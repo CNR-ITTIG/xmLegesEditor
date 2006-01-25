@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-15"?>
+%DOCTYPE%
+<NIR xmlns="http://www.normeinrete.it/disegnilegge/1.0" xmlns:h="http://www.w3.org/HTML/1998/html4">
+	<DocumentoNIR>
+		<meta>
+			<descrittori>
+				<approvazione norm="" internal_id="" leg="14" tipodoc=""/>
+				<redazione norm="" nome="" url="http://www.senato.it"/>
+				<urn></urn>
+			</descrittori>
+		</meta>
+		<intestazione>
+			<emanante>SENATO DELLA REPUBBLICA</emanante>
+			<legislatura>Legislatura XIV</legislatura>
+			<tipoDoc></tipoDoc>
+			<numDoc/>
+			<titoloDoc/>
+		</intestazione>
+		<articolato>
+			<articolo id="art1">
+				<num>Art. 1</num>
+				<rubrica></rubrica>
+				<comma id="art1-com1">
+					<num>1.</num>
+					<corpo></corpo>
+				</comma>
+			</articolo>
+		</articolato>
+	</DocumentoNIR>
+</NIR>

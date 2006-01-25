@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="iso-8859-15"?>
+
+%DOCTYPE%
+
+<NIR xmlns:xlink="http://www.w3.org/1999/xlink" 
+	  xmlns:h="http://www.w3.org/HTML/1998/html4">
+<Legge>
+	<meta>
+		<descrittori>
+			<pubblicazione tipo="GU" num="" norm=""/>
+			<urn>urn:nir:stato:legge:aaaa-mm-gg;nnn</urn>
+			<vigenza inizio="" id="v1"/>
+		</descrittori>
+	</meta>
+	<intestazione>
+		<tipoDoc>LEGGE</tipoDoc> 
+		<dataDoc norm=""/>, n. 
+		<numDoc/>
+		<titoloDoc/>
+	</intestazione> 
+	<formulainiziale>
+		<h:p>La Camera dei deputati ed il Senato della Repubblica hanno approvato;</h:p>
+		<h:p>IL PRESIDENTE DELLA REPUBBLICA</h:p>
+		<h:p>PROMULGA</h:p>
+		<h:p>la seguente legge:</h:p>
+	</formulainiziale> 
+	<articolato>
+		<articolo id="art1">
+			<num>Art. 1.</num>
+			<rubrica/>
+			<comma id="art1-com1">
+				<num>1.</num>
+				<corpo/>
+			</comma>
+		</articolo>
+	</articolato>
+	<formulafinale>
+		<h:p>La presente legge, munita del sigillo dello Stato sarà inserita nella 
+		Raccolta ufficiale degli atti normativi della Repubblica italiana. 
+		E' fatto obbligo a chiunque spetti di osservarla e di farla osservare
+		come legge dello Stato.
+		</h:p>
+	</formulafinale> 
+	<conclusione> 
+		<dataeluogo norm="" %CODICE%>Data a Roma, addì{gg mese aaaa}</dataeluogo> 
+		<sottoscrizioni> 
+			<sottoscrivente>{presidente repubblica}</sottoscrivente>
+			<sottoscrivente>{nome}, Presidente del Consiglio dei Ministri</sottoscrivente>
+			<visto>Visto, il Guardasigilli: {nome}</visto> 
+		</sottoscrizioni> 
+	</conclusione> 
+</Legge>
+</NIR>
