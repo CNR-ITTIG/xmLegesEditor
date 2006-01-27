@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<shortcuts>
+  		<skipIfNotSupported/>
+			<programGroup defaultName="Norme In Rete"
+                location="startMenu"/>
+		<shortcut
+    		name="NirEditor"
+		    target="$INSTALL_PATH\xmlegeseditor.bat"
+			workingDirectory="$INSTALL_PATH"
+
+		    description="Avvia xmLegesEditor"
+		    
+		    
+		    iconFile="$INSTALL_PATH/xmlegeseditor.ico"
+		    programGroup="yes"
+		    desktop="yes"
+		    applications="yes"
+		    startMenu="yes"
+		    startup="no">
+
+		</shortcut>
+		programGroup defaultName="Norme In Rete"
+                location="startMenu"/>
+		<shortcut
+    		name="Disinstalla xmLegesEditor"
+		    target="$INSTALL_PATH\uninstall.bat"
+			workingDirectory="$INSTALL_PATH"
+
+		    description="Disinstalla xmLegesEditor"
+		    
+		    
+		   
+		    programGroup="yes"
+		    
+		    applications="yes"
+		    startMenu="yes"
+		    startup="no">
+
+		</shortcut>
+	</shortcuts>

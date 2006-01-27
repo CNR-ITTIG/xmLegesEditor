@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
+
+<installation version="1.0">
+	<!-- 
+	The info section.
+	The meaning of the tags should be natural ...
+	-->
+	<info>
+		<appname>NirEditor</appname>
+		<appversion>2.0 RC 12</appversion>
+		<authors>
+			<author name="Mirco Taddei" email="m.taddei@ittig.cnr.it"/>
+			<author name="Enrico Francesconi" email="francesconi@ittig.cnr.it"/>
+			<author name="Tommaso Agnoloni" email="tommaso@control.dsi.unifi.it"/>
+			<author name="Lorenzo Sarti" email="sarti@dii.unisi.it"/>
+			<author name="Maurizio Mollicone" email="mollicone@ittig.cnr.it"/>
+		</authors>
+		<url>http://nir.ittig.cnr.it/</url>
+	</info>
+	
+	<!-- 
+	The gui preferences indication.
+	Sets the installer window to 640x480. It will not be able to change the size.
+	-->
+	<guiprefs width="800" height="600" resizable="no"/>
+	
+	<!-- 
+	The locale section.
+	Asks here to include the English and French langpacks.
+	-->
+	<locale>
+		<langpack iso3="ita"/>
+		<langpack iso3="eng"/>
+	</locale>
+	
+	<!-- 
+	The resources section.
+	The ids must be these ones if you want to use the LicencePanel and/or the InfoPanel.
+	-->
+	<resources>
+		<res id="LicencePanel.licence" src="LICENSE"/>
+		<res id="InfoPanel.info" src="README"/>
+		<res id="shortcutSpec.xml" src="shortcutSpec.xml"/>
+		<res id="Unix_shortcutSpec.xml" src="Unix_shortcutSpec.xml"/>
+		<res id="Installer.image.0" src="images/border1.png" />
+		<res id="Installer.image.1" src="images/border2.png" />
+		<res id="Installer.image.2" src="images/border3.png" />
+		<res id="Installer.image.3" src="images/border4.png" />
+		<res id="Installer.image.4" src="images/border5.png" />
+		<res id="Installer.image.5" src="images/border6.png" />
+		<res id="Installer.image.6" src="images/border7.png" />
+		<res id="Installer.image.7" src="images/border8.png" />
+	</resources>
+	
+	<native type="izpack" name="ShellLink.dll"/>
+	
+	<!-- 
+	The panels section.
+	We indicate here which panels we want to use. The order will be respected.
+	-->
+	<panels>
+		<panel classname="HelloPanel"/>
+		<panel classname="InfoPanel"/>
+		<panel classname="LicencePanel"/>
+		<panel classname="TargetPanel"/> 
+		<panel classname="PacksPanel"/>
+		<panel classname="ShortcutPanel"/>
+		<panel classname="InstallPanel"/>
+		<panel classname="SimpleFinishPanel"/>
+	</panels>
+	
+	<!-- 
+	The packs section.
+	We specify here our packs.
+	-->
+	<packs>
+		<pack name="NirEditor" required="yes">
+			<description>NirEditor 2</description>
+			<file src="README" targetdir="$INSTALL_PATH"/>
+			<file src="LICENSE" targetdir="$INSTALL_PATH"/>
+			
+			<file src="images/nir.png" targetdir="$INSTALL_PATH" os="unix"/>
+			<file src="images/nir.ico" targetdir="$INSTALL_PATH" os="win"/>
+			<file src="nireditor2.sh" targetdir="$INSTALL_PATH" os="unix"/>
+			<file src="nireditor2.bat" targetdir="$INSTALL_PATH" os="win"/>
+			<file src="uninstall.sh" targetdir="$INSTALL_PATH" os="unix"/>
+			<file src="uninstall.bat" targetdir="$INSTALL_PATH" os="win"/>
+			
+			<file src="nireditor.jar" targetdir="$INSTALL_PATH" />
+			
+			<executable targetfile="$INSTALL_PATH/nireditor2.sh" stage="never" keep="true" os="win"/>
+		</pack>
+		
+		<pack name="Java Runtime Environment" required="yes" os="win">
+			<description>Java Runtime Environment</description>
+			<fileset dir="jre/win32" targetdir="$INSTALL_PATH/jre/" />
+		</pack>
+
+		<pack name="Nir Libraries" required="yes">
+			<description>Nir Libraries</description>
+			<fileset dir="lib/" targetdir="$INSTALL_PATH/lib/" />
+		</pack>
+		
+		<pack name="Antiword per Windows" required="yes" os="win">
+			<description>Programma per convertire documenti di Microsoft Word in file testo.</description>
+			<fileset dir="antiword/" targetdir="$INSTALL_PATH/antiword/" />
+		</pack>
+		
+		<pack name="Help" required="no">
+			<description>Guida per l'utilizzo di NirEditor2.</description>
+			<fileset dir="help/" targetdir="$INSTALL_PATH/help/" />
+		</pack>
+	
+	</packs>
+	
+</installation>
