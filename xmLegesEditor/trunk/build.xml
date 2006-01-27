@@ -104,9 +104,9 @@
 	</target>
 
 	<target name="jar" depends="resources" description="Making jars ">
-		<jar destfile="${dist}/xmLegesApiCore.jar" basedir="${build-core-api}" compress="false" />
-		<jar destfile="${dist}/xmLegesApiImpl.jar" basedir="${build-core-impl}" compress="false" />
-		<jar destfile="${dist}/xmLegesEditorCore.jar" basedir="${build-editor-api}" compress="false" />
+		<jar destfile="${dist}/xmLegesCoreApi.jar" basedir="${build-core-api}" compress="false" />
+		<jar destfile="${dist}/xmLegesCoreImpl.jar" basedir="${build-core-impl}" compress="false" />
+		<jar destfile="${dist}/xmLegesEditorApi.jar" basedir="${build-editor-api}" compress="false" />
 		<jar destfile="${dist}/xmLegesEditorImpl.jar" basedir="${build-editor-impl}" compress="false" />
 	</target>
 
