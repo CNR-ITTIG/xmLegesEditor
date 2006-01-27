@@ -1,0 +1,114 @@
+<html>
+<head>
+<title>Riferimenti Normativi</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../../nireditor2help.css" type="text/css">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<p class="titolo">Riferimenti Normativi </p>
+<p class="testo">Nello standard XML-NIR una citazione ad un provvedimento viene 
+  identificata mediante un elemento &lt;rif&gt; al quale pu&ograve; essere associato 
+  come attributo:</p>
+<ul>
+  <li class="testo">la <a href="http://www.nir.it/sito_area3-ap_stan_rappresentazione_xml.html">URN</a> 
+    dell'atto citato ed eventualmente l'id della partizione formale interna riferita, 
+    se viene citato un atto diverso da quello corrente;</li>
+  <li class="testo">solo l'id della partizione formale riferita, se la citazione 
+    coinvolge una partizione formale interna all'atto corrente.</li>
+</ul>
+<p class="testo">Esempio di citazione individuata da un elementi &lt;rif&gt; in 
+  un documento XML-NIR:</p>
+<p class="testo">&lt;rif xlink:href=&quot;urn:nir:stato:legge:1993-09-30;388&quot; 
+  xlink:type=&quot;simple&quot; xml:lang=&quot;it&quot;&gt;legge 30 settembre 
+  1993,<br>
+  n.388&lt;/rif&gt;.</p>
+<p class="testo">Nel caso di citazioni multiple lo standard XML-NIR prevede la 
+  loro individuazione mediante la combinazione degli elementi &lt;mrif&gt; e &lt;rif&gt;.</p>
+<p class="testo">Esempio di citazioni multiple nello standard XML-NIR:</p>
+<p class="testo">&lt;mrif&gt;articoli<br>
+  &lt;rif xlink:href=&quot;urn:nir:stato:legge:1977-10-24;801#art3&quot; xlink:type=&quot;simple&quot; 
+  xml:lang=&quot;it&quot;&gt;3&lt;/rif&gt; e <br>
+  &lt;rif xlink:href=&quot;urn:nir:stato:legge:1977-10-24;801#art4&quot; xlink:type=&quot;simple&quot; 
+  xml:lang=&quot;it&quot;&gt;4&lt;/rif&gt; della legge 24 ottobre 1977, n.801&lt;/mrif&gt;.<br>
+</p>
+<p class="testo">xmLeges fornisce una serie di funzionalit&agrave; che guidano 
+  l'utente per la corretta formulazione di citazioni a norme, con l'assegnazione 
+  degli elementi &lt;rif&gt; e &lt;mrif&gt; e la corretta determinazione delle 
+  URN degli atti citati.</p>
+<p class="testo">&nbsp;</p>
+<p class="testo"><b><a name="RifEsterno"></a>Inserimento riferimenti normativi 
+  esterni</b></p>
+<ol>
+  <li class="testo">Eseguire una delle seguenti operazioni:</li>
+  <ul>
+    <li class="testo">Fare clic sul pulsante <b><img src="../../images/nir/16x16/riferimenti/rif_esterno.png" width="16" height="16"> 
+      Gestione dei riferimenti esterni</b> della <b>Barra dei riferimenti</b>;</li>
+    <li class="testo">Scegliere <b>Riferimenti > Riferimenti esterni</b> dal menù 
+      <b>Nir</b>;<br>
+      <br>
+  </ul>
+  <li class="testo">Nella casella<b> Data</b>, inserire la data di emanazione 
+    dell'atto da citare;</li>
+  <li class="testo">Nella casella <b>Numero </b>inserire il numero del provedimento 
+    dell'atto da citare;</li>
+  <li class="testo">Nella casella <b>Titolo</b> &egrave; possibile inserire il 
+    titolo con cui l'atto da citare &egrave; conosciuto;</li>
+  <li class="testo">Nella casella <b> Provvedimento</b> scegliere il tipo di atto 
+    da citare;</li>
+  <li class="testo">In funzione del tipo di atto pu&ograve; essere necessario 
+    scegliere l'<b>Autorit&agrave; </b> (es: una Regione per Legge regionale, 
+    Province per Legge provinciale, Ministeri per Decreto ministeriale). Tale 
+    informazione &egrave; essenziale per la determinazione completa della URN; 
+    in particolare xmLeges consente l'inserimento corretto del nome dell'autorit&agrave; 
+    emittente, che pu&ograve; variare in funzione del tempo (per esempio il nome 
+    di alcuni ministeri), purch&eacute; sia aggiornato il proprio Registro delle 
+    autorit&agrave; sulla base del registro ufficiale (vedi argomento <b><a href="autorita.html">Registro 
+    delle autorit&agrave; emittenti</a></b>);</li>
+  <li class="testo">Nel caso di citazione di un Allegato, di un Comunicato o della 
+    indicazione di una particolare Versione del documento da citare, fare clic 
+    sul pulsante <b>Avanzate</b> e riempire i campi: 
+    <ul>
+      <li class="testo">Per un Allegato<br>
+        <b>Denominazione</b> (es: Allegato A) ed eventualmente il <b>Titolo</b>, 
+        poi fare clic su <b>Inserisci Allegato</b> (per eliminarlo fare clic su 
+        <b>Elimina Allegato</b>);</li>
+      <li class="testo">Per un Comunicato<br>
+        Tipo e Data, poi fare clic su <b>Inserisci Comunicato</b> (per eliminarlo 
+        fare clic su <b>Elimina Comunicato</b>);</li>
+      <li class="testo">Per citare una particolare Versione di un documento<br>
+        Data di <b>Emissione ultimo provvedimento modificativo/Pubblicazione del 
+        comunicato di rettifica</b>;</li>
+    </ul>
+    <span class="testo">quindi fare clic su <b>Ok</b>;</span></li>
+  <li class="testo">Per inserire le partizioni fare clic sul pulsante <b>Inserisci</b> 
+    del men&ugrave; <b>Partizioni</b>, comporre la citazione della partizione 
+    interna da citare: 
+    <ul>
+      <li class="testo">Dopo aver composto la citazione fare clic sul pulsante 
+        <b>Ok</b>;</li>
+      <li class="testo">Per eliminare la citazione di partizione interna fare 
+        clic sulla corrispondente formulazione linguistica nella casella <b>Partizioni</b>, 
+        quindi fare clic sul pulsante <b>Elimina</b> del men&ugrave; <b>Partizioni</b>;</li>
+    </ul>
+  </li>
+  <li class="testo">Fare clic su <b>Ok</b>.</li>
+</ol>
+<p class="testo">&nbsp;</p>
+<p class="testo"><b><a name="RifInterni"></a>Inserimento riferimenti normativi 
+  interni</b></p>
+<ol>
+  <li class="testo">Eseguire una delle seguenti operazioni:</li>
+  <ul>
+    <li class="testo">Fare clic sul pulsante <b><img src="../../images/nir/16x16/riferimenti/rif_interno.png" width="16" height="16"> 
+      Inserisci un riferimento interno </b> della <b>Barra degli strumenti</b>;</li>
+    <li class="testo">Scegliere <b>Riferimenti > Riferimenti interni</b> dal menù 
+      <b>Nir</b>;<br>
+      <br>
+  </ul>
+  <li class="testo">Nella visualizzazione struttura fare clic sulla partizione 
+    che si vuol riferire;</li>
+  <li class="testo">Fare clic su <b>OK</b>.</li>
+</ol>
+</body>
+</html>
