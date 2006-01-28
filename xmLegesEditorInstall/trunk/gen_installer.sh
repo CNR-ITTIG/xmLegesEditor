@@ -35,7 +35,7 @@ ln -s ../xmLegesEditor/dist/xmLegesEditorImpl.jar xmLegesEditorImpl.jar
 echo "Creazione dell'installer..."
 echo ""
 $IZPACK_HOME/bin/compile install-linux.xml -b . -o install-linux.jar -k standard
-#$IZPACK_HOME/bin/compile install-win32.xml -b . -o install-win32.jar -k standard
+$IZPACK_HOME/bin/compile install-win32.xml -b . -o install-win32.jar -k standard
 
 
 echo "Rimozione dei link..."

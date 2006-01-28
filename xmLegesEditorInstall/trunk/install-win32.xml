@@ -6,16 +6,16 @@
 	The meaning of the tags should be natural ...
 	-->
 	<info>
-		<appname>NirEditor</appname>
-		<appversion>2.0 RC 12</appversion>
+		<appname>xmLegesEditor</appname>
+		<appversion>0.1</appversion>
 		<authors>
 			<author name="Mirco Taddei" email="m.taddei@ittig.cnr.it"/>
 			<author name="Enrico Francesconi" email="francesconi@ittig.cnr.it"/>
-			<author name="Tommaso Agnoloni" email="tommaso@control.dsi.unifi.it"/>
+			<author name="Tommaso Agnoloni" email="agnoloni@ittig.cnr.it"/>
 			<author name="Lorenzo Sarti" email="sarti@dii.unisi.it"/>
 			<author name="Maurizio Mollicone" email="mollicone@ittig.cnr.it"/>
 		</authors>
-		<url>http://nir.ittig.cnr.it/</url>
+		<url>http://xmleges.editor.ittig.cnr.it/</url>
 	</info>
 	
 	<!-- 
@@ -74,21 +74,28 @@
 	We specify here our packs.
 	-->
 	<packs>
-		<pack name="NirEditor" required="yes">
-			<description>NirEditor 2</description>
+		<pack name="xmLegesEditor" required="yes">
+			<description>xmLegesEditor</description>
 			<file src="README" targetdir="$INSTALL_PATH"/>
 			<file src="LICENSE" targetdir="$INSTALL_PATH"/>
+
+			<file src="images/xmLegesEditor.png" targetdir="$INSTALL_PATH/images/editor"/>
+			<file src="xmLegesEditor.xml" targetdir="$INSTALL_PATH"/>
 			
-			<file src="images/nir.png" targetdir="$INSTALL_PATH" os="unix"/>
-			<file src="images/nir.ico" targetdir="$INSTALL_PATH" os="win"/>
-			<file src="nireditor2.sh" targetdir="$INSTALL_PATH" os="unix"/>
-			<file src="nireditor2.bat" targetdir="$INSTALL_PATH" os="win"/>
+			<file src="images/xmlegeseditor.png" targetdir="$INSTALL_PATH" os="unix"/>
+			<file src="images/xmlegeseditor.ico" targetdir="$INSTALL_PATH" os="win"/>
+			<file src="xmlegeseditor.sh" targetdir="$INSTALL_PATH" os="unix"/>
+			<file src="xmlegeseditor.bat" targetdir="$INSTALL_PATH" os="win"/>
 			<file src="uninstall.sh" targetdir="$INSTALL_PATH" os="unix"/>
 			<file src="uninstall.bat" targetdir="$INSTALL_PATH" os="win"/>
 			
-			<file src="nireditor.jar" targetdir="$INSTALL_PATH" />
+			<file src="xmLegesCoreApi.jar" targetdir="$INSTALL_PATH" />
+			<file src="xmLegesCoreImpl.jar" targetdir="$INSTALL_PATH" />
+			<file src="xmLegesEditorApi.jar" targetdir="$INSTALL_PATH" />
+			<file src="xmLegesEditorImpl.jar" targetdir="$INSTALL_PATH" />
 			
-			<executable targetfile="$INSTALL_PATH/nireditor2.sh" stage="never" keep="true" os="win"/>
+			
+			<executable targetfile="$INSTALL_PATH/xmlegeseditor.bat" stage="never" keep="true" os="win"/>
 		</pack>
 		
 		<pack name="Java Runtime Environment" required="yes" os="win">
@@ -96,18 +103,20 @@
 			<fileset dir="jre/win32" targetdir="$INSTALL_PATH/jre/" />
 		</pack>
 
-		<pack name="Nir Libraries" required="yes">
-			<description>Nir Libraries</description>
+		<pack name="xmLegesEditor Libraries" required="yes">
+			<description>xmLegeEditor Libraries</description>
 			<fileset dir="lib/" targetdir="$INSTALL_PATH/lib/" />
+			<fileset dir="corelib/" targetdir="$INSTALL_PATH/lib/" />
+			<fileset dir="editorlib/" targetdir="$INSTALL_PATH/lib/" />
 		</pack>
-		
+
 		<pack name="Antiword per Windows" required="yes" os="win">
 			<description>Programma per convertire documenti di Microsoft Word in file testo.</description>
 			<fileset dir="antiword/" targetdir="$INSTALL_PATH/antiword/" />
-		</pack>
-		
+		</pack>	
+			
 		<pack name="Help" required="no">
-			<description>Guida per l'utilizzo di NirEditor2.</description>
+			<description>Guida per l'utilizzo di xmLegesEditor.</description>
 			<fileset dir="help/" targetdir="$INSTALL_PATH/help/" />
 		</pack>
 	

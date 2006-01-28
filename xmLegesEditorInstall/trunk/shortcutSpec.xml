@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <shortcuts>
   		<skipIfNotSupported/>
-			<programGroup defaultName="Norme In Rete"
+			<programGroup defaultName="xmLegesEditor"
                 location="startMenu"/>
 		<shortcut
-    		name="NirEditor"
+    		name="xmLegesEditor"
 		    target="$INSTALL_PATH\xmlegeseditor.bat"
 			workingDirectory="$INSTALL_PATH"
 
@@ -19,7 +19,7 @@
 		    startup="no">
 
 		</shortcut>
-		programGroup defaultName="Norme In Rete"
+		programGroup defaultName="xmLegesEditor"
                 location="startMenu"/>
 		<shortcut
     		name="Disinstalla xmLegesEditor"

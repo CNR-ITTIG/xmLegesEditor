@@ -1,6 +1,9 @@
 REM autore Mirco Taddei <m.taddei@ittig.cnr.it>
 
-set CLASSPATH=.;nireditor.jar;lib/activation.jar
+set CLASSPATH=.;xmLegesCoreApi.jar;lib/activation.jar
+set CLASSPATH=%CLASSPATH%;xmLegesCoreImpl.jar
+set CLASSPATH=%CLASSPATH%;xmLegesEditorApi.jar
+set CLASSPATH=%CLASSPATH%;xmLegesEditorImpl.jar
 set CLASSPATH=%CLASSPATH%;lib/dom4j-1.5.2.jar
 set CLASSPATH=%CLASSPATH%;lib/formsrt.jar
 set CLASSPATH=%CLASSPATH%;lib/jazzy-core.jar
@@ -14,4 +17,4 @@ set CLASSPATH=%CLASSPATH%;lib/fop.jar
 set CLASSPATH=%CLASSPATH%;lib/batik.jar
 set CLASSPATH=%CLASSPATH%;lib/avalon-framework-cvs-20020806.jar
 
-jre\bin\java -Xmx512m it.cnr.ittig.services.manager.Run
+jre\bin\java -Xmx512m it.cnr.ittig.services.manager.Run xmLegesEditor.xml images\editor\xmLegesEditor.png
