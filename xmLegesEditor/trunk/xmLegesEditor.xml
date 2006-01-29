@@ -918,7 +918,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 class="it.cnr.ittig.xmleges.core.blocks.frame.FrameImpl"
         >
         <configuration>
-            <title>xmlegesEditor</title>
+            <title>xmLegesEditor</title>
             <!-- where=top-center | top-left | bottom-center | bottom-left -->
             <!-- index=numero -->
             <panes>
