@@ -1,5 +1,6 @@
 REM autore Mirco Taddei <m.taddei@ittig.cnr.it>
 
+echo off
 set CLASSPATH=.;xmLegesCoreApi.jar;lib/activation.jar
 set CLASSPATH=%CLASSPATH%;xmLegesCoreImpl.jar
 set CLASSPATH=%CLASSPATH%;xmLegesEditorApi.jar
@@ -17,4 +18,4 @@ set CLASSPATH=%CLASSPATH%;lib/fop.jar
 set CLASSPATH=%CLASSPATH%;lib/batik.jar
 set CLASSPATH=%CLASSPATH%;lib/avalon-framework-cvs-20020806.jar
 
-jre\bin\java -Xmx512m it.cnr.ittig.services.manager.Run xmLegesEditor.xml images\editor\xmLegesEditor.png
+start /MIN jre\bin\javaw -Xmx512m it.cnr.ittig.services.manager.Run xmLegesEditor.xml images\editor\xmLegesEditor.png

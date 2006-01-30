@@ -14,8 +14,8 @@
 		    iconFile="$INSTALL_PATH/xmlegeseditor.ico"
 		    programGroup="yes"
 		    desktop="yes"
-		    applications="yes"
-		    startMenu="yes"
+		    applications="no"
+		    startMenu="no"
 		    startup="no">
 
 		</shortcut>
@@ -32,8 +32,8 @@
 		   
 		    programGroup="yes"
 		    
-		    applications="yes"
-		    startMenu="yes"
+		    applications="no"
+		    startMenu="no"
 		    startup="no">
 
 		</shortcut>
