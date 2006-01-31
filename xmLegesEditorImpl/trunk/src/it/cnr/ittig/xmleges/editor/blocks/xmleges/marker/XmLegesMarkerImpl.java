@@ -223,7 +223,7 @@ public class XmLegesMarkerImpl implements XmLegesMarker, Loggable, Serviceable, 
 		copyProgram();
 		// firsTime = false;
 		// }
-		File command = UtilFile.getFileFromTemp("XmLeges-Marker.exe");
+		File command = UtilFile.getFileFromTemp("xmLeges-Marker.exe");
 		UtilFile.setExecPermission(command);
 		StringBuffer sb = new StringBuffer(command.getAbsolutePath());
 		sb.append(" -i ");
@@ -272,9 +272,9 @@ public class XmLegesMarkerImpl implements XmLegesMarker, Loggable, Serviceable, 
 
 		String[] files = null;
 		if (osName.equalsIgnoreCase("linux") && osArch.equalsIgnoreCase("i386"))
-			files = new String[] { "linux-i386/XmLeges-Marker.exe" };
+			files = new String[] { "linux-i386/xmLeges-Marker.exe" };
 		if (osName.toLowerCase().matches("windows.*"))
-			files = new String[] { "win-32/cygiconv-2.dll", "win-32/cygwin1.dll", "win-32/cygxml2-2.dll", "win-32/cygz.dll", "win-32/XmLeges-Marker.exe" };
+			files = new String[] { "win-32/cygiconv-2.dll", "win-32/cygwin1.dll", "win-32/cygxml2-2.dll", "win-32/cygz.dll", "win-32/xmLeges-Marker.exe" };
 
 		if (files != null)
 			for (int i = 0; i < files.length; i++)
