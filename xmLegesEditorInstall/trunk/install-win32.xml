@@ -74,8 +74,8 @@
 	We specify here our packs.
 	-->
 	<packs>
-		<pack name="xmLegesEditor" required="yes">
-			<description>xmLegesEditor</description>
+		<pack name="xmLegesCore" required="yes">
+			<description>xmLegesCore</description>
 			<file src="README" targetdir="$INSTALL_PATH"/>
 			<file src="LICENSE" targetdir="$INSTALL_PATH"/>
 
@@ -91,11 +91,16 @@
 			
 			<file src="xmLegesCoreApi.jar" targetdir="$INSTALL_PATH" />
 			<file src="xmLegesCoreImpl.jar" targetdir="$INSTALL_PATH" />
+		
+			<executable targetfile="$INSTALL_PATH/xmlegeseditor.bat" stage="never" keep="true" os="win"/>
+		</pack>
+		
+		<pack name="xmLegesEditor" required="yes">
+			<description>xmLegesEditor</description>
+			
 			<file src="xmLegesEditorApi.jar" targetdir="$INSTALL_PATH" />
 			<file src="xmLegesEditorImpl.jar" targetdir="$INSTALL_PATH" />
 			
-			
-			<executable targetfile="$INSTALL_PATH/xmlegeseditor.bat" stage="never" keep="true" os="win"/>
 		</pack>
 		
 		<pack name="Java Runtime Environment" required="yes" os="win">
@@ -103,10 +108,15 @@
 			<fileset dir="jre/win32" targetdir="$INSTALL_PATH/jre/" />
 		</pack>
 
-		<pack name="xmLegesEditor Libraries" required="yes">
-			<description>xmLegeEditor Libraries</description>
+		<pack name="xmLegesCore Libraries" required="yes">
+			<description>xmLegesCore Libraries</description>
 			<fileset dir="lib/" targetdir="$INSTALL_PATH/lib/" />
 			<fileset dir="corelib/" targetdir="$INSTALL_PATH/lib/" />
+		</pack>
+		
+		<pack name="xmLegesEditor Libraries" required="yes">
+			<description>xmLegesEditor Libraries</description>
+			<fileset dir="lib/" targetdir="$INSTALL_PATH/lib/" />
 			<fileset dir="editorlib/" targetdir="$INSTALL_PATH/lib/" />
 		</pack>
 

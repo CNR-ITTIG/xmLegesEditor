@@ -74,8 +74,9 @@
 	We specify here our packs.
 	-->
 	<packs>
-		<pack name="xmLegesEditor" required="yes">
-			<description>xmLegesEditor</description>
+		
+		<pack name="xmLegesCore" required="yes">
+			<description>xmLegesCore</description>
 			<file src="README" targetdir="$INSTALL_PATH"/>
 			<file src="LICENSE" targetdir="$INSTALL_PATH"/>
 			
@@ -91,10 +92,30 @@
 			
 			<file src="xmLegesCoreApi.jar" targetdir="$INSTALL_PATH" />
 			<file src="xmLegesCoreImpl.jar" targetdir="$INSTALL_PATH" />
+			
+			<executable targetfile="$INSTALL_PATH/xmlegeseditor.sh" stage="never" keep="true" os="unix"/>
+		</pack>
+		
+		
+		<pack name="xmLegesEditor" required="yes">
+			<description>xmLegesEditor</description>
+
 			<file src="xmLegesEditorApi.jar" targetdir="$INSTALL_PATH" />
 			<file src="xmLegesEditorImpl.jar" targetdir="$INSTALL_PATH" />
 			
-			<executable targetfile="$INSTALL_PATH/xmlegeseditor.sh" stage="never" keep="true" os="unix"/>
+		</pack>
+		
+		
+		<pack name="xmLegesCore Libraries" required="yes">
+			<description>xmLegesCore Libraries</description>
+			<fileset dir="lib/" targetdir="$INSTALL_PATH/lib/" />
+			<fileset dir="corelib/" targetdir="$INSTALL_PATH/lib/" />
+		</pack>
+		
+		<pack name="xmLegesEditor Libraries" required="yes">
+			<description>xmLegesEditor Libraries</description>
+			<fileset dir="lib/" targetdir="$INSTALL_PATH/lib/" />
+			<fileset dir="editorlib/" targetdir="$INSTALL_PATH/lib/" />
 		</pack>
 		
 		<pack name="Java Runtime Environment" required="yes" os="unix">
@@ -102,12 +123,6 @@
 			<fileset dir="jre/linux" targetdir="$INSTALL_PATH/jre/" />
 		</pack>
 		
-		<pack name="xmLegesEditor Libraries" required="yes">
-			<description>xmLegeEditor Libraries</description>
-			<fileset dir="lib/" targetdir="$INSTALL_PATH/lib/" />
-			<fileset dir="corelib/" targetdir="$INSTALL_PATH/lib/" />
-			<fileset dir="editorlib/" targetdir="$INSTALL_PATH/lib/" />
-		</pack>
 		
 		<pack name="Antiword per Windows" required="yes" os="win">
 			<description>Programma per convertire documenti di Microsoft Word in file testo.</description>
