@@ -108,7 +108,7 @@ public class XmLegesLinkerImpl implements XmLegesLinker, Loggable, Serviceable, 
 		copyProgram();
 		// firstTime = false;
 		// }
-		File command = UtilFile.getFileFromTemp("XmLeges-Linker.exe");
+		File command = UtilFile.getFileFromTemp("xmLeges-Linker.exe");
 		UtilFile.setExecPermission(command);
 		StringBuffer sb = new StringBuffer(command.getAbsolutePath());
 		if (regione != null)
@@ -156,9 +156,9 @@ public class XmLegesLinkerImpl implements XmLegesLinker, Loggable, Serviceable, 
 
 		String[] files = null;
 		if (osName.equalsIgnoreCase("linux") && osArch.equalsIgnoreCase("i386"))
-			files = new String[] { "linux-i386/XmLeges-Linker.exe" };
+			files = new String[] { "linux-i386/xmLeges-Linker.exe" };
 		if (osName.toLowerCase().matches("windows.*"))
-			files = new String[] { "win-32/XmLeges-Linker.exe", "win-32/cygwin1.dll" };
+			files = new String[] { "win-32/xmLeges-Linker.exe", "win-32/cygwin1.dll" };
 		if (files != null)
 			for (int i = 0; i < files.length; i++)
 				UtilFile.copyFileInTemp(getClass().getResourceAsStream(files[i]), files[i]);
