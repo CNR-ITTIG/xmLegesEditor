@@ -38,9 +38,9 @@ public interface XmLegesMarker extends Service {
 	 * Array di valori per presentare il testo nelle form per
 	 * <code>TIPO_DTD_VALORE</code>
 	 */
-	final public static String[] TIPO_DTD = new String[] { "Completo", "Flessibile", "Base" };
+	final public static String[] TIPO_DTD = new String[] { "Completo", "Flessibile", "Base", "Dl", "Cnr"};
 
-	final public static String[] TIPO_DTD_VALORE = new String[] { "completo", "flessibile", "base" };
+	final public static String[] TIPO_DTD_VALORE = new String[] { "completo", "flessibile", "base", "dl", "cnr"};
 
 	/**
 	 * Array di valori per presentare il testo nelle form per
@@ -48,9 +48,9 @@ public interface XmLegesMarker extends Service {
 	 */
 	final public static String[] TIPO_DOC = new String[] { "Legge", "Legge Costituzionale", "Decreto Legge", "Decreto Legislativo", "Regio Decreto",
 			"Decreto Presidente Repubblica", "Decreto Presidente Repubblica - non numerato", "Decreto Pres. Cons. Ministri",
-			"Decreto Pres. Cons. Ministri - non numerato", "Decreto Ministeriale", "Decreto Ministeriale - non numerato", "Legge Regionale", "Documento NIR" };
+			"Decreto Pres. Cons. Ministri - non numerato", "Decreto Ministeriale", "Decreto Ministeriale - non numerato", "Legge Regionale", "Disegno di Legge", "Documento NIR", "Provvedimento CNR" };
 
-	final public static String[] TIPO_DOC_VALORE = new String[] { "l", "lcost", "dl", "dlgs", "rd", "dpr", "dprNN", "dpcm", "dpcmNN", "dm", "dmNN", "lr", "nir" };
+	final public static String[] TIPO_DOC_VALORE = new String[] { "l", "lcost", "dl", "dlgs", "rd", "dpr", "dprNN", "dpcm", "dpcmNN", "dm", "dmNN", "lr", "ddl", "nir", "cnr" };
 
 	/**
 	 * Array di valori per presentare il testo nelle form per
