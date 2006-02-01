@@ -20,6 +20,7 @@ import it.cnr.ittig.xmleges.editor.services.form.xmleges.marker.XmLegesMarkerFor
 import it.cnr.ittig.xmleges.editor.services.xmleges.marker.XmLegesMarker;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
@@ -61,7 +62,7 @@ import javax.swing.JTextField;
  * 
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */
-public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldListener, Loggable, Serviceable, Configurable, Initializable {
+public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldListener, ActionListener, Loggable, Serviceable, Configurable, Initializable {
 	Logger logger;
 
 	Form form;
@@ -141,14 +142,12 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 		form.replaceComponent("editor.form.xmleges.marker.file", fileTextField.getAsComponent());
 		fileTextField.addFileTextFieldListener(this);
 		fileTextField.setFileFilter(new RegexpFileFilter("doc, html, txt", ".*\\.(doc|html?|txt)"));
-		// tipoInput = (JComboBox)
-		// form.getComponentByName("editor.form.xmleges.marker.tipoinput");
-		// tipoInput.setModel(new
-		// DefaultComboBoxModel(ParserStruttura.TIPO_INPUT));
 		tipoDtd = (JComboBox) form.getComponentByName("editor.form.xmleges.marker.tipodtd");
 		tipoDtd.setModel(new DefaultComboBoxModel(XmLegesMarker.TIPO_DTD));
 		tipoDoc = (JComboBox) form.getComponentByName("editor.form.xmleges.marker.tipodoc");
 		tipoDoc.setModel(new DefaultComboBoxModel(XmLegesMarker.TIPO_DOC));
+		tipoDoc.addActionListener(this);
+		popolaTipoDtd();
 		tipoDocAltro = (JTextField) form.getComponentByName("editor.form.xmleges.marker.altro");
 		tipoComma = (JComboBox) form.getComponentByName("editor.form.xmleges.marker.tipocomma");
 		tipoComma.setModel(new DefaultComboBoxModel(XmLegesMarker.TIPO_COMMA));
@@ -157,11 +156,6 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 		senquenza = (JCheckBox) form.getComponentByName("editor.form.xmleges.marker.sequenza");
 		encoding = (JComboBox) form.getComponentByName("editor.form.xmleges.marker.encoding");
 		encoding.setModel(encodingModel);
-		// loggerLevel = (JComboBox)
-		// form.getComponentByName("editor.form.xmleges.marker.logger");
-		// loggerLevel.setModel(new
-		// DefaultComboBoxModel(ParserStruttura.LOGGER));
-		// loggerLevel.setSelectedIndex(2);
 		tabbedPane = (JTabbedPane) form.getComponentByName("editor.form.xmleges.marker.tab");
 		sorgente = (JTextArea) form.getComponentByName("editor.form.xmleges.marker.sorgente");
 		sorgente.setWrapStyleWord(true);
@@ -224,9 +218,8 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 						} else {
 							parser.setTipoInput(XmLegesMarker.TIPO_INPUT_VALORE[1]);
 						}
-						// parser.setTipoInput(ParserStruttura.TIPO_INPUT_VALORE[tipoInput.getSelectedIndex()]);
-						parser.setTipoDtd(XmLegesMarker.TIPO_DTD_VALORE[tipoDtd.getSelectedIndex()]);
 						parser.setTipoDoc(XmLegesMarker.TIPO_DOC_VALORE[tipoDoc.getSelectedIndex()]);
+						parser.setTipoDtd(XmLegesMarker.TIPO_DTD_VALORE[getSelectedDtd()]);
 						if ("nir".equalsIgnoreCase(XmLegesMarker.TIPO_DOC_VALORE[tipoDoc.getSelectedIndex()]))
 							parser.setTipoDocAltro(tipoDocAltro.getText());
 						else
@@ -263,5 +256,43 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 				}
 			}.start();
 		}
+	}
+
+	private void popolaTipoDtd(){
+		// tipoDoc Disegno di Legge vincola alla scelta della dtd dl (4' item)
+		if(tipoDoc.getSelectedItem().toString().toLowerCase().startsWith("disegn")){
+			tipoDtd.removeAllItems();
+			tipoDtd.addItem(XmLegesMarker.TIPO_DTD[3]);
+			tipoDtd.setSelectedIndex(0);
+		}
+		else if(tipoDoc.getSelectedItem().toString().toLowerCase().indexOf("cnr")!=-1){
+			tipoDtd.removeAllItems();
+			tipoDtd.addItem(XmLegesMarker.TIPO_DTD[4]);
+			tipoDtd.setSelectedIndex(0);
+		}
+		// per tutti gli altri provvedimenti ...
+		else{
+			tipoDtd.removeAllItems();
+			for(int i=0;i<3;i++)
+			   tipoDtd.addItem(XmLegesMarker.TIPO_DTD[i]);
+			tipoDtd.setSelectedIndex(0);			
+		}
+	}
+	
+	private int getSelectedDtd(){
+		if(tipoDoc.getSelectedItem().toString().toLowerCase().startsWith("disegn"))
+			return 3;
+		else if(tipoDoc.getSelectedItem().toString().toLowerCase().indexOf("cnr")!=-1)
+			return 4;
+		else
+			return tipoDtd.getSelectedIndex();
+	}
+	
+	
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource().equals(tipoDoc)) {
+			popolaTipoDtd();	
+		}
+		// TODO Auto-generated method stub		
 	}
 }
