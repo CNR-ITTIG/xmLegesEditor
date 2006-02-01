@@ -87,7 +87,10 @@ public class XmLegesEditorImpl implements XmLegisEditor, Loggable, Serviceable, 
 							"dtd-1.1/ISOpub.pen", "dtd-1.1/ISOtech.pen",
 
 							"dtd-dl/dllight.dtd", "dtd-dl/dllight.spp", "dtd-dl/ISOdia.ent", "dtd-dl/ISOgrk3.ent", "dtd-dl/ISOlat1.ent", "dtd-dl/ISOlat2.ent",
-							"dtd-dl/ISOnum.ent", "dtd-dl/ISOpub.ent", "dtd-dl/ISOtech.ent" };
+							"dtd-dl/ISOnum.ent", "dtd-dl/ISOpub.ent", "dtd-dl/ISOtech.ent",
+							
+							"dtd-cnr/cnr.dtd", "dtd-cnr/globali-cnr.dtd", "dtd-cnr/meta-cnr.dtd", "dtd-cnr/nirflessibile-cnr.dtd", "dtd-cnr/norme-cnr.dtd",
+							"dtd-cnr/testo-cnr.dtd", "dtd-cnr/tipi-cnr.dtd"};
 					for (int i = 0; i < files.length; i++) {
 						UtilFile.copyFileInTemp(getClass().getResourceAsStream(files[i]), files[i]);
 					}
