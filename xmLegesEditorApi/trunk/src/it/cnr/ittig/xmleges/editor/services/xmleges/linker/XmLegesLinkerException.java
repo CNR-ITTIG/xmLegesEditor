@@ -9,7 +9,7 @@ package it.cnr.ittig.xmleges.editor.services.xmleges.linker;
  * <dd><a href="http://www.ittig.cnr.it" target="_blank">Istituto di Teoria e
  * Tecniche dell'Informazione Giuridica (ITTIG) <br>
  * Consiglio Nazionale delle Ricerche - Italy </a></dd>
- * <dt><b>Lincense: </b></dt>
+ * <dt><b>License: </b></dt>
  * <dd><a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU
  * General Public License </a></dd>
  * </dl>

@@ -8,7 +8,7 @@ import org.w3c.dom.Node;
  * Servizio per lo spostamento in alto o in basso di partizioni all'interno del
  * documento.
  * 
- * @author <a href="mailto:agnoloni@dsi.unifi.it">Tommaso Agnoloni </a>
+ * @author <a href="mailto:agnoloni@ittig.cnr.it">Tommaso Agnoloni </a>
  */
 public interface Spostamento extends Service {
 
