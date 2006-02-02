@@ -18,6 +18,6 @@ import it.cnr.ittig.services.manager.Service;
  * 
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */
-public interface XmLegisEditor extends Service {
+public interface XmLegesEditor extends Service {
 
 }
