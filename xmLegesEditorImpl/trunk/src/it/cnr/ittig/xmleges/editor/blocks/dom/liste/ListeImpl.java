@@ -23,7 +23,7 @@ import org.w3c.dom.Node;
 
 /**
  * <h1>Implementazione del servizio
- * <code>it.cnr.ittig.xmlegis.editor.services.dom.liste.Liste</code>.</h1>
+ * <code>it.cnr.ittig.xmleges.editor.services.dom.liste.Liste</code>.</h1>
  * <h1>Descrizione</h1>
  * <h1>Configurazione</h1>
  * <h1>Dipendenze</h1>

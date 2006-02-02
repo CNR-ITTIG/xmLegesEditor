@@ -15,7 +15,7 @@ import org.w3c.dom.Node;
 
 /**
  * <h1>Implementazione del servizio
- * <code>it.cnr.ittig.xmlegis.editor.services.dom.allineamento.Allineamento</code>.</h1>
+ * <code>it.cnr.ittig.xmleges.editor.services.dom.allineamento.Allineamento</code>.</h1>
  * <h1>Descrizione</h1>
  * <h1>I18n</h1>
  * <ul>

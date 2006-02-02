@@ -24,7 +24,7 @@ import org.w3c.dom.NodeList;
 
 /**
  * <h1>Implementazione del servizio
- * <code>it.cnr.ittig.xmlegis.editor.services.dom.spostamento.Spostamento</code>.
+ * <code>it.cnr.ittig.xmleges.editor.services.dom.spostamento.Spostamento</code>.
  * </h1>
  * <h1>Descrizione</h1>
  * <h1>Configurazione</h1>

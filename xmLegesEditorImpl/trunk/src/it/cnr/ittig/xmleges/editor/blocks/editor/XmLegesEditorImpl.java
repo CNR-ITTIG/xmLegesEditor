@@ -11,11 +11,11 @@ import it.cnr.ittig.xmleges.core.services.license.LicenseManager;
 import it.cnr.ittig.xmleges.core.services.threads.ThreadManager;
 import it.cnr.ittig.xmleges.core.services.version.Version;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
-import it.cnr.ittig.xmleges.editor.services.editor.XmLegisEditor;
+import it.cnr.ittig.xmleges.editor.services.editor.XmLegesEditor;
 
 /**
  * <h1>Implementazione del servizio
- * <code>it.cnr.ittig.xmlegis.editor.services.editor.XmLegisEditor</code>.</h1>
+ * <code>it.cnr.ittig.xmleges.editor.services.editor.XmLegesEditor</code>.</h1>
  * <h1>Descrizione</h1>
  * <h1>Configurazione</h1>
  * <h1>Dipendenze</h1>
@@ -40,7 +40,7 @@ import it.cnr.ittig.xmleges.editor.services.editor.XmLegisEditor;
  * 
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */
-public class XmLegesEditorImpl implements XmLegisEditor, Loggable, Serviceable, Startable {
+public class XmLegesEditorImpl implements XmLegesEditor, Loggable, Serviceable, Startable {
 	Logger logger;
 
 	LicenseManager licenseManager;

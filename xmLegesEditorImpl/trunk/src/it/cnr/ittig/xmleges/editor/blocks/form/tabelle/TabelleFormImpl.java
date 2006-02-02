@@ -13,7 +13,7 @@ import javax.swing.JSpinner;
 
 /**
  * <h1>Implementazione del servizio
- * <code>it.cnr.ittig.xmlegis.editor.services.form.tabelle</code>.</h1>
+ * <code>it.cnr.ittig.xmleges.editor.services.form.tabelle</code>.</h1>
  * <h1>Descrizione</h1>
  * <h1>Configurazione</h1>
  * <h1>Dipendenze</h1>
