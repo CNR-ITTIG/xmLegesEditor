@@ -65,7 +65,7 @@ import org.w3c.dom.NodeList;
  * General Public License </a></dd>
  * </dl>
  * 
- * @author <a href="mailto:agnoloni@dsi.unifi.it">Tommaso Agnoloni </a>
+ * @author <a href="mailto:agnoloni@ittig.cnr.it">Tommaso Agnoloni </a>
  */
 
 public class AutoritaActionImpl implements AutoritaAction, Loggable, EventManagerListener, Serviceable, Configurable, Initializable {

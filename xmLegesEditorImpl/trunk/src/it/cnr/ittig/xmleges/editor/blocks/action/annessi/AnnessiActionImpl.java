@@ -48,12 +48,12 @@ import javax.swing.AbstractAction;
  * <dd><a href="http://www.ittig.cnr.it" target="_blank">Istituto di Teoria e
  * Tecniche dell'Informazione Giuridica (ITTIG) <br>
  * Consiglio Nazionale delle Ricerche - Italy </a></dd>
- * <dt><b>Lincense: </b></dt>
+ * <dt><b>License: </b></dt>
  * <dd><a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU
  * General Public License </a></dd>
  * </dl>
  * 
- * @author <a href="mailto:agnoloni@dsi.unifi.it">Tommaso Agnoloni </a>
+ * @author <a href="mailto:agnoloni@ittig.cnr.it">Tommaso Agnoloni </a>
  */
 public class AnnessiActionImpl implements AnnessiAction, EventManagerListener, Loggable, Serviceable, Configurable, Initializable {
 

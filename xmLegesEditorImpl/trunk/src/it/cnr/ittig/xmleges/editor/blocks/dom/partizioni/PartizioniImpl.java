@@ -35,7 +35,7 @@ import org.w3c.dom.Node;
  * 
  * @see
  * @version 1.0
- * @author <a href="mailto:agnoloni@dsi.unifi.it">Tommaso Agnoloni </a>
+ * @author <a href="mailto:agnoloni@ittig.cnr.it">Tommaso Agnoloni </a>
  */
 public class PartizioniImpl implements Partizioni, Loggable, Serviceable, Initializable {
 	Logger logger;
