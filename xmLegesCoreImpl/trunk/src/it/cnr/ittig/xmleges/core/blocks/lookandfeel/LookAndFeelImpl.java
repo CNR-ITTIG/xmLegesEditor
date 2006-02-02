@@ -12,7 +12,7 @@ import javax.swing.UIManager;
 
 /**
  * <h1>Implementazione del servizio
- * <code>it.cnr.ittig.xmlegis.util.services.lookandfeel</code>.</h1>
+ * <code>it.cnr.ittig.xmleges.util.services.lookandfeel</code>.</h1>
  * <h1>Descrizione</h1>
  * Imposta l'aspetto grafico in base alla classe specificata nella configurazione.
  * <h1>Configurazione</h1>
