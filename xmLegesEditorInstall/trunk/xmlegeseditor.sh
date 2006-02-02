@@ -25,6 +25,8 @@ export CLASSPATH=$CLASSPATH:lib/xml-apis-2.7.1.jar
 export CLASSPATH=$CLASSPATH:lib/fop.jar
 export CLASSPATH=$CLASSPATH:lib/batik.jar
 export CLASSPATH=$CLASSPATH:lib/avalon-framework-cvs-20020806.jar
+export LC_ALL=it_IT.iso885915
+export LANG=it_IT.iso885915
 
 chmod +x jre/bin/*
 jre/bin/java -Xmx512m it.cnr.ittig.services.manager.Run xmLegesEditor.xml /images/editor/xmLegesEditor.png
