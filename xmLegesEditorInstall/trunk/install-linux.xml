@@ -15,7 +15,7 @@
 			<author name="Lorenzo Sarti" email="sarti@dii.unisi.it"/>
 			<author name="Maurizio Mollicone" email="mollicone@ittig.cnr.it"/>
 		</authors>
-		<url>http://xmleges.editor.ittig.cnr.it/</url>
+		<url>http://www.ittig.cnr.it/xmleges</url>
 	</info>
 	
 	<!-- 
@@ -39,7 +39,7 @@
 	-->
 	<resources>
 		<res id="LicencePanel.licence" src="LICENSE"/>
-		<res id="InfoPanel.info" src="README"/>
+		<res id="HTMLInfoPanel.info" src="install-readme.html"/>
 		<res id="shortcutSpec.xml" src="shortcutSpec.xml"/>
 		<res id="Unix_shortcutSpec.xml" src="Unix_shortcutSpec.xml"/>
 		<res id="Installer.image.0" src="images/border1.png" />
@@ -60,7 +60,7 @@
 	-->
 	<panels>
 		<panel classname="HelloPanel"/>
-		<panel classname="InfoPanel"/>
+		<panel classname="HTMLInfoPanel"/>
 		<panel classname="LicencePanel"/>
 		<panel classname="TargetPanel"/> 
 		<panel classname="PacksPanel"/>
@@ -77,7 +77,7 @@
 		
 		<pack name="xmLegesCore" required="yes">
 			<description>xmLegesCore</description>
-			<file src="README" targetdir="$INSTALL_PATH"/>
+			<file src="install-readme.html" targetdir="$INSTALL_PATH"/>
 			<file src="LICENSE" targetdir="$INSTALL_PATH"/>
 			
 			<file src="images/xmLegesEditor.png" targetdir="$INSTALL_PATH/images/editor"/>
