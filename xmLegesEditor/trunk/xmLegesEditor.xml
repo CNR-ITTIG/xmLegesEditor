@@ -5,7 +5,7 @@
 File di composizione dell'applicazione xmLegesEditor.
 
 author       : Mirco Taddei
-version      : 0.1
+version      : 1.0 rc1
 copyright (C): 2004 - 2005
                Istituto di Teoria e Tecniche dell'Informazione Giuridica (ITTIG)
                Consiglio Nazionale delle Ricerche - Italy
@@ -100,7 +100,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 class="it.cnr.ittig.xmleges.core.blocks.bugreport.BugReportImpl"
     >
     	<configuration>
-            <mailto>nireditor-bug@ittig.cnr.it</mailto>
+            <mailto>xmleges-editor@ittig.cnr.it</mailto>
             <maxlines>1000</maxlines>
         </configuration>
     </component>
@@ -158,7 +158,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  class="it.cnr.ittig.xmleges.core.blocks.version.VersionImpl"
         >
         <configuration>
-            <version>0.1</version>
+            <version>1.0 rc1</version>
             <url>http://repo.ittig.cnr.it/nireditor2/versions.txt</url>
         </configuration>
     </component>
