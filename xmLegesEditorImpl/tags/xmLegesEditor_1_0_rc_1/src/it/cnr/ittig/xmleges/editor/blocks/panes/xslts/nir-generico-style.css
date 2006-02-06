@@ -1,0 +1,40 @@
+	body {
+		margin-left: 15 px;
+		font-family: "Verdana, Arial, Helvetica, sans-serif" ;
+		font-size: 90% ;
+	}
+	.title { 
+		font-size: 150% ;
+		font-weight: bold;
+		text-align: center;
+	} 
+	.articolo { 
+		font-size: 95% ; 
+		font-weight: bold;
+		margin-top: 15px; 
+		text-align: center;
+	}
+	.comma { 
+		font-size: 80% ; 
+		margin-top: 5px; 
+	}
+	div, li {
+		font-size: 80% ;
+	}
+	.small {
+		font-size: 65% ;
+	}
+	.intestazione {
+		margin: 15px, 15%, 0px, 15%;
+		text-align: center;
+	}
+	.el {
+		margin-left: 40px;
+		text-indent: -30px;
+		margin-top: 3px;
+	}
+    b b { font-weight: normal; }
+	.ndr {
+		color: #00cc00;
+		text-decoration: underline;
+	}

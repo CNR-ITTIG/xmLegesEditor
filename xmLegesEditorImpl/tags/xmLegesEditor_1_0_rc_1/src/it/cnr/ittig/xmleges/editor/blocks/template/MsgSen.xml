@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+%DOCTYPE%
+<NIR xmlns:h="http://www.w3.org/HTML/1998/html4">
+	<DisegnoLegge>
+		<meta>
+			<descrittori>
+				<approvazione norm="" internal_id="" leg="14" tipodoc="Ddlmess"/>
+				<redazione norm="" nome="" url=""/>
+				<urn>urn:nir:senato.repubblica:disegno.legge;messaggio:14.legislatura:nnn</urn>
+			</descrittori>
+		</meta>
+		<intestazione>
+			<emanante>SENATO DELLA REPUBBLICA</emanante>
+			<legislatura>XIV</legislatura>
+			<numDoc/>
+			<h:div>Attesto che il Senato della Repubblica,
+il {gg mese anno}, ha approvato il seguente disegno di legge, dall' iniziativa del Governo, già approvato dalla Camera dei deputati:
+</h:div>
+			<titoloDoc></titoloDoc>
+		</intestazione>
+		<articolato>
+			<articolo id="art1">
+				<num>Art. 1</num>
+				<rubrica></rubrica>
+				<comma id="art1-com1">
+					<num>1.</num>
+					<corpo></corpo>
+				</comma>
+			</articolo>
+		</articolato>
+		<conclusione>
+			<sottoscrizioni>
+				<sottoscrivente>IL PRESIDENTE</sottoscrivente>
+			</sottoscrizioni>
+		</conclusione>
+	</DisegnoLegge>
+</NIR>
+
