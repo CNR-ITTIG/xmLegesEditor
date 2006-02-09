@@ -11,6 +11,7 @@ import it.cnr.ittig.xmleges.core.services.action.ActionManager;
 import it.cnr.ittig.xmleges.core.services.action.file.importt.FileImportAction;
 import it.cnr.ittig.xmleges.core.services.action.file.open.FileOpenAction;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
+import it.cnr.ittig.xmleges.core.services.frame.Frame;
 import it.cnr.ittig.xmleges.core.services.preference.PreferenceManager;
 import it.cnr.ittig.xmleges.core.util.file.RegexpFileFilter;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
@@ -45,6 +46,8 @@ import javax.swing.JFileChooser;
 public class FileImportActionImpl extends AbstractAction implements FileImportAction, Loggable, Serviceable, Startable, Initializable {
 	Logger logger;
 
+	Frame frame;
+	
 	ActionManager actionManager;
 
 	DocumentManager documentManager;
@@ -66,6 +69,7 @@ public class FileImportActionImpl extends AbstractAction implements FileImportAc
 
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
+		frame = (Frame) serviceManager.lookup(Frame.class);
 		actionManager = (ActionManager) serviceManager.lookup(ActionManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		preferenceManager = (PreferenceManager) serviceManager.lookup(PreferenceManager.class);
@@ -104,7 +108,7 @@ public class FileImportActionImpl extends AbstractAction implements FileImportAc
 	// ////////////////////////////////////////////// FileImportAction Interface
 	public boolean doImport() {
 		fileChooser.setCurrentDirectory(getLastImportAsFile() != null ? getLastImportAsFile().getParentFile() : null);
-		if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+		if (fileChooser.showOpenDialog(frame.getComponent()) == JFileChooser.APPROVE_OPTION) {
 			parser.parse(fileChooser.getSelectedFile());
 			lastImport = fileChooser.getSelectedFile().getAbsolutePath();
 			if (parser.isParseOk()) {
