@@ -195,14 +195,100 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 			} else {
 				sorgente.setText(UtilFile.fileToString(file));
 			}
-
+			
+			setComboTipoDoc(getUnknownTipoDoc());
+			
 		} catch (Exception ex) {
 			sorgente.setText("Error");
 		}
 		tabbedPane.setSelectedIndex(0);
 		sorgente.setCaretPosition(0);
 	}
+	
+	private String getUnknownTipoDoc(){
+		
+		try{
+			if (UtilFile.hasExtension(fileTextField.getFile(), "html", false) || UtilFile.hasExtension(fileTextField.getFile(), "htm", false)) {
+				parser.setTipoInput(XmLegesMarker.TIPO_INPUT_VALORE[0]);
+			} else {
+				parser.setTipoInput(XmLegesMarker.TIPO_INPUT_VALORE[1]);
+			}
+			
+		    String unknownTipoDoc = null;
+			
+			if (UtilFile.hasExtension(fileTextField.getFile(), "doc", false))
+				unknownTipoDoc = UtilFile.inputStreamToString(parser.parseAutoTipoDoc(wordFileConv));
+			else
+				unknownTipoDoc = UtilFile.inputStreamToString(parser.parseAutoTipoDoc(fileTextField.getFile()));
+			
+			return unknownTipoDoc;
+		}
+		catch(Exception ex){
+			logger.error(ex.getMessage(),ex);
+		}
+		return null;
+	}
+	
 
+	private void setComboTipoDoc(String unknownTipoDoc){
+		
+		/**
+		 0   Legge
+		 1   Legge Costituzionale
+		 2   Decreto Legge
+		 3   Decreto Legislativo
+		 4   Regio Decreto
+		 5   Decreto Presidente Repubblica
+		 6   Decreto Presidente Repubblica - non numerato
+		 7   Decreto Pres. Cons. Ministri
+		 8   Decreto Pres. Cons. Ministri - non numerato
+		 9   Decreto Ministeriale
+		 10   Decreto Ministeriale - non numerato
+		 11   Legge Regionale
+		 12   Disegno di Legge
+		 13   Documento NIR
+		 14   Provvedimento CNR
+		 */
+		
+		String comboItem = null;
+		
+		if(unknownTipoDoc != null){
+			unknownTipoDoc = unknownTipoDoc.toLowerCase().trim();
+			
+			if(unknownTipoDoc.startsWith("legge") && unknownTipoDoc.indexOf("costituzionale")==-1)
+				comboItem = parser.TIPO_DOC[0];
+			else if(unknownTipoDoc.indexOf("costituzionale")!=-1)
+				comboItem = parser.TIPO_DOC[1];
+			else if((unknownTipoDoc.startsWith("decreto") && unknownTipoDoc.indexOf("legge")!=-1) || unknownTipoDoc.indexOf("d.l.")!=-1 || unknownTipoDoc.indexOf("dl")!=-1)
+				comboItem = parser.TIPO_DOC[2];
+			else if((unknownTipoDoc.startsWith("decreto") && unknownTipoDoc.indexOf("legislativo")!=-1) || unknownTipoDoc.indexOf("lgs")!=-1 || unknownTipoDoc.indexOf("dlgs")!=-1)
+				comboItem = parser.TIPO_DOC[3];
+			else if((unknownTipoDoc.indexOf("regio")!=-1))
+				comboItem = parser.TIPO_DOC[4];
+			else if(unknownTipoDoc.indexOf("repubblica")!=-1 || unknownTipoDoc.indexOf("dpr")!=-1 || unknownTipoDoc.indexOf("d.p.r")!=-1)
+				comboItem = parser.TIPO_DOC[5];
+			else if(unknownTipoDoc.indexOf("consiglio")!=-1 || unknownTipoDoc.indexOf("pcm")!=-1 || unknownTipoDoc.indexOf("p.c.m")!=-1)
+				comboItem = parser.TIPO_DOC[7];
+			else if(unknownTipoDoc.indexOf("ministeriale")!=-1 || unknownTipoDoc.indexOf("ministero")!=-1 || unknownTipoDoc.indexOf("dm")!=-1 || unknownTipoDoc.indexOf("d.m.")!=-1)
+				comboItem = parser.TIPO_DOC[9];
+			else if(unknownTipoDoc.indexOf("regionale")!=-1 || unknownTipoDoc.indexOf("regione")!=-1 || unknownTipoDoc.indexOf("lr")!=-1 || unknownTipoDoc.indexOf("l.r.")!=-1)
+				comboItem = parser.TIPO_DOC[11];
+			else if(unknownTipoDoc.indexOf("disegno")!=-1 || unknownTipoDoc.indexOf("ddl")!=-1 || unknownTipoDoc.indexOf("d.d.l.")!=-1)
+				comboItem = parser.TIPO_DOC[12];
+			else if(unknownTipoDoc.indexOf("provvedimento")!=-1)
+				comboItem = parser.TIPO_DOC[14];
+			else 
+				comboItem = parser.TIPO_DOC[0];
+			
+			tipoDoc.setSelectedItem(comboItem);
+			
+		}
+		else
+			tipoDoc.setSelectedIndex(0);
+	}
+	
+	
+	
 	protected class AnalyzeAction extends AbstractAction {
 
 		public void actionPerformed(ActionEvent e) {
@@ -230,10 +316,12 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 						parser.setEncoding(encoding.getSelectedItem().toString());
 						// parser.setLoggerLevel(ParserStruttura.LOGGER_VALORE[loggerLevel.getSelectedIndex()]);
 						InputStream res;
+						
 						if (UtilFile.hasExtension(fileTextField.getFile(), "doc", false))
 							res = parser.parse(wordFileConv);
 						else
 							res = parser.parse(fileTextField.getFile());
+						
 						if (parser.getError() == null) {
 							if (res != null) {
 								parserResult = UtilFile.inputStreamToString(res);
@@ -290,6 +378,7 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 	
 	
 	public void actionPerformed(ActionEvent e) {
+			
 		if (e.getSource().equals(tipoDoc)) {
 			popolaTipoDtd();	
 		}

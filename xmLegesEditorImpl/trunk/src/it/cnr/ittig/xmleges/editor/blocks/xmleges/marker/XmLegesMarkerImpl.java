@@ -185,7 +185,48 @@ public class XmLegesMarkerImpl implements XmLegesMarker, Loggable, Serviceable, 
 		checkParam(LOGGER_VALORE, logLevel);
 		this.logLevel = logLevel;
 	}
+	
+	
+	public InputStream parseAutoTipoDoc(File file) {
+		
+		execMonitor.clear();
+		
+		// From buildCommand 
+		// FIXME fare copia in dir parser/struttura
+		// if (firsTime) {
+		copyProgram();
+		// firsTime = false;
+		// }
 
+		File commandFile = UtilFile.getFileFromTemp("xmLeges-Marker.exe");
+		UtilFile.setExecPermission(commandFile);
+		StringBuffer sb = new StringBuffer(commandFile.getAbsolutePath());
+		sb.append(" -i ");
+		sb.append(format);
+		sb.append(" -t unknown");
+		String command = sb.toString();
+		
+		logger.debug("Command=" + command);
+		try {
+			UtilFile.copyFileInTemp(new FileInputStream(file), "unknown_type.in");
+			command += " -f "  + UtilFile.getTempDirName() + File.separatorChar + "unknown_type.in";
+			exec.runCommand(command);
+			error = exec.getStderr().trim();
+			if (error.length() == 0)
+				error = null;
+			return new FileInputStream(UtilFile.getTempDirName() + File.separatorChar + "unknown_type.tmp");
+		} catch (ExecTimeoutException ex) {
+			logger.error("timeout", ex);
+		} catch (ExecException ex) {
+			logger.error("error", ex);
+		} catch (Exception ex) {
+			logger.error(ex.toString(), ex);
+		}
+		execMonitor.close();
+		return null;
+	}
+
+	
 	public InputStream parse(File file) {
 		execMonitor.clear();
 		String command = buildCommand();
@@ -211,18 +252,24 @@ public class XmLegesMarkerImpl implements XmLegesMarker, Loggable, Serviceable, 
 		return null;
 	}
 
+	
 	public String getError() {
 		return error;
 	}
 
 	protected boolean firsTime = true;
 
+	
 	protected String buildCommand() {
+		
 		// FIXME fare copia in dir parser/struttura
 		// if (firsTime) {
-		copyProgram();
+	    //copyProgram();
 		// firsTime = false;
 		// }
+		
+		
+		// xmLeges-Marker.exe gia' copiato nella temp da parseAutoTipoDoc
 		File command = UtilFile.getFileFromTemp("xmLeges-Marker.exe");
 		UtilFile.setExecPermission(command);
 		StringBuffer sb = new StringBuffer(command.getAbsolutePath());
