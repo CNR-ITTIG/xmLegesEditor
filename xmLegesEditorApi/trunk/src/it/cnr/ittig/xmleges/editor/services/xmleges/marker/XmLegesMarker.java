@@ -178,9 +178,18 @@ public interface XmLegesMarker extends Service {
 	public void setLoggerLevel(String level) throws XmLegesMarkerException;
 
 	/**
+	 * Estrae il tipoDoc dal file <code>file</code>.
+	 * 
+	 * @param file file da cui estrarre il tipo
+	 * @return tipo di documento
+	 * @throws XmLegesMarkerException se avviene un errore durante l'analisi
+	 */
+	public InputStream parseAutoTipoDoc(File file) throws XmLegesMarkerException;
+	
+	/**
 	 * Converte il file <code>file</code> in XML.
 	 * 
-	 * @param file file d&agrave; convertire
+	 * @param file file da convertire
 	 * @return file XML
 	 * @throws XmLegesMarkerException se avviene un errore durante l'analisi
 	 */
