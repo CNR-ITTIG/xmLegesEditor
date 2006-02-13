@@ -33,8 +33,7 @@
 	<conclusione> 
 		<dataeluogo norm="" %CODICE%>Roma, {gg mese aaaa}</dataeluogo> 
 		<sottoscrizioni> 
-			<sottoscrivente>Il Presidente del Consiglio dei Ministri
-    			<h:br>{nome}</h:br>
+			<sottoscrivente>Il Presidente del Consiglio dei Ministri {nome}
 			</sottoscrivente>
 			<visto/>
 		</sottoscrizioni> 
