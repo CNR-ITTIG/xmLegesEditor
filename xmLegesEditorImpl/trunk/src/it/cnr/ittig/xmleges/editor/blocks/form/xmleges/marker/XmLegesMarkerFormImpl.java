@@ -259,7 +259,7 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 				comboItem = parser.TIPO_DOC[0];
 			else if(unknownTipoDoc.indexOf("costituzionale")!=-1)
 				comboItem = parser.TIPO_DOC[1];
-			else if((unknownTipoDoc.startsWith("decreto") && unknownTipoDoc.indexOf("legge")!=-1) || unknownTipoDoc.indexOf("d.l.")!=-1 || unknownTipoDoc.indexOf("dl")!=-1)
+			else if((unknownTipoDoc.startsWith("decreto") && unknownTipoDoc.indexOf("legge")!=-1) || unknownTipoDoc.indexOf("d.l")!=-1 || unknownTipoDoc.indexOf("dl")!=-1)
 				comboItem = parser.TIPO_DOC[2];
 			else if((unknownTipoDoc.startsWith("decreto") && unknownTipoDoc.indexOf("legislativo")!=-1) || unknownTipoDoc.indexOf("lgs")!=-1 || unknownTipoDoc.indexOf("dlgs")!=-1)
 				comboItem = parser.TIPO_DOC[3];
