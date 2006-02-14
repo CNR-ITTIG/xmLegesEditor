@@ -10,6 +10,7 @@ import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.form.Form;
+import it.cnr.ittig.xmleges.core.services.form.FormVerifier;
 import it.cnr.ittig.xmleges.core.services.form.filetextfield.FileTextField;
 import it.cnr.ittig.xmleges.core.services.form.filetextfield.FileTextFieldListener;
 import it.cnr.ittig.xmleges.core.services.mswordconverter.MSWordConverter;
@@ -62,7 +63,7 @@ import javax.swing.JTextField;
  * 
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */
-public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldListener, ActionListener, Loggable, Serviceable, Configurable, Initializable {
+public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldListener, ActionListener, Loggable, Serviceable, Configurable, Initializable, FormVerifier {
 	Logger logger;
 
 	Form form;
@@ -140,6 +141,9 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 		form.setName("editor.form.xmleges.marker");
 
 		form.replaceComponent("editor.form.xmleges.marker.file", fileTextField.getAsComponent());
+		
+		form.addFormVerifier(this);
+		
 		fileTextField.addFileTextFieldListener(this);
 		fileTextField.setFileFilter(new RegexpFileFilter("doc, html, txt", ".*\\.(doc|html?|txt)"));
 		tipoDtd = (JComboBox) form.getComponentByName("editor.form.xmleges.marker.tipodtd");
@@ -327,15 +331,12 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 								parserResult = UtilFile.inputStreamToString(res);
 								risultati.setText(parserResult);
 								// tabbedPane.setSelectedIndex(1);
-								// TODO I18n
 								parseOk = true;
-								utilMsg.msgInfo(form.getAsComponent(), "Analisi del file completata.");
+								utilMsg.msgInfo("editor.form.xmleges.marker.msg.warning.complete","editor.form.xmleges.marker.text");
 							} else
-								// TODO I18n
-								utilMsg.msgError(form.getAsComponent(), "Errore durante l'esecuzione dell'analizzatore.");
+								utilMsg.msgError("editor.form.xmleges.marker.msg.error.errore","editor.form.xmleges.marker.text");
 						} else {
-							// TODO I18n
-							utilMsg.msgError(form.getAsComponent(), "Errore durante l'esecuzione dell'analizzatore:\n" + parser.getError());
+							utilMsg.msgError("Errore durante l'esecuzione dell'analizzatore:\n" + parser.getError(),"editor.form.xmleges.marker.text");
 						}
 					} catch (Exception ex) {
 						logger.error(ex.toString(), ex);
@@ -382,6 +383,16 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 		if (e.getSource().equals(tipoDoc)) {
 			popolaTipoDtd();	
 		}
-		// TODO Auto-generated method stub		
+	}
+
+	
+	public String getErrorMessage() {
+		return "editor.form.xmleges.marker.msg.error.analizza";
+	}
+
+	public boolean verifyForm() {
+		if(null==parserResult || parserResult.length()==0)
+			return false;
+		return true;
 	}
 }
