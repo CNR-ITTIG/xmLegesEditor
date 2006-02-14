@@ -21,7 +21,7 @@ import org.w3c.dom.NodeList;
 
 /**
  * <h1>Implementazione del servizio
- * <code>it.cnr.ittig.xmleges.editor.services.dom.xmleges.link.XmLegesLink</code>.</h1>
+ * <code>it.cnr.ittig.xmleges.editor.services.dom.xmleges.linker.XmLegesLinker</code>.</h1>
  * <h1>Descrizione</h1>
  * <h1>Configurazione</h1>
  * <h1>Dipendenze</h1>

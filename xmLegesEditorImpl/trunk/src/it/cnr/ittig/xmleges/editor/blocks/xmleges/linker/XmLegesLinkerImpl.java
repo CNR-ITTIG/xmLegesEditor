@@ -26,7 +26,7 @@ import org.w3c.dom.Node;
 
 /**
  * <h1>Implementazione del servizio
- * <code>it.cnr.ittig.xmleges.editor.services.parser.riferimenti.RiferimentiParser</code>.
+ * <code>it.cnr.ittig.xmleges.editor.services.xmleges.linker.XmLegesLinker</code>.
  * </h1>
  * <h1>Descrizione</h1>
  * <h1>Configurazione</h1>

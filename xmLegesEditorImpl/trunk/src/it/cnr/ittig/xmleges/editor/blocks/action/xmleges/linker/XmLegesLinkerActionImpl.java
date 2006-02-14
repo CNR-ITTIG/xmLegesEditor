@@ -135,18 +135,30 @@ public class XmLegesLinkerActionImpl implements XmLegesLinkerAction, EventManage
 			logger.debug("testo dopo: " + dopo + " length " + dopo.length());
 
 			if (UtilDom.findParentByName(node, "rif") != null || UtilDom.findParentByName(node, "mrif") != null) {
-				utilMsg.msgInfo("editor.action.parser.riferimenti.warning.insiderif", "editor.action.parser.riferimenti");
+				utilMsg.msgInfo("editor.form.xmleges.link.msg.warning.insiderif", "editor.form.xmleges.link.text");
 				parserRiferimentiForm.setParseAll(true);
 			}
 
 			if (parserRiferimentiForm.openForm(selected)) { // openForm selected
 				if (parserRiferimentiForm.isParseAll()) {
-					modified = parserRiferimenti.setParsedDocument(parserRiferimentiForm.getResultForAll());
-					done = modified != null;
+					if(parserRiferimentiForm.getResultForAll()!=null){
+						modified = parserRiferimenti.setParsedDocument(parserRiferimentiForm.getResultForAll());
+						done = modified != null;
+					}
+					else{
+						utilMsg.msgInfo("editor.form.xmleges.link.msg.warning.analizza", "editor.form.xmleges.link.text");
+						done = true;
+					}
 				} else {
-					modified = parserRiferimenti.setParsedText(node, parserRiferimentiForm.getResultForText(), prima, dopo);
-					done = modified != null;
-					logger.debug("modified: " + modified.getNodeName());
+					if(parserRiferimentiForm.getResultForText()!=null){
+						modified = parserRiferimenti.setParsedText(node, parserRiferimentiForm.getResultForText(), prima, dopo);
+						done = modified != null;
+						logger.debug("modified: " + modified.getNodeName());
+					}
+					else{
+						utilMsg.msgInfo("editor.form.xmleges.link.msg.warning.analizza", "editor.form.xmleges.link.text");
+						done = true;
+					}
 				}
 			} else
 				done = true;
@@ -155,11 +167,23 @@ public class XmLegesLinkerActionImpl implements XmLegesLinkerAction, EventManage
 				logger.debug("[ParserRiferimentiAction: nodi selezionati]");
 				if (parserRiferimentiForm.openForm(selectionManager.getSelectedNodes())) {
 					if (parserRiferimentiForm.isParseAll()) {
-						modified = parserRiferimenti.setParsedDocument(parserRiferimentiForm.getResultForAll());
-						done = modified != null;
+						if(parserRiferimentiForm.getResultForAll()!=null){
+							modified = parserRiferimenti.setParsedDocument(parserRiferimentiForm.getResultForAll());
+							done = modified != null;
+						}
+						else{
+							utilMsg.msgInfo("editor.form.xmleges.link.msg.warning.analizza", "editor.form.xmleges.link.text");
+							done = true;
+						}
 					} else {
-						modified = parserRiferimenti.setParsedNodes(selectionManager.getSelectedNodes(), parserRiferimentiForm.getResultForNodes());
-						done = modified != null;
+						if(parserRiferimentiForm.getResultForNodes()!=null){
+							modified = parserRiferimenti.setParsedNodes(selectionManager.getSelectedNodes(), parserRiferimentiForm.getResultForNodes());
+							done = modified != null;
+						}
+						else{
+							utilMsg.msgInfo("editor.form.xmleges.link.msg.warning.analizza", "editor.form.xmleges.link.text");
+							done = true;
+						}
 					}
 				} else
 					done = true;
@@ -167,15 +191,31 @@ public class XmLegesLinkerActionImpl implements XmLegesLinkerAction, EventManage
 				Node node = selectionManager.getActiveNode();
 				if (node != null) {
 					logger.debug("[ParserRiferimentiAction: openForm con active node]");
+					if (UtilDom.findParentByName(node, "rif") != null || UtilDom.findParentByName(node, "mrif") != null) {
+						utilMsg.msgInfo("editor.form.xmleges.link.msg.warning.insiderif", "editor.form.xmleges.link.text");
+						parserRiferimentiForm.setParseAll(true);
+					}
 					if (parserRiferimentiForm.openForm(node)) {
 						if (parserRiferimentiForm.isParseAll()) {
-							modified = parserRiferimenti.setParsedDocument(parserRiferimentiForm.getResultForAll());
-							done = modified != null;
-							logger.debug("modified: " + modified.getNodeName());
+							if(parserRiferimentiForm.getResultForAll()!=null){
+								modified = parserRiferimenti.setParsedDocument(parserRiferimentiForm.getResultForAll());
+								done = modified != null;
+								logger.debug("modified: " + modified.getNodeName());
+							}
+							else{
+								utilMsg.msgInfo("editor.form.xmleges.link.msg.warning.analizza", "editor.form.xmleges.link.text");
+								done = true;
+							}
 						} else {
-							modified = parserRiferimenti.setParsedNode(node, parserRiferimentiForm.getResultForNode());
-							done = modified != null;
-							logger.debug("modified: " + modified.getNodeName());
+							if(parserRiferimentiForm.getResultForNode()!=null){
+								modified = parserRiferimenti.setParsedNode(node, parserRiferimentiForm.getResultForNode());
+								done = modified != null;
+								logger.debug("modified: " + modified.getNodeName());
+							}
+							else{
+								utilMsg.msgInfo("editor.form.xmleges.link.msg.warning.analizza", "editor.form.xmleges.link.text");
+								done = true;
+							}
 						}
 					} else
 						done = true;
@@ -183,15 +223,21 @@ public class XmLegesLinkerActionImpl implements XmLegesLinkerAction, EventManage
 					logger.debug("[ParserRiferimentiAction: nessuna selezione; forza parse intero documento]");
 					parserRiferimentiForm.setParseAll(true);
 					if (parserRiferimentiForm.openForm(node)) {
-						modified = parserRiferimenti.setParsedDocument(parserRiferimentiForm.getResultForAll());
-						done = modified != null;
+						if(parserRiferimentiForm.getResultForAll()!=null){
+							modified = parserRiferimenti.setParsedDocument(parserRiferimentiForm.getResultForAll());
+							done = modified != null;
+						}
+						else{
+							utilMsg.msgInfo("editor.form.xmleges.link.msg.warning.analizza", "editor.form.xmleges.link.text");
+							done = true;
+						}
 					} else
 						done = true;
 				}
 			}
 		}
 		if (!done) {
-			utilMsg.msgError("editor.action.parser.riferimenti.error", "editor.action.parser.riferimenti");
+			utilMsg.msgError("editor.form.xmleges.link.msg.error.parser", "editor.form.xmleges.link.text");
 		} else {
 			if (modified != null) {
 				logger.debug("modified: " + modified.getNodeName());
