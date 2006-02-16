@@ -22,6 +22,7 @@ import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
+import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.action.tabelle.TabelleAction;
 import it.cnr.ittig.xmleges.editor.services.dom.tabelle.Tabelle;
@@ -101,10 +102,16 @@ public class TabelleActionImpl implements TabelleAction, Loggable, Serviceable, 
 	TabelleForm tabelleForm;
 
 	Node activeNode;
+	
+	int start;
+
+	int end;
 
 	Node[] selectedNodes;
 
 	DtdRulesManager dtdRulesManager;
+	
+	UtilRulesManager utilRulesManager;
 
 	UtilMsg utilMsg;
 
@@ -127,6 +134,7 @@ public class TabelleActionImpl implements TabelleAction, Loggable, Serviceable, 
 		tabelleForm = (TabelleForm) serviceManager.lookup(TabelleForm.class);
 		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
+		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
 	}
 
 	// ////////////////////////////////////////////////// Configurable Interface
@@ -157,6 +165,8 @@ public class TabelleActionImpl implements TabelleAction, Loggable, Serviceable, 
 		if (event instanceof SelectionChangedEvent) {
 			logger.debug("manageEvent: " + event);
 			SelectionChangedEvent e = (SelectionChangedEvent) event;
+			start = selectionManager.getTextSelectionStart();
+			end = selectionManager.getTextSelectionEnd();
 			if (e.isActiveNodeChanged()) {
 				logger.debug("ActiveNodeChanged event");
 				selectedNodes = new Node[] { e.getActiveNode() };
@@ -234,10 +244,15 @@ public class TabelleActionImpl implements TabelleAction, Loggable, Serviceable, 
 						try {
 							EditTransaction tr = documentManager.beginEdit();
 
+							// INSERT INSIDE
 							if (tabelle.canInsertTable(selectedNodes[0]) == 3) {
+								utilRulesManager.insertNodeInText(selectedNodes[0], start, end, tabella, false);
+								documentManager.commitEdit(tr);
+							}
+							// INSERT AFTER
+							else if (tabelle.canInsertTable(selectedNodes[0]) == 4) {
 								if (selectedNodes[0].getNextSibling() != null) {
 									Node next = selectedNodes[0].getNextSibling();
-
 									if (dtdRulesManager.queryCanInsertBefore(parent, next, tabella)) {
 										parent.insertBefore(tabella, next);
 										documentManager.commitEdit(tr);
@@ -246,16 +261,19 @@ public class TabelleActionImpl implements TabelleAction, Loggable, Serviceable, 
 									parent.appendChild(tabella);
 									documentManager.commitEdit(tr);
 								}
-							} else if (tabelle.canInsertTable(selectedNodes[0]) == 4) {
+							// INSERT BEFORE	
+							} else if (tabelle.canInsertTable(selectedNodes[0]) == 5) {
 								if (dtdRulesManager.queryCanInsertBefore(parent, selectedNodes[0], tabella)) {
 									parent.insertBefore(tabella, selectedNodes[0]);
 									documentManager.commitEdit(tr);
 								}
+							// APPEND
 							} else if (tabelle.canInsertTable(selectedNodes[0]) == 1) {
 								if (dtdRulesManager.queryCanAppend(selectedNodes[0], tabella)) {
 									selectedNodes[0].appendChild(tabella);
 									documentManager.commitEdit(tr);
 								}
+							// PREPEND
 							} else if (tabelle.canInsertTable(selectedNodes[0]) == 2) {
 								if (dtdRulesManager.queryCanPrepend(selectedNodes[0], tabella)) {
 									selectedNodes[0].insertBefore(tabella, selectedNodes[0].getFirstChild());

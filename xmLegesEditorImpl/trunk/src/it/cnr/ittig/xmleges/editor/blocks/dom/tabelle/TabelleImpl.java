@@ -70,43 +70,31 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 	}
 
+	
 	public int canInsertTable(Node node) {
 		try {
-			int azione;
 			if (node != null) {
-				Collection node_coll1 = dtdRulesManager.queryAppendable(node);
-				if (node_coll1.contains("h:table")) {
-					azione = 1;
-					return azione;
-				} else {
-					Collection node_coll2 = dtdRulesManager.queryPrependable(node);
-					if (node_coll2.contains("h:table")) {
-						azione = 2;
-						return azione;
-					}
-				}
-
-				if (node.getParentNode() != null) {
-					Collection node_coll3 = dtdRulesManager.queryInsertableAfter(node.getParentNode(), node);
-					if (node_coll3.contains("h:table")) {
-						azione = 3;
-						return azione;
-					} else {
-						Collection node_coll4 = dtdRulesManager.queryInsertableBefore(node.getParentNode(), node);
-						if (node_coll4.contains("h:table")) {
-							azione = 4;
-							return azione;
-						}
-					}
+				if (dtdRulesManager.queryAppendable(node).contains("h:table")) 
+					return 1;
+				if (dtdRulesManager.queryPrependable(node).contains("h:table")) 
+				    return 2;
+				
+				if (node.getParentNode() != null) {	
+					if(dtdRulesManager.queryInsertableInside(node.getParentNode(), node).contains("h:table"))
+						return 3;
+					if (dtdRulesManager.queryInsertableAfter(node.getParentNode(), node).contains("h:table")) 
+						return 4;
+					if (dtdRulesManager.queryInsertableBefore(node.getParentNode(), node).contains("h:table")) 
+						return 5;
 				}
 			}
 		} catch (DtdRulesManagerException ex) {
-			logger.error(ex.getMessage(), ex);
 			return 0;
 		}
 		return 0;
 	}
 
+	
 	public boolean canDeleteTable(Node node) {
 		try {
 			Node nodoTab = UtilDom.findParentByName(node, "h:table");
@@ -114,16 +102,14 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 				return true;
 			}
 		} catch (DtdRulesManagerException ex) {
-			logger.error(ex.getMessage(), ex);
 			return false;
 		}
 		return false;
 	}
 
+	
 	public boolean canPrepRiga(Node node) {
-
 		try {
-
 			if (UtilDom.findParentByName(node, "h:tr") != null) {
 				Node nodoRiga = UtilDom.findParentByName(node, "h:tr");
 				if (nodoRiga.getParentNode() != null) {
@@ -137,12 +123,12 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 				}
 			}
 		} catch (DtdRulesManagerException ex) {
-			logger.error(ex.getMessage(), ex);
 			return false;
 		}
 		return false;
 	}
 
+	
 	public boolean canAppRiga(Node node) {
 		try {
 			if (UtilDom.findParentByName(node, "h:tr") != null) {
@@ -157,13 +143,13 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 					}
 				}
 			}
-		} catch (DtdRulesManagerException ex) {
-			logger.error(ex.getMessage(), ex);
+		} catch (DtdRulesManagerException ex) {	
 			return false;
 		}
 		return false;
 	}
 
+	
 	public boolean canDeleteRiga(Node node) {
 
 		if (UtilDom.findParentByName(node, "h:tr") != null) {
@@ -191,7 +177,6 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 						// }
 						// }
 					} catch (DtdRulesManagerException ex) {
-						logger.error(ex.getMessage(), ex);
 						return false;
 					}
 				}
@@ -214,7 +199,6 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 				}
 			}
 		} catch (DtdRulesManagerException ex) {
-			logger.error(ex.getMessage(), ex);
 			return false;
 		}
 
@@ -235,7 +219,7 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 				}
 			}
 		} catch (DtdRulesManagerException ex) {
-			logger.error(ex.getMessage(), ex);
+			//logger.error(ex.getMessage(), ex);
 			return false;
 		}
 
@@ -258,7 +242,7 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 
 			}
 		} catch (DtdRulesManagerException ex) {
-			logger.error(ex.getMessage(), ex);
+			//logger.error(ex.getMessage(), ex);
 			return false;
 		}
 		return false;
@@ -289,7 +273,7 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 			}
 
 		} catch (DtdRulesManagerException ex) {
-			logger.error(ex.getMessage(), ex);
+			//logger.error(ex.getMessage(), ex);
 			return false;
 		}
 
@@ -308,7 +292,7 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 				}
 			}
 		} catch (DtdRulesManagerException ex) {
-			logger.error(ex.getMessage(), ex);
+			//logger.error(ex.getMessage(), ex);
 			return false;
 		}
 		return false;
@@ -495,7 +479,7 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 								}
 							}
 						} catch (DtdRulesManagerException ex) {
-							logger.error(ex.getMessage(), ex);
+							//logger.error(ex.getMessage(), ex);
 						}
 					}
 
