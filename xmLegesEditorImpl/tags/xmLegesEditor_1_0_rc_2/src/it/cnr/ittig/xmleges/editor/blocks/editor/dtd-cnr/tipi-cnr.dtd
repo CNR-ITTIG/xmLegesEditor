@@ -1,0 +1,73 @@
+<!-- ===================================================================== -->
+<!--   Modello dei documenti di NormeInRete (NIR)                          -->
+<!--                                                                       -->
+<!--   tipi: content model e tipi di dato usati da NIR                     -->
+<!--   Dipende da: 'nirstrict' oppure 'nirloose'                           -->
+<!--                                                                       -->
+<!--   Release  01/06/2005                                                 -->
+<!--   Fabio Vitali - UniBo                                                -->
+<!--                                                                       -->
+<!--   Per un'introduzione, si veda il documento 'info.html'               -->
+<!-- ===================================================================== -->
+<!-- ===================================================================== -->
+<!--                                                                       -->
+<!--     Globali                                                           -->
+<!--                                                                       -->
+<!-- ===================================================================== -->
+<!ENTITY % linktype "CDATA">
+<!ENTITY % uri "CDATA">
+<!ENTITY % e-uri "(#PCDATA)">
+<!ENTITY % anytoken "CDATA">
+<!ENTITY % anystring "CDATA">
+<!ENTITY % e-anystring "(#PCDATA)">
+
+<!ENTITY % tipovigenza "(originale | monovigente | multivigente)">
+<!ENTITY % NIRdate "CDATA">
+<!ENTITY % NIRdove "CDATA">
+<!ENTITY % NIRcodice "CDATA">
+
+<!ENTITY % tiporango "(L | R | LR)">
+<!ENTITY % valute "(EU|LIT|USD|LST)">
+<!ENTITY % numero "CDATA">
+<!ENTITY % NIRnome "CDATA">
+
+<!ENTITY % sino "(si|no)">
+<!ENTITY % status "(omissis|abrogato|annullato|sospeso)">
+<!ENTITY % id "ID">
+<!ENTITY % idref "IDREF">
+<!-- ===================================================================== -->
+<!--                                                                       -->
+<!--     attributi HTML                                                    -->
+<!--                                                                       -->
+<!-- ===================================================================== -->
+<!ENTITY % htmlstyle "CDATA">
+<!ENTITY % htmlclass "CDATA">
+<!ENTITY % xmllang "CDATA">
+
+<!-- ===================================================================== -->
+<!--                                                                       -->
+<!--     Da meta.dtd                                                       -->
+<!--                                                                       -->
+<!-- ===================================================================== -->
+<!ENTITY % tipopubblicazione "CDATA">
+<!ENTITY % numeropubblicazione "CDATA">
+<!ENTITY % funzione "(informativa|regolativa)">
+<!ENTITY % ranghi "(costituzionale|primario|secondario|terziario|prassi)">
+<!ENTITY % tiporegola "CDATA">
+<!ENTITY % tipoeventi "CDATA">
+<!ENTITY % tipocontributo "CDATA">
+
+<!-- ===================================================================== -->
+<!--                                                                       -->
+<!--     Namespace                                                         -->
+<!--                                                                       -->
+<!-- ===================================================================== -->
+<!ENTITY % NSxlink "xmlns:xlink   CDATA  #FIXED 'http://www.w3.org/1999/xlink'">
+<!ENTITY % NShtml "xmlns:h       CDATA  #FIXED 'http://www.w3.org/HTML/1998/html4'">
+<!ENTITY % NSnir "xmlns         CDATA  #FIXED 'http://www.normeinrete.it/nir/2.0' ">
+<!ENTITY % NSnirdsp "xmlns:dsp     CDATA  #FIXED 'http://www.normeinrete.it/nir/disposizioni/2.0'">
+
+<!-- ===================================================================== -->
+<!--     fine del file tipi                                                -->
+<!-- ===================================================================== -->
+

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="iso-8859-15"?>
+
+%DOCTYPE%
+
+<NIR xmlns:xlink="http://www.w3.org/1999/xlink" 
+	 xmlns:h="http://www.w3.org/HTML/1998/html4">
+<DocumentoNIR nome="circolare">
+	<meta>
+		<descrittori>
+			<pubblicazione tipo="GU" num="" norm=""/>
+			<urn>urn:nir:ministero.xxxxx:circolare:aaaa-mm-gg;nir-nnn</urn>
+			<vigenza inizio="" id="v1"/>
+		</descrittori>
+	</meta>
+	<intestazione>
+		<emanante>MINISTERO {denominazione}</emanante> 
+		<tipoDoc>CIRCOLARE</tipoDoc> 
+		<dataDoc norm=""/>
+		<titoloDoc/>
+	</intestazione> 
+	<formulainiziale>
+		<h:p>{destinatario}</h:p>
+		<h:p>{destinatario}</h:p>
+		<h:p>{destinatario}</h:p>
+		<h:p/>
+		<h:p>IL MINISTRO .....</h:p>
+		<preambolo>
+			<h:p/>
+			<h:p/>
+			<h:p/>
+		</preambolo>		
+	</formulainiziale> 
+	<articolato>
+		<articolo id="art1">
+			<num>Art. 1.</num>
+			<rubrica/>
+			<comma id="art1-com1">
+				<num>1.</num>
+				<corpo/>
+			</comma>
+		</articolo>
+	</articolato>
+	<conclusione> 
+		<dataeluogo norm="" %CODICE%>Roma, {gg mese aaaa}</dataeluogo> 
+		<sottoscrizioni> 
+			<sottoscrivente>Il Ministro: {nome}</sottoscrivente>
+			<visto/>
+		</sottoscrizioni> 
+	</conclusione> 
+</DocumentoNIR>
+</NIR>
