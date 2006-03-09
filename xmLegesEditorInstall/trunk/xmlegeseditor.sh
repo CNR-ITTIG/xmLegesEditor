@@ -29,4 +29,4 @@ export LC_ALL=it_IT.iso885915
 export LANG=it_IT.iso885915
 
 chmod +x jre/bin/*
-jre/bin/java -Xmx512m it.cnr.ittig.services.manager.Run xmLegesEditor.xml /images/editor/xmLegesEditor.png
+jre/bin/java -Xmx256m it.cnr.ittig.services.manager.Run xmLegesEditor.xml /images/editor/xmLegesEditor.png
