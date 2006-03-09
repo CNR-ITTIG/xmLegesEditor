@@ -258,22 +258,21 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 		
 		if(unknownTipoDoc != null){
 			unknownTipoDoc = unknownTipoDoc.toLowerCase().trim();
-			
 			if(unknownTipoDoc.startsWith("legge") && unknownTipoDoc.indexOf("costituzionale")==-1)
 				comboItem = parser.TIPO_DOC[0];
 			else if(unknownTipoDoc.indexOf("costituzionale")!=-1)
 				comboItem = parser.TIPO_DOC[1];
-			else if((unknownTipoDoc.startsWith("decreto") && unknownTipoDoc.indexOf("legge")!=-1) || unknownTipoDoc.indexOf("d.l")!=-1 || unknownTipoDoc.indexOf("dl")!=-1)
-				comboItem = parser.TIPO_DOC[2];
 			else if((unknownTipoDoc.startsWith("decreto") && unknownTipoDoc.indexOf("legislativo")!=-1) || unknownTipoDoc.indexOf("lgs")!=-1 || unknownTipoDoc.indexOf("dlgs")!=-1)
 				comboItem = parser.TIPO_DOC[3];
+			else if((unknownTipoDoc.startsWith("decreto") && unknownTipoDoc.indexOf("legge")!=-1) || unknownTipoDoc.indexOf("d.l")!=-1 || unknownTipoDoc.indexOf("dl")!=-1)
+				comboItem = parser.TIPO_DOC[2];
 			else if((unknownTipoDoc.indexOf("regio")!=-1))
 				comboItem = parser.TIPO_DOC[4];
 			else if(unknownTipoDoc.indexOf("repubblica")!=-1 || unknownTipoDoc.indexOf("dpr")!=-1 || unknownTipoDoc.indexOf("d.p.r")!=-1)
 				comboItem = parser.TIPO_DOC[5];
 			else if(unknownTipoDoc.indexOf("consiglio")!=-1 || unknownTipoDoc.indexOf("pcm")!=-1 || unknownTipoDoc.indexOf("p.c.m")!=-1)
 				comboItem = parser.TIPO_DOC[7];
-			else if(unknownTipoDoc.indexOf("ministeriale")!=-1 || unknownTipoDoc.indexOf("ministero")!=-1 || unknownTipoDoc.indexOf("dm")!=-1 || unknownTipoDoc.indexOf("d.m.")!=-1)
+			else if(unknownTipoDoc.indexOf("ministeriale")!=-1 || unknownTipoDoc.indexOf("ministero")!=-1 || unknownTipoDoc.indexOf("dm")!=-1 || unknownTipoDoc.indexOf("d.m")!=-1)
 				comboItem = parser.TIPO_DOC[9];
 			else if(unknownTipoDoc.indexOf("regionale")!=-1 || unknownTipoDoc.indexOf("regione")!=-1 || unknownTipoDoc.indexOf("lr")!=-1 || unknownTipoDoc.indexOf("l.r.")!=-1)
 				comboItem = parser.TIPO_DOC[11];
