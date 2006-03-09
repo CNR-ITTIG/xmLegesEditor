@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="iso-8859-15"?>
+
+%DOCTYPE%
+
+<NIR xmlns:xlink="http://www.w3.org/1999/xlink" 
+	  xmlns:h="http://www.w3.org/HTML/1998/html4">
+<DecretoMinisterialeNN>
+	<meta>
+		<descrittori>
+			<pubblicazione tipo="GU" num="" norm=""/>
+			<urn>urn:nir:ministero.xxxxxxx:decreto:aaaa-mm-gg;nir-nnn</urn>
+			<vigenza inizio="" id="v1"/>
+		</descrittori>
+	</meta>
+	<intestazione>
+		<emanante>MINISTERO {denominazione}</emanante>
+		<tipoDoc>DECRETO</tipoDoc> 
+		<dataDoc norm=""/> 
+		<titoloDoc/>
+	</intestazione> 
+	<formulainiziale>
+		<h:p>IL MINISTRO .....</h:p>
+		<preambolo>
+			<h:p/>
+			<h:p/>
+			<h:p/>
+		</preambolo>		
+		<h:p>decreta:</h:p>
+	</formulainiziale> 
+	<contenitore>
+		<h:p/>
+		<h:p/>
+		<h:p/>
+	</contenitore>
+	<formulafinale>
+		<h:p>Il presente decreto sarà pubblicato nella Gazzetta Ufficiale della Repubblica italiana.
+		</h:p>
+	</formulafinale> 
+	<conclusione> 
+		<dataeluogo norm="" %CODICE%>Roma, {gg mese aaaa}</dataeluogo> 
+		<sottoscrizioni> 
+			<sottoscrivente>Il Ministro: {nome}</sottoscrivente>
+			<visto/>
+		</sottoscrizioni> 
+	</conclusione> 
+</DecretoMinisterialeNN>
+</NIR>
