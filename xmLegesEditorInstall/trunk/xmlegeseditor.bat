@@ -18,4 +18,4 @@ set CLASSPATH=%CLASSPATH%;lib/fop.jar
 set CLASSPATH=%CLASSPATH%;lib/batik.jar
 set CLASSPATH=%CLASSPATH%;lib/avalon-framework-cvs-20020806.jar
 
-start /MIN jre\bin\javaw -Xmx512m it.cnr.ittig.services.manager.Run xmLegesEditor.xml images\editor\xmLegesEditor.png
+jre\bin\java -Xmx256m it.cnr.ittig.services.manager.Run xmLegesEditor.xml images\editor\xmLegesEditor.png
