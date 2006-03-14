@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+%DOCTYPE%
+<NIR xmlns:h="http://www.w3.org/HTML/1998/html4">
+	<DisegnoLegge>
+		<meta>
+			<descrittori>
+				<approvazione norm="" internal_id="" leg="14" tipodoc="Ddlmess"/>
+				<redazione norm="" nome="" url=""/>
+				<urn>urn:nir:senato.repubblica:disegno.legge;messaggio:14.legislatura;nnn</urn>
+			</descrittori>
+		</meta>
+		<intestazione>
+			<emanante>SENATO DELLA REPUBBLICA</emanante>
+			<legislatura>XIV</legislatura>
+			<numDoc/>
+			<h:div>Attesto che il Senato della Repubblica,
+il {gg mese anno}, ha approvato il seguente disegno di legge, dall' iniziativa del Governo, già approvato dalla Camera dei deputati:
+</h:div>
+			<titoloDoc>Conversione in legge, con modificazioni, del decreto-legge {gg mese anno}, n. {numero}, recante misure urgenti per {oggetto}</titoloDoc>
+		</intestazione>
+		<articolato>
+			<articolo id="art1">
+				<num>Art. 1</num>
+				<rubrica></rubrica>
+				<comma id="art1-com1">
+					<num>1.</num>
+					<corpo>Il decreto-legge {gg mese aaa}, n. {numero}, recante misure urgenti per {oggetto}, è convertito in legge con le modificazioni riportate in allegato alla presente legge.</corpo>
+				</comma>
+				<comma id="art1-com2">
+					<num>2.</num>
+					<corpo>La presente legge entra in vigore il giorno successivo a quello della sua pubblicazione nella Gazzetta Ufficiale.</corpo>
+				</comma>
+			</articolo>
+		</articolato>
+		<conclusione>
+			<sottoscrizioni>
+				<sottoscrivente>IL PRESIDENTE</sottoscrivente>
+			</sottoscrizioni>
+		</conclusione>
+			<annessi>
+				<annesso id="ann1">
+					<testata>
+						<denAnnesso>Allegato</denAnnesso>
+						<titAnnesso>MODIFICAZIONI APPORTATE IN SEDE DI CONVERSIONE AL DECRETO-LEGGE {gg mese aaaa}, N. {numero}</titAnnesso>
+					</testata>
+					<SemiArticolato tipo="modificazioni">
+						<meta>
+							<descrittori>
+								<pubblicazione norm="" num="" tipo="GU"></pubblicazione>
+								<urn>urn:nir:senato.repubblica:disegno.legge:aaaa-mm-gg;nnn:allegato;modificazioni.apportate.sede.conversione.decreto.legge"
+								</urn>
+								<vigenza id="v2" inizio=""></vigenza>
+							</descrittori>
+						</meta>
+						<intestazione/>
+						<formulainiziale/>
+						<contenitore>
+							<h:p><mod>All'art. XX comma YY le parole "<virgolette id="all-vir1">...</virgolette>" sono sostituite dalle parole "<virgolette id="all-vir2">...</virgolette>".</mod></h:p>
+							<h:p><mod>Il comma XX dell'art. YY è sostituito dal seguente: "<virgolette id="all-vir3" tipo="struttura"><num>XX. </num><corpo>...</corpo></virgolette>"</mod></h:p>
+							<h:p><mod>Il comma XX dell'art. YY è eliminato.</mod></h:p>
+						</contenitore>
+						<formulafinale/>
+						<conclusione/>
+					</SemiArticolato>
+				</annesso>
+			</annessi>
+	</DisegnoLegge>
+</NIR>
+
