@@ -158,7 +158,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  class="it.cnr.ittig.xmleges.core.blocks.version.VersionImpl"
         >
         <configuration>
-            <version>1.0 rc3</version>
+            <version>1.0 rc4</version>
             <url>http://repo.ittig.cnr.it/nireditor2/versions.txt</url>
         </configuration>
     </component>
