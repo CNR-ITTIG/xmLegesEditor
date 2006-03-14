@@ -81,7 +81,7 @@ public class XmLegesLinkerImpl implements XmLegesLinker, Loggable, Serviceable {
 
 			logger.debug("nodo selezionato:  " + UtilDom.getNodeSummary(nodeSel));
 			Document doc = documentManager.getDocumentAsDom();
-			parsedText = "<?xml version=\"1.0\" encoding=\"iso-8859-15\"?>"
+			parsedText = "<?xml version=\"1.0\" encoding=\""+documentManager.getEncoding()+"\"?>"
 					+ "<ris  xmlns:h=\"http://www.w3.org/HTML/1998/html4\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">" + parsedText.trim() + "</ris>";
 
 			Node parsedNodeSel = UtilXml.textToXML(parsedText, true).getDocumentElement();
@@ -138,7 +138,9 @@ public class XmLegesLinkerImpl implements XmLegesLinker, Loggable, Serviceable {
 	}
 
 	public Node setParsedDocument(String parsedText) {
-		parsedText = "<?xml version=\"1.0\" encoding=\"iso-8859-15\"?>" + parsedText;
+		String encoding = documentManager.getEncoding();
+		//parsedText = "<?xml version=\"1.0\" encoding=\"iso-8859-15\"?>" + parsedText;
+		parsedText = "<?xml version=\"1.0\" encoding=\""+documentManager.getEncoding()+"\"?>" + parsedText;
 		logger.debug("[ParserRiferimentiImpl: setParsedDocument" + parsedText);
 		Document doc = documentManager.getDocumentAsDom();
 		try {
@@ -166,7 +168,7 @@ public class XmLegesLinkerImpl implements XmLegesLinker, Loggable, Serviceable {
 			EditTransaction tr = documentManager.beginEdit();
 			Node parent = node.getParentNode();
 			String text = textRis;
-			text = "<?xml version=\"1.0\" encoding=\"iso-8859-15\"?>"
+			text = "<?xml version=\"1.0\" encoding=\""+documentManager.getEncoding()+"\"?>"
 					+ "<ris  xmlns:h=\"http://www.w3.org/HTML/1998/html4\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">" + text + "</ris>";
 			Node root = UtilXml.textToXML(text, true).getDocumentElement(); // va
 			// sotto
@@ -214,7 +216,7 @@ public class XmLegesLinkerImpl implements XmLegesLinker, Loggable, Serviceable {
 				Node node = nodes[i];
 				Node parent = node.getParentNode();
 				String text = textRis[i];
-				text = "<?xml version=\"1.0\" encoding=\"iso-8859-15\"?>"
+				text = "<?xml version=\"1.0\" encoding=\""+documentManager.getEncoding()+"\"?>"
 						+ "<ris  xmlns:h=\"http://www.w3.org/HTML/1998/html4\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">" + text + "</ris>";
 				Node root = UtilXml.textToXML(text, true).getDocumentElement();
 
