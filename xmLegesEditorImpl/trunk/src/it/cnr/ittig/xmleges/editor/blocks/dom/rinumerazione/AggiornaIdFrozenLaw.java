@@ -5,6 +5,7 @@ package it.cnr.ittig.xmleges.editor.blocks.dom.rinumerazione;
 
 import it.cnr.ittig.services.manager.Logger;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
+import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.core.util.lang.UtilLang;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
@@ -552,31 +553,33 @@ public class AggiornaIdFrozenLaw {
 		return (true);
 	}
 
-	protected boolean isElementToBeIDUpdated(Node figlio) {
-		if (getElementType(figlio) != OTHER)
-			return true;
-		else
-			return false;
-	}
+//	protected boolean isElementToBeIDUpdated(Node figlio) {
+//		if (getElementType(figlio) != OTHER)
+//			return true;
+//		else
+//			return false;
+//	}
 
-	// protected boolean isElementToBeIDUpdated(Node figlio)
-	// {
-	// // in questo modo setta gli id solo agli elementi che hanno id REQUIRED
-	// try{
-	// if(dtdRulesManager.queryIsRequiredAttribute(figlio.getNodeName(),"id")){
-	// logger.debug("required ID for "+figlio.getNodeName());
-	// return true;
-	// }
-	// else{
-	// logger.debug("not required id for "+figlio.getNodeName());
-	// return false;
-	// }
-	// }
-	// catch(DtdRulesManagerException e){
-	// logger.debug("no id for "+figlio.getNodeName());
-	// return false;
-	// }
-	// }
+	 protected boolean isElementToBeIDUpdated(Node figlio)
+	 {
+		 // chiamato solo per settare this.elementType
+		 getElementType(figlio);
+		 // in questo modo setta gli id solo agli elementi che hanno id REQUIRED
+		 try{
+			 if(dtdRulesManager.queryIsRequiredAttribute(figlio.getNodeName(),"id")){
+				 logger.debug("required ID for "+figlio.getNodeName());
+				 return true;
+			 }
+			 else{
+				 logger.debug("not required id for "+figlio.getNodeName());
+				 return false;
+			 }
+		 }
+		 catch(DtdRulesManagerException e){
+			 logger.debug("no id for "+figlio.getNodeName());
+			 return false;
+		 }
+	 }
 
 	protected boolean isElementWithID(Node figlio) {
 		if (figlio.getNodeType() == Node.ELEMENT_NODE && figlio.getAttributes() != null && figlio.getAttributes().getNamedItem("id") != null)
@@ -1231,11 +1234,18 @@ public class AggiornaIdFrozenLaw {
 			sigla = "inl";
 			break;
 		case OTHER:
-			sigla = "";
+			sigla = figlio.getNodeName().toLowerCase().substring(0,3);
 			break;
 		default:
-			sigla = "";
+			sigla = figlio.getNodeName().toLowerCase().substring(0,3);;
 			break;
+// 20/03/2006 sostituisce:			
+//		case OTHER:
+//			sigla = "";
+//			break;
+//		default:
+//			sigla = "";
+//			break;
 		}
 
 		if (sigla.length() == 0) {
