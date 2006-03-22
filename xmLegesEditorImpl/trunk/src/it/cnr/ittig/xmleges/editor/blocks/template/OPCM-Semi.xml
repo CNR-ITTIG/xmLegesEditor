@@ -5,11 +5,12 @@
 <NIR xmlns:xlink="http://www.w3.org/1999/xlink" 
 	 xmlns:h="http://www.w3.org/HTML/1998/html4">
 <DocumentoNIR nome="ordinanza">
-	<meta>
+    <meta>
 		<descrittori>
-			<pubblicazione tipo="GU" num="" norm=""/>
-			<urn>urn:nir:presidente.consiglio.ministri:ordinanza:aaaa-mm-gg;nir-nnn</urn>
-			<vigenza inizio="" id="v1"/>
+		<pubblicazione norm="" num="" tipo="GU" />
+		<entratainvigore norm="" />
+		<redazione id="red1" nome="" norm="" />
+	    <urn>urn:nir:presidente.consiglio.ministri:ordinanza:aaaa-mm-gg;nir-nnn</urn>
 		</descrittori>
 	</meta>
 	<intestazione>
@@ -33,7 +34,7 @@
 		<dataeluogo norm="" %CODICE%>Roma, {gg mese aaaa}</dataeluogo> 
 		<sottoscrizioni> 
 			<sottoscrivente>Il Presidente del Consiglio dei Ministri
-    			<h:br>{nome}</h:br>
+    			<h:br/>{nome}
 			</sottoscrivente>
 			<visto/>
 		</sottoscrizioni> 

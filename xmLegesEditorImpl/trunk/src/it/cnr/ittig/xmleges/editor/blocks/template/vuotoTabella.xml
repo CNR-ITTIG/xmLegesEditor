@@ -6,13 +6,12 @@
 	  xmlns:h="http://www.w3.org/HTML/1998/html4">
 		<DocumentoNIR nome="xxxxx" xml:lang="it">
 			<meta>
-				<descrittori>
-					<pubblicazione norm="" num="" tipo="GU"></pubblicazione>
-					<urn>
-						urn:nir:autorita:provvedimento:aaaa-mm-gg;nnn
-					</urn>
-					<vigenza id="v1" inizio=""></vigenza>
-				</descrittori>
+			<descrittori>
+				<pubblicazione norm="" num="" tipo="GU" />
+				<entratainvigore norm="" />
+				<redazione id="red1" nome="" norm="" />
+	    		<urn>urn:nir:autorita:provvedimento:aaaa-mm-gg;nnn</urn>
+			</descrittori>
 			</meta>
 			<contenitore xml:lang="it">
 				<h:table>

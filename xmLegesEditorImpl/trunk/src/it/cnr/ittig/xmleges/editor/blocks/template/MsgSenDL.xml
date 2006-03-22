@@ -3,11 +3,12 @@
 <NIR xmlns:h="http://www.w3.org/HTML/1998/html4">
 	<DisegnoLegge>
 		<meta>
-			<descrittori>
-				<approvazione norm="" internal_id="" leg="14" tipodoc="Ddlmess"/>
-				<redazione norm="" nome="" url=""/>
-				<urn>urn:nir:senato.repubblica:disegno.legge;messaggio:14.legislatura;nnn</urn>
-			</descrittori>
+		<descrittori>
+		<pubblicazione norm="" num="" tipo="GU" />
+		<entratainvigore norm="" />
+		<redazione id="red1" nome="" norm="" />
+	    <urn>urn:nir:senato.repubblica:disegno.legge;messaggio:14.legislatura;nnn</urn>
+		</descrittori>
 		</meta>
 		<intestazione>
 			<emanante>SENATO DELLA REPUBBLICA</emanante>

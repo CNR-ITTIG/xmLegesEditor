@@ -7,9 +7,10 @@
 <DecretoMinisteriale>
 	<meta>
 		<descrittori>
-			<pubblicazione tipo="GU" num="" norm=""/>
-			<urn>urn:nir:ministero.xxxxxxxx:decreto:aaaa-mm-gg;nnn</urn>
-			<vigenza inizio="" id="v1"/>
+		<pubblicazione norm="" num="" tipo="GU" />
+		<entratainvigore norm="" />
+		<redazione id="red1" nome="" norm="" />
+	    <urn>urn:nir:ministero.xxxxxxxx:decreto:aaaa-mm-gg;nnn</urn>
 		</descrittori>
 	</meta>
 	<intestazione>
