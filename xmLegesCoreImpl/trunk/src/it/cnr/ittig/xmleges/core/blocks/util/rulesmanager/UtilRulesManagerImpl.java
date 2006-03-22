@@ -34,6 +34,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * <h1>Implementazione del servizio
@@ -401,12 +402,28 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 			Document parsed = (Document) domFactory.newDocumentBuilder().parse(new ByteArrayInputStream(templateXml.getBytes("UTF-8")));
 			Node parsed_root = parsed.getDocumentElement().getFirstChild();
 			newNode = doc.importNode(parsed_root, true);
-			dtdRulesManager.fillRequiredAttributes(newNode);
+			newNode = fillRecursiveRequiredAttributes(newNode);
 			domFactory.setValidating(true); // reactivate validation
 		} catch (Exception ex) {
 			logger.error(ex.toString(), ex);
 		}
 		return newNode;
+	}
+	
+	private Node fillRecursiveRequiredAttributes(Node node){
+		try{
+			
+			if(node != null)
+				dtdRulesManager.fillRequiredAttributes(node);
+			NodeList list = node.getChildNodes();
+			for (int i = 0; i < list.getLength(); i++) {
+				dtdRulesManager.fillRequiredAttributes(list.item(i));
+			}
+		}
+		catch(DtdRulesManagerException ex){
+			return node;
+		}
+		return node;
 	}
 
 	public boolean canInsertBefore(Node node, String name) {
