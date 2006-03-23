@@ -1,4 +1,4 @@
-package it.cnr.ittig.xmleges.editor.services.form.meta.descrittori;
+package it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita;
 
 import it.cnr.ittig.services.manager.Service;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Relazione;

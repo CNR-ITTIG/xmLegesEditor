@@ -1,4 +1,4 @@
-package it.cnr.ittig.xmleges.editor.services.form.meta.descrittori;
+package it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita;
 
 import it.cnr.ittig.services.manager.Service;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Pubblicazione;
@@ -6,7 +6,7 @@ import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Relazione;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Vigenza;
 
 /**
- * Servizio per la gestione dei metadati generali del documento NIR.
+ * Servizio per la gestione della form per il ciclodivita del documento .
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
@@ -19,9 +19,9 @@ import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Vigenza;
  * General Public License </a></dd>
  * </dl>
  * 
- * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
+ * @author <a href="mailto:agnoloni@ittig.cnr.it">Tommaso Agnoloni</a>
  */
-public interface MetaDescrittoriForm extends Service {
+public interface CiclodiVitaForm extends Service {
 
 	/**
 	 * Apre la form per l'inserimento dei metadati descrittori di un documento

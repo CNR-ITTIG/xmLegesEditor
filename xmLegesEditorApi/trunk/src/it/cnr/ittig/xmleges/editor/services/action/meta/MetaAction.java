@@ -25,6 +25,12 @@ public interface MetaAction extends Service {
 	 * Gestione dei metadati descrittori.
 	 */
 	public void doDescrittori();
+	
+	/**
+	 * Gestione del ciclo di vita del documento
+	 *
+	 */
+	public void doCiclodiVita();
 
 	/**
 	 * Gestione della Urn del documento.
