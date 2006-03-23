@@ -17,9 +17,9 @@ import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextFieldEditor
 import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextFieldElementEvent;
 import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextFieldElementListener;
 import it.cnr.ittig.xmleges.core.util.date.UtilDate;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Relazione;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Vigenza;
-import it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita.MetaDescrittoriVigenzaForm;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
+import it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita.CiclodiVitaEventoForm;
 import it.cnr.ittig.xmleges.editor.services.form.urn.UrnForm;
 import it.cnr.ittig.xmleges.editor.services.util.urn.Urn;
 
@@ -61,7 +61,7 @@ import javax.swing.JComboBox;
  * @version 1.0
  * @author <a href="mailto:t.paba@onetech.it">Tommaso Paba </a>
  */
-public class MetaDescrittoriVigenzaFormImpl implements MetaDescrittoriVigenzaForm, Initializable, Serviceable, ActionListener, FormVerifier {
+public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initializable, Serviceable, ActionListener, FormVerifier {
 
 	Form form;
 
@@ -89,7 +89,7 @@ public class MetaDescrittoriVigenzaFormImpl implements MetaDescrittoriVigenzaFor
 
 	DateForm dataFineDatiVigenza;
 
-	Vigenza[] vigenze;
+	Evento[] vigenze;
 
 	Relazione[] relazioniUlteriori;
 
@@ -103,7 +103,7 @@ public class MetaDescrittoriVigenzaFormImpl implements MetaDescrittoriVigenzaFor
 	 * Editor per il ListTextField con la lista delle vigenze
 	 */
 	private class VigListTextFieldEditor implements ListTextFieldEditor, ListTextFieldElementListener {
-		Vigenza v;
+		Evento v;
 
 		Relazione r;
 
@@ -130,66 +130,66 @@ public class MetaDescrittoriVigenzaFormImpl implements MetaDescrittoriVigenzaFor
 
 		public void elementChanged(ListTextFieldElementEvent e) {
 
-			int eventID = e.getID();
-
-			if (eventID == ListTextFieldElementEvent.ELEMENT_ADD) {
-
-				v = new Vigenza(calcolaIDVigenza(), inizio.getAsYYYYMMDD());
-				v.setFine(fine.getAsYYYYMMDD());
-
-				// Se la data di fine ? riempita, inseriamo anche la relazione
-				if (v.getFine() != null) {
-					String nomeTag = (String) ((JComboBox) form.getComponentByName("editor.meta.descrittori.vigenza.tiporelazione")).getSelectedItem();
-					if (nomeTag != null && urnForm.getUrn() != null) {
-						r = new Relazione(nomeTag, calcolaIDRelazione(nomeTag), urnForm.getUrn().toString());
-						v.setFonte(r);
-					} else {
-						// L'utente non ha riempito i campi per bene!
-						r = null;
-					}
-				} else {
-					r = null;
-					v.setFonte(null);
-				}
-			} else if (eventID == ListTextFieldElementEvent.ELEMENT_MODIFY) {
-
-				v.setInizio(inizio.getAsYYYYMMDD());
-				v.setFine(fine.getAsYYYYMMDD());
-
-				// Se la data di fine ? riempita, inseriamo anche la relazione
-				if (v.getFine() != null) {
-					if (r == null) {
-						// Non esiste una relazione gi? associata alla vigenza,
-						// ne creiamo una nuova
-						String nomeTag = (String) ((JComboBox) form.getComponentByName("editor.meta.descrittori.vigenza.tiporelazione")).getSelectedItem();
-						if (nomeTag != null && urnForm.getUrn() != null) {
-							r = new Relazione(nomeTag, calcolaIDRelazione(nomeTag), urnForm.getUrn().toString());
-						} else {
-							// L'utente non ha riempito i campi per bene!
-							r = null;
-						}
-					} else {
-						// Esiste gi? una relazione associata alla vigenza,
-						// perci? modifichiamo quella,
-						// in modo da mantenere lo stesso ID.
-						r.setTag(((JComboBox) form.getComponentByName("editor.meta.descrittori.vigenza.tiporelazione")).getSelectedItem().toString());
-						r.setLink(urnForm.getUrn().toString());
-					}
-					v.setFonte(r);
-				} else {
-					// L'utente non ha inserito una data di fine, quindi non c'?
-					// una relazione.
-					r = null;
-					v.setFonte(null);
-				}
-			} else if (eventID == ListTextFieldElementEvent.ELEMENT_REMOVE) {
-				v = null;
-				inizio.set(null);
-				fine.set(null);
-				r = null;
-				((JComboBox) form.getComponentByName("editor.meta.descrittori.vigenza.tiporelazione")).setSelectedItem(null);
-				urnForm.setUrn(new Urn());
-			}
+//			int eventID = e.getID();
+//
+//			if (eventID == ListTextFieldElementEvent.ELEMENT_ADD) {
+//
+//				v = new Evento(calcolaIDVigenza(), inizio.getAsYYYYMMDD());
+//				v.setFine(fine.getAsYYYYMMDD());
+//
+//				// Se la data di fine ? riempita, inseriamo anche la relazione
+//				if (v.getFine() != null) {
+//					String nomeTag = (String) ((JComboBox) form.getComponentByName("editor.meta.descrittori.vigenza.tiporelazione")).getSelectedItem();
+//					if (nomeTag != null && urnForm.getUrn() != null) {
+//						r = new Relazione(nomeTag, calcolaIDRelazione(nomeTag), urnForm.getUrn().toString());
+//						v.setFonte(r);
+//					} else {
+//						// L'utente non ha riempito i campi per bene!
+//						r = null;
+//					}
+//				} else {
+//					r = null;
+//					v.setFonte(null);
+//				}
+//			} else if (eventID == ListTextFieldElementEvent.ELEMENT_MODIFY) {
+//
+//				v.setInizio(inizio.getAsYYYYMMDD());
+//				v.setFine(fine.getAsYYYYMMDD());
+//
+//				// Se la data di fine ? riempita, inseriamo anche la relazione
+//				if (v.getFine() != null) {
+//					if (r == null) {
+//						// Non esiste una relazione gi? associata alla vigenza,
+//						// ne creiamo una nuova
+//						String nomeTag = (String) ((JComboBox) form.getComponentByName("editor.meta.descrittori.vigenza.tiporelazione")).getSelectedItem();
+//						if (nomeTag != null && urnForm.getUrn() != null) {
+//							r = new Relazione(nomeTag, calcolaIDRelazione(nomeTag), urnForm.getUrn().toString());
+//						} else {
+//							// L'utente non ha riempito i campi per bene!
+//							r = null;
+//						}
+//					} else {
+//						// Esiste gi? una relazione associata alla vigenza,
+//						// perci? modifichiamo quella,
+//						// in modo da mantenere lo stesso ID.
+//						r.setTag(((JComboBox) form.getComponentByName("editor.meta.descrittori.vigenza.tiporelazione")).getSelectedItem().toString());
+//						r.setLink(urnForm.getUrn().toString());
+//					}
+//					v.setFonte(r);
+//				} else {
+//					// L'utente non ha inserito una data di fine, quindi non c'?
+//					// una relazione.
+//					r = null;
+//					v.setFonte(null);
+//				}
+//			} else if (eventID == ListTextFieldElementEvent.ELEMENT_REMOVE) {
+//				v = null;
+//				inizio.set(null);
+//				fine.set(null);
+//				r = null;
+//				((JComboBox) form.getComponentByName("editor.meta.descrittori.vigenza.tiporelazione")).setSelectedItem(null);
+//				urnForm.setUrn(new Urn());
+//			}
 		}
 
 		public Object getElement() {
@@ -200,10 +200,10 @@ public class MetaDescrittoriVigenzaFormImpl implements MetaDescrittoriVigenzaFor
 		}
 
 		public void setElement(Object object) {
-			v = (Vigenza) object;
+			v = (Evento) object;
 			r = v.getFonte();
-			inizio.set(UtilDate.normToDate(v.getInizio()));
-			fine.set(UtilDate.normToDate(v.getFine()));
+//			inizio.set(UtilDate.normToDate(v.getInizio()));
+//			fine.set(UtilDate.normToDate(v.getFine()));
 			if (r != null) {
 				((JComboBox) form.getComponentByName("editor.meta.descrittori.vigenza.tiporelazione")).setSelectedItem(r.getTag());
 				try {
@@ -382,27 +382,27 @@ public class MetaDescrittoriVigenzaFormImpl implements MetaDescrittoriVigenzaFor
 			}
 			vig_listtextfield.setListElements(v);
 		} else {
-			dataInizio.set(UtilDate.normToDate(vigenze[0].getInizio()));
-			if (vigenze[0].hasFineFonte()) {
-				dataFine.set(UtilDate.normToDate(vigenze[0].getFine()));
-				Relazione r = vigenze[0].getFonte();
-				tipoRelazione.setSelectedItem(r.getTag());
-				try {
-					urnFormVigenzaSingola.setUrn(new Urn(r.getLink()));
-				} catch (ParseException e) {
-				}
-			}
-			if (tipoDocumento.equals("originale")) {
-				if (vigenze[0].hasFineFonte())
-					tipoVigenzaComboBox.setSelectedIndex(1);
-				else
-					tipoVigenzaComboBox.setSelectedIndex(0);
-			} else if (tipoDocumento.equals("vigente")) {
-				if (vigenze[0].hasFineFonte())
-					tipoVigenzaComboBox.setSelectedIndex(3);
-				else
-					tipoVigenzaComboBox.setSelectedIndex(2);
-			}
+//			dataInizio.set(UtilDate.normToDate(vigenze[0].getInizio()));
+//			if (vigenze[0].hasFineFonte()) {
+//				dataFine.set(UtilDate.normToDate(vigenze[0].getFine()));
+//				Relazione r = vigenze[0].getFonte();
+//				tipoRelazione.setSelectedItem(r.getTag());
+//				try {
+//					urnFormVigenzaSingola.setUrn(new Urn(r.getLink()));
+//				} catch (ParseException e) {
+//				}
+//			}
+//			if (tipoDocumento.equals("originale")) {
+//				if (vigenze[0].hasFineFonte())
+//					tipoVigenzaComboBox.setSelectedIndex(1);
+//				else
+//					tipoVigenzaComboBox.setSelectedIndex(0);
+//			} else if (tipoDocumento.equals("vigente")) {
+//				if (vigenze[0].hasFineFonte())
+//					tipoVigenzaComboBox.setSelectedIndex(3);
+//				else
+//					tipoVigenzaComboBox.setSelectedIndex(2);
+//			}
 		}
 		form.setSize(740, 500);
 		form.showDialog();
@@ -439,25 +439,25 @@ public class MetaDescrittoriVigenzaFormImpl implements MetaDescrittoriVigenzaFor
 		return errorMessage;
 	}
 
-	public Vigenza[] getVigenze() {
+	public Evento[] getVigenze() {
 		if (getTipoDocumento().equals("multivigente")) {
 			Vector v = vig_listtextfield.getListElements();
-			vigenze = new Vigenza[v.size()];
+			vigenze = new Evento[v.size()];
 			v.toArray(vigenze);
 			return vigenze;
 		} else {
-			Vigenza[] newVigenze = new Vigenza[1];
+			Evento[] newVigenze = new Evento[1];
 			Relazione r = null;
 			if (dataFine.getAsDate() != null) {
 				String nomeTag = tipoRelazione.getSelectedItem().toString();
 				r = new Relazione(nomeTag, calcolaIDRelazione(nomeTag), urnFormVigenzaSingola.getUrn().toString());
 			}
-			newVigenze[0] = new Vigenza(calcolaIDVigenza(), dataInizio.getAsYYYYMMDD(), dataFine.getAsYYYYMMDD(), r);
+//			newVigenze[0] = new Evento(calcolaIDVigenza(), dataInizio.getAsYYYYMMDD(), dataFine.getAsYYYYMMDD(), r);
 			return newVigenze;
 		}
 	}
 
-	public void setVigenze(Vigenza[] vigenze) {
+	public void setVigenze(Evento[] vigenze) {
 		this.vigenze = vigenze;
 	}
 
@@ -509,7 +509,7 @@ public class MetaDescrittoriVigenzaFormImpl implements MetaDescrittoriVigenzaFor
 		// in modo tale da considerare anche le nuove vigenze inserite.
 		Vector vigenzeVect = vig_listtextfield.getListElements();
 		for (int i = 0; i < vigenzeVect.size(); i++) {
-			Vigenza v = (Vigenza) vigenzeVect.elementAt(i);
+			Evento v = (Evento) vigenzeVect.elementAt(i);
 			if (v.getId() != null) {
 				try {
 					String s = v.getId().substring(0, prefix.length());
@@ -576,7 +576,7 @@ public class MetaDescrittoriVigenzaFormImpl implements MetaDescrittoriVigenzaFor
 		if (getTipoDocumento().equals("multivigente")) {
 			Vector vigenzeVect = vig_listtextfield.getListElements();
 			for (int i = 0; i < vigenzeVect.size(); i++) {
-				Vigenza v = (Vigenza) vigenzeVect.elementAt(i);
+				Evento v = (Evento) vigenzeVect.elementAt(i);
 				if (v.getFonte() != null) {
 					try {
 						String s = v.getFonte().getId().substring(0, prefix.length());

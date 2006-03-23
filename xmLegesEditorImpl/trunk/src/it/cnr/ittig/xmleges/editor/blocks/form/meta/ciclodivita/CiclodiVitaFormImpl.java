@@ -13,11 +13,11 @@ import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextFieldEditor
 import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextFieldElementEvent;
 import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextFieldElementListener;
 import it.cnr.ittig.xmleges.core.util.date.UtilDate;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Pubblicazione;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Relazione;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Vigenza;
 import it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita.CiclodiVitaForm;
-import it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita.MetaDescrittoriVigenzaForm;
+import it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita.CiclodiVitaEventoForm;
 import it.cnr.ittig.xmleges.editor.services.form.urn.UrnForm;
 import it.cnr.ittig.xmleges.editor.services.util.urn.Urn;
 
@@ -134,9 +134,9 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 	UrnForm urnForm;
 
 	// Form vigenze
-	MetaDescrittoriVigenzaForm formVigenze;
+	CiclodiVitaEventoForm formVigenze;
 
-	Vigenza[] vigenze;
+	Evento[] vigenze;
 
 	JList vigenzeList;
 
@@ -331,7 +331,7 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 
 		urnForm = (UrnForm) serviceManager.lookup(UrnForm.class);
 
-		formVigenze = (MetaDescrittoriVigenzaForm) serviceManager.lookup(MetaDescrittoriVigenzaForm.class);
+		formVigenze = (CiclodiVitaEventoForm) serviceManager.lookup(CiclodiVitaEventoForm.class);
 
 		report_dataPubblicazione = (DateForm) serviceManager.lookup(DateForm.class);
 		pub_dataPubblicazione = (DateForm) serviceManager.lookup(DateForm.class);
@@ -486,13 +486,13 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 		return pubblicazione;
 	}
 
-//	public Vigenza[] getVigenze() {
-//		return vigenze;
-//	}
+	public Evento[] getEventi() {
+		return vigenze;
+	}
 
-//	public Relazione[] getRelazioniUlteriori() {
-//		return relazioniUlteriori;
-//	}
+	public Relazione[] getRelazioniUlteriori() {
+		return relazioniUlteriori;
+	}
 
 	public String[] getAlias() {
 		return aliases;
@@ -520,12 +520,12 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 		}
 	}
 
-//	public void setRelazioniUlteriori(Relazione[] relazioniUlteriori) {
-//		if (relazioniUlteriori != null) {
-//			this.relazioniUlteriori = relazioniUlteriori;
-//			relazioniList.setListData(relazioniUlteriori);
-//		}
-//	}
+	public void setRelazioniUlteriori(Relazione[] relazioniUlteriori) {
+		if (relazioniUlteriori != null) {
+			this.relazioniUlteriori = relazioniUlteriori;
+			relazioniList.setListData(relazioniUlteriori);
+		}
+	}
 
 	public void setTipoDocumento(String tipoDocumento) {
 		this.tipoDocumento = tipoDocumento;
@@ -536,10 +536,10 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 		this.tipoDTD = tipoDTD;
 	}
 
-//	public void setVigenze(Vigenza[] vigenze) {
-//		this.vigenze = vigenze;
-//		vigenzeList.setListData(vigenze);
-//	}
+	public void setVigenze(Evento[] vigenze) {
+		this.vigenze = vigenze;
+		vigenzeList.setListData(vigenze);
+	}
 
 	public void setPubblicazione(Pubblicazione pubblicazione) {
 		this.pubblicazione = pubblicazione;

@@ -7,7 +7,7 @@ import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.form.Form;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Vigenza;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.form.vigenza.VigenzaForm;
 
 import javax.swing.JList;
@@ -71,7 +71,7 @@ public class VigenzaFormImpl implements VigenzaForm, Loggable, Serviceable, Init
 		vigenzeList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	}
 
-	public Vigenza openForm(Vigenza[] vigenze, String testo) {
+	public Evento openForm(Evento[] vigenze, String testo) {
 
 		if (testo != null) {
 			textArea.setText(testo);
@@ -90,7 +90,7 @@ public class VigenzaFormImpl implements VigenzaForm, Loggable, Serviceable, Init
 		form.showDialog();
 
 		if (form.isOk()) {
-			return (Vigenza) vigenzeList.getSelectedValue();
+			return (Evento) vigenzeList.getSelectedValue();
 		} else {
 			return null;
 		}

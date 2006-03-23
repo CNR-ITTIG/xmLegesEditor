@@ -11,8 +11,8 @@ import it.cnr.ittig.xmleges.core.services.form.date.DateForm;
 import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextField;
 import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextFieldEditor;
 import it.cnr.ittig.xmleges.core.util.date.UtilDate;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Pubblicazione;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Relazione;
 import it.cnr.ittig.xmleges.editor.services.form.meta.descrittori.MetaDescrittoriForm;
 import it.cnr.ittig.xmleges.editor.services.form.urn.UrnForm;
 

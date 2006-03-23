@@ -11,10 +11,10 @@ import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.MetaDescrittori;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Pubblicazione;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Relazione;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Vigenza;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 
 import java.util.Vector;
@@ -298,7 +298,7 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 		}
 	}
 
-	public Vigenza[] getVigenze() {
+	public Evento[] getVigenze() {
 		Document doc = documentManager.getDocumentAsDom();
 		NodeList vigenza = doc.getElementsByTagName("vigenza");
 		Vector vigenzeVect = new Vector();
@@ -312,17 +312,17 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 			Node nodeFonte = vigenzaNode.getAttributes().getNamedItem("fonte");
 			if (nodeFonte != null) {
 				Relazione fonte = getRelazioneById(nodeFonte.getNodeValue());
-				vigenzeVect.add(new Vigenza(id, inizio, fine, fonte));
+				//vigenzeVect.add(new Evento(id, inizio, fine, fonte));
 			} else {
-				vigenzeVect.add(new Vigenza(id, inizio));
+				//vigenzeVect.add(new Evento(id, inizio));
 			}
 		}
-		Vigenza[] vigenze = new Vigenza[vigenzeVect.size()];
+		Evento[] vigenze = new Evento[vigenzeVect.size()];
 		vigenzeVect.copyInto(vigenze);
 		return vigenze;
 	}
 
-	public void setVigenze(Vigenza[] vigenza) {
+	public void setVigenze(Evento[] vigenza) {
 
 		Document doc = documentManager.getDocumentAsDom();
 		Node descrittoriNode = doc.getElementsByTagName("descrittori").item(0);
@@ -333,11 +333,11 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 				Element vigenzaTag = doc.createElement("vigenza");
 				UtilDom.setIdAttribute(vigenzaTag, vigenza[i].getId());
 				// vigenzaTag.setAttribute("inizio", vigenza[i].getInizio());
-				UtilDom.setAttributeValue(vigenzaTag, "inizio", vigenza[i].getInizio());
-				if (vigenza[i].hasFineFonte()) {
-					UtilDom.setAttributeValue(vigenzaTag, "fine", vigenza[i].getFine());
+				//UtilDom.setAttributeValue(vigenzaTag, "inizio", vigenza[i].getInizio());
+				//if (vigenza[i].hasFineFonte()) {
+				//	UtilDom.setAttributeValue(vigenzaTag, "fine", vigenza[i].getFine());
 					UtilDom.setAttributeValue(vigenzaTag, "fonte", vigenza[i].getFonte().getId());
-				}
+				//}
 				Node child = descrittoriNode.getFirstChild();
 				boolean inserted = false;
 				do {

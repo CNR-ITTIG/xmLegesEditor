@@ -123,7 +123,7 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 		Node node = selectionManager.getActiveNode();
 		start = selectionManager.getTextSelectionStart();
 		end = selectionManager.getTextSelectionEnd();
-		it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Vigenza vigSelected;
+		it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento vigSelected;
 
 		if (null == descrittori.getVigenze() || descrittori.getVigenze().length == 0)
 			utilMsg.msgError("editor.partizioni.vigenza.error.novigenze");
