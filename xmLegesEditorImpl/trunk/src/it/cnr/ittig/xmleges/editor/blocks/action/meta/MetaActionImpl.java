@@ -165,6 +165,24 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		descrittoriForm.setAltrePubblicazioni(descrittori.getAltrePubblicazioni());
 		descrittoriForm.setPubblicazione(descrittori.getPubblicazione());
 
+		if (descrittoriForm.openForm()) {
+			try {
+				EditTransaction tr = documentManager.beginEdit();
+				UtilDom.setAttributeValue(doc.getDocumentElement(), "tipo", descrittoriForm.getTipoDocumento());
+				descrittori.setAlias(descrittoriForm.getAlias());
+				descrittori.setPubblicazione(descrittoriForm.getPubblicazione());
+				descrittori.setAltrePubblicazioni(descrittoriForm.getAltrePubblicazioni());
+				documentManager.commitEdit(tr);
+				rinumerazione.aggiorna(doc);
+			} catch (DocumentManagerException ex) {
+				logger.error(ex.getMessage(), ex);
+			}
+		}
+	}
+	
+	public void doCiclodiVita() {
+		Document doc = documentManager.getDocumentAsDom();
+
 //		Vigenza[] vigenze = descrittori.getVigenze();
 //		Relazione[] relazioni = descrittori.getRelazioni();
 //
@@ -196,47 +214,30 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 //
 //		descrittoriForm.setRelazioniUlteriori(relazioniUlteriori);
 //		descrittoriForm.setVigenze(vigenze);
+		
+		
+//		Vigenza[] newVigenze = descrittoriForm.getVigenze();
+//		descrittori.setVigenze(newVigenze);
 
-		if (descrittoriForm.openForm()) {
-			try {
-				EditTransaction tr = documentManager.beginEdit();
-				UtilDom.setAttributeValue(doc.getDocumentElement(), "tipo", descrittoriForm.getTipoDocumento());
-				descrittori.setAlias(descrittoriForm.getAlias());
-				descrittori.setPubblicazione(descrittoriForm.getPubblicazione());
-				descrittori.setAltrePubblicazioni(descrittoriForm.getAltrePubblicazioni());
-
-//				Vigenza[] newVigenze = descrittoriForm.getVigenze();
-//				descrittori.setVigenze(newVigenze);
-
-//				relazioniUlteriori = descrittoriForm.getRelazioniUlteriori();
+//		relazioniUlteriori = descrittoriForm.getRelazioniUlteriori();
 //
-//				// Ricomponi le relazioni
+//		// Ricomponi le relazioni
 //
-//				Vector relazioniVect = new Vector();
-//				for (int i = 0; i < newVigenze.length; i++) {
-//					if (newVigenze[i].hasFineFonte()) {
-//						relazioniVect.add(newVigenze[i].getFonte());
-//					}
-//				}
-//				for (int i = 0; i < relazioniUlteriori.length; i++) {
-//					relazioniVect.add(relazioniUlteriori[i]);
-//				}
+//		Vector relazioniVect = new Vector();
+//		for (int i = 0; i < newVigenze.length; i++) {
+//			if (newVigenze[i].hasFineFonte()) {
+//				relazioniVect.add(newVigenze[i].getFonte());
+//			}
+//		}
+//		for (int i = 0; i < relazioniUlteriori.length; i++) {
+//			relazioniVect.add(relazioniUlteriori[i]);
+//		}
 //
-//				Relazione[] newRelazioni = new Relazione[relazioniVect.size()];
-//				relazioniVect.copyInto(newRelazioni);
+//		Relazione[] newRelazioni = new Relazione[relazioniVect.size()];
+//		relazioniVect.copyInto(newRelazioni);
 //
-//				descrittori.setRelazioni(newRelazioni);
-
-				documentManager.commitEdit(tr);
-				rinumerazione.aggiorna(doc);
-			} catch (DocumentManagerException ex) {
-				logger.error(ex.getMessage(), ex);
-			}
-		}
-	}
-	
-	public void doCiclodiVita() {
-		Document doc = documentManager.getDocumentAsDom();
+//		descrittori.setRelazioni(newRelazioni);
+			
 		System.err.println("ciclodivita pressed");
 	}
 
