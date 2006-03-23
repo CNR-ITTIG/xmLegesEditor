@@ -1,6 +1,8 @@
 package it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori;
 
 import it.cnr.ittig.services.manager.Service;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 
 /**
  * Servizio per l'inserimento dei metadati generali.
@@ -67,14 +69,14 @@ public interface MetaDescrittori extends Service {
 	 * 
 	 * @return vigenze del documento
 	 */
-	public Vigenza[] getVigenze();
+	public Evento[] getVigenze();
 
 	/**
 	 * Imposta le vigenze del documento.
 	 * 
 	 * @param vigenza vigenze
 	 */
-	public void setVigenze(Vigenza[] vigenza);
+	public void setVigenze(Evento[] vigenza);
 
 	/**
 	 * Restituisce le relazioni del documento con altri documenti

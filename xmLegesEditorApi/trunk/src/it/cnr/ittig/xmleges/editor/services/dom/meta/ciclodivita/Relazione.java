@@ -1,4 +1,4 @@
-package it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori;
+package it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita;
 
 /**
  * Classe per la descrizione delle relazioni.

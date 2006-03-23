@@ -1,4 +1,4 @@
-package it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori;
+package it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita;
 
 import it.cnr.ittig.xmleges.core.util.date.UtilDate;
 
@@ -19,28 +19,31 @@ import it.cnr.ittig.xmleges.core.util.date.UtilDate;
  * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */
-public class Vigenza {
+public class Evento {
 
 	/** Id della vigenza */
 	String id;
 
 	/** Data inizio vigenza normalizzata (AAAAMMGG) */
-	String inizio;
-
-	/** Data fine vigenza normalizzata (AAAAMMGG) */
-	String fine;
+	String data;
 
 	/** Fonte della vigenza (relazione) */
 	Relazione fonte;
+	
+	String tipo;
 
-	public Vigenza(String id, String inizio) {
-		setId(id);
-		setInizio(inizio);
+    
+	public String getTipo() {
+		return tipo;
 	}
 
-	public Vigenza(String id, String inizio, String fine, Relazione fonte) {
-		this(id, inizio);
-		setFine(fine);
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public Evento(String id, String data, Relazione fonte) {
+		setId(id);
+		setData(data);
 		setFonte(fonte);
 	}
 
@@ -52,25 +55,14 @@ public class Vigenza {
 		this.id = id;
 	}
 
-	public String getInizio() {
-		return inizio;
+	public String getData() {
+		return data;
 	}
 
-	public void setInizio(String inizio) {
-		this.inizio = inizio;
+	public void setData(String data) {
+		this.data = data;
 	}
 
-	public boolean hasFineFonte() {
-		return this.fine != null && this.fonte != null;
-	}
-
-	public String getFine() {
-		return fine;
-	}
-
-	public void setFine(String fine) {
-		this.fine = fine;
-	}
 
 	public Relazione getFonte() {
 		return fonte;
@@ -81,9 +73,7 @@ public class Vigenza {
 	}
 
 	public String toString() {
-		String retVal = UtilDate.normToString(inizio);
-		if (fine != null)
-			retVal += " - " + UtilDate.normToString(fine);
+		String retVal = UtilDate.normToString(data);
 		if (fonte != null)
 			retVal += ", " + fonte.toString();
 		return retVal;

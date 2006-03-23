@@ -1,9 +1,9 @@
 package it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita;
 
 import it.cnr.ittig.services.manager.Service;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Pubblicazione;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Relazione;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Vigenza;
 
 /**
  * Servizio per la gestione della form per il ciclodivita del documento .
@@ -31,41 +31,23 @@ public interface CiclodiVitaForm extends Service {
 	 */
 	public boolean openForm();
 
-	/**
-	 * Restituisce i dati necessari per la pubblicazione.
-	 * 
-	 * @return dati pubblicazione
-	 */
-	public Pubblicazione getPubblicazione();
 
 	/**
-	 * Restituisce gli alias del documento.
+	 * Restituisce le vigenze del documento.
 	 * 
-	 * @return alias
+	 * @return vigenze
 	 */
-	public String[] getAlias();
-
-//	/**
-//	 * Restituisce le vigenze del documento.
-//	 * 
-//	 * @return vigenze
-//	 */
-//	public Vigenza[] getVigenze();
-//
-//	/**
-//	 * Restituisce le relazioni ulteriori (non legate alle vigenze) con altri
-//	 * documenti.
-//	 * 
-//	 * @return relazioni con altri documenti
-//	 */
-//	public Relazione[] getRelazioniUlteriori();
+	public Evento[] getEventi();
 
 	/**
-	 * Restituisce le altre pubblicazioni
+	 * Restituisce le relazioni ulteriori (non legate alle vigenze) con altri
+	 * documenti.
 	 * 
-	 * @return altre pubblicazioni
+	 * @return relazioni con altri documenti
 	 */
-	public Pubblicazione[] getAltrePubblicazioni();
+	public Relazione[] getRelazioniUlteriori();
+
+
 
 	/**
 	 * Restituisce il tipo del documento (originale, vigente, multivigente).
@@ -88,38 +70,21 @@ public interface CiclodiVitaForm extends Service {
 	 */
 	public void setTipoDTD(String tipoDTD);
 
-	/**
-	 * Imposta gli alias del documento
-	 * 
-	 * @param aliases alias del documento
-	 */
-	public void setAlias(String[] aliases);
 
-//	/**
-//	 * Imposta i periodi di vigenza del documento
-//	 * 
-//	 * @param vigenze vigenze del documento
-//	 */
-//	public void setVigenze(Vigenza[] vigenze);
-//
-//	/**
-//	 * Imposta le relazioni ulteriori (non legate alle vigenze) del documento
-//	 * 
-//	 * @param relazioni relazioni del documento
-//	 */
-//	public void setRelazioniUlteriori(Relazione[] relazioniUlteriori);
 
 	/**
-	 * Imposta la pubblicazione del documento
+	 * Imposta i periodi di vigenza del documento
 	 * 
-	 * @param altrePubblicazioni pubblicazioni del documento
+	 * @param vigenze vigenze del documento
 	 */
-	public void setPubblicazione(Pubblicazione pubblicazione);
+	public void setVigenze(Evento[] eventi);
 
 	/**
-	 * Imposta le altre pubblicazioni del documento
+	 * Imposta le relazioni ulteriori (non legate alle vigenze) del documento
 	 * 
-	 * @param altrePubblicazioni pubblicazioni del documento
+	 * @param relazioni relazioni del documento
 	 */
-	public void setAltrePubblicazioni(Pubblicazione[] altrePubblicazioni);
+	public void setRelazioniUlteriori(Relazione[] relazioniUlteriori);
+
+
 }

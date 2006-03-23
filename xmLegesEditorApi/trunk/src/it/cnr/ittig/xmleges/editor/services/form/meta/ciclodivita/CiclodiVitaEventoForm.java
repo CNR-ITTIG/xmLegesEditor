@@ -1,8 +1,8 @@
 package it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita;
 
 import it.cnr.ittig.services.manager.Service;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Relazione;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Vigenza;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 
 /**
  * Servizio per la gestione dei metadati vigenze del documento NIR.
@@ -20,7 +20,7 @@ import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Vigenza;
  * 
  * @author <a href="mailto:t.paba@onetech.it">Tommaso Paba</a>
  */
-public interface MetaDescrittoriVigenzaForm extends Service {
+public interface CiclodiVitaEventoForm extends Service {
 
 	/**
 	 * Apre la form per l'inserimento dei metadati descrittori di un documento
@@ -35,14 +35,14 @@ public interface MetaDescrittoriVigenzaForm extends Service {
 	 * 
 	 * @return vigenze del documento
 	 */
-	public Vigenza[] getVigenze();
+	public Evento[] getVigenze();
 
 	/**
 	 * Imposta l'elenco dei periodi di vigenza del documento
 	 * 
 	 * @param vigenze vigenze del documento
 	 */
-	public void setVigenze(Vigenza[] vigenze);
+	public void setVigenze(Evento[] vigenze);
 
 	/**
 	 * Imposta l'elenco delle relazioni ulteriori (non legate alle vigenze)

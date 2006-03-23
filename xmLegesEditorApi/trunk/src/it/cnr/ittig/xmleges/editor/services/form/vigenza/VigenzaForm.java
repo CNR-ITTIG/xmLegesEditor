@@ -1,7 +1,7 @@
 package it.cnr.ittig.xmleges.editor.services.form.vigenza;
 
 import it.cnr.ittig.services.manager.Service;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Vigenza;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 
 /**
  * Form per la selezione di una vigenza da applicare a un testo.
@@ -28,5 +28,5 @@ public interface VigenzaForm extends Service {
 	 * @param testo testo per il quale selezionare la vigenza
 	 * @return vigenza selezionata, o null se l'utente ha premuto "Annulla"
 	 */
-	public Vigenza openForm(Vigenza[] vigenze, String testo);
+	public Evento openForm(Evento[] vigenze, String testo);
 }
