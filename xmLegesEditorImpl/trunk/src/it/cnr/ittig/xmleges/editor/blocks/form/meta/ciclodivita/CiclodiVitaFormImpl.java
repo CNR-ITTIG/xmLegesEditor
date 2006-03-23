@@ -1,4 +1,4 @@
-package it.cnr.ittig.xmleges.editor.blocks.form.meta.descrittori;
+package it.cnr.ittig.xmleges.editor.blocks.form.meta.ciclodivita;
 
 import it.cnr.ittig.services.manager.Initializable;
 import it.cnr.ittig.services.manager.Loggable;
@@ -10,16 +10,22 @@ import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.date.DateForm;
 import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextField;
 import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextFieldEditor;
+import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextFieldElementEvent;
+import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextFieldElementListener;
 import it.cnr.ittig.xmleges.core.util.date.UtilDate;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Pubblicazione;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Relazione;
-import it.cnr.ittig.xmleges.editor.services.form.meta.descrittori.MetaDescrittoriForm;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Vigenza;
+import it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita.CiclodiVitaForm;
+import it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita.MetaDescrittoriVigenzaForm;
 import it.cnr.ittig.xmleges.editor.services.form.urn.UrnForm;
+import it.cnr.ittig.xmleges.editor.services.util.urn.Urn;
 
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.util.Vector;
 
 import javax.swing.JButton;
@@ -57,7 +63,7 @@ import javax.swing.JTextField;
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>, <a
  *         href="mailto:t.paba@onetech.it">Tommaso Paba</a>
  */
-public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, Serviceable, Initializable, ActionListener {
+public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceable, Initializable, ActionListener {
 
 	Logger logger;
 
@@ -116,10 +122,23 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 
 	ListTextField alias_listtextfield;
 
+	// Form relazioni
+	Form formRelazioni;
+
+	Form sottoFormDatiRelazione;
+
+	ListTextField rel_listtextfield;
+
+	JComboBox tagSottoFormDatiRelazione;
 
 	UrnForm urnForm;
 
-	
+	// Form vigenze
+	MetaDescrittoriVigenzaForm formVigenze;
+
+	Vigenza[] vigenze;
+
+	JList vigenzeList;
 
 	/**
 	 * Editor per il ListTextField della lista degli Alias
@@ -215,7 +234,87 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 		}
 	}
 
-	
+	/**
+	 * Editor per il ListTextField della lista delle relazioni
+	 */
+	private class RelListTextFieldEditor implements ListTextFieldEditor, ListTextFieldElementListener {
+		Form form;
+
+		Relazione r;
+
+		public RelListTextFieldEditor(Form form) {
+			this.form = form;
+		}
+
+		public Component getAsComponent() {
+			return form.getAsComponent();
+		}
+
+		public void elementChanged(ListTextFieldElementEvent e) {
+
+			int eventID = e.getID();
+
+			String nomeTag = (String) ((JComboBox) form.getComponentByName("editor.meta.descrittori.relazioni.tiporelazione")).getSelectedItem();
+			Urn urn = urnForm.getUrn();
+
+			if (eventID == ListTextFieldElementEvent.ELEMENT_ADD) {
+
+				if (!checkData()) {
+					r = null;
+				} else {
+					r = new Relazione(nomeTag, calcolaIDRelazione(nomeTag), urn.toString());
+				}
+			} else if (eventID == ListTextFieldElementEvent.ELEMENT_MODIFY) {
+
+				if (!checkData()) {
+					r = null;
+				} else {
+					r.setTag(nomeTag);
+					r.setLink(urn.toString());
+				}
+			} else if (eventID == ListTextFieldElementEvent.ELEMENT_REMOVE) {
+				r = null;
+				((JComboBox) form.getComponentByName("editor.meta.descrittori.relazioni.tiporelazione")).setSelectedItem(null);
+				urnForm.setUrn(new Urn());
+			}
+		}
+
+		public Object getElement() {
+			return r;
+		}
+
+		public void setElement(Object object) {
+			r = (Relazione) object;
+			((JComboBox) form.getComponentByName("editor.meta.descrittori.relazioni.tiporelazione")).setSelectedItem(r.getTag());
+			try {
+				urnForm.setUrn(new Urn(r.getLink()));
+			} catch (ParseException e) {
+			}
+		}
+
+		public void clearFields() {
+			((JComboBox) form.getComponentByName("editor.meta.descrittori.relazioni.tiporelazione")).setSelectedItem(null);
+			urnForm.setUrn(new Urn());
+		}
+
+		public boolean checkData() {
+			String nomeTag = (String) ((JComboBox) form.getComponentByName("editor.meta.descrittori.relazioni.tiporelazione")).getSelectedItem();
+			Urn urn = urnForm.getUrn();
+			if (urn == null || !urn.isValid() || nomeTag == null || "".equals(nomeTag.trim()) || "".equals(urn.toString().trim())) {
+				return false;
+			}
+			return true;
+		}
+
+		public String getErrorMessage() {
+			return "editor.form.meta.descrittori.msg.err.datirelazione";
+		}
+
+		public Dimension getPreferredSize() {
+			return new Dimension(700, 150);
+		}
+	}
+
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
@@ -226,9 +325,13 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 		form = (Form) serviceManager.lookup(Form.class);
 		formPubblicazioni = (Form) serviceManager.lookup(Form.class);
 		formAlias = (Form) serviceManager.lookup(Form.class);
+		formRelazioni = (Form) serviceManager.lookup(Form.class);
 		sottoFormDatiPubblicazione = (Form) serviceManager.lookup(Form.class);
+		sottoFormDatiRelazione = (Form) serviceManager.lookup(Form.class);
 
 		urnForm = (UrnForm) serviceManager.lookup(UrnForm.class);
+
+		formVigenze = (MetaDescrittoriVigenzaForm) serviceManager.lookup(MetaDescrittoriVigenzaForm.class);
 
 		report_dataPubblicazione = (DateForm) serviceManager.lookup(DateForm.class);
 		pub_dataPubblicazione = (DateForm) serviceManager.lookup(DateForm.class);
@@ -236,6 +339,7 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 
 		pub_listtextfield = (ListTextField) serviceManager.lookup(ListTextField.class);
 		alias_listtextfield = (ListTextField) serviceManager.lookup(ListTextField.class);
+		rel_listtextfield = (ListTextField) serviceManager.lookup(ListTextField.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
@@ -251,6 +355,8 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 		sottoFormDatiPubblicazione.replaceComponent("editor.meta.descrittori.pubblicazioni.datipubblicazione.data", dataSottoFormDatiPubblicazione
 				.getAsComponent());
 
+		sottoFormDatiRelazione.setMainComponent(getClass().getResourceAsStream("DatiRelazione.jfrm"));
+		sottoFormDatiRelazione.replaceComponent("editor.meta.descrittori.relazioni.urn", urnForm.getAsComponent());
 
 		formPubblicazioni.setMainComponent(getClass().getResourceAsStream("Pubblicazioni.jfrm"));
 		formPubblicazioni.replaceComponent("editor.meta.descrittori.pubblicazioni.datapubblicazione", pub_dataPubblicazione.getAsComponent());
@@ -271,18 +377,35 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 		formAlias.setName("editor.form.meta.descrittori.alias");
 		alias_listtextfield.setEditor(new AliasListTextFieldEditor());
 
+		formRelazioni.setMainComponent(getClass().getResourceAsStream("Relazioni.jfrm"));
+		formRelazioni.replaceComponent("editor.meta.descrittori.relazioni.listtextfield", rel_listtextfield.getAsComponent());
+		formRelazioni.setName("editor.form.meta.descrittori.relazioni");
+		formRelazioni.setSize(650, 400);
+
+		RelListTextFieldEditor tfe = new RelListTextFieldEditor(sottoFormDatiRelazione);
+		rel_listtextfield.setEditor(tfe);
+		rel_listtextfield.addListTextFieldElementListener(tfe);
+
+		tagSottoFormDatiRelazione = (JComboBox) sottoFormDatiRelazione.getComponentByName("editor.meta.descrittori.relazioni.tiporelazione");
+		tagSottoFormDatiRelazione.addItem("originale");
+		tagSottoFormDatiRelazione.addItem("attiva");
+		tagSottoFormDatiRelazione.addItem("giurisprudenza");
 
 		// Report items
 		aliasList = (JList) form.getComponentByName("editor.meta.descrittori.riepilogo.alias");
 		altrePubblicazioniList = (JList) form.getComponentByName("editor.meta.descrittori.riepilogo.altrepubblicazioni");
-	
+		relazioniList = (JList) form.getComponentByName("editor.meta.descrittori.riepilogo.altrerelazioni");
+		vigenzeList = (JList) form.getComponentByName("editor.meta.descrittori.riepilogo.vigenze");
 
 		pubblicazioniButton = (JButton) form.getComponentByName("editor.meta.descrittori.riepilogo.pubblicazioni_btn");
 		aliasButton = (JButton) form.getComponentByName("editor.meta.descrittori.riepilogo.alias_btn");
-		
+		vigenzaButton = (JButton) form.getComponentByName("editor.meta.descrittori.riepilogo.vigenza_btn");
+		relazioniButton = (JButton) form.getComponentByName("editor.meta.descrittori.riepilogo.relazioni_btn");
+
 		pubblicazioniButton.addActionListener(this);
 		aliasButton.addActionListener(this);
-		
+		vigenzaButton.addActionListener(this);
+		relazioniButton.addActionListener(this);
 	}
 
 	// ////////////////////////////////////////////// MetaDescrittoriForm
@@ -330,6 +453,32 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 				alias_listtextfield.getListElements().toArray(aliases);
 				aliasList.setListData(aliases);
 			}
+		} else if (e.getSource().equals(vigenzaButton)) { // VIGENZE
+			formVigenze.setVigenze(vigenze);
+			formVigenze.setRelazioniUlteriori(relazioniUlteriori);
+			formVigenze.setTipoDocumento(tipoDocumento);
+			formVigenze.setTipoDTD(tipoDTD);
+			if (formVigenze.openForm()) {
+				vigenze = formVigenze.getVigenze();
+				vigenzeList.setListData(vigenze);
+				setTipoDocumento(formVigenze.getTipoDocumento());
+			}
+		} else if (e.getSource().equals(relazioniButton)) { // RELAZIONI
+			Vector v = new Vector();
+			if (relazioniUlteriori != null) {
+				for (int i = 0; i < relazioniUlteriori.length; i++) {
+					v.add(relazioniUlteriori[i]);
+				}
+			}
+			rel_listtextfield.setListElements(v);
+
+			formRelazioni.showDialog();
+
+			if (formRelazioni.isOk()) {
+				relazioniUlteriori = new Relazione[rel_listtextfield.getListElements().size()];
+				rel_listtextfield.getListElements().toArray(relazioniUlteriori);
+				relazioniList.setListData(relazioniUlteriori);
+			}
 		}
 	}
 
@@ -371,6 +520,12 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 		}
 	}
 
+//	public void setRelazioniUlteriori(Relazione[] relazioniUlteriori) {
+//		if (relazioniUlteriori != null) {
+//			this.relazioniUlteriori = relazioniUlteriori;
+//			relazioniList.setListData(relazioniUlteriori);
+//		}
+//	}
 
 	public void setTipoDocumento(String tipoDocumento) {
 		this.tipoDocumento = tipoDocumento;
@@ -381,6 +536,10 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 		this.tipoDTD = tipoDTD;
 	}
 
+//	public void setVigenze(Vigenza[] vigenze) {
+//		this.vigenze = vigenze;
+//		vigenzeList.setListData(vigenze);
+//	}
 
 	public void setPubblicazione(Pubblicazione pubblicazione) {
 		this.pubblicazione = pubblicazione;
@@ -388,4 +547,65 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 		report_numeroPubblicazione.setText(pubblicazione.getNum());
 	}
 
+	/**
+	 * Restituisce un ID univoco per una nuova relazione.
+	 */
+	private String calcolaIDRelazione(String nomeTag) {
+
+		// TODO sarebbe da implementare in maniera un po' pi? elegante...
+		// TODO e magari spostare nelle utils
+
+		String prefix = "r";
+
+		if (nomeTag.equals("attiva")) {
+			prefix = "ra";
+		} else if (nomeTag.equals("passiva")) {
+			prefix = "rp";
+		} else if (nomeTag.equals("originale")) {
+			prefix = "ro";
+		} else if (nomeTag.equals("giurisprudenza")) {
+			prefix = "rg";
+		}
+
+		String uID = prefix;
+		int max = 0;
+
+		// Prendi il massimo degli id nelle relazioni ulteriori
+		// (prendi le relazioni dalla ListTextField per includere quelle
+		// inserite dall'utente)
+		Vector relazioniVect = rel_listtextfield.getListElements();
+		for (int i = 0; i < relazioniVect.size(); i++) {
+			Relazione r = (Relazione) relazioniVect.elementAt(i);
+			if (r.getId() != null) {
+				try {
+					String s = r.getId().substring(0, prefix.length());
+					if (s.equals(prefix)) {
+						Integer idValue = Integer.decode(r.getId().substring(prefix.length()));
+						if (idValue.intValue() > max) {
+							max = idValue.intValue();
+						}
+					}
+				} catch (IndexOutOfBoundsException exc) {
+				}
+			}
+		}
+
+		// e poi nelle relazioni delle vigenze
+		for (int i = 0; i < vigenze.length; i++) {
+			if (vigenze[i].getFonte() != null) {
+				try {
+					String s = vigenze[i].getFonte().getId().substring(0, prefix.length());
+					if (s.equals(prefix)) {
+						Integer idValue = Integer.decode(vigenze[i].getFonte().getId().substring(prefix.length()));
+						if (idValue.intValue() > max) {
+							max = idValue.intValue();
+						}
+					}
+				} catch (IndexOutOfBoundsException exc) {
+				}
+			}
+		}
+		uID += (max + 1);
+		return uID;
+	}
 }

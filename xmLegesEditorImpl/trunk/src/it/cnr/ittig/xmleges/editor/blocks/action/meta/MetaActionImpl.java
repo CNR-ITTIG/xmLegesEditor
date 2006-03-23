@@ -85,6 +85,8 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 	DocumentManager documentManager;
 
 	AbstractAction descrittoriAction = new DescrittoriAction();
+	
+	AbstractAction ciclodivitaAction = new CiclodiVitaAction();
 
 	AbstractAction urnAction = new urnAction();
 
@@ -136,16 +138,19 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws java.lang.Exception {
 		actionManager.registerAction("editor.meta.descrittori", descrittoriAction);
+		actionManager.registerAction("editor.meta.ciclodivita", ciclodivitaAction);
 		actionManager.registerAction("editor.meta.urn", urnAction);
 		eventManager.addListener(this, DocumentOpenedEvent.class);
 		eventManager.addListener(this, DocumentClosedEvent.class);
 		descrittoriAction.setEnabled(false);
+		ciclodivitaAction.setEnabled(false);
 		urnAction.setEnabled(false);
 	}
 
 	// ////////////////////////////////////////// EventManagerListener Interface
 	public void manageEvent(EventObject event) {
 		descrittoriAction.setEnabled(!documentManager.isEmpty() && !utilRulesManager.isDtdDL());
+		ciclodivitaAction.setEnabled(!documentManager.isEmpty() && !utilRulesManager.isDtdDL());
 		urnAction.setEnabled(!documentManager.isEmpty());
 	}
 
@@ -160,37 +165,37 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		descrittoriForm.setAltrePubblicazioni(descrittori.getAltrePubblicazioni());
 		descrittoriForm.setPubblicazione(descrittori.getPubblicazione());
 
-		Vigenza[] vigenze = descrittori.getVigenze();
-		Relazione[] relazioni = descrittori.getRelazioni();
-
-		// Dividi le relazioni in relazioni legate alle vigenze e relazioni
-		// ulteriori.
-		// Le relazioni legate alle vigenze vengono passate all'interno delle
-		// vigenze
-		// stesse,
-		// mentre le relazioni ulteriori con setRelazioni.
-
-		Vector relazioniUlterioriVect = new Vector();
-
-		for (int i = 0; i < relazioni.length; i++) {
-			boolean found = false;
-			for (int j = 0; j < vigenze.length; j++) {
-				Vigenza v = vigenze[j];
-				if (v.hasFineFonte() && relazioni[i].getId().equals(v.getFonte().getId())) {
-					found = true;
-					break;
-				}
-			}
-			if (!found) {
-				relazioniUlterioriVect.add(relazioni[i]);
-			}
-		}
-
-		Relazione[] relazioniUlteriori = new Relazione[relazioniUlterioriVect.size()];
-		relazioniUlterioriVect.copyInto(relazioniUlteriori);
-
-		descrittoriForm.setRelazioniUlteriori(relazioniUlteriori);
-		descrittoriForm.setVigenze(vigenze);
+//		Vigenza[] vigenze = descrittori.getVigenze();
+//		Relazione[] relazioni = descrittori.getRelazioni();
+//
+//		// Dividi le relazioni in relazioni legate alle vigenze e relazioni
+//		// ulteriori.
+//		// Le relazioni legate alle vigenze vengono passate all'interno delle
+//		// vigenze
+//		// stesse,
+//		// mentre le relazioni ulteriori con setRelazioni.
+//
+//		Vector relazioniUlterioriVect = new Vector();
+//
+//		for (int i = 0; i < relazioni.length; i++) {
+//			boolean found = false;
+//			for (int j = 0; j < vigenze.length; j++) {
+//				Vigenza v = vigenze[j];
+//				if (v.hasFineFonte() && relazioni[i].getId().equals(v.getFonte().getId())) {
+//					found = true;
+//					break;
+//				}
+//			}
+//			if (!found) {
+//				relazioniUlterioriVect.add(relazioni[i]);
+//			}
+//		}
+//
+//		Relazione[] relazioniUlteriori = new Relazione[relazioniUlterioriVect.size()];
+//		relazioniUlterioriVect.copyInto(relazioniUlteriori);
+//
+//		descrittoriForm.setRelazioniUlteriori(relazioniUlteriori);
+//		descrittoriForm.setVigenze(vigenze);
 
 		if (descrittoriForm.openForm()) {
 			try {
@@ -200,27 +205,27 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 				descrittori.setPubblicazione(descrittoriForm.getPubblicazione());
 				descrittori.setAltrePubblicazioni(descrittoriForm.getAltrePubblicazioni());
 
-				Vigenza[] newVigenze = descrittoriForm.getVigenze();
-				descrittori.setVigenze(newVigenze);
+//				Vigenza[] newVigenze = descrittoriForm.getVigenze();
+//				descrittori.setVigenze(newVigenze);
 
-				relazioniUlteriori = descrittoriForm.getRelazioniUlteriori();
-
-				// Ricomponi le relazioni
-
-				Vector relazioniVect = new Vector();
-				for (int i = 0; i < newVigenze.length; i++) {
-					if (newVigenze[i].hasFineFonte()) {
-						relazioniVect.add(newVigenze[i].getFonte());
-					}
-				}
-				for (int i = 0; i < relazioniUlteriori.length; i++) {
-					relazioniVect.add(relazioniUlteriori[i]);
-				}
-
-				Relazione[] newRelazioni = new Relazione[relazioniVect.size()];
-				relazioniVect.copyInto(newRelazioni);
-
-				descrittori.setRelazioni(newRelazioni);
+//				relazioniUlteriori = descrittoriForm.getRelazioniUlteriori();
+//
+//				// Ricomponi le relazioni
+//
+//				Vector relazioniVect = new Vector();
+//				for (int i = 0; i < newVigenze.length; i++) {
+//					if (newVigenze[i].hasFineFonte()) {
+//						relazioniVect.add(newVigenze[i].getFonte());
+//					}
+//				}
+//				for (int i = 0; i < relazioniUlteriori.length; i++) {
+//					relazioniVect.add(relazioniUlteriori[i]);
+//				}
+//
+//				Relazione[] newRelazioni = new Relazione[relazioniVect.size()];
+//				relazioniVect.copyInto(newRelazioni);
+//
+//				descrittori.setRelazioni(newRelazioni);
 
 				documentManager.commitEdit(tr);
 				rinumerazione.aggiorna(doc);
@@ -228,6 +233,11 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 				logger.error(ex.getMessage(), ex);
 			}
 		}
+	}
+	
+	public void doCiclodiVita() {
+		Document doc = documentManager.getDocumentAsDom();
+		System.err.println("ciclodivita pressed");
 	}
 
 	public void doUrn() {
@@ -514,6 +524,12 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 	public class DescrittoriAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
 			doDescrittori();
+		}
+	}
+	
+	public class CiclodiVitaAction extends AbstractAction {
+		public void actionPerformed(ActionEvent e) {
+			doCiclodiVita();
 		}
 	}
 

@@ -2,7 +2,7 @@
  * Created on 22-apr-2005 TODO To change the template for this generated file go
  * to Window - Preferences - Java - Code Style - Code Templates
  */
-package it.cnr.ittig.xmleges.editor.blocks.form.meta.descrittori;
+package it.cnr.ittig.xmleges.editor.blocks.form.meta.ciclodivita;
 
 import it.cnr.ittig.services.manager.Initializable;
 import it.cnr.ittig.services.manager.ServiceException;
@@ -19,7 +19,7 @@ import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextFieldElemen
 import it.cnr.ittig.xmleges.core.util.date.UtilDate;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Relazione;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Vigenza;
-import it.cnr.ittig.xmleges.editor.services.form.meta.descrittori.MetaDescrittoriVigenzaForm;
+import it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita.MetaDescrittoriVigenzaForm;
 import it.cnr.ittig.xmleges.editor.services.form.urn.UrnForm;
 import it.cnr.ittig.xmleges.editor.services.util.urn.Urn;
 
