@@ -16,8 +16,8 @@ import it.cnr.ittig.xmleges.core.util.date.UtilDate;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Pubblicazione;
-import it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita.CiclodiVitaForm;
 import it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita.CiclodiVitaEventoForm;
+import it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita.CiclodiVitaForm;
 import it.cnr.ittig.xmleges.editor.services.form.urn.UrnForm;
 import it.cnr.ittig.xmleges.editor.services.util.urn.Urn;
 
@@ -536,9 +536,9 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 		this.tipoDTD = tipoDTD;
 	}
 
-	public void setVigenze(Evento[] vigenze) {
-		this.vigenze = vigenze;
-		vigenzeList.setListData(vigenze);
+	public void setEventi(Evento[] eventi) {
+		this.vigenze = eventi;
+		vigenzeList.setListData(eventi);
 	}
 
 	public void setPubblicazione(Pubblicazione pubblicazione) {
