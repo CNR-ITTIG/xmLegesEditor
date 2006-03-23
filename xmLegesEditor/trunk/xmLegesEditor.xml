@@ -795,7 +795,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.meta.urn.UrnDocumentoFormImpl" />
     
-    <component  class="it.cnr.ittig.xmleges.editor.blocks.form.meta.ciclodivita.MetaDescrittoriVigenzaFormImpl" />
+    <component  class="it.cnr.ittig.xmleges.editor.blocks.form.meta.ciclodivita.CiclodiVitaEventoFormImpl" />
     
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.ndr.NdrFormImpl" />
 
