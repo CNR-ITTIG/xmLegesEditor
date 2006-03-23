@@ -24,7 +24,7 @@ import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Pubblicazione;
 public interface CiclodiVitaForm extends Service {
 
 	/**
-	 * Apre la form per l'inserimento dei metadati descrittori di un documento
+	 * Apre la form per l'inserimento degli eventi e delle relazioni associate ad un documento
 	 * NIR.
 	 * 
 	 * @return <code>true</code> se la form &egrave; valida
@@ -33,14 +33,14 @@ public interface CiclodiVitaForm extends Service {
 
 
 	/**
-	 * Restituisce le vigenze del documento.
+	 * Restituisce gli eventi associati al documento.
 	 * 
 	 * @return vigenze
 	 */
 	public Evento[] getEventi();
 
 	/**
-	 * Restituisce le relazioni ulteriori (non legate alle vigenze) con altri
+	 * Restituisce le relazioni ulteriori (non legate agli eventi) con altri
 	 * documenti.
 	 * 
 	 * @return relazioni con altri documenti
@@ -73,14 +73,14 @@ public interface CiclodiVitaForm extends Service {
 
 
 	/**
-	 * Imposta i periodi di vigenza del documento
+	 * Imposta sulla form gli eventi associati al documento
 	 * 
-	 * @param vigenze vigenze del documento
+	 * @param eventi eventi associati al documento
 	 */
-	public void setVigenze(Evento[] eventi);
+	public void setEventi(Evento[] eventi);
 
 	/**
-	 * Imposta le relazioni ulteriori (non legate alle vigenze) del documento
+	 * Imposta le relazioni ulteriori (non legate agli eventi) del documento
 	 * 
 	 * @param relazioni relazioni del documento
 	 */
