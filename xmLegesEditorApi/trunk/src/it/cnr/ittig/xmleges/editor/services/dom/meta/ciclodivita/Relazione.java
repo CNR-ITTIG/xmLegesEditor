@@ -19,7 +19,9 @@ package it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita;
  */
 public class Relazione {
 
-	/** Nome del tag: originale, attiva, passiva, giurisprudenza */
+	// FIXME:  nel caso di relazione di tipo giurisprudenza manca l'effetto (normativo|interpretativo)
+	
+	/** Nome del tag: originale, attiva, passiva, giurisprudenza, haallegato, allegatodi */
 	String tag;
 
 	/** Id del tag */
