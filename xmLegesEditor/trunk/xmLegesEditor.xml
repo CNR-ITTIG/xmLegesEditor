@@ -760,6 +760,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
     <component  class="it.cnr.ittig.xmleges.editor.blocks.dom.meta.descrittori.MetaDescrittoriImpl" />
     
+    <component  class="it.cnr.ittig.xmleges.editor.blocks.dom.meta.ciclodivita.CiclodiVitaImpl" />
+    
     <component  class="it.cnr.ittig.xmleges.editor.blocks.dom.ndr.NdrImpl" />
     
     <component  class="it.cnr.ittig.xmleges.editor.blocks.dom.xmleges.linker.XmLegesLinkerImpl" />
