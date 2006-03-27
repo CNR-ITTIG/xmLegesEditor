@@ -68,7 +68,7 @@ public class AggiornaIdFrozenLaw {
 
 	protected static final int NOT_AVV_ALT = 18;
 
-	protected static final int VIGENZA = 19;
+	protected static final int EVENTO = 19;
 
 	protected static final int ORIGINALE = 20;
 
@@ -1056,7 +1056,7 @@ public class AggiornaIdFrozenLaw {
 			break;
 		case PREAMBOLO:
 		case NOT_AVV_ALT:
-		case VIGENZA:
+		case EVENTO:
 		case INL:
 		case ORIGINALE:
 		case ATTIVA:
@@ -1124,8 +1124,8 @@ public class AggiornaIdFrozenLaw {
 		else if (n.getNodeName().compareTo("altro") == 0)
 			this.elementType = NOT_AVV_ALT;
 
-		else if (n.getNodeName().compareTo("vigenza") == 0)
-			this.elementType = VIGENZA;
+		else if (n.getNodeName().compareTo("evento") == 0)
+			this.elementType = EVENTO;
 
 		else if (n.getNodeName().compareTo("originale") == 0)
 			this.elementType = ORIGINALE;
@@ -1215,8 +1215,8 @@ public class AggiornaIdFrozenLaw {
 		case NOT_AVV_ALT:
 			sigla = "n";
 			break;
-		case VIGENZA:
-			sigla = "v";
+		case EVENTO:
+			sigla = "t";
 			break;
 		case ORIGINALE:
 			sigla = "ro";

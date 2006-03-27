@@ -22,8 +22,9 @@ import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.action.meta.MetaAction;
 import it.cnr.ittig.xmleges.editor.services.autorita.Autorita;
 import it.cnr.ittig.xmleges.editor.services.autorita.Istituzione;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.CiclodiVita;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.MetaDescrittori;
 import it.cnr.ittig.xmleges.editor.services.dom.rinumerazione.Rinumerazione;
 import it.cnr.ittig.xmleges.editor.services.form.meta.descrittori.MetaDescrittoriForm;
@@ -91,6 +92,8 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 	AbstractAction urnAction = new urnAction();
 
 	MetaDescrittori descrittori;
+	
+	CiclodiVita ciclodivita;
 
 	MetaDescrittoriForm descrittoriForm;
 
@@ -123,6 +126,7 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		descrittori = (MetaDescrittori) serviceManager.lookup(MetaDescrittori.class);
+		ciclodivita = (CiclodiVita) serviceManager.lookup(CiclodiVita.class);
 		descrittoriForm = (MetaDescrittoriForm) serviceManager.lookup(MetaDescrittoriForm.class);
 		newrinvii = (NewRinviiForm) serviceManager.lookup(NewRinviiForm.class);
 		nirUtilUrn = (NirUtilUrn) serviceManager.lookup(NirUtilUrn.class);
@@ -182,9 +186,43 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 	
 	public void doCiclodiVita() {
 		Document doc = documentManager.getDocumentAsDom();
-
-//		Vigenza[] vigenze = descrittori.getVigenze();
-//		Relazione[] relazioni = descrittori.getRelazioni();
+		
+		////////////////////////////////////////////////////////////
+		
+		Vector relvect = new Vector();
+		Relazione rel1 = new Relazione("passiva","rp1","urn:nir:stato:legge:2005-03-02");
+		Relazione rel2 = new Relazione("attiva","ra2","urn:nir:stato:decreto.legge:2005-03-02");
+		
+		relvect.add(rel1);
+		relvect.add(rel2);
+		
+		Relazione[] rels = new Relazione[relvect.size()];
+		relvect.copyInto(rels);
+		
+		Vector evect = new Vector();
+		evect.add(new Evento("t1","20050302",rel1));
+		evect.add(new Evento("t2","20030712",rel1));
+		evect.add(new Evento("t3","20030712",rel2));
+		
+		Evento[] evs = new Evento[evect.size()];
+		evect.copyInto(evs);
+		
+		/////////////////////////////////////////////////////////////
+		ciclodivita.setEventi(evs);
+		ciclodivita.setRelazioni(rels);
+		
+		
+		Evento[] eventi = ciclodivita.getEventi();
+		Relazione[] relazioni = ciclodivita.getRelazioni();
+		
+		for(int i=0; i<eventi.length; i++){
+			System.out.println("evento - "+eventi[i].toString());
+		}
+		
+		for(int i=0; i<relazioni.length; i++){
+			System.out.println("relazioni - "+relazioni[i].toString());
+		}
+		
 //
 //		// Dividi le relazioni in relazioni legate alle vigenze e relazioni
 //		// ulteriori.
