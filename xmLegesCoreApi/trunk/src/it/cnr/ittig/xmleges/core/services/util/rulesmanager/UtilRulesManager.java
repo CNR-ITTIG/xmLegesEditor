@@ -73,6 +73,17 @@ public interface UtilRulesManager extends Service {
 	 */
 	public JMenu createMenuInsert(Node node, int start, int end);
 
+	
+	/**
+	 * 
+	 * @param parent
+	 * @param new_Node
+	 * @return
+	 */
+	public boolean orderedInsertChild(Node parent, Node new_Node);
+	
+	
+	
 	/**
 	 * @param parent
 	 * @param child_node
