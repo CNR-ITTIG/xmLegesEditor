@@ -110,7 +110,6 @@ public class ListeImpl implements Liste, Loggable, Serviceable, Configurable, In
 				}
 			}
 		} catch (DtdRulesManagerException ex) {
-			logger.error(ex.getMessage(), ex);
 			return 0;
 		}
 		return 0;

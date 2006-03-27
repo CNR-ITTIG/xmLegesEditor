@@ -244,10 +244,12 @@ public class NodeInserter {
 		try {
 			// Verifico se posso appendere i figli container di parentContainer
 			// a template
-			// Prendo solo i figli cotainer di parentContainer
+			// Prendo solo i figli container di parentContainer
 			Vector pcChildren = getContainerChildren(parentContainer);
 			Node prunedTemplate = removeContainerChild(template, dtdRulesManager);
-			return (dtdRulesManager.queryCanEncloseIn(parentContainer, (Node) pcChildren.get(0), pcChildren.size(), prunedTemplate));
+			if(pcChildren.size()>0)
+			  return (dtdRulesManager.queryCanEncloseIn(parentContainer, (Node) pcChildren.get(0), pcChildren.size(), prunedTemplate));
+		    return false;
 		} catch (DtdRulesManagerException ex) {
 			return (false);
 		}
@@ -350,7 +352,8 @@ public class NodeInserter {
 	private Vector getContainerChildren(Node parentContainer) {
 		Vector pcChildren = new Vector();
 		NodeList parentContainerChildren = parentContainer.getChildNodes();
-		for (int i = 0; i < parentContainerChildren.getLength(); i++) {
+		
+		for (int i = 0; i < parentContainerChildren.getLength(); i++) {	
 			if (nirUtilDom.isContainer((Node) (parentContainerChildren.item(i))))
 				pcChildren.addElement(parentContainerChildren.item(i));
 

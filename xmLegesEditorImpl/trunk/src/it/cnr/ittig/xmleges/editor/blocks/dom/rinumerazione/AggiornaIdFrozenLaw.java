@@ -562,11 +562,10 @@ public class AggiornaIdFrozenLaw {
 
 	 protected boolean isElementToBeIDUpdated(Node figlio)
 	 {
-		 // chiamato solo per settare this.elementType
-		 getElementType(figlio);
 		 // in questo modo setta gli id solo agli elementi che hanno id REQUIRED
+		 // + forza il setId anche alle lettere, numeri, ep: gli id servono per la rinumerazione di quegli elementi
 		 try{
-			 if(dtdRulesManager.queryIsRequiredAttribute(figlio.getNodeName(),"id")){
+			 if(dtdRulesManager.queryIsRequiredAttribute(figlio.getNodeName(),"id") || getElementType(figlio)==LETTERA || getElementType(figlio)==NUMERO || getElementType(figlio)==ELENCO_PUNT){
 				 logger.debug("required ID for "+figlio.getNodeName());
 				 return true;
 			 }
