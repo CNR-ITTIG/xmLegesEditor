@@ -130,7 +130,7 @@ public class CiclodiVitaImpl implements CiclodiVita, Loggable, Serviceable {
 			Node relazioniNode = doc.createElement("relazioni");
 			for (int i = 0; i < relazioni.length; i++) {
 				if (relazioni[i].getId() != null && relazioni[i].getLink() != null && !(relazioni[i].getLink().trim().equals(""))) {
-					Element relazione = doc.createElement(relazioni[i].getTag());
+					Element relazione = doc.createElement(relazioni[i].getTagTipoRelazione());
 					UtilDom.setIdAttribute(relazione, relazioni[i].getId());
 					relazione.setAttribute("xlink:href", relazioni[i].getLink());
 					utilRulesManager.orderedInsertChild(relazioniNode,relazione);
@@ -215,7 +215,7 @@ public class CiclodiVitaImpl implements CiclodiVita, Loggable, Serviceable {
 				UtilDom.setIdAttribute(eventoTag, eventi[i].getId());
 				UtilDom.setAttributeValue(eventoTag, "data", eventi[i].getData());
 				UtilDom.setAttributeValue(eventoTag, "fonte", eventi[i].getFonte().getId());
-				UtilDom.setAttributeValue(eventoTag, "tipo", eventi[i].getTipo());
+				UtilDom.setAttributeValue(eventoTag, "tipo", eventi[i].getTipoEvento());
 				utilRulesManager.orderedInsertChild(eventiTag,eventoTag);
 			}
 			utilRulesManager.orderedInsertChild(ciclodivitaNode,eventiTag);		
