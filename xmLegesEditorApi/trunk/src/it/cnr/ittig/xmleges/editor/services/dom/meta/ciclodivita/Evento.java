@@ -30,21 +30,30 @@ public class Evento {
 	/** Fonte della vigenza (relazione) */
 	Relazione fonte;
 	
-	String tipo;
+	String tipoEvento;
+	
+	String effetto;
 
     
-	public String getTipo() {
-		return tipo;
+	public String getTipoEvento() {
+		return tipoEvento;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setTipoEvento(String tipo) {
+		this.tipoEvento = tipo;
 	}
 
 	public Evento(String id, String data, Relazione fonte) {
 		setId(id);
 		setData(data);
 		setFonte(fonte);
+	}
+	
+	public Evento(String id, String data, Relazione fonte, String effetto) {
+		setId(id);
+		setData(data);
+		setFonte(fonte);
+		setEffetto(effetto);
 	}
 
 	public String getId() {
@@ -77,6 +86,14 @@ public class Evento {
 		if (fonte != null)
 			retVal += ", " + fonte.toString();
 		return retVal;
+	}
+
+	public String getEffetto() {
+		return effetto;
+	}
+
+	public void setEffetto(String effetto) {
+		this.effetto = effetto;
 	}
 
 }

@@ -1,7 +1,6 @@
 package it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita;
 
 import it.cnr.ittig.services.manager.Service;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 
 /**
@@ -31,40 +30,30 @@ public interface CiclodiVitaEventoForm extends Service {
 	public boolean openForm();
 
 	/**
-	 * Restituisce le vigenze del documento.
+	 * Restituisce gli eventi del documento.
 	 * 
-	 * @return vigenze del documento
+	 * @return eventi del documento
 	 */
-	public Evento[] getVigenze();
+	public Evento[] getEventi();
 
 	/**
-	 * Imposta l'elenco dei periodi di vigenza del documento
+	 * Imposta l'elenco degli eventi del documento
 	 * 
-	 * @param vigenze vigenze del documento
+	 * @param eventi del documento
 	 */
-	public void setVigenze(Evento[] vigenze);
-
+	public void setEventi(Evento[] eventi);
+	
+	
 	/**
-	 * Imposta l'elenco delle relazioni ulteriori (non legate alle vigenze)
+	 * Restituisce l'eventi selezionato del listtetfield.
 	 * 
-	 * @param relazioni relazioni del documento
+	 * @return evento selezionato del documento
 	 */
-	public void setRelazioniUlteriori(Relazione[] relazioniUlteriori);
+	public Evento getSeletedEvento();
+	
+	
 
-	/**
-	 * Restituisce il tipo del documento (originale, vigente, multivigente).
-	 * 
-	 * @return tipo del documento
-	 */
-	public String getTipoDocumento();
-
-	/**
-	 * Imposta il tipo del documento (originale, vigente, multivigente)
-	 * 
-	 * @param tipoDocumento tipo del documento
-	 */
-	public void setTipoDocumento(String tipoDocumento);
-
+	
 	/**
 	 * Imposta la DTD del documento (base, completo...)
 	 * 

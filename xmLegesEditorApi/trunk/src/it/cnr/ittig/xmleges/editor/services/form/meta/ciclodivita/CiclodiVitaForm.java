@@ -1,9 +1,8 @@
 package it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita;
 
 import it.cnr.ittig.services.manager.Service;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Pubblicazione;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
 
 /**
  * Servizio per la gestione della form per il ciclodivita del documento .
@@ -49,20 +48,7 @@ public interface CiclodiVitaForm extends Service {
 
 
 
-	/**
-	 * Restituisce il tipo del documento (originale, vigente, multivigente).
-	 * 
-	 * @return tipo del documento
-	 */
-	public String getTipoDocumento();
-
-	/**
-	 * Imposta il tipo del documento
-	 * 
-	 * @param tipoDocumento tipo del documento
-	 */
-	public void setTipoDocumento(String tipoDocumento);
-
+	
 	/**
 	 * Imposta la DTD del documento (base, completo...)
 	 * 

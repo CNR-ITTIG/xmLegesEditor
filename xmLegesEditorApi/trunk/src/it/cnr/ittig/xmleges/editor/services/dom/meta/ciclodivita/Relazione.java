@@ -22,7 +22,7 @@ public class Relazione {
 	// FIXME:  nel caso di relazione di tipo giurisprudenza manca l'effetto (normativo|interpretativo)
 	
 	/** Nome del tag: originale, attiva, passiva, giurisprudenza, haallegato, allegatodi */
-	String tag;
+	String tagTipoRelazione;
 
 	/** Id del tag */
 	String id;
@@ -31,17 +31,17 @@ public class Relazione {
 	String link;
 
 	public Relazione(String tag, String id, String link) {
-		setTag(tag);
+		setTagTipoRelazione(tag);
 		setId(id);
 		setLink(link);
 	}
 
-	public String getTag() {
-		return tag;
+	public String getTagTipoRelazione() {
+		return tagTipoRelazione;
 	}
 
-	public void setTag(String tag) {
-		this.tag = tag;
+	public void setTagTipoRelazione(String tag) {
+		this.tagTipoRelazione = tag;
 	}
 
 	public String getId() {
@@ -61,6 +61,6 @@ public class Relazione {
 	}
 
 	public String toString() {
-		return tag.toUpperCase() + ", " + link;
+		return tagTipoRelazione.toUpperCase() + ", " + link;
 	}
 }
