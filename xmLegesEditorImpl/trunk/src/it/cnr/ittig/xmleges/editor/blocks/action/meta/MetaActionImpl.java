@@ -103,10 +103,11 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 	MetaInquadramento inquadramento;
 
 	MetaDescrittoriForm descrittoriForm;
+	
+	CiclodiVitaForm ciclodivitaForm;
 
 	UrnDocumentoForm urnDocumentoForm;
 	
-	CiclodiVitaForm ciclodivitaForm;
 	
 	InquadramentoForm inquadramentoForm;
 
@@ -224,54 +225,51 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		Document doc = documentManager.getDocumentAsDom();
 		
 		////////////////////////////////////////////////////////////
-		
-		Vector relvect = new Vector();
-		Relazione rel1 = new Relazione("passiva","rp1","urn:nir:stato:legge:2005-03-02");
-		Relazione rel2 = new Relazione("attiva","ra2","urn:nir:stato:decreto.legge:2005-03-02");
-		
-		relvect.add(rel1);
-		relvect.add(rel2);
-		
-		Relazione[] rels = new Relazione[relvect.size()];
-		relvect.copyInto(rels);
-		
-		Vector evect = new Vector();
-		evect.add(new Evento("t1","20050302",rel1));
-		evect.add(new Evento("t2","20030712",rel1));
-		evect.add(new Evento("t3","20030712",rel2));
-		
-		Evento[] evs = new Evento[evect.size()];
-		evect.copyInto(evs);
-		
-		/////////////////////////////////////////////////////////////
-		ciclodivita.setEventi(evs);
-		ciclodivita.setRelazioniUlteriori(rels);
-		
-//		ciclodivita.setEventi(new Evento[0]);
-//		ciclodivita.setRelazioniUlteriori(new Relazione[0]);
-		
-		
-		
-		ciclodivitaForm.setTipoDTD(documentManager.getDtdName());
-		ciclodivitaForm.setEventi(ciclodivita.getEventi());
-		ciclodivitaForm.setRelazioniUlteriori(ciclodivita.getRelazioniUlteriori());
-					
-		if (ciclodivitaForm.openForm()) {
-			try {
-				EditTransaction tr = documentManager.beginEdit();
-				
-				ciclodivita.setEventi(ciclodivitaForm.getEventi());
-				ciclodivita.setRelazioniUlteriori(ciclodivitaForm.getRelazioniUlteriori());
-				documentManager.commitEdit(tr);
-				rinumerazione.aggiorna(doc);
-			} catch (DocumentManagerException ex) {
-				logger.error(ex.getMessage(), ex);
-			}
-		
-		}
-		
-			}
 
+//      POPOLAMENTO A MANO		
+		
+//		Vector relvect = new Vector();
+//		Relazione rel1 = new Relazione("passiva","rp1","urn:nir:stato:legge:2005-03-02");
+//		Relazione rel2 = new Relazione("attiva","ra2","urn:nir:stato:decreto.legge:2005-03-02");
+//		
+//		relvect.add(rel1);
+//		relvect.add(rel2);
+//		
+//		Relazione[] rels = new Relazione[relvect.size()];
+//		relvect.copyInto(rels);
+//		
+//		Vector evect = new Vector();
+//		evect.add(new Evento("t1","20050302",rel1));
+//		evect.add(new Evento("t2","20030712",rel1));
+//		evect.add(new Evento("t3","20030712",rel2));
+//		
+//		Evento[] evs = new Evento[evect.size()];
+//		evect.copyInto(evs);
+
+
+		ciclodivitaForm.setEventi(ciclodivita.getEventi());
+		ciclodivitaForm.setRelazioniUlteriori(ciclodivita.getRelazioniUlteriori(ciclodivita.getEventi(),ciclodivita.getRelazioni()));
+		
+		
+		if(ciclodivitaForm.openForm()){
+			Evento[] newEventi = ciclodivitaForm.getEventi();
+			Relazione[] relazioniUlteriori = ciclodivitaForm.getRelazioniUlteriori();
+			
+			Relazione[] newRelazioni = ciclodivita.mergeRelazioni(newEventi,relazioniUlteriori);
+	
+			// SETTA SUL DOM:
+			ciclodivita.setEventi(newEventi);
+   		    ciclodivita.setRelazioni(newRelazioni);				
+		}
+	}
+
+
+	
+	
+	
+	/////////////////////////////////////////
+	//////////////////////////////  URN 
+	
 	public void doUrn() {
 		Document doc = documentManager.getDocumentAsDom();
 		Urn[] set = getUrnFromDocument(doc);

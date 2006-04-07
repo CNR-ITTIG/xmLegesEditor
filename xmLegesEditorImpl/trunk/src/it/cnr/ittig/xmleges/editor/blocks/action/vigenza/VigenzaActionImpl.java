@@ -57,6 +57,7 @@ import org.w3c.dom.Node;
  */
 
 public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerListener, Serviceable, Initializable {
+	
 	Logger logger;
 
 	ActionManager actionManager;
@@ -113,7 +114,8 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 			logger.debug("enable vigenza");
 			start = ((SelectionChangedEvent) event).getTextSelectionStart();
 			end = ((SelectionChangedEvent) event).getTextSelectionEnd();
-			vigenzaAction.setEnabled(vigenza.canSetVigenza(activeNode, start, end));
+			vigenzaAction.setEnabled(true);
+			//vigenzaAction.setEnabled(vigenza.canSetVigenza(activeNode, start, end));
 		}
 		if (event instanceof DocumentClosedEvent || event instanceof DocumentOpenedEvent)
 			vigenzaAction.setEnabled(false);
@@ -123,18 +125,22 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 		Node node = selectionManager.getActiveNode();
 		start = selectionManager.getTextSelectionStart();
 		end = selectionManager.getTextSelectionEnd();
-		it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento vigSelected;
+		
+		
+		vigenzaForm.openForm(null,null);
 
-		if (null == descrittori.getVigenze() || descrittori.getVigenze().length == 0)
-			utilMsg.msgError("editor.partizioni.vigenza.error.novigenze");
-		else {
-			if ((vigSelected = vigenzaForm.openForm(descrittori.getVigenze(), node.getNodeValue().trim().substring(start, end))) != null)
-				// vigenza.setVigenza(node,start,end,vigSelected.getInizio(),vigSelected.getFine());
-				// // con le date
-				vigenza.setVigenza(node, start, end, vigSelected.getId(), vigSelected.getId()); // con
-			// gli
-			// id
-		}
+//		Evento vigSelected;
+//		if (null == descrittori.getVigenze() || descrittori.getVigenze().length == 0)
+//			utilMsg.msgError("editor.partizioni.vigenza.error.novigenze");
+//		else {
+//			if ((vigSelected = vigenzaForm.openForm(descrittori.getVigenze(), node.getNodeValue().trim().substring(start, end))) != null)
+//				// vigenza.setVigenza(node,start,end,vigSelected.getInizio(),vigSelected.getFine());
+//				// // con le date
+//				vigenza.setVigenza(node, start, end, vigSelected.getId(), vigSelected.getId()); // con
+//			// gli
+//			// id
+//		}
+		
 	}
 
 	// /////////////////////////////////////////////// Azioni

@@ -7,12 +7,13 @@ import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.form.Form;
+import it.cnr.ittig.xmleges.core.services.form.FormVerifier;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
+import it.cnr.ittig.xmleges.editor.services.form.evento.EventoForm;
 import it.cnr.ittig.xmleges.editor.services.form.vigenza.VigenzaForm;
 
 import javax.swing.JList;
 import javax.swing.JTextArea;
-import javax.swing.ListSelectionModel;
 
 /**
  * <h1>Implementazione del servizio
@@ -39,14 +40,17 @@ import javax.swing.ListSelectionModel;
  * General Public License </a></dd>
  * </dl>
  * 
- * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>, Tommaso
- *         Paba
+ * @author <a href="mailto:agnoloni@ittig.cnr.it">Tommaso Agnoloni</a>
  */
-public class VigenzaFormImpl implements VigenzaForm, Loggable, Serviceable, Initializable {
+public class VigenzaFormImpl implements VigenzaForm,  FormVerifier, Loggable, Serviceable, Initializable {
 
 	Logger logger;
 
 	Form form;
+	
+	EventoForm eventoinizioform;
+	
+	EventoForm eventofineform;
 
 	JList vigenzeList;
 
@@ -60,15 +64,22 @@ public class VigenzaFormImpl implements VigenzaForm, Loggable, Serviceable, Init
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
 		form = (Form) serviceManager.lookup(Form.class);
+		eventoinizioform = (EventoForm) serviceManager.lookup(EventoForm.class);
+		eventofineform = (EventoForm) serviceManager.lookup(EventoForm.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws java.lang.Exception {
 		form.setMainComponent(getClass().getResourceAsStream("SelezioneVigenzaForm.jfrm"));
 		form.setName("editor.selezionevigenzatesto");
-		vigenzeList = (JList) form.getComponentByName("editor.selezionevigenzatesto.vigenzelist");
 		textArea = (JTextArea) form.getComponentByName("editor.selezionevigenzatesto.testo");
-		vigenzeList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		
+		form.replaceComponent("editor.selezionevigenza.eventoiniziovigore", eventoinizioform.getAsComponent());
+		form.replaceComponent("editor.selezionevigenza.eventofinevigore", eventofineform.getAsComponent());
+		
+		//vigenzeList = (JList) form.getComponentByName("editor.selezionevigenzatesto.vigenzelist");
+		//vigenzeList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	}
 
 	public Evento openForm(Evento[] vigenze, String testo) {
@@ -77,22 +88,74 @@ public class VigenzaFormImpl implements VigenzaForm, Loggable, Serviceable, Init
 			textArea.setText(testo);
 		} else {
 			textArea.setText("");
-		}
+		} 
 
-		if (vigenze != null && vigenze.length > 0) {
-			vigenzeList.setListData(vigenze);
-			vigenzeList.setSelectedIndex(0);
-		} else {
-			vigenzeList.removeAll();
-		}
+		
+//		if (vigenze != null && vigenze.length > 0) {
+//			vigenzeList.setListData(vigenze);
+//			vigenzeList.setSelectedIndex(0);
+//		} else {
+//			vigenzeList.removeAll();
+//		}
 
-		form.setSize(600, 450);
+		form.setSize(600, 350);
 		form.showDialog();
 
-		if (form.isOk()) {
-			return (Evento) vigenzeList.getSelectedValue();
-		} else {
-			return null;
-		}
+//		if (form.isOk()) {
+//			return (Evento) vigenzeList.getSelectedValue();
+//		} else {
+//			return null;
+//		}
+		return null;
 	}
+
+	
+	////////////////////     NUOVA    INTERFACCIA    /////////////////////// 
+	
+	public boolean openForm(String testo, Evento inizioVigore, Evento fineVigore, String status) {
+		return openForm(testo,inizioVigore,fineVigore,null,null,status);
+	}
+	
+	public boolean openForm(String testo, Evento inizioVigore, Evento fineVigore, Evento inizioEfficacia, Evento fineEfficacia, String status) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	public Evento getFineEfficacia() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Evento getFineVigore() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Evento getInizioEfficacia() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Evento getInizioVigore() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getStatus() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	/////////////////////////////////////////////////////////////////////////
+
+	public String getErrorMessage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean verifyForm() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
 }

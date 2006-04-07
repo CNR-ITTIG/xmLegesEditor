@@ -127,7 +127,7 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 				if (!checkData()) {
 					r = null;
 				} else {
-					r = new Relazione(nomeTag, calcolaIDRelazione(nomeTag), urn.getFormaTestuale());
+					r = new Relazione(nomeTag, calcolaIDRelazione(nomeTag), urn.toString());
 				}
 			} else if (eventID == ListTextFieldElementEvent.ELEMENT_MODIFY) {
 

@@ -334,7 +334,7 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
 	public boolean openForm() {
 
 		Vector v = new Vector();
-		if (eventi != null) {
+		if (eventi != null && eventi.length>0) {
 			for (int i = 0; i < eventi.length; i++) {
 				v.add(eventi[i]);
 			}
