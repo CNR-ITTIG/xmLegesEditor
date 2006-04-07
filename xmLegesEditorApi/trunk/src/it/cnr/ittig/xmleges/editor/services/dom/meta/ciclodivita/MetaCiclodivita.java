@@ -3,7 +3,7 @@ package it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita;
 import it.cnr.ittig.services.manager.Service;
 
 /**
- * Servizio per l'inserimento dei metadati generali.
+ * Servizio per l'inserimento del ciclodivita del documento.
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
@@ -16,36 +16,52 @@ import it.cnr.ittig.services.manager.Service;
  * General Public License </a></dd>
  * </dl>
  * 
- * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
+ * @author <a href="mailto:agnoloni@ittig.cnr.it">Tommaso Agnoloni</a>
  */
 public interface MetaCiclodivita extends Service {
 
+	
 	/**
-	 * Imposta le relazioni del documento.
-	 * 
-	 * @param relazione relazione del documento
-	 */
-	public void setRelazioniUlteriori(Relazione[] relazioni);
-
-	/**
-	 * Restituisce la Relazione del documento.
-	 * 
-	 * @return Relazione
-	 */
-	public Relazione[] getRelazioniUlteriori();
-
-		/**
-	 * Restituisce gli eventi del documento.
+	 * Restituisce gli eventi associati al documento.
 	 * 
 	 * @return eventi del documento
 	 */
 	public Evento[] getEventi();
 
 	/**
-	 * Imposta gli eventi del documento.
+	 * Imposta gli eventi sul ciclodivita del documento.
 	 * 
-	 * @param evento evento
+	 * @param eventi eventi
 	 */
-	public void setEventi(Evento[] evento);
+	public void setEventi(Evento[] eventi);
 
-	}
+	/**
+	 * Restituisce le relazioni del documento con altri documenti
+	 * 
+	 * @return relazioni con altri documenti
+	 */
+	public Relazione[] getRelazioni();
+
+	/**
+	 * Imposta le relazioni del documento con altri documenti
+	 * 
+	 * @param relazioni relazioni con altri documenti
+	 */
+	public void setRelazioni(Relazione[] relazioni);
+	
+	/**
+	 * 
+	 * @param eventi
+	 * @param relazioniUlteriori
+	 * @return
+	 */
+	public Relazione[] mergeRelazioni(Evento[] eventi, Relazione[] relazioniUlteriori);
+	
+	/**
+	 * 
+	 * @param eventi
+	 * @param relazioni
+	 * @return
+	 */
+	public Relazione[] getRelazioniUlteriori(Evento[] eventi, Relazione[] relazioni);
+}

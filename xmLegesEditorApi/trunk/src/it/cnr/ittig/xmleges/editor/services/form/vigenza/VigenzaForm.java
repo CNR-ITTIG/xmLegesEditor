@@ -29,4 +29,63 @@ public interface VigenzaForm extends Service {
 	 * @return vigenza selezionata, o null se l'utente ha premuto "Annulla"
 	 */
 	public Evento openForm(Evento[] vigenze, String testo);
+	
+	
+	
+	
+	/////////////////////   NUOVA    INTERFACCIA   ////////////////
+	
+	
+	/**
+	 * Apre il form per la selezione/modifica della vigenza (solo vigore).
+	 * @param testo Testo selezionato a cui applicare la vigenza o nome della partizione
+	 * @param inizioVigore
+	 * @param fineVigore
+	 * @param status  (omissis|abrogato|annullato|sospeso)
+	 * @return <code>true</code> se &egrave; stato premuto ok.
+	 */
+	public boolean openForm(String testo, Evento inizioVigore, Evento fineVigore, String status);
+	
+	/**
+	 * Apre il form per la selezione/modifica della vigenza (vigore ed efficacia)
+	 * @param testo Testo selezionato a cui applicare la vigenza o nome della partizione
+	 * @param inizioVigore
+	 * @param fineVigore
+	 * @param inizioEfficacia
+	 * @param fineEfficacia
+	 * @param status  (omissis|abrogato|annullato|sospeso)
+	 * @return <code>true</code> se &egrave; stato premuto ok.
+	 */
+	public boolean openForm(String testo, Evento inizioVigore, Evento fineVigore, Evento inizioEfficacia, Evento fineEfficacia, String status);
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public Evento getInizioVigore();
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public Evento getFineVigore();
+
+	/**
+	 * 
+	 * @return
+	 */
+	public Evento getInizioEfficacia();
+		
+	/**
+	 * 
+	 * @return
+	 */
+	public Evento getFineEfficacia();
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String getStatus();
+	
 }

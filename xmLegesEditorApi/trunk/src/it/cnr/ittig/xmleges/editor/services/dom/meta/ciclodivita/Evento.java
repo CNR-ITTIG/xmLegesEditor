@@ -17,7 +17,7 @@ import it.cnr.ittig.xmleges.core.util.date.UtilDate;
  * </dl>
  * 
  * @version 1.0
- * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
+ * @author <a href="mailto:agnoloni@ittig.cnr.it">Tommaso Agnoloni</a>
  */
 public class Evento {
 
@@ -87,6 +87,7 @@ public class Evento {
 			retVal += ", " + fonte.toString();
 		return retVal;
 	}
+	
 
 	public String getEffetto() {
 		return effetto;
@@ -95,5 +96,6 @@ public class Evento {
 	public void setEffetto(String effetto) {
 		this.effetto = effetto;
 	}
+
 
 }
