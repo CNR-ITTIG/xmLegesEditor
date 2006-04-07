@@ -1,9 +1,6 @@
 package it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita;
 
 import it.cnr.ittig.services.manager.Service;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Pubblicazione;
 
 /**
  * Servizio per l'inserimento dei metadati generali.
@@ -28,14 +25,14 @@ public interface MetaCiclodivita extends Service {
 	 * 
 	 * @param relazione relazione del documento
 	 */
-	public void setRelazione(Relazione relazione);
+	public void setRelazioniUlteriori(Relazione[] relazioni);
 
 	/**
 	 * Restituisce la Relazione del documento.
 	 * 
 	 * @return Relazione
 	 */
-	public Relazione getRelazione();
+	public Relazione[] getRelazioniUlteriori();
 
 		/**
 	 * Restituisce gli eventi del documento.
@@ -49,6 +46,6 @@ public interface MetaCiclodivita extends Service {
 	 * 
 	 * @param evento evento
 	 */
-	public void setEvento(Evento[] evento);
+	public void setEventi(Evento[] evento);
 
 	}

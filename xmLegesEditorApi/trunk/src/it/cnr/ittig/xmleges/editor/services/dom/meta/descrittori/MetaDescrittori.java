@@ -64,31 +64,4 @@ public interface MetaDescrittori extends Service {
 	 */
 	public String[] getAlias();
 
-	/**
-	 * Restituisce le vigenze del documento.
-	 * 
-	 * @return vigenze del documento
-	 */
-	public Evento[] getVigenze();
-
-	/**
-	 * Imposta le vigenze del documento.
-	 * 
-	 * @param vigenza vigenze
-	 */
-	public void setVigenze(Evento[] vigenza);
-
-	/**
-	 * Restituisce le relazioni del documento con altri documenti
-	 * 
-	 * @return relazioni con altri documenti
-	 */
-	public Relazione[] getRelazioni();
-
-	/**
-	 * Imposta le relazioni del documento con altri documenti
-	 * 
-	 * @param relazioni relazioni con altri documenti
-	 */
-	public void setRelazioni(Relazione[] relazioni);
-}
+	}
