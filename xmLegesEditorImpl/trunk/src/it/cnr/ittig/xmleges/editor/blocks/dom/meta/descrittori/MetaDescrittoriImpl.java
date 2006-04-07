@@ -264,7 +264,7 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 			Node relazioniNode = doc.createElement("relazioni");
 			for (int i = 0; i < relazioni.length; i++) {
 				if (relazioni[i].getId() != null && relazioni[i].getLink() != null && !(relazioni[i].getLink().trim().equals(""))) {
-					Element relazione = doc.createElement(relazioni[i].getTag());
+					Element relazione = doc.createElement(relazioni[i].getTagTipoRelazione());
 					UtilDom.setIdAttribute(relazione, relazioni[i].getId());
 					relazione.setAttribute("xlink:href", relazioni[i].getLink());
 					relazioniNode.appendChild(relazione);
@@ -298,69 +298,7 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 		}
 	}
 
-	public Evento[] getVigenze() {
-		Document doc = documentManager.getDocumentAsDom();
-		NodeList vigenza = doc.getElementsByTagName("vigenza");
-		Vector vigenzeVect = new Vector();
-		String id, inizio, fine;
-
-		for (int i = 0; i < vigenza.getLength(); i++) {
-			Node vigenzaNode = vigenza.item(i);
-			id = vigenzaNode.getAttributes().getNamedItem("id") != null ? vigenzaNode.getAttributes().getNamedItem("id").getNodeValue() : null;
-			inizio = vigenzaNode.getAttributes().getNamedItem("inizio") != null ? vigenzaNode.getAttributes().getNamedItem("inizio").getNodeValue() : null;
-			fine = vigenzaNode.getAttributes().getNamedItem("fine") != null ? vigenzaNode.getAttributes().getNamedItem("fine").getNodeValue() : null;
-			Node nodeFonte = vigenzaNode.getAttributes().getNamedItem("fonte");
-			if (nodeFonte != null) {
-				Relazione fonte = getRelazioneById(nodeFonte.getNodeValue());
-				//vigenzeVect.add(new Evento(id, inizio, fine, fonte));
-			} else {
-				//vigenzeVect.add(new Evento(id, inizio));
-			}
-		}
-		Evento[] vigenze = new Evento[vigenzeVect.size()];
-		vigenzeVect.copyInto(vigenze);
-		return vigenze;
-	}
-
-	public void setVigenze(Evento[] vigenza) {
-
-		Document doc = documentManager.getDocumentAsDom();
-		Node descrittoriNode = doc.getElementsByTagName("descrittori").item(0);
-
-		if (vigenza.length > 0) {
-			removeTagByName("vigenza");
-			for (int i = 0; i < vigenza.length; i++) {
-				Element vigenzaTag = doc.createElement("vigenza");
-				UtilDom.setIdAttribute(vigenzaTag, vigenza[i].getId());
-				// vigenzaTag.setAttribute("inizio", vigenza[i].getInizio());
-				//UtilDom.setAttributeValue(vigenzaTag, "inizio", vigenza[i].getInizio());
-				//if (vigenza[i].hasFineFonte()) {
-				//	UtilDom.setAttributeValue(vigenzaTag, "fine", vigenza[i].getFine());
-					UtilDom.setAttributeValue(vigenzaTag, "fonte", vigenza[i].getFonte().getId());
-				//}
-				Node child = descrittoriNode.getFirstChild();
-				boolean inserted = false;
-				do {
-					try {
-						if (dtdRulesManager.queryCanInsertBefore(descrittoriNode, child, vigenzaTag)) {
-							UtilDom.insertAfter(vigenzaTag, child.getPreviousSibling());
-							inserted = true;
-						}
-						child = child.getNextSibling();
-					} catch (DtdRulesManagerException ex) {
-						logger.error(ex.getMessage(), ex);
-					}
-				} while (!inserted && child != null);
-				try {
-					if (!inserted && dtdRulesManager.queryCanAppend(descrittoriNode, vigenzaTag))
-						descrittoriNode.appendChild(vigenzaTag);
-				} catch (DtdRulesManagerException ex) {
-					logger.error(ex.getMessage(), ex);
-				}
-			}
-		}
-	}
-
+	
 	private Relazione getRelazioneById(String relId) {
 
 		Document doc = documentManager.getDocumentAsDom();

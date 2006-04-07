@@ -78,10 +78,6 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 
 	JButton aliasButton;
 
-	JButton vigenzaButton;
-
-	JButton relazioniButton;
-
 	String[] aliases;
 
 	JList aliasList;

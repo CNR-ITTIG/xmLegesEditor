@@ -163,9 +163,9 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 		}
 
 		public boolean checkData() {
-			String nomeTag = (String) ((JComboBox) form.getComponentByName("editor.form.meta.ciclodivita.relazioni.tipo")).getSelectedItem();
+			String nomeTag = (String) (tagSottoFormDatiRelazione).getSelectedItem();
 			Urn urn = urnFormRelazioni.getUrn();
-			if (urn == null || !urn.isValid() || nomeTag == null || "".equals(nomeTag.trim()) || "".equals(urn.toString().trim())) {
+			if (urn == null || !urn.isValid() || tagSottoFormDatiRelazione == null || "".equals(nomeTag.trim()) || "".equals(urn.toString().trim())) {
 				return false;
 			}
 			return true;

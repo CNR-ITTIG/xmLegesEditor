@@ -22,12 +22,15 @@ import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.action.meta.MetaAction;
 import it.cnr.ittig.xmleges.editor.services.autorita.Autorita;
 import it.cnr.ittig.xmleges.editor.services.autorita.Istituzione;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.CiclodiVita;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.MetaCiclodivita;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.MetaDescrittori;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.inquadramento.MetaInquadramento;
 import it.cnr.ittig.xmleges.editor.services.dom.rinumerazione.Rinumerazione;
+import it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita.CiclodiVitaForm;
 import it.cnr.ittig.xmleges.editor.services.form.meta.descrittori.MetaDescrittoriForm;
+import it.cnr.ittig.xmleges.editor.services.form.meta.inquadramento.InquadramentoForm;
 import it.cnr.ittig.xmleges.editor.services.form.meta.urn.UrnDocumentoForm;
 import it.cnr.ittig.xmleges.editor.services.form.rinvii.newrinvii.NewRinviiForm;
 import it.cnr.ittig.xmleges.editor.services.provvedimenti.Provvedimenti;
@@ -88,16 +91,24 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 	AbstractAction descrittoriAction = new DescrittoriAction();
 	
 	AbstractAction ciclodivitaAction = new CiclodiVitaAction();
+	
+	AbstractAction inquadramentoAction = new InquadramentoAction();
 
 	AbstractAction urnAction = new urnAction();
 
 	MetaDescrittori descrittori;
 	
-	CiclodiVita ciclodivita;
+	MetaCiclodivita ciclodivita; //dom
+	
+	MetaInquadramento inquadramento;
 
 	MetaDescrittoriForm descrittoriForm;
 
 	UrnDocumentoForm urnDocumentoForm;
+	
+	CiclodiVitaForm ciclodivitaForm;
+	
+	InquadramentoForm inquadramentoForm;
 
 	Rinumerazione rinumerazione;
 
@@ -126,8 +137,11 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		descrittori = (MetaDescrittori) serviceManager.lookup(MetaDescrittori.class);
-		ciclodivita = (CiclodiVita) serviceManager.lookup(CiclodiVita.class);
+		ciclodivita = (MetaCiclodivita) serviceManager.lookup(MetaCiclodivita.class);
+		inquadramento = (MetaInquadramento) serviceManager.lookup(MetaInquadramento.class);
 		descrittoriForm = (MetaDescrittoriForm) serviceManager.lookup(MetaDescrittoriForm.class);
+		ciclodivitaForm = (CiclodiVitaForm) serviceManager.lookup(CiclodiVitaForm.class);
+		inquadramentoForm = (InquadramentoForm) serviceManager.lookup(InquadramentoForm.class);
 		newrinvii = (NewRinviiForm) serviceManager.lookup(NewRinviiForm.class);
 		nirUtilUrn = (NirUtilUrn) serviceManager.lookup(NirUtilUrn.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
@@ -143,11 +157,13 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 	public void initialize() throws java.lang.Exception {
 		actionManager.registerAction("editor.meta.descrittori", descrittoriAction);
 		actionManager.registerAction("editor.meta.ciclodivita", ciclodivitaAction);
+		actionManager.registerAction("editor.meta.inquadramento", inquadramentoAction);
 		actionManager.registerAction("editor.meta.urn", urnAction);
 		eventManager.addListener(this, DocumentOpenedEvent.class);
 		eventManager.addListener(this, DocumentClosedEvent.class);
 		descrittoriAction.setEnabled(false);
 		ciclodivitaAction.setEnabled(false);
+		inquadramentoAction.setEnabled(false);
 		urnAction.setEnabled(false);
 	}
 
@@ -155,6 +171,7 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 	public void manageEvent(EventObject event) {
 		descrittoriAction.setEnabled(!documentManager.isEmpty() && !utilRulesManager.isDtdDL());
 		ciclodivitaAction.setEnabled(!documentManager.isEmpty() && !utilRulesManager.isDtdDL());
+		inquadramentoAction.setEnabled(!documentManager.isEmpty() && !utilRulesManager.isDtdDL());
 		urnAction.setEnabled(!documentManager.isEmpty());
 	}
 
@@ -183,8 +200,27 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 			}
 		}
 	}
-	
+	public void doInquadramento() {
+		Document doc = documentManager.getDocumentAsDom();
+			
+		System.err.println("inquadramento pressed");
+		
+		if (inquadramentoForm.openForm()) {
+			try {
+				EditTransaction tr = documentManager.beginEdit();
+				//todo
+				documentManager.commitEdit(tr);
+				rinumerazione.aggiorna(doc);
+			} catch (DocumentManagerException ex) {
+				logger.error(ex.getMessage(), ex);
+			}
+		
+		}
+ 
+		
+	}
 	public void doCiclodiVita() {
+		
 		Document doc = documentManager.getDocumentAsDom();
 		
 		////////////////////////////////////////////////////////////
@@ -209,75 +245,32 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		
 		/////////////////////////////////////////////////////////////
 		ciclodivita.setEventi(evs);
-		ciclodivita.setRelazioni(rels);
+		ciclodivita.setRelazioniUlteriori(rels);
+		
+//		ciclodivita.setEventi(new Evento[0]);
+//		ciclodivita.setRelazioniUlteriori(new Relazione[0]);
 		
 		
-		Evento[] eventi = ciclodivita.getEventi();
-		Relazione[] relazioni = ciclodivita.getRelazioni();
 		
-		for(int i=0; i<eventi.length; i++){
-			System.out.println("evento - "+eventi[i].toString());
+		ciclodivitaForm.setTipoDTD(documentManager.getDtdName());
+		ciclodivitaForm.setEventi(ciclodivita.getEventi());
+		ciclodivitaForm.setRelazioniUlteriori(ciclodivita.getRelazioniUlteriori());
+					
+		if (ciclodivitaForm.openForm()) {
+			try {
+				EditTransaction tr = documentManager.beginEdit();
+				
+				ciclodivita.setEventi(ciclodivitaForm.getEventi());
+				ciclodivita.setRelazioniUlteriori(ciclodivitaForm.getRelazioniUlteriori());
+				documentManager.commitEdit(tr);
+				rinumerazione.aggiorna(doc);
+			} catch (DocumentManagerException ex) {
+				logger.error(ex.getMessage(), ex);
+			}
+		
 		}
 		
-		for(int i=0; i<relazioni.length; i++){
-			System.out.println("relazioni - "+relazioni[i].toString());
-		}
-		
-//
-//		// Dividi le relazioni in relazioni legate alle vigenze e relazioni
-//		// ulteriori.
-//		// Le relazioni legate alle vigenze vengono passate all'interno delle
-//		// vigenze
-//		// stesse,
-//		// mentre le relazioni ulteriori con setRelazioni.
-//
-//		Vector relazioniUlterioriVect = new Vector();
-//
-//		for (int i = 0; i < relazioni.length; i++) {
-//			boolean found = false;
-//			for (int j = 0; j < vigenze.length; j++) {
-//				Vigenza v = vigenze[j];
-//				if (v.hasFineFonte() && relazioni[i].getId().equals(v.getFonte().getId())) {
-//					found = true;
-//					break;
-//				}
-//			}
-//			if (!found) {
-//				relazioniUlterioriVect.add(relazioni[i]);
-//			}
-//		}
-//
-//		Relazione[] relazioniUlteriori = new Relazione[relazioniUlterioriVect.size()];
-//		relazioniUlterioriVect.copyInto(relazioniUlteriori);
-//
-//		descrittoriForm.setRelazioniUlteriori(relazioniUlteriori);
-//		descrittoriForm.setVigenze(vigenze);
-		
-		
-//		Vigenza[] newVigenze = descrittoriForm.getVigenze();
-//		descrittori.setVigenze(newVigenze);
-
-//		relazioniUlteriori = descrittoriForm.getRelazioniUlteriori();
-//
-//		// Ricomponi le relazioni
-//
-//		Vector relazioniVect = new Vector();
-//		for (int i = 0; i < newVigenze.length; i++) {
-//			if (newVigenze[i].hasFineFonte()) {
-//				relazioniVect.add(newVigenze[i].getFonte());
-//			}
-//		}
-//		for (int i = 0; i < relazioniUlteriori.length; i++) {
-//			relazioniVect.add(relazioniUlteriori[i]);
-//		}
-//
-//		Relazione[] newRelazioni = new Relazione[relazioniVect.size()];
-//		relazioniVect.copyInto(newRelazioni);
-//
-//		descrittori.setRelazioni(newRelazioni);
-			
-		System.err.println("ciclodivita pressed");
-	}
+			}
 
 	public void doUrn() {
 		Document doc = documentManager.getDocumentAsDom();
@@ -569,6 +562,12 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 	public class CiclodiVitaAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
 			doCiclodiVita();
+		}
+	}
+	
+	public class InquadramentoAction extends AbstractAction {
+		public void actionPerformed(ActionEvent e) {
+			doInquadramento();
 		}
 	}
 

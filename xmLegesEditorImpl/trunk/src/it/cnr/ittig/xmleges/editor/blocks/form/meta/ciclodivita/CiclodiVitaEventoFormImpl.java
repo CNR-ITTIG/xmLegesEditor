@@ -27,8 +27,9 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.text.ParseException;
-import java.util.Date;
 import java.util.Vector;
 
 import javax.swing.JComboBox;
@@ -119,19 +120,22 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
 			
 			if (eventID == ListTextFieldElementEvent.ELEMENT_ADD) {
 
-				String nomeTag=tagTipoRelazioneSottoFormDatiEvento.getSelectedItem().toString();
+				String nomeTag=(String)tagTipoRelazioneSottoFormDatiEvento.getSelectedItem();
 				Relazione r=new Relazione(nomeTag,calcolaIDRelazione(nomeTag),urnFormRelazione.getUrn().toString());
 				e = new Evento(calcolaIDevento(), dataDatiEvento.getAsYYYYMMDD(),r);
 				
 	
 				// Se la data ? riempita, inseriamo anche la relazione
 				if (e.getData() != null) {
-//					String nomeTag = (String) ((JComboBox) form.getComponentByName("editor.meta.ciclodivita.evento.tiporelazione")).getSelectedItem();
+
 					if (nomeTag != null && urnFormRelazione.getUrn() != null) {
 						r = new Relazione(nomeTag, calcolaIDRelazione(nomeTag), urnFormRelazione.getUrn().toString());
-						e.setFonte(r);
-						e.setEffetto(tagEffettoSottoFormDatiEvento.getSelectedItem().toString());
+						e.setFonte(r);						
 						e.setTipoEvento(tagTipoEvento.getText());
+						if(nomeTag.equals("giurisprudenza")){							
+							e.setEffetto((String)tagEffettoSottoFormDatiEvento.getSelectedItem());
+						}
+						
 					} else {
 						// L'utente non ha riempito i campi per bene!
 						r = null;
@@ -156,6 +160,11 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
 				
 						if (nomeTag != null && urnFormRelazione.getUrn() != null) {
 							e.setFonte(new Relazione(nomeTag, calcolaIDRelazione(nomeTag), urnFormRelazione.getUrn().toString()));
+							if(nomeTag.equals("giurisprudenza")){							
+								e.setEffetto((String)tagEffettoSottoFormDatiEvento.getSelectedItem());
+							}
+							
+							e.setTipoEvento(tagTipoEvento.getText());
 
 						} else {
 							// L'utente non ha riempito i campi per bene!
@@ -165,8 +174,13 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
 						// Esiste gi? una relazione associata alla vigenza,
 						// perci? modifichiamo quella,
 						// in modo da mantenere lo stesso ID.
-						e.getFonte().setTagTipoRelazione(tagTipoRelazioneSottoFormDatiEvento.getSelectedItem().toString());
+						e.getFonte().setTagTipoRelazione((String)tagTipoRelazioneSottoFormDatiEvento.getSelectedItem());
 						e.getFonte().setLink(urnFormRelazione.getUrn().toString());
+						if(nomeTag.equals("giurisprudenza")){							
+							e.setEffetto((String)tagEffettoSottoFormDatiEvento.getSelectedItem());
+						}
+						
+						e.setTipoEvento(tagTipoEvento.getText());
 					}
 					
 				} else {
@@ -203,13 +217,17 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
 				urnFormRelazione.setUrn(new Urn(e.getFonte().getLink()));
 			} catch (ParseException e) {
 			}
-			tagEffettoSottoFormDatiEvento.setSelectedItem(e.getEffetto());
+			if(e.getFonte().getTagTipoRelazione().equals("giurisprudenza")){
+				tagEffettoSottoFormDatiEvento.setEnabled(true);
+				tagEffettoSottoFormDatiEvento.setSelectedItem(e.getEffetto());
+			}else
+				tagEffettoSottoFormDatiEvento.setEnabled(false);
 			
 		
 		}
 
 		public void clearFields() {
-
+			
 			dataDatiEvento.set(null);
 			tagTipoEvento.setText("");
 			tagTipoRelazioneSottoFormDatiEvento.setSelectedItem(null);			
@@ -219,8 +237,7 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
 		}
 
 		public boolean checkData() {
-			//da fare
-			return true;
+			return verifyForm();
 		}
 
 		public String getErrorMessage() {
@@ -268,10 +285,26 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
 		tagTipoRelazioneSottoFormDatiEvento.addItem("haallegato");
 		tagTipoRelazioneSottoFormDatiEvento.addItem("allegatodi");
 		
+		tagTipoRelazioneSottoFormDatiEvento.addItemListener(new ItemListener(){
+
+			public void itemStateChanged(ItemEvent e) {
+				
+				if(e.getStateChange()==ItemEvent.SELECTED){
+					if (tagTipoRelazioneSottoFormDatiEvento.getSelectedItem().equals("giurisprudenza")){
+						tagEffettoSottoFormDatiEvento.setEnabled(true);
+						
+					}else
+						tagEffettoSottoFormDatiEvento.setEnabled(false);
+				}
+				
+			}
+			
+		});		
+		
 		tagEffettoSottoFormDatiEvento = (JComboBox) sottoFormDatiEvento.getComponentByName("editor.form.meta.ciclodivita.evento.tipoeffetto");
 		tagEffettoSottoFormDatiEvento.addItem("normativo");
 		tagEffettoSottoFormDatiEvento.addItem("implementativo");
-		
+		tagEffettoSottoFormDatiEvento.setEnabled(false);
 		
 		EventiListTextFieldEditor etfe = new EventiListTextFieldEditor(sottoFormDatiEvento);
 		eventi_listtextfield.setEditor(etfe);
@@ -305,6 +338,7 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
 			for (int i = 0; i < eventi.length; i++) {
 				v.add(eventi[i]);
 			}
+			
 			dataDatiEvento.set(UtilDate.normToDate(eventi[0].getData()));
 						
 			Relazione fonte = eventi[0].getFonte();
@@ -313,7 +347,7 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
 				urnFormRelazione.setUrn(new Urn(fonte.getLink()));
 			} catch (ParseException e) {
 			}
-			
+		
 			eventi_listtextfield.setListElements(v);
 				
 		}
@@ -325,13 +359,23 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
 
 	// ////////////////////////////////////////////// FormVerifier Interface
 	public boolean verifyForm() {
-		
-//			if (dataDatiEvento.getAsDate() == null) {
-//				errorMessage = "editor.form.meta.descrittori.vigenza.msg.err.datainiziovuota";
-//				return false;
-//			}
-		//da fare
-		
+		if (dataDatiEvento.getAsDate() == null) {
+			errorMessage = "editor.form.meta.ciclodivita.eventi.msg.err.datavuota";
+			return false;
+		}
+		if(tagTipoRelazioneSottoFormDatiEvento.getSelectedItem()==null){
+			errorMessage = "editor.form.meta.ciclodivita.eventi.msg.err.tiporelvuoto";
+			return false;
+			
+		}else{
+			if(tagTipoRelazioneSottoFormDatiEvento.getSelectedItem().equals("giurisprudenza")){
+				if(tagEffettoSottoFormDatiEvento.getSelectedItem()==null){
+					errorMessage = "editor.form.meta.ciclodivita.eventi.msg.err.effettovuoto";
+					return false;					
+				}				
+			}
+		}
+							
 		return true;
 	}
 
