@@ -138,11 +138,11 @@ public class FileValidatorActionImpl implements FileValidatorAction, EventManage
 			}
 			if (!yesNo) {
 				// TODO I18n
-				sb.append("\nUtilizzare NirEditor solo per rendere valido il documento.");
+				sb.append("\nUtilizzare xmLegesEditor solo per rendere valido il documento.");
 				utilMsg.msgError(sb.toString());
 			} else {
 				// TODO I18n
-				sb.append("\nVerificare la validit? del documento?");
+				sb.append("\nVerificare la validità del documento?");
 				if (utilMsg.msgYesNo(sb.toString()))
 					doValidation();
 			}
