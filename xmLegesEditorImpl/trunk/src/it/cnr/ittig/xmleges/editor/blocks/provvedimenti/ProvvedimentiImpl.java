@@ -20,7 +20,7 @@ import java.util.Vector;
 /**
  * <h1>Implementazione del servizio <code>provvedimenti.Provvedimenti</code>.</h1>
  * <h1>Componente che gestisce l'interazione con il file xml ch contiene
- * l'elenco dei tipi di provvedimento gestibili da NirEditor
+ * l'elenco dei tipi di provvedimento gestibili da xmLegesEditor
  * <h1>Configurazione</h1>
  * <ul>
  * <li>xxx.yyy:</li>
