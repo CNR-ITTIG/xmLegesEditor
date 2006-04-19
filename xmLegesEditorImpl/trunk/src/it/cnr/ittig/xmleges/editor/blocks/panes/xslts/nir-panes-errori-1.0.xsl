@@ -32,9 +32,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <xsl:template match="/">
    <html>
         <body>
-            <xsl:apply-templates select="//processing-instruction()" />
+            <xsl:apply-templates select="//processing-instruction('error')" />
         </body>
     </html>
 </xsl:template>
+
 
 </xsl:transform>
