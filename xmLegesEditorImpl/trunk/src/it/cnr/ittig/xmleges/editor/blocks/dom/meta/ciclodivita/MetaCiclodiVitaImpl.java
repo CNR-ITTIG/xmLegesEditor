@@ -108,11 +108,19 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 	}
 	
 	public Relazione[] mergeRelazioni(Evento[] eventi, Relazione[] relazioniUlteriori){	
-		//		 Ricomponi le relazioni
+		//		 Ricomponi le relazioni eliminando quelle duplicate (caso di +eventi linkati ad 1 relazione)
 		Vector relazioniVect = new Vector();
+		boolean duplicated;
 		
 		for (int i = 0; i < eventi.length; i++) {
-			relazioniVect.add(eventi[i].getFonte());		
+			duplicated = false;
+			
+			for(int j=0; j<relazioniVect.size();j++){
+		        if(((Relazione)relazioniVect.get(j)).getId().equalsIgnoreCase(eventi[i].getFonte().getId()))
+		        	duplicated = true;
+			}
+			if(!duplicated)
+				relazioniVect.add(eventi[i].getFonte());		
 		}
 		for (int i = 0; i < relazioniUlteriori.length; i++) {
 			relazioniVect.add(relazioniUlteriori[i]);

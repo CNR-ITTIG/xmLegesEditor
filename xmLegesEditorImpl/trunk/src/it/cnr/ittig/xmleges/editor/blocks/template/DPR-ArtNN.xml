@@ -10,7 +10,7 @@
 		<pubblicazione norm="" num="" tipo="GU" />
 		<entratainvigore norm="" />
 		<redazione id="red1" nome="" norm="" />
-	    <urn>urn:nir:presidente.repubblica:decreto:aaaa-mm-gg;nir-nn</urn>
+	        <urn value="urn:nir:presidente.repubblica:decreto:aaaa-mm-gg;nir-nn"/>
 		</descrittori>
 	</meta>
 	<intestazione>
@@ -37,11 +37,11 @@
 		</articolo>
 	</articolato>
 	<formulafinale>
-		<h:p>Il presente decreto sarï¿?pubblicato nella Gazzetta Ufficiale della Repubblica italiana.
+		<h:p>Il presente decreto sarà pubblicato nella Gazzetta Ufficiale della Repubblica italiana.
 		</h:p>
 	</formulafinale> 
 	<conclusione> 
-		<dataeluogo norm="" %CODICE%>Dato a Roma, addì {gg mese aaaa}</dataeluogo> 
+		<dataeluogo norm="" codice="">Dato a Roma, addì {gg mese aaaa}</dataeluogo> 
 		<sottoscrizioni> 
 			<sottoscrivente>{presidente repubblica}</sottoscrivente>
 			<sottoscrivente>{nome}, Presidente del Consiglio dei Ministri</sottoscrivente>

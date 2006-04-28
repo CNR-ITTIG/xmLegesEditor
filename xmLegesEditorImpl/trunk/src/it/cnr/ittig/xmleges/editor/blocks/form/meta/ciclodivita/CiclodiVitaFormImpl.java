@@ -217,7 +217,8 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 		formRelazioni.setMainComponent(getClass().getResourceAsStream("Relazioni.jfrm"));
 		formRelazioni.replaceComponent("editor.form.meta.ciclodivita.relazioni.listtextfield", rel_listtextfield.getAsComponent());
 		formRelazioni.setName("editor.form.meta.ciclodivita.relazioni");
-		formRelazioni.setSize(650, 400);
+		formRelazioni.setSize(650, 500);
+		
 
 		RelListTextFieldEditor tfe = new RelListTextFieldEditor(sottoFormDatiRelazione);
 		rel_listtextfield.setEditor(tfe);
@@ -266,7 +267,7 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 	// ////////////////////////////////////////////// MetaDescrittoriForm
 	// Interface
 	public boolean openForm() {
-		form.setSize(600, 650);
+		form.setSize(650, 500);
 		form.showDialog();
 
 		return form.isOk();

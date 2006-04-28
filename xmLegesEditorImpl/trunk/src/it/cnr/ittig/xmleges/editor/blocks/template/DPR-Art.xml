@@ -10,7 +10,7 @@
 		<pubblicazione norm="" num="" tipo="GU" />
 		<entratainvigore norm="" />
 		<redazione id="red1" nome="" norm="" />
-	    <urn>urn:nir:presidente.repubblica:decreto:aaaa-mm-gg;nnn</urn>
+	        <urn value="urn:nir:presidente.repubblica:decreto:aaaa-mm-gg;nnn"/>
 		</descrittori>
 	</meta>
 	<intestazione>
@@ -44,7 +44,7 @@
 		</h:p>
 	</formulafinale> 
 	<conclusione> 
-		<dataeluogo norm="" %CODICE%>Dato a Roma, addì {gg mese aaaa}</dataeluogo> 
+		<dataeluogo norm="" codice="">Dato a Roma, addì {gg mese aaaa}</dataeluogo> 
 		<sottoscrizioni> 
 			<sottoscrivente>{presidente repubblica}</sottoscrivente>
 			<sottoscrivente>{nome}, Presidente del Consiglio dei Ministri</sottoscrivente>

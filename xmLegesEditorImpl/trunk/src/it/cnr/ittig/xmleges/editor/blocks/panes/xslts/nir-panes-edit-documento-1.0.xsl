@@ -60,6 +60,20 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	<xsl:call-template name="makeA" />
 </xsl:template> 
 
+<!-- riferimenti incompleti -->
+<xsl:template match="processing-instruction('rif')">
+	  <font color="FF3300"><u>
+	  <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">&#160;
+		<xsl:if test="string-length(.) = 0">
+			<xsl:value-of select="mapper:getTextStringIfEmpty(.)" />
+		</xsl:if>
+		<xsl:if test="string-length(.) != 0">    
+			<xsl:value-of select="substring-before(substring-after(.,'&gt;'),'&lt;')" />
+		</xsl:if>
+	 </xsl:element>
+	 </u></font>
+</xsl:template>
+
 <xsl:template name="makeA">
 	<xsl:if test="substring(@xlink:href, 1, 1)='#'">
 		<xsl:element name="a">

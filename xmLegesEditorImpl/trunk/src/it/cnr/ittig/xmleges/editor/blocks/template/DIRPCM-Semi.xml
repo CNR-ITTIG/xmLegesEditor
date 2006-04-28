@@ -10,7 +10,7 @@
 		<pubblicazione norm="" num="" tipo="GU" />
 		<entratainvigore norm="" />
 		<redazione id="red1" nome="" norm="" />
-	    <urn>urn:nir:presidente.consiglio.ministri:ordinanza:aaaa-mm-gg;nir-nnn</urn>
+	        <urn value="urn:nir:presidente.consiglio.ministri:ordinanza:aaaa-mm-gg;nir-nnn"/>
 		</descrittori>
 	</meta>
 	<intestazione>
@@ -31,7 +31,7 @@
 		<h:p/>
 	</contenitore>
 	<conclusione> 
-		<dataeluogo norm="" %CODICE%>Roma, {gg mese aaaa}</dataeluogo> 
+		<dataeluogo norm="" codice="">Roma, {gg mese aaaa}</dataeluogo> 
 		<sottoscrizioni> 
 			<sottoscrivente>Il Presidente del Consiglio dei Ministri
     			<h:br>{nome}</h:br>

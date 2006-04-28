@@ -10,7 +10,7 @@
 				<pubblicazione norm="" num="" tipo="GU" />
 				<entratainvigore norm="" />
 				<redazione id="red1" nome="" norm="" />
-	    		<urn>urn:nir:autorita:provvedimento:aaaa-mm-gg;nnn</urn>
+	    		<urn value="urn:nir:autorita:provvedimento:aaaa-mm-gg;nnn"/>
 			</descrittori>
 			</meta>
 			<contenitore xml:lang="it">

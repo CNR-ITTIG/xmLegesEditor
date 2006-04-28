@@ -324,7 +324,7 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
 	
 	public boolean openForm() {
 
-		form.setSize(740, 500);
+		form.setSize(650, 500);
 		form.showDialog();
 		return form.isOk();
 	

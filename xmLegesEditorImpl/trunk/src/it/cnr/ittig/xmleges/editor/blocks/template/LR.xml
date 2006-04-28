@@ -10,7 +10,7 @@
 		<pubblicazione norm="" num="" tipo="GU" />
 		<entratainvigore norm="" />
 		<redazione id="red1" nome="" norm="" />
-	    <urn>urn:nir:regione.nome:legge:aaaa-mm-gg;nnn</urn>
+	        <urn value="urn:nir:regione.nome:legge:aaaa-mm-gg;nnn"/>
 		</descrittori>
 	</meta>
 	<intestazione>

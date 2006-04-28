@@ -10,7 +10,7 @@
 		<pubblicazione norm="" num="" tipo="GU" />
 		<entratainvigore norm="" />
 		<redazione id="red1" nome="" norm="" />
-	    <urn>urn:nir:ministero.xxxxx:circolare:aaaa-mm-gg;nir-nnn</urn>
+	        <urn value="urn:nir:ministero.xxxxx:circolare:aaaa-mm-gg;nir-nnn"/>
 		</descrittori>
 	</meta>
 	<intestazione>
@@ -37,7 +37,7 @@
 		<h:p/>
 	</contenitore>
 	<conclusione> 
-		<dataeluogo norm="" %CODICE%>Roma, {gg mese aaaa}</dataeluogo> 
+		<dataeluogo norm="" codice="">Roma, {gg mese aaaa}</dataeluogo> 
 		<sottoscrizioni> 
 			<sottoscrivente>Il Ministro: {nome}</sottoscrivente>
 			<visto/>

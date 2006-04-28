@@ -1,0 +1,156 @@
+<!ENTITY % PredefinedSimpleTypes SYSTEM "./pst.dtd">
+%PredefinedSimpleTypes;
+
+<!--  ====================================================================  -->
+<!--     Modello dei documenti di NormeInRete (NIR)                         -->
+<!--                                                                        -->
+<!--     nirloose: definizioni globali dello schema flessibile              -->
+<!--     Dipende da: niente                                                 -->
+<!--                                                                        -->
+<!--     Release  25/04/2006                                                -->
+<!--     Fabio Vitali - UniBo e CNR-IAT                                     -->
+<!--                                                                        -->
+<!--     Per un'introduzione, si veda il documento 'note.html'              -->
+<!--  ====================================================================  -->
+<!--  ====================================================================  -->
+<!--                                                                        -->
+<!-- 	Entita' esterne: caratteri                                         -->
+<!--                                                                        -->
+<!--  ====================================================================  -->
+ 
+<!ENTITY % ISOlat1 SYSTEM "./ISOlat1.ent">
+%ISOlat1;
+<!ENTITY % ISOlat2 SYSTEM "./ISOlat2.ent">
+%ISOlat2;
+<!ENTITY % ISOgrk3 SYSTEM "./ISOgrk3.ent">
+%ISOgrk3;
+<!ENTITY % ISOdia SYSTEM "./ISOdia.ent">
+%ISOdia;
+<!ENTITY % ISOnum SYSTEM "./ISOnum.ent">
+%ISOnum;
+<!ENTITY % ISOpub SYSTEM "./ISOpub.ent">
+%ISOpub;
+<!ENTITY % ISOtech SYSTEM "./ISOtech.ent">
+%ISOtech;
+
+<!--  ====================================================================  -->
+<!--                                                                        -->
+<!-- 	Entita' specifiche del documento flessibile                        -->
+<!--                                                                        -->
+<!--  ====================================================================  -->
+<!ENTITY % Tarticolatobase "(inlinemeta?,num?,rubrica?)" >
+<!ENTITY % CMcompleto "(libro | parte | titolo | capo | sezione | paragrafo | articolo | partizione | contenitore)*" >
+<!ENTITY % CMlibro "(%Tarticolatobase;,(parte | titolo | capo | sezione | paragrafo | articolo | partizione | contenitore)*)" >
+<!ENTITY % CMparte "(%Tarticolatobase;,(libro | titolo | capo | sezione | paragrafo | articolo | partizione | contenitore)*)" >
+<!ENTITY % CMtitolo "(%Tarticolatobase;,(libro | parte | capo | sezione | paragrafo | articolo | partizione | contenitore)*)" >
+<!ENTITY % CMcapo "(%Tarticolatobase;,(libro | parte | titolo | sezione | paragrafo | articolo | partizione | contenitore)*)" >
+<!ENTITY % CMsezione "(%Tarticolatobase;,(libro | parte | titolo | capo | paragrafo | articolo | partizione | contenitore)*)" >
+<!ENTITY % CMparagrafo "(%Tarticolatobase;,(libro | parte | titolo | capo | sezione | articolo | partizione | contenitore)*)" >
+<!ENTITY % CMpartizione "(%Tarticolatobase;,(libro | parte | titolo | capo | sezione | paragrafo | articolo | partizione | contenitore)*)" >
+<!ENTITY % CMarticolo "(inlinemeta?,(num | rubrica | decorazione)+,comma*)" >
+<!ENTITY % CMcomma "(inlinemeta?,num?,(corpo | (alinea?,(el | en | ep)*,coda?)))" >
+<!ENTITY % CMel "(num,(corpo | (alinea?,(el | en | ep)*,coda?)))" >
+<!ENTITY % CMen "(num,(corpo | (alinea?,(el | en | ep)*,coda?)))" >
+<!ENTITY % CMep "(num,(corpo | (alinea?,(el | en | ep)*,coda?)))" >
+<!ENTITY % CMlista "(num,(corpo | (alinea?,(lista)*,coda?)))" >
+<!--  ====================================================================  -->
+<!--                                                                        -->
+<!-- 	Entita' tipodocumento                                              -->
+<!--                                                                        -->
+<!--  ====================================================================  -->
+<!ENTITY % NormaNazionale "Legge | LeggeCostituzionale | DecretoLegge | DecretoLegislativo | DecretoMinisteriale | RegioDecreto | Dpr | Dpcm" >
+<!ENTITY % AltreNorme "AttoDiAuthority | DecretoMinisterialeNN | DprNN | DpcmNN | LeggeRegionale" >
+<!ENTITY % DocumentiGenerici "Comunicato | DocArticolato | DocumentoNIR | SemiArticolato" >
+<!ENTITY % tipodocumento "(%NormaNazionale; | %AltreNorme; | %DocumentiGenerici;)" >
+<!--  ====================================================================  -->
+<!--                                                                        -->
+<!-- 	Entita' esterne: DTD accessori                                     -->
+<!--                                                                        -->
+<!--  ====================================================================  -->
+<!ENTITY % tipiDTD SYSTEM "./tipi.dtd">
+%tipiDTD;
+<!ENTITY % glbDTD SYSTEM "./globali.dtd">
+%glbDTD;
+<!ENTITY % txtDTD SYSTEM "./testo.dtd">
+%txtDTD;
+<!ENTITY % nrmDTD SYSTEM "./norme.dtd">
+%nrmDTD;
+<!ENTITY % ProprietarioMeta "ANY" >
+<!ENTITY % Rproprietario "%strutture;" >
+<!ENTITY % metaDTD SYSTEM "./meta.dtd">
+%metaDTD;
+<!--  ====================================================================  -->
+<!--                                                                        -->
+<!-- 	Definizione dell'elemento radice                                   -->
+<!--                                                                        -->
+<!--     Uso:                                                               -->
+<!-- 	<NIR tipo="originale"                                              -->
+<!--     	 xmlns:xlink='http://www.w3.org/1999/xlink'                    -->
+<!-- 	   	 xmlns:h='http://www.w3.org/HTML/1998/html4'                   -->
+<!--          xmlns='http://www.normeinrete.it/nir/1.0'>                    -->
+<!-- 		<Legge>                                                        -->
+<!-- 			<meta>...</meta>                                           -->
+<!-- 			<intestazione>...</intestazione>                           -->
+<!-- 			<formulainiziale>...</formulainiziale>                     -->
+<!-- 			<articolato>...</articolato>                               -->
+<!--     		<formulafinale>...</formulafinale>                         -->
+<!--     		<conclusione>...</conclusione>                             -->
+<!--     		<annessi>...</annessi>                                     -->
+<!-- 		</Legge>                                                       -->
+<!-- 	</NIR>                                                             -->
+<!--                                                                        -->
+<!--  ====================================================================  -->
+<!ELEMENT NIR %tipodocumento; >
+<!ATTLIST NIR xmlns:xlink CDATA #FIXED "http://www.w3.org/1999/xlink"
+ xmlns:h CDATA #FIXED "http://www.w3.org/HTML/1998/html4"
+ xmlns CDATA #FIXED "http://www.normeinrete.it/nir/2.1/"
+ xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
+<!--  ====================================================================  -->
+<!--                                                                        -->
+<!-- 	Elenco dei documenti articolati                                    -->
+<!--                                                                        -->
+<!--  ====================================================================  -->
+
+<!ELEMENT Legge %docarticolato; >
+<!ELEMENT LeggeCostituzionale %docarticolato; >
+<!ELEMENT DecretoLegge %docarticolato; >
+<!ELEMENT DecretoLegislativo %docarticolato; >
+<!ELEMENT DecretoMinisteriale %docarticolato; >
+<!ELEMENT RegioDecreto %docarticolato; >
+<!ELEMENT Dpr %docarticolato; >
+<!ELEMENT Dpcm %docarticolato; >
+<!ELEMENT LeggeRegionale %docarticolato; >
+
+<!ELEMENT AttoDiAuthority %semiarticolato; >
+<!ELEMENT DecretoMinisterialeNN %semiarticolato; >
+<!ELEMENT DprNN %semiarticolato; >
+<!ELEMENT DpcmNN %semiarticolato; >
+<!ELEMENT Comunicato %semiarticolato; >
+<!ELEMENT DocArticolato %docarticolato; >
+<!ELEMENT DocumentoNIR %semiarticolato; >
+<!ELEMENT SemiArticolato %semiarticolato; >
+<!ATTLIST Comunicato %nome;  >
+<!ATTLIST DocArticolato %nome;  >
+<!ATTLIST DocumentoNIR %nome;  >
+<!ATTLIST SemiArticolato %nome;  >
+<!--  =====================================================================  -->
+<!--      fine flessibile                                                    -->
+<!--  =====================================================================  -->
+<!ATTLIST NIR tipo %tipovigenza; 'originale'  >
+<!ATTLIST Legge %globalinorma;  >
+<!ATTLIST LeggeCostituzionale %globalinorma;  >
+<!ATTLIST DecretoLegge %globalinorma;  >
+<!ATTLIST DecretoLegislativo %globalinorma;  >
+<!ATTLIST DecretoMinisteriale %globalinorma;  >
+<!ATTLIST RegioDecreto %globalinorma;  >
+<!ATTLIST Dpr %globalinorma;  >
+<!ATTLIST Dpcm %globalinorma;  >
+<!ATTLIST LeggeRegionale %globalinorma;  >
+<!ATTLIST DocArticolato %globalinorma;  >
+<!ATTLIST AttoDiAuthority %globalinorma;  >
+<!ATTLIST DecretoMinisterialeNN %globalinorma;  >
+<!ATTLIST DprNN %globalinorma;  >
+<!ATTLIST DpcmNN %globalinorma;  >
+<!ATTLIST Comunicato %globalinorma;  >
+<!ATTLIST DocumentoNIR %globalinorma;  >
+<!ATTLIST SemiArticolato %globalinorma;  >

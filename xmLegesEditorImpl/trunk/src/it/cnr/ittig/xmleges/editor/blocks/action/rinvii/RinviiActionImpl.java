@@ -300,7 +300,7 @@ public class RinviiActionImpl implements RinviiAction, EventManagerListener, For
 
 		if (primorif != null) {
 			String attValue = UtilDom.getAttributeValueAsString(primorif, "xlink:href");
-			if (attValue.startsWith("#"))
+			if (attValue!=null && attValue.startsWith("#"))
 				return true;
 		}
 		return false;
@@ -316,7 +316,7 @@ public class RinviiActionImpl implements RinviiAction, EventManagerListener, For
 
 		if (primorif != null) {
 			String attValue = UtilDom.getAttributeValueAsString(primorif, "xlink:href");
-			if (attValue.startsWith("urn"))
+			if (attValue!=null && attValue.startsWith("urn"))
 				return true;
 		}
 		return false;

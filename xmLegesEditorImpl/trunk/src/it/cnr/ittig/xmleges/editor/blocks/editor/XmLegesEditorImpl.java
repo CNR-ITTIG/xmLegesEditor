@@ -80,11 +80,24 @@ public class XmLegesEditorImpl implements XmLegesEditor, Loggable, Serviceable, 
 				if (!licenseManager.checkLicense(key, text))
 					System.exit(-1);
 				else {
-					String[] files = new String[] { "dtd-2.0/globali.dtd", "dtd-2.0/meta.dtd", "dtd-2.0/namespaces.dtd", "dtd-2.0/nirbase.dtd",
-							"dtd-2.0/nircompleto.dtd", "dtd-2.0/nirflessibile.dtd", "dtd-2.0/norme.dtd", "dtd-2.0/testo.dtd", "dtd-2.0/tipi.dtd",
+					
+//					String[] files = new String[] { "dtd-2.0/globali.dtd", "dtd-2.0/meta.dtd", "dtd-2.0/namespaces.dtd", "dtd-2.0/nirbase.dtd",
+//							"dtd-2.0/nircompleto.dtd", "dtd-2.0/nirflessibile.dtd", "dtd-2.0/norme.dtd", "dtd-2.0/testo.dtd", "dtd-2.0/tipi.dtd", 
+//
+//							"dtd-2.0/ISOdia.ent", "dtd-2.0/ISOgrk3.ent", "dtd-2.0/ISOlat1.ent", "dtd-2.0/ISOlat2.ent", "dtd-2.0/ISOnum.ent",
+//							"dtd-2.0/ISOpub.ent", "dtd-2.0/ISOtech.ent",
+//
+//							"dtd-dl/dllight.dtd", "dtd-dl/dllight.spp", "dtd-dl/ISOdia.ent", "dtd-dl/ISOgrk3.ent", "dtd-dl/ISOlat1.ent", "dtd-dl/ISOlat2.ent",
+//							"dtd-dl/ISOnum.ent", "dtd-dl/ISOpub.ent", "dtd-dl/ISOtech.ent",
+//							
+//							"dtd-cnr/cnr.dtd", "dtd-cnr/globali-cnr.dtd", "dtd-cnr/meta-cnr.dtd", "dtd-cnr/nirflessibile-cnr.dtd", "dtd-cnr/norme-cnr.dtd",
+//							"dtd-cnr/testo-cnr.dtd", "dtd-cnr/tipi-cnr.dtd"};
+//					
+					String[] files = new String[] { "dtd-2.1/globali.dtd", "dtd-2.1/meta.dtd", "dtd-2.1/namespaces.dtd", "dtd-2.1/nirbase.dtd",
+							"dtd-2.1/nircompleto.dtd", "dtd-2.1/nirflessibile.dtd", "dtd-2.1/norme.dtd", "dtd-2.1/testo.dtd", "dtd-2.1/tipi.dtd", "dtd-2.1/pst.dtd",
 
-							"dtd-2.0/ISOdia.ent", "dtd-2.0/ISOgrk3.ent", "dtd-2.0/ISOlat1.ent", "dtd-2.0/ISOlat2.ent", "dtd-2.0/ISOnum.ent",
-							"dtd-2.0/ISOpub.ent", "dtd-2.0/ISOtech.ent",
+							"dtd-2.1/ISOdia.ent", "dtd-2.1/ISOgrk3.ent", "dtd-2.1/ISOlat1.ent", "dtd-2.1/ISOlat2.ent", "dtd-2.1/ISOnum.ent",
+							"dtd-2.1/ISOpub.ent", "dtd-2.1/ISOtech.ent",
 
 							"dtd-dl/dllight.dtd", "dtd-dl/dllight.spp", "dtd-dl/ISOdia.ent", "dtd-dl/ISOgrk3.ent", "dtd-dl/ISOlat1.ent", "dtd-dl/ISOlat2.ent",
 							"dtd-dl/ISOnum.ent", "dtd-dl/ISOpub.ent", "dtd-dl/ISOtech.ent",

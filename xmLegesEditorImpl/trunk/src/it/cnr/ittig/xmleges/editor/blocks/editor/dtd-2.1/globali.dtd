@@ -1,0 +1,109 @@
+<!--  =====================================================================  -->
+<!--      Modello dei documenti di NormeInRete (NIR)                         -->
+<!--                                                                         -->
+<!--      globali: elementi ed attributi comuni o generici                   -->
+<!--      Dipende da: 'nirstrict' oppure 'nirloose'                          -->
+<!--                                                                         -->
+<!--    Release  25/04/2006                                                  -->
+<!--    Fabio Vitali - UniBo e CNR-IAT                                       -->
+<!--                                                                         -->
+<!--    Per un'introduzione, si veda il documento 'note.html'                -->
+<!--  =====================================================================  -->
+<!--  =====================================================================
+
+Entita' principali
+
+=====================================================================  -->
+<!ENTITY % link " xlink:type %linktype; #FIXED 'simple'  xlink:href %uri; #IMPLIED" >
+<!ENTITY % nome " nome %NIRnome; #REQUIRED" >
+<!ENTITY % tempi " iniziovigore %idref; #IMPLIED finevigore %idref; #IMPLIED inizioefficacia %idref; #IMPLIED fineefficacia %idref; #IMPLIED" >
+<!ENTITY % vigenza " %tempi;  status %status; #IMPLIED" >
+<!ENTITY % implicita " implicita %sino; 'no' " >
+<!ENTITY % css " h:style %htmlstyle; #IMPLIED h:class %htmlclass; #IMPLIED h:title %anystring; #IMPLIED" >
+<!ENTITY % idreq " id %id; #REQUIRED" >
+<!ENTITY % idfac " id %id; #IMPLIED" >
+<!ENTITY % idnorma " id %anytoken; #IMPLIED" >
+<!ENTITY % globalireq " %css;  %idreq;  %vigenza; " >
+<!ENTITY % globalifac " %css;  %idfac;  %vigenza; " >
+<!ENTITY % globalinorma " %css;  %idnorma;  %vigenza; " >
+<!ENTITY % data " norm %NIRdate; #REQUIRED" >
+<!ENTITY % dove " codice %NIRdove; #REQUIRED" >
+<!ENTITY % codice " codice %NIRcodice; #REQUIRED" >
+<!--  =====================================================================
+
+Entita': content model comuni ai vari tipi di elementi
+
+=====================================================================  -->
+<!ENTITY % liste "h:ul | h:ol | h:dl" >
+<!ENTITY % genvuoti "vuoto | ndr" >
+<!ENTITY % geninline "inlinea" >
+<!ENTITY % genblocchi "blocco" >
+<!ENTITY % genstruct "contenitore | gerarchia | articolato" >
+<!ENTITY % txtvuoti "h:br | h:hr | h:img" >
+<!ENTITY % txtinline "h:span | h:i | h:u | h:b | h:sup | h:sub | h:a" >
+<!ENTITY % txtblocchi "h:div | h:p | h:form | h:table | %liste;" >
+<!ENTITY % nrminline "rif | irif | mrif | mod | def | atto | soggetto | luogo | ente | data | importo" >
+<!ENTITY % nrmstruct "intestazione | formulainiziale | preambolo | formulafinale | conclusione | annessi" >
+<!ENTITY % allvuoti "%genvuoti; | %txtvuoti;" >
+<!ENTITY % allinline "%geninline; | %txtinline; | %nrminline;" >
+<!ENTITY % allblocchi "%genblocchi; | %txtblocchi;" >
+<!ENTITY % allstruct "%genstruct; | %nrmstruct;" >
+<!ENTITY % elinline "%allinline; | %allvuoti;" >
+<!ENTITY % inline "(#PCDATA |%elinline;)*" >
+<!ENTITY % blocchi "(%allblocchi;)+" >
+<!ENTITY % strutture "%allstruct;+" >
+<!ENTITY % ParaLevel "(#PCDATA |%elinline; | %allblocchi;)*" >
+<!--  =====================================================================
+
+tipi aggiuntivi del DTD++
+
+=====================================================================  -->
+<!ENTITY % emptyfac "EMPTY" >
+<!ENTITY % emptyreq "EMPTY" >
+<!ENTITY % inlinefac "%inline;" >
+<!ENTITY % inlinereq "%inline;" >
+<!ENTITY % blocchireq "(%blocchi;)" >
+<!--  =====================================================================
+
+Nota del redattore
+
+=====================================================================  -->
+<!ELEMENT ndr %inline; >
+<!ATTLIST ndr %idfac;  %css;  %link;  num %idref; #IMPLIED value %anystring; #IMPLIED >
+<!--  =====================================================================
+
+Elementi generici del documento semi-articolato
+
+=====================================================================  -->
+<!ELEMENT vuoto %emptyfac; >
+<!ATTLIST vuoto %nome;  >
+<!ELEMENT inlinea %inlinefac; >
+<!ATTLIST inlinea %nome;  >
+<!ELEMENT blocco %inlinereq; >
+<!ATTLIST blocco %nome;  >
+<!ELEMENT contenitore (inlinemeta?,(%allblocchi; | contenitore | gerarchia | lista)+)>
+<!ATTLIST contenitore %globalireq;  %nome;  >
+<!ELEMENT partizione %CMpartizione; >
+<!ATTLIST partizione %nome;  >
+<!ELEMENT lista %CMlista; >
+<!ATTLIST lista %nome;  >
+<!ENTITY % gerarchiabase "EMPTY" >
+<!ELEMENT gerarchia (inlinemeta?,(l1 | l2 | l3 | l4 | l5 | l6 | l7 | l8 | l9)+)>
+<!ATTLIST gerarchia %globalireq;  %nome;  >
+<!ELEMENT l1 ((num?,tit?),(contenitore | l2 | l3 | l4 | l5 | l6 | l7 | l8 | l9)+)>
+<!ELEMENT l2 ((num?,tit?),(contenitore | l3 | l4 | l5 | l6 | l7 | l8 | l9)+)>
+<!ELEMENT l3 ((num?,tit?),(contenitore | l4 | l5 | l6 | l7 | l8 | l9)+)>
+<!ELEMENT l4 ((num?,tit?),(contenitore | l5 | l6 | l7 | l8 | l9)+)>
+<!ELEMENT l5 ((num?,tit?),(contenitore | l6 | l7 | l8 | l9)+)>
+<!ELEMENT l6 ((num?,tit?),(contenitore | l7 | l8 | l9)+)>
+<!ELEMENT l7 ((num?,tit?),(contenitore | l8 | l9)+)>
+<!ELEMENT l8 ((num?,tit?),(contenitore | l9)+)>
+<!ELEMENT l9 ((num?,tit?),(contenitore)+)>
+<!ELEMENT tit %inlinefac; >
+<!--  =====================================================================  -->
+<!--      fine del file globali.dtd                                          -->
+<!--  =====================================================================  -->
+<!ATTLIST vuoto %globalifac;  >
+<!ATTLIST inlinea %globalifac;  >
+<!ATTLIST tit %globalifac;  >
+<!ATTLIST blocco %globalireq;  >

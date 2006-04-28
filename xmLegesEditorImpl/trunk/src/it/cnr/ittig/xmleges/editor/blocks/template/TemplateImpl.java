@@ -64,9 +64,6 @@ public class TemplateImpl implements Template, Loggable {
 		String dest = "nuovo.xml";
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-		String codice = " codice=\"00100\"";
-		if (props.getProperty("DOCTYPE").indexOf("base") != -1)
-			codice = " ";
 
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -77,9 +74,6 @@ public class TemplateImpl implements Template, Loggable {
 			Pattern p = Pattern.compile("\\%([a-zA-Z]+)\\%"); // cerca stringe
 																// di tipo %any%
 			while ((line = br.readLine()) != null) {
-
-				if (line.indexOf("%CODICE%") != -1)
-					line = line.substring(0, line.indexOf('%') - 1) + codice + line.substring(line.lastIndexOf('%') + 1);
 
 				Matcher m = p.matcher(line); // e le matcha con righe intere
 				if (m.matches()) {
