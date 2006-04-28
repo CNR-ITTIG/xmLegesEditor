@@ -36,5 +36,10 @@ public interface MetaAction extends Service {
 	 * Gestione della Urn del documento.
 	 */
 	public void doUrn();
+	
+	/**
+	 * Gestione dei metadati inquadramento.
+	 */
+	public void doInquadramento();
 
 }

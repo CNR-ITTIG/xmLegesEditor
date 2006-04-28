@@ -49,7 +49,7 @@ public interface CiclodiVitaEventoForm extends Service {
 	 * 
 	 * @return evento selezionato del documento
 	 */
-	public Evento getSeletedEvento();
+	public Evento getSelectedEvento();
 	
 	
 

@@ -1,7 +1,10 @@
 package it.cnr.ittig.xmleges.editor.services.form.vigenza;
 
+import org.w3c.dom.Node;
+
 import it.cnr.ittig.services.manager.Service;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
+import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 
 /**
  * Form per la selezione di una vigenza da applicare a un testo.
@@ -21,30 +24,7 @@ import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
  */
 public interface VigenzaForm extends Service {
 
-	/**
-	 * Apre il form per la selezione della vigenza.
-	 * 
-	 * @param vigenze array con le vigenze del documento
-	 * @param testo testo per il quale selezionare la vigenza
-	 * @return vigenza selezionata, o null se l'utente ha premuto "Annulla"
-	 */
-	public Evento openForm(Evento[] vigenze, String testo);
 	
-	
-	
-	
-	/////////////////////   NUOVA    INTERFACCIA   ////////////////
-	
-	
-	/**
-	 * Apre il form per la selezione/modifica della vigenza (solo vigore).
-	 * @param testo Testo selezionato a cui applicare la vigenza o nome della partizione
-	 * @param inizioVigore
-	 * @param fineVigore
-	 * @param status  (omissis|abrogato|annullato|sospeso)
-	 * @return <code>true</code> se &egrave; stato premuto ok.
-	 */
-	public boolean openForm(String testo, Evento inizioVigore, Evento fineVigore, String status);
 	
 	/**
 	 * Apre il form per la selezione/modifica della vigenza (vigore ed efficacia)
@@ -56,36 +36,104 @@ public interface VigenzaForm extends Service {
 	 * @param status  (omissis|abrogato|annullato|sospeso)
 	 * @return <code>true</code> se &egrave; stato premuto ok.
 	 */
-	public boolean openForm(String testo, Evento inizioVigore, Evento fineVigore, Evento inizioEfficacia, Evento fineEfficacia, String status);
+
+	public boolean openForm(Node attivo);
 	
+	/**
+	 * Imposta la DTD del documento (base, completo...)
+	 * 
+	 * @param tipoDTD DTD del documento
+	 */
+	public void setTipoDTD(String tipoDTD);
+//	/**
+//	 * 
+//	 * @return
+//	 */
+//	public Evento getInizioEfficacia();
+//		
+//	/**
+//	 * 
+//	 * @return
+//	 */
+//	public Evento getFineEfficacia();
 	/**
 	 * 
 	 * @return
 	 */
 	public Evento getInizioVigore();
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public Evento getFineVigore();
-
-	/**
-	 * 
-	 * @return
-	 */
-	public Evento getInizioEfficacia();
 		
 	/**
 	 * 
 	 * @return
 	 */
-	public Evento getFineEfficacia();
+	public Evento getFineVigore();
 	
 	/**
 	 * 
 	 * @return
 	 */
 	public String getStatus();
+
+//
+//	/**
+//	 * 
+//	 * @return
+//	 */
+//	public void setInizioEfficacia(Evento inizioefficacia);
+//		
+//	/**
+//	 * 
+//	 * @return
+//	 */
+//	public void setFineEfficacia(Evento fineefficacia);
+//
+
+	/**
+	 * 
+	 * @return
+	 */
+	public void setInizioVigore(Evento iniziovigore);
+		
+	/**
+	 * 
+	 * @return
+	 */
+	public void setFineVigore(Evento finevigore);
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public void setStatus(String status);
+	
+	public VigenzaEntity getVigenza();
+	
+	public void setVigenza(VigenzaEntity vigenza);
+	
+	public void setTestoselezionato(String testo);
+	
+	
+//	/**
+//	 * 
+//	 * @return
+//	 */
+//	public Evento getInizioVigore();
+//	
+//	/**
+//	 * 
+//	 * @return
+//	 */
+//	public Evento getFineVigore();
+//	/**
+//	 * 
+//	 * @return
+//	 */
+//	public void setInizioVigore(Evento iniziovigore);
+//	
+//	/**
+//	 * 
+//	 * @return
+//	 */
+//	public void setFineVigore(Evento finevigore);
 	
 }

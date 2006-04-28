@@ -24,6 +24,8 @@ import org.w3c.dom.Node;
  * @author <a href="mailto:agnoloni@ittig.cnr.it">Tommaso Agnoloni</a>
  */
 public interface Vigenza extends Service {
+	
+	
 
 	/**
 	 * Funzione per l'abilitazione dell'azione di assegnazione della vigenza
@@ -34,7 +36,8 @@ public interface Vigenza extends Service {
 	 * @return </code>true</code> se l'azione puo' essere abilitata
 	 */
 	public boolean canSetVigenza(Node node, int start, int end);
-
+	
+	
 	/**
 	 * Funzione Dom per l'assegnazione di un intervallo di vigenza ad una
 	 * porzione di testo
@@ -47,6 +50,12 @@ public interface Vigenza extends Service {
 	 * @return </code>true</code> se la vigenza e' stata inserita
 	 *         correttamente
 	 */
-	public boolean setVigenza(Node node, int start, int end, String dataInizio, String dataFine);
+	public boolean setVigenza(Node node, int start, int end, VigenzaEntity vigenza);
+	
+	public VigenzaEntity getVigenza(Node node, int start, int end);
+	
+	public String getSelectedText();
+	
+
 
 }

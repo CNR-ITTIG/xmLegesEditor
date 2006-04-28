@@ -21,19 +21,18 @@ import it.cnr.ittig.xmleges.core.util.date.UtilDate;
  */
 public class Evento {
 
-	/** Id della vigenza */
+	/** Id dell'evento */
 	String id;
 
-	/** Data inizio vigenza normalizzata (AAAAMMGG) */
+	/** Data inizio evento normalizzata (AAAAMMGG) */
 	String data;
 
-	/** Fonte della vigenza (relazione) */
+	/** Fonte dell'evento (relazione) */
 	Relazione fonte;
 	
+	/** Tipo di evento */
 	String tipoEvento;
 	
-	String effetto;
-
     
 	public String getTipoEvento() {
 		return tipoEvento;
@@ -43,18 +42,14 @@ public class Evento {
 		this.tipoEvento = tipo;
 	}
 
-	public Evento(String id, String data, Relazione fonte) {
+	public Evento(String id, String data, Relazione fonte, String tipo) {
 		setId(id);
 		setData(data);
 		setFonte(fonte);
+		setTipoEvento(tipo);
 	}
 	
-	public Evento(String id, String data, Relazione fonte, String effetto) {
-		setId(id);
-		setData(data);
-		setFonte(fonte);
-		setEffetto(effetto);
-	}
+	
 
 	public String getId() {
 		return id;
@@ -89,13 +84,6 @@ public class Evento {
 	}
 	
 
-	public String getEffetto() {
-		return effetto;
-	}
-
-	public void setEffetto(String effetto) {
-		this.effetto = effetto;
-	}
-
+	
 
 }

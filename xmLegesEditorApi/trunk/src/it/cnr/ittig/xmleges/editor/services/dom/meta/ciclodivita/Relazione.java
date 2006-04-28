@@ -29,11 +29,22 @@ public class Relazione {
 
 	/** Link della relazione */
 	String link;
+	
+	/** Effetto della relazione */
+	String effetto;
 
 	public Relazione(String tag, String id, String link) {
 		setTagTipoRelazione(tag);
 		setId(id);
 		setLink(link);
+		setEffetto(null);
+	}
+	
+	public Relazione(String tag, String id, String link, String effetto) {
+		setTagTipoRelazione(tag);
+		setId(id);
+		setLink(link);
+		setEffetto(effetto);
 	}
 
 	public String getTagTipoRelazione() {
@@ -59,6 +70,15 @@ public class Relazione {
 	public void setLink(String link) {
 		this.link = link;
 	}
+	
+	public String getEffetto() {
+		return effetto;
+	}
+
+	public void setEffetto(String effetto) {
+		this.effetto = effetto;
+	}
+
 
 	public String toString() {
 		return tagTipoRelazione.toUpperCase() + ", " + link;

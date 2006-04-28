@@ -43,20 +43,6 @@ public interface MetaDescrittoriForm extends Service {
 	 */
 	public String[] getAlias();
 
-//	/**
-//	 * Restituisce le vigenze del documento.
-//	 * 
-//	 * @return vigenze
-//	 */
-//	public Vigenza[] getVigenze();
-//
-//	/**
-//	 * Restituisce le relazioni ulteriori (non legate alle vigenze) con altri
-//	 * documenti.
-//	 * 
-//	 * @return relazioni con altri documenti
-//	 */
-//	public Relazione[] getRelazioniUlteriori();
 
 	/**
 	 * Restituisce le altre pubblicazioni
@@ -66,7 +52,7 @@ public interface MetaDescrittoriForm extends Service {
 	public Pubblicazione[] getAltrePubblicazioni();
 
 	/**
-	 * Restituisce il tipo del documento (originale, vigente, multivigente).
+	 * Restituisce il tipo del documento (originale, monovigente, multivigente).
 	 * 
 	 * @return tipo del documento
 	 */

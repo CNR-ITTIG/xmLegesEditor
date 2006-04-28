@@ -45,7 +45,9 @@ public interface EventoForm extends Service, CommonForm {
 	 * Apre la form
 	 *
 	 */
-	public void openForm();
+	public boolean openForm();
+	
+	
 
 	
 

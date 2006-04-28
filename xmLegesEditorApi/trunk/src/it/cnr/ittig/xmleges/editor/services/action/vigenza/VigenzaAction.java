@@ -1,5 +1,7 @@
 package it.cnr.ittig.xmleges.editor.services.action.vigenza;
 
+import org.w3c.dom.Node;
+
 import it.cnr.ittig.services.manager.Service;
 
 /**
@@ -20,6 +22,6 @@ import it.cnr.ittig.services.manager.Service;
  */
 public interface VigenzaAction extends Service {
 
-	public void doNewVigenza();
+	public void doNewVigenza(Node active);
 
 }

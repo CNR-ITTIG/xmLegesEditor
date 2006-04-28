@@ -1,6 +1,9 @@
 package it.cnr.ittig.xmleges.editor.services.form.meta.inquadramento;
 
 import it.cnr.ittig.services.manager.Service;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.inquadramento.InfoMancanti;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.inquadramento.Infodoc;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.inquadramento.Oggetto;
 
 public interface InquadramentoForm extends Service{
 
@@ -13,21 +16,21 @@ public interface InquadramentoForm extends Service{
 	 */
 	public void setTipoDTD(String tipoDTD);
 
-public void setInfodoc();
+	public void setInfodoc(Infodoc infodoc);
 	
-	public void setInfomancanti();
+	public void setInfomancanti(InfoMancanti infomancanti);
 	
-	public void setOggetto();
+	public void setOggetto(Oggetto oggetto);
 	
-	public void setProponenti();
+	public void setProponenti(String[] proponenti);
 	
-	public void getInfodoc();
+	public Infodoc getInfodoc();
 	
-	public void getInfomancanti();
+	public InfoMancanti getInfomancanti();
 	
-	public void getOggetto();
+	public Oggetto getOggetto();
 	
-	public void getProponenti();
+	public String[] getProponenti();
 
 
 }
