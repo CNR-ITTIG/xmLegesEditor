@@ -134,7 +134,7 @@ public class AggiornaIdFrozenLaw {
 	}
 
 	public boolean sortNotes(Vector ndrId) {
-
+		// ordina le note dentro redazionale nello stesso ordine in cu compaiono gli ndr nel testo
 		Vector newNotes = new Vector(50, 10);
 		Node parent = null;
 
@@ -168,6 +168,8 @@ public class AggiornaIdFrozenLaw {
 			for (int i = 0; i < oldNotes.size(); i++) {
 				logger.debug("replace oldNote " + UtilDom.getAttributeValueAsString((Node) oldNotes.get(i), "id") + " with newNote "
 						+ UtilDom.getAttributeValueAsString((Node) newNotes.get(i), "id"));
+				// FIXME: non e' detto che il parent (redazionale) sia lo stesso per tutte le note; 
+				// e.g. note negli allegati
 				parent.replaceChild((Node) newNotes.get(i), (Node) oldNotes.get(i));
 			}
 			return true;
