@@ -286,6 +286,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                         <!--item action="view.pane.panes.source" /-->
                         <item action="view.pane.editor.panes.meta" />
                         <item action="view.pane.editor.panes.riferimenti" />
+                        <item action="view.pane.editor.panes.rifincompleti" />
                         <item action="view.pane.editor.panes.ndr" />
                         <item action="view.pane.editor.panes.errori" />
                         <item action="view.pane.editor.panes.commenti" />
@@ -946,11 +947,12 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 <!--pane name="panes.source"            	where="top-center"		index="3" /-->
                 <!--pane name="panes.xslteditor"           where="top-center"  	index="3" /-->
                 <pane name="editor.panes.riferimenti" 		where="bottom-center"  	index="0" />
-                <pane name="editor.panes.ndr" 				where="bottom-center"  	index="1" />
-                <pane name="editor.panes.errori" 			where="bottom-center"	index="2" />
-                <pane name="editor.panes.commenti"			where="bottom-center"	index="3" />
-                <pane name="panes.notes"				where="bottom-center"  	index="4" />
-                <pane name="panes.problems"				where="bottom-center"  	index="5" />
+                <pane name="editor.panes.rifincompleti"     where="bottom-center"  	index="1" />
+                <pane name="editor.panes.ndr" 				where="bottom-center"  	index="2" />
+                <pane name="editor.panes.errori" 			where="bottom-center"	index="3" />
+                <pane name="editor.panes.commenti"			where="bottom-center"	index="4" />
+                <pane name="panes.notes"				where="bottom-center"  	index="5" />
+                <pane name="panes.problems"				where="bottom-center"  	index="6" />
             </panes>
         </configuration>
     </component>
@@ -994,6 +996,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             <xslt   name="edit-annessi"			file="nir-panes-edit-annessi-1.0.xsl" 		/>
             <xslt   name="edit-meta"			file="nir-panes-edit-meta-1.0.xsl"			/>
             <xslt   name="riferimenti"			file="nir-panes-riferimenti-1.0.xsl"		/>
+            <xslt   name="rifincompleti"		file="nir-panes-rifincompleti-1.0.xsl"		/>
             <xslt   name="errori"				file="nir-panes-errori-1.0.xsl"				/>
             <xslt   name="commenti"				file="nir-panes-commenti-1.0.xsl"			/>
             <xslt   name="ndr"					file="nir-panes-ndr-1.0.xsl"				/>
@@ -1020,6 +1023,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             </pane>
             <pane name="editor.panes.riferimenti">
                 <xslt name="riferimenti"/>
+            </pane>
+            <pane name="editor.panes.rifincompleti">
+                <xslt name="rifincompleti"/>
             </pane>
             <pane name="editor.panes.ndr">
                 <xslt name="ndr"/>
@@ -1128,7 +1134,17 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 <element name="h:li"/>
                 <element name="h:ul"/>
                 <element name="h:ol"/>
-                <!-- escludere ciclodivita e tutti i suoi figli appena pronti -->
+                <!-- ciclodivita -->
+                <!--element name="ciclodivita" /-->
+                <!--element name="eventi" /-->
+                <!--element name="relazioni" /--> 
+                <!--element name="evento" /-->
+                <!--element name="originale" /-->
+                <!--element name="attiva" /-->
+                <!--element name="passiva" /-->
+                <!--element name="haallegato" /-->
+                <!--element name="allegatodi" /-->
+                <!--element name="giurisprudenza" /-->                
                 <element name="#PCDATA"/>
             </exclude>           
         </configuration>
