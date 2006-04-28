@@ -9,11 +9,15 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.FormVerifier;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
+import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 import it.cnr.ittig.xmleges.editor.services.form.evento.EventoForm;
 import it.cnr.ittig.xmleges.editor.services.form.vigenza.VigenzaForm;
 
+import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JTextArea;
+
+import org.w3c.dom.Node;
 
 /**
  * <h1>Implementazione del servizio
@@ -42,19 +46,30 @@ import javax.swing.JTextArea;
  * 
  * @author <a href="mailto:agnoloni@ittig.cnr.it">Tommaso Agnoloni</a>
  */
-public class VigenzaFormImpl implements VigenzaForm,  FormVerifier, Loggable, Serviceable, Initializable {
+public class VigenzaFormImpl implements VigenzaForm, FormVerifier, Loggable, Serviceable, Initializable {
 
 	Logger logger;
 
 	Form form;
 	
-	EventoForm eventoinizioform;
+	String tipoDTD;
 	
-	EventoForm eventofineform;
+	VigenzaEntity vigenza;
+	
+	EventoForm eventoiniziovigoreform;
+	
+	EventoForm eventofinevigoreform;
+	
+	JComboBox vigenzaStatus;
 
 	JList vigenzeList;
 
 	JTextArea textArea;
+	
+	Node activeNode;
+	
+	String sel_text;
+
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -64,8 +79,8 @@ public class VigenzaFormImpl implements VigenzaForm,  FormVerifier, Loggable, Se
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
 		form = (Form) serviceManager.lookup(Form.class);
-		eventoinizioform = (EventoForm) serviceManager.lookup(EventoForm.class);
-		eventofineform = (EventoForm) serviceManager.lookup(EventoForm.class);
+		eventoiniziovigoreform = (EventoForm) serviceManager.lookup(EventoForm.class);
+		eventofinevigoreform = (EventoForm) serviceManager.lookup(EventoForm.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
@@ -74,76 +89,40 @@ public class VigenzaFormImpl implements VigenzaForm,  FormVerifier, Loggable, Se
 		form.setName("editor.selezionevigenzatesto");
 		textArea = (JTextArea) form.getComponentByName("editor.selezionevigenzatesto.testo");
 		
+		form.replaceComponent("editor.selezionevigenza.eventoiniziovigore", eventoiniziovigoreform.getAsComponent());
+		form.replaceComponent("editor.selezionevigenza.eventofinevigore", eventofinevigoreform.getAsComponent());
+
+		vigenzaStatus = (JComboBox) form.getComponentByName("editor.selezionevigenza.status");
+		vigenzaStatus.addItem("omissis");
+		vigenzaStatus.addItem("abrogato");
+		vigenzaStatus.addItem("annullato");
+		vigenzaStatus.addItem("sospeso");
+		vigenzaStatus.setSelectedItem(null);
+	}
+
+	
+//	public Evento getInizioEfficacia() {
+//		
+//		return eventoiniziovigoreform.getEvento();
+//	}
+//	public Evento getFineEfficacia() {
+//			
+//		return eventofinevigoreform.getEvento();
+//	}
+public Evento getInizioVigore() {
 		
-		form.replaceComponent("editor.selezionevigenza.eventoiniziovigore", eventoinizioform.getAsComponent());
-		form.replaceComponent("editor.selezionevigenza.eventofinevigore", eventofineform.getAsComponent());
-		
-		//vigenzeList = (JList) form.getComponentByName("editor.selezionevigenzatesto.vigenzelist");
-		//vigenzeList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		return eventoiniziovigoreform.getEvento();
 	}
-
-	public Evento openForm(Evento[] vigenze, String testo) {
-
-		if (testo != null) {
-			textArea.setText(testo);
-		} else {
-			textArea.setText("");
-		} 
-
-		
-//		if (vigenze != null && vigenze.length > 0) {
-//			vigenzeList.setListData(vigenze);
-//			vigenzeList.setSelectedIndex(0);
-//		} else {
-//			vigenzeList.removeAll();
-//		}
-
-		form.setSize(600, 350);
-		form.showDialog();
-
-//		if (form.isOk()) {
-//			return (Evento) vigenzeList.getSelectedValue();
-//		} else {
-//			return null;
-//		}
-		return null;
-	}
-
-	
-	////////////////////     NUOVA    INTERFACCIA    /////////////////////// 
-	
-	public boolean openForm(String testo, Evento inizioVigore, Evento fineVigore, String status) {
-		return openForm(testo,inizioVigore,fineVigore,null,null,status);
-	}
-	
-	public boolean openForm(String testo, Evento inizioVigore, Evento fineVigore, Evento inizioEfficacia, Evento fineEfficacia, String status) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
-	public Evento getFineEfficacia() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public Evento getFineVigore() {
-		// TODO Auto-generated method stub
-		return null;
+			
+		return eventofinevigoreform.getEvento();
 	}
 
-	public Evento getInizioEfficacia() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	public Evento getInizioVigore() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	public String getStatus() {
-		// TODO Auto-generated method stub
-		return null;
+		return (String)vigenzaStatus.getSelectedItem();
 	}
 	
 	/////////////////////////////////////////////////////////////////////////
@@ -157,5 +136,90 @@ public class VigenzaFormImpl implements VigenzaForm,  FormVerifier, Loggable, Se
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	public void setTipoDTD(String tipoDTD) {
+		this.tipoDTD = tipoDTD;
+		
+	}
+
+	public void setInizioVigore(Evento iniziovigore) {
+		if(iniziovigore!=null && iniziovigore.getId()!=null)
+			eventoiniziovigoreform.setEvento(iniziovigore);
+		else
+			eventoiniziovigoreform.setEvento(null);
+	}
+
+	public void setFineVigore(Evento finevigore) {
+		if(finevigore!=null && finevigore.getId()!=null)
+			eventofinevigoreform.setEvento(finevigore);
+		else
+			eventofinevigoreform.setEvento(null);
+	}
+	public void setStatus(String status) {
+		if(status!=null && !status.trim().equals("")){
+			vigenzaStatus.setSelectedItem(status);
+		}else
+			vigenzaStatus.setSelectedItem(null);
+	}
+
+	public VigenzaEntity getVigenza() {
+		return new VigenzaEntity(eventoiniziovigoreform.getEvento(),
+				eventofinevigoreform.getEvento(),(String)vigenzaStatus.getSelectedItem(),sel_text);
+	}
+
+	public void setVigenza(VigenzaEntity vigenza) {
+		eventoiniziovigoreform.setEvento(vigenza.getEInizioVigore());
+		eventofinevigoreform.setEvento(vigenza.getEFineVigore());
+		vigenzaStatus.setSelectedItem(vigenza.getStatus());
+		
+	}
+
+	public boolean openForm(Node attivo) {
+		activeNode=attivo;
+		textArea.setText(sel_text);
+
+		form.setSize(600, 350);
+		form.showDialog();
+		return form.isOk();
+	}
+
+	public void setTestoselezionato(String testo) {
+		sel_text=testo;
+		
+	}
+//	public void setInizioEfficacia(Evento inizioefficacia) {
+//	if(inizioefficacia!=null && inizioefficacia.getId()!=null){
+//		eventoinizioform.setEvento(inizioefficacia);
+//			
+//	}else{
+//		eventoinizioform.setEvento(null);
+//	}
+//	
+//}
+
+
+//public void setFineEfficacia(Evento fineefficacia) {
+//	if(fineefficacia!=null && fineefficacia()!=null){
+//		eventofineform.setEvento(fineefficacia);
+//			
+//	}else{
+//		eventofineform.setEvento(null);
+//	}
+//	
+//}
+
+//	public Evento getInizioEfficacia() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	public Evento getFineEfficacia() {
+//		return null;
+//	}
+
+	
+
+	
+
 	
 }

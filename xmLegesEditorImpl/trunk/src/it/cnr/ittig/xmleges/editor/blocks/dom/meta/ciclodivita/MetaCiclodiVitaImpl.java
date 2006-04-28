@@ -94,9 +94,11 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 					id = relazioneNode.getAttributes().getNamedItem("id") != null ? relazioneNode.getAttributes().getNamedItem("id").getNodeValue() : null;
 					link = relazioneNode.getAttributes().getNamedItem("xlink:href") != null ? relazioneNode.getAttributes().getNamedItem("xlink:href")
 							.getNodeValue() : null;
-				    effetto=relazioneNode.getAttributes().getNamedItem("effetto") != null ? relazioneNode.getAttributes().getNamedItem("effetto").getNodeValue() : null;
-					// FIXME gestire l'effetto (per il caso giurisprudenza)
-				    relVect.add(new Relazione(tag, id, link));
+				    if(tag.equals("giurisprudenza")){
+				    	effetto=relazioneNode.getAttributes().getNamedItem("effetto") != null ? relazioneNode.getAttributes().getNamedItem("effetto").getNodeValue() : null;
+					    relVect.add(new Relazione(tag, id, link,effetto));
+				    }else 
+				    	relVect.add(new Relazione(tag, id, link));
 				}
 			}
 		}
@@ -104,22 +106,6 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 		relVect.copyInto(rel);
 		return rel;
 	}
-
-	
-	public void setRelazioni(Relazione[] relazioni) {
-		Document doc = documentManager.getDocumentAsDom();
-		try {
-			EditTransaction tr = documentManager.beginEdit();
-			if (setDOMRelazioni(relazioni)) {
-				rinumerazione.aggiorna(doc);
-				documentManager.commitEdit(tr);
-			} else
-				documentManager.rollbackEdit(tr);
-			} catch (DocumentManagerException ex) {
-				logger.error(ex.toString() + " DocumentManagerException in CiclodiVita");
-			}
-	}
-	
 	
 	public Relazione[] mergeRelazioni(Evento[] eventi, Relazione[] relazioniUlteriori){	
 		//		 Ricomponi le relazioni
@@ -165,7 +151,19 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 		
 		return relazioniUlteriori;
 	}
-	
+	public void setRelazioni(Relazione[] relazioni) {
+		Document doc = documentManager.getDocumentAsDom();
+		try {
+			EditTransaction tr = documentManager.beginEdit();
+			if (setDOMRelazioni(relazioni)) {
+				rinumerazione.aggiorna(doc);
+				documentManager.commitEdit(tr);
+			} else
+				documentManager.rollbackEdit(tr);
+			} catch (DocumentManagerException ex) {
+				logger.error(ex.toString() + " DocumentManagerException in CiclodiVita");
+			}
+	}
 	private boolean setDOMRelazioni(Relazione[] relazioni) {
 
 		Document doc = documentManager.getDocumentAsDom();
@@ -183,12 +181,14 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 			if (relazioni[i].getId() != null && relazioni[i].getLink() != null && !(relazioni[i].getLink().trim().equals(""))) {
 				Element relazione = doc.createElement(relazioni[i].getTagTipoRelazione());
 				UtilDom.setIdAttribute(relazione, relazioni[i].getId());
-				relazione.setAttribute("xlink:href", relazioni[i].getLink());
-				utilRulesManager.orderedInsertChild(relazioniNode,relazione);
-				// FIXME settare l'attributo "effetto" se c'e'
+				relazione.setAttribute("xlink:href", relazioni[i].getLink());				
+				if( (relazioni[i].getEffetto()!=null)&&(!relazioni[i].getEffetto().equals(""))){
+					relazione.setAttribute("effetto", relazioni[i].getEffetto());
+				}
+				if(!utilRulesManager.orderedInsertChild(relazioniNode,relazione))
+					System.out.println("relazione non inserita");				
 			}
-		}
-		
+		}		
 		// se ho svuotato il nodo relazioni lo rimetto vuoto perchè è obbligatorio
 		if(relazioniNode.getChildNodes().getLength()==0)
 			relazioniNode = utilRulesManager.getNodeTemplate("relazioni");
@@ -213,20 +213,22 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 		Document doc = documentManager.getDocumentAsDom();
 		NodeList eventiList = doc.getElementsByTagName("evento");
 		Vector eventiVect = new Vector();
-		String id, data;
+		String id, data, tipo;
 
 		for (int i = 0; i < eventiList.getLength();i++) {
 			Node eventoNode = eventiList.item(i);
 			id = eventoNode.getAttributes().getNamedItem("id") != null ? eventoNode.getAttributes().getNamedItem("id").getNodeValue() : null;
 			data = eventoNode.getAttributes().getNamedItem("data") != null ? eventoNode.getAttributes().getNamedItem("data").getNodeValue() : null;
+			tipo = eventoNode.getAttributes().getNamedItem("tipo") != null ? eventoNode.getAttributes().getNamedItem("tipo").getNodeValue() : null;
 			Node nodeFonte = eventoNode.getAttributes().getNamedItem("fonte");
 			if (nodeFonte != null) {
 				Relazione fonte = getRelazioneById(nodeFonte.getNodeValue());
-				eventiVect.add(new Evento(id, data, fonte));
+				eventiVect.add(new Evento(id, data, fonte,tipo));
 			}
 		}
 		Evento[] eventi = new Evento[eventiVect.size()];
 		eventiVect.copyInto(eventi);
+		
 		return eventi;
 	}
 
@@ -269,14 +271,19 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 				UtilDom.setAttributeValue(eventoTag, "tipo", eventi[i].getTipoEvento());
 				utilRulesManager.orderedInsertChild(eventiTag,eventoTag);
 		}
-		if (eventi.length > 0)
-		  utilRulesManager.orderedInsertChild(ciclodivitaNode,eventiTag);		
+		if (eventi.length > 0){
+		  utilRulesManager.orderedInsertChild(ciclodivitaNode,eventiTag);
+		  UtilDom.setAttributeValue(doc.getDocumentElement(),"tipo","monovigente");
+		}else
+			UtilDom.setAttributeValue(doc.getDocumentElement(),"tipo","originale");
 		
 		
 		if(missingciclodivita && eventi.length>0){
 			Node metaNode = doc.getElementsByTagName("meta").item(0);
 			utilRulesManager.orderedInsertChild(metaNode,ciclodivitaNode);
 		}
+		
+		
 		
 		return true;
 	}
@@ -290,7 +297,11 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 		    String tag = relNode.getNodeName();
 			String id = relNode.getAttributes().getNamedItem("id") != null ? relNode.getAttributes().getNamedItem("id").getNodeValue() : null;
 			String link = relNode.getAttributes().getNamedItem("xlink:href") != null ? relNode.getAttributes().getNamedItem("xlink:href").getNodeValue():null;
-			return (new Relazione(tag, id, link));
+			if(tag.equals("giurisprudenza")){
+		    	String effetto=relNode.getAttributes().getNamedItem("effetto") != null ? relNode.getAttributes().getNamedItem("effetto").getNodeValue() : null;
+		    	return (new Relazione(tag, id, link,effetto));
+		    }else
+		    	return (new Relazione(tag, id, link));			
 		}
 		return null;
 	}

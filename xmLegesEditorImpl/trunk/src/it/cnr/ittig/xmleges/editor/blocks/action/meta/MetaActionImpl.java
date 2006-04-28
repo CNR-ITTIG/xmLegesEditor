@@ -106,8 +106,7 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 	
 	CiclodiVitaForm ciclodivitaForm;
 
-	UrnDocumentoForm urnDocumentoForm;
-	
+	UrnDocumentoForm urnDocumentoForm;	
 	
 	InquadramentoForm inquadramentoForm;
 
@@ -172,7 +171,7 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 	public void manageEvent(EventObject event) {
 		descrittoriAction.setEnabled(!documentManager.isEmpty() && !utilRulesManager.isDtdDL());
 		ciclodivitaAction.setEnabled(!documentManager.isEmpty() && !utilRulesManager.isDtdDL());
-		inquadramentoAction.setEnabled(!documentManager.isEmpty() && !utilRulesManager.isDtdDL());
+		inquadramentoAction.setEnabled(!documentManager.isEmpty() && !utilRulesManager.isDtdDL() && !utilRulesManager.isDtdBase());
 		urnAction.setEnabled(!documentManager.isEmpty());
 	}
 
@@ -204,49 +203,33 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 	public void doInquadramento() {
 		Document doc = documentManager.getDocumentAsDom();
 			
-		System.err.println("inquadramento pressed");
+		inquadramentoForm.setInfodoc(inquadramento.getInfodoc());
+		inquadramentoForm.setInfomancanti(inquadramento.getInfomancanti());
+		inquadramentoForm.setOggetto(inquadramento.getOggetto());
+		inquadramentoForm.setProponenti(inquadramento.getProponenti());
+		inquadramentoForm.setTipoDTD(documentManager.getDtdName());
 		
 		if (inquadramentoForm.openForm()) {
 			try {
 				EditTransaction tr = documentManager.beginEdit();
-				//todo
+				inquadramento.setInfodoc(inquadramentoForm.getInfodoc());
+				inquadramento.setInfomancanti(inquadramentoForm.getInfomancanti());
+				inquadramento.setOggetto(inquadramentoForm.getOggetto());
+				inquadramento.setProponenti(inquadramentoForm.getProponenti());
+				
 				documentManager.commitEdit(tr);
 				rinumerazione.aggiorna(doc);
 			} catch (DocumentManagerException ex) {
 				logger.error(ex.getMessage(), ex);
 			}
-		
 		}
+
  
 		
 	}
 	public void doCiclodiVita() {
 		
-		Document doc = documentManager.getDocumentAsDom();
 		
-		////////////////////////////////////////////////////////////
-
-//      POPOLAMENTO A MANO		
-		
-//		Vector relvect = new Vector();
-//		Relazione rel1 = new Relazione("passiva","rp1","urn:nir:stato:legge:2005-03-02");
-//		Relazione rel2 = new Relazione("attiva","ra2","urn:nir:stato:decreto.legge:2005-03-02");
-//		
-//		relvect.add(rel1);
-//		relvect.add(rel2);
-//		
-//		Relazione[] rels = new Relazione[relvect.size()];
-//		relvect.copyInto(rels);
-//		
-//		Vector evect = new Vector();
-//		evect.add(new Evento("t1","20050302",rel1));
-//		evect.add(new Evento("t2","20030712",rel1));
-//		evect.add(new Evento("t3","20030712",rel2));
-//		
-//		Evento[] evs = new Evento[evect.size()];
-//		evect.copyInto(evs);
-
-
 		ciclodivitaForm.setEventi(ciclodivita.getEventi());
 		ciclodivitaForm.setRelazioniUlteriori(ciclodivita.getRelazioniUlteriori(ciclodivita.getEventi(),ciclodivita.getRelazioni()));
 		
@@ -574,5 +557,7 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 			doUrn();
 		}
 	}
+
+	
 
 }

@@ -114,18 +114,9 @@ public class EventoFormImpl implements EventoForm, Loggable, Serviceable, Initia
 	}
 
 	
-	public void openForm() {
-		ciclodivitaeventoForm.setEventi(metaciclodivita.getEventi());
-		Relazione[] relazioniUlteriori = metaciclodivita.getRelazioniUlteriori(metaciclodivita.getEventi(),metaciclodivita.getRelazioni());
-		if(ciclodivitaeventoForm.openForm()){
-			// 1 - risetta tutti i nodi evento anche se non ci sono state variazioni
-			if(isUpdatedEventi(metaciclodivita.getEventi(), ciclodivitaeventoForm.getEventi())){
-				metaciclodivita.setEventi(ciclodivitaeventoForm.getEventi());
-				metaciclodivita.setRelazioni(metaciclodivita.mergeRelazioni(ciclodivitaeventoForm.getEventi(),relazioniUlteriori));
-			}
-			this.selectedEvento = ciclodivitaeventoForm.getSeletedEvento();
-			textField.setText(this.selectedEvento!=null?this.selectedEvento.toString():"");
-		}
+	public boolean openForm() {
+		return ciclodivitaeventoForm.openForm();
+		
 	}
 	
 	private boolean isUpdatedEventi(Evento[] oldEventi, Evento[] newEventi){
@@ -147,7 +138,18 @@ public class EventoFormImpl implements EventoForm, Loggable, Serviceable, Initia
 	
 	protected class EventoFormAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
-			openForm();
+			ciclodivitaeventoForm.setEventi(metaciclodivita.getEventi());
+			Relazione[] relazioniUlteriori = metaciclodivita.getRelazioniUlteriori(metaciclodivita.getEventi(),metaciclodivita.getRelazioni());
+			if(openForm()){
+				// 1 - risetta tutti i nodi evento anche se non ci sono state variazioni
+				if(isUpdatedEventi(metaciclodivita.getEventi(), ciclodivitaeventoForm.getEventi())){
+					metaciclodivita.setEventi(ciclodivitaeventoForm.getEventi());
+					metaciclodivita.setRelazioni(metaciclodivita.mergeRelazioni(ciclodivitaeventoForm.getEventi(),relazioniUlteriori));
+				}
+				selectedEvento = ciclodivitaeventoForm.getSelectedEvento();
+				textField.setText(selectedEvento!=null?selectedEvento.toString():"");
+			}
+			
 		}
 	}
 	

@@ -7,9 +7,13 @@ import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.form.Form;
+import it.cnr.ittig.xmleges.core.services.form.FormVerifier;
 import it.cnr.ittig.xmleges.core.services.form.date.DateForm;
 import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextField;
 import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextFieldEditor;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.inquadramento.InfoMancanti;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.inquadramento.Infodoc;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.inquadramento.Oggetto;
 import it.cnr.ittig.xmleges.editor.services.form.meta.inquadramento.InquadramentoForm;
 
 import java.awt.Component;
@@ -25,7 +29,7 @@ import javax.swing.JList;
 import javax.swing.JTextField;
 
 public class InquadramentoFormImpl implements InquadramentoForm, Loggable,
-		Serviceable, Initializable, ActionListener {
+		Serviceable, Initializable, ActionListener, FormVerifier {
 	
 	Logger logger;
 
@@ -52,10 +56,9 @@ public class InquadramentoFormImpl implements InquadramentoForm, Loggable,
 	
 	JButton proponentiButton;
 	
-	
 	JList proponentiList;
 
-	String[] proponenti;
+	String[] proponenti;//da fare sposta con gli altri su apiimpl
 	
 	ListTextField prop_listtextfield;
 
@@ -150,7 +153,7 @@ public class InquadramentoFormImpl implements InquadramentoForm, Loggable,
 	
 		
 	public boolean openForm() {
-		form.setSize(600, 650);
+		form.setSize(400, 600);
 		form.showDialog();
 
 		return form.isOk();
@@ -158,47 +161,158 @@ public class InquadramentoFormImpl implements InquadramentoForm, Loggable,
 	}
 
 	public void setTipoDTD(String tipoDTD) {
-		// TODO Auto-generated method stub
+		this.tipoDTD = tipoDTD;
+	}
+
+	public void setInfodoc(Infodoc infodoc) {
+		if(infodoc!=null){
+			if(infodoc.getNatura()!=null)
+				this.tagFormNatura.setText(infodoc.getNatura());
+			else
+				this.tagFormNatura.setText(" ");
+			this.tagFormInfodocNatura.setText(infodoc.getNatura());
+			if(infodoc.getNormativa()!=null)
+				this.tagFormNormativa.setText(infodoc.getNormativa());
+			else
+				this.tagFormNormativa.setText(" ");
+			this.tagFormInfoDocNormativa.setSelectedItem(infodoc.getNormativa());			
+			if(infodoc.getFunzione()!=null)
+				this.tagFormFunzione.setText(infodoc.getFunzione());
+			else
+				this.tagFormFunzione.setText(" ");
+			this.tagFormInfoDocFunzione.setSelectedItem(infodoc.getFunzione());
+			if(infodoc.getFonte()!=null)
+				this.tagFormFonte.setText(infodoc.getFonte());
+			else
+				this.tagFormFonte.setText(" ");
+			this.tagFormInfoDocFonte.setSelectedItem(infodoc.getFonte());
+		}else{
+			this.tagFormNatura.setText(" ");
+			this.tagFormNormativa.setText(" ");
+			this.tagFormFunzione.setText(" ");
+			this.tagFormFonte.setText(" ");
+			this.tagFormInfodocNatura.setText(null);
+			this.tagFormInfoDocNormativa.setSelectedItem(null);
+			this.tagFormInfoDocFunzione.setSelectedItem(null);
+			this.tagFormInfoDocFonte.setSelectedItem(null);
+			
+			
+		}
+		
+	}
+
+	public void setInfomancanti(InfoMancanti infomancanti) {
+		if(infomancanti!=null){
+			if(infomancanti.getMDatadoc()!=null){
+				this.tagFormData.setText(infomancanti.getMDatadoc());
+//				this.tagFormInfomancantiDatadoc.set(UtilDate.normToDate(infomancanti.getMDatadoc()));
+			}
+			else{
+				this.tagFormData.setText(" ");
+//				this.tagFormInfomancantiDatadoc.set(UtilDate.normToDate(""));
+			}
+			
+			if(infomancanti.getMEmanante()!=null)
+				this.tagFormEmanante.setText(infomancanti.getMEmanante());
+			else
+				this.tagFormEmanante.setText(" ");
+			this.tagFormInfomancantiEmanante.setText(infomancanti.getMEmanante());
+			if(infomancanti.getMNumdoc()!=null)
+				this.tagFormNumdoc.setText(infomancanti.getMNumdoc());
+			else
+				this.tagFormNumdoc.setText(" ");
+			this.tagFormInfomancantiNumdoc.setText(infomancanti.getMNumdoc());
+			if(infomancanti.getMTitolodoc()!=null)
+				this.tagFormTitolo.setText(infomancanti.getMTitolodoc());
+			else
+				this.tagFormTitolo.setText(" ");
+			this.tagFormInfomancantiTitolodoc.setText(infomancanti.getMTitolodoc());
+			if(infomancanti.getMTipodoc()!=null)
+				this.tagFormTipo.setText(infomancanti.getMTipodoc());
+			else
+				this.tagFormTipo.setText(" ");
+			this.tagFormInfomancantiTipodoc.setText(infomancanti.getMTipodoc());
+			
+		}else{
+			this.tagFormData.setText(" ");
+			this.tagFormEmanante.setText(" ");
+			this.tagFormNumdoc.setText(" ");
+			this.tagFormTitolo.setText(" ");
+			this.tagFormTipo.setText(" ");
+			
+			this.tagFormInfomancantiDatadoc.set(null);
+			this.tagFormInfomancantiEmanante.setText(null);
+			this.tagFormInfomancantiNumdoc.setText(null);
+			this.tagFormInfomancantiTitolodoc.setText(null);
+			this.tagFormInfomancantiTipodoc.setText(null);
+			
+			
+		}
+			
+		
+	}
+
+	public void setOggetto(Oggetto oggetto) {
+		if(oggetto!=null){
+			if(oggetto.getAttivita()!=null)
+				this.tagFormAttivita.setText(oggetto.getAttivita());
+			else
+				this.tagFormAttivita.setText("");
+			this.tagFormOggettoAttivita.setText(oggetto.getAttivita());
+			if(oggetto.getDestinatario()!=null)
+				this.tagFormDestinatario.setText(oggetto.getDestinatario());
+			else
+				this.tagFormDestinatario.setText("");
+			this.tagFormOggettoDestinatario.setText(oggetto.getDestinatario());
+			if(oggetto.getFinalita()!=null)
+				this.tagFormFinalita.setText(oggetto.getFinalita());
+			else
+				this.tagFormFinalita.setText("");
+			this.tagFormOggettoFinalita.setText(oggetto.getFinalita());
+			if(oggetto.getTerritorio()!=null)
+				this.tagFormTerritorio.setText(oggetto.getTerritorio());
+			else
+				this.tagFormTerritorio.setText("");
+			this.tagFormOggettoTerritorio.setText(oggetto.getTerritorio());
+		}else{
+			this.tagFormAttivita.setText("");
+			this.tagFormDestinatario.setText("");
+			this.tagFormFinalita.setText("");
+			this.tagFormTerritorio.setText("");
+			this.tagFormOggettoAttivita.setText(null);
+			this.tagFormOggettoDestinatario.setText(null);
+			this.tagFormOggettoFinalita.setText(null);
+			this.tagFormOggettoTerritorio.setText(null);
+			
+		}
 
 	}
 
-	public void setInfodoc() {
-		// TODO Auto-generated method stub
+	public void setProponenti(String[] proponenti) {
+		if (proponenti != null) {
+			this.proponenti = proponenti;
+			proponentiList.setListData(proponenti);
+		}
 
 	}
 
-	public void setInfomancanti() {
-		// TODO Auto-generated method stub
+	public Infodoc getInfodoc() {
+		return (new Infodoc(tagFormNatura.getText(),tagFormNormativa.getText(),tagFormFunzione.getText(),tagFormFonte.getText()));
 
 	}
 
-	public void setOggetto() {
-		// TODO Auto-generated method stub
+	public InfoMancanti getInfomancanti() {
+		return (new InfoMancanti(tagFormTitolo.getText(),tagFormTipo.getText(),tagFormData.getText(),tagFormNumdoc.getText(),tagFormEmanante.getText()));
 
 	}
 
-	public void setProponenti() {
-		// TODO Auto-generated method stub
+	public Oggetto getOggetto() {
+		return (new Oggetto(tagFormFinalita.getText(),tagFormDestinatario.getText(),tagFormTerritorio.getText(),tagFormAttivita.getText()));
 
 	}
 
-	public void getInfodoc() {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void getInfomancanti() {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void getOggetto() {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void getProponenti() {
-		// TODO Auto-generated method stub
+	public String[] getProponenti() {
+		return proponenti;
 
 	}
 
@@ -234,8 +348,8 @@ public class InquadramentoFormImpl implements InquadramentoForm, Loggable,
 		tagFormNatura = (JLabel) form.getComponentByName("editor.form.meta.inquadramento.infodoc.natura_label");
 		
 		tagFormInfoDocNormativa = (JComboBox) formDatiInfodoc.getComponentByName("editor.form.meta.inquadramento.infodoc.normativa");
-		tagFormInfoDocNormativa.addItem("Si");
-		tagFormInfoDocNormativa.addItem("No");
+		tagFormInfoDocNormativa.addItem("si");
+		tagFormInfoDocNormativa.addItem("no");
 		tagFormInfoDocNormativa.setSelectedItem(null);
 		tagFormNormativa = (JLabel) form.getComponentByName("editor.form.meta.inquadramento.infodoc.normativa_label");
 		
@@ -310,14 +424,17 @@ public class InquadramentoFormImpl implements InquadramentoForm, Loggable,
 	public void actionPerformed(ActionEvent e) {
 		 if (e.getSource().equals(infodocButton)) { // INFODOC
 			 formDatiInfodoc.showDialog();	
+			 
 			 if (formDatiInfodoc.isOk()) {
-				 
-				 tagFormNatura.setText(tagFormInfodocNatura.getText());					
-				 tagFormNormativa.setText((String)tagFormInfoDocNormativa.getSelectedItem());				
+							 
+				 tagFormNatura.setText(tagFormInfodocNatura.getText());
+				 String prova=(String)tagFormInfoDocNormativa.getSelectedItem();
+				 tagFormNormativa.setText(prova);				
 				 tagFormFunzione.setText((String)tagFormInfoDocFunzione.getSelectedItem());				
 				 tagFormFonte.setText((String)tagFormInfoDocFonte.getSelectedItem());
-					
+				
 			 }
+			 tagFormNormativa.revalidate();
 
 		 }else if (e.getSource().equals(infomancButton)) { // INFOMANC
 			 formDatiInfomancanti.showDialog();	
@@ -363,6 +480,18 @@ public class InquadramentoFormImpl implements InquadramentoForm, Loggable,
 
 		 }
 	}
+
+	public boolean verifyForm() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public String getErrorMessage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 			
 
 

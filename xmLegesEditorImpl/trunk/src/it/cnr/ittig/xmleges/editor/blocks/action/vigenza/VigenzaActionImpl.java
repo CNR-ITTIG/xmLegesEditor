@@ -15,9 +15,11 @@ import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
+import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.editor.services.action.vigenza.VigenzaAction;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.MetaDescrittori;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.Vigenza;
+import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 import it.cnr.ittig.xmleges.editor.services.form.vigenza.VigenzaForm;
 
 import java.awt.event.ActionEvent;
@@ -26,6 +28,7 @@ import java.util.EventObject;
 import javax.swing.AbstractAction;
 
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * <h1>Implementazione del servizio
@@ -65,20 +68,20 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 	EventManager eventManager;
 
 	DocumentManager documentManager;
+	
+	UtilRulesManager utilRulesManager;
 
 	SelectionManager selectionManager;
 
 	Vigenza vigenza;
 
 	VigenzaForm vigenzaForm;
-
-	MetaDescrittori descrittori;
-
-	Node activeNode;
-
+	
 	UtilMsg utilMsg;
 
 	AbstractAction vigenzaAction = new vigenzaAction();
+	
+	Node activeNode;
 
 	int start, end;
 
@@ -92,10 +95,10 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 		actionManager = (ActionManager) serviceManager.lookup(ActionManager.class);
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
+		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 		vigenza = (Vigenza) serviceManager.lookup(Vigenza.class);
 		vigenzaForm = (VigenzaForm) serviceManager.lookup(VigenzaForm.class);
-		descrittori = (MetaDescrittori) serviceManager.lookup(MetaDescrittori.class);
 		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 	}
 
@@ -109,37 +112,48 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 	}
 
 	public void manageEvent(EventObject event) {
-		if (event instanceof SelectionChangedEvent && !documentManager.isEmpty()) {
+		
+		if (event instanceof SelectionChangedEvent && !documentManager.isEmpty() && !utilRulesManager.isDtdBase()) {
 			activeNode = ((SelectionChangedEvent) event).getActiveNode();
 			logger.debug("enable vigenza");
 			start = ((SelectionChangedEvent) event).getTextSelectionStart();
 			end = ((SelectionChangedEvent) event).getTextSelectionEnd();
-			vigenzaAction.setEnabled(true);
-			//vigenzaAction.setEnabled(vigenza.canSetVigenza(activeNode, start, end));
+
+			vigenzaAction.setEnabled(vigenza.canSetVigenza(activeNode, start, end));//||vigenza.canSetVigenzaSpan(activeNode, start, end));
+
 		}
 		if (event instanceof DocumentClosedEvent || event instanceof DocumentOpenedEvent)
 			vigenzaAction.setEnabled(false);
 	}
 
-	public void doNewVigenza() {
-		Node node = selectionManager.getActiveNode();
-		start = selectionManager.getTextSelectionStart();
-		end = selectionManager.getTextSelectionEnd();
+	public void doNewVigenza(Node active) {
 		
-		
-		vigenzaForm.openForm(null,null);
+		if(active!=null){
 
-//		Evento vigSelected;
-//		if (null == descrittori.getVigenze() || descrittori.getVigenze().length == 0)
-//			utilMsg.msgError("editor.partizioni.vigenza.error.novigenze");
-//		else {
-//			if ((vigSelected = vigenzaForm.openForm(descrittori.getVigenze(), node.getNodeValue().trim().substring(start, end))) != null)
-//				// vigenza.setVigenza(node,start,end,vigSelected.getInizio(),vigSelected.getFine());
-//				// // con le date
-//				vigenza.setVigenza(node, start, end, vigSelected.getId(), vigSelected.getId()); // con
-//			// gli
-//			// id
-//		}
+			VigenzaEntity vig = vigenza.getVigenza(active,start,end);
+			Evento[] eventi_vig=new Evento[2];
+			if(vig!=null){
+				eventi_vig[0]=vig.getEInizioVigore();
+				eventi_vig[1]=vig.getEFineVigore();
+				vigenzaForm.setInizioVigore(eventi_vig[0]);
+				vigenzaForm.setFineVigore(eventi_vig[1]);
+				vigenzaForm.setStatus(vig.getStatus());
+				
+				
+			}else{
+				eventi_vig=null;
+				vigenzaForm.setInizioVigore(null);
+				vigenzaForm.setFineVigore(null);
+				vigenzaForm.setStatus(null);				
+			}
+			vigenzaForm.setTestoselezionato(vigenza.getSelectedText());
+	
+			if(vigenzaForm.openForm(active)){
+				
+				vigenza.setVigenza(active,start,end, vigenzaForm.getVigenza());
+								
+			}
+		}
 		
 	}
 
@@ -147,7 +161,8 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 	public class vigenzaAction extends AbstractAction {
 
 		public void actionPerformed(ActionEvent e) {
-			doNewVigenza();
+			if(activeNode!=null)
+				doNewVigenza(activeNode);
 		}
 	}
 

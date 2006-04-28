@@ -22,6 +22,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.text.ParseException;
 import java.util.Vector;
 
@@ -94,6 +96,8 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 	ListTextField rel_listtextfield;
 
 	JComboBox tagSottoFormDatiRelazione;
+	
+	JComboBox tagEffettoSottoFormDatiRelazione;
 
 	UrnForm urnFormRelazioni;
 
@@ -219,6 +223,11 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 		rel_listtextfield.setEditor(tfe);
 		rel_listtextfield.addListTextFieldElementListener(tfe);
 
+		tagEffettoSottoFormDatiRelazione = (JComboBox) sottoFormDatiRelazione.getComponentByName("editor.form.meta.ciclodivita.relazione.tipoeffetto");
+		tagEffettoSottoFormDatiRelazione.addItem("normativo");
+		tagEffettoSottoFormDatiRelazione.addItem("implementativo");
+		tagEffettoSottoFormDatiRelazione.setEnabled(false);
+		
 		tagSottoFormDatiRelazione = (JComboBox) sottoFormDatiRelazione.getComponentByName("editor.form.meta.ciclodivita.relazioni.tipo");
 		tagSottoFormDatiRelazione.addItem("originale");
 		tagSottoFormDatiRelazione.addItem("attiva");
@@ -226,6 +235,26 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 		tagSottoFormDatiRelazione.addItem("giurisprudenza");
 		tagSottoFormDatiRelazione.addItem("haallegato");
 		tagSottoFormDatiRelazione.addItem("allegatodi");
+		
+		tagSottoFormDatiRelazione.addItemListener(new ItemListener(){
+
+			public void itemStateChanged(ItemEvent e) {
+				
+				if(e.getStateChange()==ItemEvent.SELECTED){
+					if (tagSottoFormDatiRelazione.getSelectedItem().equals("giurisprudenza")){
+						tagEffettoSottoFormDatiRelazione.setEnabled(true);
+						
+					}else
+						tagEffettoSottoFormDatiRelazione.setEnabled(false);
+				}
+				
+			}
+			
+		});		
+		
+		
+		
+		
 		
 
 		eventoButton = (JButton) form.getComponentByName("editor.form.meta.ciclodivita.riepilogo.eventi_btn");
@@ -251,6 +280,7 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 			formEventi.setTipoDTD(tipoDTD);
 			
 			if (formEventi.openForm()) {
+				
 				eventi = formEventi.getEventi();
 				eventiList.setListData(eventi);
 				
@@ -297,7 +327,7 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 	}
 
 	public void setEventi(Evento[] eventi) {
-		this.eventi = eventi;
+		this.eventi = eventi;		
 		eventiList.setListData(eventi);
 	}
 
@@ -308,9 +338,8 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 	 */
 	private String calcolaIDRelazione(String nomeTag) {
 
-		// TODO sarebbe da implementare in maniera un po' pi? elegante...
-		// TODO e magari spostare nelle utils
-
+//		if(true)
+//			return "r1";
 		String prefix = "r";
 
 		if (nomeTag.equals("attiva")) {
@@ -322,9 +351,9 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 		} else if (nomeTag.equals("giurisprudenza")) {
 			prefix = "rg";
 		} else if (nomeTag.equals("haallegato")) {
-			prefix = "rh";
+			prefix = "haa";
 		}else if (nomeTag.equals("allegatodi")) {
-			prefix = "rd";
+			prefix = "all";
 		}
 
 		String uID = prefix;
@@ -365,6 +394,7 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 				}
 			}
 		}
+
 		uID += (max + 1);
 		return uID;
 	}
