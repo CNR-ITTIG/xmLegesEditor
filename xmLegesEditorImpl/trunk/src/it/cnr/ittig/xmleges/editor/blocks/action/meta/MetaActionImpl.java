@@ -280,7 +280,7 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 			try {
 				tr = documentManager.beginEdit();
 				Node urnNode = UtilDom.checkAndCreate(descrittori, "urn");
-				UtilDom.setTextNode(urnNode, urn[0].toString());
+				UtilDom.setAttributeValue(urnNode,"value", urn[0].toString());
 
 				Node[] otherUrn = UtilDom.getAllNextSibling(urnNode);
 				for (int i = 0; i < otherUrn.length; i++) {
@@ -291,7 +291,7 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 				Node next = urnNode;
 				for (int i = 1; i < urn.length; i++) {
 					urnNode = doc.createElement("urn");
-					UtilDom.setTextNode(urnNode, urn[i].toString());
+					UtilDom.setAttributeValue(urnNode,"value", urn[i].toString());
 					UtilDom.insertAfter(urnNode, next);
 					next = urnNode;
 				}
@@ -420,7 +420,7 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 			try {
 				if (UtilDom.findParentByName(urn.item(i), "annessi") == null) {
 
-					urnDoc = new Urn(UtilDom.getTextNode(urn.item(i)));
+					urnDoc = new Urn(UtilDom.getAttributeValueAsString(urn.item(i),"value"));
 
 					if (null != urnDoc.getDate() && urnDoc.getDate().size() > 0 && ((String) urnDoc.getDate().get(0)).startsWith("aaaa"))
 						if (urnFromDoc.getDate() != null)
