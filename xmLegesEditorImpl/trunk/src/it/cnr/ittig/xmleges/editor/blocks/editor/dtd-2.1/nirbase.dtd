@@ -45,8 +45,8 @@ Tipi di dati
 <!ENTITY % numero "%STRING;" >
 <!ENTITY % NIRnome "%STRING;" >
 <!ENTITY % valoristatus "(omissis|abrogato|annullato|sospeso)" >
-<!ENTITY % id "(%ID;)" >
-<!ENTITY % idref "(%IDREF;)" >
+<!ENTITY % id "%ID;" >
+<!ENTITY % idref "%IDREF;" >
 <!ENTITY % htmlstyle "%STRING;" >
 <!ENTITY % htmlclass "%STRING;" >
 <!ENTITY % xmllang "%STRING;" >
