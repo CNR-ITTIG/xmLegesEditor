@@ -1,46 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" xmlns:nir="http://www.normeinrete.it/disegnilegge/1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" exclude-result-prefixes="h nir xlink" xmlns="http://www.w3.org/HTML/1998/html4" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
-	<xsl:output method="html" encoding="UTF-8" indent="yes"/>
+<xsl:stylesheet version="1.0"  xmlns:nir = "http://www.normeinrete.it/nir/1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  xmlns="http://www.w3.org/HTML/1998/html4" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<xsl:output method="html"  indent="yes"/>
 	<!-- ======================================================== -->
 	<!--                                                          -->
 	<!--  Template principale                                     -->
 	<!--                                                          -->
 	<!-- ======================================================== -->
-	<xsl:template match="nir:DisegnoLegge | nir:DocumentoNIR">
+	<xsl:template match="/">
 		<html>
 			<head>
 				<title>
-					&#160;<xsl:value-of select="//nir:emanante"/> - Disegno di Legge n. <xsl:value-of select="//nir:numDoc"/>
+					&#160;<xsl:value-of select="//nir:emanante"/>  <xsl:value-of select="//nir:numDoc"/>
 				</title>
 				<meta http-equiv="Content-Type" content="text/html"/>
-				<link href="nir-disegnilegge-style.css" rel="stylesheet"/>
 			</head>
 			<body>
-				<table cellpadding="0" cellspacing="5" border="0" width="100%">
-					<tr style="margin:top:30px; margin-bottom:30px;">
-						<td colspan="2">
-							<xsl:apply-templates select="nir:intestazione"/>
-						</td>
-					</tr>
-					<tr valign="top">
-						<!--xsl:if test="nir:articolato | nir:annessi">
-							<td width="20%" style="border: thin solid #bbbbbb; background-color: #ffffcc;">
-								<div class="toc">Sommario</div>
-								<xsl:apply-templates select="nir:articolato|nir:annessi" mode="Link"/>
-							</td>
-						</xsl:if-->
-						<td width="100%" style="padding-top:15px;">
-							<xsl:apply-templates select="nir:relazione"/>
-							<xsl:apply-templates select="nir:articolato | nir:contenitore"/>
-							<xsl:apply-templates select="nir:conclusione"/>
-							<xsl:apply-templates select="nir:annessi"/>
-							<!--xsl:apply-templates select="nir:meta"/-->
-						</td>
-					</tr>
-				</table>
+            	<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='intestazione']" />
+            	<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='formulainiziale']" />
+            	<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='articolato']|/*[name()='NIR']/*/*[name()='contenitore']|/*[name()='NIR']/*/*[name()='gerarchia']" />
+            	<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='formulafinale']" />
+            	<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='conclusione']" />
 			</body>
 		</html>
 	</xsl:template>
+	
 	<!-- ======================================================== -->
 	<!--                                                          -->
 	<!--  Template intestazione e relazione                       -->
@@ -54,162 +37,39 @@
 			<xsl:apply-templates/>
 		</div>
 	</xsl:template>
-	<xsl:template match="nir:legislatura"/>
-	<xsl:template match="nir:numDoc">
-		<div class="title">Disegno di legge n. <xsl:value-of select="."/> (<xsl:value-of select="//nir:legislatura"/>)</div>
-	</xsl:template>
-	<xsl:template match="nir:intestazione/h:div ">
-		<div class="intestazione">
-			<xsl:apply-templates/>
-		</div>
-	</xsl:template>
-	<xsl:template match="nir:relazione">
-		<xsl:apply-templates/>
-		<hr/>
-	</xsl:template>
-	<xsl:template match="nir:relazione/h:div">
-		<div style="margin-top:5px;">
-			<xsl:apply-templates/>
-		</div>
-	</xsl:template>
-	<xsl:template match="nir:intestazione/nir:titoloDoc | nir:intestazione/nir:tipoDoc">
-		<div class="intestazione">
-			<i>
-				<xsl:apply-templates/>
-			</i>
-		</div>
-	</xsl:template>
-	<!-- ======================================================== -->
-	<!--                                                          -->
-	<!--  Modo Link (barra a sinistra)                            -->
-	<!--                                                          -->
-	<!-- ======================================================== -->
-	<!--xsl:template match="nir:articolo" mode="Link">
-		<div class="toc-articolo">
-			<xsl:apply-templates select="nir:num | nir:rubrica" mode="Link"/>
-		</div>
-		<xsl:if test="count(nir:comma) > 5">
-			<div class="toc-comma">
-				<xsl:apply-templates select="nir:comma" mode="Link"/>
-			</div>
-		</xsl:if>
-	</xsl:template>
-	<xsl:template match="nir:articolato" mode="Link">
-		<xsl:apply-templates mode="Link"/>
-	</xsl:template>
-	<xsl:template match="nir:comma" mode="Link">
-		<xsl:apply-templates select="nir:num" mode="Link"/>
-		<xsl:if test="position() &lt; last()">, </xsl:if>
-	</xsl:template>
-	<xsl:template match="nir:num" mode="Link">
-		<a href="#{../@id}">
-			<xsl:value-of select="."/>
-		</a>
-		<xsl:if test="following-sibling::nir:rubrica"> - </xsl:if>
-	</xsl:template>
-	<xsl:template match="nir:comma/nir:num" mode="Link">
-		<a href="#{../@id}">c <xsl:apply-templates select="node()[not(@status='soppresso')]"/>
-		</a>
-	</xsl:template>
-	<xsl:template match="nir:rubrica" mode="Link">
-		<xsl:apply-templates/>
-	</xsl:template>
-	<xsl:template match="nir:annessi" mode="Link">
-		<div class="toc-{name()}">
-			<a href="#{nir:annesso[1]/@id}">Annessi</a>
-		</div>
-	</xsl:template-->
+	
+	
 	<!-- ======================================================== -->
 	<!--                                                          -->
 	<!--  Template articolato                                     -->
 	<!--                                                          -->
 	<!-- ======================================================== -->
 	<xsl:template match="nir:articolato">
-		<table border="0" cellpadding="0" cellspacing="10" width="100%">
-			<xsl:choose>
-				<xsl:when test="//@tipo='modificato'">
-					<xsl:apply-templates select="//nir:titoloDoc" mode="parallelo"/>
-					<xsl:apply-templates mode="parallelo"/>
-				</xsl:when>
-				<xsl:otherwise>
+		<table border="0" cellpadding="0" cellspacing="10" width="100%">			
 					<xsl:apply-templates/>
-				</xsl:otherwise>
-			</xsl:choose>
 		</table>
 	</xsl:template>
-	<xsl:template match="nir:intestazione/nir:titoloDoc" mode="parallelo">
-		<tr>
-			<td width="50%" valign="top">
-				<div class="intestazione">
+	
+	<xsl:template match="nir:intestazione/nir:titoloDoc">
+				<div class="title">
 					<b>
-						<xsl:apply-templates select="//nir:tipoDoc"/>
+						<xsl:apply-templates/>
 					</b>
 				</div>
-				<div class="intestazione">
-					<b>
-						<xsl:apply-templates>
-							<xsl:with-param name="pos">left</xsl:with-param>
-						</xsl:apply-templates>
-					</b>
-				</div>
-				<div class="intestazione">
-					<xsl:apply-templates select="//nir:sinistra"/>
-				</div>
-			</td>
-			<td width="50%" valign="top">
-				<div class="intestazione">
-					<b>
-						<xsl:apply-templates select="//nir:tipoDoc"/>
-					</b>
-				</div>
-				<div class="intestazione">
-					<b>
-						<xsl:apply-templates>
-							<xsl:with-param name="pos">right</xsl:with-param>
-						</xsl:apply-templates>
-					</b>
-				</div>
-				<div class="intestazione">
-					<xsl:apply-templates select="//nir:destra"/>
-				</div>
-			</td>
-		</tr>
 	</xsl:template>
-	<xsl:template match="nir:*" mode="parallelo">
-		<tr>
-			<td width="50%" valign="top">
+	
+	<xsl:template match="nir:*">
 				<div class="{local-name()}">
-					<xsl:if test="not(@status='inserito')">
 						<xsl:apply-templates select="nir:num">
-							<xsl:with-param name="pos">left</xsl:with-param>
 						</xsl:apply-templates>
 						<xsl:text> </xsl:text>
 						<xsl:apply-templates select="nir:rubrica | nir:corpo| nir:alinea">
-							<xsl:with-param name="pos">left</xsl:with-param>
 						</xsl:apply-templates>
-					</xsl:if>
 				</div>
-			</td>
-			<td width="50%" valign="top">
-				<div class="{local-name()}">
-					<xsl:if test="@status='inserito'">
-						<xsl:attribute name="style">font-weight: bold;</xsl:attribute>
-					</xsl:if>
-					<xsl:if test="not(@status='soppresso')">
-						<xsl:apply-templates select="nir:num">
-							<xsl:with-param name="pos">right</xsl:with-param>
-						</xsl:apply-templates>
-						<xsl:text> </xsl:text>
-					</xsl:if>
-					<xsl:apply-templates select="nir:rubrica | nir:corpo| nir:alinea">
-						<xsl:with-param name="pos">right</xsl:with-param>
-					</xsl:apply-templates>
-				</div>
-			</td>
-		</tr>
-		<xsl:apply-templates mode="parallelo"/>
+		<xsl:apply-templates />
 	</xsl:template>
-	<xsl:template match="nir:num | nir:rubrica | nir:corpo| nir:alinea" mode="parallelo"/>
+	
+	<xsl:template match="nir:num | nir:rubrica | nir:corpo| nir:alinea" />
 	<xsl:template match="nir:articolo">
 		<xsl:param name="pos">none</xsl:param>
 		<div class="articolo">
@@ -240,23 +100,14 @@
 			<xsl:with-param name="pos" select="$pos"/>
 		</xsl:apply-templates>
 	</xsl:template>
+	
 	<xsl:template match="nir:corpo | nir:alinea">
 		<xsl:param name="pos">none</xsl:param>
-		<xsl:choose>
-			<xsl:when test="($pos='left' and ../@status='inserito')"/>
-			<xsl:when test="($pos='right' and ../@status='soppresso')">
-				<i>Soppresso</i>
-			</xsl:when>
-			<xsl:when test="$pos='right' and not(.//@status) and not(../@status='inserito')">
-				<i>Identico</i>
-			</xsl:when>
-			<xsl:otherwise>
 				<xsl:apply-templates>
 					<xsl:with-param name="pos" select="$pos"/>
 				</xsl:apply-templates>
-			</xsl:otherwise>
-		</xsl:choose>
 	</xsl:template>
+	
 	<!-- ======================================================== -->
 	<!--                                                          -->
 	<!--  Template sotto il comma                                 -->
@@ -378,20 +229,6 @@
 			<xsl:apply-templates/>
 		</table>
 	</xsl:template>
-	<xsl:template match="nir:redazione">
-		<tr>
-			<td class="small">Documento creato il <xsl:value-of select="concat(substring(@norm,7,2),'/',substring(@norm,5,2),'/',substring(@norm,1,4))"/> da <a href="{@url}">
-					<xsl:value-of select="@nome"/>
-				</a>
-			</td>
-		</tr>
-	</xsl:template>
-	<xsl:template match="nir:approvazione">
-		<tr>
-			<td class="small">
-				<xsl:value-of select="//nir:tipoDoc"/> approvato il <xsl:value-of select="concat(substring(@norm,7,2),'/',substring(@norm,5,2),'/',substring(@norm,1,4))"/>.</td>
-		</tr>
-	</xsl:template>
 	<xsl:template match="nir:urn">
 		<tr>
 			<td class="small">
@@ -402,30 +239,7 @@
 		</tr>
 	</xsl:template>
 	<xsl:template match="nir:confronto"/>
-	<!-- ======================================================== -->
-	<!--                                                          -->
-	<!--  Template versioning (status="soppresso" o "inserito")   -->
-	<!--                                                          -->
-	<!-- ======================================================== -->
-	<xsl:template match="h:span[@status='soppresso']">
-		<xsl:param name="pos">none</xsl:param>
-		<xsl:if test="$pos='left'">
-			<xsl:apply-templates/>
-		</xsl:if>
-	</xsl:template>
-	<xsl:template match="h:span[@status='inserito']">
-		<xsl:param name="pos">none</xsl:param>
-		<xsl:choose>
-			<xsl:when test="$pos='right'">
-				<b>
-					<xsl:apply-templates/>
-				</b>
-			</xsl:when>
-			<xsl:when test="$pos='none'">
-				<xsl:apply-templates/>
-			</xsl:when>
-		</xsl:choose>
-	</xsl:template>
+	
 	<!-- ======================================================== -->
 	<!--                                                          -->
 	<!--  Template generici                                       -->
@@ -443,6 +257,52 @@
 			</xsl:apply-templates>
 		</xsl:element>
 	</xsl:template>
+	
+	<xsl:template match="h:span">
+		<xsl:choose>
+			<xsl:when test="@inizio!=''">
+			    <xsl:variable name="inizio_id">
+				   <xsl:value-of select="@inizio"/>
+				</xsl:variable>
+				<xsl:variable name="fine_id">
+				   <xsl:value-of select="@fine"/>
+				</xsl:variable>
+					<xsl:element name="span"> 
+						<xsl:variable name="data_inizio">
+				   			<xsl:value-of select="//nir:vigenza[@id=$inizio_id]/@inizio"/>
+						</xsl:variable>
+						<xsl:variable name="data_fine">
+				   			<xsl:value-of select="//nir:vigenza[@id=$fine_id]/@fine"/>
+						</xsl:variable>
+						<xsl:choose>
+							<xsl:when test="$data_fine!=''">
+							    <i>
+							    	[<xsl:value-of select="concat(substring($data_inizio,7,2),'/',substring($data_inizio,5,2),'/',substring($data_inizio,1,4))"/> - <xsl:value-of select="concat(substring($data_fine,7,2),'/',substring($data_fine,5,2),'/',substring($data_fine,1,4))"/>] 
+								</i>
+								<font color="#FF0000">
+									<xsl:apply-templates/>
+								</font>
+							</xsl:when>
+							<xsl:otherwise>
+							    <i>
+									[dal <xsl:value-of select="concat(substring($data_inizio,7,2),'/',substring($data_inizio,5,2),'/',substring($data_inizio,1,4))"/>]
+						        </i>
+								<font color="#006600">
+									<xsl:apply-templates/>	
+								</font>
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:element>
+			</xsl:when>
+			<xsl:otherwise>
+		    	<xsl:element name="span">
+		        	<xsl:apply-templates/>
+		    	</xsl:element>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
+	
 	<xsl:template match="nir:*">
 		<xsl:param name="pos">none</xsl:param>
 		<xsl:apply-templates>

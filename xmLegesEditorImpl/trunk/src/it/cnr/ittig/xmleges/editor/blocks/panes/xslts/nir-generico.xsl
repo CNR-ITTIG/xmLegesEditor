@@ -10,7 +10,7 @@
 		<html>
 			<head>
 				<title>
-					<xsl:value-of select="//nir:emanante"/>  <xsl:value-of select="//nir:numDoc"/>
+					&#160;<xsl:value-of select="//nir:emanante"/>  <xsl:value-of select="//nir:numDoc"/>
 				</title>
 				<meta http-equiv="Content-Type" content="text/html"/>
 				<link href="nir-generico-style.css" rel="stylesheet"/>

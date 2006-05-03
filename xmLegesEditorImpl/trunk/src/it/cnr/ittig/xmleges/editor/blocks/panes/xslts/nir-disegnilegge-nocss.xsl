@@ -13,7 +13,6 @@
 					&#160;<xsl:value-of select="//nir:emanante"/> - Disegno di Legge n. <xsl:value-of select="//nir:numDoc"/>
 				</title>
 				<meta http-equiv="Content-Type" content="text/html"/>
-				<link href="nir-disegnilegge-style.css" rel="stylesheet"/>
 			</head>
 			<body>
 				<table cellpadding="0" cellspacing="5" border="0" width="100%">
