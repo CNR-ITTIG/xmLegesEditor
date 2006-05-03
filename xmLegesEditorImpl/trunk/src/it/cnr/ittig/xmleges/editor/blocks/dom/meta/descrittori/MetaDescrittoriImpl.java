@@ -11,7 +11,6 @@ import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.MetaDescrittori;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Pubblicazione;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
@@ -144,6 +143,8 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 		Document doc = documentManager.getDocumentAsDom();
 		Node descrittoriNode = doc.getElementsByTagName("descrittori").item(0);
 
+		
+		removeTagByName("altrepubblicazioni");
 		if (pubblicazioni.length > 0) {
 			Node altrepubNode = doc.createElement("altrepubblicazioni");
 			for (int i = 0; i < pubblicazioni.length; i++) {
@@ -188,7 +189,7 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 		Vector aliasVect = new Vector();
 
 		for (int i = 0; i < aliasList.getLength(); i++)
-			aliasVect.add(UtilDom.getTextNode(aliasList.item(i)));
+			aliasVect.add(UtilDom.getAttributeValueAsString(aliasList.item(i),"value"));
 
 		String[] alias = new String[aliasVect.size()];
 		aliasVect.copyInto(alias);
@@ -199,136 +200,36 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 		Document doc = documentManager.getDocumentAsDom();
 		Node descrittoriNode = doc.getElementsByTagName("descrittori").item(0);
 
-		if (alias.length > 0) {
-			removeTagByName("alias");
-			for (int i = 0; i < alias.length; i++) {
-				Element aliasTag;
-				aliasTag = doc.createElement("alias");
-				UtilDom.setTextNode(aliasTag, alias[i]);
-				Node child = descrittoriNode.getFirstChild();
-				boolean inserted = false;
-				do {
-					try {
-						if (dtdRulesManager.queryCanInsertBefore(descrittoriNode, child, aliasTag)) {
-							UtilDom.insertAfter(aliasTag, child.getPreviousSibling());
-							inserted = true;
-						}
-						child = child.getNextSibling();
-					} catch (DtdRulesManagerException ex) {
-						logger.error(ex.getMessage(), ex);
-					}
-				} while (!inserted && child != null);
+		removeTagByName("alias");
+		for (int i = 0; i < alias.length; i++) {
+			Element aliasTag;
+			aliasTag = doc.createElement("alias");
+			UtilDom.setAttributeValue(aliasTag,"value",alias[i]);
+			Node child = descrittoriNode.getFirstChild();
+			boolean inserted = false;
+			do {
 				try {
-					if (!inserted && dtdRulesManager.queryCanAppend(descrittoriNode, aliasTag))
-						descrittoriNode.appendChild(aliasTag);
+					if (dtdRulesManager.queryCanInsertBefore(descrittoriNode, child, aliasTag)) {
+						UtilDom.insertAfter(aliasTag, child.getPreviousSibling());
+						inserted = true;
+					}
+					child = child.getNextSibling();
 				} catch (DtdRulesManagerException ex) {
 					logger.error(ex.getMessage(), ex);
 				}
+			} while (!inserted && child != null);
+			try {
+				if (!inserted && dtdRulesManager.queryCanAppend(descrittoriNode, aliasTag))
+					descrittoriNode.appendChild(aliasTag);
+			} catch (DtdRulesManagerException ex) {
+				logger.error(ex.getMessage(), ex);
 			}
 		}
+		
 	}
 
-//	public Relazione[] getRelazioni() {
-//
-//		Document doc = documentManager.getDocumentAsDom();
-//
-//		String tag, id, link;
-//		Vector relVect = new Vector();
-//
-//		NodeList relazioni = doc.getElementsByTagName("relazioni");
-//		if (relazioni.getLength() > 0) {
-//			NodeList relazioniList = relazioni.item(0).getChildNodes();
-//			for (int i = 0; i < relazioniList.getLength(); i++) {
-//				Node relazioneNode = relazioniList.item(i);
-//				if (relazioneNode.getNodeType() == Node.ELEMENT_NODE) {
-//					tag = relazioneNode.getNodeName();
-//					id = relazioneNode.getAttributes().getNamedItem("id") != null ? relazioneNode.getAttributes().getNamedItem("id").getNodeValue() : null;
-//					link = relazioneNode.getAttributes().getNamedItem("xlink:href") != null ? relazioneNode.getAttributes().getNamedItem("xlink:href")
-//							.getNodeValue() : null;
-//					relVect.add(new Relazione(tag, id, link));
-//				}
-//			}
-//		}
-//		Relazione[] rel = new Relazione[relVect.size()];
-//		relVect.copyInto(rel);
-//		return rel;
-//	}
-
-	public void setRelazioni(Relazione[] relazioni) {
-
-		Document doc = documentManager.getDocumentAsDom();
-		Node descrittoriNode = doc.getElementsByTagName("descrittori").item(0);
-
-		if (relazioni.length > 0) {
-			Node relazioniNode = doc.createElement("relazioni");
-			for (int i = 0; i < relazioni.length; i++) {
-				if (relazioni[i].getId() != null && relazioni[i].getLink() != null && !(relazioni[i].getLink().trim().equals(""))) {
-					Element relazione = doc.createElement(relazioni[i].getTagTipoRelazione());
-					UtilDom.setIdAttribute(relazione, relazioni[i].getId());
-					relazione.setAttribute("xlink:href", relazioni[i].getLink());
-					relazioniNode.appendChild(relazione);
-				}
-			}
-
-			NodeList oldTag = doc.getElementsByTagName("relazioni");
-			if (oldTag.getLength() > 0) // c'era gia' un nodo altrepubblicazioni
-				descrittoriNode.replaceChild(relazioniNode, oldTag.item(0));
-			else {
-				Node child = descrittoriNode.getFirstChild();
-				boolean inserted = false;
-				do {
-					try {
-						if (dtdRulesManager.queryCanInsertBefore(descrittoriNode, child, relazioniNode)) {
-							UtilDom.insertAfter(relazioniNode, child.getPreviousSibling());
-							inserted = true;
-						}
-						child = child.getNextSibling();
-					} catch (DtdRulesManagerException ex) {
-						logger.error(ex.getMessage(), ex);
-					}
-				} while (!inserted && child != null);
-				try {
-					if (!inserted && dtdRulesManager.queryCanAppend(descrittoriNode, relazioniNode))
-						descrittoriNode.appendChild(relazioniNode);
-				} catch (DtdRulesManagerException ex) {
-					logger.error(ex.getMessage(), ex);
-				}
-			}
-		}
-	}
 
 	
-//	private Relazione getRelazioneById(String relId) {
-//
-//		Document doc = documentManager.getDocumentAsDom();
-//
-//		// FIXME Node relNode = doc.getElementById(relId);
-//		// Questa chiamata a getElementById non funziona bene... infatti, la
-//		// prima volta che viene chiamata
-//		// (ad es. con un Document fresco fresco caricato dall'XML) restituisce
-//		// correttamente il nodo, mentre
-//		// le volte successive restituisce null, e questo malgrado debuggando si
-//		// veda che nel Document il
-//		// nodo con quell'id c'?. Per ovviare a questo problema prendiamo la
-//		// lista delle relazioni e le
-//		// scandiamo una per una, cercando quella che ha l'id desiderato.
-//
-//		Node relazioniNode = doc.getElementsByTagName("relazioni").item(0);
-//		NodeList relazioni = relazioniNode.getChildNodes();
-//		for (int i = 0; i < relazioni.getLength(); i++) {
-//			Node relNode = relazioni.item(i);
-//			// if (relNode != null && relNode.getNodeType() ==
-//			// Node.ELEMENT_NODE) {
-//			if (relNode.getAttributes().getNamedItem("id").getNodeValue().equals(relId)) {
-//				String tag = relNode.getNodeName();
-//				String id = relNode.getAttributes().getNamedItem("id") != null ? relNode.getAttributes().getNamedItem("id").getNodeValue() : null;
-//				String link = relNode.getAttributes().getNamedItem("xlink:href") != null ? relNode.getAttributes().getNamedItem("xlink:href").getNodeValue()
-//						: null;
-//				return (new Relazione(tag, id, link));
-//			}
-//		}
-//		return null;
-//	}
 
 
 	/**
