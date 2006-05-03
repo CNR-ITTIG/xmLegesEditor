@@ -298,14 +298,44 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 		return false;
 	}
 	
+//	public boolean orderedInsertChild(Node parent, Node toInsert){
+//    	Node child = parent.getFirstChild();
+//    	boolean inserted = false;
+//    	if(parent != null && toInsert != null){
+//    		while (!inserted && child != null) {
+//        		try {
+//        			if (dtdRulesManager.queryCanInsertBefore(parent, child, toInsert)) {
+//        				parent.insertBefore(toInsert,child);//UtilDom.insertAfter(toInsert, child.getPreviousSibling());
+//        				inserted = true;
+//        			}
+//        			child = child.getNextSibling();
+//        		} catch (DtdRulesManagerException ex) {
+//        			logger.error(ex.getMessage(), ex);
+//        			return false;
+//        		}
+//        	} //;
+//        	try {
+//        		if (!inserted && dtdRulesManager.queryCanAppend(parent, toInsert)){
+//        			parent.appendChild(toInsert);
+//        			inserted = true;
+//        		}
+//        	} catch (DtdRulesManagerException ex) {
+//        		logger.error(ex.getMessage(), ex);
+//        		return false;
+//        	}
+//    	}
+//	return inserted;
+//    }
+	
     public boolean orderedInsertChild(Node parent, Node toInsert){
     	Node child = parent.getFirstChild();
     	boolean inserted = false;
     	if(parent != null && toInsert != null){
+    		// prova ad inserirlo AFTER
     		while (!inserted && child != null) {
         		try {
-        			if (dtdRulesManager.queryCanInsertBefore(parent, child, toInsert)) {
-        				parent.insertBefore(toInsert,child);//UtilDom.insertAfter(toInsert, child.getPreviousSibling());
+        			if (dtdRulesManager.queryCanInsertAfter(parent, child, toInsert)) {
+        				UtilDom.insertAfter(toInsert, child);
         				inserted = true;
         			}
         			child = child.getNextSibling();
@@ -314,7 +344,23 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
         			return false;
         		}
         	} //;
+    		if(!inserted){
+    			// prova ad inserirlo BEFORE
+    			child= parent.getFirstChild();
+    			if(child != null){
+    				try {
+            			if (dtdRulesManager.queryCanInsertBefore(parent, child, toInsert)) {
+            				parent.insertBefore(toInsert, child);
+            				inserted = true;
+            			}
+            		} catch (DtdRulesManagerException ex) {
+            			logger.error(ex.getMessage(), ex);
+            			return false;
+            		}
+    			}
+    		}
         	try {
+        		// prova ad APPENDerlo
         		if (!inserted && dtdRulesManager.queryCanAppend(parent, toInsert)){
         			parent.appendChild(toInsert);
         			inserted = true;
