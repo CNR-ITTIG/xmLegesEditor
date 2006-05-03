@@ -225,6 +225,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <menu action="file.export">
                     	<item action="file.export.browser" />
                         <item action="file.export.pdf" />
+                        <item action="file.export.rtf" />                        
                         <item action="file.export.html" />
                     </menu>
                     <separator/>
@@ -1001,10 +1002,13 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             <xslt   name="commenti"				file="nir-panes-commenti-1.0.xsl"			/>
             <xslt   name="ndr"					file="nir-panes-ndr-1.0.xsl"				/>
             <xslt   name="xsl-disegnilegge" 	file="nir-disegnilegge.xsl"     		startup="true" />
+            <xslt   name="xsl-disegnilegge-nocss" 	file="nir-disegnilegge-nocss.xsl"	startup="true" />
             <xslt   name="xsl-nir"				file="nir-generico.xsl"     			startup="true" />
+            <xslt   name="xsl-nir-nocss"		file="nir-generico-nocss.xsl"  			startup="true" />
             <css    name="disegnilegge-style"   file="nir-disegnilegge-style.css"       startup="true" />
             <css    name="nir-style"      		file="nir-generico-style.css"           startup="true" />
             <xslt   name="pdf-gazzettaufficiale" file="nir-fo-gazzettaufficiale.xsl"	startup="true" />
+            <xslt   name="rtf-gazzettaufficiale" file="nir-jfor-gazzettaufficiale.xsl"	startup="true" />
         </configuration>
     </component>
 
@@ -1102,6 +1106,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  class="it.cnr.ittig.xmleges.core.blocks.util.msg.UtilMsgImpl" />
     
     <component  class="it.cnr.ittig.xmleges.core.blocks.util.pdf.UtilPdfImpl" />
+    
+    <component  class="it.cnr.ittig.xmleges.core.blocks.util.rtf.UtilRtfImpl" />
 
     <component  class="it.cnr.ittig.xmleges.core.blocks.util.rulesmanager.UtilRulesManagerImpl">
         <configuration>
