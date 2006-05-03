@@ -174,15 +174,28 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 		else
 			logger.debug("ignoredAll  vector null");
 
-		// SpellCheck su testo selezionato
-		if (start != end)
-			words = domSpellCheck.spellCheck(activeNode, start, end);
-		else
+		// AVVIO SpellCheck (testo selezionato o intero documento) 
+		if (start != end) 
+			words = domSpellCheck.spellCheck(activeNode, start, end);	
+		else 	
 			words = domSpellCheck.spellCheck(documentManager.getRootElement());
-
+		
 		if (null != words && words.length > 0 && misspelledIndex != -1) {
+
+			//debug gerardo
+			System.err.println("debug.....USCITA 1");
+
+			
+			
 			misspelledIndex = showWord(words);
+			
+			
+			
 		} else {
+
+			//debug gerardo
+			System.err.println("debug.....USCITA 2");
+
 			utilMsg.msgInfo("spellcheck.error.spellcheckend");
 			return false;
 		}
@@ -276,7 +289,6 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 			this.setSuggestions(domSpellCheck.getSpellCheck().getSuggestions(wordTextField.getText()));
 		} else if (evt.getSource() == ignoreButton) {
 			logger.debug("ignore");
-
 			if (misspelledIndex != -1 && misspelledIndex < words.length) {
 				ignored.add(words[misspelledIndex]);
 				misspelledIndex = showWord(words);
@@ -302,14 +314,18 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 			if (misspelledIndex != -1 && words.length > 0)
 				replaceWord(words[misspelledIndex]);
 
-			words = domSpellCheck.spellCheck(activeNode);
+			if (activeNode!= null) 
+			      words = domSpellCheck.spellCheck(activeNode);
+			
 			if (misspelledIndex != -1 && words.length > 0) {
 				misspelledIndex = showWord(words);
 				if (misspelledIndex == -1)
 					utilMsg.msgInfo("spellcheck.error.spellcheckend");
-			} else {
+				
+			  } else {
 				utilMsg.msgInfo("spellcheck.error.spellcheckend");
-			}
+			  }
+			
 
 			for (int i = 0; i < words.length; i++) {
 				logger.debug("after replacement misspelled words: " + i + " " + words[i].getSpellCheckWord().toString());
@@ -352,11 +368,21 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 		logger.debug("endOffset: " + word.getSpellCheckWord().getEndOffset());
 		logger.debug("replace with " + this.getWord());
 
+		System.err.println("NODO: " + UtilDom.getPathName(word.getNode()));
+		System.err.println("IN: " + oldText + " . SOSTITUISCO " + this.getWord() + " DA " + word.getSpellCheckWord().getStartOffset() + " A " + word.getSpellCheckWord().getEndOffset());		
+		
 		String newText = oldText.substring(0, word.getSpellCheckWord().getStartOffset()) + this.getWord()
 				+ oldText.substring(word.getSpellCheckWord().getEndOffset());
 		logger.debug("newText " + newText);
-
-		inserted.add(this.getWord());
+		
+		System.err.println("Nuovo: " + newText);
+		
+        //Qui aggiungo la parola "nuova sostituita" però allora devo
+		//aggiornare anche le parole di words!!!
+		inserted.add(this.getWord());  
+		
+		//provo con la vecchia parola errata
+		//inserted.add(oldText);
 
 		try {
 			tr = documentManager.beginEdit();

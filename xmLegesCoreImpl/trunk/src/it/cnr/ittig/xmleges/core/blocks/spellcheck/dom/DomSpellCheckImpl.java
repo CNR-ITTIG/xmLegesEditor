@@ -129,15 +129,23 @@ public class DomSpellCheckImpl implements DomSpellCheck, Loggable, Serviceable, 
 	}
 
 	public DomSpellCheckWord[] spellCheck(Node node) {
+		
+		// Spell su intero documento (o meglio: dal nodo passato a TUTTI i figli)
+		
 		if (node != null) {
 			Vector childNodes = new Vector();
 			Vector ret = new Vector();
 			childNodes = getTextNodes(node, childNodes);
 			for (int i = 0; i < childNodes.size(); i++) {
+				
+				//chiamata con parte del testo (nodo corrente)
 				SpellCheckWord[] spellCheckWords = spellCheck.spellCheck(((Node) childNodes.get(i)).getNodeValue());
-				if (spellCheckWords.length > 0)
-					for (int j = 0; j < spellCheckWords.length; j++)
+				if (spellCheckWords.length > 0) 
+					for (int j = 0; j < spellCheckWords.length; j++) {
 						ret.add(new DomSpellCheckWordImpl(spellCheckWords[j], (Node) childNodes.get(i)));
+						System.err.println("" + spellCheckWords[j]);
+					}		
+ 
 			}
 			if (ret.size() > 0) {
 				DomSpellCheckWord[] domWords = new DomSpellCheckWord[ret.size()];
@@ -150,12 +158,18 @@ public class DomSpellCheckImpl implements DomSpellCheck, Loggable, Serviceable, 
 	}
 
 	public DomSpellCheckWord[] spellCheck(Node node, int start, int end) {
+		
+		//Spell su SELEZIONE				
 		Vector ret = new Vector();
 		if (UtilDom.isTextNode(node)) {
-			SpellCheckWord[] spellCheckWords = spellCheck.spellCheck(node.getNodeValue().trim().substring(start, end).trim());
+			
+			//SpellCheckWord[] spellCheckWords = spellCheck.spellCheck(node.getNodeValue().trim().substring(start, end).trim());
+			SpellCheckWord[] spellCheckWords = spellCheck.spellCheck(node.getNodeValue().substring(start, end));
 			if (spellCheckWords.length > 0)
-				for (int j = 0; j < spellCheckWords.length; j++)
+				for (int j = 0; j < spellCheckWords.length; j++){
+					spellCheckWords[j].setOffsetNodo(start);
 					ret.add(new DomSpellCheckWordImpl(spellCheckWords[j], node));
+				}
 			if (ret.size() > 0) {
 				DomSpellCheckWord[] domWords = new DomSpellCheckWord[ret.size()];
 				ret.copyInto(domWords);

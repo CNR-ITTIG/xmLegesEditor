@@ -62,6 +62,18 @@ public class SpellCheckWordImpl implements SpellCheckWord {
 		return this.endOffset;
 	}
 
+	/**
+	 * Aggiorna offset rispetto al nodo
+	 * 
+	 * @return indice finale
+	 */
+	public void setOffsetNodo(int start) {
+		this.startOffset = this.startOffset + start;
+		this.endOffset = this.endOffset + start;
+	}
+
+	
+	
 	public String toString() {
 		return "Misspelled word: " + this.word + " start Offset " + this.startOffset + " end Offset " + this.endOffset;
 	}
