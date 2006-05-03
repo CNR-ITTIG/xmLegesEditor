@@ -33,6 +33,13 @@ public interface SpellCheckWord {
 	 * @return indice iniziale
 	 */
 	public int getStartOffset();
+	
+	/**
+	 * Aggiorna offset rispetto al nodo
+	 * 
+	 * @return indice finale
+	 */
+	public void setOffsetNodo(int start);
 
 	/**
 	 * Indice finale della parola errata.
