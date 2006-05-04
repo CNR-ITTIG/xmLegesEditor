@@ -110,6 +110,9 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 	Vector ignoredAll = new Vector();
 
 	Vector inserted = new Vector();
+	
+	int start;
+	int end;
 
 	EditTransaction tr;
 
@@ -159,8 +162,8 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 
 	public boolean openForm() {
 
-		int start = selectionManager.getTextSelectionStart();
-		int end = selectionManager.getTextSelectionEnd();
+		this.start = selectionManager.getTextSelectionStart();
+		this.end = selectionManager.getTextSelectionEnd();
 		activeNode = selectionManager.getActiveNode();
 		// String word;
 
@@ -314,8 +317,17 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 			if (misspelledIndex != -1 && words.length > 0)
 				replaceWord(words[misspelledIndex]);
 
-			if (activeNode!= null) 
-			      words = domSpellCheck.spellCheck(activeNode);
+			//if (activeNode!= null) 
+			//      words = domSpellCheck.spellCheck(activeNode);
+			
+			// TOMMASO: MODIFICA 04/05/06
+			
+			if (start!=end) 
+				words = domSpellCheck.spellCheck(activeNode, start, end);	
+			else 	
+				words = domSpellCheck.spellCheck(documentManager.getRootElement());
+			
+			///////////////////////////////////////
 			
 			if (misspelledIndex != -1 && words.length > 0) {
 				misspelledIndex = showWord(words);

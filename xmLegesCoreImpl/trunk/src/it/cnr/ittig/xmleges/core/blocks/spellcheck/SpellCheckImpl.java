@@ -13,19 +13,15 @@ import it.cnr.ittig.xmleges.core.services.spellcheck.SpellCheckWord;
 import it.cnr.ittig.xmleges.core.services.threads.ThreadManager;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.StringTokenizer;
 import java.util.Vector;
-
-import org.w3c.dom.Node;
 
 import com.swabunga.spell.event.SpellCheckEvent;
 import com.swabunga.spell.event.SpellCheckListener;
 import com.xmlmind.spellcheck.engine.SpellChecker;
 import com.xmlmind.spellcheck.engine.SpellException;
-import com.xmlmind.spellcheck.util.CharSequence;
+
 
 
 /**
@@ -55,12 +51,7 @@ public class SpellCheckImpl implements SpellCheck, Loggable, SpellCheckListener,
 
 	I18n i18n;
 	
-	//Attenzione MODIFICARE - MODIFICARE - MODIFICARE
-	//Attenzione MODIFICARE - MODIFICARE - MODIFICARE
-	//Attenzione MODIFICARE - MODIFICARE - MODIFICARE
-	//Attenzione MODIFICARE - MODIFICARE - MODIFICARE
-	private static String dictPath = "c:/eclipse/workspace/xmLegesEditor/temp/it/"; 
-	
+	private static String dictPath = UtilFile.getTempDirName()+"/it";
 	
 	private static String encoding = "ISO-8859-1"; 
 
@@ -71,10 +62,6 @@ public class SpellCheckImpl implements SpellCheck, Loggable, SpellCheckListener,
 	private SpellChecker spellCheck = null;
 
 	private SpellChecker checker=null;
-	
-    //private SpellDictionaryHashMap dictionary = null;
-
-	//private SpellDictionaryASpell dictionary = null;
 	
 	private List suggestions;
 
