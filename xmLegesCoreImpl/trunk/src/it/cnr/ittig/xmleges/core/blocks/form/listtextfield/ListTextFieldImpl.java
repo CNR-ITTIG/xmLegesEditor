@@ -229,6 +229,10 @@ public class ListTextFieldImpl implements ListTextField, ListSelectionListener, 
 	public Object getSelectedItem() {
 		return list.getSelectedValue();
 	}
+	
+	public void setSelectedValue(Object obj) {
+		list.setSelectedValue(obj,true);
+	}
 
 	/**
 	 * Invoca il metodo elementChanged sui listener
@@ -283,6 +287,8 @@ public class ListTextFieldImpl implements ListTextField, ListSelectionListener, 
 					int selectedElement = list.getSelectedIndex();
 					if (selectedElement == -1) {
 						listModel.addElement(element);
+						// FIXME  Tommaso: aggiunto per selezionare l'elemento inserito
+						setSelectedValue(element);
 					} else {
 						listModel.insertElementAt(element, selectedElement + 1);
 						list.setSelectedIndex(selectedElement + 1);
