@@ -45,6 +45,11 @@ public class NirUtilUrnImpl implements NirUtilUrn, Loggable, Serviceable {
 	Autorita a;
 
 	DocumentManager documentManager;
+	
+	protected String bis[] = { "bis", "ter", "quater", "quinquies", "sexies", "septies", "octies", "novies", "decies", "undecies", "duodecies", "terdecies",
+			"quaterdecies", "quinquiesdecies", "sexiesdecies", "septiesdecies", "octiesdecies", "noviesdecies", "venies", "duovenies", "tervenies",
+			"quatervenies", "quinquiesvenies", "sexiesvenies", "septiesvenies", "octiesvenies", "noviesvenies" };
+
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -307,11 +312,12 @@ public class NirUtilUrnImpl implements NirUtilUrn, Loggable, Serviceable {
 				num = numero.substring(0, numero.indexOf('-'));
 				bis = numero.substring(numero.indexOf('-'));
 			}
-			ret = UtilLang.fromNumberToLetter(num) + bis + ")";
+			ret = num + bis + ")";
 		}
 		return ret;
 	}
 
+	
 	/**
 	 * Data la stringa rappresentante il numero della urn; separa gli eventuali
 	 * bis, ter etc dal numero con un "-"
@@ -320,19 +326,16 @@ public class NirUtilUrnImpl implements NirUtilUrn, Loggable, Serviceable {
 	 * @return
 	 */
 	private String separateBisTer(String s) {
-		String ret = "";
-		boolean separator = false;
-		if (s != null) {
-			CharacterIterator theIterator = new StringCharacterIterator(s);
-			for (char ch = theIterator.first(); ch != CharacterIterator.DONE; ch = theIterator.next()) {
-				if (!Character.isDigit(ch) && !separator) {
-					ret += "-";
-					separator = true;
+		int sep=0;
+		if(s!=null){
+			for(int i=0; i<bis.length; i++){
+				   if((sep=s.indexOf(bis[i]))!=-1){
+					   s=s.substring(0,sep)+"-"+s.substring(sep);
+					   return s;
+				   }
 				}
-				ret += ch;
-			}
-			return ret;
 		}
-		return null;
+		return s;
 	}
+	
 }
