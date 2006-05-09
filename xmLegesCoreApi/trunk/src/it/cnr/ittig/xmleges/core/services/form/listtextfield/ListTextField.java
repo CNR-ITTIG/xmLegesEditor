@@ -84,4 +84,10 @@ public interface ListTextField extends Service, CommonForm {
 	 * @return restituisce l'oggetto selezionato o <code>null</code>
 	 */
 	public Object getSelectedItem();
+	
+	/**
+	 * 
+	 * @param obj
+	 */
+	public void setSelectedValue(Object obj);
 }
