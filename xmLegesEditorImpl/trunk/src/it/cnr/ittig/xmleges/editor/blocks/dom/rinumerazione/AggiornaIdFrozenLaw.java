@@ -244,7 +244,15 @@ public class AggiornaIdFrozenLaw {
 				IDValue = getIDByNum(nodo);
 			else
 				IDValue = getIDByPosition(nodo);
-
+			
+            // FIXME MODIFICA PER ASSOCIARE LA VIGENZA ALL'ID:  DARA' PROBLEMI CON L'EREDITARIETA' DELLE PARTIZIONI //////
+			
+			String finevigore = UtilDom.getAttributeValueAsString(nodo,"finevigore");
+			if(null!=finevigore && !finevigore.equals(""))
+				IDValue+="-"+finevigore;
+			
+			////////////////////////////////////////////////////////////////////////////////////////////////////////
+			
 			// Aggiornamento ID dell'elemento se e' cambiato
 			OldID = ((Element) nodo).getAttribute("id");
 
@@ -373,7 +381,7 @@ public class AggiornaIdFrozenLaw {
 		String InfoNum = getInformationToBuildID(NumContent);
 		logger.debug("InfoNum " + InfoNum);
 		if (isLetter(InfoNum) && isElementWithLetter(node))
-			return ("" + UtilLang.fromLetterToNumber(InfoNum));
+			return ("" + InfoNum);//UtilLang.fromLetterToNumber(InfoNum));
 		else if (isRoman(InfoNum) && isElementWithRoman(node))
 			return ("" + UtilLang.fromRomanToArabic(InfoNum));
 		else
@@ -394,6 +402,8 @@ public class AggiornaIdFrozenLaw {
 				return (-1);
 			}
 		}
+		if(pos.trim().length() > 0  && !isNumeric(pos))   // per le lettere
+			return UtilLang.fromLetterToNumber21(pos);	
 		return (-1);
 	}
 
@@ -711,6 +721,49 @@ public class AggiornaIdFrozenLaw {
 
 		return lastNumberID;
 	}
+	
+	/*
+	 * Restituisce le ultime lettere dell'ID di un elemento lettera(es: art3-com2-leta =>
+	 * restituisce a) Altrimenti se l'elemento non ha ID o l'ID non ha un
+	 * contenuto con una lettera => restituisce ""
+	 */
+	private String getLastLetterIDElement(Node node) {
+		String  lastLetterID = "";
+		if (node != null)
+			if (node.getAttributes() != null)
+				if (node.getAttributes().getNamedItem("id") != null) {
+					String id = node.getAttributes().getNamedItem("id").getNodeValue();
+					String lastId = id.substring(id.lastIndexOf("-"));
+					if(lastId.length()>0)
+					    lastLetterID = lastId.substring(lastId.indexOf("let")+3);
+				}
+		return lastLetterID;
+	}
+	
+	/*
+	 * Restituisce le ultime lettere dell'ID di un elemento lettera(es: art3-com2-leta =>
+	 * restituisce a) Altrimenti se l'elemento non ha ID o l'ID non ha un
+	 * contenuto con una lettera => restituisce ""  [II: depurato da bis, ter etc]
+	 */
+	private String getLastLetterIDElementII(Node node) {
+		String  lastLetterID = "";
+		if (node != null)
+			if (node.getAttributes() != null)
+				if (node.getAttributes().getNamedItem("id") != null) {
+					String id = node.getAttributes().getNamedItem("id").getNodeValue();
+					String lastId = id.substring(id.lastIndexOf("-"));
+					if(lastId.length()>0)
+					    lastLetterID = lastId.substring(lastId.indexOf("let")+3);
+					for(int i=0; i<bis.length; i++){
+					   if(lastLetterID.indexOf(bis[i])!=-1){
+						   lastLetterID=lastLetterID.substring(0,lastLetterID.indexOf(bis[i]));
+					       //return lastLetterID;
+						   return "";
+					   }
+					}
+				}
+		return lastLetterID;
+	}
 
 	/*
 	 * Restituisce l'ultimo numero dell'ID di un elemento (es: art3-com2 =>
@@ -733,10 +786,7 @@ public class AggiornaIdFrozenLaw {
 							}
 						}
 					}
-					if (id.substring(i + 1).startsWith("0")) // ho trovato un
-																// id numerico
-																// di tipo 01,
-																// 001 etc
+					if (id.substring(i + 1).startsWith("0")) // ho trovato un id numerico di tipo 01, 001 etc
 						return (0);
 				}
 
@@ -764,11 +814,9 @@ public class AggiornaIdFrozenLaw {
 	 * precedente nel suo sotto albero
 	 */
 
-	protected int getPosizioneRelativaElemento(Node node) {
+	protected String getPosizioneRelativaElemento(Node node) {
 		int posizione = 1; // L'elemento corrente con quel nome e' almeno il
 							// primo
-		// es: <vigenza>
-		// <vigenza>
 		String pivotNodeName = node.getNodeName();
 		node = node.getPreviousSibling();
 		while (node != null) {
@@ -778,17 +826,28 @@ public class AggiornaIdFrozenLaw {
 			}
 			node = node.getPreviousSibling();
 		}
-		// modifica: adattamento per far corrispondere le lettere degli
-		// elelmenti el alla loro posizione nell'alfabeto us
+		
 		if (pivotNodeName.equalsIgnoreCase("el")) {
-			if (posizione % 26 == 10)
-				posizione += 2;
-			else if (posizione % 26 == 23)
-				posizione += 3;
-		}
-		return posizione;
+		   return increaseLetter(getLastLetterIDElement(node));  //+1
+	    }
+		
+		return ""+posizione;
 	}
-
+    
+	private String increaseLetter(String letter){
+		if(letter.equals(""))
+			return "a";
+		return(UtilLang.fromNumberToLetter21(""+(UtilLang.fromLetterToNumber21(letter)+1)));
+	}
+	
+	private boolean isLiteralId(Node node){
+		if(node.getNodeName().equals("el"))
+			return true;
+		return false;
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////////
+	
 	// --- modifica di TOMMASO per mantenere l'unicita' degli ID
 	// aggiungendo bis, ter etc..
 
@@ -802,82 +861,72 @@ public class AggiornaIdFrozenLaw {
 		String pos = "";
 
 		if (brothers != null) {
+			
 			int currentIdx = getCurrentIndex(node, brothers);
+			
+			// previousNumIdx: l'indice del num precedente nella lista dei fratelli
 			int previousNumIdx = getPreviousNumIndex(currentIdx, brothers);
+			// previousNum: num precedente nella lista dei fratelli
 			int previousNum = getPreviousNum(currentIdx, brothers);
+			// nextNumIdx: l'indice del num successivo nella lista dei fratelli
 			int nextNumIdx = getNextNumIndex(currentIdx, brothers);
+			// nextNum: num successivo nella lista dei fratelli
 			int nextNum = getNextNum(currentIdx, brothers);
 
+			// previousNumberedId:l'ultimo numero usato per marcare gli id
 			int previousNumberedId = getPreviousNumberedId(currentIdx, brothers);
+			// previousNumberedIdIdx:indice dell'ultimo id marcato
 			int previousNumberedIdIdx = getPreviousNumberedIdIndex(currentIdx, brothers);
-
-			// logger.debug("//*****************BEGIN******************//");
-			// logger.debug("[getPosRelativaFratelli
-			// "+UtilDom.getNodeSummary(node)+"]");
-			// logger.debug("Brother.size: "+brothers.size());
-			// for(int i=0; i<brothers.size(); i++){
-			// logger.debug("[getPosRelativaFratelli: brother type:
-			// "+UtilDom.getNodeSummary((Node)brothers.get(i)));
-			// logger.debug("[getPosRelativaFratelli: ID brother "+i + " is "
-			// +UtilDom.getAttributeValueAsString((Node)brothers.get(i),"id"));
-			// }
-			// logger.debug("currentIdx = " +currentIdx);
-			// logger.debug("previousIdx = " +previousNumberIdx);
-			// logger.debug("nextIdx = " +nextNumberIdx);
-			// logger.debug("previousNumber = " +previousNumber);
-			// logger.debug("nextNumber = " +nextNumber);
-
-			if (previousNumIdx != -1) { // c'e' un elemento precedente con un
-										// num settato
-				if (nextNumIdx != -1) { // currentIdx e' compreso fra due
-										// elementi numerati
-					if (nextNum - previousNum > currentIdx - previousNumIdx) // currentIdx-previousNumberIdx)
-																				// //
-																				// ci
-																				// sono
-																				// nummeri
-																				// disponibili
+			
+			if (previousNumIdx != -1) { // c'e' un elemento precedente con un num settato
+				if (nextNumIdx != -1) { // currentIdx e' compreso fra due elementi numerati
+					if (nextNum - previousNum > currentIdx - previousNumIdx){ // currentIdx-previousNumberIdx ci sono numeri disponibili
 						pos = "" + (previousNum + (currentIdx - previousNumIdx)); // (currentIdx-previousNumberIdx+1);
-					else
-						pos = "" + previousNumberedId + bis[currentIdx - previousNumberedIdIdx - 1];
+						if(isLiteralId(node))
+					    	pos = UtilLang.fromNumberToLetter21(pos);
+					}
+					else{
+						String previousNumberedIdString = ""+previousNumberedId;
+						if(isLiteralId(node))
+					    	previousNumberedIdString = UtilLang.fromNumberToLetter21(previousNumberedIdString);
+						pos =  previousNumberedIdString + bis[currentIdx - previousNumberedIdIdx - 1];
+					}
 				} else {
 					// pos=""+getPosizioneRelativaElemento(node);
-					pos = "" + (previousNum + (currentIdx - previousNumIdx)); //
+					pos = "" + (previousNum + (currentIdx - previousNumIdx)); 
+					if(isLiteralId(node))
+				    	pos = UtilLang.fromNumberToLetter21(pos);
 					// logger.debug(" caso di nextNumberIdx = - 1: pos = "+pos);
 				}
 			} else { // non ci sono elementi precedenti con num settato
-				if (previousNumberedIdIdx != -1) { // c'e' un elemento
-													// precedente con un numero
-													// sull'id (devo andare
-													// avanti con bis, ter)
-					if (nextNumIdx != -1) { // currentIdx e' compreso fra due
-											// elementi numerati
-						if (nextNum - previousNumberedId > currentIdx - previousNumIdx) // currentIdx-previousNumberIdx)
-																						// //
-																						// ci
-																						// sono
-																						// nummeri
-																						// disponibili
+				if (previousNumberedIdIdx != -1) { // c'e' un elemento precedente con un numero  sull'id (devo andare avanti con bis, ter)
+					if (nextNumIdx != -1) { // currentIdx e' compreso fra due elementi numerati
+						if (nextNum - previousNumberedId > currentIdx - previousNumIdx){ // currentIdx-previousNumberIdx) ci sono numeri disponibili
 							pos = "" + (previousNumberedId + (currentIdx - previousNumberedIdIdx)); // (currentIdx-previousNumberIdx+1);
-						else
+						    if(isLiteralId(node))
+						    	pos = UtilLang.fromNumberToLetter21(pos);
+						}
+						else{
 							pos = "" + previousNumberedId + bis[currentIdx - previousNumberedIdIdx - 1];
+						}
 					} else {
 						// pos=""+getPosizioneRelativaElemento(node);
 						pos = "" + (previousNumberedId + (currentIdx - previousNumberedIdIdx)); //
-						// logger.debug(" caso di nextNumberIdx = - 1: pos =
-						// "+pos);
+						if(isLiteralId(node))
+						   pos = UtilLang.fromNumberToLetter21(pos);
+						// logger.debug(" caso di nextNumberIdx = - 1: pos = "+pos);
 					}
-				} // no
-				else {// non c'e' un elemento precedente ne' col num ne' con
-						// l'id numerato
-					if (nextNum > currentIdx + 1 || nextNum == -1)
+				} 
+				else {     // non c'e' un elemento precedente ne' col num ne' con  l'id numerato
+					if (nextNum > currentIdx + 1 || nextNum == -1){
 						pos = "" + (currentIdx + 1);
+						if(isLiteralId(node))
+							   pos = UtilLang.fromNumberToLetter21(pos);
+					}
 					else
 						pos = "0" + (currentIdx + 1);// zerozero[currentIdx];
 				}
 			}
-			// logger.debug("found PosRelativaFratelli : " +pos);
-			// logger.debug("//******************END*******************//");
 		}
 		return (pos);
 	}
@@ -973,14 +1022,17 @@ public class AggiornaIdFrozenLaw {
 	 */
 	protected int getPreviousNumberedId(int currentIdx, Vector brothers) {
 		int i = getPreviousNumberedIdIndex(currentIdx, brothers);
-		if (i != -1)
-			return (getLastNumberIDElementII((Node) brothers.get(i)));
-		return (-1);
+		int ret =-1;
+		if (i != -1){	
+			if((ret=getLastNumberIDElementII((Node) brothers.get(i)))==0)
+				ret= UtilLang.fromLetterToNumber21(getLastLetterIDElementII((Node) brothers.get(i)));
+		}
+		return (ret);
 	}
 
 	protected int getPreviousNumberedIdIndex(int currentIdx, Vector brothers) {
 		for (int i = currentIdx - 1; i >= 0; i--) {
-			if (getLastNumberIDElementII((Node) brothers.get(i)) != 0)
+			if (getLastNumberIDElementII((Node) brothers.get(i)) != 0 || !getLastLetterIDElementII((Node) brothers.get(i)).equals(""))
 				return (i);
 		}
 		return (-1);
@@ -1001,6 +1053,9 @@ public class AggiornaIdFrozenLaw {
 		// modifica: adattamento per far corrispondere le lettere degli
 		// elelmenti el alla loro posizione nell'alfabeto us (non verificato il
 		// caso posAssolutaElemento)
+		
+		// FIXME non funzionerà piu' con i nuovi id fatti a lettere 
+		
 		if (nodeName.equalsIgnoreCase("el")) {
 			if (posizione % 26 > 9 && posizione % 26 <= 20)
 				posizione += 2;

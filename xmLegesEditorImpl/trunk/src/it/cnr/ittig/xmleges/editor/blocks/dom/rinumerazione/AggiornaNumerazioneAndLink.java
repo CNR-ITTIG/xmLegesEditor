@@ -6,7 +6,6 @@ package it.cnr.ittig.xmleges.editor.blocks.dom.rinumerazione;
 import it.cnr.ittig.services.manager.Logger;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
-import it.cnr.ittig.xmleges.core.util.lang.UtilLang;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 import it.cnr.ittig.xmleges.editor.services.util.urn.NirUtilUrn;
 
@@ -154,7 +153,14 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 
 				// Genero il valore del <num> in funzione
 				// del tipo del nome del contenitore
-				numVal = getValoreNum(parentNum, Integer.parseInt(lastPartID.substring(3)));
+				try{
+					int val = Integer.parseInt(lastPartID.substring(3));
+					numVal = getValoreNum(parentNum, val);
+				}
+				catch(NumberFormatException e){
+					// e' il caso delle lettere che hanno id letterale
+					numVal= lastPartID.substring(3)+")";
+				}
 				// Creo un nodo testo che diventera' il figlio di <num>
 				// e sostituisco l'unico nodo figlo di <num> con quello creato
 				// solo se num e' cambiato
@@ -462,7 +468,8 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 			res = posizione + ".";
 			break;
 		case LETTERA:
-			res = UtilLang.fromNumberToLetter("" + posizione) + ")";
+			res = posizione + ")";
+			//res = UtilLang.fromNumberToLetter("" + posizione) + ")";
 			break;
 		case NUMERO:
 			res = posizione + ")";
