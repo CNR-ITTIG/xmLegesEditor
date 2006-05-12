@@ -88,4 +88,10 @@ public interface SpellCheck extends Service {
 	 */
 	public void modifyWord(String oldWord, String newWord);
 
+	/**
+	 * Ritorna l'istanza al SpellChecker
+	 * 
+	 */
+	public Object getChecker();	
+
 }
