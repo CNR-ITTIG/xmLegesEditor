@@ -15,10 +15,14 @@ import it.cnr.ittig.xmleges.core.util.file.UtilFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.StringTokenizer;
 import java.util.Vector;
+import java.net.URL;
 
 import com.swabunga.spell.event.SpellCheckEvent;
 import com.swabunga.spell.event.SpellCheckListener;
+import com.xmlmind.spellcheck.engine.DictionaryManager;
+import com.xmlmind.spellcheck.engine.EditableTLex;
 import com.xmlmind.spellcheck.engine.SpellChecker;
 import com.xmlmind.spellcheck.engine.SpellException;
 
@@ -62,7 +66,7 @@ public class SpellCheckImpl implements SpellCheck, Loggable, SpellCheckListener,
 	private SpellChecker spellCheck = null;
 
 	private SpellChecker checker=null;
-	
+		
 	private List suggestions;
 
 	private Vector invalidWordsVect;
@@ -103,57 +107,27 @@ public class SpellCheckImpl implements SpellCheck, Loggable, SpellCheckListener,
 		try {
 			if (null==checker || null != checker){	
 				//UtilFile.copyFileInTemp(getClass().getResourceAsStream("it_wl.dic"),"it_wl.dic");
-				
 				// azcheck checker basato su italian.cdi
-				
 				//UtilFile.copyFileInTemp(getClass().getResourceAsStream("italian.cdi"),"italian.cdi");
-				
-				
 				//checker = new SpellChecker(UtilFile.getFileFromTemp(new File("italian.cdi")).getAbsolutePath());
 				checker = new SpellChecker(dictPath);
-				//checker.getDictionaryManager().setAccessPath(dictPath);
-				
-				//try{
-				//checker.selectDictionary(UtilFile.getFileFromTemp(new File("italian.cdi")).getAbsolutePath());
+												
 				try{
-					//checker.getDictionaryManager().defaultDictionaries();
-					
-					
-//	in realtà qui risetto il vocabolario ogni volta che ci passo, ovvero per ogni nodo
-//  il problema è il controllo in alto che fa entrare sempre ...... aggiustare POI					
-					
-					
-					//FORSE INUTILE (provare poi a levare)
-					//FORSE INUTILE (provare poi a levare)			
-					checker.selectDictionary("it/default");
-					
+
+				    checker.setPersonalDictionaryPath("dizionarioUtente_%L%.txt");
 					checker.setSelectedLanguage("it");
+					
+										
 				}
 				catch(SpellException ex){
 					System.err.println(ex.getMessage());
 				}
 				System.err.println("---Vocabolario caricato---"+checker.getSelectedLanguage()+"---");//.setSelectedLanguage("it");    // ?
-				//}
-				//catch(SpellException ex){
-				//	System.err.println(ex.getMessage());
-				//}
-				//dictionary = new SpellDictionaryHashMap(new InputStreamReader(getClass().getResourceAsStream("it_wl.dic")),new InputStreamReader(getClass().getResourceAsStream("it_affix.dat")));
-				//dictionary = new SpellDictionaryHashMap(new InputStreamReader(getClass().getResourceAsStream(i18n.getTextFor("spellcheck.dictionary"))));
 			}
 			} catch (IOException e) {
 			logger.error(e.getMessage(), e);
 		}
 			
-			
-//		try{
-//			checker.getSuggestions("abitao");
-//		}
-//		catch(SpellException ex){
-//			System.err.println(ex.getMessage());
-//		}
-			
-		
-		
 		if (text != null) {
 				
 			this.testo = text;
@@ -161,11 +135,6 @@ public class SpellCheckImpl implements SpellCheck, Loggable, SpellCheckListener,
 			
 			return doSearch();
 			
-//			//spellCheck.checkSpelling(new StringWordTokenizer(text));
-//
-//			SpellCheckWord[] ret = new SpellCheckWord[invalidWordsVect.size()];
-//			invalidWordsVect.copyInto(ret);
-//			return ret;
 		}
 		return null;
 	}
@@ -173,29 +142,23 @@ public class SpellCheckImpl implements SpellCheck, Loggable, SpellCheckListener,
 	
 	private SpellCheckWord[] doSearch() {
 
-// 	//Gerardo debug
-//	System.err.println("FRASE sotto esame: " + testo);
-//	try {
-//	 StringTokenizer esamina = new StringTokenizer(testo);
-//     while (esamina.hasMoreTokens()) {	
-//    	 String parola = esamina.nextToken();
-//    	 System.err.println("PAROLA sotto esame: " + parola);
-    	 
+	try {
+	 Vector listaparole = new Vector();		
+	 StringTokenizer esamina = new StringTokenizer(testo);
+	 int offsetToken = 0;
+     while (esamina.hasMoreTokens()) {	
+    	 String parola = esamina.nextToken(); 
 		
-		Vector listaparole = new Vector();
-    	 
-		for(;;)
-		{
+		for (;;) {
 			// prepare
 //			acquire next fragment from application:
-			//GERARDO checker.setInput(parola);
-			checker.setInput(testo);
+			checker.setInput(parola);
+			offsetToken = testo.indexOf(parola);
 			try{
 			int err = checker.checkNext();
 			
 			if (err == SpellChecker.ERR_NONE) {
 //				end reached: update position in source
-				
 				break;
 			}
 			String failingWord = checker.getWord();
@@ -204,55 +167,41 @@ public class SpellCheckImpl implements SpellCheck, Loggable, SpellCheckListener,
 
 			switch(err) {
 			case SpellChecker.ERR_DUPLICATE:
-				System.err.println("Parola duplicata: " + failingWord);
 				break;
 			case SpellChecker.ERR_REPLACE:
-				System.err.println(failingWord+" <- sostituita con -> " + checker.getReplacement(failingWord));
 				continue;
 			case SpellChecker.ERR_WRONG_CAP:
-				System.err.println("ERR.maiuscola");
 				break;
 			case SpellChecker.ERR_PUNCTUATION:
-				System.err.println("ERR.punteggiatura");
 				break;
 			case SpellChecker.ERR_UNKNOWN_WORD:
-				System.err.println("NON RICONOSCO: " + failingWord);
-				
-				String[] suggerimenti = checker.getSuggestions().toArray();
-				
-//				for (int j=0; j<suggerimenti.length; j++)
-//				  System.err.print(suggerimenti[j]+", ");
-//				  System.err.println("");
-				
-				
-				listaparole.add(new SpellCheckWordImpl(failingWord, replacePos, replacePos+replaceSize));
-   			    
+				listaparole.add(new SpellCheckWordImpl(failingWord, offsetToken+replacePos, offsetToken+replacePos+replaceSize));
 				break;
 			}
-//			get and process user commands:
+			
+			//get and process user commands:
 			break;
 			}
 			catch(SpellException ex){
 				System.err.println(ex.getMessage());
 			}
+			
+			System.err.println("SONO NEL FORRE: ");
 		}
 		
-		SpellCheckWord[] ret = new SpellCheckWord[listaparole.size()];
+        }
+     
+        SpellCheckWord[] ret = new SpellCheckWord[listaparole.size()];
 		listaparole.copyInto(ret);
 		
-		//return listaparole;
 		return ret;
+	   
+     
+       } 
+ 	   catch(ClassCastException ex){
+ 	   }
  	   
-		
-		
-//		//finale del debug
-//        }//chiude il while
-//       } 
-// 	   catch(ClassCastException ex){
-// 	    System.err.println(ex.getMessage());
-// 	   } //fine debug gerardo
- 	   
- 	      
+ 	     return null; 
 	
 	}
 	
@@ -292,6 +241,9 @@ public class SpellCheckImpl implements SpellCheck, Loggable, SpellCheckListener,
 
 	}
 
+	public Object getChecker() {
+		return  checker;
+	}
 	public String[] getDictionaries() {
 		// TODO getDictionaries
 		return null;
