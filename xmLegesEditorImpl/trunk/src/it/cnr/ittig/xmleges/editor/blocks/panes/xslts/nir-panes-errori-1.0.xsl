@@ -23,16 +23,15 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 >
 
 <xsl:output method="html" />
-<xsl:include href="nir-panes-dtd-norme-1.0.xsl"/>
-<xsl:include href="nir-panes-dtd-testo-1.0.xsl"/>
-<xsl:include href="nir-panes-dtd-globali-1.0.xsl"/>
-<xsl:include href="xsltmapper-1.0.xsl"/>
 <xsl:strip-space elements="*" />
 
+<xsl:include href="xsltmapper-1.0.xsl"/>
+
+ 
 <xsl:template match="/">
    <html>
         <body>
-            <xsl:apply-templates select="//processing-instruction('error')" />
+            <xsl:apply-templates select="//processing-instruction('error')" ></xsl:apply-templates>
         </body>
     </html>
 </xsl:template>
