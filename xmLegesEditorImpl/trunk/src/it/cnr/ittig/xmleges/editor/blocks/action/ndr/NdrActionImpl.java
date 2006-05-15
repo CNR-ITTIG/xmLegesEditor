@@ -12,7 +12,6 @@ import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
-import it.cnr.ittig.xmleges.core.services.spellcheck.dom.DomSpellCheckEvent;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.action.ndr.NdrAction;
 import it.cnr.ittig.xmleges.editor.services.dom.ndr.Ndr;
@@ -96,7 +95,6 @@ public class NdrActionImpl implements NdrAction, Loggable, EventManagerListener,
 	public void initialize() throws java.lang.Exception {
 		actionManager.registerAction("editor.ndr", ndrAction);
 		eventManager.addListener(this, SelectionChangedEvent.class);
-		eventManager.addListener(this, DomSpellCheckEvent.class);
 		ndrAction.setEnabled(false);
 	}
 
