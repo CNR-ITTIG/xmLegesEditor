@@ -1,5 +1,7 @@
 package it.cnr.ittig.xmleges.editor.blocks.dom.vigenza;
 
+import java.util.Vector;
+
 import it.cnr.ittig.services.manager.Loggable;
 import it.cnr.ittig.services.manager.Logger;
 import it.cnr.ittig.services.manager.ServiceException;
@@ -21,6 +23,7 @@ import it.cnr.ittig.xmleges.editor.services.util.urn.NirUtilUrn;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -66,6 +69,10 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 	Node selectedNode;
 	String selectedText;
 	
+	UtilRulesManager utilRulesManager;
+	
+	
+//	VigenzaEntity[] vigenze_presenti;
 	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -78,20 +85,8 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 		nirUtilUrn = (NirUtilUrn) serviceManager.lookup(NirUtilUrn.class);
+		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
 	}
-
-//	private boolean isDocMultivigente(Document doc) {
-//		return (
-//						UtilDom.getAttributeValueAsString(doc.getDocumentElement(), "tipo") != null 
-//				&& 
-//						(
-//						UtilDom.getAttributeValueAsString(doc.getDocumentElement(), "tipo").equalsIgnoreCase("monovigente") 
-//						|| 
-//						UtilDom.getAttributeValueAsString(doc.getDocumentElement(), "tipo").equalsIgnoreCase("multivigente")
-//						)
-//				
-//				);
-//	}
 
 	
 	public boolean canSetVigenza(Node node, int start, int end) {
@@ -128,76 +123,67 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 			selectedText=node.getNodeValue();
 
 		
-		Document doc = documentManager.getDocumentAsDom();
+//		Document doc = documentManager.getDocumentAsDom();
+//		
+//		String text = node.getNodeValue();
+//		
+//		
 		
-		String text = node.getNodeValue();
 		if(UtilDom.isTextNode(node)&&(start!=-1)&&(end!=-1)){
-			if(start==end && start!=-1){
-				String substr1=selectedText;
-				String substr2=selectedText;
-				selectedText=substr1.substring(0,start)+"[...]"+substr2.substring(start);
-				end=start+5;
-			}
-			// Creazione Nodo h:span con contenuto
-			Element span = doc.createElementNS(UtilDom.getNameSpaceURIforElement(node, "h"), "h:span");
-			span.appendChild(doc.createTextNode(selectedText.substring(start,end)));
-	
-			// Assegnazione attributi di vigenza allo span creato
-			span.setAttribute("iniziovigore", vigenza.getEInizioVigore().getId());
-			span.setAttribute("finevigore", vigenza.getEFineVigore().getId());
-			span.setAttribute("status", vigenza.getStatus());
-	
-			Node padre = node.getParentNode();
-	
+			Element span;
+			if(node.getParentNode().getNodeName().equals("h:span"))
+				span = (Element) node.getParentNode();
+			else
+			 span = (Element) utilRulesManager.encloseTextInTag(node, start, end,"h:span","h");
+//			 Assegnazione attributi di vigenza allo span creato
+			if(vigenza.getEInizioVigore()!=null)
+				span.setAttribute("iniziovigore", vigenza.getEInizioVigore().getId());
+			else
+				span.removeAttribute("iniziovigore");
+			if(vigenza.getEFineVigore()!=null)
+				span.setAttribute("finevigore", vigenza.getEFineVigore().getId());
+			else
+				span.removeAttribute("finevigore");
+			if(vigenza.getEInizioVigore()!=null && vigenza.getEFineVigore()!=null)
+				span.setAttribute("status", vigenza.getStatus());
+			else
+				span.removeAttribute("status");
 			
-			try {
-				if (start == 0 && end == text.length()) {
-					if (vigenza.getEInizioVigore() != null && vigenza.getEFineVigore()!=null) {
-						EditTransaction tr = documentManager.beginEdit();
-						padre.replaceChild(span, node);
-						documentManager.commitEdit(tr);
-						return true;
-					} 
-					
-				} else if (start == 0 && end < text.length()) {
-					if (vigenza.getEInizioVigore() != null && vigenza.getEFineVigore()!=null) {
-						EditTransaction tr = documentManager.beginEdit();
-						padre.insertBefore(span, node);
-						padre.replaceChild(doc.createTextNode(selectedText.substring(end)), node);
-						documentManager.commitEdit(tr);
-						return true;
-					}
-				} else if (start > 0 && end < text.length()) {
-					if (vigenza.getEInizioVigore() != null && vigenza.getEFineVigore()!=null) {
-						EditTransaction tr = documentManager.beginEdit();
-						padre.insertBefore(doc.createTextNode(selectedText.substring(0,start)), node);
-						padre.insertBefore(span, node);
-						padre.replaceChild(doc.createTextNode(selectedText.substring(end)), node);
-						documentManager.commitEdit(tr);
-						return true;
-					}
-				} else { // start > 0 && end = text.length
-					if (vigenza.getEInizioVigore() != null && vigenza.getEFineVigore()!=null) {
-						EditTransaction tr = documentManager.beginEdit();
-						padre.insertBefore(doc.createTextNode(selectedText.substring(0,start)), node);
-						padre.replaceChild(span, node);
-						documentManager.commitEdit(tr);
-						return true;
-					}
-				}
-			} catch (DocumentManagerException ex) {
-				logger.error(ex.getMessage(), ex);
-				return false;
-			}
 			
 		}else{
 			try {
-				if (vigenza.getEInizioVigore() != null && vigenza.getEFineVigore()!=null) {
+//				
+				if (vigenza.getEInizioVigore() != null || vigenza.getEFineVigore()!=null) {
 					EditTransaction tr = documentManager.beginEdit();
 //					 Assegnazione attributi di vigenza al nodo
-					UtilDom.setAttributeValue(node, "iniziovigore", vigenza.getEInizioVigore().getId());
-					UtilDom.setAttributeValue(node, "finevigore", vigenza.getEFineVigore().getId());
-					UtilDom.setAttributeValue(node, "status", vigenza.getStatus());
+					if(vigenza.getEInizioVigore()!=null)
+						UtilDom.setAttributeValue(node, "iniziovigore", vigenza.getEInizioVigore().getId());
+					else{
+						NamedNodeMap nnm = node.getAttributes();
+						if(nnm.getNamedItem("iniziovigore")!=null)
+							nnm.removeNamedItem("iniziovigore");	
+					}
+					if(vigenza.getEFineVigore()!=null)
+						UtilDom.setAttributeValue(node, "finevigore", vigenza.getEFineVigore().getId());
+					else{
+						NamedNodeMap nnm = node.getAttributes();
+						if(nnm.getNamedItem("finevigore")!=null)
+							nnm.removeNamedItem("finevigore");
+					}
+					if((vigenza.getEInizioVigore()!=null) || (vigenza.getEFineVigore()!=null) ){
+						if(vigenza.getStatus()!=null)
+							UtilDom.setAttributeValue(node, "status", vigenza.getStatus());
+						else{
+							NamedNodeMap nnm = node.getAttributes();
+							if(nnm.getNamedItem("status")!=null)
+							nnm.removeNamedItem("status");
+						}
+					}
+					else{
+						NamedNodeMap nnm = node.getAttributes();
+						if(nnm.getNamedItem("status")!=null)
+						nnm.removeNamedItem("status");
+					}
 										
 					documentManager.commitEdit(tr);
 					return true;
@@ -219,10 +205,11 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 		
 		if(node==null)
 			return null;
+		if(UtilDom.isTextNode(node) && node.getParentNode().getAttributes()==null)
+			return null;
+		if(!UtilDom.isTextNode(node) && node.getAttributes()==null)
+			return null;
 		
-		
-				
-				
 		Evento e_iniziovig=null;
 		Evento e_finevig=null;
 		Node iniziovig=null;
@@ -237,163 +224,184 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 			}
 			else				
 				selectedText=node.getNodeValue();
-			
-
-			if(node.getAttributes()!=null){
-				iniziovig=node.getAttributes().getNamedItem("iniziovigore");
-				finevig=node.getAttributes().getNamedItem("finevigore");
-				status=node.getAttributes().getNamedItem("status");
-			}
-				
-				if(iniziovig!=null && finevig!=null){
-
-						Element evento_ie_Tag = doc.getElementById(iniziovig.getNodeValue());
-						Element evento_fe_Tag = doc.getElementById(finevig.getNodeValue());
-						Element evento_fonte_Tag = doc.getElementById(evento_ie_Tag.getAttribute("fonte"));
-						
-						String tag, id, link, effetto;
-						Relazione rel = null;
-		
-						if (evento_fonte_Tag.getNodeType() == Node.ELEMENT_NODE) {
-							tag = evento_fonte_Tag.getNodeName();
-							id = evento_fonte_Tag.getAttributes().getNamedItem("id") != null ? evento_fonte_Tag.getAttributes().getNamedItem("id").getNodeValue() : null;
-							link = evento_fonte_Tag.getAttributes().getNamedItem("xlink:href") != null ? evento_fonte_Tag.getAttributes().getNamedItem("xlink:href")
-									.getNodeValue() : null;
-						    if(tag.equals("giurisprudenza")){
-						    	effetto=evento_fonte_Tag.getAttributes().getNamedItem("effetto") != null ? evento_fonte_Tag.getAttributes().getNamedItem("effetto").getNodeValue() : null;
-							    rel=new Relazione(tag, id, link,effetto);
-						    }else 
-						    	rel=new Relazione(tag, id, link);
-						}
-						
-			
-						e_iniziovig=new Evento(iniziovig.getNodeValue(),
-								evento_ie_Tag.getAttribute("data"),//				
-								rel,
-								evento_ie_Tag.getAttribute("tipo"));
-					
-						evento_fonte_Tag = doc.getElementById(evento_fe_Tag.getAttribute("fonte"));
-						
-						if (evento_fonte_Tag.getNodeType() == Node.ELEMENT_NODE) {
-							tag = evento_fonte_Tag.getNodeName();
-							id = evento_fonte_Tag.getAttributes().getNamedItem("id") != null ? evento_fonte_Tag.getAttributes().getNamedItem("id").getNodeValue() : null;
-							link = evento_fonte_Tag.getAttributes().getNamedItem("xlink:href") != null ? evento_fonte_Tag.getAttributes().getNamedItem("xlink:href")
-									.getNodeValue() : null;
-						    if(tag.equals("giurisprudenza")){
-						    	effetto=evento_fonte_Tag.getAttributes().getNamedItem("effetto") != null ? evento_fonte_Tag.getAttributes().getNamedItem("effetto").getNodeValue() : null;
-							    rel=new Relazione(tag, id, link,effetto);
-						    }else 
-						    	rel=new Relazione(tag, id, link);
-						}
-						e_finevig=new Evento(finevig.getNodeValue(),
-								evento_fe_Tag.getAttribute("data"),
-								rel,
-								evento_fe_Tag.getAttribute("tipo"));
-						
-						
-					
-						return new VigenzaEntity(e_iniziovig,
-							e_finevig, status.getNodeValue(),selectedText);
-				}else{
-					return null;
-				}
-		}else{//c'è lo span
-			
-//					 Recupero Nodo h:span con contenuto
-			if(node.getNodeValue()==null){
-				if(UtilDom.getTextNode(node)==null || UtilDom.getTextNode(node).trim().equals(""))
-					selectedText=node.getNodeName();					
+		}else if(node.getParentNode()!=null && node.getParentNode().getNodeName().equals("h:span")){		
+			Node span=node.getParentNode();
+		//			 Recupero Nodo h:span con contenuto
+			if(span.getNodeValue()==null){
+				if(UtilDom.getTextNode(span)==null || UtilDom.getTextNode(span).trim().equals(""))
+					selectedText=span.getNodeName();					
 				else
-					selectedText=UtilDom.getTextNode(node);		
+					selectedText=UtilDom.getTextNode(span);		
 				
 			}
 			else				
-				selectedText=node.getNodeValue();
+				selectedText=span.getNodeValue();
 			
-			
-			
-			if(start==end && start!=-1){
-				String substr1=selectedText;
-				String substr2=selectedText;
-				selectedText=substr1.substring(0,start)+"[...]"+substr2.substring(start);
-				end=start+5;
+			node=span;
+		}else{
+			if(node.getNodeValue()==null){
+				if(UtilDom.getTextNode(node)==null || UtilDom.getTextNode(node).trim().equals(""))
+					selectedText=node.getNodeName();
+				else
+					selectedText=UtilDom.getTextNode(node);
 			}
-			if(start!=end)
-				selectedText=selectedText.substring(start,end);
-			
-							
-			
-			if(node.getParentNode()!=null && node.getParentNode().getNodeName().equals("h:span")){
-					Node span=node.getParentNode();
-
-					iniziovig=span.getAttributes().getNamedItem("iniziovigore");
-					finevig=span.getAttributes().getNamedItem("finevigore");
-					status=span.getAttributes().getNamedItem("status");
+			else				
+				selectedText=node.getNodeValue();
+			return null;
+		}
 					
-					for(int i=0;i<span.getChildNodes().getLength();i++){
-						//il figlio trovato ha il testo							
-						if(span.getChildNodes().item(i).getNodeValue().equals(selectedText)){
-							Element evento_ie_Tag = doc.getElementById(iniziovig.getNodeValue());
-							Element evento_fe_Tag = doc.getElementById(finevig.getNodeValue());
-							Element evento_fonte_Tag = doc.getElementById(evento_ie_Tag.getAttribute("fonte"));
-							
-							String tag, id, link, effetto;
-							Relazione rel = null;
-			
-							if (evento_fonte_Tag.getNodeType() == Node.ELEMENT_NODE) {
-								tag = evento_fonte_Tag.getNodeName();
-								id = evento_fonte_Tag.getAttributes().getNamedItem("id") != null ? evento_fonte_Tag.getAttributes().getNamedItem("id").getNodeValue() : null;
-								link = evento_fonte_Tag.getAttributes().getNamedItem("xlink:href") != null ? evento_fonte_Tag.getAttributes().getNamedItem("xlink:href")
-										.getNodeValue() : null;
-							    if(tag.equals("giurisprudenza")){
-							    	effetto=evento_fonte_Tag.getAttributes().getNamedItem("effetto") != null ? evento_fonte_Tag.getAttributes().getNamedItem("effetto").getNodeValue() : null;
-								    rel=new Relazione(tag, id, link,effetto);
-							    }else 
-							    	rel=new Relazione(tag, id, link);
-							}
-							
-				
-							e_iniziovig=new Evento(iniziovig.getNodeValue(),
-									evento_ie_Tag.getAttribute("data"),				
-									rel,
-									evento_ie_Tag.getAttribute("tipo"));
-						
-							evento_fonte_Tag = doc.getElementById(evento_fe_Tag.getAttribute("fonte"));
-							
-							if (evento_fonte_Tag.getNodeType() == Node.ELEMENT_NODE) {
-								tag = evento_fonte_Tag.getNodeName();
-								id = evento_fonte_Tag.getAttributes().getNamedItem("id") != null ? evento_fonte_Tag.getAttributes().getNamedItem("id").getNodeValue() : null;
-								link = evento_fonte_Tag.getAttributes().getNamedItem("xlink:href") != null ? evento_fonte_Tag.getAttributes().getNamedItem("xlink:href")
-										.getNodeValue() : null;
-							    if(tag.equals("giurisprudenza")){
-							    	effetto=evento_fonte_Tag.getAttributes().getNamedItem("effetto") != null ? evento_fonte_Tag.getAttributes().getNamedItem("effetto").getNodeValue() : null;
-								    rel=new Relazione(tag, id, link,effetto);
-							    }else 
-							    	rel=new Relazione(tag, id, link);
-							}
-							e_finevig=new Evento(finevig.getNodeValue(),
-									evento_fe_Tag.getAttribute("data"),
-									rel,
-									evento_fe_Tag.getAttribute("tipo"));
-						
-						return new VigenzaEntity(e_iniziovig,
-								e_finevig, 
-								status.getNodeValue(),
-								selectedText);
-						
-						}//if									
-								
-					}//for
-			}//if
-				
-					
-		}//else		
 		
-		return null;
+			iniziovig=node.getAttributes().getNamedItem("iniziovigore");
+			finevig=node.getAttributes().getNamedItem("finevigore");
+			status=node.getAttributes().getNamedItem("status");
+		
+			//FIXME: problema sul ripopolamento; non ripopola il primo evento (iniziovigore)
+			Element evento_ie_Tag = (iniziovig==null?null:doc.getElementById(iniziovig.getNodeValue()));
+			Element evento_fe_Tag = (finevig==null?null:doc.getElementById(finevig.getNodeValue()));
+			
+	//			qui rappresenta la fonte dell'evento di inizio
+			Element evento_fonte_Tag = (evento_ie_Tag==null?null:doc.getElementById(evento_ie_Tag.getAttribute("fonte")));
+			
+			String tag, id, link, effetto, tipo;
+			Relazione rel = null;
+	
+			if (evento_fonte_Tag!=null && evento_fonte_Tag.getNodeType() == Node.ELEMENT_NODE) {
+				tag = evento_fonte_Tag.getNodeName();
+				id = evento_fonte_Tag.getAttributes().getNamedItem("id") != null ? evento_fonte_Tag.getAttributes().getNamedItem("id").getNodeValue() : null;
+				link = evento_fonte_Tag.getAttributes().getNamedItem("xlink:href") != null ? evento_fonte_Tag.getAttributes().getNamedItem("xlink:href")
+						.getNodeValue() : null;
+			    if(tag.equals("giurisprudenza")){
+			    	effetto=evento_fonte_Tag.getAttributes().getNamedItem("effetto") != null ? evento_fonte_Tag.getAttributes().getNamedItem("effetto").getNodeValue() : null;
+				    rel=new Relazione(tag, id, link,effetto);
+			    }else if(tag.equals("haallegato") || tag.equals("allegatodi")){
+			    	tipo=evento_fonte_Tag.getAttributes().getNamedItem("tipo") != null ? evento_fonte_Tag.getAttributes().getNamedItem("tipo").getNodeValue() : null;
+				    rel=new Relazione(tag, id, link,tipo);
+			    }else 						    	
+			    	rel=new Relazione(tag, id, link);
+			}
+			
+	
+			e_iniziovig=iniziovig==null?null:new Evento(iniziovig!=null?iniziovig.getNodeValue():"",
+					evento_ie_Tag!=null?evento_ie_Tag.getAttribute("data"):null,//				
+							rel,
+							evento_ie_Tag!=null?evento_ie_Tag.getAttribute("tipo"):null);
+					
+		
+	//			qui rappresenta la fonte dell'evento di fine
+			evento_fonte_Tag = evento_fe_Tag==null?null:doc.getElementById(evento_fe_Tag.getAttribute("fonte"));
+			rel=null;
+				
+			if (evento_fonte_Tag!=null && evento_fonte_Tag.getNodeType() == Node.ELEMENT_NODE) {
+				tag = evento_fonte_Tag.getNodeName();
+				id = evento_fonte_Tag.getAttributes().getNamedItem("id") != null ? evento_fonte_Tag.getAttributes().getNamedItem("id").getNodeValue() : null;
+				link = evento_fonte_Tag.getAttributes().getNamedItem("xlink:href") != null ? evento_fonte_Tag.getAttributes().getNamedItem("xlink:href")
+						.getNodeValue() : null;
+			    if(tag.equals("giurisprudenza")){
+			    	effetto=evento_fonte_Tag.getAttributes().getNamedItem("effetto") != null ? evento_fonte_Tag.getAttributes().getNamedItem("effetto").getNodeValue() : null;
+				    rel=new Relazione(tag, id, link,effetto);
+			    }else if(tag.equals("haallegato")||tag.equals("allegatodi")){
+			    	tipo=evento_fonte_Tag.getAttributes().getNamedItem("tipo") != null ? evento_fonte_Tag.getAttributes().getNamedItem("tipo").getNodeValue() : null;
+				    rel=new Relazione(tag, id, link,tipo);
+			    }else
+			    	rel=new Relazione(tag, id, link);
+			}
+			e_finevig=iniziovig==null?null:new Evento(finevig!=null?finevig.getNodeValue():"",
+					evento_fe_Tag!=null?evento_fe_Tag.getAttribute("data"):null,
+					rel,
+					evento_fe_Tag!=null?evento_fe_Tag.getAttribute("tipo"):null);
+		
+		
+		if(e_iniziovig==null && e_finevig==null) return null;
+		
+		return new VigenzaEntity(node, e_iniziovig,e_finevig, status!=null?status.getNodeValue():null,"");
+		
 	}//metodo
 
 	public String getSelectedText() {
 		return selectedText;
 	}
+
+	public boolean isVigente() {
+		Document doc = documentManager.getDocumentAsDom();
+		
+		NodeList lista = doc.getElementsByTagName("*");
+		
+		for(int i=0; i<lista.getLength();i++){
+			if(lista.item(i).getAttributes().getNamedItem("iniziovigore")!=null){
+				return true;
+			}
+			if(lista.item(i).getAttributes().getNamedItem("finevigore")!=null){
+				return true;
+			}
+		}
+	
+		
+		return false;
+			
+	}
+
+	public void setTipoDocVigenza() {
+		Document doc = documentManager.getDocumentAsDom();
+		if (isVigente()){
+			UtilDom.setAttributeValue(doc.getDocumentElement(),"tipo","multivigente");
+		}else
+			UtilDom.setAttributeValue(doc.getDocumentElement(),"tipo","originale");
+				
+	}
+	
+	public void updateVigenzaOnDoc(VigenzaEntity vig){
+		Node node=vig.getOnNode();
+		if(node==null)
+			return;
+		
+		
+		if(!UtilDom.isTextNode(node)){
+			if(node.getAttributes()!=null){
+				if(vig.getEInizioVigore()!=null && node.getAttributes().getNamedItem("iniziovigore")!=null)
+					//UtilDom.setAttributeValue(node,"iniziovigore",vig.getEInizioVigore().getId());					
+					node.getAttributes().getNamedItem("iniziovigore").setNodeValue(vig.getEInizioVigore().getId());
+				else					
+					((Element)node).removeAttribute("iniziovigore");
+					
+				if(vig.getEFineVigore()!=null && node.getAttributes().getNamedItem("finevigore")!=null)
+					node.getAttributes().getNamedItem("finevigore").setNodeValue(vig.getEFineVigore().getId());
+				else
+					((Element)node).removeAttribute("finevigore");
+				if(vig.getEInizioVigore()==null && vig.getEFineVigore()==null)
+				{
+					((Element)node).removeAttribute("status");
+				}
+				else{
+					if(node.getAttributes().getNamedItem("status")!=null)
+						node.getAttributes().getNamedItem("status").setNodeValue(vig.getStatus());
+				}
+				
+//				if(vig.getEInizioVigore()==null){
+//					node.getAttributes().removeNamedItem("iniziovigore");
+//				}else{
+//					node.getAttributes().getNamedItem("iniziovigore").setNodeValue(vig.getEInizioVigore().getId());
+//				}
+//				if(vig.getEFineVigore()==null){
+//					node.getAttributes().removeNamedItem("finevigore");
+//				}else
+//					node.getAttributes().getNamedItem("finevigore").setNodeValue(vig.getEFineVigore().getId());
+				
+			}
+				
+				
+		}else{//c'è lo span
+			
+			if(node.getParentNode()!=null && node.getParentNode().getNodeName().equals("h:span")){
+					Node span=node.getParentNode();
+
+					span.getAttributes().getNamedItem("iniziovigore").setNodeValue(vig.getEInizioVigore().getId());
+					span.getAttributes().getNamedItem("finevigore").setNodeValue(vig.getEFineVigore().getId());
+					span.getAttributes().getNamedItem("status").setNodeValue(vig.getStatus());
+			}
+		}
+	}
+
+	
+		
 
 }

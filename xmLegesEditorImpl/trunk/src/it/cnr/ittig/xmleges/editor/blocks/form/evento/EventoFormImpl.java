@@ -67,7 +67,8 @@ public class EventoFormImpl implements EventoForm, Loggable, Serviceable, Initia
 	AbstractButton openFormBtn;
 	
 	AbstractButton clearBtn;
-
+	
+	
 	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -91,6 +92,7 @@ public class EventoFormImpl implements EventoForm, Loggable, Serviceable, Initia
 		openFormBtn.setAction(new EventoFormAction());
 		clearBtn = (AbstractButton ) form.getComponentByName("editor.form.evento.clear");
 		clearBtn.setAction(new ClearEventoAction());
+		
 	}
 
 	// /////////////////////////////////////////////////////// UrnForm Interface
@@ -132,14 +134,18 @@ public class EventoFormImpl implements EventoForm, Loggable, Serviceable, Initia
 	
 	private void clearEvento() {
 		this.selectedEvento = null;
-		textField.setText("");
+		textField.setText("");		
+		
 	}
 	
 	
 	protected class EventoFormAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
-			ciclodivitaeventoForm.setEventi(metaciclodivita.getEventi());
-			Relazione[] relazioniUlteriori = metaciclodivita.getRelazioniUlteriori(metaciclodivita.getEventi(),metaciclodivita.getRelazioni());
+			Evento[] eventiOnDom=metaciclodivita.getEventi();
+			Relazione[] relazioniOnDom = metaciclodivita.getRelazioni();
+			ciclodivitaeventoForm.setEventi(eventiOnDom);
+			Relazione[] relazioniUlteriori = metaciclodivita.getRelazioniUlteriori(eventiOnDom,relazioniOnDom);
+			ciclodivitaeventoForm.setRel_totali(metaciclodivita.mergeRelazioni(ciclodivitaeventoForm.getEventi(),relazioniUlteriori));
 			if(openForm()){
 				// 1 - risetta tutti i nodi evento anche se non ci sono state variazioni
 				if(isUpdatedEventi(metaciclodivita.getEventi(), ciclodivitaeventoForm.getEventi())){
@@ -158,6 +164,8 @@ public class EventoFormImpl implements EventoForm, Loggable, Serviceable, Initia
 			clearEvento();
 		}
 	}
+	
+	
 
 
 }

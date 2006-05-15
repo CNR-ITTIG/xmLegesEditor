@@ -9,17 +9,20 @@ import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
+import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.MetaCiclodivita;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
 import it.cnr.ittig.xmleges.editor.services.dom.rinumerazione.Rinumerazione;
+import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 
 import java.util.Vector;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -61,6 +64,8 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 	Rinumerazione rinumerazione; 
 
 	UtilRulesManager utilRulesManager;
+	
+	UtilUI utilUI;
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -73,6 +78,7 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
+		utilUI = (UtilUI) serviceManager.lookup(UtilUI.class);
 	}
 
 	// /////////////////////////////////////////////// CiclodiVita Interface
@@ -81,7 +87,7 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 
 		Document doc = documentManager.getDocumentAsDom();
 
-		String tag, id, link, effetto;
+		String tag, id, link, effetto_tipoall;
 		Vector relVect = new Vector();
 
 		NodeList relazioni = doc.getElementsByTagName("relazioni");
@@ -95,9 +101,12 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 					link = relazioneNode.getAttributes().getNamedItem("xlink:href") != null ? relazioneNode.getAttributes().getNamedItem("xlink:href")
 							.getNodeValue() : null;
 				    if(tag.equals("giurisprudenza")){
-				    	effetto=relazioneNode.getAttributes().getNamedItem("effetto") != null ? relazioneNode.getAttributes().getNamedItem("effetto").getNodeValue() : null;
-					    relVect.add(new Relazione(tag, id, link,effetto));
-				    }else 
+				    	effetto_tipoall=relazioneNode.getAttributes().getNamedItem("effetto") != null ? relazioneNode.getAttributes().getNamedItem("effetto").getNodeValue() : null;
+					    relVect.add(new Relazione(tag, id, link,effetto_tipoall));
+				    }else if(tag.equals("haallegato")||tag.equals("allegatodi")){
+				    	effetto_tipoall=relazioneNode.getAttributes().getNamedItem("tipo") != null ? relazioneNode.getAttributes().getNamedItem("tipo").getNodeValue() : null;
+					    relVect.add(new Relazione(tag, id, link,effetto_tipoall));
+				    }else
 				    	relVect.add(new Relazione(tag, id, link));
 				}
 			}
@@ -160,11 +169,11 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 		return relazioniUlteriori;
 	}
 	public void setRelazioni(Relazione[] relazioni) {
-		Document doc = documentManager.getDocumentAsDom();
+		
 		try {
 			EditTransaction tr = documentManager.beginEdit();
 			if (setDOMRelazioni(relazioni)) {
-				rinumerazione.aggiorna(doc);
+				//rinumerazione.aggiorna(doc);
 				documentManager.commitEdit(tr);
 			} else
 				documentManager.rollbackEdit(tr);
@@ -190,8 +199,11 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 				Element relazione = doc.createElement(relazioni[i].getTagTipoRelazione());
 				UtilDom.setIdAttribute(relazione, relazioni[i].getId());
 				relazione.setAttribute("xlink:href", relazioni[i].getLink());				
-				if( (relazioni[i].getEffetto()!=null)&&(!relazioni[i].getEffetto().equals(""))){
-					relazione.setAttribute("effetto", relazioni[i].getEffetto());
+				if( (relazioni[i].getEffetto_tipoall()!=null)&&(!relazioni[i].getEffetto_tipoall().equals(""))){
+					if(relazioni[i].getTagTipoRelazione().equals("giurisprudenza"))
+						relazione.setAttribute("effetto", relazioni[i].getEffetto_tipoall());
+					else //caso allegato
+						relazione.setAttribute("tipo", relazioni[i].getEffetto_tipoall());
 				}
 				if(!utilRulesManager.orderedInsertChild(relazioniNode,relazione))
 					System.out.println("relazione non inserita");				
@@ -240,13 +252,40 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 		return eventi;
 	}
 
+	public String[] getEventiOnVigenza() {
+		Vector totali=new Vector();
+		Document doc = documentManager.getDocumentAsDom();
+		
+		NodeList lista = doc.getElementsByTagName("*");
+		for(int i=0; i<lista.getLength();i++){
+			NamedNodeMap attributo=lista.item(i).getAttributes();
+			Node inizio=attributo.getNamedItem("iniziovigore");
+			Node fine=attributo.getNamedItem("finevigore");
+		
+			if(inizio!=null){
+				if(!totali.contains(inizio.getNodeValue()))							
+					totali.add(inizio.getNodeValue());
+			}
+			if(fine!=null)
+				if(!totali.contains(fine.getNodeValue()))
+					totali.add(fine.getNodeValue());		
+			
+		}
+	
+		String[] id_trovati=new String[totali.size()];
+		totali.copyInto(id_trovati);
+		return id_trovati;
+					
+	}
+	
+	
 	
 	public void setEventi(Evento[] eventi) {
-		Document doc = documentManager.getDocumentAsDom();
+		
 		try {
 			EditTransaction tr = documentManager.beginEdit();
 			if (setDOMEventi(eventi)) {
-				rinumerazione.aggiorna(doc);
+//				rinumerazione.aggiorna(doc);
 				documentManager.commitEdit(tr);
 			} else
 				documentManager.rollbackEdit(tr);
@@ -279,13 +318,8 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 				UtilDom.setAttributeValue(eventoTag, "tipo", eventi[i].getTipoEvento());
 				utilRulesManager.orderedInsertChild(eventiTag,eventoTag);
 		}
-		if (eventi.length > 0){
+		if (eventi.length > 0)
 		  utilRulesManager.orderedInsertChild(ciclodivitaNode,eventiTag);
-		  UtilDom.setAttributeValue(doc.getDocumentElement(),"tipo","monovigente");
-		}else
-			UtilDom.setAttributeValue(doc.getDocumentElement(),"tipo","originale");
-		
-		
 		if(missingciclodivita && eventi.length>0){
 			Node metaNode = doc.getElementsByTagName("meta").item(0);
 			utilRulesManager.orderedInsertChild(metaNode,ciclodivitaNode);
@@ -306,43 +340,15 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 			if(tag.equals("giurisprudenza")){
 		    	String effetto=relNode.getAttributes().getNamedItem("effetto") != null ? relNode.getAttributes().getNamedItem("effetto").getNodeValue() : null;
 		    	return (new Relazione(tag, id, link,effetto));
+		    }else if(tag.equals("haallegato")||tag.equals("allegatodi")){
+		    	String tipo=relNode.getAttributes().getNamedItem("tipo") != null ? relNode.getAttributes().getNamedItem("tipo").getNodeValue() : null;
+		    	return (new Relazione(tag, id, link,tipo));
 		    }else
 		    	return (new Relazione(tag, id, link));			
 		}
 		return null;
 	}
 
-	
-//	private Relazione getRelazioneById(String relId) {
-//
-//		Document doc = documentManager.getDocumentAsDom();
-//
-//		// FIXME Node relNode = doc.getElementById(relId);
-//		// Questa chiamata a getElementById non funziona bene... infatti, la
-//		// prima volta che viene chiamata
-//		// (ad es. con un Document fresco fresco caricato dall'XML) restituisce
-//		// correttamente il nodo, mentre
-//		// le volte successive restituisce null, e questo malgrado debuggando si
-//		// veda che nel Document il
-//		// nodo con quell'id c'?. Per ovviare a questo problema prendiamo la
-//		// lista delle relazioni e le
-//		// scandiamo una per una, cercando quella che ha l'id desiderato.
-//
-//		Node relazioniNode = doc.getElementsByTagName("relazioni").item(0);
-//		NodeList relazioni = relazioniNode.getChildNodes();
-//		for (int i = 0; i < relazioni.getLength(); i++) {
-//			Node relNode = relazioni.item(i);
-//			if (relNode.getAttributes().getNamedItem("id").getNodeValue().equals(relId)) {
-//				String tag = relNode.getNodeName();
-//				String id = relNode.getAttributes().getNamedItem("id") != null ? relNode.getAttributes().getNamedItem("id").getNodeValue() : null;
-//				String link = relNode.getAttributes().getNamedItem("xlink:href") != null ? relNode.getAttributes().getNamedItem("xlink:href").getNodeValue()
-//						: null;
-//				return (new Relazione(tag, id, link));
-//			}
-//		}
-//		return null;
-//	}
-	
 	
 	/**
 	 * Rimuove i tag con un determinato nome
@@ -359,6 +365,96 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 				currNode.getParentNode().removeChild(currNode);
 			}
 		} while (listLen > 0);
+	}
+
+	public VigenzaEntity[] getVigenze() {
+		
+		Vector vigenze_totali=new Vector();
+		Vector totali=new Vector();
+		Document doc = documentManager.getDocumentAsDom();
+		//caricamento nodi con attributi di vigenza
+		NodeList lista = doc.getElementsByTagName("*");
+		for(int i=0; i<lista.getLength();i++){
+			if(lista.item(i).getAttributes()!=null && 
+					(lista.item(i).getAttributes().getNamedItem("iniziovigore")!=null 
+							|| lista.item(i).getAttributes().getNamedItem("finevigore")!=null)){
+				totali.add(lista.item(i));
+			}			
+		}
+		
+		Evento e_iniziovig=null;
+		Evento e_finevig=null;
+		Node iniziovig=null;
+		Node finevig=null;
+		Node status=null;
+		
+		for(int i=0; i<totali.size();i++){
+			Node node=(Node)totali.elementAt(i);
+				
+			iniziovig=node.getAttributes().getNamedItem("iniziovigore");
+			finevig=node.getAttributes().getNamedItem("finevigore");
+			status=node.getAttributes().getNamedItem("status");			
+				
+			Element evento_ie_Tag = (iniziovig==null?null:doc.getElementById(iniziovig.getNodeValue()));
+			Element evento_fe_Tag = (finevig==null?null:doc.getElementById(finevig.getNodeValue()));
+			
+			//qui rappresenta la fonte dell'evento di inizio
+			Element evento_fonte_Tag = (evento_ie_Tag==null?null:doc.getElementById(evento_ie_Tag.getAttribute("fonte")));
+			
+			String tag, id, link, effetto, tipo;
+			Relazione rel = null;
+
+			if (evento_fonte_Tag!=null && evento_fonte_Tag.getNodeType() == Node.ELEMENT_NODE) {
+				tag = evento_fonte_Tag.getNodeName();
+				id = evento_fonte_Tag.getAttributes().getNamedItem("id") != null ? evento_fonte_Tag.getAttributes().getNamedItem("id").getNodeValue() : null;
+				link = evento_fonte_Tag.getAttributes().getNamedItem("xlink:href") != null ? evento_fonte_Tag.getAttributes().getNamedItem("xlink:href")
+						.getNodeValue() : null;
+			    if(tag.equals("giurisprudenza")){
+			    	effetto=evento_fonte_Tag.getAttributes().getNamedItem("effetto") != null ? evento_fonte_Tag.getAttributes().getNamedItem("effetto").getNodeValue() : null;
+				    rel=new Relazione(tag, id, link,effetto);
+			    }else if(tag.equals("haallegato")||tag.equals("allegatodi")){
+			    	tipo=evento_fonte_Tag.getAttributes().getNamedItem("tipo") != null ? evento_fonte_Tag.getAttributes().getNamedItem("tipo").getNodeValue() : null;
+				    rel=new Relazione(tag, id, link,tipo);
+			    }else  
+			    	rel=new Relazione(tag, id, link);
+			}
+			e_iniziovig=iniziovig==null?null:new Evento(iniziovig!=null?iniziovig.getNodeValue():"",
+					evento_ie_Tag!=null?evento_ie_Tag.getAttribute("data"):null,//				
+					rel,
+					evento_ie_Tag!=null?evento_ie_Tag.getAttribute("tipo"):null);
+			
+			//qui rappresenta la fonte dell'evento di fine
+			evento_fonte_Tag = evento_fe_Tag==null?null:doc.getElementById(evento_fe_Tag.getAttribute("fonte"));
+			rel=null;
+			if (evento_fonte_Tag!=null && evento_fonte_Tag.getNodeType() == Node.ELEMENT_NODE) {
+				tag = evento_fonte_Tag.getNodeName();
+				id = evento_fonte_Tag.getAttributes().getNamedItem("id") != null ? evento_fonte_Tag.getAttributes().getNamedItem("id").getNodeValue() : null;
+				link = evento_fonte_Tag.getAttributes().getNamedItem("xlink:href") != null ? evento_fonte_Tag.getAttributes().getNamedItem("xlink:href")
+						.getNodeValue() : null;
+			    if(tag.equals("giurisprudenza")){
+			    	effetto=evento_fonte_Tag.getAttributes().getNamedItem("effetto") != null ? evento_fonte_Tag.getAttributes().getNamedItem("effetto").getNodeValue() : null;
+				    rel=new Relazione(tag, id, link,effetto);
+			    }else if(tag.equals("haallegato")||tag.equals("allegatodi")){
+			    	tipo=evento_fonte_Tag.getAttributes().getNamedItem("tipo") != null ? evento_fonte_Tag.getAttributes().getNamedItem("tipo").getNodeValue() : null;
+				    rel=new Relazione(tag, id, link,tipo);
+			    }else
+			    	rel=new Relazione(tag, id, link);
+			}
+			e_finevig=iniziovig==null?null:new Evento(finevig!=null?finevig.getNodeValue():"",
+					evento_fe_Tag!=null?evento_fe_Tag.getAttribute("data"):null,
+					rel,
+					evento_fe_Tag!=null?evento_fe_Tag.getAttribute("tipo"):null);
+			
+			vigenze_totali.add(new VigenzaEntity(node, e_iniziovig,
+						e_finevig, status!=null?status.getNodeValue():null,""));
+					
+							
+		}//for	
+						//////////////////////
+		VigenzaEntity[] vig_trovate=new VigenzaEntity[vigenze_totali.size()];
+		vigenze_totali.copyInto(vig_trovate);
+		return vig_trovate;
+					
 	}
 
 }

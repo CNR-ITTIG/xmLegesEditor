@@ -13,6 +13,7 @@ import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextFieldElemen
 import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextFieldElementListener;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
+import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 import it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita.CiclodiVitaEventoForm;
 import it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita.CiclodiVitaForm;
 import it.cnr.ittig.xmleges.editor.services.form.urn.UrnForm;
@@ -97,9 +98,11 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 
 	JComboBox tagSottoFormDatiRelazione;
 	
-	JComboBox tagEffettoSottoFormDatiRelazione;
+	JComboBox tagEffettoTipoSFormDatiRelazione;
 
 	UrnForm urnFormRelazioni;
+//	
+//	String[] eventiOnVigenze;
 
 
 
@@ -120,7 +123,7 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 		}
 
 		public void elementChanged(ListTextFieldElementEvent e) {
-
+			
 			int eventID = e.getID();
 
 			String nomeTag = tagSottoFormDatiRelazione.getSelectedItem().toString();
@@ -131,7 +134,19 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 				if (!checkData()) {
 					r = null;
 				} else {
-					r = new Relazione(nomeTag, calcolaIDRelazione(nomeTag), urn.toString());
+					if((nomeTag.toString().equals("giurisprudenza"))&&(tagSottoFormDatiRelazione.getSelectedItem()!=null)){
+						r=new Relazione(nomeTag,calcolaIDRelazione(nomeTag),urnFormRelazioni.getUrn().toString(),tagSottoFormDatiRelazione.getSelectedItem().toString());
+					}else if((nomeTag.toString().equals("haallegato"))&&(tagSottoFormDatiRelazione.getSelectedItem()!=null)
+							||(nomeTag.toString().equals("allegatodi"))&&(tagSottoFormDatiRelazione.getSelectedItem()!=null)){
+						r=new Relazione(nomeTag,calcolaIDRelazione(nomeTag),urnFormRelazioni.getUrn().toString(),tagSottoFormDatiRelazione.getSelectedItem().toString());
+					}
+					else if(!nomeTag.equals("")){ 
+						r=new Relazione(nomeTag,calcolaIDRelazione(nomeTag),urnFormRelazioni.getUrn().toString());
+					}else 
+						r=null;
+					
+					if(r.getTagTipoRelazione().equals("originale"))
+						tagSottoFormDatiRelazione.removeItem("originale");
 				}
 			} else if (eventID == ListTextFieldElementEvent.ELEMENT_MODIFY) {
 
@@ -140,10 +155,21 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 				} else {
 					r.setTagTipoRelazione(nomeTag);
 					r.setLink(urn.toString());
+					if(nomeTag.equals("giurisprudenza")){							
+						r.setEffetto_tipoall((String)tagEffettoTipoSFormDatiRelazione.getSelectedItem());
+					}else if(nomeTag.equals("haallegato")||nomeTag.equals("allegatodi")){							
+						r.setEffetto_tipoall((String)tagEffettoTipoSFormDatiRelazione.getSelectedItem());
+					}else if(r.getTagTipoRelazione().equals("originale"))
+						tagSottoFormDatiRelazione.removeItem("originale");
 				}
 			} else if (eventID == ListTextFieldElementEvent.ELEMENT_REMOVE) {
+				if(r.getTagTipoRelazione().equals("originale")){				
+					 if(tagSottoFormDatiRelazione.getItemCount()<6)
+						 tagSottoFormDatiRelazione.addItem("originale");
+				}
 				r = null;
 				tagSottoFormDatiRelazione.setSelectedItem(null);
+				tagEffettoTipoSFormDatiRelazione.setSelectedItem(null);
 				urnFormRelazioni.setUrn(new Urn());
 			}
 		}
@@ -159,11 +185,65 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 				urnFormRelazioni.setUrn(new Urn(r.getLink()));
 			} catch (ParseException e) {
 			}
+			
+			if(r.getTagTipoRelazione().equals("giurisprudenza")){
+				tagEffettoTipoSFormDatiRelazione.setEnabled(true);
+				tagEffettoTipoSFormDatiRelazione.setSelectedItem(r.getEffetto_tipoall());
+			}else if(r.getTagTipoRelazione().equals("haallegato")||r.getTagTipoRelazione().equals("allegatodi")){
+				tagEffettoTipoSFormDatiRelazione.setEnabled(true);
+				tagEffettoTipoSFormDatiRelazione.setSelectedItem(r.getEffetto_tipoall());
+			}else{
+				tagEffettoTipoSFormDatiRelazione.setSelectedItem(null);
+				tagEffettoTipoSFormDatiRelazione.setEnabled(false);
+			}
+			
+			if(r.getTagTipoRelazione().equals("originale")){
+				if(tagSottoFormDatiRelazione.getItemCount()<6)
+					tagSottoFormDatiRelazione.addItem("originale");
+			}else{
+		    	
+
+				Relazione[] newRelazioni = getRelazioniTotalefromCdvf();
+								
+				boolean found=false;
+				for(int i =0;i<newRelazioni.length;i++){
+					if(newRelazioni[i].getTagTipoRelazione().equals("originale")){						
+						tagSottoFormDatiRelazione.removeItem("originale");
+						found=true;
+						break;
+					}			
+				}
+				if(!found){
+					if(tagSottoFormDatiRelazione.getItemCount()<6)
+						tagSottoFormDatiRelazione.addItem("originale");
+				}
+				
+				
+		    }
+			
 		}
 
 		public void clearFields() {
 			tagSottoFormDatiRelazione.setSelectedItem(null);
 			urnFormRelazioni.setUrn(new Urn());
+			tagEffettoTipoSFormDatiRelazione.setSelectedItem(null);	
+			
+			
+			Relazione[] newRelazioni = getRelazioniTotalefromCdvf();
+			
+			
+			boolean found=false;
+			for(int i =0;i<newRelazioni.length;i++){
+				if(newRelazioni[i].getTagTipoRelazione().equals("originale")){					
+					tagSottoFormDatiRelazione.removeItem("originale");
+					found=true;
+					break;
+				}			
+			}
+			if(!found){
+				if(tagSottoFormDatiRelazione.getItemCount()<6)
+					tagSottoFormDatiRelazione.addItem("originale");
+			}
 		}
 
 		public boolean checkData() {
@@ -224,10 +304,13 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 		rel_listtextfield.setEditor(tfe);
 		rel_listtextfield.addListTextFieldElementListener(tfe);
 
-		tagEffettoSottoFormDatiRelazione = (JComboBox) sottoFormDatiRelazione.getComponentByName("editor.form.meta.ciclodivita.relazione.tipoeffetto");
-		tagEffettoSottoFormDatiRelazione.addItem("normativo");
-		tagEffettoSottoFormDatiRelazione.addItem("implementativo");
-		tagEffettoSottoFormDatiRelazione.setEnabled(false);
+		tagEffettoTipoSFormDatiRelazione = (JComboBox) sottoFormDatiRelazione.getComponentByName("editor.form.meta.ciclodivita.relazione.tipoeffetto");
+		tagEffettoTipoSFormDatiRelazione.addItem("normativo");
+		tagEffettoTipoSFormDatiRelazione.addItem("implementativo");
+		tagEffettoTipoSFormDatiRelazione.addItem("attoallegato");
+		tagEffettoTipoSFormDatiRelazione.addItem("allegatointegrante");
+		tagEffettoTipoSFormDatiRelazione.addItem("informativo");
+		tagEffettoTipoSFormDatiRelazione.setEnabled(false);
 		
 		tagSottoFormDatiRelazione = (JComboBox) sottoFormDatiRelazione.getComponentByName("editor.form.meta.ciclodivita.relazioni.tipo");
 		tagSottoFormDatiRelazione.addItem("originale");
@@ -242,22 +325,28 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 			public void itemStateChanged(ItemEvent e) {
 				
 				if(e.getStateChange()==ItemEvent.SELECTED){
-					if (tagSottoFormDatiRelazione.getSelectedItem().equals("giurisprudenza")){
-						tagEffettoSottoFormDatiRelazione.setEnabled(true);
+					Object selectedTag=tagSottoFormDatiRelazione.getSelectedItem();
+					if (selectedTag.equals("giurisprudenza")){
+						tagSottoFormDatiRelazione.removeAllItems();
+						tagSottoFormDatiRelazione.addItem("normativo");
+						tagSottoFormDatiRelazione.addItem("interpretativo");
+						tagSottoFormDatiRelazione.setEnabled(true);
 						
-					}else
-						tagEffettoSottoFormDatiRelazione.setEnabled(false);
+					}else if (selectedTag.equals("haallegato")||selectedTag.equals("allegatodi")){
+						tagSottoFormDatiRelazione.removeAllItems();
+						tagSottoFormDatiRelazione.addItem("attoallegato");
+						tagSottoFormDatiRelazione.addItem("allegatointegrante");
+						tagSottoFormDatiRelazione.addItem("informativo");
+						tagSottoFormDatiRelazione.setEnabled(true);
+					}
+					
+					else tagSottoFormDatiRelazione.setEnabled(false);
 				}
 				
 			}
 			
 		});		
 		
-		
-		
-		
-		
-
 		eventoButton = (JButton) form.getComponentByName("editor.form.meta.ciclodivita.riepilogo.eventi_btn");
 		relazioniButton = (JButton) form.getComponentByName("editor.form.meta.ciclodivita.riepilogo.relazioni_btn");
 		eventoButton.addActionListener(this);
@@ -275,6 +364,7 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 
 	public void actionPerformed(ActionEvent e) {				
 		 if (e.getSource().equals(eventoButton)) { // EVENTI
+			 formEventi.setRel_totali(getRelazioniUlteriori());
 			formEventi.setEventi(eventi);
 			setEventi(eventi);
 			setRelazioniUlteriori(relazioniUlteriori);
@@ -366,7 +456,9 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 		Vector relazioniVect = rel_listtextfield.getListElements();
 		for (int i = 0; i < relazioniVect.size(); i++) {
 			Relazione r = (Relazione) relazioniVect.elementAt(i);
+			
 			if (r.getId() != null) {
+				
 				try {
 					String s = r.getId().substring(0, prefix.length());
 					if (s.equals(prefix)) {
@@ -383,6 +475,7 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 		// e poi nelle relazioni delle vigenze
 		for (int i = 0; i < eventi.length; i++) {
 			if (eventi[i].getFonte() != null) {
+				
 				try {
 					String s = eventi[i].getFonte().getId().substring(0, prefix.length());
 					if (s.equals(prefix)) {
@@ -397,7 +490,46 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 		}
 
 		uID += (max + 1);
+		
 		return uID;
+	}
+
+	public Relazione[] getRelazioniTotalefromCdvf() {
+		Vector vec = rel_listtextfield.getListElements();
+    	Relazione[] rel_ins = new Relazione[vec.size()];
+		vec.toArray(rel_ins);
+    	
+//		 Ricomponi le relazioni eliminando quelle duplicate (caso di +eventi linkati ad 1 relazione)
+		Vector relazioniVect = new Vector();
+		boolean duplicated;
+		
+		for (int i = 0; i < eventi.length; i++) {
+			duplicated = false;
+			
+			for(int j=0; j<relazioniVect.size();j++){
+		        if(((Relazione)relazioniVect.get(j)).getId().equalsIgnoreCase(eventi[i].getFonte().getId()))
+		        	duplicated = true;
+			}
+			if(!duplicated)
+				relazioniVect.add(eventi[i].getFonte());		
+		}
+		for (int i = 0; i < rel_ins.length; i++) {
+			relazioniVect.add(rel_ins[i]);
+		}
+
+		Relazione[] newRelazioni = new Relazione[relazioniVect.size()];
+		relazioniVect.copyInto(newRelazioni);
+		return newRelazioni;
+	}
+
+	public void setEventiOnVigenze(String[] eventiOnVigenze, VigenzaEntity[] vigenze) {
+		formEventi.setEventiOnVigenze(eventiOnVigenze, vigenze);
+	}
+
+	
+	
+	public VigenzaEntity[] getVigToUpdate(){
+		return formEventi.getVigToUpdate();
 	}
 
 	

@@ -28,7 +28,6 @@ import java.util.EventObject;
 import javax.swing.AbstractAction;
 
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 /**
  * <h1>Implementazione del servizio
@@ -84,6 +83,8 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 	Node activeNode;
 
 	int start, end;
+	
+	
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -129,7 +130,7 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 	public void doNewVigenza(Node active) {
 		
 		if(active!=null){
-
+			
 			VigenzaEntity vig = vigenza.getVigenza(active,start,end);
 			Evento[] eventi_vig=new Evento[2];
 			if(vig!=null){
@@ -149,8 +150,10 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 			vigenzaForm.setTestoselezionato(vigenza.getSelectedText());
 	
 			if(vigenzaForm.openForm(active)){
-				
+				//nuovo
+				vigenza.updateVigenzaOnDoc(vigenzaForm.getVigenza());
 				vigenza.setVigenza(active,start,end, vigenzaForm.getVigenza());
+				vigenza.setTipoDocVigenza();
 								
 			}
 		}

@@ -28,6 +28,8 @@ import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.MetaDescrittori;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.inquadramento.MetaInquadramento;
 import it.cnr.ittig.xmleges.editor.services.dom.rinumerazione.Rinumerazione;
+import it.cnr.ittig.xmleges.editor.services.dom.vigenza.Vigenza;
+import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 import it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita.CiclodiVitaForm;
 import it.cnr.ittig.xmleges.editor.services.form.meta.descrittori.MetaDescrittoriForm;
 import it.cnr.ittig.xmleges.editor.services.form.meta.inquadramento.InquadramentoForm;
@@ -125,6 +127,8 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 	Autorita regAutorita;
 
 	DtdRulesManager dtdRulesManager;
+	
+	Vigenza vigenza;
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -151,6 +155,7 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		provvedimenti = (Provvedimenti) serviceManager.lookup(Provvedimenti.class);
 		regAutorita = (Autorita) serviceManager.lookup(Autorita.class);
 		urnDocumentoForm = (UrnDocumentoForm) serviceManager.lookup(UrnDocumentoForm.class);
+		vigenza = (Vigenza) serviceManager.lookup(Vigenza.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
@@ -199,6 +204,8 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 				logger.error(ex.getMessage(), ex);
 			}
 		}
+		
+		
 	}
 	public void doInquadramento() {
 		Document doc = documentManager.getDocumentAsDom();
@@ -229,11 +236,16 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 	}
 	public void doCiclodiVita() {
 		
+		Evento[] eventiOnDom = ciclodivita.getEventi();
+		Relazione[] relazioniOnDom = ciclodivita.getRelazioni();
 		
-		ciclodivitaForm.setEventi(ciclodivita.getEventi());
-		ciclodivitaForm.setRelazioniUlteriori(ciclodivita.getRelazioniUlteriori(ciclodivita.getEventi(),ciclodivita.getRelazioni()));
+		ciclodivitaForm.setEventi(eventiOnDom);
+		ciclodivitaForm.setRelazioniUlteriori(ciclodivita.getRelazioniUlteriori(eventiOnDom,relazioniOnDom));
 		
-		
+		String[] id_eventiOnVigenze =ciclodivita.getEventiOnVigenza();
+		VigenzaEntity[] vigenze = ciclodivita.getVigenze();
+		ciclodivitaForm.setEventiOnVigenze(id_eventiOnVigenze, vigenze);
+				
 		if(ciclodivitaForm.openForm()){
 			Evento[] newEventi = ciclodivitaForm.getEventi();
 			Relazione[] relazioniUlteriori = ciclodivitaForm.getRelazioniUlteriori();
@@ -242,8 +254,15 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 	
 			// SETTA SUL DOM:
 			ciclodivita.setEventi(newEventi);
-   		    ciclodivita.setRelazioni(newRelazioni);				
+   		    ciclodivita.setRelazioni(newRelazioni);
+   		    
+   		    if (ciclodivitaForm.getVigToUpdate()!=null && ciclodivitaForm.getVigToUpdate().length>0) {
+   		    	VigenzaEntity[] elenco =ciclodivitaForm.getVigToUpdate();
+   		    	for(int i=0; i<elenco.length;i++)
+   		    		vigenza.updateVigenzaOnDoc(elenco[i]);
+   		    }
 		}
+		
 	}
 
 

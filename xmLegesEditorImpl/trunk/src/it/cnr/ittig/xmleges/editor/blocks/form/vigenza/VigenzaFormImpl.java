@@ -69,7 +69,8 @@ public class VigenzaFormImpl implements VigenzaForm, FormVerifier, Loggable, Ser
 	Node activeNode;
 	
 	String sel_text;
-
+	
+	
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -163,7 +164,7 @@ public Evento getInizioVigore() {
 	}
 
 	public VigenzaEntity getVigenza() {
-		return new VigenzaEntity(eventoiniziovigoreform.getEvento(),
+		return new VigenzaEntity(activeNode, eventoiniziovigoreform.getEvento(),
 				eventofinevigoreform.getEvento(),(String)vigenzaStatus.getSelectedItem(),sel_text);
 	}
 
@@ -196,6 +197,8 @@ public Evento getInizioVigore() {
 //	}
 //	
 //}
+
+
 
 
 //public void setFineEfficacia(Evento fineefficacia) {
