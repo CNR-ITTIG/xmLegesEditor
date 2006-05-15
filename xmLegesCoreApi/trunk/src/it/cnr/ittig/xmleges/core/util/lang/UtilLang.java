@@ -228,6 +228,38 @@ public class UtilLang {
 			return "abcdefghijklmnopqrstuvwxyz".indexOf(lett) + 79;
 		return -1;
 	}
+	
+	
+	// come fromArabicToLetter ma con alfabeto a 26 caratteri
+	public static String fromNumberToLetter21(String number) {
+
+		int times;
+		int num;
+		String ret = "";
+		try {
+			num = Integer.parseInt(number);
+			if (num - 1 < 0)
+				return ("");
+			times = ((num - 1) / 21) + 1;
+			for (int i = 0; i < times; i++)
+				ret = ret + Character.toString("abcdefghilmnopqrstuvz".charAt((num - 1) % 21));
+		} catch (Exception e) {
+		}
+		return ret;
+	}
+
+	public static int fromLetterToNumber21(String c) {
+		char lett = c.charAt(0);
+		if (c.length() == 1)
+			return "abcdefghilmnopqrstuvz".indexOf(lett) + 1;
+		if (c.length() == 2)
+			return "abcdefghilmnopqrstuvz".indexOf(lett) + 22;
+		if (c.length() == 3)
+			return "abcdefghilmnopqrstuvz".indexOf(lett) + 43;
+		if (c.length() == 4)
+			return "abcdefghilmnopqrstuvz".indexOf(lett) + 64;
+		return -1;
+	}
 
 	public static String fromArabicToRoman(String arabic) {
 		int arabicnum;
