@@ -3,6 +3,8 @@ package it.cnr.ittig.xmleges.editor.services.action.vigenza;
 import org.w3c.dom.Node;
 
 import it.cnr.ittig.services.manager.Service;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
 
 /**
  * Servizio per l'attivazione della gestione delle vigenze.
@@ -23,5 +25,7 @@ import it.cnr.ittig.services.manager.Service;
 public interface VigenzaAction extends Service {
 
 	public void doNewVigenza(Node active);
+	
+	
 
 }

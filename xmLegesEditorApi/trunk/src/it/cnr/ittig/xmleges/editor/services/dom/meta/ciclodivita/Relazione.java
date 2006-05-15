@@ -19,7 +19,7 @@ package it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita;
  */
 public class Relazione {
 
-	// FIXME:  nel caso di relazione di tipo giurisprudenza manca l'effetto (normativo|interpretativo)
+
 	
 	/** Nome del tag: originale, attiva, passiva, giurisprudenza, haallegato, allegatodi */
 	String tagTipoRelazione;
@@ -30,21 +30,21 @@ public class Relazione {
 	/** Link della relazione */
 	String link;
 	
-	/** Effetto della relazione */
-	String effetto;
+	/** Effetto/tipo allegato della relazione */
+	String effetto_tipoall;
 
 	public Relazione(String tag, String id, String link) {
 		setTagTipoRelazione(tag);
 		setId(id);
 		setLink(link);
-		setEffetto(null);
+		setEffetto_tipoall(null);
 	}
 	
-	public Relazione(String tag, String id, String link, String effetto) {
+	public Relazione(String tag, String id, String link, String effetto_tipoall) {
 		setTagTipoRelazione(tag);
 		setId(id);
 		setLink(link);
-		setEffetto(effetto);
+		setEffetto_tipoall(effetto_tipoall);
 	}
 
 	public String getTagTipoRelazione() {
@@ -71,12 +71,12 @@ public class Relazione {
 		this.link = link;
 	}
 	
-	public String getEffetto() {
-		return effetto;
+	public String getEffetto_tipoall() {
+		return effetto_tipoall;
 	}
 
-	public void setEffetto(String effetto) {
-		this.effetto = effetto;
+	public void setEffetto_tipoall(String effetto_tipoall) {
+		this.effetto_tipoall = effetto_tipoall;
 	}
 
 

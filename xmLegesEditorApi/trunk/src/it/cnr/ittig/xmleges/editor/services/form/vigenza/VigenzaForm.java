@@ -1,10 +1,10 @@
 package it.cnr.ittig.xmleges.editor.services.form.vigenza;
 
-import org.w3c.dom.Node;
-
 import it.cnr.ittig.services.manager.Service;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
+
+import org.w3c.dom.Node;
 
 /**
  * Form per la selezione di una vigenza da applicare a un testo.
@@ -111,6 +111,8 @@ public interface VigenzaForm extends Service {
 	public void setVigenza(VigenzaEntity vigenza);
 	
 	public void setTestoselezionato(String testo);
+	
+//	public void setCiclidivita(Relazione[] relazioni, Evento[] eventi);
 	
 	
 //	/**

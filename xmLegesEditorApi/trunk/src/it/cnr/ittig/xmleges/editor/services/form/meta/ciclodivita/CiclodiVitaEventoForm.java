@@ -2,6 +2,8 @@ package it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita;
 
 import it.cnr.ittig.services.manager.Service;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
+import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 
 /**
  * Servizio per la gestione dei metadati vigenze del documento NIR.
@@ -60,4 +62,12 @@ public interface CiclodiVitaEventoForm extends Service {
 	 * @param tipoDTD DTD del documento
 	 */
 	public void setTipoDTD(String tipoDTD);
+	
+	public void setRel_totali(Relazione[] rel_totali);
+	
+	public Relazione[] getRelazioniTotalefromCdvEf();
+	
+	public void setEventiOnVigenze(String[] eventiOnVigenze, VigenzaEntity[] vigenze);
+	
+	public VigenzaEntity[] getVigToUpdate();
 }

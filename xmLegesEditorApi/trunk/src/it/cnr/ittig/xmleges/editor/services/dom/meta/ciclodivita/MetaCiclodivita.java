@@ -1,6 +1,7 @@
 package it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita;
 
 import it.cnr.ittig.services.manager.Service;
+import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 
 /**
  * Servizio per l'inserimento del ciclodivita del documento.
@@ -64,4 +65,8 @@ public interface MetaCiclodivita extends Service {
 	 * @return
 	 */
 	public Relazione[] getRelazioniUlteriori(Evento[] eventi, Relazione[] relazioni);
+	
+	public String[] getEventiOnVigenza();
+	
+	public VigenzaEntity[] getVigenze();
 }

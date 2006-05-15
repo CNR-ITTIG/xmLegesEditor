@@ -56,6 +56,15 @@ public interface Vigenza extends Service {
 	
 	public String getSelectedText();
 	
+	public boolean isVigente();
+
+	public void setTipoDocVigenza();
+	
+	public void updateVigenzaOnDoc(VigenzaEntity vig);
+
+	
+	
+	
 
 
 }

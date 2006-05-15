@@ -1,5 +1,10 @@
 package it.cnr.ittig.xmleges.editor.services.dom.vigenza;
 
+import org.w3c.dom.Node;
+
+import it.cnr.ittig.services.manager.ServiceException;
+import it.cnr.ittig.services.manager.ServiceManager;
+import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 
 /**
@@ -19,7 +24,7 @@ import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
  * @version 1.0
  * @author <a href="mailto:agnoloni@ittig.cnr.it">Tommaso Agnoloni</a>
  */
-public class VigenzaEntity {
+public class VigenzaEntity {//implements Serviceable{
 
 	
 	/** Evento iniziovigore */
@@ -38,13 +43,20 @@ public class VigenzaEntity {
 	String status;
 	
 	String sel_text;
+	
+	Node onNode;
+	
+//	Vigenza vigenza;
+	
+	
 
-	public VigenzaEntity(Evento inizioVigore,
+	public VigenzaEntity(Node node, Evento inizioVigore,
 			Evento fineVigore,
 			/*Evento inizioEfficacia,
 			Evento fineEfficacia,*/
 			String status, String text) 
 	{
+		onNode=node;
 		setEInizioVigore(inizioVigore);
 		setEFineVigore(fineVigore);
 //		setEInizioEfficacia(inizioEfficacia);
@@ -111,9 +123,10 @@ public class VigenzaEntity {
 }
 
 
-public void setEInizioVigore(Evento inizioVigore) {
-	eInizioVigore = inizioVigore;
-}
+	public void setEInizioVigore(Evento inizioVigore) {
+		eInizioVigore = inizioVigore;
+	}
+	
 	public Evento getEFineVigore() {
 		return eFineVigore;
 	}
@@ -122,6 +135,22 @@ public void setEInizioVigore(Evento inizioVigore) {
 	public void setEFineVigore(Evento fineVigore) {
 		eFineVigore = fineVigore;
 	}
+
+
+	public Node getOnNode() {
+		return onNode;
+	}
+	
+//	public void updateVigenza(){
+//		vigenza.updateVigenzaOnDoc(this);
+//		return;
+//	}
+//
+//
+//	public void service(ServiceManager serviceManager) throws ServiceException {
+//		vigenza = (Vigenza) serviceManager.lookup(Vigenza.class);
+//		
+//	};
 
 
 	
