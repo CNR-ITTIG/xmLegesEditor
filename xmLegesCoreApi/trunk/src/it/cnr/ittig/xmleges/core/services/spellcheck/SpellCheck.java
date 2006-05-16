@@ -67,17 +67,28 @@ public interface SpellCheck extends Service {
 	public void setCustomDictionary(String name);
 
 	/**
-	 * Aggiunge la parola <code>word</code> al dizionario <code>custom</code>.
+	 * Aggiunge la parola <code>word</code> al dizionario <code>TEMPORARY_DICT</code> o al dizionario <code>PERSONAL_DICT</code>.
 	 * 
 	 * @param word parola da aggiungere
+	 * @param dizTemp True: utilizza il TEMPORARY_DICT, False: utilizza il PERSONAL_DICT
 	 */
-	public void addWord(String word);
+	public void addWord(String word, boolean temporaryDict);
 
+	/**
+	 * Aggiunge il suggerimento <code>suggestion</code> alla parola <code>word</code> nel dizionario <code>TEMPORARY_DICT</code> o nel dizionario <code>PERSONAL_DICT</code>.
+	 * 
+	 * @param word parola errata
+	 * @param suggestion parola suggerita
+	 * @param dizTemp True: utilizza il TEMPORARY_DICT, False: utilizza il PERSONAL_DICT
+	 */
+	public void addSuggestion(String word, String suggestion, boolean temporaryDict);
+	
 	/**
 	 * Rimuove la parola <code>word</code> dal dizionario <code>custom</code>.
 	 * 
 	 * @param word parola da rimuovere
 	 */
+	
 	public void removeWord(String word);
 
 	/**
@@ -87,11 +98,4 @@ public interface SpellCheck extends Service {
 	 * @param newWord nuova parola da sostituire
 	 */
 	public void modifyWord(String oldWord, String newWord);
-
-	/**
-	 * Ritorna l'istanza al SpellChecker
-	 * 
-	 */
-	public Object getChecker();	
-
 }

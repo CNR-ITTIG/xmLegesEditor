@@ -30,7 +30,7 @@ public interface DomSpellCheck extends Service {
 	 * Restituisce un oggetto di tipo SpellCheck
 	 */
 	public SpellCheck getSpellCheck();
-
+	
 	/**
 	 * Esegue il controllo ortografico sul Node <code>node</code>.
 	 * 
