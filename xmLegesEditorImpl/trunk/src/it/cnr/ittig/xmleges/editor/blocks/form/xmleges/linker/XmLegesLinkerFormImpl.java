@@ -253,6 +253,8 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 		radioDoc.setSelected(true);
 		checkInt.setEnabled(true);
 		checkInc.setEnabled(true);
+		checkInt.setSelected(true);
+		checkInc.setSelected(true);
 		form.showDialog();
 		return form.isOk();
 	}
