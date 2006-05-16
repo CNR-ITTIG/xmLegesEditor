@@ -61,6 +61,10 @@ public class XmLegesLinkerImpl implements XmLegesLinker, Loggable, Serviceable, 
 	String regione = null;
 
 	String ministero = null;
+	
+	boolean rifIncompleti = false;
+	
+	boolean rifInterni = false;
 
 	int timeout;
 
@@ -99,6 +103,14 @@ public class XmLegesLinkerImpl implements XmLegesLinker, Loggable, Serviceable, 
 	public void setMinistero(String ministero) {
 		this.ministero = ministero;
 	}
+	
+	public void setEnabledRifInterni(boolean rifInterni){
+		this.rifInterni = rifInterni;
+	}
+	
+	public void setEnabledRifIncompleti(boolean rifIncompleti){
+		this.rifIncompleti = rifIncompleti;
+	}
 
 	protected boolean firstTime = true;
 
@@ -116,6 +128,14 @@ public class XmLegesLinkerImpl implements XmLegesLinker, Loggable, Serviceable, 
 		if (ministero != null)
 			sb.append(" -M " + this.ministero);
 		sb.append(" -m dtdnir -i xml ");
+		
+		if(rifIncompleti && rifInterni)
+			sb.append(" -r ni");
+		else if(rifIncompleti)
+			sb.append(" -r n");
+		else if(rifInterni)
+			sb.append(" -r i");
+		
 		sb.append(" -f " + UtilFile.getTempDirName() + "/pr.in");
 		sb.append(" -F " + UtilFile.getTempDirName() + "/pr.out");
 		sb.append(" -L file=" + UtilFile.getTempDirName() + "/pr.err");

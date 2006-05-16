@@ -23,7 +23,10 @@ import java.io.File;
 
 import javax.swing.AbstractAction;
 import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 
@@ -84,10 +87,16 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 	JTextArea sorgente;
 
 	JTextArea risultati;
+	
+	AbstractButton analizza;
 
-	AbstractButton analizzaSel;
+	JRadioButton radioSel;
 
-	AbstractButton analizzaDoc;
+	JRadioButton radioDoc;
+	
+	JCheckBox checkInt;
+	
+	JCheckBox checkInc;
 
 	String[] elencoregioni = new String[21];
 
@@ -159,12 +168,24 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 		sorgente.setWrapStyleWord(true);
 		risultati = (JTextArea) form.getComponentByName("editor.form.xmleges.link.risultati");
 		risultati.setWrapStyleWord(true);
-
-		analizzaDoc = (AbstractButton) form.getComponentByName("editor.form.xmleges.link.intero");
-		analizzaDoc.setAction(new AnalizzaDocAction());
-		analizzaSel = (AbstractButton) form.getComponentByName("editor.form.xmleges.link.analizza");
-		analizzaSel.setAction(new AnalizzaSelAction());
-
+		
+		radioDoc = (JRadioButton) form.getComponentByName("editor.form.xmleges.link.radio.intero");
+		radioDoc.setAction(new radioDocAction());
+		
+		radioSel = (JRadioButton) form.getComponentByName("editor.form.xmleges.link.radio.selezione");
+		radioSel.setAction(new radioSelAction());
+		
+		ButtonGroup grupporadio = new ButtonGroup();
+		grupporadio.add(radioDoc);
+		grupporadio.add(radioSel);
+		
+		
+		checkInt = (JCheckBox) form.getComponentByName("editor.form.xmleges.link.check.interni");
+		checkInc = (JCheckBox) form.getComponentByName("editor.form.xmleges.link.check.incompleti");
+		
+		analizza = (AbstractButton) form.getComponentByName("editor.form.xmleges.link.analizza");
+		analizza.setAction(new AnalizzaDocAction());
+		
 		regione.removeAllItems();
 		for (int i = 0; i < elencoregioni.length; i++)
 			regione.addItem(elencoregioni[i]);
@@ -228,7 +249,10 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 			} catch (Exception ex) {
 				logger.error(ex.toString(), ex);
 			}
-		analizzaSel.setEnabled(!parseAll);
+		radioSel.setEnabled(!parseAll);
+		radioDoc.setSelected(true);
+		checkInt.setEnabled(true);
+		checkInc.setEnabled(true);
 		form.showDialog();
 		return form.isOk();
 	}
@@ -245,76 +269,99 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 		risultati.setCaretPosition(0);
 	}
 
-	protected class AnalizzaSelAction extends AbstractAction {
+	protected class radioDocAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
-			form.setDialogWaiting(true);
-			try {
-				if (regione.getSelectedIndex() != 0)
-					parser.setRegione(regione.getSelectedItem().toString());
-				switch (tipo) {
-				case TESTO:
-					risText = UtilFile.inputStreamToString(parser.parse(text));
-					error = parser.getError();
-					setRisultati(risText);
-					break;
-				case NODO:
-					risNode = UtilFile.inputStreamToString(parser.parse(node));
-					error = parser.getError();
-					setRisultati(risNode);
-					break;
-				case NODI:
-					risNodes = new String[nodes.length];
-					StringBuffer sb = new StringBuffer();
-					for (int i = 0; i < nodes.length; i++) {
-						risNodes[i] = UtilFile.inputStreamToString(parser.parse(nodes[i]));
-						error = parser.getError();
-						if (error != null)
-							break;
-						sb.append(risNodes[i]);
-						sb.append('\n');
-					}
-					setRisultati(sb.toString());
-					break;
-				}
-				// TODO I18n
-				utilMsg.msgInfo(form.getAsComponent(), "Analisi della selezione completata.");
-				parsedAll = false;
-			} catch (Exception ex) {
-				logger.error(ex.toString(), ex);
-				// TODO I18n
-				utilMsg.msgError(form.getAsComponent(), "Errore durante l'esecuzione dell'analizzatore dei riferimenti:\n" + ex.toString());
-			}
-
-			if (error != null)
-				// TODO I18n
-				utilMsg.msgError(form.getAsComponent(), "Errore durante l'esecuzione dell'analizzatore dei riferimenti:\n" + error);
-			form.setDialogWaiting(false);
+			checkInt.setEnabled(true);
+			checkInc.setEnabled(true);	
 		}
 	}
-
+	
+	protected class radioSelAction extends AbstractAction {
+		public void actionPerformed(ActionEvent e) {
+			checkInt.setEnabled(false);
+			checkInc.setEnabled(false);
+		}
+	}
+	
 	protected class AnalizzaDocAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
 			form.setDialogWaiting(true);
-			try {
-				if (regione.getSelectedIndex() != 0)
-					parser.setRegione(regione.getSelectedItem().toString());
-				risAll = UtilFile.inputStreamToString(parser.parse(dm.getRootElement()));
-				error = parser.getError();
-				setRisultati(risAll);
-				parsedAll = true;
-				// TODO I18n
-				utilMsg.msgInfo(form.getAsComponent(), "Analisi dell'intero documento completata.");
-			} catch (Exception ex) {
-				logger.error(ex.toString(), ex);
-				// TODO I18n
-				utilMsg.msgError(form.getAsComponent(), "Errore durante l'esecuzione dell'analizzatore dei riferimenti:\n" + ex.toString());
-			}
-
-			if (error != null)
-				// TODO I18n
-				utilMsg.msgError(form.getAsComponent(), "Errore durante l'esecuzione dell'analizzatore dei riferimenti:\n" + error);
+			if(radioSel.isSelected())
+				AnalizzaSel();
+			else if(radioDoc.isSelected())
+				AnalizzaDoc();
 			form.setDialogWaiting(false);
 		}
+	}
+	
+	private void AnalizzaSel(){
+		form.setDialogWaiting(true);
+		try {
+			if (regione.getSelectedIndex() != 0)
+				parser.setRegione(regione.getSelectedItem().toString());
+			parser.setEnabledRifIncompleti(false);
+			parser.setEnabledRifInterni(false);
+			switch (tipo) {
+			case TESTO:
+				risText = UtilFile.inputStreamToString(parser.parse(text));
+				error = parser.getError();
+				setRisultati(risText);
+				break;
+			case NODO:
+				risNode = UtilFile.inputStreamToString(parser.parse(node));
+				error = parser.getError();
+				setRisultati(risNode);
+				break;
+			case NODI:
+				risNodes = new String[nodes.length];
+				StringBuffer sb = new StringBuffer();
+				for (int i = 0; i < nodes.length; i++) {
+					risNodes[i] = UtilFile.inputStreamToString(parser.parse(nodes[i]));
+					error = parser.getError();
+					if (error != null)
+						break;
+					sb.append(risNodes[i]);
+					sb.append('\n');
+				}
+				setRisultati(sb.toString());
+				break;
+			}
+			// TODO I18n
+			utilMsg.msgInfo(form.getAsComponent(), "Analisi della selezione completata.");
+			parsedAll = false;
+		} catch (Exception ex) {
+			logger.error(ex.toString(), ex);
+			// TODO I18n
+			utilMsg.msgError(form.getAsComponent(), "Errore durante l'esecuzione dell'analizzatore dei riferimenti:\n" + ex.toString());
+		}
+
+		if (error != null)
+			// TODO I18n
+			utilMsg.msgError(form.getAsComponent(), "Errore durante l'esecuzione dell'analizzatore dei riferimenti:\n" + error);
+	}
+	
+	
+	private void AnalizzaDoc(){
+		try {
+			if (regione.getSelectedIndex() != 0)
+				parser.setRegione(regione.getSelectedItem().toString());
+			parser.setEnabledRifIncompleti(checkInc.isSelected());
+			parser.setEnabledRifInterni(checkInt.isSelected());
+			risAll = UtilFile.inputStreamToString(parser.parse(dm.getRootElement()));
+			error = parser.getError();
+			setRisultati(risAll);
+			parsedAll = true;
+			// TODO I18n
+			utilMsg.msgInfo(form.getAsComponent(), "Analisi dell'intero documento completata.");
+		} catch (Exception ex) {
+			logger.error(ex.toString(), ex);
+			// TODO I18n
+			utilMsg.msgError(form.getAsComponent(), "Errore durante l'esecuzione dell'analizzatore dei riferimenti:\n" + ex.toString());
+		}
+
+		if (error != null)
+			// TODO I18n
+			utilMsg.msgError(form.getAsComponent(), "Errore durante l'esecuzione dell'analizzatore dei riferimenti:\n" + error);
 	}
 
 }
