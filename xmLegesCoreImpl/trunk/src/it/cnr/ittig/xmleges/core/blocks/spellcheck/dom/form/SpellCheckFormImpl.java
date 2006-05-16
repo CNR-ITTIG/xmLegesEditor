@@ -18,12 +18,10 @@ import it.cnr.ittig.xmleges.core.services.spellcheck.dom.DomSpellCheckWord;
 import it.cnr.ittig.xmleges.core.services.spellcheck.dom.form.SpellCheckForm;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
-import it.cnr.ittig.xmleges.core.util.file.UtilFile;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
-import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -37,14 +35,6 @@ import javax.swing.event.ListSelectionListener;
 import org.w3c.dom.Node;
 
 import com.jeta.forms.components.image.ImageComponent;
-import com.xmlmind.spellcheck.engine.SpellChecker;
-
-//per dizionario utente
-import com.xmlmind.spellcheck.engine.DictionaryManager;
-import com.xmlmind.spellcheck.engine.SpellException;
-import com.xmlmind.spellcheck.engine.TLex;
-import com.xmlmind.spellcheck.engine.TLexRules;
-import com.xmlmind.spellcheck.engine.EditableWord;
 
 
 /**

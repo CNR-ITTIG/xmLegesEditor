@@ -13,7 +13,6 @@ import it.cnr.ittig.xmleges.core.services.spellcheck.SpellCheckWord;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
 
 import java.io.File;
-import java.util.StringTokenizer;
 import java.util.Vector;
 
 import com.xmlmind.spellcheck.engine.SpellChecker;
