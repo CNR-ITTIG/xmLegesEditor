@@ -21,6 +21,7 @@ import com.xmlmind.spellcheck.engine.SpellException;
 
 
 
+
 /**
  * Implementazione del servizio per la gestione del controllo ortografico del testo.
  * 
@@ -61,6 +62,7 @@ public class SpellCheckImpl implements SpellCheck, Loggable, Serviceable, Initia
 	}
 
 	public void service(ServiceManager serviceManager) throws ServiceException {
+		//threadManager = (ThreadManager) serviceManager.lookup(ThreadManager.class);
 		i18n = (I18n) serviceManager.lookup(I18n.class);
 	}
 
@@ -99,60 +101,56 @@ public class SpellCheckImpl implements SpellCheck, Loggable, Serviceable, Initia
 	
 	
 	private SpellCheckWord[] doSearch() {
-		try {
-			 Vector listaparole = new Vector();		
-			 StringTokenizer esamina = new StringTokenizer(testo);
-			 int offsetToken = 0;
-		     while (esamina.hasMoreTokens()) {	
-		    	String parola = esamina.nextToken(); 	
-				for (;;) {
-					// prepare
-					// acquire next fragment from application:
-					checker.setInput(parola);
-					offsetToken = testo.indexOf(parola);
-					try{
-					int err = checker.checkNext();
-					
-					if (err == SpellChecker.ERR_NONE) {
-						//end reached: update position in source
-						break;
-					}
-					String failingWord = checker.getWord();
-					int replacePos = checker.getPosition();
-					int replaceSize = failingWord.length();
+        Vector listaparole = new Vector();		
+	    boolean controlla = true;
+	    try{
+		checker.setInput(testo);
+		int err = checker.checkNext();
+		int offsetparziale = 0;
+		while (controlla) {			
+			if (err == SpellChecker.ERR_NONE) {
+			    controlla = false;
+				break;
+			}
+			String failingWord = checker.getWord();
+			int replacePos = checker.getPosition();
+			int replaceSize = failingWord.length();
 
-					switch(err) {
-					case SpellChecker.ERR_DUPLICATE:
-						break;
-					case SpellChecker.ERR_REPLACE:
-						continue;
-					case SpellChecker.ERR_WRONG_CAP:
-						break;
-					case SpellChecker.ERR_PUNCTUATION:
-						break;
-					case SpellChecker.ERR_UNKNOWN_WORD:
-						listaparole.add(new SpellCheckWordImpl(failingWord, offsetToken+replacePos, offsetToken+replacePos+replaceSize));
-						break;
-					}	
-					//get and process user commands:
-					break;
-					}
-					catch(SpellException ex){
-						System.err.println(ex.getMessage());
-					}	
-					System.err.println("SONO NEL FORRE: ");
-				 }
-		        }
-		        SpellCheckWord[] ret = new SpellCheckWord[listaparole.size()];
-				listaparole.copyInto(ret);
-				return ret;
-		       } 
-		 	  catch(ClassCastException ex){
-		 	  }
- 	     return null; 
+			switch(err) {
+			case SpellChecker.ERR_DUPLICATE:
+			case SpellChecker.ERR_REPLACE:
+			case SpellChecker.ERR_WRONG_CAP:
+			case SpellChecker.ERR_PUNCTUATION:
+				offsetparziale = offsetparziale+replacePos+replaceSize+1;
+				if (offsetparziale <= testo.length()) {
+					checker.setInput(testo.substring(offsetparziale,testo.length()));
+					err = checker.checkNext();
+				}
+				else controlla = false;
+				break;
+			case SpellChecker.ERR_UNKNOWN_WORD:
+				listaparole.add(new SpellCheckWordImpl(failingWord, offsetparziale+replacePos, offsetparziale+replacePos+replaceSize));
+				offsetparziale = offsetparziale+replacePos+replaceSize+1;
+
+				if (offsetparziale <= testo.length()) {
+					checker.setInput(testo.substring(offsetparziale,testo.length()));
+					err = checker.checkNext();
+				}
+				else controlla = false;
+				break;
+			}
+		}
+	    }
+		catch(SpellException ex){
+			System.err.println(ex.getMessage());
+		}
+	
+        SpellCheckWord[] ret = new SpellCheckWord[listaparole.size()];
+		listaparole.copyInto(ret);
+		
+		return ret;
 	}
 	
-
 	public String[] getSuggestions(String word) {
 		
 	 if (word != null) {
@@ -163,14 +161,12 @@ public class SpellCheckImpl implements SpellCheck, Loggable, Serviceable, Initia
 		int err = checker.checkNext();
 		if (err == SpellChecker.ERR_NONE) return null;
 		switch(err) {	
-			   case SpellChecker.ERR_UNKNOWN_WORD: 	   //potrei testare anche gli altri casi
+			   case SpellChecker.ERR_UNKNOWN_WORD:
 		
-				   
-		       String[] suggerimenti = checker.getSuggestions().toArray();
-			    
+		       String[] suggerimenti = checker.getSuggestions().toArray();	    
   		       return suggerimenti;
 		     
-		} //chiudo lo switch
+		}
 		
 	  } catch(SpellException ex){}
 	 }		
@@ -178,10 +174,6 @@ public class SpellCheckImpl implements SpellCheck, Loggable, Serviceable, Initia
 
 	}
 
-	public Object getChecker() {
-		return  checker;
-	}
-	
 	public String[] getDictionaries() {
 		// TODO getDictionaries
 		return null;
@@ -199,8 +191,55 @@ public class SpellCheckImpl implements SpellCheck, Loggable, Serviceable, Initia
 		// TODO setCustomDictionary
 	}
 
-	public void addWord(String word) {
+	public void addWord(String word, boolean temporaryDict) {
 		// TODO addWord
+	}
+	
+	public void addSuggestion(String word, String suggestion, boolean temporaryDict) {		
+		
+		try {		
+		
+		  String dictionary = null;
+		  if (temporaryDict) dictionary = SpellChecker.TEMPORARY_DICT;
+		  else dictionary = SpellChecker.PERSONAL_DICT;		
+	      //se la parola ERRATA è corretta con una NON PRESENTE fra i suggerimenti
+	      if (!isSuggestion(word, suggestion)) {
+	             //Inserisce la parola errata e il suggerimento per la parola impostato
+		         checker.learnSuggestion(word,suggestion,dictionary);
+		         //Inserisce la parola suggerita come giusta fra quelle giuste
+		         checker.learnWord(suggestion,dictionary);
+		         
+		         
+   		         
+		         //Salva il dizionario utente (QUESTO può essere MESSO ALTROVE)
+		         if (!temporaryDict) checker.savePersonalDictionaries();
+		  }    
+		     
+		      
+		} catch (Exception ex) {
+			System.err.println(ex.getMessage());
+		}
+	}
+	
+	private boolean isSuggestion(String word, String suggestion) {
+		
+		  try {
+			
+			checker.setInput(word);  
+			
+			int err = checker.checkNext();
+			if (err == SpellChecker.ERR_NONE) return false;
+			switch(err) {	
+				   case SpellChecker.ERR_UNKNOWN_WORD:
+			
+			       String[] suggerimenti = checker.getSuggestions().toArray();
+			       for (int j=0; j<suggerimenti.length; j++)
+			    	   if (suggestion.equals(suggerimenti[j])) return true;
+	  		       return false;
+			}
+			
+		  } catch(SpellException ex){}
+		  return false;
 	}
 
 	public void removeWord(String word) {

@@ -140,7 +140,6 @@ public class DomSpellCheckImpl implements DomSpellCheck, Loggable, Serviceable, 
 				if (spellCheckWords.length > 0) 
 					for (int j = 0; j < spellCheckWords.length; j++) {
 						ret.add(new DomSpellCheckWordImpl(spellCheckWords[j], (Node) childNodes.get(i)));
-						System.err.println("" + spellCheckWords[j]);
 					}		
  
 			}

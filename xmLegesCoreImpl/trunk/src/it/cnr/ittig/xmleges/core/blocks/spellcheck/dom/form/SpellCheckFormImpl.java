@@ -327,7 +327,7 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 			logger.debug("replace on text");
 
 			if (misspelledIndex != -1 && words.length > 0)
-				replaceWord(words[misspelledIndex]);
+			    replaceWord(words, misspelledIndex);
 			
 			inserted_index.add(new Integer(misspelledIndex));
 			
@@ -370,115 +370,103 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 		else if(evt.getSource() == addButton) {
 		    logger.debug("add word");
 		    
-		    SpellChecker checker = (SpellChecker) domSpellCheck.getSpellCheck().getChecker();
 			DomSpellCheckWord word = words[misspelledIndex];
 			String oldText = word.getNode().getNodeValue();
-			try {	
-		      checker.setPersonalDictionaryPath("dizionarioUtente_%L%.txt");
-		      checker.setSelectedLanguage("it");
-		    
-		      //Inserisce la parola errata e il suggerimento per la parola impostato
-			  checker.learnSuggestion(oldText.substring(word.getSpellCheckWord().getStartOffset(),word.getSpellCheckWord().getEndOffset()),this.getWord(),SpellChecker.PERSONAL_DICT);
-			  //Inserisce la parola suggerita come giusta fra quelle giuste (se la parola era presente con suggerimenti (=errata) li cancella ovviamente)
-			  checker.learnWord(this.getWord(),SpellChecker.PERSONAL_DICT); 
- 			  //Salva il dizionario utente
-			  checker.savePersonalDictionaries();
-			} catch (Exception ex) {
-				System.err.println(ex.getMessage());
-			}	
+			
+			domSpellCheck.getSpellCheck().addSuggestion(oldText.substring(word.getSpellCheckWord().getStartOffset(),word.getSpellCheckWord().getEndOffset()),this.getWord(),false);			        
+			      
+			//eseguo anche un SOSTITUISCI TUTTO
+			replaceAllWord(words, misspelledIndex);
+			
+			inserted_index.add(new Integer(misspelledIndex));
+			
+			if (misspelledIndex != -1 && misspelledIndex < words.length) {
+				misspelledIndex = showWord(words);
+				if (misspelledIndex == -1)
+					utilMsg.msgInfo("spellcheck.error.spellcheckend");
+			} else {
+				utilMsg.msgInfo("spellcheck.error.spellcheckend");
+			}
+			
+				
 		    
 		}
 	}
-
-	private void replaceWord(DomSpellCheckWord word) {
+		
+	private void replaceWord(DomSpellCheckWord[] words, int misspelledIndex) {		
 
 		// Document doc = documentManager.getDocumentAsDom();
 
-		String oldText = word.getNode().getNodeValue();
+		String oldText = words[misspelledIndex].getNode().getNodeValue();
 		logger.debug("oldText:  " + oldText);
-		logger.debug("node " + UtilDom.getPathName(word.getNode()));
-		logger.debug("startOffset: " + word.getSpellCheckWord().getStartOffset());
-		logger.debug("endOffset: " + word.getSpellCheckWord().getEndOffset());
+		logger.debug("node " + UtilDom.getPathName(words[misspelledIndex].getNode()));
+		logger.debug("startOffset: " + words[misspelledIndex].getSpellCheckWord().getStartOffset());
+		logger.debug("endOffset: " + words[misspelledIndex].getSpellCheckWord().getEndOffset());
 		logger.debug("replace with " + this.getWord());
 		
-		try {	
-			SpellChecker checker = (SpellChecker) domSpellCheck.getSpellCheck().getChecker();
-			checker.learnSuggestion(oldText.substring(word.getSpellCheckWord().getStartOffset(),word.getSpellCheckWord().getEndOffset()),this.getWord(),SpellChecker.TEMPORARY_DICT);
-			checker.learnWord(this.getWord(),SpellChecker.TEMPORARY_DICT); 		 
-		} catch (Exception ex) {
-			System.err.println(ex.getMessage());
-		}
-		String newText = oldText.substring(0, word.getSpellCheckWord().getStartOffset()) + this.getWord()
-				+ oldText.substring(word.getSpellCheckWord().getEndOffset());
+		domSpellCheck.getSpellCheck().addSuggestion(oldText.substring(words[misspelledIndex].getSpellCheckWord().getStartOffset(),words[misspelledIndex].getSpellCheckWord().getEndOffset()),this.getWord(), true);
+		
+		String newText = oldText.substring(0, words[misspelledIndex].getSpellCheckWord().getStartOffset()) + this.getWord()
+				+ oldText.substring(words[misspelledIndex].getSpellCheckWord().getEndOffset());
 		logger.debug("newText " + newText);
 		
 		inserted.add(this.getWord());  
 
 		try {
 			tr = documentManager.beginEdit();
-			word.getNode().setNodeValue(newText);
+			words[misspelledIndex].getNode().setNodeValue(newText);
 			//selectionManager.setSelectedText(this,word.getNode(),word.getSpellCheckWord().getStartOffset(),word.getSpellCheckWord().getStartOffset()+this.getWord().length());
 			documentManager.commitEdit(tr);
 		} catch (DocumentManagerException ex) {
 			logger.error(ex.getMessage(), ex);
 		}
+		
+		//aggiorno offset delle altre parole sullo stesso nodo
+		replaceOffset(words, misspelledIndex);
 
 	}
 
+	private void replaceOffset(DomSpellCheckWord[] words, int misspelledIndex) {
+		
+		int i = misspelledIndex;
+		Node repNode = words[i].getNode();
+		int offset = this.getWord().length() - (words[i].getSpellCheckWord().getEndOffset()-words[i].getSpellCheckWord().getStartOffset());
+		
+		i++;
+		while (i < words.length) {
+			if (repNode.equals(words[i].getNode())) {
+				words[i].getSpellCheckWord().setOffsetNodo(offset);
+   			    i++;
+		    }
+			else return;
+		}		
+	}
+	
 	private void replaceAllWord(DomSpellCheckWord[] words, int misspelledIndex) {
 
-//////////////////////////NON CAPISCO COMMENTO TUTTO////////////
-//		String oldWord = oldText.substring(word.getSpellCheckWord().getStartOffset(), word.getSpellCheckWord().getEndOffset());
-//
-//		int startReplace;
-//		int endReplace;
-//		String newText;
-//
-//		while (!oldWord.equals(this.getWord()) && (startReplace = oldText.indexOf(oldWord)) != -1) {
-//			endReplace = startReplace + oldWord.length();
-//			oldText = oldText.substring(0, startReplace) + this.getWord() + oldText.substring(endReplace);
-//			logger.debug("replacing all: " + oldText);
-//		}
-//
-//		newText = oldText;
-//////////////////////////////////////////////////////////////		
+//		 Document doc = documentManager.getDocumentAsDom();
 		
-		
-		// Document doc = documentManager.getDocumentAsDom();
-
 		int i = misspelledIndex;
 		String repAll = words[i].getNode().getNodeValue().substring(words[i].getSpellCheckWord().getStartOffset(),words[i].getSpellCheckWord().getEndOffset());
+		
 		do {
 			if (repAll.equals(words[i].getNode().getNodeValue().substring(words[i].getSpellCheckWord().getStartOffset(),words[i].getSpellCheckWord().getEndOffset()))){
-				
-				System.err.println("OK---"+words[i].getNode().getNodeValue().substring(words[i].getSpellCheckWord().getStartOffset(),words[i].getSpellCheckWord().getEndOffset()));
-
 				String oldText = words[i].getNode().getNodeValue();
+		
 				logger.debug("oldText:  " + oldText);
 				logger.debug("node " + UtilDom.getPathName(words[i].getNode()));
 				logger.debug("startOffset: " + words[i].getSpellCheckWord().getStartOffset());
 				logger.debug("endOffset: " + words[i].getSpellCheckWord().getEndOffset());
 				logger.debug("replace with " + this.getWord());
 				
-				if (i==misspelledIndex) {
-					try {	
-						SpellChecker checker = (SpellChecker) domSpellCheck.getSpellCheck().getChecker();
-						checker.learnSuggestion(oldText.substring(words[i].getSpellCheckWord().getStartOffset(),words[i].getSpellCheckWord().getEndOffset()),this.getWord(),SpellChecker.TEMPORARY_DICT);
-						checker.learnWord(this.getWord(),SpellChecker.TEMPORARY_DICT); 		 
-					} catch (Exception ex) {
-						System.err.println(ex.getMessage());
-					}					
+				if (i==misspelledIndex) { //aggiungo !volta la parola al dizionario
+					domSpellCheck.getSpellCheck().addSuggestion(oldText.substring(words[i].getSpellCheckWord().getStartOffset(),words[i].getSpellCheckWord().getEndOffset()),this.getWord(),true);
 				}
-
+				
 				String newText = oldText.substring(0, words[i].getSpellCheckWord().getStartOffset()) + this.getWord()
 				+ oldText.substring(words[i].getSpellCheckWord().getEndOffset());
 
-				inserted_index.add(new Integer(i));
-				
-				//////////////////////////////////////////////				
-				//// ATTENZIONE: bisogna aggiornare gli offset 
-				//////////////////////////////////////////////
-				
+				inserted_index.add(new Integer(i));				
 				logger.debug("newText " + newText);				
 				
 				try {						
@@ -488,7 +476,11 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 					documentManager.commitEdit(tr);
 				} catch (DocumentManagerException ex) {
 					logger.error(ex.getMessage(), ex);
-				}				
+				}
+				
+				//aggiorno offset delle altre parole sullo stesso nodo
+				replaceOffset(words, i);
+
 			}
 			i++;
 		} while (i < words.length);
