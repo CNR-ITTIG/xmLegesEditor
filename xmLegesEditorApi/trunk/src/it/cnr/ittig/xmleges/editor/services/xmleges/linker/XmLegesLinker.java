@@ -37,6 +37,20 @@ public interface XmLegesLinker extends Service {
 	 * @param ministero ministero di default
 	 */
 	public void setMinistero(String ministero);
+	
+	/**
+	 * Abilita il parsing dei riferimenti Interni
+	 * 
+	 * @param rifInterni
+	 */
+	public void setEnabledRifInterni(boolean rifInterni);
+
+	/**
+	 * Abilita il parsing dei riferimenti Incompleti
+	 * 
+	 * @param rifIncompleti
+	 */
+	public void setEnabledRifIncompleti(boolean rifIncompleti);
 
 	/**
 	 * Cerca i riferimenti non marcati nel testo <code>text</code>.
