@@ -138,8 +138,6 @@ public class XmLegesLinkerImpl implements XmLegesLinker, Loggable, Serviceable {
 	}
 
 	public Node setParsedDocument(String parsedText) {
-		String encoding = documentManager.getEncoding();
-		//parsedText = "<?xml version=\"1.0\" encoding=\"iso-8859-15\"?>" + parsedText;
 		parsedText = "<?xml version=\"1.0\" encoding=\""+documentManager.getEncoding()+"\"?>" + parsedText;
 		logger.debug("[ParserRiferimentiImpl: setParsedDocument" + parsedText);
 		Document doc = documentManager.getDocumentAsDom();
@@ -150,7 +148,7 @@ public class XmLegesLinkerImpl implements XmLegesLinker, Loggable, Serviceable {
 			UtilDom.trimTextNode(imp, true);
 			doc.replaceChild(doc.importNode(imp, true), nirUtilDom.getNIRElement(doc));
 			modified = doc.getDocumentElement();
-			// rinumerazione.aggiorna(doc);
+			rinumerazione.aggiorna(doc);
 			logger.debug("committed edit in setParsedDocument");
 			documentManager.commitEdit(tr);
 			frame.reloadAllPanes();
@@ -170,7 +168,8 @@ public class XmLegesLinkerImpl implements XmLegesLinker, Loggable, Serviceable {
 			String text = textRis;
 			text = "<?xml version=\"1.0\" encoding=\""+documentManager.getEncoding()+"\"?>"
 					+ "<ris  xmlns:h=\"http://www.w3.org/HTML/1998/html4\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">" + text + "</ris>";
-			Node root = UtilXml.textToXML(text, true).getDocumentElement(); // va
+			Node root = UtilXml.textToXML(text, true).getDocumentElement(); 
+			// va
 			// sotto
 			// il
 			// tag
