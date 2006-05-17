@@ -36,7 +36,6 @@ import org.w3c.dom.Node;
 
 import com.jeta.forms.components.image.ImageComponent;
 
-
 /**
  * Implementazione della form controllo ortografico
  * 
@@ -118,6 +117,8 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 	int end;
 
 	EditTransaction tr;
+	
+	int contaTr;
 
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
@@ -193,6 +194,7 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 
 		// form.setSize(680, 450);
 		tr = null;
+		contaTr = 0;
 		form.showDialog();
 		ignored = new Vector();
 		ignoredAll = new Vector();
@@ -209,7 +211,8 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 			}
 		} else {
 			if (tr != null)
-				documentManager.rollbackEdit(tr);
+				for (int j=0; j<contaTr; j++)
+				  documentManager.rollbackEdit(tr);
 		}
 		selectionManager.setSelectedText(this, activeNode, start, start);
 		return form.isOk();
@@ -316,9 +319,18 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 		} else if (evt.getSource() == replaceButton) {
 			logger.debug("replace on text");
 
-			if (misspelledIndex != -1 && words.length > 0)
-			    replaceWord(words, misspelledIndex);
-			
+			if (misspelledIndex != -1 && words.length > 0) {
+			 				
+				  contaTr++;
+		 		  try {
+		 				tr = documentManager.beginEdit();
+						replaceWord(words, misspelledIndex);
+		 				documentManager.commitEdit(tr);
+		 			  } catch (DocumentManagerException ex) {
+		 				logger.error(ex.getMessage(), ex);
+		 			  }
+
+			}
 			inserted_index.add(new Integer(misspelledIndex));
 			
 			if (misspelledIndex != -1 && words.length > 0) {
@@ -339,8 +351,18 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 			logger.debug("replace all");
 			logger.debug("replace on text");
 
-			if (misspelledIndex != -1 && words.length > 0)
-				replaceAllWord(words, misspelledIndex);
+			if (misspelledIndex != -1 && words.length > 0) {
+			
+				  contaTr++;
+				  try {						
+						tr = documentManager.beginEdit();
+						replaceAllWord(words, misspelledIndex);
+						documentManager.commitEdit(tr);
+					  } catch (DocumentManagerException ex) {
+						logger.error(ex.getMessage(), ex);
+					  }
+
+			}	
 			
 			inserted_index.add(new Integer(misspelledIndex));
 			
@@ -365,9 +387,9 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 			
 			domSpellCheck.getSpellCheck().addSuggestion(oldText.substring(word.getSpellCheckWord().getStartOffset(),word.getSpellCheckWord().getEndOffset()),this.getWord(),false);			        
 			      
-			//eseguo anche un SOSTITUISCI TUTTO
-			replaceAllWord(words, misspelledIndex);
-			
+			if (!this.getWord().equals(oldText.substring(word.getSpellCheckWord().getStartOffset(),word.getSpellCheckWord().getEndOffset())))
+				replaceAllWord(words, misspelledIndex);
+
 			inserted_index.add(new Integer(misspelledIndex));
 			
 			if (misspelledIndex != -1 && misspelledIndex < words.length) {
@@ -402,14 +424,8 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 		
 		inserted.add(this.getWord());  
 
-		try {
-			tr = documentManager.beginEdit();
+		  //modifica per TR
 			words[misspelledIndex].getNode().setNodeValue(newText);
-			//selectionManager.setSelectedText(this,word.getNode(),word.getSpellCheckWord().getStartOffset(),word.getSpellCheckWord().getStartOffset()+this.getWord().length());
-			documentManager.commitEdit(tr);
-		} catch (DocumentManagerException ex) {
-			logger.error(ex.getMessage(), ex);
-		}
 		
 		//aggiorno offset delle altre parole sullo stesso nodo
 		replaceOffset(words, misspelledIndex);
@@ -459,14 +475,8 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 				inserted_index.add(new Integer(i));				
 				logger.debug("newText " + newText);				
 				
-				try {						
-					tr = documentManager.beginEdit();
+				  //modifica per TR
 					words[i].getNode().setNodeValue(newText);
-					// selectionManager.setSelectedText(this,word.getNode(),word.getSpellCheckWord().getStartOffset(),word.getSpellCheckWord().getStartOffset()+this.getWord().length());
-					documentManager.commitEdit(tr);
-				} catch (DocumentManagerException ex) {
-					logger.error(ex.getMessage(), ex);
-				}
 				
 				//aggiorno offset delle altre parole sullo stesso nodo
 				replaceOffset(words, i);
@@ -520,3 +530,4 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 		wordTextField.setText((String) suggestionsList.getSelectedValue());
 	}
 }
+
