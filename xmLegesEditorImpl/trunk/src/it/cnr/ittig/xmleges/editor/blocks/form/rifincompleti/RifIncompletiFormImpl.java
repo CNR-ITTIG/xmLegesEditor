@@ -1,4 +1,4 @@
-package it.cnr.ittig.xmleges.editor.blocks.form.riferimenti;
+package it.cnr.ittig.xmleges.editor.blocks.form.rifincompleti;
 
 import it.cnr.ittig.services.manager.Configurable;
 import it.cnr.ittig.services.manager.Configuration;
@@ -9,7 +9,7 @@ import it.cnr.ittig.services.manager.Logger;
 import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
-import it.cnr.ittig.xmleges.editor.services.form.riferimenti.RiferimentiForm;
+import it.cnr.ittig.xmleges.editor.services.form.rifincompleti.RifIncompletiForm;
 
 /**
  * <h1>Implementazione del servizio
@@ -38,9 +38,9 @@ import it.cnr.ittig.xmleges.editor.services.form.riferimenti.RiferimentiForm;
  * 
  * @see
  * @version 1.0
- * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
+ * @author <a href="mailto:tommaso.agnoloni@ittig.cnr.it">Tommaso Agnoloni</a>
  */
-public class RiferimentiFormImpl implements RiferimentiForm, Loggable, Serviceable, Configurable, Initializable {
+public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable, Serviceable, Configurable, Initializable {
 	Logger logger;
 
 	// Dep dep;
