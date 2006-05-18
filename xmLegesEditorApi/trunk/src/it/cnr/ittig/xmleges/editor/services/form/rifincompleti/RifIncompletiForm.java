@@ -1,4 +1,4 @@
-package it.cnr.ittig.xmleges.editor.services.form.riferimenti;
+package it.cnr.ittig.xmleges.editor.services.form.rifincompleti;
 
 import it.cnr.ittig.services.manager.Service;
 
@@ -17,8 +17,8 @@ import it.cnr.ittig.services.manager.Service;
  * </dl>
  * 
  * @version 1.0
- * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
+ * @author <a href="mailto:tommaso.agnoloni@ittig.cnr.it">Tommaso Agnoloni</a>
  */
-public interface RiferimentiForm extends Service {
+public interface RifIncompletiForm extends Service {
 
 }
