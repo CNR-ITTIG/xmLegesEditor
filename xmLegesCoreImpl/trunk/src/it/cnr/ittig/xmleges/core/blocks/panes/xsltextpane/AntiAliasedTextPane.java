@@ -84,7 +84,7 @@ public class AntiAliasedTextPane extends JTextPane implements DocumentListener, 
 
 	String href = null;
 
-	// SpellThread spellThread = new SpellThread();
+	//  SpellThread spellThread = new SpellThread();
 
 	public AntiAliasedTextPane(XsltPaneImpl xsltPane) {
 		pane = xsltPane;
@@ -107,7 +107,7 @@ public class AntiAliasedTextPane extends JTextPane implements DocumentListener, 
 		DEF_SEL = new DefaultHighlighter.DefaultHighlightPainter(selColor);
 		setSelectionColor(selColor);
 
-		// pane.threadManager.execute(spellThread);
+		//pane.threadManager.execute(spellThread);
 	}
 
 	public String getEncoding() {
@@ -627,9 +627,10 @@ public class AntiAliasedTextPane extends JTextPane implements DocumentListener, 
 				continue;
 
 			Node node = nodes[j];
-
+			
 			switch (node.getNodeType()) {
 			case Node.TEXT_NODE:
+			case Node.PROCESSING_INSTRUCTION_NODE:
 				Element element = getHTMLDocument().getElement(getXsltMapper().getIdByDom(node));
 				if (element != null) {
 					highlightElement(element);
