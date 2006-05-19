@@ -25,21 +25,26 @@
 <!ENTITY % tipopubbl "EMPTY" >
 <!ELEMENT altrepubblicazioni (ripubblicazione | errata | rettifica)+>
 <!ELEMENT pubblicazione %tipopubbl; >
+<!ATTLIST pubblicazione tipo CDATA 'GU'  num CDATA #IMPLIED %data;  >
 <!ELEMENT ripubblicazione %tipopubbl; >
+<!ATTLIST ripubblicazione tipo CDATA 'GU'  num CDATA #IMPLIED %data;  >
 <!ELEMENT errata %tipopubbl; >
+<!ATTLIST errata tipo CDATA 'GU'  num CDATA #IMPLIED %data;  >
 <!ELEMENT rettifica %tipopubbl; >
-<!ENTITY % value "EMPTY" >
+<!ATTLIST rettifica tipo CDATA 'GU'  num CDATA #IMPLIED %data;  >
 <!ELEMENT entratainvigore EMPTY >
 <!ATTLIST entratainvigore %data;  >
 <!ELEMENT redazione EMPTY >
-<!ATTLIST redazione %idreq;  %data;  nome %NIRnome; #REQUIRED url %uri; #IMPLIED contributo %tipocontributo; #IMPLIED >
+<!ATTLIST redazione %idreq;  %data;  nome CDATA #REQUIRED url CDATA #IMPLIED contributo CDATA #IMPLIED >
 <!ELEMENT urn %value; >
+<!ATTLIST urn value CDATA #REQUIRED >
 <!ATTLIST urn %tempi;  >
 <!ELEMENT alias %value; >
+<!ATTLIST alias value CDATA #REQUIRED >
 <!ELEMENT materie (materia+)>
-<!ATTLIST materie vocabolario %anystring; #REQUIRED >
-<!ELEMENT materia EMPTY >
-<!ATTLIST materia val %anystring; #REQUIRED >
+<!ATTLIST materie vocabolario CDATA #REQUIRED >
+<!ELEMENT materia %value; >
+<!ATTLIST materia value CDATA #REQUIRED >
 <!--  =====================================================================  -->
 <!--                                                                         -->
 <!--      Inquadramento                                                      -->
@@ -47,20 +52,30 @@
 <!--  =====================================================================  -->
 <!ELEMENT inquadramento (infodoc,infomancanti?,oggetto?,proponenti?)>
 <!ELEMENT infodoc EMPTY >
-<!ATTLIST infodoc natura %anystring; #REQUIRED normativa %sino; #REQUIRED funzione %funzione; #REQUIRED fonte %ranghi; #REQUIRED >
+<!ATTLIST infodoc natura CDATA #REQUIRED normativa CDATA #REQUIRED funzione CDATA #REQUIRED fonte CDATA #REQUIRED >
 <!ELEMENT infomancanti (mTitolodoc?,mTipodoc?,mDatadoc?,mNumdoc?,mEmanante?)>
 <!ELEMENT mTitolodoc %value; >
+<!ATTLIST mTitolodoc value CDATA #REQUIRED >
 <!ELEMENT mTipodoc %value; >
+<!ATTLIST mTipodoc value CDATA #REQUIRED >
 <!ELEMENT mDatadoc %value; >
+<!ATTLIST mDatadoc value CDATA #REQUIRED >
 <!ELEMENT mNumdoc %value; >
+<!ATTLIST mNumdoc value CDATA #REQUIRED >
 <!ELEMENT mEmanante %value; >
+<!ATTLIST mEmanante value CDATA #REQUIRED >
 <!ELEMENT oggetto (finalita | destinatario | territorio | attivita)*>
 <!ELEMENT finalita %value; >
+<!ATTLIST finalita value CDATA #REQUIRED >
 <!ELEMENT destinatario %value; >
+<!ATTLIST destinatario value CDATA #REQUIRED >
 <!ELEMENT territorio %value; >
+<!ATTLIST territorio value CDATA #REQUIRED >
 <!ELEMENT attivita %value; >
+<!ATTLIST attivita value CDATA #REQUIRED >
 <!ELEMENT proponenti (proponente+)>
 <!ELEMENT proponente %value; >
+<!ATTLIST proponente value CDATA #REQUIRED >
 <!--  =====================================================================  -->
 <!--                                                                         -->
 <!--      Ciclodivita                                                        -->
@@ -69,33 +84,43 @@
 <!ELEMENT ciclodivita (eventi?,relazioni)>
 <!ELEMENT eventi (evento+)>
 <!ELEMENT evento EMPTY >
-<!ATTLIST evento %idreq;  data %NIRdate; #REQUIRED fonte %idref; #REQUIRED tipo %tipoeventi; #IMPLIED >
+<!ATTLIST evento %idreq;  data CDATA #REQUIRED fonte CDATA #REQUIRED tipo CDATA #IMPLIED >
 <!ELEMENT relazioni (originale?,attiva*,passiva*,giurisprudenza*,haallegato*,allegatodi*)>
 <!ENTITY % relazioni "EMPTY" >
 <!ELEMENT originale %relazioni; >
+<!ATTLIST originale %link;  %idreq;  >
 <!ELEMENT attiva %relazioni; >
+<!ATTLIST attiva %link;  %idreq;  >
 <!ELEMENT passiva %relazioni; >
+<!ATTLIST passiva %link;  %idreq;  >
 <!ELEMENT haallegato %relazioni; >
-<!ATTLIST haallegato tipo %tipoallegato; #IMPLIED >
+<!ATTLIST haallegato %link;  %idreq;  >
+<!ATTLIST haallegato tipo CDATA #IMPLIED >
 <!ELEMENT allegatodi %relazioni; >
-<!ATTLIST allegatodi tipo %tipoallegato; #IMPLIED >
+<!ATTLIST allegatodi %link;  %idreq;  >
+<!ATTLIST allegatodi tipo CDATA #IMPLIED >
 <!ELEMENT giurisprudenza %relazioni; >
+<!ATTLIST giurisprudenza %link;  %idreq;  >
 <!ATTLIST giurisprudenza effetto (normativo|interpretativo) #IMPLIED >
 <!--  =====================================================================  -->
 <!--                                                                         -->
 <!--      Lavori preparatori, redazionale, proprietario                      -->
 <!--                                                                         -->
 <!--  =====================================================================  -->
-<!ENTITY % note "(%blocchireq;)" >
-<!ELEMENT lavoripreparatori %blocchi; >
+<!ENTITY % note "%blocchireq;" >
+<!ELEMENT lavoripreparatori %blocchireq; >
+<!ATTLIST lavoripreparatori %globalireq;  >
 <!ELEMENT redazionale (nota | avvertenza | altro | %Rproprietario;)+>
 <!ATTLIST redazionale %link;  >
 <!ELEMENT nota %note; >
+<!ATTLIST nota %globalireq;  >
 <!ELEMENT avvertenza %note; >
+<!ATTLIST avvertenza %globalireq;  >
 <!ELEMENT altro %note; >
+<!ATTLIST altro %globalireq;  >
 <!ATTLIST altro %nome;  >
 <!ELEMENT proprietario %ProprietarioMeta; >
-<!ATTLIST proprietario soggetto %NIRnome; #IMPLIED %link;  >
+<!ATTLIST proprietario soggetto CDATA #IMPLIED %link;  >
 <!--  =====================================================================  -->
 <!--                                                                         -->
 <!--      Disposizioni                                                       -->
@@ -103,21 +128,18 @@
 <!--  =====================================================================  -->
 <!ENTITY % subargomenti "ANY" >
 <!ENTITY % posizioni "((dsp:testo | dsp:pos)+)" >
-<!ENTITY % posizionitermini "%posizioni; , dsp:termine? , dsp:condizione?" >
-<!ENTITY % modifica "%posizionitermini; , dsp:norma , dsp:altradata+" >
-<!ENTITY % modificadidominio "%posizionitermini; , dsp:norma , dsp:altradata+ , dsp:dominio?" >
+<!ENTITY % posizionitermini "(%posizioni;,dsp:termine?,dsp:condizione?)" >
+<!ENTITY % modifica "(%posizionitermini;,dsp:norma,dsp:altradata+)" >
+<!ENTITY % modificadidominio "(%posizionitermini;,dsp:norma,dsp:altradata+,dsp:dominio?)" >
 <!ELEMENT disposizioni (motivazioni?,regole?,modificheattive?,modifichepassive?,comunicazioni?)>
 <!ATTLIST disposizioni %link;  >
-<!ELEMENT dsp:testo  %value; >
-<!ATTLIST dsp:testo xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
+<!ELEMENT dsp:testo %value; >
+<!ATTLIST dsp:testo value CDATA #REQUIRED >
 <!ELEMENT dsp:pos EMPTY >
-<!ATTLIST dsp:pos xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
 <!ATTLIST dsp:pos %link;  >
-<!ELEMENT dsp:termine  %subargomenti; >
-<!ATTLIST dsp:termine xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ATTLIST dsp:termine da %idref; #IMPLIED a %idref; #IMPLIED >
-<!ELEMENT dsp:condizione  %subargomenti; >
-<!ATTLIST dsp:condizione xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
+<!ELEMENT dsp:termine %subargomenti; >
+<!ATTLIST dsp:termine da CDATA #IMPLIED a CDATA #IMPLIED >
+<!ELEMENT dsp:condizione %subargomenti; >
 <!--  =====================================================================  -->
 <!--                                                                         -->
 <!--      Definizione delle disposizioni di motivazione                      -->
@@ -125,28 +147,37 @@
 <!--  =====================================================================  -->
 <!ENTITY % motivazioni "(dsp:visto | dsp:sentito | dsp:considerato | dsp:suproposta | dsp:basegiuridica | dsp:proposta | dsp:parere | dsp:richiesta | dsp:procedura | dsp:considerando | dsp:motivazione)+" >
 <!ELEMENT motivazioni %motivazioni; >
-<!ELEMENT dsp:visto (%posizioni;,dsp:norma) >
-<!ATTLIST dsp:visto xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:sentito (%posizioni;,dsp:soggetto) >
-<!ATTLIST dsp:sentito xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:considerato (%posizioni;,(dsp:fatto)) >
-<!ATTLIST dsp:considerato xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:suproposta (%posizioni;,(dsp:soggetto)) >
-<!ATTLIST dsp:suproposta xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:basegiuridica (%posizioni;,(dsp:soggetto)) >
-<!ATTLIST dsp:basegiuridica xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:proposta (%posizioni;,(dsp:organo)) >
-<!ATTLIST dsp:proposta xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:parere (%posizioni;,(dsp:organo)) >
-<!ATTLIST dsp:parere xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:richiesta (%posizioni;,(dsp:organo)) >
-<!ATTLIST dsp:richiesta xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:procedura (%posizioni;,(dsp:norma)) >
-<!ATTLIST dsp:procedura xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:considerando (%posizioni;,(dsp:fatto,dsp:fine)) >
-<!ATTLIST dsp:considerando xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:motivazione (%posizioni;) >
-<!ATTLIST dsp:motivazione xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
+<!ENTITY % visto_entity "(%posizioni;,(dsp:norma))" >
+
+<!ELEMENT dsp:visto %visto_entity;>
+<!ENTITY % sentito_entity "(%posizioni;,(dsp:soggetto))" >
+
+<!ELEMENT dsp:sentito %sentito_entity;>
+<!ENTITY % considerato_entity "(%posizioni;,(dsp:fatto))" >
+
+<!ELEMENT dsp:considerato %considerato_entity;>
+<!ENTITY % suproposta_entity "(%posizioni;,(dsp:soggetto))" >
+
+<!ELEMENT dsp:suproposta %suproposta_entity;>
+<!ENTITY % basegiuridica_entity "(%posizioni;,(dsp:soggetto))" >
+
+<!ELEMENT dsp:basegiuridica %basegiuridica_entity;>
+<!ENTITY % proposta_entity "(%posizioni;,(dsp:organo))" >
+
+<!ELEMENT dsp:proposta %proposta_entity;>
+<!ENTITY % parere_entity "(%posizioni;,(dsp:organo))" >
+
+<!ELEMENT dsp:parere %parere_entity;>
+<!ENTITY % richiesta_entity "(%posizioni;,(dsp:organo))" >
+
+<!ELEMENT dsp:richiesta %richiesta_entity;>
+<!ENTITY % procedura_entity "(%posizioni;,(dsp:norma))" >
+
+<!ELEMENT dsp:procedura %procedura_entity;>
+<!ENTITY % considerando_entity "(%posizioni;,(dsp:fatto,dsp:fine))" >
+
+<!ELEMENT dsp:considerando %considerando_entity;>
+<!ELEMENT dsp:motivazione %posizioni; >
 <!--  =====================================================================  -->
 <!--                                                                         -->
 <!--      Definizione delle disposizioni di regola                           -->
@@ -157,71 +188,84 @@
 <!ENTITY % regolative "dsp:diritto | dsp:dovere | dsp:pretesa | dsp:obbligo | dsp:divieto | dsp:permesso | dsp:procedimento | dsp:sanzione | dsp:riparazione | dsp:informazione" >
 <!ENTITY % regole "(%atto; | %costitutive; | %regolative; | dsp:regola)+" >
 <!ELEMENT regole %regole; >
-<!ELEMENT dsp:finalita (%posizionitermini;) >
-<!ATTLIST dsp:finalita xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:finanziaria (%modifica;) >
-<!ATTLIST dsp:finanziaria xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:ambito (%posizionitermini;,(dsp:destinatario,dsp:territorio,dsp:attivita)) >
-<!ATTLIST dsp:ambito xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:metaregola (%posizionitermini;,(dsp:tiporegola)) >
-<!ATTLIST dsp:metaregola xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:definitoria (%posizionitermini;,(dsp:definiendum,dsp:definiens)) >
-<!ATTLIST dsp:definitoria xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:istitutiva (%posizionitermini;,(dsp:destinatario)) >
-<!ATTLIST dsp:istitutiva xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:organizzativa (%posizionitermini;,(dsp:destinatario)) >
-<!ATTLIST dsp:organizzativa xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:status (%posizionitermini;,(dsp:destinatario,dsp:qualifica)) >
-<!ATTLIST dsp:status xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:competenza (%posizionitermini;,(dsp:destinatario,dsp:attivita)) >
-<!ATTLIST dsp:competenza xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:delega (%posizionitermini;,(dsp:destinatario,dsp:delegante,dsp:attivita)) >
-<!ATTLIST dsp:delega xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:revoca (%posizionitermini;,(dsp:destinatario,dsp:delegante,dsp:attivita)) >
-<!ATTLIST dsp:revoca xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:diritto (%posizionitermini;,(dsp:destinatario,dsp:controparte,dsp:attivita)) >
-<!ATTLIST dsp:diritto xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:dovere (%posizionitermini;,(dsp:destinatario,dsp:controparte,dsp:attivita)) >
-<!ATTLIST dsp:dovere xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:pretesa (%posizionitermini;,(dsp:destinatario,dsp:controparte,dsp:azione)) >
-<!ATTLIST dsp:pretesa xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:obbligo (%posizionitermini;,(dsp:destinatario,dsp:controparte,dsp:azione)) >
-<!ATTLIST dsp:obbligo xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:divieto (%posizionitermini;,(dsp:destinatario,dsp:controparte,dsp:azione)) >
-<!ATTLIST dsp:divieto xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:permesso (%posizionitermini;,(dsp:destinatario,dsp:controparte,dsp:azione)) >
-<!ATTLIST dsp:permesso xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:procedimento (%posizionitermini;,(dsp:destinatario,dsp:azione)) >
-<!ATTLIST dsp:procedimento xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:sanzione (%posizionitermini;,(dsp:destinatario,dsp:pena,dsp:azione)) >
-<!ATTLIST dsp:sanzione xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:riparazione (%posizionitermini;,(dsp:destinatario,dsp:effetto,dsp:azione)) >
-<!ATTLIST dsp:riparazione xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:informazione (%posizionitermini;) >
-<!ATTLIST dsp:informazione xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:regola (%posizionitermini;) >
-<!ATTLIST dsp:regola xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
+<!ELEMENT dsp:finalita %posizionitermini; >
 <!ATTLIST dsp:finalita %tempi;  %implicita;  >
-<!ATTLIST dsp:finanziaria %tempi;  %implicita;  >
+<!ELEMENT dsp:finanziaria %modifica; >
+<!ENTITY % ambito_entity "(%posizionitermini;,(dsp:destinatario,dsp:territorio,dsp:attivita))" >
+
+<!ELEMENT dsp:ambito %ambito_entity;>
 <!ATTLIST dsp:ambito %tempi;  %implicita;  >
+<!ENTITY % metaregola_entity "(%posizionitermini;,(dsp:tiporegola))" >
+
+<!ELEMENT dsp:metaregola %metaregola_entity;>
 <!ATTLIST dsp:metaregola %tempi;  %implicita;  >
+<!ENTITY % definitoria_entity "(%posizionitermini;,(dsp:definiendum,dsp:definiens))" >
+
+<!ELEMENT dsp:definitoria %definitoria_entity;>
 <!ATTLIST dsp:definitoria %tempi;  %implicita;  >
+<!ENTITY % istitutiva_entity "(%posizionitermini;,(dsp:destinatario))" >
+
+<!ELEMENT dsp:istitutiva %istitutiva_entity;>
 <!ATTLIST dsp:istitutiva %tempi;  %implicita;  >
+<!ENTITY % organizzativa_entity "(%posizionitermini;,(dsp:destinatario))" >
+
+<!ELEMENT dsp:organizzativa %organizzativa_entity;>
 <!ATTLIST dsp:organizzativa %tempi;  %implicita;  >
+<!ENTITY % status_entity "(%posizionitermini;,(dsp:destinatario,dsp:qualifica))" >
+
+<!ELEMENT dsp:status %status_entity;>
 <!ATTLIST dsp:status %tempi;  %implicita;  >
+<!ENTITY % competenza_entity "(%posizionitermini;,(dsp:destinatario,dsp:attivita))" >
+
+<!ELEMENT dsp:competenza %competenza_entity;>
 <!ATTLIST dsp:competenza %tempi;  %implicita;  >
+<!ENTITY % delega_entity "(%posizionitermini;,(dsp:destinatario,dsp:delegante,dsp:attivita))" >
+
+<!ELEMENT dsp:delega %delega_entity;>
 <!ATTLIST dsp:delega %tempi;  %implicita;  >
+<!ENTITY % revoca_entity "(%posizionitermini;,(dsp:destinatario,dsp:delegante,dsp:attivita))" >
+
+<!ELEMENT dsp:revoca %revoca_entity;>
 <!ATTLIST dsp:revoca %tempi;  %implicita;  >
+<!ENTITY % diritto_entity "(%posizionitermini;,(dsp:destinatario,dsp:controparte,dsp:attivita))" >
+
+<!ELEMENT dsp:diritto %diritto_entity;>
 <!ATTLIST dsp:diritto %tempi;  %implicita;  >
+<!ENTITY % dovere_entity "(%posizionitermini;,(dsp:destinatario,dsp:controparte,dsp:attivita))" >
+
+<!ELEMENT dsp:dovere %dovere_entity;>
 <!ATTLIST dsp:dovere %tempi;  %implicita;  >
+<!ENTITY % pretesa_entity "(%posizionitermini;,(dsp:destinatario,dsp:controparte,dsp:azione))" >
+
+<!ELEMENT dsp:pretesa %pretesa_entity;>
 <!ATTLIST dsp:pretesa %tempi;  %implicita;  >
+<!ENTITY % obbligo_entity "(%posizionitermini;,(dsp:destinatario,dsp:controparte,dsp:azione))" >
+
+<!ELEMENT dsp:obbligo %obbligo_entity;>
 <!ATTLIST dsp:obbligo %tempi;  %implicita;  >
+<!ENTITY % divieto_entity "(%posizionitermini;,(dsp:destinatario,dsp:controparte,dsp:azione))" >
+
+<!ELEMENT dsp:divieto %divieto_entity;>
 <!ATTLIST dsp:divieto %tempi;  %implicita;  >
+<!ENTITY % permesso_entity "(%posizionitermini;,(dsp:destinatario,dsp:controparte,dsp:azione))" >
+
+<!ELEMENT dsp:permesso %permesso_entity;>
 <!ATTLIST dsp:permesso %tempi;  %implicita;  >
+<!ENTITY % procedimento_entity "(%posizionitermini;,(dsp:destinatario,dsp:azione))" >
+
+<!ELEMENT dsp:procedimento %procedimento_entity;>
 <!ATTLIST dsp:procedimento %tempi;  %implicita;  >
+<!ENTITY % sanzione_entity "(%posizionitermini;,(dsp:destinatario,dsp:pena,dsp:azione))" >
+
+<!ELEMENT dsp:sanzione %sanzione_entity;>
 <!ATTLIST dsp:sanzione %tempi;  %implicita;  >
+<!ENTITY % riparazione_entity "(%posizionitermini;,(dsp:destinatario,dsp:effetto,dsp:azione))" >
+
+<!ELEMENT dsp:riparazione %riparazione_entity;>
 <!ATTLIST dsp:riparazione %tempi;  %implicita;  >
+<!ELEMENT dsp:informazione %posizionitermini; >
 <!ATTLIST dsp:informazione %tempi;  %implicita;  >
+<!ELEMENT dsp:regola %posizionitermini; >
 <!ATTLIST dsp:regola %tempi;  %implicita;  >
 <!--  =====================================================================  -->
 <!--                                                                         -->
@@ -235,86 +279,42 @@
 <!ENTITY % modifiche "(%contenuto; | %tempo; | %portata; | %ordinamento; | dsp:modifica)+" >
 <!ELEMENT modificheattive %modifiche; >
 <!ELEMENT modifichepassive %modifiche; >
-<!ELEMENT dsp:abrogazione (%modifica;,(dsp:novellando?)) >
-<!ATTLIST dsp:abrogazione xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:sostituzione (%modifica;,(dsp:novella?,dsp:novellando?)) >
-<!ATTLIST dsp:sostituzione xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:integrazione (%modifica;,(dsp:novella?,dsp:novellando?)) >
-<!ATTLIST dsp:integrazione xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:ricollocazione (%modifica;,(dsp:partizione?)) >
-<!ATTLIST dsp:ricollocazione xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:intautentica (%modificadidominio;) >
-<!ATTLIST dsp:intautentica xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:variazione (%modificadidominio;) >
-<!ATTLIST dsp:variazione xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:modtermini (%modificadidominio;) >
-<!ATTLIST dsp:modtermini xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:vigenza (%modifica;) >
-<!ATTLIST dsp:vigenza xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:annullamento (%modifica;) >
-<!ATTLIST dsp:annullamento xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:proroga (%modifica;) >
-<!ATTLIST dsp:proroga xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:reviviscenza (%modifica;) >
-<!ATTLIST dsp:reviviscenza xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:posticipo (%modifica;) >
-<!ATTLIST dsp:posticipo xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:sospensione (%modifica;) >
-<!ATTLIST dsp:sospensione xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:retroattivita (%modifica;) >
-<!ATTLIST dsp:retroattivita xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:ultrattivita (%modifica;) >
-<!ATTLIST dsp:ultrattivita xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:inapplicazione (%modifica;) >
-<!ATTLIST dsp:inapplicazione xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:deroga (%modificadidominio;) >
-<!ATTLIST dsp:deroga xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:estensione (%modificadidominio;) >
-<!ATTLIST dsp:estensione xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:recepisce (%modifica;) >
-<!ATTLIST dsp:recepisce xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:attua (%modifica;) >
-<!ATTLIST dsp:attua xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:ratifica (%modifica;) >
-<!ATTLIST dsp:ratifica xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:attuadelega (%modifica;) >
-<!ATTLIST dsp:attuadelega xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:attuadelegifica (%modifica;) >
-<!ATTLIST dsp:attuadelegifica xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:converte (%modifica;) >
-<!ATTLIST dsp:converte xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:reitera (%modifica;) >
-<!ATTLIST dsp:reitera xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:modifica (%modifica;) >
-<!ATTLIST dsp:modifica xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ATTLIST dsp:abrogazione %tempi;  %implicita;  >
-<!ATTLIST dsp:sostituzione %tempi;  %implicita;  >
-<!ATTLIST dsp:integrazione %tempi;  %implicita;  >
-<!ATTLIST dsp:ricollocazione %tempi;  %implicita;  >
-<!ATTLIST dsp:intautentica %tempi;  %implicita;  >
-<!ATTLIST dsp:variazione %tempi;  %implicita;  >
-<!ATTLIST dsp:modtermini %tempi;  %implicita;  >
-<!ATTLIST dsp:vigenza %tempi;  %implicita;  >
-<!ATTLIST dsp:annullamento %tempi;  %implicita;  >
-<!ATTLIST dsp:proroga %tempi;  %implicita;  >
-<!ATTLIST dsp:reviviscenza %tempi;  %implicita;  >
-<!ATTLIST dsp:posticipo %tempi;  %implicita;  >
-<!ATTLIST dsp:sospensione %tempi;  %implicita;  >
-<!ATTLIST dsp:retroattivita %tempi;  %implicita;  >
-<!ATTLIST dsp:ultrattivita %tempi;  %implicita;  >
-<!ATTLIST dsp:inapplicazione %tempi;  %implicita;  >
-<!ATTLIST dsp:deroga %tempi;  %implicita;  >
-<!ATTLIST dsp:estensione %tempi;  %implicita;  >
-<!ATTLIST dsp:recepisce %tempi;  %implicita;  >
-<!ATTLIST dsp:attua %tempi;  %implicita;  >
-<!ATTLIST dsp:ratifica %tempi;  %implicita;  >
-<!ATTLIST dsp:attuadelega %tempi;  %implicita;  >
-<!ATTLIST dsp:attuadelegifica %tempi;  %implicita;  >
-<!ATTLIST dsp:converte %tempi;  %implicita;  >
-<!ATTLIST dsp:reitera %tempi;  %implicita;  >
-<!ATTLIST dsp:modifica %tempi;  %implicita;  >
+<!ENTITY % abrogazione_entity "(%modifica;,(dsp:novellando?))" >
+
+<!ELEMENT dsp:abrogazione %abrogazione_entity;>
+<!ENTITY % sostituzione_entity "(%modifica;,(dsp:novella?,dsp:novellando?))" >
+
+<!ELEMENT dsp:sostituzione %sostituzione_entity;>
+<!ENTITY % integrazione_entity "(%modifica;,(dsp:novella?,dsp:novellando?))" >
+
+<!ELEMENT dsp:integrazione %integrazione_entity;>
+<!ENTITY % ricollocazione_entity "(%modifica;,(dsp:partizione?))" >
+
+<!ELEMENT dsp:ricollocazione %ricollocazione_entity;>
+<!ELEMENT dsp:intautentica %modificadidominio; >
+<!ELEMENT dsp:variazione %modificadidominio; >
+<!ELEMENT dsp:modtermini %modificadidominio; >
+<!ELEMENT dsp:vigenza %modifica; >
+<!ELEMENT dsp:annullamento %modifica; >
+<!ELEMENT dsp:proroga %modifica; >
+<!ELEMENT dsp:reviviscenza %modifica; >
+<!ELEMENT dsp:posticipo %modifica; >
+<!ELEMENT dsp:sospensione %modifica; >
+<!ELEMENT dsp:retroattivita %modifica; >
+<!ELEMENT dsp:ultrattivita %modifica; >
+<!ELEMENT dsp:inapplicazione %modifica; >
+<!ELEMENT dsp:deroga %modificadidominio; >
+<!ELEMENT dsp:estensione %modificadidominio; >
+<!ELEMENT dsp:recepisce %modifica; >
+<!ELEMENT dsp:attua %modifica; >
+<!ELEMENT dsp:ratifica %modifica; >
+<!ELEMENT dsp:attuadelega %modifica; >
+<!ELEMENT dsp:attuadelegifica %modifica; >
+<!ELEMENT dsp:converte %modifica; >
+<!ELEMENT dsp:reitera %modifica; >
+<!ELEMENT dsp:modifica %modifica; >
 <!ENTITY % suType "(efficacia|vigore)" >
-<!ATTLIST dsp:proroga su %suType; #REQUIRED >
+<!ATTLIST dsp:proroga su CDATA #REQUIRED >
 <!--  =====================================================================  -->
 <!--                                                                         -->
 <!--      Definizione delle disposizioni di comunicazione                    -->
@@ -323,89 +323,43 @@
 <!ENTITY % comunicazioni "(dsp:abrogazione | dsp:sostituzione | dsp:integrazione | dsp:vigenza | dsp:decadimento | dsp:comunicazione)+" >
 <!ENTITY % argomenti "(dsp:norma | dsp:soggetto | dsp:effetto | dsp:partizione | dsp:tiporegola | dsp:fatto | dsp:organo | dsp:fine | dsp:destinatario | dsp:territorio | dsp:attivita | dsp:definiendum | dsp:definiens | dsp:qualifica | dsp:delegante | dsp:controparte | dsp:azione | dsp:pena | dsp:novella | dsp:novellando | dsp:dominio | dsp:altradata | dsp:argomento)+" >
 <!ELEMENT comunicazioni %comunicazioni; >
-<!ELEMENT dsp:decadimento (%modifica;) >
-<!ATTLIST dsp:decadimento xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ATTLIST dsp:decadimento %tempi;  %implicita;  >
-<!ELEMENT dsp:comunicazione (%posizionitermini;,%argomenti;) >
-<!ATTLIST dsp:comunicazione xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ATTLIST dsp:comunicazione %nome;  %tempi;  %implicita;  >
+<!ELEMENT dsp:decadimento %modifica; >
+<!ENTITY % comunicazione_entity "(%posizionitermini;,(%argomenti;))" >
+
+<!ELEMENT dsp:comunicazione %comunicazione_entity;>
+<!ATTLIST dsp:comunicazione %tempi;  %implicita;  >
+<!ATTLIST dsp:comunicazione %nome;  >
 <!--  =====================================================================  -->
 <!--                                                                         -->
 <!--      Definizione degli argomenti delle disposizioni                     -->
 <!--                                                                         -->
 <!--  =====================================================================  -->
-<!ELEMENT dsp:norma  %subargomenti; >
-<!ATTLIST dsp:norma xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ATTLIST dsp:norma %link;  %nome;  tiporegola %tiporegola; #IMPLIED >
-<!ELEMENT dsp:soggetto  %subargomenti; >
-<!ATTLIST dsp:soggetto xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:effetto  %subargomenti; >
-<!ATTLIST dsp:effetto xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:partizione  %subargomenti; >
-<!ATTLIST dsp:partizione xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:tiporegola  %subargomenti; >
-<!ATTLIST dsp:tiporegola xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:fatto  %subargomenti; >
-<!ATTLIST dsp:fatto xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:organo  %subargomenti; >
-<!ATTLIST dsp:organo xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:fine  %subargomenti; >
-<!ATTLIST dsp:fine xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:destinatario  %subargomenti; >
-<!ATTLIST dsp:destinatario xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:territorio  %subargomenti; >
-<!ATTLIST dsp:territorio xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:attivita  %subargomenti; >
-<!ATTLIST dsp:attivita xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:definiendum  %subargomenti; >
-<!ATTLIST dsp:definiendum xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:definiens  %subargomenti; >
-<!ATTLIST dsp:definiens xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:qualifica  %subargomenti; >
-<!ATTLIST dsp:qualifica xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:delegante  %subargomenti; >
-<!ATTLIST dsp:delegante xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:controparte  %subargomenti; >
-<!ATTLIST dsp:controparte xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:azione  %subargomenti; >
-<!ATTLIST dsp:azione xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:pena  %subargomenti; >
-<!ATTLIST dsp:pena xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:novella  %subargomenti; >
-<!ATTLIST dsp:novella xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:novellando  %subargomenti; >
-<!ATTLIST dsp:novellando xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:dominio  %subargomenti; >
-<!ATTLIST dsp:dominio xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ELEMENT dsp:altradata  %subargomenti; >
-<!ATTLIST dsp:altradata xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
-<!ATTLIST dsp:altradata rif %idref; #REQUIRED %nome;  >
-<!ELEMENT dsp:argomento  %subargomenti; >
-<!ATTLIST dsp:argomento xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.1/">
+<!ELEMENT dsp:norma %subargomenti; >
+<!ATTLIST dsp:norma %link;  %nome;  tiporegola CDATA #IMPLIED >
+<!ELEMENT dsp:soggetto %subargomenti; >
+<!ELEMENT dsp:effetto %subargomenti; >
+<!ELEMENT dsp:partizione %subargomenti; >
+<!ELEMENT dsp:tiporegola %subargomenti; >
+<!ELEMENT dsp:fatto %subargomenti; >
+<!ELEMENT dsp:organo %subargomenti; >
+<!ELEMENT dsp:fine %subargomenti; >
+<!ELEMENT dsp:destinatario %subargomenti; >
+<!ELEMENT dsp:territorio %subargomenti; >
+<!ELEMENT dsp:attivita %subargomenti; >
+<!ELEMENT dsp:definiendum %subargomenti; >
+<!ELEMENT dsp:definiens %subargomenti; >
+<!ELEMENT dsp:qualifica %subargomenti; >
+<!ELEMENT dsp:delegante %subargomenti; >
+<!ELEMENT dsp:controparte %subargomenti; >
+<!ELEMENT dsp:azione %subargomenti; >
+<!ELEMENT dsp:pena %subargomenti; >
+<!ELEMENT dsp:novella %subargomenti; >
+<!ELEMENT dsp:novellando %subargomenti; >
+<!ELEMENT dsp:dominio %subargomenti; >
+<!ELEMENT dsp:altradata %subargomenti; >
+<!ATTLIST dsp:altradata rif CDATA #REQUIRED %nome;  >
+<!ELEMENT dsp:argomento %subargomenti; >
 <!ATTLIST dsp:argomento %nome;  >
 <!--  =====================================================================  -->
 <!--      fine del file meta.dtd                                          -->
 <!--  =====================================================================  -->
-<!ATTLIST pubblicazione tipo %tipopubblicazione; 'GU'  num %numeropubblicazione; #IMPLIED %data;  >
-<!ATTLIST ripubblicazione tipo %tipopubblicazione; 'GU'  num %numeropubblicazione; #IMPLIED %data;  >
-<!ATTLIST errata tipo %tipopubblicazione; 'GU'  num %numeropubblicazione; #IMPLIED %data;  >
-<!ATTLIST rettifica tipo %tipopubblicazione; 'GU'  num %numeropubblicazione; #IMPLIED %data;  >
-<!ATTLIST urn value  CDATA #REQUIRED >
-<!ATTLIST alias value  CDATA #REQUIRED >
-<!ATTLIST mTitolodoc value  CDATA #REQUIRED >
-<!ATTLIST mTipodoc value  CDATA #REQUIRED >
-<!ATTLIST mDatadoc value  CDATA #REQUIRED >
-<!ATTLIST mNumdoc value  CDATA #REQUIRED >
-<!ATTLIST mEmanante value  CDATA #REQUIRED >
-<!ATTLIST finalita value  CDATA #REQUIRED >
-<!ATTLIST destinatario value  CDATA #REQUIRED >
-<!ATTLIST territorio value  CDATA #REQUIRED >
-<!ATTLIST attivita value  CDATA #REQUIRED >
-<!ATTLIST proponente value  CDATA #REQUIRED >
-<!ATTLIST dsp:testo value  CDATA #REQUIRED >
-<!ATTLIST originale %link;  %idreq;  >
-<!ATTLIST attiva %link;  %idreq;  >
-<!ATTLIST passiva %link;  %idreq;  >
-<!ATTLIST haallegato %link;  %idreq;  >
-<!ATTLIST allegatodi %link;  %idreq;  >
-<!ATTLIST giurisprudenza %link;  %idreq;  >

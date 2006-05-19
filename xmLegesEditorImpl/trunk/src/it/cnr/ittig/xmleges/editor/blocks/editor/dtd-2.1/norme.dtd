@@ -9,7 +9,6 @@
 <!--                                                                         -->
 <!--      Per un'introduzione, si veda il documento 'note.html'              -->
 <!--  =====================================================================  -->
-
 <!--  =====================================================================
 
 Strutture fondamentali dei documenti normativi
@@ -25,8 +24,8 @@ Elementi dell'intestazione
 <!ELEMENT intestazione (#PCDATA |%elinline; | tipoDoc | dataDoc | numDoc | titoloDoc | emanante)*>
 <!ELEMENT tipoDoc %inline; >
 <!ELEMENT numDoc %inline; >
-<!ATTLIST numDoc nome %NIRnome; #IMPLIED >
-<!ELEMENT titoloDoc %inline; >
+<!ATTLIST numDoc %nomeopt;  >
+<!ELEMENT titoloDoc %inlinefac; >
 <!ATTLIST titoloDoc %globalifac;  >
 <!ELEMENT emanante %inline; >
 <!ELEMENT dataDoc %inline; >
@@ -39,25 +38,35 @@ Formula iniziale e finale
 <!ELEMENT formulainiziale (#PCDATA |%elinline; | %allblocchi; | preambolo)*>
 <!ATTLIST formulainiziale %globalifac;  >
 <!ELEMENT formulafinale %ParaLevel; >
+<!ATTLIST formulafinale %globalifac;  >
 <!ELEMENT preambolo (#PCDATA |%elinline; | %allblocchi; | inlinemeta)*>
 <!ATTLIST preambolo %globalifac;  >
 <!ELEMENT decorazione (#PCDATA |%elinline; | rango)*>
 <!ELEMENT rango EMPTY >
-<!ATTLIST rango tipo %tiporango; #REQUIRED >
+<!ATTLIST rango tipo CDATA #REQUIRED >
 <!--  =====================================================================
 
 Elementi dell'articolato
 
 =====================================================================  -->
 <!ELEMENT articolato %CMcompleto; >
+<!ATTLIST articolato %vigenza;  >
 <!ELEMENT libro %CMlibro; >
+<!ATTLIST libro %globalireq;  >
 <!ELEMENT parte %CMparte; >
+<!ATTLIST parte %globalireq;  >
 <!ELEMENT titolo %CMtitolo; >
+<!ATTLIST titolo %globalireq;  >
 <!ELEMENT capo %CMcapo; >
+<!ATTLIST capo %globalireq;  >
 <!ELEMENT sezione %CMsezione; >
+<!ATTLIST sezione %globalireq;  >
 <!ELEMENT paragrafo %CMparagrafo; >
+<!ATTLIST paragrafo %globalireq;  >
 <!ELEMENT articolo %CMarticolo; >
+<!ATTLIST articolo %globalireq;  >
 <!ELEMENT rubrica %inlinefac; >
+<!ATTLIST rubrica %globalifac;  >
 <!ELEMENT num %inline; >
 <!--  =====================================================================
 
@@ -65,10 +74,15 @@ Elementi sotto l'articolo
 
 =====================================================================  -->
 <!ELEMENT comma %CMcomma; >
+<!ATTLIST comma %globalireq;  >
 <!ELEMENT el %CMel; >
+<!ATTLIST el %globalifac;  >
 <!ELEMENT en %CMen; >
+<!ATTLIST en %globalifac;  >
 <!ELEMENT ep %CMep; >
+<!ATTLIST ep %globalifac;  >
 <!ELEMENT corpo %ParaLevel; >
+<!ATTLIST corpo %globalifac;  >
 <!ELEMENT alinea %inline; >
 <!ELEMENT coda %inline; >
 <!--  =====================================================================
@@ -81,7 +95,9 @@ Elementi della conclusione
 <!ATTLIST dataeluogo %data;  %dove;  >
 <!ELEMENT sottoscrizioni (sottoscrivente*,visto)>
 <!ELEMENT sottoscrivente %ParaLevel; >
+<!ATTLIST sottoscrivente %globalifac;  >
 <!ELEMENT visto %ParaLevel; >
+<!ATTLIST visto %globalifac;  >
 <!--  =====================================================================
 
 Elementi degli annessi
@@ -95,17 +111,23 @@ Elementi degli annessi
 <!ATTLIST rifesterno %link;  >
 <!ELEMENT testata (denAnnesso?,titAnnesso?,preAnnesso?)>
 <!ELEMENT denAnnesso %ParaLevel; >
+<!ATTLIST denAnnesso %globalifac;  >
 <!ELEMENT titAnnesso %ParaLevel; >
+<!ATTLIST titAnnesso %globalifac;  >
 <!ELEMENT preAnnesso %ParaLevel; >
+<!ATTLIST preAnnesso %globalifac;  >
 <!--  =====================================================================
 
 Elementi inline e speciali con semantica rilevante
 
 =====================================================================  -->
 <!ELEMENT mrif %inlinefac; >
+<!ATTLIST mrif %globalifac;  >
 <!ELEMENT irif %inlinefac; >
-<!ATTLIST irif %link;  finoa %uri; #REQUIRED >
+<!ATTLIST irif %globalifac;  >
+<!ATTLIST irif %link;  finoa CDATA #REQUIRED >
 <!ELEMENT rif %inlinefac; >
+<!ATTLIST rif %globalifac;  >
 <!ATTLIST rif %link;  >
 <!ELEMENT mod (#PCDATA |%elinline; | virgolette)*>
 <!ATTLIST mod %globalireq;  >
@@ -124,19 +146,7 @@ Elementi inline e speciali con semantica rilevante
 <!ELEMENT luogo %inline; >
 <!ATTLIST luogo %dove;  >
 <!ELEMENT importo %inline; >
-<!ATTLIST importo valore %numero; #IMPLIED valuta %valute; 'EU'  >
+<!ATTLIST importo valore CDATA #IMPLIED valuta CDATA 'EU'  >
 <!--  =====================================================================  -->
 <!--      fine del file norme.dtd                                            -->
 <!--  =====================================================================  -->
-<!ATTLIST articolato %vigenza;  >
-<!ATTLIST libro %globalireq;  >
-<!ATTLIST parte %globalireq;  >
-<!ATTLIST titolo %globalireq;  >
-<!ATTLIST capo %globalireq;  >
-<!ATTLIST sezione %globalireq;  >
-<!ATTLIST paragrafo %globalireq;  >
-<!ATTLIST articolo %globalireq;  >
-<!ATTLIST comma %globalireq;  >
-<!ATTLIST el %globalifac;  >
-<!ATTLIST en %globalifac;  >
-<!ATTLIST ep %globalifac;  >
