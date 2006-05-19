@@ -1,7 +1,5 @@
 package it.cnr.ittig.xmleges.editor.blocks.dom.vigenza;
 
-import java.util.Vector;
-
 import it.cnr.ittig.services.manager.Loggable;
 import it.cnr.ittig.services.manager.Logger;
 import it.cnr.ittig.services.manager.ServiceException;
@@ -72,8 +70,6 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 	UtilRulesManager utilRulesManager;
 	
 	
-//	VigenzaEntity[] vigenze_presenti;
-	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
@@ -100,10 +96,7 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 				return UtilDom.isTextNode(node);
 			}
 		}
-
-		
 		return false;
-
 	}
 	
 
@@ -123,19 +116,13 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 			selectedText=node.getNodeValue();
 
 		
-//		Document doc = documentManager.getDocumentAsDom();
-//		
-//		String text = node.getNodeValue();
-//		
-//		
-		
 		if(UtilDom.isTextNode(node)&&(start!=-1)&&(end!=-1)){
 			Element span;
 			if(node.getParentNode().getNodeName().equals("h:span"))
 				span = (Element) node.getParentNode();
 			else
 			 span = (Element) utilRulesManager.encloseTextInTag(node, start, end,"h:span","h");
-//			 Assegnazione attributi di vigenza allo span creato
+			// Assegnazione attributi di vigenza allo span creato
 			if(vigenza.getEInizioVigore()!=null)
 				span.setAttribute("iniziovigore", vigenza.getEInizioVigore().getId());
 			else
@@ -147,15 +134,12 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 			if(vigenza.getEInizioVigore()!=null && vigenza.getEFineVigore()!=null)
 				span.setAttribute("status", vigenza.getStatus());
 			else
-				span.removeAttribute("status");
-			
-			
+				span.removeAttribute("status");		
 		}else{
-			try {
-//				
+			try {			
 				if (vigenza.getEInizioVigore() != null || vigenza.getEFineVigore()!=null) {
 					EditTransaction tr = documentManager.beginEdit();
-//					 Assegnazione attributi di vigenza al nodo
+					// Assegnazione attributi di vigenza al nodo
 					if(vigenza.getEInizioVigore()!=null)
 						UtilDom.setAttributeValue(node, "iniziovigore", vigenza.getEInizioVigore().getId());
 					else{
@@ -333,11 +317,8 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 			if(lista.item(i).getAttributes().getNamedItem("finevigore")!=null){
 				return true;
 			}
-		}
-	
-		
-		return false;
-			
+		}	
+		return false;	
 	}
 
 	public void setTipoDocVigenza() {
@@ -345,8 +326,7 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 		if (isVigente()){
 			UtilDom.setAttributeValue(doc.getDocumentElement(),"tipo","multivigente");
 		}else
-			UtilDom.setAttributeValue(doc.getDocumentElement(),"tipo","originale");
-				
+			UtilDom.setAttributeValue(doc.getDocumentElement(),"tipo","originale");				
 	}
 	
 	public void updateVigenzaOnDoc(VigenzaEntity vig){

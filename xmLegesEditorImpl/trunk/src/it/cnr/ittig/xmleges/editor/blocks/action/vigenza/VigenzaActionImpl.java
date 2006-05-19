@@ -16,11 +16,13 @@ import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
+import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.action.vigenza.VigenzaAction;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.Vigenza;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 import it.cnr.ittig.xmleges.editor.services.form.vigenza.VigenzaForm;
+import it.cnr.ittig.xmleges.editor.services.util.urn.NirUtilUrn;
 
 import java.awt.event.ActionEvent;
 import java.util.EventObject;
@@ -77,6 +79,8 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 	VigenzaForm vigenzaForm;
 	
 	UtilMsg utilMsg;
+	
+	NirUtilUrn nirUtilUrn;
 
 	AbstractAction vigenzaAction = new vigenzaAction();
 	
@@ -99,6 +103,7 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 		vigenza = (Vigenza) serviceManager.lookup(Vigenza.class);
+		nirUtilUrn = (NirUtilUrn) serviceManager.lookup(NirUtilUrn.class);
 		vigenzaForm = (VigenzaForm) serviceManager.lookup(VigenzaForm.class);
 		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 	}
@@ -128,37 +133,53 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 	}
 
 	public void doNewVigenza(Node active) {
-		
 		if(active!=null){
-			
 			VigenzaEntity vig = vigenza.getVigenza(active,start,end);
 			Evento[] eventi_vig=new Evento[2];
+			// modifica di una vigenza esistente
 			if(vig!=null){
 				eventi_vig[0]=vig.getEInizioVigore();
 				eventi_vig[1]=vig.getEFineVigore();
 				vigenzaForm.setInizioVigore(eventi_vig[0]);
 				vigenzaForm.setFineVigore(eventi_vig[1]);
 				vigenzaForm.setStatus(vig.getStatus());
-				
-				
-			}else{
+				vigenzaForm.setTestoselezionato(vigenza.getSelectedText());
+			}else{   // inserimento di una nuova vigenza: su nodo o su testo
 				eventi_vig=null;
 				vigenzaForm.setInizioVigore(null);
 				vigenzaForm.setFineVigore(null);
-				vigenzaForm.setStatus(null);				
+				vigenzaForm.setStatus(null);
+				vigenzaForm.setTestoselezionato(getMarkedText());
 			}
-			vigenzaForm.setTestoselezionato(vigenza.getSelectedText());
-	
+			
 			if(vigenzaForm.openForm(active)){
-				//nuovo
 				vigenza.updateVigenzaOnDoc(vigenzaForm.getVigenza());
 				vigenza.setVigenza(active,start,end, vigenzaForm.getVigenza());
-				vigenza.setTipoDocVigenza();
-								
+				vigenza.setTipoDocVigenza();					
 			}
 		}
-		
 	}
+	
+	private String getMarkedText(){
+		String selectedText = "";
+		if(activeNode.getNodeValue()==null){
+			if(UtilDom.getTextNode(activeNode)==null || UtilDom.getTextNode(activeNode).trim().equals("")){
+				selectedText=nirUtilUrn.getFormaTestualeById(UtilDom.getAttributeValueAsString(activeNode,"id"));
+				if(selectedText.trim().length()==0)
+					selectedText = activeNode.getNodeName();
+			}
+			else 
+				selectedText=UtilDom.getTextNode(activeNode);
+		}
+		else{	
+			if(start!=end)
+				selectedText=activeNode.getNodeValue().substring(start,end);
+			else
+				selectedText="...";
+		}
+		return selectedText;
+	}
+
 
 	// /////////////////////////////////////////////// Azioni
 	public class vigenzaAction extends AbstractAction {
