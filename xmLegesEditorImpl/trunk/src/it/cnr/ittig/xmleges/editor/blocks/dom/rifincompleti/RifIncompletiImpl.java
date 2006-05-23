@@ -19,11 +19,9 @@ import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 import it.cnr.ittig.xmleges.editor.services.util.urn.NirUtilUrn;
 import it.cnr.ittig.xmleges.editor.services.util.urn.Urn;
 
-import java.util.Vector;
-
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.ProcessingInstruction;
 
 /**
  * <h1>Implementazione del servizio
@@ -90,8 +88,6 @@ public class RifIncompletiImpl implements RifIncompleti, Loggable, Serviceable {
 		nirutilurn = (NirUtilUrn) serviceManager.lookup(NirUtilUrn.class);
 		rinumerazione = (Rinumerazione) serviceManager.lookup(Rinumerazione.class);
 	}
-
-	//////////////  METODI VECCHI DEL DOM DEI RINVII
 	
 	public Node insert(Node node, int start, int end, Urn urn) {
 		return insert(node, start, end, urn.toString(), urn.getFormaTestuale().trim());
@@ -138,30 +134,43 @@ public class RifIncompletiImpl implements RifIncompleti, Loggable, Serviceable {
     //////////////////////////////////////////////////////
 
 	public boolean canFix(Node node) {
-		// TODO Auto-generated method stub
+		
+		if(node.getNodeType()==Node.PROCESSING_INSTRUCTION_NODE && ((ProcessingInstruction)node).getTarget().equals("rif"))
+		   return true;
+		
+		
 		return false;
 	}
 	
 
 	public Node setRif(Node node, int start, int end, Urn urn) {
-		// TODO Auto-generated method stub
+		
+		//trasforma il riferimento incompleto in un riferimento
+		
 		return null;
 	}
 
 	public Node setPlainText(Node node, int start, int end, String plainText) {
-		// TODO Auto-generated method stub
+		
+		//trasforma il riferimento incompleto in testo piatto
+		
 		return null;
 	}
 
 	public String getText(Node node) {
-		// TODO Auto-generated method stub
-		return null;
+		
+        String temp = ((ProcessingInstruction)node).getData().substring(((ProcessingInstruction)node).getData().indexOf(">"),((ProcessingInstruction)node).getData().length());
+		return (temp.substring(1,temp.indexOf("<")));
+		
 	}
 
 	public String getUrn(Node node) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		String temp = ((ProcessingInstruction)node).getData().substring(((ProcessingInstruction)node).getData().indexOf("\"")+1,((ProcessingInstruction)node).getData().length());
+		return (temp.substring(0,temp.indexOf("\"")));
+		
 	}
+
 	
 	
 

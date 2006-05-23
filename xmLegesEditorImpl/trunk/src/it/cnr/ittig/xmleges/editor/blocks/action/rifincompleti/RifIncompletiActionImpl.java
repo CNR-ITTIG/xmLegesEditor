@@ -7,16 +7,21 @@ import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.action.ActionManager;
+import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
+import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
+import it.cnr.ittig.xmleges.core.services.document.DocumentOpenedEvent;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.form.FormClosedListener;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
+import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
+import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.action.rifincompleti.RifIncompletiAction;
-import it.cnr.ittig.xmleges.editor.services.dom.rinvii.Rinvii;
-import it.cnr.ittig.xmleges.editor.services.form.rinvii.interni.RinviiInterniForm;
-import it.cnr.ittig.xmleges.editor.services.form.rinvii.newrinvii.NewRinviiForm;
+import it.cnr.ittig.xmleges.editor.services.dom.rifincompleti.RifIncompleti;
+import it.cnr.ittig.xmleges.editor.services.form.rifincompleti.RifIncompletiForm;
+
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 import it.cnr.ittig.xmleges.editor.services.util.urn.NirUtilUrn;
 import it.cnr.ittig.xmleges.editor.services.util.urn.Urn;
@@ -27,6 +32,7 @@ import java.util.EventObject;
 import javax.swing.AbstractAction;
 
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * <h1>Implementazione del servizio
@@ -68,8 +74,6 @@ public class RifIncompletiActionImpl implements RifIncompletiAction, EventManage
 
 	RifIncompletoAction rifIncompletoAction;
 
-	
-
 	NirUtilUrn nirUtilUrn;
 
 	NirUtilDom nirUtilDom;
@@ -92,11 +96,9 @@ public class RifIncompletiActionImpl implements RifIncompletiAction, EventManage
 
 	int primoend;
 
-	NewRinviiForm newrinvii;
+	RifIncompletiForm rifincompleti;
 
-	RinviiInterniForm rinviiInterni;
-
-	Rinvii domrinvii;
+	RifIncompleti domrifincompleti;
 
 	FormClosedListener listener;
 
@@ -110,18 +112,20 @@ public class RifIncompletiActionImpl implements RifIncompletiAction, EventManage
 		actionManager = (ActionManager) serviceManager.lookup(ActionManager.class);
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
-		newrinvii = (NewRinviiForm) serviceManager.lookup(NewRinviiForm.class);
-		rinviiInterni = (RinviiInterniForm) serviceManager.lookup(RinviiInterniForm.class);
-		domrinvii = (Rinvii) serviceManager.lookup(Rinvii.class);
+		rifincompleti = (RifIncompletiForm) serviceManager.lookup(RifIncompletiForm.class);
+		domrifincompleti = (RifIncompleti) serviceManager.lookup(RifIncompleti.class);
 		nirUtilUrn = (NirUtilUrn) serviceManager.lookup(NirUtilUrn.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
+		
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws java.lang.Exception {
 		rifIncompletoAction = new RifIncompletoAction();
-		actionManager.registerAction("editor.rinvii.interno", rifIncompletoAction);
+		actionManager.registerAction("editor.rifincompleto", rifIncompletoAction);
 		eventManager.addListener(this, SelectionChangedEvent.class);
+		eventManager.addListener(this, DocumentOpenedEvent.class);
+		eventManager.addListener(this, DocumentClosedEvent.class);
 		enableActions();
 	}
 
@@ -131,8 +135,14 @@ public class RifIncompletiActionImpl implements RifIncompletiAction, EventManage
 			activeNode = ((SelectionChangedEvent) event).getActiveNode();
 			start = selectionManager.getTextSelectionStart();
 			end = selectionManager.getTextSelectionEnd();
+//altra versione
+//			start = ((SelectionChangedEvent) event).getTextSelectionStart();
+//			end = ((SelectionChangedEvent) event).getTextSelectionEnd();
+
+			
 			enableActions();
 		}
+		
 	}
 
 	protected void setModified(Node modified) {
@@ -153,24 +163,30 @@ public class RifIncompletiActionImpl implements RifIncompletiAction, EventManage
 			rifIncompletoAction.setEnabled(false);
 			
 		} else {
-			rifIncompletoAction.setEnabled(true);
-			//rifInternoAction.setEnabled((domrinvii.canInsert(activeNode) || (domrinvii.canChange(activeNode) && isRinvioInt())) && !isOpenForm);
+			rifIncompletoAction.setEnabled(domrifincompleti.canFix(activeNode));
+			//rifInternoAction.setEnabled((domrinvii.canInsert(activeNode));
 		}
 	}
 
 	public void doChangeRifIncompleto() {
 		rifIncompletoAction.setEnabled(false);
-		
-		// TODO mettere qui l'aperura della form dei rif incompleti 
-		
-		if (newrinvii.openForm("", true, true, true, true)) {
-			Node node = selectionManager.getActiveNode();
-			int start = selectionManager.getTextSelectionStart();
-			int end = selectionManager.getTextSelectionEnd();
-			if (newrinvii.getUrn().size() > 1)
-				setModified(domrinvii.insert(node, start, end, newrinvii.getUrn(), newrinvii.getDescrizioneMRif()));
-			else
-				setModified(domrinvii.insert(node, start, end, (Urn) newrinvii.getUrn().get(0)));
+		 				
+		Node node = selectionManager.getActiveNode();
+//		int start = selectionManager.getTextSelectionStart();
+//		int end = selectionManager.getTextSelectionEnd();
+
+			
+		if (rifincompleti.openForm(domrifincompleti.getText(node), domrifincompleti.getUrn(node))) {
+			
+			
+			//Dovrei decidere se è stata fatta qualche modifica e passarla al DOM
+			//In realtà mi sa che dovrei far comunicare la FORM direttamente con il DOM
+			
+			
+//			if (rifincompleti.getUrn().size() > 1)
+//				setModified(domrifincompleti.insert(node, start, end, newrinvii.getUrn(), newrinvii.getDescrizioneMRif()));
+//			else
+//				setModified(domrifincompleti.insert(node, start, end, (Urn) newrinvii.getUrn().get(0)));
 		} else
 			enableActions();
 	}
