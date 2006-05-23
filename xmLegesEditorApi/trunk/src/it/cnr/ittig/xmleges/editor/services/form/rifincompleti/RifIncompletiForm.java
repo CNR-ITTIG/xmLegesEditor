@@ -21,4 +21,11 @@ import it.cnr.ittig.services.manager.Service;
  */
 public interface RifIncompletiForm extends Service {
 
+	/**
+	 * Apre la form dei Riferimenti incompleti
+	 * 
+	 * @param 
+	 * @return <code>true</code> se la form &egrave; valida
+	 */
+	public boolean openForm(String testo, String urn);
 }
