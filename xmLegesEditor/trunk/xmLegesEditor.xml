@@ -368,6 +368,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                         <item action="editor.rinvii.interno" />
                         <item action="editor.rinvii.esterno" />
                         <separator />
+                        <item action="editor.rifincompleto" />
                         <item action="editor.xmleges.linker" />
 			            <separator />
                         <item action="editor.autorita" />
@@ -496,6 +497,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <item action="editor.rinvii.interno" />
                     <item action="editor.rinvii.esterno" />
                     <separator />
+                    <item action="editor.rifincompleto" />
                     <item action="editor.xmleges.linker" />
                     <separator />
                     <item action="editor.autorita" />
@@ -730,7 +732,17 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.action.rinvii.RinviiActionImpl"
     />
+
+
+
     
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.action.rifincompleti.RifIncompletiActionImpl"
+    />
+
+
+
+
     <component  activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.action.rinumerazione.RinumerazioneActionImpl"
     />
@@ -778,6 +790,14 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
     <component  class="it.cnr.ittig.xmleges.editor.blocks.dom.rinvii.RinviiImpl" />
     
+    
+    
+        
+    <component  class="it.cnr.ittig.xmleges.editor.blocks.dom.rifincompleti.RifIncompletiImpl" />
+        
+    
+    
+    
     <component  class="it.cnr.ittig.xmleges.editor.blocks.dom.spostamento.SpostamentoImpl" />
     
     <component  class="it.cnr.ittig.xmleges.editor.blocks.dom.tabelle.TabelleImpl" />
@@ -814,6 +834,12 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  lifestyle="pool"
                 class="it.cnr.ittig.xmleges.editor.blocks.form.rinvii.interni.RinviiInterniFormImpl"
     />
+    
+    
+
+    <component  class="it.cnr.ittig.xmleges.editor.blocks.form.rifincompleti.RifIncompletiFormImpl" />
+
+    
     
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.rinvii.newrinvii.NewRinviiFormImpl" />
     
