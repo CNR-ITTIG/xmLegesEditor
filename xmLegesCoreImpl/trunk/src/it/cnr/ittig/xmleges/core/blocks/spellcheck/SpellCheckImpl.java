@@ -76,17 +76,17 @@ public class SpellCheckImpl implements SpellCheck, Loggable, Serviceable, Initia
 		   UtilFile.copyFile(getClass().getResourceAsStream("default"),new File(dictPath + File.separator,"default"));
 	    }
 		
-		if (null==checker){	
-			checker = new SpellChecker(dictPath);					
-			try{
-			   checker.setPersonalDictionaryPath("dizionarioUtente_%L%.txt");
-			   checker.setSelectedLanguage("it");					
-			}
-			catch(SpellException ex){
-			   logger.error(ex.getMessage(),ex);
-			}
-		    logger.debug("---Vocabolario caricato---"+checker.getSelectedLanguage()+"---");
-		 }
+//		if (null==checker){	
+//			checker = new SpellChecker(dictPath);					
+//			try{
+//			   checker.setPersonalDictionaryPath("dizionarioUtente_%L%.txt");
+//			   checker.setSelectedLanguage("it");					
+//			}
+//			catch(SpellException ex){
+//			   logger.error(ex.getMessage(),ex);
+//			}
+//		    logger.debug("---Vocabolario caricato---"+checker.getSelectedLanguage()+"---");
+//		 }
 	}
 
 	
