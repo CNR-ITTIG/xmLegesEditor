@@ -163,9 +163,10 @@ public class AggiornaIdFrozenLaw {
 
 		logger.debug("notaLength " + oldNotes.size() + " ndrLength " + newNotes.size());
 		if (oldNotes.size() == newNotes.size()) {
-			if (oldNotes.size() > 0)
-				parent = ((Node) oldNotes.get(0)).getParentNode();
+//			if (oldNotes.size() > 0)
+//				parent = ((Node) oldNotes.get(0)).getParentNode();
 			for (int i = 0; i < oldNotes.size(); i++) {
+				parent = ((Node) oldNotes.get(i)).getParentNode();
 				logger.debug("replace oldNote " + UtilDom.getAttributeValueAsString((Node) oldNotes.get(i), "id") + " with newNote "
 						+ UtilDom.getAttributeValueAsString((Node) newNotes.get(i), "id"));
 				// FIXME: non e' detto che il parent (redazionale) sia lo stesso per tutte le note; 
@@ -197,17 +198,37 @@ public class AggiornaIdFrozenLaw {
 		return old;
 	}
 
+	
+	private String getNdrNumPrefix(String num){
+		
+		char[] numChar = num.toCharArray();
+		int i=0;
+		
+		for (i=numChar.length-1; i>=0;i--){
+			if(!isDigit(numChar[i]))
+				break;
+		}
+		if(i>0)
+		   return num.substring(0,i+1);
+		return "n";
+	}
+	
 	public void setNdrLink(Vector ndrId, boolean renum) {
 		NodeList ndr = doc.getElementsByTagName("ndr");
-		String num, value;
+		String num, value, prefix;
 
 		for (int i = 0; i < ndr.getLength(); i++) {
-
-			num = "n" + (ndrId.indexOf(UtilDom.getAttributeValueAsString((Node) ndr.item(i), "num")) + 1);
+			
+			// separare prefix 	
+			
+			prefix = getNdrNumPrefix(UtilDom.getAttributeValueAsString((Node) ndr.item(i), "num")); 
+			num = prefix + (ndrId.indexOf(UtilDom.getAttributeValueAsString((Node) ndr.item(i), "num")) + 1);
+			
 			UtilDom.setAttributeValue(ndr.item(i), "num", num);
 			logger.debug("renum " + renum);
 			if (renum) {
-				value = num.substring(1);
+				// togliere l'intero prefix e non solo la n
+				value = num.substring(prefix.length());
 				UtilDom.setAttributeValue(ndr.item(i), "value", value);
 				String tipoNdr = rinum.getRinumerazioneNdr();
 				logger.debug("tipoNdr " + tipoNdr);
@@ -1102,6 +1123,7 @@ public class AggiornaIdFrozenLaw {
 		case ELENCO_PUNT:
 		case RIF:
 		case VIR:
+		case NOT_AVV_ALT:
 			hierarchical = true;
 			break;
 		case ARTICOLO:
@@ -1111,7 +1133,6 @@ public class AggiornaIdFrozenLaw {
 				hierarchical = false;
 			break;
 		case PREAMBOLO:
-		case NOT_AVV_ALT:
 		case EVENTO:
 		case INL:
 		case ORIGINALE:
