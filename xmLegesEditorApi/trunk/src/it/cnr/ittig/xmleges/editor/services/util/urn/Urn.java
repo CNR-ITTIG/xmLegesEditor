@@ -270,6 +270,12 @@ public class Urn {
 	 * @param data data
 	 */
 	public void addData(String data) {
+		
+		// caso di data vuota
+		if(this.date.size()==0 && data.trim().length()==0)
+			data = "____-__-__";
+		//
+		
 		this.date.addElement(data);
 	}
 
