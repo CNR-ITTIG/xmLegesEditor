@@ -173,7 +173,7 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 		try {
 			EditTransaction tr = documentManager.beginEdit();
 			if (setDOMRelazioni(relazioni)) {
-				//rinumerazione.aggiorna(doc);
+				rinumerazione.aggiorna(documentManager.getDocumentAsDom());
 				documentManager.commitEdit(tr);
 			} else
 				documentManager.rollbackEdit(tr);
@@ -285,7 +285,7 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 		try {
 			EditTransaction tr = documentManager.beginEdit();
 			if (setDOMEventi(eventi)) {
-//				rinumerazione.aggiorna(doc);
+				rinumerazione.aggiorna(documentManager.getDocumentAsDom());
 				documentManager.commitEdit(tr);
 			} else
 				documentManager.rollbackEdit(tr);
