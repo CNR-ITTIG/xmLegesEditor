@@ -449,6 +449,8 @@ public class NewRinviiFormImpl implements NewRinviiForm, Loggable, Serviceable, 
 			String gg;
 			String date;
 			String datadisp = "";
+//			if(u.getDate().size()==0)
+//				u.setUniqueData("____-__-__");
 			for (int i = 0; i < u.getDate().size(); i++) {
 				date = u.getDate().get(i).toString();
 				StringTokenizer stDate = new StringTokenizer(date, "-");
@@ -853,60 +855,7 @@ public class NewRinviiFormImpl implements NewRinviiForm, Loggable, Serviceable, 
 			}
 		}
 
-		// OLD
-		// if (e.getSource().equals(comboprovvedimenti)){
-		// try{
-		// if (datadispositivo.getText().indexOf("_")<0){
-		// //DateFormat df = DateFormat.getInstance();
-		// SimpleDateFormat sdf = new
-		// SimpleDateFormat(UtilDate.getDateFormat());
-		// Date d = sdf.parse(datadispositivo.getText());
-		// logger.debug(d.toString());
-		// ProvvedimentiItem
-		// selectedProvvedimento=provvedimenti.getProvvedimentoByName(comboprovvedimenti.getSelectedItem().toString());
-		//					    
-		// // Nel caso di urn specificata nel file Provvedimenti (es codici,
-		// costituzione etc) forza data e numero
-		// String urnAtto=selectedProvvedimento.getUrnValore();
-		// if (!urnAtto.equals(""))
-		// popolaControlli(urnAtto);
-		//						
-		// String urnAutorita=selectedProvvedimento.getUrnAutorita();
-		// if (!urnAutorita.substring(0,1).equals("+")){
-		// Istituzione[]
-		// emananti=registroautorita.getIstituzioniValideFromProvvedimenti(d,selectedProvvedimento.getUrnAutorita());
-		// if (!lmautorita.isEmpty())
-		// lmautorita.removeAllElements();
-		// manageAutorita(emananti);
-		// inserisciautorita.setEnabled(true);
-		// }
-		// else{
-		// Istituzione[] emananti=new Istituzione[1];
-		// emananti[0]=new Istituzione();
-		// emananti[0].setUrn(urnAutorita.substring(1,urnAutorita.length()));
-		// if (emananti[0].getUrn().equals("comunita.europee"))
-		// emananti[0].setNome("Comunita europee");
-		// else
-		// emananti[0].setNome("Unione europea");
-		// if (!lmautorita.isEmpty())
-		// lmautorita.removeAllElements();
-		// manageAutorita(emananti);
-		// }
-		// }
-		// else{
-		// ProvvedimentiItem
-		// selectedProvvedimento=provvedimenti.getProvvedimentoByName(comboprovvedimenti.getSelectedItem().toString());
-		// String urnAtto=selectedProvvedimento.getUrnValore();
-		// if (!urnAtto.equals("")){
-		// popolaControlli(urnAtto);
-		// }
-		// }
-		// costruisciUrn();
-		// manageUrnList();
-		// }
-		// catch (Exception exc){
-		// //logger.error(exc.toString());
-		// }
+	
 
 		if (e.getSource().equals(comboautorita))
 			manageSottoAutorita(combosottolivello1, (Istituzione) comboautorita.getSelectedItem());
