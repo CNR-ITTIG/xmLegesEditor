@@ -46,8 +46,8 @@ public interface RifIncompleti extends Service {
 	 * @return <code>null</code> se la modifica non &egrave; riuscita; nodo
 	 *         modificato
 	 */
-	public Node setRif(Node node, int start, int end, Urn urn);
-	
+	//public Node setRif(Node node, int start, int end, Urn urn); di Tommaso
+	public Node setRif(Node node, String text, Urn urn);
 	
 	/**
 	 * Sostituisce al nodo <code>&lt;?rif&gt;</code> incompleto il suo contenuto testuale.
@@ -59,7 +59,8 @@ public interface RifIncompleti extends Service {
 	 * @return <code>null</code> se la modifica non &egrave; riuscita; nodo
 	 *         modificato
 	 */
-	public Node setPlainText(Node node, int start, int end, String plainText);
+	//public Node setPlainText(Node node, int start, int end, String plainText);  di Tommaso
+	public Node setPlainText(Node node, String plainText);
 	
 	/**
 	 * Restituisce la sottostringa contenente la Urn dal nodo <code>&lt;?rif&gt;</code> incompleto
