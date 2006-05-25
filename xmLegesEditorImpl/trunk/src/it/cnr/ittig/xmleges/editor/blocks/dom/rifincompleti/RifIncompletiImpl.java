@@ -19,9 +19,14 @@ import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 import it.cnr.ittig.xmleges.editor.services.util.urn.NirUtilUrn;
 import it.cnr.ittig.xmleges.editor.services.util.urn.Urn;
 
+import java.util.Vector;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.ProcessingInstruction;
+import org.w3c.dom.traversal.DocumentTraversal;
+import org.w3c.dom.traversal.NodeFilter;
+import org.w3c.dom.traversal.NodeIterator;
 
 /**
  * <h1>Implementazione del servizio
@@ -158,10 +163,8 @@ public class RifIncompletiImpl implements RifIncompleti, Loggable, Serviceable {
 	}
 
 	public String getText(Node node) {
-		
         String temp = ((ProcessingInstruction)node).getData().substring(((ProcessingInstruction)node).getData().indexOf(">"),((ProcessingInstruction)node).getData().length());
-		return (temp.substring(1,temp.indexOf("<")));
-		
+		return (temp.substring(1,temp.indexOf("<")));		
 	}
 
 	public String getUrn(Node node) {
@@ -170,8 +173,24 @@ public class RifIncompletiImpl implements RifIncompleti, Loggable, Serviceable {
 		return (temp.substring(0,temp.indexOf("\"")));
 		
 	}
-
 	
 	
+	public Node[] getList(){
+		
+		NodeIterator nI = ((DocumentTraversal)documentManager.getDocumentAsDom()).createNodeIterator(documentManager.getDocumentAsDom().getDocumentElement(),NodeFilter.SHOW_PROCESSING_INSTRUCTION,null,true);	
+		Vector v = new Vector();
+	  
+		Node node;
+		
+		while ((node = nI.nextNode()) != null ) {
+			if(node.getNodeType()==Node.PROCESSING_INSTRUCTION_NODE && ((ProcessingInstruction)node).getTarget().equals("rif"))
+			v.add(node);
+	    }
+		
+		Node[] ret = new Node[v.size()];
+		for(int i=0; i<v.size();i++)
+			ret[i]=(Node)v.get(i);
+		return  ret;
+	}
 
 }
