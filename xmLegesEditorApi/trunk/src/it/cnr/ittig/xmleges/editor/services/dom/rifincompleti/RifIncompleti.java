@@ -74,6 +74,13 @@ public interface RifIncompleti extends Service {
 	 * @return
 	 */
 	public String getText(Node node);
+	
+	
+	/**
+	 * Restituisce la lista di tutti i riferimenti incompleti presenti nel documento a partire dalla radice
+	 * @return Array dei nodi <code>&lt;?rif&gt;</code>
+	 */
+	public Node[] getList();
 
 	
 }
