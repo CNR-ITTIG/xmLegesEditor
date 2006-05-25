@@ -21,12 +21,16 @@ import it.cnr.ittig.xmleges.editor.services.util.urn.Urn;
 
 import java.util.Vector;
 
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.traversal.DocumentTraversal;
 import org.w3c.dom.traversal.NodeFilter;
 import org.w3c.dom.traversal.NodeIterator;
+
+
+
 
 /**
  * <h1>Implementazione del servizio
@@ -119,6 +123,7 @@ public class RifIncompletiImpl implements RifIncompleti, Loggable, Serviceable {
 	}
 
 	private boolean insertDOM(Node node, int start, int end, String id, String text){
+		
 		return false;
 	}
 	
@@ -148,34 +153,95 @@ public class RifIncompletiImpl implements RifIncompleti, Loggable, Serviceable {
 	}
 	
 
-	public Node setRif(Node node, int start, int end, Urn urn) {
-		
+	//public Node setRif(Node node, int start, int end, Urn urn) { di Tommaso
+	public Node setRif(Node node, String text, Urn urn) { 
+	
 		//trasforma il riferimento incompleto in un riferimento
+	    
+		Node parent = node.getParentNode();
+		Document doc = documentManager.getDocumentAsDom();
 		
-		return null;
+		try {
+			EditTransaction tr = documentManager.beginEdit();
+			Node tmp = doc.createElement("rif");
+			UtilDom.setAttributeValue(tmp, "xlink:href", urn.toString());
+			UtilDom.setTextNode(tmp, text);
+
+	     	try{
+	     		parent.replaceChild(tmp, node);	
+			}
+			catch(DOMException e){}	
+				
+		    rinumerazione.aggiorna(doc);
+			documentManager.commitEdit(tr);
+			return node;
+			
+		} catch (DocumentManagerException ex) {
+			logger.error(ex.getMessage(), ex);
+			return null;
+		}		
 	}
 
-	public Node setPlainText(Node node, int start, int end, String plainText) {
+	//public Node setPlainText(Node node, int start, int end, String plainText) { di Tommaso
+	public Node setPlainText(Node node, String plainText) {
 		
 		//trasforma il riferimento incompleto in testo piatto
-		
-		return null;
+
+		Node container = node.getParentNode(); // contenitore del testo
+		Node ritorno = null;
+		try {
+		  EditTransaction tr = documentManager.beginEdit();
+ 		  //Ho fratello SX e DX di tipo text
+		  if (null != node.getPreviousSibling() && UtilDom.isTextNode(node.getPreviousSibling()) && null != node.getNextSibling() && UtilDom.isTextNode(node.getNextSibling())) {
+			node.getPreviousSibling().setNodeValue(node.getPreviousSibling().getNodeValue() + " " + plainText + " " + node.getNextSibling().getNodeValue());
+			ritorno = node.getPreviousSibling();
+			container.removeChild(node.getNextSibling());
+			container.removeChild(node);			
+			documentManager.commitEdit(tr);
+			return ritorno;
+		  } else { //Ho solo il fratello DX di tipo text
+			if (null != container.getNextSibling() && UtilDom.isTextNode(container.getNextSibling())) {
+				node.getNextSibling().setNodeValue(plainText + " " + node.getNextSibling().getNodeValue());
+				ritorno = node.getNextSibling();
+				container.removeChild(node);			
+				documentManager.commitEdit(tr);
+				return ritorno;							
+			}
+			else { //Ho solo il fratello SX di tipo text
+			  if (null != container.getPreviousSibling() && UtilDom.isTextNode(container.getPreviousSibling())) {
+				node.getPreviousSibling().setNodeValue(node.getPreviousSibling().getNodeValue() + " " + plainText);
+				ritorno = node.getPreviousSibling();
+				container.removeChild(node);			
+				documentManager.commitEdit(tr);
+				return ritorno;							
+			  }
+			  else { //Non ho fratelli e/o ho fratelli non text
+				  node.setNodeValue(plainText); //va settato anche il tipo??
+				  documentManager.commitEdit(tr);
+				  return node;
+			  }
+			}
+		  }			
+		} catch (DocumentManagerException ex) {
+			logger.error(ex.getMessage(), ex);
+			return null;
+		} 
 	}
 
 	public String getText(Node node) {
+		
         String temp = ((ProcessingInstruction)node).getData().substring(((ProcessingInstruction)node).getData().indexOf(">"),((ProcessingInstruction)node).getData().length());
-		return (temp.substring(1,temp.indexOf("<")));		
+		return (temp.substring(1,temp.indexOf("<")));
+		
 	}
 
 	public String getUrn(Node node) {
-		
 		String temp = ((ProcessingInstruction)node).getData().substring(((ProcessingInstruction)node).getData().indexOf("\"")+1,((ProcessingInstruction)node).getData().length());
 		return (temp.substring(0,temp.indexOf("\"")));
 		
 	}
 	
-	
-	public Node[] getList(){
+public Node[] getList(){
 		
 		NodeIterator nI = ((DocumentTraversal)documentManager.getDocumentAsDom()).createNodeIterator(documentManager.getDocumentAsDom().getDocumentElement(),NodeFilter.SHOW_PROCESSING_INSTRUCTION,null,true);	
 		Vector v = new Vector();
