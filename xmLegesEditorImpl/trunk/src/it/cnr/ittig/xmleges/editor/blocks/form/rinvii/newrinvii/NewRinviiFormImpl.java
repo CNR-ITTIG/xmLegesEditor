@@ -368,8 +368,10 @@ public class NewRinviiFormImpl implements NewRinviiForm, Loggable, Serviceable, 
 
 			partizioni.setVisible(isAllowPartizioni);
 			inseriscipartizione.setVisible(isAllowPartizioni);
+			
 			eliminapartizione.setVisible(isAllowPartizioni);
 			labelpartizioni.setVisible(isAllowPartizioni);
+			
 
 			lmd = new DefaultListModel();
 			partizioni.setModel(lmd);
@@ -408,6 +410,14 @@ public class NewRinviiFormImpl implements NewRinviiForm, Loggable, Serviceable, 
 			getDescrizioneMrif();
 		}
 
+		// abilitazione del bottone per l'inserimento di nuove partizioni
+		// se ammette mrif e' sempre abilitato
+		// altrimenti solo se non c'e' gia' una partizione inserita
+		if(! isAllowMRif)
+		   inseriscipartizione.setEnabled(isAllowPartizioni && partizioni.getModel().getSize()==0);
+		else
+		   inseriscipartizione.setEnabled(isAllowPartizioni);
+		
 		form.setDialogResizable(false);
 		form.addFormVerifier(this);
 		form.showDialog();
