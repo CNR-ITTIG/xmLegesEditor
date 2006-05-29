@@ -444,6 +444,10 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
 		sottoFormDatiEvento.replaceComponent("editor.meta.ciclodivita.evento.data", dataFormDatiEvento.getAsComponent());
 		sottoFormDatiEvento.replaceComponent("editor.form.meta.urn", urnFormRelazione.getAsComponent());
 		
+		urnFormRelazione.setAnnessi(true);
+		urnFormRelazione.setPartizioni(true);
+		urnFormRelazione.setAttiGiaCitati(true);
+		
 		
 		tagTipoEvento = (JTextField) sottoFormDatiEvento.getComponentByName("editor.form.meta.ciclodivita.evento.tipoeventi");
 		
