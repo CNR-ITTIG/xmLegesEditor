@@ -53,10 +53,12 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		=
 		<font color="green">"<xsl:value-of select="."/></font>"
 	</xsl:for-each>
-	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-		<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+	<!-- modificato causa SAXException (Can't have more than one root on a DOM!) non dovrebbe servire se i dati stanno negli attributi-->
+	<xsl:element name="div"> <!-- use-attribute-sets="XsltMapperSetClass"--> 
+		<!--xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" /-->
 		<xsl:apply-templates />
 	</xsl:element>
+
 </xsl:template>
 
 
