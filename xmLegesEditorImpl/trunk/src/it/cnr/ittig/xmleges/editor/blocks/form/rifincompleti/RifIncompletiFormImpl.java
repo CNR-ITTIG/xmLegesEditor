@@ -24,14 +24,13 @@ import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextField;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.spellcheck.dom.DomSpellCheckWord;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
-import it.cnr.ittig.xmleges.editor.blocks.dom.rifincompleti.DomRifIncompletiImpl;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
 import it.cnr.ittig.xmleges.editor.services.dom.rifincompleti.RifIncompleti;
-import it.cnr.ittig.xmleges.editor.services.dom.rifincompleti.DomRifIncompleti;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 import it.cnr.ittig.xmleges.editor.services.form.rifincompleti.RifIncompletiForm;
 import it.cnr.ittig.xmleges.editor.services.form.urn.UrnForm;
+import it.cnr.ittig.xmleges.editor.services.util.urn.NirUtilUrn;
 import it.cnr.ittig.xmleges.editor.services.util.urn.Urn;
 
 
@@ -130,14 +129,11 @@ public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable, Servi
 
 	JButton nextButton;
 	
-	Vector riferimenti = null;
+	Node[] riferimenti = null;
 	
-	Vector ignored = new Vector();
+	Vector resolved = new Vector();
+	Vector jumped = new Vector();
 
-	Vector ignoredAll = new Vector();
-
-	Vector inserted = new Vector();
-	
 	int missRif;
 	
 	EditTransaction tr;
@@ -146,54 +142,34 @@ public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable, Servi
 	
 	RifIncompleti rifincompleti;
 	
+	NirUtilUrn nirutilurn;
+	
+	int rifiniziale = 0;
+	boolean ricomincia = false;
+	
     public boolean openForm(String testo, String urn) {
 
     	
-    	//volevo fare la collezione dei riferimenti sbagliati...non sono riuscito a far di meglio
-    	// (((((((ancora non funziona))))))))
-//    	NodeList nodi = documentManager.getDocumentAsDom().getElementsByTagName("*");
-//    	System.err.println("iniziali: "+ nodi.getLength());
-//		riferimenti = new Vector();
-//		for (int i=0; i<nodi.getLength(); i++)
-//			if ((nodi.item(i).getNodeType()==Node.PROCESSING_INSTRUCTION_NODE) && ((ProcessingInstruction) nodi.item(i)).getTarget().equals("rif")) {
-//				riferimenti.add(nodi.item(i));
-//		    }
-//		
-//		System.err.println("rif trovati n° " + riferimenti.size());
-//		int rifcorrente = 0;
-//		for (int i=0; i<riferimenti.size(); i++)
-//		    if (riferimenti.get(i).equals(selectionManager.getActiveNode())) {
-//		    	 rifcorrente = i;
-//		    	 break;
-//		    }
-//		System.err.println("rif n° " + rifcorrente);	
-    	
-    	
-    	//simulo un vettore con una solo <?rif>
-		DomRifIncompleti newRif = null;
-		riferimenti = new Vector();
-		//nell'ipotetico for di sopra faccio
-		  newRif = new DomRifIncompletiImpl(selectionManager.getActiveNode());
-		  riferimenti.add(newRif);
-		  contaTr = 1;
-		
-		ignored = new Vector();
-		ignoredAll = new Vector();
-		inserted = new Vector();
+    	//vettore dei riferimenti incompleti
+    	riferimenti = rifincompleti.getList();
+    	  	    	
+		for (int i=0; i<riferimenti.length; i++)
+		    if (riferimenti[i].equals(selectionManager.getActiveNode())) {
+		    	 rifiniziale = i;
+		    	 if (i==0) ricomincia = false; 
+		    	 else ricomincia = true; 
+		    	 break;
+		    }
+			
+		resolved = new Vector();
+		jumped = new Vector();
 		missRif = 0;
 		tr = null;
 		contaTr = 0;
 		
 		form.setSize(650, 180);
 		form.setName("editor.rifincompleto");
-		
-//		textArea.setText(testo);
-//		try{
-//			urnFormRifIncompleti.setUrn(new Urn(urn));
-//		}
-//		catch(ParseException e){urnFormRifIncompleti.setUrn(new Urn());}	
-		
-		showRif(riferimenti);		
+		missRif = showRif(riferimenti);		
 		form.showDialog();
 		
 
@@ -227,11 +203,14 @@ public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable, Servi
         form.setName("editor.rifincompleto");
 
         urnFormRifIncompleti = (UrnForm) serviceManager.lookup(UrnForm.class);       
-        //utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
-
+        utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
+    
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 		rifincompleti = (RifIncompleti) serviceManager.lookup(RifIncompleti.class);
+		
+		nirutilurn = (NirUtilUrn) serviceManager.lookup(NirUtilUrn.class);
+
 	}
 
 	// ////////////////////////////////////////////////// Configurable Interface
@@ -240,12 +219,11 @@ public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable, Servi
 
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws java.lang.Exception {
-		//eventManager.addListener(this, SelectionChangedEvent.class);				
 		form.setMainComponent(getClass().getResourceAsStream("RifIncompleti.jfrm"));		
 		form.replaceComponent("editor.form.meta.urn", urnFormRifIncompleti.getAsComponent());		
 		form.setName("editor.rifincompleti");
 		textArea = (JTextArea) form.getComponentByName("editor.form.rifincompleto.testo");
-        
+		
 		ignoreButton = (JButton) form.getComponentByName("editor.form.rifincompleto.ignore");
 		ignoreButton.addActionListener(this);
 		ignoreAllButton = (JButton) form.getComponentByName("editor.form.rifincompleto.ignoreall");
@@ -257,71 +235,171 @@ public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable, Servi
 		
 	}
 	
-	private boolean isIgnored(DomRifIncompleti node) {
+	private boolean isResolved(Node node) {
 
 		int i = 0;
-		while (i < ignored.size()) {
-			if (ignored.get(i).equals(node.getNode()))
-				return true;
-			i++;
-		}
-		return false;
-	}
-
-	private boolean isIgnoredAll(DomRifIncompleti node) {
-
-        //non ha senso (è lo stesso di isIgnored) 
-		//cambiare il comportamento come "esci dalla form e APPIATTISCI TUTTO"
-		return false;
-	}
-
-	private boolean isInserted(DomRifIncompleti node) {
-
-		
-		//anche questo ha poco senso...basterebbe un unico vettore per tutto (isIndex)
-		int i = 0;
-		while (i < inserted.size()) {
-			if (inserted.get(i).equals(node.getNode()))
+		while (i < resolved.size()) {
+			if (resolved.get(i).equals(node))
 				return true;
 			i++;
 		}
 		return false;
 	}
 	
-	private int showRif(Vector riferimenti) {
+	private boolean isJumped(Node node) {
+
 		int i = 0;
+		while (i < jumped.size()) {
+			if (jumped.get(i).equals(node))
+				return true;
+			i++;
+		}
+		return false;
+	}
+	
+	
+	private int showRif(Node[] riferimenti) {
+		int i = rifiniziale;
 		do {
-			if (!isIgnored((DomRifIncompleti) riferimenti.get(i)) && !isIgnoredAll((DomRifIncompleti) riferimenti.get(i)) && !isInserted((DomRifIncompleti) riferimenti.get(i))) {
+			if (!isResolved(riferimenti[i]) && !isJumped(riferimenti[i])) {
 				
-				textArea.setText(rifincompleti.getText(((DomRifIncompletiImpl) riferimenti.get(i)).getNode()));
+				textArea.setText(rifincompleti.getText(riferimenti[i]));
 				try{
-					urnFormRifIncompleti.setUrn(new Urn(rifincompleti.getUrn(((DomRifIncompletiImpl) riferimenti.get(i)).getNode())));
+					urnFormRifIncompleti.setUrn(new Urn(rifincompleti.getUrn(riferimenti[i])));
 				}
 				catch(ParseException e){urnFormRifIncompleti.setUrn(new Urn());}	
-
+				selectionManager.setSelectedText(this, riferimenti[i], 0, riferimenti[i].getNodeValue().length());
+				return i;
 			}
 			i++;
-		} while (i < riferimenti.size());
+		} while (i < riferimenti.length);
 		return (-1);
 	}
 
+	private int doIgnoreAll(Node[] riferimenti) {
+		int i = 0;  //lo faccio su tutti
+		int ultimo=0;
+		do {
+			if (!isResolved(riferimenti[i])) {
+			  try {
+				tr = documentManager.beginEdit();
+				if (null != rifincompleti.setPlainText(riferimenti[i], rifincompleti.getText(riferimenti[i]))) {  
+					contaTr++;					
+					resolved.add(riferimenti[i]);
+					ultimo=i;
+				}
+				documentManager.commitEdit(tr);
+			  } catch (DocumentManagerException ex) {
+				logger.error(ex.getMessage(), ex);
+			  }
+			}
+			i++;
+		} while (i < riferimenti.length);
+		selectionManager.setSelectedText(this, riferimenti[ultimo], 0, riferimenti[ultimo].getNodeValue().length());
+		return ultimo; //potrei anche non spostarmi dal nodo corrente (DECIDERE?)
+	}
 	
 	public void actionPerformed(ActionEvent evt) {
 		if (evt.getSource() == nextButton) {
-			 System.err.println("TASTO next");
+		    if (missRif != -1 && missRif < riferimenti.length) {
+		    	jumped.add(riferimenti[missRif]);
+				missRif = showRif(riferimenti);
+				if (missRif == -1)
+					if (ricomincia) 
+						if (utilMsg.msgYesNo("rifincompleti.error.endrepeat")) {
+							rifiniziale = 0;   
+							ricomincia = false;
+							missRif = showRif(riferimenti);
+							if (missRif == -1) utilMsg.msgInfo("rifincompleti.error.endstop");									
+						}
+					else utilMsg.msgInfo("rifincompleti.error.endstop");								
+			} else {
+				if (ricomincia) 
+					if (utilMsg.msgYesNo("rifincompleti.error.endrepeat")) {
+						rifiniziale = 0;   
+						ricomincia = false;
+						missRif = showRif(riferimenti);
+						if (missRif == -1) utilMsg.msgInfo("rifincompleti.error.endstop");									
+					}
+					else utilMsg.msgInfo("rifincompleti.error.endstop");								
+				else utilMsg.msgInfo("rifincompleti.error.endstop");								
+			  } 
 		} 
 		else if (evt.getSource() == ignoreButton) {
-			System.err.println("TASTO ignore");
-			rifincompleti.setPlainText(((DomRifIncompletiImpl) riferimenti.get(missRif)).getNode(), textArea.getText());
-//			passa al successivo <?rif>
+			if (missRif != -1 && missRif < riferimenti.length) {
+			  try {
+		 		tr = documentManager.beginEdit();
+				if (null != rifincompleti.setPlainText(riferimenti[missRif], textArea.getText())) {
+					contaTr++;					
+					resolved.add(riferimenti[missRif]);
+					missRif = showRif(riferimenti);
+					if (missRif == -1)
+						if (ricomincia) 
+							if (utilMsg.msgYesNo("rifincompleti.error.endrepeat")) {
+								rifiniziale = 0;   
+								ricomincia = false;
+								missRif = showRif(riferimenti);
+								if (missRif == -1) utilMsg.msgInfo("rifincompleti.error.endstop");									
+							}
+						else utilMsg.msgInfo("rifincompleti.error.endstop");											
+				}
+				documentManager.commitEdit(tr);
+ 			  } catch (DocumentManagerException ex) {
+ 				logger.error(ex.getMessage(), ex);
+ 			  }
+			} else {
+				if (ricomincia) 
+					if (utilMsg.msgYesNo("rifincompleti.error.endrepeat")) {
+						rifiniziale = 0;   
+						ricomincia = false;
+						missRif = showRif(riferimenti);
+						if (missRif == -1) utilMsg.msgInfo("rifincompleti.error.endstop");									
+					}
+					else utilMsg.msgInfo("rifincompleti.error.endstop");								
+				else utilMsg.msgInfo("rifincompleti.error.endstop");								
+			  } 
 		} 
 		else if (evt.getSource() == ignoreAllButton) {
-			System.err.println("TASTO ignoreall");
+			doIgnoreAll(riferimenti);
 		} 
 		else if (evt.getSource() == replaceButton) {
-			System.err.println("TASTO replace");
-			rifincompleti.setRif(((DomRifIncompletiImpl) riferimenti.get(missRif)).getNode(), textArea.getText(), urnFormRifIncompleti.getUrn());
-	        //passa al successivo <?rif>
+			if (missRif != -1 && missRif < riferimenti.length) {
+			 if (urnFormRifIncompleti.getUrn().isValid()) {
+			  try {
+		 		tr = documentManager.beginEdit();
+		 		if (null != rifincompleti.setRif(riferimenti[missRif], nirutilurn.getFormaTestuale(urnFormRifIncompleti.getUrn()), urnFormRifIncompleti.getUrn())) {
+					contaTr++;					
+					resolved.add(riferimenti[missRif]);
+					missRif = showRif(riferimenti);
+					if (missRif == -1)
+						if (ricomincia) 
+							if (utilMsg.msgYesNo("rifincompleti.error.endrepeat")) {
+								rifiniziale = 0;   
+								ricomincia = false;
+								missRif = showRif(riferimenti);
+								if (missRif == -1) utilMsg.msgInfo("rifincompleti.error.endstop");									
+							}
+						else utilMsg.msgInfo("rifincompleti.error.endstop");								
+				}
+				documentManager.commitEdit(tr);
+ 			    } catch (DocumentManagerException ex) {
+ 				  logger.error(ex.getMessage(), ex);
+ 			    }
+		     }
+			 else {
+				 utilMsg.msgError("rifincompleti.error.urn");
+			 }
+			} else {
+				if (ricomincia) 
+					if (utilMsg.msgYesNo("rifincompleti.error.endrepeat")) {
+						rifiniziale = 0;   
+						ricomincia = false;
+						missRif = showRif(riferimenti);
+						if (missRif == -1) utilMsg.msgInfo("rifincompleti.error.endstop");									
+					}
+					else utilMsg.msgInfo("rifincompleti.error.endstop");								
+				else utilMsg.msgInfo("rifincompleti.error.endstop");								
+			  } 			
 		} 
 	}
 

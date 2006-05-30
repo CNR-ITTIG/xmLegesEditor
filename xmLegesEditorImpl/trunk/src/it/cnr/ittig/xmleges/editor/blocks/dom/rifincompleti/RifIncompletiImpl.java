@@ -97,51 +97,7 @@ public class RifIncompletiImpl implements RifIncompleti, Loggable, Serviceable {
 		nirutilurn = (NirUtilUrn) serviceManager.lookup(NirUtilUrn.class);
 		rinumerazione = (Rinumerazione) serviceManager.lookup(Rinumerazione.class);
 	}
-	
-	public Node insert(Node node, int start, int end, Urn urn) {
-		return insert(node, start, end, urn.toString(), urn.getFormaTestuale().trim());
-	}
-
-	public Node insert(Node node, int start, int end, String id, String text) {
-
-		Document doc = documentManager.getDocumentAsDom();
-
-		try {
-			EditTransaction tr = documentManager.beginEdit();
-			if (insertDOM(node, start, end, id, text)) {
-				rinumerazione.aggiorna(doc);
-				documentManager.commitEdit(tr);
-				return modified;
-			} else {
-				documentManager.rollbackEdit(tr);
-				return null;
-			}
-		} catch (DocumentManagerException ex) {
-			logger.error(ex.getMessage(), ex);
-			return null;
-		}
-	}
-
-	private boolean insertDOM(Node node, int start, int end, String id, String text){
 		
-		return false;
-	}
-	
-	public boolean canInsert(Node node) {
-		if (node != null && node.getParentNode() != null && UtilDom.findParentByName(node, "mrif") == null && UtilDom.findParentByName(node, "rif") == null) {
-			try {
-				return (dtdRulesManager.queryAppendable(node).contains("rif")
-						|| dtdRulesManager.queryInsertableInside(node.getParentNode(), node).contains("rif")
-						|| dtdRulesManager.queryInsertableAfter(node.getParentNode(), node).contains("rif") || dtdRulesManager.queryInsertableBefore(
-						node.getParentNode(), node).contains("rif"));
-			} catch (DtdRulesManagerException ex) {
-				return false;
-			}
-		}
-		return false;
-	}
-
-    //////////////////////////////////////////////////////
 
 	public boolean canFix(Node node) {
 		
@@ -153,79 +109,60 @@ public class RifIncompletiImpl implements RifIncompleti, Loggable, Serviceable {
 	}
 	
 
-	//public Node setRif(Node node, int start, int end, Urn urn) { di Tommaso
 	public Node setRif(Node node, String text, Urn urn) { 
-	
-		//trasforma il riferimento incompleto in un riferimento
 	    
 		Node parent = node.getParentNode();
 		Document doc = documentManager.getDocumentAsDom();
-		
-		try {
-			EditTransaction tr = documentManager.beginEdit();
-			Node tmp = doc.createElement("rif");
-			UtilDom.setAttributeValue(tmp, "xlink:href", urn.toString());
-			UtilDom.setTextNode(tmp, text);
 
-	     	try{
+		Node tmp = doc.createElement("rif");
+		UtilDom.setAttributeValue(tmp, "xlink:href", urn.toString());
+		UtilDom.setTextNode(tmp, text);
+     	try{
 	     		parent.replaceChild(tmp, node);	
-			}
-			catch(DOMException e){}	
+		}
+		catch(DOMException e){return null;}	
 				
-		    rinumerazione.aggiorna(doc);
-			documentManager.commitEdit(tr);
-			return node;
+	    rinumerazione.aggiorna(doc);
+		return node;
 			
-		} catch (DocumentManagerException ex) {
-			logger.error(ex.getMessage(), ex);
-			return null;
-		}		
 	}
 
-	//public Node setPlainText(Node node, int start, int end, String plainText) { di Tommaso
+	public boolean canSetPlainText(Node node) {
+		if (node == null) return false;
+		if (node.getParentNode() == null) return false;
+		return true;
+	}
+	
 	public Node setPlainText(Node node, String plainText) {
-		
-		//trasforma il riferimento incompleto in testo piatto
 
+		if (!canSetPlainText(node))
+			return null;
 		Node container = node.getParentNode(); // contenitore del testo
 		Node ritorno = null;
-		try {
-		  EditTransaction tr = documentManager.beginEdit();
- 		  //Ho fratello SX e DX di tipo text
-		  if (null != node.getPreviousSibling() && UtilDom.isTextNode(node.getPreviousSibling()) && null != node.getNextSibling() && UtilDom.isTextNode(node.getNextSibling())) {
+ 	    if (null != node.getPreviousSibling() && UtilDom.isTextNode(node.getPreviousSibling()) && null != node.getNextSibling() && UtilDom.isTextNode(node.getNextSibling())) {
 			node.getPreviousSibling().setNodeValue(node.getPreviousSibling().getNodeValue() + " " + plainText + " " + node.getNextSibling().getNodeValue());
 			ritorno = node.getPreviousSibling();
 			container.removeChild(node.getNextSibling());
 			container.removeChild(node);			
-			documentManager.commitEdit(tr);
 			return ritorno;
-		  } else { //Ho solo il fratello DX di tipo text
-			if (null != container.getNextSibling() && UtilDom.isTextNode(container.getNextSibling())) {
+		} else { //Ho solo il fratello DX di tipo text
+		  if (null != node.getNextSibling() && UtilDom.isTextNode(node.getNextSibling())) {
 				node.getNextSibling().setNodeValue(plainText + " " + node.getNextSibling().getNodeValue());
 				ritorno = node.getNextSibling();
 				container.removeChild(node);			
-				documentManager.commitEdit(tr);
 				return ritorno;							
-			}
-			else { //Ho solo il fratello SX di tipo text
-			  if (null != container.getPreviousSibling() && UtilDom.isTextNode(container.getPreviousSibling())) {
+		  } else { //Ho solo il fratello SX di tipo text
+			if (null != node.getPreviousSibling() && UtilDom.isTextNode(node.getPreviousSibling())) {
 				node.getPreviousSibling().setNodeValue(node.getPreviousSibling().getNodeValue() + " " + plainText);
 				ritorno = node.getPreviousSibling();
 				container.removeChild(node);			
-				documentManager.commitEdit(tr);
 				return ritorno;							
-			  }
-			  else { //Non ho fratelli e/o ho fratelli non text
-				  node.setNodeValue(plainText); //va settato anche il tipo??
-				  documentManager.commitEdit(tr);
-				  return node;
+			} else { //Non ho fratelli e/o ho fratelli non text
+				     node.setNodeValue(plainText);
+				     return node;
 			  }
 			}
-		  }			
-		} catch (DocumentManagerException ex) {
-			logger.error(ex.getMessage(), ex);
-			return null;
-		} 
+		 }			
 	}
 
 	public String getText(Node node) {
