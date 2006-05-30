@@ -387,9 +387,9 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 			
 			domSpellCheck.getSpellCheck().addSuggestion(oldText.substring(word.getSpellCheckWord().getStartOffset(),word.getSpellCheckWord().getEndOffset()),this.getWord(),false);			        
 			      
-			if (!this.getWord().equals(oldText.substring(word.getSpellCheckWord().getStartOffset(),word.getSpellCheckWord().getEndOffset())))
-				replaceAllWord(words, misspelledIndex);
-
+			//if (!this.getWord().equals(oldText.substring(word.getSpellCheckWord().getStartOffset(),word.getSpellCheckWord().getEndOffset())))
+			replaceAllWord(words, misspelledIndex);
+			
 			inserted_index.add(new Integer(misspelledIndex));
 			
 			if (misspelledIndex != -1 && misspelledIndex < words.length) {
@@ -424,9 +424,7 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 		
 		inserted.add(this.getWord());  
 
-		  //modifica per TR
-			words[misspelledIndex].getNode().setNodeValue(newText);
-		
+		words[misspelledIndex].getNode().setNodeValue(newText);
 		//aggiorno offset delle altre parole sullo stesso nodo
 		replaceOffset(words, misspelledIndex);
 
@@ -473,13 +471,13 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 				+ oldText.substring(words[i].getSpellCheckWord().getEndOffset());
 
 				inserted_index.add(new Integer(i));				
-				logger.debug("newText " + newText);				
+				logger.debug("newText " + newText);
 				
-				  //modifica per TR
-					words[i].getNode().setNodeValue(newText);
-				
-				//aggiorno offset delle altre parole sullo stesso nodo
-				replaceOffset(words, i);
+				if (!repAll.equals(newText)) {
+				  words[i].getNode().setNodeValue(newText);
+				  //aggiorno offset delle altre parole sullo stesso nodo
+				  replaceOffset(words, i);
+				}
 
 			}
 			i++;
