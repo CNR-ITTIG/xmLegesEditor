@@ -1,5 +1,4 @@
 package it.cnr.ittig.xmleges.editor.services.dom.rifincompleti;
-
 import it.cnr.ittig.services.manager.Service;
 import it.cnr.ittig.xmleges.editor.services.util.urn.Urn;
 
@@ -7,7 +6,6 @@ import org.w3c.dom.Node;
 
 /**
  * Servizio per la correzione o l'annullamento di un riferimento incompleto
- * di un
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
@@ -29,37 +27,32 @@ public interface RifIncompleti extends Service {
 	 * Indica se &egrave; possibile sostituire un nodo <code>&lt;?rif&gt;</code> incompleto con un nodo <code>&lt;rif&gt;</code>
 	 * 
 	 * @param node nodo di riferimento
-	 * @return <code>true</code> se &egrave; possibile inserire un nodo
+	 * @return <code>true</code> se &egrave; possibile trasformare il nodo
 	 *         <code>&lt;rif&gt;</code>
 	 */
 	public boolean canFix(Node node);
 
 	
 	/**
-	 * Inserisce un nodo <code>&lt;rif&gt; all'interno del nodo
+	 * trasforma il riferimento incompleto in un riferimento
 	 * <code>node</code>.
 	 * 
 	 * @param node nodo di riferimento
-	 * @param start inizio della selezione
-	 * @param end fine della selezione
+	 * @param text parte testuale della urn
 	 * @param Urn del riferimenti
 	 * @return <code>null</code> se la modifica non &egrave; riuscita; nodo
 	 *         modificato
 	 */
-	//public Node setRif(Node node, int start, int end, Urn urn); di Tommaso
 	public Node setRif(Node node, String text, Urn urn);
 	
 	/**
 	 * Sostituisce al nodo <code>&lt;?rif&gt;</code> incompleto il suo contenuto testuale.
 	 * 
 	 * @param node nodo di riferimento
-	 * @param start inizio della selezione
-	 * @param end fine della selezione
 	 * @param plainText testo piatto del rif Incompleto
 	 * @return <code>null</code> se la modifica non &egrave; riuscita; nodo
 	 *         modificato
 	 */
-	//public Node setPlainText(Node node, int start, int end, String plainText);  di Tommaso
 	public Node setPlainText(Node node, String plainText);
 	
 	/**
