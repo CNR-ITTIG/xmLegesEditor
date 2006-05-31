@@ -56,7 +56,8 @@ public class UtilFile {
 		} else
 			throw new IOException("Cannot create temp file " + fileName);
 	}
-
+		
+	
 	/**
 	 * Crea un file temporaneo copiandoci il contenuto del file
 	 * <code>file</code>.
@@ -174,6 +175,8 @@ public class UtilFile {
 	public static boolean copyFileInTemp(InputStream source, String dest) {
 		return copyFileInTemp(source, new File(dest));
 	}
+	
+	
 
 	/**
 	 * Copia lo stream <code>source</code> nel file <code>dest</code> nella
@@ -187,6 +190,36 @@ public class UtilFile {
 		return copyFile(source, tempDir + File.separatorChar + dest.getName());
 	}
 
+	
+	/**
+	 * Copia lo stream <code>source</code> nel file di nome <code>dest</code>
+	 * nella sottodirectory <code>dirName</code> della directory temporanea di sistema.
+	 * 
+	 * @param source stream da copiare
+	 * @param dirName nome della sottodirectory
+	 * @param dest nome del file di destinazione
+	 * @return <code>true</code> se la copia &egrave; terminata con successo
+	 */
+	public static boolean copyFileInTempDir(InputStream source, String dirName, String dest) {
+		return copyFileInTempDir(source, dirName, new File(dest));
+	}
+	
+	
+	/**
+	 * Copia lo stream <code>source</code> nel file <code>dest</code> nella
+	 * sottodirectory <code>dirName</code> della directory temporanea di sistema.
+	 * 
+	 * @param source stream da copiare
+	 * @param dirName nome della sottodirectory
+	 * @param dest destinazione
+	 * @return <code>true</code> se la copia &egrave; terminata con successo
+	 */
+	public static boolean copyFileInTempDir(InputStream source, String dirName, File dest) {
+		new File(getTempDirName() + File.separatorChar + dirName).mkdir();
+		return copyFile(source, tempDir + File.separatorChar +dirName +File.separatorChar + dest.getName());
+	}
+	
+	
 	/**
 	 * Restituisce il file <code>fileName</code> se presente nella directory
 	 * temporanea di sistema.
@@ -387,4 +420,6 @@ public class UtilFile {
 			return false;
 		}
 	}
+	
+	
 }
