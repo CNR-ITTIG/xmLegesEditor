@@ -42,11 +42,15 @@ public class VigenzaEntity {//implements Serviceable{
 	/** Status della vigenza*/
 	String status;
 	
+	/**
+	 * testo selezionato
+	 */
 	String sel_text;
-	
+	/**
+	 * nodo a cui appartiene la vigenza
+	 */
 	Node onNode;
 	
-//	Vigenza vigenza;
 	
 	
 
@@ -54,7 +58,7 @@ public class VigenzaEntity {//implements Serviceable{
 			Evento fineVigore,
 			/*Evento inizioEfficacia,
 			Evento fineEfficacia,*/
-			String status, String text) 
+			String status, String sel_text) 
 	{
 		onNode=node;
 		setEInizioVigore(inizioVigore);
@@ -62,7 +66,7 @@ public class VigenzaEntity {//implements Serviceable{
 //		setEInizioEfficacia(inizioEfficacia);
 //		setEFineEfficacia(fineEfficacia);
 		setStatus(status);
-		setSel_text(text);
+		setSel_text(sel_text);
 	}
 	
 	
@@ -140,6 +144,9 @@ public class VigenzaEntity {//implements Serviceable{
 	public Node getOnNode() {
 		return onNode;
 	}
+
+
+	
 	
 //	public void updateVigenza(){
 //		vigenza.updateVigenzaOnDoc(this);

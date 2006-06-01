@@ -3,7 +3,7 @@ package it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita;
 import it.cnr.ittig.xmleges.core.util.date.UtilDate;
 
 /**
- * Classe per la descrizione delle vigenze.
+ * Classe per la descrizione degli eventi.
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
@@ -33,7 +33,10 @@ public class Evento {
 	/** Tipo di evento */
 	String tipoEvento;
 	
-    
+    /**
+     * 
+     * @return tipoEvento
+     */
 	public String getTipoEvento() {
 		return tipoEvento;
 	}
@@ -41,7 +44,13 @@ public class Evento {
 	public void setTipoEvento(String tipo) {
 		this.tipoEvento = tipo;
 	}
-
+/**
+ * 
+ * @param id: id dell'evento
+ * @param data: data dell'evento
+ * @param fonte: la relazione fonte dell'evento
+ * @param tipo: il tipo di evento
+ */
 	public Evento(String id, String data, Relazione fonte, String tipo) {
 		setId(id);
 		setData(data);

@@ -52,9 +52,9 @@ public interface MetaCiclodivita extends Service {
 	
 	/**
 	 * 
-	 * @param eventi
-	 * @param relazioniUlteriori
-	 * @return
+	 * @param eventi: vettore contenente le relazioni degli eventi
+	 * @param relazioniUlteriori: vettore contenente le relazioni ulteriori 
+	 * @return: un unico vettore con la fusione dei due
 	 */
 	public Relazione[] mergeRelazioni(Evento[] eventi, Relazione[] relazioniUlteriori);
 	
@@ -65,8 +65,14 @@ public interface MetaCiclodivita extends Service {
 	 * @return
 	 */
 	public Relazione[] getRelazioniUlteriori(Evento[] eventi, Relazione[] relazioni);
-	
+	/**
+	 * 
+	 * @return: restituisce tutti gli id degli eventi coinvolti nelle vigenze del documento
+	 */
 	public String[] getEventiOnVigenza();
-	
+	/**
+	 * 
+	 * @return: restituisce l'elenco delle vigenze del documento
+	 */
 	public VigenzaEntity[] getVigenze();
 }

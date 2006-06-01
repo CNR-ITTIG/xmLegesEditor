@@ -33,13 +33,25 @@ public class Relazione {
 	/** Effetto/tipo allegato della relazione */
 	String effetto_tipoall;
 
+	/**
+	 * Costruttore di Relazione
+	 * @param tag:  tipo relazione
+	 * @param id: id relazione
+	 * @param link: link della urn
+	 */
 	public Relazione(String tag, String id, String link) {
 		setTagTipoRelazione(tag);
 		setId(id);
 		setLink(link);
 		setEffetto_tipoall(null);
 	}
-	
+	/**
+	 * Costruttore di Relazione nel caso di presenza effetto/tipoallegato
+	 * @param tag
+	 * @param id
+	 * @param link
+	 * @param effetto_tipoall
+	 */
 	public Relazione(String tag, String id, String link, String effetto_tipoall) {
 		setTagTipoRelazione(tag);
 		setId(id);
@@ -81,6 +93,14 @@ public class Relazione {
 
 
 	public String toString() {
-		return tagTipoRelazione.toUpperCase() + ", " + link;
+		String toString;
+		toString=tagTipoRelazione.toUpperCase() + ", " + link;
+		if(getTagTipoRelazione().equals("giurisprudenza")
+				||getTagTipoRelazione().equals("haallegato")
+				||getTagTipoRelazione().equals("allegatodi")){
+			toString+=", "+getEffetto_tipoall();
+		}
+		
+		return toString;
 	}
 }

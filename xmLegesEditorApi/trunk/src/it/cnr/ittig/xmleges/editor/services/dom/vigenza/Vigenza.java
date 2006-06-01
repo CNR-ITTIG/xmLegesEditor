@@ -35,7 +35,7 @@ public interface Vigenza extends Service {
 	 * @param end fine selezione del testo
 	 * @return </code>true</code> se l'azione puo' essere abilitata
 	 */
-	public boolean canSetVigenza(Node node, int start, int end);
+	public boolean canSetVigenza(Node node);
 	
 	
 	/**
@@ -50,16 +50,38 @@ public interface Vigenza extends Service {
 	 * @return </code>true</code> se la vigenza e' stata inserita
 	 *         correttamente
 	 */
-	public boolean setVigenza(Node node, int start, int end, VigenzaEntity vigenza);
+	public Node setVigenza(Node node, String selectedText, int start, int end, VigenzaEntity vigenza);
 	
+	/**
+	 * Funzione Dom per la lettura da documento della vigenza del nodo selezionato
+	 * @param node: nodo selezionato
+	 * @param start: inizio selezione
+	 * @param end: fine selezione
+	 * @return
+	 */
 	public VigenzaEntity getVigenza(Node node, int start, int end);
-	
+	/**
+	 * Funzione per la lettura del testo marcato
+	 * @return
+	 */
 	public String getSelectedText();
 	
+	/**
+	 * Funzione per verificare se il documento ha almeno una vigenza
+	 * @return 
+	 */
 	public boolean isVigente();
-
+	/**
+	 * Funzione che cambia il tipo di documento in funzione delle vigenze presenti
+	 *
+	 */
 	public void setTipoDocVigenza();
 	
+	/**
+	 * Funzione che aggiorna le vigenze che fanno riferimento 
+	 * agli eventi cancellati dal ciclo di vita
+	 * @param vig: vigenza da aggiornare
+	 */
 	public void updateVigenzaOnDoc(VigenzaEntity vig);
 
 	

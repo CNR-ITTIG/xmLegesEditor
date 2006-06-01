@@ -1,5 +1,7 @@
 package it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita;
 
+import java.util.Vector;
+
 import it.cnr.ittig.services.manager.Service;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
@@ -23,6 +25,7 @@ import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
  */
 public interface CiclodiVitaEventoForm extends Service {
 
+	
 	/**
 	 * Apre la form per l'inserimento dei metadati descrittori di un documento
 	 * NIR.
@@ -70,4 +73,6 @@ public interface CiclodiVitaEventoForm extends Service {
 	public void setEventiOnVigenze(String[] eventiOnVigenze, VigenzaEntity[] vigenze);
 	
 	public VigenzaEntity[] getVigToUpdate();
+	
+	public Vector getLastRemovedEvents();
 }
