@@ -3,12 +3,12 @@
 <!--     dal Consiglio Nazionale delle Ricerche                            -->
 <!--     basato sulla versione flessibile della DTD di NormeInRete (NIR)   -->
 <!--                                                                       -->
-<!--     Release  2/5/2005                                                 -->
-<!--     aggiornamento del  6/6/2005                                       -->
+<!--     Release  2.0                                                      -->
+<!--     data     31/5/2006                                                -->
 <!--                                                                       -->
 <!--     Andrea Marchetti (CNR-IIT)                                        -->
 <!--     con il contributo di                                              -->
-<!--     Mario Ragona, Carlo Biagioli, Pierluigi Spinosa - (CNR-ITTIG)     -->
+<!--     Mario Ragona, Pierluigi Spinosa - (CNR-ITTIG)                     -->
 <!--                                                                       -->
 <!-- ===================================================================== -->
 
@@ -19,13 +19,14 @@
      N.B. La prima dichiarazione che il parser incontra ha la precedenza 
      sulle altre
     ===================================================================== -->
-<!ENTITY % NSproprietario   "xmlns:cnr CDATA  #FIXED 'http://www.cnr.it/provvedimenti/1.0'">
+<!ENTITY % NSproprietario   "xmlns:cnr CDATA  #FIXED 'http://www.cnr.it/provvedimenti/2.0'">
 <!ENTITY % ProprietarioMeta "(cnr:meta)">
+<!ATTLIST proprietario %NSproprietario; >
 
 <!-- ===================================================================== 
      Inclusione della DTD NIR versione flessibile
      ===================================================================== -->
-<!ENTITY % nirDTD SYSTEM "./nirflessibile-cnr.dtd">
+<!ENTITY % nirDTD SYSTEM "./nirflessibile.dtd">
 %nirDTD;
 
 
@@ -81,10 +82,19 @@
 <!ELEMENT cnr:meta (cnr:strutturaEmanante+, cnr:autoritaEmanante+, cnr:tipoDestinatario+,
                    (cnr:disciplina+ | cnr:areaScientifica+) )>
 
-<!ELEMENT cnr:strutturaEmanante (#PCDATA) >
-<!ELEMENT cnr:autoritaEmanante  (#PCDATA) >
-<!ELEMENT cnr:tipoDestinatario  (#PCDATA) >
-<!ELEMENT cnr:disciplina        (#PCDATA) >
-<!ELEMENT cnr:areaScientifica   (#PCDATA) >
+<!ELEMENT cnr:strutturaEmanante EMPTY >
+<!ATTLIST cnr:strutturaEmanante value CDATA #IMPLIED >
+
+<!ELEMENT cnr:autoritaEmanante  EMPTY >
+<!ATTLIST cnr:autoritaEmanante  value CDATA #IMPLIED >
+
+<!ELEMENT cnr:tipoDestinatario  EMPTY >
+<!ATTLIST cnr:tipoDestinatario  value CDATA #IMPLIED >
+
+<!ELEMENT cnr:disciplina        EMPTY >
+<!ATTLIST cnr:disciplina        value CDATA #IMPLIED >
+
+<!ELEMENT cnr:areaScientifica   EMPTY >
+<!ATTLIST cnr:areaScientifica   value CDATA #IMPLIED >
 
 

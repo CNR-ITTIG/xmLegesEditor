@@ -100,8 +100,10 @@ public class XmLegesEditorImpl implements XmLegesEditor, Loggable, Serviceable, 
 							"dtd-dl/dllight.dtd", "dtd-dl/dllight.spp", "dtd-dl/ISOdia.ent", "dtd-dl/ISOgrk3.ent", "dtd-dl/ISOlat1.ent", "dtd-dl/ISOlat2.ent",
 							"dtd-dl/ISOnum.ent", "dtd-dl/ISOpub.ent", "dtd-dl/ISOtech.ent",
 							
-							"dtd-cnr/cnr.dtd", "dtd-cnr/globali-cnr.dtd", "dtd-cnr/meta-cnr.dtd", "dtd-cnr/nirflessibile-cnr.dtd", "dtd-cnr/norme-cnr.dtd",
-							"dtd-cnr/testo-cnr.dtd", "dtd-cnr/tipi-cnr.dtd",
+							"dtd-cnr/cnr.dtd"
+							
+							//, "dtd-cnr/globali-cnr.dtd", "dtd-cnr/meta-cnr.dtd", "dtd-cnr/nirflessibile-cnr.dtd", "dtd-cnr/norme-cnr.dtd",
+							//"dtd-cnr/testo-cnr.dtd", "dtd-cnr/tipi-cnr.dtd",
 							
 //							"dtd-2.1/ISOdia.ent", "dtd-2.1/ISOgrk3.ent", "dtd-2.1/ISOlat1.ent", "dtd-2.1/ISOlat2.ent", "dtd-2.1/ISOnum.ent",
 //							"dtd-2.1/ISOpub.ent", "dtd-2.1/ISOtech.ent"
