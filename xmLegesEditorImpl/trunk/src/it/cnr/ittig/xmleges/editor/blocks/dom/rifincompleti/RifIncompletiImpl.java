@@ -80,7 +80,6 @@ public class RifIncompletiImpl implements RifIncompleti, Loggable, Serviceable {
 
 	Rinumerazione rinumerazione;
 
-	private Node modified = null;
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {

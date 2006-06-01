@@ -22,7 +22,6 @@ import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.date.DateForm;
 import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextField;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
-import it.cnr.ittig.xmleges.core.services.spellcheck.dom.DomSpellCheckWord;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
@@ -33,17 +32,12 @@ import it.cnr.ittig.xmleges.editor.services.form.urn.UrnForm;
 import it.cnr.ittig.xmleges.editor.services.util.urn.NirUtilUrn;
 import it.cnr.ittig.xmleges.editor.services.util.urn.Urn;
 
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.ProcessingInstruction;
-import org.w3c.dom.Element;
 
 
 /**
@@ -132,6 +126,7 @@ public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable, Servi
 	Node[] riferimenti = null;
 	
 	Vector resolved = new Vector();
+	
 	Vector jumped = new Vector();
 
 	int missRif;
@@ -145,6 +140,7 @@ public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable, Servi
 	NirUtilUrn nirutilurn;
 	
 	int rifiniziale = 0;
+	
 	boolean ricomincia = false;
 	
     public boolean openForm(String testo, String urn) {
@@ -152,7 +148,8 @@ public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable, Servi
     	
     	//vettore dei riferimenti incompleti
     	riferimenti = rifincompleti.getList();
-    	  	    	
+    
+    	rifiniziale = 0;
 		for (int i=0; i<riferimenti.length; i++)
 		    if (riferimenti[i].equals(selectionManager.getActiveNode())) {
 		    	 rifiniziale = i;
@@ -171,7 +168,7 @@ public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable, Servi
 		form.setName("editor.rifincompleto");
 		missRif = showRif(riferimenti);		
 		form.showDialog();
-		
+
 
 		if (form.isOk()) {
 			try {
@@ -185,7 +182,7 @@ public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable, Servi
 				for (int j=0; j<contaTr; j++)
 				  documentManager.rollbackEdit(tr);
 		}
-		//selectionManager.setSelectedText(this, activeNode, start, start);		
+		selectionManager.setSelectedText(this, selectionManager.getActiveNode(), 0, 0);		
 		
 		return form.isOk();	
 	}
@@ -260,6 +257,7 @@ public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable, Servi
 	
 	private int showRif(Node[] riferimenti) {
 		int i = rifiniziale;
+		
 		do {
 			if (!isResolved(riferimenti[i]) && !isJumped(riferimenti[i])) {
 				
@@ -278,15 +276,18 @@ public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable, Servi
 
 	private int doIgnoreAll(Node[] riferimenti) {
 		int i = 0;  //lo faccio su tutti
-		int ultimo=0;
+		Node modificato=null;
+		textArea.setText("");
+		urnFormRifIncompleti.setUrn(new Urn());
 		do {
 			if (!isResolved(riferimenti[i])) {
 			  try {
 				tr = documentManager.beginEdit();
-				if (null != rifincompleti.setPlainText(riferimenti[i], rifincompleti.getText(riferimenti[i]))) {  
+				modificato = rifincompleti.setPlainText(riferimenti[i], rifincompleti.getText(riferimenti[i])); 
+				if (null != modificato) {
+					selectionManager.setSelectedText(this, modificato, 0, modificato.getNodeValue().length());
 					contaTr++;					
 					resolved.add(riferimenti[i]);
-					ultimo=i;
 				}
 				documentManager.commitEdit(tr);
 			  } catch (DocumentManagerException ex) {
@@ -295,8 +296,8 @@ public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable, Servi
 			}
 			i++;
 		} while (i < riferimenti.length);
-		selectionManager.setSelectedText(this, riferimenti[ultimo], 0, riferimenti[ultimo].getNodeValue().length());
-		return ultimo; //potrei anche non spostarmi dal nodo corrente (DECIDERE?)
+		ricomincia = false;
+		return -1;
 	}
 	
 	public void actionPerformed(ActionEvent evt) {
@@ -360,7 +361,11 @@ public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable, Servi
 			  } 
 		} 
 		else if (evt.getSource() == ignoreAllButton) {
-			doIgnoreAll(riferimenti);
+			if (missRif != -1 && missRif < riferimenti.length) {
+			  missRif = doIgnoreAll(riferimenti);
+			  utilMsg.msgInfo("rifincompleti.error.endstop");
+			}
+			else utilMsg.msgInfo("rifincompleti.error.endstop");
 		} 
 		else if (evt.getSource() == replaceButton) {
 			if (missRif != -1 && missRif < riferimenti.length) {

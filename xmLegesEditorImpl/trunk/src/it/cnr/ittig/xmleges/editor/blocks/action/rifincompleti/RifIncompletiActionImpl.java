@@ -135,10 +135,6 @@ public class RifIncompletiActionImpl implements RifIncompletiAction, EventManage
 			activeNode = ((SelectionChangedEvent) event).getActiveNode();
 			start = selectionManager.getTextSelectionStart();
 			end = selectionManager.getTextSelectionEnd();
-//altra versione
-//			start = ((SelectionChangedEvent) event).getTextSelectionStart();
-//			end = ((SelectionChangedEvent) event).getTextSelectionEnd();
-
 			
 			enableActions();
 		}
@@ -164,37 +160,18 @@ public class RifIncompletiActionImpl implements RifIncompletiAction, EventManage
 			
 		} else {
 			rifIncompletoAction.setEnabled(domrifincompleti.canFix(activeNode));
-			//rifInternoAction.setEnabled((domrinvii.canInsert(activeNode));
 		}
 	}
 
 	public void doChangeRifIncompleto() {
 		rifIncompletoAction.setEnabled(false);
 		 				
-		Node node = selectionManager.getActiveNode();
-//		int start = selectionManager.getTextSelectionStart();
-//		int end = selectionManager.getTextSelectionEnd();
-
-			
-		if (rifincompleti.openForm(domrifincompleti.getText(node), domrifincompleti.getUrn(node))) {
-			
-			
-			//Dovrei decidere se è stata fatta qualche modifica e passarla al DOM
-			//In realtà mi sa che dovrei far comunicare la FORM direttamente con il DOM
-			
-			
-//			if (rifincompleti.getUrn().size() > 1)
-//				setModified(domrifincompleti.insert(node, start, end, newrinvii.getUrn(), newrinvii.getDescrizioneMRif()));
-//			else
-//				setModified(domrifincompleti.insert(node, start, end, (Urn) newrinvii.getUrn().get(0)));
-		} else
-			enableActions();
+		Node node = selectionManager.getActiveNode();			
+		
+		rifincompleti.openForm(domrifincompleti.getText(node), domrifincompleti.getUrn(node));
+		enableActions();
+		
 	}
-
-
-
-	
-
 
 	public class RifIncompletoAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {

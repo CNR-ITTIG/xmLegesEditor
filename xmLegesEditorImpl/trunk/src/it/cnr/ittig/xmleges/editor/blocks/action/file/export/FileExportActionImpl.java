@@ -25,7 +25,7 @@ import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextFieldEditor
 import it.cnr.ittig.xmleges.core.services.preference.PreferenceManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.services.util.pdf.UtilPdf;
-import it.cnr.ittig.xmleges.core.services.util.rtf.UtilRtf;
+// import it.cnr.ittig.xmleges.core.services.util.rtf.UtilRtf;
 import it.cnr.ittig.xmleges.core.util.domwriter.DOMWriter;
 import it.cnr.ittig.xmleges.core.util.file.RegexpFileFilter;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
@@ -111,7 +111,7 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 
 	UtilPdf utilPdf;
 	
-	UtilRtf utilRtf;
+//	UtilRtf utilRtf;
 
 	EventManager eventManager;
 
@@ -129,7 +129,7 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 
 	ExportPDFAction exportPDFAction;
 	
-	ExportRTFAction exportRTFAction;
+//	ExportRTFAction exportRTFAction;
 
 	JFileChooser fileChooser;
 
@@ -155,7 +155,7 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 		fileTextField = (FileTextField) serviceManager.lookup(FileTextField.class);
 		xslts = (NirXslts) serviceManager.lookup(NirXslts.class);
 		utilPdf = (UtilPdf) serviceManager.lookup(UtilPdf.class);
-		utilRtf = (UtilRtf) serviceManager.lookup(UtilRtf.class);		
+//		utilRtf = (UtilRtf) serviceManager.lookup(UtilRtf.class);		
 	}
 
 	// ////////////////////////////////////////////////// Configurable Interface
@@ -185,9 +185,9 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 		exportHTMLAction = new ExportHTMLAction();
 		actionManager.registerAction("file.export.html", exportHTMLAction);
 		exportPDFAction = new ExportPDFAction();
-		exportRTFAction = new ExportRTFAction();
+//		exportRTFAction = new ExportRTFAction();
 		actionManager.registerAction("file.export.pdf", exportPDFAction);
-		actionManager.registerAction("file.export.rtf", exportRTFAction);
+//		actionManager.registerAction("file.export.rtf", exportRTFAction);
 		eventManager.addListener(this, DocumentOpenedEvent.class);
 		eventManager.addListener(this, DocumentClosedEvent.class);
 		Properties p = preferenceManager.getPreferenceAsProperties(getClass().getName());
@@ -224,7 +224,7 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 		exportBrowserAction.setEnabled(!documentManager.isEmpty());
 		exportHTMLAction.setEnabled(!documentManager.isEmpty());
 		exportPDFAction.setEnabled(!documentManager.isEmpty());
-		exportRTFAction.setEnabled(!documentManager.isEmpty());
+//		exportRTFAction.setEnabled(!documentManager.isEmpty());
 	}
 
 	// ////////////////////////////////////////////// FileExportAction Interface
@@ -280,72 +280,70 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 
 	public boolean doExportRTF() {
 		
-		String XSL_FO_GU = xslts.getXslt("rtf-gazzettaufficiale").getAbsolutePath();
-		String FO = XSL_FO_GU+".fo";
-		
-		File xsl = new File(xslts.getXslt("rtf-gazzettaufficiale").getAbsolutePath());
-		try {
-			DOMWriter domWriter = new DOMWriter();
-			domWriter.setCanonical(true);
-			domWriter.setFormat(false);
-			//levare errore e utilizare poi quel file che per il momento metto a mano
-			domWriter.setOutput(XSL_FO_GU+".fo");  //metterci FO
-			Node res = UtilXslt.applyXslt(documentManager.getDocumentAsDom(), xsl);
-			domWriter.write(res);
-		} catch (Exception ex) {
-			logger.error(ex.toString(), ex);
+//		String XSL_FO_GU = xslts.getXslt("rtf-gazzettaufficiale").getAbsolutePath();
+//		String FO = XSL_FO_GU+".fo";
+//		
+//		File xsl = new File(xslts.getXslt("rtf-gazzettaufficiale").getAbsolutePath());
+//		try {
+//			DOMWriter domWriter = new DOMWriter();
+//			domWriter.setCanonical(true);
+//			domWriter.setFormat(false);
+//			//levare errore e utilizare poi quel file che per il momento metto a mano
+//			domWriter.setOutput(XSL_FO_GU+".fo");  //metterci FO
+//			Node res = UtilXslt.applyXslt(documentManager.getDocumentAsDom(), xsl);
+//			domWriter.write(res);
+//		} catch (Exception ex) {
+//			logger.error(ex.toString(), ex);
+//			return false;
+//		}
+//		
+//		String osName = System.getProperty("os.name");
+//
+//		try {
+//			JFileChooser fileChooser = new JFileChooser();
+//			fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+//			String filterDesc = "Rich Text Format (*.rtf)";
+//			String[] masks = new String[1];
+//			masks[0] = ".*\\.[rR][tT][fF]$";
+//			fileChooser.setFileFilter(new RegexpFileFilter(filterDesc, masks));
+//			fileChooser.setCurrentDirectory(getLastExportAsFile() != null ? getLastExportAsFile().getParentFile() : null);
+//
+//			if (fileChooser.showSaveDialog(null) == JFileChooser.CANCEL_OPTION)
+//				return false;
+//			else {
+//				File file = fileChooser.getSelectedFile();
+//				if (!file.getAbsolutePath().matches("^.*\\.[rR][tT][fF]$"))
+//					file = new File(file.getAbsolutePath() + ".rtf");
+//
+//				// Controlla l'esistenza del file
+//				if (file.exists()) {
+//					if (!utilMsg.msgYesNo("action.file.save.replace")) {
+//						return false;
+//					}
+//				}
+//				
+//				
+//				utilRtf.convertXML2RTF(FO, file.getAbsolutePath());
+//				
+//					
+//				lastExport = file.getAbsolutePath();
+//				// qui apre il file esportato con Rich Text Format
+//				// FIXME prendere il path di OPENOFFICE/WORD dalle preference
+//				if (osName.equalsIgnoreCase("linux")) {
+//					if (Runtime.getRuntime().exec("oowrite2 " + file.getAbsolutePath()) == null)
+//						Runtime.getRuntime().exec("oowriter2 " + file.getAbsolutePath());
+//				} else if (osName.toLowerCase().matches("windows.*")) {
+//					// FIXME: problemi su windows lancio comandi con spazi nel
+//					// nome
+//					// Runtime.getRuntime().exec("cmd /C start " +
+//					// file.getCanonicalPath());//.getAbsolutePath());
+//				}
+//				return true;
+//			}
+//		} catch (Exception e) {
+//			logger.error(e.getMessage(), e);
 			return false;
-		}
-		
-		String osName = System.getProperty("os.name");
-
-		try {
-			JFileChooser fileChooser = new JFileChooser();
-			fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-			String filterDesc = "Rich Text Format (*.rtf)";
-			String[] masks = new String[1];
-			masks[0] = ".*\\.[rR][tT][fF]$";
-			fileChooser.setFileFilter(new RegexpFileFilter(filterDesc, masks));
-			fileChooser.setCurrentDirectory(getLastExportAsFile() != null ? getLastExportAsFile().getParentFile() : null);
-
-			if (fileChooser.showSaveDialog(null) == JFileChooser.CANCEL_OPTION)
-				return false;
-			else {
-				File file = fileChooser.getSelectedFile();
-				if (!file.getAbsolutePath().matches("^.*\\.[rR][tT][fF]$"))
-					file = new File(file.getAbsolutePath() + ".rtf");
-
-				// Controlla l'esistenza del file
-				if (file.exists()) {
-					if (!utilMsg.msgYesNo("action.file.save.replace")) {
-						return false;
-					}
-				}
-				
-				// prima richiamavo questo (in realtà non mi serve più)
-				//utilRtf.convertXML2RTF(documentManager.getDocumentAsDom(), XSL_FO_GU, file.getAbsolutePath());
-				
-				utilRtf.convertXML2RTF(FO, file.getAbsolutePath());
-				
-					
-				lastExport = file.getAbsolutePath();
-				// qui apre il file esportato con Rich Text Format
-				// FIXME prendere il path di OPENOFFICE/WORD dalle preference
-				if (osName.equalsIgnoreCase("linux")) {
-					if (Runtime.getRuntime().exec("oowrite2 " + file.getAbsolutePath()) == null)
-						Runtime.getRuntime().exec("oowriter2 " + file.getAbsolutePath());
-				} else if (osName.toLowerCase().matches("windows.*")) {
-					// FIXME: problemi su windows lancio comandi con spazi nel
-					// nome
-					// Runtime.getRuntime().exec("cmd /C start " +
-					// file.getCanonicalPath());//.getAbsolutePath());
-				}
-				return true;
-			}
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-			return false;
-		}
+//		}
 	}
 	
 	
@@ -531,11 +529,11 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 		}
 	}
 	
-	protected class ExportRTFAction extends AbstractAction {
-		public void actionPerformed(ActionEvent e) {
-			doExportRTF();
-		}
-	}
+//	protected class ExportRTFAction extends AbstractAction {
+//		public void actionPerformed(ActionEvent e) {
+//			doExportRTF();
+//		}
+//	}
 }
 
 
