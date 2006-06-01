@@ -25,18 +25,6 @@ import org.w3c.dom.Document;
 public interface UtilRtf extends Service {
 
 	/**
-	 * @param xmlUri			DA BUTTARE
-	 * @param xsltUri
-	 * @param rtfUri
-	 */
-	public void convertXML2RTF(String xmlUri, String xsltUri, String rtfUri);
-	/**
-	 * @param xmlDom			DA BUTTARE
-	 * @param xsltUri
-	 * @param rtfUri
-	 */
-	public void convertXML2RTF(Document xmlDom, String xsltUri, String rtfUri);
-	/**
 	 * @param FO
 	 * @param rtfUri
 	 */
