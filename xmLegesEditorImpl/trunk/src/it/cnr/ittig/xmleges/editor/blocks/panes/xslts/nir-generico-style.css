@@ -13,7 +13,7 @@
 		font-size: 65% ;
 	}
 	.intestazione {
-		margin: 15px 15% 0px 15%;
+		margin: 15px 10% 0px 10%;
 		text-align: center;
 		font-size: large;
 	}
@@ -56,10 +56,10 @@
 		margin-top: 5px;
 		margin-bottom: 5px;
 		text-align: justify;
+		text-indent: 1em;
 	}
 	
 	.capo {
-		/*border-top:2px solid #ccc;*/
 		padding-top: 10px;
 		margin:25px 25% 5px 25%;
 		text-align: center;
@@ -67,8 +67,8 @@
 	.el {
 		font-size: 100% ; 
 		text-align: justify;
-		margin-left: 40px;
-		text-indent: -30px;
+		margin-left: 5px;
+		text-indent: 2em;
 		margin-top: 2px;
 	}
 	.en {
@@ -83,7 +83,8 @@
 		color: #00cc00;
 		text-decoration: underline;
 	}
-	p.nota {
+	.nota {
+		border:2px solid red;
 		font-size:80%;
 		text-align: justify;
 	}
