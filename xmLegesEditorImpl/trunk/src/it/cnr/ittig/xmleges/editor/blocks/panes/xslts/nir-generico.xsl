@@ -25,11 +25,11 @@
 				<div class="formulainiziale">
 		       	<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='formulainiziale']" />
 		       	</div>
-            	<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='articolato']/*[name()='capo']|/*[name()='NIR']/*/*[name()='contenitore']|/*[name()='NIR']/*/*[name()='gerarchia']" />
- <!-- 		  	<div class="formulafinale">
+            	<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='articolato']/* | /*[name()='NIR']/*/*[name()='contenitore']|/*[name()='NIR']/*/*[name()='gerarchia']" />
+			  	<div class="formulafinale">
 	            	<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='formulafinale']" />
    		       	</div>
- 		       	<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='conclusione']" /> -->
+ 			       	<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='conclusione']" /> 
             	<div class="meta">
             		<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='meta']" />
             	</div>
@@ -231,28 +231,40 @@
 	</xsl:template>
 	<!-- ======================================================== -->
 	<!--                                                          -->
-	<!--  Template conclusioni                                    -->
+	<!--  Template conclusioni e formula finale                   -->
 	<!--                                                          -->
 	<!-- ======================================================== -->
-	<xsl:template match="nir:conclusione">
-		<div style="margin-top:15px;">
+	<xsl:template match="//*[name()='formulafinale']">
+		<div class="formulafinale">
+			<hr />
 			<xsl:apply-templates/>
 		</div>
 	</xsl:template>
-	<xsl:template match="nir:dataeluogo">
-		<div style="margin-top:5px;">
+	
+	<xsl:template match="//*[name()='conclusione']">
+		<div class="conclusione">
 			<xsl:apply-templates/>
 		</div>
 	</xsl:template>
-	<xsl:template match="nir:sottoscrizioni">
-		<ul style="margin-top:5px;">
+	<xsl:template match="//*[name()='dataeluogo']">
+		<p class="dataeluogo">
+			<xsl:apply-templates/>
+		</p>
+	</xsl:template>
+	<xsl:template match="//*[name()='sottoscrizioni']">
+		<ul class="sottoscrizioni">
 			<xsl:apply-templates/>
 		</ul>
 	</xsl:template>
-	<xsl:template match="nir:sottoscrivente">
+	<xsl:template match="//*[name()='sottoscrivente']">
 		<li>
 			<xsl:apply-templates/>
 		</li>
+	</xsl:template>
+	<xsl:template match="//*[name()='visto']">
+		<p class="visto">
+			<xsl:apply-templates/>
+		</p>
 	</xsl:template>
 	<!-- ======================================================== -->
 	<!--                                                          -->
@@ -292,7 +304,7 @@
 			<xsl:apply-templates/>
 		</table>
 	</xsl:template>
-	<xsl:template match="//*[name()='urn']">
+<!--	<xsl:template match="//*[name()='urn']">
 		<tr>
 			<td class="small">
 				<a href="http://www.senato.it/japp/bgt/showdoc/frame.jsp?tipodoc={//nir:approvazione/@tipodoc}&amp;leg={//nir:approvazione/@leg}&amp;id={//nir:approvazione/@internal_id}">
@@ -300,7 +312,7 @@
 				</a>
 			</td>
 		</tr>
-	</xsl:template>
+	</xsl:template>-->
 	<xsl:template match="//*[name()='redazionale']">
 		<div class="redazionale">
 			<xsl:apply-templates />
@@ -332,7 +344,7 @@
 		</xsl:element>
 	</xsl:template>
 	
-	<xsl:template match="//*">
+	<xsl:template match="//*[name()='h:span']">
 		<xsl:variable name="stato">
 			<xsl:value-of select="@status" />
 		</xsl:variable>

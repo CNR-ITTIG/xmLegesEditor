@@ -87,6 +87,20 @@
 		font-size:80%;
 		text-align: justify;
 	}
-	.formaulafinale {
-		border:2px solid #0c0;
+	.formulafinale {
+		text-align: justify;
+	}
+	.dataeluogo {
+		margin-top:25px;
+		font-style:italic;
+		font-weight:bold;
+	}
+	li {
+		padding-right: 40px;
+		list-style-type: none;
+		text-align: right;
+	}
+	.visto {
+		font-size: 80%;
+		font-weight: bold;
 	}
