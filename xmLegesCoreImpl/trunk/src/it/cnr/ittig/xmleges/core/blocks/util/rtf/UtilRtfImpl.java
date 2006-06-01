@@ -97,218 +97,63 @@ public class UtilRtfImpl implements UtilRtf, Loggable, Serviceable {
 	 * @param rtfUri URI dove salvare la versione del documento in RTF
 	 * 
 	 */
-
 	
-	
-	// Questa funzione non serve più
-	// (eliminare questa quando tutto è ok, anche dai template)
-
-	
-	public void convertXML2RTF(String xmlUri, String xsltUri, String rtfUri) {
-		
-//		// Construct driver
-//		Driver driver = new Driver();
-//
-//		// Setup logger
-//		org.apache.avalon.framework.logger.Logger avalonLogger = new ConsoleLogger(ConsoleLogger.LEVEL_INFO);
-//		driver.setLogger(avalonLogger);
-//		MessageHandler.setScreenLogger(avalonLogger);
-//
-//		// Setup Renderer (output format)
-//		driver.setRenderer(Driver.RENDER_PDF);
-//
-//		// Setup output
-//		try {
-//			OutputStream out = new java.io.FileOutputStream(new File(rtfUri));
-//			driver.setOutputStream(out);
-//
-//			// Setup XSLT
-//			TransformerFactory factory = TransformerFactory.newInstance();
-//			Transformer transformer = factory.newTransformer(new StreamSource(new File(xsltUri)));
-//
-//			// Setup input for XSLT transformation
-//			Source src = new StreamSource(new File(xmlUri));
-//
-//			// Resulting SAX events (the generated FO) must be piped through to FOP
-//			Result res = new SAXResult(driver.getContentHandler());
-//
-//			// Start XSLT transformation and FOP processing
-//			transformer.transform(src, res);
-//			out.close();
-//		} catch (Exception e) {
-//			logger.error(e.getMessage(), e);
-//		}
-	}
 
 	public void convertXML2RTF(String fo, String rtfUri) {
 		
-		
-		//PROVA 2
-			String args[] = new String[2];
-			args[0] = fo;
-			args[1] = rtfUri;
-			
-		try {
-            CmdLineConverter.main(args);
-    	} catch (Exception e) {}
-            
-         //PROVA 3   
+//		String args[] = new String[2];
+//		args[0] = fo;
+//		args[1] = rtfUri;
+//			
 //		try {
-//
-//   			// Used by relative image path.
-//			String userDir = System.getProperty ("user.dir");
-//
-//			final String xslInput = fo;
-//			final String rtfOutput = rtfUri;
-//
-//			final InputSource input = new InputSource(xslInput);
-//			final Writer output = new BufferedWriter(new FileWriter(rtfOutput));
-//
-//			// Used by relative image path.
-//			setUserDir (new File (xslInput).getCanonicalFile().getParent ());
-//			new Converter(input,output,Converter.createConverterOption ());
-//			// Used by relative image path.
-//			setUserDir (userDir);
-//                        
-//		} catch (Exception e) {
-//			System.out.println (e);
-//		}        
-		
+//            CmdLineConverter.main(args);
+//    	} catch (Exception e) {}    	
+    	
+	}
 
-    	
-    	
-    	
-    	
-    	
-    	//PROVA 1
-			//  ESEMPIO DI funzione fo-->Rtf
-		    //public void foToRtf(String dir, String fodoc, String rtfdoc){
-
-			//metterci per prova "minimal.fo.xml"
-//			
-//			try {
-//			 final String xslInput = "minimal.fo.xml";
-//			 final String rtfOutput = rtfUri;
+	
+//	/** Convert from a filename to a file URL. */
+//	private static String fileToUrl(String filename)
+//	throws MalformedURLException
+//	{
+//		return toURL (new File (filename)).toString ();
+//	}
 //
-//			 Properties p = System.getProperties ();
-//			 p.put ("user.dir", "c:/");
-//			 System.setProperties (p);
+//	/** System.setProperty function (java 1.1 compatibility) */
+//	private static void setUserDir (String dir)
+//	{
+//		if (dir == null)
+//		{
+//			return;
+//		}
+//		Properties p = System.getProperties ();
+//		p.put ("user.dir", dir);
+//		System.setProperties (p);
+//	}
 //
-//			 final InputSource input = new InputSource(xslInput);
-//
-//			 final Writer output = new BufferedWriter(new FileWriter(rtfOutput));
-//
-//			 new Converter(input,output,Converter.createConverterOption ());
-//
-//
-//			 output.close();
-//			}
-//			catch (Exception e) {
-//			
-//			}
-
+//	/**
+//	 * Converts this abstract pathname into a <code>file:</code> URL.  The
+//	 * exact form of the URL is system-dependent.  If it can be determined that
+//	 * the file denoted by this abstract pathname is a directory, then the
+//	 * resulting URL will end with a slash.
+//	 *
+//	 * @return a URL object representing the equivalent file URL.
+//	 * @throws MalformedURLException if the path cannot be parsed as a URL.
+//	 * @see     java.net.URL
+//	 * @since   1.2
+//	 */
+//	private static URL toURL (File file) throws MalformedURLException {
+//		String path = file.getAbsolutePath();
+//		if (File.separatorChar != '/') {
+//			path = path.replace(File.separatorChar, '/');
+//		}
+//		if (!path.startsWith("/")) {
+//			path = "/" + path;
+//		}
+//		if (!path.endsWith("/") && file.isDirectory()) {
+//			path = path + "/";
+//		}
+//		return new URL("file", "", path);
+//	}
 			
-			
-//			out.close();
-	
-	        
-//		} catch (Exception e) {
-//			logger.error(e.getMessage(), e);
-//		}        
-
-	}
-
-	//funzioni che aggiungo io
-	
-	/** Convert from a filename to a file URL. */
-	private static String fileToUrl(String filename)
-	throws MalformedURLException
-	{
-		return toURL (new File (filename)).toString ();
-	}
-
-	/** System.setProperty function (java 1.1 compatibility) */
-	private static void setUserDir (String dir)
-	{
-		if (dir == null)
-		{
-			return;
-		}
-		Properties p = System.getProperties ();
-		p.put ("user.dir", dir);
-		System.setProperties (p);
-	}
-
-	/**
-	 * Converts this abstract pathname into a <code>file:</code> URL.  The
-	 * exact form of the URL is system-dependent.  If it can be determined that
-	 * the file denoted by this abstract pathname is a directory, then the
-	 * resulting URL will end with a slash.
-	 *
-	 * @return a URL object representing the equivalent file URL.
-	 * @throws MalformedURLException if the path cannot be parsed as a URL.
-	 * @see     java.net.URL
-	 * @since   1.2
-	 */
-	private static URL toURL (File file) throws MalformedURLException {
-		String path = file.getAbsolutePath();
-		if (File.separatorChar != '/') {
-			path = path.replace(File.separatorChar, '/');
-		}
-		if (!path.startsWith("/")) {
-			path = "/" + path;
-		}
-		if (!path.endsWith("/") && file.isDirectory()) {
-			path = path + "/";
-		}
-		return new URL("file", "", path);
-	}
-	
-
-	
-	//fine funzioni che aggiungo io
-	
-	
-	
-	
-	
-	// Questa funzione è diventata del tutto superflua. Prende il documento, lo salva
-	// in un file temp (che già ho) e richiamo la 2° funzione con gli stessi parametri
-	
-	//   Richiamere direttamente l'altra (e poi eliminare questa quando tutto è ok)
-	
-	public void convertXML2RTF(Document doc, String xsltUri, String rtfUri) {
-		// Salvo il documento FO su di un file temporaneo
-		try {
-			File temp = UtilFile.createTemp("export-rtf.xml");
-			if (saveDocument(temp))
-				convertXML2RTF(temp.getAbsolutePath(), xsltUri, rtfUri);
-		} catch (Exception ex) {
-			logger.error(ex.getMessage(), ex);
-		}
-	}
-
-	private boolean saveDocument(File file) {
-		String encoding;
-		String defaultEncoding = "UTF-8";
-		if (documentManager.getEncoding() == null) {
-			logger.warn("No encoding found. Using default:" + defaultEncoding);
-			encoding = defaultEncoding;
-		} else
-			encoding = documentManager.getEncoding();
-		DOMWriter domWriter = new DOMWriter();
-		domWriter.setCanonical(false);
-		domWriter.setFormat(true);
-		try {
-			domWriter.setOutput(file, encoding);
-			domWriter.write(documentManager.getDocumentAsDom());
-			return true;
-		} catch (UnsupportedEncodingException ex) {
-			logger.error(ex.toString(), ex);
-		} catch (FileNotFoundException ex) {
-			logger.error(ex.toString(), ex);
-		}
-		return false;
-	}
-
 }
