@@ -225,7 +225,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <menu action="file.export">
                     	<item action="file.export.browser" />
                         <item action="file.export.pdf" />
-                        <item action="file.export.rtf" />                        
+    <!--                        <item action="file.export.rtf" />          -->               
                         <item action="file.export.html" />
                     </menu>
                     <separator/>
@@ -1034,7 +1034,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             <css    name="disegnilegge-style"   file="nir-disegnilegge-style.css"       startup="true" />
             <css    name="nir-style"      		file="nir-generico-style.css"           startup="true" />
             <xslt   name="pdf-gazzettaufficiale" file="nir-fo-gazzettaufficiale.xsl"	startup="true" />
-            <xslt   name="rtf-gazzettaufficiale" file="nir-jfor-gazzettaufficiale.xsl"	startup="true" />
+  <!--          <xslt   name="rtf-gazzettaufficiale" file="nir-jfor-gazzettaufficiale.xsl"	startup="true" />    -->
         </configuration>
     </component>
 
@@ -1133,7 +1133,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     
     <component  class="it.cnr.ittig.xmleges.core.blocks.util.pdf.UtilPdfImpl" />
     
-    <component  class="it.cnr.ittig.xmleges.core.blocks.util.rtf.UtilRtfImpl" />
+<!--    <component  class="it.cnr.ittig.xmleges.core.blocks.util.rtf.UtilRtfImpl" />    -->
 
     <component  class="it.cnr.ittig.xmleges.core.blocks.util.rulesmanager.UtilRulesManagerImpl">
         <configuration>
