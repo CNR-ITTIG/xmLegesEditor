@@ -319,8 +319,8 @@
 		</div>
 	</xsl:template>
 	<xsl:template match="//*[name()='nota']">
-		<a class="nota" name="{@id}">
-			<xsl:apply-templates />
+		<a class="nota" name="{@id}" >
+		<xsl:apply-templates />
 		</a>
 	</xsl:template>
 	<xsl:template match="nir:confronto"/>
