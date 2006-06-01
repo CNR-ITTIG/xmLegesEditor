@@ -301,7 +301,6 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 
 		boolean missingciclodivita = false;
 		
-//		 FIXME: se cancello gli eventi devo cancellare anche le relazioni linkate !!
 		
 		if (ciclodivitaNode==null){
 			ciclodivitaNode = utilRulesManager.getNodeTemplate("ciclodivita");
@@ -375,11 +374,14 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 		//caricamento nodi con attributi di vigenza
 		NodeList lista = doc.getElementsByTagName("*");
 		for(int i=0; i<lista.getLength();i++){
-			if(lista.item(i).getAttributes()!=null && 
-					(lista.item(i).getAttributes().getNamedItem("iniziovigore")!=null 
-							|| lista.item(i).getAttributes().getNamedItem("finevigore")!=null)){
-				totali.add(lista.item(i));
-			}			
+			if(lista.item(i).getAttributes()!=null){
+				if(lista.item(i).getAttributes().getNamedItem("status")!=null){
+					
+					totali.add(lista.item(i));
+				}
+													
+			}
+		
 		}
 		
 		Evento e_iniziovig=null;
@@ -387,6 +389,8 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 		Node iniziovig=null;
 		Node finevig=null;
 		Node status=null;
+		
+		
 		
 		for(int i=0; i<totali.size();i++){
 			Node node=(Node)totali.elementAt(i);
@@ -409,6 +413,8 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 				id = evento_fonte_Tag.getAttributes().getNamedItem("id") != null ? evento_fonte_Tag.getAttributes().getNamedItem("id").getNodeValue() : null;
 				link = evento_fonte_Tag.getAttributes().getNamedItem("xlink:href") != null ? evento_fonte_Tag.getAttributes().getNamedItem("xlink:href")
 						.getNodeValue() : null;
+						
+				
 			    if(tag.equals("giurisprudenza")){
 			    	effetto=evento_fonte_Tag.getAttributes().getNamedItem("effetto") != null ? evento_fonte_Tag.getAttributes().getNamedItem("effetto").getNodeValue() : null;
 				    rel=new Relazione(tag, id, link,effetto);
@@ -418,13 +424,15 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 			    }else  
 			    	rel=new Relazione(tag, id, link);
 			}
-			e_iniziovig=iniziovig==null?null:new Evento(iniziovig!=null?iniziovig.getNodeValue():"",
+			e_iniziovig=( 
+					iniziovig==null?null:new Evento(iniziovig!=null?iniziovig.getNodeValue():"",
 					evento_ie_Tag!=null?evento_ie_Tag.getAttribute("data"):null,//				
 					rel,
-					evento_ie_Tag!=null?evento_ie_Tag.getAttribute("tipo"):null);
+					evento_ie_Tag!=null?evento_ie_Tag.getAttribute("tipo"):null)
+			);
 			
 			//qui rappresenta la fonte dell'evento di fine
-			evento_fonte_Tag = evento_fe_Tag==null?null:doc.getElementById(evento_fe_Tag.getAttribute("fonte"));
+			evento_fonte_Tag = (evento_fe_Tag==null?null:doc.getElementById(evento_fe_Tag.getAttribute("fonte")));
 			rel=null;
 			if (evento_fonte_Tag!=null && evento_fonte_Tag.getNodeType() == Node.ELEMENT_NODE) {
 				tag = evento_fonte_Tag.getNodeName();
@@ -440,10 +448,12 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 			    }else
 			    	rel=new Relazione(tag, id, link);
 			}
-			e_finevig=iniziovig==null?null:new Evento(finevig!=null?finevig.getNodeValue():"",
+			e_finevig=(
+					finevig==null?null:new Evento(finevig!=null?finevig.getNodeValue():"",
 					evento_fe_Tag!=null?evento_fe_Tag.getAttribute("data"):null,
 					rel,
-					evento_fe_Tag!=null?evento_fe_Tag.getAttribute("tipo"):null);
+					evento_fe_Tag!=null?evento_fe_Tag.getAttribute("tipo"):null)
+			);
 			
 			vigenze_totali.add(new VigenzaEntity(node, e_iniziovig,
 						e_finevig, status!=null?status.getNodeValue():null,""));

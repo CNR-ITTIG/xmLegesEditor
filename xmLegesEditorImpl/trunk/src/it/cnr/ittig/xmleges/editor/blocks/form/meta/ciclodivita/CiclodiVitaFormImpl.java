@@ -7,6 +7,7 @@ import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.form.Form;
+import it.cnr.ittig.xmleges.core.services.form.FormVerifier;
 import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextField;
 import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextFieldEditor;
 import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextFieldElementEvent;
@@ -27,9 +28,11 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.ParseException;
 import java.util.Vector;
+import java.util.logging.ErrorManager;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JList;
 
 /**
@@ -62,7 +65,7 @@ import javax.swing.JList;
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>, <a
  *         href="mailto:t.paba@onetech.it">Tommaso Paba</a>
  */
-public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceable, Initializable, ActionListener {
+public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceable, Initializable, ActionListener, FormVerifier {
 
 	Logger logger;
 
@@ -99,10 +102,13 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 	JComboBox tagSottoFormDatiRelazione;
 	
 	JComboBox tagEffettoTipoSFormDatiRelazione;
+	
+	JLabel labelEffettoTipo;
 
 	UrnForm urnFormRelazioni;
-//	
-//	String[] eventiOnVigenze;
+	
+	String errorMessage = "";
+
 
 
 
@@ -159,7 +165,8 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 						r.setEffetto_tipoall((String)tagEffettoTipoSFormDatiRelazione.getSelectedItem());
 					}else if(nomeTag.equals("haallegato")||nomeTag.equals("allegatodi")){							
 						r.setEffetto_tipoall((String)tagEffettoTipoSFormDatiRelazione.getSelectedItem());
-					}else if(r.getTagTipoRelazione().equals("originale"))
+					}
+					if(r.getTagTipoRelazione().equals("originale"))
 						tagSottoFormDatiRelazione.removeItem("originale");
 				}
 			} else if (eventID == ListTextFieldElementEvent.ELEMENT_REMOVE) {
@@ -167,6 +174,7 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 					 if(tagSottoFormDatiRelazione.getItemCount()<6)
 						 tagSottoFormDatiRelazione.addItem("originale");
 				}
+				
 				r = null;
 				tagSottoFormDatiRelazione.setSelectedItem(null);
 				tagEffettoTipoSFormDatiRelazione.setSelectedItem(null);
@@ -247,21 +255,54 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 		}
 
 		public boolean checkData() {
+			boolean isvalid=true;
 			String nomeTag = (String) (tagSottoFormDatiRelazione).getSelectedItem();
 			Urn urn = urnFormRelazioni.getUrn();
-			if (urn == null || !urn.isValid() || tagSottoFormDatiRelazione == null || "".equals(nomeTag.trim()) || "".equals(urn.toString().trim())) {
+			
+			isvalid=(nomeTag!=null);
+			if(!isvalid){
+				errorMessage = "editor.form.meta.ciclodivita.eventi.msg.err.tiporelvuoto";
 				return false;
 			}
-			return true;
+			isvalid=(urn != null && urn.isValid());		
+			if(!isvalid){
+				errorMessage = "editor.form.meta.ciclodivita.eventi.msg.err.urnvuota";
+				return false;
+			}
+			
+					
+			if(nomeTag.equals("giurisprudenza")){
+					if(tagEffettoTipoSFormDatiRelazione.getSelectedItem()==null){						
+						errorMessage = "editor.form.meta.ciclodivita.eventi.msg.err.effettovuoto";
+						return false;
+					}else 
+						return true;
+					
+			}
+			else if(nomeTag.equals("haallegato")
+						||
+						nomeTag.equals("allegatodi")){
+					if(tagEffettoTipoSFormDatiRelazione.getSelectedItem()==null){
+						errorMessage = "editor.form.meta.ciclodivita.eventi.msg.err.tipoallegato";
+						return false;
+					}
+					else 
+						return true;					
+				
+			}
+			return isvalid;
 		}
 
 		public String getErrorMessage() {
-			return "editor.form.meta.descrittori.msg.err.datirelazione";
+			return errorMessage;
+//			return "editor.form.meta.descrittori.msg.err.datirelazione";
 		}
 
 		public Dimension getPreferredSize() {
 			return new Dimension(700, 150);
 		}
+
+		
 	}
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
@@ -294,6 +335,9 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 		sottoFormDatiRelazione.setMainComponent(getClass().getResourceAsStream("DatiRelazione.jfrm"));
 		sottoFormDatiRelazione.replaceComponent("editor.form.meta.urn", urnFormRelazioni.getAsComponent());
 		
+		labelEffettoTipo = (JLabel) sottoFormDatiRelazione.getComponentByName("editor.form.meta.ciclodivita.evento.label.tipoeffetto");
+		labelEffettoTipo.setText(" ");
+		
 		formRelazioni.setMainComponent(getClass().getResourceAsStream("Relazioni.jfrm"));
 		formRelazioni.replaceComponent("editor.form.meta.ciclodivita.relazioni.listtextfield", rel_listtextfield.getAsComponent());
 		formRelazioni.setName("editor.form.meta.ciclodivita.relazioni");
@@ -310,6 +354,7 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 		tagEffettoTipoSFormDatiRelazione.addItem("attoallegato");
 		tagEffettoTipoSFormDatiRelazione.addItem("allegatointegrante");
 		tagEffettoTipoSFormDatiRelazione.addItem("informativo");
+		
 		tagEffettoTipoSFormDatiRelazione.setEnabled(false);
 		
 		tagSottoFormDatiRelazione = (JComboBox) sottoFormDatiRelazione.getComponentByName("editor.form.meta.ciclodivita.relazioni.tipo");
@@ -327,20 +372,28 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 				if(e.getStateChange()==ItemEvent.SELECTED){
 					Object selectedTag=tagSottoFormDatiRelazione.getSelectedItem();
 					if (selectedTag.equals("giurisprudenza")){
-						tagSottoFormDatiRelazione.removeAllItems();
-						tagSottoFormDatiRelazione.addItem("normativo");
-						tagSottoFormDatiRelazione.addItem("interpretativo");
-						tagSottoFormDatiRelazione.setEnabled(true);
+						tagEffettoTipoSFormDatiRelazione.removeAllItems();
+						tagEffettoTipoSFormDatiRelazione.addItem("normativo");
+						tagEffettoTipoSFormDatiRelazione.addItem("interpretativo");
+						tagEffettoTipoSFormDatiRelazione.setSelectedItem(null);
+						tagEffettoTipoSFormDatiRelazione.setEnabled(true);
+						labelEffettoTipo.setText("Effetto:");
 						
 					}else if (selectedTag.equals("haallegato")||selectedTag.equals("allegatodi")){
-						tagSottoFormDatiRelazione.removeAllItems();
-						tagSottoFormDatiRelazione.addItem("attoallegato");
-						tagSottoFormDatiRelazione.addItem("allegatointegrante");
-						tagSottoFormDatiRelazione.addItem("informativo");
-						tagSottoFormDatiRelazione.setEnabled(true);
+						tagEffettoTipoSFormDatiRelazione.removeAllItems();
+						tagEffettoTipoSFormDatiRelazione.addItem("attoallegato");
+						tagEffettoTipoSFormDatiRelazione.addItem("allegatointegrante");
+						tagEffettoTipoSFormDatiRelazione.addItem("informativo");
+						tagEffettoTipoSFormDatiRelazione.setSelectedItem(null);
+						tagEffettoTipoSFormDatiRelazione.setEnabled(true);
+						labelEffettoTipo.setText("Tipo allegato:");
 					}
 					
-					else tagSottoFormDatiRelazione.setEnabled(false);
+					else {
+						tagEffettoTipoSFormDatiRelazione.setSelectedItem(null);
+						tagEffettoTipoSFormDatiRelazione.setEnabled(false);
+						labelEffettoTipo.setText(" ");
+					}
 				}
 				
 			}
@@ -530,6 +583,14 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 	
 	public VigenzaEntity[] getVigToUpdate(){
 		return formEventi.getVigToUpdate();
+	}
+
+	public boolean verifyForm() {
+		return true;
+	}
+
+	public String getErrorMessage() {
+		return errorMessage;
 	}
 
 	

@@ -8,6 +8,7 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
+import it.cnr.ittig.xmleges.core.services.dom.extracttext.ExtractText;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
@@ -69,6 +70,8 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 	
 	UtilRulesManager utilRulesManager;
 	
+	ExtractText extractText;
+	
 	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -82,14 +85,15 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 		nirUtilUrn = (NirUtilUrn) serviceManager.lookup(NirUtilUrn.class);
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
+		extractText = (ExtractText) serviceManager.lookup(ExtractText.class);
 	}
 
 	
-	public boolean canSetVigenza(Node node, int start, int end) {
-		if (node != null && node.getParentNode() != null) {//&& UtilDom.findParentByName(node, "vigenza") == null) {
+	public boolean canSetVigenza(Node node) {
+		if (node != null && node.getParentNode() != null) {
 			try {
 				return (node.getNodeName()!=null && 
-						(dtdRulesManager.queryIsValidAttribute(node.getNodeName(), "iniziovigore")
+						(dtdRulesManager.queryIsValidAttribute(node.getNodeName(), "status")
 								|| UtilDom.isTextNode(node)) 
 						);
 			} catch (DtdRulesManagerException e) {
@@ -100,12 +104,10 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 	}
 	
 
-	public boolean setVigenza(Node node, int start, int end, VigenzaEntity vigenza) {
+	public Node setVigenza(Node node, String selectedText, int start, int end, VigenzaEntity vigenza) {
 		
 		selectedNode=node;
-
-		if(node==null) return false;
-		
+		if(node==null) return null;		
 		if(node.getNodeValue()==null){
 			if(UtilDom.getTextNode(node)==null || UtilDom.getTextNode(node).trim().equals(""))
 				selectedText=node.getNodeName();
@@ -121,7 +123,7 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 			if(node.getParentNode().getNodeName().equals("h:span"))
 				span = (Element) node.getParentNode();
 			else
-			 span = (Element) utilRulesManager.encloseTextInTag(node, start, end,"h:span","h");
+				span = (Element) utilRulesManager.encloseTextInTag(node, start, end,"h:span","h");
 			// Assegnazione attributi di vigenza allo span creato
 			if(vigenza.getEInizioVigore()!=null)
 				span.setAttribute("iniziovigore", vigenza.getEInizioVigore().getId());
@@ -131,54 +133,64 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 				span.setAttribute("finevigore", vigenza.getEFineVigore().getId());
 			else
 				span.removeAttribute("finevigore");
-			if(vigenza.getEInizioVigore()!=null && vigenza.getEFineVigore()!=null)
+			if(vigenza.getEInizioVigore()!=null || vigenza.getEFineVigore()!=null)
 				span.setAttribute("status", vigenza.getStatus());
-			else
-				span.removeAttribute("status");		
-		}else{
-			try {			
-				if (vigenza.getEInizioVigore() != null || vigenza.getEFineVigore()!=null) {
-					EditTransaction tr = documentManager.beginEdit();
+			else{//appiattisce lo span
+				span.removeAttribute("status");
+				Node padre=span.getParentNode();				
+				extractText.extractText(node,0,selectedText.length());
+				padre.removeChild(span);
+				UtilDom.mergeTextNodes(padre);
+				return padre;
+				
+			}
+			return span;
+			
+		}else{//non c'è span
+			try {	
+				NamedNodeMap nnm = node.getAttributes();
+				EditTransaction tr = documentManager.beginEdit();
+				if (vigenza.getEInizioVigore() != null || vigenza.getEFineVigore()!=null) {					
+					
 					// Assegnazione attributi di vigenza al nodo
 					if(vigenza.getEInizioVigore()!=null)
 						UtilDom.setAttributeValue(node, "iniziovigore", vigenza.getEInizioVigore().getId());
-					else{
-						NamedNodeMap nnm = node.getAttributes();
+					else{						
 						if(nnm.getNamedItem("iniziovigore")!=null)
 							nnm.removeNamedItem("iniziovigore");	
 					}
 					if(vigenza.getEFineVigore()!=null)
 						UtilDom.setAttributeValue(node, "finevigore", vigenza.getEFineVigore().getId());
-					else{
-						NamedNodeMap nnm = node.getAttributes();
+					else{						
 						if(nnm.getNamedItem("finevigore")!=null)
 							nnm.removeNamedItem("finevigore");
-					}
-					if((vigenza.getEInizioVigore()!=null) || (vigenza.getEFineVigore()!=null) ){
-						if(vigenza.getStatus()!=null)
+					}	
+					
+					if(vigenza.getStatus()!=null)
 							UtilDom.setAttributeValue(node, "status", vigenza.getStatus());
-						else{
-							NamedNodeMap nnm = node.getAttributes();
-							if(nnm.getNamedItem("status")!=null)
-							nnm.removeNamedItem("status");
-						}
-					}
 					else{
-						NamedNodeMap nnm = node.getAttributes();
 						if(nnm.getNamedItem("status")!=null)
-						nnm.removeNamedItem("status");
+							nnm.removeNamedItem("status");
 					}
-										
+					
+					}else{//vigenza da eliminare						
+						if(nnm.getNamedItem("iniziovigore")!=null)
+							nnm.removeNamedItem("iniziovigore");
+						if(nnm.getNamedItem("finevigore")!=null)
+							nnm.removeNamedItem("finevigore");
+						if(nnm.getNamedItem("status")!=null)
+							nnm.removeNamedItem("status");
+					}										
 					documentManager.commitEdit(tr);
-					return true;
-				} 
+					return node;
+				
 			} catch (DocumentManagerException ex) {
 				logger.error(ex.getMessage(), ex);
-				return false;
+				return null;
 			}
 
 		}
-		return false;
+		
 
 	}
 
@@ -239,7 +251,7 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 			finevig=node.getAttributes().getNamedItem("finevigore");
 			status=node.getAttributes().getNamedItem("status");
 		
-			//FIXME: problema sul ripopolamento; non ripopola il primo evento (iniziovigore)
+
 			Element evento_ie_Tag = (iniziovig==null?null:doc.getElementById(iniziovig.getNodeValue()));
 			Element evento_fe_Tag = (finevig==null?null:doc.getElementById(finevig.getNodeValue()));
 			
@@ -289,7 +301,7 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 			    }else
 			    	rel=new Relazione(tag, id, link);
 			}
-			e_finevig=iniziovig==null?null:new Evento(finevig!=null?finevig.getNodeValue():"",
+			e_finevig=(finevig==null)?null:new Evento(finevig!=null?finevig.getNodeValue():"",
 					evento_fe_Tag!=null?evento_fe_Tag.getAttribute("data"):null,
 					rel,
 					evento_fe_Tag!=null?evento_fe_Tag.getAttribute("tipo"):null);
@@ -311,12 +323,12 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 		NodeList lista = doc.getElementsByTagName("*");
 		
 		for(int i=0; i<lista.getLength();i++){
-			if(lista.item(i).getAttributes().getNamedItem("iniziovigore")!=null){
+			if(lista.item(i).getAttributes().getNamedItem("status")!=null){
 				return true;
 			}
-			if(lista.item(i).getAttributes().getNamedItem("finevigore")!=null){
-				return true;
-			}
+//			if(lista.item(i).getAttributes().getNamedItem("finevigore")!=null){
+//				return true;
+//			}
 		}	
 		return false;	
 	}
@@ -330,58 +342,58 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 	}
 	
 	public void updateVigenzaOnDoc(VigenzaEntity vig){
+		
 		Node node=vig.getOnNode();
 		if(node==null)
 			return;
-		
-		
-		if(!UtilDom.isTextNode(node)){
-			if(node.getAttributes()!=null){
-				if(vig.getEInizioVigore()!=null && node.getAttributes().getNamedItem("iniziovigore")!=null)
-					//UtilDom.setAttributeValue(node,"iniziovigore",vig.getEInizioVigore().getId());					
-					node.getAttributes().getNamedItem("iniziovigore").setNodeValue(vig.getEInizioVigore().getId());
-				else					
-					((Element)node).removeAttribute("iniziovigore");
+			try{
+				NamedNodeMap nnm = node.getAttributes();
+				if(nnm!=null){
+					EditTransaction tr = documentManager.beginEdit();
 					
-				if(vig.getEFineVigore()!=null && node.getAttributes().getNamedItem("finevigore")!=null)
-					node.getAttributes().getNamedItem("finevigore").setNodeValue(vig.getEFineVigore().getId());
-				else
-					((Element)node).removeAttribute("finevigore");
-				if(vig.getEInizioVigore()==null && vig.getEFineVigore()==null)
-				{
-					((Element)node).removeAttribute("status");
-				}
-				else{
-					if(node.getAttributes().getNamedItem("status")!=null)
-						node.getAttributes().getNamedItem("status").setNodeValue(vig.getStatus());
-				}
-				
-//				if(vig.getEInizioVigore()==null){
-//					node.getAttributes().removeNamedItem("iniziovigore");
-//				}else{
-//					node.getAttributes().getNamedItem("iniziovigore").setNodeValue(vig.getEInizioVigore().getId());
-//				}
-//				if(vig.getEFineVigore()==null){
-//					node.getAttributes().removeNamedItem("finevigore");
-//				}else
-//					node.getAttributes().getNamedItem("finevigore").setNodeValue(vig.getEFineVigore().getId());
-				
-			}
-				
-				
-		}else{//c'è lo span
-			
-			if(node.getParentNode()!=null && node.getParentNode().getNodeName().equals("h:span")){
-					Node span=node.getParentNode();
+					//se esisteva già l'evento inizio sul dom si aggiorna al nuovo o si elimina se il nuovo è null
+					if(nnm.getNamedItem("iniziovigore")!=null){
+						if(vig.getEInizioVigore()!=null){
+//							UtilDom.setAttributeValue(node, "iniziovigore", vig.getEInizioVigore().getId());
+						}
 
-					span.getAttributes().getNamedItem("iniziovigore").setNodeValue(vig.getEInizioVigore().getId());
-					span.getAttributes().getNamedItem("finevigore").setNodeValue(vig.getEFineVigore().getId());
-					span.getAttributes().getNamedItem("status").setNodeValue(vig.getStatus());
+						else
+							nnm.removeNamedItem("iniziovigore");	
+
+					}
+	//				se esisteva già l'evento fine sul dom si aggiorna al nuovo o si elimina se il nuovo è null	
+					if(nnm.getNamedItem("finevigore")!=null){
+						if(vig.getEFineVigore()!=null){
+//							UtilDom.setAttributeValue(node, "finevigore", vig.getEFineVigore().getId());
+						}
+
+						else
+							nnm.removeNamedItem("finevigore");
+
+					}
+					if(nnm.getNamedItem("iniziovigore")==null && nnm.getNamedItem("finevigore")==null){
+						if(nnm.getNamedItem("status")!=null)
+							nnm.removeNamedItem("status");
+						if(node.getNodeName().equals("h:span")){
+//							appiattisce lo span
+							Node padre=node.getParentNode();				
+							extractText.extractText(node.getFirstChild(),0,UtilDom.getText(node.getFirstChild()).length());
+							padre.removeChild(node);
+							UtilDom.mergeTextNodes(padre);
+						}
+				
+					}
+					documentManager.commitEdit(tr);	
+				}
+				
+			}catch (DocumentManagerException ex) {
+				logger.error(ex.getMessage(), ex);
+				return;
 			}
-		}
+
+		
 	}
 
 	
-		
 
 }

@@ -15,6 +15,7 @@ import it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita.CiclodiVitaEve
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
+import java.util.Vector;
 
 import javax.swing.AbstractAction;
 import javax.swing.AbstractButton;
@@ -68,6 +69,7 @@ public class EventoFormImpl implements EventoForm, Loggable, Serviceable, Initia
 	
 	AbstractButton clearBtn;
 	
+
 	
 	
 	// //////////////////////////////////////////////////// LogEnabled Interface
@@ -149,8 +151,11 @@ public class EventoFormImpl implements EventoForm, Loggable, Serviceable, Initia
 			if(openForm()){
 				// 1 - risetta tutti i nodi evento anche se non ci sono state variazioni
 				if(isUpdatedEventi(metaciclodivita.getEventi(), ciclodivitaeventoForm.getEventi())){
+					
 					metaciclodivita.setEventi(ciclodivitaeventoForm.getEventi());
 					metaciclodivita.setRelazioni(metaciclodivita.mergeRelazioni(ciclodivitaeventoForm.getEventi(),relazioniUlteriori));
+					
+					
 				}
 				selectedEvento = ciclodivitaeventoForm.getSelectedEvento();
 				textField.setText(selectedEvento!=null?selectedEvento.toString():"");
@@ -164,6 +169,15 @@ public class EventoFormImpl implements EventoForm, Loggable, Serviceable, Initia
 			clearEvento();
 		}
 	}
+
+	public Vector getRemovedEvents() {
+		return ciclodivitaeventoForm.getLastRemovedEvents();
+	}
+
+	public void setTextField(JTextField textField) {
+		this.textField = textField;
+	}
+
 	
 	
 

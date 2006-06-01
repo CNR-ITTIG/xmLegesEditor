@@ -114,6 +114,8 @@ public class InquadramentoFormImpl implements InquadramentoForm, Loggable,
 	
 	JLabel tagFormAttivita;
 	
+	String errorMessage = "";
+	
 	
 	/**
 	 * Editor per il ListTextField della lista dei proponenti
@@ -342,6 +344,7 @@ public class InquadramentoFormImpl implements InquadramentoForm, Loggable,
 		
 		formDatiInfodoc.setMainComponent(getClass().getResourceAsStream("DatiInfodoc.jfrm"));
 		formDatiInfodoc.setName("editor.form.meta.inquadramento.infodoc");
+		formDatiInfodoc.addFormVerifier(this);
 		
 		tagFormInfodocNatura = (JTextField) formDatiInfodoc.getComponentByName("editor.form.meta.inquadramento.infodoc.natura");
 		tagFormInfodocNatura.setText("");		
@@ -482,13 +485,33 @@ public class InquadramentoFormImpl implements InquadramentoForm, Loggable,
 	}
 
 	public boolean verifyForm() {
-		// TODO Auto-generated method stub
-		return false;
+		boolean isvalid=true;
+		isvalid=tagFormInfodocNatura.getText()!=null && !tagFormInfodocNatura.getText().trim().equals("");
+		if(!isvalid){
+			errorMessage="editor.form.meta.inquadramento.infodoc.msg.err.naturavuota";
+			return false;
+		}
+		isvalid=tagFormInfoDocNormativa.getSelectedItem()!=null;
+		if(!isvalid){
+			errorMessage="editor.form.meta.inquadramento.infodoc.msg.err.normativavuota";
+			return false;
+		}
+		isvalid=tagFormInfoDocFunzione.getSelectedItem()!=null;
+		if(!isvalid){
+			errorMessage="editor.form.meta.inquadramento.infodoc.msg.err.funzionevuota";
+			return false;
+		}	
+		isvalid=tagFormInfoDocFonte.getSelectedItem()!=null;
+		if(!isvalid){
+			errorMessage="editor.form.meta.inquadramento.infodoc.msg.err.fontevuota";
+			return false;
+		}
+		
+		return isvalid;
 	}
 
 	public String getErrorMessage() {
-		// TODO Auto-generated method stub
-		return null;
+		return errorMessage;
 	}
 
 	

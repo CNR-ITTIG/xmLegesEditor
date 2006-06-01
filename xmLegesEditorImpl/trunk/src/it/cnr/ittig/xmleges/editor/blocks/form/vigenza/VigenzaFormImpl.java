@@ -1,5 +1,7 @@
 package it.cnr.ittig.xmleges.editor.blocks.form.vigenza;
 
+import java.util.Vector;
+
 import it.cnr.ittig.services.manager.Initializable;
 import it.cnr.ittig.services.manager.Loggable;
 import it.cnr.ittig.services.manager.Logger;
@@ -11,11 +13,13 @@ import it.cnr.ittig.xmleges.core.services.form.FormVerifier;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 import it.cnr.ittig.xmleges.editor.services.form.evento.EventoForm;
+import it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita.CiclodiVitaEventoForm;
 import it.cnr.ittig.xmleges.editor.services.form.vigenza.VigenzaForm;
 
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import org.w3c.dom.Node;
 
@@ -70,6 +74,11 @@ public class VigenzaFormImpl implements VigenzaForm, FormVerifier, Loggable, Ser
 	
 	String sel_text;
 	
+	String errorMessage = "";
+	
+	
+	
+	
 	
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
@@ -82,6 +91,7 @@ public class VigenzaFormImpl implements VigenzaForm, FormVerifier, Loggable, Ser
 		form = (Form) serviceManager.lookup(Form.class);
 		eventoiniziovigoreform = (EventoForm) serviceManager.lookup(EventoForm.class);
 		eventofinevigoreform = (EventoForm) serviceManager.lookup(EventoForm.class);
+		
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
@@ -129,13 +139,50 @@ public Evento getInizioVigore() {
 	/////////////////////////////////////////////////////////////////////////
 
 	public String getErrorMessage() {
-		// TODO Auto-generated method stub
-		return null;
+		return errorMessage;
 	}
 
 	public boolean verifyForm() {
-		// TODO Auto-generated method stub
-		return false;
+		boolean isvalid=true;
+		isvalid = (eventoiniziovigoreform.getEvento()!=null)||(eventofinevigoreform.getEvento()!=null);
+		if(!isvalid){
+			errorMessage = "editor.selezionevigenza.msg.err.eliminavigenza";
+			return true;
+		}else{//solo se esiste almeno un evento devo controllare lo status
+			isvalid=(vigenzaStatus.getSelectedItem()!=null);
+			if(!isvalid){
+				errorMessage = "editor.selezionevigenza.msg.err.statusvuoto";				
+				return false;
+			
+			}
+			
+//			Vector removed;
+//			if(eventofinevigoreform.getEvento()==null){
+//				removed=eventofinevigoreform.getRemovedEvents();			
+//				for(int i=0;i<removed.size();i++){				
+//					if(((String)removed.elementAt(i)).equals(eventoiniziovigoreform.getEvento().getId())){
+//						int j=5;
+//						eventoiniziovigoreform.setEvento(null);		
+//						eventoiniziovigoreform.setTextField(new JTextField());
+//					}				
+//				}
+//			}
+//			else if(eventoiniziovigoreform.getEvento()==null){
+//				removed=eventoiniziovigoreform.getRemovedEvents();			
+//				for(int i=0;i<removed.size();i++){				
+//					if(((String)removed.elementAt(i)).equals(eventofinevigoreform.getEvento().getId())){
+//						int j=5;
+//						eventofinevigoreform.setEvento(null);
+//						eventofinevigoreform.setTextField(new JTextField());
+//						
+//					}				
+//				}
+//			
+//			}
+			
+		}
+		return isvalid;
+
 	}
 
 	public void setTipoDTD(String tipoDTD) {
@@ -180,6 +227,7 @@ public Evento getInizioVigore() {
 		textArea.setText(sel_text);
 
 		form.setSize(600, 350);
+		form.addFormVerifier(this);
 		form.showDialog();
 		return form.isOk();
 	}
@@ -197,6 +245,7 @@ public Evento getInizioVigore() {
 //	}
 //	
 //}
+
 
 
 

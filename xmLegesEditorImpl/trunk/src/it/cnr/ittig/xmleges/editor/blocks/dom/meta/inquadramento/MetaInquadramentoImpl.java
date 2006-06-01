@@ -35,8 +35,6 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 
 	DocumentManager documentManager;
 
-	//UtilMsg utilMsg;
-
 	UtilRulesManager utilRulesManager;
 	
 	Rinumerazione rinumerazione; 
@@ -71,25 +69,16 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 			inquadramentoNode = doc.createElement("inquadramento");
 			missingInquadramento = true;
 		}
+					
 		Element infodoc_element = doc.createElement("infodoc");
 		if((infodoc.getNatura()!=null)&&(!infodoc.getNatura().trim().equals("")))
-			UtilDom.setAttributeValue(infodoc_element,"natura",infodoc.getNatura());
+			infodoc_element.setAttribute("natura", infodoc.getNatura());
 		if((infodoc.getNormativa()!=null)&&(!infodoc.getNormativa().trim().equals("")))
-			UtilDom.setAttributeValue(infodoc_element,"normativa",infodoc.getNormativa());			
+			infodoc_element.setAttribute("normativa", infodoc.getNormativa());
 		if((infodoc.getFunzione()!=null)&&(!infodoc.getFunzione().trim().equals("")))
-			UtilDom.setAttributeValue(infodoc_element,"funzione",infodoc.getFunzione());		
+			infodoc_element.setAttribute("funzione", infodoc.getFunzione());
 		if(infodoc.getFonte()!=null)
-			UtilDom.setAttributeValue(infodoc_element,"fonte",infodoc.getFonte());
-			
-//		Element infodoc_element = doc.createElement("infodoc");
-//		if((infodoc.getNatura()!=null)&&(!infodoc.getNatura().trim().equals("")))
-//			infodoc_element.setAttribute("natura", infodoc.getNatura());
-//		if((infodoc.getNormativa()!=null)&&(!infodoc.getNormativa().trim().equals("")))
-//			infodoc_element.setAttribute("normativa", infodoc.getNormativa());
-//		if((infodoc.getFunzione()!=null)&&(!infodoc.getFunzione().trim().equals("")))
-//			infodoc_element.setAttribute("funzione", infodoc.getFunzione());
-//		if(infodoc.getFonte()!=null)
-//			infodoc_element.setAttribute("fonte", infodoc.getFonte());
+			infodoc_element.setAttribute("fonte", infodoc.getFonte());
 			
 		Node infodocNode = (Node)infodoc_element;
 		
@@ -147,27 +136,30 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 		Element infomancanti_element=null;
 		if(infomancanti.getMTitolodoc()!= null && !infomancanti.getMTitolodoc().trim().equals("")){
 			infomancanti_element = doc.createElement("mTitolodoc");
-			UtilDom.setTextNode(infomancanti_element,infomancanti.getMTitolodoc() );
+			UtilDom.setAttributeValue(infomancanti_element,"value",infomancanti.getMTitolodoc());			
 			utilRulesManager.orderedInsertChild(infomancantiNode,infomancanti_element);
+			
+			
+			
 		}
 		if(infomancanti.getMTipodoc()!= null && !infomancanti.getMTipodoc().trim().equals("")){
 			infomancanti_element = doc.createElement("mTipodoc");
-			UtilDom.setTextNode(infomancanti_element,infomancanti.getMTipodoc() );
+			UtilDom.setAttributeValue(infomancanti_element,"value",infomancanti.getMTipodoc() );
 			utilRulesManager.orderedInsertChild(infomancantiNode,infomancanti_element);
 		}
 		if(infomancanti.getMDatadoc()!= null && !infomancanti.getMDatadoc().trim().equals("")){
 			infomancanti_element = doc.createElement("mDatadoc");
-			UtilDom.setTextNode(infomancanti_element,infomancanti.getMDatadoc() );
+			UtilDom.setAttributeValue(infomancanti_element,"value",infomancanti.getMDatadoc() );
 			utilRulesManager.orderedInsertChild(infomancantiNode,infomancanti_element);
 		}
 		if(infomancanti.getMNumdoc()!= null && !infomancanti.getMNumdoc().trim().equals("")){
 			infomancanti_element = doc.createElement("mNumdoc");
-			UtilDom.setTextNode(infomancanti_element,infomancanti.getMNumdoc() );
+			UtilDom.setAttributeValue(infomancanti_element,"value",infomancanti.getMNumdoc() );
 			utilRulesManager.orderedInsertChild(infomancantiNode,infomancanti_element);
 		}
 		if(infomancanti.getMEmanante()!= null && !infomancanti.getMEmanante().trim().equals("")){
 			infomancanti_element = doc.createElement("mEmanante");
-			UtilDom.setTextNode(infomancanti_element,infomancanti.getMEmanante() );
+			UtilDom.setAttributeValue(infomancanti_element,"value",infomancanti.getMEmanante() );
 			utilRulesManager.orderedInsertChild(infomancantiNode,infomancanti_element);
 		}
 		/////////////////////
@@ -223,26 +215,26 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 		Element oggetto_element=null;
 		if(oggetto.getFinalita()!= null && !oggetto.getFinalita().trim().equals("")){
 			oggetto_element = doc.createElement("finalita");
-			UtilDom.setTextNode(oggetto_element,oggetto.getFinalita() );
+			UtilDom.setAttributeValue(oggetto_element,"value",oggetto.getFinalita() );
 			utilRulesManager.orderedInsertChild(oggettoNode,oggetto_element);
 		}
 		if(oggetto.getDestinatario()!= null && !oggetto.getDestinatario().trim().equals("")){
 			oggetto_element = doc.createElement("destinatario");
-			UtilDom.setTextNode(oggetto_element,oggetto.getDestinatario() );
+			UtilDom.setAttributeValue(oggetto_element,"value",oggetto.getDestinatario() );
 			utilRulesManager.orderedInsertChild(oggettoNode,oggetto_element);
 		}
 		if(oggetto.getTerritorio()!= null && !oggetto.getTerritorio().trim().equals("")){
 			oggetto_element = doc.createElement("territorio");
-			UtilDom.setTextNode(oggetto_element,oggetto.getTerritorio() );
+			UtilDom.setAttributeValue(oggetto_element,"value",oggetto.getTerritorio() );
 			utilRulesManager.orderedInsertChild(oggettoNode,oggetto_element);
 		}
 		if(oggetto.getAttivita()!= null && !oggetto.getAttivita().trim().equals("")){
 			oggetto_element = doc.createElement("attivita");
-			UtilDom.setTextNode(oggetto_element,oggetto.getAttivita() );
+			UtilDom.setAttributeValue(oggetto_element,"value",oggetto.getAttivita() );
 			utilRulesManager.orderedInsertChild(oggettoNode,oggetto_element);
 		}
 		
-		
+	
 		NodeList oldTag = doc.getElementsByTagName("oggetto");
 		if (oldTag.getLength() > 0) // c'era gia' un nodo oggetto
 			inquadramentoNode.replaceChild(oggettoNode, oldTag.item(0));
@@ -287,7 +279,6 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 
 		boolean missingInquadramento = false;
 		
-//		 FIXME: se cancello gli eventi devo cancellare anche le relazioni linkate !!
 		
 		if (inquadramentoNode==null){
 			inquadramentoNode = utilRulesManager.getNodeTemplate("inquadramento");
@@ -299,7 +290,7 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 		if(proponenti!= null && proponenti.length>0 ){
 			for (int i = 0; i < proponenti.length; i++) {
 				proponenti_element = doc.createElement("proponente");
-				UtilDom.setTextNode(proponenti_element,proponenti[i] );
+				UtilDom.setAttributeValue(proponenti_element,"value",proponenti[i] );
 				utilRulesManager.orderedInsertChild(proponentiNode,proponenti_element);
 			}
 		}
@@ -355,17 +346,18 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 			
 			NodeList infomanc_elementList = n.getChildNodes();
 			for (int i = 0; i < infomanc_elementList.getLength();i++) {
+				String valore=UtilDom.getAttributeValueAsString(infomanc_elementList.item(i),"value");
 				
 				if(infomanc_elementList.item(i).getNodeName().equals("mTitolodoc"))
-					mTitolodoc = UtilDom.getTextNode(infomanc_elementList.item(i)) != null ? UtilDom.getTextNode(infomanc_elementList.item(i)) : null;  
-				if(infomanc_elementList.item(i).getNodeName().equals("mTipodoc"))
-					mTipodoc = UtilDom.getTextNode(infomanc_elementList.item(i)) != null ? UtilDom.getTextNode(infomanc_elementList.item(i)) : null;
+					mTitolodoc=valore;					
+				if(infomanc_elementList.item(i).getNodeName().equals("mTipodoc"))					
+					mTipodoc=valore;
 				if(infomanc_elementList.item(i).getNodeName().equals("mDatadoc"))
-					mDatadoc = UtilDom.getTextNode(infomanc_elementList.item(i)) != null ? UtilDom.getTextNode(infomanc_elementList.item(i)) : null;
+					mDatadoc = valore;
 				if(infomanc_elementList.item(i).getNodeName().equals("mNumdoc"))
-					mNumdoc = UtilDom.getTextNode(infomanc_elementList.item(i)) != null ? UtilDom.getTextNode(infomanc_elementList.item(i)) : null;
+					mNumdoc = valore;
 				if(infomanc_elementList.item(i).getNodeName().equals("mEmanante"))
-					mEmanante = UtilDom.getTextNode(infomanc_elementList.item(i)) != null ? UtilDom.getTextNode(infomanc_elementList.item(i)) : null;
+					mEmanante = valore;
 					
 			}
 			return (new InfoMancanti(mTitolodoc, mTipodoc, mDatadoc, mNumdoc,mEmanante));
@@ -388,15 +380,16 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 			Node n = oggettoList.item(0);
 			
 			NodeList oggetto_elementList = n.getChildNodes();
-			for (int i = 0; i < oggetto_elementList.getLength();i++) {				
+			for (int i = 0; i < oggetto_elementList.getLength();i++) {
+				String valore=UtilDom.getAttributeValueAsString(oggetto_elementList.item(i),"value");
 				if(oggetto_elementList.item(i).getNodeName().equals("finalita"))
-					finalita = UtilDom.getTextNode(oggetto_elementList.item(i)) != null ? UtilDom.getTextNode(oggetto_elementList.item(i)) : null;  
+					finalita = valore;  
 				if(oggetto_elementList.item(i).getNodeName().equals("destinatario"))
-					destinatario = UtilDom.getTextNode(oggetto_elementList.item(i)) != null ? UtilDom.getTextNode(oggetto_elementList.item(i)) : null;
+					destinatario = valore;
 				if(oggetto_elementList.item(i).getNodeName().equals("territorio"))
-					territorio = UtilDom.getTextNode(oggetto_elementList.item(i)) != null ? UtilDom.getTextNode(oggetto_elementList.item(i)) : null;
+					territorio = valore;
 				if(oggetto_elementList.item(i).getNodeName().equals("attivita"))
-					attivita = UtilDom.getTextNode(oggetto_elementList.item(i)) != null ? UtilDom.getTextNode(oggetto_elementList.item(i)) : null;
+					attivita = valore;
 									
 			}
 			
@@ -420,9 +413,9 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 			Node n = proponentiList.item(0);			
 			NodeList proponenti_elementList = n.getChildNodes();
 			for (int i = 0; i < proponenti_elementList.getLength();i++) {
-				
+				String valore=UtilDom.getAttributeValueAsString(proponenti_elementList.item(i),"value");
 				if(proponenti_elementList.item(i).getNodeName().equals("proponente"))
-					proponentiVect.add(UtilDom.getTextNode(proponenti_elementList.item(i)) != null ? UtilDom.getTextNode(proponenti_elementList.item(i)) : null);
+					proponentiVect.add(valore);
 				}
 		}
 		

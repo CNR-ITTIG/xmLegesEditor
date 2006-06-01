@@ -29,6 +29,7 @@ import java.util.EventObject;
 
 import javax.swing.AbstractAction;
 
+import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 /**
@@ -125,7 +126,7 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 			start = ((SelectionChangedEvent) event).getTextSelectionStart();
 			end = ((SelectionChangedEvent) event).getTextSelectionEnd();
 
-			vigenzaAction.setEnabled(vigenza.canSetVigenza(activeNode, start, end));//||vigenza.canSetVigenzaSpan(activeNode, start, end));
+			vigenzaAction.setEnabled(vigenza.canSetVigenza(activeNode));//||vigenza.canSetVigenzaSpan(activeNode, start, end));
 
 		}
 		if (event instanceof DocumentClosedEvent || event instanceof DocumentOpenedEvent)
@@ -136,26 +137,37 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 		if(active!=null){
 			VigenzaEntity vig = vigenza.getVigenza(active,start,end);
 			Evento[] eventi_vig=new Evento[2];
+			String testo_sel;
 			// modifica di una vigenza esistente
 			if(vig!=null){
+				testo_sel=vigenza.getSelectedText();
 				eventi_vig[0]=vig.getEInizioVigore();
 				eventi_vig[1]=vig.getEFineVigore();
 				vigenzaForm.setInizioVigore(eventi_vig[0]);
 				vigenzaForm.setFineVigore(eventi_vig[1]);
 				vigenzaForm.setStatus(vig.getStatus());
-				vigenzaForm.setTestoselezionato(vigenza.getSelectedText());
+				vigenzaForm.setTestoselezionato(testo_sel);
 			}else{   // inserimento di una nuova vigenza: su nodo o su testo
 				eventi_vig=null;
+				testo_sel=getMarkedText();
 				vigenzaForm.setInizioVigore(null);
 				vigenzaForm.setFineVigore(null);
 				vigenzaForm.setStatus(null);
-				vigenzaForm.setTestoselezionato(getMarkedText());
+				vigenzaForm.setTestoselezionato(testo_sel);
 			}
 			
+			Node ciclodiVitaSaved=getCiclodiVitaNode().cloneNode(true);
 			if(vigenzaForm.openForm(active)){
-				vigenza.updateVigenzaOnDoc(vigenzaForm.getVigenza());
-				vigenza.setVigenza(active,start,end, vigenzaForm.getVigenza());
-				vigenza.setTipoDocVigenza();					
+				
+				Node toselect = vigenza.setVigenza(active,testo_sel, start,end, vigenzaForm.getVigenza());
+				//vigenza.updateVigenzaOnDoc(vigenzaForm.getVigenza());
+								
+				if(toselect!=null)
+					vigenza.setTipoDocVigenza();
+				setModified(toselect);
+									
+			}else{//se preme annulla ripristina il nodo salvato
+				setCiclodiVitaNode(ciclodiVitaSaved);
 			}
 		}
 	}
@@ -189,5 +201,28 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 				doNewVigenza(activeNode);
 		}
 	}
+	
+	protected void setModified(Node modified) {
+		if (modified != null) {
+			selectionManager.setActiveNode(this, modified);
+			activeNode = modified;
+			vigenzaAction.setEnabled(vigenza.canSetVigenza(activeNode));
+			logger.debug(" set modified " + UtilDom.getPathName(modified));
+		} else
+			logger.debug(" modified null in set modified ");
+	}
+	
+	public Node getCiclodiVitaNode() {
+		Document doc = documentManager.getDocumentAsDom();
+		Node ciclodivitaNode = doc.getElementsByTagName("ciclodivita").item(0);
+		return ciclodivitaNode;
+	}
+
+	public void setCiclodiVitaNode(Node ciclodivitaNode) {
+		Document doc = documentManager.getDocumentAsDom();
+		Node oldCiclodivita=doc.getElementsByTagName("ciclodivita").item(0);
+		oldCiclodivita.getParentNode().replaceChild(ciclodivitaNode,oldCiclodivita);
+		
+	}		
 
 }
