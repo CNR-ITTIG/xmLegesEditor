@@ -178,7 +178,7 @@ public class NodeInserter {
 			return (insertTemplateAsBrother(template, activeNodeContainer, dtdRulesManager));
 
 		Node splitNode = getSplitNode(template, activeNodeContainer, dtdRulesManager);
-		Vector move = split(splitNode, dtdRulesManager);
+		//Vector move = split(splitNode, dtdRulesManager);
 		Node insertPoint = getParentContainer(splitNode);
 
 		logger.debug("splitNode   " + nirUtilDom.getPathName(splitNode));
@@ -325,7 +325,6 @@ public class NodeInserter {
 	private Node getFirstParentContainerForTemplate(Node template, Node activeNodeContainer, DtdRulesManager dtdRulesManager) {
 		Node prevParentContainer;
 		Node parentContainer = activeNodeContainer;
-		Vector contents = new Vector();
 		try {
 			do {
 				if (dtdRulesManager.getAlternativeContents(parentContainer.getNodeName()).contains(template.getNodeName())
@@ -487,8 +486,10 @@ public class NodeInserter {
 	private Node getNodeTemplate(String elem_name, Document doc, DtdRulesManager dtdRulesManager) {
 		Node newNode = utilRulesManager.getNodeTemplate(doc, elem_name);
 		// inserisci ovunque possibile il num
+		// FIXME attendere risposta dtd2.1
 		addElement("num", doc, newNode, dtdRulesManager);
 		// inserisci ovunque possibile la rubrica
+		// FIXME attendere risposta dtd2.1
 		addElement("rubrica", doc, newNode, dtdRulesManager);
 		return newNode;
 	}
@@ -529,20 +530,22 @@ public class NodeInserter {
 			childList = node.getChildNodes();
 			// crea il vettore dei figli del padre del nodo corrente (tmpParent)
 			for (int i = 0; i < childList.getLength(); i++) {
-				tmpNode = childList.item(i);
+				tmpNode = childList.item(i);			
 				childVect.add(tmpNode);
 			}
-
+            
 			iterator = childVect.iterator();
 			while (iterator.hasNext()) {
 				tmpNode = (Node) iterator.next();
 				try {
-					if (dtdRulesManager.queryCanInsertBefore(node, tmpNode, newNode)) {
+					// FIXME per dtd2.1; causa CMArticolo errato aggiunto !brothersContain() && canInsertBeforeRubNum
+					if (dtdRulesManager.queryCanInsertBefore(node, tmpNode, newNode) && canInsertBeforeRubNum(tmpNode,newNode) && !brothersContain(node,elem_name)) {
 						node.insertBefore(newNode, tmpNode);
 						newNode = doc.createElement(elem_name);
 					}
 				} catch (Exception ex) {
 				}
+				// lo aggiunge anche a tutti i figli [es ai commi figli di articolo]
 				addElement(elem_name, doc, tmpNode, dtdRulesManager);
 			}
 
@@ -554,6 +557,21 @@ public class NodeInserter {
 				// logger.error(exc.getMessage(), exc);
 			}
 		}
+	}
+	
+	private boolean canInsertBeforeRubNum(Node tmpNode, Node newNode){
+		if(newNode.getNodeName().equalsIgnoreCase("rubrica") && tmpNode.getNodeName().equalsIgnoreCase("num"))
+			return false;
+		return true;
+	}
+	
+	private boolean brothersContain(Node parent, String elemName){
+		NodeList childList = parent.getChildNodes();
+		for (int i = 0; i < childList.getLength(); i++) {
+			if(childList.item(i).getNodeName().equalsIgnoreCase(elemName))
+				return true;
+		}
+		return false;
 	}
 
 	private Node getSplitNode(Node template, Node activeNodeContainer, DtdRulesManager dtdRulesManager) {
