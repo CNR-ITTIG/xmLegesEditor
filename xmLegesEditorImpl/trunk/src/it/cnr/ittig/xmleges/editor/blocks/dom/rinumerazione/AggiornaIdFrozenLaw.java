@@ -599,8 +599,12 @@ public class AggiornaIdFrozenLaw {
 		 // + forza il setId anche alle lettere, numeri, ep: gli id servono per la rinumerazione di quegli elementi
 		 try{
 			 if(dtdRulesManager.queryIsRequiredAttribute(figlio.getNodeName(),"id") || getElementType(figlio)==LETTERA || getElementType(figlio)==NUMERO || getElementType(figlio)==ELENCO_PUNT){
-				 logger.debug("required ID for "+figlio.getNodeName());
-				 return true;
+				 // FIXME previene il setId degli eventi; la soluzione corretta e' quella di settare sia gli id che gli idref 
+				 if(!(getElementType(figlio)==EVENTO)){
+				   logger.debug("required ID for "+figlio.getNodeName());
+				   return true;
+				 }
+				 return false;
 			 }
 			 else{
 				 logger.debug("not required id for "+figlio.getNodeName());
