@@ -25,6 +25,7 @@ import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JTextField;
@@ -75,6 +76,8 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 	JLabel originalWordLabel;
 
 	JTextField wordTextField;
+	
+	JEditorPane nodeArea;
 
 	JList suggestionsList;
 
@@ -87,8 +90,7 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 	JButton replaceButton;
 
 	JButton replaceAllButton;
-
-	// TODO addButton
+	
 	JButton addButton;
 
 	SelectionManager selectionManager;
@@ -141,6 +143,9 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 
 		originalWordLabel = (JLabel) form.getComponentByName("spellcheck.label.originalword");
 		wordTextField = (JTextField) form.getComponentByName("spellcheck.textfield.word");
+		
+		nodeArea = (JEditorPane) form.getComponentByName("spellcheck.textarea.node");
+		
 		suggestionsList = (JList) form.getComponentByName("spellcheck.list.suggestions");
 		suggestionsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		suggestionsList.addListSelectionListener(this);
@@ -155,7 +160,6 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 		replaceButton.addActionListener(this);
 		replaceAllButton = (JButton) form.getComponentByName("spellcheck.button.replaceall");
 		replaceAllButton.addActionListener(this);
-		// TODO addButton
 		addButton = (JButton)form.getComponentByName("spellcheck.button.add");
 		addButton.addActionListener(this);
 
@@ -168,8 +172,7 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 		this.start = selectionManager.getTextSelectionStart();
 		this.end = selectionManager.getTextSelectionEnd();
 		activeNode = selectionManager.getActiveNode();
-		// String word;
-
+		
 		if (ignored != null)
 			logger.debug("ignored size: " + ignored.size());
 		else
@@ -281,6 +284,10 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 					suggestionsList.setListData(new Vector());
 				}
 				logger.debug("showWord " + word[i].getSpellCheckWord().getWord());
+				
+				nodeArea.setText(word[i].getNode().getNodeValue().substring(0,word[i].getSpellCheckWord().getStartOffset())+"<b>"+word[i].getSpellCheckWord().getWord()+"</b>"+word[i].getNode().getNodeValue().substring(word[i].getSpellCheckWord().getEndOffset(),word[i].getNode().getNodeValue().length()));	
+				nodeArea.select(word[i].getSpellCheckWord().getEndOffset(),word[i].getSpellCheckWord().getEndOffset());
+				
 				originalWordLabel.setText(word[i].getSpellCheckWord().getWord());
 				wordTextField.setText(word[i].getSpellCheckWord().getWord());
 				selectionManager.setSelectedText(this, word[i].getNode(), word[i].getSpellCheckWord().getStartOffset(), word[i].getSpellCheckWord().getEndOffset());				
@@ -378,7 +385,6 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 				logger.debug("after replacementall misspelled words: " + i + " " + words[i].getSpellCheckWord().toString());
 			}
 		}
-		// TODO addButton
 		else if(evt.getSource() == addButton) {
 		    logger.debug("add word");
 		    
