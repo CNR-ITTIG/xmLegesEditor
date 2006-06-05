@@ -18,6 +18,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 xmlns:xlink = "http://www.w3.org/1999/xlink"
                 xmlns:h     = "http://www.w3.org/HTML/1998/html4"
                 xmlns       = "http://www.normeinrete.it/nir/1.0"
+                xmlns:cnr   = "http://www.cnr.it/provvedimenti/2.0"
                 xmlns:mapper= "xalan://it.cnr.ittig.xmleges.core.blocks.panes.xsltmapper.XsltMapperImpl"
                 version     = "1.0"
 >
@@ -34,7 +35,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <xsl:template match="*[
 	name()='descrittori' or name()='lavoripreparatori' or
 	name()='redazionale' or name()='proprietario' or
-	name()='disposizioni'
+	name()='disposizioni' or name()='ciclodivita'
 	]">
 	<center><font size="+2"><b><xsl:value-of select="name()"/></b></font></center>
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
