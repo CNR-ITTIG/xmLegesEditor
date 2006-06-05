@@ -182,7 +182,7 @@ public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable, Servi
 				for (int j=0; j<contaTr; j++)
 				  documentManager.rollbackEdit(tr);
 		}
-		selectionManager.setSelectedText(this, selectionManager.getActiveNode(), 0, 0);		
+		//selectionManager.setSelectedText(this, selectionManager.getActiveNode(), 0, 0);		
 		
 		return form.isOk();	
 	}

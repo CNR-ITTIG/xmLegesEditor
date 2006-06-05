@@ -145,8 +145,6 @@ public class RifIncompletiActionImpl implements RifIncompletiAction, EventManage
 		if (modified != null) {
 			selectionManager.setActiveNode(this, modified);
 			activeNode = modified;
-			//rifInternoAction.setEnabled((domrinvii.canInsert(activeNode) || (domrinvii.canChange(activeNode) && isRinvioInt())) && !isOpenForm);
-			//rifEsternoAction.setEnabled((domrinvii.canInsert(activeNode) || (domrinvii.canChange(activeNode) && isRinvioExt())) && !isOpenForm);
 			logger.debug(" set modified " + UtilDom.getPathName(modified));
 		} else
 			logger.debug(" modified null in set modified ");
