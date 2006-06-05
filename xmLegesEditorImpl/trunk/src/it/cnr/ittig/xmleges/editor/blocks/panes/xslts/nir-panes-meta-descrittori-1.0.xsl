@@ -33,9 +33,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 -->
 
 
-pubblicazione, altrepubblicazioni?, urn+, alias*, 
-                         vigenza+, relazioni?,keywords*)
-
 <!-- ================================================================================ -->
 <!-- =============================================================== INTESTAZIONE === -->
 <!-- ================================================================================ -->
