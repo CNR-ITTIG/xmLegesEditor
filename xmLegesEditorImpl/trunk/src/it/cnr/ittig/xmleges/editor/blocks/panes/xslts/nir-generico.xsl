@@ -353,7 +353,7 @@
 	</xsl:template>
 	<!-- ======================================================== -->
 	<!--                                                          -->
-	<!--  riferimenti incompleti                                  -->
+	<!--  template riferimenti incompleti                         -->
 	<!--                                                          -->
 	<!-- ======================================================== -->
 	<xsl:template match="processing-instruction('rif')">
@@ -361,7 +361,7 @@
 	</xsl:template>
 	<!-- ======================================================== -->
 	<!--                                                          -->
-	<!--  span (vigenze)	                                      -->
+	<!--  template span (vigenze)	                              -->
 	<!--                                                          -->
 	<!-- ======================================================== -->
 	<xsl:template match="//*[name()='h:span']">
@@ -384,17 +384,17 @@
 		<xsl:choose>
 		<!-- ========================================== DATA FINE !='' ====================================== -->
 			<xsl:when test="$data_fine!=''">
-			<xsl:choose>			
-				<xsl:when test="$stato!=''">				
-					<span style="color:#f00;" title="{$stato}"><xsl:apply-templates/>
-					</span>
-				</xsl:when>
-				
-				<xsl:otherwise>
-					<span style="color:#f00;" title="abrogato"><xsl:apply-templates/>
-					</span>
-				</xsl:otherwise>
-			</xsl:choose>
+				<xsl:choose>			
+					<xsl:when test="$stato!=''">				
+						<span style="color:#f00;" title="{$stato}"><xsl:apply-templates/>
+						</span>
+					</xsl:when>
+					
+					<xsl:otherwise>
+						<span style="color:#f00;" title="abrogato"><xsl:apply-templates/>
+						</span>
+					</xsl:otherwise>
+				</xsl:choose>
 					<span style="color:#000;font-size:95%;font-style:italic;">
 						&#91;Ndr:&#160;In vigore&#160;
 					 		<xsl:choose>
@@ -434,6 +434,9 @@
 					&#93;
 				</span>	
 			</xsl:when>
+			<xsl:otherwise>
+				<xsl:apply-templates />
+			</xsl:otherwise>
 		</xsl:choose>
 			
 	</xsl:template>	
