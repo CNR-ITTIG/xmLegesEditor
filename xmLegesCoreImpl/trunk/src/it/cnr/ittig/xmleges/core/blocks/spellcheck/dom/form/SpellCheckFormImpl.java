@@ -122,6 +122,10 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 	
 	int contaTr;
 
+//	//far partire lo spell dal cursore
+//	int parolaIniziale = 0;	
+//	boolean ricomincia = false;
+	
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
 
@@ -187,6 +191,25 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 			words = domSpellCheck.spellCheck(activeNode, start, end);	
 		else 	
 			words = domSpellCheck.spellCheck(documentManager.getRootElement());
+		
+
+//		//far partire lo spell dal cursore
+//		parolaIniziale = 0;
+//		for (int i=0; i<words.length; i++)
+//
+//			//
+//			//  IF sotto deve controllare anche se HO SUPERATO il nodo corrente !!!! come??
+//			//
+//			if (words[i].getNode().equals(selectionManager.getActiveNode())) {
+//		      	 for (int j=i; j<words.length; j++) {
+//		      		 parolaIniziale = j;
+//		      		 if ((words[j].getSpellCheckWord().getStartOffset()>=start) || !(words[j].getNode().equals(selectionManager.getActiveNode()))) 
+//		    	               break;
+//		      	 }		 
+//		    	 if (parolaIniziale==0) ricomincia = false; 
+//		    	 else ricomincia = true; 
+//		    	 break;
+//		    }
 		
 		if (null != words && words.length > 0 && misspelledIndex != -1) {			
 			misspelledIndex = showWord(words);
@@ -271,7 +294,11 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 	}
 	
 	private int showWord(DomSpellCheckWord[] word) {
+		
+//		//far partire lo spell dal cursore
+//		int i = parolaIniziale;
 		int i = 0;
+		
 		do {
 			if (!isIndex(i) && !isIgnored(word[i]) && !isIgnoredAll(word[i]) && !isInserted(word[i])) {
 				String[] suggestions = domSpellCheck.getSpellCheck().getSuggestions(word[i].getSpellCheckWord().getWord());
@@ -285,7 +312,8 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 				}
 				logger.debug("showWord " + word[i].getSpellCheckWord().getWord());
 				
-				nodeArea.setText(word[i].getNode().getNodeValue().substring(0,word[i].getSpellCheckWord().getStartOffset())+"<b>"+word[i].getSpellCheckWord().getWord()+"</b>"+word[i].getNode().getNodeValue().substring(word[i].getSpellCheckWord().getEndOffset(),word[i].getNode().getNodeValue().length()));	
+				nodeArea.setText("<FONT face=\"Arial, Verdana, sans-serif\" size=3>"+word[i].getNode().getNodeValue().substring(0,word[i].getSpellCheckWord().getStartOffset())+"<font color=#FF0000><b>"+word[i].getSpellCheckWord().getWord()+"</b></font>"+word[i].getNode().getNodeValue().substring(word[i].getSpellCheckWord().getEndOffset(),word[i].getNode().getNodeValue().length())+"</FONT>");	
+				//nodeArea.setText(word[i].getNode().getNodeValue().substring(0,word[i].getSpellCheckWord().getStartOffset())+"<font color=#FF0000><b>"+word[i].getSpellCheckWord().getWord()+"</b></font>"+word[i].getNode().getNodeValue().substring(word[i].getSpellCheckWord().getEndOffset(),word[i].getNode().getNodeValue().length()));
 				nodeArea.select(word[i].getSpellCheckWord().getEndOffset(),word[i].getSpellCheckWord().getEndOffset());
 				
 				originalWordLabel.setText(word[i].getSpellCheckWord().getWord());

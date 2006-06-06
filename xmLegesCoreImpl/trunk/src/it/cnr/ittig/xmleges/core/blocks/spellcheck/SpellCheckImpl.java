@@ -128,7 +128,23 @@ public class SpellCheckImpl implements SpellCheck, Loggable, Serviceable, Initia
 				else controlla = false;
 				break;
 			case SpellChecker.ERR_UNKNOWN_WORD:
-				listaparole.add(new SpellCheckWordImpl(failingWord, offsetparziale+replacePos, offsetparziale+replacePos+replaceSize));
+				
+				//GESTIONE REGOLE:
+				boolean aggiungi = false;
+				//regola per l'apostrofo
+				if (failingWord.indexOf("'")!=-1) {
+					 
+				    String[] parti = failingWord.split("'");
+				    String nuovaParola = parti[0];
+				    for (int j=1; j<parti.length; j++) 
+				        nuovaParola.concat("' ").concat(parti[j]);
+				    if (getSuggestions(nuovaParola)!=null) aggiungi=true;  
+				}
+				else aggiungi=true;
+				
+				if (aggiungi) listaparole.add(new SpellCheckWordImpl(failingWord, offsetparziale+replacePos, offsetparziale+replacePos+replaceSize));
+
+				
 				offsetparziale = offsetparziale+replacePos+replaceSize+1;
 
 				if (offsetparziale <= testo.length()) {
