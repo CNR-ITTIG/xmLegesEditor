@@ -148,7 +148,7 @@ public class StrutturaXmlImpl implements Pane, StrutturaXml, TreePaneCellRendere
 					ret = "numero ";
 				else if ("ep".equals(name))
 					ret = "punto ";
-				String num = UtilDom.getTextNode(UtilDom.findDirectChild(node, "num")).trim();
+				String num = UtilDom.getRecursiveTextNode(UtilDom.findDirectChild(node, "num")).trim();
 				if (num.length() > 0)
 					ret += num;
 				String rubrica = UtilDom.getTextNode(UtilDom.findDirectChild(node, "rubrica")).trim();
