@@ -69,6 +69,7 @@
 	<!--  Template articolato                                     -->
 	<!--                                                          -->
 	<!-- ======================================================== -->
+	
 	<xsl:template match="//*[name()='articolato']">
 		<table border="0" cellpadding="0" cellspacing="10" width="100%">			
 					<xsl:apply-templates/>
@@ -136,7 +137,14 @@
 	</xsl:template>
 
 	<xsl:template match="//*[name()='num']">
-		<xsl:apply-templates />&#160;
+		<xsl:choose>
+			<xsl:when test="parent::node()[name()='el'] or parent::node()[name()='en'] or parent::node()[name()='ep']">
+				<em><xsl:apply-templates />&#160;</em>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:apply-templates />&#160;
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>
 	<!-- =========================	EL , EN , EP	=============================== -->
 	<xsl:template match="//*[name()='el'] | //*[name()='en'] | //*[name()='ep']">
@@ -229,6 +237,7 @@
 			</sup>
 		</a>
 	</xsl:template>
+	
 	<!-- ======================================================== -->
 	<!--                                                          -->
 	<!--  Template conclusioni e formula finale                   -->
@@ -342,11 +351,19 @@
 			</xsl:apply-templates>
 		</xsl:element>
 	</xsl:template>
-	
+	<!-- ======================================================== -->
+	<!--                                                          -->
+	<!--  riferimenti incompleti                                  -->
+	<!--                                                          -->
+	<!-- ======================================================== -->
 	<xsl:template match="processing-instruction('rif')">
 		<xsl:value-of select="substring-before(substring-after(.,'&gt;'),'&lt;')" />&#160;
 	</xsl:template>
-	
+	<!-- ======================================================== -->
+	<!--                                                          -->
+	<!--  span (vigenze)	                                      -->
+	<!--                                                          -->
+	<!-- ======================================================== -->
 	<xsl:template match="//*[name()='h:span']">
 		<xsl:variable name="stato">
 			<xsl:value-of select="@status" />
@@ -365,37 +382,61 @@
 		</xsl:variable>	
 		
 		<xsl:choose>
-			
-			<xsl:when test="$stato='omissis'">				
-				<span style="color:#f00;" title="omissis"><xsl:apply-templates/>
-				</span>
-			</xsl:when>
-			
-			<xsl:when test="$stato='abrogato'">			
-				<span style="color:#f00;" title="abrogato">
-				<xsl:apply-templates/>
-				</span>
-			</xsl:when>
+		<!-- ========================================== DATA FINE !='' ====================================== -->
+			<xsl:when test="$data_fine!=''">
+			<xsl:choose>			
+				<xsl:when test="$stato!=''">				
+					<span style="color:#f00;" title="{$stato}"><xsl:apply-templates/>
+					</span>
+				</xsl:when>
 				
-			<xsl:when test="$stato='annullato'">
-				<span style="color:#f00;" title="annullato"><xsl:apply-templates/>
-				</span>
+				<xsl:otherwise>
+					<span style="color:#f00;" title="abrogato"><xsl:apply-templates/>
+					</span>
+				</xsl:otherwise>
+			</xsl:choose>
+					<span style="color:#000;font-size:95%;font-style:italic;">
+						&#91;Ndr:&#160;In vigore&#160;
+					 		<xsl:choose>
+							<xsl:when test="$data_inizio!=''">
+								dal <xsl:value-of select="concat(substring($data_inizio,7,2),'/',substring($data_inizio,5,2),'/',substring($data_inizio,1,4))"/>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:text>fino</xsl:text>
+							</xsl:otherwise>
+						</xsl:choose>	
+						&#160;al <xsl:value-of select="concat(substring($data_fine,7,2),'/',substring($data_fine,5,2),'/',substring($data_fine,1,4))"/>
+						<xsl:choose>			
+							<xsl:when test="$stato!=''">
+								(<xsl:value-of select="$stato"/>)
+							</xsl:when>
+						</xsl:choose>		
+						<xsl:text>&#93;&#160;</xsl:text>
+					</span>					
 			</xsl:when>
-							
-			<xsl:when test="$stato='sospeso'">
-				<span style="color:#f00;" title="sospeso"><xsl:apply-templates/>
-				</span>
+			<!-- ========================================== DATA inizio !='' ====================================== -->
+			<xsl:when test="$data_inizio!=''">
+				<xsl:choose>			
+					<xsl:when test="$stato!=''">				
+						<span style="color:#060;" title="{$stato}">
+							<xsl:apply-templates />
+						</span>
+					</xsl:when>
+					<xsl:otherwise>
+						<span style="color:#060;" title="vigente">
+							<xsl:apply-templates />
+						</span>
+					</xsl:otherwise>
+				</xsl:choose>
+				<span style="color:#000;font-size:95%;font-style:italic;">
+					&#91;Ndr:&#160;In vigore&#160;
+					dal <xsl:value-of select="concat(substring($data_inizio,7,2),'/',substring($data_inizio,5,2),'/',substring($data_inizio,1,4))"/>
+					&#93;
+				</span>	
 			</xsl:when>
-			<xsl:otherwise>
-				<xsl:apply-templates/>
-			</xsl:otherwise>
 		</xsl:choose>
-		<span style="font-size:95%;font-style:italic;">
-				&#91;Ndr:&#160;<xsl:value-of select="$stato"/>
-				 dal <xsl:value-of select="concat(substring($data_inizio,7,2),'/',substring($data_inizio,5,2),'/',substring($data_inizio,1,4))"/>
-				&#160;al <xsl:value-of select="concat(substring($data_fine,7,2),'/',substring($data_fine,5,2),'/',substring($data_fine,1,4))"/>.&#93;
-		</span>		
-	</xsl:template>
+			
+	</xsl:template>	
 
 
 
