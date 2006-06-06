@@ -298,9 +298,9 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 		return false;
 	}
 	
-	
-    public boolean orderedInsertChild(Node parent, Node toInsert){
-    	Node child = parent.getFirstChild();
+		
+	public boolean orderedInsertChild(Node parent, Node toInsert){
+    	Node child = parent.getLastChild();
     	boolean inserted = false;
     	if(parent != null && toInsert != null){
     		// prova ad inserirlo AFTER
@@ -310,7 +310,7 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
         				UtilDom.insertAfter(toInsert, child);
         				inserted = true;
         			}
-        			child = child.getNextSibling();
+        			child = child.getPreviousSibling();
         		} catch (DtdRulesManagerException ex) {
         			logger.error(ex.getMessage(), ex);
         			return false;
