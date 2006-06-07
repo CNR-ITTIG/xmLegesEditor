@@ -332,7 +332,7 @@ public class PartizioniFormImpl implements PartizioniForm, Loggable, Serviceable
 			valore = testo;
 		else {
 			if (isLettera(testo, false))
-				valore = "" + UtilLang.fromLetterToNumber(testo);
+				valore = testo; // cambiata la regola sugli id delle lettere + UtilLang.fromLetterToNumber(testo);
 			else if (isRomano(testo, false))
 				valore = "" + UtilLang.fromRomanToArabic(testo);
 		}
