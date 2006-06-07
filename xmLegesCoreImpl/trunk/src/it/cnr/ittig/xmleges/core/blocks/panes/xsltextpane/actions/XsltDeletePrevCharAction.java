@@ -58,6 +58,12 @@ public class XsltDeletePrevCharAction extends XsltAction {
 		if ((modNode.getNodeType() == Node.COMMENT_NODE || modNode.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE) && elemText != null
 				&& elemText.equals(defText))
 			return;
+		
+		// FIXME spostare il controllo da xmLegesCore a xmLegesEditor
+		// aggiunto controllo Procesing Instruction <?rif> readonly
+		if(modNode.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE && modNode.getNodeValue().startsWith("<rif")) {
+			return;
+		}
 
 		if (pane.getCaretPosition() > start || pane.getSelectionStart() != pane.getSelectionEnd()) {
 			super.actionPerformed(e);

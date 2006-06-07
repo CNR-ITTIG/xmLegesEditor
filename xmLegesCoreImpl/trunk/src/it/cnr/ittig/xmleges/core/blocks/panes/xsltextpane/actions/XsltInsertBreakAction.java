@@ -45,6 +45,13 @@ public class XsltInsertBreakAction extends XsltAction {
 				return;
 
 			Node modNode = pane.getXsltMapper().getDomById(pane.getElementId(currElem), true);
+			
+			// FIXME spostare il controllo da xmLegesCore a xmLegesEditor
+			// aggiunto controllo Procesing Instruction <?rif> readonly
+			if(modNode.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE && modNode.getNodeValue().startsWith("<rif")) {
+				return;
+			}
+			
 			int relSelStart = pane.getSelectionStart() - enclosingSpans[0].getEndOffset() - 1;
 			int relSelEnd = pane.getSelectionEnd() - enclosingSpans[0].getEndOffset() - 1;
 

@@ -70,6 +70,13 @@ public class XsltKeyTypedAction extends XsltAction {
 
 		Node modNode = pane.getXsltMapper().getDomById(pane.getElementId(currElem));
 
+		
+		// FIXME spostare il controllo da xmLegesCore a xmLegesEditor
+		// aggiunto controllo Processing Instruction ?rif readonly
+		if(modNode.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE && modNode.getNodeValue().startsWith("<rif")) {
+			return;
+		}
+		
 		if (pane.getXsltMapper().getParentByGen(modNode) != null
 				|| (modNode.getNodeType() == Node.COMMENT_NODE && getText(e, currElem).equals(pane.getXsltMapper().getI18nNodeText(modNode)))
 				|| (modNode.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE && getText(e, currElem).equals(pane.getXsltMapper().getI18nNodeText(modNode)))) {
