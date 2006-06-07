@@ -351,7 +351,8 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 				
 				originalWordLabel.setText(word[i].getSpellCheckWord().getWord());
 				wordTextField.setText(word[i].getSpellCheckWord().getWord());
-				selectionManager.setSelectedText(this, word[i].getNode(), word[i].getSpellCheckWord().getStartOffset(), word[i].getSpellCheckWord().getEndOffset());				
+				selectionManager.setActiveNode(this, word[i].getNode());
+				//selectionManager.setSelectedText(this, word[i].getNode(), word[i].getSpellCheckWord().getStartOffset(), word[i].getSpellCheckWord().getEndOffset());				
 				return i;
 			}
 			i++;
