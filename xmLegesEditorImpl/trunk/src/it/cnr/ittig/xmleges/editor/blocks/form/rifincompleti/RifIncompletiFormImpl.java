@@ -313,6 +313,7 @@ public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable, Servi
 							missRif = showRif(riferimenti);
 							if (missRif == -1) utilMsg.msgInfo("rifincompleti.error.endstop");									
 						}
+						else utilMsg.msgInfo("rifincompleti.error.endstop");
 					else utilMsg.msgInfo("rifincompleti.error.endstop");								
 			} else {
 				if (ricomincia) 
@@ -342,6 +343,7 @@ public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable, Servi
 								missRif = showRif(riferimenti);
 								if (missRif == -1) utilMsg.msgInfo("rifincompleti.error.endstop");									
 							}
+							else utilMsg.msgInfo("rifincompleti.error.endstop");
 						else utilMsg.msgInfo("rifincompleti.error.endstop");											
 				}
 				documentManager.commitEdit(tr);
@@ -384,6 +386,7 @@ public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable, Servi
 								missRif = showRif(riferimenti);
 								if (missRif == -1) utilMsg.msgInfo("rifincompleti.error.endstop");									
 							}
+							else utilMsg.msgInfo("rifincompleti.error.endstop");
 						else utilMsg.msgInfo("rifincompleti.error.endstop");								
 				}
 				documentManager.commitEdit(tr);
