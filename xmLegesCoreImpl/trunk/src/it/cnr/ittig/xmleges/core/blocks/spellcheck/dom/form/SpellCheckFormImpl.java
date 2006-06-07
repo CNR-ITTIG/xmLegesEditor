@@ -34,6 +34,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import com.jeta.forms.components.image.ImageComponent;
 
@@ -122,9 +123,10 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 	
 	int contaTr;
 
-//	//far partire lo spell dal cursore
-//	int parolaIniziale = 0;	
-//	boolean ricomincia = false;
+	//far partire lo spell dal cursore
+	int parolaIniziale = 0;	
+	boolean ricomincia = false;
+	boolean nodoAttivoTrovato = false;
 	
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
@@ -171,6 +173,31 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 		setStatusIcon(ICON_NONE);
 	}
 
+	
+	private void getFirstNode(Node node) {
+		//Funzione che cerca il primo nodo, dopo il nodo attivo, con una parola errata
+		
+		if (parolaIniziale != -1) return;
+		if (node.equals(activeNode))
+			nodoAttivoTrovato=true;
+		
+		if ((node.getNodeType() == Node.TEXT_NODE) && (nodoAttivoTrovato))	
+			for (int i=0; i<words.length; i++) 
+				if (words[i].getNode().equals(node)) { 
+	    		    	parolaIniziale = i;
+				        break;
+				}    	
+	    		
+		if (node.getNodeType() == Node.ELEMENT_NODE) {
+			NodeList list = node.getChildNodes();
+			for (int i = 0; i < list.getLength(); i++) 
+				//if (parolaIniziale != -1)
+					getFirstNode(list.item(i));
+		}
+
+	}
+
+	
 	public boolean openForm() {
 
 		this.start = selectionManager.getTextSelectionStart();
@@ -193,28 +220,34 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 			words = domSpellCheck.spellCheck(documentManager.getRootElement());
 		
 
-//		//far partire lo spell dal cursore
-//		parolaIniziale = 0;
-//		for (int i=0; i<words.length; i++)
-//
-//			//
-//			//  IF sotto deve controllare anche se HO SUPERATO il nodo corrente !!!! come??
-//			//
-//			if (words[i].getNode().equals(selectionManager.getActiveNode())) {
-//		      	 for (int j=i; j<words.length; j++) {
-//		      		 parolaIniziale = j;
-//		      		 if ((words[j].getSpellCheckWord().getStartOffset()>=start) || !(words[j].getNode().equals(selectionManager.getActiveNode()))) 
-//		    	               break;
-//		      	 }		 
-//		    	 if (parolaIniziale==0) ricomincia = false; 
-//		    	 else ricomincia = true; 
-//		    	 break;
-//		    }
+		//far partire lo spell dal cursore
+		if (null != words) {
+		  if ((start != end) || (selectionManager.getActiveNode()==null) || (selectionManager.getActiveNode()==documentManager.getRootElement())) 
+			parolaIniziale = 0;
+		  else {
+			nodoAttivoTrovato = false;
+			parolaIniziale = -1;			
+			getFirstNode(documentManager.getRootElement());
+			if (parolaIniziale==-1) parolaIniziale=0;
+		  }		
+		  for (int i=parolaIniziale; i<words.length; i++) {
+			     // seleziono la prima parola dopo il cursore
+			 	 for (int j=i; j<words.length; j++) {
+		      		 parolaIniziale = j;
+		      		 if ((words[j].getSpellCheckWord().getStartOffset()>=start) || !(words[j].getNode().equals(selectionManager.getActiveNode()))) 
+		    	               break;
+		      	 }		 
+		    	 if (parolaIniziale==0) ricomincia = false; 
+		    	 else ricomincia = true; 
+		    	 break;
+		  }    
+		}
+		
 		
 		if (null != words && words.length > 0 && misspelledIndex != -1) {			
 			misspelledIndex = showWord(words);
 		} else {
-			utilMsg.msgInfo("spellcheck.error.spellcheckend");
+			utilMsg.msgInfo("spellcheck.error.endstop");
 			return false;
 		}
 
@@ -295,9 +328,9 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 	
 	private int showWord(DomSpellCheckWord[] word) {
 		
-//		//far partire lo spell dal cursore
-//		int i = parolaIniziale;
-		int i = 0;
+		//far partire lo spell dal cursore
+		int i = parolaIniziale;
+		//int i = 0;
 		
 		do {
 			if (!isIndex(i) && !isIgnored(word[i]) && !isIgnoredAll(word[i]) && !isInserted(word[i])) {
@@ -336,21 +369,52 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 				ignored.add(words[misspelledIndex]);
 				misspelledIndex = showWord(words);
 				if (misspelledIndex == -1)
-					utilMsg.msgInfo("spellcheck.error.spellcheckend");
+					if (ricomincia) 
+						if (utilMsg.msgYesNo("spellcheck.error.endrepeat")) {
+							parolaIniziale = 0;   
+							ricomincia = false;
+							misspelledIndex = showWord(words);
+							if (misspelledIndex == -1) utilMsg.msgInfo("spellcheck.error.endstop");									
+						}
+						else utilMsg.msgInfo("spellcheck.error.endstop");
+					else utilMsg.msgInfo("spellcheck.error.endstop");
 			} else {
-				utilMsg.msgInfo("spellcheck.error.spellcheckend");
-			}
+				if (ricomincia) 
+					if (utilMsg.msgYesNo("spellcheck.error.endrepeat")) {
+						parolaIniziale = 0;   
+						ricomincia = false;
+						misspelledIndex = showWord(words);
+						if (misspelledIndex == -1) utilMsg.msgInfo("spellcheck.error.endstop");									
+					}
+				    else utilMsg.msgInfo("spellcheck.error.endstop");
+				else utilMsg.msgInfo("spellcheck.error.endstop");
+			}	
 		} else if (evt.getSource() == ignoreAllButton) {
 			logger.debug("ignore all");
-
 			if (misspelledIndex != -1 && misspelledIndex < words.length) {
 				ignoredAll.add(words[misspelledIndex]);
 				misspelledIndex = showWord(words);
 				if (misspelledIndex == -1)
-					utilMsg.msgInfo("spellcheck.error.spellcheckend");
+					if (ricomincia) 
+						if (utilMsg.msgYesNo("spellcheck.error.endrepeat")) {
+							parolaIniziale = 0;   
+							ricomincia = false;
+							misspelledIndex = showWord(words);
+							if (misspelledIndex == -1) utilMsg.msgInfo("spellcheck.error.endstop");									
+						}
+						else utilMsg.msgInfo("spellcheck.error.endstop");
+					else utilMsg.msgInfo("spellcheck.error.endstop");
 			} else {
-				utilMsg.msgInfo("spellcheck.error.spellcheckend");
-			}
+				if (ricomincia) 
+					if (utilMsg.msgYesNo("spellcheck.error.endrepeat")) {
+						parolaIniziale = 0;   
+						ricomincia = false;
+						misspelledIndex = showWord(words);
+						if (misspelledIndex == -1) utilMsg.msgInfo("spellcheck.error.endstop");									
+					}
+				    else utilMsg.msgInfo("spellcheck.error.endstop");
+				else utilMsg.msgInfo("spellcheck.error.endstop");
+			}				
 		} else if (evt.getSource() == replaceButton) {
 			logger.debug("replace on text");
 
@@ -371,16 +435,30 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 			if (misspelledIndex != -1 && words.length > 0) {
 				misspelledIndex = showWord(words);
 				if (misspelledIndex == -1)
-					utilMsg.msgInfo("spellcheck.error.spellcheckend");
-				
-			  } else {
-				utilMsg.msgInfo("spellcheck.error.spellcheckend");
-			  }
-			
+				  if (ricomincia) 
+					if (utilMsg.msgYesNo("spellcheck.error.endrepeat")) {
+						parolaIniziale = 0;   
+						ricomincia = false;
+						misspelledIndex = showWord(words);
+						if (misspelledIndex == -1) utilMsg.msgInfo("spellcheck.error.endstop");									
+					}
+					else utilMsg.msgInfo("spellcheck.error.endstop");
+				  else utilMsg.msgInfo("spellcheck.error.endstop");
+			} else {
+				if (ricomincia) 
+				  if (utilMsg.msgYesNo("spellcheck.error.endrepeat")) {
+					parolaIniziale = 0;   
+					ricomincia = false;
+					misspelledIndex = showWord(words);
+					if (misspelledIndex == -1) utilMsg.msgInfo("spellcheck.error.endstop");									
+				  }
+			      else utilMsg.msgInfo("spellcheck.error.endstop");
+				else utilMsg.msgInfo("spellcheck.error.endstop");
+			}	
 
 			for (int i = 0; i < words.length; i++) {
 				logger.debug("after replacement misspelled words: " + i + " " + words[i].getSpellCheckWord().toString());
-			}
+			}		
 		} else if (evt.getSource() == replaceAllButton) {
 
 			logger.debug("replace all");
@@ -404,10 +482,26 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 			if (misspelledIndex != -1 && misspelledIndex < words.length) {
 				misspelledIndex = showWord(words);
 				if (misspelledIndex == -1)
-					utilMsg.msgInfo("spellcheck.error.spellcheckend");
+				  if (ricomincia) 
+					if (utilMsg.msgYesNo("spellcheck.error.endrepeat")) {
+						parolaIniziale = 0;   
+						ricomincia = false;
+						misspelledIndex = showWord(words);
+						if (misspelledIndex == -1) utilMsg.msgInfo("spellcheck.error.endstop");									
+					}
+					else utilMsg.msgInfo("spellcheck.error.endstop");
+				  else utilMsg.msgInfo("spellcheck.error.endstop");
 			} else {
-				utilMsg.msgInfo("spellcheck.error.spellcheckend");
-			}
+			  if (ricomincia) 
+				if (utilMsg.msgYesNo("spellcheck.error.endrepeat")) {
+					parolaIniziale = 0;   
+					ricomincia = false;
+					misspelledIndex = showWord(words);
+					if (misspelledIndex == -1) utilMsg.msgInfo("spellcheck.error.endstop");									
+				}
+			    else utilMsg.msgInfo("spellcheck.error.endstop");
+			  else utilMsg.msgInfo("spellcheck.error.endstop");
+			}	
 
 			for (int i = 0; i < words.length; i++) {
 				logger.debug("after replacementall misspelled words: " + i + " " + words[i].getSpellCheckWord().toString());
@@ -415,27 +509,43 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 		}
 		else if(evt.getSource() == addButton) {
 		    logger.debug("add word");
-		    
-			DomSpellCheckWord word = words[misspelledIndex];
-			String oldText = word.getNode().getNodeValue();
+		    if (misspelledIndex != -1 && misspelledIndex < words.length) {
+			  DomSpellCheckWord word = words[misspelledIndex];
+			  String oldText = word.getNode().getNodeValue();
 			
-			domSpellCheck.getSpellCheck().addSuggestion(oldText.substring(word.getSpellCheckWord().getStartOffset(),word.getSpellCheckWord().getEndOffset()),this.getWord(),false);			        
+			  domSpellCheck.getSpellCheck().addSuggestion(oldText.substring(word.getSpellCheckWord().getStartOffset(),word.getSpellCheckWord().getEndOffset()),this.getWord(),false);			        
 			      
-			//if (!this.getWord().equals(oldText.substring(word.getSpellCheckWord().getStartOffset(),word.getSpellCheckWord().getEndOffset())))
-			replaceAllWord(words, misspelledIndex);
+ 			  //if (!this.getWord().equals(oldText.substring(word.getSpellCheckWord().getStartOffset(),word.getSpellCheckWord().getEndOffset())))
+			  replaceAllWord(words, misspelledIndex);
 			
-			inserted_index.add(new Integer(misspelledIndex));
+			  inserted_index.add(new Integer(misspelledIndex));
 			
-			if (misspelledIndex != -1 && misspelledIndex < words.length) {
+			  if (misspelledIndex != -1 && misspelledIndex < words.length) {
 				misspelledIndex = showWord(words);
 				if (misspelledIndex == -1)
-					utilMsg.msgInfo("spellcheck.error.spellcheckend");
-			} else {
-				utilMsg.msgInfo("spellcheck.error.spellcheckend");
-			}
-			
-				
-		    
+				  if (ricomincia) 
+					if (utilMsg.msgYesNo("spellcheck.error.endrepeat")) {
+						parolaIniziale = 0;   
+						ricomincia = false;
+						misspelledIndex = showWord(words);
+						if (misspelledIndex == -1) utilMsg.msgInfo("spellcheck.error.endstop");									
+					}
+					else utilMsg.msgInfo("spellcheck.error.endstop");
+				  else utilMsg.msgInfo("spellcheck.error.endstop");
+			  } else {
+			    if (ricomincia) 
+				  if (utilMsg.msgYesNo("spellcheck.error.endrepeat")) {
+					parolaIniziale = 0;   
+					ricomincia = false;
+					misspelledIndex = showWord(words);
+					if (misspelledIndex == -1) utilMsg.msgInfo("spellcheck.error.endstop");									
+				  }
+			      else utilMsg.msgInfo("spellcheck.error.endstop");
+			    else utilMsg.msgInfo("spellcheck.error.endstop");
+			  }	
+		    }
+		    else 
+			  utilMsg.msgInfo("spellcheck.error.endstop");
 		}
 	}
 		
