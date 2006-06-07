@@ -139,6 +139,8 @@ public class NdrImpl implements Ndr, Loggable, Serviceable {
 		}
 	}
 
+	
+	// FIXME  di redazionali ce ne puo' essere più di uno (ANNESSI)
 	private boolean insTesta(Document doc, Node nota) {
 		Node red = nirUtilDom.checkAndCreateMeta(doc, "redazionale");
 		red.appendChild(nota);
@@ -157,9 +159,7 @@ public class NdrImpl implements Ndr, Loggable, Serviceable {
 		UtilDom.setAttributeValue(ndr, "value", value);
 
 		try {
-			if (dtdRulesManager.queryTextContent(ndr)) { // per la
-															// compatibilita'
-															// con la dtd 1.1
+			if (dtdRulesManager.queryTextContent(ndr)) { 
 				UtilDom.setTextNode((Node) ndr, "(" + value + ")");
 				logger.debug(" (1) mette il testo nella nota ... ");
 			} else
