@@ -28,7 +28,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.ParseException;
 import java.util.Vector;
-import java.util.logging.ErrorManager;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -411,7 +410,6 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 	public boolean openForm() {
 		form.setSize(650, 500);
 		form.showDialog();
-
 		return form.isOk();
 	}
 
