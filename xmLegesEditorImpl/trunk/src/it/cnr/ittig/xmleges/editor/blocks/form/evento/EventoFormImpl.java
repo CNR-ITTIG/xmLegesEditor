@@ -170,9 +170,9 @@ public class EventoFormImpl implements EventoForm, Loggable, Serviceable, Initia
 		}
 	}
 
-	public Vector getRemovedEvents() {
-		return ciclodivitaeventoForm.getLastRemovedEvents();
-	}
+//	public Vector getRemovedEvents() {
+//		return ciclodivitaeventoForm.getLastRemovedEvents();
+//	}
 
 	public void setTextField(JTextField textField) {
 		this.textField = textField;

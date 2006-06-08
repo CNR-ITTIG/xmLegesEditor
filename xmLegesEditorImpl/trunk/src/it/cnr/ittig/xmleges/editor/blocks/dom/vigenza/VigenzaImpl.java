@@ -93,7 +93,7 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 		if (node != null && node.getParentNode() != null) {
 			try {
 				return (node.getNodeName()!=null && 
-						(dtdRulesManager.queryIsValidAttribute(node.getNodeName(), "status")
+						(dtdRulesManager.queryIsValidAttribute(node.getNodeName(), "iniziovigore")
 								|| UtilDom.isTextNode(node)) 
 						);
 			} catch (DtdRulesManagerException e) {

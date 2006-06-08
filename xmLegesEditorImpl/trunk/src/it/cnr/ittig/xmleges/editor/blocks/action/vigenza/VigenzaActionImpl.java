@@ -215,14 +215,17 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 	
 	public Node getCiclodiVitaNode() {
 		Document doc = documentManager.getDocumentAsDom();
-		Node ciclodivitaNode = doc.getElementsByTagName("ciclodivita").item(0);
+		Node ciclodivitaNode = doc.getElementsByTagName("ciclodivita")!=null?doc.getElementsByTagName("ciclodivita").item(0):null;
 		return ciclodivitaNode;
 	}
 
 	public void setCiclodiVitaNode(Node ciclodivitaNode) {
 		Document doc = documentManager.getDocumentAsDom();
-		Node oldCiclodivita=doc.getElementsByTagName("ciclodivita").item(0);
-		oldCiclodivita.getParentNode().replaceChild(ciclodivitaNode,oldCiclodivita);
+//		doc.importNode(ciclodivitaNode,true);
+		
+		Node metaNode=doc.getElementsByTagName("meta").item(0);
+		//FIXME: il replacechild non copia esattamente tutto il nodo, setta a null la relazione
+		metaNode.replaceChild(ciclodivitaNode,doc.getElementsByTagName("ciclodivita").item(0));
 		
 	}		
 

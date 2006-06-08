@@ -8,9 +8,12 @@ import it.cnr.ittig.services.manager.Logger;
 import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
+import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.FormVerifier;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.MetaCiclodivita;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 import it.cnr.ittig.xmleges.editor.services.form.evento.EventoForm;
 import it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita.CiclodiVitaEventoForm;
@@ -21,7 +24,9 @@ import javax.swing.JList;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * <h1>Implementazione del servizio
@@ -76,8 +81,9 @@ public class VigenzaFormImpl implements VigenzaForm, FormVerifier, Loggable, Ser
 	
 	String errorMessage = "";
 	
+	DocumentManager documentManager;
 	
-	
+	MetaCiclodivita ciclodivita; //dom
 	
 	
 
@@ -92,6 +98,7 @@ public class VigenzaFormImpl implements VigenzaForm, FormVerifier, Loggable, Ser
 		eventoiniziovigoreform = (EventoForm) serviceManager.lookup(EventoForm.class);
 		eventofinevigoreform = (EventoForm) serviceManager.lookup(EventoForm.class);
 		
+		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);		
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
@@ -143,45 +150,94 @@ public Evento getInizioVigore() {
 	}
 
 	public boolean verifyForm() {
+		
+		
+		//inizio obbligatorio		
+		//poi se esiste anche la fine allora lo status è obbligatorio
+		//quindi posso fare le ricerche per iniziovigore
+		//messaggio se premo senza fare nulla segnalazione del fatto
 		boolean isvalid=true;
-		isvalid = (eventoiniziovigoreform.getEvento()!=null)||(eventofinevigoreform.getEvento()!=null);
+		isvalid = (eventoiniziovigoreform.getEvento()!=null)||(eventofinevigoreform.getEvento()!=null)||(vigenzaStatus.getSelectedItem()!=null);
+		
 		if(!isvalid){
+			//tutti i campi sono vuoti ma il msg non si vede perche return true;
 			errorMessage = "editor.selezionevigenza.msg.err.eliminavigenza";
 			return true;
-		}else{//solo se esiste almeno un evento devo controllare lo status
-			isvalid=(vigenzaStatus.getSelectedItem()!=null);
-			if(!isvalid){
-				errorMessage = "editor.selezionevigenza.msg.err.statusvuoto";				
-				return false;
+		}else{//solo se esiste la finevigore lo status è obbligatorio
 			
+			isvalid=eventoiniziovigoreform.getEvento()!=null;
+			if(!isvalid){
+				errorMessage = "editor.selezionevigenza.msg.err.iniziovigorevuoto";				
+				return false;				
 			}
 			
-//			Vector removed;
-//			if(eventofinevigoreform.getEvento()==null){
-//				removed=eventofinevigoreform.getRemovedEvents();			
-//				for(int i=0;i<removed.size();i++){				
-//					if(((String)removed.elementAt(i)).equals(eventoiniziovigoreform.getEvento().getId())){
-//						int j=5;
-//						eventoiniziovigoreform.setEvento(null);		
-//						eventoiniziovigoreform.setTextField(new JTextField());
-//					}				
-//				}
-//			}
-//			else if(eventoiniziovigoreform.getEvento()==null){
-//				removed=eventoiniziovigoreform.getRemovedEvents();			
-//				for(int i=0;i<removed.size();i++){				
-//					if(((String)removed.elementAt(i)).equals(eventofinevigoreform.getEvento().getId())){
-//						int j=5;
-//						eventofinevigoreform.setEvento(null);
-//						eventofinevigoreform.setTextField(new JTextField());
-//						
-//					}				
-//				}
-//			
-//			}
+			if(eventofinevigoreform.getEvento()!=null){
+				isvalid=(vigenzaStatus.getSelectedItem()!=null);
+			
+				if(!isvalid){
+					errorMessage = "editor.selezionevigenza.msg.err.statusvuoto";				
+					return false;				
+				}
+			}
+			
+			Evento eventoiniziovigore=eventoiniziovigoreform.getEvento();
+			Evento eventofinevigore=eventofinevigoreform.getEvento();
+			
+			Document doc = documentManager.getDocumentAsDom();
+			NodeList eventiList = doc.getElementsByTagName("evento");
+			
+			isvalid=eventiList.getLength()>0;
+			
+			if(!isvalid){
+				errorMessage="editor.selezionevigenza.msg.err.nessunevento";
+				eventoiniziovigoreform.setEvento(null);
+				eventofinevigoreform.setEvento(null);
+				return false;
+			}
+			
+			
+			String id, data, tipo, fonte=null;
+			
+			
+			for (int i = 0; i < eventiList.getLength();i++) {
+				Node eventoNode = eventiList.item(i);
+				id = eventoNode.getAttributes().getNamedItem("id") != null ? eventoNode.getAttributes().getNamedItem("id").getNodeValue() : null;				
+				data = eventoNode.getAttributes().getNamedItem("data") != null ? eventoNode.getAttributes().getNamedItem("data").getNodeValue() : null;
+				tipo = eventoNode.getAttributes().getNamedItem("tipo") != null ? eventoNode.getAttributes().getNamedItem("tipo").getNodeValue() : null;
+				Node nodeFonte = eventoNode.getAttributes().getNamedItem("fonte");
+				if (nodeFonte != null) {
+					fonte = nodeFonte.getNodeValue();					
+				}
+				
+				isvalid=id.equals(eventoiniziovigore.getId())
+					&& data.equals(eventoiniziovigore.getData())
+					&& tipo.equals(eventoiniziovigore.getTipoEvento())
+					&& fonte.equals(eventoiniziovigore.getFonte().getId());
+				
+				if(!isvalid){
+					errorMessage = "editor.selezionevigenza.msg.err.iniziovigoremod";
+					eventoiniziovigoreform.setEvento(null);
+					return false;				
+				}
+				if(eventofinevigore!=null){
+					isvalid=id.equals(eventofinevigore.getId())
+					&& data.equals(eventofinevigore.getData())
+					&& tipo.equals(eventofinevigore.getTipoEvento())
+					&& fonte.equals(eventofinevigore.getFonte().getId());
+		
+					if(!isvalid){
+						errorMessage = "editor.selezionevigenza.msg.err.finevigoremod";
+						eventofinevigoreform.setEvento(null);
+						return false;				
+					}
+		
+				}
+				
+			}
 			
 		}
-		return isvalid;
+		
+		return true;
 
 	}
 

@@ -107,10 +107,6 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
     
     UtilMsg utilMsg;
     
-    /**
-	 * vettore di eventi rimossi nella form
-	 */
-	Vector lastRemovedEvents=null;
     
     /**
      * Editor per il ListTextField con la lista degli eventi
@@ -131,13 +127,10 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
         }
         
         public Object getElement() {
-            if (!checkData())
-                return null;
-            else{
-            	
+
                 return e;
                 
-            }
+
         }
         
 
@@ -216,7 +209,7 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
 				if(tagTipoRelazioneSottoFormDatiEvento.getItemCount()<6)
 					tagTipoRelazioneSottoFormDatiEvento.addItem("originale");
 			}
-//			
+			
 
 						
 		}
@@ -348,7 +341,6 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
 								
 									if(vigenze[j].getEFineVigore()!=null){
 										if(vigenze[j].getEFineVigore().getId().equals(e.getId())){											
-												//vigenze[j].setEFineVigore(null);
 												eligibleVigs.add(vigenze[j]);
 												((VigenzaEntity)eligibleVigs.elementAt(eligibleVigs.size()-1)).setEFineVigore(null);
 										}
@@ -381,7 +373,7 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
 				}else
 					vigToUpdate=null;
 				
-				lastRemovedEvents.add(e.getId());
+
 				e.setFonte(null);
 				e = null;
 				dataFormDatiEvento.set(null);
@@ -484,7 +476,6 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
 			}
 			
 		});		
-		lastRemovedEvents=new Vector();
 		
 		
 		tagEffettoTipoSFormDatiEvento.setSelectedItem(null);
@@ -772,9 +763,7 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
 		return vigToUpdate;
 	}
 
-	public Vector getLastRemovedEvents() {
-		return lastRemovedEvents;
-	}
+
 
 }
 

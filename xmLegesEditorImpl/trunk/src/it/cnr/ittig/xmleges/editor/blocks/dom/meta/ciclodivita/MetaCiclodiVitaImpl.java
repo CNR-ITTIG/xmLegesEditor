@@ -236,6 +236,8 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 		NodeList eventiList = doc.getElementsByTagName("evento");
 		Vector eventiVect = new Vector();
 		String id, data, tipo;
+		Relazione fonte;
+		
 
 		for (int i = 0; i < eventiList.getLength();i++) {
 			Node eventoNode = eventiList.item(i);
@@ -244,7 +246,7 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 			tipo = eventoNode.getAttributes().getNamedItem("tipo") != null ? eventoNode.getAttributes().getNamedItem("tipo").getNodeValue() : null;
 			Node nodeFonte = eventoNode.getAttributes().getNamedItem("fonte");
 			if (nodeFonte != null) {
-				Relazione fonte = getRelazioneById(nodeFonte.getNodeValue());
+				fonte = getRelazioneById(nodeFonte.getNodeValue())!=null ? getRelazioneById(nodeFonte.getNodeValue()) : null;
 				eventiVect.add(new Evento(id, data, fonte,tipo));
 			}
 		}
@@ -332,6 +334,7 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 	
 	private Relazione getRelazioneById(String relId) {
 
+
 		Document doc = documentManager.getDocumentAsDom();
 		Node relNode = doc.getElementById(relId);
 		if(relNode != null){
@@ -377,7 +380,7 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 		NodeList lista = doc.getElementsByTagName("*");
 		for(int i=0; i<lista.getLength();i++){
 			if(lista.item(i).getAttributes()!=null){
-				if(lista.item(i).getAttributes().getNamedItem("status")!=null){
+				if(lista.item(i).getAttributes().getNamedItem("iniziovigore")!=null){
 					
 					totali.add(lista.item(i));
 				}
