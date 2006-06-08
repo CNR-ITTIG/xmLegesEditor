@@ -75,4 +75,6 @@ public interface MetaCiclodivita extends Service {
 	 * @return: restituisce l'elenco delle vigenze del documento
 	 */
 	public VigenzaEntity[] getVigenze();
+	
+	
 }

@@ -74,5 +74,4 @@ public interface CiclodiVitaEventoForm extends Service {
 	
 	public VigenzaEntity[] getVigToUpdate();
 	
-	public Vector getLastRemovedEvents();
 }

@@ -52,7 +52,6 @@ public interface EventoForm extends Service, CommonForm {
 	public boolean openForm();
 	
 	
-	public Vector getRemovedEvents();
 	
 	public void setTextField(JTextField textField);
 	
