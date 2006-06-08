@@ -19,6 +19,8 @@ import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.action.vigenza.VigenzaAction;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.MetaCiclodivita;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.Vigenza;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 import it.cnr.ittig.xmleges.editor.services.form.vigenza.VigenzaForm;
@@ -76,6 +78,8 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 	SelectionManager selectionManager;
 
 	Vigenza vigenza;
+	
+	MetaCiclodivita ciclodivita;
 
 	VigenzaForm vigenzaForm;
 	
@@ -103,6 +107,7 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
+		ciclodivita = (MetaCiclodivita) serviceManager.lookup(MetaCiclodivita.class);
 		vigenza = (Vigenza) serviceManager.lookup(Vigenza.class);
 		nirUtilUrn = (NirUtilUrn) serviceManager.lookup(NirUtilUrn.class);
 		vigenzaForm = (VigenzaForm) serviceManager.lookup(VigenzaForm.class);
@@ -156,20 +161,24 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 				vigenzaForm.setTestoselezionato(testo_sel);
 			}
 			
-			//Node ciclodiVitaSaved=getCiclodiVitaNode().cloneNode(true);
-			if(vigenzaForm.openForm(active)){
-				
+			
+			//Node ciclodiVitaSaved=getCiclodiVitaNode()!=null?getCiclodiVitaNode().cloneNode(true):null;
+			//ciclodiVitaSaved = UtilDom.setRecursiveIdAttribute(ciclodiVitaSaved);
+			
+			Evento[] oldEventi = ciclodivita.getEventi();
+			Relazione[] oldRelazioni = ciclodivita.getRelazioni();
+			
+			if(vigenzaForm.openForm(active)){	
 				Node toselect = vigenza.setVigenza(active,testo_sel, start,end, vigenzaForm.getVigenza());
 				//vigenza.updateVigenzaOnDoc(vigenzaForm.getVigenza());
-								
 				if(toselect!=null)
 					vigenza.setTipoDocVigenza();
 				setModified(toselect);
-									
 			}
-		//	else{//se preme annulla ripristina il nodo salvato
-		//		setCiclodiVitaNode(ciclodiVitaSaved);
-		//	}
+			else{//se preme annulla ripristina il vecchio ciclodivita
+				ciclodivita.setEventi(oldEventi);
+	   		    ciclodivita.setRelazioni(oldRelazioni);
+			}
 		}
 	}
 	
@@ -213,20 +222,22 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 			logger.debug(" modified null in set modified ");
 	}
 	
-	public Node getCiclodiVitaNode() {
-		Document doc = documentManager.getDocumentAsDom();
-		Node ciclodivitaNode = doc.getElementsByTagName("ciclodivita")!=null?doc.getElementsByTagName("ciclodivita").item(0):null;
-		return ciclodivitaNode;
-	}
 
-	public void setCiclodiVitaNode(Node ciclodivitaNode) {
-		Document doc = documentManager.getDocumentAsDom();
-//		doc.importNode(ciclodivitaNode,true);
-		
-		Node metaNode=doc.getElementsByTagName("meta").item(0);
-		//FIXME: il replacechild non copia esattamente tutto il nodo, setta a null la relazione
-		metaNode.replaceChild(ciclodivitaNode,doc.getElementsByTagName("ciclodivita").item(0));
-		
-	}		
+//	public Node getCiclodiVitaNode() {
+//		Document doc = documentManager.getDocumentAsDom();
+//		Node ciclodivitaNode = doc.getElementsByTagName("ciclodivita").getLength()>0?doc.getElementsByTagName("ciclodivita").item(0):null;
+//		return ciclodivitaNode;
+//	}
+//
+//	public void setCiclodiVitaNode(Node ciclodivitaNode) {
+//		if(ciclodivitaNode != null){
+//			Document doc = documentManager.getDocumentAsDom();
+//			doc.importNode(ciclodivitaNode,true);
+//			Node oldCiclodivita=doc.getElementsByTagName("ciclodivita").item(0);
+//			oldCiclodivita.getParentNode().replaceChild(ciclodivitaNode,oldCiclodivita);
+//		}
+//	}		
+
+
 
 }
