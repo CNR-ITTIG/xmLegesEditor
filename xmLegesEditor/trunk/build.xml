@@ -57,6 +57,7 @@
 		<include name="**/*.spp" />
 		<include name="**/*.bat" />
 		<include name="**/*.sh" />
+		<include name="**/*.dar" />
 	</patternset>
 
 	<target name="init">
