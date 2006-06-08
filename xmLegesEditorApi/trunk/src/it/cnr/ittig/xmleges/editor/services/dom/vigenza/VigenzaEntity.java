@@ -84,7 +84,10 @@ public class VigenzaEntity {//implements Serviceable{
 		
 	}
 	public String getStatus() {
-		return status;
+		if(status!=null && !status.equals("--"))
+			return status;
+		else 
+			return null;
 	}
 
 
