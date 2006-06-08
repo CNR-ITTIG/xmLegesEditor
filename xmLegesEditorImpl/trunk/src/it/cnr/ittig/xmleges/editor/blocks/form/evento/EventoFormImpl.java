@@ -15,7 +15,6 @@ import it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita.CiclodiVitaEve
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
-import java.util.Vector;
 
 import javax.swing.AbstractAction;
 import javax.swing.AbstractButton;
