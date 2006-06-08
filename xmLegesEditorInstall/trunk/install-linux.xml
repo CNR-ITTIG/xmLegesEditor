@@ -7,14 +7,15 @@
 	-->
 	<info>
 		<appname>xmLegesEditor</appname>
-		<appversion>1.0 rc5</appversion>
+		<appversion>2.0 rc1</appversion>
 		<authors>
 			<author name="Mirco Taddei" email="m.taddei@ittig.cnr.it"/>
-			<author name="Enrico Francesconi" email="francesconi@ittig.cnr.it"/>
 			<author name="Tommaso Agnoloni" email="agnoloni@ittig.cnr.it"/>
-			<author name="Lorenzo Sarti" email="sarti@dii.unisi.it"/>
+			<author name="Enrico Francesconi" email="francesconi@ittig.cnr.it"/>
 			<author name="Maurizio Mollicone" email="mollicone@ittig.cnr.it"/>
 			<author name="Lorenzo Bacci" email="lorenzobacci@gmail.com"/>
+			<author name="Francesca Uccheddu" email="francesca.uccheddu@gmail.com"/>
+			<author name="Gerardo Giardiello" email="g.giardiello@gmail.com"/>
 		</authors>
 		<url>http://www.ittig.cnr.it/xmleges</url>
 	</info>

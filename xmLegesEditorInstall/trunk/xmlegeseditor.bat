@@ -7,7 +7,6 @@ set CLASSPATH=%CLASSPATH%;xmLegesEditorApi.jar
 set CLASSPATH=%CLASSPATH%;xmLegesEditorImpl.jar
 set CLASSPATH=%CLASSPATH%;lib/dom4j-1.5.2.jar
 set CLASSPATH=%CLASSPATH%;lib/formsrt.jar
-set CLASSPATH=%CLASSPATH%;lib/jazzy-core.jar
 set CLASSPATH=%CLASSPATH%;lib/jaxen-1.1-beta-4.jar
 set CLASSPATH=%CLASSPATH%;lib/log4j-1.2.9.jar
 set CLASSPATH=%CLASSPATH%;lib/mail.jar
@@ -17,5 +16,7 @@ set CLASSPATH=%CLASSPATH%;lib/xml-apis-2.7.1.jar
 set CLASSPATH=%CLASSPATH%;lib/fop.jar
 set CLASSPATH=%CLASSPATH%;lib/batik.jar
 set CLASSPATH=%CLASSPATH%;lib/avalon-framework-cvs-20020806.jar
+set CLASSPATH=%CLASSPATH%;lib/jfor-0.7.2rc1.jar
+set CLASSPATH=%CLASSPATH%;lib/xsc.jar
 
 jre\bin\java -Xmx256m it.cnr.ittig.services.manager.Run xmLegesEditor.xml images\editor\xmLegesEditor.png
