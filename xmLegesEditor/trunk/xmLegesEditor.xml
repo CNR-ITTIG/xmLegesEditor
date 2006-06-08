@@ -5,7 +5,7 @@
 File di composizione dell'applicazione xmLegesEditor.
 
 author       : Mirco Taddei
-version      : 1.0 rc2
+version      : 2.0 rc1
 copyright (C): 2004 - 2005
                Istituto di Teoria e Tecniche dell'Informazione Giuridica (ITTIG)
                Consiglio Nazionale delle Ricerche - Italy
@@ -40,14 +40,14 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		
 		<root>
 			<priority value ="error" /> 
-			<appender-ref ref="ConsoleAppender" />
- 			<!--appender-ref ref="BugReportAppender"/-->
+			<!--  appender-ref ref="ConsoleAppender" /-->
+ 			<appender-ref ref="BugReportAppender"/> 
  			<!--appender-ref ref="FileAppender" /-->
 		</root>
 		
-<!--
-        <logger name="dtd-rules-manager">
-            <level value="error"/>
+<!-- 
+        <logger name="it.cnr.ittig.xmleges.core.blocks.spellcheck.dom.form.SpellCheckFormImpl">
+            <level value="debug"/>
         </logger> 
 -->
 
@@ -158,7 +158,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  class="it.cnr.ittig.xmleges.core.blocks.version.VersionImpl"
         >
         <configuration>
-            <version>1.0 rc5</version>
+            <version>2.0 rc1</version>
             <url>http://repo.ittig.cnr.it/nireditor2/versions.txt</url>
         </configuration>
     </component>
@@ -183,8 +183,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <!-- ================================================== SPELL CHECK === -->
     <!-- ================================================================== -->
     
+  
     <component	class="it.cnr.ittig.xmleges.core.blocks.spellcheck.SpellCheckImpl" />
-
+	 
+	 
     <component	class="it.cnr.ittig.xmleges.core.blocks.spellcheck.dom.DomSpellCheckImpl" />
 
     
@@ -197,7 +199,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     
     
     <!-- ================================================================== -->
-    <!-- =========================================== CONTENTS CALIDATOR === -->
+    <!-- =========================================== CONTENTS VALIDATOR === -->
     <!-- ================================================================== -->
     <component  class="it.cnr.ittig.xmleges.editor.blocks.contents.ContentsValidatorImpl" />
     
@@ -225,7 +227,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <menu action="file.export">
                     	<item action="file.export.browser" />
                         <item action="file.export.pdf" />
-    <!--                        <item action="file.export.rtf" />          -->               
+                        <!-- item action="file.export.rtf" /-->               
                         <item action="file.export.html" />
                     </menu>
                     <separator/>
@@ -298,13 +300,15 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 <menu action="menu.tools">
                     <item action="tool.bugreport" />
                     <separator />
-                    <item action="tool.contents" />
-                    <separator />
+                    <!-- action contents validator -->
+                    <!-- item action="tool.contents" /-->
+                    <!-- separator /-->
                     <item action="tool.spellcheck" />
-                    <!--item action="tool.spellcheck.auto" /-->
+                    <!-- item action="tool.spellcheck.auto" /-->
                     <separator />
-                    <item action="tool.version" />
-                    <separator />
+                    <!--  action aggiornamenti -->
+                    <!-- item action="tool.version" /-->
+                    <!-- separator /-->
                     <item action="tool.xpatheval" />
                 </menu>
                 <menu action="menu.editor">
@@ -423,8 +427,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <item action="file.print" />
                 </toolbar>
                 <toolbar name="edit" floatable="false" rollover="true">
-                    <item action="tool.contents" />
-                    <separator />
+                    <!-- item action="tool.contents" /-->
+                    <!-- separator /-->
                     <item action="tool.spellcheck" />
                     <!--item action="tool.spellcheck.auto" /-->
                 </toolbar>
@@ -523,11 +527,11 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 </toolbar>
             </tools>
             <status>
-                <slot relsize="0.7" name="info" delay="5000" />
+                <slot relsize="0.6" name="info" delay="5000" />
                 <slot relsize="0.1" name="renum" action="editor.rinumerazione"/>
-                <slot relsize="0.1" name="contents" action="tool.contents"/>
-                <slot relsize="0.1" name="file-validator" action="file.validator"/>
+                <!-- slot relsize="0.1" name="contents" action="tool.contents"/-->
                 <!--slot relsize="0.1" name="spellcheck" action="tool.spellcheck.auto"/-->
+                <slot relsize="0.1" name="file-validator" action="file.validator"/>
             </status>
         </configuration>
     </component>
@@ -669,9 +673,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 class="it.cnr.ittig.xmleges.core.blocks.action.tool.bugreport.BugReportActionImpl"
     />
     
-    <component  activation="startup"
+    <!-- component  activation="startup"
                 class="it.cnr.ittig.xmleges.core.blocks.action.tool.contents.ContentsValidatorActionImpl"
-    />
+    /-->
     
     <component  activation="startup"
                 class="it.cnr.ittig.xmleges.core.blocks.action.tool.newversion.ToolNewVersionActionImpl"
@@ -1132,8 +1136,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  class="it.cnr.ittig.xmleges.core.blocks.util.msg.UtilMsgImpl" />
     
     <component  class="it.cnr.ittig.xmleges.core.blocks.util.pdf.UtilPdfImpl" />
-    
-<!--    <component  class="it.cnr.ittig.xmleges.core.blocks.util.rtf.UtilRtfImpl" />    -->
+
+    <!--component  class="it.cnr.ittig.xmleges.core.blocks.util.rtf.UtilRtfImpl" /-->
+
 
     <component  class="it.cnr.ittig.xmleges.core.blocks.util.rulesmanager.UtilRulesManagerImpl">
         <configuration>
@@ -1166,17 +1171,18 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 <element name="h:li"/>
                 <element name="h:ul"/>
                 <element name="h:ol"/>
+                <element name="h:span"/>
                 <!-- ciclodivita -->
-                <!--element name="ciclodivita" /-->
-                <!--element name="eventi" /-->
-                <!--element name="relazioni" /--> 
-                <!--element name="evento" /-->
-                <!--element name="originale" /-->
-                <!--element name="attiva" /-->
-                <!--element name="passiva" /-->
-                <!--element name="haallegato" /-->
-                <!--element name="allegatodi" /-->
-                <!--element name="giurisprudenza" /-->                
+                <element name="ciclodivita" />
+                <element name="eventi" />
+                <element name="relazioni" /> 
+                <element name="evento" />
+                <element name="originale" />
+                <element name="attiva" />
+                <element name="passiva" />
+                <element name="haallegato" />
+                <element name="allegatodi" />
+                <element name="giurisprudenza" />                
                 <element name="#PCDATA"/>
             </exclude>           
         </configuration>
