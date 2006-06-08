@@ -111,6 +111,7 @@ public class VigenzaFormImpl implements VigenzaForm, FormVerifier, Loggable, Ser
 		form.replaceComponent("editor.selezionevigenza.eventofinevigore", eventofinevigoreform.getAsComponent());
 
 		vigenzaStatus = (JComboBox) form.getComponentByName("editor.selezionevigenza.status");
+		vigenzaStatus.addItem("--");
 		vigenzaStatus.addItem("omissis");
 		vigenzaStatus.addItem("abrogato");
 		vigenzaStatus.addItem("annullato");
@@ -140,7 +141,10 @@ public Evento getInizioVigore() {
 	
 
 	public String getStatus() {
-		return (String)vigenzaStatus.getSelectedItem();
+		if(vigenzaStatus.getSelectedItem().equals("--"))
+			return null;
+		else
+			return (String)vigenzaStatus.getSelectedItem();
 	}
 	
 	/////////////////////////////////////////////////////////////////////////
@@ -157,7 +161,8 @@ public Evento getInizioVigore() {
 		//quindi posso fare le ricerche per iniziovigore
 		//messaggio se premo senza fare nulla segnalazione del fatto
 		boolean isvalid=true;
-		isvalid = (eventoiniziovigoreform.getEvento()!=null)||(eventofinevigoreform.getEvento()!=null)||(vigenzaStatus.getSelectedItem()!=null);
+		isvalid = (eventoiniziovigoreform.getEvento()!=null)||(eventofinevigoreform.getEvento()!=null)||
+											( (vigenzaStatus.getSelectedItem()!=null)&&(!vigenzaStatus.getSelectedItem().equals("--")));
 		
 		if(!isvalid){
 			//tutti i campi sono vuoti ma il msg non si vede perche return true;
@@ -172,7 +177,7 @@ public Evento getInizioVigore() {
 			}
 			
 			if(eventofinevigoreform.getEvento()!=null){
-				isvalid=(vigenzaStatus.getSelectedItem()!=null);
+				isvalid=(vigenzaStatus.getSelectedItem()!=null)&&(!vigenzaStatus.getSelectedItem().equals("--"));
 			
 				if(!isvalid){
 					errorMessage = "editor.selezionevigenza.msg.err.statusvuoto";				
@@ -197,7 +202,12 @@ public Evento getInizioVigore() {
 			
 			
 			String id, data, tipo, fonte=null;
-			
+			boolean isvalidInizio=false;
+			boolean isvalidFine;
+			if(eventofinevigore!=null){
+				isvalidFine=false;
+			}else isvalidFine=true;
+
 			
 			for (int i = 0; i < eventiList.getLength();i++) {
 				Node eventoNode = eventiList.item(i);
@@ -209,30 +219,30 @@ public Evento getInizioVigore() {
 					fonte = nodeFonte.getNodeValue();					
 				}
 				
-				isvalid=id.equals(eventoiniziovigore.getId())
+				isvalidInizio = isvalidInizio || (id.equals(eventoiniziovigore.getId())
 					&& data.equals(eventoiniziovigore.getData())
 					&& tipo.equals(eventoiniziovigore.getTipoEvento())
-					&& fonte.equals(eventoiniziovigore.getFonte().getId());
+					&& fonte.equals(eventoiniziovigore.getFonte().getId()));
 				
-				if(!isvalid){
-					errorMessage = "editor.selezionevigenza.msg.err.iniziovigoremod";
-					eventoiniziovigoreform.setEvento(null);
-					return false;				
-				}
+				
 				if(eventofinevigore!=null){
-					isvalid=id.equals(eventofinevigore.getId())
+					isvalidFine = isvalidFine || (id.equals(eventofinevigore.getId())
 					&& data.equals(eventofinevigore.getData())
 					&& tipo.equals(eventofinevigore.getTipoEvento())
-					&& fonte.equals(eventofinevigore.getFonte().getId());
-		
-					if(!isvalid){
-						errorMessage = "editor.selezionevigenza.msg.err.finevigoremod";
-						eventofinevigoreform.setEvento(null);
-						return false;				
-					}
+					&& fonte.equals(eventofinevigore.getFonte().getId()));
 		
 				}
 				
+			}
+			if(!isvalidInizio){
+				errorMessage = "editor.selezionevigenza.msg.err.iniziovigoremod";
+				eventoiniziovigoreform.setEvento(null);
+				return false;				
+			}
+			if(!isvalidFine){
+				errorMessage = "editor.selezionevigenza.msg.err.finevigoremod";
+				eventofinevigoreform.setEvento(null);
+				return false;				
 			}
 			
 		}
@@ -267,8 +277,11 @@ public Evento getInizioVigore() {
 	}
 
 	public VigenzaEntity getVigenza() {
+		String stato=null;
+		if(vigenzaStatus.getSelectedItem()!=null && !vigenzaStatus.getSelectedItem().equals("--"))
+			stato=(String)vigenzaStatus.getSelectedItem();
 		return new VigenzaEntity(activeNode, eventoiniziovigoreform.getEvento(),
-				eventofinevigoreform.getEvento(),(String)vigenzaStatus.getSelectedItem(),sel_text);
+				eventofinevigoreform.getEvento(),stato,sel_text);
 	}
 
 	public void setVigenza(VigenzaEntity vigenza) {
