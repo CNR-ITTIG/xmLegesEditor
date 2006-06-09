@@ -83,6 +83,9 @@
 		color: #00cc00;
 		text-decoration: underline;
 	}
+	a {
+		text-align: justify;
+	}
 	a.nota {
 		font-size:90%;
 		text-align: justify;
