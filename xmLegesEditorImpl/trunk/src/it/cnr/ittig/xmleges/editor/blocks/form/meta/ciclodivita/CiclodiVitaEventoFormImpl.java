@@ -222,11 +222,11 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
 				errorMessage = "editor.form.meta.ciclodivita.eventi.msg.err.datavuota";				
 				return false;
 			}
-			isvalid=(tagTipoEvento!=null)&&(!tagTipoEvento.getText().trim().equals(""));
-			if(!isvalid){
-				errorMessage = "editor.form.meta.ciclodivita.eventi.msg.err.tipoeventovuoto";				
-				return false;
-			}
+//			isvalid=(tagTipoEvento!=null)&&(!tagTipoEvento.getText().trim().equals(""));
+//			if(!isvalid){
+//				errorMessage = "editor.form.meta.ciclodivita.eventi.msg.err.tipoeventovuoto";				
+//				return false;
+//			}
 			isvalid=(urnFormRelazione.getUrn().isValid());
 			if(!isvalid){
 				errorMessage = "editor.form.meta.ciclodivita.eventi.msg.err.urnvuota";				
