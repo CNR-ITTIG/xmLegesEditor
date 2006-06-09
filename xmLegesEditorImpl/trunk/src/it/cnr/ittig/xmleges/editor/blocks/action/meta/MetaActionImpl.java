@@ -185,6 +185,7 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		logger.debug("Metadati Descrittori");
 
 		Document doc = documentManager.getDocumentAsDom();
+		//TODO: da cambiare non è piu tipodoc ma tipopubblicazione con default GU
 		descrittoriForm.setTipoDocumento(UtilDom.getAttributeValueAsString(doc.getDocumentElement(), "tipo"));
 		descrittoriForm.setTipoDTD(documentManager.getDtdName());
 		descrittoriForm.setAlias(descrittori.getAlias());

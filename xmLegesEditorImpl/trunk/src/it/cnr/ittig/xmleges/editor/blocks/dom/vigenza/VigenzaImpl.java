@@ -125,9 +125,12 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 			else
 				span = (Element) utilRulesManager.encloseTextInTag(node, start, end,"h:span","h");
 			// Assegnazione attributi di vigenza allo span creato
-			if(vigenza.getEInizioVigore()!=null)
-				span.setAttribute("iniziovigore", vigenza.getEInizioVigore().getId());
-			else{//inizio obbligatorio, se non presente si elimina la vigenza e si esce
+			if(vigenza.getEInizioVigore()!=null){
+				UtilDom.setAttributeValue(span,"iniziovigore",vigenza.getEInizioVigore().getId());
+				if(vigenza.getStatus()!=null && !vigenza.getStatus().equals("--"))
+					span.setAttribute("status", vigenza.getStatus());
+			}
+			else{//inizio obbligatorio, se non presente si elimina la vigenza e si esce				
 				span.removeAttribute("iniziovigore");
 				span.removeAttribute("finevigore");
 				span.removeAttribute("status");
@@ -144,7 +147,7 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 			}
 			//FIXME: va controllato che esista sul dom prima di rimuoverli?
 			if(vigenza.getEFineVigore()!=null)
-				span.setAttribute("finevigore", vigenza.getEFineVigore().getId());
+				UtilDom.setAttributeValue(span,"finevigore",vigenza.getEFineVigore().getId());				
 			else
 				span.removeAttribute("finevigore");
 //			if(vigenza.getEInizioVigore()!=null || vigenza.getEFineVigore()!=null)

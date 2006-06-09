@@ -200,12 +200,15 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 			if (relazioni[i].getId() != null && relazioni[i].getLink() != null && !(relazioni[i].getLink().trim().equals(""))) {
 				Element relazione = doc.createElement(relazioni[i].getTagTipoRelazione());
 				UtilDom.setIdAttribute(relazione, relazioni[i].getId());
-				relazione.setAttribute("xlink:href", relazioni[i].getLink());				
+				UtilDom.setAttributeValue(relazione, "xlink:href", relazioni[i].getLink());
+//				relazione.setAttribute("xlink:href", relazioni[i].getLink());				
 				if( (relazioni[i].getEffetto_tipoall()!=null)&&(!relazioni[i].getEffetto_tipoall().equals(""))){
 					if(relazioni[i].getTagTipoRelazione().equals("giurisprudenza"))
-						relazione.setAttribute("effetto", relazioni[i].getEffetto_tipoall());
+						UtilDom.setAttributeValue(relazione, "effetto", relazioni[i].getEffetto_tipoall());
+//						relazione.setAttribute("effetto", relazioni[i].getEffetto_tipoall());
 					else //caso allegato
-						relazione.setAttribute("tipo", relazioni[i].getEffetto_tipoall());
+						UtilDom.setAttributeValue(relazione, "tipo", relazioni[i].getEffetto_tipoall());
+//						relazione.setAttribute("tipo", relazioni[i].getEffetto_tipoall());
 				}
 				if(!utilRulesManager.orderedInsertChild(relazioniNode,relazione))
 					System.out.println("relazione non inserita");				
