@@ -15,6 +15,123 @@
 					&#160; del &#160; <xsl:value-of select="/*[name()='NIR']/*/*/*[name()='dataDoc']"/>
 				</title>
 				<meta http-equiv="Content-Type" content="text/html"/>
+				
+				<style type="text/css">
+	body {
+		margin-left: 15 px;
+		font-family: "Verdana, Arial, Helvetica, sans-serif" ;
+		font-size: 90% ;
+		tex-align:justify;
+	}
+	hr {
+		margin:30px 25% 30px 25%;
+		text-align:center;
+	}
+
+	.small {
+		font-size: 65% ;
+	}
+	.intestazione {
+		margin: 15px 10% 0px 10%;
+		text-align: center;
+		font-size: large;
+	}
+	.title {
+		margin-top: 15px;
+		text-align:center;
+		font-size: 90% ;
+		font-weight: bold;
+		text-align: center;
+	}
+	.formulainiziale {
+		text-align: center;
+		font-size: 100%;
+		margin-bottom: 30px;
+	}
+	.preambolo {
+		text-align: left;
+		font-size: 100%;
+	}
+	.articolo { 
+		font-size: 95% ; 
+		margin-top: 15px; 
+		text-align: center;
+	}
+	a.articolo { 
+		font-size: 100% ; 
+		font-weight: bolder;
+		margin-top: 15px; 
+		text-align: center;
+	}
+	p.rubrica {
+		text-align: center;
+		margin-top: 0;
+		font-style: italic;
+		font-weight: lighter;
+		font-size: 100%;
+	}
+	.comma { 
+		font-size: 100% ; 
+		margin-top: 5px;
+		margin-bottom: 5px;
+		text-align: justify;
+		text-indent: 1em;
+	}
+	
+	.capo {
+		padding-top: 10px;
+		margin:25px 25% 5px 25%;
+		text-align: center;
+	}
+	.el {
+		font-size: 100% ; 
+		text-align: justify;
+		margin-left: 5px;
+		text-indent: 2em;
+		margin-top: 2px;
+	}
+	.en {
+		text-align: justify;
+		margin-left: 55px;
+		text-indent: -10px;
+		margin-top: 2px;
+		font-size: 100% ; 
+	}
+    b b { font-weight: normal; }
+	.ndr {
+		color: #00cc00;
+		text-decoration: underline;
+	}
+	a {
+		text-align: justify;
+	}
+	a.nota {
+		font-size:90%;
+		text-align: justify;
+	}
+	.formulafinale {
+		text-align: justify;
+	}
+	.dataeluogo {
+		margin-top:25px;
+		font-style:italic;
+		font-weight:bold;
+	}
+	li {
+		padding-right: 40px;
+		list-style-type: none;
+		text-align: right;
+	}
+	.visto {
+		font-size: 80%;
+		font-weight: bold;
+	}
+	.span {
+	border:2px solid red;
+	} 				
+ 				</style>
+				
+				
 			</head>
 			<body>
 				<div class="intestazione">
@@ -439,7 +556,6 @@
 		</xsl:choose>
 			
 	</xsl:template>	
-
 
 
 	
