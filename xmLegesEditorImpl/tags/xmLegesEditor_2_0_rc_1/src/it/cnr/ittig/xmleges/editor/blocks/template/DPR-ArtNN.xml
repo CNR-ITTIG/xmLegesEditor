@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="iso-8859-15"?>
+
+%DOCTYPE%
+
+<NIR xmlns:xlink="http://www.w3.org/1999/xlink"
+	  xmlns:h="http://www.w3.org/HTML/1998/html4">
+<DprNN>
+	<meta>
+		<descrittori>
+		<pubblicazione norm="" num="" tipo="GU" />
+		<entratainvigore norm="" />
+		<redazione id="red1" nome="" norm="" />
+	        <urn value="urn:nir:presidente.repubblica:decreto:aaaa-mm-gg;nir-nn"/>
+		</descrittori>
+	</meta>
+	<intestazione>
+		<tipoDoc>DECRETO DEL PRESIDENTE DELLA REPUBBLICA</tipoDoc> 
+		<dataDoc norm=""/>
+		<titoloDoc/>
+	</intestazione> 
+	<formulainiziale>
+		<h:p>IL PRESIDENTE DELLA REPUBBLICA</h:p>
+		<preambolo>
+			<h:p>Visto l'articolo 87, quinto comma, della Costituzione;</h:p>
+			<h:p>Sulla proposta del Ministro {denominazione};</h:p>
+		</preambolo>		
+		<h:p>decreta:</h:p>
+	</formulainiziale> 
+	<articolato>
+		<articolo id="art1">
+			<num>Art. 1.</num>
+			<rubrica/>
+			<comma id="art1-com1">
+				<num>1.</num>
+				<corpo/>
+			</comma>
+		</articolo>
+	</articolato>
+	<formulafinale>
+		<h:p>Il presente decreto sarà pubblicato nella Gazzetta Ufficiale della Repubblica italiana.
+		</h:p>
+	</formulafinale> 
+	<conclusione> 
+		<dataeluogo norm="" codice="">Dato a Roma, addì {gg mese aaaa}</dataeluogo> 
+		<sottoscrizioni> 
+			<sottoscrivente>{presidente repubblica}</sottoscrivente>
+			<sottoscrivente>{nome}, Presidente del Consiglio dei Ministri</sottoscrivente>
+			<visto/>
+		</sottoscrizioni> 
+	</conclusione> 
+</DprNN>
+</NIR>

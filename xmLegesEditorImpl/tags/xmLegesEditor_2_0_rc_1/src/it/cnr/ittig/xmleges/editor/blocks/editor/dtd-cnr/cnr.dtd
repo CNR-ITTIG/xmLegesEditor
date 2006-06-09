@@ -1,0 +1,100 @@
+<!-- ===================================================================== -->
+<!--     DTD dei Provvedimenti emessi                                      -->
+<!--     dal Consiglio Nazionale delle Ricerche                            -->
+<!--     basato sulla versione flessibile della DTD di NormeInRete (NIR)   -->
+<!--                                                                       -->
+<!--     Release  2.0                                                      -->
+<!--     data     31/5/2006                                                -->
+<!--                                                                       -->
+<!--     Andrea Marchetti (CNR-IIT)                                        -->
+<!--     con il contributo di                                              -->
+<!--     Mario Ragona, Pierluigi Spinosa - (CNR-ITTIG)                     -->
+<!--                                                                       -->
+<!-- ===================================================================== -->
+
+<!-- ===================================================================== 
+     Ridefinizione delle entita' 
+     NSproprietario   definita in nirloose.dtd
+     ProprietarioMeta definita in nirloose.dtd
+     N.B. La prima dichiarazione che il parser incontra ha la precedenza 
+     sulle altre
+    ===================================================================== -->
+<!ENTITY % NSproprietario   "xmlns:cnr CDATA  #FIXED 'http://www.cnr.it/provvedimenti/2.0'">
+<!ENTITY % ProprietarioMeta "(cnr:meta)">
+<!ATTLIST proprietario %NSproprietario; >
+
+<!-- ===================================================================== 
+     Inclusione della DTD NIR versione flessibile
+     ===================================================================== -->
+<!ENTITY % nirDTD SYSTEM "./nirflessibile.dtd">
+%nirDTD;
+
+
+<!-- ===================================================================== 
+     Metadati Proprietari
+     settore                      - ...
+     produttore                   - ...
+     tipoDestinatario             - ...
+     disciplina | areaScientifica - ...
+
+     Valori predefiniti:
+     
+     tipoDestinatario
+      01 - Organi di Ricerca
+      02 - Aree di Ricerca
+      03 - Gruppi Nazionali
+      04 - Istituti Nazionali di Coordinamento
+      05 - Progetti Finalizzati
+      06 - Progetti Strategici
+      07 - Presidenza
+      08 - Organi del CNR
+      09 - Direzione Generale
+      10 - Amministrazione Centrale
+      11 - Nucleo di Valutazione
+      
+     disciplina fino al 31-12-2000
+      01 - Scienze Agrarie
+      02 - Scienze e Tecnologie dell'Ambiente e dell'Habitat
+      03 - Scienza e Tecnologia dei Beni Culturali
+      04 - Scienze Biologiche e Mediche
+      05 - Biotecnologie e Biologia Molecolare
+      06 - Scienze Chimiche
+      07 - Scienze Giuridiche e Politiche
+      08 - Scienze Economiche, Sociologiche e Statistiche
+      09 - Scienze Fisiche
+      10 - Scienze Geologiche e Minerarie
+      11 - Scienza e Tecnologie dell'Informazione
+      12 - Scienze d'Ingegneria e di Architettura
+      13 - Scienze Matematiche 
+      14 - Scienze Storiche, Filosofiche e Filologiche
+      15 - Ricerche Tecnologiche e Innovazione
+      16 - Carattere generale
+
+     Area Scientifica dal 01-01-2001
+      01 - Scienze di base
+      02 - Scienze della vita
+      03 - Scienze della terra e dell'ambiente
+      04 - Scienze sociali e umanistiche
+      05 - Scienze tecnologiche, ingegneristiche e informatiche"
+      06 - Carattere generale
+
+    ===================================================================== -->
+<!ELEMENT cnr:meta (cnr:strutturaEmanante+, cnr:autoritaEmanante+, cnr:tipoDestinatario+,
+                   (cnr:disciplina+ | cnr:areaScientifica+) )>
+
+<!ELEMENT cnr:strutturaEmanante EMPTY >
+<!ATTLIST cnr:strutturaEmanante value CDATA #IMPLIED >
+
+<!ELEMENT cnr:autoritaEmanante  EMPTY >
+<!ATTLIST cnr:autoritaEmanante  value CDATA #IMPLIED >
+
+<!ELEMENT cnr:tipoDestinatario  EMPTY >
+<!ATTLIST cnr:tipoDestinatario  value CDATA #IMPLIED >
+
+<!ELEMENT cnr:disciplina        EMPTY >
+<!ATTLIST cnr:disciplina        value CDATA #IMPLIED >
+
+<!ELEMENT cnr:areaScientifica   EMPTY >
+<!ATTLIST cnr:areaScientifica   value CDATA #IMPLIED >
+
+
