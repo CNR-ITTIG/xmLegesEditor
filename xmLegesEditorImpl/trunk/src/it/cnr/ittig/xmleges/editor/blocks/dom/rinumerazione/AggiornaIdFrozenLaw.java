@@ -276,7 +276,17 @@ public class AggiornaIdFrozenLaw {
 			
 			// Aggiornamento ID dell'elemento se e' cambiato
 			OldID = ((Element) nodo).getAttribute("id");
+			
+			
+			
+			// FIXME patch per id degli eventi - disabilita il setId degli eventi ma mantiene il setIdAttribute
+  		    if((getElementType(nodo)==EVENTO)){
+  		    	IDValue = OldID;
+			}
+			////////////////////////////////////////////////////////////////////////////////////////////////// 
 
+  		    
+  		    
 			logger.debug("idChanged: new  " + IDValue + " old " + OldID);
 
 			if (!UtilDom.hasIdAttribute(nodo) || !OldID.equals(IDValue)) {
@@ -600,11 +610,11 @@ public class AggiornaIdFrozenLaw {
 		 try{
 			 if(dtdRulesManager.queryIsRequiredAttribute(figlio.getNodeName(),"id") || getElementType(figlio)==LETTERA || getElementType(figlio)==NUMERO || getElementType(figlio)==ELENCO_PUNT){
 				 // FIXME previene il setId degli eventi; la soluzione corretta e' quella di settare sia gli id che gli idref 
-				 if(!(getElementType(figlio)==EVENTO)){
-				   logger.debug("required ID for "+figlio.getNodeName());
+				 //if(!(getElementType(figlio)==EVENTO)){
+				 //  logger.debug("required ID for "+figlio.getNodeName());
 				   return true;
-				 }
-				 return false;
+				 //}
+				 //return false;
 			 }
 			 else{
 				 logger.debug("not required id for "+figlio.getNodeName());
