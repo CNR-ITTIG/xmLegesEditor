@@ -87,6 +87,9 @@ public class Evento {
 
 	public String toString() {
 		String retVal = UtilDate.normToString(data);
+		if(tipoEvento!=null){
+			retVal += ", " +tipoEvento;
+		}
 		if (fonte != null)
 			retVal += ", " + fonte.toString();
 		return retVal;
