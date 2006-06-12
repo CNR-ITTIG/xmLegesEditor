@@ -68,6 +68,8 @@ public class TestoActionImpl implements TestoAction, EventManagerListener, Logga
 	Testo testo;
 
 	Node activeNode;
+	
+	int start, end;
 
 	Node[] activeNodeList;
 
@@ -143,6 +145,9 @@ public class TestoActionImpl implements TestoAction, EventManagerListener, Logga
 			if (((SelectionChangedEvent) event).isActiveNodeChanged()) {
 				logger.debug("selectionChangedEvent: " + ((SelectionChangedEvent) event).toString());
 				activeNode = ((SelectionChangedEvent) event).getActiveNode();
+				start = ((SelectionChangedEvent) event).getTextSelectionStart();
+				end = ((SelectionChangedEvent) event).getTextSelectionEnd();
+				
 
 				if (activeNode != null) {
 					logger.debug("active node" + activeNode + " node type " + activeNode.getNodeType());
@@ -179,8 +184,8 @@ public class TestoActionImpl implements TestoAction, EventManagerListener, Logga
 
 	public void doAction(String action) {
 		if (onlyTag == 0) { // caso di azione su nodo testo
-			int start = selectionManager.getTextSelectionStart();
-			int end = selectionManager.getTextSelectionEnd();
+			//int start = selectionManager.getTextSelectionStart();
+			//int end = selectionManager.getTextSelectionEnd();
 
 			Node found = UtilDom.findParentByName(activeNode, action);
 			if (found == null)
