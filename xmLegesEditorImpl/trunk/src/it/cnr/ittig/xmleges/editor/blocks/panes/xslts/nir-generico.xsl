@@ -15,7 +15,8 @@
 					&#160; del &#160; <xsl:value-of select="/*[name()='NIR']/*/*/*[name()='dataDoc']"/>
 				</title>
 				<meta http-equiv="Content-Type" content="text/html"/>
-				<link href="nir-generico-style.css" rel="stylesheet"/>
+				<link href="nir-generico-style.css" rel="stylesheet"/>			
+				
 			</head>
 			<body>
 				<div class="intestazione">
@@ -149,6 +150,7 @@
 	<!-- =========================	EL , EN , EP	=============================== -->
 	<xsl:template match="//*[name()='el'] | //*[name()='en'] | //*[name()='ep']">
 		<p class="{local-name()}" name="{@id}">
+			<a name="{@id}"/>
 			<xsl:apply-templates />
 		</p>	
 	</xsl:template>
@@ -379,6 +381,9 @@
 		</xsl:variable>
 		<xsl:variable name="data_fine">
 			<xsl:value-of select="//*[name()='evento'][@id=$fine_id]/@data"/>
+		</xsl:variable>
+		<xsl:variable name="nome">
+			<xsl:value-of select="translate(substring(.,1,10),' ','')"/>
 		</xsl:variable>	
 		
 		<xsl:choose>
@@ -389,7 +394,6 @@
 						<span style="color:#f00;" title="{$stato}"><xsl:apply-templates/>
 						</span>
 					</xsl:when>
-					
 					<xsl:otherwise>
 						<span style="color:#f00;" title="abrogato"><xsl:apply-templates/>
 						</span>
@@ -412,7 +416,7 @@
 							</xsl:when>
 						</xsl:choose>		
 						<xsl:text>&#93;&#160;</xsl:text>
-					</span>					
+					</span>	
 			</xsl:when>
 			<!-- ========================================== DATA inizio !='' ====================================== -->
 			<xsl:when test="$data_inizio!=''">
@@ -441,7 +445,4 @@
 			
 	</xsl:template>	
 
-
-
-	
 </xsl:stylesheet>
