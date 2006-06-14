@@ -202,8 +202,9 @@
 	<!-- ========================== 	CAPO	============================== -->
 	<xsl:template match="//*[name()='capo']">
 		<hr />
+		<a name="{@id}"/>		
 		<p class="capo" name="{@id}">
-			<xsl:apply-templates />
+			<xsl:call-template name="vigenza"/>
 		</p>
 	</xsl:template>
 	
@@ -231,9 +232,9 @@
 	<!-- =========================	ARTICOLO	=============================== -->
 	
 	<xsl:template match="//*[name()='articolo']">
+		<a name="{@id}"/>
 		<div class="articolo" name="{@id}">
-			<a name="{@id}"/>
-			<xsl:apply-templates />
+			<xsl:call-template name="vigenza"/>
 		</div>
 	</xsl:template>
 	
@@ -256,7 +257,7 @@
 	<xsl:template match="//*[name()='comma']">
 		<a name="{@id}"/>
 		<p class="comma" name="{@id}">
-			<xsl:apply-templates />
+			<xsl:call-template name="vigenza" />
 		</p>
 	</xsl:template>
 
@@ -272,10 +273,11 @@
 	</xsl:template>
 	<!-- =========================	EL , EN , EP	=============================== -->
 	<xsl:template match="//*[name()='el'] | //*[name()='en'] | //*[name()='ep']">
-		<p class="{local-name()}" name="{@id}">
-			<a name="{@id}"/>
-			<xsl:apply-templates />
-		</p>	
+	<a name="{@id}"/>		
+	<p class="{local-name()}" name="{@id}">
+		<xsl:call-template name="vigenza"/>	
+	</p>			
+
 	</xsl:template>
 	
 	<xsl:template match="nir:corpo | nir:alinea">
@@ -490,8 +492,13 @@
 	<!--                                                          -->
 	<!-- ======================================================== -->
 	<xsl:template match="//*[name()='h:span']">
+		<span>
+		<xsl:call-template name="vigenza"/>		
+		</span>
+	</xsl:template>	
+<xsl:template name="vigenza" >
 		<xsl:variable name="stato">
-			<xsl:value-of select="@status" />
+		<xsl:value-of select="@status" />
 		</xsl:variable>
 		<xsl:variable name="inizio_id">
 			<xsl:value-of select="@iniziovigore"/>
@@ -508,17 +515,16 @@
 		<xsl:variable name="nome">
 			<xsl:value-of select="translate(substring(.,1,10),' ','')"/>
 		</xsl:variable>	
-		
 		<xsl:choose>
 		<!-- ========================================== DATA FINE !='' ====================================== -->
 			<xsl:when test="$data_fine!=''">
 				<xsl:choose>			
-					<xsl:when test="$stato!=''">				
-						<span style="color:#f00;" title="{$stato}"><xsl:apply-templates/>
+					<xsl:when test="$stato!=''">
+						<span style="color:#f00;" title="{$stato}"><xsl:apply-templates /> 
 						</span>
 					</xsl:when>
 					<xsl:otherwise>
-						<span style="color:#f00;" title="abrogato"><xsl:apply-templates/>
+						<span style="color:#f00;" title="abrogato"><xsl:apply-templates />
 						</span>
 					</xsl:otherwise>
 				</xsl:choose>
@@ -562,10 +568,8 @@
 				</span>	
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:apply-templates />
+			<xsl:apply-templates />
 			</xsl:otherwise>
 		</xsl:choose>
-			
-	</xsl:template>	
-
+</xsl:template>
 </xsl:stylesheet>

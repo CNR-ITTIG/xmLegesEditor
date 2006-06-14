@@ -1,14 +1,16 @@
 	body {
-		margin-left: 15 px;
+		margin-left: 5px;
 		font-family: "Verdana, Arial, Helvetica, sans-serif" ;
 		font-size: 90% ;
-		tex-align:justify;
+		text-align:justify;
 	}
 	hr {
 		margin:30px 25% 30px 25%;
 		text-align:center;
 	}
-
+	em {
+		font-size: 100%
+	}
 	.small {
 		font-size: 65% ;
 	}
@@ -61,7 +63,7 @@
 	
 	.capo {
 		padding-top: 10px;
-		margin:25px 25% 5px 25%;
+		/*margin:25px 25% 5px 25%;*/
 		text-align: center;
 	}
 	.el {
