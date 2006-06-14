@@ -31,7 +31,9 @@
 				margin:30px 25% 30px 25%;
 				text-align:center;
 			}
-		
+			em {
+				font-size: 100%
+			}
 			.small {
 				font-size: 65% ;
 			}
@@ -136,7 +138,7 @@
 		<!--  fine Foglio di Stile                                    -->
 		<!--                                                          -->
 		<!-- ======================================================== --> 		
-				
+
 				
 			</head>
 			<body>
@@ -271,6 +273,7 @@
 	<!-- =========================	EL , EN , EP	=============================== -->
 	<xsl:template match="//*[name()='el'] | //*[name()='en'] | //*[name()='ep']">
 		<p class="{local-name()}" name="{@id}">
+			<a name="{@id}"/>
 			<xsl:apply-templates />
 		</p>	
 	</xsl:template>
@@ -501,6 +504,9 @@
 		</xsl:variable>
 		<xsl:variable name="data_fine">
 			<xsl:value-of select="//*[name()='evento'][@id=$fine_id]/@data"/>
+		</xsl:variable>
+		<xsl:variable name="nome">
+			<xsl:value-of select="translate(substring(.,1,10),' ','')"/>
 		</xsl:variable>	
 		
 		<xsl:choose>
@@ -511,7 +517,6 @@
 						<span style="color:#f00;" title="{$stato}"><xsl:apply-templates/>
 						</span>
 					</xsl:when>
-					
 					<xsl:otherwise>
 						<span style="color:#f00;" title="abrogato"><xsl:apply-templates/>
 						</span>
@@ -534,7 +539,7 @@
 							</xsl:when>
 						</xsl:choose>		
 						<xsl:text>&#93;&#160;</xsl:text>
-					</span>					
+					</span>	
 			</xsl:when>
 			<!-- ========================================== DATA inizio !='' ====================================== -->
 			<xsl:when test="$data_inizio!=''">
@@ -563,6 +568,4 @@
 			
 	</xsl:template>	
 
-
-	
 </xsl:stylesheet>
