@@ -1,0 +1,25 @@
+<!-- ===========================================================================
+                TABELLA PROVVEDIMENTI
+                ---------------------
+- Una classe contiene piu' provvedimenti della stessa natura.
+- Un provvedimento compare una volta sola, ma puo' avere piu' template, 
+  secondo le combinazioni articolato (si/no) e numerato (si/no).
+- I provvedimenti senza template possono essere solo citati, ma non editati.
+
+<classe name=descrizione della natura del provvedimento nell'elenco di 1.o livello>
+    <provvedimento name=descrizione del provvedimento nell'elenco di 2.o livello
+	               emananti="SI|NO" (gestione emananti)>
+    	<urn>
+    		<atto>--tipo provvedimento da utilizzare nella urn--</atto>
+    		<citazione autorita="SI|NO">
+    		    --descrizione nella forma estesa della citazione--</citazione>
+    		<autorita>--espressione regolare per interrogare il registro autorita'--</autorita>
+    		<valore>--da utilizzare se l'atto ha una urn predefinita (es. Costituzione)--</valore>
+    	</urn>
+		<template tipo="Articolato|SemiArticolato" numerato="SI|NO"
+		          tag="tipo atto della DTD" nome="specificazione dell'atto generico">
+		    --nome file--</template>
+		<template tipo= ...>--nomefile--</template>
+    </provvedimento>
+</classe>
+=========================================================================== -->

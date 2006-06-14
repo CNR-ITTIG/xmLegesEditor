@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="iso-8859-15"?>
+
+%DOCTYPE%
+
+<NIR xmlns:xlink="http://www.w3.org/1999/xlink" 
+	  xmlns:h="http://www.w3.org/HTML/1998/html4">
+<DpcmNN>
+	<meta>
+		<descrittori>
+		<pubblicazione norm="" num="" tipo="GU" />
+		<entratainvigore norm="" />
+		<redazione id="red1" nome="" norm="" />
+	    <urn value="urn:nir:presidente.consiglio.ministri:decreto:aaaa-mm-gg;nir-nnn"/>
+		</descrittori>
+	</meta>
+	<intestazione>
+		<tipoDoc>DECRETO DEL PRESIDENTE DEL CONSIGLIO DEI MINISTRI</tipoDoc> 
+		<dataDoc norm=""/>
+		<titoloDoc/>
+	</intestazione> 
+	<formulainiziale>
+		<h:p>IL PRESIDENTE DEL CONSIGLIO DEI MINISTRI</h:p>
+		<preambolo>
+			<h:p/>
+			<h:p>Sulla proposta del Ministro {denominazione};</h:p>
+		</preambolo>		
+		<h:p>Decreta:</h:p>
+	</formulainiziale> 
+	<contenitore>
+		<h:p/>
+		<h:p/>
+		<h:p/>
+	</contenitore>
+	<formulafinale>
+		<h:p>Il presente decreto verrà pubblicato nella Gazzetta Ufficiale della Repubblica italiana. 
+            </h:p>
+	</formulafinale> 
+	<conclusione> 
+		<dataeluogo norm="" codice="">Roma, {gg mese aaaa}</dataeluogo> 
+		<sottoscrizioni> 
+			<sottoscrivente>{nome}, Presidente del Consiglio dei Ministri</sottoscrivente>
+			<visto/>
+		</sottoscrizioni> 
+	</conclusione> 
+</DpcmNN>
+</NIR>

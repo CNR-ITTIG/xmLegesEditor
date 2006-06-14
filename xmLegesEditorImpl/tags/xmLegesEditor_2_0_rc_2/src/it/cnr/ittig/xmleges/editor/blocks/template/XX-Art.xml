@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="iso-8859-15"?>
+
+%DOCTYPE%
+
+<NIR xmlns:xlink="http://www.w3.org/1999/xlink" 
+	  xmlns:h="http://www.w3.org/HTML/1998/html4">
+<DocumentoNIR nome="xxxxx">
+	<meta>
+		<descrittori>
+		<pubblicazione norm="" num="" tipo="GU" />
+		<entratainvigore norm="" />
+		<redazione id="red1" nome="" norm="" />
+	    <urn value="urn:nir:autorita:provvedimento:aaaa-mm-gg;nnn"/>
+		</descrittori>
+	</meta>
+	<intestazione>
+		<emanante/>
+		<tipoDoc/>
+		<dataDoc norm=""/>, n. 
+		<numDoc/>
+		<titoloDoc/>
+	</intestazione>
+	<formulainiziale>
+		<h:p>IL PRESIDENTE</h:p>
+		<preambolo>
+			<h:p/>
+			<h:p/>
+			<h:p/>
+		</preambolo>		
+		<h:p>decreta:</h:p>
+	</formulainiziale>
+	<articolato>
+		<articolo id="art1">
+			<num>Art. 1.</num>
+			<rubrica/>
+			<comma id="art1-com1">
+				<num>1.</num>
+				<corpo/>
+			</comma>
+		</articolo>
+	</articolato>
+	<formulafinale>
+		<h:p>Il presente decreto sarà pubblicato .....
+		</h:p>
+	</formulafinale> 
+	<conclusione>
+		<dataeluogo norm="" codice="">{città}, addì {gg mese aaaa}</dataeluogo>
+		<sottoscrizioni>
+			<sottoscrivente>Il Presidente: {nome}</sottoscrivente>
+			<visto/>
+		</sottoscrizioni>
+	</conclusione>
+</DocumentoNIR>
+</NIR>

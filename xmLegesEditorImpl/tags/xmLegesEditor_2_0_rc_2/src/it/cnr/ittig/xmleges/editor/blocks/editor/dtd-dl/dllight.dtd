@@ -1,0 +1,473 @@
+<!-- =====================================================================
+		DTD dei disegni di Legge in NormeInRete (NIR)
+
+		dllight.dtd: DTD semplificato dei disegni di legge
+		Dipende da: niente
+
+        Release  20/4/2005                                                
+		Fabio Vitali - UniBo
+    ===================================================================== -->
+<!-- ===================================================================== -->
+<!--                                                                       -->
+<!--	Entita' esterne: caratteri                                           -->
+<!--                                                                       -->
+<!-- ===================================================================== -->
+<!ENTITY % ISOlat1 SYSTEM "./ISOlat1.ent">
+%ISOlat1;
+<!ENTITY % ISOlat2 SYSTEM "./ISOlat2.ent">
+%ISOlat2;
+<!ENTITY % ISOgrk3 SYSTEM "./ISOgrk3.ent">
+%ISOgrk3;
+<!ENTITY % ISOdia SYSTEM "./ISOdia.ent">
+%ISOdia;
+<!ENTITY % ISOnum SYSTEM "./ISOnum.ent">
+%ISOnum;
+<!ENTITY % ISOpub SYSTEM "./ISOpub.ent">
+%ISOpub;
+<!ENTITY % ISOtech SYSTEM "./ISOtech.ent">
+%ISOtech;
+<!-- ===================================================================== -->
+<!--                                                                       -->
+<!--     Tipi di dati                                                      -->
+<!--                                                                       -->
+<!-- ===================================================================== -->
+
+<!ENTITY % linktype "CDATA">
+<!ENTITY % uri "CDATA">
+<!ENTITY % anytoken "CDATA">
+<!ENTITY % anystring "CDATA">
+<!ENTITY % date "CDATA">
+<!ENTITY % numero "CDATA">
+<!ENTITY % nome "CDATA">
+<!ENTITY % tipovigenza "(originale | modificato)" >
+<!ENTITY % id "ID">
+<!ENTITY % idref "IDREF">
+<!ENTITY % htmlstyle "CDATA">
+<!ENTITY % htmlclass "CDATA">
+<!ENTITY % xmllang "CDATA">
+<!-- ===================================================================== -->
+<!--                                                                       -->
+<!--     Entita' principali                                                -->
+<!--                                                                       -->
+<!-- ===================================================================== -->
+<!ENTITY % HTMLattrs "class      %htmlclass;				#IMPLIED
+		    style      %htmlstyle;				#IMPLIED
+		    title      %anystring;				#IMPLIED">
+<!ENTITY % link "
+		xlink:href    %uri;		#IMPLIED
+		xlink:type    %linktype;		#FIXED     'simple'
+">
+<!ENTITY % idreq "id		        %id;		      #REQUIRED">
+<!ENTITY % idfac "id		        %id;		      #IMPLIED">
+<!ENTITY % idnorma "id		        %anytoken;		  #IMPLIED">
+<!ENTITY % data "norm		    %date;		  #REQUIRED">
+<!ENTITY % elinline "#PCDATA | rif | mrif | mod | ndr | nome | data | h:span">
+<!ENTITY % elblocchi "h:div | h:p | h:ul">
+<!ENTITY % inline "(%elinline;)*">
+<!ENTITY % blocchi "(%elblocchi;)+">
+<!ENTITY % blocchipreambolo "(%elblocchi;|preambolo)+">
+<!ENTITY % status "status (inserito|soppresso|identico)  'identico'">
+<!-- =====================================================================
+
+		Definizione dell'elemento radice
+
+		Uso:
+			<NIR xmlns:xlink='http://www.w3.org/1999/xlink'
+				 xmlns:h='http://www.w3.org/HTML/1998/html4'
+				 xmlns='http://www.normeinrete.it/disegnolegge/1.0'>
+				<DisegnoLegge> 
+					<meta>...</meta> 
+					<intestazione>...</intestazione> 
+					<articolato>...</articolato> 
+					<conclusione>...</conclusione> 
+					<annessi>...</annessi> 
+				</DisegnoLegge> 
+			</NIR> 
+		
+    ===================================================================== -->
+<!ENTITY % tipodocumento "DisegnoLegge | DocumentoNIR">
+<!ELEMENT NIR (%tipodocumento;)>
+<!ATTLIST NIR
+	xmlns:xlink   CDATA  #FIXED 'http://www.w3.org/1999/xlink'
+	xmlns:h       CDATA  #FIXED 'http://www.w3.org/HTML/1998/html4'
+	xmlns         CDATA  #FIXED 'http://www.normeinrete.it/disegnilegge/1.0' 
+>
+
+<!-- =====================================================================
+
+		Elenco dei documenti articolati
+
+    ===================================================================== -->
+<!ENTITY % docarticolato "intestazione, 
+  						  relazione?,
+						  articolato, 
+						  conclusione?, 
+						  annessi?">
+<!ELEMENT DisegnoLegge (meta, %docarticolato;)>
+<!ATTLIST DisegnoLegge
+	%idnorma; %status; 
+	tipo %tipovigenza; "originale" 
+>
+<!-- =====================================================================
+
+		Elementi dell'intestazione
+
+    ===================================================================== -->
+<!ELEMENT intestazione (%blocchi; | legislatura | tipoDoc | dataDoc | numDoc | titoloDoc | emanante)*>
+<!ELEMENT legislatura %inline;>
+<!ELEMENT tipoDoc %inline;>
+<!ELEMENT numDoc %inline;>
+<!ELEMENT titoloDoc %inline;>
+<!ELEMENT emanante %inline;>
+<!ELEMENT dataDoc %inline;>
+<!ATTLIST dataDoc
+	%data; 
+>
+
+<!ELEMENT relazione (%blocchi;)*>
+
+<!-- =====================================================================
+
+		Elementi dell'articolato
+
+    ===================================================================== -->
+<!ELEMENT articolato (libro+ | parte+ | titolo+ | capo+ | articolo+)>
+<!ELEMENT libro (num, rubrica?, (parte+ | titolo+ | capo+ | articolo+))>
+<!ELEMENT parte (num, rubrica?, (titolo+ | capo+ | articolo+))>
+<!ELEMENT titolo (num, rubrica?, (capo+ | articolo+))>
+<!ELEMENT capo (num, rubrica?, (sezione+ | articolo+))>
+<!ELEMENT sezione (num, rubrica?, articolo+)>
+<!ELEMENT articolo (num, rubrica?, comma+)>
+<!ATTLIST articolato
+	%status; 
+>
+<!ATTLIST libro
+	%idreq; %status;
+>
+<!ATTLIST parte
+	%idreq; %status;
+>
+<!ATTLIST titolo
+	%idreq; %status;
+>
+<!ATTLIST capo
+	%idreq; %status;
+>
+<!ATTLIST sezione
+	%idreq; %status;
+>
+<!ATTLIST articolo
+	%idreq; %status;
+>
+<!ELEMENT num %inline;>
+<!ELEMENT rubrica %inline;>
+<!-- =====================================================================
+
+		Elementi sotto l'articolo
+
+    ===================================================================== -->
+<!ELEMENT comma (num, (corpo | (alinea, (el | en | ep)+, coda?)))>
+<!ELEMENT el (num, (corpo | (alinea, (el | en | ep)+, coda?)))>
+<!ELEMENT en (num, (corpo | (alinea, (el | en | ep)+, coda?)))>
+<!ELEMENT ep (num, (corpo | (alinea, (el | en | ep)+, coda?)))>
+<!ATTLIST comma
+	%idreq; %status;
+>
+<!ATTLIST el
+	%idfac; %status;
+>
+<!ATTLIST en
+	%idfac; %status;
+>
+<!ATTLIST ep
+	%idfac; %status;
+>
+<!ELEMENT corpo %inline;>
+<!ELEMENT alinea %inline;>
+<!ELEMENT coda %inline;>
+<!-- =====================================================================
+
+		Elementi della conclusione
+
+    ===================================================================== -->
+<!ELEMENT conclusione (%blocchi; | dataeluogo | sottoscrizioni)+>
+<!ELEMENT dataeluogo %inline;>
+<!ATTLIST dataeluogo
+	%data; 
+>
+<!ELEMENT sottoscrizioni (sottoscrivente*)>
+<!ELEMENT sottoscrivente %inline;>
+<!ELEMENT visto %inline;>
+<!-- =====================================================================
+
+		Elementi degli annessi		
+
+    ===================================================================== -->
+<!ELEMENT annessi (annesso+)>
+<!ELEMENT annesso (testata?, rifesterno)>
+<!ATTLIST annesso
+	%idreq; %status;
+>
+<!ELEMENT rifesterno EMPTY>
+<!ATTLIST rifesterno
+	%link; 
+>
+<!ELEMENT testata (denAnnesso?, titAnnesso?, preAnnesso?)>
+<!ELEMENT denAnnesso %blocchi;>
+<!ELEMENT titAnnesso %blocchi;>
+<!ELEMENT preAnnesso %blocchi;>
+<!-- =====================================================================
+
+		Elementi inline e speciali con semantica rilevante
+				  
+    ===================================================================== -->
+<!ELEMENT ndr %inline;>
+<!ATTLIST ndr
+	%idfac; 
+	%link; 
+	%HTMLattrs; 
+	num %idref; #IMPLIED
+	value %anystring; #IMPLIED
+>
+<!ELEMENT rif %inline;>
+<!ATTLIST rif
+	%link; %idfac;
+>
+<!ELEMENT mrif %inline;>
+<!ATTLIST mrif
+	%idfac; %status;
+>
+<!ELEMENT mod (%elinline; | virgolette)*>
+<!ATTLIST mod
+	%idreq; %status;
+>
+<!ELEMENT virgolette (%elinline; | libro | parte | titolo | capo | sezione | articolo | comma | el | en | ep)*>
+<!ATTLIST virgolette
+	tipo (parola | struttura) "parola"
+	%idreq; %status;
+>
+<!ELEMENT nome %inline;>
+<!ATTLIST nome
+	%idfac; 
+	%HTMLattrs; 
+>
+<!ELEMENT data %inline;>
+<!ATTLIST data
+	%data; 
+	%idfac; 
+	%HTMLattrs; 
+>
+<!-- =====================================================================
+
+		Strutture fondamentali del documento semi-articolato
+
+    ===================================================================== -->
+<!ENTITY % nome "nome		 %nome;		#IMPLIED  ">
+<!ENTITY % strutture "(contenitore|gerarchia|articolato)+">
+<!ENTITY % tuttiblocchi "(h:div|h:p|h:img|h:ul|h:ol|h:table)+">
+<!ENTITY % semiarticolato "intestazione?, 
+						   relazione?,
+						   %strutture;, 
+						   conclusione?,
+						   annessi? ">
+<!ELEMENT DocumentoNIR (meta, %semiarticolato;)>
+<!ATTLIST DocumentoNIR
+	%idnorma; %status; 
+	tipo %tipovigenza; "originale" 
+>
+<!-- =====================================================================
+
+		Elementi generici del documento semi-articolato
+
+    ===================================================================== -->
+<!ELEMENT contenitore ((%tuttiblocchi;)+)>
+<!ATTLIST contenitore
+	%idfac; %HTMLattrs;
+>
+<!ELEMENT gerarchia (l1 | l2 | l3 | l4 | l5 | l6 | l7 | l8 | l9)+>
+<!ELEMENT l1 (num?, tit?, (%tuttiblocchi; | l2 | l3 | l4 | l5 | l6 | l7 | l8 | l9)+)>
+<!ELEMENT l2 (num?, tit?, (%tuttiblocchi; | l3 | l4 | l5 | l6 | l7 | l8 | l9)+)>
+<!ELEMENT l3 (num?, tit?, (%tuttiblocchi; | l4 | l5 | l6 | l7 | l8 | l9)+)>
+<!ELEMENT l4 (num?, tit?, (%tuttiblocchi; | l5 | l6 | l7 | l8 | l9)+)>
+<!ELEMENT l5 (num?, tit?, (%tuttiblocchi; | l6 | l7 | l8 | l9)+)>
+<!ELEMENT l6 (num?, tit?, (%tuttiblocchi; | l7 | l8 | l9)+)>
+<!ELEMENT l7 (num?, tit?, (%tuttiblocchi; | l8 | l9)+)>
+<!ELEMENT l8 (num?, tit?, (%tuttiblocchi; | l9)+)>
+<!ELEMENT l9 (num?, tit?, (%tuttiblocchi;)+)>
+<!ELEMENT tit %inline;>
+<!ATTLIST tit
+	%idfac; %HTMLattrs;
+>
+<!ATTLIST gerarchia
+	%idreq; %HTMLattrs;
+>
+<!ATTLIST l1
+	%idreq; %HTMLattrs;
+>
+<!ATTLIST l2
+	%idreq; %HTMLattrs;
+>
+<!ATTLIST l3
+	%idreq; %HTMLattrs;
+>
+<!ATTLIST l4
+	%idreq; %HTMLattrs;
+>
+<!ATTLIST l5
+	%idreq; %HTMLattrs;
+>
+<!ATTLIST l6
+	%idreq; %HTMLattrs;
+>
+<!ATTLIST l7
+	%idreq; %HTMLattrs;
+>
+<!ATTLIST l8
+	%idreq; %HTMLattrs;
+>
+<!ATTLIST l9
+	%idreq; %HTMLattrs;
+><!-- =====================================================================
+
+		Elementi HTML del documento articolato
+
+    ===================================================================== -->
+<!ELEMENT h:p %inline;>
+<!ELEMENT h:div %inline;>
+<!ATTLIST h:p
+	%idfac; %HTMLattrs; %status;
+>
+<!ATTLIST h:div
+	%idfac; %HTMLattrs; %status;
+>
+<!ELEMENT h:span %inline;>
+<!ATTLIST h:span
+	%status; %idfac; %HTMLattrs;
+>
+<!ELEMENT h:img EMPTY>
+<!ATTLIST h:img
+	%idfac; %HTMLattrs;
+	src %uri; #REQUIRED
+	alt %anystring; #IMPLIED
+	width %numero; #IMPLIED
+	height %numero; #IMPLIED
+>
+<!ELEMENT h:ul (h:li)+>
+<!ELEMENT h:ol (h:li)+>
+<!ELEMENT h:li %inline;>
+<!ATTLIST h:ul
+	%idfac; %HTMLattrs;
+>
+<!ATTLIST h:ol
+	%idfac; %HTMLattrs;
+>
+<!ATTLIST h:li
+	%idfac; %HTMLattrs; %status;
+>
+<!ENTITY % cellattrs 'rowspan     CDATA		 "1"
+				       colspan     CDATA		 "1"  '>
+<!ELEMENT h:table (h:tr+)>
+<!ATTLIST h:table
+	%idfac; %HTMLattrs;
+	width %numero; #IMPLIED
+	border %numero; #IMPLIED
+	cellspacing %numero; #IMPLIED
+	cellpadding %numero; #IMPLIED
+>
+<!ELEMENT h:tr (h:th | h:td)+>
+<!ATTLIST h:tr
+	%idfac; %HTMLattrs;
+>
+<!ELEMENT h:th %inline;>
+<!ELEMENT h:td %inline;>
+<!ATTLIST h:th
+	%cellattrs; %idfac;
+>
+<!ATTLIST h:td
+	%cellattrs; %idfac; %status;
+>
+<!-- =====================================================================
+
+		Definizione di elementi di metainformazione
+		
+		
+     ===================================================================== -->
+<!ELEMENT meta (descrittori, ciclodivita?, redazionale?, confronto?)>
+<!ELEMENT descrittori (approvazione, redazione, urn+, alias*, materie?)>
+<!ELEMENT approvazione EMPTY>
+<!ATTLIST approvazione
+	%data; 
+	internal_id CDATA #REQUIRED
+	leg CDATA #REQUIRED
+	tipodoc CDATA #REQUIRED
+>
+<!ELEMENT redazione EMPTY>
+<!ATTLIST redazione
+	%data; 
+	nome CDATA #REQUIRED
+	url CDATA #IMPLIED
+>
+<!ELEMENT urn (#PCDATA)>
+<!ELEMENT alias (#PCDATA)>
+<!ELEMENT materie (materia+)>
+<!ATTLIST materie
+	vocabolario %anystring; #REQUIRED
+>
+<!ELEMENT materia EMPTY>
+<!ATTLIST materia
+	val %anystring; #REQUIRED
+>
+<!ELEMENT ciclodivita (eventi?, relazioni)>
+<!ELEMENT eventi (evento+)>
+<!ELEMENT evento EMPTY>
+<!ATTLIST evento
+	%idreq; 
+	data %date; #REQUIRED
+	fonte %idref; #REQUIRED
+>
+<!ELEMENT relazioni (originale?, attiva*, passiva*, giurisprudenza*, haallegato*, allegatodi*)>
+<!ELEMENT originale EMPTY>
+<!ELEMENT attiva EMPTY>
+<!ELEMENT passiva EMPTY>
+<!ELEMENT giurisprudenza EMPTY>
+<!ELEMENT haallegato EMPTY>
+<!ELEMENT allegatodi EMPTY>
+<!ATTLIST originale
+	%link; %idreq;
+>
+<!ATTLIST attiva
+	%link; %idreq;
+>
+<!ATTLIST passiva
+	%link; %idreq;
+>
+<!ATTLIST giurisprudenza
+	%link; %idreq;
+	effetto (normativo | interpretativo) #IMPLIED
+>
+<!ATTLIST haallegato
+	%link; %idreq;
+>
+<!ATTLIST allegatodi
+	%link; %idreq;
+>
+<!ELEMENT redazionale (nota | avvertenza | altro)+>
+<!ELEMENT nota %blocchi;>
+<!ELEMENT avvertenza %blocchi;>
+<!ELEMENT altro %blocchi;>
+<!ATTLIST nota
+	%idreq; %HTMLattrs;
+>
+<!ATTLIST avvertenza
+	%idreq; %HTMLattrs;
+>
+<!ATTLIST altro
+	%idreq; %HTMLattrs;
+>
+<!ELEMENT confronto (sinistra,destra)>
+<!ELEMENT sinistra %inline;>
+<!ELEMENT destra %inline;>
+
+<!-- =====================================================================
+		fine DTD
+    ===================================================================== -->
