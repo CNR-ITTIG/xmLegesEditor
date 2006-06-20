@@ -277,11 +277,9 @@
 	</xsl:template>
 	<xsl:template match="nir:articolo/nir:rubrica">
 		<xsl:param name="pos">none</xsl:param>
-		<xsl:text>(</xsl:text>
 		<xsl:apply-templates>
 			<xsl:with-param name="pos" select="$pos"/>
 		</xsl:apply-templates>
-		<xsl:text>)</xsl:text>
 	</xsl:template>
 	<xsl:template match="nir:virgolette">
 		<xsl:param name="pos">none</xsl:param>
@@ -414,14 +412,31 @@
 	</xsl:template>
 	<xsl:template match="h:span[@status='inserito']">
 		<xsl:param name="pos">none</xsl:param>
+		<xsl:variable name="post_car">
+			<xsl:value-of select="substring(substring-after(./parent::*,.),1,1)" />
+		</xsl:variable>	
 		<xsl:choose>
 			<xsl:when test="$pos='right'">
 				<b>
-					<xsl:apply-templates/>
+				<xsl:choose>
+					<xsl:when test="$post_car!=' '">
+						<xsl:apply-templates/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:apply-templates/>&#160;
+					</xsl:otherwise>
+				</xsl:choose>
 				</b>
 			</xsl:when>
 			<xsl:when test="$pos='none'">
-				<xsl:apply-templates/>
+				<xsl:choose>
+					<xsl:when test="$post_car!=' '">
+						<xsl:apply-templates/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:apply-templates/>&#160;
+					</xsl:otherwise>
+				</xsl:choose>
 			</xsl:when>
 		</xsl:choose>
 	</xsl:template>
