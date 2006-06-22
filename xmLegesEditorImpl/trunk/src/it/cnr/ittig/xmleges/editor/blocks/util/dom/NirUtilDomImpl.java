@@ -190,6 +190,43 @@ public class NirUtilDomImpl implements NirUtilDom, Loggable, Serviceable, Config
 		return path;
 	}
 
+	public Node checkAndCreateMeta(Document doc, Node node, String nome) {
+
+		Node meta, found, child;
+		meta = null;
+		while (node.getParentNode()!=null) {
+			node = node.getParentNode();
+			if (node.getNodeName().equals("annesso")) {
+				//mi posiziono su meta
+				meta = node.getChildNodes().item(1).getChildNodes().item(0);
+				break;	
+			}
+		} 
+		if (meta == null)  
+		    meta = doc.getElementsByTagName("meta").item(0);
+        
+        
+		found = UtilDom.findDirectChild(meta, nome);
+
+		if (found == null) { // non c'e' il tag nome
+			child = meta.getFirstChild();
+			
+			found = doc.createElement(nome);
+			try {
+				if (meta.getFirstChild() != null) {
+					while (!dtdRulesManager.queryCanInsertAfter(meta, child, found))
+						child = child.getNextSibling();
+					meta.insertBefore(found, child.getNextSibling());
+				} else
+					meta.appendChild(found);
+			} catch (Exception ex) {
+				logger.error(ex.getMessage(), ex);
+				return null;
+			}
+		}
+		return (found);
+	}
+	
 	public Node checkAndCreateMeta(Document doc, String nome) {
 
 		Node meta, found, child;

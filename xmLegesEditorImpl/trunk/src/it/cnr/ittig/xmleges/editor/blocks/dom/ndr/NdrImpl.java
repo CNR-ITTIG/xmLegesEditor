@@ -10,6 +10,7 @@ import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
+import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
@@ -70,6 +71,8 @@ public class NdrImpl implements Ndr, Loggable, Serviceable {
 
 	Node modified = null;
 
+	SelectionManager selectionManager;
+	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
@@ -83,6 +86,8 @@ public class NdrImpl implements Ndr, Loggable, Serviceable {
 		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
 		rinumerazione = (Rinumerazione) serviceManager.lookup(Rinumerazione.class);
+
+		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 	}
 
 	public boolean canSetNdr(Node n) {
@@ -140,9 +145,9 @@ public class NdrImpl implements Ndr, Loggable, Serviceable {
 	}
 
 	
-	// FIXME  di redazionali ce ne puo' essere più di uno (ANNESSI)
 	private boolean insTesta(Document doc, Node nota) {
-		Node red = nirUtilDom.checkAndCreateMeta(doc, "redazionale");
+
+		Node red = nirUtilDom.checkAndCreateMeta(doc,selectionManager.getActiveNode(),"redazionale"); 
 		red.appendChild(nota);
 		return true;
 	}
