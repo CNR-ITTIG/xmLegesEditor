@@ -146,6 +146,8 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 	public void initialize() throws Exception {
 		form.setMainComponent(getClass().getResourceAsStream("SpellCheck.jfrm"));
 		form.setName("spellcheck");
+		
+		form.setHelpKey("help.contents.index.spellcheckform");
 
 		originalWordLabel = (JLabel) form.getComponentByName("spellcheck.label.originalword");
 		wordTextField = (JTextField) form.getComponentByName("spellcheck.textfield.word");
@@ -171,6 +173,8 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 
 		setOriginalWord("");
 		setStatusIcon(ICON_NONE);
+		
+	
 	}
 
 	
