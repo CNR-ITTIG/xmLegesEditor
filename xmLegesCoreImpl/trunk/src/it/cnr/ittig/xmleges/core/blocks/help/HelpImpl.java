@@ -100,8 +100,7 @@ public class HelpImpl implements Help, Loggable, Serviceable {
 	}
 
 	public boolean hasKey(String key) {
-		// TODO verificare
-		return false;
+		return(!i18n.getTextFor(key).equals(key));
 	}
 
 	public void about() {
