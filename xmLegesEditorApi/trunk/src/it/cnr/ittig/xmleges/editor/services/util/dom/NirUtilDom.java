@@ -98,6 +98,7 @@ public interface NirUtilDom extends Service {
 	/**
 	 * se in meta c'e' il nodo
 	 * <code>nome<code> lo restituisce, altrimenti lo crea 
+	 * @param doc
 	 * @param node
 	 * @param nome
 	 * @return
