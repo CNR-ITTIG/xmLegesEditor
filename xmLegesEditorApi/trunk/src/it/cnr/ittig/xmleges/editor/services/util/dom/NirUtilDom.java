@@ -95,4 +95,13 @@ public interface NirUtilDom extends Service {
 	 */
 	public Node checkAndCreateMeta(Document doc, String nome);
 
+	/**
+	 * se in meta c'e' il nodo
+	 * <code>nome<code> lo restituisce, altrimenti lo crea 
+	 * @param node
+	 * @param nome
+	 * @return
+	 */
+	public Node checkAndCreateMeta(Document doc, Node node, String nome);
+
 }
