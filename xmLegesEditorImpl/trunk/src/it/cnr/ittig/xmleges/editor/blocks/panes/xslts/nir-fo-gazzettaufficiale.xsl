@@ -198,10 +198,17 @@
 
 	<xsl:template name="estremiAtto">
 		<xsl:value-of select="/*[name()='NIR']/*/*[name()='intestazione']/*[name()='tipoDoc']"/>
-		<xsl:text> del </xsl:text>
-		<xsl:value-of select="/*[name()='NIR']/*/*[name()='intestazione']/*[name()='dataDoc']"/>
-		<xsl:text>, n. </xsl:text>
-		<xsl:value-of select="/*[name()='NIR']/*/*[name()='intestazione']/*[name()='numDoc']"/>
+		<xsl:choose>
+			<xsl:when test="/*[name()='NIR']/*/*[name()='intestazione']/*[name()='dataDoc']!=''">
+				<xsl:text> del </xsl:text>
+				<xsl:value-of select="/*[name()='NIR']/*/*[name()='intestazione']/*[name()='dataDoc']"/>
+				<xsl:text>, n. </xsl:text>
+				<xsl:value-of select="/*[name()='NIR']/*/*[name()='intestazione']/*[name()='numDoc']"/>
+			</xsl:when>
+			<xsl:otherwise>
+			</xsl:otherwise>
+		</xsl:choose>
+
 	</xsl:template>
 
 	<!-- Norma -->
@@ -296,7 +303,7 @@
 	<!-- Trattamento particolare di alcuni elementi che richiedono una qualche trasformazione -->
 
 	<xsl:template match="*[name()='comma' or name()='el' or name()='en']">
-		<fo:block margin-top="1mm" text-align="justify">
+		<fo:block margin-top="1mm" text-align="justify" text-indent="3mm">
 			<xsl:if test="*[name()='num']!=''">
 				<xsl:value-of select="*[name()='num']"/>
 			</xsl:if>
@@ -319,7 +326,7 @@
 	</xsl:template>
 
 
-	<!-- Note a pié di pagina -->
+	<!-- Note a piÃ¨ di pagina -->
 	<xsl:template match="*[name()='ndr']">
 		<fo:footnote>
 			<fo:inline baseline-shift="super" font-size="6pt">(<xsl:value-of select="@value"/>)</fo:inline>
