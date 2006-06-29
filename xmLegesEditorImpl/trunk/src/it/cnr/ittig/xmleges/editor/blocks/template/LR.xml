@@ -42,7 +42,7 @@
 		</h:p>
 	</formulafinale> 
 	<conclusione> 
-		<dataeluogo norm="" codice="xxx00">Data a {città, addì {gg mese aaaa}</dataeluogo> 
+		<dataeluogo norm="" codice="xxx00">Data a {città}, addì {gg mese aaaa}</dataeluogo> 
 		<sottoscrizioni> 
 			<sottoscrivente>{presidente giunta regionale}</sottoscrivente>
 			<visto/>

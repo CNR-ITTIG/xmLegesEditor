@@ -26,7 +26,7 @@
 		<h:p/>
 		<h:p>IL PRESIDENTE DEL CONSIGLIO DEI MINISTRI</h:p>
 	</formulainiziale> 
-	<contenitore>
+	<contenitore id="con1" nome="corpo">
 		<h:p/>
 		<h:p/>
 		<h:p/>

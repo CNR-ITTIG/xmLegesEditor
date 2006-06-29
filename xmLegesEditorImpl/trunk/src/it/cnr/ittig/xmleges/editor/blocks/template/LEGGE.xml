@@ -43,7 +43,7 @@
 		</h:p>
 	</formulafinale> 
 	<conclusione> 
-		<dataeluogo norm="" codice="">Data a Roma, addì{gg mese aaaa}</dataeluogo> 
+		<dataeluogo norm="" codice="">Data a Roma, addì {gg mese aaaa}</dataeluogo> 
 		<sottoscrizioni> 
 			<sottoscrivente>{presidente repubblica}</sottoscrivente>
 			<sottoscrivente>{nome}, Presidente del Consiglio dei Ministri</sottoscrivente>

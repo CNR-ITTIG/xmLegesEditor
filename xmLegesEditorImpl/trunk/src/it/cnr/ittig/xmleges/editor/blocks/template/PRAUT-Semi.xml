@@ -29,7 +29,7 @@
 		</preambolo>		
 		<h:p>dispone:</h:p>
 	</formulainiziale> 
-	<contenitore>
+	<contenitore id="con1" nome="corpo">
 		<h:p/>
 		<h:p/>
 		<h:p/>

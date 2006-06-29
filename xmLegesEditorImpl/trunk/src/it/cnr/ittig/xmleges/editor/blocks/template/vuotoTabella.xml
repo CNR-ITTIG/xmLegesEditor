@@ -4,7 +4,7 @@
 
 <NIR xmlns:xlink="http://www.w3.org/1999/xlink" 
 	  xmlns:h="http://www.w3.org/HTML/1998/html4">
-		<DocumentoNIR nome="xxxxx" xml:lang="it">
+		<DocumentoNIR nome="xxxxx">
 			<meta>
 			<descrittori>
 				<pubblicazione norm="" num="" tipo="GU" />
@@ -13,7 +13,7 @@
 	    		<urn value="urn:nir:autorita:provvedimento:aaaa-mm-gg;nnn"/>
 			</descrittori>
 			</meta>
-			<contenitore xml:lang="it">
+			<contenitore id="con1" nome="corpo">
 				<h:table>
 					<h:caption></h:caption>
 					<h:thead>

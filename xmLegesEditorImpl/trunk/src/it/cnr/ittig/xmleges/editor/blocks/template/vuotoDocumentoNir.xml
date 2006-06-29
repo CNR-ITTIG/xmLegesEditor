@@ -20,7 +20,7 @@
 		<numDoc/>
 		<titoloDoc/>
 	</intestazione>
-	<contenitore>
+	<contenitore id="con1" nome="corpo">
 		<h:p/>
 		<h:p/>
 		<h:p/>
