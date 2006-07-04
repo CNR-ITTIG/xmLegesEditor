@@ -224,14 +224,21 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 		exportBrowserAction.setEnabled(!documentManager.isEmpty());
 		exportHTMLAction.setEnabled(!documentManager.isEmpty());
 		exportPDFAction.setEnabled(!documentManager.isEmpty());
-//		exportRTFAction.setEnabled(!documentManager.isEmpty());
+		//exportRTFAction.setEnabled(!documentManager.isEmpty());
 	}
 
 	// ////////////////////////////////////////////// FileExportAction Interface
 
 	public boolean doExportPDF() {
 
-		String XSL_FO_GU = xslts.getXslt("pdf-gazzettaufficiale").getAbsolutePath();
+		String XSL_FO_GU; 
+		String dtdName = documentManager.getDtdName();
+		
+		if (dtdName.startsWith("nir"))    // documenti NIR
+			XSL_FO_GU = xslts.getXslt("pdf-gazzettaufficiale").getAbsolutePath();
+		else 
+			XSL_FO_GU = xslts.getXslt("pdf-cnr").getAbsolutePath();
+	
 		String osName = System.getProperty("os.name");
 
 		try {
@@ -350,10 +357,13 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 	// ///////////////////// salva come HTML
 	public boolean doExportHTML() {
 		File xsl = null;
+		String dtdName = documentManager.getDtdName();
 				
-		if (documentManager.getDtdName().startsWith("nir"))
+		if (dtdName.startsWith("nir"))    // documenti NIR
 			xsl = new File(xslts.getXslt("xsl-nir-nocss").getAbsolutePath());
-		else
+		else if (dtdName.indexOf("cnr")!=-1)  // documenti CNR
+			xsl = new File(xslts.getXslt("xsl-cnr").getAbsolutePath());
+		else                                  // documenti DL
 			xsl = new File(xslts.getXslt("xsl-disegnilegge-nocss").getAbsolutePath());
 
 		if (fileChooser.showSaveDialog(form.getAsComponent()) == JFileChooser.APPROVE_OPTION) {
@@ -366,9 +376,12 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 	// ///////////////////// esporta su browser
 	public boolean doExportBrowser() {
 		File xsl = null;
-		if (documentManager.getDtdName().startsWith("nir"))
+		String dtdName = documentManager.getDtdName();
+		if (dtdName.startsWith("nir"))  // documenti NIR
 			xsl = new File(xslts.getXslt("xsl-nir").getAbsolutePath());
-		else
+		else if (dtdName.indexOf("cnr")!=-1)  // documenti CNR
+			xsl = new File(xslts.getXslt("xsl-cnr").getAbsolutePath());
+		else								  // documenti DL
 			xsl = new File(xslts.getXslt("xsl-disegnilegge").getAbsolutePath());
 
 		try {
@@ -418,7 +431,7 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 			domWriter.setCanonical(true);
 			domWriter.setFormat(false);
 			domWriter.setOutput(dest);
-			Node res = UtilXslt.applyXslt(documentManager.getDocumentAsDom(), xslt);
+			Node res = UtilXslt.applyXslt(documentManager.getDocumentAsDom(), xslt, documentManager.getEncoding());
 			domWriter.write(res);
 			return true;
 		} catch (Exception ex) {
@@ -426,45 +439,6 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 			return false;
 		}
 	}
-
-	// ///////////////////// salva come HTML (CON FORM)
-	// public boolean doExportHTML() {
-	// form.showDialog();
-	// if (form.isOk()) {
-	// if (listTextField.getSelectedItem() == null) {
-	// utilMsg.msgError("file.export.error.xslt");
-	// } else if (fileChooser.showSaveDialog(form.getAsComponent()) ==
-	// JFileChooser.APPROVE_OPTION)
-	// exportHTML(new File(listTextField.getSelectedItem().toString()),
-	// fileChooser.getSelectedFile());
-	// }
-	// return false;
-	// }
-
-	// ///////////////////// esporta su browser (CON FORM)
-	// public boolean doExportBrowser() {
-	// form.showDialog();
-	// if (form.isOk()) {
-	// if (listTextField.getSelectedItem() == null) {
-	// utilMsg.msgError("file.export.error.xslt");
-	// } else
-	// try {
-	// File temp = UtilFile.createTemp("export.html");
-	// temp.deleteOnExit();
-	// if (exportHTML(new File(listTextField.getSelectedItem().toString()),
-	// temp)) {
-	// Runtime.getRuntime().exec("mozilla-firefox " + temp.getAbsolutePath());
-	// return true;
-	// }
-	// } catch (Exception ex) {
-	// utilMsg.msgError("file.export.error.browser");
-	// logger.error(ex.toString(), ex);
-	// }
-	// }
-	// return false;
-	// }
-
-	// /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// /////////////////////////////////////////// ListTextFieldEditor Interface
 	public boolean checkData() {
@@ -535,6 +509,52 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 //		}
 //	}
 }
+
+
+
+
+
+
+
+
+// ///////////////////// salva come HTML (CON FORM)
+// public boolean doExportHTML() {
+// form.showDialog();
+// if (form.isOk()) {
+// if (listTextField.getSelectedItem() == null) {
+// utilMsg.msgError("file.export.error.xslt");
+// } else if (fileChooser.showSaveDialog(form.getAsComponent()) ==
+// JFileChooser.APPROVE_OPTION)
+// exportHTML(new File(listTextField.getSelectedItem().toString()),
+// fileChooser.getSelectedFile());
+// }
+// return false;
+// }
+
+// ///////////////////// esporta su browser (CON FORM)
+// public boolean doExportBrowser() {
+// form.showDialog();
+// if (form.isOk()) {
+// if (listTextField.getSelectedItem() == null) {
+// utilMsg.msgError("file.export.error.xslt");
+// } else
+// try {
+// File temp = UtilFile.createTemp("export.html");
+// temp.deleteOnExit();
+// if (exportHTML(new File(listTextField.getSelectedItem().toString()),
+// temp)) {
+// Runtime.getRuntime().exec("mozilla-firefox " + temp.getAbsolutePath());
+// return true;
+// }
+// } catch (Exception ex) {
+// utilMsg.msgError("file.export.error.browser");
+// logger.error(ex.toString(), ex);
+// }
+// }
+// return false;
+// }
+
+// /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
