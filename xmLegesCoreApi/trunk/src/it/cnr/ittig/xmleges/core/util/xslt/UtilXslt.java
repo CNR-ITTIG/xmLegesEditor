@@ -5,7 +5,9 @@ import java.io.File;
 import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Properties;
 
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
@@ -36,7 +38,7 @@ import org.w3c.dom.Node;
  */
 public class UtilXslt {
 
-	private static boolean cache = true;
+	private static boolean cache = false; // default true
 
 	private static Hashtable transformers = new Hashtable(50);
 
@@ -74,7 +76,25 @@ public class UtilXslt {
 	 *         applicabile
 	 */
 	public static Node applyXslt(Node node, File xslt) throws TransformerException {
-		return applyXslt(node, xslt, null);
+		return applyXslt(node, xslt, null, null);
+	}
+	
+	/**
+	 * Converte il nodo <code>node</code> con le regole del file di
+	 * trasformazione <code>xslt</code>.
+	 * 
+	 * @param node nodo da convertire
+	 * @param xslt file di trasformazione
+	 * @return trasformazione
+	 * @throws TransformerException se il file di trasformazione non &egrave;
+	 *         applicabile
+	 */
+	public static Node applyXslt(Node node, File xslt, String encoding) throws TransformerException {
+		// FIXME wa per problemi di setOutputProperties in Xalan
+		Hashtable enc = new Hashtable(1);
+		enc.put("encoding",encoding);
+		return applyXslt(node, xslt, enc, encoding);
+		//return applyXslt(node, xslt, null, encoding);
 	}
 
 	/**
@@ -123,6 +143,31 @@ public class UtilXslt {
 		}
 		return applyXslt(tr, node, param);
 	}
+	
+	
+	/**
+	 * Converte il nodo <code>node</code> con le regole del file di
+	 * trasformazione <code>xslt</code> e i suoi parametri <code>param</code>.
+	 * 
+	 * @param node nodo da convertire
+	 * @param xslt file di trasformazione
+	 * @param param parametri del file di trasformazione
+	 * @return trasformazione
+	 * @throws TransformerException se il file di trasformazione non &egrave;
+	 *         applicabile
+	 */
+	public static Node applyXslt(Node node, File xslt, Hashtable param, String encoding) throws TransformerException {
+		Transformer tr;
+		if (transformers.containsKey(xslt) && cache) {
+			tr = (Transformer) transformers.get(xslt);
+		} else {
+			TransformerFactory factory = TransformerFactory.newInstance();
+			tr = factory.newTransformer(new StreamSource(xslt));
+			transformers.put(xslt, tr);
+		}
+		return applyXslt(tr, node, param, encoding);
+	}
+	
 
 	/**
 	 * Converte il nodo <code>node</code> tramite il trasformer
@@ -143,6 +188,41 @@ public class UtilXslt {
 		tr.transform(source, result);
 		return result.getNode();
 	}
+	
+	
+	/**
+	 * Converte il nodo <code>node</code> tramite il trasformer
+	 * <code>tr</code> applicando i parametri <code>param</code>.
+	 * 
+	 * @param tr trasformatore
+	 * @param node nodo da convertire
+	 * @param param parametri
+	 * @param encoding encoding da applicare all'html
+	 * @return trasformazione
+	 * @throws TransformerException se il file di trasformazione non &egrave;
+	 *         applicabile
+	 */
+	public static Node applyXslt(Transformer tr, Node node, Hashtable param, String encoding) throws TransformerException {
+		DOMSource source = new DOMSource(node);
+		DOMResult result = new DOMResult();
+		
+		if(encoding != null){
+			try{
+			  param.put("encoding",encoding);
+			  tr.setOutputProperty(OutputKeys.METHOD, "html");		  
+			  tr.setOutputProperty(OutputKeys.ENCODING,encoding.toUpperCase());
+			}
+			catch(IllegalArgumentException e){
+				System.err.println(e.getMessage());
+			}
+		}	
+		tr.clearParameters();
+		setTransformerParam(tr, param);
+		
+		tr.transform(source, result);
+		return result.getNode();
+	}
+	
 
 	/**
 	 * Applica i parametri <code>param</code> al traformatore <code>tr</code>.
