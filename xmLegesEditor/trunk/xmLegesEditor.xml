@@ -40,8 +40,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		
 		<root>
 			<priority value ="error" /> 
-			<appender-ref ref="ConsoleAppender" />
- 			<!-- appender-ref ref="BugReportAppender"/--> 
+			<!--appender-ref ref="ConsoleAppender" /-->
+ 			<appender-ref ref="BugReportAppender"/> 
  			<!--appender-ref ref="FileAppender" /-->
 		</root>
 		
@@ -1038,6 +1038,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             <css    name="disegnilegge-style"   file="nir-disegnilegge-style.css"       startup="true" />
             <css    name="nir-style"      		file="nir-generico-style.css"           startup="true" />
             <xslt   name="pdf-gazzettaufficiale" file="nir-fo-gazzettaufficiale.xsl"	startup="true" />
+            <xslt   name="xsl-cnr"              file="cnrHTML.xsl"						startup="true" />
+            <xslt   name="pdf-cnr"              file="cnrFO.xsl"						startup="true" />
   <!--          <xslt   name="rtf-gazzettaufficiale" file="nir-jfor-gazzettaufficiale.xsl"	startup="true" />    -->
         </configuration>
     </component>
