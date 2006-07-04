@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0"  xmlns:nir = "http://www.normeinrete.it/nir/2.1" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  xmlns="http://www.w3.org/HTML/1998/html4" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
-	<xsl:output method="html"  indent="yes"/>
+	<xsl:output method="html" indent="yes"/>
+	
+	<xsl:param name="encoding"/>
 	<!-- ======================================================== -->
 	<!--                                                          -->
 	<!--  Template principale                                     -->
@@ -14,7 +16,7 @@
 					n. &#160;<xsl:value-of select="/*[name()='NIR']/*/*/*[name()='numDoc']"/>	
 					&#160; del &#160; <xsl:value-of select="/*[name()='NIR']/*/*/*[name()='dataDoc']"/>
 				</title>
-				<meta http-equiv="Content-Type" content="text/html"/>
+				<meta http-equiv="Content-Type" content="text/html ; charset= {$encoding}"/> 
 				<link href="nir-generico-style.css" rel="stylesheet"/>			
 				
 			</head>
