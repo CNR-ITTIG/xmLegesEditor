@@ -8,6 +8,7 @@ import it.cnr.ittig.services.manager.Initializable;
 import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
+import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.FormVerifier;
 import it.cnr.ittig.xmleges.core.services.form.date.DateForm;
@@ -17,11 +18,18 @@ import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextFieldElemen
 import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextFieldElementListener;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.util.date.UtilDate;
+import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
+import it.cnr.ittig.xmleges.editor.services.action.meta.MetaAction;
+import it.cnr.ittig.xmleges.editor.services.autorita.Istituzione;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.MetaCiclodivita;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.MetaDescrittori;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 import it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita.CiclodiVitaEventoForm;
 import it.cnr.ittig.xmleges.editor.services.form.urn.UrnForm;
+import it.cnr.ittig.xmleges.editor.services.provvedimenti.ProvvedimentiItem;
+import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 import it.cnr.ittig.xmleges.editor.services.util.urn.Urn;
 
 import java.awt.Component;
@@ -34,6 +42,10 @@ import java.util.Vector;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * <h1>Implementazione del servizio
@@ -107,6 +119,16 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
     
     UtilMsg utilMsg;
     
+    MetaCiclodivita ciclodivita; //dom
+    
+    MetaDescrittori descrittori;//dom
+    
+        
+    DocumentManager documentManager;
+    
+    NirUtilDom nirUtilDom;
+    
+       
     
     /**
      * Editor per il ListTextField con la lista degli eventi
@@ -145,21 +167,35 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
 			tagTipoRelazioneSottoFormDatiEvento.setSelectedItem(e.getFonte().getTagTipoRelazione());
 			
 			if(e.getFonte().getTagTipoRelazione().equals("originale")){
-				if(tagTipoRelazioneSottoFormDatiEvento.getItemCount()<6)
-					tagTipoRelazioneSottoFormDatiEvento.addItem("originale");
+				tagTipoRelazioneSottoFormDatiEvento.removeAllItems();
+				tagTipoRelazioneSottoFormDatiEvento.addItem("originale");
 			}else{
 				Relazione[] rel_ins = getRelazioniTotalefromCdvEf();
 				boolean found=false;
 				for(int i =0;i<rel_ins.length;i++){
-					if(rel_ins[i].getTagTipoRelazione().equals("originale")){						
-						tagTipoRelazioneSottoFormDatiEvento.removeItem("originale");
+					if(rel_ins[i].getTagTipoRelazione().equals("originale")){	
+						tagTipoRelazioneSottoFormDatiEvento.removeAllItems();
+						tagTipoRelazioneSottoFormDatiEvento.addItem("attiva");
+						tagTipoRelazioneSottoFormDatiEvento.addItem("passiva");
+						tagTipoRelazioneSottoFormDatiEvento.addItem("giurisprudenza");
+						tagTipoRelazioneSottoFormDatiEvento.addItem("haallegato");
+						tagTipoRelazioneSottoFormDatiEvento.addItem("allegatodi");		
+						
 						found=true;
 						break;
 					}			
 				}
 				if(!found){
-					if(tagTipoRelazioneSottoFormDatiEvento.getItemCount()<6)
-						tagTipoRelazioneSottoFormDatiEvento.addItem("originale");
+					tagTipoRelazioneSottoFormDatiEvento.removeAllItems();
+					tagTipoRelazioneSottoFormDatiEvento.addItem("originale");
+					tagTipoRelazioneSottoFormDatiEvento.addItem("attiva");
+					tagTipoRelazioneSottoFormDatiEvento.addItem("passiva");
+					tagTipoRelazioneSottoFormDatiEvento.addItem("giurisprudenza");
+					tagTipoRelazioneSottoFormDatiEvento.addItem("haallegato");
+					tagTipoRelazioneSottoFormDatiEvento.addItem("allegatodi");		
+						
+					
+					System.out.println("ERRORE!!!!");
 				}
 
 		    }
@@ -200,14 +236,35 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
 			boolean found=false;
 			for(int i =0;i<rel_ins.length;i++){
 				if(rel_ins[i].getTagTipoRelazione().equals("originale")){					
-					tagTipoRelazioneSottoFormDatiEvento.removeItem("originale");
+					tagTipoRelazioneSottoFormDatiEvento.removeAllItems();
+					tagTipoRelazioneSottoFormDatiEvento.addItem("attiva");
+					tagTipoRelazioneSottoFormDatiEvento.addItem("passiva");
+					tagTipoRelazioneSottoFormDatiEvento.addItem("giurisprudenza");
+					tagTipoRelazioneSottoFormDatiEvento.addItem("haallegato");
+					tagTipoRelazioneSottoFormDatiEvento.addItem("allegatodi");	
+					tagTipoRelazioneSottoFormDatiEvento.setSelectedItem(null);
 					found=true;
 					break;
 				}			
 			}
 			if(!found){
-				if(tagTipoRelazioneSottoFormDatiEvento.getItemCount()<6)
-					tagTipoRelazioneSottoFormDatiEvento.addItem("originale");
+				Document doc = documentManager.getDocumentAsDom();
+				tagTipoRelazioneSottoFormDatiEvento.removeAllItems();
+				tagTipoRelazioneSottoFormDatiEvento.addItem("originale");
+				
+				NodeList pubList = doc.getElementsByTagName("entratainvigore");
+				String data="";
+				if (pubList.getLength() > 0) {
+					Node n = pubList.item(0);					
+					data = n.getAttributes().getNamedItem("norm") != null ? n.getAttributes().getNamedItem("norm").getNodeValue() : null;
+				}				
+				dataFormDatiEvento.set(UtilDate.normToDate(data));
+				tagTipoEvento.setText("entrata in vigore");
+				tagTipoRelazioneSottoFormDatiEvento.setSelectedItem("originale");			
+				urnFormRelazione.setUrn(getUrnFromDocument(doc));
+				labelEffettoTipo.setText(" ");
+				tagEffettoTipoSFormDatiEvento.setSelectedItem(null);
+								
 			}
 			
 
@@ -216,12 +273,14 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
 
 		public boolean checkData() {
 			
+			
 			boolean isvalid=true;
 			isvalid = (dataFormDatiEvento!=null)&&(dataFormDatiEvento.getAsYYYYMMDD()!=null)&&(!dataFormDatiEvento.getAsYYYYMMDD().trim().equals(""));
 			if(!isvalid){
 				errorMessage = "editor.form.meta.ciclodivita.eventi.msg.err.datavuota";				
 				return false;
 			}
+			
 //			isvalid=(tagTipoEvento!=null)&&(!tagTipoEvento.getText().trim().equals(""));
 //			if(!isvalid){
 //				errorMessage = "editor.form.meta.ciclodivita.eventi.msg.err.tipoeventovuoto";				
@@ -293,8 +352,14 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
 						r=null;
 					e =new Evento(calcolaIDevento(), dataFormDatiEvento.getAsYYYYMMDD(),r,tagTipoEvento.getText());
 									
-					if(e.getFonte().getTagTipoRelazione().equals("originale"))
-						tagTipoRelazioneSottoFormDatiEvento.removeItem("originale");
+					if(e.getFonte().getTagTipoRelazione().equals("originale")){
+						tagTipoRelazioneSottoFormDatiEvento.removeAllItems();
+						tagTipoRelazioneSottoFormDatiEvento.addItem("attiva");
+						tagTipoRelazioneSottoFormDatiEvento.addItem("passiva");
+						tagTipoRelazioneSottoFormDatiEvento.addItem("giurisprudenza");
+						tagTipoRelazioneSottoFormDatiEvento.addItem("haallegato");
+						tagTipoRelazioneSottoFormDatiEvento.addItem("allegatodi");	
+					}
 				}
 				
 					
@@ -304,6 +369,7 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
 					
 				String nomeTag=tagTipoRelazioneSottoFormDatiEvento.getSelectedItem().toString();
 				Evento sel_item=((Evento)eventi_listtextfield.getSelectedItem());
+				//se il tipo è lo stesso di prima mantengo id
 				if (sel_item.getFonte().getTagTipoRelazione().equals(nomeTag)){
 					e.setFonte(new Relazione(nomeTag,sel_item.getFonte().getId(),urnFormRelazione.getUrn().toString()));
 				}
@@ -319,10 +385,21 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
 				e.setTipoEvento(tagTipoEvento.getText());
 				e.setData(dataFormDatiEvento.getAsYYYYMMDD());
 								
-				if(e.getFonte().getTagTipoRelazione().equals("originale"))
-					tagTipoRelazioneSottoFormDatiEvento.removeItem("originale");
+				if(e.getFonte().getTagTipoRelazione().equals("originale")){
+					tagTipoRelazioneSottoFormDatiEvento.removeAllItems();
+					tagTipoRelazioneSottoFormDatiEvento.addItem("attiva");
+					tagTipoRelazioneSottoFormDatiEvento.addItem("passiva");
+					tagTipoRelazioneSottoFormDatiEvento.addItem("giurisprudenza");
+					tagTipoRelazioneSottoFormDatiEvento.addItem("haallegato");
+					tagTipoRelazioneSottoFormDatiEvento.addItem("allegatodi");	
+				}
 				
 			} else if (eventID == ListTextFieldElementEvent.ELEMENT_REMOVE) {
+				
+				if(e.getFonte().getTagTipoRelazione().equals("originale")){
+					utilMsg.msgError("Evento originale obbligatorio!!");
+					return;
+				}
 				
 				Vector eligibleVigs=new Vector();
 				if(eventiOnVigenze!=null){
@@ -406,6 +483,16 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
         urnFormRelazione = (UrnForm) serviceManager.lookup(UrnForm.class);
         
         utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
+        
+        descrittori = (MetaDescrittori) serviceManager.lookup(MetaDescrittori.class);
+		ciclodivita = (MetaCiclodivita) serviceManager.lookup(MetaCiclodivita.class);
+		
+		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
+		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
+		
+
+		
+		
 
 		
 		
@@ -594,14 +681,23 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
 		boolean found=false;
 		for(int i =0;i<rel_ins.length;i++){
 			if(rel_ins[i].getTagTipoRelazione().equals("originale")){
-				tagTipoRelazioneSottoFormDatiEvento.removeItem("originale");
+				tagTipoRelazioneSottoFormDatiEvento.removeAllItems();
+				tagTipoRelazioneSottoFormDatiEvento.addItem("attiva");
+				tagTipoRelazioneSottoFormDatiEvento.addItem("passiva");
+				tagTipoRelazioneSottoFormDatiEvento.addItem("giurisprudenza");
+				tagTipoRelazioneSottoFormDatiEvento.addItem("haallegato");
+				tagTipoRelazioneSottoFormDatiEvento.addItem("allegatodi");	
+//				tagTipoRelazioneSottoFormDatiEvento.setSelectedItem(null);
 				found=true;
 				break;
 			}			
 		}
 		if(!found){
-			if(tagTipoRelazioneSottoFormDatiEvento.getItemCount()<6)
+			if(tagTipoRelazioneSottoFormDatiEvento.getItemCount()<6){
+				tagTipoRelazioneSottoFormDatiEvento.removeAllItems();
 				tagTipoRelazioneSottoFormDatiEvento.addItem("originale");
+			}
+				
 		}
 		eventi_listtextfield.setListElements(v);
 	}
@@ -762,6 +858,32 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
 	public VigenzaEntity[] getVigToUpdate() {
 		return vigToUpdate;
 	}
+	
+	/**
+	 * Restituisce le urn presenti nel documento
+	 * 
+	 * @param doc
+	 * @return urn del documento
+	 */
+	private Urn getUrnFromDocument(Document doc) {
+
+		Urn urnDoc=null;
+		
+		NodeList urn = doc.getElementsByTagName("urn");
+		if(urn!=null && urn.getLength()>0)
+			try {
+				urnDoc = new Urn(UtilDom.getAttributeValueAsString(urn.item(0),"value"));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		return urnDoc;
+	}
+	
+	
+
+
 
 
 
