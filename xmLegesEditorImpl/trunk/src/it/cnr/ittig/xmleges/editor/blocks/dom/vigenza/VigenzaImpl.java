@@ -118,12 +118,16 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 			selectedText=node.getNodeValue();
 
 		
-		if(UtilDom.isTextNode(node)){//&&(start!=-1)&&(end!=-1)){
+		if(UtilDom.isTextNode(node)){
 			Element span;
 			if(node.getParentNode().getNodeName().equals("h:span"))
 				span = (Element) node.getParentNode();
-			else
+			else{
+				if(vigenza.getEInizioVigore()==null && vigenza.getEFineVigore()==null && vigenza.getStatus()==null){
+					return null;
+				}
 				span = (Element) utilRulesManager.encloseTextInTag(node, start, end,"h:span","h");
+			}
 			// Assegnazione attributi di vigenza allo span creato
 			if(vigenza.getEInizioVigore()!=null){
 				UtilDom.setAttributeValue(span,"iniziovigore",vigenza.getEInizioVigore().getId());
@@ -150,24 +154,13 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 				UtilDom.setAttributeValue(span,"finevigore",vigenza.getEFineVigore().getId());				
 			else
 				span.removeAttribute("finevigore");
-//			if(vigenza.getEInizioVigore()!=null || vigenza.getEFineVigore()!=null)
-//				span.setAttribute("status", vigenza.getStatus());
-//			else{//appiattisce lo span
-//				span.removeAttribute("status");
-//				Node padre=span.getParentNode();				
-//				extractText.extractText(node,0,selectedText.length());
-//				padre.removeChild(span);
-//				UtilDom.mergeTextNodes(padre);
-//				return padre;
-//				
-//			}
+
 			return span;
 			
 		}else{//non c'è span
 			try {	
 				NamedNodeMap nnm = node.getAttributes();
 				EditTransaction tr = documentManager.beginEdit();
-//				if (vigenza.getEInizioVigore() != null || vigenza.getEFineVigore()!=null) {					
 					
 					// Assegnazione attributi di vigenza al nodo
 					if(vigenza.getEInizioVigore()!=null)
@@ -196,14 +189,7 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 							nnm.removeNamedItem("status");
 					}
 					
-//					}else{//vigenza da eliminare						
-//						if(nnm.getNamedItem("iniziovigore")!=null)
-//							nnm.removeNamedItem("iniziovigore");
-//						if(nnm.getNamedItem("finevigore")!=null)
-//							nnm.removeNamedItem("finevigore");
-//						if(nnm.getNamedItem("status")!=null)
-//							nnm.removeNamedItem("status");
-//					}										
+
 					documentManager.commitEdit(tr);
 					return node;
 				
@@ -351,7 +337,7 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 		NodeList lista = doc.getElementsByTagName("*");
 		
 		for(int i=0; i<lista.getLength();i++){
-			if(lista.item(i).getAttributes().getNamedItem("status")!=null){
+			if(lista.item(i).getAttributes().getNamedItem("iniziovigore")!=null){
 				return true;
 			}
 //			if(lista.item(i).getAttributes().getNamedItem("finevigore")!=null){
