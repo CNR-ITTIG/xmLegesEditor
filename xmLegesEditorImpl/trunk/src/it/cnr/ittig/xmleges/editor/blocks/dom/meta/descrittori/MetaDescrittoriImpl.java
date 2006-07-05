@@ -89,7 +89,7 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 		NodeList pubList = doc.getElementsByTagName("pubblicazione");
 		if (pubList.getLength() > 0) {
 			Node n = pubList.item(0);
-			tipo = n.getAttributes().getNamedItem("tipo") != null ? n.getAttributes().getNamedItem("tipo").getNodeValue() : null;
+			tipo = n.getAttributes().getNamedItem("tipo") != null ? n.getAttributes().getNamedItem("tipo").getNodeValue() : "GU";
 			num = n.getAttributes().getNamedItem("num") != null ? n.getAttributes().getNamedItem("num").getNodeValue() : null;
 			data = n.getAttributes().getNamedItem("norm") != null ? n.getAttributes().getNamedItem("norm").getNodeValue() : null;
 		}
