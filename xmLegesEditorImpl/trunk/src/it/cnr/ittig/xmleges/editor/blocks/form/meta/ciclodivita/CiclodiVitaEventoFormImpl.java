@@ -19,8 +19,6 @@ import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextFieldElemen
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.util.date.UtilDate;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
-import it.cnr.ittig.xmleges.editor.services.action.meta.MetaAction;
-import it.cnr.ittig.xmleges.editor.services.autorita.Istituzione;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.MetaCiclodivita;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
@@ -28,7 +26,6 @@ import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.MetaDescrittori
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 import it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita.CiclodiVitaEventoForm;
 import it.cnr.ittig.xmleges.editor.services.form.urn.UrnForm;
-import it.cnr.ittig.xmleges.editor.services.provvedimenti.ProvvedimentiItem;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 import it.cnr.ittig.xmleges.editor.services.util.urn.Urn;
 
