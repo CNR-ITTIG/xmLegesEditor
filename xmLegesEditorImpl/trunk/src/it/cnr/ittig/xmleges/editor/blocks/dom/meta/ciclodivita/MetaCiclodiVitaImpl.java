@@ -320,6 +320,13 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 				Element eventoTag = doc.createElement("evento");
 				UtilDom.setIdAttribute(eventoTag, eventi[i].getId());
 				UtilDom.setAttributeValue(eventoTag, "data", eventi[i].getData());
+				Node tag = doc.getElementsByTagName("entratainvigore").item(0);
+				
+				if(eventi[i].getData()!=null && !eventi[i].getData().trim().equals(""))
+					UtilDom.setAttributeValue(tag,"norm",eventi[i].getData());					
+				else
+					UtilDom.setAttributeValue(tag,"norm",null);
+					
 				UtilDom.setAttributeValue(eventoTag, "fonte", eventi[i].getFonte().getId());
 				UtilDom.setAttributeValue(eventoTag, "tipo", eventi[i].getTipoEvento());
 				utilRulesManager.orderedInsertChild(eventiTag,eventoTag);
