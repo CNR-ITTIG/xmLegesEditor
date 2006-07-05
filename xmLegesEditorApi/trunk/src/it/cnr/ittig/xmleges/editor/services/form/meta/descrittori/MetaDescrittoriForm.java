@@ -52,18 +52,18 @@ public interface MetaDescrittoriForm extends Service {
 	public Pubblicazione[] getAltrePubblicazioni();
 
 	/**
-	 * Restituisce il tipo del documento (originale, monovigente, multivigente).
+	 * Restituisce il tipo di pubblicazione?? (originale, monovigente, multivigente).
 	 * 
 	 * @return tipo del documento
 	 */
-	public String getTipoDocumento();
+	public String getTipoPubblicazione();
 
 	/**
 	 * Imposta il tipo del documento
 	 * 
-	 * @param tipoDocumento tipo del documento
+	 * @param tipoPubblicazione tipo del documento
 	 */
-	public void setTipoDocumento(String tipoDocumento);
+	public void setTipoPubblicazione(String tipoPubblicazione);
 
 	/**
 	 * Imposta la DTD del documento (base, completo...)
