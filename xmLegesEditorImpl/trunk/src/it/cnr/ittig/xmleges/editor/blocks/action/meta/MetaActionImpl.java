@@ -186,7 +186,8 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 
 		Document doc = documentManager.getDocumentAsDom();
 		//TODO: da cambiare non è piu tipodoc ma tipopubblicazione con default GU
-		descrittoriForm.setTipoDocumento(UtilDom.getAttributeValueAsString(doc.getDocumentElement(), "tipo"));
+//		descrittoriForm.setTipoPubblicazione(UtilDom.getAttributeValueAsString(doc.getDocumentElement(), "tipo"));
+//		descrittoriForm.setTipoPubblicazione(descrittori.getPubblicazione().getTipo());
 		descrittoriForm.setTipoDTD(documentManager.getDtdName());
 		descrittoriForm.setAlias(descrittori.getAlias());
 		descrittoriForm.setAltrePubblicazioni(descrittori.getAltrePubblicazioni());
@@ -195,7 +196,7 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		if (descrittoriForm.openForm()) {
 			try {
 				EditTransaction tr = documentManager.beginEdit();
-				UtilDom.setAttributeValue(doc.getDocumentElement(), "tipo", descrittoriForm.getTipoDocumento());
+				UtilDom.setAttributeValue(doc.getDocumentElement(), "tipo", descrittoriForm.getTipoPubblicazione());
 				descrittori.setAlias(descrittoriForm.getAlias());
 				descrittori.setPubblicazione(descrittoriForm.getPubblicazione());
 				descrittori.setAltrePubblicazioni(descrittoriForm.getAltrePubblicazioni());
@@ -252,7 +253,7 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 			Relazione[] relazioniUlteriori = ciclodivitaForm.getRelazioniUlteriori();
 			
 			Relazione[] newRelazioni = ciclodivita.mergeRelazioni(newEventi,relazioniUlteriori);
-	
+
 			// SETTA SUL DOM:
 			ciclodivita.setEventi(newEventi);
    		    ciclodivita.setRelazioni(newRelazioni);
