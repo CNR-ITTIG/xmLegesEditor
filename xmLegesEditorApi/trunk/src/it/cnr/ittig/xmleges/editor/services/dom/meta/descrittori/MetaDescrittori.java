@@ -1,8 +1,6 @@
 package it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori;
 
 import it.cnr.ittig.services.manager.Service;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 
 /**
  * Servizio per l'inserimento dei metadati generali.
