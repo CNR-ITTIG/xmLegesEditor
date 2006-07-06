@@ -10,7 +10,7 @@
 <!--                                                         -->
 
 <xsl:stylesheet  version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                               xmlns:nir="http://www.normeinrete.it/nir/2.1"
+                               xmlns:nir="http://www.normeinrete.it/nir/2.0"
                                xmlns:h  ='http://www.w3.org/HTML/1998/html4' 
                                xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.1" 
                                xmlns:xlink="http://www.w3.org/1999/xlink">
