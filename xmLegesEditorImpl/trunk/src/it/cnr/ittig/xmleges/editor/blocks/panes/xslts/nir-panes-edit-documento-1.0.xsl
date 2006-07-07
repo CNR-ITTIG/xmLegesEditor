@@ -78,7 +78,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	<xsl:if test="substring(@xlink:href, 1, 1)='#'">
 		<xsl:element name="a">
 			<xsl:attribute name="href"><xsl:value-of select="@xlink:href" /></xsl:attribute>
-			[*]
+			<!--[*]-->
 		</xsl:element>
 	</xsl:if>
 </xsl:template>
