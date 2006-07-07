@@ -15,6 +15,8 @@ import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextFieldElemen
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Enumeration;
 import java.util.Vector;
 
@@ -55,7 +57,7 @@ import javax.swing.event.ListSelectionListener;
  * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */
-public class ListTextFieldImpl implements ListTextField, ListSelectionListener, Loggable, Serviceable, Initializable {
+public class ListTextFieldImpl implements MouseListener, ListTextField, ListSelectionListener, Loggable, Serviceable, Initializable {
 	Logger logger;
 
 	Form form;
@@ -65,7 +67,7 @@ public class ListTextFieldImpl implements ListTextField, ListSelectionListener, 
 	JList list;
 
 	DefaultListModel listModel = new DefaultListModel();
-
+	
 	// ListTextFieldEditor listEditor;
 	AddAction addAction = new AddAction();
 
@@ -97,6 +99,7 @@ public class ListTextFieldImpl implements ListTextField, ListSelectionListener, 
 		form.setMainComponent(getClass().getResourceAsStream("ListTextField.jfrm"));
 		list = (JList) form.getComponentByName("form.listtextfield.list");
 		list.addListSelectionListener(this);
+		list.addMouseListener(this);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setEnabled(true);
 		list.setModel(listModel);
@@ -167,7 +170,9 @@ public class ListTextFieldImpl implements ListTextField, ListSelectionListener, 
 		moveUpAction.setEnabled(enab && selectedElement > 0);
 		moveDownAction.setEnabled(enab && selectedElement < listModel.size() - 1);
 	}
+	
 
+	
 	public void setMoveButtons(boolean moveButtons) {
 
 		if (moveButtons && !this.moveButtons) {
@@ -317,6 +322,7 @@ public class ListTextFieldImpl implements ListTextField, ListSelectionListener, 
 	 */
 	protected class ModifyAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
+			
 			int selectedElement = list.getSelectedIndex();
 			if (selectedElement != -1) {
 				if (editorForm.openForm(form.getAsComponent())) {
@@ -421,5 +427,22 @@ public class ListTextFieldImpl implements ListTextField, ListSelectionListener, 
 				list.setSelectedIndex(selectedElement + 1);
 			}
 		}
+	}
+
+	public void mousePressed(MouseEvent e) {
+		 //if (e.getClickCount() == 2) {
+		 if(e.getButton()==e.BUTTON3){
+			list.clearSelection();
+	     }
+	}
+	
+	
+	public void mouseClicked(MouseEvent e) {	
+	}
+	public void mouseEntered(MouseEvent e) {
+	}
+	public void mouseExited(MouseEvent e) {
+	}
+	public void mouseReleased(MouseEvent e) {	
 	}
 }
