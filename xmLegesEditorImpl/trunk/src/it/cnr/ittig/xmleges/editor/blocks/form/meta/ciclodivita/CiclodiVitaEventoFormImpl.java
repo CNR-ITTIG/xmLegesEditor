@@ -394,6 +394,9 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
 			} else if (eventID == ListTextFieldElementEvent.ELEMENT_REMOVE) {
 				
 				if(e.getFonte().getTagTipoRelazione().equals("originale")){
+					Vector v = new Vector(1);
+					v.add(e);
+					eventi_listtextfield.setListElements(v);
 					utilMsg.msgError("Evento originale obbligatorio!!");
 					return;
 				}
