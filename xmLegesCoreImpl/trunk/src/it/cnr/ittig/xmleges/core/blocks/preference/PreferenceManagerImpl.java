@@ -85,7 +85,7 @@ public class PreferenceManagerImpl implements PreferenceManager, Loggable, Confi
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
-	public void initialize() throws Exception {
+	public void initialize()  {
 		logger.info("Loading preferences...");
 		try {
 			conf = UtilXml.readXML(preferenceFile);
@@ -162,7 +162,13 @@ public class PreferenceManagerImpl implements PreferenceManager, Loggable, Confi
 	public Vector getPreferenceAsVector(String section) {
 		try {
 			Properties p = getPreferenceAsProperties(section);
-			int size = Integer.parseInt(p.getProperty("size"));
+			int size;
+			try{
+			  size = Integer.parseInt(p.getProperty("size"));
+			}
+			catch(NumberFormatException e){
+			  size = 0;	
+			}
 			Vector ret = new Vector(size);
 			for (int i = 0; i < size; i++)
 				ret.addElement(p.get("" + i).toString());
