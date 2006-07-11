@@ -35,8 +35,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <xsl:template match="*[
 	name()='descrittori' or name()='lavoripreparatori' or
 	name()='redazionale' or name()='proprietario' or
-	name()='disposizioni' or name()='ciclodivita'
-	]">
+	name()='disposizioni' or name()='ciclodivita']">
 	<center><font size="+2"><b><xsl:value-of select="name()"/></b></font></center>
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 		<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
@@ -45,8 +44,40 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	<hr/>
 </xsl:template>
 
+
+<xsl:template match="*[name()='cnr:meta']">
+	<center>
+	  <font size="+2">
+		<b>(CNR) meta</b>
+	  </font>
+	</center>
+	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
+		<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+		<xsl:apply-templates />
+	</xsl:element>
+	<hr/>
+</xsl:template>
+
+
+
 <xsl:template match="node()">
-	<b><xsl:value-of select="name()"/></b>
+
+    <xsl:variable name ="nodename">
+      <xsl:value-of select="name()"/>
+    </xsl:variable>
+    
+    <!-- gestione delle etichette con prefisso cnr -->
+    <xsl:choose>
+      <xsl:when test ="substring($nodename,1,3)='cnr'">
+        <b><xsl:value-of select="substring($nodename,5)"/></b> 
+      </xsl:when>
+      <xsl:otherwise>
+        <b><xsl:value-of select="name()"/></b>
+      </xsl:otherwise> 
+    </xsl:choose>
+    <!--             #################             -->
+    
+    
 	<xsl:for-each select="@*">
 		<br/>
 		&#160;
@@ -54,12 +85,13 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		=
 		<font color="green">"<xsl:value-of select="."/></font>"
 	</xsl:for-each>
+	
 	<!-- modificato causa SAXException (Can't have more than one root on a DOM!) non dovrebbe servire se i dati stanno negli attributi-->
 	<xsl:element name="div"> <!-- use-attribute-sets="XsltMapperSetClass"--> 
-		<!--xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" /-->
+		<!-- xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" /-->
 		<xsl:apply-templates />
 	</xsl:element>
-
+	
 </xsl:template>
 
 
