@@ -174,7 +174,6 @@ public class UtilXml {
 			return (domBuilder.parse(file));
 
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			return null;
 		}
 	}
