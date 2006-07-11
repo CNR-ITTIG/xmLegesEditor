@@ -430,6 +430,7 @@ public class ListTextFieldImpl implements MouseListener, ListTextField, ListSele
 	}
 
 	public void mousePressed(MouseEvent e) {
+		 // TODO   la cosa migliore sarebbe che, ripremendo (single click) su un item gia' selezionato deselezionasse tutto
 		 //if (e.getClickCount() == 2) {
 		 if(e.getButton()==e.BUTTON3){
 			list.clearSelection();
