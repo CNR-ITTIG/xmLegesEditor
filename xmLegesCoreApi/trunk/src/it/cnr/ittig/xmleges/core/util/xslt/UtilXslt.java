@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.Hashtable;
-import java.util.Properties;
 
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -90,9 +89,12 @@ public class UtilXslt {
 	 *         applicabile
 	 */
 	public static Node applyXslt(Node node, File xslt, String encoding) throws TransformerException {
-		// FIXME wa per problemi di setOutputProperties in Xalan
-		Hashtable enc = new Hashtable(1);
-		enc.put("encoding",encoding);
+		// FIXME w/a per problemi di setOutputProperties in Xalan
+		Hashtable enc = null;
+		if(encoding != null){
+		 enc = new Hashtable(1);
+		 enc.put("encoding",encoding);
+		}
 		return applyXslt(node, xslt, enc, encoding);
 		//return applyXslt(node, xslt, null, encoding);
 	}
