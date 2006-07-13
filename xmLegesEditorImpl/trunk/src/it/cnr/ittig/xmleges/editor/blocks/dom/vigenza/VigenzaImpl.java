@@ -15,6 +15,7 @@ import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
+import it.cnr.ittig.xmleges.editor.services.dom.rinumerazione.Rinumerazione;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.Vigenza;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
@@ -70,6 +71,8 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 	
 	UtilRulesManager utilRulesManager;
 	
+	Rinumerazione rinumerazione;
+	
 	ExtractText extractText;
 	
 	
@@ -86,6 +89,7 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 		nirUtilUrn = (NirUtilUrn) serviceManager.lookup(NirUtilUrn.class);
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
 		extractText = (ExtractText) serviceManager.lookup(ExtractText.class);
+		rinumerazione = (Rinumerazione) serviceManager.lookup(Rinumerazione.class);
 	}
 
 	
@@ -154,7 +158,10 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 				UtilDom.setAttributeValue(span,"finevigore",vigenza.getEFineVigore().getId());				
 			else
 				span.removeAttribute("finevigore");
-
+            
+			// setta gli id degli span
+			rinumerazione.aggiorna(documentManager.getDocumentAsDom());
+			
 			return span;
 			
 		}else{//non c'è span

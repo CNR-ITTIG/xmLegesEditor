@@ -77,6 +77,8 @@ public class AggiornaIdFrozenLaw {
 	protected static final int PASSIVA = 22;
 
 	protected static final int GIURISPRUDENZA = 23;
+	
+	protected static final int SPAN = 24;
 
 	protected final int OTHER = -1;
 
@@ -269,7 +271,7 @@ public class AggiornaIdFrozenLaw {
             // FIXME MODIFICA PER ASSOCIARE LA VIGENZA ALL'ID:  DARA' PROBLEMI CON L'EREDITARIETA' DELLE PARTIZIONI //////
 			
 			String finevigore = UtilDom.getAttributeValueAsString(nodo,"finevigore");
-			if(null!=finevigore && !finevigore.equals(""))
+			if(null!=finevigore && !finevigore.equals("") && getElementType(nodo)!=SPAN)
 				IDValue+="-"+finevigore;
 			
 			////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -608,7 +610,7 @@ public class AggiornaIdFrozenLaw {
 		 // in questo modo setta gli id solo agli elementi che hanno id REQUIRED
 		 // + forza il setId anche alle lettere, numeri, ep: gli id servono per la rinumerazione di quegli elementi
 		 try{
-			 if(dtdRulesManager.queryIsRequiredAttribute(figlio.getNodeName(),"id") || getElementType(figlio)==LETTERA || getElementType(figlio)==NUMERO || getElementType(figlio)==ELENCO_PUNT){
+			 if(dtdRulesManager.queryIsRequiredAttribute(figlio.getNodeName(),"id") || getElementType(figlio)==LETTERA || getElementType(figlio)==NUMERO || getElementType(figlio)==ELENCO_PUNT || getElementType(figlio)==SPAN){
 				 // FIXME previene il setId degli eventi; la soluzione corretta e' quella di settare sia gli id che gli idref 
 				 //if(!(getElementType(figlio)==EVENTO)){
 				 //  logger.debug("required ID for "+figlio.getNodeName());
@@ -1155,6 +1157,7 @@ public class AggiornaIdFrozenLaw {
 		case GIURISPRUDENZA:
 		case ANNESSO:
 		case MOD:
+		case SPAN:
 		case OTHER:
 			hierarchical = false;
 			break;
@@ -1227,6 +1230,8 @@ public class AggiornaIdFrozenLaw {
 		else if (n.getNodeName().compareTo("giurisprudenza") == 0)
 			this.elementType = GIURISPRUDENZA;
 
+		else if (n.getNodeName().compareTo("h:span") == 0)
+			this.elementType = SPAN;
 		else if (n.getNodeName().compareTo("h:br") == 0)
 			this.elementType = INL;
 		else if (n.getNodeName().compareTo("h:hr") == 0)
@@ -1323,6 +1328,9 @@ public class AggiornaIdFrozenLaw {
 			break;
 		case INL:
 			sigla = "inl";
+			break;
+		case SPAN:
+			sigla = "h";
 			break;
 		case OTHER:
 			sigla = figlio.getNodeName().toLowerCase().substring(0,3);
