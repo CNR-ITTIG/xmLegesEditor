@@ -130,7 +130,7 @@
 		<xsl:attribute name="page-height">
 			<xsl:value-of select="$paper-height"/>
 		</xsl:attribute>
-		<xsl:attribute name="reference-orientation">0</xsl:attribute>
+		<!--<xsl:attribute name="reference-orientation">0</xsl:attribute> -->
 		<xsl:attribute name="writing-mode">lr-tb</xsl:attribute>
 		<xsl:attribute name="margin-right">
 			<xsl:value-of select="$side1"/>
@@ -153,7 +153,7 @@
 		<xsl:attribute name="page-height">
 			<xsl:value-of select="$paper-height"/>
 		</xsl:attribute>
-		<xsl:attribute name="reference-orientation">0</xsl:attribute>
+		<!--<xsl:attribute name="reference-orientation">0</xsl:attribute>-->
 		<xsl:attribute name="writing-mode">lr-tb</xsl:attribute>
 		<xsl:attribute name="margin-right">
 			<xsl:value-of select="$side2"/>
@@ -171,7 +171,7 @@
 
 	<xsl:attribute-set name="headerStyle">
 		<xsl:attribute name="extent">10mm</xsl:attribute>
-		<xsl:attribute name="border-bottom">thin solid gray</xsl:attribute>
+		<xsl:attribute name="border-bottom">1mm solid gray</xsl:attribute>
 		<xsl:attribute name="padding-bottom">0mm</xsl:attribute>
 	</xsl:attribute-set>
 
@@ -198,17 +198,10 @@
 
 	<xsl:template name="estremiAtto">
 		<xsl:value-of select="/*[name()='NIR']/*/*[name()='intestazione']/*[name()='tipoDoc']"/>
-		<xsl:choose>
-			<xsl:when test="/*[name()='NIR']/*/*[name()='intestazione']/*[name()='dataDoc']!=''">
-				<xsl:text> del </xsl:text>
-				<xsl:value-of select="/*[name()='NIR']/*/*[name()='intestazione']/*[name()='dataDoc']"/>
-				<xsl:text>, n. </xsl:text>
-				<xsl:value-of select="/*[name()='NIR']/*/*[name()='intestazione']/*[name()='numDoc']"/>
-			</xsl:when>
-			<xsl:otherwise>
-			</xsl:otherwise>
-		</xsl:choose>
-
+		<xsl:text> del </xsl:text>
+		<xsl:value-of select="/*[name()='NIR']/*/*[name()='intestazione']/*[name()='dataDoc']"/>
+		<xsl:text>, n. </xsl:text>
+		<xsl:value-of select="/*[name()='NIR']/*/*[name()='intestazione']/*[name()='numDoc']"/>
 	</xsl:template>
 
 	<!-- Norma -->
@@ -218,6 +211,7 @@
 		<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='formulafinale']"/>
 		<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='conclusione']"/>
 		<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='annessi']"/>
+		<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='meta']/*[name()='redazionale']"/>
 	</xsl:template>
 
 
@@ -268,18 +262,27 @@
 		</fo:block>
 	</xsl:template>
 
+	<xsl:template match="*[name()='redazionale']">
+		<fo:block text-align="justify" text-indent="3mm" margin-top="10mm">
+			<xsl:apply-templates/>
+		</fo:block>
+	</xsl:template>
+	<xsl:template match="*[name()='h:p']">
+		<fo:block text-align="justify" text-indent="3mm">
+			<xsl:apply-templates/>
+		</fo:block>
+	</xsl:template>
+
 
 	<!-- RIGUARDARE T. -->
 	<!--xsl:template name="/*[name()='annessi']"-->
 	<!--/xsl:template-->
-
-
-
+	
 
 	<!-- Tutti gli elementi -->
 	<xsl:template match="*[name()='libro' or name()='parte' or name()='capo' or name()='titolo' or name()='sezione' or name()='articolo']">
 		<fo:block margin-top="2mm" text-align="center">
-			<fo:block  space-before="3mm" space-after="3mm">
+			<fo:block  space-before="3mm" space-after="3mm" margin-bottom="0mm">
 				<xsl:value-of select="*[name()='num']"/>
 			</fo:block>
 			<fo:block font-style="italic" space-after="3mm">
@@ -290,7 +293,7 @@
 			<xsl:apply-templates select="*[name()='libro' or name()='parte' or name()='capo' or name()='titolo' or name()='sezione' or name()='articolo' or name()='comma']"/>
 		</fo:block>
 	</xsl:template>
-
+	
 <!-- Tutti gli elementi -->
 <!-- <xsl:template match="/*[name()='libro' or name()='parte' or name()='capo' or name()='titolo' or name()='sezione' or name()='articolo']" >
    <fo:block margin-top="2mm" >
@@ -302,15 +305,36 @@
 
 	<!-- Trattamento particolare di alcuni elementi che richiedono una qualche trasformazione -->
 
-	<xsl:template match="*[name()='comma' or name()='el' or name()='en']">
+	<xsl:template match="*[name()='comma']">
 		<fo:block margin-top="1mm" text-align="justify" text-indent="3mm">
 			<xsl:if test="*[name()='num']!=''">
 				<xsl:value-of select="*[name()='num']"/>
 			</xsl:if>
+
 			<xsl:apply-templates select="*[name()='corpo' or name()='alinea' or name()='el']"/>
 		</fo:block>
 	</xsl:template>
-
+	
+	<xsl:template match="*[name()='rubrica']">
+		<fo:block margin-top="0mm" padding-top="0mm" text-align="center">
+			<xsl:apply-templates/>
+		</fo:block>
+	</xsl:template>
+	<xsl:template match="*[name()='el' or name()='en']">
+		<fo:block margin-top="1mm" text-align="justify" text-indent="6mm">
+			<xsl:if test="*[name()='num']!=''">
+				<xsl:value-of select="*[name()='num']"/>
+				<xsl:choose>
+					<xsl:when test="substring(./*,1,1)!=' '">
+						<xsl:text>&#160;</xsl:text>
+					</xsl:when>
+					<xsl:otherwise/>
+				</xsl:choose>
+			</xsl:if>
+			<xsl:apply-templates select="*[name()='corpo' or name()='alinea' or name()='el']"/>
+		</fo:block>
+	</xsl:template>
+	
 	<!-- Elementi inline -->
 	<xsl:template match="h:i">
 		<fo:inline font-style="italic">
@@ -320,13 +344,13 @@
 
 	<!-- Elementi block -->
 	<xsl:template match="h:p|h:div">
-		<fo:block>
+		<fo:block text-indent="3mm">
 			<xsl:value-of select="."/>
 		</fo:block>
 	</xsl:template>
 
 
-	<!-- Note a piè di pagina -->
+	<!-- Note a pi di pagina -->
 	<xsl:template match="*[name()='ndr']">
 		<fo:footnote>
 			<fo:inline baseline-shift="super" font-size="6pt">(<xsl:value-of select="@value"/>)</fo:inline>
@@ -358,3 +382,4 @@
 		</fo:footnote>
 	</xsl:template>
 </xsl:stylesheet>
+
