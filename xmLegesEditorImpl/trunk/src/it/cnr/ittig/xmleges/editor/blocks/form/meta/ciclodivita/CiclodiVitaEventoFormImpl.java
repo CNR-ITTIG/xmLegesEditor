@@ -34,6 +34,7 @@ import java.awt.Dimension;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.ParseException;
+import java.util.Collection;
 import java.util.Vector;
 
 import javax.swing.JComboBox;
@@ -394,8 +395,9 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
 			} else if (eventID == ListTextFieldElementEvent.ELEMENT_REMOVE) {
 				
 				if(e.getFonte().getTagTipoRelazione().equals("originale")){
-					Vector v = new Vector(1);
+					Vector v = new Vector(eventi_listtextfield.getListElements().size()+1);
 					v.add(e);
+					v.addAll((Collection)eventi_listtextfield.getListElements());
 					eventi_listtextfield.setListElements(v);
 					utilMsg.msgError("Evento originale obbligatorio!!");
 					return;
