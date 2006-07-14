@@ -389,6 +389,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     </menu>
                     <menu action="menu.editor.metadati">
                         <item action="editor.meta.descrittori" />
+                        <item action="editor.meta.cnr" />                        
                         <item action="editor.meta.ciclodivita" />
                         <item action="editor.meta.inquadramento" />
                         <item action="editor.meta.urn" />
@@ -524,6 +525,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 </toolbar>
                 <toolbar name="editor.metadati" floatable="false" rollover="true">
                     <item action="editor.meta.descrittori" />
+                    <item action="editor.meta.cnr" />                    
                     <item action="editor.meta.ciclodivita" />
                     <item action="editor.meta.inquadramento" />                    
                     <item action="editor.meta.urn" />
@@ -800,6 +802,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
     <component  class="it.cnr.ittig.xmleges.editor.blocks.dom.meta.inquadramento.MetaInquadramentoImpl" />    
     
+    <component  class="it.cnr.ittig.xmleges.editor.blocks.dom.meta.cnr.MetaCnrImpl" />    
+    
     <component  class="it.cnr.ittig.xmleges.editor.blocks.dom.ndr.NdrImpl" />
     
     <component  class="it.cnr.ittig.xmleges.editor.blocks.dom.xmleges.linker.XmLegesLinkerImpl" />
@@ -842,6 +846,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.meta.ciclodivita.CiclodiVitaFormImpl" />
     
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.meta.inquadramento.InquadramentoFormImpl" />
+    
+    <component  class="it.cnr.ittig.xmleges.editor.blocks.form.meta.cnr.CnrProprietariFormImpl" />
 
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.meta.urn.UrnDocumentoFormImpl" />
     
