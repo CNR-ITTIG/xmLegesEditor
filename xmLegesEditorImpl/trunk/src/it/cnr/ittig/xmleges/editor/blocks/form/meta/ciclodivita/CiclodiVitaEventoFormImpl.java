@@ -399,7 +399,7 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
 					v.add(e);
 					v.addAll((Collection)eventi_listtextfield.getListElements());
 					eventi_listtextfield.setListElements(v);
-					utilMsg.msgError("Evento originale obbligatorio!!");
+					utilMsg.msgError("editor.form.meta.ciclodivita.eventi.msg.err.originale");
 					return;
 				}
 				
