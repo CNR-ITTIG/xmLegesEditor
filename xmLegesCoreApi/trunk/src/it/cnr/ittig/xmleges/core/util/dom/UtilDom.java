@@ -435,7 +435,7 @@ public class UtilDom {
 			} else
 				attr = node.getOwnerDocument().createAttribute(attribute);
 			attr.setValue(value);
-			node.getAttributes().setNamedItem(attr);
+ 		    node.getAttributes().setNamedItem(attr);
 		} else
 			attrNode.setNodeValue(value);
 	}
