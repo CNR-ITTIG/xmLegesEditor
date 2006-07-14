@@ -355,15 +355,25 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <menu action="menu.editor.tabelle">
                         <item action="editor.tabelle.crea" />
                         <item action="editor.tabelle.elimina" />
+                        
+           <separator />             
+           <item action="editor.tabelle.testo.allinea" />                                                
+                        
                         <menu action="menu.editor.tabelle.riga">
                             <item action="editor.tabelle.riga.prependi" />
                             <item action="editor.tabelle.riga.appendi" />
+                            <separator/>
+                            <item action="editor.tabelle.righe.mergeup" />
+                            <item action="editor.tabelle.righe.mergedown" />
                             <separator/>
                             <item action="editor.tabelle.riga.elimina" />
                         </menu>
                         <menu action="menu.editor.tabelle.colonna">
                             <item action="editor.tabelle.colonna.prependi" />
                             <item action="editor.tabelle.colonna.appendi" />
+                            <separator/>
+                            <item action="editor.tabelle.colonna.mergesx" />
+                            <item action="editor.tabelle.colonna.mergedx" />
                             <separator/>
                             <item action="editor.tabelle.colonna.elimina" />
                         </menu>
@@ -488,13 +498,21 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 <toolbar name="editor.tabelle"  floatable="false" rollover="true">
                     <item action="editor.tabelle.crea" />
                     <item action="editor.tabelle.elimina" />
+                    
+                        <separator />             
+                        <item action="editor.tabelle.testo.allinea" />                                                
+                                        
                     <separator />
                     <item action="editor.tabelle.riga.prependi" />
                     <item action="editor.tabelle.riga.appendi" />
+                    <item action="editor.tabelle.righe.mergeup" />
+                    <item action="editor.tabelle.righe.mergedown" />
                     <item action="editor.tabelle.riga.elimina" />
                     <separator />
                     <item action="editor.tabelle.colonna.prependi" />
                     <item action="editor.tabelle.colonna.appendi" />
+                    <item action="editor.tabelle.colonna.mergesx" />
+                    <item action="editor.tabelle.colonna.mergedx" />
                     <item action="editor.tabelle.colonna.elimina" />
                 </toolbar>
                 <toolbar name="editor.riferimenti" floatable="false" rollover="true">
@@ -1038,8 +1056,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             <css    name="disegnilegge-style"   file="nir-disegnilegge-style.css"       startup="true" />
             <css    name="nir-style"      		file="nir-generico-style.css"           startup="true" />
             <xslt   name="pdf-gazzettaufficiale" file="nir-fo-gazzettaufficiale.xsl"	startup="true" />
-            <xslt   name="xsl-cnr"              file="cnrHTML.xsl"						startup="true" />
-            <xslt   name="pdf-cnr"              file="cnrFO.xsl"						startup="true" />
   <!--          <xslt   name="rtf-gazzettaufficiale" file="nir-jfor-gazzettaufficiale.xsl"	startup="true" />    -->
         </configuration>
     </component>
