@@ -44,7 +44,14 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 </xsl:template>
 
 <xsl:template match="h:img">
-    <xsl:element name="img" use-attribute-sets="XsltMapperSetClass" />
+    <!--    <xsl:element name="img" use-attribute-sets="XsltMapperSetClass" />  -->
+
+    	&#160;
+ 		 <font color="blue">
+   		 Immagine = "<xsl:value-of select="@src"/>"
+   		 </font>
+    	&#160;
+        
 </xsl:template>
 
 <xsl:template match="h:input">
@@ -287,11 +294,17 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 <xsl:template match="h:table">
     <div align="center">
-    <xsl:apply-templates select="./h:caption" />
     <xsl:element name="table" use-attribute-sets="XsltMapperSetClass">
         <xsl:attribute name="width">95%</xsl:attribute>
+<!--
+ 	    <xsl:if test="not(@border)">
+            <xsl:attribute name="border">0</xsl:attribute>        
+        </xsl:if>
+ -->
+ 
         <xsl:attribute name="cellpadding">2</xsl:attribute>
         <xsl:attribute name="align">center</xsl:attribute>
+        <xsl:apply-templates select="./h:caption" />
         <xsl:apply-templates select="./h:thead" />
         <xsl:apply-templates select="./h:tbody" />
         <xsl:apply-templates select="./h:tfoot" />
@@ -304,7 +317,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <i>
     <xsl:element name="caption" use-attribute-sets="XsltMapperSetClass">
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-	        <xsl:apply-templates />
+	    <xsl:apply-templates />
     </xsl:element>
     </i>
 </xsl:template>
@@ -338,7 +351,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 </xsl:template>
 
 <xsl:template match="h:col">
-    <xsl:element name="col" use-attribute-sets="XsltMapperSetClass">
+    <xsl:element name="col" use-attribute-sets="XsltMapperSetClass">    
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
         <xsl:apply-templates />
     </xsl:element>
