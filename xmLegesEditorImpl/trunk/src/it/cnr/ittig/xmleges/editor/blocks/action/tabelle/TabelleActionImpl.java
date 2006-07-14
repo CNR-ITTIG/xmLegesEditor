@@ -34,6 +34,7 @@ import java.util.EventObject;
 import javax.swing.AbstractAction;
 
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * <h1>Implementazione del servizio
@@ -117,7 +118,7 @@ public class TabelleActionImpl implements TabelleAction, Loggable, Serviceable, 
 
 	MyAbstractAction[] actions = new MyAbstractAction[] { new CreaTabellaAction(), new EliminaTabellaAction(), new PrependiRigaAction(),
 			new AppendiRigaAction(), new EliminaRigaAction(), new PrependiColonnaAction(), new AppendiColonnaAction(), new EliminaColonnaAction(),
-			new MergeRigheAction(), new AllineaTestoAction() };
+			new MergeUpRigheAction(), new MergeDownRigheAction(), new MergeSxColonneAction(), new MergeDxColonneAction(), new AllineaTestoAction() };
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -152,7 +153,10 @@ public class TabelleActionImpl implements TabelleAction, Loggable, Serviceable, 
 		actionManager.registerAction("editor.tabelle.colonna.prependi", actions[i++]);
 		actionManager.registerAction("editor.tabelle.colonna.appendi", actions[i++]);
 		actionManager.registerAction("editor.tabelle.colonna.elimina", actions[i++]);
-		actionManager.registerAction("editor.tabelle.righe.merge", actions[i++]);
+		actionManager.registerAction("editor.tabelle.righe.mergeup", actions[i++]);
+		actionManager.registerAction("editor.tabelle.righe.mergedown", actions[i++]);
+		actionManager.registerAction("editor.tabelle.colonna.mergesx", actions[i++]);
+		actionManager.registerAction("editor.tabelle.colonna.mergedx", actions[i++]);
 		actionManager.registerAction("editor.tabelle.testo.allinea", actions[i++]);
 		eventManager.addListener(this, SelectionChangedEvent.class);
 		eventManager.addListener(this, DocumentOpenedEvent.class);
@@ -195,36 +199,43 @@ public class TabelleActionImpl implements TabelleAction, Loggable, Serviceable, 
 		}
 	}
 
+    private Node SelezioneNodoCorrente (Node nodo, String avo) {
+    	if (avo!=null)
+    		nodo = UtilDom.findParentByName(nodo, avo);
+    	if (nodo!=null)
+    		if (nodo.getPreviousSibling() != null)
+    			return nodo.getPreviousSibling();
+    		else if (nodo.getNextSibling() != null)
+    			    return nodo.getNextSibling();
+    		     else if (nodo.getParentNode() != null)
+			             return nodo.getParentNode();
+    	return nodo;
+    }
+	
+	
 	// ///////////////////////////////////////////////// Azioni
 	public class CreaTabellaAction extends MyAbstractAction {
 
 		int azione;
 
 		public boolean canDoAction(Node[] n) {
+			
+			//Se non è selezionato nulla le funzioni canInsertTable non funzionano
+			if (end==-1) 
+	            end =1;
+			if (start==-1) 
+	            start =1;
+			
 			if (n != null && n.length > 0) {
 				if (logger.isDebugEnabled())
 					logger.debug("nodo selezionato: " + n[0].getNodeName());
 				if (n.length == 1 && tabelle.canInsertTable(n[0]) != 0) {
-					// tabelle.canInsertTable(n[0]);
-					if (logger.isDebugEnabled())
-						logger.debug("canCreaTabella true");
 					return true;
 				}
 			}
 			if (logger.isDebugEnabled())
 				logger.debug("canCreaTabella false");
 			return false;
-			/*
-			 * try { if (n[0].getParentNode()!= null){ Collection node_coll1 =
-			 * dtdRulesManager.queryInsertableAfter(n[0].getParentNode(),n[0]);
-			 * if (node_coll1.contains("h:table")){ azione = 1; return true;
-			 * }else{ Collection node_coll2 =
-			 * dtdRulesManager.queryInsertableBefore(n[0].getParentNode(),n[0]);
-			 * if (node_coll2.contains("h:table")){ azione = 2; return true; } } } }
-			 * catch(DtdRulesManagerException ex) {
-			 * logger.error(ex.getMessage(),ex); } return false; } else return
-			 * false;
-			 */
 		}
 
 		public void actionPerformed(ActionEvent e) {
@@ -236,8 +247,6 @@ public class TabelleActionImpl implements TabelleAction, Loggable, Serviceable, 
 					boolean head = tabelleForm.hasHead();
 					boolean foot = tabelleForm.hasFoot();
 					Node tabella = tabelle.creaTabella(righe, colonne, titolo, head, foot);
-					// if (activeNode.getParentNode()!=null){
-					// Node parent = activeNode.getParentNode();
 					if (canDoAction(selectedNodes)) {
 						Node parent = selectedNodes[0].getParentNode();
 
@@ -301,33 +310,19 @@ public class TabelleActionImpl implements TabelleAction, Loggable, Serviceable, 
 				return true;
 			}
 			return false;
-			/*
-			 * try{ //logger.debug("candoactionELIMINATAB"); Node nodoTab =
-			 * UtilDom.findParentByName(n[0],"h:table"); if(nodoTab != null &&
-			 * nodoTab.getParentNode() != null &&
-			 * dtdRulesManager.queryCanDelete(nodoTab.getParentNode(),nodoTab)) {
-			 * return true; } } catch(DtdRulesManagerException ex) {
-			 * logger.error(ex.getMessage(),ex); } return false; }else return
-			 * false;
-			 */
 		}
 
 		public void actionPerformed(ActionEvent e) {
 			if (canDoAction(selectedNodes)) {
 
 				if (utilMsg.msgYesNo("editor.tabelle.elimina.msg")) {
-					logger.debug("actionperformedTAB");
+					logger.debug("EliminoTabella");
 					Node nodoTab = UtilDom.findParentByName(selectedNodes[0], "h:table");
-					// Node parent = nodoTab.getParentNode();
-					// if(parent != null &&
-					// dtdRulesManager.queryCanDelete(parent,nodoTab)){
-					tabelle.eliminaTabella(nodoTab);
-
+					
+					Node nodoSel = SelezioneNodoCorrente (nodoTab, "h:table");
+					if (tabelle.eliminaTabella(nodoTab))
+							selectionManager.setActiveNode(this,nodoSel);
 				}
-				// }
-				// }
-				// catch(DtdRulesManagerException ex) {
-				// logger.error(ex.getMessage(),ex);
 			}
 		}
 	}
@@ -342,10 +337,10 @@ public class TabelleActionImpl implements TabelleAction, Loggable, Serviceable, 
 
 		public void actionPerformed(ActionEvent e) {
 			if (canDoAction(selectedNodes)) {
+				logger.debug("Prependo Riga");
 				Node nodoRiga = UtilDom.findParentByName(selectedNodes[0], "h:tr");
 				Node nuovaRiga = tabelle.creaRiga(nodoRiga, false);
 				selectionManager.setActiveNode(this, nuovaRiga);
-
 			}
 		}
 	}
@@ -360,6 +355,7 @@ public class TabelleActionImpl implements TabelleAction, Loggable, Serviceable, 
 
 		public void actionPerformed(ActionEvent e) {
 			if (canDoAction(selectedNodes)) {
+				logger.debug("Appendo Riga");
 				Node nodoRiga = UtilDom.findParentByName(selectedNodes[0], "h:tr");
 				Node nuovaRiga = tabelle.creaRiga(nodoRiga, true);
 				selectionManager.setActiveNode(this, nuovaRiga);
@@ -368,21 +364,54 @@ public class TabelleActionImpl implements TabelleAction, Loggable, Serviceable, 
 	}
 
 	public class EliminaRigaAction extends MyAbstractAction {
+		//
+		// Per elimina righe lascio la possibilità della selezione multipla, quindi
+		// non è più suff.controllare "canDeleteRiga" x singole righe, bisogna anche
+		// considerare il numero di righe che andrò a cancellare e il tipo.
+		//     (Al momento accantonato)
+		//
+
 		public boolean canDoAction(Node[] n) {
-			for (int i = 0; i < n.length; i++) {
-				if (!(tabelle.canDeleteRiga(n[i]))) {
-					return false;
-				}
+			if (n.length == 1 && tabelle.canDeleteRiga(n[0])) {
+				return true;
 			}
-			return true;
+			return false;
+
+// versione con selez.multipla						
+//			//int ContaHead = 0;
+//			//int ContaFoot = 0;
+//			int ContaBody = 0;
+//			for (int i = 0; i < n.length; i++) {
+//				   //if (n[i].getParentNode().getNodeName().equals("h:thead")) ContaHead++;
+//				   //if (n[i].getParentNode().getNodeName().equals("h:tfoot")) ContaFoot++;
+//				   if (n[i].getParentNode().getNodeName().equals("h:tbody")) ContaBody++;		   
+//			}
+//			if (UtilDom.findParentByName(selectedNodes[0], "h:table").getLastChild().getChildNodes().getLength() > ContaBody)
+//				return true;
+//			else 
+//				return false;
 		}
 
 		public void actionPerformed(ActionEvent e) {
 			if (canDoAction(selectedNodes)) {
 				for (int i = 0; i < selectedNodes.length; i++) {
-					Node nodoRiga = UtilDom.findParentByName(selectedNodes[i], "h:tr");
-					// Node parent = nodoRiga.getParentNode();
-					tabelle.eliminaRiga(nodoRiga);
+					Node nodoRiga = UtilDom.findParentByName(selectedNodes[i], "h:tr");					
+					Node nodoSel = SelezioneNodoCorrente (nodoRiga, "h:tr");
+					EditTransaction tr = null;
+		  			try {
+		  			  tr = documentManager.beginEdit();	
+		  			  logger.debug("EliminoRiga");	
+		  			  if (tabelle.eliminaRiga(nodoRiga)) {
+							selectionManager.setActiveNode(null,nodoSel);
+							documentManager.commitEdit(tr); 
+ 					   }	   
+ 					   else 
+ 						   documentManager.rollbackEdit(tr);
+					} 
+		  			catch (DocumentManagerException ex) {
+						logger.error(ex.getMessage(), ex);
+						documentManager.rollbackEdit(tr);
+					}											
 				}
 			}
 		}
@@ -398,8 +427,9 @@ public class TabelleActionImpl implements TabelleAction, Loggable, Serviceable, 
 
 		public void actionPerformed(ActionEvent e) {
 			if (canDoAction(selectedNodes)) {
+				logger.debug("PrependoColonna");
 				Node nodoCella = UtilDom.findParentByName(selectedNodes[0], "h:td");
-				Node[] nuovaColonna = tabelle.creaColonna(nodoCella, false);
+				Node[] nuovaColonna = tabelle.creaColonna(nodoCella, false); 
 				selectionManager.setSelectedNodes(this, nuovaColonna);
 			}
 		}
@@ -415,6 +445,7 @@ public class TabelleActionImpl implements TabelleAction, Loggable, Serviceable, 
 
 		public void actionPerformed(ActionEvent e) {
 			if (canDoAction(selectedNodes)) {
+				logger.debug("AppendoColonna");
 				Node nodoCella = UtilDom.findParentByName(selectedNodes[0], "h:td");
 				Node[] nuovaColonna = tabelle.creaColonna(nodoCella, true);
 				selectionManager.setSelectedNodes(this, nuovaColonna);
@@ -425,112 +456,239 @@ public class TabelleActionImpl implements TabelleAction, Loggable, Serviceable, 
 
 	public class EliminaColonnaAction extends MyAbstractAction {
 		public boolean canDoAction(Node[] n) {
+			//
+			// Per elimina colonna lascio la possibilità della selezione multipla, quindi
+			// non è più suff.controllare "canDeleteColonna" x singole colonne, ma bisogna
+			// contare il numero di colonne che andrò a cancellare.
+			//     (Al momento accantonato)
+			//
 
-			for (int i = 0; i < n.length; i++) {
-				if (!(tabelle.canDeleteColonna(n[i]))) {
-					return false;
-				}
-
+			if (n.length == 1 && tabelle.canDeleteColonna(n[0])) {
+				return true;
 			}
-			return true;
+			return false;
+						
+//versione con selez.multipla
+//			if (UtilDom.findParentByName(selectedNodes[0], "h:table").getLastChild().getChildNodes().getLength() > n.length)
+//				return true;
+//			else 
+//				return false;			
 		}
 
 		public void actionPerformed(ActionEvent e) {
 			if (canDoAction(selectedNodes)) {
-				for (int i = 0; i < selectedNodes.length; i++) {
+				for (int i = 0; i < selectedNodes.length; i++) { //????????????????????
 					Node nodoCella = UtilDom.findParentByName(selectedNodes[i], "h:td");
-					logger.debug("#### action performed elimina col");
-					tabelle.eliminaColonna(nodoCella);
-				}
+					logger.debug("EliminoColonna");
+					Node nodoSel = SelezioneNodoCorrente (nodoCella, null);
+		 			EditTransaction tr = null;				
+		  			try {
+		  			  tr = documentManager.beginEdit();	
+	
+ 					  if (tabelle.eliminaColonna(nodoCella)) {
+							selectionManager.setActiveNode(this,nodoSel);
+							documentManager.commitEdit(tr); 
+ 					   }	   
+ 					   else 
+ 						   documentManager.rollbackEdit(tr);
+					} 
+		  			catch (DocumentManagerException ex) {
+						logger.error(ex.getMessage(), ex);
+						documentManager.rollbackEdit(tr);
+					}					  
+ 			    }
 			}
 		}
 	}
 
-	public class MergeRigheAction extends MyAbstractAction {
+	public class MergeSxColonneAction extends MyAbstractAction {
 
 		public boolean canDoAction(Node[] n) {
 
-			for (int i = 1; i < n.length; i++) {
-				if (!(tabelle.canMergeRighe(n[0], n[i]))) {
-					return false;
-				}
-			}
-			return true;
-			/*
-			 * if(UtilDom.findParentByName(n[i],"h:tr") == null){ return false; }
-			 * Node nodoRiga = UtilDom.findParentByName(n[i],"h:tr"); Node next =
-			 * UtilDom.findParentByName(n[i+1],"h:tr"); if (next == null ||
-			 * next.getParentNode() == null){ return false; }
-			 * //logger.debug("candoactionMERGEBIS"); Node parentnext =
-			 * next.getParentNode(); if (!(next.getNodeName().equals ("h:tr"))){
-			 * return false; } //logger.debug("candoactionMERGE3"); if
-			 * (!(UtilDom.getCommonAncestor(next,nodoRiga).getNodeName().equals("h:table") ||
-			 * UtilDom.getCommonAncestor(next,nodoRiga).getNodeName().equals("h:thead") ||
-			 * UtilDom.getCommonAncestor(next,nodoRiga).getNodeName().equals("h:tbody"))){
-			 * //logger.debug("candoactionMERGE4"); return false; } if
-			 * (!(dtdRulesManager.queryCanDelete(parentnext,next))){
-			 * //logger.debug("candoactionMERGE5"); return false; } } }
-			 * catch(DtdRulesManagerException ex) {
-			 * logger.error(ex.getMessage(),ex); } return true;
-			 */
+    		if (n.length == 1 && tabelle.canMergeSxColonne(n[0])) 
+					return true;
+			return false;
 		}
 
 		public void actionPerformed(ActionEvent e) {
 
-			if (canDoAction(selectedNodes)) {
-				// logger.debug("actionperformedMERGERIGHE");
-				for (int i = 1; i < selectedNodes.length; i++) {
-					Node nodoRiga = UtilDom.findParentByName(selectedNodes[0], "h:tr");
-					// if (nodoRiga != null) {
-					Node next = UtilDom.findParentByName(selectedNodes[i], "h:tr");
-					// if(next != null){
-					/*
-					 * if (next !=null && next.getNodeName().equals ("h:tr") &&
-					 * UtilDom.getCommonAncestor(next,nodoRiga).equals("h:table") &&
-					 * (new EliminaRigaAction()).canDoAction(next)/*&&
-					 * tabelle.contaCelle(nodoRiga) ==
-					 * tabelle.contaCelle(previous)){
-					 */
+			logger.debug("MERGEsxCOLONNE"); 
+			Node nodoColonna = UtilDom.findParentByName(selectedNodes[0], "h:td");
+			Node nodoSel = nodoColonna.getPreviousSibling();
 
-					tabelle.mergeRighe(nodoRiga, next);
-					// logger.debug("mergerighe????");
-					// tabelle.eliminaRiga(next);
-
-				}
-
-				for (int i = 1; i < selectedNodes.length; i++) {
-					tabelle.eliminaRiga(selectedNodes[i]);
-				}
+ 			EditTransaction tr = null;				
+  			try {
+  			  tr = documentManager.beginEdit();	
+			  if (tabelle.mergeColonne(nodoColonna.getPreviousSibling(), nodoColonna)) {
+			   if (tabelle.eliminaColonna(nodoColonna)) {
+				   selectionManager.setActiveNode(this,nodoSel);
+				   documentManager.commitEdit(tr); 
+			   }	   
+			   else 
+				   documentManager.rollbackEdit(tr);
+			  }
+			} 
+  			catch (DocumentManagerException ex) {
+				logger.error(ex.getMessage(), ex);
+				documentManager.rollbackEdit(tr);
 			}
 		}
-
 	}
 
+	public class MergeDxColonneAction extends MyAbstractAction {
+
+		public boolean canDoAction(Node[] n) {
+
+			
+    		if (n.length == 1 && tabelle.canMergeDxColonne(n[0])) 
+					return true;
+			return false;
+		}
+
+		public void actionPerformed(ActionEvent e) {
+
+			logger.debug("MERGEdxCOLONNE");
+			Node nodoColonna = UtilDom.findParentByName(selectedNodes[0], "h:td");
+			Node nodoSel = nodoColonna;
+ 			EditTransaction tr = null;				
+  			try {
+  			  tr = documentManager.beginEdit();	
+			  if (tabelle.mergeColonne(nodoColonna, nodoColonna.getNextSibling())) {
+			   if (tabelle.eliminaColonna(nodoColonna.getNextSibling())) { 
+				   selectionManager.setActiveNode(this,nodoSel);
+				   documentManager.commitEdit(tr); 
+			   }	   
+			   else 
+				   documentManager.rollbackEdit(tr);
+			  }
+			} 
+  			catch (DocumentManagerException ex) {
+				logger.error(ex.getMessage(), ex);
+				documentManager.rollbackEdit(tr);
+			}			
+		}
+	}
+		
+	public class MergeUpRigheAction extends MyAbstractAction {
+
+		public boolean canDoAction(Node[] n) {
+
+//GERARDO:  Funzione scritta per la selezione multipla... attualmente non usata
+//			for (int i = 1; i < n.length; i++) {
+//				if (!(tabelle.canMergeRighe(n[0], n[i]))) {
+//					return false;
+//				}
+//			}
+			
+			if (n.length == 1 && tabelle.canMergeUpRighe(n[0])) {
+					return true;
+			}	
+			return false;
+		}
+
+		public void actionPerformed(ActionEvent e) {
+
+			logger.debug("MERGEupRIGHE"); 
+			Node nodoRiga1 = UtilDom.findParentByName(selectedNodes[0], "h:tr");
+			Node nodoRiga2 = null;
+ 			EditTransaction tr = null;				
+  			try {
+  			  tr = documentManager.beginEdit();	
+			  if (nodoRiga1.getParentNode().getNodeName().equals("h:tbody")) 
+		    	nodoRiga2 = nodoRiga1.getPreviousSibling();	
+		      else
+		    	nodoRiga2 = nodoRiga1.getParentNode().getNextSibling().getLastChild();
+		      Node nodoSel = nodoRiga2;
+		      logger.debug("mergerighe UP...");
+		      if (tabelle.mergeRighe(nodoRiga2, nodoRiga1)) {
+			   logger.debug("eliminariga...");
+			   if (tabelle.eliminaRiga(nodoRiga1)) {
+				   selectionManager.setActiveNode(this,nodoSel);
+				   documentManager.commitEdit(tr); 
+			   }	   
+			   else 
+				   documentManager.rollbackEdit(tr);
+			  }
+			} 
+  			catch (DocumentManagerException ex) {
+				logger.error(ex.getMessage(), ex);
+				documentManager.rollbackEdit(tr);
+			}
+		}
+	}
+
+	public class MergeDownRigheAction extends MyAbstractAction {
+		
+		public boolean canDoAction(Node[] n) {
+			
+			if (n.length == 1 && tabelle.canMergeDownRighe(n[0])) {			
+					return true;
+			}			
+			return false;
+		}
+		
+		public void actionPerformed(ActionEvent arg0) {
+			
+			logger.debug("MERGEdownRIGHE"); 
+			Node nodoRiga1 = UtilDom.findParentByName(selectedNodes[0], "h:tr");
+			Node nodoRiga2 = null;
+ 			EditTransaction tr = null;				
+  			try {			
+  			  tr = documentManager.beginEdit();
+		      if (nodoRiga1.getParentNode().getNodeName().equals("h:tbody")) 
+		    	nodoRiga2 = nodoRiga1.getNextSibling();	
+		      else {
+		    	nodoRiga2 = nodoRiga1.getParentNode();
+ 		  	    while (!nodoRiga2.getNextSibling().getNodeName().equals("h:tbody"))
+		  		  nodoRiga2 = nodoRiga2.getNextSibling();
+		  	    nodoRiga2 = nodoRiga2.getNextSibling().getFirstChild();		    
+		      }
+		    			
+		      Node nodoSel = nodoRiga1;
+		      logger.debug("mergerighe DOWN...");
+			  if (tabelle.mergeRighe(nodoRiga1, nodoRiga2)) {
+			   logger.debug("eliminariga...");
+			   if (tabelle.eliminaRiga(nodoRiga2)) { 
+				   selectionManager.setActiveNode(this,nodoSel);
+				   documentManager.commitEdit(tr); 
+			   }	   
+			   else 
+				   documentManager.rollbackEdit(tr);
+			  }
+			} 
+  			catch (DocumentManagerException ex) {
+				logger.error(ex.getMessage(), ex);
+				documentManager.rollbackEdit(tr);
+			}
+		}
+	}
+	
 	public class AllineaTestoAction extends MyAbstractAction {
 		public boolean canDoAction(Node[] n) {
 
-			for (int i = 0; i < n.length; i++) {
-				if (!(tabelle.canAllignTextCol(n[i]))) {
-					return false;
-				}
+			if (n.length == 1 &&  tabelle.canAllignTextCol(n[0])) {
+					return true;
 			}
-			return true;
+			return false;
 
 		}
-
+		
 		public void actionPerformed(ActionEvent e) {
-			logger.debug("actionPerfAllinea");
+
 			if (canDoAction(selectedNodes)) {
 				try {
 
 					for (int i = 0; i < selectedNodes.length; i++) {
-						logger.debug("actionPerfAllinea --- selectedNodes.length:" + selectedNodes.length);
-						// Node nodoCella =
-						// UtilDom.findParentByName(selectedNodes[i], "h:td");
-						String all = "left";
-
+						String valoreDefaul = "left";
+						String all = null;
+						Node cella = UtilDom.findParentByName(selectedNodes[0], "h:td");
+						if (cella.getAttributes().getNamedItem("align") != null)
+						  all = cella.getAttributes().getNamedItem("align").getNodeValue();
+						else 
+						  all = valoreDefaul;
+						logger.debug("AllineoTesto:"+all);
 						if (dtdRulesManager.queryIsValidAttributeValue("h:td", "align", all)) {
-							tabelle.allineaTestoCol(selectedNodes[i], all);
+							tabelle.allineaTestoCol(UtilDom.findParentByName(selectedNodes[i], "h:td"), all);
 						}
 
 					}
