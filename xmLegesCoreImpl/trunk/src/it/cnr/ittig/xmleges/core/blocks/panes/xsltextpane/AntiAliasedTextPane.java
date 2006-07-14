@@ -791,7 +791,10 @@ public class AntiAliasedTextPane extends JTextPane implements DocumentListener, 
 					while (curr != null && !found) {
 						if ("div".equals(curr.getName())) {
 							idDiv = getIdInAttributeSet(curr.getAttributes());
-							if (idDiv.startsWith("map"))
+							//Modifica di GERARDO ---- aggiunto if (idDiv != null)
+							//Nella gestione delle tabelle arriva qui con idDiv = NULL
+							if (idDiv != null)
+							  if (idDiv.startsWith("map"))
 								found = true;
 						}
 						curr = curr.getParentElement();
