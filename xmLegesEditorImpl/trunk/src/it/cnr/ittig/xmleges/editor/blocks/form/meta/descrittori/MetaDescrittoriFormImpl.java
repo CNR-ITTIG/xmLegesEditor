@@ -23,6 +23,7 @@ import java.awt.event.ActionListener;
 import java.util.Vector;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JTextField;
 
@@ -101,7 +102,7 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 //	tag delle altre pubblicazioni
 	DateForm tagDataSottoFormDatiPubblicazione;
 
-	JTextField tagTipoSottoFormDatiPubblicazione;
+	JComboBox tagTipoSottoFormDatiPubblicazione;
 	
 	JTextField tagNumeroSottoFormDatiPubblicazione;
 
@@ -169,8 +170,8 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 
 		public Object getElement() {
 
-			String nometag = (String) ((JTextField) form.getComponentByName("editor.meta.descrittori.pubblicazioni.datipubblicazione.nometag"))
-					.getText();
+			String nometag = (String) ((JComboBox) form.getComponentByName("editor.meta.descrittori.pubblicazioni.datipubblicazione.nometag"))
+					.getSelectedItem();
 			String numero = ((JTextField) form.getComponentByName("editor.meta.descrittori.pubblicazioni.datipubblicazione.numero")).getText();
 
 			return new Pubblicazione(nometag, "GU", numero, data.getAsYYYYMMDD());
@@ -178,20 +179,20 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 
 		public void setElement(Object object) {
 			Pubblicazione p = (Pubblicazione) object;
-			((JTextField) form.getComponentByName("editor.meta.descrittori.pubblicazioni.datipubblicazione.nometag")).setText(p.getTag());
+			((JComboBox) form.getComponentByName("editor.meta.descrittori.pubblicazioni.datipubblicazione.nometag")).setSelectedItem(p.getTag());
 			((JTextField) form.getComponentByName("editor.meta.descrittori.pubblicazioni.datipubblicazione.numero")).setText(p.getNum());
 			data.set(UtilDate.normToDate(p.getNorm()));
 		}
 
 		public void clearFields() {
-			((JTextField) form.getComponentByName("editor.meta.descrittori.pubblicazioni.datipubblicazione.nometag")).setText(null);
+			((JComboBox) form.getComponentByName("editor.meta.descrittori.pubblicazioni.datipubblicazione.nometag")).setSelectedItem(null);
 			((JTextField) form.getComponentByName("editor.meta.descrittori.pubblicazioni.datipubblicazione.numero")).setText(null);
 			data.set(null);
 		}
 
 		public boolean checkData() {
-			String nometag = (String) ((JTextField) form.getComponentByName("editor.meta.descrittori.pubblicazioni.datipubblicazione.nometag"))
-					.getText();
+			String nometag = (String) ((JComboBox) form.getComponentByName("editor.meta.descrittori.pubblicazioni.datipubblicazione.nometag"))
+					.getSelectedItem();
 			String numero = ((JTextField) form.getComponentByName("editor.meta.descrittori.pubblicazioni.datipubblicazione.numero")).getText();
 
 			if (data.getAsDate() == null || nometag == null || numero == null || "".equals(nometag.trim()) || "".equals(numero.trim())) {
@@ -253,11 +254,11 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 		sottoFormDatiPubblicazione.replaceComponent("editor.meta.descrittori.pubblicazioni.datipubblicazione.data", tagDataSottoFormDatiPubblicazione
 				.getAsComponent());
 
-		tagTipoSottoFormDatiPubblicazione = (JTextField) sottoFormDatiPubblicazione
+		tagTipoSottoFormDatiPubblicazione = (JComboBox) sottoFormDatiPubblicazione
 				.getComponentByName("editor.meta.descrittori.pubblicazioni.datipubblicazione.nometag");
-//		tagTipoSottoFormDatiPubblicazione.addItem("ripubblicazione");
-//		tagTipoSottoFormDatiPubblicazione.addItem("errata");
-//		tagTipoSottoFormDatiPubblicazione.addItem("rettifica");
+		tagTipoSottoFormDatiPubblicazione.addItem("ripubblicazione");
+		tagTipoSottoFormDatiPubblicazione.addItem("errata");
+		tagTipoSottoFormDatiPubblicazione.addItem("rettifica");
 		tagNumeroSottoFormDatiPubblicazione = (JTextField) sottoFormDatiPubblicazione
 			.getComponentByName("editor.meta.descrittori.pubblicazioni.datipubblicazione.numero");
 
