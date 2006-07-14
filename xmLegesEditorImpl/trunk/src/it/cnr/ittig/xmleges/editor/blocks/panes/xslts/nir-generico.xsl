@@ -3,6 +3,9 @@
 	<xsl:output method="html" indent="yes"/>
 	
 	<xsl:param name="encoding"/>
+	
+	<xsl:include href="nir-panes-dtd-testo-1.0.xsl"/>
+	
 	<!-- ======================================================== -->
 	<!--                                                          -->
 	<!--  Template principale                                     -->
