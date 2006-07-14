@@ -107,6 +107,42 @@ public interface Tabelle extends Service {
 	public boolean canMergeRighe(Node node1, Node node2);
 
 	/**
+	 * Indica se &egrave; possibile unire la colonna
+	 * <code>node1</code> con quella (eventuale) a sinistra.
+	 * 
+	 * @param node riga
+	 * @return <code>true</code> se &egrave; possibile unire
+	 */
+	public boolean canMergeSxColonne(Node node);
+
+	/**
+	 * Indica se &egrave; possibile unire la colonna
+	 * <code>node1</code> con quella (eventuale) a destra.
+	 * 
+	 * @param node riga
+	 * @return <code>true</code> se &egrave; possibile unire
+	 */
+	public boolean canMergeDxColonne(Node node);
+	
+	/**
+	 * Indica se &egrave; possibile unire la riga
+	 * <code>node1</code> con quella (eventuale) superiore.
+	 * 
+	 * @param node riga
+	 * @return <code>true</code> se &egrave; possibile unire
+	 */
+	public boolean canMergeUpRighe(Node node);
+
+	/**
+	 * Indica se &egrave; possibile unire la riga
+	 * <code>node1</code> con quella (eventuale) inferiore.
+	 * 
+	 * @param node riga
+	 * @return <code>true</code> se &egrave; possibile unire
+	 */
+	public boolean canMergeDownRighe(Node node);
+
+	/**
 	 * Indica se &egrave; possibile allineare il testo della colonna individuata
 	 * dal nodo <code>node</code>.
 	 * 
@@ -128,13 +164,13 @@ public interface Tabelle extends Service {
 	public Node creaTabella(int righe, int colonne, boolean caption, boolean head, boolean foot);
 
 	/**
-	 * Indica se &egrave; possibile cancellare la tabella individuata dal nodo
+	 * Cancella la tabella individuata dal nodo
 	 * <code>node</code>.
 	 * 
 	 * @param node nodo di riferimento
-	 * @return <code>true</code> se &egrave; possibile cancellare
+	 * @return <code>true</code> se &egrave; stata cancellata la tabella
 	 */
-	public void eliminaTabella(Node node);
+	public boolean eliminaTabella(Node node);
 
 	/**
 	 * Crea una riga prima o dopo al nodo <code>pos</code>.
@@ -149,8 +185,19 @@ public interface Tabelle extends Service {
 	 * Elimina la riga individuata dal nodo <code>pos</code>.
 	 * 
 	 * @param pos riga
+	 * @return <code>true</code> se &egrave; stata cancellata la riga 
 	 */
-	public void eliminaRiga(Node pos);
+	public boolean eliminaRiga(Node pos);
+
+	/**
+	 * Unisce le colonne individuate dai nodi <code>pos1</code> e
+	 * <code>pos2</code>.
+	 * 
+	 * @param pos1 prima colonna
+	 * @param pos2 seconda colonna
+	 * @return <code>true</code> se &egrave; stato effettuato il merge
+	 */
+	public boolean mergeColonne(Node pos1, Node pos2);
 
 	/**
 	 * Unisce le righe individuate dai nodi <code>pos1</code> e
@@ -158,8 +205,9 @@ public interface Tabelle extends Service {
 	 * 
 	 * @param pos1 prima riga
 	 * @param pos2 seconda riga
+	 * @return <code>true</code> se &egrave; stato effettuato il merge
 	 */
-	public void mergeRighe(Node pos1, Node pos2);
+	public boolean mergeRighe(Node pos1, Node pos2);
 
 	/**
 	 * Crea una colonna prima o dopo al nodo <code>pos</code>.
@@ -174,8 +222,9 @@ public interface Tabelle extends Service {
 	 * Elimina la colonna individuata dal nodo <code>pos</code>.
 	 * 
 	 * @param pos riga
+	 * @return <code>true</code> se &egrave; stata eliminata la colonna
 	 */
-	public void eliminaColonna(Node pos);
+	public boolean eliminaColonna(Node pos);
 
 	/**
 	 * Allinea il testo della colonna individuata dal nodo <code>pos</code>.
