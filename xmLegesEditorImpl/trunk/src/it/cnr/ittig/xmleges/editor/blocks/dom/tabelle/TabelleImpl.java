@@ -45,10 +45,6 @@ import org.w3c.dom.NodeList;
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */
 
-/*
- * Il nodo che viene passato ad ogni metodo e' il nodo giusto nella gerarchia
- * dell'albero DOM
- */
 
 public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 	Logger logger;
@@ -79,7 +75,7 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 				if (dtdRulesManager.queryPrependable(node).contains("h:table")) 
 				    return 2;
 				
-				if (node.getParentNode() != null) {	
+				if (node.getParentNode() != null) {
 					if(dtdRulesManager.queryInsertableInside(node.getParentNode(), node).contains("h:table"))
 						return 3;
 					if (dtdRulesManager.queryInsertableAfter(node.getParentNode(), node).contains("h:table")) 
@@ -149,6 +145,21 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 		return false;
 	}
 
+	public boolean canAllignTextCol(Node node) {
+
+		Node nodoAvo = UtilDom.findParentByName(node, "h:table");
+		if (nodoAvo != null) {
+	         NodeList figli = nodoAvo.getChildNodes();
+	         for (int i=1; i< figli.getLength(); i++)
+		         if (figli.item(i).getNodeName().equals("h:thead") || figli.item(i).getNodeName().equals("h:tfoot"))
+		        	 return true;
+             if (nodoAvo.getLastChild().getChildNodes().getLength()>1) 
+            	 return true;
+             return false;
+		}
+		return false;
+	}
+
 	
 	public boolean canDeleteRiga(Node node) {
 
@@ -160,22 +171,8 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 					return true;
 				else {
 					try {
-						/*
-						 * if (UtilDom.findParentByName(node,"h:tr") != null){
-						 * Node nodoRiga =
-						 * UtilDom.findParentByName(node,"h:tr"); if
-						 * (nodoRiga.getParentNode() != null){ Node parent =
-						 * nodoRiga.getParentNode();
-						 */
-						// if (parent.getNodeName().equals("h:thead") ||
-						// parent.getNodeName().equals("h:tfoot")
-						// || dtdRulesManager.queryCanDelete(parent,nodoRiga)){
 						if (dtdRulesManager.queryCanDelete(parent, nodoRiga))
 							return true;
-						// }
-
-						// }
-						// }
 					} catch (DtdRulesManagerException ex) {
 						return false;
 					}
@@ -233,8 +230,6 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 				Node nodoCella = UtilDom.findParentByName(node, "h:td");
 				if (nodoCella.getParentNode() != null) {
 					Node parent = nodoCella.getParentNode();
-					// Collection coll =
-					// dtdRulesManager.queryInsertableBefore(parent,nodoCella);
 					if (dtdRulesManager.queryCanDelete(parent, nodoCella)) {
 						return true;
 					}
@@ -242,12 +237,116 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 
 			}
 		} catch (DtdRulesManagerException ex) {
-			//logger.error(ex.getMessage(), ex);
+			logger.error(ex.getMessage(), ex);
 			return false;
 		}
 		return false;
 	}
 
+	public boolean canMergeSxColonne(Node node) {
+		
+		try {
+		    if (UtilDom.findParentByName(node, "h:td") != null) {
+		      Node nodoCella = UtilDom.findParentByName(node, "h:td");
+		      if (nodoCella.getPreviousSibling() != null) { 
+	 		    if (dtdRulesManager.queryCanDelete(nodoCella.getParentNode(), nodoCella)) {
+				  logger.debug("candoaction-MergeSxColonne");
+				  return true;
+			    }
+		      }
+		    }
+
+		} catch (DtdRulesManagerException ex) {
+			logger.error(ex.getMessage(), ex);
+			return false;
+		}
+
+		return false;
+	}
+	
+    public boolean canMergeDxColonne(Node node) {
+		
+    	try {
+		    if (UtilDom.findParentByName(node, "h:td") != null) {
+		      Node nodoCella = UtilDom.findParentByName(node, "h:td");
+		      if (nodoCella.getNextSibling() != null) { 
+	 		    if (dtdRulesManager.queryCanDelete(nodoCella.getParentNode(), nodoCella)) {
+				  logger.debug("candoaction-MergeDxColonne");
+				  return true;
+			    }
+		      }
+		    }
+
+		} catch (DtdRulesManagerException ex) {
+			logger.error(ex.getMessage(), ex);
+			return false;
+		}
+
+		return false;
+	}
+	public boolean canMergeUpRighe(Node node) {
+
+		try {
+			Node nodoRiga1 = UtilDom.findParentByName(node, "h:tr");
+		    if (nodoRiga1 != null) { 
+		      Node nodoRiga2 = null;
+			  if (nodoRiga1.getParentNode().getNodeName().equals("h:tbody")) 
+		    	nodoRiga2 = nodoRiga1.getPreviousSibling();	
+		      else 
+		    	if (nodoRiga1.getParentNode().getNodeName().equals("h:tfoot")) 
+		    	  nodoRiga2 = nodoRiga1.getParentNode().getNextSibling().getFirstChild();
+		    	else 
+		    	  return false;
+		      if ((nodoRiga2 != null) && (nodoRiga2.getNodeName().equals("h:tr"))) {
+			    Node parent = nodoRiga2.getParentNode();
+	 		    if (dtdRulesManager.queryCanDelete(parent, nodoRiga2)) {
+				  logger.debug("candoaction-MergeUpRighe");
+				  return true;
+			    }
+		      }
+		    }
+
+		} catch (DtdRulesManagerException ex) {
+			logger.error(ex.getMessage(), ex);
+			return false;
+		}
+		
+		return false;
+	}
+	
+	public boolean canMergeDownRighe(Node node) {
+		
+		try {
+			Node nodoRiga1 = UtilDom.findParentByName(node, "h:tr");
+		    if (nodoRiga1 != null) { 
+		      Node nodoRiga2 = null;
+		      if (nodoRiga1.getParentNode().getNodeName().equals("h:tbody"))
+		    	nodoRiga2 = nodoRiga1.getNextSibling();
+		      else 
+		    	if (nodoRiga1.getParentNode().getNodeName().equals("h:thead")) {
+		    	  nodoRiga2 = nodoRiga1.getParentNode();
+		    	  while (!nodoRiga2.getNextSibling().getNodeName().equals("h:tbody"))
+		    		  nodoRiga2 = nodoRiga2.getNextSibling();
+		    	  nodoRiga2 = nodoRiga2.getNextSibling().getFirstChild();
+		    	}  
+		    	else return false;
+		      if ((nodoRiga2 != null) && (nodoRiga2.getNodeName().equals("h:tr"))) {
+			    Node parent = nodoRiga2.getParentNode();
+	 		    if (dtdRulesManager.queryCanDelete(parent, nodoRiga2)) {
+				  logger.debug("candoaction-MergeDownRighe");
+				  return true;
+			    }
+		      }
+		    }
+
+		} catch (DtdRulesManagerException ex) {
+			logger.error(ex.getMessage(), ex);
+			return false;
+		}
+		
+		return false;
+	}
+	
 	public boolean canMergeRighe(Node node1, Node node2) {
 
 		try {
@@ -256,7 +355,6 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 				Node nodoRiga2 = UtilDom.findParentByName(node2, "h:tr");
 				if (nodoRiga2.getParentNode() != null) {
 					Node parentnext = nodoRiga2.getParentNode();
-					// if (!(next.getNodeName().equals ("h:tr"))){
 
 					if ((UtilDom.getCommonAncestor(nodoRiga2, nodoRiga1).getNodeName().equals("h:table")
 							|| UtilDom.getCommonAncestor(nodoRiga2, nodoRiga1).getNodeName().equals("h:thead") || UtilDom.getCommonAncestor(nodoRiga2,
@@ -280,24 +378,6 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 		return false;
 	}
 
-	// da fare canDo per allineamento verticale ??????????
-
-	public boolean canAllignTextCol(Node node) {
-		try {
-			if (UtilDom.findParentByName(node, "h:td") != null) {
-				// if ((n[i].getNodeType() == Node.ELEMENT_NODE)){
-				if (dtdRulesManager.queryIsValidAttribute("h:td", "align")) {
-					return true;
-
-				}
-			}
-		} catch (DtdRulesManagerException ex) {
-			//logger.error(ex.getMessage(), ex);
-			return false;
-		}
-		return false;
-
-	}
 
 	// /////////////////////////////////////////////////////// Tabella Interface
 	public Node creaTabella(int righe, int colonne, boolean caption, boolean head, boolean foot) {
@@ -317,7 +397,8 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 			Node titolo = tabella.getOwnerDocument().createElementNS(UtilDom.getNameSpaceURIforElement(root, "h"), "h:caption");
 
 			try {
-				Node nodoTesto = tabella.getOwnerDocument().createTextNode("");
+			 	Node nodoTesto = tabella.getOwnerDocument().createElementNS(UtilDom.getNameSpaceURIforElement(root, "h"), "h:caption");
+			 	
 				if (dtdRulesManager.queryCanAppend(titolo, nodoTesto)) {
 					titolo.appendChild(nodoTesto);
 				}
@@ -362,7 +443,7 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 		return tabella;
 	}
 
-	public void eliminaTabella(Node pos) {
+	public boolean eliminaTabella(Node pos) {
 
 		if (canDeleteTable(pos)) {
 			EditTransaction tr = null;
@@ -373,9 +454,11 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 			} catch (Exception ex) {
 				logger.error(ex.getMessage(), ex);
 				documentManager.rollbackEdit(tr);
+				return false;
 			}
+			return true;
 		}
-
+        return false;
 	}
 
 	// crea una riga prima o dopo quella in posizione pos
@@ -383,10 +466,7 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 
 		if (pos.getParentNode() != null) {
 			Node genitore = pos.getParentNode();
-			int numCelle = pos.getChildNodes().getLength(); // ricavo il numero
-			// di celle
-			// per impostare le colonne
-			// della nuova riga
+			int numCelle = pos.getChildNodes().getLength(); 
 			logger.debug("numero di celle della nuova riga: " + numCelle);
 
 			// crea una nuova riga;
@@ -416,139 +496,152 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 					genitore.insertBefore(nuovaRiga, pos);
 					documentManager.commitEdit(tr);
 				}
-
 				catch (DocumentManagerException ex) {
 					logger.error(ex.getMessage(), ex);
 					documentManager.rollbackEdit(tr);
 				}
 			}
-
 			return nuovaRiga;
 		}
-
 		return null;
-
 	}
 
-	public void eliminaRiga(Node pos) {
 
+	public boolean eliminaRiga(Node pos) {
+		
 		if (canDeleteRiga(pos)) {
-			EditTransaction tr = null;
-			try {
-				tr = documentManager.beginEdit();
-				Node genitore = pos.getParentNode();
-				// Node htr = genitore.removeChild(pos);
-				logger.debug("##### rimosso htr");
-
-				if (!(genitore.hasChildNodes())) { // genitore: head, foot o
-					// body
-					logger.debug("##### head/foot/body hanno 1 solo figlio htr");
-					Node nonno = genitore.getParentNode(); // nonno: table
-					// elimino thead, hfoot o tbody se non hanno altri figli
-					if (genitore.getNodeName().equals("h:thead") || genitore.getNodeName().equals("h:tfoot")) {
-						nonno.removeChild(genitore); // si evita dtdRM
-						logger.debug("##### rimuovo head/foot");
-						// documentManager.commitEdit(tr);
-
-					} else {
-						try {
-							if (dtdRulesManager.queryCanDelete(nonno, genitore)) {
-								logger.debug("##### posso eliminare h/f/b");
-								nonno.removeChild(genitore);
-								// documentManager.commitEdit(tr);
-								NodeList nd = nonno.getChildNodes(); // lista
-								// figli
-								// di
-								// table: head,
-								// foot, body
-								if (nd.getLength() > 1) {
-									boolean trovatoAltroBody = false;
-									for (int i = 0; i < nd.getLength() && !trovatoAltroBody; i++) {
-										if (nd.item(i).getNodeName().equals("h:body")) {
-											trovatoAltroBody = true;
-										}
-									}
-
-									// elimino la tabella se non ci sono pi?
-									// body
-									if (nonno.getNodeName().equals("h:table") && !(trovatoAltroBody)) {
-										if (dtdRulesManager.queryCanDelete(nonno.getParentNode(), nonno))
-											nonno.getParentNode().removeChild(nonno);
-										// documentManager.commitEdit(tr);
-									}
-								}
-							}
-						} catch (DtdRulesManagerException ex) {
-							//logger.error(ex.getMessage(), ex);
-						}
-					}
-
-				}
-				documentManager.commitEdit(tr);
-			} catch (Exception ex) {
-				logger.error(ex.getMessage(), ex);
-				documentManager.rollbackEdit(tr);
-			}
-
+			Node genitore = pos.getParentNode();
+			logger.debug("RimuovoRIGAtabella");
+			if (genitore.getNodeName().equals("h:thead") || genitore.getNodeName().equals("h:tfoot")) {
+				//rimuovo il h:tr
+				genitore.removeChild(pos);
+				//rimuovo anche il THEAD o TFOOT				
+				pos = genitore;				
+			    genitore = genitore.getParentNode(); 		
+			}   
+			genitore.removeChild(pos);
+			return true;
 		}
+		logger.debug("RimozioneRIGAtabella FALLITA");
+		return false;
 	}
 
-	public void mergeRighe(Node pos1, Node pos2) {
+	public boolean mergeColonne(Node pos1, Node pos2) {
+
+		//merge generico, anche di colonne non adiacenti
+		Node parent = UtilDom.findParentByName(pos1, "h:table");
+		if (parent != null && UtilDom.findParentByName(pos2, "h:table") == parent) {
+			int numeroCol1 = -1;
+			int numeroCol2 = -1;
+			NodeList pos1parent = pos1.getParentNode().getChildNodes();
+			NodeList pos2parent = pos2.getParentNode().getChildNodes();
+			for (int i=0; i<pos1parent.getLength(); i++)
+				if (pos1parent.item(i).equals(pos1)) numeroCol1 = i;
+			for (int i=0; i<pos2parent.getLength(); i++)
+				if (pos2parent.item(i).equals(pos2)) numeroCol2 = i;
+			if (numeroCol1 != numeroCol2) {
+				Node sostituisci = parent.getFirstChild();
+				while (sostituisci != null) {
+				   if (sostituisci.getNodeName().equals("h:thead") || sostituisci.getNodeName().equals("h:tfoot") || sostituisci.getNodeName().equals("h:tbody")) {
+					   Node Riga = (Node) sostituisci.getFirstChild();
+					   while (Riga != null) {
+					     Node A = Riga.getFirstChild();
+						 Node B = A;
+					     for (int i=0; i<numeroCol1; i++) 
+						     A = A.getNextSibling();
+					     for (int i=0; i<numeroCol2; i++) 
+						     B = B.getNextSibling();
+
+									
+						 if (A.getLastChild() != null && B.getFirstChild() != null) {
+					      if ((A.getLastChild().getNodeType()==Node.TEXT_NODE) && (B.getFirstChild().getNodeType()==Node.TEXT_NODE)) {
+  					         //merge fra 2 nodi testo (e copiare altri figli)
+					         A.getLastChild().setNodeValue(A.getLastChild().getNodeValue()+" "+B.getFirstChild().getNodeValue());
+					         NodeList figli = B.getChildNodes();
+					         int numeroFigli = figli.getLength();
+					         for (int i=1; i< numeroFigli; i++)
+						         A.appendChild(figli.item(1));
+					         Riga = Riga.getNextSibling();
+					         continue;
+				          }
+						 } 
+				         //else { 
+					       //solo copia dei figli
+					       NodeList figli = B.getChildNodes();
+					       int numeroFigli = figli.getLength();
+					       for (int i=0; i<numeroFigli; i++)
+						       A.appendChild(figli.item(0));
+				         //}				
+ 					     Riga = Riga.getNextSibling();
+					   }
+				   }
+				   sostituisci = sostituisci.getNextSibling();
+				}				
+			} 
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean mergeRighe(Node pos1, Node pos2) {
+		
+//		if (pos2.getParentNode().getNodeName().equals("h:tfoot")) {
+//		  Node temp = pos2;
+//		  pos2 = pos1;
+//		  pos1 = temp;
+//		}
+	
 		Node nodoriga1 = UtilDom.findParentByName(pos1, "h:tr");
 		Node nodoriga2 = UtilDom.findParentByName(pos2, "h:tr");
-		/*
-		 * if (nodoriga1 != null && nodoriga2 != null){
-		 * if(UtilDom.getCommonAncestor(nodoriga1,nodoriga2).getNodeName().equals("h:table")||
-		 * UtilDom.getCommonAncestor(nodoriga1,nodoriga2).getNodeName().equals("h:thead") ||
-		 * UtilDom.getCommonAncestor(nodoriga1,nodoriga2).getNodeName().equals("h:tbody")){
-		 */
 
-		if (canMergeRighe(pos1, pos2)) {
-			EditTransaction tr = null;
-			try {
-				tr = documentManager.beginEdit();
-
+	    //ERRORE: non mi fa il merge ALTO da Piede a Corpo (levato il controllo if per questo)
+		//if (canMergeRighe(pos1, pos2)) {
 				Vector figlinodoriga1 = getChildHtd(nodoriga1);
 				Vector figlinodoriga2 = getChildHtd(nodoriga2);
-				if (figlinodoriga1.size() == figlinodoriga2.size()) {
+				if (figlinodoriga1.size() == figlinodoriga2.size()) {	
 					for (int j = 0; j < figlinodoriga1.size(); j++) {
+						
 						Node A = (Node) figlinodoriga1.elementAt(j);
-						Node B = (Node) figlinodoriga2.elementAt(j);
-						String textA = UtilDom.getTextNode(A);
-						String textB = UtilDom.getTextNode(B);
-						String textAB = textA + textB;
-						UtilDom.setTextNode(A, textAB);
-
+					    Node B = (Node) figlinodoriga2.elementAt(j);	    			
+			            if (A.getLastChild() != null && B.getFirstChild() != null) {
+						  if ((A.getLastChild().getNodeType()==Node.TEXT_NODE) &&
+								(B.getFirstChild().getNodeType()==Node.TEXT_NODE)) {
+							//merge fra 2 nodi testo (e copiare altri figli)
+							A.getLastChild().setNodeValue(A.getLastChild().getNodeValue()+" "+B.getFirstChild().getNodeValue());
+							NodeList figli = B.getChildNodes();
+						    int numeroFigli = figli.getLength();
+							for (int i=1; i<numeroFigli; i++)
+								A.appendChild(figli.item(1));
+							continue;
+						  }
+			            }	
+						//else { 
+							//solo copia dei figli
+							NodeList figli = B.getChildNodes();
+						    int numeroFigli = figli.getLength();
+							for (int i=0; i<numeroFigli; i++)
+								A.appendChild(figli.item(0));
+						//}		
 					}
-
+					return true;
 				}
+				return false;
+		//}
 
-				documentManager.commitEdit(tr);
-			} catch (Exception ex) {
-				logger.error(ex.getMessage(), ex);
-				documentManager.rollbackEdit(tr);
-			}
-		}
-
-		// }
-		// }
 	}
 
-	// inserisce una colonna prima o dopo pos, dove pos ? una cella
+	// inserisce una colonna prima o dopo pos, dove pos è una cella
 	// della colonna di riferimento
 	public Node[] creaColonna(Node pos, boolean appendi) {
 
 		Node genitore = pos.getParentNode();
-		int indice = UtilDom.getChildIndex(genitore, pos); // indice della
-		// colonna
+		int indice = UtilDom.getChildIndex(genitore, pos); // indice della colonna
 		Node nonno = genitore.getParentNode();
 		Node bisnonno = nonno.getParentNode();
 
-		// NodeList fg = nonno.getChildNodes();//lista delle righe
 		Vector headbodyfoot = UtilDom.getChildElements(bisnonno);
 		Vector colonna = new Vector();
 
-		// if (canDeleteColonna(pos)) {
 		EditTransaction tr = null;
 		try {
 			tr = documentManager.beginEdit();
@@ -558,12 +651,8 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 				if (!(htr.getNodeName().equals("h:caption"))) {
 					NodeList fg = htr.getChildNodes();// lista delle righe
 					for (int i = 0; i < fg.getLength(); i++) {
-						NodeList np = fg.item(i).getChildNodes(); // lista
-						// colonne
+						NodeList np = fg.item(i).getChildNodes(); // lista colonne
 						Node nuovaCella = pos.getOwnerDocument().createElementNS(UtilDom.getNameSpaceURIforElement(pos, "h"), "h:td");
-						// Node nodoTesto =
-						// pos.getOwnerDocument().createTextNode("");
-						// nuovaCella.appendChild(nodoTesto);
 
 						if (appendi) {
 							fg.item(i).insertBefore(nuovaCella, np.item(indice + 1));
@@ -572,10 +661,8 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 							fg.item(i).insertBefore(nuovaCella, np.item(indice));
 							colonna.add(np.item(indice));
 						}
-
 					}
 				}
-
 			}
 			documentManager.commitEdit(tr);
 		} catch (Exception ex) {
@@ -595,7 +682,7 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 	// trovo l'indice della colonna da eliminare
 	// e da ogni elemento-riga nell'albero tolgo
 	// l'elemento-cella con quell'indice
-	public void eliminaColonna(Node pos) {
+	public boolean eliminaColonna(Node pos) {
 
 		Node genitore = pos.getParentNode();
 		int indice = UtilDom.getChildIndex(genitore, pos);
@@ -603,68 +690,24 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 		Node bisnonno = nonno.getParentNode();
 		// NodeList fg = nonno.getChildNodes(); //lista delle righe
 		Vector headbodyfoot = UtilDom.getChildElements(bisnonno);
-		boolean figli = true;
 
 		if (canDeleteColonna(pos)) {
-			EditTransaction tr = null;
-			try {
-				tr = documentManager.beginEdit();
-
-				for (int j = 0; j < headbodyfoot.size(); j++) { // scarta primo
-					// nodo
-					// caption
+				for (int j = 0; j < headbodyfoot.size(); j++) { 
 					Node htr = (Node) headbodyfoot.elementAt(j);
 					if (!(htr.getNodeName().equals("h:caption"))) {
 						NodeList fg = htr.getChildNodes();// lista delle righe
 						for (int i = 0; i < fg.getLength(); i++) {
-							NodeList np = fg.item(i).getChildNodes();// lista
-							// colonne
+							NodeList np = fg.item(i).getChildNodes();// lista colonne
 							Node daeliminare = np.item(indice);
 							fg.item(i).removeChild(daeliminare);
 							logger.debug("##### elimina colonna");
-							figli = figli | fg.item(i).hasChildNodes();
-
-						}
-						if (!figli) {
-							// se le righe della tabella non hanno pi? colonne
-							// elimino la
-							// tabella
-							if (nonno.getNodeName().equals("h:tbody")) {
-								nonno.getParentNode().getParentNode().removeChild(nonno.getParentNode());
-								logger.debug("##### elimina colonna: elimino tutta la tab");
-
-							} else if (nonno.getNodeName().equals("h:thead") | nonno.getNodeName().equals("h:foot")) {
-								nonno.getParentNode().removeChild(nonno);
-								logger.debug("##### elimina colonna");
-							}
-
 						}
 					}
 				}
-
-				documentManager.commitEdit(tr);
-			} catch (Exception ex) {
-				logger.error(ex.getMessage(), ex);
-				documentManager.rollbackEdit(tr);
-			}
-
+            return true;
 		}
+		return false;
 	}
-
-	// riceve in ingresso la lista di celle appartenenti alla colonna da
-	// eliminare
-	// private void eliminaColonna(NodeList listaNodi) {
-	//
-	// Node primoNodo = listaNodi.item(0);
-	// Node genitore = primoNodo.getParentNode();
-	// Node nonno = genitore.getParentNode();
-	// NodeList fg = nonno.getChildNodes();
-	//
-	// for (int i = 0; i < fg.getLength(); i++) {
-	// fg.item(i).removeChild(listaNodi.item(i));
-	// }
-	//
-	// }
 
 	// inserisce in un vector i figli di tipo h:td di un nodo riga
 	public Vector getChildHtd(org.w3c.dom.Node elem) {
@@ -682,6 +725,26 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 
 	public void allineaTestoCol(Node pos, String allinea) {
 
+		
+	//prova NON FUNZIONANTE	
+//		if (canAllignTextCol(pos)) {
+//			EditTransaction tr = null;
+//			try {
+//				int indice = UtilDom.getChildIndex(pos.getParentNode(), pos);
+//				Node nodo = UtilDom.findParentByName(pos, "h:table").getFirstChild();
+//				while (nodo != null) {
+//					Node figlio = nodo.getFirstChild();
+//					for (int i=0; i<indice; i++)
+//						 figlio.getNextSibling();
+//					UtilDom.setAttributeValue(figlio, "align", allinea);
+//				}
+//			} catch (Exception ex) {
+//			    logger.error(ex.getMessage(), ex);
+//			    documentManager.rollbackEdit(tr);
+//			}
+//				
+//		}
+				
 		Node genitore = pos.getParentNode();
 		int indice = UtilDom.getChildIndex(genitore, pos);
 		Node nonno = genitore.getParentNode();
@@ -689,7 +752,8 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 		Vector headbodyfoot = UtilDom.getChildElements(bisnonno);
 		// NodeList righe = nonno.getChildNodes(); //lista delle righe
 
-		if (canDeleteTable(pos)) {
+		if (canAllignTextCol(pos)) {
+			
 			EditTransaction tr = null;
 			try {
 				tr = documentManager.beginEdit();
@@ -698,17 +762,15 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 					NodeList righe = htr.getChildNodes();// lista delle righe
 
 					for (int i = 0; i < righe.getLength(); i++) {
-						NodeList colonne = righe.item(i).getChildNodes();// per
-						// tutte
-						// le righe
-						// prendi la
-						// lista dei
-						// figli
-						Node nodoIndice = colonne.item(indice); // fra tutti i
-						// figli
-						// prendi quelli con
-						// indice=col da allineare
-						UtilDom.setAttributeValue(nodoIndice, "align", allinea);
+						NodeList colonne = righe.item(i).getChildNodes();
+						// per tutte le righe prendi la lista dei figli 
+						Node nodoIndice = colonne.item(indice);
+//						(per correggere errore : FORSE)
+						if (nodoIndice != null) 
+//						if (!nodoIndice.getNodeName().equals("h:td"))
+//  						    nodoIndice = UtilDom.findParentByName(nodoIndice, "h:td");
+						// fra tutti i figli prendi quelli con indice=col da allineare
+						   UtilDom.setAttributeValue(nodoIndice, "align", allinea);
 					}
 
 				}
@@ -718,28 +780,9 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 				documentManager.rollbackEdit(tr);
 			}
 		}
-
-		/*
-		 * ALLINEAMENTO ORIZZ if (allinea.equals("left")){
-		 * UtilDom.setAttributeValue(nodoIndice,"align","left"); } if
-		 * (allinea.equals("right")) {
-		 * UtilDom.setAttributeValue(nodoIndice,"align","right"); }
-		 * if(allinea.equals("center")) {
-		 * UtilDom.setAttributeValue(nodoIndice,"align","center"); }
-		 * if(allinea.equals("justify")) {
-		 * UtilDom.setAttributeValue(nodoIndice,"align","justify"); }
-		 * ALLINEAMENTO VERT if(allinea.equals("top")) {
-		 * UtilDom.setAttributeValue(nodoIndice,"valign","top"); }
-		 * if(allinea.equals("middle")) {
-		 * UtilDom.setAttributeValue(nodoIndice,"valign","middle"); }
-		 * if(allinea.equals("bottom")) {
-		 * UtilDom.setAttributeValue(nodoIndice,"valign","bottom"); }
-		 */
-
 	}
 
-	// a partire dal nodo corrente, costruisce le righe e le colonne della
-	// tabella
+	// a partire dal nodo corrente, costruisce le righe e le colonne della tabella
 	protected Node insertTab(Node inizio, int righe, int colonne) {
 
 		for (int i = 1; i <= righe; i++) {
@@ -755,8 +798,6 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 
 		for (int h = 1; h <= colonne; h++) {
 			Node newcell = riga.getOwnerDocument().createElementNS(UtilDom.getNameSpaceURIforElement(riga, "h"), "h:td");
-			// Node nodoTesto = riga.getOwnerDocument().createTextNode("");
-			// newcell.appendChild(nodoTesto);
 			riga.appendChild(newcell);
 		}
 		return riga;
