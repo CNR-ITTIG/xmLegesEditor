@@ -77,6 +77,7 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 		
 		
 		form.setMainComponent(getClass().getResourceAsStream("cnrProprietari.jfrm"));
+		form.setSize(400,150);
 
 		form.setName("editor.form.meta.cnr");
 		
