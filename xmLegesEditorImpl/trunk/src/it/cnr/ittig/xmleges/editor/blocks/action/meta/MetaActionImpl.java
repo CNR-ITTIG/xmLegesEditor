@@ -25,12 +25,14 @@ import it.cnr.ittig.xmleges.editor.services.autorita.Istituzione;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.MetaCiclodivita;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.cnr.MetaCnr;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.MetaDescrittori;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.inquadramento.MetaInquadramento;
 import it.cnr.ittig.xmleges.editor.services.dom.rinumerazione.Rinumerazione;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.Vigenza;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 import it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita.CiclodiVitaForm;
+import it.cnr.ittig.xmleges.editor.services.form.meta.cnr.CnrProprietariForm;
 import it.cnr.ittig.xmleges.editor.services.form.meta.descrittori.MetaDescrittoriForm;
 import it.cnr.ittig.xmleges.editor.services.form.meta.inquadramento.InquadramentoForm;
 import it.cnr.ittig.xmleges.editor.services.form.meta.urn.UrnDocumentoForm;
@@ -97,18 +99,24 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 	AbstractAction inquadramentoAction = new InquadramentoAction();
 
 	AbstractAction urnAction = new urnAction();
+	
+	AbstractAction cnrAction = new cnrAction();
 
 	MetaDescrittori descrittori;
 	
 	MetaCiclodivita ciclodivita; //dom
 	
 	MetaInquadramento inquadramento;
+	
+	MetaCnr metaCnr;
 
 	MetaDescrittoriForm descrittoriForm;
 	
 	CiclodiVitaForm ciclodivitaForm;
 
-	UrnDocumentoForm urnDocumentoForm;	
+	UrnDocumentoForm urnDocumentoForm;
+	
+	CnrProprietariForm cnrForm;
 	
 	InquadramentoForm inquadramentoForm;
 
@@ -143,6 +151,7 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		descrittori = (MetaDescrittori) serviceManager.lookup(MetaDescrittori.class);
 		ciclodivita = (MetaCiclodivita) serviceManager.lookup(MetaCiclodivita.class);
 		inquadramento = (MetaInquadramento) serviceManager.lookup(MetaInquadramento.class);
+		metaCnr = (MetaCnr) serviceManager.lookup(MetaCnr.class);
 		descrittoriForm = (MetaDescrittoriForm) serviceManager.lookup(MetaDescrittoriForm.class);
 		ciclodivitaForm = (CiclodiVitaForm) serviceManager.lookup(CiclodiVitaForm.class);
 		inquadramentoForm = (InquadramentoForm) serviceManager.lookup(InquadramentoForm.class);
@@ -155,6 +164,7 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		provvedimenti = (Provvedimenti) serviceManager.lookup(Provvedimenti.class);
 		regAutorita = (Autorita) serviceManager.lookup(Autorita.class);
 		urnDocumentoForm = (UrnDocumentoForm) serviceManager.lookup(UrnDocumentoForm.class);
+		cnrForm = (CnrProprietariForm) serviceManager.lookup(CnrProprietariForm.class);
 		vigenza = (Vigenza) serviceManager.lookup(Vigenza.class);
 	}
 
@@ -164,12 +174,14 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		actionManager.registerAction("editor.meta.ciclodivita", ciclodivitaAction);
 		actionManager.registerAction("editor.meta.inquadramento", inquadramentoAction);
 		actionManager.registerAction("editor.meta.urn", urnAction);
+		actionManager.registerAction("editor.meta.cnr", cnrAction);
 		eventManager.addListener(this, DocumentOpenedEvent.class);
 		eventManager.addListener(this, DocumentClosedEvent.class);
 		descrittoriAction.setEnabled(false);
 		ciclodivitaAction.setEnabled(false);
 		inquadramentoAction.setEnabled(false);
 		urnAction.setEnabled(false);
+		cnrAction.setEnabled(false);
 	}
 
 	// ////////////////////////////////////////// EventManagerListener Interface
@@ -177,7 +189,8 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		descrittoriAction.setEnabled(!documentManager.isEmpty() && !utilRulesManager.isDtdDL());
 		ciclodivitaAction.setEnabled(!documentManager.isEmpty() && !utilRulesManager.isDtdDL());
 		inquadramentoAction.setEnabled(!documentManager.isEmpty() && !utilRulesManager.isDtdDL() && !utilRulesManager.isDtdBase());
-		urnAction.setEnabled(!documentManager.isEmpty());
+		urnAction.setEnabled(!documentManager.isEmpty());		
+		cnrAction.setEnabled(!documentManager.isEmpty() && documentManager.getDtdName().equals("cnr.dtd"));
 	}
 
 	// //////////////////////////////////////////// MetaGeneraliAction Interface
@@ -268,8 +281,29 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 	}
 
 
+/////////////////////////////////////////
+	//////////////////////////////  CNR 
 	
-	
+	public void doCnr() {
+		Document doc = documentManager.getDocumentAsDom();
+		
+		cnrForm.setProprietari(metaCnr.getProprietario());
+		
+		
+		if (cnrForm.openForm()) {
+			try {
+				EditTransaction tr = documentManager.beginEdit();
+				metaCnr.setProprietario(cnrForm.getProprietari());								
+				documentManager.commitEdit(tr);
+				rinumerazione.aggiorna(doc);
+			} catch (DocumentManagerException ex) {
+				logger.error(ex.getMessage(), ex);
+			}
+		}
+		
+	}
+
+
 	
 	/////////////////////////////////////////
 	//////////////////////////////  URN 
@@ -561,6 +595,7 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		}
 	}
 	
+	
 	public class CiclodiVitaAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
 			doCiclodiVita();
@@ -578,6 +613,13 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 			doUrn();
 		}
 	}
+	
+	public class cnrAction extends AbstractAction {
+		public void actionPerformed(ActionEvent e) {
+			doCnr();
+		}
+	}
+	
 
 	
 
