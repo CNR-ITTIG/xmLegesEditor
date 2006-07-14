@@ -4,8 +4,6 @@
 	
 	<xsl:param name="encoding"/>
 	
-	<xsl:include href="nir-panes-dtd-testo-1.0.xsl"/>
-	
 	<!-- ======================================================== -->
 	<!--                                                          -->
 	<!--  Template principale                                     -->
@@ -454,4 +452,5 @@
 			</xsl:otherwise>
 		</xsl:choose>
 </xsl:template>
+
 </xsl:stylesheet>
