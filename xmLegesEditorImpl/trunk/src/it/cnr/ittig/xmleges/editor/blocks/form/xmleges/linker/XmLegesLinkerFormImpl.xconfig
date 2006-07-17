@@ -1,25 +1,26 @@
 <configuration>
 <regione name="" urn="" />
-<regione name="Abruzzo" urn="regione:abruzzo" />
-<regione name="Basilicata" urn="regione:basilicata" />
-<regione name="Calabria" urn="regione:calabria" />
-<regione name="Campania" urn="regione:campania" />
-<regione name="Emilia Romagna" urn="regione:emilia.romagna" />
-<regione name="Friuli Venezia Giulia" urn="regione:friuli.venezia.giulia" />
-<regione name="Lazio" urn="regione:lazio" />
-<regione name="Liguria" urn="regione:liguria" />
-<regione name="Lombardia" urn="regione:lombardia" />
-<regione name="Marche" urn="regione:marche" />
-<regione name="Molise" urn="regione:molise" />
-<regione name="Piemonte" urn="regione:piemonte" />
-<regione name="Puglia" urn="regione:puglia" />
-<regione name="Sardegna" urn="regione:sardegna" />
-<regione name="Sicilia" urn="regione:sicilia" />
-<regione name="Toscana" urn="regione:toscana" />
-<regione name="Trentino Alto Adige" urn="regione:trentino.alto.adige" />
-<regione name="Umbria" urn="regione:umbria" />
-<regione name="Valle d\'Aosta" urn="regione:valle.aosta" />
-<regione name="Veneto" urn="regione:veneto" />
-
-
+<regione name="Abruzzo" urn="abruzzo" />
+<regione name="Basilicata" urn="basilicata" />
+<regione name="Calabria" urn="calabria" />
+<regione name="Campania" urn="campania" />
+<regione name="Emilia Romagna" urn="emilia.romagna" />
+<regione name="Friuli Venezia Giulia" urn="friuli.venezia.giulia" />
+<regione name="Lazio" urn="lazio" />
+<regione name="Liguria" urn="liguria" />
+<regione name="Lombardia" urn="lombardia" />
+<regione name="Marche" urn="marche" />
+<regione name="Molise" urn="molise" />
+<regione name="Piemonte" urn="piemonte" />
+<regione name="Puglia" urn="puglia" />
+<regione name="Sardegna" urn="sardegna" />
+<regione name="Sicilia" urn="sicilia" />
+<regione name="Toscana" urn="toscana" />
+<regione name="Trentino Alto Adige" urn="trentino.alto.adige" />
+<regione name="Umbria" urn="umbria" />
+<regione name="Valle d'Aosta" urn="valle.aosta" />
+<regione name="Veneto" urn="veneto" />
+<ente name="" urn="" />
+<ente name="CNR" urn="consiglio.nazionale.ricerche" />
+<ente name="CNIPA" urn="centro.nazionale.informatica.pubblica.amministrazione" />
 </configuration>

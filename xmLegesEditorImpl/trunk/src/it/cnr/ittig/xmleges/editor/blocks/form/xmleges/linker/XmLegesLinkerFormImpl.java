@@ -80,7 +80,7 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 
 	UtilMsg utilMsg;
 
-	JComboBox regione;
+	JComboBox regione, ente;
 
 	JTabbedPane tabbedPane;
 
@@ -98,7 +98,13 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 	
 	JCheckBox checkInc;
 
-	String[] elencoregioni = new String[21];
+	String[] elencoregioni = new String[22];
+	
+	String[] elencoregioniUrn = new String[22];
+	
+	String[] elencoenti = new String[5];
+	
+	String[] elencoentiUrn = new String[5];
 
 	File fileRisultato;
 
@@ -149,9 +155,18 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 	// ////////////////////////////////////////////////// Configurable Interface
 	public void configure(Configuration configuration) throws ConfigurationException {
 		try {
-			Configuration[] elencoregioniconf = configuration.getChildren();
-			for (int i = 0; i < elencoregioniconf.length; i++)
-				elencoregioni[i] = elencoregioniconf[i].getAttribute("name");
+			Configuration[] elencoConf = configuration.getChildren();
+			int j=0, k=0;
+			for (int i = 0; i < elencoConf.length; i++){
+				if(elencoConf[i].getName().toLowerCase().startsWith("region")){
+				   elencoregioni[j] = elencoConf[i].getAttribute("name");
+				   elencoregioniUrn[j++] = elencoConf[i].getAttribute("urn");
+				}
+				else{
+				   elencoenti[k]= elencoConf[i].getAttribute("name");	
+				   elencoentiUrn[k++]= elencoConf[i].getAttribute("urn");
+				}
+			}
 		} catch (ConfigurationException e) {
 			logger.error("Impossibile leggere il file di configurazione");
 		}
@@ -163,6 +178,7 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 		form.setSize(700, 500);
 		form.setName("editor.form.xmleges.link");
 		regione = (JComboBox) form.getComponentByName("editor.form.xmleges.link.regione");
+		ente = (JComboBox) form.getComponentByName("editor.form.xmleges.link.ente");
 		tabbedPane = (JTabbedPane) form.getComponentByName("editor.form.xmleges.link.tab");
 		sorgente = (JTextArea) form.getComponentByName("editor.form.xmleges.link.sorgente");
 		sorgente.setWrapStyleWord(true);
@@ -189,6 +205,10 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 		regione.removeAllItems();
 		for (int i = 0; i < elencoregioni.length; i++)
 			regione.addItem(elencoregioni[i]);
+		
+		ente.removeAllItems();
+		for (int i = 0; i < elencoenti.length; i++)
+			ente.addItem(elencoenti[i]);
 	}
 
 	// ///////////////////////////////////////// ParserRiferimentiForm Interface
@@ -255,6 +275,8 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 		checkInc.setEnabled(true);
 		checkInt.setSelected(true);
 		checkInc.setSelected(true);
+		regione.setSelectedIndex(0);
+		ente.setSelectedIndex(0);
 		form.showDialog();
 		return form.isOk();
 	}
@@ -300,7 +322,9 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 		form.setDialogWaiting(true);
 		try {
 			if (regione.getSelectedIndex() != 0)
-				parser.setRegione(regione.getSelectedItem().toString());
+				parser.setRegione(elencoregioniUrn[regione.getSelectedIndex()]);
+			if (ente.getSelectedIndex() != 0)
+				parser.setEnte(elencoentiUrn[ente.getSelectedIndex()]);
 			parser.setEnabledRifIncompleti(false);
 			parser.setEnabledRifInterni(false);
 			switch (tipo) {
@@ -346,7 +370,9 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 	private void AnalizzaDoc(){
 		try {
 			if (regione.getSelectedIndex() != 0)
-				parser.setRegione(regione.getSelectedItem().toString());
+				parser.setRegione(elencoregioniUrn[regione.getSelectedIndex()]);
+			if (ente.getSelectedIndex() != 0)
+				parser.setEnte(elencoentiUrn[ente.getSelectedIndex()]);
 			parser.setEnabledRifIncompleti(checkInc.isSelected());
 			parser.setEnabledRifInterni(checkInt.isSelected());
 			risAll = UtilFile.inputStreamToString(parser.parse(dm.getRootElement()));
