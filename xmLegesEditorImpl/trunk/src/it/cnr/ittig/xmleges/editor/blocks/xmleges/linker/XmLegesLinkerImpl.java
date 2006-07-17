@@ -59,6 +59,8 @@ public class XmLegesLinkerImpl implements XmLegesLinker, Loggable, Serviceable, 
 	ExecMonitor execMonitor;
 
 	String regione = null;
+	
+	String ente = null;
 
 	String ministero = null;
 	
@@ -99,6 +101,10 @@ public class XmLegesLinkerImpl implements XmLegesLinker, Loggable, Serviceable, 
 	public void setRegione(String regione) {
 		this.regione = regione;
 	}
+	
+	public void setEnte(String ente) {
+		this.ente = ente;
+	}
 
 	public void setMinistero(String ministero) {
 		this.ministero = ministero;
@@ -125,6 +131,8 @@ public class XmLegesLinkerImpl implements XmLegesLinker, Loggable, Serviceable, 
 		StringBuffer sb = new StringBuffer(command.getAbsolutePath());
 		if (regione != null)
 			sb.append(" -R " + this.regione);
+		if (ente != null)
+			sb.append(" -E " + this.ente);
 		if (ministero != null)
 			sb.append(" -M " + this.ministero);
 		sb.append(" -m dtdnir -i xml ");
