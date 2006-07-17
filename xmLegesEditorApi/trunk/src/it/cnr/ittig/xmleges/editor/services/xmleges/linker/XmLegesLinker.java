@@ -30,6 +30,13 @@ public interface XmLegesLinker extends Service {
 	 * @param regione regione di default
 	 */
 	public void setRegione(String regione);
+	
+	/**
+	 * Imposta l'ente emanante di default se non specificato nella citazione.
+	 * 
+	 * @param ente ente di default
+	 */
+	public void setEnte(String ente);
 
 	/**
 	 * Imposta il ministero di default se non specificato nella citazione.
