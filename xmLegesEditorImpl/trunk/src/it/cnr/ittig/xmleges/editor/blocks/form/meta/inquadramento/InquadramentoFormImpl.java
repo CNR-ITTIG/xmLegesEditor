@@ -155,7 +155,7 @@ public class InquadramentoFormImpl implements InquadramentoForm, Loggable,
 	
 		
 	public boolean openForm() {
-		form.setSize(400, 600);
+		form.setSize(450, 600);
 		form.showDialog();
 
 		return form.isOk();
