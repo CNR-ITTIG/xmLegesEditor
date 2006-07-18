@@ -258,7 +258,9 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 		
 		if(unknownTipoDoc != null){
 			unknownTipoDoc = unknownTipoDoc.toLowerCase().trim();
-			if(unknownTipoDoc.startsWith("legge") && unknownTipoDoc.indexOf("costituzionale")==-1)
+			if(unknownTipoDoc.indexOf("regionale")!=-1 || unknownTipoDoc.indexOf("regione")!=-1 || unknownTipoDoc.indexOf("lr")!=-1 || unknownTipoDoc.indexOf("l.r.")!=-1)
+				comboItem = parser.TIPO_DOC[11];
+			else if(unknownTipoDoc.startsWith("legge") && unknownTipoDoc.indexOf("costituzionale")==-1)
 				comboItem = parser.TIPO_DOC[0];
 			else if(unknownTipoDoc.indexOf("costituzionale")!=-1)
 				comboItem = parser.TIPO_DOC[1];
@@ -274,8 +276,6 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 				comboItem = parser.TIPO_DOC[7];
 			else if(unknownTipoDoc.indexOf("ministeriale")!=-1 || unknownTipoDoc.indexOf("ministero")!=-1 || unknownTipoDoc.indexOf("dm")!=-1 || unknownTipoDoc.indexOf("d.m")!=-1)
 				comboItem = parser.TIPO_DOC[9];
-			else if(unknownTipoDoc.indexOf("regionale")!=-1 || unknownTipoDoc.indexOf("regione")!=-1 || unknownTipoDoc.indexOf("lr")!=-1 || unknownTipoDoc.indexOf("l.r.")!=-1)
-				comboItem = parser.TIPO_DOC[11];
 			else if(unknownTipoDoc.indexOf("disegno")!=-1 || unknownTipoDoc.indexOf("ddl")!=-1 || unknownTipoDoc.indexOf("d.d.l.")!=-1)
 				comboItem = parser.TIPO_DOC[12];
 			else if(unknownTipoDoc.indexOf("provvedimento")!=-1)
