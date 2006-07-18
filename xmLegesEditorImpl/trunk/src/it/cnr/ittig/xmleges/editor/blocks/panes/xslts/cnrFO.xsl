@@ -10,11 +10,11 @@
 <!--                                                         -->
 
 <xsl:stylesheet  version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                               xmlns:fo= "http://www.w3.org/1999/XSL/Format"
-                               xmlns:h  ="http://www.w3.org/HTML/1998/html4"
+                               xmlns:fo="http://www.w3.org/1999/XSL/Format"
+                               xmlns:h="http://www.w3.org/HTML/1998/html4"
                                xmlns:xlink="http://www.w3.org/1999/xlink" 
-                               xmlns:nir="http://www.normeinrete.it/nir/2.0"
-                               xmlns:cnr="http://www.cnr.it/provvedimenti/1.0" >
+                               xmlns:nir="http://www.normeinrete.it/nir/2.1/"
+                               xmlns:cnr="http://www.cnr.it/provvedimenti/2.0" >
                                
 <xsl:output method="xml" indent="yes" encoding="iso-8859-1"/>
 
@@ -107,24 +107,24 @@
 <xsl:template name="intestazione">
 <fo:block text-align="center" >
    <fo:block font-weight="bold" font-size="18pt" space-after="5mm" font-style="italic">
-   Consiglio Nazionale Delle Ricerche
+   Consiglio Nazionale delle Ricerche
    </fo:block>
-   <fo:block font-weight="bold" font-size="12pt" >
+   <fo:block font-weight="bold" font-size="12pt">
       <xsl:call-template name="estremiAtto" />
    </fo:block>
    <fo:block font-weight="bold" font-size="15pt" space-before="10mm" space-after="5mm">
-      <xsl:apply-templates select = "//nir:intestazione/nir:titoloDoc"/>
+      <xsl:apply-templates select="//nir:intestazione/nir:titoloDoc"/>
    </fo:block>
 </fo:block>
 </xsl:template>
 
 <xsl:template name="estremiAtto">
-   <xsl:value-of select = "//nir:intestazione/nir:tipoDoc"/>
+   <xsl:value-of select="//nir:intestazione/nir:tipoDoc"/>
    <xsl:if test="//nir:intestazione/nir:numDoc">
 	   <xsl:text> n.</xsl:text>
-	   <xsl:value-of select = "//nir:intestazione/nir:numDoc"/>
+	   <xsl:value-of select="//nir:intestazione/nir:numDoc"/>
 	   <xsl:text> del </xsl:text>
-	   <xsl:value-of select = "//nir:intestazione/nir:dataDoc"/>
+	   <xsl:value-of select="//nir:intestazione/nir:dataDoc"/>
    </xsl:if>
 </xsl:template>
 
