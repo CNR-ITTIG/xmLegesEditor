@@ -33,6 +33,7 @@ import it.cnr.ittig.xmleges.core.services.panes.xsltpane.XsltPane;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.spellcheck.dom.DomSpellCheck;
+//import it.cnr.ittig.xmleges.core.services.spellcheck.dom.DomSpellCheckEvent;
 import it.cnr.ittig.xmleges.core.services.threads.ThreadManager;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
@@ -173,6 +174,7 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 		eventManager.addListener(this, SelectionChangedEvent.class);
 		eventManager.addListener(this, DocumentChangedEvent.class);
 		eventManager.addListener(this, PaneActivatedEvent.class);
+		//eventManager.addListener(this, DomSpellCheckEvent.class);
 		textPane = new AntiAliasedTextPane(this);
 
 		panel.add(new JScrollPane(textPane), BorderLayout.CENTER);
@@ -256,8 +258,11 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 		} else if (event instanceof DocumentClosedEvent) {
 			textPane.setDom((Document) null);
 			updateTextPane();
-		}
-
+		} //	else if (event instanceof DomSpellCheckEvent) {
+		  //	// FIXME Tommaso: aggiunto io; non so se va bene qui e non funziona (elem null)
+		  //	textPane.viewDomSpellCheckEvent((DomSpellCheckEvent)event);
+		  //	//updateTextPane();
+		  //	}
 	}
 
 	// ////////////////////////////////////////////////////// XsltPane Interface
@@ -369,6 +374,7 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 
 	public synchronized void updateNode(Node node, String text) {
 		logger.debug("UPDATING NODE BEGIN");
+		
 		EditTransaction editTrans = null;
 		try {
 			editTrans = documentManager.beginEdit(this);
@@ -397,11 +403,11 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 					node.setNodeValue(xsltMapper.getI18nNodeText(parentNode));
 					fireActiveNodeChanged(parentNode);
 				}
-			} else if (node.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE) {
+			} else if (node!=null && node.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE) {
 				if (text != null) {
 					node.setNodeValue(text);
 				}
-			} else if (node.getNodeType() == Node.COMMENT_NODE) {
+			} else if (node!=null && node.getNodeType() == Node.COMMENT_NODE) {
 				if (text != null) {
 					node.setNodeValue(text);
 				}
