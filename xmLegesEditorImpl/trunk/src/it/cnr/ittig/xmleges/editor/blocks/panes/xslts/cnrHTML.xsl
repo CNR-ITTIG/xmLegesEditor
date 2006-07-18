@@ -10,9 +10,9 @@
 <!--                                                         -->
 
 <xsl:stylesheet  version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                               xmlns:nir="http://www.normeinrete.it/nir/2.0"
+                               xmlns:nir="http://www.normeinrete.it/nir/2.1/"
                                xmlns:h  ='http://www.w3.org/HTML/1998/html4' 
-                               xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.1" 
+                               xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.1/" 
                                xmlns:xlink="http://www.w3.org/1999/xlink">
 
 <xsl:output method="html" encoding="iso-8859-1"/>
@@ -47,7 +47,7 @@ body { font-family: "Verdana", "Tahoma", "Times New Roman",  "Book Antiqua";
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * METADATI                                                                                                            *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-.meta, .inlinemeta { display: none; }/* I metadati non sono visualizzati */
+.meta, .inlinemeta { display: none; } /* I metadati non sono visualizzati */
 
 
 
