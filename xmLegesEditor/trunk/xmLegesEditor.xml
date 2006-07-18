@@ -273,6 +273,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                         <check action="view.toolbar.editor.tabelle" />
                         <check action="view.toolbar.editor.riferimenti" />
                         <check action="view.toolbar.editor.metadati" />
+                        <check action="view.toolbar.editor.revisioni" />
                         <check action="view.toolbar.frame" />
                     </menu>
                     <menu action="menu.view.panes">
@@ -494,7 +495,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <item action="editor.partizioni.vigenza" />
                     <item action="editor.annessi.annesso" />
                     <item action="editor.ndr" />
-                    <!--item action="editor.rinumerazione" /-->
                 </toolbar>
                 <toolbar name="editor.tabelle"  floatable="false" rollover="true">
                     <item action="editor.tabelle.crea" />
