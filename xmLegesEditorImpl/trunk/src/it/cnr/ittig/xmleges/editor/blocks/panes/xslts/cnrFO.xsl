@@ -14,7 +14,7 @@
                                xmlns:h="http://www.w3.org/HTML/1998/html4"
                                xmlns:xlink="http://www.w3.org/1999/xlink" 
                                xmlns:nir="http://www.normeinrete.it/nir/2.1/"
-                               xmlns:cnr="http://www.cnr.it/provvedimenti/2.0" >
+                               xmlns:cnr="http://www.cnr.it/provvedimenti/2.1" >
                                
 <xsl:output method="xml" indent="yes" encoding="iso-8859-1"/>
 
