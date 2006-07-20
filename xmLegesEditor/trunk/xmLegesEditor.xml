@@ -41,7 +41,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		<root>
 			<priority value ="error" /> 
 			<appender-ref ref="ConsoleAppender" />
- 			<!-- appender-ref ref="BugReportAppender"/--> 
+ 			<appender-ref ref="BugReportAppender" /> 
  			<!--appender-ref ref="FileAppender" /-->
 		</root>
 		
@@ -295,6 +295,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                         <item action="view.pane.editor.panes.errori" />
                         <item action="view.pane.editor.panes.commenti" />
                         <item action="view.pane.panes.problems" />
+      
                     </menu>
                     <check action="view.statusbar" />
                 </menu>
@@ -358,7 +359,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                         <item action="editor.tabelle.elimina" />
                         
            <separator />             
-           <item action="editor.tabelle.testo.allinea" />                                                
                         
                         <menu action="menu.editor.tabelle.riga">
                             <item action="editor.tabelle.riga.prependi" />
@@ -500,8 +500,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <item action="editor.tabelle.crea" />
                     <item action="editor.tabelle.elimina" />
                     <!--separator /-->             
-                      <!--item action="editor.tabelle.testo.allinea" /-->                                                                      
-                    <!--separator /-->
                     <item action="editor.tabelle.riga.prependi" />
                     <item action="editor.tabelle.riga.appendi" />
                     <!--item action="editor.tabelle.righe.mergeup" /-->
@@ -1006,6 +1004,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 <pane name="editor.panes.commenti"			where="bottom-center"	index="4" />
                 <pane name="panes.notes"				where="bottom-center"  	index="5" />
                 <pane name="panes.problems"				where="bottom-center"  	index="6" />
+
             </panes>
         </configuration>
     </component>
@@ -1134,7 +1133,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 class="it.cnr.ittig.xmleges.core.blocks.panes.problems.ProblemsPaneImpl"
     />
 
-    
+
+
     
     <!-- ================================================================== -->
     <!-- =================================================== XML EDITOR === -->
@@ -1222,3 +1222,4 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     
     
 </container>
+
