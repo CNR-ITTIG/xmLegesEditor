@@ -328,27 +328,55 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
 			int eventID = evt.getID();
 			
 			if (eventID == ListTextFieldElementEvent.ELEMENT_ADD) {
-				
-				
-				String nomeTag=(String)tagTipoRelazioneSottoFormDatiEvento.getSelectedItem();
-				Relazione r=null;						
-				if( (dataFormDatiEvento.getAsYYYYMMDD() != null)&&(!dataFormDatiEvento.getAsYYYYMMDD().trim().equals(""))
-						&&(nomeTag!=null)&&(urnFormRelazione.getUrn() != null))
-				{
-					if((nomeTag.toString().equals("giurisprudenza"))&&(tagEffettoTipoSFormDatiEvento.getSelectedItem()!=null)){
-						r=new Relazione(nomeTag,calcolaIDRelazione(nomeTag),urnFormRelazione.getUrn().toString(),tagEffettoTipoSFormDatiEvento.getSelectedItem().toString());
-					}else if(
-							((nomeTag.toString().equals("haallegato"))&&(tagEffettoTipoSFormDatiEvento.getSelectedItem()!=null))
-					||
-					((nomeTag.toString().equals("allegatodi"))&&(tagEffettoTipoSFormDatiEvento.getSelectedItem()!=null)))
+				//TODO: non funziona perche lo fa alla fine e non all'inizio 
+				if(eventi_listtextfield.getSelectedItem()==null){
+					String nomeTag=(String)tagTipoRelazioneSottoFormDatiEvento.getSelectedItem();
+					Relazione r=null;						
+					if( (dataFormDatiEvento.getAsYYYYMMDD() != null)&&(!dataFormDatiEvento.getAsYYYYMMDD().trim().equals(""))
+							&&(nomeTag!=null)&&(urnFormRelazione.getUrn() != null))
 					{
-						r=new Relazione(nomeTag,calcolaIDRelazione(nomeTag),urnFormRelazione.getUrn().toString(),tagEffettoTipoSFormDatiEvento.getSelectedItem().toString());
+						if((nomeTag.toString().equals("giurisprudenza"))&&(tagEffettoTipoSFormDatiEvento.getSelectedItem()!=null)){
+							r=new Relazione(nomeTag,calcolaIDRelazione(nomeTag),urnFormRelazione.getUrn().toString(),tagEffettoTipoSFormDatiEvento.getSelectedItem().toString());
+						}else if(
+								((nomeTag.toString().equals("haallegato"))&&(tagEffettoTipoSFormDatiEvento.getSelectedItem()!=null))
+						||
+						((nomeTag.toString().equals("allegatodi"))&&(tagEffettoTipoSFormDatiEvento.getSelectedItem()!=null)))
+						{
+							r=new Relazione(nomeTag,calcolaIDRelazione(nomeTag),urnFormRelazione.getUrn().toString(),tagEffettoTipoSFormDatiEvento.getSelectedItem().toString());
+						}
+						else if(!nomeTag.equals("")){ 
+							r=new Relazione(nomeTag,calcolaIDRelazione(nomeTag),urnFormRelazione.getUrn().toString());
+						}else 
+							r=null;
+						e =new Evento(calcolaIDevento(), dataFormDatiEvento.getAsYYYYMMDD(),r,tagTipoEvento.getText());
+										
+						if(e.getFonte().getTagTipoRelazione().equals("originale")){
+							tagTipoRelazioneSottoFormDatiEvento.removeAllItems();
+							tagTipoRelazioneSottoFormDatiEvento.addItem("attiva");
+							tagTipoRelazioneSottoFormDatiEvento.addItem("passiva");
+							tagTipoRelazioneSottoFormDatiEvento.addItem("giurisprudenza");
+							tagTipoRelazioneSottoFormDatiEvento.addItem("haallegato");
+							tagTipoRelazioneSottoFormDatiEvento.addItem("allegatodi");	
+						}
 					}
-					else if(!nomeTag.equals("")){ 
-						r=new Relazione(nomeTag,calcolaIDRelazione(nomeTag),urnFormRelazione.getUrn().toString());
-					}else 
-						r=null;
-					e =new Evento(calcolaIDevento(), dataFormDatiEvento.getAsYYYYMMDD(),r,tagTipoEvento.getText());
+				}else{
+					String nomeTag=tagTipoRelazioneSottoFormDatiEvento.getSelectedItem().toString();
+					Evento sel_item=((Evento)eventi_listtextfield.getSelectedItem());
+					//se il tipo è lo stesso di prima mantengo id
+					if (sel_item.getFonte().getTagTipoRelazione().equals(nomeTag)){
+						e.setFonte(new Relazione(nomeTag,sel_item.getFonte().getId(),urnFormRelazione.getUrn().toString()));
+					}
+					else
+						e.setFonte(new Relazione(nomeTag,calcolaIDRelazione(nomeTag),urnFormRelazione.getUrn().toString()));
+
+					if(nomeTag.equals("giurisprudenza")){							
+						e.getFonte().setEffetto_tipoall((String)tagEffettoTipoSFormDatiEvento.getSelectedItem());
+					} else if(nomeTag.equals("haallegato")||nomeTag.equals("allegatodi")){							
+						e.getFonte().setEffetto_tipoall((String)tagEffettoTipoSFormDatiEvento.getSelectedItem());
+					}
+					
+					e.setTipoEvento(tagTipoEvento.getText());
+					e.setData(dataFormDatiEvento.getAsYYYYMMDD());
 									
 					if(e.getFonte().getTagTipoRelazione().equals("originale")){
 						tagTipoRelazioneSottoFormDatiEvento.removeAllItems();
