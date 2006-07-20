@@ -56,7 +56,9 @@ public class MetaCnrImpl implements MetaCnr, Loggable, Serviceable {
 		String strutturaEmanante=null;	
 		String autoritaEmanante=null;		
 		String tipoDestinatario=null;		
-		String tagDiscipline=null;		
+		String tagDiscipline=null;	
+		String strutturaDestinataria=null;
+		String tipo_provvedimento=null;
 		
 
 		NodeList cnrMetaList = doc.getElementsByTagName("cnr:meta");
@@ -76,15 +78,18 @@ public class MetaCnrImpl implements MetaCnr, Loggable, Serviceable {
 					tipoDestinatario = valore;
 				if(cnrMeta_elementList.item(i).getNodeName().equals("cnr:disciplina"))
 					tagDiscipline = valore;
-				
+				if(cnrMeta_elementList.item(i).getNodeName().equals("cnr:strutturaDestinataria"))
+					strutturaDestinataria = valore;
+				if(cnrMeta_elementList.item(i).getNodeName().equals("cnr:tipoProvvedimento"))
+					tipo_provvedimento = valore;
 			}
-			return (new String[]{strutturaEmanante, autoritaEmanante, tipoDestinatario, tagDiscipline});
+			return (new String[]{strutturaEmanante, autoritaEmanante, tipoDestinatario, tagDiscipline, strutturaDestinataria, tipo_provvedimento});
 		}else return null;
 		
 	}
 
 	public void setProprietario(String[] metadati) {
-		if(metadati!=null && metadati.length==4){
+		if(metadati!=null && metadati.length==6){
 			Document doc = documentManager.getDocumentAsDom();
 			try {
 				EditTransaction tr = documentManager.beginEdit();
@@ -111,9 +116,8 @@ public class MetaCnrImpl implements MetaCnr, Loggable, Serviceable {
 			missingCnr = true;
 		}
 					
-		String[] elementsName=new String[]{"cnr:strutturaEmanante","cnr:autoritaEmanante","cnr:tipoDestinatario","cnr:disciplina"};
+		String[] elementsName=new String[]{"cnr:strutturaEmanante","cnr:autoritaEmanante","cnr:tipoDestinatario","cnr:disciplina","cnr:strutturaDestinataria","cnr:tipoProvvedimento"};
 		 
-		
 		for(int i=0;i<elementsName.length;i++){
 			Element metaCnr_element = doc.createElement(elementsName[i]);
 			if((metadati[0]!=null)&&(!metadati[0].trim().equals("")))
