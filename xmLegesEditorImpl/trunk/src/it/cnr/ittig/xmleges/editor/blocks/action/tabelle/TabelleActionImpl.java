@@ -63,7 +63,6 @@ import org.w3c.dom.NodeList;
  * <li>editor.tabelle.colonna.appendi</li>
  * <li>editor.tabelle.colonna.elimina</li>
  * <li>editor.tabelle.righe.merge</li>
- * <li>editor.tabelle.testo.allinea</li>
  * <li>editor.tabelle.elimina.msg</li>
  * </ul>
  * <p>
@@ -118,7 +117,7 @@ public class TabelleActionImpl implements TabelleAction, Loggable, Serviceable, 
 
 	MyAbstractAction[] actions = new MyAbstractAction[] { new CreaTabellaAction(), new EliminaTabellaAction(), new PrependiRigaAction(),
 			new AppendiRigaAction(), new EliminaRigaAction(), new PrependiColonnaAction(), new AppendiColonnaAction(), new EliminaColonnaAction(),
-			new MergeUpRigheAction(), new MergeDownRigheAction(), new MergeSxColonneAction(), new MergeDxColonneAction(), new AllineaTestoAction() };
+			new MergeUpRigheAction(), new MergeDownRigheAction(), new MergeSxColonneAction(), new MergeDxColonneAction() };
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -157,7 +156,6 @@ public class TabelleActionImpl implements TabelleAction, Loggable, Serviceable, 
 		actionManager.registerAction("editor.tabelle.righe.mergedown", actions[i++]);
 		actionManager.registerAction("editor.tabelle.colonna.mergesx", actions[i++]);
 		actionManager.registerAction("editor.tabelle.colonna.mergedx", actions[i++]);
-		actionManager.registerAction("editor.tabelle.testo.allinea", actions[i++]);
 		eventManager.addListener(this, SelectionChangedEvent.class);
 		eventManager.addListener(this, DocumentOpenedEvent.class);
 		eventManager.addListener(this, DocumentClosedEvent.class);
@@ -663,41 +661,4 @@ public class TabelleActionImpl implements TabelleAction, Loggable, Serviceable, 
 		}
 	}
 	
-	public class AllineaTestoAction extends MyAbstractAction {
-		public boolean canDoAction(Node[] n) {
-
-			if (n.length == 1 &&  tabelle.canAllignTextCol(n[0])) {
-					return true;
-			}
-			return false;
-
-		}
-		
-		public void actionPerformed(ActionEvent e) {
-
-			if (canDoAction(selectedNodes)) {
-				try {
-
-					for (int i = 0; i < selectedNodes.length; i++) {
-						String valoreDefaul = "left";
-						String all = null;
-						Node cella = UtilDom.findParentByName(selectedNodes[0], "h:td");
-						if (cella.getAttributes().getNamedItem("align") != null)
-						  all = cella.getAttributes().getNamedItem("align").getNodeValue();
-						else 
-						  all = valoreDefaul;
-						logger.debug("AllineoTesto:"+all);
-						if (dtdRulesManager.queryIsValidAttributeValue("h:td", "align", all)) {
-							tabelle.allineaTestoCol(UtilDom.findParentByName(selectedNodes[i], "h:td"), all);
-						}
-
-					}
-				} catch (DtdRulesManagerException ex) {
-					logger.error(ex.getMessage(), ex);
-				}
-			}
-		}
-
-	}
-
 }
