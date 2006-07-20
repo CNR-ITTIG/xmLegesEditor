@@ -102,7 +102,9 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 //	tag delle altre pubblicazioni
 	DateForm tagDataSottoFormDatiPubblicazione;
 
-	JComboBox tagTipoSottoFormDatiPubblicazione;
+	JComboBox tagAnonimaSottoFormDatiPubblicazione;
+	
+	JTextField tagTipoSottoFormDatiPubblicazione;
 	
 	JTextField tagNumeroSottoFormDatiPubblicazione;
 
@@ -254,11 +256,14 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 		sottoFormDatiPubblicazione.replaceComponent("editor.meta.descrittori.pubblicazioni.datipubblicazione.data", tagDataSottoFormDatiPubblicazione
 				.getAsComponent());
 
-		tagTipoSottoFormDatiPubblicazione = (JComboBox) sottoFormDatiPubblicazione
+		tagTipoSottoFormDatiPubblicazione = (JTextField) sottoFormDatiPubblicazione
+		.getComponentByName("editor.meta.descrittori.pubblicazioni.datipubblicazione.tipo");
+		
+		tagAnonimaSottoFormDatiPubblicazione = (JComboBox) sottoFormDatiPubblicazione
 				.getComponentByName("editor.meta.descrittori.pubblicazioni.datipubblicazione.nometag");
-		tagTipoSottoFormDatiPubblicazione.addItem("ripubblicazione");
-		tagTipoSottoFormDatiPubblicazione.addItem("errata");
-		tagTipoSottoFormDatiPubblicazione.addItem("rettifica");
+		tagAnonimaSottoFormDatiPubblicazione.addItem("ripubblicazione");
+		tagAnonimaSottoFormDatiPubblicazione.addItem("errata");
+		tagAnonimaSottoFormDatiPubblicazione.addItem("rettifica");
 		tagNumeroSottoFormDatiPubblicazione = (JTextField) sottoFormDatiPubblicazione
 			.getComponentByName("editor.meta.descrittori.pubblicazioni.datipubblicazione.numero");
 
