@@ -146,17 +146,9 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 	}
 
 	public boolean canAllignTextCol(Node node) {
-
-		Node nodoAvo = UtilDom.findParentByName(node, "h:table");
-		if (nodoAvo != null) {
-	         NodeList figli = nodoAvo.getChildNodes();
-	         for (int i=1; i< figli.getLength(); i++)
-		         if (figli.item(i).getNodeName().equals("h:thead") || figli.item(i).getNodeName().equals("h:tfoot"))
-		        	 return true;
-             if (nodoAvo.getLastChild().getChildNodes().getLength()>1) 
-            	 return true;
-             return false;
-		}
+		
+		if (UtilDom.findParentByName(node, "h:table") != null)
+			return true;
 		return false;
 	}
 
@@ -724,28 +716,8 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 	}
 
 	public void allineaTestoCol(Node pos, String allinea) {
-
-		
-	//prova NON FUNZIONANTE	
-//		if (canAllignTextCol(pos)) {
-//			EditTransaction tr = null;
-//			try {
-//				int indice = UtilDom.getChildIndex(pos.getParentNode(), pos);
-//				Node nodo = UtilDom.findParentByName(pos, "h:table").getFirstChild();
-//				while (nodo != null) {
-//					Node figlio = nodo.getFirstChild();
-//					for (int i=0; i<indice; i++)
-//						 figlio.getNextSibling();
-//					UtilDom.setAttributeValue(figlio, "align", allinea);
-//				}
-//			} catch (Exception ex) {
-//			    logger.error(ex.getMessage(), ex);
-//			    documentManager.rollbackEdit(tr);
-//			}
-//				
-//		}
 				
-		Node genitore = pos.getParentNode();
+		Node genitore = pos.getParentNode();		
 		int indice = UtilDom.getChildIndex(genitore, pos);
 		Node nonno = genitore.getParentNode();
 		Node bisnonno = nonno.getParentNode();
@@ -766,11 +738,12 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 						// per tutte le righe prendi la lista dei figli 
 						Node nodoIndice = colonne.item(indice);
 //						(per correggere errore : FORSE)
-						if (nodoIndice != null) 
-//						if (!nodoIndice.getNodeName().equals("h:td"))
-//  						    nodoIndice = UtilDom.findParentByName(nodoIndice, "h:td");
-						// fra tutti i figli prendi quelli con indice=col da allineare
-						   UtilDom.setAttributeValue(nodoIndice, "align", allinea);
+						if (nodoIndice != null) {
+  						  if (!nodoIndice.getNodeName().equals("h:td"))
+  						    nodoIndice = UtilDom.findParentByName(nodoIndice, "h:td");
+						  if (nodoIndice != null)
+						  UtilDom.setAttributeValue(nodoIndice, "align", allinea);
+						}  
 					}
 
 				}
