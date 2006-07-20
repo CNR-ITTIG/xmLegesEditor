@@ -11,6 +11,7 @@ import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
+import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.action.allineamento.AllineamentoAction;
 import it.cnr.ittig.xmleges.editor.services.dom.allineamento.Allineamento;
 import it.cnr.ittig.xmleges.editor.services.dom.tabelle.Tabelle;
@@ -128,7 +129,6 @@ public class AllineamentoActionImpl implements AllineamentoAction, Loggable, Ser
 		}
 
 		public boolean canDoAction(Node n) {
-			// if (n == null) verificato !=null in canallign
 			if (tabelle.canAllignTextCol(n) || allineamento.canAlignText(n)) {
 				logger.debug("####### can allign true");
 
@@ -136,7 +136,6 @@ public class AllineamentoActionImpl implements AllineamentoAction, Loggable, Ser
 			}
 
 			logger.debug("####### can allign false");
-			// TODO can di tabelle, poi generico
 			return false;
 
 		}
@@ -147,7 +146,7 @@ public class AllineamentoActionImpl implements AllineamentoAction, Loggable, Ser
 			logger.debug("###### tipo " + tipo);
 			if (tabelle.canAllignTextCol(activeNode)) {
 
-				tabelle.allineaTestoCol(activeNode, tipo);
+				tabelle.allineaTestoCol(UtilDom.findParentByName(activeNode, "h:td"), tipo);
 				logger.debug("#### siamo in tab");
 			}
 
