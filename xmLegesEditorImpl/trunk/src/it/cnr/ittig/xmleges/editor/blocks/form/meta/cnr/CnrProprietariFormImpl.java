@@ -2,6 +2,7 @@ package it.cnr.ittig.xmleges.editor.blocks.form.meta.cnr;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import it.cnr.ittig.services.manager.Initializable;
 import it.cnr.ittig.services.manager.Loggable;
 import it.cnr.ittig.services.manager.Logger;
@@ -95,7 +96,7 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 		
 		
 		form.setMainComponent(getClass().getResourceAsStream("cnrProprietari.jfrm"));
-		
+		form.setSize(400,150);
 
 		form.setName("editor.form.meta.cnr");
 		
@@ -114,6 +115,9 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 //		
 //		tagDiscipline.setEnabled(true);
 		
+		str_destinataria_combo = (JComboBox) form.getComponentByName("editor.form.meta.cnr.str_dest_combo");
+		str_destinataria_text = (JTextField) form.getComponentByName("editor.form.meta.cnr.str_dest_text");
+		str_destinataria_button = (JButton) form.getComponentByName("editor.form.meta.cnr.str_dest_button");
 		
 		str_destinataria_combo.addItem("uno");
 		str_destinataria_combo.addItem("due");
@@ -150,7 +154,7 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 	// ////////////////////////////////////////////// MetaDescrittoriForm
 	// Interface
 	public boolean openForm() {
-		form.setSize(600, 150);
+		form.setSize(650, 500);
 		form.showDialog();
 		return form.isOk();
 	}
