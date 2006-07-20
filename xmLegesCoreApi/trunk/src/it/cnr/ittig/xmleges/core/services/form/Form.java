@@ -78,6 +78,13 @@ public interface Form extends Service {
 	 * @param key chiave per l'help
 	 */
 	public void setHelpKey(String key);
+	
+	/**
+	 * Imposta la chiave dell'help della form.
+	 * @param key chiave per l'help
+	 * @param helpFormlistener listener della chiusura dell'help
+	 */
+	public void setHelpKey(String key, FormClosedListener helpFormlistener);
 
 	/**
 	 * Visualizza la form come dialogo usando come oggetto padre, se

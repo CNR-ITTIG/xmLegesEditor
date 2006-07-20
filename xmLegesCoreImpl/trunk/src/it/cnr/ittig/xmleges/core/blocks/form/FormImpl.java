@@ -146,7 +146,9 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 	Vector verifiers = new Vector();
 
 	FormClosedListener listener;
-
+	
+	FormClosedListener helpFormlistener;
+	
 	ThreadManager threadManager;
 
 	CutCopyPasteMouseAdapter cutCopyPasteMouseAdapter = new CutCopyPasteMouseAdapter();
@@ -234,6 +236,12 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 
 	public void setHelpKey(String key) {
 		this.helpKey = key;
+		dialogChanged = true;
+	}
+	
+	public void setHelpKey(String key, FormClosedListener helpFormlistener) {
+		this.helpKey = key;
+		this.helpFormlistener = helpFormlistener;
 		dialogChanged = true;
 	}
 
@@ -557,7 +565,7 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 	protected class HelpButtonAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
 			logger.debug("calling help on:" + helpKey);
-			help.helpOn(helpKey);
+			help.helpOnForm(helpKey, helpFormlistener, getAsComponent());
 		}
 	}
 

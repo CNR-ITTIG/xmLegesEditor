@@ -1,6 +1,9 @@
 package it.cnr.ittig.xmleges.core.services.help;
 
 import it.cnr.ittig.services.manager.Service;
+import it.cnr.ittig.xmleges.core.services.form.FormClosedListener;
+
+import java.awt.Component;
 
 /**
  * Servizio per la gestione dell'help.
@@ -27,6 +30,14 @@ public interface Help extends Service {
 	 * @param key chiave per l'help
 	 */
 	public void helpOn(String key);
+	
+	/**
+	 * Invoca l'help di una form sulla chiave <code>key</code>.
+	 * @param key  chiave per l'help
+	 * @param listener listener sulla form che chiede l'help
+     * @param owner form che chiede l'help
+	 */
+	public void helpOnForm(String key, FormClosedListener listener, Component owner);
 
 	/**
 	 * Verifica se <code>key</code> &egrave; utilizzabile come chiave per

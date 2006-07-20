@@ -12,6 +12,8 @@ import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import it.cnr.ittig.xmleges.core.services.version.Version;
 
+import java.awt.Component;
+
 import javax.swing.JLabel;
 
 /**
@@ -55,7 +57,8 @@ public class HelpImpl implements Help, Loggable, Serviceable {
 	Version version;
 
 	HelpDialog helpDialog;
-
+	
+	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
@@ -91,7 +94,24 @@ public class HelpImpl implements Help, Loggable, Serviceable {
 				initialize();
 			if (!helpForm.isDialogVisible())
 				helpForm.showDialog((FormClosedListener) null);
-			// helpDialog.setDocument("file:///home/mirco/n/NirEditor/help/index.html");
+			helpDialog.setDocument(i18n.getTextFor(key));
+		} catch (Exception ex) {
+			logger.error("Error opening help for key: " + key, ex);
+		}
+
+	}
+	
+	public void helpOnForm(String key, FormClosedListener listener, Component owner) {
+		try {
+			// FIXME aprendo prima l'help generale e poi quello 
+			// della form ricomincia a suonare
+			// il viceversa no (aprendo per primo quello della form)
+			
+			if (!helpForm.hasMainComponent() || !aboutForm.hasMainComponent())
+			   initialize();
+			// se faccio initialize comunque, non suona piu' ma scrive sull'helpDialog sbagliato
+			if (!helpForm.isDialogVisible())
+				helpForm.showDialog(listener,owner);
 			helpDialog.setDocument(i18n.getTextFor(key));
 		} catch (Exception ex) {
 			logger.error("Error opening help for key: " + key, ex);

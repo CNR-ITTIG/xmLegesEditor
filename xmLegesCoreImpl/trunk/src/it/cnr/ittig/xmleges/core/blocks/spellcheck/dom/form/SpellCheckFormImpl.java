@@ -11,6 +11,7 @@ import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.form.Form;
+import it.cnr.ittig.xmleges.core.services.form.FormClosedListener;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.spellcheck.dom.DomSpellCheck;
@@ -58,7 +59,7 @@ import com.jeta.forms.components.image.ImageComponent;
  * @author <a href="mailto:agnoloni@ittig.cnr.it">Tommaso Agnoloni </a>
  * 
  */
-public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable, Initializable, ActionListener, ListSelectionListener {
+public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable, Initializable, ActionListener, ListSelectionListener, FormClosedListener {
 
 	private static final int ICON_NONE = 0;
 
@@ -147,7 +148,7 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 		form.setMainComponent(getClass().getResourceAsStream("SpellCheck.jfrm"));
 		form.setName("spellcheck");
 		
-		form.setHelpKey("help.contents.index.spellcheckform");
+		form.setHelpKey("help.contents.index.spellcheckform",this);
 
 		originalWordLabel = (JLabel) form.getComponentByName("spellcheck.label.originalword");
 		wordTextField = (JTextField) form.getComponentByName("spellcheck.textfield.word");
@@ -675,6 +676,12 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 
 	public void valueChanged(ListSelectionEvent arg0) {
 		wordTextField.setText((String) suggestionsList.getSelectedValue());
+	}
+
+	public void formClosed() {
+		logger.debug("help form CLOSED");
+		return;
+		
 	}
 }
 
