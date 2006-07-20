@@ -24,7 +24,8 @@ public class Pubblicazione {
 	/** Nome del tag: pubblicazione, ripubblicazione, rettifica, errata */
 	String tag;
 
-	/** Tipo di pubblicazione (la DTD prevede la momento valore fisso GU */
+		
+	/** Tipo di pubblicazione (la DTD prevede al momento valore fisso GU */
 	String tipo;
 
 	/** Numero della pubblicazione */
