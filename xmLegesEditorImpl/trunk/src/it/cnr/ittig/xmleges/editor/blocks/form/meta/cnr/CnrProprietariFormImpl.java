@@ -1,5 +1,7 @@
 package it.cnr.ittig.xmleges.editor.blocks.form.meta.cnr;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import it.cnr.ittig.services.manager.Initializable;
 import it.cnr.ittig.services.manager.Loggable;
 import it.cnr.ittig.services.manager.Logger;
@@ -10,6 +12,8 @@ import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.FormVerifier;
 import it.cnr.ittig.xmleges.editor.services.form.meta.cnr.CnrProprietariForm;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
 /**
@@ -59,6 +63,20 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 	
 //	JComboBox tagDiscipline;
 	
+	JComboBox str_destinataria_combo;
+//	editor.form.meta.cnr.str_dest_combo
+	
+	JTextField str_destinataria_text;
+//	editor.form.meta.cnr.str_dest_text
+	
+	JButton str_destinataria_button;
+	
+	JComboBox tipo_provv_combo;
+	
+	JTextField tipo_provv_text;
+
+	JButton tipo_provv_button;
+	
 	String errorMessage = "";
 
 	
@@ -97,6 +115,36 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 //		tagDiscipline.setEnabled(true);
 		
 		
+		str_destinataria_combo.addItem("uno");
+		str_destinataria_combo.addItem("due");
+		str_destinataria_combo.addItem("tre");
+		
+		str_destinataria_button.addActionListener(new ActionListener() {
+		      public void actionPerformed(ActionEvent e) {
+		    	  str_destinataria_combo.addItem(str_destinataria_text.getText());
+		    	  str_destinataria_combo.setSelectedItem(str_destinataria_text.getText());
+		    	  str_destinataria_text.setText(null);
+		    	  
+		      }
+		    });
+		
+		tipo_provv_combo = (JComboBox) form.getComponentByName("editor.form.meta.cnr.tipo_provv_combo");
+		tipo_provv_text = (JTextField) form.getComponentByName("editor.form.meta.cnr.tipo_provv_text");
+		tipo_provv_button = (JButton) form.getComponentByName("editor.form.meta.cnr.tipo_provv_button");
+		
+		tipo_provv_combo.addItem("quattro");
+		tipo_provv_combo.addItem("cinque");
+		tipo_provv_combo.addItem("sei");
+		
+		tipo_provv_button.addActionListener(new ActionListener() {
+		      public void actionPerformed(ActionEvent e) {
+		    	  tipo_provv_combo.addItem(tipo_provv_text.getText());
+		    	  tipo_provv_combo.setSelectedItem(tipo_provv_text.getText());
+		    	  tipo_provv_text.setText(null);
+		    	  
+		      }
+		    });
+		
 	}
 
 	// ////////////////////////////////////////////// MetaDescrittoriForm
@@ -122,7 +170,10 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 				strutturaEmanante.getText(),
 				autoritaEmanante.getText(),
 				tipoDestinatario.getText(),
-				tagDiscipline.getText()};
+				tagDiscipline.getText(),
+				str_destinataria_combo.getSelectedItem().toString(),
+				tipo_provv_combo.getSelectedItem().toString()};
+				
 	}
 
 	public void setProprietari(String[] metadati) {
@@ -130,6 +181,12 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 		autoritaEmanante.setText(metadati[1]);
 		tipoDestinatario.setText(metadati[2]);
 		tagDiscipline.setText(metadati[3]);
+		str_destinataria_combo.removeItem(metadati[4]);
+		str_destinataria_combo.addItem(metadati[4]);
+		str_destinataria_combo.setSelectedItem(metadati[4]);
+		tipo_provv_combo.removeItem(metadati[5]);
+		tipo_provv_combo.addItem(metadati[5]);
+		tipo_provv_combo.setSelectedItem(metadati[5]);
 		
 	}
 
