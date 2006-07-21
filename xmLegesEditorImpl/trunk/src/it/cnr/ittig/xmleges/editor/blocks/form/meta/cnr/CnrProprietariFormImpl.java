@@ -67,16 +67,7 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 	JComboBox str_destinataria_combo;
 //	editor.form.meta.cnr.str_dest_combo
 	
-	JTextField str_destinataria_text;
-//	editor.form.meta.cnr.str_dest_text
-	
-	JButton str_destinataria_button;
-	
 	JComboBox tipo_provv_combo;
-	
-	JTextField tipo_provv_text;
-
-	JButton tipo_provv_button;
 	
 	String errorMessage = "";
 
@@ -116,38 +107,28 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 //		tagDiscipline.setEnabled(true);
 		
 		str_destinataria_combo = (JComboBox) form.getComponentByName("editor.form.meta.cnr.str_dest_combo");
-		str_destinataria_text = (JTextField) form.getComponentByName("editor.form.meta.cnr.str_dest_text");
-		str_destinataria_button = (JButton) form.getComponentByName("editor.form.meta.cnr.str_dest_button");
 		
-		str_destinataria_combo.addItem("uno");
-		str_destinataria_combo.addItem("due");
-		str_destinataria_combo.addItem("tre");
-		
-		str_destinataria_button.addActionListener(new ActionListener() {
-		      public void actionPerformed(ActionEvent e) {
-		    	  str_destinataria_combo.addItem(str_destinataria_text.getText());
-		    	  str_destinataria_combo.setSelectedItem(str_destinataria_text.getText());
-		    	  str_destinataria_text.setText(null);
-		    	  
-		      }
-		    });
+		str_destinataria_combo.addItem("----");
+		str_destinataria_combo.addItem("tutti gli istituti");
+		str_destinataria_combo.addItem("tutti i dipartimenti");
+		str_destinataria_combo.setEditable(true);
 		
 		tipo_provv_combo = (JComboBox) form.getComponentByName("editor.form.meta.cnr.tipo_provv_combo");
-		tipo_provv_text = (JTextField) form.getComponentByName("editor.form.meta.cnr.tipo_provv_text");
-		tipo_provv_button = (JButton) form.getComponentByName("editor.form.meta.cnr.tipo_provv_button");
 		
-		tipo_provv_combo.addItem("quattro");
-		tipo_provv_combo.addItem("cinque");
-		tipo_provv_combo.addItem("sei");
+		tipo_provv_combo.addItem("----");
+		tipo_provv_combo.addItem("nomina direttore");
+		tipo_provv_combo.addItem("nomina commissione");
+		tipo_provv_combo.addItem("istituzione ufficio");		
+		tipo_provv_combo.setEditable(true);
 		
-		tipo_provv_button.addActionListener(new ActionListener() {
-		      public void actionPerformed(ActionEvent e) {
-		    	  tipo_provv_combo.addItem(tipo_provv_text.getText());
-		    	  tipo_provv_combo.setSelectedItem(tipo_provv_text.getText());
-		    	  tipo_provv_text.setText(null);
-		    	  
-		      }
-		    });
+//		tipo_provv_button.addActionListener(new ActionListener() {
+//		      public void actionPerformed(ActionEvent e) {
+//		    	  tipo_provv_combo.addItem(tipo_provv_text.getText());
+//		    	  tipo_provv_combo.setSelectedItem(tipo_provv_text.getText());
+//		    	  tipo_provv_text.setText(null);
+//		    	  
+//		      }
+//		    });
 		
 	}
 
@@ -175,22 +156,24 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 				autoritaEmanante.getText(),
 				tipoDestinatario.getText(),
 				tagDiscipline.getText(),
-				str_destinataria_combo.getSelectedItem().toString(),
-				tipo_provv_combo.getSelectedItem().toString()};
+				(String)str_destinataria_combo.getSelectedItem(),
+				(String)tipo_provv_combo.getSelectedItem()};
 				
 	}
 
 	public void setProprietari(String[] metadati) {
-		strutturaEmanante.setText(metadati[0]);
-		autoritaEmanante.setText(metadati[1]);
-		tipoDestinatario.setText(metadati[2]);
-		tagDiscipline.setText(metadati[3]);
-		str_destinataria_combo.removeItem(metadati[4]);
-		str_destinataria_combo.addItem(metadati[4]);
-		str_destinataria_combo.setSelectedItem(metadati[4]);
-		tipo_provv_combo.removeItem(metadati[5]);
-		tipo_provv_combo.addItem(metadati[5]);
-		tipo_provv_combo.setSelectedItem(metadati[5]);
+		if(metadati!=null && metadati.length==6){
+			strutturaEmanante.setText(metadati[0]);
+			autoritaEmanante.setText(metadati[1]);
+			tipoDestinatario.setText(metadati[2]);
+			tagDiscipline.setText(metadati[3]);
+			str_destinataria_combo.removeItem(metadati[4]);
+			str_destinataria_combo.addItem(metadati[4]);
+			str_destinataria_combo.setSelectedItem(metadati[4]);
+			tipo_provv_combo.removeItem(metadati[5]);
+			tipo_provv_combo.addItem(metadati[5]);
+			tipo_provv_combo.setSelectedItem(metadati[5]);
+		}
 		
 	}
 
