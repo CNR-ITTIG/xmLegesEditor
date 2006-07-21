@@ -135,7 +135,7 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 	// ////////////////////////////////////////////// MetaDescrittoriForm
 	// Interface
 	public boolean openForm() {
-		form.setSize(650, 330);
+		form.setSize(650, 280);
 		form.showDialog();
 		return form.isOk();
 	}
