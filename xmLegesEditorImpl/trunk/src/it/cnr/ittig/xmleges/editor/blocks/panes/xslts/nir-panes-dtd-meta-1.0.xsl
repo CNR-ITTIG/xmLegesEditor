@@ -18,7 +18,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 xmlns:xlink = "http://www.w3.org/1999/xlink"
                 xmlns:h     = "http://www.w3.org/HTML/1998/html4"
                 xmlns       = "http://www.normeinrete.it/nir/1.0"
-                xmlns:cnr   = "http://www.cnr.it/provvedimenti/2.0"
+                xmlns:cnr   = "http://www.cnr.it/provvedimenti/2.1"
                 xmlns:mapper= "xalan://it.cnr.ittig.xmleges.core.blocks.panes.xsltmapper.XsltMapperImpl"
                 version     = "1.0"
 >
@@ -51,10 +51,22 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		<b>(CNR) meta</b>
 	  </font>
 	</center>
-	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
+	
+	 
+	<!--
+    <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 		<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 		<xsl:apply-templates />
 	</xsl:element>
+	-->
+	
+	<!-- modificato causa SAXException (Can't have more than one root on a DOM!) -->
+	
+	<xsl:element name="div">
+		<xsl:apply-templates/>
+	</xsl:element>
+	
+	
 	<hr/>
 </xsl:template>
 
@@ -75,7 +87,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
         <b><xsl:value-of select="name()"/></b>
       </xsl:otherwise> 
     </xsl:choose>
-    <!--             #################             -->
+    <!--             fine etichette cnr            -->
     
     
 	<xsl:for-each select="@*">
