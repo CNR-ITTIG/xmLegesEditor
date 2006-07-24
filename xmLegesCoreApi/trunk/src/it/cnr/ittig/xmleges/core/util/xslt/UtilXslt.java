@@ -37,7 +37,7 @@ import org.w3c.dom.Node;
  */
 public class UtilXslt {
 
-	private static boolean cache = false; // default true
+	private static boolean cache = true; 
 
 	private static Hashtable transformers = new Hashtable(50);
 
