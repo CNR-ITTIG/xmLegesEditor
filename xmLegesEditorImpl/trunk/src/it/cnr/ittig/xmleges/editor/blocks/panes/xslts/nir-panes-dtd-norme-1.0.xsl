@@ -395,4 +395,123 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
         </xsl:element>
 </xsl:template>
 
+<!-- ================================================================================ -->
+<!-- =========================================================== COMUNI           === -->
+<!-- ================================================================================ -->
+
+<!-- riferimenti incompleti -->
+
+<xsl:template match="processing-instruction('rif')">
+	  <font color="FF3300"><u>
+	  <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">&#160;
+		<xsl:if test="string-length(.) = 0">
+			<xsl:value-of select="mapper:getTextStringIfEmpty(.)" />
+		</xsl:if>
+		<xsl:if test="string-length(.) != 0">    
+			<xsl:value-of select="substring-before(substring-after(.,'&gt;'),'&lt;')" />
+		</xsl:if>
+	 </xsl:element>
+	 </u></font>
+</xsl:template>
+
+
+<xsl:template  name="vigenza">
+	<xsl:variable name="stato">
+		<xsl:value-of select="@status" />
+	</xsl:variable>
+	<xsl:variable name="inizio_id">
+		<xsl:value-of select="@iniziovigore"/>
+	</xsl:variable>
+	<xsl:variable name="fine_id">
+		<xsl:value-of select="@finevigore"/>
+	</xsl:variable>		
+	<xsl:variable name="data_inizio">
+		<xsl:value-of select="//*[name()='evento'][@id=$inizio_id]/@data"/>
+	</xsl:variable>
+	<xsl:variable name="data_fine">
+		<xsl:value-of select="//*[name()='evento'][@id=$fine_id]/@data"/>
+	</xsl:variable>	
+	
+	<xsl:choose>
+		<!-- DTD-DL -->
+		<xsl:when test="$stato='soppresso'">
+		    <font color="red"><s>
+		    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
+		    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+		        <xsl:apply-templates />
+		    </xsl:element>
+		    </s></font>
+		</xsl:when>
+		<xsl:when test="$stato='inserito'">
+		    <font color="green">
+		    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
+		    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+		        <xsl:apply-templates />
+		    </xsl:element>
+		    </font>
+		</xsl:when>
+		
+		<!--		 DTD 2.1 		-->
+		<!-- ========================================== DATA FINE !='' ====================================== -->
+		<xsl:when test="$data_fine!=''">
+		    <font color="red">
+		    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
+		    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+		        <xsl:apply-templates />
+		    </xsl:element>
+		    </font>			
+			<span>
+				<em>
+				  <font size="2">
+					&#91;In vigore&#160;
+				 	<xsl:choose>
+						<xsl:when test="$data_inizio!=''">
+							dal <xsl:value-of select="concat(substring($data_inizio,7,2),'/',substring($data_inizio,5,2),'/',substring($data_inizio,1,4))"/>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:text>fino</xsl:text>
+						</xsl:otherwise>
+					</xsl:choose>	
+					&#160;al <xsl:value-of select="concat(substring($data_fine,7,2),'/',substring($data_fine,5,2),'/',substring($data_fine,1,4))"/>
+					<xsl:choose>			
+						<xsl:when test="$stato!=''">
+							(<xsl:value-of select="$stato"/>)
+						</xsl:when>
+					</xsl:choose>		
+					<xsl:text>&#93;&#160;</xsl:text>
+				   </font>	
+				</em>
+			</span>			 						
+		</xsl:when>	
+		<!--		 ========================================== DATA inizio !='' ====================================== -->
+		<xsl:when test="$data_inizio!=''">
+		    <font color="green">
+		    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
+		    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+		        <xsl:apply-templates />
+		    </xsl:element>
+		    </font>
+			<!-- NOTA SUCCESSIVA 			  -->
+			<span>
+				<em>
+				  <font size="2">
+					&#91;In vigore&#160;
+					dal <xsl:value-of select="concat(substring($data_inizio,7,2),'/',substring($data_inizio,5,2),'/',substring($data_inizio,1,4))"/>
+					&#93;
+				  </font>
+				</em>
+			</span>	
+		</xsl:when>
+		<xsl:otherwise>
+		    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
+		    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+		        <xsl:apply-templates />
+		    </xsl:element>
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:template>
+
+
+
+
 </xsl:transform>
