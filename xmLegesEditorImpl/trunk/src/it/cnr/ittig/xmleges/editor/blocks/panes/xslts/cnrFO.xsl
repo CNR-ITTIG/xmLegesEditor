@@ -137,7 +137,16 @@
    <xsl:apply-templates select="//nir:annessi" />
 </xsl:template>
 
-
+	<!-- ======================================================== -->
+	<!--                                                          -->
+	<!--  template riferimenti incompleti                         -->
+	<!--                                                          -->
+	<!-- ======================================================== -->
+	<xsl:template match="processing-instruction('rif')">
+		<xsl:value-of select="substring-before(substring-after(.,'&gt;'),'&lt;')" />&#160;
+	</xsl:template>
+	
+	
 <xsl:template match="nir:formulainiziale">
    <fo:block text-align="center" space-before="5mm">
       <xsl:apply-templates/>
@@ -215,7 +224,7 @@
 </xsl:template>
 
 
-<!-- Note a pié di pagina -->
+<!-- Note a piï¿½ di pagina -->
 <xsl:template match="nir:ndr" >
    <fo:footnote>
       <fo:inline font-size="6pt" baseline-shift="super" >(<xsl:value-of select = "@nir:value"/>)</fo:inline>

@@ -214,7 +214,16 @@
 		<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='meta']/*[name()='redazionale']"/>
 	</xsl:template>
 
-
+	<!-- ======================================================== -->
+	<!--                                                          -->
+	<!--  template riferimenti incompleti                         -->
+	<!--                                                          -->
+	<!-- ======================================================== -->
+	<xsl:template match="processing-instruction('rif')">
+		<xsl:value-of select="substring-before(substring-after(.,'&gt;'),'&lt;')" />&#160;
+	</xsl:template>
+	
+	
 	<xsl:template match="*[name()='formulainiziale']">
 		<fo:block text-align="center" margin-top="5mm">
 			<xsl:apply-templates/>
@@ -257,13 +266,13 @@
 		</fo:block>
 	</xsl:template>
 	<xsl:template match="*[name()='visto']">
-		<fo:block font-size="6pt" text-indent="0mm" space-before="2mm">
+		<fo:block margin-bottom="2mm" font-size="7pt" text-indent="0mm" space-before="2mm">
 			<xsl:apply-templates/>
 		</fo:block>
 	</xsl:template>
 
 	<xsl:template match="*[name()='redazionale']">
-		<fo:block text-align="justify" text-indent="3mm" margin-top="10mm">
+		<fo:block text-align="justify" text-indent="3mm" margin-top="3mm">
 			<xsl:apply-templates/>
 		</fo:block>
 	</xsl:template>
