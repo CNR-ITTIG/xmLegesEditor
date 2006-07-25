@@ -218,11 +218,14 @@ public class AutoritaImpl implements Autorita, Loggable, Serviceable, Configurab
 	}
 
 	public Istituzione[] getIstituzioniValideFromProvvedimenti(String data, String RegExp) {
-		Vector ist = new Vector();
-		ist = getIstituzioniValideFromProvvedimentiVect(data, RegExp);
-		Istituzione[] ret = new Istituzione[ist.size()];
-		ist.copyInto(ret);
-		return (ret);
+		if(RegExp!=null){
+			Vector ist = new Vector();
+			ist = getIstituzioniValideFromProvvedimentiVect(data, RegExp);
+			Istituzione[] ret = new Istituzione[ist.size()];
+			ist.copyInto(ret);
+			return (ret);
+		}
+		return null;
 	}
 
 	private Vector getIstituzioniValideFromProvvedimentiVect(String data, String RegExp) {
