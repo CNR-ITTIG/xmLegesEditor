@@ -179,6 +179,8 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 		form.setName("editor.form.xmleges.link");
 		regione = (JComboBox) form.getComponentByName("editor.form.xmleges.link.regione");
 		ente = (JComboBox) form.getComponentByName("editor.form.xmleges.link.ente");
+		// FIXME si potrebbe mettere anche editabile ma al parser non si passa questa stringa ma la urn dell'ente selezionato
+		//ente.setEditable(true);
 		tabbedPane = (JTabbedPane) form.getComponentByName("editor.form.xmleges.link.tab");
 		sorgente = (JTextArea) form.getComponentByName("editor.form.xmleges.link.sorgente");
 		sorgente.setWrapStyleWord(true);
