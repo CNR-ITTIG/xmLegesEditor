@@ -102,11 +102,6 @@ public class XmLegesEditorImpl implements XmLegesEditor, Loggable, Serviceable, 
 							
 							"dtd-cnr/cnr.dtd"
 							
-							//, "dtd-cnr/globali-cnr.dtd", "dtd-cnr/meta-cnr.dtd", "dtd-cnr/nirflessibile-cnr.dtd", "dtd-cnr/norme-cnr.dtd",
-							//"dtd-cnr/testo-cnr.dtd", "dtd-cnr/tipi-cnr.dtd",
-							
-//							"dtd-2.1/ISOdia.ent", "dtd-2.1/ISOgrk3.ent", "dtd-2.1/ISOlat1.ent", "dtd-2.1/ISOlat2.ent", "dtd-2.1/ISOnum.ent",
-//							"dtd-2.1/ISOpub.ent", "dtd-2.1/ISOtech.ent"
 				            };
 					
 					for (int i = 0; i < files.length; i++) {
@@ -122,6 +117,34 @@ public class XmLegesEditorImpl implements XmLegesEditor, Loggable, Serviceable, 
 					for (int i = 0; i < entities.length; i++) {
 						UtilFile.copyFileInTempDir(getClass().getResourceAsStream(entities[i]), "entities", entities[i]);
 					}
+					
+//					// 21-07
+//					
+//					String[] files = new String[] { "dtd-2.1/globali.dtd", "dtd-2.1/meta.dtd",  "dtd-2.1/nirbase.dtd",
+//							"dtd-2.1/nircompleto.dtd", "dtd-2.1/nirflessibile.dtd", "dtd-2.1/norme.dtd", "dtd-2.1/testo.dtd", "dtd-2.1/tipi.dtd", "dtd-2.1/pst.dtd",
+//
+//							"dtd-dl/dllight.dtd", "dtd-dl/dllight.spp", "dtd-dl/ISOdia.ent", "dtd-dl/ISOgrk3.ent", "dtd-dl/ISOlat1.ent", "dtd-dl/ISOlat2.ent",
+//							"dtd-dl/ISOnum.ent", "dtd-dl/ISOpub.ent", "dtd-dl/ISOtech.ent",
+//							
+//							"dtd-cnr/cnr.dtd"
+//							
+//				            };
+//					
+//					for (int i = 0; i < files.length; i++) {
+//						UtilFile.copyFileInTemp(getClass().getResourceAsStream(files[i]), files[i]);
+//					}
+//					
+//					
+//					String[] entities = new String[]{"dtd-2.1/ISOdia.ent",  "dtd-2.1/ISOgrk3.ent",  "dtd-2.1/ISOlat1.ent", 
+//							 "dtd-2.1/ISOlat2.ent", "dtd-2.1/ISOnum.ent",	"dtd-2.1/ISOpub.ent",  "dtd-2.1/ISOtech.ent"};
+//					
+//					// copia nella sottodirectory entities
+//					
+//					for (int i = 0; i < entities.length; i++) {
+//						UtilFile.copyFileInTempDir(getClass().getResourceAsStream(entities[i]), "entities", entities[i]);
+//					}
+					
+					
 					
 					frame.setInteraction(true);
 				}
