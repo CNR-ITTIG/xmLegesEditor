@@ -442,7 +442,9 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 		try {
 			DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
 
-			templateXml = "<utilrulesmanager xmlns:h=\"http://www.w3.org/HTML/1998/html4\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:dsp=\"http://www.normeinrete.it/nir/disposizioni/1.0\">"
+			// FIXME  ho aggiunto xmlns:cnr  --> verificare se da' noia su documenti non cnr
+			
+			templateXml = "<utilrulesmanager xmlns:h=\"http://www.w3.org/HTML/1998/html4\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:dsp=\"http://www.normeinrete.it/nir/disposizioni/1.0\" xmlns:cnr=\"http://www.cnr.it/provvedimenti/2.1\">"
 					+ dtdRulesManager.getDefaultContent(elem_name) + "</utilrulesmanager>";
 
 			domFactory.setValidating(false); // deactivate validation
