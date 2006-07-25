@@ -18,7 +18,9 @@ public class UrnAttributeEditor implements AttributeEditor {
 	}
 
 	public boolean canEdit(Node node, Node attrib) {
-		return "xlink:href".equals(attrib.getNodeName()) && !attrib.getNodeValue().startsWith("#");
+		return ("xlink:href".equals(attrib.getNodeName()) && !attrib.getNodeValue().startsWith("#"))||
+		       ("value".equals(attrib.getNodeName()) && node.getNodeName().startsWith("urn")) ;
+		//FIXME  l'edit della urn va disabilitato per settare la urn soltanto dalla funzione dom?
 	}
 
 	public Component getEditor(Node node, Node attrib) {
