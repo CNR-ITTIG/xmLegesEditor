@@ -545,13 +545,14 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 			data = dataDoc;
 		} else
 			data = UtilDate.dateToNorm(UtilDate.getCurrentDate());
-
+        
+		
 		ProvvedimentiItem prov = findProvvedimento(doc);
 
 		if (prov != null) {
-			provvedimento = prov.getUrnAtto();
+			provvedimento = prov.getUrnAtto()!=null?prov.getUrnAtto():provvedimento;
 			Istituzione[] ist = regAutorita.getIstituzioniValideFromProvvedimenti(data, prov.getUrnAutorita());
-			if (ist.length == 1) // una sola possibile autorita emenante
+			if (ist!=null && ist.length == 1) // una sola possibile autorita emenante
 				autorita = ist[0].getUrn();
 		}
 
