@@ -47,7 +47,7 @@ body { font-family: "Verdana", "Tahoma", "Times New Roman",  "Book Antiqua";
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * METADATI                                                                                                            *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-.meta, .inlinemeta { display: none; } /* I metadati non sono visualizzati */
+.meta, .inlinemeta { display: none; }/* I metadati non sono visualizzati */
 
 
 
@@ -254,7 +254,14 @@ mrif,.mrif {  display: inline; text-decoration: underline; }
    <div class="rubrica"><xsl:value-of select = "."/></div>
 </xsl:template>
 
-
+	<!-- ======================================================== -->
+	<!--                                                          -->
+	<!--  template riferimenti incompleti                         -->
+	<!--                                                          -->
+	<!-- ======================================================== -->
+	<xsl:template match="processing-instruction('rif')">
+		<xsl:value-of select="substring-before(substring-after(.,'&gt;'),'&lt;')" />&#160;
+	</xsl:template>
 
 <!-- Riferimenti -->
 <xsl:template match="nir:rif">
