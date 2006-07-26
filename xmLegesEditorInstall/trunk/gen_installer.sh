@@ -19,6 +19,7 @@ echo ""
 echo "Creazione dei link alle librerie..."
 echo ""
 ln -s ../xmLegesEditor/xmLegesEditor.xml xmLegesEditor.xml
+ln -s ../xmLegesEditor/preference.xml preference.xml
 ln -s ../xmLegesEditor/lib lib
 ln -s ../xmLegesCoreImpl/lib corelib
 ln -s ../xmLegesEditorImpl/lib editorlib
@@ -34,10 +35,10 @@ ln -s ../xmLegesEditor/dist/xmLegesEditorImpl.jar xmLegesEditorImpl.jar
 
 echo "Creazione dell'installer..."
 echo ""
-$IZPACK_HOME/bin/compile install-linux.xml -b . -o install-linux.jar -k standard
-$IZPACK_HOME/bin/compile install-win32.xml -b . -o install-win32.jar -k standard
+$IZPACK_HOME/bin/compile install-linux.xml -b . -o xmLegesEditor-2.0.rc.x.linux.jar -k standard
+$IZPACK_HOME/bin/compile install-win32.xml -b . -o xmLegesEditor-2.0.rc.x.win32.jar -k standard
 
 
 echo "Rimozione dei link..."
 
-rm xmLegesCoreApi.jar xmLegesCoreImpl.jar xmLegesEditorApi.jar xmLegesEditorImpl.jar xmLegesEditor.xml lib  corelib editorlib antiword help
+rm xmLegesCoreApi.jar xmLegesCoreImpl.jar xmLegesEditorApi.jar xmLegesEditorImpl.jar xmLegesEditor.xml preference.xml lib  corelib editorlib antiword help
