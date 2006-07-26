@@ -40,7 +40,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		
 		<root>
 			<priority value ="error" /> 
-			<appender-ref ref="ConsoleAppender" />
+			<!--appender-ref ref="ConsoleAppender" /-->
  			<appender-ref ref="BugReportAppender" /> 
  			<!--appender-ref ref="FileAppender" /-->
 		</root>
@@ -1017,6 +1017,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  class="it.cnr.ittig.xmleges.core.blocks.panes.attributes.AttributesPaneImpl">
         <configuration>
         	<readonly>id</readonly>
+        	<readonly>iniziovigore</readonly>
+        	<readonly>finevigore</readonly>
         </configuration>
 	</component>
 
