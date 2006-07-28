@@ -5,6 +5,8 @@
 package it.cnr.ittig.xmleges.editor.blocks.form.meta.ciclodivita;
 
 import it.cnr.ittig.services.manager.Initializable;
+import it.cnr.ittig.services.manager.Loggable;
+import it.cnr.ittig.services.manager.Logger;
 import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
@@ -74,8 +76,10 @@ import org.w3c.dom.NodeList;
  * @version 1.0
  * @author <a href="mailto:t.paba@onetech.it">Tommaso Paba </a>
  */
-public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initializable, Serviceable, FormVerifier {
+public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Loggable, Initializable, Serviceable, FormVerifier {
 
+	Logger logger;
+	
 	//	Eventi.jfrm
     Form form;
 
@@ -470,6 +474,11 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
 		
 	}
 
+//  //////////////////////////////////////////////////// LogEnabled Interface
+	public void enableLogging(Logger logger) {
+		this.logger = logger;
+	}
+    
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
 
@@ -862,12 +871,17 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
 		return vigToUpdate;
 	}
 	
+	
 	/**
 	 * Restituisce le urn presenti nel documento
 	 * 
 	 * @param doc
 	 * @return urn del documento
 	 */
+	
+	// FIXME sincronizzare questo metodo coi metodi createUrnFromDocument etc in MetaActionImpl
+	// tirarli fuori da MetaActionImpl e metterli in NirUtilUrn (?)
+	
 	private Urn getUrnFromDocument(Document doc) {
 
 		Urn urnDoc=null;
@@ -875,12 +889,12 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Initial
 		NodeList urn = doc.getElementsByTagName("urn");
 		if(urn!=null && urn.getLength()>0)
 			try {
-				urnDoc = new Urn(UtilDom.getAttributeValueAsString(urn.item(0),"value"));
+				String urnValue = UtilDom.getAttributeValueAsString(urn.item(0),"value");
+				urnValue=urnValue.trim().length()!=0?urnValue:"urn:nir:";
+				urnDoc = new Urn(urnValue);
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.error(e.getMessage(),e);
 			}
-
 		return urnDoc;
 	}
 	
