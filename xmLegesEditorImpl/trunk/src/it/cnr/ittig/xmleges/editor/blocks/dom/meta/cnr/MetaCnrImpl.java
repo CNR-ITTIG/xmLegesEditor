@@ -106,45 +106,88 @@ public class MetaCnrImpl implements MetaCnr, Loggable, Serviceable {
 	}
 
 	private boolean setDOMCnr(String[] metadati) {
-		Document doc = documentManager.getDocumentAsDom();
-		Node proprietarioNode = doc.getElementsByTagName("proprietario").item(0);
 		
-		boolean missingProprietario = false;
-		
-		if (proprietarioNode==null){
-			proprietarioNode = doc.createElementNS("http://www.cnr.it/provvedimenti/2.1","proprietario");
-			//TODO: VERIFICA NAMESPACE
-			missingProprietario = true;
-		}
-		
-		Node cnrNode = doc.getElementsByTagName("cnr:meta").item(0);
-		if (cnrNode==null){
-			cnrNode = doc.createElement("cnr:meta");			
-		}
-		utilRulesManager.orderedInsertChild(proprietarioNode,cnrNode);
-					
-		String[] elementsName=new String[]{"cnr:strutturaEmanante","cnr:autoritaEmanante","cnr:tipoDestinatario","cnr:disciplina","cnr:strutturaDestinataria","cnr:tipoProvvedimento"};
-		 
-		for(int i=0;i<elementsName.length;i++){
-			Element toInsertElement = doc.createElement(elementsName[i]);
-			if((metadati[i]!=null)&&(!metadati[i].trim().equals("")))
-				UtilDom.setAttributeValue(toInsertElement,"value",metadati[i]);
+			Document doc = documentManager.getDocumentAsDom();
+			Node proprietarioNode = doc.getElementsByTagName("proprietario").item(0);
 			
-			Node toInsert_Node = (Node)toInsertElement;
+			boolean missingProprietario = false;
 			
-			NodeList oldTag = doc.getElementsByTagName(elementsName[i]);
-			if (oldTag.getLength() > 0) // c'era gia' un nodo elementsName[i]
-				cnrNode.replaceChild(toInsert_Node, oldTag.item(0));
-			else 
-				utilRulesManager.orderedInsertChild(cnrNode,toInsert_Node);
+			if (proprietarioNode==null){
+				proprietarioNode = doc.createElementNS("http://www.cnr.it/provvedimenti/2.1","proprietario");
+				//TODO: VERIFICA NAMESPACE
+				missingProprietario = true;
+			}
 			
+			Node cnrNode = doc.getElementsByTagName("cnr:meta").item(0);
+			if (cnrNode==null){
+			    cnrNode = utilRulesManager.getNodeTemplate("cnr:meta");
+				//cnrNode = doc.createElement("cnr:meta");			
+			}
+			
+			
+			utilRulesManager.orderedInsertChild(proprietarioNode,cnrNode);
+						
+			String[] elementsName=new String[]{"cnr:strutturaEmanante","cnr:autoritaEmanante","cnr:tipoDestinatario","cnr:disciplina","cnr:strutturaDestinataria","cnr:tipoProvvedimento"};
+			 
+			for(int i=0;i<elementsName.length;i++){
+				Element toInsertElement = doc.createElement(elementsName[i]);
+				if((metadati[i]!=null)&&(!metadati[i].trim().equals("")))
+					UtilDom.setAttributeValue(toInsertElement,"value",metadati[i]);
+				
+				Node toInsert_Node = (Node)toInsertElement;
+				
+				NodeList oldTag = doc.getElementsByTagName(elementsName[i]);
+				if (oldTag.getLength() > 0) // c'era gia' un nodo elementsName[i]
+					cnrNode.replaceChild(toInsert_Node, oldTag.item(0));
+				else 
+					utilRulesManager.orderedInsertChild(cnrNode,toInsert_Node);	
+			}
 			
 			if(missingProprietario){
 				Node metaNode = doc.getElementsByTagName("meta").item(0);
 				utilRulesManager.orderedInsertChild(metaNode,proprietarioNode);
 			}
-		}
-		return true;
+			return true;
+		
+//		Document doc = documentManager.getDocumentAsDom();
+//		Node proprietarioNode = doc.getElementsByTagName("proprietario").item(0);
+//		
+//		boolean missingProprietario = false;
+//		
+//		if (proprietarioNode==null){
+//			proprietarioNode = doc.createElementNS("http://www.cnr.it/provvedimenti/2.1","proprietario");
+//			//TODO: VERIFICA NAMESPACE
+//			missingProprietario = true;
+//		}
+//		
+//		Node cnrNode = doc.getElementsByTagName("cnr:meta").item(0);
+//		if (cnrNode==null){
+//			cnrNode = doc.createElement("cnr:meta");			
+//		}
+//		utilRulesManager.orderedInsertChild(proprietarioNode,cnrNode);
+//					
+//		String[] elementsName=new String[]{"cnr:strutturaEmanante","cnr:autoritaEmanante","cnr:tipoDestinatario","cnr:disciplina","cnr:strutturaDestinataria","cnr:tipoProvvedimento"};
+//		 
+//		for(int i=0;i<elementsName.length;i++){
+//			Element toInsertElement = doc.createElement(elementsName[i]);
+//			if((metadati[i]!=null)&&(!metadati[i].trim().equals("")))
+//				UtilDom.setAttributeValue(toInsertElement,"value",metadati[i]);
+//			
+//			Node toInsert_Node = (Node)toInsertElement;
+//			
+//			NodeList oldTag = doc.getElementsByTagName(elementsName[i]);
+//			if (oldTag.getLength() > 0) // c'era gia' un nodo elementsName[i]
+//				cnrNode.replaceChild(toInsert_Node, oldTag.item(0));
+//			else 
+//				utilRulesManager.orderedInsertChild(cnrNode,toInsert_Node);
+//			
+//			
+//			if(missingProprietario){
+//				Node metaNode = doc.getElementsByTagName("meta").item(0);
+//				utilRulesManager.orderedInsertChild(metaNode,proprietarioNode);
+//			}
+//		}
+//		return true;
 	}
 
 
