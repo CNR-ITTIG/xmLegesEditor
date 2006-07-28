@@ -109,7 +109,7 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 	MetaInquadramento inquadramento;
 	
 	MetaCnr metaCnr;
-
+	
 	MetaDescrittoriForm descrittoriForm;
 	
 	CiclodiVitaForm ciclodivitaForm;
@@ -151,7 +151,7 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		descrittori = (MetaDescrittori) serviceManager.lookup(MetaDescrittori.class);
 		ciclodivita = (MetaCiclodivita) serviceManager.lookup(MetaCiclodivita.class);
 		inquadramento = (MetaInquadramento) serviceManager.lookup(MetaInquadramento.class);
-		metaCnr = (MetaCnr) serviceManager.lookup(MetaCnr.class);
+		metaCnr = (MetaCnr) serviceManager.lookup(MetaCnr.class);		
 		descrittoriForm = (MetaDescrittoriForm) serviceManager.lookup(MetaDescrittoriForm.class);
 		ciclodivitaForm = (CiclodiVitaForm) serviceManager.lookup(CiclodiVitaForm.class);
 		inquadramentoForm = (InquadramentoForm) serviceManager.lookup(InquadramentoForm.class);
@@ -181,7 +181,7 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		ciclodivitaAction.setEnabled(false);
 		inquadramentoAction.setEnabled(false);
 		urnAction.setEnabled(false);
-		cnrAction.setEnabled(false);
+		cnrAction.setEnabled(false);		
 	}
 
 	// ////////////////////////////////////////// EventManagerListener Interface
@@ -205,6 +205,7 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		descrittoriForm.setAlias(descrittori.getAlias());
 		descrittoriForm.setAltrePubblicazioni(descrittori.getAltrePubblicazioni());
 		descrittoriForm.setPubblicazione(descrittori.getPubblicazione());
+		descrittoriForm.setRedazione(descrittori.getRedazione());
 
 		if (descrittoriForm.openForm()) {
 			try {
@@ -213,6 +214,7 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 				descrittori.setAlias(descrittoriForm.getAlias());
 				descrittori.setPubblicazione(descrittoriForm.getPubblicazione());
 				descrittori.setAltrePubblicazioni(descrittoriForm.getAltrePubblicazioni());
+				descrittori.setRedazione(descrittoriForm.getRedazione());
 				documentManager.commitEdit(tr);
 				rinumerazione.aggiorna(doc);
 			} catch (DocumentManagerException ex) {
@@ -302,6 +304,8 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		}
 		
 	}
+	
+
 
 
 	
@@ -620,6 +624,8 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 			doCnr();
 		}
 	}
+	
+	
 	
 
 	
