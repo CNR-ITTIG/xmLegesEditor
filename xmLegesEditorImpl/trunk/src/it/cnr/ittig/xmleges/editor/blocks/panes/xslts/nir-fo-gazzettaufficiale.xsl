@@ -223,7 +223,7 @@
 		<xsl:value-of select="substring-before(substring-after(.,'&gt;'),'&lt;')" />&#160;
 	</xsl:template>
 	
-	
+
 	<xsl:template match="*[name()='formulainiziale']">
 		<fo:block text-align="center" margin-top="5mm">
 			<xsl:apply-templates/>
@@ -351,8 +351,25 @@
 		</fo:inline>
 	</xsl:template>
 
+
+	<xsl:template match="h:b">
+		<fo:inline font-weight="bold">
+			<xsl:apply-templates/>
+		</fo:inline>
+	</xsl:template>
+	
+	<xsl:template match="h:u">
+		<fo:inline text-decoration="underline">
+			<xsl:apply-templates/>
+		</fo:inline>
+	</xsl:template>
+
+	<!--xsl:template match="*[name()='virgolette']">
+			<xsl:apply-templates />
+	</xsl:template-->
+
 	<!-- Elementi block -->
-	<xsl:template match="h:p|h:div">
+	<xsl:template match="h:p|h:div|h:br">
 		<fo:block text-indent="3mm">
 			<xsl:value-of select="."/>
 		</fo:block>
