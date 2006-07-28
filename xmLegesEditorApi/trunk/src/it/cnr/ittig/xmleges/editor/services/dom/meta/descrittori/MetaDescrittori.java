@@ -61,5 +61,19 @@ public interface MetaDescrittori extends Service {
 	 * @return alias del documento
 	 */
 	public String[] getAlias();
+	
+	/**
+	 * Imposta la redazione del documento
+	 * 
+	 * @param redazione
+	 */
+	public void setRedazione(String[] redazione);
+
+	/**
+	 * Restituisce la redazione del documento
+	 * 
+	 * @return redazione del documento
+	 */
+	public String[] getRedazione();
 
 	}

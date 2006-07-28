@@ -76,6 +76,6 @@ public class Pubblicazione {
 	}
 
 	public String toString() {
-		return tag.toUpperCase() + ", N? " + num + ", " + tipo + ", " + UtilDate.normToString(norm);
+		return tag.toUpperCase() + ", N " + num + ", " + tipo + ", " + UtilDate.normToString(norm);
 	}
 }

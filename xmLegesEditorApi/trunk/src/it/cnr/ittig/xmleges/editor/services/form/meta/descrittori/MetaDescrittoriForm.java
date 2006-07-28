@@ -106,4 +106,8 @@ public interface MetaDescrittoriForm extends Service {
 	 * @param altrePubblicazioni pubblicazioni del documento
 	 */
 	public void setAltrePubblicazioni(Pubblicazione[] altrePubblicazioni);
+	
+	public void setRedazione(String[] redazione);
+	
+	public String[] getRedazione();
 }
