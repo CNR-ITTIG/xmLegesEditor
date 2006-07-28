@@ -75,6 +75,15 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 
 	JTextField report_numeroPubblicazione;
 
+//	tag della redazione del documento
+	JTextField report_redazioneNome;
+
+	DateForm report_redazioneData;
+
+	JTextField report_redazioneUrl;
+	
+	JTextField report_redazioneContributo;
+	
 	JButton pubblicazioniButton;
 
 	JButton aliasButton;
@@ -175,8 +184,10 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 			String nometag = (String) ((JComboBox) form.getComponentByName("editor.meta.descrittori.pubblicazioni.datipubblicazione.nometag"))
 					.getSelectedItem();
 			String numero = ((JTextField) form.getComponentByName("editor.meta.descrittori.pubblicazioni.datipubblicazione.numero")).getText();
+			
+			String tipo = ((JTextField) form.getComponentByName("editor.meta.descrittori.pubblicazioni.datipubblicazione.tipo")).getText();
 
-			return new Pubblicazione(nometag, "GU", numero, data.getAsYYYYMMDD());
+			return new Pubblicazione(nometag, tipo, numero, data.getAsYYYYMMDD());
 		}
 
 		public void setElement(Object object) {
@@ -187,8 +198,9 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 		}
 
 		public void clearFields() {
-			((JComboBox) form.getComponentByName("editor.meta.descrittori.pubblicazioni.datipubblicazione.nometag")).setSelectedItem(null);
+			((JComboBox) form.getComponentByName("editor.meta.descrittori.pubblicazioni.datipubblicazione.nometag")).setSelectedIndex(0);
 			((JTextField) form.getComponentByName("editor.meta.descrittori.pubblicazioni.datipubblicazione.numero")).setText(null);
+			((JTextField) form.getComponentByName("editor.meta.descrittori.pubblicazioni.datipubblicazione.tipo")).setText(null);
 			data.set(null);
 		}
 
@@ -228,6 +240,8 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 		urnForm = (UrnForm) serviceManager.lookup(UrnForm.class);
 
 		report_dataPubblicazione = (DateForm) serviceManager.lookup(DateForm.class);
+		
+		report_redazioneData = (DateForm) serviceManager.lookup(DateForm.class);
 
 		tagDataSottoFormDatiPubblicazione = (DateForm) serviceManager.lookup(DateForm.class);
 
@@ -239,8 +253,12 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 	public void initialize() throws java.lang.Exception {
 		form.setMainComponent(getClass().getResourceAsStream("MetaDescrittori.jfrm"));
 		form.replaceComponent("editor.meta.descrittori.riepilogo.datapubblicazione", report_dataPubblicazione.getAsComponent());
+		form.replaceComponent("editor.meta.descrittori.redazione.data", report_redazioneData.getAsComponent());
 		report_numeroPubblicazione = (JTextField) form.getComponentByName("editor.meta.descrittori.riepilogo.numeropubblicazione");
 		report_tipoPubblicazione = (JTextField) form.getComponentByName("editor.meta.descrittori.riepilogo.tipopubblicazione");
+		report_redazioneNome = (JTextField) form.getComponentByName("editor.meta.descrittori.riepilogo.redazione.nome");
+		report_redazioneUrl = (JTextField) form.getComponentByName("editor.meta.descrittori.riepilogo.redazione.url");
+		report_redazioneContributo = (JTextField) form.getComponentByName("editor.meta.descrittori.riepilogo.redazione.contributo");
 		form.setName("editor.form.meta.descrittori.riepilogo");
 
 		sottoFormDatiPubblicazione.setMainComponent(getClass().getResourceAsStream("DatiPubblicazione.jfrm"));
@@ -391,6 +409,21 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 		report_dataPubblicazione.set(UtilDate.normToDate(pubblicazione.getNorm()));
 		report_numeroPubblicazione.setText(pubblicazione.getNum());
 		report_tipoPubblicazione.setText(pubblicazione.getTipo());
+	}
+	public void setRedazione(String[] redazione) {
+		report_redazioneData.set(UtilDate.normToDate(redazione[0]));
+		report_redazioneNome.setText(redazione[1]);
+		report_redazioneUrl.setText(redazione[2]);
+		report_redazioneContributo.setText(redazione[3]);
+		
+	}
+
+	public String[] getRedazione() {
+		String[] redazione=new String[]{UtilDate.dateToNorm(report_redazioneData.getAsDate()),
+				report_redazioneNome.getText(),
+				report_redazioneUrl.getText(),
+				report_redazioneContributo.getText()};
+		return redazione;
 	}
 
 }
