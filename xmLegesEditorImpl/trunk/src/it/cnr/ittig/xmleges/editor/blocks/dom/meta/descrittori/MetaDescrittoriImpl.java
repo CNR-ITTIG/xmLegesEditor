@@ -249,4 +249,43 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 		} while (listLen > 0);
 	}
 
+	public void setRedazione(String[] redazione) {
+		
+		Document doc = documentManager.getDocumentAsDom();
+		Node descrittoriNode = doc.getElementsByTagName("descrittori").item(0);
+
+		if (redazione != null) {
+			Node oldTag = doc.getElementsByTagName("redazione").item(0);
+			Element redTag;
+			redTag = doc.createElement("redazione");			
+			redTag.setAttribute("norm", redazione[0]);
+			redTag.setAttribute("nome", redazione[1]);
+			redTag.setAttribute("url", redazione[2]);
+			redTag.setAttribute("contributo", redazione[3]);
+			
+			descrittoriNode.replaceChild(redTag, oldTag);
+		}
+	}
+
+	public String[] getRedazione() {
+		Document doc = documentManager.getDocumentAsDom();
+		String data = null;
+		String nome = null;
+		String url = null;
+		String contributo = null;
+		
+
+		NodeList redList = doc.getElementsByTagName("redazione");
+		if (redList.getLength() > 0) {
+			Node n = redList.item(0);
+			data = n.getAttributes().getNamedItem("norm") != null ? n.getAttributes().getNamedItem("norm").getNodeValue() : null;
+			nome = n.getAttributes().getNamedItem("nome") != null ? n.getAttributes().getNamedItem("nome").getNodeValue() : null;
+			url = n.getAttributes().getNamedItem("url") != null ? n.getAttributes().getNamedItem("url").getNodeValue() : null;
+			contributo = n.getAttributes().getNamedItem("contributo") != null ? n.getAttributes().getNamedItem("contributo").getNodeValue() : null;
+			
+		}
+		return (new String[]{data,nome, url,contributo});
+		
+	}
+
 }
