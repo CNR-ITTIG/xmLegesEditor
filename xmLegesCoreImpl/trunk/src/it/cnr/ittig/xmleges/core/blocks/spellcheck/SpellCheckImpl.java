@@ -10,6 +10,7 @@ import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.preference.PreferenceManager;
 import it.cnr.ittig.xmleges.core.services.spellcheck.SpellCheck;
 import it.cnr.ittig.xmleges.core.services.spellcheck.SpellCheckWord;
+import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
 
 import java.io.File;
@@ -44,6 +45,8 @@ public class SpellCheckImpl implements SpellCheck, Loggable, Serviceable, Initia
 
 	Logger logger;
 
+	UtilMsg utilMsg;
+	
 	PreferenceManager preferenceManager;
 
 	I18n i18n;
@@ -63,6 +66,7 @@ public class SpellCheckImpl implements SpellCheck, Loggable, Serviceable, Initia
 	public void service(ServiceManager serviceManager) throws ServiceException {
 		//threadManager = (ThreadManager) serviceManager.lookup(ThreadManager.class);
 		i18n = (I18n) serviceManager.lookup(I18n.class);
+		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 	}
 
 	public void initialize() throws Exception {
@@ -76,9 +80,10 @@ public class SpellCheckImpl implements SpellCheck, Loggable, Serviceable, Initia
 		   UtilFile.copyFile(getClass().getResourceAsStream("default"),new File(dictPath + File.separator,"default"));
 	    }
 		
-		if (null==checker){	
+		if (null==checker){
+		  try{	
 			checker = new SpellChecker(dictPath);					
-			try{
+			try{	//Intercetto se è scaduta la demo della libreria "xsc.jar"
 			   checker.setPersonalDictionaryPath("dizionarioUtente_%L%.txt");
 			   checker.setSelectedLanguage("it");					
 			}
@@ -86,7 +91,12 @@ public class SpellCheckImpl implements SpellCheck, Loggable, Serviceable, Initia
 			   logger.error(ex.getMessage(),ex);
 			}
 		    logger.debug("---Vocabolario caricato---"+checker.getSelectedLanguage()+"---");
-		 }
+		  }
+		  catch(Exception ex){
+			   logger.error(ex.getMessage(),ex);
+			   utilMsg.msgInfo("spellcheck.error.library");
+		  }
+		}
 	}
 
 	
@@ -100,8 +110,10 @@ public class SpellCheckImpl implements SpellCheck, Loggable, Serviceable, Initia
 	
 	
 	private SpellCheckWord[] doSearch() {
-        Vector listaparole = new Vector();		
-	    boolean controlla = true;
+		
+      Vector listaparole = new Vector();		
+      if (null!=checker) {
+        boolean controlla = true;
 	    try{
 		checker.setInput(testo);
 		int err = checker.checkNext();
@@ -159,11 +171,11 @@ public class SpellCheckImpl implements SpellCheck, Loggable, Serviceable, Initia
 		catch(SpellException ex){
 			System.err.println(ex.getMessage());
 		}
-	
-        SpellCheckWord[] ret = new SpellCheckWord[listaparole.size()];
-		listaparole.copyInto(ret);
+      }
+      SpellCheckWord[] ret = new SpellCheckWord[listaparole.size()];
+	  listaparole.copyInto(ret);
 		
-		return ret;
+	  return ret;
 	}
 	
 	public String[] getSuggestions(String word) {
