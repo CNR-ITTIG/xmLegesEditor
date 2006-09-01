@@ -19,6 +19,7 @@ import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.form.Form;
+import it.cnr.ittig.xmleges.core.services.form.FormClosedListener;
 import it.cnr.ittig.xmleges.core.services.form.date.DateForm;
 import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextField;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
@@ -38,7 +39,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import org.w3c.dom.Node;
-
 
 /**
  * <h1>Implementazione del servizio
@@ -69,7 +69,7 @@ import org.w3c.dom.Node;
  * @version 1.0
  * @author <a href="mailto:tommaso.agnoloni@ittig.cnr.it">Tommaso Agnoloni</a>
  */
-public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable, Serviceable, Configurable, Initializable, ActionListener {
+public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable, Serviceable, Configurable, Initializable, ActionListener, FormClosedListener {
 	
 	Logger logger;
 
@@ -230,6 +230,7 @@ public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable, Servi
 		nextButton = (JButton) form.getComponentByName("editor.form.rifincompleto.next");
 		nextButton.addActionListener(this);
 		
+		form.setHelpKey("help.contents.index.rifincompleti",this);
 	}
 	
 	private boolean isResolved(Node node) {
@@ -409,6 +410,12 @@ public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable, Servi
 				else utilMsg.msgInfo("rifincompleti.error.endstop");								
 			  } 			
 		} 
+	}
+
+
+	public void formClosed() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
