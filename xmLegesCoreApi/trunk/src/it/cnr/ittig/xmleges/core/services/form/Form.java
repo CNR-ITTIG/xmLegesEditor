@@ -5,6 +5,8 @@ import it.cnr.ittig.services.manager.Service;
 import java.awt.Component;
 import java.io.InputStream;
 
+import javax.swing.JDialog;
+
 /**
  * Servizio per la costruzione di una form e visualizzazione in una finestra di
  * dialogo.
@@ -124,6 +126,14 @@ public interface Form extends Service {
 	public void showDialog(FormClosedListener listener, Component owner);
 
 	/**
+	 * Ricostruisce la form dell'Help.
+	 * 
+	 * @param listener listener per notificare la chiusura della form
+	 * @param owner padre della form
+	 */
+	public void rebuildHelp(FormClosedListener listener, Component owner);
+	
+	/**
 	 * Indica se la form di dialogo &egrave; visibile.
 	 * 
 	 * @return <code>true</code> se &egrave; visibile
@@ -236,7 +246,7 @@ public interface Form extends Service {
 	 * @return indice del pulsante premuto
 	 */
 	public int getPressedButton();
-
+		
 	/**
 	 * Forza la chiusura della form.
 	 */
