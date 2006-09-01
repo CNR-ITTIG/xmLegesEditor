@@ -717,31 +717,29 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 
 	public void allineaTestoCol(Node pos, String allinea) {
 				
-		Node genitore = pos.getParentNode();		
-		int indice = UtilDom.getChildIndex(genitore, pos);
-		Node nonno = genitore.getParentNode();
-		Node bisnonno = nonno.getParentNode();
+		Node genitore = pos.getParentNode();				//RIGA		
+		int indice = UtilDom.getChildIndex(genitore, pos);	//Posizione nella riga
+		Node nonno = genitore.getParentNode();				//H o F o Body
+		Node bisnonno = nonno.getParentNode();				//TABELLA
 		Vector headbodyfoot = UtilDom.getChildElements(bisnonno);
-		// NodeList righe = nonno.getChildNodes(); //lista delle righe
-
-		if (canAllignTextCol(pos)) {
-			
+		Node prova = (Node) headbodyfoot.get(0);
+		while (prova != null) {
+		    prova = prova.getNextSibling();
+		}
+		if (canAllignTextCol(pos)) {	
 			EditTransaction tr = null;
 			try {
 				tr = documentManager.beginEdit();
-				for (int j = 1; j < headbodyfoot.size(); j++) {
+				for (int j = 0; j < headbodyfoot.size(); j++) {
 					Node htr = (Node) headbodyfoot.elementAt(j);
-					NodeList righe = htr.getChildNodes();// lista delle righe
-
+					if (htr.getNodeName().equals("h:caption"))   //Devo saltare la CAPTION!!
+						 continue;
+					NodeList righe = htr.getChildNodes();// lista delle righe per H, F o Body
 					for (int i = 0; i < righe.getLength(); i++) {
-						NodeList colonne = righe.item(i).getChildNodes();
-						// per tutte le righe prendi la lista dei figli 
+						// per tutte le righe prendi la lista dei figli
+						NodeList colonne = righe.item(i).getChildNodes(); 
 						Node nodoIndice = colonne.item(indice);
-//						(per correggere errore : FORSE)
 						if (nodoIndice != null) {
-  						  if (!nodoIndice.getNodeName().equals("h:td"))
-  						    nodoIndice = UtilDom.findParentByName(nodoIndice, "h:td");
-						  if (nodoIndice != null)
 						  UtilDom.setAttributeValue(nodoIndice, "align", allinea);
 						}  
 					}
