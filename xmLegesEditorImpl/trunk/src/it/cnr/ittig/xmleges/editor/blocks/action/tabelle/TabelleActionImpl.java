@@ -312,7 +312,6 @@ public class TabelleActionImpl implements TabelleAction, Loggable, Serviceable, 
 
 		public void actionPerformed(ActionEvent e) {
 			if (canDoAction(selectedNodes)) {
-
 				if (utilMsg.msgYesNo("editor.tabelle.elimina.msg")) {
 					logger.debug("EliminoTabella");
 					Node nodoTab = UtilDom.findParentByName(selectedNodes[0], "h:table");
