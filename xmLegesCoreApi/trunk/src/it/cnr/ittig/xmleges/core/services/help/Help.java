@@ -1,6 +1,7 @@
 package it.cnr.ittig.xmleges.core.services.help;
 
 import it.cnr.ittig.services.manager.Service;
+import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.FormClosedListener;
 
 import java.awt.Component;
@@ -52,4 +53,16 @@ public interface Help extends Service {
 	 * Visualizza la finestra di dialogo delle informazioni sull'applicazione.
 	 */
 	public void about();
+	
+	/**
+	 * Controlla se la maschera di HELP è visibile o no
+	 * @return <code>true</code> se &egrave; visibile
+	 */
+	public boolean isVisible();
+
+	/**
+	 * Restiruisce il riferimento alla maschera dell'Help
+	 * @return <code>Form</code> dell'Help
+	 */
+	public Form getHelpForm();
 }
