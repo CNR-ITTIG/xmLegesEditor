@@ -26,6 +26,7 @@ import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Frame;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -50,13 +51,14 @@ import javax.swing.text.JTextComponent;
 import com.jeta.forms.components.panel.FormPanel;
 
 /**
- * <h1>Implementazione del servizio <code>it.cnr.ittig.xmleges.editor.services.form.Form</code>.</h1>
+ * <h1>Implementazione del servizio
+ * <code>it.cnr.ittig.xmleges.editor.services.form.Form</code>.</h1>
  * <h1>Descrizione</h1>
  * Questa implementazione usa le form generate da <a
- * href="http://www.jetaware.com">Abeille Form Designer </a> quindi &egrave; necessario
- * avere nel classpath la libreria <code>formsrt.jar</code>.<br>
- * Se &egrave; usato il metodo <code>setName(name)</code>, il titolo della form
- * &egrave; internazionalizzato chiedendo a <code>I18n</code> il titolo
+ * href="http://www.jetaware.com">Abeille Form Designer </a> quindi &egrave;
+ * necessario avere nel classpath la libreria <code>formsrt.jar</code>.<br>
+ * Se &egrave; usato il metodo <code>setName(name)</code>, il titolo della
+ * form &egrave; internazionalizzato chiedendo a <code>I18n</code> il titolo
  * <code>name.text</code> e l'icona <code>name.icon</code>.
  * <h1>Configurazione</h1>
  * Nessuna.
@@ -71,26 +73,26 @@ import com.jeta.forms.components.panel.FormPanel;
  * <ul>
  * <li><code>form.text</code>: titolo di default della form;</li>
  * <li><code>form.icon</code>: icona di default della form;</li>
- * <li><code>form.button.help</code>: pulsato per attivare l'help configurato tramite
- * <code>UtilUi.applyI18n</code></li>
+ * <li><code>form.button.help</code>: pulsato per attivare l'help
+ * configurato tramite <code>UtilUi.applyI18n</code></li>
  * <li><code>form.button.ok</code>: pulsato di conferma configurato tramite
  * <code>UtilUi.applyI18n</code></li>
- * <li><code>form.button.cancel</code>: pulsato di annulla configurato tramite
- * <code>UtilUi.applyI18n</code></li>
- * <li>tutti i componenti grafici supportati da <code>UtilUi.applyI18n</code> sono
- * internazionalizzati.</li>
+ * <li><code>form.button.cancel</code>: pulsato di annulla configurato
+ * tramite <code>UtilUi.applyI18n</code></li>
+ * <li>tutti i componenti grafici supportati da <code>UtilUi.applyI18n</code>
+ * sono internazionalizzati.</li>
  * </ul>
  * 
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
  * <dd>2003 - 2004</dd>
- * <dd><a href="http://www.ittig.cnr.it" target="_blank">Istituto di Teoria e Tecniche
- * dell'Informazione Giuridica (ITTIG) <br>
+ * <dd><a href="http://www.ittig.cnr.it" target="_blank">Istituto di Teoria e
+ * Tecniche dell'Informazione Giuridica (ITTIG) <br>
  * Consiglio Nazionale delle Ricerche - Italy </a></dd>
  * <dt><b>License: </b></dt>
- * <dd><a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU General Public
- * License </a></dd>
+ * <dd><a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU
+ * General Public License </a></dd>
  * </dl>
  * 
  * @see it.cnr.ittig.xmleges.core.services.util.ui.UtilUI
@@ -99,6 +101,7 @@ import com.jeta.forms.components.panel.FormPanel;
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */
 public class FormImpl implements Form, Loggable, Serviceable, Initializable {
+	
 	Logger logger;
 
 	I18n i18n;
@@ -146,9 +149,9 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 	Vector verifiers = new Vector();
 
 	FormClosedListener listener;
-	
+
 	FormClosedListener helpFormlistener;
-	
+
 	ThreadManager threadManager;
 
 	CutCopyPasteMouseAdapter cutCopyPasteMouseAdapter = new CutCopyPasteMouseAdapter();
@@ -172,7 +175,8 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 		utilUi = (UtilUI) serviceManager.lookup(UtilUI.class);
 		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 		help = (Help) serviceManager.lookup(Help.class);
-		threadManager = (ThreadManager) serviceManager.lookup(ThreadManager.class);
+		threadManager = (ThreadManager) serviceManager
+				.lookup(ThreadManager.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
@@ -181,7 +185,8 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 			public void run() {
 				try {
 					synchronized (this) {
-						form = new FormPanel(getClass().getResourceAsStream("Form.jfrm"));
+						form = new FormPanel(getClass().getResourceAsStream(
+								"Form.jfrm"));
 					}
 				} catch (Exception ex) {
 					logger.error("Error loading 'Form.jfrm'.", ex);
@@ -194,7 +199,8 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 		popupMenu.add(utilUi.applyI18n("form.popup.paste", pasteAction));
 		// form = new
 		// FormPanel(this.getClass().getResourceAsStream("Form.jfrm"));
-		helpButton = new JButton(utilUi.applyI18n("form.button.help", new HelpButtonAction()));
+		helpButton = new JButton(utilUi.applyI18n("form.button.help",
+				new HelpButtonAction()));
 	}
 
 	// ////////////////////////////////////////////////////////// Form Interface
@@ -238,9 +244,9 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 		this.helpKey = key;
 		dialogChanged = true;
 	}
-	
+
 	public void setHelpKey(String key, FormClosedListener helpFormlistener) {
-		this.helpKey = key;
+		this.helpKey = key;		
 		this.helpFormlistener = helpFormlistener;
 		dialogChanged = true;
 	}
@@ -257,12 +263,18 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 	}
 
 	public void showDialog(Component owner) {
+				
 		if (dialogChanged)
-			dialog = buildDialog(owner);
+		  dialog = buildDialog(owner);
 		this.listener = null;
 		dialog.setModal(true);
 		dialog.validate();
-		dialog.show();
+
+		//Se la finestra dell'Help è aperta bisogna ricostruirla
+		if (help != null && help.isVisible()) 
+			help.getHelpForm().rebuildHelp(helpFormlistener, getAsComponent());
+		
+		dialog.show();	    		
 	}
 
 	public void showDialog(FormClosedListener listener) {
@@ -270,14 +282,28 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 	}
 
 	public void showDialog(FormClosedListener listener, Component owner) {
-		if (dialogChanged)
-			dialog = buildDialog(owner);
+		
+		dialog = buildDialog(owner);
+		
 		this.listener = listener;
 		dialog.setModal(false);
 		dialog.validate();
 		dialog.show();
 	}
 
+	public void rebuildHelp(FormClosedListener listener, Component owner) {
+					
+		Rectangle r = dialog.getBounds();
+		close();
+		dialog = buildDialog(owner);
+		dialog.setBounds(r);
+				
+		this.listener = listener;
+		dialog.setModal(false);
+		dialog.validate();
+		dialog.show();
+	}
+	
 	public boolean isDialogVisible() {
 		return dialog != null && dialog.isVisible();
 	}
@@ -322,7 +348,7 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 			getForm().setSize(size);
 		return form;
 	}
-
+	
 	public Component getComponentByName(String compName) {
 		return mainPanel.getFormAccessor().getComponentByName(compName);
 		// return getComponentByName(compName, mainPanel);
@@ -340,16 +366,19 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 			}
 		return null;
 	}
-
-	public void replaceComponent(String compName, InputStream desc) throws FormException {
+	
+	public void replaceComponent(String compName, InputStream desc)
+			throws FormException {
 		try {
-			mainPanel.getFormAccessor().replaceBean(compName, new FormPanel(desc));
+			mainPanel.getFormAccessor().replaceBean(compName,
+					new FormPanel(desc));
 		} catch (com.jeta.forms.gui.common.FormException ex) {
 			throw new FormException(ex.toString());
 		}
 	}
 
-	public void replaceComponent(String compName, Component comp) throws FormException {
+	public void replaceComponent(String compName, Component comp)
+			throws FormException {
 		mainPanel.getFormAccessor().replaceBean(compName, comp);
 	}
 
@@ -359,7 +388,8 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 		defaultButtons = null;
 		if (text != null)
 			for (int i = 0; i < text.length; i++) {
-				Action action = utilUi.applyI18n(text[i], new MyButtonAction(i + 1));
+				Action action = utilUi.applyI18n(text[i], new MyButtonAction(
+						i + 1));
 				JButton btn = new JButton(action);
 				btnPanel.add(btn);
 				if (i == 0)
@@ -382,9 +412,19 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 	}
 
 	public void close() {
-		if (listener != null)
+		
+		boolean aggiornaHelp = false;
+		//Se l'Help è aperto e sono su una modale lo ricostruisco per la generale
+		if (dialog.isModal() &&  help != null && help.isVisible())
+			aggiornaHelp = true;
+		
+		if (listener != null)			
 			listener.formClosed();
 		dialog.setVisible(false);
+		
+		if (aggiornaHelp)
+			// TODO NON è detto per la generale...ci potrebbe essere un altra (modale) di mezzo !!!!
+			help.getHelpForm().rebuildHelp(null, defaultOwner);
 	}
 
 	public void addFormVerifier(FormVerifier verifier) {
@@ -455,7 +495,8 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 		JDialog newDialog = null;
 		// cerco padre che sia Frame o Dialog
 		Component myOwner = owner;
-		while (myOwner != null && !(myOwner instanceof Frame) && !(myOwner instanceof Dialog))
+		while (myOwner != null && !(myOwner instanceof Frame)
+				&& !(myOwner instanceof Dialog))
 			myOwner = myOwner.getParent();
 		if (myOwner != null) {
 			if (myOwner instanceof Frame)
@@ -466,9 +507,11 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 		if (newDialog == null)
 			newDialog = new JDialog();
 		newDialog.getContentPane().setLayout(new BorderLayout());
-		newDialog.getContentPane().add(getAsComponentWithDecor(), BorderLayout.CENTER);
+		newDialog.getContentPane().add(getAsComponentWithDecor(),
+				BorderLayout.CENTER);
 		if (!buttons)
-			setCustomButtons(new String[] { "form.button.ok", "form.button.cancel" });
+			setCustomButtons(new String[] { "form.button.ok",
+					"form.button.cancel" });
 		if (buttons && defaultButtons != null)
 			newDialog.getRootPane().setDefaultButton(defaultButtons);
 		newDialog.getContentPane().add(btnPanel, BorderLayout.SOUTH);
@@ -476,12 +519,14 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 			getForm().getFormAccessor().replaceBean("form.panel", mainPanel);
 			if (title == null)
 				setName("form");
-			JLabel lblTitle = (JLabel) getForm().getComponentByName("form.title");
+			JLabel lblTitle = (JLabel) getForm().getComponentByName(
+					"form.title");
 			lblTitle.setText(title);
 			JLabel lblIcon = (JLabel) getForm().getComponentByName("form.icon");
 			lblIcon.setIcon(icon);
 			if (help.hasKey(helpKey))
-				getForm().getFormAccessor("form.top").replaceBean("form.help", helpButton);
+				getForm().getFormAccessor("form.top").replaceBean("form.help",
+						helpButton);
 		} catch (Exception ex) {
 			logger.error(ex.toString(), ex);
 		}
@@ -520,12 +565,12 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 	 * <dl>
 	 * <dt><b>Copyright &copy;: </b></dt>
 	 * <dd>2003 - 2004</dd>
-	 * <dd><a href="http://www.ittig.cnr.it" target="_blank">Istituto di Teoria e
-	 * Tecniche dell'Informazione Giuridica (ITTIG) <br>
+	 * <dd><a href="http://www.ittig.cnr.it" target="_blank">Istituto di Teoria
+	 * e Tecniche dell'Informazione Giuridica (ITTIG) <br>
 	 * Consiglio Nazionale delle Ricerche - Italy </a></dd>
 	 * <dt><b>License: </b></dt>
-	 * <dd><a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU General
-	 * Public License </a></dd>
+	 * <dd><a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU
+	 * General Public License </a></dd>
 	 * </dl>
 	 * 
 	 * @version 1.0
@@ -551,12 +596,12 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 	 * <dl>
 	 * <dt><b>Copyright &copy;: </b></dt>
 	 * <dd>2003 - 2004</dd>
-	 * <dd><a href="http://www.ittig.cnr.it" target="_blank">Istituto di Teoria e
-	 * Tecniche dell'Informazione Giuridica (ITTIG) <br>
+	 * <dd><a href="http://www.ittig.cnr.it" target="_blank">Istituto di Teoria
+	 * e Tecniche dell'Informazione Giuridica (ITTIG) <br>
 	 * Consiglio Nazionale delle Ricerche - Italy </a></dd>
 	 * <dt><b>License: </b></dt>
-	 * <dd><a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU General
-	 * Public License </a></dd>
+	 * <dd><a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU
+	 * General Public License </a></dd>
 	 * </dl>
 	 * 
 	 * @version 1.0
@@ -564,8 +609,8 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 	 */
 	protected class HelpButtonAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
-			logger.debug("calling help on:" + helpKey);
-			help.helpOnForm(helpKey, helpFormlistener, getAsComponent());
+			logger.debug("Call help on: " + helpKey);
+			help.helpOnForm(helpKey, helpFormlistener, getAsComponent());	
 		}
 	}
 
@@ -576,12 +621,12 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 	 * <dl>
 	 * <dt><b>Copyright &copy;: </b></dt>
 	 * <dd>2003 - 2004</dd>
-	 * <dd><a href="http://www.ittig.cnr.it" target="_blank">Istituto di Teoria e
-	 * Tecniche dell'Informazione Giuridica (ITTIG) <br>
+	 * <dd><a href="http://www.ittig.cnr.it" target="_blank">Istituto di Teoria
+	 * e Tecniche dell'Informazione Giuridica (ITTIG) <br>
 	 * Consiglio Nazionale delle Ricerche - Italy </a></dd>
 	 * <dt><b>License: </b></dt>
-	 * <dd><a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU General
-	 * Public License </a></dd>
+	 * <dd><a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU
+	 * General Public License </a></dd>
 	 * </dl>
 	 * 
 	 * @version 1.0
@@ -602,12 +647,12 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 	 * <dl>
 	 * <dt><b>Copyright &copy;: </b></dt>
 	 * <dd>2003 - 2004</dd>
-	 * <dd><a href="http://www.ittig.cnr.it" target="_blank">Istituto di Teoria e
-	 * Tecniche dell'Informazione Giuridica (ITTIG) <br>
+	 * <dd><a href="http://www.ittig.cnr.it" target="_blank">Istituto di Teoria
+	 * e Tecniche dell'Informazione Giuridica (ITTIG) <br>
 	 * Consiglio Nazionale delle Ricerche - Italy </a></dd>
 	 * <dt><b>License: </b></dt>
-	 * <dd><a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU General
-	 * Public License </a></dd>
+	 * <dd><a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU
+	 * General Public License </a></dd>
 	 * </dl>
 	 * 
 	 * @version 1.0
@@ -627,12 +672,12 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 	 * <dl>
 	 * <dt><b>Copyright &copy;: </b></dt>
 	 * <dd>2003 - 2004</dd>
-	 * <dd><a href="http://www.ittig.cnr.it" target="_blank">Istituto di Teoria e
-	 * Tecniche dell'Informazione Giuridica (ITTIG) <br>
+	 * <dd><a href="http://www.ittig.cnr.it" target="_blank">Istituto di Teoria
+	 * e Tecniche dell'Informazione Giuridica (ITTIG) <br>
 	 * Consiglio Nazionale delle Ricerche - Italy </a></dd>
 	 * <dt><b>License: </b></dt>
-	 * <dd><a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU General
-	 * Public License </a></dd>
+	 * <dd><a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU
+	 * General Public License </a></dd>
 	 * </dl>
 	 * 
 	 * @version 1.0
@@ -644,7 +689,8 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 				if (UtilClipboard.hasString())
 					popupComponent.paste();
 				else
-					popupComponent.replaceSelection(UtilDom.getRecursiveTextNode(UtilClipboard.getAsNode()));
+					popupComponent.replaceSelection(UtilDom
+							.getRecursiveTextNode(UtilClipboard.getAsNode()));
 			}
 		}
 	}
@@ -656,9 +702,12 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 			if (e.getButton() == MouseEvent.BUTTON3) {
 				try {
 					popupComponent = (JTextComponent) e.getComponent();
-					cutAction.setEnabled(popupComponent.getSelectedText() != null);
-					copyAction.setEnabled(popupComponent.getSelectedText() != null);
-					pasteAction.setEnabled(UtilClipboard.hasString() || UtilClipboard.hasNode());
+					cutAction
+							.setEnabled(popupComponent.getSelectedText() != null);
+					copyAction
+							.setEnabled(popupComponent.getSelectedText() != null);
+					pasteAction.setEnabled(UtilClipboard.hasString()
+							|| UtilClipboard.hasNode());
 					popupMenu.show(e.getComponent(), e.getX(), e.getY());
 				} catch (Exception ex) {
 					cutAction.setEnabled(false);
