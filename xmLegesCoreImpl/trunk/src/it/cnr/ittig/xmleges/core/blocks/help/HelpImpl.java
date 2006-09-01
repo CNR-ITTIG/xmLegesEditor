@@ -1,5 +1,6 @@
 package it.cnr.ittig.xmleges.core.blocks.help;
 
+import it.cnr.ittig.services.manager.Initializable;
 import it.cnr.ittig.services.manager.Loggable;
 import it.cnr.ittig.services.manager.Logger;
 import it.cnr.ittig.services.manager.ServiceException;
@@ -11,10 +12,12 @@ import it.cnr.ittig.xmleges.core.services.help.Help;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import it.cnr.ittig.xmleges.core.services.version.Version;
-
 import java.awt.Component;
 
+import javax.swing.JDialog;
 import javax.swing.JLabel;
+
+import com.jeta.forms.components.panel.FormPanel;
 
 /**
  * Implementazione del servizio it.cnr.ittig.xmleges.editor.services.help.Help. Questa implementazione
@@ -43,7 +46,7 @@ import javax.swing.JLabel;
  * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */
-public class HelpImpl implements Help, Loggable, Serviceable {
+public class HelpImpl implements Help, Loggable, Serviceable, Initializable {
 	Logger logger;
 
 	I18n i18n;
@@ -75,11 +78,13 @@ public class HelpImpl implements Help, Loggable, Serviceable {
 
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws java.lang.Exception {
+		
 		helpForm.setMainComponent(getClass().getResourceAsStream("Help.jfrm"));
 		helpForm.setCustomButtons(null);
 		helpForm.setName("help.panel");
 		helpForm.setSize(800, 600);
-		helpDialog = new HelpDialog(i18n, helpForm);
+	    helpDialog = new HelpDialog(i18n, helpForm);
+		
 		aboutForm.setMainComponent(getClass().getResourceAsStream("About.jfrm"));
 		aboutForm.setCustomButtons(new String[] { "generic.close" });
 		aboutForm.setName("help.about");
@@ -92,33 +97,37 @@ public class HelpImpl implements Help, Loggable, Serviceable {
 		try {
 			if (!helpForm.hasMainComponent() || !aboutForm.hasMainComponent())
 				initialize();
-			if (!helpForm.isDialogVisible())
+			if (!helpForm.isDialogVisible()) {
 				helpForm.showDialog((FormClosedListener) null);
-			helpDialog.setDocument(i18n.getTextFor(key));
+				//  OPZIONE:	[Levare da sotto IF se si vuole comunque andare alla pagina Index]
+				//Vado anche sulla pagina di Index dell'Help (solo se l'Help non era già visibile)
+				logger.debug("Call Help page: " + i18n.getTextFor(key));
+			    helpDialog.setDocument(i18n.getTextFor(key));
+			}
 		} catch (Exception ex) {
 			logger.error("Error opening help for key: " + key, ex);
 		}
-
 	}
 	
 	public void helpOnForm(String key, FormClosedListener listener, Component owner) {
 		try {
-			// FIXME aprendo prima l'help generale e poi quello 
-			// della form ricomincia a suonare
-			// il viceversa no (aprendo per primo quello della form)
-			
 			if (!helpForm.hasMainComponent() || !aboutForm.hasMainComponent())
 			   initialize();
-			// se faccio initialize comunque, non suona piu' ma scrive sull'helpDialog sbagliato
-			if (!helpForm.isDialogVisible())
+			
+			if (!helpForm.isDialogVisible())				
 				helpForm.showDialog(listener,owner);
+			
 			helpDialog.setDocument(i18n.getTextFor(key));
 		} catch (Exception ex) {
 			logger.error("Error opening help for key: " + key, ex);
 		}
-
 	}
 
+
+	public Form getHelpForm() {
+		return helpForm;
+	}
+	
 	public boolean hasKey(String key) {
 		if(null!=key)
 		   return(!i18n.getTextFor(key).equals(key));
@@ -134,4 +143,10 @@ public class HelpImpl implements Help, Loggable, Serviceable {
 		}
 		aboutForm.showDialog();
 	}
+	
+	public boolean isVisible() {
+		return helpForm.isDialogVisible();
+	}
+	
+	
 }
