@@ -16,8 +16,6 @@ import it.cnr.ittig.xmleges.core.services.preference.PreferenceManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.Properties;
 
@@ -65,7 +63,7 @@ import javax.swing.JTextField;
  * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */
-public class BugReportImpl implements BugReport, ActionListener, Loggable, Configurable, Serviceable, Startable {
+public class BugReportImpl implements BugReport, /* ActionListener,*/ Loggable, Configurable, Serviceable, Startable {
 	Logger logger;
 
 	Form form;
@@ -111,7 +109,7 @@ public class BugReportImpl implements BugReport, ActionListener, Loggable, Confi
 	// ////////////////////////////////////////////////// Configurable Interface
 	public void configure(Configuration configuration) throws ConfigurationException {
 		mailTo = configuration.getChild("mailto").getValue();
-		BugReportAppender.maxLines = configuration.getChild("maxlines").getValueAsInteger(10000);
+		BugReportAppender.maxLines = configuration.getChild("maxlines").getValueAsInteger(10000);		
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
@@ -131,10 +129,6 @@ public class BugReportImpl implements BugReport, ActionListener, Loggable, Confi
 		JList list = (JList) form.getComponentByName("bugreport.list");
 		list.setModel(BugReportAppender.listModel);
 
-		logModules = (JComboBox) form.getComponentByName("bugreport.logmodules");
-		logModules.addActionListener(this);
-		logLevels = (JComboBox) form.getComponentByName("bugreport.loglevels");
-		logLevels.addActionListener(this);
 		Properties p = preferenceManager.getPreferenceAsProperties(getClass().getName());
 		mailFrom.setText(p.getProperty("mail.from", ""));
 		mailSmtp.setText(p.getProperty("mail.smtp", ""));
@@ -161,65 +155,10 @@ public class BugReportImpl implements BugReport, ActionListener, Loggable, Confi
 			} catch (Exception ex) {
 				logger.error(ex.toString(), ex);
 			}
-		String[] loggers = Logger.getLoggerNames();
-		String[] loggers2 = new String[loggers.length + 1];
-		for (int i = 0; i < loggers.length; i++)
-			loggers2[i] = loggers[i];
-		loggers2[loggers.length] = allString;
-		Arrays.sort(loggers2);
-		comboBoxModel = new DefaultComboBoxModel(loggers2);
-		logModules.setModel(comboBoxModel);
-		listModel.clear();
-		setLogLevel(Logger.getLoggers(), 0);
+					
 		form.showDialog((FormClosedListener) null);
 	}
 
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource().equals(logModules)) {
-			Logger logger = Logger.getLogger(logModules.getSelectedItem().toString());
-			if (logger.isDebugEnabled())
-				logLevels.setSelectedIndex(0);
-			else if (logger.isInfoEnabled())
-				logLevels.setSelectedIndex(1);
-			else if (logger.isWarningEnabled())
-				logLevels.setSelectedIndex(2);
-			else if (logger.isErrorEnabled())
-				logLevels.setSelectedIndex(3);
-			else if (logger.isFatalErrorEnabled())
-				logLevels.setSelectedIndex(4);
-		} else if (e.getSource().equals(logLevels)) {
-			String n = logModules.getSelectedItem().toString();
-			if (allString.equals(n))
-				setLogLevel(Logger.getLoggers(), logLevels.getSelectedIndex());
-			else
-				setLogLevel(Logger.getLogger(n), logLevels.getSelectedIndex());
-		}
-	}
-
-	protected void setLogLevel(Logger[] loggers, int level) {
-		for (int i = 0; i < loggers.length; i++)
-			setLogLevel(loggers[i], level);
-	}
-
-	protected void setLogLevel(Logger logger, int level) {
-		switch (level) {
-		case 0:
-			logger.setDebugEnabled();
-			break;
-		case 1:
-			logger.setInfoEnabled();
-			break;
-		case 2:
-			logger.setWarningEnabled();
-			break;
-		case 3:
-			logger.setErrorEnabled();
-			break;
-		case 4:
-			logger.setFatalErrorEnabled();
-			break;
-		}
-	}
 
 	/**
 	 * <p>
