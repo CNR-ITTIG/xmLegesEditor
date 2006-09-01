@@ -53,11 +53,13 @@ public class HelpDialog implements HyperlinkListener { // , ComponentListener {
 
 	ReloadAction reloadAction = new ReloadAction();
 
-	CloseAction closeAction = new CloseAction();
+	DeleteAction deleteAction = new DeleteAction();
+	
+	IndexAction indexAction = new IndexAction();
 
 	Vector hystory = new Vector();
 
-	int hystoryCurr = 0;
+	int hystoryCurr = -1;
 
 	public HelpDialog(I18n i18n, Form helpForm) {
 		this.i18n = i18n;
@@ -73,14 +75,15 @@ public class HelpDialog implements HyperlinkListener { // , ComponentListener {
 		btn.setAction(forwardAction);
 		btn = (AbstractButton) helpForm.getComponentByName("help.panel.reload");
 		btn.setAction(reloadAction);
-		btn = (AbstractButton) helpForm.getComponentByName("help.panel.close");
-		btn.setAction(closeAction);
+		btn = (AbstractButton) helpForm.getComponentByName("help.panel.index");
+		btn.setAction(indexAction);
+		btn = (AbstractButton) helpForm.getComponentByName("help.panel.delete");
+		btn.setAction(deleteAction);
 
 		title = (JLabel) helpForm.getComponentByName("help.panel.title");
 		status = (JLabel) helpForm.getComponentByName("help.panel.status");
-		updateActions();
 	}
-
+	
 	public URL setDocument(String fileName) throws IOException {
 		try {
 			URL url = new URL(fileName);
@@ -105,35 +108,37 @@ public class HelpDialog implements HyperlinkListener { // , ComponentListener {
 		} catch (Exception ex) {
 			throw new IOException(ex.toString());
 		}
-		if (hystory.size() == 0)
-			hystory.addElement(url);
+		
+		//Gestione hystory
+		hystoryCurr++;
+		if (hystoryCurr >= hystory.size() || !hystory.elementAt(hystoryCurr).equals(url)) {
+			while (hystory.size() - hystoryCurr > 0)
+				hystory.removeElementAt(hystory.size() - 1);
+			hystory.insertElementAt(url, hystoryCurr);
+		}
+		updateActions();
+		status.setText(" ");		
 		updateActions();
 		return url;
 	}
-
+	
 	public void setMessage(String msg) {
 		text.setText(msg);
 	}
 
 	public void hyperlinkUpdate(HyperlinkEvent e) {
+		
 		String file = e.getDescription();
 		HyperlinkEvent.EventType type = e.getEventType();
 		if (type == HyperlinkEvent.EventType.ACTIVATED) {
 			status.setText(i18n.getTextFor("help.panel.reading") + file);
 			try {
-				hystoryCurr++;
-				URL url = null;
-				url = (e.getURL() != null) ? setDocument(e.getURL()) : setDocument(file);
-				if (hystoryCurr >= hystory.size() || hystory.elementAt(hystoryCurr) != url) {
-					while (hystory.size() - hystoryCurr > 0)
-						hystory.removeElementAt(hystory.size() - 1);
-					hystory.insertElementAt(url, hystoryCurr);
-				}
-				updateActions();
-				status.setText(" ");
+				if (e.getURL() != null) 
+					setDocument(e.getURL());
+				else
+					setDocument(file);				
 			} catch (IOException ex) {
 				status.setText(i18n.getTextFor("help.panel.error"));
-				hystoryCurr--;
 			}
 		}
 		if (type == HyperlinkEvent.EventType.ENTERED)
@@ -145,9 +150,14 @@ public class HelpDialog implements HyperlinkListener { // , ComponentListener {
 	protected void updateActions() {
 		backAction.setEnabled(hystoryCurr > 0);
 		forwardAction.setEnabled(hystoryCurr < hystory.size() - 1);
+
+		deleteAction.setEnabled(hystory.size() > 1);
+		indexAction.setEnabled((hystoryCurr > -1 && !hystory.elementAt(hystoryCurr).toString().equals(i18n.getTextFor("help.contents.index"))));		
 	}
 
+	
 	protected void updateDocument(Object o) {
+		hystoryCurr--;
 		try {
 			if (o instanceof URL)
 				setDocument((URL) o);
@@ -155,9 +165,10 @@ public class HelpDialog implements HyperlinkListener { // , ComponentListener {
 				setMessage((String) o);
 		} catch (IOException ex) {
 			status.setText(i18n.getTextFor("help.panel.error"));
+			++hystoryCurr;
 		}
 	}
-
+	
 	public class BackAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
 			if (hystoryCurr > 0)
@@ -178,10 +189,21 @@ public class HelpDialog implements HyperlinkListener { // , ComponentListener {
 		}
 	}
 
-	public class CloseAction extends AbstractAction {
+	public class IndexAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
-			helpForm.close();
+			try {
+			  setDocument(i18n.getTextFor("help.contents.index"));
+			} catch (Exception ex) {}  
 		}
 	}
-
+	
+	public class DeleteAction extends AbstractAction {
+		public void actionPerformed(ActionEvent e) {
+			URL url = (URL) hystory.elementAt(hystoryCurr);
+			hystory.removeAllElements();
+			hystoryCurr=0;
+			hystory.insertElementAt(url, hystoryCurr);
+			updateActions();	
+		}
+	}
 }
