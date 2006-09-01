@@ -42,4 +42,9 @@ public class BugReportAppender extends AppenderSkeleton {
 	public void close() {
 	}
 
+	
+	public static DefaultListModel getListModel() {
+		return listModel;
+	}
+
 }
