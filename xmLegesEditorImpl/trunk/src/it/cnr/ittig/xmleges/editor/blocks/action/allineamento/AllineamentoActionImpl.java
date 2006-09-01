@@ -145,7 +145,6 @@ public class AllineamentoActionImpl implements AllineamentoAction, Loggable, Ser
 			logger.debug("actionPerfAllinea");
 			logger.debug("###### tipo " + tipo);
 			if (tabelle.canAllignTextCol(activeNode)) {
-
 				tabelle.allineaTestoCol(UtilDom.findParentByName(activeNode, "h:td"), tipo);
 				logger.debug("#### siamo in tab");
 			}
