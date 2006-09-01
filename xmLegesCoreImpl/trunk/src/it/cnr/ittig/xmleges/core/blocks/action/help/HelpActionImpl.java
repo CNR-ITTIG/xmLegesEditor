@@ -60,10 +60,12 @@ public class HelpActionImpl implements HelpAction, Loggable, Serviceable, Initia
 
 	// //////////////////////////////////////////////////// HelpAction Interface
 	public void doAbout() {
+		logger.debug("Call About");
 		help.about();
 	}
 
 	public void doContents() {
+		logger.debug("Call Help");
 		help.helpOn("help.contents.index");
 	}
 
