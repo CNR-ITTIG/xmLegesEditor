@@ -25,4 +25,9 @@ public interface BugReport extends Service {
 	 */
 	public void openForm();
 
+	/**
+	 * 
+	 */
+	public void clearBugReport();
+
 }
