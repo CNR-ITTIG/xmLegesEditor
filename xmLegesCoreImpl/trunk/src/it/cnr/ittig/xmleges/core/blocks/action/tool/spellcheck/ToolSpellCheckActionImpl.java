@@ -18,6 +18,7 @@ import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.preference.PreferenceManager;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
+import it.cnr.ittig.xmleges.core.services.spellcheck.SpellCheck;
 import it.cnr.ittig.xmleges.core.services.spellcheck.dom.DomSpellCheck;
 import it.cnr.ittig.xmleges.core.services.spellcheck.dom.DomSpellCheckEvent;
 import it.cnr.ittig.xmleges.core.services.spellcheck.dom.form.SpellCheckForm;
@@ -69,6 +70,8 @@ public class ToolSpellCheckActionImpl implements ToolSpellCheckAction, Loggable,
 
 	DomSpellCheck domSpellCheck;
 
+	SpellCheck spellCheck;
+	
 	UtilMsg utilMsg;
 
 	Bars bars;
@@ -107,6 +110,7 @@ public class ToolSpellCheckActionImpl implements ToolSpellCheckAction, Loggable,
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
+		spellCheck = (SpellCheck) serviceManager.lookup(SpellCheck.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
@@ -130,7 +134,9 @@ public class ToolSpellCheckActionImpl implements ToolSpellCheckAction, Loggable,
 
 	public void manageEvent(EventObject event) {
 		if (event instanceof DocumentOpenedEvent)
-			spellAction.setEnabled(true);
+			//controllo se la libreria dello SpellCk. è stata caricata
+			//spellAction.setEnabled(true);
+			spellAction.setEnabled(spellCheck.isLoad());
 
 		if (event instanceof DocumentClosedEvent)
 			spellAction.setEnabled(false);
