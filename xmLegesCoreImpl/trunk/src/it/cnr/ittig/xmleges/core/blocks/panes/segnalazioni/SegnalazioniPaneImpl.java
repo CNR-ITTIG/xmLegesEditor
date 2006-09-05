@@ -57,6 +57,11 @@ public class SegnalazioniPaneImpl implements SegnalazioniPane, Loggable, Service
 
 	Logger logger;
 	BugReport bugTracer;
+	
+	//***
+	BugReportAppender bugReport; 
+	
+	
 	ActionManager actionManager;
 	
 	Frame frame;
@@ -77,6 +82,7 @@ public class SegnalazioniPaneImpl implements SegnalazioniPane, Loggable, Service
 	JList list = new JList();
 
 	OpenAction openAction = new OpenAction();
+	ClearAction clearAction = new ClearAction();
 
 	JPopupMenu popupMenu;
 
@@ -94,7 +100,7 @@ public class SegnalazioniPaneImpl implements SegnalazioniPane, Loggable, Service
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 		utilUI = (UtilUI) serviceManager.lookup(UtilUI.class);
 		bars = (Bars) serviceManager.lookup(Bars.class);
-		//aggiunti da me... i sopra vanno ancora controllati
+
 		bugTracer = (BugReport) serviceManager.lookup(BugReport.class);
 		actionManager = (ActionManager) serviceManager.lookup(ActionManager.class);
 		
@@ -109,6 +115,9 @@ public class SegnalazioniPaneImpl implements SegnalazioniPane, Loggable, Service
 		bar.add(utilUI.applyI18n("panes.segnalazioni.open", openAction));
 		panel.add(bar, BorderLayout.NORTH);
 		
+		//bottone per azzerare il BugReport
+		bar.add(utilUI.applyI18n("panes.segnalazioni.clear", clearAction));
+		panel.add(bar, BorderLayout.NORTH);
 
 		scrollPane.setViewportView(list);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -145,6 +154,13 @@ public class SegnalazioniPaneImpl implements SegnalazioniPane, Loggable, Service
 		public void actionPerformed(ActionEvent e) {
 			//Apro il BugReport
 			bugTracer.openForm();
+		}
+	}
+	
+	protected class ClearAction extends AbstractAction {
+		public void actionPerformed(ActionEvent e) {
+			bugTracer.clearBugReport();
+			logger.info("log cleared");
 		}
 	}
 
