@@ -159,7 +159,10 @@ public class BugReportImpl implements BugReport, /* ActionListener,*/ Loggable, 
 		form.showDialog((FormClosedListener) null);
 	}
 
-
+	public void clearBugReport() {
+		BugReportAppender.listModel.clear();
+	}
+	
 	/**
 	 * <p>
 	 * <dl>
