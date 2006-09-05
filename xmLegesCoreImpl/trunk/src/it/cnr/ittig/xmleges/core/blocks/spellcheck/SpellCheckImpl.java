@@ -43,6 +43,8 @@ import com.xmlmind.spellcheck.engine.SpellException;
  */
 public class SpellCheckImpl implements SpellCheck, Loggable, Serviceable, Initializable {
 
+	boolean libreriaCaricata;
+	
 	Logger logger;
 
 	UtilMsg utilMsg;
@@ -85,16 +87,18 @@ public class SpellCheckImpl implements SpellCheck, Loggable, Serviceable, Initia
 			checker = new SpellChecker(dictPath);					
 			try{	//Intercetto se è scaduta la demo della libreria "xsc.jar"
 			   checker.setPersonalDictionaryPath("dizionarioUtente_%L%.txt");
-			   checker.setSelectedLanguage("it");					
+			   checker.setSelectedLanguage("it");	
 			}
 			catch(SpellException ex){
 			   logger.error(ex.getMessage(),ex);
 			}
 		    logger.debug("---Vocabolario caricato---"+checker.getSelectedLanguage()+"---");
+		    libreriaCaricata = true;
 		  }
 		  catch(Exception ex){
 			   logger.error(ex.getMessage(),ex);
 			   utilMsg.msgInfo("spellcheck.error.library");
+			   libreriaCaricata = false;
 		  }
 		}
 	}
@@ -277,4 +281,7 @@ public class SpellCheckImpl implements SpellCheck, Loggable, Serviceable, Initia
 		// TODO modifyWord
 	}
 
+	public boolean isLoad() {
+		return libreriaCaricata;
+	}
 }
