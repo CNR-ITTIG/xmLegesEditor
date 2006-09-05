@@ -25,14 +25,16 @@ public interface SpellCheck extends Service {
 	/**
 	 * Restituisce la lista dei suggerimenti per una data parola
 	 * 
-	 * @param word parola di cui cercare i suggerimenti
+	 * @param word
+	 *            parola di cui cercare i suggerimenti
 	 */
 	public String[] getSuggestions(String word);
 
 	/**
 	 * Esegue il controllo ortografico sul testo <code>text</code>.
 	 * 
-	 * @param text testo sul quale effettuare il controllo ortografico
+	 * @param text
+	 *            testo sul quale effettuare il controllo ortografico
 	 * @return elenco delle parole con errore
 	 */
 	public SpellCheckWord[] spellCheck(String text);
@@ -48,54 +50,79 @@ public interface SpellCheck extends Service {
 	 * Aggiunge il dizionario <code>custom</code> con il nome
 	 * <code>name</code>.
 	 * 
-	 * @param name nome del dizionazio
+	 * @param name
+	 *            nome del dizionazio
 	 */
 	public void addDictionary(String name);
 
 	/**
 	 * Rimuove il dizionario <code>custom</code> di nome <code>name</code>.
 	 * 
-	 * @param name nome del dizionario
+	 * @param name
+	 *            nome del dizionario
 	 */
 	public void removeDictionary(String name);
 
 	/**
 	 * Imposta il dizionario <code>custom</code> con nome <code>name</code>.
 	 * 
-	 * @param name nome del dizionario
+	 * @param name
+	 *            nome del dizionario
 	 */
 	public void setCustomDictionary(String name);
 
 	/**
-	 * Aggiunge la parola <code>word</code> al dizionario <code>TEMPORARY_DICT</code> o al dizionario <code>PERSONAL_DICT</code>.
+	 * Aggiunge la parola <code>word</code> al dizionario
+	 * <code>TEMPORARY_DICT</code> o al dizionario <code>PERSONAL_DICT</code>.
 	 * 
-	 * @param word parola da aggiungere
-	 * @param dizTemp True: utilizza il TEMPORARY_DICT, False: utilizza il PERSONAL_DICT
+	 * @param word
+	 *            parola da aggiungere
+	 * @param dizTemp
+	 *            True: utilizza il TEMPORARY_DICT, False: utilizza il
+	 *            PERSONAL_DICT
 	 */
 	public void addWord(String word, boolean temporaryDict);
 
 	/**
-	 * Aggiunge il suggerimento <code>suggestion</code> alla parola <code>word</code> nel dizionario <code>TEMPORARY_DICT</code> o nel dizionario <code>PERSONAL_DICT</code>.
+	 * Aggiunge il suggerimento <code>suggestion</code> alla parola
+	 * <code>word</code> nel dizionario <code>TEMPORARY_DICT</code> o nel
+	 * dizionario <code>PERSONAL_DICT</code>.
 	 * 
-	 * @param word parola errata
-	 * @param suggestion parola suggerita
-	 * @param dizTemp True: utilizza il TEMPORARY_DICT, False: utilizza il PERSONAL_DICT
+	 * @param word
+	 *            parola errata
+	 * @param suggestion
+	 *            parola suggerita
+	 * @param dizTemp
+	 *            True: utilizza il TEMPORARY_DICT, False: utilizza il
+	 *            PERSONAL_DICT
 	 */
-	public void addSuggestion(String word, String suggestion, boolean temporaryDict);
-	
+	public void addSuggestion(String word, String suggestion,
+			boolean temporaryDict);
+
 	/**
 	 * Rimuove la parola <code>word</code> dal dizionario <code>custom</code>.
 	 * 
-	 * @param word parola da rimuovere
+	 * @param word
+	 *            parola da rimuovere
 	 */
-	
+
 	public void removeWord(String word);
 
 	/**
 	 * Modifica la parola <code>oldWord</code> con <code>newWord</code>.
 	 * 
-	 * @param oldWord parola da modificare
-	 * @param newWord nuova parola da sostituire
+	 * @param oldWord
+	 *            parola da modificare
+	 * @param newWord
+	 *            nuova parola da sostituire
 	 */
 	public void modifyWord(String oldWord, String newWord);
+
+	/**
+	 * Restituisce true se è caricata la libreria dello SpellCheck
+	 * 
+	 * @return <code>true</code> se è caricata la libreria
+	 */
+	public boolean isLoad();
+	
 }
