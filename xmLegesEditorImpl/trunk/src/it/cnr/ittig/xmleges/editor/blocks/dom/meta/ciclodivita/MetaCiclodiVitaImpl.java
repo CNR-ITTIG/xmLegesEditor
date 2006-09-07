@@ -9,14 +9,11 @@ import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
-import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.MetaCiclodivita;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
-import it.cnr.ittig.xmleges.editor.services.dom.rinumerazione.Rinumerazione;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
-import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 
 import java.util.Vector;
 
@@ -57,16 +54,10 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 
 	Logger logger;
 
-	NirUtilDom nirUtilDom;
-
 	DocumentManager documentManager;
 	
-	Rinumerazione rinumerazione; 
-
 	UtilRulesManager utilRulesManager;
 	
-	UtilUI utilUI;
-
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
@@ -74,11 +65,9 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
-		rinumerazione = (Rinumerazione) serviceManager.lookup(Rinumerazione.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
-		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
-		utilUI = (UtilUI) serviceManager.lookup(UtilUI.class);
+	
 	}
 
 	// /////////////////////////////////////////////// CiclodiVita Interface
