@@ -8,7 +8,6 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.inquadramento.InfoMancanti;
@@ -16,7 +15,6 @@ import it.cnr.ittig.xmleges.editor.services.dom.meta.inquadramento.Infodoc;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.inquadramento.MetaInquadramento;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.inquadramento.Oggetto;
 import it.cnr.ittig.xmleges.editor.services.dom.rinumerazione.Rinumerazione;
-import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 
 import java.util.Vector;
 
@@ -28,10 +26,6 @@ import org.w3c.dom.NodeList;
 public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Serviceable {
 
 	Logger logger;
-
-	NirUtilDom nirUtilDom;
-
-	DtdRulesManager dtdRulesManager;
 
 	DocumentManager documentManager;
 
@@ -432,11 +426,8 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 	}
 
 	public void service(ServiceManager serviceManager) throws ServiceException {
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
 		rinumerazione = (Rinumerazione) serviceManager.lookup(Rinumerazione.class);
-		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
-		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
-		//utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
+		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);		
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
 		
 		

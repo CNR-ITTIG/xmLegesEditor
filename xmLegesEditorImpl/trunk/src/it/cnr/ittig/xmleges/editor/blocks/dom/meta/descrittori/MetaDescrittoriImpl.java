@@ -8,12 +8,9 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
-import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
-import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.MetaDescrittori;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Pubblicazione;
-import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 
 import java.util.Vector;
 
@@ -53,15 +50,9 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 
 	Logger logger;
 
-	NirUtilDom nirUtilDom;
-
 	DtdRulesManager dtdRulesManager;
 
 	DocumentManager documentManager;
-
-	UtilMsg utilMsg;
-
-	UtilRulesManager utilRulesManager;
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -72,9 +63,7 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 	public void service(ServiceManager serviceManager) throws ServiceException {
 		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
-		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
-		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
-		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
+		
 	}
 
 	// ///////////////////////////////////////////////////// MetaDescrittori

@@ -1,8 +1,8 @@
 package it.cnr.ittig.xmleges.editor.blocks.form.meta.cnr;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
+import it.cnr.ittig.services.manager.Configurable;
+import it.cnr.ittig.services.manager.Configuration;
+import it.cnr.ittig.services.manager.ConfigurationException;
 import it.cnr.ittig.services.manager.Initializable;
 import it.cnr.ittig.services.manager.Loggable;
 import it.cnr.ittig.services.manager.Logger;
@@ -13,8 +13,12 @@ import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.FormVerifier;
 import it.cnr.ittig.xmleges.editor.services.form.meta.cnr.CnrProprietariForm;
 
-import javax.swing.JButton;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 /**
@@ -47,7 +51,7 @@ import javax.swing.JTextField;
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>, <a
  *         href="mailto:t.paba@onetech.it">Tommaso Paba</a>
  */
-public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Serviceable, Initializable, FormVerifier {
+public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Serviceable, Initializable, FormVerifier, Configurable {
 
 	Logger logger;
 
@@ -58,17 +62,31 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 
 	JTextField autoritaEmanante;
 	
-	JTextField tipoDestinatario;
+	JComboBox tipoDestinatario;
 
-	JTextField tagDiscipline;
-	
-//	JComboBox tagDiscipline;
-	
+	JComboBox areadisciplina_combo;
+		
 	JComboBox str_destinataria_combo;
 //	editor.form.meta.cnr.str_dest_combo
 	
 	JComboBox tipo_provv_combo;
 	
+	JRadioButton areaButton;
+	
+	JRadioButton disciplinaButton;
+	
+	ButtonGroup areadisciplinaGroup;
+	
+	String[] elenco_tipodest = new String[13];
+	
+	String[] elenco_strutturaDestinataria = new String[3];
+	
+	String[] elenco_tipoProvvedimento = new String[4];
+	
+	String[] elenco_disciplina = new String[17];
+	
+	String[] elenco_areaScientifica = new String[7];
+		
 	String errorMessage = "";
 
 	
@@ -93,49 +111,61 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 		
 		strutturaEmanante = (JTextField) form.getComponentByName("editor.form.meta.cnr.struttura");
 		autoritaEmanante = (JTextField) form.getComponentByName("editor.form.meta.cnr.autorita");
-		tipoDestinatario = (JTextField) form.getComponentByName("editor.form.meta.cnr.destinatario");
+		tipoDestinatario = (JComboBox) form.getComponentByName("editor.form.meta.cnr.destinatario");
+		tipoDestinatario.removeAllItems();
+		for (int i = 0; i < elenco_tipodest.length; i++)
+			tipoDestinatario.addItem(elenco_tipodest[i]);		
+		tipoDestinatario.setEditable(true);
 		
-		tagDiscipline = (JTextField) form.getComponentByName("editor.form.meta.cnr.disciplina");
+		areadisciplina_combo = (JComboBox) form.getComponentByName("editor.form.meta.cnr.areadisciplina_combo");
+		areadisciplina_combo.setEnabled(false);
+		areaButton = (JRadioButton) form.getComponentByName("editor.form.meta.cnr.area_button");
+		areaButton.setActionCommand("area");
+		disciplinaButton = (JRadioButton) form.getComponentByName("editor.form.meta.cnr.disciplina_button");
+		disciplinaButton.setActionCommand("disciplina");
 		
-//		tagDiscipline = (JComboBox) form.getComponentByName("editor.form.meta.cnr.disciplina");
-//		tagDiscipline.addItem("aaa");
-//		tagDiscipline.addItem("bbb");
-//		tagDiscipline.addItem("ccc");
-//		tagDiscipline.addItem("ddd");
-//		tagDiscipline.addItem("eee");
-//		
-//		tagDiscipline.setEnabled(true);
+		ActionListener areadisciplinaListener = new ActionListener(){
+
+			public void actionPerformed(ActionEvent e) {
+				if(e.getActionCommand().equals("area")){
+					areadisciplina_combo.removeAllItems();
+					for (int i = 0; i < elenco_areaScientifica.length; i++)
+						areadisciplina_combo.addItem(elenco_areaScientifica[i]);		
+					areadisciplina_combo.setEditable(true);
+				}else{
+					areadisciplina_combo.removeAllItems();
+					for (int i = 0; i < elenco_disciplina.length; i++)
+						areadisciplina_combo.addItem(elenco_disciplina[i]);		
+					areadisciplina_combo.setEditable(true);
+				}
+				areadisciplina_combo.setEnabled(true);
+			}};
+		areaButton.addActionListener(areadisciplinaListener);
+		disciplinaButton.addActionListener(areadisciplinaListener);
 		
+		areadisciplinaGroup = new ButtonGroup();
+		areadisciplinaGroup.add(areaButton);
+		areadisciplinaGroup.add(disciplinaButton);
+						
 		str_destinataria_combo = (JComboBox) form.getComponentByName("editor.form.meta.cnr.str_dest_combo");
-		
-		str_destinataria_combo.addItem("----");
-		str_destinataria_combo.addItem("tutti gli istituti");
-		str_destinataria_combo.addItem("tutti i dipartimenti");
+		str_destinataria_combo.removeAllItems();
+		for (int i = 0; i < elenco_strutturaDestinataria.length; i++)
+			str_destinataria_combo.addItem(elenco_strutturaDestinataria[i]);		
 		str_destinataria_combo.setEditable(true);
-		
+				
 		tipo_provv_combo = (JComboBox) form.getComponentByName("editor.form.meta.cnr.tipo_provv_combo");
 		
-		tipo_provv_combo.addItem("----");
-		tipo_provv_combo.addItem("nomina direttore");
-		tipo_provv_combo.addItem("nomina commissione");
-		tipo_provv_combo.addItem("istituzione ufficio");		
+		tipo_provv_combo.removeAllItems();
+		for (int i = 0; i < elenco_tipoProvvedimento.length; i++)
+			tipo_provv_combo.addItem(elenco_tipoProvvedimento[i]);		
 		tipo_provv_combo.setEditable(true);
-		
-//		tipo_provv_button.addActionListener(new ActionListener() {
-//		      public void actionPerformed(ActionEvent e) {
-//		    	  tipo_provv_combo.addItem(tipo_provv_text.getText());
-//		    	  tipo_provv_combo.setSelectedItem(tipo_provv_text.getText());
-//		    	  tipo_provv_text.setText(null);
-//		    	  
-//		      }
-//		    });
-		
+
 	}
 
 	// ////////////////////////////////////////////// MetaDescrittoriForm
 	// Interface
 	public boolean openForm() {
-		form.setSize(650, 280);
+		form.setSize(650, 380);
 		form.showDialog();
 		return form.isOk();
 	}
@@ -154,8 +184,8 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 		return new String[] {
 				strutturaEmanante.getText(),
 				autoritaEmanante.getText(),
-				tipoDestinatario.getText(),
-				tagDiscipline.getText(),
+				(String)tipoDestinatario.getSelectedItem(),
+				(String)areadisciplina_combo.getSelectedItem(),
 				(String)str_destinataria_combo.getSelectedItem(),
 				(String)tipo_provv_combo.getSelectedItem()};
 				
@@ -165,8 +195,12 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 		if(metadati!=null && metadati.length==6){
 			strutturaEmanante.setText(metadati[0]);
 			autoritaEmanante.setText(metadati[1]);
-			tipoDestinatario.setText(metadati[2]);
-			tagDiscipline.setText(metadati[3]);
+			tipoDestinatario.removeItem(metadati[2]);
+			tipoDestinatario.addItem(metadati[2]);
+			tipoDestinatario.setSelectedItem(metadati[2]);
+			areadisciplina_combo.removeItem(metadati[3]);
+			areadisciplina_combo.addItem(metadati[3]);
+			areadisciplina_combo.setSelectedItem(metadati[3]);
 			str_destinataria_combo.removeItem(metadati[4]);
 			str_destinataria_combo.addItem(metadati[4]);
 			str_destinataria_combo.setSelectedItem(metadati[4]);
@@ -177,5 +211,39 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 		
 	}
 
+	public void configure(Configuration configuration) throws ConfigurationException {
+		try {
+			Configuration[] elencoConf = configuration.getChildren();
+			int j=0, k=0, l=0, m=0, n=0;
+			for (int i = 0; i < elencoConf.length; i++){
+				if(elencoConf[i].getName().toLowerCase().startsWith("tipoprovvedimento")){
+				   elenco_tipoProvvedimento[j] = elencoConf[i].getAttribute("name");
+				   j++;
+				}
+				else if(elencoConf[i].getName().toLowerCase().startsWith("tipodestinatario")){
+					   elenco_tipodest[k] = elencoConf[i].getAttribute("name");
+					   k++;
+				}
+				else if(elencoConf[i].getName().toLowerCase().startsWith("strutturadestinataria")){
+					   elenco_strutturaDestinataria[l] = elencoConf[i].getAttribute("name");
+					   l++;
+				}
+				else if(elencoConf[i].getName().toLowerCase().startsWith("disciplina")){
+					   elenco_disciplina[m] = elencoConf[i].getAttribute("name");
+					   m++;
+				}
+				else if(elencoConf[i].getName().toLowerCase().startsWith("areascientifica")){
+					   elenco_areaScientifica[n] = elencoConf[i].getAttribute("name");
+					   n++;
+				}
+			}
+		} catch (ConfigurationException e) {
+			logger.error("Impossibile leggere il file di configurazione");
+		}
+		
+	}
+
 	
 }
+
+//TODO: ridimensiona la form e fai il configurable

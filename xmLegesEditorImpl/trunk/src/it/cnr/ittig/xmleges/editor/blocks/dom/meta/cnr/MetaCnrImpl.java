@@ -8,12 +8,10 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.cnr.MetaCnr;
 import it.cnr.ittig.xmleges.editor.services.dom.rinumerazione.Rinumerazione;
-import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -23,11 +21,7 @@ import org.w3c.dom.NodeList;
 public class MetaCnrImpl implements MetaCnr, Loggable, Serviceable {
 
 	Logger logger;
-
-	NirUtilDom nirUtilDom;
-
-	DtdRulesManager dtdRulesManager;
-
+	
 	DocumentManager documentManager;
 
 	UtilRulesManager utilRulesManager;
@@ -40,11 +34,9 @@ public class MetaCnrImpl implements MetaCnr, Loggable, Serviceable {
 
 	}
 
-	public void service(ServiceManager serviceManager) throws ServiceException {
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+	public void service(ServiceManager serviceManager) throws ServiceException {		
 		rinumerazione = (Rinumerazione) serviceManager.lookup(Rinumerazione.class);
-		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
-		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);		
+		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);				
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
 		
 	}
@@ -76,7 +68,7 @@ public class MetaCnrImpl implements MetaCnr, Loggable, Serviceable {
 					autoritaEmanante=valore;
 				if(cnrMeta_elementList.item(i).getNodeName().equals("cnr:tipoDestinatario"))
 					tipoDestinatario = valore;
-				if(cnrMeta_elementList.item(i).getNodeName().equals("cnr:disciplina"))
+				if(cnrMeta_elementList.item(i).getNodeName().equals("cnr:areaScientifica"))
 					tagDiscipline = valore;
 				if(cnrMeta_elementList.item(i).getNodeName().equals("cnr:strutturaDestinataria"))
 					strutturaDestinataria = valore;
@@ -114,7 +106,6 @@ public class MetaCnrImpl implements MetaCnr, Loggable, Serviceable {
 			
 			if (proprietarioNode==null){
 				proprietarioNode = doc.createElementNS("http://www.cnr.it/provvedimenti/2.1","proprietario");
-				//TODO: VERIFICA NAMESPACE
 				missingProprietario = true;
 			}
 			
@@ -127,7 +118,7 @@ public class MetaCnrImpl implements MetaCnr, Loggable, Serviceable {
 			
 			utilRulesManager.orderedInsertChild(proprietarioNode,cnrNode);
 						
-			String[] elementsName=new String[]{"cnr:strutturaEmanante","cnr:autoritaEmanante","cnr:tipoDestinatario","cnr:disciplina","cnr:strutturaDestinataria","cnr:tipoProvvedimento"};
+			String[] elementsName=new String[]{"cnr:strutturaEmanante","cnr:autoritaEmanante","cnr:tipoDestinatario","cnr:areaScientifica","cnr:strutturaDestinataria","cnr:tipoProvvedimento"};
 			 
 			for(int i=0;i<elementsName.length;i++){
 				Element toInsertElement = doc.createElement(elementsName[i]);
@@ -135,12 +126,13 @@ public class MetaCnrImpl implements MetaCnr, Loggable, Serviceable {
 					UtilDom.setAttributeValue(toInsertElement,"value",metadati[i]);
 				
 				Node toInsert_Node = (Node)toInsertElement;
-				
-				NodeList oldTag = doc.getElementsByTagName(elementsName[i]);
-				if (oldTag.getLength() > 0) // c'era gia' un nodo elementsName[i]
-					cnrNode.replaceChild(toInsert_Node, oldTag.item(0));
+
+				Node oldTag = UtilDom.findDirectChild(cnrNode,elementsName[i]);//doc.getElementsByTagName(elementsName[i]);
+				if (oldTag!=null) // c'era gia' un nodo elementsName[i]
+					cnrNode.replaceChild(toInsert_Node, oldTag);
 				else 
-					utilRulesManager.orderedInsertChild(cnrNode,toInsert_Node);	
+					utilRulesManager.orderedInsertChild(cnrNode,toInsert_Node);
+			    	
 			}
 			
 			if(missingProprietario){
@@ -149,45 +141,7 @@ public class MetaCnrImpl implements MetaCnr, Loggable, Serviceable {
 			}
 			return true;
 		
-//		Document doc = documentManager.getDocumentAsDom();
-//		Node proprietarioNode = doc.getElementsByTagName("proprietario").item(0);
-//		
-//		boolean missingProprietario = false;
-//		
-//		if (proprietarioNode==null){
-//			proprietarioNode = doc.createElementNS("http://www.cnr.it/provvedimenti/2.1","proprietario");
-//			//TODO: VERIFICA NAMESPACE
-//			missingProprietario = true;
-//		}
-//		
-//		Node cnrNode = doc.getElementsByTagName("cnr:meta").item(0);
-//		if (cnrNode==null){
-//			cnrNode = doc.createElement("cnr:meta");			
-//		}
-//		utilRulesManager.orderedInsertChild(proprietarioNode,cnrNode);
-//					
-//		String[] elementsName=new String[]{"cnr:strutturaEmanante","cnr:autoritaEmanante","cnr:tipoDestinatario","cnr:disciplina","cnr:strutturaDestinataria","cnr:tipoProvvedimento"};
-//		 
-//		for(int i=0;i<elementsName.length;i++){
-//			Element toInsertElement = doc.createElement(elementsName[i]);
-//			if((metadati[i]!=null)&&(!metadati[i].trim().equals("")))
-//				UtilDom.setAttributeValue(toInsertElement,"value",metadati[i]);
-//			
-//			Node toInsert_Node = (Node)toInsertElement;
-//			
-//			NodeList oldTag = doc.getElementsByTagName(elementsName[i]);
-//			if (oldTag.getLength() > 0) // c'era gia' un nodo elementsName[i]
-//				cnrNode.replaceChild(toInsert_Node, oldTag.item(0));
-//			else 
-//				utilRulesManager.orderedInsertChild(cnrNode,toInsert_Node);
-//			
-//			
-//			if(missingProprietario){
-//				Node metaNode = doc.getElementsByTagName("meta").item(0);
-//				utilRulesManager.orderedInsertChild(metaNode,proprietarioNode);
-//			}
-//		}
-//		return true;
+
 	}
 
 

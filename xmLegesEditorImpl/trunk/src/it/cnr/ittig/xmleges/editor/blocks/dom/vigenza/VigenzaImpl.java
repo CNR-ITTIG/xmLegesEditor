@@ -18,8 +18,6 @@ import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
 import it.cnr.ittig.xmleges.editor.services.dom.rinumerazione.Rinumerazione;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.Vigenza;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
-import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
-import it.cnr.ittig.xmleges.editor.services.util.urn.NirUtilUrn;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -63,19 +61,18 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 
 	DocumentManager documentManager;
 	
-	NirUtilUrn nirUtilUrn;
-	NirUtilDom nirUtilDom;
-	
-	Node selectedNode;
-	String selectedText;
-	
 	UtilRulesManager utilRulesManager;
-	
-	Rinumerazione rinumerazione;
 	
 	ExtractText extractText;
 	
+	Rinumerazione rinumerazione;
+		
+	Node selectedNode;
 	
+	String selectedText;
+	
+	
+		
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
@@ -85,8 +82,6 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 	public void service(ServiceManager serviceManager) throws ServiceException {
 		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
-		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
-		nirUtilUrn = (NirUtilUrn) serviceManager.lookup(NirUtilUrn.class);
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
 		extractText = (ExtractText) serviceManager.lookup(ExtractText.class);
 		rinumerazione = (Rinumerazione) serviceManager.lookup(Rinumerazione.class);

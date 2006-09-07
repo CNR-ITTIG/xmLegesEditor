@@ -226,7 +226,8 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Loggabl
 		}
 
 		public void clearFields() {
-			if(eventi_listtextfield.getSelectedItem()==null){
+			if(eventi_listtextfield.getSelectedItem()==null ||
+					((Evento)eventi_listtextfield.getSelectedItem()).getFonte().getTagTipoRelazione().equals("originale")){
 				dataFormDatiEvento.set(null);
 				tagTipoEvento.setText("");
 				tagTipoRelazioneSottoFormDatiEvento.setSelectedItem(null);			
