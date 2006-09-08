@@ -40,17 +40,12 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		
 		<root>
 			<priority value ="error" /> 
-			<!--appender-ref ref="ConsoleAppender" /-->
+			<appender-ref ref="ConsoleAppender" />
  			<appender-ref ref="BugReportAppender" /> 
  			<!--appender-ref ref="FileAppender" /-->
 		</root>
 		
-	<!--  
-        <logger class="it.cnr.ittig.xmleges.core.blocks.spellcheck.dom.form.SpellCheckFormImpl">
-            <level value="debug"/>
-        </logger> 
-	-->
-
+	
 	</log4j:configuration>
 	
     <!-- ================================================================== -->
@@ -295,7 +290,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                         <item action="view.pane.editor.panes.errori" />
                         <item action="view.pane.editor.panes.commenti" />
                         <item action="view.pane.panes.problems" />
-      
+                        <item action="view.pane.panes.segnalazioni" />
                     </menu>
                     <check action="view.statusbar" />
                 </menu>
@@ -1006,7 +1001,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 <pane name="editor.panes.commenti"			where="bottom-center"	index="4" />
                 <pane name="panes.notes"				where="bottom-center"  	index="5" />
                 <pane name="panes.problems"				where="bottom-center"  	index="6" />
-
+				<pane name="panes.segnalazioni"				where="bottom-center"  	index="7" />
             </panes>
         </configuration>
     </component>
@@ -1137,7 +1132,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 class="it.cnr.ittig.xmleges.core.blocks.panes.problems.ProblemsPaneImpl"
     />
 
-
+	<component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.panes.segnalazioni.SegnalazioniPaneImpl"
+    />
 
     
     <!-- ================================================================== -->
