@@ -833,6 +833,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.annessi.AnnessiFormImpl" />
 
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.filenew.FileNewFormImpl" />
+    
+    <component  class="it.cnr.ittig.xmleges.editor.blocks.form.fileexport.FileExportFormImpl" />
 
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.meta.descrittori.MetaDescrittoriFormImpl" />
     
@@ -856,12 +858,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 class="it.cnr.ittig.xmleges.editor.blocks.form.rinvii.interni.RinviiInterniFormImpl"
     />
     
-    
-
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.rifincompleti.RifIncompletiFormImpl" />
 
-    
-    
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.rinvii.newrinvii.NewRinviiFormImpl" />
     
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.rinvii.newrinviiavanzate.NewRinviiAvanzateFormImpl" />
