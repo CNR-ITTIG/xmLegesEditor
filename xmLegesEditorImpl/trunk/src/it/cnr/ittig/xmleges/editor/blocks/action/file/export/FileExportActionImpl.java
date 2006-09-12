@@ -30,6 +30,8 @@ import it.cnr.ittig.xmleges.core.util.domwriter.DOMWriter;
 import it.cnr.ittig.xmleges.core.util.file.RegexpFileFilter;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
 import it.cnr.ittig.xmleges.core.util.xslt.UtilXslt;
+import it.cnr.ittig.xmleges.editor.services.dom.vigenza.Vigenza;
+import it.cnr.ittig.xmleges.editor.services.form.fileexport.FileExportForm;
 import it.cnr.ittig.xmleges.editor.services.panes.xslts.NirXslts;
 
 import java.awt.Component;
@@ -37,6 +39,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.util.EventObject;
+import java.util.Hashtable;
 import java.util.Properties;
 import java.util.Vector;
 
@@ -118,6 +121,8 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 	NirXslts xslts;
 	
 	Form form;
+	
+	FileExportForm fileExportForm;
 
 	ListTextField listTextField;
 
@@ -129,6 +134,8 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 
 	ExportPDFAction exportPDFAction;
 	
+	Vigenza vigenza;
+	
 //	ExportRTFAction exportRTFAction;
 
 	JFileChooser fileChooser;
@@ -136,6 +143,8 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 	String lastExport = null;
 
 	String[] browsers;
+	
+	String dataVigenza = "";
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -155,7 +164,9 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 		fileTextField = (FileTextField) serviceManager.lookup(FileTextField.class);
 		xslts = (NirXslts) serviceManager.lookup(NirXslts.class);
 		utilPdf = (UtilPdf) serviceManager.lookup(UtilPdf.class);
-//		utilRtf = (UtilRtf) serviceManager.lookup(UtilRtf.class);		
+//		utilRtf = (UtilRtf) serviceManager.lookup(UtilRtf.class);	
+		fileExportForm = (FileExportForm) serviceManager.lookup(FileExportForm.class);
+		vigenza = (Vigenza) serviceManager.lookup(Vigenza.class);
 	}
 
 	// ////////////////////////////////////////////////// Configurable Interface
@@ -190,6 +201,8 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 //		actionManager.registerAction("file.export.rtf", exportRTFAction);
 		eventManager.addListener(this, DocumentOpenedEvent.class);
 		eventManager.addListener(this, DocumentClosedEvent.class);
+		
+		dataVigenza="";
 		Properties p = preferenceManager.getPreferenceAsProperties(getClass().getName());
 		try {
 			lastExport = p.getProperty("lastexport");
@@ -358,9 +371,26 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 	public boolean doExportHTML() {
 		File xsl = null;
 		String dtdName = documentManager.getDtdName();
-				
-		if (dtdName.startsWith("nir"))    // documenti NIR
+		
+		if (dtdName.startsWith("nir")){    // documenti NIR
 			xsl = new File(xslts.getXslt("xsl-nir-nocss").getAbsolutePath());
+			
+			
+			// FIXME spostare il check isDocMultivigente da qualche altra parte ?
+			
+			// per documenti NIR multivigenti; apre la form di setting dataVigenza 
+			if(vigenza.isVigente()){
+				if(fileExportForm.openForm()){
+				   if(fileExportForm.isMonoVigente())
+                     this.dataVigenza = fileExportForm.getDataVigenza();
+				   else
+					 this.dataVigenza="";
+				}
+				else
+				   return false;
+			}
+			
+		}   
 		else if (dtdName.indexOf("cnr")!=-1)  // documenti CNR
 			xsl = new File(xslts.getXslt("xsl-cnr").getAbsolutePath());
 		else                                  // documenti DL
@@ -375,10 +405,27 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 
 	// ///////////////////// esporta su browser
 	public boolean doExportBrowser() {
+		
 		File xsl = null;
 		String dtdName = documentManager.getDtdName();
-		if (dtdName.startsWith("nir"))  // documenti NIR
+		if (dtdName.startsWith("nir")){  // documenti NIR
 			xsl = new File(xslts.getXslt("xsl-nir").getAbsolutePath());
+			
+			// FIXME spostare il check isDocMultivigente da qualche altra parte ?
+			
+			// per documenti NIR multivigenti; apre la form di setting dataVigenza 
+			if(vigenza.isVigente()){
+				if(fileExportForm.openForm()){
+				   if(fileExportForm.isMonoVigente())
+                     this.dataVigenza = fileExportForm.getDataVigenza();
+				   else
+					 this.dataVigenza="";
+				}
+				else
+				   return false;
+			}
+			
+		}
 		else if (dtdName.indexOf("cnr")!=-1)  // documenti CNR
 			xsl = new File(xslts.getXslt("xsl-cnr").getAbsolutePath());
 		else								  // documenti DL
@@ -431,7 +478,11 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 			domWriter.setCanonical(true);
 			domWriter.setFormat(false);
 			domWriter.setOutput(dest);
-			Node res = UtilXslt.applyXslt(documentManager.getDocumentAsDom(), xslt, documentManager.getEncoding());
+			
+			Hashtable param = new Hashtable(1);
+			param.put("datafine",this.dataVigenza);
+	
+			Node res = UtilXslt.applyXslt(documentManager.getDocumentAsDom(), xslt, param, documentManager.getEncoding());
 			domWriter.write(res);
 			return true;
 		} catch (Exception ex) {
