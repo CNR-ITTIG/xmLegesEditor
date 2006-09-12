@@ -49,7 +49,6 @@ public class FileExportFormImpl implements FileExportForm, Loggable, Serviceable
 	JRadioButton radioMonovigente;
 	JRadioButton radioMultivigente;
 
-
 	String errorMessage = "";
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
@@ -78,6 +77,7 @@ public class FileExportFormImpl implements FileExportForm, Loggable, Serviceable
 	
 	
 	// ///////////////////////////////////////////////// Initializable Interface
+	
 	public void initialize() throws java.lang.Exception {
 		form.setMainComponent(this.getClass().getResourceAsStream("FileExport.jfrm"));
 		form.replaceComponent("editor.form.fileexport.datavigenza", dataVigenza.getAsComponent());
@@ -99,8 +99,21 @@ public class FileExportFormImpl implements FileExportForm, Loggable, Serviceable
 	}
 
 	public boolean verifyForm() {
-		return true;
+		
+		// FIXME sistemare verifyForm: se data < entrataInVigore setEntrataInVigore e msg;
+		// se data > dataOdierna : set Data Odierna
+		
+		boolean isValid = true;
+		
+		if(isMonoVigente() && (dataVigenza.getAsYYYYMMDD()==null || dataVigenza.getAsYYYYMMDD().trim().length()!=8))
+				isValid = false;
+		
+		if(!isValid)
+			errorMessage = "editor.form.fileexport.msg.err.dateerror";
+		
+		return isValid;
 	}
+	
 
 	public String getDataVigenza() {
 		return dataVigenza.getAsYYYYMMDD();
