@@ -4,7 +4,6 @@
 										xmlns="http://www.w3.org/HTML/1998/html4" 
 										xmlns:h="http://www.w3.org/HTML/1998/html4" 
 										xmlns:xlink="http://www.w3.org/1999/xlink">
-										<!--xmlns:mapper= "xalan://it.cnr.ittig.xmleges.core.blocks.panes.xsltmapper.XsltMapperImpl"-->
 										
 	<xsl:output method="html"  indent="yes"/>
 	<!-- ======================================================== -->
