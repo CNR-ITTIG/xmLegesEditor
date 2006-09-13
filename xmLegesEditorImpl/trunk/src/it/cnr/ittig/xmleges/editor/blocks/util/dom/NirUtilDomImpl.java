@@ -189,30 +189,44 @@ public class NirUtilDomImpl implements NirUtilDom, Loggable, Serviceable, Config
 
 		return path;
 	}
+	
+	
+	
+	public Node findParentMeta(Document doc, Node node){
+		Node meta; 
+		
+		// se non e' stato selezionato un nodo attivo prende il primo meta del documento;
+		if(node == null)
+				return doc.getElementsByTagName("meta").item(0);
+		// cerca sopra al nodo attivo
+		meta = UtilDom.findAncestorByName(node,"meta");
+		// se non lo trova sopra, cerca sotto
+		if(meta == null){
+			if(node.getParentNode()!=null)
+				node = node.getParentNode();    // in questo modo cerca anche fra i fratelli
+			meta = UtilDom.findRecursiveChild(node,"meta");
+		}
+		return meta;
+	}
 
+	
 	public Node checkAndCreateMeta(Document doc, Node node, String nome) {
 
 		Node meta, found, child;
 		meta = null;
-		while (node.getParentNode()!=null) {
-			node = node.getParentNode();
-			if (node.getNodeName().equals("annesso")) {
-				//mi posiziono su meta
-				meta = node.getChildNodes().item(1).getChildNodes().item(0);
-				break;	
-			}
-		} 
-		if (meta == null)  
-		    meta = doc.getElementsByTagName("meta").item(0);
-        
-        
+
+		meta = findParentMeta(doc, node);
 		found = UtilDom.findDirectChild(meta, nome);
 
-		if (found == null) { // non c'e' il tag nome
+		if (found == null) { // se non c'e' il tag "nome" lo crea
 			child = meta.getFirstChild();
-			
 			found = doc.createElement(nome);
+			// qui getNodeTemplate
+			// PROBLEMA:
+			// la questione e' che prendendo i template magari il nodo minimale che crea non e' quello che si vuole ..
+			
 			try {
+				// qui orderedInsertChild
 				if (meta.getFirstChild() != null) {
 					while (!dtdRulesManager.queryCanInsertAfter(meta, child, found))
 						child = child.getNextSibling();
@@ -227,30 +241,7 @@ public class NirUtilDomImpl implements NirUtilDom, Loggable, Serviceable, Config
 		return (found);
 	}
 	
-	public Node checkAndCreateMeta(Document doc, String nome) {
-
-		Node meta, found, child;
-
-		meta = doc.getElementsByTagName("meta").item(0);
-		found = UtilDom.findDirectChild(meta, nome);
-
-		if (found == null) { // non c'e' il tag nome
-			child = meta.getFirstChild();
-			found = doc.createElement(nome);
-			try {
-				if (meta.getFirstChild() != null) {
-					while (!dtdRulesManager.queryCanInsertAfter(meta, child, found))
-						child = child.getNextSibling();
-					meta.insertBefore(found, child.getNextSibling());
-				} else
-					meta.appendChild(found);
-			} catch (Exception ex) {
-				logger.error(ex.getMessage(), ex);
-				return null;
-			}
-		}
-		return (found);
-	}
+	
 
 	/**
 	 * se il nodo attivo ha un nodo inline lo restituisce, altrimenti lo crea
