@@ -196,6 +196,30 @@ public class UtilDom {
 				node = node.getParentNode();
 		return node;
 	}
+	
+	/**
+	 * Cerca il primo nodo antenato (padre o previousSibling) con il nome specificato
+	 * 
+	 * @param node Nodo corrente
+	 * @param name Nome dell'antenato da cercare
+	 * @return Il nodo antenato con il nome specificato oppure null
+	 */
+	public static Node findAncestorByName(Node node, String name) {
+		Node previous;
+		while (node != null)
+			if (node.getNodeName().equals(name))
+				return node;
+			else{
+				previous = node.getPreviousSibling();
+		        if(previous != null)
+		        	node = previous;
+		        else
+		        	node = node.getParentNode();
+			}
+		return node;
+	}
+	
+		
 
 	/**
 	 * Restituisce il nodo padre di tipo "Element"
@@ -269,6 +293,12 @@ public class UtilDom {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @param node
+	 * @param tagName
+	 * @return
+	 */
 	public static Node checkAndDelete(Node node, String tagName) {
 		Node e = findDirectChild(node, tagName);
 		if (e == null)
@@ -280,6 +310,12 @@ public class UtilDom {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @param node
+	 * @param tagName
+	 * @return
+	 */
 	public static Node findDirectChild(Node node, String tagName) {
 		if (node == null)
 			return null;
@@ -288,6 +324,31 @@ public class UtilDom {
 			if (nl.item(i) != null && nl.item(i).getNodeName().equals(tagName) && nl.item(i).getNodeType() == Node.ELEMENT_NODE)
 				return nl.item(i);
 		return null;
+	}
+	
+	
+	/**
+	 * 
+	 * @param node
+	 * @param tagName
+	 * @return
+	 */
+	public static Node findRecursiveChild(Node node, String tagName) {
+		Node found = null;
+		if(node == null)
+			return null;
+		if (node != null && node.getNodeName().equals(tagName) && node.getNodeType() == Node.ELEMENT_NODE){
+			return node;
+		}
+		else{
+			NodeList nl = node.getChildNodes();
+			for (int i = 0; i < nl.getLength(); i++){
+				 if((found=findRecursiveChild(nl.item(i),tagName))!=null){
+					break;
+				 }
+			}
+		}
+		return found;
 	}
 
 	public static void setTextNode(Node node, String text) {
