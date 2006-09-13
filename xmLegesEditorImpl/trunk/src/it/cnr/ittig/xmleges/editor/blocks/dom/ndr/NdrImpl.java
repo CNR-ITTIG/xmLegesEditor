@@ -86,7 +86,6 @@ public class NdrImpl implements Ndr, Loggable, Serviceable {
 		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
 		rinumerazione = (Rinumerazione) serviceManager.lookup(Rinumerazione.class);
-
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 	}
 
