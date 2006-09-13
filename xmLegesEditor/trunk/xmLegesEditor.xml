@@ -377,7 +377,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <menu action="menu.editor.riferimenti">
                         <item action="editor.rinvii.interno" />
                         <item action="editor.rinvii.esterno" />
-                        <separator />
+                        <item action="editor.link" />
+						<separator />
                         <item action="editor.rifincompleto" />
                         <item action="editor.xmleges.linker" />
 			            <separator />
@@ -510,6 +511,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 <toolbar name="editor.riferimenti" floatable="false" rollover="true">
                     <item action="editor.rinvii.interno" />
                     <item action="editor.rinvii.esterno" />
+                    <item action="editor.link" />
                     <separator />
                     <item action="editor.rifincompleto" />
                     <item action="editor.xmleges.linker" />
@@ -748,8 +750,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 class="it.cnr.ittig.xmleges.editor.blocks.action.rinvii.RinviiActionImpl"
     />
 
-
-
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.action.link.LinkActionImpl"
+    />
     
     <component  activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.action.rifincompleti.RifIncompletiActionImpl"
@@ -809,6 +812,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     
     
     
+    <component  class="it.cnr.ittig.xmleges.editor.blocks.dom.link.LinkImpl" />
+
+    
         
     <component  class="it.cnr.ittig.xmleges.editor.blocks.dom.rifincompleti.RifIncompletiImpl" />
         
@@ -857,6 +863,21 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  lifestyle="pool"
                 class="it.cnr.ittig.xmleges.editor.blocks.form.rinvii.interni.RinviiInterniFormImpl"
     />
+    
+
+
+    <component  class="it.cnr.ittig.xmleges.editor.blocks.form.link.LinkFormImpl"
+    >
+       <configuration>
+			<browsers>
+				<browser>mozilla-firefox</browser>
+				<browser>C:\\Programmi\\Internet Explorer\\iexplore.exe</browser>
+				<browser>cmd /C start</browser>
+				<browser>C:\\Programmi\\Mozilla Firefox\\firefox.exe</browser>		
+				<browser>cmd /C start</browser>
+			</browsers>
+    	</configuration>    
+    </component>    
     
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.rifincompleti.RifIncompletiFormImpl" />
 
