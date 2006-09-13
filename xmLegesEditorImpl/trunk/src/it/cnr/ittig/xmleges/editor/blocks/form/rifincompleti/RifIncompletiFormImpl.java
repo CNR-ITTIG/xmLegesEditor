@@ -77,33 +77,7 @@ public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable, Servi
 
     Form sottoForm;
 
-    DateForm dataFormDatiEvento;
-
-    JTextField tagTipoEvento;
-
-    JComboBox tagTipoRelazioneSottoFormDatiEvento;
-
     UrnForm urnFormRifIncompleti;
-
-    JComboBox tagEffettoTipoSFormDatiEvento;
-
-    Evento[] eventi;
-
-    String tipoDocumento;
-
-    String tipoDTD;
-
-    String errorMessage = "";
-
-    ListTextField eventi_listtextfield;
-    
-    Relazione[] rel_totali;
-    
-    String[] eventiOnVigenze;
-    
-    VigenzaEntity[] vigenze;
-    
-    VigenzaEntity[] vigToUpdate;
     
     UtilMsg utilMsg;
 	
@@ -145,7 +119,7 @@ public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable, Servi
 	
     public boolean openForm(String testo, String urn) {
 
-    	
+        	
     	//vettore dei riferimenti incompleti
     	riferimenti = rifincompleti.getList();
     
