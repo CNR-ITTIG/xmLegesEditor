@@ -76,27 +76,27 @@ public interface Link extends Service {
 	public String getType(Node node);
 		
 	/**
-	 * Sostituisce al nodo <code>&lt;rif&gt;</code> il suo contenuto testuale.
+	 * Sostituisce al nodo il suo contenuto testuale.
 	 * 
 	 * @param node nodo di riferimento
-	 * @param plainText testo piatto del rif Incompleto
+	 * @param plainText testo piatto del nodo
 	 * @return <code>null</code> se la modifica non &egrave; riuscita; nodo
 	 *         modificato
 	 */
 	public Node setPlainText(Node node, String plainText);
 	
 	/**
-	 * Indica se è possibile inserire un nodo <code>&lt;rif&gt;</code>
+	 * Indica se è possibile inserire un nodo <code>&lt;h:a&gt</code>
 	 * all'interno del nodo <code>node</code>.
 	 * 
 	 * @param node nodo di riferimento
 	 * @return <code>true</code> se &egrave; possibile inserire un nodo
-	 *         <code>&lt;rif&gt;</code>
+	 *         <code>&lt;h:a&gt;</code>
 	 */
 	public boolean canInsert(Node node);
 
 	/**
-	 * Inserisce un nodo <code>&lt;rif&gt;</code>all'interno del nodo
+	 * Inserisce un nodo <code>&lt;h:a&gt</code>all'interno del nodo
 	 * <code>node</code>.
 	 * 
 	 * @param node nodo di riferimento
@@ -107,4 +107,5 @@ public interface Link extends Service {
 	 *         modificato
 	 */
 	public Node insert(Node nodo, int start, int end, String testo, String url, String type);
+	
 }
