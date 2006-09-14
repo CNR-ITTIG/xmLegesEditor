@@ -14,7 +14,6 @@ import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.form.FormClosedListener;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
-import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.action.link.LinkAction;
 import it.cnr.ittig.xmleges.editor.services.dom.link.Link;
 import it.cnr.ittig.xmleges.editor.services.form.link.LinkForm;
@@ -116,31 +115,17 @@ public class LinkActionImpl implements LinkAction, EventManagerListener,  Loggab
 		
 	}
 
-	protected void setModified(Node modified) {
-		if (modified != null) {
-			selectionManager.setActiveNode(this, modified);
-			activeNode = modified;
-			logger.debug(" set modified " + UtilDom.getPathName(modified));
-		} else
-			logger.debug(" modified null in set modified ");
-	}
-
-	
-
 	protected void enableActions() {
 		if (activeNode == null) 
 			linkAction.setEnabled(false);
 		else			
 			linkAction.setEnabled(domlink.canInsert(activeNode));
-		
 	}
 
 	public void doChangeLink() {
 		linkAction.setEnabled(false);	 				
-		Node node = selectionManager.getActiveNode();	
-		if (node.getNodeName().equals("#text") && node.getParentNode().getNodeName().equals("rif"))
-			node = node.getParentNode();	
-		link.openForm(node, domlink.getText(selectionManager.getActiveNode()), domlink.getUrl(selectionManager.getActiveNode()));
+		
+		link.openForm(activeNode, domlink.getText(activeNode), domlink.getUrl(activeNode));
 		enableActions();
 		
 	}
