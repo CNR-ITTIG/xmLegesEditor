@@ -37,15 +37,14 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 				<param name="ConversionPattern" value="%-5p, %8r, %-30c, - %m%n"/>
 			</layout>
 		</appender>
-		
-		<root>
+
+ 		<root>
 			<priority value ="error" /> 
 			<appender-ref ref="ConsoleAppender" />
  			<appender-ref ref="BugReportAppender" /> 
  			<!--appender-ref ref="FileAppender" /-->
 		</root>
-		
-	
+		        
 	</log4j:configuration>
 	
     <!-- ================================================================== -->
@@ -95,8 +94,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 class="it.cnr.ittig.xmleges.core.blocks.bugreport.BugReportImpl"
     >
     	<configuration>
-            <mailto>xmleges-editor@ittig.cnr.it</mailto>
-            <maxlines>1000</maxlines>
+           <mailto>xmleges-editor@ittig.cnr.it</mailto> 
+           <maxlines>1000</maxlines>
         </configuration>
     </component>
 
@@ -291,6 +290,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                         <item action="view.pane.editor.panes.commenti" />
                         <item action="view.pane.panes.problems" />
                         <item action="view.pane.panes.segnalazioni" />
+      
                     </menu>
                     <check action="view.statusbar" />
                 </menu>
@@ -378,7 +378,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                         <item action="editor.rinvii.interno" />
                         <item action="editor.rinvii.esterno" />
                         <item action="editor.link" />
-						<separator />
+                        <separator />
                         <item action="editor.rifincompleto" />
                         <item action="editor.xmleges.linker" />
 			            <separator />
@@ -839,8 +839,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.annessi.AnnessiFormImpl" />
 
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.filenew.FileNewFormImpl" />
-    
-    <component  class="it.cnr.ittig.xmleges.editor.blocks.form.fileexport.FileExportFormImpl" />
 
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.meta.descrittori.MetaDescrittoriFormImpl" />
     
@@ -848,9 +846,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.meta.inquadramento.InquadramentoFormImpl" />
     
-    <component  class="it.cnr.ittig.xmleges.editor.blocks.form.meta.cnr.CnrProprietariFormImpl" >
-	    <configuration external="true" resource="CnrProprietariFormImpl.xconfig" />
-    </component>
+    <component  class="it.cnr.ittig.xmleges.editor.blocks.form.meta.cnr.CnrProprietariFormImpl" />
 
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.meta.urn.UrnDocumentoFormImpl" />
     
@@ -881,6 +877,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.rifincompleti.RifIncompletiFormImpl" />
 
+    
+    
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.rinvii.newrinvii.NewRinviiFormImpl" />
     
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.rinvii.newrinviiavanzate.NewRinviiAvanzateFormImpl" />
@@ -1020,7 +1018,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 <pane name="editor.panes.commenti"			where="bottom-center"	index="4" />
                 <pane name="panes.notes"				where="bottom-center"  	index="5" />
                 <pane name="panes.problems"				where="bottom-center"  	index="6" />
-				<pane name="panes.segnalazioni"				where="bottom-center"  	index="7" />
+                <pane name="panes.segnalazioni"				where="bottom-center"  	index="7" />
+
             </panes>
         </configuration>
     </component>
@@ -1033,8 +1032,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  class="it.cnr.ittig.xmleges.core.blocks.panes.attributes.AttributesPaneImpl">
         <configuration>
         	<readonly>id</readonly>
-        	<readonly>iniziovigore</readonly>
-        	<readonly>finevigore</readonly>
         </configuration>
 	</component>
 
@@ -1151,7 +1148,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 class="it.cnr.ittig.xmleges.core.blocks.panes.problems.ProblemsPaneImpl"
     />
 
-	<component  activation="startup"
+    <component  activation="startup"
                 class="it.cnr.ittig.xmleges.core.blocks.panes.segnalazioni.SegnalazioniPaneImpl"
     />
 
