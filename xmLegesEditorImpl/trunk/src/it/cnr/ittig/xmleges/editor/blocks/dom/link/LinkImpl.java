@@ -126,21 +126,43 @@ public class LinkImpl implements Link, Loggable, Serviceable {
 	
 	public String getText(Node node) {
 		
-    	if (node.getNodeName().equals("#text") && node.getParentNode().getNodeName().equals("rif"))
-    			return node.getNodeValue();
-    	
-    	if (node.getNodeName().equals("rif"))
-    			return node.getFirstChild().getNodeValue();
-
-    	int start = selectionManager.getTextSelectionStart();
-		int end = selectionManager.getTextSelectionEnd();
-
-		if (start == end)
-			return node.getNodeValue();
-		else
-			return node.getNodeValue().substring(start,end);
-    	
+		//se sono su un nodo h:a seleziono comunque tutto il testo
+		if (node.getNodeType()==Node.TEXT_NODE) {
+			if (node.getParentNode().getNodeName().equals("h:a"))
+				return node.getNodeValue();
+		}	
+		else 	
+			if (node.getNodeName().equals("h:a"))
+				return node.getFirstChild().getNodeValue();
+			
+		
+		if (node.getNodeType()==Node.TEXT_NODE) {
+			if (selectionManager.getTextSelectionStart()!=-1)
+				return selectionManager.getActiveNode().getNodeValue().substring(selectionManager.getTextSelectionStart(),selectionManager.getTextSelectionEnd());
+			else
+				if (node==selectionManager.getActiveNode())
+					return selectionManager.getActiveNode().getNodeValue(); 
+				else	
+					return "";
+		}
+		else {
+			if (selectionManager.getActiveNode().getFirstChild()!=null)
+				return selectionManager.getActiveNode().getFirstChild().getNodeValue();
+			else
+				return ""; //Sono su un nodo vuoto
+		}
 	}
+
+	public String getUrl(Node node) {
+		
+		if (node.getNodeType()==Node.TEXT_NODE && node.getParentNode()!=null)
+			return UtilDom.getAttributeValueAsString(node.getParentNode(),"xlink:href");
+		else	
+			return UtilDom.getAttributeValueAsString(node,"xlink:href");
+	}	
+
+	
+	
 	
 	public Node setUrl(Node node, String url) {
 	    try {
@@ -160,14 +182,6 @@ public class LinkImpl implements Link, Loggable, Serviceable {
 			logger.error(ex.getMessage(), ex);
 			return null;
 		}	    
-	}
-
-	public String getUrl(Node node) {
-	
-    	if (node.getNodeName().equals("#text") && node.getParentNode().getNodeName().equals("rif"))
-			return UtilDom.getAttributeValueAsString(node.getParentNode(),"xlink:href");
-
-		return UtilDom.getAttributeValueAsString(node,"xlink:href");
 	}
 
 	public Node setType(Node node, String type) {
@@ -193,17 +207,18 @@ public class LinkImpl implements Link, Loggable, Serviceable {
 
 		Document doc = documentManager.getDocumentAsDom();
 		
-		if (start == end) {
-	    	start = 0;
-			end = node.getNodeValue().length();
-		}
+		if (node.getNodeType()==Node.TEXT_NODE && node.getParentNode()!=null)
+			node = node.getParentNode();
 		
-		Element newLink = doc.createElement("rif");
+		//gestire la selezione!?!?
+		
+		Element newLink = doc.createElement("h:a");
 		UtilDom.setAttributeValue(newLink, "xlink:href", url);
 		UtilDom.setAttributeValue(newLink, "xlink:type", type);
-		newLink.appendChild(doc.createTextNode(testo.trim())) ;
+		newLink.setNodeValue(""+testo.trim());
+		newLink.appendChild(doc.createTextNode(""+testo.trim()));
+		
 		if (utilRulesManager.insertNodeInText(node, start, end, newLink, true)) {
-			
 			return newLink;
 		}
 		return null;
@@ -211,12 +226,13 @@ public class LinkImpl implements Link, Loggable, Serviceable {
 
 	public boolean canInsert(Node node) {
 		
-		if (node != null && !isUrnOrInt(node) && node.getParentNode() != null) {
+		//Non capisco perchè ma mi permette di inserire h:a nei rif (e non credo sia giusto)
+		if (node != null && !isRif(node) && node.getParentNode() != null) {
 			try {
-				return (dtdRulesManager.queryAppendable(node).contains("rif")
-						|| dtdRulesManager.queryInsertableInside(node.getParentNode(), node).contains("rif")
-						|| dtdRulesManager.queryInsertableAfter(node.getParentNode(), node).contains("rif") || dtdRulesManager.queryInsertableBefore(
-						node.getParentNode(), node).contains("rif"));
+				return (dtdRulesManager.queryAppendable(node).contains("h:a")
+						|| dtdRulesManager.queryInsertableInside(node.getParentNode(), node).contains("h:a")
+						|| dtdRulesManager.queryInsertableAfter(node.getParentNode(), node).contains("h:a") || dtdRulesManager.queryInsertableBefore(
+						node.getParentNode(), node).contains("h:a"));
 			} catch (DtdRulesManagerException ex) {
 				return false;
 			}
@@ -224,29 +240,16 @@ public class LinkImpl implements Link, Loggable, Serviceable {
 		return false;
 	}
 
-	private boolean isUrnOrInt(Node node) {
+	private boolean isRif(Node node) {
 		
-	    if (node!=null) {    	
-	    	if (node.getNodeName().equals("#text"))
-	    	    node = node.getParentNode();
-	    		
-	    	if (node != null && node.getNodeName()!=null)
-	    	if (node.getNodeName().equals("rif")) { 
-	    		String temp = UtilDom.getAttributeValueAsString(node,"xlink:href");
-	    		
-	    		if (temp==null)
-	    			//è una PROCESSING_INSTRUCTION
-	    			return false;	    		
-	    		if (temp.length()>2 && temp.substring(0,3).equals("urn"))
-	    			//è una riferimento esterno (una URN)	    			
-	    			return true;
-		  
-	    		if (temp.length()>0 && temp.substring(0,1).equals("#"))
-	    			//è una riferimento interno	    			
-	    			return true;
-	    	}
-		}  
-		return false;
+    	if (node.getNodeName().equals("#text"))
+    	    node = node.getParentNode();
+    		
+    	if (node != null && node.getNodeName()!=null)
+    		if (node.getNodeName().equals("rif"))  
+    			return true;
+
+	    return false;
 	}
 	
 }
