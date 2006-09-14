@@ -2,9 +2,6 @@ package it.cnr.ittig.xmleges.editor.blocks.form.link;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.URL;
-import java.text.ParseException;
-import java.util.Vector;
 
 import it.cnr.ittig.services.manager.Configurable;
 import it.cnr.ittig.services.manager.Configuration;
@@ -21,20 +18,14 @@ import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.FormClosedListener;
-import it.cnr.ittig.xmleges.core.services.form.date.DateForm;
-import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextField;
+import it.cnr.ittig.xmleges.core.services.form.FormVerifier;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
 import it.cnr.ittig.xmleges.editor.services.dom.link.Link;
-import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 import it.cnr.ittig.xmleges.editor.services.form.link.LinkForm;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 import org.w3c.dom.Node;
 
@@ -67,7 +58,7 @@ import org.w3c.dom.Node;
  * @version 1.0
  * @author <a href="mailto:tommaso.agnoloni@ittig.cnr.it">Tommaso Agnoloni</a>
  */
-public class LinkFormImpl implements LinkForm, Loggable, Serviceable, Configurable, Initializable, ActionListener, FormClosedListener {
+public class LinkFormImpl implements LinkForm, Loggable, Serviceable, Configurable, Initializable, ActionListener, FormClosedListener, FormVerifier {
 	
 	Logger logger;
 
@@ -89,8 +80,6 @@ public class LinkFormImpl implements LinkForm, Loggable, Serviceable, Configurab
 
 	JTextArea textUrl;
 	
-	JTextArea textType;
-	
 	DocumentManager documentManager;
 	
 	SelectionManager selectionManager;
@@ -98,7 +87,7 @@ public class LinkFormImpl implements LinkForm, Loggable, Serviceable, Configurab
 	JButton eliminaButton;
 
 	JButton verificaButton;
-		
+	
 	EditTransaction tr;
 	
 	Link link;
@@ -107,58 +96,26 @@ public class LinkFormImpl implements LinkForm, Loggable, Serviceable, Configurab
 	
     public boolean openForm(Node node, String testo, String url) {
 		
-    	nodoCorrente = node;
-    	vecchioLink =  node.getNodeName().equals("rif");
+		if (node.getNodeType()==Node.TEXT_NODE && node.getParentNode()!=null)
+			nodoCorrente = node.getParentNode();
+		else
+			nodoCorrente = node;
+    	vecchioLink = nodoCorrente.getNodeName().equals("h:a");
     	start = selectionManager.getTextSelectionStart();
     	end = selectionManager.getTextSelectionEnd();
     	eliminaButton.setEnabled(vecchioLink);
-		form.setSize(450, 200);
+		form.setSize(450, 170);
 		form.setName("editor.link");		
 		
 		textOriginal.setText(testo);
 		textUrl.setText(url);
-		textType.setText("simple");     //CHIEDERE se necessita di combo o altro !!!!!
+		form.addFormVerifier(this);
 		form.showDialog();
 
-
 		if (form.isOk()) {
-			try {
-		 		tr = documentManager.beginEdit();
-		 		if (vecchioLink) { //aggiorno i valori del link
-	                try {
-	                	Node nodoDAggiornare = nodoCorrente;
-	                	nodoDAggiornare = link.setText(nodoDAggiornare, textOriginal.getText());
-	                	nodoDAggiornare = link.setUrl(nodoDAggiornare, textUrl.getText());
-	                	nodoDAggiornare = link.setType(nodoDAggiornare, textType.getText());
-	                	nodoCorrente = nodoDAggiornare;
-	                	logger.debug("aggiornamento link riuscito");
-	                } catch (Exception ex) {
-	    				logger.debug("aggiornamento link non riuscito");
-	    				documentManager.rollbackEdit(tr);
-	    			}
-		 		}
-		 		else { //eseguo un insert
-		 				Node nodoDAggiornare = nodoCorrente;
-	                	nodoDAggiornare = link.insert(nodoDAggiornare, start, end, textOriginal.getText(),textUrl.getText(),textType.getText());
-	                	if (nodoDAggiornare != null) {
-	                		nodoCorrente = nodoDAggiornare;	
-	                	    logger.debug("inserimento link riuscito");
-	                	}    
-	                	else {
-	                		logger.debug("inserimento link non riuscito");
-	                		documentManager.rollbackEdit(tr);
-	                	}	
-		 		}
-
-		 		documentManager.commitEdit(tr);
-			} catch (DocumentManagerException ex) {
-				logger.error(ex.getMessage(), ex);
-				documentManager.rollbackEdit(tr);
-			}
-		}	
-		
-		selectionManager.setSelectedText(this, nodoCorrente, 0, 0);		
-		
+			settaLink();
+		}
+		selectionManager.setSelectedText(this, nodoCorrente, 0, 0);				
 		return form.isOk();	
 	}
 
@@ -173,14 +130,10 @@ public class LinkFormImpl implements LinkForm, Loggable, Serviceable, Configurab
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 		form = (Form) serviceManager.lookup(Form.class);
         form.setName("editor.link");
-       
         utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
-    
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 		link = (Link) serviceManager.lookup(Link.class);
-		
-
 	}
 
 	// ////////////////////////////////////////////////// Configurable Interface
@@ -200,7 +153,6 @@ public class LinkFormImpl implements LinkForm, Loggable, Serviceable, Configurab
 		form.setName("editor.link");
 		textOriginal = (JTextArea) form.getComponentByName("editor.form.link.testo");
 		textUrl = (JTextArea) form.getComponentByName("editor.form.link.url");
-		textType = (JTextArea) form.getComponentByName("editor.form.link.type");
 		eliminaButton = (JButton) form.getComponentByName("editor.form.link.elimina");
 		eliminaButton.addActionListener(this);
 		verificaButton = (JButton) form.getComponentByName("editor.form.link.verifica");
@@ -240,12 +192,52 @@ public class LinkFormImpl implements LinkForm, Loggable, Serviceable, Configurab
 		} 
 	}
 
+	private void settaLink() {
+		try {
+	 		tr = documentManager.beginEdit();
+	 		if (vecchioLink) { //aggiorno i valori del link
+                try {
+                	Node nodoDAggiornare = nodoCorrente;
+                	nodoDAggiornare = link.setText(nodoDAggiornare, textOriginal.getText());
+                	nodoDAggiornare = link.setUrl(nodoDAggiornare, textUrl.getText());
+                	nodoDAggiornare = link.setType(nodoDAggiornare, "simple");
+                	nodoCorrente = nodoDAggiornare;
+                	logger.debug("aggiornamento link riuscito");
+                } catch (Exception ex) {
+    				logger.debug("aggiornamento link non riuscito");
+    				documentManager.rollbackEdit(tr);
+    			}
+	 		}
+	 		else { //eseguo un insert
+	 				Node nodoDAggiornare = nodoCorrente;
+                	nodoDAggiornare = link.insert(nodoDAggiornare, start, end, textOriginal.getText(),textUrl.getText(),"simple");
+                	if (nodoDAggiornare != null) {
+                		nodoCorrente = nodoDAggiornare;	
+                	    logger.debug("inserimento link riuscito");
+                	}    
+                	else {
+                		logger.debug("inserimento link non riuscito");
+                		documentManager.rollbackEdit(tr);
+                	}	
+	 		}
 
+	 		documentManager.commitEdit(tr);
+		} catch (DocumentManagerException ex) {
+			logger.error(ex.getMessage(), ex);
+			documentManager.rollbackEdit(tr);
+		}
+		form.close();
+	}	
+	
 	public void formClosed() {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
+	public boolean verifyForm() {
+		return (textOriginal.getText().trim().length() != 0) && (textUrl.getText().trim().length() != 0);
+	}
 
-
+	public String getErrorMessage() {
+		return ("editor.form.link.datinonvalidi");
+	}	
 }
