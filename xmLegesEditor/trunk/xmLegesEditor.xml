@@ -1034,6 +1034,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
         <configuration>
         	<readonly>id</readonly>
         	<readonly>iniziovigore</readonly>
+        	<readonly>inizioefficacia</readonly>        	
         	<readonly>finevigore</readonly>
         	<readonly>fineefficacia</readonly>
         </configuration>
