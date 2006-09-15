@@ -81,12 +81,16 @@ public class NavigationFilter extends javax.swing.text.NavigationFilter {
 	public void setDot(FilterBypass fb, int dot, Bias bias) {
 		try {
 			Element newElem = textPane.getHTMLDocument().getCharacterElement(dot);
-			Object attr = newElem.getAttributes().getAttribute(HTML.Tag.A);
-			if (attr != null) {
-				textPane.href = attr.toString().trim();
-				return;
-			}
 			
+/// FIXME (Tommaso) qui dovrebbe prendere l'href negli h:a ma non lo trova
+//			Object attr = newElem.getAttributes().getAttribute(HTML.Tag.A);
+//			if (attr != null) {
+//				textPane.href = attr.toString().trim();
+//				return;
+//			}
+			
+			
+// OLD			
 //			Enumeration en = newElem.getAttributes().getAttributeNames();
 //			while (en.hasMoreElements()) {
 //				Object k = en.nextElement();
