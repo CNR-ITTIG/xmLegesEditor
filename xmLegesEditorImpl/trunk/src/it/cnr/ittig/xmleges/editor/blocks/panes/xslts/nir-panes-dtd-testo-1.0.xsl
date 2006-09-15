@@ -108,10 +108,12 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 
 <xsl:template match="h:a">
-    <xsl:element name="a" use-attribute-sets="XsltMapperSetClass">
-    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-        <xsl:apply-templates />
-    </xsl:element>
+	<font color="blue"><u>
+    	<xsl:element name="a" use-attribute-sets="XsltMapperSetClass">
+    		<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+        	<xsl:apply-templates />
+    	</xsl:element>
+    </u></font>
 </xsl:template>
 
 <!-- ================================================================================ -->
