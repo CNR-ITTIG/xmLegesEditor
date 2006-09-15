@@ -1035,6 +1035,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
         	<readonly>id</readonly>
         	<readonly>iniziovigore</readonly>
         	<readonly>finevigore</readonly>
+        	<readonly>fineefficacia</readonly>
         </configuration>
 	</component>
 
