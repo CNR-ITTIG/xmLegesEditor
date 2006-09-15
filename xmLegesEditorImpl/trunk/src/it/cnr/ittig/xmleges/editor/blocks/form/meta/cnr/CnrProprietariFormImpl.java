@@ -120,6 +120,14 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 		areadisciplina_combo = (JComboBox) form.getComponentByName("editor.form.meta.cnr.areadisciplina_combo");
 		areadisciplina_combo.setEnabled(false);
 		areaButton = (JRadioButton) form.getComponentByName("editor.form.meta.cnr.area_button");
+		{
+			areaButton.setSelected(true);
+			areadisciplina_combo.removeAllItems();
+			for (int i = 0; i < elenco_areaScientifica.length; i++)
+				areadisciplina_combo.addItem(elenco_areaScientifica[i]);		
+			areadisciplina_combo.setEditable(true);
+			areadisciplina_combo.setEnabled(true);
+		}
 		areaButton.setActionCommand("area");
 		disciplinaButton = (JRadioButton) form.getComponentByName("editor.form.meta.cnr.disciplina_button");
 		disciplinaButton.setActionCommand("disciplina");
@@ -165,7 +173,7 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 	// ////////////////////////////////////////////// MetaDescrittoriForm
 	// Interface
 	public boolean openForm() {
-		form.setSize(650, 380);
+		form.setSize(600, 300);
 		form.showDialog();
 		return form.isOk();
 	}
