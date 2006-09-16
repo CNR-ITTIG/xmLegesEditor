@@ -145,6 +145,7 @@ public class AnnessiImpl implements Annessi, Loggable, Serviceable {
 			ref = urnBase + ":" + denAnnessoUrn;
 			logger.info("urn allegato " + ref);
 		} else {
+			// FIXME qui si potrebbe forzare il set della urn del documento
 			utilMsg.msgError("Specificare la Urn del documento");
 		}
 		return (ref);
@@ -238,7 +239,7 @@ public class AnnessiImpl implements Annessi, Loggable, Serviceable {
 			} else {
 				// setta la urn dell'annesso
 				NodeList urnNodes = annettere.getElementsByTagName("urn");
-				UtilDom.setTextNode(urnNodes.item(0), urnAnnesso);
+				UtilDom.setAttributeValue(urnNodes.item(0),"value", urnAnnesso);
 				String idAnnesso = "ann" + getIdAnnesso(documento);
 				// annettere.getElementById()
 				Node annettere_node = documento.importNode(nirUtilDom.getTipoAtto(annettere), true);
@@ -281,9 +282,8 @@ public class AnnessiImpl implements Annessi, Loggable, Serviceable {
 		NodeList urnNodes = documento.getElementsByTagName("urn");
 
 		for (int i = 0; i < urnNodes.getLength(); i++) {
-			// UtilityDOM.getTextNode(urnNodes.item(i)).matches(regex) &&
 			if (!isInAnnesso(urnNodes.item(i)))
-				return (UtilDom.getTextNode(urnNodes.item(i)));
+				return (UtilDom.getAttributeValueAsString(urnNodes.item(i),"value"));
 		}
 		return (null);
 	}
