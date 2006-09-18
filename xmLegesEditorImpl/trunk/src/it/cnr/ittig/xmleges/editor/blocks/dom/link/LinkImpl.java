@@ -16,7 +16,6 @@ import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 import it.cnr.ittig.xmleges.editor.services.util.urn.NirUtilUrn;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
@@ -86,44 +85,6 @@ public class LinkImpl implements Link, Loggable, Serviceable {
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 	}
 			
-	public boolean canSetPlainText(Node node) {
-		if (node == null) return false;
-		if (node.getParentNode() == null) return false;
-		return true;
-	}
-	
-	public Node setPlainText(Node node, String plainText) {
-
-		if (!canSetPlainText(node))
-			return null;
-		Node container = node.getParentNode(); // contenitore del testo
-		Node ritorno = null;
- 	    if (null != node.getPreviousSibling() && UtilDom.isTextNode(node.getPreviousSibling()) && null != node.getNextSibling() && UtilDom.isTextNode(node.getNextSibling())) {
-			node.getPreviousSibling().setNodeValue(node.getPreviousSibling().getNodeValue() + " " + plainText + " " + node.getNextSibling().getNodeValue());
-			ritorno = node.getPreviousSibling();
-			container.removeChild(node.getNextSibling());
-			container.removeChild(node);			
-			return ritorno;
-		} else { //Ho solo il fratello DX di tipo text
-		  if (null != node.getNextSibling() && UtilDom.isTextNode(node.getNextSibling())) {
-				node.getNextSibling().setNodeValue(plainText + " " + node.getNextSibling().getNodeValue());
-				ritorno = node.getNextSibling();
-				container.removeChild(node);			
-				return ritorno;							
-		  } else { //Ho solo il fratello SX di tipo text
-			if (null != node.getPreviousSibling() && UtilDom.isTextNode(node.getPreviousSibling())) {
-				node.getPreviousSibling().setNodeValue(node.getPreviousSibling().getNodeValue() + " " + plainText);
-				ritorno = node.getPreviousSibling();
-				container.removeChild(node);			
-				return ritorno;							
-			} else { //Non ho fratelli e/o ho fratelli non text
-				     node.setNodeValue(plainText);
-				     return node;
-			  }
-			}
-		 }			
-	}
-	
 	public String getText(Node node) {
 		
 		//se sono su un nodo h:a seleziono comunque tutto il testo
@@ -133,24 +94,19 @@ public class LinkImpl implements Link, Loggable, Serviceable {
 		}	
 		else 	
 			if (node.getNodeName().equals("h:a"))
-				return node.getFirstChild().getNodeValue();
+				if (node.getFirstChild()!=null)
+					return node.getFirstChild().getNodeValue();
+				else 
+					return "";
 			
-		
 		if (node.getNodeType()==Node.TEXT_NODE) {
 			if (selectionManager.getTextSelectionStart()!=-1)
 				return selectionManager.getActiveNode().getNodeValue().substring(selectionManager.getTextSelectionStart(),selectionManager.getTextSelectionEnd());
 			else
-				if (node==selectionManager.getActiveNode())
-					return selectionManager.getActiveNode().getNodeValue(); 
-				else	
-					return "";
+				return "";
 		}
-		else {
-			if (selectionManager.getActiveNode().getFirstChild()!=null)
-				return selectionManager.getActiveNode().getFirstChild().getNodeValue();
-			else
-				return ""; //Sono su un nodo vuoto
-		}
+		else
+			return ""; //Sono su un nodo vuoto
 	}
 
 	public String getUrl(Node node) {
@@ -160,13 +116,13 @@ public class LinkImpl implements Link, Loggable, Serviceable {
 		else	
 			return UtilDom.getAttributeValueAsString(node,"xlink:href");
 	}	
-
-	
-	
 	
 	public Node setUrl(Node node, String url) {
 	    try {
-	    	UtilDom.setAttributeValue(node, "xlink:href", url);
+	    	if (node.getNodeType()==Node.TEXT_NODE && node.getParentNode()!=null)
+	    		UtilDom.setAttributeValue(node.getParentNode(), "xlink:href", url);
+	    	else
+	    		UtilDom.setAttributeValue(node, "xlink:href", url);
 	    	return node;
 	    } catch (Exception ex) {
 			logger.error(ex.getMessage(), ex);
@@ -176,7 +132,10 @@ public class LinkImpl implements Link, Loggable, Serviceable {
 
 	public Node setText(Node node, String text) {
 	    try {
-	    	node.getFirstChild().setNodeValue(text);
+	    	if (node.getNodeType()==Node.TEXT_NODE && node.getParentNode()!=null)
+	    		node.getParentNode().setNodeValue(text);
+	    	else
+	    		node.setNodeValue(text);
 	    	return node;
 	    } catch (Exception ex) {
 			logger.error(ex.getMessage(), ex);
@@ -186,7 +145,10 @@ public class LinkImpl implements Link, Loggable, Serviceable {
 
 	public Node setType(Node node, String type) {
 	    try {
-	    	UtilDom.setAttributeValue(node, "xlink:type", type);
+	    	if (node.getNodeType()==Node.TEXT_NODE && node.getParentNode()!=null)
+	    		UtilDom.setAttributeValue(node.getParentNode(), "xlink:type", type);
+	    	else
+	    		UtilDom.setAttributeValue(node, "xlink:type", type);
 	    	return node;
 	    } catch (Exception ex) {
 			logger.error(ex.getMessage(), ex);
@@ -195,31 +157,21 @@ public class LinkImpl implements Link, Loggable, Serviceable {
 	}
 
 	public String getType(Node node) {
-		
-		return UtilDom.getAttributeValueAsString(node,"xlink:type");
+		if (node.getNodeType()==Node.TEXT_NODE && node.getParentNode()!=null)
+			return UtilDom.getAttributeValueAsString(node.getParentNode(),"xlink:type");
+		else
+			return UtilDom.getAttributeValueAsString(node,"xlink:type");
 	}
 
-
-	
-	
 	
 	public Node insert(Node node, int start, int end, String testo, String url, String type) {
 
-		Document doc = documentManager.getDocumentAsDom();
-		
-		if (node.getNodeType()==Node.TEXT_NODE && node.getParentNode()!=null)
-			node = node.getParentNode();
-		
-		//gestire la selezione!?!?
-		
-		Element newLink = doc.createElement("h:a");
-		UtilDom.setAttributeValue(newLink, "xlink:href", url);
-		UtilDom.setAttributeValue(newLink, "xlink:type", type);
-		newLink.setNodeValue(""+testo.trim());
-		newLink.appendChild(doc.createTextNode(""+testo.trim()));
-		
-		if (utilRulesManager.insertNodeInText(node, start, end, newLink, true)) {
-			return newLink;
+		Element newLink = (Element) utilRulesManager.encloseTextInTag(testo, "h:a", "h");
+		if (newLink != null) {
+			newLink.setAttribute("xlink:href", url);
+			newLink.setAttribute("xlink:type", type);
+			if (utilRulesManager.insertNodeInText(node, start, end, newLink, true))
+				return newLink;
 		}
 		return null;
 	}
@@ -229,10 +181,10 @@ public class LinkImpl implements Link, Loggable, Serviceable {
 		//Non capisco perchè ma mi permette di inserire h:a nei rif (e non credo sia giusto)
 		if (node != null && !isRif(node) && node.getParentNode() != null) {
 			try {
-				return (dtdRulesManager.queryAppendable(node).contains("h:a")
-						|| dtdRulesManager.queryInsertableInside(node.getParentNode(), node).contains("h:a")
-						|| dtdRulesManager.queryInsertableAfter(node.getParentNode(), node).contains("h:a") || dtdRulesManager.queryInsertableBefore(
-						node.getParentNode(), node).contains("h:a"));
+				return (dtdRulesManager.queryAppendable(node).contains("h:a") || 
+						dtdRulesManager.queryInsertableInside(node.getParentNode(), node).contains("h:a") || 
+						//dtdRulesManager.queryInsertableAfter(node.getParentNode(), node).contains("h:a") || 
+						dtdRulesManager.queryInsertableBefore(node.getParentNode(), node).contains("h:a"));
 			} catch (DtdRulesManagerException ex) {
 				return false;
 			}
