@@ -350,6 +350,27 @@ public class UtilDom {
 		}
 		return found;
 	}
+	
+	public static Node findRelativeTag(Document doc, Node node, String tagName){
+		Node tagNode; 
+		
+		// se non e' stato selezionato un nodo attivo prende il primo "tagName" del documento;
+		if(node == null){
+			if(doc.getElementsByTagName(tagName)!=null && doc.getElementsByTagName(tagName).getLength()>0)
+				return doc.getElementsByTagName(tagName).item(0);
+			else
+				return null;
+		}
+		// cerca sopra al nodo attivo
+		tagNode = UtilDom.findAncestorByName(node,tagName);
+		// se non lo trova sopra, cerca sotto
+		if(tagNode == null){
+			if(node.getParentNode()!=null)
+				node = node.getParentNode();    // in questo modo cerca anche fra i fratelli
+			tagNode = UtilDom.findRecursiveChild(node,tagName);
+		}
+		return tagNode;
+	}
 
 	public static void setTextNode(Node node, String text) {
 		Node tmp = node.getOwnerDocument().createTextNode(text);
