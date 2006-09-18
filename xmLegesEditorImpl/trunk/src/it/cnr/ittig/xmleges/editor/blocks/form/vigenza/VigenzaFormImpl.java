@@ -151,7 +151,7 @@ public Evento getInizioVigore() {
 	public boolean verifyForm() {
 		
 		
-		//inizio obbligatorio		
+		//iniziovigore obbligatorio		
 		//poi se esiste anche la fine allora lo status è obbligatorio
 		//quindi posso fare le ricerche per iniziovigore
 		//messaggio se premo senza fare nulla segnalazione del fatto

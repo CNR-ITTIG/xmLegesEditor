@@ -99,7 +99,7 @@ public class FileExportFormImpl implements FileExportForm, Loggable, Serviceable
 	}
 
 	public boolean verifyForm() {
-		
+//		(newrinviiformimpl)
 		// FIXME sistemare verifyForm: se data < entrataInVigore setEntrataInVigore e msg;
 		// se data > dataOdierna : set Data Odierna
 		
@@ -116,6 +116,7 @@ public class FileExportFormImpl implements FileExportForm, Loggable, Serviceable
 	
 
 	public String getDataVigenza() {
+		
 		return dataVigenza.getAsYYYYMMDD();
 	}
 

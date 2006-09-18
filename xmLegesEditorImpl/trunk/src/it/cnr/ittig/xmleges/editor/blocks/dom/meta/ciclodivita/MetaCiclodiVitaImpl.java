@@ -8,6 +8,7 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
+import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
@@ -58,6 +59,8 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 	
 	UtilRulesManager utilRulesManager;
 	
+	SelectionManager selectionManager;
+	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
@@ -67,6 +70,7 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 	public void service(ServiceManager serviceManager) throws ServiceException {
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
+		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 	
 	}
 
@@ -311,7 +315,7 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 				UtilDom.setAttributeValue(eventoTag, "data", eventi[i].getData());
 				if(eventi[i].getFonte().getTagTipoRelazione().equals("originale")){
 					Node tag=null;
-					tag= doc.getElementsByTagName("entratainvigore").item(0);
+					tag= UtilDom.findRelativeTag(doc,selectionManager.getActiveNode(),"entratainvigore");//doc.getElementsByTagName("entratainvigore").item(0);
 					if(tag==null){
 						tag = utilRulesManager.getNodeTemplate("entratainvigore");
 						Node descrNode= doc.getElementsByTagName("descrittori").item(0);

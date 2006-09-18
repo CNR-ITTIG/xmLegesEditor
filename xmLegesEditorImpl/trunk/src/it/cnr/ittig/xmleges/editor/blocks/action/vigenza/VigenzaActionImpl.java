@@ -221,22 +221,7 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 		} else
 			logger.debug(" modified null in set modified ");
 	}
-	
 
-//	public Node getCiclodiVitaNode() {
-//		Document doc = documentManager.getDocumentAsDom();
-//		Node ciclodivitaNode = doc.getElementsByTagName("ciclodivita").getLength()>0?doc.getElementsByTagName("ciclodivita").item(0):null;
-//		return ciclodivitaNode;
-//	}
-//
-//	public void setCiclodiVitaNode(Node ciclodivitaNode) {
-//		if(ciclodivitaNode != null){
-//			Document doc = documentManager.getDocumentAsDom();
-//			doc.importNode(ciclodivitaNode,true);
-//			Node oldCiclodivita=doc.getElementsByTagName("ciclodivita").item(0);
-//			oldCiclodivita.getParentNode().replaceChild(ciclodivitaNode,oldCiclodivita);
-//		}
-//	}		
 
 
 
