@@ -25,7 +25,7 @@ import it.cnr.ittig.xmleges.editor.services.dom.link.Link;
 import it.cnr.ittig.xmleges.editor.services.form.link.LinkForm;
 
 import javax.swing.JButton;
-import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import org.w3c.dom.Node;
 
@@ -76,16 +76,12 @@ public class LinkFormImpl implements LinkForm, Loggable, Serviceable, Configurab
 	
 	EventManager eventManager;
 	
-	JTextArea textOriginal;
-
-	JTextArea textUrl;
+	JTextField textUrl;
 	
 	DocumentManager documentManager;
 	
 	SelectionManager selectionManager;
     
-	JButton eliminaButton;
-
 	JButton verificaButton;
 	
 	EditTransaction tr;
@@ -94,25 +90,34 @@ public class LinkFormImpl implements LinkForm, Loggable, Serviceable, Configurab
 	
 	String[] browsers;
 	
+	String parteTestuale;
+	
     public boolean openForm(Node node, String testo, String url) {
-		
-		if (node.getNodeType()==Node.TEXT_NODE && node.getParentNode()!=null)
-			nodoCorrente = node.getParentNode();
-		else
-			nodoCorrente = node;
-    	vecchioLink = nodoCorrente.getNodeName().equals("h:a");
+
+    	nodoCorrente = node;		
+		if (node.getNodeType()==Node.TEXT_NODE) {
+			if (node.getParentNode().getNodeName().equals("h:a"))
+				vecchioLink=true;
+			else 	
+				vecchioLink=false;
+		}
+		else 
+			vecchioLink = (node.getNodeName().equals("h:a"));
+			
     	start = selectionManager.getTextSelectionStart();
     	end = selectionManager.getTextSelectionEnd();
-    	eliminaButton.setEnabled(vecchioLink);
-		form.setSize(450, 170);
+		form.setSize(450, 150);
 		form.setName("editor.link");		
 		
-		textOriginal.setText(testo);
 		textUrl.setText(url);
 		form.addFormVerifier(this);
 		form.showDialog();
 
 		if (form.isOk()) {
+			if (testo!=null && testo.length()!=0)
+				parteTestuale = testo;
+			else
+				parteTestuale = textUrl.getText().trim();
 			settaLink();
 		}
 		selectionManager.setSelectedText(this, nodoCorrente, 0, 0);				
@@ -151,36 +156,14 @@ public class LinkFormImpl implements LinkForm, Loggable, Serviceable, Configurab
 	public void initialize() throws java.lang.Exception {
 		form.setMainComponent(getClass().getResourceAsStream("Link.jfrm"));				
 		form.setName("editor.link");
-		textOriginal = (JTextArea) form.getComponentByName("editor.form.link.testo");
-		textUrl = (JTextArea) form.getComponentByName("editor.form.link.url");
-		eliminaButton = (JButton) form.getComponentByName("editor.form.link.elimina");
-		eliminaButton.addActionListener(this);
+		textUrl = (JTextField) form.getComponentByName("editor.form.link.url");
 		verificaButton = (JButton) form.getComponentByName("editor.form.link.verifica");
 		verificaButton.addActionListener(this);		
 		form.setHelpKey("help.contents.index.link",this);
 	}
 			
 	public void actionPerformed(ActionEvent evt) {
-		if (evt.getSource() == eliminaButton) {
-			try {
-				tr = documentManager.beginEdit();
-				Node modificato = link.setPlainText(nodoCorrente, textOriginal.getText());
-				if (null != modificato) {
-					logger.debug("Eliminazione link riuscita");
-					nodoCorrente = modificato;
-					documentManager.commitEdit(tr);
-				}
-				else {
-					logger.debug("Eliminazione link fallita");
-					documentManager.rollbackEdit(tr);
-				}
-			} catch (DocumentManagerException ex) {
-				logger.error(ex.getMessage(), ex);
-				documentManager.rollbackEdit(tr);
-			}
-			form.close();
-		} 
-		else if (evt.getSource() == verificaButton) {
+		if (evt.getSource() == verificaButton) {
 			logger.debug("Eseguo browser");
 			for (int i = 0; i < browsers.length; i++)
 				try {
@@ -195,10 +178,11 @@ public class LinkFormImpl implements LinkForm, Loggable, Serviceable, Configurab
 	private void settaLink() {
 		try {
 	 		tr = documentManager.beginEdit();
-	 		if (vecchioLink) { //aggiorno i valori del link
+	 		
+	 		if (vecchioLink && nodoCorrente!=null) { //aggiorno i valori del link
                 try {
                 	Node nodoDAggiornare = nodoCorrente;
-                	nodoDAggiornare = link.setText(nodoDAggiornare, textOriginal.getText());
+                	nodoDAggiornare = link.setText(nodoDAggiornare, parteTestuale);
                 	nodoDAggiornare = link.setUrl(nodoDAggiornare, textUrl.getText());
                 	nodoDAggiornare = link.setType(nodoDAggiornare, "simple");
                 	nodoCorrente = nodoDAggiornare;
@@ -210,7 +194,7 @@ public class LinkFormImpl implements LinkForm, Loggable, Serviceable, Configurab
 	 		}
 	 		else { //eseguo un insert
 	 				Node nodoDAggiornare = nodoCorrente;
-                	nodoDAggiornare = link.insert(nodoDAggiornare, start, end, textOriginal.getText(),textUrl.getText(),"simple");
+                	nodoDAggiornare = link.insert(nodoDAggiornare, start, end, parteTestuale ,textUrl.getText().trim(),"simple");
                 	if (nodoDAggiornare != null) {
                 		nodoCorrente = nodoDAggiornare;	
                 	    logger.debug("inserimento link riuscito");
@@ -234,7 +218,7 @@ public class LinkFormImpl implements LinkForm, Loggable, Serviceable, Configurab
 	}
 
 	public boolean verifyForm() {
-		return (textOriginal.getText().trim().length() != 0) && (textUrl.getText().trim().length() != 0);
+		return (textUrl.getText().trim().length() != 0);
 	}
 
 	public String getErrorMessage() {
