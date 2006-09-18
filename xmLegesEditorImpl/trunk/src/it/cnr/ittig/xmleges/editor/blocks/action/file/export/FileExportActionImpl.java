@@ -285,10 +285,10 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 					if (Runtime.getRuntime().exec("xpdf " + file.getAbsolutePath()) == null)
 						Runtime.getRuntime().exec("acroread " + file.getAbsolutePath());
 				} else if (osName.toLowerCase().matches("windows.*")) {
-					// FIXME: problemi su windows lancio comandi con spazi nel
-					// nome
-					// Runtime.getRuntime().exec("cmd /C start " +
-					// file.getCanonicalPath());//.getAbsolutePath());
+					// FIXME: Testato solamente su Windows XP
+					try {
+					 Runtime.getRuntime().exec("cmd /C start AcroRd32 " + file.getAbsolutePath());
+					} catch (Exception ex) {} 
 				}
 				return true;
 			}
