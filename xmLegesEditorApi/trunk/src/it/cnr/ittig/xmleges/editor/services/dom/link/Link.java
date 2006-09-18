@@ -74,17 +74,7 @@ public interface Link extends Service {
 	 * @return
 	 */
 	public String getType(Node node);
-		
-	/**
-	 * Sostituisce al nodo il suo contenuto testuale.
-	 * 
-	 * @param node nodo di riferimento
-	 * @param plainText testo piatto del nodo
-	 * @return <code>null</code> se la modifica non &egrave; riuscita; nodo
-	 *         modificato
-	 */
-	public Node setPlainText(Node node, String plainText);
-	
+			
 	/**
 	 * Indica se è possibile inserire un nodo <code>&lt;h:a&gt</code>
 	 * all'interno del nodo <code>node</code>.
