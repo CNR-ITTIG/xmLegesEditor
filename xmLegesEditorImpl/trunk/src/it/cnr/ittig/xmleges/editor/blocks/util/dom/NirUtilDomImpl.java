@@ -192,30 +192,12 @@ public class NirUtilDomImpl implements NirUtilDom, Loggable, Serviceable, Config
 	
 	
 	
-	public Node findParentMeta(Document doc, Node node){
-		Node meta; 
-		
-		// se non e' stato selezionato un nodo attivo prende il primo meta del documento;
-		if(node == null)
-				return doc.getElementsByTagName("meta").item(0);
-		// cerca sopra al nodo attivo
-		meta = UtilDom.findAncestorByName(node,"meta");
-		// se non lo trova sopra, cerca sotto
-		if(meta == null){
-			if(node.getParentNode()!=null)
-				node = node.getParentNode();    // in questo modo cerca anche fra i fratelli
-			meta = UtilDom.findRecursiveChild(node,"meta");
-		}
-		return meta;
-	}
-
-	
 	public Node checkAndCreateMeta(Document doc, Node node, String nome) {
 
 		Node meta, found, child;
 		meta = null;
 
-		meta = findParentMeta(doc, node);
+		meta = UtilDom.findRelativeTag(doc, node,"meta");
 		found = UtilDom.findDirectChild(meta, nome);
 
 		if (found == null) { // se non c'e' il tag "nome" lo crea
