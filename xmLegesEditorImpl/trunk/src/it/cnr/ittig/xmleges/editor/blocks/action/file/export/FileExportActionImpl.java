@@ -41,6 +41,7 @@ import java.io.File;
 import java.util.EventObject;
 import java.util.Hashtable;
 import java.util.Properties;
+import java.util.StringTokenizer;
 import java.util.Vector;
 
 import javax.swing.AbstractAction;
@@ -285,9 +286,10 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 					if (Runtime.getRuntime().exec("xpdf " + file.getAbsolutePath()) == null)
 						Runtime.getRuntime().exec("acroread " + file.getAbsolutePath());
 				} else if (osName.toLowerCase().matches("windows.*")) {
-					// FIXME: Testato solamente su Windows XP
 					try {
-					 Runtime.getRuntime().exec("cmd /C start AcroRd32 " + file.getAbsolutePath());
+						// FIXME provato solo su winXP
+						if (Runtime.getRuntime().exec("cmd /C start " + cmdWin(file.getAbsolutePath())) == null)
+							Runtime.getRuntime().exec("command /C start " + cmdWin(file.getAbsolutePath()));
 					} catch (Exception ex) {} 
 				}
 				return true;
@@ -297,7 +299,22 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 			return false;
 		}
 	}
-
+    private String cmdWin(String cmd) {
+    	
+    	StringTokenizer token = new StringTokenizer(cmd, "\\");
+    	String comando=token.nextToken();
+    	String temp;
+		while (token.hasMoreTokens()) {
+			temp = token.nextToken();
+			if (temp.indexOf(" ")==-1)
+				comando += "\\" + temp; 
+			else
+				comando += "\\\"" + temp +"\"";
+		}
+    	return comando;
+    }
+	
+	
 	public boolean doExportRTF() {
 		
 //		String XSL_FO_GU = xslts.getXslt("rtf-gazzettaufficiale").getAbsolutePath();
