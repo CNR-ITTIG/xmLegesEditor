@@ -20,23 +20,17 @@ import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.FormClosedListener;
-import it.cnr.ittig.xmleges.core.services.form.date.DateForm;
-import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextField;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
 import it.cnr.ittig.xmleges.editor.services.dom.rifincompleti.RifIncompleti;
-import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 import it.cnr.ittig.xmleges.editor.services.form.rifincompleti.RifIncompletiForm;
 import it.cnr.ittig.xmleges.editor.services.form.urn.UrnForm;
 import it.cnr.ittig.xmleges.editor.services.util.urn.NirUtilUrn;
 import it.cnr.ittig.xmleges.editor.services.util.urn.Urn;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
+import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 import org.w3c.dom.Node;
 
@@ -97,6 +91,8 @@ public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable, Servi
 
 	JButton nextButton;
 	
+	JCheckBox typeReplace;
+	
 	Node[] riferimenti = null;
 	
 	Vector resolved = new Vector();
@@ -138,7 +134,7 @@ public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable, Servi
 		tr = null;
 		contaTr = 0;
 		
-		form.setSize(650, 180);
+		form.setSize(650, 200);
 		form.setName("editor.rifincompleto");
 		missRif = showRif(riferimenti);		
 		form.showDialog();
@@ -203,6 +199,7 @@ public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable, Servi
 		replaceButton.addActionListener(this);
 		nextButton = (JButton) form.getComponentByName("editor.form.rifincompleto.next");
 		nextButton.addActionListener(this);
+		typeReplace = (JCheckBox) form.getComponentByName("editor.form.rifincompleto.typereplace");
 		
 		form.setHelpKey("help.contents.index.rifincompleti",this);
 	}
@@ -349,7 +346,15 @@ public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable, Servi
 			 if (urnFormRifIncompleti.getUrn().isValid()) {
 			  try {
 		 		tr = documentManager.beginEdit();
-		 		if (null != rifincompleti.setRif(riferimenti[missRif], nirutilurn.getFormaTestuale(urnFormRifIncompleti.getUrn()), urnFormRifIncompleti.getUrn())) {
+		 		
+		 		//ORIGINALE  (sostituisci con URN)
+		 		//if (null != rifincompleti.setRif(riferimenti[missRif], nirutilurn.getFormaTestuale(urnFormRifIncompleti.getUrn()), urnFormRifIncompleti.getUrn())) {
+		 		
+		 		//Gestiamo la forma testuale della URN
+		 		String formaTestuale = textArea.getText();
+		 		if (typeReplace.isSelected()) formaTestuale = nirutilurn.getFormaTestuale(urnFormRifIncompleti.getUrn());
+		 		if (null != rifincompleti.setRif(riferimenti[missRif], formaTestuale, urnFormRifIncompleti.getUrn())) {
+		 			
 					contaTr++;					
 					resolved.add(riferimenti[missRif]);
 					missRif = showRif(riferimenti);
