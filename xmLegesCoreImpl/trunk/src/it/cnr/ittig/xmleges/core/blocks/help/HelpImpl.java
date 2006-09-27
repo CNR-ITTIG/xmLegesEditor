@@ -1,5 +1,8 @@
 package it.cnr.ittig.xmleges.core.blocks.help;
 
+import it.cnr.ittig.services.manager.Configurable;
+import it.cnr.ittig.services.manager.Configuration;
+import it.cnr.ittig.services.manager.ConfigurationException;
 import it.cnr.ittig.services.manager.Initializable;
 import it.cnr.ittig.services.manager.Loggable;
 import it.cnr.ittig.services.manager.Logger;
@@ -14,10 +17,8 @@ import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import it.cnr.ittig.xmleges.core.services.version.Version;
 import java.awt.Component;
 
-import javax.swing.JDialog;
 import javax.swing.JLabel;
 
-import com.jeta.forms.components.panel.FormPanel;
 
 /**
  * Implementazione del servizio it.cnr.ittig.xmleges.editor.services.help.Help. Questa implementazione
@@ -46,7 +47,7 @@ import com.jeta.forms.components.panel.FormPanel;
  * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */
-public class HelpImpl implements Help, Loggable, Serviceable, Initializable {
+public class HelpImpl implements Help, Loggable, Serviceable, Initializable, Configurable {
 	Logger logger;
 
 	I18n i18n;
@@ -61,6 +62,7 @@ public class HelpImpl implements Help, Loggable, Serviceable, Initializable {
 
 	HelpDialog helpDialog;
 	
+	String[] browsers;
 	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -75,7 +77,18 @@ public class HelpImpl implements Help, Loggable, Serviceable, Initializable {
 		helpForm = (Form) serviceManager.lookup(Form.class);
 		version = (Version) serviceManager.lookup(Version.class);
 	}
-
+	
+	// ////////////////////////////////////////////////// Configurable Interface
+	public void configure(Configuration conf) throws ConfigurationException {
+		Configuration bs = conf.getChild("browsers");
+		if (bs != null) {
+			Configuration[] b = bs.getChildren("browser");
+			browsers = new String[b.length];
+			for (int i = 0; i < b.length; i++)
+				browsers[i] = b[i].getValue();
+		}
+	}	
+	
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws java.lang.Exception {
 		
@@ -94,35 +107,49 @@ public class HelpImpl implements Help, Loggable, Serviceable, Initializable {
 
 	// ////////////////////////////////////////////////////////// Help Interface
 	public void helpOn(String key) {
-		try {
-			if (!helpForm.hasMainComponent() || !aboutForm.hasMainComponent())
-				initialize();
-			if (!helpForm.isDialogVisible()) {
-				helpForm.showDialog((FormClosedListener) null);
-				//  OPZIONE:	[Levare da sotto IF se si vuole comunque andare alla pagina Index]
-				//Vado anche sulla pagina di Index dell'Help (solo se l'Help non era già visibile)
-				logger.debug("Call Help page: " + i18n.getTextFor(key));
-			    helpDialog.setDocument(i18n.getTextFor(key));
+
+		
+		//VECCHIA gestione dell'HELP. Lasciata per promemoria.
+		//L'Help richiamato dal menu in alto, viene eseguito esternamente in un browser 
+		
+//		try {
+//			if (!helpForm.hasMainComponent() || !aboutForm.hasMainComponent())
+//				initialize();
+//			if (!helpForm.isDialogVisible()) {
+//				helpForm.showDialog((FormClosedListener) null);
+//				//  OPZIONE:	[Levare da sotto IF se si vuole comunque andare alla pagina Index]
+//				//Vado anche sulla pagina di Index dell'Help (solo se l'Help non era già visibile)
+//				logger.debug("Call Help page: " + i18n.getTextFor(key));
+//			    helpDialog.setDocument(i18n.getTextFor(key));
+//			}
+//		} catch (Exception ex) {
+//			logger.error("Error opening help for key: " + key, ex);
+//		}
+
+		logger.debug("Call Help page: " + i18n.getTextFor(key));
+		
+		//e linux?????????????????? PROVARE
+		
+		for (int i = 0; i < browsers.length; i++)
+			try {
+				String cmd = browsers[i] + " " + i18n.getTextFor(key);
+				Runtime.getRuntime().exec(cmd);
+				break;
+			} catch (Exception ex) {
 			}
-		} catch (Exception ex) {
-			logger.error("Error opening help for key: " + key, ex);
-		}
 	}
 	
 	public void helpOnForm(String key, FormClosedListener listener, Component owner) {
 		try {
 			if (!helpForm.hasMainComponent() || !aboutForm.hasMainComponent())
 			   initialize();
-			
-			if (!helpForm.isDialogVisible())				
-				helpForm.showDialog(listener,owner);
-			
+	
+			helpForm.showDialog(listener,owner);			
 			helpDialog.setDocument(i18n.getTextFor(key));
 		} catch (Exception ex) {
 			logger.error("Error opening help for key: " + key, ex);
 		}
 	}
-
 
 	public Form getHelpForm() {
 		return helpForm;
