@@ -127,9 +127,6 @@ public class HelpImpl implements Help, Loggable, Serviceable, Initializable, Con
 //		}
 
 		logger.debug("Call Help page: " + i18n.getTextFor(key));
-		
-		//e linux?????????????????? PROVARE
-		
 		for (int i = 0; i < browsers.length; i++)
 			try {
 				String cmd = browsers[i] + " " + i18n.getTextFor(key);
