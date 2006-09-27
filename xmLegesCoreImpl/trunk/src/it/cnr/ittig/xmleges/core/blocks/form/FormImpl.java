@@ -26,7 +26,6 @@ import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Frame;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -263,17 +262,16 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 	}
 
 	public void showDialog(Component owner) {
-				
+
+		//Se la finestra dell'Help è aperta la chiudo
+		if (help != null && help.isVisible())
+			help.getHelpForm().close();
+
 		if (dialogChanged)
 		  dialog = buildDialog(owner);
 		this.listener = null;
 		dialog.setModal(true);
-		dialog.validate();
-
-		//Se la finestra dell'Help è aperta bisogna ricostruirla
-		if (help != null && help.isVisible()) 
-			help.getHelpForm().rebuildHelp(helpFormlistener, getAsComponent());
-		
+		dialog.validate();		
 		dialog.show();	    		
 	}
 
@@ -285,19 +283,6 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 		
 		dialog = buildDialog(owner);
 		
-		this.listener = listener;
-		dialog.setModal(false);
-		dialog.validate();
-		dialog.show();
-	}
-
-	public void rebuildHelp(FormClosedListener listener, Component owner) {
-					
-		Rectangle r = dialog.getBounds();
-		close();
-		dialog = buildDialog(owner);
-		dialog.setBounds(r);
-				
 		this.listener = listener;
 		dialog.setModal(false);
 		dialog.validate();
@@ -412,19 +397,10 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 	}
 
 	public void close() {
-		
-		boolean aggiornaHelp = false;
-		//Se l'Help è aperto e sono su una modale lo ricostruisco per la generale
-		if (dialog.isModal() &&  help != null && help.isVisible())
-			aggiornaHelp = true;
-		
+				
 		if (listener != null)			
 			listener.formClosed();
 		dialog.setVisible(false);
-		
-		if (aggiornaHelp)
-			// TODO NON è detto per la generale...ci potrebbe essere un altra (modale) di mezzo !!!!
-			help.getHelpForm().rebuildHelp(null, defaultOwner);
 	}
 
 	public void addFormVerifier(FormVerifier verifier) {
