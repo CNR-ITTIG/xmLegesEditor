@@ -124,14 +124,6 @@ public interface Form extends Service {
 	 * @param owner padre della form
 	 */
 	public void showDialog(FormClosedListener listener, Component owner);
-
-	/**
-	 * Ricostruisce la form dell'Help.
-	 * 
-	 * @param listener listener per notificare la chiusura della form
-	 * @param owner padre della form
-	 */
-	public void rebuildHelp(FormClosedListener listener, Component owner);
 	
 	/**
 	 * Indica se la form di dialogo &egrave; visibile.
