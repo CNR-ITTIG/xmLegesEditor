@@ -871,9 +871,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
        <configuration>
 			<browsers>
 				<browser>mozilla-firefox</browser>
+				<browser>C:\\Programmi\\Mozilla Firefox\\firefox.exe</browser>
 				<browser>C:\\Programmi\\Internet Explorer\\iexplore.exe</browser>
-				<browser>cmd /C start</browser>
-				<browser>C:\\Programmi\\Mozilla Firefox\\firefox.exe</browser>		
 				<browser>cmd /C start</browser>
 			</browsers>
     	</configuration>    
@@ -1240,8 +1239,17 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     
     <component  class="it.cnr.ittig.xmleges.editor.blocks.util.urn.NirUtilUrnImpl" />
     
-    <component  class="it.cnr.ittig.xmleges.core.blocks.help.HelpImpl" />
-    
+    <component  class="it.cnr.ittig.xmleges.core.blocks.help.HelpImpl"
+    >
+       <configuration>
+			<browsers>
+				<browser>mozilla-firefox</browser>
+				<browser>C:\\Programmi\\Mozilla Firefox\\firefox.exe</browser>
+				<browser>C:\\Programmi\\Internet Explorer\\iexplore.exe</browser>
+				<browser>cmd /C start</browser>
+			</browsers>
+    	</configuration> 
+    </component>
     
 </container>
 
