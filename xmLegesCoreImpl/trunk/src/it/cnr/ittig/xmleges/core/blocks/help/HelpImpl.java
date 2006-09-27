@@ -141,7 +141,8 @@ public class HelpImpl implements Help, Loggable, Serviceable, Initializable, Con
 			if (!helpForm.hasMainComponent() || !aboutForm.hasMainComponent())
 			   initialize();
 	
-			helpForm.showDialog(listener,owner);			
+			if (!helpForm.isDialogVisible())	
+			    helpForm.showDialog(listener,owner);			
 			helpDialog.setDocument(i18n.getTextFor(key));
 		} catch (Exception ex) {
 			logger.error("Error opening help for key: " + key, ex);
