@@ -145,6 +145,8 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 
 	String[] browsers;
 	
+	String[] readerPdf;
+	
 	String dataVigenza = "";
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
@@ -179,7 +181,13 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 			for (int i = 0; i < b.length; i++)
 				browsers[i] = b[i].getValue();
 		}
-
+		bs = conf.getChild("readerpdf");
+		if (bs != null) {
+			Configuration[] b = bs.getChildren("reader");
+			readerPdf = new String[b.length];
+			for (int i = 0; i < b.length; i++)
+				readerPdf[i] = b[i].getValue();
+		}
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
@@ -280,18 +288,19 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 
 				utilPdf.convertXML2PDF(documentManager.getDocumentAsDom(), XSL_FO_GU, file.getAbsolutePath());
 				lastExport = file.getAbsolutePath();
-				// qui apre il file esportato con acrobat reader
-				// FIXME prendere il path di acrobat dalle preference
-				if (osName.equalsIgnoreCase("linux")) {
-					if (Runtime.getRuntime().exec("xpdf " + file.getAbsolutePath()) == null)
-						Runtime.getRuntime().exec("acroread " + file.getAbsolutePath());
-				} else if (osName.toLowerCase().matches("windows.*")) {
+
+				
+				String nomeFile = file.getAbsolutePath();
+				if (osName.toLowerCase().matches("windows.*"))
+					nomeFile = cmdWin(file.getAbsolutePath());
+				
+				for (int i = 0; i < readerPdf.length; i++)
 					try {
-						// FIXME provato solo su winXP
-						if (Runtime.getRuntime().exec("cmd /C start " + cmdWin(file.getAbsolutePath())) == null)
-							Runtime.getRuntime().exec("command /C start " + cmdWin(file.getAbsolutePath()));
-					} catch (Exception ex) {} 
-				}
+						String cmd = readerPdf[i] + " " + nomeFile;
+						Runtime.getRuntime().exec(cmd);
+						break;
+					} catch (Exception ex) {
+					}
 				return true;
 			}
 		} catch (Exception e) {
