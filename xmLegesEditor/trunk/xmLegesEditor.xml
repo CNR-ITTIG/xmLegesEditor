@@ -618,16 +618,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
     <component  activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.action.file.export.FileExportActionImpl">
-        <configuration>
-			<browsers>
-				<browser>mozilla-firefox</browser>
-				<browser>C:\\Programmi\\Internet Explorer\\iexplore.exe</browser>
-				<browser>cmd /C start</browser>
-				<!-- per il momento coi fogli di stile che abbiamo firefox su windows non funziona -->
-				<browser>C:\\Programmi\\Mozilla Firefox\\firefox.exe</browser>		
-				<browser>cmd /C start</browser>
-			</browsers>
-    	</configuration>
+        <configuration external="true" resource="FileExportActionImpl.xconfig" />
     </component>
 
     <component  activation="startup"
@@ -866,18 +857,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     
 
 
-    <component  class="it.cnr.ittig.xmleges.editor.blocks.form.link.LinkFormImpl"
-    >
-       <configuration>
-			<browsers>
-				<browser>mozilla-firefox</browser>
-				<browser>C:\\Programmi\\Mozilla Firefox\\firefox.exe</browser>
-				<browser>C:\\Programmi\\Internet Explorer\\iexplore.exe</browser>
-				<browser>cmd /C start</browser>
-			</browsers>
-    	</configuration>    
-    </component>    
-    
+    <component  class="it.cnr.ittig.xmleges.editor.blocks.form.link.LinkFormImpl">
+        <configuration external="true" resource="LinkFormImpl.xconfig" />
+    </component>
+     
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.rifincompleti.RifIncompletiFormImpl" />
 
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.rinvii.newrinvii.NewRinviiFormImpl" />
@@ -1044,15 +1027,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  class="it.cnr.ittig.xmleges.core.blocks.panes.xsltmapper.XsltMapperImpl" />
     
     <component  lifestyle="pool" 
-                class="it.cnr.ittig.xmleges.core.blocks.panes.xsltextpane.XsltPaneImpl"
-    	>
-    	<configuration>
-			<browsers>
-				<browser>firefox</browser>
-				<browser>mozilla-firefox</browser>
-				<browser>cmd /C start</browser>
-			</browsers>
-    	</configuration>
+                class="it.cnr.ittig.xmleges.core.blocks.panes.xsltextpane.XsltPaneImpl">
+	    <configuration external="true" resource="XsltPaneImpl.xconfig" />
     </component>
     
     <component  activation="startup"
@@ -1239,16 +1215,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     
     <component  class="it.cnr.ittig.xmleges.editor.blocks.util.urn.NirUtilUrnImpl" />
     
-    <component  class="it.cnr.ittig.xmleges.core.blocks.help.HelpImpl"
-    >
-       <configuration>
-			<browsers>
-				<browser>mozilla-firefox</browser>
-				<browser>C:\\Programmi\\Mozilla Firefox\\firefox.exe</browser>
-				<browser>C:\\Programmi\\Internet Explorer\\iexplore.exe</browser>
-				<browser>cmd /C start</browser>
-			</browsers>
-    	</configuration> 
+    <component  class="it.cnr.ittig.xmleges.core.blocks.help.HelpImpl" >
+	    <configuration external="true" resource="HelpImpl.xconfig" />
     </component>
     
 </container>
