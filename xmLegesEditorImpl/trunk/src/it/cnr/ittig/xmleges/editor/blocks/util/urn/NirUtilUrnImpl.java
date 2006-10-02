@@ -153,10 +153,16 @@ public class NirUtilUrnImpl implements NirUtilUrn, Loggable, Serviceable {
 							if (formatestualeautorita != null)
 								break;
 						}
-						if (urn.getAutorita().size() > 1) { // autorit?
-															// multiple:
-							if (i < urn.getAutorita().size() - 2) // <
-																	// penultima
+						
+						// se ci sono ancora pezzi di autorita nella urn dopo l'istituzione (ad esempio i livelli)
+						// vengono prepended
+						if(st.hasMoreTokens()){
+							while(st.hasMoreTokens()){
+								formatestualeautorita = toMaiuscolo(st.nextToken())+" "+formatestualeautorita;
+							}
+						}
+						if (urn.getAutorita().size() > 1) { // autorita' multiple:
+							if (i < urn.getAutorita().size() - 2) //  penultima
 								formatestuale += formatestualeautorita + ", del ";
 							else if (i == urn.getAutorita().size() - 2) // penultima
 								formatestuale += formatestualeautorita + " e del ";
@@ -197,6 +203,10 @@ public class NirUtilUrnImpl implements NirUtilUrn, Loggable, Serviceable {
 		}
 	}
 
+	private String toMaiuscolo(String str){
+		return str.substring(0,1).toUpperCase()+str.substring(1);
+	}
+	
 	private String getPreposizioneForProvvedimento(String urnProvvedimento) {
 		if (urnProvvedimento == null)
 			return "";
