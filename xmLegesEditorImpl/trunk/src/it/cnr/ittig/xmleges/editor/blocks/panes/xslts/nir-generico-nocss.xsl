@@ -96,7 +96,6 @@
 					
 					.capo {
 						padding-top: 10px;
-						margin:25px 25% 5px 25%;
 						text-align: center;
 					}
 					.el {
