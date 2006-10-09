@@ -27,12 +27,15 @@ import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.MetaCiclodivita
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.cnr.MetaCnr;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.MetaDescrittori;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.MetaDescrittoriMaterie;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Vocabolario;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.inquadramento.MetaInquadramento;
 import it.cnr.ittig.xmleges.editor.services.dom.rinumerazione.Rinumerazione;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.Vigenza;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 import it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita.CiclodiVitaForm;
 import it.cnr.ittig.xmleges.editor.services.form.meta.cnr.CnrProprietariForm;
+import it.cnr.ittig.xmleges.editor.services.form.meta.descrittori.MaterieVocabolariForm;
 import it.cnr.ittig.xmleges.editor.services.form.meta.descrittori.MetaDescrittoriForm;
 import it.cnr.ittig.xmleges.editor.services.form.meta.inquadramento.InquadramentoForm;
 import it.cnr.ittig.xmleges.editor.services.form.meta.urn.UrnDocumentoForm;
@@ -97,6 +100,8 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 	AbstractAction ciclodivitaAction = new CiclodiVitaAction();
 	
 	AbstractAction inquadramentoAction = new InquadramentoAction();
+	
+	AbstractAction materieAction = new MaterieAction();
 
 	AbstractAction urnAction = new urnAction();
 	
@@ -107,6 +112,8 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 	MetaCiclodivita ciclodivita; //dom
 	
 	MetaInquadramento inquadramento;
+	
+	MetaDescrittoriMaterie materie;
 	
 	MetaCnr metaCnr;
 	
@@ -119,6 +126,8 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 	CnrProprietariForm cnrForm;
 	
 	InquadramentoForm inquadramentoForm;
+	
+	MaterieVocabolariForm materieForm;
 
 	Rinumerazione rinumerazione;
 
@@ -151,10 +160,12 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		descrittori = (MetaDescrittori) serviceManager.lookup(MetaDescrittori.class);
 		ciclodivita = (MetaCiclodivita) serviceManager.lookup(MetaCiclodivita.class);
 		inquadramento = (MetaInquadramento) serviceManager.lookup(MetaInquadramento.class);
+		materie = (MetaDescrittoriMaterie) serviceManager.lookup(MetaDescrittoriMaterie.class);
 		metaCnr = (MetaCnr) serviceManager.lookup(MetaCnr.class);		
 		descrittoriForm = (MetaDescrittoriForm) serviceManager.lookup(MetaDescrittoriForm.class);
 		ciclodivitaForm = (CiclodiVitaForm) serviceManager.lookup(CiclodiVitaForm.class);
 		inquadramentoForm = (InquadramentoForm) serviceManager.lookup(InquadramentoForm.class);
+		materieForm = (MaterieVocabolariForm) serviceManager.lookup(MaterieVocabolariForm.class);
 		newrinvii = (NewRinviiForm) serviceManager.lookup(NewRinviiForm.class);
 		nirUtilUrn = (NirUtilUrn) serviceManager.lookup(NirUtilUrn.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
@@ -173,6 +184,7 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		actionManager.registerAction("editor.meta.descrittori", descrittoriAction);
 		actionManager.registerAction("editor.meta.ciclodivita", ciclodivitaAction);
 		actionManager.registerAction("editor.meta.inquadramento", inquadramentoAction);
+		actionManager.registerAction("editor.meta.descrittori.materie", materieAction);
 		actionManager.registerAction("editor.meta.urn", urnAction);
 		actionManager.registerAction("editor.meta.cnr", cnrAction);
 		eventManager.addListener(this, DocumentOpenedEvent.class);
@@ -180,6 +192,7 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		descrittoriAction.setEnabled(false);
 		ciclodivitaAction.setEnabled(false);
 		inquadramentoAction.setEnabled(false);
+		materieAction.setEnabled(false);
 		urnAction.setEnabled(false);
 		cnrAction.setEnabled(false);		
 	}
@@ -189,6 +202,7 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		descrittoriAction.setEnabled(!documentManager.isEmpty() && !utilRulesManager.isDtdDL());
 		ciclodivitaAction.setEnabled(!documentManager.isEmpty() && !utilRulesManager.isDtdDL());
 		inquadramentoAction.setEnabled(!documentManager.isEmpty() && !utilRulesManager.isDtdDL() && !utilRulesManager.isDtdBase());
+		materieAction.setEnabled(true);
 		urnAction.setEnabled(!documentManager.isEmpty());		
 		cnrAction.setEnabled(!documentManager.isEmpty() && documentManager.getDtdName().equals("cnr.dtd"));
 	}
@@ -249,6 +263,27 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		}
 
  
+		
+	}
+	public void doMaterie() {
+		Document doc = documentManager.getDocumentAsDom();
+		Vocabolario[] vocabolariOnDoc=materie.getVocabolari();		
+		
+		materieForm.setVocabolari(vocabolariOnDoc);
+		
+				
+		if (materieForm.openForm()) {
+			try {
+				EditTransaction tr = documentManager.beginEdit();
+				Vocabolario[] vocabolariOnForm=materieForm.getVocabolari();
+				materie.setVocabolari(vocabolariOnForm);
+												
+				documentManager.commitEdit(tr);
+				rinumerazione.aggiorna(doc);
+			} catch (DocumentManagerException ex) {
+				logger.error(ex.getMessage(), ex);
+			}
+		}
 		
 	}
 	public void doCiclodiVita() {
@@ -612,6 +647,12 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 			doInquadramento();
 		}
 	}
+	
+	public class MaterieAction extends AbstractAction {
+		public void actionPerformed(ActionEvent e) {
+			doMaterie();
+		}
+	}
 
 	public class urnAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
@@ -624,6 +665,8 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 			doCnr();
 		}
 	}
+
+	
 	
 	
 	
