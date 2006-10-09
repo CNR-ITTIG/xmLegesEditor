@@ -126,6 +126,24 @@ public class RifIncompletiImpl implements RifIncompleti, Loggable, Serviceable {
 			
 	}
 
+	public Node setRif(Node node, String text, String rif){ 
+	    
+		Node parent = node.getParentNode();
+		Document doc = documentManager.getDocumentAsDom();
+
+		Node tmp = doc.createElement("rif");
+		UtilDom.setAttributeValue(tmp, "xlink:href", rif);
+		UtilDom.setTextNode(tmp, text);
+     	try{
+	     		parent.replaceChild(tmp, node);	
+		}
+		catch(DOMException e){return null;}	
+				
+	    rinumerazione.aggiorna(doc);
+		return node;
+			
+	}
+	
 	public boolean canSetPlainText(Node node) {
 		if (node == null) return false;
 		if (node.getParentNode() == null) return false;
