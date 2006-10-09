@@ -2,7 +2,7 @@ package it.cnr.ittig.xmleges.editor.services.dom.meta.cnr;
 
 import it.cnr.ittig.services.manager.Service;
 /**
- * Servizio per l'inserimento dell'inquadramento del documento.
+ * Servizio per l'inserimento dei dati cnr del documento.
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
