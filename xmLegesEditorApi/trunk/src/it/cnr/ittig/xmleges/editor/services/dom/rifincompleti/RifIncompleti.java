@@ -44,7 +44,19 @@ public interface RifIncompleti extends Service {
 	 *         modificato
 	 */
 	public Node setRif(Node node, String text, Urn urn);
-	
+
+	/**
+	 * trasforma il riferimento incompleto in un riferimento INTERNO
+	 * <code>node</code>.
+	 * 
+	 * @param node nodo di riferimento
+	 * @param text parte testuale del riferimento
+	 * @param Rif riferimento interno
+	 * @return <code>null</code> se la modifica non &egrave; riuscita; nodo
+	 *         modificato
+	 */
+	public Node setRif(Node node, String text, String rif);
+
 	/**
 	 * Sostituisce al nodo <code>&lt;?rif&gt;</code> incompleto il suo contenuto testuale.
 	 * 
