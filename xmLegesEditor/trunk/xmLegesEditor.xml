@@ -390,6 +390,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                         <item action="editor.meta.ciclodivita" />
                         <item action="editor.meta.inquadramento" />
                         <item action="editor.meta.urn" />
+                        <item action="editor.meta.descrittori.materie" />  
                     </menu>
                     <menu action="menu.editor.revisioni">
                         <item action="editor.revisioni.inserisci" />
@@ -523,6 +524,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <item action="editor.meta.cnr" />                    
                     <item action="editor.meta.ciclodivita" />
                     <item action="editor.meta.inquadramento" />                    
+                    <item action="editor.meta.descrittori.materie" /> 
                     <item action="editor.meta.urn" />
                 </toolbar>
                 <toolbar name="editor.revisioni" floatable="false" rollover="true">
@@ -791,6 +793,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     
     <component  class="it.cnr.ittig.xmleges.editor.blocks.dom.meta.cnr.MetaCnrImpl" />    
     
+    <component  class="it.cnr.ittig.xmleges.editor.blocks.dom.meta.descrittori.MetaDescrittoriMaterieImpl" />    
+    
     <component  class="it.cnr.ittig.xmleges.editor.blocks.dom.ndr.NdrImpl" />
     
     <component  class="it.cnr.ittig.xmleges.editor.blocks.dom.xmleges.linker.XmLegesLinkerImpl" />
@@ -842,6 +846,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.meta.cnr.CnrProprietariFormImpl" >
 	    <configuration external="true" resource="CnrProprietariFormImpl.xconfig" />
     </component>
+    
+    <component  class="it.cnr.ittig.xmleges.editor.blocks.form.meta.descrittori.MaterieVocabolariFormImpl" />
 
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.meta.urn.UrnDocumentoFormImpl" />
     
