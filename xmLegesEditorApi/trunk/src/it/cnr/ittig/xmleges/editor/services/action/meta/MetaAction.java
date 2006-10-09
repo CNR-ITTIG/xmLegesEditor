@@ -41,5 +41,9 @@ public interface MetaAction extends Service {
 	 * Gestione dei metadati inquadramento.
 	 */
 	public void doInquadramento();
+	/**
+	 * Gestione dei metadati materie.
+	 */
+	public void doMaterie();
 
 }
