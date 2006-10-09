@@ -9,6 +9,7 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.FormVerifier;
 import it.cnr.ittig.xmleges.core.services.form.date.DateForm;
+import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.editor.services.form.fileexport.FileExportForm;
 
 import it.cnr.ittig.xmleges.core.util.date.UtilDate;
@@ -48,6 +49,9 @@ public class FileExportFormImpl implements FileExportForm, Loggable, Serviceable
 	
 	JRadioButton radioMonovigente;
 	JRadioButton radioMultivigente;
+	
+	UtilMsg utilmsg;
+	
 
 	String errorMessage = "";
 
@@ -60,6 +64,7 @@ public class FileExportFormImpl implements FileExportForm, Loggable, Serviceable
 	public void service(ServiceManager serviceManager) throws ServiceException {
 		form = (Form) serviceManager.lookup(Form.class);
 		dataVigenza = (DateForm) serviceManager.lookup(DateForm.class);	
+		utilmsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 	}
 
 
@@ -91,6 +96,7 @@ public class FileExportFormImpl implements FileExportForm, Loggable, Serviceable
 		form.setSize(350, 150);
 		form.setName("editor.form.fileexport");
 		form.addFormVerifier(this);
+		
 	}
 
 	
@@ -104,6 +110,11 @@ public class FileExportFormImpl implements FileExportForm, Loggable, Serviceable
 		// se data > dataOdierna : set Data Odierna
 		
 		boolean isValid = true;
+		
+		if(dataVigenza.getAsDate().compareTo(UtilDate.getCurrentDate())>0){
+			utilmsg.msgInfo("editor.form.fileexport.msg.err.dateaftervalid");
+			dataVigenza.set(UtilDate.getCurrentDate());
+		}
 		
 		if(isMonoVigente() && (dataVigenza.getAsYYYYMMDD()==null || dataVigenza.getAsYYYYMMDD().trim().length()!=8))
 				isValid = false;
