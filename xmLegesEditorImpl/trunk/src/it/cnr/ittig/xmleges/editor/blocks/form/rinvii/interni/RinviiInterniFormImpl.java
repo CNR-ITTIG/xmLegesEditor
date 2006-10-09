@@ -182,7 +182,7 @@ public class RinviiInterniFormImpl implements RinviiInterniForm, EventManagerLis
 				if (autoUpdate)
 					this.testo.setText(txt);
 			} catch (Exception exc) {
-				logger.error(exc.getMessage(), exc);
+				//logger.error(exc.getMessage(), exc);
 			}
 		}
 	}
