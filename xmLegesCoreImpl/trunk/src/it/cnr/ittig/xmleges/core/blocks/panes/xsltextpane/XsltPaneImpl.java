@@ -219,7 +219,17 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 				}
 			}
 			updated = !all;
+			
+			if (!updated){ 
+				updateTextPane();
+				updated = true;
+			}
+			
 			textPane.selectNode(new Node[] { selectionManager.getActiveNode() });
+			
+			logger.debug("setted ActiveNode in DocumentChangedEvent di core/xsltPane: "+selectionManager.getActiveNode().getNodeValue());
+			logger.debug("updated = "+updated);
+			
 		} else if (event instanceof SelectionChangedEvent) {
 			if (!textPane.isShowing()) {
 				// TODO dividere in updatedDom e updatedSelection
@@ -528,8 +538,11 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 	public class UpdateTask extends TimerTask {
 
 		public void run() {
-			if (textPane.isShowing() && !updated)
+			if (textPane.isShowing() && !updated){
 				updateTextPane();
+				// FIXME Tommaso: l'ho aggiunto io perche' partiva il thread di aggiornamento del pannello e perdeva il nodo (?)
+				textPane.selectNode(new Node[] { selectionManager.getActiveNode() });
+			}
 		}
 
 	}
