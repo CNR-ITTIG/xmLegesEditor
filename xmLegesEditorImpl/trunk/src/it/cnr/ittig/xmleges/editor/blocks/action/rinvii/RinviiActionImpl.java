@@ -248,24 +248,24 @@ public class RinviiActionImpl implements RinviiAction, EventManagerListener, For
 			String id = UtilDom.getAttributeValueAsString(nodeRif, "xlink:href");
 			id = id.replaceAll("#", "");
 			Node nodeID = node.getOwnerDocument().getElementById(id);
-			selectionManager.setActiveNode(this, nodeID);
-			rinviiInterni.setCallingNode(nodeID);
+			rinviiInterni.setCallingNode(nodeRif);
 			rinviiInterni.openForm(this, true);
+			selectionManager.setActiveNode(this, nodeID);
 			changeInt = true;
 		} else {
 			nodeRif = isMultipleRif(node);
 			if (nodeRif != null) {
 				String[] ids = getInternalMrif(nodeRif);
 				Node nodeID = node.getOwnerDocument().getElementById(ids[0]);
-				selectionManager.setActiveNode(this, nodeID);
-				rinviiInterni.setCallingNode(nodeID);
+				rinviiInterni.setCallingNode(nodeRif);
 				rinviiInterni.openForm(this, true);
+				selectionManager.setActiveNode(this, nodeID);
 				rinviiInterni.setMrif(ids);
 				changeInt = true;
 			}
 		}
-
 	}
+	
 
 	public void doNewRinvioInterno() {
 
