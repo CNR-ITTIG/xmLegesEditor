@@ -276,5 +276,6 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 		return (new String[]{data,nome, url,contributo});
 		
 	}
+	
 
 }
