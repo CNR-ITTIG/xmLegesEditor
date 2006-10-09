@@ -89,9 +89,9 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 	JButton aliasButton;
 
 	String[] aliases;
-
+	
 	JList aliasList;
-
+	
 	Pubblicazione pubblicazione;
 
 	Pubblicazione[] altrePubblicazioni;
@@ -116,13 +116,13 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 	JTextField tagTipoSottoFormDatiPubblicazione;
 	
 	JTextField tagNumeroSottoFormDatiPubblicazione;
-
+	
+		
 	// Form alias
 	Form formAlias;
-
+	
 	ListTextField alias_listtextfield;
-
-
+	
 	UrnForm urnForm;
 
 	
@@ -161,6 +161,8 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 			return new Dimension(600, 150);
 		}
 	}
+	
+	
 
 	/**
 	 * Editor per il ListTextField della lista delle pubblicazioni
@@ -236,7 +238,7 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 		formPubblicazioni = (Form) serviceManager.lookup(Form.class);
 		formAlias = (Form) serviceManager.lookup(Form.class);
 		sottoFormDatiPubblicazione = (Form) serviceManager.lookup(Form.class);
-
+		
 		urnForm = (UrnForm) serviceManager.lookup(UrnForm.class);
 
 		report_dataPubblicazione = (DateForm) serviceManager.lookup(DateForm.class);
@@ -247,6 +249,7 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 
 		pub_listtextfield = (ListTextField) serviceManager.lookup(ListTextField.class);
 		alias_listtextfield = (ListTextField) serviceManager.lookup(ListTextField.class);
+		
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
@@ -290,8 +293,7 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 		formAlias.setSize(650, 400);
 		formAlias.setName("editor.form.meta.descrittori.alias");
 		alias_listtextfield.setEditor(new AliasListTextFieldEditor());
-
-
+		
 		// Report items
 		aliasList = (JList) form.getComponentByName("editor.meta.descrittori.riepilogo.alias");
 		altrePubblicazioniList = (JList) form.getComponentByName("editor.meta.descrittori.riepilogo.altrepubblicazioni");
@@ -302,8 +304,6 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 		
 		pubblicazioniButton.addActionListener(this);
 		aliasButton.addActionListener(this);
-		
-
 		
 	}
 
@@ -353,6 +353,7 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 				aliasList.setListData(aliases);
 			}
 		}
+		
 	}
 
 	public Pubblicazione getPubblicazione() {
