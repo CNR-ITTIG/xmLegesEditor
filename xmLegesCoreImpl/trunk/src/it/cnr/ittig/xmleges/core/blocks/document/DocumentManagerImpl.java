@@ -34,6 +34,7 @@ import java.util.Vector;
 import org.apache.xerces.dom.DeferredDocumentImpl;
 import org.apache.xerces.dom.NodeImpl;
 import org.apache.xerces.dom.events.MutationEventImpl;
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -362,15 +363,21 @@ public class DocumentManagerImpl implements DocumentManager, EventListener, Logg
 	protected void insert(DomEditImpl edit) {
 		if (edit.getNextSibling() != null)
 			edit.getParentNode().insertBefore(edit.getNode(), edit.getNextSibling());
-		else
-			edit.getParentNode().appendChild(edit.getNode());
+		else{
+			try{
+			   edit.getParentNode().appendChild(edit.getNode());
+			}
+			catch(DOMException ex){
+				logger.error(ex.getMessage(),ex);				
+			}
+		}		
 	}
 
 	protected void remove(DomEditImpl edit) {
 		try {
 			edit.getParentNode().removeChild(edit.getNode());
-		} catch (Exception ex) {
-
+		} catch (DOMException ex) {
+			logger.error(ex.getMessage(),ex);
 		}
 	}
 
