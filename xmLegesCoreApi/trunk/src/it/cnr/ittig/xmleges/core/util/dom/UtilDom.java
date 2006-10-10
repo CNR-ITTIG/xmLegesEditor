@@ -823,9 +823,21 @@ public class UtilDom {
 			for (int l = level1; l > level2; l--, node1 = node1.getParentNode())
 				;
 
+		
+		// FIXME aggiunto try/catch eccezioni quando i pathIndex sopra non funzionano nel riportare i  nodi allo stesso livello (?) approfondire
 		while (node1 != node2) {
-			node1 = node1.getParentNode();
-			node2 = node2.getParentNode();
+			try{
+			   node1 = node1.getParentNode();
+			}
+			catch(Exception ex){
+				return node1;
+			}
+			try{
+			   node2 = node2.getParentNode();
+			}
+			catch(Exception ex){
+				return node2;
+			}
 		}
 		return node1;
 	}
