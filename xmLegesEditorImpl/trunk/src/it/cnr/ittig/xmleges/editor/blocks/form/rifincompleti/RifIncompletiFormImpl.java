@@ -143,7 +143,7 @@ public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable,
 		tr = null;
 		contaTr = 0;
 
-		form.setSize(650, 200);
+		form.setSize(740, 200);
 		form.setName("editor.rifincompleto");
 		missRif = showRif(riferimenti);
 
