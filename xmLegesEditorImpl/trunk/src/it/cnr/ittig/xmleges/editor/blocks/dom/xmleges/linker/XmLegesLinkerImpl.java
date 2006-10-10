@@ -142,12 +142,12 @@ public class XmLegesLinkerImpl implements XmLegesLinker, Loggable, Serviceable {
 		logger.debug("[ParserRiferimentiImpl: setParsedDocument" + parsedText);
 		Document doc = documentManager.getDocumentAsDom();
 		try {
-			EditTransaction tr = documentManager.beginEdit();
 			Document d = UtilXml.textToXML(parsedText, true);
-			Node imp = nirUtilDom.getNIRElement(d);
+			Node imp = doc.importNode(nirUtilDom.getTipoAtto(d),true);
 			UtilDom.trimTextNode(imp, true);
-			doc.replaceChild(doc.importNode(imp, true), nirUtilDom.getNIRElement(doc));
-			modified = doc.getDocumentElement();
+			EditTransaction tr = documentManager.beginEdit();
+			nirUtilDom.getNIRElement(doc).replaceChild(imp, nirUtilDom.getTipoAtto(doc));
+			modified = nirUtilDom.getTipoAtto(doc);
 			rinumerazione.aggiorna(doc);
 			logger.debug("committed edit in setParsedDocument");
 			documentManager.commitEdit(tr);
@@ -158,6 +158,8 @@ public class XmLegesLinkerImpl implements XmLegesLinker, Loggable, Serviceable {
 		}
 		return modified;
 	}
+	
+
 
 	public Node setParsedNode(Node node, String textRis) {
 		logger.debug("[ParserRiferimentiImpl: setParsedNode" + textRis);
