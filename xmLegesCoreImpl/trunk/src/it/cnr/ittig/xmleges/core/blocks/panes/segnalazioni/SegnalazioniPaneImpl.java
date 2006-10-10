@@ -15,7 +15,9 @@ import it.cnr.ittig.xmleges.core.services.action.ActionManager;
 import it.cnr.ittig.xmleges.core.services.action.tool.bugreport.BugReportAction;
 import it.cnr.ittig.xmleges.core.services.bars.Bars;
 import it.cnr.ittig.xmleges.core.services.bugreport.BugReport;
+import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
+import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.frame.FindIterator;
 import it.cnr.ittig.xmleges.core.services.frame.Frame;
 import it.cnr.ittig.xmleges.core.services.frame.PaneException;
@@ -28,6 +30,7 @@ import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
+import java.util.EventObject;
 
 import javax.swing.AbstractAction;
 import javax.swing.JList;
@@ -53,7 +56,7 @@ import javax.swing.DefaultListModel;
  * </dl>
  */
 
-public class SegnalazioniPaneImpl implements SegnalazioniPane, Loggable, Serviceable, Initializable, Startable {
+public class SegnalazioniPaneImpl implements SegnalazioniPane, EventManagerListener, Loggable, Serviceable, Initializable, Startable {
 
 	Logger logger;
 	BugReport bugTracer;
@@ -124,9 +127,17 @@ public class SegnalazioniPaneImpl implements SegnalazioniPane, Loggable, Service
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		panel.add(scrollPane);
 		list.setModel(BugReportAppender.getListModel());
+		
+		eventManager.addListener(this, DocumentClosedEvent.class);
 	    
 	}
 
+	// ////////////////////////////////////////// EventManagerListener Interface
+	public void manageEvent(EventObject event) {
+		if (event instanceof DocumentClosedEvent)
+			bugTracer.clearBugReport();
+	}
+	
 	// ///////////////////////////////////////////////////// Startable Interface
 	public void start() throws Exception {
 		frame.addPane(this, false);
