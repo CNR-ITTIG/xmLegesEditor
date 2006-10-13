@@ -882,6 +882,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     />
     
     <component  lifestyle="pool"
+                class="it.cnr.ittig.xmleges.editor.blocks.form.browser.BrowserFormImpl"
+    />
+    
+    <component  lifestyle="pool"
                 class="it.cnr.ittig.xmleges.editor.blocks.form.evento.EventoFormImpl"
     />
     
@@ -1053,6 +1057,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             <xslt   name="errori"				file="nir-panes-errori-1.0.xsl"				/>
             <xslt   name="commenti"				file="nir-panes-commenti-1.0.xsl"			/>
             <xslt   name="ndr"					file="nir-panes-ndr-1.0.xsl"				/>
+            <xslt   name="xsl-disegnilegge-testoafronte" 	file="nir-disegnilegge-testoafronte.xsl"     		startup="true" />
             <xslt   name="xsl-disegnilegge" 	file="nir-disegnilegge.xsl"     		startup="true" />
             <xslt   name="xsl-disegnilegge-nocss" 	file="nir-disegnilegge-nocss.xsl"	startup="true" />
             <xslt   name="xsl-nir"				file="nir-generico.xsl"     			startup="true" />
