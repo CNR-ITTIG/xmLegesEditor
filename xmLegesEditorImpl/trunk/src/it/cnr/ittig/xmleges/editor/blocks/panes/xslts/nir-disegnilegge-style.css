@@ -65,3 +65,10 @@
 		color: #00cc00;
 		text-decoration: underline;
 	}
+	.soppresso {
+		color: red;
+		text-decoration: line-through;
+	}
+	.inserito {
+		color: green;
+	}

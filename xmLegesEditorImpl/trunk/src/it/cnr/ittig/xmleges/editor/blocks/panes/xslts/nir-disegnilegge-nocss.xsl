@@ -13,6 +13,85 @@
 					&#160;<xsl:value-of select="//nir:emanante"/> - Disegno di Legge n. <xsl:value-of select="//nir:numDoc"/>
 				</title>
 				<meta http-equiv="Content-Type" content="text/html"/>
+				<!-- ======================================================== -->
+				<!--                                                          -->
+				<!--  Foglio di Stile interno                                 -->
+				<!--                                                          -->
+				<!-- ======================================================== -->				
+				<style type="text/css">
+				body {
+					margin-left: 15 px;
+					font-family: "Verdana, Arial, Helvetica, sans-serif" ;
+					font-size: 70% ;
+				}
+				.title { 
+					font-size: 110% ;
+					font-weight: bold;
+					text-align: center;
+					color: #0000cc;
+					line-height: 100% ;
+				} 
+				.sinistra { 
+					font-size: 110% ;
+					text-align: left;
+					line-height: 100% ;
+				} 	
+				.toc-articolo, .toc-annessi {
+					margin-left: 7px;
+					font-size: 65%;
+				}
+				.toc-comma {
+					margin-left: 15px;
+					font-size: 65%;
+				}
+				.toc {
+					margin-left: 2px;
+					font-size: 65%;
+					font-weight: bold;
+				}
+				.capo { 
+					font-size: 110% ;
+					font-weight: bold;
+					text-align: center;
+					line-height: 100% ;
+					margin-top: 25px; 
+				} 
+				.articolo { 
+					font-size: 90% ; 
+					text-align: center;
+					font-weight: bold;
+					margin-top: 15px; 
+				}
+				.comma { 
+					font-size: 80% ; 
+					margin-top: 5px; 
+				}
+				div, li {
+					font-size: 80% ;
+				}
+				.small {
+					font-size: 65% ;
+				}
+				.intestazione {
+					margin: 15px, 15%, 0px, 15%;
+					text-align: center;
+				}
+				.el {
+					margin-left: 40px;
+					text-indent: -30px;
+					margin-top: 3px;
+				}
+			    b b { font-weight: normal; }
+				.ndr {
+					color: #00cc00;
+					text-decoration: underline;
+				}
+				</style>
+				<!-- ======================================================== -->
+				<!--                                                          -->
+				<!--  fine Foglio di Stile                                    -->
+				<!--                                                          -->
+				<!-- ======================================================== --> 					
 			</head>
 			<body>
 				<table cellpadding="0" cellspacing="5" border="0" width="100%">
@@ -49,16 +128,26 @@
 		<xsl:apply-templates/>
 	</xsl:template>
 	<xsl:template match="nir:emanante">
-		<div class="title">
+		<div class="sinistra">
 			<xsl:apply-templates/>
 		</div>
 	</xsl:template>
-	<xsl:template match="nir:legislatura"/>
-	<xsl:template match="nir:numDoc">
-		<div class="title">Disegno di legge n. <xsl:value-of select="."/> (<xsl:value-of select="//nir:legislatura"/>)</div>
+	<xsl:template match="nir:legislatura">
+		<div class="title">
+			----- <xsl:apply-templates/> -----
+		</div>
 	</xsl:template>
+	<xsl:template match="nir:tipoDoc"/>
+	<xsl:template match="nir:numDoc">
+		<div class="sinistra">
+			N. <xsl:apply-templates/>
+		</div>
+	</xsl:template>	
 	<xsl:template match="nir:intestazione/h:div ">
 		<div class="intestazione">
+		    <xsl:attribute name="style">
+			    <xsl:value-of select="@style"/>
+		    </xsl:attribute>
 			<xsl:apply-templates/>
 		</div>
 	</xsl:template>
@@ -68,14 +157,17 @@
 	</xsl:template>
 	<xsl:template match="nir:relazione/h:div">
 		<div style="margin-top:5px;">
+		    <xsl:attribute name="style">
+			    <xsl:value-of select="@style"/>
+		    </xsl:attribute>		
 			<xsl:apply-templates/>
 		</div>
 	</xsl:template>
-	<xsl:template match="nir:intestazione/nir:titoloDoc | nir:intestazione/nir:tipoDoc">
+	<xsl:template match="nir:intestazione/nir:titoloDoc">
 		<div class="intestazione">
-			<i>
+			<h1>
 				<xsl:apply-templates/>
-			</i>
+			</h1>
 		</div>
 	</xsl:template>
 	<!-- ======================================================== -->
@@ -141,40 +233,32 @@
 			<td width="50%" valign="top">
 				<div class="intestazione">
 					<b>
-						<xsl:apply-templates select="//nir:tipoDoc"/>
-					</b>
-				</div>
-				<div class="intestazione">
-					<b>
-						<xsl:apply-templates>
-							<xsl:with-param name="pos">left</xsl:with-param>
-						</xsl:apply-templates>
+						<xsl:apply-templates select="//nir:tipoDoc"  mode="parallelo"/>
 					</b>
 				</div>
 				<div class="intestazione">
 					<xsl:apply-templates select="//nir:sinistra"/>
+					<br/><br/><b>--</b><br/><br/>
 				</div>
 			</td>
 			<td width="50%" valign="top">
 				<div class="intestazione">
 					<b>
-						<xsl:apply-templates select="//nir:tipoDoc"/>
-					</b>
-				</div>
-				<div class="intestazione">
-					<b>
-						<xsl:apply-templates>
-							<xsl:with-param name="pos">right</xsl:with-param>
-						</xsl:apply-templates>
+						<xsl:apply-templates select="//nir:tipoDoc" mode="parallelo"/>
 					</b>
 				</div>
 				<div class="intestazione">
 					<xsl:apply-templates select="//nir:destra"/>
+					<br/><br/><b>--</b><br/><br/>
 				</div>
 			</td>
 		</tr>
 	</xsl:template>
-	<xsl:template match="nir:*" mode="parallelo">
+	<xsl:template match="nir:tipoDoc" mode="parallelo">
+		<xsl:apply-templates/>
+	</xsl:template>
+	<xsl:template match="nir:*
+	" mode="parallelo">
 		<tr>
 			<td width="50%" valign="top">
 				<div class="{local-name()}">
@@ -182,7 +266,6 @@
 						<xsl:apply-templates select="nir:num">
 							<xsl:with-param name="pos">left</xsl:with-param>
 						</xsl:apply-templates>
-						<xsl:text> </xsl:text>
 						<xsl:apply-templates select="nir:rubrica | nir:corpo| nir:alinea">
 							<xsl:with-param name="pos">left</xsl:with-param>
 						</xsl:apply-templates>
@@ -198,7 +281,6 @@
 						<xsl:apply-templates select="nir:num">
 							<xsl:with-param name="pos">right</xsl:with-param>
 						</xsl:apply-templates>
-						<xsl:text> </xsl:text>
 					</xsl:if>
 					<xsl:apply-templates select="nir:rubrica | nir:corpo| nir:alinea">
 						<xsl:with-param name="pos">right</xsl:with-param>
@@ -271,16 +353,24 @@
 	</xsl:template>
 	<xsl:template match="nir:num">
 		<xsl:param name="pos">none</xsl:param>
-		<xsl:apply-templates>
+		&#160;&#160;<xsl:apply-templates>
 			<xsl:with-param name="pos" select="$pos"/>
-		</xsl:apply-templates>
+		</xsl:apply-templates>&#160;&#160;
 	</xsl:template>
 	<xsl:template match="nir:articolo/nir:rubrica">
 		<xsl:param name="pos">none</xsl:param>
+		<br/><br/><i>
 		<xsl:apply-templates>
 			<xsl:with-param name="pos" select="$pos"/>
-		</xsl:apply-templates>
+		</xsl:apply-templates></i>
 	</xsl:template>
+	<xsl:template match="nir:capo/nir:rubrica">
+		<xsl:param name="pos">none</xsl:param>
+		<br/><br/><i>
+		<xsl:apply-templates>
+			<xsl:with-param name="pos" select="$pos"/>
+		</xsl:apply-templates></i>
+	</xsl:template>	
 	<xsl:template match="nir:virgolette">
 		<xsl:param name="pos">none</xsl:param>
 		<p>
@@ -407,25 +497,30 @@
 	<xsl:template match="h:span[@status='soppresso']">
 		<xsl:param name="pos">none</xsl:param>
 		<xsl:if test="$pos='left'">
-			<xsl:apply-templates/>
-		</xsl:if>
+				
+ 		 <xsl:choose>
+  		  <xsl:when test="following-sibling::node()[1]//@status='inserito'">
+		 	<xsl:apply-templates/>&#160;
+		  </xsl:when>
+   		  <xsl:when test="preceding-sibling::node()[1]//@status='inserito'">
+		 	<xsl:apply-templates/>&#160;
+ 		  </xsl:when>
+ 		  <xsl:otherwise>
+ 			  <b><xsl:apply-templates/></b>
+ 		  </xsl:otherwise>
+ 		 </xsl:choose>
+		</xsl:if>  
 	</xsl:template>
+	
 	<xsl:template match="h:span[@status='inserito']">
 		<xsl:param name="pos">none</xsl:param>
 		<xsl:variable name="post_car">
 			<xsl:value-of select="substring(substring-after(./parent::*,.),1,1)" />
-		</xsl:variable>	
+		</xsl:variable>
 		<xsl:choose>
-			<xsl:when test="$pos='right'">
+			<xsl:when test="$pos='right'">			
 				<b>
-				<xsl:choose>
-					<xsl:when test="$post_car!=' '">
-						<xsl:apply-templates/>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:apply-templates/>&#160;
-					</xsl:otherwise>
-				</xsl:choose>
+			<xsl:apply-templates/>&#160;
 				</b>
 			</xsl:when>
 			<xsl:when test="$pos='none'">
@@ -462,5 +557,5 @@
 		<xsl:apply-templates>
 			<xsl:with-param name="pos" select="$pos"/>
 		</xsl:apply-templates>
-	</xsl:template>
+	</xsl:template> 
 </xsl:stylesheet>
