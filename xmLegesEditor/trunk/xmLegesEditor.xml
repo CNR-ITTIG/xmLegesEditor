@@ -881,9 +881,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 class="it.cnr.ittig.xmleges.editor.blocks.form.urn.UrnFormImpl"
     />
     
-    <component  lifestyle="pool"
+    <!--component  lifestyle="pool"
                 class="it.cnr.ittig.xmleges.editor.blocks.form.browser.BrowserFormImpl"
-    />
+    /-->
     
     <component  lifestyle="pool"
                 class="it.cnr.ittig.xmleges.editor.blocks.form.evento.EventoFormImpl"
