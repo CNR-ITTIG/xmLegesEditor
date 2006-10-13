@@ -481,7 +481,7 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 		try {
 			File temp = UtilFile.createTemp("export-ddl.html");
 			temp.deleteOnExit();
-			if (exportHTML(new File(xslts.getXslt("xsl-disegnilegge").getAbsolutePath()), temp)) {
+			if (exportHTML(new File(xslts.getXslt("xsl-disegnilegge-testoafronte").getAbsolutePath()), temp)) {
 				for (int i = 0; i < browsers.length; i++)
 					try {
 						String cmd = browsers[i] + " " + temp.getAbsolutePath();
