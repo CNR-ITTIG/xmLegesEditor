@@ -10,6 +10,11 @@
 		color: #0000cc;
 		line-height: 100% ;
 	} 
+	.sinistra { 
+		font-size: 110% ;
+		text-align: left;
+		line-height: 100% ;
+	} 	
 	.toc-articolo, .toc-annessi {
 		margin-left: 7px;
 		font-size: 65%;
@@ -23,8 +28,16 @@
 		font-size: 65%;
 		font-weight: bold;
 	}
+	.capo { 
+		font-size: 110% ;
+		font-weight: bold;
+		text-align: center;
+		line-height: 100% ;
+		margin-top: 25px; 
+	} 
 	.articolo { 
 		font-size: 90% ; 
+		text-align: center;
 		font-weight: bold;
 		margin-top: 15px; 
 	}
