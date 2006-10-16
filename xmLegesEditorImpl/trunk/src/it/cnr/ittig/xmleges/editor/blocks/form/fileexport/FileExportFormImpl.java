@@ -95,8 +95,7 @@ public class FileExportFormImpl implements FileExportForm, Loggable, Serviceable
 		dataVigenza.set(null);
 		form.setSize(350, 150);
 		form.setName("editor.form.fileexport");
-		form.addFormVerifier(this);
-		
+		form.addFormVerifier(this);		
 	}
 
 	
@@ -105,19 +104,19 @@ public class FileExportFormImpl implements FileExportForm, Loggable, Serviceable
 	}
 
 	public boolean verifyForm() {
-//		(newrinviiformimpl)
-		// FIXME sistemare verifyForm: se data < entrataInVigore setEntrataInVigore e msg;
-		// se data > dataOdierna : set Data Odierna
 		
 		boolean isValid = true;
 		
-		if(dataVigenza.getAsDate().compareTo(UtilDate.getCurrentDate())>0){
-			utilmsg.msgInfo("editor.form.fileexport.msg.err.dateaftervalid");
-			dataVigenza.set(UtilDate.getCurrentDate());
+		
+		if(isMonoVigente()){
+			if((dataVigenza.getAsYYYYMMDD()==null || dataVigenza.getAsYYYYMMDD().trim().length()!=8))
+				isValid = false;
+			else if(dataVigenza.getAsDate().compareTo(UtilDate.getCurrentDate())>0){
+				utilmsg.msgInfo("editor.form.fileexport.msg.err.dateaftervalid");
+				dataVigenza.set(UtilDate.getCurrentDate());
+			}
 		}
 		
-		if(isMonoVigente() && (dataVigenza.getAsYYYYMMDD()==null || dataVigenza.getAsYYYYMMDD().trim().length()!=8))
-				isValid = false;
 		
 		if(!isValid)
 			errorMessage = "editor.form.fileexport.msg.err.dateerror";
