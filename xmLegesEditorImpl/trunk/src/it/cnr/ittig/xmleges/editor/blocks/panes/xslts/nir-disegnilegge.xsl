@@ -94,8 +94,8 @@
 		<table border="0" cellpadding="0" cellspacing="10" width="100%">
 			<xsl:choose>
 				<xsl:when test="//@tipo='modificato'">
-					<xsl:apply-templates select="//nir:titoloDoc" mode="parallelo"/>
-					<xsl:apply-templates mode="parallelo"/>
+					<xsl:apply-templates select="//nir:titoloDoc" mode="singolo"/>
+					<xsl:apply-templates mode="singolo"/>
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:apply-templates/>
@@ -103,26 +103,27 @@
 			</xsl:choose>
 		</table>
 	</xsl:template>
-	<xsl:template match="nir:intestazione/nir:titoloDoc" mode="parallelo">
+	<xsl:template match="nir:intestazione/nir:titoloDoc" mode="singolo">
 		<tr>
 			<td width="50%" valign="top">
 				<div class="intestazione">
 					<b>
-						<xsl:apply-templates select="//nir:tipoDoc"  mode="parallelo"/>
+						<xsl:apply-templates select="//nir:tipoDoc"  mode="singolo"/>
 					</b>
 				</div>
 				<div class="intestazione">
-					<xsl:apply-templates select="//nir:sinistra"/>
+					<xsl:apply-templates select="//nir:sinistra"/><br />
+					<xsl:apply-templates select="//nir:destra"/>
 					<br/><br/><b>--</b><br/><br/>
 				</div>
 			</td>
 		</tr>
 	</xsl:template>
-	<xsl:template match="nir:tipoDoc" mode="parallelo">
+	<xsl:template match="nir:tipoDoc" mode="singolo">
 		<xsl:apply-templates/>
 	</xsl:template>
 	<xsl:template match="nir:*
-	" mode="parallelo">
+	" mode="singolo">
 		<tr>
 			<td width="50%" valign="top">
 				<div class="{local-name()}">
@@ -137,9 +138,9 @@
 				</div>
 			</td>
 		</tr>
-		<xsl:apply-templates mode="parallelo"/>
+		<xsl:apply-templates mode="singolo"/>
 	</xsl:template>
-	<xsl:template match="nir:num | nir:rubrica | nir:corpo| nir:alinea" mode="parallelo"/>
+	<xsl:template match="nir:num | nir:rubrica | nir:corpo| nir:alinea" mode="singolo"/>
 	<xsl:template match="nir:articolo">
 		<xsl:param name="pos">none</xsl:param>
 		<div class="articolo">
