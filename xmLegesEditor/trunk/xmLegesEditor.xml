@@ -1001,8 +1001,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 <pane name="editor.panes.strutturaxml"     where="top-left"    	index="0" />
                 <pane name="editor.panes.attributi"		where="bottom-left" 	index="0" />
                 <pane name="editor.panes.documento"		where="top-center"  	index="0" />
-                <pane name="editor.panes.annessi"    		where="top-center"  	index="1" />
-                <pane name="editor.panes.meta"				where="top-center"  	index="2" />
+                <pane name="editor.panes.meta"				where="top-center"  	index="1" />
+                <pane name="editor.panes.annessi"    		where="top-center"  	index="2" />
                 <!--pane name="panes.source"            	where="top-center"		index="3" /-->
                 <!--pane name="panes.xslteditor"           where="top-center"  	index="3" /-->
                 <pane name="editor.panes.riferimenti" 		where="bottom-center"  	index="0" />
@@ -1029,6 +1029,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
         	<readonly>inizioefficacia</readonly>        	
         	<readonly>finevigore</readonly>
         	<readonly>fineefficacia</readonly>
+        	<readonly>tipo</readonly>
         </configuration>
 	</component>
 
