@@ -268,7 +268,7 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 
 	/*
 	 * Aggiorna gli attributi di tipo IDRef se c'e' stato un cambiamento negli
-	 * ID dell'elemento corrente a?? quali si riferivano che ha avuto l'ID
+	 * ID dell'elemento corrente ai quali si riferivano che ha avuto l'ID
 	 * cambiato da OldID a NewID
 	 */
 	private void updateIDRefAttributes(String OldID, String NewID) {

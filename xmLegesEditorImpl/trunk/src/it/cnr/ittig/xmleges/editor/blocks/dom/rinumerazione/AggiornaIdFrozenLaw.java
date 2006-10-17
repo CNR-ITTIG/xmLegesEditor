@@ -217,14 +217,16 @@ public class AggiornaIdFrozenLaw {
 	
 	public void setNdrLink(Vector ndrId, boolean renum) {
 		NodeList ndr = doc.getElementsByTagName("ndr");
+		NodeList note = doc.getElementsByTagName("nota");
 		String num, value, prefix;
 
 		for (int i = 0; i < ndr.getLength(); i++) {
 			
-			// separare prefix 	
+			//prefix = getNdrNumPrefix(UtilDom.getAttributeValueAsString((Node) ndr.item(i), "num")); 
+			//num = prefix + (ndrId.indexOf(UtilDom.getAttributeValueAsString((Node) ndr.item(i), "num")) + 1);
 			
-			prefix = getNdrNumPrefix(UtilDom.getAttributeValueAsString((Node) ndr.item(i), "num")); 
-			num = prefix + (ndrId.indexOf(UtilDom.getAttributeValueAsString((Node) ndr.item(i), "num")) + 1);
+			prefix = getNdrNumPrefix(UtilDom.getAttributeValueAsString((Node) note.item(i), "id")); 
+			num = UtilDom.getAttributeValueAsString((Node) note.item(i), "id");
 			
 			UtilDom.setAttributeValue(ndr.item(i), "num", num);
 			logger.debug("renum " + renum);
@@ -612,11 +614,7 @@ public class AggiornaIdFrozenLaw {
 		 try{
 			 if(dtdRulesManager.queryIsRequiredAttribute(figlio.getNodeName(),"id") || getElementType(figlio)==LETTERA || getElementType(figlio)==NUMERO || getElementType(figlio)==ELENCO_PUNT || getElementType(figlio)==SPAN){
 				 // FIXME previene il setId degli eventi; la soluzione corretta e' quella di settare sia gli id che gli idref 
-				 //if(!(getElementType(figlio)==EVENTO)){
-				 //  logger.debug("required ID for "+figlio.getNodeName());
 				   return true;
-				 //}
-				 //return false;
 			 }
 			 else{
 				 logger.debug("not required id for "+figlio.getNodeName());
