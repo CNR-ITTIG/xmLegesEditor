@@ -48,7 +48,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
 
 import org.w3c.dom.Node;
-
+import it.cnr.ittig.xmleges.core.util.dom.*;
 /**
  * <h1>Implementazione del servizio
  * <code>it.cnr.ittig.xmleges.editor.services.action.file.save.FileSaveAction</code>.</h1>
@@ -289,18 +289,28 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 				utilPdf.convertXML2PDF(documentManager.getDocumentAsDom(), XSL_FO_GU, file.getAbsolutePath());
 				lastExport = file.getAbsolutePath();
 
-				
-				String nomeFile = file.getAbsolutePath();
-				if (osName.toLowerCase().matches("windows.*"))
-					nomeFile = cmdWin(file.getAbsolutePath());
-				
-				for (int i = 0; i < readerPdf.length; i++)
-					try {
-						String cmd = readerPdf[i] + " " + nomeFile;
-						Runtime.getRuntime().exec(cmd);
-						break;
-					} catch (Exception ex) {
-					}
+				if (osName.toLowerCase().matches("windows.*")) {
+					String nomeFile = cmdWin(file.getAbsolutePath());
+					for (int i = 0; i < readerPdf.length; i++)
+						try {
+							String cmd = readerPdf[i] + " " + nomeFile;
+							Runtime.getRuntime().exec(cmd);
+							break;
+						} catch (Exception ex) {
+						}
+				}
+				else {
+					String nomeFile = file.getAbsolutePath();
+					for (int i = 0; i < readerPdf.length; i++)
+						try {
+							String temp[] = new String[2];
+							temp[0] = readerPdf[i];
+							temp[1] = nomeFile;
+							Runtime.getRuntime().exec(temp);	
+							break;
+						} catch (Exception ex) {
+						}
+				}
 				return true;
 			}
 		} catch (Exception e) {
@@ -507,7 +517,7 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 			
 			Hashtable param = new Hashtable(1);
 			param.put("datafine",this.dataVigenza);
-	
+			
 			Node res = UtilXslt.applyXslt(documentManager.getDocumentAsDom(), xslt, param, documentManager.getEncoding());
 			domWriter.write(res);
 			return true;
