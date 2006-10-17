@@ -510,19 +510,22 @@ public class DocumentManagerImpl implements DocumentManager, EventListener, Logg
 	public void warning(SAXParseException ex) throws SAXException {
 		errors.add("WARNIG: " + ex.getLocalizedMessage());
 		problemsPane.addProblem(new DocumentProblemImpl(Problem.WARNING, ex.getLocalizedMessage()));
-		logger.warn(ex.getMessage());
+		//Gerardo: non esegui il log visto che è già stato segnalato nel pannello dei problemi
+		//logger.warn(ex.getMessage());
 	}
 
 	public void error(SAXParseException ex) throws SAXException {
 		errors.add("ERROR: " + ex.getLocalizedMessage());
 		problemsPane.addProblem(new DocumentProblemImpl(Problem.ERROR, ex.getLocalizedMessage()));
-		logger.error(ex.getMessage());
+		//Gerardo: non esegui il log visto che è già stato segnalato nel pannello dei problemi		
+		//logger.error(ex.getMessage());
 	}
 
 	public void fatalError(SAXParseException ex) throws SAXException {
 		errors.add("FATAL ERROR: " + ex.getLocalizedMessage());
 		problemsPane.addProblem(new DocumentProblemImpl(Problem.FATAL_ERROR, ex.getLocalizedMessage()));
-		logger.error(ex.getMessage());
+		//Gerardo: non esegui il log visto che è già stato segnalato nel pannello dei problemi
+		//logger.error(ex.getMessage());
 	}
 
 }
