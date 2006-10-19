@@ -227,8 +227,10 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 			
 			textPane.selectNode(new Node[] { selectionManager.getActiveNode() });
 			
-			logger.debug("setted ActiveNode in DocumentChangedEvent di core/xsltPane: "+selectionManager.getActiveNode().getNodeValue());
-			logger.debug("updated = "+updated);
+			if(logger.isDebugEnabled()){
+				logger.debug("setted ActiveNode in DocumentChangedEvent di core/xsltPane: "+selectionManager.getActiveNode().getNodeValue());
+				logger.debug("updated = "+updated);
+			}
 			
 		} else if (event instanceof SelectionChangedEvent) {
 			if (!textPane.isShowing()) {
