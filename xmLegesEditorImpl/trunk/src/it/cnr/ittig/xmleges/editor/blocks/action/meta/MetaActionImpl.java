@@ -202,6 +202,9 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		descrittoriAction.setEnabled(!documentManager.isEmpty() && !utilRulesManager.isDtdDL());
 		ciclodivitaAction.setEnabled(!documentManager.isEmpty() && !utilRulesManager.isDtdDL());
 		inquadramentoAction.setEnabled(!documentManager.isEmpty() && !utilRulesManager.isDtdDL() && !utilRulesManager.isDtdBase());
+		
+			
+		
 		materieAction.setEnabled(true);
 		urnAction.setEnabled(!documentManager.isEmpty());		
 		cnrAction.setEnabled(!documentManager.isEmpty() && documentManager.getDtdName().equals("cnr.dtd"));
@@ -266,23 +269,15 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		
 	}
 	public void doMaterie() {
-		Document doc = documentManager.getDocumentAsDom();
+//		Document doc = documentManager.getDocumentAsDom();
 		Vocabolario[] vocabolariOnDoc=materie.getVocabolari();		
 		
 		materieForm.setVocabolari(vocabolariOnDoc);
 		
 				
 		if (materieForm.openForm()) {
-			try {
-				EditTransaction tr = documentManager.beginEdit();
 				Vocabolario[] vocabolariOnForm=materieForm.getVocabolari();
-				materie.setVocabolari(vocabolariOnForm);
-												
-				documentManager.commitEdit(tr);
-				rinumerazione.aggiorna(doc);
-			} catch (DocumentManagerException ex) {
-				logger.error(ex.getMessage(), ex);
-			}
+				materie.setVocabolari(vocabolariOnForm);												
 		}
 		
 	}
