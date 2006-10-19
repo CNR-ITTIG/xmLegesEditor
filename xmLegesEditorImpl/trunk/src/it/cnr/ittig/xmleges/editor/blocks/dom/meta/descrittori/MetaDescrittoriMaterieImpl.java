@@ -6,6 +6,8 @@ import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
+import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
+import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
@@ -47,33 +49,45 @@ public class MetaDescrittoriMaterieImpl implements MetaDescrittoriMaterie , Logg
 	public void setVocabolari(Vocabolario[] vocabolari) {
 		
 		Document doc = documentManager.getDocumentAsDom();
-		Node descrittoriNode = doc.getElementsByTagName("descrittori").item(0);
-		
-		removeTagByName("materie");
-		
-		for (int i = 0; i < vocabolari.length; i++) {
+		try {
+			EditTransaction tr = documentManager.beginEdit();
 			
-			Node vocabTag;
-			vocabTag = utilRulesManager.getNodeTemplate("materie");
+			Node descrittoriNode = doc.getElementsByTagName("descrittori").item(0);
 			
+			removeTagByName("materie");
 			
-			UtilDom.setAttributeValue(vocabTag,"vocabolario",vocabolari[i].getNome());
-			String[] materieVocab=vocabolari[i].getMaterie();
-			if(materieVocab!=null && materieVocab.length>0){
-				vocabTag.removeChild(vocabTag.getChildNodes().item(0));
-				for (int j = 0; j < materieVocab.length; j++) {
-					Element materiaTag;
-					materiaTag = doc.createElement("materia");
-					UtilDom.setAttributeValue(materiaTag,"value",vocabolari[i].getMaterie()[j]);
-					utilRulesManager.orderedInsertChild(vocabTag,materiaTag);
-					
+			for (int i = 0; i < vocabolari.length; i++) {
+				
+				Node vocabTag;
+				vocabTag = utilRulesManager.getNodeTemplate("materie");
+				
+				
+				UtilDom.setAttributeValue(vocabTag,"vocabolario",vocabolari[i].getNome());
+				String[] materieVocab=vocabolari[i].getMaterie();
+				if(materieVocab!=null && materieVocab.length>0){
+					vocabTag.removeChild(vocabTag.getChildNodes().item(0));
+					for (int j = 0; j < materieVocab.length; j++) {
+						Element materiaTag;
+						materiaTag = doc.createElement("materia");
+						UtilDom.setAttributeValue(materiaTag,"value",vocabolari[i].getMaterie()[j]);
+						utilRulesManager.orderedInsertChild(vocabTag,materiaTag);
+						
+					}
+				}else{
+					UtilDom.setAttributeValue(vocabTag.getChildNodes().item(0),"value",null);
 				}
-			}else{
-				UtilDom.setAttributeValue(vocabTag.getChildNodes().item(0),"value",null);
-			}
-			utilRulesManager.orderedInsertChild(descrittoriNode,vocabTag);
+				utilRulesManager.orderedInsertChild(descrittoriNode,vocabTag);
 
+			}
+			documentManager.commitEdit(tr);
+			rinumerazione.aggiorna(doc);
+		} catch (DocumentManagerException ex) {
+			logger.error(ex.getMessage(), ex);
+			return;
 		}
+												
+		
+		
 
 		
 	}
