@@ -7,7 +7,6 @@ import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.form.Form;
-import it.cnr.ittig.xmleges.core.services.form.FormException;
 import it.cnr.ittig.xmleges.core.services.form.FormVerifier;
 import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextField;
 import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextFieldEditor;
@@ -21,14 +20,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JEditorPane;
-import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JPanel;
 
 public class MaterieVocabolariFormImpl implements MaterieVocabolariForm , Loggable,
 Serviceable, Initializable, ActionListener, FormVerifier {
@@ -40,17 +39,21 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 	String errorMessage = "";
 	UtilMsg utilmsg;
 	
+	JButton materieButton;
+	
 //	Form ListTextFile materie
 //	Materie.jfrm
-	Form formMaterie;
-	JButton materieButton;
+	Form formMaterie;	
 	JList listaMaterieSelectedVocab;
 	ListTextField materie_listtextfield;
 	
-	Form sottoFormBrowser;
+//	Form ListTextFile del browser Teseo
+//	Teseo.jfrm
+	Form formMaterieTeseo;
+	JList listaMaterieTeseo;
+	ListTextField materie_teseo_listtextfield;
 	
-	JEditorPane browser;
-		
+			
 	//	Form ListTextFiled vocabolari
 //	Vocabolari.jfrm
 	Form formVocabolari;
@@ -114,17 +117,18 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 		utilmsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 		form = (Form) serviceManager.lookup(Form.class);
 		formVocabolari = (Form) serviceManager.lookup(Form.class);
-		formMaterie = (Form) serviceManager.lookup(Form.class);
-		sottoFormBrowser=(Form) serviceManager.lookup(Form.class);
+		formMaterie = (Form) serviceManager.lookup(Form.class);	
+		formMaterieTeseo = (Form) serviceManager.lookup(Form.class);
 		vocabolari_listtextfield = (ListTextField) serviceManager.lookup(ListTextField.class);
 		materie_listtextfield = (ListTextField) serviceManager.lookup(ListTextField.class);
+		materie_teseo_listtextfield = (ListTextField) serviceManager.lookup(ListTextField.class);
 	}
 
 	public void initialize() throws Exception {
 		form.setMainComponent(getClass().getResourceAsStream("MaterieVocabolari.jfrm"));
 		form.setName("editor.form.meta.descrittori.materie");
 		
-		form.setSize(350, 300);
+		form.setSize(350, 150);
 		vocabolariButton = (JButton) form.getComponentByName("editor.meta.vocabolario.modifica_btn");
 		vocabolariButton.addActionListener(this);
 		materieButton = (JButton) form.getComponentByName("editor.meta.vocabolario.materie.modifica_btn");
@@ -137,21 +141,8 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 			public void itemStateChanged(ItemEvent e) {
 
 				if(e.getStateChange()==ItemEvent.SELECTED){
-					if(((String)comboVocabolari.getSelectedItem()).equalsIgnoreCase("teseo2")){
-						try {
-							sottoFormBrowser.setMainComponent(getClass().getResourceAsStream("DatiVocabolari.jfrm"));
-							materie_listtextfield.setEditor(new BrowserListTextFieldEditor(sottoFormBrowser));
-							browser = (JEditorPane) sottoFormBrowser.getComponentByName("editor.meta.descrittori.materie.vocabolari.browser");
-							sottoFormBrowser.replaceComponent("editor.meta.descrittori.materie.vocabolari.browser", browser);
-						} catch (FormException e1) {
-							e1.printStackTrace();
-						}
-						
-
-					}else{
-						//TODO: il problema è che la seconda volta non riesce a farlo il seteditor
-//						materie_listtextfield.setEditor(new MaterieListTextFieldEditor());
-					}
+					
+										
 					String[] materieToShow=getMaterieVocab((String)comboVocabolari.getSelectedItem());
 					if(materieToShow!=null)
 						listaMaterieSelectedVocab.setListData(materieToShow);
@@ -178,13 +169,13 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 		
 		materie_listtextfield.setEditor(new MaterieListTextFieldEditor());
 		
-//		sottoFormBrowser.setMainComponent(getClass().getResourceAsStream("DatiVocabolari.jfrm"));
-//		materie_listtextfield.setEditor(new BrowserListTextFieldEditor(sottoFormBrowser));
-//		browser = (JEditorPane) sottoFormBrowser.getComponentByName("editor.meta.descrittori.materie.vocabolari.browser");
+		formMaterieTeseo.setMainComponent(getClass().getResourceAsStream("Teseo.jfrm"));
+		formMaterieTeseo.replaceComponent("editor.meta.descrittori.materie.materie.listtextfield", materie_teseo_listtextfield.getAsComponent());
+		formMaterieTeseo.setSize(650, 400);
+		formMaterieTeseo.setName("editor.meta.descrittori.materie.materieteseo");
 		
-		
-		
-		
+		materie_teseo_listtextfield.setEditor(new MaterieListTextFieldEditor());
+	
 		
 		
 	}
@@ -261,26 +252,51 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 						v.add(materieVocab[i]);
 					}
 				}
-				if(!((String)comboVocabolari.getSelectedItem()).equalsIgnoreCase("teseo2"))
-					materie_listtextfield.setListElements(v);
-				else{
-					browser.add(new JLabel(materieVocab[0]));
-				}
+				if("teseo".equalsIgnoreCase((String) comboVocabolari.getSelectedItem())){
+					//////////////
+					String urlData = "http://www.normeinrete.it/stdoc/xmlrae/data_creazione_rae.txt";
+					
+					URL source = null;
+					try {
+						source = new URL(urlData);
+					} catch (MalformedURLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}			
+					
+						try {
+							source.openConnection();
+						} catch (IOException e2) {
+							// TODO Auto-generated catch block
+							e2.printStackTrace();
+						}		
 				
-
-				formMaterie.showDialog();
-
-				if (formMaterie.isOk()) {
-					if(!((String)comboVocabolari.getSelectedItem()).equalsIgnoreCase("teseo2")){
+					/////////////////
+					materie_teseo_listtextfield.setListElements(v);
+					formMaterieTeseo.showDialog();
+	
+					if (formMaterieTeseo.isOk()) {
+						
+						materieVocab = new String[materie_teseo_listtextfield.getListElements().size()];
+						materie_teseo_listtextfield.getListElements().toArray(materieVocab);
+						
+						listaMaterieSelectedVocab.setListData(materieVocab);
+						setMaterieVocab(materieVocab,(String) comboVocabolari.getSelectedItem());
+						
+					}
+				}else{
+					materie_listtextfield.setListElements(v);
+					formMaterie.showDialog();
+	
+					if (formMaterie.isOk()) {
+						
 						materieVocab = new String[materie_listtextfield.getListElements().size()];
 						materie_listtextfield.getListElements().toArray(materieVocab);
-					}else{
-						materieVocab=new String[1];
-						materieVocab[0]="materia da sito web";
+						
+						listaMaterieSelectedVocab.setListData(materieVocab);
+						setMaterieVocab(materieVocab,(String) comboVocabolari.getSelectedItem());
+						
 					}
-					listaMaterieSelectedVocab.setListData(materieVocab);
-					setMaterieVocab(materieVocab,(String) comboVocabolari.getSelectedItem());
-					
 				}
 	 
 
@@ -404,50 +420,7 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 			return new Dimension(600, 150);
 		}
 	}
-	/**
-	 * Editor per il ListTextField della lista delle materie
-	 */
-	private class BrowserListTextFieldEditor extends MaterieListTextFieldEditor{
-		javax.swing.JTextField textField = new javax.swing.JTextField();
-		Form form;
-		
-		public BrowserListTextFieldEditor() {
-			super();
-			form=null;
-			browser=null;
-		}
-		public BrowserListTextFieldEditor(Form form) {
-			this.form = form;			
-		}
-
-		public Component getAsComponent() {
-			return form.getAsComponent();
-		}
-
-		public Object getElement() {
-			return textField.getText();
-		}
-
-		public void setElement(Object object) {
-			textField.setText(object.toString());
-		}
-
-		public void clearFields() {
-			textField.setText(null);
-		}
-
-		public boolean checkData() {
-			return (textField.getText() != null && !"".equals(textField.getText().trim()));
-		}
-
-		public String getErrorMessage() {
-			return "editor.form.meta.descrittori.msg.err.datialias";
-		}
-
-		public Dimension getPreferredSize() {
-			return new Dimension(600, 150);
-		}
-	}
+	
 
 
 	
