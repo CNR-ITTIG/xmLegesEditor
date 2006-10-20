@@ -6,13 +6,18 @@ import it.cnr.ittig.services.manager.Logger;
 import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
+import it.cnr.ittig.xmleges.core.services.event.EventManager;
+import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.form.Form;
+import it.cnr.ittig.xmleges.core.services.form.FormException;
 import it.cnr.ittig.xmleges.core.services.form.FormVerifier;
 import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextField;
 import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextFieldEditor;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
+import it.cnr.ittig.xmleges.editor.blocks.form.browser.BrowserEvent;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Vocabolario;
 import it.cnr.ittig.xmleges.editor.services.form.meta.descrittori.MaterieVocabolariForm;
+import it.cnr.ittig.xmleges.editor.services.form.browser.BrowserForm;
 
 import java.awt.Component;
 import java.awt.Dimension;
@@ -20,10 +25,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
+import java.util.EventObject;
 import java.util.Vector;
 
 import javax.swing.JButton;
@@ -62,6 +66,12 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 	JComboBox comboVocabolari;	
 	ListTextField vocabolari_listtextfield;		
 	Vocabolario[] vocabolari;
+	
+	// Mie variabili
+	Form sottoFormTeseo;
+	ListTextField teseo_listtextfield;
+	BrowserForm browserForm;
+	EventManager eventManager;
 	
 	
 	public boolean openForm() {
@@ -123,6 +133,9 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 		vocabolari_listtextfield = (ListTextField) serviceManager.lookup(ListTextField.class);
 		materie_listtextfield = (ListTextField) serviceManager.lookup(ListTextField.class);
 		materie_teseo_listtextfield = (ListTextField) serviceManager.lookup(ListTextField.class);
+		sottoFormTeseo = (Form) serviceManager.lookup(Form.class);
+		browserForm = (BrowserForm) serviceManager.lookup(BrowserForm.class);
+		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 	}
 
 	public void initialize() throws Exception {
@@ -143,7 +156,6 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 
 				if(e.getStateChange()==ItemEvent.SELECTED){
 					
-										
 					String[] materieToShow=getMaterieVocab((String)comboVocabolari.getSelectedItem());
 					if(materieToShow!=null)
 						listaMaterieSelectedVocab.setListData(materieToShow);
@@ -175,9 +187,8 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 		formMaterieTeseo.setSize(650, 400);
 		formMaterieTeseo.setName("editor.meta.descrittori.materie.materieteseo");
 		
-		materie_teseo_listtextfield.setEditor(new MaterieListTextFieldEditor());
-	
-		
+		sottoFormTeseo.setMainComponent(getClass().getResourceAsStream("TeseoBrowser.jfrm"));
+		materie_teseo_listtextfield.setEditor(new MaterieListTextFieldEditor(sottoFormTeseo));
 		
 	}
 
@@ -385,40 +396,104 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 	/**
 	 * Editor per il ListTextField della lista delle materie
 	 */
-	private class MaterieListTextFieldEditor implements ListTextFieldEditor {
-		javax.swing.JTextField textField = new javax.swing.JTextField();
-		
+	private class MaterieListTextFieldEditor implements ListTextFieldEditor, EventManagerListener {
 
-		public MaterieListTextFieldEditor() {
+		
+		//LAVORARE QUI !!!!!!!!!!!!!!!!!!!!
+		
+		
+		Form form;
+		Vector terminiSelezionati = new Vector();
+
+		public MaterieListTextFieldEditor() {		
+			
+			System.err.println("IMMAGINO CHE QUI vuoi implementare qualcosa !??? COSA ?!");
 			
 		}
 		
+		public MaterieListTextFieldEditor(Form form) {		
+			this.form = form;
+		}
+		
 		public Component getAsComponent() {
-			return textField;
+			return form.getAsComponent();
 		}
 
 		public Object getElement() {
-			return textField.getText();
+						
+			System.err.println("**(TODO)*** RESTITUISCO LA SELEZIONE *********");
+			return null;
 		}
 
-		public void setElement(Object object) {
-			textField.setText(object.toString());
+		public void setElement(Object object) {			
 		}
-
+		
 		public void clearFields() {
-			textField.setText(null);
+			
+			try {
+				form.replaceComponent("editor.meta.teseo.browser.interno", browserForm.getAsComponent());
+			} catch (FormException e) {
+				e.printStackTrace();
+			}
+			eventManager.addListener(this, BrowserEvent.class);
+
+			browserForm.setUrlListener("http://www.senato.it/App/Search/sddl.asp#Cla");
+			
+			logger.debug("Apro pagina iniziale Teseo");
+			try {
+				browserForm.setUrl(new URL("http://www.senato.it/App/Search/sddl.asp?CmdSelCla=Sistema+TESEO"));
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		private void estraiSelezionati(String content) {
+
+			// Estraggo i termini selezionati dall'HTML			
+			try {
+				// Mi avvicino alla zona della selezione in più passi (migliorabile)
+				content = content.substring(content.indexOf("almeno un termine"), content.length());
+				content = content.substring(content.indexOf("Sistema TESEO"),content.length());
+				content = content.substring(content.indexOf("checkSubmit(event)"), content.length());
+				// Taglio fino a qui
+				content = content.substring(0, content.indexOf("Cerca nella classificazione"));
+				while (content.indexOf("value") != -1) {
+					content = content.substring(content.indexOf("value"), content.length());
+					content = content.substring(content.indexOf(">"), content.length());
+					terminiSelezionati.addElement(content.substring(1, content.indexOf("<")));
+					content = content.substring(content.indexOf("<"), content.length());
+				}
+
+				((JList) form.getComponentByName("editor.meta.teseo.scelte")).setListData(terminiSelezionati);
+			} catch (StringIndexOutOfBoundsException e) {
+				logger.error("Errore nel parser del Teseo");
+			}							
+			try {
+				browserForm.setUrl(new URL("http://www.senato.it/App/Search/sddl.asp?CmdSelCla=Sistema+TESEO"));
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		public boolean checkData() {
-			return (textField.getText() != null && !"".equals(textField.getText().trim()));
+			return true;
 		}
 
-		public String getErrorMessage() {
-			return "editor.form.meta.descrittori.msg.err.datialias";
+		public String getErrorMessage() {			
+			return "--messaggio di errore--";
 		}
-
 		public Dimension getPreferredSize() {
-			return new Dimension(600, 150);
+			return new Dimension(800, 600);
+		}
+
+		public void manageEvent(EventObject event) {
+			
+			BrowserEvent e = (BrowserEvent) event;
+			if (e.isUrlDownload()) {
+
+				logger.debug("Selezione da browser confermata");
+				estraiSelezionati((String) e.getSource());
+			}	
 		}
 	}
 	
