@@ -1,5 +1,8 @@
 package it.cnr.ittig.xmleges.editor.blocks.dom.link;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import it.cnr.ittig.services.manager.Loggable;
 import it.cnr.ittig.services.manager.Logger;
 import it.cnr.ittig.services.manager.ServiceException;
@@ -118,6 +121,7 @@ public class LinkImpl implements Link, Loggable, Serviceable {
 	}	
 	
 	public Node setUrl(Node node, String url) {
+		url = setProtocollo(url);
 	    try {
 	    	if (node.getNodeType()==Node.TEXT_NODE && node.getParentNode()!=null)
 	    		UtilDom.setAttributeValue(node.getParentNode(), "xlink:href", url);
@@ -130,6 +134,19 @@ public class LinkImpl implements Link, Loggable, Serviceable {
 		}
 	}
 
+	private String setProtocollo(String url) {
+		
+		//il controllo è un pò troppo banale. Se l'url non è valida
+		//aggiunge il protocollo http 
+		try {
+			new URL(url);
+			return url;
+		} catch (MalformedURLException e) {
+			logger.debug("Aggiungo il protocollo http all'url " + url);
+			return "http://"+url;
+		}
+	}
+	
 	public Node setText(Node node, String text) {
 	    try {
 	    	if (node.getNodeType()==Node.TEXT_NODE && node.getParentNode()!=null)
@@ -166,6 +183,7 @@ public class LinkImpl implements Link, Loggable, Serviceable {
 	
 	public Node insert(Node node, int start, int end, String testo, String url, String type) {
 
+		url = setProtocollo(url);
 		Element newLink = (Element) utilRulesManager.encloseTextInTag(testo, "h:a", "h");
 		if (newLink != null) {
 			newLink.setAttribute("xlink:href", url);
