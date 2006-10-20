@@ -228,6 +228,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <separator/>
                     <item action="file.save" />
                     <item action="file.saveas" />
+                    <item action="file.removepi" />                    
                     <separator/>
                     <item action="file.print" />
                     <separator/>
@@ -432,6 +433,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <separator/>
                     <item action="file.save" />
                     <item action="file.saveas" />
+                    <item action="file.removepi" />                                        
                     <separator/>
                     <item action="file.print" />
                 </toolbar>
@@ -1232,4 +1234,5 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     </component>
     
 </container>
+
 
