@@ -27,6 +27,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.w3c.dom.ProcessingInstruction;
+import org.w3c.dom.traversal.DocumentTraversal;
+import org.w3c.dom.traversal.NodeFilter;
+import org.w3c.dom.traversal.NodeIterator;
 
 
 /**
@@ -207,15 +211,17 @@ public class UtilDom {
 	 */
 	public static Node findAncestorByName(Node node, String name) {
 		Node previous;
-		while (node != null)
-			if (node.getNodeName().equals(name))
-				return node;
+		Node found = null;
+		while (node != null )
+			if ((found = UtilDom.findRecursiveChild(node,name))!=null) //node.getNodeName().equals(name))
+				return found;
 			else{
 				previous = node.getPreviousSibling();
 		        if(previous != null)
 		        	node = previous;
-		        else
+		        else{ // deve smettere di salire a un certo punto altrimenti va a cercare sotto ...
 		        	node = node.getParentNode();
+		        }
 			}
 		return node;
 	}
@@ -352,26 +358,26 @@ public class UtilDom {
 		return found;
 	}
 	
-	public static Node findRelativeTag(Document doc, Node node, String tagName){
-		Node tagNode; 
-		
-		// se non e' stato selezionato un nodo attivo prende il primo "tagName" del documento;
-		if(node == null){
-			if(doc.getElementsByTagName(tagName)!=null && doc.getElementsByTagName(tagName).getLength()>0)
-				return doc.getElementsByTagName(tagName).item(0);
-			else
-				return null;
-		}
-		// cerca sopra al nodo attivo
-		tagNode = UtilDom.findAncestorByName(node,tagName);
-		// se non lo trova sopra, cerca sotto
-		if(tagNode == null){
-			if(node.getParentNode()!=null)
-				node = node.getParentNode();    // in questo modo cerca anche fra i fratelli
-			tagNode = UtilDom.findRecursiveChild(node,tagName);
-		}
-		return tagNode;
-	}
+//	public static Node findRelativeTag(Document doc, Node node, String tagName){
+//		Node tagNode; 
+//		
+//		// se non e' stato selezionato un nodo attivo prende il primo "tagName" del documento;
+//		if(node == null){
+//			if(doc.getElementsByTagName(tagName)!=null && doc.getElementsByTagName(tagName).getLength()>0)
+//				return doc.getElementsByTagName(tagName).item(0);
+//			else
+//				return null;
+//		}
+//		// cerca sopra al nodo attivo
+//		tagNode = UtilDom.findAncestorByName(node,tagName);
+//		// se non lo trova sopra, cerca sotto
+//		if(tagNode == null){
+//			if(node.getParentNode()!=null)
+//				node = node.getParentNode();    // in questo modo cerca anche fra i fratelli
+//			tagNode = UtilDom.findRecursiveChild(node,tagName);
+//		}
+//		return tagNode;
+//	}
 
 	public static void setTextNode(Node node, String text) {
 		Node tmp = node.getOwnerDocument().createTextNode(text);
@@ -990,51 +996,14 @@ public class UtilDom {
 	 */
 	public static void mergeTextNodes(Node node) {
 		mergeTextNodes(node, false);
-		// NodeList nl = node.getChildNodes();
-		// Node p = nl.item(0);
-		// for (int i = 1; i < nl.getLength(); i++) {
-		// if (nl.item(i).getNodeType() == Node.TEXT_NODE && p.getNodeType() ==
-		// Node.TEXT_NODE) {
-		// p.setNodeValue(p.getNodeValue() + nl.item(i).getNodeValue());
-		// node.removeChild(nl.item(i));
-		// i--;
-		// } else
-		// p = nl.item(i);
-		// }
 	}
 
 	public static void mergeTextNodes(Node node, boolean deep) {
-
 		mergeTextNodes(node, deep, "");
-
-		// NodeList nl = node.getChildNodes();
-		// Node p = nl.item(0);
-		// for (int i = 1; i < nl.getLength(); i++) {
-		// if (nl.item(i).getNodeType() == Node.TEXT_NODE && p.getNodeType() ==
-		// Node.TEXT_NODE) {
-		// p.setNodeValue(p.getNodeValue() + nl.item(i).getNodeValue());
-		// node.removeChild(nl.item(i));
-		// i--;
-		// } else if (deep && p.getNodeType() == Node.ELEMENT_NODE)
-		// mergeTextNodes(p, true);
-		// p = nl.item(i);
-		// }
-
 	}
 
 	public static void mergeTextNodes(Node node, String separator) {
 		mergeTextNodes(node, false, separator);
-		// NodeList nl = node.getChildNodes();
-		// Node p = nl.item(0);
-		// for (int i = 1; i < nl.getLength(); i++) {
-		// if (nl.item(i).getNodeType() == Node.TEXT_NODE && p.getNodeType() ==
-		// Node.TEXT_NODE) {
-		// p.setNodeValue(p.getNodeValue() + nl.item(i).getNodeValue());
-		// node.removeChild(nl.item(i));
-		// i--;
-		// } else
-		// p = nl.item(i);
-		// }
 	}
 
 	public static void mergeTextNodes(Node node, boolean deep, String separator) {
@@ -1159,4 +1128,31 @@ public class UtilDom {
 			}
 		return false;
 	}
+	
+	/**
+	 * 
+	 * @param doc
+	 * @param fromHere
+	 * @param tagName
+	 * @return
+	 */
+    public static Node[] getElementsByTagName(Document doc, Node fromHere, String tagName){
+		
+		NodeIterator nI = ((DocumentTraversal)doc).createNodeIterator(fromHere,NodeFilter.SHOW_ELEMENT,null,false);	
+		Vector v = new Vector();
+	  
+		Node node;
+		
+		while ((node = nI.nextNode()) != null ) {
+			if(node.getNodeType()==Node.ELEMENT_NODE && node.getNodeName().equals(tagName))
+			  v.add(node);
+	    }
+		
+		Node[] ret = new Node[v.size()];
+		for(int i=0; i<v.size();i++)
+			ret[i]=(Node)v.get(i);
+		return  ret;
+	}
+	
+	
 }
