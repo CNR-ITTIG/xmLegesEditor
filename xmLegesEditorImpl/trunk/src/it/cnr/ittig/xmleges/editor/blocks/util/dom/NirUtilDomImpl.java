@@ -197,7 +197,7 @@ public class NirUtilDomImpl implements NirUtilDom, Loggable, Serviceable, Config
 		Node meta, found, child;
 		meta = null;
 
-		meta = UtilDom.findRelativeTag(doc, node,"meta");
+		meta = findActiveMeta(doc, node);
 		found = UtilDom.findDirectChild(meta, nome);
 
 		if (found == null) { // se non c'e' il tag "nome" lo crea
@@ -268,5 +268,50 @@ public class NirUtilDomImpl implements NirUtilDom, Loggable, Serviceable, Config
 			return (inlinemeta);
 		return (null);
 	}
+	
+	
+	public  Node findActiveMeta(Document doc, Node node){
+		Node tagNode; 
+		String tagName = "meta";
+		
+		// se non e' stato selezionato un nodo attivo prende il primo "tagName" del documento;
+		if(node == null){
+			if(doc.getElementsByTagName(tagName)!=null && doc.getElementsByTagName(tagName).getLength()>0)
+				return doc.getElementsByTagName(tagName).item(0);
+			else
+				return null;
+		}
+		// cerca sopra al nodo attivo
+		tagNode = findParentMeta(node);
+		// se non lo trova sopra, cerca sotto
+		if(tagNode == null){
+			if(node.getParentNode()!=null)
+				node = node.getParentNode();    // in questo modo cerca anche fra i fratelli
+			tagNode = UtilDom.findRecursiveChild(node,tagName);
+		}
+		return tagNode;
+	}
+	
+	/**
+	 * Cerca il primo nodo antenato (padre o previousSibling) di tipo meta
+	 */
+	protected Node findParentMeta(Node node) {
+		Node previous;
+		String name = "meta";
+		
+		while (node != null )
+			if (node.getNodeName().equals(name))
+				return node;
+			else{
+				previous = node.getPreviousSibling();
+		        if(previous != null)
+		        	node = previous;
+		        else{ 
+		        	node = node.getParentNode();
+		        }
+			}
+		return node;
+	}
+
 
 }
