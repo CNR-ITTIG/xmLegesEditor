@@ -34,16 +34,18 @@ public interface Testo extends Service {
 	 * @param start
 	 * @param end
 	 * @param action
+	 * @return Node il nodo modificato 
 	 */
-	public void doActionOff(Node node, int start, int end, String action);
+	public Node doActionOff(Node node, int start, int end, String action);
 
 	/**
 	 * @param node
 	 * @param start
 	 * @param end
 	 * @param action
+	 * @return Node il nodo modificato
 	 */
-	public void doActionOn(Node node, int start, int end, String action);
+	public Node doActionOn(Node node, int start, int end, String action);
 
 	/**
 	 * @param node
@@ -54,8 +56,9 @@ public interface Testo extends Service {
 
 	/**
 	 * @param node
+	 * @return Node il nodo modificato
 	 */
-	public void doActionOffOnlyTag(Node node);
+	public Node doActionOffOnlyTag(Node node);
 
 	/**
 	 * @param node
@@ -66,7 +69,7 @@ public interface Testo extends Service {
 
 	/**
 	 * @param node
-	 * @param azione
+	 * @param azione 
 	 */
 	public void doTagTree(Node node, String azione);
 
