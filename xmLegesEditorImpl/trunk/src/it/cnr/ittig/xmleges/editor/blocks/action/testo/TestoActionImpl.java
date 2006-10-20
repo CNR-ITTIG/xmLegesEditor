@@ -183,20 +183,30 @@ public class TestoActionImpl implements TestoAction, EventManagerListener, Logga
 	}
 
 	public void doAction(String action) {
+		Node modificato = activeNode;
 		if (onlyTag == 0) { // caso di azione su nodo testo
 			//int start = selectionManager.getTextSelectionStart();
 			//int end = selectionManager.getTextSelectionEnd();
 
 			Node found = UtilDom.findParentByName(activeNode, action);
+			
 			if (found == null)
-				testo.doActionOn(activeNode, start, end, action);
-			else
-				testo.doActionOff(activeNode, start, end, action);
+				modificato = testo.doActionOn(activeNode, start, end, action);
+			else 
+				modificato = testo.doActionOff(activeNode, start, end, action);
+			
 		} else if (onlyTag == 1) // caso di azione su nodo h:b vuoto
-			testo.doActionOffOnlyTag(activeNode);
-
-		if (tree == 1) // caso di azione su altri nodi
+			modificato = testo.doActionOffOnlyTag(activeNode);
+		
+		if (tree == 1) {// caso di azione su altri nodi
+			
+			//FIXME: far restituire a doTagTree il nodo modificato
+			if (UtilDom.findParentByName(activeNode, action) != null)
+				modificato = activeNode.getParentNode();
 			testo.doTagTree(activeNode, action);
+		}
+		selectionManager.setActiveNode(this, modificato);
+
 	}
 
 	public class GrassettoAction extends AbstractAction {
