@@ -217,21 +217,24 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 		return returnValue;
 	}
 
-	public void doActionOn(Node node, int start, int end, String action) {
+	public Node doActionOn(Node node, int start, int end, String action) {
 		try {
 			EditTransaction tr = documentManager.beginEdit();
-			utilRulesManager.encloseTextInTag(node, start, end, action, "h");
+			Node modificato = utilRulesManager.encloseTextInTag(node, start, end, action, "h");
 			documentManager.commitEdit(tr);
+			return modificato;
 		} catch (DocumentManagerException ex) {
+			return node;
 		}
 	}
 
-	public void doActionOff(Node node, int start, int end, String action) {
+	public Node doActionOff(Node node, int start, int end, String action) {
 		try {
 			EditTransaction tr = documentManager.beginEdit();
 			Node found = UtilDom.findParentByName(node, action);
 			Node pfound = found.getParentNode();
 			Node p = node.getParentNode();
+			Node modificato = null;
 
 			logger.debug("found: " + UtilDom.getPathName(found) + " pfound: " + UtilDom.getPathName(pfound) + " p: " + UtilDom.getPathName(p) + " node: "
 					+ UtilDom.getPathName(node) + node);
@@ -239,7 +242,7 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 			if (found == p) { // il nodo action da rimuovere e' il padre di
 								// node
 				logger.debug("rimuovi tag");
-				rimuoviTag(node, start, end, action);
+				modificato = rimuoviTag(node, start, end, action);
 			} else { // il nodo action da rimuovere e' piu' su nell'albero
 				// RIMUOVO IL NODO FOUND DALL'ALBERO E VI AGGANCIO I SUOI FIGLI
 				NodeList childList;
@@ -260,10 +263,14 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 
 				for (i = 0; i < len; i++)
 					changeTagInSubTree(vector[i], node, start, end, action);
+				
+				modificato = pfound;
 			}
 			documentManager.commitEdit(tr);
+			return modificato;
 		} catch (DocumentManagerException ex) {
 			logger.error(ex.getMessage(), ex);
+			return null;
 		}
 	}
 
@@ -280,7 +287,7 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 		return false;
 	}
 
-	public void doActionOffOnlyTag(Node node) {
+	public Node doActionOffOnlyTag(Node node) {
 		try {
 			EditTransaction tr = documentManager.beginEdit();
 
@@ -288,7 +295,9 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 			p.removeChild(node);
 
 			documentManager.commitEdit(tr);
+			return p;
 		} catch (DocumentManagerException ex) {
+			return null;
 		}
 	}
 
@@ -329,7 +338,7 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 		}
 	}
 
-	private void rimuoviTag(Node node, int start, int end, String action) {
+	private Node rimuoviTag(Node node, int start, int end, String action) {
 		Document documento = documento = documentManager.getDocumentAsDom();
 
 		String value = UtilDom.getText(node).trim();
@@ -339,11 +348,13 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 
 		Node p = node.getParentNode();
 		Node ancestor = p.getParentNode();
+		Node modificato=null;
 
 		if (testo1.equals("") && testo2.equals("")) {
 			if (ancestor != null) {
 				ancestor.insertBefore(node, p);
 				ancestor.removeChild(p);
+				modificato=ancestor;
 			}
 		} else {
 			logger.debug(" TESTO IMPL : PARTE DI STRINGA ");
@@ -373,9 +384,11 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 					ancestor.insertBefore(newActualTag1, node);
 					ancestor.removeChild(p);
 				}
+				modificato=ancestor;
 			}
 		}
 		UtilDom.mergeTextNodes(ancestor);
+		return modificato;
 	}
 
 	private void addTag(Node node, int start, int end, String action) {
@@ -629,7 +642,7 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 
 		if (contaNodiTesto == 0)
 			return;
-
+		
 		if (onOff > 0) {
 			try {
 				EditTransaction tr = documentManager.beginEdit();
@@ -649,7 +662,6 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 				// logger.error(ex.getMessage(),ex);
 			}
 		}
-		return;
 	}
 
 	private boolean nodeOnlyTag(Node node, String azione) {
