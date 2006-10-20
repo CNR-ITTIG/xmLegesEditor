@@ -23,6 +23,7 @@ import java.awt.event.ItemListener;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.Vector;
 
 import javax.swing.JButton;
@@ -64,7 +65,7 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 	
 	
 	public boolean openForm() {
-		form.setSize(450, 600);
+		form.setSize(450, 300);
 		form.showDialog();
 		return form.isOk();
 
@@ -254,22 +255,22 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 				}
 				if("teseo".equalsIgnoreCase((String) comboVocabolari.getSelectedItem())){
 					//////////////
-					String urlData = "http://www.normeinrete.it/stdoc/xmlrae/data_creazione_rae.txt";
+//					String urlData = "http://www.normeinrete.it/stdoc/xmlrae/data_creazione_rae.txt";
+//					URL url = null;
+//					URLConnection connection=null;
+//					try {
+//						url = new URL(urlData);
+//					} catch (MalformedURLException e1) {
+//						// TODO Auto-generated catch block
+//						e1.printStackTrace();
+//					}
+//					try {
+//						connection=url.openConnection();
+//					} catch (IOException e1) {
+//						// TODO Auto-generated catch block
+//						e1.printStackTrace();
+//					}
 					
-					URL source = null;
-					try {
-						source = new URL(urlData);
-					} catch (MalformedURLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}			
-					
-						try {
-							source.openConnection();
-						} catch (IOException e2) {
-							// TODO Auto-generated catch block
-							e2.printStackTrace();
-						}		
 				
 					/////////////////
 					materie_teseo_listtextfield.setListElements(v);
