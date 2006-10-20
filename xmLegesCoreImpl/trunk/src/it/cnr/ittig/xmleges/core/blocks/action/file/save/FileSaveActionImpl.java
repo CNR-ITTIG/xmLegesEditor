@@ -9,6 +9,7 @@ import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.services.manager.Startable;
+import it.cnr.ittig.xmleges.core.blocks.document.DocumentManagerImpl;
 import it.cnr.ittig.xmleges.core.services.action.ActionManager;
 import it.cnr.ittig.xmleges.core.services.action.file.open.FileOpenAction;
 import it.cnr.ittig.xmleges.core.services.action.file.save.FileSaveAction;
@@ -16,12 +17,17 @@ import it.cnr.ittig.xmleges.core.services.bars.Bars;
 import it.cnr.ittig.xmleges.core.services.document.DocumentChangedEvent;
 import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
+import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.DocumentOpenedEvent;
 import it.cnr.ittig.xmleges.core.services.document.DocumentSavedEvent;
+import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
+import it.cnr.ittig.xmleges.core.services.dom.extracttext.ExtractText;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.preference.PreferenceManager;
+import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
+import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.core.util.domwriter.DOMWriter;
 import it.cnr.ittig.xmleges.core.util.file.RegexpFileFilter;
 
@@ -31,9 +37,17 @@ import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.util.EventObject;
 import java.util.Properties;
+import java.util.Vector;
 
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.ProcessingInstruction;
+import org.w3c.dom.traversal.DocumentTraversal;
+import org.w3c.dom.traversal.NodeFilter;
+import org.w3c.dom.traversal.NodeIterator;
 
 /**
  * <h1>Implementazione del servizio
@@ -102,6 +116,8 @@ public class FileSaveActionImpl implements FileSaveAction, EventManagerListener,
 
 	FileSaveActionImpl.SaveAction saveAction;
 
+	FileSaveActionImpl.RemoveAction removeAction;
+	
 	FileSaveActionImpl.SaveAsAction saveAsAction;
 
 	String defaultEncoding = "UTF-8";
@@ -114,6 +130,12 @@ public class FileSaveActionImpl implements FileSaveAction, EventManagerListener,
 
 	String lastSaved = null;
 
+	ExtractText extractText;
+	
+	SelectionManager selectionManager;
+	
+	EditTransaction tr;
+	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
@@ -128,6 +150,7 @@ public class FileSaveActionImpl implements FileSaveAction, EventManagerListener,
 		bars = (Bars) serviceManager.lookup(Bars.class);
 		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 		openAction = (FileOpenAction) serviceManager.lookup(FileOpenAction.class);
+		extractText = (ExtractText) serviceManager.lookup(ExtractText.class);
 	}
 
 	// ////////////////////////////////////////////////// Configurable Interface
@@ -159,6 +182,8 @@ public class FileSaveActionImpl implements FileSaveAction, EventManagerListener,
 	public void initialize() throws Exception {
 		saveAction = new FileSaveActionImpl.SaveAction();
 		actionManager.registerAction("file.save", saveAction);
+		removeAction = new FileSaveActionImpl.RemoveAction();
+		actionManager.registerAction("file.removepi", removeAction);
 		saveAsAction = new FileSaveActionImpl.SaveAsAction();
 		actionManager.registerAction("file.saveas", saveAsAction);
 		eventManager.addListener(this, DocumentChangedEvent.class);
@@ -189,6 +214,7 @@ public class FileSaveActionImpl implements FileSaveAction, EventManagerListener,
 	// //////////////////////////////////////// EventManagerListener Interface
 	public void manageEvent(EventObject event) {
 		saveAction.setEnabled(!documentManager.isEmpty() && documentManager.isChanged());
+		removeAction.setEnabled(!documentManager.isEmpty());
 		saveAsAction.setEnabled(!documentManager.isEmpty());
 	}
 
@@ -200,6 +226,90 @@ public class FileSaveActionImpl implements FileSaveAction, EventManagerListener,
 			return saveFile(new File(documentManager.getSourceName()));
 	}
 
+	public boolean doRemovePI() {
+		//effettua la rimozione delle PI dal documento
+		removePI();
+		//Chiedo se si vuole il salvataggio del documento
+		if (!utilMsg.msgYesNo("action.file.replacepi.save")) 
+			return true;
+		if (documentManager.isNew())
+			return doSaveAs();
+		else
+			return saveFile(new File(documentManager.getSourceName()));	
+	}
+
+	private boolean removePI() {
+		
+		if (documentManager.getDocumentAsDom()==null)
+			return false;
+		NodeIterator nI = ((DocumentTraversal)documentManager.getDocumentAsDom()).createNodeIterator(documentManager.getDocumentAsDom().getDocumentElement(),NodeFilter.SHOW_PROCESSING_INSTRUCTION,null,true);	
+		Node node;
+		try {
+			tr = documentManager.beginEdit();	
+			while ((node = nI.nextNode()) != null ) {
+			
+				if (node.getNodeType()==Node.PROCESSING_INSTRUCTION_NODE) {
+				
+					//Inserire qui i casi da gestire:
+					//ATTUALMENTE: per ?rif --> si tiene la parte testuale
+					//             altrimenti --> si butta via il nodo. 
+				
+					if (((ProcessingInstruction)node).getTarget().equals("rif")) {
+						logger.debug("estraggo testo da " + node.toString());									
+						setPlainText(node,getText(node));					
+					}	
+					else {
+						logger.debug("butto il nodo " + node.toString());
+						Node parent = node.getParentNode();
+						parent.removeChild(node);
+						UtilDom.mergeTextNodes(parent);
+					}
+				}
+			}
+			documentManager.commitEdit(tr);
+		} catch (DocumentManagerException ex) {
+			logger.error(ex.getMessage(), ex);
+		}
+
+		return true;
+	}
+
+	private String getText(Node node) {
+        String temp = ((ProcessingInstruction)node).getData().substring(((ProcessingInstruction)node).getData().indexOf(">"),((ProcessingInstruction)node).getData().length());
+		return (temp.substring(1,temp.indexOf("<")));		
+	}
+
+	private Node setPlainText(Node node, String plainText) {
+
+		Node container = node.getParentNode(); // contenitore del testo
+		Node ritorno = null;
+ 	    if (null != node.getPreviousSibling() && UtilDom.isTextNode(node.getPreviousSibling()) && null != node.getNextSibling() && UtilDom.isTextNode(node.getNextSibling())) {
+			node.getPreviousSibling().setNodeValue(node.getPreviousSibling().getNodeValue() + " " + plainText + " " + node.getNextSibling().getNodeValue());
+			ritorno = node.getPreviousSibling();
+			container.removeChild(node.getNextSibling());
+			container.removeChild(node);			
+			return ritorno;
+		} else { //Ho solo il fratello DX di tipo text
+		  if (null != node.getNextSibling() && UtilDom.isTextNode(node.getNextSibling())) {
+				node.getNextSibling().setNodeValue(plainText + " " + node.getNextSibling().getNodeValue());
+				ritorno = node.getNextSibling();
+				container.removeChild(node);			
+				return ritorno;							
+		  } else { //Ho solo il fratello SX di tipo text
+			if (null != node.getPreviousSibling() && UtilDom.isTextNode(node.getPreviousSibling())) {
+				node.getPreviousSibling().setNodeValue(node.getPreviousSibling().getNodeValue() + " " + plainText);
+				ritorno = node.getPreviousSibling();
+				container.removeChild(node);			
+				return ritorno;							
+			} else { //Non ho fratelli e/o ho fratelli non text
+				     node.setNodeValue(plainText);
+				     return node;
+			  }
+			}
+		 }			
+	}
+	
+	
 	public boolean doSaveAs() {
 		if (!documentManager.isNew())
 			fileChooser.setCurrentDirectory(new File(documentManager.getSourceName()));
@@ -287,6 +397,12 @@ public class FileSaveActionImpl implements FileSaveAction, EventManagerListener,
 		}
 	}
 
+	protected class RemoveAction extends AbstractAction {
+		public void actionPerformed(ActionEvent e) {
+			doRemovePI();
+		}
+	}
+	
 	protected class SaveAsAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
 			doSaveAs();
