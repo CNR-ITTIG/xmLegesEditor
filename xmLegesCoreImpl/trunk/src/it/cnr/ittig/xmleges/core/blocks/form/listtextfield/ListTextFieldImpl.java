@@ -82,6 +82,8 @@ public class ListTextFieldImpl implements MouseListener, ListTextField, ListSele
 	EventListenerList listTextFieldElementListeners = new EventListenerList();
 
 	boolean moveButtons = true;
+	
+	private int lastselected=-1;
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -99,7 +101,7 @@ public class ListTextFieldImpl implements MouseListener, ListTextField, ListSele
 		form.setMainComponent(getClass().getResourceAsStream("ListTextField.jfrm"));
 		list = (JList) form.getComponentByName("form.listtextfield.list");
 		list.addListSelectionListener(this);
-		list.addMouseListener(this);
+		list.addMouseListener(this);		
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setEnabled(true);
 		list.setModel(listModel);
@@ -160,7 +162,10 @@ public class ListTextFieldImpl implements MouseListener, ListTextField, ListSele
 
 	// ///////////////////////////////////////// ListSelectionListener Interface
 	public void valueChanged(ListSelectionEvent e) {
+		
+		
 		int selectedElement = list.getSelectedIndex();
+		
 		boolean enab = selectedElement >= 0 && selectedElement < listModel.size();
 		if (enab) {
 			editorForm.getEditor().setElement(listModel.getElementAt(selectedElement));
@@ -169,6 +174,7 @@ public class ListTextFieldImpl implements MouseListener, ListTextField, ListSele
 		deleteAction.setEnabled(enab);
 		moveUpAction.setEnabled(enab && selectedElement > 0);
 		moveDownAction.setEnabled(enab && selectedElement < listModel.size() - 1);
+		
 	}
 	
 
@@ -429,21 +435,24 @@ public class ListTextFieldImpl implements MouseListener, ListTextField, ListSele
 		}
 	}
 
-	public void mousePressed(MouseEvent e) {
-		 // TODO   la cosa migliore sarebbe che, ripremendo (single click) su un item gia' selezionato deselezionasse tutto
-		 //if (e.getClickCount() == 2) {
-		 if(e.getButton()==e.BUTTON3){
-			list.clearSelection();
-	     }
+	public void mousePressed(MouseEvent e) {		
 	}
 	
 	
-	public void mouseClicked(MouseEvent e) {	
+	public void mouseClicked(MouseEvent e) {
+		int selectedElement = list.getSelectedIndex();
+		if (lastselected!=-1 && selectedElement==lastselected){
+			lastselected=-1;
+			list.clearSelection();			
+			return;
+		}
+		lastselected=selectedElement; 
 	}
 	public void mouseEntered(MouseEvent e) {
 	}
 	public void mouseExited(MouseEvent e) {
 	}
 	public void mouseReleased(MouseEvent e) {	
+
 	}
 }
