@@ -97,5 +97,14 @@ public interface NirUtilDom extends Service {
 	 */
 	public Node checkAndCreateMeta(Document doc, Node node, String nome);
 	
+	
+	/**
+	 * 
+	 * @param doc
+	 * @param node
+	 * @return
+	 */
+	public  Node findActiveMeta(Document doc, Node node);
+	
 
 }
