@@ -15,6 +15,7 @@ import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.MetaCiclodivita;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
+import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 
 import java.util.Vector;
 
@@ -61,6 +62,8 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 	
 	SelectionManager selectionManager;
 	
+	NirUtilDom nirUtilDom;
+	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
@@ -71,6 +74,7 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
+		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 	
 	}
 
@@ -315,7 +319,8 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 				UtilDom.setAttributeValue(eventoTag, "data", eventi[i].getData());
 				if(eventi[i].getFonte().getTagTipoRelazione().equals("originale")){
 					Node tag=null;
-					tag= UtilDom.findRelativeTag(doc,selectionManager.getActiveNode(),"entratainvigore");//doc.getElementsByTagName("entratainvigore").item(0);
+					Node activeMeta = nirUtilDom.findActiveMeta(doc, selectionManager.getActiveNode());
+					tag= UtilDom.findRecursiveChild(activeMeta,"entratainvigore");//doc.getElementsByTagName("entratainvigore").item(0);
 					if(tag==null){
 						tag = utilRulesManager.getNodeTemplate("entratainvigore");
 						Node descrNode= doc.getElementsByTagName("descrittori").item(0);
