@@ -399,7 +399,7 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 	private class MaterieListTextFieldEditor implements ListTextFieldEditor, EventManagerListener {
 
 		
-		//LAVORARE QUI !!!!!!!!!!!!!!!!!!!!
+
 		
 		
 		Form form;
@@ -407,7 +407,6 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 
 		public MaterieListTextFieldEditor() {		
 			
-			System.err.println("IMMAGINO CHE QUI vuoi implementare qualcosa !??? COSA ?!");
 			
 		}
 		
