@@ -16,6 +16,7 @@ import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
+import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.date.UtilDate;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
@@ -130,6 +131,8 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 	MaterieVocabolariForm materieForm;
 
 	Rinumerazione rinumerazione;
+	
+	SelectionManager selectionManager;
 
 	UtilRulesManager utilRulesManager;
 
@@ -157,6 +160,7 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		actionManager = (ActionManager) serviceManager.lookup(ActionManager.class);
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
+		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 		descrittori = (MetaDescrittori) serviceManager.lookup(MetaDescrittori.class);
 		ciclodivita = (MetaCiclodivita) serviceManager.lookup(MetaCiclodivita.class);
 		inquadramento = (MetaInquadramento) serviceManager.lookup(MetaInquadramento.class);
@@ -202,9 +206,7 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		descrittoriAction.setEnabled(!documentManager.isEmpty() && !utilRulesManager.isDtdDL());
 		ciclodivitaAction.setEnabled(!documentManager.isEmpty() && !utilRulesManager.isDtdDL());
 		inquadramentoAction.setEnabled(!documentManager.isEmpty() && !utilRulesManager.isDtdDL() && !utilRulesManager.isDtdBase());
-		
 			
-		
 		materieAction.setEnabled(true);
 		urnAction.setEnabled(!documentManager.isEmpty());		
 		cnrAction.setEnabled(!documentManager.isEmpty() && documentManager.getDtdName().equals("cnr.dtd"));
@@ -213,34 +215,34 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 	// //////////////////////////////////////////// MetaGeneraliAction Interface
 	public void doDescrittori() {
 		logger.debug("Metadati Descrittori");
-
+		
+		Node node = selectionManager.getActiveNode();
 		Document doc = documentManager.getDocumentAsDom();
 		//TODO: da cambiare non è piu tipodoc ma tipopubblicazione con default GU
 //		descrittoriForm.setTipoPubblicazione(UtilDom.getAttributeValueAsString(doc.getDocumentElement(), "tipo"));
 //		descrittoriForm.setTipoPubblicazione(descrittori.getPubblicazione().getTipo());
 		descrittoriForm.setTipoDTD(documentManager.getDtdName());
-		descrittoriForm.setAlias(descrittori.getAlias());
-		descrittoriForm.setAltrePubblicazioni(descrittori.getAltrePubblicazioni());
-		descrittoriForm.setPubblicazione(descrittori.getPubblicazione());
-		descrittoriForm.setRedazione(descrittori.getRedazione());
+		descrittoriForm.setAlias(descrittori.getAlias(node));
+		descrittoriForm.setAltrePubblicazioni(descrittori.getAltrePubblicazioni(node));
+		descrittoriForm.setPubblicazione(descrittori.getPubblicazione(node));
+		descrittoriForm.setRedazione(descrittori.getRedazione(node));
 
 		if (descrittoriForm.openForm()) {
 			try {
 				EditTransaction tr = documentManager.beginEdit();
 				UtilDom.setAttributeValue(doc.getDocumentElement(), "tipo", descrittoriForm.getTipoPubblicazione());
-				descrittori.setAlias(descrittoriForm.getAlias());
-				descrittori.setPubblicazione(descrittoriForm.getPubblicazione());
-				descrittori.setAltrePubblicazioni(descrittoriForm.getAltrePubblicazioni());
-				descrittori.setRedazione(descrittoriForm.getRedazione());
+				descrittori.setAlias(node, descrittoriForm.getAlias());
+				descrittori.setPubblicazione(node, descrittoriForm.getPubblicazione());
+				descrittori.setAltrePubblicazioni(node, descrittoriForm.getAltrePubblicazioni());
+				descrittori.setRedazione(node, descrittoriForm.getRedazione());
 				documentManager.commitEdit(tr);
 				rinumerazione.aggiorna(doc);
 			} catch (DocumentManagerException ex) {
 				logger.error(ex.getMessage(), ex);
 			}
-		}
-		
-		
+		}		
 	}
+	
 	public void doInquadramento() {
 		Document doc = documentManager.getDocumentAsDom();
 			
@@ -363,7 +365,14 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 
 		EditTransaction tr = null;
 
+		//Node activeMeta = nirUtilDom.findActiveMeta(doc,selectionManager.getActiveNode());
+		//Node descrittori = UtilDom.findRecursiveChild(activeMeta,"descrittori");
+		
+		
+		// TODO sulle urn lasciare ancora che si riferisca al documento principale
+		
 		Node descrittori = doc.getElementsByTagName("descrittori").item(0);
+		
 		// TODO chiedere qualcosa al rulesManager ?
 		if (descrittori != null) {
 			try {
