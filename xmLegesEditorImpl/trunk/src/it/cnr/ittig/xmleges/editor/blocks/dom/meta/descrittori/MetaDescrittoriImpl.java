@@ -54,7 +54,6 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 
 	DtdRulesManager dtdRulesManager;
 	DocumentManager documentManager;
-	SelectionManager selectionManager;
 	NirUtilDom nirUtilDom;
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
@@ -66,7 +65,6 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 	public void service(ServiceManager serviceManager) throws ServiceException {
 		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
-		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 	}
 
@@ -74,7 +72,7 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 	// Interface
 		
 
-	public Pubblicazione getPubblicazione() {
+	public Pubblicazione getPubblicazione(Node node) {
 		Document doc = documentManager.getDocumentAsDom();
 		String tipo = null;
 		String num = null;
@@ -82,7 +80,7 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 
 		// cerca il nodo pubblicazione del documento a cui appartiene il nodo attivo
 		
-		Node activeMeta = nirUtilDom.findActiveMeta(doc,selectionManager.getActiveNode());
+		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
 		Node n = UtilDom.findRecursiveChild(activeMeta,"pubblicazione");
 		
 		if(n!=null){
@@ -93,11 +91,11 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 		return (new Pubblicazione("pubblicazione", tipo, num, data));
 	}
 
-	public void setPubblicazione(Pubblicazione pubblicazione) {
+	public void setPubblicazione(Node node, Pubblicazione pubblicazione) {
 
 		Document doc = documentManager.getDocumentAsDom();
 		
-		Node activeMeta = nirUtilDom.findActiveMeta(doc,selectionManager.getActiveNode());
+		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
 		Node descrittoriNode = UtilDom.findRecursiveChild(activeMeta,"descrittori");
 		
 		if (pubblicazione.getNum() != null || pubblicazione.getNorm() != null) {
@@ -112,13 +110,13 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 		}
 	}
 
-	public Pubblicazione[] getAltrePubblicazioni() {
+	public Pubblicazione[] getAltrePubblicazioni(Node node) {
 
 		Document doc = documentManager.getDocumentAsDom();
 		String tag, num, data, tipo;
 		Vector altrePubblicazioniVect = new Vector();
 
-		Node activeMeta = nirUtilDom.findActiveMeta(doc,selectionManager.getActiveNode());
+		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
 		Node altrePubNode = UtilDom.findRecursiveChild(activeMeta,"altrepubblicazioni");
 		
 		if (altrePubNode != null) {
@@ -140,13 +138,13 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 		return altrePubblicazioni;
 	}
 
-	public void setAltrePubblicazioni(Pubblicazione[] pubblicazioni) {
+	public void setAltrePubblicazioni(Node node, Pubblicazione[] pubblicazioni) {
 		Document doc = documentManager.getDocumentAsDom();
 		
-		Node activeMeta = nirUtilDom.findActiveMeta(doc,selectionManager.getActiveNode());
+		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
 		Node descrittoriNode = UtilDom.findRecursiveChild(activeMeta,"descrittori");
 		
-		removeMetaByName("altrepubblicazioni");
+		removeMetaByName("altrepubblicazioni", node);
 		if (pubblicazioni.length > 0) {
 			Node altrepubNode = doc.createElement("altrepubblicazioni");
 			for (int i = 0; i < pubblicazioni.length; i++) {
@@ -185,10 +183,10 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 	}
 
 
-	public String[] getAlias() {
+	public String[] getAlias(Node node) {
 		Document doc = documentManager.getDocumentAsDom();
 
-		Node activeMeta = nirUtilDom.findActiveMeta(doc,selectionManager.getActiveNode());
+		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
 		Node[] aliasList = UtilDom.getElementsByTagName(doc,activeMeta,"alias");
 		
 		Vector aliasVect = new Vector();
@@ -201,14 +199,14 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 		return alias;
 	}
 
-	public void setAlias(String[] alias) {
+	public void setAlias(Node node, String[] alias) {
 		
 		Document doc = documentManager.getDocumentAsDom();
 		
-		Node activeMeta = nirUtilDom.findActiveMeta(doc,selectionManager.getActiveNode());
+		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
 		Node descrittoriNode = UtilDom.findRecursiveChild(activeMeta,"descrittori");
 
-		removeMetaByName("alias");
+		removeMetaByName("alias", node);
 		for (int i = 0; i < alias.length; i++) {
 			Element aliasTag;
 			aliasTag = doc.createElement("alias");
@@ -237,7 +235,7 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 	}
 
 
-	public String[] getRedazione() {
+	public String[] getRedazione(Node node) {
 		Document doc = documentManager.getDocumentAsDom();
 		String data = null;
 		String nome = null;
@@ -245,7 +243,7 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 		String contributo = null;
 		
 
-		Node activeMeta = nirUtilDom.findActiveMeta(doc,selectionManager.getActiveNode());
+		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
 		Node[] redList = UtilDom.getElementsByTagName(doc,activeMeta,"redazione");
 		
 		if (redList.length > 0) {
@@ -261,10 +259,10 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 	}
 	
 	
-	public void setRedazione(String[] redazione) {
+	public void setRedazione(Node node, String[] redazione) {
 		
 		Document doc = documentManager.getDocumentAsDom();
-		Node activeMeta = nirUtilDom.findActiveMeta(doc,selectionManager.getActiveNode());
+		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
 		Node descrittoriNode = UtilDom.findRecursiveChild(activeMeta,"descrittori");
 
 		if (redazione != null) {
@@ -284,11 +282,11 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 	/**
 	 * Rimuove i tag con un determinato nome
 	 */
-	private void removeMetaByName(String nome) {
+	private void removeMetaByName(String nome, Node node) {
 		Document doc = documentManager.getDocumentAsDom();
 		Node toRemove;
 		
-		Node activeMeta = nirUtilDom.findActiveMeta(doc,selectionManager.getActiveNode());
+		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
 	
 		do {
 			toRemove = UtilDom.findRecursiveChild(activeMeta,nome); 
