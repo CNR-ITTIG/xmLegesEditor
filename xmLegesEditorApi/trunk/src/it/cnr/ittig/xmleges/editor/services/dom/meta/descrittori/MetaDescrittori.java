@@ -2,6 +2,8 @@ package it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori;
 
 import it.cnr.ittig.services.manager.Service;
 
+import org.w3c.dom.Node;
+
 /**
  * Servizio per l'inserimento dei metadati generali.
  * <p>
@@ -25,55 +27,55 @@ public interface MetaDescrittori extends Service {
 	 * 
 	 * @param pubblicazione pubblicazione del documento
 	 */
-	public void setPubblicazione(Pubblicazione pubblicazione);
+	public void setPubblicazione(Node node, Pubblicazione pubblicazione);
 
 	/**
 	 * Restituisce la pubblicazione del documento.
 	 * 
 	 * @return pubblicazione
 	 */
-	public Pubblicazione getPubblicazione();
+	public Pubblicazione getPubblicazione(Node node);
 
 	/**
 	 * Imposta le altre pubbilcazioni del documento.
 	 * 
 	 * @param pubblicazioni altre pubblicazioni
 	 */
-	public void setAltrePubblicazioni(Pubblicazione[] pubblicazioni);
+	public void setAltrePubblicazioni(Node node, Pubblicazione[] pubblicazioni);
 
 	/**
 	 * Restituisce le altre pubblicazioni del documento.
 	 * 
 	 * @return altre pubblicazioni
 	 */
-	public Pubblicazione[] getAltrePubblicazioni();
+	public Pubblicazione[] getAltrePubblicazioni(Node node);
 
 	/**
 	 * Imposta gli alias del documento
 	 * 
 	 * @param alias alias del documento
 	 */
-	public void setAlias(String[] alias);
+	public void setAlias(Node node, String[] alias);
 
 	/**
 	 * Restituisce gli alias del documento
 	 * 
 	 * @return alias del documento
 	 */
-	public String[] getAlias();
+	public String[] getAlias(Node node);
 	
 	/**
 	 * Imposta la redazione del documento
 	 * 
 	 * @param redazione
 	 */
-	public void setRedazione(String[] redazione);
+	public void setRedazione(Node node, String[] redazione);
 
 	/**
 	 * Restituisce la redazione del documento
 	 * 
 	 * @return redazione del documento
 	 */
-	public String[] getRedazione();
+	public String[] getRedazione(Node node);
 
 	}
