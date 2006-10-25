@@ -37,6 +37,14 @@ public interface ListTextFieldEditor {
 	 *         oggetto.
 	 */
 	public Object getElement();
+	
+//	/**
+//	 * Restituisce gli oggetti da inserire nella lista.
+//	 * 
+//	 * @return oggetti da inserire nella lista, o null per non inserire nessun
+//	 *         oggetto.
+//	 */
+//	public Object[] getElements();
 
 	/**
 	 * Imposta l'oggetto selezionato nella lista che deve essere presentato nei
