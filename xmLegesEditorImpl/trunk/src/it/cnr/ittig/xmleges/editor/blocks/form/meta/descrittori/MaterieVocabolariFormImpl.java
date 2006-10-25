@@ -30,10 +30,8 @@ import java.net.URL;
 import java.util.EventObject;
 import java.util.Vector;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JList;
 
 public class MaterieVocabolariFormImpl implements MaterieVocabolariForm , Loggable,
@@ -69,10 +67,12 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 	ListTextField vocabolari_listtextfield;		
 	Vocabolario[] vocabolari;
 	
-
+	// Mie variabili
 	Form sottoFormTeseo;
+	ListTextField teseo_listtextfield;
 	BrowserForm browserForm;
-	EventManager eventManager;	
+	EventManager eventManager;
+	
 	
 	public boolean openForm() {
 		form.setSize(450, 300);
@@ -188,7 +188,7 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 		formMaterieTeseo.setName("editor.meta.descrittori.materie.materieteseo");
 		
 		sottoFormTeseo.setMainComponent(getClass().getResourceAsStream("TeseoBrowser.jfrm"));
-		materie_teseo_listtextfield.setEditor(new MaterieListTextFieldEditor(sottoFormTeseo));
+		materie_teseo_listtextfield.setEditor(new MaterieTeseoListTextFieldEditor(sottoFormTeseo));
 		
 	}
 
@@ -286,12 +286,8 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 					/////////////////
 					materie_teseo_listtextfield.setListElements(v);
 					formMaterieTeseo.showDialog();
-					
-					if (formMaterieTeseo.isOk()) {
 	
-						
-						//FIXME   generalizzare anche qui per la gestione delle materie del teseo tramite il 
-						//			browser. (oppure impedire la modifica ---- DA DECIDERE )
+					if (formMaterieTeseo.isOk()) {
 						
 						materieVocab = new String[materie_teseo_listtextfield.getListElements().size()];
 						materie_teseo_listtextfield.getListElements().toArray(materieVocab);
@@ -400,25 +396,54 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 	/**
 	 * Editor per il ListTextField della lista delle materie
 	 */
-	private class MaterieListTextFieldEditor implements ListTextFieldEditor, EventManagerListener {
+	private class MaterieListTextFieldEditor implements ListTextFieldEditor{
+
+		javax.swing.JTextField textField = new javax.swing.JTextField();
+
+		public Component getAsComponent() {
+			return textField;
+		}
+
+		public Object getElement() {
+			return textField.getText();
+		}
+
+		public void setElement(Object object) {
+			textField.setText(object.toString());
+		}
+
+		public void clearFields() {
+			textField.setText(null);
+		}
+
+		public boolean checkData() {
+			return (textField.getText() != null && !"".equals(textField.getText().trim()));
+		}
+
+		public String getErrorMessage() {
+			return "editor.form.meta.descrittori.msg.err.datialias";
+		}
+
+		public Dimension getPreferredSize() {
+			return new Dimension(600, 150);
+		}
+	}
+	/**
+	 * Editor per il ListTextField della lista delle materie di teseo
+	 */
+	private class MaterieTeseoListTextFieldEditor implements ListTextFieldEditor, EventManagerListener {
+
 		
 		Form form;
-		
 		Vector terminiSelezionati = new Vector();
-		Component tempBrowser = new JLabel("browser");
-		
-		boolean primaVolta = true;
-		
-		DefaultListModel listModel = new DefaultListModel();
-		JList listaSelezionati;
-		
-		public MaterieListTextFieldEditor() {		
-				
+
+		public MaterieTeseoListTextFieldEditor() {		
+			
+			
 		}
 		
-		public MaterieListTextFieldEditor(Form form) {		
+		public MaterieTeseoListTextFieldEditor(Form form) {		
 			this.form = form;
-			listaSelezionati = (JList) form.getComponentByName("editor.meta.teseo.scelte");
 		}
 		
 		public Component getAsComponent() {
@@ -426,51 +451,47 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 		}
 
 		public Object getElement() {
-			
+			//FIXME: implementare il getelements per ottenerli tutti assieme
+//			String[] materieScelte = new String[terminiSelezionati.size()];
+//			terminiSelezionati.toArray(materieScelte);
+//			return materieScelte[0];
 			String[] temp = new String[terminiSelezionati.size()];
 			for (int i=0; i<terminiSelezionati.size(); i++)
 				temp[i] = (String) terminiSelezionati.get(i);
 			return temp;
 			
-			//return terminiSelezionati;
+
 		}
 
-		public void setElement(Object object) {			
-			
-			//infilarci l'elemento selezionato
+		public void setElement(Object object) {	
+			//	infilarci l'elemento selezionato
 			
 			try {
 				browserForm.setUrl(new URL("http://www.senato.it/App/Search/sddl.asp?CmdSelCla=Sistema+TESEO"));
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
 			}
-			
+			terminiSelezionati.add(object.toString());
 		}
 		
 		public void clearFields() {
-			
-			if (primaVolta) { 
+			if("teseo".equalsIgnoreCase((String) comboVocabolari.getSelectedItem())){
 				try {
-					form.replaceComponent("editor.meta.teseo.browser.interno", browserForm.getAsComponent());				
+					form.replaceComponent("editor.meta.teseo.browser.interno", browserForm.getAsComponent());
 				} catch (FormException e) {
 					e.printStackTrace();
 				}
 				eventManager.addListener(this, BrowserEvent.class);
+	
 				browserForm.setUrlListener("http://www.senato.it/App/Search/sddl.asp#Cla");
-			}
-			else {
-				terminiSelezionati.clear();
-				listModel.clear();
-			}
-
-//			if (browserForm.getUrl()!=null && browserForm.getUrl().equals("http://www.senato.it/App/Search/sddl.asp?CmdSelCla=Sistema+TESEO")) {
+				
 				logger.debug("Apro pagina iniziale Teseo");
 				try {
 					browserForm.setUrl(new URL("http://www.senato.it/App/Search/sddl.asp?CmdSelCla=Sistema+TESEO"));
 				} catch (MalformedURLException e) {
 					e.printStackTrace();
 				}
-//			}	
+			}
 		}
 		
 		private void estraiSelezionati(String content) {
@@ -490,9 +511,7 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 					content = content.substring(content.indexOf("<"), content.length());
 				}
 
-				//((JList) form.getComponentByName("editor.meta.teseo.scelte")).setListData(terminiSelezionati);
-				listaSelezionati.setListData(terminiSelezionati);
-				
+				((JList) form.getComponentByName("editor.meta.teseo.scelte")).setListData(terminiSelezionati);
 			} catch (StringIndexOutOfBoundsException e) {
 				logger.error("Errore nel parser del Teseo");
 			}							
@@ -508,14 +527,10 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 		}
 
 		public String getErrorMessage() {			
-			return "";
+			return "--messaggio di errore--";
 		}
 		public Dimension getPreferredSize() {
-			if (primaVolta) {
-				primaVolta = false;
-				return new Dimension(800, 600);
-			}	
-			return null;
+			return new Dimension(800, 600);
 		}
 
 		public void manageEvent(EventObject event) {

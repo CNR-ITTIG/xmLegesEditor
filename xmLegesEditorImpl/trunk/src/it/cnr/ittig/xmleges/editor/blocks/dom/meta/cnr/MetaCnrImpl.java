@@ -12,6 +12,7 @@ import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.cnr.MetaCnr;
 import it.cnr.ittig.xmleges.editor.services.dom.rinumerazione.Rinumerazione;
+import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -27,6 +28,8 @@ public class MetaCnrImpl implements MetaCnr, Loggable, Serviceable {
 	UtilRulesManager utilRulesManager;
 	
 	Rinumerazione rinumerazione; 
+	
+	NirUtilDom nirUtilDom;
 
 	
 	public void enableLogging(Logger logger) {
@@ -38,13 +41,13 @@ public class MetaCnrImpl implements MetaCnr, Loggable, Serviceable {
 		rinumerazione = (Rinumerazione) serviceManager.lookup(Rinumerazione.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);				
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
-		
+		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 	}
 	
-	public String[] getProprietario() {
+	public String[] getProprietario(Node node) {
 
 		Document doc = documentManager.getDocumentAsDom();
-		
+		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
 		String strutturaEmanante=null;	
 		String autoritaEmanante=null;		
 		String tipoDestinatario=null;		
@@ -52,11 +55,11 @@ public class MetaCnrImpl implements MetaCnr, Loggable, Serviceable {
 		String strutturaDestinataria=null;
 		String tipo_provvedimento=null;
 		
-
-		NodeList cnrMetaList = doc.getElementsByTagName("cnr:meta");
-		if (cnrMetaList.getLength() > 0) {
+		Node[] cnrMetaList = UtilDom.getElementsByTagName(doc,activeMeta,"cnr:meta");
+		
+		if (cnrMetaList.length > 0) {
 			
-			Node n = cnrMetaList.item(0);
+			Node n = cnrMetaList[0];
 			
 			NodeList cnrMeta_elementList = n.getChildNodes();
 			for (int i = 0; i < cnrMeta_elementList.getLength();i++) {
@@ -80,12 +83,12 @@ public class MetaCnrImpl implements MetaCnr, Loggable, Serviceable {
 		
 	}
 
-	public void setProprietario(String[] metadati) {
+	public void setProprietario(Node node, String[] metadati) {
 		if(metadati!=null && metadati.length==6){
 			Document doc = documentManager.getDocumentAsDom();
 			try {
 				EditTransaction tr = documentManager.beginEdit();
-				if (setDOMCnr(metadati)) {
+				if (setDOMCnr(node, metadati)) {
 					rinumerazione.aggiorna(doc);
 					documentManager.commitEdit(tr);
 				} else
@@ -97,10 +100,12 @@ public class MetaCnrImpl implements MetaCnr, Loggable, Serviceable {
 		
 	}
 
-	private boolean setDOMCnr(String[] metadati) {
+	private boolean setDOMCnr(Node node, String[] metadati) {
 		
 			Document doc = documentManager.getDocumentAsDom();
-			Node proprietarioNode = doc.getElementsByTagName("proprietario").item(0);
+			Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
+			Node proprietarioNode = UtilDom.findRecursiveChild(activeMeta,"proprietario");
+			
 			
 			boolean missingProprietario = false;
 			
@@ -109,11 +114,10 @@ public class MetaCnrImpl implements MetaCnr, Loggable, Serviceable {
 				missingProprietario = true;
 			}
 			
-			Node cnrNode = doc.getElementsByTagName("cnr:meta").item(0);
-			if (cnrNode==null){
+			Node cnrNode = UtilDom.findRecursiveChild(activeMeta,"cnr:meta");
+			if (cnrNode==null)
 			    cnrNode = utilRulesManager.getNodeTemplate("cnr:meta");
-				//cnrNode = doc.createElement("cnr:meta");			
-			}
+			
 			
 			
 			utilRulesManager.orderedInsertChild(proprietarioNode,cnrNode);

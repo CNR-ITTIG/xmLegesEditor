@@ -14,6 +14,7 @@ import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.MetaDescrittoriMaterie;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Vocabolario;
 import it.cnr.ittig.xmleges.editor.services.dom.rinumerazione.Rinumerazione;
+import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -32,6 +33,8 @@ public class MetaDescrittoriMaterieImpl implements MetaDescrittoriMaterie , Logg
 	
 	Rinumerazione rinumerazione; 
 	
+	NirUtilDom nirUtilDom;
+	
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
 		
@@ -42,19 +45,19 @@ public class MetaDescrittoriMaterieImpl implements MetaDescrittoriMaterie , Logg
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
-		
+		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 		
 	}
 
-	public void setVocabolari(Vocabolario[] vocabolari) {
+	public void setVocabolari(Node node, Vocabolario[] vocabolari) {
 		
 		Document doc = documentManager.getDocumentAsDom();
 		try {
 			EditTransaction tr = documentManager.beginEdit();
-			
-			Node descrittoriNode = doc.getElementsByTagName("descrittori").item(0);
-			
-			removeTagByName("materie");
+			Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
+			Node descrittoriNode = UtilDom.findRecursiveChild(activeMeta,"descrittori");
+						
+			removeMetaByName("materie",node);
 			
 			for (int i = 0; i < vocabolari.length; i++) {
 				
@@ -92,20 +95,22 @@ public class MetaDescrittoriMaterieImpl implements MetaDescrittoriMaterie , Logg
 		
 	}
 
-	public Vocabolario[] getVocabolari() {
+	public Vocabolario[] getVocabolari(Node node) {
+		
 		Vocabolario[] vocabolariOnDoc;
 		Document doc = documentManager.getDocumentAsDom();
-				
-		NodeList vocabolariList=doc.getElementsByTagName("materie");
-		if(vocabolariList==null || vocabolariList.getLength()==0)
+		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
+		
+		Node[] vocabolariList = UtilDom.getElementsByTagName(doc,activeMeta,"materie");
+		if(vocabolariList==null || vocabolariList.length==0)
 			return null;
 		
-		vocabolariOnDoc=new Vocabolario[vocabolariList.getLength()];
-		for(int i=0;i<vocabolariList.getLength();i++){
+		vocabolariOnDoc=new Vocabolario[vocabolariList.length];
+		for(int i=0;i<vocabolariList.length;i++){
 			vocabolariOnDoc[i]=new Vocabolario();
-			String nomeVocabolario=vocabolariList.item(i).getAttributes().getNamedItem("vocabolario").getNodeValue();
+			String nomeVocabolario=vocabolariList[i].getAttributes().getNamedItem("vocabolario").getNodeValue();
 			vocabolariOnDoc[i].setNome(nomeVocabolario);
-			NodeList materieList=vocabolariList.item(i).getChildNodes();
+			NodeList materieList=vocabolariList[i].getChildNodes();
 			boolean isEmpty=(materieList.getLength()==1 && (materieList.item(0).getAttributes().getNamedItem("value")==null 
 					|| 
 					materieList.item(0).getAttributes().getNamedItem("value").getNodeValue().equals("")));
@@ -125,20 +130,19 @@ public class MetaDescrittoriMaterieImpl implements MetaDescrittoriMaterie , Logg
 	/**
 	 * Rimuove i tag con un determinato nome
 	 */
-	private void removeTagByName(String nome) {
+	private void removeMetaByName(String nome, Node node) {
 		Document doc = documentManager.getDocumentAsDom();
-		NodeList list;
-		int listLen;
+		Node toRemove;
+		
+		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
+	
 		do {
-			list = doc.getElementsByTagName(nome);
-			listLen = list.getLength();
-			if (listLen > 0) {
-				Node currNode = list.item(0);
-				currNode.getParentNode().removeChild(currNode);
+			toRemove = UtilDom.findRecursiveChild(activeMeta,nome); 
+			if (toRemove != null) {
+				toRemove.getParentNode().removeChild(toRemove);
 			}
-		} while (listLen > 0);
+		} while (toRemove != null);
 	}
-
 
 	
 

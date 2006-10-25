@@ -7,6 +7,7 @@ import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.form.Form;
+import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.MetaCiclodivita;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
@@ -19,6 +20,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.AbstractButton;
 import javax.swing.JTextField;
+
+import org.w3c.dom.Node;
 
 /**
  * <h1>Implementazione del servizio
@@ -68,6 +71,9 @@ public class EventoFormImpl implements EventoForm, Loggable, Serviceable, Initia
 	
 	AbstractButton clearBtn;
 	
+	SelectionManager selectionManager;
+	
+		
 
 	
 	
@@ -80,7 +86,8 @@ public class EventoFormImpl implements EventoForm, Loggable, Serviceable, Initia
 	public void service(ServiceManager serviceManager) throws ServiceException {
 		form = (Form) serviceManager.lookup(Form.class);
 		ciclodivitaeventoForm = (CiclodiVitaEventoForm) serviceManager.lookup(CiclodiVitaEventoForm.class);
-		metaciclodivita = (MetaCiclodivita) serviceManager.lookup(MetaCiclodivita.class);		
+		metaciclodivita = (MetaCiclodivita) serviceManager.lookup(MetaCiclodivita.class);
+		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
@@ -141,7 +148,10 @@ public class EventoFormImpl implements EventoForm, Loggable, Serviceable, Initia
 	
 	
 	protected class EventoFormAction extends AbstractAction {
+		
 		public void actionPerformed(ActionEvent e) {
+			Node node = selectionManager.getActiveNode();
+			metaciclodivita.setActiveNode(node);
 			Evento[] eventiOnDom=metaciclodivita.getEventi();
 			Relazione[] relazioniOnDom = metaciclodivita.getRelazioni();
 			ciclodivitaeventoForm.setEventi(eventiOnDom);

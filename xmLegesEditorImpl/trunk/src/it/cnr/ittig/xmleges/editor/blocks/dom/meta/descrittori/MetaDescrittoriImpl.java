@@ -8,7 +8,6 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
-import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.MetaDescrittori;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Pubblicazione;

@@ -78,7 +78,6 @@ public class VigenzaFormImpl implements VigenzaForm, FormVerifier, Loggable, Ser
 	
 	DocumentManager documentManager;
 	
-	MetaCiclodivita ciclodivita; //dom
 	
 	
 
