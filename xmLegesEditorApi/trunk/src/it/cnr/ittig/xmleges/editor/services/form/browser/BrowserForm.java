@@ -65,6 +65,6 @@ public interface BrowserForm extends Service, CommonForm {
 	 * @param int width e height
 	 */
 	public void setSize(int width, int height);
-
+	
 	// ALTRI metodi esposti dalla libreria Jdic
 }
