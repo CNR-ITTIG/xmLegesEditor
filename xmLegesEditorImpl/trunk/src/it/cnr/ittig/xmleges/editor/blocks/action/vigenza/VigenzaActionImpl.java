@@ -164,7 +164,8 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 			
 			//Node ciclodiVitaSaved=getCiclodiVitaNode()!=null?getCiclodiVitaNode().cloneNode(true):null;
 			//ciclodiVitaSaved = UtilDom.setRecursiveIdAttribute(ciclodiVitaSaved);
-			
+			Node node = selectionManager.getActiveNode();
+			ciclodivita.setActiveNode(node);
 			Evento[] oldEventi = ciclodivita.getEventi();
 			Relazione[] oldRelazioni = ciclodivita.getRelazioni();
 			
