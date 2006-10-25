@@ -296,20 +296,31 @@ public class ListTextFieldImpl implements MouseListener, ListTextField, ListSele
 				// Se ? stato restituito un elemento valido, aggiorna la lista
 				if (element != null) {
 					
-					//GERARDO: generalizzo element per gestire anche la restituzione
-					//di un vettore di stringhe e non per forza una singola stringa (***)
-					Vector listaElementi = (Vector) element;
-					//listaElementi.add(element);
-					for (int i=0; i<listaElementi.size(); i++) {
+					//GERARDO: gestisco il caso della restituzione delle materie del teseo
+					if (element.getClass().isArray()) {
+						String[] listaElementi = new String[((String[]) element).length];
+						for (int i=0; i<listaElementi.length; i++)
+							listaElementi[i]=((String[]) element)[i];
+						for (int i=0; i<listaElementi.length; i++) {
+							int selectedElement = list.getSelectedIndex();
+							if (selectedElement == -1) {
+								listModel.addElement(listaElementi[i]);
+								// FIXME  Tommaso: aggiunto per selezionare l'elemento inserito
+								setSelectedValue(element);
+							} else {
+								listModel.insertElementAt(listaElementi[i], selectedElement + 1);
+								list.setSelectedIndex(selectedElement + 1);
+							}
+						}
+					}
+					else { 					
 						int selectedElement = list.getSelectedIndex();
 						if (selectedElement == -1) {
-							//listModel.addElement(element); (***)
-							listModel.addElement(listaElementi.get(i));
+							listModel.addElement(element);
 							// FIXME  Tommaso: aggiunto per selezionare l'elemento inserito
 							setSelectedValue(element);
 						} else {
-							//listModel.insertElementAt(element, selectedElement + 1); (***)
-							listModel.insertElementAt(listaElementi.get(i), selectedElement + 1);
+							listModel.insertElementAt(element, selectedElement + 1);
 							list.setSelectedIndex(selectedElement + 1);
 						}
 					}
