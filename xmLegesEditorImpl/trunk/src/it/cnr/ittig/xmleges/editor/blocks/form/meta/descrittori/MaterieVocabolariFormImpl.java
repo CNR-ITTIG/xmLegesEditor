@@ -30,9 +30,12 @@ import java.net.URL;
 import java.util.EventObject;
 import java.util.Vector;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.ListSelectionModel;
 
 public class MaterieVocabolariFormImpl implements MaterieVocabolariForm , Loggable,
 Serviceable, Initializable, ActionListener, FormVerifier {
@@ -67,12 +70,10 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 	ListTextField vocabolari_listtextfield;		
 	Vocabolario[] vocabolari;
 	
-	// Mie variabili
+
 	Form sottoFormTeseo;
-	ListTextField teseo_listtextfield;
 	BrowserForm browserForm;
-	EventManager eventManager;
-	
+	EventManager eventManager;	
 	
 	public boolean openForm() {
 		form.setSize(450, 300);
@@ -397,21 +398,24 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 	 * Editor per il ListTextField della lista delle materie
 	 */
 	private class MaterieListTextFieldEditor implements ListTextFieldEditor, EventManagerListener {
-
-		
-
-		
 		
 		Form form;
+		
 		Vector terminiSelezionati = new Vector();
-
+		Component tempBrowser = new JLabel("browser");
+		
+		boolean primaVolta = true;
+		
+		DefaultListModel listModel = new DefaultListModel();
+		JList listaSelezionati;
+		
 		public MaterieListTextFieldEditor() {		
-			
-			
+				
 		}
 		
 		public MaterieListTextFieldEditor(Form form) {		
 			this.form = form;
+			listaSelezionati = (JList) form.getComponentByName("editor.meta.teseo.scelte");
 		}
 		
 		public Component getAsComponent() {
@@ -419,9 +423,7 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 		}
 
 		public Object getElement() {
-						
-			System.err.println("**(TODO)*** RESTITUISCO LA SELEZIONE *********");
-			return null;
+			return terminiSelezionati;
 		}
 
 		public void setElement(Object object) {			
@@ -429,21 +431,28 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 		
 		public void clearFields() {
 			
-			try {
-				form.replaceComponent("editor.meta.teseo.browser.interno", browserForm.getAsComponent());
-			} catch (FormException e) {
-				e.printStackTrace();
+			if (primaVolta) { 
+				try {
+					form.replaceComponent("editor.meta.teseo.browser.interno", browserForm.getAsComponent());				
+				} catch (FormException e) {
+					e.printStackTrace();
+				}
+				eventManager.addListener(this, BrowserEvent.class);
+				browserForm.setUrlListener("http://www.senato.it/App/Search/sddl.asp#Cla");
 			}
-			eventManager.addListener(this, BrowserEvent.class);
+			else {
+				terminiSelezionati.clear();
+				listModel.clear();
+			}
 
-			browserForm.setUrlListener("http://www.senato.it/App/Search/sddl.asp#Cla");
-			
-			logger.debug("Apro pagina iniziale Teseo");
-			try {
-				browserForm.setUrl(new URL("http://www.senato.it/App/Search/sddl.asp?CmdSelCla=Sistema+TESEO"));
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-			}
+//			if (browserForm.getUrl()!=null && browserForm.getUrl().equals("http://www.senato.it/App/Search/sddl.asp?CmdSelCla=Sistema+TESEO")) {
+				logger.debug("Apro pagina iniziale Teseo");
+				try {
+					browserForm.setUrl(new URL("http://www.senato.it/App/Search/sddl.asp?CmdSelCla=Sistema+TESEO"));
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+				}
+//			}	
 		}
 		
 		private void estraiSelezionati(String content) {
@@ -463,7 +472,9 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 					content = content.substring(content.indexOf("<"), content.length());
 				}
 
-				((JList) form.getComponentByName("editor.meta.teseo.scelte")).setListData(terminiSelezionati);
+				//((JList) form.getComponentByName("editor.meta.teseo.scelte")).setListData(terminiSelezionati);
+				listaSelezionati.setListData(terminiSelezionati);
+				
 			} catch (StringIndexOutOfBoundsException e) {
 				logger.error("Errore nel parser del Teseo");
 			}							
@@ -479,10 +490,14 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 		}
 
 		public String getErrorMessage() {			
-			return "--messaggio di errore--";
+			return "";
 		}
 		public Dimension getPreferredSize() {
-			return new Dimension(800, 600);
+			if (primaVolta) {
+				primaVolta = false;
+				return new Dimension(800, 600);
+			}	
+			return null;
 		}
 
 		public void manageEvent(EventObject event) {
