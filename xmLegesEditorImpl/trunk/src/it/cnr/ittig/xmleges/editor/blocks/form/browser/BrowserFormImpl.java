@@ -24,9 +24,10 @@ import javax.swing.JPanel;
 import org.jdesktop.jdic.browser.WebBrowser;
 import org.jdesktop.jdic.browser.WebBrowserEvent;
 import org.jdesktop.jdic.browser.WebBrowserListener;
-import org.jdesktop.jdic.browser.*;
+import org.jdesktop.jdic.browser.internal.WebBrowserUtil;
 import org.jdesktop.jdic.init.JdicManager;
-
+import org.jdesktop.jdic.init.JdicInitException;
+import org.jdesktop.jdic.init.JdicManager;
 
 /**
  * <h1>Implementazione del servizio
@@ -67,15 +68,33 @@ public class BrowserFormImpl implements BrowserForm, Loggable, Serviceable, Init
 
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws java.lang.Exception {
-
-		//System.err.println("jdic: "+JdicManager.getPlatform());		
-		
+				
 		form.setMainComponent(this.getClass().getResourceAsStream("Browser.jfrm"));
 				
 		panel = new JPanel();
 		panel.setLayout(new BorderLayout());
 		panel.setPreferredSize(new Dimension(600, 400));
 		panel.add(webBrowser, BorderLayout.CENTER);
+		
+
+//		//Prove ----> sono da buttare poi
+//		System.err.println("--------------- debug JDIC --------------------------");
+//		
+////		WebBrowserUtil;
+////		JdicManager;
+////		JdicInitException;
+////		JdicManager;
+//		
+//		System.err.println("Platform: " + JdicManager.getPlatform());
+//		System.err.println("Browser path: " +WebBrowserUtil.getBrowserPath());	
+//		System.err.println("Binary name: " +WebBrowserUtil.getEmbedBinaryName());
+//		System.err.println("MozillaHome: "+WebBrowserUtil.getMozillaGreHome());
+//		System.err.println("Mozilla default browser: " + WebBrowserUtil.isDefaultBrowserMozilla());
+//				
+//		System.err.println("------------------------------------------------------");
+//		//WebBrowserUtil.enableDebugMessages(true);
+		
+		
 		
         webBrowser.addWebBrowserListener(
                 new WebBrowserListener() {
@@ -100,7 +119,6 @@ public class BrowserFormImpl implements BrowserForm, Loggable, Serviceable, Init
                 public void titleChange(WebBrowserEvent event) {;}  
                 public void statusTextChange(WebBrowserEvent event) {;}        
             });
-        //webBrowser.setDebug(true);
 		form.replaceComponent("editor.form.browser.jdic",panel);		
 	}
 
@@ -139,7 +157,7 @@ public class BrowserFormImpl implements BrowserForm, Loggable, Serviceable, Init
 	public void setSize(int width, int height) {
 		//TODO implementare il metodo
 	}
-
+		
 	public void manageEvent(EventObject event) {}
 	 
 }
