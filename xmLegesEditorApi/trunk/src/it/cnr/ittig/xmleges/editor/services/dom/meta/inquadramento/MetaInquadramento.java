@@ -1,5 +1,7 @@
 package it.cnr.ittig.xmleges.editor.services.dom.meta.inquadramento;
 
+import org.w3c.dom.Node;
+
 import it.cnr.ittig.services.manager.Service;
 /**
  * Servizio per l'inserimento dell'inquadramento del documento.
@@ -35,5 +37,8 @@ public interface MetaInquadramento extends Service {
 	public Oggetto getOggetto();
 	
 	public String[] getProponenti();
-
+	
+	public void setActiveNode(Node node);
+	
+	
 }
