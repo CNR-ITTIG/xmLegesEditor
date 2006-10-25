@@ -589,6 +589,8 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 			doExportPDF();
 		}
 	}
+
+	
 	
 //	protected class ExportRTFAction extends AbstractAction {
 //		public void actionPerformed(ActionEvent e) {
