@@ -57,7 +57,7 @@ public class ListTextFieldEditorForm implements Service, CommonForm, FormVerifie
 		Dimension d = listEditor.getPreferredSize();
 		if (d != null) {
 			form.setSize(d.width, d.height);
-		}
+		}		
 		form.showDialog(owner);
 		return form.isOk();
 	}

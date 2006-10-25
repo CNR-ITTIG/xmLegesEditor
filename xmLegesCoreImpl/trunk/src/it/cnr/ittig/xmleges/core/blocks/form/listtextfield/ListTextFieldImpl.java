@@ -292,17 +292,26 @@ public class ListTextFieldImpl implements MouseListener, ListTextField, ListSele
 
 				// Recupera il nuovo elemento
 				Object element = editorForm.getEditor().getElement();
-
+				
 				// Se ? stato restituito un elemento valido, aggiorna la lista
 				if (element != null) {
-					int selectedElement = list.getSelectedIndex();
-					if (selectedElement == -1) {
-						listModel.addElement(element);
-						// FIXME  Tommaso: aggiunto per selezionare l'elemento inserito
-						setSelectedValue(element);
-					} else {
-						listModel.insertElementAt(element, selectedElement + 1);
-						list.setSelectedIndex(selectedElement + 1);
+					
+					//GERARDO: generalizzo element per gestire anche la restituzione
+					//di un vettore di stringhe e non per forza una singola stringa (***)
+					Vector listaElementi = (Vector) element;
+					//listaElementi.add(element);
+					for (int i=0; i<listaElementi.size(); i++) {
+						int selectedElement = list.getSelectedIndex();
+						if (selectedElement == -1) {
+							//listModel.addElement(element); (***)
+							listModel.addElement(listaElementi.get(i));
+							// FIXME  Tommaso: aggiunto per selezionare l'elemento inserito
+							setSelectedValue(element);
+						} else {
+							//listModel.insertElementAt(element, selectedElement + 1); (***)
+							listModel.insertElementAt(listaElementi.get(i), selectedElement + 1);
+							list.setSelectedIndex(selectedElement + 1);
+						}
 					}
 				}
 			}
