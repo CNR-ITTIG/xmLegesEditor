@@ -245,7 +245,8 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 	
 	public void doInquadramento() {
 		Document doc = documentManager.getDocumentAsDom();
-			
+		Node node = selectionManager.getActiveNode();
+		inquadramento.setActiveNode(node);
 		inquadramentoForm.setInfodoc(inquadramento.getInfodoc());
 		inquadramentoForm.setInfomancanti(inquadramento.getInfomancanti());
 		inquadramentoForm.setOggetto(inquadramento.getOggetto());
@@ -271,20 +272,20 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		
 	}
 	public void doMaterie() {
-//		Document doc = documentManager.getDocumentAsDom();
-		Vocabolario[] vocabolariOnDoc=materie.getVocabolari();		
-		
+		Node node = selectionManager.getActiveNode();
+		Vocabolario[] vocabolariOnDoc=materie.getVocabolari(node);		
 		materieForm.setVocabolari(vocabolariOnDoc);
-		
-				
+
 		if (materieForm.openForm()) {
 				Vocabolario[] vocabolariOnForm=materieForm.getVocabolari();
-				materie.setVocabolari(vocabolariOnForm);												
+				materie.setVocabolari(node, vocabolariOnForm);												
 		}
 		
 	}
 	public void doCiclodiVita() {
 		
+		Node node = selectionManager.getActiveNode();
+		ciclodivita.setActiveNode(node);
 		Evento[] eventiOnDom = ciclodivita.getEventi();
 		Relazione[] relazioniOnDom = ciclodivita.getRelazioni();
 		
@@ -302,8 +303,8 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 			Relazione[] newRelazioni = ciclodivita.mergeRelazioni(newEventi,relazioniUlteriori);
 
 			// SETTA SUL DOM:
-			ciclodivita.setEventi(newEventi);
-   		    ciclodivita.setRelazioni(newRelazioni);
+			ciclodivita.setEventi( newEventi);
+   		    ciclodivita.setRelazioni( newRelazioni);
    		    
    		    if (ciclodivitaForm.getVigToUpdate()!=null && ciclodivitaForm.getVigToUpdate().length>0) {
    		    	VigenzaEntity[] elenco =ciclodivitaForm.getVigToUpdate();
@@ -320,14 +321,14 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 	
 	public void doCnr() {
 		Document doc = documentManager.getDocumentAsDom();
-		
-		cnrForm.setProprietari(metaCnr.getProprietario());
+		Node node = selectionManager.getActiveNode();
+		cnrForm.setProprietari(metaCnr.getProprietario(node));
 		
 		
 		if (cnrForm.openForm()) {
 			try {
 				EditTransaction tr = documentManager.beginEdit();
-				metaCnr.setProprietario(cnrForm.getProprietari());								
+				metaCnr.setProprietario(node, cnrForm.getProprietari());								
 				documentManager.commitEdit(tr);
 				rinumerazione.aggiorna(doc);
 			} catch (DocumentManagerException ex) {
