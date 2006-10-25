@@ -1,5 +1,7 @@
 package it.cnr.ittig.xmleges.editor.services.dom.meta.cnr;
 
+import org.w3c.dom.Node;
+
 import it.cnr.ittig.services.manager.Service;
 /**
  * Servizio per l'inserimento dei dati cnr del documento.
@@ -25,12 +27,12 @@ public interface MetaCnr extends Service {
 	 * 
 	 * @return metadati proprietari
 	 */
-	public String[] getProprietario();
+	public String[] getProprietario(Node node);
 
 	/**
 	 * Scrive sul documento i metadati cnr associati
 	 * 
 	 * @param metadati
 	 */
-	public void setProprietario(String[] metadati);
+	public void setProprietario(Node node, String[] metadati);
 }
