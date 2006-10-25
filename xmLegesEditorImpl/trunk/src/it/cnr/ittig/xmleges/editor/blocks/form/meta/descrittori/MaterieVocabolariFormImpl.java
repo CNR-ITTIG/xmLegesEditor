@@ -35,7 +35,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.ListSelectionModel;
 
 public class MaterieVocabolariFormImpl implements MaterieVocabolariForm , Loggable,
 Serviceable, Initializable, ActionListener, FormVerifier {
@@ -287,8 +286,12 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 					/////////////////
 					materie_teseo_listtextfield.setListElements(v);
 					formMaterieTeseo.showDialog();
-	
+					
 					if (formMaterieTeseo.isOk()) {
+	
+						
+						//FIXME   generalizzare anche qui per la gestione delle materie del teseo tramite il 
+						//			browser. (oppure impedire la modifica ---- DA DECIDERE )
 						
 						materieVocab = new String[materie_teseo_listtextfield.getListElements().size()];
 						materie_teseo_listtextfield.getListElements().toArray(materieVocab);
@@ -423,10 +426,25 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 		}
 
 		public Object getElement() {
-			return terminiSelezionati;
+			
+			String[] temp = new String[terminiSelezionati.size()];
+			for (int i=0; i<terminiSelezionati.size(); i++)
+				temp[i] = (String) terminiSelezionati.get(i);
+			return temp;
+			
+			//return terminiSelezionati;
 		}
 
 		public void setElement(Object object) {			
+			
+			//infilarci l'elemento selezionato
+			
+			try {
+				browserForm.setUrl(new URL("http://www.senato.it/App/Search/sddl.asp?CmdSelCla=Sistema+TESEO"));
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			}
+			
 		}
 		
 		public void clearFields() {
