@@ -1,5 +1,7 @@
 package it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita;
 
+import org.w3c.dom.Node;
+
 import it.cnr.ittig.services.manager.Service;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 
@@ -76,5 +78,7 @@ public interface MetaCiclodivita extends Service {
 	 */
 	public VigenzaEntity[] getVigenze();
 	
+	
+	public void setActiveNode(Node node);
 	
 }
