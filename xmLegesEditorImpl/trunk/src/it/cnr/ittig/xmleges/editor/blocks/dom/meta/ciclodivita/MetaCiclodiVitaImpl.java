@@ -64,6 +64,8 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 	
 	NirUtilDom nirUtilDom;
 	
+	Node node=null;
+	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
@@ -83,13 +85,14 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 	public Relazione[] getRelazioni() {
 
 		Document doc = documentManager.getDocumentAsDom();
+		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
 
 		String tag, id, link, effetto_tipoall;
 		Vector relVect = new Vector();
 
-		NodeList relazioni = doc.getElementsByTagName("relazioni");
-		if (relazioni.getLength() > 0) {
-			NodeList relazioniList = relazioni.item(0).getChildNodes();
+		Node[] relazioni = UtilDom.getElementsByTagName(doc,activeMeta,"relazioni");
+		if (relazioni.length > 0) {
+			NodeList relazioniList = relazioni[0].getChildNodes();
 			for (int i = 0; i < relazioniList.getLength(); i++) {
 				Node relazioneNode = relazioniList.item(i);
 				if (relazioneNode.getNodeType() == Node.ELEMENT_NODE) {
@@ -183,12 +186,13 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 	private boolean setDOMRelazioni(Relazione[] relazioni) {
 
 		Document doc = documentManager.getDocumentAsDom();
-		Node ciclodivitaNode = doc.getElementsByTagName("ciclodivita").item(0);
+		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
+		Node ciclodivitaNode = UtilDom.getElementsByTagName(doc,activeMeta,"ciclodivita")[0];
 		
 		boolean missingciclodivita = false;
 		
 		if (ciclodivitaNode==null){
-			ciclodivitaNode = doc.createElement("ciclodivita");
+			ciclodivitaNode = utilRulesManager.getNodeTemplate("ciclodivita");
 			missingciclodivita = true;
 		}
 		
@@ -215,15 +219,14 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 		if(relazioniNode.getChildNodes().getLength()==0)
 			relazioniNode = utilRulesManager.getNodeTemplate("relazioni");
 
-		NodeList oldTag = doc.getElementsByTagName("relazioni");
-		if (oldTag.getLength() > 0) // c'era gia' un nodo relazioni
-			ciclodivitaNode.replaceChild(relazioniNode, oldTag.item(0));
+		Node[] oldTags = UtilDom.getElementsByTagName(doc,activeMeta,"relazioni");
+		if (oldTags.length > 0) // c'era gia' un nodo relazioni
+			ciclodivitaNode.replaceChild(relazioniNode, oldTags[0]);
 		else 
 			utilRulesManager.orderedInsertChild(ciclodivitaNode,relazioniNode);
-		
-		
+				
 		if(missingciclodivita && relazioni.length>0){
-			Node metaNode = doc.getElementsByTagName("meta").item(0);
+			Node metaNode = UtilDom.getElementsByTagName(doc,activeMeta,"meta")[0];
 			utilRulesManager.orderedInsertChild(metaNode,ciclodivitaNode);
 		}
 		
@@ -233,14 +236,15 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 	
 	public Evento[] getEventi() {
 		Document doc = documentManager.getDocumentAsDom();
-		NodeList eventiList = doc.getElementsByTagName("evento");
+		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
+		Node[] eventiList = UtilDom.getElementsByTagName(doc,activeMeta,"evento");
 		Vector eventiVect = new Vector();
 		String id, data, tipo;
 		Relazione fonte;
 		
 
-		for (int i = 0; i < eventiList.getLength();i++) {
-			Node eventoNode = eventiList.item(i);
+		for (int i = 0; i < eventiList.length;i++) {
+			Node eventoNode = eventiList[i];
 			id = eventoNode.getAttributes().getNamedItem("id") != null ? eventoNode.getAttributes().getNamedItem("id").getNodeValue() : null;
 			data = eventoNode.getAttributes().getNamedItem("data") != null ? eventoNode.getAttributes().getNamedItem("data").getNodeValue() : null;
 			tipo = eventoNode.getAttributes().getNamedItem("tipo") != null ? eventoNode.getAttributes().getNamedItem("tipo").getNodeValue() : null;
@@ -259,10 +263,11 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 	public String[] getEventiOnVigenza() {
 		Vector totali=new Vector();
 		Document doc = documentManager.getDocumentAsDom();
+		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
 		
-		NodeList lista = doc.getElementsByTagName("*");
-		for(int i=0; i<lista.getLength();i++){
-			NamedNodeMap attributo=lista.item(i).getAttributes();
+		Node[] lista = UtilDom.getElementsByTagName(doc,activeMeta,"*");
+		for(int i=0; i<lista.length;i++){
+			NamedNodeMap attributo=lista[i].getAttributes();
 			Node inizio=attributo.getNamedItem("iniziovigore");
 			Node fine=attributo.getNamedItem("finevigore");
 		
@@ -301,7 +306,10 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 	private boolean setDOMEventi(Evento[] eventi) {
 
 		Document doc = documentManager.getDocumentAsDom();
-		Node ciclodivitaNode = doc.getElementsByTagName("ciclodivita").item(0);
+		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
+		Node[] ciclodivitaNodes = UtilDom.getElementsByTagName(doc,activeMeta,"ciclodivita");
+		Node ciclodivitaNode=ciclodivitaNodes.length>0?ciclodivitaNodes[0]:null;
+		
 
 		boolean missingciclodivita = false;
 		
@@ -311,19 +319,17 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 			missingciclodivita = true;
 		}
 		
-		removeTagByName("eventi");
+		removeMetaByName("eventi",node);
 		Element eventiTag = doc.createElement("eventi");
 		for (int i = 0; i < eventi.length; i++) {
 				Element eventoTag = doc.createElement("evento");
 				UtilDom.setIdAttribute(eventoTag, eventi[i].getId());
 				UtilDom.setAttributeValue(eventoTag, "data", eventi[i].getData());
 				if(eventi[i].getFonte().getTagTipoRelazione().equals("originale")){
-					Node tag=null;
-					Node activeMeta = nirUtilDom.findActiveMeta(doc, selectionManager.getActiveNode());
-					tag= UtilDom.findRecursiveChild(activeMeta,"entratainvigore");//doc.getElementsByTagName("entratainvigore").item(0);
+					Node tag=UtilDom.findRecursiveChild(activeMeta,"entratainvigore");//doc.getElementsByTagName("entratainvigore").item(0);
 					if(tag==null){
 						tag = utilRulesManager.getNodeTemplate("entratainvigore");
-						Node descrNode= doc.getElementsByTagName("descrittori").item(0);
+						Node descrNode= UtilDom.findRecursiveChild(activeMeta,"descrittori");
 						utilRulesManager.orderedInsertChild(descrNode,tag);
 					}
 					
@@ -340,7 +346,7 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 		if (eventi.length > 0)
 		  utilRulesManager.orderedInsertChild(ciclodivitaNode,eventiTag);
 		if(missingciclodivita && eventi.length>0){
-			Node metaNode = doc.getElementsByTagName("meta").item(0);
+			Node metaNode = UtilDom.getElementsByTagName(doc,activeMeta,"meta")[0];
 			utilRulesManager.orderedInsertChild(metaNode,ciclodivitaNode);
 		}
 		
@@ -373,32 +379,34 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 	/**
 	 * Rimuove i tag con un determinato nome
 	 */
-	private void removeTagByName(String nome) {
+	private void removeMetaByName(String nome, Node node) {
 		Document doc = documentManager.getDocumentAsDom();
-		NodeList list;
-		int listLen;
+		Node toRemove;
+		
+		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
+	
 		do {
-			list = doc.getElementsByTagName(nome);
-			listLen = list.getLength();
-			if (listLen > 0) {
-				Node currNode = list.item(0);
-				currNode.getParentNode().removeChild(currNode);
+			toRemove = UtilDom.findRecursiveChild(activeMeta,nome); 
+			if (toRemove != null) {
+				toRemove.getParentNode().removeChild(toRemove);
 			}
-		} while (listLen > 0);
+		} while (toRemove != null);
 	}
+
 
 	public VigenzaEntity[] getVigenze() {
 		
 		Vector vigenze_totali=new Vector();
 		Vector totali=new Vector();
 		Document doc = documentManager.getDocumentAsDom();
+		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
 		//caricamento nodi con attributi di vigenza
-		NodeList lista = doc.getElementsByTagName("*");
-		for(int i=0; i<lista.getLength();i++){
-			if(lista.item(i).getAttributes()!=null){
-				if(lista.item(i).getAttributes().getNamedItem("iniziovigore")!=null){
+		Node[] lista = UtilDom.getElementsByTagName(doc,activeMeta,"*");
+		for(int i=0; i<lista.length;i++){
+			if(lista[i].getAttributes()!=null){
+				if(lista[i].getAttributes().getNamedItem("iniziovigore")!=null){
 					
-					totali.add(lista.item(i));
+					totali.add(lista[i]);
 				}
 													
 			}
@@ -411,14 +419,14 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 		Node finevig=null;
 		Node status=null;
 		
-		
+		//FIXME: getelementbyid è coerente con gli allegati???
 		
 		for(int i=0; i<totali.size();i++){
-			Node node=(Node)totali.elementAt(i);
+			Node nodo=(Node)totali.elementAt(i);
 				
-			iniziovig=node.getAttributes().getNamedItem("iniziovigore");
-			finevig=node.getAttributes().getNamedItem("finevigore");
-			status=node.getAttributes().getNamedItem("status");			
+			iniziovig=nodo.getAttributes().getNamedItem("iniziovigore");
+			finevig=nodo.getAttributes().getNamedItem("finevigore");
+			status=nodo.getAttributes().getNamedItem("status");			
 				
 			Element evento_ie_Tag = (iniziovig==null?null:doc.getElementById(iniziovig.getNodeValue()));
 			Element evento_fe_Tag = (finevig==null?null:doc.getElementById(finevig.getNodeValue()));
@@ -476,7 +484,7 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 					evento_fe_Tag!=null?evento_fe_Tag.getAttribute("tipo"):null)
 			);
 			
-			vigenze_totali.add(new VigenzaEntity(node, e_iniziovig,
+			vigenze_totali.add(new VigenzaEntity(nodo, e_iniziovig,
 						e_finevig, status!=null?status.getNodeValue():null,""));
 					
 							
@@ -486,6 +494,11 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 		vigenze_totali.copyInto(vig_trovate);
 		return vig_trovate;
 					
+	}
+
+	public void setActiveNode(Node node) {
+		this.node=node;
+		
 	}
 
 }
