@@ -189,6 +189,8 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 		
 		sottoFormTeseo.setMainComponent(getClass().getResourceAsStream("TeseoBrowser.jfrm"));
 		materie_teseo_listtextfield.setEditor(new MaterieTeseoListTextFieldEditor(sottoFormTeseo));
+		sottoFormTeseo.replaceComponent("editor.meta.teseo.browser.interno", browserForm.getAsComponent());
+		
 		
 	}
 
@@ -444,6 +446,8 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 		
 		public MaterieTeseoListTextFieldEditor(Form form) {		
 			this.form = form;
+			eventManager.addListener(this, BrowserEvent.class);			
+			browserForm.setUrlListener("http://www.senato.it/App/Search/sddl.asp#Cla");
 		}
 		
 		public Component getAsComponent() {
@@ -451,46 +455,33 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 		}
 
 		public Object getElement() {
-			//FIXME: implementare il getelements per ottenerli tutti assieme
-//			String[] materieScelte = new String[terminiSelezionati.size()];
-//			terminiSelezionati.toArray(materieScelte);
-//			return materieScelte[0];
 			String[] temp = new String[terminiSelezionati.size()];
 			for (int i=0; i<terminiSelezionati.size(); i++)
 				temp[i] = (String) terminiSelezionati.get(i);
 			return temp;
-			
-
 		}
 
 		public void setElement(Object object) {	
 			//	infilarci l'elemento selezionato
 			
-			try {
-				browserForm.setUrl(new URL("http://www.senato.it/App/Search/sddl.asp?CmdSelCla=Sistema+TESEO"));
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-			}
+//			try {
+//				browserForm.setUrl(new URL("http://www.senato.it/App/Search/sddl.asp?CmdSelCla=Sistema+TESEO"));
+//			} catch (MalformedURLException e) {
+//				e.printStackTrace();
+//			}
 			terminiSelezionati.add(object.toString());
 		}
 		
 		public void clearFields() {
+
 			if("teseo".equalsIgnoreCase((String) comboVocabolari.getSelectedItem())){
-				try {
-					form.replaceComponent("editor.meta.teseo.browser.interno", browserForm.getAsComponent());
-				} catch (FormException e) {
-					e.printStackTrace();
-				}
-				eventManager.addListener(this, BrowserEvent.class);
-	
-				browserForm.setUrlListener("http://www.senato.it/App/Search/sddl.asp#Cla");
 				
-				logger.debug("Apro pagina iniziale Teseo");
-				try {
-					browserForm.setUrl(new URL("http://www.senato.it/App/Search/sddl.asp?CmdSelCla=Sistema+TESEO"));
-				} catch (MalformedURLException e) {
-					e.printStackTrace();
-				}
+					logger.debug("Apro pagina iniziale Teseo");
+					try {
+						browserForm.setUrl(new URL("http://www.senato.it/App/Search/sddl.asp?CmdSelCla=Sistema+TESEO"));
+					} catch (MalformedURLException e) {
+						e.printStackTrace();
+					}
 			}
 		}
 		
