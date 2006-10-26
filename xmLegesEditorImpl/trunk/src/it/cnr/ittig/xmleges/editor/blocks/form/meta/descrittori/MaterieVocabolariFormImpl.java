@@ -323,7 +323,7 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 	private boolean isteseoOK() {
 		boolean isready="teseo".equalsIgnoreCase((String) comboVocabolari.getSelectedItem());
 //FIXME			isready=isready&&isconnected&&&iswindows
-		return true;
+		return isready;
 	}
 
 	private void addVocabolario(String nome) {
