@@ -30,8 +30,10 @@ import java.net.URL;
 import java.util.EventObject;
 import java.util.Vector;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JList;
 
 public class MaterieVocabolariFormImpl implements MaterieVocabolariForm , Loggable,
@@ -189,7 +191,7 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 		
 		sottoFormTeseo.setMainComponent(getClass().getResourceAsStream("TeseoBrowser.jfrm"));
 		materie_teseo_listtextfield.setEditor(new MaterieTeseoListTextFieldEditor(sottoFormTeseo));
-		sottoFormTeseo.replaceComponent("editor.meta.teseo.browser.interno", browserForm.getAsComponent());
+		
 		
 		
 	}
@@ -266,7 +268,7 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 						v.add(materieVocab[i]);
 					}
 				}
-				if("teseo".equalsIgnoreCase((String) comboVocabolari.getSelectedItem())){
+				if(isteseoOK()){
 					//////////////
 //					String urlData = "http://www.normeinrete.it/stdoc/xmlrae/data_creazione_rae.txt";
 //					URL url = null;
@@ -316,6 +318,12 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 
 		 } 
 		
+	}
+
+	private boolean isteseoOK() {
+		boolean isready="teseo".equalsIgnoreCase((String) comboVocabolari.getSelectedItem());
+//FIXME			isready=isready&&isconnected&&&iswindows
+		return true;
 	}
 
 	private void addVocabolario(String nome) {
@@ -434,20 +442,23 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 	 * Editor per il ListTextField della lista delle materie di teseo
 	 */
 	private class MaterieTeseoListTextFieldEditor implements ListTextFieldEditor, EventManagerListener {
-
-		
 		Form form;
+		
 		Vector terminiSelezionati = new Vector();
-
+		Component tempBrowser = new JLabel("browser");
+		
+		boolean primaVolta = true;
+		
+		DefaultListModel listModel = new DefaultListModel();
+		JList listaSelezionati;
+		
 		public MaterieTeseoListTextFieldEditor() {		
-			
-			
+				
 		}
 		
 		public MaterieTeseoListTextFieldEditor(Form form) {		
 			this.form = form;
-			eventManager.addListener(this, BrowserEvent.class);			
-			browserForm.setUrlListener("http://www.senato.it/App/Search/sddl.asp#Cla");
+			listaSelezionati = (JList) form.getComponentByName("editor.meta.teseo.scelte");
 		}
 		
 		public Component getAsComponent() {
@@ -455,34 +466,51 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 		}
 
 		public Object getElement() {
+			
 			String[] temp = new String[terminiSelezionati.size()];
 			for (int i=0; i<terminiSelezionati.size(); i++)
 				temp[i] = (String) terminiSelezionati.get(i);
 			return temp;
+			
+			//return terminiSelezionati;
 		}
 
-		public void setElement(Object object) {	
-			//	infilarci l'elemento selezionato
+		public void setElement(Object object) {			
 			
-//			try {
-//				browserForm.setUrl(new URL("http://www.senato.it/App/Search/sddl.asp?CmdSelCla=Sistema+TESEO"));
-//			} catch (MalformedURLException e) {
-//				e.printStackTrace();
-//			}
-			terminiSelezionati.add(object.toString());
+			//infilarci l'elemento selezionato
+			
+			try {
+				browserForm.setUrl(new URL("http://www.senato.it/App/Search/sddl.asp?CmdSelCla=Sistema+TESEO"));
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			}
+			
 		}
 		
 		public void clearFields() {
-
-			if("teseo".equalsIgnoreCase((String) comboVocabolari.getSelectedItem())){
-				
-					logger.debug("Apro pagina iniziale Teseo");
-					try {
-						browserForm.setUrl(new URL("http://www.senato.it/App/Search/sddl.asp?CmdSelCla=Sistema+TESEO"));
-					} catch (MalformedURLException e) {
-						e.printStackTrace();
-					}
+			
+			if (primaVolta) { 
+				try {
+					form.replaceComponent("editor.meta.teseo.browser.interno", browserForm.getAsComponent());				
+				} catch (FormException e) {
+					e.printStackTrace();
+				}
+				eventManager.addListener(this, BrowserEvent.class);
+				browserForm.setUrlListener("http://www.senato.it/App/Search/sddl.asp#Cla");
 			}
+			else {
+				terminiSelezionati.clear();
+				listModel.clear();
+			}
+
+//			if (browserForm.getUrl()!=null && browserForm.getUrl().equals("http://www.senato.it/App/Search/sddl.asp?CmdSelCla=Sistema+TESEO")) {
+				logger.debug("Apro pagina iniziale Teseo");
+				try {
+					browserForm.setUrl(new URL("http://www.senato.it/App/Search/sddl.asp?CmdSelCla=Sistema+TESEO"));
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+				}
+//			}	
 		}
 		
 		private void estraiSelezionati(String content) {
@@ -502,7 +530,9 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 					content = content.substring(content.indexOf("<"), content.length());
 				}
 
-				((JList) form.getComponentByName("editor.meta.teseo.scelte")).setListData(terminiSelezionati);
+				//((JList) form.getComponentByName("editor.meta.teseo.scelte")).setListData(terminiSelezionati);
+				listaSelezionati.setListData(terminiSelezionati);
+				
 			} catch (StringIndexOutOfBoundsException e) {
 				logger.error("Errore nel parser del Teseo");
 			}							
@@ -518,10 +548,14 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 		}
 
 		public String getErrorMessage() {			
-			return "--messaggio di errore--";
+			return "";
 		}
 		public Dimension getPreferredSize() {
-			return new Dimension(800, 600);
+			if (primaVolta) {
+				primaVolta = false;
+				return new Dimension(800, 600);
+			}	
+			return null;
 		}
 
 		public void manageEvent(EventObject event) {
@@ -533,6 +567,104 @@ Serviceable, Initializable, ActionListener, FormVerifier {
 				estraiSelezionati((String) e.getSource());
 			}	
 		}
+		
+//		Form form;
+//		Vector terminiSelezionati = new Vector();
+//
+//		public MaterieTeseoListTextFieldEditor() {		
+//			
+//			
+//		}
+//		
+//		public MaterieTeseoListTextFieldEditor(Form form) {		
+//			this.form = form;
+//			eventManager.addListener(this, BrowserEvent.class);			
+//			browserForm.setUrlListener("http://www.senato.it/App/Search/sddl.asp#Cla");
+//		}
+//		
+//		public Component getAsComponent() {
+//			return form.getAsComponent();
+//		}
+//
+//		public Object getElement() {
+//			String[] temp = new String[terminiSelezionati.size()];
+//			for (int i=0; i<terminiSelezionati.size(); i++)
+//				temp[i] = (String) terminiSelezionati.get(i);
+//			return temp;
+//		}
+//
+//		public void setElement(Object object) {	
+//			//	infilarci l'elemento selezionato
+//			
+////			try {
+////				browserForm.setUrl(new URL("http://www.senato.it/App/Search/sddl.asp?CmdSelCla=Sistema+TESEO"));
+////			} catch (MalformedURLException e) {
+////				e.printStackTrace();
+////			}
+//			terminiSelezionati.add(object.toString());
+//		}
+//		
+//		public void clearFields() {
+//
+//			if("teseo".equalsIgnoreCase((String) comboVocabolari.getSelectedItem())){
+//				
+//					logger.debug("Apro pagina iniziale Teseo");
+//					try {
+//						browserForm.setUrl(new URL("http://www.senato.it/App/Search/sddl.asp?CmdSelCla=Sistema+TESEO"));
+//					} catch (MalformedURLException e) {
+//						e.printStackTrace();
+//					}
+//			}
+//		}
+//		
+//		private void estraiSelezionati(String content) {
+//
+//			// Estraggo i termini selezionati dall'HTML			
+//			try {
+//				// Mi avvicino alla zona della selezione in più passi (migliorabile)
+//				content = content.substring(content.indexOf("almeno un termine"), content.length());
+//				content = content.substring(content.indexOf("Sistema TESEO"),content.length());
+//				content = content.substring(content.indexOf("checkSubmit(event)"), content.length());
+//				// Taglio fino a qui
+//				content = content.substring(0, content.indexOf("Cerca nella classificazione"));
+//				while (content.indexOf("value") != -1) {
+//					content = content.substring(content.indexOf("value"), content.length());
+//					content = content.substring(content.indexOf(">"), content.length());
+//					terminiSelezionati.addElement(content.substring(1, content.indexOf("<")));
+//					content = content.substring(content.indexOf("<"), content.length());
+//				}
+//
+//				((JList) form.getComponentByName("editor.meta.teseo.scelte")).setListData(terminiSelezionati);
+//			} catch (StringIndexOutOfBoundsException e) {
+//				logger.error("Errore nel parser del Teseo");
+//			}							
+//			try {
+//				browserForm.setUrl(new URL("http://www.senato.it/App/Search/sddl.asp?CmdSelCla=Sistema+TESEO"));
+//			} catch (MalformedURLException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//
+//		public boolean checkData() {
+//			return true;
+//		}
+//
+//		public String getErrorMessage() {			
+//			return "--messaggio di errore--";
+//		}
+//		public Dimension getPreferredSize() {
+//			return new Dimension(800, 600);
+//		}
+//
+//		public void manageEvent(EventObject event) {
+//			
+//			BrowserEvent e = (BrowserEvent) event;
+//			if (e.isUrlDownload()) {
+//
+//				logger.debug("Selezione da browser confermata");
+//				estraiSelezionati((String) e.getSource());
+//			}	
+//		}
 	}
 	
 
