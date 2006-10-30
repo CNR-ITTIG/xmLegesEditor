@@ -6,6 +6,8 @@ import it.cnr.ittig.xmleges.core.services.frame.FindIterator;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Element;
 
+import org.w3c.dom.Node;
+
 /**
  * Classe per cercare e sostituire il testo.
  * <p>
@@ -74,7 +76,18 @@ public class XsltFindIterator implements FindIterator {
 				if (pos == -1)
 					lastPos = e;
 				else {
+					Element foundElem = pane.getHTMLDocument().getCharacterElement(s+pos);
+					String id = pane.getElementId(foundElem);
+					Node foundNode = pane.getXsltMapper().getDomById(id);
+					
+					// il selectText prima serve per mantenere l'allineamento fra testo selezionato e
+					// nodo selezionato (altrimenti sfalsati)
+					// quello sotto per garantire un pane.getSelectedText!=null e abilitare il replace
+					
 					pane.selectText(s + pos, s + pos + toFind.length());
+					pane.selectNode(new Node[] {foundNode});
+					pane.selectText(s + pos, s + pos + toFind.length());
+					
 					lastPos = s + pos + toFind.length();
 				}
 				if (lastLeaf == leaf) {
