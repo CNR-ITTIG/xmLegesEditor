@@ -300,18 +300,10 @@ public class ListTextFieldImpl implements MouseListener, ListTextField, ListSele
 					if (element.getClass().isArray()) {
 						String[] listaElementi = new String[((String[]) element).length];
 						for (int i=0; i<listaElementi.length; i++)
-							listaElementi[i]=((String[]) element)[i];
-						for (int i=0; i<listaElementi.length; i++) {
-							int selectedElement = list.getSelectedIndex();
-							if (selectedElement == -1) {
-								listModel.addElement(listaElementi[i]);
-								// FIXME  Tommaso: aggiunto per selezionare l'elemento inserito
-								setSelectedValue(element);
-							} else {
-								listModel.insertElementAt(listaElementi[i], selectedElement + 1);
-								list.setSelectedIndex(selectedElement + 1);
-							}
-						}
+							listaElementi[i]=((String[]) element)[i];		
+						for (int i=0; i<listaElementi.length; i++) 
+							listModel.addElement(listaElementi[i]);
+						setSelectedValue(listModel.get(listModel.size()));
 					}
 					else { 					
 						int selectedElement = list.getSelectedIndex();
@@ -361,9 +353,26 @@ public class ListTextFieldImpl implements MouseListener, ListTextField, ListSele
 
 					// Se ? stato restituito un elemento valido, aggiorna la lista
 					if (element != null) {
-						listModel.remove(selectedElement);
-						listModel.add(selectedElement, element);
-						list.setSelectedIndex(selectedElement);
+						//GERARDO: gestisco il caso della restituzione delle materie del teseo
+						if (element.getClass().isArray()) {
+							String[] listaElementi = new String[((String[]) element).length];
+							for (int i=0; i<listaElementi.length; i++)
+								listaElementi[i]=((String[]) element)[i];
+							for (int i=0; i<listaElementi.length; i++) { 
+								if (i==0) {
+									listModel.remove(selectedElement);
+									listModel.add(selectedElement, listaElementi[i]);	
+								}	
+								else 
+									listModel.addElement(listaElementi[i]);
+							}	
+							setSelectedValue(listModel.get(listModel.size()));
+						}
+						else { 					
+							listModel.remove(selectedElement);
+							listModel.add(selectedElement, element);
+							list.setSelectedIndex(selectedElement);
+						}
 					}
 				}
 			}
