@@ -60,7 +60,7 @@ Serviceable, Initializable, ActionListener {
 //	Form ListTextFile del browser Teseo
 //	Teseo.jfrm
 	Form formMaterieTeseo;
-	JList listaMaterieTeseo;
+	
 	ListTextField materie_teseo_listtextfield;
 	
 			
@@ -113,9 +113,10 @@ Serviceable, Initializable, ActionListener {
 		return vocabolari;
 	}
 	public void setVocabolari(Vocabolario[] vocabolari) {
-		if (vocabolari != null) {
-			this.vocabolari = vocabolari;
-			comboVocabolari.removeAllItems();
+		this.vocabolari = vocabolari;
+		comboVocabolari.removeAllItems();
+		listaMaterieSelectedVocab.setListData(new Vector());
+		if (vocabolari != null) {			
 			for(int i=0;i<vocabolari.length;i++){
 				comboVocabolari.addItem(vocabolari[i].getNome());
 				setMaterieVocab(vocabolari[i].getMaterie(),vocabolari[i].getNome());
