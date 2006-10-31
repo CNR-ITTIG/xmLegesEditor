@@ -557,7 +557,7 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 		String sopstr = "le parole", insstr = "le parole", dopostr = "le parole";
 		String sopsopstr = " sono soppresse ", insinsstr = " sono inserite ";
 		String soststr = " sono sostituite con ";
-		String vA = "?", vC = "?"; // Simbolo di virgolette Aperte e Chiuse
+		String vA = "«", vC = "»"; // Simbolo di virgolette Aperte e Chiuse
 		Node newNode = null;
 
 		// logger.debug("t: " + t + " mod: " + mod + " rif: "+rif+" pos: "+pos+"
@@ -571,12 +571,12 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 		ins = ins.trim();
 		if (sop.indexOf(" ") == -1) {
 			sopstr = "la parola";
-			sopsopstr = " ? soppressa ";
-			soststr = " ? sostituita con ";
+			sopsopstr = " è soppressa ";
+			soststr = " è sostituita con ";
 		}
 		if (ins.indexOf(" ") == -1) {
 			insstr = "la parola";
-			insinsstr = " ? inserita ";
+			insinsstr = " è inserita ";
 		}
 		if (dopo.indexOf(" ") == -1)
 			dopostr = "la parola";
@@ -649,13 +649,13 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 				tipostr = "lettera";
 			}
 			if (mod == 0) { // soppresso
-				str1 = part + rif + " ? soppresso.";
+				str1 = part + rif + " è soppresso.";
 				if (t == 4)
-					str1 = part + rif + " ? soppressa.";
+					str1 = part + rif + " è soppressa.";
 			}
 			if (mod == 1) { // inserito
 				if (pos == 0) {
-					// Non sempre ? corretto mettere "all'inizio della
+					// Non sempre è corretto mettere "all'inizio della
 					// partizione" ecc...?!
 					if (t == 1)
 						cont = "dell'" + doporif;
@@ -663,28 +663,28 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 						cont = "del " + doporif;
 					if (t == 3)
 						cont = "dell'articolato";
-					str1 = "All'inizio " + cont + " ? inserito il seguente "/*
+					str1 = "All'inizio " + cont + " è inserito il seguente "/*
 																			 * +
 																			 * tipostr
 																			 */
 							+ ": " + vA;
 					if (t == 4)
-						str1 = "Nell'" + doporif + " ? inserita la seguente lettera: " + vA;
+						str1 = "Nell'" + doporif + " è inserita la seguente lettera: " + vA;
 				}
 				if (pos == 1) {
-					str1 = "Dopo " + part + doporif + " ? inserito il seguente "/*
+					str1 = "Dopo " + part + doporif + " è inserito il seguente "/*
 																				 * +
 																				 * tipostr
 																				 */+ ": " + vA;
 					if (t == 4)
-						str1 = "Dopo " + part + doporif + " ? inserita la seguente lettera: " + vA;
+						str1 = "Dopo " + part + doporif + " è inserita la seguente lettera: " + vA;
 				}
 			}
 			if (mod == 2) { // sostituito
-				str1 = part + rif + " ? sostituito dal seguente "/* + tipostr */
+				str1 = part + rif + " è sostituito dal seguente "/* + tipostr */
 						+ ": " + vA;
 				if (t == 4)
-					str1 = part + rif + " ? sostituita dalla seguente lettera: " + vA;
+					str1 = part + rif + " è sostituita dalla seguente lettera: " + vA;
 			}
 			// Maiuscola all'inizio di ogni comma dell'emendamento
 			String str1a = str1.trim().substring(0, 1);
@@ -696,7 +696,7 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 	}
 
 	/*
-	 * CASO PAROLE (ovvero <virgolette tipo="parole"> ) Verifica se ? possibile
+	 * CASO PAROLE (ovvero <virgolette tipo="parole"> ) Verifica se è possibile
 	 * costruire un nodo 'comma' che rappresenti la modifica nel nuovo
 	 * documento. In caso affermativo restituisci il nodo comma (con 'mod' ed
 	 * eventuali 'virgolette').
@@ -708,8 +708,8 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 		// se
 		// il
 		// primo
-		// ?
-		// vuoto?
+		// è
+		// vuotoè
 		Node newCorpo = UtilDom.findDirectChild(newComma, "corpo");
 		Node newMod = utilRulesManager.getNodeTemplate(newDoc, "mod");
 		Node newVirg = null;
@@ -756,7 +756,7 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 	}
 
 	/*
-	 * CASO PARTIZIONI (ovvero <virgolette tipo="struttura"> ) Verifica se ?
+	 * CASO PARTIZIONI (ovvero <virgolette tipo="struttura"> ) Verifica se è
 	 * possibile costruire un nodo 'comma' che rappresenti la modifica nel nuovo
 	 * documento. In caso affermativo restituisci il nodo comma (con 'mod' ed
 	 * eventuali 'virgolette' e i nodi/struttura sottostanti).
@@ -768,7 +768,7 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 		// se
 		// il
 		// primo
-		// ?
+		// è
 		// vuoto?
 		Node newCorpo = UtilDom.findDirectChild(newComma, "corpo");
 		Node newMod = utilRulesManager.getNodeTemplate(newDoc, "mod");
@@ -802,7 +802,7 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 					newMod.appendChild(newVirg);
 				if (dtdRulesManager.queryCanAppend(newVirg, node))
 					newVirg.appendChild(node);
-				txt = newDoc.createTextNode("?.");
+				txt = newDoc.createTextNode("».");
 				if (dtdRulesManager.queryCanAppend(newMod, txt))
 					newMod.appendChild(txt);
 			} catch (DtdRulesManagerException ex) {
@@ -926,7 +926,7 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 			// Analizza solo nodi di tipo Element:
 			if (node.getNodeType() != 1)
 				continue;
-			// Analizza solo nodi in cui ? presente l'attributo 'status':
+			// Analizza solo nodi in cui è presente l'attributo 'status':
 			if (((Element) node).hasAttribute("status") == false)
 				continue;
 			status = ((Element) node).getAttribute("status"); // Valore
