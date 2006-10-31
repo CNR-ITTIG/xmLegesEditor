@@ -79,6 +79,10 @@ public class FindReplaceActionImpl implements FindReplaceAction, EventManagerLis
 
 	FindAction findAction = new FindAction();
 
+	FindNextAction findNextAction = new FindNextAction();
+
+	ReplaceAction replaceAction = new ReplaceAction();
+
 	BtnFindAction btnFindAction = new BtnFindAction();
 
 	BtnReplaceAction btnReplaceAction = new BtnReplaceAction();
@@ -110,6 +114,8 @@ public class FindReplaceActionImpl implements FindReplaceAction, EventManagerLis
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws java.lang.Exception {
 		actionManager.registerAction("edit.find", findAction);
+		actionManager.registerAction("edit.findnext", findNextAction);
+		actionManager.registerAction("edit.replace", replaceAction);
 		eventManager.addListener(this, PaneActivatedEvent.class);
 		eventManager.addListener(this, DocumentClosedEvent.class);
 		eventManager.addListener(this, PaneStatusChangedEvent.class);
@@ -199,8 +205,12 @@ public class FindReplaceActionImpl implements FindReplaceAction, EventManagerLis
 	protected void enableActions(Pane pane) {
 		if (pane == null) {
 			findAction.setEnabled(false);
+			findNextAction.setEnabled(false);
+			replaceAction.setEnabled(false);
 		} else {
 			findAction.setEnabled(activePane.canFind());
+			findNextAction.setEnabled(activePane.canFind());
+			replaceAction.setEnabled(activePane.canFind() && canReplace);
 			btnFindAction.setEnabled( find.getText().length() > 0);   							  // hasNext &&
 			btnReplaceAction.setEnabled(find.getText().length() > 0 && canReplace);               // hasNext &&   
 			btnReplaceAllAction.setEnabled(find.getText().length() > 0 && canReplace);            // hasNext &&
@@ -217,6 +227,17 @@ public class FindReplaceActionImpl implements FindReplaceAction, EventManagerLis
 		}
 	}
 
+	protected class FindNextAction extends AbstractAction {
+		public void actionPerformed(ActionEvent e) {
+			doFindNext();
+		}
+	}
+
+	protected class ReplaceAction extends AbstractAction {
+		public void actionPerformed(ActionEvent e) {
+			doReplace();
+		}
+	}
 
 	/**
 	 * Azione su pressione del tasto <code>find</code> della form.
