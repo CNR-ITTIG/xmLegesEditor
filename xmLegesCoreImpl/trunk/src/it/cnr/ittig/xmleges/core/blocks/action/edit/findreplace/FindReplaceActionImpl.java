@@ -18,6 +18,7 @@ import it.cnr.ittig.xmleges.core.services.frame.Pane;
 import it.cnr.ittig.xmleges.core.services.frame.PaneActivatedEvent;
 import it.cnr.ittig.xmleges.core.services.frame.PaneEvent;
 import it.cnr.ittig.xmleges.core.services.frame.PaneStatusChangedEvent;
+import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 
 import java.awt.event.ActionEvent;
 import java.util.EventObject;
@@ -71,14 +72,12 @@ public class FindReplaceActionImpl implements FindReplaceAction, EventManagerLis
 	ActionManager actionManager;
 
 	EventManager eventManager;
+	
+	UtilMsg utilMsg;
 
 	Frame frame;
 
 	FindAction findAction = new FindAction();
-
-	FindNextAction findNextAction = new FindNextAction();
-
-	ReplaceAction replaceAction = new ReplaceAction();
 
 	BtnFindAction btnFindAction = new BtnFindAction();
 
@@ -105,13 +104,12 @@ public class FindReplaceActionImpl implements FindReplaceAction, EventManagerLis
 		actionManager = (ActionManager) serviceManager.lookup(ActionManager.class);
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 		form = (Form) serviceManager.lookup(Form.class);
+		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws java.lang.Exception {
 		actionManager.registerAction("edit.find", findAction);
-		actionManager.registerAction("edit.findnext", findNextAction);
-		actionManager.registerAction("edit.replace", replaceAction);
 		eventManager.addListener(this, PaneActivatedEvent.class);
 		eventManager.addListener(this, DocumentClosedEvent.class);
 		eventManager.addListener(this, PaneStatusChangedEvent.class);
@@ -130,9 +128,15 @@ public class FindReplaceActionImpl implements FindReplaceAction, EventManagerLis
 		btn.setAction(btnReplaceAction);
 		btn = (AbstractButton) form.getComponentByName("action.edit.findreplace.btn.replaceall");
 		btn.setAction(btnReplaceAllAction);
+		clearFields();
 		enableActions(null);
 	}
 
+	private void clearFields(){
+		find.setText("");
+		replace.setText("");
+	}
+	
 	// ///////////////////////////////////////// EditFindReplaceAction Interface
 	String toFind = null;
 
@@ -160,8 +164,13 @@ public class FindReplaceActionImpl implements FindReplaceAction, EventManagerLis
 		canReplace = it.canReplace(replace.getText());
 		enableActions(activePane);
 		if (!hasNext) {
-			findAction.setEnabled(false);
-			btnFindAction.setEnabled(false);
+			if(!utilMsg.msgYesNo("action.edit.findreplace.msg.endofdocument")){
+				btnFindAction.setEnabled(false);
+				btnReplaceAction.setEnabled(false);
+				btnReplaceAllAction.setEnabled(false);
+			}
+		//	findAction.setEnabled(false);
+		//	btnFindAction.setEnabled(false);
 		}
 	}
 
@@ -190,15 +199,11 @@ public class FindReplaceActionImpl implements FindReplaceAction, EventManagerLis
 	protected void enableActions(Pane pane) {
 		if (pane == null) {
 			findAction.setEnabled(false);
-			findNextAction.setEnabled(false);
-			replaceAction.setEnabled(false);
 		} else {
 			findAction.setEnabled(activePane.canFind());
-			findNextAction.setEnabled(activePane.canFind() && hasNext);
-			replaceAction.setEnabled(activePane.canFind() && hasNext);
-			btnFindAction.setEnabled(hasNext && find.getText().length() > 0);
-			btnReplaceAction.setEnabled(hasNext && canReplace);
-			btnReplaceAllAction.setEnabled(hasNext && canReplace);
+			btnFindAction.setEnabled( find.getText().length() > 0);   							  // hasNext &&
+			btnReplaceAction.setEnabled(find.getText().length() > 0 && canReplace);               // hasNext &&   
+			btnReplaceAllAction.setEnabled(find.getText().length() > 0 && canReplace);            // hasNext &&
 		}
 	}
 
@@ -212,17 +217,6 @@ public class FindReplaceActionImpl implements FindReplaceAction, EventManagerLis
 		}
 	}
 
-	protected class FindNextAction extends AbstractAction {
-		public void actionPerformed(ActionEvent e) {
-			doFindNext();
-		}
-	}
-
-	protected class ReplaceAction extends AbstractAction {
-		public void actionPerformed(ActionEvent e) {
-			doReplace();
-		}
-	}
 
 	/**
 	 * Azione su pressione del tasto <code>find</code> della form.
@@ -266,5 +260,7 @@ public class FindReplaceActionImpl implements FindReplaceAction, EventManagerLis
 	// /////////////////////////////////////////////// CaretListener Interface
 	public void caretUpdate(CaretEvent e) {
 		btnFindAction.setEnabled(find.getText().length() > 0);
+		btnReplaceAction.setEnabled(find.getText().length() > 0);
+		btnReplaceAllAction.setEnabled(find.getText().length() > 0);
 	}
 }
