@@ -59,8 +59,8 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 	private boolean setDOMInfodoc(Infodoc infodoc) {
 		Document doc = documentManager.getDocumentAsDom();
 		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
-		Node[] inquadramentoNodes = UtilDom.getElementsByTagName(doc,activeMeta,"inquadramento");
-		Node inquadramentoNode=inquadramentoNodes.length>0?inquadramentoNodes[0]:null;
+		Node inquadramentoNode = UtilDom.findRecursiveChild(activeMeta,"inquadramento");
+		
 		boolean missingInquadramento = false;
 		
 		if (inquadramentoNode==null){
@@ -80,25 +80,19 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 			
 		Node infodocNode = (Node)infodoc_element;
 		
-		Node[] oldTags = UtilDom.getElementsByTagName(doc,activeMeta,"infodoc");
-		if (oldTags.length > 0) // c'era gia' un nodo infodoc
-			inquadramentoNode.replaceChild(infodocNode, oldTags[0]);
+		Node oldTag = UtilDom.findRecursiveChild(activeMeta,"infodoc");
+		if (oldTag!=null) // c'era gia' un nodo infodoc
+			inquadramentoNode.replaceChild(infodocNode, oldTag);
 		else 
 			utilRulesManager.orderedInsertChild(inquadramentoNode,infodocNode);
 		
 		
-		if(missingInquadramento){
-			Node metaNode = UtilDom.getElementsByTagName(doc,activeMeta,"meta")[0];
-			utilRulesManager.orderedInsertChild(metaNode,inquadramentoNode);
+		if(missingInquadramento){			
+			utilRulesManager.orderedInsertChild(activeMeta,inquadramentoNode);
 		}
 		
 		return true;
 
-
-//FIXME: chiedere a tommaso la differenza fra findRecursiveChild e getElementsByTagName
-//inquadramento non scrive piu i dati sul dom!!!!da finire di correggere
-//FIXME: se metto il getnodetemplate AL POSTO DI DOC.CREATE non funziona piu perche?		
-		
 	}
 
 
@@ -125,8 +119,7 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 		Document doc = documentManager.getDocumentAsDom();
 		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
 		
-		Node[] inquadramentoNodes = UtilDom.getElementsByTagName(doc,activeMeta,"inquadramento");
-		Node inquadramentoNode=inquadramentoNodes.length>0?inquadramentoNodes[0]:null;
+		Node inquadramentoNode = UtilDom.findRecursiveChild(activeMeta,"inquadramento");
 		boolean missingInquadramento = false;
 		
 		if (inquadramentoNode==null){
@@ -136,7 +129,7 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 		
 		Node infomancantiNode = utilRulesManager.getNodeTemplate("infomancanti");
 
-		//////////////////
+		
 		Element infomancanti_element=null;
 		if(infomancanti.getMTitolodoc()!= null && !infomancanti.getMTitolodoc().trim().equals("")){
 			infomancanti_element = (Element) utilRulesManager.getNodeTemplate("mTitolodoc");
@@ -165,15 +158,15 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 			utilRulesManager.orderedInsertChild(infomancantiNode,infomancanti_element);
 		}
 		/////////////////////
-		Node[] oldTags = UtilDom.getElementsByTagName(doc,activeMeta,"infomancanti");
-		if (oldTags.length > 0) // c'era gia' un nodo infomancanti
-			inquadramentoNode.replaceChild(infomancantiNode, oldTags[0]);
+		Node oldTag = UtilDom.findRecursiveChild(activeMeta,"infomancanti");
+		if (oldTag!=null) // c'era gia' un nodo infomancanti
+			inquadramentoNode.replaceChild(infomancantiNode, oldTag);
 		else 
 			utilRulesManager.orderedInsertChild(inquadramentoNode,infomancantiNode);
 		
 		if(missingInquadramento){
-			Node metaNode = UtilDom.getElementsByTagName(doc,activeMeta,"meta")[0];
-			utilRulesManager.orderedInsertChild(metaNode,inquadramentoNode);
+			
+			utilRulesManager.orderedInsertChild(activeMeta,inquadramentoNode);
 		}
 				
 		return true;
@@ -202,8 +195,7 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 	private boolean setDOMOggetto(Oggetto oggetto) {
 		Document doc = documentManager.getDocumentAsDom();
 		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
-		Node[] inquadramentoNodes = UtilDom.getElementsByTagName(doc,activeMeta,"inquadramento");
-		Node inquadramentoNode=inquadramentoNodes.length>0?inquadramentoNodes[0]:null;
+		Node inquadramentoNode = UtilDom.findRecursiveChild(activeMeta,"inquadramento");
 		boolean missingInquadramento = false;
 		
 		if (inquadramentoNode==null){
@@ -235,16 +227,16 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 			utilRulesManager.orderedInsertChild(oggettoNode,oggetto_element);
 		}
 		
-		Node[] oldTags = UtilDom.getElementsByTagName(doc,activeMeta,"oggetto");
-		if (oldTags.length > 0) // c'era gia' un nodo oggetto
-			inquadramentoNode.replaceChild(oggettoNode, oldTags[0]);
+		Node oldTag = UtilDom.findRecursiveChild(activeMeta,"oggetto");
+		if (oldTag!=null) // c'era gia' un nodo oggetto
+			inquadramentoNode.replaceChild(oggettoNode, oldTag);
 		else 
 			utilRulesManager.orderedInsertChild(inquadramentoNode,oggettoNode);
 		
 		
 		if(missingInquadramento){
-			Node metaNode = UtilDom.getElementsByTagName(doc,activeMeta,"meta")[0];
-			utilRulesManager.orderedInsertChild(metaNode,inquadramentoNode);
+			
+			utilRulesManager.orderedInsertChild(activeMeta,inquadramentoNode);
 		}
 		
 		
@@ -279,8 +271,7 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 			
 		Document doc = documentManager.getDocumentAsDom();
 		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
-		Node[] inquadramentoNodes = UtilDom.getElementsByTagName(doc,activeMeta,"inquadramento");
-		Node inquadramentoNode=inquadramentoNodes.length>0?inquadramentoNodes[0]:null;
+		Node inquadramentoNode = UtilDom.findRecursiveChild(activeMeta,"inquadramento");
 		boolean missingInquadramento = false;
 		
 		if (inquadramentoNode==null){
@@ -299,16 +290,16 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 			}
 		}
 		
-		Node[] oldTags = UtilDom.getElementsByTagName(doc,activeMeta,"proponenti");
-		if (oldTags.length > 0) // c'era gia' un nodo proponenti
-			inquadramentoNode.replaceChild(proponentiNode, oldTags[0]);
+		Node oldTag = UtilDom.findRecursiveChild(activeMeta,"proponenti");
+		if (oldTag!=null) // c'era gia' un nodo proponenti
+			inquadramentoNode.replaceChild(proponentiNode, oldTag);
 		else 
 			utilRulesManager.orderedInsertChild(inquadramentoNode,proponentiNode);
 		
 		
 		if(missingInquadramento){
-			Node metaNode = UtilDom.getElementsByTagName(doc,activeMeta,"meta")[0];
-			utilRulesManager.orderedInsertChild(metaNode,inquadramentoNode);
+			
+			utilRulesManager.orderedInsertChild(activeMeta,inquadramentoNode);
 		}
 		
 				
@@ -328,9 +319,9 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 		String fonte=null;
 
 		
-		Node[] infodocList = UtilDom.getElementsByTagName(doc,activeMeta,"infodoc");
-		if (infodocList.length > 0) {
-			Node n = infodocList[0];
+		Node infodocNode = UtilDom.findRecursiveChild(activeMeta,"infodoc");
+		if (infodocNode!=null) {
+			Node n = infodocNode;
 			natura = n.getAttributes().getNamedItem("natura") != null ? n.getAttributes().getNamedItem("natura").getNodeValue() : null;
 			normativa = n.getAttributes().getNamedItem("normativa") != null ? n.getAttributes().getNamedItem("normativa").getNodeValue() : null;
 			funzione = n.getAttributes().getNamedItem("funzione") != null ? n.getAttributes().getNamedItem("funzione").getNodeValue() : null;
@@ -349,10 +340,10 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 		String mNumdoc=null;		
 		String mEmanante=null;
 
-		Node[] infomancList = UtilDom.getElementsByTagName(doc,activeMeta,"infomancanti");
-		if (infomancList.length > 0) {
+		Node infomancNode = UtilDom.findRecursiveChild(activeMeta,"infomancanti");
+		if (infomancNode!=null) {
 			
-			Node n = infomancList[0];
+			Node n = infomancNode;
 			
 			NodeList infomanc_elementList = n.getChildNodes();
 			for (int i = 0; i < infomanc_elementList.getLength();i++) {
@@ -385,10 +376,10 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 		String attivita=null;
 
 
-		Node[] oggettoList = UtilDom.getElementsByTagName(doc,activeMeta,"oggetto");
-		if (oggettoList.length > 0) {
+		Node oggettoNode = UtilDom.findRecursiveChild(activeMeta,"oggetto");
+		if (oggettoNode!=null) {
 			
-			Node n = oggettoList[0];
+			Node n = oggettoNode;
 			
 			NodeList oggetto_elementList = n.getChildNodes();
 			for (int i = 0; i < oggetto_elementList.getLength();i++) {
@@ -418,11 +409,11 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 		Document doc = documentManager.getDocumentAsDom();
 		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
 		Vector proponentiVect = new Vector();
-		Node[] proponentiList = UtilDom.getElementsByTagName(doc,activeMeta,"proponenti");
+		Node proponentiNode = UtilDom.findRecursiveChild(activeMeta,"proponenti");
 		
-		if (proponentiList.length > 0) {
+		if (proponentiNode!=null) {
 					
-			Node n = proponentiList[0];			
+			Node n = proponentiNode;			
 			NodeList proponenti_elementList = n.getChildNodes();
 			for (int i = 0; i < proponenti_elementList.getLength();i++) {
 				String valore=UtilDom.getAttributeValueAsString(proponenti_elementList.item(i),"value");

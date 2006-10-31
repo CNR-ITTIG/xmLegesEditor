@@ -55,12 +55,10 @@ public class MetaCnrImpl implements MetaCnr, Loggable, Serviceable {
 		String strutturaDestinataria=null;
 		String tipo_provvedimento=null;
 		
-		Node[] cnrMetaList = UtilDom.getElementsByTagName(doc,activeMeta,"cnr:meta");
+		Node n = UtilDom.findRecursiveChild(activeMeta,"cnr:meta");
 		
-		if (cnrMetaList.length > 0) {
-			
-			Node n = cnrMetaList[0];
-			
+		if (n!=null) {
+						
 			NodeList cnrMeta_elementList = n.getChildNodes();
 			for (int i = 0; i < cnrMeta_elementList.getLength();i++) {
 				String valore=UtilDom.getAttributeValueAsString(cnrMeta_elementList.item(i),"value");

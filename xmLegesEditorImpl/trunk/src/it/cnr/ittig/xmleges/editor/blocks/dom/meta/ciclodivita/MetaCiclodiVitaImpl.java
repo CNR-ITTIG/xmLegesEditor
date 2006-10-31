@@ -90,9 +90,9 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 		String tag, id, link, effetto_tipoall;
 		Vector relVect = new Vector();
 
-		Node[] relazioni = UtilDom.getElementsByTagName(doc,activeMeta,"relazioni");
-		if (relazioni.length > 0) {
-			NodeList relazioniList = relazioni[0].getChildNodes();
+		Node relazioni = UtilDom.findRecursiveChild(activeMeta,"relazioni");
+		if (relazioni!=null) {
+			NodeList relazioniList = relazioni.getChildNodes();
 			for (int i = 0; i < relazioniList.getLength(); i++) {
 				Node relazioneNode = relazioniList.item(i);
 				if (relazioneNode.getNodeType() == Node.ELEMENT_NODE) {
@@ -187,7 +187,7 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 
 		Document doc = documentManager.getDocumentAsDom();
 		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
-		Node ciclodivitaNode = UtilDom.getElementsByTagName(doc,activeMeta,"ciclodivita")[0];
+		Node ciclodivitaNode = UtilDom.findRecursiveChild(activeMeta,"ciclodivita");
 		
 		boolean missingciclodivita = false;
 		
@@ -219,15 +219,15 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 		if(relazioniNode.getChildNodes().getLength()==0)
 			relazioniNode = utilRulesManager.getNodeTemplate("relazioni");
 
-		Node[] oldTags = UtilDom.getElementsByTagName(doc,activeMeta,"relazioni");
-		if (oldTags.length > 0) // c'era gia' un nodo relazioni
-			ciclodivitaNode.replaceChild(relazioniNode, oldTags[0]);
+		Node oldTag = UtilDom.findRecursiveChild(activeMeta,"relazioni");
+		if (oldTag!=null) // c'era gia' un nodo relazioni
+			ciclodivitaNode.replaceChild(relazioniNode, oldTag);
 		else 
 			utilRulesManager.orderedInsertChild(ciclodivitaNode,relazioniNode);
 				
 		if(missingciclodivita && relazioni.length>0){
-			Node metaNode = UtilDom.getElementsByTagName(doc,activeMeta,"meta")[0];
-			utilRulesManager.orderedInsertChild(metaNode,ciclodivitaNode);
+			
+			utilRulesManager.orderedInsertChild(activeMeta,ciclodivitaNode);
 		}
 		
 		return true;
@@ -307,10 +307,8 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 
 		Document doc = documentManager.getDocumentAsDom();
 		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
-		Node[] ciclodivitaNodes = UtilDom.getElementsByTagName(doc,activeMeta,"ciclodivita");
-		Node ciclodivitaNode=ciclodivitaNodes.length>0?ciclodivitaNodes[0]:null;
+		Node ciclodivitaNode = UtilDom.findRecursiveChild(activeMeta,"ciclodivita");
 		
-
 		boolean missingciclodivita = false;
 		
 		
@@ -346,8 +344,7 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 		if (eventi.length > 0)
 		  utilRulesManager.orderedInsertChild(ciclodivitaNode,eventiTag);
 		if(missingciclodivita && eventi.length>0){
-			Node metaNode = UtilDom.getElementsByTagName(doc,activeMeta,"meta")[0];
-			utilRulesManager.orderedInsertChild(metaNode,ciclodivitaNode);
+			utilRulesManager.orderedInsertChild(activeMeta,ciclodivitaNode);
 		}
 		
 		return true;
@@ -359,6 +356,7 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 
 		Document doc = documentManager.getDocumentAsDom();
 		Node relNode = doc.getElementById(relId);
+		//FIXME: questa ricerca dei nodi relNode non funziona!!immagino..
 		if(relNode != null){
 		    String tag = relNode.getNodeName();
 			String id = relNode.getAttributes().getNamedItem("id") != null ? relNode.getAttributes().getNamedItem("id").getNodeValue() : null;

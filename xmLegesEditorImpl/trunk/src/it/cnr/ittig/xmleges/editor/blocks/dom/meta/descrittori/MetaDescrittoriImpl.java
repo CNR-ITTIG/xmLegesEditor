@@ -243,10 +243,10 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 		
 
 		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
-		Node[] redList = UtilDom.getElementsByTagName(doc,activeMeta,"redazione");
+		Node redNode = UtilDom.findRecursiveChild(activeMeta,"redazione");
 		
-		if (redList.length > 0) {
-			Node n = redList[0];
+		if (redNode!=null) {
+			Node n = redNode;
 			data = n.getAttributes().getNamedItem("norm") != null ? n.getAttributes().getNamedItem("norm").getNodeValue() : null;
 			nome = n.getAttributes().getNamedItem("nome") != null ? n.getAttributes().getNamedItem("nome").getNodeValue() : null;
 			url = n.getAttributes().getNamedItem("url") != null ? n.getAttributes().getNamedItem("url").getNodeValue() : null;
