@@ -4,14 +4,14 @@
 	<DisegnoLegge>
 		<meta>
 			<descrittori>
-				<approvazione norm="" internal_id="" leg="14" tipodoc="DdlMessaggio"/>
+				<approvazione norm="" internal_id="" leg="15" tipodoc="DdlMessaggio"/>
 				<redazione norm="" nome="" url="http://www.senato.it"/>
-				<urn>urn:nir:senato.repubblica:disegno.legge;messaggio:14.legislatura;nnn</urn>
+				<urn>urn:nir:senato.repubblica:disegno.legge;messaggio:15.legislatura;nnn</urn>
 			</descrittori>
 		</meta>
 		<intestazione>
 			<emanante>SENATO DELLA REPUBBLICA</emanante>
-			<legislatura>Legislatura XIV</legislatura>
+			<legislatura>Legislatura XV</legislatura>
 			<tipoDoc>DISEGNO DI LEGGE</tipoDoc>
 			<numDoc/>
 			<h:div style="text-align:center; font:italic">Attesto che il Senato della Repubblica, il <data norm=""/>,</h:div>

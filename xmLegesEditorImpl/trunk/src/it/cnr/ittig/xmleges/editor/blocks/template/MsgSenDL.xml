@@ -7,12 +7,12 @@
 		<pubblicazione norm="" num="" tipo="GU" />
 		<entratainvigore norm="" />
 		<redazione id="red1" nome="" norm="" />
-	    <urn>urn:nir:senato.repubblica:disegno.legge;messaggio:14.legislatura;nnn</urn>
+	    <urn>urn:nir:senato.repubblica:disegno.legge;messaggio:15.legislatura;nnn</urn>
 		</descrittori>
 		</meta>
 		<intestazione>
 			<emanante>SENATO DELLA REPUBBLICA</emanante>
-			<legislatura>XIV</legislatura>
+			<legislatura>XV</legislatura>
 			<numDoc/>
 			<h:div>Attesto che il Senato della Repubblica,
 il {gg mese anno}, ha approvato il seguente disegno di legge, dall' iniziativa del Governo, già approvato dalla Camera dei deputati:

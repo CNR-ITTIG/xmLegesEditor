@@ -4,9 +4,9 @@
 	<DisegnoLegge tipo="modificato">
 		<meta>
 			<descrittori>
-				<approvazione norm="" internal_id="" leg="14" tipodoc="DdlAssemblea"/>
+				<approvazione norm="" internal_id="" leg="15" tipodoc="DdlAssemblea"/>
 				<redazione norm="" nome="" url="http://www.senato.it"/>
-				<urn>urn:nir:senato.repubblica:disegno.legge;assemblea:14.legislatura;nnn</urn>
+				<urn>urn:nir:senato.repubblica:disegno.legge;assemblea:15.legislatura;nnn</urn>
 			</descrittori>
 			<confronto>
 				<sinistra>Testo proposto dalla Commissione</sinistra>
@@ -15,7 +15,7 @@
 		</meta>
 		<intestazione>
 			<emanante>SENATO DELLA REPUBBLICA</emanante>
-			<legislatura>Legislatura XIV</legislatura>
+			<legislatura>Legislatura XV</legislatura>
 			<tipoDoc>DISEGNO DI LEGGE</tipoDoc>
 			<numDoc/>
 			<h:div style="text-align:center; font:italic">

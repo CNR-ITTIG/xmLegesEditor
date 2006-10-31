@@ -4,9 +4,9 @@
 	<DisegnoLegge tipo="modificato">
 		<meta>
 			<descrittori>
-				<approvazione norm="" internal_id="" leg="14" tipodoc="DdlRelazione"/>
+				<approvazione norm="" internal_id="" leg="15" tipodoc="DdlRelazione"/>
 				<redazione norm="" nome="" url="http://www.senato.it"/>
-				<urn>urn:nir:senato.repubblica:disegno.legge;relazione:14.legislatura;num</urn>
+				<urn>urn:nir:senato.repubblica:disegno.legge;relazione:15.legislatura;num</urn>
 			</descrittori>
 			<confronto>
 				<sinistra>Testo d'iniziativa dei senatori / del Governo</sinistra>
@@ -15,7 +15,7 @@
 		</meta>
 		<intestazione>
 			<emanante>SENATO DELLA REPUBBLICA</emanante>
-			<legislatura>Legislatura XIV</legislatura>
+			<legislatura>Legislatura XV</legislatura>
 			<tipoDoc>DISEGNO DI LEGGE</tipoDoc>
 			<numDoc/>
 			<h:p style="text-align:center; font:bold">RELAZIONE DELLA {nn}.a COMMISSIONE PERMANENTE</h:p>
