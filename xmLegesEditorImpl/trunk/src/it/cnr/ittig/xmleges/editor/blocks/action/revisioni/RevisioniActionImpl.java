@@ -238,7 +238,10 @@ public class RevisioniActionImpl implements RevisioniAction, Loggable, EventMana
 			fileNewForm.openForm(dtdName);
 			if (fileNewForm.isOKClicked()) {
 				try {
-					templatefile = template.getNirTemplate(fileNewForm.getSelectedTemplate(), fileNewForm.getSelectedDTD());
+					Properties p = fileNewForm.getSelectedDTD();
+					p.put("ENCODING","<?xml version=\"1.0\" encoding=\""+documentManager.getEncoding()+"\"?>");
+
+					templatefile = template.getNirTemplate(fileNewForm.getSelectedTemplate(), p);
 					documentManager.openSource(templatefile.getAbsolutePath(), true);
 					Document newDoc = documentManager.getDocumentAsDom();
 
