@@ -64,7 +64,10 @@ public class TemplateImpl implements Template, Loggable {
 		String dest = "nuovo.xml";
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-
+	    // FIXME un po' sporco; alcuni template (vedi ddl) richiedono di specificare l'encoding preferito
+		if(props.getProperty("ENCODING")==null)
+			props.put("ENCODING","<?xml version=\"1.0\" encoding=\"iso-8859-15\"?>");
+		
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(baos));
