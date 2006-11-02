@@ -63,7 +63,7 @@ public class LinkActionImpl implements LinkAction, EventManagerListener,  Loggab
 
 	SelectionManager selectionManager;
 
-	LinkAction linkAction;
+	doLinkAction linkAction;
 
 	Node activeNode;
 
@@ -95,7 +95,7 @@ public class LinkActionImpl implements LinkAction, EventManagerListener,  Loggab
 
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws java.lang.Exception {
-		linkAction = new LinkAction();
+		linkAction = new doLinkAction();
 		actionManager.registerAction("editor.link", linkAction);
 		eventManager.addListener(this, SelectionChangedEvent.class);
 		eventManager.addListener(this, DocumentOpenedEvent.class);
@@ -130,7 +130,7 @@ public class LinkActionImpl implements LinkAction, EventManagerListener,  Loggab
 		
 	}
 
-	public class LinkAction extends AbstractAction {
+	public class doLinkAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
 				doChangeLink(); 
 		}
