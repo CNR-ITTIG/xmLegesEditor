@@ -140,7 +140,8 @@ Serviceable, Initializable, ActionListener {
 		materie_listtextfield = (ListTextField) serviceManager.lookup(ListTextField.class);
 		materie_teseo_listtextfield = (ListTextField) serviceManager.lookup(ListTextField.class);
 		sottoFormTeseo = (Form) serviceManager.lookup(Form.class);
-		browserForm = (BrowserForm) serviceManager.lookup(BrowserForm.class);
+		if (isWin())
+		   browserForm = (BrowserForm) serviceManager.lookup(BrowserForm.class);
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 	}
 
@@ -272,7 +273,7 @@ Serviceable, Initializable, ActionListener {
 						v.add(materieVocab[i]);
 					}
 				}
-				if(isteseoOK()){
+				if(isWin() && isteseoOK()){
 					materie_teseo_listtextfield.setListElements(v);
 					formMaterieTeseo.showDialog();
 	
@@ -305,11 +306,16 @@ Serviceable, Initializable, ActionListener {
 		
 	}
 
+	private boolean isWin() {
+		return JdicManager.getPlatform().equals("windows");	    
+	}
+	
 	private boolean isteseoOK() {
 				
-		boolean isready="teseo".equalsIgnoreCase((String) comboVocabolari.getSelectedItem());
-		boolean iswin = JdicManager.getPlatform().equals("windows");
+		if (!"teseo".equalsIgnoreCase((String) comboVocabolari.getSelectedItem()))
+			return false;
 
+		//test connessione
 		JEditorPane editor = new JEditorPane();
 	    try {
 	       editor.setPage("http://www.senato.it/");
@@ -317,8 +323,7 @@ Serviceable, Initializable, ActionListener {
 	    	logger.debug("Connessione assente");
 			return false;
 	    }
-
-		return (isready && iswin);
+		return true;
 	}
 
 	private void addVocabolario(String nome) {
@@ -496,7 +501,7 @@ Serviceable, Initializable, ActionListener {
 
 			// Estraggo i termini selezionati dall'HTML			
 			try {
-				// Mi avvicino alla zona della selezione in più passi (migliorabile)
+				// Mi avvicino alla zona della selezione in piï¿½ passi (migliorabile)
 				content = content.substring(content.indexOf("almeno un termine"), content.length());
 				content = content.substring(content.indexOf("Sistema TESEO"),content.length());
 				content = content.substring(content.indexOf("checkSubmit(event)"), content.length());
