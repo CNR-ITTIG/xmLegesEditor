@@ -18,5 +18,6 @@ set CLASSPATH=%CLASSPATH%;lib/batik.jar
 set CLASSPATH=%CLASSPATH%;lib/avalon-framework-cvs-20020806.jar
 set CLASSPATH=%CLASSPATH%;lib/jfor-0.7.2rc1.jar
 set CLASSPATH=%CLASSPATH%;lib/xsc.jar
+set CLASSPATH=%CLASSPATH%;lib/jdic/jdic.jar
 
 jre\bin\java -Xmx256m it.cnr.ittig.services.manager.Run xmLegesEditor.xml images\editor\xmLegesEditor.png

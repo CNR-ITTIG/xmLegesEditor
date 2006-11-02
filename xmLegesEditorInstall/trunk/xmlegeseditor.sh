@@ -27,6 +27,7 @@ export CLASSPATH=$CLASSPATH:lib/batik.jar
 export CLASSPATH=$CLASSPATH:lib/avalon-framework-cvs-20020806.jar
 export CLASSPATH=$CLASSPATH:lib/jfor-0.7.2rc1.jar
 export CLASSPATH=$CLASSPATH:lib/xsc.jar
+export CLASSPATH=$CLASSPATH:lib/jdic/jdic.jar
 
 
 export LC_ALL=it_IT@euro
