@@ -255,6 +255,6 @@ packages, or other classes whose sole purpose is to implement
 these APIs.
 
 -----------------------------------------------------------------------
-Copyright 2005 Sun Microsystems, Inc., 4150 Network Circle, 
+Copyright 2006 Sun Microsystems, Inc., 4150 Network Circle, 
 Santa Clara, California 95054, U.S.A.  All rights reserved.
 

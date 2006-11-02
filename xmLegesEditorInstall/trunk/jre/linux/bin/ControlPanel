@@ -70,8 +70,8 @@ PRG=$0
 progname=`basename $0`
 os=`uname -s`
 
-PLUGIN_VERSION=1.4.2_10 
-PLUGIN_NODOTVERSION=142_10
+PLUGIN_VERSION=1.4.2_12 
+PLUGIN_NODOTVERSION=142_12
 
 if [ "${os}" = "Linux" ]; then
     case "`uname -m`" in
