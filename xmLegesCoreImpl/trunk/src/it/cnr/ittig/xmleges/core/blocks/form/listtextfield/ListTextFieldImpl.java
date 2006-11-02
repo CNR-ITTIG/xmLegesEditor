@@ -301,8 +301,9 @@ public class ListTextFieldImpl implements MouseListener, ListTextField, ListSele
 						String[] listaElementi = new String[((String[]) element).length];
 						for (int i=0; i<listaElementi.length; i++)
 							listaElementi[i]=((String[]) element)[i];		
-						for (int i=0; i<listaElementi.length; i++) 
-							listModel.addElement(listaElementi[i]);
+						for (int i=0; i<listaElementi.length; i++)
+							if (!listModel.contains(listaElementi[i]))
+								listModel.addElement(listaElementi[i]);
 					}
 					else { 					
 						int selectedElement = list.getSelectedIndex();
@@ -360,10 +361,12 @@ public class ListTextFieldImpl implements MouseListener, ListTextField, ListSele
 							for (int i=0; i<listaElementi.length; i++) { 
 								if (i==0) {
 									listModel.remove(selectedElement);
-									listModel.add(selectedElement, listaElementi[i]);	
+									if (!listModel.contains(listaElementi[i]))
+										listModel.add(selectedElement, listaElementi[i]);	
 								}	
 								else 
-									listModel.addElement(listaElementi[i]);
+									if (!listModel.contains(listaElementi[i]))
+										listModel.addElement(listaElementi[i]);
 							}	
 						}
 						else { 					
