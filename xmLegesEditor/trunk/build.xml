@@ -37,6 +37,11 @@
 			<include name="*.jar" />
 		</fileset>
 	</path>
+	<path id="path-editor-jdic-impl">
+			<fileset dir="${editor-impl}/lib/jdic">
+				<include name="*.jar" />
+			</fileset>
+	</path>
 
 	<patternset id="resources">
 		<include name="**/*.dtd" />
@@ -52,6 +57,7 @@
 		<include name="**/*.png" />
 		<include name="**/*.exe" />
 		<include name="**/*.dll" />
+		<include name="**/*.so" />
 		<include name="**/*.dic" />
 		<include name="**/*.ent" />
 		<include name="**/*.spp" />
@@ -88,6 +94,7 @@
 			<classpath path="${build-core-api}" />
 			<classpath path="${build-editor-api}" />
 			<classpath refid="path-editor-impl" />
+			<classpath refid="path-editor-jdic-impl"/>
 		</javac>
 	</target>
 
