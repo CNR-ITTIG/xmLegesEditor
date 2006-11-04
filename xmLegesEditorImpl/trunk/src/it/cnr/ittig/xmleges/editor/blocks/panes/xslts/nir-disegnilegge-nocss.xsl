@@ -211,16 +211,30 @@
 	" mode="singolo">
 		<tr>
 			<td width="50%" valign="top">
-				<div class="{local-name()}">
-
+ 		 	  <xsl:choose>
+	 	  	   <xsl:when test="@status='soppresso'">
+				  <div class="soppresso">
+  				   <div class="{local-name()}">
 						<xsl:apply-templates select="nir:num">
 							<xsl:with-param name="pos">left</xsl:with-param>
 						</xsl:apply-templates>
 						<xsl:apply-templates select="nir:rubrica | nir:corpo| nir:alinea">
 							<xsl:with-param name="pos">left</xsl:with-param>
 						</xsl:apply-templates>
-
-				</div>
+				   </div>
+				  </div>
+		       </xsl:when>
+   		  	   <xsl:otherwise>
+  				   <div class="{local-name()}">
+						<xsl:apply-templates select="nir:num">
+							<xsl:with-param name="pos">left</xsl:with-param>
+						</xsl:apply-templates>
+						<xsl:apply-templates select="nir:rubrica | nir:corpo| nir:alinea">
+							<xsl:with-param name="pos">left</xsl:with-param>
+						</xsl:apply-templates>
+				   </div> 			  
+ 		       </xsl:otherwise>
+ 		     </xsl:choose>
 			</td>
 		</tr>
 		<xsl:apply-templates mode="singolo"/>
