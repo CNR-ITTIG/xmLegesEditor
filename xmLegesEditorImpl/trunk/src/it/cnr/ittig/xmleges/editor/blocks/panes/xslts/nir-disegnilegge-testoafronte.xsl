@@ -199,7 +199,7 @@
 					<xsl:if test="@status='inserito'">
 						<xsl:attribute name="style">font-weight: bold;</xsl:attribute>
 					</xsl:if>
-					<xsl:if test="not(@status='soppresso')">
+					<xsl:if test="not(@status='inserito')">					
 						<xsl:apply-templates select="nir:num">
 							<xsl:with-param name="pos">right</xsl:with-param>
 						</xsl:apply-templates>
