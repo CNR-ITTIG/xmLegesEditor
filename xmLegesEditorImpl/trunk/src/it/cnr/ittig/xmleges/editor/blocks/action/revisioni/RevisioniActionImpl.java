@@ -296,8 +296,10 @@ public class RevisioniActionImpl implements RevisioniAction, Loggable, EventMana
 		String tipoDoc = oldTipoDoc != null && UtilDom.getText(oldTipoDoc) != null ? UtilDom.getText(oldTipoDoc) : "";
 		String leg = oldLegislatura != null && UtilDom.getText(oldLegislatura) != null ? UtilDom.getText(oldLegislatura) : "";
 
-		Properties dtd_prop = new Properties();
-		dtd_prop.put("DOCTYPE", "<!DOCTYPE NIR SYSTEM \"" + documentManager.getDtdName() + "\">");
+		
+		Properties prop = new Properties();
+		prop.put("DOCTYPE", "<!DOCTYPE NIR SYSTEM \"" + documentManager.getDtdName() + "\">");
+		prop.put("ENCODING","<?xml version=\"1.0\" encoding=\""+documentManager.getEncoding()+"\"?>");
 
 		int reply = 0;
 
@@ -305,9 +307,9 @@ public class RevisioniActionImpl implements RevisioniAction, Loggable, EventMana
 			fileSaveAction.doSave();
 		}
 
-		if (reply != 2) { // Non ? stato premuto Cancel
+		if (reply != 2) { // Non è stato premuto Cancel
 			try {
-				templatefile = template.getNirTemplate("DDLEmendamenti.xml", dtd_prop);
+				templatefile = template.getNirTemplate("DDLEmendamenti.xml", prop);
 				documentManager.openSource(templatefile.getAbsolutePath(), true);
 				Document newDoc = documentManager.getDocumentAsDom();
 				Node[] emendamenti = revisioni.getEmendamenti(oldDoc, newDoc);
