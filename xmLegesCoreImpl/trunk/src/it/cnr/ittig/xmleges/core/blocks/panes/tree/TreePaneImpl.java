@@ -454,7 +454,9 @@ public class TreePaneImpl implements TreePane, EventManagerListener, Loggable, S
 	}
 
 	public boolean canFind() {
-		return documentManager.getRootElement() != null;
+		if(!documentManager.isEmpty())
+		   return documentManager.getRootElement() != null;
+		return false;
 	}
 
 	public FindIterator getFindIterator() {
