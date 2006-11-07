@@ -349,6 +349,27 @@
 			<xsl:apply-templates/>
 		</li>
 	</xsl:template>
+	
+	
+	<!-- ======================================================== -->
+	<!--                                                          -->
+	<!--  Template MODIFICHE                                      -->
+	<!--                                                          -->
+	<!-- ======================================================== -->
+	<xsl:template match="*[name()='mod']">
+		<span class="mod">
+ 	    	<xsl:apply-templates/>
+ 		</span>
+	</xsl:template> 
+	<xsl:template match="*[name()='virgolette']">
+	    <div class="spazio">&#160;</div>
+	    <span class="virgolette">
+			<xsl:apply-templates />
+		</span>	
+	    <div class="spazio">&#160;</div>				
+	</xsl:template>	
+	
+	
 	<!-- ======================================================== -->
 	<!--                                                          -->
 	<!--  Template allegati                                       -->

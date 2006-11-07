@@ -66,9 +66,29 @@
 		text-decoration: underline;
 	}
 	.soppresso {
+		font-size: large;
 		color: red;
 		text-decoration: line-through;
+		background: #FFFFFF;
 	}
 	.inserito {
 		color: green;
+		background: #FFFFFF;
+	}
+	.mod {
+		display: inline;
+		font-size: 9pt;  
+		font-weight: normal; 
+		font-style: normal; 
+		font-family: Courier;
+		background: #FFDDAA;
+	}
+	.virgolette {
+		display: inline; 
+		border-width: solid; 
+		background: #FFEE99;
+	}	
+	.spazio {
+		display: inline; 
+		background: #FFFFFF;
 	}

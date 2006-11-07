@@ -93,6 +93,23 @@
 				.inserito {
 					color: green;
 				}
+				.mod {
+					display: inline;
+					font-size: 9pt;  
+					font-weight: normal; 
+					font-style: normal; 
+					font-family: Courier;
+					background: #FFDDAA;
+				}
+				.virgolette {
+					display: inline; 
+					border-width: solid; 
+					background: #FFEE99;
+				}	
+				.spazio {
+					display: inline; 
+					background: #FFFFFF;
+				}				
 				</style>
 				<!-- ======================================================== -->
 				<!--                                                          -->
@@ -365,6 +382,25 @@
 			<xsl:apply-templates/>
 		</li>
 	</xsl:template>
+	
+	<!-- ======================================================== -->
+	<!--                                                          -->
+	<!--  Template MODIFICHE                                      -->
+	<!--                                                          -->
+	<!-- ======================================================== -->
+	<xsl:template match="*[name()='mod']">
+		<span class="mod">
+ 	    	<xsl:apply-templates/>
+ 		</span>
+	</xsl:template> 
+	<xsl:template match="*[name()='virgolette']">
+	    <div class="spazio">&#160;</div>
+	    <span class="virgolette">
+			<xsl:apply-templates />
+		</span>	
+	    <div class="spazio">&#160;</div>				
+	</xsl:template>	
+	
 	<!-- ======================================================== -->
 	<!--                                                          -->
 	<!--  Template allegati                                       -->
