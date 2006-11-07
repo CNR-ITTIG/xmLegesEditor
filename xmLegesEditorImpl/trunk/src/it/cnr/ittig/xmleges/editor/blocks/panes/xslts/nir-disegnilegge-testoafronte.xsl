@@ -198,6 +198,7 @@
 				<div class="{local-name()}">
 					<xsl:if test="@status='inserito'">
 						<xsl:attribute name="style">font-weight: bold;</xsl:attribute>
+						<xsl:apply-templates/>
 					</xsl:if>
 					<xsl:if test="not(@status='inserito')">					
 						<xsl:apply-templates select="nir:num">
@@ -228,6 +229,9 @@
 			<xsl:with-param name="pos" select="$pos"/>
 		</xsl:apply-templates>
 	</xsl:template>
+	
+
+	
 	<xsl:template match="nir:comma| nir:el | nir:en | nir:ep">
 		<xsl:param name="pos">none</xsl:param>
 		<div class="{local-name()}">
@@ -239,11 +243,14 @@
 				<xsl:with-param name="pos" select="$pos"/>
 			</xsl:apply-templates>
 		</div>
+		
+		
+		
 		<xsl:apply-templates select="nir:el | nir:ep | nir:en | nir:coda">
 			<xsl:with-param name="pos" select="$pos"/>
 		</xsl:apply-templates>
 	</xsl:template>
-	<xsl:template match="nir:corpo | nir:alinea">
+	<xsl:template match="nir:corpo | nir:alinea ">
 		<xsl:param name="pos">none</xsl:param>
 		<xsl:choose>
 			<xsl:when test="($pos='left' and ../@status='inserito')"/>

@@ -36,7 +36,7 @@
 					text-align: left;
 					line-height: 100% ;
 				} 	
-					.toc-articolo, .toc-annessi {
+				.toc-articolo, .toc-annessi {
 					margin-left: 7px;
 					font-size: 65%;
 				}
@@ -81,6 +81,11 @@
 					text-indent: -30px;
 					margin-top: 3px;
 				}
+				.en {
+					margin-left: 50px;
+					text-indent: -30px;
+					margin-top: 3px;
+				}				
 			    b b { font-weight: normal; }
 				.ndr {
 					color: #00cc00;
@@ -241,6 +246,18 @@
 				   </div>
 				  </div>
 		       </xsl:when>
+		       <xsl:when test="@status='inserito'">
+				  <div class="inserito">
+  				   <div class="{local-name()}">
+						<xsl:apply-templates select="nir:num">
+							<xsl:with-param name="pos">left</xsl:with-param>
+						</xsl:apply-templates>
+						<xsl:apply-templates select="nir:rubrica | nir:corpo| nir:alinea">
+							<xsl:with-param name="pos">left</xsl:with-param>
+						</xsl:apply-templates>
+				   </div>
+				  </div>
+		       </xsl:when>
    		  	   <xsl:otherwise>
   				   <div class="{local-name()}">
 						<xsl:apply-templates select="nir:num">
@@ -269,6 +286,9 @@
 			</xsl:apply-templates>
 		</div>
 		<xsl:apply-templates select="nir:comma">
+
+
+
 			<xsl:with-param name="pos" select="$pos"/>
 		</xsl:apply-templates>
 	</xsl:template>
@@ -400,7 +420,6 @@
 		</span>	
 	    <div class="spazio">&#160;</div>				
 	</xsl:template>	
-	
 	<!-- ======================================================== -->
 	<!--                                                          -->
 	<!--  Template allegati                                       -->
@@ -469,14 +488,18 @@
 	<!--                                                          -->
 	<!-- ======================================================== -->
 	<xsl:template match="h:span[@status='soppresso']">
+	    <div class="spazio">&#160;</div>
 		<span class="soppresso">
- 	    <xsl:apply-templates/>&#160;
+ 	    <xsl:apply-templates/>
  	    </span>
+   	    <div class="spazio">&#160;</div>
 	</xsl:template>
 	<xsl:template match="h:span[@status='inserito']">
+	    <div class="spazio">&#160;</div>
 		<span class="inserito">
- 	    <xsl:apply-templates/>&#160;
+ 	    <xsl:apply-templates/>
  	    </span>
+   	    <div class="spazio">&#160;</div>
 	</xsl:template>
 	<!-- ======================================================== -->
 	<!--                                                          -->

@@ -139,6 +139,18 @@
 				   </div>
 				  </div>
 		       </xsl:when>
+		       <xsl:when test="@status='inserito'">
+				  <div class="inserito">
+  				   <div class="{local-name()}">
+						<xsl:apply-templates select="nir:num">
+							<xsl:with-param name="pos">left</xsl:with-param>
+						</xsl:apply-templates>
+						<xsl:apply-templates select="nir:rubrica | nir:corpo| nir:alinea">
+							<xsl:with-param name="pos">left</xsl:with-param>
+						</xsl:apply-templates>
+				   </div>
+				  </div>
+		       </xsl:when>
    		  	   <xsl:otherwise>
   				   <div class="{local-name()}">
 						<xsl:apply-templates select="nir:num">
@@ -369,14 +381,18 @@
 	<!--                                                          -->
 	<!-- ======================================================== -->
 	<xsl:template match="h:span[@status='soppresso']">
+	    <div class="spazio">&#160;</div>
 		<span class="soppresso">
- 	    <xsl:apply-templates/>&#160;
+ 	    <xsl:apply-templates/>
  	    </span>
+   	    <div class="spazio">&#160;</div>
 	</xsl:template>
 	<xsl:template match="h:span[@status='inserito']">
+	    <div class="spazio">&#160;</div>
 		<span class="inserito">
- 	    <xsl:apply-templates/>&#160;
+ 	    <xsl:apply-templates/>
  	    </span>
+   	    <div class="spazio">&#160;</div>
 	</xsl:template>
 	<!-- ======================================================== -->
 	<!--                                                          -->

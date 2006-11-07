@@ -60,13 +60,17 @@
 		text-indent: -30px;
 		margin-top: 3px;
 	}
+	.en {
+		margin-left: 50px;
+		text-indent: -30px;
+		margin-top: 3px;
+	}	
     b b { font-weight: normal; }
 	.ndr {
 		color: #00cc00;
 		text-decoration: underline;
 	}
 	.soppresso {
-		font-size: large;
 		color: red;
 		text-decoration: line-through;
 		background: #FFFFFF;
