@@ -1,0 +1,134 @@
+<!--  =====================================================================  -->
+<!--      Modello dei documenti di NormeInRete (NIR)                         -->
+<!--                                                                         -->
+<!--      testo: elementi ed attributi testuali                              -->
+<!--      Dipende da: 'nirstrict' oppure 'nirloose'                          -->
+<!--                                                                         -->
+<!--      Release  25/04/2006                                                -->
+<!--      Fabio Vitali - UniBo & IAT/CNR                                     -->
+<!--                                                                         -->
+<!--      Per un'introduzione, si veda il documento 'note.html'              -->
+<!--  =====================================================================  -->
+<!--  =====================================================================
+
+Elementi HTML del documento articolato
+
+=====================================================================  -->
+<!--  =====================================================================
+
+Tipi semplici HTML
+
+=====================================================================  -->
+<!ENTITY % methodType "(post|get|put)" >
+<!ENTITY % TFrame "(void|above|below|hsides|lhs|rhs|vsides|box|border)" >
+<!ENTITY % TRules "(none|groups|rows|cols|all)" >
+<!ENTITY % Scope "(row|col|rowgroup|colgroup)" >
+<!ENTITY % align "(left|center|right|justify|char)" >
+<!ENTITY % valign "(top|middle|bottom|baseline)" >
+<!--  =====================================================================  -->
+<!--                                                                         -->
+<!--      Elementi con content model EMPTY                                   -->
+<!--                                                                         -->
+<!--  =====================================================================  -->
+<!ELEMENT h:br %emptyfac; >
+<!ATTLIST h:br %globalifac;  >
+<!ELEMENT h:hr %emptyfac; >
+<!ATTLIST h:hr %globalifac;  >
+<!ELEMENT h:img %emptyfac; >
+<!ATTLIST h:img %globalifac;  >
+<!ATTLIST h:img src CDATA #REQUIRED alt CDATA #IMPLIED width CDATA #IMPLIED height CDATA #IMPLIED >
+<!ELEMENT h:input %emptyfac; >
+<!ATTLIST h:input %globalifac;  >
+<!ATTLIST h:input type CDATA #REQUIRED size CDATA #IMPLIED >
+<!--  =====================================================================  -->
+<!--                                                                         -->
+<!--      Elementi di tipo inline                                            -->
+<!--                                                                         -->
+<!--  =====================================================================  -->
+<!ELEMENT h:b %inlinefac; >
+<!ATTLIST h:b %globalifac;  >
+<!ELEMENT h:i %inlinefac; >
+<!ATTLIST h:i %globalifac;  >
+<!ELEMENT h:u %inlinefac; >
+<!ATTLIST h:u %globalifac;  >
+<!ELEMENT h:sub %inlinefac; >
+<!ATTLIST h:sub %globalifac;  >
+<!ELEMENT h:sup %inlinefac; >
+<!ATTLIST h:sup %globalifac;  >
+<!ELEMENT h:span %inlinefac; >
+<!ATTLIST h:span %globalifac;  >
+<!ELEMENT h:a %inlinefac; >
+<!ATTLIST h:a %globalifac;  >
+<!ATTLIST h:a %link;  >
+<!--  =====================================================================  -->
+<!--                                                                         -->
+<!--      Elementi di tipo blocco e form                                     -->
+<!--                                                                         -->
+<!--  =====================================================================  -->
+<!ELEMENT h:p %inlinefac; >
+<!ATTLIST h:p %globalifac;  >
+<!ELEMENT h:div %inlinefac; >
+<!ATTLIST h:div %globalifac;  >
+<!ELEMENT h:form (#PCDATA |%elinline; | %allblocchi; | h:input)*>
+<!ATTLIST h:form %globalifac;  method CDATA 'post'  action CDATA #IMPLIED enctype CDATA 'x-url-encoded'  >
+<!--  =====================================================================  -->
+<!--                              LISTE                                      -->
+<!--                                                                         -->
+<!--      Derivato                                                           -->
+<!--      PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"                          -->
+<!--      SYSTEM "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"         -->
+<!--  =====================================================================  -->
+<!ENTITY % list "(h:li)+" >
+<!ENTITY % deflist "(h:dt | h:dd)+" >
+<!ELEMENT h:ul %list; >
+<!ATTLIST h:ul %globalifac;  >
+<!ELEMENT h:ol %list; >
+<!ATTLIST h:ol %globalifac;  >
+<!ELEMENT h:li %ParaLevel; >
+<!ATTLIST h:li %globalifac;  >
+<!ELEMENT h:dl %deflist; >
+<!ATTLIST h:dl %globalifac;  >
+<!ELEMENT h:dt %inlinefac; >
+<!ATTLIST h:dt %globalifac;  >
+<!ELEMENT h:dd %ParaLevel; >
+<!ATTLIST h:dd %globalifac;  >
+<!--  =====================================================================  -->
+<!--                              TABELLE                                    -->
+<!--                                                                         -->
+<!--      Derivato da "-//SoftQuad//DTD HTML 4.0 Table v1.0 19990413//EN"    -->
+<!--  =====================================================================  -->
+<!--  =====================================================================  -->
+<!--                     Attributi                                           -->
+<!--  =====================================================================  -->
+<!ENTITY % cellhalign " align CDATA #IMPLIED char CDATA #IMPLIED charoff CDATA #IMPLIED" >
+<!ENTITY % cellvalign " valign CDATA #IMPLIED" >
+<!ENTITY % cellalign " %cellhalign;  %cellvalign; " >
+<!--  =====================================================================  -->
+<!--                     Elementi                                            -->
+<!--  =====================================================================  -->
+<!ELEMENT h:table (h:caption?,(h:col* | h:colgroup*),h:thead?,h:tfoot?,(h:tbody+ | h:tr+))>
+<!ATTLIST h:table %globalifac;  summary CDATA #IMPLIED width CDATA #IMPLIED border CDATA #IMPLIED frame CDATA #IMPLIED rules CDATA #IMPLIED cellspacing CDATA #IMPLIED cellpadding CDATA #IMPLIED datapagesize CDATA #IMPLIED >
+<!ELEMENT h:caption %inlinefac; >
+<!ATTLIST h:caption %globalifac;  >
+<!ENTITY % rows "(h:tr)+" >
+<!ELEMENT h:thead %rows; >
+<!ATTLIST h:thead %globalifac;  %cellalign;  >
+<!ELEMENT h:tfoot %rows; >
+<!ATTLIST h:tfoot %globalifac;  %cellalign;  >
+<!ELEMENT h:tbody %rows; >
+<!ATTLIST h:tbody %globalifac;  %cellalign;  >
+<!ENTITY % cols " %globalifac;  %cellalign;  span CDATA '1'  width CDATA #IMPLIED" >
+<!ELEMENT h:colgroup (h:col+)>
+<!ATTLIST h:colgroup %cols;  >
+<!ELEMENT h:col EMPTY >
+<!ATTLIST h:col %cols;  >
+<!ELEMENT h:tr (h:th | h:td)+>
+<!ATTLIST h:tr %globalifac;  %cellhalign;  >
+<!ENTITY % cell "%ParaLevel;" >
+<!ELEMENT h:th %cell; >
+<!ATTLIST h:th %cellalign;  abbr CDATA #IMPLIED axis CDATA #IMPLIED headers CDATA #IMPLIED scope CDATA #IMPLIED rowspan CDATA '1'  colspan CDATA '1'  %globalifac;  >
+<!ELEMENT h:td %cell; >
+<!ATTLIST h:td %cellalign;  abbr CDATA #IMPLIED axis CDATA #IMPLIED headers CDATA #IMPLIED scope CDATA #IMPLIED rowspan CDATA '1'  colspan CDATA '1'  %globalifac;  >
+<!--  =====================================================================  -->
+<!--      fine del file testo.dtd                                            -->
+<!--  =====================================================================  -->

@@ -1,0 +1,130 @@
+<!-- ===================================================================== -->
+<!--     DTD dei Provvedimenti emessi                                      -->
+<!--     dal Consiglio Nazionale delle Ricerche                            -->
+<!--     basato sulla versione flessibile della DTD di NormeInRete (NIR)   -->
+<!--                                                                       -->
+<!--     Release  2.1                                                      -->
+<!--     data     18/7/2006                                                -->
+<!--                                                                       -->
+<!--     Andrea Marchetti (CNR-IIT)                                        -->
+<!--     con il contributo di                                              -->
+<!--     Mario Ragona, Pierluigi Spinosa - (CNR-ITTIG)                     -->
+<!--                                                                       -->
+<!-- ===================================================================== -->
+
+<!-- ===================================================================== 
+     Ridefinizione delle entita' 
+     NSproprietario   definita in nirloose.dtd
+     ProprietarioMeta definita in nirloose.dtd
+     N.B. La prima dichiarazione che il parser incontra ha la precedenza 
+     sulle altre
+    ===================================================================== -->
+<!ENTITY % NSproprietario   "xmlns:cnr CDATA  #FIXED 'http://www.cnr.it/provvedimenti/2.1'">
+<!ENTITY % ProprietarioMeta "(cnr:meta)">
+<!ATTLIST proprietario %NSproprietario; >
+
+<!-- ===================================================================== 
+     Inclusione della DTD NIR versione flessibile
+     ===================================================================== -->
+<!ENTITY % nirDTD SYSTEM "./nirflessibile.dtd">
+%nirDTD;
+
+
+<!-- ===================================================================== 
+     Metadati Proprietari:
+
+	Metadato				Descrizione
+
+1.	strutturaEmanante:		la struttura che ha emesso il provvedimento (es. Presidenza)
+2.	autoritaEmanante:        l'autorita' che ha emesso il provvedimento (es. Presidente)
+3.	tipoDestinatario:		il tipo di strutture a cui il provvedimento è destinato (es. Organi di ricerca)
+4.	strutturaDestinataria:	la specifica struttura a cui il provvedimento è destinato (es. ITTIG)
+5.	tipoProvvedimento:		tipologia a cui il provvedimento appartiene (es. nomina direttore)
+6.	disciplina:			la disciplina scientifica interessata dal provvedimento (es. Scienze Agrarie)
+7.	areaScientifica:		l'area scientifica interessata dal provvedimento (es. Scienze di base)
+
+     Metadato				Valori particolari o predefiniti
+     
+     tipoDestinatario		Valori predefiniti:
+     					- Organi di Ricerca
+						- Aree di Ricerca
+						- Gruppi Nazionali
+						- Istituti Nazionali di Coordinamento
+						- Progetti Finalizzati
+						- Progetti Strategici
+						- Presidenza
+						- Organi del CNR
+						- Direzione Generale
+						- Amministrazione Centrale
+						- Nucleo di Valutazione
+						- Dipartimenti
+      
+     strutturaDestinataria	sigla e denominazione estesa dell'organo 
+						(es. ITTIG - Istituto di Teoria e Tecniche dell'Informazione Giuridica).
+						Se il provvedimento riguarda più strutture, usare codifiche del tipo:
+						- tutti gli istituti
+						- tutti i dipartimenti
+						- ...
+
+	tipoProvvedimento:		tipologia a cui il provvedimento appartiene (elenco da definire):
+						- nomina direttore
+						- nomina commissione
+						- istituzione ufficio
+						- ...
+
+     disciplina			area disciplinare in uso fino al 31-12-2000:
+						- Scienze Agrarie
+						- Scienze e Tecnologie dell'Ambiente e dell'Habitat
+						- Scienza e Tecnologia dei Beni Culturali
+						- Scienze Biologiche e Mediche
+						- Biotecnologie e Biologia Molecolare
+						- Scienze Chimiche
+						- Scienze Giuridiche e Politiche
+						- Scienze Economiche, Sociologiche e Statistiche
+						- Scienze Fisiche
+						- Scienze Geologiche e Minerarie
+						- Scienza e Tecnologie dell'Informazione
+						- Scienze d'Ingegneria e di Architettura
+						- Scienze Matematiche 
+						- Scienze Storiche, Filosofiche e Filologiche
+						- Ricerche Tecnologiche e Innovazione
+						- Carattere generale
+
+     areaScientifica 		area scientifica in uso dal 01-01-2001:
+						- Scienze di base
+						- Scienze della vita
+						- Scienze della terra e dell'ambiente
+						- Scienze sociali e umanistiche
+						- Scienze tecnologiche, ingegneristiche e informatiche"
+						- Carattere generale
+
+    ===================================================================== -->
+
+<!ELEMENT cnr:meta (cnr:strutturaEmanante+,
+				cnr:autoritaEmanante+, 
+				cnr:tipoDestinatario+, 
+				cnr:strutturaDestinataria+, 
+				cnr:tipoProvvedimento+, 
+                    (cnr:disciplina+ | cnr:areaScientifica+) )>
+
+<!ELEMENT cnr:strutturaEmanante		EMPTY >
+<!ATTLIST cnr:strutturaEmanante		value CDATA #IMPLIED >
+
+<!ELEMENT cnr:autoritaEmanante		EMPTY >
+<!ATTLIST cnr:autoritaEmanante		value CDATA #IMPLIED >
+
+<!ELEMENT cnr:tipoDestinatario		EMPTY >
+<!ATTLIST cnr:tipoDestinatario		value CDATA #IMPLIED >
+
+<!ELEMENT cnr:strutturaDestinataria	EMPTY >
+<!ATTLIST cnr:strutturaDestinataria	value CDATA #IMPLIED >
+
+<!ELEMENT cnr:tipoProvvedimento		EMPTY >
+<!ATTLIST cnr:tipoProvvedimento		value CDATA #IMPLIED >
+
+<!ELEMENT cnr:disciplina				EMPTY >
+<!ATTLIST cnr:disciplina				value CDATA #IMPLIED >
+
+<!ELEMENT cnr:areaScientifica			EMPTY >
+<!ATTLIST cnr:areaScientifica			value CDATA #IMPLIED >
+
