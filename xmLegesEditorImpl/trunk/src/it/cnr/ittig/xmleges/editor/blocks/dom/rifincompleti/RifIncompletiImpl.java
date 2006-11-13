@@ -6,10 +6,7 @@ import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
-import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
-import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
@@ -175,8 +172,17 @@ public class RifIncompletiImpl implements RifIncompleti, Loggable, Serviceable {
 				container.removeChild(node);			
 				return ritorno;							
 			} else { //Non ho fratelli e/o ho fratelli non text
-				     node.setNodeValue(plainText);
-				     return node;
+					Document doc = documentManager.getDocumentAsDom();					
+					ritorno = doc.createElement(container.getNodeName());
+					UtilDom.setTextNode(ritorno, plainText);
+					try{
+						UtilDom.replace(container, ritorno);	
+					}
+					catch(DOMException e){
+						logger.error("errore dom" + e.toString());
+						return null;
+					}	
+				    return ritorno; 
 			  }
 			}
 		 }			
