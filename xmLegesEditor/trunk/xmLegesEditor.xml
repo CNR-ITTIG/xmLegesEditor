@@ -1032,6 +1032,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
         	<readonly>finevigore</readonly>
         	<readonly>fineefficacia</readonly>
         	<readonly>tipo</readonly>
+        	<readonly>status</readonly>
         </configuration>
 	</component>
 
