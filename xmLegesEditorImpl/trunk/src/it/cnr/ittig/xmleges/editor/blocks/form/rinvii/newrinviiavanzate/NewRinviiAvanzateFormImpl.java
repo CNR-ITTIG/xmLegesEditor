@@ -132,7 +132,7 @@ public class NewRinviiAvanzateFormImpl implements NewRinviiAvanzateForm, Loggabl
 	}
 
 	public String getVersione() {
-		return versione;
+		return versione.substring(6)+"-"+versione.substring(3,5)+"-"+versione.substring(0,2);	
 	}
 
 	/*
