@@ -7,14 +7,11 @@ import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
-import it.cnr.ittig.xmleges.core.util.lang.UtilLang;
 import it.cnr.ittig.xmleges.editor.services.autorita.Autorita;
 import it.cnr.ittig.xmleges.editor.services.provvedimenti.Provvedimenti;
 import it.cnr.ittig.xmleges.editor.services.util.urn.NirUtilUrn;
 import it.cnr.ittig.xmleges.editor.services.util.urn.Urn;
 
-import java.text.CharacterIterator;
-import java.text.StringCharacterIterator;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
@@ -174,6 +171,7 @@ public class NirUtilUrnImpl implements NirUtilUrn, Loggable, Serviceable {
 					}
 				}
 			}
+			formatestuale = formatestuale.trim();
 			formatestuale += " ";
 			if (urn.getDate().size() > 0)
 				for (int i = 0; i < urn.getDate().size(); i++)
