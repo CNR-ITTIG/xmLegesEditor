@@ -29,6 +29,7 @@ import javax.swing.JList;
 
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * <h1>Implementazione del servizio
@@ -76,7 +77,7 @@ public class AttogiacitatoFormImpl implements AttogiacitatoForm, Loggable, Servi
 
 	NirUtilUrn nirutilurn;
 
-	Vector urnVector = new Vector();
+	Vector urnVector;
 
 	// Oggetti grafici
 	JList elenco;
@@ -109,7 +110,7 @@ public class AttogiacitatoFormImpl implements AttogiacitatoForm, Loggable, Servi
 	public void initialize() throws java.lang.Exception {
 		logger.debug("Inizializzazione Form Attogiacitato");
 		form.setMainComponent(this.getClass().getResourceAsStream("Attogiacitato.jfrm"));
-		form.setSize(350, 250);
+		//form.setSize(350, 250);
 		form.setName("editor.form.rinvii.attogiacitato");
 		elenco = (JList) form.getComponentByName("editor.form.rinvii.attogiacitato.list.elenco");
 		JLabel labelelenco = (JLabel) form.getComponentByName("editor.form.rinvii.attogiacitato.label.elenco");
@@ -122,6 +123,8 @@ public class AttogiacitatoFormImpl implements AttogiacitatoForm, Loggable, Servi
 
 	private void preparaElenco(NamedNodeMap[] elenconodi, int index) {
 
+		
+		urnVector = new Vector();
 		lmelenco = new DefaultListModel();
 		if (lmelenco.size() > 0)
 			lmelenco.removeAllElements();
@@ -159,12 +162,10 @@ public class AttogiacitatoFormImpl implements AttogiacitatoForm, Loggable, Servi
 
 	private void popolaElenco() {
 		int indexofAttribute = 0;
-		org.w3c.dom.NodeList listarif = dm.getDocumentAsDom().getElementsByTagName("rif"); // nota:
-																							// in
-																							// questo
-																							// modo
-		// prende anche i rif dentro
-		// gli mrif
+		NodeList listarif = dm.getDocumentAsDom().getElementsByTagName("rif"); 
+		
+		// nota: in questo modo prende anche i rif dentro  gli mrif
+		
 		Vector rifVect = new Vector(listarif.getLength());
 
 		for (int i = 0; i < listarif.getLength(); ++i) {
@@ -198,7 +199,7 @@ public class AttogiacitatoFormImpl implements AttogiacitatoForm, Loggable, Servi
 	}
 
 	public boolean openForm() {
-		form.setSize(480, 350);
+		//form.setSize(480, 350);
 		form.setDialogResizable(false);
 		form.addFormVerifier(this);
 		popolaElenco();
