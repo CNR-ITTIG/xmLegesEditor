@@ -24,10 +24,6 @@ import javax.swing.JPanel;
 import org.jdesktop.jdic.browser.WebBrowser;
 import org.jdesktop.jdic.browser.WebBrowserEvent;
 import org.jdesktop.jdic.browser.WebBrowserListener;
-import org.jdesktop.jdic.browser.internal.WebBrowserUtil;
-import org.jdesktop.jdic.init.JdicManager;
-import org.jdesktop.jdic.init.JdicInitException;
-import org.jdesktop.jdic.init.JdicManager;
 
 /**
  * <h1>Implementazione del servizio
