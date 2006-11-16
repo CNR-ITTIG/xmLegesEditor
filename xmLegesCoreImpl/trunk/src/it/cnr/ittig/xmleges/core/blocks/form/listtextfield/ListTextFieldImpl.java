@@ -122,6 +122,7 @@ public class ListTextFieldImpl implements MouseListener, ListTextField, ListSele
 		deleteAction.setEnabled(false);
 		moveUpAction.setEnabled(false);
 		moveDownAction.setEnabled(false);
+		
 	}
 
 	// //////////////////////////////////////////////////// CommonForm Interface
@@ -144,12 +145,14 @@ public class ListTextFieldImpl implements MouseListener, ListTextField, ListSele
 	public void setListElements(Vector elem) {
 		listModel.clear();
 		addListElements(elem);
+		lastselected=-1;
 	}
 
 	public void addListElements(Vector elem) {
 		for (Enumeration en = elem.elements(); en.hasMoreElements();)
 			listModel.addElement(en.nextElement());
 		list = (JList) form.getComponentByName("form.listtextfield.list");
+		lastselected=-1;
 	}
 
 	public Vector getListElements() {
@@ -470,13 +473,16 @@ public class ListTextFieldImpl implements MouseListener, ListTextField, ListSele
 	
 	
 	public void mouseClicked(MouseEvent e) {
-		int selectedElement = list.getSelectedIndex();
-		if (lastselected!=-1 && selectedElement==lastselected){
-			lastselected=-1;
-			list.clearSelection();			
-			return;
+		if(e.getClickCount()==1){
+			int selectedElement = list.getSelectedIndex();
+			if (lastselected!=-1 && selectedElement==lastselected){
+				lastselected=-1;
+				list.clearSelection();			
+				
+			}
+			else
+				lastselected=selectedElement;
 		}
-		lastselected=selectedElement; 
 	}
 	public void mouseEntered(MouseEvent e) {
 	}
