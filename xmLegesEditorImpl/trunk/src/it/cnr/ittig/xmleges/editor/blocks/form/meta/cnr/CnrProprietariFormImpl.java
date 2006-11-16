@@ -254,4 +254,3 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 	
 }
 
-//TODO: ridimensiona la form e fai il configurable
