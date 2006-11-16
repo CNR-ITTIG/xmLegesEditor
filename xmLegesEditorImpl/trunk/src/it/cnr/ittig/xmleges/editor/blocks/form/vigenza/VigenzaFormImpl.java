@@ -324,7 +324,6 @@ public Evento getInizioVigore() {
 //}
 
 //	public Evento getInizioEfficacia() {
-//		// TODO Auto-generated method stub
 //		return null;
 //	}
 //
