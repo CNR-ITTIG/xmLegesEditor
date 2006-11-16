@@ -207,10 +207,13 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		ciclodivitaAction.setEnabled(!documentManager.isEmpty() && !utilRulesManager.isDtdDL());
 		inquadramentoAction.setEnabled(!documentManager.isEmpty() && !utilRulesManager.isDtdDL() && !utilRulesManager.isDtdBase());
 			
-		materieAction.setEnabled(true);
+		materieAction.setEnabled(!documentManager.isEmpty() && !utilRulesManager.isDtdDL() && !utilRulesManager.isDtdBase());
+	
 		urnAction.setEnabled(!documentManager.isEmpty());		
 		cnrAction.setEnabled(!documentManager.isEmpty() && documentManager.getDtdName().equals("cnr.dtd"));
 	}
+	
+	
 
 	// //////////////////////////////////////////// MetaGeneraliAction Interface
 	public void doDescrittori() {
@@ -218,9 +221,6 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		
 		Node node = selectionManager.getActiveNode();
 		Document doc = documentManager.getDocumentAsDom();
-		//TODO: da cambiare non è piu tipodoc ma tipopubblicazione con default GU
-//		descrittoriForm.setTipoPubblicazione(UtilDom.getAttributeValueAsString(doc.getDocumentElement(), "tipo"));
-//		descrittoriForm.setTipoPubblicazione(descrittori.getPubblicazione().getTipo());
 		descrittoriForm.setTipoDTD(documentManager.getDtdName());
 		descrittoriForm.setAlias(descrittori.getAlias(node));
 		descrittoriForm.setAltrePubblicazioni(descrittori.getAltrePubblicazioni(node));
