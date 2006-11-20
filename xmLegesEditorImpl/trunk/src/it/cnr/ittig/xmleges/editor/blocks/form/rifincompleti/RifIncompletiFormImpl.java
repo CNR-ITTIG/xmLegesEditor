@@ -66,8 +66,7 @@ import org.w3c.dom.Node;
  * @author <a href="mailto:tommaso.agnoloni@ittig.cnr.it">Tommaso Agnoloni</a>
  */
 public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable,
-		Serviceable, Configurable, Initializable, ActionListener,
-		FormClosedListener, FormVerifier {
+		Serviceable, Configurable, Initializable, ActionListener, FormVerifier {
 
 	Logger logger;
 
@@ -228,7 +227,7 @@ public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable,
 		rifInterno.addActionListener(this);
 
 		form.addFormVerifier(this);
-		form.setHelpKey("help.contents.index.rifincompleti", this);
+		form.setHelpKey("help.contents.index.rifincompleti");
 	}
 
 	private boolean isResolved(Node node) {
@@ -492,9 +491,6 @@ public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable,
 				logger.error(ex.getMessage(), ex);
 			}
 		}
-	}
-
-	public void formClosed() {		
 	}
 
 	public boolean verifyForm() {

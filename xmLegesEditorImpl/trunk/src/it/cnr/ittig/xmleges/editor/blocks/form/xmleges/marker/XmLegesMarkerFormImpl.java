@@ -13,6 +13,7 @@ import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.FormVerifier;
 import it.cnr.ittig.xmleges.core.services.form.filetextfield.FileTextField;
 import it.cnr.ittig.xmleges.core.services.form.filetextfield.FileTextFieldListener;
+import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.mswordconverter.MSWordConverter;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.util.file.RegexpFileFilter;
@@ -110,6 +111,7 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 
 	File wordFileConv;
 
+	I18n i18n;
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
@@ -122,6 +124,7 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 		fileTextField = (FileTextField) serviceManager.lookup(FileTextField.class);
 		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 		wordConverter = (MSWordConverter) serviceManager.lookup(MSWordConverter.class);
+		i18n = (I18n) serviceManager.lookup(I18n.class);
 	}
 
 	// ////////////////////////////////////////////////// Configurable Interface
@@ -335,7 +338,7 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 							} else
 								utilMsg.msgError("editor.form.xmleges.marker.msg.error.errore","editor.form.xmleges.marker.text");
 						} else {
-							utilMsg.msgError("Errore durante l'esecuzione dell'analizzatore:\n" + parser.getError(),"editor.form.xmleges.marker.text");
+							utilMsg.msgError(i18n.getTextFor("xmlegesmarker.errore") + parser.getError(),"editor.form.xmleges.marker.text");
 						}
 					} catch (Exception ex) {
 						logger.error(ex.toString(), ex);

@@ -17,7 +17,6 @@ import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.form.Form;
-import it.cnr.ittig.xmleges.core.services.form.FormClosedListener;
 import it.cnr.ittig.xmleges.core.services.form.FormVerifier;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
@@ -58,7 +57,7 @@ import org.w3c.dom.Node;
  * @version 1.0
  * @author <a href="mailto:tommaso.agnoloni@ittig.cnr.it">Tommaso Agnoloni</a>
  */
-public class LinkFormImpl implements LinkForm, Loggable, Serviceable, Configurable, Initializable, ActionListener, FormClosedListener, FormVerifier {
+public class LinkFormImpl implements LinkForm, Loggable, Serviceable, Configurable, Initializable, ActionListener, FormVerifier {
 	
 	Logger logger;
 
@@ -159,7 +158,7 @@ public class LinkFormImpl implements LinkForm, Loggable, Serviceable, Configurab
 		textUrl = (JTextField) form.getComponentByName("editor.form.link.url");
 		verificaButton = (JButton) form.getComponentByName("editor.form.link.verifica");
 		verificaButton.addActionListener(this);		
-		form.setHelpKey("help.contents.index.link",this);
+		form.setHelpKey("help.contents.index.link");
 	}
 			
 	public void actionPerformed(ActionEvent evt) {
@@ -212,10 +211,6 @@ public class LinkFormImpl implements LinkForm, Loggable, Serviceable, Configurab
 		}
 		form.close();
 	}	
-	
-	public void formClosed() {
-		// TODO Auto-generated method stub	
-	}
 
 	public boolean verifyForm() {
 		return (textUrl.getText().trim().length() != 0);

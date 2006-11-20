@@ -435,7 +435,6 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Loggabl
 						
 					}
 				}
-				
 				String msg="";
 				if(eligibleVigs.size()>0){
 					vigToUpdate=new VigenzaEntity[eligibleVigs.size()];

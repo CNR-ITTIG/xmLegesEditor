@@ -11,6 +11,7 @@ import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.form.Form;
+import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
@@ -138,6 +139,9 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 
 	String error;
 
+	I18n i18n;
+	
+	String mesErr;
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
@@ -150,6 +154,7 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 		utilUI = (UtilUI) serviceManager.lookup(UtilUI.class);
 		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 		dm = (DocumentManager) serviceManager.lookup(DocumentManager.class);
+		i18n = (I18n) serviceManager.lookup(I18n.class);
 	}
 
 	// ////////////////////////////////////////////////// Configurable Interface
@@ -211,6 +216,8 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 		ente.removeAllItems();
 		for (int i = 0; i < elencoenti.length; i++)
 			ente.addItem(elencoenti[i]);
+		
+		mesErr = i18n.getTextFor("xmlegeslinker.errore");
 	}
 
 	// ///////////////////////////////////////// ParserRiferimentiForm Interface
@@ -265,6 +272,7 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 	}
 
 	protected boolean openForm() {
+		
 		if (!form.hasMainComponent())
 			try {
 				initialize();
@@ -354,18 +362,15 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 				setRisultati(sb.toString());
 				break;
 			}
-			// TODO I18n
-			utilMsg.msgInfo(form.getAsComponent(), "Analisi della selezione completata.");
+			utilMsg.msgInfo(form.getAsComponent(), "linker.analisi");
 			parsedAll = false;
 		} catch (Exception ex) {
 			logger.error(ex.toString(), ex);
-			// TODO I18n
-			utilMsg.msgError(form.getAsComponent(), "Errore durante l'esecuzione dell'analizzatore dei riferimenti:\n" + ex.toString());
+			utilMsg.msgError(form.getAsComponent(), mesErr + ex.toString());
 		}
 
-		if (error != null)
-			// TODO I18n
-			utilMsg.msgError(form.getAsComponent(), "Errore durante l'esecuzione dell'analizzatore dei riferimenti:\n" + error);
+		if (error != null)			
+			utilMsg.msgError(form.getAsComponent(), mesErr + error);
 	}
 	
 	
@@ -381,17 +386,14 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 			error = parser.getError();
 			setRisultati(risAll);
 			parsedAll = true;
-			// TODO I18n
-			utilMsg.msgInfo(form.getAsComponent(), "Analisi dell'intero documento completata.");
+			utilMsg.msgInfo(form.getAsComponent(), "linker.analisicompleta");
 		} catch (Exception ex) {
-			logger.error(ex.toString(), ex);
-			// TODO I18n
-			utilMsg.msgError(form.getAsComponent(), "Errore durante l'esecuzione dell'analizzatore dei riferimenti:\n" + ex.toString());
+			logger.error(ex.toString(), ex); 
+			utilMsg.msgError(form.getAsComponent(), mesErr + ex.toString());
 		}
 
-		if (error != null)
-			// TODO I18n
-			utilMsg.msgError(form.getAsComponent(), "Errore durante l'esecuzione dell'analizzatore dei riferimenti:\n" + error);
+		if (error != null) 
+			utilMsg.msgError(form.getAsComponent(), mesErr + error);
 	}
 
 }

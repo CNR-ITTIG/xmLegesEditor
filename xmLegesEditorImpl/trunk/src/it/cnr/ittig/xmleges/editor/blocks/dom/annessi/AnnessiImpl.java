@@ -146,7 +146,7 @@ public class AnnessiImpl implements Annessi, Loggable, Serviceable {
 			logger.info("urn allegato " + ref);
 		} else {
 			// FIXME qui si potrebbe forzare il set della urn del documento
-			utilMsg.msgError("Specificare la Urn del documento");
+			utilMsg.msgError("annessi.urn");
 		}
 		return (ref);
 	}

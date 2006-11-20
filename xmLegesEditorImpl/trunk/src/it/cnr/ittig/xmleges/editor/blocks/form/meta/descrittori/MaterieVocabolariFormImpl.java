@@ -262,7 +262,7 @@ Serviceable, Initializable, ActionListener {
 
 		 }else if (e.getSource().equals(materieButton)) { // MATERIE
 			 if(comboVocabolari.getSelectedItem()==null){
-				 utilmsg.msgInfo("Scegliere prima il vocabolario");				 
+				 utilmsg.msgInfo("materie.vocabolari");				 
 				 return;
 			 }
 			 

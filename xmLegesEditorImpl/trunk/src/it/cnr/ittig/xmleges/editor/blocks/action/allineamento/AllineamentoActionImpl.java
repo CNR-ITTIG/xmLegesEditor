@@ -141,7 +141,6 @@ public class AllineamentoActionImpl implements AllineamentoAction, Loggable, Ser
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			// TODO allinea di tabelle, poi generico
 			logger.debug("actionPerfAllinea");
 			logger.debug("###### tipo " + tipo);
 			if (tabelle.canAllignTextCol(activeNode)) {
