@@ -82,6 +82,9 @@ public class FileTextFieldImpl implements FileTextField, Loggable, Serviceable, 
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws java.lang.Exception {
 		form.setMainComponent(getClass().getResourceAsStream("FileTextField.jfrm"));
+		
+		form.setHelpKey("help.contents.form.filetextfield");
+		
 		field = (JTextField) form.getComponentByName("form.filetextfield.file");
 		field.addKeyListener(this);
 		defColor = field.getForeground();

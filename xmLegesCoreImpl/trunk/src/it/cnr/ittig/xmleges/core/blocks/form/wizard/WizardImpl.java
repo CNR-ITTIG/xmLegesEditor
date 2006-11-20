@@ -83,6 +83,9 @@ public class WizardImpl implements Wizard, Loggable, Serviceable, Initializable 
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws java.lang.Exception {
 		form.setMainComponent(getClass().getResourceAsStream("Wizard.jfrm"));
+		
+		form.setHelpKey("help.contents.form.wizard");
+		
 		AbstractButton btn;
 		btn = (AbstractButton) form.getComponentByName("form.wizard.back");
 		btn.setAction(utilUI.applyI18n("form.wizard.back", backAction));

@@ -11,7 +11,6 @@ import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.form.Form;
-import it.cnr.ittig.xmleges.core.services.form.FormClosedListener;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.spellcheck.dom.DomSpellCheck;
@@ -148,7 +147,7 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 		form.setMainComponent(getClass().getResourceAsStream("SpellCheck.jfrm"));
 		form.setName("spellcheck");
 		
-		form.setHelpKey("help.contents.index.spellcheckform");
+		form.setHelpKey("help.contents.form.spellcheck");
 
 		originalWordLabel = (JLabel) form.getComponentByName("spellcheck.label.originalword");
 		wordTextField = (JTextField) form.getComponentByName("spellcheck.textfield.word");

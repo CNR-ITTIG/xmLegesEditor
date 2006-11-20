@@ -83,6 +83,9 @@ public class TableImpl implements Table, Loggable, Serviceable, Configurable, In
 		form.setMainComponent(getClass().getResourceAsStream("Table.jfrm"));
 		form.setSize(350, 250);
 		form.setName("editor.form.meta.descrittori");
+		
+		//TODO verificare se questo HELP serve
+		form.setHelpKey("help.contents.form.table");
 
 		jtable = (JTable) form.getComponentByName("editor.forms.table.table");
 		addButton = (AbstractButton) form.getComponentByName("editor.forms.table.button.add");

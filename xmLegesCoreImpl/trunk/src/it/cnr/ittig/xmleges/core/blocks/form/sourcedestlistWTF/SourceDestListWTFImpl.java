@@ -80,6 +80,10 @@ public class SourceDestListWTFImpl implements SourceDestListWTF, Loggable, Servi
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws java.lang.Exception {
 		form.setMainComponent(getClass().getResourceAsStream("SourceDestListWTF.jfrm"));
+		
+		//TODO verificare se questo HELP serve
+		form.setHelpKey("help.contents.form.sourcedestlistwtf");
+		
 		sourceList = (JList) form.getComponentByName("editor.forms.sourcedestlist.list.sourcelist");
 		destList = (JList) form.getComponentByName("editor.forms.sourcedestlist.list.destlist");
 		sourcetxtfield = (JTextField) form.getComponentByName("editor.forms.sourcedestlistWTF.txtfield.sourcetxtfield");

@@ -92,6 +92,10 @@ public class ExecMonitorImpl implements ExecMonitor, EventManagerListener, Logga
 		eventManager.addListener(this, ExecStartedEvent.class);
 		eventManager.addListener(this, ExecFinishedEvent.class);
 		form.setName("exec.monitor.form");
+		
+		//TODO verificare la necessità di questo HELP
+		form.setHelpKey("help.contents.form.execmonitor");
+		
 		form.setMainComponent(getClass().getResourceAsStream("ExecMonitor.jfrm"));
 		form.setCustomButtons(new String[] { "exec.monitor.form.close" });
 		JList list = (JList) form.getComponentByName("exec.monitor.form.list");

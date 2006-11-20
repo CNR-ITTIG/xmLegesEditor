@@ -131,6 +131,9 @@ public class VersionImpl implements Version, ListSelectionListener, Loggable, Se
 		try {
 			form.setMainComponent(this.getClass().getResourceAsStream("Version.jfrm"));
 			form.setSize(700, 400);
+			
+			form.setHelpKey("help.contents.form.version");
+			
 			form.setName("version");
 			list = (JList) form.getComponentByName("version.list");
 			desc = (JEditorPane) form.getComponentByName("version.desc");

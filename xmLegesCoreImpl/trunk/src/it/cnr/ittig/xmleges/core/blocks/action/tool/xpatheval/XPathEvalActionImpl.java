@@ -139,6 +139,10 @@ public class XPathEvalActionImpl implements XPathEvalAction, EventManagerListene
 		eventManager.addListener(this, DocumentClosedEvent.class);
 		form.setMainComponent(getClass().getResourceAsStream("XPathEval.jfrm"));
 		form.setName("action.tool.xpatheval.form");
+		
+		//TODO verificare la necessità di questo HELP
+		form.setHelpKey("help.contents.form.xpatheval");
+		
 		form.setSize(700, 600);
 		Action btnAction = utilUi.applyI18n("action.tool.xpatheval.eval", new EvalButtonAction());
 		xpathField = (JTextField) form.getComponentByName("action.tool.xpatheval.xpath");

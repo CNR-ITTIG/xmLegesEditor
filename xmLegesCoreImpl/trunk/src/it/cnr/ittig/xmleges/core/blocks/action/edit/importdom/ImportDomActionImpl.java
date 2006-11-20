@@ -136,6 +136,9 @@ public class ImportDomActionImpl implements ImportDomAction, EventManagerListene
 		form.setSize(600, 500);
 		form.setName("edit.importdom.form");
 
+		//TODO verificare necessità di questo help
+		form.setHelpKey("help.contents.form.importdom");
+		
 		form.replaceComponent("edit.importdom.form.file", fileTextField.getAsComponent());
 		fileTextField.addFileTextFieldListener(this);
 		fileTextField.setFileFilter(new RegexpFileFilter("XML", ".*\\.xml"));

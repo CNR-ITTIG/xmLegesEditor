@@ -244,6 +244,7 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 		dialogChanged = true;
 	}
 
+	//METODO DA ELIMINARE
 	public void setHelpKey(String key, FormClosedListener helpFormlistener) {
 		this.helpKey = key;		
 		this.helpFormlistener = helpFormlistener;

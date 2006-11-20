@@ -116,6 +116,9 @@ public class BugReportImpl implements BugReport, /* ActionListener,*/ Loggable, 
 	public void initialize() throws java.lang.Exception {
 		form.setMainComponent(getClass().getResourceAsStream("BugReport.jfrm"));
 		form.setName("bugreport");
+		
+		form.setHelpKey("help.contents.form.bugreport");
+		
 		form.setSize(550, 550);
 		form.setCustomButtons(new String[] { "generic.close" });
 		mailFrom = (JTextField) form.getComponentByName("bugreport.mail.from");

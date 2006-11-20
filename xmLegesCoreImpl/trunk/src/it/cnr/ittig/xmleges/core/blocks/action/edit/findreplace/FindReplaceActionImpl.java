@@ -122,6 +122,9 @@ public class FindReplaceActionImpl implements FindReplaceAction, EventManagerLis
 		form.setMainComponent(getClass().getResourceAsStream("FindReplace.jfrm"));
 		form.setCustomButtons(new String[] { "action.edit.findreplace.btn.close" });
 		form.setName("action.edit.findreplace");
+		
+		form.setHelpKey("help.contents.form.findreplace");
+		
 		// form.setSize(300, 250);
 		find = (JTextField) form.getComponentByName("action.edit.findreplace.find");
 		find.addCaretListener(this);

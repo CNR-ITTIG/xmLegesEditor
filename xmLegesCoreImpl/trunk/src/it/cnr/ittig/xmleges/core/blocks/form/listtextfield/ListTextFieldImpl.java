@@ -99,6 +99,9 @@ public class ListTextFieldImpl implements MouseListener, ListTextField, ListSele
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws java.lang.Exception {
 		form.setMainComponent(getClass().getResourceAsStream("ListTextField.jfrm"));
+		
+		form.setHelpKey("help.contents.form.listtextfield");
+		
 		list = (JList) form.getComponentByName("form.listtextfield.list");
 		list.addListSelectionListener(this);
 		list.addMouseListener(this);		
