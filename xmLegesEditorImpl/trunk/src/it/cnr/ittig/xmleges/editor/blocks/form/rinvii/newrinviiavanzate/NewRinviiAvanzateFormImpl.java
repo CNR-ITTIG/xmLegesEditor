@@ -273,6 +273,8 @@ public class NewRinviiAvanzateFormImpl implements NewRinviiAvanzateForm, Loggabl
 		form.setSize(600, 450);
 		form.setName("editor.form.rinvii.newrinvii.avanzate");
 
+		form.setHelpKey("help.contents.form.newrinviiavanzate");
+		
 		labelallegati = (JLabel) form.getComponentByName("editor.form.rinvii.newrinvii.avanzate.label.allegati");
 		labeldenominazione = (JLabel) form.getComponentByName("editor.form.rinvii.newrinvii.avanzate.label.denominazione");
 		labeltitolo = (JLabel) form.getComponentByName("editor.form.rinvii.newrinvii.avanzate.label.titolo");

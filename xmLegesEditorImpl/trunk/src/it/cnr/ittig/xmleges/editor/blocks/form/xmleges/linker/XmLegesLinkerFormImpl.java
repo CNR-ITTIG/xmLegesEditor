@@ -182,6 +182,9 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 		form.setMainComponent(this.getClass().getResourceAsStream("xmLegesLinker.jfrm"));
 		form.setSize(700, 500);
 		form.setName("editor.form.xmleges.link");
+		
+		form.setHelpKey("help.contents.form.xmlegeslinker");
+		
 		regione = (JComboBox) form.getComponentByName("editor.form.xmleges.link.regione");
 		ente = (JComboBox) form.getComponentByName("editor.form.xmleges.link.ente");
 		// FIXME si potrebbe mettere anche editabile ma al parser non si passa questa stringa ma la urn dell'ente selezionato

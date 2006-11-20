@@ -340,6 +340,7 @@ public class InquadramentoFormImpl implements InquadramentoForm, Loggable,
 		form.setMainComponent(getClass().getResourceAsStream("Inquadramento.jfrm"));
 		form.setName("editor.form.meta.inquadramento.riepilogo");
 		
+		form.setHelpKey("help.contents.form.inquadramento");
 		form.setSize(350, 300);
 		
 		formDatiInfodoc.setMainComponent(getClass().getResourceAsStream("DatiInfodoc.jfrm"));

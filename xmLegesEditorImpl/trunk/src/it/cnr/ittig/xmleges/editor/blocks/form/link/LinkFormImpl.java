@@ -158,7 +158,7 @@ public class LinkFormImpl implements LinkForm, Loggable, Serviceable, Configurab
 		textUrl = (JTextField) form.getComponentByName("editor.form.link.url");
 		verificaButton = (JButton) form.getComponentByName("editor.form.link.verifica");
 		verificaButton.addActionListener(this);		
-		form.setHelpKey("help.contents.index.link");
+		form.setHelpKey("help.contents.form.link");
 	}
 			
 	public void actionPerformed(ActionEvent evt) {

@@ -101,6 +101,7 @@ public class EventoFormImpl implements EventoForm, Loggable, Serviceable, Initia
 		clearBtn = (AbstractButton ) form.getComponentByName("editor.form.evento.clear");
 		clearBtn.setAction(new ClearEventoAction());
 		
+		form.setHelpKey("help.contents.form.evento");
 	}
 
 	// /////////////////////////////////////////////////////// UrnForm Interface

@@ -109,6 +109,8 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 
 		form.setName("editor.form.meta.cnr");
 		
+		form.setHelpKey("help.contents.form.cnrproprietari");
+		
 		strutturaEmanante = (JTextField) form.getComponentByName("editor.form.meta.cnr.struttura");
 		autoritaEmanante = (JTextField) form.getComponentByName("editor.form.meta.cnr.autorita");
 		tipoDestinatario = (JComboBox) form.getComponentByName("editor.form.meta.cnr.destinatario");

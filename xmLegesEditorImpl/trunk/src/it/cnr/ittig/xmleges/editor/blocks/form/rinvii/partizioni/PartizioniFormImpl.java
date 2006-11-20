@@ -127,6 +127,9 @@ public class PartizioniFormImpl implements PartizioniForm, Loggable, Serviceable
 		form.setMainComponent(this.getClass().getResourceAsStream("Partizioni.jfrm"));
 		form.setSize(350, 250);
 		form.setName("editor.form.rinvii.partizioni");
+		
+		form.setHelpKey("help.contents.form.avanzate");
+		
 		comboPartizioni_0 = (JComboBox) form.getComponentByName("editor.form.rinvii.partizioni.combo.tipo0");
 		comboPartizioni_1 = (JComboBox) form.getComponentByName("editor.form.rinvii.partizioni.combo.tipo1");
 		comboPartizioni_2 = (JComboBox) form.getComponentByName("editor.form.rinvii.partizioni.combo.tipo2");

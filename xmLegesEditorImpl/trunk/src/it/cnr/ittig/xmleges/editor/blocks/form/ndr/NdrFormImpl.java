@@ -88,6 +88,9 @@ public class NdrFormImpl implements NdrForm, ListSelectionListener, CaretListene
 		form.setMainComponent(this.getClass().getResourceAsStream("Ndr.jfrm"));
 		form.setSize(300, 400);
 		form.setName("editor.form.ndr");
+		
+		form.setHelpKey("help.contents.form.ndr");
+		
 		lista = (JList) form.getComponentByName("editor.form.ndr.lista");
 		cardinale = (JRadioButton) form.getComponentByName("editor.form.ndr.radio.cardinale");
 		romano = (JRadioButton) form.getComponentByName("editor.form.ndr.radio.romano");

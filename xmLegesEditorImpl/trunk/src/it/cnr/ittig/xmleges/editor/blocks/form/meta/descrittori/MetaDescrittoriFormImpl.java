@@ -263,7 +263,9 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 		report_redazioneUrl = (JTextField) form.getComponentByName("editor.meta.descrittori.riepilogo.redazione.url");
 		report_redazioneContributo = (JTextField) form.getComponentByName("editor.meta.descrittori.riepilogo.redazione.contributo");
 		form.setName("editor.form.meta.descrittori.riepilogo");
-
+		
+		form.setHelpKey("help.contents.form.metadescrittori");
+		
 		sottoFormDatiPubblicazione.setMainComponent(getClass().getResourceAsStream("DatiPubblicazione.jfrm"));
 		
 

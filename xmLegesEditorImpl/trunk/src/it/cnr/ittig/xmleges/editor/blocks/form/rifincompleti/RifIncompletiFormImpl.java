@@ -227,7 +227,7 @@ public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable,
 		rifInterno.addActionListener(this);
 
 		form.addFormVerifier(this);
-		form.setHelpKey("help.contents.index.rifincompleti");
+		form.setHelpKey("help.contents.form.rifincompleti");
 	}
 
 	private boolean isResolved(Node node) {

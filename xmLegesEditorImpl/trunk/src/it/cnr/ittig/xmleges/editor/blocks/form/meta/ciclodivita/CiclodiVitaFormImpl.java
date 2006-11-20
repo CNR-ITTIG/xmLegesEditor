@@ -325,7 +325,9 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 		
 		
 		form.setMainComponent(getClass().getResourceAsStream("Ciclodivita.jfrm"));
-				
+		
+		form.setHelpKey("help.contents.form.ciclodivita");
+		
 		relazioniList = (JList) form.getComponentByName("editor.form.meta.ciclodivita.relazioni");
 		eventiList = (JList) form.getComponentByName("editor.form.meta.ciclodivita.eventi");
 	

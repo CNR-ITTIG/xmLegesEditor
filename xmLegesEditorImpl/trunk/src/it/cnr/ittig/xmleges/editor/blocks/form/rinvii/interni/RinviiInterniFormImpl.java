@@ -118,6 +118,9 @@ public class RinviiInterniFormImpl implements RinviiInterniForm, EventManagerLis
 		eventManager.addListener(this, SelectionChangedEvent.class);
 		form.setMainComponent(this.getClass().getResourceAsStream("RinviiInterni.jfrm"));
 		form.setName("editor.form.rinvii.interni");
+		
+		form.setHelpKey("help.contents.form.rinviiinterni");
+		
 		id = (JTextField) form.getComponentByName("editor.form.rinvii.interni.id");
 		testo = (JTextField) form.getComponentByName("editor.form.rinvii.interni.testo");
 		add = (JButton) form.getComponentByName("editor.form.rinvii.interni.add");

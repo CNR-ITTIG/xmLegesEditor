@@ -118,6 +118,9 @@ public class AnnessiFormImpl implements AnnessiForm, Loggable, Serviceable, Init
 		form.setMainComponent(this.getClass().getResourceAsStream("Annessi.jfrm"));
 		form.setSize(550, 250);
 		form.setName("editor.form.annessi");
+		
+		form.setHelpKey("help.contents.form.annessi");
+		
 		internoTemplate = (JRadioButton) form.getComponentByName("editor.form.annessi.radio.internotemplate");
 		internoFile = (JRadioButton) form.getComponentByName("editor.form.annessi.radio.internofile");
 		esterno = (JRadioButton) form.getComponentByName("editor.form.annessi.radio.esterno");

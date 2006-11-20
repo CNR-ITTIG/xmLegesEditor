@@ -160,6 +160,8 @@ public class FileNewFormImpl implements FileNewForm, Loggable, Serviceable, Init
 		form.setMainComponent(this.getClass().getResourceAsStream("FileNew.jfrm"));
 		form.setSize(550, 420);
 		form.setName("editor.form.filenew");
+		
+		form.setHelpKey("help.contents.form.filenew");
 
 		classilist = (JList) form.getComponentByName("editor.form.filenew.list.classe");
 		provvedimentilist = (JList) form.getComponentByName("editor.form.filenew.list.provvedimento");

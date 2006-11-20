@@ -149,6 +149,8 @@ Serviceable, Initializable, ActionListener {
 		form.setMainComponent(getClass().getResourceAsStream("MaterieVocabolari.jfrm"));
 		form.setName("editor.form.meta.descrittori.materie");
 		
+		form.setHelpKey("help.contents.form.materievocabolari");
+		
 		form.setSize(350, 150);
 		vocabolariButton = (JButton) form.getComponentByName("editor.meta.vocabolario.modifica_btn");
 		vocabolariButton.addActionListener(this);

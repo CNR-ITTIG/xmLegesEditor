@@ -133,6 +133,8 @@ public class UrnDocumentoFormImpl implements UrnDocumentoForm, Initializable, Se
 		form.setMainComponent(getClass().getResourceAsStream("UrnDocumento.jfrm"));
 		form.replaceComponent("editor.meta.urn.list", listtextfield.getAsComponent());
 		form.addFormVerifier(this);
+		
+		form.setHelpKey("help.contents.form.urndocumento");
 	}
 
 	public Urn[] getUrn() {

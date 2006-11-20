@@ -57,6 +57,9 @@ public class TabelleFormImpl implements TabelleForm, Loggable, Serviceable {
 	public void initialize() throws java.lang.Exception {
 		form.setMainComponent(getClass().getResourceAsStream("Tabelle.jfrm"));
 		form.setName("editor.form.tabelle");
+		
+		form.setHelpKey("help.contents.form.tabelle");
+		
 		((JSpinner) form.getComponentByName("editor.form.tabelle.rows")).setValue(new Integer(3));
 		((JSpinner) form.getComponentByName("editor.form.tabelle.cols")).setValue(new Integer(3));
 	}

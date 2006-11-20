@@ -191,6 +191,8 @@ public class NewRinviiFormImpl implements NewRinviiForm, Loggable, Serviceable, 
 		// TODO cambiare il nome per editor.form.rinvii.newrinvii
 		form.setName("editor.form.rinvii.newrinvii");
 
+		form.setHelpKey("help.contents.form.newrinvii");
+		
 		areaurn = (JList) form.getComponentByName("editor.form.rinvii.newrinvii.list.urn");
 		areaurn.setEnabled(false);
 

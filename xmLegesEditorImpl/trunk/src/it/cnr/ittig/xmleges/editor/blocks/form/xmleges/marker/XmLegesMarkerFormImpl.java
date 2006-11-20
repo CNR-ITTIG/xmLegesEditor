@@ -143,6 +143,8 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 		form.setSize(700, 550);
 		form.setName("editor.form.xmleges.marker");
 
+		form.setHelpKey("help.contents.form.xmlegesmarker");
+		
 		form.replaceComponent("editor.form.xmleges.marker.file", fileTextField.getAsComponent());
 		
 		form.addFormVerifier(this);

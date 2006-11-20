@@ -10,7 +10,6 @@ import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.FormVerifier;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.MetaCiclodivita;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 import it.cnr.ittig.xmleges.editor.services.form.evento.EventoForm;
 import it.cnr.ittig.xmleges.editor.services.form.vigenza.VigenzaForm;
@@ -104,6 +103,8 @@ public class VigenzaFormImpl implements VigenzaForm, FormVerifier, Loggable, Ser
 		form.replaceComponent("editor.selezionevigenza.eventoiniziovigore", eventoiniziovigoreform.getAsComponent());
 		form.replaceComponent("editor.selezionevigenza.eventofinevigore", eventofinevigoreform.getAsComponent());
 
+		form.setHelpKey("help.contents.form.vigenza");
+		
 		vigenzaStatus = (JComboBox) form.getComponentByName("editor.selezionevigenza.status");
 		vigenzaStatus.addItem("--");
 		vigenzaStatus.addItem("omissis");

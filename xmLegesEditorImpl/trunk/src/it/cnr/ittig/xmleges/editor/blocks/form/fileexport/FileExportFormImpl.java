@@ -96,6 +96,8 @@ public class FileExportFormImpl implements FileExportForm, Loggable, Serviceable
 		form.setSize(350, 150);
 		form.setName("editor.form.fileexport");
 		form.addFormVerifier(this);		
+		
+		form.setHelpKey("help.contents.form.fileexport");
 	}
 
 	

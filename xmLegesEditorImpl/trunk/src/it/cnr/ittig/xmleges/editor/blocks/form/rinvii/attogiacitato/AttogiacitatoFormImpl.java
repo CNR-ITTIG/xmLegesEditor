@@ -112,6 +112,9 @@ public class AttogiacitatoFormImpl implements AttogiacitatoForm, Loggable, Servi
 		form.setMainComponent(this.getClass().getResourceAsStream("Attogiacitato.jfrm"));
 		//form.setSize(350, 250);
 		form.setName("editor.form.rinvii.attogiacitato");
+		
+		form.setHelpKey("help.contents.form.attogiacitato");
+		
 		elenco = (JList) form.getComponentByName("editor.form.rinvii.attogiacitato.list.elenco");
 		JLabel labelelenco = (JLabel) form.getComponentByName("editor.form.rinvii.attogiacitato.label.elenco");
 
