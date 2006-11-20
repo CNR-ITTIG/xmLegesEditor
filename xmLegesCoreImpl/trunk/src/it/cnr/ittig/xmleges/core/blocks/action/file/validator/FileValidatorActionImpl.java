@@ -16,6 +16,7 @@ import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentOpenedEvent;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
+import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 
 import java.awt.Color;
@@ -80,6 +81,8 @@ public class FileValidatorActionImpl implements FileValidatorAction, EventManage
 
 	ShowValidationMsgAction showValidationMsgAction = new ShowValidationMsgAction();
 
+	I18n i18n;
+	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
@@ -94,6 +97,7 @@ public class FileValidatorActionImpl implements FileValidatorAction, EventManage
 		fileOpenAction = (FileOpenAction) serviceManager.lookup(FileOpenAction.class);
 		fileSaveAction = (FileSaveAction) serviceManager.lookup(FileSaveAction.class);
 		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
+		i18n = (I18n) serviceManager.lookup(I18n.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
@@ -130,19 +134,16 @@ public class FileValidatorActionImpl implements FileValidatorAction, EventManage
 			bars.getStatusBar().setText("file.validator.novalid", "file-validator");
 			bars.getStatusBar().setBackground(Color.RED, "file-validator");
 			bars.getStatusBar().setForeground(Color.RED, "file-validator");
-			// TODO i18n
-			StringBuffer sb = new StringBuffer("Documento non valido per i seguenti motivi:\n");
+			StringBuffer sb = new StringBuffer(i18n.getTextFor("filevalidator.documentononvalido"));
 			for (int i = 0; i < errors.length; i++) {
 				sb.append(errors[i]);
 				sb.append('\n');
 			}
 			if (!yesNo) {
-				// TODO I18n
-				sb.append("\nUtilizzare xmLegesEditor solo per rendere valido il documento.");
+				sb.append(i18n.getTextFor("filevalidator.utilizzoxmleges"));
 				utilMsg.msgError(sb.toString());
 			} else {
-				// TODO I18n
-				sb.append("\nVerificare la validità del documento?");
+				sb.append(i18n.getTextFor("filevalidator.controllo"));
 				if (utilMsg.msgYesNo(sb.toString()))
 					doValidation();
 			}

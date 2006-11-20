@@ -66,7 +66,7 @@ public class HelpActionImpl implements HelpAction, Loggable, Serviceable, Initia
 
 	public void doContents() {
 		logger.debug("Call Help");
-		help.helpOn("help.contents.index");
+		help.helpOn("help.contents.browser");
 	}
 
 	/**
