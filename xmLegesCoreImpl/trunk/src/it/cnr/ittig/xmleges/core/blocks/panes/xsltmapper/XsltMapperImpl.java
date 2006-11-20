@@ -16,8 +16,11 @@ import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.panes.xsltmapper.XsltMapper;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
 
+import java.io.IOException;
 import java.util.EventObject;
 import java.util.Hashtable;
+
+import javax.swing.JEditorPane;
 
 import org.apache.xpath.NodeSet;
 import org.w3c.dom.Node;
@@ -189,6 +192,20 @@ public class XsltMapperImpl implements XsltMapper, EventManagerListener, Loggabl
 		return instance.getI18nNodeText(node);
 	}
 
+	public static String getValidUrn(NodeList nodeList) {
+		
+		JEditorPane editor = new JEditorPane();
+		String test="";
+		try {
+	       editor.setPage("http://www.nir.it/cgi-bin/N2Ln?"+nodeList.item(0).getNodeValue());
+	       test = editor.getText().substring(editor.getText().indexOf("URN"), 4);
+	       //editor.getText().substring(editor.getText().indexOf("URN"), 4).equals("URN=");
+	    } catch (Exception e) {	
+			return "( "+test+" )";
+	    }
+		return "( OK )";
+	}
+	
 	public static NodeList getTextNodeIfEmpty(NodeList nodeList) {
 		if (instance == null)
 			return null;

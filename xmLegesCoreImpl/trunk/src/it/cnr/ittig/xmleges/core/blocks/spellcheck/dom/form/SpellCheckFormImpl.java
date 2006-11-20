@@ -59,7 +59,7 @@ import com.jeta.forms.components.image.ImageComponent;
  * @author <a href="mailto:agnoloni@ittig.cnr.it">Tommaso Agnoloni </a>
  * 
  */
-public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable, Initializable, ActionListener, ListSelectionListener, FormClosedListener {
+public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable, Initializable, ActionListener, ListSelectionListener {
 
 	private static final int ICON_NONE = 0;
 
@@ -148,7 +148,7 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 		form.setMainComponent(getClass().getResourceAsStream("SpellCheck.jfrm"));
 		form.setName("spellcheck");
 		
-		form.setHelpKey("help.contents.index.spellcheckform",this);
+		form.setHelpKey("help.contents.index.spellcheckform");
 
 		originalWordLabel = (JLabel) form.getComponentByName("spellcheck.label.originalword");
 		wordTextField = (JTextField) form.getComponentByName("spellcheck.textfield.word");
@@ -175,7 +175,7 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 		setOriginalWord("");
 		setStatusIcon(ICON_NONE);
 		
-	
+
 	}
 
 	
@@ -678,10 +678,5 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 		wordTextField.setText((String) suggestionsList.getSelectedValue());
 	}
 
-	public void formClosed() {
-		logger.debug("help form CLOSED");
-		return;
-		
-	}
 }
 
