@@ -3,7 +3,8 @@
 										xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  
 										xmlns="http://www.w3.org/HTML/1998/html4" 
 										xmlns:h="http://www.w3.org/HTML/1998/html4" 
-										xmlns:xlink="http://www.w3.org/1999/xlink">
+										xmlns:xlink="http://www.w3.org/1999/xlink"
+										xmlns:date="http://exslt.org/dates-and-times">
 										
 	<xsl:output method="html"  indent="yes"/>
 	<!-- ======================================================== -->
@@ -37,6 +38,17 @@
 				</xsl:choose>
 			</p>
 
+
+			<xsl:choose>
+				<xsl:when test="//*[name()='evento']/@data!=''">
+					<div id="timeline">
+						<xsl:call-template name="TimeLine" />
+					</div>
+				</xsl:when>
+			</xsl:choose>
+
+
+
 			<div class="intestazione">
 				<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='intestazione']" />
 				</div>
@@ -52,9 +64,11 @@
             	<div class="meta">
             		<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='meta']" />
             	</div>
-            	<div>
+            	<xsl:if test="$datafine=''">
+            	  <div>
             		<xsl:call-template name="gestionenote" /> 
-            	</div>
+            	  </div>
+            	</xsl:if>  
 			</body>
 		</html>
 	</xsl:template>
@@ -76,7 +90,7 @@
 	</xsl:template>
 
 	<xsl:template match="//*[name()='titoloDoc']">
-				<div class="title">
+				<div class="titleLegge">
 					<xsl:apply-templates/>
 				</div>
 	</xsl:template>	
@@ -102,7 +116,14 @@
 		<hr />
 		<a name="{@id}"/>		
 		<p class="capo" name="{@id}">
-			<xsl:call-template name="vigenza"/>
+		<xsl:choose>
+			<xsl:when test="$datafine!=''">
+				<xsl:call-template name="vigenza"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="multivigenza"/>
+			</xsl:otherwise>
+		</xsl:choose>				
 		</p>
 	</xsl:template>
 	
@@ -132,7 +153,14 @@
 	<xsl:template match="//*[name()='articolo']">
 		<a name="{@id}"/>
 		<div class="articolo" name="{@id}">
-			<xsl:call-template name="vigenza"/>
+			<xsl:choose>
+				<xsl:when test="$datafine!=''">
+					<xsl:call-template name="vigenza"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:call-template name="multivigenza"/>
+				</xsl:otherwise>
+			</xsl:choose>				
 		</div>
 	</xsl:template>
 	
@@ -156,7 +184,14 @@
 	<xsl:template match="//*[name()='comma']">
 		<a name="{@id}"/>
 		<p class="comma" name="{@id}">
-			<xsl:call-template name="vigenza" />
+			<xsl:choose>
+				<xsl:when test="$datafine!=''">
+					<xsl:call-template name="vigenza"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:call-template name="multivigenza"/>
+				</xsl:otherwise>
+			</xsl:choose>				
 		</p>
 	</xsl:template>
 
@@ -174,7 +209,14 @@
 	<xsl:template match="//*[name()='el'] | //*[name()='en'] | //*[name()='ep']">
 	<a name="{@id}"/>		
 	<p class="{local-name()}" name="{@id}">
-		<xsl:call-template name="vigenza"/>	
+		<xsl:choose>
+			<xsl:when test="$datafine!=''">
+				<xsl:call-template name="vigenza"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="multivigenza"/>
+			</xsl:otherwise>
+		</xsl:choose>				
 	</p>			
 
 	</xsl:template>
@@ -292,7 +334,7 @@
 		</ul>
 	</xsl:template>
 	<xsl:template match="//*[name()='sottoscrivente']">
-		<li>
+		<li class="li">
 			<xsl:apply-templates/>
 		</li>
 	</xsl:template>
@@ -393,9 +435,119 @@
 	<!-- ======================================================== -->
 	<xsl:template match="//*[name()='h:span']">
 		<span>
-		<xsl:call-template name="vigenza"/>
+			<xsl:choose>
+				<xsl:when test="$datafine!=''">
+					<xsl:call-template name="vigenza"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:call-template name="multivigenza"/>
+				</xsl:otherwise>
+			</xsl:choose>				
 		</span>
 	</xsl:template>	
+
+	<!-- ======================================================== -->
+	<!--                                                          -->
+	<!--  template gestione MULTIvigenze                          -->
+	<!--                                                          -->
+	<!-- ======================================================== -->
+	
+	<xsl:template name="multivigenza" >
+		<xsl:variable name="stato">
+		<xsl:value-of select="@status" />
+		</xsl:variable>
+		<xsl:variable name="inizio_id">
+			<xsl:value-of select="@iniziovigore"/>
+		</xsl:variable>
+		<xsl:variable name="fine_id">
+			<xsl:value-of select="@finevigore"/>
+		</xsl:variable>		
+		<xsl:variable name="data_inizio">
+			<xsl:value-of select="//*[name()='evento'][@id=$inizio_id]/@data"/>
+		</xsl:variable>
+		<xsl:variable name="data_fine">
+			<xsl:value-of select="//*[name()='evento'][@id=$fine_id]/@data"/>
+		</xsl:variable>
+		<xsl:variable name="id">
+			<xsl:value-of select="@id"/>
+		</xsl:variable>
+		<xsl:variable name="tooltip">
+				<xsl:choose>
+				<!-- ================= data_fine!='' =========-->
+					<xsl:when test="$data_fine!=''">In vigore&#160;<xsl:choose>
+										<xsl:when test="$data_inizio!=''">dal <xsl:value-of select="concat(substring($data_inizio,7,2),'/',substring($data_inizio,5,2),'/',substring($data_inizio,1,4))"/>
+										</xsl:when>
+										<xsl:otherwise><xsl:text>fino</xsl:text>
+										</xsl:otherwise>
+									</xsl:choose>&#160;al <xsl:value-of select="concat(substring($data_fine,7,2),'/',substring($data_fine,5,2),'/',substring($data_fine,1,4))"/>
+									<xsl:choose>			
+										<xsl:when test="$stato!=''">(<xsl:value-of select="$stato"/>)</xsl:when>
+									</xsl:choose>		
+					</xsl:when>
+				<!-- ================= data_inizio!='' =========-->
+					<xsl:when test="$data_inizio!=''">In vigore&#160;dal <xsl:value-of select="concat(substring($data_inizio,7,2),'/',substring($data_inizio,5,2),'/',substring($data_inizio,1,4))"/></xsl:when>
+				</xsl:choose>
+		</xsl:variable>
+
+			<xsl:attribute name="title"><xsl:copy-of select="$tooltip" /></xsl:attribute>
+			<xsl:choose>
+
+			<!-- ========================================== DATA FINE !='' ====================================== -->				
+				<xsl:when test="$data_fine!=''">
+					<xsl:choose>
+						<xsl:when test="$data_fine&lt;$datafine">
+							<!--===================== n{@id}, t{@id}:'n' e 't' differenziano il testo dalle note
+							    ===================== <xsl:value-of select="@id"/>: il valore accanto a 'VigNota', l'id della partizione
+							-->
+							<span> [ ... ] <a href="#n{$id}" name="t{@id}"> <sup>Vig{<xsl:value-of select="@id"/>}</sup></a> </span>
+						</xsl:when>
+						<xsl:when test="$data_inizio&gt;number(number($datafine)-1)">
+							<span style="color:#060;" title="vigente">
+								<xsl:apply-templates />
+							    [ ... ] <a href="#n{$id}" name="t{@id}"> <sup>Vig{<xsl:value-of select="@id"/>}</sup></a>
+							</span>
+						</xsl:when>						
+						<xsl:otherwise>
+							<xsl:choose>			
+								<xsl:when test="$stato!=''">
+									<span style="color:#f00;" title="{$stato}"><xsl:apply-templates /> 
+									 [ ... ] <a href="#n{$id}" name="t{@id}"> <sup>Vig{<xsl:value-of select="@id"/>}</sup></a>
+									</span>
+								</xsl:when>
+								<xsl:otherwise>
+									<span style="color:#f00;" title="abrogato"><xsl:apply-templates />
+									 [ ... ] <a href="#n{$id}" name="t{@id}"> <sup>Vig{<xsl:value-of select="@id"/>}</sup></a>
+									</span>
+								</xsl:otherwise>
+							</xsl:choose>
+						</xsl:otherwise>
+					</xsl:choose>
+				</xsl:when>	
+								<!-- ========================================== DATA inizio !='' ====================================== -->
+				<xsl:when test="$data_inizio!=''">
+					<xsl:choose>
+						<xsl:when test="$data_inizio&gt;$datafine or $data_fine&lt;$datafine">
+							<!--===================== n{@id}, t{@id}:'n' e 't' differenziano il testo dalle note
+							    ===================== <xsl:value-of select="@id"/>: il valore accanto a 'VigNota', l'id della partizione
+							-->
+							<span> [ ... ] <a href="#n{$id}" name="t{@id}"> <sup>{<xsl:value-of select="@id"/>}</sup></a> </span>
+						</xsl:when>
+						<xsl:otherwise>
+							<span style="color:#060;" title="vigente">
+								<xsl:apply-templates />
+								[ ... ] <a href="#n{$id}" name="t{@id}"> <sup>Vig{<xsl:value-of select="@id"/>}</sup></a>
+							</span>
+						</xsl:otherwise>
+					</xsl:choose>
+				</xsl:when>			
+
+
+				<xsl:otherwise>
+					<xsl:apply-templates />
+				</xsl:otherwise>
+			</xsl:choose>
+	</xsl:template>
+
 	
 	<!-- ======================================================== -->
 	<!--                                                          -->
@@ -419,54 +571,62 @@
 		<xsl:variable name="data_fine">
 			<xsl:value-of select="//*[name()='evento'][@id=$fine_id]/@data"/>
 		</xsl:variable>
-
-
+		<xsl:variable name="id">
+			<xsl:value-of select="@id"/>
+		</xsl:variable>
+		<xsl:variable name="tooltip">
+				<xsl:choose>
+					<xsl:when test="$data_fine!=''">In vigore&#160;<xsl:choose>
+										<xsl:when test="$data_inizio!=''">dal <xsl:value-of select="concat(substring($data_inizio,7,2),'/',substring($data_inizio,5,2),'/',substring($data_inizio,1,4))"/>
+										</xsl:when>
+										<xsl:otherwise><xsl:text>fino</xsl:text>
+										</xsl:otherwise>
+									</xsl:choose>&#160;al <xsl:value-of select="concat(substring($data_fine,7,2),'/',substring($data_fine,5,2),'/',substring($data_fine,1,4))"/>
+									<xsl:choose>			
+										<xsl:when test="$stato!=''">(<xsl:value-of select="$stato"/>)</xsl:when>
+									</xsl:choose>		
+					</xsl:when>
+					<xsl:when test="$data_inizio!=''">In vigore&#160;dal <xsl:value-of select="concat(substring($data_inizio,7,2),'/',substring($data_inizio,5,2),'/',substring($data_inizio,1,4))"/></xsl:when>
+				</xsl:choose>
+		</xsl:variable>
 
 			<xsl:choose>
-
-				<!-- ========================================== DATA inizio !='' ====================================== -->
-				<xsl:when test="$data_inizio!=''">
-					<xsl:choose>
-
-						<xsl:when test="$data_inizio&gt;$datafine">
-							<!--===================== n{@id}, t{@id}:'n' e 't' differenziano il testo dalle note
-							    ===================== <xsl:value-of select="@id"/>: il valore accanto a 'v.nota', l'id della partizione
-							-->
-							<span> [ ... ] <a href="#n{@id}" name="t{@id}"> <sup> v. nota  </sup> </a> <sup style="color:#000">(<xsl:value-of select="@id"/>) </sup></span>
-						</xsl:when>
-						<xsl:otherwise>
-							<span style="color:#060;" title="vigente">
-								<xsl:apply-templates />
-							</span><span> [ ... ] <a href="#n{@id}" name="t{@id}"> <sup> v. nota </sup> </a> <sup style="color:#000">(<xsl:value-of select="@id"/>) </sup> </span>
-						</xsl:otherwise>
-					</xsl:choose>
-				</xsl:when>
 
 			<!-- ========================================== DATA FINE !='' ====================================== -->				
 				<xsl:when test="$data_fine!=''">
 					<xsl:choose>
+						<xsl:when test="$data_fine&lt;number(number($datafine)+1)">
+							<xsl:attribute name="title"><xsl:copy-of select="$tooltip" /></xsl:attribute>
+ 							<xsl:choose>
+					  		  <xsl:when test="following-sibling::node()[1]//@iniziovigore=$fine_id">
+							  </xsl:when>
+					   		  <xsl:when test="preceding-sibling::node()[1]//@iniziovigore=$fine_id">
+					 		  </xsl:when>
+					 		  <xsl:otherwise>
+								<span> [ ... ] </span>	
+								<!-- 		<sup>{<xsl:copy-of select="$tooltip" />}</sup>   -->
+ 							  </xsl:otherwise>
+						   </xsl:choose>
 
-						<xsl:when test="$data_fine&lt;$datafine">
+						</xsl:when>
+						<xsl:when test="$data_inizio&lt;number(number($datafine)+1) and $data_fine&gt;$datafine">
+								<xsl:apply-templates />
+						</xsl:when>						
+					</xsl:choose>
+				</xsl:when>	
+			<!-- ========================================== DATA inizio !='' ====================================== -->
+				<xsl:when test="$data_inizio!=''">
+					<xsl:choose>
+						<xsl:when test="$data_inizio&gt;$datafine">
 							<!--===================== n{@id}, t{@id}:'n' e 't' differenziano il testo dalle note
-							    ===================== <xsl:value-of select="@id"/>: il valore accanto a 'v.nota', l'id della partizione
+							    ===================== <xsl:value-of select="@id"/>: il valore accanto a 'VigNota', l'id della partizione
 							-->
-							<span> [ ... ] <a href="#n{@id}" name="t{@id}"> <sup> v. nota </sup></a><sup style="color:#000">(<xsl:value-of select="@id"/>) </sup> </span>
 						</xsl:when>
 						<xsl:otherwise>
-							<xsl:choose>			
-								<xsl:when test="$stato!=''">
-									<span style="color:#f00;" title="{$stato}"><xsl:apply-templates /> 
-									</span><span> [ ... ] <a href="#n{@id}" name="t{@id}"> <sup> v. nota </sup> </a><sup style="color:#000">(<xsl:value-of select="@id"/>) </sup></span>
-								</xsl:when>
-								<xsl:otherwise>
-									<span style="color:#f00;" title="abrogato"><xsl:apply-templates />
-									</span><span> [ ... ] <a href="#n{@id}" name="t{@id}"> <sup> v. nota </sup> </a> <sup style="color:#000">(<xsl:value-of select="@id"/>) </sup></span>
-								</xsl:otherwise>
-							</xsl:choose>
+								<xsl:apply-templates />
 						</xsl:otherwise>
 					</xsl:choose>
-				</xsl:when>				
-
+				</xsl:when>			
 
 				<xsl:otherwise>
 					<xsl:apply-templates />
@@ -521,7 +681,7 @@
 		<!-- la prima volta che avviene unmatch scrive il titolo	-->
 		<xsl:choose>
 			<xsl:when test="$num=1">
-		   	<h1>Note alle vigenze</h1>
+		   	<h1>Note sulla vigenza</h1>
    		</xsl:when>
 		</xsl:choose>
 
@@ -566,8 +726,23 @@
        </xsl:for-each>
    </xsl:template>
  
-
-
-
+ 
+<xsl:template name="TimeLine">
+	<xsl:variable name="currentdate">
+		<xsl:value-of select="concat(substring(date:date-time(),1,4),substring(date:date-time(),6,2),substring(date:date-time(),9,2))"/>
+	</xsl:variable>
+	<p>
+		Date di vigenza che interessano il documento:
+		<xsl:text> </xsl:text> 
+		<xsl:for-each select="//*[name()='eventi']/*[@data!='']">
+			<xsl:variable name="data">
+				<xsl:value-of select="concat(substring(@data,7,2),'/',substring(@data,5,2),'/',substring(@data,1,4))"/>
+			</xsl:variable>
+			<xsl:value-of select="$data"/>
+			<xsl:text> </xsl:text> 
+		</xsl:for-each>
+	</p>		
+</xsl:template>
+ 
 
 </xsl:stylesheet>
