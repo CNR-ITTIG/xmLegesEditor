@@ -12,6 +12,7 @@ import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.form.FormClosedListener;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
+import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.action.rinvii.RinviiAction;
 import it.cnr.ittig.xmleges.editor.services.dom.rinvii.Rinvii;
@@ -99,6 +100,8 @@ public class RinviiActionImpl implements RinviiAction, EventManagerListener, For
 	RinviiInterniForm rinviiInterni;
 
 	Rinvii domrinvii;
+	
+	UtilMsg utilMsg;
 
 	FormClosedListener listener;
 
@@ -115,6 +118,7 @@ public class RinviiActionImpl implements RinviiAction, EventManagerListener, For
 		newrinvii = (NewRinviiForm) serviceManager.lookup(NewRinviiForm.class);
 		rinviiInterni = (RinviiInterniForm) serviceManager.lookup(RinviiInterniForm.class);
 		domrinvii = (Rinvii) serviceManager.lookup(Rinvii.class);
+		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 		nirUtilUrn = (NirUtilUrn) serviceManager.lookup(NirUtilUrn.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 	}
@@ -173,11 +177,11 @@ public class RinviiActionImpl implements RinviiAction, EventManagerListener, For
 				changeInt = false;
 				if (rinviiInterni.getMRif() != null) {
 					if (rinviiInterni.getMRif().length == 1)
-						setModified(domrinvii.change(nodeRif, mrif[0], rinviiInterni.getTesto()));
+						setModified(domrinvii.change(nodeRif, mrif[0], rinviiInterni.getTesto(),msgUpdateText()));
 					else
 						setModified(domrinvii.change(nodeRif, mrif, rinviiInterni.getDescrizioneMRifInt()));
 				} else {
-					setModified(domrinvii.change(nodeRif, "#" + rinviiInterni.getId(), rinviiInterni.getTesto()));
+					setModified(domrinvii.change(nodeRif, "#" + rinviiInterni.getId(), rinviiInterni.getTesto(),msgUpdateText()));
 				}
 			}
 		} else {
@@ -234,7 +238,7 @@ public class RinviiActionImpl implements RinviiAction, EventManagerListener, For
 			if (newrinvii.getUrn().size() > 1)
 				setModified(domrinvii.change(nodeRif, newrinvii.getUrn(), newrinvii.getDescrizioneMRif()));
 			else
-				setModified(domrinvii.change(nodeRif, (Urn) newrinvii.getUrn().get(0)));
+				setModified(domrinvii.change(nodeRif, (Urn) newrinvii.getUrn().get(0),msgUpdateText()));
 		}
 
 	}
@@ -376,6 +380,11 @@ public class RinviiActionImpl implements RinviiAction, EventManagerListener, For
 			return ret;
 		}
 		return null;
+	}
+	
+	
+	private boolean msgUpdateText(){
+		return utilMsg.msgYesNo("editor.rinvii.msg.updatetext");
 	}
 
 	public class RifEsternoAction extends AbstractAction {
