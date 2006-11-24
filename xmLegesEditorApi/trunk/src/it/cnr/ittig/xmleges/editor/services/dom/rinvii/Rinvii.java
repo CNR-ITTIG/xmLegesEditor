@@ -98,10 +98,11 @@ public interface Rinvii extends Service {
 	 * 
 	 * @param node nodo di riferimento
 	 * @param urn urn del riferimento
+	 * @param updateText <code>true</code> se si desidera aggiornare la forma testuale del riferimento
 	 * @return <code>null</code> se la modifica non &egrave; riuscita; nodo
 	 *         modificato
 	 */
-	public Node change(Node node, Urn urn);
+	public Node change(Node node, Urn urn, boolean updateText);
 
 	/**
 	 * @param node
@@ -117,10 +118,11 @@ public interface Rinvii extends Service {
 	 * @param node nodo di riferimento
 	 * @param id id del riferimento (attributo xlink:href)
 	 * @param text testo del riferimento
+	 * @param updateText <code>true</code> se si desidera aggiornare la forma testuale del riferimento
 	 * @return <code>null</code> se la modifica non &egrave; riuscita; nodo
 	 *         modificato
 	 */
-	public Node change(Node node, String id, String text);
+	public Node change(Node node, String id, String text, boolean updateText);
 
 	/**
 	 * @param node
