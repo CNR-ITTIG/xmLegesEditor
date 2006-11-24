@@ -66,9 +66,7 @@ public class RinviiImpl implements Rinvii, Loggable, Serviceable {
 	DtdRulesManager dtdRulesManager;
 
 	DocumentManager documentManager;
-
-	UtilMsg utilMsg;
-
+	
 	UtilRulesManager utilRulesManager;
 
 	Rinumerazione rinumerazione;
@@ -85,7 +83,6 @@ public class RinviiImpl implements Rinvii, Loggable, Serviceable {
 		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
-		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
 		nirutilurn = (NirUtilUrn) serviceManager.lookup(NirUtilUrn.class);
 		rinumerazione = (Rinumerazione) serviceManager.lookup(Rinumerazione.class);
@@ -155,15 +152,15 @@ public class RinviiImpl implements Rinvii, Loggable, Serviceable {
 		}
 	}
 
-	public Node change(Node node, Urn urn) {
-		return change(node, urn.toString(), urn.getFormaTestuale());
+	public Node change(Node node, Urn urn, boolean updateText) {
+		return change(node, urn.toString(), urn.getFormaTestuale(),updateText);
 	}
 
-	public Node change(Node node, String id, String text) {
+	public Node change(Node node, String id, String text, boolean updateText) {
 		Document doc = documentManager.getDocumentAsDom();
 		try {
 			EditTransaction tr = documentManager.beginEdit();
-			if (changeDOM(node, id, text)) {
+			if (changeDOM(node, id, text,updateText)) {
 				rinumerazione.aggiorna(doc);
 				documentManager.commitEdit(tr);
 				return modified;
@@ -359,15 +356,7 @@ public class RinviiImpl implements Rinvii, Loggable, Serviceable {
 		return false;
 	}
 
-	private boolean changeDOM(Node node, Urn[] urn, String[] descrizioneMRif) {
 
-		Node newMultiCitazione = getExternalMRif(null, urn, descrizioneMRif);
-
-		node.getParentNode().replaceChild(newMultiCitazione, node);
-		modified = newMultiCitazione;
-
-		return true;
-	}
 
 	private boolean insertDOM(Node node, int start, int end, String id, String text) {
 		Document doc = documentManager.getDocumentAsDom();
@@ -400,14 +389,26 @@ public class RinviiImpl implements Rinvii, Loggable, Serviceable {
 		return false;
 	}
 
-	private boolean changeDOM(Node node, String id, String text) {
+	private boolean changeDOM(Node node, String id, String text, boolean updateText) {
 
 		Element newCitazione = documentManager.getDocumentAsDom().createElement("rif");
 		UtilDom.setAttributeValue(newCitazione, "xlink:href", id);
-		UtilDom.setTextNode(newCitazione, text);
-
+		if(! updateText)
+			text = UtilDom.getTextNode(node);
+ 		UtilDom.setTextNode(newCitazione, text);
+		
 		node.getParentNode().replaceChild(newCitazione, node);
 		modified = newCitazione;
+
+		return true;
+	}
+	
+	private boolean changeDOM(Node node, Urn[] urn, String[] descrizioneMRif) {
+
+		Node newMultiCitazione = getExternalMRif(null, urn, descrizioneMRif);
+
+		node.getParentNode().replaceChild(newMultiCitazione, node);
+		modified = newMultiCitazione;
 
 		return true;
 	}
