@@ -79,6 +79,8 @@ public class RinumerazioneImpl implements Rinumerazione, DocumentBeforeInitUndoA
 	public void service(ServiceManager serviceManager) throws ServiceException {
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
+		nirUtilUrn = (NirUtilUrn) serviceManager.lookup(NirUtilUrn.class);
 		preferenceManager = (PreferenceManager) serviceManager.lookup(PreferenceManager.class);
 	}
 
