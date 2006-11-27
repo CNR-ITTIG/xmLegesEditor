@@ -791,7 +791,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     
     <component  class="it.cnr.ittig.xmleges.editor.blocks.dom.meta.ciclodivita.MetaCiclodiVitaImpl" />
 
-    <component  class="it.cnr.ittig.xmleges.editor.blocks.dom.meta.inquadramento.MetaInquadramentoImpl" />    
+    <component  class="it.cnr.ittig.xmleges.editor.blocks.dom.meta.inquadramento.MetaInquadramentoImpl" />  
+    
+    <component  class="it.cnr.ittig.xmleges.editor.blocks.dom.meta.urndocumento.MetaUrnDocumentoImpl" />   
     
     <component  class="it.cnr.ittig.xmleges.editor.blocks.dom.meta.cnr.MetaCnrImpl" />    
     
@@ -1219,7 +1221,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 <element name="haallegato" />
                 <element name="allegatodi" />
                 <element name="giurisprudenza" />                
-                <element name="#PCDATA"/>
+                <!--element name="#PCDATA"/-->
             </exclude>           
         </configuration>
     </component>
