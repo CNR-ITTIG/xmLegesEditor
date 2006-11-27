@@ -25,6 +25,7 @@ import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.MetaCiclodivita;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.MetaDescrittori;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.urndocumento.MetaUrnDocumento;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 import it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita.CiclodiVitaEventoForm;
 import it.cnr.ittig.xmleges.editor.services.form.urn.UrnForm;
@@ -124,6 +125,8 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Loggabl
     MetaCiclodivita ciclodivita; //dom
     
     MetaDescrittori descrittori;//dom
+    
+    MetaUrnDocumento metaUrnDocumento;
     
         
     DocumentManager documentManager;
@@ -502,6 +505,7 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Loggabl
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 		
+		metaUrnDocumento = (MetaUrnDocumento) serviceManager.lookup(MetaUrnDocumento.class);
 
 		
 		
@@ -879,31 +883,10 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Loggabl
 	 * @return urn del documento
 	 */
 	
-	// FIXME sincronizzare questo metodo coi metodi createUrnFromDocument etc in MetaActionImpl
-	// tirarli fuori da MetaActionImpl e metterli in NirUtilUrn (?)
-	
 	private Urn getUrnFromDocument(Document doc) {
-
-		Urn urnDoc=null;
-		
-		NodeList urn = doc.getElementsByTagName("urn");
-		if(urn!=null && urn.getLength()>0)
-			try {
-				String urnValue = UtilDom.getAttributeValueAsString(urn.item(0),"value");
-				urnValue=urnValue.trim().length()!=0?urnValue:"urn:nir:";
-				urnDoc = new Urn(urnValue);
-			} catch (ParseException e) {
-				logger.error(e.getMessage(),e);
-			}
-		return urnDoc;
+		return metaUrnDocumento.getUrnFromDocument(doc).length>0?metaUrnDocumento.getUrnFromDocument(doc)[0]:null;
 	}
 	
-	
-
-
-
-
-
 }
 
 	
