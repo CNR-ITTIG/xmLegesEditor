@@ -179,6 +179,7 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 			else{//se preme annulla ripristina il vecchio ciclodivita
 				ciclodivita.setEventi(oldEventi);
 	   		    ciclodivita.setRelazioni(oldRelazioni);
+	   		    setModified(active);
 			}
 		}
 	}
