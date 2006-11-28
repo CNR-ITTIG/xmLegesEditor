@@ -45,17 +45,7 @@ public interface VigenzaForm extends Service {
 	 * @param tipoDTD DTD del documento
 	 */
 	public void setTipoDTD(String tipoDTD);
-//	/**
-//	 * 
-//	 * @return
-//	 */
-//	public Evento getInizioEfficacia();
-//		
-//	/**
-//	 * 
-//	 * @return
-//	 */
-//	public Evento getFineEfficacia();
+
 	/**
 	 * 
 	 * @return
@@ -74,19 +64,6 @@ public interface VigenzaForm extends Service {
 	 */
 	public String getStatus();
 
-//
-//	/**
-//	 * 
-//	 * @return
-//	 */
-//	public void setInizioEfficacia(Evento inizioefficacia);
-//		
-//	/**
-//	 * 
-//	 * @return
-//	 */
-//	public void setFineEfficacia(Evento fineefficacia);
-//
 
 	/**
 	 * 
@@ -137,5 +114,32 @@ public interface VigenzaForm extends Service {
 //	 * @return
 //	 */
 //	public void setFineVigore(Evento finevigore);
+	
+	
+	//
+//	/**
+//	 * 
+//	 * @return
+//	 */
+//	public void setInizioEfficacia(Evento inizioefficacia);
+//		
+//	/**
+//	 * 
+//	 * @return
+//	 */
+//	public void setFineEfficacia(Evento fineefficacia);
+//
+//	/**
+//	 * 
+//	 * @return
+//	 */
+//	public Evento getInizioEfficacia();
+//		
+//	/**
+//	 * 
+//	 * @return
+//	 */
+//	public Evento getFineEfficacia();
+
 	
 }
