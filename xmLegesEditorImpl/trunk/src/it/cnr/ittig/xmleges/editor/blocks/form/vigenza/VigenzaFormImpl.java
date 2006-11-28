@@ -11,7 +11,7 @@ import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.FormVerifier;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
-import it.cnr.ittig.xmleges.editor.services.form.evento.EventoForm;
+import it.cnr.ittig.xmleges.editor.services.form.evento.EventoFormPlane;
 import it.cnr.ittig.xmleges.editor.services.form.vigenza.VigenzaForm;
 
 import javax.swing.JComboBox;
@@ -59,9 +59,10 @@ public class VigenzaFormImpl implements VigenzaForm, FormVerifier, Loggable, Ser
 	
 	VigenzaEntity vigenza;
 	
-	EventoForm eventoiniziovigoreform;
+	EventoFormPlane eventoiniziovigoreform;
 	
-	EventoForm eventofinevigoreform;
+	EventoFormPlane eventofinevigoreform;
+	
 	
 	JComboBox vigenzaStatus;
 
@@ -88,8 +89,8 @@ public class VigenzaFormImpl implements VigenzaForm, FormVerifier, Loggable, Ser
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
 		form = (Form) serviceManager.lookup(Form.class);
-		eventoiniziovigoreform = (EventoForm) serviceManager.lookup(EventoForm.class);
-		eventofinevigoreform = (EventoForm) serviceManager.lookup(EventoForm.class);
+		eventoiniziovigoreform = (EventoFormPlane) serviceManager.lookup(EventoFormPlane.class);
+		eventofinevigoreform = (EventoFormPlane) serviceManager.lookup(EventoFormPlane.class);
 		
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);		
 	}
@@ -115,22 +116,15 @@ public class VigenzaFormImpl implements VigenzaForm, FormVerifier, Loggable, Ser
 	}
 
 	
-//	public Evento getInizioEfficacia() {
-//		
-//		return eventoiniziovigoreform.getEvento();
-//	}
-//	public Evento getFineEfficacia() {
-//			
-//		return eventofinevigoreform.getEvento();
-//	}
-public Evento getInizioVigore() {
-		
-		return eventoiniziovigoreform.getEvento();
-	}
-	public Evento getFineVigore() {
+
+	public Evento getInizioVigore() {
 			
+		return eventoiniziovigoreform.getEvento();
+		}
+	public Evento getFineVigore() {
+		
 		return eventofinevigoreform.getEvento();
-	}
+		}
 
 
 	
@@ -150,14 +144,14 @@ public Evento getInizioVigore() {
 
 	public boolean verifyForm() {
 		
-		
 		//iniziovigore obbligatorio		
 		//poi se esiste anche la fine allora lo status è obbligatorio
 		//quindi posso fare le ricerche per iniziovigore
 		//messaggio se premo senza fare nulla segnalazione del fatto
 		boolean isvalid=true;
+		
 		isvalid = (eventoiniziovigoreform.getEvento()!=null)||(eventofinevigoreform.getEvento()!=null)||
-											( (vigenzaStatus.getSelectedItem()!=null)&&(!vigenzaStatus.getSelectedItem().equals("--")));
+										( (vigenzaStatus.getSelectedItem()!=null)&&(!vigenzaStatus.getSelectedItem().equals("--")));
 		
 		if(!isvalid){
 			//tutti i campi sono vuoti ma il msg non si vede perche return true;
@@ -252,6 +246,7 @@ public Evento getInizioVigore() {
 	}
 
 	public void setInizioVigore(Evento iniziovigore) {
+		
 		if(iniziovigore!=null && iniziovigore.getId()!=null)
 			eventoiniziovigoreform.setEvento(iniziovigore);
 		else
@@ -259,6 +254,7 @@ public Evento getInizioVigore() {
 	}
 
 	public void setFineVigore(Evento finevigore) {
+		
 		if(finevigore!=null && finevigore.getId()!=null)
 			eventofinevigoreform.setEvento(finevigore);
 		else
@@ -275,11 +271,13 @@ public Evento getInizioVigore() {
 		String stato=null;
 		if(vigenzaStatus.getSelectedItem()!=null && !vigenzaStatus.getSelectedItem().equals("--"))
 			stato=(String)vigenzaStatus.getSelectedItem();
+		
 		return new VigenzaEntity(activeNode, eventoiniziovigoreform.getEvento(),
 				eventofinevigoreform.getEvento(),stato,sel_text);
 	}
 
 	public void setVigenza(VigenzaEntity vigenza) {
+	
 		eventoiniziovigoreform.setEvento(vigenza.getEInizioVigore());
 		eventofinevigoreform.setEvento(vigenza.getEFineVigore());
 		vigenzaStatus.setSelectedItem(vigenza.getStatus());
@@ -331,6 +329,15 @@ public Evento getInizioVigore() {
 //	public Evento getFineEfficacia() {
 //		return null;
 //	}
+	
+//	public Evento getInizioEfficacia() {
+//	
+//	return eventoiniziovigoreform.getEvento();
+//}
+//public Evento getFineEfficacia() {
+//		
+//	return eventofinevigoreform.getEvento();
+//}
 
 	
 
