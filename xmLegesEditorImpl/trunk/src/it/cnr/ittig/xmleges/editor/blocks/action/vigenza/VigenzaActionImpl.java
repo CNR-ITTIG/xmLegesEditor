@@ -31,7 +31,6 @@ import java.util.EventObject;
 
 import javax.swing.AbstractAction;
 
-import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 /**
@@ -162,8 +161,6 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 			}
 			
 			
-			//Node ciclodiVitaSaved=getCiclodiVitaNode()!=null?getCiclodiVitaNode().cloneNode(true):null;
-			//ciclodiVitaSaved = UtilDom.setRecursiveIdAttribute(ciclodiVitaSaved);
 			Node node = selectionManager.getActiveNode();
 			ciclodivita.setActiveNode(node);
 			Evento[] oldEventi = ciclodivita.getEventi();
@@ -177,8 +174,9 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 				setModified(toselect);
 			}
 			else{//se preme annulla ripristina il vecchio ciclodivita
-				ciclodivita.setEventi(oldEventi);
-	   		    ciclodivita.setRelazioni(oldRelazioni);
+				// FIXME per togliere questi set bisogna impedire di poter modificare gli eventi dalla form delle vigenze
+				//ciclodivita.setEventi(oldEventi);
+	   		    //ciclodivita.setRelazioni(oldRelazioni);
 	   		    setModified(active);
 			}
 		}
