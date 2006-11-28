@@ -156,7 +156,8 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 
 	// ////////////////////////////////////////////////// Configurable Interface
 	public void configure(Configuration conf) throws ConfigurationException {
-		timerTaskPeriod = conf.getAttributeAsLong("updateperiod", 5000);
+		// FIXME calibrare tempo di attesa di UpdateTask o eliminarlo del tutto  era 5000
+		timerTaskPeriod = conf.getAttributeAsLong("updateperiod", 30000);
 		Configuration bs = conf.getChild("browsers");
 		if (bs != null) {
 			Configuration[] b = bs.getChildren("browser");
@@ -184,6 +185,7 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 		panel.setDoubleBuffered(true);
 
 		Timer timer = new Timer();
+		// FIXME provare a toglierlo ? allungato a 30 secondi !!
 		timer.scheduleAtFixedRate(new UpdateTask(), timerTaskPeriod, timerTaskPeriod);
 	}
 
