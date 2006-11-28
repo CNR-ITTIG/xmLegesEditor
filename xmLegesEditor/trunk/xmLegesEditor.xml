@@ -317,6 +317,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                         <separator />
                         <item action="editor.testo.apice" />
                         <item action="editor.testo.pedice" />
+                        <separator />
+                        <item action="editor.testo.unmark" />
                     </menu>
                     <menu action="menu.editor.allineamento">
                         <item action="editor.allineamento.oriz.sx" />
@@ -461,6 +463,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <separator />
                     <item action="editor.testo.apice" />
                     <item action="editor.testo.pedice" />
+                    <separator />
+                    <item action="editor.testo.unmark" />
                 </toolbar>
                 <toolbar name="editor.allineamento" floatable="false" rollover="true">
                     <item action="editor.allineamento.oriz.sx" />
@@ -692,7 +696,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  lifestyle="singleton" activation="startup"
                 class="it.cnr.ittig.xmleges.core.blocks.action.tool.spellcheck.ToolSpellCheckActionImpl"
     />
-    
+       
     <component  lifestyle="singleton" activation="startup"
                 class="it.cnr.ittig.xmleges.core.blocks.action.tool.xpatheval.XPathEvalActionImpl"
     />
@@ -739,6 +743,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
     <component  activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.action.testo.TestoActionImpl"
+    />
+    
+     <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.action.tool.unmark.UnmarkActionImpl"
     />
 
     <component  activation="startup"
@@ -891,6 +899,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     
     <component  lifestyle="pool"
                 class="it.cnr.ittig.xmleges.editor.blocks.form.evento.EventoFormImpl"
+    />
+    
+    <component  lifestyle="pool"
+                class="it.cnr.ittig.xmleges.editor.blocks.form.evento.EventoFormPlaneImpl"
     />
     
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.xmleges.marker.XmLegesMarkerFormImpl">
