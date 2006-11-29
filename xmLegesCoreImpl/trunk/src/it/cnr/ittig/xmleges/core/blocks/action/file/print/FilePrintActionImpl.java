@@ -50,10 +50,11 @@ import javax.swing.AbstractAction;
  * <dd><a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU General Public
  * License </a></dd>
  * </dl>
- * 
+ *
  * @see java.awt.print.Printable
  * @see it.cnr.ittig.xmleges.core.services.printer.Printer
  * @see it.cnr.ittig.xmleges.core.services.action.ActionManager
+ * @see it.cnr.ittig.xmleges.core.services.event.EventManager 
  * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */

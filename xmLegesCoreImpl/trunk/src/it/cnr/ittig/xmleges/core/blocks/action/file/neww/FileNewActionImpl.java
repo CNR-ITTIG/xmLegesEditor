@@ -73,6 +73,7 @@ import javax.swing.JFileChooser;
  * 
  * @see it.cnr.ittig.xmleges.core.services.action.ActionManager
  * @see it.cnr.ittig.xmleges.core.services.preference.PreferenceManager
+ * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */
 public class FileNewActionImpl extends AbstractAction implements FileNewAction, Loggable, Serviceable, Configurable, Initializable {

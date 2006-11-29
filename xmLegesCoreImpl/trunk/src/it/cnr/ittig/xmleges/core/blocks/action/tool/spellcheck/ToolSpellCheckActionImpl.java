@@ -37,16 +37,31 @@ import org.w3c.dom.Node;
  * <code>it.cnr.ittig.xmleges.editor.services.action.tool.spellcheck.ToolSpellCheckAction</code>.
  * </h1>
  * <h1>Descrizione</h1>
+ * Servizio per l'avvio del controllo ortografico e l'attivazione del controllo
+ * ortografico automatico.
  * <h1>Configurazione</h1>
+ * Nessuna
  * <h1>Dipendenze</h1>
  * <ul>
- * <li>it.cnr.ittig.xmleges.editor.services.form.Form:1.0</li>
+ * <li>it.cnr.ittig.xmleges.editor.services.action.ActionManager:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.spellcheck.dom.DomSpellCheck:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.util.msg.utilMsg:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.bars.Bars:1.0</li>
+ * <li>it.cnr.ittig.xmleges.editor.services.preference.PreferenceManager:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.spellcheck.dom.form.SpellCheckForm:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.event.EventManager:1.0</li>
+ * <li>it.cnr.ittig.xmleges.editor.services.document.DocumentManager:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.spellcheck.SpellCheck:1.0</li>
  * </ul>
  * <h1>I18n</h1>
  * <ul>
- * <li>xxx.yyy:</li>
+ * <li><code>tool.spellcheck</code>: descrizione dell'azione come specificato nell'ActionManager; </li>
+ * <li><code>tool.spellcheck.auto</code>: descrizione dell'azione come specificato nell'ActionManager; </li> 
+ * <li><code>tool.spellcheck.auto.status.enable</code>: messaggio di abilitazione spellcheck;</li>
+ * <li><code>tool.spellcheck.auto.status.disable</code>: messaggio di disabilitazione spellcheck;</li> 
+ * <li><code>tool.spellcheck.auto.msg.enable</code>: messaggio di abilitazione spellcheck;</li> 
+ * <li><code>tool.spellcheck.auto.msg.disable</code>: messaggio di abilitazione spellcheck;</li>
  * </ul>
- * 
  * 
  * <p>
  * <dl>
@@ -59,7 +74,21 @@ import org.w3c.dom.Node;
  * <dd><a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU General Public
  * License </a></dd>
  * </dl>
- * 
+
+ *  * <li>it.cnr.ittig.xmleges.editor.services.action.ActionManager:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.spellcheck.dom.DomSpellCheck:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.util.msg.utilMsg:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.bars.Bars:1.0</li>
+ * <li>it.cnr.ittig.xmleges.editor.services.preference.PreferenceManager:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.spellcheck.dom.form.SpellCheckForm:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.event.EventManager:1.0</li>
+ * <li>it.cnr.ittig.xmleges.editor.services.document.DocumentManager:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.spellcheck.SpellCheck:1.0</li>
+
+ * @see it.cnr.ittig.xmleges.core.services.action.ActionManager
+ * @see it.cnr.ittig.xmleges.core.services.preference.PreferenceManager
+ * @see it.cnr.ittig.xmleges.core.services.event.EventManager
+ * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */
 public class ToolSpellCheckActionImpl implements ToolSpellCheckAction, Loggable, Serviceable, Initializable, EventManagerListener, Startable {
@@ -84,8 +113,6 @@ public class ToolSpellCheckActionImpl implements ToolSpellCheckAction, Loggable,
 
 	SpellCheckForm spellCheckForm;
 
-	SelectionManager selectionManager;
-
 	EventManager eventManager;
 
 	DocumentManager documentManager;
@@ -107,7 +134,6 @@ public class ToolSpellCheckActionImpl implements ToolSpellCheckAction, Loggable,
 		statusBar = ((Bars) serviceManager.lookup(Bars.class)).getStatusBar();
 		preferenceManager = (PreferenceManager) serviceManager.lookup(PreferenceManager.class);
 		spellCheckForm = (SpellCheckForm) serviceManager.lookup(SpellCheckForm.class);
-		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		spellCheck = (SpellCheck) serviceManager.lookup(SpellCheck.class);

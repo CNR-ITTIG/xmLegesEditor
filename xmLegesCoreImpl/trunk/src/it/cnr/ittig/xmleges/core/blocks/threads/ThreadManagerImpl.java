@@ -13,7 +13,16 @@ import java.util.Vector;
 /**
  * <h1>Implementazione del servizio
  * <code>it.cnr.ittig.xmleges.editor.services.threads.ThreadManager</code>.</h1>
+ * <h1>Descrizione</h1>
+ * Servizio per il mantenimento di un pool di thread per effettuare l'esecuzione
+ * di oggetti che implementano l'interfaccia Runnable. 
  * <h1>Configurazione</h1>
+ * La configurazione pu&ograve; avere i seguenti tag:
+ * <ul>
+ * <li><code>&lt;max&gt;</code>: Numero massimo di thread gestibili;</li>
+ * <li><code>&lt;min&gt;</code>: Numero per inizializzare i thread;</li>
+ * <li><code>&lt;spare&gt;</code>: Numero per incrementare i thread.</li>
+ * </ul>
  * <h1>Dipendenze</h1>
  * Nessuna
  * <h1>I18n</h1>

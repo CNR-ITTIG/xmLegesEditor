@@ -34,16 +34,21 @@ import javax.swing.AbstractAction;
  * Nessuna
  * <h1>Dipendenze</h1>
  * <ul>
- * <li>it.cnr.ittig.xmleges.editor.services.frame.Frame:1.0</li>
  * <li>it.cnr.ittig.xmleges.editor.services.document.DocumentManager:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.event.EventManager:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.bars.Bars:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.action.file.open.FileOpenAction</li>
  * <li>it.cnr.ittig.xmleges.editor.services.action.ActionManager:1.0</li>
  * <li>it.cnr.ittig.xmleges.editor.services.action.file.save.FileSaveAction:1.0</li>
- * <li>it.cnr.ittig.xmleges.editor.services.preference.PreferenceManager:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.i18n.I18n:1.0</li>
  * <li>it.cnr.ittig.xmleges.editor.services.util.msg.UtilMsg:1.0</li>
  * </ul>
  * <h1>I18n</h1>
  * <ul>
- * <li>file.validator: descrizione dell'azione come specificato nell'ActionManager; </li>
+ * <li><code>file.validator</code>: descrizione dell'azione come specificato nell'ActionManager;</li>
+ * <li><code>filevalidator.documentononvalido</code>: messaggio documento non valido;</li>
+ * <li><code>filevalidator.utilizzoxmleges</code>: messaggio sell'utilizzo di xmleges;</li>
+ * <li><code>filevalidator.controllo</code>: messaggio controllare la validit&agrave; del documento;</li>
  * </ul>
  * 
  * <p>
@@ -57,9 +62,10 @@ import javax.swing.AbstractAction;
  * <dd><a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU General Public
  * License </a></dd>
  * </dl>
- * 
+ * @see it.cnr.ittig.xmleges.core.services.event.EventManager
  * @see it.cnr.ittig.xmleges.core.services.action.ActionManager
- * @see it.cnr.ittig.xmleges.core.blocks.action.ActionManagerImpl
+ * @see it.cnr.ittig.xmleges.core.services.i18n.I18n
+ * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */
 public class FileValidatorActionImpl implements FileValidatorAction, EventManagerListener, Loggable, Serviceable, Initializable {

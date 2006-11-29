@@ -9,7 +9,6 @@ import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.services.manager.Startable;
-import it.cnr.ittig.xmleges.core.blocks.document.DocumentManagerImpl;
 import it.cnr.ittig.xmleges.core.services.action.ActionManager;
 import it.cnr.ittig.xmleges.core.services.action.file.open.FileOpenAction;
 import it.cnr.ittig.xmleges.core.services.action.file.save.FileSaveAction;
@@ -37,12 +36,10 @@ import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.util.EventObject;
 import java.util.Properties;
-import java.util.Vector;
 
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
 
-import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.traversal.DocumentTraversal;
@@ -59,9 +56,19 @@ import org.w3c.dom.traversal.NodeIterator;
  * Questa implementazione registra le azioni <code>file.save</code> e
  * <code>file.saveas</code> nell'ActionManager.
  * <h1>Configurazione</h1>
- * Nessuna.
+ * La configurazione pu&ograve; avere i seguenti tag:
+ * <ul>
+ * <li><code>&lt;encoding&gt;</code>: encoding da utilizzare;</li>
+ * <li><code>&lt;filter&gt;</code>: filtro per la finestra di dialogo, contiene i tag:
+ * <ul>
+ * <li><code>&lt;description&gt;</code>: descrizione del filtro;</li>
+ * <li><code>&lt;extension&gt;</code>: estenzione da utilizzare per il documento da salvare.</li>
+ * </ul>
+ * </li>
+ * </ul>
  * <h1>Dipendenze</h1>
  * <ul>
+ * <li>it.cnr.ittig.xmleges.editor.services.preference.PreferenceManager:1.0</li>
  * <li>it.cnr.ittig.xmleges.editor.services.action.ActionManager:1.0</li>
  * <li>it.cnr.ittig.xmleges.editor.services.document.DocumentManager:1.0</li>
  * <li>it.cnr.ittig.xmleges.editor.services.event.EventManager:1.0</li>
@@ -71,12 +78,14 @@ import org.w3c.dom.traversal.NodeIterator;
  * </ul>
  * <h1>I18n</h1>
  * <ul>
- * <li>file.save: descrizione dell'azione come specificato nell'ActionManager; </li>
- * <li>file.saveas: descrizione dell'azione come specificato nell'ActionManager;</li>
- * <li>action.file.save.replace: messaggio conferma se file esistente;</li>
- * <li>action.file.save.saved: testo status bar se file salvato;</li>
- * <li>action.file.save.error.file: testo messaggio se errore di salvataggio; </li>
- * <li>action.file.save.error.encoding: testo se encoding non supportato.</li>
+ * <li><code>file.save</code>: descrizione dell'azione come specificato nell'ActionManager; </li>
+ * <li><code>file.saveas</code>: descrizione dell'azione come specificato nell'ActionManager;</li>
+ * <li><code>file.removepi</code>: descrizione dell'azione come specificato nell'ActionManager;</li>
+ * <li><code>action.file.save.replace</code>: messaggio conferma se file esistente;</li>
+ * <li><code>action.file.save.saved</code>: testo status bar se file salvato;</li>
+ * <li><code>action.file.save.error.file</code>: testo messaggio se errore di salvataggio; </li>
+ * <li><code>action.file.save.error.encoding</code>: testo se encoding non supportato;</li>
+ * <li><code>action.file.replacepi.save</code>: testo se si vuole il salvataggio del documento.</li>
  * </ul>
  * 
  * <p>
@@ -91,8 +100,9 @@ import org.w3c.dom.traversal.NodeIterator;
  * License </a></dd>
  * </dl>
  * 
+ * @see it.cnr.ittig.xmleges.core.services.preference.PreferenceManager
  * @see it.cnr.ittig.xmleges.core.services.action.ActionManager
- * @see it.cnr.ittig.xmleges.core.blocks.action.ActionManagerImpl
+ * @see it.cnr.ittig.xmleges.core.services.event.EventManager
  * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */
@@ -150,7 +160,6 @@ public class FileSaveActionImpl implements FileSaveAction, EventManagerListener,
 		bars = (Bars) serviceManager.lookup(Bars.class);
 		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 		openAction = (FileOpenAction) serviceManager.lookup(FileOpenAction.class);
-		extractText = (ExtractText) serviceManager.lookup(ExtractText.class);
 	}
 
 	// ////////////////////////////////////////////////// Configurable Interface

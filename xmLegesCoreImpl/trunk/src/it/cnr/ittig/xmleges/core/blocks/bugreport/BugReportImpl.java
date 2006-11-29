@@ -42,12 +42,47 @@ import javax.swing.JTextField;
  * <h1>Implementazione del servizio
  * <code>it.cnr.ittig.xmleges.editor.services.bugreport.BugReport</code>.</h1>
  * <h1>Descrizione</h1>
+ * Questa classe implementa un buffer circolare incrementato dai vari logger. Il contenuto
+ * del buffer si può inviare tramite mail ad un indirizzo che si può configurare.
+
+ * Si può configurare tramite file il numero di linee del buffer e l'indirizzo mail da
+ * utilizzare per l'invio del contenuto. 
+
  * <h1>Configurazione</h1>
- * <h1>Dipendenze</h1>
- * Nessuna.
- * <h1>I18n</h1>
- * Nessuna.
+ * La configurazione pu&ograve; avere i seguenti tag (tutti opzionali):
+ * <ul>
+ * <li><code>&lt;mailto&gt;</code>: indica l'indirizzo mail per ricevere il report; </li>
+ * <li><code>&lt;maxlines&gt;</code>: indica il numero di linee del buffer.</li>
+ * </ul>
  * 
+ * <h1>Dipendenze</h1>
+ * <ul>
+ * <li>it.cnr.ittig.xmleges.core.services.form.Form:1.0</li>
+ * <li>it.cnr.ittig.xmleges.editor.services.preference.PreferenceManager:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.util.msg.utilMsg:1.0</li>
+ * </ul>
+ * <h1>I18n</h1>
+ * <ul>
+ * <li><code>form.text</code>: titolo di default della form;</li>
+ * <li><code>form.text</code>: titolo di default della form;</li>
+ * <li><code>form.icon</code>: icona di default della form;</li>
+ * <li><code>help.contents.form.bugreport</code>: pulsante per attivare l'help;</li>
+ * <li><code>generic.close</code>: pulsante di chiusura della form;</li>
+ * <li><code>bugreport.mail.from</code>: indirizzo mail mittente;</li>		
+ * <li><code>bugreport.mail.to</code>: indirizzo mail destinatario;</li>
+ * <li><code>bugreport.mail.smtp</code>: indirizzo del server smtp;</li>		
+ * <li><code>bugreport.mail.subject</code>: oggetto della mail;</li>
+ * <li><code>bugreport.mail.body</code>: corpo della mail;</li>
+ * <li><code>bugreport.clear</code>: pulsante di azzeramento contenuto del buffer;</li>
+ * <li><code>bugreport.send</code>: pulsante di invio del contenuto del buffer;</li>
+ * <li><code>bugreport.msg.from</code>: messaggio di errore sul campo from;</li>
+ * <li><code>bugreport.msg.send</code>: messaggio di errore sul campo send;</li>
+ * <li><code>bugreport.msg.smtp</code>: messaggio di errore sul server smtp;</li>
+ * <li><code>bugreport.msg.subject</code>: messaggio di errore sull'oggetto mail;</li>
+ * <li><code>bugreport.msg.body</code>: messaggio di errore sul corpo della mail;</li>
+ * <li><code>bugreport.msg.log</code>: messaggio di errore sul buffer;</li>
+ * <li><code>bugreport.msg.sendok</code>: messaggio di invio mail con successo;</li>
+ * </ul> 
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
@@ -60,6 +95,7 @@ import javax.swing.JTextField;
  * License </a></dd>
  * </dl>
  * 
+ * @see it.cnr.ittig.xmleges.core.services.preference.PreferenceManager
  * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */

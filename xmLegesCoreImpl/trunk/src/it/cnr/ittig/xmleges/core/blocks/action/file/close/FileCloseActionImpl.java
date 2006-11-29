@@ -26,7 +26,7 @@ import javax.swing.AbstractAction;
  * <code>it.cnr.ittig.xmleges.editor.services.action.file.close.FileCloseAction</code>. </h1>
  * <h1>Descrizione</h1>
  * Chiude il documento corrente. Se il documento &egrave; stato modificato (
- * <code>DocumentManager.isChanged</code> effettua l'operazione di salvataggio chiamando
+ * <code>DocumentManager.isChanged</code>) effettua l'operazione di salvataggio chiamando
  * l'azione <code>FileSavaAction.doSave</code>.<br>
  * Questa implementazione registra le azioni <code>file.close</code> nell'ActionManager.
  * <h1>Configurazione</h1>
@@ -56,7 +56,10 @@ import javax.swing.AbstractAction;
  * <dd><a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU General Public
  * License </a></dd>
  * </dl>
- * 
+ *
+ * @see it.cnr.ittig.xmleges.core.services.action.ActionManager
+ * @see it.cnr.ittig.xmleges.core.services.event.EventManager
+ * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */
 public class FileCloseActionImpl extends AbstractAction implements FileCloseAction, EventManagerListener, Loggable, Serviceable, Initializable {

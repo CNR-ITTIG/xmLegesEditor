@@ -19,21 +19,17 @@ import javax.swing.AbstractAction;
  * <code>it.cnr.ittig.xmleges.editor.services.action.tool.bugreport.BugReportAction</code>. </h1>
  * <h1>Descrizione</h1>
  * Questa implementazione registra nell'ActionManager l'azione <code>tool.bugtracer</code>
+ *
  * <h1>Configurazione</h1>
  * Nessuna.
  * <h1>Dipendenze</h1>
  * <ul>
+ * <li>it.cnr.ittig.xmleges.core.services.bugreport.BugReport</li>
  * <li>it.cnr.ittig.xmleges.editor.services.action.ActionManager:1.0</li>
- * <li>it.cnr.ittig.xmleges.editor.services.document.DocumentManager:1.0</li>
- * <li>it.cnr.ittig.xmleges.editor.services.event.EventManager:1.0</li>
- * <li>it.cnr.ittig.xmleges.editor.services.form.Form:1.0</li>
- * <li>it.cnr.ittig.xmleges.editor.services.util.ui.UtilUI:1.0</li>
- * <li>dom4j:dom4j:1.5.2</li>
- * <li>jaxen:jaxen:1.1-beta-4</li>
  * </ul>
  * <h1>I18n</h1>
  * <ul>
- * <li>tool.xpatheval: descrizione dell'azione come specificato nell'ActionManager</li>
+ * <li><code>tool.bugreport</code>: descrizione dell'azione come specificato nell'ActionManager; </li> 
  * </ul>
  * 
  * <p>
@@ -49,7 +45,7 @@ import javax.swing.AbstractAction;
  * </dl>
  * 
  * @see it.cnr.ittig.xmleges.core.services.action.ActionManager
- * @see it.cnr.ittig.xmleges.core.blocks.action.ActionManagerImpl
+ * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */
 public class BugReportActionImpl extends AbstractAction implements BugReportAction, Loggable, Serviceable, Initializable {

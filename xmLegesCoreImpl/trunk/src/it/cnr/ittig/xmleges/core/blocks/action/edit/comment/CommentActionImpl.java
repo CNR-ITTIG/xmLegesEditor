@@ -33,14 +33,15 @@ import org.w3c.dom.Node;
  * Nessuna.
  * <h1>Dipendenze</h1>
  * <ul>
- * <li>dom-comment</li>;
- * <li>action-manager</li>;
- * <li>event-manager</li>;
- * <li>selection-manager</li>.
+ * <li>it.cnr.ittig.xmleges.core.services.dom.comment.Comment:1.0</li>
+ * <li>it.cnr.ittig.xmleges.editor.services.action.ActionManager:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.selection.SelectionManager:1.0</li>
  * </ul>
  * <h1>I18n</h1>
- * Dipendente dall'implementazione dell'ActionManager per i nomi delle azioni edit.comment
- * e edit.procinstr.
+ * <ul>
+ * <li><code>edit.comment</code>: descrizione dell'azione come specificato nell'ActionManager; </li>
+ * <li><code>edit.procinstr</code>: descrizione dell'azione come specificato nell'ActionManager; </li>
+ * </ul>
  * 
  * <p>
  * <dl>
@@ -54,10 +55,9 @@ import org.w3c.dom.Node;
  * License </a></dd>
  * </dl>
  * 
- * @see it.cnr.ittig.xmleges.core.services.dom.comment.Comment
  * @see it.cnr.ittig.xmleges.core.services.action.ActionManager
- * @see it.cnr.ittig.xmleges.core.services.event.EventManager
  * @see it.cnr.ittig.xmleges.core.services.selection.SelectionManager
+ * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */
 public class CommentActionImpl implements CommentAction, EventManagerListener, Loggable, Serviceable, Initializable {

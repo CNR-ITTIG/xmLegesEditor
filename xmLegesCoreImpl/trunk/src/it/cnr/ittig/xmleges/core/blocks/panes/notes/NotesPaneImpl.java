@@ -41,7 +41,29 @@ import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
 
 /**
- * Implementazione del servizio it.cnr.ittig.xmleges.editor.services.panes.notes.NotesPane.
+ * <h1>Implementazione del servizio
+ * <code>servizio it.cnr.ittig.xmleges.editor.services.panes.notes.NotesPane</code>.</h1>
+ * <h1>Descrizione</h1>
+ * Servizio che gestisce il pannello delle note
+ * <h1>Configurazione</h1>
+ * Nessuna
+ * <h1>Dipendenze</h1>
+ * <ul> 	
+ * <li>it.cnr.ittig.xmleges.core.services.bars.Bars:1.0</li>
+ * <li>it.cnr.ittig.xmleges.editor.services.frame.Frame:1.0</li>
+ * <li>it.cnr.ittig.xmleges.editor.services.preference.PreferenceManager:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.event.EventManager:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.selection.SelectionManager:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.blocks.util.ui.UtilUI:1.0</li>
+ * </ul>
+ * <h1>I18n</h1>
+ * <ul>
+ * <li><code>panes.notes.open</code>: Messaggio di apertura della nota;</li>
+ * <li><code>panes.notes.save</code>: Messaggio di salvataggio della nota;</li>
+ * <li><code>panes.notes.saveas</code>: Messaggio di salvataggio con nome della nota;</li>
+ * <li><code>panes.notes.add</code>: Messaggio di aggiunta della nota;</li>
+ * <li><code>panes.notes.del</code>: Messaggio di cancellazione della nota.</li>
+ * </ul>
  * 
  * <p>
  * <dl>
@@ -55,6 +77,9 @@ import javax.swing.SwingUtilities;
  * License </a></dd>
  * </dl>
  * 
+ * @see it.cnr.ittig.xmleges.core.services.preference.PreferenceManager
+ * @see it.cnr.ittig.xmleges.core.services.event.EventManager
+ * @see it.cnr.ittig.xmleges.core.services.util.ui.UtilUI
  * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */

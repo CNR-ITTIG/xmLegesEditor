@@ -58,12 +58,13 @@ import org.dom4j.swing.LeafTreeNode;
  * <li>it.cnr.ittig.xmleges.editor.services.event.EventManager:1.0</li>
  * <li>it.cnr.ittig.xmleges.editor.services.form.Form:1.0</li>
  * <li>it.cnr.ittig.xmleges.editor.services.util.ui.UtilUI:1.0</li>
- * <li>dom4j:dom4j:1.5.2</li>
- * <li>jaxen:jaxen:1.1-beta-4</li>
+ * <li>dom4j:1.5.2</li>
+ * <li>jaxen:1.1-beta-4</li>
  * </ul>
  * <h1>I18n</h1>
  * <ul>
- * <li>tool.xpatheval: descrizione dell'azione come specificato nell'ActionManager</li>
+ * <li><code>tool.xpatheval</code>: descrizione dell'azione come specificato nell'ActionManager; </li>
+ * <li><code>help.contents.form.xpatheval</code>: pagina dell'help della form;</li>
  * </ul>
  * 
  * <p>
@@ -79,7 +80,8 @@ import org.dom4j.swing.LeafTreeNode;
  * </dl>
  * 
  * @see it.cnr.ittig.xmleges.core.services.action.ActionManager
- * @see it.cnr.ittig.xmleges.core.blocks.action.ActionManagerImpl
+ * @see it.cnr.ittig.xmleges.core.services.event.EventManager
+ * @see it.cnr.ittig.xmleges.core.services.util.ui.UtilUI
  * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */

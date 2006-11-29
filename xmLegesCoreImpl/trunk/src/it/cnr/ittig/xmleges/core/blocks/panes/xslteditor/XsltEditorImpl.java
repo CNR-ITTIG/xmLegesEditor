@@ -39,14 +39,30 @@ import org.w3c.dom.Node;
  * <h1>Implementazione del servizio
  * <code>it.cnr.ittig.xmleges.editor.services.panes.xslteditor.XsltEditor</code>.</h1>
  * <h1>Descrizione</h1>
+ * Servizio che gestisce il pannello per le trasformazioni xslt
  * <h1>Configurazione</h1>
+ * La configurazione ha il seguente tag:
+ * <ul>
+ * <li><code>&lt;name&gt;</code>: che specifica la chiave i18n per il nome del pane; </li>
+ * </ul>
  * <h1>Dipendenze</h1>
  * <ul>
- * <li>it.cnr.ittig.xmleges.editor.services.form.Form:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.bars.Bars:1.0</li>
+ * <li>it.cnr.ittig.xmleges.editor.services.frame.Frame:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.panes.xsltpane.XsltPane:1.0</li>
+ * <li>it.cnr.ittig.xmleges.editor.services.document.DocumentManager:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.blocks.util.ui.UtilUI:1.0</li>
  * </ul>
  * <h1>I18n</h1>
  * <ul>
- * <li>xxx.yyy:</li>
+ * <li><code>panes.xslteditor.open</code>: Messaggio di apertura xslt o css;</li>
+ * <li><code>panes.xslteditor.save</code>: Messaggio di salvataggio xslt o css;</li>
+ * <li><code>panes.xslteditor.saveas</code>: Messaggio di salvataggio con nome xslt o css;</li>
+ * <li><code>panes.xslteditor.apply</code>: Messaggio di apply;</li>
+ * <li><code>panes.xslteditor.tab.xslt</code>: Nome della scheda trasformazione del documento corrente;</li>
+ * <li><code>panes.xslteditor.tab.param</code>: Nome della scheda parametri;</li>
+ * <li><code>panes.xslteditor.tab.conv</code>: Nome della scheda conversione documento;</li>
+ * <li><code>panes.xslteditor.tab.view</code>: Nome della scheda view;</li>
  * </ul>
  * 
  * <p>
@@ -61,6 +77,8 @@ import org.w3c.dom.Node;
  * License </a></dd>
  * </dl>
  * 
+ * @see it.cnr.ittig.xmleges.core.services.util.ui.UtilUI
+ * @see it.cnr.ittig.xmleges.core.services.panes.xsltpane.XsltPane
  * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */

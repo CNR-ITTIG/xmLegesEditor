@@ -56,21 +56,75 @@ import javax.swing.WindowConstants;
 /**
  * <h1>Implementazione del servizio <code>it.cnr.ittig.xmleges.editor.services.frame.Frame</code>.</h1>
  * <h1>Descrizione</h1>
- * <h1>Configurazione</h1>
- * <h1>Dipendenze</h1>
+ * Servizio per la gestione della finestra principale dell'applicazione. <br>
+ * Ogni pannello di modifica che intende essere visualizzato deve implementare
+ * l'interfaccia <code>Pane</code> e registrarsi sul frame attraverso il
+ * metodo <code>addPane</code>. Le aree sul quale il pannello pu&ograve;
+ * essere visualizzato sono espresse tramite i valori:
  * <ul>
+ * <li><code>Frame.TOP_LEFT</code>;</li>
+ * <li><code>Frame.TOP_CENTER</code>;</li>
+ * <li><code>Frame.BOTTOM_LEFT</code>;</li>
+ * <li><code>Frame.BOTTOM_CENTER</code>.</li>
+ * </ul>
+ * che rappresentano le seguenti posizioni:
+ * 
+ * <pre>
+ *         
+ *          +-------------+---------------+
+ *          :  TOP_LEFT   :  TOP_CENTER   :
+ *          +-------------+---------------+
+ *          : BOTTOM_LEFT : BOTTOM_CENTER :
+ *          +-------------+---------------+
+ *          
+ * </pre>
+ * 
+ * <br>
+ * Il componente che implementa questo servizio deve preoccuparsi della gestione
+ * dell'attivazione e disattivazione dei pannelli ed emettere l'opportuno evento (
+ * <code>PaneFocusGainedEvent</code>,<code>PaneFocusLostEvent</code>,
+ * <code>PaneActivatedEvent</code> e <code>PaneDeactivatedEvent</code>)
+ * tramite il componente <code>EventManager</code>.
+ * <h1>Configurazione</h1>
+ * La configurazione pu&ograve; avere i seguenti tag:
+ * <ul>
+ * <li><code>&lt;title&gt;</code>: il titolo dell'applicazione;</li>
+ * <li><code>&lt;panes&gt;</code>: pane dell'applicazione, contiene i tag:
+ * <ul>
+ * <li><code>&lt;pane&gt;</code>: descrizione del pane che specifica name, where e index del pane;</li>
+ * </ul>
+ * </li>
+ * </ul>
+ * Esempio: <br>
+ * 
+ * <pre>
+ *     &lt;title&gt;xmLegesEditor&lt;/title&gt;
+ *     &lt;panes&gt;
+ *       &lt;pane name="editor.panes.strutturaxml"     where="top-left"    	index="0" / &gt;
+ *       &lt;pane name="editor.panes.documento"     where="top-center"    	index="0" / &gt;
+ *     &lt;/panes&gt;
+ * </pre>
+ * 
+ * <h1>Dipendenze</h1>
+ * <ul>		
  * <li>it.cnr.ittig.xmleges.editor.services.action.ActionManager:1.0</li>
  * <li>it.cnr.ittig.xmleges.editor.services.event.EventManager:1.0</li>
  * <li>it.cnr.ittig.xmleges.editor.services.preference.PreferenceManager:1.0</li>
  * <li>it.cnr.ittig.xmleges.editor.services.bars.Bars:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.form.filetextfield.FileTextField:1.0</li>
  * </ul>
  * <h1>i18n</h1>
  * <ul>
- * <li>xxx.yyy:</li>
+ * <li><code>frame.pane.maximize</code>: descrizione dell'azione come specificato nell'ActionManager; </li>
+ * <li><code>frame.pane.restore</code>: descrizione dell'azione come specificato nell'ActionManager; </li>
+ * <li><code>frame.pane.close</code>: descrizione dell'azione come specificato nell'ActionManager; </li>
+ * <li><code>frame.pane.reload</code>: descrizione dell'azione come specificato nell'ActionManager; </li>
+ * <li><code>view.pane.'paneName'</code>: descrizione dell'azione come specificato nell'ActionManager; </li>
  * </ul>
- * 
+ * @see it.cnr.ittig.xmleges.core.services.action.ActionManager
  * @see it.cnr.ittig.xmleges.core.services.event.EventManager
- * @see it.cnr.ittig.xmleges.core.services.bars.Bars
+ * @see it.cnr.ittig.xmleges.core.services.preference.PreferenceManager
+ * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>, Valentina Billi
  */
 public class FrameImpl implements Frame, Loggable, Serviceable, Configurable, Initializable, Startable, EventManagerListener {
@@ -285,6 +339,7 @@ public class FrameImpl implements Frame, Loggable, Serviceable, Configurable, In
 
 	public void show() {
 		frame.show();
+		//TODO Internazionalizzare 
 		statusBar.setText("Editor ready.");
 	}
 

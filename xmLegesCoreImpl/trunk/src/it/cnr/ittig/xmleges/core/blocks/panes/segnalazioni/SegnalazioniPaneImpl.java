@@ -1,8 +1,5 @@
 package it.cnr.ittig.xmleges.core.blocks.panes.segnalazioni;
 
-import it.cnr.ittig.services.manager.Configurable;
-import it.cnr.ittig.services.manager.Configuration;
-import it.cnr.ittig.services.manager.ConfigurationException;
 import it.cnr.ittig.services.manager.Initializable;
 import it.cnr.ittig.services.manager.Loggable;
 import it.cnr.ittig.services.manager.Logger;
@@ -11,8 +8,6 @@ import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.services.manager.Startable;
 import it.cnr.ittig.xmleges.core.blocks.bugreport.BugReportAppender;
-import it.cnr.ittig.xmleges.core.services.action.ActionManager;
-import it.cnr.ittig.xmleges.core.services.action.tool.bugreport.BugReportAction;
 import it.cnr.ittig.xmleges.core.services.bars.Bars;
 import it.cnr.ittig.xmleges.core.services.bugreport.BugReport;
 import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
@@ -21,10 +16,7 @@ import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.frame.FindIterator;
 import it.cnr.ittig.xmleges.core.services.frame.Frame;
 import it.cnr.ittig.xmleges.core.services.frame.PaneException;
-import it.cnr.ittig.xmleges.core.services.frame.PaneStatusChangedEvent;
 import it.cnr.ittig.xmleges.core.services.panes.segnalazioni.SegnalazioniPane;
-import it.cnr.ittig.xmleges.core.services.preference.PreferenceManager;
-import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 
 import java.awt.BorderLayout;
@@ -38,10 +30,28 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
-import javax.swing.DefaultListModel;
 
 /**						
- * Implementazione del servizio it.cnr.ittig.xmleges.editor.services.panes.segnalazioni.SegnalazioniPane.
+ * <h1>Implementazione del servizio
+ * <code>it.cnr.ittig.xmleges.editor.services.panes.segnalazioni.SegnalazioniPane</code>.</h1>
+ * <h1>Descrizione</h1>
+ * Servizio per la visualizzazione del pannello delle segnalazioni.
+ * <h1>Configurazione</h1>
+ * Nessuna
+ * <h1>Dipendenze</h1>
+ * <ul>
+ * <li>it.cnr.ittig.xmleges.core.services.bars.Bars:1.0</li>
+ * <li>it.cnr.ittig.xmleges.editor.services.frame.Frame:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.event.EventManager:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.blocks.util.ui.UtilUI:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.bugreport.BugReport:1.0</li>
+ * </ul>
+ * <h1>I18n</h1>
+ * <ul>
+ * <li><code>panes.segnalazioni</code>: chiave che contiene il nome del pannello;</li>
+ * <li><code>panes.segnalazioni.open</code>: messaggio di apertura della maschera del bugreport;</li>
+ * <li><code>panes.segnalazioni.clear</code>: messaggio di cancellazione delle segnalazioni.</li>
+ * </ul>
  * 
  * <p>
  * <dl>
@@ -54,37 +64,35 @@ import javax.swing.DefaultListModel;
  * <dd><a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU General Public
  * License </a></dd>
  * </dl>
+ * 
+ * @see it.cnr.ittig.xmleges.core.services.event.EventManager
+ * @see it.cnr.ittig.xmleges.core.services.util.ui.UtilUI
+ * @version 1.0
+ * @author <a href="mailto:g.giardiello@gmail.com">Gerardo Giardiello</a>
  */
 
 public class SegnalazioniPaneImpl implements SegnalazioniPane, EventManagerListener, Loggable, Serviceable, Initializable, Startable {
 
 	Logger logger;
-	BugReport bugTracer;
 	
-	//***
-	BugReportAppender bugReport; 
-	
-	
-	ActionManager actionManager;
+	BugReport bugTracer; 
 	
 	Frame frame;
 
-	PreferenceManager preferenceManager;
-
 	EventManager eventManager;
-
-	SelectionManager selectionManager;
 
 	UtilUI utilUI;
 
 	Bars bars;
 
 	JPanel panel = new JPanel(new BorderLayout());
+	
 	JScrollPane scrollPane = new JScrollPane();
 
 	JList list = new JList();
 
 	OpenAction openAction = new OpenAction();
+	
 	ClearAction clearAction = new ClearAction();
 
 	JPopupMenu popupMenu;
@@ -98,38 +106,26 @@ public class SegnalazioniPaneImpl implements SegnalazioniPane, EventManagerListe
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
 		frame = (Frame) serviceManager.lookup(Frame.class);
-		preferenceManager = (PreferenceManager) serviceManager.lookup(PreferenceManager.class);
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
-		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 		utilUI = (UtilUI) serviceManager.lookup(UtilUI.class);
 		bars = (Bars) serviceManager.lookup(Bars.class);
-
 		bugTracer = (BugReport) serviceManager.lookup(BugReport.class);
-		actionManager = (ActionManager) serviceManager.lookup(ActionManager.class);
-		
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws Exception {
 		popupMenu = bars.getPopup(false);
-
-		//Barra con il bottone per aprire il BugReport
 		JToolBar bar = new JToolBar();
 		bar.add(utilUI.applyI18n("panes.segnalazioni.open", openAction));
 		panel.add(bar, BorderLayout.NORTH);
-		
-		//bottone per azzerare il BugReport
 		bar.add(utilUI.applyI18n("panes.segnalazioni.clear", clearAction));
 		panel.add(bar, BorderLayout.NORTH);
-
 		scrollPane.setViewportView(list);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		panel.add(scrollPane);
 		list.setModel(BugReportAppender.getListModel());
-		
 		eventManager.addListener(this, DocumentClosedEvent.class);
-	    
 	}
 
 	// ////////////////////////////////////////// EventManagerListener Interface
@@ -154,8 +150,6 @@ public class SegnalazioniPaneImpl implements SegnalazioniPane, EventManagerListe
 	public Component getPaneAsComponent() {
 		return panel;
 	}
-
-	
 	
 	// ///////////////////////////////////////////////////////// Toolbar Actions
 	/**
@@ -175,83 +169,58 @@ public class SegnalazioniPaneImpl implements SegnalazioniPane, EventManagerListe
 		}
 	}
 
-////???????????????????
-//	protected void firePaneStatusChangedEvent() {
-//		eventManager.fireEvent(new PaneStatusChangedEvent(this, this));
-//	}
-////???????????????????
-//	protected void fireSelectionNode() {
-//		selectionManager.setActiveNode(this, null);
-//	}
-
 	public boolean canCut() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	public void cut() throws PaneException {
-		// TODO Auto-generated method stub
 	}
 
 	public boolean canCopy() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	public void copy() throws PaneException {
-		// TODO Auto-generated method stub
 	}
 
 	public boolean canPaste() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	public void paste() throws PaneException {
-		// TODO Auto-generated method stub
 	}
 
 	public boolean canPasteAsText() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	public void pasteAsText() throws PaneException {
-		// TODO Auto-generated method stub
 	}
 
 	public boolean canDelete() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	public void delete() throws PaneException {
-		// TODO Auto-generated method stub
 	}
 
 	public boolean canPrint() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	public Component getComponentToPrint() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public boolean canFind() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	public FindIterator getFindIterator() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public void reload() {
-		// TODO Auto-generated method stub
 	}
-
-
+	
 }

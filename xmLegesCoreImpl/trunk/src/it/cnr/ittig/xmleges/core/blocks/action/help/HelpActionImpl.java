@@ -15,9 +15,23 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 
 /**
- * Implementazione del servizio <code>it.cnr.ittig.xmleges.editor.services.action.help.HelpAction</code>.
+ * Implementazione del servizio <code>it.cnr.ittig.xmleges.editor.services.action.help.HelpAction</code>
+ * per la gestione degli help.
  * Questa implementazione registra nell'ActionManager le azioni <code>help.contents</code>
  * e <code>help.about</code>.
+ * <h1>Configurazione</h1>
+ * Nessuna
+ * <h1>Dipendenze</h1>
+ * <ul>
+ * <li>it.cnr.ittig.xmleges.editor.services.action.ActionManager:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.help.Help:1.0</li>
+ * </ul>
+ * <h1>I18n</h1>
+ * <ul>
+ * <li><code>help.contents.browser</code>: Pagina index dell'help;</li>
+ * <li><code>help.contents</code>: descrizione dell'azione come specificato nell'ActionManager;</li>
+ * <li><code>help.about</code>: descrizione dell'azione come specificato nell'ActionManager.</li>
+ * </ul>
  * 
  * <p>
  * <dl>
@@ -31,8 +45,9 @@ import javax.swing.AbstractAction;
  * License </a></dd>
  * </dl>
  * 
+ * @see it.cnr.ittig.xmleges.core.services.action.ActionManager
+ * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
- * 
  */
 public class HelpActionImpl implements HelpAction, Loggable, Serviceable, Initializable {
 	Logger logger;

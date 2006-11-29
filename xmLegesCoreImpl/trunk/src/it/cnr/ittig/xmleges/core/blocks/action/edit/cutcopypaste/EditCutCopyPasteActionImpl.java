@@ -38,12 +38,18 @@ import javax.swing.AbstractAction;
  * Nessuna.
  * <h1>Dipendenze</h1>
  * <ul>
+ * <li>it.cnr.ittig.xmleges.editor.services.frame.Frame:1.0</li>
  * <li>it.cnr.ittig.xmleges.editor.services.action.ActionManager:1.0</li>
  * <li>it.cnr.ittig.xmleges.editor.services.event.EventManager:1.0</li>
  * </ul>
  * <h1>I18n</h1>
- * Dipendente dall'implementazione dell'ActionManager per i nomi delle azioni: edit.cut,
- * edit.copy, edit.paste, edit.pastetext e edit.delete.
+ * <ul>
+ * <li><code>edit.cut</code>: descrizione dell'azione come specificato nell'ActionManager; </li>
+ * <li><code>edit.copy</code>: descrizione dell'azione come specificato nell'ActionManager; </li>
+ * <li><code>edit.paste</code>: descrizione dell'azione come specificato nell'ActionManager; </li>
+ * <li><code>edit.pastetext</code>: descrizione dell'azione come specificato nell'ActionManager; </li> 
+ * <li><code>edit.pastetext</code>: descrizione dell'azione come specificato nell'ActionManager; </li>
+ * </ul>
  * 
  * <p>
  * <dl>

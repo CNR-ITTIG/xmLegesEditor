@@ -31,6 +31,17 @@ import org.w3c.dom.Node;
  * <code>edit.procinstr</code> nell'ActionManager. <br>
  * <h1>Configurazione</h1>
  * Nessuna.
+ * <h1>Dipendenze</h1>
+ * <ul>
+ * <li>it.cnr.ittig.xmleges.core.services.dom.extracttext.ExtractText:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.dom.extracttext.ExtractText:1.0</li>
+ * <li>it.cnr.ittig.xmleges.editor.services.action.ActionManager:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.event.EventManager:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.selection.SelectionManager:1.0</li>
+ * </ul>
+ * <h1>I18n</h1>
+ * Nessuno
+ * 
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
@@ -43,6 +54,9 @@ import org.w3c.dom.Node;
  * License </a></dd>
  * </dl>
  * 
+ * @see it.cnr.ittig.xmleges.core.services.action.ActionManager
+ * @see it.cnr.ittig.xmleges.core.services.event.EventManager
+ * @version 1.0
  * @author <a href="mailto:agnoloni@ittig.cnr.it">Tommaso Agnoloni </a>
  */
 public class ExtractTextActionImpl implements ExtractTextAction, EventManagerListener, Loggable, Serviceable, Initializable {

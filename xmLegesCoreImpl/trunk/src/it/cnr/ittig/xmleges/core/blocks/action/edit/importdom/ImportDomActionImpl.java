@@ -52,13 +52,19 @@ import org.w3c.dom.Node;
  * <li>it.cnr.ittig.xmleges.editor.services.document.DocumentManager:1.0</li>
  * <li>it.cnr.ittig.xmleges.editor.services.action.ActionManager:1.0</li>
  * <li>it.cnr.ittig.xmleges.editor.services.event.EventManager:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.form.Form:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.form.filetextfield.FileTextField:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.blocks.util.ui.UtilUI:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.util.msg.utilMsg:1.0</li>
  * </ul>
  * <h1>I18n</h1>
  * <ul>
- * <li>edit.undo: descrizione dell'azione come specificato nell'ActionManager; </li>
- * <li>edit.redo: descrizione dell'azione come specificato nell'ActionManager; </li>
+ * <li><code>edit.importdom</code>: descrizione dell'azione come specificato nell'ActionManager; </li>
+ * <li><code>generic.close</code>: messaggio di chiusura della maschera;</li>
+ * <li><code>help.contents.form.importdom</code>: file di help della maschera.</li>
  * </ul>
- * 
+ *  
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
@@ -73,6 +79,9 @@ import org.w3c.dom.Node;
  * 
  * @see it.cnr.ittig.xmleges.core.services.document.DocumentManager
  * @see it.cnr.ittig.xmleges.core.services.action.ActionManager
+ * @see it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager
+ * @see it.cnr.ittig.xmleges.core.services.util.ui.UtilUI
+ * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */
 public class ImportDomActionImpl implements ImportDomAction, EventManagerListener, FileTextFieldListener, Loggable, Serviceable, Initializable {

@@ -53,6 +53,7 @@ import javax.swing.AbstractAction;
  * </dl>
  * 
  * @see it.cnr.ittig.xmleges.core.services.document.DocumentManager
+ * @see it.cnr.ittig.xmleges.core.services.event.EventManager
  * @see it.cnr.ittig.xmleges.core.services.action.ActionManager
  * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>

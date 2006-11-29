@@ -13,7 +13,6 @@ import it.cnr.ittig.services.manager.Startable;
 import it.cnr.ittig.xmleges.core.services.action.ActionManager;
 import it.cnr.ittig.xmleges.core.services.action.file.open.FileOpenAction;
 import it.cnr.ittig.xmleges.core.services.action.file.save.FileSaveAction;
-import it.cnr.ittig.xmleges.core.services.bars.Bars;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.frame.Frame;
 import it.cnr.ittig.xmleges.core.services.preference.PreferenceManager;
@@ -89,8 +88,8 @@ import javax.swing.JFileChooser;
  * License </a></dd>
  * </dl>
  * 
+ * @see it.cnr.ittig.xmleges.core.services.preference.PreferenceManager
  * @see it.cnr.ittig.xmleges.core.services.action.ActionManager
- * @see it.cnr.ittig.xmleges.core.blocks.action.ActionManagerImpl
  * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */
@@ -102,8 +101,6 @@ public class FileOpenActionImpl implements FileOpenAction, Loggable, Serviceable
 	DocumentManager docManager;
 
 	PreferenceManager preferenceManager;
-
-	Bars bars;
 
 	FileSaveAction fileSaveAction;
 
@@ -128,7 +125,6 @@ public class FileOpenActionImpl implements FileOpenAction, Loggable, Serviceable
 		fileSaveAction = (FileSaveAction) serviceManager.lookup(FileSaveAction.class);
 		preferenceManager = (PreferenceManager) serviceManager.lookup(PreferenceManager.class);
 		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
-		bars = (Bars) serviceManager.lookup(Bars.class);
 	}
 
 	// ////////////////////////////////////////////////// Configurable Interface

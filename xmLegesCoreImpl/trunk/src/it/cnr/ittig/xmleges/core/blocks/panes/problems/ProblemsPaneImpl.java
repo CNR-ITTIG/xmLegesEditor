@@ -17,7 +17,6 @@ import it.cnr.ittig.xmleges.core.services.frame.PaneStatusChangedEvent;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.panes.problems.Problem;
 import it.cnr.ittig.xmleges.core.services.panes.problems.ProblemsPane;
-import it.cnr.ittig.xmleges.core.services.preference.PreferenceManager;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import it.cnr.ittig.xmleges.core.util.clipboard.UtilClipboard;
@@ -40,20 +39,42 @@ import javax.swing.SwingUtilities;
 import org.w3c.dom.Node;
 
 /**
- * Implementazione del servizio it.cnr.ittig.xmleges.editor.services.panes.problems.ProblemsPane.
+ * <h1>Implementazione del servizio
+ * <code>it.cnr.ittig.xmleges.editor.services.panes.problems.ProblemsPane</code>.</h1>
+ * <h1>Descrizione</h1>
+ * Servizio per la visualizzazione del pannello dei problemi.
+ * <h1>Configurazione</h1>
+ * Nessuna
+ * <h1>Dipendenze</h1>
+ * <ul>
+ * <li>it.cnr.ittig.xmleges.core.services.selection.SelectionManager:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.event.EventManager:1.0</li>
+ * <li>it.cnr.ittig.xmleges.editor.services.frame.Frame:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.blocks.util.ui.UtilUI:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.bars.Bars:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.i18n.I18n:1.0</li>
+ * </ul>
+ * <h1>I18n</h1>
+ * <ul>
+ * <li><code>panes.problems</code>: Indica il nome del pannello;</li>
+ * <li><code>panes.problems.action.goto</code>: messaggio per l'azione vai al nodo;</li>
+ * <li><code>panes.problems.action.resolve</code>: messaggio per l'azione risolvi problema.</li>
+ * </ul>
  * 
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
  * <dd>2003 - 2004</dd>
- * <dd><a href="http://www.ittig.cnr.it" target="_blank">Istituto di Teoria e Tecniche
- * dell'Informazione Giuridica (ITTIG) <br>
+ * <dd><a href="http://www.ittig.cnr.it" target="_blank">Istituto di Teoria e
+ * Tecniche dell'Informazione Giuridica (ITTIG) <br>
  * Consiglio Nazionale delle Ricerche - Italy </a></dd>
  * <dt><b>License: </b></dt>
- * <dd><a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU General Public
- * License </a></dd>
+ * <dd><a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU
+ * General Public License </a></dd>
  * </dl>
  * 
+ * @see it.cnr.ittig.xmleges.core.services.util.ui.UtilUI
+ * @see it.cnr.ittig.xmleges.core.services.event.EventManager
  * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */
@@ -61,8 +82,6 @@ public class ProblemsPaneImpl implements ProblemsPane, EventManagerListener, Log
 	Logger logger;
 
 	Frame frame;
-
-	PreferenceManager preferenceManager;
 
 	EventManager eventManager;
 
@@ -112,7 +131,6 @@ public class ProblemsPaneImpl implements ProblemsPane, EventManagerListener, Log
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
 		frame = (Frame) serviceManager.lookup(Frame.class);
-		preferenceManager = (PreferenceManager) serviceManager.lookup(PreferenceManager.class);
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 		utilUI = (UtilUI) serviceManager.lookup(UtilUI.class);

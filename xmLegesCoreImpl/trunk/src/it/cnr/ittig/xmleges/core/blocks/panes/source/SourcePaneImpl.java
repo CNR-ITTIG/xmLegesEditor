@@ -24,7 +24,21 @@ import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 
 /**
- * Implementazione del servizio it.cnr.ittig.xmleges.editor.services.panes.source.SourcePane.
+ * <h1>Implementazione del servizio
+ * <code>it.cnr.ittig.xmleges.editor.services.panes.source.SourcePane</code>.</h1>
+ * <h1>Descrizione</h1>
+ * Servizio per la visualizzazione del testo sorgente del file XML.
+ * <h1>Configurazione</h1>
+ * Nessuna
+ * <h1>Dipendenze</h1>
+ * <li>it.cnr.ittig.xmleges.editor.services.frame.Frame:1.0</li>
+ * <li>it.cnr.ittig.xmleges.editor.services.document.DocumentManager:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.event.EventManager:1.0</li>
+ * </ul>
+ * <h1>I18n</h1>
+ * <ul>
+ * <li><code>panes.source</code>: Nome del pannello.</li>
+ * </ul>
  * 
  * <p>
  * <dl>
@@ -38,6 +52,7 @@ import javax.swing.text.StyleConstants;
  * License </a></dd>
  * </dl>
  * 
+ * @see it.cnr.ittig.xmleges.core.services.event.EventManager
  * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */

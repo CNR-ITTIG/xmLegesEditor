@@ -25,10 +25,13 @@ import java.util.Vector;
  * Questa implementanzione prevede l'esistenza del ThreadManager per la gestione degli
  * eventi tramite un pool di thread.
  * <h1>Configurazione</h1>
- * Nessuna.
+ * La configurazione pu&ograve; avere il seguente tag:
+ * <ul>
+ * <li><code>&lt;multithread&gt;</code>: true/false per la gestione del multithread;</li>
+ * </ul>
  * <h1>Dipendenze</h1>
  * <ul>
- * <li>thread-manager:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.threads.threadManager:1.0</li>
  * </ul>
  * <h1>I18n</h1>
  * Nessuno.

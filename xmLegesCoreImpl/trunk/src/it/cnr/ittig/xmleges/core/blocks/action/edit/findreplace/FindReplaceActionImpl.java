@@ -44,13 +44,18 @@ import javax.swing.event.CaretListener;
  * Nessuna.
  * <h1>Dipendenze</h1>
  * <ul>
+ * <li>it.cnr.ittig.xmleges.editor.services.frame.Frame:1.0</li>
  * <li>it.cnr.ittig.xmleges.editor.services.action.ActionManager:1.0</li>
  * <li>it.cnr.ittig.xmleges.editor.services.event.EventManager:1.0</li>
  * <li>it.cnr.ittig.xmleges.editor.services.form.Form:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.util.msg.utilMsg:1.0</li>
  * </ul>
  * <h1>I18n</h1>
- * Dipendente dall'implementazione dell'ActionManager per i nomi delle azioni: edit.find,
- * edit.findnext e edit.replace.
+ * <ul>
+ * <li><code>edit.find</code>: descrizione dell'azione come specificato nell'ActionManager;</li>
+ * <li><code>edit.findnext</code>: descrizione dell'azione come specificato nell'ActionManager;</li>
+ * <li><code>edit.replace</code>: descrizione dell'azione come specificato nell'ActionManager.</li>
+ * </ul>
  * 
  * <p>
  * <dl>
@@ -64,6 +69,9 @@ import javax.swing.event.CaretListener;
  * License </a></dd>
  * </dl>
  * 
+ * @see it.cnr.ittig.xmleges.core.services.action.ActionManager
+ * @see it.cnr.ittig.xmleges.core.services.event.EventManager
+ * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */
 public class FindReplaceActionImpl implements FindReplaceAction, EventManagerListener, CaretListener, Loggable, Serviceable, Initializable {

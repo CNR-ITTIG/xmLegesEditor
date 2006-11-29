@@ -44,29 +44,57 @@ import javax.swing.JSeparator;
 import javax.swing.JToolBar;
 
 /**
- * <h1>Implementazione del servizio <code>it.cnr.ittig.xmleges.editor.services.bars.Bars</code>.</h1>
+ * <h1>Implementazione del servizio
+ * <code>it.cnr.ittig.xmleges.editor.services.bars.Bars</code>.</h1>
  * <h1>Descrizione</h1>
+ * Servizio per la creazione delle barre dei menu, degli strumenti e di stato.
  * <h1>Configurazione</h1>
+ * 
+ * La configurazione pu&ograve; avere i seguenti tag:
+ * <ul>
+ * <li><code>&lt;menus&gt;</code>: con i vari item;</li>
+ * <li><code>&lt;popup&gt;</code>: con i vari item;</li>
+ * <li><code>&lt;tools&gt;</code>: con i vari item per le toolbar;</li>
+ * <li><code>&lt;status&gt;</code>: con i vari slot per la statusbar;</li>
+ * </ul>
  * <h1>Dipendenze</h1>
- * Nessuna.
+ * <ul>
+ * <li>it.cnr.ittig.xmleges.editor.services.util.ui.UtilUI:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.action.ActionManager:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.event.EventManager:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.preference.PreferenceManager:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.i18n.I18n:1.0</li>
+ * </ul>
  * <h1>I18n</h1>
- * Nessuna.
+ * <ul>
+ * <li><code>view.toolbar.*</code>: chiavi per i menu;</li>
+ * <li><code>view.statusbar.*</code>: chiavi per la barra di stato;</li>
+ * <li><code>view.statusbar</code>: descrizione dell'azione come specificato nell'ActionManager; </li>
+ * </ul>
  * 
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
  * <dd>2003 - 2004</dd>
- * <dd><a href="http://www.ittig.cnr.it" target="_blank">Istituto di Teoria e Tecniche
- * dell'Informazione Giuridica (ITTIG) <br>
+ * <dd><a href="http://www.ittig.cnr.it" target="_blank">Istituto di Teoria e
+ * Tecniche dell'Informazione Giuridica (ITTIG) <br>
  * Consiglio Nazionale delle Ricerche - Italy </a></dd>
  * <dt><b>License: </b></dt>
- * <dd><a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU General Public
- * License </a></dd>
+ * <dd><a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU
+ * General Public License </a></dd>
  * </dl>
  * 
+ * @see it.cnr.ittig.xmleges.core.services.util.ui.UtilUI
+ * @see it.cnr.ittig.xmleges.core.services.i18n.I18n
+ * @see it.cnr.ittig.xmleges.core.services.action.ActionManager
+ * @see it.cnr.ittig.xmleges.core.services.preference.PreferenceManager
+ * @see it.cnr.ittig.xmleges.core.services.event.EventManager
+ * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */
-public class BarsImpl implements Bars, EventManagerListener, Loggable, Configurable, Serviceable, Initializable, Startable {
+
+public class BarsImpl implements Bars, EventManagerListener, Loggable,
+		Configurable, Serviceable, Initializable, Startable {
 	Configuration conf;
 
 	Logger logger;
@@ -105,20 +133,24 @@ public class BarsImpl implements Bars, EventManagerListener, Loggable, Configura
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
 		utilUI = (UtilUI) serviceManager.lookup(UtilUI.class);
-		actionManager = (ActionManager) serviceManager.lookup(ActionManager.class);
+		actionManager = (ActionManager) serviceManager
+				.lookup(ActionManager.class);
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
-		preferenceManager = (PreferenceManager) serviceManager.lookup(PreferenceManager.class);
+		preferenceManager = (PreferenceManager) serviceManager
+				.lookup(PreferenceManager.class);
 		i18n = (I18n) serviceManager.lookup(I18n.class);
 	}
 
 	// ////////////////////////////////////////////////// Configurable Interface
-	public void configure(Configuration configuration) throws ConfigurationException {
+	public void configure(Configuration configuration)
+			throws ConfigurationException {
 		this.conf = configuration;
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws java.lang.Exception {
-		prefs = preferenceManager.getPreferenceAsProperties(getClass().getName());
+		prefs = preferenceManager.getPreferenceAsProperties(getClass()
+				.getName());
 		toolbarPanel = new ToolbarPanel();
 		menubar = new JMenuBar();
 		statusbar = new StatusBarImpl(logger, i18n);
@@ -137,14 +169,18 @@ public class BarsImpl implements Bars, EventManagerListener, Loggable, Configura
 		Component[] cs = toolbarPanel.getComponents();
 		for (int i = 0; i < cs.length; i++)
 			if (cs[i] instanceof JToolBar)
-				prefs.setProperty(cs[i].getName(), Boolean.toString(cs[i].isVisible()));
+				prefs.setProperty(cs[i].getName(), Boolean.toString(cs[i]
+						.isVisible()));
 		for (Enumeration en = actionToCheck.keys(); en.hasMoreElements();) {
 			Object name = en.nextElement();
-			JCheckBoxMenuItem item = (JCheckBoxMenuItem) actionToCheck.get(name);
-			prefs.setProperty("check." + name.toString(), Boolean.toString(item.isSelected()));
+			JCheckBoxMenuItem item = (JCheckBoxMenuItem) actionToCheck
+					.get(name);
+			prefs.setProperty("check." + name.toString(), Boolean.toString(item
+					.isSelected()));
 		}
 		// salvataggio stato statusbar
-		prefs.setProperty("view.statusbar", Boolean.toString(statusbar.getComponent().isVisible()));
+		prefs.setProperty("view.statusbar", Boolean.toString(statusbar
+				.getComponent().isVisible()));
 		preferenceManager.setPreference(getClass().getName(), prefs);
 	}
 
@@ -203,7 +239,8 @@ public class BarsImpl implements Bars, EventManagerListener, Loggable, Configura
 		}
 		String actionName = "view.statusbar";
 		statusbar.getComponent().setVisible(checkPreference(actionName));
-		ViewBarAction viewBarAction = new ViewBarAction(statusbar.getComponent());
+		ViewBarAction viewBarAction = new ViewBarAction(statusbar
+				.getComponent());
 		actionManager.registerAction("view.statusbar", viewBarAction);
 	}
 
@@ -219,7 +256,8 @@ public class BarsImpl implements Bars, EventManagerListener, Loggable, Configura
 			JComponent item = null;
 			if (name.equals("menu")) {
 				if (ref != null) {
-					Configuration refConf = (Configuration) actionToConf.get(ref);
+					Configuration refConf = (Configuration) actionToConf
+							.get(ref);
 					item = utilUI.createMenu(ref);
 					buildMenu(refConf, item);
 				} else {
@@ -235,7 +273,8 @@ public class BarsImpl implements Bars, EventManagerListener, Loggable, Configura
 					item = new JMenuItem(action);
 				else if (name.equals("check")) {
 					item = new JCheckBoxMenuItem(action);
-					((JCheckBoxMenuItem) item).setSelected(checkPreference("check." + actionName));
+					((JCheckBoxMenuItem) item)
+							.setSelected(checkPreference("check." + actionName));
 					actionToCheck.put(actionName, item);
 				}
 			}
@@ -248,7 +287,8 @@ public class BarsImpl implements Bars, EventManagerListener, Loggable, Configura
 					}
 					v.addElement(item);
 				}
-				// if (actionName != null && !actionToMenu.contains(actionName)) {
+				// if (actionName != null && !actionToMenu.contains(actionName))
+				// {
 				// actionToMenu.put(actionName, item);
 				// }
 				comp.add(item);
@@ -265,7 +305,8 @@ public class BarsImpl implements Bars, EventManagerListener, Loggable, Configura
 			toolbar.setName(actionName);
 			panel.add(toolbar);
 			toolbar.setVisible(checkPreference(actionName));
-			BarsImpl.ViewBarAction viewAction = new BarsImpl.ViewBarAction(toolbar);
+			BarsImpl.ViewBarAction viewAction = new BarsImpl.ViewBarAction(
+					toolbar);
 			actionManager.registerAction(actionName, viewAction);
 			logger.debug("Toolbar builded: " + name);
 		}
@@ -298,7 +339,8 @@ public class BarsImpl implements Bars, EventManagerListener, Loggable, Configura
 	}
 
 	protected boolean checkPreference(String name) {
-		return (!prefs.containsKey(name) || prefs.getProperty(name).equalsIgnoreCase("true"));
+		return (!prefs.containsKey(name) || prefs.getProperty(name)
+				.equalsIgnoreCase("true"));
 	}
 
 	/**
@@ -308,12 +350,12 @@ public class BarsImpl implements Bars, EventManagerListener, Loggable, Configura
 	 * <dl>
 	 * <dt><b>Copyright &copy;: </b></dt>
 	 * <dd>2003 - 2004</dd>
-	 * <dd><a href="http://www.ittig.cnr.it" target="_blank">Istituto di Teoria e
-	 * Tecniche dell'Informazione Giuridica (ITTIG) <br>
+	 * <dd><a href="http://www.ittig.cnr.it" target="_blank">Istituto di Teoria
+	 * e Tecniche dell'Informazione Giuridica (ITTIG) <br>
 	 * Consiglio Nazionale delle Ricerche - Italy </a></dd>
 	 * <dt><b>License: </b></dt>
-	 * <dd><a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU General
-	 * Public License </a></dd>
+	 * <dd><a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU
+	 * General Public License </a></dd>
 	 * </dl>
 	 * 
 	 * @version 1.0
@@ -338,12 +380,12 @@ public class BarsImpl implements Bars, EventManagerListener, Loggable, Configura
 	 * <dl>
 	 * <dt><b>Copyright &copy;: </b></dt>
 	 * <dd>2003 - 2004</dd>
-	 * <dd><a href="http://www.ittig.cnr.it" target="_blank">Istituto di Teoria e
-	 * Tecniche dell'Informazione Giuridica (ITTIG) <br>
+	 * <dd><a href="http://www.ittig.cnr.it" target="_blank">Istituto di Teoria
+	 * e Tecniche dell'Informazione Giuridica (ITTIG) <br>
 	 * Consiglio Nazionale delle Ricerche - Italy </a></dd>
 	 * <dt><b>License: </b></dt>
-	 * <dd><a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU General
-	 * Public License </a></dd>
+	 * <dd><a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU
+	 * General Public License </a></dd>
 	 * </dl>
 	 * 
 	 * @version 1.0
