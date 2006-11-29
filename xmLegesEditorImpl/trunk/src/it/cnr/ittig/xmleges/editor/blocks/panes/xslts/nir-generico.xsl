@@ -604,13 +604,17 @@
 					 		  </xsl:when>
 					 		  <xsl:otherwise>
 								<span> [ ... ] </span>	
-								<!-- 		<sup>{<xsl:copy-of select="$tooltip" />}</sup>   -->
+								<sup>{<xsl:copy-of select="$tooltip" />}</sup>
  							  </xsl:otherwise>
 						   </xsl:choose>
 
 						</xsl:when>
 						<xsl:when test="$data_inizio&lt;number(number($datafine)+1) and $data_fine&gt;$datafine">
+							<xsl:attribute name="title"><xsl:copy-of select="$tooltip" /></xsl:attribute>
+							<span style="color:#060;">
 								<xsl:apply-templates />
+							</span>
+							<sup>{<xsl:copy-of select="$tooltip" />}</sup>
 						</xsl:when>						
 					</xsl:choose>
 				</xsl:when>	
@@ -623,7 +627,11 @@
 							-->
 						</xsl:when>
 						<xsl:otherwise>
+							<xsl:attribute name="title"><xsl:copy-of select="$tooltip" /></xsl:attribute>						
+							<span style="color:#060;">
 								<xsl:apply-templates />
+							</span>	
+							<sup>{<xsl:copy-of select="$tooltip" />}</sup>
 						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:when>			
