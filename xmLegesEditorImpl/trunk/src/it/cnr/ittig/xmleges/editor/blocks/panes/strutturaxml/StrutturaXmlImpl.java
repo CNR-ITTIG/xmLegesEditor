@@ -32,16 +32,28 @@ import org.w3c.dom.Node;
  * <code>it.cnr.ittig.xmleges.editor.services.panes.strutturaxml.StrutturaXml</code>.
  * </h1>
  * <h1>Descrizione</h1>
+ * Configura il pannello strutturaXml
  * <h1>Configurazione</h1>
+ * La configurazione ha ilseguente tag:
+ * <ul>
+ * <li><code>&lt;name&gt;</code>: che specifica la chiave i18n per il nome del pane; </li>
+ * </ul>
  * <h1>Dipendenze</h1>
  * <ul>
  * <li>it.cnr.ittig.xmleges.editor.services.panes.tree.TreePane:1.0</li>
- * <li>it.cnr.ittig.util.dom.UtilDom</li>
+ * <li>it.cnr.ittig.xmleges.editor.services.frame.Frame:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.panes.tree.TreePane:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.i18n.I18n:1.0</li>
+ * <li>it.cnr.ittig.xmleges.editor.services.document.DocumentManager:1.0</li>
+ * <li>it.cnr.ittig.xmleges.editor.services.dom.rinumerazione.Rinumerazione:1.0</li>
  * </ul>
  * <h1>I18n</h1>
  * <ul>
- * <li>xxx.yyy:</li>
+ * <li><code>editor.panes.strutturaxml.testo</code>: chiave per l'icona di testo;</li>
+ * <li><code>editor.panes.strutturaxml.commento</code>: chiave per l'icona di commento;</li>
+ * <li><code>editor.panes.strutturaxml.errore</code>: chiave per l'icona di errore.</li>
  * </ul>
+ * 
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
