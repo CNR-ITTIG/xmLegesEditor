@@ -13,17 +13,27 @@ import java.util.Hashtable;
 
 /**
  * <h1>Implementazione del servizio
- * <code>it.cnr.ittig.xmleges.editor.services.panes.xslts.NirPanesXslts</code>.</h1>
+ * <code>it.cnr.ittig.xmleges.editor.services.panes.xslts.NirPanesXslts.</code></h1>
  * <h1>Descrizione</h1>
+ * Servizio per la gestione dei file di trasformazione XSLT e fogli di stile CSS.
  * <h1>Configurazione</h1>
+ * La configurazione pu&ograve; avere i seguenti tag (tutti opzionali):
+ * <ul>
+ * <li><code>&lt;xslt&gt;</code>: specifica un file xsl; </li>
+ * <li><code>&lt;css&gt;</code>: specifica un file css.</li>
+ * </ul>
+ * Esempio:
+ * 
+ * <pre>
+ *     &lt;xslt	name="nomedisistemaxslt"	file="nomesulfilesystemdelxslt.xsl" / &gt;
+ *     &lt;css	name="nomedisistemacss"	file="nomesulfilesystemdelcss.xsl"	startup="true" / &gt;
+ * </pre>
+ * 
  * <h1>Dipendenze</h1>
- * <ul>
- * <li>it.cnr.ittig.xmleges.editor.services.form.Form:1.0</li>
- * </ul>
+ * Nessuna
  * <h1>I18n</h1>
- * <ul>
- * <li>xxx.yyy:</li>
- * </ul>
+ * Nessuno
+ * 
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
@@ -36,7 +46,6 @@ import java.util.Hashtable;
  * General Public License </a></dd>
  * </dl>
  * 
- * @see
  * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */
