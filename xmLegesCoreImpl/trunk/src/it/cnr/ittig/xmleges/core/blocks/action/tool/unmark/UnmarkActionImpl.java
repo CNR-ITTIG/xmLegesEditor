@@ -9,7 +9,10 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.action.ActionManager;
 import it.cnr.ittig.xmleges.core.services.action.tool.unmark.UnmarkAction;
 import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
+import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
+import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.DocumentOpenedEvent;
+import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
 import it.cnr.ittig.xmleges.core.services.dom.extracttext.ExtractText;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
@@ -68,11 +71,15 @@ public class UnmarkActionImpl implements UnmarkAction, EventManagerListener, Log
 	
 	UtilRulesManager utilRulesManager;
 	
+	DocumentManager documentManager;
+	
 	ExtractText extractText;
 
 	Node activeNode;
 	
 	int start, end;
+	
+	String selectedText="";
 
 	UnmarkAction unmarkaction = new UnmarkAction ();
 
@@ -87,6 +94,7 @@ public class UnmarkActionImpl implements UnmarkAction, EventManagerListener, Log
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
+		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		extractText = (ExtractText) serviceManager.lookup(ExtractText.class);
 	}
 
@@ -105,23 +113,23 @@ public class UnmarkActionImpl implements UnmarkAction, EventManagerListener, Log
 				unmarkaction.setEnabled(false);
 		} else {
 			logger.debug("START enableTesto");
-			unmarkaction.setEnabled(onlyTag==0);
+			unmarkaction.setEnabled(extractText.canExtractText(activeNode,0,selectedText.length()));
 			logger.debug("END enableTesto");
 		}
 	}
 
-	public void enableActionTagTree() {
-		if (activeNode == null) {			
-			unmarkaction.setEnabled(false);
-		} else {
-			unmarkaction.setEnabled(true);
-		}
-	}
-
-	public void enableActionRemoveTag() {
-		unmarkaction.setEnabled(true);
-		
-	}
+//	public void enableActionTagTree() {
+//		if (activeNode == null) {			
+//			unmarkaction.setEnabled(false);
+//		} else {
+//			unmarkaction.setEnabled(true);
+//		}
+//	}
+//
+//	public void enableActionRemoveTag() {
+//		unmarkaction.setEnabled(true);
+//		
+//	}
 
 	// ////////////////////////////////////////// EventManagerListener Interface
 	public void manageEvent(EventObject event) {
@@ -132,6 +140,15 @@ public class UnmarkActionImpl implements UnmarkAction, EventManagerListener, Log
 				activeNode = ((SelectionChangedEvent) event).getActiveNode();
 				start = ((SelectionChangedEvent) event).getTextSelectionStart();
 				end = ((SelectionChangedEvent) event).getTextSelectionEnd();
+				
+				if(activeNode.getNodeValue()==null){
+					if(UtilDom.getTextNode(activeNode)==null || UtilDom.getTextNode(activeNode).trim().equals(""))
+						selectedText=activeNode.getNodeName();
+					else
+						selectedText=UtilDom.getTextNode(activeNode);
+				}
+				else				
+					selectedText=activeNode.getNodeValue();
 				
 
 				if (activeNode != null) {
@@ -149,12 +166,14 @@ public class UnmarkActionImpl implements UnmarkAction, EventManagerListener, Log
 							onlyTag = 1;
 							tree = 0;
 							logger.debug("azione sul nodo tag");
-							enableActionRemoveTag();
+//							enableActionRemoveTag();
+							unmarkaction.setEnabled(false);
 						} else {
 							onlyTag = 2;
 							tree = 1;
 							logger.debug("azione sul tree");
-							enableActionTagTree();
+//							enableActionTagTree();
+							unmarkaction.setEnabled(false);
 						}
 					}
 				} else {
@@ -183,29 +202,35 @@ public class UnmarkActionImpl implements UnmarkAction, EventManagerListener, Log
 		
 		Node modificato = activeNode;
 		if (onlyTag == 0) { // caso di azione su nodo testo
-			//	ricerca del testo selezionato
-			String selectedText="";
-			if(modificato.getNodeValue()==null){
-				if(UtilDom.getTextNode(modificato)==null || UtilDom.getTextNode(modificato).trim().equals(""))
-					selectedText=modificato.getNodeName();
-				else
-					selectedText=UtilDom.getTextNode(modificato);
-			}
-			else				
-				selectedText=modificato.getNodeValue();
+			
 
 			//	appiattisce il testo				
 						
 			Node extractedNode;
 			extractedNode = extractText.extractText(modificato,0,selectedText.length());
-			if(extractedNode!=null && extractedNode.getPreviousSibling()!=null){
-				extractedNode.getParentNode().removeChild(extractedNode.getPreviousSibling());
-				UtilDom.mergeTextNodes(extractedNode.getParentNode());
+			try{
+				EditTransaction tr = documentManager.beginEdit();
+				if(extractedNode!=null && extractedNode.getPreviousSibling()!=null){
+					
+					extractedNode.getParentNode().removeChild(extractedNode.getPreviousSibling());
+					Node toSelect=extractedNode.getParentNode();
+					UtilDom.mergeTextNodes(extractedNode.getParentNode());
+					documentManager.commitEdit(tr);
+					selectionManager.setActiveNode(this, toSelect);
+					
+				}else{
+					documentManager.rollbackEdit(tr);
+				}
+				
+			}catch (DocumentManagerException ex) {
+				logger.error(ex.getMessage(), ex);
+				return;
+			
 			}
 
 		} 
 			
-		selectionManager.setActiveNode(this, modificato);
+		
 
 	}
 
