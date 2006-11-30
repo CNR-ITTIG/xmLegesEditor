@@ -74,7 +74,7 @@ public class TestoActionImpl implements TestoAction, EventManagerListener, Logga
 	Node[] activeNodeList;
 
 	AbstractAction[] actions = new AbstractAction[] { new GrassettoAction(), new CorsivoAction(), new SottolineatoAction(), new ApiceAction(),
-			new PediceAction() };
+			new PediceAction()};
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -215,7 +215,7 @@ public class TestoActionImpl implements TestoAction, EventManagerListener, Logga
 			doAction("h:b");
 		}
 	}
-
+	
 	public class CorsivoAction extends AbstractAction {
 
 		public void actionPerformed(ActionEvent e) {
