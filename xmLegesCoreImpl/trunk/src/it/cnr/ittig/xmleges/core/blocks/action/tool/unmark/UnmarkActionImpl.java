@@ -227,11 +227,8 @@ public class UnmarkActionImpl implements UnmarkAction, EventManagerListener, Log
 				return;
 			
 			}
-
 		} 
 			
-		
-
 	}
 
 	public class UnmarkAction extends AbstractAction {
