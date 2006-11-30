@@ -87,6 +87,7 @@ public class EventoFormPlaneImpl implements EventoFormPlane, Loggable, Serviceab
 	public void service(ServiceManager serviceManager) throws ServiceException {
 		form = (Form) serviceManager.lookup(Form.class);
 		sottoFormEventi = (Form) serviceManager.lookup(Form.class);
+		sottoFormEventi.setName("editor.form.evento.eventiplane");
 		metaciclodivita = (MetaCiclodivita) serviceManager.lookup(MetaCiclodivita.class);
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 	}
