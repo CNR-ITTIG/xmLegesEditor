@@ -11,6 +11,7 @@ import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.FormVerifier;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
+import it.cnr.ittig.xmleges.editor.services.form.evento.EventoForm;
 import it.cnr.ittig.xmleges.editor.services.form.evento.EventoFormPlane;
 import it.cnr.ittig.xmleges.editor.services.form.vigenza.VigenzaForm;
 
@@ -157,14 +158,13 @@ public class VigenzaFormImpl implements VigenzaForm, FormVerifier, Loggable, Ser
 			//tutti i campi sono vuoti ma il msg non si vede perche return true;
 			errorMessage = "editor.selezionevigenza.msg.err.eliminavigenza";
 			return true;
-		}else{//solo se esiste la finevigore lo status è obbligatorio
-			
+		}else{
 			isvalid=eventoiniziovigoreform.getEvento()!=null;
 			if(!isvalid){
 				errorMessage = "editor.selezionevigenza.msg.err.iniziovigorevuoto";				
 				return false;				
 			}
-			
+//			solo se esiste la finevigore lo status è obbligatorio
 			if(eventofinevigoreform.getEvento()!=null){
 				isvalid=(vigenzaStatus.getSelectedItem()!=null)&&(!vigenzaStatus.getSelectedItem().equals("--"));
 			
@@ -173,67 +173,7 @@ public class VigenzaFormImpl implements VigenzaForm, FormVerifier, Loggable, Ser
 					return false;				
 				}
 			}
-			
-			Evento eventoiniziovigore=eventoiniziovigoreform.getEvento();
-			Evento eventofinevigore=eventofinevigoreform.getEvento();
-			
-			Document doc = documentManager.getDocumentAsDom();
-			NodeList eventiList = doc.getElementsByTagName("evento");
-			
-			isvalid=eventiList.getLength()>0;
-			
-			if(!isvalid){
-				errorMessage="editor.selezionevigenza.msg.err.nessunevento";
-				eventoiniziovigoreform.setEvento(null);
-				eventofinevigoreform.setEvento(null);
-				return false;
-			}
-			
-			
-			String id, data, tipo, fonte=null;
-			boolean isvalidInizio=false;
-			boolean isvalidFine;
-			if(eventofinevigore!=null){
-				isvalidFine=false;
-			}else isvalidFine=true;
-
-			
-			for (int i = 0; i < eventiList.getLength();i++) {
-				Node eventoNode = eventiList.item(i);
-				id = eventoNode.getAttributes().getNamedItem("id") != null ? eventoNode.getAttributes().getNamedItem("id").getNodeValue() : null;				
-				data = eventoNode.getAttributes().getNamedItem("data") != null ? eventoNode.getAttributes().getNamedItem("data").getNodeValue() : null;
-				tipo = eventoNode.getAttributes().getNamedItem("tipo") != null ? eventoNode.getAttributes().getNamedItem("tipo").getNodeValue() : null;
-				Node nodeFonte = eventoNode.getAttributes().getNamedItem("fonte");
-				if (nodeFonte != null) {
-					fonte = nodeFonte.getNodeValue();					
-				}
 				
-				isvalidInizio = isvalidInizio || (id.equals(eventoiniziovigore.getId())
-					&& data.equals(eventoiniziovigore.getData())
-					&& tipo.equals(eventoiniziovigore.getTipoEvento())
-					&& fonte.equals(eventoiniziovigore.getFonte().getId()));
-				
-				
-				if(eventofinevigore!=null){
-					isvalidFine = isvalidFine || (id.equals(eventofinevigore.getId())
-					&& data.equals(eventofinevigore.getData())
-					&& tipo.equals(eventofinevigore.getTipoEvento())
-					&& fonte.equals(eventofinevigore.getFonte().getId()));
-		
-				}
-				
-			}
-			if(!isvalidInizio){
-				errorMessage = "editor.selezionevigenza.msg.err.iniziovigoremod";
-				eventoiniziovigoreform.setEvento(null);
-				return false;				
-			}
-			if(!isvalidFine){
-				errorMessage = "editor.selezionevigenza.msg.err.finevigoremod";
-				eventofinevigoreform.setEvento(null);
-				return false;				
-			}
-			
 		}
 		
 		return true;
