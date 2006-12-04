@@ -104,7 +104,7 @@ public class RinumerazioneActionImpl implements RinumerazioneAction, EventManage
 
 	// ///////////////////////////////////////////////////// Startable Interface
 	public void start() throws java.lang.Exception {
-		renumAction.setEnabled(false);
+		renumAction.setEnabled(true);  // era false
 		String attiva = preferenceManager.getPreferenceAsString(getClass().getName());
 		doSetRinumerazione(Boolean.valueOf(attiva).booleanValue());
 	}
@@ -114,7 +114,7 @@ public class RinumerazioneActionImpl implements RinumerazioneAction, EventManage
 	}
 
 	public void manageEvent(EventObject event) {
-		renumAction.setEnabled(!documentManager.isEmpty());
+		renumAction.setEnabled(true);//!documentManager.isEmpty());
 	}
 
 	// /////////////////////////////////////////////// Azioni
