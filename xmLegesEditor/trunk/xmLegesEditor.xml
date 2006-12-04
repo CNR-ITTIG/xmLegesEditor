@@ -256,6 +256,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <item action="edit.procinstr" />
                     <separator/>
                     <item action="edit.extracttext" />
+                    <item action="editor.testo.unmark" />
                 </menu>
                 <menu action="menu.view">
                     <menu action="menu.view.toolbars">
@@ -317,8 +318,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                         <separator />
                         <item action="editor.testo.apice" />
                         <item action="editor.testo.pedice" />
-                        <separator />
-                        <item action="editor.testo.unmark" />
                     </menu>
                     <menu action="menu.editor.allineamento">
                         <item action="editor.allineamento.oriz.sx" />
@@ -439,13 +438,13 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <separator/>
                     <item action="file.print" />
                 </toolbar>
-                <toolbar name="edit" floatable="false" rollover="true">
+                <toolbar name="tools" floatable="false" rollover="true">
                     <!-- item action="tool.contents" /-->
                     <!-- separator /-->
                     <item action="tool.spellcheck" />
                     <!--item action="tool.spellcheck.auto" /-->
                 </toolbar>
-                <toolbar name="tools" floatable="false" rollover="true">
+                <toolbar name="edit" floatable="false" rollover="true">
                     <item action="edit.cut" />
                     <item action="edit.copy" />
                     <item action="edit.paste" />
@@ -455,6 +454,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <item action="edit.redo" />
                     <separator />
                     <item action="edit.find" />
+                    <separator />
+                    <item action="editor.testo.unmark" />
                 </toolbar>
                 <toolbar name="editor.testo" floatable="false" rollover="true">
                     <item action="editor.testo.grassetto" />
@@ -462,9 +463,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <item action="editor.testo.sottolineato" />
                     <separator />
                     <item action="editor.testo.apice" />
-                    <item action="editor.testo.pedice" />
-                    <separator />
-                    <item action="editor.testo.unmark" />
+                    <item action="editor.testo.pedice" />  
                 </toolbar>
                 <toolbar name="editor.allineamento" floatable="false" rollover="true">
                     <item action="editor.allineamento.oriz.sx" />
