@@ -70,7 +70,7 @@
 						font-size: 100%;
 					}
 					.articolo { 
-						font-size: 95% ; 
+						font-size: 100% ; 
 						margin-top: 15px; 
 						text-align: center;
 					}
@@ -258,8 +258,8 @@
 	</xsl:template>
 	<!-- ========================== 	LIBRO		============================== -->
 	<xsl:template match="//*[name()='libro']">
-		<a name="{@id}"/>		
-		<p class="libro" name="{@id}">
+		<a name="{@id}"></a>
+		<p class="libro">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
 				<xsl:call-template name="vigenza"/>
@@ -273,8 +273,8 @@
 
 	<!-- ========================== 	PARTE		============================== -->
 	<xsl:template match="//*[name()='parte']">
-		<a name="{@id}"/>		
-		<p class="parte" name="{@id}">
+		<a name="{@id}"></a>
+		<p class="parte">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
 				<xsl:call-template name="vigenza"/>
@@ -288,8 +288,8 @@
 
 	<!-- ========================== 	TITOLO		============================== -->
 	<xsl:template match="//*[name()='titolo']">
-		<a name="{@id}"/>		
-		<p class="titolo" name="{@id}">
+		<a name="{@id}"></a>
+		<p class="titolo">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
 				<xsl:call-template name="vigenza"/>
@@ -303,8 +303,8 @@
 
 	<!-- ========================== 	SEZIONE		============================== -->
 	<xsl:template match="//*[name()='sezione']">
-		<a name="{@id}"/>		
-		<p class="sezione" name="{@id}">
+		<a name="{@id}"></a>
+		<p class="sezione">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
 				<xsl:call-template name="vigenza"/>
@@ -319,8 +319,8 @@
 	<!-- ========================== 	CAPO	============================== -->
 	<xsl:template match="//*[name()='capo']">
 		<hr />
-		<a name="{@id}"/>		
-		<p class="capo" name="{@id}">
+		<a name="{@id}"></a>
+		<p class="capo">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
 				<xsl:call-template name="vigenza"/>
@@ -335,6 +335,7 @@
 	<!-- ========================== 	RUBRICA	 	============================== -->
 	
 	<xsl:template match="//*[name()='rubrica']">
+		<a name="{@id}"></a>
 		<p class="rubrica">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
@@ -362,8 +363,8 @@
 	<!-- =========================	ARTICOLO	=============================== -->
 	
 	<xsl:template match="//*[name()='articolo']">
-		<a name="{@id}"/>
-		<div class="articolo" name="{@id}">
+		<a name="{@id}"></a>
+		<div class="articolo">
 			<xsl:choose>
 				<xsl:when test="$datafine!=''">
 					<xsl:call-template name="vigenza"/>
@@ -393,8 +394,8 @@
 	<!-- =========================	COMMA e sotto comma	=============================== -->
 
 	<xsl:template match="//*[name()='comma']">
-		<a name="{@id}"/>
-		<p class="comma" name="{@id}">
+		<a name="{@id}"></a>
+		<p class="comma">
 			<xsl:choose>
 				<xsl:when test="$datafine!=''">
 					<xsl:call-template name="vigenza"/>
@@ -418,8 +419,8 @@
 	</xsl:template>
 	<!-- =========================	EL , EN , EP	=============================== -->
 	<xsl:template match="//*[name()='el'] | //*[name()='en'] | //*[name()='ep']">
-	<a name="{@id}"/>		
-	<p class="{local-name()}" name="{@id}">
+	<a name="{@id}"></a>
+	<p class="{local-name()}">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
 				<xsl:call-template name="vigenza"/>
@@ -778,6 +779,9 @@
 		<xsl:variable name="fine_id">
 			<xsl:value-of select="@finevigore"/>
 		</xsl:variable>		
+		<xsl:variable name="data_entratainvigore">
+			<xsl:value-of select="//*[name()='evento'][@fonte='ro1']/@data"/>
+		</xsl:variable>
 		<xsl:variable name="data_inizio">
 			<xsl:value-of select="//*[name()='evento'][@id=$inizio_id]/@data"/>
 		</xsl:variable>
@@ -820,10 +824,18 @@
 						</xsl:when>
 						<xsl:when test="$data_inizio&lt;number(number($datafine)+1) and $data_fine&gt;$datafine">
 							<xsl:attribute name="title"><xsl:copy-of select="$tooltip" /></xsl:attribute>
-							<span style="color:#060;">
-								<xsl:apply-templates />					
-								<xsl:call-template name="makeNotavigenza" />
-							</span>
+ 							<xsl:choose>
+								<xsl:when test="$data_entratainvigore = $data_inizio">
+									<xsl:apply-templates />					
+									<xsl:call-template name="makeNotavigenza" />
+								</xsl:when>
+						 		<xsl:otherwise>
+									<span style="color:#060;">
+										<xsl:apply-templates />					
+										<xsl:call-template name="makeNotavigenza" />
+									</span>
+ 							  	</xsl:otherwise>
+						   	</xsl:choose>
 						</xsl:when>						
 					</xsl:choose>
 				</xsl:when>	
@@ -837,10 +849,18 @@
 						</xsl:when>
 						<xsl:otherwise>
 							<xsl:attribute name="title"><xsl:copy-of select="$tooltip" /></xsl:attribute>						
-							<span style="color:#060;">
-								<xsl:apply-templates />
-								<xsl:call-template name="makeNotavigenza" />
-							</span>
+ 							<xsl:choose>
+								<xsl:when test="$data_entratainvigore = $data_inizio">
+									<xsl:apply-templates />					
+									<xsl:call-template name="makeNotavigenza" />
+								</xsl:when>
+						 		<xsl:otherwise>
+									<span style="color:#060;">
+										<xsl:apply-templates />					
+										<xsl:call-template name="makeNotavigenza" />
+									</span>
+ 							  	</xsl:otherwise>
+						   	</xsl:choose>
 						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:when>			
