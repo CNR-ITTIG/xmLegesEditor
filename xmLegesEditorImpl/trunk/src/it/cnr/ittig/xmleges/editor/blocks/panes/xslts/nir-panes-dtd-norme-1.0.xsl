@@ -149,9 +149,12 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     	<xsl:attribute name="style">
     	    font-size: large;
             font-style: italic;
+	    <xsl:if test="@status='soppresso'">color:red;  text-decoration:line-through;</xsl:if>
+	    <xsl:if test="@status='inserito'">color:green</xsl:if>            
         </xsl:attribute>
-    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-    	<xsl:apply-templates />
+        <xsl:call-template name="vigenza"/>	
+<!--    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />-->
+<!--    	<xsl:apply-templates />-->
     </xsl:element>
 </xsl:template>
 
