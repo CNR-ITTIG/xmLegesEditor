@@ -33,10 +33,10 @@
 				<!-- ======================================================== -->				
 				<style type="text/css">
 					body {
-						margin-left: 5 px;
+						margin-left: 5px;
 						font-family: "Verdana, Arial, Helvetica, sans-serif" ;
 						font-size: 90% ;
-						tex-align:justify;
+						text-align:justify;
 					}
 					hr {
 						margin:30px 25% 30px 25%;
@@ -74,7 +74,17 @@
 						margin-top: 15px; 
 						text-align: center;
 					}
-					a.articolo { 
+					p.titolo, p.libro, p.parte, p.sezione { 
+						font-size: 100% ; 
+						font-weight: bolder; 
+						text-align: center;
+					}	
+					.capo {
+						padding-top: 10px;
+						/*margin:25px 25% 5px 25%;*/
+						text-align: center;
+					}
+						a.articolo { 
 						font-size: 100% ; 
 						font-weight: bolder;
 						margin-top: 15px; 
@@ -93,12 +103,7 @@
 						margin-bottom: 5px;
 						text-align: justify;
 						text-indent: 1em;
-					}
-					
-					.capo {
-						padding-top: 10px;
-						text-align: center;
-					}
+					}		
 					.el {
 						font-size: 100% ; 
 						text-align: justify;
@@ -154,7 +159,12 @@
 					}
 					p {
 						text-align:justify;
-					}					
+					}
+					.allineadx, p.allineadx {
+						width: 100%;
+						text-align: right;
+						margin-bottom: 20px;
+					}
 		 		</style>
 				<!-- ======================================================== -->
 				<!--                                                          -->
@@ -199,11 +209,11 @@
             	<div class="meta">
             		<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='meta']" />
             	</div>
-            	<xsl:if test="$datafine=''">
-            	  <div>
-            		<xsl:call-template name="gestionenote" /> 
-            	  </div>
-            	</xsl:if>  
+
+	            	  <div>
+    	        		<xsl:call-template name="notemultivigente" /> 
+        	    	  </div>
+
 			</body>
 		</html>
 	</xsl:template>
@@ -246,6 +256,66 @@
 					<xsl:apply-templates/>
 		</table>
 	</xsl:template>
+	<!-- ========================== 	LIBRO		============================== -->
+	<xsl:template match="//*[name()='libro']">
+		<a name="{@id}"/>		
+		<p class="libro" name="{@id}">
+		<xsl:choose>
+			<xsl:when test="$datafine!=''">
+				<xsl:call-template name="vigenza"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="multivigenza"/>
+			</xsl:otherwise>
+		</xsl:choose>				
+		</p>
+	</xsl:template>
+
+	<!-- ========================== 	PARTE		============================== -->
+	<xsl:template match="//*[name()='parte']">
+		<a name="{@id}"/>		
+		<p class="parte" name="{@id}">
+		<xsl:choose>
+			<xsl:when test="$datafine!=''">
+				<xsl:call-template name="vigenza"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="multivigenza"/>
+			</xsl:otherwise>
+		</xsl:choose>				
+		</p>
+	</xsl:template>
+
+	<!-- ========================== 	TITOLO		============================== -->
+	<xsl:template match="//*[name()='titolo']">
+		<a name="{@id}"/>		
+		<p class="titolo" name="{@id}">
+		<xsl:choose>
+			<xsl:when test="$datafine!=''">
+				<xsl:call-template name="vigenza"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="multivigenza"/>
+			</xsl:otherwise>
+		</xsl:choose>				
+		</p>
+	</xsl:template>
+
+	<!-- ========================== 	SEZIONE		============================== -->
+	<xsl:template match="//*[name()='sezione']">
+		<a name="{@id}"/>		
+		<p class="sezione" name="{@id}">
+		<xsl:choose>
+			<xsl:when test="$datafine!=''">
+				<xsl:call-template name="vigenza"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="multivigenza"/>
+			</xsl:otherwise>
+		</xsl:choose>				
+		</p>
+	</xsl:template>
+
 	<!-- ========================== 	CAPO	============================== -->
 	<xsl:template match="//*[name()='capo']">
 		<hr />
@@ -266,11 +336,17 @@
 	
 	<xsl:template match="//*[name()='rubrica']">
 		<p class="rubrica">
-			<xsl:apply-templates />
+		<xsl:choose>
+			<xsl:when test="$datafine!=''">
+				<xsl:call-template name="vigenza"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="multivigenza"/>
+			</xsl:otherwise>
+		</xsl:choose>				
 		</p>
-	</xsl:template>	
+	</xsl:template>
 
-	
 <!--	<xsl:template match="nir:*">
 				<div class="{local-name()}">
 						<xsl:apply-templates select="nir:num">
@@ -603,12 +679,8 @@
 		<xsl:variable name="data_fine">
 			<xsl:value-of select="//*[name()='evento'][@id=$fine_id]/@data"/>
 		</xsl:variable>
-		<xsl:variable name="id">
-			<xsl:value-of select="@id"/>
-		</xsl:variable>
 		<xsl:variable name="tooltip">
 				<xsl:choose>
-				<!-- ================= data_fine!='' =========-->
 					<xsl:when test="$data_fine!=''">In vigore&#160;<xsl:choose>
 										<xsl:when test="$data_inizio!=''">dal <xsl:value-of select="concat(substring($data_inizio,7,2),'/',substring($data_inizio,5,2),'/',substring($data_inizio,1,4))"/>
 										</xsl:when>
@@ -619,7 +691,6 @@
 										<xsl:when test="$stato!=''">(<xsl:value-of select="$stato"/>)</xsl:when>
 									</xsl:choose>		
 					</xsl:when>
-				<!-- ================= data_inizio!='' =========-->
 					<xsl:when test="$data_inizio!=''">In vigore&#160;dal <xsl:value-of select="concat(substring($data_inizio,7,2),'/',substring($data_inizio,5,2),'/',substring($data_inizio,1,4))"/></xsl:when>
 				</xsl:choose>
 		</xsl:variable>
@@ -634,24 +705,29 @@
 							<!--===================== n{@id}, t{@id}:'n' e 't' differenziano il testo dalle note
 							    ===================== <xsl:value-of select="@id"/>: il valore accanto a 'VigNota', l'id della partizione
 							-->
-							<span> [ ... ] <a href="#n{$id}" name="t{@id}"> <sup>Vig{<xsl:value-of select="@id"/>}</sup></a> </span>
+							<span>
+								<xsl:call-template name="makeNotavigenza" />
+							</span>
 						</xsl:when>
 						<xsl:when test="$data_inizio&gt;number(number($datafine)-1)">
-							<span style="color:#060;" title="vigente">
+							<span style="color:#060;">
 								<xsl:apply-templates />
-							    [ ... ] <a href="#n{$id}" name="t{@id}"> <sup>Vig{<xsl:value-of select="@id"/>}</sup></a>
+								<xsl:call-template name="makeNotavigenza" />
 							</span>
 						</xsl:when>						
 						<xsl:otherwise>
 							<xsl:choose>			
 								<xsl:when test="$stato!=''">
-									<span style="color:#f00;" title="{$stato}"><xsl:apply-templates /> 
-									 [ ... ] <a href="#n{$id}" name="t{@id}"> <sup>Vig{<xsl:value-of select="@id"/>}</sup></a>
+									<!-- <span style="color:#f00;" title="{$stato}"><xsl:apply-templates /> -->												
+									<span style="color:#f00;">
+										<xsl:apply-templates /> 
+										<xsl:call-template name="makeNotavigenza" />
 									</span>
 								</xsl:when>
 								<xsl:otherwise>
-									<span style="color:#f00;" title="abrogato"><xsl:apply-templates />
-									 [ ... ] <a href="#n{$id}" name="t{@id}"> <sup>Vig{<xsl:value-of select="@id"/>}</sup></a>
+									<span style="color:#f00;">
+										<xsl:apply-templates />
+										<xsl:call-template name="makeNotavigenza" />
 									</span>
 								</xsl:otherwise>
 							</xsl:choose>
@@ -665,12 +741,14 @@
 							<!--===================== n{@id}, t{@id}:'n' e 't' differenziano il testo dalle note
 							    ===================== <xsl:value-of select="@id"/>: il valore accanto a 'VigNota', l'id della partizione
 							-->
-							<span> [ ... ] <a href="#n{$id}" name="t{@id}"> <sup>{<xsl:value-of select="@id"/>}</sup></a> </span>
+							<span> 
+								<xsl:call-template name="makeNotavigenza" />
+							</span>
 						</xsl:when>
 						<xsl:otherwise>
-							<span style="color:#060;" title="vigente">
+							<span style="color:#060;">
 								<xsl:apply-templates />
-								[ ... ] <a href="#n{$id}" name="t{@id}"> <sup>Vig{<xsl:value-of select="@id"/>}</sup></a>
+								<xsl:call-template name="makeNotavigenza" />
 							</span>
 						</xsl:otherwise>
 					</xsl:choose>
@@ -706,9 +784,6 @@
 		<xsl:variable name="data_fine">
 			<xsl:value-of select="//*[name()='evento'][@id=$fine_id]/@data"/>
 		</xsl:variable>
-		<xsl:variable name="id">
-			<xsl:value-of select="@id"/>
-		</xsl:variable>
 		<xsl:variable name="tooltip">
 				<xsl:choose>
 					<xsl:when test="$data_fine!=''">In vigore&#160;<xsl:choose>
@@ -737,15 +812,18 @@
 							  </xsl:when>
 					   		  <xsl:when test="preceding-sibling::node()[1]//@iniziovigore=$fine_id">
 					 		  </xsl:when>
-					 		  <xsl:otherwise>
-								<span> [ ... ] </span>	
-								<!-- 		<sup>{<xsl:copy-of select="$tooltip" />}</sup>   -->
+					 		  <xsl:otherwise>						 		  
+						 		<span style="color:#f00;"> [ ... ] <a href="#n{@id}" name="t{@id}"> <sup>{Vig.<xsl:value-of select="@id"/>}</sup></a></span>						 		
  							  </xsl:otherwise>
 						   </xsl:choose>
 
 						</xsl:when>
 						<xsl:when test="$data_inizio&lt;number(number($datafine)+1) and $data_fine&gt;$datafine">
-								<xsl:apply-templates />
+							<xsl:attribute name="title"><xsl:copy-of select="$tooltip" /></xsl:attribute>
+							<span style="color:#060;">
+								<xsl:apply-templates />					
+								<xsl:call-template name="makeNotavigenza" />
+							</span>
 						</xsl:when>						
 					</xsl:choose>
 				</xsl:when>	
@@ -758,7 +836,11 @@
 							-->
 						</xsl:when>
 						<xsl:otherwise>
+							<xsl:attribute name="title"><xsl:copy-of select="$tooltip" /></xsl:attribute>						
+							<span style="color:#060;">
 								<xsl:apply-templates />
+								<xsl:call-template name="makeNotavigenza" />
+							</span>
 						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:when>			
@@ -769,10 +851,31 @@
 			</xsl:choose>
 	</xsl:template>
 
+	<!-- ======================================================== -->
+	<!--                                                          -->
+	<!--  template nota di vigenza (nel testo)                    --> 
+	<!--                                                          -->
+	<!-- ======================================================== -->
 
+   <xsl:template name="makeNotavigenza">
+		<xsl:choose>
+			<!--  Si potrebbe anche inserire i COMMA che hanno figli -->		
+			<xsl:when test="(local-name()='articolo' or local-name()='capo' or local-name()='titolo' or local-name()='libro' or local-name()='parte' or local-name()='sezione')">
+				<div class="allineadx"><a href="#n{@id}" name="t{@id}"><sup>{Vig.<xsl:value-of select="@id"/>}</sup></a></div>
+			</xsl:when>
+			<xsl:otherwise>
+				<a href="#n{@id}" name="t{@id}"><sup>{Vig.<xsl:value-of select="@id"/>}</sup></a>
+			</xsl:otherwise>
+		</xsl:choose>									
+   </xsl:template>
 
+	<!-- ======================================================== -->
+	<!--                                                          -->
+	<!--  template note testo MultiVigente (fondo pagina)         -->
+	<!--                                                          -->
+	<!-- ======================================================== -->
 
-   <xsl:template name="gestionenote">
+   <xsl:template name="notemultivigente">
       <!--========== match su tutte le partizioni con gli attributi status, iniziovigore o finevigore
           ========== crea un elenco di note numerate linkabili al testo nel documento 
       -->
@@ -861,12 +964,18 @@
        </xsl:for-each>
    </xsl:template>
  
+
+	<!-- ======================================================== -->
+	<!--                                                          -->
+	<!--  template TimeLine							              -->
+	<!--                                                          -->
+	<!-- ======================================================== -->
  
-<xsl:template name="TimeLine">
-	<xsl:variable name="currentdate">
+	<xsl:template name="TimeLine">
+	 <xsl:variable name="currentdate">
 		<xsl:value-of select="concat(substring(date:date-time(),1,4),substring(date:date-time(),6,2),substring(date:date-time(),9,2))"/>
-	</xsl:variable>
-	<p>
+	 </xsl:variable>
+	 <p>
 		Date di vigenza che interessano il documento:
 		<xsl:text> </xsl:text> 
 		<xsl:for-each select="//*[name()='eventi']/*[@data!='']">
@@ -876,8 +985,9 @@
 			<xsl:value-of select="$data"/>
 			<xsl:text> </xsl:text> 
 		</xsl:for-each>
-	</p>		
-</xsl:template>
+	 </p>		
+	</xsl:template>
  
 
 </xsl:stylesheet>
+				

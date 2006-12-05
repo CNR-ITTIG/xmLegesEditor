@@ -40,6 +40,16 @@
 		margin-top: 15px; 
 		text-align: center;
 	}
+	p.titolo, p.libro, p.parte, p.sezione { 
+		font-size: 100% ; 
+		font-weight: bolder; 
+		text-align: center;
+	}	
+	.capo {
+		padding-top: 10px;
+		/*margin:25px 25% 5px 25%;*/
+		text-align: center;
+	}
 	a.articolo { 
 		font-size: 100% ; 
 		font-weight: bolder;
@@ -59,12 +69,6 @@
 		margin-bottom: 5px;
 		text-align: justify;
 		text-indent: 1em;
-	}
-	
-	.capo {
-		padding-top: 10px;
-		/*margin:25px 25% 5px 25%;*/
-		text-align: center;
 	}
 	.el {
 		font-size: 100% ; 
@@ -121,4 +125,9 @@
 	}
 	p {
 		text-align:justify;
+	}
+	.allineadx, p.allineadx {
+		width: 100%;
+		text-align: right;
+		margin-bottom: 20px;
 	}
