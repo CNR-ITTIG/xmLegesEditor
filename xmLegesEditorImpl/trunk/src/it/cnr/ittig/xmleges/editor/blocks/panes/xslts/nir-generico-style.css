@@ -36,24 +36,18 @@
 		font-size: 100%;
 	}
 	.articolo { 
-		font-size: 100% ; 
+		font-size: 90% ; 
 		margin-top: 15px; 
 		text-align: center;
 	}
-	p.titolo, p.libro, p.parte, p.sezione { 
+	.titolo, .libro, .parte, .sezione { 
 		font-size: 100% ; 
-		font-weight: bolder; 
+		font-weight: bold;
 		text-align: center;
 	}	
 	.capo {
 		padding-top: 10px;
 		/*margin:25px 25% 5px 25%;*/
-		text-align: center;
-	}
-	a.articolo { 
-		font-size: 100% ; 
-		font-weight: bolder;
-		margin-top: 15px; 
 		text-align: center;
 	}
 	p.rubrica {
@@ -65,6 +59,7 @@
 	}
 	.comma { 
 		font-size: 100% ; 
+		font-weight: normal;
 		margin-top: 5px;
 		margin-bottom: 5px;
 		text-align: justify;
@@ -72,6 +67,7 @@
 	}
 	.el {
 		font-size: 100% ; 
+		font-weight: normal;
 		text-align: justify;
 		margin-left: 5px;
 		text-indent: 2em;
@@ -83,6 +79,7 @@
 		text-indent: -10px;
 		margin-top: 2px;
 		font-size: 100% ; 
+		font-weight: normal;
 	}
     b b { font-weight: normal; }
 	.ndr {

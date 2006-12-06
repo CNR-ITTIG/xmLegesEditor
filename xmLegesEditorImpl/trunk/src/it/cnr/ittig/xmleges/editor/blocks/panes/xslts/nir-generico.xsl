@@ -114,7 +114,7 @@
 	<!-- ========================== 	LIBRO		============================== -->
 	<xsl:template match="//*[name()='libro']">
 		<a name="{@id}"></a>
-		<p class="libro">
+		<div class="libro">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
 				<xsl:call-template name="vigenza"/>
@@ -123,13 +123,13 @@
 				<xsl:call-template name="multivigenza"/>
 			</xsl:otherwise>
 		</xsl:choose>				
-		</p>
+		</div>
 	</xsl:template>
 
 	<!-- ========================== 	PARTE		============================== -->
 	<xsl:template match="//*[name()='parte']">
 		<a name="{@id}"></a>
-		<p class="parte">
+		<div class="parte">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
 				<xsl:call-template name="vigenza"/>
@@ -138,13 +138,13 @@
 				<xsl:call-template name="multivigenza"/>
 			</xsl:otherwise>
 		</xsl:choose>				
-		</p>
+		</div>
 	</xsl:template>
 
 	<!-- ========================== 	TITOLO		============================== -->
 	<xsl:template match="//*[name()='titolo']">
 		<a name="{@id}"></a>
-		<p class="titolo">
+		<div class="titolo">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
 				<xsl:call-template name="vigenza"/>
@@ -153,13 +153,13 @@
 				<xsl:call-template name="multivigenza"/>
 			</xsl:otherwise>
 		</xsl:choose>				
-		</p>
+		</div>
 	</xsl:template>
 
 	<!-- ========================== 	SEZIONE		============================== -->
 	<xsl:template match="//*[name()='sezione']">
 		<a name="{@id}"></a>
-		<p class="sezione">
+		<div class="sezione">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
 				<xsl:call-template name="vigenza"/>
@@ -168,14 +168,14 @@
 				<xsl:call-template name="multivigenza"/>
 			</xsl:otherwise>
 		</xsl:choose>				
-		</p>
+		</div>
 	</xsl:template>
 
 	<!-- ========================== 	CAPO	============================== -->
 	<xsl:template match="//*[name()='capo']">
 		<hr />
 		<a name="{@id}"></a>
-		<p class="capo">
+		<div class="capo">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
 				<xsl:call-template name="vigenza"/>
@@ -184,7 +184,7 @@
 				<xsl:call-template name="multivigenza"/>
 			</xsl:otherwise>
 		</xsl:choose>				
-		</p>
+		</div>
 	</xsl:template>
 	
 	<!-- ========================== 	RUBRICA	 	============================== -->
