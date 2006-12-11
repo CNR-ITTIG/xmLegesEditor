@@ -1,10 +1,6 @@
 package it.cnr.ittig.xmleges.core.services.util.rtf;
 
-import java.io.File;
-
 import it.cnr.ittig.services.manager.Service;
-
-import org.w3c.dom.Document;
 
 /**
  * Servizio per ...
