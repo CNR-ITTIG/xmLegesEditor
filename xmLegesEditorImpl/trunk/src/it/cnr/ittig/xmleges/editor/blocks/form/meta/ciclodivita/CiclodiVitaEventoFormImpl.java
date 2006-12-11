@@ -20,7 +20,6 @@ import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextFieldElemen
 import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextFieldElementListener;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.util.date.UtilDate;
-import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.MetaCiclodivita;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
@@ -184,7 +183,8 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Loggabl
 						tagTipoRelazioneSottoFormDatiEvento.addItem("passiva");
 						tagTipoRelazioneSottoFormDatiEvento.addItem("giurisprudenza");
 						tagTipoRelazioneSottoFormDatiEvento.addItem("haallegato");
-						tagTipoRelazioneSottoFormDatiEvento.addItem("allegatodi");		
+						tagTipoRelazioneSottoFormDatiEvento.addItem("allegatodi");	
+						tagTipoRelazioneSottoFormDatiEvento.setSelectedItem(e.getFonte().getTagTipoRelazione());
 						
 						found=true;
 						break;
