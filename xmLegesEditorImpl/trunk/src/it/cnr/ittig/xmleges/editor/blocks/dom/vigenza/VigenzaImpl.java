@@ -137,16 +137,16 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 				span.removeAttribute("iniziovigore");
 				span.removeAttribute("finevigore");
 				span.removeAttribute("status");
-				if(start!=end){
+			//	if(start!=end){
 	//				appiattisce lo span				
 					Node padre=span.getParentNode();				
 					extractText.extractText(node,0,selectedText.length());
 					padre.removeChild(span);
 					UtilDom.mergeTextNodes(padre);
 					return padre;
-				}else{
-					return span;
-				}
+//				}else{
+//					return span;
+//				}
 			}
 			//FIXME: va controllato che esista sul dom prima di rimuoverli?
 			if(vigenza.getEFineVigore()!=null)
