@@ -5,8 +5,6 @@ import it.cnr.ittig.services.manager.Service;
 import java.awt.Component;
 import java.io.InputStream;
 
-import javax.swing.JDialog;
-
 /**
  * Servizio per la costruzione di una form e visualizzazione in una finestra di
  * dialogo.
