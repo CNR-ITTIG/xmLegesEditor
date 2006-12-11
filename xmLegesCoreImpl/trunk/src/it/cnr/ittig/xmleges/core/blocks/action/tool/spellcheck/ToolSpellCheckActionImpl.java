@@ -17,7 +17,6 @@ import it.cnr.ittig.xmleges.core.services.document.DocumentOpenedEvent;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.preference.PreferenceManager;
-import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.spellcheck.SpellCheck;
 import it.cnr.ittig.xmleges.core.services.spellcheck.dom.DomSpellCheck;
 import it.cnr.ittig.xmleges.core.services.spellcheck.dom.DomSpellCheckEvent;
