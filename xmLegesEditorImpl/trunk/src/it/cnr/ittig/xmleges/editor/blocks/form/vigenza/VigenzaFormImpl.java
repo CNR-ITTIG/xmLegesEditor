@@ -11,7 +11,6 @@ import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.FormVerifier;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
-import it.cnr.ittig.xmleges.editor.services.form.evento.EventoForm;
 import it.cnr.ittig.xmleges.editor.services.form.evento.EventoFormPlane;
 import it.cnr.ittig.xmleges.editor.services.form.vigenza.VigenzaForm;
 
@@ -19,9 +18,7 @@ import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JTextArea;
 
-import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 /**
  * <h1>Implementazione del servizio
