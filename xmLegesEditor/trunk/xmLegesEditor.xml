@@ -1069,11 +1069,11 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             <xslt   name="edit-documento"		file="nir-panes-edit-documento-1.0.xsl"	startup="true" />
             <xslt   name="edit-annessi"			file="nir-panes-edit-annessi-1.0.xsl" 		/>
             <xslt   name="edit-meta"			file="nir-panes-edit-meta-1.0.xsl"			/>
-            <xslt   name="riferimenti"			file="nir-panes-riferimenti-1.0.xsl"		/>
-            <xslt   name="rifincompleti"		file="nir-panes-rifincompleti-1.0.xsl"		/>
-            <xslt   name="errori"				file="nir-panes-errori-1.0.xsl"				/>
-            <xslt   name="commenti"				file="nir-panes-commenti-1.0.xsl"			/>
-            <xslt   name="ndr"					file="nir-panes-ndr-1.0.xsl"				/>
+            <xslt   name="riferimenti"			file="nir-panes-view-riferimenti-1.0.xsl"	/>
+            <xslt   name="rifincompleti"		file="nir-panes-view-rifincompleti-1.0.xsl"	/>
+            <xslt   name="errori"				file="nir-panes-view-errori-1.0.xsl"		/>
+            <xslt   name="commenti"				file="nir-panes-view-commenti-1.0.xsl"		/>
+            <xslt   name="ndr"					file="nir-panes-view-ndr-1.0.xsl"			/>
             <xslt   name="xsl-disegnilegge-testoafronte" 	file="nir-disegnilegge-testoafronte.xsl"     		startup="true" />
             <xslt   name="xsl-disegnilegge" 	file="nir-disegnilegge.xsl"     		startup="true" />
             <xslt   name="xsl-disegnilegge-nocss" 	file="nir-disegnilegge-nocss.xsl"	startup="true" />
