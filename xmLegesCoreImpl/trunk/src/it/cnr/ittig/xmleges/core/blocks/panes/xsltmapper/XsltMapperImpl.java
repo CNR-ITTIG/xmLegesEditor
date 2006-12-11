@@ -16,7 +16,6 @@ import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.panes.xsltmapper.XsltMapper;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
 
-import java.io.IOException;
 import java.util.EventObject;
 import java.util.Hashtable;
 
@@ -41,9 +40,7 @@ import org.w3c.dom.NodeList;
  * <li>it.cnr.ittig.xmleges.editor.services.i18n.I18n:1.0</li>
  * </ul>
  * <h1>I18n</h1>
- * <ul>
- * <li>xxx.yyy:</li>
- * </ul>
+ * Nessuna
  * 
  * <p>
  * <dl>
