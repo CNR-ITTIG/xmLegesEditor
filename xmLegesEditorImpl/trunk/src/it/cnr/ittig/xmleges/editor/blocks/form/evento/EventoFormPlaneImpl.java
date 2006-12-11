@@ -130,6 +130,7 @@ public class EventoFormPlaneImpl implements EventoFormPlane, Loggable, Serviceab
 
 	
 	public boolean openForm() {
+		sottoFormEventi.setSize(600,350);
 		sottoFormEventi.showDialog();
 		return sottoFormEventi.isOk();
 
