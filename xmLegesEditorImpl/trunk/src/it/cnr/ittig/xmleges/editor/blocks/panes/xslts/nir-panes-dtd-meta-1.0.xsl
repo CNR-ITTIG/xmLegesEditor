@@ -31,9 +31,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <xsl:template match="*[name()='redazionale']" />
 
 <xsl:template match="*[
-	name()='descrittori' or name()='lavoripreparatori' or
-	name()='proprietario' or name()='disposizioni' or name()='ciclodivita']">
-	<center><font size="+2"><b><xsl:value-of select="name()"/></b></font></center>
+	name()='lavoripreparatori' or name()='proprietario' or name()='disposizioni' or name()='ciclodivita']">
+	<center><b><xsl:value-of select="name()"/></b></center>
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 		<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 		<xsl:apply-templates />
@@ -42,7 +41,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 </xsl:template>
 
 <xsl:template match="*[name()='descrittori']">
-	<center><font size="+2"><b><xsl:value-of select="name()"/></b></font></center>
+	<center><b><xsl:value-of select="name()"/></b></center>
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 		<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 		<xsl:apply-templates select="*[name()='pubblicazione']" />
