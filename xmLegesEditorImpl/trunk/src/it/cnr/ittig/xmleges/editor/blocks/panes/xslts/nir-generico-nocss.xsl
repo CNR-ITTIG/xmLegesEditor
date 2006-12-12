@@ -32,140 +32,137 @@
 				<!--                                                          -->
 				<!-- ======================================================== -->				
 				<style type="text/css">
-					body {
-						margin-left: 5px;
-						font-family: "Verdana, Arial, Helvetica, sans-serif" ;
-						font-size: 90% ;
-						text-align:justify;
-					}
-					hr {
-						margin:30px 25% 30px 25%;
-						text-align:center;
-					}
-					em {
-						font-size: 100%
-					}
-					.small {
-						font-size: 65% ;
-					}
-					.intestazione {
-						margin: 15px 10% 0px 10%;
-						text-align: center;
-						font-size: large;
-					}
-					.title {
-						margin-top: 15px;
-						text-align:center;
-						font-size: 90% ;
-						font-weight: bold;
-						text-align: center;
-					}
-					.formulainiziale {
-						text-align: center;
-						font-size: 100%;
-						margin-bottom: 30px;
-					}
-					.preambolo {
-						text-align: left;
-						font-size: 100%;
-					}
-					.articolo { 
-						font-size: 100% ; 
-						margin-top: 15px; 
-						text-align: center;
-					}
-					p.titolo, p.libro, p.parte, p.sezione { 
-						font-size: 100% ; 
-						font-weight: bolder; 
-						text-align: center;
-					}	
-					.capo {
-						padding-top: 10px;
-						/*margin:25px 25% 5px 25%;*/
-						text-align: center;
-					}
-						a.articolo { 
-						font-size: 100% ; 
-						font-weight: bolder;
-						margin-top: 15px; 
-						text-align: center;
-					}
-					p.rubrica {
-						text-align: center;
-						margin-top: 0;
-						font-style: italic;
-						font-weight: lighter;
-						font-size: 100%;
-					}
-					.comma { 
-						font-size: 100% ; 
-						margin-top: 5px;
-						margin-bottom: 5px;
-						text-align: justify;
-						text-indent: 1em;
-					}		
-					.el {
-						font-size: 100% ; 
-						text-align: justify;
-						margin-left: 5px;
-						text-indent: 2em;
-						margin-top: 2px;
-					}
-					.en {
-						text-align: justify;
-						margin-left: 55px;
-						text-indent: -10px;
-						margin-top: 2px;
-						font-size: 100% ; 
-					}
-				    b b { font-weight: normal; }
-					.ndr {
-						text-decoration: underline;
-					}
-					a {
-						text-align: justify;
-					}
-					.nota {
-						font-size:90%;
-						text-align: justify;
-						display: inline;
-						float: left;
-					}
-					.formulafinale {
-						text-align: justify;
-					}
-					.dataeluogo {
-						margin-top:25px;
-						font-style:italic;
-						font-weight:bold;
-					}
-					li {
-						padding-right: 40px;
-						list-style-type: none;
-						text-align: right;
-					}
-					.visto {
-						font-size: 80%;
-						font-weight: bold;
-					}
-					.hidden {
-						width:0px;
-						height:0px;
-						max-width:0px
-						max-height:0px
-						display: inline;
-						margin: 0 0 0 0;
-						padding: 0 0 0 0;
-					}
-					p {
-						text-align:justify;
-					}
-					.allineadx, p.allineadx {
-						width: 100%;
-						text-align: right;
-						margin-bottom: 20px;
-					}
-		 		</style>
+				body {
+					margin-left: 5px;
+					font-family: "Verdana, Arial, Helvetica, sans-serif" ;
+					font-size: 90% ;
+					text-align:justify;
+				}
+				hr {
+					margin:30px 25% 30px 25%;
+					text-align:center;
+				}
+				em {
+					font-size: 100%
+				}
+				.small {
+					font-size: 65% ;
+				}
+				.intestazione {
+					margin: 15px 10% 0px 10%;
+					text-align: center;
+					font-size: large;
+				}
+				.title {
+					margin-top: 15px;
+					text-align:center;
+					font-size: 90% ;
+					font-weight: bold;
+					text-align: center;
+				}
+				.formulainiziale {
+					text-align: center;
+					font-size: 100%;
+					margin-bottom: 30px;
+				}
+				.preambolo {
+					text-align: left;
+					font-size: 100%;
+				}
+				.articolo { 
+					font-size: 90% ; 
+					margin-top: 15px; 
+					text-align: center;
+				}
+				.titolo, .libro, .parte, .sezione { 
+					font-size: 100% ; 
+					font-weight: bold;
+					text-align: center;
+				}	
+				.capo {
+					padding-top: 10px;
+					/*margin:25px 25% 5px 25%;*/
+					text-align: center;
+				}
+				p.rubrica {
+					text-align: center;
+					margin-top: 0;
+					font-style: italic;
+					font-weight: lighter;
+					font-size: 100%;
+				}
+				.comma { 
+					font-size: 100% ; 
+					font-weight: normal;
+					margin-top: 5px;
+					margin-bottom: 5px;
+					text-align: justify;
+					text-indent: 1em;
+				}
+				.el {
+					font-size: 100% ; 
+					font-weight: normal;
+					text-align: justify;
+					margin-left: 5px;
+					text-indent: 2em;
+					margin-top: 2px;
+				}
+				.en {
+					text-align: justify;
+					margin-left: 55px;
+					text-indent: -10px;
+					margin-top: 2px;
+					font-size: 100% ; 
+					font-weight: normal;
+				}
+			    b b { font-weight: normal; }
+				.ndr {
+					text-decoration: underline;
+				}
+				a {
+					text-align: justify;
+				}
+				.nota {
+					font-size:90%;
+					text-align: justify;
+					display: inline;
+					float: left;
+				}
+				.formulafinale {
+					text-align: justify;
+				}
+				.dataeluogo {
+					margin-top:25px;
+					font-style:italic;
+					font-weight:bold;
+				}
+				li {
+					padding-right: 40px;
+					list-style-type: none;
+					text-align: right;
+				}
+				.visto {
+					font-size: 80%;
+					font-weight: bold;
+				}
+				.hidden {
+					width:0px;
+					height:0px;
+					max-width:0px
+					max-height:0px
+					display: inline;
+					margin: 0 0 0 0;
+					padding: 0 0 0 0;
+				}
+				p {
+					text-align:justify;
+				}
+				.allineadx, p.allineadx {
+					width: 100%;
+					text-align: right;
+					margin-bottom: 20px;
+				}
+				</style>
 				<!-- ======================================================== -->
 				<!--                                                          -->
 				<!--  fine Foglio di Stile                                    -->
@@ -259,7 +256,7 @@
 	<!-- ========================== 	LIBRO		============================== -->
 	<xsl:template match="//*[name()='libro']">
 		<a name="{@id}"></a>
-		<p class="libro">
+		<div class="libro">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
 				<xsl:call-template name="vigenza"/>
@@ -268,13 +265,13 @@
 				<xsl:call-template name="multivigenza"/>
 			</xsl:otherwise>
 		</xsl:choose>				
-		</p>
+		</div>
 	</xsl:template>
 
 	<!-- ========================== 	PARTE		============================== -->
 	<xsl:template match="//*[name()='parte']">
 		<a name="{@id}"></a>
-		<p class="parte">
+		<div class="parte">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
 				<xsl:call-template name="vigenza"/>
@@ -283,13 +280,13 @@
 				<xsl:call-template name="multivigenza"/>
 			</xsl:otherwise>
 		</xsl:choose>				
-		</p>
+		</div>
 	</xsl:template>
 
 	<!-- ========================== 	TITOLO		============================== -->
 	<xsl:template match="//*[name()='titolo']">
 		<a name="{@id}"></a>
-		<p class="titolo">
+		<div class="titolo">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
 				<xsl:call-template name="vigenza"/>
@@ -298,13 +295,13 @@
 				<xsl:call-template name="multivigenza"/>
 			</xsl:otherwise>
 		</xsl:choose>				
-		</p>
+		</div>
 	</xsl:template>
 
 	<!-- ========================== 	SEZIONE		============================== -->
 	<xsl:template match="//*[name()='sezione']">
 		<a name="{@id}"></a>
-		<p class="sezione">
+		<div class="sezione">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
 				<xsl:call-template name="vigenza"/>
@@ -313,14 +310,14 @@
 				<xsl:call-template name="multivigenza"/>
 			</xsl:otherwise>
 		</xsl:choose>				
-		</p>
+		</div>
 	</xsl:template>
 
 	<!-- ========================== 	CAPO	============================== -->
 	<xsl:template match="//*[name()='capo']">
 		<hr />
 		<a name="{@id}"></a>
-		<p class="capo">
+		<div class="capo">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
 				<xsl:call-template name="vigenza"/>
@@ -329,7 +326,7 @@
 				<xsl:call-template name="multivigenza"/>
 			</xsl:otherwise>
 		</xsl:choose>				
-		</p>
+		</div>
 	</xsl:template>
 	
 	<!-- ========================== 	RUBRICA	 	============================== -->
