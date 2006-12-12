@@ -172,7 +172,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	<xsl:for-each select="*">
 		<xsl:variable name="id"><xsl:value-of select="@id"/></xsl:variable>
 		<xsl:choose>
-			<xsl:when test="//*/*[name()='evento' and @fonte=$id]">
+			<xsl:when test="../../*[name()='eventi']/*[name()='evento' and @fonte=$id]">
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
