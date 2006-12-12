@@ -447,41 +447,31 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	<xsl:choose>
 		<!-- DTD-DL -->
 		<xsl:when test="$stato='soppresso'">
-		    <span><div style=" color: red; "><s>
+		    <font color="red"><s>
 		    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
 		    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 		        <xsl:apply-templates />
 		    </xsl:element>
-		    </s></div></span>
+		    </s></font>
 		</xsl:when>
 		<xsl:when test="$stato='inserito'">
-		    <span><div style=" color: green; ">
+		    <font color="green">
 		    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
 		    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 		        <xsl:apply-templates />
 		    </xsl:element>
-		    </div></span>
+		    </font>
 		</xsl:when>
 		
 		<!--		 DTD 2.1 		-->
 		<!-- ========================================== DATA FINE !='' ====================================== -->
 		<xsl:when test="$data_fine!=''">
-
-		<!--	
-		    <font color="red">  
-	    -->
-	    <span><div style="color: red; ">
-	    
-	    
+		<font color="red">
 		    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
 		    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 		        <xsl:apply-templates />
 		    </xsl:element>
-		<!--	
-		    </font>			
-	    -->
-	    </div></span>
-
+		</font>	
 			<span>
 				<em>
 				  <font size="2">
@@ -507,12 +497,12 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		</xsl:when>	
 		<!--		 ========================================== DATA inizio !='' ====================================== -->
 		<xsl:when test="$data_inizio!=''">
-		    <span><div style= " color: green; ">
+		    <font color="green">
 		    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
 		    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 		        <xsl:apply-templates />
 		    </xsl:element>
-		    </div></span>
+		    </font>
 			<!-- NOTA SUCCESSIVA 			  -->
 			<span>
 				<em>
