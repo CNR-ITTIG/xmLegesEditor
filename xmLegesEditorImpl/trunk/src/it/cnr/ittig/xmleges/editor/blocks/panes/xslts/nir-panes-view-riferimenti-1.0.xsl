@@ -35,7 +35,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		    </style>
         </head>
 		<body>
-			<xsl:apply-templates select="//*[name()='mrif']|//*[name()='rif' and name(..)!='mrif']" />
+			<xsl:apply-templates select="//*[name()='mrif']|//*[name()='rif' and name(..)!='mrif']|//*[name()='irif' and name(..)!='mrif']" />
 		</body>
 	</html>
 </xsl:template>
@@ -44,6 +44,14 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
         - <xsl:apply-templates />
+    </xsl:element>
+</xsl:template>
+
+<xsl:template match="*[name()='irif']">
+    <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
+    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+        - <xsl:apply-templates />
+<!--        [fino a ??]				-->
     </xsl:element>
 </xsl:template>
 

@@ -319,7 +319,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     </u>
 </xsl:template> 
 
-<xsl:template match="*[name()='rif']">
+<xsl:template match="*[name()='rif' or name()='irif']">
 	<font color="blue"><u>
     <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
@@ -438,31 +438,41 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	<xsl:choose>
 		<!-- DTD-DL -->
 		<xsl:when test="$stato='soppresso'">
-		    <font color="red"><s>
+		    <span><div style=" color: red; "><s>
 		    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
 		    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 		        <xsl:apply-templates />
 		    </xsl:element>
-		    </s></font>
+		    </s></div></span>
 		</xsl:when>
 		<xsl:when test="$stato='inserito'">
-		    <font color="green">
+		    <span><div style=" color: green; ">
 		    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
 		    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 		        <xsl:apply-templates />
 		    </xsl:element>
-		    </font>
+		    </div></span>
 		</xsl:when>
 		
 		<!--		 DTD 2.1 		-->
 		<!-- ========================================== DATA FINE !='' ====================================== -->
 		<xsl:when test="$data_fine!=''">
-		    <font color="red">
+
+		<!--	
+		    <font color="red">  
+	    -->
+	    <span><div style="color: red; ">
+	    
+	    
 		    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
 		    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 		        <xsl:apply-templates />
 		    </xsl:element>
+		<!--	
 		    </font>			
+	    -->
+	    </div></span>
+
 			<span>
 				<em>
 				  <font size="2">
@@ -488,12 +498,12 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		</xsl:when>	
 		<!--		 ========================================== DATA inizio !='' ====================================== -->
 		<xsl:when test="$data_inizio!=''">
-		    <font color="green">
+		    <span><div style= " color: green; ">
 		    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
 		    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 		        <xsl:apply-templates />
 		    </xsl:element>
-		    </font>
+		    </div></span>
 			<!-- NOTA SUCCESSIVA 			  -->
 			<span>
 				<em>
