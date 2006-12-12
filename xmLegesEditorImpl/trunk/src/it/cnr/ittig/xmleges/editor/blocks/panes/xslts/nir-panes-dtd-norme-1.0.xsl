@@ -268,6 +268,14 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     	</xsl:attribute>
         <xsl:apply-templates />
     </xsl:element>
+    <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
+    	<xsl:attribute name="style">
+    		background: #FFEEEE;
+    		margin: 10 0 10 0;
+    		font-size: small;
+    	</xsl:attribute>
+        <xsl:apply-templates select="../*/*[name()='meta']/*"/>
+    </xsl:element>    
 </xsl:template>
 
 <xsl:template match="*[name()='denAnnesso' or name()='titAnnesso']">
@@ -305,6 +313,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     </xsl:element>
 </xsl:template>
 
+<xsl:template match="*[name()='meta']"/>
 
 
 <!-- ================================================================================ -->
