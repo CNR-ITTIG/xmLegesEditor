@@ -60,6 +60,15 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	<xsl:call-template name="makeA" />
 </xsl:template> 
 
+<xsl:template match="*[name()='irif']">
+	<font color="blue"><u>
+    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
+    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+        <xsl:apply-templates />
+    </xsl:element>
+    </u></font>
+	<xsl:call-template name="makeA" />
+</xsl:template> 
 
 
 <xsl:template name="makeA">
