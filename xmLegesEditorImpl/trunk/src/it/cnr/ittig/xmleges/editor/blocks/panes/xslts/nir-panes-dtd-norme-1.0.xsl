@@ -245,6 +245,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     </xsl:element>
 </xsl:template>
 
+<!-- ==Cosa e'== -->
 <xsl:template match="*[name()='elencoAnnessi']">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
         <xsl:apply-templates />
@@ -446,32 +447,58 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	
 	<xsl:choose>
 		<!-- DTD-DL -->
-		<xsl:when test="$stato='soppresso'">
-		    <font color="red"><s>
-		    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
-		    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-		        <xsl:apply-templates />
-		    </xsl:element>
-		    </s></font>
+		<xsl:when test="$stato='soppresso'">					
+      		<xsl:choose>
+				<xsl:when test="local-name()='span'">
+				    <font color="red"><s>
+					    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
+					    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+					        <xsl:apply-templates />
+					    </xsl:element>
+				    </s></font>
+				</xsl:when>
+				<xsl:otherwise>
+				    <div style="color: red; "><s>
+					    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
+					    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+					        <xsl:apply-templates />
+					    </xsl:element>
+				    </s></div>
+				</xsl:otherwise>
+			</xsl:choose>
 		</xsl:when>
 		<xsl:when test="$stato='inserito'">
-		    <font color="green">
-		    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
-		    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-		        <xsl:apply-templates />
-		    </xsl:element>
-		    </font>
+      		<xsl:choose>
+				<xsl:when test="local-name()='span'">
+				    <font color="green">
+					    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
+					    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+					        <xsl:apply-templates />
+		    			</xsl:element>
+				    </font>
+				</xsl:when>
+				<xsl:otherwise>
+				    <div style="color: green; ">
+					    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
+					    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+					        <xsl:apply-templates />
+		    			</xsl:element>
+				    </div>
+				</xsl:otherwise>
+			</xsl:choose>
 		</xsl:when>
 		
 		<!--		 DTD 2.1 		-->
 		<!-- ========================================== DATA FINE !='' ====================================== -->
 		<xsl:when test="$data_fine!=''">
-		<font color="red">
-		    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
-		    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-		        <xsl:apply-templates />
-		    </xsl:element>
-		</font>	
+      		<xsl:choose>
+				<xsl:when test="local-name()='span'">
+					<font color="red">
+					    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
+					    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+					        <xsl:apply-templates />
+					    </xsl:element>
+
 			<span>
 				<em>
 				  <font size="2">
@@ -494,16 +521,60 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 				   </font>	
 				</em>
 			</span>			 						
+
+
+
+					</font>	
+				</xsl:when>
+				<xsl:otherwise>
+				    <div style="color: red; ">
+					    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
+					    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+					        <xsl:apply-templates />
+					    </xsl:element>
+
+
+			<span>
+				<em>
+				  <font size="2">
+					&#91;In vigore&#160;
+				 	<xsl:choose>
+						<xsl:when test="$data_inizio!=''">
+							dal <xsl:value-of select="concat(substring($data_inizio,7,2),'/',substring($data_inizio,5,2),'/',substring($data_inizio,1,4))"/>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:text>fino</xsl:text>
+						</xsl:otherwise>
+					</xsl:choose>	
+					&#160;al <xsl:value-of select="concat(substring($data_fine,7,2),'/',substring($data_fine,5,2),'/',substring($data_fine,1,4))"/>
+					<xsl:choose>			
+						<xsl:when test="$stato!=''">
+							(<xsl:value-of select="$stato"/>)
+						</xsl:when>
+					</xsl:choose>		
+					<xsl:text>&#93;&#160;</xsl:text>
+				   </font>	
+				</em>
+			</span>			 						
+
+
+
+
+				    </div>
+				</xsl:otherwise>
+			</xsl:choose>
 		</xsl:when>	
 		<!--		 ========================================== DATA inizio !='' ====================================== -->
 		<xsl:when test="$data_inizio!=''">
-		    <font color="green">
-		    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
-		    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-		        <xsl:apply-templates />
-		    </xsl:element>
-		    </font>
-			<!-- NOTA SUCCESSIVA 			  -->
+      		<xsl:choose>
+				<xsl:when test="local-name()='span'">
+				    <font color="green">
+					    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
+					    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+					        <xsl:apply-templates />
+					    </xsl:element>
+					    
+					    
 			<span>
 				<em>
 				  <font size="2">
@@ -513,6 +584,34 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 				  </font>
 				</em>
 			</span>	
+					    
+					    
+					    					    
+					    
+				    </font>
+				</xsl:when>
+				<xsl:otherwise>
+				    <div style="color: green; ">
+					    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
+					    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+					        <xsl:apply-templates />
+					    </xsl:element>
+					    
+
+			<span>
+				<em>
+				  <font size="2">
+					&#91;In vigore&#160;
+					dal <xsl:value-of select="concat(substring($data_inizio,7,2),'/',substring($data_inizio,5,2),'/',substring($data_inizio,1,4))"/>
+					&#93;
+				  </font>
+				</em>
+			</span>	
+
+					    
+				    </div>
+				</xsl:otherwise>
+			</xsl:choose>
 		</xsl:when>
 		<xsl:otherwise>
 		    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
