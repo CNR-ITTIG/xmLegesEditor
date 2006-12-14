@@ -43,13 +43,19 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	</html>
 </xsl:template>
 
+<xsl:template match="*[name()='denAnnesso']" >
+		<hr/>
+		<center>
+			<b>
+				<xsl:value-of select="."/>
+			</b>
+		</center>		
+</xsl:template>
 
 <xsl:template match="*[name()='nota']" >
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 		<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-		<center><b>
-			<xsl:value-of select="../../../../*[name()='testata']/*[name()='denAnnesso']" />
-		</b></center>
+		<xsl:apply-templates select="../../../../*[name()='testata']/*[name()='denAnnesso']" />
 		<xsl:variable name="idnota"><xsl:value-of select="@id"/></xsl:variable>
 		<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 	    	<xsl:attribute name="style">
@@ -73,7 +79,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 			</xsl:element>
 				
 	    </xsl:element>
-		<hr/>
 	</xsl:element>
 </xsl:template>
 
