@@ -36,33 +36,47 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		    </style>
         </head>
 		<body>
-			<xsl:for-each select="//*[name()='nota']">
-				<xsl:variable name="idnota"><xsl:value-of select="@id"/></xsl:variable>
-				<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-			    	<xsl:attribute name="style">
-			            margin: 10 5 10 5;
-			        </xsl:attribute>
-			        
-					<font color="blue">
-					<xsl:for-each select="//*[name()='ndr' and @num=$idnota]">
-					  <b>
-						<xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
-							<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-							<xsl:apply-templates />
-						</xsl:element>
-						</b>
-					  </xsl:for-each>
-					</font>
-							
-					<xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
-						<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-						<xsl:apply-templates />
-					</xsl:element>
-					
-			    </xsl:element>
+			<xsl:for-each select="//*[name()='meta']">
+				<xsl:apply-templates select="./*[name()='redazionale']/*[name()='nota']" />
 			</xsl:for-each>
 		</body>
 	</html>
 </xsl:template>
+
+
+<xsl:template match="*[name()='nota']" >
+	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
+		<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+		<center><b>
+			<xsl:value-of select="../../../../*[name()='testata']/*[name()='denAnnesso']" />
+		</b></center>
+		<xsl:variable name="idnota"><xsl:value-of select="@id"/></xsl:variable>
+		<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
+	    	<xsl:attribute name="style">
+	            margin: 10 5 10 5;
+	        </xsl:attribute>
+	        
+			<font color="blue">
+			<xsl:for-each select="//*[name()='ndr' and @num=$idnota]">
+			  <b>
+				<xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
+					<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+					<xsl:apply-templates />
+				</xsl:element>
+				</b>
+			  </xsl:for-each>
+			</font>
+						
+			<xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
+				<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+				<xsl:apply-templates />
+			</xsl:element>
+				
+	    </xsl:element>
+		<hr/>
+	</xsl:element>
+</xsl:template>
+
+
 
 </xsl:transform>
