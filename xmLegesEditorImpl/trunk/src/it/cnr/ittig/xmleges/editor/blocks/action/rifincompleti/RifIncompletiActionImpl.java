@@ -8,15 +8,12 @@ import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.action.ActionManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
-import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentOpenedEvent;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.form.FormClosedListener;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
-import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
-import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.action.rifincompleti.RifIncompletiAction;
 import it.cnr.ittig.xmleges.editor.services.dom.rifincompleti.RifIncompleti;
@@ -24,7 +21,6 @@ import it.cnr.ittig.xmleges.editor.services.form.rifincompleti.RifIncompletiForm
 
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 import it.cnr.ittig.xmleges.editor.services.util.urn.NirUtilUrn;
-import it.cnr.ittig.xmleges.editor.services.util.urn.Urn;
 
 import java.awt.event.ActionEvent;
 import java.util.EventObject;
@@ -32,7 +28,6 @@ import java.util.EventObject;
 import javax.swing.AbstractAction;
 
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 /**
  * <h1>Implementazione del servizio
