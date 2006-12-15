@@ -166,6 +166,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  class="it.cnr.ittig.xmleges.core.blocks.i18n.I18nImpl">
         <configuration>
             <locale language="it" country="IT" variant="16" />
+			<!-- locale language="en" country="EN" /	-->            
             <base>i18n/editor</base>
             <base>i18n/editor-dom</base>
             <base>i18n/core</base>
@@ -275,6 +276,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     </menu>
                     <menu action="menu.view.panes">
                         <item action="view.pane.editor.panes.strutturaxml" />
+                        <item action="view.pane.editor.panes.indice" />                        
                         <item action="view.pane.editor.panes.attributi" />
                         <item action="view.pane.panes.notes" />
                         <item action="view.pane.editor.panes.documento" />
@@ -1018,8 +1020,12 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 <pane name="editor.panes.documento"		where="top-center"  	index="0" />
                 <pane name="editor.panes.meta"				where="top-center"  	index="1" />
                 <pane name="editor.panes.annessi"    		where="top-center"  	index="2" />
-                <!--pane name="panes.source"            	where="top-center"		index="3" /-->
-                <!--pane name="panes.xslteditor"           where="top-center"  	index="3" /-->
+                
+                <!--	pane name="editor.panes.indice"		where="top-center"  	index="3" /	-->                                
+                <pane name="editor.panes.indice"		where="top-left"  	index="1" />                
+                
+                <!--	pane name="panes.source"            	where="top-center"		index="4" /	-->
+                <!--	pane name="panes.xslteditor"           where="top-center"  	index="5" /	-->
                 <pane name="editor.panes.riferimenti" 		where="bottom-center"  	index="0" />
                 <pane name="editor.panes.rifincompleti"     where="bottom-center"  	index="1" />
                 <pane name="editor.panes.ndr" 				where="bottom-center"  	index="2" />
@@ -1067,6 +1073,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             <xslt   name="dtd-globali"   		file="nir-panes-dtd-globali-1.0.xsl"	startup="true"/>
             <xslt   name="dtd-meta"     		file="nir-panes-dtd-meta-1.0.xsl"		startup="true"/>
             <xslt   name="edit-documento"		file="nir-panes-edit-documento-1.0.xsl"	startup="true" />
+            <xslt   name="edit-indice"			file="nir-panes-edit-indice-1.0.xsl"	startup="true" />            
             <xslt   name="edit-annessi"			file="nir-panes-edit-annessi-1.0.xsl" 		/>
             <xslt   name="edit-meta"			file="nir-panes-edit-meta-1.0.xsl"			/>
             <xslt   name="riferimenti"			file="nir-panes-view-riferimenti-1.0.xsl"	/>
@@ -1116,6 +1123,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             <pane name="editor.panes.commenti">
                 <xslt name="commenti"/>
             </pane>
+            <pane name="editor.panes.indice">
+                <xslt name="edit-indice"/>
+            </pane>
 
         </configuration>
     </component>
@@ -1136,13 +1146,13 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
         </configuration>
     </component>
     
-    <!--component  activation="startup"
+    <component  activation="startup"
                 class="it.cnr.ittig.xmleges.core.blocks.panes.xslteditor.XsltEditorImpl"
         >
         <configuration>
             <name>nir.panes.xslteditor</name>
         </configuration>
-    </component-->
+    </component>
 
     <component  activation="startup"
                 class="it.cnr.ittig.xmleges.core.blocks.panes.source.SourcePaneImpl"
