@@ -786,7 +786,7 @@ public class AggiornaIdFrozenLaw {
 			if (node.getAttributes() != null)
 				if (node.getAttributes().getNamedItem("id") != null) {
 					String id = node.getAttributes().getNamedItem("id").getNodeValue();
-					String lastId = id.substring(id.lastIndexOf("-"));
+					String lastId = id.lastIndexOf("-")>0?id.substring(id.lastIndexOf("-")):"";
 					if(lastId.length()>0)
 					    lastLetterID = lastId.substring(lastId.indexOf("let")+3);
 					for(int i=0; i<bis.length; i++){
