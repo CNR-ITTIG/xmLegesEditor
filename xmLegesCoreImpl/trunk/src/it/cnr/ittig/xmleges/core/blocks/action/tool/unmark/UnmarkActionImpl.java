@@ -81,7 +81,7 @@ public class UnmarkActionImpl implements UnmarkAction, EventManagerListener, Log
 	
 	String selectedText="";
 
-	UnmarkAction unmarkaction = new UnmarkAction ();
+	doUnmarkAction unmarkaction = new doUnmarkAction ();
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -231,7 +231,7 @@ public class UnmarkActionImpl implements UnmarkAction, EventManagerListener, Log
 			
 	}
 
-	public class UnmarkAction extends AbstractAction {
+	public class doUnmarkAction extends AbstractAction {
 
 		public void actionPerformed(ActionEvent e) {
 			doUnmark();
