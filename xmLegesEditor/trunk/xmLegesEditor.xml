@@ -275,26 +275,26 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                         <check action="view.toolbar.frame" />
                     </menu>
                     <menu action="menu.view.panes">
-                        <item action="view.pane.editor.panes.strutturaxml" />
-                        <item action="view.pane.editor.panes.indice" />                        
-                        <item action="view.pane.editor.panes.attributi" />
-                        <item action="view.pane.panes.notes" />
-                        <item action="view.pane.editor.panes.documento" />
+                        <check action="view.pane.editor.panes.strutturaxml" />
+                        <check action="view.pane.editor.panes.indice" />                        
+                        <check action="view.pane.editor.panes.attributi" />
+                        <check action="view.pane.panes.notes" />
+                        <check action="view.pane.editor.panes.documento" />
                         <!--
                         <item action="view.pane.editor.panes.intestazione" />
                         <item action="view.pane.editor.panes.articolato" />
                         <item action="view.pane.editor.panes.formulafinale" />
                         -->
-                        <item action="view.pane.editor.panes.annessi" />
-                        <!--item action="view.pane.panes.source" /-->
-                        <item action="view.pane.editor.panes.meta" />
-                        <item action="view.pane.editor.panes.riferimenti" />
-                        <item action="view.pane.editor.panes.rifincompleti" />
-                        <item action="view.pane.editor.panes.ndr" />
-                        <item action="view.pane.editor.panes.errori" />
-                        <item action="view.pane.editor.panes.commenti" />
-                        <item action="view.pane.panes.problems" />
-                        <item action="view.pane.panes.segnalazioni" />
+                        <check action="view.pane.editor.panes.annessi" />
+                        <!--check action="view.pane.panes.source" /-->
+                        <check action="view.pane.editor.panes.meta" />
+                        <check action="view.pane.editor.panes.riferimenti" />
+                        <check action="view.pane.editor.panes.rifincompleti" />
+                        <check action="view.pane.editor.panes.ndr" />
+                        <check action="view.pane.editor.panes.errori" />
+                        <check action="view.pane.editor.panes.commenti" />
+                        <check action="view.pane.panes.problems" />
+                        <check action="view.pane.panes.segnalazioni" />
                     </menu>
                     <check action="view.statusbar" />
                 </menu>
