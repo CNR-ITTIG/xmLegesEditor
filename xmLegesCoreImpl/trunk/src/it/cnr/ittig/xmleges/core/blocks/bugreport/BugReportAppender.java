@@ -37,8 +37,18 @@ public class BugReportAppender extends AppenderSkeleton {
 		if (listModel.size() > maxLines)
 			listModel.remove(0);
 		listModel.addElement(s);
+		if (arg0.getThrowableStrRep()!=null) 
+			appendStackTrace(arg0);
 	}
 
+	private void appendStackTrace(LoggingEvent arg0) {
+		for (int i=0; i<arg0.getThrowableStrRep().length; i++) {
+			if (listModel.size() > maxLines)
+				listModel.remove(0);
+			listModel.addElement(arg0.getThrowableStrRep()[i]);
+		}
+	}
+	
 	public void close() {
 	}
 
