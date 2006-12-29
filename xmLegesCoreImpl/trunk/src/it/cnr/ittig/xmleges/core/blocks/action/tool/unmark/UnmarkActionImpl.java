@@ -101,7 +101,7 @@ public class UnmarkActionImpl implements UnmarkAction, EventManagerListener, Log
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws java.lang.Exception {
 		
-		actionManager.registerAction("editor.testo.unmark", unmarkaction);
+		actionManager.registerAction("edit.unmark", unmarkaction);
 		eventManager.addListener(this, SelectionChangedEvent.class);
 		eventManager.addListener(this, DocumentOpenedEvent.class);
 		eventManager.addListener(this, DocumentClosedEvent.class);
