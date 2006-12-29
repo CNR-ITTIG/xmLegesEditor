@@ -257,7 +257,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <item action="edit.procinstr" />
                     <separator/>
                     <item action="edit.extracttext" />
-                    <item action="editor.testo.unmark" />
+                    <item action="edit.unmark" />
                 </menu>
                 <menu action="menu.view">
                     <menu action="menu.view.toolbars">
@@ -457,7 +457,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <separator />
                     <item action="edit.find" />
                     <separator />
-                    <item action="editor.testo.unmark" />
+                    <item action="edit.unmark" />
                 </toolbar>
                 <toolbar name="editor.testo" floatable="false" rollover="true">
                     <item action="editor.testo.grassetto" />
