@@ -370,7 +370,6 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 
 	public FindIterator getFindIterator() {
 		return this.xsltFindIterator;
-		// return null;
 	}
 
 	public void setInsertBreakAction(InsertBreakAction insertBreakAction) {
