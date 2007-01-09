@@ -100,8 +100,9 @@ public class NirXsltsImpl implements NirXslts, Loggable, Configurable {
 	}
 
 	protected synchronized void copyFile(String file) {
-		// if (!UtilFile.fileExistInTemp(file))
-		UtilFile.copyFileInTemp(getClass().getResourceAsStream(file), file);
+		//FIXME Scommentare se non si vuole sovrascrivere i file (xsl) e (css) già presenti nella TEMP
+		//if (!UtilFile.fileExistInTemp(file))
+			UtilFile.copyFileInTemp(getClass().getResourceAsStream(file), file);
 	}
 
 }
