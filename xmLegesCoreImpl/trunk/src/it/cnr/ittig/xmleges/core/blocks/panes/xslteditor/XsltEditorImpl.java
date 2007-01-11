@@ -126,6 +126,7 @@ public class XsltEditorImpl implements XsltEditor, Pane, Loggable, Serviceable, 
 
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws java.lang.Exception {
+		
 		panel = new JPanel(new BorderLayout());
 		panel.add(utilUi.applyI18n(tabbedPane), BorderLayout.CENTER);
 
@@ -155,6 +156,11 @@ public class XsltEditorImpl implements XsltEditor, Pane, Loggable, Serviceable, 
 
 	public class OpenAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
+			
+			//FIXME Caricare più file
+			//interessante la possibilità di caricare più file per volta ma dovrebbero essere, al più,
+			//un XSL e un CSS altrimenti considera solo l'ultimo dei XSL e l'ultimo dei CSS caricati!!
+			
 			if (fileChooser.showOpenDialog(SwingUtilities.getRoot(tabbedPane)) == JFileChooser.APPROVE_OPTION)
 				try {
 					File[] files = fileChooser.getSelectedFiles();
@@ -225,6 +231,7 @@ public class XsltEditorImpl implements XsltEditor, Pane, Loggable, Serviceable, 
 			File css = UtilFile.getFileFromTemp("xslteditor.css");
 			xsltPane.set(xslt, css, paramPanel.getParams());
 			try {
+				UtilXslt.remove(xslt);	//rimuovo il file altrimenti riprende "il vecchio" dalla cache
 				Node node = UtilXslt.applyXslt(documentManager.getDocumentAsDom(), xslt);
 				convTextArea.setText(UtilDom.domToString(node));
 			} catch (Exception ex) {
