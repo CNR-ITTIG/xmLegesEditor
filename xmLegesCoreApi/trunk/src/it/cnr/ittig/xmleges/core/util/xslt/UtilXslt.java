@@ -241,5 +241,15 @@ public class UtilXslt {
 			}
 		}
 	}
+	
+	/**
+	 * Rimuove l'oggetto <code>xslt</code> dal traformatore.
+	 * 
+	 * @param xslt l'oggetto da rimuovere
+	 */
+	public static void remove(File xslt) {
+		transformers.remove(xslt);
+	}
+	
 
 }
