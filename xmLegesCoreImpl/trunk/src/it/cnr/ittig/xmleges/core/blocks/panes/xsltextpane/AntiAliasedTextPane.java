@@ -742,7 +742,7 @@ public class AntiAliasedTextPane extends JTextPane implements DocumentListener, 
 		ignoreDocumentEvents = true;
 		ignoreCaretEvents = true;
 		try {
-			if (dom == null) {
+			if (dom == null || xslt == null) {
 				setText("");
 			} else {
 				String text = getHtml(dom);
