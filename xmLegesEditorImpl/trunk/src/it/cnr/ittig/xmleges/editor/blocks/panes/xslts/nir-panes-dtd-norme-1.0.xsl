@@ -490,7 +490,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		
 		<!--		 DTD 2.1 		-->
 		<!-- ========================================== DATA FINE !='' ====================================== -->
-		<xsl:when test="$data_fine!=''">
+		<xsl:when test="$fine_id!=''">
       		<xsl:choose>
 				<xsl:when test="local-name()='span'">
 					<font color="red">
@@ -565,7 +565,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 			</xsl:choose>
 		</xsl:when>	
 		<!--		 ========================================== DATA inizio !='' ====================================== -->
-		<xsl:when test="$data_inizio!=''">
+
+		<xsl:when test="$inizio_id!=''">
       		<xsl:choose>
 				<xsl:when test="local-name()='span'">
 				    <font color="green">
