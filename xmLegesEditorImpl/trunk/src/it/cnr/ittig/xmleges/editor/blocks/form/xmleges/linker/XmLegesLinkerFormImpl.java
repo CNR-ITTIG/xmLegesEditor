@@ -287,7 +287,7 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 		checkInt.setEnabled(true);
 		checkInc.setEnabled(true);
 		checkInt.setSelected(true);
-		checkInc.setSelected(true);
+		checkInc.setSelected(false);
 		regione.setSelectedIndex(0);
 		ente.setSelectedIndex(0);
 		form.showDialog();
