@@ -349,12 +349,16 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 		return false;	
 	}
 
+	// T: aggiunto il controllo di non riaggiornare il tipo se e' gia' settato: risparmia molto tempo sull'update dei pannelli
 	public void setTipoDocVigenza() {
 		Document doc = documentManager.getDocumentAsDom();
 		if (isVigente()){
-			UtilDom.setAttributeValue(doc.getDocumentElement(),"tipo","multivigente");
-		}else
-			UtilDom.setAttributeValue(doc.getDocumentElement(),"tipo","originale");				
+			if(!UtilDom.getAttributeValueAsString(doc.getDocumentElement(),"tipo").equalsIgnoreCase("multivigente"))
+				UtilDom.setAttributeValue(doc.getDocumentElement(),"tipo","multivigente");
+		}else{
+			if(!UtilDom.getAttributeValueAsString(doc.getDocumentElement(),"tipo").equalsIgnoreCase("originale"))
+				UtilDom.setAttributeValue(doc.getDocumentElement(),"tipo","originale");	
+		}
 	}
 	
 	public void updateVigenzaOnDoc(VigenzaEntity vig){
