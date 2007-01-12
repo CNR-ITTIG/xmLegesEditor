@@ -185,8 +185,8 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 		panel.setDoubleBuffered(true);
 
 		Timer timer = new Timer();
-		// FIXME provare a toglierlo ? allungato a 30 secondi !!
-		timer.scheduleAtFixedRate(new UpdateTask(), timerTaskPeriod, timerTaskPeriod);
+		// FIXME provare a toglierlo ? allungato a 30 secondi !!   TOLTO
+		//timer.scheduleAtFixedRate(new UpdateTask(), timerTaskPeriod, timerTaskPeriod);
 	}
 
 	boolean updated = false;
