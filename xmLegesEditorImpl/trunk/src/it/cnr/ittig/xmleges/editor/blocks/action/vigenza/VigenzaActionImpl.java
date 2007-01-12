@@ -163,8 +163,8 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 			
 			Node node = selectionManager.getActiveNode();
 			ciclodivita.setActiveNode(node);
-			Evento[] oldEventi = ciclodivita.getEventi();
-			Relazione[] oldRelazioni = ciclodivita.getRelazioni();
+//			Evento[] oldEventi = ciclodivita.getEventi();
+//			Relazione[] oldRelazioni = ciclodivita.getRelazioni();
 			
 			if(vigenzaForm.openForm(active)){	
 				Node toselect = vigenza.setVigenza(active,testo_sel, start,end, vigenzaForm.getVigenza());
