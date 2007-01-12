@@ -140,8 +140,13 @@ Serviceable, Initializable, ActionListener {
 		materie_listtextfield = (ListTextField) serviceManager.lookup(ListTextField.class);
 		materie_teseo_listtextfield = (ListTextField) serviceManager.lookup(ListTextField.class);
 		sottoFormTeseo = (Form) serviceManager.lookup(Form.class);
-		if (isWin())
-		   browserForm = (BrowserForm) serviceManager.lookup(BrowserForm.class);
+		try {
+			if (isWin())
+				browserForm = (BrowserForm) serviceManager.lookup(BrowserForm.class);
+		}
+		catch (Exception e){
+			//Probabilmente non caricato
+		}
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 	}
 
