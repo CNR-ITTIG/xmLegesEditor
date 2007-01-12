@@ -12,11 +12,13 @@ import it.cnr.ittig.xmleges.core.util.xslt.UtilXslt;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.NoSuchElementException;
@@ -746,28 +748,8 @@ public class AntiAliasedTextPane extends JTextPane implements DocumentListener, 
 				setText("");
 			} else {
 				String text = getHtml(dom);
-				// try {
-				// HTMLEditorKit kit = (HTMLEditorKit) getEditorKit();
-				// Reader reader = new InputStreamReader(new
-				// ByteArrayInputStream(text.getBytes()), "UTF-8");
-				// javax.swing.text.Document doc = kit.createDefaultDocument();
-				// // doc.putProperty("IgnoreCharsetDirective", Boolean.TRUE);
-				// setDocument(doc);
-				// kit.read(reader, doc, 0);
-				// }
-				//
-				// catch (ChangedCharSetException ccse) {
-				// logger.error(ccse.toString(), ccse);
-				// }
 				setText(text);
 				setEnabled(true);
-				/*
-				 * Element curr =
-				 * getHTMLDocument().getParagraphElement(getHTMLDocument().getStartPosition().getOffset());
-				 * Element prev = null; while (!curr.equals(prev)) {
-				 * spellThread.addElement(curr); prev = curr; curr =
-				 * getHTMLDocument().getParagraphElement(curr.getEndOffset()); }
-				 */
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -812,7 +794,11 @@ public class AntiAliasedTextPane extends JTextPane implements DocumentListener, 
 					//					
 					// kit.insertHTML(getHTMLDocument(), end, getHtml(node), 0, 0,null);
 					// getHTMLDocument().remove(start, end - start -1);
-					getHTMLDocument().setOuterHTML(elem, getHtml(node));
+					
+					// FIXME 10 Jan 07
+					getHTMLDocument().setOuterHTML(elem, convertEncoding(getHtml(node)));
+					// OLD
+					//getHTMLDocument().setOuterHTML(elem, getHtml(node));					
 				}
 
 				return node;
@@ -825,7 +811,28 @@ public class AntiAliasedTextPane extends JTextPane implements DocumentListener, 
 		}
 		return null;
 	}
+	
+	
+	// vedi   http://www.iam.ubc.ca/guides/javatut99/i18n/text/stream.html
+	protected String convertEncoding(String text){
+		    StringBuffer buffer = new StringBuffer();
+		    try{ 	
+		    	InputStreamReader r = new InputStreamReader(new ByteArrayInputStream(text.getBytes()), pane.documentManager.getEncoding());
+		    	Reader in = new BufferedReader(r);
+			    int ch;
+			   while ((ch = in.read()) > -1) {
+				   buffer.append((char)ch);
+			   }
+			   in.close();
+			   return buffer.toString();
+		    }
+		    catch(Exception ex){
+		    	logger.error(ex.getMessage(),ex);
+		    	return text;
+		    }	
+	}
 
+	
 	public void viewDomSpellCheckEvent(DomSpellCheckEvent e) {
 		ignoreCaretEvents = true;
 		DomSpellCheckWord[] words = e.getWords();
