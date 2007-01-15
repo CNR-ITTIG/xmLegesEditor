@@ -104,6 +104,22 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 	
 
 	public Node setVigenza(Node node, String selectedText, int start, int end, VigenzaEntity vigenza) {
+		Node ret = null;
+		try {
+			EditTransaction tr = documentManager.beginEdit();
+			if ((ret=setDOMVigenza(node, selectedText, start, end, vigenza))!=null) {
+				//rinumerazione.aggiorna(documentManager.getDocumentAsDom());
+				documentManager.commitEdit(tr);
+			} else
+				documentManager.rollbackEdit(tr);
+		} catch (DocumentManagerException ex) {
+			logger.error(ex.toString() + " DocumentManagerException in SetVigenza");
+			return null;
+		}
+		return ret;
+	}
+	
+	public Node setDOMVigenza(Node node, String selectedText, int start, int end, VigenzaEntity vigenza) {
 		
 		selectedNode=node;
 		if(node==null) return null;		
