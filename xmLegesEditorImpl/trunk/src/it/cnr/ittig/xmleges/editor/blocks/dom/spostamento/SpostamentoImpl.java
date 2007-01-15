@@ -281,8 +281,11 @@ public class SpostamentoImpl implements Spostamento, Loggable, Serviceable {
 
 		// cambio il contenitore di node
 		newElement = (Node) doc.createElement(parent.getNodeName());
+		
+		// assegna a newElement tutti gli attributi che aveva node; (ad esempio per preservare la vigenza)
+		UtilDom.replaceAttributes(newElement,node);
 		UtilDom.setIdAttribute(newElement, UtilDom.getAttributeValueAsString(node, "id"));
-		// UtilDom.setAttributeValue(newElement,"id",UtilDom.getAttributeValueAsString(node,"id"));
+		
 		Vector children = UtilDom.getAllChildElements(node);
 		for (int i = 0; i < children.size(); i++)
 			newElement.appendChild((Node) children.get(i));
@@ -367,8 +370,11 @@ public class SpostamentoImpl implements Spostamento, Loggable, Serviceable {
 
 		// cambio il contenitore di node
 		newElement = (Node) doc.createElement(newEl);
+		
+		// assegna a newElement tutti gli attributi che aveva node; (ad esempio per preservare la vigenza)
+		UtilDom.replaceAttributes(newElement,node);
 		UtilDom.setIdAttribute(newElement, UtilDom.getAttributeValueAsString(node, "id"));
-		// UtilDom.setAttributeValue(newElement,"id",UtilDom.getAttributeValueAsString(node,"id"));
+	
 		Vector children = UtilDom.getAllChildElements(node);
 		for (int i = 0; i < children.size(); i++)
 			newElement.appendChild((Node) children.get(i));
@@ -403,7 +409,6 @@ public class SpostamentoImpl implements Spostamento, Loggable, Serviceable {
 				// una
 				// coda
 				modified = newElement;
-				// selectionManager.setActiveNode(this,newElement);
 				return true;
 			}
 			return false;
