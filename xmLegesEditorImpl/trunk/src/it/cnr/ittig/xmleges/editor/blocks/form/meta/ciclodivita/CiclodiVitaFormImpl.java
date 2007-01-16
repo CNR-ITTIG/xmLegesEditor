@@ -112,7 +112,7 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 
 
 	/**
-	 * Editor per il ListTextField della lista delle relazioni
+	 * Editor per il ListTextField della lista delle relazioni (altre)
 	 */
 	private class RelListTextFieldEditor implements ListTextFieldEditor, ListTextFieldElementListener {
 		Form form;
@@ -294,7 +294,6 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 
 		public String getErrorMessage() {
 			return errorMessage;
-//			return "editor.form.meta.descrittori.msg.err.datirelazione";
 		}
 
 		public Dimension getPreferredSize() {
@@ -407,8 +406,7 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 		relazioniButton.addActionListener(this);
 	}
 
-	// ////////////////////////////////////////////// MetaDescrittoriForm
-	// Interface
+	// ////////////////////////////////////////////// CiclodiVitaForm Interface
 	public boolean openForm() {
 		form.setSize(650, 500);
 		form.showDialog();
@@ -416,18 +414,16 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 	}
 
 	public void actionPerformed(ActionEvent e) {				
-		 if (e.getSource().equals(eventoButton)) { // EVENTI
-			 formEventi.setRel_totali(getRelazioniUlteriori());
+		 if (e.getSource().equals(eventoButton)) { 			// EVENTI
+			formEventi.setRel_totali(getRelazioniUlteriori());
 			formEventi.setEventi(eventi);
 			setEventi(eventi);
 			setRelazioniUlteriori(relazioniUlteriori);
 			formEventi.setTipoDTD(tipoDTD);
 			
 			if (formEventi.openForm()) {
-				
 				eventi = formEventi.getEventi();
 				eventiList.setListData(eventi);
-				
 			}
 		} else if (e.getSource().equals(relazioniButton)) { // RELAZIONI
 			Vector v = new Vector();
@@ -481,9 +477,7 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 	 * Restituisce un ID univoco per una nuova relazione.
 	 */
 	private String calcolaIDRelazione(String nomeTag) {
-
-//		if(true)
-//			return "r1";
+		
 		String prefix = "r";
 
 		if (nomeTag.equals("attiva")) {
@@ -525,7 +519,7 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 			}
 		}
 
-		// e poi nelle relazioni delle vigenze
+		// e poi nelle relazioni degli eventi
 		for (int i = 0; i < eventi.length; i++) {
 			if (eventi[i].getFonte() != null) {
 				

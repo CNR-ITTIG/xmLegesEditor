@@ -153,14 +153,9 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Loggabl
         }
         
         public Object getElement() {
-
                 return e;
-                
-
         }
         
-
-
        
 		public void setElement(Object object) {
 			
@@ -199,12 +194,9 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Loggabl
 					tagTipoRelazioneSottoFormDatiEvento.addItem("haallegato");
 					tagTipoRelazioneSottoFormDatiEvento.addItem("allegatodi");		
 						
-					
-					System.out.println("ERRORE!!!!");
+					logger.error("ERRORE in CiclodiVitaEventoForm !");
 				}
-
 		    }
-			
 			
 			
 			try {
@@ -224,10 +216,9 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Loggabl
 				tagEffettoTipoSFormDatiEvento.setEnabled(false);
 				labelEffettoTipo.setText(" ");
 			}
-						
-		
 		}
 
+		
 		public void clearFields() {
 			if(eventi_listtextfield.getSelectedItem()==null ||
 					((Evento)eventi_listtextfield.getSelectedItem()).getFonte().getTagTipoRelazione().equals("originale")){
@@ -281,8 +272,6 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Loggabl
 		}
 
 		public boolean checkData() {
-			
-			
 			boolean isvalid=true;
 			isvalid = (dataFormDatiEvento!=null)&&(dataFormDatiEvento.getAsYYYYMMDD()!=null)&&(!dataFormDatiEvento.getAsYYYYMMDD().trim().equals(""));
 			if(!isvalid){
@@ -733,6 +722,7 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Loggabl
 	public void setTipoDTD(String tipoDTD) {
 		this.tipoDTD = tipoDTD;
 	}
+	
 	/**
 	 * Restituisce un ID univoco per un nuovo evento
 	 */
@@ -743,9 +733,9 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Loggabl
 
 		// TODO questo codice in pratica duplica quello per le relazioni...
 
-		// Prendi il massimo degli id delle vigenze. Usiamo il vettore preso
+		// Prendi il massimo degli id degli eventi. Usiamo il vettore preso
 		// dalla ListTextField
-		// in modo tale da considerare anche le nuove vigenze inserite.
+		// in modo tale da considerare anche i nuovi eventi inseriti.
 		Vector eventiVect = eventi_listtextfield.getListElements();
 		for (int i = 0; i < eventiVect.size(); i++) {
 			Evento e = (Evento) eventiVect.elementAt(i);
@@ -762,7 +752,6 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Loggabl
 				}
 			}
 		}
-
 		uID += (max + 1);
 		return uID;
 	}
