@@ -223,7 +223,6 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 			utilRulesManager.orderedInsertChild(ciclodivitaNode,relazioniNode);
 				
 		if(missingciclodivita && relazioni.length>0){
-			
 			utilRulesManager.orderedInsertChild(activeMeta,ciclodivitaNode);
 		}
 		
@@ -321,7 +320,7 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 				UtilDom.setIdAttribute(eventoTag, eventi[i].getId());
 				UtilDom.setAttributeValue(eventoTag, "data", eventi[i].getData());
 				if(eventi[i].getFonte().getTagTipoRelazione().equals("originale")){
-					Node tag=UtilDom.findRecursiveChild(activeMeta,"entratainvigore");//doc.getElementsByTagName("entratainvigore").item(0);
+					Node tag=UtilDom.findRecursiveChild(activeMeta,"entratainvigore");
 					if(tag==null){
 						tag = utilRulesManager.getNodeTemplate("entratainvigore");
 						Node descrNode= UtilDom.findRecursiveChild(activeMeta,"descrittori");
