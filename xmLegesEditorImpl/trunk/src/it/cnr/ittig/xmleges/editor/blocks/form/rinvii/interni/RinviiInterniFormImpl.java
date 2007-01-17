@@ -137,7 +137,7 @@ public class RinviiInterniFormImpl implements RinviiInterniForm, EventManagerLis
 	// ////////////////////////////////////////// EventManagerListener Interface
 	public void manageEvent(EventObject event) {
 		SelectionChangedEvent e = (SelectionChangedEvent) event;
-		if (e.isActiveNodeChanged()) {
+		if (e.isActiveNodeChanged() && form.isDialogVisible()) {
 			logger.debug("activeNodeChanged in form");
 			updateContent(e.getActiveNode());
 		}
