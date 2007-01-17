@@ -275,16 +275,15 @@ public class RinviiInterniFormImpl implements RinviiInterniForm, EventManagerLis
 						sottopart1 = Partizioni.get(i).toString().split("-");
 						sottopart2 = Partizioni.get(j).toString().split("-");
 						for (int k = 0; k < sottopart1.length; k++)
-							if (sottopart1[k].compareTo(sottopart2[k]) == 0 && k < sottopart1.length - 1) { // stessa
-																											// radice
-																											// "es
-																											// prt-2"
+							if (sottopart1[k].compareTo(sottopart2[k]) == 0 && k < sottopart1.length - 1) { // stessa radice "es prt-2"
+							  if(sottopart1[k + 1].length()>=3 && sottopart2[k + 1].length()>=3 ){   // salta quelli che non sono prefissi di partizioni (es t1,t2,t3)
 								if (sottopart1[k + 1].substring(0, 3).compareTo(sottopart2[k + 1].substring(0, 3)) == 0) {
 									mRifDescription.add(",");
 									mRifDescription.add(sottopart2[k + 1].substring(3, sottopart2[k + 1].length()));
 									Partizioni.set(j, null);
 									break;
 								}
+							 }
 							}
 					}
 				}
