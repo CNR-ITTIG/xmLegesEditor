@@ -251,7 +251,7 @@ public class NirUtilUrnImpl implements NirUtilUrn, Loggable, Serviceable {
 			boolean addedToken = false;
 			for (int i = 0; i < tokenizedrefId.length; i++) {
 				if (addedToken || i == tokenizedrefId.length - 1 || (i < tokenizedCallId.length && !tokenizedrefId[i].equals(tokenizedCallId[i]))) {
-					formatestuale += getPartizioneFromIdToken(tokenizedrefId[i]) + ", ";
+					formatestuale += getPartizioneFromIdToken(tokenizedrefId[i]).trim().length()>0?getPartizioneFromIdToken(tokenizedrefId[i]) + ", ":"";
 					addedToken = true;
 				}
 			}
@@ -264,6 +264,8 @@ public class NirUtilUrnImpl implements NirUtilUrn, Loggable, Serviceable {
 
 	private String getPartizioneFromIdToken(String idToken) {
 		String partizione = "";
+		if(idToken.matches("t\\d"))      // salta le porzioni di id relative alla vigenza [t1, t2, t3 ...]
+			return partizione;
 		if (idToken.startsWith("ann")) {
 			Node annesso = documentManager.getDocumentAsDom().getElementById(idToken);
 			if (annesso != null) {
