@@ -43,9 +43,13 @@ public class NirUtilUrnImpl implements NirUtilUrn, Loggable, Serviceable {
 
 	DocumentManager documentManager;
 	
-	protected String bis[] = { "bis", "ter", "quater", "quinquies", "sexies", "septies", "octies", "novies", "decies", "undecies", "duodecies", "terdecies",
-			"quaterdecies", "quinquiesdecies", "sexiesdecies", "septiesdecies", "octiesdecies", "noviesdecies", "venies", "duovenies", "tervenies",
-			"quatervenies", "quinquiesvenies", "sexiesvenies", "septiesvenies", "octiesvenies", "noviesvenies" };
+	// riordinati dalle stringhe piu' lunghe alle piu' corte
+	protected String bis[] = { "bis", "quaterdecies", "quatervenies", "quater", "tervenies", "terdecies", "ter", 
+			"quinquies", "sexies", "septies", "octies", "novies", 
+			"undecies", "duodecies", 	 "quinquiesdecies", "sexiesdecies", 
+			"septiesdecies", "octiesdecies", "noviesdecies", "decies",  "duovenies", 
+			"quinquiesvenies", "sexiesvenies", "septiesvenies", "octiesvenies", 
+			"noviesvenies", "venies"};
 
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
