@@ -206,6 +206,10 @@
             	<div class="meta">
             		<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='meta']" />
             	</div>
+            	<div class="annessi">
+		            <xsl:apply-templates select="/*[name()='NIR']/*/*[name()='annessi']" />
+            	</div>
+            	
 
 	            	  <div>
     	        		<xsl:call-template name="notemultivigente" /> 
@@ -557,25 +561,23 @@
 	<!--  Template allegati                                       -->
 	<!--                                                          -->
 	<!-- ======================================================== -->
-	<xsl:template match="nir:annessi">
-		<hr/>
-		<ol style="margin-top:15px;">
-			<xsl:apply-templates/>
-		</ol>
+	<xsl:template match="//*[name()='annessi']">
+		<br/>ALLEGATI:
+		<xsl:apply-templates/>
 	</xsl:template>
-	<xsl:template match="nir:testata">
-		<li class="small">
-			<xsl:apply-templates select="nir:denAnnesso| nir:titAnnesso"/>
-		</li>
+	<xsl:template match="//*[name()='testata']">
+			<hr/>
+			<xsl:apply-templates select="*[name()='denAnnesso'] | *[name()='titAnnesso']"/>
+			<br/>
 	</xsl:template>
-	<xsl:template match="nir:denAnnesso">
+	<xsl:template match="*[name()='denAnnesso']">
 		<b>
 			<xsl:apply-templates select=".//text()"/>
 		</b>
-		<xsl:if test="following-sibling::nir:titAnnesso"> - </xsl:if>
+		<xsl:if test="following-sibling::*[name()='titAnnesso']"> - </xsl:if>
 	</xsl:template>
-	<xsl:template match="nir:titAnnesso">
-		<a name="{../../@id}" href="{../../nir:rifesterno/@xlink:href}">
+	<xsl:template match="*[name()='titAnnesso']">
+		<a name="{../../@id}">
 			<xsl:apply-templates select=".//text()"/>
 		</a>
 	</xsl:template>
@@ -585,12 +587,11 @@
 	<!--                                                          -->
 	<!-- ======================================================== -->
 	<xsl:template match="//*[name()='meta']">
-		<hr/>
-		<table border="1" cellpadding="2" cellspacing="0" width="75%" style="margin-left: 15px;">
+		<!--	table border="1" cellpadding="2" cellspacing="0" width="75%" style="margin-left: 15px;"	-->
 			<xsl:apply-templates/>
-		</table>
+		<!--	/table	-->
 	</xsl:template>
-<!--	<xsl:template match="//*[name()='urn']">
+	<!--	xsl:template match="//*[name()='urn']">
 		<tr>
 			<td class="small">
 				<a href="http://www.senato.it/japp/bgt/showdoc/frame.jsp?tipodoc={//nir:approvazione/@tipodoc}&amp;leg={//nir:approvazione/@leg}&amp;id={//nir:approvazione/@internal_id}">
@@ -598,12 +599,12 @@
 				</a>
 			</td>
 		</tr>
-	</xsl:template>-->
+	</xsl:template>
 	<xsl:template match="//*[name()='redazionale']">
 		<div class="redazionale">
 			<xsl:apply-templates />
 		</div>
-	</xsl:template>
+	</xsl:template	-->
 	<xsl:template match="//*[name()='nota']">
 		<a class="nota" name="{@id}" href="{concat('#ndr',@id)}">
 			<xsl:value-of select="@id"/>
@@ -611,7 +612,7 @@
 		<xsl:apply-templates />
 	</xsl:template>
 	<xsl:template match="nir:confronto"/>
-	
+
 	<!-- ======================================================== -->
 	<!--                                                          -->
 	<!--  Template generici                                       -->
