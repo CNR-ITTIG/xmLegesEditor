@@ -32,7 +32,7 @@ public interface MetaCiclodivita extends Service {
 	public Evento[] getEventi();
 
 	/**
-	 * Imposta gli eventi sul ciclodivita del documento.
+	 * Imposta gli eventi sul ciclodivita del documento
 	 * 
 	 * @param eventi eventi
 	 */
@@ -51,6 +51,15 @@ public interface MetaCiclodivita extends Service {
 	 * @param relazioni relazioni con altri documenti
 	 */
 	public void setRelazioni(Relazione[] relazioni);
+	
+	
+	/**
+	 * Imposta gli eventi e le relative relazioni sul ciclodivita del documento
+	 * 
+	 * @param relazioni relazioni con altri documenti
+	 */
+	public void setCiclodiVita(Evento[] eventi, Relazione[] relazioni);
+	
 	
 	/**
 	 * 
