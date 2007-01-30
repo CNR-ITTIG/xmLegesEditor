@@ -219,8 +219,8 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 				descrittori.setPubblicazione(node, descrittoriForm.getPubblicazione());
 				descrittori.setAltrePubblicazioni(node, descrittoriForm.getAltrePubblicazioni());
 				descrittori.setRedazione(node, descrittoriForm.getRedazione());
-				documentManager.commitEdit(tr);
 				rinumerazione.aggiorna(doc);
+				documentManager.commitEdit(tr);
 			} catch (DocumentManagerException ex) {
 				logger.error(ex.getMessage(), ex);
 			}
@@ -244,9 +244,8 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 				inquadramento.setInfomancanti(inquadramentoForm.getInfomancanti());
 				inquadramento.setOggetto(inquadramentoForm.getOggetto());
 				inquadramento.setProponenti(inquadramentoForm.getProponenti());
-				
-				documentManager.commitEdit(tr);
 				rinumerazione.aggiorna(doc);
+				documentManager.commitEdit(tr);
 			} catch (DocumentManagerException ex) {
 				logger.error(ex.getMessage(), ex);
 			}
@@ -320,9 +319,9 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		if (cnrForm.openForm()) {
 			try {
 				EditTransaction tr = documentManager.beginEdit();
-				metaCnr.setProprietario(node, cnrForm.getProprietari());								
-				documentManager.commitEdit(tr);
+				metaCnr.setProprietario(node, cnrForm.getProprietari());
 				rinumerazione.aggiorna(doc);
+				documentManager.commitEdit(tr);
 			} catch (DocumentManagerException ex) {
 				logger.error(ex.getMessage(), ex);
 			}
