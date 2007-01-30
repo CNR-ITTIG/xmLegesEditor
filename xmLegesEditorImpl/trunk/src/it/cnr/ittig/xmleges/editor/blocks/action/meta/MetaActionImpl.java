@@ -271,10 +271,10 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		Node node = selectionManager.getActiveNode();
 		ciclodivita.setActiveNode(node);
 		Evento[] eventiOnDom = ciclodivita.getEventi();
-		Relazione[] relazioniOnDom = ciclodivita.getRelazioni();
+//		Relazione[] relazioniOnDom = ciclodivita.getRelazioni();
 		
 		ciclodivitaForm.setEventi(eventiOnDom);
-		ciclodivitaForm.setRelazioniUlteriori(ciclodivita.getRelazioniUlteriori(eventiOnDom,relazioniOnDom));
+//		ciclodivitaForm.setRelazioniUlteriori(ciclodivita.getRelazioniUlteriori(eventiOnDom,relazioniOnDom));
 		
 		String[] id_eventiOnVigenze =ciclodivita.getEventiOnVigenza();
 		VigenzaEntity[] vigenze = ciclodivita.getVigenze();
@@ -282,9 +282,17 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 				
 		if(ciclodivitaForm.openForm()){
 			Evento[] newEventi = ciclodivitaForm.getEventi();
-			Relazione[] relazioniUlteriori = ciclodivitaForm.getRelazioniUlteriori();
+//			Relazione[] relazioniUlteriori = ciclodivitaForm.getRelazioniUlteriori();
 			
-			Relazione[] newRelazioni = ciclodivita.mergeRelazioni(newEventi,relazioniUlteriori);
+//			Relazione[] newRelazioni = ciclodivita.mergeRelazioni(newEventi,relazioniUlteriori);
+			Relazione[] newRelazioni = null;
+			if(newEventi!=null){
+				newRelazioni = new Relazione[newEventi.length];
+				for(int i=0;i<newEventi.length;i++){
+					newRelazioni[i]=newEventi[i].getFonte();
+				}
+			}
+			
 
 			// SETTA SUL DOM:
 			ciclodivita.setEventi( newEventi);
