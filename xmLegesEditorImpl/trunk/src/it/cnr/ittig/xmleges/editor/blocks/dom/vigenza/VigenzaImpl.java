@@ -108,7 +108,6 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 		try {
 			EditTransaction tr = documentManager.beginEdit();
 			if ((ret=setDOMVigenza(node, selectedText, start, end, vigenza))!=null) {
-//				 setta gli id degli span
 				rinumerazione.aggiorna(documentManager.getDocumentAsDom());
 				documentManager.commitEdit(tr);
 			} else
