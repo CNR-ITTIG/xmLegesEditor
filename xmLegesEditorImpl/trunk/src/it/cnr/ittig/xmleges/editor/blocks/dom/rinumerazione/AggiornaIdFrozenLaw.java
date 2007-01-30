@@ -147,14 +147,17 @@ public class AggiornaIdFrozenLaw {
 			// newNotes.add(doc.getElementById((String)ndrId.get(i)).cloneNode(true));
 			if (getNotaById((String) ndrId.get(i)) != null)
 				newNotes.add(getNotaById((String) ndrId.get(i)).cloneNode(true));
-			else
-				logger.debug("il nodo di " + ndrId.get(i) + " e' null");
+			else{
+				if(logger.isDebugEnabled())
+				    logger.debug("il nodo di " + ndrId.get(i) + " e' null");
+			}
 		}
 
 		Vector oldNotes = getOldNotes();
 
 		if (oldNotes.size() > newNotes.size()) {
-			logger.debug("ci sono note senza ndr; completa la lista");
+			if(logger.isDebugEnabled())
+				logger.debug("ci sono note senza ndr; completa la lista");
 			// completa il vector newNotes da oldNotes con id != note in
 			// newNotes (aggiunge le note che non hanno un ndr)
 			for (int i = 0; i < oldNotes.size(); i++) {
@@ -162,22 +165,26 @@ public class AggiornaIdFrozenLaw {
 					newNotes.add(oldNotes.get(i));
 			}
 		}
-
-		logger.debug("notaLength " + oldNotes.size() + " ndrLength " + newNotes.size());
+         
+		if(logger.isDebugEnabled())
+			logger.debug("notaLength " + oldNotes.size() + " ndrLength " + newNotes.size());
 		if (oldNotes.size() == newNotes.size()) {
 //			if (oldNotes.size() > 0)
 //				parent = ((Node) oldNotes.get(0)).getParentNode();
 			for (int i = 0; i < oldNotes.size(); i++) {
 				parent = ((Node) oldNotes.get(i)).getParentNode();
-				logger.debug("replace oldNote " + UtilDom.getAttributeValueAsString((Node) oldNotes.get(i), "id") + " with newNote "
+				if(logger.isDebugEnabled())
+					logger.debug("replace oldNote " + UtilDom.getAttributeValueAsString((Node) oldNotes.get(i), "id") + " with newNote "
 						+ UtilDom.getAttributeValueAsString((Node) newNotes.get(i), "id"));
 				// FIXME: non e' detto che il parent (redazionale) sia lo stesso per tutte le note; 
 				// e.g. note negli allegati
 				parent.replaceChild((Node) newNotes.get(i), (Node) oldNotes.get(i));
 			}
 			return true;
-		} else
-			logger.debug("ci sono ndr senza nota");
+		} else{
+			if(logger.isDebugEnabled())
+				logger.debug("ci sono ndr senza nota");
+		}
 		return false;
 	}
 
@@ -229,13 +236,15 @@ public class AggiornaIdFrozenLaw {
 			num = UtilDom.getAttributeValueAsString((Node) note.item(i), "id");
 			
 			UtilDom.setAttributeValue(ndr.item(i), "num", num);
-			logger.debug("renum " + renum);
+			if(logger.isDebugEnabled())
+				logger.debug("renum " + renum);
 			if (renum) {
 				// togliere l'intero prefix e non solo la n
 				value = num.substring(prefix.length());
 				UtilDom.setAttributeValue(ndr.item(i), "value", value);
 				String tipoNdr = rinum.getRinumerazioneNdr();
-				logger.debug("tipoNdr " + tipoNdr);
+				if(logger.isDebugEnabled())
+					logger.debug("tipoNdr " + tipoNdr);
 				if (tipoNdr.equalsIgnoreCase("cardinale"))
 					UtilDom.setTextNode(ndr.item(i), "(" + value + ")");
 				else if (tipoNdr.equalsIgnoreCase("letterale"))
@@ -270,17 +279,21 @@ public class AggiornaIdFrozenLaw {
 			else
 				IDValue = getIDByPosition(nodo);
 			
-            // FIXME MODIFICA PER ASSOCIARE LA VIGENZA ALL'ID:  DARA' PROBLEMI CON L'EREDITARIETA' DELLE PARTIZIONI //////
-			
+            /////////////////////////////////////////////////////////////////////////////
+			//          QUI SETTA IL SUFFISSO ALL'ID DELLE PARTIZIONI SOPPRESSE               
+			/////////////////////////////////////////////////////////////////////////////
 			String finevigore = UtilDom.getAttributeValueAsString(nodo,"finevigore");
-			if(null!=finevigore && !finevigore.equals("") && getElementType(nodo)!=SPAN)
+			if(null!=finevigore && !finevigore.equals("") && getElementType(nodo)!=SPAN){
 				IDValue+="-"+finevigore;
-			
-			////////////////////////////////////////////////////////////////////////////////////////////////////////
+				if(logger.isDebugEnabled()){
+					logger.debug("finevigore = "+finevigore);
+					logger.debug("IDValue = "+IDValue);
+				}			
+			}
+			/////////////////////////////////////////////////////////////////////////////
 			
 			// Aggiornamento ID dell'elemento se e' cambiato
 			OldID = ((Element) nodo).getAttribute("id");
-			
 			
 			
 			// FIXME patch per id degli eventi - disabilita il setId degli eventi ma mantiene il setIdAttribute
@@ -289,13 +302,13 @@ public class AggiornaIdFrozenLaw {
 			}
 			////////////////////////////////////////////////////////////////////////////////////////////////// 
 
-  		    
-  		    
-			logger.debug("idChanged: new  " + IDValue + " old " + OldID);
+  		    if(logger.isDebugEnabled()) 		    
+			 logger.debug("idChanged: new  " + IDValue + " old " + OldID);
 
 			if (!UtilDom.hasIdAttribute(nodo) || !OldID.equals(IDValue)) {
 				UtilDom.setIdAttribute(nodo, IDValue);
-				logger.debug("idChanged: new  " + IDValue + " old " + OldID);
+				if(logger.isDebugEnabled())
+				  logger.debug("idChanged: new  " + IDValue + " old " + OldID);
 			}
 		}
 
@@ -304,7 +317,7 @@ public class AggiornaIdFrozenLaw {
 		for (int i = 0; i < figliNodo.getLength(); i++) {
 			Node figlio = figliNodo.item(i);
 			updateIDs(figlio);
-		}// Fine del for
+		}
 	}
 
 	private boolean isElementWithNum(Node node) {
@@ -353,9 +366,11 @@ public class AggiornaIdFrozenLaw {
 		// Aggiunta per trattare commi non numerati
 		if (pos.trim().length() == 0) {
 			pos = "" + getPosRelativaFratelli(articolo);
-			logger.debug("POS FROM FRATELLI in getIDArticoloByNum " + pos);
+			if(logger.isDebugEnabled())
+				logger.debug("POS FROM FRATELLI in getIDArticoloByNum " + pos);
 		} else {
-			logger.debug("POS FROM NUM in getIDArticoloByNum " + pos);
+			if(logger.isDebugEnabled())
+				logger.debug("POS FROM NUM in getIDArticoloByNum " + pos);
 		}
 		// ------------------------------------------
 
@@ -379,9 +394,11 @@ public class AggiornaIdFrozenLaw {
 		// Aggiunta per trattare commi non numerati
 		if (pos.trim().length() == 0) {
 			pos = "" + getPosRelativaFratelli(nodo);
-			logger.debug("POS FROM FRATELLI in getIDNotArticoloByNum " + pos);
+			if(logger.isDebugEnabled())
+				logger.debug("POS FROM FRATELLI in getIDNotArticoloByNum " + pos);
 		} else {
-			logger.debug("POS FROM NUM in getIDNotArticoloByNum " + pos);
+			if(logger.isDebugEnabled())
+				logger.debug("POS FROM NUM in getIDNotArticoloByNum " + pos);
 		}
 		// ------------------------------------------
 
@@ -414,7 +431,8 @@ public class AggiornaIdFrozenLaw {
 														// .getRecursiveTextNode(num);
 		// Prendo da <num> l'informazione utile a costruire l'ID
 		String InfoNum = getInformationToBuildID(NumContent);
-		logger.debug("InfoNum " + InfoNum);
+		if(logger.isDebugEnabled())
+			logger.debug("InfoNum " + InfoNum);
 		if (isLetter(InfoNum) && isElementWithLetter(node))
 			return ("" + InfoNum);//UtilLang.fromLetterToNumber(InfoNum));
 		else if (isRoman(InfoNum) && isElementWithRoman(node))
@@ -617,12 +635,14 @@ public class AggiornaIdFrozenLaw {
 				   return true;
 			 }
 			 else{
-				 logger.debug("not required id for "+figlio.getNodeName());
+				 if(logger.isDebugEnabled())
+					 logger.debug("not required id for "+figlio.getNodeName());
 				 return false;
 			 }
 		 }
 		 catch(DtdRulesManagerException e){
-			 logger.debug("no id for "+figlio.getNodeName());
+			 if(logger.isDebugEnabled())
+				 logger.debug("no id for "+figlio.getNodeName());
 			 return false;
 		 }
 	 }
