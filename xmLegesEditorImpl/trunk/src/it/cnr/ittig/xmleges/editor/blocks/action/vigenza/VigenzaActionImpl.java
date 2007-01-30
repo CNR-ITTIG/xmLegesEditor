@@ -20,7 +20,6 @@ import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.action.vigenza.VigenzaAction;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.MetaCiclodivita;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.Vigenza;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 import it.cnr.ittig.xmleges.editor.services.form.vigenza.VigenzaForm;
@@ -129,7 +128,7 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 			logger.debug("enable vigenza");
 			start = ((SelectionChangedEvent) event).getTextSelectionStart();
 			end = ((SelectionChangedEvent) event).getTextSelectionEnd();
-
+		
 			vigenzaAction.setEnabled(vigenza.canSetVigenza(activeNode));//||vigenza.canSetVigenzaSpan(activeNode, start, end));
 
 		}
@@ -142,8 +141,10 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 			VigenzaEntity vig = vigenza.getVigenza(active,start,end);
 			Evento[] eventi_vig=new Evento[2];
 			String testo_sel;
+			
 			// modifica di una vigenza esistente
 			if(vig!=null){
+					
 				testo_sel=vigenza.getSelectedText();
 				eventi_vig[0]=vig.getEInizioVigore();
 				eventi_vig[1]=vig.getEFineVigore();
@@ -161,8 +162,8 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 			}
 			
 			
-			Node node = selectionManager.getActiveNode();
-			ciclodivita.setActiveNode(node);
+//			Node node = selectionManager.getActiveNode();
+//			ciclodivita.setActiveNode(node);
 //			Evento[] oldEventi = ciclodivita.getEventi();
 //			Relazione[] oldRelazioni = ciclodivita.getRelazioni();
 			
@@ -194,8 +195,11 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 				selectedText=UtilDom.getTextNode(activeNode);
 		}
 		else{	
-			if(start!=end)
-				selectedText=activeNode.getNodeValue().substring(start,end);
+			
+			if(start!=end){
+//				if(start >= 0 && end <= selectedText.length())
+					selectedText=activeNode.getNodeValue().substring(start,end);
+			}
 			else
 				selectedText="...";
 		}
