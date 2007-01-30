@@ -108,7 +108,8 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 		try {
 			EditTransaction tr = documentManager.beginEdit();
 			if ((ret=setDOMVigenza(node, selectedText, start, end, vigenza))!=null) {
-				//rinumerazione.aggiorna(documentManager.getDocumentAsDom());
+//				 setta gli id degli span
+				rinumerazione.aggiorna(documentManager.getDocumentAsDom());
 				documentManager.commitEdit(tr);
 			} else
 				documentManager.rollbackEdit(tr);
@@ -122,60 +123,76 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 	public Node setDOMVigenza(Node node, String selectedText, int start, int end, VigenzaEntity vigenza) {
 		
 		selectedNode=node;
-		if(node==null) return null;		
+		
+		if(node==null) 
+			return null;	
+		
 		if(node.getNodeValue()==null){
 			if(UtilDom.getTextNode(node)==null || UtilDom.getTextNode(node).trim().equals(""))
+				//caso di selzione solo su nodo generici (articolato, formulainiziale, formulafinale ecc..)
 				selectedText=node.getNodeName();
 			else
+				//caso di selezione su nodo paragrafo o sottoscrivente o visto (perche'?)
 				selectedText=UtilDom.getTextNode(node);
 		}
-		else				
-			selectedText=node.getNodeValue();
+//		else				
+//			selectedText=node.getNodeValue();
 
 		
 		if(UtilDom.isTextNode(node)){
+			//solo nodi finali di testo (con matitina verde)
 			Element span;
-			if(node.getParentNode().getNodeName().equals("h:span"))
+			if(node.getNodeValue().equals(selectedText) || (start==-1 && end==-1)){
+				//il testo selezionato coincide con tutto il nodo
 				span = (Element) node.getParentNode();
+				selectedText=node.getNodeValue();
+			}
+
 			else{
-				if(vigenza.getEInizioVigore()==null && vigenza.getEFineVigore()==null && vigenza.getStatus()==null){
-					return null;
-				}
+//				il testo selezionato è una sottoparte del nodo di testo (va creato lo span)				
+				
+				//qui crea uno span dal testo selezionato 
 				span = (Element) utilRulesManager.encloseTextInTag(node, start, end,"h:span","h");
-			}
-			// Assegnazione attributi di vigenza allo span creato
-			if(vigenza.getEInizioVigore()!=null){
-				UtilDom.setAttributeValue(span,"iniziovigore",vigenza.getEInizioVigore().getId());
-				if(vigenza.getStatus()!=null && !vigenza.getStatus().equals("--"))
-					span.setAttribute("status", vigenza.getStatus());
-			}
-			else{//inizio obbligatorio, se non presente si elimina la vigenza e si esce				
-				span.removeAttribute("iniziovigore");
-				span.removeAttribute("finevigore");
-				span.removeAttribute("status");
-			//	if(start!=end){
-	//				appiattisce lo span				
-					Node padre=span.getParentNode();				
+				if(vigenza.getEInizioVigore()==null && vigenza.getEFineVigore()==null && vigenza.getStatus()==null){
+					Node padre=span.getParentNode();
+					//	appiattisce lo span
 					extractText.extractText(node,0,selectedText.length());
 					padre.removeChild(span);
 					UtilDom.mergeTextNodes(padre);
 					return padre;
-//				}else{
-//					return span;
-//				}
+				}
 			}
-			//FIXME: va controllato che esista sul dom prima di rimuoverli?
-			if(vigenza.getEFineVigore()!=null)
-				UtilDom.setAttributeValue(span,"finevigore",vigenza.getEFineVigore().getId());				
-			else
-				span.removeAttribute("finevigore");
+				// Assegnazione attributi di vigenza allo span creato
+				if(vigenza.getEInizioVigore()!=null){
+					UtilDom.setAttributeValue(span,"iniziovigore",vigenza.getEInizioVigore().getId());
+					if(vigenza.getStatus()!=null && !vigenza.getStatus().equals("--"))
+						span.setAttribute("status", vigenza.getStatus());
+				}
+				else{//inizio obbligatorio, se non presente si elimina la vigenza e si esce				
+					span.removeAttribute("iniziovigore");
+					span.removeAttribute("finevigore");
+					span.removeAttribute("status");				
+					Node padre=span.getParentNode();
+					//	appiattisce lo span
+					extractText.extractText(node,0,selectedText.length());
+					padre.removeChild(span);
+					UtilDom.mergeTextNodes(padre);
+//					 setta gli id degli span
+					rinumerazione.aggiorna(documentManager.getDocumentAsDom());
+					return padre;
+				}
+				if(vigenza.getEFineVigore()!=null)
+					UtilDom.setAttributeValue(span,"finevigore",vigenza.getEFineVigore().getId());				
+				else
+					span.removeAttribute("finevigore");
             
 			// setta gli id degli span
 			rinumerazione.aggiorna(documentManager.getDocumentAsDom());
 			
 			return span;
 			
-		}else{//non c'è span
+		}else{
+			//non è un nodo di testo
 			try {	
 				NamedNodeMap nnm = node.getAttributes();
 				EditTransaction tr = documentManager.beginEdit();
@@ -222,128 +239,132 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 	}
 
 
-	public VigenzaEntity getVigenza(Node node, int start, int end) {
+public VigenzaEntity getVigenza(Node node, int start, int end) {
 
-		Document doc = documentManager.getDocumentAsDom();
+	Document doc = documentManager.getDocumentAsDom();
+	
+	if(node==null)
+		return null;
+	
+	if(UtilDom.isTextNode(node) && (node.getParentNode().getAttributes()== null || node.getParentNode().getAttributes().getNamedItem("iniziovigore")==null) )
+		return null;
+	
+	if(!UtilDom.isTextNode(node) && (node.getAttributes()==null || node.getAttributes().getNamedItem("iniziovigore")==null))
+		return null;
+	
+	Evento e_iniziovig=null;
+	Evento e_finevig=null;
+	Node iniziovig=null;
+	Node finevig=null;
+	Node status=null;
+	selectedText="";
+	
+	if(!UtilDom.isTextNode(node)){
+		//non c'è selezione di testo sono su nodo generico
+		if(node.getNodeValue()==null){
+			if(UtilDom.getTextNode(node)==null || UtilDom.getTextNode(node).trim().equals(""))
+				//	caso di selzione solo su nodo generici (articolato, formulainiziale, formulafinale ecc..)
+				selectedText=node.getNodeName();
+			else
+				// caso di selezione su nodo paragrafo o sottoscrivente o visto (perche'?)
+				selectedText=UtilDom.getTextNode(node);
+		}
+		else				
+			selectedText=node.getNodeValue();
 		
-		if(node==null)
-			return null;
-		if(UtilDom.isTextNode(node) && node.getParentNode().getAttributes()==null)
-			return null;
-		if(!UtilDom.isTextNode(node) && node.getAttributes()==null)
-			return null;
+	}
+	//else	siamo su nodo di testo (matita verde) 
+	else {
+
+		Node parentNode=node.getParentNode();
 		
-		Evento e_iniziovig=null;
-		Evento e_finevig=null;
-		Node iniziovig=null;
-		Node finevig=null;
-		Node status=null;
-		if(!UtilDom.isTextNode(node)&&(start==-1)&&(end==-1)){
-			if(node.getNodeValue()==null){
-				if(UtilDom.getTextNode(node)==null || UtilDom.getTextNode(node).trim().equals(""))
-					selectedText=node.getNodeName();
-				else
-					selectedText=UtilDom.getTextNode(node);
-			}
-			else				
-				selectedText=node.getNodeValue();
-		}else if(node.getParentNode()!=null && node.getParentNode().getNodeName().equals("h:span")){		
-			Node span=node.getParentNode();
-		//			 Recupero Nodo h:span con contenuto
-			if(span.getNodeValue()==null){
-				if(UtilDom.getTextNode(span)==null || UtilDom.getTextNode(span).trim().equals(""))
-					selectedText=span.getNodeName();					
-				else
-					selectedText=UtilDom.getTextNode(span);		
+	   // Recupero contenuto Nodo
+		selectedText=UtilDom.getTextNode(parentNode);
+
+		//se il testo selezionato non coincide con quello dello span di cui è figlio
+		//si crea una nuova vigenza		
+		if(start!=end && selectedText.substring(start,end).length()<selectedText.length()){
+				selectedText=selectedText.substring(start,end);
+				return null;
+		}
+		
+		
+		
+		node=parentNode;
+
+	}
 				
-			}
-			else				
-				selectedText=span.getNodeValue();
-			
-			node=span;
-		}else{
-			if(node.getNodeValue()==null){
-				if(UtilDom.getTextNode(node)==null || UtilDom.getTextNode(node).trim().equals(""))
-					selectedText=node.getNodeName();
-				else
-					selectedText=UtilDom.getTextNode(node);
-			}
-			else				
-				selectedText=node.getNodeValue();
+	
+		iniziovig=node.getAttributes().getNamedItem("iniziovigore");
+		finevig=node.getAttributes().getNamedItem("finevigore");
+		status=node.getAttributes().getNamedItem("status");
+	
+
+		Element evento_ie_Tag = (iniziovig==null?null:doc.getElementById(iniziovig.getNodeValue()));
+		Element evento_fe_Tag = (finevig==null?null:doc.getElementById(finevig.getNodeValue()));
+		
+		if(evento_ie_Tag==null){
+			//evento inizio non presente quindi vigenza vuota
 			return null;
 		}
-					
 		
-			iniziovig=node.getAttributes().getNamedItem("iniziovigore");
-			finevig=node.getAttributes().getNamedItem("finevigore");
-			status=node.getAttributes().getNamedItem("status");
+		//	qui rappresenta la fonte dell'evento di inizio
+		Element evento_fonte_Tag = (evento_ie_Tag==null?null:doc.getElementById(evento_ie_Tag.getAttribute("fonte")));
+		
+		String tag, id, link, effetto, tipo;
+		Relazione rel = null;
+
+		if (evento_fonte_Tag!=null && evento_fonte_Tag.getNodeType() == Node.ELEMENT_NODE) {
+			tag = evento_fonte_Tag.getNodeName();
+			id = evento_fonte_Tag.getAttributes().getNamedItem("id") != null ? evento_fonte_Tag.getAttributes().getNamedItem("id").getNodeValue() : null;
+			link = evento_fonte_Tag.getAttributes().getNamedItem("xlink:href") != null ? evento_fonte_Tag.getAttributes().getNamedItem("xlink:href")
+					.getNodeValue() : null;
+		    if(tag.equals("giurisprudenza")){
+		    	effetto=evento_fonte_Tag.getAttributes().getNamedItem("effetto") != null ? evento_fonte_Tag.getAttributes().getNamedItem("effetto").getNodeValue() : null;
+			    rel=new Relazione(tag, id, link,effetto);
+		    }else if(tag.equals("haallegato") || tag.equals("allegatodi")){
+		    	tipo=evento_fonte_Tag.getAttributes().getNamedItem("tipo") != null ? evento_fonte_Tag.getAttributes().getNamedItem("tipo").getNodeValue() : null;
+			    rel=new Relazione(tag, id, link,tipo);
+		    }else 						    	
+		    	rel=new Relazione(tag, id, link);
+		}
 		
 
-			Element evento_ie_Tag = (iniziovig==null?null:doc.getElementById(iniziovig.getNodeValue()));
-			Element evento_fe_Tag = (finevig==null?null:doc.getElementById(finevig.getNodeValue()));
-			
-			if(evento_ie_Tag==null){
-				//evento inizio non presente quindi vigenza vuota
-				return null;
-			}
-			
-	//			qui rappresenta la fonte dell'evento di inizio
-			Element evento_fonte_Tag = (evento_ie_Tag==null?null:doc.getElementById(evento_ie_Tag.getAttribute("fonte")));
-			
-			String tag, id, link, effetto, tipo;
-			Relazione rel = null;
-	
-			if (evento_fonte_Tag!=null && evento_fonte_Tag.getNodeType() == Node.ELEMENT_NODE) {
-				tag = evento_fonte_Tag.getNodeName();
-				id = evento_fonte_Tag.getAttributes().getNamedItem("id") != null ? evento_fonte_Tag.getAttributes().getNamedItem("id").getNodeValue() : null;
-				link = evento_fonte_Tag.getAttributes().getNamedItem("xlink:href") != null ? evento_fonte_Tag.getAttributes().getNamedItem("xlink:href")
-						.getNodeValue() : null;
-			    if(tag.equals("giurisprudenza")){
-			    	effetto=evento_fonte_Tag.getAttributes().getNamedItem("effetto") != null ? evento_fonte_Tag.getAttributes().getNamedItem("effetto").getNodeValue() : null;
-				    rel=new Relazione(tag, id, link,effetto);
-			    }else if(tag.equals("haallegato") || tag.equals("allegatodi")){
-			    	tipo=evento_fonte_Tag.getAttributes().getNamedItem("tipo") != null ? evento_fonte_Tag.getAttributes().getNamedItem("tipo").getNodeValue() : null;
-				    rel=new Relazione(tag, id, link,tipo);
-			    }else 						    	
-			    	rel=new Relazione(tag, id, link);
-			}
-			
-	
-			e_iniziovig=iniziovig==null?null:new Evento(iniziovig!=null?iniziovig.getNodeValue():"",
-					evento_ie_Tag!=null?evento_ie_Tag.getAttribute("data"):null,//				
-							rel,
-							evento_ie_Tag!=null?evento_ie_Tag.getAttribute("tipo"):null);
-					
-		
-	//			qui rappresenta la fonte dell'evento di fine
-			evento_fonte_Tag = evento_fe_Tag==null?null:doc.getElementById(evento_fe_Tag.getAttribute("fonte"));
-			rel=null;
+		e_iniziovig=iniziovig==null?null:new Evento(iniziovig!=null?iniziovig.getNodeValue():"",
+				evento_ie_Tag!=null?evento_ie_Tag.getAttribute("data"):null,//				
+						rel,
+						evento_ie_Tag!=null?evento_ie_Tag.getAttribute("tipo"):null);
 				
-			if (evento_fonte_Tag!=null && evento_fonte_Tag.getNodeType() == Node.ELEMENT_NODE) {
-				tag = evento_fonte_Tag.getNodeName();
-				id = evento_fonte_Tag.getAttributes().getNamedItem("id") != null ? evento_fonte_Tag.getAttributes().getNamedItem("id").getNodeValue() : null;
-				link = evento_fonte_Tag.getAttributes().getNamedItem("xlink:href") != null ? evento_fonte_Tag.getAttributes().getNamedItem("xlink:href")
-						.getNodeValue() : null;
-			    if(tag.equals("giurisprudenza")){
-			    	effetto=evento_fonte_Tag.getAttributes().getNamedItem("effetto") != null ? evento_fonte_Tag.getAttributes().getNamedItem("effetto").getNodeValue() : null;
-				    rel=new Relazione(tag, id, link,effetto);
-			    }else if(tag.equals("haallegato")||tag.equals("allegatodi")){
-			    	tipo=evento_fonte_Tag.getAttributes().getNamedItem("tipo") != null ? evento_fonte_Tag.getAttributes().getNamedItem("tipo").getNodeValue() : null;
-				    rel=new Relazione(tag, id, link,tipo);
-			    }else
-			    	rel=new Relazione(tag, id, link);
-			}
-			e_finevig=(finevig==null)?null:new Evento(finevig!=null?finevig.getNodeValue():"",
-					evento_fe_Tag!=null?evento_fe_Tag.getAttribute("data"):null,
-					rel,
-					evento_fe_Tag!=null?evento_fe_Tag.getAttribute("tipo"):null);
-		
-		
-		if(e_iniziovig==null && e_finevig==null) return null;
-		
-		return new VigenzaEntity(node, e_iniziovig,e_finevig, status!=null?status.getNodeValue():null,"");
-		
-	}//metodo
+	
+		//		qui rappresenta la fonte dell'evento di fine
+		evento_fonte_Tag = evento_fe_Tag==null?null:doc.getElementById(evento_fe_Tag.getAttribute("fonte"));
+		rel=null;
+			
+		if (evento_fonte_Tag!=null && evento_fonte_Tag.getNodeType() == Node.ELEMENT_NODE) {
+			tag = evento_fonte_Tag.getNodeName();
+			id = evento_fonte_Tag.getAttributes().getNamedItem("id") != null ? evento_fonte_Tag.getAttributes().getNamedItem("id").getNodeValue() : null;
+			link = evento_fonte_Tag.getAttributes().getNamedItem("xlink:href") != null ? evento_fonte_Tag.getAttributes().getNamedItem("xlink:href")
+					.getNodeValue() : null;
+		    if(tag.equals("giurisprudenza")){
+		    	effetto=evento_fonte_Tag.getAttributes().getNamedItem("effetto") != null ? evento_fonte_Tag.getAttributes().getNamedItem("effetto").getNodeValue() : null;
+			    rel=new Relazione(tag, id, link,effetto);
+		    }else if(tag.equals("haallegato")||tag.equals("allegatodi")){
+		    	tipo=evento_fonte_Tag.getAttributes().getNamedItem("tipo") != null ? evento_fonte_Tag.getAttributes().getNamedItem("tipo").getNodeValue() : null;
+			    rel=new Relazione(tag, id, link,tipo);
+		    }else
+		    	rel=new Relazione(tag, id, link);
+		}
+		e_finevig=(finevig==null)?null:new Evento(finevig!=null?finevig.getNodeValue():"",
+				evento_fe_Tag!=null?evento_fe_Tag.getAttribute("data"):null,
+				rel,
+				evento_fe_Tag!=null?evento_fe_Tag.getAttribute("tipo"):null);
+	
+	
+	if(e_iniziovig==null && e_finevig==null) return null;
+	
+	return new VigenzaEntity(node, e_iniziovig,e_finevig, status!=null?status.getNodeValue():null,selectedText);
+	
+}//metodo
 
 	public String getSelectedText() {
 		return selectedText;
