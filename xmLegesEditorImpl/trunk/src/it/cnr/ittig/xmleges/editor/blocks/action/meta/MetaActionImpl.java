@@ -291,12 +291,9 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 					newRelazioni[i]=newEventi[i].getFonte();
 				}
 			}
+		
+			ciclodivita.setCiclodiVita(newEventi,newRelazioni);
 			
-
-			// SETTA SUL DOM:
-			ciclodivita.setEventi( newEventi);
-   		    ciclodivita.setRelazioni( newRelazioni);
-   		    
    		    if (ciclodivitaForm.getVigToUpdate()!=null && ciclodivitaForm.getVigToUpdate().length>0) {
    		    	VigenzaEntity[] elenco =ciclodivitaForm.getVigToUpdate();
    		    	for(int i=0; i<elenco.length;i++)
