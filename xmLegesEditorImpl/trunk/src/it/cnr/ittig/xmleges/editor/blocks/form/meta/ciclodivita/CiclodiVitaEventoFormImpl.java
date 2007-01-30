@@ -401,52 +401,52 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Loggabl
 					return;
 				}
 				
-				Vector eligibleVigs=new Vector();
-				if(eventiOnVigenze!=null){
-					for(int i=0; i<eventiOnVigenze.length;i++){
-						if(eventiOnVigenze[i].equals(e.getId())){
-							for(int j=0;j<vigenze.length;j++){
-								
-									if(vigenze[j].getEInizioVigore()!=null){
-										if(vigenze[j].getEInizioVigore().getId().equals(e.getId())){											
-												
-												eligibleVigs.add(vigenze[j]);
-												((VigenzaEntity)eligibleVigs.elementAt(eligibleVigs.size()-1)).setEInizioVigore(null);
-											}
-									}
-								
-								
-									if(vigenze[j].getEFineVigore()!=null){
-										if(vigenze[j].getEFineVigore().getId().equals(e.getId())){											
-												eligibleVigs.add(vigenze[j]);
-												((VigenzaEntity)eligibleVigs.elementAt(eligibleVigs.size()-1)).setEFineVigore(null);
-										}
-									}
-							}						
-						}
-						
-					}
-				}
-				String msg="";
-				if(eligibleVigs.size()>0){
-					vigToUpdate=new VigenzaEntity[eligibleVigs.size()];
-					eligibleVigs.copyInto(vigToUpdate);
-					msg="Evento "+e.getId()+" presente sulle seguenti vigenze: \n";
-					for(int i=0; i<vigToUpdate.length;i++){
-						msg+="nodo: "+vigToUpdate[i].getOnNode().toString()+"\n";
-												
-					}
-					msg+="Eliminare?";
-					if (!utilMsg.msgYesNo(msg)){
-						vigToUpdate=null;
-						return;
-					}
-					if(e.getFonte().getTagTipoRelazione().equals("originale")){				
-							 if(tagTipoRelazioneSottoFormDatiEvento.getItemCount()<6)
-									tagTipoRelazioneSottoFormDatiEvento.addItem("originale");
-					}	
-						
-				}else
+//				Vector eligibleVigs=new Vector();
+//				if(eventiOnVigenze!=null){
+//					for(int i=0; i<eventiOnVigenze.length;i++){
+//						if(eventiOnVigenze[i].equals(e.getId())){
+//							for(int j=0;j<vigenze.length;j++){
+//								
+//									if(vigenze[j].getEInizioVigore()!=null){
+//										if(vigenze[j].getEInizioVigore().getId().equals(e.getId())){											
+//												
+//												eligibleVigs.add(vigenze[j]);
+//												((VigenzaEntity)eligibleVigs.elementAt(eligibleVigs.size()-1)).setEInizioVigore(null);
+//											}
+//									}
+//								
+//								
+//									if(vigenze[j].getEFineVigore()!=null){
+//										if(vigenze[j].getEFineVigore().getId().equals(e.getId())){											
+//												eligibleVigs.add(vigenze[j]);
+//												((VigenzaEntity)eligibleVigs.elementAt(eligibleVigs.size()-1)).setEFineVigore(null);
+//										}
+//									}
+//							}						
+//						}
+//						
+//					}
+//				}
+//				String msg="";
+//				if(eligibleVigs.size()>0){
+//					vigToUpdate=new VigenzaEntity[eligibleVigs.size()];
+//					eligibleVigs.copyInto(vigToUpdate);
+//					msg="Evento "+e.getId()+" presente sulle seguenti vigenze: \n";
+//					for(int i=0; i<vigToUpdate.length;i++){
+//						msg+="nodo: "+vigToUpdate[i].getOnNode().toString()+"\n";
+//												
+//					}
+//					msg+="Eliminare?";
+//					if (!utilMsg.msgYesNo(msg)){
+//						vigToUpdate=null;
+//						return;
+//					}
+//					if(e.getFonte().getTagTipoRelazione().equals("originale")){				
+//							 if(tagTipoRelazioneSottoFormDatiEvento.getItemCount()<6)
+//									tagTipoRelazioneSottoFormDatiEvento.addItem("originale");
+//					}	
+//						
+//				}else
 					vigToUpdate=null;
 				
 
