@@ -103,7 +103,7 @@ public class ExtractTextImpl implements ExtractText, Loggable, Serviceable {
 		Node container = node.getParentNode(); // contenitore del testo
 		try {
 			EditTransaction tr = documentManager.beginEdit();
-			if (start == 0 && end <= node.getNodeValue().length()) { // all'inizio del testo
+			if (start == 0 && end < node.getNodeValue().length()) { // all'inizio del testo
 				if (null != container.getPreviousSibling() && UtilDom.isTextNode(container.getPreviousSibling())) {
 					container.getPreviousSibling().setNodeValue(container.getPreviousSibling().getNodeValue() + " " + node.getNodeValue().substring(start, end));
 					node.setNodeValue(node.getNodeValue().substring(end));
