@@ -79,20 +79,6 @@ public interface MetaDescrittoriForm extends Service {
 	 */
 	public void setAlias(String[] aliases);
 
-//	/**
-//	 * Imposta i periodi di vigenza del documento
-//	 * 
-//	 * @param vigenze vigenze del documento
-//	 */
-//	public void setVigenze(Vigenza[] vigenze);
-//
-//	/**
-//	 * Imposta le relazioni ulteriori (non legate alle vigenze) del documento
-//	 * 
-//	 * @param relazioni relazioni del documento
-//	 */
-//	public void setRelazioniUlteriori(Relazione[] relazioniUlteriori);
-
 	/**
 	 * Imposta la pubblicazione del documento
 	 * 
