@@ -44,6 +44,25 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	<center><b><xsl:value-of select="name()"/></b></center>
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 		<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+		<xsl:for-each select="*[name()='urn']">
+			<xsl:variable name="num">
+				<xsl:value-of select="position()" />
+			</xsl:variable>
+			<xsl:choose>
+				<xsl:when test="$num=1">
+					<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
+	   					<xsl:attribute name="style">
+	            			margin: 30 15 15 25;
+		            		color: red;
+					    </xsl:attribute>
+					    <xsl:value-of select="name()"/>
+					</xsl:element>	    
+				</xsl:when>
+			</xsl:choose>
+			<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
+				<font color="blue"><xsl:value-of select="@value"/></font>
+			</xsl:element>
+		</xsl:for-each>
 		<xsl:apply-templates select="*[name()='pubblicazione']" />
 		<xsl:apply-templates select="*[name()='altrepubblicazioni']" />
 		<xsl:for-each select="*[name()='alias']">
@@ -210,8 +229,5 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		</xsl:element>		
 	</xsl:for-each>
 </xsl:template>
-
-
-
 
 </xsl:transform>
