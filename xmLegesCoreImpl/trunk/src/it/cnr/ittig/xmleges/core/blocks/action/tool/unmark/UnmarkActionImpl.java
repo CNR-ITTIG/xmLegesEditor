@@ -69,15 +69,11 @@ public class UnmarkActionImpl implements UnmarkAction, EventManagerListener, Log
 
 	SelectionManager selectionManager;
 	
-	UtilRulesManager utilRulesManager;
-	
 	DocumentManager documentManager;
 	
 	ExtractText extractText;
 
 	Node activeNode;
-	
-	int start, end;
 	
 	String selectedText="";
 
@@ -93,7 +89,6 @@ public class UnmarkActionImpl implements UnmarkAction, EventManagerListener, Log
 		actionManager = (ActionManager) serviceManager.lookup(ActionManager.class);
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
-		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		extractText = (ExtractText) serviceManager.lookup(ExtractText.class);
 	}
@@ -112,24 +107,12 @@ public class UnmarkActionImpl implements UnmarkAction, EventManagerListener, Log
 		if (activeNode == null) {
 				unmarkaction.setEnabled(false);
 		} else {
-			logger.debug("START enableTesto");
+			logger.debug("START enableUnmark");
 			unmarkaction.setEnabled(extractText.canExtractText(activeNode,0,selectedText.length()));
-			logger.debug("END enableTesto");
+			logger.debug("END enableUnmark");
 		}
 	}
 
-//	public void enableActionTagTree() {
-//		if (activeNode == null) {			
-//			unmarkaction.setEnabled(false);
-//		} else {
-//			unmarkaction.setEnabled(true);
-//		}
-//	}
-//
-//	public void enableActionRemoveTag() {
-//		unmarkaction.setEnabled(true);
-//		
-//	}
 
 	// ////////////////////////////////////////// EventManagerListener Interface
 	public void manageEvent(EventObject event) {
@@ -138,97 +121,63 @@ public class UnmarkActionImpl implements UnmarkAction, EventManagerListener, Log
 			if (((SelectionChangedEvent) event).isActiveNodeChanged()) {
 				logger.debug("selectionChangedEvent: " + ((SelectionChangedEvent) event).toString());
 				activeNode = ((SelectionChangedEvent) event).getActiveNode();
-				start = ((SelectionChangedEvent) event).getTextSelectionStart();
-				end = ((SelectionChangedEvent) event).getTextSelectionEnd();
 				
-				if(activeNode.getNodeValue()==null){
-					if(UtilDom.getTextNode(activeNode)==null || UtilDom.getTextNode(activeNode).trim().equals(""))
-						selectedText=activeNode.getNodeName();
-					else
-						selectedText=UtilDom.getTextNode(activeNode);
-				}
-				else				
-					selectedText=activeNode.getNodeValue();
-				
-
 				if (activeNode != null) {
+					
 					logger.debug("active node" + activeNode + " node type " + activeNode.getNodeType());
-					if ((UtilDom.isTextNode(activeNode))) {
-//						if(activeNode.getParentNode().getNodeName().equals("rif"))
-							onlyTag = 0;
-//						else
-//							onlyTag = -1;
-						tree = 0;
+					
+					//   CERCA  SELECTEDTEXT  ////////////////////////////////////////
+					if(activeNode.getNodeValue()==null){
+						if(UtilDom.getTextNode(activeNode)==null || UtilDom.getTextNode(activeNode).trim().equals(""))
+							selectedText=activeNode.getNodeName();
+						else
+							selectedText=UtilDom.getTextNode(activeNode);
+					}
+					else				
+						selectedText=activeNode.getNodeValue();
+					//////////////////////////////////////////////////////////////////
+					
+					
+					//  ENABLE ACTION  /////////////////////////////////////////////////
+					if ((UtilDom.isTextNode(activeNode))) {     // AZIONE SU NODO TESTO
 						logger.debug("azione sul nodo testo");
 						enableAction();
-					} else {
-						if (activeNode.getFirstChild() == null) {
-							onlyTag = 1;
-							tree = 0;
-							logger.debug("azione sul nodo tag");
-//							enableActionRemoveTag();
-							unmarkaction.setEnabled(false);
-						} else {
-							onlyTag = 2;
-							tree = 1;
-							logger.debug("azione sul tree");
-//							enableActionTagTree();
-							unmarkaction.setEnabled(false);
-						}
-					}
-				} else {
+					} else 
+						unmarkaction.setEnabled(false);
+					// /////////////////////////////////////////////////////////////////
+					
+				} else 
 					unmarkaction.setEnabled(false);
-				}
 			}
 		} else if (event instanceof DocumentClosedEvent || event instanceof DocumentOpenedEvent) {
 			unmarkaction.setEnabled(false);
 		}
 	}
 
-	public void doUnmark() {
-		
-		if (onlyTag==-1){
-			System.out.println("azione su nodo test non rif");
-			return;
-		}
-		if (onlyTag==1){
-			System.out.println("azione su nodo vuoto");
-			return;
-		}
-		if(tree==1){
-			System.out.println("azione su altri nodi");
-			return;
-		}
-		
+	public void doUnmark() {	
 		Node modificato = activeNode;
-		if (onlyTag == 0) { // caso di azione su nodo testo
-			
-
-			//	appiattisce il testo				
-						
-			Node extractedNode;
-			extractedNode = extractText.extractText(modificato,0,selectedText.length());
-			try{
-				EditTransaction tr = documentManager.beginEdit();
-				if(extractedNode!=null && extractedNode.getPreviousSibling()!=null){
-					
+		//	appiattisce il testo				
+		Node extractedNode;
+		extractedNode = extractText.extractText(modificato,0,selectedText.length());
+		try{
+			EditTransaction tr = documentManager.beginEdit();
+			if(extractedNode!=null && extractedNode.getPreviousSibling()!=null){
+				if(extractedNode.getPreviousSibling().getChildNodes().getLength()==0)
 					extractedNode.getParentNode().removeChild(extractedNode.getPreviousSibling());
-					Node toSelect=extractedNode.getParentNode();
-					UtilDom.mergeTextNodes(extractedNode.getParentNode());
-					documentManager.commitEdit(tr);
-					selectionManager.setActiveNode(this, toSelect);
-					
-				}else{
-					documentManager.rollbackEdit(tr);
-				}
+				Node toSelect=extractedNode.getParentNode();
+				UtilDom.mergeTextNodes(extractedNode.getParentNode());
+				documentManager.commitEdit(tr);
+				selectionManager.setActiveNode(this, toSelect);
 				
-			}catch (DocumentManagerException ex) {
-				logger.error(ex.getMessage(), ex);
-				return;
-			
+			}else{
+				documentManager.rollbackEdit(tr);
 			}
-		} 
 			
+		}catch (DocumentManagerException ex) {
+			logger.error(ex.getMessage(), ex);
+			return;
+		
+		}					
 	}
 
 	public class doUnmarkAction extends AbstractAction {
