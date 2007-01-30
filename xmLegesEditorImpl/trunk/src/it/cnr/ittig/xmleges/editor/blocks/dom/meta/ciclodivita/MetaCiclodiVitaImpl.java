@@ -169,6 +169,20 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 		return relazioniUlteriori;
 	}
 	
+
+	public void setCiclodiVita(Evento[] eventi, Relazione[] relazioni) {
+		try {
+			EditTransaction tr = documentManager.beginEdit();
+			if (setDOMEventi(eventi) && setDOMRelazioni(relazioni)) {
+				//rinumerazione.aggiorna(documentManager.getDocumentAsDom());
+				documentManager.commitEdit(tr);
+			} else
+				documentManager.rollbackEdit(tr);
+			} catch (DocumentManagerException ex) {
+				logger.error(ex.toString() + " DocumentManagerException in CiclodiVita");
+			}
+	}
+
 	public void setRelazioni(Relazione[] relazioni) {
 		
 		try {
