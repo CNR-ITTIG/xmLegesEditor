@@ -14,11 +14,12 @@ import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.DocumentOpenedEvent;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
 import it.cnr.ittig.xmleges.core.services.dom.extracttext.ExtractText;
+import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
+import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
-import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 
 import java.awt.event.ActionEvent;
@@ -71,6 +72,8 @@ public class UnmarkActionImpl implements UnmarkAction, EventManagerListener, Log
 	
 	DocumentManager documentManager;
 	
+	DtdRulesManager dtdRulesManager;
+	
 	ExtractText extractText;
 
 	Node activeNode;
@@ -90,6 +93,7 @@ public class UnmarkActionImpl implements UnmarkAction, EventManagerListener, Log
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
+		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
 		extractText = (ExtractText) serviceManager.lookup(ExtractText.class);
 	}
 
@@ -162,8 +166,15 @@ public class UnmarkActionImpl implements UnmarkAction, EventManagerListener, Log
 		try{
 			EditTransaction tr = documentManager.beginEdit();
 			if(extractedNode!=null && extractedNode.getPreviousSibling()!=null){
-				if(extractedNode.getPreviousSibling().getChildNodes().getLength()==0)
-					extractedNode.getParentNode().removeChild(extractedNode.getPreviousSibling());
+				
+				try{
+					if(extractedNode.getPreviousSibling().getChildNodes().getLength()==0  &&
+					   dtdRulesManager.queryCanDelete(extractedNode.getParentNode(),extractedNode.getPreviousSibling()))
+							extractedNode.getParentNode().removeChild(extractedNode.getPreviousSibling());
+				}
+				catch(DtdRulesManagerException ex){	
+				}
+				
 				Node toSelect=extractedNode.getParentNode();
 				UtilDom.mergeTextNodes(extractedNode.getParentNode());
 				documentManager.commitEdit(tr);
