@@ -418,12 +418,14 @@
 	<!--  Template allegati                                       -->
 	<!--                                                          -->
 	<!-- ======================================================== -->
+	
 	<xsl:template match="//*[name()='annessi']">
 		<br/>ALLEGATI:
 		<xsl:apply-templates/>
 	</xsl:template>
 	<xsl:template match="//*[name()='testata']">
 			<hr/>
+			<a name="{../@id}"></a>
 			<xsl:apply-templates select="*[name()='denAnnesso'] | *[name()='titAnnesso']"/>
 			<br/>
 	</xsl:template>
@@ -434,9 +436,7 @@
 		<xsl:if test="following-sibling::*[name()='titAnnesso']"> - </xsl:if>
 	</xsl:template>
 	<xsl:template match="*[name()='titAnnesso']">
-		<a name="{../../@id}">
 			<xsl:apply-templates select=".//text()"/>
-		</a>
 	</xsl:template>
 	<!-- ======================================================== -->
 	<!--                                                          -->
