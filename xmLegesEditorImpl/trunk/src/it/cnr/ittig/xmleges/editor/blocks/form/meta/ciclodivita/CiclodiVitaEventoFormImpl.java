@@ -319,7 +319,7 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Loggabl
 		}
 
 		public Dimension getPreferredSize() {
-			return new Dimension(800, 150);
+			return new Dimension(800, 160);
 		}
 		
 		
