@@ -35,9 +35,20 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		    </style>
         </head>
 		<body>
-			<xsl:apply-templates select="//*[name()='mrif']|//*[name()='rif' and name(..)!='mrif']|//*[name()='irif' and name(..)!='mrif']" />
+			<xsl:apply-templates select="//*[name()='annesso']|//*[name()='mrif']|//*[name()='rif' and name(..)!='mrif']|//*[name()='irif' and name(..)!='mrif']" />
 		</body>
 	</html>
+</xsl:template>
+
+<xsl:template match="*[name()='annesso']" >
+	 <xsl:if test="descendant::*[name()='rif' or name()='mrif']">
+		<br/><hr/>
+		<center>
+			<b>
+				<xsl:value-of select="./*[name()='testata']/*[name()='denAnnesso']"/>
+			</b>
+		</center>		
+	</xsl:if>		
 </xsl:template>
 
 <xsl:template match="*[name()='mrif']">
