@@ -121,7 +121,7 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 
 	// ////////////////////////////////////////////// CiclodiVitaForm Interface
 	public boolean openForm() {
-		form.setSize(650, 500);
+		form.setSize(650, 400);
 		form.showDialog();
 		return form.isOk();
 	}
