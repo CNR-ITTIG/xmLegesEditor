@@ -110,7 +110,7 @@ public class AttogiacitatoFormImpl implements AttogiacitatoForm, Loggable, Servi
 	public void initialize() throws java.lang.Exception {
 		logger.debug("Inizializzazione Form Attogiacitato");
 		form.setMainComponent(this.getClass().getResourceAsStream("Attogiacitato.jfrm"));
-		//form.setSize(350, 250);
+		form.setSize(600, 350);
 		form.setName("editor.form.rinvii.attogiacitato");
 		
 		form.setHelpKey("help.contents.form.attogiacitato");
@@ -202,7 +202,6 @@ public class AttogiacitatoFormImpl implements AttogiacitatoForm, Loggable, Servi
 	}
 
 	public boolean openForm() {
-		//form.setSize(480, 350);
 		form.setDialogResizable(false);
 		form.addFormVerifier(this);
 		popolaElenco();
