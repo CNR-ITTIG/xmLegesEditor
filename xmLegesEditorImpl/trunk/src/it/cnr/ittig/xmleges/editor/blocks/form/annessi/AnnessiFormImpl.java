@@ -116,7 +116,7 @@ public class AnnessiFormImpl implements AnnessiForm, Loggable, Serviceable, Init
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws java.lang.Exception {
 		form.setMainComponent(this.getClass().getResourceAsStream("Annessi.jfrm"));
-		form.setSize(550, 250);
+		form.setSize(600, 250);
 		form.setName("editor.form.annessi");
 		
 		form.setHelpKey("help.contents.form.annessi");
