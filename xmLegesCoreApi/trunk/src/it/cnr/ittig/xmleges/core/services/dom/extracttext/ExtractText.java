@@ -23,8 +23,8 @@ import org.w3c.dom.Node;
 public interface ExtractText extends Service {
 
 	/**
-	 * Indica se &egrave; possibile inserire un commento come figlio di node o
-	 * spezzando ooportunamente il nodo se di tipo testo.
+	 * Indica se &egrave; possibile estrarre il testo selezionato fra start ed end 
+	 * dal nodo node ed appenderlo come fratello.
 	 * 
 	 * @param node node nel/dal quale creare il commento
 	 * @param start posizione di inizio
@@ -34,14 +34,25 @@ public interface ExtractText extends Service {
 	public boolean canExtractText(Node node, int start, int end);
 
 	/**
-	 * Inserisci un commento come figlio di node o spezzando ooportunamente il
-	 * nodo se di tipo testo.
+	 * Estrae il testo selezionato fra start ed end dal nodo node e lo appende come fratello.
+	 * Racchiuso in una transazione.
 	 * 
-	 * @param node node nel/dal quale creare il commento
+	 * @param node node dal quale estrarre il testo
 	 * @param start posizione di inizio
 	 * @param end posizione di fine
-	 * @return nodo creato
+	 * @return nodo estratto
 	 */
 	public Node extractText(Node node, int start, int end);
+	
+	/**
+	 * Estrae il testo selezionato fra start ed end dal nodo node e lo appende come fratello.
+	 * NON racchiuso in una transazione.
+	 * 
+	 * @param node node dal quale estrarre il testo
+	 * @param start posizione di inizio
+	 * @param end posizione di fine
+	 * @return nodo estratto
+	 */
+	public Node extractTextDOM(Node node, int start, int end);
 
 }
