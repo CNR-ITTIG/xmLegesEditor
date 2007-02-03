@@ -100,29 +100,54 @@ public class ExtractTextImpl implements ExtractText, Loggable, Serviceable {
 	public Node extractText(Node node, int start, int end) {
 		if (!canExtractText(node, start, end))
 			return null;
-		Node container = node.getParentNode(); // contenitore del testo
+		Node ret = null;
 		try {
 			EditTransaction tr = documentManager.beginEdit();
-			if (start == 0 && end < node.getNodeValue().length()) { // all'inizio del testo
-				if (null != container.getPreviousSibling() && UtilDom.isTextNode(container.getPreviousSibling())) {
-					container.getPreviousSibling().setNodeValue(container.getPreviousSibling().getNodeValue() + " " + node.getNodeValue().substring(start, end));
-					node.setNodeValue(node.getNodeValue().substring(end));
-					documentManager.commitEdit(tr);
-					return container.getPreviousSibling();
-				} else {
-					if (null != container.getParentNode()) {
-						Node newText = node.getOwnerDocument().createTextNode(node.getNodeValue().substring(start, end));
-						node.setNodeValue(node.getNodeValue().substring(end));
-						container.getParentNode().insertBefore(newText, container);
-						documentManager.commitEdit(tr);
-						return newText;
-					}
-				}
+			if((ret=extractTextDOM(node,start,end))!=null)
+				documentManager.commitEdit(tr);
+			else
 				documentManager.rollbackEdit(tr);
-				return null;
-			} else if (end == node.getNodeValue().length()) { // alla fine del testo
-				if (null != container.getNextSibling() && UtilDom.isTextNode(container.getNextSibling())) {
-					container.getNextSibling().setNodeValue(node.getNodeValue().substring(start, end) + " " + container.getNextSibling().getNodeValue());
+			return ret;
+		} catch (DocumentManagerException ex) {
+			logger.error(ex.getMessage(), ex);
+			return null;
+		}	
+	}
+	
+	public Node extractTextDOM(Node node, int start, int end) {
+		
+		if (!canExtractText(node, start, end))
+			return null;
+		
+		Node container = node.getParentNode(); 					// contenitore del testo
+		if (start == 0 && end < node.getNodeValue().length()) { // all'inizio del testo
+			if (null != container.getPreviousSibling() && UtilDom.isTextNode(container.getPreviousSibling())) {
+				container.getPreviousSibling().setNodeValue(container.getPreviousSibling().getNodeValue() + " " + node.getNodeValue().substring(start, end));
+				node.setNodeValue(node.getNodeValue().substring(end));
+				return container.getPreviousSibling();
+			} else {
+				if (null != container.getParentNode()) {
+					Node newText = node.getOwnerDocument().createTextNode(node.getNodeValue().substring(start, end));
+					node.setNodeValue(node.getNodeValue().substring(end));
+					container.getParentNode().insertBefore(newText, container);
+					return newText;
+				}
+			}
+			return null;
+		} else if (end == node.getNodeValue().length()) { // alla fine del testo
+			if (null != container.getNextSibling() && UtilDom.isTextNode(container.getNextSibling())) {
+				container.getNextSibling().setNodeValue(node.getNodeValue().substring(start, end) + " " + container.getNextSibling().getNodeValue());
+				try {
+					if (start == 0 && dtdRulesManager.queryCanDelete(container, node))
+						container.removeChild(node);
+				} catch (DtdRulesManagerException ex) {
+				}
+				if (start > 0)
+					node.setNodeValue(node.getNodeValue().substring(0, start));
+				return container.getNextSibling();
+			} else {
+				if (null != container.getParentNode()) {
+					Node newText = node.getOwnerDocument().createTextNode(node.getNodeValue().substring(start, end));
 					try {
 						if (start == 0 && dtdRulesManager.queryCanDelete(container, node))
 							container.removeChild(node);
@@ -130,33 +155,14 @@ public class ExtractTextImpl implements ExtractText, Loggable, Serviceable {
 					}
 					if (start > 0)
 						node.setNodeValue(node.getNodeValue().substring(0, start));
-					documentManager.commitEdit(tr);
-					return container.getNextSibling();
-				} else {
-					if (null != container.getParentNode()) {
-						Node newText = node.getOwnerDocument().createTextNode(node.getNodeValue().substring(start, end));
-						try {
-							if (start == 0 && dtdRulesManager.queryCanDelete(container, node))
-								container.removeChild(node);
-						} catch (DtdRulesManagerException ex) {
-						}
-						if (start > 0)
-							node.setNodeValue(node.getNodeValue().substring(0, start));
-						node.setNodeValue(node.getNodeValue().substring(0, start));
-						UtilDom.insertAfter(newText, container);
-						documentManager.commitEdit(tr);
-						return newText;
-					}
+					node.setNodeValue(node.getNodeValue().substring(0, start));
+					UtilDom.insertAfter(newText, container);
+					return newText;
 				}
-				documentManager.rollbackEdit(tr);
-				return null;
-			} else { // in mezzo al testo
-				logger.debug("manca testo selezionato in mezzo");
-				documentManager.rollbackEdit(tr);
-				return null;
 			}
-		} catch (DocumentManagerException ex) {
-			logger.error(ex.getMessage(), ex);
+			return null;
+		} else { // in mezzo al testo
+			logger.debug("manca testo selezionato in mezzo");
 			return null;
 		}
 	}
