@@ -20,7 +20,6 @@ import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.DocumentOpenedEvent;
 import it.cnr.ittig.xmleges.core.services.document.DocumentSavedEvent;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
-import it.cnr.ittig.xmleges.core.services.dom.extracttext.ExtractText;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.preference.PreferenceManager;
@@ -139,8 +138,6 @@ public class FileSaveActionImpl implements FileSaveAction, EventManagerListener,
 	String filterExt = "";
 
 	String lastSaved = null;
-
-	ExtractText extractText;
 	
 	SelectionManager selectionManager;
 	
