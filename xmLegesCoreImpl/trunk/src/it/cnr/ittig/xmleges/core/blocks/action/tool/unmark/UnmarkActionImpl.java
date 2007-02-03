@@ -162,9 +162,9 @@ public class UnmarkActionImpl implements UnmarkAction, EventManagerListener, Log
 		Node modificato = activeNode;
 		//	appiattisce il testo				
 		Node extractedNode;
-		extractedNode = extractText.extractText(modificato,0,selectedText.length());
 		try{
 			EditTransaction tr = documentManager.beginEdit();
+			extractedNode = extractText.extractTextDOM(modificato,0,selectedText.length());
 			if(extractedNode!=null && extractedNode.getPreviousSibling()!=null){
 				
 				try{
