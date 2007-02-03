@@ -137,7 +137,6 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 //		else				
 //			selectedText=node.getNodeValue();
 
-		
 		if(UtilDom.isTextNode(node)){
 			//solo nodi finali di testo (con matitina verde)
 			Element span;
@@ -155,7 +154,7 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 				if(vigenza.getEInizioVigore()==null && vigenza.getEFineVigore()==null && vigenza.getStatus()==null){
 					Node padre=span.getParentNode();
 					//	appiattisce lo span
-					extractText.extractText(node,0,selectedText.length());
+					extractText.extractTextDOM(node,0,selectedText.length());
 					padre.removeChild(span);
 					UtilDom.mergeTextNodes(padre);
 					return padre;
@@ -167,74 +166,72 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 					if(vigenza.getStatus()!=null && !vigenza.getStatus().equals("--"))
 						span.setAttribute("status", vigenza.getStatus());
 				}
-				else{//inizio obbligatorio, se non presente si elimina la vigenza e si esce				
-					span.removeAttribute("iniziovigore");
-					span.removeAttribute("finevigore");
-					span.removeAttribute("status");				
+				else{//inizio obbligatorio, se non presente si elimina la vigenza e si esce	
+					
+					try{
+						if(!dtdRulesManager.queryIsRequiredAttribute(span.getNodeName(),"iniziovigore"))
+						    span.removeAttribute("iniziovigore");
+						else 
+							UtilDom.setAttributeValue(span,"iniziovigore","");
+						if(!dtdRulesManager.queryIsRequiredAttribute(span.getNodeName(),"finevigore"))
+						    span.removeAttribute("finevigore");
+						else 
+							UtilDom.setAttributeValue(span,"finevigore","");
+						if(!dtdRulesManager.queryIsRequiredAttribute(span.getNodeName(),"status"))
+						    span.removeAttribute("status");
+						else 
+							UtilDom.setAttributeValue(span,"status","");
+					}
+					catch(DtdRulesManagerException ex){}
+					
 					Node padre=span.getParentNode();
 					//	appiattisce lo span
-					extractText.extractText(node,0,selectedText.length());
+					extractText.extractTextDOM(node,0,selectedText.length());
 					padre.removeChild(span);
 					UtilDom.mergeTextNodes(padre);
-//					 setta gli id degli span
-					rinumerazione.aggiorna(documentManager.getDocumentAsDom());
 					return padre;
 				}
 				if(vigenza.getEFineVigore()!=null)
 					UtilDom.setAttributeValue(span,"finevigore",vigenza.getEFineVigore().getId());				
-				else
-					span.removeAttribute("finevigore");
-            
-			// setta gli id degli span
-			rinumerazione.aggiorna(documentManager.getDocumentAsDom());
-			
-			return span;
-			
+				else{
+					try{
+						if(!dtdRulesManager.queryIsRequiredAttribute(span.getNodeName(),"finevigore"))
+						    span.removeAttribute("finevigore");
+						else 
+							UtilDom.setAttributeValue(span,"finevigore","");
+					}
+					catch(DtdRulesManagerException ex){}
+					}	
+			return span;		
 		}else{
 			//non è un nodo di testo
-			try {	
-				NamedNodeMap nnm = node.getAttributes();
-				EditTransaction tr = documentManager.beginEdit();
-					
-					// Assegnazione attributi di vigenza al nodo
-					if(vigenza.getEInizioVigore()!=null)
-						UtilDom.setAttributeValue(node, "iniziovigore", vigenza.getEInizioVigore().getId());
-					else{						
-						if(nnm.getNamedItem("iniziovigore")!=null)
-							nnm.removeNamedItem("iniziovigore");
-						if(nnm.getNamedItem("finevigore")!=null)
-							nnm.removeNamedItem("finevigore");
-						if(nnm.getNamedItem("status")!=null)
-							nnm.removeNamedItem("status");
-						documentManager.commitEdit(tr);
-						return node;
-					}
-					if(vigenza.getEFineVigore()!=null)
-						UtilDom.setAttributeValue(node, "finevigore", vigenza.getEFineVigore().getId());
-					else{						
-						if(nnm.getNamedItem("finevigore")!=null)
-							nnm.removeNamedItem("finevigore");
-					}	
-					
-					if(vigenza.getStatus()!=null)
-							UtilDom.setAttributeValue(node, "status", vigenza.getStatus());
-					else{
-						if(nnm.getNamedItem("status")!=null)
-							nnm.removeNamedItem("status");
-					}
-					
-
-					documentManager.commitEdit(tr);
-					return node;
-				
-			} catch (DocumentManagerException ex) {
-				logger.error(ex.getMessage(), ex);
-				return null;
+		    NamedNodeMap nnm = node.getAttributes();
+		    // Assegnazione attributi di vigenza al nodo
+			if(vigenza.getEInizioVigore()!=null)
+				UtilDom.setAttributeValue(node, "iniziovigore", vigenza.getEInizioVigore().getId());
+			else{						
+				if(nnm.getNamedItem("iniziovigore")!=null)
+					nnm.removeNamedItem("iniziovigore");
+				if(nnm.getNamedItem("finevigore")!=null)
+					nnm.removeNamedItem("finevigore");
+				if(nnm.getNamedItem("status")!=null)
+					nnm.removeNamedItem("status");
+				return node;
 			}
-
+			if(vigenza.getEFineVigore()!=null)
+				UtilDom.setAttributeValue(node, "finevigore", vigenza.getEFineVigore().getId());
+			else{						
+				if(nnm.getNamedItem("finevigore")!=null)
+					nnm.removeNamedItem("finevigore");
+			}	
+			if(vigenza.getStatus()!=null)
+					UtilDom.setAttributeValue(node, "status", vigenza.getStatus());
+			else{
+				if(nnm.getNamedItem("status")!=null)
+					nnm.removeNamedItem("status");
+			}
+			return node;		
 		}
-		
-
 	}
 
 
@@ -433,7 +430,7 @@ public VigenzaEntity getVigenza(Node node, int start, int end) {
 						if(node.getNodeName().equals("h:span")){
 //							appiattisce lo span
 							Node padre=node.getParentNode();				
-							extractText.extractText(node.getFirstChild(),0,UtilDom.getText(node.getFirstChild()).length());
+							extractText.extractTextDOM(node.getFirstChild(),0,UtilDom.getText(node.getFirstChild()).length());
 							padre.removeChild(node);
 							UtilDom.mergeTextNodes(padre);
 						}
