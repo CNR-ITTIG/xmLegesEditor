@@ -451,6 +451,7 @@ public class DocumentManagerImpl implements DocumentManager, EventListener, Logg
 				if (internal)
 					commitEdit(this.transaction);
 				if (logger.isDebugEnabled()) {
+					logger.debug("added event "+edits.get(edits.size()-1).toString());
 					logger.debug("lastUndo=" + lastUndo + " size=" + undos.size());
 					logger.debug("bubbling event: " + evt.getBubbles());
 					logger.debug("logger debug on DomTransaction: " + edits.toString());
