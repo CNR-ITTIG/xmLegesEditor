@@ -175,7 +175,7 @@ public class UnmarkActionImpl implements UnmarkAction, EventManagerListener, Log
 				catch(DtdRulesManagerException ex){	
 				}
 				
-				Node toSelect=extractedNode.getParentNode();
+    			Node toSelect=extractedNode.getParentNode();
 				UtilDom.mergeTextNodes(extractedNode.getParentNode());
 				documentManager.commitEdit(tr);
 				selectionManager.setActiveNode(this, toSelect);
