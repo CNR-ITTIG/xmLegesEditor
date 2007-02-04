@@ -210,10 +210,12 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 			for (int i = 0; i < edits.length; i++) {
 				if (logger.isDebugEnabled())
 					logger.debug(edits[i].toString());
-				Node node = edits[i].getNode();
+				Node node = edits[i].getNode();	
 				if (!UtilDom.isInSubtrees(node, updatedNode.iterator())) {
 					Node u = textPane.update(edits[i].getNode());
 					if (u == null) {
+					    if(logger.isDebugEnabled())
+					    	logger.debug("return null updating "+edits[i].toString()+" starting global update");
 						all = true;
 						break;
 					} else
