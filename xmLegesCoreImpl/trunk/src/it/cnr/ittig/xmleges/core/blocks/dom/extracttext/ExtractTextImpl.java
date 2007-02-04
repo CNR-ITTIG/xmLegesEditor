@@ -155,7 +155,6 @@ public class ExtractTextImpl implements ExtractText, Loggable, Serviceable {
 					}
 					if (start > 0)
 						node.setNodeValue(node.getNodeValue().substring(0, start));
-					node.setNodeValue(node.getNodeValue().substring(0, start));
 					UtilDom.insertAfter(newText, container);
 					return newText;
 				}
