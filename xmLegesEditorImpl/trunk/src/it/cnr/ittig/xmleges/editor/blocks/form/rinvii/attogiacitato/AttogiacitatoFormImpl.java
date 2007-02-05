@@ -21,6 +21,8 @@ import it.cnr.ittig.xmleges.editor.services.provvedimenti.Provvedimenti;
 import it.cnr.ittig.xmleges.editor.services.util.urn.NirUtilUrn;
 import it.cnr.ittig.xmleges.editor.services.util.urn.Urn;
 
+import java.text.ParseException;
+import java.util.Collections;
 import java.util.Vector;
 
 import javax.swing.DefaultListModel;
@@ -126,6 +128,47 @@ public class AttogiacitatoFormImpl implements AttogiacitatoForm, Loggable, Servi
 
 	private void preparaElenco(NamedNodeMap[] elenconodi, int index) {
 
+		urnVector = new Vector();
+		lmelenco = new DefaultListModel();
+		if (lmelenco.size() > 0)
+			lmelenco.removeAllElements();
+		elenco.setModel(lmelenco);
+		for (int i = 0; i < elenconodi.length; i++) {
+			try {
+				if ((elenconodi[i].item(index).getNodeValue().length() > 0) && (elenconodi[i].item(index).getNodeValue().length() > 3)
+						&& (!elenconodi[i].item(index).getNodeValue().substring(0, 4).equals("http"))
+						&& (!elenconodi[i].item(index).getNodeValue().equals("rif1")) && (!elenconodi[i].item(index).getNodeValue().equals("simple"))
+						&& (!elenconodi[i].item(index).getNodeValue().startsWith("#"))) { // elimino i rif interni?
+					String urn = elenconodi[i].item(index).getNodeValue();
+					String[] urnbase = urn.split("#");
+					Urn nuovaurn = new Urn();
+					nuovaurn.parseUrn(urn);
+					nuovaurn.setFormaTestuale(nirutilurn.getFormaTestuale(nuovaurn));
+					if(!urnVector.contains(nuovaurn))
+						urnVector.add(nuovaurn);
+					if ((urnbase.length > 1) && (!(urnbase[0].equals("")))) {
+						Urn nuovaurnbase = new Urn();
+						nuovaurnbase.parseUrn(urnbase[0]);
+						nuovaurnbase.setFormaTestuale(nirutilurn.getFormaTestuale(nuovaurnbase));
+						if(!urnVector.contains(nuovaurnbase))
+							urnVector.add(nuovaurnbase);
+					}
+				}
+			} catch (Exception e) {
+				// utilmsg.msgError(e.toString());
+			}
+		}
+		
+        Collections.sort(urnVector);
+        for(int i=0;i<urnVector.size();i++)
+        	lmelenco.addElement(((Urn)urnVector.get(i)).getFormaTestuale());
+        
+	}
+	
+	
+	// FIXME: dopo qualche test questo metodo si puo eliminare
+	private void preparaElencoOLD(NamedNodeMap[] elenconodi, int index) {
+
 		
 		urnVector = new Vector();
 		lmelenco = new DefaultListModel();
@@ -160,8 +203,10 @@ public class AttogiacitatoFormImpl implements AttogiacitatoForm, Loggable, Servi
 				// utilmsg.msgError(e.toString());
 			}
 		}
-
+		System.err.println("elenco NON ordinato; size: "+urnVector.size()); 
 	}
+
+	
 
 	private void popolaElenco() {
 		int indexofAttribute = 0;
@@ -198,7 +243,7 @@ public class AttogiacitatoFormImpl implements AttogiacitatoForm, Loggable, Servi
 	}
 
 	public String getUrn() {
-		return (urnVector.get(elenco.getSelectedIndex()).toString());
+		return (((Urn)urnVector.get(elenco.getSelectedIndex())).toString());
 	}
 
 	public boolean openForm() {
