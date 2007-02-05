@@ -561,14 +561,12 @@
 	<!--  Template allegati                                       -->
 	<!--                                                          -->
 	<!-- ======================================================== -->
-	
 	<xsl:template match="//*[name()='annessi']">
 		<br/>ALLEGATI:
 		<xsl:apply-templates/>
 	</xsl:template>
 	<xsl:template match="//*[name()='testata']">
 			<hr/>
-			<a name="{../@id}"></a>
 			<xsl:apply-templates select="*[name()='denAnnesso'] | *[name()='titAnnesso']"/>
 			<br/>
 	</xsl:template>
@@ -579,7 +577,9 @@
 		<xsl:if test="following-sibling::*[name()='titAnnesso']"> - </xsl:if>
 	</xsl:template>
 	<xsl:template match="*[name()='titAnnesso']">
+		<a name="{../../@id}">
 			<xsl:apply-templates select=".//text()"/>
+		</a>
 	</xsl:template>
 	<!-- ======================================================== -->
 	<!--                                                          -->
@@ -810,9 +810,9 @@
 						<xsl:when test="$data_fine&lt;number(number($datafine)+1)">
 							<xsl:attribute name="title"><xsl:copy-of select="$tooltip" /></xsl:attribute>
  							<xsl:choose>
-					  		  <xsl:when test="following-sibling::node()[1]//@iniziovigore=$fine_id">
+					  		  <xsl:when test="following-sibling::node()[1][@iniziovigore=$fine_id]">
 							  </xsl:when>
-					   		  <xsl:when test="preceding-sibling::node()[1]//@iniziovigore=$fine_id">
+					   		  <xsl:when test="preceding-sibling::node()[1][@iniziovigore=$fine_id]">
 					 		  </xsl:when>
 					 		  <xsl:otherwise>						 		  
 						 		<span style="color:#f00;"> [ ... ] <a href="#n{@id}" name="t{@id}"> <sup>{Vig.<xsl:value-of select="@id"/>}</sup></a></span>						 		
