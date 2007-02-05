@@ -8,9 +8,6 @@ import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.FormVerifier;
 import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextField;
 import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextFieldEditor;
-import it.cnr.ittig.xmleges.core.util.date.UtilDate;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
 import it.cnr.ittig.xmleges.editor.services.form.meta.urn.UrnDocumentoForm;
 import it.cnr.ittig.xmleges.editor.services.form.urn.UrnForm;
 import it.cnr.ittig.xmleges.editor.services.util.urn.Urn;
@@ -20,10 +17,6 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 /**
  * <h1>Implementazione del servizio
