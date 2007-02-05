@@ -25,8 +25,10 @@ import java.util.Vector;
  * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */
-public class Urn {
+public class Urn implements Comparable{
 
+	//TODO manca la gestione delle autorita' su piu' livelli
+	
 	Vector autorita = new Vector();
 
 	String provvedimento = ""; // specificazioni separata da ;
@@ -87,7 +89,7 @@ public class Urn {
 				throw new ParseException("Urn parse error", i);
 			} else if ((i == 1) && (!stUrn[i].equals("nir"))) {
 				throw new ParseException("Urn parse error", i);
-			} else if (i == 2) {
+			} else if (i == 2) {   // sezione   .....:autorita:....
 				String urnAutorita = stUrn[i];
 				String[] stAutorita = urnAutorita.split("\\+");
 				for (int k = 0; k < stAutorita.length; k++) {
@@ -356,7 +358,6 @@ public class Urn {
 		for (int i = 0; i < getAutorita().size(); i++)
 			autorita += getAutorita().get(i) + "+";
 		try {
-			// Tommaso Agnoloni: aggiunto questo controllo
 			if (autorita.length() > 0)
 				sb.append(autorita.substring(0, autorita.length() - 1));
 			sb.append(':');
@@ -533,4 +534,12 @@ public class Urn {
 		return descrizioneDecreto;
 	}
 
+	public int compareTo(Object o) {
+		return (this.toString().compareTo(o.toString()));
+	}
+
+	public boolean equals(Object o){
+		return (this.toString().equals(o.toString()));
+	}
+	
 }
