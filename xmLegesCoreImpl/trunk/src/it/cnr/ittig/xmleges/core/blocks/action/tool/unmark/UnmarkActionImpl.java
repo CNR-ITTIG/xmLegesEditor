@@ -158,13 +158,17 @@ public class UnmarkActionImpl implements UnmarkAction, EventManagerListener, Log
 		}
 	}
 
+	
 	public void doUnmark() {	
 		Node modificato = activeNode;
 		//	appiattisce il testo				
 		Node extractedNode;
+		extractedNode = extractText.extractText(modificato,0,selectedText.length());
 		try{
 			EditTransaction tr = documentManager.beginEdit();
-			extractedNode = extractText.extractTextDOM(modificato,0,selectedText.length());
+			// ripristinata la dipendenza da extractText con Transazione;
+			// due transazioni separate fra estrazione e cancellazionealtrimenti da'problemi sugli update
+			//extractedNode = extractText.extractTextDOM(modificato,0,selectedText.length());
 			if(extractedNode!=null && extractedNode.getPreviousSibling()!=null){
 				
 				try{
