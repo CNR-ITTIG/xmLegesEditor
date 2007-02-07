@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+ 
 <!--
 ============================================================================================
 File di trasformazione per gli elementi di testo.dtd.
