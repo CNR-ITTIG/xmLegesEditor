@@ -179,8 +179,6 @@
 					</xsl:when>
 				</xsl:choose>
 			</p>
-
-
 			<xsl:choose>
 				<xsl:when test="//*[name()='evento']/@data!=''">
 					<div id="timeline">
@@ -189,35 +187,44 @@
 				</xsl:when>
 			</xsl:choose>
 
-
-
-			<div class="intestazione">
-				<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='intestazione']" />
-				</div>
-				<hr/>
-				<div class="formulainiziale">
-		       	<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='formulainiziale']" />
-		       	</div>
-            	<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='articolato']/* | /*[name()='NIR']/*/*[name()='contenitore']|/*[name()='NIR']/*/*[name()='gerarchia']" />
-			  	<div class="formulafinale">
-	            	<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='formulafinale']" />
-   		       	</div>
- 			       	<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='conclusione']" /> 
-            	<div class="meta">
-            		<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='meta']" />
-            	</div>
-            	<div class="annessi">
-		            <xsl:apply-templates select="/*[name()='NIR']/*/*[name()='annessi']" />
-            	</div>
-            	
-
-	            	  <div>
-    	        		<xsl:call-template name="notemultivigente" /> 
-        	    	  </div>
-
+			<xsl:apply-templates select="/*[name()='NIR']/*" />
+           	<div>
+   	        	<xsl:call-template name="notemultivigente" /> 
+       	    </div>
 			</body>
 		</html>
 	</xsl:template>
+
+	<xsl:template match="/*[name()='NIR']/*">	
+		<a name="{@id}"></a>
+		<div>
+		<xsl:choose>
+			<xsl:when test="$datafine!=''">
+				<xsl:call-template name="vigenza"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="multivigenza"/>
+			</xsl:otherwise>
+		</xsl:choose>				
+		</div>
+	</xsl:template>		
+	
+
+	<xsl:template match="/*[name()='NIR']/*/*[name()='formulainiziale']">
+		<a name="{@id}"></a>
+		<div class="formulainiziale">
+		<xsl:choose>
+			<xsl:when test="$datafine!=''">
+				<xsl:call-template name="vigenza"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="multivigenza"/>
+			</xsl:otherwise>
+		</xsl:choose>				
+		</div>
+		<hr/>
+	</xsl:template>
+	
 
 
 	<!-- ======================================================== -->
@@ -225,10 +232,14 @@
 	<!--  Template intestazione e relazione                       -->
 	<!--                                                          -->
 	<!-- ======================================================== -->
-	<xsl:template match="nir:intestazione">
-		<xsl:apply-templates/>
-	<xsl:apply-templates/>
+	
+	<xsl:template match="/*[name()='NIR']/*/*[name()='intestazione']">
+		<div class="intestazione">
+			<xsl:apply-templates/>
+		</div>
+		<hr/>
 	</xsl:template>
+	
 	<xsl:template match="nir:emanante">
 		<div class="title">
 			<xsl:apply-templates/>
@@ -236,10 +247,19 @@
 	</xsl:template>
 
 	<xsl:template match="//*[name()='titoloDoc']">
-				<div class="titleLegge">
-					<xsl:apply-templates/>
-				</div>
-	</xsl:template>	
+		<a name="{@id}"></a>
+		<div class="titleLegge">
+		<xsl:choose>
+			<xsl:when test="$datafine!=''">
+				<xsl:call-template name="vigenza"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="multivigenza"/>
+			</xsl:otherwise>
+		</xsl:choose>				
+		</div>
+	</xsl:template>
+	
 	
 	<xsl:template match="//*[name()='preambolo']">
 				<div class="preambolo">
@@ -253,10 +273,21 @@
 	<!-- ======================================================== -->
 	
 	<xsl:template match="//*[name()='articolato'] | //*[name()='contenitore']">
+		<a name="{@id}"></a>
+		<div>
 		<table border="0" cellpadding="0" cellspacing="10" width="100%">			
-					<xsl:apply-templates/>
+		<xsl:choose>
+			<xsl:when test="$datafine!=''">
+				<xsl:call-template name="vigenza"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="multivigenza"/>
+			</xsl:otherwise>
+		</xsl:choose>				
 		</table>
+		</div>
 	</xsl:template>
+
 	<!-- ========================== 	LIBRO		============================== -->
 	<xsl:template match="//*[name()='libro']">
 		<a name="{@id}"></a>
@@ -525,10 +556,18 @@
 	<!--                                                          -->
 	<!-- ======================================================== -->
 	<xsl:template match="//*[name()='formulafinale']">
+		<a name="{@id}"></a>
 		<div class="formulafinale">
-			<hr />
-			<xsl:apply-templates/>
-		</div>
+		<hr/>
+		<xsl:choose>
+			<xsl:when test="$datafine!=''">
+				<xsl:call-template name="vigenza"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="multivigenza"/>
+			</xsl:otherwise>
+		</xsl:choose>				
+		</div>		
 	</xsl:template>
 	
 	<xsl:template match="//*[name()='conclusione']">
@@ -548,12 +587,28 @@
 	</xsl:template>
 	<xsl:template match="//*[name()='sottoscrivente']">
 		<li class="li">
-			<xsl:apply-templates/>
+			<!--	xsl:apply-templates/	-->
+			<xsl:choose>
+			  <xsl:when test="$datafine!=''">
+				<xsl:call-template name="vigenza"/>
+			  </xsl:when>
+			  <xsl:otherwise>
+				<xsl:call-template name="multivigenza"/>
+			  </xsl:otherwise>
+			</xsl:choose>			
 		</li>
 	</xsl:template>
 	<xsl:template match="//*[name()='visto']">
 		<p class="visto">
-			<xsl:apply-templates/>
+			<!--	xsl:apply-templates/	-->
+			<xsl:choose>
+			  <xsl:when test="$datafine!=''">
+				<xsl:call-template name="vigenza"/>
+			  </xsl:when>
+			  <xsl:otherwise>
+				<xsl:call-template name="multivigenza"/>
+			  </xsl:otherwise>
+			</xsl:choose>	
 		</p>
 	</xsl:template>
 	<!-- ======================================================== -->
@@ -612,7 +667,7 @@
 		<xsl:apply-templates />
 	</xsl:template>
 	<xsl:template match="nir:confronto"/>
-
+	
 	<!-- ======================================================== -->
 	<!--                                                          -->
 	<!--  Template generici                                       -->
@@ -654,6 +709,24 @@
 				</xsl:otherwise>
 			</xsl:choose>				
 		</span>
+	</xsl:template>	
+
+	<!-- ======================================================== -->
+	<!--                                                          -->
+	<!--  template p 				                              -->
+	<!--                                                          -->
+	<!-- ======================================================== -->
+	<xsl:template match="//*[name()='h:p']">
+		<p>
+			<xsl:choose>
+				<xsl:when test="$datafine!=''">
+					<xsl:call-template name="vigenza"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:call-template name="multivigenza"/>
+				</xsl:otherwise>
+			</xsl:choose>				
+		</p>
 	</xsl:template>	
 
 	<!-- ======================================================== -->
@@ -1008,4 +1081,4 @@
  
 
 </xsl:stylesheet>
-				
+							

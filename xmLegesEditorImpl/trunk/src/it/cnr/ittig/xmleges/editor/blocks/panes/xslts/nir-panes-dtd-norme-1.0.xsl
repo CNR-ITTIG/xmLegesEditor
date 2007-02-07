@@ -31,6 +31,16 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 
 
+	<xsl:template match="*[name()='NIR']/*">	
+		<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
+    	<!--	xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+        <xsl:apply-templates /	-->
+        <xsl:call-template name="vigenza"/>
+    </xsl:element>
+		
+	</xsl:template>	
+	
+	
 <!-- ================================================================================ -->
 <!-- =============================================================== INTESTAZIONE === -->
 <!-- ================================================================================ -->
@@ -38,6 +48,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 		<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 		<xsl:apply-templates />
+        <!--	xsl:call-template name="vigenza"/	-->	
 	</xsl:element>
 </xsl:template>
 
@@ -56,8 +67,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 			font-style: bold;
 			margin: 15 0 15 0;
 		</xsl:attribute>
-		<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-		<xsl:apply-templates />
+		<!--	xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+		<xsl:apply-templates /	-->
+        <xsl:call-template name="vigenza"/>	
 	</xsl:element>
 </xsl:template>
 
@@ -75,8 +87,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <!-- ================================================================================ -->
 <xsl:template match="*[name()='formulainiziale' or name()='preambolo']">
         <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-        	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-            <xsl:apply-templates />
+        	<!--	xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+            <xsl:apply-templates /	-->
+        	<xsl:call-template name="vigenza"/>	
         </xsl:element>
 </xsl:template>
 
@@ -88,8 +101,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <xsl:template match="*[name()='formulafinale']">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
     	<xsl:attribute name="style">margin: 30 5 5 5;</xsl:attribute>
-    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-        <xsl:apply-templates />
+    	<!--	xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+        <xsl:apply-templates /	-->
+        <xsl:call-template name="vigenza"/>
     </xsl:element>
 </xsl:template>
 
@@ -122,8 +136,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     	    text-align: center;
     	    margin-top: 40 0 5 0;
         </xsl:attribute>
-    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-    	<xsl:apply-templates />
+    	<!--	xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+    	<xsl:apply-templates /	-->
+    	<xsl:call-template name="vigenza"/>
     </xsl:element>
 </xsl:template>
 
@@ -199,6 +214,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     	<xsl:attribute name="style">margin: 20 30;</xsl:attribute>
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
         <xsl:apply-templates />
+        <!--	xsl:call-template name="vigenza"/	-->
     </xsl:element>
 </xsl:template>
 
@@ -213,16 +229,18 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <xsl:template match="*[name()='sottoscrivente']">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
     	<xsl:attribute name="style">margin: 5 0 0 0;</xsl:attribute>
-    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-        <xsl:apply-templates />
+    	<!--	xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+        <xsl:apply-templates /	-->
+        <xsl:call-template name="vigenza"/>
     </xsl:element>
 </xsl:template>
 
 <xsl:template match="*[name()='visto']">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
     	<xsl:attribute name="style">font-style: italic; margin: 20 0</xsl:attribute>
-    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-        <xsl:apply-templates />
+    	<!--	xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+        <xsl:apply-templates /	-->
+        <xsl:call-template name="vigenza"/>
     </xsl:element>
 </xsl:template>
 

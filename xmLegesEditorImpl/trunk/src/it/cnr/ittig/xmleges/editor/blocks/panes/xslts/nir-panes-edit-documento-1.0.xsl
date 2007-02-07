@@ -40,12 +40,17 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
         </head>
         <body>
             <xsl:apply-templates select="/*[name()='NIR']/*/*[name()='meta']/*[name()='confronto']" />
-            <xsl:apply-templates select="/*[name()='NIR']/*/*[name()='intestazione']" />
+
+            <!--	xsl:apply-templates select="/*[name()='NIR']/*/*[name()='intestazione']" />
             <xsl:apply-templates select="/*[name()='NIR']/*/*[name()='formulainiziale']" />
             <xsl:apply-templates select="/*[name()='NIR']/*/*[name()='relazione']"/>
             <xsl:apply-templates select="/*[name()='NIR']/*/*[name()='articolato']|/*[name()='NIR']/*/*[name()='contenitore']|/*[name()='NIR']/*/*[name()='gerarchia']" />
             <xsl:apply-templates select="/*[name()='NIR']/*/*[name()='formulafinale']" />
-            <xsl:apply-templates select="/*[name()='NIR']/*/*[name()='conclusione']" />
+            <xsl:apply-templates select="/*[name()='NIR']/*/*[name()='conclusione']" /	-->
+            
+            <xsl:apply-templates select="/*[name()='NIR']/*" />
+            
+            
         </body>
     </html>
 </xsl:template>
