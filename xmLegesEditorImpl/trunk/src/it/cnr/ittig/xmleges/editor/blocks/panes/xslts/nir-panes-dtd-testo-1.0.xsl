@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
- 
+
 <!--
 ============================================================================================
 File di trasformazione per gli elementi di testo.dtd.
@@ -36,7 +36,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <!-- ================================================================================ -->
 
 <xsl:template match="h:br">
-	<font color="blue" weight="bold">ï¿½</font><br/>
+	<font color="blue" weight="bold">¶</font><br/>
 </xsl:template>
 
 <xsl:template match="h:hr">
@@ -122,7 +122,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 <xsl:template match="h:p">
     <xsl:element name="p" use-attribute-sets="XsltMapperSetClass">
-	    <font color="blue" weight="bold">ï¿½</font>
+	    <font color="blue" weight="bold">§</font>
 
     	<!--	xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
         <xsl:apply-templates /	-->
