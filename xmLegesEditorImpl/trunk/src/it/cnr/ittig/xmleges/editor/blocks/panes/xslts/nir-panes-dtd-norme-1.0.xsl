@@ -85,12 +85,18 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <!-- ================================================================================ -->
 <!-- =========================================================== FORMULA INIZIALE === -->
 <!-- ================================================================================ -->
-<xsl:template match="*[name()='formulainiziale' or name()='preambolo']">
+<xsl:template match="*[name()='formulainiziale']">
         <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
         	<!--	xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
             <xsl:apply-templates /	-->
         	<xsl:call-template name="vigenza"/>	
         </xsl:element>
+</xsl:template>
+
+<xsl:template match="*[name()='preambolo']">
+    <xsl:element name="p" use-attribute-sets="XsltMapperSetClass">
+        <xsl:call-template name="vigenza"/>	
+    </xsl:element>
 </xsl:template>
 
 

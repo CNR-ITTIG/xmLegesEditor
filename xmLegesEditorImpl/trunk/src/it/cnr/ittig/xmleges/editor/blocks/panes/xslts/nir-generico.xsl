@@ -120,9 +120,17 @@
 	
 	
 	<xsl:template match="//*[name()='preambolo']">
-				<div class="preambolo">
-					<xsl:apply-templates/>
-				</div>
+		<a name="{@id}"></a>
+		<div class="preambolo">
+		<xsl:choose>
+			<xsl:when test="$datafine!=''">
+				<xsl:call-template name="vigenza"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="multivigenza"/>
+			</xsl:otherwise>
+		</xsl:choose>				
+		</div>
 	</xsl:template>	
 	<!-- ======================================================== -->
 	<!--                                                          -->
