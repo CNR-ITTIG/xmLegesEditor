@@ -5,7 +5,7 @@
 File di composizione dell'applicazione xmLegesEditor.
 
 author       : Mirco Taddei
-version      : 2.0 rc4
+version      : 2.0 rc5
 copyright (C): 2004 - 2005
                Istituto di Teoria e Tecniche dell'Informazione Giuridica (ITTIG)
                Consiglio Nazionale delle Ricerche - Italy
@@ -1216,8 +1216,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 <element name="sezione" />
                 <element name="articolo" />
                 <element name="comma" />
-                <element name="lettera" />
-                <element name="numero" />
+                <!--element name="lettera" /-->
+                <!--element name="numero" /-->
                 <element name="rubrica" />
                 <element name="anness.*" />
                 <element name="ndr" />
