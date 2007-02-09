@@ -138,16 +138,15 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 //			selectedText=node.getNodeValue();
 
 		if(UtilDom.isTextNode(node)){
-			//solo nodi finali di testo (con matitina verde)
+			// solo nodi finali di testo (con matitina verde)
 			Element span;
 			if(node.getNodeValue().equals(selectedText) || (start==-1 && end==-1)){
 				//il testo selezionato coincide con tutto il nodo
 				span = (Element) node.getParentNode();
 				selectedText=node.getNodeValue();
 			}
-
-			else{
-//				il testo selezionato è una sottoparte del nodo di testo (va creato lo span)				
+			else{        // racchiude il testo in uno span e lo riestrae ????
+            // il testo selezionato è una sottoparte del nodo di testo (va creato lo span)				
 				
 				//qui crea uno span dal testo selezionato 
 				span = (Element) utilRulesManager.encloseTextInTag(node, start, end,"h:span","h");
@@ -159,51 +158,57 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 					UtilDom.mergeTextNodes(padre);
 					return padre;
 				}
+				
 			}
-				// Assegnazione attributi di vigenza allo span creato
-				if(vigenza.getEInizioVigore()!=null){
-					UtilDom.setAttributeValue(span,"iniziovigore",vigenza.getEInizioVigore().getId());
-					if(vigenza.getStatus()!=null && !vigenza.getStatus().equals("--"))
-						span.setAttribute("status", vigenza.getStatus());
+			
+//			 Assegnazione attributi di vigenza allo span creato
+			if(vigenza.getEInizioVigore()!=null){
+				UtilDom.setAttributeValue(span,"iniziovigore",vigenza.getEInizioVigore().getId());
+				if(vigenza.getStatus()!=null && !vigenza.getStatus().equals("--"))
+					span.setAttribute("status", vigenza.getStatus());
+			}
+			else{//inizio obbligatorio, se non presente si elimina la vigenza e si esce	
+				
+			// ?   A CHE SERVONO QUESTE OPERAZIONI SE ELIMINO LO SPAN ? 	
+				
+//				try{
+//					if(!dtdRulesManager.queryIsRequiredAttribute(span.getNodeName(),"iniziovigore"))
+//					    span.removeAttribute("iniziovigore");
+//					else 
+//						UtilDom.setAttributeValue(span,"iniziovigore","");
+//					if(!dtdRulesManager.queryIsRequiredAttribute(span.getNodeName(),"finevigore"))
+//					    span.removeAttribute("finevigore");
+//					else 
+//						UtilDom.setAttributeValue(span,"finevigore","");
+//					if(!dtdRulesManager.queryIsRequiredAttribute(span.getNodeName(),"status"))
+//					    span.removeAttribute("status");
+//					else 
+//						UtilDom.setAttributeValue(span,"status","");
+//				}
+//				catch(DtdRulesManagerException ex){}
+				
+				Node padre=span.getParentNode();
+				//	appiattisce lo span
+				extractText.extractTextDOM(node,0,selectedText.length());
+				padre.removeChild(span);
+				UtilDom.mergeTextNodes(padre);
+				return padre;
+			}
+			
+			if(vigenza.getEFineVigore()!=null)
+				UtilDom.setAttributeValue(span,"finevigore",vigenza.getEFineVigore().getId());				
+			else{
+				try{
+					if(!dtdRulesManager.queryIsRequiredAttribute(span.getNodeName(),"finevigore"))
+					    span.removeAttribute("finevigore");
+					else 
+						UtilDom.setAttributeValue(span,"finevigore","");
 				}
-				else{//inizio obbligatorio, se non presente si elimina la vigenza e si esce	
-					
-					try{
-						if(!dtdRulesManager.queryIsRequiredAttribute(span.getNodeName(),"iniziovigore"))
-						    span.removeAttribute("iniziovigore");
-						else 
-							UtilDom.setAttributeValue(span,"iniziovigore","");
-						if(!dtdRulesManager.queryIsRequiredAttribute(span.getNodeName(),"finevigore"))
-						    span.removeAttribute("finevigore");
-						else 
-							UtilDom.setAttributeValue(span,"finevigore","");
-						if(!dtdRulesManager.queryIsRequiredAttribute(span.getNodeName(),"status"))
-						    span.removeAttribute("status");
-						else 
-							UtilDom.setAttributeValue(span,"status","");
-					}
-					catch(DtdRulesManagerException ex){}
-					
-					Node padre=span.getParentNode();
-					//	appiattisce lo span
-					extractText.extractTextDOM(node,0,selectedText.length());
-					padre.removeChild(span);
-					UtilDom.mergeTextNodes(padre);
-					return padre;
-				}
-				if(vigenza.getEFineVigore()!=null)
-					UtilDom.setAttributeValue(span,"finevigore",vigenza.getEFineVigore().getId());				
-				else{
-					try{
-						if(!dtdRulesManager.queryIsRequiredAttribute(span.getNodeName(),"finevigore"))
-						    span.removeAttribute("finevigore");
-						else 
-							UtilDom.setAttributeValue(span,"finevigore","");
-					}
-					catch(DtdRulesManagerException ex){}
-					}	
-			return span;		
-		}else{
+				catch(DtdRulesManagerException ex){}
+			}	
+		    return span;
+		
+		}else{   
 			//non è un nodo di testo
 		    NamedNodeMap nnm = node.getAttributes();
 		    // Assegnazione attributi di vigenza al nodo
