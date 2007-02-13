@@ -55,6 +55,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     </html>
 </xsl:template>
 
+<xsl:template match="/*[name()='NIR']/*/*[name()='annessi']" />
+
 <xsl:template match="*[name()='rif']">
 	<font color="blue"><u>
     <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
