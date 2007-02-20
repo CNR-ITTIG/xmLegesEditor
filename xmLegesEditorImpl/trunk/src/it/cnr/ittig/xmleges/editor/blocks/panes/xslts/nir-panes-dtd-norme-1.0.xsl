@@ -463,10 +463,12 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		<xsl:value-of select="@finevigore"/>
 	</xsl:variable>		
 	<xsl:variable name="data_inizio">
-		<xsl:value-of select="//*[name()='evento'][@id=$inizio_id]/@data"/>
+		<!--	xsl:value-of select="//*[name()='evento'][@id=$inizio_id]/@data"/	-->
+		<xsl:value-of select="id($inizio_id)/@data"/>
 	</xsl:variable>
 	<xsl:variable name="data_fine">
-		<xsl:value-of select="//*[name()='evento'][@id=$fine_id]/@data"/>
+		<!--	xsl:value-of select="//*[name()='evento'][@id=$fine_id]/@data"/	-->
+		<xsl:value-of select="id($fine_id)/@data"/>
 	</xsl:variable>	
 	
 	<xsl:choose>

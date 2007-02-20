@@ -16,6 +16,14 @@
 	<xsl:param name="datafine"></xsl:param>
 	<xsl:param name="encoding"/>
 	
+
+
+	<!--	Associo id eventi con date	(prova per ora fallita)	-->
+	<!--	xsl:key name="dateventi" match="evento" use="@id"/	-->
+
+
+
+		
 	<xsl:template match="/">
 		<html>
 			<head>
@@ -753,11 +761,26 @@
 		<xsl:variable name="fine_id">
 			<xsl:value-of select="@finevigore"/>
 		</xsl:variable>		
+		
 		<xsl:variable name="data_inizio">
-			<xsl:value-of select="//*[name()='evento'][@id=$inizio_id]/@data"/>
+
+			<!--	xsl:value-of select="//*[name()='evento'][@id=$inizio_id]/@data"/	-->
+			<!--	xsl:for-each select="key('dateventi',$inizio_id)">
+				<xsl:value-of select="@data"/>
+			</xsl:for-each	-->
+			<!--	xsl:value-of select="key('dateventi',$inizio_id)" /	-->
+			<xsl:value-of select="id($inizio_id)/@data"/>			
+			
 		</xsl:variable>
 		<xsl:variable name="data_fine">
-			<xsl:value-of select="//*[name()='evento'][@id=$fine_id]/@data"/>
+		
+			<!--	xsl:value-of select="//*[name()='evento'][@id=$fine_id]/@data"/		-->
+			<!--	xsl:for-each select="key('dateventi',$fine_id)">
+				<xsl:value-of select="@data"/>
+			</xsl:for-each	-->
+			<!--	xsl:value-of select="key('dateventi',$fine_id)" /	-->
+			<xsl:value-of select="id($fine_id)/@data"/>
+			
 		</xsl:variable>
 		<xsl:variable name="tooltip">
 				<xsl:choose>
@@ -862,10 +885,12 @@
 			<xsl:value-of select="//*[name()='evento'][@fonte='ro1']/@data"/>
 		</xsl:variable>
 		<xsl:variable name="data_inizio">
-			<xsl:value-of select="//*[name()='evento'][@id=$inizio_id]/@data"/>
+			<!--	xsl:value-of select="//*[name()='evento'][@id=$inizio_id]/@data"/	-->
+			<xsl:value-of select="id($inizio_id)/@data"/>
 		</xsl:variable>
 		<xsl:variable name="data_fine">
-			<xsl:value-of select="//*[name()='evento'][@id=$fine_id]/@data"/>
+			<!--	xsl:value-of select="//*[name()='evento'][@id=$fine_id]/@data"/	-->
+			<xsl:value-of select="id($fine_id)/@data"/>
 		</xsl:variable>
 		<xsl:variable name="tooltip">
 				<xsl:choose>
@@ -990,10 +1015,12 @@
 			<xsl:value-of select="@finevigore"/>
 		</xsl:variable>		
 		<xsl:variable name="data_inizio">
-			<xsl:value-of select="//*[name()='evento'][@id=$inizio_id]/@data"/>
+			<!--	xsl:value-of select="//*[name()='evento'][@id=$inizio_id]/@data"/	-->
+			<xsl:value-of select="id($inizio_id)/@data"/>
 		</xsl:variable>
 		<xsl:variable name="data_fine">
-			<xsl:value-of select="//*[name()='evento'][@id=$fine_id]/@data"/>
+			<!--	xsl:value-of select="//*[name()='evento'][@id=$fine_id]/@data"/	-->
+			<xsl:value-of select="id($fine_id)/@data"/>
 		</xsl:variable>
 		<!-- numero che si incrementa ad ogni match -->
 		<xsl:variable name="num">
@@ -1003,16 +1030,19 @@
 		<xsl:variable name="fonte">
 			<xsl:choose>
 				<xsl:when test="$fine_id!=''">
-					<xsl:value-of select="//*[name()='eventi']/*[@id=$fine_id]/@fonte"/>
+					<!--	xsl:value-of select="//*[name()='eventi']/*[@id=$fine_id]/@fonte"/	-->
+					<xsl:value-of select="id($fine_id)/@fonte"/>
 				</xsl:when>
 				<xsl:otherwise>
-					<xsl:value-of select="//*[name()='eventi']/*[@id=$inizio_id]/@fonte"/>
+					<!--	xsl:value-of select="//*[name()='eventi']/*[@id=$inizio_id]/@fonte"/	-->
+					<xsl:value-of select="id($inizio_id)/@fonte"/>
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
 		
 		<xsl:variable name="urn">
-			<xsl:value-of select="//*[name()='relazioni']/*[@id=$fonte]/@xlink:href"/>
+			<!--	xsl:value-of select="//*[name()='relazioni']/*[@id=$fonte]/@xlink:href"/	-->
+			<xsl:value-of select="id($fonte)/@xlink:href"/>
 		</xsl:variable>
 
 		<!-- la prima volta che avviene unmatch scrive il titolo	-->
