@@ -497,13 +497,22 @@
 	
 	<xsl:template match="//*[name()='virgolette']">
 		<xsl:param name="pos">none</xsl:param>
-		<p>
-			<xsl:text>"</xsl:text>
-			<xsl:apply-templates>
-				<xsl:with-param name="pos" select="$pos"/>
-			</xsl:apply-templates>
-			<xsl:text>"</xsl:text>
-		</p>
+		<span>
+			<!--	xsl:text>"</xsl:text	-->
+			<xsl:choose>
+				<xsl:when test="$datafine!=''">
+					<xsl:call-template name="vigenza">
+						<xsl:with-param name="pos" select="$pos"/>
+					</xsl:call-template>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:call-template name="multivigenza">
+						<xsl:with-param name="pos" select="$pos"/>
+					</xsl:call-template>
+				</xsl:otherwise>
+			</xsl:choose>	
+			<!--	xsl:text>"</xsl:text	-->
+		</span>
 	</xsl:template>
 	<xsl:template match="//*[name()='nome']">
 		<span title="Nome: {.}">

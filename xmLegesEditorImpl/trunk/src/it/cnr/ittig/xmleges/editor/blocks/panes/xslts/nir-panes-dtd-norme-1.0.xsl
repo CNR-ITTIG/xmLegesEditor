@@ -390,7 +390,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 			<xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
 		    	<font bgcolor="#FFEE99">
 		    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-	    		<xsl:apply-templates />
+	    		<!--	xsl:apply-templates /	-->
+   		        <xsl:call-template name="vigenza"/>	
 	    		</font>
 		    	</xsl:element>
 			</i>
