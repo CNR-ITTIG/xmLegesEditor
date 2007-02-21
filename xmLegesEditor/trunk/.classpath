@@ -6,6 +6,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/xmLegesCoreImpl"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/xmLegesEditorApi"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/xmLegesEditorImpl"/>
-	<classpathentry kind="lib" path="lib/plastic-1.2.0.jar"/>
+	<classpathentry kind="lib" path="lib/looks-2.1.2.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>
