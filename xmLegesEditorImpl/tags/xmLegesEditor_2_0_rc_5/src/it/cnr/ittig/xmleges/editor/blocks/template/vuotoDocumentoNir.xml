@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-15"?>
+
+%DOCTYPE%
+
+<NIR xmlns:xlink="http://www.w3.org/1999/xlink" 
+	  xmlns:h="http://www.w3.org/HTML/1998/html4">
+<DocumentoNIR nome="xxxxx">
+	<meta>
+		<descrittori>
+		<pubblicazione norm="" num="" tipo="GU" />
+		<entratainvigore norm="" />
+		<redazione id="red1" nome="" norm="" />
+	    <urn value="urn:nir:autorita:provvedimento:aaaa-mm-gg;nnn"/>
+		</descrittori>
+	</meta>
+	<intestazione>
+		<emanante/>
+		<tipoDoc/>
+		<dataDoc norm=""/>, n. 
+		<numDoc/>
+		<titoloDoc/>
+	</intestazione>
+	<contenitore id="con1" nome="corpo">
+		<h:p/>
+		<h:p/>
+		<h:p/>
+	</contenitore>
+</DocumentoNIR>
+</NIR>

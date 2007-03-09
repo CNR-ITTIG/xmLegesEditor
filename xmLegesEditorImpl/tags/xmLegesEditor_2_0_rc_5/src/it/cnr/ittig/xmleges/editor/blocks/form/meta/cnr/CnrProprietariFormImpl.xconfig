@@ -1,0 +1,51 @@
+<configuration>
+<tipoDestinatario name="----"/>
+<tipoDestinatario name="Organi di Ricerca"/>
+<tipoDestinatario name="Aree di Ricerca"/>
+<tipoDestinatario name="Gruppi Nazionali"/>
+<tipoDestinatario name="Istituti Nazionali di Coordinamento"/>
+<tipoDestinatario name="Progetti Finalizzati"/>
+<tipoDestinatario name="Progetti Strategici"/>
+<tipoDestinatario name="Presidenza"/>
+<tipoDestinatario name="Organi del CNR"/>
+<tipoDestinatario name="Direzione Generale"/>
+<tipoDestinatario name="Amministrazione Centrale"/>
+<tipoDestinatario name="Nucleo di Valutazione"/>
+<tipoDestinatario name="Dipartimenti"/>
+
+<strutturaDestinataria name="----"/>
+<strutturaDestinataria name="tutti gli istituti"/>
+<strutturaDestinataria name="tutti i dipartimenti"/>
+      
+<tipoProvvedimento name="----"/>
+<tipoProvvedimento name="nomina direttore"/>
+<tipoProvvedimento name="nomina commissione"/>
+<tipoProvvedimento name="istituzione ufficio"/>
+  
+<disciplina name="----"/>
+<disciplina name="Scienze Agrarie"/>
+<disciplina name="Scienze e Tecnologie dell'Ambiente e dell'Habitat"/>
+<disciplina name="Scienza e Tecnologia dei Beni Culturali"/>
+<disciplina name="Scienze Biologiche e Mediche"/>
+<disciplina name="Biotecnologie e Biologia Molecolare"/>
+<disciplina name="Scienze Chimiche"/>
+<disciplina name="Scienze Giuridiche e Politiche"/>
+<disciplina name="Scienze Economiche, Sociologiche e Statistiche"/>
+<disciplina name="Scienze Fisiche"/>
+<disciplina name="Scienze Geologiche e Minerarie"/>
+<disciplina name="Scienza e Tecnologie dell'Informazione"/>
+<disciplina name="Scienze d'Ingegneria e di Architettura"/>
+<disciplina name="Scienze Matematiche"/>
+<disciplina name="Scienze Storiche, Filosofiche e Filologiche"/>
+<disciplina name="Ricerche Tecnologiche e Innovazione"/>
+<disciplina name="Carattere generale"/>
+  
+<areaScientifica name="----"/>  
+<areaScientifica name="Scienze di base"/>  
+<areaScientifica name="Scienze della vita"/>  
+<areaScientifica name="Scienze della terra e dell'ambiente"/>  
+<areaScientifica name="Scienze sociali e umanistiche"/>  
+<areaScientifica name="Scienze tecnologiche, ingegneristiche e informatiche"/>  
+<areaScientifica name="Carattere generale"/>  
+
+</configuration>

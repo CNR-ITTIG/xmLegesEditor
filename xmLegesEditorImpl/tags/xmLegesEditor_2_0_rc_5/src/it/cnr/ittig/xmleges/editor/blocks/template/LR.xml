@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="iso-8859-15"?>
+
+%DOCTYPE%
+
+<NIR xmlns:xlink="http://www.w3.org/1999/xlink" 
+	  xmlns:h="http://www.w3.org/HTML/1998/html4">
+<LeggeRegionale>
+	<meta>
+		<descrittori>
+		<pubblicazione norm="" num="" tipo="GU" />
+		<entratainvigore norm="" />
+		<redazione id="red1" nome="" norm="" />
+	        <urn value="urn:nir:regione.nome:legge:aaaa-mm-gg;nnn"/>
+		</descrittori>
+	</meta>
+	<intestazione>
+        <emanante>Regione {denominazione}</emanante>
+		<tipoDoc>LEGGE REGIONALE</tipoDoc> 
+		<dataDoc norm=""/>, n. 
+		<numDoc/>
+		<titoloDoc/>
+	</intestazione> 
+	<formulainiziale>
+		<h:p>Il Consiglio regionale ha approvato;</h:p>
+		<h:p>Il Presidente della Giunta regionale</h:p>
+		<h:p>PROMULGA</h:p>
+		<h:p>la seguente legge:</h:p>
+	</formulainiziale>
+	<articolato>
+		<articolo id="art1">
+			<num>Art. 1.</num>
+			<rubrica/>
+			<comma id="art1-com1">
+				<num>1.</num>
+				<corpo/>
+			</comma>
+		</articolo>
+	</articolato>
+	<formulafinale>
+		<h:p>La presente legge regionale sarà pubblicata nel Bollettino Ufficiale della Regione.
+		E' fatto obbligo a chiunque spetti di osservarla e di farla osservare come legge della Regione {denominazione}.
+		</h:p>
+	</formulafinale> 
+	<conclusione> 
+		<dataeluogo norm="" codice="xxx00">Data a {città}, addì {gg mese aaaa}</dataeluogo> 
+		<sottoscrizioni> 
+			<sottoscrivente>{presidente giunta regionale}</sottoscrivente>
+			<visto/>
+		</sottoscrizioni> 
+	</conclusione> 
+</LeggeRegionale>
+</NIR>
