@@ -85,8 +85,9 @@ public class XmLegesLinkerImpl implements XmLegesLinker, Loggable, Serviceable {
 					+ "<ris  xmlns:h=\"http://www.w3.org/HTML/1998/html4\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">" + parsedText.trim() + "</ris>";
 
 			Node parsedNodeSel = UtilXml.textToXML(parsedText, true).getDocumentElement();
-
-			logger.debug("parsed: " + UtilDom.domToString(parsedNodeSel));
+			
+			if(logger.isDebugEnabled())
+				logger.debug("parsed: " + UtilDom.domToString(parsedNodeSel));
 
 			NodeList nl = parsedNodeSel.getChildNodes();
 			Node padre = nodeSel.getParentNode();
@@ -95,13 +96,20 @@ public class XmLegesLinkerImpl implements XmLegesLinker, Loggable, Serviceable {
 			// per poi inserire al posto del nodo selezione la successione dei
 			// nodi creati
 			// Node nextSelNode = nodeSel.getNextSibling();
-			logger.debug("------Inizio---------");
-			logger.debug(UtilDom.domToString(padre));
+			
+			if(logger.isDebugEnabled()){
+				logger.debug("------Inizio---------");
+				logger.debug(UtilDom.domToString(padre));
+			}
+			
 			if (testoPrima.length() > 0)
 				padre.insertBefore(doc.createTextNode(testoPrima), nodeSel);
-			logger.debug("------Dopo inserimento testo prima---------");
-			logger.debug(UtilDom.domToString(padre));
-
+			
+			if(logger.isDebugEnabled()){
+				logger.debug("------Dopo inserimento testo prima---------");
+				logger.debug(UtilDom.domToString(padre));
+			}
+			
 			UtilDom.trimTextNode(parsedNodeSel, true);
 
 			while (nl.getLength() > 0) {
@@ -110,22 +118,29 @@ public class XmLegesLinkerImpl implements XmLegesLinker, Loggable, Serviceable {
 				padre.insertBefore(imp, nodeSel);
 			}
 
-			logger.debug("------Dopo inserimento lista nodi risultato---------");
-			logger.debug(UtilDom.domToString(padre));
+			if(logger.isDebugEnabled()){
+				logger.debug("------Dopo inserimento lista nodi risultato---------");
+				logger.debug(UtilDom.domToString(padre));
+			}
+			
 			if (testoDopo.length() > 0)
 				padre.insertBefore(doc.createTextNode(testoDopo), nodeSel);
 			padre.removeChild(nodeSel);
 
-			logger.debug("-----Dopo inserimento testo dopo----------");
-			logger.debug(UtilDom.domToString(padre));
-
+			if(logger.isDebugEnabled()){
+				logger.debug("-----Dopo inserimento testo dopo----------");
+				logger.debug(UtilDom.domToString(padre));
+			}
+			
 			UtilXml.concatenaTextNode(padre);
 
 			modified = padre;
-
-			logger.debug("----Dopo concatenaTextNode--------");
-			logger.debug(UtilDom.domToString(padre));
-
+			
+			if(logger.isDebugEnabled()){
+				logger.debug("----Dopo concatenaTextNode--------");
+				logger.debug(UtilDom.domToString(padre));
+			}
+			
 			// rinumerazione.aggiorna(doc);
 			logger.debug("committed edit in setParsedText");
 			documentManager.commitEdit(tr);
