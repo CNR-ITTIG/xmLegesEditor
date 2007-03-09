@@ -415,8 +415,10 @@ public class AntiAliasedTextPane extends JTextPane implements DocumentListener, 
 			if (logger.isDebugEnabled())
 				logger.debug("node: " + node);
 			if (xsltParam != null)
+				//ret = UtilXslt.applyXsltToString(node,xslt,xsltParam);
 				nodeHtml = UtilXslt.applyXslt(node, xslt, xsltParam);
 			else
+				//ret = UtilXslt.applyXsltToString(node,xslt);
 				nodeHtml = UtilXslt.applyXslt(node, xslt);
 			if (logger.isDebugEnabled())
 				logger.debug("html:" + UtilDom.domToString(nodeHtml, true, null, false));
@@ -727,7 +729,8 @@ public class AntiAliasedTextPane extends JTextPane implements DocumentListener, 
 			if (t == null || t.equals("")) {
 				return;
 			}
-			InputStreamReader r = new InputStreamReader(new ByteArrayInputStream(t.getBytes()), pane.documentManager.getEncoding());
+			BufferedReader r = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(t.getBytes()), pane.documentManager.getEncoding()));
+			//InputStreamReader r = new InputStreamReader(new ByteArrayInputStream(t.getBytes()), pane.documentManager.getEncoding());
 			EditorKit kit = getEditorKit();
 			kit.read(r, doc, 0);
 		} catch (IOException ioe) {
