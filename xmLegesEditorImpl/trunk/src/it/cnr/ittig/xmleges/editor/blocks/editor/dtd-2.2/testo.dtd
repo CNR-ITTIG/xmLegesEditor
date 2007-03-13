@@ -1,0 +1,173 @@
+<!--  =====================================================================        
+            Modello dei documenti di NormeInRete (NIR)                               
+                                                                                     
+            testo: elementi ed attributi testuali                                    
+            Dipende da: 'nirstrict' oppure 'nirloose'                                
+                                                                                     
+          Versione  2.2                                                              
+          Release   26/02/2007                                                       
+          Fabio Vitali - UniBo                                                       
+                                                                                     
+            Per un'introduzione, si veda il documento 'note.html'                    
+        =====================================================================  -->
+
+<!--  =====================================================================
+
+Elementi HTML del documento articolato
+
+=====================================================================  -->
+
+<!--  =====================================================================
+
+Tipi semplici HTML
+
+=====================================================================  -->
+<!ENTITY % methodType "(post|get|put)" >
+<!ENTITY % EmethodType "((post|get|put))" >
+<!ENTITY % TFrame     "(void|above|below|hsides|lhs|rhs|vsides|box|border)" >
+<!ENTITY % ETFrame "((void|above|below|hsides|lhs|rhs|vsides|box|border))" >
+<!ENTITY % TRules     "(none|groups|rows|cols|all)" >
+<!ENTITY % ETRules "((none|groups|rows|cols|all))" >
+<!ENTITY % Scope      "(row|col|rowgroup|colgroup)" >
+<!ENTITY % EScope "((row|col|rowgroup|colgroup))" >
+<!ENTITY % align      "(left|center|right|justify|char)" >
+<!ENTITY % Ealign "((left|center|right|justify|char))" >
+<!ENTITY % valign     "(top|middle|bottom|baseline)" >
+<!ENTITY % Evalign "((top|middle|bottom|baseline))" >
+
+<!--  =====================================================================        
+                                                                                     
+            Elementi con content model EMPTY                                         
+                                                                                     
+        =====================================================================  -->
+
+<!ELEMENT h:br %emptyfac; >
+<!ATTLIST h:br %globalifac;  >
+<!ELEMENT h:hr %emptyfac; >
+<!ATTLIST h:hr %globalifac;  >
+<!ELEMENT h:img %emptyfac; >
+<!ATTLIST h:img %globalifac;  >
+
+<!ATTLIST h:img src %uri; #REQUIRED alt %anystring; #IMPLIED width %numero; #IMPLIED height %numero; #IMPLIED >
+<!ELEMENT h:input %emptyfac; >
+<!ATTLIST h:input %globalifac;  >
+
+<!ATTLIST h:input type %anystring; #REQUIRED size %numero; #IMPLIED >
+<!ELEMENT h:object %ParaLevelReq; >
+<!ATTLIST h:object %globalireq;  >
+
+<!ATTLIST h:object src %uri; #REQUIRED alt %anystring; #IMPLIED width %numero; #IMPLIED height %numero; #IMPLIED >
+
+<!--  =====================================================================        
+                                                                                     
+            Elementi di tipo inline                                                  
+                                                                                     
+        =====================================================================  -->
+<!ELEMENT h:b %inlinefac; >
+<!ATTLIST h:b %globalifac;  >
+<!ELEMENT h:i %inlinefac; >
+<!ATTLIST h:i %globalifac;  >
+<!ELEMENT h:u %inlinefac; >
+<!ATTLIST h:u %globalifac;  >
+<!ELEMENT h:sub %inlinefac; >
+<!ATTLIST h:sub %globalifac;  >
+<!ELEMENT h:sup %inlinefac; >
+<!ATTLIST h:sup %globalifac;  >
+<!ELEMENT h:span %inlinefac; >
+<!ATTLIST h:span %globalifac;  >
+<!ELEMENT h:a %inlinefac; >
+<!ATTLIST h:a %globalifac;  >
+
+<!ATTLIST h:a %link;  >
+
+<!--  =====================================================================        
+                                                                                     
+            Elementi di tipo blocco e form                                           
+                                                                                     
+        =====================================================================  -->
+<!ELEMENT h:p %inlinefac; >
+<!ATTLIST h:p %globalifac;  >
+<!ELEMENT h:div %inlinefac; >
+<!ATTLIST h:div %globalifac;  >
+
+<!ELEMENT h:form (#PCDATA |%elinline; | %allblocchi; | h:input)*>
+
+
+<!ATTLIST h:form %globalifac;  method %methodType; 'post'  action %anystring; #IMPLIED enctype %anystring; 'x-url-encoded'  >
+<!--  =====================================================================        
+                                    LISTE                                            
+                                                                                     
+            Derivato                                                                 
+            PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"                                
+            SYSTEM "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"               
+        =====================================================================  -->
+
+<!ENTITY % list "(h:li)+" >
+<!ENTITY % deflist "(h:dt | h:dd)+" >
+
+<!ELEMENT h:ul %list; >
+<!ATTLIST h:ul %globalifac;  >
+<!ELEMENT h:ol %list; >
+<!ATTLIST h:ol %globalifac;  >
+<!ELEMENT h:li %ParaLevel; >
+<!ATTLIST h:li %globalifac;  >
+
+<!ELEMENT h:dl %deflist; >
+<!ATTLIST h:dl %globalifac;  >
+<!ELEMENT h:dt %inlinefac; >
+<!ATTLIST h:dt %globalifac;  >
+<!ELEMENT h:dd %ParaLevel; >
+<!ATTLIST h:dd %globalifac;  >
+<!--  =====================================================================        
+                                    TABELLE                                          
+                                                                                     
+            Derivato da "-//SoftQuad//DTD HTML 4.0 Table v1.0 19990413//EN"          
+        =====================================================================        
+        =====================================================================        
+                           Attributi                                                 
+        =====================================================================  -->
+
+<!ENTITY % cellhalign " align %align; #IMPLIED char %anystring; #IMPLIED charoff %anystring; #IMPLIED" >
+<!ENTITY % cellvalign " valign %valign; #IMPLIED" >
+<!ENTITY % cellalign " %cellhalign;  %cellvalign; " >
+
+<!--  =====================================================================        
+                           Elementi                                                  
+        =====================================================================  -->
+<!ELEMENT h:table (h:caption?,(h:col* | h:colgroup*),h:thead?,h:tfoot?,(h:tbody+ | h:tr+))>
+
+<!ATTLIST h:table %globalifac;  summary %anystring; #IMPLIED width %numero; #IMPLIED border %numero; #IMPLIED frame %TFrame; #IMPLIED rules %TRules; #IMPLIED cellspacing %numero; #IMPLIED cellpadding %numero; #IMPLIED datapagesize %numero; #IMPLIED >
+<!ELEMENT h:caption %inlinefac; >
+<!ATTLIST h:caption %globalifac;  >
+
+<!ENTITY % rows "(h:tr)+" >
+
+<!ELEMENT h:thead %rows; >
+<!ATTLIST h:thead %globalifac;  %cellalign;  >
+<!ELEMENT h:tfoot %rows; >
+<!ATTLIST h:tfoot %globalifac;  %cellalign;  >
+<!ELEMENT h:tbody %rows; >
+<!ATTLIST h:tbody %globalifac;  %cellalign;  >
+
+<!ENTITY % cols " %globalifac;  %cellalign;  span %numero; '1'  width %numero; #IMPLIED" >
+
+<!ELEMENT h:colgroup (h:col+)>
+
+<!ATTLIST h:colgroup %cols;  >
+<!ELEMENT h:col EMPTY >
+
+<!ATTLIST h:col %cols;  >
+
+<!ELEMENT h:tr (h:th | h:td)+>
+
+<!ATTLIST h:tr %globalifac;  %cellhalign;  >
+<!ENTITY % cell "%ParaLevel;" >
+
+<!ELEMENT h:th %cell; >
+<!ATTLIST h:th %globalifac;  >
+<!ELEMENT h:td %cell; >
+<!ATTLIST h:td %globalifac;  >
+
+<!--  =====================================================================        
+            fine del file testo.dtd                                                  
+        =====================================================================  -->
