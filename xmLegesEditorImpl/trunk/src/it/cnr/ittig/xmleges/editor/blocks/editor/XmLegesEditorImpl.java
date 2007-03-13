@@ -99,8 +99,8 @@ public class XmLegesEditorImpl implements XmLegesEditor, Loggable, Serviceable, 
 //							"dtd-cnr/cnr.dtd", "dtd-cnr/globali-cnr.dtd", "dtd-cnr/meta-cnr.dtd", "dtd-cnr/nirflessibile-cnr.dtd", "dtd-cnr/norme-cnr.dtd",
 //							"dtd-cnr/testo-cnr.dtd", "dtd-cnr/tipi-cnr.dtd"};
 //					
-					String[] files = new String[] { "dtd-2.1/globali.dtd", "dtd-2.1/meta.dtd", "dtd-2.1/namespaces.dtd", "dtd-2.1/nirbase.dtd",
-							"dtd-2.1/nircompleto.dtd", "dtd-2.1/nirflessibile.dtd", "dtd-2.1/norme.dtd", "dtd-2.1/testo.dtd", "dtd-2.1/tipi.dtd", "dtd-2.1/pst.dtd",
+					String[] files = new String[] { "dtd-2.2/globali.dtd", "dtd-2.2/meta.dtd", "dtd-2.2/nirbase.dtd",
+							"dtd-2.2/nircompleto.dtd", "dtd-2.2/nirflessibile.dtd", "dtd-2.2/norme.dtd", "dtd-2.2/testo.dtd", "dtd-2.2/tipi.dtd", "dtd-2.2/pst.dtd",
 
 							"dtd-dl/dllight.dtd", "dtd-dl/dllight.spp", "dtd-dl/ISOdia.ent", "dtd-dl/ISOgrk3.ent", "dtd-dl/ISOlat1.ent", "dtd-dl/ISOlat2.ent",
 							"dtd-dl/ISOnum.ent", "dtd-dl/ISOpub.ent", "dtd-dl/ISOtech.ent",
