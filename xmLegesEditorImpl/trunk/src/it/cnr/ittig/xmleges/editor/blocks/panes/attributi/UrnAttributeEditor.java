@@ -19,7 +19,7 @@ public class UrnAttributeEditor implements AttributeEditor {
 
 	public boolean canEdit(Node node, Node attrib) {
 		return ("xlink:href".equals(attrib.getNodeName()) && !attrib.getNodeValue().startsWith("#") && node.getNodeName().startsWith("rif"))||
-		       ("value".equals(attrib.getNodeName()) && node.getNodeName().startsWith("urn")) ;
+		       ("valore".equals(attrib.getNodeName()) && node.getNodeName().startsWith("urn")) ;
 	}
 
 	public Component getEditor(Node node, Node attrib) {
