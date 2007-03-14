@@ -1052,7 +1052,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
         	<readonly>inizioefficacia</readonly>        	
         	<readonly>finevigore</readonly>
         	<readonly>fineefficacia</readonly>
-        	<readonly>tipo</readonly>
+        	<!-- <readonly>tipo</readonly> dtd2.2: e' anche il nome dell'attributo del tag firma--> 
         	<readonly>status</readonly>
         </configuration>
 	</component>
