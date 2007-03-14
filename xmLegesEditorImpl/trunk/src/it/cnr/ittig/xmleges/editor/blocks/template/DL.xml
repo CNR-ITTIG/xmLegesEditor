@@ -10,7 +10,7 @@
 		<pubblicazione norm="" num="" tipo="GU" />
 		<entratainvigore norm="" />
 		<redazione id="red1" nome="" norm="" />
-	        <urn value="urn:nir:stato:decreto.legge:aaaa-mm-gg;nnn"/>
+	        <urn valore="urn:nir:stato:decreto.legge:aaaa-mm-gg;nnn"/>
 		</descrittori>
 	</meta>
 	<intestazione>
@@ -47,11 +47,9 @@
 	</formulafinale> 
 	<conclusione> 
 		<dataeluogo norm="" codice="">Dato a Roma, addì {gg mese aaaa}</dataeluogo> 
-		<sottoscrizioni> 
-			<sottoscrivente>{presidente repubblica}</sottoscrivente>
-			<sottoscrivente>{nome}, Presidente del Consiglio dei Ministri</sottoscrivente>
-			<visto>Visto, il Guardasigilli: {nome}</visto> 
-		</sottoscrizioni> 
+		<firma tipo="sottoscrizione">{presidente repubblica}</firma>
+		<firma tipo="sottoscrizione">{nome}, Presidente del Consiglio dei Ministri</firma>
+		<firma tipo="visto">Visto, il Guardasigilli: {nome}</firma>
 	</conclusione> 
 </DecretoLegge>
 </NIR>
