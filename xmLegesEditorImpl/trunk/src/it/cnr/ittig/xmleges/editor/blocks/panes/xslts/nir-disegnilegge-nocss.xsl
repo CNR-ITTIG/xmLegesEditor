@@ -392,6 +392,9 @@
 			<xsl:apply-templates/>
 		</div>
 	</xsl:template>
+	
+	
+	<!--	RIMOSSI DALLA DTD 2.2
 	<xsl:template match="nir:sottoscrizioni">
 		<ul style="margin-top:5px;">
 			<xsl:apply-templates/>
@@ -401,7 +404,7 @@
 		<li>
 			<xsl:apply-templates/>
 		</li>
-	</xsl:template>
+	</xsl:template		-->
 	
 	<!-- ======================================================== -->
 	<!--                                                          -->
