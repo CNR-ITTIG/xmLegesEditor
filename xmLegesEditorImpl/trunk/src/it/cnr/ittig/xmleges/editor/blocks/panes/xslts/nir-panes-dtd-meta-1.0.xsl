@@ -17,7 +17,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <xsl:transform  xmlns:xsl   = "http://www.w3.org/1999/XSL/Transform"
                 xmlns:xlink = "http://www.w3.org/1999/xlink"
                 xmlns:h     = "http://www.w3.org/HTML/1998/html4"
-                xmlns       = "http://www.normeinrete.it/nir/1.0"
+                xmlns       = "http://www.normeinrete.it/nir/2.2"
                 xmlns:cnr   = "http://www.cnr.it/provvedimenti/2.1"
                 xmlns:mapper= "xalan://it.cnr.ittig.xmleges.core.blocks.panes.xsltmapper.XsltMapperImpl"
                 version     = "1.0"
@@ -125,6 +125,18 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		    <xsl:value-of select="@tipo"/>
 		    <xsl:text>, </xsl:text>		    
 		    <xsl:value-of select="concat(substring(@norm,7,2),'/',substring(@norm,5,2),'/',substring(@norm,1,4))"/> 
+		</font>
+	</xsl:element>
+</xsl:template>
+
+<xsl:template match="*[name()='risoluzione']" >
+	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
+		<xsl:value-of select="name()"/>
+		<font color="blue">
+		    <xsl:text>: URL </xsl:text>
+		    <xsl:value-of select="@url"/>
+		    <xsl:text>, URN </xsl:text>
+		    <xsl:value-of select="@urn"/>
 		</font>
 	</xsl:element>
 </xsl:template>

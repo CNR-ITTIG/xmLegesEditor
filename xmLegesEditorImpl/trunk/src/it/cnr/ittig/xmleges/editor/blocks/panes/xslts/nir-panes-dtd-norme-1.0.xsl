@@ -17,7 +17,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <xsl:transform  xmlns:xsl   = "http://www.w3.org/1999/XSL/Transform"
                 xmlns:xlink = "http://www.w3.org/1999/xlink"
                 xmlns:h     = "http://www.w3.org/HTML/1998/html4"
-                xmlns       = "http://www.normeinrete.it/nir/1.0"
+                xmlns       = "http://www.normeinrete.it/nir/2.2"
                 xmlns:mapper= "xalan://it.cnr.ittig.xmleges.core.blocks.panes.xsltmapper.XsltMapperImpl"
                 version     = "1.0"
 >
@@ -224,6 +224,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     </xsl:element>
 </xsl:template>
 
+	
+		
+	
+	<!--	RIMOSSI DALLA DTD 2.2
 <xsl:template match="*[name()='sottoscrizioni']">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
     	<xsl:attribute name="style">margin: 15 0 0 0;</xsl:attribute>
@@ -231,24 +235,31 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
         <xsl:apply-templates />
     </xsl:element>
 </xsl:template>
-
 <xsl:template match="*[name()='sottoscrivente']">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
     	<xsl:attribute name="style">margin: 5 0 0 0;</xsl:attribute>
-    	<!--	xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-        <xsl:apply-templates /	-->
+        <xsl:call-template name="vigenza"/>
+    </xsl:element>
+</xsl:template				-->
+
+	
+	<!--	RIMOSSI DALLA DTD 2.2
+<xsl:template match="*[name()='visto']">
+    <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
+    	<xsl:attribute name="style">font-style: italic; margin: 20 0</xsl:attribute>
+        <xsl:call-template name="vigenza"/>
+    </xsl:element>
+</xsl:template		-->
+
+
+	<!--	Aggiunto dalla dtd 2.2	-->
+<xsl:template match="*[name()='firma']">
+    <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
+    	<xsl:attribute name="style">font-style: italic; margin: 20 0</xsl:attribute>
         <xsl:call-template name="vigenza"/>
     </xsl:element>
 </xsl:template>
 
-<xsl:template match="*[name()='visto']">
-    <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-    	<xsl:attribute name="style">font-style: italic; margin: 20 0</xsl:attribute>
-    	<!--	xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-        <xsl:apply-templates /	-->
-        <xsl:call-template name="vigenza"/>
-    </xsl:element>
-</xsl:template>
 
 <xsl:template match="*[name()='dataeluogo']">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
