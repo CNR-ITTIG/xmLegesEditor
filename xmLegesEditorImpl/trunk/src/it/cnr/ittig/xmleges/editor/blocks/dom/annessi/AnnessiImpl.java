@@ -239,7 +239,7 @@ public class AnnessiImpl implements Annessi, Loggable, Serviceable {
 			} else {
 				// setta la urn dell'annesso
 				NodeList urnNodes = annettere.getElementsByTagName("urn");
-				UtilDom.setAttributeValue(urnNodes.item(0),"value", urnAnnesso);
+				UtilDom.setAttributeValue(urnNodes.item(0),"valore", urnAnnesso);
 				String idAnnesso = "ann" + getIdAnnesso(documento);
 				// annettere.getElementById()
 				Node annettere_node = documento.importNode(nirUtilDom.getTipoAtto(annettere), true);
@@ -283,7 +283,7 @@ public class AnnessiImpl implements Annessi, Loggable, Serviceable {
 
 		for (int i = 0; i < urnNodes.getLength(); i++) {
 			if (!isInAnnesso(urnNodes.item(i)))
-				return (UtilDom.getAttributeValueAsString(urnNodes.item(i),"value"));
+				return (UtilDom.getAttributeValueAsString(urnNodes.item(i),"valore"));
 		}
 		return (null);
 	}
