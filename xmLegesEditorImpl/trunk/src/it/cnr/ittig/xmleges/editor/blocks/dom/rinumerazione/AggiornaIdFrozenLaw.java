@@ -241,7 +241,7 @@ public class AggiornaIdFrozenLaw {
 			if (renum) {
 				// togliere l'intero prefix e non solo la n
 				value = num.substring(prefix.length());
-				UtilDom.setAttributeValue(ndr.item(i), "value", value);
+				UtilDom.setAttributeValue(ndr.item(i), "valore", value);
 				String tipoNdr = rinum.getRinumerazioneNdr();
 				if(logger.isDebugEnabled())
 					logger.debug("tipoNdr " + tipoNdr);
