@@ -107,10 +107,12 @@
 		list-style-type: none;
 		text-align: right;
 	}
+	/* ELIMINATO DALLA DTD 2.2 
 	.visto {
 		font-size: 80%;
 		font-weight: bold;
 	}
+	*/
 	.hidden {
 		width:0px;
 		height:0px;
