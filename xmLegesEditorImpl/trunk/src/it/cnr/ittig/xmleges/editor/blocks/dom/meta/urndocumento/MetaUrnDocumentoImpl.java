@@ -76,7 +76,7 @@ public class MetaUrnDocumentoImpl implements MetaUrnDocumento, Loggable, Service
 			try {
 				tr = documentManager.beginEdit();
 				Node urnNode = UtilDom.checkAndCreate(descrittori, "urn");
-				UtilDom.setAttributeValue(urnNode,"value", urn[0].toString());
+				UtilDom.setAttributeValue(urnNode,"valore", urn[0].toString());
 
 				Node[] otherUrn = UtilDom.getAllNextSibling(urnNode);
 				for (int i = 0; i < otherUrn.length; i++) {
@@ -87,7 +87,7 @@ public class MetaUrnDocumentoImpl implements MetaUrnDocumento, Loggable, Service
 				Node next = urnNode;
 				for (int i = 1; i < urn.length; i++) {
 					urnNode = doc.createElement("urn");
-					UtilDom.setAttributeValue(urnNode,"value", urn[i].toString());
+					UtilDom.setAttributeValue(urnNode,"valore", urn[i].toString());
 					UtilDom.insertAfter(urnNode, next);
 					next = urnNode;
 				}
@@ -263,7 +263,7 @@ public class MetaUrnDocumentoImpl implements MetaUrnDocumento, Loggable, Service
 		for (int i = 0; i < urn.getLength(); i++) {
 			try {
 				if (UtilDom.findParentByName(urn.item(i), "annessi") == null) {
-					urnDoc = new Urn(UtilDom.getAttributeValueAsString(urn.item(i),"value"));
+					urnDoc = new Urn(UtilDom.getAttributeValueAsString(urn.item(i),"valore"));
 
 					if (null != urnDoc.getDate() && urnDoc.getDate().size() > 0 && ((String) urnDoc.getDate().get(0)).startsWith("aaaa"))
 						if (urnFromDoc.getDate() != null)
