@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<xsl:stylesheet version="1.0" xmlns:nir = "http://www.normeinrete.it/nir/2.1" 
+<xsl:stylesheet version="1.0" xmlns:nir = "http://www.normeinrete.it/nir/2.2" 
 										xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  
 										xmlns="http://www.w3.org/HTML/1998/html4" 
 										xmlns:h="http://www.w3.org/HTML/1998/html4" 
@@ -463,6 +463,10 @@
 			<xsl:apply-templates/>
 		</p>
 	</xsl:template>
+	
+		
+	
+	<!--	RIMOSSI DALLA DTD 2.2
 	<xsl:template match="//*[name()='sottoscrizioni']">
 		<ul class="sottoscrizioni">
 			<xsl:apply-templates/>
@@ -470,7 +474,6 @@
 	</xsl:template>
 	<xsl:template match="//*[name()='sottoscrivente']">
 		<li class="li">
-			<!--	xsl:apply-templates/	-->
 			<xsl:choose>
 			  <xsl:when test="$datafine!=''">
 				<xsl:call-template name="vigenza"/>
@@ -480,10 +483,11 @@
 			  </xsl:otherwise>
 			</xsl:choose>			
 		</li>
-	</xsl:template>
+	</xsl:template	-->
+
+	<!--	RIMOSSI DALLA DTD 2.2
 	<xsl:template match="//*[name()='visto']">
 		<p class="visto">
-			<!--	xsl:apply-templates/	-->
 			<xsl:choose>
 			  <xsl:when test="$datafine!=''">
 				<xsl:call-template name="vigenza"/>
@@ -493,7 +497,22 @@
 			  </xsl:otherwise>
 			</xsl:choose>	
 		</p>
-	</xsl:template>
+	</xsl:template		-->
+
+	<!--	Aggiunto dalla DTD 2.2	-->
+	<xsl:template match="//*[name()='firma']">
+		<p class="firma">
+			<xsl:choose>
+			  <xsl:when test="$datafine!=''">
+				<xsl:call-template name="vigenza"/>
+			  </xsl:when>
+			  <xsl:otherwise>
+				<xsl:call-template name="multivigenza"/>
+			  </xsl:otherwise>
+			</xsl:choose>	
+		</p>
+	</xsl:template>	
+	
 	<!-- ======================================================== -->
 	<!--                                                          -->
 	<!--  Template allegati                                       -->
