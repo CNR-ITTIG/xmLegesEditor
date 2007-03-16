@@ -164,7 +164,7 @@ public class NdrImpl implements Ndr, Loggable, Serviceable {
 		// Preparazione elemento ndr
 		Element ndr = doc.createElement("ndr");
 		UtilDom.setAttributeValue(ndr, "num", id);
-		UtilDom.setAttributeValue(ndr, "value", value);
+		UtilDom.setAttributeValue(ndr, "valore", value);
 
 		try {
 			if (dtdRulesManager.queryTextContent(ndr)) { 
@@ -191,7 +191,6 @@ public class NdrImpl implements Ndr, Loggable, Serviceable {
 		UtilDom.setTextNode(par, testo);
 		Element nota = doc.createElement("nota");
 		UtilDom.setIdAttribute(nota, "n" + getNotNum(doc));
-		// UtilDom.setAttributeValue(nota,"id", "n"+getNotNum(doc));
 		nota.appendChild(par);
 
 		return nota;
