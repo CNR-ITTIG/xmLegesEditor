@@ -3,8 +3,8 @@
 <!--     dal Consiglio Nazionale delle Ricerche                            -->
 <!--     basato sulla versione flessibile della DTD di NormeInRete (NIR)   -->
 <!--                                                                       -->
-<!--     Release  2.1                                                      -->
-<!--     data     18/7/2006                                                -->
+<!--     Release  2.2                                                      -->
+<!--     data     19/03/2007                                               -->
 <!--                                                                       -->
 <!--     Andrea Marchetti (CNR-IIT)                                        -->
 <!--     con il contributo di                                              -->
@@ -19,7 +19,7 @@
      N.B. La prima dichiarazione che il parser incontra ha la precedenza 
      sulle altre
     ===================================================================== -->
-<!ENTITY % NSproprietario   "xmlns:cnr CDATA  #FIXED 'http://www.cnr.it/provvedimenti/2.1'">
+<!ENTITY % NSproprietario   "xmlns:cnr CDATA  #FIXED 'http://www.cnr.it/provvedimenti/2.2'">
 <!ENTITY % ProprietarioMeta "(cnr:meta)">
 <!ATTLIST proprietario %NSproprietario; >
 
@@ -27,8 +27,8 @@
      Inclusione della DTD NIR versione flessibile
      ===================================================================== -->
 <!ENTITY % nirDTD SYSTEM "./nirflessibile.dtd">
-%nirDTD;
 
+%nirDTD;
 
 <!-- ===================================================================== 
      Metadati Proprietari:
@@ -108,23 +108,23 @@
                     (cnr:disciplina+ | cnr:areaScientifica+) )>
 
 <!ELEMENT cnr:strutturaEmanante		EMPTY >
-<!ATTLIST cnr:strutturaEmanante		value CDATA #IMPLIED >
+<!ATTLIST cnr:strutturaEmanante		valore CDATA #IMPLIED >
 
 <!ELEMENT cnr:autoritaEmanante		EMPTY >
-<!ATTLIST cnr:autoritaEmanante		value CDATA #IMPLIED >
+<!ATTLIST cnr:autoritaEmanante		valore CDATA #IMPLIED >
 
 <!ELEMENT cnr:tipoDestinatario		EMPTY >
-<!ATTLIST cnr:tipoDestinatario		value CDATA #IMPLIED >
+<!ATTLIST cnr:tipoDestinatario		valore CDATA #IMPLIED >
 
 <!ELEMENT cnr:strutturaDestinataria	EMPTY >
-<!ATTLIST cnr:strutturaDestinataria	value CDATA #IMPLIED >
+<!ATTLIST cnr:strutturaDestinataria	valore CDATA #IMPLIED >
 
 <!ELEMENT cnr:tipoProvvedimento		EMPTY >
-<!ATTLIST cnr:tipoProvvedimento		value CDATA #IMPLIED >
+<!ATTLIST cnr:tipoProvvedimento		valore CDATA #IMPLIED >
 
 <!ELEMENT cnr:disciplina				EMPTY >
-<!ATTLIST cnr:disciplina				value CDATA #IMPLIED >
+<!ATTLIST cnr:disciplina				valore CDATA #IMPLIED >
 
 <!ELEMENT cnr:areaScientifica			EMPTY >
-<!ATTLIST cnr:areaScientifica			value CDATA #IMPLIED >
+<!ATTLIST cnr:areaScientifica			valore CDATA #IMPLIED >
 
