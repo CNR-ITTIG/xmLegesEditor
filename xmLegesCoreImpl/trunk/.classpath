@@ -14,7 +14,6 @@
 	<classpathentry kind="lib" path="lib/avalon-framework-cvs-20020806.jar"/>
 	<classpathentry kind="lib" path="lib/batik.jar"/>
 	<classpathentry kind="lib" path="lib/fop.jar"/>
-	<classpathentry kind="lib" path="lib/jfor-0.7.2rc1.jar"/>
 	<classpathentry kind="lib" path="lib/logkit-1.0.1.jar"/>	
 	<classpathentry kind="lib" path="lib/xsc.jar"/>	
 	<classpathentry kind="lib" path="lib/xsc_eval_key.jar"/>		
