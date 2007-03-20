@@ -346,6 +346,17 @@
 		<dtd name="DTD Nir Flessibile">nirflessibile.dtd</dtd>
 		<dtd name="DTD Nir Base">nirbase.dtd</dtd>
     </provvedimento>
+<!-- ************************************************* Provv. CNR -->
+    <provvedimento name="Provvedimento CNR" emananti="SI">
+	    <urn>
+	        <atto>provvedimento</atto>
+	        <citazione autorita="SI">provvedimento</citazione>
+	        <autorita>=(^consiglio\.nazionale\.ricerche$)</autorita>
+	    </urn>
+	    <template tipo="Articolato" tag="DocumentoNIR">PRCNR-Art.xml</template>
+	    <template tipo="SemiArticolato" tag="DocumentoNIR">PRCNR-Semi.xml</template>
+	    <dtd name="DTD CNR">cnr.dtd</dtd>
+    </provvedimento>
 <!-- *********************************************** ALTRI Provv. -->
     <provvedimento name="Provvedimento di altre autorita'" emananti="SI">
 	    <urn>
