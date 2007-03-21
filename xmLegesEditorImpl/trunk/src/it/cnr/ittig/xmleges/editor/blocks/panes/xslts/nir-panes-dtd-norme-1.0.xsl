@@ -30,7 +30,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <xsl:strip-space elements="*" />
 
 
-
 	<xsl:template match="*[name()='NIR']/*">	
 		<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
     	<!--	xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
@@ -75,6 +74,11 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 <xsl:template match="*[name()='emanante']">
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
+		<xsl:attribute name="style">
+			text-align: center;
+			font-size: large;
+			margin: 10 0 10 0;
+		</xsl:attribute>
 		<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 		<xsl:apply-templates />
 	</xsl:element>
@@ -255,7 +259,14 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	<!--	Aggiunto dalla dtd 2.2	-->
 <xsl:template match="*[name()='firma']">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-    	<xsl:attribute name="style">font-style: italic; margin: 20 0</xsl:attribute>
+		<xsl:choose>
+			  <xsl:when test="@tipo='visto'">
+				<xsl:attribute name="style">font-style: italic; margin: 20 0</xsl:attribute>
+			  </xsl:when>
+			  <xsl:otherwise>
+				<xsl:attribute name="style">margin: 20 0</xsl:attribute>
+			  </xsl:otherwise>
+		</xsl:choose>			  
         <xsl:call-template name="vigenza"/>
     </xsl:element>
 </xsl:template>

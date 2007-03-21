@@ -29,16 +29,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 
 <xsl:template match="*[name()='redazionale']" />
-
-<xsl:template match="*[
-	name()='lavoripreparatori' or name()='proprietario' or name()='disposizioni' or name()='ciclodivita']">
-	<center><b><xsl:value-of select="name()"/></b></center>
-	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-		<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-		<xsl:apply-templates />
-	</xsl:element>
-	<hr/>
-</xsl:template>
+<xsl:template match="*[name()='lavoripreparatori']" />
+<xsl:template match="*[name()='disposizioni']" />
 
 <xsl:template match="*[name()='descrittori']">
 	<center><b><xsl:value-of select="name()"/></b></center>
@@ -60,11 +52,15 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 				</xsl:when>
 			</xsl:choose>
 			<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-				<font color="blue"><xsl:value-of select="@value"/></font>
+				<font color="blue"><xsl:value-of select="@valore"/></font>
 			</xsl:element>
 		</xsl:for-each>
 		<xsl:apply-templates select="*[name()='pubblicazione']" />
+		
+<!--	RIMOSSO DALLA DTD 2.2		
 		<xsl:apply-templates select="*[name()='altrepubblicazioni']" />
+-->
+		
 		<xsl:for-each select="*[name()='alias']">
 			<xsl:variable name="num">
 				<xsl:value-of select="position()" />
@@ -81,12 +77,38 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 				</xsl:when>
 			</xsl:choose>
 			<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-				<font color="blue"><xsl:value-of select="@value"/></font>
+				<font color="blue"><xsl:value-of select="@valore"/></font>
 			</xsl:element>
 		</xsl:for-each>
 	</xsl:element>
 	<xsl:apply-templates select="*[name()='redazione']" />
 	<br/><hr/>
+	
+	<xsl:for-each select="../*[name()='proprietario']">
+		<xsl:variable name="num">
+			<xsl:value-of select="position()" />
+		</xsl:variable>
+		<xsl:choose>
+			<xsl:when test="$num=1">
+				<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
+	   				<center><b><xsl:value-of select="name()"/>/i</b></center>
+				</xsl:element>	    
+			</xsl:when>
+		</xsl:choose>
+		<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
+			<font color="blue">
+		    	<xsl:text> Soggetto: </xsl:text>
+			    <xsl:value-of select="@soggetto"/>
+			    <xsl:text>, </xsl:text>
+			    <xsl:value-of select="@xlink:href"/>
+			</font>
+		</xsl:element>
+		<xsl:choose>
+			<xsl:when test="$num=last()">
+				<br/><hr/>    
+			</xsl:when>
+		</xsl:choose>
+	</xsl:for-each>
 </xsl:template>
 
 <xsl:template match="*[name()='pubblicazione']" >
@@ -104,38 +126,39 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	</xsl:element>
 </xsl:template>
 
-<xsl:template match="*[name()='altrepubblicazioni']" >
-	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-	   	<xsl:attribute name="style">
-	            margin: 30 15 15 25;
-	            color: red;
-	    </xsl:attribute>
-	    <xsl:value-of select="name()"/>
-	</xsl:element>	    
-	<xsl:apply-templates />
-</xsl:template>
-
-<xsl:template match="*[name()='altrepubblicazioni']/*" >
-	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-		<font color="blue">
+<!--	Rimosso dalla Dtd 2.2
+	<xsl:template match="*[name()='altrepubblicazioni']" >
+		<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
+	   		<xsl:attribute name="style">
+	        	    margin: 30 15 15 25;
+	            	color: red;
+		    </xsl:attribute>
 		    <xsl:value-of select="name()"/>
-		    <xsl:text>, N. </xsl:text>
-		    <xsl:value-of select="@num"/>
-		    <xsl:text>, </xsl:text>
-		    <xsl:value-of select="@tipo"/>
-		    <xsl:text>, </xsl:text>		    
-		    <xsl:value-of select="concat(substring(@norm,7,2),'/',substring(@norm,5,2),'/',substring(@norm,1,4))"/> 
-		</font>
-	</xsl:element>
-</xsl:template>
+		</xsl:element>	    
+		<xsl:apply-templates />
+	</xsl:template>
+	<xsl:template match="*[name()='altrepubblicazioni']/*" >
+		<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
+			<font color="blue">
+			    <xsl:value-of select="name()"/>
+			    <xsl:text>, N. </xsl:text>
+			    <xsl:value-of select="@num"/>
+		    	<xsl:text>, </xsl:text>
+			    <xsl:value-of select="@tipo"/>
+			    <xsl:text>, </xsl:text>		    
+			    <xsl:value-of select="concat(substring(@norm,7,2),'/',substring(@norm,5,2),'/',substring(@norm,1,4))"/> 
+			</font>
+		</xsl:element>
+	</xsl:template>
+fine rimosso dalla dtd 2.2-->
 
 <xsl:template match="*[name()='risoluzione']" >
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-		<xsl:value-of select="name()"/>
+		<center><b><xsl:value-of select="name()"/></b></center>
 		<font color="blue">
-		    <xsl:text>: URL </xsl:text>
+		    <xsl:text>URL: </xsl:text>
 		    <xsl:value-of select="@url"/>
-		    <xsl:text>, URN </xsl:text>
+		    <xsl:text>, URN: </xsl:text>
 		    <xsl:value-of select="@urn"/>
 		</font>
 	</xsl:element>
@@ -155,6 +178,15 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		Url: <font color="blue"><xsl:value-of select="@url"/></font>
 		Contributo: <font color="blue"><xsl:value-of select="@contributo"/></font>
 	</xsl:element>
+</xsl:template>
+
+<xsl:template match="*[name()='ciclodivita']">
+	<center><b><xsl:value-of select="name()"/></b></center>
+	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
+		<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+		<xsl:apply-templates />
+	</xsl:element>
+	<hr/>
 </xsl:template>
 
 <xsl:template match="*[name()='eventi']" >
