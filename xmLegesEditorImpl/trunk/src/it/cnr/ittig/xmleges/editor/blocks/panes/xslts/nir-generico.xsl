@@ -106,7 +106,7 @@
 		<hr/>
 	</xsl:template>
 	
-	<xsl:template match="nir:emanante">
+	<xsl:template match="//*[name()='emanante']">
 		<div class="title">
 			<xsl:apply-templates/>
 		</div>
@@ -114,7 +114,7 @@
 
 	<xsl:template match="//*[name()='titoloDoc']">
 		<a name="{@id}"></a>
-		<div class="titleLegge">
+		<div class="titoloDoc">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
 				<xsl:call-template name="vigenza"/>
@@ -499,18 +499,33 @@
 		</p>
 	</xsl:template		-->
 
-	<!--	Aggiunto dalla DTD 2.2	-->
 	<xsl:template match="//*[name()='firma']">
-		<p class="firma">
 			<xsl:choose>
-			  <xsl:when test="$datafine!=''">
-				<xsl:call-template name="vigenza"/>
+			  <xsl:when test="@tipo='visto'">
+				<p class="visto">
+					<xsl:choose>
+						<xsl:when test="$datafine!=''">
+							<xsl:call-template name="vigenza"/>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:call-template name="multivigenza"/>
+			  			</xsl:otherwise>
+					</xsl:choose>	
+				</p>
 			  </xsl:when>
 			  <xsl:otherwise>
-				<xsl:call-template name="multivigenza"/>
+				<p class="firma">
+					<xsl:choose>
+					  <xsl:when test="$datafine!=''">
+						<xsl:call-template name="vigenza"/>
+					  </xsl:when>
+					  <xsl:otherwise>
+						<xsl:call-template name="multivigenza"/>
+					  </xsl:otherwise>
+					</xsl:choose>	
+				</p>
 			  </xsl:otherwise>
 			</xsl:choose>	
-		</p>
 	</xsl:template>	
 	
 	<!-- ======================================================== -->

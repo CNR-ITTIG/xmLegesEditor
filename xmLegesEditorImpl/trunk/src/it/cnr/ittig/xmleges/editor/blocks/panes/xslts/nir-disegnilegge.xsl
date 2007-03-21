@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" xmlns:nir="http://www.normeinrete.it/disegnilegge/1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" exclude-result-prefixes="h nir xlink" xmlns="http://www.w3.org/HTML/1998/html4" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
+<xsl:stylesheet version="1.0" 
+xmlns:nir="http://www.normeinrete.it/disegnilegge/1.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+exclude-result-prefixes="h nir xlink" xmlns="http://www.w3.org/HTML/1998/html4" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
 	<xsl:output method="html" encoding="UTF-8" indent="yes"/>
 	<!-- ======================================================== -->
 	<!--                                                          -->

@@ -62,12 +62,18 @@
 					font-size: large;
 				}
 				.title {
-					margin-top: 15px;
+					margin-top: 10px;
 					text-align:center;
 					font-size: 90% ;
-					font-weight: bold;
 					text-align: center;
 				}
+				.titoloDoc {
+					margin-top: 15px;
+					text-align:center;
+					font-size: 110% ;
+					font-weight: bold;
+					text-align: center;
+				}	
 				.formulainiziale {
 					text-align: center;
 					font-size: 100%;
@@ -149,13 +155,10 @@
 					list-style-type: none;
 					text-align: right;
 				}
-				/* ELIMINATO DALLA DTD 2.2 
 				.visto {
 					font-size: 80%;
-					font-weight: bold;
+					font-style:italic;
 				}
-				*/
-				/* aggiunto dalla DTD 2.2 */
 				.firma {
 					font-size: 80%;
 					font-weight: bold;
@@ -255,7 +258,7 @@
 		<hr/>
 	</xsl:template>
 	
-	<xsl:template match="nir:emanante">
+	<xsl:template match="//*[name()='emanante']">
 		<div class="title">
 			<xsl:apply-templates/>
 		</div>
@@ -263,7 +266,7 @@
 
 	<xsl:template match="//*[name()='titoloDoc']">
 		<a name="{@id}"></a>
-		<div class="titleLegge">
+		<div class="titoloDoc">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
 				<xsl:call-template name="vigenza"/>
@@ -648,20 +651,33 @@
 		</p>
 	</xsl:template		-->
 
-	<!--	Aggiunto dalla DTD 2.2	-->
 	<xsl:template match="//*[name()='firma']">
-		<p class="firma">
-		
-			<!--   è possibile marcare la vigenza? altrimenti eliminare	-->
 			<xsl:choose>
-			  <xsl:when test="$datafine!=''">
-				<xsl:call-template name="vigenza"/>
+			  <xsl:when test="@tipo='visto'">
+				<p class="visto">
+					<xsl:choose>
+						<xsl:when test="$datafine!=''">
+							<xsl:call-template name="vigenza"/>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:call-template name="multivigenza"/>
+			  			</xsl:otherwise>
+					</xsl:choose>	
+				</p>
 			  </xsl:when>
 			  <xsl:otherwise>
-				<xsl:call-template name="multivigenza"/>
+				<p class="firma">
+					<xsl:choose>
+					  <xsl:when test="$datafine!=''">
+						<xsl:call-template name="vigenza"/>
+					  </xsl:when>
+					  <xsl:otherwise>
+						<xsl:call-template name="multivigenza"/>
+					  </xsl:otherwise>
+					</xsl:choose>	
+				</p>
 			  </xsl:otherwise>
 			</xsl:choose>	
-		</p>
 	</xsl:template>	
 	
 	<!-- ======================================================== -->
