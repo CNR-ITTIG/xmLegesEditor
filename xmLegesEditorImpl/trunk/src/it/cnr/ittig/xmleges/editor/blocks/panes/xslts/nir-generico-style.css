@@ -20,12 +20,18 @@
 		font-size: large;
 	}
 	.title {
-		margin-top: 15px;
+		margin-top: 10px;
 		text-align:center;
 		font-size: 90% ;
-		font-weight: bold;
 		text-align: center;
 	}
+	.titoloDoc {
+		margin-top: 15px;
+		text-align:center;
+		font-size: 110% ;
+		font-weight: bold;
+		text-align: center;
+	}	
 	.formulainiziale {
 		text-align: center;
 		font-size: 100%;
@@ -107,12 +113,10 @@
 		list-style-type: none;
 		text-align: right;
 	}
-	/* ELIMINATO DALLA DTD 2.2 
 	.visto {
 		font-size: 80%;
-		font-weight: bold;
+		font-style:italic;
 	}
-	*/
 	.hidden {
 		width:0px;
 		height:0px;
