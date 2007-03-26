@@ -27,18 +27,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <xsl:include href="xsltmapper-1.0.xsl"/>
 
 <!-- mettere elementi gestiti da questo file -->
-<xsl:strip-space elements="*" />
-
-
-	<xsl:template match="*[name()='NIR']/*">	
-		<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-    	<!--	xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-        <xsl:apply-templates /	-->
-        <xsl:call-template name="vigenza"/>
-    </xsl:element>
-		
-	</xsl:template>	
-	
+<xsl:strip-space elements="*" />	
 	
 <!-- ================================================================================ -->
 <!-- =============================================================== INTESTAZIONE === -->
@@ -231,7 +220,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	
 		
 	
-	<!--	RIMOSSI DALLA DTD 2.2
+	<!--	RIMOSSI DALLA DTD 2.2 - Ma servono ancora per i DDL -->
 <xsl:template match="*[name()='sottoscrizioni']">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
     	<xsl:attribute name="style">margin: 15 0 0 0;</xsl:attribute>
@@ -244,7 +233,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     	<xsl:attribute name="style">margin: 5 0 0 0;</xsl:attribute>
         <xsl:call-template name="vigenza"/>
     </xsl:element>
-</xsl:template				-->
+</xsl:template>
 
 	
 	<!--	RIMOSSI DALLA DTD 2.2

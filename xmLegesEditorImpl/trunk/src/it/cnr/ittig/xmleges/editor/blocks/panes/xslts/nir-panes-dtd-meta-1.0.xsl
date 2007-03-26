@@ -35,7 +35,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <xsl:template match="*[name()='descrittori']">
 	<center><b><xsl:value-of select="name()"/></b></center>
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-		<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 		<xsl:for-each select="*[name()='urn']">
 			<xsl:variable name="num">
 				<xsl:value-of select="position()" />
@@ -82,6 +81,26 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		</xsl:for-each>
 	</xsl:element>
 	<xsl:apply-templates select="*[name()='redazione']" />
+
+
+	<xsl:for-each select="*[name()='materie']">
+		<xsl:variable name="num">
+			<xsl:value-of select="position()" />
+		</xsl:variable>
+		<xsl:choose>
+			<xsl:when test="$num=1">
+				<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
+	   				<br/><center><b><xsl:value-of select="name()"/></b></center>
+				</xsl:element>	    
+			</xsl:when>
+		</xsl:choose>
+		<br/><xsl:value-of select="@vocabolario"/>
+		<xsl:text>: </xsl:text>
+		<font color="blue">
+			<xsl:apply-templates select="*[name()='materia']" />
+		</font>	
+	</xsl:for-each>
+
 	<br/><hr/>
 	
 	<xsl:for-each select="../*[name()='proprietario']">
@@ -109,6 +128,11 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 			</xsl:when>
 		</xsl:choose>
 	</xsl:for-each>
+</xsl:template>
+
+<xsl:template match="*[name()='materia']" >
+    <xsl:value-of select="@valore"/>
+    <xsl:text> </xsl:text>
 </xsl:template>
 
 <xsl:template match="*[name()='pubblicazione']" >
@@ -183,7 +207,6 @@ fine rimosso dalla dtd 2.2-->
 <xsl:template match="*[name()='ciclodivita']">
 	<center><b><xsl:value-of select="name()"/></b></center>
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-		<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 		<xsl:apply-templates />
 	</xsl:element>
 	<hr/>
@@ -257,6 +280,51 @@ fine rimosso dalla dtd 2.2-->
 	</xsl:for-each>			      
 </xsl:template>						
 
+<xsl:template match="*[name()='inquadramento']">
+	<center><b><xsl:value-of select="name()"/></b></center>
+	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
+		<xsl:for-each select="*">
+			<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
+				<xsl:attribute name="style">
+           			margin: 30 15 15 25;
+            		color: red;
+			    </xsl:attribute>
+			    <xsl:value-of select="name()"/>
+			    <br/>
+			</xsl:element>	    
+		    <xsl:apply-templates select="."/>
+		</xsl:for-each>
+	</xsl:element>
+	<br/><hr/>
+</xsl:template>
+
+<xsl:template match="*[name()='infodoc']" >
+	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
+		Fonte: <font color="blue"><xsl:value-of select="@fonte"/></font><br/>
+		Funzione: <font color="blue"><xsl:value-of select="@funzione"/></font><br/>
+		Natura: <font color="blue"><xsl:value-of select="@natura"/></font><br/>
+		Normativa: <font color="blue"><xsl:value-of select="@normativa"/></font><br/>
+		Registrazione: <font color="blue"><xsl:value-of select="@registrazione"/></font><br/>
+	</xsl:element>
+</xsl:template>
+
+
+<xsl:template match="*[name()='infomancanticccccc']" >
+	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
+		non fatto
+	</xsl:element>
+</xsl:template>
+
+<xsl:template match="*[name()='oggetto'] | *[name()='proponenti'] | *[name()='infomancanti']" >
+	<xsl:for-each select="*">
+		<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
+			<xsl:value-of select="name()"/>: <font color="blue"><xsl:value-of select="@valore"/></font>
+		</xsl:element>	    
+	</xsl:for-each>
+</xsl:template>
+
+
+
 <xsl:template match="*[name()='cnr:meta']">
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 	   	<xsl:attribute name="style">
@@ -269,7 +337,7 @@ fine rimosso dalla dtd 2.2-->
 		<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 		    <xsl:value-of select="substring(name(),5)"/>
 		    <xsl:text>: </xsl:text>
-			<font color="blue"><xsl:value-of select="@value"/></font>
+			<font color="blue"><xsl:value-of select="@valore"/></font>
 		</xsl:element>		
 	</xsl:for-each>
 </xsl:template>

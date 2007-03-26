@@ -13,7 +13,7 @@
                                xmlns:fo="http://www.w3.org/1999/XSL/Format"
                                xmlns:h="http://www.w3.org/HTML/1998/html4"
                                xmlns:xlink="http://www.w3.org/1999/xlink" 
-                               xmlns:nir="http://www.normeinrete.it/nir/2.1/"
+                               xmlns:nir="http://www.normeinrete.it/nir/2.2/"
                                xmlns:cnr="http://www.cnr.it/provvedimenti/2.1" >
                                
 <xsl:output method="xml" indent="yes" encoding="iso-8859-1"/>
@@ -177,22 +177,32 @@
       <xsl:apply-templates/>
    </fo:block>
 </xsl:template>
-<xsl:template match="nir:sottoscrizioni">
+
+<!--	xsl:template match="nir:sottoscrizioni">
    <fo:block space-before="2mm">
       <xsl:apply-templates/>
    </fo:block>
-</xsl:template>
-<xsl:template match="nir:sottoscrivente">
+</xsl:template	-->
+
+<!-- xsl:template match="nir:sottoscrivente">
    <fo:block margin-left="4em" text-indent="0mm" space-before="1mm">
-   <!-- fo:block margin-left="50%" text-indent="0mm" space-before="1mm"-->
+   
       <xsl:apply-templates/>
    </fo:block>
-</xsl:template>
-<xsl:template match="nir:visto">
+</xsl:template -->
+
+<!--	xsl:template match="nir:visto">
+   <fo:block font-size="smaller" text-indent="0mm" space-before="2mm">
+      <xsl:apply-templates/>
+   </fo:block>
+</xsl:template	-->
+
+<xsl:template match="nir:firma">
    <fo:block font-size="smaller" text-indent="0mm" space-before="2mm">
       <xsl:apply-templates/>
    </fo:block>
 </xsl:template>
+
 <xsl:template name="annessi">
 </xsl:template>
 

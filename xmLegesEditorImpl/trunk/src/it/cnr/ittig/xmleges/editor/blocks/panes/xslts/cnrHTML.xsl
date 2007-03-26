@@ -10,9 +10,9 @@
 <!--                                                         -->
 
 <xsl:stylesheet  version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                               xmlns:nir="http://www.normeinrete.it/nir/2.1/"
+                               xmlns:nir="http://www.normeinrete.it/nir/2.2/"
                                xmlns:h  ='http://www.w3.org/HTML/1998/html4' 
-                               xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.1/" 
+                               xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" 
                                xmlns:xlink="http://www.w3.org/1999/xlink">
 
 <xsl:output method="html" encoding="iso-8859-1"/>
@@ -80,10 +80,12 @@ body { font-family: "Verdana", "Tahoma", "Times New Roman",  "Book Antiqua";
 .formulafinale          {  margin-top: 50pt;  margin-left: 10pt; margin-right: 10pt;    display: block;}
 .conclusione            {  display: block;                                                            }
 .dataeluogo             {  margin-top: 3em;  display: block;  padding-left: 20pt;                     }
+/*
 .sottoscrizioni         {  display: block;                                                            }
 .sottoscrivente         {  margin-top: 1em;  display: block; text-align: center; padding-left: 20%;   }
 .visto                  {  margin-top: 2em;  display: block;  text-align: left; font-size: 9pt;       }
-
+*/
+.firma                  {  margin-top: 2em;  display: block;  text-align: left; font-size: 9pt;       }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * ARTICOLATO                                                                                                          *

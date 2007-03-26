@@ -8,7 +8,7 @@
 <!--     Release 31/01/2001                                  -->
 <!--                                                         -->
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink"
-                xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/1.0" xmlns:nir="http://www.normeinrete.it/nir/1.0">
+                xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2" xmlns:nir="http://www.normeinrete.it/nir/2.2">
 
 	<xsl:output method="xml" encoding="ISO-8859-1"/>
 
