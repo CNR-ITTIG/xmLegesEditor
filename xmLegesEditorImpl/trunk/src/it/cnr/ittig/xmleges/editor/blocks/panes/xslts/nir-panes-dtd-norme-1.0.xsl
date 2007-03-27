@@ -463,8 +463,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	 </u></font>
 </xsl:template>
 
-
-<xsl:template  name="vigenza">
+										
+<xsl:template name="vigenza">&#160;<!--	per risolvere il problema con h:p	-->
 	<xsl:variable name="stato">
 		<xsl:value-of select="@status" />
 	</xsl:variable>
@@ -473,7 +473,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	</xsl:variable>
 	<xsl:variable name="fine_id">
 		<xsl:value-of select="@finevigore"/>
-	</xsl:variable>		
+	</xsl:variable>
 	<xsl:variable name="data_inizio">
 		<!--	xsl:value-of select="//*[name()='evento'][@id=$inizio_id]/@data"/	-->
 		<xsl:value-of select="id($inizio_id)/@data"/>
@@ -481,11 +481,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	<xsl:variable name="data_fine">
 		<!--	xsl:value-of select="//*[name()='evento'][@id=$fine_id]/@data"/	-->
 		<xsl:value-of select="id($fine_id)/@data"/>
-	</xsl:variable>	
-	
+	</xsl:variable>
 	<xsl:choose>
 		<!-- DTD-DL -->
-		<xsl:when test="$stato='soppresso'">					
+		<xsl:when test="$stato='soppresso'">
       		<xsl:choose>
 				<xsl:when test="local-name()='span'">
 				    <font color="red"><s>
@@ -525,7 +524,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:when>
-		
 		<!--		 DTD 2.1 		-->
 		<!-- ========================================== DATA FINE !='' ====================================== -->
 		<xsl:when test="$fine_id!=''">
@@ -536,7 +534,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 					    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 					        <xsl:apply-templates />
 					    </xsl:element>
-
 			<span>
 				<em>
 				  <font size="2">
@@ -548,21 +545,18 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 						<xsl:otherwise>
 							<xsl:text>fino</xsl:text>
 						</xsl:otherwise>
-					</xsl:choose>	
+					</xsl:choose>
 					&#160;al <xsl:value-of select="concat(substring($data_fine,7,2),'/',substring($data_fine,5,2),'/',substring($data_fine,1,4))"/>
-					<xsl:choose>			
+					<xsl:choose>
 						<xsl:when test="$stato!=''">
 							(<xsl:value-of select="$stato"/>)
 						</xsl:when>
-					</xsl:choose>		
+					</xsl:choose>
 					<xsl:text>&#93;&#160;</xsl:text>
-				   </font>	
+				   </font>
 				</em>
-			</span>			 						
-
-
-
-					</font>	
+			</span>
+					</font>
 				</xsl:when>
 				<xsl:otherwise>
 				    <div style="color: red; ">
@@ -570,8 +564,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 					    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 					        <xsl:apply-templates />
 					    </xsl:element>
-
-
 			<span>
 				<em>
 				  <font size="2">
@@ -583,27 +575,22 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 						<xsl:otherwise>
 							<xsl:text>fino</xsl:text>
 						</xsl:otherwise>
-					</xsl:choose>	
+					</xsl:choose>
 					&#160;al <xsl:value-of select="concat(substring($data_fine,7,2),'/',substring($data_fine,5,2),'/',substring($data_fine,1,4))"/>
-					<xsl:choose>			
+					<xsl:choose>
 						<xsl:when test="$stato!=''">
 							(<xsl:value-of select="$stato"/>)
 						</xsl:when>
-					</xsl:choose>		
+					</xsl:choose>
 					<xsl:text>&#93;&#160;</xsl:text>
-				   </font>	
+				   </font>
 				</em>
-			</span>			 						
-
-
-
-
+			</span>
 				    </div>
 				</xsl:otherwise>
 			</xsl:choose>
-		</xsl:when>	
+		</xsl:when>
 		<!--		 ========================================== DATA inizio !='' ====================================== -->
-
 		<xsl:when test="$inizio_id!=''">
       		<xsl:choose>
 				<xsl:when test="local-name()='span'">
@@ -612,8 +599,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 					    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 					        <xsl:apply-templates />
 					    </xsl:element>
-					    
-					    
 			<span>
 				<em>
 				  <font size="2">
@@ -622,11 +607,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 					&#93;
 				  </font>
 				</em>
-			</span>	
-					    
-					    
-					    					    
-					    
+			</span>
 				    </font>
 				</xsl:when>
 				<xsl:otherwise>
@@ -635,8 +616,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 					    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 					        <xsl:apply-templates />
 					    </xsl:element>
-					    
-
 			<span>
 				<em>
 				  <font size="2">
@@ -645,9 +624,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 					&#93;
 				  </font>
 				</em>
-			</span>	
-
-					    
+			</span>
 				    </div>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -660,7 +637,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		</xsl:otherwise>
 	</xsl:choose>
 </xsl:template>
-
 
 
 
