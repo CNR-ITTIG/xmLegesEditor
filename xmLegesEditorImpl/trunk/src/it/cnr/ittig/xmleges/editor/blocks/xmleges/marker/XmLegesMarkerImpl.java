@@ -279,7 +279,7 @@ public class XmLegesMarkerImpl implements XmLegesMarker, Loggable, Serviceable, 
 		sb.append(dtd);
 		sb.append(" -t ");
 		sb.append(tipoDoc);
-		if (tipoDocAltro != null) {
+		if (tipoDocAltro != null && tipoDocAltro.trim().length()>0) {
 			sb.append(" -T ");
 			sb.append(tipoDocAltro);
 		}
