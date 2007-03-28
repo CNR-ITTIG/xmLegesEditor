@@ -72,12 +72,12 @@ public class MetaDescrittoriMaterieImpl implements MetaDescrittoriMaterie , Logg
 					for (int j = 0; j < materieVocab.length; j++) {
 						Element materiaTag;
 						materiaTag = doc.createElement("materia");
-						UtilDom.setAttributeValue(materiaTag,"value",vocabolari[i].getMaterie()[j]);
+						UtilDom.setAttributeValue(materiaTag,"valore",vocabolari[i].getMaterie()[j]);
 						utilRulesManager.orderedInsertChild(vocabTag,materiaTag);
 						
 					}
 				}else{
-					UtilDom.setAttributeValue(vocabTag.getChildNodes().item(0),"value",null);
+					UtilDom.setAttributeValue(vocabTag.getChildNodes().item(0),"valore",null);
 				}
 				utilRulesManager.orderedInsertChild(descrittoriNode,vocabTag);
 
@@ -111,13 +111,13 @@ public class MetaDescrittoriMaterieImpl implements MetaDescrittoriMaterie , Logg
 			String nomeVocabolario=vocabolariList[i].getAttributes().getNamedItem("vocabolario").getNodeValue();
 			vocabolariOnDoc[i].setNome(nomeVocabolario);
 			NodeList materieList=vocabolariList[i].getChildNodes();
-			boolean isEmpty=(materieList.getLength()==1 && (materieList.item(0).getAttributes().getNamedItem("value")==null 
+			boolean isEmpty=(materieList.getLength()==1 && (materieList.item(0).getAttributes().getNamedItem("valore")==null 
 					|| 
-					materieList.item(0).getAttributes().getNamedItem("value").getNodeValue().equals("")));
+					materieList.item(0).getAttributes().getNamedItem("valore").getNodeValue().equals("")));
 			if(materieList!=null && !isEmpty){
 				String[] materieVocabolario=new String[materieList.getLength()];
 				for(int j=0;j<materieList.getLength();j++){
-					materieVocabolario[j]=materieList.item(j).getAttributes().getNamedItem("value").getNodeValue();			
+					materieVocabolario[j]=materieList.item(j).getAttributes().getNamedItem("valore").getNodeValue();			
 				}
 				vocabolariOnDoc[i].setMaterie(materieVocabolario);
 				

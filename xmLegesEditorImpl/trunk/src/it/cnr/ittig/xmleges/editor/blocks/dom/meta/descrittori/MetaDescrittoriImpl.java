@@ -9,8 +9,11 @@ import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.MetaDescrittori;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Pubblicazione;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Redazione;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 
 import java.util.Vector;
@@ -109,78 +112,7 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 		}
 	}
 
-	public Pubblicazione[] getAltrePubblicazioni(Node node) {
-
-		Document doc = documentManager.getDocumentAsDom();
-		String tag, num, data, tipo;
-		Vector altrePubblicazioniVect = new Vector();
-
-		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
-		Node altrePubNode = UtilDom.findRecursiveChild(activeMeta,"altrepubblicazioni");
-		
-		if (altrePubNode != null) {
-			NodeList altreList = altrePubNode.getChildNodes();
-			for (int i = 0; i < altreList.getLength(); i++) {
-				Node pubNode = altreList.item(i);
-				if (pubNode.getNodeType() == Node.ELEMENT_NODE) {
-					tag = pubNode.getNodeName();
-					tipo = pubNode.getAttributes().getNamedItem("tipo") != null ? pubNode.getAttributes().getNamedItem("tipo").getNodeValue() : null;
-					num = pubNode.getAttributes().getNamedItem("num") != null ? pubNode.getAttributes().getNamedItem("num").getNodeValue() : null;
-					data = pubNode.getAttributes().getNamedItem("norm") != null ? pubNode.getAttributes().getNamedItem("norm").getNodeValue() : null;
-					altrePubblicazioniVect.add(new Pubblicazione(tag, tipo, num, data));
-				}
-			}
-		}
-		Pubblicazione[] altrePubblicazioni = new Pubblicazione[altrePubblicazioniVect.size()];
-		altrePubblicazioniVect.copyInto(altrePubblicazioni);
-
-		return altrePubblicazioni;
-	}
-
-	public void setAltrePubblicazioni(Node node, Pubblicazione[] pubblicazioni) {
-		Document doc = documentManager.getDocumentAsDom();
-		
-		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
-		Node descrittoriNode = UtilDom.findRecursiveChild(activeMeta,"descrittori");
-		
-		removeMetaByName("altrepubblicazioni", node);
-		if (pubblicazioni.length > 0) {
-			Node altrepubNode = doc.createElement("altrepubblicazioni");
-			for (int i = 0; i < pubblicazioni.length; i++) {
-				Element altrapub = doc.createElement(pubblicazioni[i].getTag());
-				altrapub.setAttribute("tipo", pubblicazioni[i].getTipo());
-				altrapub.setAttribute("num", pubblicazioni[i].getNum());
-				altrapub.setAttribute("norm", pubblicazioni[i].getNorm());
-				altrepubNode.appendChild(altrapub);
-			}
-
-			Node oldTag = UtilDom.findRecursiveChild(activeMeta,"altrepubblicazioni");
-			if (oldTag != null) // c'era gia' un nodo altrepubblicazioni
-				descrittoriNode.replaceChild(altrepubNode, oldTag);
-			else {
-				Node child = descrittoriNode.getFirstChild();
-				boolean inserted = false;
-				do {
-					try {
-						if (dtdRulesManager.queryCanInsertBefore(descrittoriNode, child, altrepubNode)) {
-							UtilDom.insertAfter(altrepubNode, child.getPreviousSibling());
-							inserted = true;
-						}
-						child = child.getNextSibling();
-					} catch (DtdRulesManagerException ex) {
-						logger.error(ex.getMessage(), ex);
-					}
-				} while (!inserted && child != null);
-				try {
-					if (!inserted && dtdRulesManager.queryCanAppend(descrittoriNode, altrepubNode))
-						descrittoriNode.appendChild(altrepubNode);
-				} catch (DtdRulesManagerException ex) {
-					logger.error(ex.getMessage(), ex);
-				}
-			}
-		}
-	}
-
+	
 
 	public String[] getAlias(Node node) {
 		Document doc = documentManager.getDocumentAsDom();
@@ -191,7 +123,7 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 		Vector aliasVect = new Vector();
 
 		for (int i = 0; i < aliasList.length; i++)
-			aliasVect.add(UtilDom.getAttributeValueAsString(aliasList[i],"value"));
+			aliasVect.add(UtilDom.getAttributeValueAsString(aliasList[i],"valore"));
 
 		String[] alias = new String[aliasVect.size()];
 		aliasVect.copyInto(alias);
@@ -209,7 +141,7 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 		for (int i = 0; i < alias.length; i++) {
 			Element aliasTag;
 			aliasTag = doc.createElement("alias");
-			UtilDom.setAttributeValue(aliasTag,"value",alias[i]);
+			UtilDom.setAttributeValue(aliasTag,"valore",alias[i]);
 			Node child = descrittoriNode.getFirstChild();
 			boolean inserted = false;
 			do {
@@ -234,47 +166,124 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 	}
 
 
-	public String[] getRedazione(Node node) {
+	public Redazione[] getRedazioni(Node node) {
+		
 		Document doc = documentManager.getDocumentAsDom();
+		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
+		Node[] redazioniList = UtilDom.getElementsByTagName(doc,activeMeta,"redazione");
+		Vector redazioniVect = new Vector();
 		String data = null;
 		String nome = null;
 		String url = null;
 		String contributo = null;
-		
+				
 
-		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
-		Node redNode = UtilDom.findRecursiveChild(activeMeta,"redazione");
-		
-		if (redNode!=null) {
-			Node n = redNode;
-			data = n.getAttributes().getNamedItem("norm") != null ? n.getAttributes().getNamedItem("norm").getNodeValue() : null;
-			nome = n.getAttributes().getNamedItem("nome") != null ? n.getAttributes().getNamedItem("nome").getNodeValue() : null;
-			url = n.getAttributes().getNamedItem("url") != null ? n.getAttributes().getNamedItem("url").getNodeValue() : null;
-			contributo = n.getAttributes().getNamedItem("contributo") != null ? n.getAttributes().getNamedItem("contributo").getNodeValue() : null;
+		for (int i = 0; i < redazioniList.length;i++) {
+			Node redazioneNode = redazioniList[i];
+			if (redazioneNode!=null) {
+				Node n = redazioneNode;
+				data = n.getAttributes().getNamedItem("norm") != null ? n.getAttributes().getNamedItem("norm").getNodeValue() : null;
+				nome = n.getAttributes().getNamedItem("nome") != null ? n.getAttributes().getNamedItem("nome").getNodeValue() : null;
+				url = n.getAttributes().getNamedItem("url") != null ? n.getAttributes().getNamedItem("url").getNodeValue() : null;
+				contributo = n.getAttributes().getNamedItem("contributo") != null ? n.getAttributes().getNamedItem("contributo").getNodeValue() : null;
+				if ( (data!=null&&!data.trim().equals("")) 
+						|| (nome!=null&&!nome.trim().equals("")) 
+						|| (url!=null&&!url.trim().equals("")) 
+						|| (contributo!=null&&!contributo.trim().equals("")) )
+					redazioniVect.add(new Redazione(data,nome,url,contributo));
+			}
 			
 		}
-		return (new String[]{data,nome, url,contributo});
+		Redazione[] redazioni = new Redazione[redazioniVect.size()];
+		redazioniVect.copyInto(redazioni);
+		
+		return redazioni;
+		
+		
+//		return (new String[]{data,nome, url,contributo});
 		
 	}
 	
 	
-	public void setRedazione(Node node, String[] redazione) {
-		
+	public void setRedazioni(Node node, Redazione[] redazioni) {
+//		
 		Document doc = documentManager.getDocumentAsDom();
 		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
 		Node descrittoriNode = UtilDom.findRecursiveChild(activeMeta,"descrittori");
-
-		if (redazione != null) {
-			Node oldTag = UtilDom.findRecursiveChild(activeMeta,"redazione");
-			Element redTag;
-			redTag = doc.createElement("redazione");			
-			redTag.setAttribute("norm", redazione[0]);
-			redTag.setAttribute("nome", redazione[1]);
-			redTag.setAttribute("url", redazione[2]);
-			redTag.setAttribute("contributo", redazione[3]);
+		
+		removeMetaByName("redazione", node);
+		
+		if(redazioni!=null && redazioni.length>0){
 			
-			descrittoriNode.replaceChild(redTag, oldTag);
-		}
+			for (int i = 0; i < redazioni.length; i++) {
+				Element redazioneTag;
+				redazioneTag = doc.createElement("redazione");
+				redazioneTag.setAttribute("norm", redazioni[i].getData());
+				redazioneTag.setAttribute("nome", redazioni[i].getNome());
+				redazioneTag.setAttribute("url", redazioni[i].getUrl());
+				redazioneTag.setAttribute("contributo", redazioni[i].getContributo());
+				Node child = descrittoriNode.getFirstChild();
+				boolean inserted = false;
+				do {
+					try {
+						if (dtdRulesManager.queryCanInsertBefore(descrittoriNode, child, redazioneTag)) {
+							UtilDom.insertAfter(redazioneTag, child.getPreviousSibling());
+							inserted = true;
+						}
+						child = child.getNextSibling();
+					} catch (DtdRulesManagerException ex) {
+						logger.error(ex.getMessage(), ex);
+					}
+				} while (!inserted && child != null);
+				try {
+					if (!inserted && dtdRulesManager.queryCanAppend(descrittoriNode, redazioneTag))
+						descrittoriNode.appendChild(redazioneTag);
+				} catch (DtdRulesManagerException ex) {
+					logger.error(ex.getMessage(), ex);
+				}
+			}
+		}else{
+				Element redazioneTag;
+				redazioneTag = doc.createElement("redazione");
+				
+				Node child = descrittoriNode.getFirstChild();
+				boolean inserted = false;
+				do {
+					try {
+						if (dtdRulesManager.queryCanInsertBefore(descrittoriNode, child, redazioneTag)) {
+							UtilDom.insertAfter(redazioneTag, child.getPreviousSibling());
+							inserted = true;
+						}
+						child = child.getNextSibling();
+					} catch (DtdRulesManagerException ex) {
+						logger.error(ex.getMessage(), ex);
+					}
+				} while (!inserted && child != null);
+				try {
+					if (!inserted && dtdRulesManager.queryCanAppend(descrittoriNode, redazioneTag))
+						descrittoriNode.appendChild(redazioneTag);
+				} catch (DtdRulesManagerException ex) {
+					logger.error(ex.getMessage(), ex);
+				}
+				
+			}
+		
+		
+//		if (redazioni != null) {
+//			Node redazioneNode = doc.createElement("redazione");
+//			for (int i = 0; i < redazioni.length; i++) {
+//				
+//				Node oldTag = UtilDom.findRecursiveChild(activeMeta,"redazione");
+//				Element redTag;
+//				redTag = doc.createElement("redazione");			
+//				redTag.setAttribute("norm", redazioni[i].getData());
+//				redTag.setAttribute("nome", redazioni[i].getNome());
+//				redTag.setAttribute("url", redazioni[i].getUrl());
+//				redTag.setAttribute("contributo", redazioni[i].getContributo());
+//				
+//				descrittoriNode.replaceChild(redTag, oldTag);
+//			}
+//		}
 	}
 
 	
