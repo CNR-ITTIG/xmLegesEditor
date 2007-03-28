@@ -27,11 +27,14 @@ public class Infodoc {
 	
 	String fonte="";
 	
-	public Infodoc(String natura, String normativa, String funzione, String fonte) {
+	String registrazione="";
+	
+	public Infodoc(String natura, String normativa, String funzione, String fonte, String registrazione) {
 		setNatura(natura);
 		setNormativa(normativa);
 		setFunzione(funzione);
 		setFonte(fonte);
+		setRegistrazione(registrazione);
 	}
 	
 
@@ -69,6 +72,16 @@ public class Infodoc {
 
 	public String getNormativa() {
 		return normativa;
+	}
+
+
+	public String getRegistrazione() {
+		return registrazione;
+	}
+
+
+	public void setRegistrazione(String registrazione) {
+		this.registrazione = registrazione;
 	}
 
 }

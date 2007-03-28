@@ -2,6 +2,7 @@ package it.cnr.ittig.xmleges.editor.services.form.meta.descrittori;
 
 import it.cnr.ittig.services.manager.Service;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Pubblicazione;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Redazione;
 
 /**
  * Servizio per la gestione dei metadati generali del documento NIR.
@@ -45,13 +46,6 @@ public interface MetaDescrittoriForm extends Service {
 
 
 	/**
-	 * Restituisce le altre pubblicazioni
-	 * 
-	 * @return altre pubblicazioni
-	 */
-	public Pubblicazione[] getAltrePubblicazioni();
-
-	/**
 	 * Restituisce il tipo di pubblicazione?? (originale, monovigente, multivigente).
 	 * 
 	 * @return tipo del documento
@@ -86,14 +80,7 @@ public interface MetaDescrittoriForm extends Service {
 	 */
 	public void setPubblicazione(Pubblicazione pubblicazione);
 
-	/**
-	 * Imposta le altre pubblicazioni del documento
-	 * 
-	 * @param altrePubblicazioni pubblicazioni del documento
-	 */
-	public void setAltrePubblicazioni(Pubblicazione[] altrePubblicazioni);
+	public void setRedazioni(Redazione[] redazioni);
 	
-	public void setRedazione(String[] redazione);
-	
-	public String[] getRedazione();
+	public Redazione[] getRedazioni();
 }
