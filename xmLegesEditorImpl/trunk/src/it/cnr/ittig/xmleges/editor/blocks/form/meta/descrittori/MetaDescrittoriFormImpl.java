@@ -308,7 +308,7 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 	// ////////////////////////////////////////////// MetaDescrittoriForm
 	// Interface
 	public boolean openForm() {
-		form.setSize(600, 650);
+		form.setSize(600, 450);
 		form.showDialog();
 		if(form.isOk()){
 			pubblicazione = new Pubblicazione("pubblicazione", report_tipoPubblicazione.getText(), report_numeroPubblicazione.getText(), report_dataPubblicazione.getAsYYYYMMDD());
