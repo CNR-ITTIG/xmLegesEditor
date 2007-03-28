@@ -464,7 +464,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 </xsl:template>
 
 										
-<xsl:template name="vigenza">&#160;<!--	per risolvere il problema con h:p	-->
+<xsl:template name="vigenza">
 	<xsl:variable name="stato">
 		<xsl:value-of select="@status" />
 	</xsl:variable>
