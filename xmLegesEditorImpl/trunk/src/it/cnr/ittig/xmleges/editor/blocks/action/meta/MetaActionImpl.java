@@ -207,9 +207,8 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		Document doc = documentManager.getDocumentAsDom();
 		descrittoriForm.setTipoDTD(documentManager.getDtdName());
 		descrittoriForm.setAlias(descrittori.getAlias(node));
-		descrittoriForm.setAltrePubblicazioni(descrittori.getAltrePubblicazioni(node));
 		descrittoriForm.setPubblicazione(descrittori.getPubblicazione(node));
-		descrittoriForm.setRedazione(descrittori.getRedazione(node));
+		descrittoriForm.setRedazioni(descrittori.getRedazioni(node));
 
 		if (descrittoriForm.openForm()) {
 			try {
@@ -217,8 +216,7 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 				UtilDom.setAttributeValue(doc.getDocumentElement(), "tipo", descrittoriForm.getTipoPubblicazione());
 				descrittori.setAlias(node, descrittoriForm.getAlias());
 				descrittori.setPubblicazione(node, descrittoriForm.getPubblicazione());
-				descrittori.setAltrePubblicazioni(node, descrittoriForm.getAltrePubblicazioni());
-				descrittori.setRedazione(node, descrittoriForm.getRedazione());
+				descrittori.setRedazioni(node, descrittoriForm.getRedazioni());
 				rinumerazione.aggiorna(doc);
 				documentManager.commitEdit(tr);
 			} catch (DocumentManagerException ex) {
