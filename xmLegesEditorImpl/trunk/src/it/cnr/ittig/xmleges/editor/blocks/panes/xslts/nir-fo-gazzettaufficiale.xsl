@@ -68,6 +68,7 @@
                <fo:inline margin-left="2cm"><fo:page-number/></fo:inline>
             </fo:block>
          -->
+         
             <fo:list-block provisional-distance-between-starts="4.5in"
                            provisional-label-separation="0pt"
                            >
@@ -171,7 +172,7 @@
 
 	<xsl:attribute-set name="headerStyle">
 		<xsl:attribute name="extent">10mm</xsl:attribute>
-		<xsl:attribute name="border-bottom">1mm solid gray</xsl:attribute>
+		<xsl:attribute name="border-bottom">0mm solid gray</xsl:attribute>
 		<xsl:attribute name="padding-bottom">0mm</xsl:attribute>
 	</xsl:attribute-set>
 
