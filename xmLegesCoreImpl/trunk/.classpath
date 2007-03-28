@@ -13,9 +13,15 @@
 	<classpathentry kind="lib" path="lib/formsrt.jar"/>
 	<classpathentry kind="lib" path="lib/avalon-framework-cvs-20020806.jar"/>
 	<classpathentry kind="lib" path="lib/batik.jar"/>
+			
+			<!--	FOP 0.93	-->
 	<classpathentry kind="lib" path="lib/fop.jar"/>
-	<classpathentry kind="lib" path="lib/logkit-1.0.1.jar"/>	
-	<classpathentry kind="lib" path="lib/xsc.jar"/>	
-	<classpathentry kind="lib" path="lib/xsc_eval_key.jar"/>		
+	<classpathentry kind="lib" path="lib/commons-logging-1.0.4.jar"/>	
+	<classpathentry kind="lib" path="lib/xmlgraphics-commons-1.1.jar"/>	
+	<classpathentry kind="lib" path="lib/commons-io-1.1.jar"/>	
+	
+	<classpathentry kind="lib" path="lib/logkit-1.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/xsc.jar"/>		
+	<classpathentry kind="lib" path="lib/xsc_eval_key.jar"/>	
 	<classpathentry kind="output" path="bin"/>
 </classpath>
