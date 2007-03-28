@@ -22,9 +22,12 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamSource;
 
-import org.apache.avalon.framework.logger.ConsoleLogger;
-import org.apache.fop.apps.Driver;
-import org.apache.fop.messaging.MessageHandler;
+import org.apache.fop.apps.FopFactory;
+import org.apache.fop.apps.Fop;
+import org.apache.fop.apps.MimeConstants;
+
+
+
 import org.w3c.dom.Document;
 
 /**
@@ -88,21 +91,14 @@ public class UtilPdfImpl implements UtilPdf, Loggable, Serviceable {
 	 */
 	public void convertXML2PDF(String xmlUri, String xsltUri, String pdfUri) {
 
-		// Construct driver
-		Driver driver = new Driver();
-
-		// Setup logger
-		org.apache.avalon.framework.logger.Logger avalonLogger = new ConsoleLogger(ConsoleLogger.LEVEL_INFO);
-		driver.setLogger(avalonLogger);
-		MessageHandler.setScreenLogger(avalonLogger);
-
-		// Setup Renderer (output format)
-		driver.setRenderer(Driver.RENDER_PDF);
+		//Construct driver
+		FopFactory fopFactory = FopFactory.newInstance();
 
 		// Setup output
 		try {
 			OutputStream out = new java.io.FileOutputStream(new File(pdfUri));
-			driver.setOutputStream(out);
+			
+			Fop fop = fopFactory.newFop(MimeConstants.MIME_PDF, out);
 
 			// Setup XSLT
 			TransformerFactory factory = TransformerFactory.newInstance();
@@ -112,7 +108,7 @@ public class UtilPdfImpl implements UtilPdf, Loggable, Serviceable {
 			Source src = new StreamSource(new File(xmlUri));
 
 			// Resulting SAX events (the generated FO) must be piped through to FOP
-			Result res = new SAXResult(driver.getContentHandler());
+			Result res = new SAXResult(fop.getDefaultHandler());
 
 			// Start XSLT transformation and FOP processing
 			transformer.transform(src, res);
@@ -120,6 +116,7 @@ public class UtilPdfImpl implements UtilPdf, Loggable, Serviceable {
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
+
 	}
 
 	public void convertXML2PDF(Document doc, String xsltUri, String pdfUri) {
