@@ -30,11 +30,7 @@ license      : GNU General Public License http://www.gnu.org/licenses/gpl.html
 <!-- ====================================================================== -->
 <!-- ======================================================= TEXT NODE ==== -->
 <!-- ====================================================================== -->
-<xsl:template match="text()">
-	<xsl:element name="span" use-attribute-sets="XsltMapperSetParentClass">
-		&#160;<xsl:value-of select="." />
-	</xsl:element>
-</xsl:template>
+<xsl:template match="text()"><xsl:element name="span" use-attribute-sets="XsltMapperSetParentClass">&#160;<xsl:value-of select="." /></xsl:element></xsl:template>
 
 
 <!-- ====================================================================== -->
