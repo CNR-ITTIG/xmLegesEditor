@@ -61,7 +61,7 @@ public class MetaCnrImpl implements MetaCnr, Loggable, Serviceable {
 						
 			NodeList cnrMeta_elementList = n.getChildNodes();
 			for (int i = 0; i < cnrMeta_elementList.getLength();i++) {
-				String valore=UtilDom.getAttributeValueAsString(cnrMeta_elementList.item(i),"value");
+				String valore=UtilDom.getAttributeValueAsString(cnrMeta_elementList.item(i),"valore");
 				
 				if(cnrMeta_elementList.item(i).getNodeName().equals("cnr:strutturaEmanante"))
 					strutturaEmanante=valore;					
@@ -125,7 +125,7 @@ public class MetaCnrImpl implements MetaCnr, Loggable, Serviceable {
 			for(int i=0;i<elementsName.length;i++){
 				Element toInsertElement = doc.createElement(elementsName[i]);
 				if((metadati[i]!=null)&&(!metadati[i].trim().equals("")))
-					UtilDom.setAttributeValue(toInsertElement,"value",metadati[i]);
+					UtilDom.setAttributeValue(toInsertElement,"valore",metadati[i]);
 				
 				Node toInsert_Node = (Node)toInsertElement;
 
