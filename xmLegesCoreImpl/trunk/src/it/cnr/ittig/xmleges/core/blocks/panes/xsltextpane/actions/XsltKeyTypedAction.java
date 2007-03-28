@@ -53,11 +53,11 @@ public class XsltKeyTypedAction extends XsltAction {
 		if (enclosingSpans == null)
 			return;
 
-		// verifica di spazi prima o dopo il cursore. se ci sono non inserisce
+		// verifica di spazi prima o dopo il cursore. se ci sono  o siamo a inizio tag non inserisce
 		if (SPACE.equals(actionCommand)) {
 			int caret = pane.getCaretPosition();
-			try {
-				if (SPACE.equals(pane.getText(caret - 1, 1)))
+			try {    
+				if (SPACE.equals(pane.getText(caret - 1, 1)) || caret-1 == currElem.getStartOffset())
 					return;
 			} catch (BadLocationException ex) {
 			}
