@@ -77,6 +77,8 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 			infodoc_element.setAttribute("funzione", infodoc.getFunzione());
 		if(infodoc.getFonte()!=null)
 			infodoc_element.setAttribute("fonte", infodoc.getFonte());
+		if(infodoc.getRegistrazione()!=null)
+			infodoc_element.setAttribute("registrazione", infodoc.getRegistrazione());
 			
 		Node infodocNode = (Node)infodoc_element;
 		
@@ -133,28 +135,28 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 		Element infomancanti_element=null;
 		if(infomancanti.getMTitolodoc()!= null && !infomancanti.getMTitolodoc().trim().equals("")){
 			infomancanti_element = (Element) utilRulesManager.getNodeTemplate("mTitolodoc");
-			UtilDom.setAttributeValue(infomancanti_element,"value",infomancanti.getMTitolodoc());			
+			UtilDom.setAttributeValue(infomancanti_element,"valore",infomancanti.getMTitolodoc());			
 			utilRulesManager.orderedInsertChild(infomancantiNode,infomancanti_element);
 	
 		}
 		if(infomancanti.getMTipodoc()!= null && !infomancanti.getMTipodoc().trim().equals("")){
 			infomancanti_element = (Element) utilRulesManager.getNodeTemplate("mTipodoc");
-			UtilDom.setAttributeValue(infomancanti_element,"value",infomancanti.getMTipodoc() );
+			UtilDom.setAttributeValue(infomancanti_element,"valore",infomancanti.getMTipodoc() );
 			utilRulesManager.orderedInsertChild(infomancantiNode,infomancanti_element);
 		}
 		if(infomancanti.getMDatadoc()!= null && !infomancanti.getMDatadoc().trim().equals("")){
 			infomancanti_element = (Element) utilRulesManager.getNodeTemplate("mDatadoc");
-			UtilDom.setAttributeValue(infomancanti_element,"value",infomancanti.getMDatadoc() );
+			UtilDom.setAttributeValue(infomancanti_element,"valore",infomancanti.getMDatadoc() );
 			utilRulesManager.orderedInsertChild(infomancantiNode,infomancanti_element);
 		}
 		if(infomancanti.getMNumdoc()!= null && !infomancanti.getMNumdoc().trim().equals("")){
 			infomancanti_element = (Element) utilRulesManager.getNodeTemplate("mNumdoc");
-			UtilDom.setAttributeValue(infomancanti_element,"value",infomancanti.getMNumdoc() );
+			UtilDom.setAttributeValue(infomancanti_element,"valore",infomancanti.getMNumdoc() );
 			utilRulesManager.orderedInsertChild(infomancantiNode,infomancanti_element);
 		}
 		if(infomancanti.getMEmanante()!= null && !infomancanti.getMEmanante().trim().equals("")){
 			infomancanti_element = (Element) utilRulesManager.getNodeTemplate("mEmanante");
-			UtilDom.setAttributeValue(infomancanti_element,"value",infomancanti.getMEmanante() );
+			UtilDom.setAttributeValue(infomancanti_element,"valore",infomancanti.getMEmanante() );
 			utilRulesManager.orderedInsertChild(infomancantiNode,infomancanti_element);
 		}
 		/////////////////////
@@ -208,22 +210,22 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 		Element oggetto_element=null;
 		if(oggetto.getFinalita()!= null && !oggetto.getFinalita().trim().equals("")){
 			oggetto_element = (Element) utilRulesManager.getNodeTemplate("finalita");
-			UtilDom.setAttributeValue(oggetto_element,"value",oggetto.getFinalita() );
+			UtilDom.setAttributeValue(oggetto_element,"valore",oggetto.getFinalita() );
 			utilRulesManager.orderedInsertChild(oggettoNode,oggetto_element);
 		}
 		if(oggetto.getDestinatario()!= null && !oggetto.getDestinatario().trim().equals("")){
 			oggetto_element = (Element) utilRulesManager.getNodeTemplate("destinatario");
-			UtilDom.setAttributeValue(oggetto_element,"value",oggetto.getDestinatario() );
+			UtilDom.setAttributeValue(oggetto_element,"valore",oggetto.getDestinatario() );
 			utilRulesManager.orderedInsertChild(oggettoNode,oggetto_element);
 		}
 		if(oggetto.getTerritorio()!= null && !oggetto.getTerritorio().trim().equals("")){
 			oggetto_element = (Element) utilRulesManager.getNodeTemplate("territorio");
-			UtilDom.setAttributeValue(oggetto_element,"value",oggetto.getTerritorio() );
+			UtilDom.setAttributeValue(oggetto_element,"valore",oggetto.getTerritorio() );
 			utilRulesManager.orderedInsertChild(oggettoNode,oggetto_element);
 		}
 		if(oggetto.getAttivita()!= null && !oggetto.getAttivita().trim().equals("")){
 			oggetto_element = (Element) utilRulesManager.getNodeTemplate("attivita");
-			UtilDom.setAttributeValue(oggetto_element,"value",oggetto.getAttivita() );
+			UtilDom.setAttributeValue(oggetto_element,"valore",oggetto.getAttivita() );
 			utilRulesManager.orderedInsertChild(oggettoNode,oggetto_element);
 		}
 		
@@ -285,7 +287,7 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 		if(proponenti!= null && proponenti.length>0 ){
 			for (int i = 0; i < proponenti.length; i++) {
 				proponenti_element =  (Element) utilRulesManager.getNodeTemplate("proponente");
-				UtilDom.setAttributeValue(proponenti_element,"value",proponenti[i] );
+				UtilDom.setAttributeValue(proponenti_element,"valore",proponenti[i] );
 				utilRulesManager.orderedInsertChild(proponentiNode,proponenti_element);
 			}
 		}
@@ -317,6 +319,7 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 		String normativa=null;		
 		String funzione=null;		
 		String fonte=null;
+		String registrazione=null;
 
 		
 		Node infodocNode = UtilDom.findRecursiveChild(activeMeta,"infodoc");
@@ -326,8 +329,9 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 			normativa = n.getAttributes().getNamedItem("normativa") != null ? n.getAttributes().getNamedItem("normativa").getNodeValue() : null;
 			funzione = n.getAttributes().getNamedItem("funzione") != null ? n.getAttributes().getNamedItem("funzione").getNodeValue() : null;
 			fonte = n.getAttributes().getNamedItem("fonte") != null ? n.getAttributes().getNamedItem("fonte").getNodeValue() : null;
+			registrazione = n.getAttributes().getNamedItem("registrazione") != null ? n.getAttributes().getNamedItem("registrazione").getNodeValue() : null;
 		}
-		return (new Infodoc(natura, normativa, funzione, fonte));
+		return (new Infodoc(natura, normativa, funzione, fonte, registrazione));
 
 	}
 
@@ -347,7 +351,7 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 			
 			NodeList infomanc_elementList = n.getChildNodes();
 			for (int i = 0; i < infomanc_elementList.getLength();i++) {
-				String valore=UtilDom.getAttributeValueAsString(infomanc_elementList.item(i),"value");
+				String valore=UtilDom.getAttributeValueAsString(infomanc_elementList.item(i),"valore");
 				
 				if(infomanc_elementList.item(i).getNodeName().equals("mTitolodoc"))
 					mTitolodoc=valore;					
@@ -383,7 +387,7 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 			
 			NodeList oggetto_elementList = n.getChildNodes();
 			for (int i = 0; i < oggetto_elementList.getLength();i++) {
-				String valore=UtilDom.getAttributeValueAsString(oggetto_elementList.item(i),"value");
+				String valore=UtilDom.getAttributeValueAsString(oggetto_elementList.item(i),"valore");
 				if(oggetto_elementList.item(i).getNodeName().equals("finalita"))
 					finalita = valore;  
 				if(oggetto_elementList.item(i).getNodeName().equals("destinatario"))
@@ -416,7 +420,7 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 			Node n = proponentiNode;			
 			NodeList proponenti_elementList = n.getChildNodes();
 			for (int i = 0; i < proponenti_elementList.getLength();i++) {
-				String valore=UtilDom.getAttributeValueAsString(proponenti_elementList.item(i),"value");
+				String valore=UtilDom.getAttributeValueAsString(proponenti_elementList.item(i),"valore");
 				if(proponenti_elementList.item(i).getNodeName().equals("proponente"))
 					proponentiVect.add(valore);
 				}
