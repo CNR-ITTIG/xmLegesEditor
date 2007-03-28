@@ -72,9 +72,13 @@ public class InquadramentoFormImpl implements InquadramentoForm, Loggable,
 	
 	JLabel tagFormFonte;
 	
+	JLabel tagFormRegistrazione;
+	
 	JComboBox tagFormInfoDocNormativa;
 	
 	JComboBox tagFormInfoDocFunzione;
+	
+	DateForm tagFormInfoDocRegistrazione;
 	
 	JComboBox tagFormInfoDocFonte;
 	
@@ -188,15 +192,26 @@ public class InquadramentoFormImpl implements InquadramentoForm, Loggable,
 			else
 				this.tagFormFonte.setText(" ");
 			this.tagFormInfoDocFonte.setSelectedItem(infodoc.getFonte());
+			
+			if(infodoc.getRegistrazione()!=null){
+				this.tagFormRegistrazione.setText(infodoc.getRegistrazione());
+			}
+			else{
+				this.tagFormRegistrazione.setText(" ");
+			}
+//			this.tagFormInfoDocRegistrazione.set(infodoc.getRegistrazione());
+			
 		}else{
 			this.tagFormNatura.setText(" ");
 			this.tagFormNormativa.setText(" ");
 			this.tagFormFunzione.setText(" ");
 			this.tagFormFonte.setText(" ");
+			this.tagFormRegistrazione.setText(" ");
 			this.tagFormInfodocNatura.setText(null);
 			this.tagFormInfoDocNormativa.setSelectedItem(null);
 			this.tagFormInfoDocFunzione.setSelectedItem(null);
 			this.tagFormInfoDocFonte.setSelectedItem(null);
+			this.tagFormInfoDocRegistrazione.set(null);
 			
 			
 		}
@@ -299,7 +314,7 @@ public class InquadramentoFormImpl implements InquadramentoForm, Loggable,
 	}
 
 	public Infodoc getInfodoc() {
-		return (new Infodoc(tagFormNatura.getText(),tagFormNormativa.getText(),tagFormFunzione.getText(),tagFormFonte.getText()));
+		return (new Infodoc(tagFormNatura.getText(),tagFormNormativa.getText(),tagFormFunzione.getText(),tagFormFonte.getText(),tagFormRegistrazione.getText()));
 
 	}
 
@@ -330,6 +345,7 @@ public class InquadramentoFormImpl implements InquadramentoForm, Loggable,
 		formDatiOggetto = (Form) serviceManager.lookup(Form.class);
 		formDatiProponenti = (Form) serviceManager.lookup(Form.class);
 		
+		tagFormInfoDocRegistrazione = (DateForm) serviceManager.lookup(DateForm.class);
 		tagFormInfomancantiDatadoc = (DateForm) serviceManager.lookup(DateForm.class);
 				
 		prop_listtextfield = (ListTextField) serviceManager.lookup(ListTextField.class);
@@ -371,6 +387,10 @@ public class InquadramentoFormImpl implements InquadramentoForm, Loggable,
 		tagFormInfoDocFonte.addItem("prassi");
 		tagFormInfoDocFonte.setSelectedItem(null);
 		tagFormFonte = (JLabel) form.getComponentByName("editor.form.meta.inquadramento.infodoc.fonte_label");
+		
+		
+		formDatiInfodoc.replaceComponent("editor.form.meta.inquadramento.infodoc.registrazione", tagFormInfoDocRegistrazione.getAsComponent());		
+		tagFormRegistrazione = (JLabel) form.getComponentByName("editor.form.meta.inquadramento.infodoc.registrazione_label");
 			
 		infodocButton = (JButton) form.getComponentByName("editor.form.meta.inquadramento.riepilogo.infodoc_btn");
 		infodocButton.addActionListener(this);
@@ -436,6 +456,7 @@ public class InquadramentoFormImpl implements InquadramentoForm, Loggable,
 				 tagFormNormativa.setText(prova);				
 				 tagFormFunzione.setText((String)tagFormInfoDocFunzione.getSelectedItem());				
 				 tagFormFonte.setText((String)tagFormInfoDocFonte.getSelectedItem());
+				 tagFormRegistrazione.setText((String)tagFormInfoDocRegistrazione.getAsString());
 				
 			 }
 			 tagFormNormativa.revalidate();
