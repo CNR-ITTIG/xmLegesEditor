@@ -36,20 +36,7 @@ public interface MetaDescrittori extends Service {
 	 */
 	public Pubblicazione getPubblicazione(Node node);
 
-	/**
-	 * Imposta le altre pubbilcazioni del documento.
-	 * 
-	 * @param pubblicazioni altre pubblicazioni
-	 */
-	public void setAltrePubblicazioni(Node node, Pubblicazione[] pubblicazioni);
-
-	/**
-	 * Restituisce le altre pubblicazioni del documento.
-	 * 
-	 * @return altre pubblicazioni
-	 */
-	public Pubblicazione[] getAltrePubblicazioni(Node node);
-
+	
 	/**
 	 * Imposta gli alias del documento
 	 * 
@@ -69,13 +56,13 @@ public interface MetaDescrittori extends Service {
 	 * 
 	 * @param redazione
 	 */
-	public void setRedazione(Node node, String[] redazione);
+	public void setRedazioni(Node node, Redazione[] redazione);
 
 	/**
 	 * Restituisce la redazione del documento
 	 * 
 	 * @return redazione del documento
 	 */
-	public String[] getRedazione(Node node);
+	public Redazione[] getRedazioni(Node node);
 
 	}
