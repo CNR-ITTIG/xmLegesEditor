@@ -514,8 +514,8 @@ Serviceable, Initializable, ActionListener {
 				content = content.substring(content.indexOf("checkSubmit(event)"), content.length());
 				// Taglio fino a qui
 				content = content.substring(0, content.indexOf("Cerca nella classificazione"));
-				while (content.indexOf("value") != -1) {
-					content = content.substring(content.indexOf("value"), content.length());
+				while (content.indexOf("valore") != -1) {
+					content = content.substring(content.indexOf("valore"), content.length());
 					content = content.substring(content.indexOf(">"), content.length());
 					terminiSelezionati.addElement(content.substring(1, content.indexOf("<")));
 					content = content.substring(content.indexOf("<"), content.length());
