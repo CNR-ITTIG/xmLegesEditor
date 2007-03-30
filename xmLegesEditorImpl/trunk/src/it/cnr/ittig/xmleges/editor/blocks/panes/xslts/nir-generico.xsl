@@ -73,6 +73,9 @@
 			</xsl:otherwise>
 		</xsl:choose>				
 		</div>
+		<div class="meta">
+        	<xsl:apply-templates select="/*/*/*[name()='meta']/*[name()='redazionale']/*[name()='nota']" />
+        </div>
 	</xsl:template>		
 	
 
@@ -558,11 +561,7 @@
 	<!--  Template metadati                                       -->
 	<!--                                                          -->
 	<!-- ======================================================== -->
-	<xsl:template match="//*[name()='meta']">
-		<!--	table border="1" cellpadding="2" cellspacing="0" width="75%" style="margin-left: 15px;"	-->
-			<xsl:apply-templates/>
-		<!--	/table	-->
-	</xsl:template>
+	<xsl:template match="//*[name()='meta']"/>
 	<!--	xsl:template match="//*[name()='urn']">
 		<tr>
 			<td class="small">
