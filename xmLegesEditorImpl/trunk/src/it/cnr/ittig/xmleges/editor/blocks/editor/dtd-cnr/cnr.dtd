@@ -90,12 +90,26 @@
 						- Ricerche Tecnologiche e Innovazione
 						- Carattere generale
 
-     areaScientifica 		area scientifica in uso dal 01-01-2001:
+     areaScientifica 		area scientifica in uso dal 01-01-2001 al 31-12-2004:
 						- Scienze di base
 						- Scienze della vita
 						- Scienze della terra e dell'ambiente
 						- Scienze sociali e umanistiche
 						- Scienze tecnologiche, ingegneristiche e informatiche"
+						- Carattere generale
+
+     dipartimento			macro area in uso dal 1-1-2005:
+						- Agroalimentare
+						- Energia e trasporti
+						- ICT - Tecnologie dell'informazione e delle comunicazioni
+						- Identità culturale
+						- Materiali e dispositivi
+						- Medicina
+						- Patrimonio culturale
+						- Progettazione molecolare
+						- Scienze della vita
+						- Sistemi di produzione
+						- Terra e ambiente
 						- Carattere generale
 
     ===================================================================== -->
@@ -105,7 +119,7 @@
 				cnr:tipoDestinatario+, 
 				cnr:strutturaDestinataria+, 
 				cnr:tipoProvvedimento+, 
-                    (cnr:disciplina+ | cnr:areaScientifica+) )>
+                    (cnr:disciplina+ | cnr:areaScientifica+ | cnr:dipartimento+) )>
 
 <!ELEMENT cnr:strutturaEmanante		EMPTY >
 <!ATTLIST cnr:strutturaEmanante		valore CDATA #IMPLIED >
@@ -127,4 +141,7 @@
 
 <!ELEMENT cnr:areaScientifica			EMPTY >
 <!ATTLIST cnr:areaScientifica			valore CDATA #IMPLIED >
+
+<!ELEMENT cnr:dipartimento			EMPTY >
+<!ATTLIST cnr:dipartimento			valore CDATA #IMPLIED >
 
