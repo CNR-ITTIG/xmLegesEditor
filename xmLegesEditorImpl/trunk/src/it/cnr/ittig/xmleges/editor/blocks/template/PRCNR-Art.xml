@@ -15,7 +15,7 @@
 						<cnr:tipoDestinatario valore="" />
 						<cnr:strutturaDestinataria valore="" />
 						<cnr:tipoProvvedimento valore="" />
-						<cnr:areaScientifica valore="" />
+						<cnr:dipartimento valore="" />
 					</cnr:meta>
 				</proprietario>
 			</meta>
