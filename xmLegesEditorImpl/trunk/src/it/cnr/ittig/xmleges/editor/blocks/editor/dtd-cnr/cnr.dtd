@@ -4,7 +4,7 @@
 <!--     basato sulla versione flessibile della DTD di NormeInRete (NIR)   -->
 <!--                                                                       -->
 <!--     Release  2.2                                                      -->
-<!--     data     19/03/2007                                               -->
+<!--     data     11/04/2007                                               -->
 <!--                                                                       -->
 <!--     Andrea Marchetti (CNR-IIT)                                        -->
 <!--     con il contributo di                                              -->
@@ -40,8 +40,9 @@
 3.	tipoDestinatario:		il tipo di strutture a cui il provvedimento è destinato (es. Organi di ricerca)
 4.	strutturaDestinataria:	la specifica struttura a cui il provvedimento è destinato (es. ITTIG)
 5.	tipoProvvedimento:		tipologia a cui il provvedimento appartiene (es. nomina direttore)
-6.	disciplina:			la disciplina scientifica interessata dal provvedimento (es. Scienze Agrarie)
-7.	areaScientifica:		l'area scientifica interessata dal provvedimento (es. Scienze di base)
+6a.	disciplina:			la disciplina scientifica interessata dal provvedimento (es. Scienze Agrarie)
+6b.	areaScientifica:		l'area scientifica interessata dal provvedimento (es. Scienze di base)
+6c.	dipartimento:			il dipartimento interessato dal provvedimento (es. Agroalimentare)
 
      Metadato				Valori particolari o predefiniti
      
