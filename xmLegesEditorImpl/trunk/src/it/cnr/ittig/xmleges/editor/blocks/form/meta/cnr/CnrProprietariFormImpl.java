@@ -71,6 +71,8 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 	
 	JComboBox tipo_provv_combo;
 	
+	JRadioButton dipartimentoButton;
+	
 	JRadioButton areaButton;
 	
 	JRadioButton disciplinaButton;
@@ -87,6 +89,8 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 	
 	String[] elenco_areaScientifica = new String[7];
 		
+	String[] elenco_areaDipartimento = new String[13];
+	
 	String errorMessage = "";
 
 	
@@ -121,15 +125,19 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 		
 		areadisciplina_combo = (JComboBox) form.getComponentByName("editor.form.meta.cnr.areadisciplina_combo");
 		areadisciplina_combo.setEnabled(false);
-		areaButton = (JRadioButton) form.getComponentByName("editor.form.meta.cnr.area_button");
+		
+		
+		
+		dipartimentoButton = (JRadioButton) form.getComponentByName("editor.form.meta.cnr.dipartimento_button");
 		{
-			areaButton.setSelected(true);
+			dipartimentoButton.setSelected(true);
 			areadisciplina_combo.removeAllItems();
-			for (int i = 0; i < elenco_areaScientifica.length; i++)
-				areadisciplina_combo.addItem(elenco_areaScientifica[i]);		
+			for (int i = 0; i < elenco_areaDipartimento.length; i++)
+				areadisciplina_combo.addItem(elenco_areaDipartimento[i]);		
 			areadisciplina_combo.setEditable(true);
 			areadisciplina_combo.setEnabled(true);
 		}
+		areaButton = (JRadioButton) form.getComponentByName("editor.form.meta.cnr.area_button");
 		areaButton.setActionCommand("area");
 		disciplinaButton = (JRadioButton) form.getComponentByName("editor.form.meta.cnr.disciplina_button");
 		disciplinaButton.setActionCommand("disciplina");
@@ -142,18 +150,25 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 					for (int i = 0; i < elenco_areaScientifica.length; i++)
 						areadisciplina_combo.addItem(elenco_areaScientifica[i]);		
 					areadisciplina_combo.setEditable(true);
-				}else{
+				}else if(e.getActionCommand().equals("disciplina")){
 					areadisciplina_combo.removeAllItems();
 					for (int i = 0; i < elenco_disciplina.length; i++)
 						areadisciplina_combo.addItem(elenco_disciplina[i]);		
+					areadisciplina_combo.setEditable(true);
+				} else{
+					areadisciplina_combo.removeAllItems();
+					for (int i = 0; i < elenco_areaDipartimento.length; i++)
+						areadisciplina_combo.addItem(elenco_areaDipartimento[i]);		
 					areadisciplina_combo.setEditable(true);
 				}
 				areadisciplina_combo.setEnabled(true);
 			}};
 		areaButton.addActionListener(areadisciplinaListener);
 		disciplinaButton.addActionListener(areadisciplinaListener);
+		dipartimentoButton.addActionListener(areadisciplinaListener);
 		
 		areadisciplinaGroup = new ButtonGroup();
+		areadisciplinaGroup.add(dipartimentoButton);
 		areadisciplinaGroup.add(areaButton);
 		areadisciplinaGroup.add(disciplinaButton);
 						
@@ -175,7 +190,7 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 	// ////////////////////////////////////////////// MetaDescrittoriForm
 	// Interface
 	public boolean openForm() {
-		form.setSize(600, 300);
+		form.setSize(600, 350);
 		form.showDialog();
 		return form.isOk();
 	}
@@ -224,7 +239,7 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 	public void configure(Configuration configuration) throws ConfigurationException {
 		try {
 			Configuration[] elencoConf = configuration.getChildren();
-			int j=0, k=0, l=0, m=0, n=0;
+			int j=0, k=0, l=0, m=0, n=0, o=0;
 			for (int i = 0; i < elencoConf.length; i++){
 				if(elencoConf[i].getName().toLowerCase().startsWith("tipoprovvedimento")){
 				   elenco_tipoProvvedimento[j] = elencoConf[i].getAttribute("name");
@@ -245,6 +260,9 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 				else if(elencoConf[i].getName().toLowerCase().startsWith("areascientifica")){
 					   elenco_areaScientifica[n] = elencoConf[i].getAttribute("name");
 					   n++;
+				} else if(elencoConf[i].getName().toLowerCase().startsWith("dipartimento")){
+						elenco_areaDipartimento[o] = elencoConf[i].getAttribute("name");
+					   o++;
 				}
 			}
 		} catch (ConfigurationException e) {

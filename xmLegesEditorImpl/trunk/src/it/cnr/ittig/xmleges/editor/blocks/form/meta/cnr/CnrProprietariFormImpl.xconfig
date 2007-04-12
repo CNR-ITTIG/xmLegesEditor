@@ -48,4 +48,18 @@
 <areaScientifica name="Scienze tecnologiche, ingegneristiche e informatiche"/>  
 <areaScientifica name="Carattere generale"/>  
 
+<dipartimento name="----"/>  
+<dipartimento name="Agroalimentare"/>  
+<dipartimento name="Energia e trasporti"/>  
+<dipartimento name="ICT - Tecnologie dell'informazione e delle comunicazioni"/>  
+<dipartimento name="Identita' culturale"/>  
+<dipartimento name="Materiali e dispositivi"/>  
+<dipartimento name="Medicina"/>  
+<dipartimento name="Patrimonio culturale"/>  
+<dipartimento name="Progettazione molecolare"/>  
+<dipartimento name="Scienze della vita"/>  
+<dipartimento name="Sistemi di produzione"/>  
+<dipartimento name="Terra e ambiente"/>  
+<dipartimento name="Carattere generale"/>  
+
 </configuration>
