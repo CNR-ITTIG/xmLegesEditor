@@ -129,6 +129,49 @@
 	    <template tipo="Articolato" tag="DisegnoLegge">DDLSen-Mess.xml</template>
 		<dtd name="DTD DDL Base">dllight.dtd</dtd>
     </provvedimento>  
+<!-- ******************************************************* PRESENTAZIONE CAMERA PDL -->
+    <provvedimento name="PDL Camera - Presentazione" emananti="SI">
+	    <urn>
+	        <atto>proposta.legge</atto>
+	        <citazione>proposta di legge</citazione>
+	        <autorita>=^camera\.deputati$</autorita>
+	    </urn>
+	    <template tipo="Articolato" tag="DisegnoLegge">PDLCam-Pres.xml</template>
+		<dtd name="DTD DDL Base">dllight.dtd</dtd>
+    </provvedimento>
+
+<!-- ******************************************************* RELAZIONE CAMERA PDL -->
+    <provvedimento name="PDL Camera - Relazione" emananti="SI">
+	    <urn>
+	        <atto>proposta.legge;relazione</atto>
+	        <citazione>relazione del</citazione>
+	        <autorita>=^camera\.deputati$</autorita>
+	    </urn>
+	    <template tipo="Articolato" tag="DisegnoLegge">PDLCam-Rel.xml</template>
+		<dtd name="DTD DDL Base">dllight.dtd</dtd>
+    </provvedimento>
+
+<!-- ******************************************************* AULA CAMERA PDL -->
+    <provvedimento name="PDL Camera - Testo in Assemblea" emananti="SI">
+	    <urn>
+	        <atto>proposta.legge;assemblea</atto>
+	        <citazione>testo approvato dall'assemblea </citazione>
+	        <autorita>=^camera\.deputati$</autorita>
+	    </urn>
+	    <template tipo="Articolato" tag="DisegnoLegge">PDLCam-Ass.xml</template>
+		<dtd name="DTD DDL Base">dllight.dtd</dtd>
+    </provvedimento> 
+
+<!-- ******************************************************* MESSAGGIO CAMERA PDL -->
+    <provvedimento name="PDL Camera - Messaggio" emananti="SI">
+	    <urn>
+	        <atto>proposta.legge;messaggio</atto>
+	        <citazione>messaggio del </citazione>
+	        <autorita>=^camera\.deputati$</autorita>
+	    </urn>
+	    <template tipo="Articolato" tag="DisegnoLegge">PDLCam-Mess.xml</template>
+		<dtd name="DTD DDL Base">dllight.dtd</dtd>
+    </provvedimento>  
 </classe>
 
 <!-- ====================================================== LEGGE REGIONALE -->
