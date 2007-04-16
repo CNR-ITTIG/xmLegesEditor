@@ -24,7 +24,7 @@
 			<titoloDoc/>
 		</intestazione>
 		<relazione>
-			<h:div>Onorevoli Senatori. - Il il presente disegno di legge ...</h:div>
+			<h:div>Onorevoli Senatori. - Il presente disegno di legge ...</h:div>
 			<h:p style="text-align:right">Relazione tecnica</h:p>
 			<h:div>{relazione tecnica}</h:div>
 			<h:p style="text-align:right">Analisi tecnico-normativa</h:p>
