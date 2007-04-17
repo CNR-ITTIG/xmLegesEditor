@@ -124,7 +124,7 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 	boolean dialogChanged = true;
 
 	// TODO configurazione
-	// Dimension size = new Dimension(500, 400);
+	
 	Dimension size = null;
 
 	String title = null;
@@ -174,8 +174,7 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 		utilUi = (UtilUI) serviceManager.lookup(UtilUI.class);
 		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 		help = (Help) serviceManager.lookup(Help.class);
-		threadManager = (ThreadManager) serviceManager
-				.lookup(ThreadManager.class);
+		threadManager = (ThreadManager) serviceManager.lookup(ThreadManager.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
@@ -184,8 +183,7 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 			public void run() {
 				try {
 					synchronized (this) {
-						form = new FormPanel(getClass().getResourceAsStream(
-								"Form.jfrm"));
+						form = new FormPanel(getClass().getResourceAsStream("Form.jfrm"));
 					}
 				} catch (Exception ex) {
 					logger.error("Error loading 'Form.jfrm'.", ex);
@@ -196,10 +194,7 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 		popupMenu.add(utilUi.applyI18n("form.popup.cut", cutAction));
 		popupMenu.add(utilUi.applyI18n("form.popup.copy", copyAction));
 		popupMenu.add(utilUi.applyI18n("form.popup.paste", pasteAction));
-		// form = new
-		// FormPanel(this.getClass().getResourceAsStream("Form.jfrm"));
-		helpButton = new JButton(utilUi.applyI18n("form.button.help",
-				new HelpButtonAction()));
+		helpButton = new JButton(utilUi.applyI18n("form.button.help",new HelpButtonAction()));
 	}
 
 	// ////////////////////////////////////////////////////////// Form Interface
@@ -356,8 +351,7 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 	public void replaceComponent(String compName, InputStream desc)
 			throws FormException {
 		try {
-			mainPanel.getFormAccessor().replaceBean(compName,
-					new FormPanel(desc));
+			mainPanel.getFormAccessor().replaceBean(compName,new FormPanel(desc));
 		} catch (com.jeta.forms.gui.common.FormException ex) {
 			throw new FormException(ex.toString());
 		}
@@ -374,8 +368,7 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 		defaultButtons = null;
 		if (text != null)
 			for (int i = 0; i < text.length; i++) {
-				Action action = utilUi.applyI18n(text[i], new MyButtonAction(
-						i + 1));
+				Action action = utilUi.applyI18n(text[i], new MyButtonAction(i + 1));
 				JButton btn = new JButton(action);
 				btnPanel.add(btn);
 				if (i == 0)
@@ -484,11 +477,9 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 		if (newDialog == null)
 			newDialog = new JDialog();
 		newDialog.getContentPane().setLayout(new BorderLayout());
-		newDialog.getContentPane().add(getAsComponentWithDecor(),
-				BorderLayout.CENTER);
+		newDialog.getContentPane().add(getAsComponentWithDecor(),BorderLayout.CENTER);
 		if (!buttons)
-			setCustomButtons(new String[] { "form.button.ok",
-					"form.button.cancel" });
+			setCustomButtons(new String[] { "form.button.ok","form.button.cancel" });
 		if (buttons && defaultButtons != null)
 			newDialog.getRootPane().setDefaultButton(defaultButtons);
 		newDialog.getContentPane().add(btnPanel, BorderLayout.SOUTH);
@@ -496,14 +487,12 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 			getForm().getFormAccessor().replaceBean("form.panel", mainPanel);
 			if (title == null)
 				setName("form");
-			JLabel lblTitle = (JLabel) getForm().getComponentByName(
-					"form.title");
+			JLabel lblTitle = (JLabel) getForm().getComponentByName("form.title");
 			lblTitle.setText(title);
 			JLabel lblIcon = (JLabel) getForm().getComponentByName("form.icon");
 			lblIcon.setIcon(icon);
 			if (help.hasKey(helpKey))
-				getForm().getFormAccessor("form.top").replaceBean("form.help",
-						helpButton);
+				getForm().getFormAccessor("form.top").replaceBean("form.help",helpButton);
 		} catch (Exception ex) {
 			logger.error(ex.toString(), ex);
 		}
