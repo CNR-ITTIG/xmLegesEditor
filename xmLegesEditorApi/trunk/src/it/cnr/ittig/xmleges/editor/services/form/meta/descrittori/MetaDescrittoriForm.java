@@ -80,7 +80,15 @@ public interface MetaDescrittoriForm extends Service {
 	 */
 	public void setPubblicazione(Pubblicazione pubblicazione);
 
+	/**
+	 * 
+	 * @param redazioni
+	 */
 	public void setRedazioni(Redazione[] redazioni);
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public Redazione[] getRedazioni();
 }
