@@ -11,7 +11,6 @@ import it.cnr.ittig.xmleges.core.services.form.date.DateForm;
 import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextField;
 import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextFieldEditor;
 import it.cnr.ittig.xmleges.core.util.date.UtilDate;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Pubblicazione;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Redazione;
 import it.cnr.ittig.xmleges.editor.services.form.meta.descrittori.MetaDescrittoriForm;
@@ -24,7 +23,6 @@ import java.awt.event.ActionListener;
 import java.util.Vector;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JTextField;
 
@@ -62,7 +60,7 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 
 	Logger logger;
 
-	// Form riepilogo
+	//Form riepilogo
 	Form form;
 
 	String tipoDTD;
@@ -76,10 +74,8 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 
 	JTextField report_numeroPubblicazione;
 
-//	tag della redazione del documento
+	//tag della redazione del documento
 	JTextField report_redazioneNome;
-
-	DateForm report_redazioneData;
 
 	JTextField report_redazioneUrl;
 	
@@ -121,9 +117,6 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 	Form formAlias;
 	
 	ListTextField alias_listtextfield;
-	
-	UrnForm urnForm;
-
 	
 
 	/**
@@ -167,8 +160,8 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 	 * Editor per il ListTextField della lista delle pubblicazioni
 	 */
 	private class RedazioniListTextFieldEditor implements ListTextFieldEditor {
+		
 		Form form;
-
 		DateForm data;
 
 		public RedazioniListTextFieldEditor(Form form, DateForm data) {
@@ -181,13 +174,9 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 		}
 
 		public Object getElement() {
-
-			String nome = ((JTextField) form.getComponentByName("editor.meta.descrittori.riepilogo.redazione.nome"))
-					.getText();
+			String nome = ((JTextField) form.getComponentByName("editor.meta.descrittori.riepilogo.redazione.nome")).getText();
 			String url = ((JTextField) form.getComponentByName("editor.meta.descrittori.riepilogo.redazione.url")).getText();
-			
 			String contributo = ((JTextField) form.getComponentByName("editor.meta.descrittori.riepilogo.redazione.contributo")).getText();
-			
 			return new Redazione(data.getAsYYYYMMDD(), nome, url, contributo);
 		}
 
@@ -208,8 +197,7 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 			data.set(null);
 		}
 
-		public boolean checkData() {
-			
+		public boolean checkData() {	
 			return true;
 		}
 
@@ -235,58 +223,38 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 		formAlias = (Form) serviceManager.lookup(Form.class);
 		sottoFormDatiRedazioni = (Form) serviceManager.lookup(Form.class);
 		
-		urnForm = (UrnForm) serviceManager.lookup(UrnForm.class);
-
 		report_dataPubblicazione = (DateForm) serviceManager.lookup(DateForm.class);
-		
-		report_redazioneData = (DateForm) serviceManager.lookup(DateForm.class);
-
 		tagDataSottoFormDatiRedazione = (DateForm) serviceManager.lookup(DateForm.class);
-
+		
 		redazioni_listtextfield = (ListTextField) serviceManager.lookup(ListTextField.class);
 		alias_listtextfield = (ListTextField) serviceManager.lookup(ListTextField.class);
-		
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws java.lang.Exception {
 		form.setMainComponent(getClass().getResourceAsStream("MetaDescrittori.jfrm"));
 		form.replaceComponent("editor.meta.descrittori.riepilogo.datapubblicazione", report_dataPubblicazione.getAsComponent());
-//		form.replaceComponent("editor.meta.descrittori.redazione.data", report_redazioneData.getAsComponent());
 		report_numeroPubblicazione = (JTextField) form.getComponentByName("editor.meta.descrittori.riepilogo.numeropubblicazione");
 		report_tipoPubblicazione = (JTextField) form.getComponentByName("editor.meta.descrittori.riepilogo.tipopubblicazione");
-//		report_redazioneNome = (JTextField) form.getComponentByName("editor.meta.descrittori.riepilogo.redazione.nome");
-//		report_redazioneUrl = (JTextField) form.getComponentByName("editor.meta.descrittori.riepilogo.redazione.url");
-//		report_redazioneContributo = (JTextField) form.getComponentByName("editor.meta.descrittori.riepilogo.redazione.contributo");
-		form.setName("editor.form.meta.descrittori.riepilogo");
+  	    form.setName("editor.form.meta.descrittori.riepilogo");
 		
 		form.setHelpKey("help.contents.form.metadescrittori");
 		
 		sottoFormDatiRedazioni.setMainComponent(getClass().getResourceAsStream("DatiRedazione.jfrm"));
-		
-
+	    
 		formRedazioni.setMainComponent(getClass().getResourceAsStream("Redazioni.jfrm"));
-
 		formRedazioni.replaceComponent("editor.meta.descrittori.redazioni", redazioni_listtextfield.getAsComponent());
 		formRedazioni.setSize(680, 400);
 		formRedazioni.setName("editor.form.meta.descrittori.redazioni");
 		redazioni_listtextfield.setEditor(new RedazioniListTextFieldEditor(sottoFormDatiRedazioni, tagDataSottoFormDatiRedazione));
 
-		sottoFormDatiRedazioni.replaceComponent("editor.meta.descrittori.redazione.data", tagDataSottoFormDatiRedazione
-				.getAsComponent());
+		sottoFormDatiRedazioni.replaceComponent("editor.meta.descrittori.redazione.data", tagDataSottoFormDatiRedazione.getAsComponent());
 
-		tagNomeSottoFormDatiRedazione = (JTextField) sottoFormDatiRedazioni
-		.getComponentByName("editor.meta.descrittori.riepilogo.redazione.nome");
+		tagNomeSottoFormDatiRedazione = (JTextField) sottoFormDatiRedazioni.getComponentByName("editor.meta.descrittori.riepilogo.redazione.nome");
+		tagUrlSottoFormDatiRedazione = (JTextField) sottoFormDatiRedazioni.getComponentByName("editor.meta.descrittori.riepilogo.redazione.url");
+		tagContributoSottoFormDatiRedazione = (JTextField) sottoFormDatiRedazioni.getComponentByName("editor.meta.descrittori.riepilogo.redazione.contributo");
 		
-		tagUrlSottoFormDatiRedazione = (JTextField) sottoFormDatiRedazioni
-		.getComponentByName("editor.meta.descrittori.riepilogo.redazione.url");
-		
-		tagContributoSottoFormDatiRedazione = (JTextField) sottoFormDatiRedazioni
-		.getComponentByName("editor.meta.descrittori.riepilogo.redazione.contributo");
-		
-		
-
-		formAlias.setMainComponent(getClass().getResourceAsStream("Alias.jfrm"));
+	    formAlias.setMainComponent(getClass().getResourceAsStream("Alias.jfrm"));
 		formAlias.replaceComponent("editor.meta.descrittori.alias.listtextfield", alias_listtextfield.getAsComponent());
 		formAlias.setSize(650, 400);
 		formAlias.setName("editor.form.meta.descrittori.alias");
@@ -296,17 +264,14 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 		aliasList = (JList) form.getComponentByName("editor.meta.descrittori.riepilogo.alias");
 		redazioniList = (JList) form.getComponentByName("editor.meta.descrittori.riepilogo.redazione");
 	
-
 		redazioniButton = (JButton) form.getComponentByName("editor.meta.descrittori.riepilogo.redazioni_btn");
 		aliasButton = (JButton) form.getComponentByName("editor.meta.descrittori.riepilogo.alias_btn");
 		
 		redazioniButton.addActionListener(this);
 		aliasButton.addActionListener(this);
-		
 	}
 
-	// ////////////////////////////////////////////// MetaDescrittoriForm
-	// Interface
+	// ////////////////////////////////////////////// MetaDescrittoriForm Interface
 	public boolean openForm() {
 		form.setSize(600, 400);
 		form.showDialog();
@@ -328,11 +293,9 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 
 			formRedazioni.showDialog();
 			if (formRedazioni.isOk()) {
-
 				redazioni = new Redazione[redazioni_listtextfield.getListElements().size()];
 				redazioni_listtextfield.getListElements().toArray(redazioni);
 				redazioniList.setListData(redazioni);
-
 			}
 		} else if (e.getSource().equals(aliasButton)) { // ALIAS
 			Vector v = new Vector();
@@ -342,29 +305,19 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 				}
 			}
 			alias_listtextfield.setListElements(v);
-
 			formAlias.showDialog();
-
 			if (formAlias.isOk()) {
 				aliases = new String[alias_listtextfield.getListElements().size()];
 				alias_listtextfield.getListElements().toArray(aliases);
 				aliasList.setListData(aliases);
 			}
 		}
-		
 	}
 
 	public Pubblicazione getPubblicazione() {
 		return pubblicazione;
 	}
 
-//	public Vigenza[] getVigenze() {
-//		return vigenze;
-//	}
-
-//	public Relazione[] getRelazioniUlteriori() {
-//		return relazioniUlteriori;
-//	}
 
 	public String[] getAlias() {
 		return aliases;
@@ -409,8 +362,5 @@ public class MetaDescrittoriFormImpl implements MetaDescrittoriForm, Loggable, S
 		report_numeroPubblicazione.setText(pubblicazione.getNum());
 		report_tipoPubblicazione.setText(pubblicazione.getTipo());
 	}
-
-
-	
 
 }
