@@ -11,11 +11,10 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.exec.Exec;
 import it.cnr.ittig.xmleges.core.services.exec.ExecException;
 import it.cnr.ittig.xmleges.core.services.exec.ExecTimeoutException;
-import it.cnr.ittig.xmleges.core.services.exec.monitor.ExecMonitor;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
-import it.cnr.ittig.xmleges.editor.services.xmleges.linker.XmLegesLinkerException;
 import it.cnr.ittig.xmleges.editor.services.xmleges.linker.XmLegesLinker;
+import it.cnr.ittig.xmleges.editor.services.xmleges.linker.XmLegesLinkerException;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -56,7 +55,7 @@ public class XmLegesLinkerImpl implements XmLegesLinker, Loggable, Serviceable, 
 
 	Exec exec;
 
-	ExecMonitor execMonitor;
+	//ExecMonitor execMonitor;
 
 	String regione = null;
 	
@@ -80,7 +79,7 @@ public class XmLegesLinkerImpl implements XmLegesLinker, Loggable, Serviceable, 
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
 		exec = (Exec) serviceManager.lookup(Exec.class);
-		execMonitor = (ExecMonitor) serviceManager.lookup(ExecMonitor.class);
+		//execMonitor = (ExecMonitor) serviceManager.lookup(ExecMonitor.class);
 	}
 
 	// ////////////////////////////////////////////////// Configurable Interface
