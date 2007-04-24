@@ -35,9 +35,9 @@ public class Relazione {
 
 	/**
 	 * Costruttore di Relazione
-	 * @param tag:  tipo relazione
-	 * @param id: id relazione
-	 * @param link: link della urn
+	 * @param tag  tipo relazione
+	 * @param id id relazione
+	 * @param link link della urn
 	 */
 	public Relazione(String tag, String id, String link) {
 		setTagTipoRelazione(tag);

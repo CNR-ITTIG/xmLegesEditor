@@ -46,10 +46,10 @@ public class Evento {
 	}
 /**
  * 
- * @param id: id dell'evento
- * @param data: data dell'evento
- * @param fonte: la relazione fonte dell'evento
- * @param tipo: il tipo di evento
+ * @param id id dell'evento
+ * @param data data dell'evento
+ * @param fonte la relazione fonte dell'evento
+ * @param tipo il tipo di evento
  */
 	public Evento(String id, String data, Relazione fonte, String tipo) {
 		setId(id);
