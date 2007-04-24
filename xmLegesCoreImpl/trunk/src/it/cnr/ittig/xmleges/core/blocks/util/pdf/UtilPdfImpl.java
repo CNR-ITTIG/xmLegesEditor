@@ -58,8 +58,7 @@ import org.w3c.dom.Document;
  * License </a></dd>
  * </dl>
  * 
- * @see
- * @version 1.1
+ * @version 1.0
  * @author <a href="mailto:agnoloni@ittig.cnr.it">Tommaso Agnoloni </a>
  */
 
