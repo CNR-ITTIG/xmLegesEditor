@@ -66,7 +66,7 @@ public interface DocumentManager extends Service {
 	/**
 	 * Imposta la sorgente usata per recuperare il documento.
 	 * 
-	 * @param sourceName sorgente del documento
+	 * @param source sorgente del documento
 	 */
 	public void setSourceName(String source);
 
@@ -189,7 +189,7 @@ public interface DocumentManager extends Service {
 	/**
 	 * Imposta lo stato del documento a nuovo
 	 * 
-	 * @param <code>true</code> se &egrave; nuovo
+	 * @param isNew <code>true</code> se &egrave; nuovo
 	 */
 	public void setNew(boolean isNew);
 
