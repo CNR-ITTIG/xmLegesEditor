@@ -5,7 +5,8 @@ import it.cnr.ittig.services.manager.Service;
 import org.w3c.dom.Node;
 
 /**
- * Servizio per l'inserimento nel dom di un commento
+ * Servizio per l'inserimento nel dom di un commento.
+ * 
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
