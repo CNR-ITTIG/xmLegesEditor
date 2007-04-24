@@ -5,7 +5,8 @@ import it.cnr.ittig.services.manager.Service;
 import org.w3c.dom.Node;
 
 /**
- * Servizio per l'estrazione di un testo da un tag
+ * Servizio per l'estrazione di un testo da un tag.
+ * 
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
