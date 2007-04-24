@@ -27,7 +27,9 @@ public interface LinkForm extends Service {
 	/**
 	 * Apre la form pe gestire i Link ad ipertesti
 	 * 
-	 * @param 
+	 * @param node
+	 * @param testo
+	 * @param url
 	 * @return <code>true</code> se la form &egrave; valida
 	 */
 	public boolean openForm(Node node, String testo, String url);

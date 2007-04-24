@@ -96,26 +96,25 @@ public class TemplateItem {
 	/**
 	 * Imposta il tipo di documento
 	 * 
-	 * @param Tipo di documento: valori ammessi "Articolato" e "SemiArticolato"
+	 * @param type tipo di documento: valori ammessi "Articolato" e "SemiArticolato"
 	 */
 	public void setType(String type) {
 		this.type = type;
 	}
 
 	/**
-	 * Imposta la proprieta' numerato del template
+	 * Imposta la propriet&agrave; numerato del template
 	 * 
-	 * @param numerato: true = template relativo a documento numerato, false
-	 *        altrimento
+	 * @param numerato <code>true</code> per template relativo a documento numerato, <code>false</code> altrimenti
 	 */
 	public void setNumerato(boolean numerato) {
 		this.numerato = numerato;
 	}
 
 	/**
-	 * Imposta la proprieta' tag del template
+	 * Imposta la propriet&agrave; tag del template
 	 * 
-	 * @param tipa atto da impostare
+	 * @param tag atto da impostare
 	 */
 	public void setTag(String tag) {
 		this.tag = tag;

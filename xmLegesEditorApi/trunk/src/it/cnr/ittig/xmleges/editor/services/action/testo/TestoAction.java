@@ -3,7 +3,8 @@ package it.cnr.ittig.xmleges.editor.services.action.testo;
 import it.cnr.ittig.services.manager.Service;
 
 /**
- * Servizio per la modifica dello stile del testo (grassetto, corsivo ecc)
+ * Servizio per la modifica dello stile del testo (grassetto, corsivo ecc).
+ * 
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>

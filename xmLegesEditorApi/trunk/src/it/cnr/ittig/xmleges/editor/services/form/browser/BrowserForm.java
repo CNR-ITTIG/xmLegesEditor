@@ -41,8 +41,7 @@ public interface BrowserForm extends Service, CommonForm {
 	/**
 	 * Imposta url del browser.
 	 * 
-	 * @param url
-	 *            url da visualizzare.
+	 * @param url url da visualizzare.
 	 */
 	public void setUrl(String url);		
 	/**
@@ -59,10 +58,12 @@ public interface BrowserForm extends Service, CommonForm {
 	 */
 	public String getHtml();
 		
+	
+	
 	/**
 	 * Imposta le dimensioni della finestra del browser
-	 * 
-	 * @param int width e height
+	 * @param width larghezza della finestra
+	 * @param height altezza della finestra
 	 */
 	public void setSize(int width, int height);
 	

@@ -3,7 +3,7 @@ package it.cnr.ittig.xmleges.editor.services.dom.intestazione;
 import it.cnr.ittig.services.manager.Service;
 
 /**
- * Servizio per la gestione del DOM relativo al tag &lt;interstazione&gt;.
+ * Servizio per la gestione del DOM relativo al tag &lt;intestazione&gt;.
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>

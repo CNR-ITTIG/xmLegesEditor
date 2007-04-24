@@ -1,13 +1,7 @@
-/*
- * Created on Dec 15, 2004 TODO To change the template for this generated file
- * go to Window - Preferences - Java - Code Style - Code Templates
- */
 package it.cnr.ittig.xmleges.editor.services.provvedimenti;
 
 /**
- * @author Lorenzo Sarti TODO To change the template for this generated type
- *         comment go to Window - Preferences - Java - Code Style - Code
- *         Templates
+ * @author Lorenzo Sarti 
  */
 public class ProvvedimentiItem {
 	/**
@@ -136,7 +130,7 @@ public class ProvvedimentiItem {
 	/**
 	 * Restituisce la lista dei template associati al provvedimento
 	 * 
-	 * @return
+	 * @return lista dei template 
 	 */
 	public TemplateItem[] getTemplateList() {
 		return templatelist;
@@ -145,8 +139,8 @@ public class ProvvedimentiItem {
 	/**
 	 * Restituisce un elemento della lista dei template
 	 * 
-	 * @param index: elemento richiesto
-	 * @return
+	 * @param index elemento richiesto
+	 * @return template
 	 */
 	public TemplateItem getTemplateAt(int index) {
 		try {
@@ -160,7 +154,7 @@ public class ProvvedimentiItem {
 	/**
 	 * Restituisce la lista delle dtd associate al provvedimento
 	 * 
-	 * @return
+	 * @return lista delle dtd gestite
 	 */
 	public DtdItem[] getDtdList() {
 		return dtdlist;
@@ -169,8 +163,8 @@ public class ProvvedimentiItem {
 	/**
 	 * Restituisce un elemento della lista delle dtd
 	 * 
-	 * @param index: elemento richiesto
-	 * @return
+	 * @param index elemento richiesto
+	 * @return dtdItem
 	 */
 	public DtdItem getDtdAt(int index) {
 		try {
@@ -183,7 +177,7 @@ public class ProvvedimentiItem {
 	/**
 	 * Imposta la proprieta' name
 	 * 
-	 * @param name: nome provvedimento
+	 * @param name nome provvedimento
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -192,7 +186,7 @@ public class ProvvedimentiItem {
 	/**
 	 * Imposta la proprieta' emananti
 	 * 
-	 * @param emananti: il provvedimento ammette piu' di un'emanante?
+	 * @param emananti il provvedimento ammette piu' di un'emanante?
 	 */
 	public void setEmananti(boolean emananti) {
 		this.emananti = emananti;
@@ -202,7 +196,7 @@ public class ProvvedimentiItem {
 	 * Imposta la proprieta' che si riferisce alla stringa da utilizzare nella
 	 * composizione della urn
 	 * 
-	 * @param urnatto: urn relativa all'atto
+	 * @param urnatto urn relativa all'atto
 	 */
 	public void setUrnAtto(String urnatto) {
 		this.urnatto = urnatto;
@@ -211,7 +205,7 @@ public class ProvvedimentiItem {
 	/**
 	 * Imposta la forma testuale della citazione
 	 * 
-	 * @param urncitazione: forma testuale della citazione
+	 * @param urncitazione forma testuale della citazione
 	 */
 	public void setUrnCitazione(String urncitazione) {
 		this.urncitazione = urncitazione;
@@ -221,7 +215,7 @@ public class ProvvedimentiItem {
 	 * Imposta l'espressione regolare da utilizzare per interrogare il registro
 	 * autorita'
 	 * 
-	 * @param urnautorita: espressione regolare
+	 * @param urnautorita espressione regolare
 	 */
 	public void setUrnAutorita(String urnautorita) {
 		this.urnautorita = urnautorita;
@@ -230,7 +224,7 @@ public class ProvvedimentiItem {
 	/**
 	 * Imposta la urn completa del provvedimeto, se disponibile
 	 * 
-	 * @param urnvalore: urn completa del provvedimento
+	 * @param urnvalore urn completa del provvedimento
 	 */
 	public void setUrnValore(String urnvalore) {
 		this.urnvalore = urnvalore;
@@ -239,7 +233,7 @@ public class ProvvedimentiItem {
 	/**
 	 * Imposta la lista dei template
 	 * 
-	 * @param templatelist: lista dei template
+	 * @param templatelist lista dei template
 	 */
 	public void setTemplateList(TemplateItem[] templatelist) {
 		this.templatelist = templatelist;
@@ -248,8 +242,8 @@ public class ProvvedimentiItem {
 	/**
 	 * Imposta un elemento della lista dei template
 	 * 
-	 * @param item: nuovo elemento
-	 * @param index: posizione di inserimento
+	 * @param item nuovo elemento
+	 * @param index posizione di inserimento
 	 */
 	public void setTemplateListAt(TemplateItem item, int index) {
 		try {
@@ -263,7 +257,7 @@ public class ProvvedimentiItem {
 	/**
 	 * Imposta la lista delle dtd
 	 * 
-	 * @param dtdlist: lista delle dtd
+	 * @param dtdlist lista delle dtd
 	 */
 	public void setDtdList(DtdItem[] dtdlist) {
 		this.dtdlist = dtdlist;
@@ -272,8 +266,8 @@ public class ProvvedimentiItem {
 	/**
 	 * Imposta un elemento della lista delle dtd
 	 * 
-	 * @param item: nuovo elemento
-	 * @param index: posizione di inserimento
+	 * @param item nuovo elemento
+	 * @param index posizione di inserimento
 	 */
 	public void setDtdListAt(DtdItem item, int index) {
 		try {

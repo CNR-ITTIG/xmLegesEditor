@@ -102,7 +102,7 @@ public interface XmLegesMarker extends Service {
 	 * Imposta il tipo di documento. Il valore deve appartenere a
 	 * <code>TIPO_DOC_VALORE</code>.
 	 * 
-	 * @param tipo element di <code>TIPO_DOC_VALORE</code>
+	 * @param tipoDoc element di <code>TIPO_DOC_VALORE</code>
 	 * @throws XmLegesMarkerException se il parametro non &egrave; corretto
 	 */
 	public void setTipoDoc(String tipoDoc) throws XmLegesMarkerException;
@@ -118,7 +118,7 @@ public interface XmLegesMarker extends Service {
 	 * Imposta i tipo di commi. Il valore deve appartenere a
 	 * <code>TIPO_COMMA_VALORE</code>.
 	 * 
-	 * @param tipo elemento di <code>TIPO_COMMA_VALORE</code>
+	 * @param tipoComma elemento di <code>TIPO_COMMA_VALORE</code>
 	 * @throws XmLegesMarkerException se il parametro non &egrave; corretto
 	 */
 	public void setTipoComma(String tipoComma) throws XmLegesMarkerException;
@@ -127,7 +127,7 @@ public interface XmLegesMarker extends Service {
 	 * Imposta il tipo di rubriche. Il valore deve appartenere a
 	 * <code>TIPO_RUBRICA_VALORE</code>.
 	 * 
-	 * @param tipo elemento di <code>TIPO_RUBRICA_VALORE</code>
+	 * @param tipoRubrica elemento di <code>TIPO_RUBRICA_VALORE</code>
 	 * @throws XmLegesMarkerException se il parametro non &egrave; corretto
 	 */
 	public void setTipoRubrica(String tipoRubrica) throws XmLegesMarkerException;
@@ -135,7 +135,7 @@ public interface XmLegesMarker extends Service {
 	/**
 	 * Indica se il testo ha le rubriche. Valido solo per commi non numerati.
 	 * 
-	 * @param reb <code>true</code> se sono presenti
+	 * @param testoConRubriche <code>true</code> se sono presenti
 	 */
 	public void setTestoConRubriche(boolean testoConRubriche);
 
@@ -150,7 +150,7 @@ public interface XmLegesMarker extends Service {
 	 * Indica se deve essere attivato il controllo delle sequenze
 	 * dell'articolato.
 	 * 
-	 * @param seq <code>true</code> se deve essere attivato (default)
+	 * @param controlloSequenza <code>true</code> se deve essere attivato (default)
 	 */
 	public void setControlloSequenza(boolean controlloSequenza);
 

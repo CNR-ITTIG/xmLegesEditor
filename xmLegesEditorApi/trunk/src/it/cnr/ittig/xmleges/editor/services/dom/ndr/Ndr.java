@@ -22,24 +22,27 @@ import org.w3c.dom.Node;
  */
 public interface Ndr extends Service {
 
-	/**
-	 * @param node
-	 * @param numPersonalizzata
-	 * @param numerazione
-	 * @return nodo modificato; null se l'operazione non &egrave andata a buon
+	
+    /**
+     * 
+     * @param node
+     * @param start
+     * @param end
+     * @param id
+     * @param testo
+     * @return nodo modificato; null se l'operazione non &egrave andata a buon
 	 *         fine
-	 */
-
+     */
 	public Node setNdr(Node node, int start, int end, String id, String testo);
 
 	/**
 	 * @param node
-	 * @return
-	 */
+	 * @return <code>true</code> se &egrave; possibile inserire una nota nella posizione specificata
+ 	 */
 	public boolean canSetNdr(Node node);
 
 	/**
-	 * @return
+	 * @return array di note
 	 */
 	public Nota[] getNotesFromDocument();
 

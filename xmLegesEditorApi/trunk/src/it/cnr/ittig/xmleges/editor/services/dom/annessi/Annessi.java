@@ -5,7 +5,8 @@ import it.cnr.ittig.services.manager.Service;
 import java.io.File;
 
 /**
- * Servizio per la gestione degli annessi interni ed esterni al documento
+ * Servizio per la gestione degli annessi interni ed esterni al documento.
+ * 
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>

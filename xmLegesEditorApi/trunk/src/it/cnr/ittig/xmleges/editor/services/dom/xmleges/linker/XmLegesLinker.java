@@ -6,7 +6,7 @@ import org.w3c.dom.Node;
 
 /**
  * Servizio per l'aggiornamento del documento in funzione del parser dei
- * riferimenti. di un
+ * riferimenti (XmLegesLinker). 
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>

@@ -47,8 +47,6 @@ public interface CiclodiVitaForm extends Service {
 	 */
 	public Relazione[] getRelazioniUlteriori();
 
-
-
 	
 	/**
 	 * Imposta la DTD del documento (base, completo...)
@@ -69,14 +67,28 @@ public interface CiclodiVitaForm extends Service {
 	/**
 	 * Imposta le relazioni ulteriori (non legate agli eventi) del documento
 	 * 
-	 * @param relazioni relazioni del documento
+	 * @param relazioniUlteriori altre relazioni del documento
 	 */
 	public void setRelazioniUlteriori(Relazione[] relazioniUlteriori);
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public Relazione[] getRelazioniTotalefromCdvf();
 	
+	
+	/**
+	 * 
+	 * @param eventiOnVigenze
+	 * @param vigenze
+	 */
 	public void setEventiOnVigenze(String[] eventiOnVigenze, VigenzaEntity[] vigenze);
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public VigenzaEntity[] getVigToUpdate();
 
 

@@ -6,7 +6,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 /**
- * Servizio per la gestione delle revisioni di un disegno di legge
+ * Servizio per la gestione delle revisioni di un disegno di legge.
+ * 
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
@@ -95,8 +96,9 @@ public interface Revisioni extends Service {
 	 * Funzione per l'estrazione da un documento di tipo dl della forma testuale
 	 * degli emendamenti
 	 * 
-	 * @param doc
-	 * @return Vettore di stringhe con la lista degli emendamenti; null se vuoto
+	 * @param oldDoc
+	 * @param newDoc 
+	 * @return Array di nodi con la lista degli emendamenti; null se vuoto
 	 */
 	public Node[] getEmendamenti(Document oldDoc, Document newDoc);
 

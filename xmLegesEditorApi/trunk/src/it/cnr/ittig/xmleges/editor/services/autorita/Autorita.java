@@ -5,7 +5,8 @@ import it.cnr.ittig.services.manager.Service;
 import java.util.Date;
 
 /**
- * Servizio per l'interrogazione del Registro dell Autorit&agrave; Emittenti
+ * Servizio per l'interrogazione del Registro delle Autorit&agrave; Emittenti.
+ * 
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
@@ -108,7 +109,7 @@ public interface Autorita extends Service {
 
 	/**
 	 * Restituisce true se l'istituzione specificata da
-	 * <code>nomeIstituzione</code> e' valida alla data <code>data</code>
+	 * <code>nomeIstituzione</code> &egrave; valida alla data <code>data</code>
 	 * 
 	 * @param data data in formato Date
 	 * @param nomeIstituzione
@@ -118,7 +119,7 @@ public interface Autorita extends Service {
 
 	/**
 	 * Restituisce true se l'istituzione specificata da
-	 * <code>nomeIstituzione</code> e' valida alla data <code>data</code>
+	 * <code>nomeIstituzione</code> &egrave; valida alla data <code>data</code>
 	 * 
 	 * @param data data normalizzata yyyyMMdd in formato String
 	 * @param nomeIstituzione
@@ -127,29 +128,29 @@ public interface Autorita extends Service {
 	public boolean isIstituzioneValida(String data, String nomeIstituzione);
 
 	/**
-	 * Restituisce la Urn dell'Istituzione dato il nome; se non e' presente
-	 * restituisce null;
+	 * Restituisce la Urn dell'Istituzione dato il nome; se non &egrave; presente
+	 * restituisce null.
 	 * 
 	 * @param nomeIstituzione nome dell'Istituzione
-	 * @return urn dell'Istituzione; null se non ? presente
+	 * @return urn dell'Istituzione; null se non &egrave; presente
 	 */
 	public String getUrnIstituzioneFromNomeIstituzione(String nomeIstituzione);
 
 	/**
-	 * Restituisce il nome dell'Istituzione data la urn; se non e' presente
+	 * Restituisce il nome dell'Istituzione data la urn; se non &egrave; presente
 	 * restituisce null;
 	 * 
 	 * @param urnIstituzione
-	 * @return nome dell'istituzione; null se non ? presente
+	 * @return nome dell'istituzione; null se non &egrave; presente
 	 */
 	public String getNomeIstituzioneFromUrnIstituzione(String urnIstituzione);
 
 	/**
-	 * Restituisce true se la urn dell'istituzione ? presente nel registro al
+	 * Restituisce true se la urn dell'istituzione &egrave; presente nel registro al
 	 * livello <code>livello<code>
 	 * @param urn urn da cercare nel registro
-	 * @param livello livello a cui cercarla; pu? essere Autorita.LIVELLO_0; Autorita.LIVELLO_1; Autorita.LIVELLO_2
-	 * @return true se la urn ? presente nel registro
+	 * @param livello livello a cui cercarla; pu&ograve; essere Autorita.LIVELLO_0; Autorita.LIVELLO_1; Autorita.LIVELLO_2
+	 * @return true se la urn &egrave; presente nel registro
 	 */
 	public boolean isUrnInRegistro(String urn, int livello);
 

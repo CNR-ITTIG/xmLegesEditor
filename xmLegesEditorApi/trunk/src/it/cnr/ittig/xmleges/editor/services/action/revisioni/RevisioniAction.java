@@ -3,7 +3,8 @@ package it.cnr.ittig.xmleges.editor.services.action.revisioni;
 import it.cnr.ittig.services.manager.Service;
 
 /**
- * Servizio per la gestione delle azioni per l'iter dei disegni di legge
+ * Servizio per la gestione delle azioni per l'iter dei disegni di legge.
+ * 
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>

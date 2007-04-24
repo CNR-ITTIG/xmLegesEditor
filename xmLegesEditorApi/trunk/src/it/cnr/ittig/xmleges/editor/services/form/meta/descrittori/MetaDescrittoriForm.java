@@ -46,7 +46,7 @@ public interface MetaDescrittoriForm extends Service {
 
 
 	/**
-	 * Restituisce il tipo di pubblicazione?? (originale, monovigente, multivigente).
+	 * Restituisce il tipo di pubblicazione (originale, monovigente, multivigente).
 	 * 
 	 * @return tipo del documento
 	 */
@@ -76,7 +76,7 @@ public interface MetaDescrittoriForm extends Service {
 	/**
 	 * Imposta la pubblicazione del documento
 	 * 
-	 * @param altrePubblicazioni pubblicazioni del documento
+	 * @param pubblicazione pubblicazione del documento
 	 */
 	public void setPubblicazione(Pubblicazione pubblicazione);
 
@@ -88,7 +88,7 @@ public interface MetaDescrittoriForm extends Service {
 	
 	/**
 	 * 
-	 * @return
+	 * @return array di Redazione
 	 */
 	public Redazione[] getRedazioni();
 }

@@ -38,7 +38,7 @@ public interface FileNewForm extends Service {
 	public Properties getSelectedDTD();
 
 	/**
-	 * Restituisce TRUE se e' stato premuto OK per chiudere la form, FALSE se ??
+	 * Restituisce <code>true</code> se &egrave; stato premuto OK per chiudere la form, <code>false</code> se &egrave;
 	 * stato premuto CANCEL
 	 */
 	public boolean isOKClicked();

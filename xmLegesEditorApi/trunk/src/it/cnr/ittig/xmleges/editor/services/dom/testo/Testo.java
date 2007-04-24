@@ -5,8 +5,8 @@ import it.cnr.ittig.services.manager.Service;
 import org.w3c.dom.Node;
 
 /**
- * Servizio per l'applicazione dei tag html h:b, h:i, h:u, h:sup, h:inf, al
- * testo
+ * Servizio per l'applicazione dei tag html h:b, h:i, h:u, h:sup, h:inf, al testo.
+ * 
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>

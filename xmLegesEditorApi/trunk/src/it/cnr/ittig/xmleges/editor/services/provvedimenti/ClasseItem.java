@@ -50,14 +50,13 @@ public class ClasseItem {
 	/**
 	 * Restituisce il provvedimento in posizione index
 	 * 
-	 * @param index: posizione richiesta
-	 * @return
+	 * @param index posizione richiesta
+	 * @return provvedimento
 	 */
 	public ProvvedimentiItem getProvvedimentoAt(int index) {
 		try {
 			return provvedimentilist[index];
 		} catch (Exception e) {
-			// System.out.println(e.toString());
 			return null;
 		}
 	}

@@ -5,7 +5,8 @@ import it.cnr.ittig.services.manager.Service;
 import org.w3c.dom.Node;
 
 /**
- * Servizio per la correzione o l'annullamento di un link ad un ipertesto
+ * Servizio per la correzione o l'annullamento di un link ad un ipertesto.
+ * 
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
@@ -89,8 +90,10 @@ public interface Link extends Service {
 	 * Inserisce un nodo <code>&lt;h:a&gt</code>all'interno del nodo
 	 * <code>node</code>.
 	 * 
-	 * @param node nodo di riferimento
-	 * @param testo testo del link
+	 * @param nodo nodo di riferimento
+	 * @param start inizio della selezione del testo
+	 * @param end fine della selezione del testo
+	 * @param testo testo selezionato
 	 * @param url la stringa contenente la url del link
 	 * @param type la stringa indicante il tipo del link
 	 * @return <code>null</code> se la modifica non &egrave; riuscita; nodo

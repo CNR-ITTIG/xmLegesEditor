@@ -17,14 +17,15 @@ import it.cnr.ittig.services.manager.Service;
  * </dl>
  * 
  * @version 1.0
- * @author <a href="mailto:tommaso.agnoloni@ittig.cnr.it">Tommaso Agnoloni</a>
+ * @author <a href="mailto:g.giardiello@gmail.com">Gerardo Giardiello</a>
  */
 public interface RifIncompletiForm extends Service {
 
 	/**
 	 * Apre la form dei Riferimenti incompleti
 	 * 
-	 * @param 
+	 * @param testo
+	 * @param urn
 	 * @return <code>true</code> se la form &egrave; valida
 	 */
 	public boolean openForm(String testo, String urn);

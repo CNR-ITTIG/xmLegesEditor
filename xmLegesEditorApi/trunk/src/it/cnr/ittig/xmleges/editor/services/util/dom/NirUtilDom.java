@@ -29,17 +29,17 @@ public interface NirUtilDom extends Service {
 	public Node getTipoAtto(Document doc);
 
 	/**
-	 * Controlla se un nodo e' un container (libro, parte, titolo, capo,
+	 * Controlla se un nodo &egrave; un container (libro, parte, titolo, capo,
 	 * articolo, comma)
 	 * 
 	 * @param node Il nodo da controllare
-	 * @return true se il nodo e' considerato un container
+	 * @return true se il nodo &egrave; considerato un container
 	 */
 	public boolean isContainer(Node node);
 
 	/**
 	 * Restituisce il nodo della partizione Nir contenitore del nodo
-	 * <code>node</code>.<br>
+	 * <code>node</code><br>
 	 * 
 	 * @param node nodo di cui trovare il contenitore Nir
 	 */
@@ -47,7 +47,7 @@ public interface NirUtilDom extends Service {
 
 	/**
 	 * Restituisce il nodo di tipo container immediatamente superiore al nodo
-	 * <code>node</code>.<br>
+	 * <code>node</code><br>
 	 * 
 	 * @param node nodo di cui trovare il parent container
 	 * @return
@@ -56,7 +56,7 @@ public interface NirUtilDom extends Service {
 
 	/**
 	 * Restituisce il nodo di tipo container immediatamente superiore o uguale
-	 * al nodo <code>node</code>.<br>
+	 * al nodo <code>node</code><br>
 	 * 
 	 * @param node nodo di cui trovare il container
 	 * @return
@@ -65,7 +65,7 @@ public interface NirUtilDom extends Service {
 
 	/**
 	 * Restituisce il nodo di tipo h:p immediatamente superiore al nodo
-	 * <code>node</code>.<br>
+	 * <code>node</code><br>
 	 * 
 	 * @param node nodo di cui trovare il container h:p
 	 * @return

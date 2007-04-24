@@ -52,7 +52,7 @@ public interface Partizioni extends Service {
 
 	/**
 	 * @param node nodo di partenza per effettuare l'inserimento
-	 * @param elemName tipo di partizione
+	 * @param partizione nodo partizione
 	 * @return -1 se non e' possibile inserire la partizione, altrimenti il
 	 *         codice dell' operazione di inserimento ammessa
 	 */
@@ -90,7 +90,7 @@ public interface Partizioni extends Service {
 	 * 
 	 * @param node nodo di partenza per effettuare l'inserimento
 	 * @param elemName tipo di partizione
-	 * @param int action azione di inserimento ammessa
+	 * @param action azione di inserimento ammessa
 	 * @return nodo modificato; null se l'operazione non &egrave andata a buon
 	 *         fine
 	 */
@@ -102,7 +102,7 @@ public interface Partizioni extends Service {
 	 * 
 	 * @param node nodo di partenza per effettuare l'inserimento
 	 * @param partizione nuova partizione
-	 * @param int action azione di inserimento ammessa
+	 * @param action azione di inserimento ammessa
 	 * @return nodo modificato; null se l'operazione non &egrave andata a buon
 	 *         fine
 	 */

@@ -36,7 +36,7 @@ public interface PartizioniAction extends Service {
 	 * Inserisce un nuovo tag contenitore <code>&lt;libro&gt;</code>.
 	 * 
 	 * @param node nodo attivo sul quale attivare l'inserimento
-	 * @param int action azione di inserimento ammessa
+	 * @param action azione di inserimento ammessa
 	 */
 	public void doNewLibro(Node node, int action);
 
@@ -51,7 +51,7 @@ public interface PartizioniAction extends Service {
 	 * Inserisce un nuovo tag contenitore <code>&lt;parte&gt;</code>.
 	 * 
 	 * @param node nodo attivo sul quale attivare l'inserimento
-	 * @param int action azione di inserimento ammessa
+	 * @param action azione di inserimento ammessa
 	 */
 	public void doNewParte(Node node, int action);
 
@@ -66,7 +66,7 @@ public interface PartizioniAction extends Service {
 	 * Inserisce un nuovo tag contenitore <code>&lt;titolo&gt;</code>.
 	 * 
 	 * @param node nodo attivo sul quale attivare l'inserimento
-	 * @param int action azione di inserimento ammessa
+	 * @param action azione di inserimento ammessa
 	 */
 	public void doNewTitolo(Node node, int action);
 
@@ -81,7 +81,7 @@ public interface PartizioniAction extends Service {
 	 * Inserisce un nuovo tag contenitore <code>&lt;capo&gt;</code>.
 	 * 
 	 * @param node nodo attivo sul quale attivare l'inserimento
-	 * @param int action azione di inserimento ammessa
+	 * @param action azione di inserimento ammessa
 	 */
 	public void doNewCapo(Node node, int action);
 
@@ -96,7 +96,7 @@ public interface PartizioniAction extends Service {
 	 * Inserisce un nuovo tag contenitore <code>&lt;sezione&gt;</code>.
 	 * 
 	 * @param node nodo attivo sul quale attivare l'inserimento
-	 * @param int action azione di inserimento ammessa
+	 * @param action azione di inserimento ammessa
 	 */
 	public void doNewSezione(Node node, int action);
 
@@ -111,7 +111,7 @@ public interface PartizioniAction extends Service {
 	 * Inserisce un nuovo tag contenitore <code>&lt;articolo&gt;</code>.
 	 * 
 	 * @param node nodo attivo sul quale attivare l'inserimento
-	 * @param int action azione di inserimento ammessa
+	 * @param action azione di inserimento ammessa
 	 */
 	public void doNewArticolo(Node node, int action);
 
@@ -126,7 +126,7 @@ public interface PartizioniAction extends Service {
 	 * Inserisce un nuovo tag contenitore <code>&lt;comma&gt;</code>.
 	 * 
 	 * @param node nodo attivo sul quale attivare l'inserimento
-	 * @param int action azione di inserimento ammessa
+	 * @param action azione di inserimento ammessa
 	 */
 	public void doNewComma(Node node, int action);
 
@@ -141,7 +141,7 @@ public interface PartizioniAction extends Service {
 	 * Inserisce un nuovo tag contenitore <code>&lt;el&gt;</code>.
 	 * 
 	 * @param node nodo attivo sul quale attivare l'inserimento
-	 * @param int action azione di inserimento ammessa
+	 * @param action azione di inserimento ammessa
 	 */
 	public void doNewLettera(Node node, int action);
 
@@ -156,7 +156,7 @@ public interface PartizioniAction extends Service {
 	 * Inserisce un nuovo tag contenitore <code>&lt;en&gt;</code>.
 	 * 
 	 * @param node nodo attivo sul quale attivare l'inserimento
-	 * @param int action azione di inserimento ammessa
+	 * @param action azione di inserimento ammessa
 	 */
 	public void doNewNumero(Node node, int action);
 
@@ -171,7 +171,7 @@ public interface PartizioniAction extends Service {
 	 * Inserisce un nuovo tag contenitore <code>&lt;rubrica&gt;</code>.
 	 * 
 	 * @param node nodo attivo sul quale attivare l'inserimento
-	 * @param int action azione di inserimento ammessa
+	 * @param action azione di inserimento ammessa
 	 */
 	public void doNewRubrica(Node node, int action);
 }

@@ -5,7 +5,8 @@ import it.cnr.ittig.xmleges.editor.services.util.urn.Urn;
 import org.w3c.dom.Node;
 
 /**
- * Servizio per la correzione o l'annullamento di un riferimento incompleto
+ * Servizio per la correzione o l'annullamento di un riferimento incompleto.
+ * 
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
@@ -24,7 +25,7 @@ import org.w3c.dom.Node;
 public interface RifIncompleti extends Service {
 
 	/**
-	 * Indica se &egrave; possibile sostituire un nodo <code>&lt;?rif&gt;</code> incompleto con un nodo <code>&lt;rif&gt;</code>
+	 * Indica se &egrave; possibile sostituire un nodo <code>&lt;&#63;rif&gt;</code> incompleto con un nodo <code>&lt;rif&gt;</code>
 	 * 
 	 * @param node nodo di riferimento
 	 * @return <code>true</code> se &egrave; possibile trasformare il nodo
@@ -39,7 +40,7 @@ public interface RifIncompleti extends Service {
 	 * 
 	 * @param node nodo di riferimento
 	 * @param text parte testuale della urn
-	 * @param Urn del riferimenti
+	 * @param urn del riferimento
 	 * @return <code>null</code> se la modifica non &egrave; riuscita; nodo
 	 *         modificato
 	 */
@@ -51,14 +52,14 @@ public interface RifIncompleti extends Service {
 	 * 
 	 * @param node nodo di riferimento
 	 * @param text parte testuale del riferimento
-	 * @param Rif riferimento interno
+	 * @param rif riferimento interno
 	 * @return <code>null</code> se la modifica non &egrave; riuscita; nodo
 	 *         modificato
 	 */
 	public Node setRif(Node node, String text, String rif);
 
 	/**
-	 * Sostituisce al nodo <code>&lt;?rif&gt;</code> incompleto il suo contenuto testuale.
+	 * Sostituisce al nodo <code>&lt;&#63;rif&gt;</code> incompleto il suo contenuto testuale
 	 * 
 	 * @param node nodo di riferimento
 	 * @param plainText testo piatto del rif Incompleto
@@ -68,14 +69,14 @@ public interface RifIncompleti extends Service {
 	public Node setPlainText(Node node, String plainText);
 	
 	/**
-	 * Restituisce la sottostringa contenente la Urn dal nodo <code>&lt;?rif&gt;</code> incompleto
+	 * Restituisce la sottostringa contenente la Urn dal nodo <code>&lt;&#63;rif&gt;</code> incompleto
 	 * @param node
 	 * @return
 	 */
 	public String getUrn(Node node);
 	
 	/**
-	 * Restituisce la sottostringa contenente la form testuale dal nodo <code>&lt;?rif&gt;</code> incompleto
+	 * Restituisce la sottostringa contenente la form testuale dal nodo <code>&lt;&#63;rif&gt;</code> incompleto
 	 * @param node
 	 * @return
 	 */
@@ -84,7 +85,7 @@ public interface RifIncompleti extends Service {
 	
 	/**
 	 * Restituisce la lista di tutti i riferimenti incompleti presenti nel documento a partire dalla radice
-	 * @return Array dei nodi <code>&lt;?rif&gt;</code>
+	 * @return Array dei nodi <code>&lt;&#63;rif&gt;</code>
 	 */
 	public Node[] getList();
 

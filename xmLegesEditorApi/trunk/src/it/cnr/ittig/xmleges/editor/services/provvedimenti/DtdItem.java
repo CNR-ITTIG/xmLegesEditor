@@ -42,7 +42,7 @@ public class DtdItem {
 	/**
 	 * Imposta il nome della dtd
 	 * 
-	 * @param Nome della dtd
+	 * @param dtdname della dtd
 	 */
 	public void setDtdName(String dtdname) {
 		this.dtdname = dtdname;
