@@ -201,8 +201,8 @@ public class DFSA implements Serializable {
 
 	/**
 	 * Crea un automa deterministico a partire da uno non deterministico
-	 * 
-	 * @param non_deterministic l'automa da trasformare
+	 * @param _name etichetta della regola
+	 * @param nd_fsa l'automa da trasformare
 	 * @throws DtdRulesManagerException
 	 */
 	public DFSA(String _name, FSA nd_fsa) throws DtdRulesManagerException {
