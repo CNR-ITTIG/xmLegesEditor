@@ -79,7 +79,7 @@ public class UtilDate {
 	 * Formatta una data normalizzata (nel formato dato da getNormFormat()) con
 	 * il formato dato da getDateFormat().
 	 * 
-	 * @param norm data normalizzata
+	 * @param date data normalizzata
 	 * @return data formattata, o null in caso di errore
 	 */
 	public static String dateToNorm(java.util.Date date) {
@@ -132,8 +132,7 @@ public class UtilDate {
 	}
 
 	/**
-	 * converte una data in forma testuale gg mese aaaa (es. 12 Dicembre 2003)
-	 * in formato java.util.Date.
+	 * converte una data in forma testuale gg mese aaaa (es: 12 Dicembre 2003) in formato java.util.Date.
 	 * 
 	 * @return data, o null se la data passata non è valida
 	 */
@@ -174,8 +173,7 @@ public class UtilDate {
 	}
 
 	/**
-	 * converte una data in formato java.util.Date in forma testuale gg mese
-	 * aaaa (es. 12 Dicembre 2003) .
+	 * converte una data in formato java.util.Date in forma testuale gg mese aaaa (es: 12 Dicembre 2003) .
 	 * 
 	 * @return forma testuale della data, o null se la data passata non è valida
 	 */
