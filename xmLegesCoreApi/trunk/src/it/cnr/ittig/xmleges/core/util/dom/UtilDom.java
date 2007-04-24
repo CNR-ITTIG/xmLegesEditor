@@ -77,13 +77,10 @@ public class UtilDom {
 	/**
 	 * Converte il sottoalbero a partire da node in testo con tag xml
 	 * 
-	 * @return stringa contenente il documento xml
-	 * @param format indica se il file deve essere formattato (true) o no
-	 *        (false)
-	 * @param formatTab string usata per la tabulazione
 	 * @param node nodo da trasformare in stringa
+	 * @param format indica se il file deve essere formattato <code>true</code> o no <code>false</code>
 	 * @param formatTab string usata per la tabulazione
-	 * @return nodo xml rappresentante il nodo <code>node</code>
+	 * @return stringa contenente il documento xml
 	 */
 	public static String domToString(Node node, boolean format, String formatTab) {
 		return domToString(node, format, formatTab, true);
@@ -91,14 +88,12 @@ public class UtilDom {
 
 	/**
 	 * Converte il sottoalbero a partire da node in testo con tag xml
-	 * 
-	 * @return stringa contenente il documento xml
-	 * @param format indica se il file deve essere formattato (true) o no
-	 *        (false)
-	 * @param formatTab string usata per la tabulazione
+	 *
 	 * @param node nodo da trasformare in stringa
+	 * @param format indica se il file deve essere formattato <code>true</code> o no <code>false</code>
 	 * @param formatTab string usata per la tabulazione
-	 * @return nodo xml rappresentante il nodo <code>node</code>
+	 * @param xmlns <code>true</code> se nameSpaceAware
+	 * @return stringa contenente il documento xml
 	 */
 	public static String domToString(Node node, boolean format, String formatTab, boolean xmlns) {
 		return domToString(node, format, formatTab, xmlns, true);
@@ -107,15 +102,13 @@ public class UtilDom {
 	/**
 	 * Converte il sottoalbero a partire da node in testo con tag xml
 	 * 
-	 * @return stringa contenente il documento xml
-	 * @param format indica se il file deve essere formattato (true) o no
-	 *        (false)
-	 * @param formatTab string usata per la tabulazione
 	 * @param node nodo da trasformare in stringa
+	 * @param format indica se il file deve essere formattato <code>true</code> o no <code>false</code>
 	 * @param formatTab string usata per la tabulazione
+	 * @param xmlns <code>true</code> se nameSpaceAware
 	 * @param expandEmptyTag indica se espandere i nodi vuoti (&lt;p/&gt; o
 	 *        &lt;p&gt;&lt;/p&gt;)
-	 * @return nodo xml rappresentante il nodo <code>node</code>
+	 * @return Stringa xml rappresentante il nodo <code>node</code>
 	 */
 	public static String domToString(Node node, boolean format, String formatTab, boolean xmlns, boolean expandEmptyTag) {
 		DOMWriter writer = new DOMWriter();
@@ -1064,9 +1057,8 @@ public class UtilDom {
 	/**
 	 * Controlla se il nodo <code>node</code> appartiene al sottoalbero
 	 * individuato dal nodo <code>ancestor</code>.
-	 * 
+	 * @param ancestor
 	 * @param node nodo figlio
-	 * @param parent
 	 * @return <code>true</code> se <code>node</code> appartiene al
 	 *         sottoalbero individuato dal nodo <code>ancestor</code>
 	 */
