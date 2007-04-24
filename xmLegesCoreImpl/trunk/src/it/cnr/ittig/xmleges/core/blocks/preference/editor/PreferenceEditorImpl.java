@@ -20,8 +20,9 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
 /**
- * <b>Implementazione del servizio
- * <code>it.cnr.ittig.xmleges.editor.services.preference.editor.PreferenceEditor</code>.</b>
+ * <h1>Implementazione del servizio
+ * <code>it.cnr.ittig.xmleges.editor.services.preference.editor.PreferenceEditor</code>.
+ * </h1>
  * <h1>Descrizione</h1>
  * <h1>Configurazione</h1>
  * <h1>Dipendenze</h1>
