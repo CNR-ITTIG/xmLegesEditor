@@ -1,11 +1,10 @@
 package it.cnr.ittig.xmleges.core.services.action.tool.unmark;
 
-
-
 import it.cnr.ittig.services.manager.Service;
 
 /**
- * Servizio per la eliminazione della marcatura del nodo selezionato 
+ * Servizio per la eliminazione della marcatura del nodo selezionato.
+ *  
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
