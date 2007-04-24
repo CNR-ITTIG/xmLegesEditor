@@ -31,7 +31,6 @@ import org.w3c.dom.Node;
  * <li>xxx.yyy:</li>
  * </ul>
  * 
- * @see
  * @version 1.0
  */
 public class NirUtilUrnImpl implements NirUtilUrn, Loggable, Serviceable {
