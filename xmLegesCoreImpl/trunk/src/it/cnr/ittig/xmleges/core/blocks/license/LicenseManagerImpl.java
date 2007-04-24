@@ -42,7 +42,6 @@ import javax.swing.JLabel;
  * License </a></dd>
  * </dl>
  * 
- * @see
  * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */
