@@ -12,8 +12,8 @@ import java.io.File;
 import java.util.Hashtable;
 
 /**
- * <h1>Implementazione del servizio
- * <code>it.cnr.ittig.xmleges.editor.services.panes.xslts.NirPanesXslts.</code></h1>
+ * <h1>Implementazione del servizio</h1>
+ * <code>it.cnr.ittig.xmleges.editor.services.panes.xslts.NirPanesXslts</code>
  * <h1>Descrizione</h1>
  * Servizio per la gestione dei file di trasformazione XSLT e fogli di stile CSS.
  * <h1>Configurazione</h1>

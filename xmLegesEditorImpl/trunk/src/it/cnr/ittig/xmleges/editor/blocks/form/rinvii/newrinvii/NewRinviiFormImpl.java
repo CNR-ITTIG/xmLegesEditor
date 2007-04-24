@@ -68,7 +68,6 @@ import javax.swing.text.MaskFormatter;
  * General Public License </a></dd>
  * </dl>
  * 
- * @see
  * @version 1.0
  * @author <a href="mailto:sarti@dii.unisi.it">Lorenzo Sarti</a>, Tommaso Paba
  */
@@ -602,25 +601,7 @@ public class NewRinviiFormImpl implements NewRinviiForm, Loggable, Serviceable, 
 
 		} catch (Exception e) {
 		}
-
 		costruisciUrn();
-
-		// ////////////////////////////////////// TRASH
-		// /////////////////////////////
-		// eraseAreaUrn();
-		// addElementAreaUrn(urnString);
-		// if (urn.size() > 0) {
-		// urn.removeAllElements();
-		// }
-
-		// if(!urn.contains(u)) // bug su modifica rif singolo
-		// urn.add(u);
-
-		// if(!isInsertedUrn(u)) // bug su modifica rif singolo
-		// urn.add(u);
-
-		// ///////////////////////////////////////////////////////////////////////////////////
-
 	}
 
 	private boolean isInsertedUrn(Urn u) {
@@ -634,7 +615,7 @@ public class NewRinviiFormImpl implements NewRinviiForm, Loggable, Serviceable, 
 	private void costruisciUrn() {
 		if (urn.size() > 0)
 			urn.removeAllElements();
-		for (int i = 0; i < lmd.size(); i++) {
+		for (int i = 0; i < lmd.size(); i++) {  // caso multiRif (?)
 			Urn u = new Urn();
 			try {
 				for (int j = 0; j < lmautorita.getSize(); j++) {
@@ -700,29 +681,23 @@ public class NewRinviiFormImpl implements NewRinviiForm, Loggable, Serviceable, 
 					else if (token.equals("Unione europea"))
 						urnautorita = "unione.europea.";
 					else {
-
-						if (j == 0)
-							urnautorita = registroautorita.getUrnIstituzioneFromNomeIstituzione(token) + ".";
-
-						else {
+						if (j == 0)   // livello 0
+							urnautorita = registroautorita.getUrnIstituzioneFromNomeIstituzione(token) + ";";
+						else {        // livelli inferiori
 							StringTokenizer st2 = new StringTokenizer(token, " ");
-							while (st2.hasMoreTokens())
-								urnautorita += st2.nextToken() + ".";
-
+							while (st2.hasMoreTokens()){
+								urnautorita += st2.nextToken();
+								if(st2.hasMoreTokens())
+									urnautorita+=".";
+							}
+							urnautorita+=";";
 						}
 					}
 				}
-				if (urnautorita.substring(urnautorita.length() - 1, urnautorita.length()).equals("."))
+				if (urnautorita.substring(urnautorita.length() - 1, urnautorita.length()).equals(";"))
 					u.addAutorita(urnautorita.substring(0, urnautorita.length() - 1));
 				else
 					u.addAutorita(urnautorita);
-				/*
-				 * String token=st.nextToken(); if (token.equals("Comunita
-				 * europee")) u.addAutorita("comunita.europee"); else if
-				 * (token.equals("Unione europea"))
-				 * u.addAutorita("unione.europea"); else
-				 * u.addAutorita(registroautorita.getUrnIstituzioneFromNomeIstituzione(token));
-				 */
 			}
 			u.setProvvedimento(((ProvvedimentiItem) comboprovvedimenti.getSelectedItem()).getUrnAtto());
 			StringTokenizer stdata = new StringTokenizer(datadispositivo.getText(), "/");

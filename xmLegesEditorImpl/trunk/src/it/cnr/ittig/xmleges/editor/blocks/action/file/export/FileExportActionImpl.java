@@ -244,8 +244,7 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 	public void manageEvent(EventObject event) {
 		exportBrowserAction.setEnabled(!documentManager.isEmpty());
 		exportHTMLAction.setEnabled(!documentManager.isEmpty());
-		//export per i DDL non è implementato (disabilito)
-		//exportPDFAction.setEnabled(!documentManager.isEmpty());
+		//exportPDF i DDL non è implementato (disabilito)
 		exportPDFAction.setEnabled(!documentManager.isEmpty() && !documentManager.getRootElement().getFirstChild().getNodeName().equals("DisegnoLegge"));
 		exportRTFAction.setEnabled(!documentManager.isEmpty());
 	}

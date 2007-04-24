@@ -57,7 +57,6 @@ import org.w3c.dom.Node;
  * General Public License </a></dd>
  * </dl>
  * 
- * @see
  * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */

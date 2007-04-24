@@ -47,10 +47,9 @@ import javax.swing.event.CaretListener;
  * <dd><a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU
  * General Public License </a></dd>
  * </dl>
- * 
- * @see
  * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
+ * @author <a href="mailto:agnoloni@ittig.cnr.it">Tommaso Agnoloni</a>
  */
 public class UrnFormImpl implements UrnForm, CaretListener, Loggable, Serviceable, Initializable {
 

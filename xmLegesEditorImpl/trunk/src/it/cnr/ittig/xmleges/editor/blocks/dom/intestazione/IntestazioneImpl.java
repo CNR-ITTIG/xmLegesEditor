@@ -12,8 +12,8 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.editor.services.dom.intestazione.Intestazione;
 
 /**
- * <b>Implementazione del servizio
- * <code>it.cnr.ittig.xmleges.editor.services.dom.intestazione.Intestazione</code>.</b>
+ * <h1>Implementazione del servizio</h1>
+ * <code>it.cnr.ittig.xmleges.editor.services.dom.intestazione.Intestazione</code>
  * <h1>Descrizione</h1>
  * <h1>Configurazione</h1>
  * <h1>Dipendenze</h1>

@@ -66,7 +66,6 @@ import javax.swing.text.MaskFormatter;
  * General Public License </a></dd>
  * </dl>
  * 
- * @see
  * @version 1.0
  * @author <a href="mailto:sarti@dii.unisi.it">Lorenzo Sarti </a>
  */

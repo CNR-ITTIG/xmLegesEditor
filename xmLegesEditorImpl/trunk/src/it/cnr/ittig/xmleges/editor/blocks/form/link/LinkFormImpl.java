@@ -52,8 +52,6 @@ import org.w3c.dom.Node;
  * <dd><a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU
  * General Public License </a></dd>
  * </dl>
- * 
- * @see
  * @version 1.0
  * @author <a href="mailto:tommaso.agnoloni@ittig.cnr.it">Tommaso Agnoloni</a>
  */

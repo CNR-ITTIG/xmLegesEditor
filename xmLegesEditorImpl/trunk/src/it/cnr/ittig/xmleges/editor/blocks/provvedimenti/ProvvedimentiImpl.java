@@ -26,7 +26,6 @@ import java.util.Vector;
  * <li>xxx.yyy:</li>
  * </ul>
  * 
- * @see
  * @version 1.0
  * @author Lorenzo Sarti
  */
