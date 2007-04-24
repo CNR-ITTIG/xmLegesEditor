@@ -3,7 +3,8 @@ package it.cnr.ittig.xmleges.core.services.spellcheck.dom.form;
 import it.cnr.ittig.services.manager.Service;
 
 /**
- * Servizio per la form controllo ortografico
+ * Servizio per la form controllo ortografico.
+ * 
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
