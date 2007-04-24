@@ -60,10 +60,6 @@ public interface AttributeEditor {
 	 * Attiva la form per la modifica dell'attributo <code>attrib</code> del
 	 * nodo <code>node</code> se il motodo <code>hasForm</code> ha
 	 * restituito <code>true</code>.
-	 * 
-	 * @param node nodo dell'albero DOM che ha l'attributo <code>attrib</code>
-	 * @param attrib nodo attributo
-	 * @return componente che permette la modifica dell'attributo
 	 */
 	public void showEditorForm();
 
