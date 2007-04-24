@@ -82,7 +82,7 @@ public class MetaCnrImpl implements MetaCnr, Loggable, Serviceable {
 	}
 
 	public void setProprietario(Node node, String[] metadati) {
-		if(metadati!=null && metadati.length==6){
+		if(metadati!=null && metadati.length==7){
 			Document doc = documentManager.getDocumentAsDom();
 			try {
 				EditTransaction tr = documentManager.beginEdit();
@@ -108,7 +108,7 @@ public class MetaCnrImpl implements MetaCnr, Loggable, Serviceable {
 			boolean missingProprietario = false;
 			
 			if (proprietarioNode==null){
-				proprietarioNode = doc.createElementNS("http://www.cnr.it/provvedimenti/2.1","proprietario");
+				proprietarioNode = doc.createElementNS("http://www.cnr.it/provvedimenti/2.2","proprietario");
 				missingProprietario = true;
 			}
 			
@@ -119,22 +119,28 @@ public class MetaCnrImpl implements MetaCnr, Loggable, Serviceable {
 			
 			
 			utilRulesManager.orderedInsertChild(proprietarioNode,cnrNode);
-						
-			String[] elementsName=new String[]{"cnr:strutturaEmanante","cnr:autoritaEmanante","cnr:tipoDestinatario","cnr:areaScientifica","cnr:strutturaDestinataria","cnr:tipoProvvedimento"};
+			
+			
+			String[] elementsName=new String[]{"cnr:strutturaEmanante","cnr:autoritaEmanante","cnr:tipoDestinatario","cnr:strutturaDestinataria","cnr:tipoProvvedimento",metadati[6]};
 			 
+			
+			UtilDom.removeAllChildren(cnrNode);
+			
 			for(int i=0;i<elementsName.length;i++){
 				Element toInsertElement = doc.createElement(elementsName[i]);
 				if((metadati[i]!=null)&&(!metadati[i].trim().equals("")))
 					UtilDom.setAttributeValue(toInsertElement,"valore",metadati[i]);
 				
-				Node toInsert_Node = (Node)toInsertElement;
+//				Node toInsert_Node = (Node)toInsertElement;
 
-				Node oldTag = UtilDom.findDirectChild(cnrNode,elementsName[i]);//doc.getElementsByTagName(elementsName[i]);
-				if (oldTag!=null) // c'era gia' un nodo elementsName[i]
-					cnrNode.replaceChild(toInsert_Node, oldTag);
-				else 
-					utilRulesManager.orderedInsertChild(cnrNode,toInsert_Node);
+//				Node oldTag = UtilDom.findDirectChild(cnrNode,elementsName[i]);//doc.getElementsByTagName(elementsName[i]);
+//				if (oldTag!=null) // c'era gia' un nodo elementsName[i]
+//					cnrNode.replaceChild(toInsert_Node, oldTag);
+//				else 
+//					utilRulesManager.orderedInsertChild(cnrNode,toInsert_Node);
 			    	
+				cnrNode.appendChild((Node)toInsertElement);
+				
 			}
 			
 			if(missingProprietario){
