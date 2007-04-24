@@ -4,8 +4,8 @@ import java.awt.Component;
 
 /**
  * Interfaccia necessaria per registrare un pannello per le modifiche delle
- * preferenze specifiche di una sezione del file di configurazione.<br>
- * Il pannello che implementa questa interfaccia pu&ograve; deve specificare il
+ * preferenze specifiche di una sezione del file di configurazione<br>
+ * Il pannello che implementa questa interfaccia pu&ograve;  specificare il
  * gruppo di appartenenza tramite il metodo
  * <code>getPreferenceEditorGroup</code>. Cos&igrave; facendo l'albero di
  * riepilogo mostrer&agrave; le varie sezioni modificabili raggruppate.<br>
