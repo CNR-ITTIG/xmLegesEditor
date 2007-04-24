@@ -59,7 +59,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 /**
- * Implementazione del servizio it.cnr.ittig.services.xsltpane.XsltPane;
+ * <h1>Implementazione del servizio <code>it.cnr.ittig.services.xsltpane.XsltPane</code></h1>
+ * <h1>Descrizione</h1>
+ * <h1>Configurazione</h1>.
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
