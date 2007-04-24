@@ -39,7 +39,6 @@ import javax.swing.JList;
  * <li>xxx.yyy:</li>
  * </ul>
  * 
- * @see
  * @version 1.0
  * @author Lorenzo Sarti
  */
