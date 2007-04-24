@@ -77,7 +77,7 @@ public interface SpellCheck extends Service {
 	 * 
 	 * @param word
 	 *            parola da aggiungere
-	 * @param dizTemp
+	 * @param temporaryDict
 	 *            True: utilizza il TEMPORARY_DICT, False: utilizza il
 	 *            PERSONAL_DICT
 	 */
@@ -92,12 +92,11 @@ public interface SpellCheck extends Service {
 	 *            parola errata
 	 * @param suggestion
 	 *            parola suggerita
-	 * @param dizTemp
+	 * @param temporaryDict
 	 *            True: utilizza il TEMPORARY_DICT, False: utilizza il
 	 *            PERSONAL_DICT
 	 */
-	public void addSuggestion(String word, String suggestion,
-			boolean temporaryDict);
+	public void addSuggestion(String word, String suggestion,boolean temporaryDict);
 
 	/**
 	 * Rimuove la parola <code>word</code> dal dizionario <code>custom</code>.
