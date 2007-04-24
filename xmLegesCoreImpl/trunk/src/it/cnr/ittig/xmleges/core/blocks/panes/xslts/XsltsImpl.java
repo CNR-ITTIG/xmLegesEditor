@@ -12,15 +12,15 @@ import java.io.File;
 import java.util.Hashtable;
 
 /**
- * <h1>Implementazione del servizio
- * <code>it.cnr.ittig.xmleges.editor.services.panes.xslts.NirPanesXslts.</code></h1>
+ * <h1>Implementazione del servizio</h1>
+ * <code>it.cnr.ittig.xmleges.editor.services.panes.xslts.Xslts</code>
  * <h1>Descrizione</h1>
- * Servizio per la gestione dei file di trasformazione XSLT e fogli di stile CSS.
+ * Servizio per la gestione dei file di trasformazione XSLT e fogli di stile CSS
  * <h1>Configurazione</h1>
  * La configurazione pu&ograve; avere i seguenti tag (tutti opzionali):
  * <ul>
- * <li><code>&lt;xslt&gt;</code>: specifica un file xsl; </li>
- * <li><code>&lt;css&gt;</code>: specifica un file css.</li>
+ * <li><code>&lt;xslt&gt;</code>: specifica un file xsl</li>
+ * <li><code>&lt;css&gt;</code>: specifica un file css</li>
  * </ul>
  * Esempio:
  * 
