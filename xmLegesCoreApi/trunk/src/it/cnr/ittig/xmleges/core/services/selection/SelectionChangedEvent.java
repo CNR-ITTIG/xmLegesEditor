@@ -74,12 +74,16 @@ public class SelectionChangedEvent extends EventObject {
 		this.textSelectionEnd = -1;
 	}
 
+		
 	/**
 	 * Crea una nuova istanza di <code>SelectionChangedEvent</code> per
 	 * l'evento di nuova selezione di testo.
-	 * 
+	 *  
 	 * @param source sorgente dell'evento
-	 * @param nodes nodi selezionati
+	 * @param activeNode
+	 * @param start
+	 * @param end
+	 * @param activeNodeChanged
 	 */
 	public SelectionChangedEvent(Object source, Node activeNode, int start, int end, boolean activeNodeChanged) {
 		super(source);
