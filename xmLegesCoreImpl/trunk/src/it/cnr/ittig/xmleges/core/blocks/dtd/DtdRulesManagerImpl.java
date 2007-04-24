@@ -916,7 +916,7 @@ public class DtdRulesManagerImpl implements DtdRulesManager, DeclHandler, Loggab
 	/**
 	 * Ritorna il nome di un nodo
 	 * 
-	 * @param node il nodo di cui si richiede il nome
+	 * @param dom_node il nodo di cui si richiede il nome
 	 * @throws DtdRulesManagerException
 	 */
 	public String getNodeName(Node dom_node) throws DtdRulesManagerException {
@@ -954,7 +954,7 @@ public class DtdRulesManagerImpl implements DtdRulesManager, DeclHandler, Loggab
 	/**
 	 * Controlla se il contenuto di un nodo &egrave valido
 	 * 
-	 * @param node il nodo da validare
+	 * @param dom_node il nodo da validare
 	 * @throws DtdRulesManagerException
 	 */
 	public boolean queryIsValid(Node dom_node) throws DtdRulesManagerException {
@@ -968,7 +968,7 @@ public class DtdRulesManagerImpl implements DtdRulesManager, DeclHandler, Loggab
 	/**
 	 * Controlla se un nodo pu&ograve contenere del testo
 	 * 
-	 * @param node il nodo in esame
+	 * @param dom_node il nodo in esame
 	 * @throws DtdRulesManagerException
 	 */
 	public boolean queryTextContent(Node dom_node) throws DtdRulesManagerException {
