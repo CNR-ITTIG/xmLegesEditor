@@ -102,9 +102,6 @@ public interface Frame extends Service {
 	 * </ul>
 	 * 
 	 * @param pane pannello di modifica da aggiungere
-	 * @param where posizione
-	 * @param index indice di posizionamente se presenti pi&ugrave; pannello
-	 *        nello stesso luogo (where)
 	 * @param scrollable <code>true</code> se il pannello deve essere gestito
 	 *        con JScrollPane
 	 */
