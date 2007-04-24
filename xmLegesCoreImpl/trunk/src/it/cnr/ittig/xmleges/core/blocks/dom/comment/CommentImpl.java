@@ -38,7 +38,6 @@ import org.w3c.dom.Node;
  * License </a></dd>
  * </dl>
  * 
- * @see
  * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */
