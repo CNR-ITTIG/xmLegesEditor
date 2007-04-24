@@ -3,8 +3,9 @@ package it.cnr.ittig.xmleges.core.services.tool.newversion;
 import it.cnr.ittig.services.manager.Service;
 
 /**
- * Servizio per il controllo della disponibilit&agrave;? di nuove versioni del
+ * Servizio per il controllo della disponibilit&agrave; di nuove versioni del
  * programma.
+ * 
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
