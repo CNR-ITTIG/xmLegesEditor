@@ -50,7 +50,7 @@ public interface XsltMapper extends Service {
 	/**
 	 * Restituisce i nodi DOM dato un array di id.
 	 * 
-	 * @param id id dei nodi
+	 * @param ids id dei nodi
 	 * @return nodi XSLT
 	 */
 	public Node[] getDomById(String[] ids);
@@ -70,7 +70,7 @@ public interface XsltMapper extends Service {
 	 * Restituisce i nodi DOM dato un array di id, sostituendo eventualmente i
 	 * nodi testo generati con il loro parent.
 	 * 
-	 * @param id id dei nodi
+	 * @param ids id dei nodi
 	 * @param replaceGenNodes indica se sostituire i nodi generati con il loro
 	 *        parent
 	 * @return nodi XSLT
