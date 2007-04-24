@@ -24,7 +24,7 @@ public interface UrnDocumentoForm extends Service {
 
 	/**
 	 * @param urn
-	 * @return
+	 * @return <code>true</code> se la form &egrave; valida
 	 */
 	public boolean openForm(Urn[] urn);
 

@@ -6,7 +6,7 @@ import org.w3c.dom.Node;
 
 /**
  * Servizio per l'assegnazione di un intervallo di vigenza ad una porzione di
- * testo
+ * testo o ad una partizione. 
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
@@ -31,8 +31,6 @@ public interface Vigenza extends Service {
 	 * Funzione per l'abilitazione dell'azione di assegnazione della vigenza
 	 * 
 	 * @param node nodo sul cui testo si vuole applicare la vigenza
-	 * @param start inizio selezione del testo
-	 * @param end fine selezione del testo
 	 * @return </code>true</code> se l'azione puo' essere abilitata
 	 */
 	public boolean canSetVigenza(Node node);
@@ -43,10 +41,10 @@ public interface Vigenza extends Service {
 	 * porzione di testo
 	 * 
 	 * @param node nodo sul cui testo si applica la vigenza
+	 * @param selectedText testo selezionato
 	 * @param start inizio selezione del testo
 	 * @param end fine selezione del testo
-	 * @param dataInizio data di fine della vigenza
-	 * @param dataFine data di inizio della vigenza
+	 * @param vigenza oggetto contenente la vigenza
 	 * @return </code>true</code> se la vigenza e' stata inserita
 	 *         correttamente
 	 */
@@ -54,9 +52,9 @@ public interface Vigenza extends Service {
 	
 	/**
 	 * Funzione Dom per la lettura da documento della vigenza del nodo selezionato
-	 * @param node: nodo selezionato
-	 * @param start: inizio selezione
-	 * @param end: fine selezione
+	 * @param node nodo selezionato
+	 * @param start inizio selezione
+	 * @param end fine selezione
 	 * @return
 	 */
 	public VigenzaEntity getVigenza(Node node, int start, int end);
@@ -80,7 +78,7 @@ public interface Vigenza extends Service {
 	/**
 	 * Funzione che aggiorna le vigenze che fanno riferimento 
 	 * agli eventi cancellati dal ciclo di vita
-	 * @param vig: vigenza da aggiornare
+	 * @param vig vigenza da aggiornare
 	 */
 	public void updateVigenzaOnDoc(VigenzaEntity vig);
 

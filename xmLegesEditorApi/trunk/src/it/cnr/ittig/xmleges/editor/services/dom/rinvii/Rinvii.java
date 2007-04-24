@@ -8,8 +8,8 @@ import java.util.Vector;
 import org.w3c.dom.Node;
 
 /**
- * Servizio per l'inserimento o la modifica di un riferimento interno o esterno
- * di un
+ * Servizio per l'inserimento o la modifica di un riferimento interno o esterno.
+ * 
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
@@ -28,7 +28,7 @@ import org.w3c.dom.Node;
 public interface Rinvii extends Service {
 
 	/**
-	 * Indica se ??? possibile inserire un nodo <code>&lt;rif&gt;</code>
+	 * Indica se &egrave; possibile inserire un nodo <code>&lt;rif&gt;</code>
 	 * all'interno del nodo <code>node</code>.
 	 * 
 	 * @param node nodo di riferimento
@@ -55,7 +55,7 @@ public interface Rinvii extends Service {
 	 * @param node nodo di riferimento
 	 * @param start inizio della selezione
 	 * @param end fine della selezione
-	 * @param Vector vettore delle urn dei riferimenti
+	 * @param urn oggetto <code>Urn</code> contenente la urn da inserire
 	 * @return <code>null</code> se la modifica non &egrave; riuscita; nodo
 	 *         modificato
 	 */
@@ -86,7 +86,7 @@ public interface Rinvii extends Service {
 	public Node insert(Node node, int start, int end, String[] id, String[] descrizioneMRif);
 
 	/**
-	 * Indica se ??? possibile modificare il nodo <code>&lt;rif&gt;</code>.
+	 * Indica se &egrave; possibile modificare il nodo <code>&lt;rif&gt;</code>.
 	 * 
 	 * @param node nodo di riferimento
 	 * @return <code>true</code> se &egrave; possibile modificare in nodo

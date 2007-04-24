@@ -20,7 +20,7 @@ import org.w3c.dom.Node;
  * General Public License </a></dd>
  * </dl>
  * 
- * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
+ * @author <a href="francesca.uccheddu@gmail.com">Francesca Uccheddu</a>
  */
 public interface VigenzaForm extends Service {
 
@@ -28,12 +28,7 @@ public interface VigenzaForm extends Service {
 	
 	/**
 	 * Apre il form per la selezione/modifica della vigenza (vigore ed efficacia)
-	 * @param testo Testo selezionato a cui applicare la vigenza o nome della partizione
-	 * @param inizioVigore
-	 * @param fineVigore
-	 * @param inizioEfficacia
-	 * @param fineEfficacia
-	 * @param status  (omissis|abrogato|annullato|sospeso)
+	 * @param attivo Nodo selezionato a cui applicare la vigenza 
 	 * @return <code>true</code> se &egrave; stato premuto ok.
 	 */
 
@@ -83,63 +78,26 @@ public interface VigenzaForm extends Service {
 	 */
 	public void setStatus(String status);
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public VigenzaEntity getVigenza();
 	
+	/**
+	 * 
+	 * @param vigenza
+	 */
 	public void setVigenza(VigenzaEntity vigenza);
 	
+	/**
+	 * 
+	 * @param testo
+	 */
 	public void setTestoselezionato(String testo);
 	
 //	public void setCiclidivita(Relazione[] relazioni, Evento[] eventi);
 	
 	
-//	/**
-//	 * 
-//	 * @return
-//	 */
-//	public Evento getInizioVigore();
-//	
-//	/**
-//	 * 
-//	 * @return
-//	 */
-//	public Evento getFineVigore();
-//	/**
-//	 * 
-//	 * @return
-//	 */
-//	public void setInizioVigore(Evento iniziovigore);
-//	
-//	/**
-//	 * 
-//	 * @return
-//	 */
-//	public void setFineVigore(Evento finevigore);
-	
-	
-	//
-//	/**
-//	 * 
-//	 * @return
-//	 */
-//	public void setInizioEfficacia(Evento inizioefficacia);
-//		
-//	/**
-//	 * 
-//	 * @return
-//	 */
-//	public void setFineEfficacia(Evento fineefficacia);
-//
-//	/**
-//	 * 
-//	 * @return
-//	 */
-//	public Evento getInizioEfficacia();
-//		
-//	/**
-//	 * 
-//	 * @return
-//	 */
-//	public Evento getFineEfficacia();
-
 	
 }
