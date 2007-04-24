@@ -48,6 +48,7 @@ import org.w3c.dom.Node;
  *     form.button.ok.mnemonic=O
  *     form.button.ok.icon=images/ok.png
  * </pre>
+ * .
  * 
  * <p>
  * <dl>
@@ -67,7 +68,7 @@ import org.w3c.dom.Node;
 public interface UtilUI extends Service {
 
 	/**
-	 * Crea un generico menu vuoto.
+	 * Crea un generico menu vuoto
 	 * 
 	 * @return menu
 	 * @param name nome del menu
@@ -75,7 +76,7 @@ public interface UtilUI extends Service {
 	public JMenu createMenu(String name);
 
 	/**
-	 * Crea un generico elemento di menu.
+	 * Crea un generico elemento di menu
 	 * 
 	 * @return elemento di menu inizializzato
 	 * @param action nome dell'azione su evento
@@ -84,7 +85,7 @@ public interface UtilUI extends Service {
 
 	/**
 	 * Crea un generico elemento di menu impostando l'oggetto che gestisce
-	 * l'evento.
+	 * l'evento
 	 * 
 	 * @param action nome dell'azione su evento
 	 * @param al listener per gli eventi
@@ -93,7 +94,7 @@ public interface UtilUI extends Service {
 	public JCheckBoxMenuItem createCheckBoxMenuItem(String action, ActionListener al);
 
 	/**
-	 * Crea un elemento di menu spuntabile.
+	 * Crea un elemento di menu spuntabile
 	 * 
 	 * @return elemento di menu inizializzato
 	 * @param action nome dell'azione su evento
@@ -102,7 +103,7 @@ public interface UtilUI extends Service {
 
 	/**
 	 * Crea un elemento di menu spuntabile impostando l'oggetto che gestisce
-	 * l'evento.
+	 * l'evento
 	 * 
 	 * @param action nome dell'azione su evento
 	 * @param al listener per gli eventi
@@ -130,7 +131,7 @@ public interface UtilUI extends Service {
 
 	/**
 	 * Crea un generico pulsante per le toolbar (con margini 0 e rollover
-	 * abilitato).
+	 * abilitato)
 	 * 
 	 * @return il pulsante inizializzato
 	 * @param action nome dell'azione su evento
@@ -139,7 +140,7 @@ public interface UtilUI extends Service {
 
 	/**
 	 * Crea un generico pulsante per le toolbar (con margini 0 e rollover
-	 * abilitato) impostando l'oggetto che gestisce l'evento.
+	 * abilitato) impostando l'oggetto che gestisce l'evento
 	 * 
 	 * @param action nome dell'azione su evento
 	 * @param al listener per gli eventi
@@ -166,7 +167,7 @@ public interface UtilUI extends Service {
 	public JToggleButton createToggleButton(String action, ActionListener al);
 
 	/**
-	 * Imposta, se non sono gi&agrave; presenti, le propriet&agrave;:
+	 * Imposta, se non sono gi&agrave; presenti, le propriet&agrave;
 	 * <ul>
 	 * <li>text</li>
 	 * <li>mnemonic</li>
@@ -182,7 +183,7 @@ public interface UtilUI extends Service {
 	public Action applyI18n(String actionName, Action action);
 
 	/**
-	 * Imposta, se non sono gi&agrave; presenti, le propriet&agrave;:
+	 * Imposta, se non sono gi&agrave; presenti, le propriet&agrave; 
 	 * <ul>
 	 * <li>text</li>
 	 * <li>mnemonic</li>
@@ -190,8 +191,7 @@ public interface UtilUI extends Service {
 	 * <li>tooltip</li>
 	 * <li>accelerator</li>
 	 * </ul>
-	 * I componenti con le relative propriet&agrave supportate sono:
-	 * 
+	 * I componenti con le relative propriet&agrave supportate sono
 	 * <pre>
 	 *     JComponent    : tooltip
 	 *     JLabel        : tooltip, text, icon
