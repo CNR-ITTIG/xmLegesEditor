@@ -7,9 +7,10 @@ import java.util.Vector;
 
 /**
  * Servizio per l'inserimento di elementi in una lista utilizzando come editor
- * un pannello specificato dall'interfaccia <code>ListEditor</code>.<br>
+ * un pannello specificato dall'interfaccia <code>ListEditor</code><br>
  * La lista visualizza il testo degli oggetti usando il metodo
  * <code>Object.toString()</code>.
+ * 
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
@@ -71,7 +72,7 @@ public interface ListTextField extends Service, CommonForm {
 	public void removeListTextFieldElementListener(ListTextFieldElementListener listener);
 
 	/**
-	 * Imposta la propriet? moveButtons, che determina se il componente deve
+	 * Imposta la propriet&agrave; moveButtons, che determina se il componente deve
 	 * visualizzare i pulsanti per spostare in alto o in basso un elemento.
 	 * 
 	 * @param moveButtons true per mostrare i pulsanti, false per nasconderli

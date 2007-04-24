@@ -29,7 +29,7 @@ public interface ListTextFieldElementListener extends EventListener {
 	 * del tipo di azione che il ListTextField sta per compiere sull'elemento,
 	 * in modo che il listener possa prepararsi di conseguenza.
 	 * 
-	 * @param evento contenente il tipo di cambiamoento effettuato
+	 * @param e evento contenente il tipo di cambiamento effettuato
 	 */
 	public void elementChanged(ListTextFieldElementEvent e);
 }
