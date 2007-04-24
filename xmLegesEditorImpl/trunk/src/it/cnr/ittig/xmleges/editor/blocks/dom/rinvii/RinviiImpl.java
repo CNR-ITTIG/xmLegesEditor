@@ -50,7 +50,6 @@ import org.w3c.dom.Node;
  * General Public License </a></dd>
  * </dl>
  * 
- * @see
  * @version 1.0
  * @author <a href="mailto:agnoloni@ittig.cnr.it">Tommaso Agnoloni </a>
  */
