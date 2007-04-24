@@ -60,8 +60,8 @@ public interface Form extends Service {
 	/**
 	 * Imposta la dimensione della form.
 	 * 
-	 * @param dimX larghezza
-	 * @param dimY altezza
+	 * @param width larghezza
+	 * @param height altezza
 	 */
 	public void setSize(int width, int height);
 
