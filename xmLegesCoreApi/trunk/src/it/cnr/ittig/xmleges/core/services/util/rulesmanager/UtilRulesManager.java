@@ -187,7 +187,7 @@ public interface UtilRulesManager extends Service {
 
 	/**
 	 * Inserisce un sottoalbero alla posizione <code>pos</code> del nodo testo
-	 * <code>node</code>.<br>
+	 * <code>node</code><br>
 	 * Se il parametro <code>destructure</code> &egrave; <code>true</code>
 	 * l'inserimento tenter&agrave; di appiattire i livelli del sottoalbero fino
 	 * a quando &egrave; possibile inserirlo correttamente. In questo caso
