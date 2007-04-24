@@ -237,8 +237,7 @@ public class UtilXml {
 	}
 
 	/**
-	 * Versione del metodo che elimina dal file l'attributo xmlns che d?
-	 * problemi prima di parsare l'XML.
+	 * Versione del metodo che elimina dal file l'attributo xmlns che d&agrave; problemi prima di parsare l'XML.
 	 * 
 	 * @param is stream contenente il documento XML
 	 * @param validate
