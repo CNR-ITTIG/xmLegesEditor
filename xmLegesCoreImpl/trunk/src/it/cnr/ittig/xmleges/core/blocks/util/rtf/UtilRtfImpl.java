@@ -56,9 +56,8 @@ import org.w3c.dom.Document;
  * License </a></dd>
  * </dl>
  * 
- * @see
- * @version 1.1
- * @author <a href="mailto:agnoloni@ittig.cnr.it">Tommaso Agnoloni </a>
+ * @version 1.0
+ * @author <a href="mailto:g.giardiello@gmail.com">Gerardo Giardiello </a>
  */
 
 public class UtilRtfImpl implements UtilRtf, Loggable, Serviceable {
