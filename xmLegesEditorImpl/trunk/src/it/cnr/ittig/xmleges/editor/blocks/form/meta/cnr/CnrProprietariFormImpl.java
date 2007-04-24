@@ -79,6 +79,8 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 	
 	ButtonGroup areadisciplinaGroup;
 	
+	String sceltoGruppo;
+	
 	String[] elenco_tipodest = new String[13];
 	
 	String[] elenco_strutturaDestinataria = new String[3];
@@ -131,6 +133,7 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 		dipartimentoButton = (JRadioButton) form.getComponentByName("editor.form.meta.cnr.dipartimento_button");
 		{
 			dipartimentoButton.setSelected(true);
+			sceltoGruppo="cnr:dipartimento";
 			areadisciplina_combo.removeAllItems();
 			for (int i = 0; i < elenco_areaDipartimento.length; i++)
 				areadisciplina_combo.addItem(elenco_areaDipartimento[i]);		
@@ -150,16 +153,19 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 					for (int i = 0; i < elenco_areaScientifica.length; i++)
 						areadisciplina_combo.addItem(elenco_areaScientifica[i]);		
 					areadisciplina_combo.setEditable(true);
+					sceltoGruppo="cnr:areaScientifica";
 				}else if(e.getActionCommand().equals("disciplina")){
 					areadisciplina_combo.removeAllItems();
 					for (int i = 0; i < elenco_disciplina.length; i++)
 						areadisciplina_combo.addItem(elenco_disciplina[i]);		
 					areadisciplina_combo.setEditable(true);
+					sceltoGruppo="cnr:disciplina";
 				} else{
 					areadisciplina_combo.removeAllItems();
 					for (int i = 0; i < elenco_areaDipartimento.length; i++)
 						areadisciplina_combo.addItem(elenco_areaDipartimento[i]);		
 					areadisciplina_combo.setEditable(true);
+					sceltoGruppo="cnr:dipartimento";
 				}
 				areadisciplina_combo.setEnabled(true);
 			}};
@@ -210,28 +216,43 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 				strutturaEmanante.getText(),
 				autoritaEmanante.getText(),
 				(String)tipoDestinatario.getSelectedItem(),
-				(String)areadisciplina_combo.getSelectedItem(),
 				(String)str_destinataria_combo.getSelectedItem(),
-				(String)tipo_provv_combo.getSelectedItem()};
+				(String)tipo_provv_combo.getSelectedItem(),
+				(String)areadisciplina_combo.getSelectedItem(),
+				sceltoGruppo,	//ritorna il selezionato del gruppo 
+				};
 				
 	}
-
+	
 	public void setProprietari(String[] metadati) {
-		if(metadati!=null && metadati.length==6){
+		if(metadati!=null && metadati.length==7){
+			
+			areaButton.setEnabled(true);
+			if (metadati[6].equals("cnr:areaScientifica")) 
+				areaButton.setSelected(true);
+			else 
+				if (metadati[6].equals("cnr:disciplina")) 
+					disciplinaButton.setSelected(true);
+				else
+					dipartimentoButton.setEnabled(true);
+		
+			
 			strutturaEmanante.setText(metadati[0]);
 			autoritaEmanante.setText(metadati[1]);
 			tipoDestinatario.removeItem(metadati[2]);
 			tipoDestinatario.addItem(metadati[2]);
 			tipoDestinatario.setSelectedItem(metadati[2]);
-			areadisciplina_combo.removeItem(metadati[3]);
-			areadisciplina_combo.addItem(metadati[3]);
-			areadisciplina_combo.setSelectedItem(metadati[3]);
-			str_destinataria_combo.removeItem(metadati[4]);
-			str_destinataria_combo.addItem(metadati[4]);
-			str_destinataria_combo.setSelectedItem(metadati[4]);
-			tipo_provv_combo.removeItem(metadati[5]);
-			tipo_provv_combo.addItem(metadati[5]);
-			tipo_provv_combo.setSelectedItem(metadati[5]);
+			
+			areadisciplina_combo.removeItem(metadati[5]);
+			areadisciplina_combo.addItem(metadati[5]);
+			areadisciplina_combo.setSelectedItem(metadati[5]);
+			
+			str_destinataria_combo.removeItem(metadati[3]);
+			str_destinataria_combo.addItem(metadati[3]);
+			str_destinataria_combo.setSelectedItem(metadati[3]);
+			tipo_provv_combo.removeItem(metadati[4]);
+			tipo_provv_combo.addItem(metadati[4]);
+			tipo_provv_combo.setSelectedItem(metadati[4]);
 		}
 		
 	}
