@@ -3,7 +3,7 @@ package it.cnr.ittig.xmleges.core.services.document;
 import org.w3c.dom.Document;
 
 /**
- * Classe evento per notificare che il documento ? stato aperto
+ * Classe evento per notificare che il documento &egrave; stato aperto.
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>

@@ -32,7 +32,7 @@ public class DocumentManagerEvent extends EventObject {
 	 * Costruttore dell'evento.
 	 * 
 	 * @param source sorgente che ha emesso l'evento
-	 * @param transaction transazione
+	 * @param document documento a cui &egrave; associato l'evento
 	 */
 	public DocumentManagerEvent(Object source, Document document) {
 		super(source);
