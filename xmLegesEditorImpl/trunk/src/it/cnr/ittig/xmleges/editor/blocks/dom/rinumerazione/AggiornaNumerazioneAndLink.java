@@ -433,7 +433,7 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 
 	/**
 	 * Calcola il valore dell'elemento <b>num</b> contenuto nel nodo passato,
-	 * se il nodo non ??? di tipo libro, parte, titolo, capo, sezione, articolo,
+	 * se il nodo non &egrave; di tipo libro, parte, titolo, capo, sezione, articolo,
 	 * comma, lettera, numero, restituisce una stringa vuota
 	 * 
 	 * @param n nodo di cui si vuole calcolare il contenuto del sottoelemento
