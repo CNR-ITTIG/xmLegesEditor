@@ -36,7 +36,7 @@ public interface Splash {
 	/**
 	 * Imposta nella splash l'immagine di nome <code>imageName</code>.
 	 * 
-	 * @param imageFileName nome del file
+	 * @param imageName nome del file
 	 */
 	public void setImage(String imageName);
 
