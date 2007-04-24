@@ -29,7 +29,6 @@ public interface MSWordConverter extends Service {
 	 * &egrave; restituito <code>null</code>.
 	 * 
 	 * @param src file da convertire
-	 * @param dest file destinazione
 	 * @return file convertito o <code>null</code>
 	 */
 	public File convert(File src);
@@ -40,7 +39,6 @@ public interface MSWordConverter extends Service {
 	 * &egrave; restituito <code>null</code>.
 	 * 
 	 * @param src file da convertire
-	 * @param dest file destinazione
 	 * @param column numero di colonne per riga
 	 * @return file convertito o <code>null</code>
 	 */
@@ -52,7 +50,6 @@ public interface MSWordConverter extends Service {
 	 * &egrave; restituito <code>null</code>.
 	 * 
 	 * @param src file da convertire
-	 * @param dest file destinazione
 	 * @param column numero di colonne per riga
 	 * @param map file per trasformare i caratteri
 	 * @return file convertito o <code>null</code>
