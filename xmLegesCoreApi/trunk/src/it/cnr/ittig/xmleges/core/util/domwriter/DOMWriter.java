@@ -19,7 +19,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- * Classe per costruire il file XML da un documento DOM
+ * Classe per costruire il file XML da un documento DOM.
+ * 
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
@@ -449,7 +450,7 @@ public class DOMWriter {
 	/**
 	 * Controlla se un elemento &egrave; vuoto.
 	 * 
-	 * @param elem elemento
+	 * @param node Nodo
 	 * @return true se &egrave; vuoto
 	 */
 	public boolean isEmpty(Node node) {
