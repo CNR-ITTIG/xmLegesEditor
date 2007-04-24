@@ -47,7 +47,7 @@ public class XsltAction extends TextAction {
 	/**
 	 * Imposta l'azione di default dell'HTMLEditorKit.
 	 * 
-	 * @param action azione di default
+	 * @param defaultAction azione di default
 	 */
 	public void setDefaultAction(Action defaultAction) {
 		this.defaultAction = defaultAction;

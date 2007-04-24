@@ -7,7 +7,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.text.DefaultEditorKit;
 
 /**
- * Copia nel testo il contenuto della clipboard
+ * Copia nel testo il contenuto della clipboard.
+ * 
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
