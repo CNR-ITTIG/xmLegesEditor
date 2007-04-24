@@ -92,6 +92,6 @@ public interface EventManager extends Service {
 	 * 
 	 * @param event evento
 	 */
-	public void fireEventSerially(EventObject eventObject);
+	public void fireEventSerially(EventObject event);
 
 }
