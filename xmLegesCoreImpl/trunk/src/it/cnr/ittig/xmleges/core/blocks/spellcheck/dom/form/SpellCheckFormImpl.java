@@ -39,7 +39,7 @@ import org.w3c.dom.NodeList;
 import com.jeta.forms.components.image.ImageComponent;
 
 /**
- * Implementazione della form controllo ortografico
+ * Implementazione della form controllo ortografico.
  * 
  * <p>
  * <dl>
