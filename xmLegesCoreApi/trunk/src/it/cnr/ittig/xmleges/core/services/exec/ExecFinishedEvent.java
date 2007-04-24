@@ -32,9 +32,10 @@ public class ExecFinishedEvent extends EventObject {
 
 	/**
 	 * Costruisce l'evento di fine esecuzione.
-	 * 
 	 * @param source sorgente che emette il messaggio
-	 * @param msg messaggio
+	 * @param exitValue valore di uscita dell'applicazione
+	 * @param timeout
+	 * @param terminated <code>true</code> se terminato
 	 */
 	public ExecFinishedEvent(Object source, int exitValue, boolean timeout, boolean terminated) {
 		super(source);
