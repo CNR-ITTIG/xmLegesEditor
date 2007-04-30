@@ -28,6 +28,7 @@ import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.core.util.domwriter.DOMWriter;
 import it.cnr.ittig.xmleges.core.util.file.RegexpFileFilter;
+import it.cnr.ittig.xmleges.core.util.file.UtilFile;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
@@ -39,7 +40,9 @@ import java.util.Properties;
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
 
+import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.traversal.DocumentTraversal;
 import org.w3c.dom.traversal.NodeFilter;
@@ -346,7 +349,29 @@ public class FileSaveActionImpl implements FileSaveAction, EventManagerListener,
 		return false;
 	}
 
+	//Funzione di utilità per copiare la cartella che contiene gli allegati del file.
+	private boolean copyFolder(String path) {
+		
+		Document dom = documentManager.getDocumentAsDom();
+		
+		if (dom==null)
+			return false;
+		NodeList nl = dom.getElementsByTagName("h:img");
+		if (nl.getLength()>0)
+			new File(path).mkdir();
+		for (int i = 0; i < nl.getLength(); i++) {
+			Node node = nl.item(i);
+			String file = UtilDom.getAttributeValueAsString(node, "src");
+			UtilFile.copyFile(UtilFile.getFolderPath(documentManager.getSourceName())+file, path + file);
+		}
+		
+		return true;
+
+	}
+
+	
 	private boolean saveFile(File file) {
+		
 		String encoding;
 		if (documentManager.getEncoding() == null) {
 			logger.warn("No encoding found. Using default:" + defaultEncoding);
@@ -357,6 +382,8 @@ public class FileSaveActionImpl implements FileSaveAction, EventManagerListener,
 		domWriter.setCanonical(false);
 		domWriter.setFormat(true);
 		try {
+			copyFolder(UtilFile.getFolderPath(file.getAbsolutePath()));
+			
 			domWriter.setOutput(file, encoding);
 			domWriter.write(documentManager.getDocumentAsDom());
 			documentManager.setChanged(false);
@@ -366,6 +393,7 @@ public class FileSaveActionImpl implements FileSaveAction, EventManagerListener,
 			openAction.addLast(file.getAbsolutePath());
 			lastSaved = file.getAbsolutePath();
 			eventManager.fireEvent(new DocumentSavedEvent(this, documentManager.getDocumentAsDom()));
+
 			return true;
 		} catch (UnsupportedEncodingException ex) {
 			utilMsg.msgError("action.file.save.error.encoding");
