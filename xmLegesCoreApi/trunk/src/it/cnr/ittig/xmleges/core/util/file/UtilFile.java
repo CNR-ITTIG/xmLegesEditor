@@ -33,7 +33,8 @@ import java.util.StringTokenizer;
 public class UtilFile {
 
 	final static String tempDir;
-
+	final static String suffixFolder = "_xmlfile/";
+	
 	static {
 		tempDir = "temp";
 		new File(tempDir).mkdir();
@@ -142,6 +143,56 @@ public class UtilFile {
 		return tempDir;
 	}
 
+	/**
+	 * Copia <code>fileName</code> nella cartella che contiene gli allegati del file.
+	 * Se la cartella non esiste ancora, viene creata.
+	 * 
+	 * @param docName il nome del file xml corrente
+	 * @param fileName il nome del file da allagare
+	 * @return <code>fileName</code> se la copia &egrave; terminata con successo
+	 */
+	public static String copyInFolder(String docName, String fileName) throws IOException {
+		
+		File vecchio = new File(fileName);
+		String folderPath = getFolderPath(docName);
+		
+		//test che nuovo sia diverso da vecchio!!!!!!!!
+		if ((folderPath).substring(0, (folderPath).length()-1).equals(vecchio.getParent()))	
+			return vecchio.getName();
+		
+		new File(folderPath).mkdir();
+		if (!vecchio.exists())
+			return "";
+		File nuovo = new File(folderPath + vecchio.getName());
+		
+		if (nuovo.exists())
+			nuovo.delete();
+		if (copyFile(new FileInputStream(vecchio), nuovo))
+			return nuovo.getName();
+		return "";
+	}
+	
+
+	/**
+	 * Restituisce il nome della cartella che contiene gli allegati del file.
+	 * 
+	 * @param file il nome del file xml corrente
+	 * @return il nome della cartella
+	 */
+	public static String getFolderPath(String file) {
+		String returnPath = "";
+		while (file.indexOf(File.separatorChar)!=-1) {
+			returnPath = returnPath + file.substring(0, file.indexOf(File.separatorChar))+File.separatorChar;
+			file = file.substring(file.indexOf(File.separatorChar)+1, file.length());
+		}
+		if (file.indexOf(".")!=-1)
+			returnPath = returnPath + file.substring(0, file.indexOf("."));
+		else
+			returnPath = returnPath + file;
+		return returnPath+suffixFolder;
+	}
+	
+	
 	/**
 	 * Verifica la presenza del file <code>fileName</code> nella directory
 	 * temporanea di sistema.
