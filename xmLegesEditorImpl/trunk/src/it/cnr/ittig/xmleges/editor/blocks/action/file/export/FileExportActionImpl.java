@@ -244,7 +244,7 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 	public void manageEvent(EventObject event) {
 		exportBrowserAction.setEnabled(!documentManager.isEmpty());
 		exportHTMLAction.setEnabled(!documentManager.isEmpty());
-		//exportPDF i DDL non è implementato (disabilito)
+		//export per i DDL non è implementato (disabilito)
 		exportPDFAction.setEnabled(!documentManager.isEmpty() && !documentManager.getRootElement().getFirstChild().getNodeName().equals("DisegnoLegge"));
 		exportRTFAction.setEnabled(!documentManager.isEmpty());
 	}
@@ -502,8 +502,9 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 			domWriter.setFormat(false);
 			domWriter.setOutput(dest);
 			
-			Hashtable param = new Hashtable(1);
+			Hashtable param = new Hashtable(2);
 			param.put("datafine",this.dataVigenza);
+			param.put("baseurl",UtilFile.getFolderPath(documentManager.getSourceName()));
 			
 			Node res = UtilXslt.applyXslt(documentManager.getDocumentAsDom(), xslt, param, documentManager.getEncoding());
 			domWriter.write(res);
