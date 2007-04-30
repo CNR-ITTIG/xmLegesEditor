@@ -15,6 +15,7 @@ import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.DocumentOpenedEvent;
+import it.cnr.ittig.xmleges.core.services.document.DocumentSavedEvent;
 import it.cnr.ittig.xmleges.core.services.document.DomEdit;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
@@ -37,6 +38,7 @@ import it.cnr.ittig.xmleges.core.services.spellcheck.dom.DomSpellCheck;
 import it.cnr.ittig.xmleges.core.services.threads.ThreadManager;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
+import it.cnr.ittig.xmleges.core.util.file.UtilFile;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -177,6 +179,7 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 		eventManager.addListener(this, SelectionChangedEvent.class);
 		eventManager.addListener(this, DocumentChangedEvent.class);
 		eventManager.addListener(this, PaneActivatedEvent.class);
+		eventManager.addListener(this, DocumentSavedEvent.class);
 		//eventManager.addListener(this, DomSpellCheckEvent.class);
 		textPane = new AntiAliasedTextPane(this);
 
@@ -269,6 +272,14 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 			if (logger.isDebugEnabled())
 				logger.debug("DOM=" + UtilDom.domToString(e.getDocument()));
 			textPane.setDom(e.getDocument());
+			
+
+			// inserisco il parametro del BaseURL
+			Hashtable hashtable = new Hashtable(1);
+			hashtable.put("base", "file:///"+UtilFile.getFolderPath(documentManager.getSourceName()));			
+			textPane.setParameter(hashtable);
+			
+			
 			if (textPane.isShowing()) {
 				updateTextPane();
 			} else
@@ -276,6 +287,13 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 		} else if (event instanceof DocumentClosedEvent) {
 			textPane.setDom((Document) null);
 			updateTextPane();
+		} else if (event instanceof DocumentSavedEvent) {
+
+			// inserisco il parametro del BaseURL
+			Hashtable hashtable = new Hashtable(1);
+			hashtable.put("base", "file:///"+UtilFile.getFolderPath(documentManager.getSourceName()));			
+			textPane.setParameter(hashtable);
+
 		} //	else if (event instanceof DomSpellCheckEvent) {
 		  //	// FIXME Tommaso: aggiunto io; non so se va bene qui e non funziona (elem null)
 		  //	textPane.viewDomSpellCheckEvent((DomSpellCheckEvent)event);
