@@ -44,14 +44,17 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 </xsl:template>
 
 <xsl:template match="h:img">
-    <!--    <xsl:element name="img" use-attribute-sets="XsltMapperSetClass" />  -->
+    <xsl:element name="img" use-attribute-sets="XsltMapperSetClass">
+		<xsl:apply-templates select="@*"/>    			
+    </xsl:element>        
+</xsl:template>
 
-    	&#160;
- 		 <font color="blue">
-   		 Immagine = "<xsl:value-of select="@src"/>"
-   		 </font>
-    	&#160;
-        
+<xsl:template match="@*">
+	<xsl:attribute name="{local-name()}"><xsl:value-of select="."/></xsl:attribute>
+</xsl:template>
+
+<xsl:template match="h:object">
+    <xsl:element name="object" use-attribute-sets="XsltMapperSetClass" />
 </xsl:template>
 
 <xsl:template match="h:input">
@@ -203,15 +206,19 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <xsl:template match="h:table">
     <div align="center">
     <xsl:element name="table" use-attribute-sets="XsltMapperSetClass">
-        <xsl:attribute name="width">95%</xsl:attribute>
-<!--
+ 	    <xsl:if test="not(@width)">
+	        <xsl:attribute name="width">95%</xsl:attribute>
+        </xsl:if>
  	    <xsl:if test="not(@border)">
             <xsl:attribute name="border">0</xsl:attribute>        
         </xsl:if>
- -->
- 
-        <xsl:attribute name="cellpadding">2</xsl:attribute>
-        <xsl:attribute name="align">center</xsl:attribute>
+ 	    <xsl:if test="not(@cellpadding)">
+            <xsl:attribute name="cellpadding">2</xsl:attribute>        
+        </xsl:if>
+ 	    <xsl:if test="not(@center)">
+            <xsl:attribute name="align">center</xsl:attribute>
+        </xsl:if>
+		<xsl:apply-templates select="@*"/>
         <xsl:apply-templates select="./h:caption" />
         <xsl:apply-templates select="./h:thead" />
         <xsl:apply-templates select="./h:tbody" />

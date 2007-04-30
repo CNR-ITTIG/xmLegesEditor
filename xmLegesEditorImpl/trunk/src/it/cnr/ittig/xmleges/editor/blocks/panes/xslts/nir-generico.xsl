@@ -15,15 +15,8 @@
 
 	<xsl:param name="datafine"></xsl:param>
 	<xsl:param name="encoding"/>
-	
+	<xsl:param name="baseurl"/>
 
-
-	<!--	Associo id eventi con date	(prova per ora fallita)	-->
-	<!--	xsl:key name="dateventi" match="evento" use="@id"/	-->
-
-
-
-		
 	<xsl:template match="/">
 		<html>
 			<head>
@@ -36,6 +29,7 @@
 
 				<link href="nir-generico-style.css" rel="stylesheet"/>
 			</head>
+			<base href="{$baseurl}" />
 			<body>
 			<p style="font-weight:bold;">
 				<xsl:choose>
@@ -589,6 +583,26 @@
 	<!--  Template generici                                       -->
 	<!--                                                          -->
 	<!-- ======================================================== -->
+	<xsl:template match="h:table">
+		<xsl:element name="{local-name()}">
+			<xsl:apply-templates select="@*"/>
+			<xsl:if test="not(@width)">
+	        	<xsl:attribute name="width">95%</xsl:attribute>
+	        </xsl:if>
+ 		    <xsl:if test="not(@border)">
+        	    <xsl:attribute name="border">1</xsl:attribute>        
+	        </xsl:if>
+ 		    <xsl:if test="not(@cellpadding)">
+        	    <xsl:attribute name="cellpadding">2</xsl:attribute>        
+	        </xsl:if>
+ 		    <xsl:if test="not(@center)">
+        	    <xsl:attribute name="align">center</xsl:attribute>
+	        </xsl:if>
+			<xsl:apply-templates/>
+		</xsl:element>
+	</xsl:template>
+
+
 	<xsl:template match="@*">
 		<xsl:attribute name="{local-name()}"><xsl:value-of select="."/></xsl:attribute>
 	</xsl:template>

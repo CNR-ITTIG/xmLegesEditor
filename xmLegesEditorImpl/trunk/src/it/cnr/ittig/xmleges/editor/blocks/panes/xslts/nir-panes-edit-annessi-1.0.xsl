@@ -30,6 +30,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <xsl:include href="xsltmapper-1.0.xsl"/>
 <xsl:strip-space elements="*" />
 
+<xsl:param name="base"/>
+
 <xsl:template match="/">
    <html>
 		<head>
@@ -37,6 +39,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 				body { font-family: Arial; }
 			</style>
 		</head>
+		        <!--	xsl:value-of select="mapper:getBaseURL(.)" /	-->
+        <xsl:element name="base" use-attribute-sets="XsltMapperBaseURL" />
+
+        <base href="{$base}" />
         <body>
           
             <!--	xsl:apply-templates select="/*[name()='NIR']/*/*[name()='annessi']" /	-->

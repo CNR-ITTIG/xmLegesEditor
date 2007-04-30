@@ -110,8 +110,7 @@
 				}
 				li {
 					padding-right: 40px;
-					list-style-type: none;
-					text-align: right;
+					text-align: left;
 				}
 				.visto {
 					font-size: 80%;

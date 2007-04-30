@@ -31,6 +31,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <!-- aggiunto relazione dei DL definito nell'xsl dell'intestazione -->
 <!-- aggiunto il tag confronto dei DL in cima al documento -->
 
+<xsl:param name="base"/>
+
 <xsl:template match="/">
    <html>
    		<head>
@@ -38,6 +40,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		        body { font-family: Arial; }
 		    </style>
         </head>
+        <base href="{$base}" />
         <body>
             <xsl:apply-templates select="/*[name()='NIR']/*/*[name()='meta']/*[name()='confronto']" />
             <xsl:apply-templates select="/*[name()='NIR']/*/*[name()='intestazione']" />
