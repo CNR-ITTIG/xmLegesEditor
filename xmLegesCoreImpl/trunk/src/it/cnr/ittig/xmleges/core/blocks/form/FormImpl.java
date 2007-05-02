@@ -50,11 +50,11 @@ import javax.swing.text.JTextComponent;
 import com.jeta.forms.components.panel.FormPanel;
 
 /**
- * <h1>Implementazione del servizio
- * <code>it.cnr.ittig.xmleges.editor.services.form.Form</code>.</h1>
+ * <h1>Implementazione del servizio</h1>
+ * <code>it.cnr.ittig.xmleges.core.services.form.Form</code>
  * <h1>Descrizione</h1>
- * Questa implementazione usa le form generate da <a
- * href="http://www.jetaware.com">Abeille Form Designer </a> quindi &egrave;
+ * Questa implementazione usa le form generate da 
+ * <a href="https://abeille.dev.java.net/">Abeille Form Designer </a> quindi &egrave;
  * necessario avere nel classpath la libreria <code>formsrt.jar</code>.<br>
  * Se &egrave; usato il metodo <code>setName(name)</code>, il titolo della
  * form &egrave; internazionalizzato chiedendo a <code>I18n</code> il titolo
@@ -63,20 +63,20 @@ import com.jeta.forms.components.panel.FormPanel;
  * Nessuna.
  * <h1>Dipendenze</h1>
  * <ul>
- * <li>it.cnr.ittig.xmleges.editor.services.util.ui.UtilUI:1.0</li>
- * <li>it.cnr.ittig.xmleges.editor.services.util.ui.UtilMsg:1.0</li>
- * <li>it.cnr.ittig.xmleges.editor.services.i18n.I18n:1.0</li>
- * <li>it.cnr.ittig.xmleges.editor.services.help.Help:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.util.ui.UtilUI</li>
+ * <li>it.cnr.ittig.xmleges.core.services.util.ui.UtilMsg</li>
+ * <li>it.cnr.ittig.xmleges.core.services.i18n.I18n</li>
+ * <li>it.cnr.ittig.xmleges.core.services.help.Help</li>
  * </ul>
  * <h1>I18n</h1>
  * <ul>
  * <li><code>form.text</code>: titolo di default della form;</li>
  * <li><code>form.icon</code>: icona di default della form;</li>
- * <li><code>form.button.help</code>: pulsato per attivare l'help
+ * <li><code>form.button.help</code>: pulsante per attivare l'help
  * configurato tramite <code>UtilUi.applyI18n</code></li>
- * <li><code>form.button.ok</code>: pulsato di conferma configurato tramite
+ * <li><code>form.button.ok</code>: pulsante di conferma configurato tramite
  * <code>UtilUi.applyI18n</code></li>
- * <li><code>form.button.cancel</code>: pulsato di annulla configurato
+ * <li><code>form.button.cancel</code>: pulsante di annulla configurato
  * tramite <code>UtilUi.applyI18n</code></li>
  * <li>tutti i componenti grafici supportati da <code>UtilUi.applyI18n</code>
  * sono internazionalizzati.</li>
