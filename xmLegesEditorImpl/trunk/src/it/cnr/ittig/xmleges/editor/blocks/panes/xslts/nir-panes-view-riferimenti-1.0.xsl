@@ -26,6 +26,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <xsl:strip-space elements="*" />
 
 <xsl:include href="xsltmapper-1.0.xsl"/>
+<xsl:include href="xsltutil-1.0.xsl"/>
 
 <xsl:template match="/">
 	<html>
@@ -98,6 +99,11 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		</xsl:choose>
 		[<xsl:apply-templates select="@xlink:href"/>]
 	</xsl:element>
+	<xsl:choose>
+		<xsl:when test="substring(@xlink:href, 1, 1)!='#'">
+				<xsl:element name="font" use-attribute-sets="XsltMapperVerificaUrn">(test)</xsl:element>
+		</xsl:when>
+	</xsl:choose>
 
 </xsl:template>
 
