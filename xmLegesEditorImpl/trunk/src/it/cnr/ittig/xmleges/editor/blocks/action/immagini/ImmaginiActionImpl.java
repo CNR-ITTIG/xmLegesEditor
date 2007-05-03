@@ -92,7 +92,7 @@ public class ImmaginiActionImpl implements ImmaginiAction, EventManagerListener,
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws java.lang.Exception {
 		immaginiAction = new doImmaginiAction();
-		actionManager.registerAction("editor.immagini", immaginiAction);
+		actionManager.registerAction("editor.insert.immagini", immaginiAction);
 		eventManager.addListener(this, SelectionChangedEvent.class);
 		eventManager.addListener(this, DocumentOpenedEvent.class);
 		eventManager.addListener(this, DocumentClosedEvent.class);
