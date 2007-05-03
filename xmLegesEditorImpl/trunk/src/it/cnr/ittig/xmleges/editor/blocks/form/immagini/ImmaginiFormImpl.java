@@ -168,7 +168,6 @@ public class ImmaginiFormImpl implements ImmaginiForm, Loggable, Serviceable, In
 	public void service(ServiceManager serviceManager) throws ServiceException {
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 		form = (Form) serviceManager.lookup(Form.class);
-		form.setName("editor.immagini");
 		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
@@ -178,7 +177,7 @@ public class ImmaginiFormImpl implements ImmaginiForm, Loggable, Serviceable, In
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws java.lang.Exception {
 		form.setMainComponent(getClass().getResourceAsStream("Immagini.jfrm"));
-		form.setName("editor.immagini");
+		form.setName("editor.insert.immagini");
 		alt = (JTextField) form.getComponentByName("editor.form.immagini.alt");
 		width = (JTextField) form.getComponentByName("editor.form.immagini.width");
 		height = (JTextField) form.getComponentByName("editor.form.immagini.height");
