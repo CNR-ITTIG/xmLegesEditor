@@ -39,8 +39,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 				body { font-family: Arial; }
 			</style>
 		</head>
-		        <!--	xsl:value-of select="mapper:getBaseURL(.)" /	-->
-        <xsl:element name="base" use-attribute-sets="XsltMapperBaseURL" />
 
         <base href="{$base}" />
         <body>
