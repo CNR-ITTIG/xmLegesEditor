@@ -175,11 +175,6 @@ public class RiferimentiPaneImpl implements RiferimentiPane, EventManagerListene
 	// ///////////////////////////////////////////////////////// Toolbar Actions
 	class StartAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
-
-			bar.getComponent(0).setEnabled(false);
-			bar.getComponent(1).setEnabled(true);
-			
-			
 			
 			new Thread() {
 				public void run() {
@@ -187,25 +182,28 @@ public class RiferimentiPaneImpl implements RiferimentiPane, EventManagerListene
 					thread = Thread.currentThread();
 					thread.setName("Test URN online");
 
-					
 					client = new HttpClient(new MultiThreadedHttpConnectionManager());
 					client.getHttpConnectionManager().getParams().setConnectionTimeout(30000);
 					
 					Document dom = documentManager.getDocumentAsDom();
-			
-					NodeList nl = dom.getElementsByTagName("rif");
-					progress.setMaximum(nl.getLength());
-					for (int i = 0; i < nl.getLength(); i++) {
-						Node node = nl.item(i);
-						String urn = UtilDom.getAttributeValueAsString(node, "xlink:href");
-						testURN(urn);
-						progress.setValue(i+1);
-					}
+					if (dom!=null) {
 					
-					progress.setValue(0);
-					bar.getComponent(0).setEnabled(true);
-					bar.getComponent(1).setEnabled(false);
-					xsltPane.reload();
+						NodeList nl = dom.getElementsByTagName("rif");				
+						bar.getComponent(0).setEnabled(false);
+						bar.getComponent(1).setEnabled(true);
+						progress.setMaximum(nl.getLength());
+						for (int i = 0; i < nl.getLength(); i++) {
+							Node node = nl.item(i);
+							String urn = UtilDom.getAttributeValueAsString(node, "xlink:href");
+							testURN(urn);
+							progress.setValue(i+1);
+						}
+					
+						progress.setValue(0);
+						bar.getComponent(0).setEnabled(true);
+						bar.getComponent(1).setEnabled(false);
+						xsltPane.reload();
+					}	
 				}
 			}.start(); 
 			
