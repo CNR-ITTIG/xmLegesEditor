@@ -72,7 +72,18 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		<xsl:when test="name(..) != 'mrif'">
 			<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 				<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-				- <xsl:apply-templates /> 
+					
+				<xsl:choose>
+					<xsl:when test="substring(@xlink:href, 1, 1)!='#'">
+						<xsl:element name="font" use-attribute-sets="XsltMapperVerificaUrn">
+							- <xsl:apply-templates /> 
+						</xsl:element>
+					</xsl:when>
+					<xsl:otherwise>
+						- <xsl:apply-templates /> 
+					</xsl:otherwise>	
+				</xsl:choose>					
+				
 				<xsl:call-template name="makeA" />
 		    </xsl:element>
 		
@@ -99,12 +110,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		</xsl:choose>
 		[<xsl:apply-templates select="@xlink:href"/>]
 	</xsl:element>
-	<xsl:choose>
-		<xsl:when test="substring(@xlink:href, 1, 1)!='#'">
-				<xsl:element name="font" use-attribute-sets="XsltMapperVerificaUrn">(test)</xsl:element>
-		</xsl:when>
-	</xsl:choose>
-
 </xsl:template>
 
 </xsl:transform>
