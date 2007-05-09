@@ -20,16 +20,19 @@ import it.cnr.ittig.xmleges.editor.services.panes.riferimenti.RiferimentiPane;
 import it.cnr.ittig.xmleges.editor.services.panes.xslts.NirXslts;
 import it.cnr.ittig.xmleges.core.services.panes.xsltpane.XsltPane;
 import it.cnr.ittig.xmleges.core.services.panes.xsltutil.XsltUtil;
+import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.util.EventObject;
 
 
 import javax.swing.AbstractAction;
+import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
@@ -100,6 +103,8 @@ public class RiferimentiPaneImpl implements RiferimentiPane, EventManagerListene
 	DocumentManager documentManager;
 	
 	Thread thread;
+
+	UtilMsg utilmsg;
 	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -116,6 +121,7 @@ public class RiferimentiPaneImpl implements RiferimentiPane, EventManagerListene
 		xslts = (NirXslts) serviceManager.lookup(NirXslts.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		xsltutil = (XsltUtil) serviceManager.lookup(XsltUtil.class);
+		utilmsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
@@ -182,30 +188,88 @@ public class RiferimentiPaneImpl implements RiferimentiPane, EventManagerListene
 					thread = Thread.currentThread();
 					thread.setName("Test URN online");
 
-					client = new HttpClient(new MultiThreadedHttpConnectionManager());
-					client.getHttpConnectionManager().getParams().setConnectionTimeout(30000);
 					
-					Document dom = documentManager.getDocumentAsDom();
-					if (dom!=null) {
+					JEditorPane ep = new JEditorPane();
+				    try {
+				    	//test connessione
+				        ep.setPage("http://www.nir.it");
+				       
+				        client = new HttpClient(new MultiThreadedHttpConnectionManager());
+				        client.getHttpConnectionManager().getParams().setConnectionTimeout(30000);
 					
-						NodeList nl = dom.getElementsByTagName("rif");				
-						bar.getComponent(0).setEnabled(false);
-						bar.getComponent(1).setEnabled(true);
-						progress.setMaximum(nl.getLength());
-						for (int i = 0; i < nl.getLength(); i++) {
-							Node node = nl.item(i);
-							String urn = UtilDom.getAttributeValueAsString(node, "xlink:href");
-							testURN(urn);
-							progress.setValue(i+1);
-						}
+				        Document dom = documentManager.getDocumentAsDom();
+				        if (dom!=null) {
 					
-						progress.setValue(0);
-						bar.getComponent(0).setEnabled(true);
-						bar.getComponent(1).setEnabled(false);
-						xsltPane.reload();
-					}	
+				        	NodeList nl = dom.getElementsByTagName("rif");				
+				        	bar.getComponent(0).setEnabled(false);
+				        	bar.getComponent(1).setEnabled(true);
+				        	progress.setMaximum(nl.getLength()+1);
+				        	progress.setValue(1);
+				        	for (int i = 0; i < nl.getLength(); i++) {
+				        		Node node = nl.item(i);
+				        		String urn = UtilDom.getAttributeValueAsString(node, "xlink:href");
+				        		testURN(urn);
+				        		progress.setValue(i+2);
+				        	}
+				        	progress.setValue(0);				        	
+				        	xsltPane.reload();
+				        }	
+				    } catch (IOException e) {
+				    	logger.debug("Connessione assente");
+				    	utilmsg.msgInfo("panes.riferimenti.noconnection");	
+				    }
+				    bar.getComponent(0).setEnabled(true);
+		        	bar.getComponent(1).setEnabled(false);
 				}
 			}.start(); 
+			
+			
+			//provo modifica per errore StackOverflowError
+//			thread = new Thread(
+//				new Runnable(){
+//					public void run() {
+//						logger.debug("Eseguo test urn");
+//						thread = Thread.currentThread();
+//						thread.setName("Test URN online");
+//
+//						
+//						JEditorPane ep = new JEditorPane();
+//					    try {
+//					    	//test connessione
+//					        ep.setPage("http://www.nir.it");
+//					       
+//					        client = new HttpClient(new MultiThreadedHttpConnectionManager());
+//					        client.getHttpConnectionManager().getParams().setConnectionTimeout(30000);
+//						
+//					        Document dom = documentManager.getDocumentAsDom();
+//					        if (dom!=null) {
+//						
+//					        	NodeList nl = dom.getElementsByTagName("rif");				
+//					        	bar.getComponent(0).setEnabled(false);
+//					        	bar.getComponent(1).setEnabled(true);
+//					        	progress.setMaximum(nl.getLength()+1);
+//					        	progress.setValue(1);
+//					        	for (int i = 0; i < nl.getLength(); i++) {
+//					        		Node node = nl.item(i);
+//					        		String urn = UtilDom.getAttributeValueAsString(node, "xlink:href");
+//					        		testURN(urn);
+//					        		progress.setValue(i+2);
+//					        	}
+//					        	progress.setValue(0);				        	
+//					        	xsltPane.reload();
+//					        }	
+//					    } catch (IOException e) {
+//					    	logger.debug("Connessione assente");
+//					    	utilmsg.msgInfo("panes.riferimenti.noconnection");	
+//					    }
+//					    bar.getComponent(0).setEnabled(true);
+//			        	bar.getComponent(1).setEnabled(false);
+//					}});
+//			thread.start(); 		 
+
+			
+			
+			
 			
 		}
 	}
