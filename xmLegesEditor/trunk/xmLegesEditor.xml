@@ -1077,7 +1077,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     
     <component  class="it.cnr.ittig.xmleges.core.blocks.panes.xsltmapper.XsltMapperImpl" />
 
-    <component  class="it.cnr.ittig.xmleges.core.blocks.panes.xsltutil.XsltUtilImpl" />
+    <component  class="it.cnr.ittig.xmleges.editor.blocks.panes.xsltutil.XsltUtilImpl" />
     
     <component  lifestyle="pool" 
                 class="it.cnr.ittig.xmleges.core.blocks.panes.xsltextpane.XsltPaneImpl">
