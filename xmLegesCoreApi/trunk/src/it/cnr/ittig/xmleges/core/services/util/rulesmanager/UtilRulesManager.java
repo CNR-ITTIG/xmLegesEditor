@@ -201,19 +201,6 @@ public interface UtilRulesManager extends Service {
 	 */
 	public boolean insertSubTreeInText(Node node, int pos, boolean destructure);
 
-	/**
-	 * Indica se la dtd del documento aperto &egrave; una dtd base (light)
-	 * 
-	 * @return <code>true</code> se &egrave; una dtd base (light)
-	 */
-	public boolean isDtdBase();
-
-	/**
-	 * Indica se la dtd del documento aperto &egrave; una dtd per disegni di
-	 * legge
-	 * 
-	 * @return <code>true</code> se &egrave; una dtd per disegni di legge
-	 */
-	public boolean isDtdDL();
+	
 
 }
