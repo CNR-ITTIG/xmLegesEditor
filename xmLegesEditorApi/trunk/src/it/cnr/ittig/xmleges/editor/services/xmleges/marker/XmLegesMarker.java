@@ -38,9 +38,9 @@ public interface XmLegesMarker extends Service {
 	 * Array di valori per presentare il testo nelle form per
 	 * <code>TIPO_DTD_VALORE</code>
 	 */
-	final public static String[] TIPO_DTD = new String[] { "Completo", "Flessibile", "Base", "Dl", "Cnr"};
+	final public static String[] TIPO_DTD = new String[] { "Completo", "Flessibile", "Base", "Dl"};
 
-	final public static String[] TIPO_DTD_VALORE = new String[] { "completo", "flessibile", "base", "dl", "cnr"};
+	final public static String[] TIPO_DTD_VALORE = new String[] { "completo", "flessibile", "base", "dl"};
 
 	/**
 	 * Array di valori per presentare il testo nelle form per
