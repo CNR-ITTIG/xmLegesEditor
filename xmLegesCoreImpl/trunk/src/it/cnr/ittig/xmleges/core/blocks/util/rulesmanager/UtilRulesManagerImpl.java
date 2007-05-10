@@ -64,7 +64,6 @@ import org.w3c.dom.NodeList;
  * License </a></dd>
  * </dl>
  * 
- * @see
  * @version 1.1
  * @author <a href="mailto:mollicone@ittig.cnr.it">Maurizio Mollicone </a>
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
@@ -109,17 +108,7 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 		}
 	}
 
-	public boolean isDtdBase() {
-		if (documentManager.getDtdName().toLowerCase().indexOf("base") != -1 || documentManager.getDtdName().toLowerCase().indexOf("light") != -1)
-			return (true);
-		return (false);
-	}
-
-	public boolean isDtdDL() {
-		if (documentManager.getDtdName().toLowerCase().indexOf("dl") != -1)
-			return (true);
-		return (false);
-	}
+	
 
 	// //////////////////////////////////////// UtilRulesManager Interface
 
