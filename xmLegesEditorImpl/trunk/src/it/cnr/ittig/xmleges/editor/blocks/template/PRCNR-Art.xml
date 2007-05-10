@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="iso-8859-15"?>
-	<!DOCTYPE NIR SYSTEM 'cnr.dtd'>
+	<!DOCTYPE NIR SYSTEM 'nirflessibile.dtd'>
 	<NIR tipo="originale" xmlns="http://www.normeinrete.it/nir/2.2/" xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
 		<DocumentoNIR nome="Provvedimento">
 			<meta>
 				<descrittori>
 					<pubblicazione norm="" num="" tipo="BUCNR" />
-					<redazione id="urp" nome="Urp-Cnr" norm="" />
+					<redazione id="red1" nome="Urp-Cnr" norm="" />
 					<urn valore="urn:nir:consiglio.nazionale.ricerche:provvedimento:" />
 				</descrittori>
-				<proprietario xlink:type="simple" xmlns:cnr="http://www.cnr.it/provvedimenti/2.2">
-					<cnr:meta>
+				<proprietario soggetto="CNR" xlink:href="http://www.cnr.it" xlink:type="simple">
+					<cnr:meta xmlns:cnr="http://www.cnr.it/provvedimenti/2.2">
 						<cnr:strutturaEmanante valore="" />
 						<cnr:autoritaEmanante valore="" />
 						<cnr:tipoDestinatario valore="" />
@@ -53,9 +53,9 @@
 			<formulafinale />
 			<conclusione>
 				<firma tipo="sottoscrizione">
-					IL PRESIDENTE
+					IL PRESIDENTE 
 					<h:br />
-					(Prof. Fabio Pistella)
+					(Prof. Fabio Pistella) 
 				</firma>
 			</conclusione>
 		</DocumentoNIR>
