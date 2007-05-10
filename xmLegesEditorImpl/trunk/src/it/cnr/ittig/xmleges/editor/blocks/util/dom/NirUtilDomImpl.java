@@ -1,14 +1,11 @@
 package it.cnr.ittig.xmleges.editor.blocks.util.dom;
 
-import it.cnr.ittig.services.manager.Configurable;
-import it.cnr.ittig.services.manager.Configuration;
-import it.cnr.ittig.services.manager.ConfigurationException;
-import it.cnr.ittig.services.manager.Initializable;
 import it.cnr.ittig.services.manager.Loggable;
 import it.cnr.ittig.services.manager.Logger;
 import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
+import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
@@ -36,10 +33,11 @@ import org.w3c.dom.NodeList;
  * 
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */
-public class NirUtilDomImpl implements NirUtilDom, Loggable, Serviceable, Configurable, Initializable {
+public class NirUtilDomImpl implements NirUtilDom, Loggable, Serviceable{
 	Logger logger;
 
 	DtdRulesManager dtdRulesManager;
+	DocumentManager documentManager;
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -49,16 +47,32 @@ public class NirUtilDomImpl implements NirUtilDom, Loggable, Serviceable, Config
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
 		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 	}
 
-	// ////////////////////////////////////////////////// Configurable Interface
-	public void configure(Configuration configuration) throws ConfigurationException {
+
+	
+	public boolean isDtdBase() {
+		if (documentManager.getDtdName().toLowerCase().indexOf("base") != -1 || documentManager.getDtdName().toLowerCase().indexOf("light") != -1)
+			return true;
+		return false;
 	}
 
-	// ///////////////////////////////////////////////// Initializable Interface
-	public void initialize() throws java.lang.Exception {
+	public boolean isDtdDL() {
+		if (documentManager.getDtdName().toLowerCase().indexOf("dl") != -1)
+			return true;
+		return false;
 	}
-
+	
+	public boolean isDocCNR(Node activeNode) {
+		//return(documentManager.getDocumentAsDom().getElementsByTagName("cnr:meta").getLength()>0);
+	    Node activeMeta = findActiveMeta(documentManager.getDocumentAsDom(),activeNode);
+	    Node[] cnrMeta = UtilDom.getElementsByTagName(documentManager.getDocumentAsDom(),activeMeta,"cnr:meta");
+	    return (cnrMeta !=null && cnrMeta.length>0);
+		
+	}
+	
+	
 	public Node getNIRElement(Document doc) {
 		NodeList nl = doc.getChildNodes();
 		for (int i = 0; i < nl.getLength(); i++)
