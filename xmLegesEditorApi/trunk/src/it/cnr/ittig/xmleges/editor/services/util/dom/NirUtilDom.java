@@ -13,7 +13,31 @@ import org.w3c.dom.Node;
  */
 
 public interface NirUtilDom extends Service {
+	
+	
+	/**
+	 * Indica se la dtd del documento aperto &egrave; una dtd base (light)
+	 * 
+	 * @return <code>true</code> se &egrave; una dtd base (light)
+	 */
+	public boolean isDtdBase();
 
+	/**
+	 * Indica se la dtd del documento aperto &egrave; una dtd per disegni di
+	 * legge
+	 * 
+	 * @return <code>true</code> se &egrave; una dtd per disegni di legge
+	 */
+	public boolean isDtdDL();
+
+	
+	/**
+	 * Indica il documento aperto &egrave; un provvedimento del CNR
+	 * 
+	 * @return <code>true</code> se &egrave; un provvedimento del CNR
+	 */
+	public boolean isDocCNR(Node activeNode);
+	
 	/**
 	 * Restituisce il nodo Nir del documento <code>doc</code>
 	 * 
