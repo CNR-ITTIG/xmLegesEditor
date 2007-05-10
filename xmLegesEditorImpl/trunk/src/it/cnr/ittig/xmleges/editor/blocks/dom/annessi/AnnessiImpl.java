@@ -179,7 +179,7 @@ public class AnnessiImpl implements Annessi, Loggable, Serviceable {
 			testata = utilRulesManager.getNodeTemplate("testata");
 			if (denAnnesso != null) {
 				Node denAnnessoNode = utilRulesManager.getNodeTemplate("denAnnesso");
-				if (utilRulesManager.isDtdBase())
+				if (nirUtilDom.isDtdBase())
 					UtilDom.setTextNode(denAnnessoNode.getFirstChild(), denAnnesso);
 				else
 					UtilDom.setTextNode(denAnnessoNode, denAnnesso);
@@ -187,7 +187,7 @@ public class AnnessiImpl implements Annessi, Loggable, Serviceable {
 			}
 			if (titAnnesso != null && titAnnesso.trim().length() != 0) {
 				Node titAnnessoNode = utilRulesManager.getNodeTemplate("titAnnesso");
-				if (utilRulesManager.isDtdBase())
+				if (nirUtilDom.isDtdBase())
 					UtilDom.setTextNode(titAnnessoNode.getFirstChild(), titAnnesso);
 				else
 					UtilDom.setTextNode(titAnnessoNode, titAnnesso);
@@ -195,7 +195,7 @@ public class AnnessiImpl implements Annessi, Loggable, Serviceable {
 			}
 			if (preAnnesso != null && preAnnesso.trim().length() != 0) {
 				Node preAnnessoNode = utilRulesManager.getNodeTemplate("preAnnesso");
-				if (utilRulesManager.isDtdBase())
+				if (nirUtilDom.isDtdBase())
 					UtilDom.setTextNode(preAnnessoNode.getFirstChild(), preAnnesso);
 				else
 					UtilDom.setTextNode(preAnnessoNode, preAnnesso);

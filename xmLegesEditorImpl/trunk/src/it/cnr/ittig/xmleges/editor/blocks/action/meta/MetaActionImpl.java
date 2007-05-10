@@ -14,6 +14,7 @@ import it.cnr.ittig.xmleges.core.services.document.DocumentOpenedEvent;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
+import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
@@ -36,9 +37,7 @@ import it.cnr.ittig.xmleges.editor.services.form.meta.descrittori.MaterieVocabol
 import it.cnr.ittig.xmleges.editor.services.form.meta.descrittori.MetaDescrittoriForm;
 import it.cnr.ittig.xmleges.editor.services.form.meta.inquadramento.InquadramentoForm;
 import it.cnr.ittig.xmleges.editor.services.form.meta.urn.UrnDocumentoForm;
-import it.cnr.ittig.xmleges.editor.services.form.rinvii.newrinvii.NewRinviiForm;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
-import it.cnr.ittig.xmleges.editor.services.util.urn.NirUtilUrn;
 import it.cnr.ittig.xmleges.editor.services.util.urn.Urn;
 
 import java.awt.event.ActionEvent;
@@ -128,10 +127,6 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 
 	UtilRulesManager utilRulesManager;
 
-	NewRinviiForm newrinvii;
-
-	NirUtilUrn nirUtilUrn;
-
 	NirUtilDom nirUtilDom;
 	
 	Vigenza vigenza;
@@ -157,8 +152,6 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		ciclodivitaForm = (CiclodiVitaForm) serviceManager.lookup(CiclodiVitaForm.class);
 		inquadramentoForm = (InquadramentoForm) serviceManager.lookup(InquadramentoForm.class);
 		materieForm = (MaterieVocabolariForm) serviceManager.lookup(MaterieVocabolariForm.class);
-		newrinvii = (NewRinviiForm) serviceManager.lookup(NewRinviiForm.class);
-		nirUtilUrn = (NirUtilUrn) serviceManager.lookup(NirUtilUrn.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 		rinumerazione = (Rinumerazione) serviceManager.lookup(Rinumerazione.class);
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
@@ -176,6 +169,8 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		actionManager.registerAction("editor.meta.urn", urnAction);
 		actionManager.registerAction("editor.meta.cnr", cnrAction);
 		eventManager.addListener(this, DocumentOpenedEvent.class);
+		eventManager.addListener(this, SelectionChangedEvent.class);
+		// aggiungere un listener su DocumentChanged ????
 		eventManager.addListener(this, DocumentClosedEvent.class);
 		descrittoriAction.setEnabled(false);
 		ciclodivitaAction.setEnabled(false);
@@ -187,14 +182,15 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 
 	// ////////////////////////////////////////// EventManagerListener Interface
 	public void manageEvent(EventObject event) {
-		descrittoriAction.setEnabled(!documentManager.isEmpty() && !utilRulesManager.isDtdDL());
-		ciclodivitaAction.setEnabled(!documentManager.isEmpty() && !utilRulesManager.isDtdDL());
-		inquadramentoAction.setEnabled(!documentManager.isEmpty() && !utilRulesManager.isDtdDL() && !utilRulesManager.isDtdBase());
+		descrittoriAction.setEnabled(!documentManager.isEmpty() && !nirUtilDom.isDtdDL());
+		ciclodivitaAction.setEnabled(!documentManager.isEmpty() && !nirUtilDom.isDtdDL());
+		inquadramentoAction.setEnabled(!documentManager.isEmpty() && !nirUtilDom.isDtdDL() && !nirUtilDom.isDtdBase());
 			
-		materieAction.setEnabled(!documentManager.isEmpty() && !utilRulesManager.isDtdDL() && !utilRulesManager.isDtdBase());
+		materieAction.setEnabled(!documentManager.isEmpty() && !nirUtilDom.isDtdDL() && !nirUtilDom.isDtdBase());
 	
-		urnAction.setEnabled(!documentManager.isEmpty());		
-		cnrAction.setEnabled(!documentManager.isEmpty() && documentManager.getDtdName().equals("cnr.dtd"));
+		urnAction.setEnabled(!documentManager.isEmpty());
+		// FIXME l'abilitazione dei meta CNR non va piu' bene col check del nome della dtd
+		cnrAction.setEnabled(!documentManager.isEmpty() && nirUtilDom.isDocCNR(selectionManager.getActiveNode()));    
 	}
 	
 	

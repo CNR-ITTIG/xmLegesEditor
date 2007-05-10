@@ -82,7 +82,7 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 
 	public String canSetModifica(Node node, String status, int start, int end) {
 
-		if (documentManager.isEmpty() || !utilRulesManager.isDtdDL())
+		if (documentManager.isEmpty() || !nirUtilDom.isDtdDL())
 			return null;
 		if (node == null)
 			return null;
@@ -119,14 +119,14 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 	}
 
 	public boolean canTestoaFronte() {
-		if (!documentManager.isEmpty() && utilRulesManager.isDtdDL())
+		if (!documentManager.isEmpty() && nirUtilDom.isDtdDL())
 			if (isDocumentModificato())
 				return true;
 		return false;
 	}
 
 	public boolean canPassaggio() {
-		if (!documentManager.isEmpty() && utilRulesManager.isDtdDL())
+		if (!documentManager.isEmpty() && nirUtilDom.isDtdDL())
 			return true;
 		return false;
 	}

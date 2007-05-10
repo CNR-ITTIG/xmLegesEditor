@@ -14,15 +14,13 @@ import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
-import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
-import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.action.vigenza.VigenzaAction;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.MetaCiclodivita;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.Vigenza;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 import it.cnr.ittig.xmleges.editor.services.form.vigenza.VigenzaForm;
+import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 import it.cnr.ittig.xmleges.editor.services.util.urn.NirUtilUrn;
 
 import java.awt.event.ActionEvent;
@@ -71,19 +69,17 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 
 	DocumentManager documentManager;
 	
-	UtilRulesManager utilRulesManager;
-
 	SelectionManager selectionManager;
 
 	Vigenza vigenza;
 	
-	MetaCiclodivita ciclodivita;
+	//MetaCiclodivita ciclodivita;
 
 	VigenzaForm vigenzaForm;
 	
-	UtilMsg utilMsg;
-	
 	NirUtilUrn nirUtilUrn;
+	
+	NirUtilDom nirUtilDom;
 
 	AbstractAction vigenzaAction = new vigenzaAction();
 	
@@ -103,13 +99,12 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 		actionManager = (ActionManager) serviceManager.lookup(ActionManager.class);
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
-		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
+		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
-		ciclodivita = (MetaCiclodivita) serviceManager.lookup(MetaCiclodivita.class);
+		//ciclodivita = (MetaCiclodivita) serviceManager.lookup(MetaCiclodivita.class);
 		vigenza = (Vigenza) serviceManager.lookup(Vigenza.class);
 		nirUtilUrn = (NirUtilUrn) serviceManager.lookup(NirUtilUrn.class);
 		vigenzaForm = (VigenzaForm) serviceManager.lookup(VigenzaForm.class);
-		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
@@ -123,7 +118,7 @@ public class VigenzaActionImpl implements VigenzaAction, Loggable, EventManagerL
 
 	public void manageEvent(EventObject event) {
 		
-		if (event instanceof SelectionChangedEvent && !documentManager.isEmpty() && !utilRulesManager.isDtdBase()) {
+		if (event instanceof SelectionChangedEvent && !documentManager.isEmpty() && !nirUtilDom.isDtdBase()) {
 			activeNode = ((SelectionChangedEvent) event).getActiveNode();
 			logger.debug("enable vigenza");
 			start = ((SelectionChangedEvent) event).getTextSelectionStart();
