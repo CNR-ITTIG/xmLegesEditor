@@ -8,7 +8,7 @@ nirlight: modello semplificato di Norme In Rete
 Dipende da: niente
 
 Versione  2.2
-Release   26/02/2007
+Release   18/04/2007
 Fabio Vitali - UniBo
 
 Per un'introduzione, si veda il documento 'note.html'
@@ -331,7 +331,8 @@ Strutture fondamentali del documento semi-articolato
 <!ENTITY % tuttiblocchi     "h:div | h:p | h:img | h:ul | h:ol | h:table" >
 <!ENTITY % semiarticolato   "(meta,intestazione?,(%strutture;)+,annessi?)" >
 <!ELEMENT DocumentoNIR %semiarticolato; >
-<!ATTLIST DocumentoNIR %idfac;  %status;  >
+<!ATTLIST DocumentoNIR %idfac;  %status;  %nome;  >
+
 
 <!--  =====================================================================
 

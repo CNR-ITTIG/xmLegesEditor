@@ -5,7 +5,7 @@
             Dipende da: 'nirstrict' oppure 'nirloose'                                
                                                                                      
           Versione  2.2                                                              
-          Release   26/02/2007                                                       
+          Release   18/04/2007                                                       
           Fabio Vitali - UniBo                                                       
                                                                                      
           Per un'introduzione, si veda il documento 'note.html'                      
@@ -21,7 +21,7 @@ Entita' principali
 <!ENTITY % nomefac " nome %NIRnome; #IMPLIED" >
 <!ENTITY % tempi " iniziovigore %uri; #IMPLIED finevigore %uri; #IMPLIED inizioefficacia %uri; #IMPLIED fineefficacia %uri; #IMPLIED" >
 
-<!ENTITY % vigenza " %tempi;  status %status; #IMPLIED" >
+<!ENTITY % vigenza " %tempi;  rel %uri; #IMPLIED status %status; #IMPLIED" >
 <!ENTITY % implicita " implicita %sino; 'no' "
 >
 
@@ -121,6 +121,7 @@ Elementi generici del documento semi-articolato
 
 <!ATTLIST partizione %nome;  >
 <!ELEMENT lista      %CMlista; >
+<!ATTLIST lista %globalifac;  >
 
 <!ATTLIST lista %nome;  >
 

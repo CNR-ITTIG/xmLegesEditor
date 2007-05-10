@@ -8,7 +8,7 @@
            Dipende da: niente                                                       
                                                                                     
            Versione  2.2                                                            
-           Release   26/02/2007                                                     
+           Release   18/04/2007                                                     
            Fabio Vitali - UniBo                                                     
                                                                                     
            Per un'introduzione, si veda il documento 'note.html'                    
@@ -104,9 +104,14 @@ Entita' esterne: caratteri
 <!ENTITY % nrmDTD SYSTEM "./norme.dtd">%nrmDTD;
 
 
+<!ENTITY % proprietarioDTD SYSTEM "./proprietario.dtd">%proprietarioDTD;
+
+
 <!ENTITY % ProprietarioMeta "ANY" >
 <!ENTITY % Rproprietario "%strutture;" >
 <!ENTITY % metaDTD SYSTEM "./meta.dtd">%metaDTD;
+
+
 
 
 
