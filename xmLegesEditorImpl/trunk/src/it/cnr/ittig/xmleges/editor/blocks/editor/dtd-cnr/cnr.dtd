@@ -1,51 +1,31 @@
 <!-- ===================================================================== -->
-<!--     DTD dei Provvedimenti emessi                                      -->
-<!--     dal Consiglio Nazionale delle Ricerche                            -->
-<!--     basato sulla versione flessibile della DTD di NormeInRete (NIR)   -->
+<!-- DTD di cnr:meta                                     					-->
+<!-- ===================================================================== -->
+<!--     Metadati per i Provvedimenti emessi dal                           -->
+<!--     Consiglio Nazionale delle Ricerche                            	-->
 <!--                                                                       -->
 <!--     Release  2.2                                                      -->
-<!--     data     11/04/2007                                               -->
+<!--     data     01/05/2007                                               -->
 <!--                                                                       -->
 <!--     Andrea Marchetti (CNR-IIT)                                        -->
-<!--     con il contributo di                                              -->
 <!--     Mario Ragona, Pierluigi Spinosa - (CNR-ITTIG)                     -->
-<!--                                                                       -->
 <!-- ===================================================================== -->
 
 <!-- ===================================================================== 
-     Ridefinizione delle entita' 
-     NSproprietario   definita in nirloose.dtd
-     ProprietarioMeta definita in nirloose.dtd
-     N.B. La prima dichiarazione che il parser incontra ha la precedenza 
-     sulle altre
-    ===================================================================== -->
-<!ENTITY % NSproprietario   "xmlns:cnr CDATA  #FIXED 'http://www.cnr.it/provvedimenti/2.2'">
-<!ENTITY % ProprietarioMeta "(cnr:meta)">
-<!ATTLIST proprietario %NSproprietario; >
-
-<!-- ===================================================================== 
-     Inclusione della DTD NIR versione flessibile
-     ===================================================================== -->
-<!ENTITY % nirDTD SYSTEM "./nirflessibile.dtd">
-
-%nirDTD;
-
-<!-- ===================================================================== 
-     Metadati Proprietari:
-
-	Metadato				Descrizione
-
-1.	strutturaEmanante:		la struttura che ha emesso il provvedimento (es. Presidenza)
-2.	autoritaEmanante:        l'autorita' che ha emesso il provvedimento (es. Presidente)
-3.	tipoDestinatario:		il tipo di strutture a cui il provvedimento è destinato (es. Organi di ricerca)
-4.	strutturaDestinataria:	la specifica struttura a cui il provvedimento è destinato (es. ITTIG)
+	Metadato CNR			Descrizione
+     ................................................................................................
+1.	strutturaEmanante:		struttura che ha emesso il provvedimento (es. Presidenza)
+2.	autoritaEmanante:        autorita' che ha emesso il provvedimento (es. Presidente)
+3.	tipoDestinatario:		tipo di strutture a cui il provvedimento è destinato (es. Organi di ricerca)
+4.	strutturaDestinataria:	specifica struttura a cui il provvedimento è destinato (es. ITTIG)
 5.	tipoProvvedimento:		tipologia a cui il provvedimento appartiene (es. nomina direttore)
-6a.	disciplina:			la disciplina scientifica interessata dal provvedimento (es. Scienze Agrarie)
-6b.	areaScientifica:		l'area scientifica interessata dal provvedimento (es. Scienze di base)
-6c.	dipartimento:			il dipartimento interessato dal provvedimento (es. Agroalimentare)
-
+6.	...					organizzazione scientifica del CNR interessata dal provvedimento:
+6a.	disciplina:			disciplina scientifica (es. Scienze Agrarie): in uso fino al 31-12-2000
+6b.	areaScientifica:		area scientifica (es. Scienze di base): 	 in uso dal 01-01-2001 al 31-12-2004 
+6c.	dipartimento:			dipartimento (es. Agroalimentare): 		 in uso dal 1-1-2005
+    =====================================================================
      Metadato				Valori particolari o predefiniti
-     
+     ................................................................................................
      tipoDestinatario		Valori predefiniti:
      					- Organi di Ricerca
 						- Aree di Ricerca
@@ -59,20 +39,20 @@
 						- Amministrazione Centrale
 						- Nucleo di Valutazione
 						- Dipartimenti
-      
+     ................................................................................................
      strutturaDestinataria	sigla e denominazione estesa dell'organo 
 						(es. ITTIG - Istituto di Teoria e Tecniche dell'Informazione Giuridica).
 						Se il provvedimento riguarda più strutture, usare codifiche del tipo:
 						- tutti gli istituti
 						- tutti i dipartimenti
 						- ...
-
+     ................................................................................................
 	tipoProvvedimento:		tipologia a cui il provvedimento appartiene (elenco da definire):
 						- nomina direttore
 						- nomina commissione
 						- istituzione ufficio
 						- ...
-
+     ................................................................................................
      disciplina			area disciplinare in uso fino al 31-12-2000:
 						- Scienze Agrarie
 						- Scienze e Tecnologie dell'Ambiente e dell'Habitat
@@ -90,7 +70,7 @@
 						- Scienze Storiche, Filosofiche e Filologiche
 						- Ricerche Tecnologiche e Innovazione
 						- Carattere generale
-
+     ................................................................................................
      areaScientifica 		area scientifica in uso dal 01-01-2001 al 31-12-2004:
 						- Scienze di base
 						- Scienze della vita
@@ -98,7 +78,7 @@
 						- Scienze sociali e umanistiche
 						- Scienze tecnologiche, ingegneristiche e informatiche"
 						- Carattere generale
-
+     ................................................................................................
      dipartimento			macro area in uso dal 1-1-2005:
 						- Agroalimentare
 						- Energia e trasporti
@@ -112,8 +92,11 @@
 						- Sistemi di produzione
 						- Terra e ambiente
 						- Carattere generale
-
     ===================================================================== -->
+
+<!ENTITY % cnrNS  "xmlns:cnr CDATA #FIXED 'http://www.cnr.it/provvedimenti/2.2'" >
+
+<!ENTITY % cnrVAL "valore CDATA #IMPLIED" >
 
 <!ELEMENT cnr:meta (cnr:strutturaEmanante+,
 				cnr:autoritaEmanante+, 
@@ -122,27 +105,32 @@
 				cnr:tipoProvvedimento+, 
                     (cnr:disciplina+ | cnr:areaScientifica+ | cnr:dipartimento+) )>
 
+<!ATTLIST cnr:meta %cnrNS; >
+
 <!ELEMENT cnr:strutturaEmanante		EMPTY >
-<!ATTLIST cnr:strutturaEmanante		valore CDATA #IMPLIED >
+<!ATTLIST cnr:strutturaEmanante		%cnrVAL; >
 
 <!ELEMENT cnr:autoritaEmanante		EMPTY >
-<!ATTLIST cnr:autoritaEmanante		valore CDATA #IMPLIED >
+<!ATTLIST cnr:autoritaEmanante		%cnrVAL; >
 
 <!ELEMENT cnr:tipoDestinatario		EMPTY >
-<!ATTLIST cnr:tipoDestinatario		valore CDATA #IMPLIED >
+<!ATTLIST cnr:tipoDestinatario		%cnrVAL; >
 
 <!ELEMENT cnr:strutturaDestinataria	EMPTY >
-<!ATTLIST cnr:strutturaDestinataria	valore CDATA #IMPLIED >
+<!ATTLIST cnr:strutturaDestinataria	%cnrVAL; >
 
 <!ELEMENT cnr:tipoProvvedimento		EMPTY >
-<!ATTLIST cnr:tipoProvvedimento		valore CDATA #IMPLIED >
+<!ATTLIST cnr:tipoProvvedimento		%cnrVAL; >
 
 <!ELEMENT cnr:disciplina				EMPTY >
-<!ATTLIST cnr:disciplina				valore CDATA #IMPLIED >
+<!ATTLIST cnr:disciplina				%cnrVAL; >
 
 <!ELEMENT cnr:areaScientifica			EMPTY >
-<!ATTLIST cnr:areaScientifica			valore CDATA #IMPLIED >
+<!ATTLIST cnr:areaScientifica			%cnrVAL; >
 
 <!ELEMENT cnr:dipartimento			EMPTY >
-<!ATTLIST cnr:dipartimento			valore CDATA #IMPLIED >
+<!ATTLIST cnr:dipartimento			%cnrVAL; >
 
+<!--    =====================================================================        
+        fine di cnr:meta                                             
+        =====================================================================  -->
