@@ -360,8 +360,9 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 		}
 		else if(tipoDoc.getSelectedItem().toString().toLowerCase().indexOf("cnr")!=-1){
 			tipoDtd.removeAllItems();
-			tipoDtd.addItem(XmLegesMarker.TIPO_DTD[4]);
-			tipoDtd.setSelectedIndex(0);
+			for(int i=0;i<2;i++)
+				   tipoDtd.addItem(XmLegesMarker.TIPO_DTD[i]);
+			tipoDtd.setSelectedIndex(0);			
 		}
 		// per tutti gli altri provvedimenti ...
 		else{
@@ -375,8 +376,6 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 	private int getSelectedDtd(){
 		if(tipoDoc.getSelectedItem().toString().toLowerCase().startsWith("disegn"))
 			return 3;
-		else if(tipoDoc.getSelectedItem().toString().toLowerCase().indexOf("cnr")!=-1)
-			return 4;
 		else
 			return tipoDtd.getSelectedIndex();
 	}
