@@ -48,14 +48,12 @@ import javax.swing.JTextField;
  * </dl>
  * 
  * @version 1.0
- * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>, <a
- *         href="mailto:t.paba@onetech.it">Tommaso Paba</a>
+ * @author <a href="francesca.uccheddu@gmail.com">Francesca Uccheddu</a>
  */
 public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Serviceable, Initializable, FormVerifier, Configurable {
 
 	Logger logger;
 
-	//   cnrProprietari.jfrm
 	Form form;
 	
 	JTextField strutturaEmanante;
@@ -67,7 +65,6 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 	JComboBox areadisciplina_combo;
 		
 	JComboBox str_destinataria_combo;
-//	editor.form.meta.cnr.str_dest_combo
 	
 	JComboBox tipo_provv_combo;
 	
@@ -111,10 +108,7 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 		
 		
 		form.setMainComponent(getClass().getResourceAsStream("cnrProprietari.jfrm"));
-		//form.setSize(400,150);
-
 		form.setName("editor.form.meta.cnr");
-		
 		form.setHelpKey("help.contents.form.cnrproprietari");
 		
 		strutturaEmanante = (JTextField) form.getComponentByName("editor.form.meta.cnr.struttura");
@@ -213,8 +207,8 @@ public class CnrProprietariFormImpl implements CnrProprietariForm, Loggable, Ser
 
 	public String[] getProprietari() {
 		return new String[] {
-				strutturaEmanante.getText(),
-				autoritaEmanante.getText(),
+				strutturaEmanante.getText().trim(),
+				autoritaEmanante.getText().trim(),
 				(String)tipoDestinatario.getSelectedItem(),
 				(String)str_destinataria_combo.getSelectedItem(),
 				(String)tipo_provv_combo.getSelectedItem(),
