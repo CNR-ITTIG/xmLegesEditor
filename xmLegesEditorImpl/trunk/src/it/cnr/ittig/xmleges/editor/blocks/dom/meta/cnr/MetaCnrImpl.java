@@ -61,7 +61,7 @@ public class MetaCnrImpl implements MetaCnr, Loggable, Serviceable {
 						
 			NodeList cnrMeta_elementList = n.getChildNodes();
 			for (int i = 0; i < cnrMeta_elementList.getLength();i++) {
-				String valore=UtilDom.getAttributeValueAsString(cnrMeta_elementList.item(i),"valore");
+				String valore=UtilDom.getAttributeValueAsString(cnrMeta_elementList.item(i),"valore").trim();
 				
 				if(cnrMeta_elementList.item(i).getNodeName().equals("cnr:strutturaEmanante"))
 					strutturaEmanante=valore;					
@@ -116,11 +116,6 @@ public class MetaCnrImpl implements MetaCnr, Loggable, Serviceable {
 			if (cnrNode==null)
 			    cnrNode = utilRulesManager.getNodeTemplate("cnr:meta");
 			
-			
-			
-			utilRulesManager.orderedInsertChild(proprietarioNode,cnrNode);
-			
-			
 			String[] elementsName=new String[]{"cnr:strutturaEmanante","cnr:autoritaEmanante","cnr:tipoDestinatario","cnr:strutturaDestinataria","cnr:tipoProvvedimento",metadati[6]};
 			 
 			
@@ -130,26 +125,15 @@ public class MetaCnrImpl implements MetaCnr, Loggable, Serviceable {
 				Element toInsertElement = doc.createElement(elementsName[i]);
 				if((metadati[i]!=null)&&(!metadati[i].trim().equals("")))
 					UtilDom.setAttributeValue(toInsertElement,"valore",metadati[i]);
-				
-//				Node toInsert_Node = (Node)toInsertElement;
-
-//				Node oldTag = UtilDom.findDirectChild(cnrNode,elementsName[i]);//doc.getElementsByTagName(elementsName[i]);
-//				if (oldTag!=null) // c'era gia' un nodo elementsName[i]
-//					cnrNode.replaceChild(toInsert_Node, oldTag);
-//				else 
-//					utilRulesManager.orderedInsertChild(cnrNode,toInsert_Node);
-			    	
-				cnrNode.appendChild((Node)toInsertElement);
-				
+				cnrNode.appendChild((Node)toInsertElement);	
 			}
+			utilRulesManager.orderedInsertChild(proprietarioNode,cnrNode);			
 			
 			if(missingProprietario){
 				Node metaNode = doc.getElementsByTagName("meta").item(0);
 				utilRulesManager.orderedInsertChild(metaNode,proprietarioNode);
 			}
 			return true;
-		
-
 	}
 
 
