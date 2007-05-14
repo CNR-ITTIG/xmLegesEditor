@@ -398,7 +398,8 @@
 	    </urn>
 	    <template tipo="Articolato" tag="DocumentoNIR">PRCNR-Art.xml</template>
 	    <template tipo="SemiArticolato" tag="DocumentoNIR">PRCNR-Semi.xml</template>
-	    <dtd name="DTD CNR">cnr.dtd</dtd>
+	    <dtd name="DTD Nir Completo">nircompleto.dtd</dtd>
+		<dtd name="DTD Nir Flessibile">nirflessibile.dtd</dtd>
     </provvedimento>
 <!-- *********************************************** ALTRI Provv. -->
     <provvedimento name="Provvedimento di altre autorita'" emananti="SI">
