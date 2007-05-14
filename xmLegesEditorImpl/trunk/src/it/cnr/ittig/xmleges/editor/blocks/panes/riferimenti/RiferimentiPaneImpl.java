@@ -154,7 +154,8 @@ public class RiferimentiPaneImpl implements RiferimentiPane, EventManagerListene
 		if (event instanceof DocumentClosedEvent) {
 			bar.getComponent(0).setEnabled(true);
 			bar.getComponent(1).setEnabled(false);
-			if(thread.isAlive())
+			// FIXME 
+			if(thread != null && thread.isAlive())
 				thread.stop();
 			progress.setValue(0);
 		}
