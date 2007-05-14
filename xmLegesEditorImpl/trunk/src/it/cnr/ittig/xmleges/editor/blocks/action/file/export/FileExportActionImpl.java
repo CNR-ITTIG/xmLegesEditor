@@ -33,6 +33,7 @@ import it.cnr.ittig.xmleges.core.util.xslt.UtilXslt;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.Vigenza;
 import it.cnr.ittig.xmleges.editor.services.form.fileexport.FileExportForm;
 import it.cnr.ittig.xmleges.editor.services.panes.xslts.NirXslts;
+import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 
 import java.awt.Component;
 import java.awt.Dimension;
@@ -136,6 +137,8 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 	
 	Vigenza vigenza;
 	
+	NirUtilDom nirUtilDom;
+	
 	ExportRTFAction exportRTFAction;
 
 	JFileChooser fileChooser;
@@ -169,6 +172,7 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 		utilRtf = (UtilRtf) serviceManager.lookup(UtilRtf.class);	
 		fileExportForm = (FileExportForm) serviceManager.lookup(FileExportForm.class);
 		vigenza = (Vigenza) serviceManager.lookup(Vigenza.class);
+		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 	}
 
 	// ////////////////////////////////////////////////// Configurable Interface
@@ -256,7 +260,7 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 		String XSL_FO_GU; 
 		String dtdName = documentManager.getDtdName();
 		
-		if (dtdName.startsWith("nir"))    // documenti NIR
+		if (dtdName.startsWith("nir") && !nirUtilDom.isDocCNR(null))    // documenti NIR
 			XSL_FO_GU = xslts.getXslt("pdf-gazzettaufficiale").getAbsolutePath();
 		else 
 			XSL_FO_GU = xslts.getXslt("pdf-cnr").getAbsolutePath();
@@ -339,7 +343,7 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 		String XSL_FO_GU; 
 		String dtdName = documentManager.getDtdName();
 		
-		if (dtdName.startsWith("nir"))    // documenti NIR
+		if (dtdName.startsWith("nir") && !nirUtilDom.isDocCNR(null))    // documenti NIR
 			XSL_FO_GU = xslts.getXslt("pdf-gazzettaufficiale").getAbsolutePath();
 		else 
 			XSL_FO_GU = xslts.getXslt("pdf-cnr").getAbsolutePath();
@@ -395,7 +399,7 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 		File xsl = null;
 		String dtdName = documentManager.getDtdName();
 		
-		if (dtdName.startsWith("nir")){    // documenti NIR
+		if (dtdName.startsWith("nir") && !nirUtilDom.isDocCNR(null)){    // documenti NIR
 			xsl = new File(xslts.getXslt("xsl-nir-nocss").getAbsolutePath());
 			
 			
@@ -414,7 +418,7 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 			}
 			
 		}   
-		else if (dtdName.indexOf("cnr")!=-1)  // documenti CNR
+		else if (nirUtilDom.isDocCNR(null))  // documenti CNR
 			xsl = new File(xslts.getXslt("xsl-cnr").getAbsolutePath());
 		else                                  // documenti DL
 			xsl = new File(xslts.getXslt("xsl-disegnilegge-nocss").getAbsolutePath());
@@ -431,7 +435,7 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 		
 		File xsl = null;
 		String dtdName = documentManager.getDtdName();
-		if (dtdName.startsWith("nir")){  // documenti NIR
+		if (dtdName.startsWith("nir") && !nirUtilDom.isDocCNR(null)){  // documenti NIR
 			xsl = new File(xslts.getXslt("xsl-nir").getAbsolutePath());
 			
 			// FIXME spostare il check isDocMultivigente da qualche altra parte ?
@@ -449,7 +453,7 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 			}
 			
 		}
-		else if (dtdName.indexOf("cnr")!=-1)  // documenti CNR
+		else if (nirUtilDom.isDocCNR(null))  // documenti CNR
 			xsl = new File(xslts.getXslt("xsl-cnr").getAbsolutePath());
 		else								  // documenti DL
 			xsl = new File(xslts.getXslt("xsl-disegnilegge").getAbsolutePath());
