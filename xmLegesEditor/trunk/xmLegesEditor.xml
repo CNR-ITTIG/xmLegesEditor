@@ -1271,6 +1271,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 <element name="allegatodi" />
                 <element name="giurisprudenza" />                
                 <!--element name="#PCDATA"/-->
+                <element name="proprietario" />       
             </exclude>           
         </configuration>
     </component>
