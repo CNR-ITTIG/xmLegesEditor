@@ -284,11 +284,6 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 			domWriter.setFormat(false);
 			domWriter.setOutput(dest);
 			
-			
-			// serve ?
-			//Hashtable param = new Hashtable(1);
-			//param.put("baseurl",UtilFile.getFolderPath(documentManager.getSourceName()));
-			
 			Node res = UtilXslt.applyXslt(documentManager.getDocumentAsDom(), xslt, documentManager.getEncoding());
 			domWriter.write(res);
 			return true;
