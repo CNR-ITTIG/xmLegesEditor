@@ -34,10 +34,11 @@ public interface FileExportAction extends Service {
 	 * Esporta il documento corrente in PDF.
 	 */
 	public boolean doExportPDF();
-
+	
 	/**
-	 * Produce il testo a fronte di un DDL sul Browser
+	 * Esporta il documento corrente in RTF.
 	 */
-	public boolean doTestoAFronte();
+	public boolean doExportRTF();
+
 
 }
