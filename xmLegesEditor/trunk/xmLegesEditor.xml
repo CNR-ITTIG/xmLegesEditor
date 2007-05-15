@@ -1172,12 +1172,12 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
         </configuration>
     </component>
     
-    <component  activation="startup"
+    <!--	component  activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.panes.riferimenti.RiferimentiPaneImpl">
 		<configuration>
             <name>editor.panes.riferimenti</name>
         </configuration>                
-    </component>
+    </component	-->
     
 <!--  
     <component  activation="startup"
