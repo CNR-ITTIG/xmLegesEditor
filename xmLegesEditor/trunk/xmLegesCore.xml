@@ -179,7 +179,6 @@ File di composizione dell'applicazione xmLegesEditor CORE
                         <item action="file.openrecent.3" />
                     </menu>
                     <separator/>
-<!-- EXPORT commento x il momento
                     <menu action="file.export">
                     	<item action="file.export.browser" />
                         <item action="file.export.pdf" />      
@@ -187,7 +186,6 @@ File di composizione dell'applicazione xmLegesEditor CORE
                         <item action="file.export.html" />
                     </menu>                    
                     <separator/>
--->                    
                     <item action="file.save" />
                     <item action="file.saveas" />
                     <item action="file.removepi" />                    
@@ -389,12 +387,12 @@ File di composizione dell'applicazione xmLegesEditor CORE
         </configuration>
     </component>
 
-<!-- EXPORT commento x il momento
+
     <component  activation="startup"
-                class="it.cnr.ittig.xmleges.editor.blocks.action.file.export.FileExportActionImpl">
+                class="it.cnr.ittig.xmleges.core.blocks.action.file.export.FileExportActionImpl">
         <configuration external="true" resource="FileExportActionImpl.xconfig" />
     </component>
--->    
+   
 
     <component  activation="startup"
                 class="it.cnr.ittig.xmleges.core.blocks.action.file.save.FileSaveActionImpl"
@@ -638,20 +636,28 @@ File di composizione dell'applicazione xmLegesEditor CORE
                 class="it.cnr.ittig.xmleges.core.blocks.panes.segnalazioni.SegnalazioniPaneImpl"
     />
 
+
     <!-- ================================================================== -->
     <!-- =================================================== XML EDITOR === -->
     <!-- ================================================================== -->
     <component  activation="startup"
                 class="it.cnr.ittig.xmleges.core.blocks.xmleditor.XmlEditorImpl"
     />    
+ 
+ 
     
-    <!-- ================================================================== -->
-    <!-- =============================================== XMLEGES EDITOR === -->
-    <!-- ================================================================== -->
+<!-- 
+    
+     ================================================================== 
+     =============================================== XMLEGES EDITOR === 
+     ================================================================== 
     <component  activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.editor.XmLegesEditorImpl"
     />
-        
+    
+ -->
+
+ 
     <!-- ================================================================== -->
     <!-- ======================================================== UTILS === -->
     <!-- ================================================================== -->
