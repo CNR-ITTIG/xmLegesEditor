@@ -7,7 +7,6 @@ import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.action.ActionManager;
-import it.cnr.ittig.xmleges.core.services.action.file.export.FileExportAction;
 import it.cnr.ittig.xmleges.core.services.action.file.save.FileSaveAction;
 import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
@@ -19,6 +18,7 @@ import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
+import it.cnr.ittig.xmleges.editor.services.action.file.export.NirFileExportAction;
 import it.cnr.ittig.xmleges.editor.services.action.revisioni.RevisioniAction;
 import it.cnr.ittig.xmleges.editor.services.dom.partizioni.Partizioni;
 import it.cnr.ittig.xmleges.editor.services.dom.revisioni.Revisioni;
@@ -81,7 +81,7 @@ public class RevisioniActionImpl implements RevisioniAction, Loggable, EventMana
 
 	Partizioni partizioni;
 
-	FileExportAction export;
+	NirFileExportAction export;
 
 	FileNewForm fileNewForm;
 
@@ -122,7 +122,7 @@ public class RevisioniActionImpl implements RevisioniAction, Loggable, EventMana
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 		revisioni = (Revisioni) serviceManager.lookup(Revisioni.class);
-		export = (FileExportAction) serviceManager.lookup(FileExportAction.class);
+		export = (NirFileExportAction) serviceManager.lookup(NirFileExportAction.class);
 		fileNewForm = (FileNewForm) serviceManager.lookup(FileNewForm.class);
 		fileSaveAction = (FileSaveAction) serviceManager.lookup(FileSaveAction.class);
 		template = (Template) serviceManager.lookup(Template.class);
