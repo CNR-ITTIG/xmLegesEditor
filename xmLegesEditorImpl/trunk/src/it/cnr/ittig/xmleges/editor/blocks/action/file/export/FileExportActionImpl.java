@@ -1,4 +1,4 @@
-package it.cnr.ittig.xmleges.editor.blocks.action.file.export;
+package it.cnr.ittig.xmleges.core.blocks.action.file.export;
 
 import it.cnr.ittig.services.manager.Configurable;
 import it.cnr.ittig.services.manager.Configuration;
@@ -30,17 +30,12 @@ import it.cnr.ittig.xmleges.core.util.domwriter.DOMWriter;
 import it.cnr.ittig.xmleges.core.util.file.RegexpFileFilter;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
 import it.cnr.ittig.xmleges.core.util.xslt.UtilXslt;
-import it.cnr.ittig.xmleges.editor.services.dom.vigenza.Vigenza;
-import it.cnr.ittig.xmleges.editor.services.form.fileexport.FileExportForm;
-import it.cnr.ittig.xmleges.editor.services.panes.xslts.NirXslts;
-import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.util.EventObject;
-import java.util.Hashtable;
 import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.Vector;
@@ -101,6 +96,8 @@ import org.w3c.dom.Node;
  */
 public class FileExportActionImpl implements FileExportAction, EventManagerListener, ListTextFieldEditor, Loggable, Serviceable, Configurable, Initializable,
 		Startable {
+	
+	
 	Logger logger;
 
 	PreferenceManager preferenceManager;
@@ -109,8 +106,6 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 
 	DocumentManager documentManager;
 
-	Bars bars;
-
 	UtilMsg utilMsg;
 
 	UtilPdf utilPdf;
@@ -118,12 +113,8 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 	UtilRtf utilRtf;
 
 	EventManager eventManager;
-
-	NirXslts xslts;
 	
 	Form form;
-	
-	FileExportForm fileExportForm;
 
 	ListTextField listTextField;
 
@@ -135,10 +126,6 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 
 	ExportPDFAction exportPDFAction;
 	
-	Vigenza vigenza;
-	
-	NirUtilDom nirUtilDom;
-	
 	ExportRTFAction exportRTFAction;
 
 	JFileChooser fileChooser;
@@ -149,7 +136,7 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 	
 	String[] readerPdf;
 	
-	String dataVigenza = "";
+	
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -162,17 +149,12 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 		actionManager = (ActionManager) serviceManager.lookup(ActionManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
-		bars = (Bars) serviceManager.lookup(Bars.class);
 		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 		form = (Form) serviceManager.lookup(Form.class);
 		listTextField = (ListTextField) serviceManager.lookup(ListTextField.class);
 		fileTextField = (FileTextField) serviceManager.lookup(FileTextField.class);
-		xslts = (NirXslts) serviceManager.lookup(NirXslts.class);
 		utilPdf = (UtilPdf) serviceManager.lookup(UtilPdf.class);
-		utilRtf = (UtilRtf) serviceManager.lookup(UtilRtf.class);	
-		fileExportForm = (FileExportForm) serviceManager.lookup(FileExportForm.class);
-		vigenza = (Vigenza) serviceManager.lookup(Vigenza.class);
-		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
+		utilRtf = (UtilRtf) serviceManager.lookup(UtilRtf.class);			
 	}
 
 	// ////////////////////////////////////////////////// Configurable Interface
@@ -214,7 +196,6 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 		eventManager.addListener(this, DocumentOpenedEvent.class);
 		eventManager.addListener(this, DocumentClosedEvent.class);
 		
-		dataVigenza="";
 		Properties p = preferenceManager.getPreferenceAsProperties(getClass().getName());
 		try {
 			lastExport = p.getProperty("lastexport");
@@ -248,80 +229,77 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 	public void manageEvent(EventObject event) {
 		exportBrowserAction.setEnabled(!documentManager.isEmpty());
 		exportHTMLAction.setEnabled(!documentManager.isEmpty());
-		//export per i DDL non è implementato (disabilito)
-		exportPDFAction.setEnabled(!documentManager.isEmpty() && !documentManager.getRootElement().getFirstChild().getNodeName().equals("DisegnoLegge"));
+		exportPDFAction.setEnabled(!documentManager.isEmpty());
 		exportRTFAction.setEnabled(!documentManager.isEmpty());
 	}
 
 	// ////////////////////////////////////////////// FileExportAction Interface
 
-	public boolean doExportPDF() {
 
-		String XSL_FO_GU; 
-		String dtdName = documentManager.getDtdName();
+	//	 ///////////////////// salva come HTML
+	public boolean doExportHTML() {
+		 form.showDialog();
+		 if (form.isOk()) {
+			 if (listTextField.getSelectedItem() == null) {
+				 utilMsg.msgError("file.export.error.xslt");
+			 } else if (fileChooser.showSaveDialog(form.getAsComponent()) == JFileChooser.APPROVE_OPTION)
+				 exportHTML(new File(listTextField.getSelectedItem().toString()),fileChooser.getSelectedFile());
+		 }
+		 return false;
+	}
 		
-		if (dtdName.startsWith("nir") && !nirUtilDom.isDocCNR(null))    // documenti NIR
-			XSL_FO_GU = xslts.getXslt("pdf-gazzettaufficiale").getAbsolutePath();
-		else 
-			XSL_FO_GU = xslts.getXslt("pdf-cnr").getAbsolutePath();
+		
+	// ///////////////////// esporta su browser
+	public boolean doExportBrowser() {	
+		form.showDialog();
+     	if (form.isOk()) {
+     		if (listTextField.getSelectedItem() == null) 
+     			utilMsg.msgError("file.export.error.xslt");
+		    else
+		    	try {
+		    		File temp = UtilFile.createTemp("export.html");
+		    		temp.deleteOnExit();
+		    		if (exportHTML(new File(listTextField.getSelectedItem().toString()),temp)) {
+		    			for (int i = 0; i < browsers.length; i++)
+		    				try {
+		    					String cmd = browsers[i] + " " + temp.getAbsolutePath();
+		    					Runtime.getRuntime().exec(cmd);
+		    					break;
+		    				} catch (Exception ex) {
+		    				}
+		    			return true;
+		    		}
+		    	} catch (Exception ex) {
+		    		utilMsg.msgError("file.export.error.browser");
+		    		logger.error(ex.toString(), ex);
+		    	}
+     	}
+		return false;
+	}
 	
-		String osName = System.getProperty("os.name");
-
+	
+	protected boolean exportHTML(File xslt, File dest) {
 		try {
-			JFileChooser fileChooser = new JFileChooser();
-			fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-			String filterDesc = "Portable Document Format (*.pdf)";
-			String[] masks = new String[1];
-			masks[0] = ".*\\.[pP][dD][fF]$";
-			fileChooser.setFileFilter(new RegexpFileFilter(filterDesc, masks));
-			fileChooser.setCurrentDirectory(getLastExportAsFile() != null ? getLastExportAsFile().getParentFile() : null);
-
-			if (fileChooser.showSaveDialog(null) == JFileChooser.CANCEL_OPTION)
-				return false;
-			else {
-				File file = fileChooser.getSelectedFile();
-				if (!file.getAbsolutePath().matches("^.*\\.[pP][dD][fF]$"))
-					file = new File(file.getAbsolutePath() + ".pdf");
-
-				// Controlla l'esistenza del file
-				if (file.exists()) {
-					if (!utilMsg.msgYesNo("action.file.save.replace")) {
-						return false;
-					}
-				}
-
-				utilPdf.convertXML2PDF(documentManager.getDocumentAsDom(), XSL_FO_GU, file.getAbsolutePath());
-				lastExport = file.getAbsolutePath();
-
-				if (osName.toLowerCase().matches("windows.*")) {
-					String nomeFile = cmdWin(file.getAbsolutePath());
-					for (int i = 0; i < readerPdf.length; i++)
-						try {
-							String cmd = readerPdf[i] + " " + nomeFile;
-							Runtime.getRuntime().exec(cmd);
-							break;
-						} catch (Exception ex) {
-						}
-				}
-				else {
-					String nomeFile = file.getAbsolutePath();
-					for (int i = 0; i < readerPdf.length; i++)
-						try {
-							String temp[] = new String[2];
-							temp[0] = readerPdf[i];
-							temp[1] = nomeFile;
-							Runtime.getRuntime().exec(temp);	
-							break;
-						} catch (Exception ex) {
-						}
-				}
-				return true;
-			}
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
+			DOMWriter domWriter = new DOMWriter();
+			domWriter.setCanonical(true);
+			domWriter.setFormat(false);
+			domWriter.setOutput(dest);
+			
+			
+			// serve ?
+			//Hashtable param = new Hashtable(1);
+			//param.put("baseurl",UtilFile.getFolderPath(documentManager.getSourceName()));
+			
+			Node res = UtilXslt.applyXslt(documentManager.getDocumentAsDom(), xslt, documentManager.getEncoding());
+			domWriter.write(res);
+			return true;
+		} catch (Exception ex) {
+			logger.error(ex.toString(), ex);
 			return false;
 		}
 	}
+	
+	
     private String cmdWin(String cmd) {
     	
     	StringTokenizer token = new StringTokenizer(cmd, "\\");
@@ -338,186 +316,134 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
     }
 	
 	
+	public boolean doExportPDF() {
+
+		String XSL_FO_GU; 
+		String dtdName = documentManager.getDtdName();
+		
+//		if (dtdName.startsWith("nir") && !nirUtilDom.isDocCNR(null))    // documenti NIR
+//			XSL_FO_GU = xslts.getXslt("pdf-gazzettaufficiale").getAbsolutePath();
+//		else 
+//			XSL_FO_GU = xslts.getXslt("pdf-cnr").getAbsolutePath();
+//	
+//		String osName = System.getProperty("os.name");
+//
+//		try {
+//			JFileChooser fileChooser = new JFileChooser();
+//			fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+//			String filterDesc = "Portable Document Format (*.pdf)";
+//			String[] masks = new String[1];
+//			masks[0] = ".*\\.[pP][dD][fF]$";
+//			fileChooser.setFileFilter(new RegexpFileFilter(filterDesc, masks));
+//			fileChooser.setCurrentDirectory(getLastExportAsFile() != null ? getLastExportAsFile().getParentFile() : null);
+//
+//			if (fileChooser.showSaveDialog(null) == JFileChooser.CANCEL_OPTION)
+//				return false;
+//			else {
+//				File file = fileChooser.getSelectedFile();
+//				if (!file.getAbsolutePath().matches("^.*\\.[pP][dD][fF]$"))
+//					file = new File(file.getAbsolutePath() + ".pdf");
+//
+//				// Controlla l'esistenza del file
+//				if (file.exists()) {
+//					if (!utilMsg.msgYesNo("action.file.save.replace")) {
+//						return false;
+//					}
+//				}
+//
+//				utilPdf.convertXML2PDF(documentManager.getDocumentAsDom(), XSL_FO_GU, file.getAbsolutePath());
+//				lastExport = file.getAbsolutePath();
+//
+//				if (osName.toLowerCase().matches("windows.*")) {
+//					String nomeFile = cmdWin(file.getAbsolutePath());
+//					for (int i = 0; i < readerPdf.length; i++)
+//						try {
+//							String cmd = readerPdf[i] + " " + nomeFile;
+//							Runtime.getRuntime().exec(cmd);
+//							break;
+//						} catch (Exception ex) {
+//						}
+//				}
+//				else {
+//					String nomeFile = file.getAbsolutePath();
+//					for (int i = 0; i < readerPdf.length; i++)
+//						try {
+//							String temp[] = new String[2];
+//							temp[0] = readerPdf[i];
+//							temp[1] = nomeFile;
+//							Runtime.getRuntime().exec(temp);	
+//							break;
+//						} catch (Exception ex) {
+//						}
+//				}
+//				return true;
+//			}
+//		} catch (Exception e) {
+//			logger.error(e.getMessage(), e);
+//			return false;
+//		}
+		return false;
+	}
+    
+    
 	public boolean doExportRTF() {
 		
 		String XSL_FO_GU; 
 		String dtdName = documentManager.getDtdName();
 		
-		if (dtdName.startsWith("nir") && !nirUtilDom.isDocCNR(null))    // documenti NIR
-			XSL_FO_GU = xslts.getXslt("pdf-gazzettaufficiale").getAbsolutePath();
-		else 
-			XSL_FO_GU = xslts.getXslt("pdf-cnr").getAbsolutePath();
-	
-		String osName = System.getProperty("os.name");
-
-		try {
-			JFileChooser fileChooser = new JFileChooser();
-			fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-			String filterDesc = "Rich Text Format (*.rtf)";
-			String[] masks = new String[1];
-			masks[0] = ".*\\.[rR][tT][fF]$";
-			fileChooser.setFileFilter(new RegexpFileFilter(filterDesc, masks));
-			fileChooser.setCurrentDirectory(getLastExportAsFile() != null ? getLastExportAsFile().getParentFile() : null);
-
-			if (fileChooser.showSaveDialog(null) == JFileChooser.CANCEL_OPTION)
-				return false;
-			else {
-				File file = fileChooser.getSelectedFile();
-				if (!file.getAbsolutePath().matches("^.*\\.[rR][tT][fF]$"))
-					file = new File(file.getAbsolutePath() + ".rtf");
-
-				// Controlla l'esistenza del file
-				if (file.exists()) {
-					if (!utilMsg.msgYesNo("action.file.save.replace")) {
-						return false;
-					}
-				}
-
-				utilRtf.convertXML2RTF(documentManager.getDocumentAsDom(), XSL_FO_GU, file.getAbsolutePath());
-				lastExport = file.getAbsolutePath();
-
-				// FIXME prendere il path di OPENOFFICE/WORD dalle preference
-				if (osName.equalsIgnoreCase("linux")) {
-					if (Runtime.getRuntime().exec("oowrite2 " + file.getAbsolutePath()) == null)
-						Runtime.getRuntime().exec("oowriter2 " + file.getAbsolutePath());
-				} else if (osName.toLowerCase().matches("windows.*")) {
-					 String nomeFile = cmdWin(file.getAbsolutePath());
-					 Runtime.getRuntime().exec("cmd /C start " + nomeFile);					 
-				}
-				return true;
-			}
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-			return false;
-		}
-	}
-
-	
-	
-	// ///////////////////// salva come HTML
-	public boolean doExportHTML() {
-		File xsl = null;
-		String dtdName = documentManager.getDtdName();
+//		if (dtdName.startsWith("nir") && !nirUtilDom.isDocCNR(null))    // documenti NIR
+//			XSL_FO_GU = xslts.getXslt("pdf-gazzettaufficiale").getAbsolutePath();
+//		else 
+//			XSL_FO_GU = xslts.getXslt("pdf-cnr").getAbsolutePath();
+//	
+//		String osName = System.getProperty("os.name");
+//
+//		try {
+//			JFileChooser fileChooser = new JFileChooser();
+//			fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+//			String filterDesc = "Rich Text Format (*.rtf)";
+//			String[] masks = new String[1];
+//			masks[0] = ".*\\.[rR][tT][fF]$";
+//			fileChooser.setFileFilter(new RegexpFileFilter(filterDesc, masks));
+//			fileChooser.setCurrentDirectory(getLastExportAsFile() != null ? getLastExportAsFile().getParentFile() : null);
+//
+//			if (fileChooser.showSaveDialog(null) == JFileChooser.CANCEL_OPTION)
+//				return false;
+//			else {
+//				File file = fileChooser.getSelectedFile();
+//				if (!file.getAbsolutePath().matches("^.*\\.[rR][tT][fF]$"))
+//					file = new File(file.getAbsolutePath() + ".rtf");
+//
+//				// Controlla l'esistenza del file
+//				if (file.exists()) {
+//					if (!utilMsg.msgYesNo("action.file.save.replace")) {
+//						return false;
+//					}
+//				}
+//
+//				utilRtf.convertXML2RTF(documentManager.getDocumentAsDom(), XSL_FO_GU, file.getAbsolutePath());
+//				lastExport = file.getAbsolutePath();
+//
+//				// FIXME prendere il path di OPENOFFICE/WORD dalle preference
+//				if (osName.equalsIgnoreCase("linux")) {
+//					if (Runtime.getRuntime().exec("oowrite2 " + file.getAbsolutePath()) == null)
+//						Runtime.getRuntime().exec("oowriter2 " + file.getAbsolutePath());
+//				} else if (osName.toLowerCase().matches("windows.*")) {
+//					 String nomeFile = cmdWin(file.getAbsolutePath());
+//					 Runtime.getRuntime().exec("cmd /C start " + nomeFile);					 
+//				}
+//				return true;
+//			}
+//		} catch (Exception e) {
+//			logger.error(e.getMessage(), e);
+//			return false;
+//		}
 		
-		if (dtdName.startsWith("nir") && !nirUtilDom.isDocCNR(null)){    // documenti NIR
-			xsl = new File(xslts.getXslt("xsl-nir-nocss").getAbsolutePath());
-			
-			
-			// FIXME spostare il check isDocMultivigente da qualche altra parte ?
-			
-			// per documenti NIR multivigenti; apre la form di setting dataVigenza 
-			if(vigenza.isVigente()){
-				if(fileExportForm.openForm()){
-				   if(fileExportForm.isMonoVigente())
-                     this.dataVigenza = fileExportForm.getDataVigenza();
-				   else
-					 this.dataVigenza="";
-				}
-				else
-				   return false;
-			}
-			
-		}   
-		else if (nirUtilDom.isDocCNR(null))  // documenti CNR
-			xsl = new File(xslts.getXslt("xsl-cnr").getAbsolutePath());
-		else                                  // documenti DL
-			xsl = new File(xslts.getXslt("xsl-disegnilegge-nocss").getAbsolutePath());
-
-		if (fileChooser.showSaveDialog(form.getAsComponent()) == JFileChooser.APPROVE_OPTION) {
-			exportHTML(xsl, fileChooser.getSelectedFile());
-			return (true);
-		}
 		return false;
-	}
-
-	// ///////////////////// esporta su browser
-	public boolean doExportBrowser() {
 		
-		File xsl = null;
-		String dtdName = documentManager.getDtdName();
-		if (dtdName.startsWith("nir") && !nirUtilDom.isDocCNR(null)){  // documenti NIR
-			xsl = new File(xslts.getXslt("xsl-nir").getAbsolutePath());
-			
-			// FIXME spostare il check isDocMultivigente da qualche altra parte ?
-			
-			// per documenti NIR multivigenti; apre la form di setting dataVigenza 
-			if(vigenza.isVigente()){
-				if(fileExportForm.openForm()){
-				   if(fileExportForm.isMonoVigente())
-                     this.dataVigenza = fileExportForm.getDataVigenza();
-				   else
-					 this.dataVigenza="";
-				}
-				else
-				   return false;
-			}
-			
-		}
-		else if (nirUtilDom.isDocCNR(null))  // documenti CNR
-			xsl = new File(xslts.getXslt("xsl-cnr").getAbsolutePath());
-		else								  // documenti DL
-			xsl = new File(xslts.getXslt("xsl-disegnilegge").getAbsolutePath());
-
-		try {
-			File temp = UtilFile.createTemp("export.html");
-			temp.deleteOnExit();
-			if (exportHTML(xsl, temp)) {
-				for (int i = 0; i < browsers.length; i++)
-					try {
-						String cmd = browsers[i] + " " + temp.getAbsolutePath();
-						Runtime.getRuntime().exec(cmd);
-						break;
-					} catch (Exception ex) {
-					}
-				return true;
-			}
-		} catch (Exception ex) {
-			utilMsg.msgError("file.export.error.browser");
-			logger.error(ex.toString(), ex);
-		}
-		return false;
 	}
 
-	public boolean doTestoAFronte() {
-		try {
-			File temp = UtilFile.createTemp("export-ddl.html");
-			temp.deleteOnExit();
-			if (exportHTML(new File(xslts.getXslt("xsl-disegnilegge-testoafronte").getAbsolutePath()), temp)) {
-				for (int i = 0; i < browsers.length; i++)
-					try {
-						String cmd = browsers[i] + " " + temp.getAbsolutePath();
-						Runtime.getRuntime().exec(cmd);
-						break;
-					} catch (Exception ex) {
-					}
-				return true;
-			}
-		} catch (Exception ex) {
-			utilMsg.msgError("file.export.error.browser");
-			logger.error(ex.toString(), ex);
-		}
-		return false;
-	}
 
-	protected boolean exportHTML(File xslt, File dest) {
-		try {
-			DOMWriter domWriter = new DOMWriter();
-			domWriter.setCanonical(true);
-			domWriter.setFormat(false);
-			domWriter.setOutput(dest);
-			
-			Hashtable param = new Hashtable(2);
-			param.put("datafine",this.dataVigenza);
-			param.put("baseurl",UtilFile.getFolderPath(documentManager.getSourceName()));
-			
-			Node res = UtilXslt.applyXslt(documentManager.getDocumentAsDom(), xslt, param, documentManager.getEncoding());
-			domWriter.write(res);
-			return true;
-		} catch (Exception ex) {
-			logger.error(ex.toString(), ex);
-			return false;
-		}
-	}
 
 	// /////////////////////////////////////////// ListTextFieldEditor Interface
 	public boolean checkData() {
@@ -590,56 +516,6 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 		}
 	}
 }
-
-
-
-
-
-
-
-
-// ///////////////////// salva come HTML (CON FORM)
-// public boolean doExportHTML() {
-// form.showDialog();
-// if (form.isOk()) {
-// if (listTextField.getSelectedItem() == null) {
-// utilMsg.msgError("file.export.error.xslt");
-// } else if (fileChooser.showSaveDialog(form.getAsComponent()) ==
-// JFileChooser.APPROVE_OPTION)
-// exportHTML(new File(listTextField.getSelectedItem().toString()),
-// fileChooser.getSelectedFile());
-// }
-// return false;
-// }
-
-// ///////////////////// esporta su browser (CON FORM)
-// public boolean doExportBrowser() {
-// form.showDialog();
-// if (form.isOk()) {
-// if (listTextField.getSelectedItem() == null) {
-// utilMsg.msgError("file.export.error.xslt");
-// } else
-// try {
-// File temp = UtilFile.createTemp("export.html");
-// temp.deleteOnExit();
-// if (exportHTML(new File(listTextField.getSelectedItem().toString()),
-// temp)) {
-// Runtime.getRuntime().exec("mozilla-firefox " + temp.getAbsolutePath());
-// return true;
-// }
-// } catch (Exception ex) {
-// utilMsg.msgError("file.export.error.browser");
-// logger.error(ex.toString(), ex);
-// }
-// }
-// return false;
-// }
-
-// /////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
 
 
 
