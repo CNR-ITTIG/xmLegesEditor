@@ -103,6 +103,8 @@ public class RiferimentiPaneImpl implements RiferimentiPane, EventManagerListene
 	DocumentManager documentManager;
 	
 	Thread thread;
+	
+	boolean threadGo = false; 
 
 	UtilMsg utilmsg;
 	
@@ -154,9 +156,7 @@ public class RiferimentiPaneImpl implements RiferimentiPane, EventManagerListene
 		if (event instanceof DocumentClosedEvent) {
 			bar.getComponent(0).setEnabled(true);
 			bar.getComponent(1).setEnabled(false);
-			// FIXME 
-			if(thread != null && thread.isAlive())
-				thread.stop();
+			threadGo = false;
 			progress.setValue(0);
 		}
 			
@@ -189,6 +189,7 @@ public class RiferimentiPaneImpl implements RiferimentiPane, EventManagerListene
 					thread = Thread.currentThread();
 					thread.setName("Test URN online");
 
+					threadGo=true;
 					
 					JEditorPane ep = new JEditorPane();
 				    try {
@@ -206,11 +207,15 @@ public class RiferimentiPaneImpl implements RiferimentiPane, EventManagerListene
 				        	bar.getComponent(1).setEnabled(true);
 				        	progress.setMaximum(nl.getLength()+1);
 				        	progress.setValue(1);
+				        	
+				        	
 				        	for (int i = 0; i < nl.getLength(); i++) {
-				        		Node node = nl.item(i);
-				        		String urn = UtilDom.getAttributeValueAsString(node, "xlink:href");
-				        		testURN(urn);
-				        		progress.setValue(i+2);
+				        		if (threadGo) {
+					        		Node node = nl.item(i);
+					        		String urn = UtilDom.getAttributeValueAsString(node, "xlink:href");
+					        		testURN(urn);
+					        		progress.setValue(i+2);
+					        	}
 				        	}
 				        	progress.setValue(0);				        	
 				        	xsltPane.reload();
@@ -223,62 +228,12 @@ public class RiferimentiPaneImpl implements RiferimentiPane, EventManagerListene
 		        	bar.getComponent(1).setEnabled(false);
 				}
 			}.start(); 
-			
-			
-			//provo modifica per errore StackOverflowError
-//			thread = new Thread(
-//				new Runnable(){
-//					public void run() {
-//						logger.debug("Eseguo test urn");
-//						thread = Thread.currentThread();
-//						thread.setName("Test URN online");
-//
-//						
-//						JEditorPane ep = new JEditorPane();
-//					    try {
-//					    	//test connessione
-//					        ep.setPage("http://www.nir.it");
-//					       
-//					        client = new HttpClient(new MultiThreadedHttpConnectionManager());
-//					        client.getHttpConnectionManager().getParams().setConnectionTimeout(30000);
-//						
-//					        Document dom = documentManager.getDocumentAsDom();
-//					        if (dom!=null) {
-//						
-//					        	NodeList nl = dom.getElementsByTagName("rif");				
-//					        	bar.getComponent(0).setEnabled(false);
-//					        	bar.getComponent(1).setEnabled(true);
-//					        	progress.setMaximum(nl.getLength()+1);
-//					        	progress.setValue(1);
-//					        	for (int i = 0; i < nl.getLength(); i++) {
-//					        		Node node = nl.item(i);
-//					        		String urn = UtilDom.getAttributeValueAsString(node, "xlink:href");
-//					        		testURN(urn);
-//					        		progress.setValue(i+2);
-//					        	}
-//					        	progress.setValue(0);				        	
-//					        	xsltPane.reload();
-//					        }	
-//					    } catch (IOException e) {
-//					    	logger.debug("Connessione assente");
-//					    	utilmsg.msgInfo("panes.riferimenti.noconnection");	
-//					    }
-//					    bar.getComponent(0).setEnabled(true);
-//			        	bar.getComponent(1).setEnabled(false);
-//					}});
-//			thread.start(); 		 
-
-			
-			
-			
-			
 		}
 	}
 	
 	protected class StopAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
-			if(thread.isAlive())
-				thread.stop();
+			threadGo=false;
 			progress.setValue(0);
 			bar.getComponent(0).setEnabled(true);
 			bar.getComponent(1).setEnabled(false);
@@ -305,12 +260,6 @@ public class RiferimentiPaneImpl implements RiferimentiPane, EventManagerListene
 					colore = "red";
 				}
 				xsltutil.setUrn(urn, colore);
-				
-				
-				//TODO NON va aggiornato solo se attivo.... va aggiornato se visibile
-//				if (frame.getActivePane().getName().equals("editor.panes.riferimenti"))
-//					frame.getActivePane().reload();
-				
 				
 			}
 		} catch (Exception ex) {
