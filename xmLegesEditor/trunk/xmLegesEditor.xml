@@ -40,11 +40,18 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		
 		<root>
 			<priority value ="error" /> 
-			<!-- appender-ref ref="ConsoleAppender" /-->
- 			<appender-ref ref="BugReportAppender" /> 
+			<appender-ref ref="ConsoleAppender" />
+ 			<!--appender-ref ref="BugReportAppender" /--> 
  			<!--appender-ref ref="FileAppender" /-->
 		</root>
 		
+	<!-- 
+		<logger name=".DtdRulesManager" additivity="false">
+                        <priority value ="debug" />
+                        <appender-ref ref="ConsoleAppender" />
+        </logger>
+	
+	 -->	
 	
 	</log4j:configuration>
 	
@@ -635,8 +642,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     />
 
     <component  activation="startup"
-                class="it.cnr.ittig.xmleges.editor.blocks.action.file.export.FileExportActionImpl">
-        <configuration external="true" resource="FileExportActionImpl.xconfig" />
+                class="it.cnr.ittig.xmleges.editor.blocks.action.file.export.NirFileExportActionImpl">
+        <configuration external="true" resource="NirFileExportActionImpl.xconfig" />
     </component>
 
     <component  activation="startup"
