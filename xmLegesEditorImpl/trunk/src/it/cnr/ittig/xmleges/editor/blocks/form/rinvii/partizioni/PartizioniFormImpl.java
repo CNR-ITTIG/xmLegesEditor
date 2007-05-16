@@ -720,26 +720,29 @@ public class PartizioniFormImpl implements PartizioniForm, Loggable, Serviceable
 		}
 		return isArabo;
 	}
-
-	private boolean isLettera(String numero, boolean verbose) {
-		boolean isLettera = true;
-		if (numero.length() == 1) {
-			try {
-				Integer.parseInt(numero);
-				isLettera = false;
-				if (verbose)
-					utilmsg.msgError("editor.form.rinvii.partizioni.msg.error.lettera.text");
-			} catch (Exception e) {
-
+	
+	
+	private boolean isLettera(String string, boolean verbose) {
+		boolean isLet = false;
+		if (string.length() == 0)
+			return isLet;
+		if (string.trim().charAt(0) >= 'a' && string.trim().charAt(0) <= 'z') {
+			isLet = true;
+			for (int i = 1; i < string.length(); i++) { // comprende il caso aa
+														// bb aaa bbb ccc
+				if (string.trim().charAt(i) == string.trim().charAt(0))
+					isLet = true;
+				else
+					isLet = false;
 			}
-		} else {
-			isLettera = false;
-			if (verbose)
-				utilmsg.msgError("editor.form.rinvii.partizioni.msg.error.lettera.text");
-		}
-		return isLettera;
-
+		} else
+			isLet = false;
+        if(verbose && !isLet)
+        	utilmsg.msgError("editor.form.rinvii.partizioni.msg.error.lettera.text");	
+		return isLet;
 	}
+	
+	
 
 	private boolean checkNumber(String partizione, String numero) {
 		if (!partizione.equals("")) {
@@ -756,23 +759,7 @@ public class PartizioniFormImpl implements PartizioniForm, Loggable, Serviceable
 			return true;
 	}
 
-	// private boolean checkNumber(String partizione,String numero){
-	// if (partizione != null && !partizione.equals("")){
-	// if
-	// (partizione.equals("Libro")||partizione.equals("Parte")||partizione.equals("Titolo")||partizione.equals("Capo")||partizione.equals("Sezione"))
-	// return(isRomanOrArabo(numero,true));
-	// else {
-	// if
-	// (partizione.equals("Articolo")||partizione.equals("Comma")||partizione.equals("Numero"))
-	// return(isArabo(numero,true));
-	// else
-	// return(isLettera(numero,true));
-	// }
-	// }
-	// else
-	// return true;
-	//		
-	// }
+
 	/*
 	 * (non-Javadoc)
 	 * 
