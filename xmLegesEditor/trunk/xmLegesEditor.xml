@@ -271,7 +271,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                         <check action="view.toolbar.file" />
                         <check action="view.toolbar.edit" />
                         <check action="view.toolbar.tools" />
-                        <check action="view.toolbar.editor.insert" />
+                        <!-- FIXME eliminata per il momento a causa di StackOverflow -->
+                        <!--check action="view.toolbar.editor.insert" /-->
                         <check action="view.toolbar.editor.testo" />
                         <check action="view.toolbar.editor.allineamento" />
                         <check action="view.toolbar.editor.spostamento" />
@@ -456,11 +457,20 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <!-- item action="tool.contents" /-->
                     <!-- separator /-->
                     <item action="tool.spellcheck" />
+                    <separator/>
+                    <item action="editor.insert.immagini" />
                     <!--item action="tool.spellcheck.auto" /-->
                 </toolbar>
+                
+                <!--
+                
                 <toolbar name="editor.insert" floatable="false" rollover="true">
                     <item action="editor.insert.immagini" />
-                </toolbar>
+                </toolbar>   
+                
+                -->
+                
+                
                 <toolbar name="edit" floatable="false" rollover="true">
                     <item action="edit.cut" />
                     <item action="edit.copy" />
