@@ -470,8 +470,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 
                 -->
                 
-                
-                <toolbar name="edit" floatable="false" rollover="true">
+                  <toolbar name="edit" floatable="false" rollover="true">
                     <item action="edit.cut" />
                     <item action="edit.copy" />
                     <item action="edit.paste" />
@@ -1094,7 +1093,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     
     <component  class="it.cnr.ittig.xmleges.core.blocks.panes.xsltmapper.XsltMapperImpl" />
 
-    <component  class="it.cnr.ittig.xmleges.editor.blocks.panes.xsltutil.XsltUtilImpl" />
+    <component  activation="startup"	class="it.cnr.ittig.xmleges.editor.blocks.panes.xsltutil.XsltUtilImpl" />
     
     <component  lifestyle="pool" 
                 class="it.cnr.ittig.xmleges.core.blocks.panes.xsltextpane.XsltPaneImpl">
@@ -1126,8 +1125,15 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             <css    name="disegnilegge-style"   file="nir-disegnilegge-style.css"       startup="true" />
             <css    name="nir-style"      		file="nir-generico-style.css"           startup="true" />
             <xslt   name="pdf-gazzettaufficiale" file="nir-fo-gazzettaufficiale.xsl"	startup="true" />
-            <xslt   name="xsl-cnr"              file="cnrHTML.xsl"						startup="true" />
-            <xslt   name="pdf-cnr"              file="cnrFO.xsl"						startup="true" />
+            
+            <xslt   name="xsl-cnr"              		file="cnrHTML.xsl"				startup="true" />
+            <css    name="html-cnr-default_style"     	file="cnrLight.css"				startup="true" />
+			<css    name="html-cnr-alternative_style"   file="cnr.css"					startup="true" />        
+            <xslt   name="pdf-cnr"              		file="cnrFO.xsl"				startup="true" />
+		 	<xslt   name="pdf-cnr-style"      			file="styleFO.xsl"				startup="true" />	
+	 	 	<xslt   name="pdf-cnr-xhtml2fo"             file="xhtml2fo.xsl"				startup="true" />
+      
+		 	
         </configuration>
     </component>
 
