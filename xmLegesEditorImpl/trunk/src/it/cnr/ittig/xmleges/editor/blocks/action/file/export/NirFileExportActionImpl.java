@@ -392,7 +392,6 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 			
 			
 			// FIXME spostare il check isDocMultivigente da qualche altra parte ?
-			
 			// per documenti NIR multivigenti; apre la form di setting dataVigenza 
 			if(vigenza.isVigente()){
 				if(fileExportForm.openForm()){
@@ -411,11 +410,24 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 		else                                  // documenti DL
 			xsl = new File(xslts.getXslt("xsl-disegnilegge-nocss").getAbsolutePath());
 
-		if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-			exportHTML(xsl, fileChooser.getSelectedFile());
-			return (true);
+		
+		if (fileChooser.showSaveDialog(null) == JFileChooser.CANCEL_OPTION)
+			return false;
+		else {
+			File file = fileChooser.getSelectedFile();
+			if (!file.getAbsolutePath().matches("^.*\\.[hH][tT][mM][lL]$"))
+				file = new File(file.getAbsolutePath() + ".html");
+
+			// Controlla l'esistenza del file
+			if (file.exists()) {
+				if (!utilMsg.msgYesNo("action.file.save.replace")) {
+					return false;
+				}
+			}
+			exportHTML(xsl, file);
+			lastExport = file.getAbsolutePath();
+			return true;
 		}
-		return false;
 	}
 
 	// ///////////////////// esporta su browser
