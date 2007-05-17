@@ -51,9 +51,12 @@ public class MetaCnrImpl implements MetaCnr, Loggable, Serviceable {
 		String strutturaEmanante=null;	
 		String autoritaEmanante=null;		
 		String tipoDestinatario=null;		
-		String tagDiscipline=null;	
 		String strutturaDestinataria=null;
 		String tipo_provvedimento=null;
+		String choiceDipAreaDisciplina = null;
+		
+		
+		String tagDiscipline = null;
 		
 		Node n = UtilDom.findRecursiveChild(activeMeta,"cnr:meta");
 		
@@ -61,7 +64,7 @@ public class MetaCnrImpl implements MetaCnr, Loggable, Serviceable {
 						
 			NodeList cnrMeta_elementList = n.getChildNodes();
 			for (int i = 0; i < cnrMeta_elementList.getLength();i++) {
-				String valore=UtilDom.getAttributeValueAsString(cnrMeta_elementList.item(i),"valore").trim();
+				String valore=UtilDom.getAttributeValueAsString(cnrMeta_elementList.item(i),"valore");
 				
 				if(cnrMeta_elementList.item(i).getNodeName().equals("cnr:strutturaEmanante"))
 					strutturaEmanante=valore;					
@@ -69,14 +72,24 @@ public class MetaCnrImpl implements MetaCnr, Loggable, Serviceable {
 					autoritaEmanante=valore;
 				if(cnrMeta_elementList.item(i).getNodeName().equals("cnr:tipoDestinatario"))
 					tipoDestinatario = valore;
-				if(cnrMeta_elementList.item(i).getNodeName().equals("cnr:areaScientifica"))
-					tagDiscipline = valore;
 				if(cnrMeta_elementList.item(i).getNodeName().equals("cnr:strutturaDestinataria"))
 					strutturaDestinataria = valore;
 				if(cnrMeta_elementList.item(i).getNodeName().equals("cnr:tipoProvvedimento"))
 					tipo_provvedimento = valore;
+				if(cnrMeta_elementList.item(i).getNodeName().equals("cnr:dipartimento")){
+					tagDiscipline = valore;
+					choiceDipAreaDisciplina = "cnr:dipartimento";
+				}
+				if(cnrMeta_elementList.item(i).getNodeName().equals("cnr:areaScientifica")){
+					tagDiscipline = valore;
+					choiceDipAreaDisciplina = "cnr:areaScientifica";
+				}
+				if(cnrMeta_elementList.item(i).getNodeName().equals("cnr:disciplina")){
+					tagDiscipline = valore;
+					choiceDipAreaDisciplina = "cnr:disciplina";
+				}
 			}
-			return (new String[]{strutturaEmanante, autoritaEmanante, tipoDestinatario, tagDiscipline, strutturaDestinataria, tipo_provvedimento});
+			return (new String[]{strutturaEmanante, autoritaEmanante, tipoDestinatario, strutturaDestinataria, tipo_provvedimento, tagDiscipline,choiceDipAreaDisciplina});
 		}else return null;
 		
 	}
