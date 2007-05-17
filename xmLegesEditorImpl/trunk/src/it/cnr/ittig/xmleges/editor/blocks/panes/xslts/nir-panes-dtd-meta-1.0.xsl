@@ -115,8 +115,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 			</xsl:when>
 		</xsl:choose>
 		<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-			<font color="blue">
-		    	<xsl:text> Soggetto: </xsl:text>
+		    <xsl:text> Soggetto: </xsl:text>
+			<font color="blue">		    	
 			    <xsl:value-of select="@soggetto"/>
 			    <xsl:text>, </xsl:text>
 			    <xsl:value-of select="@xlink:href"/>
