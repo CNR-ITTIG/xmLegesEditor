@@ -41,4 +41,4 @@ $IZPACK_HOME/bin/compile install-win32.xml -b . -o xmLegesEditor-2.0.rc.x.win32.
 
 echo "Rimozione dei link..."
 
-rm xmLegesCoreApi.jar xmLegesCoreImpl.jar xmLegesEditorApi.jar xmLegesEditorImpl.jar xmLegesEditor.xml preference.xml lib  corelib editorlib antiword help
+rm xmLegesCoreApi.jar xmLegesCoreImpl.jar xmLegesEditorApi.jar xmLegesEditorImpl.jar xmLegesEditor.xml  lib  corelib editorlib antiword help
