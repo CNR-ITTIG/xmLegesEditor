@@ -189,7 +189,6 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		materieAction.setEnabled(!documentManager.isEmpty() && !nirUtilDom.isDtdDL() && !nirUtilDom.isDtdBase());
 	
 		urnAction.setEnabled(!documentManager.isEmpty());
-		// FIXME l'abilitazione dei meta CNR non va piu' bene col check del nome della dtd
 		cnrAction.setEnabled(!documentManager.isEmpty() && nirUtilDom.isDocCNR(selectionManager.getActiveNode()));    
 	}
 	
