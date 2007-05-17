@@ -23,9 +23,11 @@ export CLASSPATH=$CLASSPATH:lib/plastic-1.2.0.jar
 export CLASSPATH=$CLASSPATH:lib/xercesImpl-2.7.1.jar
 export CLASSPATH=$CLASSPATH:lib/xml-apis-2.7.1.jar
 export CLASSPATH=$CLASSPATH:lib/fop.jar
+export CLASSPATH=$CLASSPATH:lib/commons-logging-1.0.4.jar
+export CLASSPATH=$CLASSPATH:lib/xmlgraphics-commons-1.1.jar
+export CLASSPATH=$CLASSPATH:lib/commons-io-1.1.jar
 export CLASSPATH=$CLASSPATH:lib/batik.jar
 export CLASSPATH=$CLASSPATH:lib/avalon-framework-cvs-20020806.jar
-export CLASSPATH=$CLASSPATH:lib/jfor-0.7.2rc1.jar
 export CLASSPATH=$CLASSPATH:lib/xsc.jar
 export CLASSPATH=$CLASSPATH:lib/jdic/jdic.jar
 
