@@ -17,7 +17,8 @@ import it.cnr.ittig.services.manager.Service;
  * General Public License </a></dd>
  * </dl>
  * 
- * 
+ * @author <a href="mailto:francesca.uccheddu@gmail.com">Francesca Uccheddu</a>
+ *   
  */
 
 public interface MetaCnr extends Service {

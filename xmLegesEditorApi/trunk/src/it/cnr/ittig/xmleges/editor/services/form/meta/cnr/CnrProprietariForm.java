@@ -1,7 +1,6 @@
 package it.cnr.ittig.xmleges.editor.services.form.meta.cnr;
 
 import it.cnr.ittig.services.manager.Service;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 
 /**
  * Servizio per la gestione della form per i metadati cnr del documento .
@@ -17,7 +16,8 @@ import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
  * General Public License </a></dd>
  * </dl>
  * 
- * @author <a href="mailto:agnoloni@ittig.cnr.it">Tommaso Agnoloni</a>
+ * @author <a href="mailto:francesca.uccheddu@gmail.com">Francesca Uccheddu</a>
+ * 
  */
 public interface CnrProprietariForm extends Service {
 
