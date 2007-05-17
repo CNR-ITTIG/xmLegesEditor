@@ -130,7 +130,7 @@
    <xsl:if test="starts-with(@xlink:href, 'urn:nir')">
       <a target="nirWindow">
          <xsl:attribute name="href">
-            <xsl:text>http://norma.test.cineca.it/cgi-bin/N2Ls?urn=</xsl:text>
+            <xsl:text>http://www.nir.it/cgi-bin/N2Ln?</xsl:text>
             <xsl:if test="contains(@xlink:href,';')">
                <xsl:value-of select="substring-before(substring-after(@xlink:href,'urn:nir:'),';')"/>
                <xsl:text>%3b</xsl:text>
