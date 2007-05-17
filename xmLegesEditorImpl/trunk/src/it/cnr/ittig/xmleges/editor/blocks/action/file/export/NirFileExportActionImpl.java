@@ -118,9 +118,7 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 	EventManager eventManager;
 
 	NirXslts xslts;
-	
-	Form form;
-	
+		
 	FileExportForm fileExportForm;
 
 	ListTextField listTextField;
@@ -162,7 +160,6 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 		bars = (Bars) serviceManager.lookup(Bars.class);
 		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
-		form = (Form) serviceManager.lookup(Form.class);
 		listTextField = (ListTextField) serviceManager.lookup(ListTextField.class);
 		fileTextField = (FileTextField) serviceManager.lookup(FileTextField.class);
 		xslts = (NirXslts) serviceManager.lookup(NirXslts.class);
@@ -193,14 +190,7 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws Exception {
-//		form.setName("file.export.form");
-//		fileTextField.setFileFilter(new RegexpFileFilter("XSL File", ".*\\.xsl[t]?"));
-//
-//		form.setMainComponent(getClass().getResourceAsStream("Export.jfrm"));
-//		form.replaceComponent("file.export.form.export.list", listTextField.getAsComponent());
-
 		listTextField.setEditor(this);
-
 		exportBrowserAction = new ExportBrowserAction();
 		actionManager.registerAction("file.export.browser", exportBrowserAction);
 		exportHTMLAction = new ExportHTMLAction();
@@ -421,7 +411,7 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 		else                                  // documenti DL
 			xsl = new File(xslts.getXslt("xsl-disegnilegge-nocss").getAbsolutePath());
 
-		if (fileChooser.showSaveDialog(form.getAsComponent()) == JFileChooser.APPROVE_OPTION) {
+		if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
 			exportHTML(xsl, fileChooser.getSelectedFile());
 			return (true);
 		}
