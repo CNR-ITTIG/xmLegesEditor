@@ -435,12 +435,10 @@ public class UtilFile {
 	 */
 	public static File getDTDFile(String dtdAbsolutePath) {
 		File ret = null;
-		if (dtdAbsolutePath.startsWith(File.separator)) { // dtd con percorso
+		if (dtdAbsolutePath.startsWith(File.separator)||dtdAbsolutePath.indexOf(":")!=-1) { // dtd con percorso
 			// specificato nel documento
 			ret = new File(dtdAbsolutePath);
-			if (!ret.exists()) { // se non ha trovato la dtd associata al
-									// documento, la
-				// cerca nella temp
+			if (!ret.exists()) { // se non ha trovato la dtd associata al documento, la cerca nella temp
 				String[] pathChunks = dtdAbsolutePath.split("/");
 				ret = getFileFromTemp(pathChunks[pathChunks.length - 1]);
 			}
