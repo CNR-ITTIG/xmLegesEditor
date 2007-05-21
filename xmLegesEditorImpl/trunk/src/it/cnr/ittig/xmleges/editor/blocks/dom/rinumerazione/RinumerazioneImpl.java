@@ -113,11 +113,15 @@ public class RinumerazioneImpl implements Rinumerazione, DocumentBeforeInitUndoA
 	public void aggiorna(Document document) {
 		logger.debug("rinumerazione START");
 		NodeList nir = document.getElementsByTagName("NIR");
-		if (renum)
-			aggiornaNumerazioneAndLink.aggiornaNum(nir.item(0));
-		else
-			aggiornaNumerazioneAndLink.aggiornaID(nir.item(0));
-		logger.debug("rinumerazione END");
+		try{
+			if (renum)
+				aggiornaNumerazioneAndLink.aggiornaNum(nir.item(0));
+			else
+				aggiornaNumerazioneAndLink.aggiornaID(nir.item(0));
+			logger.debug("rinumerazione END");
+		}catch(Exception ex){
+			logger.error("rinumerazione non applicabile");
+		}
 	}
 
 	public void setRinumerazione(boolean renum) {
