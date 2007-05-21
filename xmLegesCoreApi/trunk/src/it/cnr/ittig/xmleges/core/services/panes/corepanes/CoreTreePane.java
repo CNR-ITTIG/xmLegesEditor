@@ -3,7 +3,7 @@ package it.cnr.ittig.xmleges.core.services.panes.corepanes;
 import it.cnr.ittig.services.manager.Service;
 
 /**
- * Servizio per ...
+ * Servizio per la visualizzazione del pannello ad Albero per un documento generico
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
@@ -17,7 +17,7 @@ import it.cnr.ittig.services.manager.Service;
  * </dl>
  * 
  * @version 1.0
- * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
+ * @author <a href="mailto:agnoloni@ittig.cnr.it">Tommaso Agnoloni</a>
  */
 public interface CoreTreePane extends Service {
 

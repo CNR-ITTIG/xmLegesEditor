@@ -3,8 +3,7 @@ package it.cnr.ittig.xmleges.core.services.panes.corepanes;
 import it.cnr.ittig.services.manager.Service;
 
 /**
- * Servizio per la visualizzazione del pannello degli attributi di un nodo con
- * funzioni specifiche di xmLeges.
+ * Servizio per la visualizzazione del pannello degli attributi di un nodo 
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
@@ -17,7 +16,7 @@ import it.cnr.ittig.services.manager.Service;
  * General Public License </a></dd>
  * </dl>
  * 
- * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
+ * @author <a href="mailto:agnoloni@ittig.cnr.it">Tommaso Agnoloni</a>
  */
 public interface CoreAttributesPane extends Service {
 

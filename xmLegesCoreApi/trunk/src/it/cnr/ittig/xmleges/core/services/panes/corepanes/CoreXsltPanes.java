@@ -3,7 +3,7 @@ package it.cnr.ittig.xmleges.core.services.panes.corepanes;
 import it.cnr.ittig.services.manager.Service;
 
 /**
- * Servizio per ...
+ * Servizio per l'allocazione dei pannelli di visualizzazione dei documenti sul frame principale
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
@@ -17,7 +17,7 @@ import it.cnr.ittig.services.manager.Service;
  * </dl>
  * 
  * @version 1.0
- * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
+ * @author <a href="mailto:agnoloni@ittig.cnr.it">Tommaso Agnoloni</a>
  */
 public interface CoreXsltPanes extends Service {
 
