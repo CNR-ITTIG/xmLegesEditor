@@ -159,7 +159,7 @@ public class DtdRulesManagerImpl implements DtdRulesManager, DeclHandler, Loggab
 		File xml_file = new File(filename);
 
 		if (dtdPath.startsWith(".")) // crea path name assoluto
-			dtdPath = xml_file.getParent().concat(dtdPath.substring(1));
+			dtdPath = xml_file.getParent().concat(File.separator+dtdPath.substring(2));
 
 		File dtd_file = UtilFile.getDTDFile(dtdPath);
 
