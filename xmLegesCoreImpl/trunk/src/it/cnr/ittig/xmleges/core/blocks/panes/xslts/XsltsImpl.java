@@ -13,7 +13,7 @@ import java.util.Hashtable;
 
 /**
  * <h1>Implementazione del servizio</h1>
- * <code>it.cnr.ittig.xmleges.editor.services.panes.xslts.Xslts</code>
+ * <code>it.cnr.ittig.xmleges.core.services.panes.xslts.Xslts</code>
  * <h1>Descrizione</h1>
  * Servizio per la gestione dei file di trasformazione XSLT e fogli di stile CSS
  * <h1>Configurazione</h1>
