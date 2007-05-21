@@ -50,7 +50,7 @@ import org.w3c.dom.traversal.NodeIterator;
 
 /**
  * <h1>Implementazione del servizio
- * <code>it.cnr.ittig.xmleges.editor.services.action.file.save.FileSaveAction</code>.</h1>
+ * <code>it.cnr.ittig.xmleges.core.services.action.file.save.FileSaveAction</code>.</h1>
  * <h1>Descrizione</h1>
  * Esegue il salvataggio su file del documento corrente. Se il documento &egrave; nuovo (<code>DocumentManager.isNew</code>)
  * chiede il nome e lo aggiunge alla lista dei file recenti (<code>FileOpenAction.addLast</code>).
