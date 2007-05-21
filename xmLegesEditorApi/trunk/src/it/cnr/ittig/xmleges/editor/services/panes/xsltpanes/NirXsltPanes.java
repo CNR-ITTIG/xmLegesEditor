@@ -3,7 +3,7 @@ package it.cnr.ittig.xmleges.editor.services.panes.xsltpanes;
 import it.cnr.ittig.services.manager.Service;
 
 /**
- * Servizio per ...
+ * Servizio per l'allocazione dei pannelli di visualizzazione per documenti Nir sul frame principale
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
