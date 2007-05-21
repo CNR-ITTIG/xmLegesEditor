@@ -3,7 +3,7 @@ package it.cnr.ittig.xmleges.editor.services.action.file.export;
 import it.cnr.ittig.services.manager.Service;
 
 /**
- * Servizio per esportare il documento corrente.
+ * Servizio per esportare il documento NIR corrente. 
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
