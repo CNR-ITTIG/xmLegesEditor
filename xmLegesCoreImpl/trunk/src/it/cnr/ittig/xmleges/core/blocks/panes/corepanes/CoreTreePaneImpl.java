@@ -27,10 +27,10 @@ import org.w3c.dom.Node;
 
 /**
  * <h1>Implementazione del servizio
- * <code>it.cnr.ittig.xmleges.editor.services.panes.strutturaxml.StrutturaXml</code>.
+ * <code>it.cnr.ittig.xmleges.core.services.panes.corepanes.CoreTreePane;</code>.
  * </h1>
  * <h1>Descrizione</h1>
- * Configura il pannello strutturaXml
+ * Configura il pannello ad Albero
  * <h1>Configurazione</h1>
  * La configurazione ha ilseguente tag:
  * <ul>
@@ -38,12 +38,10 @@ import org.w3c.dom.Node;
  * </ul>
  * <h1>Dipendenze</h1>
  * <ul>
- * <li>it.cnr.ittig.xmleges.editor.services.panes.tree.TreePane:1.0</li>
- * <li>it.cnr.ittig.xmleges.editor.services.frame.Frame:1.0</li>
  * <li>it.cnr.ittig.xmleges.core.services.panes.tree.TreePane:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.frame.Frame:1.0</li>
  * <li>it.cnr.ittig.xmleges.core.services.i18n.I18n:1.0</li>
- * <li>it.cnr.ittig.xmleges.editor.services.document.DocumentManager:1.0</li>
- * <li>it.cnr.ittig.xmleges.editor.services.dom.rinumerazione.Rinumerazione:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.document.DocumentManager:1.0</li>
  * </ul>
  * <h1>I18n</h1>
  * <ul>
@@ -65,7 +63,7 @@ import org.w3c.dom.Node;
  * </dl>
  * 
  * @version 1.0
- * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
+ * @author <a href="mailto:agnoloni@ittig.cnr.it">Tommaso Agnoloni</a>
  */
 public class CoreTreePaneImpl implements Pane, CoreTreePane, TreePaneCellRenderer, Serviceable, Configurable, Initializable {
 	Frame frame;

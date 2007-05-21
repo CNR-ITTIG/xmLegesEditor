@@ -9,16 +9,12 @@ import it.cnr.ittig.services.manager.Logger;
 import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
-import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.frame.Frame;
 import it.cnr.ittig.xmleges.core.services.panes.corepanes.CoreXsltPanes;
 import it.cnr.ittig.xmleges.core.services.panes.xsltpane.DeleteNextPrevAction;
 import it.cnr.ittig.xmleges.core.services.panes.xsltpane.InsertBreakAction;
 import it.cnr.ittig.xmleges.core.services.panes.xsltpane.XsltPane;
 import it.cnr.ittig.xmleges.core.services.panes.xslts.Xslts;
-import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
-import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 
 import java.util.Vector;
 
@@ -56,7 +52,7 @@ import org.w3c.dom.Node;
  * </dl>
  * 
  * @version 1.0
- * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
+ * @author <a href="mailto:agnoloni@ittig.cnr.it">Tommaso Agnoloni</a>
  */
 public class CoreXsltPanesImpl implements CoreXsltPanes, Loggable, Serviceable, Configurable, Initializable, InsertBreakAction, DeleteNextPrevAction {
 	Logger logger;
@@ -65,17 +61,8 @@ public class CoreXsltPanesImpl implements CoreXsltPanes, Loggable, Serviceable, 
 
 	Xslts xslts;
 
-	ServiceManager serviceManager;
-
-	DocumentManager documentManager;
-
-	DtdRulesManager dtdRulesManager;
-
-	UtilRulesManager utilRulesManager;
-
-	SelectionManager selectionManager;
-
-
+	ServiceManager serviceManager;	
+	
 	Configuration configuration;
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
@@ -88,10 +75,6 @@ public class CoreXsltPanesImpl implements CoreXsltPanes, Loggable, Serviceable, 
 		this.serviceManager = serviceManager;
 		frame = (Frame) serviceManager.lookup(Frame.class);
 		xslts = (Xslts) serviceManager.lookup(Xslts.class);
-		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
-		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
-		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 	}
 
 	// ////////////////////////////////////////////////// Configurable Interface

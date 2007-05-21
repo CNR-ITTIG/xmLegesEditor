@@ -15,7 +15,7 @@ import it.cnr.ittig.xmleges.core.services.panes.corepanes.CoreAttributesPane;
 
 /**
  * <h1>Implementazione del servizio
- * <code>it.cnr.ittig.xmleges.editor.services.panes.attributi.AttributiPane</code>.
+ * <code>it.cnr.ittig.xmleges; it.cnr.ittig.xmleges.core.services.panes.corepanes.CoreAttributesPane</code>.
  * </h1>
  * <h1>Descrizione</h1>
  * <h1>Configurazione</h1>
@@ -39,7 +39,7 @@ import it.cnr.ittig.xmleges.core.services.panes.corepanes.CoreAttributesPane;
  * General Public License </a></dd>
  * </dl>
  * 
- * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
+ * @author <a href="mailto:agnoloni@ittig.cnr.it">Tommaso Agnoloni</a>
  */
 public class CoreAttributesPaneImpl implements CoreAttributesPane, Loggable, Serviceable, Configurable, Initializable {
 	Logger logger;
