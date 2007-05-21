@@ -11,15 +11,12 @@ import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.services.manager.Startable;
 import it.cnr.ittig.xmleges.core.services.action.ActionManager;
-import it.cnr.ittig.xmleges.core.services.bars.Bars;
 import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentOpenedEvent;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
-import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.filetextfield.FileTextField;
-import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextField;
 import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextFieldEditor;
 import it.cnr.ittig.xmleges.core.services.preference.PreferenceManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
@@ -43,7 +40,6 @@ import java.util.EventObject;
 import java.util.Hashtable;
 import java.util.Properties;
 import java.util.StringTokenizer;
-import java.util.Vector;
 
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
@@ -107,8 +103,6 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 
 	DocumentManager documentManager;
 
-	Bars bars;
-
 	UtilMsg utilMsg;
 
 	UtilPdf utilPdf;
@@ -120,8 +114,6 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 	NirXslts xslts;
 		
 	FileExportForm fileExportForm;
-
-	ListTextField listTextField;
 
 	FileTextField fileTextField;
 
@@ -158,9 +150,7 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 		actionManager = (ActionManager) serviceManager.lookup(ActionManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
-		bars = (Bars) serviceManager.lookup(Bars.class);
 		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
-		listTextField = (ListTextField) serviceManager.lookup(ListTextField.class);
 		fileTextField = (FileTextField) serviceManager.lookup(FileTextField.class);
 		xslts = (NirXslts) serviceManager.lookup(NirXslts.class);
 		utilPdf = (UtilPdf) serviceManager.lookup(UtilPdf.class);
@@ -190,7 +180,6 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws Exception {
-		listTextField.setEditor(this);
 		exportBrowserAction = new ExportBrowserAction();
 		actionManager.registerAction("file.export.browser", exportBrowserAction);
 		exportHTMLAction = new ExportHTMLAction();
@@ -214,14 +203,9 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 
 	// /////////////////////////////////////////////////// Startable Interface
 	public void start() throws Exception {
-		Vector v = preferenceManager.getPreferenceAsVector(getClass().getName());
-		listTextField.setListElements(v);
 	}
 
 	public void stop() throws Exception {
-		Vector v = listTextField.getListElements();
-		preferenceManager.setPreference(getClass().getName(), v);
-
 		logger.debug("saving last exported...");
 		Properties p = preferenceManager.getPreferenceAsProperties(getClass().getName());
 		try {
@@ -310,6 +294,8 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 			return false;
 		}
 	}
+	
+	
     private String cmdWin(String cmd) {
     	
     	StringTokenizer token = new StringTokenizer(cmd, "\\");
@@ -390,8 +376,6 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 		if (dtdName.startsWith("nir") && !nirUtilDom.isDocCNR(null)){    // documenti NIR
 			xsl = new File(xslts.getXslt("xsl-nir-nocss").getAbsolutePath());
 			
-			
-			// FIXME spostare il check isDocMultivigente da qualche altra parte ?
 			// per documenti NIR multivigenti; apre la form di setting dataVigenza 
 			if(vigenza.isVigente()){
 				if(fileExportForm.openForm()){
@@ -402,8 +386,7 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 				}
 				else
 				   return false;
-			}
-			
+			}			
 		}   
 		else if (nirUtilDom.isDocCNR(null))  // documenti CNR
 			xsl = new File(xslts.getXslt("xsl-cnr").getAbsolutePath());
@@ -438,8 +421,6 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 		if (dtdName.startsWith("nir") && !nirUtilDom.isDocCNR(null)){  // documenti NIR
 			xsl = new File(xslts.getXslt("xsl-nir").getAbsolutePath());
 			
-			// FIXME spostare il check isDocMultivigente da qualche altra parte ?
-			
 			// per documenti NIR multivigenti; apre la form di setting dataVigenza 
 			if(vigenza.isVigente()){
 				if(fileExportForm.openForm()){
@@ -451,7 +432,6 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 				else
 				   return false;
 			}
-			
 		}
 		else if (nirUtilDom.isDocCNR(null))  // documenti CNR
 			xsl = new File(xslts.getXslt("xsl-cnr").getAbsolutePath());
