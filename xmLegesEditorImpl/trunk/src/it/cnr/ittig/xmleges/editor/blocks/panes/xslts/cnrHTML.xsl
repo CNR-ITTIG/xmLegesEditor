@@ -128,17 +128,22 @@
 
    <!-- Riferimenti a testi normativi esterni -->
    <xsl:if test="starts-with(@xlink:href, 'urn:nir')">
-      <a target="nirWindow">
+      <a>
          <xsl:attribute name="href">
-            <xsl:text>http://www.nir.it/cgi-bin/N2Ln?</xsl:text>
+            <xsl:text>http://www.nir.it/cgi-bin/N2Ln?urn:nir:</xsl:text>            
+    		<xsl:value-of select="substring-after(@xlink:href,'urn:nir:')"/>
+    
+    <!--
             <xsl:if test="contains(@xlink:href,';')">
                <xsl:value-of select="substring-before(substring-after(@xlink:href,'urn:nir:'),';')"/>
                <xsl:text>%3b</xsl:text>
-               <xsl:value-of select="substring-after(@xlink:href,';')"/>
+               <xsl:value-of select="substring-after(@xlink:href,';')"/>     
             </xsl:if>
             <xsl:if test="not(contains(@xlink:href,';'))">
                <xsl:value-of select="substring-after(@xlink:href,'urn:nir:')"/>
-            </xsl:if>
+            </xsl:if>           
+      -->      
+                   
          </xsl:attribute>
          <span class="rifEsterno"><xsl:value-of select="."/></span>
       </a>
