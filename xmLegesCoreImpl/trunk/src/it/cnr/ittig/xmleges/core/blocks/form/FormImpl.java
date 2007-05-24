@@ -122,6 +122,8 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 	JDialog dialog;
 
 	boolean dialogChanged = true;
+	
+	boolean settatoMainComponent = false;
 
 	// TODO configurazione
 	
@@ -484,7 +486,8 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 			newDialog.getRootPane().setDefaultButton(defaultButtons);
 		newDialog.getContentPane().add(btnPanel, BorderLayout.SOUTH);
 		try {
-			getForm().getFormAccessor().replaceBean("form.panel", mainPanel);
+			if (!settatoMainComponent)
+				getForm().getFormAccessor().replaceBean("form.panel", mainPanel);
 			if (title == null)
 				setName("form");
 			JLabel lblTitle = (JLabel) getForm().getComponentByName("form.title");
@@ -492,7 +495,9 @@ public class FormImpl implements Form, Loggable, Serviceable, Initializable {
 			JLabel lblIcon = (JLabel) getForm().getComponentByName("form.icon");
 			lblIcon.setIcon(icon);
 			if (help.hasKey(helpKey))
-				getForm().getFormAccessor("form.top").replaceBean("form.help",helpButton);
+				if (!settatoMainComponent)
+					getForm().getFormAccessor("form.top").replaceBean("form.help",helpButton);
+			settatoMainComponent=true;
 		} catch (Exception ex) {
 			logger.error(ex.toString(), ex);
 		}
