@@ -182,8 +182,7 @@
 				<!-- ======================================================== --> 	
 				
 			</head>
-			<base href="{$baseurl}" />
-			
+			<!--	PROBLEMI CON LE ANCORE 	base href="{$baseurl}" /	-->
 			<body>
 			<p style="font-weight:bold;">
 				<xsl:choose>
