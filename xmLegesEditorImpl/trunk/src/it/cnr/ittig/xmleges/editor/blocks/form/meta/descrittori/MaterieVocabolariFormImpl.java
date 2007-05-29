@@ -403,7 +403,7 @@ Serviceable, Initializable, ActionListener {
 		}
 
 		public String getErrorMessage() {
-			return "editor.form.meta.descrittori.msg.err.datialias";
+			return "editor.form.meta.descrittori.msg.err.datimaterie";
 		}
 
 		public Dimension getPreferredSize() {
