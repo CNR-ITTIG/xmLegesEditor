@@ -311,7 +311,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     		margin: 10 0 10 0;
     		font-size: small;
     	</xsl:attribute>
-        <xsl:apply-templates select="../*/*[name()='meta']/*"/>
+        <xsl:apply-templates select="../*/*[name()='meta']/*" mode="oneroot" />
     </xsl:element>    
 </xsl:template>
 
