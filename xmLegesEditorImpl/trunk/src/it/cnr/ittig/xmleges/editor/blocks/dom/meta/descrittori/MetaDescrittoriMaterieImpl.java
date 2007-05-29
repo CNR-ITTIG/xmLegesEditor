@@ -104,11 +104,13 @@ public class MetaDescrittoriMaterieImpl implements MetaDescrittoriMaterie , Logg
 		Node[] vocabolariList = UtilDom.getElementsByTagName(doc,activeMeta,"materie");
 		if(vocabolariList==null || vocabolariList.length==0)
 			return null;
-		
+
 		vocabolariOnDoc=new Vocabolario[vocabolariList.length];
 		for(int i=0;i<vocabolariList.length;i++){
 			vocabolariOnDoc[i]=new Vocabolario();
 			String nomeVocabolario=vocabolariList[i].getAttributes().getNamedItem("vocabolario").getNodeValue();
+			if (nomeVocabolario.equals(""))
+				nomeVocabolario = "-- name absent --";
 			vocabolariOnDoc[i].setNome(nomeVocabolario);
 			NodeList materieList=vocabolariList[i].getChildNodes();
 			boolean isEmpty=(materieList.getLength()==1 && (materieList.item(0).getAttributes().getNamedItem("valore")==null 
