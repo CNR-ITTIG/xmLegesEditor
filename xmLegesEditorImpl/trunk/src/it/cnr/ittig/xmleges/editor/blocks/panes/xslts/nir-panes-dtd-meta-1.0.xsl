@@ -28,11 +28,22 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <xsl:strip-space elements="*" />
 
 
-<xsl:template match="*[name()='redazionale']" />
-<xsl:template match="*[name()='lavoripreparatori']" />
-<xsl:template match="*[name()='disposizioni']" />
+<xsl:template name="visualizzaMeta">
+	<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='meta']/*[name()='descrittori']" mode="oneroot" />
+	<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='meta']/*[name()='inquadramento']" mode="oneroot"  />	
+	<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='meta']/*[name()='ciclodivita']" mode="oneroot"  />	
+	<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='meta']/*[name()='lavoripreparatori']" mode="oneroot"  />	
+	<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='meta']/*[name()='redazionale']" mode="oneroot"  />	
+	<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='meta']/*[name()='proprietario']" mode="oneroot"  />	
+	<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='meta']/*[name()='risoluzione']" mode="oneroot"  />	
+	<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']" mode="oneroot"  />	
+</xsl:template>
 
-<xsl:template match="*[name()='descrittori']">
+<xsl:template match="*[name()='redazionale']"  mode="oneroot" />
+<xsl:template match="*[name()='lavoripreparatori']" mode="oneroot" />
+<xsl:template match="*[name()='disposizioni']" mode="oneroot" />
+
+<xsl:template match="*[name()='descrittori']" mode="oneroot">
 	<center><b><xsl:value-of select="name()"/></b></center>
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 		<xsl:for-each select="*[name()='urn']">
@@ -54,7 +65,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 				<font color="blue"><xsl:value-of select="@valore"/></font>
 			</xsl:element>
 		</xsl:for-each>
-		<xsl:apply-templates select="*[name()='pubblicazione']" />
+		<xsl:apply-templates select="*[name()='pubblicazione']" mode="oneroot" />
 		
 <!--	RIMOSSO DALLA DTD 2.2		
 		<xsl:apply-templates select="*[name()='altrepubblicazioni']" />
@@ -80,7 +91,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 			</xsl:element>
 		</xsl:for-each>
 	</xsl:element>
-	<xsl:apply-templates select="*[name()='redazione']" />
+	<xsl:apply-templates select="*[name()='redazione']" mode="oneroot" />
 
 
 	<xsl:for-each select="*[name()='materie']">
@@ -97,7 +108,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		<br/><xsl:value-of select="@vocabolario"/>
 		<xsl:text>: </xsl:text>
 		<font color="blue">
-			<xsl:apply-templates select="*[name()='materia']" />
+			<xsl:apply-templates select="*[name()='materia']" mode="oneroot" />
 		</font>	
 	</xsl:for-each>
 
@@ -130,12 +141,12 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	</xsl:for-each>
 </xsl:template>
 
-<xsl:template match="*[name()='materia']" >
+<xsl:template match="*[name()='materia']"  mode="oneroot" >
     <xsl:value-of select="@valore"/>
     <xsl:text> </xsl:text>
 </xsl:template>
 
-<xsl:template match="*[name()='pubblicazione']" >
+<xsl:template match="*[name()='pubblicazione']"  mode="oneroot" >
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 	   	<xsl:attribute name="style">
 	            margin: 30 15 15 25;
@@ -159,7 +170,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		    </xsl:attribute>
 		    <xsl:value-of select="name()"/>
 		</xsl:element>	    
-		<xsl:apply-templates />
+		<xsl:apply-templates mode="oneroot" />
 	</xsl:template>
 	<xsl:template match="*[name()='altrepubblicazioni']/*" >
 		<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
@@ -176,7 +187,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	</xsl:template>
 fine rimosso dalla dtd 2.2-->
 
-<xsl:template match="*[name()='risoluzione']" >
+<xsl:template match="*[name()='risoluzione']"  mode="oneroot" >
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 		<center><b><xsl:value-of select="name()"/></b></center>
 		<font color="blue">
@@ -188,7 +199,7 @@ fine rimosso dalla dtd 2.2-->
 	</xsl:element>
 </xsl:template>
 
-<xsl:template match="*[name()='redazione']" >
+<xsl:template match="*[name()='redazione']"  mode="oneroot" >
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 	   	<xsl:attribute name="style">
 	            margin: 30 15 15 25;
@@ -204,15 +215,15 @@ fine rimosso dalla dtd 2.2-->
 	</xsl:element>
 </xsl:template>
 
-<xsl:template match="*[name()='ciclodivita']">
+<xsl:template match="*[name()='ciclodivita']" mode="oneroot" >
 	<center><b><xsl:value-of select="name()"/></b></center>
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-		<xsl:apply-templates />
+		<xsl:apply-templates mode="oneroot" />
 	</xsl:element>
 	<hr/>
 </xsl:template>
 
-<xsl:template match="*[name()='eventi']" >
+<xsl:template match="*[name()='eventi']"  mode="oneroot" >
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 	   	<xsl:attribute name="style">
 	            margin: 30 15 15 25;
@@ -246,7 +257,7 @@ fine rimosso dalla dtd 2.2-->
 	</xsl:for-each>
 </xsl:template>
 
-<xsl:template match="*[name()='relazioni']" >
+<xsl:template match="*[name()='relazioni']"  mode="oneroot" >
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 	   	<xsl:attribute name="style">
 	            margin: 30 15 15 25;
@@ -280,7 +291,7 @@ fine rimosso dalla dtd 2.2-->
 	</xsl:for-each>			      
 </xsl:template>						
 
-<xsl:template match="*[name()='inquadramento']">
+<xsl:template match="*[name()='inquadramento']" mode="oneroot" >
 	<center><b><xsl:value-of select="name()"/></b></center>
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 		<xsl:for-each select="*">
@@ -298,7 +309,7 @@ fine rimosso dalla dtd 2.2-->
 	<br/><hr/>
 </xsl:template>
 
-<xsl:template match="*[name()='infodoc']" >
+<xsl:template match="*[name()='infodoc']"  mode="oneroot" >
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 		Fonte: <font color="blue"><xsl:value-of select="@fonte"/></font><br/>
 		Funzione: <font color="blue"><xsl:value-of select="@funzione"/></font><br/>
@@ -309,13 +320,13 @@ fine rimosso dalla dtd 2.2-->
 </xsl:template>
 
 
-<xsl:template match="*[name()='infomancanticccccc']" >
+<xsl:template match="*[name()='infomancanticccccc']"  mode="oneroot" >
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 		non fatto
 	</xsl:element>
 </xsl:template>
 
-<xsl:template match="*[name()='oggetto'] | *[name()='proponenti'] | *[name()='infomancanti']" >
+<xsl:template match="*[name()='oggetto'] | *[name()='proponenti'] | *[name()='infomancanti']"  mode="oneroot" >
 	<xsl:for-each select="*">
 		<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 			<xsl:value-of select="name()"/>: <font color="blue"><xsl:value-of select="@valore"/></font>
@@ -325,7 +336,7 @@ fine rimosso dalla dtd 2.2-->
 
 
 
-<xsl:template match="*[name()='cnr:meta']">
+<xsl:template match="*[name()='cnr:meta']" mode="oneroot" >
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 	   	<xsl:attribute name="style">
 	            margin: 30 15 15 25;

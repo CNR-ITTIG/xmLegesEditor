@@ -87,7 +87,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 </xsl:template>
 
 <xsl:template match="*[name()='preambolo']">
-    <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
+    <xsl:element name="p" use-attribute-sets="XsltMapperSetClass">
         <xsl:call-template name="vigenza"/>	
     </xsl:element>
 </xsl:template>
@@ -198,8 +198,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 <xsl:template match="*[name()='corpo' or name()='alinea' or name()='coda']">
     <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
-    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-        <xsl:apply-templates />
+        <xsl:call-template name="vigenza"/>	
+<!--    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />-->
+<!--    	<xsl:apply-templates />-->
     </xsl:element>
 </xsl:template> 
 

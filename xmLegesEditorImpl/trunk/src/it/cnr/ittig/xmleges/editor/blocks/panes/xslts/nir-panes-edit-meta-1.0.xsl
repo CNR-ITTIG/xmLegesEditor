@@ -40,7 +40,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		</style>
 	</head>
 	<body>
-	<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='meta']/*" />
+	
+		<!--	xsl:apply-templates select="/*[name()='NIR']/*/*[name()='meta']/*" /	-->
+		<xsl:call-template name="visualizzaMeta" />
+	
 	</body>
 	</html>
 </xsl:template>

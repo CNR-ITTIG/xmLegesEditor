@@ -17,7 +17,6 @@
 	<xsl:param name="encoding"/>
 	<xsl:param name="baseurl"/>
 
-	
 	<xsl:template match="/">
 		<html>
 			<head>
@@ -222,7 +221,7 @@
 		</div>
 		<div class="meta">
         	<xsl:apply-templates select="/*/*/*[name()='meta']/*[name()='redazionale']/*[name()='nota']" />
-        </div>		
+        </div>
 	</xsl:template>		
 	
 
@@ -391,7 +390,9 @@
 	<!-- ========================== 	RUBRICA	 	============================== -->
 	
 	<xsl:template match="//*[name()='rubrica']">
-		<a name="{@id}"></a>
+		<xsl:element name="a">
+			<xsl:attribute name="name"><xsl:value-of select="../@id" />-rub</xsl:attribute>
+		</xsl:element>
 		<p class="rubrica">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
@@ -634,8 +635,8 @@
 			</xsl:choose>			
 		</li>
 	</xsl:template	-->
-	
-	<!--	RIMOSSI DALLA DTD 2.2	
+
+	<!--	RIMOSSI DALLA DTD 2.2
 	<xsl:template match="//*[name()='visto']">
 		<p class="visto">
 			<xsl:choose>
@@ -1054,6 +1055,13 @@
 			<xsl:when test="(local-name()='articolo' or local-name()='capo' or local-name()='titolo' or local-name()='libro' or local-name()='parte' or local-name()='sezione')">
 				<div class="allineadx"><a href="#n{@id}" name="t{@id}"><sup>{Vig.<xsl:value-of select="@id"/>}</sup></a></div>
 			</xsl:when>
+			<xsl:when test="local-name()='rubrica'">		<!--	si prende l'id dal padre	-->
+				<xsl:element name="a">
+					<xsl:attribute name="href">#n<xsl:value-of select="../@id" />-rub</xsl:attribute>
+					<xsl:attribute name="name">t<xsl:value-of select="../@id" />-rub</xsl:attribute>
+					<sup>{Vig.<xsl:value-of select="../@id"/>-rub}</sup>	
+				</xsl:element>
+			</xsl:when>
 			<xsl:otherwise>
 				<a href="#n{@id}" name="t{@id}"><sup>{Vig.<xsl:value-of select="@id"/>}</sup></a>
 			</xsl:otherwise>
@@ -1121,7 +1129,20 @@
 
 			<p>
 			<!-- link al testo -->
-			<a name="n{@id}" href="#t{@id}"> nota n. <xsl:value-of select="$num"/></a> (<xsl:value-of select="@id"/>)<xsl:text> - Modificato da: </xsl:text>
+			<xsl:choose>
+				<xsl:when test="local-name()='rubrica'">		<!--	si prende l'id dal padre	-->
+					<xsl:element name="a">
+						<xsl:attribute name="href">#t<xsl:value-of select="../@id" />-rub</xsl:attribute>
+						<xsl:attribute name="name">n<xsl:value-of select="../@id" />-rub</xsl:attribute>
+						nota n. <xsl:value-of select="$num"/>
+					</xsl:element>
+					 (<xsl:value-of select="../@id"/>-rub)
+				</xsl:when>
+				<xsl:otherwise>
+					<a name="n{@id}" href="#t{@id}"> nota n. <xsl:value-of select="$num"/></a> (<xsl:value-of select="@id"/>)
+				</xsl:otherwise>
+			</xsl:choose>			
+			<xsl:text> - Modificato da: </xsl:text>
 			<!-- link a NIR ricerca urn -->
 			<a href="http://www.nir.it/cgi-bin/N2Ln?{$urn}" title=" Dest. = http://www.nir.it/cgi-bin/N2Ln?{$urn}"> <xsl:value-of select="$urn" /> </a>
 				<xsl:choose>
