@@ -1,5 +1,9 @@
 package it.cnr.ittig.xmleges.editor.blocks.form.fileexport;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.Date;
+
 import it.cnr.ittig.services.manager.Initializable;
 import it.cnr.ittig.services.manager.Loggable;
 import it.cnr.ittig.services.manager.Logger;
@@ -8,14 +12,24 @@ import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.FormVerifier;
+import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.form.date.DateForm;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.editor.services.form.fileexport.FileExportForm;
 
 import it.cnr.ittig.xmleges.core.util.date.UtilDate;
 
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.DefaultListModel;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
+
 import javax.swing.ButtonGroup;
 import javax.swing.JRadioButton;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 
 /**
  * <h1>Implementazione del servizio <code>it.cnr.ittig.xmleges.editor.services.form.fileexport.FileExportForm</code>.</h1>
@@ -37,23 +51,34 @@ import javax.swing.JRadioButton;
  */
 
 
-//editor.form.fileexport.datavigenza
-//editor.form.fileexport.radio.monovigente
-//editor.form.fileexport.radio.multivigente
-
 public class FileExportFormImpl implements FileExportForm, Loggable, Serviceable, Initializable, FormVerifier {
 
 	Logger logger;
 	Form form;
 	DateForm dataVigenza;
 	
+	JList sceltaDataVigenza;
+	JLabel etichettaVigenze;
+	
 	JRadioButton radioMonovigente;
 	JRadioButton radioMultivigente;
 	
 	UtilMsg utilmsg;
-	
 
 	String errorMessage = "";
+	
+	DocumentManager documentManager;
+	
+	DefaultListModel listModel = new DefaultListModel();
+	
+	MouseAdapter mouseAdapter = new MouseAdapter() {
+		public void mouseClicked(MouseEvent e) {
+			if (SwingUtilities.isLeftMouseButton(e)) {
+				radioMonovigente.setSelected(true);				
+				dataVigenza.set(new Date((String) listModel.getElementAt(sceltaDataVigenza.getSelectedIndex())));
+			}
+		}
+	};
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -65,6 +90,7 @@ public class FileExportFormImpl implements FileExportForm, Loggable, Serviceable
 		form = (Form) serviceManager.lookup(Form.class);
 		dataVigenza = (DateForm) serviceManager.lookup(DateForm.class);	
 		utilmsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
+		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 	}
 
 
@@ -75,6 +101,8 @@ public class FileExportFormImpl implements FileExportForm, Loggable, Serviceable
 			} catch (Exception ex) {
 				logger.error(ex.getMessage(), ex);
 			}
+		listModel.removeAllElements();
+		setDateDiVigenza();
 		dataVigenza.set(null);
 		form.showDialog();
 		return form.isOk();
@@ -86,18 +114,24 @@ public class FileExportFormImpl implements FileExportForm, Loggable, Serviceable
 	public void initialize() throws java.lang.Exception {
 		form.setMainComponent(this.getClass().getResourceAsStream("FileExport.jfrm"));
 		form.replaceComponent("editor.form.fileexport.datavigenza", dataVigenza.getAsComponent());
+		sceltaDataVigenza = (JList) form.getComponentByName("editor.form.fileexport.datevigenza");
+		sceltaDataVigenza.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		sceltaDataVigenza.setModel(listModel);
+		sceltaDataVigenza.addMouseListener(mouseAdapter);
+		
 		radioMonovigente = (JRadioButton) form.getComponentByName("editor.form.fileexport.radio.monovigente");
 		radioMultivigente = (JRadioButton) form.getComponentByName("editor.form.fileexport.radio.multivigente");
+		etichettaVigenze = (JLabel) form.getComponentByName("editor.form.fileexport.etiVigenze");
 		ButtonGroup grupporadio = new ButtonGroup();
 		grupporadio.add(radioMonovigente);
 		grupporadio.add(radioMultivigente);
 		radioMonovigente.setSelected(true);
 		dataVigenza.set(null);
-		form.setSize(350, 170);
+		form.setSize(250, 270);
 		form.setName("editor.form.fileexport");
 		form.addFormVerifier(this);		
 		
-		form.setHelpKey("help.contents.form.fileexport");
+		form.setHelpKey("help.contents.form.fileexport");		
 	}
 
 	
@@ -140,5 +174,14 @@ public class FileExportFormImpl implements FileExportForm, Loggable, Serviceable
 		return radioMultivigente.isSelected();
 	}
 	
+	private void setDateDiVigenza() {
+		Document doc = documentManager.getDocumentAsDom();
+		NodeList lista = doc.getElementsByTagName("evento");
+		String temp;
+		for(int i=0; i<lista.getLength();i++) {
+			temp=lista.item(i).getAttributes().getNamedItem("data").getNodeValue();
+			listModel.addElement(temp.substring(6, 8)+"/"+temp.substring(4, 6)+"/"+temp.substring(0, 4));
+		}
+	}
 }
 	
