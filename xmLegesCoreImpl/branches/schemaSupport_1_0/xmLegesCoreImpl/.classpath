@@ -20,5 +20,8 @@
 	<classpathentry kind="lib" path="lib/logkit-1.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/xsc.jar"/>
 	<classpathentry kind="lib" path="lib/xsc_eval_key.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.emf.common_2.2.1.v200705141058.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.emf.ecore_2.2.3.v200705141058.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.xsd_2.2.3.v200705141058.jar" sourcepath="lib/src.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
