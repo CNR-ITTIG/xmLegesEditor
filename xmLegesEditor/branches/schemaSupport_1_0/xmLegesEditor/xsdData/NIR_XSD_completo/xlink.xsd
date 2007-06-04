@@ -1,0 +1,11 @@
+<xsd:schema targetNamespace="http://www.w3.org/1999/xlink" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns="http://www.normeinrete.it/nir/2.2/" xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" xmlns:xlink="http://www.w3.org/1999/xlink" elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:import namespace="http://www.w3.org/HTML/1998/html4" schemaLocation="./h.xsd"/>
+	<xsd:import namespace="http://www.normeinrete.it/nir/2.2/" schemaLocation="./nirstrict.xsd"/>
+	<xsd:import namespace="http://www.normeinrete.it/nir/disposizioni/2.2/" schemaLocation="./dsp.xsd"/>
+
+	<xsd:attribute name="type" type="linktype" fixed="simple" />
+
+	<xsd:attribute name="href" type="uri"/>
+
+</xsd:schema>

@@ -1,0 +1,476 @@
+<xsd:schema 
+xmlns:xlink="http://www.w3.org/1999/xlink" 
+xmlns:h="http://www.w3.org/HTML/1998/html4" 
+targetNamespace="http://www.normeinrete.it/nir/2.2/" 
+xmlns="http://www.normeinrete.it/nir/2.2/" 
+xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" 
+elementFormDefault="qualified" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+>
+
+	<xsd:import namespace="http://www.w3.org/1999/xlink" schemaLocation="./xlink.xsd"/>
+	<xsd:import namespace="http://www.w3.org/HTML/1998/html4" schemaLocation="./h.xsd"/>
+
+	<xsd:import namespace="http://www.normeinrete.it/nir/disposizioni/2.2/" schemaLocation="./dsp.xsd"/>
+
+
+	<xsd:annotation>
+		<xsd:documentation>
+		 =====================================================================        
+		            Modello dei documenti di NormeInRete (NIR)                               
+		                                                                                     
+		            norme: elementi ed attributi con contenuto normativo                     
+		            Dipende da: 'nirstrict' oppure 'nirloose'                                
+		                                                                                     
+		          Versione  2.2                                                              
+		          Release   18/04/2007                                                       
+		          Fabio Vitali - UniBo                                                       
+		                                                                                     
+		            Per un'introduzione, si veda il documento 'note.html'                    
+		        ===================================================================== 
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		 =====================================================================
+		
+		Strutture fondamentali dei documenti normativi
+		
+		===================================================================== 
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:complexType name="docarticolato"  >
+		<xsd:sequence >
+			<xsd:element ref="meta" />
+			<xsd:element ref="intestazione" />
+			<xsd:element ref="formulainiziale" />
+			<xsd:element ref="articolato" />
+			<xsd:element ref="formulafinale" />
+			<xsd:element ref="conclusione" />
+			<xsd:element ref="annessi" minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+		<xsd:attributeGroup ref="globalinorma"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="semiarticolato"  >
+		<xsd:sequence >
+			<xsd:element ref="meta" />
+			<xsd:element ref="intestazione" minOccurs="0" maxOccurs="1" />
+			<xsd:element ref="formulainiziale" minOccurs="0" maxOccurs="1" />
+			<xsd:sequence minOccurs="0" maxOccurs="1" >
+				<xsd:group ref="genstruct" />
+			</xsd:sequence>
+			<xsd:element ref="formulafinale" minOccurs="0" maxOccurs="1" />
+			<xsd:element ref="conclusione" minOccurs="0" maxOccurs="1" />
+			<xsd:element ref="annessi" minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+		<xsd:attributeGroup ref="globalinorma"/>
+	</xsd:complexType>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		 =====================================================================
+		
+		Elementi dell'intestazione
+		
+		===================================================================== 
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:element name="intestazione" >
+		<xsd:complexType mixed="true">
+			<xsd:choice minOccurs="0" maxOccurs="unbounded" >
+				<xsd:group ref="elinline" />
+				<xsd:element ref="tipoDoc" />
+				<xsd:element ref="dataDoc" />
+				<xsd:element ref="numDoc" />
+				<xsd:element ref="titoloDoc" />
+				<xsd:element ref="emanante" />
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="tipoDoc"  type="inline" />
+
+	<xsd:element name="numDoc"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="inline">
+					<xsd:attributeGroup ref="nomefac"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="titoloDoc"  type="inlinefac" />
+
+	<xsd:element name="emanante"  type="inline" />
+
+	<xsd:element name="dataDoc"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="inline">
+					<xsd:attributeGroup ref="data"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		 =====================================================================
+		
+		Formula iniziale e finale
+		
+		===================================================================== 
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:element name="formulainiziale" >
+		<xsd:complexType mixed="true">
+			<xsd:choice minOccurs="0" maxOccurs="unbounded" >
+				<xsd:group ref="elinline" />
+				<xsd:group ref="allblocchi" />
+				<xsd:element ref="preambolo" />
+			</xsd:choice>
+				<xsd:attributeGroup ref="globalifac"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="formulafinale"  type="ParaLevel" />
+
+	<xsd:element name="preambolo" >
+		<xsd:complexType mixed="true">
+			<xsd:choice minOccurs="0" maxOccurs="unbounded" >
+				<xsd:group ref="elinline" />
+				<xsd:group ref="allblocchi" />
+				<xsd:element ref="inlinemeta" />
+			</xsd:choice>
+				<xsd:attributeGroup ref="globalifac"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="decorazione" >
+		<xsd:complexType mixed="true">
+			<xsd:choice minOccurs="0" maxOccurs="unbounded" >
+				<xsd:group ref="elinline" />
+				<xsd:element ref="rango" />
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="rango"  >
+		<xsd:complexType>
+			<xsd:attribute name="tipo" type="tiporango" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		 =====================================================================
+		
+		Elementi dell'articolato
+		
+		===================================================================== 
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:element name="articolato"  type="CMcompleto" />
+
+	<xsd:element name="libro"  type="CMlibro" />
+
+	<xsd:element name="parte"  type="CMparte" />
+
+	<xsd:element name="titolo"  type="CMtitolo" />
+
+	<xsd:element name="capo"  type="CMcapo" />
+
+	<xsd:element name="sezione"  type="CMsezione" />
+
+	<xsd:element name="paragrafo"  type="CMparagrafo" />
+
+	<xsd:element name="articolo"  type="CMarticolo" />
+
+	<xsd:element name="rubrica"  type="inlinefac" />
+
+	<xsd:element name="num"  type="inline" />
+
+	<xsd:annotation>
+		<xsd:documentation>
+		 =====================================================================
+		
+		Elementi sotto l'articolo
+		
+		===================================================================== 
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:element name="comma"  type="CMcomma" />
+
+	<xsd:element name="el"  type="CMel" />
+
+	<xsd:element name="en"  type="CMen" />
+
+	<xsd:element name="ep"  type="CMep" />
+
+	<xsd:element name="corpo"  type="ParaLevel" />
+
+	<xsd:element name="alinea"  type="inline" />
+
+	<xsd:element name="coda"  type="inline" />
+
+	<xsd:annotation>
+		<xsd:documentation>
+		 =====================================================================
+		
+		Elementi della conclusione
+		
+		===================================================================== 
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:element name="conclusione" >
+		<xsd:complexType mixed="true">
+			<xsd:choice minOccurs="0" maxOccurs="unbounded" >
+				<xsd:group ref="elinline" />
+				<xsd:element ref="dataeluogo" />
+				<xsd:element ref="firma" />
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="dataeluogo"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="inline">
+					<xsd:attributeGroup ref="data"/>
+					<xsd:attributeGroup ref="dove"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="firma"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="ParaLevel">
+					<xsd:attribute name="tipo" type="tipofirma" default="sottoscrizione" />
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		 =====================================================================
+		
+		Elementi degli annessi
+		
+		===================================================================== 
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:element name="annessi" >
+		<xsd:complexType >
+			<xsd:sequence >
+				<xsd:element ref="elencoAnnessi" minOccurs="0" maxOccurs="1" />
+				<xsd:element ref="annesso" minOccurs="1" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="elencoAnnessi"  type="blocchi" />
+
+	<xsd:element name="annesso" >
+		<xsd:complexType >
+			<xsd:sequence >
+				<xsd:element ref="inlinemeta" minOccurs="0" maxOccurs="1" />
+				<xsd:element ref="testata" minOccurs="0" maxOccurs="1" />
+				<xsd:choice >
+					<xsd:group ref="NormaNazionale" />
+					<xsd:group ref="AltreNorme" />
+					<xsd:group ref="DocumentiGenerici" />
+					<xsd:element ref="rifesterno" />
+				</xsd:choice>
+			</xsd:sequence>
+				<xsd:attributeGroup ref="globalireq"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="rifesterno"  >
+		<xsd:complexType>
+			<xsd:attributeGroup ref="link"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="testata" >
+		<xsd:complexType >
+			<xsd:sequence >
+				<xsd:element ref="denAnnesso" minOccurs="0" maxOccurs="1" />
+				<xsd:element ref="titAnnesso" minOccurs="0" maxOccurs="1" />
+				<xsd:element ref="preAnnesso" minOccurs="0" maxOccurs="1" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="denAnnesso"  type="ParaLevel" />
+
+	<xsd:element name="titAnnesso"  type="ParaLevel" />
+
+	<xsd:element name="preAnnesso"  type="ParaLevel" />
+
+	<xsd:annotation>
+		<xsd:documentation>
+		 =====================================================================
+		
+		Elementi inline e speciali con semantica rilevante
+		
+		===================================================================== 
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:element name="mrif"  type="inlinefac" />
+
+	<xsd:element name="irif"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="inlinefac">
+					<xsd:attributeGroup ref="link"/>
+					<xsd:attribute name="finoa" type="uri" use="required"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="rif"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="inlinefac">
+					<xsd:attributeGroup ref="link"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="mod" >
+		<xsd:complexType mixed="true">
+			<xsd:choice minOccurs="0" maxOccurs="unbounded" >
+				<xsd:group ref="elinline" />
+				<xsd:element ref="virgolette" />
+			</xsd:choice>
+				<xsd:attributeGroup ref="globalireq"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:group name="CMvirg">
+		<xsd:choice>
+			<xsd:element ref="libro"/>
+			<xsd:element ref="parte"/>
+			<xsd:element ref="titolo"/>
+			<xsd:element ref="capo"/>
+			<xsd:element ref="sezione"/>
+			<xsd:element ref="paragrafo"/>
+			<xsd:element ref="articolo"/>
+			<xsd:element ref="comma"/>
+			<xsd:element ref="el"/>
+			<xsd:element ref="en"/>
+			<xsd:element ref="ep"/>
+			<xsd:element ref="contenitore"/>
+			<xsd:element ref="gerarchia"/>
+			<xsd:element ref="partizione"/>
+			<xsd:group ref="elinline" />
+			<xsd:group ref="allblocchi" />
+		</xsd:choice>
+	</xsd:group>
+
+	<xsd:element name="virgolette" >
+		<xsd:complexType mixed="true">
+			<xsd:choice minOccurs="0" maxOccurs="unbounded" >
+				<xsd:group ref="CMvirg" />
+			</xsd:choice>
+				<xsd:attribute name="tipo"  default="parola" >
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="parola" />
+							<xsd:enumeration value="struttura" />
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:attribute>
+				<xsd:attributeGroup ref="globalireq"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="def"  type="inline" />
+
+	<xsd:element name="atto"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="inline">
+					<xsd:attributeGroup ref="codice"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="soggetto"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="inline">
+					<xsd:attributeGroup ref="codice"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="ente"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="inline">
+					<xsd:attributeGroup ref="codice"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="data"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="inline">
+					<xsd:attributeGroup ref="data"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="luogo"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="inline">
+					<xsd:attributeGroup ref="dove"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="importo"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="inline">
+					<xsd:attribute name="valore" type="numero"/>
+					<xsd:attribute name="valuta" type="valute" default="EU" />
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		 =====================================================================        
+		            fine del file norme.dtd                                                  
+		        ===================================================================== 
+		</xsd:documentation>
+	</xsd:annotation>
+
+</xsd:schema>

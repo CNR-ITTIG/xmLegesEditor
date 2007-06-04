@@ -1,0 +1,638 @@
+<xsd:schema 
+xmlns:xlink="http://www.w3.org/1999/xlink" 
+xmlns:h="http://www.w3.org/HTML/1998/html4" 
+targetNamespace="http://www.normeinrete.it/nir/2.2/" 
+xmlns="http://www.normeinrete.it/nir/2.2/" 
+xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" 
+elementFormDefault="qualified" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+>
+
+	<xsd:import namespace="http://www.w3.org/1999/xlink" schemaLocation="./xlink.xsd"/>
+	<xsd:import namespace="http://www.w3.org/HTML/1998/html4" schemaLocation="./h.xsd"/>
+
+	<xsd:import namespace="http://www.normeinrete.it/nir/disposizioni/2.2/" schemaLocation="./dsp.xsd"/>
+
+
+	<xsd:annotation>
+		<xsd:documentation>
+		 =====================================================================        
+		            Modello dei documenti di NormeInRete (NIR)                               
+		                                                                                     
+		            globali: elementi ed attributi comuni o generici                         
+		            Dipende da: 'nirstrict' oppure 'nirloose'                                
+		                                                                                     
+		          Versione  2.2                                                              
+		          Release   18/04/2007                                                       
+		          Fabio Vitali - UniBo                                                       
+		                                                                                     
+		          Per un'introduzione, si veda il documento 'note.html'                      
+		        ===================================================================== 
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		 =====================================================================
+		
+		Entita' principali
+		
+		===================================================================== 
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:attributeGroup name="link">
+		<xsd:attribute ref="xlink:type" />
+		<xsd:attribute ref="xlink:href" />
+	</xsd:attributeGroup>
+
+	<xsd:attributeGroup name="nome">
+		<xsd:attribute name="nome" type="NIRnome" use="required"/>
+	</xsd:attributeGroup>
+
+	<xsd:attributeGroup name="nomefac">
+		<xsd:attribute name="nome" type="NIRnome"/>
+	</xsd:attributeGroup>
+
+	<xsd:attributeGroup name="tempi">
+		<xsd:attribute name="iniziovigore" type="uri"/>
+		<xsd:attribute name="finevigore" type="uri"/>
+		<xsd:attribute name="inizioefficacia" type="uri"/>
+		<xsd:attribute name="fineefficacia" type="uri"/>
+	</xsd:attributeGroup>
+
+	<xsd:attributeGroup name="vigenza">
+		<xsd:attributeGroup ref="tempi"/>
+		<xsd:attribute name="rel" type="uri"/>
+		<xsd:attribute name="status" type="status"/>
+	</xsd:attributeGroup>
+
+	<xsd:attributeGroup name="implicita">
+		<xsd:attribute name="implicita" type="sino" default="no" />
+	</xsd:attributeGroup>
+
+	<xsd:attributeGroup name="css">
+		<xsd:attribute ref="h:style" />
+		<xsd:attribute ref="h:class" />
+		<xsd:attribute ref="h:title" />
+	</xsd:attributeGroup>
+
+	<xsd:attributeGroup name="idreq">
+		<xsd:attribute name="id" type="id" use="required"/>
+	</xsd:attributeGroup>
+
+	<xsd:attributeGroup name="idfac">
+		<xsd:attribute name="id" type="id"/>
+	</xsd:attributeGroup>
+
+	<xsd:attributeGroup name="idnorma">
+		<xsd:attribute name="id" type="anytoken"/>
+	</xsd:attributeGroup>
+
+	<xsd:attributeGroup name="globalireq">
+		<xsd:attributeGroup ref="css"/>
+		<xsd:attributeGroup ref="idreq"/>
+		<xsd:attributeGroup ref="vigenza"/>
+	</xsd:attributeGroup>
+
+	<xsd:attributeGroup name="globalifac">
+		<xsd:attributeGroup ref="css"/>
+		<xsd:attributeGroup ref="idfac"/>
+		<xsd:attributeGroup ref="vigenza"/>
+	</xsd:attributeGroup>
+
+	<xsd:attributeGroup name="globalinorma">
+		<xsd:attributeGroup ref="css"/>
+		<xsd:attributeGroup ref="idnorma"/>
+		<xsd:attributeGroup ref="vigenza"/>
+	</xsd:attributeGroup>
+
+	<xsd:attributeGroup name="data">
+		<xsd:attribute name="norm" type="NIRdate" use="required"/>
+	</xsd:attributeGroup>
+
+	<xsd:attributeGroup name="dove">
+		<xsd:attribute name="codice" type="NIRdove" use="required"/>
+	</xsd:attributeGroup>
+
+	<xsd:attributeGroup name="codice">
+		<xsd:attribute name="codice" type="NIRcodice" use="required"/>
+	</xsd:attributeGroup>
+
+	<xsd:attributeGroup name="val">
+		<xsd:attribute name="valore" type="anystring" use="required"/>
+	</xsd:attributeGroup>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		 =====================================================================
+		
+		Entita': content model comuni ai vari tipi di elementi
+		
+		===================================================================== 
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:group name="liste">
+		<xsd:choice>
+			<xsd:element ref="h:ul"/>
+			<xsd:element ref="h:ol"/>
+			<xsd:element ref="h:dl"/>
+		</xsd:choice>
+	</xsd:group>
+
+	<xsd:group name="genvuoti">
+		<xsd:choice>
+			<xsd:element ref="vuoto"/>
+			<xsd:element ref="ndr"/>
+		</xsd:choice>
+	</xsd:group>
+
+	<xsd:group name="geninline">
+		<xsd:sequence>
+			<xsd:element ref="inlinea"/>
+		</xsd:sequence>
+	</xsd:group>
+
+	<xsd:group name="genblocchi">
+		<xsd:sequence>
+			<xsd:element ref="blocco"/>
+		</xsd:sequence>
+	</xsd:group>
+
+	<xsd:group name="genstruct">
+		<xsd:choice>
+			<xsd:element ref="contenitore"/>
+			<xsd:element ref="gerarchia"/>
+			<xsd:element ref="articolato"/>
+		</xsd:choice>
+	</xsd:group>
+
+	<xsd:group name="txtvuoti">
+		<xsd:choice>
+			<xsd:element ref="h:br"/>
+			<xsd:element ref="h:hr"/>
+			<xsd:element ref="h:img"/>
+		</xsd:choice>
+	</xsd:group>
+
+	<xsd:group name="txtinline">
+		<xsd:choice>
+			<xsd:element ref="h:span"/>
+			<xsd:element ref="h:i"/>
+			<xsd:element ref="h:u"/>
+			<xsd:element ref="h:b"/>
+			<xsd:element ref="h:sup"/>
+			<xsd:element ref="h:sub"/>
+			<xsd:element ref="h:a"/>
+		</xsd:choice>
+	</xsd:group>
+
+	<xsd:group name="txtblocchi">
+		<xsd:choice>
+			<xsd:element ref="h:div"/>
+			<xsd:element ref="h:p"/>
+			<xsd:element ref="h:form"/>
+			<xsd:element ref="h:table"/>
+			<xsd:element ref="h:object"/>
+			<xsd:group ref="liste" />
+		</xsd:choice>
+	</xsd:group>
+
+	<xsd:group name="nrminline">
+		<xsd:choice>
+			<xsd:element ref="rif"/>
+			<xsd:element ref="irif"/>
+			<xsd:element ref="mrif"/>
+			<xsd:element ref="mod"/>
+			<xsd:element ref="def"/>
+			<xsd:element ref="atto"/>
+			<xsd:element ref="soggetto"/>
+			<xsd:element ref="luogo"/>
+			<xsd:element ref="ente"/>
+			<xsd:element ref="data"/>
+			<xsd:element ref="importo"/>
+		</xsd:choice>
+	</xsd:group>
+
+	<xsd:group name="nrmstruct">
+		<xsd:choice>
+			<xsd:element ref="intestazione"/>
+			<xsd:element ref="formulainiziale"/>
+			<xsd:element ref="preambolo"/>
+			<xsd:element ref="formulafinale"/>
+			<xsd:element ref="conclusione"/>
+			<xsd:element ref="annessi"/>
+		</xsd:choice>
+	</xsd:group>
+
+	<xsd:group name="allvuoti">
+		<xsd:choice>
+			<xsd:group ref="genvuoti" />
+			<xsd:group ref="txtvuoti" />
+		</xsd:choice>
+	</xsd:group>
+
+	<xsd:group name="allinline">
+		<xsd:choice>
+			<xsd:group ref="geninline" />
+			<xsd:group ref="txtinline" />
+			<xsd:group ref="nrminline" />
+		</xsd:choice>
+	</xsd:group>
+
+	<xsd:group name="allblocchi">
+		<xsd:choice>
+			<xsd:group ref="genblocchi" />
+			<xsd:group ref="txtblocchi" />
+		</xsd:choice>
+	</xsd:group>
+
+	<xsd:group name="allstruct">
+		<xsd:choice>
+			<xsd:group ref="genstruct" />
+			<xsd:group ref="nrmstruct" />
+		</xsd:choice>
+	</xsd:group>
+
+	<xsd:group name="elinline">
+		<xsd:choice>
+			<xsd:group ref="allinline" />
+			<xsd:group ref="allvuoti" />
+		</xsd:choice>
+	</xsd:group>
+
+	<xsd:group name="strutture">
+		<xsd:sequence>
+			<xsd:group ref="allstruct" minOccurs="1" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:group>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		 =====================================================================
+		
+		tipi aggiuntivi del DTD++
+		
+		===================================================================== 
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:complexType name="inline"  mixed="true">
+		<xsd:choice minOccurs="0" maxOccurs="unbounded" >
+			<xsd:group ref="elinline" />
+		</xsd:choice>
+	</xsd:complexType>
+
+	<xsd:complexType name="blocchi"  >
+		<xsd:sequence minOccurs="1" maxOccurs="unbounded" >
+			<xsd:group ref="allblocchi" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ParaLevel"  mixed="true">
+		<xsd:choice minOccurs="0" maxOccurs="unbounded" >
+			<xsd:group ref="elinline" />
+			<xsd:group ref="allblocchi" />
+		</xsd:choice>
+		<xsd:attributeGroup ref="globalifac"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="ParaLevelReq"  mixed="true">
+		<xsd:choice minOccurs="0" maxOccurs="unbounded" >
+			<xsd:group ref="elinline" />
+			<xsd:group ref="allblocchi" />
+		</xsd:choice>
+		<xsd:attributeGroup ref="globalireq"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="valore"  >
+		<xsd:attributeGroup ref="val"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="empty"  >
+	</xsd:complexType>
+
+	<xsd:complexType name="emptyfac"  >
+		<xsd:attributeGroup ref="globalifac"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="emptyreq"  >
+		<xsd:attributeGroup ref="globalireq"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="inlinefac"  mixed="true">
+		<xsd:complexContent>
+			<xsd:extension base="inline">
+				<xsd:attributeGroup ref="globalifac"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="inlinereq"  mixed="true">
+		<xsd:complexContent>
+			<xsd:extension base="inline">
+				<xsd:attributeGroup ref="globalireq"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="blocchireq"  >
+		<xsd:complexContent>
+			<xsd:extension base="blocchi">
+				<xsd:attributeGroup ref="globalireq"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="blocchifac"  >
+		<xsd:complexContent>
+			<xsd:extension base="blocchi">
+				<xsd:attributeGroup ref="globalifac"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		 =====================================================================
+		
+		Nota del redattore
+		
+		===================================================================== 
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:element name="ndr"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="inlinefac">
+					<xsd:attributeGroup ref="link"/>
+					<xsd:attribute name="num" type="uri"/>
+					<xsd:attribute name="valore" type="anystring"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		 =====================================================================
+		
+		Elementi generici del documento semi-articolato
+		
+		===================================================================== 
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:element name="vuoto"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="emptyfac">
+					<xsd:attributeGroup ref="nome"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="inlinea"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="inlinefac">
+					<xsd:attributeGroup ref="nome"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="blocco"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="inlinereq">
+					<xsd:attributeGroup ref="nome"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="contenitore" >
+		<xsd:complexType >
+			<xsd:sequence >
+				<xsd:element ref="inlinemeta" minOccurs="0" maxOccurs="1" />
+				<xsd:choice minOccurs="1" maxOccurs="unbounded" >
+					<xsd:group ref="allblocchi" />
+					<xsd:element ref="contenitore" />
+					<xsd:element ref="gerarchia" />
+					<xsd:element ref="lista" />
+				</xsd:choice>
+			</xsd:sequence>
+				<xsd:attributeGroup ref="globalireq"/>
+				<xsd:attributeGroup ref="nome"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="partizione"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="CMpartizione">
+					<xsd:attributeGroup ref="nome"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="lista"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="CMlista">
+					<xsd:attributeGroup ref="nome"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="gerarchiabase"  >
+		<xsd:sequence >
+			<xsd:element ref="num" minOccurs="0" maxOccurs="1" />
+			<xsd:element ref="tit" minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+		<xsd:attributeGroup ref="globalireq"/>
+		<xsd:attributeGroup ref="nome"/>
+	</xsd:complexType>
+
+	<xsd:element name="gerarchia" >
+		<xsd:complexType >
+			<xsd:sequence >
+				<xsd:element ref="inlinemeta" minOccurs="0" maxOccurs="1" />
+				<xsd:choice minOccurs="1" maxOccurs="unbounded" >
+					<xsd:element ref="l1" />
+					<xsd:element ref="l2" />
+					<xsd:element ref="l3" />
+					<xsd:element ref="l4" />
+					<xsd:element ref="l5" />
+					<xsd:element ref="l6" />
+					<xsd:element ref="l7" />
+					<xsd:element ref="l8" />
+					<xsd:element ref="l9" />
+				</xsd:choice>
+			</xsd:sequence>
+				<xsd:attributeGroup ref="globalireq"/>
+				<xsd:attributeGroup ref="nome"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="l1"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="gerarchiabase">
+					<xsd:choice minOccurs="1" maxOccurs="unbounded" >
+						<xsd:element ref="contenitore" />
+						<xsd:element ref="l2" />
+						<xsd:element ref="l3" />
+						<xsd:element ref="l4" />
+						<xsd:element ref="l5" />
+						<xsd:element ref="l6" />
+						<xsd:element ref="l7" />
+						<xsd:element ref="l8" />
+						<xsd:element ref="l9" />
+					</xsd:choice>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="l2"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="gerarchiabase">
+					<xsd:choice minOccurs="1" maxOccurs="unbounded" >
+						<xsd:element ref="contenitore" />
+						<xsd:element ref="l3" />
+						<xsd:element ref="l4" />
+						<xsd:element ref="l5" />
+						<xsd:element ref="l6" />
+						<xsd:element ref="l7" />
+						<xsd:element ref="l8" />
+						<xsd:element ref="l9" />
+					</xsd:choice>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="l3"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="gerarchiabase">
+					<xsd:choice minOccurs="1" maxOccurs="unbounded" >
+						<xsd:element ref="contenitore" />
+						<xsd:element ref="l4" />
+						<xsd:element ref="l5" />
+						<xsd:element ref="l6" />
+						<xsd:element ref="l7" />
+						<xsd:element ref="l8" />
+						<xsd:element ref="l9" />
+					</xsd:choice>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="l4"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="gerarchiabase">
+					<xsd:choice minOccurs="1" maxOccurs="unbounded" >
+						<xsd:element ref="contenitore" />
+						<xsd:element ref="l5" />
+						<xsd:element ref="l6" />
+						<xsd:element ref="l7" />
+						<xsd:element ref="l8" />
+						<xsd:element ref="l9" />
+					</xsd:choice>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="l5"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="gerarchiabase">
+					<xsd:choice minOccurs="1" maxOccurs="unbounded" >
+						<xsd:element ref="contenitore" />
+						<xsd:element ref="l6" />
+						<xsd:element ref="l7" />
+						<xsd:element ref="l8" />
+						<xsd:element ref="l9" />
+					</xsd:choice>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="l6"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="gerarchiabase">
+					<xsd:choice minOccurs="1" maxOccurs="unbounded" >
+						<xsd:element ref="contenitore" />
+						<xsd:element ref="l7" />
+						<xsd:element ref="l8" />
+						<xsd:element ref="l9" />
+					</xsd:choice>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="l7"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="gerarchiabase">
+					<xsd:choice minOccurs="1" maxOccurs="unbounded" >
+						<xsd:element ref="contenitore" />
+						<xsd:element ref="l8" />
+						<xsd:element ref="l9" />
+					</xsd:choice>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="l8"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="gerarchiabase">
+					<xsd:choice minOccurs="1" maxOccurs="unbounded" >
+						<xsd:element ref="contenitore" />
+						<xsd:element ref="l9" />
+					</xsd:choice>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="l9"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="gerarchiabase">
+					<xsd:sequence minOccurs="1" maxOccurs="unbounded" >
+						<xsd:element ref="contenitore" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="tit"  type="inlinefac" />
+
+	<xsd:annotation>
+		<xsd:documentation>
+		 =====================================================================        
+		            fine del file globali.dtd                                                
+		        ===================================================================== 
+		</xsd:documentation>
+	</xsd:annotation>
+
+</xsd:schema>

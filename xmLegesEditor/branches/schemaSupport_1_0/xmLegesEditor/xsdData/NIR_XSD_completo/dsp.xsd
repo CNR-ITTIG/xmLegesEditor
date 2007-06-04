@@ -1,0 +1,503 @@
+<xsd:schema xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns="http://www.normeinrete.it/nir/2.2/" targetNamespace="http://www.normeinrete.it/nir/disposizioni/2.2/" xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:import namespace="http://www.w3.org/1999/xlink" schemaLocation="./xlink.xsd"/>
+	<xsd:import namespace="http://www.w3.org/HTML/1998/html4" schemaLocation="./h.xsd"/>
+	<xsd:import namespace="http://www.normeinrete.it/nir/2.2/" schemaLocation="./nirstrict.xsd"/>
+
+	<xsd:element name="testo"  type="valore" />
+	<xsd:element name="pos"  >
+		<xsd:complexType>
+			<xsd:attributeGroup ref="link"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="termine"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="subargomenti">
+					<xsd:attribute name="da" type="uri"/>
+					<xsd:attribute name="a" type="uri"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="condizione"  type="subargomenti" />
+	<xsd:element name="visto"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="posizioni">
+					<xsd:sequence >
+						<xsd:element ref="dsp:norma" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="sentito"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="posizioni">
+					<xsd:sequence >
+						<xsd:element ref="dsp:soggetto" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="considerato"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="posizioni">
+					<xsd:sequence >
+						<xsd:element ref="dsp:fatto" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="suproposta"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="posizioni">
+					<xsd:sequence >
+						<xsd:element ref="dsp:soggetto" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="basegiuridica"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="posizioni">
+					<xsd:sequence >
+						<xsd:element ref="dsp:soggetto" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="proposta"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="posizioni">
+					<xsd:sequence >
+						<xsd:element ref="dsp:organo" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="parere"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="posizioni">
+					<xsd:sequence >
+						<xsd:element ref="dsp:organo" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="richiesta"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="posizioni">
+					<xsd:sequence >
+						<xsd:element ref="dsp:organo" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="procedura"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="posizioni">
+					<xsd:sequence >
+						<xsd:element ref="dsp:norma" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="considerando"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="posizioni">
+					<xsd:sequence >
+						<xsd:element ref="dsp:fatto" />
+						<xsd:element ref="dsp:fine" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="motivazione"  type="posizioni" />
+	<xsd:element name="finalita"  type="posizionitermini" />
+	<xsd:element name="finanziaria"  type="modifica" />
+	<xsd:element name="ambito"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="posizionitermini">
+					<xsd:sequence >
+						<xsd:element ref="dsp:destinatario" />
+						<xsd:element ref="dsp:territorio" />
+						<xsd:element ref="dsp:attivita" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="metaregola"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="posizionitermini">
+					<xsd:sequence >
+						<xsd:element ref="dsp:tiporegola" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="definitoria"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="posizionitermini">
+					<xsd:sequence >
+						<xsd:element ref="dsp:definiendum" />
+						<xsd:element ref="dsp:definiens" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="istitutiva"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="posizionitermini">
+					<xsd:sequence >
+						<xsd:element ref="dsp:destinatario" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="organizzativa"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="posizionitermini">
+					<xsd:sequence >
+						<xsd:element ref="dsp:destinatario" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="status"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="posizionitermini">
+					<xsd:sequence >
+						<xsd:element ref="dsp:destinatario" />
+						<xsd:element ref="dsp:qualifica" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="competenza"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="posizionitermini">
+					<xsd:sequence >
+						<xsd:element ref="dsp:destinatario" />
+						<xsd:element ref="dsp:attivita" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="delega"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="posizionitermini">
+					<xsd:sequence >
+						<xsd:element ref="dsp:destinatario" />
+						<xsd:element ref="dsp:delegante" />
+						<xsd:element ref="dsp:attivita" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="revoca"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="posizionitermini">
+					<xsd:sequence >
+						<xsd:element ref="dsp:destinatario" />
+						<xsd:element ref="dsp:delegante" />
+						<xsd:element ref="dsp:attivita" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="diritto"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="posizionitermini">
+					<xsd:sequence >
+						<xsd:element ref="dsp:destinatario" />
+						<xsd:element ref="dsp:controparte" />
+						<xsd:element ref="dsp:attivita" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="dovere"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="posizionitermini">
+					<xsd:sequence >
+						<xsd:element ref="dsp:destinatario" />
+						<xsd:element ref="dsp:controparte" />
+						<xsd:element ref="dsp:attivita" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="pretesa"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="posizionitermini">
+					<xsd:sequence >
+						<xsd:element ref="dsp:destinatario" />
+						<xsd:element ref="dsp:controparte" />
+						<xsd:element ref="dsp:azione" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="obbligo"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="posizionitermini">
+					<xsd:sequence >
+						<xsd:element ref="dsp:destinatario" />
+						<xsd:element ref="dsp:controparte" />
+						<xsd:element ref="dsp:azione" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="divieto"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="posizionitermini">
+					<xsd:sequence >
+						<xsd:element ref="dsp:destinatario" />
+						<xsd:element ref="dsp:controparte" />
+						<xsd:element ref="dsp:azione" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="permesso"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="posizionitermini">
+					<xsd:sequence >
+						<xsd:element ref="dsp:destinatario" />
+						<xsd:element ref="dsp:controparte" />
+						<xsd:element ref="dsp:azione" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="procedimento"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="posizionitermini">
+					<xsd:sequence >
+						<xsd:element ref="dsp:destinatario" />
+						<xsd:element ref="dsp:azione" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="sanzione"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="posizionitermini">
+					<xsd:sequence >
+						<xsd:element ref="dsp:destinatario" />
+						<xsd:element ref="dsp:pena" />
+						<xsd:element ref="dsp:azione" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="riparazione"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="posizionitermini">
+					<xsd:sequence >
+						<xsd:element ref="dsp:destinatario" />
+						<xsd:element ref="dsp:effetto" />
+						<xsd:element ref="dsp:azione" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="informazione"  type="posizionitermini" />
+	<xsd:element name="regola"  type="posizionitermini" />
+	<xsd:element name="abrogazione"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="modifica">
+					<xsd:sequence >
+						<xsd:element ref="dsp:novellando" minOccurs="0" maxOccurs="1" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="sostituzione"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="modifica">
+					<xsd:sequence >
+						<xsd:element ref="dsp:novella" minOccurs="0" maxOccurs="1" />
+						<xsd:element ref="dsp:novellando" minOccurs="0" maxOccurs="1" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="integrazione"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="modifica">
+					<xsd:sequence >
+						<xsd:element ref="dsp:novella" minOccurs="0" maxOccurs="1" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ricollocazione"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="modifica">
+					<xsd:sequence >
+						<xsd:element ref="dsp:partizione" minOccurs="0" maxOccurs="1" />
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="intautentica"  type="modificadidominio" />
+	<xsd:element name="variazione"  type="modificadidominio" />
+	<xsd:element name="modtermini"  type="modificadidominio" />
+	<xsd:element name="vigenza"  type="modifica" />
+	<xsd:element name="annullamento"  type="modifica" />
+	<xsd:element name="proroga"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="modifica">
+					<xsd:attribute name="su" type="suType" use="required"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="reviviscenza"  type="modifica" />
+	<xsd:element name="posticipo"  type="modifica" />
+	<xsd:element name="sospensione"  type="modifica" />
+	<xsd:element name="retroattivita"  type="modifica" />
+	<xsd:element name="ultrattivita"  type="modifica" />
+	<xsd:element name="inapplicazione"  type="modifica" />
+	<xsd:element name="deroga"  type="modificadidominio" />
+	<xsd:element name="estensione"  type="modificadidominio" />
+	<xsd:element name="recepisce"  type="modifica" />
+	<xsd:element name="attua"  type="modifica" />
+	<xsd:element name="ratifica"  type="modifica" />
+	<xsd:element name="attuadelega"  type="modifica" />
+	<xsd:element name="attuadelegifica"  type="modifica" />
+	<xsd:element name="converte"  type="modifica" />
+	<xsd:element name="reitera"  type="modifica" />
+	<xsd:element name="modifica"  type="modifica" />
+	<xsd:element name="decadimento"  type="modifica" />
+	<xsd:element name="comunicazione"  >
+		<xsd:complexType >
+			<xsd:complexContent>
+				<xsd:extension base="posizionitermini">
+					<xsd:sequence >
+						<xsd:group ref="argomenti" minOccurs="1" maxOccurs="unbounded" />
+					</xsd:sequence>
+					<xsd:attributeGroup ref="nome"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="norma"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="subargomenti">
+					<xsd:attributeGroup ref="link"/>
+					<xsd:attributeGroup ref="nomefac"/>
+					<xsd:attribute name="tiporegola" type="tiporegola"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="soggetto"  type="subargomenti" />
+	<xsd:element name="effetto"  type="subargomenti" />
+	<xsd:element name="partizione"  type="subargomenti" />
+	<xsd:element name="tiporegola"  type="subargomenti" />
+	<xsd:element name="fatto"  type="subargomenti" />
+	<xsd:element name="organo"  type="subargomenti" />
+	<xsd:element name="fine"  type="subargomenti" />
+	<xsd:element name="destinatario"  type="subargomenti" />
+	<xsd:element name="territorio"  type="subargomenti" />
+	<xsd:element name="attivita"  type="subargomenti" />
+	<xsd:element name="definiendum"  type="subargomenti" />
+	<xsd:element name="definiens"  type="subargomenti" />
+	<xsd:element name="qualifica"  type="subargomenti" />
+	<xsd:element name="delegante"  type="subargomenti" />
+	<xsd:element name="controparte"  type="subargomenti" />
+	<xsd:element name="azione"  type="subargomenti" />
+	<xsd:element name="pena"  type="subargomenti" />
+	<xsd:element name="novella"  type="subargomenti" />
+	<xsd:element name="novellando"  type="subargomenti" />
+	<xsd:element name="dominio"  type="subargomenti" />
+	<xsd:element name="altradata"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="subargomenti">
+					<xsd:attribute name="rif" type="uri" use="required"/>
+					<xsd:attributeGroup ref="nome"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="argomento"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="subargomenti">
+					<xsd:attributeGroup ref="nome"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+</xsd:schema>
