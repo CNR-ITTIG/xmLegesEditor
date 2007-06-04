@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="iso-8859-15"?>
+
+%DOCTYPE%
+
+<NIR xmlns:xlink="http://www.w3.org/1999/xlink" 
+	  xmlns:h="http://www.w3.org/HTML/1998/html4">
+<Dpcm>
+	<meta>
+		<descrittori>
+		<pubblicazione norm="" num="" tipo="GU" />
+		<entratainvigore norm="" />
+		<redazione id="red1" nome="" norm="" />
+	        <urn valore="urn:nir:presidente.consiglio.ministri:decreto:aaaa-mm-gg;nnn"/>
+		</descrittori>
+	</meta>
+	<intestazione>
+		<tipoDoc>DECRETO DEL PRESIDENTE DEL CONSIGLIO DEI MINISTRI</tipoDoc> 
+		<dataDoc norm=""/>, n. 
+		<numDoc/>
+		<titoloDoc/>
+	</intestazione> 
+	<formulainiziale>
+		<h:p>IL PRESIDENTE DEL CONSIGLIO DEI MINISTRI</h:p>
+		<preambolo>
+			<h:p/>
+			<h:p>Sulla proposta del Ministro {denominazione};</h:p>
+		</preambolo>		
+		<h:p>ADOTTA</h:p>
+		<h:p>il seguente regolamento:</h:p>
+	</formulainiziale> 
+	<articolato>
+		<articolo id="art1">
+			<num>Art. 1.</num>
+			<rubrica/>
+			<comma id="art1-com1">
+				<num>1.</num>
+				<corpo/>
+			</comma>
+		</articolo>
+	</articolato>
+	<formulafinale>
+		<h:p>Il presente decreto, munito del sigillo dello Stato, sarà inserito nella 
+		Raccolta ufficiale degli atti normativi della Repubblica italiana. 
+		E' fatto obbligo a chiunque spetti di osservarlo e di farlo osservare.
+            </h:p>
+	</formulafinale> 
+	<conclusione> 
+		<dataeluogo norm="" codice="">Roma, {gg mese aaaa}</dataeluogo>
+		<firma tipo="sottoscrizione">{nome}, Presidente del Consiglio dei Ministri</firma>
+		<firma tipo="visto">Visto, il Guardasigilli: {nome}</firma> 
+	</conclusione> 
+</Dpcm>
+</NIR>
