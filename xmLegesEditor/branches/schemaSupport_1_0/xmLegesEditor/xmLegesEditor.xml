@@ -45,12 +45,12 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
  			<!--appender-ref ref="FileAppender" /-->
 		</root>
 		
-	<!-- 
+	
 		<logger name=".DtdRulesManager" additivity="false">
                         <priority value ="debug" />
                         <appender-ref ref="ConsoleAppender" />
         </logger>
-	 -->	
+	
 	
 	</log4j:configuration>
 	
@@ -119,7 +119,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
         </configuration>
     </component>
 
-    <component  class="it.cnr.ittig.xmleges.core.blocks.dtd.DtdRulesManagerImpl" />
+    <!--component  class="it.cnr.ittig.xmleges.core.blocks.dtd.DtdRulesManagerImpl" /-->
+    
+    <component  class="it.cnr.ittig.xmleges.core.blocks.schema.SchemaRulesManagerImpl" />
     
     <component  class="it.cnr.ittig.xmleges.core.blocks.selection.SelectionManagerImpl" />
     
