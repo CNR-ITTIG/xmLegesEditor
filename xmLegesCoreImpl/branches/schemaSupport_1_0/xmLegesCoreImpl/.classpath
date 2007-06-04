@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/xmLegesCoreApi"/>
+	<classpathentry exported="true" kind="lib" path="lib/dom4j-1.5.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jaxen-1.1-beta-4.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/xercesImpl-2.7.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/xml-apis-2.7.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/log4j-1.2.9.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/activation.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/mail.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/formsrt.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/avalon-framework-cvs-20020806.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/batik.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/fop.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-logging-1.0.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/xmlgraphics-commons-1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-io-1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/logkit-1.0.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/xsc.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/xsc_eval_key.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
