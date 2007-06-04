@@ -1,0 +1,719 @@
+<xsd:schema 
+xmlns:xlink="http://www.w3.org/1999/xlink" 
+xmlns:h="http://www.w3.org/HTML/1998/html4" 
+targetNamespace="http://www.normeinrete.it/nir/2.2/" 
+xmlns="http://www.normeinrete.it/nir/2.2/" 
+xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" 
+elementFormDefault="qualified" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+>
+
+	<xsd:import namespace="http://www.w3.org/1999/xlink" schemaLocation="./xlink.xsd"/>
+	<xsd:import namespace="http://www.w3.org/HTML/1998/html4" schemaLocation="./h.xsd"/>
+
+	<xsd:import namespace="http://www.normeinrete.it/nir/disposizioni/2.2/" schemaLocation="./dsp.xsd"/>
+
+
+	<xsd:annotation>
+		<xsd:documentation>
+		 =====================================================================        
+		          Modello dei documenti di NormeInRete (NIR)                                 
+		                                                                                     
+		          meta: metainformazioni sui documenti di NIR                                
+		          Dipende da: 'nirstrict' oppure 'nirloose'                                  
+		                                                                                     
+		          Versione  2.2                                                              
+		          Release   18/04/2007                                                       
+		          Fabio Vitali - UniBo                                                       
+		                                                                                     
+		          Per un'introduzione, si veda il documento 'meta.html'                      
+		        =====================================================================        
+		        =====================================================================        
+		                                                                                     
+		            Elementi base: meta e metainline                                         
+		                                                                                     
+		        ===================================================================== 
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:element name="meta" >
+		<xsd:complexType >
+			<xsd:sequence >
+				<xsd:element ref="descrittori" />
+				<xsd:element ref="inquadramento" minOccurs="0" maxOccurs="1" />
+				<xsd:element ref="ciclodivita" minOccurs="0" maxOccurs="1" />
+				<xsd:element ref="lavoripreparatori" minOccurs="0" maxOccurs="1" />
+				<xsd:element ref="redazionale" minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element ref="proprietario" minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element ref="risoluzione" minOccurs="0" maxOccurs="1" />
+				<xsd:element ref="disposizioni" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="inlinemeta" >
+		<xsd:complexType >
+			<xsd:sequence >
+				<xsd:element ref="redazionale" minOccurs="0" maxOccurs="1" />
+				<xsd:element ref="proprietario" minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element ref="disposizioni" minOccurs="0" maxOccurs="1" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		 =====================================================================        
+		                                                                                     
+		            Descrittori                                                              
+		                                                                                     
+		        ===================================================================== 
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:element name="descrittori" >
+		<xsd:complexType >
+			<xsd:sequence >
+				<xsd:element ref="pubblicazione" />
+				<xsd:element ref="entratainvigore" minOccurs="0" maxOccurs="1" />
+				<xsd:element ref="redazione" minOccurs="1" maxOccurs="unbounded" />
+				<xsd:element ref="urn" minOccurs="1" maxOccurs="unbounded" />
+				<xsd:element ref="alias" minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element ref="materie" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="tipopubbl"  >
+		<xsd:attribute name="tipo" type="tipopubblicazione" default="GU" />
+		<xsd:attribute name="num" type="numeropubblicazione"/>
+		<xsd:attributeGroup ref="data"/>
+	</xsd:complexType>
+
+	<xsd:element name="pubblicazione"  type="tipopubbl" />
+
+	<xsd:element name="entratainvigore"  >
+		<xsd:complexType>
+			<xsd:attributeGroup ref="data"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="redazione"  >
+		<xsd:complexType>
+			<xsd:attributeGroup ref="idreq"/>
+			<xsd:attributeGroup ref="data"/>
+			<xsd:attribute name="nome" type="NIRnome" use="required"/>
+			<xsd:attribute name="url" type="uri"/>
+			<xsd:attribute name="contributo" type="tipocontributo"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="urn"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="valore">
+					<xsd:attributeGroup ref="tempi"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="alias"  type="valore" />
+
+	<xsd:element name="materie" >
+		<xsd:complexType >
+			<xsd:sequence >
+				<xsd:element ref="materia" minOccurs="1" maxOccurs="unbounded" />
+			</xsd:sequence>
+				<xsd:attribute name="vocabolario" type="anystring" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="materia"  type="valore" />
+
+	<xsd:annotation>
+		<xsd:documentation>
+		 =====================================================================        
+		                                                                                     
+		            Inquadramento                                                            
+		                                                                                     
+		        ===================================================================== 
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:element name="inquadramento" >
+		<xsd:complexType >
+			<xsd:sequence >
+				<xsd:element ref="infodoc" />
+				<xsd:element ref="infomancanti" minOccurs="0" maxOccurs="1" />
+				<xsd:element ref="oggetto" minOccurs="0" maxOccurs="1" />
+				<xsd:element ref="proponenti" minOccurs="0" maxOccurs="1" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="infodoc"  >
+		<xsd:complexType>
+			<xsd:attribute name="natura" type="anystring" use="required"/>
+			<xsd:attribute name="normativa" type="sino" use="required"/>
+			<xsd:attribute name="funzione" type="funzione" use="required"/>
+			<xsd:attribute name="fonte" type="ranghi" use="required"/>
+			<xsd:attribute name="registrazione" type="NIRdate"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="infomancanti" >
+		<xsd:complexType >
+			<xsd:sequence >
+				<xsd:element ref="mTitolodoc" minOccurs="0" maxOccurs="1" />
+				<xsd:element ref="mTipodoc" minOccurs="0" maxOccurs="1" />
+				<xsd:element ref="mDatadoc" minOccurs="0" maxOccurs="1" />
+				<xsd:element ref="mNumdoc" minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element ref="mEmanante" minOccurs="0" maxOccurs="1" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="mTitolodoc"  type="valore" />
+
+	<xsd:element name="mTipodoc"  type="valore" />
+
+	<xsd:element name="mDatadoc"  type="valore" />
+
+	<xsd:element name="mNumdoc"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="valore">
+					<xsd:attributeGroup ref="nomefac"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="mEmanante"  type="valore" />
+
+	<xsd:element name="oggetto" >
+		<xsd:complexType >
+			<xsd:choice minOccurs="0" maxOccurs="unbounded" >
+				<xsd:element ref="finalita" />
+				<xsd:element ref="destinatario" />
+				<xsd:element ref="territorio" />
+				<xsd:element ref="attivita" />
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="finalita"  type="valore" />
+
+	<xsd:element name="destinatario"  type="valore" />
+
+	<xsd:element name="territorio"  type="valore" />
+
+	<xsd:element name="attivita"  type="valore" />
+
+	<xsd:element name="proponenti" >
+		<xsd:complexType >
+			<xsd:sequence >
+				<xsd:element ref="proponente" minOccurs="1" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="proponente"  type="valore" />
+
+	<xsd:annotation>
+		<xsd:documentation>
+		 =====================================================================        
+		                                                                                     
+		            Ciclodivita                                                              
+		                                                                                     
+		        ===================================================================== 
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:element name="ciclodivita" >
+		<xsd:complexType >
+			<xsd:sequence >
+				<xsd:element ref="eventi" minOccurs="0" maxOccurs="1" />
+				<xsd:element ref="relazioni" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="eventi" >
+		<xsd:complexType >
+			<xsd:sequence >
+				<xsd:element ref="evento" minOccurs="1" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="evento"  >
+		<xsd:complexType>
+			<xsd:attributeGroup ref="idreq"/>
+			<xsd:attribute name="data" type="NIRdate" use="required"/>
+			<xsd:attribute name="fonte" type="uri" use="required"/>
+			<xsd:attribute name="tipo" type="tipoeventi"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="relazioni" >
+		<xsd:complexType >
+			<xsd:sequence >
+				<xsd:element ref="originale" minOccurs="0" maxOccurs="1" />
+				<xsd:element ref="attiva" minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element ref="passiva" minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element ref="giurisprudenza" minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element ref="haallegato" minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element ref="allegatodi" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="relazioni"  >
+		<xsd:attributeGroup ref="link"/>
+		<xsd:attributeGroup ref="idreq"/>
+	</xsd:complexType>
+
+	<xsd:element name="originale"  type="relazioni" />
+
+	<xsd:element name="attiva"  type="relazioni" />
+
+	<xsd:element name="passiva"  type="relazioni" />
+
+	<xsd:element name="haallegato"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="relazioni">
+					<xsd:attribute name="tipo" type="tipoallegato"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="allegatodi"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="relazioni">
+					<xsd:attribute name="tipo" type="tipoallegato"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="giurisprudenza"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="relazioni">
+					<xsd:attribute name="effetto" >
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="normativo" />
+								<xsd:enumeration value="interpretativo" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		 =====================================================================        
+		                                                                                     
+		            Lavori preparatori, redazionale, proprietario, risoluzione               
+		                                                                                     
+		        ===================================================================== 
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:complexType name="note"  >
+		<xsd:complexContent>
+			<xsd:extension base="blocchireq"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="lavoripreparatori"  type="blocchifac" />
+
+	<xsd:element name="redazionale" >
+		<xsd:complexType >
+			<xsd:choice minOccurs="1" maxOccurs="unbounded" >
+				<xsd:element ref="nota" />
+				<xsd:element ref="avvertenza" />
+				<xsd:element ref="altro" />
+				<xsd:group ref="Rproprietario" />
+			</xsd:choice>
+				<xsd:attributeGroup ref="link"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="nota"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="note">
+					<xsd:attributeGroup ref="nomefac"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="avvertenza"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="note">
+					<xsd:attributeGroup ref="nomefac"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="altro"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="note">
+					<xsd:attributeGroup ref="nomefac"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="proprietario"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="ProprietarioMeta">
+					<xsd:attribute name="soggetto" type="NIRnome"/>
+					<xsd:attributeGroup ref="link"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="risoluzioni" >
+		<xsd:complexType >
+			<xsd:sequence >
+				<xsd:element ref="risoluzione" minOccurs="1" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="risoluzione"  >
+		<xsd:complexType>
+			<xsd:attributeGroup ref="idfac"/>
+			<xsd:attribute name="urn" type="uri" use="required"/>
+			<xsd:attribute name="url" type="uri" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		 =====================================================================        
+		                                                                                     
+		            Disposizioni                                                             
+		                                                                                     
+		        ===================================================================== 
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:complexType name="subargomenti"  >
+		<xsd:choice>
+			<xsd:any  namespace="##other"/>
+		</xsd:choice>
+	</xsd:complexType>
+
+	<xsd:complexType name="posizioni"  >
+		<xsd:sequence >
+			<xsd:choice minOccurs="1" maxOccurs="unbounded" >
+				<xsd:element ref="dsp:testo" />
+				<xsd:element ref="dsp:pos" />
+			</xsd:choice>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="posizionitermini"  >
+		<xsd:complexContent>
+			<xsd:extension base="posizioni">
+				<xsd:sequence >
+					<xsd:element ref="dsp:termine" minOccurs="0" maxOccurs="1" />
+					<xsd:element ref="dsp:condizione" minOccurs="0" maxOccurs="1" />
+				</xsd:sequence>
+				<xsd:attributeGroup ref="tempi"/>
+				<xsd:attributeGroup ref="implicita"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="modifica"  >
+		<xsd:complexContent>
+			<xsd:extension base="posizionitermini">
+				<xsd:sequence >
+					<xsd:element ref="dsp:norma" />
+					<xsd:element ref="dsp:altradata" minOccurs="0" maxOccurs="unbounded" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="modificadidominio"  >
+		<xsd:complexContent>
+			<xsd:extension base="posizionitermini">
+				<xsd:sequence >
+					<xsd:element ref="dsp:norma" />
+					<xsd:element ref="dsp:altradata" minOccurs="0" maxOccurs="unbounded" />
+					<xsd:element ref="dsp:dominio" minOccurs="0" maxOccurs="1" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="disposizioni" >
+		<xsd:complexType >
+			<xsd:sequence >
+				<xsd:element ref="motivazioni" minOccurs="0" maxOccurs="1" />
+				<xsd:element ref="regole" minOccurs="0" maxOccurs="1" />
+				<xsd:element ref="modificheattive" minOccurs="0" maxOccurs="1" />
+				<xsd:element ref="modifichepassive" minOccurs="0" maxOccurs="1" />
+				<xsd:element ref="comunicazioni" minOccurs="0" maxOccurs="1" />
+			</xsd:sequence>
+				<xsd:attributeGroup ref="link"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		 =====================================================================        
+		                                                                                     
+		            Definizione delle disposizioni di motivazione                            
+		                                                                                     
+		        ===================================================================== 
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:complexType name="motivazioni"  >
+		<xsd:choice minOccurs="1" maxOccurs="unbounded" >
+			<xsd:element ref="dsp:visto" />
+			<xsd:element ref="dsp:sentito" />
+			<xsd:element ref="dsp:considerato" />
+			<xsd:element ref="dsp:suproposta" />
+			<xsd:element ref="dsp:basegiuridica" />
+			<xsd:element ref="dsp:proposta" />
+			<xsd:element ref="dsp:parere" />
+			<xsd:element ref="dsp:richiesta" />
+			<xsd:element ref="dsp:procedura" />
+			<xsd:element ref="dsp:considerando" />
+			<xsd:element ref="dsp:motivazione" />
+		</xsd:choice>
+	</xsd:complexType>
+
+	<xsd:element name="motivazioni"  type="motivazioni" />
+
+	<xsd:annotation>
+		<xsd:documentation>
+		 =====================================================================        
+		                                                                                     
+		            Definizione delle disposizioni di regola                                 
+		                                                                                     
+		        ===================================================================== 
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:group name="atto">
+		<xsd:choice>
+			<xsd:element ref="dsp:finalita"/>
+			<xsd:element ref="dsp:finanziaria"/>
+			<xsd:element ref="dsp:ambito"/>
+		</xsd:choice>
+	</xsd:group>
+
+	<xsd:group name="costitutive">
+		<xsd:choice>
+			<xsd:element ref="dsp:metaregola"/>
+			<xsd:element ref="dsp:definitoria"/>
+			<xsd:element ref="dsp:istitutiva"/>
+			<xsd:element ref="dsp:organizzativa"/>
+			<xsd:element ref="dsp:status"/>
+			<xsd:element ref="dsp:competenza"/>
+			<xsd:element ref="dsp:delega"/>
+			<xsd:element ref="dsp:revoca"/>
+		</xsd:choice>
+	</xsd:group>
+
+	<xsd:group name="regolative">
+		<xsd:choice>
+			<xsd:element ref="dsp:diritto"/>
+			<xsd:element ref="dsp:dovere"/>
+			<xsd:element ref="dsp:pretesa"/>
+			<xsd:element ref="dsp:obbligo"/>
+			<xsd:element ref="dsp:divieto"/>
+			<xsd:element ref="dsp:permesso"/>
+			<xsd:element ref="dsp:procedimento"/>
+			<xsd:element ref="dsp:sanzione"/>
+			<xsd:element ref="dsp:riparazione"/>
+			<xsd:element ref="dsp:informazione"/>
+		</xsd:choice>
+	</xsd:group>
+
+	<xsd:complexType name="regole"  >
+		<xsd:choice minOccurs="1" maxOccurs="unbounded" >
+			<xsd:group ref="atto" />
+			<xsd:group ref="costitutive" />
+			<xsd:group ref="regolative" />
+			<xsd:element ref="dsp:regola" />
+		</xsd:choice>
+	</xsd:complexType>
+
+	<xsd:element name="regole"  type="regole" />
+
+	<xsd:annotation>
+		<xsd:documentation>
+		 =====================================================================        
+		                                                                                     
+		            Definizione delle disposizioni di modifica                               
+		                                                                                     
+		        ===================================================================== 
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:group name="contenuto">
+		<xsd:choice>
+			<xsd:element ref="dsp:abrogazione"/>
+			<xsd:element ref="dsp:sostituzione"/>
+			<xsd:element ref="dsp:integrazione"/>
+			<xsd:element ref="dsp:ricollocazione"/>
+			<xsd:element ref="dsp:intautentica"/>
+			<xsd:element ref="dsp:variazione"/>
+			<xsd:element ref="dsp:modtermini"/>
+		</xsd:choice>
+	</xsd:group>
+
+	<xsd:group name="tempo">
+		<xsd:choice>
+			<xsd:element ref="dsp:vigenza"/>
+			<xsd:element ref="dsp:annullamento"/>
+			<xsd:element ref="dsp:proroga"/>
+			<xsd:element ref="dsp:reviviscenza"/>
+			<xsd:element ref="dsp:posticipo"/>
+			<xsd:element ref="dsp:sospensione"/>
+			<xsd:element ref="dsp:retroattivita"/>
+			<xsd:element ref="dsp:ultrattivita"/>
+			<xsd:element ref="dsp:inapplicazione"/>
+		</xsd:choice>
+	</xsd:group>
+
+	<xsd:group name="portata">
+		<xsd:choice>
+			<xsd:element ref="dsp:deroga"/>
+			<xsd:element ref="dsp:estensione"/>
+		</xsd:choice>
+	</xsd:group>
+
+	<xsd:group name="ordinamento">
+		<xsd:choice>
+			<xsd:element ref="dsp:recepisce"/>
+			<xsd:element ref="dsp:attua"/>
+			<xsd:element ref="dsp:ratifica"/>
+			<xsd:element ref="dsp:attuadelega"/>
+			<xsd:element ref="dsp:attuadelegifica"/>
+			<xsd:element ref="dsp:converte"/>
+			<xsd:element ref="dsp:reitera"/>
+		</xsd:choice>
+	</xsd:group>
+
+	<xsd:complexType name="modifiche"  >
+		<xsd:choice minOccurs="1" maxOccurs="unbounded" >
+			<xsd:group ref="contenuto" />
+			<xsd:group ref="tempo" />
+			<xsd:group ref="portata" />
+			<xsd:group ref="ordinamento" />
+			<xsd:element ref="dsp:modifica" />
+		</xsd:choice>
+	</xsd:complexType>
+
+	<xsd:element name="modificheattive"  type="modifiche" />
+
+	<xsd:element name="modifichepassive"  type="modifiche" />
+
+	<xsd:annotation>
+		<xsd:documentation>
+		 riunione NIR 2/2/07: tolto novellando da integrazione        
+		        ELEMENT dsp:integrazione    (@modifica;, (dsp:novella?, dsp:novellando?))   
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:simpleType name="suType"  >
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="efficacia" />
+			<xsd:enumeration value="vigore" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		 =====================================================================        
+		                                                                                     
+		            Definizione delle disposizioni di comunicazione                          
+		                                                                                     
+		        ===================================================================== 
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:complexType name="comunicazioni"  >
+		<xsd:choice minOccurs="1" maxOccurs="unbounded" >
+			<xsd:element ref="dsp:abrogazione" />
+			<xsd:element ref="dsp:sostituzione" />
+			<xsd:element ref="dsp:integrazione" />
+			<xsd:element ref="dsp:vigenza" />
+			<xsd:element ref="dsp:decadimento" />
+			<xsd:element ref="dsp:comunicazione" />
+		</xsd:choice>
+	</xsd:complexType>
+
+	<xsd:group name="argomenti">
+		<xsd:choice>
+			<xsd:element ref="dsp:norma"/>
+			<xsd:element ref="dsp:soggetto"/>
+			<xsd:element ref="dsp:effetto"/>
+			<xsd:element ref="dsp:partizione"/>
+			<xsd:element ref="dsp:tiporegola"/>
+			<xsd:element ref="dsp:fatto"/>
+			<xsd:element ref="dsp:organo"/>
+			<xsd:element ref="dsp:fine"/>
+			<xsd:element ref="dsp:destinatario"/>
+			<xsd:element ref="dsp:territorio"/>
+			<xsd:element ref="dsp:attivita"/>
+			<xsd:element ref="dsp:definiendum"/>
+			<xsd:element ref="dsp:definiens"/>
+			<xsd:element ref="dsp:qualifica"/>
+			<xsd:element ref="dsp:delegante"/>
+			<xsd:element ref="dsp:controparte"/>
+			<xsd:element ref="dsp:azione"/>
+			<xsd:element ref="dsp:pena"/>
+			<xsd:element ref="dsp:novella"/>
+			<xsd:element ref="dsp:novellando"/>
+			<xsd:element ref="dsp:dominio"/>
+			<xsd:element ref="dsp:altradata"/>
+			<xsd:element ref="dsp:argomento"/>
+		</xsd:choice>
+	</xsd:group>
+
+	<xsd:element name="comunicazioni"  type="comunicazioni" />
+
+	<xsd:annotation>
+		<xsd:documentation>
+		 =====================================================================        
+		                                                                                     
+		            Definizione degli argomenti delle disposizioni                           
+		                                                                                     
+		        ===================================================================== 
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		 =====================================================================        
+		            fine del file meta.dtd                                                
+		        ===================================================================== 
+		</xsd:documentation>
+	</xsd:annotation>
+
+</xsd:schema>
