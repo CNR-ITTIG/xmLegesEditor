@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path=""/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/xmLegesCoreApi"/>
-	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/xmLegesCoreImpl"/>
-	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/xmLegesEditorApi"/>
-	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/xmLegesEditorImpl"/>
-	<classpathentry exported="true" kind="lib" path="lib/plastic-1.2.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/xmLegesCoreApi"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/xmLegesCoreImpl"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/xmLegesEditorApi"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/xmLegesEditorImpl"/>
+	<classpathentry kind="lib" path="lib/plastic-1.2.0.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>
