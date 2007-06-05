@@ -165,7 +165,7 @@ public class NirXsltPanesImpl implements NirXsltPanes, Loggable, Serviceable, Co
 		Node container = nirUtilDom.getParentContainer(node);
 		String contName = container.getNodeName();
 
-		if ("comma".equals(contName) || "el".equals(contName) || "en".equals(contName)) {
+		if ("comma".equals(contName) || "el".equals(contName) || "en".equals(contName) || "ep".equals(contName)) {
 			String contained = node.getNodeValue();
 			Node[] nexts = UtilDom.getAllNextSibling(node);
 			int azione = partizioni.canInsertNuovaPartizione(node, container);
