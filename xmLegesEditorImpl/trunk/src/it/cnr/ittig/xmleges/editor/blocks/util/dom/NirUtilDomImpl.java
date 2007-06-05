@@ -109,7 +109,7 @@ public class NirUtilDomImpl implements NirUtilDom, Loggable, Serviceable{
 		// con la precedente regola il comma non veniva considerato un container
 		// per la dtd base(!)
 		// quindi per adesso meglio evitare sorprese..
-		if (node.getNodeName().equalsIgnoreCase("el") || node.getNodeName().equalsIgnoreCase("en") || node.getNodeName().equalsIgnoreCase("comma")
+		if (node.getNodeName().equalsIgnoreCase("el") || node.getNodeName().equalsIgnoreCase("en") || node.getNodeName().equalsIgnoreCase("ep") || node.getNodeName().equalsIgnoreCase("comma")
 				|| node.getNodeName().equalsIgnoreCase("articolo") || node.getNodeName().equalsIgnoreCase("sezione")
 				|| node.getNodeName().equalsIgnoreCase("capo") || node.getNodeName().equalsIgnoreCase("titolo") || node.getNodeName().equalsIgnoreCase("parte")
 				|| node.getNodeName().equalsIgnoreCase("libro"))
@@ -136,7 +136,7 @@ public class NirUtilDomImpl implements NirUtilDom, Loggable, Serviceable{
 		if (node == null)
 			return false;
 
-		if (node.getNodeName().equalsIgnoreCase("el") || node.getNodeName().equalsIgnoreCase("en") || node.getNodeName().equalsIgnoreCase("comma")
+		if (node.getNodeName().equalsIgnoreCase("el") || node.getNodeName().equalsIgnoreCase("en") || node.getNodeName().equalsIgnoreCase("ep") ||node.getNodeName().equalsIgnoreCase("comma")
 				|| node.getNodeName().equalsIgnoreCase("articolo") || node.getNodeName().equalsIgnoreCase("sezione")
 				|| node.getNodeName().equalsIgnoreCase("capo") || node.getNodeName().equalsIgnoreCase("titolo") || node.getNodeName().equalsIgnoreCase("parte")
 				|| node.getNodeName().equalsIgnoreCase("libro"))
