@@ -257,7 +257,7 @@ public class SpostamentoImpl implements Spostamento, Loggable, Serviceable {
 	}
 
 	public boolean canUpgrade(Node node) {
-		if (UtilDom.getPathName(node).endsWith("el") || UtilDom.getPathName(node).endsWith("en"))
+		if (UtilDom.getPathName(node).endsWith("el") || UtilDom.getPathName(node).endsWith("en") || UtilDom.getPathName(node).endsWith("ep"))
 			return true;
 		return false;
 	}
@@ -265,7 +265,7 @@ public class SpostamentoImpl implements Spostamento, Loggable, Serviceable {
 	public boolean canDowngrade(Node node) {
 		Node brother = node.getPreviousSibling();
 		if (brother != null) {
-			if ((UtilDom.getPathName(node).endsWith("comma") || UtilDom.getPathName(node).endsWith("el") || UtilDom.getPathName(node).endsWith("en"))
+			if ((UtilDom.getPathName(node).endsWith("comma") || UtilDom.getPathName(node).endsWith("el") || UtilDom.getPathName(node).endsWith("en") || UtilDom.getPathName(node).endsWith("ep"))
 					&& node.getNodeName().equals(brother.getNodeName()))
 				return true;
 		}
