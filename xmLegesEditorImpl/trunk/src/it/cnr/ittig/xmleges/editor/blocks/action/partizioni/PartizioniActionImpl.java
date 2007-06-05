@@ -76,7 +76,7 @@ public class PartizioniActionImpl implements PartizioniAction, EventManagerListe
 	Node[] selNodes;
 
 	MyAbstractAction[] actions = new MyAbstractAction[] { new LibroAction(), new ParteAction(), new TitoloAction(), new CapoAction(), new SezioneAction(),
-			new ArticoloAction(), new CommaAction(), new LetteraAction(), new NumeroAction(), new RubricaAction() };
+			new ArticoloAction(), new CommaAction(), new LetteraAction(), new NumeroAction(), new PuntoAction(), new RubricaAction() };
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -104,6 +104,7 @@ public class PartizioniActionImpl implements PartizioniAction, EventManagerListe
 		actionManager.registerAction("editor.partizioni.comma", actions[i++]);
 		actionManager.registerAction("editor.partizioni.lettera", actions[i++]);
 		actionManager.registerAction("editor.partizioni.numero", actions[i++]);
+		actionManager.registerAction("editor.partizioni.punto", actions[i++]);
 		actionManager.registerAction("editor.partizioni.rubrica", actions[i++]);
 		eventManager.addListener(this, SelectionChangedEvent.class);
 		eventManager.addListener(this, DocumentClosedEvent.class);
@@ -253,7 +254,17 @@ public class PartizioniActionImpl implements PartizioniAction, EventManagerListe
 		// TODO AGGREGAZIONE
 		setModified(partizioni.nuovaPartizione(node, Partizioni.EN, action));
 	}
+	
+	public void doNewPunto(Node node) {
+		// TODO AGGREGAZIONE
+		setModified(partizioni.nuovaPartizione(node, Partizioni.EP));
+	}
 
+	public void doNewPunto(Node node, int action) {
+		// TODO AGGREGAZIONE
+		setModified(partizioni.nuovaPartizione(node, Partizioni.EP, action));
+	}
+	
 	public void doNewRubrica(Node node) {
 		// TODO AGGREGAZIONE
 		setModified(partizioni.nuovaPartizione(node, Partizioni.RUBRICA));
@@ -397,6 +408,19 @@ public class PartizioniActionImpl implements PartizioniAction, EventManagerListe
 		}
 	}
 
+	public class PuntoAction extends MyAbstractAction {
+		int action;
+
+		public boolean canDoAction(Node n) {
+			action = partizioni.canInsertNuovaPartizione(n, Partizioni.EP);
+			return (action != -1);
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			doNewPunto(activeNode, action);
+		}
+	}
+	
 	public class RubricaAction extends MyAbstractAction {
 		int action;
 
