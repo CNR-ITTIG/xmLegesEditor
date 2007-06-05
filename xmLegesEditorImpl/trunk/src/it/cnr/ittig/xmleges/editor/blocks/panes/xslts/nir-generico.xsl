@@ -29,7 +29,6 @@
 
 				<link href="nir-generico-style.css" rel="stylesheet"/>
 			</head>
-			<!--	PROBLEMI CON LE ANCORE 	base href="{$baseurl}" /	-->
 			<body>
 			<p style="font-weight:bold;">
 				<xsl:choose>
@@ -537,6 +536,16 @@
 		<br/>ALLEGATI:
 		<xsl:apply-templates/>
 	</xsl:template>
+	<xsl:template match="//*[name()='annesso']">
+		<xsl:choose>
+			<xsl:when test="$datafine!=''">
+				<xsl:call-template name="vigenza"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="multivigenza"/>
+			</xsl:otherwise>
+		</xsl:choose>				
+	</xsl:template>
 	<xsl:template match="//*[name()='testata']">
 			<hr/>
 			<xsl:apply-templates select="*[name()='denAnnesso'] | *[name()='titAnnesso']"/>
@@ -609,6 +618,29 @@
 	<xsl:template match="@*">
 		<xsl:attribute name="{local-name()}"><xsl:value-of select="."/></xsl:attribute>
 	</xsl:template>
+	
+	<xsl:template match="@*" mode="object">
+		<xsl:choose>
+			<xsl:when test="name()='src'">
+				<xsl:variable name="nome"><xsl:value-of select="." /></xsl:variable>
+				<xsl:attribute name="src"><xsl:value-of select="concat('file://',$baseurl,$nome)"/></xsl:attribute>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:attribute name="{name()}"><xsl:value-of select="."/></xsl:attribute>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>	
+	
+	<xsl:template match="h:img">
+		<xsl:param name="pos">none</xsl:param>
+		<xsl:element name="{local-name()}">
+			<xsl:apply-templates select="@*" mode="object"/>
+			<xsl:apply-templates>
+				<xsl:with-param name="pos" select="$pos"/>
+			</xsl:apply-templates>&#160;
+		</xsl:element>
+	</xsl:template>
+	
 	<xsl:template match="h:*">
 		<xsl:param name="pos">none</xsl:param>
 		<xsl:element name="{local-name()}">

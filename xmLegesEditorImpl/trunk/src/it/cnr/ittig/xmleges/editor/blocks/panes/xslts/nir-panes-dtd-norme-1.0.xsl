@@ -281,7 +281,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     </xsl:element>
 </xsl:template>
 
-<!-- ==Cosa e'== -->
 <xsl:template match="*[name()='elencoAnnessi']">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
         <xsl:apply-templates />
@@ -290,7 +289,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 <xsl:template match="*[name()='annesso']">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-        <xsl:apply-templates />
+        <xsl:call-template name="vigenza"/>	
+		<!--	xsl:apply-templates /	-->
     </xsl:element>
 	<p/>
 	<hr width="80%" align="center"/>
