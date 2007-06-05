@@ -38,6 +38,9 @@ public interface Partizioni extends Service {
 
 	/** Indica la partizione di tipo: EN */
 	public final static String EN = "en";
+	
+	/** Indica la partizione di tipo: EP */
+	public final static String EP = "ep";
 
 	/** Indica la partizione di tipo: RUBRICA */
 	public final static String RUBRICA = "rubrica";
