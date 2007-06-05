@@ -252,11 +252,15 @@ public class FileSaveActionImpl implements FileSaveAction, EventManagerListener,
 		if (documentManager.getDocumentAsDom()==null)
 			return false;
 		NodeIterator nI = ((DocumentTraversal)documentManager.getDocumentAsDom()).createNodeIterator(documentManager.getDocumentAsDom().getDocumentElement(),NodeFilter.SHOW_PROCESSING_INSTRUCTION,null,true);	
+		boolean domanda = true;
 		Node node;
 		try {
 			tr = documentManager.beginEdit();	
 			while ((node = nI.nextNode()) != null ) {
-			
+				if (domanda && !utilMsg.msgYesNo("action.file.replacepi.save")) 
+					return false;
+		
+				domanda = false;
 				if (node.getNodeType()==Node.PROCESSING_INSTRUCTION_NODE) {
 				
 					//Inserire qui i casi da gestire:
@@ -378,6 +382,10 @@ public class FileSaveActionImpl implements FileSaveAction, EventManagerListener,
 			encoding = defaultEncoding;
 		} else
 			encoding = documentManager.getEncoding();
+		
+		//	esistenza/domanda/rimozione PI
+		removePI();
+		
 		DOMWriter domWriter = new DOMWriter();
 		domWriter.setCanonical(false);
 		domWriter.setFormat(true);
