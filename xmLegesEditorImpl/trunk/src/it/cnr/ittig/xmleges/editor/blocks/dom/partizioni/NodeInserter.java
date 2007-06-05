@@ -14,6 +14,7 @@ import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -41,7 +42,7 @@ public class NodeInserter {
 	}
 
 	public int canInsertNewNode(Node template, Document doc, Node activeNode, DtdRulesManager dtdRulesManager) {
-		logger.debug("ask for canInsertNewNode");
+		logger.debug("ask for canInsertNewNode: " + template.getNodeName());
 
 		Node activeNodeContainer = getContainer(activeNode); // PARENT
 
@@ -76,7 +77,7 @@ public class NodeInserter {
 		if (parentContainer != null && canInsertTemplateAsParent(template, parentContainer, dtdRulesManager))
 			return 3;
 
-		if (canSwapCorpo2Alinea(template, activeNodeContainer, dtdRulesManager))
+		if (canSwapCorpo2Alinea(template, activeNodeContainer, dtdRulesManager, doc))
 			return 4;
 
 		return -1;
@@ -122,7 +123,7 @@ public class NodeInserter {
 				logger.debug("swapCorpo2Alinea");
 				logger.debug("activeNodeContainer ");
 				logger.debug("activeNodeContainer " + activeNodeContainer != null ? UtilDom.getPathName(activeNodeContainer) : "null");
-				return (swapCorpo2Alinea(activeNodeContainer, doc, dtdRulesManager));
+				return (swapCorpo2Alinea(activeNodeContainer, doc, dtdRulesManager, template.getNodeName()));
 			default:
 				return false;
 			}
@@ -205,8 +206,8 @@ public class NodeInserter {
 			return (insertTemplateAsParent(template, parentContainer, dtdRulesManager));
 
 		// 4- provo a trasformare corpo in alinea
-		if (canSwapCorpo2Alinea(template, activeNodeContainer, dtdRulesManager))
-			return (swapCorpo2Alinea(activeNodeContainer, doc, dtdRulesManager));
+		if (canSwapCorpo2Alinea(template, activeNodeContainer, dtdRulesManager, doc))
+			return (swapCorpo2Alinea(activeNodeContainer, doc, dtdRulesManager, template.getNodeName()));
 
 		return false;
 	}
@@ -407,7 +408,7 @@ public class NodeInserter {
 		return template;
 	}
 
-	private boolean canSwapCorpo2Alinea(Node template, Node activeNodeContainer, DtdRulesManager dtdRulesManager) {
+	private boolean canSwapCorpo2Alinea(Node template, Node activeNodeContainer, DtdRulesManager dtdRulesManager, Document doc) {
 
 		Vector contents = new Vector();
 
@@ -416,17 +417,23 @@ public class NodeInserter {
 			// for:"+activeNodeContainer.getNodeName()+ " : "
 			// +dtdRulesManager.getAlternativeContents(activeNodeContainer.getNodeName()).toString());
 			if (UtilDom.findDirectChild(activeNodeContainer, "corpo") != null) {
+				
+				
+				//TODO migliorare gestione dtdFlessibile
+				if (doc.getDoctype().getSystemId().equals("nirflessibile.dtd"))
+					return true;
+				
 				contents = dtdRulesManager.getAlternativeContents(activeNodeContainer.getNodeName());
 				for (int j = 0; j < contents.size(); j++)
-					if (((String) contents.get(j)).indexOf(template.getNodeName()) != -1) // il
-																							// template
-																							// e'
-																							// ammesso
-																							// come
-																							// contenuto
-																							// dell'active
-																							// node
-						return true;
+				if (((String) contents.get(j)).indexOf(template.getNodeName()) != -1) // il
+																						// template
+																						// e'
+																						// ammesso
+																						// come
+																						// contenuto
+																						// dell'active
+																						// node
+					return true;				
 			}
 			return false;
 		} catch (DtdRulesManagerException e) {
@@ -434,7 +441,7 @@ public class NodeInserter {
 		}
 	}
 
-	private boolean swapCorpo2Alinea(Node activeNodeContainer, Document doc, DtdRulesManager dtdRulesManager) {
+	private boolean swapCorpo2Alinea(Node activeNodeContainer, Document doc, DtdRulesManager dtdRulesManager, String tipoLista) {
 
 		Node tmpParent, newNode, dummyNode;
 		Vector children;
@@ -451,16 +458,16 @@ public class NodeInserter {
 		// appende l'alinea cosi' completata al vecchio nodo (sostituisce il
 		// corpo con l'alinea)
 		tmpParent.replaceChild(newNode, corpo);
-		// riempito con una lettera o un numero vuoti
-		dummyNode = getNodeTemplate("el", doc, dtdRulesManager);
+		// riempito con una lettera o un numero vuoti (o con un lista puntata)
+		dummyNode = getNodeTemplate(tipoLista, doc, dtdRulesManager);
 
 		try {
 			if (dtdRulesManager.queryCanInsertAfter(tmpParent, newNode, dummyNode))
 				tmpParent.insertBefore(dummyNode, newNode.getNextSibling()); // insertAfter
-			else { // altrimenti ci appendo un numero
-				dummyNode = getNodeTemplate("en", doc, dtdRulesManager);
-				tmpParent.insertBefore(dummyNode, newNode.getNextSibling()); // insertAfter
-			}
+//			else { // altrimenti ci appendo un numero
+//				dummyNode = getNodeTemplate("en", doc, dtdRulesManager);
+//				tmpParent.insertBefore(dummyNode, newNode.getNextSibling()); // insertAfter
+//			}
 		} catch (Exception ex) {
 			return false;
 		}
@@ -483,17 +490,32 @@ public class NodeInserter {
 	// fornisce un template del nodo minimale, arricchedolo sempre, se
 	// possibile, per necessita' di visualizzazione
 	// di un numero e di una rubrica
+	//TODO: migliorare gestione dtdFlessibile
 	private Node getNodeTemplate(String elem_name, Document doc, DtdRulesManager dtdRulesManager) {
+		
 		Node newNode = utilRulesManager.getNodeTemplate(doc, elem_name);
-		// inserisci ovunque possibile il num
-		// FIXME attendere risposta dtd2.1
-		addElement("num", doc, newNode, dtdRulesManager);
-		// inserisci ovunque possibile la rubrica
-		// FIXME attendere risposta dtd2.1
-		addElement("rubrica", doc, newNode, dtdRulesManager);
+		//TODO usare funzionalità del DtdRulesManager
+		if (doc.getDoctype().getSystemId().equals("nirflessibile.dtd")) {
+			addElement("num", doc, newNode, dtdRulesManager);
+			if (elem_name.equals("articolo")) {
+				addElement("rubrica", doc, newNode, dtdRulesManager);
+				addElement("comma", doc, newNode, dtdRulesManager);
+				addElement("num", doc, newNode, dtdRulesManager);
+				addElement("corpo", doc, newNode, dtdRulesManager);
+			}	
+			addElement("corpo", doc, newNode, dtdRulesManager);	
+		}	
+		else {
+			//inserisci ovunque possibile il num
+			//FIXME attendere risposta dtd2.1
+			addElement("num", doc, newNode, dtdRulesManager);
+			// inserisci ovunque possibile la rubrica
+			// FIXME attendere risposta dtd2.1
+			addElement("rubrica", doc, newNode, dtdRulesManager);
+		}
 		return newNode;
-	}
-
+	}	
+	
 	private Node completeTemplate(Node template, Vector move, DtdRulesManager dtdRulesManager) {
 		Node replace;
 		int j = 0;
