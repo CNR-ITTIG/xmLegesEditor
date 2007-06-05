@@ -323,7 +323,7 @@ public class AggiornaIdFrozenLaw {
 	private boolean isElementWithNum(Node node) {
 		int elemType = getElementType(node);
 		if (elemType == LIBRO || elemType == PARTE || elemType == TITOLO || elemType == CAPO || elemType == SEZIONE || elemType == ARTICOLO
-				|| elemType == COMMA || elemType == NUMERO || elemType == LETTERA)
+				|| elemType == COMMA || elemType == NUMERO || elemType == LETTERA || elemType == ELENCO_PUNT)
 			return true;
 		else
 			return false;
