@@ -42,11 +42,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                         <priority value ="debug" />
                         <appender-ref ref="ConsoleAppender" />
         </logger	-->
-
-		<logger name=".Partizioni" additivity="false">
-                        <priority value ="debug" />
-                        <appender-ref ref="ConsoleAppender" />
-        </logger>
        
        	<root>
 			<priority value ="error" /> 
