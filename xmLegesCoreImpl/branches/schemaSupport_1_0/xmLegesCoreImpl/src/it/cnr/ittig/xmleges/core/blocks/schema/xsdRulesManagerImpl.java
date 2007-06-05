@@ -39,6 +39,7 @@ public class xsdRulesManagerImpl {
 
 	
 	protected HashMap rules;
+	protected HashMap elemDeclNames;
 	protected HashMap alternative_contents;
 	protected HashMap attributes;
 	protected String targetNameSpace;
@@ -46,6 +47,7 @@ public class xsdRulesManagerImpl {
 	
 	public xsdRulesManagerImpl(){		
 		rules = new HashMap();
+		elemDeclNames = new HashMap();
 		alternative_contents = new HashMap();
 		attributes = new HashMap();
 	}
@@ -80,8 +82,12 @@ public class xsdRulesManagerImpl {
             }
 
             XSDParticleImpl.XSDNFA dfa = (XSDParticleImpl.XSDNFA)xsdParticle.getDFA();
+            if(dfa.getStates().size()==1){
+            	((XSDParticleImpl.XSDNFA.StateImpl)dfa.getStates().get(0)).setAccepting(true);
+            }
             
         	rules.put(elemDecl.getQName(), dfa);
+        	elemDeclNames.put(elemDecl.getQName(), elemDecl);
         	
             
             System.err.println("********** AUTOMA simple DI "+elemDecl.getQName()+" ************");
@@ -112,6 +118,7 @@ public class xsdRulesManagerImpl {
 
                 XSDParticle.DFA dfa = (XSDParticle.DFA) typedef.getComplexType().getDFA();
                 rules.put(elemDecl.getQName(), dfa);
+                elemDeclNames.put(elemDecl.getQName(), elemDecl);
 
               
                 System.err.println("********** AUTOMA DI "+elemDecl.getQName()+" ************");
@@ -134,7 +141,11 @@ public class xsdRulesManagerImpl {
                 }
 
                 XSDParticleImpl.XSDNFA dfa = (XSDParticleImpl.XSDNFA)xsdParticle.getDFA();
+                if(dfa.getStates().size()==1){
+                	((XSDParticleImpl.XSDNFA.StateImpl)dfa.getStates().get(0)).setAccepting(true);
+                }
                 rules.put(elemDecl.getQName(), dfa);
+                elemDeclNames.put(elemDecl.getQName(), elemDecl);
                 
 
                 System.err.println("********** AUTOMA speciale DI "+elemDecl.getQName()+" ************");
@@ -180,8 +191,23 @@ public class xsdRulesManagerImpl {
         System.err.println("********** AUTOMA DI #ANY ************");
         printDFA(dfa);
       
-}
+	}
 
+	public void createRuleForPCDATA(){
+        
+        XSDParticle xsdParticle; 
+        xsdParticle = XSDFactory.eINSTANCE.createXSDParticle();
+        
+        XSDParticleImpl.XSDNFA dfa = (XSDParticleImpl.XSDNFA)xsdParticle.getDFA();
+        
+    	rules.put("#PCDATA", dfa);
+    	XSDElementDeclaration xsdElementDeclaration = (XSDElementDeclaration)xsdParticle.getTerm();  // e' null (il term)
+    	elemDeclNames.put("#PCDATA", xsdElementDeclaration);
+        
+        System.err.println("********** AUTOMA DI #PCDATA ************");
+        printDFA(dfa);
+      
+	}
 	
 	public boolean isValid(String elem_name, Collection elem_children)  {
 		return isValid(elem_name, elem_children, false);
@@ -203,7 +229,7 @@ public class xsdRulesManagerImpl {
 		if (rule == null)
 			System.err.println("No rule for element <" + elem_name + ">");
 
-		return align(rule,elem_children,withgaps);
+		return align(elem_name,elem_children,withgaps);
 		
 	}
 	
@@ -319,13 +345,14 @@ public class xsdRulesManagerImpl {
 	 * @return <code>true</code> se la sequenza di nodi allinea con l'automa
 	 * @throws DtdRulesManagerException
 	 */
-	public boolean align(XSDParticle.DFA rule, Collection sequence, boolean with_gaps) {
+	public boolean align(String ruleName, Collection sequence, boolean with_gaps) {
+		XSDParticle.DFA rule = (XSDParticle.DFA) rules.get(ruleName);
 		if (with_gaps){
 			Vector startfrom = new Vector();
 			startfrom.add(rule.getInitialState());			
 			return alignWithGaps(sequence.iterator(), startfrom, rule.getStates());
 		}
-		return align(rule, sequence);
+		return align(ruleName, sequence);
 	}
 	
     /**
@@ -334,17 +361,32 @@ public class xsdRulesManagerImpl {
      * @param sequence
      * @return
      */
-	public boolean align (XSDParticle.DFA rule, Collection sequence){
-		
+	public boolean align (String ruleName, Collection sequence){
+		XSDParticle.DFA rule = (XSDParticle.DFA) rules.get(ruleName);
 		XSDParticle.DFA.State initialState = rule.getInitialState();
 		XSDParticle.DFA.State finalState = initialState;
 		XSDParticle.DFA.Transition tr;
 		
 		for (Iterator i = sequence.iterator(); i.hasNext() && finalState != null;) {
-			tr= getAcceptingTransition(finalState,(String) i.next());
-			
-			//System.err.println("transizione: "+XSDParticleImpl.XSDNFA.getComponentLabel(Dtr.getParticle()));
-			finalState = tr!=null?tr.getState():null;
+			String childName = (String) i.next();
+			if(childName.equals("#PCDATA")){
+				XSDElementDeclaration elemDecl = (XSDElementDeclaration) elemDeclNames.get(ruleName);
+				XSDTypeDefinition elemType = elemDecl.getType();
+				if(elemType.getComplexType()!=null && ((XSDComplexTypeDefinition)elemType).isMixed()){
+					System.err.println("isMixed");
+				}
+				else{
+					tr= getAcceptingTransition(finalState,childName);
+//					System.err.println("transizione: "+XSDParticleImpl.XSDNFA.getComponentLabel(Dtr.getParticle()));
+					finalState = tr!=null?tr.getState():null;
+				}
+			}
+			else{
+				tr= getAcceptingTransition(finalState,childName);
+				
+				//System.err.println("transizione: "+XSDParticleImpl.XSDNFA.getComponentLabel(Dtr.getParticle()));
+				finalState = tr!=null?tr.getState():null;
+			}			
 		}
 		if(finalState!=null){
 			System.err.println("FinalState Exiting Size: "+finalState.getTransitions().size());
@@ -487,6 +529,7 @@ public class xsdRulesManagerImpl {
               
         }
         
+        createRuleForPCDATA();
         
         List allAttributes = schema.getAttributeGroupDefinitions();//etAttributeDeclarations();
         
@@ -711,8 +754,12 @@ public class xsdRulesManagerImpl {
                         State dfsa_destination = getNextState(dfsa_node, dfsa_edge);
                         ContentGraph.Node graph_destination = (ContentGraph.Node)graph_nodes_table.get(dfsa_destination.toString());
                         graph_node.addEdge(graph_edge, graph_destination);
+                       
                 }
-
+                
+                if(isMixed(elemName))
+                    graph_node.addEdge("#PCDATA", last);
+                
                 // se il nodo e' un nodo iniziale del DFSA aggiunge una transizione vuota
                 // dal nodo iniziale del ContentGraph
                 if (rule.getInitialState().equals(dfsa_node))
@@ -733,6 +780,12 @@ public class xsdRulesManagerImpl {
 
         return graph;
 }
+    
+    public boolean isMixed(String elemName){
+    	XSDElementDeclaration elemDecl = (XSDElementDeclaration) elemDeclNames.get(elemName);
+		XSDTypeDefinition elemType = elemDecl.getType();
+		return(elemType.getComplexType()!=null && ((XSDComplexTypeDefinition)elemType).isMixed());
+    }
     
     
     

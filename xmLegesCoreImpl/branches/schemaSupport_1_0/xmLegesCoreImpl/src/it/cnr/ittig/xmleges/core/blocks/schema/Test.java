@@ -100,7 +100,7 @@ public class Test {
 		
 		String defaultContent = "";
 		try{
-			defaultContent=sRM.getDefaultContent("articolo");
+			defaultContent=sRM.getDefaultContent("meta");
 		}
 		catch(Exception e){
 			System.err.println("exc in getDefaultContent "+e.getMessage());

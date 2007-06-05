@@ -850,11 +850,12 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 
 	
 		
-//      FIXME da implementare quando funzioner� il queryTextContent
+//      FIXME da implementare quando funzionera' il queryTextContent
 		
-//		if (queryTextContent(elem_name)) // don't explode text and mixed
-//			// elements to save iterations
-//			return createTextContentGraph(elem_name);
+		if (queryTextContent(elem_name)) // don't explode text and mixed
+			// elements to save iterations
+			return createTextContentGraph(elem_name);
+		
 //
 //		DFSA elem_rule = (DFSA) rules.get(elem_name);
 //		if (elem_rule == null)
