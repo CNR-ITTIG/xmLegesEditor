@@ -983,19 +983,14 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 		return str_children;
 	}
 
+
 	/**
-	 // FIXME
-	 * 
 	 * Ritorna il nome di un nodo
 	 * 
 	 * @param dom_node il nodo di cui si richiede il nome
 	 * @throws DtdRulesManagerException
 	 */
-	public String getNodeName(Node dom_node) throws DtdRulesManagerException {
-//		if (dom_node.getNodeType() == Node.TEXT_NODE)
-//			return new String("#PCDATA");
-//		return dom_node.getNodeName();
-		
+	public String getNodeName(Node dom_node) throws DtdRulesManagerException {		
 		if (dom_node.getNodeType() == Node.ELEMENT_NODE)
 			return dom_node.getNodeName();
 		if (dom_node.getNodeType() == Node.TEXT_NODE)
@@ -1061,8 +1056,8 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			throw new DtdRulesManagerException("node is null");
 		if (dom_node.getNodeType() != Node.ELEMENT_NODE)
 			return true;
-		//return xsdRM.isValid(getNodeName(dom_node), getChildren(dom_node));
-		return isValid(getNodeName(dom_node), getChildren(dom_node));
+		return xsdRM.isValid(getNodeName(dom_node), getChildren(dom_node));
+		//return isValid(getNodeName(dom_node), getChildren(dom_node));
 	}
 
 	/**
@@ -1076,8 +1071,8 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			throw new DtdRulesManagerException("node is null");
 		if (dom_node.getNodeType() != Node.ELEMENT_NODE)
 			return true;
-		//return xsdRM.isValid(getNodeName(dom_node), UtilLang.singleton("#PCDATA"));
-		return isValid(getNodeName(dom_node), UtilLang.singleton("#PCDATA"));
+		return xsdRM.isValid(getNodeName(dom_node), UtilLang.singleton("#PCDATA"));
+		//return isValid(getNodeName(dom_node), UtilLang.singleton("#PCDATA"));
 	}
 
 	/**

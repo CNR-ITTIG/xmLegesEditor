@@ -53,18 +53,19 @@ public class xsdRulesManagerImpl {
 	}
 
 	
-	
+	/**
+	 * 
+	 * @param elemDecl
+	 */
 	public void createRuleForElement(XSDElementDeclaration elemDecl){
 		
 		// ?? come gestire: i simpleType
 		//				  : i complexType con typedef.getComplexType NULL
 		//				  : i complexType con typedef.getName NULL (anonymous)
 		
-//		System.out.println("sto creando la regola per: "+elemDecl.getName());
+
 		XSDTypeDefinition typedef = elemDecl.getType();
-		
-		
-        
+	        
         if (typedef instanceof XSDSimpleTypeDefinition){
             System.err.println(elemDecl.getQName()+" : simple Type");
             
@@ -193,6 +194,8 @@ public class xsdRulesManagerImpl {
       
 	}
 
+	
+	// FIXME serve ?
 	public void createRuleForPCDATA(){
         
         XSDParticle xsdParticle; 
@@ -249,7 +252,6 @@ public class xsdRulesManagerImpl {
 		if (rule == null)
 			System.err.println("No rule for element <" + elem_name + ">");
 		return alignAlternatives(elem_children, rule, choice_point);
-
 	}
 	
 	
@@ -291,12 +293,17 @@ public class xsdRulesManagerImpl {
 		    nameSpaceUri = "http://www.w3.org/HTML/1998/html4";
 		    label = label.substring(label.indexOf(":")+1);
 		}
-		else
+		else if(label.startsWith("dsp:")){
+			nameSpaceUri = "http://www.normeinrete.it/nir/disposizioni/2.2/";
+			label = label.substring(label.indexOf(":")+1);
+		}else
 			nameSpaceUri = targetNameSpace;
 		
 		XSDParticle.DFA.Transition accepting = fromState.accept(nameSpaceUri,label);
 		return  accepting;
 	}
+	
+	
 	
 	/**
 	 * 
@@ -327,14 +334,7 @@ public class xsdRulesManagerImpl {
 		return v;
 	}
 	
-	
-	
-	/**
-	 * xsdparticle.issubset(anotherparticle)?????????
-	 */
-	
-	
-	
+
 	
 	/**
 	 * Allinea una sequenza di stringhe con l'automa
@@ -370,32 +370,20 @@ public class xsdRulesManagerImpl {
 		for (Iterator i = sequence.iterator(); i.hasNext() && finalState != null;) {
 			String childName = (String) i.next();
 			if(childName.equals("#PCDATA")){
-				XSDElementDeclaration elemDecl = (XSDElementDeclaration) elemDeclNames.get(ruleName);
-				XSDTypeDefinition elemType = elemDecl.getType();
-				if(elemType.getComplexType()!=null && ((XSDComplexTypeDefinition)elemType).isMixed()){
-					System.err.println("isMixed");
+				if(isMixed(ruleName)){
+					System.err.println(ruleName+" is Mixed");
 				}
 				else{
 					tr= getAcceptingTransition(finalState,childName);
-//					System.err.println("transizione: "+XSDParticleImpl.XSDNFA.getComponentLabel(Dtr.getParticle()));
 					finalState = tr!=null?tr.getState():null;
 				}
 			}
 			else{
 				tr= getAcceptingTransition(finalState,childName);
-				
-				//System.err.println("transizione: "+XSDParticleImpl.XSDNFA.getComponentLabel(Dtr.getParticle()));
 				finalState = tr!=null?tr.getState():null;
 			}			
 		}
-		if(finalState!=null){
-			System.err.println("FinalState Exiting Size: "+finalState.getTransitions().size());
-			if(finalState.isAccepting())
-			  System.err.println("FinalState ACCEPTING: TRUE");
-			else
-			  System.err.println("FinalState ACCEPTING: FALSE");
-		}
-		return (finalState != null && finalState.isAccepting());//&& finalState.getTransitions().size()==0);   // se non ci sono transizioni uscenti e' un nodo finale 	
+		return (finalState != null && finalState.isAccepting());
 	}
 	
 	
@@ -468,7 +456,7 @@ public class xsdRulesManagerImpl {
 			last_node = getNextState(last_node, (String) seq_array[i]);
 		}
 		if (last_node == null){
-			System.out.println("The sequence does not align, cannot find alternatives");
+			System.out.println("The sequence does not align, cannot find alternatives"+sequence.toString());
 			return null;
 		}
 
@@ -488,7 +476,6 @@ public class xsdRulesManagerImpl {
 			if (last_node != null && last_node.isAccepting())
 				alternatives.add(symbol);
 		}
-
 		return alternatives;
 	}
 
@@ -497,10 +484,6 @@ public class xsdRulesManagerImpl {
 	
 	
 	public void loadRules(String schemaURL){	
-		
-		
-		
-		
 		
         XSDSchema schema = null;
 		try{
@@ -685,6 +668,8 @@ public class xsdRulesManagerImpl {
 		}
 		return false;
 	}
+	
+	
 	/**
      * 
      * @param dfa
@@ -695,39 +680,12 @@ public class xsdRulesManagerImpl {
       ((XSDParticleImpl.XSDNFA)dfa).dump(System.err);
     }
     
-//    private boolean alignWithGaps(Iterator nav, Vector startFrom) throws DtdRulesManagerException {
-//		if (!nav.hasNext())
-//			return true;
-//		String token = (String) nav.next();
-//
-//		// cerca tutti i nodi che riconoscono il token
-//		Collection nodes = nodes_table.values();
-//		Vector new_startFrom = new Vector();
-//		for (Iterator id = nodes.iterator(); id.hasNext();) {
-//			Node src = (Node) id.next();
-//			Node dest = src.getNext(token);
-//			if (dest != null) {
-//				// verifica che il nodo attuale sia raggiungible
-//				// dall'insieme dei nodi di partenza
-//				for (Iterator is = startFrom.iterator(); is.hasNext();) {
-//					Node start = (Node) is.next();
-//					if (canReach(start, src)) {
-//						// aggiunge il nodo al nuovo insieme dei nodi di partenza
-//						new_startFrom.addElement(dest);
-//					}
-//				}
-//			}
-//		}
-//
-//		if (new_startFrom.size() == 0)
-//			return false;
-//		return alignWithGaps(nav, new_startFrom);
-//	}
-	
 
-    
-    
-    
+	/**
+	 * 
+	 * @param elemName
+	 * @return
+	 */    
     public ContentGraph createContentGraph(String elemName) {
     	
     	XSDParticle.DFA rule = (XSDParticle.DFA)rules.get(elemName);
@@ -752,26 +710,32 @@ public class xsdRulesManagerImpl {
                         String dfsa_edge = (String) j.next();
                         String graph_edge = dfsa_edge;
                         State dfsa_destination = getNextState(dfsa_node, dfsa_edge);
+                        if(dfsa_edge.startsWith("dsp"))
+                        	System.err.println("dfsa_edge = "+dfsa_edge);
+                        
+                        if(dfsa_destination == null){
+                        	System.out.println("dfsa_edge = "+dfsa_edge);
+                        }
                         ContentGraph.Node graph_destination = (ContentGraph.Node)graph_nodes_table.get(dfsa_destination.toString());
                         graph_node.addEdge(graph_edge, graph_destination);
                        
                 }
                 
-                if(isMixed(elemName))
-                    graph_node.addEdge("#PCDATA", last);
+                
+//                // FIXME    ?
+//                if(isMixed(elemName))
+//                    graph_node.addEdge("#PCDATA", last);
                 
                 // se il nodo e' un nodo iniziale del DFSA aggiunge una transizione vuota
                 // dal nodo iniziale del ContentGraph
                 if (rule.getInitialState().equals(dfsa_node))
                         first.addEdge("#EPS", graph_node);
 
-                // se il nodo e' un nodo finale del DFSA aggiunge una transizione vuota verso
-                // il
+                // se il nodo e' un nodo finale del DFSA aggiunge una transizione vuota verso il
                 // nodo finale del ContentGraph
                 if (dfsa_node.isAccepting()) {
                         if (rule.getInitialState().equals(dfsa_node)) {
-                                // in questo modo si previene che esistano elementi con il contenuto
-                                // vuoto
+                                // in questo modo si previene che esistano elementi con il contenuto vuoto
                                 graph_node.addEdge("#PCDATA", last);
                         } else
                                 graph_node.addEdge("#EPS", last);
@@ -787,95 +751,7 @@ public class xsdRulesManagerImpl {
 		return(elemType.getComplexType()!=null && ((XSDComplexTypeDefinition)elemType).isMixed());
     }
     
-    
-    
-   // PROBLEMA DELL'OutofMemory: 
-   // FIXME  
-    
-   // in SchemaRulesManagerImpl.getContentGraph manca la parte sul queryTextContent e il metodo
-   // createTextContentGraph(elem_name); per l'esplosione degli archi elemento (descrittori, redazionale, etc..)
-    
-//   NON SI VERIFICA
-    //   if (edge instanceof ContentGraph) {
-    
-//  check every edge of the old graph
-//	for (Iterator i = graph.visitNodes(); i.hasNext();) {
-//		ContentGraph.Node src = (ContentGraph.Node) i.next();
-//		for (int j = 0; j < src.getNoEdges(); j++) {
-//			Object edge = src.getEdge(j);
-//			String edge_name = src.getEdgeName(j);
-//			if (edge instanceof ContentGraph) {
-//				System.err.println(edge_name+"  instanceOf ContentGraph");
-//				// recursively explore subgraph
-//				explodeContentGraph((ContentGraph) edge);
-//			} else if (edge_name.compareTo("#PCDATA") != 0 && edge_name.compareTo("#EPS") != 0) {
-//				// replace edge with ContentGraph
-//				src.setEdge(getContentGraph(edge_name), j);
-//			}
-//		}
-//	}
-    
-    
-//    
-//   ORIGINAL    
-//    
-// 
-//    /**
-//	 * Crea un ContentGraph che rappresenta il contenuto di questo elemento
-//	 */
-//	public ContentGraph createContentGraph() {
-//
-//		ContentGraph graph = new ContentGraph(name);
-//		ContentGraph.Node first = graph.getFirst();
-//		ContentGraph.Node last = graph.getLast();
-//
-//		// aggiunge un nodo al grafo per ogni nodo del DFSA
-//		HashMap graph_nodes_table = new HashMap();
-//		for (Iterator i = nodes_table.keySet().iterator(); i.hasNext();) {
-//			graph_nodes_table.put((String) i.next(), graph.addNode());
-//		}
-//
-//		// per ogni nodo del DFSA
-//		for (Iterator i = nodes_table.keySet().iterator(); i.hasNext();) {
-//			String node_name = (String) i.next();
-//			DFSA.Node dfsa_node = (DFSA.Node) nodes_table.get(node_name);
-//			ContentGraph.Node graph_node = (ContentGraph.Node) graph_nodes_table.get(node_name);
-//
-//			// aggiunge un arco per ogni transizione
-//			for (Iterator j = dfsa_node.getVocabulary().iterator(); j.hasNext();) {
-//				String dfsa_edge = (String) j.next();
-//				String graph_edge = dfsa_edge;
-//				DFSA.Node dfsa_destination = dfsa_node.getNext(dfsa_edge);
-//				ContentGraph.Node graph_destination = (ContentGraph.Node) graph_nodes_table.get(dfsa_destination.getName());
-//				graph_node.addEdge(graph_edge, graph_destination);
-//			}
-//
-//			// se il nodo e' un nodo iniziale del DFSA aggiunge una transizione vuota
-//			// dal nodo iniziale del ContentGraph
-//			if (dfsa_node.isStart())
-//				first.addEdge("#EPS", graph_node);
-//
-//			// se il nodo e' un nodo finale del DFSA aggiunge una transizione vuota verso
-//			// il
-//			// nodo finale del ContentGraph
-//			if (dfsa_node.isEnd()) {
-//				if (dfsa_node.isStart()) {
-//					// in questo modo si previene che esistano elementi con il contenuto
-//					// vuoto
-//					graph_node.addEdge("#PCDATA", last);
-//				} else
-//					graph_node.addEdge("#EPS", last);
-//			}
-//		}
-//
-//		return graph;
-//	}
-//   
-// 
-//    
-    
-    
-    
+
     
     
 }
