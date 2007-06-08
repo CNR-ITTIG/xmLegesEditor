@@ -99,9 +99,6 @@ public class xsdRulesManagerImpl {
         else if (typedef instanceof XSDComplexTypeDefinition){
             System.err.println(elemDecl.getQName()+" : complex Type");
             
-            if(((XSDComplexTypeDefinition)typedef).isMixed())
-            	System.err.println("------------------------>          MIXED");
-            
             
             if(typedef.getComplexType()!=null){
 
@@ -118,6 +115,22 @@ public class xsdRulesManagerImpl {
                 }
 
                 XSDParticle.DFA dfa = (XSDParticle.DFA) typedef.getComplexType().getDFA();
+                
+                if(((XSDComplexTypeDefinition)typedef).isMixed()){
+                	
+//                	List nodes = dfa.getStates();
+//                	for (Iterator id = nodes.iterator(); id.hasNext();) {
+//            			State state = (State) id.next();
+//            			if(state != dfa.getInitialState() && !state.isAccepting()){
+//            				((XSDParticleImpl.XSDNFA.StateImpl)state).createTransition(xsdParticle, state);
+//            				state.
+//            			}
+//                	}
+                	System.err.println("------------------------>          MIXED");
+                }
+                
+                
+                
                 rules.put(elemDecl.getQName(), dfa);
                 elemDeclNames.put(elemDecl.getQName(), elemDecl);
 
@@ -251,7 +264,7 @@ public class xsdRulesManagerImpl {
 		XSDParticle.DFA rule = (XSDParticle.DFA) rules.get(elem_name);
 		if (rule == null)
 			System.err.println("No rule for element <" + elem_name + ">");
-		return alignAlternatives(elem_children, rule, choice_point);
+		return alignAlternatives(elem_children, elem_name, choice_point);
 	}
 	
 	
@@ -261,20 +274,28 @@ public class xsdRulesManagerImpl {
 	 * @param label
 	 * @return
 	 */
-	public XSDParticle.DFA.State getNextState(XSDParticle.DFA.State fromState, String label){
-		
-		// FIXME     sistemare prefissi e namespace
-		String nameSpaceUri;
-		if(label.startsWith("h:")){
-		    nameSpaceUri = "http://www.w3.org/HTML/1998/html4";
-		    label = label.substring(label.indexOf(":")+1);
+	public XSDParticle.DFA.State getNextState(String ruleName, XSDParticle.DFA.State fromState, String label){
+		if(isMixed(ruleName) && label.equalsIgnoreCase("#PCDATA")){
+			return fromState;
 		}
-		else
-			nameSpaceUri = targetNameSpace;
+		return getAcceptingTransition(fromState,label)!=null?getAcceptingTransition(fromState,label).getState():null;
 		
-		
-		XSDParticle.DFA.State next = (fromState.accept(nameSpaceUri,label)!=null)?fromState.accept(nameSpaceUri,label).getState():null;
-		return next;
+//		// FIXME     sistemare prefissi e namespace
+//		String nameSpaceUri;
+//		if(label.startsWith("h:")){
+//		    nameSpaceUri = "http://www.w3.org/HTML/1998/html4";
+//		    label = label.substring(label.indexOf(":")+1);
+//		}
+//		else if(label.startsWith("dsp:")){
+//			nameSpaceUri = "http://www.normeinrete.it/nir/disposizioni/2.2/";
+//			label = label.substring(label.indexOf(":")+1);
+//		}
+//		else
+//			nameSpaceUri = targetNameSpace;
+//		
+//		
+//		XSDParticle.DFA.State next = (fromState.accept(nameSpaceUri,label)!=null)?fromState.accept(nameSpaceUri,label).getState():null;
+//		return next;
 		
 	}
 	
@@ -350,7 +371,7 @@ public class xsdRulesManagerImpl {
 		if (with_gaps){
 			Vector startfrom = new Vector();
 			startfrom.add(rule.getInitialState());			
-			return alignWithGaps(sequence.iterator(), startfrom, rule.getStates());
+			return alignWithGaps(ruleName, sequence.iterator(), startfrom, rule.getStates());
 		}
 		return align(ruleName, sequence);
 	}
@@ -371,16 +392,14 @@ public class xsdRulesManagerImpl {
 			String childName = (String) i.next();
 			if(childName.equals("#PCDATA")){
 				if(isMixed(ruleName)){
-					System.err.println(ruleName+" is Mixed");
+					//System.err.println(ruleName+" is Mixed");
 				}
 				else{
-					tr= getAcceptingTransition(finalState,childName);
-					finalState = tr!=null?tr.getState():null;
+					finalState = getNextState(ruleName, finalState,childName);
 				}
 			}
 			else{
-				tr= getAcceptingTransition(finalState,childName);
-				finalState = tr!=null?tr.getState():null;
+				finalState = getNextState(ruleName, finalState,childName);
 			}			
 		}
 		return (finalState != null && finalState.isAccepting());
@@ -390,6 +409,9 @@ public class xsdRulesManagerImpl {
 	
 	
 	/**
+	 * 
+	 * gestire isMixed
+	 * 
 	 * Allinea una sequenza di string con l'automa, con la possibilita' di inserire dei
 	 * gaps fra i token
 	 * 
@@ -399,7 +421,7 @@ public class xsdRulesManagerImpl {
 	 * @return <code>true</code> se la sequenza di nodi allinea con l'automa
 	 * @throws DtdRulesManagerException
 	 */
-	public boolean alignWithGaps(Iterator nav, Vector startFrom, List nodes){
+	public boolean alignWithGaps(String ruleName, Iterator nav, Vector startFrom, List nodes){
 
 		if (!nav.hasNext())
 			return true;
@@ -410,9 +432,8 @@ public class xsdRulesManagerImpl {
 		Vector new_startFrom = new Vector();
 		for (Iterator id = nodes.iterator(); id.hasNext();) {
 			State src = (State) id.next();
-			Transition transitionDest = getAcceptingTransition(src,token);
-			if (transitionDest != null) {
-				State dest=transitionDest.getState();
+			State dest = getNextState(ruleName, src,token);
+			if (dest != null) {
 				// verifica che il nodo attuale sia raggiungible
 				// dall'insieme dei nodi di partenza
 				for (Iterator is = startFrom.iterator(); is.hasNext();) {
@@ -427,7 +448,7 @@ public class xsdRulesManagerImpl {
 
 		if (new_startFrom.size() == 0)
 			return false;
-		return alignWithGaps(nav, new_startFrom, nodes);
+		return alignWithGaps(ruleName, nav, new_startFrom, nodes);
 	}
 	
 	/**
@@ -440,7 +461,9 @@ public class xsdRulesManagerImpl {
 	 * @return la collezione di alternative
 	 * @throws DtdRulesManagerException
 	 */
-	public Collection alignAlternatives(Collection sequence, XSDParticle.DFA rule, int choice_point) {
+	public Collection alignAlternatives(Collection sequence, String ruleName, int choice_point) {
+		
+		XSDParticle.DFA rule = (XSDParticle.DFA) rules.get(ruleName);
 		
 		if (rule.getStates().size() == 0)
 			System.out.println("Empty automata");
@@ -452,9 +475,8 @@ public class xsdRulesManagerImpl {
 
 		// align until the choice point
 		//verifica allineamento della sequenza di partenza sequence
-		for (int i = 0; i <= choice_point && i < seq_array.length && last_node != null; i++) {
-			last_node = getNextState(last_node, (String) seq_array[i]);
-		}
+		for (int i = 0; i <= choice_point && i < seq_array.length && last_node != null; i++) 
+			   last_node = getNextState(ruleName, last_node, (String) seq_array[i]);
 		if (last_node == null){
 			System.out.println("The sequence does not align, cannot find alternatives"+sequence.toString());
 			return null;
@@ -468,14 +490,18 @@ public class xsdRulesManagerImpl {
 			String symbol = (String) v.next();
 
 			// align from the choice point
-			last_node = getNextState(choice_node, symbol);
+			last_node = getNextState(ruleName, choice_node, symbol);
 			for (int i = choice_point + 1; i < seq_array.length && last_node != null; i++)
-				last_node = getNextState(last_node, (String) seq_array[i]);
+				last_node = getNextState(ruleName, last_node, (String) seq_array[i]);
 
 			// valid alternative
 			if (last_node != null && last_node.isAccepting())
 				alternatives.add(symbol);
 		}
+		// ?
+		if(isMixed(ruleName))
+			alternatives.add("#PCDATA");
+		
 		return alternatives;
 	}
 
@@ -709,7 +735,7 @@ public class xsdRulesManagerImpl {
                 for (Iterator j = getVocabulary(dfsa_node).iterator(); j.hasNext();) {
                         String dfsa_edge = (String) j.next();
                         String graph_edge = dfsa_edge;
-                        State dfsa_destination = getNextState(dfsa_node, dfsa_edge);
+                        State dfsa_destination = getNextState(elemName, dfsa_node, dfsa_edge);
                         if(dfsa_edge.startsWith("dsp"))
                         	System.err.println("dfsa_edge = "+dfsa_edge);
                         
