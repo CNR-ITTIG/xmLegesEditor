@@ -19,7 +19,7 @@ license      : GNU General Public License http://www.gnu.org/licenses/gpl.html
 
 <xsl:transform  xmlns:xsl   = "http://www.w3.org/1999/XSL/Transform"
                 xmlns:xlink = "http://www.w3.org/1999/xlink"
-                xmlns:h     = "http://www.w3.org/HTML/1998/html4"
+                xmlns       = "http://www.w3.org/HTML/1998/html4"
                 xmlns:mapper= "xalan://it.cnr.ittig.xmleges.core.blocks.panes.xsltmapper.XsltMapperImpl"
                 version     = "1.0"
 >
@@ -66,7 +66,7 @@ license      : GNU General Public License http://www.gnu.org/licenses/gpl.html
     		<xsl:when test="@status='soppresso'">color:red;  text-decoration:line-through;</xsl:when>
     		<xsl:when test="@status='inserito'">color:green;</xsl:when>
     		<xsl:when test="@style!=''"><xsl:value-of select="@style"/></xsl:when>
-    		<xsl:when test="@h:style!=''"><xsl:value-of select="@h:style"/></xsl:when>
+    		<!--xsl:when test="@h:style!=''"><xsl:value-of select="@h:style"/></xsl:when-->
     		<xsl:otherwise/>
     	</xsl:choose>
     </xsl:attribute>
