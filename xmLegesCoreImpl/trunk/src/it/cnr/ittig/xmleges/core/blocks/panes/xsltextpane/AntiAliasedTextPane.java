@@ -415,16 +415,18 @@ public class AntiAliasedTextPane extends JTextPane implements DocumentListener, 
 			if (logger.isDebugEnabled())
 				logger.debug("node: " + node);
 			if (xsltParam != null)
+				ret = UtilXslt.serializedApplyXslt(node, xslt, xsltParam);
 				//ret = UtilXslt.applyXsltToString(node,xslt,xsltParam);
-				nodeHtml = UtilXslt.applyXslt(node, xslt, xsltParam);
+				//nodeHtml = UtilXslt.applyXslt(node, xslt, xsltParam);
 			else
+				ret = UtilXslt.serializedApplyXslt(node, xslt);
 				//ret = UtilXslt.applyXsltToString(node,xslt);
-				nodeHtml = UtilXslt.applyXslt(node, xslt);
+				//nodeHtml = UtilXslt.applyXslt(node, xslt);
 			if (logger.isDebugEnabled())
-				logger.debug("html:" + UtilDom.domToString(nodeHtml, true, null, false));
-
-			ret = UtilDom.domToString(nodeHtml, false, null, false, true);
-			ret = ret.substring(ret.indexOf('\n'));
+				//logger.debug("html:" + UtilDom.domToString(nodeHtml, true, null, false));
+				logger.debug("HTML: " + ret);
+			//ret = UtilXslt.serializedApplyXslt(node, xslt, xsltParam);//UtilDom.domToString(nodeHtml, false, null, false, true);
+			//ret = ret.substring(ret.indexOf('\n'));
 		} catch (Exception ex) {
 			logger.error(ex.toString(), ex);
 		}
@@ -724,7 +726,7 @@ public class AntiAliasedTextPane extends JTextPane implements DocumentListener, 
 
 	public void setText(String t) {
 		try {
-			javax.swing.text.Document doc = getDocument();
+			HTMLDocument doc = (HTMLDocument)getDocument();
 			doc.remove(0, doc.getLength());
 			if (t == null || t.equals("")) {
 				return;
