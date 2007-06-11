@@ -16,13 +16,11 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 <xsl:transform  xmlns:xsl   = "http://www.w3.org/1999/XSL/Transform"
                 xmlns:xlink = "http://www.w3.org/1999/xlink"
-                xmlns:h     = "http://www.w3.org/HTML/1998/html4"
-                xmlns       = "http://www.normeinrete.it/nir/2.2"
+                xmlns       = "http://www.w3.org/HTML/1998/html4"
+                xmlns:nir   = "http://www.normeinrete.it/nir/2.2"
                 xmlns:mapper= "xalan://it.cnr.ittig.xmleges.core.blocks.panes.xsltmapper.XsltMapperImpl"
                 version     = "1.0"
 >
-
-<xsl:output method="html" />
 
 <xsl:include href="xsltmapper-1.0.xsl"/>
 
@@ -49,12 +47,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 <xsl:template match="*[name()='titoloDoc']">
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-		<xsl:attribute name="style">
-			text-align: center;
-			font-size: x-large;
-			font-style: bold;
-			margin: 15 0 15 0;
-		</xsl:attribute>
+		<xsl:attribute name="style">text-align: center; font-size: x-large; font-style: bold; margin: 15 0 15 0;</xsl:attribute>
 		<!--	xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 		<xsl:apply-templates /	-->
         <xsl:call-template name="vigenza"/>	
@@ -63,11 +56,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 <xsl:template match="*[name()='emanante']">
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-		<xsl:attribute name="style">
-			text-align: center;
-			font-size: large;
-			margin: 10 0 10 0;
-		</xsl:attribute>
+		<xsl:attribute name="style">text-align: center; font-size: large; margin: 10 0 10 0;</xsl:attribute>
 		<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 		<xsl:apply-templates />
 	</xsl:element>
@@ -131,10 +120,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <!-- ================================================================================ -->
 <xsl:template match="*[name()='articolato']">
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-    	<xsl:attribute name="style">
-    	    text-align: center;
-    	    margin-top: 40 0 5 0;
-        </xsl:attribute>
+    	<xsl:attribute name="style">text-align: center; margin-top: 40 0 5 0;</xsl:attribute>
     	<!--	xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
     	<xsl:apply-templates /	-->
     	<xsl:call-template name="vigenza"/>
@@ -146,9 +132,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	name()='sezione' or name()='paragrafo' or name()='partizione' or name()='articolo'
 	]">
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-    	<xsl:attribute name="style">
-    	    font-size: x-large;
-            margin: 30 0 5 0;
+    	<xsl:attribute name="style">font-size: x-large; margin: 30 0 5 0;
 	    <xsl:if test="@status='soppresso'">color:red;  text-decoration:line-through;</xsl:if>
 	    <xsl:if test="@status='inserito'">color:green</xsl:if>
         </xsl:attribute>
@@ -281,6 +265,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     </xsl:element>
 </xsl:template>
 
+<!-- ==Cosa e'== -->
 <xsl:template match="*[name()='elencoAnnessi']">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
         <xsl:apply-templates />
@@ -289,8 +274,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 <xsl:template match="*[name()='annesso']">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-        <xsl:call-template name="vigenza"/>	
-		<!--	xsl:apply-templates /	-->
+        <xsl:apply-templates />
     </xsl:element>
 	<p/>
 	<hr width="80%" align="center"/>

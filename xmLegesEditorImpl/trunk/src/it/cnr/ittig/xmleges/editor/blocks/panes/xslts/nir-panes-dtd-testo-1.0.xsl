@@ -17,30 +17,27 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <xsl:transform  xmlns:xsl   = "http://www.w3.org/1999/XSL/Transform"
                 xmlns:xlink = "http://www.w3.org/1999/xlink"
                 xmlns:h     = "http://www.w3.org/HTML/1998/html4"
-                xmlns       = "http://www.normeinrete.it/nir/2.2"
+                xmlns       = "http://www.w3.org/HTML/1998/html4"
+                
                 xmlns:mapper= "xalan://it.cnr.ittig.xmleges.core.blocks.panes.xsltmapper.XsltMapperImpl"
                 version     = "1.0"
 >
-
-<xsl:output method="html" />
 
 <xsl:include href="xsltmapper-1.0.xsl"/>
 
 <!-- mettere elementi gestiti da questo file -->
 <xsl:strip-space elements="h:*" />
 
-
-
 <!-- ================================================================================ -->
 <!-- ============================================================= ELEMENTI VUOTI === -->
 <!-- ================================================================================ -->
 
 <xsl:template match="h:br">
-	<font color="blue" weight="bold">¶</font><br/>
+	<h:font color="blue" weight="bold">¶</h:font><h:br/>
 </xsl:template>
 
 <xsl:template match="h:hr">
-	<hr/>
+	<h:hr/>
 </xsl:template>
 
 <xsl:template match="h:img">
