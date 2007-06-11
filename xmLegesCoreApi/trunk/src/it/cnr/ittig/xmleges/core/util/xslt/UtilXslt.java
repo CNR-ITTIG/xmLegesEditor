@@ -67,10 +67,13 @@ public class UtilXslt {
 			factory.setAttribute("http://xml.apache.org/xalan/features/incremental",java.lang.Boolean.TRUE);
 			tr = factory.newTransformer(new StreamSource(xslt));
 			tr.setOutputProperty(OutputKeys.METHOD, "html");		  
-			
 			// OTHER
 			tr.setOutputProperty(OutputKeys.INDENT, "yes");
 		    tr.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+			tr.setOutputProperty(OutputKeys.ENCODING, "ISO-8859-15");
+			tr.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, "-//W3C//DTD HTML 4.01 Transitional//EN");
+			tr.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd");
+
 			transformers.put(xslt, tr);
 		}
 		return tr; 
@@ -310,9 +313,9 @@ public class UtilXslt {
 		DOMSource source = new DOMSource(node);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		Result result = new StreamResult(baos);
-		tr.clearParameters();
+	    tr.clearParameters();
 		setTransformerParam(tr, param);
-		tr.transform(source, result);
+   		tr.transform(source, result);
 		
 		return baos.toString();		
 	}
