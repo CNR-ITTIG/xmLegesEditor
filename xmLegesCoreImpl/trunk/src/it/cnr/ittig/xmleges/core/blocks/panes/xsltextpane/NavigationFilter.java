@@ -139,8 +139,6 @@ public class NavigationFilter extends javax.swing.text.NavigationFilter {
 							}
 						}
 						super.setDot(fb, newDest, bias);
-					} else { 
-						super.setDot(fb, dot, bias);
 					}
 				}
 
