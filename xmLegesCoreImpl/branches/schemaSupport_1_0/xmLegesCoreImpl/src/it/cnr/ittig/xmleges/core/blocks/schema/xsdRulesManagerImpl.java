@@ -53,6 +53,258 @@ public class xsdRulesManagerImpl {
 	}
 
 	
+	
+	public void loadRules(String schemaURL){	
+        XSDSchema schema = null;
+		try{
+		   schema = loadSchemaUsingResourceSet(schemaURL);
+		   if (null == schema){
+	            System.err.println("ERROR: Could not load a XSDSchema object!");
+	            return;
+	       } 
+		}catch(Exception e){
+			System.err.println("exception");
+		}
+		
+		targetNameSpace = schema.getTargetNamespace();
+		
+		System.err.println("loaded schema");
+		System.err.println("TARGET NAMESPACE: "+schema.getTargetNamespace());
+		
+		List allElements = schema.getElementDeclarations();
+		    
+        for (Iterator iter = allElements.iterator(); iter.hasNext(); /* no-op */){
+            XSDElementDeclaration elemDecl = (XSDElementDeclaration)iter.next();
+            
+            // logger
+            //System.err.println("----> Sto esaminando l'elemento: "+ elemDecl.getQName());   
+            createRuleForElement(elemDecl);      
+        }
+        
+        createRuleForPCDATA();
+        
+        List allAttributes = schema.getAttributeGroupDefinitions();//etAttributeDeclarations();
+        
+        for (Iterator iter = allAttributes.iterator(); iter.hasNext(); /* no-op */){
+        	XSDAttributeGroupDefinition attrDecl = (XSDAttributeGroupDefinition)iter.next();
+            
+        	// logger
+            //System.err.println("----> Sto esaminando l'attributo: "+ attrDecl.getQName());   
+            createRuleForAttribute(attrDecl);      
+        }   
+        System.err.println("Creating Rules DONE");
+	}
+	
+	
+	
+	
+	
+	
+//	// TRACELOADING
+//
+//
+//	public void traceLoading(java.lang.String xsdSchemaURI)
+//
+//
+//	    {
+//	      // Traces a resource set's loading behavior when loading the given URI.
+//	      //
+//	      // The code assumes that the following registration has taken place.
+//	      // Currently, unless special handling is implemented in the resource set, 
+//	      // only files ending with a .xsd extension will be loaded as schemas.
+//	      //
+//	      // Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xsd", new XSDResourceFactoryImpl());
+//
+//	      try
+//	      {
+//	        // Create a resource set.
+//	        //
+//	        ResourceSet resourceSet = 
+//	          new ResourceSetImpl()
+//	          {
+//	            public Resource getResource(URI uri, boolean loadOnDemand) 
+//	            {
+//	              Resource result = super.getResource(uri, true);
+//	              System.out.println("<!-- loaded: " + uri + " --> " + result);
+//	              return result;
+//	            }
+//	          };
+//
+//	        // Create a derived URIConverter to track normalization.
+//	        //
+//	        resourceSet.getURIConverter().getURIMap().put
+//	          (URI.createURI("http://www.example.com/logical.xsd"), 
+//	           URI.createURI("file://c:/physical.xsd"));
+//
+//	        // Load the schema from the URI.
+//	        //
+//	        XSDResourceImpl xsdSchemaResource = (XSDResourceImpl)resourceSet.getResource(URI.createURI(xsdSchemaURI), true);
+//
+//	        // Iterate over all the resources, i.e., the main resource 
+//	        // and those that have been included, imported, or redefined.
+//	        //
+//	        for (Iterator resources = resourceSet.getResources().iterator(); resources.hasNext(); )
+//	        {
+//	          // Check for schema resources.
+//	          //
+//	          Resource resource = (Resource)resources.next();
+//	          if (resource instanceof XSDResourceImpl)
+//	          {
+//	            XSDResourceImpl xsdResource = (XSDResourceImpl)resource;
+//
+//	            // Iterate over the schema's content's looking for directives.
+//	            //
+//	            XSDSchema xsdSchema = xsdResource.getSchema();
+//	            for (Iterator contents = xsdSchema.getContents().iterator(); contents.hasNext(); )
+//	            {
+//	              XSDSchemaContent xsdSchemaContent = (XSDSchemaContent)contents.next();
+//	              if (xsdSchemaContent instanceof XSDSchemaDirective)
+//	              {
+//	                // Check if the directive resolved to a schema.
+//	                //
+//	                XSDSchemaDirective xsdSchemaDirective = (XSDSchemaDirective)xsdSchemaContent;
+//	                if (xsdSchemaDirective.getResolvedSchema() == null)
+//	                {
+//	                  System.out.println("Unresolved schema in " + xsdResource.getURI());
+//	                  printComponent(System.out, xsdSchemaDirective);
+//	                }
+//	              }
+//	            }
+//	          }
+//	        }
+//	      }
+//	      catch (Exception exception)
+//	      {
+//	        System.out.println(exception.getLocalizedMessage());
+//	        exception.printStackTrace();
+//	      }
+//	    }
+
+	
+	
+	/**
+	 * 
+	 * @param schemaURL
+	 * @return
+	 * @throws Exception
+	 */
+    public static XSDSchema loadSchemaUsingResourceSet(String schemaURL) throws Exception{
+    	
+    	// provare
+//    	XSDResourceImpl.SchemaLocator sL = new XSDResourceImpl.SchemaLocator();
+//    	org.eclipse.xsd.util.XSDSchemaLocator
+    	
+ 
+    	
+    	
+    	System.out.println("--> 		Loading Schema Using Resource Set @ url "+schemaURL);
+    	
+    	XSDResourceFactoryImpl resourceFactory = new XSDResourceFactoryImpl();
+    	Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xsd",resourceFactory);
+    	
+    	
+//    	org.eclipse.xsd.util.XSDPrototypicalSchema  xPS = new org.eclipse.xsd.util.XSDPrototypicalSchema();
+//    	xPS.traceLoading(schemaURL);
+    	 		
+		// Create a resource set and load the main schema file into it.
+		ResourceSet resourceSet = new ResourceSetImpl(); 
+
+	
+		/////////////////////////////////////////////////////
+		//     PROBLEMI CON GLI IMPORT
+		/////////////////////////////////////////////////////
+		
+//		String xlinkURL =schemaURL+"/../xlink.xsd";
+//		File xlinkFile = new File(xlinkURL);
+//		if (xlinkFile.isFile()){
+//		  xlinkURL = URI.createFileURI(xlinkFile.getCanonicalFile().toString()).toString();
+//		  System.out.println(xlinkURL);
+//		}
+//		else
+//		   System.out.println(xlinkURL+"./xlink.xsd not file");
+//		
+//		// Create a derived URIConverter to track normalization.
+//	    //			
+		
+		
+//	    resourceSet.getURIConverter().getURIMap().put(URI.createURI("http://www.w3.org/1999/xlink"),URI.createURI("file:/home/tommaso/schemaWorkspace/xmLegesEditor/xsdData/NIR_XSD_completo/xlink.xsd"));//,URI.createURI("./xlink.xsd"));
+//	    resourceSet.getURIConverter().getURIMap().put(URI.createURI("http://www.w3.org/HTML/1998/html4"),URI.createURI("file:/home/tommaso/schemaWorkspace/xmLegesEditor/xsdData/NIR_XSD_completo/h.xsd"));//,URI.createURI("./h.xsd"));
+//	    resourceSet.getURIConverter().getURIMap().put(URI.createURI("http://www.normeinrete.it/nir/disposizioni/2.2"),URI.createURI("file:/home/tommaso/schemaWorkspace/xmLegesEditor/xsdData/NIR_XSD_completo/dsp.xsd"));//,URI.createURI("./dsp.xsd"));
+
+	    
+	    resourceSet.getURIConverter().getURIMap().put(URI.createURI("./xlink.xsd"),URI.createURI("file:/home/tommaso/schemaWorkspace/xmLegesEditor/xsdData/NIR_XSD_completo/xlink.xsd"));//,URI.createURI("./xlink.xsd"));
+	    resourceSet.getURIConverter().getURIMap().put(URI.createURI("./h.xsd"),URI.createURI("file:/home/tommaso/schemaWorkspace/xmLegesEditor/xsdData/NIR_XSD_completo/h.xsd"));//,URI.createURI("./h.xsd"));
+	    resourceSet.getURIConverter().getURIMap().put(URI.createURI("./dsp.xsd"),URI.createURI("file:/home/tommaso/schemaWorkspace/xmLegesEditor/xsdData/NIR_XSD_completo/dsp.xsd"));//,URI.createURI("./dsp.xsd"));
+		
+	    
+	    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	    //
+		// prende il path assoluto di schemaURL
+		//
+		File file = new File(schemaURL);
+		if (file.isFile())
+		  schemaURL = URI.createFileURI(file.getCanonicalFile().toString()).toString();
+		
+		resourceSet.getLoadOptions().put(XSDResourceImpl.XSD_TRACK_LOCATION, Boolean.TRUE);
+		
+		
+    	XSDResourceImpl xsdSchemaResource = null;
+    	try
+    	{
+	    	xsdSchemaResource = (XSDResourceImpl)resourceSet.getResource(URI.createURI(schemaURL),true);
+    	}
+    	catch(Exception e)
+    	{
+	    	System.err.println("Exception caught in method 'load schema using ResourceSet' message = " + e.getMessage() + " xsdSchemaResource: " +
+	    	xsdSchemaResource);    	
+    	}
+		
+		// getResources() returns an iterator over all the resources, i.e., the main resource
+		// and those that have been included, imported, or redefined.
+		for (Iterator resources = resourceSet.getResources().iterator(); resources.hasNext(); /* no-op */)
+		{
+		    // Return the first schema object found
+		    Resource resource = (Resource)resources.next();
+		    if (resource instanceof XSDResourceImpl)
+		    {
+		    	 	
+		    	 XSDResourceImpl xsdResource = (XSDResourceImpl)resource;
+
+		         // Iterate over the schema's content's looking for directives.
+		         //
+		         XSDSchema xsdSchema = xsdResource.getSchema();
+		         for (Iterator contents = xsdSchema.getContents().iterator(); contents.hasNext(); )
+		         {
+		           XSDSchemaContent xsdSchemaContent = (XSDSchemaContent)contents.next();
+		           if (xsdSchemaContent instanceof XSDSchemaDirective)
+		           {   
+		        	   XSDSchemaDirective xsdSchemaDirective = (XSDSchemaDirective)xsdSchemaContent;
+					   if (xsdSchemaDirective.getResolvedSchema() == null) {
+					   		System.err.println("Unresolved schema "+ xsdSchemaDirective.getSchemaLocation() +" in " + xsdResource.getURI());
+					   		if(xsdSchemaDirective instanceof XSDImport){
+					   			XSDImport xsdSchemaImport = (XSDImport)xsdSchemaDirective;
+					   			System.err.println("			IMPORT: namespace --> "+xsdSchemaImport.getNamespace());
+					   			System.err.println("			IMPORT: location  --> "+xsdSchemaImport.getSchemaLocation());
+					   		}
+					   } 
+					   else {
+					    		System.err.println("Resolved schema "+ xsdSchemaDirective.getSchemaLocation() +" in " + xsdResource.getURI());
+					    		if(xsdSchemaDirective instanceof XSDImport){
+						   			XSDImport xsdSchemaImport = (XSDImport)xsdSchemaDirective;
+						   			System.err.println("			IMPORT: namespace --> "+xsdSchemaImport.getNamespace());
+						   			System.err.println("			IMPORT: location  --> "+xsdSchemaImport.getSchemaLocation());
+						   		}
+					    	}  
+		           }
+		         }
+		        return xsdResource.getSchema();
+		    }
+		}
+		System.err.println("loadSchemaUsingResourceSet(" + schemaURL + ") did not contain any schemas!");
+		return null;
+	}
+     
+	
 	/**
 	 * 
 	 * @param elemDecl
@@ -65,9 +317,11 @@ public class xsdRulesManagerImpl {
 		
 
 		XSDTypeDefinition typedef = elemDecl.getType();
-	        
+
         if (typedef instanceof XSDSimpleTypeDefinition){
-            System.err.println(elemDecl.getQName()+" : simple Type");
+        	
+        	// logger
+            // System.err.println(elemDecl.getQName()+" : simple Type");
             
             XSDParticle xsdParticle;
             if (typedef.getContainer() instanceof XSDParticle)
@@ -90,14 +344,17 @@ public class xsdRulesManagerImpl {
         	rules.put(elemDecl.getQName(), dfa);
         	elemDeclNames.put(elemDecl.getQName(), elemDecl);
         	
-            
-            System.err.println("********** AUTOMA simple DI "+elemDecl.getQName()+" ************");
-            printDFA(dfa);
-            
+            // mettere nel logger
+        	 if(elemDecl.getQName().equals("h:p")){
+               System.err.println("********** AUTOMA simple DI "+elemDecl.getQName()+" ************");
+               printDFA(dfa);
+        	 }
         }
         
         else if (typedef instanceof XSDComplexTypeDefinition){
-            System.err.println(elemDecl.getQName()+" : complex Type");
+            
+        	// logger
+        	//System.err.println(elemDecl.getQName()+" : complex Type");
             
             
             if(typedef.getComplexType()!=null){
@@ -116,8 +373,7 @@ public class xsdRulesManagerImpl {
 
                 XSDParticle.DFA dfa = (XSDParticle.DFA) typedef.getComplexType().getDFA();
                 
-                if(((XSDComplexTypeDefinition)typedef).isMixed()){
-                	
+                if(((XSDComplexTypeDefinition)typedef).isMixed()){                	
 //                	List nodes = dfa.getStates();
 //                	for (Iterator id = nodes.iterator(); id.hasNext();) {
 //            			State state = (State) id.next();
@@ -126,7 +382,7 @@ public class xsdRulesManagerImpl {
 //            				state.
 //            			}
 //                	}
-                	System.err.println("------------------------>          MIXED");
+//                	System.err.println("------------------------>          MIXED");
                 }
                 
                 
@@ -134,10 +390,11 @@ public class xsdRulesManagerImpl {
                 rules.put(elemDecl.getQName(), dfa);
                 elemDeclNames.put(elemDecl.getQName(), elemDecl);
 
-              
-                System.err.println("********** AUTOMA DI "+elemDecl.getQName()+" ************");
-                printDFA(dfa);
-
+                // mettere nel LOGGER
+                if(elemDecl.getQName().equals("h:p")){
+                	System.err.println("********** AUTOMA DI "+elemDecl.getQName()+" ************");
+                	printDFA(dfa);
+                }
         	    
             }
             else{
@@ -161,9 +418,11 @@ public class xsdRulesManagerImpl {
                 rules.put(elemDecl.getQName(), dfa);
                 elemDeclNames.put(elemDecl.getQName(), elemDecl);
                 
-
-                System.err.println("********** AUTOMA speciale DI "+elemDecl.getQName()+" ************");
-                printDFA(dfa);
+                //mettere nel LOGGER
+                if(elemDecl.getQName().equals("h:p")){
+                  System.err.println("********** AUTOMA speciale DI "+elemDecl.getQName()+" ************");
+                  printDFA(dfa);
+                }
 
             }
         }
@@ -175,6 +434,12 @@ public class xsdRulesManagerImpl {
 		//createAlternativeContents(name, model);
 	}
 
+	
+	
+	/**
+	 * 
+	 * @param attrDecl
+	 */
 	public void createRuleForAttribute(XSDAttributeGroupDefinition attrDecl){
 		
 		//GLI ATTRIBUTI SONO SEMPRE DI TIPO SIMPLE!!
@@ -187,11 +452,13 @@ public class xsdRulesManagerImpl {
         	attributes.put(attrDecl.getQName(), dfa);
         	
             
-            System.err.println("********** AUTOMA simple DI "+attrDecl.getQName()+" ************");
-            printDFA(dfa);
+            //System.err.println("********** AUTOMA simple DI "+attrDecl.getQName()+" ************");
+            //printDFA(dfa);
             
-        }
-
+    }
+	
+	
+	// FIXME serve ?
 	public void createRuleForANY(){
 	        
         XSDParticle xsdParticle; 
@@ -220,11 +487,20 @@ public class xsdRulesManagerImpl {
     	XSDElementDeclaration xsdElementDeclaration = (XSDElementDeclaration)xsdParticle.getTerm();  // e' null (il term)
     	elemDeclNames.put("#PCDATA", xsdElementDeclaration);
         
-        System.err.println("********** AUTOMA DI #PCDATA ************");
-        printDFA(dfa);
+//        System.err.println("********** AUTOMA DI #PCDATA ************");
+//        printDFA(dfa);
       
 	}
 	
+	
+	
+	
+	/**
+	 * 
+	 * @param elem_name
+	 * @param elem_children
+	 * @return
+	 */
 	public boolean isValid(String elem_name, Collection elem_children)  {
 		return isValid(elem_name, elem_children, false);
 	}
@@ -268,6 +544,7 @@ public class xsdRulesManagerImpl {
 	}
 	
 	
+	
 	/**
 	 * 
 	 * @param fromState
@@ -278,28 +555,11 @@ public class xsdRulesManagerImpl {
 		if(isMixed(ruleName) && label.equalsIgnoreCase("#PCDATA")){
 			return fromState;
 		}
-		return getAcceptingTransition(fromState,label)!=null?getAcceptingTransition(fromState,label).getState():null;
-		
-//		// FIXME     sistemare prefissi e namespace
-//		String nameSpaceUri;
-//		if(label.startsWith("h:")){
-//		    nameSpaceUri = "http://www.w3.org/HTML/1998/html4";
-//		    label = label.substring(label.indexOf(":")+1);
-//		}
-//		else if(label.startsWith("dsp:")){
-//			nameSpaceUri = "http://www.normeinrete.it/nir/disposizioni/2.2/";
-//			label = label.substring(label.indexOf(":")+1);
-//		}
-//		else
-//			nameSpaceUri = targetNameSpace;
-//		
-//		
-//		XSDParticle.DFA.State next = (fromState.accept(nameSpaceUri,label)!=null)?fromState.accept(nameSpaceUri,label).getState():null;
-//		return next;
-		
+		return getAcceptingTransition(fromState,label)!=null?getAcceptingTransition(fromState,label).getState():null;		
 	}
 	
 
+	
 	/**
 	 * 
 	 * @param fromState
@@ -376,6 +636,8 @@ public class xsdRulesManagerImpl {
 		return align(ruleName, sequence);
 	}
 	
+	
+	
     /**
      * 
      * @param rule
@@ -386,21 +648,10 @@ public class xsdRulesManagerImpl {
 		XSDParticle.DFA rule = (XSDParticle.DFA) rules.get(ruleName);
 		XSDParticle.DFA.State initialState = rule.getInitialState();
 		XSDParticle.DFA.State finalState = initialState;
-		XSDParticle.DFA.Transition tr;
 		
 		for (Iterator i = sequence.iterator(); i.hasNext() && finalState != null;) {
 			String childName = (String) i.next();
-			if(childName.equals("#PCDATA")){
-				if(isMixed(ruleName)){
-					//System.err.println(ruleName+" is Mixed");
-				}
-				else{
-					finalState = getNextState(ruleName, finalState,childName);
-				}
-			}
-			else{
-				finalState = getNextState(ruleName, finalState,childName);
-			}			
+		    finalState = getNextState(ruleName, finalState,childName);			
 		}
 		return (finalState != null && finalState.isAccepting());
 	}
@@ -409,9 +660,6 @@ public class xsdRulesManagerImpl {
 	
 	
 	/**
-	 * 
-	 * gestire isMixed
-	 * 
 	 * Allinea una sequenza di string con l'automa, con la possibilita' di inserire dei
 	 * gaps fra i token
 	 * 
@@ -451,6 +699,8 @@ public class xsdRulesManagerImpl {
 		return alignWithGaps(ruleName, nav, new_startFrom, nodes);
 	}
 	
+	
+	
 	/**
 	 * Allinea una sequenza di stringhe con l'automa, esplorando tutte le possibili
 	 * alternative nella posizione specificata
@@ -478,7 +728,7 @@ public class xsdRulesManagerImpl {
 		for (int i = 0; i <= choice_point && i < seq_array.length && last_node != null; i++) 
 			   last_node = getNextState(ruleName, last_node, (String) seq_array[i]);
 		if (last_node == null){
-			System.out.println("The sequence does not align, cannot find alternatives"+sequence.toString());
+			System.out.println("The sequence "+sequence.toString()+" does not align with "+ruleName +" ,cannot find alternatives");
 			return null;
 		}
 
@@ -507,162 +757,6 @@ public class xsdRulesManagerImpl {
 
 
 	
-	
-	
-	public void loadRules(String schemaURL){	
-		
-        XSDSchema schema = null;
-		try{
-		   schema = loadSchemaUsingResourceSet(schemaURL);
-		   if (null == schema){
-	            System.err.println("ERROR: Could not load a XSDSchema object!");
-	            return;
-	       } 
-		}catch(Exception e){
-			System.err.println("exception");
-		}
-		
-		targetNameSpace = schema.getTargetNamespace();
-		
-		System.err.println("loaded schema");
-		System.err.println("TARGET NAMESPACE: "+schema.getTargetNamespace());
-		
-		List allElements = schema.getElementDeclarations();
-		
-        
-        for (Iterator iter = allElements.iterator(); iter.hasNext(); /* no-op */){
-            XSDElementDeclaration elemDecl = (XSDElementDeclaration)iter.next();
-            
-            System.err.println("----> Sto esaminando l'elemento: "+ elemDecl.getQName());   
-            createRuleForElement(elemDecl);
-              
-        }
-        
-        createRuleForPCDATA();
-        
-        List allAttributes = schema.getAttributeGroupDefinitions();//etAttributeDeclarations();
-        
-        		
-        
-        for (Iterator iter = allAttributes.iterator(); iter.hasNext(); /* no-op */){
-        	XSDAttributeGroupDefinition attrDecl = (XSDAttributeGroupDefinition)iter.next();
-            
-            System.err.println("----> Sto esaminando l'attributo: "+ attrDecl.getQName());   
-            createRuleForAttribute(attrDecl);
-              
-        }
-        
-       
-        
-        
-        System.err.println("Creating Rules DONE");
-	}
-	
-	
-	
-	/**
-	 * 
-	 * @param schemaURL
-	 * @return
-	 * @throws Exception
-	 */
-    public static XSDSchema loadSchemaUsingResourceSet(String schemaURL) throws Exception{
-
-    	    	
-    	XSDResourceFactoryImpl resourceFactory = new XSDResourceFactoryImpl();
-    	Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xsd",resourceFactory);
-    	 		
-		// Create a resource set and load the main schema file into it.
-		ResourceSet resourceSet = new ResourceSetImpl(); 
-
-	
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		//     PROBLEMI CON GLI IMPORT
-		/////////////////////////////////////////////////////
-		
-		String xlinkURL =schemaURL+"/../xlink.xsd";
-		File xlinkFile = new File(xlinkURL);
-		if (xlinkFile.isFile()){
-		  xlinkURL = URI.createFileURI(xlinkFile.getCanonicalFile().toString()).toString();
-		  System.out.println(xlinkURL);
-		}
-		else
-		   System.out.println(xlinkURL+"./xlink.xsd not file");
-		
-	    
-	   
-		// Create a derived URIConverter to track normalization.
-	    //			
-	    resourceSet.getURIConverter().getURIMap().put(URI.createURI("./xlink.xsd"),URI.createURI(xlinkURL));
-	    resourceSet.getURIConverter().getURIMap().put(URI.createURI("http://www.w3.org/HTML/1998/html4"),URI.createURI("./h.xsd"));
-	    resourceSet.getURIConverter().getURIMap().put(URI.createURI("http://www.normeinrete.it/nir/disposizioni/2.2"),URI.createURI("./dsp.xsd"));
-		
-	    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	    
-	    
-	    
-	    //
-		// prende il path assoluto di schemaURL
-		//
-		File file = new File(schemaURL);
-		if (file.isFile())
-		  schemaURL = URI.createFileURI(file.getCanonicalFile().toString()).toString();
-		
-		resourceSet.getLoadOptions().put(XSDResourceImpl.XSD_TRACK_LOCATION, Boolean.TRUE);
-		
-		
-    	XSDResourceImpl xsdSchemaResource = null;
-    	try
-    	{
-	    	xsdSchemaResource = (XSDResourceImpl)resourceSet.getResource(URI.createURI(schemaURL),true);
-    	}
-    	catch(Exception e)
-    	{
-	    	System.err.println("Exception caught in method 'load schema using ResourceSet' message = " + e.getMessage() + " xsdSchemaResource: " +
-	    	xsdSchemaResource);    	
-    	}
-		
-		// getResources() returns an iterator over all the resources, i.e., the main resource
-		// and those that have been included, imported, or redefined.
-		for (Iterator resources = resourceSet.getResources().iterator(); resources.hasNext(); /* no-op */)
-		{
-		    // Return the first schema object found
-		    Resource resource = (Resource)resources.next();
-		    if (resource instanceof XSDResourceImpl)
-		    {
-		    	 	
-		    	 XSDResourceImpl xsdResource = (XSDResourceImpl)resource;
-
-		         // Iterate over the schema's content's looking for directives.
-		         //
-		         XSDSchema xsdSchema = xsdResource.getSchema();
-		         for (Iterator contents = xsdSchema.getContents().iterator(); contents.hasNext(); )
-		         {
-		           XSDSchemaContent xsdSchemaContent = (XSDSchemaContent)contents.next();
-		           if (xsdSchemaContent instanceof XSDSchemaDirective)
-		           {   
-		        	   XSDSchemaDirective xsdSchemaDirective = (XSDSchemaDirective)xsdSchemaContent;
-					   if (xsdSchemaDirective.getResolvedSchema() == null) {
-					   		System.err.println("Unresolved schema "+ xsdSchemaDirective.getSchemaLocation() +" in " + xsdResource.getURI());
-					   		if(xsdSchemaDirective instanceof XSDImport){
-					   			XSDImport xsdSchemaImport = (XSDImport)xsdSchemaDirective;
-					   			System.err.println("			IMPORT: namespace --> "+xsdSchemaImport.getNamespace());
-					   			System.err.println("			IMPORT: location  --> "+xsdSchemaImport.getSchemaLocation());
-					   		}
-					   } 
-					   else {
-					    		System.err.println("Resolved schema "+ xsdSchemaDirective.getSchemaLocation() +" in " + xsdResource.getURI());
-					    	}  
-		           }
-		         }
-		        return xsdResource.getSchema();
-		    }
-		}
-		System.err.println("loadSchemaUsingResourceSet(" + schemaURL + ") did not contain any schemas!");
-		return null;
-	}
-    
-    
 	
     /**
 	 * Verifica che vi sia un path fra i due nodi
@@ -701,8 +795,7 @@ public class xsdRulesManagerImpl {
      * @param dfa
      */
     protected static void printDFA(XSDParticle.DFA dfa)
-    {
-    	
+    {	
       ((XSDParticleImpl.XSDNFA)dfa).dump(System.err);
     }
     
@@ -746,9 +839,8 @@ public class xsdRulesManagerImpl {
                         graph_node.addEdge(graph_edge, graph_destination);
                        
                 }
-                
-                
-//                // FIXME    ?
+                               
+//                // FIXME    ci vuole o no ? confronto col DFSA e XSDNFA
 //                if(isMixed(elemName))
 //                    graph_node.addEdge("#PCDATA", last);
                 
