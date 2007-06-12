@@ -14,11 +14,11 @@ public class Test {
         
 		String schemaURL = "../xmLegesEditor/xsdData/NIR_XSD_base/nirlight.xsd";
 		//String schemaURL = "../xmLegesEditor/xsdData/NIR_XSD_completo/nirstrict.xsd";
-		//String schemaURL = "../xmLegesEditor/temp/nirstrict.xsd";
 		
 		
 		
-		SchemaRulesManagerImpl sRM = new SchemaRulesManagerImpl();
+		
+		//SchemaRulesManagerImpl sRM = new SchemaRulesManagerImpl();
 		
 		
 		xsdRulesManagerImpl xsdRM = new xsdRulesManagerImpl();
@@ -60,7 +60,7 @@ public class Test {
 //		else
 //			System.err.println("person IS not VALID with nome email link");
 		
-		Vector vv=new Vector();
+		//Vector vv=new Vector();
 //		vv.add("num");
 //		vv.add("rubrica");
 //		vv.add("comma");
@@ -72,42 +72,56 @@ public class Test {
 //		vv.add("formulafinale");
 //		vv.add("conclusione");
 		
-		
+		Vector vv=new Vector();
 		vv.add("#PCDATA");
-//		vv.add("h:p");
-//		vv.add("h:p");
-//		vv.add("h:p");
-
+////		vv.add("h:p");
+////		vv.add("h:p");
+////		vv.add("h:p");
+//
 		System.out.println(xsdRM.isValid("h:p", vv));
-	
-//		Collection results = xsdRM.getAlternatives("h:p", vv, 0);
+		
+		//vv.add("articolo");
+
+		
+//		Vector vv=new Vector();
+//		vv.add("num");
+//		vv.add("rubrica");
+//		vv.add("comma");
+//		
+//		Collection results = xsdRM.getAlternatives("articolo", vv, 2);
 //		System.err.println("alternatives");
 //		for(Iterator i=results.iterator(); i.hasNext(); ){
 //			System.err.println(i.next().toString());
 //		}
-//		System.err.println("end");
 		
-//		String DTDdefaultContent = "";
+		
+//		deve venire 
+//		
+//		rif
+//		ndr
+//		#PCDATA
+//		mrif
+//		mod
+		
+		
+//      con schema manca #PCDATA
+
+		
+
+		
+		// default CONTENT
+		
+//		String defaultContent = "";
 //		try{
-//			DTDdefaultContent=sRM.getDTDDefaultContent("titoloDoc");
+//			defaultContent=sRM.getDefaultContent("capo");
 //		}
 //		catch(Exception e){
-//			System.err.println("exc in getDTDDefaultContent "+e.getMessage());
+//			e.printStackTrace();
+//			System.err.println("exc in getDefaultContent "+e.getStackTrace());
 //		}
-		
-//		System.out.println("       **DTD** DEFAULT CONTENT FOR ARTICOLO "+DTDdefaultContent);
-		
-		
-		String defaultContent = "";
-		try{
-			defaultContent=sRM.getDefaultContent("meta");
-		}
-		catch(Exception e){
-			System.err.println("exc in getDefaultContent "+e.getMessage());
-		}
-		
-		System.out.println("DEFAULT CONTENT FOR ARTICOLO "+defaultContent);
-		
+//		
+//		System.out.println("DEFAULT CONTENT FOR ARTICOLO "+defaultContent);
+//		
 	}
 
 }
