@@ -1,0 +1,141 @@
+<xsd:schema xmlns:xlink="http://www.w3.org/1999/xlink" targetNamespace="http://www.w3.org/HTML/1998/html4" xmlns="http://www.normeinrete.it/nir/2.2/" xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" xmlns:h="http://www.w3.org/HTML/1998/html4" elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:import namespace="http://www.w3.org/1999/xlink" schemaLocation="./xlink.xsd"/>
+	<xsd:import namespace="http://www.normeinrete.it/nir/2.2/" schemaLocation="./nirstrict.xsd"/>
+	<xsd:import namespace="http://www.normeinrete.it/nir/disposizioni/2.2/" schemaLocation="./dsp.xsd"/>
+
+	<xsd:attribute name="style" type="htmlstyle"/>
+
+	<xsd:attribute name="class" type="htmlclass"/>
+
+	<xsd:attribute name="title" type="anystring"/>
+
+	<xsd:element name="br"  type="emptyfac" />
+	<xsd:element name="hr"  type="emptyfac" />
+	<xsd:element name="img"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="emptyfac">
+					<xsd:attribute name="src" type="uri" use="required"/>
+					<xsd:attribute name="alt" type="anystring"/>
+					<xsd:attribute name="width" type="numero"/>
+					<xsd:attribute name="height" type="numero"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="input"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="emptyfac">
+					<xsd:attribute name="type" type="anystring" use="required"/>
+					<xsd:attribute name="size" type="numero"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="object"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="ParaLevelReq">
+					<xsd:attribute name="src" type="uri" use="required"/>
+					<xsd:attribute name="alt" type="anystring"/>
+					<xsd:attribute name="width" type="numero"/>
+					<xsd:attribute name="height" type="numero"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="b"  type="inlinefac" />
+	<xsd:element name="i"  type="inlinefac" />
+	<xsd:element name="u"  type="inlinefac" />
+	<xsd:element name="sub"  type="inlinefac" />
+	<xsd:element name="sup"  type="inlinefac" />
+	<xsd:element name="span"  type="inlinefac" />
+	<xsd:element name="a"  >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="inlinefac">
+					<xsd:attributeGroup ref="link"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="p"  type="inlinefac" />
+	<xsd:element name="div"  type="inlinefac" />
+	<xsd:element name="form" >
+		<xsd:complexType mixed="true">
+			<xsd:choice minOccurs="0" maxOccurs="unbounded" >
+				<xsd:group ref="elinline" />
+				<xsd:group ref="allblocchi" />
+				<xsd:element ref="h:input" />
+			</xsd:choice>
+				<xsd:attributeGroup ref="globalifac"/>
+				<xsd:attribute name="method" type="methodType" default="post" />
+				<xsd:attribute name="action" type="anystring"/>
+				<xsd:attribute name="enctype" type="anystring" default="x-url-encoded" />
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ul"  type="list" />
+	<xsd:element name="ol"  type="list" />
+	<xsd:element name="li"  type="ParaLevel" />
+	<xsd:element name="dl"  type="deflist" />
+	<xsd:element name="dt"  type="inlinefac" />
+	<xsd:element name="dd"  type="ParaLevel" />
+	<xsd:element name="table" >
+		<xsd:complexType >
+			<xsd:sequence >
+				<xsd:element ref="h:caption" minOccurs="0" maxOccurs="1" />
+				<xsd:choice >
+					<xsd:element ref="h:col" minOccurs="0" maxOccurs="unbounded" />
+					<xsd:element ref="h:colgroup" minOccurs="0" maxOccurs="unbounded" />
+				</xsd:choice>
+				<xsd:element ref="h:thead" minOccurs="0" maxOccurs="1" />
+				<xsd:element ref="h:tfoot" minOccurs="0" maxOccurs="1" />
+				<xsd:choice >
+					<xsd:element ref="h:tbody" minOccurs="1" maxOccurs="unbounded" />
+					<xsd:element ref="h:tr" minOccurs="1" maxOccurs="unbounded" />
+				</xsd:choice>
+			</xsd:sequence>
+				<xsd:attributeGroup ref="globalifac"/>
+				<xsd:attribute name="summary" type="anystring"/>
+				<xsd:attribute name="width" type="numero"/>
+				<xsd:attribute name="border" type="numero"/>
+				<xsd:attribute name="frame" type="TFrame"/>
+				<xsd:attribute name="rules" type="TRules"/>
+				<xsd:attribute name="cellspacing" type="numero"/>
+				<xsd:attribute name="cellpadding" type="numero"/>
+				<xsd:attribute name="datapagesize" type="numero"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="caption"  type="inlinefac" />
+	<xsd:element name="thead"  type="rows" />
+	<xsd:element name="tfoot"  type="rows" />
+	<xsd:element name="tbody"  type="rows" />
+	<xsd:element name="colgroup" >
+		<xsd:complexType >
+			<xsd:sequence >
+				<xsd:element ref="h:col" minOccurs="1" maxOccurs="unbounded" />
+			</xsd:sequence>
+				<xsd:attributeGroup ref="cols"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="col"  >
+		<xsd:complexType>
+			<xsd:attributeGroup ref="cols"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="tr" >
+		<xsd:complexType >
+			<xsd:choice minOccurs="1" maxOccurs="unbounded" >
+				<xsd:element ref="h:th" />
+				<xsd:element ref="h:td" />
+			</xsd:choice>
+				<xsd:attributeGroup ref="globalifac"/>
+				<xsd:attributeGroup ref="cellhalign"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="th"  type="cell" />
+	<xsd:element name="td"  type="cell" />
+
+</xsd:schema>
