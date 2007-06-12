@@ -1,16 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema xmlns="http://www.normeinrete.it/nir/2.2/" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.w3.org/HTML/1998/html4">
-
-	
+<xsd:schema xmlns:xlink="http://www.w3.org/1999/xlink" targetNamespace="http://www.w3.org/HTML/1998/html4" xmlns="http://www.normeinrete.it/nir/2.2/" xmlns:h="http://www.w3.org/HTML/1998/html4" elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
 	<xsd:import namespace="http://www.w3.org/1999/xlink" schemaLocation="./xlink.xsd"/>
 	<xsd:import namespace="http://www.normeinrete.it/nir/2.2/" schemaLocation="./nirlight.xsd"/>
-    
 
 
-	<xsd:element name="p" type="inlinefac"/>
-	<xsd:element name="div" type="inlinefac"/>
-	<xsd:element name="img">
+
+	<xsd:element name="p"  type="inlinefac" />
+	<xsd:element name="div"  type="inlinefac" />
+	<xsd:element name="img"  >
 		<xsd:complexType>
 			<xsd:attributeGroup ref="idfac"/>
 			<xsd:attributeGroup ref="HTMLattrs"/>
@@ -20,13 +17,13 @@
 			<xsd:attribute name="height" type="numero"/>
 		</xsd:complexType>
 	</xsd:element>
-	<xsd:element name="ul" type="list"/>
-	<xsd:element name="ol" type="list"/>
-	<xsd:element name="li" type="inlinefac"/>
-	<xsd:element name="table">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element maxOccurs="unbounded" minOccurs="1" ref="h:tr"/>
+	<xsd:element name="ul"  type="list" />
+	<xsd:element name="ol"  type="list" />
+	<xsd:element name="li"  type="inlinefac" />
+	<xsd:element name="table" >
+		<xsd:complexType >
+			<xsd:sequence >
+				<xsd:element ref="h:tr" minOccurs="1" maxOccurs="unbounded" />
 			</xsd:sequence>
 				<xsd:attributeGroup ref="idfac"/>
 				<xsd:attributeGroup ref="HTMLattrs"/>
@@ -36,17 +33,17 @@
 				<xsd:attribute name="cellpadding" type="numero"/>
 		</xsd:complexType>
 	</xsd:element>
-	<xsd:element name="tr">
-		<xsd:complexType>
-			<xsd:choice maxOccurs="unbounded" minOccurs="1">
-				<xsd:element ref="h:th"/>
-				<xsd:element ref="h:td"/>
+	<xsd:element name="tr" >
+		<xsd:complexType >
+			<xsd:choice minOccurs="1" maxOccurs="unbounded" >
+				<xsd:element ref="h:th" />
+				<xsd:element ref="h:td" />
 			</xsd:choice>
 				<xsd:attributeGroup ref="idfac"/>
 				<xsd:attributeGroup ref="HTMLattrs"/>
 		</xsd:complexType>
 	</xsd:element>
-	<xsd:element name="th">
+	<xsd:element name="th"  >
 		<xsd:complexType mixed="true">
 			<xsd:complexContent>
 				<xsd:extension base="inline">
@@ -56,7 +53,7 @@
 			</xsd:complexContent>
 		</xsd:complexType>
 	</xsd:element>
-	<xsd:element name="td">
+	<xsd:element name="td"  >
 		<xsd:complexType mixed="true">
 			<xsd:complexContent>
 				<xsd:extension base="inline">
