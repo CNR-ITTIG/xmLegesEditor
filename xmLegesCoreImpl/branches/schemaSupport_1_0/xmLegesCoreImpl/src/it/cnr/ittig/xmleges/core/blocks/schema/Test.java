@@ -12,8 +12,9 @@ public class Test {
         //String schemaURL = "data/NIR_XSD_base/nirlight.xsd";
 
         
-		String schemaURL = "../xmLegesEditor/xsdData/NIR_XSD_base/nirlight.xsd";
-		//String schemaURL = "../xmLegesEditor/xsdData/NIR_XSD_completo/nirstrict.xsd";
+		//String schemaURL = "../xmLegesEditor/xsdData/NIR_XSD_base/nirlight.xsd";
+		String schemaURL = "../xmLegesEditor/xsdData/NIR_XSD_completo/nirstrict.xsd";
+		//String schemaURL = "../xmLegesEditor/xsdData/XSD_Test/nirstrict.xsd";
 		
 		
 		
