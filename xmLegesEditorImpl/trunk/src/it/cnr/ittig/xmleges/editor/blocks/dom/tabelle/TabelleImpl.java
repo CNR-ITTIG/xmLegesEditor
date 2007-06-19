@@ -147,7 +147,7 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 
 	public boolean canAllignTextCol(Node node) {
 		
-		if (UtilDom.findParentByName(node, "h:table") != null)
+		if (UtilDom.findParentByName(node, "h:td") != null)
 			return true;
 		return false;
 	}
@@ -740,7 +740,9 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 						NodeList colonne = righe.item(i).getChildNodes(); 
 						Node nodoIndice = colonne.item(indice);
 						if (nodoIndice != null) {
-						  UtilDom.setAttributeValue(nodoIndice, "align", allinea);
+						  //TODO: bisognerebbe recuperare eventuali altri valori già presenti in h:style
+						  //		(questo errore si ripete anche in allineamentoImpl
+						  UtilDom.setAttributeValue(nodoIndice, "h:style", "text-align: " + allinea + ";");
 						}  
 					}
 
