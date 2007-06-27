@@ -77,7 +77,6 @@ public class xsdRulesManagerImpl{
  	            XSDElementDeclaration elemDecl = (XSDElementDeclaration)iter.next();
  	            createRuleForElement(elemDecl);      
  	      }
- 		  
  		}catch(Exception e){
  			System.err.println("exception");
  		}
@@ -103,12 +102,11 @@ public class xsdRulesManagerImpl{
    	            XSDElementDeclaration elemDecl = (XSDElementDeclaration)iter.next();
    	            createRuleForElement(elemDecl);      
    		  	}
-   		  	
         }
         
 		
 		
-		  printRules();
+		printRules();
 	
         
 //        createRuleForPCDATA();
@@ -126,47 +124,58 @@ public class xsdRulesManagerImpl{
 	}
 	
 	
-	  public void mergedAddRule(XSDElementDeclaration elemDecl, XSDParticle.DFA dfa){
-	    	
-	        if(elemDecl.getQName().equals("h:p")){
-	            System.err.println("				++++++++++++++++++++++++++++++++++++++++++++++++");
-	        	printDFA(dfa);
-	        	System.err.println("new rule for h:p has "+dfa.getStates().size()+" states");
-	        }
-	    	
+	public void mergedAddRule(XSDElementDeclaration elemDecl, XSDParticle.DFA dfa){
+	    	    	
 	    	if(rules.get(elemDecl.getQName())==null){
 	    		//System.err.println("rule for "+name+" NOT present");
 	    		rules.put(elemDecl.getQName(), dfa);
 	        	elemDeclNames.put(elemDecl.getQName(), elemDecl);
 	    	}
 	    	else{
-	    		//System.err.println("rule for "+name+" ALREADY present");
-	    		
-	    		// non va bene il confronto sul numero di stati !!
-	    		
-	    		//if(((XSDParticle.DFA)rules.get(elemDecl.getQName())).getStates().size()< dfa.getStates().size()){
 	    		if(elemDecl.getType() instanceof XSDComplexTypeDefinition && elemDecl.getType().getComplexType()!=null){
 	    			rules.put(elemDecl.getQName(), dfa);
 	    			elemDeclNames.put(elemDecl.getQName(), elemDecl);
 	    			//System.out.println("--------------->  replacing rule for "+elemDecl.getQName());
 	    		}
 	    	}
-	    }
-	         
-		
-	    public void printRules(){
+	 }
+	  
+	/**
+	 * 
+	 * @param elemName
+	 * @return
+	 */         
+	public String getDFAType(String elemName){
+			XSDTypeDefinition typedef = ((XSDElementDeclaration)elemDeclNames.get(elemName)).getType();
+			 if (typedef instanceof XSDSimpleTypeDefinition)
+				 return " SIMPLE ";
+			 if (typedef instanceof XSDComplexTypeDefinition){
+				 if (typedef.getComplexType()!=null)
+					 return " COMPLEX ";
+				 else
+					 return "  SPECIALE ";
+			 }
+			return " UNDEFINED ";
+	}
+	
+	/**
+	 * 
+	 *
+	 */
+	public void printRules(){
 	    	for(Iterator it = rules.keySet().iterator(); it.hasNext();){
 	    		String elemName = (String) it.next();
-	    		System.err.println("********** AUTOMA DI "+elemName+" ************");
-	            printDFA((XSDParticle.DFA)rules.get(elemName));
+	    		System.err.println("********** AUTOMA  "+getDFAType(elemName)+" DI "+elemName+" ************");
+	              printDFA((XSDParticle.DFA)rules.get(elemName));
 	    	}
-	    }
+	}
 	    
-		/**
-		 * 
-		 * @param elemDecl
-		 */
-		public void createRuleForElement(XSDElementDeclaration elemDecl){
+	
+	/**
+	 * 
+	 * @param elemDecl
+	 */
+	public void createRuleForElement(XSDElementDeclaration elemDecl){
 			
 			// ?? come gestire: i simpleType
 			//				  : i complexType con typedef.getComplexType NULL
@@ -189,9 +198,6 @@ public class xsdRulesManagerImpl{
 	            	((XSDParticleImpl.XSDNFA.StateImpl)dfa.getStates().get(0)).setAccepting(true);
 	            }
 	            mergedAddRule(elemDecl, dfa);
-	        	//rules.put(elemDecl.getQName(), dfa);
-	            
-	           
 	        	
 	            //System.err.println("********** AUTOMA simple DI "+elemDecl.getQName()+" ************");
 	            //printDFA(dfa);
@@ -209,26 +215,11 @@ public class xsdRulesManagerImpl{
 	            	//if(elemDecl.getQName().equals("h:p"))
 	            	//	System.out.println("---------------------------------> h:p is Complex");
 
-	            	XSDParticle xsdParticle;
-	                if (typedef.getContainer() instanceof XSDParticle)
-	                {
-	                  xsdParticle = (XSDParticle)typedef.getContainer();
-	                  
-	                }
-	                else
-	                {
-	                  xsdParticle = XSDFactory.eINSTANCE.createXSDParticle();
-	                  
-	                }
 
 	                XSDParticle.DFA dfa = (XSDParticle.DFA) typedef.getComplexType().getDFA();
 	                
 	                //rules.put(elemDecl.getQName(), dfa);
 	                mergedAddRule(elemDecl, dfa);
-	                
-
-	               	//System.err.println("********** AUTOMA DI "+elemDecl.getQName()+" ************");
-	               	//printDFA(dfa);
 	        	    
 	            }
 	            else{
@@ -256,21 +247,15 @@ public class xsdRulesManagerImpl{
 	                mergedAddRule(elemDecl, dfa);
 	                
 	               
-	                //System.err.println("********** AUTOMA speciale DI "+elemDecl.getQName()+" ************");
-	                //printDFA(dfa);
-	       
 	            }
 	        }
 			
 	        else{
 	        	System.out.println("niente rule per "+elemDecl.getQName());
-	        }
-	        
-	       
-	        
+	        }        
 			// add alternative contents for element
 			//createAlternativeContents(name, model);
-		}
+	}
 
 		
 		
