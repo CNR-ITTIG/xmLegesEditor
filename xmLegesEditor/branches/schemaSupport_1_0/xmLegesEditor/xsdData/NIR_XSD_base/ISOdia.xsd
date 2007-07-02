@@ -1,35 +1,149 @@
-<!-- (C) International Organization for Standardization 1986
-     Permission to copy in any form is granted for use with
-     conforming SGML systems and applications as defined in
-     ISO 8879, provided this notice is included in all copies.
--->
-<!-- Character entity set. Typical invocation:
-     <!ENTITY % ISOdia PUBLIC
-       "ISO 8879:1986//ENTITIES Diacritical Marks//EN//XML">
-     %ISOdia;
--->
-<!-- This version of the entity set can be used with any SGML document
-     which uses ISO 10646 as its document character set. 
-     This includes XML documents and ISO HTML documents.
-     This entity set uses hexadecimal numeric character references. 
-          
-     Creator: Rick Jelliffe, Allette Systems
-     
-     Version: 1997-07-07
--->
+<!DOCTYPE xsd:schema [ 
+<!ENTITY acute "&#180;">
+<!ENTITY breve "&#x2D8;">
+<!ENTITY caron "&#x2C7;">
+<!ENTITY cedil "&#184;">
+<!ENTITY circ "^">
+<!ENTITY dblac "&#x2DD;">
+<!ENTITY die "&#168;">
+<!ENTITY dot "&#x2D9;">
+<!ENTITY grave "`">
+<!ENTITY macr "&#175;">
+<!ENTITY ogon "&#x2DB;">
+<!ENTITY ring "&#x2DA;">
+<!ENTITY tilde "&#x2DC;">
+<!ENTITY uml "&#168;">
+]>
+<xsd:schema 
+xmlns:xlink="http://www.w3.org/1999/xlink" 
+xmlns:h="http://www.w3.org/HTML/1998/html4" 
+targetNamespace="http://www.normeinrete.it/nir/2.2/" 
+xmlns="http://www.normeinrete.it/nir/2.2/" 
+elementFormDefault="qualified" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+>
 
-<!ENTITY acute  "&#180;" ><!--=acute accent-->
-<!ENTITY breve  "&#x2D8;" ><!--=breve-->
-<!ENTITY caron  "&#x2C7;" ><!--=caron-->
-<!ENTITY cedil  "&#184;" ><!--=cedilla-->
-<!ENTITY circ   "^" ><!--=circumflex accent-->
-<!ENTITY dblac  "&#x2DD;" ><!--=double acute accent-->
-<!ENTITY die    "&#168;" ><!--=dieresis-->
-<!ENTITY dot    "&#x2D9;" ><!--=dot above-->
-<!ENTITY grave  "`" ><!--=grave accent-->
-<!ENTITY macr   "&#175;" ><!--=macron-->
-<!ENTITY ogon   "&#x2DB;" ><!--=ogonek-->
-<!ENTITY ring   "&#x2DA;" ><!--=ring-->
-<!ENTITY tilde  "&#x2DC;" ><!--=tilde-->
-<!ENTITY uml    "&#168;" ><!--=umlaut mark-->
+	<xsd:import namespace="http://www.w3.org/1999/xlink" schemaLocation="./xlink.xsd"/>
+	<xsd:import namespace="http://www.w3.org/HTML/1998/html4" schemaLocation="./h.xsd"/>
 
+
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        (C) International Organization for Standardization 1986
+		Permission to copy in any form is granted for use with
+		conforming SGML systems and applications as defined in
+		ISO 8879, provided this notice is included in all copies.
+		
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        Character entity set. Typical invocation:
+		&lt;!ENTITY % ISOdia PUBLIC
+		"ISO 8879:1986//ENTITIES Diacritical Marks//EN//XML"&gt; 
+		%ISOdia;
+		
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        This version of the entity set can be used with any SGML document
+		which uses ISO 10646 as its document character set.
+		This includes XML documents and ISO HTML documents.
+		This entity set uses hexadecimal numeric character references.
+		
+		Creator: Rick Jelliffe, Allette Systems
+		
+		Version: 1997-07-07
+		
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =acute accent       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =breve       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =caron       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =cedilla       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =circumflex accent       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =double acute accent       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =dieresis       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =dot above       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =grave accent       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =macron       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =ogonek       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =ring       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =tilde       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =umlaut mark       
+		</xsd:documentation>
+	</xsd:annotation>
+
+</xsd:schema>

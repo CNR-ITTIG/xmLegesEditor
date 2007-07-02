@@ -1,109 +1,646 @@
-<!-- (C) International Organization for Standardization 1986
-     Permission to copy in any form is granted for use with
-     conforming SGML systems and applications as defined in
-     ISO 8879, provided this notice is included in all copies.
--->
-<!-- Character entity set. Typical invocation:
-     <!ENTITY % ISOnum PUBLIC
-       "ISO 8879:1986//ENTITIES Numeric and Special Graphic//EN//XML">
-     %ISOnum;
--->
-<!-- This version of the entity set can be used with any SGML document
-     which uses ISO 10646 as its document character set. 
-     This includes XML documents and ISO HTML documents.
-     This entity set uses hexadecimal numeric character references. 
-          
-     Creator: Rick Jelliffe, Allette Systems
-     
-     Version: 1997-07-07
--->
+<!DOCTYPE xsd:schema [ 
+<!ENTITY emsp "&#x2003;">
+<!ENTITY ensp "&#x2002;">
+<!ENTITY emsp13 "&#x2004;">
+<!ENTITY emsp14 "&#x2005;">
+<!ENTITY numsp "&#x2007;">
+<!ENTITY puncsp "&#x2008;">
+<!ENTITY thinsp "&#x2009;">
+<!ENTITY hairsp "&#x200A;">
+<!ENTITY mdash "&#x2014;">
+<!ENTITY ndash "&#x2013;">
+<!ENTITY dash "&#x2010;">
+<!ENTITY blank "&#x2423;">
+<!ENTITY hellip "&#x2026;">
+<!ENTITY nldr "&#x2025;">
+<!ENTITY frac13 "&#x2153;">
+<!ENTITY frac23 "&#x2154;">
+<!ENTITY frac15 "&#x2155;">
+<!ENTITY frac25 "&#x2156;">
+<!ENTITY frac35 "&#x2157;">
+<!ENTITY frac45 "&#x2158;">
+<!ENTITY frac16 "&#x2159;">
+<!ENTITY frac56 "&#x215a;">
+<!ENTITY incare "&#x2105;">
+<!ENTITY block "&#x2588;">
+<!ENTITY uhblk "&#x2580;">
+<!ENTITY lhblk "&#x2584;">
+<!ENTITY blk14 "&#x2591;">
+<!ENTITY blk12 "&#x2592;">
+<!ENTITY blk34 "&#x2593;">
+<!ENTITY marker "&#x25AE;">
+<!ENTITY cir "&#x25CB;">
+<!ENTITY squ "&#x25A1;">
+<!ENTITY rect "&#x25AD;">
+<!ENTITY utri "&#x25B5;">
+<!ENTITY dtri "&#x25BF;">
+<!ENTITY star "&#x2606;">
+<!ENTITY bull "&#x2022;">
+<!ENTITY squf "&#x25AA;">
+<!ENTITY utrif "&#x25B4;">
+<!ENTITY dtrif "&#x25BE;">
+<!ENTITY ltrif "&#x25C2;">
+<!ENTITY rtrif "&#x25B8;">
+<!ENTITY clubs "&#x2663;">
+<!ENTITY diams "&#x2662;">
+<!ENTITY hearts "&#x2661;">
+<!ENTITY spades "&#x2660;">
+<!ENTITY malt "&#x2720;">
+<!ENTITY dagger "&#x2020;">
+<!ENTITY Dagger "&#x2021;">
+<!ENTITY check "&#x2713;">
+<!ENTITY cross "&#x2717;">
+<!ENTITY sharp "&#x266F;">
+<!ENTITY flat "&#x266D;">
+<!ENTITY male "&#x2642;">
+<!ENTITY female "&#x2640;">
+<!ENTITY phone "&#x26E0;">
+<!ENTITY telrec "&#x2315;">
+<!ENTITY copysr "&#x2117;">
+<!ENTITY caret "&#x2041;">
+<!ENTITY lsquor "&#x201A;">
+<!ENTITY ldquor "&#x201E;">
+<!ENTITY fflig "&#xFB00;">
+<!ENTITY filig "&#xFB01;">
+<!ENTITY fjlig "fj">
+<!ENTITY ffilig "&#xFB03;">
+<!ENTITY ffllig "&#xFB04;">
+<!ENTITY fllig "&#xFB02;">
+<!ENTITY mldr "&#x2025;">
+<!ENTITY rdquor "&#x201D;">
+<!ENTITY rsquor "&#x2019;">
+<!ENTITY vellip "&#x22EE;">
+<!ENTITY hybull "&#x2043;">
+<!ENTITY loz "&#x2727;">
+<!ENTITY lozf "&#x2726;">
+<!ENTITY ltri "&#x25C3;">
+<!ENTITY rtri "&#x25B9;">
+<!ENTITY starf "&#x2605;">
+<!ENTITY natur "&#x266E;">
+<!ENTITY rx "&#x211E;">
+<!ENTITY sext "&#x2736;">
+<!ENTITY target "&#x2316;">
+<!ENTITY dlcrop "&#x230D;">
+<!ENTITY drcrop "&#x230C;">
+<!ENTITY ulcrop "&#x230F;">
+<!ENTITY urcrop "&#x230E;">
+]>
+<xsd:schema 
+xmlns:xlink="http://www.w3.org/1999/xlink" 
+xmlns:h="http://www.w3.org/HTML/1998/html4" 
+targetNamespace="http://www.normeinrete.it/nir/2.2/" 
+xmlns="http://www.normeinrete.it/nir/2.2/" 
+elementFormDefault="qualified" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+>
 
-<!ENTITY half   "&#189;" ><!--=fraction one-half-->
-<!ENTITY frac12 "&#189;" ><!--=fraction one-half-->
-<!ENTITY frac14 "&#188;" ><!--=fraction one-quarter-->
-<!ENTITY frac34 "&#190;" ><!--=fraction three-quarters-->
-<!ENTITY frac18 "&#x215B;" > 
-    <!-- or "&#xB1;&#x202;&#x2044;&#x2088;" --><!--=fraction one-eighth-->
-<!ENTITY frac38 "&#x215C;" >
-    <!-- or "&#xB3;&#x2044;&#x2088;" --><!--=fraction three-eighths-->
-<!ENTITY frac58 "&#x215D;" >
-    <!-- or "&#x2075;&#x2044;&#x2088;" --><!--=fraction five-eighths-->
-<!ENTITY frac78 "&#x215E;" >
-    <!-- or "&#x2077;&#x2044;&#x2088;" --><!--=fraction seven-eighths-->
-
-<!ENTITY sup1   "&#185;" ><!--=superscript one-->
-<!ENTITY sup2   "&#178;" ><!--=superscript two-->
-<!ENTITY sup3   "&#179;" ><!--=superscript three-->
-
-<!ENTITY plus   "+" >    <!--=plus sign B:-->
-<!ENTITY plusmn "&#xB1;" ><!--/pm B: =plus-or-minus sign-->
-<!ENTITY lt     "&#38;#60;"      ><!--=less-than sign R:-->
-<!ENTITY equals "="      ><!--=equals sign R:-->
-<!ENTITY gt     ">"      ><!--=greater-than sign R:-->
-<!ENTITY divide "&#247;" ><!--/div B: =divide sign-->
-<!ENTITY times  "&#215;" ><!--/times B: =multiply sign-->
-
-<!ENTITY curren "&#164;" ><!--=general currency sign-->
-<!ENTITY pound  "&#165;" ><!--=pound sign-->
-<!ENTITY dollar "$"      ><!--=dollar sign-->
-<!ENTITY cent   "&#162;" ><!--=cent sign-->
-<!ENTITY yen    "&#165;" ><!--/yen =yen sign-->
-
-<!ENTITY num    "#" ><!--=number sign-->
-<!ENTITY percnt "&#37;" ><!--=percent sign-->
-<!ENTITY amp    "&#38;#38;" ><!--=ampersand-->
-<!ENTITY ast    "*" ><!--/ast B: =asterisk-->
-<!ENTITY commat "@" ><!--=commercial at-->
-<!ENTITY lsqb   "[" ><!--/lbrack O: =left square bracket-->
-<!ENTITY bsol   "\" ><!--/backslash =reverse solidus-->
-<!ENTITY rsqb   "]" ><!--/rbrack C: =right square bracket-->
-<!ENTITY lcub   "{" ><!--/lbrace O: =left curly bracket-->
-<!ENTITY horbar "&#x2015;" ><!--=horizontal bar-->
-<!ENTITY verbar "|" ><!--/vert =vertical bar-->
-<!ENTITY rcub   "}" ><!--/rbrace C: =right curly bracket-->
-<!ENTITY micro  "&#181;" ><!--=micro sign-->
-<!ENTITY ohm    "&#2126;" ><!--=ohm sign-->
-<!ENTITY deg    "&#176;" ><!--=degree sign-->
-<!ENTITY ordm   "&#186;" ><!--=ordinal indicator, masculine-->
-<!ENTITY ordf   "&#170;" ><!--=ordinal indicator, feminine-->
-<!ENTITY sect   "&#167;" ><!--=section sign-->
-<!ENTITY para   "&#182;" ><!--=pilcrow (paragraph sign)-->
-<!ENTITY middot "&#183;" ><!--/centerdot B: =middle dot-->
-<!ENTITY larr   "&#x2190;" ><!--/leftarrow /gets A: =leftward arrow-->
-<!ENTITY rarr   "&#x2192;" ><!--/rightarrow /to A: =rightward arrow-->
-<!ENTITY uarr   "&#x2191;" ><!--/uparrow A: =upward arrow-->
-<!ENTITY darr   "&#x2193;" ><!--/downarrow A: =downward arrow-->
-<!ENTITY copy   "&#169;" ><!--=copyright sign-->
-<!ENTITY reg    "&#174;" ><!--/circledR =registered sign-->
-<!ENTITY trade  "&#8482;" ><!--=trade mark sign-->
-<!ENTITY brvbar "&#xA6;" ><!--=bren (vertical) bar-->
-<!ENTITY not    "&#xAC;" ><!--/neg /lnot =not sign-->
-<!ENTITY sung   "&#x266A;" ><!--=music note (sung text sign)-->
-
-<!ENTITY excl   "!" ><!--=exclamation mark-->
-<!ENTITY iexcl  "&#xA1;" ><!--=inverted exclamation mark-->
-<!ENTITY quot   '"' ><!--=quotation mark-->
-<!ENTITY apos   "'" ><!--=apostrophe-->
-<!ENTITY lpar   "(" ><!--O: =left parenthesis-->
-<!ENTITY rpar   ")" ><!--C: =right parenthesis-->
-<!ENTITY comma  "," ><!--P: =comma-->
-<!ENTITY lowbar "_" ><!--=low line-->
-<!ENTITY hyphen "&#x2010;" ><!--=hyphen-->
-<!ENTITY period "." ><!--=full stop, period-->
-<!ENTITY sol    "/" ><!--=solidus-->
-<!ENTITY colon  ":" ><!--/colon P:-->
-<!ENTITY semi   ";" ><!--=semicolon P:-->
-<!ENTITY quest  "?" ><!--=question mark-->
-<!ENTITY iquest "&#xBF;" ><!--=inverted question mark-->
-<!ENTITY laquo  "&#x2039;" ><!--=angle quotation mark, left
- But note that Unicode 1 & Maler & el Andaloussi give &#xAB; -->
-<!ENTITY raquo  "&#x203A;" ><!--=angle quotation mark, right
- But note that Unicode 1 & Maler & el Andaloussi give &#xBB; -->
-<!ENTITY lsquo  "&#x2018;" ><!--=single quotation mark, left-->
-<!ENTITY rsquo  "&#x2019;" ><!--=single quotation mark, right-->
-<!ENTITY ldquo  "&#x201C;" ><!--=double quotation mark, left-->
-<!ENTITY rdquo  "&#x201D;" ><!--=double quotation mark, right-->
-<!ENTITY nbsp   "&#160;" ><!--=no break (required) space-->
-<!ENTITY shy    "&#173;" ><!--=soft hyphen-->
+	<xsd:import namespace="http://www.w3.org/1999/xlink" schemaLocation="./xlink.xsd"/>
+	<xsd:import namespace="http://www.w3.org/HTML/1998/html4" schemaLocation="./h.xsd"/>
 
 
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        (C) International Organization for Standardization 1986
+		Permission to copy in any form is granted for use with
+		conforming SGML systems and applications as defined in
+		ISO 8879, provided this notice is included in all copies.
+		
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        Character entity set. Typical invocation:
+		&lt;!ENTITY % ISOpub PUBLIC
+		"ISO 8879:1986//ENTITIES Publishing//EN//XML"&gt; 
+		%ISOpub;
+		
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        This version of the entity set can be used with any SGML document
+		which uses ISO 10646 as its document character set.
+		This includes XML documents and ISO HTML documents.
+		This entity set uses hexadecimal numeric character references.
+		
+		Creator: Rick Jelliffe, Allette Systems
+		
+		Version: 1997-07-07
+		
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =em space       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =en space (1/2-em)       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =1/3-em space       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =1/4-em space       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =digit space (width of a number)       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =punctuation space (width of comma)       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =thin space (1/6-em)       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =hair space       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =em dash       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =en dash       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =hyphen (true graphic)       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =significant blank symbol       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =ellipsis (horizontal)       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =double baseline dot (en leader)       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =fraction one-third       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =fraction two-thirds       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =fraction one-fifth       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =fraction two-fifths       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =fraction three-fifths       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =fraction four-fifths       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =fraction one-sixth       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =fraction five-sixths       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =in-care-of symbol       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =full block       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =upper half block       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =lower half block       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =25% shaded block       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =50% shaded block       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =75% shaded block       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =histogram marker       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /circ B: =circle, open       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =square, open       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =rectangle, open       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /triangle =up triangle, open       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /triangledown =down triangle, open       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =star, open       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /bullet B: =round bullet, filled       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /blacksquare =sq bullet, filled       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /blacktriangle =up tri, filled       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /blacktriangledown =dn tri, filled       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /blacktriangleleft R: =l tri, filled       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /blacktriangleright R: =r tri, filled       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /clubsuit =club suit symbol       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /diamondsuit =diamond suit symbol       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /heartsuit =heart suit symbol       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /spadesuit =spades suit symbol       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /maltese =maltese cross       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /dagger B: =dagger       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /ddagger B: =double dagger       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /checkmark =tick, check mark       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =ballot cross       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /sharp =musical sharp       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /flat =musical flat       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =male symbol       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =female symbol       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =telephone symbol       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =telephone recorder symbol       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =sound recording copyright sign       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =caret (insertion mark)       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =rising single quote, left (low)       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =rising dbl quote, left (low)       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       small ff ligature       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       small fi ligature       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       small fj ligature       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       small ffi ligature       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       small ffl ligature       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       small fl ligature       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       em leader       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       rising dbl quote, right (high)       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       rising single quote, right (high)       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       vertical ellipsis       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       rectangle, filled (hyphen bullet)       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /lozenge - lozenge or total mark       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /blacklozenge - lozenge, filled       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /triangleleft B: l triangle, open       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /triangleright B: r triangle, open       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /bigstar - star, filled       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /natural - music natural       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       pharmaceutical prescription (Rx)       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       sextile (6-pointed star)       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       register mark or target       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       downward left crop mark        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       downward right crop mark        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       upward left crop mark        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       upward right crop mark        
+		</xsd:documentation>
+	</xsd:annotation>
+
+</xsd:schema>

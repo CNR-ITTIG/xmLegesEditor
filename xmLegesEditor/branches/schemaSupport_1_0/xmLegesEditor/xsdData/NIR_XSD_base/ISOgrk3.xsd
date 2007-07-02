@@ -1,69 +1,356 @@
-<!-- (C) International Organization for Standardization 1986
-     Permission to copy in any form is granted for use with
-     conforming SGML systems and applications as defined in
-     ISO 8879, provided this notice is included in all copies.
--->
-<!-- Character entity set. Typical invocation:
-     <!ENTITY % ISOgrk3 PUBLIC
-       "ISO 8879:1986//ENTITIES Greek Symbols//EN//XML">
-     %ISOgrk3;
--->
-<!-- This version of the entity set can be used with any SGML document
-     which uses ISO 10646 as its document character set. 
-     This includes XML documents and ISO HTML documents.
-     This entity set uses hexadecimal numeric character references. 
-          
-     Creator: Rick Jelliffe
-     
-     Version: 1997-07-07
+<!DOCTYPE xsd:schema [ 
+<!ENTITY alpha "&#x3B1;">
+<!ENTITY beta "&#x3B2;">
+<!ENTITY gamma "&#x3B3;">
+<!ENTITY Gamma "&#x393;">
+<!ENTITY gammad "&#x3DC;">
+<!ENTITY delta "&#x3B4;">
+<!ENTITY Delta "&#x394;">
+<!ENTITY epsi "&#x3B5;">
+<!ENTITY epsiv "&#x2107;">
+<!ENTITY epsis "&#x1B8;">
+<!ENTITY zeta "&#x3B6;">
+<!ENTITY eta "&#x3B7;">
+<!ENTITY thetas "&#x3B8;">
+<!ENTITY Theta "&#x398;">
+<!ENTITY thetav "&#x3D1;">
+<!ENTITY iota "&#x3B9;">
+<!ENTITY kappa "&#x3BA;">
+<!ENTITY kappav "&#x3F0;">
+<!ENTITY lambda "&#x3BB;">
+<!ENTITY Lambda "&#x39B;">
+<!ENTITY mu "&#x3BC;">
+<!ENTITY nu "&#x3BD;">
+<!ENTITY xi "&#x3BE;">
+<!ENTITY Xi "&#x39E;">
+<!ENTITY pi "&#x3C0;">
+<!ENTITY piv "&#x3D6;">
+<!ENTITY Pi "&#x3A0;">
+<!ENTITY rho "&#x3c1;">
+<!ENTITY rhov "&#x3F1;">
+<!ENTITY sigma "&#x3C3;">
+<!ENTITY Sigma "&#x3A3;">
+<!ENTITY sigmav "&#x3C2;">
+<!ENTITY tau "&#x3C4;">
+<!ENTITY upsi "&#x3C5;">
+<!ENTITY Upsi "&#x3A5;">
+<!ENTITY phis "&#x3C6;">
+<!ENTITY Phi "&#x3A6;">
+<!ENTITY phiv "&#x3D5;">
+<!ENTITY chi "&#x3C7;">
+<!ENTITY psi "&#x3C8;">
+<!ENTITY Psi "&#x3A8;">
+<!ENTITY omega "&#x3C9;">
+<!ENTITY Omega "&#x3A9;">
+]>
+<xsd:schema 
+xmlns:xlink="http://www.w3.org/1999/xlink" 
+xmlns:h="http://www.w3.org/HTML/1998/html4" 
+targetNamespace="http://www.normeinrete.it/nir/2.2/" 
+xmlns="http://www.normeinrete.it/nir/2.2/" 
+elementFormDefault="qualified" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+>
 
-     Tweaked for full XML conformance
-     by Wendell Piez, Mulberry Technologies, 1999-03-29
-
--->
-<!ENTITY alpha    "&#x3B1;"> <!--=small alpha, Greek-->
-<!ENTITY beta     "&#x3B2;"> <!--=small beta, Greek-->
-<!ENTITY gamma    "&#x3B3;"> <!--=small gamma, Greek-->
-<!ENTITY Gamma    "&#x393;"> <!--=capital Gamma, Greek-->
-<!ENTITY gammad   "&#x3DC;"> <!--/digamma-->
-<!ENTITY delta    "&#x3B4;"> <!--=small delta, Greek-->
-<!ENTITY Delta    "&#x394;"> <!--=capital Delta, Greek-->
-<!ENTITY epsi     "&#x3B5;"> <!--=small epsilon, Greek -->
-<!ENTITY epsiv    "&#x2107;"> <!--/varepsilon ?-->
-<!ENTITY epsis    "&#x1B8;"> <!--/straightepsilon ?-->
-<!ENTITY zeta     "&#x3B6;"> <!--=small zeta, Greek-->
-<!ENTITY eta      "&#x3B7;"> <!--=small eta, Greek-->
-<!ENTITY thetas   "&#x3B8;"> <!--straight theta-->
-<!ENTITY Theta    "&#x398;"> <!--=capital Theta, Greek-->
-<!ENTITY thetav   "&#x3D1;"> <!--/vartheta - curly or open theta-->
-<!ENTITY iota     "&#x3B9;"> <!--=small iota, Greek-->
-<!ENTITY kappa    "&#x3BA;"> <!--=small kappa, Greek-->
-<!ENTITY kappav   "&#x3F0;"> <!--/varkappa-->
-<!ENTITY lambda   "&#x3BB;"> <!--=small lambda, Greek-->
-<!ENTITY Lambda   "&#x39B;"> <!--=capital Lambda, Greek-->
-<!ENTITY mu       "&#x3BC;"> <!--=small mu, Greek-->
-<!ENTITY nu       "&#x3BD;"> <!--=small nu, Greek-->
-<!ENTITY xi       "&#x3BE;"> <!--=small xi, Greek-->
-<!ENTITY Xi       "&#x39E;"> <!--=capital Xi, Greek-->
-<!ENTITY pi       "&#x3C0;"> <!--=small pi, Greek-->
-<!ENTITY piv      "&#x3D6;"> <!--/varpi-->
-<!ENTITY Pi       "&#x3A0;"> <!--=capital Pi, Greek-->
-<!ENTITY rho      "&#x3c1;"> <!--=small rho, Greek-->
-<!ENTITY rhov     "&#x3F1;"> <!--/varrho-->
-<!ENTITY sigma    "&#x3C3;"> <!--=small sigma, Greek-->
-<!ENTITY Sigma    "&#x3A3;"> <!--=capital Sigma, Greek-->
-<!ENTITY sigmav   "&#x3C2;"> <!--/varsigma-->
-<!ENTITY tau      "&#x3C4;"> <!--=small tau, Greek-->
-<!ENTITY upsi     "&#x3C5;"> <!--=small upsilon, Greek-->
-<!ENTITY Upsi     "&#x3A5;"> <!--=capital Upsilon, Greek-->
-<!ENTITY phis     "&#x3C6;"> <!--/straightphi - straight phi-->
-<!ENTITY Phi      "&#x3A6;"> <!--=capital Phi, Greek-->
-<!ENTITY phiv     "&#x3D5;"> <!--/varphi - curly or open phi-->
-<!ENTITY chi      "&#x3C7;"> <!--=small chi, Greek-->
-<!ENTITY psi      "&#x3C8;"> <!--=small psi, Greek-->
-<!ENTITY Psi      "&#x3A8;"> <!--=capital Psi, Greek-->
-<!ENTITY omega    "&#x3C9;"> <!--=small omega, Greek-->
-<!ENTITY Omega    "&#x3A9;"> <!--=capital Omega, Greek-->
+	<xsd:import namespace="http://www.w3.org/1999/xlink" schemaLocation="./xlink.xsd"/>
+	<xsd:import namespace="http://www.w3.org/HTML/1998/html4" schemaLocation="./h.xsd"/>
 
 
 
+	<xsd:annotation>
+		<xsd:documentation>
+		        (C) International Organization for Standardization 1986
+		Permission to copy in any form is granted for use with
+		conforming SGML systems and applications as defined in
+		ISO 8879, provided this notice is included in all copies.
+		
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        Character entity set. Typical invocation:
+		&lt;!ENTITY % ISOgrk3 PUBLIC
+		"ISO 8879:1986//ENTITIES Greek Symbols//EN//XML"&gt; 
+		%ISOgrk3;
+		
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        This version of the entity set can be used with any SGML document
+		which uses ISO 10646 as its document character set.
+		This includes XML documents and ISO HTML documents.
+		This entity set uses hexadecimal numeric character references.
+		
+		Creator: Rick Jelliffe
+		
+		Version: 1997-07-07
+		
+		Tweaked for full XML conformance
+		by Wendell Piez, Mulberry Technologies, 1999-03-29
+		
+		
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =small alpha, Greek       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =small beta, Greek       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =small gamma, Greek       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =capital Gamma, Greek       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /digamma       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =small delta, Greek       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =capital Delta, Greek       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =small epsilon, Greek        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /varepsilon ?       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /straightepsilon ?       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =small zeta, Greek       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =small eta, Greek       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       straight theta       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =capital Theta, Greek       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /vartheta - curly or open theta       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =small iota, Greek       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =small kappa, Greek       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /varkappa       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =small lambda, Greek       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =capital Lambda, Greek       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =small mu, Greek       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =small nu, Greek       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =small xi, Greek       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =capital Xi, Greek       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =small pi, Greek       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /varpi       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =capital Pi, Greek       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =small rho, Greek       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /varrho       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =small sigma, Greek       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =capital Sigma, Greek       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /varsigma       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =small tau, Greek       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =small upsilon, Greek       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =capital Upsilon, Greek       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /straightphi - straight phi       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =capital Phi, Greek       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /varphi - curly or open phi       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =small chi, Greek       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =small psi, Greek       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =capital Psi, Greek       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =small omega, Greek       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =capital Omega, Greek       
+		</xsd:documentation>
+	</xsd:annotation>
+
+</xsd:schema>
