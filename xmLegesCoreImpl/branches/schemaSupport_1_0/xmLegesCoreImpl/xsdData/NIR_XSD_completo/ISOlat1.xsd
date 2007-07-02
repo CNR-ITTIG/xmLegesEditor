@@ -1,0 +1,482 @@
+<!DOCTYPE xsd:schema [ 
+<!ENTITY Agrave "&#192;">
+<!ENTITY Aacute "&#193;">
+<!ENTITY Acirc "&#194;">
+<!ENTITY Atilde "&#195;">
+<!ENTITY Auml "&#196;">
+<!ENTITY Aring "&#197;">
+<!ENTITY AElig "&#198;">
+<!ENTITY Ccedil "&#199;">
+<!ENTITY Egrave "&#200;">
+<!ENTITY Eacute "&#201;">
+<!ENTITY Ecirc "&#202;">
+<!ENTITY Euml "&#203;">
+<!ENTITY Igrave "&#204;">
+<!ENTITY Iacute "&#205;">
+<!ENTITY Icirc "&#206;">
+<!ENTITY Iuml "&#207;">
+<!ENTITY ETH "&#208;">
+<!ENTITY Ntilde "&#209;">
+<!ENTITY Ograve "&#210;">
+<!ENTITY Oacute "&#211;">
+<!ENTITY Ocirc "&#212;">
+<!ENTITY Otilde "&#213;">
+<!ENTITY Ouml "&#214;">
+<!ENTITY Oslash "&#216;">
+<!ENTITY Ugrave "&#217;">
+<!ENTITY Uacute "&#218;">
+<!ENTITY Ucirc "&#219;">
+<!ENTITY Uuml "&#220;">
+<!ENTITY Yacute "&#221;">
+<!ENTITY THORN "&#222;">
+<!ENTITY szlig "&#223;">
+<!ENTITY agrave "&#224;">
+<!ENTITY aacute "&#225;">
+<!ENTITY acirc "&#226;">
+<!ENTITY atilde "&#227;">
+<!ENTITY auml "&#228;">
+<!ENTITY aring "&#229;">
+<!ENTITY aelig "&#230;">
+<!ENTITY ccedil "&#231;">
+<!ENTITY egrave "&#232;">
+<!ENTITY eacute "&#233;">
+<!ENTITY ecirc "&#234;">
+<!ENTITY euml "&#235;">
+<!ENTITY igrave "&#236;">
+<!ENTITY iacute "&#237;">
+<!ENTITY icirc "&#238;">
+<!ENTITY iuml "&#239;">
+<!ENTITY eth "&#240;">
+<!ENTITY ntilde "&#241;">
+<!ENTITY ograve "&#242;">
+<!ENTITY oacute "&#243;">
+<!ENTITY ocirc "&#244;">
+<!ENTITY otilde "&#245;">
+<!ENTITY ouml "&#246;">
+<!ENTITY oslash "&#248;">
+<!ENTITY ugrave "&#249;">
+<!ENTITY uacute "&#250;">
+<!ENTITY ucirc "&#251;">
+<!ENTITY uuml "&#252;">
+<!ENTITY yacute "&#253;">
+<!ENTITY thorn "&#254;">
+<!ENTITY yuml "&#255;">
+]>
+<xsd:schema 
+xmlns:xlink="http://www.w3.org/1999/xlink" 
+xmlns:h="http://www.w3.org/HTML/1998/html4" 
+targetNamespace="http://www.normeinrete.it/nir/2.2/" 
+xmlns="http://www.normeinrete.it/nir/2.2/" 
+xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" 
+elementFormDefault="qualified" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+>
+
+	<xsd:import namespace="http://www.w3.org/1999/xlink" schemaLocation="./xlink.xsd"/>
+	<xsd:import namespace="http://www.w3.org/HTML/1998/html4" schemaLocation="./h.xsd"/>
+
+	<xsd:import namespace="http://www.normeinrete.it/nir/disposizioni/2.2/" schemaLocation="./dsp.xsd"/>
+
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        (C) International Organization for Standardization 1986
+		Permission to copy in any form is granted for use with
+		conforming SGML systems and applications as defined in
+		ISO 8879, provided this notice is included in all copies.
+		
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        Character entity set. Typical invocation:
+		&lt;!ENTITY % HTMLlat1 PUBLIC
+		"ISO 8879-1986//ENTITIES Added Latin 1//EN//XML"&gt; 
+		%ISOlat1;
+		
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        This version of the entity set can be used with any SGML document
+		which uses ISO 8859-1 or ISO 10646 as its document character
+		set. This includes XML documents and ISO HTML documents.
+		
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        capital A, grave accent        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        capital A, acute accent        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        capital A, circumflex accent        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        capital A, tilde        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        capital A, dieresis or umlaut mark        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        capital A, ring        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        capital AE diphthong (ligature)        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        capital C, cedilla        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        capital E, grave accent        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        capital E, acute accent        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        capital E, circumflex accent        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        capital E, dieresis or umlaut mark        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        capital I, grave accent        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        capital I, acute accent        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        capital I, circumflex accent        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        capital I, dieresis or umlaut mark        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        capital Eth, Icelandic        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        capital N, tilde        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        capital O, grave accent        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        capital O, acute accent        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        capital O, circumflex accent        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        capital O, tilde        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        capital O, dieresis or umlaut mark        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        capital O, slash        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        capital U, grave accent        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        capital U, acute accent        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        capital U, circumflex accent        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        capital U, dieresis or umlaut mark        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        capital Y, acute accent        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        capital THORN, Icelandic        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        small sharp s, German (sz ligature)        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        small a, grave accent        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        small a, acute accent        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        small a, circumflex accent        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        small a, tilde        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        small a, dieresis or umlaut mark        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        small a, ring        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        small ae diphthong (ligature)        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        small c, cedilla        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        small e, grave accent        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        small e, acute accent        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        small e, circumflex accent        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        small e, dieresis or umlaut mark        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        small i, grave accent        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        small i, acute accent        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        small i, circumflex accent        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        small i, dieresis or umlaut mark        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        small eth, Icelandic        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        small n, tilde        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        small o, grave accent        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        small o, acute accent        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        small o, circumflex accent        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        small o, tilde        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        small o, dieresis or umlaut mark        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        small o, slash        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        small u, grave accent        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        small u, acute accent        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        small u, circumflex accent        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        small u, dieresis or umlaut mark        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        small y, acute accent        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        small thorn, Icelandic        
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        small y, dieresis or umlaut mark        
+		</xsd:documentation>
+	</xsd:annotation>
+
+</xsd:schema>

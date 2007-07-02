@@ -1,0 +1,488 @@
+<!DOCTYPE xsd:schema [ 
+<!ENTITY aleph "&#x2135;">
+<!ENTITY and "&#x2227;">
+<!ENTITY ang90 "&#x221F;">
+<!ENTITY angsph "&#x2222;">
+<!ENTITY ap "&#x2249;">
+<!ENTITY becaus "&#x2235;">
+<!ENTITY bottom "&#x22A5;">
+<!ENTITY cap "&#x2229;">
+<!ENTITY cong "&#x2245;">
+<!ENTITY conint "&#x222E;">
+<!ENTITY cup "&#x222A;">
+<!ENTITY equiv "&#x2261;">
+<!ENTITY exist "&#x2203;">
+<!ENTITY forall "&#x2200;">
+<!ENTITY fnof "&#x192;">
+<!ENTITY ge "&#x2265;">
+<!ENTITY iff "&#x21D4;">
+<!ENTITY infin "&#x221E;">
+<!ENTITY int "&#x222B;">
+<!ENTITY isin "&#x2208;">
+<!ENTITY lang "&#x2329;">
+<!ENTITY lArr "&#x21D0;">
+<!ENTITY le "&#x2264;">
+<!ENTITY minus "-">
+<!ENTITY mnplus "&#x2213;">
+<!ENTITY nabla "&#x2207;">
+<!ENTITY ne "&#x2260;">
+<!ENTITY ni "&#x220B;">
+<!ENTITY or "&#x2228;">
+<!ENTITY par "&#x2225;">
+<!ENTITY part "&#x2202;">
+<!ENTITY permil "&#x2030;">
+<!ENTITY perp "&#x22A5;">
+<!ENTITY prime "&#x2032;">
+<!ENTITY Prime "&#x2033;">
+<!ENTITY prop "&#x221D;">
+<!ENTITY radic "&#x221A;">
+<!ENTITY rang "&#x232A;">
+<!ENTITY rArr "&#x21D2;">
+<!ENTITY sim "&#x223C;">
+<!ENTITY sime "&#x2243;">
+<!ENTITY square "&#x25A1;">
+<!ENTITY sub "&#x2282;">
+<!ENTITY sube "&#x2286;">
+<!ENTITY sup "&#x2283;">
+<!ENTITY supe "&#x2287;">
+<!ENTITY there4 "&#x2234;">
+<!ENTITY Verbar "&#x2016;">
+<!ENTITY angst "&#x212B;">
+<!ENTITY bernou "&#x212C;">
+<!ENTITY compfn "&#x2218;">
+<!ENTITY Dot "&#xA8;">
+<!ENTITY DotDot "&#x20DC;">
+<!ENTITY hamilt "&#x210B;">
+<!ENTITY lagran "&#x2112;">
+<!ENTITY lowast "&#x2217;">
+<!ENTITY notin "&#x2209;">
+<!ENTITY order "&#x2134;">
+<!ENTITY phmmat "&#x2133;">
+<!ENTITY tdot "&#x20DB;">
+<!ENTITY tprime "&#x2034;">
+<!ENTITY wedgeq "&#x2259;">
+]>
+<xsd:schema 
+xmlns:xlink="http://www.w3.org/1999/xlink" 
+xmlns:h="http://www.w3.org/HTML/1998/html4" 
+targetNamespace="http://www.normeinrete.it/nir/2.2/" 
+xmlns="http://www.normeinrete.it/nir/2.2/" 
+xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" 
+elementFormDefault="qualified" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+>
+
+	<xsd:import namespace="http://www.w3.org/1999/xlink" schemaLocation="./xlink.xsd"/>
+	<xsd:import namespace="http://www.w3.org/HTML/1998/html4" schemaLocation="./h.xsd"/>
+
+	<xsd:import namespace="http://www.normeinrete.it/nir/disposizioni/2.2/" schemaLocation="./dsp.xsd"/>
+
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        (C) International Organization for Standardization 1986
+		Permission to copy in any form is granted for use with
+		conforming SGML systems and applications as defined in
+		ISO 8879, provided this notice is included in all copies.
+		
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        Character entity set. Typical invocation:
+		&lt;!ENTITY % ISOtech PUBLIC
+		"ISO 8879:1986//ENTITIES General Technical//EN//XML"
+		"ISOtech.pen"&gt; 
+		%ISOtech;
+		
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		        This version of the entity set can be used with any SGML document
+		which uses ISO 10646 as its document character set.
+		This includes XML documents and ISO HTML documents.
+		This entity set uses hexadecimal numeric character references.
+		
+		Creator: Rick Jelliffe, Allette Systems
+		
+		Version: 1997-07-07
+		
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /aleph =aleph, Hebrew       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /wedge /land B: =logical and       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =right (90 degree) angle       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /sphericalangle =angle-spherical       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /approx R: =approximate       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /because R: =because       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /bot B: =perpendicular       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /cap B: =intersection       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /cong R: =congruent with       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /oint L: =contour integral operator       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /cup B: =union or logical sum       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /equiv R: =identical with       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /exists =at least one exists       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /forall =for all       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =function of (italic small f)       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /geq /ge R: =greater-than-or-equal       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /iff =if and only if       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /infty =infinity       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /int L: =integral operator       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /in R: =set membership       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /langle O: =left angle bracket       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /Leftarrow A: =is implied by       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /leq /le R: =less-than-or-equal       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       B: =minus sign       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /mp B: =minus-or-plus sign       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /nabla =del, Hamilton operator       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /ne /neq R: =not equal       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /ni /owns R: =contains       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /vee /lor B: =logical or       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /parallel R: =parallel       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /partial =partial differential       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =per thousand       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /perp R: =perpendicular       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /prime =prime or minute       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =double prime or second       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /propto R: =is proportional to       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /surd =radical       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /rangle C: =right angle bracket       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /Rightarrow A: =implies       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /sim R: =similar       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /simeq R: =similar, equals       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /square B: =square       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /subset R: =subset or is implied by       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /subseteq R: =subset, equals       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /supset R: =superset or implies       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /supseteq R: =superset, equals       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /therefore R: =therefore       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       /Vert =dbl vertical bar       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       Angstrom =capital A, ring       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       Bernoulli function (script capital B)       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       B: composite function (small circle)       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       =dieresis or umlaut mark       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       four dots above       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       Hamiltonian (script capital H)       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       Lagrangian (script capital L)       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       low asterisk       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       N: negated set membership       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       order of (script small o)       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       physics M-matrix (script capital M)       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       three dots above       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       triple prime       
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+		       R: corresponds to (wedge, equals)       
+		</xsd:documentation>
+	</xsd:annotation>
+
+</xsd:schema>
