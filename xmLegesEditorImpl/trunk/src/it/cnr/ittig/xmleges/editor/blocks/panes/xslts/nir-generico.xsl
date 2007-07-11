@@ -607,9 +607,6 @@
  		    <xsl:if test="not(@cellpadding)">
         	    <xsl:attribute name="cellpadding">2</xsl:attribute>        
 	        </xsl:if>
- 		    <xsl:if test="not(@center)">
-        	    <xsl:attribute name="align">center</xsl:attribute>
-	        </xsl:if>
 			<xsl:apply-templates/>
 		</xsl:element>
 	</xsl:template>
@@ -631,20 +628,20 @@
 		</xsl:choose>
 	</xsl:template>	
 	
-	<xsl:template match="h:img">
+	<xsl:template match="h:*">
 		<xsl:param name="pos">none</xsl:param>
 		<xsl:element name="{local-name()}">
-			<xsl:apply-templates select="@*" mode="object"/>
+			<xsl:apply-templates select="@*"/>
 			<xsl:apply-templates>
 				<xsl:with-param name="pos" select="$pos"/>
 			</xsl:apply-templates>&#160;
 		</xsl:element>
 	</xsl:template>
 	
-	<xsl:template match="h:*">
+	<xsl:template match="h:img">
 		<xsl:param name="pos">none</xsl:param>
 		<xsl:element name="{local-name()}">
-			<xsl:apply-templates select="@*"/>
+			<xsl:apply-templates select="@*" mode="object"/>
 			<xsl:apply-templates>
 				<xsl:with-param name="pos" select="$pos"/>
 			</xsl:apply-templates>&#160;

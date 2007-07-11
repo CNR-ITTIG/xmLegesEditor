@@ -748,9 +748,6 @@
  		    <xsl:if test="not(@cellpadding)">
         	    <xsl:attribute name="cellpadding">2</xsl:attribute>        
 	        </xsl:if>
- 		    <xsl:if test="not(@center)">
-        	    <xsl:attribute name="align">center</xsl:attribute>
-	        </xsl:if>
 			<xsl:apply-templates/>
 		</xsl:element>
 	</xsl:template>
