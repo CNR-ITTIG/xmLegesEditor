@@ -64,10 +64,10 @@ public interface XmLegesMarker extends Service {
 	 * Array di valori per presentare il testo nelle form per
 	 * <code>TIPO_RUBRICA_VALORE</code>
 	 */
-	final public static String[] TIPO_RUBRICA = new String[] { "Su nuova linea", "Adiacente" };
+	final public static String[] TIPO_RUBRICA = new String[] { "Su nuova linea", "Adiacente", "Adiacente senza 'Art.'" };
 
 	/** Array di valori per il metodo <code>setTipoRubrica()</code> */
-	final public static String[] TIPO_RUBRICA_VALORE = new String[] { "0", "1" };
+	final public static String[] TIPO_RUBRICA_VALORE = new String[] { "0", "1", "2" };
 
 	/** Array di valori per il livello di logging per <code>LOGGER_VALORE</code> */
 	final public static String[] LOGGER = new String[] { "Errore", "Avvertimenti", "Informazioni", "Debug" };
