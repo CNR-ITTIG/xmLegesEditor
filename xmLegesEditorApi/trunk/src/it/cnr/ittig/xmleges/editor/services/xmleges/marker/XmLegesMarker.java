@@ -48,9 +48,10 @@ public interface XmLegesMarker extends Service {
 	 */
 	final public static String[] TIPO_DOC = new String[] { "Legge", "Legge Costituzionale", "Decreto Legge", "Decreto Legislativo", "Regio Decreto",
 			"Decreto Presidente Repubblica", "Decreto Presidente Repubblica - non numerato", "Decreto Pres. Cons. Ministri",
-			"Decreto Pres. Cons. Ministri - non numerato", "Decreto Ministeriale", "Decreto Ministeriale - non numerato", "Legge Regionale", "Disegno di Legge", "Documento NIR", "Provvedimento CNR" };
+			"Decreto Pres. Cons. Ministri - non numerato", "Decreto Ministeriale", "Decreto Ministeriale - non numerato", "Legge Regionale", 
+			"Regolamento Regionale", "Regolamento", "Circolare", "Provvedimento", "Disegno di Legge", "Documento NIR", "Provvedimento CNR" };
 
-	final public static String[] TIPO_DOC_VALORE = new String[] { "l", "lcost", "dl", "dlgs", "rd", "dpr", "dprNN", "dpcm", "dpcmNN", "dm", "dmNN", "lr", "ddl", "nir", "cnr" };
+	final public static String[] TIPO_DOC_VALORE = new String[] { "l", "lcost", "dl", "dlgs", "rd", "dpr", "dprNN", "dpcm", "dpcmNN", "dm", "dmNN", "lr", "rreg", "reg", "circ", "prov", "ddl", "nir", "cnr" };
 
 	/**
 	 * Array di valori per presentare il testo nelle form per
@@ -64,10 +65,10 @@ public interface XmLegesMarker extends Service {
 	 * Array di valori per presentare il testo nelle form per
 	 * <code>TIPO_RUBRICA_VALORE</code>
 	 */
-	final public static String[] TIPO_RUBRICA = new String[] { "Su nuova linea", "Adiacente", "Adiacente senza 'Art.'" };
+	final public static String[] TIPO_RUBRICA = new String[] { "Su nuova linea", "Adiacente", "Adiacente senza 'Art.'", "Senza rubrica" };
 
 	/** Array di valori per il metodo <code>setTipoRubrica()</code> */
-	final public static String[] TIPO_RUBRICA_VALORE = new String[] { "0", "1", "2" };
+	final public static String[] TIPO_RUBRICA_VALORE = new String[] { "0", "1", "2", "9" };
 
 	/** Array di valori per il livello di logging per <code>LOGGER_VALORE</code> */
 	final public static String[] LOGGER = new String[] { "Errore", "Avvertimenti", "Informazioni", "Debug" };
