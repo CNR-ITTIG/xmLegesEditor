@@ -254,16 +254,20 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 		 9   Decreto Ministeriale
 		 10   Decreto Ministeriale - non numerato
 		 11   Legge Regionale
-		 12   Disegno di Legge
-		 13   Documento NIR
-		 14   Provvedimento CNR
+		 	12	Regolamento Regionale 
+		 	13	Regolamento
+		 	14	Circolare
+		 	15	Provvedimento
+		 16   Disegno di Legge
+		 17   Documento NIR
+		 18   Provvedimento CNR
 		 */
 		
 		String comboItem = null;
 		
 		if(unknownTipoDoc != null){
 			unknownTipoDoc = unknownTipoDoc.toLowerCase().trim();
-			if(unknownTipoDoc.indexOf("regionale")!=-1 || unknownTipoDoc.indexOf("regione")!=-1 || unknownTipoDoc.indexOf("lr")!=-1 || unknownTipoDoc.indexOf("l.r.")!=-1)
+			if(unknownTipoDoc.indexOf("regionale")!=-1 || unknownTipoDoc.indexOf("regione")!=-1 || unknownTipoDoc.indexOf("lr")!=-1 || unknownTipoDoc.indexOf("l.r.")!=-1 || unknownTipoDoc.indexOf("l r")!=-1)
 				comboItem = parser.TIPO_DOC[11];
 			else if(unknownTipoDoc.startsWith("legge") && unknownTipoDoc.indexOf("costituzionale")==-1)
 				comboItem = parser.TIPO_DOC[0];
@@ -282,9 +286,9 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 			else if(unknownTipoDoc.indexOf("ministeriale")!=-1 || unknownTipoDoc.indexOf("ministero")!=-1 || unknownTipoDoc.indexOf("dm")!=-1 || unknownTipoDoc.indexOf("d.m")!=-1)
 				comboItem = parser.TIPO_DOC[9];
 			else if(unknownTipoDoc.indexOf("disegno")!=-1 || unknownTipoDoc.indexOf("ddl")!=-1 || unknownTipoDoc.indexOf("d.d.l.")!=-1)
-				comboItem = parser.TIPO_DOC[12];
+				comboItem = parser.TIPO_DOC[16];
 			else if(unknownTipoDoc.indexOf("provvedimento")!=-1)
-				comboItem = parser.TIPO_DOC[14];
+				comboItem = parser.TIPO_DOC[18];
 			else 
 				comboItem = parser.TIPO_DOC[0];
 			
