@@ -19,4 +19,9 @@ public class AttributeDeclaration implements Serializable {
 		valueDefault = _valueDefault;
 		value = _value;
 	}
+	
+	public String toString(){
+		return "type="+type+" default="+valueDefault+" value="+value;
+	}
+	
 }
