@@ -149,8 +149,8 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 		// INIZIALIZZA GLI AUTOMI DALLO SCHEMA
 		//loadRules("dtdData/nirbase.dtd");
 		xsdRM = new xsdRulesManagerImpl();
-		xsdRM.loadRules("xsdData/NIR_XSD_base/nirlight.xsd");
-		//xsdRM.loadRules("xsdData/NIR_XSD_completo/nirstrict.xsd");
+		//xsdRM.loadRules("xsdData/NIR_XSD_base/nirlight.xsd");
+		xsdRM.loadRules("xsdData/NIR_XSD_completo/nirstrict.xsd");
 		
 	}
 	
@@ -221,8 +221,25 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 
 		// parse DTD
 		UtilXml.readDTD(xml_file, this);
+		
+		printAlternativeContents();
 
 		logger.info("END loading rules from DTD");
+	}
+	
+	
+	private void printAlternativeContents(){
+		
+		System.err.println("****************** ALTERNATIVE CONTENTS ****************************");
+		for(Iterator it = alternative_contents.keySet().iterator(); it.hasNext();){
+			String key = it.next().toString();
+			Vector v = (Vector)alternative_contents.get(key);
+			System.err.println("alternatives for "+key+"  SIZE "+v.size());
+			for(int i=0;i<v.size();i++){
+				System.err.println("------- ALT. "+(i+1)+"  "+v.get(i).toString());
+			}
+		}
+		
 	}
 
 	// lettura delle regole dalle mappe salvate su file
@@ -330,6 +347,8 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 		// System.out.println("Reading alternatives");
 		Vector contents_strings = readAlternativeContents(model);
 		alternative_contents.put(name, contents_strings);
+		System.err.println("---------------------- alternative content models -----------------------");
+		System.err.println(name+ " "+model);
 
 		return contents_strings;
 	}
@@ -656,9 +675,11 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 				Object edge = src.getEdge(j);
 				String edge_name = src.getEdgeName(j);
 				if (edge instanceof ContentGraph) {
+					System.err.println("recursively explore subgraph "+((ContentGraph)edge).name);
 					// recursively explore subgraph
 					explodeContentGraph((ContentGraph) edge);
 				} else if (edge_name.compareTo("#PCDATA") != 0 && edge_name.compareTo("#EPS") != 0) {
+					System.err.println("replace edge with ContentGraph");
 					// replace edge with ContentGraph
 					src.setEdge(getContentGraph(edge_name), j);
 				}
@@ -677,9 +698,11 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 	protected String getDefaultContent(ContentGraph graph) throws DtdRulesManagerException {
 		// cycle until a default content has been found
 		while (true) {
-			if (visitContentGraph(graph) < Integer.MAX_VALUE)
+			if (visitContentGraph(graph) < Integer.MAX_VALUE){
+				//System.err.println("finite path");
 				return getXMLContent(graph);
-
+			}
+			//System.err.println("!   infinite path:  exploding");
 			// no default content: substitute each element with its ContentGraph
 			explodeContentGraph(graph);
 		}
@@ -1774,10 +1797,10 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 	private AttributeDeclaration getAttributeDeclaration(String elem_name, String att_name) throws DtdRulesManagerException {
 		if (elem_name == "#PCDATA")
 			throw new DtdRulesManagerException("No attributes for element <" + elem_name + ">");
-		if (!rules.containsKey(elem_name))
+		if (!xsdRM.rules.containsKey(elem_name))
 			throw new DtdRulesManagerException("No rule for element <" + elem_name + ">");
 
-		HashMap att_hash = (HashMap) attributes.get(elem_name);
+		HashMap att_hash = (HashMap) xsdRM.attributes.get(elem_name);
 		if (att_hash == null)
 			throw new DtdRulesManagerException("No attributes for element <" + elem_name + ">");
 
@@ -1796,10 +1819,10 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 	public Collection queryGetAttributes(String elem_name) throws DtdRulesManagerException {
 		if (elem_name == "#PCDATA")
 			return new Vector();
-		if (!rules.containsKey(elem_name))
+		if (!xsdRM.rules.containsKey(elem_name))
 			throw new DtdRulesManagerException("No rule for element <" + elem_name + ">");
 
-		HashMap att_hash = (HashMap) attributes.get(elem_name);
+		HashMap att_hash = (HashMap) xsdRM.attributes.get(elem_name);
 		if (att_hash == null)
 			return new Vector(); // no attributes for element
 
@@ -1855,9 +1878,9 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 	public boolean queryIsValidAttribute(String elem_name, String att_name) throws DtdRulesManagerException {
 		if (elem_name == "#PCDATA")
 			throw new DtdRulesManagerException("No attributes for element <" + elem_name + ">");
-		if (!rules.containsKey(elem_name))
+		if (!xsdRM.rules.containsKey(elem_name))
 			throw new DtdRulesManagerException("No rule for element <" + elem_name + ">");
-		return (attributes.containsKey(elem_name) && ((HashMap) attributes.get(elem_name)).containsKey(att_name));
+		return (xsdRM.attributes.containsKey(elem_name) && ((HashMap) xsdRM.attributes.get(elem_name)).containsKey(att_name));
 	}
 
 	/**
@@ -1870,7 +1893,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 	 */
 	public boolean queryIsRequiredAttribute(String elem_name, String att_name) throws DtdRulesManagerException {
 		AttributeDeclaration att_decl = getAttributeDeclaration(elem_name, att_name);
-		return ((att_decl.valueDefault != null) && (att_decl.valueDefault.equalsIgnoreCase("#REQUIRED") || att_decl.valueDefault.equalsIgnoreCase("#FIXED")));
+		return ((att_decl.valueDefault != null) && (att_decl.valueDefault.equalsIgnoreCase("#REQUIRED") || att_decl.valueDefault.equalsIgnoreCase("#FIXED") || att_decl.valueDefault.equalsIgnoreCase("required")));
 	}
 
 	/**
@@ -1945,12 +1968,5 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			}
 		}
 	}
-
-	/*
-	 * private void printAttributes(Node elem) { org.w3c.dom.NamedNodeMap att_nodes =
-	 * elem.getAttributes(); for (int i = 0; i < att_nodes.getLength(); i++) { Node att =
-	 * att_nodes.item(i); System.out.println(" attribute: name=" + att.getNodeName() + "
-	 * value=" + att.getNodeValue()); } }
-	 */
 
 }
