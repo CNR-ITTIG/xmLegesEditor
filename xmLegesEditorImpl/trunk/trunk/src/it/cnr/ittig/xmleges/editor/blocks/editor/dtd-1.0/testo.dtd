@@ -1,0 +1,279 @@
+<!-- ===================================================================== -->
+<!--     DTD dei documenti di NormeInRete (NIR)                            -->
+<!--                                                                       -->
+<!--     testo.dtd: elementi ed attributi testuali                         -->
+<!--     Dipende da: 'nircompleto.dtd' oppure 'nirflessibile.dtd'                 -->
+<!--                                                                       -->
+<!--     Versione del 23/03/2001                                           -->
+<!-- ===================================================================== -->
+
+<!-- =====================================================================
+
+		Elementi HTML del documento articolato
+
+		Nei DTD NormeInRete esiste un grande numero
+		di situazioni in cui e' possibile inserire testo di vario tipo, 
+		diviso in capoversi. Esempi includono il preambolo o le note di 
+		redazione di un documento. 
+		
+		In questi casi si devono poter specificare blocchi di testo
+		divisi organizzati in capoversi (o paragrafi) e che possano contenere
+		artifici tipografici come i grassetti, i corsivi, ecc.
+		Questo viene ottenuto in NormeInRete attraverso l'uso di elementi 
+		direttamente tratti da HTML. Qui viene elencato il sottoinsieme
+		di HTML che e' possibile usare nei documenti NIR. 
+		
+		Ogni elemento di questo elenco va considerato come equivalente 
+		all'omonimo elemento di HTML, con le seguenti eccezioni e note: 
+		
+		* non vi e' differenza d'uso tra div e p: i due elementi sono
+		  totalmente intercambiabili. A questi elementi e' possibile
+		  associare, attraverso attributi, uno stile CSS che permetta di
+		  specificare caratteristiche tipografiche particolari. Cio' tuttavia
+		  e' opportuno soltanto quando le caratteristiche tipografiche del
+		  testo stampato richiedano effettivamente di essere registrate
+		  esplicitamente.
+		* l'elemento br va utilizzato per spezzare su piu' righe testo
+		  appartenente allo stesso capoverso come frasi poste su piu' righe
+		  per enfatizzare alcune parole (ad esempio "VISTO" o "CONSIDERATO",
+		  ecc.
+		* l'elemento a si distingue dall'elemento rif (definito nel file
+		  norme.dtd): rif serve per indicare riferimenti normativi espliciti
+		  posti all'interno del testo, mentre a serve per indicare riferimenti
+		  ipertestuali di tutti gli altri tipi, da usare nel caso il testo
+		  riporti, ad esempio, indicazione di una pagine del WWW o di un sito.
+		
+    ===================================================================== -->
+
+<!-- ===================================================================== -->
+<!--                                                                       -->
+<!--     Elementi con content model EMPTY                                  -->
+<!--                                                                       -->
+<!-- ===================================================================== -->
+
+<!ELEMENT h:br            EMPTY    >
+<!ATTLIST h:br            %globalifac;    >
+
+<!ELEMENT h:hr            EMPTY    >
+<!ATTLIST h:hr            %globalifac;    >
+
+<!ELEMENT h:img           EMPTY    >
+<!ATTLIST h:img
+                        %globalifac;
+                        src        CDATA        #REQUIRED
+                        alt        CDATA        #IMPLIED
+                        width      CDATA        #IMPLIED
+                        height     CDATA        #IMPLIED
+>
+
+<!ELEMENT h:input         EMPTY    >
+<!ATTLIST h:input
+                        %globalifac;
+                        type        CDATA        #REQUIRED
+                        size        CDATA        #IMPLIED
+>
+
+<!-- ===================================================================== -->
+<!--                                                                       -->
+<!--     Elementi di tipo inline                                           -->
+<!--                                                                       -->
+<!-- ===================================================================== -->
+
+<!ELEMENT h:b             %inline; >
+<!ELEMENT h:i             %inline; >
+<!ELEMENT h:u             %inline; >
+<!ELEMENT h:sub           %inline; >
+<!ELEMENT h:sup           %inline; >
+<!ELEMENT h:span          %inline; >
+<!ELEMENT h:a             %inline; >
+
+<!ATTLIST h:b             %globalifac;    >
+<!ATTLIST h:i             %globalifac;    >
+<!ATTLIST h:u             %globalifac;    >
+<!ATTLIST h:sub           %globalifac;    >
+<!ATTLIST h:sup           %globalifac;    >
+<!ATTLIST h:span          %globalifac;    >
+<!ATTLIST h:a             %globalifac;    %link;    >
+
+<!-- ===================================================================== -->
+<!--                                                                       -->
+<!--     Elementi di tipo blocco e form                                    -->
+<!--                                                                       -->
+<!-- ===================================================================== -->
+
+<!ELEMENT h:p             %inline; >
+<!ELEMENT h:div           %inline; >
+<!ATTLIST h:p             %globalifac;    >
+<!ATTLIST h:div           %globalifac;    >
+<!ELEMENT h:form        ( %elinline; | %allblocchi; | h:input )* >
+<!ATTLIST h:form            
+                %globalifac;
+                method    (post|get|put)    'post'
+                action    CDATA    #IMPLIED
+                enctype   CDATA    'x-url-encoded' >
+
+<!-- ===================================================================== -->
+<!--                             LISTE                                     -->
+<!--                                                                       -->
+<!--     Derivato                                                          -->
+<!--     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"                         -->
+<!--     SYSTEM "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"        -->
+<!-- ===================================================================== -->
+
+<!-- Unordered list          -->
+<!ELEMENT h:ul (h:li)+         >
+<!ATTLIST h:ul  %globalifac;   >
+
+<!-- Ordered (numbered) list -->
+<!ELEMENT h:ol (h:li)+         >
+<!ATTLIST h:ol  %globalifac;   >
+
+<!-- list item               -->
+<!ELEMENT h:li %ParaLevel;          >
+<!ATTLIST h:li  %globalifac;   >
+
+<!-- definition lists - dt for term, dd for its definition -->
+<!ELEMENT h:dl (h:dt|h:dd)+    >
+<!ATTLIST h:dl  %globalifac;   >
+
+<!ELEMENT h:dt %inline;        >
+<!ATTLIST h:dt  %globalifac;   >
+
+<!ELEMENT h:dd %ParaLevel;          >
+<!ATTLIST h:dd  %globalifac;   >
+
+
+<!-- ===================================================================== -->
+<!--                             TABELLE                                   -->
+<!--                                                                       -->
+<!--     Derivato da "-//SoftQuad//DTD HTML 4.0 Table v1.0 19990413//EN"   -->
+<!-- ===================================================================== -->
+
+
+<!-- ===================================================================== -->
+<!--                    Attributi                                          -->
+<!-- ===================================================================== -->
+
+
+<!ENTITY % coreattrs
+            "id         ID                     #IMPLIED
+             class      CDATA                  #IMPLIED
+             style      CDATA                  #IMPLIED
+             title      CDATA                  #IMPLIED"             >
+
+
+<!ENTITY % i18n
+            "lang       CDATA                  #IMPLIED
+             dir        (ltr|rtl)              #IMPLIED"             >
+
+
+<!ENTITY % attrs        "%coreattrs; %i18n;"                >
+
+<!ENTITY % TFrame "(void|above|below|hsides|lhs|rhs|vsides|box|border)">
+
+<!ENTITY % TRules "(none | groups | rows | cols | all)">
+
+<!ENTITY % TAlign "(left|center|right)">
+
+<!ENTITY % Scope "(row|col|rowgroup|colgroup)">
+
+<!ENTITY % cellhalign
+  "align      (left|center|right|justify|char) #IMPLIED
+   char       CDATA         #IMPLIED
+   charoff    CDATA         #IMPLIED  "
+>
+
+<!ENTITY % cellvalign
+  "valign     (top|middle|bottom|baseline) #IMPLIED"
+>
+
+<!ENTITY % CAlign "(top|bottom|left|right)">
+
+
+<!-- ===================================================================== -->
+<!--                    Elementi                                           -->
+<!-- ===================================================================== -->
+
+<!ELEMENT h:table   (  h:caption?, 
+                      (h:col*|h:colgroup*), 
+                       h:thead?, 
+                       h:tfoot?, 
+                      (h:tbody+|h:tr+)     )>
+<!ATTLIST h:table
+  %attrs;
+  summary      CDATA          #IMPLIED
+  width        CDATA          #IMPLIED
+  border       CDATA          #IMPLIED
+  frame        %TFrame;       #IMPLIED
+  rules        %TRules;       #IMPLIED
+  cellspacing  CDATA          #IMPLIED
+  cellpadding  CDATA          #IMPLIED
+  datapagesize CDATA          #IMPLIED
+>
+
+<!ELEMENT h:caption      %PhraseLevel;     >
+<!ATTLIST h:caption      %attrs;           >
+
+<!ELEMENT h:thead        (h:tr)+           >
+<!ATTLIST h:thead        %attrs;   %cellhalign;    %cellvalign; >
+
+<!ELEMENT h:tfoot        (h:tr)+           >
+<!ATTLIST h:tfoot        %attrs;   %cellhalign;    %cellvalign; >
+
+<!ELEMENT h:tbody        (h:tr)+           >
+<!ATTLIST h:tbody        %attrs;   %cellhalign;    %cellvalign; >
+
+<!ELEMENT h:colgroup     (h:col)*          >
+<!ATTLIST h:colgroup
+  %attrs;
+  span        CDATA        "1"
+  width       CDATA        #IMPLIED
+  %cellhalign;
+  %cellvalign;
+>
+
+<!ELEMENT h:col          EMPTY           >
+<!ATTLIST h:col
+  %attrs;
+  span        CDATA         "1"
+  width       CDATA         #IMPLIED
+  %cellhalign;
+  %cellvalign;
+>
+  
+  
+<!ELEMENT h:tr           (h:th|h:td)+        >
+<!ATTLIST h:tr           %attrs;   %cellhalign;    %cellvalign; >
+
+<!ELEMENT h:th           %ParaLevel;       >
+<!ATTLIST h:th
+  %attrs;
+  abbr        CDATA          #IMPLIED
+  axis        CDATA          #IMPLIED
+  headers     IDREFS         #IMPLIED
+  scope       %Scope;        #IMPLIED
+  rowspan     CDATA          "1"
+  colspan     CDATA          "1"
+  %cellhalign;
+  %cellvalign;
+>
+
+<!ELEMENT h:td           %ParaLevel;       >
+<!ATTLIST h:td
+  %attrs;
+  abbr        CDATA          #IMPLIED
+  axis        CDATA          #IMPLIED
+  headers     IDREFS         #IMPLIED
+  scope       %Scope;        #IMPLIED
+  rowspan     CDATA          "1"
+  colspan     CDATA          "1"
+  %cellhalign;
+  %cellvalign;
+>
+
+<!-- ===================================================================== -->
+<!--     fine del file testo.dtd                                           -->
+<!-- ===================================================================== -->
+
+
+
