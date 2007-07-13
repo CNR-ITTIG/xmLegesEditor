@@ -15,12 +15,18 @@ set CLASSPATH=%CLASSPATH%;lib/xercesImpl-2.7.1.jar
 set CLASSPATH=%CLASSPATH%;lib/xml-apis-2.7.1.jar
 set CLASSPATH=%CLASSPATH%;lib/fop.jar
 set CLASSPATH=%CLASSPATH%;lib/commons-logging-1.0.4.jar
-set CLASSPATH=%CLASSPATH;%lib/xmlgraphics-commons-1.1.jar
-set CLASSPATH=%CLASSPATH;%lib/commons-io-1.1.jar
+set CLASSPATH=%CLASSPATH%;lib/xmlgraphics-commons-1.1.jar
+set CLASSPATH=%CLASSPATH%;lib/commons-io-1.1.jar
 set CLASSPATH=%CLASSPATH%;lib/batik.jar
 set CLASSPATH=%CLASSPATH%;lib/avalon-framework-cvs-20020806.jar
-
+set CLASSPATH=%CLASSPATH%;lib/logkit-1.0.1.jar
+set CLASSPATH=%CLASSPATH%;lib/commons-codec-1.3.jar
+set CLASSPATH=%CLASSPATH%;lib/commons-httpclient-3.0.1.jar
+set CLASSPATH=%CLASSPATH%;lib/commons-logging-1.1.jar
+set CLASSPATH=%CLASSPATH%;lib/commons-logging-adapters-1.1.jar
+set CLASSPATH=%CLASSPATH%;lib/commons-logging-api-1.1.jar
 set CLASSPATH=%CLASSPATH%;lib/xsc.jar
 set CLASSPATH=%CLASSPATH%;lib/jdic/jdic.jar
+
 
 start /MIN jre\bin\javaw -Xmx256m it.cnr.ittig.services.manager.Run xmLegesEditor.xml images\editor\xmLegesEditor.png
