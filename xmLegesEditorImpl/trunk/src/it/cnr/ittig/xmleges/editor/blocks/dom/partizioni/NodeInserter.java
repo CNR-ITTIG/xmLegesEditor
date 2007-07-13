@@ -14,7 +14,6 @@ import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.Vector;
 

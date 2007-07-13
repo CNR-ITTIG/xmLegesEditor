@@ -546,5 +546,10 @@ public class AltreRelazioniFormImpl implements CiclodiVitaForm, Loggable, Servic
 		return null;
 	}
 
+	public int getEventoSelezionato() {
+		// TODO Auto-generated method stub
+		return -1;
+	}
+
 	
 }

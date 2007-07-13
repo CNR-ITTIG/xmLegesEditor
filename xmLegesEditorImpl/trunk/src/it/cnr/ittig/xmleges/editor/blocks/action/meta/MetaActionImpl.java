@@ -346,6 +346,9 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 	
 	public class CiclodiVitaAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
+			
+			//BUTTARLA DA QUI ed eliminarla anche dalle barre dei menu
+			
 			doCiclodiVita();
 		}
 	}

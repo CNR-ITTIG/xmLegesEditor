@@ -142,6 +142,13 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 		
 	}
 
+	public int getEventoSelezionato() {
+		if (eventiList.isSelectionEmpty())
+			return -1;
+		else
+			return eventiList.getSelectedIndex();
+	}
+	
 	
 	public Evento[] getEventi() {
 		return eventi;
