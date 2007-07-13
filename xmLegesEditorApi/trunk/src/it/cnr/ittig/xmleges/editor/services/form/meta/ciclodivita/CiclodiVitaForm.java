@@ -40,6 +40,11 @@ public interface CiclodiVitaForm extends Service {
 	public Evento[] getEventi();
 
 	/**
+	 * Restituisce l'indice dell'evento selezionato nella form.
+	 */
+	public int getEventoSelezionato();
+	
+	/**
 	 * Restituisce le relazioni ulteriori (non legate agli eventi) con altri
 	 * documenti.
 	 * 
