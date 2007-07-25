@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 sp1 U (http://www.altova.com) by Alexander willem Frank Boer (EMBRACE) -->
+<xsd:schema xmlns="http://www.akomantoso.org/1.0" xmlns:e="http://www.metalex.eu/1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.akomantoso.org/1.0" elementFormDefault="qualified">
+	<xsd:import namespace="http://www.metalex.eu/1.0" schemaLocation="./metalex.xsd"/>
+	<xsd:annotation>
+		<xsd:documentation>
+		 =====================================================================
+		Akoma Ntoso test schema for MetaLex CEN standard
+		
+		
+		Release  11/11/2006
+		technical supervision Fabio Vitali - University of Bologna
+		
+		meant as a test to verify the stength of the abstract typing mechanism
+		of the MetaLex CEN standard
+		
+		===================================================================== 
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:complexType name="Thierarchy">
+		<xsd:complexContent>
+			<xsd:restriction base="e:Thcontainer">
+				<xsd:sequence>
+					<xsd:element ref="e:ur-htitle" maxOccurs="unbounded"/>
+					<xsd:sequence maxOccurs="unbounded">
+						<xsd:element ref="e:ur-hcontainer"/>
+					</xsd:sequence>
+				</xsd:sequence>
+				<xsd:attributeGroup ref="e:locnumb"/>
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Tarticle">
+		<xsd:complexContent>
+			<xsd:restriction base="e:Thcontainer">
+				<xsd:sequence>
+					<xsd:element ref="e:ur-htitle" maxOccurs="unbounded"/>
+					<xsd:sequence maxOccurs="unbounded">
+						<xsd:element ref="e:ur-container"/>
+					</xsd:sequence>
+				</xsd:sequence>
+				<xsd:attributeGroup ref="e:globnumb"/>
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Tclause">
+		<xsd:complexContent>
+			<xsd:restriction base="e:Thcontainer">
+				<xsd:sequence>
+					<xsd:element ref="e:ur-htitle" maxOccurs="unbounded"/>
+					<xsd:choice>
+						<xsd:element ref="e:ur-hcontainer"/>
+						<xsd:element ref="e:ur-container"/>
+					</xsd:choice>
+				</xsd:sequence>
+				<xsd:attributeGroup ref="e:locnumb"/>
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Tcontent">
+		<xsd:complexContent>
+			<xsd:restriction base="e:Tcontainer">
+				<xsd:sequence maxOccurs="unbounded">
+					<xsd:element ref="e:ur-hcontainer"/>
+				</xsd:sequence>
+				<xsd:attributeGroup ref="e:locnumb"/>
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="akomantoso" type="e:Troot"/>
+	<xsd:element name="clauses" type="Tcontent" substitutionGroup="e:ur-container"/>
+	<xsd:element name="section" type="Thierarchy" substitutionGroup="e:ur-hcontainer"/>
+	<xsd:element name="part" type="Thierarchy" substitutionGroup="e:ur-hcontainer"/>
+	<xsd:element name="paragraph" type="Thierarchy" substitutionGroup="e:ur-hcontainer"/>
+	<xsd:element name="chapter" type="Thierarchy" substitutionGroup="e:ur-hcontainer"/>
+	<xsd:element name="article" type="Tarticle" substitutionGroup="e:ur-hcontainer"/>
+	<xsd:element name="clause" type="Tclause" substitutionGroup="e:ur-hcontainer"/>
+	<xsd:element name="num" type="e:Tblock" substitutionGroup="e:ur-htitle"/>
+	<xsd:element name="title" type="e:Tblock" substitutionGroup="e:ur-htitle"/>
+	<xsd:element name="body" type="e:Tcontainer" substitutionGroup="e:ur-container"/>
+	<xsd:element name="p" type="e:Tblock" substitutionGroup="e:ur-block"/>
+	<xsd:element name="a" type="e:Tanchor" substitutionGroup="e:ur-inline"/>
+	<xsd:element name="meta" type="e:Tmcontainer" substitutionGroup="e:ur-mcontainer"/>
+	<xsd:element name="publication" type="e:Tmeta" substitutionGroup="e:ur-meta"/>
+</xsd:schema>
