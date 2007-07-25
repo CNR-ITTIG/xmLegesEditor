@@ -1893,7 +1893,8 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 	 */
 	public boolean queryIsRequiredAttribute(String elem_name, String att_name) throws DtdRulesManagerException {
 		AttributeDeclaration att_decl = getAttributeDeclaration(elem_name, att_name);
-		return ((att_decl.valueDefault != null) && (att_decl.valueDefault.equalsIgnoreCase("#REQUIRED") || att_decl.valueDefault.equalsIgnoreCase("#FIXED") || att_decl.valueDefault.equalsIgnoreCase("required")));
+		return ((att_decl.valueDefault != null) && (att_decl.valueDefault.equalsIgnoreCase("#REQUIRED") || att_decl.valueDefault.equalsIgnoreCase("#FIXED") 
+				|| att_decl.valueDefault.equalsIgnoreCase("required") || att_decl.valueDefault.equalsIgnoreCase("fixed")));
 	}
 
 	/**
@@ -1906,7 +1907,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 	 */
 	public boolean queryIsFixedAttribute(String elem_name, String att_name) throws DtdRulesManagerException {
 		AttributeDeclaration att_decl = getAttributeDeclaration(elem_name, att_name);
-		return (att_decl.valueDefault == "#FIXED");
+		return (att_decl.valueDefault == "#FIXED" || att_decl.valueDefault.equalsIgnoreCase("fixed"));
 	}
 
 	/**
@@ -1921,7 +1922,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 	 */
 	public boolean queryIsValidAttributeValue(String elem_name, String att_name, String value) throws DtdRulesManagerException {
 		AttributeDeclaration att_decl = getAttributeDeclaration(elem_name, att_name);
-		if (att_decl.valueDefault == "#FIXED") {
+		if (att_decl.valueDefault == "#FIXED" || att_decl.valueDefault.equalsIgnoreCase("fixed")) {
 			// fixed value
 			return (att_decl.value.compareTo(value) == 0);
 		}
