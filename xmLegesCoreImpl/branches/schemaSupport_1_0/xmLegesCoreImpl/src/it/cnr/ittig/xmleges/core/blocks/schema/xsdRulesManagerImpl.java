@@ -71,22 +71,20 @@ public class xsdRulesManagerImpl{
  	            System.err.println("ERROR: Could not load a XSDSchema object!");
  	            return;
  	       }
- 		   
+ 		  targetNameSpace = schema.getTargetNamespace();
+ 		  
  		  List allElements = schema.getElementDeclarations();
  		  for (Iterator iter = allElements.iterator(); iter.hasNext(); /* no-op */){
  	            XSDElementDeclaration elemDecl = (XSDElementDeclaration)iter.next();
  	            createRuleForElement(elemDecl);
- 	            createAlternativeContents(elemDecl);
  	            createRuleForAttributes(elemDecl);
+ 	            //createAlternativeContents(elemDecl);  
  	            
  	      }
  		}catch(Exception e){
  			System.err.println("exception");
  		}
         
- 		
- 		targetNameSpace = schema.getTargetNamespace();
-		
 		System.err.println("loaded schema");
 		System.err.println("TARGET NAMESPACE: "+schema.getTargetNamespace());
  		
@@ -110,7 +108,7 @@ public class xsdRulesManagerImpl{
    		  	for (Iterator iter = allElements.iterator(); iter.hasNext(); /* no-op */){
    	            XSDElementDeclaration elemDecl = (XSDElementDeclaration)iter.next();
    	            createRuleForElement(elemDecl);  
-   	            createAlternativeContents(elemDecl);
+   	            //createAlternativeContents(elemDecl);
    	            createRuleForAttributes(elemDecl); 
    		  	}
         }
@@ -1138,8 +1136,8 @@ public class xsdRulesManagerImpl{
                         String graph_edge = dfsa_edge;
                         State dfsa_destination = getNextState(elemName, dfsa_node, dfsa_edge);
                         if(dfsa_destination == null){
-                        	System.out.println("null destination for content "+elemName);
-                        	System.out.println("dfsa_edge = "+dfsa_edge);
+                        	System.err.println("+++++++++++++++ null destination for content "+elemName);
+                        	System.err.println("+++++++++++++++ dfsa_edge = "+dfsa_edge);
                         }
                         ContentGraph.Node graph_destination = (ContentGraph.Node)graph_nodes_table.get(dfsa_destination.toString());
                         graph_node.addEdge(graph_edge, graph_destination);
