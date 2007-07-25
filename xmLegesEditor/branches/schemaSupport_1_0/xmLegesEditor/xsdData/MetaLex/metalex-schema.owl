@@ -1,0 +1,452 @@
+<?xml version="1.0"?>
+<!--
+    MetaLex 1.3
+    Copyright (C) 2006  Leibniz Center for Law, Universiteit van Amsterdam
+
+    This library is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Lesser General Public
+    License as published by the Free Software Foundation; either
+    version 2.1 of the License, or (at your option) any later version.
+
+    This library is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+-->
+<rdf:RDF
+    xmlns="http://www.metalex.nl/2005/10/schema#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+  xml:base="http://www.metalex.nl/2005/10/schema">
+  <owl:Ontology rdf:about="">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </owl:Ontology>
+  <owl:Class rdf:ID="Article">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="AStructuredSource"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="APrimarySource"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="APartialSource"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="AIndexedSource"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="CitationDesignation">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="AText"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="ADesignation"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#APartialSource"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="SentenceFragmentSubPart">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#APartialSource"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#AIndexedSource"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#AStructuredSource"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="CiteGroup">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="AReference"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#AIndexedSource">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="ASource"/>
+    </rdfs:subClassOf>
+    <owl:disjointWith>
+      <owl:Class rdf:ID="ACitableSource"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:ID="AAnonSource"/>
+    </owl:disjointWith>
+  </owl:Class>
+  <owl:Class rdf:ID="Title">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#AText"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#APartialSource"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#ADesignation"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ADeclarativeAct">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="ALegislativeAct"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Appendix">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="AUnstructuredSource"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#APrimarySource"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#APartialSource"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#AAnonSource"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#AUnstructuredSource">
+    <owl:disjointWith>
+      <owl:Class rdf:about="#AStructuredSource"/>
+    </owl:disjointWith>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#AText"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#ASource"/>
+  </owl:Class>
+  <owl:Class rdf:about="#ACitableSource">
+    <rdfs:subClassOf rdf:resource="#ASource"/>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#AAnonSource"/>
+    </owl:disjointWith>
+    <owl:disjointWith rdf:resource="#AIndexedSource"/>
+  </owl:Class>
+  <owl:Class rdf:about="#AText">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:ID="TextVersion"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="textVersion"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="AnyXML"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="List">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#AStructuredSource"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#AAnonSource"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#APartialSource"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#ALegislativeAct">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="AKnownLocutionaryAct"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="CiteRange">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#AReference"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#AReference">
+    <rdfs:subClassOf rdf:resource="#AText"/>
+  </owl:Class>
+  <owl:Class rdf:about="#APrimarySource">
+    <owl:disjointWith>
+      <owl:Class rdf:ID="ASecondarySource"/>
+    </owl:disjointWith>
+    <rdfs:subClassOf rdf:resource="#ASource"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Regulation">
+    <rdfs:subClassOf rdf:resource="#ACitableSource"/>
+    <rdfs:subClassOf rdf:resource="#APrimarySource"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#AStructuredSource"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="AWholeSource"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="APermittingAct">
+    <rdfs:subClassOf rdf:resource="#ALegislativeAct"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ASourceTimeline">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="#ASource"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="temporalMember"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="ASourceCollection"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Quote">
+    <rdfs:subClassOf rdf:resource="#AText"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Decision">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#AStructuredSource"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#ACitableSource"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#AWholeSource"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#APrimarySource"/>
+  </owl:Class>
+  <owl:Class rdf:ID="JudicialDecision">
+    <rdfs:subClassOf rdf:resource="#Decision"/>
+  </owl:Class>
+  <owl:Class rdf:about="#TextVersion">
+    <rdfs:subClassOf rdf:resource="#AnyXML"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Part">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#AStructuredSource"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#APartialSource"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#AIndexedSource"/>
+    <rdfs:subClassOf rdf:resource="#APrimarySource"/>
+  </owl:Class>
+  <owl:Class rdf:about="#APartialSource">
+    <rdfs:subClassOf rdf:resource="#ASource"/>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#AWholeSource"/>
+    </owl:disjointWith>
+  </owl:Class>
+  <owl:Class rdf:ID="Reference">
+    <rdfs:subClassOf rdf:resource="#AReference"/>
+  </owl:Class>
+  <owl:Class rdf:about="#AKnownLocutionaryAct">
+    <rdfs:subClassOf rdf:resource="#ASource"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Index">
+    <rdfs:subClassOf rdf:resource="#ADesignation"/>
+    <rdfs:subClassOf rdf:resource="#APartialSource"/>
+    <rdfs:subClassOf rdf:resource="#AText"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Body">
+    <rdfs:comment xml:lang="en">Only a decision can have a body</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="#APrimarySource"/>
+    <rdfs:subClassOf rdf:resource="#AUnstructuredSource"/>
+    <rdfs:subClassOf rdf:resource="#APartialSource"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Introduction">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#AAnonSource"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#APartialSource"/>
+    <rdfs:subClassOf rdf:resource="#APrimarySource"/>
+    <rdfs:subClassOf rdf:resource="#AUnstructuredSource"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Cite">
+    <rdfs:subClassOf rdf:resource="#AReference"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SentenceFragment">
+    <rdfs:subClassOf rdf:resource="#AUnstructuredSource"/>
+    <rdfs:subClassOf rdf:resource="#APartialSource"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#AAnonSource"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Annotation">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ASecondarySource"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#APartialSource"/>
+    <rdfs:subClassOf rdf:resource="#AUnstructuredSource"/>
+  </owl:Class>
+  <owl:Class rdf:ID="CitationTitle">
+    <rdfs:subClassOf rdf:resource="#AText"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ADefiningAct">
+    <rdfs:subClassOf rdf:resource="#ADeclarativeAct"/>
+  </owl:Class>
+  <owl:Class rdf:about="#AStructuredSource">
+    <rdfs:subClassOf rdf:resource="#ASource"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="#APartialSource"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="structuralMember"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:disjointWith rdf:resource="#AUnstructuredSource"/>
+  </owl:Class>
+  <owl:Class rdf:ID="IndexDesignation">
+    <rdfs:subClassOf rdf:resource="#ADesignation"/>
+    <rdfs:subClassOf rdf:resource="#APartialSource"/>
+    <rdfs:subClassOf rdf:resource="#AStructuredSource"/>
+  </owl:Class>
+  <owl:Class rdf:ID="AdministrativeDecision">
+    <rdfs:subClassOf rdf:resource="#Decision"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ADirectiveAct">
+    <rdfs:subClassOf rdf:resource="#ALegislativeAct"/>
+  </owl:Class>
+  <owl:Class rdf:about="#AAnonSource">
+    <rdfs:subClassOf rdf:resource="#ASource"/>
+    <owl:disjointWith rdf:resource="#AIndexedSource"/>
+    <owl:disjointWith rdf:resource="#ACitableSource"/>
+  </owl:Class>
+  <owl:Class rdf:ID="SubPart">
+    <rdfs:subClassOf rdf:resource="#AStructuredSource"/>
+    <rdfs:subClassOf rdf:resource="#AIndexedSource"/>
+    <rdfs:subClassOf rdf:resource="#APartialSource"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ACommittingAct">
+    <rdfs:subClassOf rdf:resource="#AKnownLocutionaryAct"/>
+  </owl:Class>
+  <owl:Class rdf:about="#ASecondarySource">
+    <rdfs:subClassOf rdf:resource="#ASource"/>
+  </owl:Class>
+  <owl:Class rdf:ID="MetaData">
+    <rdfs:subClassOf rdf:resource="#AUnstructuredSource"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Sentence">
+    <rdfs:subClassOf rdf:resource="#AUnstructuredSource"/>
+    <rdfs:subClassOf rdf:resource="#APartialSource"/>
+    <rdfs:subClassOf rdf:resource="#AAnonSource"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Conclusion">
+    <rdfs:subClassOf rdf:resource="#APartialSource"/>
+    <rdfs:subClassOf rdf:resource="#APrimarySource"/>
+    <rdfs:subClassOf rdf:resource="#AUnstructuredSource"/>
+    <rdfs:subClassOf rdf:resource="#AAnonSource"/>
+  </owl:Class>
+  <owl:Class rdf:about="#ASourceCollection">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="#ASource"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="collectionMember"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </owl:Class>
+  <owl:Class rdf:ID="InformalPart">
+    <rdfs:subClassOf rdf:resource="#APrimarySource"/>
+    <rdfs:subClassOf rdf:resource="#APartialSource"/>
+    <rdfs:subClassOf rdf:resource="#AStructuredSource"/>
+  </owl:Class>
+  <owl:Class rdf:about="#AWholeSource">
+    <owl:disjointWith rdf:resource="#APartialSource"/>
+    <rdfs:subClassOf rdf:resource="#ASource"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Category">
+    <rdfs:subClassOf rdf:resource="#APartialSource"/>
+    <rdfs:subClassOf rdf:resource="#ADesignation"/>
+    <rdfs:subClassOf rdf:resource="#AText"/>
+  </owl:Class>
+  <owl:ObjectProperty rdf:ID="authority">
+    <rdfs:domain rdf:resource="#ASource"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="properStructuralSuccessor">
+    <rdfs:subPropertyOf>
+      <owl:TransitiveProperty rdf:ID="structuralSuccessor"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="editor">
+    <rdfs:domain rdf:resource="#ASource"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="author">
+    <rdfs:domain rdf:resource="#ASource"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#structuralMember">
+    <rdfs:subPropertyOf>
+      <owl:TransitiveProperty rdf:ID="member"/>
+    </rdfs:subPropertyOf>
+    <rdfs:domain rdf:resource="#AStructuredSource"/>
+    <rdfs:range rdf:resource="#APartialSource"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="procedure">
+    <rdfs:domain rdf:resource="#ASource"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="temporalSuccessor">
+    <rdfs:domain rdf:resource="#ASource"/>
+    <rdfs:range rdf:resource="#ASource"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="metadata">
+    <rdfs:range rdf:resource="#MetaData"/>
+    <rdfs:subPropertyOf>
+      <owl:TransitiveProperty rdf:about="#member"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#temporalMember">
+    <rdfs:domain rdf:resource="#ASourceTimeline"/>
+    <rdfs:subPropertyOf>
+      <owl:TransitiveProperty rdf:about="#member"/>
+    </rdfs:subPropertyOf>
+    <rdfs:range rdf:resource="#ASource"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="properTemporalSuccessor">
+    <rdfs:subPropertyOf rdf:resource="#temporalSuccessor"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="annotation">
+    <rdfs:subPropertyOf>
+      <owl:TransitiveProperty rdf:about="#member"/>
+    </rdfs:subPropertyOf>
+    <rdfs:range rdf:resource="#Annotation"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#collectionMember">
+    <rdfs:subPropertyOf>
+      <owl:TransitiveProperty rdf:about="#member"/>
+    </rdfs:subPropertyOf>
+    <rdfs:range rdf:resource="#ASource"/>
+    <rdfs:domain rdf:resource="#ASourceCollection"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#textVersion">
+    <rdfs:range rdf:resource="#TextVersion"/>
+    <rdfs:domain rdf:resource="#AText"/>
+    <rdfs:subPropertyOf>
+      <owl:TransitiveProperty rdf:about="#member"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="link">
+    <rdfs:domain rdf:resource="#AReference"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="region">
+    <rdfs:domain rdf:resource="#ASource"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="properStructuralMember">
+    <rdfs:subPropertyOf rdf:resource="#structuralMember"/>
+  </owl:ObjectProperty>
+  <owl:TransitiveProperty rdf:ID="translation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="#TextVersion"/>
+    <rdfs:range rdf:resource="#TextVersion"/>
+  </owl:TransitiveProperty>
+  <owl:TransitiveProperty rdf:about="#structuralSuccessor">
+    <rdfs:domain rdf:resource="#APartialSource"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:range rdf:resource="#APartialSource"/>
+  </owl:TransitiveProperty>
+  <owl:TransitiveProperty rdf:about="#member">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </owl:TransitiveProperty>
+  <owl:FunctionalProperty rdf:ID="value">
+    <rdfs:domain rdf:resource="#AnyXML"/>
+    <rdfs:comment xml:lang="en">Warning: DIG 1.1 does not support the datatype range specified for this property. Ignore warnings of this type when using RDF/OWL aware tools that do DL validation based on DIG (Description Logic Implementation Group), or remove this property before validation if this out problematic. This property is the only deviation from the OWL DL level in this schema.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </owl:FunctionalProperty>
+</rdf:RDF>
+
+<!-- Created with Protege (with OWL Plugin 2.2 beta, Build 289)  http://protege.stanford.edu -->

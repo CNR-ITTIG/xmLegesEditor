@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    MetaLex 1.3
+    Copyright (C) 2006  Leibniz Center for Law, Universiteit van Amsterdam
+
+    This library is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Lesser General Public
+    License as published by the Free Software Foundation; either
+    version 2.1 of the License, or (at your option) any later version.
+
+    This library is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+-->
+<!-- AB- This is a schema for referring to regulations. It is not jurisdiction-specific. 
+-->
+<!-- AB- This is a part of the modular version of the schema.
+-->
+<!-- AB- If you used types defined in the metalex: namespace, take note that all type definitions now have "Type" suffixed to their names to distinguish them from elements of the same name.
+-->
+<xsd:schema xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.metalex.nl/latest" targetNamespace="http://www.metalex.nl/latest">
+	<xsd:import namespace="http://www.w3.org/1999/xlink" schemaLocation="res/Xlink-Schema.xsd"/>
+	<xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/xml.xsd">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Access to xml:lang and xml:base</xsd:documentation>
+		</xsd:annotation>
+	</xsd:import>
+	<!--<xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2000/10/xml.xsd"/>
+WARNING! If you get an error message in your editor or validator of choice relating to the xml: namespace (or the xml:lang or xml:base attribute), try replacing the import statement with this one, or omitting it altogether. The XML Spy validator and older Xerces validators may be fussy about this. -->
+	<xsd:attributeGroup name="identityAttrs">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">These attributes form a coherent whole. These attributes apply to all kinds of regulatory texts, and to most elements of regulatory text up to the sentence level, or even lower. Every MetaLex element with identity is treated like a self-contained regulatory unit identified by a URI. There are two ways of stating the URI of an element: using the URI attribute to state the complete URI, or using the ID attribute and setting the xml:base attribute to state that the URI is base() + ID (for instance http://purl-org/foo#bar where xml:base="http://purl-org/foo" and id="bar").
+				</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="id" type="xsd:ID" use="optional">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="en">If the id attribute is used on an element, then it must be possible to establish the xml base of 
+the XML element for RDF and XML Linking support to work.
+	Note that XML documents on the World Wide Web do have a base() that can generally be automatically established, but this base() is lost if the document is downloaded and saved to a local disk. It is good practice to set the at least the xml:base attribute of the Regulation element in a Metalex XML document on the World Wide Web, so that the context is not lost if the document is saved in a local file. Note that it is possible to set the xml:base in multiple places, for instance because the XML file contains legislation taken from multiple locations on the World Wide Web. See the XML Base and XML Linking specifications on http://www.w3.org for more information on the semantics of xml:base.
+	Instead of the metalex:id attribute, the xml:id attribute may be used. NEVER specify both a metalex:id and xml:id attribute on a single element. It is an XML requirement that only one id attribute be specified on a single element: an application allowing two id attributes on an element is not XML conformant.
+</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="uri" type="xsd:anyURI" use="optional">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="en">The URI of the element identifies the element. Note that it may be a URN (universal resource name). If the name cannot be resolved through generic HTTP, then set the resolver attribute.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:attributeGroup>
+	<xsd:attributeGroup name="descriptorAttrs">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">These attributes form a coherent whole. These attributes apply to all kinds of regulatory texts, and to most elements of regulatory text up to the sentence level, or even lower. Usually they are only attached to the Regulation element. All attributes take a URI value that refers to an entity that can be described in a metadata standard like RDF, Topic Maps, or GML (Geography Markup Language).
+			The attribute value applies to the element to which it is attached and to all its subelements, unless these carry the same attribute.
+				</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="author" type="xsd:anyURI" use="optional">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="en">The legislator that is responsible for creating the legislation, for instance 'the government', 'government and parliament', 'the Crown', 'the Minister of X', etc. This body or person is usually created by law, so there are usually references from (constitutional) law to this entity that describes the extent of its legislative competence.  The legislator is identified by a URI, and this URI functions as identifier for a description in RDF.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="region" type="xsd:anyURI" use="optional">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="en">This is the spatial entity in which the rules in the regulation can be applied. It can be used in combination with RDF and GML to describe spatial extent of the regulation's applicability. In GML and similar geospatial standards a URI is used to refer to coordinates in a coordinate reference system (CRS).</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="region-resolver" type="xsd:anyURI" use="optional">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="en">A resolver for CRS coordinate URI used in the region attribute.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="editor" type="xsd:anyURI" use="optional">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="en">The editor that is responsible for creating and managing this metalex encoding of the legislation. The editor is identified by a URI, and this URI functions as identifier for a description in RDF.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="editor-resolver" type="xsd:anyURI" use="optional">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="en">The URI of the element identifies the element, but it is not a requirement that the URI can be resolved through generic HTTP. If it cannot be resolved through http, then it is an option to set the resolver attribute is a URI resolution service exists. The URI value of the resolver attribute + the URI value in xlink:href should result in a URI that can resolved. Since URI can be assigned to legislation by editors of metalex data, URI resolvers for metalex elements should be logically linked to the editor.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="authority" type="xsd:anyURI" use="optional">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="en">The legislator may be able to use different forms of legislative authority or legislative competence created and delegated by law. In some jurisdictions legislative competence is called legislative power. Formal law may for instance state that a Minister is able to make certain changes in formal law for specific purposes, where otherwise the Minister would not have this competence. In addition to the competence of drafting ministerial regulations the minister has a restricted competence to directly amend formal law for some purpose. A competence is usually created by other law, and there are textual references in that law to the competence.  The competence is identified by a URI, and this URI functions as identifier for a description in RDF. A decision maker uses
+				an authority or power created by law to make adiministrative decisions.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="procedure" type="xsd:anyURI" use="optional">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="en">The type of procedure that resulted in the legislation. In some cases the formal legislator can produce different types of legislation depending on the type of procedure followed (for instance decrees vs. formal legislation). This may have consequences for determining Lex Superior relations between collections of regulations. The procedure is identified by a URI, and this URI functions as identifier for a description in RDF.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:attributeGroup>
+	<xsd:attributeGroup name="temporalAttrs">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">These attributes form a coherent whole. These attributes apply to all kinds of regulatory texts. Strict application of the metalex standard requires a (possibly inferred) setting for these attributes on each text element. Because the rules for determining the applicable values are complex, they cannot be checked with XML schema.
+			The attribute value applies to the element to which it is attached and to all its subelements, unless these carry the same attribute.
+				</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="date-version" type="xsd:date" use="optional">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="en">date-version is the date of serialization of the XML element on which it occurs. This is important to determine whether the element represents a future modification to the regulation at the time of serialization. If it is, it may not be the text that eventually became active at that future date.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="date-enacted" type="xsd:date" use="optional">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="en">The date at which the regulatory text represented by the element was enacted. The time interval between enactment and repeal (see date-repealed, duration-active) is when the text was active in the sense that it could be used in that interval to take decisions. If there are multiple versions of a regulatory text, then the activity intervals of the versions should form a continuous time interval in which the text element(s) existed in the legal system. If a regulatory text is repealed and then re-enacted, it should be treated as a new regulatory text even if it is the exact same text.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="date-repealed" type="xsd:date" use="optional">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="en">The date at which the activity time interval is closed (see date-enacted, duration-active).</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="date-publication" type="xsd:date" use="optional">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="en">date-publication is the date at which the regulation was formally made public. In the period before that the text does not exist in public awareness. Depending on jurisdiction this may be a date of signing (dies signum) by monarch or president, the date it passed in parliament, or the date it was published in a designated official publication channel. In most jurisdictions there are a number of relevant in the lifecycle of a regulatory text before it becomes 'real'. Choose a relevant date at which it 1) has become public, 2) a static identity is officially assigned, 3) any auxiliary provisions(s) in the text on the date of enactment become active, and the text cannot be changed anymore, except by legislative procedure.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:attributeGroup>
+	<xsd:attributeGroup name="extTemporalAttrs">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">These attributes are strictly optional. They are not needed for version management. They have been added to present a coherent theory on phenomena like retroactive application and delayed application etc.
+The temporal attributes are based on a theory that a provision in a regulatory text can be read as a rule RULE(t1,t2): IF CONDITIONS(t3,t4) THEN EFFECTS(t5,t6). Between date enactment t1 and date-repeal t2 the rule is active, and therefore can be applied. The events to which is it applied must have happened between date-start-efficacy t3 and date-end-efficacy t4, the time interval in which the rule is capable of producing an effect. The effect itself exists somewhere in the time interval between t5 and t6.
+Example: In 2001 there is a tax provision which states that the premium payments to be made in 2001-2005 for certain capital insurance policies closed in and meeting certain conditions in the period 1993-1998 are tax deductible.
+	The attribute value applies to the element to which it is attached and to all its subelements, unless these carry the same attribute. The duration attributes represent a time interval between two date attributes and should be consistent with the values of the date attributes.
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="date-start-efficacy" type="xsd:date" use="optional">
+			<xsd:annotation>
+				<xsd:documentation/>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="date-end-efficacy" type="xsd:date" use="optional">
+			<xsd:annotation>
+				<xsd:documentation/>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="date-start-effect" type="xsd:date" use="optional">
+			<xsd:annotation>
+				<xsd:documentation/>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="date-end-effect" type="xsd:date" use="optional">
+			<xsd:annotation>
+				<xsd:documentation/>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="duration-to-enactment" type="xsd:date" use="optional">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="en">The length of the time interval between date-publication and date-enacted. Use this time interval to indicate a constraint on the duration to enactment when the precise dates are not known. The regulatory text may for instance state that it will be enacted 3 months after publication.
+</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="duration-active" type="xsd:date" use="optional">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="en">See date-enacted and date-repealed. The active time interval is the interval between date-enacted and date-repealed. In this time interval the regulatory text could be applied to a case, yielding a conclusion.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="duration-efficacy" type="xsd:date" use="optional">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="en">The time interval between date-start-efficacy and date-end-efficacy. The facts to which a rule can be applied have happened in this time interval. Set this time interval to model retroactive applicability of regulatory text. Note that retroactive applicability does not usually refer to the possibility of making decisions using a regulation that does not exist yet, but instead to the possibility of applying the regulation to events that happened before the enactment of the regulatory text.
+If multiple interpretations are possible, or if the length of the time interval depends on the exact case, choose the largest time interval possible.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:attributeGroup>
+	<xsd:complexType name="CiteRangeType" mixed="true">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Cite a range of articles/parts /subparts of a regulation.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element ref="CiteFrom"/>
+			<xsd:element ref="CiteTo"/>
+		</xsd:sequence>
+		<xsd:attributeGroup ref="identityAttrs"/>
+		<xsd:attributeGroup ref="temporalAttrs"/>
+		<xsd:attributeGroup ref="extTemporalAttrs"/>
+		<xsd:attributeGroup ref="descriptorAttrs"/>
+		<xsd:attribute name="ref-date" type="xsd:date" use="optional"/>
+		<xsd:anyAttribute namespace="##other" processContents="lax"/>
+	</xsd:complexType>
+	<xsd:complexType name="CiteGroupType" mixed="true">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Cite multiple regulations, parts, articles. In some cases  you will find compound references of the pattern: "regulation X, art. |1|, |2-4|". The problem is that it consists of parts specifying the individual references (1, 2-4) and a description of a context that the individual references share. If you use the Cite element to hyperlink to a target document, then you need to mark up the individual references, but if you want to parse the references to identify the target, you have to parse the complete CiteGroup.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:choice maxOccurs="unbounded">
+				<xsd:element ref="Cite"/>
+				<xsd:element ref="CiteRange"/>
+				<xsd:element ref="CiteGroup"/>
+			</xsd:choice>
+		</xsd:sequence>
+		<xsd:attributeGroup ref="identityAttrs"/>
+		<xsd:attributeGroup ref="temporalAttrs"/>
+		<xsd:attributeGroup ref="extTemporalAttrs"/>
+		<xsd:attributeGroup ref="descriptorAttrs"/>
+		<xsd:anyAttribute namespace="##other" processContents="lax"/>
+	</xsd:complexType>
+	<xsd:complexType name="MixedType" mixed="true">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Contains mixed XML from any namespace.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent mixed="true">
+			<xsd:restriction base="xsd:anyType">
+				<xsd:sequence>
+					<xsd:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:sequence>
+				<xsd:anyAttribute namespace="##other" processContents="lax"/>
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="TextVersionType" mixed="true">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Contains mixed XML from any namespace, but does have identity and version management attributes.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent mixed="true">
+			<xsd:restriction base="xsd:anyType">
+				<xsd:sequence>
+					<xsd:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:sequence>
+				<xsd:attribute ref="xml:lang"/>
+				<xsd:attributeGroup ref="identityAttrs"/>
+				<xsd:attributeGroup ref="temporalAttrs"/>
+				<xsd:attributeGroup ref="extTemporalAttrs"/>
+				<xsd:attributeGroup ref="descriptorAttrs"/>
+				<xsd:anyAttribute namespace="##other" processContents="lax"/>
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="TextType" mixed="true">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Contains either TextVersion elements and annotations or mixed XML from any namespace, with identity and version management attributes.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent mixed="true">
+			<xsd:restriction base="xsd:anyType">
+				<xsd:choice>
+					<xsd:sequence>
+						<xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+					</xsd:sequence>
+					<xsd:sequence>
+						<xsd:element ref="TextVersion" maxOccurs="unbounded"/>
+						<xsd:element ref="Annotation" minOccurs="0" maxOccurs="unbounded"/>
+						<xsd:element ref="MetaData" minOccurs="0" maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:choice>
+				<xsd:attribute ref="xml:lang"/>
+				<xsd:attributeGroup ref="identityAttrs"/>
+				<xsd:attributeGroup ref="temporalAttrs"/>
+				<xsd:attributeGroup ref="extTemporalAttrs"/>
+				<xsd:attributeGroup ref="descriptorAttrs"/>
+				<xsd:anyAttribute namespace="##other" processContents="lax"/>
+			</xsd:restriction>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="AReferringTextType" mixed="true">
+		<xsd:annotation>
+			<xsd:documentation>It is required to use the xlink:type attribute to instruct XML Linking implementations that this element is a link. 
+	If the target of the link is unclear, use xlink:type="simple". If a target URI is known, use xlink:type="locator" and xlink:href to point to the URI. The URI should be a static URI that identifies the target legislation.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent mixed="true">
+			<xsd:extension base="TextType">
+				<xsd:attribute ref="xlink:type" use="required"/>
+				<xsd:attribute ref="xlink:href" use="optional"/>
+				<xsd:attribute name="resolver" type="xsd:anyURI" use="optional">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">The URI of the element identifies the element, but it is not a requirement that the URI can be resolved through generic HTTP. If a document contains xlink:href attributes pointing to URI that cannot be resolved through http, then it is an option to set the resolver attribute if a URI resolution service exists. The URI value of the resolver attribute + the URI value in xlink:href should result in a URI that can resolved.
+						Example: xlink:href="urn:nir:stato:decreto.legislativo:1992-07-24;358#art5 " and resolver="http://resolver.nl?" would result in a XHTML version of the MetaLex XML document in a hyperlink href="http://resolver.nl?urn:nir:stato:decreto.legislativo:1992-07-24;358#art5"</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="href" type="xsd:anyURI" use="optional">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">If no reasonable URI candidate for the xlink:href attribute exists, use the href attribute to refer to the URL of some representation of the document on the Internet. For instance, if you only have a URL of a PDF version of a regulation, and you want a citation of article 31 of that regulation to point to that PDF document, then use this attribute instead of the xlink:href.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ReferringTextType" mixed="true">
+		<xsd:complexContent mixed="true">
+			<xsd:extension base="AReferringTextType">
+				<xsd:attribute name="ref-date" type="xsd:date" use="optional"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="CiteFrom" type="AReferringTextType">
+		<xsd:annotation>
+			<xsd:documentation>Cite from this article/part/subpart.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CiteTo" type="AReferringTextType">
+		<xsd:annotation>
+			<xsd:documentation>Cite to (and including) this article/part/subpart.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="TextVersion" type="TextVersionType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Contains mixed XML from any namespace. Is used to separate different versions of a piece of text. (both for languageversions as for the specification of newer and older versions)</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Category" type="TextType">
+		<xsd:annotation>
+			<xsd:documentation>The category of an article, part or subpart. Example: part, chapter, article, sub, etc.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Index" type="TextType">
+		<xsd:annotation>
+			<xsd:documentation>Number of article, part or subpart. Can be 1,2,3 or a,b,c etc. The order of this numbering should be fixed.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CitationTitle" type="TextType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A phrase designated as a formal name or acronym for citing the regulation. In some cases a specific title, or specific titles, to be used for designation, is (are) declared in the declarative/directive part of the regulation. This element is used in running text. Do not confuse this element with the CitationDesignation element.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="MetaData" type="MixedType">
+		<xsd:annotation>
+			<xsd:documentation>Any XML content not part of a regulation, and not human-readable text, but about the regulatory text in which it is embedded.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Annotation" type="MixedType">
+		<xsd:annotation>
+			<xsd:documentation>Any commentary, footnotes, references etc. that are not part of a regulation in the sense that they were not added by the legislator.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Quote" type="TextType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A phrase that repeats a passage from another text. Do not confuse with the cite element. The quote occurs in modifying laws 
+			(where the text of the modified law is often quoted), and in external sources that explain legislation.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Cite" type="ReferringTextType">
+		<xsd:annotation>
+			<xsd:documentation>Cite denotes a citation of a regulation, article, part or subpart. Examples: "The Rome Statute, Article 1", "Article 12.1 of this regulation". It is used in running text. This element can be used in any other XML standard, and in running text in metalex documents. 
+			Not to be confused with a quote or an allusion.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Reference" type="ReferringTextType">
+		<xsd:annotation>
+			<xsd:documentation>Reference (allusion) by name to a known person (the Minister, the King), body (the Tax and Customs Administration, the Government, the Crown), region (the territory of the Kingdom of the Netherlands in Europe) or concept defined in a regulation. Allusion is the implicit referencing of a related object or circumstance, which occurs or exists in an external context. 
+			An allusion is understandable only to those with prior knowledge of the target of the reference in question (as the author assumes the reader has).</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CiteRange" type="CiteRangeType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Cite a range of articles/parts /subparts of a regulation.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CiteGroup" type="CiteGroupType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Cite multiple regulations, parts, articles.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+</xsd:schema>
