@@ -47,7 +47,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		
 	
 		<logger name=".DtdRulesManager" additivity="false">
-                        <priority value ="debug" />
+                        <priority value ="error" />
                         <appender-ref ref="ConsoleAppender" />
         </logger>
 	
@@ -1255,15 +1255,14 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  class="it.cnr.ittig.xmleges.core.blocks.util.rulesmanager.UtilRulesManagerImpl">
         <configuration>
             <exclude>
-                <element name="libro" />
+                <!--element name="libro" />
                 <element name="parte" />
                 <element name="titolo" />
                 <element name="capo" />
                 <element name="sezione" />
                 <element name="articolo" />
                 <element name="comma" />
-                <!--element name="lettera" /-->
-                <!--element name="numero" /-->
+                
                 <element name="rubrica" />
                 <element name="anness.*" />
                 <element name="ndr" />
@@ -1272,7 +1271,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 <element name="mrif" />
                 <element name="inlinea" />
                 <element name="vuoto" />
-                <!-- escludere alcuni h: -->
+               
                 <element name="h:form"/>
                 <element name="h:t.*"/>
                 <element name="h:sup"/>
@@ -1284,7 +1283,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 <element name="h:ul"/>
                 <element name="h:ol"/>
                 <element name="h:span"/>
-                <!-- ciclodivita -->
+                
                 <element name="ciclodivita" />
                 <element name="eventi" />
                 <element name="relazioni" /> 
@@ -1295,8 +1294,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 <element name="haallegato" />
                 <element name="allegatodi" />
                 <element name="giurisprudenza" />                
-                <!--element name="#PCDATA"/-->
-                <element name="proprietario" />       
+                
+                <element name="proprietario" /-->       
             </exclude>           
         </configuration>
     </component>
