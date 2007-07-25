@@ -130,6 +130,14 @@ public class xsdRulesManagerImpl{
 	
 	
 	
+	
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////   ABBOZZO   DI  ALTERNATIVE CONTENTS     	///////////////////////////////////////
+	
+	
+	
+	
 	/**
 	 * 
 	 * @param elemDecl
@@ -137,61 +145,95 @@ public class xsdRulesManagerImpl{
 	 */
 	public Collection createAlternativeContents(XSDElementDeclaration elemDecl){
 		
-		// vedi XSDParticleImpl.initialize()
 		
+		ContentGraph cg = createContentGraph(elemDecl.getQName());
+		visitContentGraphPaths(cg);
 		
-		XSDTypeDefinition typedef = elemDecl.getType();
-
-        if (typedef instanceof XSDSimpleTypeDefinition){
-            //System.err.println("********** Alternative Content for SIMPLE TYPE ************");	
-         }
-        else if (typedef instanceof XSDComplexTypeDefinition){
-        	XSDTypeDefinition theBaseTypeDefinition = typedef.getBaseType();
-        	 
-            if(typedef.getComplexType()!=null){
-
-                XSDParticle.DFA dfa = (XSDParticle.DFA) typedef.getComplexType().getDFA();
-                mergedAddRule(elemDecl, dfa);
-        	    
-            }
-            else{
-            	
-            	typedef = schema.resolveComplexTypeDefinition(typedef.getName());
-            	
-            	XSDParticle xsdParticle;
-                if (typedef.getContainer() instanceof XSDParticle)
-                {
-                  xsdParticle = (XSDParticle)typedef.getContainer();                 
-                }
-                else
-                {
-                  xsdParticle = XSDFactory.eINSTANCE.createXSDParticle();
-                  
-                }
-
-                XSDParticleImpl.XSDNFA dfa = (XSDParticleImpl.XSDNFA)xsdParticle.getDFA();
-                if(dfa.getStates().size()==1){
-                	((XSDParticleImpl.XSDNFA.StateImpl)dfa.getStates().get(0)).setAccepting(true);
-                }
-                mergedAddRule(elemDecl, dfa);
-                      
-            }
-        }
+		// secondo me:
+		// i contents_strings per ogni elemento dovrebbero essere  come minimo la lista di tutti i possibili cammini minimi
+		// ancora piu' utile, la lista di tutti i cammini senza cicli da start ad end nel grafo. 
+		// il formato dell'output dovrebbe essere un Vector in cui ogni elemento e' fatto da una string contenente 
+		// la lista delle label delle transizioni separate da virgole, tipo:
+		// meta,intestazione,formulainiziale,articolato,formulafinale,conclusione   (cammino per l'elemento DocArticolato)
+		// in questi due casi posso riempire la tabella alternativecontents una volta per tutte e consultare quella.
 		
-        else{
-        	System.out.println("niente rule per "+elemDecl.getQName());
-        }        
-
-		
-			
+		// altrimenti si puo' fare in modo di richiedere un "cammino" (sequenza di label) che contiene una o piu' label in particolare.
+		// in questo caso pero' deve essere fatto in linea e non si puo' backuppare sulla hashtable
 		
 		Vector contents_strings = readAlternativeContents(elemDecl.getTypeDefinition());
 		alternative_contents.put(elemDecl.getQName(), contents_strings);
 		
 		return contents_strings;
+		
+		
+		
 	}
 	
 	
+	
+//	 USO nel caso di template minimale; nel caso degli alternative contents ci bastano i cammini composti da archi "complessi" e non bisogna esplodere gli archi:
+//	 while (true) {
+//		 if (visitContentGraph(graph) < Integer.MAX_VALUE){
+//			 //System.err.println("finite path");
+//			 return getXMLContent(graph);
+//		 }
+//		 //System.err.println("!   infinite path:  exploding");
+//		 // no default content: substitute each element with its ContentGraph
+//		 explodeContentGraph(graph);
+//	 }
+	
+	
+	static protected int visitContentGraphPaths(ContentGraph graph) {
+		ContentGraph.Node first = graph.getFirst();
+		ContentGraph.Node last = graph.getLast();
+
+		// init visit
+		Vector queue = new Vector();
+		for (Iterator i = graph.visitNodes(); i.hasNext();)
+			((ContentGraph.Node) i.next()).resetVisit();
+		first.setVisit(0, "", null);
+		queue.add(first);
+
+		// visit the graph
+		while (queue.size() > 0) {
+			// pop first element from queue
+			ContentGraph.Node tovisit = (ContentGraph.Node) queue.elementAt(0);
+			queue.remove(0);
+
+			// for all the outgoing edges
+			for (int i = 0; i < tovisit.getNoEdges(); i++) {
+				// check if the edge is visitable
+
+				int step = Integer.MAX_VALUE;
+				Object edge = tovisit.getEdge(i);
+				String edgename = tovisit.getEdgeName(i);
+
+				if (edge instanceof ContentGraph)
+					step = visitContentGraphPaths((ContentGraph) edge);
+				else if (edgename.compareTo("#PCDATA") == 0)
+					step = 1;
+				else if (edgename.compareTo("#EPS") == 0)
+					step = 0;
+
+				if (step < Integer.MAX_VALUE) {
+					// if this path is shorter set the new path
+					ContentGraph.Node destination = tovisit.getDestination(i);
+					int visit_length = tovisit.getVisitLength() + step;
+					if (destination.getVisitLength() > visit_length) {
+						// push the next node of the path in the queue
+						destination.setVisit(visit_length, edge, tovisit);
+						queue.add(destination);
+					}
+				}
+			}
+		}
+
+		return last.getVisitLength();
+	}
+	
+	
+	//////////////////////////////////// FINE ALTERNATIVE CONTENTS ///////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	
 	/**
@@ -202,6 +244,8 @@ public class xsdRulesManagerImpl{
 	public Vector readAlternativeContents(XSDTypeDefinition typeDef) {
 		return null;
 	}
+	
+	
 	
 	
 	
@@ -338,88 +382,80 @@ public class xsdRulesManagerImpl{
 	        }        
 	}
 
-	
 	/**
 	 * 
 	 * @param elemDecl
-	 */	
+	 */
 	public void createRuleForAttributes(XSDElementDeclaration elemDecl){
 
-		String attrName=""; //nome dell'attributo analizzato
-		String type=""; //type dell'attributo
-		String defaultValue=""; //literal dell'uso dell'attributo
-		String value = ""; //lexical value dell'uso dell'attributo
+        String attrName=""; //nome dell'attributo analizzato
+        String type=""; //type dell'attributo
+        String defaultValue=""; //literal dell'uso dell'attributo
+        String value = ""; //lexical value dell'uso dell'attributo
 
-		if( elemDecl.getType() instanceof XSDComplexTypeDefinition){
-			//System.out.println("\\esamino attrs di "+elemDecl.getQName());
-			List allAttributeUses =	((XSDComplexTypeDefinition)elemDecl.getType()).getAttributeUses();
+        if( elemDecl.getType() instanceof XSDComplexTypeDefinition){
+            List allAttributeUses = ((XSDComplexTypeDefinition)elemDecl.getType()).getAttributeUses();
 
-			for (Iterator iterA = allAttributeUses.iterator();iterA.hasNext(); /* no-op */){
-				XSDAttributeUse attruse = (XSDAttributeUse)iterA.next();
-				attrName = attruse.getAttributeDeclaration().getQName();
-				XSDSimpleTypeDefinition typeDef =attruse.getAttributeDeclaration().getTypeDefinition();
-				String simpleType="";//nome del tipo dell'attributo
-				String baseType=""; //tipo finale dell'attributo (string, id, idref)
-				if (typeDef!=null){
-					if(typeDef.getSimpleType()!=null){
-						simpleType=typeDef.getSimpleType().getAliasName();                               
-					}
-					if(typeDef.getBaseTypeDefinition()!=null){
-						baseType=/*", cioè"+*/typeDef.getBaseTypeDefinition().getAliasName();
-					}
-					simpleType+=baseType;    
-				}else                            
-					simpleType="no type-->no name";
+            for (Iterator iterA = allAttributeUses.iterator();iterA.hasNext();/* no-op */){
+                XSDAttributeUse attruse = (XSDAttributeUse)iterA.next();
+                attrName = attruse.getAttributeDeclaration().getQName();
+               
+                XSDSimpleTypeDefinition typeDef=attruse.getAttributeDeclaration().getTypeDefinition();
+                String simpleType="";//nome del tipo dell'attributo
+                String baseType=""; //tipo finale dell'attributo (string, id, idref)
+                if (typeDef!=null){
+                    if(typeDef.getSimpleType()!=null){
+                        simpleType=typeDef.getSimpleType().getAliasName();
+                    }
+                    if(typeDef.getBaseTypeDefinition()!=null){
+                        baseType=/*", cioè"+*/typeDef.getBaseTypeDefinition().getAliasName();
+                    }
+                    simpleType+=baseType;
+                }else
+                    simpleType="no type-->no name";
 
-//				if(attruse.isSetConstraint()){
-//					defaultValue = attruse.getConstraint().getLiteral();
-//					value = attruse.getLexicalValue();
-//				}else if(attruse.isRequired()){
-//					defaultValue=attruse.getUse().getLiteral();
-//					value = attruse.getLexicalValue()!=null?attruse.getLexicalValue():null;
-//				}else if(attruse.isSetUse()){
-//					defaultValue=attruse.getUse().getLiteral();
-//					value = attruse.getLexicalValue()!=null?attruse.getLexicalValue():null;
-//				}else
-//				defaultValue= null;
 
-				
-//              OLD			
-				defaultValue=attruse.getUse().getLiteral();
-				value = attruse.getLexicalValue()!=null?attruse.getLexicalValue():"null";
-				
-				
-				
-				List allTypeFacets = typeDef.getSimpleType().getFacetContents();
-				// FIXME tommaso    type = baseType al posto di "NO TYPE"
-				type=baseType;//"NO TYPE";
-				if(allTypeFacets.size()>0){ //è una enumeration
-					type="(";
-					for (Iterator iterB = allTypeFacets.iterator(); iterB.hasNext();/* no-op */){
-						XSDConstrainingFacet restriction = (XSDConstrainingFacet)iterB.next();
-//						System.out.println("     facet name: "+restriction.getFacetName()); //c'è scritto enumeration
-//						System.out.println("         lexical value:	"+restriction.getLexicalValue());
-						type+=restriction.getLexicalValue()+"|";
-					}
-					type=type.substring(0, type.length()-1)+")";
+                defaultValue=attruse.getUse().getLiteral();
+                value=attruse.getAttributeDeclaration().getLexicalValue();
+                // prima era: (non trova il fixed ma trova il default)
+                //value = attruse.getLexicalValue()!=null?attruse.getLexicalValue():null;
+                if(!defaultValue.equals("required")){
+                    defaultValue=attruse.getAttributeDeclaration().getConstraint().getLiteral();
+                    if(!defaultValue.equals("fixed")){
+                        defaultValue="implied";                       
+                    }
+                }   
+               
+                List allTypeFacets = typeDef.getSimpleType().getFacetContents();
+                // FIXME tommaso    type = baseType al posto di "NO TYPE"
+                type=baseType;//"NO TYPE";
+                if(allTypeFacets.size()>0){ //è una enumeration
+                    type="(";
+                    for (Iterator iterB = allTypeFacets.iterator();iterB.hasNext();/* no-op */){
+                        XSDConstrainingFacet restriction = (XSDConstrainingFacet)iterB.next();
+//                        System.out.println("     facet name: "+restriction.getFacetName()); //c'è scritto enumeration
+//                        System.out.println("         lexical value:    "+restriction.getLexicalValue());
+                        type+=restriction.getLexicalValue()+"|";
+                    }
+                    type=type.substring(0, type.length()-1)+")";
 
-				}
-			
-				//System.out.println(" - "+attrName+" ["+simpleType+"], type= "+type+", defaultValue = "+defaultValue+""+value);
-				HashMap att_hash = (HashMap) attributes.get(elemDecl.getQName());
-				if (att_hash == null) {
-					att_hash = new HashMap();
-					attributes.put(elemDecl.getQName(), att_hash);
-				}
-				// add a new attribute definition
-				AttributeDeclaration attrDecl = new AttributeDeclaration(type,defaultValue,value);
-				mergedAddAttribute(elemDecl,att_hash,attrName,attrDecl);
-			}
-		}else{
-			//System.out.println(elemDecl.getQName()+" non ha attrs");
-		}
-	} 
+                }
+           
+                //System.out.println(elemDecl.getQName()+" -attr: "+attrName+"["+simpleType+"], type= "+type+", defaultValue = "+defaultValue+"value = "+(value!=null?value:" null"));
+                HashMap att_hash = (HashMap) attributes.get(elemDecl.getQName());
+                if (att_hash == null) {
+                    att_hash = new HashMap();
+                    attributes.put(elemDecl.getQName(), att_hash);
+                }
+                // add a new attribute definition
+                AttributeDeclaration attrDecl = new AttributeDeclaration(type,defaultValue,value);
+                mergedAddAttribute(elemDecl,att_hash,attrName,attrDecl);
+            }
+        }
+       
+    }
 
+	
 
 	/**
 	 * 
