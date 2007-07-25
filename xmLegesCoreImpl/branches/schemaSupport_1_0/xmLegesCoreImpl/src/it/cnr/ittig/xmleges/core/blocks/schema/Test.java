@@ -11,10 +11,18 @@ public class Test {
 		//String schemaURL = "data/NIR_XSD_completo/nirstrict.xsd";	
         //String schemaURL = "data/NIR_XSD_base/nirlight.xsd";
 
-        
+		//String schemaURL = "../xmLegesEditor/xsdData/AkomaNtoso/akomantoso10.xsd";
 		//String schemaURL = "../xmLegesEditor/xsdData/NIR_XSD_base/nirlight.xsd";
+		//String schemaURL = "../xmLegesEditor/xsdData/NIR_XSD_base/purchaseOrderSchema.xsd";
 		String schemaURL = "../xmLegesEditor/xsdData/NIR_XSD_completo/nirstrict.xsd";
-		//String schemaURL = "../xmLegesEditor/xsdData/XSD_Test/nirstrict.xsd";
+		//String schemaURL = "../xmLegesEditor/xsdData/MetaLex/metalex.xsd";
+		//String schemaURL = "../xmLegesEditor/xsdData/MetaLexLatest/metalex.xsd";
+		//String schemaURL = "../xmLegesEditor/xsdData/NIR_XSD_completo/meta.xsd";
+		//String schemaURL = "../xmLegesEditor/xsdData/NIR_XSD_completo/h.xsd";
+		//String schemaURL = "../xmLegesEditor/xsdData/XSD_Test_2/nirstrict.xsd";
+		//String schemaURL = "../xmLegesEditor/xsdData/XSD_Test_3/nirlight.xsd";
+		//String schemaURL = "../xmLegesEditor/xsdData/XSD_Test_5/nirstrict.xsd";
+		//String schemaURL = "../xmLegesEditor/xsdData/XSD_Test_Light/A.xsd";
 		
 		
 		
@@ -23,6 +31,7 @@ public class Test {
 		
 		
 		xsdRulesManagerImpl xsdRM = new xsdRulesManagerImpl();
+		//xsdRM.loadRules(schemaURL);
 		xsdRM.loadRules(schemaURL);
 		
 		
