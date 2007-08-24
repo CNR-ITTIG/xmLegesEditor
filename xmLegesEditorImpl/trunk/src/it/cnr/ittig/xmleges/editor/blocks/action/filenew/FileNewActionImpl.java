@@ -12,6 +12,8 @@ import it.cnr.ittig.xmleges.core.services.action.file.open.FileOpenAction;
 import it.cnr.ittig.xmleges.core.services.action.file.save.FileSaveAction;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
+import it.cnr.ittig.xmleges.editor.services.action.rinumerazione.RinumerazioneAction;
+import it.cnr.ittig.xmleges.editor.services.dom.rinumerazione.Rinumerazione;
 import it.cnr.ittig.xmleges.editor.services.form.filenew.FileNewForm;
 import it.cnr.ittig.xmleges.editor.services.template.Template;
 import it.cnr.ittig.xmleges.editor.services.template.TemplateException;
@@ -75,6 +77,9 @@ public class FileNewActionImpl extends AbstractAction implements FileNewAction, 
 	FileSaveAction fileSaveAction;
 
 	FileOpenAction fileOpenAction;
+	
+	Rinumerazione rinumerazione;
+	RinumerazioneAction rinumerazioneAction;
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -90,6 +95,9 @@ public class FileNewActionImpl extends AbstractAction implements FileNewAction, 
 		fileOpenAction = (FileOpenAction) serviceManager.lookup(FileOpenAction.class);
 		fileSaveAction = (FileSaveAction) serviceManager.lookup(FileSaveAction.class);
 		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
+		
+		rinumerazione = (Rinumerazione) serviceManager.lookup(Rinumerazione.class);
+		rinumerazioneAction = (RinumerazioneAction) serviceManager.lookup(RinumerazioneAction.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
@@ -109,6 +117,11 @@ public class FileNewActionImpl extends AbstractAction implements FileNewAction, 
 				templatefile = template.getNirTemplate(fileNewForm.getSelectedTemplate(), fileNewForm.getSelectedDTD());
 				if (fileOpenAction.doOpen(templatefile.getAbsolutePath(), false)) {
 					dm.setNew(true);
+					
+					//imposto la Rinumerazione ATTIVA (se non lo è già)
+					if (!rinumerazione.isRinumerazione())
+						rinumerazioneAction.doSetRinumerazione(true);
+					
 					return true;
 				} else
 					return false;
