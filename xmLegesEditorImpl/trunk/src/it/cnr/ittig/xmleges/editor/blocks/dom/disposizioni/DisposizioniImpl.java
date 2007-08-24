@@ -106,7 +106,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 				return cercaMetaproprietarioittig(cerca.getNextSibling());
 	}	
 	
-	public boolean setDOMDisposizioni(String pos, String norma, String partizione, String novellando, String novella, String preNota, String autoNota, String postNota) {
+	public boolean setDOMDisposizioni(String pos, String norma, String partizione, String novellando, String novella, String preNota, String autoNota, String postNota, boolean implicita) {
 		Document doc = documentManager.getDocumentAsDom();
 		Node activeMeta = nirUtilDom.findActiveMeta(doc,null);
 
@@ -153,6 +153,10 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		Node operazioneNode;
 		if (!novellando.equals("") && !novella.equals("")) {	//sostituzione
 			operazioneNode = utilRulesManager.getNodeTemplate(doc,"dsp:sostituzione");
+			if (implicita)
+				UtilDom.setAttributeValue(operazioneNode, "implicita", "si");
+			else
+				UtilDom.setAttributeValue(operazioneNode, "implicita", "no");				
 			modifichepassiveNode.appendChild(operazioneNode);
 			setNorma(nomeNota, operazioneNode, pos, norma, partizione);
 			setNovella(operazioneNode, novella);
@@ -160,12 +164,20 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		}
 		else if (!novellando.equals("")) {	//abrogazione
 				operazioneNode = utilRulesManager.getNodeTemplate(doc, "dsp:abrogazione");
+				if (implicita)
+					UtilDom.setAttributeValue(operazioneNode, "implicita", "si");
+				else
+					UtilDom.setAttributeValue(operazioneNode, "implicita", "no");
 				modifichepassiveNode.appendChild(operazioneNode);
 				setNorma(nomeNota, operazioneNode, pos, norma, partizione);
 				setNovellando(operazioneNode, novellando);
 			}
 			else if (!novella.equals("")) {	//integrazione
 				operazioneNode = utilRulesManager.getNodeTemplate(doc,"dsp:integrazione");
+				if (implicita)
+					UtilDom.setAttributeValue(operazioneNode, "implicita", "si");
+				else
+					UtilDom.setAttributeValue(operazioneNode, "implicita", "no");
 				modifichepassiveNode.appendChild(operazioneNode);
 				setNorma(nomeNota, operazioneNode, pos, norma, partizione);
 				setNovella(operazioneNode, novella);
@@ -266,9 +278,20 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		return n;
 	}
 	
-	public Node makeSpan(Node node, int posizione, VigenzaEntity vigenza) {
+	public Node makeSpan(Node node, int posizione, VigenzaEntity vigenza, String testo) {
 
-		Node span = utilRulesManager.encloseTextInTag(node, posizione, posizione,"h:span","h");
+		Node span=null;
+		if (posizione < 0) 
+			if (node.getNextSibling()==null) {
+				span = node.getOwnerDocument().createElementNS(UtilDom.getNameSpaceURIforElement(documentManager.getDocumentAsDom().getDocumentElement(), "h"), "h:span");
+				node.getParentNode().appendChild(span);
+			}
+			else
+				span = utilRulesManager.encloseTextInTag(node.getNextSibling(), 0, 0,"h:span","h");
+		else
+			span = utilRulesManager.encloseTextInTag(node, posizione, posizione,"h:span","h");
+		if (!testo.trim().equals(""))
+			UtilDom.setTextNode(span,testo);
 		return setVigenza(span, "", -1, -1, vigenza);
 		
 	}
@@ -391,7 +414,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		}
 	}
 
-	public void doUndo(String id) {
+	public void doUndo(String id, boolean cancellaTesto) {
 		Document doc = documentManager.getDocumentAsDom();
 		Element undo =null;
 		if (id!=null) 
@@ -404,6 +427,8 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 			Node selezione = undo.getParentNode();
 			try {
 				tr = documentManager.beginEdit();
+				if (!cancellaTesto)
+					extractText.extractTextDOM(undo.getFirstChild(),0,undo.getFirstChild().getNodeValue().length());
 				selezione.removeChild(undo);
 				UtilDom.mergeTextNodes(selezione);		
 				documentManager.commitEdit(tr);
