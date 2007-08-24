@@ -191,21 +191,14 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == sceltaevento) {
-			
-			
-			
-			//provare a saltare il ciclo di vita
-			//voglio aprire solo gli EVENTI PASSIVI !!!!!!!!!!!!!!!!!
-			
-			
 			ciclodivita.setActiveNode(activeNode);
 			Evento[] eventiOnDom = ciclodivita.getEventi();
-			eventoriginale = eventiOnDom[0];
 			ciclodivitaForm.setEventi(eventiOnDom);
 			
 			if (ciclodivitaForm.openForm()) {
 				eventoselezionato = ciclodivitaForm.getEventoSelezionato();
-				if (eventoselezionato != -1) {					
+				if (eventoselezionato != -1) {	
+					eventoriginale = eventiOnDom[0];
 					eventovigore=ciclodivitaForm.getEventi()[eventoselezionato];
 					if (eventovigore.getFonte().getTagTipoRelazione().equalsIgnoreCase("passiva"))
 						evento.setText(eventovigore.getFonte().getLink());	
@@ -284,7 +277,7 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 		activeNode = null;
 		operazioneIniziale = NO_OPERAZIONE;
 		operazioneProssima = NO_OPERAZIONE;
-		form.setSize(350, 250);
+		form.setSize(400, 250);
 		form.showDialog(false);
 	}
 
