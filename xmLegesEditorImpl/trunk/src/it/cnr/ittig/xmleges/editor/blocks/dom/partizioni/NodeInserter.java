@@ -496,8 +496,8 @@ public class NodeInserter {
 		//TODO usare funzionalità del DtdRulesManager
 		if (doc.getDoctype().getSystemId().equals("nirflessibile.dtd")) {
 			addElement("num", doc, newNode, dtdRulesManager);
-			if (elem_name.equals("articolo")) {
-				addElement("rubrica", doc, newNode, dtdRulesManager);
+			addElement("rubrica", doc, newNode, dtdRulesManager);
+			if (elem_name.equals("articolo")) {				
 				addElement("comma", doc, newNode, dtdRulesManager);
 				addElement("num", doc, newNode, dtdRulesManager);
 				addElement("corpo", doc, newNode, dtdRulesManager);
