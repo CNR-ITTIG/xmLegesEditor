@@ -24,4 +24,10 @@
 	<classpathentry kind="lib" path="lib/xsc.jar"/>		
 	<classpathentry kind="lib" path="lib/xsc_eval_key.jar"/>	
 	<classpathentry kind="output" path="bin"/>
+	
+			<!--	WebDav	-->
+	<classpathentry kind="lib" path="lib/commons-httpclient.jar"/>
+	<classpathentry kind="lib" path="lib/jakarta-slide-webdavlib-2.1.jar"/>
+	<classpathentry kind="lib" path="lib/jdom-1.0.jar"/>
+	
 </classpath>
