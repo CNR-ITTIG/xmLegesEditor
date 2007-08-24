@@ -197,7 +197,6 @@ public class RiferimentiPaneImpl implements RiferimentiPane, EventManagerListene
 				        ep.setPage("http://www.nir.it");
 				       
 				        client = new HttpClient(new MultiThreadedHttpConnectionManager());
-				        client.getHttpConnectionManager().getParams().setConnectionTimeout(30000);
 					
 				        Document dom = documentManager.getDocumentAsDom();
 				        if (dom!=null) {
