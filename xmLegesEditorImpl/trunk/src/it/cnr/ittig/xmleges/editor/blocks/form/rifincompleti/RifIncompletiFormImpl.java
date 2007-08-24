@@ -121,6 +121,8 @@ public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable,
 
 	public boolean openForm(String testo, String urn) {
 
+		typeReplace.setSelected(false);	//preferiscono disattivare l'opzione
+		
 		// vettore dei riferimenti incompleti
 		riferimenti = rifincompleti.getList();
 
@@ -219,7 +221,7 @@ public class RifIncompletiFormImpl implements RifIncompletiForm, Loggable,
 		nextButton.addActionListener(this);
 		typeReplace = (JCheckBox) form
 				.getComponentByName("editor.form.rifincompleto.typereplace");
-		typeReplace.setSelected(true);
+		typeReplace.setSelected(false);
 
 		rifInterno = (JButton) form
 				.getComponentByName("editor.form.rifincompleto.rifint");
