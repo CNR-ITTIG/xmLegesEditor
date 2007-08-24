@@ -204,11 +204,14 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		descrittoriForm.setAlias(descrittori.getAlias(node));
 		descrittoriForm.setPubblicazione(descrittori.getPubblicazione(node));
 		descrittoriForm.setRedazioni(descrittori.getRedazioni(node));
-
+		
 		if (descrittoriForm.openForm()) {
 			try {
 				EditTransaction tr = documentManager.beginEdit();
-				UtilDom.setAttributeValue(doc.getDocumentElement(), "tipo", descrittoriForm.getTipoPubblicazione());
+				
+				//L'attributo non è mai settato nella form. ELIMINATO
+				//UtilDom.setAttributeValue(doc.getDocumentElement(), "tipo", descrittoriForm.getTipoPubblicazione());
+				
 				descrittori.setAlias(node, descrittoriForm.getAlias());
 				descrittori.setPubblicazione(node, descrittoriForm.getPubblicazione());
 				descrittori.setRedazioni(node, descrittoriForm.getRedazioni());
