@@ -30,7 +30,7 @@ public interface Disposizioni extends Service {
 	 * 
 	 * @return </code>True</code> operazione correttamente eseguita
 	 */
-	public boolean setDOMDisposizioni(String pos, String Norma, String partizione, String Novellando, String Novella, String preNota, String autoNota, String postNota);
+	public boolean setDOMDisposizioni(String pos, String Norma, String partizione, String Novellando, String Novella, String preNota, String autoNota, String postNota, boolean implicita);
 	
 	/**
 	 * Funzione per l'inserimento di una nuova partizione
@@ -45,11 +45,12 @@ public interface Disposizioni extends Service {
 	 * Funzione per l'inserimento di un nuovo span
 	 * 
 	 * @param node nodo in cui inserire lo span
-	 * @param posizione la posizione in cui va inserito lo span
+	 * @param posizione (se positivo) la posizione in cui va inserito lo span nel nodo (altrimenti) inserito come fratello destro
 	 * @param vigenza la vigenza che assumerà lo span
+	 * @param testo dello span
 	 * @return </code>Node</code> la nuova partizione inserita
 	 */
-	public Node makeSpan(Node node, int posizione, VigenzaEntity vigenza);
+	public Node makeSpan(Node node, int posizione, VigenzaEntity vigenza, String testo);
 	
 	/**
 	 * Funzione per l'abilitazione dell'azione di assegnazione della vigenza
@@ -107,13 +108,13 @@ public interface Disposizioni extends Service {
 	public void updateVigenzaOnDoc(VigenzaEntity vig);
 
 	/**
-	 * Undo x Novellando
+	 * Undo ripristinando una vecchia vigenza
 	 */
 	public void doUndo(String id, String iniziovigore, String finevigore, String status);	
 	
 	/**
-	 * Undo x Novella
+	 * Undo senza vigenza, ripristino testo opzionale
 	 */
-	public void doUndo(String id);	
+	public void doUndo(String id, boolean cancellaTesto);	
 
 }

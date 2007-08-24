@@ -3,9 +3,6 @@ package it.cnr.ittig.xmleges.editor.services.form.disposizioni.passive;
 import org.w3c.dom.Node;
 
 import it.cnr.ittig.services.manager.Service;
-import it.cnr.ittig.xmleges.core.services.form.Form;
-import it.cnr.ittig.xmleges.core.services.form.FormClosedListener;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 
 /**
@@ -26,11 +23,28 @@ import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
  */
 public interface DispPassiveForm extends Service {
 
+	//operazioni
+	final static int NO_OPERAZIONE = 0;
+	final static int INIZIO = 1;
+	final static int ABROGAZIONE = 2;
+	final static int SOSTITUZIONE = 3;
+	final static int INTEGRAZIONE = 4;
+	final static int NOVELLANDO = 5;
+	final static int NOVELLA = 6;
+	final static int NOTA = 7;
+	final static int FINE = 8;
+	
 	/**
 	 * Apre la form.
 	 */
 	public void openForm(boolean cancellaCampi);
 
+	/**
+	 * Ritorna il tipo di disposizione
+	 * 
+	 */
+	public int getTipoDisposizione();
+	
 	/**
 	 * Setta la prossima operazione da compiere
 	 * 
@@ -54,7 +68,13 @@ public interface DispPassiveForm extends Service {
 	 * 
 	 */
 	public void setNovella(String id);
-	
+
+	/**
+	 * Setta l'id della novella
+	 * 
+	 */
+	public void setStatus(String status);
+
 	/**
 	 * Setta la parte di testo da inserire prima della nota automatica di vigenza
 	 * 
@@ -68,8 +88,14 @@ public interface DispPassiveForm extends Service {
 	public void setPostnota(String nota);
 	
 	/**
+	 * Setta se la disposizione è implicita o no
+	 * 
+	 */
+	public void setImplicita(boolean implicita);
+
+	/**
 	 * Costruisce la vigenza del nodo node a secondo il tipo di disposizione dsp
 	 * 
 	 */
-	public VigenzaEntity makeVigenza(Node node, String dsp);
+	public VigenzaEntity makeVigenza(Node node, String dsp, String status);
 }
