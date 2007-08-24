@@ -20,6 +20,7 @@ import it.cnr.ittig.xmleges.editor.services.form.disposizioni.passive.NotaForm;
 import it.cnr.ittig.xmleges.editor.services.form.disposizioni.passive.DispPassiveForm;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
 
@@ -67,6 +68,8 @@ public class NotaFormImpl implements NotaForm, Loggable, Serviceable, Initializa
 	JLabel pretesto;
 	JLabel autotesto;
 	JLabel posttesto;
+	JLabel implicitatesto;
+	JCheckBox implicita; 
 	JButton fine;
 	JButton indietro;
 	
@@ -95,6 +98,9 @@ public class NotaFormImpl implements NotaForm, Loggable, Serviceable, Initializa
 		pretesto = (JLabel) form.getComponentByName("editor.disposizioni.passive.pretesto");
 		autotesto = (JLabel) form.getComponentByName("editor.disposizioni.passive.autotesto");
 		posttesto = (JLabel) form.getComponentByName("editor.disposizioni.passive.posttesto");
+		implicitatesto = (JLabel) form.getComponentByName("editor.disposizioni.passive.implicitatesto");
+		implicita = (JCheckBox)  form.getComponentByName("editor.disposizioni.passive.implicita");
+		
 		fine = (JButton) form.getComponentByName("editor.form.disposizioni.passive.btn.fine");
 		indietro = (JButton) form.getComponentByName("editor.form.disposizioni.passive.btn.indietro");
 		fine.addActionListener(this);
@@ -108,6 +114,7 @@ public class NotaFormImpl implements NotaForm, Loggable, Serviceable, Initializa
 		prenota.setText("");
 		postnota.setText("");
 		autonota.setText(nota);
+		implicita.setSelected(false);
 		form.showDialog(listener);
 	}
 
@@ -116,6 +123,7 @@ public class NotaFormImpl implements NotaForm, Loggable, Serviceable, Initializa
 			disposizioni.setOperazioneProssima();
 			disposizioni.setPostnota(postnota.getText().trim());
 			disposizioni.setPrenota(prenota.getText().trim());
+			disposizioni.setImplicita(implicita.isSelected());
 			form.close();
 		}
 		if (e.getSource() == indietro) {

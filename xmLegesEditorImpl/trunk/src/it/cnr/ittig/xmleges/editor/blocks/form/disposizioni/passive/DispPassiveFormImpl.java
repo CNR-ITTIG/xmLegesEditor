@@ -14,7 +14,6 @@ import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
-import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
 import it.cnr.ittig.xmleges.core.util.date.UtilDate;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
@@ -38,7 +37,6 @@ import java.awt.event.ActionListener;
 import java.util.EventObject;
 import java.util.StringTokenizer;
 
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -73,84 +71,41 @@ import org.w3c.dom.Node;
  * 
  * @version 1.0
  */
-public class DispPassiveFormImpl implements DispPassiveForm,
-		EventManagerListener, Loggable, ActionListener, Serviceable,
-		Initializable, FormClosedListener {
+public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListener, Loggable, ActionListener, Serviceable, Initializable, FormClosedListener {
 
 	Logger logger;
-
 	NirUtilDom nirUtilDom;
-
 	NirUtilUrn nirUtilUrn;
-
 	EventManager eventManager;
-
 	UtilUI utilui;
-
 	UtilMsg utilmsg;
-
 	MetaCiclodivita ciclodivita;
-
 	CiclodiVitaForm ciclodivitaForm;
-
 	int eventoselezionato = -1;
-
 	Form form;
-
 	JLabel finevigoretesto;
-
-	JLabel statustesto;
-
-	JComboBox vigenzaStatus;
-
 	JButton abrogazione;
-
 	JButton sostituzione;
-
 	JButton integrazione;
-
 	JButton sceltaevento;
-
 	JTextField evento;
-
 	JLabel dovetesto;
-
 	JButton sceltadove;
-
 	JTextField dove;
-
 	PartizioniForm partizioniForm;
-
 	NovellandoForm novellandoForm;
-
 	NovellaForm novellaForm;
-
 	NotaForm notaForm;
-
 	Node activeNode;
-
 	VigenzaEntity vigenzaEntity;
-	
 	Vigenza vigenza;
-
 	String errorMessage = "";
-
+	
 	DocumentManager documentManager;
 
 	int operazioneIniziale;
 	int operazioneCorrente;
 	int operazioneProssima;
-	
-	//operazioni
-	final static int NO_OPERAZIONE = 0;
-	final static int INIZIO = 1;
-	final static int ABROGAZIONE = 2;
-	final static int SOSTITUZIONE = 3;
-	final static int INTEGRAZIONE = 4;
-	final static int NOVELLANDO = 5;
-	final static int NOVELLA = 6;
-	final static int NOTA = 7;
-	final static int FINE = 8;
 	
 	String posDisposizione = "";
 	String idNovellando = "";
@@ -162,13 +117,14 @@ public class DispPassiveFormImpl implements DispPassiveForm,
 	String preNota = "";
 	String autoNota = "";
 	String postNota = "";
+	boolean implicita;
+	String status;
 	
 	Disposizioni domDisposizioni;
 	Evento eventoriginale;
 	Evento eventovigore;
 	
-	EditTransaction tr[] = new EditTransaction[9];			//MAX 3
-	int currentTransaction;
+	
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -201,20 +157,12 @@ public class DispPassiveFormImpl implements DispPassiveForm,
 		form.setCustomButtons(new String[] { "editor.form.disposizioni.passive.btn.cancel" });
 		form.setHelpKey("help.contents.form.disposizionipassive");
 		finevigoretesto = (JLabel) form.getComponentByName("editor.disposizioni.passive.finevigoretesto");
-		statustesto = (JLabel) form.getComponentByName("editor.disposizioni.passive.statustesto");
-		vigenzaStatus = (JComboBox) form.getComponentByName("editor.disposizioni.passive.status");
 		abrogazione = (JButton) form.getComponentByName("editor.disposizioni.passive.abrogazione");
 		sostituzione = (JButton) form.getComponentByName("editor.disposizioni.passive.sostituzione");
 		integrazione = (JButton) form.getComponentByName("editor.disposizioni.passive.integrazione");
 		abrogazione.addActionListener(this);
 		sostituzione.addActionListener(this);
 		integrazione.addActionListener(this);
-		//vigenzaStatus.addItem("--");
-		vigenzaStatus.addItem("abrogato");
-		vigenzaStatus.addItem("omissis");
-		vigenzaStatus.addItem("annullato");
-		vigenzaStatus.addItem("sospeso");
-		//vigenzaStatus.setSelectedItem(null);
 		evento = (JTextField) form.getComponentByName("editor.disposizioni.passive.evento");
 		sceltaevento = (JButton) form.getComponentByName("editor.disposizioni.passive.sceltaevento");
 		sceltaevento.addActionListener(this);
@@ -224,7 +172,7 @@ public class DispPassiveFormImpl implements DispPassiveForm,
 		sceltadove.addActionListener(this);
 	}
 	
-	public VigenzaEntity makeVigenza(Node node, String dsp) {
+	public VigenzaEntity makeVigenza(Node node, String dsp, String status) {
 		
 		Evento eIniz=null;
 		Evento efine=null;
@@ -234,7 +182,7 @@ public class DispPassiveFormImpl implements DispPassiveForm,
 				eIniz=eventoriginale;
 			else
 				eIniz=domDisposizioni.getVigenza(node,-1,-1).getEInizioVigore();
-			return (new VigenzaEntity(node, eIniz,efine, (String) vigenzaStatus.getSelectedItem(), ""));
+			return (new VigenzaEntity(node, eIniz,efine, status, ""));
 		}
 		//Novella
 		eIniz=eventovigore;
@@ -243,16 +191,29 @@ public class DispPassiveFormImpl implements DispPassiveForm,
 	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == sceltaevento) {
+			
+			
+			
+			//provare a saltare il ciclo di vita
+			//voglio aprire solo gli EVENTI PASSIVI !!!!!!!!!!!!!!!!!
+			
+			
 			ciclodivita.setActiveNode(activeNode);
 			Evento[] eventiOnDom = ciclodivita.getEventi();
+			eventoriginale = eventiOnDom[0];
 			ciclodivitaForm.setEventi(eventiOnDom);
-
+			
 			if (ciclodivitaForm.openForm()) {
 				eventoselezionato = ciclodivitaForm.getEventoSelezionato();
-				if (eventoselezionato != -1) {
-					eventoriginale=ciclodivitaForm.getEventi()[0];
+				if (eventoselezionato != -1) {					
 					eventovigore=ciclodivitaForm.getEventi()[eventoselezionato];
-					evento.setText(eventovigore.getFonte().getLink());				
+					if (eventovigore.getFonte().getTagTipoRelazione().equalsIgnoreCase("passiva"))
+						evento.setText(eventovigore.getFonte().getLink());	
+					else {
+						evento.setText(eventovigore.getFonte().getLink());
+						utilmsg.msgInfo("Dovresti selezionare un evento passivo");
+						evento.setText("");
+					}	
 				}	
 				Evento[] newEventi = ciclodivitaForm.getEventi();
 				Relazione[] newRelazioni = null;
@@ -280,8 +241,6 @@ public class DispPassiveFormImpl implements DispPassiveForm,
 			// verifiche per proseguire con la seconda maschera
 			if (evento.getText().equals(""))
 				utilmsg.msgInfo("editor.form.disposizioni.passive.noevento");
-			else if (vigenzaStatus.getSelectedItem() == null || vigenzaStatus.getSelectedItem().equals("--"))
-				utilmsg.msgInfo("editor.form.disposizioni.passive.nostatus");
 			else {
 				if (e.getSource() == abrogazione) {
 					operazioneIniziale = ABROGAZIONE;
@@ -310,17 +269,17 @@ public class DispPassiveFormImpl implements DispPassiveForm,
 
 	public void openForm(boolean cancellaCampi) {
 		
-//		if (form.isDialogVisible() || operazioneIniziale != NO_OPERAZIONE)
-//			return;
+		if (form.isDialogVisible())
+			return;		//questa form è già aperta
+		if (operazioneIniziale != NO_OPERAZIONE )
+			return;		//una form successiva è già aperta
 			
 		idNovellando="";
 		idNovella="";
 		if (cancellaCampi) {
 			evento.setText("");
 			dove.setText("");
-			vigenzaStatus.setSelectedIndex(0);
 		}	
-		currentTransaction=0;
 		posDisposizione="";
 		activeNode = null;
 		operazioneIniziale = NO_OPERAZIONE;
@@ -329,8 +288,12 @@ public class DispPassiveFormImpl implements DispPassiveForm,
 		form.showDialog(false);
 	}
 
+	public int getTipoDisposizione() {
+		return operazioneIniziale;
+	}
+	
 	public void setPosdisposizione(Node nodo) {
-		if (posDisposizione.equals(""))
+		if (posDisposizione.equals(""))				//il controllo sul "" non dovrebbe essere più necessario perchè la sostituzione ora non agisce più sulla maschera della novella ........ CONTROLLARE
 			if (nirUtilDom.getNirContainer(nodo)!=null)
 				posDisposizione = UtilDom.getAttributeValueAsString(nirUtilDom.getNirContainer(nodo), "id");
 			else
@@ -338,7 +301,7 @@ public class DispPassiveFormImpl implements DispPassiveForm,
 	}
 	
 	public void setNovellando(String id, String iniziovigore, String finevigore, String status, boolean nuovo) {
-		idNovellando = id;
+		idNovellando = (id!=null) ? id : "??";
 		iniziovigoreNovellando = iniziovigore;
 		finevigoreNovellando = finevigore;
 		statusNovellando = status;
@@ -346,9 +309,12 @@ public class DispPassiveFormImpl implements DispPassiveForm,
 	}
 	
 	public void setNovella(String id) {
-		idNovella = id;
+		idNovella = (id!=null) ? id : "??";
 	}
 	
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public void setPrenota(String nota) {
 		preNota = nota;
 	}
@@ -357,13 +323,14 @@ public class DispPassiveFormImpl implements DispPassiveForm,
 		postNota = nota;
 	}
 	
+	public void setImplicita(boolean implicita) {
+		this.implicita = implicita;
+	}
+	
 	public void setOperazioneProssima() {
 	  switch (operazioneCorrente) {
 		case NOVELLANDO: {
-			if (operazioneIniziale == SOSTITUZIONE)
-				operazioneProssima = NOVELLA;
-			else
-				operazioneProssima = NOTA;
+			operazioneProssima = NOTA;
 			break;
 		}
 		case NOVELLA: {
@@ -381,13 +348,17 @@ public class DispPassiveFormImpl implements DispPassiveForm,
 		if (operazione==NOVELLANDO) {
 			logger.debug("Undo Novellando: (" + idNovellando + " " + iniziovigoreNovellando + " " + finevigoreNovellando + " " + statusNovellando);
 			if (nuovoNovellando)
-				domDisposizioni.doUndo(idNovellando);
+				domDisposizioni.doUndo(idNovellando, false);
 			else	
 				domDisposizioni.doUndo(idNovellando, iniziovigoreNovellando, finevigoreNovellando, statusNovellando);
+			if (operazioneIniziale==SOSTITUZIONE) {//se era una sostituzione undo anche di novella
+				logger.debug("Undo Novella: (" + idNovella + ")");
+				domDisposizioni.doUndo(idNovella, true);
+			} 
 		}	
 		if (operazione==NOVELLA) {
 			logger.debug("Undo Novella: (" + idNovella + ")");
-			domDisposizioni.doUndo(idNovella);
+			domDisposizioni.doUndo(idNovella, true);
 		}	
 	}
 	
@@ -395,16 +366,12 @@ public class DispPassiveFormImpl implements DispPassiveForm,
 
 		if (operazioneCorrente==operazioneProssima) {	//Ho scelto Indietro o chiuso con X
 			if (operazioneProssima == NOVELLA) {
-				if (operazioneIniziale == SOSTITUZIONE) 
-					operazioneProssima = NOVELLANDO;
-				else
-					operazioneProssima = INIZIO;
-				
+				operazioneProssima = INIZIO;				
 			} else if (operazioneProssima == NOTA) {
-				if (operazioneIniziale == ABROGAZIONE)
-					operazioneProssima = NOVELLANDO;
-				else
+				if (operazioneIniziale == INTEGRAZIONE)
 					operazioneProssima = NOVELLA;
+				else
+					operazioneProssima = NOVELLANDO;
 			} else if (operazioneProssima == NOVELLANDO) {
 				operazioneProssima = INIZIO;
 			}
@@ -425,7 +392,10 @@ public class DispPassiveFormImpl implements DispPassiveForm,
 			try {
 				urn = nirUtilUrn.getFormaTestuale(new Urn(urn));
 			} catch (Exception e) {}
-			autoNota = ((String) vigenzaStatus.getSelectedItem()) + " da: " + urn + ".\nIn vigore dal " + UtilDate.normToString(eventoriginale.getData()) + " al " + UtilDate.normToString(eventovigore.getData());
+			if (operazioneIniziale == INTEGRAZIONE)
+				autoNota = "Integrato da: " + urn + ".\nIn vigore dal " + UtilDate.normToString(eventovigore.getData());
+			else
+				autoNota = status + " da: " + urn + ".\nIn vigore dal " + UtilDate.normToString(eventoriginale.getData()) + " al " + UtilDate.normToString(eventovigore.getData());
 			notaForm.openForm(this, autoNota);	
 		}	
 		
@@ -434,8 +404,10 @@ public class DispPassiveFormImpl implements DispPassiveForm,
 			if (!dove.getText().equals("")) 
 				partizione = partizione + "#" + dove.getText();	//TODO testare se ho già una urn con partizioni specificate e decidere come comportarsi
 			
-			if (!domDisposizioni.setDOMDisposizioni(posDisposizione, evento.getText(), partizione, idNovellando, idNovella, preNota, autoNota, postNota))
+			if (!domDisposizioni.setDOMDisposizioni(posDisposizione, evento.getText(), partizione, idNovellando, idNovella, preNota, autoNota, postNota, implicita))
 				utilmsg.msgError("editor.form.disposizioni.passive.erroremetadati");
+			
+			operazioneIniziale = NO_OPERAZIONE;
 		}
 		if (operazioneProssima == INIZIO) {
 			operazioneIniziale = NO_OPERAZIONE;

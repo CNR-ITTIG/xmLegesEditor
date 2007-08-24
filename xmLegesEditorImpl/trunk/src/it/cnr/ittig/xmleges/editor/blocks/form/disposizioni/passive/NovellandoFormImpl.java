@@ -13,7 +13,9 @@ import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.FormClosedListener;
+import it.cnr.ittig.xmleges.core.services.form.FormException;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
+import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
@@ -31,6 +33,7 @@ import java.util.EventObject;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -88,17 +91,24 @@ public class NovellandoFormImpl implements NovellandoForm, EventManagerListener,
 	JTextField idotesto;
 	JLabel novellandotesto;
 	JLabel testo;
-	JTextArea spiegazione;
+	JLabel spiegazione;
 	JButton avanti;
 	JButton indietro;
 	JRadioButton sceltopartizione;
 	JRadioButton sceltotesto;
+	JTextArea testoaggiunto;
+	JLabel testoaggiuntotesto;
+	JLabel statustesto;
+	JComboBox vigenzaStatus;
 
+	
 	Disposizioni domDisposizioni;
 	
 	Node activeNode;
 	
 	DtdRulesManager dtdRulesManager;
+	
+	SelectionManager selectionManager;
 
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
@@ -114,6 +124,7 @@ public class NovellandoFormImpl implements NovellandoForm, EventManagerListener,
 		disposizioni = (DispPassiveForm) serviceManager.lookup(DispPassiveForm.class);
 		domDisposizioni  = (Disposizioni) serviceManager.lookup(Disposizioni.class);
 		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 	}
 
 	public void initialize() throws java.lang.Exception {
@@ -126,18 +137,26 @@ public class NovellandoFormImpl implements NovellandoForm, EventManagerListener,
 		form.setHelpKey("help.contents.form.disposizionipassive.novellando");
 		idotesto = (JTextField) form.getComponentByName("editor.disposizioni.passive.novellando");
 		testo = (JLabel) form.getComponentByName("editor.disposizioni.passive.stepnovellando");
-		spiegazione = (JTextArea) form.getComponentByName("editor.disposizioni.passive.spiegazionenovellando");
+		spiegazione = (JLabel) form.getComponentByName("editor.disposizioni.passive.spiegazionenovellando");
 		novellandotesto = (JLabel) form.getComponentByName("editor.disposizioni.passive.novellandotesto");
 		avanti = (JButton) form.getComponentByName("editor.form.disposizioni.passive.btn.avanti");
 		indietro = (JButton) form.getComponentByName("editor.form.disposizioni.passive.btn.indietro");
 		sceltotesto = (JRadioButton) form.getComponentByName("editor.disposizioni.passive.testo"); 
 		sceltopartizione = (JRadioButton) form.getComponentByName("editor.disposizioni.passive.partizione");
+		testoaggiunto = (JTextArea) form.getComponentByName("editor.disposizioni.passive.testoaggiunto");
+		testoaggiuntotesto = (JLabel) form.getComponentByName("editor.disposizioni.passive.testoaggiuntotesto");
 		ButtonGroup grupporadio = new ButtonGroup();
 		grupporadio.add(sceltotesto);
 		grupporadio.add(sceltopartizione);
+		statustesto = (JLabel) form.getComponentByName("editor.disposizioni.passive.statustesto");
+		vigenzaStatus = (JComboBox) form.getComponentByName("editor.disposizioni.passive.status");
+		vigenzaStatus.addItem("abrogato");
+		vigenzaStatus.addItem("omissis");
+		vigenzaStatus.addItem("annullato");
+		vigenzaStatus.addItem("sospeso");
 		avanti.addActionListener(this);
 		indietro.addActionListener(this);
-		form.setSize(250, 220);
+		form.setSize(250, 350);
 	}
 
 	public void manageEvent(EventObject event) {
@@ -178,27 +197,44 @@ public class NovellandoFormImpl implements NovellandoForm, EventManagerListener,
 	public void actionPerformed(ActionEvent e) {
 		
 		if (e.getSource() == avanti) {
-			if (idotesto.getText().equals(""))
-				utilmsg.msgInfo("editor.disposizioni.passive.noselezione");
-			else {	
-				Node n;
-				if (sceltopartizione.isSelected()) {	//partizione
-					String iniziovigore = UtilDom.getAttributeValueAsString(activeNode, "iniziovigore");
-					String finevigore = UtilDom.getAttributeValueAsString(activeNode, "finevigore");
-					String statusvigore = UtilDom.getAttributeValueAsString(activeNode, "status");
-					n = domDisposizioni.setVigenza(activeNode, activeNode.getNodeValue(), start, end, disposizioni.makeVigenza(activeNode,"novellando"));
-					idSelezionato = UtilDom.getAttributeValueAsString(n, "id");
-					disposizioni.setNovellando(idSelezionato, iniziovigore, finevigore, statusvigore, false);
-				}
-				else  {//creo un nuovo span
-					n = domDisposizioni.setVigenza(activeNode, "", start, end, disposizioni.makeVigenza(activeNode,"novellando"));
-					idSelezionato = UtilDom.getAttributeValueAsString(n, "id");
-					disposizioni.setNovellando(idSelezionato, "", "", "", true);
-				}	
-				disposizioni.setOperazioneProssima();
+			Node n;
+			if (sceltopartizione.isSelected()) {	//partizione
+				String iniziovigore = UtilDom.getAttributeValueAsString(activeNode, "iniziovigore");
+				String finevigore = UtilDom.getAttributeValueAsString(activeNode, "finevigore");
+				String statusvigore = UtilDom.getAttributeValueAsString(activeNode, "status");
+				n = domDisposizioni.setVigenza(activeNode, activeNode.getNodeValue(), start, end, disposizioni.makeVigenza(activeNode,"novellando",(String) vigenzaStatus.getSelectedItem()));
+				idSelezionato = UtilDom.getAttributeValueAsString(n, "id");
+				disposizioni.setNovellando(idSelezionato, iniziovigore, finevigore, statusvigore, false);
 				disposizioni.setPosdisposizione(n);
-				form.close();
+				
+				if (disposizioni.getTipoDisposizione()==disposizioni.SOSTITUZIONE) {
+					n = domDisposizioni.makePartition(activeNode, false, disposizioni.makeVigenza(activeNode,"novella",(String) vigenzaStatus.getSelectedItem()));				
+					selectionManager.setActiveNode(this, n);
+					if (n!=null)
+						disposizioni.setNovella(UtilDom.getAttributeValueAsString(n, "id"));
+					else
+						disposizioni.setNovella("??");				
+				}
 			}
+			else  {//creo un nuovo span
+				n = domDisposizioni.setVigenza(activeNode, "", start, end, disposizioni.makeVigenza(activeNode,"novellando",(String) vigenzaStatus.getSelectedItem()));
+				idSelezionato = UtilDom.getAttributeValueAsString(n, "id");
+				disposizioni.setNovellando(idSelezionato, "", "", "", true);
+				disposizioni.setPosdisposizione(n);
+									
+				if (disposizioni.getTipoDisposizione()==disposizioni.SOSTITUZIONE) {
+					n = domDisposizioni.makeSpan(n, -1, disposizioni.makeVigenza(n,"novella",(String) vigenzaStatus.getSelectedItem()),testoaggiunto.getText());
+					selectionManager.setActiveNode(this, n);	
+					if (n!=null)
+						disposizioni.setNovella(UtilDom.getAttributeValueAsString(n, "id"));
+					else
+						disposizioni.setNovella("??");
+				}					
+			}	
+			disposizioni.setOperazioneProssima();
+			disposizioni.setStatus((String) vigenzaStatus.getSelectedItem());
+			
+			form.close();			
 		}
 		if (e.getSource() == indietro) {
 			form.close();
@@ -207,6 +243,9 @@ public class NovellandoFormImpl implements NovellandoForm, EventManagerListener,
 
 	private void updateContent(Node activeNode, int start, int end) {
 		idotesto.setText("");
+		avanti.setEnabled(false);
+		testoaggiuntotesto.setEnabled(false);
+		testoaggiunto.setEnabled(false);
 		if (activeNode != null) {
 		  if (canSelec(activeNode)) {	
 			 if (UtilDom.isTextNode(activeNode)) {	//test se ha fatto una selezione di testo
@@ -217,22 +256,28 @@ public class NovellandoFormImpl implements NovellandoForm, EventManagerListener,
 						if (end - start > 30)
 							idotesto.setText(activeNode.getNodeValue().substring(start, start + 30) + " ...");
 						else	
-							idotesto.setText(activeNode.getNodeValue().substring(start, end));
+							idotesto.setText(activeNode.getNodeValue().substring(start, end));						
 						sceltotesto.setSelected(true);
+						if (disposizioni.getTipoDisposizione()==disposizioni.SOSTITUZIONE)
+							testoaggiuntotesto.setEnabled(true);
+						testoaggiunto.setEnabled(true);
+						avanti.setEnabled(true);
 					}
 			    }	
 			 }
 			 else {
 					try {
-						if (activeNode.getNodeName()!=null && dtdRulesManager.queryIsValidAttribute(activeNode.getNodeName(), "iniziovigore")) {
-							logger.debug("selezione non testo");
-							idSelezionato = UtilDom.getAttributeValueAsString(activeNode, "id");
-							if (idSelezionato==null)
-								idotesto.setText(activeNode.getNodeName());
-							else
-								idotesto.setText(activeNode.getNodeName() + " (" + idSelezionato + " )");
-							sceltopartizione.setSelected(true);
-						}
+						if (activeNode.getNodeName()!=null && dtdRulesManager.queryIsValidAttribute(activeNode.getNodeName(), "iniziovigore")) 
+							if (disposizioni.getTipoDisposizione()==disposizioni.ABROGAZIONE || dtdRulesManager.queryCanAppend(activeNode.getParentNode(), activeNode.getOwnerDocument().createElement(activeNode.getNodeName()))) {
+								logger.debug("selezione non testo");
+								idSelezionato = UtilDom.getAttributeValueAsString(activeNode, "id");
+								if (idSelezionato==null)
+									idotesto.setText(activeNode.getNodeName());
+								else
+									idotesto.setText(activeNode.getNodeName() + " (" + idSelezionato + " )");
+								sceltopartizione.setSelected(true);
+								avanti.setEnabled(true);
+							}
 					} catch (DtdRulesManagerException e) {}				 
 			 }
 			 
@@ -245,6 +290,14 @@ public class NovellandoFormImpl implements NovellandoForm, EventManagerListener,
 	public void openForm(FormClosedListener listener) {
 
 		idotesto.setText("");
+		avanti.setEnabled(false);					
+		testoaggiuntotesto.setEnabled(false);
+		testoaggiunto.setText("");
+		testoaggiunto.setEnabled(false);
+		if (disposizioni.getTipoDisposizione()==disposizioni.ABROGAZIONE)  
+			testoaggiunto.setVisible(false);
+		else 
+			testoaggiunto.setVisible(true);
 		form.showDialog(listener);	
 	}
 }

@@ -67,7 +67,8 @@ import org.w3c.dom.Node;
  */
 public class NovellaFormImpl implements NovellaForm, EventManagerListener, Loggable, ActionListener, Serviceable, Initializable {
 	Logger logger;
-
+	DtdRulesManager dtdRulesManager;
+	
 	int start;
 	int end;
 	
@@ -91,18 +92,18 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 	JLabel testo;
 	JLabel novellanuovo;
 	JLabel nuovo;
-	JTextArea spiegazione;
+	JLabel spiegazione;
 	JRadioButton prima;
 	JRadioButton dopo;
 	String genericaPartizione=null;
 	JButton avanti;
 	JButton indietro;
+	JTextArea testoaggiunto;
+	JLabel testoaggiuntotesto;
 
 	Node activeNode;
 	
 	Disposizioni domDisposizioni;
-	
-	DtdRulesManager dtdRulesManager;
 
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
@@ -130,10 +131,12 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 		form.setCustomButtons(null);
 		form.setHelpKey("help.contents.form.disposizionipassive.novellando");
 		testo = (JLabel) form.getComponentByName("editor.disposizioni.passive.stepnovella");
-		spiegazione = (JTextArea) form.getComponentByName("editor.disposizioni.passive.spiegazionenovella");
+		spiegazione = (JLabel) form.getComponentByName("editor.disposizioni.passive.spiegazionenovella");
 		novellatesto = (JLabel) form.getComponentByName("editor.disposizioni.passive.novellatesto");
 		novellanuovo = (JLabel) form.getComponentByName("editor.disposizioni.passive.novellanuovo");
 		nuovo = (JLabel) form.getComponentByName("editor.disposizioni.passive.nuovo");
+		testoaggiunto = (JTextArea) form.getComponentByName("editor.disposizioni.passive.testoaggiunto");
+		testoaggiuntotesto = (JLabel) form.getComponentByName("editor.disposizioni.passive.testoaggiuntotesto");
 		dopo = (JRadioButton) form.getComponentByName("editor.disposizioni.passive.novelladopo");
 		prima = (JRadioButton) form.getComponentByName("editor.disposizioni.passive.novellaprima");
 		ButtonGroup grupporadio = new ButtonGroup();
@@ -144,7 +147,7 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 		avanti.addActionListener(this);
 		indietro.addActionListener(this);
 		dopo.setSelected(true);
-		form.setSize(250, 250);
+		form.setSize(250, 300);
 	}
 
 	public void manageEvent(EventObject event) {
@@ -169,9 +172,6 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == avanti) {
-			if (nuovo.getText().equals(""))
-				utilmsg.msgInfo("editor.disposizioni.passive.noselezione");
-			else {
 			Node n;
 			if (UtilDom.isTextNode(activeNode)) {  	//	creo un nuovo span
 				int posizione;
@@ -179,11 +179,11 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 					posizione = start;
 				else
 					posizione = end;
-				n = domDisposizioni.makeSpan(activeNode, posizione, disposizioni.makeVigenza(activeNode,"novella"));	
+				n = domDisposizioni.makeSpan(activeNode, posizione, disposizioni.makeVigenza(activeNode,"novella",""),testoaggiunto.getText());	
 				selectionManager.setActiveNode(this, n);
 			}
 			else {		//	creo una partizione nuova
-				n = domDisposizioni.makePartition(activeNode, prima.isSelected(), disposizioni.makeVigenza(activeNode,"novella"));				
+				n = domDisposizioni.makePartition(activeNode, prima.isSelected(), disposizioni.makeVigenza(activeNode,"novella",""));				
 				selectionManager.setActiveNode(this, n);
 			} 					
 			disposizioni.setOperazioneProssima();
@@ -193,7 +193,6 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 				disposizioni.setNovella("??");
 			disposizioni.setPosdisposizione(n);
 			form.close();
-			}
 		}
 		if (e.getSource() == indietro) {
 			form.close();
@@ -202,27 +201,41 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 
 	private void updateContent(Node activeNode, int start, int end) {
 		nuovo.setText("");
+		avanti.setEnabled(false);
+		testoaggiuntotesto.setEnabled(false);
+		testoaggiunto.setEnabled(false);
 		if (activeNode != null) {
 			 if (UtilDom.isTextNode(activeNode)) { 	//test se ha fatto una selezione di testo
 					if (activeNode.getNodeValue()!=null) {
 						logger.debug("selezione testo");
 						nuovo.setText("testo");
+						avanti.setEnabled(true);
+						testoaggiuntotesto.setEnabled(true);
+						testoaggiunto.setEnabled(true);
 					}
 			 }		
 			 else {
 					try {
 						if (activeNode.getNodeName()!=null && dtdRulesManager.queryIsValidAttribute(activeNode.getNodeName(), "iniziovigore") && !activeNode.getNodeName().equals("h:span")) {
 						 	logger.debug("selezione non testo");
-							if (activeNode==nirUtilDom.getNirContainer(activeNode)) {
-								String tempId = UtilDom.getAttributeValueAsString(activeNode, "id");
-								String temp = nirUtilUrn.getFormaTestualeById(tempId, tempId);
-								if (temp.lastIndexOf(" ")!=-1)
-									nuovo.setText(temp.substring(0, temp.lastIndexOf(" ")));
-								else
-									nuovo.setText(temp); //capire i casi che finiscono qui (se ci sono)
+							if (dtdRulesManager.queryAppendable(activeNode.getParentNode()).contains(activeNode.getNodeName())) {
+								if (activeNode==nirUtilDom.getNirContainer(activeNode)) {
+								
+								
+									
+									String tempId = UtilDom.getAttributeValueAsString(activeNode, "id");
+									String temp = nirUtilUrn.getFormaTestualeById(tempId, tempId);
+									if (temp.lastIndexOf(" ")!=-1)
+										nuovo.setText(temp.substring(0, temp.lastIndexOf(" ")));
+									else
+										nuovo.setText(temp); 
+									avanti.setEnabled(true);
+								}	
+								else {	
+									nuovo.setText(activeNode.getNodeName());
+									avanti.setEnabled(true);
+								}									
 							}	
-							else	
-								nuovo.setText(activeNode.getNodeName());
 						}
 					} catch (DtdRulesManagerException e) {}		
 			}				
@@ -233,6 +246,10 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 
 		form.showDialog(listener);
 		nuovo.setText("");
+		testoaggiuntotesto.setEnabled(false);
+		testoaggiunto.setText("");
+		testoaggiunto.setEnabled(false);
+		avanti.setEnabled(false);
 		activeNode = selectionManager.getActiveNode();
 		if (activeNode!=null) {
 			start = selectionManager.getTextSelectionStart();
