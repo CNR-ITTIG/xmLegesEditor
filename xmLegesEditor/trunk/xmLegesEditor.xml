@@ -38,10 +38,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 			</layout>
 		</appender>
 		
-		<!--	logger name="cli" additivity="false">
+		<logger name=".ConnectAction" additivity="false">
                         <priority value ="debug" />
                         <appender-ref ref="ConsoleAppender" />
-        </logger	-->
+        </logger>
        
        	<root>
 			<priority value ="error" /> 
@@ -236,7 +236,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <item action="file.saveas" />
                     <!--	item action="file.removepi" /	-->   
                     <separator/>
-                    <!--	menu action="file.connect">
+                    <menu action="file.connect">
                         <menu action="connect.ftp">
 	                        <item action="connect.ftp.open" />
 	                        <item action="connect.ftp.save" />	                        
@@ -246,7 +246,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	                        <item action="connect.webdav.save" />	                        
                         </menu>
                     </menu>          
-                    <separator/	-->
+                    <separator/>
                     <item action="file.print" />
                     <separator/>
                     <item action="file.close" />
@@ -266,6 +266,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <item action="edit.find" />
                     <item action="edit.findnext" />
                     <item action="edit.replace" />
+                    <separator/>
+                    <item action="edit.changedtd" />
                     <separator/>
                     <item action="edit.importdom" />
                     <separator/>
@@ -304,8 +306,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                         <item action="view.pane.editor.panes.formulafinale" />
                         -->
                         <check action="view.pane.editor.panes.annessi" />
-  						<!--	check action="view.pane.panes.source" /	-->
-                        <!--	check action="view.pane.panes.xslteditor" /	--> 
+   						<check action="view.pane.panes.source" />
+                        <check action="view.pane.panes.xslteditor" /> 
                         <check action="view.pane.editor.panes.meta" />
                         <check action="view.pane.editor.panes.riferimenti" />
                         <check action="view.pane.editor.panes.rifincompleti" />
@@ -671,9 +673,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
         <configuration external="true" resource="NirFileExportActionImpl.xconfig" />
     </component>
     
-    <!--	component  activation="startup"
+    <component  activation="startup"
                 class="it.cnr.ittig.xmleges.core.blocks.action.connect.ConnectActionImpl"
-    /	-->
+    />
 
     <component  activation="startup"
                 class="it.cnr.ittig.xmleges.core.blocks.action.file.save.FileSaveActionImpl"
@@ -749,6 +751,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     
     <component  lifestyle="singleton" activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.action.allineamento.AllineamentoActionImpl"
+    />
+    
+    <component  lifestyle="singleton" activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.action.cambiadtd.CambiaDtdActionImpl"
     />
     
     <component  lifestyle="singleton" activation="startup"
@@ -1111,9 +1117,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
                 <pane name="editor.panes.indice"		where="top-center"  	index="3" />                                
                 <pane name="editor.panes.indice"		where="top-left"  	index="1" />                
-                 <!--	pane name="panes.source"            	where="top-center"		index="4" /	-->
-                <!--	pane name="panes.xslteditor"           where="top-center"  	index="5" /	-->
-                 <pane name="editor.panes.riferimenti" 		where="bottom-center"  	index="0" />
+                <pane name="panes.source"            	where="top-center"		index="4" />
+                <pane name="panes.xslteditor"           where="top-center"  	index="5" />
+                <pane name="editor.panes.riferimenti" 		where="bottom-center"  	index="0" />
                 <pane name="editor.panes.rifincompleti"     where="bottom-center"  	index="1" />
                 <pane name="editor.panes.ndr" 				where="bottom-center"  	index="2" />
                 <pane name="editor.panes.errori" 			where="bottom-center"	index="3" />
@@ -1249,7 +1255,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     </component>
     
   
-<!--    
     <component  activation="startup"
                 class="it.cnr.ittig.xmleges.core.blocks.panes.xslteditor.XsltEditorImpl"
         >
@@ -1261,7 +1266,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  activation="startup"
                 class="it.cnr.ittig.xmleges.core.blocks.panes.source.SourcePaneImpl"
     />
---> 
+
     
     
     <component  activation="startup"
@@ -1364,8 +1369,5 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     </component>
     
 </container>
-
-
-
 
 
