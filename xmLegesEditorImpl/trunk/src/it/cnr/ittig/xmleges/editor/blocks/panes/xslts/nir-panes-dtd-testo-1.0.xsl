@@ -206,6 +206,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <xsl:template match="h:table">
     <div align="center">
     <xsl:element name="table" use-attribute-sets="XsltMapperSetClass">
+
+<!--
  	    <xsl:if test="not(@width)">
 	        <xsl:attribute name="width">95%</xsl:attribute>
         </xsl:if>
@@ -218,6 +220,11 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
  	    <xsl:if test="not(@center)">
             <xsl:attribute name="align">center</xsl:attribute>
         </xsl:if>
+-->
+ 	    <xsl:if test="not(@h:style)">
+	        <xsl:attribute name="h:style">width: 95%; border: 0; cellpadding: 2; text-align: center;</xsl:attribute>
+        </xsl:if>
+        
 		<xsl:apply-templates select="@*"/>
         <xsl:apply-templates select="./h:caption" />
         <xsl:apply-templates select="./h:thead" />
@@ -296,9 +303,13 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <xsl:element name="td" use-attribute-sets="XsltMapperSetClass">
 	<xsl:attribute name="style">margin: 1</xsl:attribute>
 	<xsl:attribute name="bgcolor">white</xsl:attribute>
-	<xsl:if test="@align">
+	
+	<!--	xsl:if test="@align">
 		<xsl:attribute name="align"><xsl:value-of select="@align"/></xsl:attribute>
-	</xsl:if>
+	</xsl:if	-->
+	<xsl:apply-templates select="@*"/>
+		
+	
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
         <xsl:apply-templates />
     </xsl:element>
