@@ -15,6 +15,8 @@ import it.cnr.ittig.xmleges.core.services.frame.Frame;
 import it.cnr.ittig.xmleges.core.services.preference.PreferenceManager;
 import it.cnr.ittig.xmleges.core.util.file.RegexpFileFilter;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
+import it.cnr.ittig.xmleges.editor.services.action.rinumerazione.RinumerazioneAction;
+import it.cnr.ittig.xmleges.editor.services.dom.rinumerazione.Rinumerazione;
 import it.cnr.ittig.xmleges.editor.services.form.xmleges.marker.XmLegesMarkerForm;
 
 import java.awt.event.ActionEvent;
@@ -61,6 +63,9 @@ public class FileImportActionImpl extends AbstractAction implements FileImportAc
 	FileOpenAction fileOpenAction;
 
 	String lastImport = null;
+	
+	Rinumerazione rinumerazione;
+	RinumerazioneAction rinumerazioneAction;
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -75,6 +80,9 @@ public class FileImportActionImpl extends AbstractAction implements FileImportAc
 		preferenceManager = (PreferenceManager) serviceManager.lookup(PreferenceManager.class);
 		parser = (XmLegesMarkerForm) serviceManager.lookup(XmLegesMarkerForm.class);
 		fileOpenAction = (FileOpenAction) serviceManager.lookup(FileOpenAction.class);
+		
+		rinumerazione = (Rinumerazione) serviceManager.lookup(Rinumerazione.class);
+		rinumerazioneAction = (RinumerazioneAction) serviceManager.lookup(RinumerazioneAction.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
@@ -115,6 +123,11 @@ public class FileImportActionImpl extends AbstractAction implements FileImportAc
 				UtilFile.copyFileInTemp(parser.getResult(), "import.xml");
 				if (fileOpenAction.doOpen(UtilFile.getFileFromTemp("import.xml").getAbsolutePath(), false)) {
 					documentManager.setNew(true);
+					
+					//imposto la Rinumerazione DISATTIVA (se non lo è già)
+					if (rinumerazione.isRinumerazione())
+						rinumerazioneAction.doSetRinumerazione(false);
+					
 					return true;
 				}
 				return false;
