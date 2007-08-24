@@ -202,7 +202,7 @@ public class MetaUrnDocumentoImpl implements MetaUrnDocumento, Loggable, Service
 			// FIXME andrebbe cercato solo nel documento principale
 			NodeList emanantiList = doc.getElementsByTagName("emanante");
 			for (int i = 0; i < emanantiList.getLength(); i++) {
-				if (null != UtilDom.getTextNode(emanantiList.item(i)) && UtilDom.getTextNode(emanantiList.item(i)).equalsIgnoreCase(autorita))
+				if (null != UtilDom.getTextNode(emanantiList.item(i)) && UtilDom.getTextNode(emanantiList.item(i)).trim().equalsIgnoreCase(autorita.trim()))
 					return true;
 			}
 		}
