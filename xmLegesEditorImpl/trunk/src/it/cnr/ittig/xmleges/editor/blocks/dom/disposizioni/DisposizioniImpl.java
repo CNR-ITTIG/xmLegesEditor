@@ -110,37 +110,6 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		Document doc = documentManager.getDocumentAsDom();
 		Node activeMeta = nirUtilDom.findActiveMeta(doc,null);
 
-		int id=0;
-		//NodeList notaNodes = doc.getElementsByTagNameNS("http://www.ittig.cnr.it/provvedimenti/2.2", "nota");
-		NodeList notaNodes = doc.getElementsByTagName("ittig:nota");
-		for (int i = 0; i < notaNodes.getLength(); i++) {
-			try {
-				int valore = Integer.parseInt(UtilDom.getAttributeValueAsString(notaNodes.item(i),"nome"));
-				if (valore>id)
-					id = valore;
-			}	
-			catch (NumberFormatException e) {}	
-		}
-		String nomeNota=""+(id+1);
-		//inserisco la nota nei metadati proprietari ITTIG
-		Node ittigNode = cercaMetaproprietarioittig(UtilDom.findRecursiveChild(activeMeta,"proprietario"));
-		if (ittigNode==null) {
-			ittigNode = nirUtilDom.checkAndCreateMeta(doc,activeMeta,"proprietario");
-			UtilDom.setAttributeValue(ittigNode, "soggetto", "ITTIG");
-			UtilDom.setAttributeValue(ittigNode, "xlink:href" , "http://www.ittig.cnr.it");
-		}
-		Node metaittigNode = UtilDom.findRecursiveChild(ittigNode,"ittig:meta");
-		if (metaittigNode==null)
-			metaittigNode = doc.createElementNS("http://www.ittig.it/provvedimenti/2.2", "ittig:meta");
-		ittigNode.appendChild(metaittigNode);
-
-		Node notaittigNode = doc.createElementNS("http://www.ittig.it/provvedimenti/2.2", "ittig:nota");
-		metaittigNode.appendChild(notaittigNode);
-		UtilDom.setAttributeValue(notaittigNode, "nome", nomeNota); 
-		UtilDom.setAttributeValue(notaittigNode, "pre", preNota);
-		UtilDom.setAttributeValue(notaittigNode, "auto", autoNota);
-		UtilDom.setAttributeValue(notaittigNode, "post", postNota);
-		
 		//inserisco la disposizione
 		Node disposizioniNode = UtilDom.findRecursiveChild(activeMeta,"disposizioni");
 		if (disposizioniNode==null)
@@ -158,7 +127,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 			else
 				UtilDom.setAttributeValue(operazioneNode, "implicita", "no");				
 			modifichepassiveNode.appendChild(operazioneNode);
-			setNorma(nomeNota, operazioneNode, pos, norma, partizione);
+			setNorma(operazioneNode, pos, norma, partizione, preNota, autoNota, postNota);
 			setNovella(operazioneNode, novella);
 			setNovellando(operazioneNode, novellando);			
 		}
@@ -169,7 +138,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 				else
 					UtilDom.setAttributeValue(operazioneNode, "implicita", "no");
 				modifichepassiveNode.appendChild(operazioneNode);
-				setNorma(nomeNota, operazioneNode, pos, norma, partizione);
+				setNorma(operazioneNode, pos, norma, partizione, preNota, autoNota, postNota);
 				setNovellando(operazioneNode, novellando);
 			}
 			else if (!novella.equals("")) {	//integrazione
@@ -179,20 +148,23 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 				else
 					UtilDom.setAttributeValue(operazioneNode, "implicita", "no");
 				modifichepassiveNode.appendChild(operazioneNode);
-				setNorma(nomeNota, operazioneNode, pos, norma, partizione);
+				setNorma(operazioneNode, pos, norma, partizione, preNota, autoNota, postNota);
 				setNovella(operazioneNode, novella);
 			}
 		
 		return true;
 	}
 
-	private void setNorma(String nomeNota, Node n, String pos, String norma, String partizione) {
+	private void setNorma(Node n, String pos, String norma, String partizione, String preNota, String autoNota, String postNota) {
 		/*	
 		 *  Voglio ottenere:
 		 *  
 		 *  <dsp:pos xlink:href="pos" xlink:type="simple"/>
 		 * 	<dsp:norma xlink:href="norma" xlink:type="simple"/>	
 		 * 		<dsp:pos xlink:href="partizione" xlink:type="simple"/>
+		 * 
+		 * 				Inserisco anche la nota qui !!!!
+		 * 
 		 *  </dsp:norma>
 		 *  
 		 */
@@ -210,10 +182,21 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 			n.appendChild(normaNode);
 		}	
 		UtilDom.setAttributeValue(normaNode, "xlink:href", norma);
-		UtilDom.setAttributeValue(normaNode, "nome", nomeNota);
 		Node normaposNode = utilRulesManager.getNodeTemplate("dsp:pos");
 		UtilDom.setAttributeValue(normaposNode, "xlink:href", partizione);
 		normaNode.appendChild(normaposNode);
+		
+		//Inserisco anche la nota qui !!!!		
+		Node metaittigNode = documentManager.getDocumentAsDom().createElementNS("http://www.ittig.it/provvedimenti/2.2", "ittig:meta");
+		normaNode.appendChild(metaittigNode);
+
+		Node notaittigNode = documentManager.getDocumentAsDom().createElementNS("http://www.ittig.it/provvedimenti/2.2", "ittig:nota");
+		metaittigNode.appendChild(notaittigNode); 
+		UtilDom.setAttributeValue(notaittigNode, "pre", preNota);
+		UtilDom.setAttributeValue(notaittigNode, "auto", autoNota);
+		UtilDom.setAttributeValue(notaittigNode, "post", postNota);
+		
+		
 	}
 	
 	private void setNovellando(Node n, String novellando) {
