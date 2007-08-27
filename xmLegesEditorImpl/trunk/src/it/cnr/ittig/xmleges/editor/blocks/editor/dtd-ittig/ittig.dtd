@@ -1,7 +1,6 @@
 
 <!ENTITY % ittigNS  "xmlns:ittig CDATA #FIXED 'http://www.ittig.cnr.it/provvedimenti/2.2'" >
 
-<!ENTITY % ittigNUM "nome CDATA #IMPLIED" >
 <!ENTITY % ittigPRENOTA "pre CDATA #IMPLIED" >
 <!ENTITY % ittigNOTA "auto CDATA #IMPLIED" >
 <!ENTITY % ittigPOSTNOTA "post CDATA #IMPLIED" >
@@ -11,7 +10,6 @@
 <!ATTLIST ittig:meta %ittigNS; >
 
 <!ELEMENT ittig:nota		EMPTY >
-<!ATTLIST ittig:nota		%ittigNUM; >
 <!ATTLIST ittig:nota		%ittigPRENOTA; >
 <!ATTLIST ittig:nota		%ittigNOTA; >
 <!ATTLIST ittig:nota		%ittigPOSTNOTA; >
