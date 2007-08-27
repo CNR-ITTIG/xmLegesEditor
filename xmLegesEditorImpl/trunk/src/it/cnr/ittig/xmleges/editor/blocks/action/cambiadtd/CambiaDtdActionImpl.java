@@ -1,6 +1,7 @@
 package it.cnr.ittig.xmleges.editor.blocks.action.cambiadtd;
 
 import java.awt.event.ActionEvent;
+import java.io.CharArrayReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -68,7 +69,6 @@ public class CambiaDtdActionImpl implements CambiaDtdAction, EventManagerListene
 	DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 	DocumentBuilder db;
 	
-	Document doc =null;
 	boolean valido;
 	
 	// //////////////////////////////////////////////////// LogEnabled Interface
@@ -143,24 +143,30 @@ public class CambiaDtdActionImpl implements CambiaDtdAction, EventManagerListene
 		public void actionPerformed(ActionEvent e) {
 			
 			logger.debug("test cambio dtd da " + from.getText() + " a " + to.getText());
-			
-	
+			String encoding;
+			if (documentManager.getEncoding() == null) {
+				logger.warn("No encoding found. Using default: UTF-8");
+				encoding = "UTF-8";
+			} else
+				encoding = documentManager.getEncoding();
 			try {
 				valido = true;
-				//doc = db.parse(UtilFile.getFileFromTemp("tempChangeDtd.xml"));
-				//oppure doc=documentmanager.getdocasdom per prendere gli altri parametri (encoding ...)
-				
 				
 				//non dovrebbe essere necessario ma senza ha uno stranissimo comportamento
-				//Transformer converti = factory.newTransformer();
-				Transformer converti = factory.newTransformer(new StreamSource(new FileInputStream("temp/identita.xsl")));				
+				//Transformer converti = factory.newTransformer();				
 				
-				
+				String trasformazioneIdentita = "<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"><xsl:template match=\"*|@*|comment()|processing-instruction()|text()\"><xsl:copy><xsl:apply-templates select=\"*|@*|comment()|processing-instruction()|text()\"/></xsl:copy></xsl:template></xsl:stylesheet>";
+				char [] xslt = new char[trasformazioneIdentita.length()];
+				for (int i=0; i<xslt.length; i++)
+					xslt[i] = trasformazioneIdentita.charAt(i);
+				Transformer converti = factory.newTransformer(new StreamSource(new CharArrayReader(xslt)));
 				
 				UtilFile.copyFileInTemp(new FileInputStream(documentManager.getSourceName()), "tempChangeDtdFrom.xml");
+				
 				Source source = new StreamSource(new File("temp/tempChangeDtdFrom.xml"));
 				Result dest = new StreamResult("temp/tempChangeDtdTo.xml");
 				converti.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, dtdto.getText());
+				converti.setOutputProperty(OutputKeys.ENCODING, encoding);
 				converti.transform(source,dest);
 				db.parse(UtilFile.getFileFromTemp("tempChangeDtdTo.xml"));
 				if (valido) { 
