@@ -1096,15 +1096,21 @@
       <!--	xsl:choose>
 		<xsl:when test="$datafine=''"	--> 
 	      <xsl:for-each select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*[name()='dsp:norma']">
-			<xsl:variable name="nomenota">
-				<xsl:value-of select="@nome"/>
-			</xsl:variable>	
 			<xsl:variable name="implicita">
 				<xsl:value-of select="../@implicita"/>
 			</xsl:variable>	
 			<xsl:variable name="urn">
 				<xsl:value-of select="../*[name()='dsp:norma']/*[name()='dsp:pos']/@xlink:href"/>
 			</xsl:variable>	
+			<xsl:variable name="prenota">
+				<xsl:value-of select="../*[name()='dsp:norma']/*[name()='ittig:meta']/*[name()='ittig:nota']/@pre"/>
+			</xsl:variable>	
+			<xsl:variable name="autonota">
+				<xsl:value-of select="../*[name()='dsp:norma']/*[name()='ittig:meta']/*[name()='ittig:nota']/@auto"/>
+			</xsl:variable>	
+			<xsl:variable name="postnota">
+				<xsl:value-of select="../*[name()='dsp:norma']/*[name()='ittig:meta']/*[name()='ittig:nota']/@post"/>
+			</xsl:variable>				
 			<xsl:variable name="novella">
 				<xsl:value-of select="../*[name()='dsp:novella']/*[name()='dsp:pos']/@xlink:href"/>
 			</xsl:variable>	
@@ -1148,12 +1154,11 @@
 				<xsl:text> implicita</xsl:text>
 			</xsl:if>
 			<xsl:text>) - </xsl:text>
-						
-			<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='proprietario'][@soggetto='ITTIG']/*[name()='ittig:meta']/*[name()='ittig:nota'][@nome=$nomenota]/@pre"/>
+			<xsl:value-of select="$prenota"/>
 			<xsl:text> </xsl:text>
-			<a href="http://www.nir.it/cgi-bin/N2Ln?{$urn}" title=" Dest. = http://www.nir.it/cgi-bin/N2Ln?{$urn}"> <xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='proprietario'][@soggetto='ITTIG']/*[name()='ittig:meta']/*[name()='ittig:nota'][@nome=$nomenota]/@auto"/> </a>
+			<a href="http://www.nir.it/cgi-bin/N2Ln?{$urn}" title=" Dest. = http://www.nir.it/cgi-bin/N2Ln?{$urn}"> <xsl:value-of select="$autonota"/> </a>
 			<xsl:text> </xsl:text>
-			<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='proprietario'][@soggetto='ITTIG']/*[name()='ittig:meta']/*[name()='ittig:nota'][@nome=$nomenota]/@post"/>
+			<xsl:value-of select="$postnota"/>			
 			</p>
 	      </xsl:for-each>
 		<!--	/xsl:when>
