@@ -198,7 +198,7 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 			if (ciclodivitaForm.openForm()) {
 				eventoselezionato = ciclodivitaForm.getEventoSelezionato();
 				if (eventoselezionato != -1) {	
-					eventoriginale = eventiOnDom[0];
+					eventoriginale = ciclodivitaForm.getEventi()[0];	//eventiOnDom[0];
 					eventovigore=ciclodivitaForm.getEventi()[eventoselezionato];
 					if (eventovigore.getFonte().getTagTipoRelazione().equalsIgnoreCase("passiva"))
 						evento.setText(eventovigore.getFonte().getLink());	
