@@ -107,6 +107,7 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 	int operazioneCorrente;
 	int operazioneProssima;
 	
+	String partizione="";
 	String posDisposizione = "";
 	String idNovellando = "";
 	String iniziovigoreNovellando;
@@ -198,7 +199,10 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 			if (ciclodivitaForm.openForm()) {
 				eventoselezionato = ciclodivitaForm.getEventoSelezionato();
 				if (eventoselezionato != -1) {	
-					eventoriginale = ciclodivitaForm.getEventi()[0];	//eventiOnDom[0];
+					if (eventiOnDom.length!=0)
+						eventoriginale = eventiOnDom[0];
+					else
+						eventoriginale = ciclodivitaForm.getEventi()[0];
 					eventovigore=ciclodivitaForm.getEventi()[eventoselezionato];
 					if (eventovigore.getFonte().getTagTipoRelazione().equalsIgnoreCase("passiva"))
 						evento.setText(eventovigore.getFonte().getLink());	
@@ -226,8 +230,10 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 		}
 		if (e.getSource() == sceltadove) {
 			partizioniForm.openForm();
-			if (partizioniForm.getPartizioneEstesa().length() > 0)
-				dove.setText(makeSub(partizioniForm.getPartizioneEstesa()));
+			if (partizioniForm.getPartizioneEstesa().length() > 0) {
+				partizione = partizioniForm.getPartizioneEstesa();
+				dove.setText(makeSub(partizione));
+			}	
 		}
 		if (e.getSource() == abrogazione || e.getSource() == sostituzione
 				|| e.getSource() == integrazione) {
@@ -272,6 +278,7 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 		if (cancellaCampi) {
 			evento.setText("");
 			dove.setText("");
+			partizione="";
 		}	
 		posDisposizione="";
 		activeNode = null;
@@ -384,6 +391,8 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 			String urn = eventovigore.getFonte().getLink();
 			try {
 				urn = nirUtilUrn.getFormaTestuale(new Urn(urn));
+				if (!partizione.equals("")) 
+					urn = urn + " " + partizione;
 			} catch (Exception e) {}
 			if (operazioneIniziale == INTEGRAZIONE)
 				autoNota = "Integrato da: " + urn + ".\nIn vigore dal " + UtilDate.normToString(eventovigore.getData());
