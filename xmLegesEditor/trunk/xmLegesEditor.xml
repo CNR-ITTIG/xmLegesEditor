@@ -38,10 +38,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 			</layout>
 		</appender>
 		
-		<logger name=".ConnectAction" additivity="false">
+		<!--	logger name=".xxx" additivity="false">
                         <priority value ="debug" />
                         <appender-ref ref="ConsoleAppender" />
-        </logger>
+        </logger	-->
        
        	<root>
 			<priority value ="error" /> 
@@ -316,6 +316,15 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                         <check action="view.pane.editor.panes.commenti" />
                         <check action="view.pane.panes.problems" />
                         <check action="view.pane.panes.segnalazioni" />
+                        
+                        
+                        
+                        
+                        <!--	check action="view.pane.editor.panes.ndv" /	-->
+                        
+                        
+                        
+                        
                     </menu>
                     <check action="view.statusbar" />
                 </menu>
@@ -376,6 +385,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                         <!--	item action="editor.partizioni.vigenza" /	-->
                         
                         <item action="editor.disposizioni.passive" />
+                        
+
+						<!--	item action="editor.disposizioni.rimuovipassive" /	-->
+                        
                         
                         <item action="editor.annessi.annesso" />
                         <item action="editor.ndr" />
@@ -539,6 +552,11 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <!--	item action="editor.partizioni.vigenza" /	-->
                     
                     <item action="editor.disposizioni.passive" />
+                    
+
+					<!--	item action="editor.disposizioni.rimuovipassive" /	-->
+
+
                     
                     <item action="editor.annessi.annesso" />
                     <item action="editor.ndr" />
@@ -948,7 +966,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     
 
 
-
+    <component  lifestyle="singleton" activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.passive.ModificaDispPassiveFormImpl"
+    />
     <component  lifestyle="singleton" activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.passive.DispPassiveFormImpl"
     />
@@ -1127,6 +1147,11 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 <pane name="panes.notes"				where="bottom-center"  	index="5" />
                 <pane name="panes.problems"				where="bottom-center"  	index="6" />
 				<pane name="panes.segnalazioni"				where="bottom-center"  	index="7" />
+
+				
+				<!--	pane name="editor.panes.ndv" 				where="bottom-center"  	index="8" /	-->
+
+
             </panes>
         </configuration>
     </component>
@@ -1192,6 +1217,11 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		 	<xslt   name="pdf-cnr-style"      			file="styleFO.xsl"				startup="true" />	
 	 	 	<xslt   name="pdf-cnr-xhtml2fo"             file="xhtml2fo.xsl"				startup="true" />
       
+      
+      
+		    <!--	xslt   name="ndv"					file="nir-panes-view-ndv-1.0.xsl"			/	-->
+      
+      
 		 	
         </configuration>
     </component>
@@ -1227,6 +1257,16 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             <pane name="editor.panes.indice">
                 <xslt name="edit-indice"/>
             </pane>
+
+
+
+
+            <!--	pane name="editor.panes.ndv">
+                <xslt name="ndv"/>
+            </pane	-->
+
+
+
 
         </configuration>
     </component>
