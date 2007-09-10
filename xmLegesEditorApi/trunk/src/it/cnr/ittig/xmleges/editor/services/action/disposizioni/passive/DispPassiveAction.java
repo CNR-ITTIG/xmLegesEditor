@@ -24,5 +24,6 @@ public interface DispPassiveAction extends Service {
 	 *
 	 */
 	public void doDispPassiva();
+	public void undoDispPassiva();
 
 }
