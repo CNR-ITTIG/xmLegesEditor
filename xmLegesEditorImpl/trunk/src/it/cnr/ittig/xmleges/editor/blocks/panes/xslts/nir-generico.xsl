@@ -66,9 +66,10 @@
 			</xsl:otherwise>
 		</xsl:choose>				
 		</div>
-		<div class="meta">
-        	<xsl:apply-templates select="/*/*/*[name()='meta']/*[name()='redazionale']/*[name()='nota']" />
-        </div>
+		<xsl:if test="/*/*/*[name()='meta']/*[name()='redazionale']/*[name()='nota']">
+			<h1>Note</h1>
+			<xsl:apply-templates select="/*/*/*[name()='meta']/*[name()='redazionale']/*[name()='nota']" />
+		</xsl:if>
 	</xsl:template>		
 	
 
@@ -583,8 +584,14 @@
 		</div>
 	</xsl:template	-->
 	<xsl:template match="//*[name()='nota']">
+		<xsl:variable name="idnota">
+			<xsl:value-of select="@id" />
+		</xsl:variable>
 		<a class="nota" name="{@id}" href="{concat('#ndr',@id)}">
-			<xsl:value-of select="@id"/>
+
+			<xsl:value-of select="//*[name()='ndr'][@num=$idnota]"/>
+			<!--	xsl:value-of select="@id"/	-->
+			
 		</a><span class="nota"><xsl:text>&#160;-&#160;</xsl:text></span>
 		<xsl:apply-templates />
 	</xsl:template>
@@ -830,6 +837,9 @@
 	<!-- ======================================================== -->
 	
 	<xsl:template name="vigenza" >
+		<xsl:variable name="idnota">
+			<xsl:value-of select="@id" />
+		</xsl:variable>
 		<xsl:variable name="stato">
 		<xsl:value-of select="@status" />
 		</xsl:variable>
@@ -870,6 +880,9 @@
 
 			<!-- ========================================== DATA FINE !='' ====================================== -->				
 				<xsl:when test="$data_fine!=''">
+					<xsl:variable name="ittignota">
+						<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$idnota]/../../*[name()='dsp:norma']/*[name()='ittig:notavigenza']/@id"/>
+					</xsl:variable>		
 					<xsl:choose>
 						<xsl:when test="$data_fine&lt;number(number($datafine)+1)">
 							<xsl:attribute name="title"><xsl:copy-of select="$tooltip" /></xsl:attribute>
@@ -879,7 +892,7 @@
 					   		  <xsl:when test="preceding-sibling::node()[1][@iniziovigore=$fine_id]">
 					 		  </xsl:when>
 					 		  <xsl:otherwise>						 		  
-						 		<span style="color:#f00;"> [ ... ] <a href="#n{@id}" name="t{@id}"> <sup>{Vig.<xsl:value-of select="@id"/>}</sup></a></span>						 		
+						 		<span style="color:#f00;"> [ ... ] <a href="#n{@id}" name="t{@id}"> <sup>[<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>]</sup></a></span>						 		
  							  </xsl:otherwise>
 						   </xsl:choose>
 
@@ -940,20 +953,26 @@
 	<!-- ======================================================== -->
 
    <xsl:template name="makeNotavigenza">
+   		<xsl:variable name="idnota">
+			<xsl:value-of select="@id" />
+		</xsl:variable>
+		<xsl:variable name="ittignota">
+				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$idnota]/../../*[name()='dsp:norma']/*[name()='ittig:notavigenza']/@id"/>
+		</xsl:variable>		
 		<xsl:choose>
 			<!--  Si potrebbe anche inserire i COMMA che hanno figli -->		
 			<xsl:when test="(local-name()='articolo' or local-name()='capo' or local-name()='titolo' or local-name()='libro' or local-name()='parte' or local-name()='sezione')">
-				<div class="allineadx"><a href="#n{@id}" name="t{@id}"><sup>{Vig.<xsl:value-of select="@id"/>}</sup></a></div>
+				<div class="allineadx"><a href="#n{@id}" name="t{@id}"><sup>[<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>]</sup></a></div>
 			</xsl:when>
 			<xsl:when test="local-name()='rubrica'">		<!--	si prende l'id dal padre	-->
 				<xsl:element name="a">
 					<xsl:attribute name="href">#n<xsl:value-of select="../@id" />-rub</xsl:attribute>
 					<xsl:attribute name="name">t<xsl:value-of select="../@id" />-rub</xsl:attribute>
-					<sup>{Vig.<xsl:value-of select="../@id"/>-rub}</sup>	
+					<sup>{Vig...<xsl:value-of select="../@id"/>-rub}</sup>	
 				</xsl:element>
 			</xsl:when>
 			<xsl:otherwise>
-				<a href="#n{@id}" name="t{@id}"><sup>{Vig.<xsl:value-of select="@id"/>}</sup></a>
+				<a href="#n{@id}" name="t{@id}"><sup>[<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>]</sup></a>
 			</xsl:otherwise>
 		</xsl:choose>									
    </xsl:template>
@@ -974,14 +993,20 @@
 			<xsl:variable name="urn">
 				<xsl:value-of select="../*[name()='dsp:norma']/*[name()='dsp:pos']/@xlink:href"/>
 			</xsl:variable>	
+			<xsl:variable name="idnota">
+				<xsl:value-of select="../*[name()='dsp:norma']/*[name()='ittig:notavigenza']/@id"/>
+			</xsl:variable>	
+			<xsl:variable name="numeronota">
+				<xsl:value-of select="substring($idnota,4,number(string-length($idnota)))"/>
+			</xsl:variable>	
 			<xsl:variable name="prenota">
-				<xsl:value-of select="../*[name()='dsp:norma']/*[name()='ittig:meta']/*[name()='ittig:nota']/@pre"/>
+				<xsl:value-of select="../*[name()='dsp:norma']/*[name()='ittig:notavigenza']/@prima"/>
 			</xsl:variable>	
 			<xsl:variable name="autonota">
-				<xsl:value-of select="../*[name()='dsp:norma']/*[name()='ittig:meta']/*[name()='ittig:nota']/@auto"/>
+				<xsl:value-of select="../*[name()='dsp:norma']/*[name()='ittig:notavigenza']/@testo"/>
 			</xsl:variable>	
 			<xsl:variable name="postnota">
-				<xsl:value-of select="../*[name()='dsp:norma']/*[name()='ittig:meta']/*[name()='ittig:nota']/@post"/>
+				<xsl:value-of select="../*[name()='dsp:norma']/*[name()='ittig:notavigenza']/@dopo"/>
 			</xsl:variable>				
 			<xsl:variable name="novella">
 				<xsl:value-of select="../*[name()='dsp:novella']/*[name()='dsp:pos']/@xlink:href"/>
@@ -998,18 +1023,16 @@
    				</xsl:when>
 			</xsl:choose>
 			<p>
-
-
 			<xsl:choose>
 				<xsl:when test="$novellando">
 					<xsl:choose>
 						<xsl:when test="$novella">
 							<!--	sostituzione	-->
-							<a name="n{$novellando}" href="#t{$novellando}"> nota n. <xsl:value-of select="$num"/>a</a> e <a name="n{$novella}" href="#t{$novella}"><xsl:value-of select="$num"/>b</a> ( Sostituzione			
+							<a name="n{$novellando}" href="#t{$novellando}"> Vigenza n. <xsl:value-of select="$numeronota"/>a</a> e <a name="n{$novella}" href="#t{$novella}"><xsl:value-of select="$numeronota"/>i</a> ( Sostituzione			
    						</xsl:when>
    						<xsl:otherwise>
    							<!--	abrogazione		-->
-							<a name="n{$novellando}" href="#t{$novellando}"> nota n. <xsl:value-of select="$num"/></a> ( Abrogazione			
+							<a name="n{$novellando}" href="#t{$novellando}"> Vigenza n. <xsl:value-of select="$numeronota"/></a> ( Abrogazione			
 						</xsl:otherwise>			
 					</xsl:choose>
    				</xsl:when>
@@ -1017,7 +1040,7 @@
 					<xsl:choose>
 						<xsl:when test="$novella">
 							<!--	integrazione	-->
-							<a name="n{$novella}" href="#t{$novella}"> nota n. <xsl:value-of select="$num"/></a> ( Integrazione			
+							<a name="n{$novella}" href="#t{$novella}"> Vigenza n. <xsl:value-of select="$numeronota"/></a> ( Integrazione			
    						</xsl:when>
 					</xsl:choose>
 				</xsl:otherwise>			   				
@@ -1028,7 +1051,13 @@
 			<xsl:text>) - </xsl:text>
 			<xsl:value-of select="$prenota"/>
 			<xsl:text> </xsl:text>
-			<a href="http://www.nir.it/cgi-bin/N2Ln?{$urn}" title=" Dest. = http://www.nir.it/cgi-bin/N2Ln?{$urn}"> <xsl:value-of select="$autonota"/> </a>
+			<xsl:value-of select="substring-before($autonota,':')"/>
+			<xsl:text>: </xsl:text>
+			<a href="http://www.nir.it/cgi-bin/N2Ln?{$urn}" title=" Dest. = http://www.nir.it/cgi-bin/N2Ln?{$urn}"> 
+			<xsl:value-of select="substring-after(substring-before($autonota,' In vigore'),':')"/> 
+			</a>
+			<xsl:text> In vigore </xsl:text>			
+			<xsl:value-of select="substring-after($autonota,'In vigore')"/>
 			<xsl:text> </xsl:text>
 			<xsl:value-of select="$postnota"/>			
 			</p>
