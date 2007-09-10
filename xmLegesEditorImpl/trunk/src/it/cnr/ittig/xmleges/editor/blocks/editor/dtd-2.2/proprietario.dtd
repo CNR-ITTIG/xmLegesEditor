@@ -27,9 +27,8 @@
         =====================================================================  -->
 
 <!ENTITY % cnrMeta "cnr:meta" >
-<!ENTITY % ittigMeta "ittig:meta" >
 
-<!ENTITY % ProprietarioMeta "(%cnrMeta; | %ittigMeta;)*" >
+<!ENTITY % ProprietarioMeta "(%cnrMeta;)*" >
 
 <!--    =====================================================================        
           Metadati proprietari del CNR                                               
@@ -40,7 +39,7 @@
 %cnrDTD;
 
 <!--    =====================================================================        
-          Metadati proprietari dell'ITTIG                                         
+          Metadati proprietari ITTIG                                               
         =====================================================================  -->
 
 <!ENTITY % ittigDTD SYSTEM "./ittig.dtd">
