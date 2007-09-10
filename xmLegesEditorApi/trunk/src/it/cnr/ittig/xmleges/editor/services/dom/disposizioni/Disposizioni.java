@@ -117,4 +117,13 @@ public interface Disposizioni extends Service {
 	 */
 	public void doUndo(String id, boolean cancellaTesto);	
 
+	/**
+	 * Elimina vigenza
+	 */
+	public void doErase(String idNovellando, String idNovella, Node disposizione);
+	
+	/**
+	 * Modifica vigenza
+	 */
+	public void doChange(String norma, String pos, Node disposizione);
 }
