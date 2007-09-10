@@ -105,7 +105,7 @@ public class NotaFormImpl implements NotaForm, Loggable, Serviceable, Initializa
 		indietro = (JButton) form.getComponentByName("editor.form.disposizioni.passive.btn.indietro");
 		fine.addActionListener(this);
 		indietro.addActionListener(this);
-		form.setSize(360, 290);
+		form.setSize(360, 350);
 	}
 
 	public void openForm(FormClosedListener listener, String nota) {
