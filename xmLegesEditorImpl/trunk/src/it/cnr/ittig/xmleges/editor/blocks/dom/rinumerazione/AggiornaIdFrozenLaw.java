@@ -31,6 +31,8 @@ public class AggiornaIdFrozenLaw {
 	RinumerazioneImpl rinum;
 
 	NirUtilDom nirUtilDom;
+	
+	Vector disposizioniId;
 
 	protected static final int LIBRO = 0;
 
@@ -107,6 +109,13 @@ public class AggiornaIdFrozenLaw {
 
 		doc = nodo.getOwnerDocument();
 
+		//recupero id referenziati dalle disposizioni
+		try {
+			disposizioniId = getDisposizioniIdFromDoc(UtilDom.getElementsByTagName(doc,doc,"modifichepassive")[0]);
+		} catch (Exception e) {
+			disposizioniId = null;
+		}
+			
 		// aggiornamento relativo alle note:
 		// le note vengono ordinate in base a come compaiono nel testo
 		Vector ndrId = getNdrIdFromDoc();
@@ -124,6 +133,19 @@ public class AggiornaIdFrozenLaw {
 		setNdrLink(ndrId, false);
 	}
 
+	public Vector getDisposizioniIdFromDoc(Node modifichepassive) {
+		Node[] disp = UtilDom.getElementsByTagName(doc,modifichepassive,"dsp:pos");
+		Vector ids = new Vector(50, 10);
+		for (int i = 0; i < disp.length; i++) {
+			if (!UtilDom.getAttributeValueAsString(disp[i],"xlink:href").startsWith("urn")) {
+				String id = UtilDom.getAttributeValueAsString(disp[i], "xlink:href");
+				if (ids.indexOf(id) == -1)
+					ids.add(id);
+			}
+		}
+		return ids;
+	}
+	
 	public Vector getNdrIdFromDoc() {
 		NodeList ndr = doc.getElementsByTagName("ndr");
 		Vector ids = new Vector(50, 10);
@@ -307,6 +329,11 @@ public class AggiornaIdFrozenLaw {
 
 			if (!UtilDom.hasIdAttribute(nodo) || !OldID.equals(IDValue)) {
 				UtilDom.setIdAttribute(nodo, IDValue);
+				
+				//aggiorno le disposizioni
+				if (disposizioniId!= null && disposizioniId.contains(OldID))
+					updateDisposizione(OldID, IDValue);
+				
 				if(logger.isDebugEnabled())
 				  logger.debug("idChanged: new  " + IDValue + " old " + OldID);
 			}
@@ -320,6 +347,15 @@ public class AggiornaIdFrozenLaw {
 		}
 	}
 
+	private void updateDisposizione(String oldID, String newID) {
+		Node[] disp = UtilDom.getElementsByTagName(doc,UtilDom.getElementsByTagName(doc,doc,"modifichepassive")[0],"dsp:pos");
+		for (int i = 0; i < disp.length; i++) {
+			if (oldID.equals(UtilDom.getAttributeValueAsString(disp[i], "xlink:href")))
+				UtilDom.setAttributeValue(disp[i],"xlink:href",newID);
+		}
+		disposizioniId.remove(oldID);
+	}
+	
 	private boolean isElementWithNum(Node node) {
 		int elemType = getElementType(node);
 		if (elemType == LIBRO || elemType == PARTE || elemType == TITOLO || elemType == CAPO || elemType == SEZIONE || elemType == ARTICOLO
