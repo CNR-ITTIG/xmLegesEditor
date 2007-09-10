@@ -96,18 +96,9 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 	}
 	
-	private Node cercaMetaproprietarioittig(Node cerca) {
-		if (cerca==null)
-			return null;
-		else 	//potrei avere altri metadati proprietario (ad esempio quelli del CNR)
-			if (UtilDom.getAttributeValueAsString(cerca, "soggetto").equalsIgnoreCase("ITTIG"))
-				return cerca;
-			else 	
-				return cercaMetaproprietarioittig(cerca.getNextSibling());
-	}	
-	
 	public boolean setDOMDisposizioni(String pos, String norma, String partizione, String novellando, String novella, String preNota, String autoNota, String postNota, boolean implicita) {
 		Document doc = documentManager.getDocumentAsDom();
+		
 		Node activeMeta = nirUtilDom.findActiveMeta(doc,null);
 
 		//inserisco la disposizione
@@ -152,6 +143,8 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 				setNovella(operazioneNode, novella);
 			}
 		
+		//marco il documento come multivigente
+		setTipoDocVigenza();
 		return true;
 	}
 
@@ -186,19 +179,24 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		UtilDom.setAttributeValue(normaposNode, "xlink:href", partizione);
 		normaNode.appendChild(normaposNode);
 		
-		//Inserisco anche la nota qui !!!!		
-		Node metaittigNode = documentManager.getDocumentAsDom().createElementNS("http://www.ittig.it/provvedimenti/2.2", "ittig:meta");
-		normaNode.appendChild(metaittigNode);
-
-		Node notaittigNode = documentManager.getDocumentAsDom().createElementNS("http://www.ittig.it/provvedimenti/2.2", "ittig:nota");
-		metaittigNode.appendChild(notaittigNode); 
-		UtilDom.setAttributeValue(notaittigNode, "pre", preNota);
-		UtilDom.setAttributeValue(notaittigNode, "auto", autoNota);
-		UtilDom.setAttributeValue(notaittigNode, "post", postNota);
+		//Inserisco anche la nota qui !!!!
+		//cambio tutto!!
+//		Node metaittigNode = documentManager.getDocumentAsDom().createElementNS("http://www.ittig.it/provvedimenti/2.2", "ittig:meta");
+//		normaNode.appendChild(metaittigNode);
+//		Node notaittigNode = documentManager.getDocumentAsDom().createElementNS("http://www.ittig.it/provvedimenti/2.2", "ittig:nota");
+//		metaittigNode.appendChild(notaittigNode);
+		Node notaittigNode = documentManager.getDocumentAsDom().createElementNS("http://www.ittig.it/provvedimenti/2.2", "ittig:notavigenza");
+		normaNode.appendChild(notaittigNode);
+		
+		UtilDom.setIdAttribute(notaittigNode, "itt" + documentManager.getDocumentAsDom().getElementsByTagName("ittig:notavigenza").getLength());
+		
+		UtilDom.setAttributeValue(notaittigNode, "prima", preNota);
+		UtilDom.setAttributeValue(notaittigNode, "testo", autoNota);
+		UtilDom.setAttributeValue(notaittigNode, "dopo", postNota);
 		
 		
 	}
-	
+		
 	private void setNovellando(Node n, String novellando) {
 		/*	
 		 *  Voglio ottenere:
@@ -397,6 +395,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		}
 	}
 
+	
 	public void doUndo(String id, boolean cancellaTesto) {
 		Document doc = documentManager.getDocumentAsDom();
 		Element undo =null;
@@ -410,7 +409,8 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 			Node selezione = undo.getParentNode();
 			try {
 				tr = documentManager.beginEdit();
-				if (!cancellaTesto)
+				
+				if (!cancellaTesto && undo.getFirstChild().getNodeValue()!=null)
 					extractText.extractTextDOM(undo.getFirstChild(),0,undo.getFirstChild().getNodeValue().length());
 				selezione.removeChild(undo);
 				UtilDom.mergeTextNodes(selezione);		
@@ -454,6 +454,43 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 			}	
 		}
 	}
+	
+	public void doChange(String norma, String pos, Node disposizione) {
+		
+		Document doc = documentManager.getDocumentAsDom();
+		Node modifica = UtilDom.getElementsByTagName(doc, disposizione, "dsp:norma")[0];
+		if (!UtilDom.getAttributeValueAsString(modifica, "xlink:href").equals(norma))
+			UtilDom.setAttributeValue(modifica, "xlink:href", norma);
+		modifica = UtilDom.getElementsByTagName(doc, modifica, "dsp:pos")[0]; 
+		if (!UtilDom.getAttributeValueAsString(modifica, "xlink:href").equals(pos))
+			UtilDom.setAttributeValue(modifica, "xlink:href", norma+"#"+pos);		
+		
+		//devo aggiornare anche la NOTA !!!!!!!!!!!!!!!!!!!!!!!!!!
+		
+	}
+	
+	public void doErase(String idNovellando, String idNovella, Node disposizione) {
+
+		
+		
+		//devo ancora scindere il caso di partizione da quello di span!!
+		
+		
+		if (disposizione.getNodeName().equals("dsp:abrogazione"))
+			if (!"".equals(idNovellando))
+				doUndo(idNovellando, false);	
+		if (disposizione.getNodeName().equals("dsp:integrazione"))	
+			if (!"".equals(idNovella))
+				doUndo(idNovella, true);
+		if (disposizione.getNodeName().equals("dsp:sostituzione")) {	
+			if (!"".equals(idNovellando))
+				doUndo(idNovellando, null, null, null);
+			if (!"".equals(idNovella))
+				doUndo(idNovella, true);	
+		}
+		disposizione.getParentNode().removeChild(disposizione);
+	}
+	
 	
 	
 	//	non uso nulla da qui in poi (controllare)
@@ -683,5 +720,6 @@ public VigenzaEntity getVigenza(Node node, int start, int end) {
 
 		
 	}
+
 
 }
