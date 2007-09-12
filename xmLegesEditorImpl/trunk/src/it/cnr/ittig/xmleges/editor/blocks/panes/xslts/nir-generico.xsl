@@ -892,7 +892,7 @@
 					   		  <xsl:when test="preceding-sibling::node()[1][@iniziovigore=$fine_id]">
 					 		  </xsl:when>
 					 		  <xsl:otherwise>						 		  
-						 		<span style="color:#f00;"> [ ... ] <a href="#n{@id}" name="t{@id}"> <sup>[<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>]</sup></a></span>						 		
+						 		<span style="color:#f00;"> [ ... ] <a href="#n{@id}" name="t{@id}"> <sup>{<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>}</sup></a></span>						 		
  							  </xsl:otherwise>
 						   </xsl:choose>
 
@@ -962,7 +962,7 @@
 		<xsl:choose>
 			<!--  Si potrebbe anche inserire i COMMA che hanno figli -->		
 			<xsl:when test="(local-name()='articolo' or local-name()='capo' or local-name()='titolo' or local-name()='libro' or local-name()='parte' or local-name()='sezione')">
-				<div class="allineadx"><a href="#n{@id}" name="t{@id}"><sup>[<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>]</sup></a></div>
+				<div class="allineadx"><a href="#n{@id}" name="t{@id}"><sup>{<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>}</sup></a></div>
 			</xsl:when>
 			<xsl:when test="local-name()='rubrica'">		<!--	si prende l'id dal padre	-->
 				<xsl:element name="a">
@@ -972,7 +972,7 @@
 				</xsl:element>
 			</xsl:when>
 			<xsl:otherwise>
-				<a href="#n{@id}" name="t{@id}"><sup>[<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>]</sup></a>
+				<a href="#n{@id}" name="t{@id}"><sup>{<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>}</sup></a>
 			</xsl:otherwise>
 		</xsl:choose>									
    </xsl:template>
