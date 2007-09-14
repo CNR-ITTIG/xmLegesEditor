@@ -249,10 +249,12 @@ public class AggiornaIdFrozenLaw {
 		NodeList note = doc.getElementsByTagName("nota");
 		String num, value, prefix;
 
-		for (int i = 0; i < ndr.getLength(); i++) {
+		//for (int i = 0; i < ndr.getLength(); i++) {	//Non è detto abbiano la stessa cardinalità
+		for (int i = 0; i < note.getLength(); i++) {
 			
 			//prefix = getNdrNumPrefix(UtilDom.getAttributeValueAsString((Node) ndr.item(i), "num")); 
 			//num = prefix + (ndrId.indexOf(UtilDom.getAttributeValueAsString((Node) ndr.item(i), "num")) + 1);
+			
 			
 			prefix = getNdrNumPrefix(UtilDom.getAttributeValueAsString((Node) note.item(i), "id")); 
 			num = UtilDom.getAttributeValueAsString((Node) note.item(i), "id");

@@ -262,8 +262,9 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 		// Aggiungere altri nomi di IDRef quando ci saranno
 		if (attrName.equals("fonte"))
 			return true;
-		else
-			return false;
+		if (attrName.equals("xlink:href"))
+			return true;
+		return false;
 	}
 
 	/*
