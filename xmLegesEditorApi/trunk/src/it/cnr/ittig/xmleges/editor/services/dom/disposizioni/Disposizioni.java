@@ -53,6 +53,11 @@ public interface Disposizioni extends Service {
 	public Node makeSpan(Node node, int posizione, VigenzaEntity vigenza, String testo);
 	
 	/**
+	 * Funzione per l'inserimento della nota ndr (per la vigenza)
+	*/
+	public void makeNotaVigenza(Node node);
+	
+	/**
 	 * Funzione per l'abilitazione dell'azione di assegnazione della vigenza
 	 * 
 	 * @param node nodo sul cui testo si vuole applicare la vigenza
@@ -125,5 +130,5 @@ public interface Disposizioni extends Service {
 	/**
 	 * Modifica vigenza
 	 */
-	public void doChange(String norma, String pos, Node disposizione);
+	public void doChange(String norma, String pos, Node disposizione, String prenota, String autonota, String postnota, Node novellando, String status);
 }
