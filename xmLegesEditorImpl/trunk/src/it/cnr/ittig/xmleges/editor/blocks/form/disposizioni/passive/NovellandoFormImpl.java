@@ -13,15 +13,12 @@ import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.FormClosedListener;
-import it.cnr.ittig.xmleges.core.services.form.FormException;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.disposizioni.Disposizioni;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
-import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 import it.cnr.ittig.xmleges.editor.services.form.disposizioni.passive.NovellandoForm;
 import it.cnr.ittig.xmleges.editor.services.form.disposizioni.passive.DispPassiveForm;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
@@ -203,6 +200,7 @@ public class NovellandoFormImpl implements NovellandoForm, EventManagerListener,
 				String finevigore = UtilDom.getAttributeValueAsString(activeNode, "finevigore");
 				String statusvigore = UtilDom.getAttributeValueAsString(activeNode, "status");
 				n = domDisposizioni.setVigenza(activeNode, activeNode.getNodeValue(), start, end, disposizioni.makeVigenza(activeNode,"novellando",(String) vigenzaStatus.getSelectedItem()));
+				domDisposizioni.makeNotaVigenza(n);
 				idSelezionato = UtilDom.getAttributeValueAsString(n, "id");
 				disposizioni.setNovellando(idSelezionato, iniziovigore, finevigore, statusvigore, false);
 				disposizioni.setPosdisposizione(n);
@@ -218,6 +216,7 @@ public class NovellandoFormImpl implements NovellandoForm, EventManagerListener,
 			}
 			else  {//creo un nuovo span
 				n = domDisposizioni.setVigenza(activeNode, "", start, end, disposizioni.makeVigenza(activeNode,"novellando",(String) vigenzaStatus.getSelectedItem()));
+				domDisposizioni.makeNotaVigenza(n);
 				idSelezionato = UtilDom.getAttributeValueAsString(n, "id");
 				disposizioni.setNovellando(idSelezionato, "", "", "", true);
 				disposizioni.setPosdisposizione(n);

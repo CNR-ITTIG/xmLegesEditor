@@ -28,12 +28,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.StringTokenizer;
 
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * <h1>Implementazione del servizio
@@ -81,6 +84,12 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 	JButton sceltadove;
 	JTextField dove;
 	JLabel modificaelimina;
+	JLabel statustesto;
+	JComboBox vigenzaStatus;
+	JTextArea prenota;
+	JTextArea autonota;
+	JTextArea postnota;
+	
 	PartizioniForm partizioniForm;
 	Node activeNode;
 	VigenzaEntity vigenzaEntity;
@@ -100,12 +109,21 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 	Document  doc;
 	Node disposizione;
 	Node norma;
+	Node ittigNota;
 	Node pos;
+	Node novellando;
 	String id;
 	String idNovella;
 	String idNovellando;
 	String dispCorrente;
 	String partCorrente;
+	String preCorrente;
+	String autoCorrente;
+	String postCorrente;
+	String statusCorrente;
+	String urnTestoCorrente;
+	String partTestoCorrente;
+	String vigenzaTestoCorrente;
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -143,6 +161,15 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 		dove = (JTextField) form.getComponentByName("editor.disposizioni.passive.dove");
 		sceltadove = (JButton) form.getComponentByName("editor.disposizioni.passive.sceltadove");
 		sceltadove.addActionListener(this);
+		statustesto = (JLabel) form.getComponentByName("editor.disposizioni.passive.statustesto");
+		vigenzaStatus = (JComboBox) form.getComponentByName("editor.disposizioni.passive.status");
+		vigenzaStatus.addItem("abrogato");
+		vigenzaStatus.addItem("omissis");
+		vigenzaStatus.addItem("annullato");
+		vigenzaStatus.addItem("sospeso");
+		prenota = (JTextArea) form.getComponentByName("editor.disposizioni.passive.prenota");
+		autonota = (JTextArea) form.getComponentByName("editor.disposizioni.passive.autonota");
+		postnota = (JTextArea) form.getComponentByName("editor.disposizioni.passive.postnota");		
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -192,28 +219,37 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 			form.close();
 		}	
 		if (e.getSource() == modifica)
-			if (dispCorrente.equals(evento.getText()) && partCorrente.equals(dove.getText()))
+			if (dispCorrente.equals(evento.getText()) && 
+				partCorrente.equals(dove.getText()) &&
+				preCorrente.equals(prenota.getText()) &&
+				postCorrente.equals(postnota.getText()) &&
+				(!vigenzaStatus.isEnabled() || statusCorrente.equals(vigenzaStatus.getSelectedItem())))
 					 utilmsg.msgError("Non hai effettuato nessuna modifica");
 			else {
-				//ricalcolo nota automatica		
-//				String vecchiaNota = UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(doc, disposizione, "ittig:notavigenza")[0],"testo");
-//				String vecchiaPartizione = vecchiaNota.substring(, endIndex)
-//				String urn = evento.getText();
-//				if (dispCorrente.equals(evento.getText()))
-//				
-//				try {
-//					urn = nirUtilUrn.getFormaTestuale(new Urn(urn));
-//					if (!partizione.equals("")) 
-//						urn = urn + " " + partizione;
-//				} catch (Exception ex) {}
-//				if (tipoDisposizione.equalsIgnoreCase("integrazione"))
-//					autoNota = "Integrato da: " + urn + ".\nIn vigore dal " + UtilDate.normToString(eventovigore.getData());
-//				else
-//					autoNota = status + " da: " + urn + ".\nIn vigore dal " + UtilDate.normToString(eventoriginale.getData()) + " al " + UtilDate.normToString(eventovigore.getData());
-				
-				
-				
-				domDisposizioni.doChange(evento.getText(),dove.getText(),disposizione);
+				//ricalcolo nota automatica
+				String autoNota;
+				String urn = urnTestoCorrente;
+				String vigore = vigenzaTestoCorrente;
+				if (!dispCorrente.equals(evento.getText())) {
+					if (tipoDisposizione.equalsIgnoreCase("INTEGRAZIONE"))
+						vigore = "In vigore dal " + UtilDate.normToString(eventovigore.getData());
+					else
+						vigore = "In vigore dal " + UtilDate.normToString(eventoriginale.getData()) + " al " + UtilDate.normToString(eventovigore.getData());
+					urn =  evento.getText();
+					try {
+						urn = nirUtilUrn.getFormaTestuale(new Urn(urn));
+					} catch (Exception ex) {}
+				}
+				if (!partCorrente.equals(dove.getText()))
+					urn = urn + " " + partizione + ".\n";
+				else	
+					urn = urn + partTestoCorrente;
+				if (tipoDisposizione.equalsIgnoreCase("INTEGRAZIONE"))
+					autoNota = "Integrato da: " + urn + vigore;
+				else
+					autoNota = (String) vigenzaStatus.getSelectedItem() + " da: " + urn + vigore;
+						
+				domDisposizioni.doChange(evento.getText(),dove.getText(),disposizione,prenota.getText(),autoNota,postnota.getText(),novellando, (String) vigenzaStatus.getSelectedItem());
 				form.close();
 			}	
 	}
@@ -228,6 +264,7 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 		if (disposizione!=null) {
 			norma = UtilDom.getElementsByTagName(doc, disposizione, "dsp:norma")[0];
 			pos = UtilDom.getElementsByTagName(doc, norma, "dsp:pos")[0];
+			ittigNota = UtilDom.getElementsByTagName(doc, norma, "ittig:notavigenza")[0];
 			dispCorrente=UtilDom.getAttributeValueAsString(norma, "xlink:href");
 			partCorrente=UtilDom.getAttributeValueAsString(pos, "xlink:href");
 			if (partCorrente.endsWith(dispCorrente))
@@ -237,10 +274,47 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 			modificaelimina.setText("Hai selezionato una " + tipoDisposizione + ".");
 			evento.setText(dispCorrente);
 			dove.setText(partCorrente);
-			form.setSize(400, 270);
+			
+			preCorrente = UtilDom.getAttributeValueAsString(ittigNota, "prima");
+			autoCorrente = UtilDom.getAttributeValueAsString(ittigNota, "auto");
+			postCorrente = UtilDom.getAttributeValueAsString(ittigNota, "dopo");
+			
+			prenota.setText(preCorrente);
+			autonota.setText(autoCorrente);
+			postnota.setText(postCorrente);
+			vigenzaStatus.setEnabled(true);
+			statusCorrente = "";
+			if (!idNovellando.equals("") && UtilDom.getAttributeValueAsString(activeNode,"status")==null)
+				novellando = ricercaNovellando(activeNode.getParentNode(), idNovellando);
+			else
+				novellando = activeNode;
+			if (!idNovellando.equals("") && UtilDom.getAttributeValueAsString(novellando,"status")!=null) {
+				statusCorrente = UtilDom.getAttributeValueAsString(novellando,"status");
+				vigenzaStatus.setSelectedItem(statusCorrente);
+			}	
+			else
+				vigenzaStatus.setEnabled(false);
+			
+			try {
+				urnTestoCorrente = nirUtilUrn.getFormaTestuale(new Urn(dispCorrente));
+			} catch (Exception ex) {
+				urnTestoCorrente="";
+			}
+			vigenzaTestoCorrente = autoCorrente.substring(autoCorrente.indexOf("In vigore"), autoCorrente.length());
+			partTestoCorrente = autoCorrente.substring(autoCorrente.indexOf(urnTestoCorrente)+urnTestoCorrente.length(),autoCorrente.indexOf(vigenzaTestoCorrente));
+
+			form.setSize(400, 450);
 			form.showDialog();
 		}
 		else utilmsg.msgError("Errore nei metadati");
+	}
+	
+	private Node ricercaNovellando(Node padre, String idNovellando) {
+		NodeList figli = padre.getChildNodes(); 
+		for (int i=0; i< figli.getLength(); i++)
+			if (idNovellando.equals(UtilDom.getAttributeValueAsString(figli.item(i), "id")))
+				return figli.item(i);
+		return padre;
 	}
 	
 	private Node ricercaDisposizione(Node cerca) {
