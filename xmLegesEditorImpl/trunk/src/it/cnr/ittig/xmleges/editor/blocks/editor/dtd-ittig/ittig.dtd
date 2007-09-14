@@ -2,5 +2,5 @@
 <!ENTITY % ittigNS  "xmlns:ittig CDATA #FIXED 'http://www.ittig.cnr.it/provvedimenti/2.2'" >
 
 <!ELEMENT ittig:notavigenza EMPTY >
-<!ATTLIST ittig:notavigenza %ittigNS; %idreq; prima %anystring; #REQUIRED testo %anystring; #REQUIRED dopo %anystring; #REQUIRED>
+<!ATTLIST ittig:notavigenza %ittigNS; %idreq; prima %anystring; #REQUIRED auto %anystring; #REQUIRED dopo %anystring; #REQUIRED>
 
