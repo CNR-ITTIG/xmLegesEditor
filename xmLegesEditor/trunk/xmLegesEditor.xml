@@ -320,7 +320,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                         
                         
                         
-                        <!--	check action="view.pane.editor.panes.ndv" /	-->
+                        <check action="view.pane.editor.panes.ndv" />
                         
                         
                         
@@ -387,7 +387,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                         <item action="editor.disposizioni.passive" />
                         
 
-						<!--	item action="editor.disposizioni.rimuovipassive" /	-->
+						<item action="editor.disposizioni.rimuovipassive" />
                         
                         
                         <item action="editor.annessi.annesso" />
@@ -554,7 +554,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <item action="editor.disposizioni.passive" />
                     
 
-					<!--	item action="editor.disposizioni.rimuovipassive" /	-->
+					<item action="editor.disposizioni.rimuovipassive" />
 
 
                     
@@ -1149,7 +1149,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 				<pane name="panes.segnalazioni"				where="bottom-center"  	index="7" />
 
 				
-				<!--	pane name="editor.panes.ndv" 				where="bottom-center"  	index="8" /	-->
+				<pane name="editor.panes.ndv" 				where="bottom-center"  	index="8" />
 
 
             </panes>
@@ -1219,7 +1219,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
       
       
       
-		    <!--	xslt   name="ndv"					file="nir-panes-view-ndv-1.0.xsl"			/	-->
+		    <xslt   name="ndv"					file="nir-panes-view-ndv-1.0.xsl"			/>
       
       
 		 	
@@ -1261,9 +1261,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 
 
-            <!--	pane name="editor.panes.ndv">
+            <pane name="editor.panes.ndv">
                 <xslt name="ndv"/>
-            </pane	-->
+            </pane>
 
 
 
