@@ -14,6 +14,7 @@ import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
+import it.cnr.ittig.xmleges.core.util.xml.UtilXml;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
 import it.cnr.ittig.xmleges.editor.services.dom.partizioni.Partizioni;
@@ -191,10 +192,8 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		UtilDom.setIdAttribute(notaittigNode, "itt" + documentManager.getDocumentAsDom().getElementsByTagName("ittig:notavigenza").getLength());
 		
 		UtilDom.setAttributeValue(notaittigNode, "prima", preNota);
-		UtilDom.setAttributeValue(notaittigNode, "testo", autoNota);
+		UtilDom.setAttributeValue(notaittigNode, "auto", autoNota);
 		UtilDom.setAttributeValue(notaittigNode, "dopo", postNota);
-		
-		
 	}
 		
 	private void setNovellando(Node n, String novellando) {
@@ -237,6 +236,19 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		novellaNode.appendChild(posNode);
 	}
 	
+	public void makeNotaVigenza(Node node) {
+		int numeroNota = 1+documentManager.getDocumentAsDom().getElementsByTagName("ittig:notavigenza").getLength();
+		Element ndr = documentManager.getDocumentAsDom().createElement("ndr");
+		UtilDom.setAttributeValue(ndr, "num", "itt"+numeroNota);
+		UtilDom.setAttributeValue(ndr, "valore", ""+numeroNota);
+		UtilDom.setTextNode(ndr, "{" + numeroNota + "}");
+		if (node.getNodeName().equals("h:span"))
+			node.appendChild(ndr);
+		else
+			UtilDom.findRecursiveChild(node,"num").appendChild(ndr);
+	}
+	
+	
 	public Node makePartition(Node container, boolean prima, VigenzaEntity vigenza) {
 		Node n;		
 		if (nirUtilDom.isContainer(container))
@@ -256,6 +268,8 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		catch (DOMException e) {
 			logger.error("Errore inserimento nuova partizione ( " + container.getLocalName() + " )");
 		}
+		
+		makeNotaVigenza(n);
 		return n;
 	}
 	
@@ -273,8 +287,13 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 			span = utilRulesManager.encloseTextInTag(node, posizione, posizione,"h:span","h");
 		if (!testo.trim().equals(""))
 			UtilDom.setTextNode(span,testo);
-		return setVigenza(span, "", -1, -1, vigenza);
+		span = setVigenza(span, "", -1, -1, vigenza);
 		
+		
+		makeNotaVigenza(span);
+		
+		
+		return span;
 	}
 
 	public Node setVigenza(Node node, String selectedText, int start, int end, VigenzaEntity vigenza) {
@@ -284,6 +303,11 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 			if ((ret=setDOMVigenza(node, selectedText, start, end, vigenza))!=null) {
 				rinumerazione.aggiorna(documentManager.getDocumentAsDom());
 				documentManager.commitEdit(tr);
+				
+				
+				//makeNotaVigenza(ret);
+				
+				
 			} else
 				documentManager.rollbackEdit(tr);
 		} catch (DocumentManagerException ex) {
@@ -455,8 +479,8 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		}
 	}
 	
-	public void doChange(String norma, String pos, Node disposizione) {
-		
+	public void doChange(String norma, String pos, Node disposizione, String prenota, String autonota, String postnota, Node novellando, String status) {
+				
 		Document doc = documentManager.getDocumentAsDom();
 		Node modifica = UtilDom.getElementsByTagName(doc, disposizione, "dsp:norma")[0];
 		if (!UtilDom.getAttributeValueAsString(modifica, "xlink:href").equals(norma))
@@ -464,18 +488,19 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		modifica = UtilDom.getElementsByTagName(doc, modifica, "dsp:pos")[0]; 
 		if (!UtilDom.getAttributeValueAsString(modifica, "xlink:href").equals(pos))
 			UtilDom.setAttributeValue(modifica, "xlink:href", norma+"#"+pos);		
-		
-		//devo aggiornare anche la NOTA !!!!!!!!!!!!!!!!!!!!!!!!!!
-		
+		modifica = UtilDom.getElementsByTagName(doc, modifica.getParentNode(), "ittig:notavigenza")[0];
+		if (!UtilDom.getAttributeValueAsString(modifica, "prima").equals(prenota))
+			UtilDom.setAttributeValue(modifica, "prima", prenota);
+		if (!UtilDom.getAttributeValueAsString(modifica, "auto").equals(autonota))
+			UtilDom.setAttributeValue(modifica, "auto", autonota);
+		if (!UtilDom.getAttributeValueAsString(modifica, "dopo").equals(postnota))
+			UtilDom.setAttributeValue(modifica, "dopo", postnota);
+		if (!UtilDom.getAttributeValueAsString(novellando, "status").equals(status))
+			UtilDom.setAttributeValue(novellando, "status", status);
 	}
 	
 	public void doErase(String idNovellando, String idNovella, Node disposizione) {
 
-		
-		
-		//devo ancora scindere il caso di partizione da quello di span!!
-		
-		
 		if (disposizione.getNodeName().equals("dsp:abrogazione"))
 			if (!"".equals(idNovellando))
 				doUndo(idNovellando, false);	
@@ -488,7 +513,30 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 			if (!"".equals(idNovella))
 				doUndo(idNovella, true);	
 		}
+		
+		int numeroNotaEliminata = Integer.parseInt(UtilDom.getAttributeValueAsString(UtilDom.findRecursiveChild(disposizione, "ittig:notavigenza"), "id").substring(3))-1;
 		disposizione.getParentNode().removeChild(disposizione);
+	
+		NodeList noteMeta = documentManager.getDocumentAsDom().getElementsByTagName("ittig:notavigenza");
+		for(int i=0; i<noteMeta.getLength();i++) {
+			int numero = Integer.parseInt(UtilDom.getAttributeValueAsString(noteMeta.item(i), "id").substring(3))-1;
+			if (numero>numeroNotaEliminata)
+				UtilDom.setAttributeValue(noteMeta.item(i), "id", "itt"+numero);
+		}
+		NodeList noteTesto = documentManager.getDocumentAsDom().getElementsByTagName("ndr");
+		for(int i=0; i<noteTesto.getLength();i++) {
+			String valoreAttributo = noteTesto.item(i).getAttributes().getNamedItem("num").getNodeValue();
+			if (valoreAttributo.length()>3 && valoreAttributo.substring(0,3).equals("itt")) {
+				int numero = Integer.parseInt(valoreAttributo.substring(3))-1;
+				if (numero>numeroNotaEliminata) {
+					UtilDom.setAttributeValue(noteTesto.item(i), "num", "itt"+numero);
+					UtilDom.setAttributeValue(noteTesto.item(i), "valore", ""+numero);
+					UtilDom.setTextNode(noteTesto.item(i), "{" + numero + "}");
+				}	
+			}	
+		}
+		
+
 	}
 	
 	
