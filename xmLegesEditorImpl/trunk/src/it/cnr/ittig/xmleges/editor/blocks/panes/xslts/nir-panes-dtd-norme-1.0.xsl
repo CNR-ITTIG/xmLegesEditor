@@ -535,6 +535,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 					    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 					        <xsl:apply-templates />
 					    </xsl:element>
+	<!--				    
 			<span>
 				<em>
 				  <font size="2">
@@ -557,6 +558,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 				   </font>
 				</em>
 			</span>
+	-->		
 					</font>
 				</xsl:when>
 				<xsl:otherwise>
@@ -565,6 +567,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 					    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 					        <xsl:apply-templates />
 					    </xsl:element>
+	<!--
 			<span>
 				<em>
 				  <font size="2">
@@ -587,6 +590,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 				   </font>
 				</em>
 			</span>
+	-->		
 				    </div>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -600,6 +604,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 					    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 					        <xsl:apply-templates />
 					    </xsl:element>
+	<!--					    
 			<span>
 				<em>
 				  <font size="2">
@@ -609,6 +614,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 				  </font>
 				</em>
 			</span>
+	-->			
 				    </font>
 				</xsl:when>
 				<xsl:otherwise>
@@ -617,6 +623,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 					    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 					        <xsl:apply-templates />
 					    </xsl:element>
+	<!--					    
 			<span>
 				<em>
 				  <font size="2">
@@ -626,6 +633,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 				  </font>
 				</em>
 			</span>
+	-->			
 				    </div>
 				</xsl:otherwise>
 			</xsl:choose>
