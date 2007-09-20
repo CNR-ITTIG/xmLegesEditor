@@ -147,7 +147,7 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 		avanti.addActionListener(this);
 		indietro.addActionListener(this);
 		dopo.setSelected(true);
-		form.setSize(250, 300);
+		form.setSize(270, 300);
 	}
 
 	public void manageEvent(EventObject event) {

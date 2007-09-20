@@ -153,7 +153,7 @@ public class NovellandoFormImpl implements NovellandoForm, EventManagerListener,
 		vigenzaStatus.addItem("sospeso");
 		avanti.addActionListener(this);
 		indietro.addActionListener(this);
-		form.setSize(250, 350);
+		form.setSize(290, 350);
 	}
 
 	public void manageEvent(EventObject event) {

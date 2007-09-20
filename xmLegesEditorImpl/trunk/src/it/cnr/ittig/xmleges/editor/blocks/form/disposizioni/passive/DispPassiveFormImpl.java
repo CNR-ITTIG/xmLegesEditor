@@ -284,6 +284,7 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 		idNovella="";
 		if (cancellaCampi) {
 			evento.setText("");
+			data.setText("");
 			dove.setText("");
 			partizione="";
 			implicita.setSelected(false);
@@ -292,7 +293,7 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 		activeNode = null;
 		operazioneIniziale = NO_OPERAZIONE;
 		operazioneProssima = NO_OPERAZIONE;
-		form.setSize(400, 280);
+		form.setSize(420, 280);
 		form.showDialog(false);
 	}
 
