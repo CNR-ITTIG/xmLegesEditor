@@ -191,9 +191,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		
 		UtilDom.setIdAttribute(notaittigNode, "itt" + documentManager.getDocumentAsDom().getElementsByTagName("ittig:notavigenza").getLength());
 		
-		UtilDom.setAttributeValue(notaittigNode, "prima", preNota);
 		UtilDom.setAttributeValue(notaittigNode, "auto", autoNota);
-		UtilDom.setAttributeValue(notaittigNode, "dopo", postNota);
 	}
 		
 	private void setNovellando(Node n, String novellando) {
@@ -269,7 +267,11 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 			logger.error("Errore inserimento nuova partizione ( " + container.getLocalName() + " )");
 		}
 		
-		makeNotaVigenza(n);
+		
+		//questo inseriva una ndr come notaDIvigenza
+		//makeNotaVigenza(n);
+		
+		
 		return n;
 	}
 	
@@ -290,7 +292,8 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		span = setVigenza(span, "", -1, -1, vigenza);
 		
 		
-		makeNotaVigenza(span);
+		//questo inseriva una ndr come notaDIvigenza
+		//makeNotaVigenza(span);
 		
 		
 		return span;
@@ -479,9 +482,17 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		}
 	}
 	
-	public void doChange(String norma, String pos, Node disposizione, String prenota, String autonota, String postnota, Node novellando, String status) {
-				
+	public void doChange(String norma, String pos, Node disposizione, String autonota, boolean implicita, Node novellando, String status) {		
+		
+		
 		Document doc = documentManager.getDocumentAsDom();
+
+		
+		if (implicita && UtilDom.getAttributeValueAsString(disposizione, "implicita").equalsIgnoreCase("no"))
+			UtilDom.setAttributeValue(disposizione, "implicita","si");
+		else
+			if (!implicita && UtilDom.getAttributeValueAsString(disposizione, "implicita").equalsIgnoreCase("si"))
+				UtilDom.setAttributeValue(disposizione, "implicita","no");
 		Node modifica = UtilDom.getElementsByTagName(doc, disposizione, "dsp:norma")[0];
 		if (!UtilDom.getAttributeValueAsString(modifica, "xlink:href").equals(norma))
 			UtilDom.setAttributeValue(modifica, "xlink:href", norma);
@@ -489,17 +500,14 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		if (!UtilDom.getAttributeValueAsString(modifica, "xlink:href").equals(pos))
 			UtilDom.setAttributeValue(modifica, "xlink:href", norma+"#"+pos);		
 		modifica = UtilDom.getElementsByTagName(doc, modifica.getParentNode(), "ittig:notavigenza")[0];
-		if (!UtilDom.getAttributeValueAsString(modifica, "prima").equals(prenota))
-			UtilDom.setAttributeValue(modifica, "prima", prenota);
 		if (!UtilDom.getAttributeValueAsString(modifica, "auto").equals(autonota))
 			UtilDom.setAttributeValue(modifica, "auto", autonota);
-		if (!UtilDom.getAttributeValueAsString(modifica, "dopo").equals(postnota))
-			UtilDom.setAttributeValue(modifica, "dopo", postnota);
-		if (!UtilDom.getAttributeValueAsString(novellando, "status").equals(status))
-			UtilDom.setAttributeValue(novellando, "status", status);
+		if (UtilDom.getAttributeValueAsString(novellando, "status")!=null)
+			if (!UtilDom.getAttributeValueAsString(novellando, "status").equals(status))
+				UtilDom.setAttributeValue(novellando, "status", status);
 	}
 	
-	public void doErase(String idNovellando, String idNovella, Node disposizione) {
+	public void doErase(String idNovellando, String idNovella, Node disposizione, Node novellando) {
 
 		if (disposizione.getNodeName().equals("dsp:abrogazione"))
 			if (!"".equals(idNovellando))
@@ -509,9 +517,15 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 				doUndo(idNovella, true);
 		if (disposizione.getNodeName().equals("dsp:sostituzione")) {	
 			if (!"".equals(idNovellando))
-				doUndo(idNovellando, null, null, null);
+				if (novellando.getNodeName().equals("h:span"))
+					doUndo(idNovellando, false);
+				else
+					doUndo(idNovellando, null, null, null);
 			if (!"".equals(idNovella))
 				doUndo(idNovella, true);	
+			Node ndr = UtilDom.findRecursiveChild(novellando,"ndr");
+			if (ndr!=null)
+				ndr.getParentNode().removeChild(ndr);
 		}
 		
 		int numeroNotaEliminata = Integer.parseInt(UtilDom.getAttributeValueAsString(UtilDom.findRecursiveChild(disposizione, "ittig:notavigenza"), "id").substring(3))-1;
@@ -523,20 +537,6 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 			if (numero>numeroNotaEliminata)
 				UtilDom.setAttributeValue(noteMeta.item(i), "id", "itt"+numero);
 		}
-		NodeList noteTesto = documentManager.getDocumentAsDom().getElementsByTagName("ndr");
-		for(int i=0; i<noteTesto.getLength();i++) {
-			String valoreAttributo = noteTesto.item(i).getAttributes().getNamedItem("num").getNodeValue();
-			if (valoreAttributo.length()>3 && valoreAttributo.substring(0,3).equals("itt")) {
-				int numero = Integer.parseInt(valoreAttributo.substring(3))-1;
-				if (numero>numeroNotaEliminata) {
-					UtilDom.setAttributeValue(noteTesto.item(i), "num", "itt"+numero);
-					UtilDom.setAttributeValue(noteTesto.item(i), "valore", ""+numero);
-					UtilDom.setTextNode(noteTesto.item(i), "{" + numero + "}");
-				}	
-			}	
-		}
-		
-
 	}
 	
 	
