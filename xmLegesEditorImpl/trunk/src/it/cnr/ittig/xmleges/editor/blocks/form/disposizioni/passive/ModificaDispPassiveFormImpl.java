@@ -28,10 +28,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.StringTokenizer;
 
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JButton;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import org.w3c.dom.Document;
@@ -86,10 +86,8 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 	JLabel modificaelimina;
 	JLabel statustesto;
 	JComboBox vigenzaStatus;
-	JTextArea prenota;
-	JTextArea autonota;
-	JTextArea postnota;
-	
+	JLabel implicitatesto;
+	JCheckBox implicita; 
 	PartizioniForm partizioniForm;
 	Node activeNode;
 	VigenzaEntity vigenzaEntity;
@@ -117,13 +115,14 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 	String idNovellando;
 	String dispCorrente;
 	String partCorrente;
-	String preCorrente;
 	String autoCorrente;
-	String postCorrente;
 	String statusCorrente;
 	String urnTestoCorrente;
 	String partTestoCorrente;
 	String vigenzaTestoCorrente;
+	boolean implicitaCorrente;
+	
+	JTextField data;
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -167,9 +166,9 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 		vigenzaStatus.addItem("omissis");
 		vigenzaStatus.addItem("annullato");
 		vigenzaStatus.addItem("sospeso");
-		prenota = (JTextArea) form.getComponentByName("editor.disposizioni.passive.prenota");
-		autonota = (JTextArea) form.getComponentByName("editor.disposizioni.passive.autonota");
-		postnota = (JTextArea) form.getComponentByName("editor.disposizioni.passive.postnota");		
+		implicitatesto = (JLabel) form.getComponentByName("editor.disposizioni.passive.implicitatesto");
+		implicita = (JCheckBox)  form.getComponentByName("editor.disposizioni.passive.implicita");
+		data = (JTextField) form.getComponentByName("editor.disposizioni.passive.data");
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -183,12 +182,15 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 				if (eventoselezionato != -1) {	
 					eventoriginale = eventiOnDom[0];
 					eventovigore=ciclodivitaForm.getEventi()[eventoselezionato];
-					if (eventovigore.getFonte().getTagTipoRelazione().equalsIgnoreCase("passiva"))
-						evento.setText(eventovigore.getFonte().getLink());	
+					if (eventovigore.getFonte().getTagTipoRelazione().equalsIgnoreCase("passiva")) {
+						evento.setText(eventovigore.getFonte().getLink());
+						data.setText(UtilDate.normToString(eventovigore.getData()));
+					}	
 					else {
 						evento.setText(eventovigore.getFonte().getLink());
 						utilmsg.msgInfo("Dovresti selezionare un evento passivo");
 						evento.setText("");
+						data.setText("");
 					}	
 				}	
 				Evento[] newEventi = ciclodivitaForm.getEventi();
@@ -215,14 +217,13 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 			}	
 		}
 		if (e.getSource() == elimina) {
-			domDisposizioni.doErase(idNovellando,idNovella,disposizione);
+			domDisposizioni.doErase(idNovellando,idNovella,disposizione,novellando);
 			form.close();
 		}	
 		if (e.getSource() == modifica)
 			if (dispCorrente.equals(evento.getText()) && 
 				partCorrente.equals(dove.getText()) &&
-				preCorrente.equals(prenota.getText()) &&
-				postCorrente.equals(postnota.getText()) &&
+				implicita.isSelected()==implicitaCorrente &&
 				(!vigenzaStatus.isEnabled() || statusCorrente.equals(vigenzaStatus.getSelectedItem())))
 					 utilmsg.msgError("Non hai effettuato nessuna modifica");
 			else {
@@ -245,11 +246,13 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 				else	
 					urn = urn + partTestoCorrente;
 				if (tipoDisposizione.equalsIgnoreCase("INTEGRAZIONE"))
-					autoNota = "Integrato da: " + urn + vigore;
+					//autoNota = "Integrato da: " + urn + vigore;
+					autoNota = urn + vigore;
 				else
-					autoNota = (String) vigenzaStatus.getSelectedItem() + " da: " + urn + vigore;
+					//autoNota = (String) vigenzaStatus.getSelectedItem() + " da: " + urn + vigore;
+					autoNota = urn + vigore;
 						
-				domDisposizioni.doChange(evento.getText(),dove.getText(),disposizione,prenota.getText(),autoNota,postnota.getText(),novellando, (String) vigenzaStatus.getSelectedItem());
+				domDisposizioni.doChange(evento.getText(),dove.getText(),disposizione,autoNota, implicita.isSelected(),novellando, (String) vigenzaStatus.getSelectedItem());
 				form.close();
 			}	
 	}
@@ -260,53 +263,68 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 		id = UtilDom.getAttributeValueAsString(activeNode,"id");
 		
 		doc =documentManager.getDocumentAsDom();
-		disposizione = ricercaDisposizione(UtilDom.getElementsByTagName(doc, UtilDom.findParentByName(activeNode,"NIR"), "modifichepassive")[0].getFirstChild());
-		if (disposizione!=null) {
-			norma = UtilDom.getElementsByTagName(doc, disposizione, "dsp:norma")[0];
-			pos = UtilDom.getElementsByTagName(doc, norma, "dsp:pos")[0];
-			ittigNota = UtilDom.getElementsByTagName(doc, norma, "ittig:notavigenza")[0];
-			dispCorrente=UtilDom.getAttributeValueAsString(norma, "xlink:href");
-			partCorrente=UtilDom.getAttributeValueAsString(pos, "xlink:href");
-			if (partCorrente.endsWith(dispCorrente))
-				partCorrente="";
-			else
-				partCorrente=partCorrente.substring(1+dispCorrente.length());		
-			modificaelimina.setText("Hai selezionato una " + tipoDisposizione + ".");
-			evento.setText(dispCorrente);
-			dove.setText(partCorrente);
-			
-			preCorrente = UtilDom.getAttributeValueAsString(ittigNota, "prima");
-			autoCorrente = UtilDom.getAttributeValueAsString(ittigNota, "auto");
-			postCorrente = UtilDom.getAttributeValueAsString(ittigNota, "dopo");
-			
-			prenota.setText(preCorrente);
-			autonota.setText(autoCorrente);
-			postnota.setText(postCorrente);
-			vigenzaStatus.setEnabled(true);
-			statusCorrente = "";
-			if (!idNovellando.equals("") && UtilDom.getAttributeValueAsString(activeNode,"status")==null)
-				novellando = ricercaNovellando(activeNode.getParentNode(), idNovellando);
-			else
-				novellando = activeNode;
-			if (!idNovellando.equals("") && UtilDom.getAttributeValueAsString(novellando,"status")!=null) {
-				statusCorrente = UtilDom.getAttributeValueAsString(novellando,"status");
-				vigenzaStatus.setSelectedItem(statusCorrente);
-			}	
-			else
-				vigenzaStatus.setEnabled(false);
-			
-			try {
-				urnTestoCorrente = nirUtilUrn.getFormaTestuale(new Urn(dispCorrente));
-			} catch (Exception ex) {
-				urnTestoCorrente="";
-			}
-			vigenzaTestoCorrente = autoCorrente.substring(autoCorrente.indexOf("In vigore"), autoCorrente.length());
-			partTestoCorrente = autoCorrente.substring(autoCorrente.indexOf(urnTestoCorrente)+urnTestoCorrente.length(),autoCorrente.indexOf(vigenzaTestoCorrente));
+		
+		if (UtilDom.getElementsByTagName(doc, UtilDom.findParentByName(activeNode,"NIR"), "modifichepassive").length>0) {
+			disposizione = ricercaDisposizione(UtilDom.getElementsByTagName(doc, UtilDom.findParentByName(activeNode,"NIR"), "modifichepassive")[0].getFirstChild());
+			if (disposizione!=null) {
+				implicitaCorrente = UtilDom.getAttributeValueAsString(disposizione, "implicita").equalsIgnoreCase("si");
+				norma = UtilDom.getElementsByTagName(doc, disposizione, "dsp:norma")[0];
+				pos = UtilDom.getElementsByTagName(doc, norma, "dsp:pos")[0];
+				ittigNota = UtilDom.getElementsByTagName(doc, norma, "ittig:notavigenza")[0];
+				dispCorrente=UtilDom.getAttributeValueAsString(norma, "xlink:href");
+				partCorrente=UtilDom.getAttributeValueAsString(pos, "xlink:href");
+				if (partCorrente.endsWith(dispCorrente))
+					partCorrente="";
+				else
+					partCorrente=partCorrente.substring(1+dispCorrente.length());		
+				modificaelimina.setText("Hai selezionato una " + tipoDisposizione + ".");
+				evento.setText(dispCorrente);
+				
+				//per il momento lo recupero dal testo... dopo recuperarlo dai metadati (dsp:tempi ....o simile)
+				NodeList eventi = UtilDom.findRecursiveChild(doc, "eventi").getChildNodes();
+				String evento;
+				if (!"".equals(UtilDom.getAttributeValueAsString(activeNode, "finevigore")))
+					evento = UtilDom.getAttributeValueAsString(activeNode, "finevigore");
+				else
+					evento = UtilDom.getAttributeValueAsString(activeNode, "iniziovigore");
+				for (int i=0; i<eventi.getLength(); i++)
+					if (UtilDom.getAttributeValueAsString(eventi.item(i),"id").equals(evento))
+						data.setText(UtilDate.normToString(UtilDom.getAttributeValueAsString(eventi.item(i),"data")));
+					
+					
+				dove.setText(partCorrente);
+				implicita.setSelected(implicitaCorrente);				
+				autoCorrente = UtilDom.getAttributeValueAsString(ittigNota, "auto");
+				vigenzaStatus.setEnabled(true);
+				statusCorrente = "";
+				if (!idNovellando.equals("") && UtilDom.getAttributeValueAsString(activeNode,"status")==null)
+					novellando = ricercaNovellando(activeNode.getParentNode(), idNovellando);
+				else
+					novellando = activeNode;
+				if (!idNovellando.equals("") && UtilDom.getAttributeValueAsString(novellando,"status")!=null) {
+					statusCorrente = UtilDom.getAttributeValueAsString(novellando,"status");
+					vigenzaStatus.setSelectedItem(statusCorrente);
+					
+					//x ora vogliono bloccato sempre lo status
+					vigenzaStatus.setEnabled(false);
+				}	
+				else
+					vigenzaStatus.setEnabled(false);
+				
+				try {
+					urnTestoCorrente = nirUtilUrn.getFormaTestuale(new Urn(dispCorrente));
+				} catch (Exception ex) {
+					urnTestoCorrente="";
+				}
+				vigenzaTestoCorrente = autoCorrente.substring(autoCorrente.indexOf("In vigore"), autoCorrente.length());
+				partTestoCorrente = autoCorrente.substring(autoCorrente.indexOf(urnTestoCorrente)+urnTestoCorrente.length(),autoCorrente.indexOf(vigenzaTestoCorrente));
 
-			form.setSize(400, 450);
-			form.showDialog();
-		}
-		else utilmsg.msgError("Errore nei metadati");
+				form.setSize(400, 280);
+				form.showDialog();
+			}
+			else utilmsg.msgInfo("editor.disposizioni.passive.nometadati");
+		}	
+		else utilmsg.msgInfo("editor.disposizioni.passive.nometadati");
 	}
 	
 	private Node ricercaNovellando(Node padre, String idNovellando) {

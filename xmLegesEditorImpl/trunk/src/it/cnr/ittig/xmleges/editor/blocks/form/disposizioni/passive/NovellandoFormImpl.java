@@ -200,7 +200,13 @@ public class NovellandoFormImpl implements NovellandoForm, EventManagerListener,
 				String finevigore = UtilDom.getAttributeValueAsString(activeNode, "finevigore");
 				String statusvigore = UtilDom.getAttributeValueAsString(activeNode, "status");
 				n = domDisposizioni.setVigenza(activeNode, activeNode.getNodeValue(), start, end, disposizioni.makeVigenza(activeNode,"novellando",(String) vigenzaStatus.getSelectedItem()));
-				domDisposizioni.makeNotaVigenza(n);
+				
+				
+				//questo inseriva una ndr come notaDIvigenza
+				//domDisposizioni.makeNotaVigenza(n);
+				
+				
+				
 				idSelezionato = UtilDom.getAttributeValueAsString(n, "id");
 				disposizioni.setNovellando(idSelezionato, iniziovigore, finevigore, statusvigore, false);
 				disposizioni.setPosdisposizione(n);
@@ -216,7 +222,12 @@ public class NovellandoFormImpl implements NovellandoForm, EventManagerListener,
 			}
 			else  {//creo un nuovo span
 				n = domDisposizioni.setVigenza(activeNode, "", start, end, disposizioni.makeVigenza(activeNode,"novellando",(String) vigenzaStatus.getSelectedItem()));
-				domDisposizioni.makeNotaVigenza(n);
+				
+				
+				//questo inseriva una ndr come notaDIvigenza
+				//domDisposizioni.makeNotaVigenza(n);
+				
+				
 				idSelezionato = UtilDom.getAttributeValueAsString(n, "id");
 				disposizioni.setNovellando(idSelezionato, "", "", "", true);
 				disposizioni.setPosdisposizione(n);
@@ -288,6 +299,10 @@ public class NovellandoFormImpl implements NovellandoForm, EventManagerListener,
 
 	public void openForm(FormClosedListener listener) {
 
+		
+		//x ora vogliono bloccato sempre lo status
+		vigenzaStatus.setEnabled(false);
+		
 		idotesto.setText("");
 		avanti.setEnabled(false);					
 		testoaggiuntotesto.setEnabled(false);
