@@ -125,10 +125,10 @@ public interface Disposizioni extends Service {
 	/**
 	 * Elimina vigenza
 	 */
-	public void doErase(String idNovellando, String idNovella, Node disposizione);
+	public void doErase(String idNovellando, String idNovella, Node disposizione, Node novellando);
 	
 	/**
 	 * Modifica vigenza
 	 */
-	public void doChange(String norma, String pos, Node disposizione, String prenota, String autonota, String postnota, Node novellando, String status);
+	public void doChange(String norma, String pos, Node disposizione, String autonota, boolean implicita, Node novellando, String status);
 }
