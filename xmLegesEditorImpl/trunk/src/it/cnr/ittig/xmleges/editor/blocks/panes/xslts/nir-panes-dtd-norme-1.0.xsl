@@ -466,6 +466,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 										
 <xsl:template name="vigenza">
+	<xsl:variable name="id">
+		<xsl:value-of select="@id" />
+	</xsl:variable>
 	<xsl:variable name="stato">
 		<xsl:value-of select="@status" />
 	</xsl:variable>
@@ -535,7 +538,33 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 					    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 					        <xsl:apply-templates />
 					    </xsl:element>
-	<!--				    
+
+
+	<xsl:choose>
+		<xsl:when test="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]">
+			<xsl:variable name="ittignota">
+				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:norma']/*[name()='ittig:notavigenza']/@id "/>
+			</xsl:variable>
+			<xsl:variable name="novella">
+				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:novella']/*[name()='dsp:pos']/@xlink:href"/>
+			</xsl:variable>	
+			<xsl:variable name="novellando">
+				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:novellando']/*[name()='dsp:pos']/@xlink:href"/>
+			</xsl:variable>	
+			<sup>
+				{<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>
+					<xsl:if test="$novellando">
+						<xsl:if test="$novella">
+							<!--	sostituzione	-->
+							<xsl:if test="$novella=$id">i</xsl:if>
+		   					<xsl:if test="$novellando=$id">e</xsl:if>
+	   					</xsl:if>
+   					</xsl:if>}
+			</sup>
+		</xsl:when>
+		<xsl:otherwise>
+
+
 			<span>
 				<em>
 				  <font size="2">
@@ -558,7 +587,12 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 				   </font>
 				</em>
 			</span>
-	-->		
+
+
+		</xsl:otherwise>
+	</xsl:choose>
+
+
 					</font>
 				</xsl:when>
 				<xsl:otherwise>
@@ -567,7 +601,33 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 					    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 					        <xsl:apply-templates />
 					    </xsl:element>
-	<!--
+
+
+	<xsl:choose>
+		<xsl:when test="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]">
+			<xsl:variable name="ittignota">
+				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:norma']/*[name()='ittig:notavigenza']/@id "/>
+			</xsl:variable>
+			<xsl:variable name="novella">
+				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:novella']/*[name()='dsp:pos']/@xlink:href"/>
+			</xsl:variable>	
+			<xsl:variable name="novellando">
+				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:novellando']/*[name()='dsp:pos']/@xlink:href"/>
+			</xsl:variable>	
+			<sup>
+				{<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>
+					<xsl:if test="$novellando">
+						<xsl:if test="$novella">
+							<!--	sostituzione	-->
+							<xsl:if test="$novella=$id">i</xsl:if>
+		   					<xsl:if test="$novellando=$id">e</xsl:if>
+	   					</xsl:if>
+   					</xsl:if>}
+			</sup>
+		</xsl:when>
+		<xsl:otherwise>
+		
+		
 			<span>
 				<em>
 				  <font size="2">
@@ -590,7 +650,12 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 				   </font>
 				</em>
 			</span>
-	-->		
+
+
+		</xsl:otherwise>
+	</xsl:choose>
+
+
 				    </div>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -604,7 +669,34 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 					    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 					        <xsl:apply-templates />
 					    </xsl:element>
-	<!--					    
+
+
+	<xsl:choose>
+		<xsl:when test="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]">
+			<xsl:variable name="ittignota">
+				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:norma']/*[name()='ittig:notavigenza']/@id "/>
+			</xsl:variable>
+			<xsl:variable name="novella">
+				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:novella']/*[name()='dsp:pos']/@xlink:href"/>
+			</xsl:variable>	
+			<xsl:variable name="novellando">
+				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:novellando']/*[name()='dsp:pos']/@xlink:href"/>
+			</xsl:variable>	
+			<sup>
+				{<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>
+					<xsl:if test="$novellando">
+						<xsl:if test="$novella">
+							<!--	sostituzione	-->
+							<xsl:if test="$novella=$id">i</xsl:if>
+		   					<xsl:if test="$novellando=$id">e</xsl:if>
+	   					</xsl:if>
+   					</xsl:if>}
+			</sup>
+
+		</xsl:when>
+		<xsl:otherwise>
+		
+						    
 			<span>
 				<em>
 				  <font size="2">
@@ -614,7 +706,12 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 				  </font>
 				</em>
 			</span>
-	-->			
+
+
+		</xsl:otherwise>
+	</xsl:choose>
+	
+		
 				    </font>
 				</xsl:when>
 				<xsl:otherwise>
@@ -623,7 +720,34 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 					    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 					        <xsl:apply-templates />
 					    </xsl:element>
-	<!--					    
+
+
+	<xsl:choose>
+		<xsl:when test="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]">
+			<xsl:variable name="ittignota">
+				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:norma']/*[name()='ittig:notavigenza']/@id "/>
+			</xsl:variable>
+			<xsl:variable name="novella">
+				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:novella']/*[name()='dsp:pos']/@xlink:href"/>
+			</xsl:variable>	
+			<xsl:variable name="novellando">
+				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:novellando']/*[name()='dsp:pos']/@xlink:href"/>
+			</xsl:variable>	
+			<sup>
+				{<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>
+					<xsl:if test="$novellando">
+						<xsl:if test="$novella">
+							<!--	sostituzione	-->
+							<xsl:if test="$novella=$id">i</xsl:if>
+		   					<xsl:if test="$novellando=$id">e</xsl:if>
+	   					</xsl:if>
+   					</xsl:if>}
+			</sup>
+
+		</xsl:when>
+		<xsl:otherwise>
+		
+					    
 			<span>
 				<em>
 				  <font size="2">
@@ -633,7 +757,12 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 				  </font>
 				</em>
 			</span>
-	-->			
+
+
+		</xsl:otherwise>
+	</xsl:choose>
+	
+				
 				    </div>
 				</xsl:otherwise>
 			</xsl:choose>
