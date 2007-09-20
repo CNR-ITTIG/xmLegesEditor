@@ -31,8 +31,7 @@ public interface DispPassiveForm extends Service {
 	final static int INTEGRAZIONE = 4;
 	final static int NOVELLANDO = 5;
 	final static int NOVELLA = 6;
-	final static int NOTA = 7;
-	final static int FINE = 8;
+	final static int FINE = 7;
 	
 	/**
 	 * Apre la form.
@@ -74,24 +73,6 @@ public interface DispPassiveForm extends Service {
 	 * 
 	 */
 	public void setStatus(String status);
-
-	/**
-	 * Setta la parte di testo da inserire prima della nota automatica di vigenza
-	 * 
-	 */
-	public void setPrenota(String nota);
-
-	/**
-	 * Setta la parte di testo da inserire dopo della nota automatica di vigenza
-	 * 
-	 */
-	public void setPostnota(String nota);
-	
-	/**
-	 * Setta se la disposizione è implicita o no
-	 * 
-	 */
-	public void setImplicita(boolean implicita);
 
 	/**
 	 * Costruisce la vigenza del nodo node a secondo il tipo di disposizione dsp
