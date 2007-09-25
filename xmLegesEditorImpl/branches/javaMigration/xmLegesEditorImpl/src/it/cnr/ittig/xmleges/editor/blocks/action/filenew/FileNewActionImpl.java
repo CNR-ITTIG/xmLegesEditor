@@ -78,8 +78,8 @@ public class FileNewActionImpl extends AbstractAction implements FileNewAction, 
 
 	FileOpenAction fileOpenAction;
 	
-	Rinumerazione rinumerazione;
-	RinumerazioneAction rinumerazioneAction;
+	//Rinumerazione rinumerazione;
+	//RinumerazioneAction rinumerazioneAction;
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -96,8 +96,8 @@ public class FileNewActionImpl extends AbstractAction implements FileNewAction, 
 		fileSaveAction = (FileSaveAction) serviceManager.lookup(FileSaveAction.class);
 		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 		
-		rinumerazione = (Rinumerazione) serviceManager.lookup(Rinumerazione.class);
-		rinumerazioneAction = (RinumerazioneAction) serviceManager.lookup(RinumerazioneAction.class);
+		//rinumerazione = (Rinumerazione) serviceManager.lookup(Rinumerazione.class);
+		//rinumerazioneAction = (RinumerazioneAction) serviceManager.lookup(RinumerazioneAction.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
@@ -118,9 +118,9 @@ public class FileNewActionImpl extends AbstractAction implements FileNewAction, 
 				if (fileOpenAction.doOpen(templatefile.getAbsolutePath(), false)) {
 					dm.setNew(true);
 					
-					//imposto la Rinumerazione ATTIVA (se non lo è già)
-					if (!rinumerazione.isRinumerazione())
-						rinumerazioneAction.doSetRinumerazione(true);
+					//imposto la Rinumerazione ATTIVA (se non lo ï¿½ giï¿½)
+					//if (!rinumerazione.isRinumerazione())
+					//	rinumerazioneAction.doSetRinumerazione(true);
 					
 					return true;
 				} else
