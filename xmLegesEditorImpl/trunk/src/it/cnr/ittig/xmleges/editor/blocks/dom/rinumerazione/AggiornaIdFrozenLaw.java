@@ -249,8 +249,7 @@ public class AggiornaIdFrozenLaw {
 		NodeList note = doc.getElementsByTagName("nota");
 		String num, value, prefix;
 
-		//for (int i = 0; i < ndr.getLength(); i++) {	//Non è detto abbiano la stessa cardinalità
-		for (int i = 0; i < note.getLength(); i++) {
+		for (int i = 0; i < ndr.getLength(); i++) {
 			
 			//prefix = getNdrNumPrefix(UtilDom.getAttributeValueAsString((Node) ndr.item(i), "num")); 
 			//num = prefix + (ndrId.indexOf(UtilDom.getAttributeValueAsString((Node) ndr.item(i), "num")) + 1);
@@ -1147,7 +1146,7 @@ public class AggiornaIdFrozenLaw {
 		// elelmenti el alla loro posizione nell'alfabeto us (non verificato il
 		// caso posAssolutaElemento)
 		
-		// FIXME non funzionerà piu' con i nuovi id fatti a lettere 
+		// FIXME non funzionerï¿½ piu' con i nuovi id fatti a lettere 
 		
 		if (nodeName.equalsIgnoreCase("el")) {
 			if (posizione % 26 > 9 && posizione % 26 <= 20)
