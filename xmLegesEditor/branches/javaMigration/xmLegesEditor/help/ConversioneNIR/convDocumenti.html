@@ -1,0 +1,79 @@
+<html>
+<head>
+<title>Conversione di un documento non strutturato</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../nireditor2help.css" type="text/css">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#000000" class="testo">
+<p class="testo"><b><font size="+2">Conversione di un documento non strutturato</font></b></p>
+<p class="testo"><span class="testo">xmLegesEditor consente la conversione in formato 
+  XML-NIR di documenti normativi originariamente in formato testo, html o doc. 
+  La conversione in formato XML-NIR consente l'apertura del documento nella <a href="../AmbienteRedazione/editingXML/princEditing.html">finestra 
+  principale di editing</a>.</span></p>
+<p class="testo"><span class="testo">Se il file di origine &egrave; in formato 
+  diverso da XML-NIR testo o html, occorre aprirlo innanzitutto nel programma 
+  di origine, quindi salvarlo in un formato supportato da xmLegesEditor (preferibilemente 
+  txt o html). Dopo aver convertito il file di origine in formato testo o html, 
+  &egrave; possibile attivare le funzio</span><span class="testo">ne di conversione 
+  nel formato XML-NIR.</span></p>
+<p><b>Marcatura automatica della struttura</b></p>
+<ol>
+  <li>Scegliere <b><img src="../images/nuvola/16x16/misc.png" width="16" height="16"> 
+    Importa </b> dal men&ugrave; <b>File</b>;</li>
+  <li> Inserire nome del file che si desidera convertire, completo del suo percorso 
+    attraverso le cartelle. E' possibile effettuare una ricerca per selezionare 
+    il file desiderato. </li>
+  <li>Nella casella <b>Formato Sorgente</b> indicare il formato del documento 
+    sorgente da convertire;</li>
+  <li>Nella casella <b> DTD</b> scegliere il DTD-NIR (Completo, Flessibile, Base) 
+    con le cui regole si desidera che il documento venga marcato;</li>
+  <li>Nella casella <b>Tipo Documento</b> indicare il tipo del documento sorgente;</li>
+  <li>Nella casella <b>Altro tipo documento</b> inserire una eventuale ulteriore 
+    specificazione del tipo di documento sorgente (es: ...);</li>
+  <li>Nella casella <b>Encoding</b> indicare la codifica del documento sorgente;</li>
+  <li>Nella casella <b>Formato Commi</b> indicare se nel documento sorgente i 
+    commi sono o meno numerati;</li>
+  <li>Nella casella <b>Formato Rubriche</b> indicare la posizione delle Rubriche 
+    nel documento sorgente (&quot;Su nuova linea&quot; rispetto al numero dell'Articolo 
+    o &quot;Adiacente&quot; ad esso);</li>
+  <li>Nella casella <b>Livello di log</b> scegliere il livello di informazioni 
+    da ottenere dalla fase di conversione;</li>
+  <li>Fare clic sul pulsante <b><span class="testo"><b><img src="../images/nuvola/16x16/misc.png" width="16" height="16"></b></span> 
+    Analizza</b>, al termine dell'analisi nella casella <b>Risultati</b> appare 
+    il testo convertito in XML-NIR;</li>
+  <li>Fare clic su <b>Ok</b> per importare il documento nella <a href="../AmbienteRedazione/editingXML/princEditing.html">finestra 
+    principale di editing</a>.</li>
+</ol>
+<p><b><a name="ParserRif"></a>Marcatura automatica dei riferimenti normativi</b></p>
+<p>Per individuare i riferimenti normativi e calcolarne la URN, &egrave; possibile 
+  attivare una funzione di riconoscimento automatico dei riferimenti esterni, 
+  che consente all'utente di inserire il testo della citazione ad un atto direttamente 
+  nella finestra principale di editing, selezionare un intorno del testo contenente 
+  la citazione e delegare al riconoscitore la marcatura del riferimento e il calcolo 
+  della URN corrispondente.</p>
+<ol>
+  <li>Fare clic sul pulsante <img src="../images/nir/16x16/riferimenti/rif_parser.png" width="16" height="16"> 
+    <b>Riconoscimento automatico dei riferimenti esterni</b>;</li>
+  <li>Scegliere se applicare il riconoscimento sull'Intero documento o sul Testo 
+    selezionato: nella casella Risultato compare il testo sul quale la funzione 
+    sar&agrave; applicata;</li>
+  <li>In caso di un riferimento ad una legge regionale, nella casella Regione 
+    scegliere la regione che ha emanato l'atto;</li>
+  <li>Per attivare la funzione di riconoscimento fare clic sul pulsante Analizza;</li>
+  <li>Nella casella Risultato compare il testo originario in cui i riferimenti 
+    sono stati marcati con l'elemento &lt;rif&gt; e sono state determinate e inserite 
+    le relative URN;</li>
+  <li>Premere Ok per applicare il risultato del riconoscimento al documento corrente.</li>
+</ol>
+<p>Tale funzione pu&ograve; essere anche applicata solo ad un testo selezionato.</p>
+<ol>
+  <li> Nella finestra principale di editing, inserire la formulazione linguistica 
+    di una citazione ad un atto;</li>
+  <li> Selezionare un intorno del testo contenente almeno la citazione;</li>
+  <li> Fare clic sul pulsante <img src="../images/nir/16x16/riferimenti/rif_parser.png" width="16" height="16"> 
+    <b>Riconoscimento automatico dei riferimenti esterni</b>;</li>
+  <li>Eseguire le operazioni 2. 3. 4. 5. 6. del caso precedente.</li>
+</ol>
+</body>
+</html>
