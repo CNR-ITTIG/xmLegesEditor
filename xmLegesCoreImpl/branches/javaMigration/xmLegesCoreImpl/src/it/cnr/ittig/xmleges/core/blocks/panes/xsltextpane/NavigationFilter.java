@@ -25,18 +25,26 @@ public class NavigationFilter extends javax.swing.text.NavigationFilter {
 	public int getNextVisualPositionFrom(JTextComponent text, int pos, Bias bias, int direction, Bias[] biasRet) throws BadLocationException {
 		if (direction == SwingConstants.EAST) {
 			int maxLen = textPane.getHTMLDocument().getDefaultRootElement().getEndOffset();
+			// muovi in avanti e fermati alla prima posizione che sta dentro uno span
 			for (int i = pos + 1; i < maxLen; i++) {
-				Element newElem = textPane.getHTMLDocument().getCharacterElement(i - 1);
-				if (newElem.getName().equals("content") && textPane.getEnclosingSpan(newElem) != null) {
-					return i;
+				Element newElem = textPane.getHTMLDocument().getCharacterElement(i);
+				if (textPane.getEnclosingSpan(newElem) != null) {
+					// non ti fermare sulla prima casella di uno span 
+					// e' uno spazio aggiuntivo che fa da buffer per la selezione
+					if(textPane.getEnclosingSpan(newElem).getStartOffset() != i)
+						return i;
 				}
 			}
 			return pos;
 		} else if (direction == SwingConstants.WEST) {
+			// muovi all'indietro e fermati alla prima posizione che sta dentro uno span
 			for (int i = pos - 1; i >= 0; i--) {
-				Element newElem = textPane.getHTMLDocument().getCharacterElement(i - 1);
-				if (newElem.getName().equals("content") && textPane.getEnclosingSpan(newElem) != null) {
-					return i;
+				Element newElem = textPane.getHTMLDocument().getCharacterElement(i);
+				if (textPane.getEnclosingSpan(newElem) != null) {
+					// non ti fermare sulla prima casella di uno span 
+					// e' uno spazio aggiuntivo che fa da buffer per la selezione
+					if(textPane.getEnclosingSpan(newElem).getStartOffset() != i)
+						return i;
 				}
 			}
 			return pos;
@@ -72,9 +80,10 @@ public class NavigationFilter extends javax.swing.text.NavigationFilter {
 	}
 
 	public void moveDot(FilterBypass fb, int dot, Bias bias) {
-		Element newElem = textPane.getHTMLDocument().getCharacterElement(dot);
-		if (textPane.getEnclosingSpan(newElem) != null && !newElem.equals(textPane.getStartSpan(newElem))
-				&& dot != (textPane.getStartSpan(newElem).getEndOffset()))
+		// se l'elemento si trova all'interno di uno span mappato, muoviti,
+		// altrimenti ignora l'azione.
+		Element currSpan = textPane.getEnclosingSpan(textPane.getHTMLDocument().getCharacterElement(dot));
+		if (currSpan != null) 
 			super.moveDot(fb, dot, bias);
 	}
 
@@ -105,12 +114,13 @@ public class NavigationFilter extends javax.swing.text.NavigationFilter {
 //				}
 //			}
 			Element enclosingSpan = textPane.getEnclosingSpan(newElem);
-			boolean isEnclosed = enclosingSpan != null
-					&& ((newElem.getName().equals("content") && dot != enclosingSpan.getStartOffset()) || dot == enclosingSpan.getEndOffset());
+			boolean isEnclosed = enclosingSpan != null; // && ((newElem.getName().equals("content") && dot != enclosingSpan.getStartOffset()) || dot == enclosingSpan.getEndOffset());
 
 			if (isEnclosed)
+				// Quando l'utente clicca dentro uno span mappato, posiziona il cursors 
 				super.setDot(fb, dot, bias);
 			else {
+				// Quando l'utente clicca fuori di uno span
 				try {
 					int east, west;
 					east = getNextVisualPositionFrom(textPane, dot, bias, SwingConstants.EAST, new Position.Bias[1]);
@@ -139,7 +149,7 @@ public class NavigationFilter extends javax.swing.text.NavigationFilter {
 							}
 						}
 						super.setDot(fb, newDest, bias);
-					} /* else super.setDot(fb, dot, bias);*/
+					} 
 				}
 
 				catch (BadLocationException ble) {

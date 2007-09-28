@@ -94,7 +94,7 @@ public class XsltAction extends TextAction {
 		int start = e.getStartOffset() + 1, end = e.getEndOffset();
 		if (containingSpan != null)
 		{
-			start = containingSpan.getStartOffset();
+			start = containingSpan.getStartOffset() + 1;
 			end = containingSpan.getEndOffset();
 		}
 		try
@@ -112,7 +112,7 @@ public class XsltAction extends TextAction {
 		int start = currElem.getStartOffset() + 1;
 		if (containingSpan != null)
 		{
-			start = containingSpan.getStartOffset();
+			start = containingSpan.getStartOffset() + 1;
 			if (!currElem.getName().equals("content"))
 				currElem = doc.getCharacterElement(start);
 		}

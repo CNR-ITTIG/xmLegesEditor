@@ -49,7 +49,7 @@ public class XsltDeleteNextCharAction extends XsltAction {
 		int start = currElem.getStartOffset() + 1;
 		int end = currElem.getEndOffset();
 		if (containingSpan != null) {
-			start = containingSpan.getStartOffset();
+			start = containingSpan.getStartOffset() + 1;
 			end = containingSpan.getEndOffset();
 		}
 

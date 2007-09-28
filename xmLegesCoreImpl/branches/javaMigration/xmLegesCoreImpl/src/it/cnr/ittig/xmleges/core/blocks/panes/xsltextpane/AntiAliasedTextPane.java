@@ -62,7 +62,7 @@ import org.w3c.dom.Node;
  * 
  * @author <a href="mailto:m.taddei@ittig.cnr.it">Mirco Taddei </a>
  */
-public class AntiAliasedTextPane extends JTextPane implements DocumentListener, CaretListener {
+public final class AntiAliasedTextPane extends JTextPane implements DocumentListener, CaretListener {
 
 	public final static String HTML_ERROR = "<center><b>ERROR</b></center>";
 
@@ -169,7 +169,7 @@ public class AntiAliasedTextPane extends JTextPane implements DocumentListener, 
 
 		if (getXsltMapper().getParentByGen(modNode) != null) {
 			Element enclosingSpan = getEnclosingSpan(currElem);
-			select(enclosingSpan.getStartOffset(), enclosingSpan.getEndOffset());
+			select(enclosingSpan.getStartOffset()+1, enclosingSpan.getEndOffset());
 		}
 		replaceSelection(UtilClipboard.getAsString());
 	}
@@ -261,8 +261,8 @@ public class AntiAliasedTextPane extends JTextPane implements DocumentListener, 
 		int relSelStart = selStart - currelem.getStartOffset() - 1;
 		int relSelEnd = selEnd - currelem.getStartOffset() - 1;
 		if (enclosingSpan != null) {
-			relSelStart = selStart - enclosingSpan.getStartOffset();
-			relSelEnd = selEnd - enclosingSpan.getStartOffset();
+			relSelStart = selStart - enclosingSpan.getStartOffset() - 1;
+			relSelEnd = selEnd - enclosingSpan.getStartOffset() - 1;
 		}
 
 		pane.fireSelectionChanged(selNode, relSelStart, relSelEnd);
@@ -309,7 +309,7 @@ public class AntiAliasedTextPane extends JTextPane implements DocumentListener, 
 		String id = getIdInAttributeSet(e.getAttributes());
 
 		if (id == null) {
-			Element startSpan = getStartSpan(e);
+			Element startSpan = getEnclosingSpan(e);
 			if (startSpan != null) {
 				id = getIdInAttributeSet(startSpan.getAttributes());
 			}
@@ -360,16 +360,25 @@ public class AntiAliasedTextPane extends JTextPane implements DocumentListener, 
 	
 	// TODO: A partire da Java 5 non esiste pi� un tag di chiusura
 	// esplicito per gli elementi span, che diventano di tipo content
-	public Element getEnclosingSpan(Element e) {
-		while(e != null && !isSpan(e))
+	public static Element getEnclosingSpan(Element e) {
+		while(e != null && !(isSpan(e) && isMapped(e)))
 			e = e.getParentElement();
 		return e;
 	}
 	
+	protected static boolean isMapped(Element e) 
+	{
+		AttributeSet as = e.getAttributes();
+		String id = null;
+		if(as != null) id = getIdInAttributeSet(e.getAttributes());
+		if(id != null)
+			return id.startsWith("map");
+		else
+			return false;
+	}
+
 	protected static boolean isSpan(Element e) {
-		// System.err.println(System.getProperty("java.version"));
-		// return "span".equals(e.getName());
-		
+		if(e == null) return false;
 		if("content".equals(e.getName())) {
 			AttributeSet as = e.getAttributes();
 			if(as != null) {
@@ -417,13 +426,13 @@ public class AntiAliasedTextPane extends JTextPane implements DocumentListener, 
 		return ((HTMLDocument) getDocument());
 	}
 
-	public String getIdInAttributeSet(AttributeSet a) {
+	public static String getIdInAttributeSet(AttributeSet a) {
 		String id = null;
 		Enumeration en = a.getAttributeNames();
 		while (en.hasMoreElements() && id == null) {
 			Object k = en.nextElement();
 			Object v = a.getAttribute(k);
-			// se � presente un attributeset scorrilo
+			// se è presente un attributeset scorrilo
 			// ricorsivamente
 			if(v instanceof AttributeSet)
 				return getIdInAttributeSet((AttributeSet)v);
@@ -460,23 +469,6 @@ public class AntiAliasedTextPane extends JTextPane implements DocumentListener, 
 			Node node = getXsltMapper().getDomById(id);
 			if (id != null && !id.equals(origId) && UtilDom.isTextNode(node))
 				return currElem;
-			prevElem = currElem;
-		}
-		return null;
-	}
-
-	protected Element getStartSpan(Element e) {
-		if (e == null)
-			return null;
-
-		Element prevElem = null;
-		for (Element currElem = e; !currElem.equals(prevElem); currElem = getHTMLDocument().getCharacterElement(currElem.getStartOffset() - 1)) {
-			String id = getIdInAttributeSet(currElem.getAttributes());
-			if (currElem.getName().equals("span") && id != null && id.startsWith("map") && !currElem.getAttributes().isDefined(HTML.getAttributeKey("endtag"))) {
-				return currElem;
-			} else if (currElem.getName().equals("span") && !currElem.equals(e)) {
-				return null;
-			}
 			prevElem = currElem;
 		}
 		return null;
@@ -532,7 +524,7 @@ public class AntiAliasedTextPane extends JTextPane implements DocumentListener, 
 				int start = modElem.getStartOffset() + 1;
 				int end = modElem.getEndOffset();
 				if (containingSpan != null) {
-					start = containingSpan.getStartOffset();
+					start = containingSpan.getStartOffset() + 1;
 					end = containingSpan.getEndOffset();
 				}
 
@@ -593,7 +585,7 @@ public class AntiAliasedTextPane extends JTextPane implements DocumentListener, 
 			int start = modElem.getStartOffset() + 1;
 			int end = modElem.getEndOffset();
 			if (containingSpan != null) {
-				start = containingSpan.getStartOffset();
+				start = containingSpan.getStartOffset() + 1;
 				end = containingSpan.getEndOffset();
 			}
 

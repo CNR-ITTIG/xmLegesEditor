@@ -260,7 +260,7 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 				Element currElem = textPane.getHTMLDocument().getElement(xsltMapper.getIdByDom(e.getActiveNode()));
 				Element enclosingSpan = textPane.getEnclosingSpan(currElem);
 				if (enclosingSpan != null) {
-					int startOff = enclosingSpan.getStartOffset();
+					int startOff = enclosingSpan.getStartOffset() + 1;
 					textPane.selectText(startOff + e.getTextSelectionStart(), startOff + e.getTextSelectionEnd());
 				}
 			}

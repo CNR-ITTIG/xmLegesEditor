@@ -80,7 +80,7 @@ public class XsltKeyTypedAction extends XsltAction {
 		if (pane.getXsltMapper().getParentByGen(modNode) != null
 				|| (modNode.getNodeType() == Node.COMMENT_NODE && getText(e, currElem).equals(pane.getXsltMapper().getI18nNodeText(modNode)))
 				|| (modNode.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE && getText(e, currElem).equals(pane.getXsltMapper().getI18nNodeText(modNode)))) {
-			pane.select(enclosingSpan.getStartOffset()+1, enclosingSpan.getEndOffset()-1);
+			pane.select(enclosingSpan.getStartOffset() + 1, enclosingSpan.getEndOffset() - 1);
 		}
 
 		super.actionPerformed(e);
