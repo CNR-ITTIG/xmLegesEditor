@@ -214,10 +214,12 @@ public class NovellandoFormImpl implements NovellandoForm, EventManagerListener,
 				if (disposizioni.getTipoDisposizione()==disposizioni.SOSTITUZIONE) {
 					n = domDisposizioni.makePartition(activeNode, false, disposizioni.makeVigenza(activeNode,"novella",(String) vigenzaStatus.getSelectedItem()));				
 					selectionManager.setActiveNode(this, n);
-					if (n!=null)
-						disposizioni.setNovella(UtilDom.getAttributeValueAsString(n, "id"));
-					else
-						disposizioni.setNovella("??");				
+					if (n!=null) {
+						String id = UtilDom.getAttributeValueAsString(n, "id");
+//						if (id==null)
+//							id = getIDNotArticoloByPosition(n);
+						disposizioni.setNovella(id);
+					}	
 				}
 			}
 			else  {//creo un nuovo span
@@ -235,10 +237,12 @@ public class NovellandoFormImpl implements NovellandoForm, EventManagerListener,
 				if (disposizioni.getTipoDisposizione()==disposizioni.SOSTITUZIONE) {
 					n = domDisposizioni.makeSpan(n, -1, disposizioni.makeVigenza(n,"novella",(String) vigenzaStatus.getSelectedItem()),testoaggiunto.getText());
 					selectionManager.setActiveNode(this, n);	
-					if (n!=null)
-						disposizioni.setNovella(UtilDom.getAttributeValueAsString(n, "id"));
-					else
-						disposizioni.setNovella("??");
+					if (n!=null) {
+						String id = UtilDom.getAttributeValueAsString(n, "id");
+//						if (id==null)
+//							id = getIDNotArticoloByPosition(n);
+						disposizioni.setNovella(id);
+					}	
 				}					
 			}	
 			disposizioni.setOperazioneProssima();

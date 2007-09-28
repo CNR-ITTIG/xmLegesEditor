@@ -119,7 +119,6 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 	String statusCorrente;
 	String urnTestoCorrente;
 	String partTestoCorrente;
-	String vigenzaTestoCorrente;
 	boolean implicitaCorrente;
 	
 	JTextField data;
@@ -228,31 +227,19 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 					 utilmsg.msgError("Non hai effettuato nessuna modifica");
 			else {
 				//ricalcolo nota automatica
-				String autoNota;
-				String urn = urnTestoCorrente;
-				String vigore = vigenzaTestoCorrente;
+				String autoNota = urnTestoCorrente;
 				if (!dispCorrente.equals(evento.getText())) {
-					if (tipoDisposizione.equalsIgnoreCase("INTEGRAZIONE"))
-						vigore = "In vigore dal " + UtilDate.normToString(eventovigore.getData());
-					else
-						vigore = "In vigore dal " + UtilDate.normToString(eventoriginale.getData()) + " al " + UtilDate.normToString(eventovigore.getData());
-					urn =  evento.getText();
+					autoNota =  evento.getText();
 					try {
-						urn = nirUtilUrn.getFormaTestuale(new Urn(urn));
+						autoNota = nirUtilUrn.getFormaTestuale(new Urn(autoNota));
 					} catch (Exception ex) {}
 				}
 				if (!partCorrente.equals(dove.getText()))
-					urn = urn + " " + partizione + ".\n";
+					autoNota = partizione + " " + autoNota;
 				else	
-					urn = urn + partTestoCorrente;
-				if (tipoDisposizione.equalsIgnoreCase("INTEGRAZIONE"))
-					//autoNota = "Integrato da: " + urn + vigore;
-					autoNota = urn + vigore;
-				else
-					//autoNota = (String) vigenzaStatus.getSelectedItem() + " da: " + urn + vigore;
-					autoNota = urn + vigore;
-						
-				domDisposizioni.doChange(evento.getText(),dove.getText(),disposizione,autoNota, implicita.isSelected(),novellando, (String) vigenzaStatus.getSelectedItem());
+					autoNota = partTestoCorrente + autoNota;
+				
+				domDisposizioni.doChange(evento.getText(),dove.getText(),disposizione, autoNota, implicita.isSelected(),novellando, (String) vigenzaStatus.getSelectedItem());
 				form.close();
 			}	
 	}
@@ -316,8 +303,7 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 				} catch (Exception ex) {
 					urnTestoCorrente="";
 				}
-				vigenzaTestoCorrente = autoCorrente.substring(autoCorrente.indexOf("In vigore"), autoCorrente.length());
-				partTestoCorrente = autoCorrente.substring(autoCorrente.indexOf(urnTestoCorrente)+urnTestoCorrente.length(),autoCorrente.indexOf(vigenzaTestoCorrente));
+				partTestoCorrente = autoCorrente.substring(0, autoCorrente.indexOf(urnTestoCorrente));
 
 				form.setSize(400, 280);
 				form.showDialog();

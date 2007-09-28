@@ -122,10 +122,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	   					</xsl:if>
    					</xsl:if>
 					<xsl:text> da: </xsl:text>
-
-				<!--	attenzione voglio ricambiare ancora il testo di autonota (eliminando il vigore) -->							
-				<xsl:value-of select="substring-before($autonota,' In vigore')"/> 				
-				
+					<xsl:value-of select="$autonota"/> 	
+					<xsl:text>. </xsl:text>				
 					<xsl:choose>
 					<!-- ================= data_fine!='' =========-->
 						<xsl:when test="$data_fine!=''">

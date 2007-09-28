@@ -187,10 +187,12 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 				selectionManager.setActiveNode(this, n);
 			} 					
 			disposizioni.setOperazioneProssima();
-			if (n!=null)
-				disposizioni.setNovella(UtilDom.getAttributeValueAsString(n, "id"));
-			else
-				disposizioni.setNovella("??");
+			if (n!=null) {
+				String id = UtilDom.getAttributeValueAsString(n, "id");
+//				if (id==null)
+//					id = getIDNotArticoloByPosition(n);
+				disposizioni.setNovella(id);
+			}	
 			disposizioni.setPosdisposizione(n);
 			form.close();
 		}

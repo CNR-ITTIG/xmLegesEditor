@@ -240,9 +240,6 @@
 	<!-- ========================== 	RUBRICA	 	============================== -->
 	
 	<xsl:template match="//*[name()='rubrica']">
-		<xsl:element name="a">
-			<xsl:attribute name="name"><xsl:value-of select="../@id" />-rub</xsl:attribute>
-		</xsl:element>
 		<p class="rubrica">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
@@ -379,7 +376,6 @@
 		</span>
 	</xsl:template>
 	<xsl:template match="//*[name()='rif']">
-		<xsl:param name="colorerif"/>
 		<xsl:variable name="url">
 			<xsl:value-of select="@xlink:href" />
 		</xsl:variable>
@@ -393,12 +389,12 @@
 			<xsl:when test="contains($url,'urn:nir:')">
 				<xsl:choose>
 					<xsl:when test="$strina='&#59;' or $strina='&#46;' or $strina='&#58;' or $strina='&#44;'  or $strina='&#45;'">		 
-						<a style="color:{$colorerif}" href="http://www.nir.it/cgi-bin/N2Ln?{@xlink:href}" title="Destinazione: http://www.nir.it/cgi-bin/N2Ln?{@xlink:href}">
+						<a href="http://www.nir.it/cgi-bin/N2Ln?{@xlink:href}" title="Destinazione: http://www.nir.it/cgi-bin/N2Ln?{@xlink:href}">
 							<xsl:apply-templates/>
 						</a>
 					</xsl:when>
 					<xsl:otherwise>					 
-						<a style="color:{$colorerif}" href="http://www.nir.it/cgi-bin/N2Ln?{@xlink:href}" title="Destinazione: http://www.nir.it/cgi-bin/N2Ln?{@xlink:href}">						
+						<a href="http://www.nir.it/cgi-bin/N2Ln?{@xlink:href}" title="Destinazione: http://www.nir.it/cgi-bin/N2Ln?{@xlink:href}">						
 							<xsl:apply-templates/>						
 						</a>&#160;
 					</xsl:otherwise>
@@ -407,12 +403,12 @@
 			<xsl:otherwise>
 				<xsl:choose>
 					<xsl:when test="$strina='&#59;' or $strina='&#46;' or $strina='&#58;' or $strina='&#44;'  or $strina='&#45;'">		 
-						<a style="color:{$colorerif}" href="{@xlink:href}" title="Destinazione: {@xlink:href}">
+						<a href="{@xlink:href}" title="Destinazione: {@xlink:href}">
 							<xsl:apply-templates/>
 						</a>
 					</xsl:when>
 					<xsl:otherwise>					 
-						<a style="color:{$colorerif}" href="{@xlink:href}" title="Destinazione: {@xlink:href}">						
+						<a href="{@xlink:href}" title="Destinazione: {@xlink:href}">						
 						<xsl:apply-templates/>						
 						</a>&#160;
 					</xsl:otherwise>
@@ -784,10 +780,8 @@
 						<xsl:when test="$data_inizio&gt;number(number($datafine)-1)">
 							<span style="color:#060;">
 								<xsl:variable name="colore">#060</xsl:variable> 
-								<xsl:apply-templates>
-									<xsl:with-param name="colorerif" select="$colore"/>
-								</xsl:apply-templates>	
-								
+								<xsl:apply-templates/>
+			
 								
 								<!--************
 								<xsl:call-template name="makeNotavigenza" />
@@ -810,9 +804,7 @@
 									<!-- <span style="color:#f00;" title="{$stato}"><xsl:apply-templates /> -->												
 									<span style="color:#f00;">
 										<xsl:variable name="colore">#f00</xsl:variable> 
-										<xsl:apply-templates>
-											<xsl:with-param name="colorerif" select="$colore"/>
-										</xsl:apply-templates>
+										<xsl:apply-templates/>
 										
 										
 										<!--************
@@ -833,9 +825,7 @@
 								<xsl:otherwise>
 									<span style="color:#f00;">
 										<xsl:variable name="colore">#f00</xsl:variable> 
-										<xsl:apply-templates>
-											<xsl:with-param name="colorerif" select="$colore"/>
-										</xsl:apply-templates>
+										<xsl:apply-templates/>
 										
 										
 										<!--************
@@ -885,9 +875,7 @@
 						<xsl:otherwise>
 							<span style="color:#060;">
 								<xsl:variable name="colore">#060</xsl:variable> 
-								<xsl:apply-templates>
-									<xsl:with-param name="colorerif" select="$colore"/>
-								</xsl:apply-templates>
+								<xsl:apply-templates/>
 								
 								
 								<!--************
@@ -1251,14 +1239,9 @@
 							<xsl:if test="$novella=$id"> (testo inserito)</xsl:if>
 		   					<xsl:if test="$novellando=$id"> (testo eliminato)</xsl:if>
 	   					</xsl:if>
-   					</xsl:if>
-					
-					
+   					</xsl:if>					
 					<xsl:text> da: </xsl:text>
-					<a href="http://www.nir.it/cgi-bin/N2Ln?{$urn}" title=" Dest. = http://www.nir.it/cgi-bin/N2Ln?{$urn}"> 
-						<!--	attenzione voglio ricambiare ancora il testo di autonota (eliminando il vigore) -->							
-						<xsl:value-of select="substring-before($autonota,' In vigore')"/> 
-					</a>
+					<a href="http://www.nir.it/cgi-bin/N2Ln?{$urn}" title=" Dest. = http://www.nir.it/cgi-bin/N2Ln?{$urn}"><xsl:value-of select="$autonota"/></a>
 			      </xsl:for-each>
 				</xsl:when>
 				<xsl:otherwise>
@@ -1268,7 +1251,7 @@
 					<a href="http://www.nir.it/cgi-bin/N2Ln?{$urn}" title=" Dest. = http://www.nir.it/cgi-bin/N2Ln?{$urn}"> <xsl:value-of select="$urn" /> </a>
 				</xsl:otherwise>			
 			</xsl:choose>
-			
+			<xsl:text>. </xsl:text>
 				<xsl:choose>
 					<!-- ================= data_fine!='' =========-->
 						<xsl:when test="$data_fine!=''">

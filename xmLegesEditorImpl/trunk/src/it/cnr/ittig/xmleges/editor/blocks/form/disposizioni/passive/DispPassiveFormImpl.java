@@ -353,15 +353,10 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 			if (operazioneProssima == NOVELLA) {
 				operazioneProssima = INIZIO;				
 			}
-//			  else if (operazioneProssima == NOTA) {
-//				if (operazioneIniziale == INTEGRAZIONE)
-//					operazioneProssima = NOVELLA;
-//				else
-//					operazioneProssima = NOVELLANDO;
-//			}
-			  else if (operazioneProssima == NOVELLANDO) {
-				operazioneProssima = INIZIO;
-			}
+		    else 
+		    	if (operazioneProssima == NOVELLANDO) {
+		    		operazioneProssima = INIZIO;
+		    	}
 			undo(operazioneProssima);
 		}
 		
@@ -380,15 +375,9 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 			try {
 				urn = nirUtilUrn.getFormaTestuale(new Urn(urn));
 				if (!partizione.equals("")) 
-					urn = urn + " " + partizione;
+					urn = partizione + " " + urn;
 			} catch (Exception e) {}
-			if (operazioneIniziale == INTEGRAZIONE)
-				//autoNota = "Integrato da: " + urn + ".\nIn vigore dal " + UtilDate.normToString(eventovigore.getData());
-				autoNota = urn + ".\nIn vigore dal " + UtilDate.normToString(eventovigore.getData());
-			else
-				//autoNota = status + " da: " + urn + ".\nIn vigore dal " + UtilDate.normToString(eventoriginale.getData()) + " al " + UtilDate.normToString(eventovigore.getData());
-				autoNota = urn + ".\nIn vigore dal " + UtilDate.normToString(eventoriginale.getData()) + " al " + UtilDate.normToString(eventovigore.getData());
-			
+			autoNota = urn;
 			
 			String partizione = evento.getText();
 			if (!dove.getText().equals("")) 
