@@ -169,7 +169,7 @@ public class NotesPaneImpl implements NotesPane, Loggable, Serviceable, Initiali
 
 	// ///////////////////////////////////////////////////// Startable Interface
 	public void start() throws Exception {
-		reload();
+		load();
 		frame.addPane(this, false);
 	}
 
@@ -264,6 +264,10 @@ public class NotesPaneImpl implements NotesPane, Loggable, Serviceable, Initiali
 	}
 
 	public void reload() {
+		//Niente: non sono un pannello che deve essere aggiornato se è aggiornato il documento
+	}
+	
+	private void load() {
 		Properties p = preferenceManager.getPreferenceAsProperties(getClass().getName());
 		int n = Integer.parseInt(p.getProperty("n", "0"));
 		for (int i = 0; i < n; i++) {
