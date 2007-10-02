@@ -44,9 +44,6 @@ import com.hp.hpl.jena.reasoner.Reasoner;
 import com.hp.hpl.jena.reasoner.ReasonerRegistry;
 import com.hp.hpl.jena.vocabulary.RDF;
 
-
-
-
 /**
  * <h1>Implementazione del servizio
  * <code>it.cnr.ittig.xmleges.editor.services.dalos.kbmanager.KbManager</code>.</h1>
@@ -68,10 +65,11 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 	public String IND_CLAW = KB_REPOSITORY + "/ind-to-consumer.owl";
 	public String TYPES = KB_REPOSITORY + "/types.owl";
 	public String CONCEPT_ONTO = KB_REPOSITORY + "/concepts.owl";
+	public String SOURCE_FILE = KB_REPOSITORY + "/sources.owl";
 	
 	//Dati
 	public Map synsets = null;
-	
+	public Vector sortedSynsets = null;
 	
 	private SynsetTree tree = null;
 	
@@ -95,6 +93,7 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 		
 		LANGUAGE = "IT";
 		synsets = new HashMap(2048, 0.70f);
+		sortedSynsets = new Vector(512);
 		topClasses = new HashSet();
 		
 		long t1 = System.currentTimeMillis();		
@@ -140,9 +139,27 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 			syn.setURI(ores.getNameSpace() + ores.getLocalName());
 			//System.out.println("Adding " + ores.getLocalName() + " --> " + syn);			
 			synsets.put(ores.getLocalName(), syn); //meglio questa come chiave??
+			addSortedSynset(syn);
 		}
 	}
 	
+	private void addSortedSynset(Synset syn) {
+		
+		boolean ins = false;
+		for(int i = 0; i < sortedSynsets.size(); i++) {
+			Synset item = (Synset) sortedSynsets.get(i);
+			if(item.toString().compareToIgnoreCase(syn.toString()) < 0) continue;
+			if(item.toString().compareToIgnoreCase(syn.toString()) > 0) {
+				sortedSynsets.add(i, syn);
+				ins = true;
+				break;
+			}
+		}
+		if(!ins) {
+			//Inserisci alla fine del vettore
+			sortedSynsets.add(syn);
+		}
+	}
 	
 	private OntModel getModel(String type) {
 		
@@ -212,6 +229,10 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 			om.read(INDW_FILE);
 			om.read(TYPES);
 		}
+		if(type.equalsIgnoreCase("source")) {
+			om.read(IND_FILE);
+			om.read(SOURCE_FILE);			
+		}
 		OntDocumentManager odm = OntDocumentManager.getInstance();
 		odm.setProcessImports(true);
 		odm.loadImports(om);
@@ -221,7 +242,7 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 	
 
 	public void addProperties(Synset syn) {
-		if(syn.isCached()) {
+		if(syn.isPropCached()) {
 			return;
 		}
 
@@ -231,7 +252,7 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 
 		addSemanticProperties(syn);
 		
-		syn.setCached(true);	
+		syn.setPropCached(true);	
 	}
 	
 
@@ -333,7 +354,39 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 		mappedSynsets.add(objSynset);		
 	}
 	
-	
+	public void addSources(Synset syn) {
+		
+		if(syn.isSourceCached()) {
+			return;
+		}
+		
+		System.out.println(">> adding sources to " + syn + "...");
+		
+		OntModel om = getModel("source", "micro");
+		
+		Individual ind = om.getIndividual(syn.getURI());
+
+		OntProperty sourceProp = om.getOntProperty(KBConf.SOURCESCHEMA_NS + "source");
+		OntProperty involvesProp = om.getOntProperty(KBConf.SOURCESCHEMA_NS + "source");
+		OntProperty belongsProp = om.getOntProperty(KBConf.SOURCESCHEMA_NS + "source");
+		OntProperty linkProp = om.getOntProperty(KBConf.SOURCESCHEMA_NS + "source");
+		
+		for(Iterator i = ind.listProperties(sourceProp); i.hasNext();) {
+			OntResource ores = (OntResource) i.next();
+			OntResource part = (OntResource) ores.getPropertyValue(involvesProp);
+			OntResource doc = (OntResource) part.getPropertyValue(belongsProp);
+			RDFNode val = doc.getPropertyValue(linkProp);
+			
+			String link = "http://somewhere.over.the.rainbow/documents/doc.html";
+			if(val != null) {
+				link = ((Literal) val).getString();
+			}
+			syn.addSource(link);
+		}
+		
+		syn.setSourceCached(true);
+	}
+
 
 	
 	// da InitHierarchy
