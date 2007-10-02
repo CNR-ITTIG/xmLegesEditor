@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Vector;
 
 public class Synset {
 	
@@ -15,14 +16,16 @@ public class Synset {
 	
 	private String lexicalForm; //sostituire con un vettore di forme lessicali?
 	
-	private boolean isCached = false;
+	private boolean isPropCached = false;
+	
+	private boolean isSourceCached = false;
+
+	private Vector sources; //rispettare l'ordine alfabetico
 
 	public Map lexicalToSynset = null;
 		
 	public Map semanticToSynset = null;
 		
-	public Collection sources; //sostituire con vettore di rif. esterni?
-	
 	public Synset() {
 		
 		this("(empty)", "");
@@ -41,7 +44,7 @@ public class Synset {
 		lexicalToSynset = new HashMap();
 		semanticToSynset = new HashMap();
 		
-		sources = new HashSet();
+		sources = new Vector();
 	}
 
 	public void setDef(String str) {
@@ -59,14 +62,24 @@ public class Synset {
 		return lexicalForm;
 	}
 
-	public void setCached(boolean status) {
+	public void setPropCached(boolean status) {
 		
-		isCached = status;
+		isPropCached = status;
 	}
 	
-	public boolean isCached() {
+	public boolean isPropCached() {
 		
-		return isCached;
+		return isPropCached;
+	}
+
+	public void setSourceCached(boolean status) {
+		
+		isSourceCached = status;
+	}
+	
+	public boolean isSourceCached() {
+		
+		return isSourceCached;
 	}
 
 	public void setLanguage(String str) {
@@ -89,6 +102,30 @@ public class Synset {
 		return URI;
 	}
 	
+	public boolean addSource(String s) {
+
+		boolean ins = false;
+		for(int i = 0; i < sources.size(); i++) {
+			String item = (String) sources.get(i);
+			if(item.toString().compareToIgnoreCase(s.toString()) < 0) continue;
+			if(item.toString().compareToIgnoreCase(s.toString()) > 0) {
+				sources.add(i, s);
+				ins = true;
+				break;
+			}
+		}
+		if(!ins) {
+			//Inserisci alla fine del vettore
+			sources.add(s);
+		}
+		return true;
+	}
+
+	public Vector getSources() {
+		
+		return sources;
+	}
+
 	public String toString() {
 		
 		return lexicalForm;
