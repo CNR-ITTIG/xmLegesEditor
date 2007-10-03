@@ -19,8 +19,10 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.Vector;
 
+import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
@@ -72,6 +74,7 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 	public Vector sortedSynsets = null;
 	
 	private SynsetTree tree = null;
+	private SynsetTree tmpTree = null;
 	
 	private Set topClasses = null;
 	private Map linked = null; 
@@ -159,6 +162,60 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 			//Inserisci alla fine del vettore
 			sortedSynsets.add(syn);
 		}
+	}
+	
+	private void addSortedNode(DefaultMutableTreeNode node, Vector sortedNodes) {
+		
+		if(sortedNodes.size() == 0) {
+			sortedNodes.add(node);
+			return;
+		}
+		boolean ins = false;
+		Object userObj = node.getUserObject();
+		if(userObj instanceof OntoClass) {
+			for(int i = 0; i < sortedNodes.size(); i++) {
+				DefaultMutableTreeNode item = (DefaultMutableTreeNode) sortedNodes.get(i);
+				Object itemObj = item.getUserObject();
+				if(itemObj instanceof OntoClass) {					
+					if(itemObj.toString().compareToIgnoreCase(userObj.toString()) < 0) {
+						continue;
+					}
+					if(itemObj.toString().compareToIgnoreCase(userObj.toString()) > 0) {
+						sortedNodes.add(i, node);					
+						ins = true;
+						break;
+					}
+				} else {
+					sortedNodes.add(i, node);
+					ins = true;
+					break;
+				}				
+			}
+		}
+		if(userObj instanceof Synset) {
+			for(int i = 0; i < sortedNodes.size(); i++) {
+				DefaultMutableTreeNode item = (DefaultMutableTreeNode) sortedNodes.get(i);
+				Object itemObj = item.getUserObject();
+				if(itemObj instanceof OntoClass) {
+					continue;
+				} else {
+					if(itemObj.toString().compareToIgnoreCase(userObj.toString()) < 0) {
+						continue;
+					}
+					if(itemObj.toString().compareToIgnoreCase(userObj.toString()) > 0) {
+						sortedNodes.add(i, node);					
+						ins = true;
+						break;
+					}
+				}
+			}
+			
+		}
+
+		if(!ins) {
+			//Inserisci alla fine del vettore
+			sortedNodes.add(node);
+		}		
 	}
 	
 	private OntModel getModel(String type) {
@@ -401,16 +458,22 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 		long t1 = System.currentTimeMillis();		
 		System.out.println("Init tree...");
 
-     	DefaultMutableTreeNode tmpRoot = new DefaultMutableTreeNode(" - ");
-     	DefaultTreeModel tmpModel = new DefaultTreeModel(tmpRoot);     	
-		tree = new SynsetTree(tmpModel,i18n);
-	
+     	DefaultMutableTreeNode tmpRoot1 = new DefaultMutableTreeNode(" - ");
+     	DefaultTreeModel tmpModel1 = new DefaultTreeModel(tmpRoot1);     	
+     	DefaultMutableTreeNode tmpRoot2 = new DefaultMutableTreeNode(" - ");
+     	DefaultTreeModel tmpModel2 = new DefaultTreeModel(tmpRoot2);     	
+		
+     	tree = new SynsetTree(tmpModel1, i18n);
 		tree.setRootUserObject("CONSUMER LAW");
 		tree.setRootVisible(true);
 		
+     	tmpTree = new SynsetTree(tmpModel2, i18n);	
+		tmpTree.setRootUserObject("CONSUMER LAW");
+		tmpTree.setRootVisible(true);
+		
 		OntClass oc = getModel("domain", "micro").getOntClass(KBConf.ROOT_CLASS);
 		
-		expandClass(oc, null);
+		expandClass(oc, null, tmpTree);
 		
 		addSynsets();
 		
@@ -423,7 +486,7 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 	}
 	
 	
-	private void expandClass(OntClass oc, DefaultMutableTreeNode node) {
+	private void expandClass(OntClass oc, DefaultMutableTreeNode node, JTree tmpTree) {
 		//Problema: se una classe non ha sotto-classi e non ha synset
 		//viene visualizzata come foglia!
 		//Aggiungere dei children fittizi? (empty) ?
@@ -445,14 +508,14 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 				if(node == null) {
 					if(!topClasses.contains(cl)) {
 						topClasses.add(cl);
-						tree.addNode(newNode);
+						((SynsetTree) tmpTree).addNode(newNode);
 					}
 				} else {
 					node.add(newNode);
 				}
-				expandClass(c, newNode);
+				expandClass(c, newNode, tmpTree);
 			} else {
-				expandClass(c, node);
+				expandClass(c, node, tmpTree);
 			}			
 		}		
 	}
@@ -483,7 +546,7 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 			addLink(thisObj, thisSubj);
 		}
 		
-		TreeModel model = tree.getModel();
+		TreeModel model = tmpTree.getModel();
 		Object root = model.getRoot();
 		walk(model, root);
 		
@@ -555,20 +618,47 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 				//System.out.println("++ Adding synset to root node: " + syn );
 				DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(syn);
 				//((DefaultMutableTreeNode) root).add(newNode); //Usare se il nodo non � la root
-				tree.addNode(newNode);
+				tmpTree.addNode(newNode);
 			}
 		}
 	}
 	
 	private void adjustTree() {
 		
-		System.out.println("Adjusting tree...");
-		TreeModel model = tree.getModel();
+		TreeModel model = tmpTree.getModel();
 		Object root = model.getRoot();
-		adjustLeaf(model, root);
-		
+
 		System.out.println("Sorting tree...");
-		//sort() ??
+		TreeModel model2 = tree.getModel();
+		Object root2 = model2.getRoot();
+		sortedWalk(model, root, model2, root2);
+		
+		//Delete temp tree...
+		tmpTree = null;
+
+		System.out.println("Adjusting tree...");
+		adjustLeaf(model2, root2);		
+	}
+	
+	private void sortedWalk(TreeModel model1, Object node1, 
+			TreeModel model2, Object node2) {
+		
+		Vector sortedChildren = new Vector();
+		for(int i = 0; i < model1.getChildCount(node1); i++) {
+			addSortedNode((DefaultMutableTreeNode) model1.getChild(node1, i),
+					sortedChildren);
+		}
+		
+		for(Iterator i = sortedChildren.iterator(); i.hasNext();) {
+			DefaultMutableTreeNode node = (DefaultMutableTreeNode) i.next();
+			DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(node.getUserObject());
+			if(model2.getRoot().equals(node2)) {
+				tree.addNode(newNode);
+			} else {
+				((DefaultMutableTreeNode) node2).add(newNode);
+			}
+			sortedWalk(model1, node, model2, newNode);
+		}
 	}
 	
 	private void adjustLeaf(TreeModel model, Object o) {
