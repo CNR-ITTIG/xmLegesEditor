@@ -1,4 +1,4 @@
-package it.cnr.ittig.xmleges.editor.blocks.dalos.kbmanager;
+package it.cnr.ittig.xmleges.editor.blocks.dalos.kb;
 
 public class KBConf {
 

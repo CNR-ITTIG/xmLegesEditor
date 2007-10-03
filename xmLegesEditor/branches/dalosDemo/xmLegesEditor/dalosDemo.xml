@@ -1433,7 +1433,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <!-- =================================================================== -->
     
     <component  activation="startup"
-                class="it.cnr.ittig.xmleges.editor.blocks.dalos.kbmanager.KbManagerImpl"
+                class="it.cnr.ittig.xmleges.editor.blocks.dalos.kb.KbManagerImpl"
     />
     
     <component  activation="startup"

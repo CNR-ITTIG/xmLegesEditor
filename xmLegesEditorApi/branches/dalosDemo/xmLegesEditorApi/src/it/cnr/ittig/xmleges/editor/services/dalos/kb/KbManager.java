@@ -1,4 +1,4 @@
-package it.cnr.ittig.xmleges.editor.services.dalos.kbmanager;
+package it.cnr.ittig.xmleges.editor.services.dalos.kb;
 
 import it.cnr.ittig.services.manager.Service;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
@@ -25,6 +25,11 @@ import java.util.Collection;
  */
 public interface KbManager extends Service {
 
+	/**
+	 * 
+	 * @param lang
+	 */
+	public void addLanguage(String lang);
 	
 	/**
 	 * 
@@ -36,13 +41,13 @@ public interface KbManager extends Service {
 	 * 
 	 * @return
 	 */
-	public SynsetTree getTree();
+	public SynsetTree getTree(String lang);
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public Collection getSynsets();
+	public Collection getSynsets(String lang);
 	
 	
 	

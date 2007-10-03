@@ -8,8 +8,6 @@ import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.services.manager.Startable;
 import it.cnr.ittig.xmleges.core.services.bars.Bars;
-import it.cnr.ittig.xmleges.core.services.bugreport.BugReport;
-import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.frame.FindIterator;
@@ -17,7 +15,7 @@ import it.cnr.ittig.xmleges.core.services.frame.Frame;
 import it.cnr.ittig.xmleges.core.services.frame.PaneException;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
-import it.cnr.ittig.xmleges.editor.services.dalos.kbmanager.KbManager;
+import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetListPane;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSelectionEvent;
@@ -38,7 +36,6 @@ import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
-import javax.swing.ListCellRenderer;
 import javax.swing.ListSelectionModel;
 
 /**						
@@ -145,7 +142,7 @@ public class SynsetListPaneImpl implements SynsetListPane, EventManagerListener,
 		
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
-        Collection synsets = kbManager.getSynsets();
+        Collection synsets = kbManager.getSynsets("IT");
         
         //Usa un cell renderer per i lemmi
         LemmaListCellRenderer renderer = new LemmaListCellRenderer();

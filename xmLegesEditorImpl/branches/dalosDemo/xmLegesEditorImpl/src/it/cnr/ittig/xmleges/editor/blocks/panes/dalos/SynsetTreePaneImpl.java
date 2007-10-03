@@ -8,14 +8,13 @@ import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.services.manager.Startable;
 import it.cnr.ittig.xmleges.core.services.bars.Bars;
-import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.frame.FindIterator;
 import it.cnr.ittig.xmleges.core.services.frame.Frame;
 import it.cnr.ittig.xmleges.core.services.frame.PaneException;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
-import it.cnr.ittig.xmleges.editor.services.dalos.kbmanager.KbManager;
+import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSelectionEvent;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetTreePane;
@@ -32,8 +31,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
-
-import org.w3c.dom.Node;
 
 /**						
  * <h1>Implementazione del servizio
@@ -119,7 +116,7 @@ public class SynsetTreePaneImpl implements SynsetTreePane, EventManagerListener,
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		panel.add(scrollPane);
 	
-		tree = kbManager.getTree();		
+		tree = kbManager.getTree("IT");		
 		scrollPane.setViewportView(tree);
 		
 		tree.addMouseListener(new SynsetTreePaneMouseAdapter());
