@@ -201,7 +201,8 @@ public class UtilFile {
 	 * @return <code>true</code> se esiste
 	 */
 	public static boolean fileExistInTemp(String fileName) {
-		return fileExistInTemp(new File(fileName));
+		//return fileExistInTemp(new File(fileName));
+		return new File(tempDir + File.separatorChar + fileName).exists();
 	}
 
 	/**
@@ -279,7 +280,9 @@ public class UtilFile {
 	 * @return file presente nella directory di sistema (null se non esiste)
 	 */
 	public static File getFileFromTemp(String fileName) {
-		return getFileFromTemp(new File(fileName));
+		//return getFileFromTemp(new File(fileName));
+		File ret = new File(tempDir + File.separatorChar + fileName);
+		return ret.exists() ? ret : null;
 	}
 
 	/**
