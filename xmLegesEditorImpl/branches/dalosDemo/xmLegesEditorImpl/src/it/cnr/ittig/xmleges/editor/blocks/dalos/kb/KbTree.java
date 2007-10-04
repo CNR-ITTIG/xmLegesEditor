@@ -32,8 +32,8 @@ public class KbTree {
 	
 	private KbContainer kbc;
 	
-	private Set topClasses = null;
-	private Map linked = null;
+	private Set topClasses;
+	private Map linked;
 	
 	private I18n i18n;
 	
@@ -41,10 +41,13 @@ public class KbTree {
 		
 		kbc = k;
 		i18n = in;		
-		topClasses = new HashSet();
+		topClasses = null;
+		linked = null;
 	}
 	
 	public SynsetTree getTree() {
+		
+		topClasses = new HashSet();
 		
 		long t1 = System.currentTimeMillis();		
 		System.out.println("Init tree...");
@@ -62,7 +65,7 @@ public class KbTree {
 		tmpTree.setRootUserObject("CONSUMER LAW");
 		tmpTree.setRootVisible(true);
 		
-		OntClass oc = kbc.getModel("domain", "micro").getOntClass(KBConf.ROOT_CLASS);
+		OntClass oc = kbc.getModel("domain", "micro").getOntClass(KbConf.ROOT_CLASS);
 		
 		expandClass(oc, null, tmpTree);
 		
@@ -72,6 +75,8 @@ public class KbTree {
 		
 		long t2 = System.currentTimeMillis();
 		System.out.println("...tree loaded! (" + Long.toString(t2 - t1) + " ms)\n");
+		
+		topClasses = null;
 		
 		return tree;
 	}
@@ -88,7 +93,7 @@ public class KbTree {
 			OntClass c = (OntClass) i.next();
 
 			//escludi le classi al di fuori della consumer law
-			if(!c.isAnon() && !c.getNameSpace().equalsIgnoreCase(KBConf.DOMAIN_ONTO_NS)) {
+			if(!c.isAnon() && !c.getNameSpace().equalsIgnoreCase(KbConf.DOMAIN_ONTO_NS)) {
 				continue;
 			}
 			
@@ -128,7 +133,7 @@ public class KbTree {
 			}
 			Resource thisObj = (Resource) thisObjNode;
 			if(thisObj.isAnon() ||
-					!thisObj.getNameSpace().equalsIgnoreCase(KBConf.DOMAIN_ONTO_NS)) {
+					!thisObj.getNameSpace().equalsIgnoreCase(KbConf.DOMAIN_ONTO_NS)) {
 				continue;
 			}
 //			System.out.println("Adding to linked: " + thisObj.getLocalName() +
@@ -141,6 +146,8 @@ public class KbTree {
 		walk(model, root);
 		
 		addRemainingSynsets();
+		
+		linked = null;
 	}
 	
 	private void addLink(Resource oc, Resource syn) {

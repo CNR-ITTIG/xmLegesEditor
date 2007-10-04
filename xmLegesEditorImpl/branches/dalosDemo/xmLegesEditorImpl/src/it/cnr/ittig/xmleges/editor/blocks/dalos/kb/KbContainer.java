@@ -1,9 +1,11 @@
 package it.cnr.ittig.xmleges.editor.blocks.dalos.kb;
 
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
+import it.cnr.ittig.xmleges.core.util.file.UtilFile;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.SynsetTree;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -32,46 +34,78 @@ import com.hp.hpl.jena.reasoner.ReasonerRegistry;
 
 public class KbContainer {
 
-	private String LANGUAGE = "";
+	private String LANGUAGE;
 	
-	public String KB_REPOSITORY;
-	public String IND_FILE;
-	public String INDW_FILE;
-	public String IND_CLAW;
-	public String TYPES;
-	public String CONCEPT_ONTO;
-	public String SOURCE_FILE;
+	public String localRepository;
+	public String indFile;
+	public String indwFile;
+	public String indcFile;
+	public String typesFile;
+	public String conceptsFile;
+	public String sourcesFile;
 	
 	private I18n i18n;
 
 	//Dati
 	Map synsets = null;
-	Vector sortedSynsets = null;
+	Vector sortedSynsets = null; //meglio un TreeSet ??
 	
 	private KbTree kbt;
 
 	public KbContainer(String lang, I18n i) {
-
-		KB_REPOSITORY = "file://" + KBConf.LOCAL_REPOSITORY; // + "/" + LANGUAGE;
-		IND_FILE = KB_REPOSITORY + "/individuals.owl";
-		INDW_FILE = KB_REPOSITORY + "/individuals-word.owl";
-		IND_CLAW = KB_REPOSITORY + "/ind-to-consumer.owl";
-		TYPES = KB_REPOSITORY + "/types.owl";
-		CONCEPT_ONTO = KB_REPOSITORY + "/concepts.owl";
-		SOURCE_FILE = KB_REPOSITORY + "/sources.owl";
-
+		
 		i18n = i;
-		
-		synsets = new HashMap(2048, 0.70f);
-		sortedSynsets = new Vector(512);
-		
-		kbt = new KbTree(this, i18n);
 
-		long t1 = System.currentTimeMillis();		
-		System.out.println("Init synsets...");
-		initSynsets();
-		long t2 = System.currentTimeMillis();
-		System.out.println("...synsets loaded! (" + Long.toString(t2 - t1) + " ms)\n");	
+		LANGUAGE = lang;
+
+		localRepository = KbConf.dalosRepository + LANGUAGE + "/";
+		indFile = localRepository + KbConf.IND;
+		//indFile = UtilFile.getFileFromTemp(KbConf.IND);
+		indwFile = localRepository + KbConf.INDW;
+		indcFile = localRepository + KbConf.INDC;
+		typesFile = localRepository + KbConf.TYPES;
+		conceptsFile = localRepository + KbConf.CONCEPTS;
+		sourcesFile = localRepository + KbConf.SOURCES;
+		
+		if(!checkFiles()) {
+			System.err.println("## ERROR ## KbContainer - Data files not found! Repo: " +
+					localRepository);			
+		} else {			
+			synsets = new HashMap(2048, 0.70f);
+			sortedSynsets = new Vector(512);
+			
+			kbt = new KbTree(this, i18n);
+	
+			long t1 = System.currentTimeMillis();		
+			System.out.println("Init synsets...");
+			initSynsets();
+			long t2 = System.currentTimeMillis();
+			System.out.println("...synsets loaded! (" + Long.toString(t2 - t1) + " ms)\n");
+		}
+	}
+	
+	private boolean checkFiles() {
+		
+		if(!UtilFile.fileExistInTemp(indFile)) {
+			return false;
+		}
+		if(!UtilFile.fileExistInTemp(indwFile)) {
+			return false;
+		}
+		if(!UtilFile.fileExistInTemp(indcFile)) {
+			return false;
+		}
+		if(!UtilFile.fileExistInTemp(typesFile)) {
+			return false;
+		}
+		if(!UtilFile.fileExistInTemp(conceptsFile)) {
+			return false;
+		}
+		if(!UtilFile.fileExistInTemp(sourcesFile)) {
+			return false;
+		}
+		
+		return true;
 	}
 
 	OntModel getModel(String type) {
@@ -120,37 +154,43 @@ public class KbContainer {
 		
 		if(type.equalsIgnoreCase("full")) {			
 			//om.read(METALEVEL_ONTO); //basta importare il PROP...?
-			om.read(KBConf.METALEVEL_PROP);
-			om.read(KBConf.DOMAIN_ONTO);
-			om.read(CONCEPT_ONTO);
-			om.read(IND_FILE);
-			om.read(INDW_FILE);
-			om.read(IND_CLAW);		
-			om.read(TYPES);
+			om.read(KbConf.METALEVEL_PROP);
+			om.read(KbConf.DOMAIN_ONTO);
+			readData(om, conceptsFile);
+			readData(om, indFile);
+			readData(om, indwFile);
+			readData(om, indcFile);		
+			readData(om, typesFile);
 		}
 		if(type.equalsIgnoreCase("domain")) {
-			om.read(KBConf.DOMAIN_ONTO);
+			om.read(KbConf.DOMAIN_ONTO);
 		}
 		if(type.equalsIgnoreCase("mapping")) {
-			om.read(IND_CLAW);		
-			om.read(KBConf.METALEVEL_ONTO);			
+			readData(om, indcFile);		
+			om.read(KbConf.METALEVEL_ONTO);			
 		}
 		if(type.equalsIgnoreCase("individual")) {
-			om.read(KBConf.METALEVEL_ONTO);
-			om.read(KBConf.METALEVEL_PROP);
-			om.read(IND_FILE);
-			om.read(INDW_FILE);
-			om.read(TYPES);
+			om.read(KbConf.METALEVEL_ONTO);
+			om.read(KbConf.METALEVEL_PROP);
+			readData(om, indFile);
+			readData(om, indwFile);
+			readData(om, typesFile);
 		}
 		if(type.equalsIgnoreCase("source")) {
-			om.read(IND_FILE);
-			om.read(SOURCE_FILE);			
+			readData(om, indFile);
+			readData(om, sourcesFile);			
 		}
 		OntDocumentManager odm = OntDocumentManager.getInstance();
 		odm.setProcessImports(true);
 		odm.loadImports(om);
 		
 		return om;
+	}
+	
+	private void readData(OntModel om, String fileStr) {
+		
+		File file = UtilFile.getFileFromTemp(fileStr);
+		om.read("file://" + file.getAbsolutePath());
 	}
 	
 	SynsetTree getTree() {
@@ -162,10 +202,10 @@ public class KbContainer {
 		
 		OntModel ind_m = getModel("individual", "micro");
 		
-		OntProperty contains = ind_m.getOntProperty(KBConf.METALEVEL_ONTO_NS + "containsWordSense");
-		OntProperty word = ind_m.getOntProperty(KBConf.METALEVEL_ONTO_NS + "word");
-		OntProperty lexical = ind_m.getOntProperty(KBConf.METALEVEL_ONTO_NS + "lexicalForm");
-		OntClass synClass = ind_m.getOntClass(KBConf.METALEVEL_ONTO_NS + "Synset");
+		OntProperty contains = ind_m.getOntProperty(KbConf.METALEVEL_ONTO_NS + "containsWordSense");
+		OntProperty word = ind_m.getOntProperty(KbConf.METALEVEL_ONTO_NS + "word");
+		OntProperty lexical = ind_m.getOntProperty(KbConf.METALEVEL_ONTO_NS + "lexicalForm");
+		OntClass synClass = ind_m.getOntClass(KbConf.METALEVEL_ONTO_NS + "Synset");
 		if(contains == null || word == null || lexical == null) {
 			System.out.println("ERROR: null properties.");
 			return;
@@ -227,10 +267,10 @@ public class KbContainer {
 		
 		Individual ind = om.getIndividual(syn.getURI());
 
-		OntProperty sourceProp = om.getOntProperty(KBConf.SOURCESCHEMA_NS + "source");
-		OntProperty involvesProp = om.getOntProperty(KBConf.SOURCESCHEMA_NS + "source");
-		OntProperty belongsProp = om.getOntProperty(KBConf.SOURCESCHEMA_NS + "source");
-		OntProperty linkProp = om.getOntProperty(KBConf.SOURCESCHEMA_NS + "source");
+		OntProperty sourceProp = om.getOntProperty(KbConf.SOURCESCHEMA_NS + "source");
+		OntProperty involvesProp = om.getOntProperty(KbConf.SOURCESCHEMA_NS + "source");
+		OntProperty belongsProp = om.getOntProperty(KbConf.SOURCESCHEMA_NS + "source");
+		OntProperty linkProp = om.getOntProperty(KbConf.SOURCESCHEMA_NS + "source");
 		
 		for(Iterator i = ind.listProperties(sourceProp); i.hasNext();) {
 			OntResource ores = (OntResource) i.next();
@@ -269,9 +309,9 @@ public class KbContainer {
 		OntModel om = getModel("individual", "micro");
 		
 		Individual ind = om.getIndividual(syn.getURI());
-		OntProperty glossProp = om.getOntProperty(KBConf.METALEVEL_ONTO_NS + "gloss");
+		OntProperty glossProp = om.getOntProperty(KbConf.METALEVEL_ONTO_NS + "gloss");
 		//OntProperty sourceProp = om.getOntProperty(METALEVEL_ONTO_NS + "source");  //fonte		
-		OntProperty langProp = om.getOntProperty(KBConf.METALEVEL_PROP_NS + "language-property");
+		OntProperty langProp = om.getOntProperty(KbConf.METALEVEL_PROP_NS + "language-property");
 		if(glossProp == null) {
 			System.err.println("gloss property is null!");
 			return;
@@ -314,7 +354,7 @@ public class KbContainer {
 		Individual ind = om.getIndividual(syn.getURI());
 		for(Iterator i = ind.listRDFTypes(false); i.hasNext();) {
 			Resource res = (Resource) i.next();
-			if(res.getNameSpace().equalsIgnoreCase(KBConf.DOMAIN_ONTO_NS)) {
+			if(res.getNameSpace().equalsIgnoreCase(KbConf.DOMAIN_ONTO_NS)) {
 				OntClass oc = (OntClass) res.as(OntClass.class);
 				for(Iterator p = oc.listDeclaredProperties(false); p.hasNext();) {
 					OntProperty op = (OntProperty) p.next();
