@@ -30,7 +30,7 @@ license      : GNU General Public License http://www.gnu.org/licenses/gpl.html
 <!-- ====================================================================== -->
 <!-- ======================================================= TEXT NODE ==== -->
 <!-- ====================================================================== -->
-<xsl:template match="text()"><xsl:element name="span" use-attribute-sets="XsltMapperSetParentClass">&#160;<xsl:value-of select="." />&#160;</xsl:element></xsl:template>
+<xsl:template match="text()"><xsl:element name="span" use-attribute-sets="XsltMapperSetParentClass"><xsl:value-of select="." /></xsl:element></xsl:template>
 
 
 <!-- ====================================================================== -->
@@ -38,13 +38,13 @@ license      : GNU General Public License http://www.gnu.org/licenses/gpl.html
 <!-- ====================================================================== -->
 <xsl:template match="processing-instruction()">
 	<pre color="red">
-	<xsl:element name="span" use-attribute-sets="XsltMapperSetClass"><xsl:attribute name="color">red</xsl:attribute>&#160;<xsl:if test="string-length(.) = 0"><xsl:value-of select="mapper:getTextStringIfEmpty(.)" /></xsl:if><xsl:if test="string-length(.) != 0"><xsl:value-of select="." /></xsl:if>&#160;</xsl:element>
+	<xsl:element name="span" use-attribute-sets="XsltMapperSetClass"><xsl:attribute name="color">red</xsl:attribute><xsl:if test="string-length(.) = 0"><xsl:value-of select="mapper:getTextStringIfEmpty(.)" /></xsl:if><xsl:if test="string-length(.) != 0"><xsl:value-of select="." /></xsl:if></xsl:element>
 	</pre>
 </xsl:template>
 
 <xsl:template match="comment()">
 	<pre color="green">
-	<xsl:element name="span" use-attribute-sets="XsltMapperSetClass"><xsl:attribute name="color">green</xsl:attribute>&#160;<xsl:if test="string-length(.) = 0"><xsl:value-of select="mapper:getTextStringIfEmpty(.)" /></xsl:if><xsl:if test="string-length(.) != 0"><xsl:value-of select="." /></xsl:if>&#160;</xsl:element>
+	<xsl:element name="span" use-attribute-sets="XsltMapperSetClass"><xsl:attribute name="color">green</xsl:attribute><xsl:if test="string-length(.) = 0"><xsl:value-of select="mapper:getTextStringIfEmpty(.)" /></xsl:if><xsl:if test="string-length(.) != 0"><xsl:value-of select="." /></xsl:if></xsl:element>
 	</pre>
 </xsl:template>
 

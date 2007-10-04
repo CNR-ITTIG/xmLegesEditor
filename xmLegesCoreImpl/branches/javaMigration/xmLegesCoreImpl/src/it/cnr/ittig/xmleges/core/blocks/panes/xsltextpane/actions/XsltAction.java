@@ -91,10 +91,10 @@ public class XsltAction extends TextAction {
 		AntiAliasedTextPane pane = (AntiAliasedTextPane)getTextComponent(evt);
 		String retVal = null;
 		Element containingSpan = pane.getEnclosingSpan(e);
-		int start = e.getStartOffset() + 1, end = e.getEndOffset();
+		int start = e.getStartOffset(), end = e.getEndOffset();
 		if (containingSpan != null)
 		{
-			start = containingSpan.getStartOffset() + 1;
+			start = containingSpan.getStartOffset();
 			end = containingSpan.getEndOffset();
 		}
 		try
@@ -109,10 +109,10 @@ public class XsltAction extends TextAction {
 	public void insertDefaultText(AntiAliasedTextPane pane, Element currElem, HTMLDocument doc)
 	{
 		Element containingSpan = pane.getEnclosingSpan(currElem);
-		int start = currElem.getStartOffset() + 1;
+		int start = currElem.getStartOffset();
 		if (containingSpan != null)
 		{
-			start = containingSpan.getStartOffset() + 1;
+			start = containingSpan.getStartOffset();
 			if (!currElem.getName().equals("content"))
 				currElem = doc.getCharacterElement(start);
 		}

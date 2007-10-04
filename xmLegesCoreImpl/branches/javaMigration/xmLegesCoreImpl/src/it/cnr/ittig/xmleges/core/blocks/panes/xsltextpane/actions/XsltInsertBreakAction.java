@@ -40,7 +40,7 @@ public class XsltInsertBreakAction extends XsltAction {
 			HTMLDocument doc = (HTMLDocument) pane.getDocument();
 
 			Element currElem = doc.getCharacterElement(pane.getCaretPosition());
-			Element enclosingSpan = pane.getEnclosingSpan(currElem);
+			Element enclosingSpan = pane.getSpan(pane.getCaretPosition());
 			if (enclosingSpan == null)
 				return;
 
@@ -52,8 +52,8 @@ public class XsltInsertBreakAction extends XsltAction {
 				return;
 			}
 			
-			int relSelStart = pane.getSelectionStart() - enclosingSpan.getStartOffset() - 1;
-			int relSelEnd = pane.getSelectionEnd() - enclosingSpan.getStartOffset() - 1;
+			int relSelStart = pane.getSelectionStart() - enclosingSpan.getStartOffset();
+			int relSelEnd = pane.getSelectionEnd() - enclosingSpan.getStartOffset();
 
 			action.insertBreak(modNode, relSelStart, relSelEnd);
 		}

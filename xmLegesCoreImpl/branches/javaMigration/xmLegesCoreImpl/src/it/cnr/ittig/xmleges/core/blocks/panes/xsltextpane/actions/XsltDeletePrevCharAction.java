@@ -46,10 +46,10 @@ public class XsltDeletePrevCharAction extends XsltAction {
 			return;
 
 		Element containingSpan = pane.getEnclosingSpan(currElem);
-		int start = currElem.getStartOffset() + 1;
+		int start = currElem.getStartOffset();
 		int end = currElem.getEndOffset();
 		if (containingSpan != null) {
-			start = containingSpan.getStartOffset() + 1;
+			start = containingSpan.getStartOffset();
 			end = containingSpan.getEndOffset();
 		}
 

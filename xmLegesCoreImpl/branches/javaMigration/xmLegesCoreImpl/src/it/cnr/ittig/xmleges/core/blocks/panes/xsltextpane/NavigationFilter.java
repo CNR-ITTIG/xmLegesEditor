@@ -27,24 +27,18 @@ public class NavigationFilter extends javax.swing.text.NavigationFilter {
 			int maxLen = textPane.getHTMLDocument().getDefaultRootElement().getEndOffset();
 			// muovi in avanti e fermati alla prima posizione che sta dentro uno span
 			for (int i = pos + 1; i < maxLen; i++) {
-				Element newElem = textPane.getHTMLDocument().getCharacterElement(i);
-				if (textPane.getEnclosingSpan(newElem) != null) {
-					// non ti fermare sulla prima casella di uno span 
-					// e' uno spazio aggiuntivo che fa da buffer per la selezione
-					if(textPane.getEnclosingSpan(newElem).getStartOffset() != i)
-						return i;
+				Element span = textPane.getSpan(i);
+				if (span != null /* && i != span.getStartOffset() */) {
+					return i;
 				}
 			}
 			return pos;
 		} else if (direction == SwingConstants.WEST) {
 			// muovi all'indietro e fermati alla prima posizione che sta dentro uno span
 			for (int i = pos - 1; i >= 0; i--) {
-				Element newElem = textPane.getHTMLDocument().getCharacterElement(i);
-				if (textPane.getEnclosingSpan(newElem) != null) {
-					// non ti fermare sulla prima casella di uno span 
-					// e' uno spazio aggiuntivo che fa da buffer per la selezione
-					if(textPane.getEnclosingSpan(newElem).getStartOffset() != i)
-						return i;
+				Element span = textPane.getSpan(i);
+				if (span != null /* && i != span.getStartOffset() */) {
+					return i;
 				}
 			}
 			return pos;
@@ -82,8 +76,7 @@ public class NavigationFilter extends javax.swing.text.NavigationFilter {
 	public void moveDot(FilterBypass fb, int dot, Bias bias) {
 		// se l'elemento si trova all'interno di uno span mappato, muoviti,
 		// altrimenti ignora l'azione.
-		Element currSpan = textPane.getEnclosingSpan(textPane.getHTMLDocument().getCharacterElement(dot));
-		if (currSpan != null) 
+		if (textPane.getSpan(dot) != null) 
 			super.moveDot(fb, dot, bias);
 	}
 
@@ -113,7 +106,7 @@ public class NavigationFilter extends javax.swing.text.NavigationFilter {
 //						}
 //				}
 //			}
-			Element enclosingSpan = textPane.getEnclosingSpan(newElem);
+			Element enclosingSpan = textPane.getSpan(dot);
 			boolean isEnclosed = enclosingSpan != null; // && ((newElem.getName().equals("content") && dot != enclosingSpan.getStartOffset()) || dot == enclosingSpan.getEndOffset());
 
 			if (isEnclosed)

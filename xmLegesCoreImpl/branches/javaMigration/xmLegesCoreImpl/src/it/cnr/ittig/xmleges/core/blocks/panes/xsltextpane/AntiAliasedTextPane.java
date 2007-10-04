@@ -38,7 +38,6 @@ import javax.swing.text.Element;
 import javax.swing.text.Highlighter;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
-import javax.swing.text.html.HTML;
 import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.StyleSheet;
 
@@ -169,7 +168,7 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 
 		if (getXsltMapper().getParentByGen(modNode) != null) {
 			Element enclosingSpan = getEnclosingSpan(currElem);
-			select(enclosingSpan.getStartOffset()+1, enclosingSpan.getEndOffset());
+			select(enclosingSpan.getStartOffset(), enclosingSpan.getEndOffset());
 		}
 		replaceSelection(UtilClipboard.getAsString());
 	}
@@ -213,7 +212,12 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 
 		int currpos = e.getDot();
 
-		Element currelem = getHTMLDocument().getCharacterElement(currpos);
+		// FIXME: Mirko (usare una getCurrentElement 
+				// ad hoc, al posto di getCharacterElement(pos)
+				// per poter selezionare accuratamente l'elemento
+				// correntemente sotto il cursore.
+		Element currelem = //getCurrentElement(); 
+		getHTMLDocument().getCharacterElement(currpos);
 
 		String id = getElementId(currelem);
 
@@ -228,14 +232,14 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 			// Se la selezione si estende su nodi diversi lanciamo l'evento
 			// SelectedNodesChanged
 			Element selDot = getHTMLDocument().getCharacterElement(e.getDot());
-			Element selDotEnclosing = getEnclosingSpan(selDot);
+			Element selDotEnclosing = getSpan(e.getDot());
 			int selDotStart = selDot.getStartOffset(), selDotEnd = selDot.getEndOffset();
 			if (selDotEnclosing != null) {
 				selDotStart = selDotEnclosing.getStartOffset();
 				selDotEnd = selDotEnclosing.getEndOffset();
 			}
 			Element selMark = getHTMLDocument().getCharacterElement(e.getMark());
-			Element selMarkEnclosing = getEnclosingSpan(selMark);
+			Element selMarkEnclosing = getSpan(e.getMark());
 			int selMarkStart = selMark.getStartOffset(), selMarkEnd = selMark.getEndOffset();
 			if (selMarkEnclosing != null) {
 				selMarkStart = selMarkEnclosing.getStartOffset();
@@ -257,12 +261,12 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 			}
 		}
 
-		Element enclosingSpan = getEnclosingSpan(currelem);
-		int relSelStart = selStart - currelem.getStartOffset() - 1;
-		int relSelEnd = selEnd - currelem.getStartOffset() - 1;
+		Element enclosingSpan = getSpan(currpos);
+		int relSelStart = selStart - currelem.getStartOffset();
+		int relSelEnd = selEnd - currelem.getStartOffset();
 		if (enclosingSpan != null) {
-			relSelStart = selStart - enclosingSpan.getStartOffset() - 1;
-			relSelEnd = selEnd - enclosingSpan.getStartOffset() - 1;
+			relSelStart = selStart - enclosingSpan.getStartOffset();
+			relSelEnd = selEnd - enclosingSpan.getStartOffset();
 		}
 
 		pane.fireSelectionChanged(selNode, relSelStart, relSelEnd);
@@ -358,7 +362,7 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 		return array;
 	}
 	
-	// TODO: A partire da Java 5 non esiste pi� un tag di chiusura
+	// TODO: A partire da Java 5 non esiste più un tag di chiusura
 	// esplicito per gli elementi span, che diventano di tipo content
 	public static Element getEnclosingSpan(Element e) {
 		while(e != null && !(isSpan(e) && isMapped(e)))
@@ -366,6 +370,21 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 		return e;
 	}
 	
+	public Element getSpan(int dot) {
+		Element e = getHTMLDocument().getCharacterElement(dot);
+
+		while(e != null && !(isSpan(e) && isMapped(e)))
+			e = e.getParentElement();
+
+		if(e == null) {
+			e = getHTMLDocument().getCharacterElement(dot - 1);
+			while(e != null && !(isSpan(e) && isMapped(e)))
+				e = e.getParentElement();
+		}	
+
+		return e;
+	}
+
 	protected static boolean isMapped(Element e) 
 	{
 		AttributeSet as = e.getAttributes();
@@ -521,10 +540,10 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 			try {
 
 				Element containingSpan = getEnclosingSpan(modElem);
-				int start = modElem.getStartOffset() + 1;
+				int start = modElem.getStartOffset();
 				int end = modElem.getEndOffset();
 				if (containingSpan != null) {
-					start = containingSpan.getStartOffset() + 1;
+					start = containingSpan.getStartOffset();
 					end = containingSpan.getEndOffset();
 				}
 
@@ -582,10 +601,10 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 		try {
 
 			Element containingSpan = getEnclosingSpan(modElem);
-			int start = modElem.getStartOffset() + 1;
+			int start = modElem.getStartOffset();
 			int end = modElem.getEndOffset();
 			if (containingSpan != null) {
-				start = containingSpan.getStartOffset() + 1;
+				start = containingSpan.getStartOffset();
 				end = containingSpan.getEndOffset();
 			}
 

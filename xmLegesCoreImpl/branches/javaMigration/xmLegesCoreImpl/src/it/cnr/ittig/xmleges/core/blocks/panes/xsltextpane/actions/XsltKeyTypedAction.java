@@ -48,29 +48,30 @@ public class XsltKeyTypedAction extends XsltAction {
 		HTMLDocument doc = (HTMLDocument) pane.getDocument();
 
 		Element currElem = doc.getCharacterElement(pane.getCaretPosition());
-		Element enclosingSpan = pane.getEnclosingSpan(currElem);
-
+		Element enclosingSpan = pane.getSpan(pane.getCaretPosition());
+		currElem = enclosingSpan;
+		
 		if (enclosingSpan == null)
 			return;
 
-		// verifica di spazi prima o dopo il cursore. se ci sono  o siamo a inizio tag non inserisce
+		// verifica di spazi prima o dopo il cursore. 
+		// se ci sono  o siamo a inizio tag non inserisce
 		if (SPACE.equals(actionCommand)) {
 			int caret = pane.getCaretPosition();
 			try {    
-				if (SPACE.equals(pane.getText(caret - 1, 1)) || caret-1 == currElem.getStartOffset())
+				if (SPACE.equals(pane.getText(caret - 1, 1)) /* || caret-1 == currElem.getStartOffset() */)
 					return;
 			} catch (BadLocationException ex) {
 			}
 			try {
-				if (SPACE.equals(pane.getText(caret, 1)) && caret + 1 != currElem.getEndOffset())
+				if (SPACE.equals(pane.getText(caret, 1)) /* && caret + 1 != currElem.getEndOffset()*/)
 					return;
 			} catch (BadLocationException ex) {
 			}
 		}
-
+		
 		Node modNode = pane.getXsltMapper().getDomById(pane.getElementId(currElem));
 
-		
 		// FIXME spostare il controllo da xmLegesCore a xmLegesEditor
 		// aggiunto controllo Processing Instruction ?rif readonly
 		if(modNode.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE && modNode.getNodeValue().startsWith("<rif")) {
@@ -78,9 +79,9 @@ public class XsltKeyTypedAction extends XsltAction {
 		}
 		
 		if (pane.getXsltMapper().getParentByGen(modNode) != null
-				|| (modNode.getNodeType() == Node.COMMENT_NODE && getText(e, currElem).equals(pane.getXsltMapper().getI18nNodeText(modNode)))
-				|| (modNode.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE && getText(e, currElem).equals(pane.getXsltMapper().getI18nNodeText(modNode)))) {
-			pane.select(enclosingSpan.getStartOffset() + 1, enclosingSpan.getEndOffset() - 1);
+				/* || (modNode.getNodeType() == Node.COMMENT_NODE && getText(e, currElem).equals(pane.getXsltMapper().getI18nNodeText(modNode)))
+				|| (modNode.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE && getText(e, currElem).equals(pane.getXsltMapper().getI18nNodeText(modNode)))*/) {
+			pane.select(enclosingSpan.getStartOffset(), enclosingSpan.getEndOffset());
 		}
 
 		super.actionPerformed(e);
