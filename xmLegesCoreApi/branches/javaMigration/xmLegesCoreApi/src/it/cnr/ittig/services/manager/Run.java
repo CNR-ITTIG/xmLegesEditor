@@ -156,7 +156,7 @@ public class Run {
 			System.err.println("Usage:");
 			System.err.println("Run app.xml [splashImage]");
 			System.err.println("ex:");
-			System.err.println("Run xmLegesEditor.xml /images/editor/splash/xmLegesEditor.png");
+			System.err.println("Run xmLegesEditor.xml /images/editor/xmLegesEditor.png");
 		}
 	}
 }
