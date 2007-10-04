@@ -84,6 +84,17 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 		return kbc.getTree();
 	}
 		
+	public Collection search(String search) {
+		
+		return search(search, "contains", "IT");
+	}
+	
+	public Collection search(String search, String type, String lang) {
+		
+		KbContainer kbc = getContainer(lang);
+		return kbc.search(search, type);
+	}
+	
 	private KbContainer getContainer(String lang) {
 		
 		KbContainer kbc = (KbContainer) langToContainer.get(lang);

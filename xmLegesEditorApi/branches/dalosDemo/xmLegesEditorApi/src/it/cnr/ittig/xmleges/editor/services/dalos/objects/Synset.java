@@ -25,6 +25,8 @@ public class Synset {
 	public Map lexicalToSynset = null;
 		
 	public Map semanticToSynset = null;
+	
+	public Vector variants = null; //lemmi come normali stringhe..?
 		
 	public Synset() {
 		
@@ -40,6 +42,9 @@ public class Synset {
 		
 		lexicalForm = lexical;
 		lang = language;
+		
+		variants = new Vector();
+		variants.add(lexical);
 		
 		lexicalToSynset = new HashMap();
 		semanticToSynset = new HashMap();

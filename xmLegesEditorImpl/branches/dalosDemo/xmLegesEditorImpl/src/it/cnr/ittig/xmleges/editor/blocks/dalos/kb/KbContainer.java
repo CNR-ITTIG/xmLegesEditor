@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.Vector;
 
 import com.hp.hpl.jena.ontology.Individual;
@@ -60,7 +61,6 @@ public class KbContainer {
 
 		localRepository = KbConf.dalosRepository + LANGUAGE + "/";
 		indFile = localRepository + KbConf.IND;
-		//indFile = UtilFile.getFileFromTemp(KbConf.IND);
 		indwFile = localRepository + KbConf.INDW;
 		indcFile = localRepository + KbConf.INDC;
 		typesFile = localRepository + KbConf.TYPES;
@@ -153,7 +153,6 @@ public class KbContainer {
 		OntModel om = ModelFactory.createOntologyModel(spec, null);
 		
 		if(type.equalsIgnoreCase("full")) {			
-			//om.read(METALEVEL_ONTO); //basta importare il PROP...?
 			om.read(KbConf.METALEVEL_PROP);
 			om.read(KbConf.DOMAIN_ONTO);
 			readData(om, conceptsFile);
@@ -166,8 +165,8 @@ public class KbContainer {
 			om.read(KbConf.DOMAIN_ONTO);
 		}
 		if(type.equalsIgnoreCase("mapping")) {
-			readData(om, indcFile);		
 			om.read(KbConf.METALEVEL_ONTO);			
+			readData(om, indcFile);		
 		}
 		if(type.equalsIgnoreCase("individual")) {
 			om.read(KbConf.METALEVEL_ONTO);
@@ -177,6 +176,7 @@ public class KbContainer {
 			readData(om, typesFile);
 		}
 		if(type.equalsIgnoreCase("source")) {
+			//om.read(KbConf.SOURCE_SCHEMA); //Ci vuole questo metalivello??
 			readData(om, indFile);
 			readData(om, sourcesFile);			
 		}
@@ -216,24 +216,26 @@ public class KbContainer {
 		}
 		
 		for(Iterator i = synClass.listInstances(false); i.hasNext();) {
-			
-			OntResource ores = (OntResource) i.next();			
-			OntResource ws = (OntResource) ores.getPropertyValue(contains);
-			if(ws == null) {
-				System.out.println("No wordsense for " + ores);
-				continue;
+
+			Synset syn = null;
+			OntResource ores = (OntResource) i.next();		
+			for(Iterator k = ores.listProperties(contains); i.hasNext();) {
+				OntResource ws = (OntResource) i.next();			
+				OntResource w = (OntResource) ws.getPropertyValue(word);			
+				RDFNode lexNode = (RDFNode) w.getPropertyValue(lexical);			
+				String lex = ((Literal) lexNode).getString();
+				if(syn == null) {
+					syn = new Synset(lex);
+					syn.setLanguage(LANGUAGE);
+					syn.setURI(ores.getNameSpace() + ores.getLocalName());
+					//System.out.println("Adding " + ores.getLocalName() + " --> " + syn);			
+					synsets.put(ores.getLocalName(), syn); //meglio questa come chiave??
+					addSortedSynset(syn);
+				} else {
+					syn.variants.add(lex);
+				}
 			}
-		
-			OntResource w = (OntResource) ws.getPropertyValue(word);			
-			RDFNode lexNode = (RDFNode) w.getPropertyValue(lexical);			
-			String lex = ((Literal) lexNode).getString();
 			
-			Synset syn = new Synset(lex);
-			syn.setLanguage(LANGUAGE);
-			syn.setURI(ores.getNameSpace() + ores.getLocalName());
-			//System.out.println("Adding " + ores.getLocalName() + " --> " + syn);			
-			synsets.put(ores.getLocalName(), syn); //meglio questa come chiave??
-			addSortedSynset(syn);
 		}
 	}
 	
@@ -400,4 +402,53 @@ public class KbContainer {
 		//Se viene implementato un Set non possono esserci doppioni (elementi disordinati!)
 		mappedSynsets.add(objSynset);		
 	}	
+	
+	Collection search(String search, String type) {
+		//Compie ricerche lessicali nell'insieme dei synset
+		
+		if(search.length() < 1) {
+			return sortedSynsets;
+		}
+		
+		Vector results = new Vector();
+		for(int i = 0; i < sortedSynsets.size(); i++) {
+			Synset syn = (Synset) sortedSynsets.get(i);
+			for(int k = 0; k < syn.variants.size(); k++) {
+				String lemma = (String) syn.variants.get(k);
+				if(checkLemma(lemma, search, type)) {
+					results.add(syn);
+					break;
+				}
+			}
+		}
+		
+		return results;
+	}
+	
+	private boolean checkLemma(String lemma, String search, String type) {
+		//ricerca full-text con ranking...??
+		
+		if(type.equalsIgnoreCase("contains")) {
+			if(lemma.toLowerCase().indexOf(search) > 1) {
+				return true;
+			}
+		}
+		if(type.equalsIgnoreCase("startsWith")) {
+			if(lemma.toLowerCase().startsWith(search)) {
+				return true;
+			}			
+		}
+		if(type.equalsIgnoreCase("endsWith")) {
+			if(lemma.toLowerCase().endsWith(search)) {
+				return true;
+			}
+		}
+		if(type.equalsIgnoreCase("exact")) {
+			if(lemma.equalsIgnoreCase(search)) {
+				return true;
+			}	
+		}
+		
+		return false;
+	}
 }
