@@ -219,22 +219,34 @@ public class KbContainer {
 
 			Synset syn = null;
 			OntResource ores = (OntResource) i.next();		
-			for(Iterator k = ores.listProperties(contains); i.hasNext();) {
-				OntResource ws = (OntResource) i.next();			
-				OntResource w = (OntResource) ws.getPropertyValue(word);			
-				RDFNode lexNode = (RDFNode) w.getPropertyValue(lexical);			
-				String lex = ((Literal) lexNode).getString();
-				if(syn == null) {
-					syn = new Synset(lex);
-					syn.setLanguage(LANGUAGE);
-					syn.setURI(ores.getNameSpace() + ores.getLocalName());
-					//System.out.println("Adding " + ores.getLocalName() + " --> " + syn);			
-					synsets.put(ores.getLocalName(), syn); //meglio questa come chiave??
-					addSortedSynset(syn);
-				} else {
-					syn.variants.add(lex);
-				}
-			}
+			OntResource ws = (OntResource) ores.getPropertyValue(contains);			
+			OntResource w = (OntResource) ws.getPropertyValue(word);			
+			RDFNode lexNode = (RDFNode) w.getPropertyValue(lexical);			
+			String lex = ((Literal) lexNode).getString();
+
+			syn = new Synset(lex);
+			syn.setLanguage(LANGUAGE);
+			syn.setURI(ores.getNameSpace() + ores.getLocalName());
+			//System.out.println("Adding " + ores.getLocalName() + " --> " + syn);			
+			synsets.put(ores.getLocalName(), syn); //meglio questa come chiave??
+			addSortedSynset(syn);
+
+//			for(Iterator k = ores.listProperties(contains); k.hasNext();) {
+//				OntResource ws = (OntResource) k.next();			
+//				OntResource w = (OntResource) ws.getPropertyValue(word);			
+//				RDFNode lexNode = (RDFNode) w.getPropertyValue(lexical);			
+//				String lex = ((Literal) lexNode).getString();
+//				if(syn == null) {
+//					syn = new Synset(lex);
+//					syn.setLanguage(LANGUAGE);
+//					syn.setURI(ores.getNameSpace() + ores.getLocalName());
+//					//System.out.println("Adding " + ores.getLocalName() + " --> " + syn);			
+//					synsets.put(ores.getLocalName(), syn); //meglio questa come chiave??
+//					addSortedSynset(syn);
+//				} else {
+//					syn.variants.add(lex);
+//				}
+//			}
 			
 		}
 	}
