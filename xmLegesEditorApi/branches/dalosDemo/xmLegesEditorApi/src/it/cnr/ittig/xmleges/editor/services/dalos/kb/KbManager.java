@@ -52,6 +52,13 @@ public interface KbManager extends Service {
 	/**
 	 * 
 	 * @param search
+	 * @return
+	 */
+	public Collection search(String search);
+	
+	/**
+	 * 
+	 * @param search
 	 * @param type
 	 * @param lang
 	 * @return
