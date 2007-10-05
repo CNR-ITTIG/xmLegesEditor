@@ -29,27 +29,15 @@ public class Synset {
 	public Vector variants = null; //lemmi come normali stringhe..?
 		
 	public Synset() {
-		
-		this("(empty)", "");
-	}
-
-	public Synset(String lexical) {
-		
-		this(lexical, "");
-	}
-	
-	public Synset(String lexical, String language) {
-		
-		lexicalForm = lexical;
-		lang = language;
-		
-		variants = new Vector();
-		variants.add(lexical);
-		
+				
 		lexicalToSynset = new HashMap();
 		semanticToSynset = new HashMap();
 		
 		sources = new Vector();
+		variants = new Vector();
+		
+		lexicalForm = "";
+		
 	}
 
 	public void setDef(String str) {
@@ -60,6 +48,11 @@ public class Synset {
 	public String getDef() {
 		
 		return def;
+	}
+	
+	public void setLexicalForm(String lex) {
+		
+		lexicalForm = lex;
 	}
 	
 	public String getLexicalForm() {
@@ -132,7 +125,10 @@ public class Synset {
 	}
 
 	public String toString() {
-		
+
+		if(lexicalForm.trim().length() < 1) {
+			return "(empty)";
+		}
 		return lexicalForm;
 	}
 	

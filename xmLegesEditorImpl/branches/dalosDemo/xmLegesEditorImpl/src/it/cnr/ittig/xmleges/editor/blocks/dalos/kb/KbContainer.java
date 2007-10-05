@@ -12,7 +12,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.Vector;
 
 import com.hp.hpl.jena.ontology.Individual;
@@ -205,6 +204,7 @@ public class KbContainer {
 		OntProperty contains = ind_m.getOntProperty(KbConf.METALEVEL_ONTO_NS + "containsWordSense");
 		OntProperty word = ind_m.getOntProperty(KbConf.METALEVEL_ONTO_NS + "word");
 		OntProperty lexical = ind_m.getOntProperty(KbConf.METALEVEL_ONTO_NS + "lexicalForm");
+		OntProperty proto = ind_m.getOntProperty(KbConf.METALEVEL_ONTO_NS + "protoForm");
 		OntClass synClass = ind_m.getOntClass(KbConf.METALEVEL_ONTO_NS + "Synset");
 		if(contains == null || word == null || lexical == null) {
 			System.out.println("ERROR: null properties.");
@@ -219,35 +219,28 @@ public class KbContainer {
 
 			Synset syn = null;
 			OntResource ores = (OntResource) i.next();		
-			OntResource ws = (OntResource) ores.getPropertyValue(contains);			
-			OntResource w = (OntResource) ws.getPropertyValue(word);			
-			RDFNode lexNode = (RDFNode) w.getPropertyValue(lexical);			
-			String lex = ((Literal) lexNode).getString();
 
-			syn = new Synset(lex);
+			syn = new Synset();
 			syn.setLanguage(LANGUAGE);
 			syn.setURI(ores.getNameSpace() + ores.getLocalName());
 			//System.out.println("Adding " + ores.getLocalName() + " --> " + syn);			
 			synsets.put(ores.getLocalName(), syn); //meglio questa come chiave??
 			addSortedSynset(syn);
 
-//			for(Iterator k = ores.listProperties(contains); k.hasNext();) {
-//				OntResource ws = (OntResource) k.next();			
-//				OntResource w = (OntResource) ws.getPropertyValue(word);			
-//				RDFNode lexNode = (RDFNode) w.getPropertyValue(lexical);			
-//				String lex = ((Literal) lexNode).getString();
-//				if(syn == null) {
-//					syn = new Synset(lex);
-//					syn.setLanguage(LANGUAGE);
-//					syn.setURI(ores.getNameSpace() + ores.getLocalName());
-//					//System.out.println("Adding " + ores.getLocalName() + " --> " + syn);			
-//					synsets.put(ores.getLocalName(), syn); //meglio questa come chiave??
-//					addSortedSynset(syn);
-//				} else {
-//					syn.variants.add(lex);
-//				}
-//			}
-			
+			for(Iterator k = ores.listPropertyValues(contains); k.hasNext();) {
+				OntResource ws = (OntResource) k.next();
+				OntResource w = (OntResource) ws.getPropertyValue(word);
+				RDFNode protoNode = (RDFNode) w.getPropertyValue(proto);
+				if(protoNode != null) {
+					String protoForm = ((Literal) protoNode).getString();
+					syn.setLexicalForm(protoForm);					
+				}
+				for(Iterator l = w.listPropertyValues(lexical); l.hasNext(); ) {
+					RDFNode lexNode = (RDFNode) l.next();
+					String lexForm = ((Literal) lexNode).getString();
+					syn.variants.add(lexForm);
+				}
+			}
 		}
 	}
 	
