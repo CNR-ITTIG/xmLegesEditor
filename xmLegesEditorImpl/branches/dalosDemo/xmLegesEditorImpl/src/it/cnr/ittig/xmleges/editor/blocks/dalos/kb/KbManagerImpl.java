@@ -85,11 +85,12 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 	}
 		
 	public Collection search(String search) {
-		
+		//Dovrebbe prendere la lingua dalle Preference?	
 		return search(search, "contains", "IT");
 	}
 	
 	public Collection search(String search, String type, String lang) {
+		//Dovrebbe prendere il tipo di ricerca dalle Preference? (ultima usata)		
 		
 		KbContainer kbc = getContainer(lang);
 		return kbc.search(search, type);

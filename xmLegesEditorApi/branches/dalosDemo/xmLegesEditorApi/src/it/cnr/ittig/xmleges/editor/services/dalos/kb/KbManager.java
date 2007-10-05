@@ -49,7 +49,13 @@ public interface KbManager extends Service {
 	 */
 	public Collection getSynsets(String lang);
 	
+	/**
+	 * 
+	 * @param search
+	 * @param type
+	 * @param lang
+	 * @return
+	 */
+	public Collection search(String search, String type, String lang);
 	
-	
-
 }
