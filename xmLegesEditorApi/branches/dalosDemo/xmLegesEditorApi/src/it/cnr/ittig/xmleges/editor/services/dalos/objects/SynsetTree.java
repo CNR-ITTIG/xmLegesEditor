@@ -13,7 +13,7 @@ public class SynsetTree extends SingleTree {
 				
      	//Personalizza CellRenderer:
      	DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
-     	renderer.setLeafIcon(i18n.getIconFor("editor.panes.dalos.concept.icon"));
+     	renderer.setLeafIcon(i18n.getIconFor("editor.panes.dalos.synsetlist.icon"));
      	renderer.setOpenIcon(i18n.getIconFor("editor.panes.dalos.treeopen.icon"));
      	renderer.setClosedIcon(i18n.getIconFor("editor.panes.dalos.treeclosed.icon"));
      	
