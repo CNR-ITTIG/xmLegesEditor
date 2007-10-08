@@ -13,28 +13,27 @@ import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.frame.FindIterator;
 import it.cnr.ittig.xmleges.core.services.frame.Frame;
 import it.cnr.ittig.xmleges.core.services.frame.PaneException;
+import it.cnr.ittig.xmleges.core.services.i18n.I18n;
+import it.cnr.ittig.xmleges.core.services.panes.source.SourcePane;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
-import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
-import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
+import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetDetailsPane;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSelectionEvent;
-import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetTreePane;
+import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSourcePane;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.ActionEvent;
 import java.util.EventObject;
 
-import javax.swing.JList;
+import javax.swing.AbstractAction;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
-import javax.swing.JTree;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.TreePath;
+import javax.swing.JToolBar;
 
 /**						
  * <h1>Implementazione del servizio
- * <code>it.cnr.ittig.xmleges.editor.services.panes.dalos.ConceptsPane</code>.</h1>
+ * <code>it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetDetailsPane</code>.</h1>
  * <h1>Descrizione</h1>
  * Servizio per la visualizzazione del pannello .....
  * <h1>Configurazione</h1>
@@ -45,6 +44,7 @@ import javax.swing.tree.TreePath;
  * <li>it.cnr.ittig.xmleges.editor.services.frame.Frame:1.0</li>
  * <li>it.cnr.ittig.xmleges.core.services.event.EventManager:1.0</li>
  * <li>it.cnr.ittig.xmleges.core.blocks.util.ui.UtilUI:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.bugreport.BugReport:1.0</li>
  * </ul>
  * <h1>I18n</h1>
  * <ul>
@@ -71,7 +71,7 @@ import javax.swing.tree.TreePath;
  * @author <a href="mailto:agnoloni@ittig.cnr.it">Tommaso Agnoloni</a>
  */
 
-public class SynsetTreePaneImpl implements SynsetTreePane, EventManagerListener, Loggable, Serviceable, Initializable, Startable {
+public class SynsetSourcePaneImpl implements SynsetSourcePane, EventManagerListener, Loggable, Serviceable, Initializable, Startable {
 
 	Logger logger;
 	
@@ -87,12 +87,15 @@ public class SynsetTreePaneImpl implements SynsetTreePane, EventManagerListener,
 	
 	JScrollPane scrollPane = new JScrollPane();
 
-	JList list = new JList();
-	
-	JTree tree;
-	
-	KbManager kbManager;
+	SwitchLangAction switchLangAction = new SwitchLangAction();
 
+	JPopupMenu popupMenu;
+	
+	SynsetDetails synsetPane;
+	
+	I18n i18n;
+
+	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
@@ -104,22 +107,26 @@ public class SynsetTreePaneImpl implements SynsetTreePane, EventManagerListener,
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 		utilUI = (UtilUI) serviceManager.lookup(UtilUI.class);
 		bars = (Bars) serviceManager.lookup(Bars.class);
-		kbManager = (KbManager) serviceManager.lookup(KbManager.class);
+		i18n = (I18n) serviceManager.lookup(I18n.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws Exception {
-				
-		frame.addPane(this, false);
-        
+		popupMenu = bars.getPopup(false);
+		JToolBar bar = new JToolBar();
+		bar.add(utilUI.applyI18n("editor.panes.dalos.synsetlist.find", switchLangAction));
+		panel.add(bar, BorderLayout.SOUTH);
+		
+		
+		synsetPane = new SynsetDetails();
+		synsetPane.setI18n(i18n);
+		
+		scrollPane.setViewportView(synsetPane);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		panel.add(scrollPane);
-	
-		tree = kbManager.getTree("IT");		
-		scrollPane.setViewportView(tree);
 		
-		tree.addMouseListener(new SynsetTreePaneMouseAdapter());
+		synsetPane.clearContent();
 		
 		eventManager.addListener(this, SynsetSelectionEvent.class);
 	}
@@ -127,14 +134,14 @@ public class SynsetTreePaneImpl implements SynsetTreePane, EventManagerListener,
 	// ////////////////////////////////////////// EventManagerListener Interface
 	public void manageEvent(EventObject event) {
 		if (event instanceof SynsetSelectionEvent){
-
-			System.err.println("Synchronize tree from "+event.getSource().toString() + "on    "+((SynsetSelectionEvent)event).getActiveSynset().getLexicalForm());			
-		}
+			synsetPane.setSynset(((SynsetSelectionEvent)event).getActiveSynset());
+			synsetPane.draw();
+		}			
 	}
 	
 	// ///////////////////////////////////////////////////// Startable Interface
 	public void start() throws Exception {
-		
+		frame.addPane(this, false);
 	}
 
 	public void stop() throws Exception {
@@ -142,14 +149,21 @@ public class SynsetTreePaneImpl implements SynsetTreePane, EventManagerListener,
 
 	// ///////////////////////////////////////////////////// SegnalazioniPane Interface
 	public String getName() {
-		return "editor.panes.dalos.synsettree";
+		return "editor.panes.dalos.source";
 	}
 
 	public Component getPaneAsComponent() {
 		return panel;
 	}
+
 	
-	
+	// ///////////////////////////////////////////////////////// Toolbar Actions
+	protected class SwitchLangAction extends AbstractAction {
+		public void actionPerformed(ActionEvent e) {
+			System.err.println("--------> SWITCH LANG ACTION");
+			logger.info("switch lang action");
+		}
+	}
 
 	public boolean canCut() {
 		return false;
@@ -204,35 +218,5 @@ public class SynsetTreePaneImpl implements SynsetTreePane, EventManagerListener,
 
 	public void reload() {
 	}
-	
-	
-	private void selectSynset(Synset activeSynset){
-		eventManager.fireEvent(new SynsetSelectionEvent(this, activeSynset));
-	}
-	
-	protected class SynsetTreePaneMouseAdapter extends MouseAdapter {
-		
-		public void mouseClicked(MouseEvent e) {
-			TreePath path = tree.getPathForLocation(e.getX(), e.getY());
-			if (path != null) {
-				DefaultMutableTreeNode n = (DefaultMutableTreeNode) path.getLastPathComponent();
-				try {
-					if(n.getUserObject() instanceof Synset){
-						selectSynset((Synset)n.getUserObject());
-					}
-					else
-						System.err.println("NOT Synset selected on tree");
-				} catch (ClassCastException exc) {
-				}
-				if (e.getButton() == MouseEvent.BUTTON3) {
-					System.err.println("right click on tree");
-				}
-			}
-		}
-
-		
-	}
-	
-	
 	
 }

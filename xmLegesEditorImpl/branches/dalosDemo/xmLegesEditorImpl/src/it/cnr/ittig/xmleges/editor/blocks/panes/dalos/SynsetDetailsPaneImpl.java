@@ -31,7 +31,7 @@ import javax.swing.JToolBar;
 
 /**						
  * <h1>Implementazione del servizio
- * <code>it.cnr.ittig.xmleges.editor.services.panes.dalos.ConceptsPane</code>.</h1>
+ * <code>it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetDetailsPane</code>.</h1>
  * <h1>Descrizione</h1>
  * Servizio per la visualizzazione del pannello .....
  * <h1>Configurazione</h1>
@@ -89,7 +89,7 @@ public class SynsetDetailsPaneImpl implements SynsetDetailsPane, EventManagerLis
 
 	JPopupMenu popupMenu;
 	
-	SynsetPane synsetPane;
+	SynsetDetails synsetPane;
 	
 	I18n i18n;
 
@@ -112,11 +112,11 @@ public class SynsetDetailsPaneImpl implements SynsetDetailsPane, EventManagerLis
 	public void initialize() throws Exception {
 		popupMenu = bars.getPopup(false);
 		JToolBar bar = new JToolBar();
-		bar.add(utilUI.applyI18n("editor.panes.dalos.concept.find", switchLangAction));
+		bar.add(utilUI.applyI18n("editor.panes.dalos.synsetlist.find", switchLangAction));
 		panel.add(bar, BorderLayout.SOUTH);
 		
 		
-		synsetPane = new SynsetPane();
+		synsetPane = new SynsetDetails();
 		synsetPane.setI18n(i18n);
 		
 		scrollPane.setViewportView(synsetPane);
@@ -147,7 +147,7 @@ public class SynsetDetailsPaneImpl implements SynsetDetailsPane, EventManagerLis
 
 	// ///////////////////////////////////////////////////// SegnalazioniPane Interface
 	public String getName() {
-		return "editor.panes.dalos.synset";
+		return "editor.panes.dalos.synsetdetails";
 	}
 
 	public Component getPaneAsComponent() {

@@ -13,23 +13,29 @@ import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.frame.FindIterator;
 import it.cnr.ittig.xmleges.core.services.frame.Frame;
 import it.cnr.ittig.xmleges.core.services.frame.PaneException;
+import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
+import it.cnr.ittig.xmleges.editor.services.dalos.objects.SynsetTree;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
+import it.cnr.ittig.xmleges.editor.services.panes.dalos.SemanticRelationPane;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSelectionEvent;
-import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetTreePane;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Collection;
 import java.util.EventObject;
+import java.util.Iterator;
 
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
 /**						
@@ -71,7 +77,7 @@ import javax.swing.tree.TreePath;
  * @author <a href="mailto:agnoloni@ittig.cnr.it">Tommaso Agnoloni</a>
  */
 
-public class SynsetTreePaneImpl implements SynsetTreePane, EventManagerListener, Loggable, Serviceable, Initializable, Startable {
+public class SemanticRelationPaneImpl implements SemanticRelationPane, EventManagerListener, Loggable, Serviceable, Initializable, Startable {
 
 	Logger logger;
 	
@@ -92,6 +98,10 @@ public class SynsetTreePaneImpl implements SynsetTreePane, EventManagerListener,
 	JTree tree;
 	
 	KbManager kbManager;
+	
+	SynsetTree relazioniTree;
+	
+	I18n i18n;
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -105,31 +115,34 @@ public class SynsetTreePaneImpl implements SynsetTreePane, EventManagerListener,
 		utilUI = (UtilUI) serviceManager.lookup(UtilUI.class);
 		bars = (Bars) serviceManager.lookup(Bars.class);
 		kbManager = (KbManager) serviceManager.lookup(KbManager.class);
+		i18n = (I18n) serviceManager.lookup(I18n.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws Exception {
 				
-		frame.addPane(this, false);
-        
+		DefaultMutableTreeNode tmpRoot = new DefaultMutableTreeNode(" - ");
+     	DefaultTreeModel tmpModel = new DefaultTreeModel(tmpRoot);     	
+     	relazioniTree = new SynsetTree(tmpModel,i18n);
+     	relazioniTree.addMouseListener(new SemanticRelationTreeMouseAdapter());
+			
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		panel.add(scrollPane);
 	
-		tree = kbManager.getTree("IT");		
-		scrollPane.setViewportView(tree);
-		
-		tree.addMouseListener(new SynsetTreePaneMouseAdapter());
-		
+		scrollPane.setViewportView(relazioniTree);		
+		frame.addPane(this, false);
+				
 		eventManager.addListener(this, SynsetSelectionEvent.class);
 	}
 
 	// ////////////////////////////////////////// EventManagerListener Interface
 	public void manageEvent(EventObject event) {
-		if (event instanceof SynsetSelectionEvent){
-
-			System.err.println("Synchronize tree from "+event.getSource().toString() + "on    "+((SynsetSelectionEvent)event).getActiveSynset().getLexicalForm());			
-		}
+//		if (event instanceof SynsetSelectionEvent){
+//			Synset selected = ((SynsetSelectionEvent)event).getActiveSynset();
+//			kbManager.addProperties(selected);
+//			showSemanticRelations(selected);
+//		}
 	}
 	
 	// ///////////////////////////////////////////////////// Startable Interface
@@ -142,11 +155,62 @@ public class SynsetTreePaneImpl implements SynsetTreePane, EventManagerListener,
 
 	// ///////////////////////////////////////////////////// SegnalazioniPane Interface
 	public String getName() {
-		return "editor.panes.dalos.synsettree";
+		return "editor.panes.dalos.semanticrelation";
 	}
 
 	public Component getPaneAsComponent() {
 		return panel;
+	}
+	
+	
+	private void clearTree(SynsetTree tree) {
+
+		tree.removeChildren();
+		tree.setRootVisible(false);
+		tree.reloadModel();
+	}
+	
+	
+	
+	void showSemanticRelations(Synset syn) {
+		
+		
+		Collection related = (Collection)syn.semanticToSynset.get("");    // che chiave ? prop ?
+		
+		
+		//Relazione rel = new Relazione();
+		DefaultMutableTreeNode top = null, node = null;
+
+		clearTree(relazioniTree);
+
+		if(related.size() < 1) {
+			return;
+		}
+
+		relazioniTree.setRootUserObject(syn.toString());
+		relazioniTree.setRootVisible(true);
+	
+//		for(Iterator i = related.iterator(); i.hasNext();) {
+//			Synset item = (Synset)i.next();
+//			Relazione thisRel = item.getRelation();
+//			if(rel.equals(thisRel) == false) {
+//				relazioniTree.expandChilds(top);
+//				rel = thisRel;
+//				top = new DefaultMutableTreeNode(rel);
+//				relazioniTree.addNode(top);
+//			}
+//			Concetto dest = item.getDestination();
+//			node = new DefaultMutableTreeNode(dest);
+//			top.add(node);
+//		}
+		
+		relazioniTree.expandChilds(top);
+		
+//		JScrollBar vbar = relazioniScroll.getVerticalScrollBar();
+//		vbar.setValue(vbar.getMinimum());
+//		JScrollBar hbar = relazioniScroll.getHorizontalScrollBar();
+//		hbar.setValue(hbar.getMinimum());
+
 	}
 	
 	
@@ -210,7 +274,7 @@ public class SynsetTreePaneImpl implements SynsetTreePane, EventManagerListener,
 		eventManager.fireEvent(new SynsetSelectionEvent(this, activeSynset));
 	}
 	
-	protected class SynsetTreePaneMouseAdapter extends MouseAdapter {
+	protected class SemanticRelationTreeMouseAdapter extends MouseAdapter {
 		
 		public void mouseClicked(MouseEvent e) {
 			TreePath path = tree.getPathForLocation(e.getX(), e.getY());

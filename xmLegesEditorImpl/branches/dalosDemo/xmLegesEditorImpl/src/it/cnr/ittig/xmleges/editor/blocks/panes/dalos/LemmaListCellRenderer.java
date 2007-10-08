@@ -37,7 +37,7 @@ public class LemmaListCellRenderer extends JLabel implements ListCellRenderer {
 		}
 
 		if(value instanceof Synset)
-			setIcon(i18n.getIconFor("editor.panes.dalos.concept.icon"));
+			setIcon(i18n.getIconFor("editor.panes.dalos.synsetlist.icon"));
 		
 //		if(value instanceof Lemma) {
 //			setIcon(UtilEditor.getIcon("lemma1"));

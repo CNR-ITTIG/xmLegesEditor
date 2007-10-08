@@ -16,8 +16,8 @@ import it.cnr.ittig.xmleges.core.services.frame.PaneException;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
+import it.cnr.ittig.xmleges.editor.services.panes.dalos.LinguisticRelationPane;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSelectionEvent;
-import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetTreePane;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -71,7 +71,7 @@ import javax.swing.tree.TreePath;
  * @author <a href="mailto:agnoloni@ittig.cnr.it">Tommaso Agnoloni</a>
  */
 
-public class SynsetTreePaneImpl implements SynsetTreePane, EventManagerListener, Loggable, Serviceable, Initializable, Startable {
+public class LinguisticRelationPaneImpl implements LinguisticRelationPane, EventManagerListener, Loggable, Serviceable, Initializable, Startable {
 
 	Logger logger;
 	
@@ -116,10 +116,10 @@ public class SynsetTreePaneImpl implements SynsetTreePane, EventManagerListener,
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		panel.add(scrollPane);
 	
-		tree = kbManager.getTree("IT");		
-		scrollPane.setViewportView(tree);
+//		tree = kbManager.getTree("IT");		
+//		scrollPane.setViewportView(tree);
 		
-		tree.addMouseListener(new SynsetTreePaneMouseAdapter());
+//		tree.addMouseListener(new SynsetTreePaneMouseAdapter());
 		
 		eventManager.addListener(this, SynsetSelectionEvent.class);
 	}
@@ -127,8 +127,8 @@ public class SynsetTreePaneImpl implements SynsetTreePane, EventManagerListener,
 	// ////////////////////////////////////////// EventManagerListener Interface
 	public void manageEvent(EventObject event) {
 		if (event instanceof SynsetSelectionEvent){
-
-			System.err.println("Synchronize tree from "+event.getSource().toString() + "on    "+((SynsetSelectionEvent)event).getActiveSynset().getLexicalForm());			
+		//	System.err.println("Synchronize LinguisticRelationPane on    "+((SynsetSelectionEvent)event).getActiveSynset().getLexicalForm());
+			
 		}
 	}
 	
@@ -142,7 +142,7 @@ public class SynsetTreePaneImpl implements SynsetTreePane, EventManagerListener,
 
 	// ///////////////////////////////////////////////////// SegnalazioniPane Interface
 	public String getName() {
-		return "editor.panes.dalos.synsettree";
+		return "editor.panes.dalos.linguisticrelation";
 	}
 
 	public Component getPaneAsComponent() {

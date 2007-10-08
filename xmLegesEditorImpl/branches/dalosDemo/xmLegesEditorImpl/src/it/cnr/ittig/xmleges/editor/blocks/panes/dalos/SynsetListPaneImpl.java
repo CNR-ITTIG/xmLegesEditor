@@ -24,12 +24,15 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Collection;
 import java.util.EventObject;
+import java.util.Vector;
 
 import javax.swing.AbstractAction;
+import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
@@ -37,6 +40,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**						
  * <h1>Implementazione del servizio
@@ -80,6 +85,12 @@ import javax.swing.ListSelectionModel;
 
 public class SynsetListPaneImpl implements SynsetListPane, EventManagerListener, Loggable, Serviceable, Initializable, Startable {
 
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 	Logger logger;
 	
 	Frame frame;
@@ -97,6 +108,8 @@ public class SynsetListPaneImpl implements SynsetListPane, EventManagerListener,
 	JList list = new JList();
 	
 	JTextField  textWords = new JTextField();
+	
+	JComboBox   searchType;
 
 	FindAction findAction = new FindAction();
 
@@ -105,6 +118,9 @@ public class SynsetListPaneImpl implements SynsetListPane, EventManagerListener,
 	KbManager kbManager;
 	
 	I18n i18n;
+	
+	
+	String[] searchTypes={"contains", "startsWith","endsWith","exact"};
 	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -126,12 +142,17 @@ public class SynsetListPaneImpl implements SynsetListPane, EventManagerListener,
 		popupMenu = bars.getPopup(false);
 		JToolBar bar = new JToolBar();
 		
+		searchType = new JComboBox(searchTypes);
+		searchType.setSelectedIndex(0);
+		
         textWords.setPreferredSize(new Dimension(300,24));
         textWords.setEditable(true);
-	    //textWords.addActionListener(this);
-	  
+	    textWords.addActionListener(new TextFieldActionListener());
+	   
+	    
+	    bar.add(searchType);
 		bar.add(textWords);
-		bar.add(utilUI.applyI18n("editor.panes.dalos.concept.find", findAction));
+		bar.add(utilUI.applyI18n("editor.panes.dalos.synsetlist.find", findAction));
 		
 		panel.add(bar, BorderLayout.SOUTH);
 		scrollPane.setViewportView(list);
@@ -148,10 +169,11 @@ public class SynsetListPaneImpl implements SynsetListPane, EventManagerListener,
         LemmaListCellRenderer renderer = new LemmaListCellRenderer();
         renderer.setI18n(i18n);
         list.addMouseListener(new SynsetListPaneMouseAdapter());
+        list.addListSelectionListener(new SynsetListSelectionListener());
 		
         list.setCellRenderer(renderer);
         list.setListData(synsets.toArray());
-        
+     
 		eventManager.addListener(this,SynsetSelectionEvent.class);
 	}
 
@@ -172,7 +194,7 @@ public class SynsetListPaneImpl implements SynsetListPane, EventManagerListener,
 
 	// ///////////////////////////////////////////////////// SegnalazioniPane Interface
 	public String getName() {
-		return "editor.panes.dalos.concept";
+		return "editor.panes.dalos.synsetlist";
 	}
 
 	public Component getPaneAsComponent() {
@@ -185,10 +207,20 @@ public class SynsetListPaneImpl implements SynsetListPane, EventManagerListener,
 	 */
 	class FindAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
-			System.err.println("Find ACTION pressed");
+			System.err.println("Find ACTION pressed");		
+			searchAndDisplaySynsets();
 		}
 	}
 	
+	
+	private void searchAndDisplaySynsets(){
+		Collection res = kbManager.search(textWords.getText(), (String)searchType.getSelectedItem(), "IT");
+		if(res!=null && !res.isEmpty()){
+			list.setListData(res.toArray());
+			list.setSelectedIndex(0);
+		}else
+			list.setListData(new Vector());
+	}
 
 	public boolean canCut() {
 		return false;
@@ -246,18 +278,35 @@ public class SynsetListPaneImpl implements SynsetListPane, EventManagerListener,
 	
 	
 	
-	
-	
-	
-	
 	private void selectSynset(Synset activeSynset){
 		eventManager.fireEvent(new SynsetSelectionEvent(this, activeSynset));
 	}
 	
-	protected class SynsetListPaneMouseAdapter extends MouseAdapter {
+	
+	protected class SynsetListSelectionListener implements ListSelectionListener {
 		
+		public void valueChanged(ListSelectionEvent e) {
+			if(list.getSelectedValue()!=null)
+				selectSynset((Synset)list.getSelectedValue());
+		}
+	}
+	
+	protected class TextFieldActionListener implements ActionListener {
+		
+		public void actionPerformed(ActionEvent e) {
+			System.err.println("action performed on textfieldddd");
+			searchAndDisplaySynsets();
+		}
+	}
+	
+	
+	protected class SynsetListPaneMouseAdapter extends MouseAdapter {
+		// da implementare il doubleclick
 		public void mouseClicked(MouseEvent e) {
-			selectSynset((Synset)list.getSelectedValue());
+			if(e.getClickCount()==2){
+				Synset selectedSyn = (Synset)list.getSelectedValue();
+				System.err.println("<"+selectedSyn.getURI()+">"+selectedSyn.getLexicalForm()+"</"+selectedSyn.getURI()+">");
+			}
 		}
 	}
 	

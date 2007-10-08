@@ -11,12 +11,12 @@ import javax.swing.JEditorPane;
 import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLEditorKit;
 
-public class SynsetPane extends JEditorPane {
+public class SynsetDetails extends JEditorPane {
 	
 	Synset synset = null;
 	I18n i18n;
 	
-	public SynsetPane() {
+	public SynsetDetails() {
 		
 		super();
 		
@@ -87,7 +87,7 @@ public class SynsetPane extends JEditorPane {
 	
 	public void draw() {
 		
-			String img = "<img src=\"./" + i18n.getIconFor("editor.panes.dalos.concept")+ "\">";
+			String img = "<img src=\"./" + i18n.getIconFor("editor.panes.dalos.synsetlist")+ "\">";
 			String html = "<html><body>" +  img +
 				"</h3><h2><i>Definizione</i></h2><h3>" + synset.toString() + 
 				"</h3><h2><i>Varianti</i></h2><h3>"+synset.getLexicalForm(); 
