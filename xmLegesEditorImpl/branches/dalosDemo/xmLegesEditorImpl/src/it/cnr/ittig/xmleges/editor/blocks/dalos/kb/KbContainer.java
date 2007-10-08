@@ -2,6 +2,7 @@ package it.cnr.ittig.xmleges.editor.blocks.dalos.kb;
 
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
+import it.cnr.ittig.xmleges.editor.services.dalos.objects.Source;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.SynsetTree;
 
@@ -223,9 +224,6 @@ public class KbContainer {
 			syn = new Synset();
 			syn.setLanguage(LANGUAGE);
 			syn.setURI(ores.getNameSpace() + ores.getLocalName());
-			//System.out.println("Adding " + ores.getLocalName() + " --> " + syn);			
-			synsets.put(ores.getLocalName(), syn); //meglio questa come chiave??
-			addSortedSynset(syn);
 
 			for(Iterator k = ores.listPropertyValues(contains); k.hasNext();) {
 				OntResource ws = (OntResource) k.next();
@@ -241,6 +239,10 @@ public class KbContainer {
 					syn.variants.add(lexForm);
 				}
 			}
+			
+			//System.out.println("Adding " + ores.getLocalName() + " --> " + syn);			
+			synsets.put(ores.getLocalName(), syn); //meglio questa come chiave??
+			addSortedSynset(syn);
 		}
 	}
 	
@@ -278,18 +280,33 @@ public class KbContainer {
 		OntProperty involvesProp = om.getOntProperty(KbConf.SOURCESCHEMA_NS + "source");
 		OntProperty belongsProp = om.getOntProperty(KbConf.SOURCESCHEMA_NS + "source");
 		OntProperty linkProp = om.getOntProperty(KbConf.SOURCESCHEMA_NS + "source");
+		OntProperty contentProp = om.getOntProperty(KbConf.SOURCESCHEMA_NS + "content");
+		OntProperty idProp = om.getOntProperty(KbConf.SOURCESCHEMA_NS + "partitionCode");
 		
-		for(Iterator i = ind.listProperties(sourceProp); i.hasNext();) {
+		for(Iterator i = ind.listPropertyValues(sourceProp); i.hasNext();) {
 			OntResource ores = (OntResource) i.next();
 			OntResource part = (OntResource) ores.getPropertyValue(involvesProp);
 			OntResource doc = (OntResource) part.getPropertyValue(belongsProp);
-			RDFNode val = doc.getPropertyValue(linkProp);
 			
-			String link = "http://somewhere.over.the.rainbow/documents/doc.html";
-			if(val != null) {
-				link = ((Literal) val).getString();
+			RDFNode idNode = part.getPropertyValue(idProp);			
+			if(idNode == null) {
+				System.out.println("## ERROR ## partitionCode is null!! ind: " + ind);
+				return;
 			}
-			syn.addSource(link);
+			
+			Source source = new Source(((Literal) idNode).getString());
+			
+			RDFNode linkNode = doc.getPropertyValue(linkProp);			
+			if(linkNode != null) {
+				source.setLink(((Literal) linkNode).getString());
+			}
+			
+			RDFNode contentNode = ores.getPropertyValue(contentProp);			
+			if(contentNode != null) {
+				source.setContent(((Literal) contentNode).getString());				
+			}
+
+			syn.addSource(source);
 		}
 		
 		syn.setSourceCached(true);

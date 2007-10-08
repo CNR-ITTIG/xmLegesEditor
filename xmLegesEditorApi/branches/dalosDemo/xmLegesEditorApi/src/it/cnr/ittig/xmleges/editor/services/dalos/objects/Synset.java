@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.Vector;
 
 public class Synset {
@@ -20,7 +22,7 @@ public class Synset {
 	
 	private boolean isSourceCached = false;
 
-	private Vector sources; //rispettare l'ordine alfabetico
+	private Collection sources; //rispettare l'ordine alfabetico
 
 	public Map lexicalToSynset = null;
 		
@@ -33,7 +35,7 @@ public class Synset {
 		lexicalToSynset = new HashMap();
 		semanticToSynset = new HashMap();
 		
-		sources = new Vector();
+		sources = new TreeSet();
 		variants = new Vector();
 		
 		lexicalForm = "";
@@ -100,26 +102,30 @@ public class Synset {
 		return URI;
 	}
 	
-	public boolean addSource(String s) {
+//	public void addSource(String s) {
+//
+//		boolean ins = false;
+//		for(int i = 0; i < sources.size(); i++) {
+//			String item = (String) sources.get(i);
+//			if(item.toString().compareToIgnoreCase(s.toString()) < 0) continue;
+//			if(item.toString().compareToIgnoreCase(s.toString()) > 0) {
+//				sources.add(i, s);
+//				ins = true;
+//				break;
+//			}
+//		}
+//		if(!ins) {
+//			//Inserisci alla fine del vettore
+//			sources.add(s);
+//		}
+//	}
 
-		boolean ins = false;
-		for(int i = 0; i < sources.size(); i++) {
-			String item = (String) sources.get(i);
-			if(item.toString().compareToIgnoreCase(s.toString()) < 0) continue;
-			if(item.toString().compareToIgnoreCase(s.toString()) > 0) {
-				sources.add(i, s);
-				ins = true;
-				break;
-			}
-		}
-		if(!ins) {
-			//Inserisci alla fine del vettore
-			sources.add(s);
-		}
-		return true;
+	public void addSource(Source source) {
+
+		sources.add(source);
 	}
-
-	public Vector getSources() {
+	
+	public Collection getSources() {
 		
 		return sources;
 	}
@@ -144,7 +150,7 @@ public class Synset {
 	}
 	
 	public int hashCode() {
+		
 		return 1;
 	}
-
 }
