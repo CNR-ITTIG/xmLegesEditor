@@ -33,6 +33,8 @@ public class AggiornaIdFrozenLaw {
 	NirUtilDom nirUtilDom;
 	
 	Vector disposizioniId;
+	
+	Node disposizioni;
 
 	protected static final int LIBRO = 0;
 
@@ -111,6 +113,7 @@ public class AggiornaIdFrozenLaw {
 
 		//recupero id referenziati dalle disposizioni
 		try {
+			disposizioni = UtilDom.getElementsByTagName(doc,doc,"modifichepassive")[0].cloneNode(true);
 			disposizioniId = getDisposizioniIdFromDoc(UtilDom.getElementsByTagName(doc,doc,"modifichepassive")[0]);
 		} catch (Exception e) {
 			disposizioniId = null;
@@ -349,10 +352,11 @@ public class AggiornaIdFrozenLaw {
 	}
 
 	private void updateDisposizione(String oldID, String newID) {
-		Node[] disp = UtilDom.getElementsByTagName(doc,UtilDom.getElementsByTagName(doc,doc,"modifichepassive")[0],"dsp:pos");
-		for (int i = 0; i < disp.length; i++) {
-			if (oldID.equals(UtilDom.getAttributeValueAsString(disp[i], "xlink:href")))
-				UtilDom.setAttributeValue(disp[i],"xlink:href",newID);
+		Node[] nuoveDisp = UtilDom.getElementsByTagName(doc,UtilDom.getElementsByTagName(doc,doc,"modifichepassive")[0],"dsp:pos");
+		Node[] vecchieDisp = UtilDom.getElementsByTagName(doc,disposizioni,"dsp:pos");
+		for (int i = 0; i < vecchieDisp.length; i++) {
+			if (oldID.equals(UtilDom.getAttributeValueAsString(vecchieDisp[i], "xlink:href")))
+				UtilDom.setAttributeValue(nuoveDisp[i],"xlink:href",newID);
 		}
 		disposizioniId.remove(oldID);
 	}
