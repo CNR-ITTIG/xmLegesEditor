@@ -1,8 +1,0 @@
-<configuration>
-	<browsers>
-		<browser>mozilla-firefox</browser>
-		<browser>C:\\Programmi\\Mozilla Firefox\\firefox.exe</browser>
-		<browser>C:\\Programmi\\Internet Explorer\\iexplore.exe</browser>
-		<browser>cmd /C start</browser>
-	</browsers>
-</configuration>    
