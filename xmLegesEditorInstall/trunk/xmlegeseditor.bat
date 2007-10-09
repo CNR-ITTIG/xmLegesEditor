@@ -27,6 +27,8 @@ set CLASSPATH=%CLASSPATH%;lib/commons-logging-adapters-1.1.jar
 set CLASSPATH=%CLASSPATH%;lib/commons-logging-api-1.1.jar
 set CLASSPATH=%CLASSPATH%;lib/xsc.jar
 set CLASSPATH=%CLASSPATH%;lib/jdic/jdic.jar
-
+set CLASSPATH=%CLASSPATH%;lib/commons-httpclient.jar
+set CLASSPATH=%CLASSPATH%;lib/jakarta-slide-webdavlib-2.1.jar
+set CLASSPATH=%CLASSPATH%;lib/jdom-1.0.jar
 
 start /MIN jre\bin\javaw -Xmx256m it.cnr.ittig.services.manager.Run xmLegesEditor.xml images\editor\xmLegesEditor.png
