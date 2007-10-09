@@ -30,7 +30,6 @@ export CLASSPATH=$CLASSPATH:lib/batik.jar
 export CLASSPATH=$CLASSPATH:lib/avalon-framework-cvs-20020806.jar
 export CLASSPATH=$CLASSPATH:lib/logkit-1.0.1.jar
 export CLASSPATH=$CLASSPATH:lib/commons-codec-1.3.jar
-export CLASSPATH=$CLASSPATH:lib/commons-httpclient-3.0.1.jar
 export CLASSPATH=$CLASSPATH:lib/commons-logging-1.1.jar
 export CLASSPATH=$CLASSPATH:lib/commons-logging-adapters-1.1.jar
 export CLASSPATH=$CLASSPATH:lib/commons-logging-api-1.1.jar
