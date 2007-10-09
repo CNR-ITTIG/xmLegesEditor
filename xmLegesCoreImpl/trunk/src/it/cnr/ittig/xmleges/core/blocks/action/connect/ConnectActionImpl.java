@@ -80,7 +80,7 @@ import sun.net.ftp.FtpClient;
 
 public class ConnectActionImpl implements ConnectAction, EventManagerListener, Loggable, Serviceable, Initializable, Startable {
 
-	private HttpURL httpURL;
+	HttpURL httpURL;
 
 	WebdavResource webdavResource = null;
 	
@@ -106,7 +106,7 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 	
 	WebdavSaveAction webdavSaveAction;
 	
-	ConnectAction connectAction;
+	AzioneConnetti connectAction;
 	
 	LockUnlockAction lockUnlockAction;
 	
@@ -216,7 +216,7 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 		actionManager.registerAction("connect.webdav.open", webdavOpenAction);
 		webdavSaveAction = new WebdavSaveAction();
 		actionManager.registerAction("connect.webdav.save", webdavSaveAction);	
-		connectAction = new ConnectAction();
+		connectAction = new AzioneConnetti();
 		actionManager.registerAction("editor.form.connetti.connect", connectAction);
 		lockUnlockAction = new LockUnlockAction();
 		actionManager.registerAction("editor.form.connetti.lockUnlock", lockUnlockAction);		
@@ -293,7 +293,7 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 		webdavSaveAction.setEnabled(!documentManager.isEmpty());
 	}
 
-	protected class ConnectAction extends AbstractAction {
+	protected class AzioneConnetti extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
 			if (type.equals("ftp"))
 				if (openFTP(host.getText(), 21, user.getText(), password.getText())) {
