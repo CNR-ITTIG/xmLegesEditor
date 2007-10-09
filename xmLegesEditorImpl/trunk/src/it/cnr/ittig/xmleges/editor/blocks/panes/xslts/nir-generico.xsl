@@ -779,13 +779,7 @@
 						</xsl:when>
 						<xsl:when test="$data_inizio&gt;number(number($datafine)-1)">
 							<span style="color:#060;">
-								<xsl:variable name="colore">#060</xsl:variable> 
-								<xsl:apply-templates/>
-			
-								
-								<!--************
-								<xsl:call-template name="makeNotavigenza" />
-								-->
+							 	[<xsl:apply-templates/>]
 								<xsl:variable name="id">
 									<xsl:value-of select="@id" />
 								</xsl:variable>
@@ -794,22 +788,13 @@
 										<a href="#n{$id}" name="t{$id}"><sup>[<xsl:value-of select="position()" />]</sup></a>
 									</xsl:if>		
 								</xsl:for-each>
-								
-								
 							</span>
 						</xsl:when>						
 						<xsl:otherwise>
 							<xsl:choose>			
 								<xsl:when test="$stato!=''">
-									<!-- <span style="color:#f00;" title="{$stato}"><xsl:apply-templates /> -->												
 									<span style="color:#f00;">
-										<xsl:variable name="colore">#f00</xsl:variable> 
-										<xsl:apply-templates/>
-										
-										
-										<!--************
-										<xsl:call-template name="makeNotavigenza" />
-										-->
+										[<xsl:apply-templates/>]
 										<xsl:variable name="id">
 											<xsl:value-of select="@id" />
 										</xsl:variable>
@@ -818,19 +803,11 @@
 												<a href="#n{$id}" name="t{$id}"><sup>[<xsl:value-of select="position()" />]</sup></a>
 											</xsl:if>		
 										</xsl:for-each>
-										
-										
 									</span>
 								</xsl:when>
 								<xsl:otherwise>
 									<span style="color:#f00;">
-										<xsl:variable name="colore">#f00</xsl:variable> 
-										<xsl:apply-templates/>
-										
-										
-										<!--************
-										<xsl:call-template name="makeNotavigenza" />
-										-->
+										[<xsl:apply-templates/>]
 										<xsl:variable name="id">
 											<xsl:value-of select="@id" />
 										</xsl:variable>
@@ -839,8 +816,6 @@
 												<a href="#n{$id}" name="t{$id}"><sup>[<xsl:value-of select="position()" />]</sup></a>
 											</xsl:if>		
 										</xsl:for-each>
-										
-										
 									</span>
 								</xsl:otherwise>
 							</xsl:choose>
@@ -853,14 +828,7 @@
 						<xsl:when test="$data_inizio&gt;$datafine or $data_fine&lt;$datafine">
 							<!--===================== n{@id}, t{@id}:'n' e 't' differenziano il testo dalle note
 							    ===================== <xsl:value-of select="@id"/>: il valore accanto a 'VigNota', l'id della partizione
-							-->
-							
-							
-							<!--************
-							<span> 
-								<xsl:call-template name="makeNotavigenza" />
-							</span>
-							-->
+							-->							
 							<xsl:variable name="id">
 								<xsl:value-of select="@id" />
 							</xsl:variable>
@@ -869,18 +837,10 @@
 									<a href="#n{$id}" name="t{$id}"><sup>[<xsl:value-of select="position()" />]</sup></a>
 								</xsl:if>		
 							</xsl:for-each>							
-							
-							
 						</xsl:when>
 						<xsl:otherwise>
 							<span style="color:#060;">
-								<xsl:variable name="colore">#060</xsl:variable> 
 								<xsl:apply-templates/>
-								
-								
-								<!--************
-								<xsl:call-template name="makeNotavigenza" />
-								-->
 								<xsl:variable name="id">
 									<xsl:value-of select="@id" />
 								</xsl:variable>
@@ -889,8 +849,6 @@
 										<a href="#n{$id}" name="t{$id}"><sup>[<xsl:value-of select="position()" />]</sup></a>
 									</xsl:if>		
 								</xsl:for-each>								
-								
-								
 							</span>
 						</xsl:otherwise>
 					</xsl:choose>

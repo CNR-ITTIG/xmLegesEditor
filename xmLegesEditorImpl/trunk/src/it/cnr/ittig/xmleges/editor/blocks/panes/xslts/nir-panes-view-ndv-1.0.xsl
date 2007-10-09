@@ -80,14 +80,14 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	        
 		        <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
 					<font color="blue">
-					{<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>
+					[<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>
 					<xsl:if test="$novellando">
 						<xsl:if test="$novella">
 							<!--	sostituzione	-->
 							<xsl:if test="$novella=$idnota">i</xsl:if>
 		   					<xsl:if test="$novellando=$idnota">e</xsl:if>
 	   					</xsl:if>
-   					</xsl:if>}
+   					</xsl:if>]
    					</font>
 				</xsl:element>					
 				<xsl:text> </xsl:text>
