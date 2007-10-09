@@ -84,6 +84,7 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 	int eventoselezionato = -1;
 	Form form;
 	JLabel finevigoretesto;
+	JLabel datatesto;
 	JButton abrogazione;
 	JButton sostituzione;
 	JButton integrazione;
@@ -157,6 +158,7 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 		form.setCustomButtons(new String[] { "editor.form.disposizioni.passive.btn.cancel" });
 		form.setHelpKey("help.contents.form.disposizionipassive");
 		finevigoretesto = (JLabel) form.getComponentByName("editor.disposizioni.passive.finevigoretesto");
+		datatesto = (JLabel) form.getComponentByName("editor.disposizioni.passive.datatesto");
 		abrogazione = (JButton) form.getComponentByName("editor.disposizioni.passive.abrogazione");
 		sostituzione = (JButton) form.getComponentByName("editor.disposizioni.passive.sostituzione");
 		integrazione = (JButton) form.getComponentByName("editor.disposizioni.passive.integrazione");
