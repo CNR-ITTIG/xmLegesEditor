@@ -38,14 +38,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 			</layout>
 		</appender>
 		
-		<!--	logger name=".xxx" additivity="false">
-                        <priority value ="debug" />
-                        <appender-ref ref="ConsoleAppender" />
-        </logger	-->
-       
        	<root>
 			<priority value ="error" /> 
-			<appender-ref ref="ConsoleAppender" />
+			<!--	appender-ref ref="ConsoleAppender" /	-->
  			<appender-ref ref="BugReportAppender" /> 
  			<!--appender-ref ref="FileAppender" /-->
 		</root>
@@ -1134,8 +1129,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
                 <pane name="editor.panes.indice"		where="top-center"  	index="3" />                                
                 <pane name="editor.panes.indice"		where="top-left"  	index="1" />                
-                <pane name="panes.source"            	where="top-center"		index="4" />
-                <pane name="panes.xslteditor"           where="top-center"  	index="5" />
+                <!--	pane name="panes.source"            	where="top-center"		index="4" /	-->
+                <!--	pane name="panes.xslteditor"           where="top-center"  	index="5" /	-->
                 <pane name="editor.panes.riferimenti" 		where="bottom-center"  	index="0" />
                 <pane name="editor.panes.rifincompleti"     where="bottom-center"  	index="1" />
                 <pane name="editor.panes.ndr" 				where="bottom-center"  	index="2" />
@@ -1291,7 +1286,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
         </configuration>                
     </component>
     
-  
+ <!-- 
     <component  activation="startup"
                 class="it.cnr.ittig.xmleges.core.blocks.panes.xslteditor.XsltEditorImpl"
         >
@@ -1303,7 +1298,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  activation="startup"
                 class="it.cnr.ittig.xmleges.core.blocks.panes.source.SourcePaneImpl"
     />
-
+-->
     
     
     <component  activation="startup"
