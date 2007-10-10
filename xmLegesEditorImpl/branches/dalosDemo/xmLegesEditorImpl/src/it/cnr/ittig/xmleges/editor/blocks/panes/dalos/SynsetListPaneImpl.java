@@ -14,11 +14,14 @@ import it.cnr.ittig.xmleges.core.services.frame.FindIterator;
 import it.cnr.ittig.xmleges.core.services.frame.Frame;
 import it.cnr.ittig.xmleges.core.services.frame.PaneException;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
+import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
+import it.cnr.ittig.xmleges.editor.services.dalos.action.SynsetMarkupAction;
 import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetListPane;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSelectionEvent;
+import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -42,6 +45,8 @@ import javax.swing.JToolBar;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import org.w3c.dom.Node;
 
 /**						
  * <h1>Implementazione del servizio
@@ -85,12 +90,6 @@ import javax.swing.event.ListSelectionListener;
 
 public class SynsetListPaneImpl implements SynsetListPane, EventManagerListener, Loggable, Serviceable, Initializable, Startable {
 
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
 	Logger logger;
 	
 	Frame frame;
@@ -119,6 +118,7 @@ public class SynsetListPaneImpl implements SynsetListPane, EventManagerListener,
 	
 	I18n i18n;
 	
+	SynsetMarkupAction synsetMarkupAction;
 	
 	String[] searchTypes={"contains", "startsWith","endsWith","exact"};
 	
@@ -135,6 +135,8 @@ public class SynsetListPaneImpl implements SynsetListPane, EventManagerListener,
 		bars = (Bars) serviceManager.lookup(Bars.class);
 		kbManager = (KbManager) serviceManager.lookup(KbManager.class);
 		i18n = (I18n) serviceManager.lookup(I18n.class);
+		synsetMarkupAction = (SynsetMarkupAction) serviceManager.lookup(SynsetMarkupAction.class);
+		
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
@@ -175,6 +177,7 @@ public class SynsetListPaneImpl implements SynsetListPane, EventManagerListener,
         list.setListData(synsets.toArray());
      
 		eventManager.addListener(this,SynsetSelectionEvent.class);
+		eventManager.addListener(this, SelectionChangedEvent.class);
 	}
 
 	// ////////////////////////////////////////// EventManagerListener Interface
@@ -182,7 +185,16 @@ public class SynsetListPaneImpl implements SynsetListPane, EventManagerListener,
 		if (event instanceof SynsetSelectionEvent){
 			list.setSelectedValue(((SynsetSelectionEvent)event).getActiveSynset(), true);
 		}
+		if (event instanceof SelectionChangedEvent){
+			Node activeNode = ((SelectionChangedEvent)event).getActiveNode();
+			if(isDalosSpan(activeNode)){
+				list.setSelectedValue(kbManager.getSynset(getSynsetURI(activeNode), "IT"), true);
+				//selectSynset(kbManager.getSynset(getSynsetURI(activeNode), "IT"));
+				System.err.println("Synchronize on "+getSynsetURI(activeNode));
+			}	
+		}
 	}
+	
 	
 	// ///////////////////////////////////////////////////// Startable Interface
 	public void start() throws Exception {
@@ -210,6 +222,22 @@ public class SynsetListPaneImpl implements SynsetListPane, EventManagerListener,
 			System.err.println("Find ACTION pressed");		
 			searchAndDisplaySynsets();
 		}
+	}
+	
+	
+	private boolean isDalosSpan(Node node){
+		if(node!=null){
+			if(UtilDom.isTextNode(node))
+				node = node.getParentNode();
+			return ((node.getNodeName().indexOf("span")!=-1) && (UtilDom.getAttributeValueAsString(node, "h:style").equalsIgnoreCase("dalos")));
+		}
+		return false;
+	}
+	
+	private String getSynsetURI(Node node){
+		if(UtilDom.isTextNode(node))
+	    	node = node.getParentNode();
+		return(UtilDom.getAttributeValueAsString(node, "h:class"));
 	}
 	
 	
@@ -279,7 +307,8 @@ public class SynsetListPaneImpl implements SynsetListPane, EventManagerListener,
 	
 	
 	private void selectSynset(Synset activeSynset){
-		eventManager.fireEvent(new SynsetSelectionEvent(this, activeSynset));
+		if(activeSynset!=null)
+			eventManager.fireEvent(new SynsetSelectionEvent(this, activeSynset));
 	}
 	
 	
@@ -305,6 +334,7 @@ public class SynsetListPaneImpl implements SynsetListPane, EventManagerListener,
 		public void mouseClicked(MouseEvent e) {
 			if(e.getClickCount()==2){
 				Synset selectedSyn = (Synset)list.getSelectedValue();
+				synsetMarkupAction.doSynsetMarkup(selectedSyn);
 				System.err.println("<"+selectedSyn.getURI()+">"+selectedSyn.getLexicalForm()+"</"+selectedSyn.getURI()+">");
 			}
 		}
