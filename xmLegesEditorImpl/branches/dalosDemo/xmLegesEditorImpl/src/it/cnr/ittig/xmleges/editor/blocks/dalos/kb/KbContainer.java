@@ -124,8 +124,10 @@ public class KbContainer {
 		
 		File file = null;
 		
-		OntDocumentManager odm = OntDocumentManager.getInstance();
-		
+		//Remote ontologies are locally cached...
+		//Aggiungere una funzione che, se on-line, scarica le ontologie remote
+		//in modo da avere sempre l'ultima versione?
+		OntDocumentManager odm = OntDocumentManager.getInstance();		
 		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_DOMAIN_ONTO);
 		odm.addAltEntry(KbConf.DOMAIN_ONTO, "file://" + file.getAbsolutePath());
 		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_METALEVEL_ONTO);

@@ -16,6 +16,8 @@ import it.cnr.ittig.xmleges.core.services.frame.PaneException;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.panes.source.SourcePane;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
+import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
+import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetDetailsPane;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSelectionEvent;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSourcePane;
@@ -91,7 +93,9 @@ public class SynsetSourcePaneImpl implements SynsetSourcePane, EventManagerListe
 
 	JPopupMenu popupMenu;
 	
-	SynsetDetails synsetPane;
+	SourceDetails synsetPane;
+	
+	KbManager kbManager;
 	
 	I18n i18n;
 
@@ -107,6 +111,7 @@ public class SynsetSourcePaneImpl implements SynsetSourcePane, EventManagerListe
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 		utilUI = (UtilUI) serviceManager.lookup(UtilUI.class);
 		bars = (Bars) serviceManager.lookup(Bars.class);
+		kbManager = (KbManager) serviceManager.lookup(KbManager.class);
 		i18n = (I18n) serviceManager.lookup(I18n.class);
 	}
 
@@ -116,9 +121,8 @@ public class SynsetSourcePaneImpl implements SynsetSourcePane, EventManagerListe
 		JToolBar bar = new JToolBar();
 		bar.add(utilUI.applyI18n("editor.panes.dalos.synsetlist.find", switchLangAction));
 		panel.add(bar, BorderLayout.SOUTH);
-		
-		
-		synsetPane = new SynsetDetails();
+				
+		synsetPane = new SourceDetails();
 		synsetPane.setI18n(i18n);
 		
 		scrollPane.setViewportView(synsetPane);
@@ -134,7 +138,9 @@ public class SynsetSourcePaneImpl implements SynsetSourcePane, EventManagerListe
 	// ////////////////////////////////////////// EventManagerListener Interface
 	public void manageEvent(EventObject event) {
 		if (event instanceof SynsetSelectionEvent){
-			synsetPane.setSynset(((SynsetSelectionEvent)event).getActiveSynset());
+			Synset selected = ((SynsetSelectionEvent)event).getActiveSynset();
+			synsetPane.setSynset(selected);
+			kbManager.addSources(selected);
 			synsetPane.draw();
 		}			
 	}

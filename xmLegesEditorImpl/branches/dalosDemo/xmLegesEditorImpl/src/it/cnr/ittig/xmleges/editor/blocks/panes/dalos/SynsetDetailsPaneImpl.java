@@ -15,6 +15,7 @@ import it.cnr.ittig.xmleges.core.services.frame.Frame;
 import it.cnr.ittig.xmleges.core.services.frame.PaneException;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
+import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetDetailsPane;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSelectionEvent;
 
@@ -114,8 +115,7 @@ public class SynsetDetailsPaneImpl implements SynsetDetailsPane, EventManagerLis
 		JToolBar bar = new JToolBar();
 		bar.add(utilUI.applyI18n("editor.panes.dalos.synsetlist.find", switchLangAction));
 		panel.add(bar, BorderLayout.SOUTH);
-		
-		
+				
 		synsetPane = new SynsetDetails();
 		synsetPane.setI18n(i18n);
 		
@@ -132,7 +132,8 @@ public class SynsetDetailsPaneImpl implements SynsetDetailsPane, EventManagerLis
 	// ////////////////////////////////////////// EventManagerListener Interface
 	public void manageEvent(EventObject event) {
 		if (event instanceof SynsetSelectionEvent){
-			synsetPane.setSynset(((SynsetSelectionEvent)event).getActiveSynset());
+			Synset selected = ((SynsetSelectionEvent)event).getActiveSynset();
+			synsetPane.setSynset(selected);
 			synsetPane.draw();
 		}			
 	}

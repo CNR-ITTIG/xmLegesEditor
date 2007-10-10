@@ -45,6 +45,12 @@ public interface KbManager extends Service {
 	
 	/**
 	 * 
+	 * @param syn
+	 */
+	public void addSources(Synset syn);
+	
+	/**
+	 * 
 	 * @return
 	 */
 	public SynsetTree getTree(String lang);

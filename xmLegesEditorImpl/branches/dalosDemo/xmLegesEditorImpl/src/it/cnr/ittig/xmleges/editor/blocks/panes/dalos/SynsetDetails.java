@@ -2,10 +2,14 @@ package it.cnr.ittig.xmleges.editor.blocks.panes.dalos;
 
 
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
+import it.cnr.ittig.xmleges.core.util.file.UtilFile;
+import it.cnr.ittig.xmleges.editor.blocks.dalos.kb.KbConf;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Iterator;
 
 import javax.swing.JEditorPane;
 import javax.swing.text.html.HTMLDocument;
@@ -27,7 +31,8 @@ public class SynsetDetails extends JEditorPane {
 		HTMLDocument doc = (HTMLDocument) this.getDocument();
 
 		try {
-			URL url = new URL("file:////" );//+ EditorConf.DATA_DIR + "/");
+			File file = UtilFile.getFileFromTemp(KbConf.dalosRepository);
+			URL url = new URL("file:////" + file.getAbsolutePath() + "/");
 			doc.setBase(url);
 			//System.out.println("URL: " + url);
 		} catch (MalformedURLException e) {
@@ -36,46 +41,6 @@ public class SynsetDetails extends JEditorPane {
 		}
 		
 	}
-	
-//	public void draw(Concetto c) {
-//
-//		String definizione = c.getDefinizione();
-//		String datains = UtilEditor.getHumanDateFormat(c.getDataIns());
-//		String datamod = c.getDataMod();		
-//		if(datamod != null && !datamod.equals("")) {
-//			datamod = "<br> Data ultima modifica: " + datamod;
-//		} else {
-//			//Non mostrare data ultima modifica se non � mai stato modificato
-//			datamod = "";
-//		}
-//		
-//		//Usa una sola immagine
-//		//String img = "<img src=\"" + EditorConf.JWS_URL + "img/kontact_journal.png\">";
-//		String img = "<img src=\"./" + EditorConf.SYNSET_GENERIC_IMG + "\">";
-//		if(c.ontoclassi.size() > 0) {
-//			img = "<img src=\"./" + EditorConf.SYNSET_ONTO_IMG + "\">" +
-//			"<pre>" + c.ontoclassi.get(0).getName() + "</pre>";
-//		}
-//		
-//		String html = "<html><body>" + img +
-////			"<h3>Data inserimento: " + datains + datamod +
-//			"</h3><h2><i>Definizione</i></h2><h3>" + definizione + 
-//			"</h3><h2><i>Varianti</i></h2><h3>"; 
-//		
-//		for(Iterator<Lemma> i = c.lemmi.iterator(); i.hasNext();) {
-//			Lemma item = i.next();
-//			String lstr = item.toString();
-//			html += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + item.getOrdine() + 
-//					". " + lstr + "<br>";				
-//		}
-//		
-//		html += "</h3></body></html>";
-//
-//		//UtilEditor.debug("HTML:\n" + html + "\n");
-//		
-//		setText(html);		
-//	}
-	
 	
 	public void setI18n(I18n i18n){
 		this.i18n = i18n;
@@ -87,14 +52,33 @@ public class SynsetDetails extends JEditorPane {
 	
 	public void draw() {
 		
-			String img = "<img src=\"./" + i18n.getIconFor("editor.panes.dalos.synsetlist")+ "\">";
-			String html = "<html><body>" +  img +
-				"</h3><h2><i>Definizione</i></h2><h3>" + synset.toString() + 
-				"</h3><h2><i>Varianti</i></h2><h3>"+synset.getLexicalForm(); 
-			
-			html += "</h3></body></html>";
-	
-			setText(html);		
+		if(synset == null) {
+			setText("<html></html>");
+			return;
+		}
+		
+		String img = "<img src=\"./kontact_journal.png\">";
+		
+		String def = synset.getDef();
+		if(def == null) {
+			def = "";
+		}
+		
+		String html = "<html><body>" +  img +
+			"</h3><h2><i>Definition</i></h2><h3>" + 
+			def +  "</h3><h2><i>Variants</i></h2><h3>"; 
+		
+		for(Iterator i = synset.variants.iterator(); i.hasNext();) {
+			String variant = (String) i.next();
+			html += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - " + 
+						variant + "<br>";				
+		}
+		
+		html += "</h3></body></html>";
+
+		setText(html);
+		
+		//System.out.println("DEBUG HTML: " + html + "\n");
 	}
 	
 	public void clearContent() {

@@ -190,7 +190,9 @@ public class KbTree {
 		Object root = model.getRoot();
 		walk(model, root);
 		
-		addRemainingSynsets();
+		//Non aggiungere per il momento i synset non classificati,
+		//sono visibili nell'elenco dei synset totali
+		//addRemainingSynsets();
 		
 		linked = null;
 	}
