@@ -102,6 +102,8 @@ public class SemanticRelationPaneImpl implements SemanticRelationPane, EventMana
 	SynsetTree relazioniTree;
 	
 	I18n i18n;
+	
+	boolean update = false;
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -138,11 +140,17 @@ public class SemanticRelationPaneImpl implements SemanticRelationPane, EventMana
 
 	// ////////////////////////////////////////// EventManagerListener Interface
 	public void manageEvent(EventObject event) {
-//		if (event instanceof SynsetSelectionEvent){
-//			Synset selected = ((SynsetSelectionEvent)event).getActiveSynset();
-//			kbManager.addSemanticProperties(selected);
-//			showSemanticRelations(selected);
-//		}
+		
+		update = this.getPaneAsComponent().isShowing();
+		
+		if (event instanceof SynsetSelectionEvent && update){
+			System.err.println("Synchronize LinguisticRelationPane on " 
+					+ ((SynsetSelectionEvent) event).getActiveSynset().getLexicalForm());
+
+    		Synset selected = ((SynsetSelectionEvent) event).getActiveSynset();
+			kbManager.addLexicalProperties(selected);
+			showSemanticRelations(selected);			
+		}
 	}
 	
 	// ///////////////////////////////////////////////////// Startable Interface
