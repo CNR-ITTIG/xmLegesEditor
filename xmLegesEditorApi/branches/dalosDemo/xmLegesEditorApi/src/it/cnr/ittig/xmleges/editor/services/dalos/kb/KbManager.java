@@ -57,6 +57,14 @@ public interface KbManager extends Service {
 	
 	/**
 	 * 
+	 * @param uri
+	 * @param lang
+	 * @return
+	 */
+	public Synset getSynset(String uri, String lang);
+	
+	/**
+	 * 
 	 * @param search
 	 * @return
 	 */
