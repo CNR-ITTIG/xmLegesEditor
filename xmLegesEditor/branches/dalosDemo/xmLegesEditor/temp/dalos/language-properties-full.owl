@@ -1,0 +1,234 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
+    xmlns="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#"
+  xml:base="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl">
+  <owl:Ontology rdf:about="">
+    <rdfs:comment xml:lang="en">Synset Language Properties and Semantics (full version, transitivity included)</rdfs:comment>
+    <owl:versionInfo xml:lang="en">ver. 2.0</owl:versionInfo>
+  </owl:Ontology>
+  <owl:ObjectProperty rdf:ID="involved_result">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="role_result"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has_pertained">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="pertains_to"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="co_result_instrument">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="co_instrument_result"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#pertains_to">
+    <owl:inverseOf rdf:resource="#has_pertained"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="be_in_state">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="state_of"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#state_of">
+    <owl:inverseOf rdf:resource="#be_in_state"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="is_means_for">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="has_means"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has_mero_member">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="has_holo_member"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="belongs_to_class">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="has_instance"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="is_purpose_of">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="for_purpose_of"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#has_instance">
+    <owl:inverseOf rdf:resource="#belongs_to_class"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="liable_to">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="has_liability"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has_subevent">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="is_subevent_of"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="role_instrument">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="involved_instrument"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="derivation"/>
+  <owl:ObjectProperty rdf:about="#co_instrument_result">
+    <owl:inverseOf rdf:resource="#co_result_instrument"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="role_agent">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="involved_agent"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="results_in">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="is_result_of"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#has_means">
+    <owl:inverseOf rdf:resource="#is_means_for"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="involved_location">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="role_location"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="xpos_fuzzynym"/>
+  <owl:ObjectProperty rdf:ID="co_role"/>
+  <owl:ObjectProperty rdf:ID="co_agent_result">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="co_result_agent"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has_value">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="is_a_value_of"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has_mero_madeof">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="has_holo_madeof"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#co_result_agent">
+    <owl:inverseOf rdf:resource="#co_agent_result"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="co_agent_patient">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="co_patient_agent"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="is_caused_by">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="causes"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="role">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="involved"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="involved_patient">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="role_patient"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#is_subevent_of">
+    <owl:inverseOf rdf:resource="#has_subevent"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#causes">
+    <owl:inverseOf rdf:resource="#is_caused_by"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#is_a_value_of">
+    <owl:inverseOf rdf:resource="#has_value"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has_meronym">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="has_holonym"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#co_patient_agent">
+    <owl:inverseOf rdf:resource="#co_agent_patient"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#has_holonym">
+    <owl:inverseOf rdf:resource="#has_meronym"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#has_liability">
+    <owl:inverseOf rdf:resource="#liable_to"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#has_holo_madeof">
+    <owl:inverseOf rdf:resource="#has_mero_madeof"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#role_patient">
+    <owl:inverseOf rdf:resource="#involved_patient"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has_xpos_hyperonym"/>
+  <owl:ObjectProperty rdf:about="#involved">
+    <owl:inverseOf rdf:resource="#role"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="xpos_near_synonym"/>
+  <owl:ObjectProperty rdf:about="#is_result_of">
+    <owl:inverseOf rdf:resource="#results_in"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#involved_instrument">
+    <owl:inverseOf rdf:resource="#role_instrument"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#has_holo_member">
+    <owl:inverseOf rdf:resource="#has_mero_member"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#for_purpose_of">
+    <owl:inverseOf rdf:resource="#is_purpose_of"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#role_result">
+    <owl:inverseOf rdf:resource="#involved_result"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#role_location">
+    <owl:inverseOf rdf:resource="#involved_location"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#involved_agent">
+    <owl:inverseOf rdf:resource="#role_agent"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has_xpos_hyponym"/>
+  <owl:TransitiveProperty rdf:ID="has_mero_part">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <owl:inverseOf>
+      <owl:TransitiveProperty rdf:ID="has_holo_part"/>
+    </owl:inverseOf>
+  </owl:TransitiveProperty>
+  <owl:TransitiveProperty rdf:about="#has_holo_part">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <owl:inverseOf rdf:resource="#has_mero_part"/>
+  </owl:TransitiveProperty>
+  <owl:TransitiveProperty rdf:ID="has_hyperonym">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <owl:inverseOf>
+      <owl:TransitiveProperty rdf:ID="has_hyponym"/>
+    </owl:inverseOf>
+  </owl:TransitiveProperty>
+  <owl:TransitiveProperty rdf:about="#has_hyponym">
+    <owl:inverseOf rdf:resource="#has_hyperonym"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </owl:TransitiveProperty>
+  <owl:SymmetricProperty rdf:ID="near_synonym">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <owl:inverseOf rdf:resource="#near_synonym"/>
+  </owl:SymmetricProperty>
+  <owl:SymmetricProperty rdf:ID="fuzzynym">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <owl:inverseOf rdf:resource="#fuzzynym"/>
+  </owl:SymmetricProperty>
+  <owl:SymmetricProperty rdf:ID="antonym">
+    <owl:inverseOf rdf:resource="#antonym"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </owl:SymmetricProperty>
+  <owl:SymmetricProperty rdf:ID="related_term">
+    <owl:inverseOf rdf:resource="#related_term"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </owl:SymmetricProperty>
+</rdf:RDF>
+
+<!-- Created with Protege (with OWL Plugin 3.2.1, Build 365)  http://protege.stanford.edu -->

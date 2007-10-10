@@ -122,6 +122,21 @@ public class KbContainer {
 		 * reasoner: sceglie il reasoner da utilizzare nel modello
 		 */
 		
+		File file = null;
+		
+		OntDocumentManager odm = OntDocumentManager.getInstance();
+		
+		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_DOMAIN_ONTO);
+		odm.addAltEntry(KbConf.DOMAIN_ONTO, "file://" + file.getAbsolutePath());
+		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_METALEVEL_ONTO);
+		odm.addAltEntry(KbConf.METALEVEL_ONTO, "file://" + file.getAbsolutePath());
+		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_METALEVEL_PROP);
+		odm.addAltEntry(KbConf.METALEVEL_PROP, "file://" + file.getAbsolutePath());
+		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_METALEVEL_FULL);
+		odm.addAltEntry(KbConf.METALEVEL_FULL, "file://" + file.getAbsolutePath());
+		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_SOURCE_SCHEMA);
+		odm.addAltEntry(KbConf.SOURCE_SCHEMA, "file://" + file.getAbsolutePath());
+
 		ModelMaker maker = ModelFactory.createMemModelMaker();
 
 		OntModelSpec spec = null;
@@ -182,7 +197,7 @@ public class KbContainer {
 			readData(om, indFile);
 			readData(om, sourcesFile);			
 		}
-		OntDocumentManager odm = OntDocumentManager.getInstance();
+		
 		odm.setProcessImports(true);
 		odm.loadImports(om);
 		
