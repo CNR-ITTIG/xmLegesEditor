@@ -101,12 +101,24 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     </xsl:element>
 </xsl:template>
 
+
+
 <xsl:template match="h:span">
-         <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
-                <xsl:call-template name="vigenza"/>	
-<!--		    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />-->
-<!--		        <xsl:apply-templates />-->
-	    </xsl:element>
+   	<xsl:choose>
+			  <xsl:when test="@h:style='dalos'">
+			  	 <font color="#FF6600"><b>
+						<xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
+                        	  	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+   		        				<xsl:apply-templates />
+ 	    				</xsl:element>
+ 	    		 </b></font>
+			  </xsl:when>
+			  <xsl:otherwise>
+					<xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
+                		<xsl:call-template name="vigenza"/>	
+ 	    			</xsl:element>
+			  </xsl:otherwise>
+  	</xsl:choose>		
 </xsl:template>	
 
 
