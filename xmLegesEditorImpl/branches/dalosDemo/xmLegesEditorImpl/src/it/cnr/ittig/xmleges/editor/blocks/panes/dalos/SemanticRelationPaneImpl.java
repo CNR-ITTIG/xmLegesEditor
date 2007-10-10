@@ -144,7 +144,7 @@ public class SemanticRelationPaneImpl implements SemanticRelationPane, EventMana
 		update = this.getPaneAsComponent().isShowing();
 		
 		if (event instanceof SynsetSelectionEvent && update){
-			System.err.println("Synchronize LinguisticRelationPane on " 
+			System.err.println("Synchronize SemanticRelationPane on " 
 					+ ((SynsetSelectionEvent) event).getActiveSynset().getLexicalForm());
 
     		Synset selected = ((SynsetSelectionEvent) event).getActiveSynset();

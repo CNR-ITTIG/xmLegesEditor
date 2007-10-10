@@ -131,16 +131,12 @@ public class LinguisticRelationPaneImpl implements LinguisticRelationPane, Event
      	DefaultMutableTreeNode root = new DefaultMutableTreeNode(" - ");
      	DefaultTreeModel model = new DefaultTreeModel(root);     	
      	relazioniTree = new SynsetTree(model, i18n);
-		//relazioniTree.addMouseListener(new LinguisticRelationTreeMouseAdapter());
+		relazioniTree.addMouseListener(new LinguisticRelationTreeMouseAdapter());
 		
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		panel.add(scrollPane);
-	
-//		tree = kbManager.getTree("IT");		
-//		scrollPane.setViewportView(tree);		
-//		tree.addMouseListener(new SynsetTreePaneMouseAdapter());
-		
+			
 		scrollPane.setViewportView(relazioniTree);		
 		frame.addPane(this, false);
 		
@@ -293,7 +289,7 @@ public class LinguisticRelationPaneImpl implements LinguisticRelationPane, Event
 		eventManager.fireEvent(new SynsetSelectionEvent(this, activeSynset));
 	}
 	
-	protected class SynsetTreePaneMouseAdapter extends MouseAdapter {
+	protected class LinguisticRelationTreeMouseAdapter extends MouseAdapter {
 		
 		public void mouseClicked(MouseEvent e) {
 			//TreePath path = tree.getPathForLocation(e.getX(), e.getY());
