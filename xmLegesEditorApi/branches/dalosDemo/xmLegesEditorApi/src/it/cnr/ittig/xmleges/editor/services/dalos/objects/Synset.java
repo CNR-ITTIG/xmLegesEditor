@@ -18,7 +18,9 @@ public class Synset {
 	
 	private String lexicalForm; //sostituire con un vettore di forme lessicali?
 	
-	private boolean isPropCached = false;
+	private boolean isLexicalPropCached = false;
+	
+	private boolean isSemanticPropCached = false;
 	
 	private boolean isSourceCached = false;
 
@@ -62,16 +64,26 @@ public class Synset {
 		return lexicalForm;
 	}
 
-	public void setPropCached(boolean status) {
+	public void setLexicalPropCached(boolean status) {
 		
-		isPropCached = status;
+		isLexicalPropCached = status;
 	}
 	
-	public boolean isPropCached() {
+	public boolean isLexicalPropCached() {
 		
-		return isPropCached;
+		return isLexicalPropCached;
 	}
 
+	public void setSemanticPropCached(boolean status) {
+		
+		isSemanticPropCached = status;
+	}
+	
+	public boolean isSemanticPropCached() {
+		
+		return isSemanticPropCached;
+	}
+	
 	public void setSourceCached(boolean status) {
 		
 		isSourceCached = status;

@@ -57,11 +57,18 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 		langToContainer.put(lang, new KbContainer(lang, i18n));
 	}
 
-	public void addProperties(Synset syn) {
+	public void addSemanticProperties(Synset syn) {
 		
 		String lang = syn.getLanguage();
 		KbContainer kbc = getContainer(lang);
-		kbc.addProperties(syn);
+		kbc.addSemanticProperties(syn);
+	}
+	
+	public void addLexicalProperties(Synset syn) {
+		
+		String lang = syn.getLanguage();
+		KbContainer kbc = getContainer(lang);
+		kbc.addLexicalProperties(syn);
 	}
 	
 	public void addSources(Synset syn) {
@@ -77,6 +84,11 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 		return kbc.sortedSynsets;
 	}
 	
+	public Synset getSynset(String uri, String lang) {
+		
+		KbContainer kbc = getContainer(lang);
+		return kbc.getSynset(uri);
+	}
 	
 	public SynsetTree getTree(String lang) {
 

@@ -18,7 +18,6 @@ import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.SynsetTree;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SemanticRelationPane;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSelectionEvent;
 
@@ -32,6 +31,7 @@ import java.util.Iterator;
 
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -140,7 +140,7 @@ public class SemanticRelationPaneImpl implements SemanticRelationPane, EventMana
 	public void manageEvent(EventObject event) {
 //		if (event instanceof SynsetSelectionEvent){
 //			Synset selected = ((SynsetSelectionEvent)event).getActiveSynset();
-//			kbManager.addProperties(selected);
+//			kbManager.addSemanticProperties(selected);
 //			showSemanticRelations(selected);
 //		}
 	}
@@ -162,7 +162,6 @@ public class SemanticRelationPaneImpl implements SemanticRelationPane, EventMana
 		return panel;
 	}
 	
-	
 	private void clearTree(SynsetTree tree) {
 
 		tree.removeChildren();
@@ -170,51 +169,50 @@ public class SemanticRelationPaneImpl implements SemanticRelationPane, EventMana
 		tree.reloadModel();
 	}
 	
-	
-	
 	void showSemanticRelations(Synset syn) {
 		
+		Collection relations = syn.semanticToSynset.keySet(); 
 		
-		Collection related = (Collection)syn.semanticToSynset.get("");    // che chiave ? prop ?
-		
-		
-		//Relazione rel = new Relazione();
 		DefaultMutableTreeNode top = null, node = null;
 
 		clearTree(relazioniTree);
 
-		if(related.size() < 1) {
-			return;
-		}
-
 		relazioniTree.setRootUserObject(syn.toString());
 		relazioniTree.setRootVisible(true);
 	
-//		for(Iterator i = related.iterator(); i.hasNext();) {
-//			Synset item = (Synset)i.next();
-//			Relazione thisRel = item.getRelation();
-//			if(rel.equals(thisRel) == false) {
-//				relazioniTree.expandChilds(top);
-//				rel = thisRel;
-//				top = new DefaultMutableTreeNode(rel);
-//				relazioniTree.addNode(top);
-//			}
-//			Concetto dest = item.getDestination();
-//			node = new DefaultMutableTreeNode(dest);
-//			top.add(node);
-//		}
+		if(relations == null || relations.size() < 1) {
+			return;
+		}
+		
+		String rel = "";
+
+		for(Iterator i = relations.iterator(); i.hasNext();) {
+			String thisRel = (String) i.next();
+			if(thisRel.equalsIgnoreCase("semantic-property")) {
+				continue;
+			}
+			if( !rel.equals(thisRel) ) {
+				relazioniTree.expandChilds(top);
+				rel = thisRel;
+				top = new DefaultMutableTreeNode(rel);
+				relazioniTree.addNode(top);
+			}
+			Collection values = (Collection) syn.semanticToSynset.get(thisRel);
+			for(Iterator k = values.iterator(); k.hasNext();) {
+				Synset item = (Synset) k.next();
+				node = new DefaultMutableTreeNode(item);
+				top.add(node);				
+			}
+		}
 		
 		relazioniTree.expandChilds(top);
 		
-//		JScrollBar vbar = relazioniScroll.getVerticalScrollBar();
-//		vbar.setValue(vbar.getMinimum());
-//		JScrollBar hbar = relazioniScroll.getHorizontalScrollBar();
-//		hbar.setValue(hbar.getMinimum());
-
+		JScrollBar vbar = scrollPane.getVerticalScrollBar();
+		vbar.setValue(vbar.getMinimum());
+		JScrollBar hbar = scrollPane.getHorizontalScrollBar();
+		hbar.setValue(hbar.getMinimum());
 	}
 	
-	
-
 	public boolean canCut() {
 		return false;
 	}

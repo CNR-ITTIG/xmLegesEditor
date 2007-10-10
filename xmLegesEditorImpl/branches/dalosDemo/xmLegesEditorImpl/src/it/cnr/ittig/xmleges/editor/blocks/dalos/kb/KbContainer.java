@@ -51,6 +51,8 @@ public class KbContainer {
 	Map synsets = null;
 	Vector sortedSynsets = null; //meglio un TreeSet ??
 	
+	Set langProperties = null;
+	
 	private KbTree kbt;
 
 	public KbContainer(String lang, I18n i) {
@@ -264,6 +266,15 @@ public class KbContainer {
 		}
 	}
 	
+	Synset getSynset(String uri) {
+		
+		if(uri.indexOf("#") > -1) {
+			uri = uri.substring(uri.indexOf("#") + 1);
+		}
+		
+		return (Synset) synsets.get(uri);
+	}
+	
 	void addSources(Synset syn) {
 		
 		if(syn.isSourceCached()) {
@@ -312,23 +323,14 @@ public class KbContainer {
 		syn.setSourceCached(true);
 	}
 
-	void addProperties(Synset syn) {
-		if(syn.isPropCached()) {
+	void addLexicalProperties(Synset syn) {		
+		//Aggiunge le propriet� generiche e quelle lessicali
+
+		System.out.println("Adding lexical properties...");
+		if(syn.isLexicalPropCached()) {
+			System.out.println("..already cached!");
 			return;
 		}
-
-		System.out.println(">> adding properties to " + syn + "...");
-		
-		addLinguisticProperties(syn);
-
-		addSemanticProperties(syn);
-		
-		syn.setPropCached(true);	
-	}
-	
-
-	private void addLinguisticProperties(Synset syn) {
-		//Aggiunge le propriet� generiche e quelle lessicali
 
 		OntModel om = getModel("individual", "micro");
 		
@@ -348,10 +350,17 @@ public class KbContainer {
 		//Prendi in considerazione solo le propriet� che sono subProperty di language-property
 		//(cos� aggiunge anche language-property come relazione, che mappa verso l'unione
 		//dei synset mappati da tutte le propriet� lessicali... pu� essere utile?)
-		Set langProperties = new HashSet();
-		for(Iterator i = langProp.listSubProperties(false); i.hasNext(); ) {
-			OntProperty prop = (OntProperty) i.next();
-			langProperties.add(prop.getNameSpace() + prop.getLocalName());
+		if(langProperties == null) {
+			langProperties = new HashSet();			
+			for(Iterator i = langProp.listSubProperties(false); i.hasNext(); ) {
+				OntProperty prop = (OntProperty) i.next();
+				langProperties.add(prop.getNameSpace() + prop.getLocalName());
+			}
+//			System.out.println("Lex properties:");
+//			for(Iterator r = langProperties.iterator(); r.hasNext();) {
+//				String ores = (String) r.next();
+//				System.out.println("lang: " + ores);
+//			}			
 		}
 		
 		RDFNode glossNode = ind.getPropertyValue(glossProp);
@@ -361,24 +370,31 @@ public class KbContainer {
 		
 		for(StmtIterator i = ind.listProperties(); i.hasNext();) {
 			Statement stm = (Statement) i.next();
+			//System.out.println("@@ STMT @@: " + stm);
 			Property prop = stm.getPredicate();
 			String propUri = prop.getNameSpace() + prop.getLocalName();
 			if(langProperties.contains(propUri)) {
 				addLinguisticProperty(syn, prop, stm.getObject());
 			}
 		}
+		
+		syn.setLexicalPropCached(true);
 	}
 	
 	
-	private void addSemanticProperties(Synset syn) {
+	void addSemanticProperties(Synset syn) {
 		//Aggiunge le propriet� semantiche
 		
+		if(syn.isSemanticPropCached()) {
+			return;
+		}
+
 		OntModel om = getModel("full", "micro");
 		
 		Individual ind = om.getIndividual(syn.getURI());
 		for(Iterator i = ind.listRDFTypes(false); i.hasNext();) {
 			Resource res = (Resource) i.next();
-			if(res.getNameSpace().equalsIgnoreCase(KbConf.DOMAIN_ONTO_NS)) {
+			if(!res.isAnon() && res.getNameSpace().equalsIgnoreCase(KbConf.DOMAIN_ONTO_NS)) {
 				OntClass oc = (OntClass) res.as(OntClass.class);
 				for(Iterator p = oc.listDeclaredProperties(false); p.hasNext();) {
 					OntProperty op = (OntProperty) p.next();
@@ -394,7 +410,9 @@ public class KbContainer {
 					}
 				}
 			}
-		}		
+		}
+		
+		syn.setSemanticPropCached(true);
 	}
 	
 	

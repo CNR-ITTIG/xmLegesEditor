@@ -80,6 +80,51 @@ public class KbTree {
 		
 		return tree;
 	}
+	
+//	public TreePath getSelectionPath(Synset syn) {
+//		
+//		TreeModel model = tree.getModel();
+//		Object root = model.getRoot();
+//		searchSynset(model, root, syn, path);
+//		
+//	}
+//	
+//	public TreePath[] getSelectionPaths(Synset syn) {
+//		
+//		TreePath[] paths = null;
+//		
+//		TreeModel model = tree.getModel();
+//		Object root = model.getRoot();
+//		searchSynset(model, root, syn, paths);
+//
+//		return paths;
+//	}
+//	
+//	private void searchSynset(TreeModel model, Object o, Synset syn, TreePath path) {
+//		
+//		int  cc = model.getChildCount(o);
+//		for( int i = 0; i < cc; i++) {
+//			Object child = model.getChild(o, i);
+//			Object data = ((DefaultMutableTreeNode) child).getUserObject();
+//			boolean isOntoClass = false;
+//			if(data instanceof Synset && ((Synset) data).equals(syn)) {
+//				TreePath tp = ((DefaultMutableTreeNode) child).getPath()
+//				
+//			}
+//			
+//			Vector syns = (Vector) linked.get(data.toString());
+//			if(syns != null) {
+//				for(int k = 0; k < syns.size(); k++) {
+//					//System.out.println("Asking object mapped by " + syns.get(k));
+//					Synset syn = (Synset) kbc.synsets.get(syns.get(k));
+//					//System.out.println("++ Adding " + syn + " to " + child.toString());
+//					DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(syn);
+//					((DefaultMutableTreeNode) child).add(newNode);
+//				}
+//			}
+//			walk(model, child);
+//		}
+//	} 
 
 	private void expandClass(OntClass oc, DefaultMutableTreeNode node, JTree tmpTree) {
 		//Problema: se una classe non ha sotto-classi e non ha synset

@@ -35,7 +35,13 @@ public interface KbManager extends Service {
 	 * 
 	 * @param syn
 	 */
-	public void addProperties(Synset syn); 
+	public void addLexicalProperties(Synset syn); 
+	
+	/**
+	 * 
+	 * @param syn
+	 */
+	public void addSemanticProperties(Synset syn); 
 	
 	/**
 	 * 

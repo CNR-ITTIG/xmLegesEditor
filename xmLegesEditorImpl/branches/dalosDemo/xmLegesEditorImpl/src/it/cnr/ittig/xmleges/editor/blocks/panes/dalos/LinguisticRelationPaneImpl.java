@@ -13,9 +13,11 @@ import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.frame.FindIterator;
 import it.cnr.ittig.xmleges.core.services.frame.Frame;
 import it.cnr.ittig.xmleges.core.services.frame.PaneException;
+import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
+import it.cnr.ittig.xmleges.editor.services.dalos.objects.SynsetTree;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.LinguisticRelationPane;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSelectionEvent;
 
@@ -23,13 +25,16 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Collection;
 import java.util.EventObject;
+import java.util.Iterator;
 
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
-import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
 /**						
@@ -89,10 +94,14 @@ public class LinguisticRelationPaneImpl implements LinguisticRelationPane, Event
 
 	JList list = new JList();
 	
-	JTree tree;
+	//JTree tree;
 	
 	KbManager kbManager;
+	
+	SynsetTree relazioniTree;
 
+	I18n i18n;
+	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
@@ -105,6 +114,7 @@ public class LinguisticRelationPaneImpl implements LinguisticRelationPane, Event
 		utilUI = (UtilUI) serviceManager.lookup(UtilUI.class);
 		bars = (Bars) serviceManager.lookup(Bars.class);
 		kbManager = (KbManager) serviceManager.lookup(KbManager.class);
+		i18n = (I18n) serviceManager.lookup(I18n.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
@@ -112,14 +122,21 @@ public class LinguisticRelationPaneImpl implements LinguisticRelationPane, Event
 				
 		frame.addPane(this, false);
         
+     	DefaultMutableTreeNode root = new DefaultMutableTreeNode(" - ");
+     	DefaultTreeModel model = new DefaultTreeModel(root);     	
+     	relazioniTree = new SynsetTree(model, i18n);
+		//relazioniTree.addMouseListener(new LinguisticRelationTreeMouseAdapter());
+		
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		panel.add(scrollPane);
 	
 //		tree = kbManager.getTree("IT");		
-//		scrollPane.setViewportView(tree);
-		
+//		scrollPane.setViewportView(tree);		
 //		tree.addMouseListener(new SynsetTreePaneMouseAdapter());
+		
+		scrollPane.setViewportView(relazioniTree);		
+		frame.addPane(this, false);
 		
 		eventManager.addListener(this, SynsetSelectionEvent.class);
 	}
@@ -127,8 +144,12 @@ public class LinguisticRelationPaneImpl implements LinguisticRelationPane, Event
 	// ////////////////////////////////////////// EventManagerListener Interface
 	public void manageEvent(EventObject event) {
 		if (event instanceof SynsetSelectionEvent){
-		//	System.err.println("Synchronize LinguisticRelationPane on    "+((SynsetSelectionEvent)event).getActiveSynset().getLexicalForm());
-			
+			System.err.println("Synchronize LinguisticRelationPane on " 
+					+ ((SynsetSelectionEvent) event).getActiveSynset().getLexicalForm());
+
+			Synset selected = ((SynsetSelectionEvent) event).getActiveSynset();
+			kbManager.addLexicalProperties(selected);
+			showLinguisticRelations(selected);			
 		}
 	}
 	
@@ -145,10 +166,63 @@ public class LinguisticRelationPaneImpl implements LinguisticRelationPane, Event
 		return "editor.panes.dalos.linguisticrelation";
 	}
 
+	private void clearTree(SynsetTree tree) {
+
+		tree.removeChildren();
+		tree.setRootVisible(false);
+		tree.reloadModel();
+	}
+	
+	void showLinguisticRelations(Synset syn) {
+		
+		Collection relations = syn.lexicalToSynset.keySet(); 
+		
+		DefaultMutableTreeNode top = null, node = null;
+
+		clearTree(relazioniTree);
+
+		relazioniTree.setRootUserObject(syn.toString());
+		relazioniTree.setRootVisible(true);
+	
+		if(relations == null || relations.size() < 1) {
+			System.out.println(">> relations is empty!!");
+			return;
+		}
+		
+		String rel = "";
+
+		for(Iterator i = relations.iterator(); i.hasNext();) {
+			String thisRel = (String) i.next();
+			if(thisRel.equalsIgnoreCase("language-property")) {
+				continue;
+			}
+			if( !rel.equals(thisRel) ) {
+				relazioniTree.expandChilds(top);
+				rel = thisRel;
+				top = new DefaultMutableTreeNode(rel);
+				relazioniTree.addNode(top);
+				//System.out.println("++ NODE: " + rel);
+			}
+			Collection values = (Collection) syn.lexicalToSynset.get(thisRel);
+			for(Iterator k = values.iterator(); k.hasNext();) {
+				Synset item = (Synset) k.next();
+				node = new DefaultMutableTreeNode(item);
+				//System.out.println("++++ LEAF: " + item);
+				top.add(node);				
+			}
+		}
+		
+		relazioniTree.expandChilds(top);
+		
+		JScrollBar vbar = scrollPane.getVerticalScrollBar();
+		vbar.setValue(vbar.getMinimum());
+		JScrollBar hbar = scrollPane.getHorizontalScrollBar();
+		hbar.setValue(hbar.getMinimum());
+	}
+	
 	public Component getPaneAsComponent() {
 		return panel;
 	}
-	
 	
 
 	public boolean canCut() {
@@ -213,7 +287,8 @@ public class LinguisticRelationPaneImpl implements LinguisticRelationPane, Event
 	protected class SynsetTreePaneMouseAdapter extends MouseAdapter {
 		
 		public void mouseClicked(MouseEvent e) {
-			TreePath path = tree.getPathForLocation(e.getX(), e.getY());
+			//TreePath path = tree.getPathForLocation(e.getX(), e.getY());
+			TreePath path = relazioniTree.getPathForLocation(e.getX(), e.getY());
 			if (path != null) {
 				DefaultMutableTreeNode n = (DefaultMutableTreeNode) path.getLastPathComponent();
 				try {
