@@ -13,6 +13,7 @@ import it.cnr.ittig.xmleges.editor.services.dalos.objects.SynsetTree;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -29,8 +30,11 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 	
 	Logger logger;
 
-	//Map from language string to KbContainer objects.
+	//Maps from language to KbContainer objects.
 	private Map langToContainer;
+	
+	//Maps pivot language synsets to foreign languages synsets
+	private Map pivotToForeign;
 	
 	I18n i18n;
 	
@@ -48,8 +52,13 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 	public void initialize() throws Exception {	
 		
 		langToContainer = new HashMap();
+		pivotToForeign = null;
+		
 		//La lingua italiana dovrebbe essere inizializzata da qualche altra parte...
 		addLanguage("IT");
+		addLanguage("EN");
+		addLanguage("ES");
+		addLanguage("NL");
 	}
 
 	public void addLanguage(String lang) {
@@ -90,6 +99,36 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 		return kbc.getSynset(uri);
 	}
 	
+	public Synset getForeignSynset(String uri, String lang) {
+		
+		//Gets foreign KB container:
+		if(getContainer(lang) == null) {
+			System.out.println("## ERROR ## getForeignSynset() " +
+					" - language not initialized: " + lang);
+			return null;
+		}
+
+		//Gets pivot to foreign synsets mapping
+		if(pivotToForeign == null) {
+			initForeignLanguages();
+		}
+		
+		Collection foreignSyns = (Collection) pivotToForeign.get(uri);
+		
+		if(foreignSyns == null) {
+			return null;
+		}
+		
+		for(Iterator i = foreignSyns.iterator(); i.hasNext();) {
+			Synset item = (Synset) i.next();
+			if(item.getLanguage().equalsIgnoreCase(lang)) {
+				return item;
+			}
+		}
+		
+		return null;
+	}
+	
 	public SynsetTree getTree(String lang) {
 
 		KbContainer kbc = getContainer(lang);
@@ -113,6 +152,14 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 		KbContainer kbc = getContainer(lang);
 		return kbc.setTreeSelection(syn);
 	}
+	
+	private void initForeignLanguages() {
+		
+		pivotToForeign = new HashMap(2048, 0.70f);
+	
+		//Leggi il concepts.owl e crea le classi pivot ??!?!
+		//oppure parti direttamente dai types.owl ?
+	}	
 	
 	private KbContainer getContainer(String lang) {
 		

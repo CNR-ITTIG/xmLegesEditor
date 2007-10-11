@@ -6,14 +6,14 @@
     xmlns:claw="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#"
     xmlns:source="http://localhost/dalos/IT/sources.owl#"
     xmlns:langf="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#"
+    xmlns:conc="http://localhost/dalos/concepts.owl#"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:conc="http://localhost/dalos/IT/concepts.owl#"
     xmlns:indclaw="http://localhost/dalos/IT/ind-to-consumer.owl#"
     xmlns:ind="http://localhost/dalos/IT/individuals.owl#"
     xmlns:indw="http://localhost/dalos/IT/individuals-word.owl#"
     xmlns:type="http://localhost/dalos/IT/types.owl#"
     xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
-  xml:base="file:///home/lorenzo/.MetaLeveler/ind-to-consumer.owl" > 
+  xml:base="http://localhost/dalos/IT/ind-to-consumer.owl" > 
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-fornitore-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#intra-Community_infringement"/>
   </rdf:Description>

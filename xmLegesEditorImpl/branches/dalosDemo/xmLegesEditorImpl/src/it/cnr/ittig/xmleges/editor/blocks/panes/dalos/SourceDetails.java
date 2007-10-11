@@ -14,7 +14,6 @@ import java.util.Iterator;
 
 import javax.swing.JEditorPane;
 import javax.swing.text.html.HTMLDocument;
-import javax.swing.text.html.HTMLEditorKit;
 
 public class SourceDetails extends JEditorPane {
 	
@@ -28,7 +27,6 @@ public class SourceDetails extends JEditorPane {
 		setEditable(false);
 		setContentType("text/html");
 		
-		HTMLEditorKit kit = (HTMLEditorKit) this.getEditorKit();
 		HTMLDocument doc = (HTMLDocument) this.getDocument();
 
 		try {
@@ -63,8 +61,14 @@ public class SourceDetails extends JEditorPane {
 		
 		for(Iterator i = synset.getSources().iterator(); i.hasNext();) {
 			Source source = (Source) i.next();
-			html += "&nbsp;&nbsp;&nbsp;Def.: " + 
-						source.getContent() + " (link: <A HREF=\"" + source.getLink() + 
+			String def = source.getContent();
+			if(def == null || def.trim().length() < 1) {
+				def = "Source text not available";
+			}
+			
+			html += "&nbsp;&nbsp;&nbsp;Def.: <i>" + 
+						def + "</i><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+						"(link: <A HREF=\"" + source.getLink() + 
 						"\">" + source.getId() + "</A>)<br>";			
 		}
 		
@@ -72,7 +76,7 @@ public class SourceDetails extends JEditorPane {
 
 		setText(html);
 		
-		System.out.println("DEBUG HTML: " + html + "\n");
+		//System.out.println("DEBUG HTML: " + html + "\n");
 	}
 	
 	public void clearContent() {

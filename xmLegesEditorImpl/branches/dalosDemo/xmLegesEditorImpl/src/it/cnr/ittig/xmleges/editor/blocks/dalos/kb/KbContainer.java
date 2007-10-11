@@ -66,8 +66,8 @@ public class KbContainer {
 		indwFile = localRepository + KbConf.INDW;
 		indcFile = localRepository + KbConf.INDC;
 		typesFile = localRepository + KbConf.TYPES;
-		conceptsFile = localRepository + KbConf.CONCEPTS;
 		sourcesFile = localRepository + KbConf.SOURCES;
+		conceptsFile = KbConf.dalosRepository + KbConf.CONCEPTS;
 		
 		if(!checkFiles()) {
 			System.err.println("## ERROR ## KbContainer - Data files not found! Repo: " +
