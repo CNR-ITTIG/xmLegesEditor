@@ -98,6 +98,8 @@ public class SynsetSourcePaneImpl implements SynsetSourcePane, EventManagerListe
 	KbManager kbManager;
 	
 	I18n i18n;
+	
+	boolean update = false;
 
 	
 	// //////////////////////////////////////////////////// LogEnabled Interface
@@ -137,12 +139,17 @@ public class SynsetSourcePaneImpl implements SynsetSourcePane, EventManagerListe
 
 	// ////////////////////////////////////////// EventManagerListener Interface
 	public void manageEvent(EventObject event) {
-		if (event instanceof SynsetSelectionEvent){
-			Synset selected = ((SynsetSelectionEvent)event).getActiveSynset();
-			synsetPane.setSynset(selected);
-			kbManager.addSources(selected);
-			synsetPane.draw();
-		}			
+		update = this.getPaneAsComponent().isShowing();
+		
+		if (event instanceof SynsetSelectionEvent && update){
+			System.err.println("Synchronize SynsetSourcePane on " 
+					+ ((SynsetSelectionEvent) event).getActiveSynset().getLexicalForm());
+
+    		Synset selected = ((SynsetSelectionEvent) event).getActiveSynset();
+    		kbManager.addSources(selected);
+    		synsetPane.setSynset(selected);
+			synsetPane.draw();	
+		}
 	}
 	
 	// ///////////////////////////////////////////////////// Startable Interface
