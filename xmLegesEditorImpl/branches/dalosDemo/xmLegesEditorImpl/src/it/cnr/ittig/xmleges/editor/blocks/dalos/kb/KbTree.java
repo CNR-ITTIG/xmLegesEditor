@@ -14,9 +14,11 @@ import java.util.Set;
 import java.util.Vector;
 
 import javax.swing.JTree;
+import javax.swing.text.Position;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
+import javax.swing.tree.TreePath;
 
 import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntModel;
@@ -29,6 +31,8 @@ public class KbTree {
 	
 	private SynsetTree tree;
 	private SynsetTree tmpTree;
+	
+	private TreeModel treeModel;
 	
 	private KbContainer kbc;
 	
@@ -43,9 +47,16 @@ public class KbTree {
 		i18n = in;		
 		topClasses = null;
 		linked = null;
+		
+		tree = null;
+		tmpTree = null;
 	}
 	
 	public SynsetTree getTree() {
+
+		if(tree != null) {
+			return tree;
+		}
 		
 		topClasses = new HashSet();
 		
@@ -76,56 +87,69 @@ public class KbTree {
 		long t2 = System.currentTimeMillis();
 		System.out.println("...tree loaded! (" + Long.toString(t2 - t1) + " ms)\n");
 		
-		topClasses = null;
-		
 		return tree;
 	}
 	
-//	public TreePath getSelectionPath(Synset syn) {
-//		
-//		TreeModel model = tree.getModel();
-//		Object root = model.getRoot();
-//		searchSynset(model, root, syn, path);
-//		
-//	}
-//	
-//	public TreePath[] getSelectionPaths(Synset syn) {
-//		
-//		TreePath[] paths = null;
-//		
-//		TreeModel model = tree.getModel();
-//		Object root = model.getRoot();
-//		searchSynset(model, root, syn, paths);
-//
-//		return paths;
-//	}
-//	
-//	private void searchSynset(TreeModel model, Object o, Synset syn, TreePath path) {
-//		
-//		int  cc = model.getChildCount(o);
-//		for( int i = 0; i < cc; i++) {
-//			Object child = model.getChild(o, i);
-//			Object data = ((DefaultMutableTreeNode) child).getUserObject();
-//			boolean isOntoClass = false;
-//			if(data instanceof Synset && ((Synset) data).equals(syn)) {
-//				TreePath tp = ((DefaultMutableTreeNode) child).getPath()
-//				
-//			}
-//			
-//			Vector syns = (Vector) linked.get(data.toString());
-//			if(syns != null) {
-//				for(int k = 0; k < syns.size(); k++) {
-//					//System.out.println("Asking object mapped by " + syns.get(k));
-//					Synset syn = (Synset) kbc.synsets.get(syns.get(k));
-//					//System.out.println("++ Adding " + syn + " to " + child.toString());
-//					DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(syn);
-//					((DefaultMutableTreeNode) child).add(newNode);
-//				}
-//			}
-//			walk(model, child);
-//		}
-//	} 
+	boolean setSelection(Synset syn) {
+		
+		treeModel = tree.getModel();
+		Object root = treeModel.getRoot();
+		
+		collapseTree();
+		
+		System.out.println(">> Trying to find and select \"" + syn + "\" within tree...");		
+			
+		//Non va bene questo: cerca solo nei nodi e foglie già espansi e cerca
+		//con un prefisso non con l'exact matching.
+		//TreePath path = tree.getNextMatch(syn.toString(), 0, Position.Bias.Forward);
 
+		Collection paths = new Vector();
+		walkAndExpand(root, syn.toString(), paths);
+		
+		if(paths.size() == 0) {
+			System.out.println(">> ...not found!");
+			return false;
+		}
+		
+		//System.out.println(">> founded! Selecting paths " + paths);
+
+		//tree.setSelectionPaths((TreePath[]) paths.toArray(new TreePath[0]));
+        //tree.setSelectionPath((TreePath) ((Vector) paths).get(0));
+		tree.addSelectionPaths((TreePath[]) paths.toArray(new TreePath[0]));
+		
+		return true;
+	}
+	
+	private void collapseTree() {
+		
+		Object o = treeModel.getRoot();
+		int  cc = treeModel.getChildCount(o);
+		for( int i = 0; i < cc; i++) {
+			Object child = treeModel.getChild(o, i);
+			tree.collapsePath(new TreePath(((DefaultMutableTreeNode) child).getPath()));
+		}
+	}
+	
+	private void walkAndExpand(Object o, String key, Collection paths) {
+		
+		int  cc = treeModel.getChildCount(o);
+		for( int i = 0; i < cc; i++) {
+			Object child = treeModel.getChild(o, i);
+			Object data = ((DefaultMutableTreeNode) child).getUserObject();
+			if(data instanceof Synset &&
+					key.equalsIgnoreCase((data.toString()))) {
+				//TreePath exPath = new TreePath(((DefaultMutableTreeNode) child).getParent());
+				TreePath thisPath = new TreePath(((DefaultMutableTreeNode) child).getPath());
+				//System.out.println(">> Expanding path " + exPath);
+				tree.expandPath(thisPath);
+				paths.add(thisPath);
+				tree.scrollPathToVisible(thisPath);
+				//tree.addSelectionPath(thisPath);
+			}			
+			walkAndExpand(child, key, paths);
+		}
+	}
+	
 	private void expandClass(OntClass oc, DefaultMutableTreeNode node, JTree tmpTree) {
 		//Problema: se una classe non ha sotto-classi e non ha synset
 		//viene visualizzata come foglia!

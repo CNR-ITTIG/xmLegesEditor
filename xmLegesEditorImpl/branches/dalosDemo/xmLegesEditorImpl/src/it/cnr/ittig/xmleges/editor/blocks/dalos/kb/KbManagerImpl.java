@@ -108,6 +108,12 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 		return kbc.search(search, type);
 	}
 	
+	public boolean setTreeSelection(Synset syn, String lang) {
+		
+		KbContainer kbc = getContainer(lang);
+		return kbc.setTreeSelection(syn);
+	}
+	
 	private KbContainer getContainer(String lang) {
 		
 		KbContainer kbc = (KbContainer) langToContainer.get(lang);

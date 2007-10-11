@@ -58,26 +58,21 @@ public class SourceDetails extends JEditorPane {
 			return;
 		}
 		
-		String def = synset.getDef();
-		if(def.trim().length() < 1) {
-			def = " - ";
-		}
-		
 		String html = "<html><body>" +
 			"</h3><h2><i>Sources</i></h2><h3>"; 
 		
 		for(Iterator i = synset.getSources().iterator(); i.hasNext();) {
 			Source source = (Source) i.next();
-			html += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - " + 
-						source.getContent() + " - <A HREF=\"" + source.getLink() + 
-						"\">" + source.getId() + "<br>";			
+			html += "&nbsp;&nbsp;&nbsp;Def.: " + 
+						source.getContent() + " (link: <A HREF=\"" + source.getLink() + 
+						"\">" + source.getId() + "</A>)<br>";			
 		}
 		
 		html += "</h3></body></html>";
 
 		setText(html);
 		
-		//System.out.println("DEBUG HTML: " + html + "\n");
+		System.out.println("DEBUG HTML: " + html + "\n");
 	}
 	
 	public void clearContent() {

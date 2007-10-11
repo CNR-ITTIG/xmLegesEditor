@@ -27,6 +27,7 @@ import java.util.EventObject;
 
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -92,6 +93,8 @@ public class SynsetTreePaneImpl implements SynsetTreePane, EventManagerListener,
 	JTree tree;
 	
 	KbManager kbManager;
+	
+	Synset selected;
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -118,6 +121,7 @@ public class SynsetTreePaneImpl implements SynsetTreePane, EventManagerListener,
 	
 		tree = kbManager.getTree("IT");		
 		scrollPane.setViewportView(tree);
+		selected = null;
 		
 		tree.addMouseListener(new SynsetTreePaneMouseAdapter());
 		
@@ -128,7 +132,18 @@ public class SynsetTreePaneImpl implements SynsetTreePane, EventManagerListener,
 	public void manageEvent(EventObject event) {
 		if (event instanceof SynsetSelectionEvent){
 
-			System.err.println("Synchronize tree from "+event.getSource().toString() + "on    "+((SynsetSelectionEvent)event).getActiveSynset().getLexicalForm());			
+			Synset sel = ((SynsetSelectionEvent) event).getActiveSynset();
+			if(selected == null || !selected.equals(sel)) {
+				selected = sel;
+			}
+			System.err.println("Synchronize tree from " + 
+					event.getSource().toString() + "on    " + selected);
+			kbManager.setTreeSelection(selected, "IT");
+			
+			JScrollBar vbar = scrollPane.getVerticalScrollBar();
+			vbar.setValue(vbar.getMinimum());
+			JScrollBar hbar = scrollPane.getHorizontalScrollBar();
+			hbar.setValue(hbar.getMinimum());
 		}
 	}
 	

@@ -195,7 +195,7 @@ public class KbContainer {
 			readData(om, typesFile);
 		}
 		if(type.equalsIgnoreCase("source")) {
-			//om.read(KbConf.SOURCE_SCHEMA); //Ci vuole questo metalivello??
+			om.read(KbConf.SOURCE_SCHEMA); //Ci vuole questo metalivello??
 			readData(om, indFile);
 			readData(om, sourcesFile);			
 		}
@@ -215,6 +215,11 @@ public class KbContainer {
 	SynsetTree getTree() {
 		
 		return kbt.getTree();
+	}
+	
+	boolean setTreeSelection(Synset syn) {
+		
+		return kbt.setSelection(syn);
 	}
 	
 	private void initSynsets() {
@@ -305,9 +310,9 @@ public class KbContainer {
 		Individual ind = om.getIndividual(syn.getURI());
 
 		OntProperty sourceProp = om.getOntProperty(KbConf.SOURCESCHEMA_NS + "source");
-		OntProperty involvesProp = om.getOntProperty(KbConf.SOURCESCHEMA_NS + "source");
-		OntProperty belongsProp = om.getOntProperty(KbConf.SOURCESCHEMA_NS + "source");
-		OntProperty linkProp = om.getOntProperty(KbConf.SOURCESCHEMA_NS + "source");
+		OntProperty involvesProp = om.getOntProperty(KbConf.SOURCESCHEMA_NS + "involvesPartition");
+		OntProperty belongsProp = om.getOntProperty(KbConf.SOURCESCHEMA_NS + "belongsTo");
+		OntProperty linkProp = om.getOntProperty(KbConf.SOURCESCHEMA_NS + "link");
 		OntProperty contentProp = om.getOntProperty(KbConf.SOURCESCHEMA_NS + "content");
 		OntProperty idProp = om.getOntProperty(KbConf.SOURCESCHEMA_NS + "partitionCode");
 		
@@ -329,9 +334,14 @@ public class KbContainer {
 				source.setLink(((Literal) linkNode).getString());
 			}
 			
-			RDFNode contentNode = ores.getPropertyValue(contentProp);			
+			RDFNode contentNode = ores.getPropertyValue(contentProp);
 			if(contentNode != null) {
-				source.setContent(((Literal) contentNode).getString());				
+				if(!contentNode.isLiteral()) {
+					System.out.println("## ERROR ## CONTENT IS " 
+							+ contentNode.getClass() + " : " + contentNode );					
+				} else {
+					source.setContent(((Literal) contentNode).getString());
+				}
 			}
 
 			syn.addSource(source);
