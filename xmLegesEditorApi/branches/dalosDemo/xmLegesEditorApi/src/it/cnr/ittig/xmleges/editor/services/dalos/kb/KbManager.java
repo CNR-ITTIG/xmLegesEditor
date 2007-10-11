@@ -85,4 +85,11 @@ public interface KbManager extends Service {
 	 */
 	public Collection search(String search, String type, String lang);
 	
+	/**
+	 * 
+	 * @param syn
+	 * @param lang
+	 * @return
+	 */
+	public boolean setTreeSelection(Synset syn, String lang);
 }
