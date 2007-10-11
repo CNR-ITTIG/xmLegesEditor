@@ -12,11 +12,8 @@ import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.frame.FindIterator;
 import it.cnr.ittig.xmleges.core.services.frame.Frame;
-import it.cnr.ittig.xmleges.core.services.frame.PaneActivatedEvent;
-import it.cnr.ittig.xmleges.core.services.frame.PaneDeactivatedEvent;
 import it.cnr.ittig.xmleges.core.services.frame.PaneException;
 import it.cnr.ittig.xmleges.core.services.frame.PaneFocusGainedEvent;
-import it.cnr.ittig.xmleges.core.services.frame.PaneFocusLostEvent;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
@@ -106,7 +103,9 @@ public class LinguisticRelationPaneImpl implements LinguisticRelationPane, Event
 
 	I18n i18n;
 	
-	boolean update = false;
+	boolean visible = false;
+	
+	Synset selectedSyn = null;
 	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -141,20 +140,21 @@ public class LinguisticRelationPaneImpl implements LinguisticRelationPane, Event
 		frame.addPane(this, false);
 		
 		eventManager.addListener(this, SynsetSelectionEvent.class);
+		eventManager.addListener(this, PaneFocusGainedEvent.class);
 	}
 
 	// ////////////////////////////////////////// EventManagerListener Interface
 	public void manageEvent(EventObject event) {
 		
-		update = this.getPaneAsComponent().isShowing();
+		visible = this.getPaneAsComponent().isShowing();
 		
-		if (event instanceof SynsetSelectionEvent && update){
-			System.err.println("Synchronize LinguisticRelationPane on " 
-					+ ((SynsetSelectionEvent) event).getActiveSynset().getLexicalForm());
-
-    		Synset selected = ((SynsetSelectionEvent) event).getActiveSynset();
-			kbManager.addLexicalProperties(selected);
-			showLinguisticRelations(selected);			
+		if (event instanceof SynsetSelectionEvent)
+				selectedSyn = ((SynsetSelectionEvent) event).getActiveSynset();
+		
+		if (visible && (event instanceof SynsetSelectionEvent || event instanceof PaneFocusGainedEvent)){
+			System.err.println("Synchronize LinguisticRelationPane on "	+ selectedSyn.getLexicalForm());    		
+			kbManager.addLexicalProperties(selectedSyn);
+			showLinguisticRelations(selectedSyn);			
 		}
 	}
 	
