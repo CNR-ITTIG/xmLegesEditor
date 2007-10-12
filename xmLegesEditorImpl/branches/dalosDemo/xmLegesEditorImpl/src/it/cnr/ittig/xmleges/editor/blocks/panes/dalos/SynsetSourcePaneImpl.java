@@ -13,6 +13,7 @@ import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.frame.FindIterator;
 import it.cnr.ittig.xmleges.core.services.frame.Frame;
 import it.cnr.ittig.xmleges.core.services.frame.PaneException;
+import it.cnr.ittig.xmleges.core.services.frame.PaneFocusGainedEvent;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.panes.source.SourcePane;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
@@ -97,6 +98,8 @@ public class SynsetSourcePaneImpl implements SynsetSourcePane, EventManagerListe
 	
 	KbManager kbManager;
 	
+	Synset selectedSyn = null;
+	
 	I18n i18n;
 	
 	boolean update = false;
@@ -135,21 +138,25 @@ public class SynsetSourcePaneImpl implements SynsetSourcePane, EventManagerListe
 		synsetPane.clearContent();
 		
 		eventManager.addListener(this, SynsetSelectionEvent.class);
+		eventManager.addListener(this, PaneFocusGainedEvent.class);
 	}
 
 	// ////////////////////////////////////////// EventManagerListener Interface
 	public void manageEvent(EventObject event) {
-		update = this.getPaneAsComponent().isShowing();
 		
-		if (event instanceof SynsetSelectionEvent && update){
-			System.err.println("Synchronize SynsetSourcePane on " 
-					+ ((SynsetSelectionEvent) event).getActiveSynset().getLexicalForm());
-
-    		Synset selected = ((SynsetSelectionEvent) event).getActiveSynset();
-    		kbManager.addSources(selected);
-    		synsetPane.setSynset(selected);
-			synsetPane.draw();	
+		//update = this.getPaneAsComponent().isShowing();
+		
+		if (event instanceof SynsetSelectionEvent)
+			selectedSyn = ((SynsetSelectionEvent) event).getActiveSynset();
+	
+		if (event instanceof PaneFocusGainedEvent && ((PaneFocusGainedEvent)event).getPane().equals(this)){
+			synsetPane.clearContent();
+			System.err.println("Synchronize SynsetSourcePane on "	+ selectedSyn.getLexicalForm());    		
+			kbManager.addSources(selectedSyn);
+			synsetPane.setSynset(selectedSyn);
+			synsetPane.draw();		
 		}
+		
 	}
 	
 	// ///////////////////////////////////////////////////// Startable Interface

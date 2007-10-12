@@ -95,11 +95,9 @@ public class LinguisticRelationPaneImpl implements LinguisticRelationPane, Event
 
 	JList list = new JList();
 	
-	//JTree tree;
-	
 	KbManager kbManager;
 	
-	SynsetTree relazioniTree;
+	SynsetTree lexicalTree;
 
 	I18n i18n;
 	
@@ -129,14 +127,14 @@ public class LinguisticRelationPaneImpl implements LinguisticRelationPane, Event
         
      	DefaultMutableTreeNode root = new DefaultMutableTreeNode(" - ");
      	DefaultTreeModel model = new DefaultTreeModel(root);     	
-     	relazioniTree = new SynsetTree(model, i18n);
-		relazioniTree.addMouseListener(new LinguisticRelationTreeMouseAdapter());
+     	lexicalTree = new SynsetTree(model, i18n);
+		lexicalTree.addMouseListener(new LinguisticRelationTreeMouseAdapter());
 		
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		panel.add(scrollPane);
 			
-		scrollPane.setViewportView(relazioniTree);		
+		scrollPane.setViewportView(lexicalTree);		
 		frame.addPane(this, false);
 		
 		eventManager.addListener(this, SynsetSelectionEvent.class);
@@ -151,7 +149,8 @@ public class LinguisticRelationPaneImpl implements LinguisticRelationPane, Event
 		if (event instanceof SynsetSelectionEvent)
 				selectedSyn = ((SynsetSelectionEvent) event).getActiveSynset();
 		
-		if (visible && (event instanceof SynsetSelectionEvent || event instanceof PaneFocusGainedEvent)){
+		if (event instanceof PaneFocusGainedEvent && ((PaneFocusGainedEvent)event).getPane().equals(this)){
+			clearTree(lexicalTree);
 			System.err.println("Synchronize LinguisticRelationPane on "	+ selectedSyn.getLexicalForm());    		
 			kbManager.addLexicalProperties(selectedSyn);
 			showLinguisticRelations(selectedSyn);			
@@ -172,7 +171,7 @@ public class LinguisticRelationPaneImpl implements LinguisticRelationPane, Event
 	}
 
 	private void clearTree(SynsetTree tree) {
-
+		System.err.println("--------CLEANING LEXICAL TREE ---------");
 		tree.removeChildren();
 		tree.setRootVisible(false);
 		tree.reloadModel();
@@ -184,10 +183,10 @@ public class LinguisticRelationPaneImpl implements LinguisticRelationPane, Event
 		
 		DefaultMutableTreeNode top = null, node = null;
 
-		clearTree(relazioniTree);
+		clearTree(lexicalTree);
 
-		relazioniTree.setRootUserObject(syn.toString());
-		relazioniTree.setRootVisible(true);
+		lexicalTree.setRootUserObject(syn.toString());
+		lexicalTree.setRootVisible(true);
 	
 		if(relations == null || relations.size() < 1) {
 			System.out.println(">> relations is empty!!");
@@ -202,10 +201,10 @@ public class LinguisticRelationPaneImpl implements LinguisticRelationPane, Event
 				continue;
 			}
 			if( !rel.equals(thisRel) ) {
-				relazioniTree.expandChilds(top);
+				lexicalTree.expandChilds(top);
 				rel = thisRel;
 				top = new DefaultMutableTreeNode(rel);
-				relazioniTree.addNode(top);
+				lexicalTree.addNode(top);
 				//System.out.println("++ NODE: " + rel);
 			}
 			Collection values = (Collection) syn.lexicalToSynset.get(thisRel);
@@ -217,7 +216,7 @@ public class LinguisticRelationPaneImpl implements LinguisticRelationPane, Event
 			}
 		}
 		
-		relazioniTree.expandChilds(top);
+		lexicalTree.expandChilds(top);
 		
 		JScrollBar vbar = scrollPane.getVerticalScrollBar();
 		vbar.setValue(vbar.getMinimum());
@@ -293,7 +292,7 @@ public class LinguisticRelationPaneImpl implements LinguisticRelationPane, Event
 		
 		public void mouseClicked(MouseEvent e) {
 			//TreePath path = tree.getPathForLocation(e.getX(), e.getY());
-			TreePath path = relazioniTree.getPathForLocation(e.getX(), e.getY());
+			TreePath path = lexicalTree.getPathForLocation(e.getX(), e.getY());
 			if (path != null) {
 				DefaultMutableTreeNode n = (DefaultMutableTreeNode) path.getLastPathComponent();
 				try {

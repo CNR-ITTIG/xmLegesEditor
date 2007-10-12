@@ -16,12 +16,13 @@ import it.cnr.ittig.xmleges.core.services.frame.PaneException;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
+import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dalos.action.SynsetMarkupAction;
 import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
+import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetDetailsPane;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetListPane;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSelectionEvent;
-import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -32,11 +33,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Collection;
 import java.util.EventObject;
+import java.util.Iterator;
 import java.util.Vector;
 
 import javax.swing.AbstractAction;
 import javax.swing.JComboBox;
 import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
@@ -122,6 +126,8 @@ public class SynsetListPaneImpl implements SynsetListPane, EventManagerListener,
 	
 	String[] searchTypes={"contains", "startsWith","endsWith","exact"};
 	
+	SynsetDetailsPane synsetDetailsPane;
+	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
@@ -136,12 +142,12 @@ public class SynsetListPaneImpl implements SynsetListPane, EventManagerListener,
 		kbManager = (KbManager) serviceManager.lookup(KbManager.class);
 		i18n = (I18n) serviceManager.lookup(I18n.class);
 		synsetMarkupAction = (SynsetMarkupAction) serviceManager.lookup(SynsetMarkupAction.class);
-		
+		synsetDetailsPane = (SynsetDetailsPane) serviceManager.lookup(SynsetDetailsPane.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws Exception {
-		popupMenu = bars.getPopup(false);
+		popupMenu = new JPopupMenu();//bars.getPopup(false);
 		JToolBar bar = new JToolBar();
 		
 		searchType = new JComboBox(searchTypes);
@@ -183,7 +189,11 @@ public class SynsetListPaneImpl implements SynsetListPane, EventManagerListener,
 	// ////////////////////////////////////////// EventManagerListener Interface
 	public void manageEvent(EventObject event) {
 		if (event instanceof SynsetSelectionEvent){
-			list.setSelectedValue(((SynsetSelectionEvent)event).getActiveSynset(), true);
+		
+			frame.setShowingPane(synsetDetailsPane, true);
+			
+			System.err.println("synsetdetailspane setvisible true");
+			list.setSelectedValue(((SynsetSelectionEvent)event).getActiveSynset(), true);			
 		}
 		if (event instanceof SelectionChangedEvent){
 			Node activeNode = ((SelectionChangedEvent)event).getActiveNode();
@@ -315,8 +325,13 @@ public class SynsetListPaneImpl implements SynsetListPane, EventManagerListener,
 	protected class SynsetListSelectionListener implements ListSelectionListener {
 		
 		public void valueChanged(ListSelectionEvent e) {
-			if(list.getSelectedValue()!=null)
+			if(list.getSelectedValue()!=null){
+				
+				frame.setShowingPane(synsetDetailsPane, true);
+			
+				System.err.println("synsetdetailspane setvisible true");
 				selectSynset((Synset)list.getSelectedValue());
+			}
 		}
 	}
 	
@@ -329,15 +344,86 @@ public class SynsetListPaneImpl implements SynsetListPane, EventManagerListener,
 	}
 	
 	
+	
+	// METTER TUTTO IN UN UTIL A PARTE   PER RICHIAMARLO DAI VARI POSTI   ???? 
+	
 	protected class SynsetListPaneMouseAdapter extends MouseAdapter {
-		// da implementare il doubleclick
+		
+		JMenu insert = null;
+		
 		public void mouseClicked(MouseEvent e) {
-			if(e.getClickCount()==2){
-				Synset selectedSyn = (Synset)list.getSelectedValue();
-				synsetMarkupAction.doSynsetMarkup(selectedSyn);
+			Synset selectedSyn = (Synset)list.getSelectedValue();
+			if(e.getClickCount()==2){				
+				synsetMarkupAction.doSynsetMarkup(selectedSyn, selectedSyn.getLexicalForm());
 				System.err.println("<"+selectedSyn.getURI()+">"+selectedSyn.getLexicalForm()+"</"+selectedSyn.getURI()+">");
 			}
+			if (e.getButton() == MouseEvent.BUTTON3) {
+				updateMenus(selectedSyn);
+				popupMenu.show(list, e.getX(), e.getY());
+			}
 		}
+	
+		
+		protected void updateMenus(Synset synset) {
+			if(insert != null)
+				popupMenu.remove(insert);
+			insert = createMenuInsertVariant(synset);
+			popupMenu.add(insert);
+		}
+		
+		
+		protected JMenu createMenuInsertVariant(Synset synset) {
+
+			JMenu menu = createMenu("editor.dalos.menu.variant.markup");
+			if (synset == null)
+				return menu;
+			
+			Vector sorted = synset.variants;
+			
+			// rimuovere la lexical form  ???
+			//sorted.remove(synset.getLexicalForm());
+			
+			//Collections.sort(sorted);
+			Collection coll = (Collection) sorted;
+
+			for (Iterator it = coll.iterator(); it.hasNext();) {
+				String next = (String) it.next();
+
+				JMenuItem menuItem = new JMenuItem(next);
+				
+				menuItem.addActionListener(new InsertVariantAction(synset,next));
+				menu.add(menuItem);
+				menu.setEnabled(true);
+			}
+			return menu;
+		}
+		
+		
+		
+		protected JMenu createMenu(String name) {
+			JMenu menu = new JMenu();
+			menu.setName(name);
+			menu.setEnabled(false);
+			utilUI.applyI18n(menu);
+			return menu;
+		}
+		
+		
+	
+		protected class InsertVariantAction extends AbstractAction {
+			private Synset synset;
+			private String variant;
+			
+			private InsertVariantAction(Synset synset, String variant) {
+				this.synset = synset;
+				this.variant = variant;
+			}
+
+			public void actionPerformed(ActionEvent e) {
+				synsetMarkupAction.doSynsetMarkup(synset,variant);
+			}
+		}
+
 	}
 	
 }
