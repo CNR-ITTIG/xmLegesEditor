@@ -497,7 +497,7 @@ public class KbContainer {
 		//ricerca full-text con ranking...??
 		
 		if(type.equalsIgnoreCase("contains")) {
-			if(lemma.toLowerCase().indexOf(search) > 1) {
+			if(lemma.toLowerCase().indexOf(search) > -1) {
 				return true;
 			}
 		}
