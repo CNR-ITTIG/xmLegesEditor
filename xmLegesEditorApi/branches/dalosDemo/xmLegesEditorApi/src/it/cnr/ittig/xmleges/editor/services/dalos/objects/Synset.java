@@ -26,19 +26,19 @@ public class Synset {
 
 	private Collection sources; //rispettare l'ordine alfabetico
 
+	private Collection variants = null; //lemmi come normali stringhe..? ORDINE ALFABETICO !
+	
 	public Map lexicalToSynset = null;
 		
 	public Map semanticToSynset = null;
 	
-	public Vector variants = null; //lemmi come normali stringhe..?
-		
 	public Synset() {
 				
 		lexicalToSynset = new HashMap();
 		semanticToSynset = new HashMap();
 		
 		sources = new TreeSet();
-		variants = new Vector();
+		variants = new TreeSet();
 		
 		lexicalForm = "";
 		
@@ -140,6 +140,16 @@ public class Synset {
 	public Collection getSources() {
 		
 		return sources;
+	}
+
+	public void addVariant(String var) {
+
+		variants.add(var);
+	}
+	
+	public Collection getVariants() {
+		
+		return variants;
 	}
 
 	public String toString() {

@@ -68,7 +68,8 @@ public class SynsetDetails extends JEditorPane {
 			"</h3><h2><i>Definition</i></h2><h3>" + 
 			def +  "</h3><h2><i>Variants</i></h2><h3>"; 
 		
-		for(Iterator i = synset.variants.iterator(); i.hasNext();) {
+		
+		for(Iterator i = synset.getVariants().iterator(); i.hasNext();) {
 			String variant = (String) i.next();
 			html += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - " + 
 						variant + "<br>";				

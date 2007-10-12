@@ -378,15 +378,7 @@ public class SynsetListPaneImpl implements SynsetListPane, EventManagerListener,
 			if (synset == null)
 				return menu;
 			
-			Vector sorted = synset.variants;
-			
-			// rimuovere la lexical form  ???
-			//sorted.remove(synset.getLexicalForm());
-			
-			//Collections.sort(sorted);
-			Collection coll = (Collection) sorted;
-
-			for (Iterator it = coll.iterator(); it.hasNext();) {
+			for (Iterator it = synset.getVariants().iterator(); it.hasNext();) {
 				String next = (String) it.next();
 
 				JMenuItem menuItem = new JMenuItem(next);

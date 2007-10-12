@@ -260,7 +260,7 @@ public class KbContainer {
 				for(Iterator l = w.listPropertyValues(lexical); l.hasNext(); ) {
 					RDFNode lexNode = (RDFNode) l.next();
 					String lexForm = ((Literal) lexNode).getString();
-					syn.variants.add(lexForm);
+					((Collection) syn.getVariants()).add(lexForm);
 				}
 			}
 			
@@ -480,8 +480,9 @@ public class KbContainer {
 		Vector results = new Vector();
 		for(int i = 0; i < sortedSynsets.size(); i++) {
 			Synset syn = (Synset) sortedSynsets.get(i);
-			for(int k = 0; k < syn.variants.size(); k++) {
-				String lemma = (String) syn.variants.get(k);
+			Collection variants = syn.getVariants();
+			for(Iterator k = variants.iterator(); k.hasNext();) {
+				String lemma = (String) k.next();
 				if(checkLemma(lemma, search, type)) {
 					results.add(syn);
 					break;
