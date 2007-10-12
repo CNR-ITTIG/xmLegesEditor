@@ -48,6 +48,7 @@ import org.w3c.dom.Node;
  */
 public class SynsetMarkupImpl implements SynsetMarkup, Loggable, Serviceable {
 	
+
 	Logger logger;
 
 	DtdRulesManager dtdRulesManager;
@@ -86,13 +87,18 @@ public class SynsetMarkupImpl implements SynsetMarkup, Loggable, Serviceable {
 	
 
 	
-	// correggere::   se sono dentro uno span dalos; sostituisco tutto lo span indip dal testo selezionato
+
 	public Node setSynset(Node node,  int start, int end, Synset synset) {
+		return(setSynset(node,start,end,synset,synset.getLexicalForm()));
+	}
+	
+	
+	public Node setSynset(Node node, int start, int end, Synset synset, String variant) {
 		Node ret = null;
 		if(canSetSynset(node)){
 			try {
 				EditTransaction tr = documentManager.beginEdit();
-				if ((ret=setDOMSynset(node, start, end, synset))!=null) {
+				if ((ret=setDOMSynset(node, start, end, synset,variant))!=null) {
 					rinumerazione.aggiorna(documentManager.getDocumentAsDom());
 					documentManager.commitEdit(tr);
 				} else
@@ -106,7 +112,8 @@ public class SynsetMarkupImpl implements SynsetMarkup, Loggable, Serviceable {
 	}
 	
 	
-	private Node setDOMSynset(Node node,  int start, int end, Synset synset) {
+	// correggere::   se sono dentro uno span dalos; sostituisco tutto lo span indip dal testo selezionato
+	private Node setDOMSynset(Node node,  int start, int end, Synset synset, String variant) {
 
 		if(UtilDom.isTextNode(node)){
 			Element span;
@@ -119,7 +126,7 @@ public class SynsetMarkupImpl implements SynsetMarkup, Loggable, Serviceable {
 				//qui crea uno span dal testo selezionato 
 				span = (Element) utilRulesManager.encloseTextInTag(node, start, end,"h:span","h");	
 			}
-			UtilDom.setTextNode(span, synset.getLexicalForm());
+			UtilDom.setTextNode(span, variant);
 			UtilDom.setAttributeValue(span,"h:style","dalos");
 			UtilDom.setAttributeValue(span, "h:class", synset.getURI().substring(synset.getURI().indexOf("#")+1));
 		return (Node) span;
