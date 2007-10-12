@@ -273,7 +273,8 @@ public class FrameImpl implements Frame, Loggable, Serviceable, Configurable, In
 		tCenterPane = new AutoTabbedPane(this, "tab-top-center");
 		bLeftPane = new AutoTabbedPane(this, "tab-bottom-left");
 		bCenterPane = new AutoTabbedPane(this, "tab-bottom-center");
-
+		
+		
 		tLeftPane.set((Vector) pos2Panes.get(TOP_LEFT));
 		tCenterPane.set((Vector) pos2Panes.get(TOP_CENTER));
 		bLeftPane.set((Vector) pos2Panes.get(BOTTOM_LEFT));
@@ -336,7 +337,9 @@ public class FrameImpl implements Frame, Loggable, Serviceable, Configurable, In
 		else
 			return null;
 	}
-
+	
+	
+		
 	public void show() {
 		frame.show();
 		//TODO Internazionalizzare 
@@ -606,4 +609,15 @@ public class FrameImpl implements Frame, Loggable, Serviceable, Configurable, In
 			setInteraction(true);
 		}
 	}
+	
+	
+//	 si potrebbe fare con ViewPaneAction   ????
+	public void setShowingPane(Pane pane, boolean show){		
+		PaneFrame pf = (PaneFrame) name2PaneFrames.get(pane.getName());
+		if (pf.isShow()) {
+			AutoTabbedPane tab = getAutoTabbedPane(pf);
+			tab.setSelected(pf);
+		}
+	}
+	
 }
