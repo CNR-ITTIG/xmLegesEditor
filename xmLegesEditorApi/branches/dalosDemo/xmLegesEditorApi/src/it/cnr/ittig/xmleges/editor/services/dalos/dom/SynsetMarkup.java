@@ -26,32 +26,36 @@ import org.w3c.dom.Node;
 public interface SynsetMarkup extends Service {
 	
 	
-
 	/**
-	 * Funzione per l'abilitazione dell'azione di assegnazione della vigenza
 	 * 
-	 * @param node nodo sul cui testo si vuole applicare la vigenza
-	 * @return </code>true</code> se l'azione puo' essere abilitata
+	 * @param node
+	 * @return
 	 */
 	public boolean canSetSynset(Node node);
 	
 	
+
 	/**
-	 * Funzione Dom per l'assegnazione di un intervallo di vigenza ad una
-	 * porzione di testo
 	 * 
-	 * @param node nodo sul cui testo si applica la vigenza
-	 * @param selectedText testo selezionato
-	 * @param start inizio selezione del testo
-	 * @param end fine selezione del testo
-	 * @param vigenza oggetto contenente la vigenza
-	 * @return </code>true</code> se la vigenza e' stata inserita
-	 *         correttamente
+	 * @param node
+	 * @param start
+	 * @param end
+	 * @param synset
+	 * @return
 	 */
 	public Node setSynset(Node node, int start, int end, Synset synset);
 	
 	
-	
+	/**
+	 * 
+	 * @param node
+	 * @param start
+	 * @param end
+	 * @param synset
+	 * @param variant
+	 * @return
+	 */
+	public Node setSynset(Node node, int start, int end, Synset synset, String variant);
 	
 
 }
