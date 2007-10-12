@@ -358,49 +358,40 @@ public class SynsetListPaneImpl implements SynsetListPane, EventManagerListener,
 				System.err.println("<"+selectedSyn.getURI()+">"+selectedSyn.getLexicalForm()+"</"+selectedSyn.getURI()+">");
 			}
 			if (e.getButton() == MouseEvent.BUTTON3) {
-				updateMenus(selectedSyn);
+				updatePopupMenu(selectedSyn);
 				popupMenu.show(list, e.getX(), e.getY());
 			}
 		}
 	
 		
-		protected void updateMenus(Synset synset) {
-			if(insert != null)
-				popupMenu.remove(insert);
-			insert = createMenuInsertVariant(synset);
-			popupMenu.add(insert);
-		}
-		
-		
-		protected JMenu createMenuInsertVariant(Synset synset) {
-
-			JMenu menu = createMenu("editor.dalos.menu.variant.markup");
-			if (synset == null)
-				return menu;
+		protected void updatePopupMenu(Synset synset) {
+			popupMenu.removeAll();
 			
-			for (Iterator it = synset.getVariants().iterator(); it.hasNext();) {
+			
+			Collection variants = synset.getVariants();
+			variants.remove(synset.getLexicalForm());
+			
+			
+			// LEXICAL FORM
+			JMenuItem menuItem = new JMenuItem(synset.getLexicalForm(),i18n.getIconFor("editor.panes.dalos.item.icon"));	
+			//menuItem.setFont(Font)
+			menuItem.addActionListener(new InsertVariantAction(synset,synset.getLexicalForm()));
+			popupMenu.add(menuItem);
+			
+			if(variants.size()>0)
+				popupMenu.addSeparator();
+			
+			
+			// VARIANTS
+			for (Iterator it = variants.iterator(); it.hasNext();) {
 				String next = (String) it.next();
-
-				JMenuItem menuItem = new JMenuItem(next);
-				
+                menuItem = new JMenuItem(next);
 				menuItem.addActionListener(new InsertVariantAction(synset,next));
-				menu.add(menuItem);
-				menu.setEnabled(true);
+				popupMenu.add(menuItem);
 			}
-			return menu;
 		}
 		
-		
-		
-		protected JMenu createMenu(String name) {
-			JMenu menu = new JMenu();
-			menu.setName(name);
-			menu.setEnabled(false);
-			utilUI.applyI18n(menu);
-			return menu;
-		}
-		
-		
+				
 	
 		protected class InsertVariantAction extends AbstractAction {
 			private Synset synset;
