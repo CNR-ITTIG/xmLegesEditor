@@ -17,7 +17,7 @@ import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
  * General Public License </a></dd>
  * </dl>
  * 
- * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
+ * @author <a href="mailto:agnoloni@ittig.cnr.it">Tommaso Agnoloni</a>
  */
 public interface SynsetMarkupAction extends Service {
 
@@ -25,10 +25,8 @@ public interface SynsetMarkupAction extends Service {
 	 * Gestione della vigenza del nodo selezionato
 	 *
 	 */
-	public void doSynsetMarkup(Synset synset);
-	
-	
-	
+	public void doSynsetMarkup(Synset synset, String variant);
+
 	
 	
 
