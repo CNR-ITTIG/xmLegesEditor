@@ -73,7 +73,9 @@ public class SynsetMarkupActionImpl implements SynsetMarkupAction, Loggable, Eve
 	
 	NirUtilDom nirUtilDom;
 	
-	AbstractAction synsetMarkupAction = new synsetMarkupAction();
+	
+	// FIXME     ?????? null, null
+	AbstractAction synsetMarkupAction = new synsetMarkupAction(null, null);
 	
 	Node activeNode;
 	
@@ -125,16 +127,16 @@ public class SynsetMarkupActionImpl implements SynsetMarkupAction, Loggable, Eve
 	}
 
 	
-	public void doSynsetMarkup(Synset synset) {
+	public void doSynsetMarkup(Synset synset, String variant) {
 		activeNode = selectionManager.getActiveNode();
 		int start = selectionManager.getTextSelectionStart();
 		int end = selectionManager.getTextSelectionEnd();
 	
         if(synsetMarkup.canSetSynset(activeNode)){
-        	Node toselect = synsetMarkup.setSynset(activeNode, start, end, synset);
+        	Node toselect = synsetMarkup.setSynset(activeNode, start, end, synset, variant);
         	setModified(toselect);
         }else{
-        	utilMsg.msgError("editor.dalos.error.markup");
+        	utilMsg.msgError("editor.dalos.error.msg", "editor.dalos.error.markup");
         }
 	}
 	
@@ -142,12 +144,20 @@ public class SynsetMarkupActionImpl implements SynsetMarkupAction, Loggable, Eve
 
 	// /////////////////////////////////////////////// Azioni
 	public class synsetMarkupAction extends AbstractAction {
+		
+		private Synset synset;
+		private String variant;
+		
+		public synsetMarkupAction(Synset synset, String variant) {
+			this.synset = synset;
+			this.variant = variant;
+		}
 
 		public void actionPerformed(ActionEvent e) {
-//			if(activeNode!=null)
-//				doNewVigenza(activeNode);
+			doSynsetMarkup(synset,variant);
 		}
 	}
+	
 	
 	protected void setModified(Node modified) {
 		if (modified != null) {
