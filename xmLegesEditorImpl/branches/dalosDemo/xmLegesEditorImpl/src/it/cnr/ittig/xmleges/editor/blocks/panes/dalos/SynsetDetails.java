@@ -61,21 +61,22 @@ public class SynsetDetails extends JEditorPane {
 		
 		String def = synset.getDef();
 		if(def == null) {
-			def = "";
+			def = "(empty definition)";
 		}
 		
-		String html = "<html><body>" +  img +
-			"</h3><h2><i>Definition</i></h2><h3>" + 
-			def +  "</h3><h2><i>Variants</i></h2><h3>"; 
-		
+		String html = "<html><body><table><tr><td>" +  img +
+			"</td><td><h2><i>Definition</i></h2><h3>" + 
+			def +  "</h3></td></tr></table><h2><i>Variants</i></h2><table>"; 
 		
 		for(Iterator i = synset.getVariants().iterator(); i.hasNext();) {
 			String variant = (String) i.next();
-			html += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - " + 
-						variant + "<br>";				
+//			html += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - " + 
+//						variant + "<br>";
+			html += "<tr><td><img src=\"./lexical.png\"></td><td>" +
+					variant + "</td></tr>";
 		}
 		
-		html += "</h3></body></html>";
+		html += "</table></body></html>";
 
 		setText(html);
 		

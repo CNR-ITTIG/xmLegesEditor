@@ -107,7 +107,7 @@ public class KbTree {
 		walkAndExpand(root, syn.toString(), paths);
 		
 		if(paths.size() == 0) {
-			System.out.println(">> ...not found!");
+			//System.out.println(">> ...not found!");
 			return false;
 		}
 		

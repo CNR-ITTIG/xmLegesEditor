@@ -124,7 +124,7 @@ public class SynsetListPaneImpl implements SynsetListPane, EventManagerListener,
 	
 	SynsetMarkupAction synsetMarkupAction;
 	
-	String[] searchTypes={"contains", "startsWith","endsWith","exact"};
+	String[] searchTypes={"Contains", "Starts with","Ends with","Matches"};
 	
 	SynsetDetailsPane synsetDetailsPane;
 	
@@ -373,7 +373,7 @@ public class SynsetListPaneImpl implements SynsetListPane, EventManagerListener,
 			
 			
 			// LEXICAL FORM
-			JMenuItem menuItem = new JMenuItem(synset.getLexicalForm(),i18n.getIconFor("editor.panes.dalos.item.icon"));	
+			JMenuItem menuItem = new JMenuItem(synset.getLexicalForm(),i18n.getIconFor("editor.panes.dalos.item.lexical"));	
 			//menuItem.setFont(Font)
 			menuItem.addActionListener(new InsertVariantAction(synset,synset.getLexicalForm()));
 			popupMenu.add(menuItem);
@@ -385,7 +385,7 @@ public class SynsetListPaneImpl implements SynsetListPane, EventManagerListener,
 			// VARIANTS
 			for (Iterator it = variants.iterator(); it.hasNext();) {
 				String next = (String) it.next();
-                menuItem = new JMenuItem(next);
+                menuItem = new JMenuItem(next,i18n.getIconFor("editor.panes.dalos.item.lexical"));
 				menuItem.addActionListener(new InsertVariantAction(synset,next));
 				popupMenu.add(menuItem);
 			}

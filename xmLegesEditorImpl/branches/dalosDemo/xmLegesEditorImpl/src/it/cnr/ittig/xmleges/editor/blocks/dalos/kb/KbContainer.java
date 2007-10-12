@@ -453,8 +453,7 @@ public class KbContainer {
 					}
 				}
 			}
-		}
-		
+		}		
 		syn.setSemanticPropCached(true);
 	}
 	

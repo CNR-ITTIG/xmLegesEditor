@@ -57,7 +57,7 @@ public class SourceDetails extends JEditorPane {
 		}
 		
 		String html = "<html><body>" +
-			"</h3><h2><i>Sources</i></h2><h3>"; 
+			"</h3><h2><i>Sources</i></h2><table>"; 
 		
 		for(Iterator i = synset.getSources().iterator(); i.hasNext();) {
 			Source source = (Source) i.next();
@@ -66,13 +66,13 @@ public class SourceDetails extends JEditorPane {
 				def = "Source text not available";
 			}
 			
-			html += "&nbsp;&nbsp;&nbsp;Def.: <i>" + 
-						def + "</i><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
-						"(link: <A HREF=\"" + source.getLink() + 
-						"\">" + source.getId() + "</A>)<br>";			
+			html += "<tr><td><img src=\"./signature.png\"></td><td><i>" + 
+						def + "</i></td><td>&nbsp;</td><td>" +
+						"<A HREF=\"" + source.getLink() + 
+						"\">" + source.getId() + "</A>)</td></tr>";			
 		}
 		
-		html += "</h3></body></html>";
+		html += "</table></body></html>";
 
 		setText(html);
 		
