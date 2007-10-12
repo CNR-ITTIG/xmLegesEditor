@@ -419,19 +419,35 @@ public class KbContainer {
 		OntModel om = getModel("full", "micro");
 		
 		Individual ind = om.getIndividual(syn.getURI());
+		System.out.println("@@@@@@@@@@@@@@@ Analyzing " + ind + " semantics...");
 		for(Iterator i = ind.listRDFTypes(false); i.hasNext();) {
 			Resource res = (Resource) i.next();
-			if(!res.isAnon() && res.getNameSpace().equalsIgnoreCase(KbConf.DOMAIN_ONTO_NS)) {
+			if(res.isAnon()) {
+				continue;
+			}
+			System.out.println("@ RDF TYPE: " + res);
+			if(res.getNameSpace().equalsIgnoreCase(KbConf.DOMAIN_ONTO_NS)) {
 				OntClass oc = (OntClass) res.as(OntClass.class);
+				System.out.println("@@ ONTCLASS: " + oc);
 				for(Iterator p = oc.listDeclaredProperties(false); p.hasNext();) {
 					OntProperty op = (OntProperty) p.next();
+					System.out.println("@@@ PROP: " + op);
 					if(op.isDatatypeProperty()) {
 						continue;
 					}
 					for(Iterator r = op.listRange(); r.hasNext();) {
 						OntClass range = (OntClass) r.next();
-						for(Iterator ist = range.listInstances(false); ist.hasNext();) {
+						if(range.isAnon() || 
+							range.toString().equalsIgnoreCase(
+									"http://www.w3.org/2002/07/owl#Thing") ||
+							range.toString().equalsIgnoreCase(
+									"http://www.w3.org/2000/01/rdf-schema#Resource")) {
+							continue;
+						}
+						System.out.println("@@@@ RANGE: " + range);
+						for(Iterator ist = range.listInstances(true); ist.hasNext();) {
 							Resource obj = (Resource) ist.next();
+							System.out.println("@@@@@ OBJECT: " + obj);
 							addSemanticProperty(syn, op, obj);
 						}
 					}
@@ -461,6 +477,10 @@ public class KbContainer {
 		
 		String propName = prop.getLocalName();
 		Synset objSynset = (Synset) synsets.get(((Resource) obj).getLocalName());
+		if(objSynset == null) {
+			System.err.println("Unknown instance found: " + objSynset);
+			return;
+		}
 		Collection mappedSynsets = (Collection) syn.semanticToSynset.get(propName);
 		if(mappedSynsets == null) {
 			mappedSynsets = new HashSet();
