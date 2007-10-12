@@ -159,4 +159,12 @@ public interface Frame extends Service {
 	 *        <code>pane</code>
 	 */
 	public void highlightPane(Pane pane, boolean highlight);
+	
+	/**
+	 * 
+	 * @param pane
+	 * @param show
+	 */
+	public void setShowingPane(Pane pane, boolean show);
+	
 }
