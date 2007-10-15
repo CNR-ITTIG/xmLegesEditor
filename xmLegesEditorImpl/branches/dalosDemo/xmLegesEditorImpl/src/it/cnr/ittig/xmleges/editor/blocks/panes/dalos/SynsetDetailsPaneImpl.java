@@ -7,6 +7,7 @@ import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.services.manager.Startable;
+import it.cnr.ittig.xmleges.core.services.action.ActionManager;
 import it.cnr.ittig.xmleges.core.services.bars.Bars;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
@@ -15,20 +16,27 @@ import it.cnr.ittig.xmleges.core.services.frame.Frame;
 import it.cnr.ittig.xmleges.core.services.frame.PaneException;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
+import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetDetailsPane;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSelectionEvent;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.EventObject;
+import java.util.Vector;
 
 import javax.swing.AbstractAction;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
+import javax.swing.ListCellRenderer;
 
 /**						
  * <h1>Implementazione del servizio
@@ -86,14 +94,58 @@ public class SynsetDetailsPaneImpl implements SynsetDetailsPane, EventManagerLis
 	
 	JScrollPane scrollPane = new JScrollPane();
 
-	SwitchLangAction switchLangAction = new SwitchLangAction();
 
-	JPopupMenu popupMenu;
+	AbstractAction[] toLangActions = new AbstractAction[] { new toLangAction("it",0), new toLangAction("en",1),new toLangAction("nl",2),new toLangAction("es",3)}; 
 	
+	JComboBox   toLangCombo;
+		
 	SynsetDetails synsetPane;
 	
 	I18n i18n;
+	
+	ActionManager actionManager;
+	
+	KbManager kbManager;
+	
+	Synset selectedSynset = null;
 
+	
+//	 ///////////////////////////////////////////////// Azioni
+	public class toLangAction extends AbstractAction {	
+		
+		String lang;
+		int index;
+		String iconKey;
+
+		public toLangAction(String lang, int index){
+			this.lang = lang;
+			this.index = index;
+			this.iconKey = "editor.dalos.action.tolanguage."+lang+".icon";
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			if(selectedSynset!=null){
+				try{
+				   eventManager.fireEvent(new SynsetSelectionEvent(this,  kbManager.getSynset(selectedSynset.getURI(), lang)));
+				}catch(Exception ex){
+					System.err.println("Synset not found in "+lang);
+				}
+			}
+		}
+		
+		public String toString(){
+			return lang;
+		}
+		
+		public int getIndex(){
+			return this.index;
+		}
+		
+		public String getIconKey(){
+			return this.iconKey;
+		}
+
+	}
 	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -103,19 +155,77 @@ public class SynsetDetailsPaneImpl implements SynsetDetailsPane, EventManagerLis
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
 		frame = (Frame) serviceManager.lookup(Frame.class);
+		actionManager = (ActionManager) serviceManager.lookup(ActionManager.class);
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
+		kbManager = (KbManager) serviceManager.lookup(KbManager.class);
 		utilUI = (UtilUI) serviceManager.lookup(UtilUI.class);
 		bars = (Bars) serviceManager.lookup(Bars.class);
 		i18n = (I18n) serviceManager.lookup(I18n.class);
 	}
+	
 
+	protected class ComboBoxRenderer extends JLabel implements ListCellRenderer {
+		public ComboBoxRenderer() {
+			setOpaque(true);
+			setHorizontalAlignment(CENTER);
+			setVerticalAlignment(CENTER);
+		}
+
+		
+		public Component getListCellRendererComponent(JList list,Object value,int index,boolean isSelected,boolean cellHasFocus) {
+			int selectedIndex = ((toLangAction)value).getIndex();
+			
+			if (isSelected) {
+				setBackground(list.getSelectionBackground());
+				setForeground(list.getSelectionForeground());
+			} else {
+				setBackground(list.getBackground());
+				setForeground(list.getForeground());
+			}
+			
+			toLangAction tL = (toLangAction)toLangActions[selectedIndex];
+			setIcon(i18n.getIconFor(tL.getIconKey()));
+			return this;
+		}		
+	}
+	
+	
+	protected class toLangComboActionListener implements ActionListener {	
+		public void actionPerformed(ActionEvent e) {
+			((toLangAction)toLangCombo.getSelectedItem()).actionPerformed(e);
+		}
+	}
+	
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws Exception {
-		popupMenu = bars.getPopup(false);
-		JToolBar bar = new JToolBar();
-		bar.add(utilUI.applyI18n("editor.panes.dalos.synsetlist.find", switchLangAction));
-		panel.add(bar, BorderLayout.SOUTH);
+
+		
+		JLabel  lblIT=new JLabel(i18n.getIconFor("editor.dalos.action.tolanguage.it.icon"));
+		JLabel  lblEN=new JLabel(i18n.getIconFor("editor.dalos.action.tolanguage.en.icon"));
+		JLabel  lblTO=new JLabel(i18n.getIconFor("editor.dalos.action.tolanguage.to.icon"));
 				
+		FlowLayout fl = new FlowLayout(FlowLayout.LEFT);
+		JPanel pnl = new JPanel();
+		pnl.setLayout(fl);
+				
+		
+		JToolBar bar = new JToolBar();
+		
+		toLangCombo = new JComboBox(toLangActions);
+		toLangCombo.addActionListener(new toLangComboActionListener());
+		ComboBoxRenderer renderer = new ComboBoxRenderer();
+		toLangCombo.setRenderer(renderer);
+		toLangCombo.setSelectedIndex(0);
+		
+		
+		bar.add(lblIT);
+		bar.add(lblTO);
+		bar.add(toLangCombo);
+		pnl.add(bar);
+		
+		
+		panel.add(pnl, BorderLayout.SOUTH);
+		
 		synsetPane = new SynsetDetails();
 		synsetPane.setI18n(i18n);
 		
@@ -124,16 +234,16 @@ public class SynsetDetailsPaneImpl implements SynsetDetailsPane, EventManagerLis
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		panel.add(scrollPane);
 		
-		synsetPane.clearContent();
-		
+		synsetPane.clearContent();		
 		eventManager.addListener(this, SynsetSelectionEvent.class);
 	}
-
+	
+	
 	// ////////////////////////////////////////// EventManagerListener Interface
 	public void manageEvent(EventObject event) {
 		if (event instanceof SynsetSelectionEvent){
-			Synset selected = ((SynsetSelectionEvent)event).getActiveSynset();
-			synsetPane.setSynset(selected);
+			selectedSynset = ((SynsetSelectionEvent)event).getActiveSynset();
+			synsetPane.setSynset(selectedSynset);
 			synsetPane.draw();
 		}			
 	}
@@ -156,13 +266,7 @@ public class SynsetDetailsPaneImpl implements SynsetDetailsPane, EventManagerLis
 	}
 
 	
-	// ///////////////////////////////////////////////////////// Toolbar Actions
-	protected class SwitchLangAction extends AbstractAction {
-		public void actionPerformed(ActionEvent e) {
-			System.err.println("--------> SWITCH LANG ACTION");
-			logger.info("switch lang action");
-		}
-	}
+
 
 	public boolean canCut() {
 		return false;

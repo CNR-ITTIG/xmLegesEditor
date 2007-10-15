@@ -128,10 +128,13 @@ public class SynsetListPaneImpl implements SynsetListPane, EventManagerListener,
 	
 	SynsetDetailsPane synsetDetailsPane;
 	
+	
+	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
 	}
+	
 	
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
@@ -147,7 +150,7 @@ public class SynsetListPaneImpl implements SynsetListPane, EventManagerListener,
 
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws Exception {
-		popupMenu = new JPopupMenu();//bars.getPopup(false);
+		popupMenu = new JPopupMenu();
 		JToolBar bar = new JToolBar();
 		
 		searchType = new JComboBox(searchTypes);
