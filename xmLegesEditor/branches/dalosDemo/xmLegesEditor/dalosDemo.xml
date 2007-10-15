@@ -1438,6 +1438,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 class="it.cnr.ittig.xmleges.editor.blocks.dalos.kb.KbManagerImpl"
     />
     
+    <component  class="it.cnr.ittig.xmleges.editor.blocks.dalos.util.UtilDalosImpl"/>
+    
     <component  activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.action.dalos.ShowViewActionImpl"
     />
@@ -1471,6 +1473,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  class="it.cnr.ittig.xmleges.editor.blocks.dalos.action.SynsetMarkupActionImpl"/>
     
     <component  class="it.cnr.ittig.xmleges.editor.blocks.dalos.dom.SynsetMarkupImpl"/>
+    
+   
     
     
 </container>
