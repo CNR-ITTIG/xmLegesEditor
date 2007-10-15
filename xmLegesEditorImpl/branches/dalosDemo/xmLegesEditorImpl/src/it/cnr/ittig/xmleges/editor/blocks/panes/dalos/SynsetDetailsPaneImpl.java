@@ -196,20 +196,13 @@ public class SynsetDetailsPaneImpl implements SynsetDetailsPane, EventManagerLis
 		}
 	}
 	
-	// ///////////////////////////////////////////////// Initializable Interface
+	/////////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws Exception {
-
 		
-		JLabel  lblIT=new JLabel(i18n.getIconFor("editor.dalos.action.tolanguage.it.icon"));
-		JLabel  lblEN=new JLabel(i18n.getIconFor("editor.dalos.action.tolanguage.en.icon"));
-		JLabel  lblTO=new JLabel(i18n.getIconFor("editor.dalos.action.tolanguage.to.icon"));
+		JLabel lblIT = new JLabel(i18n.getIconFor("editor.dalos.action.tolanguage.it.icon"));
+		JLabel lblTO = new JLabel(i18n.getIconFor("editor.dalos.action.tolanguage.to.icon"));
 				
-		FlowLayout fl = new FlowLayout(FlowLayout.LEFT);
-		JPanel pnl = new JPanel();
-		pnl.setLayout(fl);
-				
-		
-		JToolBar bar = new JToolBar();
+		JPanel pnl = new JPanel(new FlowLayout(FlowLayout.LEFT, 12, 2));				
 		
 		toLangCombo = new JComboBox(toLangActions);
 		toLangCombo.addActionListener(new toLangComboActionListener());
@@ -217,12 +210,9 @@ public class SynsetDetailsPaneImpl implements SynsetDetailsPane, EventManagerLis
 		toLangCombo.setRenderer(renderer);
 		toLangCombo.setSelectedIndex(0);
 		
-		
-		bar.add(lblIT);
-		bar.add(lblTO);
-		bar.add(toLangCombo);
-		pnl.add(bar);
-		
+		pnl.add(lblIT);
+		pnl.add(lblTO);
+		pnl.add(toLangCombo);
 		
 		panel.add(pnl, BorderLayout.SOUTH);
 		
