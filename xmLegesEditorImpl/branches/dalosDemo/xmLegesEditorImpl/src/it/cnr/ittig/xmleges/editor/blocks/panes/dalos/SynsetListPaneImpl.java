@@ -27,6 +27,7 @@ import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSelectionEvent;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -376,7 +377,9 @@ public class SynsetListPaneImpl implements SynsetListPane, EventManagerListener,
 			
 			
 			// LEXICAL FORM
-			JMenuItem menuItem = new JMenuItem(synset.getLexicalForm(),i18n.getIconFor("editor.panes.dalos.item.lexical"));	
+			Font font = new Font(null, Font.BOLD, 10);
+			JMenuItem menuItem = new JMenuItem(synset.getLexicalForm(),i18n.getIconFor("editor.panes.dalos.item.lexical"));
+			menuItem.setFont(font);
 			//menuItem.setFont(Font)
 			menuItem.addActionListener(new InsertVariantAction(synset,synset.getLexicalForm()));
 			popupMenu.add(menuItem);
