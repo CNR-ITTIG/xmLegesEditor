@@ -19,6 +19,7 @@ import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.SynsetTree;
+import it.cnr.ittig.xmleges.editor.services.dalos.util.UtilDalos;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.LinguisticRelationPane;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSelectionEvent;
 
@@ -105,6 +106,8 @@ public class LinguisticRelationPaneImpl implements LinguisticRelationPane, Event
 	
 	Synset selectedSyn = null;
 	
+	UtilDalos utilDalos;
+	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
@@ -118,6 +121,7 @@ public class LinguisticRelationPaneImpl implements LinguisticRelationPane, Event
 		bars = (Bars) serviceManager.lookup(Bars.class);
 		kbManager = (KbManager) serviceManager.lookup(KbManager.class);
 		i18n = (I18n) serviceManager.lookup(I18n.class);
+		utilDalos = (UtilDalos) serviceManager.lookup(UtilDalos.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
@@ -133,6 +137,8 @@ public class LinguisticRelationPaneImpl implements LinguisticRelationPane, Event
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		panel.add(scrollPane);
+		
+		panel.add(utilDalos.getLanguageSwitchPanel(), BorderLayout.SOUTH);
 			
 		scrollPane.setViewportView(lexicalTree);		
 		frame.addPane(this, false);
@@ -145,6 +151,8 @@ public class LinguisticRelationPaneImpl implements LinguisticRelationPane, Event
 	public void manageEvent(EventObject event) {
 		
 		visible = this.getPaneAsComponent().isShowing();
+		
+		
 		
 		if (event instanceof SynsetSelectionEvent)
 				selectedSyn = ((SynsetSelectionEvent) event).getActiveSynset();

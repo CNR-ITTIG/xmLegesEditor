@@ -19,6 +19,7 @@ import it.cnr.ittig.xmleges.core.services.panes.source.SourcePane;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
+import it.cnr.ittig.xmleges.editor.services.dalos.util.UtilDalos;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetDetailsPane;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSelectionEvent;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSourcePane;
@@ -102,6 +103,8 @@ public class SynsetSourcePaneImpl implements SynsetSourcePane, EventManagerListe
 	
 	I18n i18n;
 	
+	UtilDalos utilDalos;
+	
 	boolean update = false;
 
 	
@@ -118,15 +121,14 @@ public class SynsetSourcePaneImpl implements SynsetSourcePane, EventManagerListe
 		bars = (Bars) serviceManager.lookup(Bars.class);
 		kbManager = (KbManager) serviceManager.lookup(KbManager.class);
 		i18n = (I18n) serviceManager.lookup(I18n.class);
+		utilDalos = (UtilDalos) serviceManager.lookup(UtilDalos.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws Exception {
-		popupMenu = bars.getPopup(false);
-		JToolBar bar = new JToolBar();
-		bar.add(utilUI.applyI18n("editor.panes.dalos.synsetlist.find", switchLangAction));
-		panel.add(bar, BorderLayout.SOUTH);
-				
+
+		panel.add(utilDalos.getLanguageSwitchPanel(), BorderLayout.SOUTH);
+						
 		synsetPane = new SourceDetails();
 		synsetPane.setI18n(i18n);
 		
