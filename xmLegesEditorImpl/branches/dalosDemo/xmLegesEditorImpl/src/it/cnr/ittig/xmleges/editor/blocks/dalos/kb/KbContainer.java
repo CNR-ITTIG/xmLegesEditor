@@ -6,7 +6,14 @@ import it.cnr.ittig.xmleges.editor.services.dalos.objects.Source;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.SynsetTree;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -172,8 +179,8 @@ public class KbContainer {
 		OntModel om = ModelFactory.createOntologyModel(spec, null);
 		
 		if(type.equalsIgnoreCase("full")) {			
-			om.read(KbConf.METALEVEL_PROP);
-			om.read(KbConf.DOMAIN_ONTO);
+			readSchema(om, KbConf.METALEVEL_PROP);
+			readSchema(om, KbConf.DOMAIN_ONTO);
 			readData(om, conceptsFile);
 			readData(om, indFile);
 			readData(om, indwFile);
@@ -181,21 +188,23 @@ public class KbContainer {
 			readData(om, typesFile);
 		}
 		if(type.equalsIgnoreCase("domain")) {
-			om.read(KbConf.DOMAIN_ONTO);
+			readSchema(om, KbConf.DOMAIN_ONTO);
 		}
 		if(type.equalsIgnoreCase("mapping")) {
-			om.read(KbConf.METALEVEL_ONTO);			
+			readSchema(om, KbConf.METALEVEL_ONTO);	
 			readData(om, indcFile);		
 		}
 		if(type.equalsIgnoreCase("individual")) {
-			om.read(KbConf.METALEVEL_ONTO);
-			om.read(KbConf.METALEVEL_PROP);
+			readSchema(om, KbConf.METALEVEL_ONTO);
+			readSchema(om, KbConf.METALEVEL_PROP);
+//			om.read(KbConf.METALEVEL_ONTO);
+//			om.read(KbConf.METALEVEL_PROP);
 			readData(om, indFile);
 			readData(om, indwFile);
 			readData(om, typesFile);
 		}
 		if(type.equalsIgnoreCase("source")) {
-			om.read(KbConf.SOURCE_SCHEMA); //Ci vuole questo metalivello??
+			readSchema(om, KbConf.SOURCE_SCHEMA); //Ci vuole questo metalivello??
 			readData(om, indFile);
 			readData(om, sourcesFile);			
 		}
@@ -206,10 +215,27 @@ public class KbContainer {
 		return om;
 	}
 	
+	private void readSchema(OntModel om, String url) {
+		
+		URL u = null;
+		try {
+			u = new URL(url);			
+			System.out.println("URL: " + u.toString());
+			om.read(u.openStream(), null);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
 	private void readData(OntModel om, String fileStr) {
 		
 		File file = UtilFile.getFileFromTemp(fileStr);
-		om.read("file://" + file.getAbsolutePath());
+		om.read("file:///" + file.getAbsolutePath());
 	}
 	
 	SynsetTree getTree() {
