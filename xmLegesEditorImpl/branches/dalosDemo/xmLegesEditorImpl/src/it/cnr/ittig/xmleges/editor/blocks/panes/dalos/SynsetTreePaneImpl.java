@@ -13,6 +13,7 @@ import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.frame.FindIterator;
 import it.cnr.ittig.xmleges.core.services.frame.Frame;
 import it.cnr.ittig.xmleges.core.services.frame.PaneException;
+import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
@@ -20,11 +21,21 @@ import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSelectionEvent;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetTreePane;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.HeadlessException;
+import java.awt.Image;
+import java.awt.Transparency;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.util.EventObject;
 
+import javax.swing.ImageIcon;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
@@ -94,6 +105,8 @@ public class SynsetTreePaneImpl implements SynsetTreePane, EventManagerListener,
 	
 	KbManager kbManager;
 	
+	I18n i18n;
+	
 	Synset selected;
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
@@ -108,26 +121,43 @@ public class SynsetTreePaneImpl implements SynsetTreePane, EventManagerListener,
 		utilUI = (UtilUI) serviceManager.lookup(UtilUI.class);
 		bars = (Bars) serviceManager.lookup(Bars.class);
 		kbManager = (KbManager) serviceManager.lookup(KbManager.class);
+		i18n = (I18n) serviceManager.lookup(I18n.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws Exception {
-				
-		frame.addPane(this, false);
-        
+		
+		tree = kbManager.getTree("IT");		
+		//scrollPane.setViewportView(tree);
+		//tree.setRootVisible(false);
+		tree.setShowsRootHandles(false);
+		tree.putClientProperty("JTree.lineStyle", "None");
+		selected = null;		
+		tree.addMouseListener(new SynsetTreePaneMouseAdapter());
+
+		scrollPane.getViewport().setOpaque(false);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		panel.add(scrollPane);
-	
-		tree = kbManager.getTree("IT");		
-		scrollPane.setViewportView(tree);
-		selected = null;
 		
-		tree.addMouseListener(new SynsetTreePaneMouseAdapter());
+		Image logoDalos = null;		
+		logoDalos = i18n.getImageFor("editor.panes.dalos.logo");		
+		System.out.println("logoDalos: " + logoDalos);		
+		ImagePanel iPanel = new ImagePanel(logoDalos);
+		iPanel.setLayout(new BorderLayout());
+		iPanel.add(tree, BorderLayout.CENTER);
+		iPanel.setBackground(Color.WHITE);
+		scrollPane.getViewport().setView(iPanel);
+				
+		tree.setOpaque(false);
+		iPanel.setOpaque(true);
+
+		panel.add(scrollPane, BorderLayout.CENTER);
 		
+		frame.addPane(this, false);
+        
 		eventManager.addListener(this, SynsetSelectionEvent.class);
 	}
-
+	
 	// ////////////////////////////////////////// EventManagerListener Interface
 	public void manageEvent(EventObject event) {
 		if (event instanceof SynsetSelectionEvent){
