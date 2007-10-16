@@ -20,6 +20,6 @@ import it.cnr.ittig.services.manager.Service;
  * 
  * @author <a href="mailto:agnoloni@ittig.cnr.it">Tommaso Agnoloni</a>
  */
-public interface ShowViewAction extends Service {
+public interface DalosMenuAction extends Service {
 
 }
