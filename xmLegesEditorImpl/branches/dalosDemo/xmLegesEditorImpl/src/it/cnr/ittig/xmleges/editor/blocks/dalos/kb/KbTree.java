@@ -76,9 +76,15 @@ public class KbTree {
 		tmpTree.setRootUserObject("CONSUMER LAW");
 		tmpTree.setRootVisible(true);
 		
-		OntClass oc = kbc.getModel("domain", "micro").getOntClass(KbConf.ROOT_CLASS);
-		
-		expandClass(oc, null, tmpTree);
+		//OntClass oc = kbc.getModel("domain", "micro").getOntClass(KbConf.ROOT_CLASS);
+		Collection topClasses = kbc.getTopClasses();
+		for(Iterator i = topClasses.iterator(); i.hasNext();) {
+			OntClass oc = (OntClass) i.next();
+			OntoClass cl = new OntoClass(oc.getLocalName());
+			DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(cl);
+			((SynsetTree) tmpTree).addNode(newNode);
+			expandClass(oc, newNode, tmpTree);
+		}		
 		
 		addSynsets();
 		
@@ -160,14 +166,16 @@ public class KbTree {
 		
 		for(Iterator i = oc.listSubClasses(true); i.hasNext();) {
 			OntClass c = (OntClass) i.next();
-
+			
 			//escludi le classi al di fuori della consumer law
 			if(!c.isAnon() && !c.getNameSpace().equalsIgnoreCase(KbConf.DOMAIN_ONTO_NS)) {
 				continue;
 			}
 			
 			if(!c.isAnon() && !c.isRestriction()) {
-				OntoClass cl = new OntoClass(c.getLocalName());
+				String localName = c.getLocalName();
+
+				OntoClass cl = new OntoClass(localName);
 				newNode = new DefaultMutableTreeNode(cl);
 				if(node == null) {
 					if(!topClasses.contains(cl)) {
@@ -404,3 +412,4 @@ public class KbTree {
 	}
 
 }
+

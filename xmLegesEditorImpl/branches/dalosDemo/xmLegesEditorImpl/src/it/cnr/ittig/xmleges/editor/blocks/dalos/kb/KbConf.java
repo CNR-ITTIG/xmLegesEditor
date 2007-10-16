@@ -5,7 +5,7 @@ public class KbConf {
 	public static String dalosRepository = "dalos/";
 	
 	public static String DOMAIN_ONTO = 
-		"http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl";
+		"http://turing.ittig.cnr.it/jwn/ontologies/consumer-law-merge.owl";
 	public static String METALEVEL_ONTO =
 		"http://turing.ittig.cnr.it/jwn/ontologies/owns.owl";
 	public static String METALEVEL_PROP =
@@ -15,7 +15,7 @@ public class KbConf {
 	public static String METALEVEL_FULL =
 		"http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl";
 	
-	public static String DOMAIN_ONTO_NS = KbConf.DOMAIN_ONTO + "#";		
+	public static String DOMAIN_ONTO_NS = "http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#";
 	public static String METALEVEL_ONTO_NS = KbConf.METALEVEL_ONTO + "#";	
 	public static String METALEVEL_PROP_NS = KbConf.METALEVEL_PROP + "#";
 	public static String SOURCESCHEMA_NS = KbConf.SOURCE_SCHEMA + "#";

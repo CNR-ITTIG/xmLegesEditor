@@ -57,7 +57,8 @@ public class KbContainer {
 	//Dati
 	Map synsets = null;
 	Vector sortedSynsets = null; //meglio un TreeSet ??
-	
+	private Set legalTopClasses;
+
 	Set langProperties = null;
 	
 	private KbTree kbt;
@@ -91,6 +92,40 @@ public class KbContainer {
 			long t2 = System.currentTimeMillis();
 			System.out.println("...synsets loaded! (" + Long.toString(t2 - t1) + " ms)\n");
 		}
+	}
+
+	public Collection getTopClasses() {
+		
+		initLegal();
+		OntModel om = getModel("domain", "micro");
+		Set classes = new HashSet();
+		for(Iterator i = legalTopClasses.iterator(); i.hasNext();) {
+			String name = (String) i.next();
+			OntClass oc = om.getOntClass(KbConf.DOMAIN_ONTO_NS + name);
+			if(oc == null) {
+				System.out.println("## ERROR ## top class not found: " + name);
+				continue;
+			}
+			classes.add(oc);
+		}
+		
+		return classes;
+	}
+	
+	private void initLegal() {
+		
+		legalTopClasses = new HashSet();
+
+		legalTopClasses.add("Legal_Task");
+		legalTopClasses.add("Legal_Role");
+		legalTopClasses.add("Economic_Concept");
+		legalTopClasses.add("Events");
+		legalTopClasses.add("Legal_Situation");
+		legalTopClasses.add("Legal_Subject");
+		legalTopClasses.add("Normative_Framework");
+		legalTopClasses.add("Physical_Object");
+		legalTopClasses.add("Quality");
+		legalTopClasses.add("Region");
 	}
 	
 	private boolean checkFiles() {
@@ -135,16 +170,16 @@ public class KbContainer {
 		//Aggiungere una funzione che, se on-line, scarica le ontologie remote
 		//in modo da avere sempre l'ultima versione?
 		OntDocumentManager odm = OntDocumentManager.getInstance();		
-		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_DOMAIN_ONTO);
-		odm.addAltEntry(KbConf.DOMAIN_ONTO, "file://" + file.getAbsolutePath());
-		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_METALEVEL_ONTO);
-		odm.addAltEntry(KbConf.METALEVEL_ONTO, "file://" + file.getAbsolutePath());
-		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_METALEVEL_PROP);
-		odm.addAltEntry(KbConf.METALEVEL_PROP, "file://" + file.getAbsolutePath());
-		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_METALEVEL_FULL);
-		odm.addAltEntry(KbConf.METALEVEL_FULL, "file://" + file.getAbsolutePath());
-		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_SOURCE_SCHEMA);
-		odm.addAltEntry(KbConf.SOURCE_SCHEMA, "file://" + file.getAbsolutePath());
+//		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_DOMAIN_ONTO);
+//		odm.addAltEntry(KbConf.DOMAIN_ONTO, "file://" + file.getAbsolutePath());
+//		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_METALEVEL_ONTO);
+//		odm.addAltEntry(KbConf.METALEVEL_ONTO, "file://" + file.getAbsolutePath());
+//		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_METALEVEL_PROP);
+//		odm.addAltEntry(KbConf.METALEVEL_PROP, "file://" + file.getAbsolutePath());
+//		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_METALEVEL_FULL);
+//		odm.addAltEntry(KbConf.METALEVEL_FULL, "file://" + file.getAbsolutePath());
+//		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_SOURCE_SCHEMA);
+//		odm.addAltEntry(KbConf.SOURCE_SCHEMA, "file://" + file.getAbsolutePath());
 
 		ModelMaker maker = ModelFactory.createMemModelMaker();
 
