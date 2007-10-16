@@ -6,6 +6,9 @@ public class OntoClass {
 	
 	public OntoClass(String str) {
 		
+		if(str.length() > 24) {
+			str = str.substring(0, 24);
+		}
 		name = str;
 	}
 	
@@ -21,7 +24,11 @@ public class OntoClass {
 	
 	public String toString() {
 		
-		return name;
+		String str = name;
+		if(str.length() > 32) {
+			str = str.substring(0, 30) + "..";
+		}
+		return str;
 	}
 	
 	public boolean equals(Object obj) {

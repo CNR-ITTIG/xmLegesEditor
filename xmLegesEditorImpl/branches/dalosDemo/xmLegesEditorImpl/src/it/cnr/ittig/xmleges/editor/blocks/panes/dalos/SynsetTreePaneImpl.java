@@ -128,7 +128,6 @@ public class SynsetTreePaneImpl implements SynsetTreePane, EventManagerListener,
 	public void initialize() throws Exception {
 		
 		tree = kbManager.getTree("IT");		
-		//scrollPane.setViewportView(tree);
 		//tree.setRootVisible(false);
 		tree.setShowsRootHandles(false);
 		tree.putClientProperty("JTree.lineStyle", "None");
@@ -147,6 +146,7 @@ public class SynsetTreePaneImpl implements SynsetTreePane, EventManagerListener,
 		iPanel.add(tree, BorderLayout.CENTER);
 		iPanel.setBackground(Color.WHITE);
 		scrollPane.getViewport().setView(iPanel);
+		//scrollPane.add(iPanel);
 				
 		tree.setOpaque(false);
 		iPanel.setOpaque(true);

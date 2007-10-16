@@ -493,7 +493,7 @@ public class KbContainer {
 				for(Iterator p = oc.listDeclaredProperties(false); p.hasNext();) {
 					OntProperty op = (OntProperty) p.next();
 					System.out.println("@@@ PROP: " + op);
-					if(op.isDatatypeProperty()) {
+					if(op.isDatatypeProperty() || !op.getNameSpace().equalsIgnoreCase(KbConf.DOMAIN_ONTO_NS)) {
 						continue;
 					}
 					for(Iterator r = op.listRange(); r.hasNext();) {
@@ -502,7 +502,8 @@ public class KbContainer {
 							range.toString().equalsIgnoreCase(
 									"http://www.w3.org/2002/07/owl#Thing") ||
 							range.toString().equalsIgnoreCase(
-									"http://www.w3.org/2000/01/rdf-schema#Resource")) {
+									"http://www.w3.org/2000/01/rdf-schema#Resource") ||
+							!range.getNameSpace().equalsIgnoreCase(KbConf.DOMAIN_ONTO_NS)) {
 							continue;
 						}
 						System.out.println("@@@@ RANGE: " + range);
