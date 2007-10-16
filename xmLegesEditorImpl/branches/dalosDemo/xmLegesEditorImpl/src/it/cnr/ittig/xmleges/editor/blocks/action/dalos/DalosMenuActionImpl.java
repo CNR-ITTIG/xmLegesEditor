@@ -12,7 +12,7 @@ import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
-import it.cnr.ittig.xmleges.editor.services.action.dalos.ShowViewAction;
+import it.cnr.ittig.xmleges.editor.services.action.dalos.DalosMenuAction;
 import it.cnr.ittig.xmleges.editor.services.dom.allineamento.Allineamento;
 import it.cnr.ittig.xmleges.editor.services.dom.tabelle.Tabelle;
 
@@ -57,7 +57,7 @@ import org.w3c.dom.Node;
  * 
  * @author <a href="mailto:agnoloni@ittig.cnr.it">Tommaso Agnoloni</a>
  */
-public class ShowViewActionImpl implements ShowViewAction, Loggable, Serviceable, Initializable, EventManagerListener {
+public class DalosMenuActionImpl implements DalosMenuAction, Loggable, Serviceable, Initializable, EventManagerListener {
 	Logger logger;
 
 	ActionManager actionManager;
@@ -67,6 +67,7 @@ public class ShowViewActionImpl implements ShowViewAction, Loggable, Serviceable
 	Node activeNode = null;
 
 	ShowViewAction showViewAction;
+	
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -83,6 +84,10 @@ public class ShowViewActionImpl implements ShowViewAction, Loggable, Serviceable
 	public void initialize() throws java.lang.Exception {
 		showViewAction = new ShowViewAction();
 		actionManager.registerAction("editor.dalos.showview", showViewAction);
+		actionManager.registerAction("editor.dalos.switchlang.it", new SwitchLangAction());
+		actionManager.registerAction("editor.dalos.switchlang.en", new SwitchLangAction());
+		actionManager.registerAction("editor.dalos.switchlang.nl", new SwitchLangAction());
+		actionManager.registerAction("editor.dalos.switchlang.es", new SwitchLangAction());
 	}
 
 	public void manageEvent(EventObject event) {
@@ -105,6 +110,22 @@ public class ShowViewActionImpl implements ShowViewAction, Loggable, Serviceable
 
 		public void actionPerformed(ActionEvent e) {
 			System.err.println("--------SHOW DALOS VIEW----------");
+		}
+	}
+	
+	public class SwitchLangAction extends AbstractAction {
+		String tipo;
+
+		public SwitchLangAction() {
+			
+		}
+
+		public boolean canDoAction(Node n) {
+			return true;
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			System.err.println("--------SWITCH MASTER LANGUAGE----------");
 		}
 	}
 
