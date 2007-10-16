@@ -352,8 +352,11 @@ public class DocumentManagerImpl implements DocumentManager, EventListener, Logg
 			break;
 		case DomEdit.ATTR_NODE_MODIFIED:
 			NamedNodeMap attributes = edit.getNode().getAttributes();
-			if (undo)
-				attributes.getNamedItem(edit.getAttribute()).setNodeValue(edit.getTextPrev());
+			if (undo){
+				// FIXME dalla documentazione non dovrebbe dare eccezione quando setto null
+				if(edit.getTextPrev()!=null)
+					attributes.getNamedItem(edit.getAttribute()).setNodeValue(edit.getTextPrev());
+			}
 			else
 				attributes.getNamedItem(edit.getAttribute()).setNodeValue(edit.getTextNew());
 			break;
