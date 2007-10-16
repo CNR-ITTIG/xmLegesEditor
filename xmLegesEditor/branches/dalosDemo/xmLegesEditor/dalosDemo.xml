@@ -458,7 +458,12 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 <menu action="menu.editor.dalos">
                     <item action="editor.dalos.showview" />
 		            <separator />
-	                <item action="editor.dalos.switchlang" />
+		            <menu action="menu.editor.dalos.switchlang">
+	                		<item action="editor.dalos.switchlang.it" />
+	                		<item action="editor.dalos.switchlang.en" />
+	                		<item action="editor.dalos.switchlang.nl" />
+	                		<item action="editor.dalos.switchlang.es" />																		
+	                </menu>
                 </menu>
                 
                 
@@ -1441,7 +1446,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  class="it.cnr.ittig.xmleges.editor.blocks.dalos.util.UtilDalosImpl"/>
     
     <component  activation="startup"
-                class="it.cnr.ittig.xmleges.editor.blocks.action.dalos.ShowViewActionImpl"
+                class="it.cnr.ittig.xmleges.editor.blocks.action.dalos.DalosMenuActionImpl"
     />
     
     <component  activation="startup"
