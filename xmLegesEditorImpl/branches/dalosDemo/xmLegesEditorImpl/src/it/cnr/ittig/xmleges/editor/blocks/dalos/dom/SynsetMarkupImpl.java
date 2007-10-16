@@ -111,13 +111,23 @@ public class SynsetMarkupImpl implements SynsetMarkup, Loggable, Serviceable {
 		return ret;
 	}
 	
+	// FIXME   copiato da SynsetListPane   metterlo nelle utilDalos
+	private boolean isDalosSpan(Node node){
+		if(node!=null){
+			if(UtilDom.isTextNode(node))
+				node = node.getParentNode();
+			return ((node.getNodeName().indexOf("span")!=-1) && (UtilDom.getAttributeValueAsString(node, "h:style").equalsIgnoreCase("dalos")));
+		}
+		return false;
+	}
 	
 	// correggere::   se sono dentro uno span dalos; sostituisco tutto lo span indip dal testo selezionato
 	private Node setDOMSynset(Node node,  int start, int end, Synset synset, String variant) {
 
 		if(UtilDom.isTextNode(node)){
 			Element span;
-			if(node.getNodeValue().equals(node.getNodeValue().substring(start,end))){
+			if(isDalosSpan(node)){
+			//if(node.getNodeValue().equals(node.getNodeValue().substring(start,end))){
 				//il testo selezionato coincide con tutto il nodo
 				span = (Element) node.getParentNode();
 			}
@@ -126,11 +136,11 @@ public class SynsetMarkupImpl implements SynsetMarkup, Loggable, Serviceable {
 				//qui crea uno span dal testo selezionato 
 				span = (Element) utilRulesManager.encloseTextInTag(node, start, end,"h:span","h");	
 			}
-			UtilDom.setTextNode(span, variant);
 			UtilDom.setAttributeValue(span,"h:style","dalos");
 			UtilDom.setAttributeValue(span, "h:class", synset.getURI().substring(synset.getURI().indexOf("#")+1));
-		return (Node) span;
-	}
+			UtilDom.setTextNode(span, variant);
+			return (Node) span;
+		}
 		return null;
 	}	
 
