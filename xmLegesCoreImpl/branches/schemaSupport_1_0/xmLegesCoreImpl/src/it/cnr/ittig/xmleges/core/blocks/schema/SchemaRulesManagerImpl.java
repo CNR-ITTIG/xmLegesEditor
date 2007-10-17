@@ -345,12 +345,14 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 	 */
 	protected Collection createAlternativeContents(String name, String model) throws DtdRulesManagerException {
 		// System.out.println("Reading alternatives");
-		Vector contents_strings = readAlternativeContents(model);
-		alternative_contents.put(name, contents_strings);
-		System.err.println("---------------------- alternative content models -----------------------");
-		System.err.println(name+ " "+model);
-
-		return contents_strings;
+		
+		return null;
+//		Vector contents_strings = readAlternativeContents(model);
+//		alternative_contents.put(name, contents_strings);
+//		System.err.println("---------------------- alternative content models -----------------------");
+//		System.err.println(name+ " "+model);
+//
+//		return contents_strings;
 	}
 
 	/**
@@ -511,6 +513,8 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 		}
 		return alternatives;
 	}
+	
+	
 
 	/**
 	 * Crea le possibili alternative del contenuto di un elemento
@@ -519,58 +523,62 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 	 * @throws DtdRulesManagerException
 	 */
 	protected Vector readAlternativeContents(String content) throws DtdRulesManagerException {
+		
+		
+		
+		return null;
 
-		Vector alternatives = new Vector();
-
-		// get cardinality
-		boolean is_repeatable = false;
-		boolean is_optional = false;
-		if (content.endsWith("?"))
-			is_optional = true;
-		else if (content.endsWith("+"))
-			is_repeatable = true;
-		else if (content.endsWith("*")) {
-			is_optional = true;
-			is_repeatable = true;
-		}
-		if (is_optional || is_repeatable)
-			content = content.substring(0, content.length() - 1);
-
-		// optional contents are ignored, repeating is not considered
-		if (is_optional)
-			return alternatives;
-
-		// parse content
-		if (content.startsWith("(") && content.endsWith(")")) {
-			content = content.substring(1, content.length() - 1);
-
-			// check if it is a sequence
-			Collection sequence = splitContent(content, ',');
-			if (sequence.size() > 1) {
-				for (Iterator i = sequence.iterator(); i.hasNext();)
-					alternatives = mergeAlternatives(alternatives, readAlternativeContents((String) i.next()));
-			} else {
-				// check if it's a choice
-				Collection choice = splitContent(content, '|');
-				if (choice.size() > 1) {
-					// mixed content, cardinality=='*', are ignored
-					if (((String) choice.iterator().next()).equals("#PCDATA"))
-						return alternatives;
-
-					// add all the alternatives given from the possible choices
-					for (Iterator i = choice.iterator(); i.hasNext();)
-						alternatives.addAll(readAlternativeContents((String) i.next()));
-				} else {
-					// single element
-					return readAlternativeContents(content);
-				}
-			}
-		} else {
-			// single element
-			alternatives.add(content);
-		}
-
-		return alternatives;
+//		Vector alternatives = new Vector();
+//
+//		// get cardinality
+//		boolean is_repeatable = false;
+//		boolean is_optional = false;
+//		if (content.endsWith("?"))
+//			is_optional = true;
+//		else if (content.endsWith("+"))
+//			is_repeatable = true;
+//		else if (content.endsWith("*")) {
+//			is_optional = true;
+//			is_repeatable = true;
+//		}
+//		if (is_optional || is_repeatable)
+//			content = content.substring(0, content.length() - 1);
+//
+//		// optional contents are ignored, repeating is not considered
+//		if (is_optional)
+//			return alternatives;
+//
+//		// parse content
+//		if (content.startsWith("(") && content.endsWith(")")) {
+//			content = content.substring(1, content.length() - 1);
+//
+//			// check if it is a sequence
+//			Collection sequence = splitContent(content, ',');
+//			if (sequence.size() > 1) {
+//				for (Iterator i = sequence.iterator(); i.hasNext();)
+//					alternatives = mergeAlternatives(alternatives, readAlternativeContents((String) i.next()));
+//			} else {
+//				// check if it's a choice
+//				Collection choice = splitContent(content, '|');
+//				if (choice.size() > 1) {
+//					// mixed content, cardinality=='*', are ignored
+//					if (((String) choice.iterator().next()).equals("#PCDATA"))
+//						return alternatives;
+//
+//					// add all the alternatives given from the possible choices
+//					for (Iterator i = choice.iterator(); i.hasNext();)
+//						alternatives.addAll(readAlternativeContents((String) i.next()));
+//				} else {
+//					// single element
+//					return readAlternativeContents(content);
+//				}
+//			}
+//		} else {
+//			// single element
+//			alternatives.add(content);
+//		}
+//
+//		return alternatives;
 	}
 
 	// ------------ GESTIONE CONTENUTO DI DEFAULT DI UN ELEMENTO
@@ -587,7 +595,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 	static protected int visitContentGraph(ContentGraph graph) {
 		ContentGraph.Node first = graph.getFirst();
 		ContentGraph.Node last = graph.getLast();
-
+		
 		// init visit
 		Vector queue = new Vector();
 		for (Iterator i = graph.visitNodes(); i.hasNext();)
@@ -632,6 +640,8 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 		return last.getVisitLength();
 	}
 
+	
+	
 	/**
 	 * Restituisce una stringa in formato XML a partire dal contenuto di default
 	 * dell'elemento
@@ -654,10 +664,47 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 		// get xml content
 		String output = "<" + graph.getName() + ">";
 		for (Iterator i = path.iterator(); i.hasNext();)
-			output += getXMLContent((ContentGraph) i.next());
+			//in questo modo il path non è esploso
+			//output += getXMLContent((ContentGraph) i.next());
+			output += ((ContentGraph) i.next()).name;
 		output = output + "</" + graph.getName() + ">";
 
 		return output;
+	}
+	
+	/**
+	 * Restituisce una stringa in formato XML a partire dal contenuto di default
+	 * dell'elemento
+	 * 
+	 * @param graph il ContentGraph dell'elemento
+	 */
+	static protected Vector getMinPath(ContentGraph graph) {
+
+		Vector path=new Vector(2);
+		// get visit path
+		Vector nodePath = new Vector();
+		Vector edgePath = new Vector();
+		ContentGraph.Node nav = graph.getLast();
+		while (nav != null) {
+			Object edge = nav.getVisitEdge();
+			ContentGraph.Node before = nav.getVisitBefore();
+			if (before != null && !edge.equals("#EPS") && !edge.equals("#PCDATA")){ //instanceof ContentGraph){//non lo visualizza l'eps
+				edgePath.add(0, edge);
+				nodePath.add(0,nav);
+			}
+			nav = before;
+		}
+
+//		// get xml content
+//		String output = "<" + graph.getName() + ">";
+//		for (Iterator i = path.iterator(); i.hasNext();)
+//			output += ((ContentGraph) i.next()).name;
+//		
+//		output = output + "</" + graph.getName() + ">";
+
+		path.add(0,nodePath);
+		path.add(1,edgePath);
+		return path;
 	}
 
 	/**
@@ -675,11 +722,11 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 				Object edge = src.getEdge(j);
 				String edge_name = src.getEdgeName(j);
 				if (edge instanceof ContentGraph) {
-					System.err.println("recursively explore subgraph "+((ContentGraph)edge).name);
+					//oraSystem.err.println("recursively explore subgraph "+((ContentGraph)edge).name);
 					// recursively explore subgraph
 					explodeContentGraph((ContentGraph) edge);
 				} else if (edge_name.compareTo("#PCDATA") != 0 && edge_name.compareTo("#EPS") != 0) {
-					System.err.println("replace edge with ContentGraph");
+					//oraSystem.err.println("replace edge with ContentGraph");
 					// replace edge with ContentGraph
 					src.setEdge(getContentGraph(edge_name), j);
 				}
@@ -687,6 +734,36 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 		}
 	}
 
+	/**
+	 * Sostituisce ogni arco del ContentGraph che rappresenta un elemento, con il suo
+	 * ContentGraph. Scende ricorsivamente negli archi gia' esplosi
+	 * 
+	 * @param graph il ContentGraph da esplodere
+	 * @throws DtdRulesManagerException
+	 */
+	protected void explodeContentGraphAlternatives(ContentGraph graph) throws DtdRulesManagerException {
+		
+		// check every edge of the old graph
+		for (Iterator i = graph.visitNodes(); i.hasNext();) {
+			ContentGraph.Node src = (ContentGraph.Node) i.next();
+			for (int j = 0; j < src.getNoEdges(); j++) {
+				Object edge = src.getEdge(j);
+				String edge_name = src.getEdgeName(j);
+				if (edge instanceof ContentGraph) {
+					//oraSystem.err.println("recursively explore subgraph "+((ContentGraph)edge).name);
+					// recursively explore subgraph
+					explodeContentGraph((ContentGraph) edge);
+				} else if (edge_name.compareTo("#PCDATA") != 0 && edge_name.compareTo("#EPS") != 0) {
+					//oraSystem.err.println("replace edge with ContentGraph");
+					// replace edge with ContentGraph
+					src.setEdge(getContentGraph(edge_name), j);
+					
+					
+				}
+			}
+		}
+		
+	}
 	/**
 	 * Ritorna una stringa in formato XML che definisce il contenuto di default di un
 	 * elemento
@@ -707,6 +784,275 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			explodeContentGraph(graph);
 		}
 	}
+	
+	/**
+	 * Ritorna una stringa in formato XML che definisce il contenuto di default di un
+	 * elemento
+	 * 
+	 * @param elem_name il nome dell'elemento padre
+	 * @param graph ContentGraph da cui iniziare a definire il contenuto di default
+	 * @throws DtdRulesManagerException
+	 */
+	protected Vector getAlternativeContents(ContentGraph graph) throws DtdRulesManagerException {
+		
+		ContentGraph newcg=new ContentGraph(graph.name); //GRAFO CORRENTE A CUI VENGONO SOTTRATTI GLI ARCHI DEL CAMMINO MINIMO PRECEDENTEM TROVATO
+		newcg.nodes_table=new HashMap(graph.nodes_table);
+		
+		Vector firstMinPath = new Vector();
+		
+		graph.resetVisit();
+
+//		System.out.println("grafo su cui cercherà il minimo: \n"+graph);
+		
+		firstMinPath=findCurrentMinPath(graph);
+		graph.resetVisit();
+		
+		
+		
+		int minPathLength=firstMinPath.size()>0?((Vector) firstMinPath.elementAt(0)).size():0;
+		Vector nodesMinPath=new Vector(); //vettore con i nodi del cammino minimo corrente
+		Vector edgesMinPath=new Vector(); //vettore con gli archi del cammino minimo corrente
+		if(firstMinPath.size()>0){
+			nodesMinPath=(Vector) firstMinPath.elementAt(0);
+			edgesMinPath=(Vector) firstMinPath.elementAt(1);
+		}
+		else
+			return null;
+		
+
+		ContentGraph.Node toRemove=newcg.getFirst().getDestination(0);//nodo da cui rimuovere gli archi del cammino minimo per cercarne altri
+		
+		Vector allAlternatives=new Vector(); //vettore con tutti i cammini minimi alternativi di stessa lunghezza
+		
+		allAlternatives.add(firstMinPath);
+		
+		int currentMinPathLenght=minPathLength; //lunghezza del cammino minimo corrente
+		Vector currentMinPath = new Vector(); //cammino minimo corrente
+		
+		for(int k=0; k< allAlternatives.size();k++){
+			//per ogni cammino minimo trovato devo eliminare uno a uno tutti i nodi fino a che non trovo piu cammini minimi
+			for(int i=0; i< minPathLength;i++){
+				//per tutti gli archi del cammino minimo corrente
+					String nameOfEdgeToRemove=((edgesMinPath.elementAt(i) instanceof ContentGraph)?((ContentGraph)edgesMinPath.elementAt(i)).name:edgesMinPath.elementAt(i).toString());
+					if(!toRemove.removeEdge(nameOfEdgeToRemove, newcg.getNode(((ContentGraph.Node) nodesMinPath.elementAt(i)).name))){
+						//non riesco a rimuovere l'arco--caso anomalo
+						System.out.println("ANOMALIA su "+graph.name);
+						currentMinPathLenght=Integer.MAX_VALUE;
+						break;
+					}
+					
+					currentMinPath=findCurrentMinPath(newcg);
+					currentMinPathLenght=((Vector) currentMinPath.elementAt(0)).size();
+					
+					newcg.resetVisit();
+					
+					if(currentMinPath!=null && currentMinPath.size()>0 && currentMinPathLenght==minPathLength){//((Vector) currentMinPath.elementAt(0)).size()==minPathLength /*&& !currentMinPath.elementAt(1).equals(edgesMinPath)*/){
+						//TROVATO ALTRO CAMMINO MINIMO
+						allAlternatives.add(currentMinPath);
+						
+					}
+					else{
+						//NON ESISTE CAMMINO MINIMO QUINDI RIPOPOLO IL GRAFO E CONTINUO CON UN ALTRO MINIMO EVENTUALE ALTERNATIVO
+						newcg=new ContentGraph(graph.name);
+						newcg.nodes_table=new HashMap(graph.nodes_table);
+//						System.out.println("STOP!!");
+						break;
+					}
+					toRemove=((ContentGraph.Node) nodesMinPath.elementAt(i)); //IL NODO DA CUI TOGLIERE GLI ARCHI SI SPOSTA NEL CAMMINO
+				}
+				if((k+1)<allAlternatives.size()){
+					//SE PRECEDENT E' STATO TROVATO UN MINIMO ALTERNATIVO IL NODO DA CUI RIMUOVERE GLI ARCHI DIVENTA IL PRIMO DI TALE CAMMINO
+					nodesMinPath=(Vector)((Vector) allAlternatives.elementAt(k+1)).elementAt(0);
+					edgesMinPath=(Vector)((Vector) allAlternatives.elementAt(k+1)).elementAt(1);
+					toRemove=newcg.getFirst().getDestination(0);
+				}
+			}
+
+		
+		if (minPathLength==0){
+			System.out.print("alternatives for "+graph.name+"  SIZE 0");
+			return null;
+		}
+		System.out.print("alternatives for "+graph.name+"  SIZE "+allAlternatives.size());
+		for(int i=0; i< allAlternatives.size();i++){
+			System.out.print("\n------- ALT. "+(i+1)+"  ");
+			Vector currentAlternative=(Vector) allAlternatives.elementAt(i);
+			Vector edgesCurrentAlternatives=(Vector) currentAlternative.elementAt(1);
+			for(int j=0; j< minPathLength;j++){
+				
+				System.out.print(((edgesCurrentAlternatives.elementAt(j) instanceof ContentGraph)?((ContentGraph)edgesCurrentAlternatives.elementAt(j)).name:edgesCurrentAlternatives.elementAt(j))+",");
+			}
+		}
+		return allAlternatives;
+		
+		
+	}
+	
+	protected Vector findCurrentMinPath(ContentGraph graph) throws DtdRulesManagerException {
+		
+		
+		
+		Vector currentMinPath = new Vector();
+
+		getDijkstraShortestPath(graph);
+		currentMinPath=getMinPath(graph);
+		return currentMinPath;
+			
+		
+
+		
+		
+//		Vector currentMinPath = new Vector();
+//		// cycle until a default content has been found
+//		while (true) {
+//			if (visitContentGraphAlternatives(graph) < Integer.MAX_VALUE){
+//				//System.err.println("finite path");
+//				currentMinPath=getMinPath(graph);
+//				return currentMinPath;
+//				
+//			}
+//			//System.err.println("!   infinite path:  exploding");
+//			// no default content: substitute each element with its ContentGraph
+//			explodeContentGraphAlternatives(graph);
+//		}
+		
+
+	}
+	
+	/**
+	 * Controlla se il ContentGraph contiene un contenuto di default: un cammino fatto
+	 * solo di elementi di testo e transizioni vuote dal primo all'ultimo nodo
+	 * 
+	 * @param graph il ContentGraph
+	 * @return <code>Integer.MAX_VALUE</code> se non esiste un cammino, altrimenti
+	 *         ritorna la lunghezza del cammino minimo
+	 */
+	static protected Vector getDijkstraShortestPath(ContentGraph graph) {
+		ContentGraph.Node first = graph.getFirst();
+		ContentGraph.Node last = graph.getLast();
+		
+		// init visit
+		int distance=Integer.MAX_VALUE;
+		Vector predecessors=new Vector();
+		
+		//the set of unsettled vertices
+		Vector queue = new Vector();
+		//the set of settled vertices, the vertices whose shortest distances from the source have been found
+		Vector settledNodes = new Vector();
+		
+		for (Iterator i = graph.visitNodes(); i.hasNext();)
+			((ContentGraph.Node) i.next()).resetVisit();
+		
+		
+		queue.add(first);
+		first.setVisit(0, "", null);
+
+		// visit the graph
+		while (queue.size() > 0) {
+			// pop first element from queue
+			ContentGraph.Node tovisit = extract_minimum(queue);
+			settledNodes.add(tovisit);
+			
+			// for all the outgoing edges relax_neighbours(toVisit)
+			for (int i = 0; i < tovisit.getNoEdges(); i++) {
+				// check if the edge is visitable
+				Object edge = tovisit.getEdge(i);
+				String edgename = tovisit.getEdgeName(i);
+				ContentGraph.Node destination = tovisit.getDestination(i);
+				if(!settledNodes.contains(destination)){
+					int visit_length = tovisit.getVisitLength();
+					if (destination.getVisitLength() > visit_length+1) {
+						// push the next node of the path in the queue
+						destination.setVisit(visit_length+1, edge, tovisit);
+						queue.add(destination);
+						predecessors.add(tovisit);
+					}
+				}
+				
+			}
+		}
+
+		return predecessors;
+	}
+
+
+	private static ContentGraph.Node extract_minimum(Vector queue) {
+		int min_length=Integer.MAX_VALUE;
+		int min_node_index=-1;
+		for(int i=0; i<queue.size();i++){
+			int current_length = ((ContentGraph.Node)queue.elementAt(i)).visit_length;
+			if(current_length<min_length){
+				min_length=current_length;
+				min_node_index=i;
+			}
+		}
+		if (min_length<Integer.MAX_VALUE){
+			ContentGraph.Node toRemove=(ContentGraph.Node) queue.elementAt(min_node_index);
+			queue.removeElementAt(min_node_index);
+			return toRemove;
+		}
+		
+		return null;
+	}
+
+	/**
+	 * Controlla se il ContentGraph contiene un contenuto di default: un cammino fatto
+	 * solo di elementi di testo e transizioni vuote dal primo all'ultimo nodo
+	 * 
+	 * @param graph il ContentGraph
+	 * @return <code>Integer.MAX_VALUE</code> se non esiste un cammino, altrimenti
+	 *         ritorna la lunghezza del cammino minimo
+	 */
+	static protected int visitContentGraphAlternatives(ContentGraph graph) {
+		ContentGraph.Node first = graph.getFirst();
+		ContentGraph.Node last = graph.getLast();
+		
+		// init visit
+		Vector queue = new Vector();
+		for (Iterator i = graph.visitNodes(); i.hasNext();)
+			((ContentGraph.Node) i.next()).resetVisit();
+		first.setVisit(0, "", null);
+		queue.add(first);
+
+		// visit the graph
+		while (queue.size() > 0) {
+			// pop first element from queue
+			ContentGraph.Node tovisit = (ContentGraph.Node) queue.elementAt(0);
+			queue.remove(0);
+
+			// for all the outgoing edges
+			for (int i = 0; i < tovisit.getNoEdges(); i++) {
+				// check if the edge is visitable
+
+				int step = Integer.MAX_VALUE;
+				Object edge = tovisit.getEdge(i);
+				String edgename = tovisit.getEdgeName(i);
+
+				if (edge instanceof ContentGraph)
+					step = visitContentGraphAlternatives((ContentGraph) edge);
+				else if (edgename.compareTo("#PCDATA") == 0)
+					step = 1;
+				else if (edgename.compareTo("#EPS") == 0)
+					step = 0;
+
+				if (step < Integer.MAX_VALUE) {
+					// if this path is shorter set the new path
+					ContentGraph.Node destination = tovisit.getDestination(i);
+					int visit_length = tovisit.getVisitLength() + step;
+					if (destination.getVisitLength() > visit_length) {
+						// push the next node of the path in the queue
+						destination.setVisit(visit_length, edge, tovisit);
+						queue.add(destination);
+					}
+				}
+			}
+		}
+
+		return last.getVisitLength();
+	}
+
+	
+	
 
 	/**
 	 * Ritorna una stringa in formato XML che definisce il contenuto di default di un
@@ -720,6 +1066,8 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			return "";
 		return getDefaultContent(getContentGraph(elem_name));
 	}
+	
+	
 	
 	
 	/**
@@ -824,12 +1172,15 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 	public Vector getAlternativeContents(String elem_name) throws DtdRulesManagerException {
 		if (elem_name.compareTo("#PCDATA") == 0)
 			return new Vector();
-
-		Vector alternatives = (Vector) alternative_contents.get(elem_name);
-		if (alternatives == null)
-			throw new DtdRulesManagerException("No alternative contents for element <" + elem_name + ">");
-
-		return alternatives;
+		
+		return getAlternativeContents(getContentGraph(elem_name));
+//		//qui
+//		
+//		Vector alternatives = (Vector) alternative_contents.get(elem_name);
+//		if (alternatives == null)
+//			throw new DtdRulesManagerException("No alternative contents for element <" + elem_name + ">");
+//
+//		return alternatives;
 	}
 
 	/**
