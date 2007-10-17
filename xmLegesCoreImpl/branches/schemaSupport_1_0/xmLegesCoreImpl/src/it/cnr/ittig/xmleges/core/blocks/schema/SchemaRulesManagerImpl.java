@@ -97,6 +97,14 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 		att_hash.put(attributeName, new AttributeDeclaration(type, valueDefault, value));
 	}
 
+	
+	public boolean assess(Node node){
+		
+		return xsdRM.assess(node);
+		
+
+	}
+	
 	public void elementDecl(String name, String model) {
 
 		if (logger.isDebugEnabled())
@@ -146,12 +154,23 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 		attributes = new HashMap();
 		
 		
+		
+		
+		// TODO reimplementare per gli Schema il caricamento 
+		
+		
+		
 		// INIZIALIZZA GLI AUTOMI DALLO SCHEMA
 		//loadRules("dtdData/nirbase.dtd");
 		xsdRM = new xsdRulesManagerImpl();
 		//xsdRM.loadRules("xsdData/NIR_XSD_base/nirlight.xsd");
-		xsdRM.loadRules("xsdData/NIR_XSD_completo/nirstrict.xsd");
+		//xsdRM.loadRules("xsdData/NIR_XSD_completo/nirstrict.xsd");
 		
+		xsdRM.loadRules("xsdData/restriction/restriction2.xsd");
+		
+		//String schemaURL = "../xmLegesEditor/xsdData/restriction/restriction.xsd";
+		
+	
 	}
 	
 
@@ -164,67 +183,74 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 	// ------------ INIZIALIZZAZIONE DELLE REGOLE --------------------
 
 	public void loadRules(String filename) {
+		
+		// TODO reimplementare per gli Schema
 
-		//logger.info("START loading rules from DTD");
-
-		// open file
-		File xml_file = new File(filename);
-
-		// clear old rules
-		clear();
-
-		// parse DTD
-		UtilXml.readDTD(xml_file, this);
-
-//		logger.info("END loading rules from DTD");
+//		//logger.info("START loading rules from DTD");
+//
+//		// open file
+//		File xml_file = new File(filename);
+//
+//		// clear old rules
+//		clear();
+//
+//		// parse DTD
+//		UtilXml.readDTD(xml_file, this);
+//
+////		logger.info("END loading rules from DTD");
 
 	}
 
 	public void loadRules(String filename, String dtdPath) {
+		
+		// TODO reimplementare per gli Schema
 
-		String key = null;
-		File xml_file = new File(filename);
-
-		if (dtdPath.startsWith(".")) // crea path name assoluto
-			dtdPath = xml_file.getParent().concat(File.separator+dtdPath.substring(2));
-
-		File dtd_file = UtilFile.getDTDFile(dtdPath);
-
-		// Generazione della chiave
-		try {
-			key = UtilLang.bytesToHexString(UtilFile.calculateMD5(dtd_file));
-			logger.debug("key for " + dtdPath + " = " + key.toString());
-		} catch (Exception ex) {
-			logger.error(ex.getMessage(), ex);
-		}
-
-		String md5Path = new String("dtdmd5");
-		new File(md5Path).mkdir();
-		File rulesMap = new File(md5Path + File.separator, key + "_rules");
-		File alternativesMap = new File(md5Path, key + "_alternatives");
-		File attributesMap = new File(md5Path, key + "_attributes");
-
-		if (key != null && rulesMap.exists() && alternativesMap.exists() && attributesMap.exists()) {
-			loadRulesFromCachedMap(rulesMap, alternativesMap, attributesMap);
-		} else {
-			loadRules(xml_file);
-			saveRulesOnCachedMap(rulesMap, alternativesMap, attributesMap);
-		}
+//		String key = null;
+//		File xml_file = new File(filename);
+//
+//		if (dtdPath.startsWith(".")) // crea path name assoluto
+//			dtdPath = xml_file.getParent().concat(File.separator+dtdPath.substring(2));
+//
+//		File dtd_file = UtilFile.getDTDFile(dtdPath);
+//
+//		// Generazione della chiave
+//		try {
+//			key = UtilLang.bytesToHexString(UtilFile.calculateMD5(dtd_file));
+//			logger.debug("key for " + dtdPath + " = " + key.toString());
+//		} catch (Exception ex) {
+//			logger.error(ex.getMessage(), ex);
+//		}
+//
+//		String md5Path = new String("dtdmd5");
+//		new File(md5Path).mkdir();
+//		File rulesMap = new File(md5Path + File.separator, key + "_rules");
+//		File alternativesMap = new File(md5Path, key + "_alternatives");
+//		File attributesMap = new File(md5Path, key + "_attributes");
+//
+//		if (key != null && rulesMap.exists() && alternativesMap.exists() && attributesMap.exists()) {
+//			loadRulesFromCachedMap(rulesMap, alternativesMap, attributesMap);
+//		} else {
+//			loadRules(xml_file);
+//			saveRulesOnCachedMap(rulesMap, alternativesMap, attributesMap);
+//		}
 	}
 
 	public void loadRules(File xml_file) {
+				
+		// TODO reimplementare per gli Schema
 
-		logger.info("START loading rules from DTD");
-
-		// clear old rules
-		clear();
-
-		// parse DTD
-		UtilXml.readDTD(xml_file, this);
+//		logger.info("START loading rules from DTD");
+//
+//		// clear old rules
+//		clear();
+//
+//		// parse DTD
+//		UtilXml.readDTD(xml_file, this);
+//		
+//		printAlternativeContents();
+//
+//		logger.info("END loading rules from DTD");
 		
-		printAlternativeContents();
-
-		logger.info("END loading rules from DTD");
 	}
 	
 	

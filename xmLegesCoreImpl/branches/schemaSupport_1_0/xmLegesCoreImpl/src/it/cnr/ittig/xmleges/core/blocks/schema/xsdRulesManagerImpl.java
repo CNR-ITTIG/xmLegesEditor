@@ -35,6 +35,7 @@ import org.eclipse.xsd.XSDParticle.DFA.Transition;
 import org.eclipse.xsd.impl.XSDParticleImpl;
 import org.eclipse.xsd.util.XSDResourceFactoryImpl;
 import org.eclipse.xsd.util.XSDResourceImpl;
+import org.w3c.dom.Node;
 
 
 public class xsdRulesManagerImpl{
@@ -129,7 +130,14 @@ public class xsdRulesManagerImpl{
 	}
 	
 	
-	
+	public boolean assess(Node node){
+		
+		
+
+	//	XSDTypeDefinition typedef = elemDecl.getType();
+		
+		return true;
+	}
 	
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
