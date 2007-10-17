@@ -74,11 +74,13 @@ public class xsdRulesManagerImpl{
  		  targetNameSpace = schema.getTargetNamespace();
  		  
  		  List allElements = schema.getElementDeclarations();
+ 		  
  		  for (Iterator iter = allElements.iterator(); iter.hasNext(); /* no-op */){
  	            XSDElementDeclaration elemDecl = (XSDElementDeclaration)iter.next();
  	            createRuleForElement(elemDecl);
  	            createRuleForAttributes(elemDecl);
- 	            //createAlternativeContents(elemDecl);  
+ 	            createAlternativeContents(elemDecl);  
+ 	           
  	            
  	      }
  		}catch(Exception e){
@@ -113,15 +115,15 @@ public class xsdRulesManagerImpl{
    		  	}
         }
         
-        //createRuleForPCDATA();
-		
-		printRules();
-		printAttrRules();
-	
-		System.err.println("");
-        System.err.println("------------------------ END ELEMENTS -------------------");
-        System.err.println("");
         
+		
+//		printRules();
+//		printAttrRules();
+//	
+//		System.err.println("");
+//        System.err.println("------------------------ END ELEMENTS -------------------");
+//        System.err.println("");
+//        
 		  
         System.err.println("Creating Rules DONE");
 	}
@@ -144,8 +146,8 @@ public class xsdRulesManagerImpl{
 	public Collection createAlternativeContents(XSDElementDeclaration elemDecl){
 		
 		
-		ContentGraph cg = createContentGraph(elemDecl.getQName());
-		visitContentGraphPaths(cg);
+//		ContentGraph cg = createContentGraph(elemDecl.getQName());
+//		visitContentGraphPaths(cg);
 		
 		// secondo me:
 		// i contents_strings per ogni elemento dovrebbero essere  come minimo la lista di tutti i possibili cammini minimi
@@ -377,7 +379,8 @@ public class xsdRulesManagerImpl{
 			
 	        else{
 	        	System.out.println("niente rule per "+elemDecl.getQName());
-	        }        
+	        }   
+	        
 	}
 
 	/**
