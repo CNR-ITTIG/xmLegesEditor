@@ -1,5 +1,7 @@
 package it.cnr.ittig.xmleges.core.blocks.schema;
 
+import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
+
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Vector;
@@ -27,16 +29,16 @@ public class Test {
 		
 		
 		
-		//SchemaRulesManagerImpl sRM = new SchemaRulesManagerImpl();
+		SchemaRulesManagerImpl sRM = new SchemaRulesManagerImpl();
+		//sRM.loadRules(schemaURL);
 		
-		
-		xsdRulesManagerImpl xsdRM = new xsdRulesManagerImpl();
-		//xsdRM.loadRules(schemaURL);
-		xsdRM.loadRules(schemaURL);
+//		xsdRulesManagerImpl xsdRM = new xsdRulesManagerImpl();
+//		//xsdRM.loadRules(schemaURL);
+//		xsdRM.loadRules(schemaURL);
 		
 		
 //		System.err.println("----------------- TEST ISVALID ----------------------");
-		Vector v = new Vector();		
+//		Vector v = new Vector();		
 
 		
 //		String figlio1="num";
@@ -48,12 +50,12 @@ public class Test {
 //		String figlio1="nome";
 //		String figlio2="email";
 //		String figlio3="link";
-		String figlio1="articolo";
-		String figlio2="articolo";
-		
-		
-		v.add(figlio1);
-		v.add(figlio2);
+//		String figlio1="articolo";
+//		String figlio2="articolo";
+//		
+//		
+//		v.add(figlio1);
+//		v.add(figlio2);
 //		v.add(figlio3);
 		
 ////		String element="articolo";
@@ -82,13 +84,13 @@ public class Test {
 //		vv.add("formulafinale");
 //		vv.add("conclusione");
 		
-		Vector vv=new Vector();
-		vv.add("#PCDATA");
+//		Vector vv=new Vector();
+//		vv.add("#PCDATA");
 ////		vv.add("h:p");
 ////		vv.add("h:p");
 ////		vv.add("h:p");
 //
-		System.out.println(xsdRM.isValid("h:p", vv));
+//		System.out.println(xsdRM.isValid("h:p", vv));
 		
 		//vv.add("articolo");
 
@@ -121,6 +123,7 @@ public class Test {
 		
 		// default CONTENT
 		
+//		System.out.println("test");
 //		String defaultContent = "";
 //		try{
 //			defaultContent=sRM.getDefaultContent("capo");
@@ -130,8 +133,17 @@ public class Test {
 //			System.err.println("exc in getDefaultContent "+e.getStackTrace());
 //		}
 //		
-//		System.out.println("DEFAULT CONTENT FOR ARTICOLO "+defaultContent);
-//		
+//		System.out.println("DEFAULT CONTENT FOR capo "+defaultContent);
+		
+		
+		try {
+			sRM.getAlternativeContents("dsp:comunicazione");
+		} catch (DtdRulesManagerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//FIXME: cnr:meta si pianta!!
+		//FIXME: dsp:comunicazione non ha tutte le soluz
 	}
 
 }
