@@ -16,6 +16,9 @@ che comprende la clo-dul oppure la vecchia da sola (init più rapido...);
 in un ulteriore modulo owl;
 - cercare o creare un algoritmo per il calcolo (anche qualitativo) della prossimità 
 semantica dei termini una volta collegata l'ontologia;
+- ulteriore modulo owl per specificare quali concetti che nel lessico sono ipo/iper
+diventano subClassOf nel dominio della cons.law;
+
 
 
 INTERFACCIA:
