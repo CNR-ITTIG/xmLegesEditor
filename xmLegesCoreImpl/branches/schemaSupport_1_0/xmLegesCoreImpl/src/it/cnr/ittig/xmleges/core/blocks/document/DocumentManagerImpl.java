@@ -157,6 +157,11 @@ public class DocumentManagerImpl implements DocumentManager, EventListener, Logg
 		Document doc = open(source);
 		if (doc != null) {
 			this.document = doc;
+			
+			Node assess = (Node)doc.getElementsByTagName("mediumDressSize").item(0);
+			
+			rulesManager.assess(assess);
+			
 			DOMWriter.setDefaultEncoding(getEncoding());
 
 			for (Enumeration en = beforeInitActions.elements(); en.hasMoreElements();) {
@@ -236,8 +241,13 @@ public class DocumentManagerImpl implements DocumentManager, EventListener, Logg
 	}
 
 	private String getDtdPath(Document doc) {
-		if (doc != null)
+		try{
+		if (doc != null){
 			return (doc.getDoctype().getSystemId());
+		}
+		}catch(Exception e){
+			return null;
+		}
 		return null;
 	}
 
