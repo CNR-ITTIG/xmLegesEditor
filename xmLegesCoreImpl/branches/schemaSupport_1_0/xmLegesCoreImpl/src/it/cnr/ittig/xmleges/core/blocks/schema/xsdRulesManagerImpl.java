@@ -608,7 +608,8 @@ public class xsdRulesManagerImpl{
 					XSDSchemaDirective xsdSchemaDirective = (XSDSchemaDirective)xsdSchemaContent;
 					if(xsdSchemaDirective instanceof XSDImport){
 							XSDImport xsdSchemaImport = (XSDImport)xsdSchemaDirective;
-							ret.add(folder+xsdSchemaImport.getSchemaLocation().substring(1));
+							String location = xsdSchemaImport.getSchemaLocation().startsWith(".")?xsdSchemaImport.getSchemaLocation().substring(1):File.separator+xsdSchemaImport.getSchemaLocation();
+							ret.add(folder+location);
 							System.err.println(" IMPORT: namespace --> "+xsdSchemaImport.getNamespace());
 							System.err.println(" IMPORT: location  --> "+xsdSchemaImport.getSchemaLocation());
 					}
@@ -1176,11 +1177,16 @@ public class xsdRulesManagerImpl{
      * @param elemName
      * @return
      */
+    //FIXME riguardare meglio; da' eccezione sui simpleType (es. h:hr) ; messo un try-catch
     public boolean isMixed(String elemName){
     	XSDElementDeclaration elemDecl = (XSDElementDeclaration) elemDeclNames.get(elemName);
 		XSDTypeDefinition elemType = elemDecl.getType();
-		return((elemType.getComplexType()!=null && ((XSDComplexTypeDefinition)elemType).isMixed())
-				||(elemDecl.getType().getBaseType().getComplexType()!=null && ((XSDComplexTypeDefinition)elemDecl.getType().getBaseType()).isMixed()));
+		try{
+			return((elemType.getComplexType()!=null && ((XSDComplexTypeDefinition)elemType).isMixed())
+					||(elemDecl.getType().getBaseType().getComplexType()!=null && ((XSDComplexTypeDefinition)elemDecl.getType().getBaseType()).isMixed()));
+		}catch(Exception e){
+			return false;
+		}
 		// eredita mixed anche dal tipo base che estende [vedi ad esempio dataDoc, numDoc]
     }
     
