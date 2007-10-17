@@ -44,6 +44,11 @@ public class DtdRulesManagerImpl implements DtdRulesManager, DeclHandler, Loggab
 
 	Logger logger;
 
+	
+	public boolean assess(Node node){
+		return true;
+	}
+	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
