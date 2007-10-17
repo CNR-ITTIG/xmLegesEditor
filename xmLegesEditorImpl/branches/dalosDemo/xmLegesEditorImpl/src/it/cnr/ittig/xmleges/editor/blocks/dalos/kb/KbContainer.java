@@ -6,12 +6,8 @@ import it.cnr.ittig.xmleges.editor.services.dalos.objects.Source;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.SynsetTree;
 
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collection;
@@ -57,7 +53,6 @@ public class KbContainer {
 	//Dati
 	Map synsets = null;
 	Vector sortedSynsets = null; //meglio un TreeSet ??
-	private Set legalTopClasses;
 
 	Set langProperties = null;
 	
@@ -94,44 +89,47 @@ public class KbContainer {
 		}
 	}
 
-	public Collection getTopClasses() {
+	Collection getTopClasses() {
+		/*
+		 * Return a set of String that represent the local names
+		 * of direct sub classes of Thing in DOMAIN ontology.
+		 */
 		
 		if(!KbConf.MERGE_DOMAIN) {
 			return null;
 		}
 		
-		initLegal();
-		OntModel om = getModel("domain", "micro");
 		Set classes = new HashSet();
-		for(Iterator i = legalTopClasses.iterator(); i.hasNext();) {
-			String name = (String) i.next();
-			OntClass oc = om.getOntClass(KbConf.DOMAIN_ONTO_NS + name);
-			if(oc == null) {
-				System.out.println("## ERROR ## top class not found: " + name);
+		OntModel om = getModel("domain");
+
+		for(Iterator i = om.listClasses(); i.hasNext();) {
+			OntClass oc = (OntClass) i.next();
+			if(oc.isAnon() ||
+			!oc.getNameSpace().equalsIgnoreCase(KbConf.DOMAIN_ONTO_NS)) {
 				continue;
 			}
-			classes.add(oc);
-		}
+			boolean top = true;
+			for(Iterator k = oc.listSuperClasses(true); k.hasNext();) {
+				OntClass sup = (OntClass) k.next();
+				if(sup.isAnon()) {
+					//che si fa se è anonima?? significa che non è top?
+				} else {
+					if(sup.getNameSpace().equalsIgnoreCase(KbConf.DOMAIN_ONTO_NS)) {
+						top = false;
+						break;
+					}
+				}
+			}
+			if(top) {
+				classes.add(oc.getLocalName());
+				System.out.println("++ TOP CLASS: " 
+						+ oc.getNameSpace() + oc.getLocalName());
+			}
+		}		
 		
 		return classes;
 	}
-	
-	private void initLegal() {
 		
-		legalTopClasses = new HashSet();
-
-		legalTopClasses.add("Legal_Task");
-		legalTopClasses.add("Legal_Role");
-		legalTopClasses.add("Economic_Concept");
-		legalTopClasses.add("Events");
-		legalTopClasses.add("Legal_Situation");
-		legalTopClasses.add("Legal_Subject");
-		legalTopClasses.add("Normative_Framework");
-		legalTopClasses.add("Physical_Object");
-		legalTopClasses.add("Quality");
-		legalTopClasses.add("Region");
-	}
-	
 	private boolean checkFiles() {
 		
 		if(!UtilFile.fileExistInTemp(indFile)) {

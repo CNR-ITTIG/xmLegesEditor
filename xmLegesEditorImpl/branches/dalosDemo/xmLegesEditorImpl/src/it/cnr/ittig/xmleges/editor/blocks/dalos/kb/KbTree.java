@@ -14,7 +14,6 @@ import java.util.Set;
 import java.util.Vector;
 
 import javax.swing.JTree;
-import javax.swing.text.Position;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
@@ -76,16 +75,25 @@ public class KbTree {
 		tmpTree.setRootUserObject("CONSUMER LAW");
 		tmpTree.setRootVisible(true);
 		
-		if(!KbConf.MERGE_DOMAIN) {
-			OntClass ocRoot = kbc.getModel("domain", "micro").getOntClass(KbConf.ROOT_CLASS);
+		OntModel om = kbc.getModel("domain", "micro");
+		if(!KbConf.MERGE_DOMAIN) {			
+			OntClass ocRoot = om.getOntClass(KbConf.ROOT_CLASS);
 			expandClass(ocRoot, null, tmpTree);
 		} else {
 			Collection topClasses = kbc.getTopClasses();
 			for(Iterator i = topClasses.iterator(); i.hasNext();) {
-				OntClass oc = (OntClass) i.next();
-				OntoClass cl = new OntoClass(oc.getLocalName());
+				String ocName = (String) i.next();
+				OntoClass cl = new OntoClass(ocName);
 				DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(cl);
 				((SynsetTree) tmpTree).addNode(newNode);
+				//Prendi la relativa OntClass in *questo* OntModel:
+				String ocNameNs = KbConf.DOMAIN_ONTO_NS + ocName;				
+				OntClass oc = om.getOntClass(ocNameNs);
+				if(oc == null) {
+					System.out.println("## ERROR ## top class is null!! " +
+							"name: " + ocNameNs);
+					return null;
+				}
 				expandClass(oc, newNode, tmpTree);
 			}
 		}
