@@ -69,7 +69,7 @@ public class SourceDetails extends JEditorPane {
 			html += "<tr><td><img src=\"./signature.png\"></td><td><i>" + 
 						def + "</i></td><td>&nbsp;</td><td>" +
 						"<A HREF=\"" + source.getLink() + 
-						"\">" + source.getId() + "</A>)</td></tr>";			
+						"\">" + source.getId() + "</A></td></tr>";			
 		}
 		
 		html += "</table></body></html>";
