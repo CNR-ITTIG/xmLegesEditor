@@ -96,6 +96,10 @@ public class KbContainer {
 
 	public Collection getTopClasses() {
 		
+		if(!KbConf.MERGE_DOMAIN) {
+			return null;
+		}
+		
 		initLegal();
 		OntModel om = getModel("domain", "micro");
 		Set classes = new HashSet();
@@ -169,8 +173,12 @@ public class KbContainer {
 		//Remote ontologies are locally cached...
 		//Aggiungere una funzione che, se on-line, scarica le ontologie remote
 		//in modo da avere sempre l'ultima versione?
-		OntDocumentManager odm = OntDocumentManager.getInstance();		
-		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_DOMAIN_ONTO);
+		OntDocumentManager odm = OntDocumentManager.getInstance();
+		if(KbConf.MERGE_DOMAIN) {
+			file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_DOMAIN_MERGE_ONTO);			
+		} else {
+			file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_DOMAIN_ONTO);
+		}
 		odm.addAltEntry(KbConf.DOMAIN_ONTO, "file://" + file.getAbsolutePath());
 		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_METALEVEL_ONTO);
 		odm.addAltEntry(KbConf.METALEVEL_ONTO, "file://" + file.getAbsolutePath());
@@ -486,16 +494,16 @@ public class KbContainer {
 			if(res.isAnon()) {
 				continue;
 			}
-			System.out.println("@ RDF TYPE: " + res);
 			if(res.getNameSpace().equalsIgnoreCase(KbConf.DOMAIN_ONTO_NS)) {
+				System.out.println("@ RDF TYPE: " + res);
 				OntClass oc = (OntClass) res.as(OntClass.class);
 				System.out.println("@@ ONTCLASS: " + oc);
 				for(Iterator p = oc.listDeclaredProperties(false); p.hasNext();) {
 					OntProperty op = (OntProperty) p.next();
-					System.out.println("@@@ PROP: " + op);
 					if(op.isDatatypeProperty() || !op.getNameSpace().equalsIgnoreCase(KbConf.DOMAIN_ONTO_NS)) {
 						continue;
 					}
+					System.out.println("@@@ PROP: " + op);
 					for(Iterator r = op.listRange(); r.hasNext();) {
 						OntClass range = (OntClass) r.next();
 						if(range.isAnon() || 
@@ -507,7 +515,7 @@ public class KbContainer {
 							continue;
 						}
 						System.out.println("@@@@ RANGE: " + range);
-						for(Iterator ist = range.listInstances(true); ist.hasNext();) {
+						for(Iterator ist = range.listInstances(false); ist.hasNext();) {
 							Resource obj = (Resource) ist.next();
 							System.out.println("@@@@@ OBJECT: " + obj);
 							addSemanticProperty(syn, op, obj);
@@ -557,6 +565,8 @@ public class KbContainer {
 		if(search.length() < 1) {
 			return sortedSynsets;
 		}
+		
+		search = search.toLowerCase();
 		
 		Vector results = new Vector();
 		for(int i = 0; i < sortedSynsets.size(); i++) {

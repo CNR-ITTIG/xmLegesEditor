@@ -2,10 +2,11 @@ package it.cnr.ittig.xmleges.editor.blocks.dalos.kb;
 
 public class KbConf {
 
-	public static String dalosRepository = "dalos/";
+	public static boolean MERGE_DOMAIN = true;
 	
+	public static String dalosRepository = "dalos/";
+		
 	public static String DOMAIN_ONTO = 
-		//"http://turing.ittig.cnr.it/jwn/ontologies/consumer-law_15102007.owl";
 		"http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl";
 	public static String METALEVEL_ONTO =
 		"http://turing.ittig.cnr.it/jwn/ontologies/owns.owl";
@@ -31,6 +32,7 @@ public class KbConf {
 	public static String SOURCES = "sources.owl";
 	
 	public static String LOCAL_DOMAIN_ONTO =  "consumer-law.owl";
+	public static String LOCAL_DOMAIN_MERGE_ONTO =  "consumer-law-merge.owl";
 	public static String LOCAL_METALEVEL_ONTO = "owns.owl";
 	public static String LOCAL_METALEVEL_PROP = "owns-full.owl";
 	public static String LOCAL_SOURCE_SCHEMA = "metasources.owl";

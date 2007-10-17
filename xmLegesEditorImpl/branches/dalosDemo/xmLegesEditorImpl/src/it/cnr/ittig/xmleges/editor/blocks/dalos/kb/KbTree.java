@@ -76,8 +76,7 @@ public class KbTree {
 		tmpTree.setRootUserObject("CONSUMER LAW");
 		tmpTree.setRootVisible(true);
 		
-		boolean OLD_VERSION = false;
-		if(OLD_VERSION) {
+		if(!KbConf.MERGE_DOMAIN) {
 			OntClass ocRoot = kbc.getModel("domain", "micro").getOntClass(KbConf.ROOT_CLASS);
 			expandClass(ocRoot, null, tmpTree);
 		} else {

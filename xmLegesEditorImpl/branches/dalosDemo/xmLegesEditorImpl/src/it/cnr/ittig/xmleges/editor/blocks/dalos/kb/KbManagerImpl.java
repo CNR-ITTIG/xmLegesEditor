@@ -54,6 +54,11 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 		langToContainer = new HashMap();
 		pivotToForeign = null;
 		
+		if(KbConf.MERGE_DOMAIN) {
+			KbConf.DOMAIN_ONTO = 
+				"http://turing.ittig.cnr.it/jwn/ontologies/consumer-law-merge.owl";
+		}
+		
 		//La lingua italiana dovrebbe essere inizializzata da qualche altra parte...
 		addLanguage("IT");
 		addLanguage("EN");
