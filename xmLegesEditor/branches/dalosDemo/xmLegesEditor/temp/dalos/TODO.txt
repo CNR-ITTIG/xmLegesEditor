@@ -6,7 +6,6 @@ DATI:
 - dati DALOS mancanti nelle lingue inglese, olandese, spagnolo;
 - implementare la funzione getForeignSynset() decidendo come rappresentare
 in memoria i concetti pivot di "concepts.owl";
-- trovare un modo migliore per calcolare le classi "teste" dell'ontologia di dominio;
 - una volta disponibile l'ontologia definitiva, separare l'ontologia di dominio
 dall'ontologia clo-dul.owl e dal modulo owl contenente il modo in cui le classi di dominio
 sono collegate alla clo-dul (questi tre file saranno caricati dinamicamente come gli altri),
