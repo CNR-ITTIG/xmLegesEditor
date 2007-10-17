@@ -21,6 +21,8 @@ public interface DtdRulesManager extends Service {
 
 	public void clear();
 
+	public boolean assess(Node node);
+	
 	/**
 	 * @param filename
 	 */
