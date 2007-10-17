@@ -137,6 +137,20 @@ public class ContentGraph implements Serializable {
 			return (Node) destinations.elementAt(i);
 		}
 
+		
+		/**
+		 * Ritorna la destinazione dell'arco
+		 */
+		public Node getDestination(String edgeName) {
+			
+			for(int i = 0; i< edges.size(); i++){
+				if(getEdgeName(i).equals(edgeName)){
+					return getDestination(i);
+				}			
+			}
+			return null;
+		}
+
 		/**
 		 * Aggiunge un arco uscente dal nodo
 		 * 
@@ -154,13 +168,18 @@ public class ContentGraph implements Serializable {
 		 * @param edge valore presente sull'arco
 		 * @param destination nodo destinazione dell'arco
 		 */
-		public void removeEdge(String edge, Node destination) {
+		public boolean removeEdge(String edge, Node destination) {
+
 			for (int i = 0; i < edges.size(); i++) {
-				if (getDestination(i) == destination && getEdgeName(i) == edge) {
+				if (getDestination(i) == destination && getEdgeName(i).equals(edge)) {
 					edges.remove(i);
 					destinations.remove(i);
+					System.out.println("removed "+edge);//+" da "+name+" a "+destination.name+" rimosso!!");
+					return true;
 				}
 			}
+//			System.out.println("Arco "+edge+" da "+name+" a "+destination.name+" NON rimosso!!");
+			return false;
 		}
 
 		/**
@@ -273,6 +292,16 @@ public class ContentGraph implements Serializable {
 			return new_node;
 		}
 		return (Node) nodes_table.get(id);
+	}
+	
+	/**
+	 * Setta la lunghezza del cammino minimo per ogni nodo al valore di default -inf
+	 */
+	public void resetVisit() {
+		
+		for (Iterator i = this.visitNodes(); i.hasNext();) {
+			((Node) i.next()).resetVisit();
+		}
 	}
 
 	public String toString() {
