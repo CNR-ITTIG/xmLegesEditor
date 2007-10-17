@@ -11,6 +11,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import org.apache.xerces.jaxp.DocumentBuilderFactoryImpl;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -157,12 +158,15 @@ public class UtilXml {
 	public static Document readXML(File file, boolean validate, ErrorHandler eh, boolean nameSpaceAware) {
 		try {
 			// return readXML(new FileInputStream(file));
-			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();		
 
 			dbf.setNamespaceAware(nameSpaceAware);
 			if (validate) {
 				dbf.setValidating(true);
 				dbf.setIgnoringElementContentWhitespace(true);
+				// FIXME   c'e' nell'interfaccia standard di Jaxp dalla 1.5
+				((DocumentBuilderFactoryImpl)dbf).setFeature("http://xml.org/sax/features/validation", true);
+				((DocumentBuilderFactoryImpl)dbf).setFeature("http://apache.org/xml/features/validation/schema", true);	
 			}
 			dbf.setIgnoringComments(false);
 
