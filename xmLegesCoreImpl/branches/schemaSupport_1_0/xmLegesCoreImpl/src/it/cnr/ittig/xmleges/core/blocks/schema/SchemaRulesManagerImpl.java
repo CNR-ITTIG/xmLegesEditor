@@ -820,18 +820,17 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 	 * @throws DtdRulesManagerException
 	 */
 	protected Vector getAlternativeContents(ContentGraph graph) throws DtdRulesManagerException {
-		
-		ContentGraph newcg=new ContentGraph(graph.name); //GRAFO CORRENTE A CUI VENGONO SOTTRATTI GLI ARCHI DEL CAMMINO MINIMO PRECEDENTEM TROVATO
-		newcg.nodes_table=new HashMap(graph.nodes_table);
-		
-		Vector firstMinPath = new Vector();
-		
+		//FIXME: non riesco a fare il clone del grafo originale
 		graph.resetVisit();
-
-//		System.out.println("grafo su cui cercherà il minimo: \n"+graph);
+		System.out.println("grafo su cui cercherà il minimo: \n"+graph);
 		
-		firstMinPath=findCurrentMinPath(graph);
-		graph.resetVisit();
+		ContentGraph newcg=(ContentGraph) graph.clone();
+//			new ContentGraph(graph.name); //GRAFO CORRENTE A CUI VENGONO SOTTRATTI GLI ARCHI DEL CAMMINO MINIMO PRECEDENTEM TROVATO
+//		newcg.nodes_table=new HashMap(graph.nodes_table);
+		
+		Vector firstMinPath = new Vector();		
+		firstMinPath=findCurrentMinPath(newcg);
+		newcg.resetVisit();
 		
 		
 		
@@ -854,35 +853,58 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 		
 		int currentMinPathLenght=minPathLength; //lunghezza del cammino minimo corrente
 		Vector currentMinPath = new Vector(); //cammino minimo corrente
-		
+		Vector checked_edgeoff = new Vector();
+		System.out.println("nodi prima alt: "+firstMinPath.elementAt(0));
+		System.out.println("edge prima alt: "+firstMinPath.elementAt(1));
 		for(int k=0; k< allAlternatives.size();k++){
-			//per ogni cammino minimo trovato devo eliminare uno a uno tutti i nodi fino a che non trovo piu cammini minimi
+			System.out.println("alternative per ora: "+allAlternatives.size());
+			//per ogni cammino minimo trovato, devo eliminare uno a uno tutti i nodi fino a che non trovo piu cammini minimi
+			System.out.println("eliminero' "+minPathLength+" archi");
 			for(int i=0; i< minPathLength;i++){
+				newcg=(ContentGraph) graph.clone();
+//				newcg=new ContentGraph(graph.name);
+//				newcg.nodes_table=new HashMap(graph.nodes_table);
+				System.out.println("grafo su cui cercherà il minimo (come orig): \n"+newcg);
+				
 				//per tutti gli archi del cammino minimo corrente
 					String nameOfEdgeToRemove=((edgesMinPath.elementAt(i) instanceof ContentGraph)?((ContentGraph)edgesMinPath.elementAt(i)).name:edgesMinPath.elementAt(i).toString());
-					if(!toRemove.removeEdge(nameOfEdgeToRemove, newcg.getNode(((ContentGraph.Node) nodesMinPath.elementAt(i)).name))){
-						//non riesco a rimuovere l'arco--caso anomalo
-						System.out.println("ANOMALIA su "+graph.name);
-						currentMinPathLenght=Integer.MAX_VALUE;
-						break;
-					}
 					
-					currentMinPath=findCurrentMinPath(newcg);
-					currentMinPathLenght=((Vector) currentMinPath.elementAt(0)).size();
-					
-					newcg.resetVisit();
-					
-					if(currentMinPath!=null && currentMinPath.size()>0 && currentMinPathLenght==minPathLength){//((Vector) currentMinPath.elementAt(0)).size()==minPathLength /*&& !currentMinPath.elementAt(1).equals(edgesMinPath)*/){
-						//TROVATO ALTRO CAMMINO MINIMO
-						allAlternatives.add(currentMinPath);
+					//controllo se l'avevo già tolto non lo levo
+					if(!checked_edgeoff.contains(nameOfEdgeToRemove)){
 						
-					}
-					else{
-						//NON ESISTE CAMMINO MINIMO QUINDI RIPOPOLO IL GRAFO E CONTINUO CON UN ALTRO MINIMO EVENTUALE ALTERNATIVO
-						newcg=new ContentGraph(graph.name);
-						newcg.nodes_table=new HashMap(graph.nodes_table);
-//						System.out.println("STOP!!");
-						break;
+					
+						if(!toRemove.removeEdge(nameOfEdgeToRemove, newcg.getNode(((ContentGraph.Node) nodesMinPath.elementAt(i)).name))){
+							//non riesco a rimuovere l'arco--caso anomalo
+							System.out.println("ANOMALIA su "+graph.name);
+							currentMinPathLenght=Integer.MAX_VALUE;
+							break;
+						}
+						System.out.println("eliminato arco "+(i+1)+" di "+minPathLength);
+						checked_edgeoff.add(nameOfEdgeToRemove);
+						System.out.println("grafo su cui cercherà il minimo (potato): \n"+newcg);
+						currentMinPath=findCurrentMinPath(newcg);
+						System.out.println("nodi trovata alt: "+currentMinPath.elementAt(0));
+						System.out.println("edge trovata alt: "+currentMinPath.elementAt(1));
+						currentMinPathLenght=((Vector) currentMinPath.elementAt(0)).size();
+						
+						newcg.resetVisit();
+						
+						if(currentMinPath!=null && currentMinPath.size()>0 && currentMinPathLenght==minPathLength){//((Vector) currentMinPath.elementAt(0)).size()==minPathLength /*&& !currentMinPath.elementAt(1).equals(edgesMinPath)*/){
+							//TROVATO ALTRO CAMMINO MINIMO
+							allAlternatives.add(currentMinPath);
+							
+						}
+						toRemove.addEdge(nameOfEdgeToRemove, newcg.getNode(((ContentGraph.Node) nodesMinPath.elementAt(i)).name));
+						
+//						else{
+//							//NON ESISTE CAMMINO MINIMO QUINDI RIPOPOLO IL GRAFO E CONTINUO CON UN ALTRO MINIMO EVENTUALE ALTERNATIVO
+//							newcg=new ContentGraph(graph.name);
+//							newcg.nodes_table=new HashMap(graph.nodes_table);
+//	//						System.out.println("STOP!!");
+//							break;
+//						}
+						
+						
 					}
 					toRemove=((ContentGraph.Node) nodesMinPath.elementAt(i)); //IL NODO DA CUI TOGLIERE GLI ARCHI SI SPOSTA NEL CAMMINO
 				}
