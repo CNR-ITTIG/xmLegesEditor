@@ -8,6 +8,7 @@ package it.cnr.ittig.xmleges.core.blocks.schema;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Vector;
 
 public class ContentGraph implements Serializable {
@@ -57,6 +58,7 @@ public class ContentGraph implements Serializable {
 			destinations = new Vector();
 			resetVisit();
 		}
+		
 
 		/**
 		 * Ritorna l'id del nodo
@@ -244,6 +246,15 @@ public class ContentGraph implements Serializable {
 		return getNode("E");
 	}
 
+	public Object clone(){
+		ContentGraph cloned=new ContentGraph(name);
+//		cloned.nodes_table=(HashMap) nodes_table.clone();
+		for (Iterator i = nodes_table.entrySet().iterator(); i.hasNext(); ) {
+            Map.Entry e = (Map.Entry) i.next();
+            cloned.nodes_table.put(e.getKey(), e.getValue());
+		}
+		return cloned;
+	}
 	/**
 	 * Ritorna la tabella dei nodi
 	 */
