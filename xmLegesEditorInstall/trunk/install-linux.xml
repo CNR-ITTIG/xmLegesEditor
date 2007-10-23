@@ -96,6 +96,8 @@
 			<file src="xmLegesCoreApi.jar" targetdir="$INSTALL_PATH" />
 			<file src="xmLegesCoreImpl.jar" targetdir="$INSTALL_PATH" />
 			
+			<parsable targetfile="$INSTALL_PATH/xmLegesEditor.xml"/>
+			
 			<executable targetfile="$INSTALL_PATH/xmlegeseditor.sh" stage="never" keep="true" os="unix"/>
 		</pack>
 		
