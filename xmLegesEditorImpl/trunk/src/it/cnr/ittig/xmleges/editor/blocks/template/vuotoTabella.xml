@@ -15,36 +15,36 @@
 			</meta>
 			<contenitore id="con1" nome="corpo">
 				<h:table>
-					<h:caption></h:caption>
+					<h:caption/>
 					<h:thead>
 						<h:tr>
-							<h:td colspan="1" rowspan="1"></h:td>
-							<h:td colspan="1" rowspan="1"></h:td>
-							<h:td colspan="1" rowspan="1"></h:td>
+							<h:td/>
+							<h:td/>
+							<h:td/>
 						</h:tr>
 					</h:thead>
 					<h:tfoot>
 						<h:tr>
-							<h:td colspan="1" rowspan="1"></h:td>
-							<h:td colspan="1" rowspan="1"></h:td>
-							<h:td colspan="1" rowspan="1"></h:td>
+							<h:td/>
+							<h:td/>
+							<h:td/>
 						</h:tr>
 					</h:tfoot>
 					<h:tbody>
 						<h:tr>
-							<h:td colspan="1" rowspan="1"></h:td>
-							<h:td colspan="1" rowspan="1"></h:td>
-							<h:td colspan="1" rowspan="1"></h:td>
+							<h:td/>
+							<h:td/>
+							<h:td/>
 						</h:tr>
 						<h:tr>
-							<h:td colspan="1" rowspan="1"></h:td>
-							<h:td colspan="1" rowspan="1"></h:td>
-							<h:td colspan="1" rowspan="1"></h:td>
+							<h:td/>
+							<h:td/>
+							<h:td/>
 						</h:tr>
 						<h:tr>
-							<h:td colspan="1" rowspan="1"></h:td>
-							<h:td colspan="1" rowspan="1"></h:td>
-							<h:td colspan="1" rowspan="1"></h:td>
+							<h:td/>
+							<h:td/>
+							<h:td/>
 						</h:tr>
 					</h:tbody>
 				</h:table>
