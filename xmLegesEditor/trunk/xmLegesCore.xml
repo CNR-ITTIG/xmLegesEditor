@@ -140,7 +140,11 @@ File di composizione dell'applicazione xmLegesEditor CORE
     <component  class="it.cnr.ittig.xmleges.core.blocks.i18n.I18nImpl">
         <configuration>
 	   	    <!--<locale language="it" country="IT" variant="16" /> -->         
-			<locale language="en" country="EN" variant="1" />       
+			<locale language="en" country="EN" variant="1" />      
+			
+			<!-- scommentare la riga sotto nella versione per creare l'installer -->
+            <!--locale language="$ISO3_LANG" country="$ISO3_LANG" variant="16" /-->    
+			 
             <base>i18n/editor</base>
             <base>i18n/editor-dom</base>
             <base>i18n/core</base>
