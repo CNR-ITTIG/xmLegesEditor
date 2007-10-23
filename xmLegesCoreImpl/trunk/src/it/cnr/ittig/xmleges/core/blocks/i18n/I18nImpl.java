@@ -121,6 +121,11 @@ public class I18nImpl implements I18n, Loggable, Configurable, Serviceable, Init
 			Configuration c = configuration.getChild("locale");
 			String language = c.getAttribute("language", "en");
 			String country = c.getAttribute("country", "US");
+			
+			// utilizzato per convertire i codici ISO3_LANG settati dall'installer IzPack in codici ISO 639
+			language = language.substring(0,2).toLowerCase();
+			country = country.substring(0,2).toUpperCase();
+			
 			String variant = c.getAttribute("variant", null);
 			if (variant != null)
 				setLocale(language, country, variant);
