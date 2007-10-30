@@ -2,6 +2,8 @@ package it.cnr.ittig.xmleges.editor.blocks.form.fileexport;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import it.cnr.ittig.services.manager.Initializable;
@@ -75,11 +77,23 @@ public class FileExportFormImpl implements FileExportForm, Loggable, Serviceable
 		public void mouseClicked(MouseEvent e) {
 			if (SwingUtilities.isLeftMouseButton(e)) {
 				radioMonovigente.setSelected(true);				
-				dataVigenza.set(new Date((String) listModel.getElementAt(sceltaDataVigenza.getSelectedIndex())));
+				//dataVigenza.set(new Date((String) listModel.getElementAt(sceltaDataVigenza.getSelectedIndex())));
+				dataVigenza.set(getAsDate((String) listModel.getElementAt(sceltaDataVigenza.getSelectedIndex())));
 			}
 		}
 	};
 
+	private java.util.Date getAsDate(String data) {
+		java.util.Date d;
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat(UtilDate.getDateFormat());
+			d = sdf.parse(data);
+			return d;
+		} catch (ParseException ex) {
+		}
+		return null;
+	}
+	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
@@ -127,7 +141,7 @@ public class FileExportFormImpl implements FileExportForm, Loggable, Serviceable
 		grupporadio.add(radioMultivigente);
 		radioMonovigente.setSelected(true);
 		dataVigenza.set(null);
-		form.setSize(250, 340);
+		form.setSize(250, 300);
 		form.setName("editor.form.fileexport");
 		form.addFormVerifier(this);		
 		
