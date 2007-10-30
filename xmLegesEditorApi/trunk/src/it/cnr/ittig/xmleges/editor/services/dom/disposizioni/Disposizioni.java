@@ -25,7 +25,14 @@ import org.w3c.dom.Node;
 public interface Disposizioni extends Service {
 	
 	/**
-	 * Funzione per l'aggiornamento dei metadati di disposizione e
+	 * Funzione per l'aggiornamento dei metadati di disposizione ATTIVE
+	 * 
+	 * @return </code>True</code> operazione correttamente eseguita
+	 */
+	public boolean setDOMDispAttive(String pos, String norma, String partizione, String novellando, String novella, String autoNota, boolean implicita);
+	
+	/**
+	 * Funzione per l'aggiornamento dei metadati di disposizione PASSIVE e
 	 * per l'inserimento dei metadati proprietari (creazione della nota)
 	 * 
 	 * @return </code>True</code> operazione correttamente eseguita
