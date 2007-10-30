@@ -768,6 +768,54 @@ public VigenzaEntity getVigenza(Node node, int start, int end) {
 
 		
 	}
+	
+	public boolean setDOMDispAttive(String pos, String norma, String partizione, String novellando, String novella, String autoNota, boolean implicita) {
+		Document doc = documentManager.getDocumentAsDom();
+		
+		Node activeMeta = nirUtilDom.findActiveMeta(doc,null);
 
+		//inserisco la disposizione
+		Node disposizioniNode = UtilDom.findRecursiveChild(activeMeta,"disposizioni");
+		if (disposizioniNode==null)
+			disposizioniNode = nirUtilDom.checkAndCreateMeta(doc,activeMeta,"disposizioni");
+			
+		Node modificheattiveNode = UtilDom.findRecursiveChild(disposizioniNode,"modificheattive");
+		if (modificheattiveNode==null)
+			modificheattiveNode = UtilDom.checkAndCreate(disposizioniNode, "modificheattive");		
+
+		Node operazioneNode;
+		if (!novellando.equals("") && !novella.equals("")) {	//sostituzione
+			operazioneNode = utilRulesManager.getNodeTemplate(doc,"dsp:sostituzione");
+			if (implicita)
+				UtilDom.setAttributeValue(operazioneNode, "implicita", "si");
+			else
+				UtilDom.setAttributeValue(operazioneNode, "implicita", "no");				
+			modificheattiveNode.appendChild(operazioneNode);
+			setNorma(operazioneNode, pos, norma, partizione, "", autoNota, "");
+			setNovella(operazioneNode, novella);
+			setNovellando(operazioneNode, novellando);			
+		}
+		else if (!novellando.equals("")) {	//abrogazione
+				operazioneNode = utilRulesManager.getNodeTemplate(doc, "dsp:abrogazione");
+				if (implicita)
+					UtilDom.setAttributeValue(operazioneNode, "implicita", "si");
+				else
+					UtilDom.setAttributeValue(operazioneNode, "implicita", "no");
+				modificheattiveNode.appendChild(operazioneNode);
+				setNorma(operazioneNode, pos, norma, partizione, "", autoNota, "");
+				setNovellando(operazioneNode, novellando);
+			}
+			else if (!novella.equals("")) {	//integrazione
+				operazioneNode = utilRulesManager.getNodeTemplate(doc,"dsp:integrazione");
+				if (implicita)
+					UtilDom.setAttributeValue(operazioneNode, "implicita", "si");
+				else
+					UtilDom.setAttributeValue(operazioneNode, "implicita", "no");
+				modificheattiveNode.appendChild(operazioneNode);
+				setNorma(operazioneNode, pos, norma, partizione, "", autoNota, "");
+				setNovella(operazioneNode, novella);
+			}		
+		return true;
+	}
 
 }
