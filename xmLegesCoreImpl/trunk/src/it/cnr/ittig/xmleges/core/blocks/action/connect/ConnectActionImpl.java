@@ -7,10 +7,10 @@ import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.services.manager.Startable;
-import it.cnr.ittig.xmleges.core.services.action.file.open.FileOpenAction;
-import it.cnr.ittig.xmleges.core.services.action.file.save.FileSaveAction;
 import it.cnr.ittig.xmleges.core.services.action.ActionManager;
 import it.cnr.ittig.xmleges.core.services.action.connect.ConnectAction;
+import it.cnr.ittig.xmleges.core.services.action.file.open.FileOpenAction;
+import it.cnr.ittig.xmleges.core.services.action.file.save.FileSaveAction;
 import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentOpenedEvent;
@@ -19,7 +19,6 @@ import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.frame.Frame;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
-import it.cnr.ittig.xmleges.core.services.panes.problems.Problem;
 import it.cnr.ittig.xmleges.core.services.preference.PreferenceManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.util.domwriter.DOMWriter;
@@ -30,14 +29,23 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.EventObject;
 import java.util.Properties;
+import java.util.StringTokenizer;
 
 import javax.swing.AbstractAction;
+import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -51,17 +59,6 @@ import org.apache.commons.httpclient.HttpURL;
 import org.apache.commons.httpclient.HttpsURL;
 import org.apache.webdav.lib.WebdavResource;
 import org.apache.webdav.lib.methods.LockMethod;
-
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.util.StringTokenizer;
 
 import sun.net.TelnetInputStream;
 import sun.net.ftp.FtpClient;
@@ -191,7 +188,7 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 					
 					//aggiornare come fatto per DAV!!!!!!!!!!!
 					
-					if (cwdFTP(temp)) {	//test se è una directory
+					if (cwdFTP(temp)) {	//test se Ã¨ una directory
 						file.setText("");
 						readDirFTP("");
 					} else	{
@@ -200,7 +197,7 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 					}	
 				}
 				if (type.equals("webdav")) {		
-					if (pre.trim().equals("DIR:")) {	//test se è una directory
+					if (pre.trim().equals("DIR:")) {	//test se Ã¨ una directory
 						lockUnlock.setVisible(false);
 						//file.setText("");
 						readDirDAV(temp);
@@ -342,6 +339,9 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 		} catch (Exception ex) {
 		}
 		manageEvent(null);
+		
+		//davListCellRenderer davRenderer =
+		
 	}
 
 	// /////////////////////////////////////////////////// Startable Interface
@@ -504,8 +504,7 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 			host.setText(lastDavHost);
 			user.setText(lastDavUser);
 			password.setText(lastDavPass);
-			filedir = new JList(icons);
-			filedir.setCellRenderer(davRenderer);
+			filedir.setCellRenderer( new davListCellRenderer());
 		}
 		typehost.setText("Host " + connectionType);
 		currDir.setText("*** non connesso ***");
@@ -729,9 +728,10 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 				return false;
 			listModel.removeAllElements();
 			list = webdavResource.listWebdavResources();
+			filedir.setListData(list);
 
 			///////////no devo passare JLabel !!!!!!!!!!!!!!!!!!!!!
-			////idea è buttare (dividere da ftp)
+			////idea ï¿½ buttare (dividere da ftp)
 
 			//JLabel label = new JLabel("DIR:  ..");
 			JLabel label = icons[0]; label.setText("DIR:  ..");
@@ -993,19 +993,34 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 		return true;
 	}	
 	
-	ListCellRenderer davRenderer = new ListCellRenderer() {
-		public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-			JLabel label = (JLabel)value;
-			label.setBackground(isSelected ? Color.LIGHT_GRAY : Color.WHITE);
-			
-			if (label.getText().substring(0, 6).trim().equals("DIR:")) 
-				label.setIcon(tipoDirectory);
-			else
-				label.setIcon(tipoDirectory);
-			label.setText(label.getText().substring(6,label.getText().length()));
-			return label;
+	
+	
+	
+	
+	
+	public class davListCellRenderer extends JLabel implements ListCellRenderer {
+
+		
+		public davListCellRenderer() {
+			setOpaque(true);
+			setVerticalAlignment(CENTER);
 		}
-	};
+	
+		public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+			if(value instanceof WebdavResource){
+				
+				setBackground(isSelected ? Color.LIGHT_GRAY : Color.WHITE);
+
+				if(((WebdavResource)value).isCollection())
+					setIcon(tipoDirectory);
+				else
+					setIcon(tipoFile);
+				
+				setText(((WebdavResource)value).toString());
+			}			
+			return this;
+		}
+	}
 	
 }
 
