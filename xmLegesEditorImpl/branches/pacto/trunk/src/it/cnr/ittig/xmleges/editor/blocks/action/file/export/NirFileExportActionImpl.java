@@ -120,6 +120,10 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 	ExportBrowserAction exportBrowserAction;
 
 	ExportHTMLAction exportHTMLAction;
+	
+	/* *********** Modifica I+ ************* */
+	ExportLenyaAction exportLenyaAction;
+	/* ************************************* */
 
 	ExportPDFAction exportPDFAction;
 	
@@ -184,6 +188,12 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 		actionManager.registerAction("file.export.browser", exportBrowserAction);
 		exportHTMLAction = new ExportHTMLAction();
 		actionManager.registerAction("file.export.html", exportHTMLAction);
+		
+		/* ******************** Modifica I+ ************************** */
+		exportLenyaAction = new ExportLenyaAction();
+		actionManager.registerAction("file.export.lenya", exportLenyaAction);
+		/* ************************************************************* */
+		
 		exportPDFAction = new ExportPDFAction();
 		exportRTFAction = new ExportRTFAction();
 		actionManager.registerAction("file.export.pdf", exportPDFAction);
@@ -220,6 +230,11 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 	public void manageEvent(EventObject event) {
 		exportBrowserAction.setEnabled(!documentManager.isEmpty());
 		exportHTMLAction.setEnabled(!documentManager.isEmpty());
+		
+		/* ******************* Modifica I+ ************************ */
+		exportLenyaAction.setEnabled(!documentManager.isEmpty());
+		/* ****************************************************** */
+		
 		//export per i DDL non è implementato (disabilito)
 		exportPDFAction.setEnabled(!documentManager.isEmpty() && !documentManager.getRootElement().getFirstChild().getNodeName().equals("DisegnoLegge"));
 		exportRTFAction.setEnabled(!documentManager.isEmpty());
@@ -227,6 +242,25 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 
 	// ////////////////////////////////////////////// FileExportAction Interface
 
+//	 ///////////////////// salva su Lenya - Modifica I+
+	public boolean doExportLenya() {
+		
+			//cerco di aprire una finestra nel browser
+			String path= "C:\\Programmi\\Mozilla Firefox\\firefox.exe";
+			
+
+			String[] command={path};
+			try {
+				Process process = Runtime.getRuntime ().exec (command);
+			}
+			catch (Exception e) {
+				//TODO inserire il log4j
+				System.out.println("Errore " + e);
+		
+		}
+		return false;
+	}
+	
 	public boolean doExportPDF() {
 
 		String XSL_FO_GU; 
@@ -562,7 +596,26 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 		}
 	}
 
-	
+	/**
+	 * 
+	 * <hr>
+	 * Project 	: xmLegesCoreImpl<br>
+	 * package 	: it.cnr.ittig.xmleges.core.blocks.action.file.export<br>
+	 * Type Name : <b>ExportHTMLAction</b><br>
+	 * Comment	:<br>
+	 * Esporta il documento corrente su Lenya
+	 * <hr>
+	 * I+ S.r.l. 05/nov/07<br>
+	 * <hr>
+	 * @author Macchia<br>
+	 * <hr>
+	 * 
+	 */
+	protected class ExportLenyaAction extends AbstractAction {
+		public void actionPerformed(ActionEvent e) {
+			doExportLenya();
+		}
+	}	
 	
 	protected class ExportRTFAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
@@ -570,13 +623,6 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 		}
 	}
 }
-
-
-
-
-
-
-
 
 // ///////////////////// salva come HTML (CON FORM)
 // public boolean doExportHTML() {
