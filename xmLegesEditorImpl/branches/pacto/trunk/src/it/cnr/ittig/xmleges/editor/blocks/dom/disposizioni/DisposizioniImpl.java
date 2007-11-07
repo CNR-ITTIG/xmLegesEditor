@@ -783,6 +783,7 @@ public VigenzaEntity getVigenza(Node node, int start, int end) {
 		if (modificheattiveNode==null)
 			modificheattiveNode = UtilDom.checkAndCreate(disposizioniNode, "modificheattive");		
 
+
 		Node operazioneNode;
 		if (!novellando.equals("") && !novella.equals("")) {	//sostituzione
 			operazioneNode = utilRulesManager.getNodeTemplate(doc,"dsp:sostituzione");
