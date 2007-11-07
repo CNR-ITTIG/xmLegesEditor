@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="iso-8859-15"?>
+
+%DOCTYPE%
+
+<NIR xmlns:xlink="http://www.w3.org/1999/xlink" 
+	  xmlns:h="http://www.w3.org/HTML/1998/html4">
+<DocumentoNIR nome="RegolamentoComunale">
+	<meta>
+		<descrittori>
+			<pubblicazione norm="" num="" tipo="GU" />
+			<entratainvigore norm="" />
+			<redazione id="red1" nome="" norm="" />
+			<urn valore="" />
+		</descrittori>
+	</meta>
+	<intestazione>
+			<tipoDoc />
+			<dataDoc norm="" />
+			<titoloDoc />
+		<titoloDoc/>
+	</intestazione>
+	<formulainiziale>
+		<preambolo>
+			<h:p/>
+		</preambolo>		
+	</formulainiziale>
+	<articolato>
+		<titolo id="tit1">
+			<num>Titolo I</num>
+			<rubrica />
+			<articolo id="art1">
+				<num>Art. 1.</num>
+				<rubrica/>
+				<comma id="art1-com1">
+					<num>1.</num>
+					<corpo/>
+				</comma>
+			</articolo>
+		</titolo>
+	</articolato>
+	<formulafinale />
+	<conclusione />
+</DocumentoNIR>
+</NIR>
