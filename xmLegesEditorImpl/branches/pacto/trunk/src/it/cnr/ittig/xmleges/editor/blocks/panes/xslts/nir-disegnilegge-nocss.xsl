@@ -19,102 +19,140 @@
 				<!--                                                          -->
 				<!-- ======================================================== -->				
 				<style type="text/css">
-				body {
-					margin-left: 15 px;
-					font-family: "Verdana, Arial, Helvetica, sans-serif" ;
-					font-size: 70% ;
-				}
-				.title { 
-					font-size: 110% ;
-					font-weight: bold;
-					text-align: center;
-					color: #0000cc;
-					line-height: 100% ;
-				} 
-				.sinistra { 
-					font-size: 110% ;
-					text-align: left;
-					line-height: 100% ;
-				} 	
-				.toc-articolo, .toc-annessi {
-					margin-left: 7px;
-					font-size: 65%;
-				}
-				.toc-comma {
-					margin-left: 15px;
-					font-size: 65%;
-				}
-				.toc {
-					margin-left: 2px;
-					font-size: 65%;
-					font-weight: bold;
-				}
-				.capo { 
-					font-size: 110% ;
-					font-weight: bold;
-					text-align: center;
-					line-height: 100% ;
-					margin-top: 25px; 
-				} 
-				.articolo { 
-					font-size: 90% ; 
-					text-align: center;
-					font-weight: bold;
-					margin-top: 15px; 
-				}
-				.comma { 
-					font-size: 80% ; 
-					margin-top: 5px; 
-				}
-				div, li {
-					font-size: 80% ;
-				}
-				.small {
-					font-size: 65% ;
-				}
-				.intestazione {
-					margin: 15px, 15%, 0px, 15%;
-					text-align: center;
-				}
-				.el {
-					margin-left: 40px;
-					text-indent: -30px;
-					margin-top: 3px;
-				}
-				.en {
-					margin-left: 50px;
-					text-indent: -30px;
-					margin-top: 3px;
-				}				
-			    b b { font-weight: normal; }
-				.ndr {
-					color: #00cc00;
-					text-decoration: underline;
-				}
-				.soppresso {
-					color: red;
-					text-decoration: line-through;
-				}
-				.inserito {
-					color: green;
-				}
-				.mod {
-					display: inline;
-					font-size: 9pt;  
-					font-weight: normal; 
-					font-style: normal; 
-					font-family: Courier;
-					background: #FFDDAA;
-				}
-				.virgolette {
-					display: inline; 
-					border-width: solid; 
-					background: #FFEE99;
-				}	
-				.spazio {
-					display: inline; 
-					background: #FFFFFF;
-				}				
+			/*Style CSS Disegni di legge*/
+body {
+	margin-left: 15px;
+	font-family: Arial, Verdana,  Helvetica, sans-serif ;
+	font-size: 70% ;
+}
+.title { 
+	font-size: 110% ;
+	font-weight: normal;
+	text-align: center;
+	line-height: 100% ;
+	width: 100%;
+	margin-bottom: 3px;
+}
+.sinistra { 
+padding-top: 5px;
+	font-size: 100% ;
+	text-align: left;
+	line-height: 100% ;
+	font-style:italic;
+} 	
+.toc-articolo, .toc-annessi {
+	margin-left: 7px;
+	font-size: 65%;
+}
+.toc-comma {
+	margin-left: 15px;
+	font-size: 65%;
+}
+.toc {
+	margin-left: 2px;
+	font-size: 65%;
+	font-weight: bold;
+}
+.capo { 
+	font-size: 110% ;
+	font-weight: bold;
+	text-align: center;
+	line-height: 100% ;
+	margin-top: 25px; 
+} 
+/*Stile numero articolo*/
+.articolo { 
+	font-size: 95% ; 
+	text-align: left;
+	font-weight: bold;
+	margin-top: 15px; 
+
+}
+
+.articolo a{
+padding: 0 150px 2px 0px; 
+border-bottom: 2px solid #000;
+}
+
+i{
+font-size: 90%; 
+font-weight: normal;
+}
+/* --------------------------- */
+/*Stile comma*/
+.comma { 
+	font-size: 80%;
+	margin-top: 5px;
+	text-align: justify;
+	padding: 3px;
+	border: 1px solid #999;
+	background: #EBEBEB;
+}
+.comma:first-letter{
+font-size:120%;
+}
+.comma:first-line{
+font-size:100%;
+}
+/* --------------------------- */
+div, li {
+	font-size: 80% ;
+}
+.small {
+	font-size: 65% ;
+}
+.intestazione {
+	margin: 15px 15% 0px 15%;
+	text-align: center;
+	border-bottom: 1px solid #000;
+	color: #990000;
+}
+.el {
+	margin-left: 10px;
+	text-indent: 30px;
+	margin-top: 5px;
+	text-align:justify;
+	padding: 3px;
+	border: 1px solid #ccc;
+	background: #f9f9f9;
+}
+.en {
+	margin-left: 10px;
+	text-indent: 30px;
+	margin-top: 5px;
+	text-align:justify;
+	padding: 3px;
+	border: 1px solid #ccc;
+	background: #f9f9f9;
+}				
+b b { font-weight: normal; }
+.ndr {
+	color:#0000AA;
+	text-decoration: underline;
+}
+.soppresso {
+	color: #CA0000;
+	text-decoration: line-through;
+}
+.inserito {
+	color: green;
+}
+/*Stile modificato*/
+.mod {
+	display: inline;
+	font-size: 9pt;  
+	/*font-family: Courier;*/
+	background: #FFDF62;
+}
+/* --------------- */
+.virgolette {
+	display: inline;  
+	background: #FFCC33;
+}	
+.spazio {
+	display: inline; 
+	background: #FFFFFF;
+}		
 				</style>
 				<!-- ======================================================== -->
 				<!--                                                          -->
@@ -167,6 +205,7 @@
 	</xsl:template>	
 	<xsl:template match="nir:intestazione/h:div ">
 		<div class="intestazione">
+		<span></span>
 		    <xsl:attribute name="style">
 			    <xsl:value-of select="@style"/>
 		    </xsl:attribute>
@@ -187,6 +226,7 @@
 	</xsl:template>
 	<xsl:template match="nir:intestazione/nir:titoloDoc">
 		<div class="intestazione">
+		<span></span>
 			<h1>
 				<xsl:apply-templates/>
 			</h1>

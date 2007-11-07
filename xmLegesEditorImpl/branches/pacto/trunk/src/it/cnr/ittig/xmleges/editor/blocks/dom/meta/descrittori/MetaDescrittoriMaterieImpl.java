@@ -12,75 +12,86 @@ import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.MetaDescrittoriMaterie;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Vocabolario;
 import it.cnr.ittig.xmleges.editor.services.dom.rinumerazione.Rinumerazione;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
+import it.ipiu.digest.parse.Archivio;
+import it.ipiu.digest.parse.ParseXmlToVocabolario;
+import it.ipiu.digest.parse.Vocabolario;
+
+import java.io.IOException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
-
-public class MetaDescrittoriMaterieImpl implements MetaDescrittoriMaterie , Loggable, Serviceable {
+public class MetaDescrittoriMaterieImpl implements MetaDescrittoriMaterie,
+		Loggable, Serviceable {
 	Logger logger;
 
 	DocumentManager documentManager;
-	
+
 	DtdRulesManager dtdRulesManager;
 
 	UtilRulesManager utilRulesManager;
-	
-	Rinumerazione rinumerazione; 
-	
+
+	Rinumerazione rinumerazione;
+
 	NirUtilDom nirUtilDom;
-	
+
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
-		
 	}
 
 	public void service(ServiceManager serviceManager) throws ServiceException {
-		rinumerazione = (Rinumerazione) serviceManager.lookup(Rinumerazione.class);
-		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
-		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
+		rinumerazione = (Rinumerazione) serviceManager
+				.lookup(Rinumerazione.class);
+		documentManager = (DocumentManager) serviceManager
+				.lookup(DocumentManager.class);
+		dtdRulesManager = (DtdRulesManager) serviceManager
+				.lookup(DtdRulesManager.class);
+		utilRulesManager = (UtilRulesManager) serviceManager
+				.lookup(UtilRulesManager.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
-		
 	}
 
+	//TODO comment
 	public void setVocabolari(Node node, Vocabolario[] vocabolari) {
-		
+
 		Document doc = documentManager.getDocumentAsDom();
 		try {
 			EditTransaction tr = documentManager.beginEdit();
-			Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
-			Node descrittoriNode = UtilDom.findRecursiveChild(activeMeta,"descrittori");
-						
-			removeMetaByName("materie",node);
-			
+			Node activeMeta = nirUtilDom.findActiveMeta(doc, node);
+			Node descrittoriNode = UtilDom.findRecursiveChild(activeMeta,
+					"descrittori");
+
+			removeMetaByName("materie", node);
+
 			for (int i = 0; i < vocabolari.length; i++) {
-				
+
 				Node vocabTag;
 				vocabTag = utilRulesManager.getNodeTemplate("materie");
-				
-				
-				UtilDom.setAttributeValue(vocabTag,"vocabolario",vocabolari[i].getNome());
-				String[] materieVocab=vocabolari[i].getMaterie();
-				if(materieVocab!=null && materieVocab.length>0){
+
+				UtilDom.setAttributeValue(vocabTag, "vocabolario",
+						vocabolari[i].getNome());
+				String[] materieVocab = vocabolari[i].getMaterie();
+				if (materieVocab != null && materieVocab.length > 0) {
 					vocabTag.removeChild(vocabTag.getChildNodes().item(0));
 					for (int j = 0; j < materieVocab.length; j++) {
 						Element materiaTag;
 						materiaTag = doc.createElement("materia");
-						UtilDom.setAttributeValue(materiaTag,"valore",vocabolari[i].getMaterie()[j]);
-						utilRulesManager.orderedInsertChild(vocabTag,materiaTag);
-						
-					}
-				}else{
-					UtilDom.setAttributeValue(vocabTag.getChildNodes().item(0),"valore",null);
-				}
-				utilRulesManager.orderedInsertChild(descrittoriNode,vocabTag);
+						UtilDom.setAttributeValue(materiaTag, "valore",
+								vocabolari[i].getMaterie()[j]);
+						utilRulesManager.orderedInsertChild(vocabTag,
+								materiaTag);
 
+					}
+				} else {
+					UtilDom.setAttributeValue(vocabTag.getChildNodes().item(0),
+							"valore", null);
+				}
+				utilRulesManager.orderedInsertChild(descrittoriNode, vocabTag);
 			}
 			documentManager.commitEdit(tr);
 			rinumerazione.aggiorna(doc);
@@ -88,64 +99,87 @@ public class MetaDescrittoriMaterieImpl implements MetaDescrittoriMaterie , Logg
 			logger.error(ex.getMessage(), ex);
 			return;
 		}
-												
-		
-		
-
-		
 	}
 
 	public Vocabolario[] getVocabolari(Node node) {
-		
-		Vocabolario[] vocabolariOnDoc;
-		Document doc = documentManager.getDocumentAsDom();
-		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
-		
-		Node[] vocabolariList = UtilDom.getElementsByTagName(doc,activeMeta,"materie");
-		if(vocabolariList==null || vocabolariList.length==0)
-			return null;
 
-		vocabolariOnDoc=new Vocabolario[vocabolariList.length];
-		for(int i=0;i<vocabolariList.length;i++){
-			vocabolariOnDoc[i]=new Vocabolario();
-			String nomeVocabolario=vocabolariList[i].getAttributes().getNamedItem("vocabolario").getNodeValue();
+		/* Modifica I+ */
+		Vocabolario[] vocabolariOnDoc = this.getVocabolario();
+
+		/* Codice ITTIG */
+
+		Document doc = documentManager.getDocumentAsDom();
+		Node activeMeta = nirUtilDom.findActiveMeta(doc, node);
+
+		Node[] vocabolariList = UtilDom.getElementsByTagName(doc, activeMeta,
+				"materie");
+
+		Vocabolario[] vocabolariOnDoctmp = new Vocabolario[vocabolariList.length];
+		for (int i = 0; i < vocabolariList.length; i++) {
+			vocabolariOnDoctmp[i] = new Vocabolario();
+			String nomeVocabolario = vocabolariList[i].getAttributes()
+					.getNamedItem("vocabolario").getNodeValue();
 			if (nomeVocabolario.equals(""))
 				nomeVocabolario = "-- name absent --";
-			vocabolariOnDoc[i].setNome(nomeVocabolario);
-			NodeList materieList=vocabolariList[i].getChildNodes();
-			boolean isEmpty=(materieList.getLength()==1 && (materieList.item(0).getAttributes().getNamedItem("valore")==null 
-					|| 
-					materieList.item(0).getAttributes().getNamedItem("valore").getNodeValue().equals("")));
-			if(materieList!=null && !isEmpty){
-				String[] materieVocabolario=new String[materieList.getLength()];
-				for(int j=0;j<materieList.getLength();j++){
-					materieVocabolario[j]=materieList.item(j).getAttributes().getNamedItem("valore").getNodeValue();			
+			vocabolariOnDoctmp[i].setNome(nomeVocabolario);
+			NodeList materieList = vocabolariList[i].getChildNodes();
+			boolean isEmpty = (materieList.getLength() == 1 && (materieList
+					.item(0).getAttributes().getNamedItem("valore") == null || materieList
+					.item(0).getAttributes().getNamedItem("valore")
+					.getNodeValue().equals("")));
+			if (materieList != null && !isEmpty) {
+				String[] materieVocabolario = new String[materieList
+						.getLength()];
+				for (int j = 0; j < materieList.getLength(); j++) {
+					materieVocabolario[j] = materieList.item(j).getAttributes()
+							.getNamedItem("valore").getNodeValue();
 				}
-				vocabolariOnDoc[i].setMaterie(materieVocabolario);
-				
+				vocabolariOnDoctmp[i].setMaterie(materieVocabolario);
 			}
-			
 		}
-		
-		return vocabolariOnDoc;
+
+		// TODO Comment
+		Vocabolario[] vocabolarios = Archivio.merge(vocabolariOnDoc, vocabolariOnDoctmp);
+
+		return vocabolarios;
 	}
+
+	
+
+	/**
+	 * Il metodo costruisce un array di Vocabolari e i relativi insieme di
+	 * materie
+	 * 
+	 * @return <code>Vocabolario[]</code>
+	 */
+	private Vocabolario[] getVocabolario() {
+
+		try {
+			String filename = "file:\\c:\\cygwin\\home\\Macchia\\svn\\xmLegesEditorApi\\src\\it\\cnr\\ittig\\xmleges\\editor\\services\\dom\\meta\\descrittori\\vocabolario.xml";
+			Archivio archivio = ParseXmlToVocabolario.parse(filename);
+			return archivio.getVocabolari();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		}
+		return new Vocabolario[0];
+	}
+
 	/**
 	 * Rimuove i tag con un determinato nome
 	 */
 	private void removeMetaByName(String nome, Node node) {
 		Document doc = documentManager.getDocumentAsDom();
 		Node toRemove;
-		
-		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
-	
+
+		Node activeMeta = nirUtilDom.findActiveMeta(doc, node);
+
 		do {
-			toRemove = UtilDom.findRecursiveChild(activeMeta,nome); 
+			toRemove = UtilDom.findRecursiveChild(activeMeta, nome);
 			if (toRemove != null) {
 				toRemove.getParentNode().removeChild(toRemove);
 			}
 		} while (toRemove != null);
 	}
-
-	
-
 }

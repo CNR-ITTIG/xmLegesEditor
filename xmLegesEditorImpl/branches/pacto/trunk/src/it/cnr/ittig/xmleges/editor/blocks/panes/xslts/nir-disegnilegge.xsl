@@ -47,6 +47,7 @@ exclude-result-prefixes="h nir xlink" xmlns="http://www.w3.org/HTML/1998/html4" 
 	</xsl:template>
 	<xsl:template match="nir:emanante">
 		<div class="sinistra">
+		<span></span>
 			<xsl:apply-templates/>
 		</div>
 	</xsl:template>
@@ -63,6 +64,7 @@ exclude-result-prefixes="h nir xlink" xmlns="http://www.w3.org/HTML/1998/html4" 
 	</xsl:template>	
 	<xsl:template match="nir:intestazione/h:div ">
 		<div class="intestazione">
+		<span></span>
 		    <xsl:attribute name="style">
 			    <xsl:value-of select="@style"/>
 		    </xsl:attribute>

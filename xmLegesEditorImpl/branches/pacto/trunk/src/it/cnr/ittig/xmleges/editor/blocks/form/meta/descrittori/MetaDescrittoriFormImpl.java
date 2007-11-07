@@ -14,7 +14,6 @@ import it.cnr.ittig.xmleges.core.util.date.UtilDate;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Pubblicazione;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Redazione;
 import it.cnr.ittig.xmleges.editor.services.form.meta.descrittori.MetaDescrittoriForm;
-import it.cnr.ittig.xmleges.editor.services.form.urn.UrnForm;
 
 import java.awt.Component;
 import java.awt.Dimension;

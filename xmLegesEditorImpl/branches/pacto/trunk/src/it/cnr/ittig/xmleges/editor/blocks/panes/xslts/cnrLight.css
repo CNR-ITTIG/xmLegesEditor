@@ -7,14 +7,14 @@
 
 
 
-@namespace h url(http://www.w3.org/HTML/1998/html4);
+/* @namespace h url(http://www.w3.org/HTML/1998/html4); ????*/
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * ELEMENTO ROOT                                                                                                       *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-body { font-family: "Verdana", "Tahoma", "Times New Roman",  "Book Antiqua";
+body { font-family: Verdana, Tahoma, Times New Roman,  Book Antiqua;
 		   font-size: 1.1em; line-height:1.6em;
        background-color: #aaaaaa; color: #494949; }
 
@@ -59,7 +59,7 @@ body { font-family: "Verdana", "Tahoma", "Times New Roman",  "Book Antiqua";
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * FORMULA INIZIALE, FINALE e CONCLUSIONE                                                                              *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-.formulainiziale        {  margin: 10 pt;    display: block;  text-align: center;                     }
+.formulainiziale        {  margin: 10pt;    display: block;  text-align: center;                     }
 .preambolo              {  margin-top: 1em;  display: block;  text-align: justify; text-indent: 1em; font-size: 9pt; line-height:12pt; }
 .formulafinale          {  margin-top: 50pt; margin-left: 10pt; margin-right: 10pt;    display: block;}
 .conclusione            {  display: block;                                                            }
@@ -104,7 +104,7 @@ h\:p,  .corpo   {  display: inline; font-size: 9pt; }
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 mod, .mod                {  display: inline; }
 /* virgolette, .virgolette  {  display: inline; margin-top: 1pt; margin-left: 1em; padding: 0.5em;  background: #EEEEEE;} */
-virgolette, .virgolette  {  display: block; margin-top: 1pt; margin-left: 1em; padding: 0.5em; border-style: groove; border-width: solid; background: #EEEEEE;}
+virgolette, .virgolette  {  display: block; margin-top: 1pt; margin-left: 1em; padding: 0.5em; border-style: groove; border: 1px solid; background: #EEEEEE;}
 mod articolo, mod comma,
 mod el, mod en,
 .mod .articolo, .mod .comma,
@@ -148,7 +148,10 @@ h\:li,    li    {  display: list-item;  margin-top: 5pt; }
 /* Links */
 
 h\:a:visited, a:visited       {  color: green; text-decoration: none;}
-h\:a:link,    a:link          {  color: brown; text-decoration: none;}
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+* Modifica I+ 																										   *
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+h\:a:link,    a:link          {  color: red; text-decoration: none;}
 h\:a:hover,   a:hover         {  background: yellow; }
 
 rif, .rif  {  display: inline; text-decoration: underline;}
