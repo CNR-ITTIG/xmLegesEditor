@@ -236,8 +236,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <!--	item action="file.removepi" /	-->   
                     <separator/>
                     
-					<item action="file.savemonovig" />
-                    <separator/>
+					<!--	item action="file.savemonovig" />
+                    <separator/	-->
                     
                     <menu action="file.connect">                       
                         <item action="connect.webdav.open" />
