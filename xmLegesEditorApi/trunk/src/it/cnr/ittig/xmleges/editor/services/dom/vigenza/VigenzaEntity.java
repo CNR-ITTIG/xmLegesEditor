@@ -1,8 +1,11 @@
 package it.cnr.ittig.xmleges.editor.services.dom.vigenza;
 
-import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
-
 import org.w3c.dom.Node;
+
+import it.cnr.ittig.services.manager.ServiceException;
+import it.cnr.ittig.services.manager.ServiceManager;
+import it.cnr.ittig.services.manager.Serviceable;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 
 /**
  * Classe per la descrizione delle vigenze.
