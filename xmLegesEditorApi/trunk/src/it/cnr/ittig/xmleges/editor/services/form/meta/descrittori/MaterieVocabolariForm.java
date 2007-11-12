@@ -1,7 +1,7 @@
 package it.cnr.ittig.xmleges.editor.services.form.meta.descrittori;
 
 import it.cnr.ittig.services.manager.Service;
-import it.ipiu.digest.parse.Vocabolario;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Vocabolario;
 
 /**
  * Servizio per la gestione della form per i metadati descrittori delle materie del documento.
