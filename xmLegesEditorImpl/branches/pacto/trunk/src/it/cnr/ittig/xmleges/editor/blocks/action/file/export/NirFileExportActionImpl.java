@@ -122,7 +122,7 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 	ExportHTMLAction exportHTMLAction;
 	
 	/* *********** Modifica I+ ************* */
-	ExportLenyaAction exportLenyaAction;
+	//ExportLenyaAction exportLenyaAction;
 	/* ************************************* */
 
 	ExportPDFAction exportPDFAction;
@@ -190,8 +190,8 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 		actionManager.registerAction("file.export.html", exportHTMLAction);
 		
 		/* ******************** Modifica I+ ************************** */
-		exportLenyaAction = new ExportLenyaAction();
-		actionManager.registerAction("file.export.lenya", exportLenyaAction);
+//		exportLenyaAction = new ExportLenyaAction();
+//		actionManager.registerAction("file.export.lenya", exportLenyaAction);
 		/* ************************************************************* */
 		
 		exportPDFAction = new ExportPDFAction();
@@ -232,7 +232,7 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 		exportHTMLAction.setEnabled(!documentManager.isEmpty());
 		
 		/* ******************* Modifica I+ ************************ */
-		exportLenyaAction.setEnabled(!documentManager.isEmpty());
+//		exportLenyaAction.setEnabled(!documentManager.isEmpty());
 		/* ****************************************************** */
 		
 		//export per i DDL non è implementato (disabilito)

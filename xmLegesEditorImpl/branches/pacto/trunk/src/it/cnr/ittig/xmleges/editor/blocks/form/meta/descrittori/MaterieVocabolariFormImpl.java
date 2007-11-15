@@ -18,6 +18,8 @@ import it.ipiu.digest.parse.Archivio;
 import it.ipiu.digest.parse.Materia;
 import it.ipiu.digest.parse.ParseXmlToVocabolario;
 import it.ipiu.digest.parse.Vocabolario;
+import it.jaime.configuration.ConfigurationFacade;
+import it.jaime.utilities.file.FileUtility;
 
 import java.awt.Component;
 import java.awt.Dimension;
@@ -34,8 +36,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JEditorPane;
 import javax.swing.JList;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 public class MaterieVocabolariFormImpl implements MaterieVocabolariForm,
 Loggable, Serviceable, Initializable, ActionListener {
@@ -85,7 +85,9 @@ Loggable, Serviceable, Initializable, ActionListener {
 	EventManager eventManager;
 
 	private Archivio archivio;
-
+	
+	String vocabolariSelectedItem;
+	
 	public boolean openForm() {
 		form.setSize(450, 300);
 		form.showDialog();
@@ -121,6 +123,7 @@ Loggable, Serviceable, Initializable, ActionListener {
 		this.archivio.setVocabolario(materie, vocabolario);
 	}
 
+	
 	public Vocabolario[] getVocabolari() {
 		return this.archivio.getVocabolari();
 	}
@@ -157,6 +160,7 @@ Loggable, Serviceable, Initializable, ActionListener {
 		materie_listtextfield = (ListTextField) serviceManager.lookup(ListTextField.class);
 		materie_teseo_listtextfield = (ListTextField) serviceManager.lookup(ListTextField.class);
 		sottoFormTeseo = (Form) serviceManager.lookup(Form.class);
+		
 		// disabilito il teseo
 		// try {
 		// if (isWin())
@@ -182,34 +186,18 @@ Loggable, Serviceable, Initializable, ActionListener {
 
 		comboVocabolari = (JComboBox) form.getComponentByName("editor.meta.descrittori.vocabolari.dativocabolari.nometagvocabolario");
 		
+		
 		/* ********* Modifiche I+ ********* */
-		//listaMaterieSelectedVocab = (JList)form.getComponentByName("");
-		
-		// Aggiungo l'ascoltatore sulla lista delle materie
-		if (listaMaterieSelectedVocab != null) {
-			listaMaterieSelectedVocab.addListSelectionListener(new ListSelectionListener() {
-
-				public void valueChanged(ListSelectionEvent e) {
-
-					String materiaSelezionata = (String) listaMaterieSelectedVocab.getSelectedValue();
-					logger.debug("La materia selezionata è " + materiaSelezionata);
-				}
-			});
-		}
-		else {
-			logger.debug("listaMaterieSelectedVocab è Null");
-		}
-		
+		listaMaterieSelectedVocab = (JList)form.getComponentByName("editor.meta.descrittori.vocabolari.riepilogo.materie");
+				
 		comboVocabolari.addItemListener(new ItemListener() {
 			
 			public void itemStateChanged(ItemEvent e) {
 
 				if (e.getStateChange() == ItemEvent.SELECTED) {
 
-					String vocabolariSelectedItem = comboVocabolari.getSelectedItem().toString();
-					//Vocabolario vocabolarioSelected  = new Vocabolario(vocabolariSelectedItem);
-					
-							
+					vocabolariSelectedItem = comboVocabolari.getSelectedItem().toString();
+																
 					String[] materieToShow = getMaterieVocab(vocabolariSelectedItem);
 					
 					if (materieToShow != null){
@@ -246,15 +234,18 @@ Loggable, Serviceable, Initializable, ActionListener {
 		formMaterieTeseo
 		.setName("editor.meta.descrittori.materie.materieteseo");
 
-		sottoFormTeseo.setMainComponent(getClass().getResourceAsStream(
-		"TeseoBrowser.jfrm"));
-		materie_teseo_listtextfield
-		.setEditor(new MaterieTeseoListTextFieldEditor(sottoFormTeseo));
-
-		//TODO parametrizzare il percorso del file 
-		String filename = "file:\\c:\\cygwin\\home\\Macchia\\svn\\xmLegesEditorApi\\src\\it\\cnr\\ittig\\xmleges\\editor\\services\\dom\\meta\\descrittori\\vocabolario.xml";
-		this.archivio = ParseXmlToVocabolario.parse(filename);
-	}
+		sottoFormTeseo.setMainComponent(getClass().getResourceAsStream("TeseoBrowser.jfrm"));
+		materie_teseo_listtextfield.setEditor(new MaterieTeseoListTextFieldEditor(sottoFormTeseo));
+	
+		//IPIU-TODO configuration
+		
+		String filename = ConfigurationFacade.get("config.properties/archivio.path");
+		String path = FileUtility.getInstance().getPath(filename);
+	
+		this.archivio = ParseXmlToVocabolario.parse(path);
+		
+		setVocabolari(this.archivio.getVocabolari());
+		}
 
 	/*
 	 * (non-Javadoc)
@@ -280,6 +271,7 @@ Loggable, Serviceable, Initializable, ActionListener {
 	 * della finestra "Materie".
 	 */
 	private void modificaMaterie() {
+		// NOTA : converto le materie del vocabolario selezionate da un String[] a un Vector.
 		Vector v = new Vector();
 		String[] materieVocab = getMaterieSelectedVocabolario();
 		if (materieVocab != null) {
@@ -287,22 +279,7 @@ Loggable, Serviceable, Initializable, ActionListener {
 				v.add(materieVocab[i]);
 			}
 		}
-//		if (isWin() && isteseoOK()) {
-//		materie_teseo_listtextfield.setListElements(v);
-//		formMaterieTeseo.showDialog();
-
-//		if (formMaterieTeseo.isOk()) {
-
-//		materieVocab = new String[materie_teseo_listtextfield
-//		.getListElements().size()];
-//		materie_teseo_listtextfield.getListElements().toArray(
-//		materieVocab);
-
-//		listaMaterieSelectedVocab.setListData(materieVocab);
-//		setMaterieVocab(materieVocab, (String) comboVocabolari
-//		.getSelectedItem());
-//		}
-//		} else {
+		//
 		materie_listtextfield.setListElements(v);
 		formMaterie.showDialog();
 
@@ -314,7 +291,6 @@ Loggable, Serviceable, Initializable, ActionListener {
 
 			setMaterieVocab(materieVocab, comboVocabolari.getSelectedItem().toString());
 		}
-//	}
 }
 
 
@@ -607,5 +583,19 @@ Loggable, Serviceable, Initializable, ActionListener {
 				estraiSelezionati((String) e.getSource());
 			}
 		}
+	}
+
+	/* (non-Javadoc)
+	 * @see it.cnr.ittig.xmleges.editor.services.form.meta.descrittori.MaterieVocabolariForm#geVocabolarioSelected()
+	 */
+	public Vocabolario geVocabolarioSelected() {
+		Vocabolario vocabolarioSelected  = new Vocabolario(comboVocabolari.getSelectedItem().toString());
+		if (listaMaterieSelectedVocab.getSelectedValue() != null) {
+			Object[] materieSelected = listaMaterieSelectedVocab.getSelectedValues();
+			for (int i = 0; i < materieSelected.length; i++) {
+				vocabolarioSelected.addMateria(materieSelected[i].toString());
+			}
+		}
+		return vocabolarioSelected;
 	}
 }

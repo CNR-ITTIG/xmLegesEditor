@@ -245,15 +245,19 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		}
 
 	}
+	/* (non-Javadoc)
+	 * @see it.cnr.ittig.xmleges.editor.services.action.meta.MetaAction#doMaterie()
+	 */
 	public void doMaterie() {
 		Node node = selectionManager.getActiveNode();
-		Vocabolario[] vocabolariOnDoc = materie.getVocabolari(node);
-		materieForm.setVocabolari(vocabolariOnDoc);
-		
-		//Vocabolario[] vocabolariOnForm2 = materieForm.getVocabolari();
+//		Vocabolario[] vocabolariOnDoc = materie.getVocabolari(node);
+//		materieForm.setVocabolari(vocabolariOnDoc);
+
 		if (materieForm.openForm()) {
-			Vocabolario[] vocabolariOnForm = materieForm.getVocabolari();
-			materie.setVocabolari(node, vocabolariOnForm);												
+			Vocabolario vocabolarioSelected = materieForm.geVocabolarioSelected();
+			Vocabolario[] vocabolarioSelectedList = new Vocabolario[1];
+			vocabolarioSelectedList[0] = vocabolarioSelected;
+			materie.setVocabolari(node, vocabolarioSelectedList);												
 		}
 
 	}

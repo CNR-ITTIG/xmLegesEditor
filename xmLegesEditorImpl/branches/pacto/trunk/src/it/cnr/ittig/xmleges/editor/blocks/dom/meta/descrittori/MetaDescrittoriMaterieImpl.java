@@ -17,6 +17,10 @@ import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 import it.ipiu.digest.parse.Archivio;
 import it.ipiu.digest.parse.ParseXmlToVocabolario;
 import it.ipiu.digest.parse.Vocabolario;
+import it.jaime.configuration.ConfigLoadedException;
+import it.jaime.configuration.ConfigurationFacade;
+import it.jaime.configuration.MalFormedParameterExpression;
+import it.jaime.utilities.file.FileUtility;
 
 import java.io.IOException;
 
@@ -40,23 +44,21 @@ public class MetaDescrittoriMaterieImpl implements MetaDescrittoriMaterie,
 
 	NirUtilDom nirUtilDom;
 
+
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
 	}
 
 	public void service(ServiceManager serviceManager) throws ServiceException {
-		rinumerazione = (Rinumerazione) serviceManager
-				.lookup(Rinumerazione.class);
-		documentManager = (DocumentManager) serviceManager
-				.lookup(DocumentManager.class);
-		dtdRulesManager = (DtdRulesManager) serviceManager
-				.lookup(DtdRulesManager.class);
-		utilRulesManager = (UtilRulesManager) serviceManager
-				.lookup(UtilRulesManager.class);
+		rinumerazione = (Rinumerazione) serviceManager.lookup(Rinumerazione.class);
+		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
+		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
+
 	}
 
-	//TODO comment
+	//IPIU-TODO comment
 	public void setVocabolari(Node node, Vocabolario[] vocabolari) {
 
 		Document doc = documentManager.getDocumentAsDom();
@@ -138,7 +140,9 @@ public class MetaDescrittoriMaterieImpl implements MetaDescrittoriMaterie,
 			}
 		}
 
-		// TODO Comment
+		/**
+		 * Effettuando il merge tra due array di Vcabolari ottengo un unico array.
+		 */
 		Vocabolario[] vocabolarios = Archivio.merge(vocabolariOnDoc, vocabolariOnDoctmp);
 
 		return vocabolarios;
@@ -155,12 +159,20 @@ public class MetaDescrittoriMaterieImpl implements MetaDescrittoriMaterie,
 	private Vocabolario[] getVocabolario() {
 
 		try {
-			String filename = "file:\\c:\\cygwin\\home\\Macchia\\svn\\xmLegesEditorApi\\src\\it\\cnr\\ittig\\xmleges\\editor\\services\\dom\\meta\\descrittori\\vocabolario.xml";
-			Archivio archivio = ParseXmlToVocabolario.parse(filename);
+			//IPIU-TODO configuration
+			String filename = ConfigurationFacade.get("config.properties/archivio.path");
+			String path = FileUtility.getInstance().getPath(filename);
+			
+			Archivio archivio = ParseXmlToVocabolario.parse(path);
+			
 			return archivio.getVocabolari();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (ConfigLoadedException e) {
+			e.printStackTrace();
+		} catch (MalFormedParameterExpression e) {
 			e.printStackTrace();
 		}
 		return new Vocabolario[0];
