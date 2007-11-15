@@ -16,9 +16,9 @@
 	<classpathentry kind="lib" path="lib/commons-logging-api-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/dom4j-1.5.2.jar"/>
 	<classpathentry kind="lib" path="lib/jdic/jdic.jar"/>
-	<classpathentry kind="lib" path="C:/cygwin/home/Macchia/svn/xmLegesEditorVocabolario/deploy/xmLegesEditorVocabolario.jar"/>
-	<classpathentry kind="lib" path="C:/cygwin/home/Macchia/svn/it.ipiu.jaime.configuration/deploy/it.ipiu.jaime.configuration.jar"/>
-	<classpathentry kind="lib" path="C:/cygwin/home/Macchia/svn/it.ipiu.jaime.utils/deploy/it.ipiu.jaime.utils.jar"/>
-	<classpathentry kind="lib" path="C:/cygwin/home/Macchia/svn/xmLegesEditorVocabolarioTest/deploy/xmLegesEditorVocabolarioTest.jar"/>
+	<classpathentry kind="lib" path="lib/xmLegesEditorVocabolario.jar"/>
+	<classpathentry kind="lib" path="lib/xmLegesEditorVocabolarioTest.jar"/>
+	<classpathentry kind="lib" path="lib/it.ipiu.jaime.configuration.jar"/>
+	<classpathentry kind="lib" path="lib/it.ipiu.jaime.utils.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
