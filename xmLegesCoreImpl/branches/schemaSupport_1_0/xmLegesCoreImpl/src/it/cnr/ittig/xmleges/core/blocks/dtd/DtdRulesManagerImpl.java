@@ -166,7 +166,7 @@ public class DtdRulesManagerImpl implements DtdRulesManager, DeclHandler, Loggab
 		if (dtdPath.startsWith(".")) // crea path name assoluto
 			dtdPath = xml_file.getParent().concat(File.separator+dtdPath.substring(2));
 
-		File dtd_file = UtilFile.getDTDFile(dtdPath);
+		File dtd_file = UtilFile.getGrammarFile(dtdPath);
 
 		// Generazione della chiave
 		try {
