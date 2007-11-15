@@ -9,6 +9,6 @@
 	<classpathentry kind="lib" path="commons-logging-1.1.jar"/>
 	<classpathentry kind="lib" path="commons-logging-adapters-1.1.jar"/>
 	<classpathentry kind="lib" path="commons-logging-api-1.1.jar"/>
-	<classpathentry kind="lib" path="C:/cygwin/home/Macchia/svn/xmLegesEditorVocabolario/deploy/xmLegesEditorVocabolario.jar"/>
+	<classpathentry kind="lib" path="xmLegesEditorVocabolario.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
