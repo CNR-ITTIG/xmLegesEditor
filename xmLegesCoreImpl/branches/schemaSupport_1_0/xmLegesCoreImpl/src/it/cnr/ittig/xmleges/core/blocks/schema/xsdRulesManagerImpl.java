@@ -2,6 +2,7 @@ package it.cnr.ittig.xmleges.core.blocks.schema;
 
 
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
+import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 
 import java.io.File;
 import java.util.Collection;
@@ -32,6 +33,7 @@ import org.eclipse.xsd.XSDTypeDefinition;
 import org.eclipse.xsd.XSDWildcard;
 import org.eclipse.xsd.XSDParticle.DFA.State;
 import org.eclipse.xsd.XSDParticle.DFA.Transition;
+import org.eclipse.xsd.impl.XSDDiagnosticImpl;
 import org.eclipse.xsd.impl.XSDParticleImpl;
 import org.eclipse.xsd.util.XSDResourceFactoryImpl;
 import org.eclipse.xsd.util.XSDResourceImpl;
@@ -49,14 +51,22 @@ public class xsdRulesManagerImpl{
 	protected XSDSchema schema;
 	
 	
-	public xsdRulesManagerImpl(){		
+	public xsdRulesManagerImpl(){	
 		rules = new HashMap();
 		elemDeclNames = new HashMap();
 		alternative_contents = new HashMap();
 		attributes = new HashMap();
 	}
 
-		
+	
+	public void clear() {
+		rules = new HashMap();
+		elemDeclNames = new HashMap();
+		alternative_contents = new HashMap();
+		attributes = new HashMap();
+	}
+	
+	
 	/**
 	 * 
 	 * @param schemaURL
@@ -80,7 +90,7 @@ public class xsdRulesManagerImpl{
  	            XSDElementDeclaration elemDecl = (XSDElementDeclaration)iter.next();
  	            createRuleForElement(elemDecl);
  	            createRuleForAttributes(elemDecl);
- 	            createAlternativeContents(elemDecl);  
+ 	            //createAlternativeContents(elemDecl);  
  	           
  	            
  	      }
@@ -115,36 +125,22 @@ public class xsdRulesManagerImpl{
    	            createRuleForAttributes(elemDecl); 
    		  	}
         }
-        
-        
-		
+        	
 //		printRules();
-//		printAttrRules();
-//	
-//		System.err.println("");
-//        System.err.println("------------------------ END ELEMENTS -------------------");
-//        System.err.println("");
-//        
-		  
+		printAttrRules();
+   
         System.err.println("Creating Rules DONE");
 	}
 	
 	
-	public boolean assess(Node node){
-		
-		
+	
+	
 
-	//	XSDTypeDefinition typedef = elemDecl.getType();
-		
-		return true;
-	}
+	
 	
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////   ABBOZZO   DI  ALTERNATIVE CONTENTS     	///////////////////////////////////////
-	
-	
-	
 	
 	/**
 	 * 
@@ -152,11 +148,7 @@ public class xsdRulesManagerImpl{
 	 * @return
 	 */
 	public Collection createAlternativeContents(XSDElementDeclaration elemDecl){
-		
-		
-//		ContentGraph cg = createContentGraph(elemDecl.getQName());
-//		visitContentGraphPaths(cg);
-		
+			
 		// secondo me:
 		// i contents_strings per ogni elemento dovrebbero essere  come minimo la lista di tutti i possibili cammini minimi
 		// ancora piu' utile, la lista di tutti i cammini senza cicli da start ad end nel grafo. 
@@ -168,102 +160,29 @@ public class xsdRulesManagerImpl{
 		// altrimenti si puo' fare in modo di richiedere un "cammino" (sequenza di label) che contiene una o piu' label in particolare.
 		// in questo caso pero' deve essere fatto in linea e non si puo' backuppare sulla hashtable
 		
-		Vector contents_strings = readAlternativeContents(elemDecl.getTypeDefinition());
+		Vector contents_strings = null; //readAlternativeContents(elemDecl.getTypeDefinition());
 		alternative_contents.put(elemDecl.getQName(), contents_strings);
 		
-		return contents_strings;
-		
-		
+		return contents_strings;		
 		
 	}
 	
-	
-	
-//	 USO nel caso di template minimale; nel caso degli alternative contents ci bastano i cammini composti da archi "complessi" e non bisogna esplodere gli archi:
-//	 while (true) {
-//		 if (visitContentGraph(graph) < Integer.MAX_VALUE){
-//			 //System.err.println("finite path");
-//			 return getXMLContent(graph);
-//		 }
-//		 //System.err.println("!   infinite path:  exploding");
-//		 // no default content: substitute each element with its ContentGraph
-//		 explodeContentGraph(graph);
-//	 }
-	
-	
-	static protected int visitContentGraphPaths(ContentGraph graph) {
-		ContentGraph.Node first = graph.getFirst();
-		ContentGraph.Node last = graph.getLast();
 
-		// init visit
-		Vector queue = new Vector();
-		for (Iterator i = graph.visitNodes(); i.hasNext();)
-			((ContentGraph.Node) i.next()).resetVisit();
-		first.setVisit(0, "", null);
-		queue.add(first);
-
-		// visit the graph
-		while (queue.size() > 0) {
-			// pop first element from queue
-			ContentGraph.Node tovisit = (ContentGraph.Node) queue.elementAt(0);
-			queue.remove(0);
-
-			// for all the outgoing edges
-			for (int i = 0; i < tovisit.getNoEdges(); i++) {
-				// check if the edge is visitable
-
-				int step = Integer.MAX_VALUE;
-				Object edge = tovisit.getEdge(i);
-				String edgename = tovisit.getEdgeName(i);
-
-				if (edge instanceof ContentGraph)
-					step = visitContentGraphPaths((ContentGraph) edge);
-				else if (edgename.compareTo("#PCDATA") == 0)
-					step = 1;
-				else if (edgename.compareTo("#EPS") == 0)
-					step = 0;
-
-				if (step < Integer.MAX_VALUE) {
-					// if this path is shorter set the new path
-					ContentGraph.Node destination = tovisit.getDestination(i);
-					int visit_length = tovisit.getVisitLength() + step;
-					if (destination.getVisitLength() > visit_length) {
-						// push the next node of the path in the queue
-						destination.setVisit(visit_length, edge, tovisit);
-						queue.add(destination);
-					}
-				}
-			}
-		}
-
-		return last.getVisitLength();
-	}
 	
 	
 	//////////////////////////////////// FINE ALTERNATIVE CONTENTS ///////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	
-	/**
-	 * 
-	 * @param elemDecl
-	 * @return
-	 */
-	public Vector readAlternativeContents(XSDTypeDefinition typeDef) {
-		return null;
-	}
-	
-	
-	
-	
-	
+
+
 	
 	/**
 	 * 
 	 * @param elemDecl
 	 * @param dfa
 	 */
-	public void mergedAddRule(XSDElementDeclaration elemDecl, XSDParticle.DFA dfa){
+	private void mergedAddRule(XSDElementDeclaration elemDecl, XSDParticle.DFA dfa){
 	    	    	
 	    	if(rules.get(elemDecl.getQName())==null){
 	    		//System.err.println("rule for "+name+" NOT present");
@@ -280,42 +199,13 @@ public class xsdRulesManagerImpl{
 	 }
 	  
 	
-	/**
-	 * 
-	 * @param elemName
-	 * @return
-	 */         
-	public String getDFAType(String elemName){
-			XSDTypeDefinition typedef = ((XSDElementDeclaration)elemDeclNames.get(elemName)).getType();
-			 if (typedef instanceof XSDSimpleTypeDefinition)
-				 return " SIMPLE ";
-			 if (typedef instanceof XSDComplexTypeDefinition){
-				 if (typedef.getComplexType()!=null)
-					 return " COMPLEX ";
-				 else
-					 return "  SPECIALE ";
-			 }
-			return " UNDEFINED ";
-	}
 	
-	/**
-	 * 
-	 *
-	 */
-	public void printRules(){
-	    	for(Iterator it = rules.keySet().iterator(); it.hasNext();){
-	    		String elemName = (String) it.next();
-	    		System.err.println("********** AUTOMA  "+getDFAType(elemName)+" DI "+elemName+" ************");
-	              printDFA((XSDParticle.DFA)rules.get(elemName));
-	    	}
-	}
-	    
 	
 	/**
 	 * 
 	 * @param elemDecl
 	 */
-	public void createRuleForElement(XSDElementDeclaration elemDecl){
+	private void createRuleForElement(XSDElementDeclaration elemDecl){
 
 			XSDTypeDefinition typedef = elemDecl.getType();
 
@@ -395,7 +285,7 @@ public class xsdRulesManagerImpl{
 	 * 
 	 * @param elemDecl
 	 */
-	public void createRuleForAttributes(XSDElementDeclaration elemDecl){
+	private void createRuleForAttributes(XSDElementDeclaration elemDecl){
 
         String attrName=""; //nome dell'attributo analizzato
         String type=""; //type dell'attributo
@@ -497,6 +387,51 @@ public class xsdRulesManagerImpl{
 	}
 	
 
+	
+	
+	
+	/**
+	 * 
+	 * @param elemName
+	 * @return
+	 */         
+	private String getDFAType(String elemName){
+			XSDTypeDefinition typedef = ((XSDElementDeclaration)elemDeclNames.get(elemName)).getType();
+			 if (typedef instanceof XSDSimpleTypeDefinition)
+				 return " SIMPLE ";
+			 if (typedef instanceof XSDComplexTypeDefinition){
+				 if (typedef.getComplexType()!=null)
+					 return " COMPLEX ";
+				 else
+					 return "  SPECIALE ";
+			 }
+			return " UNDEFINED ";
+	}
+	
+	/**
+	 * 
+	 *
+	 */
+	private void printRules(){
+	    	for(Iterator it = rules.keySet().iterator(); it.hasNext();){
+	    		String elemName = (String) it.next();
+	    		System.err.println("********** AUTOMA  "+getDFAType(elemName)+" DI "+elemName+" ************");
+	              printDFA((XSDParticle.DFA)rules.get(elemName));
+	    	}
+	}
+	    
+	
+	/**
+     * 
+     * @param dfa
+     */
+    protected static void printDFA(XSDParticle.DFA dfa)
+    {	
+      ((XSDParticleImpl.XSDNFA)dfa).dump(System.err);
+    }
+    
+    
+	
 	
 	/**
 	 * 
@@ -652,12 +587,7 @@ public class xsdRulesManagerImpl{
 	}
 	
 	
-	
-	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	
+
 	
     /**
     * * @param schemaURL
@@ -752,11 +682,26 @@ public class xsdRulesManagerImpl{
 		return null;
 	}
    
-     
+	
+	//
+	//
+	//									FINE METODI CARICAMENTO
+	//
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	
+	
+
+	
+	
+	
+	
 	
 	////////////////////////////////////////////
 	////
-	//// 	Metodi di validazione  
+	//// 	Metodi di VALIDAZIONE 
     ////
 	////
 
@@ -786,8 +731,7 @@ public class xsdRulesManagerImpl{
 		if (rule == null)
 			System.err.println("No rule for element <" + elem_name + ">");
 
-		return align(elem_name,elem_children,withgaps);
-		
+		return align(elem_name,elem_children,withgaps);		
 	}
 	
 	/**
@@ -809,6 +753,54 @@ public class xsdRulesManagerImpl{
 	}
 	
 	
+	/**
+	 * 
+	 * @param node
+	 * @return
+	 */
+	public boolean assess(Node node){
+        boolean isvalid=false;
+        String diagnosticMessages="";
+        XSDElementDeclaration elemDecl = (XSDElementDeclaration)elemDeclNames.get(node.getNodeName());
+       
+        String toTest=UtilDom.getTextNode(node);
+        XSDTypeDefinition typedef = elemDecl.getType ();
+           
+        if (typedef instanceof XSDSimpleTypeDefinition){
+            XSDSimpleTypeDefinition simpleTypeDef=(XSDSimpleTypeDefinition) typedef;
+         
+            System.out.println("\n ----> assess "+toTest+ " su "+simpleTypeDef.getAliasName());
+            if(simpleTypeDef.assess(toTest).getDiagnostics().size()==0){
+            //    System.out.println(toTest+" è valido su "+simpleTypeDef.getAliasName());
+                isvalid=true;
+            }
+            else{
+                for (Iterator i = simpleTypeDef.assess(toTest).getDiagnostics().iterator(); i.hasNext(); ) {
+                   
+                    XSDDiagnosticImpl diagnostic = (XSDDiagnosticImpl) i.next();
+                    isvalid=false;
+        //            System.out.println(toTest+" non valido: "+diagnostic.getMessage());
+                    diagnosticMessages+=diagnostic.getMessage()+"\n";
+                   
+                }
+            }
+            return isvalid;
+        }else{
+            System.out.println("assess solo su simpletype!");
+            return false;
+        }
+	}
+
+	
+	//
+	//
+	//
+	//
+	//////////////////////////////////////////////////////////////////////////////////////////
+	//
+	//				METODI MANIPOLAZIONE       XSDFA
+	//
+	//
 	
 	/**
 	 * 
@@ -816,7 +808,7 @@ public class xsdRulesManagerImpl{
 	 * @param label
 	 * @return
 	 */
-	public XSDParticle.DFA.State getNextState(String ruleName, XSDParticle.DFA.State fromState, String label){
+	private XSDParticle.DFA.State getNextState(String ruleName, XSDParticle.DFA.State fromState, String label){
 		if(isMixed(ruleName) && label.equalsIgnoreCase("#PCDATA")){
 			return fromState;
 		}
@@ -830,7 +822,7 @@ public class xsdRulesManagerImpl{
 	 * @param label
 	 * @return
 	 */
-	public XSDParticle.DFA.Transition getAcceptingTransition(XSDParticle.DFA.State fromState, String label){
+	private XSDParticle.DFA.Transition getAcceptingTransition(XSDParticle.DFA.State fromState, String label){
 		
 		// FIXME     sistemare prefissi e namespace
 		String nameSpaceUri;
@@ -852,6 +844,8 @@ public class xsdRulesManagerImpl{
 	}
 	
 	
+	
+	//   questo ?
 	
 //	public XSDParticle.DFA.Transition accept(String namespaceURI, String localName)
 //    {
@@ -944,7 +938,7 @@ public class xsdRulesManagerImpl{
 	 * @return <code>true</code> se la sequenza di nodi allinea con l'automa
 	 * @throws DtdRulesManagerException
 	 */
-	public boolean align(String ruleName, Collection sequence, boolean with_gaps) {
+	private boolean align(String ruleName, Collection sequence, boolean with_gaps) {
 		XSDParticle.DFA rule = (XSDParticle.DFA) rules.get(ruleName);
 		if (with_gaps){
 			Vector startfrom = new Vector();
@@ -962,7 +956,7 @@ public class xsdRulesManagerImpl{
      * @param sequence
      * @return
      */
-	public boolean align (String ruleName, Collection sequence){
+	private boolean align (String ruleName, Collection sequence){
 	
 		XSDParticle.DFA rule = (XSDParticle.DFA) rules.get(ruleName);
 		XSDParticle.DFA.State initialState = rule.getInitialState();
@@ -988,7 +982,7 @@ public class xsdRulesManagerImpl{
 	 * @return <code>true</code> se la sequenza di nodi allinea con l'automa
 	 * @throws DtdRulesManagerException
 	 */
-	public boolean alignWithGaps(String ruleName, Iterator nav, Vector startFrom, List nodes){
+	private boolean alignWithGaps(String ruleName, Iterator nav, Vector startFrom, List nodes){
 
 		if (!nav.hasNext())
 			return true;
@@ -1030,7 +1024,7 @@ public class xsdRulesManagerImpl{
 	 * @return la collezione di alternative
 	 * @throws DtdRulesManagerException
 	 */
-	public Collection alignAlternatives(Collection sequence, String ruleName, int choice_point) {
+	private Collection alignAlternatives(Collection sequence, String ruleName, int choice_point) {
 		
 		XSDParticle.DFA rule = (XSDParticle.DFA) rules.get(ruleName);
 		
@@ -1109,16 +1103,43 @@ public class xsdRulesManagerImpl{
 	}
 	
 	
-	/**
+
+    
+    
+    /**
      * 
-     * @param dfa
+     * @param elemName
+     * @return
      */
-    protected static void printDFA(XSDParticle.DFA dfa)
-    {	
-      ((XSDParticleImpl.XSDNFA)dfa).dump(System.err);
+    //FIXME riguardare meglio; da' eccezione sui simpleType (es. h:hr) ; messo un try-catch
+    private boolean isMixed(String elemName){
+    	XSDElementDeclaration elemDecl = (XSDElementDeclaration) elemDeclNames.get(elemName);
+		XSDTypeDefinition elemType = elemDecl.getType();
+		try{
+			return((elemType.getComplexType()!=null && ((XSDComplexTypeDefinition)elemType).isMixed())
+					||(elemDecl.getType().getBaseType().getComplexType()!=null && ((XSDComplexTypeDefinition)elemDecl.getType().getBaseType()).isMixed()));
+		}catch(Exception e){
+			return false;
+		}
+		// eredita mixed anche dal tipo base che estende [vedi ad esempio dataDoc, numDoc]
     }
     
-
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /////////////////////////////////////////////////////////////////////////////////////////////
+    //
+    //				   METODI DI CREAZIONE E MANIPOLAZIONE DI CONTENTGRAPH
+    //
+    //
+    
 	/**
 	 * 
 	 * @param elemName
@@ -1178,25 +1199,6 @@ public class xsdRulesManagerImpl{
         return graph;
     }
     
-    
-    
-    /**
-     * 
-     * @param elemName
-     * @return
-     */
-    //FIXME riguardare meglio; da' eccezione sui simpleType (es. h:hr) ; messo un try-catch
-    public boolean isMixed(String elemName){
-    	XSDElementDeclaration elemDecl = (XSDElementDeclaration) elemDeclNames.get(elemName);
-		XSDTypeDefinition elemType = elemDecl.getType();
-		try{
-			return((elemType.getComplexType()!=null && ((XSDComplexTypeDefinition)elemType).isMixed())
-					||(elemDecl.getType().getBaseType().getComplexType()!=null && ((XSDComplexTypeDefinition)elemDecl.getType().getBaseType()).isMixed()));
-		}catch(Exception e){
-			return false;
-		}
-		// eredita mixed anche dal tipo base che estende [vedi ad esempio dataDoc, numDoc]
-    }
-    
+   
     
 }
