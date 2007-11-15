@@ -41,6 +41,12 @@ public interface MaterieVocabolariForm extends Service {
 	 * @param vocabolari
 	 */
 	public void setVocabolari(Vocabolario[] vocabolari);
+	
+	/**
+	 * Recupera il vocabolario e la materia selezionati
+	 * @return vocabolari
+	 */
+	public Vocabolario geVocabolarioSelected();
 
 	
 	
