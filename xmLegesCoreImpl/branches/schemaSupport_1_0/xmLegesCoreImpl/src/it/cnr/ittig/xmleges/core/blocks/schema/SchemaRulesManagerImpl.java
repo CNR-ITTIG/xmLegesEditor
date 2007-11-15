@@ -15,18 +15,10 @@ import it.cnr.ittig.services.manager.Loggable;
 import it.cnr.ittig.services.manager.Logger;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
-import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
 import it.cnr.ittig.xmleges.core.util.lang.UtilLang;
-import it.cnr.ittig.xmleges.core.util.xml.UtilXml;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -34,13 +26,12 @@ import java.util.Vector;
 
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.ext.DeclHandler;
 
 /**
  * Implementazione del servizio it.cnr.ittig.xmleges.editor.services.dtdrulesmanager.DtdRulesManager;
  * 
  */
-public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Loggable {
+public class SchemaRulesManagerImpl implements DtdRulesManager,  Loggable {
 
 	Logger logger;
 
@@ -53,7 +44,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 	 * Tabella hash contenente le regole per l'interrogazione sotto-forma di automi
 	 * deterministici. Ogni regola &egrave associata ad un elemento.
 	 */
-	protected HashMap rules;
+	//protected HashMap rules;
 
 	/**
 	 * Tabella hash dei possibili contenuti alternativi dei vari elementi. Ogni valore
@@ -61,7 +52,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 	 * elementi separati da virgole che rappresentano le possibili alternative. La tabella
 	 * hash &egrave indirizzata dai nomi degli elementi.
 	 */
-	protected HashMap alternative_contents;
+	//protected HashMap alternative_contents;
 
 	/**
 	 * Tabella hash degli attributi associati agli elementi. La tabella hash &egrave
@@ -72,543 +63,97 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 	 * costituito da un'istanza della classe AttributeDecl, e definisce l'attributo
 	 * specifico.
 	 */
-	protected HashMap attributes;
+	//protected HashMap attributes;
 
 	protected boolean pre_check = false;
 	
 	
 	protected xsdRulesManagerImpl xsdRM;
 
-	// --------- Funzioni per l'interpretazione della DTD ---------------------
 
-	public void attributeDecl(String elementName, String attributeName, String type, String valueDefault, String value) {
-		if (logger.isDebugEnabled())
-			logger.debug("ATTRIBUTE: elem=" + elementName + " name=" + attributeName + " type=" + type + " default=" + valueDefault + " value=" + value);
-
-		// get the hash table of attributes associated with the element
-		// or create a new one if not existing
-		HashMap att_hash = (HashMap) attributes.get(elementName);
-		if (att_hash == null) {
-			att_hash = new HashMap();
-			attributes.put(elementName, att_hash);
-		}
-
-		// add a new attribute definition
-		att_hash.put(attributeName, new AttributeDeclaration(type, valueDefault, value));
-	}
-
-	
-	public boolean assess(Node node){
-		
-		return xsdRM.assess(node);
-		
-
-	}
-	
-	public void elementDecl(String name, String model) {
-
-		if (logger.isDebugEnabled())
-			logger.debug("ELEMENT: name=" + name + " model=" + model);
-
-		try {
-			// add element rule
-			createRule(name, model);
-
-			// add alternative contents for element
-			createAlternativeContents(name, model);
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-		}
-	}
-
-	public void externalEntityDecl(String name, String publicId, String systemId) {
-		if (logger.isDebugEnabled())
-			logger.debug("EXTERNAL ENTITY: name=" + name + " publicId=" + publicId + " systemId=" + systemId);
-	}
-
-	public void internalEntityDecl(String name, String value) {
-		if (logger.isDebugEnabled())
-			logger.debug("INTERNAL ENTITY: name=" + name + " value=" + value);
-	}
 
 	///////////////////////////////////////////////////////////////////////
 	//
-	//
-	//
 	//				 INIZIALIZZAZIONE     SCHEMA
-	//
-	//
-	//
-	//
-	//
-	//
-	//
 	//
 	
 	
 	// ------------ COSTRUTTORI --------------------
 
-	public SchemaRulesManagerImpl() {
-		rules = new HashMap();
-		alternative_contents = new HashMap();
-		attributes = new HashMap();
-		
-		
-		
-		
-		// TODO reimplementare per gli Schema il caricamento 
-		
-		
-		
-		// INIZIALIZZA GLI AUTOMI DALLO SCHEMA
-		//loadRules("dtdData/nirbase.dtd");
-		xsdRM = new xsdRulesManagerImpl();
-		//xsdRM.loadRules("xsdData/NIR_XSD_base/nirlight.xsd");
-		//xsdRM.loadRules("xsdData/NIR_XSD_completo/nirstrict.xsd");
-		
-		xsdRM.loadRules("xsdData/restriction/restriction2.xsd");
-		
-		//String schemaURL = "../xmLegesEditor/xsdData/restriction/restriction.xsd";
-		
-	
+	public SchemaRulesManagerImpl() {				
+		xsdRM = new xsdRulesManagerImpl();		
 	}
 	
 
 	public void clear() {
-		rules = new HashMap();
-		alternative_contents = new HashMap();
-		attributes = new HashMap();
+		xsdRM.clear();
 	}
 
 	// ------------ INIZIALIZZAZIONE DELLE REGOLE --------------------
 
 	public void loadRules(String filename) {
+		File xml_file = new File(filename);
+		loadRules(xml_file);
+	}
+	
+	
+	public void loadRules(String filename, String schemaPath) {
+		logger.info("START loading rules from SCHEMA");
+	
+		File xml_file = new File(filename);
 		
-		// TODO reimplementare per gli Schema
-
-//		//logger.info("START loading rules from DTD");
-//
-//		// open file
-//		File xml_file = new File(filename);
-//
-//		// clear old rules
-//		clear();
-//
-//		// parse DTD
-//		UtilXml.readDTD(xml_file, this);
-//
-////		logger.info("END loading rules from DTD");
-
+		if (schemaPath.startsWith(".")) // crea path name assoluto
+			schemaPath = xml_file.getParent().concat(File.separator+schemaPath.substring(2));
+		
+		File schema_file = UtilFile.getGrammarFile(schemaPath);
+		logger.info("------------>   schemaURL= "+schema_file.getAbsolutePath());
+		// clear old rules
+		clear();
+		xsdRM.loadRules(schema_file.getAbsolutePath());
+		logger.info("END loading rules from SCHEMA");
 	}
 
-	public void loadRules(String filename, String dtdPath) {
-		
-		// TODO reimplementare per gli Schema
-
-//		String key = null;
-//		File xml_file = new File(filename);
-//
-//		if (dtdPath.startsWith(".")) // crea path name assoluto
-//			dtdPath = xml_file.getParent().concat(File.separator+dtdPath.substring(2));
-//
-//		File dtd_file = UtilFile.getDTDFile(dtdPath);
-//
-//		// Generazione della chiave
-//		try {
-//			key = UtilLang.bytesToHexString(UtilFile.calculateMD5(dtd_file));
-//			logger.debug("key for " + dtdPath + " = " + key.toString());
-//		} catch (Exception ex) {
-//			logger.error(ex.getMessage(), ex);
-//		}
-//
-//		String md5Path = new String("dtdmd5");
-//		new File(md5Path).mkdir();
-//		File rulesMap = new File(md5Path + File.separator, key + "_rules");
-//		File alternativesMap = new File(md5Path, key + "_alternatives");
-//		File attributesMap = new File(md5Path, key + "_attributes");
-//
-//		if (key != null && rulesMap.exists() && alternativesMap.exists() && attributesMap.exists()) {
-//			loadRulesFromCachedMap(rulesMap, alternativesMap, attributesMap);
-//		} else {
-//			loadRules(xml_file);
-//			saveRulesOnCachedMap(rulesMap, alternativesMap, attributesMap);
-//		}
-	}
-
+	
 	public void loadRules(File xml_file) {
-				
-		// TODO reimplementare per gli Schema
-
-//		logger.info("START loading rules from DTD");
-//
-//		// clear old rules
-//		clear();
-//
-//		// parse DTD
-//		UtilXml.readDTD(xml_file, this);
-//		
-//		printAlternativeContents();
-//
-//		logger.info("END loading rules from DTD");
-		
+		// TODO dal file xml estrarre lo schemaURL dall'intestazione		
 	}
 	
-	
-	private void printAlternativeContents(){
-		
-		System.err.println("****************** ALTERNATIVE CONTENTS ****************************");
-		for(Iterator it = alternative_contents.keySet().iterator(); it.hasNext();){
-			String key = it.next().toString();
-			Vector v = (Vector)alternative_contents.get(key);
-			System.err.println("alternatives for "+key+"  SIZE "+v.size());
-			for(int i=0;i<v.size();i++){
-				System.err.println("------- ALT. "+(i+1)+"  "+v.get(i).toString());
-			}
-		}
-		
-	}
 
 	// lettura delle regole dalle mappe salvate su file
 
 	private void loadRulesFromCachedMap(File rulesMap, File alternativesMap, File attributesMap) {
-		logger.info("START loading rules from files");
 
-		FileInputStream fis = null;
-		ObjectInputStream in = null;
-
-		// reading rules
-		try {
-			fis = new FileInputStream(rulesMap);
-			in = new ObjectInputStream(new BufferedInputStream(fis));
-			rules = (HashMap) in.readObject();
-			in.close();
-		} catch (Exception ex) {
-			logger.error("Error reading rules map " + ex.getMessage(), ex);
-		}
-
-		// reading alternative_contents
-		try {
-			fis = new FileInputStream(alternativesMap);
-			in = new ObjectInputStream(new BufferedInputStream(fis));
-			alternative_contents = (HashMap) in.readObject();
-			in.close();
-		} catch (Exception ex) {
-			logger.error("Error reading alternatives map " + ex.getMessage(), ex);
-		}
-
-		// reading attributes
-		try {
-			fis = new FileInputStream(attributesMap);
-			in = new ObjectInputStream(new BufferedInputStream(fis));
-			attributes = (HashMap) in.readObject();
-			in.close();
-		} catch (Exception ex) {
-			logger.error("Error reading attributes map " + ex.getMessage(), ex);
-		}
-
-		logger.info("END loading rules from files");
 	}
 
 	// scrittura delle regole su mappe salvate su file
 
 	private void saveRulesOnCachedMap(File rulesMap, File alternativesMap, File attributesMap) {
-		FileOutputStream fos = null;
-		ObjectOutputStream out = null;
-
-		// saving rules
-		try {
-			fos = new FileOutputStream(rulesMap);
-			out = new ObjectOutputStream(new BufferedOutputStream(fos));
-			out.writeObject(rules);
-			out.close();
-		} catch (Exception ex) {
-			logger.error("Error saving rules map " + ex.getMessage(), ex);
-		}
-
-		// saving alternative_contents
-		try {
-			fos = new FileOutputStream(alternativesMap);
-			out = new ObjectOutputStream(new BufferedOutputStream(fos));
-			out.writeObject(alternative_contents);
-			out.close();
-		} catch (Exception ex) {
-			logger.error("Error saving alternatives map " + ex.getMessage(), ex);
-		}
-
-		// saving attributes
-		try {
-			fos = new FileOutputStream(attributesMap);
-			out = new ObjectOutputStream(new BufferedOutputStream(fos));
-			out.writeObject(attributes);
-			out.close();
-		} catch (Exception ex) {
-			logger.error("Error saving attributes map " + ex.getMessage(), ex);
-		}
-	}
-
-	/**
-	 * Crea una regola per un elemento a partire da un modello della DTD
-	 * 
-	 * @return la nuova regola
-	 * @throws DtdRulesManagerException
-	 */
-	protected DFSA createRule(String name, String model) throws DtdRulesManagerException {
-		// System.out.println("Creating FSA");
-		FSA qrule = readModel(model);
-
-		// System.out.println("Creating DFSA");
-		DFSA vrule = new DFSA(name, qrule);
-		rules.put(name, vrule);
-
-		return vrule;
-	}
-
-	/**
-	 * Crea i contenuti alternativi per un elemento
-	 * 
-	 * @return il vettore di alternative
-	 * @throws DtdRulesManagerException
-	 */
-	protected Collection createAlternativeContents(String name, String model) throws DtdRulesManagerException {
-		// System.out.println("Reading alternatives");
 		
-		return null;
-//		Vector contents_strings = readAlternativeContents(model);
-//		alternative_contents.put(name, contents_strings);
-//		System.err.println("---------------------- alternative content models -----------------------");
-//		System.err.println(name+ " "+model);
-//
-//		return contents_strings;
 	}
-
-	/**
-	 * Crea l'automa a stati finiti che rappresenta il content di un elemento
-	 * 
-	 * @param model modello dell'elemento da rappresentare
-	 * @throws DtdRulesManagerException
-	 */
-	protected FSA readModel(String model) throws DtdRulesManagerException {
-		FSA rule = new FSA();
-
-		int start = rule.addNode(); // aggiunge il nodo inizio
-		int end = rule.addNode(true); // aggiunge il nodo fine
-
-		if (model == "ANY")
-//			 rule.addTransition(start,end,"#ANY");
-			rule.addTransition(start, end, "#PCDATA");
-		else if (model == "EMPTY")
-			 rule.addTransition(start, end);
-		else
-			readContent(rule, start, end, model);
-
-		return rule;
-	}
-
-	/**
-	 * Divide una stringa in tokens separati da un carattere specificato. Le parti di
-	 * stringa racchiuse da parentesi tonde sono considerate come singoli tokens.
-	 * 
-	 * @param content stringa da separare
-	 * @param separator carattere separatore dei tokens
-	 * @return il vettore dei tokens
-	 */
-
-	protected Collection splitContent(String content, char separator) throws DtdRulesManagerException {
-		int size = content.length();
-		if (size == 0)
-			throw new DtdRulesManagerException("Empty content");
-
-		int last = 0;
-		int open_pars = 0;
-		Vector tokens = new Vector();
-		for (int i = 0; i < size; i++) {
-			char thischar = content.charAt(i);
-
-			if (thischar == '(')
-				open_pars++;
-			else if (thischar == ')')
-				open_pars--;
-
-			if (open_pars < 0)
-				throw new DtdRulesManagerException("Malformed content: " + content);
-			if (open_pars == 0) {
-				if (thischar == separator) {
-					if (last == i)
-						throw new DtdRulesManagerException("Malformed content: " + content);
-					tokens.add(content.substring(last, i));
-					last = i + 1;
-				}
-			}
-		}
-		tokens.add(content.substring(last, size));
-
-		return tokens;
-	}
-
-	/**
-	 * Aggiunge le transizioni che rappresentano questo content all'automa
-	 * 
-	 * @param automata automa da modificare
-	 * @param start indice del nodo inizio transizione
-	 * @param end indice del nodo fine transizione
-	 * @param item content da parsare
-	 * @param content il modello del contenuto di un elemento
-	 * @throws DtdRulesManagerException
-	 */
-	protected void readContent(FSA automata, int start, int end, String content) throws DtdRulesManagerException {
-		// get cardinality
-
-		boolean is_repeatable = false;
-		boolean is_optional = false;
-		if (content.endsWith("?"))
-			is_optional = true;
-		else if (content.endsWith("+"))
-			is_repeatable = true;
-		else if (content.endsWith("*")) {
-			is_optional = true;
-			is_repeatable = true;
-		}
-		if (is_optional || is_repeatable)
-			content = content.substring(0, content.length() - 1);
-
-		// parse content
-		if (content.startsWith("(") && content.endsWith(")")) {
-			content = content.substring(1, content.length() - 1);
-
-			// check if it is a sequence
-			Collection sequence = splitContent(content, ',');
-			if (sequence.size() > 1) {
-				int last = start;
-				for (Iterator i = sequence.iterator(); i.hasNext();) {
-					// add state for blocking epsilon transitions
-					int new_start = automata.addNode();
-					int new_end = automata.addNode();
-					readContent(automata, new_start, new_end, (String) i.next());
-					automata.addTransition(last, new_start);
-					last = new_end;
-				}
-				automata.addTransition(last, end);
-			} else {
-				// check if it's a choice
-				Collection choice = splitContent(content, '|');
-				if (choice.size() > 1) {
-					if (((String) choice.iterator().next()).equals("#PCDATA")) {
-						// mixed content, cardinality=='*'
-						is_optional = true;
-						is_repeatable = true;
-					}
-
-					for (Iterator i = choice.iterator(); i.hasNext();) {
-						// add state for blocking epsilon transitions
-						int new_start = automata.addNode();
-						int new_end = automata.addNode();
-						readContent(automata, new_start, new_end, (String) i.next());
-						automata.addTransition(start, new_start);
-						automata.addTransition(new_end, end);
-					}
-				} else {
-					// single element
-					readContent(automata, start, end, content);
-				}
-			}
-		} else {
-			// single element
-			automata.addTransition(start, end, content);
-		}
-
-		// cardinality modificator
-		if (is_optional)
-			automata.addTransition(start, end);
-		if (is_repeatable)
-			automata.addTransition(end, start);
-	}
-
-	protected Vector mergeAlternatives(Vector before, Vector after) {
-		if (before.size() == 0)
-			return after;
-		if (after.size() == 0)
-			return before;
-
-		Vector alternatives = new Vector();
-		for (Iterator i = before.iterator(); i.hasNext();) {
-			String str_before = (String) i.next();
-			for (Iterator l = after.iterator(); l.hasNext();) {
-				String str_after = (String) l.next();
-				alternatives.add(str_before + "," + str_after);
-			}
-		}
-		return alternatives;
+	
+	//
+	//
+	//
+	////////////////////   FINE   INIZIALIZZAZIONE SCHEMA   /////////////////////////
+	
+	
+	
+	
+	
+	
+	public boolean assess(Node node){
+		return xsdRM.assess(node);
 	}
 	
 	
-
-	/**
-	 * Crea le possibili alternative del contenuto di un elemento
-	 * 
-	 * @param content il modello del contenuto di un elemento
-	 * @throws DtdRulesManagerException
-	 */
-	protected Vector readAlternativeContents(String content) throws DtdRulesManagerException {
-		
-		
-		
-		return null;
-
-//		Vector alternatives = new Vector();
-//
-//		// get cardinality
-//		boolean is_repeatable = false;
-//		boolean is_optional = false;
-//		if (content.endsWith("?"))
-//			is_optional = true;
-//		else if (content.endsWith("+"))
-//			is_repeatable = true;
-//		else if (content.endsWith("*")) {
-//			is_optional = true;
-//			is_repeatable = true;
-//		}
-//		if (is_optional || is_repeatable)
-//			content = content.substring(0, content.length() - 1);
-//
-//		// optional contents are ignored, repeating is not considered
-//		if (is_optional)
-//			return alternatives;
-//
-//		// parse content
-//		if (content.startsWith("(") && content.endsWith(")")) {
-//			content = content.substring(1, content.length() - 1);
-//
-//			// check if it is a sequence
-//			Collection sequence = splitContent(content, ',');
-//			if (sequence.size() > 1) {
-//				for (Iterator i = sequence.iterator(); i.hasNext();)
-//					alternatives = mergeAlternatives(alternatives, readAlternativeContents((String) i.next()));
-//			} else {
-//				// check if it's a choice
-//				Collection choice = splitContent(content, '|');
-//				if (choice.size() > 1) {
-//					// mixed content, cardinality=='*', are ignored
-//					if (((String) choice.iterator().next()).equals("#PCDATA"))
-//						return alternatives;
-//
-//					// add all the alternatives given from the possible choices
-//					for (Iterator i = choice.iterator(); i.hasNext();)
-//						alternatives.addAll(readAlternativeContents((String) i.next()));
-//				} else {
-//					// single element
-//					return readAlternativeContents(content);
-//				}
-//			}
-//		} else {
-//			// single element
-//			alternatives.add(content);
-//		}
-//
-//		return alternatives;
-	}
-
-	// ------------ GESTIONE CONTENUTO DI DEFAULT DI UN ELEMENTO
-	// --------------------
+	
+	
+	
+	//////////////////////////////////////////////////////////////////////////////////
+	//
+	// 				 GESTIONE CONTENUTO DI DEFAULT DI UN ELEMENTO
+	//
+	//
 
 	/**
 	 * Controlla se il ContentGraph contiene un contenuto di default: un cammino fatto
@@ -621,7 +166,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 	static protected int visitContentGraph(ContentGraph graph) {
 		ContentGraph.Node first = graph.getFirst();
 		ContentGraph.Node last = graph.getLast();
-		
+
 		// init visit
 		Vector queue = new Vector();
 		for (Iterator i = graph.visitNodes(); i.hasNext();)
@@ -666,8 +211,8 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 		return last.getVisitLength();
 	}
 
-	
-	
+
+
 	/**
 	 * Restituisce una stringa in formato XML a partire dal contenuto di default
 	 * dell'elemento
@@ -697,7 +242,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 
 		return output;
 	}
-	
+
 	/**
 	 * Restituisce una stringa in formato XML a partire dal contenuto di default
 	 * dell'elemento
@@ -724,8 +269,8 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 //		// get xml content
 //		String output = "<" + graph.getName() + ">";
 //		for (Iterator i = path.iterator(); i.hasNext();)
-//			output += ((ContentGraph) i.next()).name;
-//		
+//		output += ((ContentGraph) i.next()).name;
+
 //		output = output + "</" + graph.getName() + ">";
 
 		path.add(0,nodePath);
@@ -768,7 +313,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 	 * @throws DtdRulesManagerException
 	 */
 	protected void explodeContentGraphAlternatives(ContentGraph graph) throws DtdRulesManagerException {
-		
+
 		// check every edge of the old graph
 		for (Iterator i = graph.visitNodes(); i.hasNext();) {
 			ContentGraph.Node src = (ContentGraph.Node) i.next();
@@ -783,13 +328,15 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 					//oraSystem.err.println("replace edge with ContentGraph");
 					// replace edge with ContentGraph
 					src.setEdge(getContentGraph(edge_name), j);
-					
-					
+
+
 				}
 			}
 		}
-		
+
 	}
+
+
 	/**
 	 * Ritorna una stringa in formato XML che definisce il contenuto di default di un
 	 * elemento
@@ -810,7 +357,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			explodeContentGraph(graph);
 		}
 	}
-	
+
 	/**
 	 * Ritorna una stringa in formato XML che definisce il contenuto di default di un
 	 * elemento
@@ -823,17 +370,17 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 		//FIXME: non riesco a fare il clone del grafo originale
 		graph.resetVisit();
 		System.out.println("grafo su cui cercherà il minimo: \n"+graph);
-		
+
 		ContentGraph newcg=(ContentGraph) graph.clone();
-//			new ContentGraph(graph.name); //GRAFO CORRENTE A CUI VENGONO SOTTRATTI GLI ARCHI DEL CAMMINO MINIMO PRECEDENTEM TROVATO
+//		new ContentGraph(graph.name); //GRAFO CORRENTE A CUI VENGONO SOTTRATTI GLI ARCHI DEL CAMMINO MINIMO PRECEDENTEM TROVATO
 //		newcg.nodes_table=new HashMap(graph.nodes_table);
-		
+
 		Vector firstMinPath = new Vector();		
 		firstMinPath=findCurrentMinPath(newcg);
 		newcg.resetVisit();
-		
-		
-		
+
+
+
 		int minPathLength=firstMinPath.size()>0?((Vector) firstMinPath.elementAt(0)).size():0;
 		Vector nodesMinPath=new Vector(); //vettore con i nodi del cammino minimo corrente
 		Vector edgesMinPath=new Vector(); //vettore con gli archi del cammino minimo corrente
@@ -843,14 +390,14 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 		}
 		else
 			return null;
-		
+
 
 		ContentGraph.Node toRemove=newcg.getFirst().getDestination(0);//nodo da cui rimuovere gli archi del cammino minimo per cercarne altri
-		
+
 		Vector allAlternatives=new Vector(); //vettore con tutti i cammini minimi alternativi di stessa lunghezza
-		
+
 		allAlternatives.add(firstMinPath);
-		
+
 		int currentMinPathLenght=minPathLength; //lunghezza del cammino minimo corrente
 		Vector currentMinPath = new Vector(); //cammino minimo corrente
 		Vector checked_edgeoff = new Vector();
@@ -865,58 +412,58 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 //				newcg=new ContentGraph(graph.name);
 //				newcg.nodes_table=new HashMap(graph.nodes_table);
 				System.out.println("grafo su cui cercherà il minimo (come orig): \n"+newcg);
-				
-				//per tutti gli archi del cammino minimo corrente
-					String nameOfEdgeToRemove=((edgesMinPath.elementAt(i) instanceof ContentGraph)?((ContentGraph)edgesMinPath.elementAt(i)).name:edgesMinPath.elementAt(i).toString());
-					
-					//controllo se l'avevo già tolto non lo levo
-					if(!checked_edgeoff.contains(nameOfEdgeToRemove)){
-						
-					
-						if(!toRemove.removeEdge(nameOfEdgeToRemove, newcg.getNode(((ContentGraph.Node) nodesMinPath.elementAt(i)).name))){
-							//non riesco a rimuovere l'arco--caso anomalo
-							System.out.println("ANOMALIA su "+graph.name);
-							currentMinPathLenght=Integer.MAX_VALUE;
-							break;
-						}
-						System.out.println("eliminato arco "+(i+1)+" di "+minPathLength);
-						checked_edgeoff.add(nameOfEdgeToRemove);
-						System.out.println("grafo su cui cercherà il minimo (potato): \n"+newcg);
-						currentMinPath=findCurrentMinPath(newcg);
-						System.out.println("nodi trovata alt: "+currentMinPath.elementAt(0));
-						System.out.println("edge trovata alt: "+currentMinPath.elementAt(1));
-						currentMinPathLenght=((Vector) currentMinPath.elementAt(0)).size();
-						
-						newcg.resetVisit();
-						
-						if(currentMinPath!=null && currentMinPath.size()>0 && currentMinPathLenght==minPathLength){//((Vector) currentMinPath.elementAt(0)).size()==minPathLength /*&& !currentMinPath.elementAt(1).equals(edgesMinPath)*/){
-							//TROVATO ALTRO CAMMINO MINIMO
-							allAlternatives.add(currentMinPath);
-							
-						}
-						toRemove.addEdge(nameOfEdgeToRemove, newcg.getNode(((ContentGraph.Node) nodesMinPath.elementAt(i)).name));
-						
-//						else{
-//							//NON ESISTE CAMMINO MINIMO QUINDI RIPOPOLO IL GRAFO E CONTINUO CON UN ALTRO MINIMO EVENTUALE ALTERNATIVO
-//							newcg=new ContentGraph(graph.name);
-//							newcg.nodes_table=new HashMap(graph.nodes_table);
-//	//						System.out.println("STOP!!");
-//							break;
-//						}
-						
-						
-					}
-					toRemove=((ContentGraph.Node) nodesMinPath.elementAt(i)); //IL NODO DA CUI TOGLIERE GLI ARCHI SI SPOSTA NEL CAMMINO
-				}
-				if((k+1)<allAlternatives.size()){
-					//SE PRECEDENT E' STATO TROVATO UN MINIMO ALTERNATIVO IL NODO DA CUI RIMUOVERE GLI ARCHI DIVENTA IL PRIMO DI TALE CAMMINO
-					nodesMinPath=(Vector)((Vector) allAlternatives.elementAt(k+1)).elementAt(0);
-					edgesMinPath=(Vector)((Vector) allAlternatives.elementAt(k+1)).elementAt(1);
-					toRemove=newcg.getFirst().getDestination(0);
-				}
-			}
 
-		
+				//per tutti gli archi del cammino minimo corrente
+				String nameOfEdgeToRemove=((edgesMinPath.elementAt(i) instanceof ContentGraph)?((ContentGraph)edgesMinPath.elementAt(i)).name:edgesMinPath.elementAt(i).toString());
+
+				//controllo se l'avevo già tolto non lo levo
+				if(!checked_edgeoff.contains(nameOfEdgeToRemove)){
+
+
+					if(!toRemove.removeEdge(nameOfEdgeToRemove, newcg.getNode(((ContentGraph.Node) nodesMinPath.elementAt(i)).name))){
+						//non riesco a rimuovere l'arco--caso anomalo
+						System.out.println("ANOMALIA su "+graph.name);
+						currentMinPathLenght=Integer.MAX_VALUE;
+						break;
+					}
+					System.out.println("eliminato arco "+(i+1)+" di "+minPathLength);
+					checked_edgeoff.add(nameOfEdgeToRemove);
+					System.out.println("grafo su cui cercherà il minimo (potato): \n"+newcg);
+					currentMinPath=findCurrentMinPath(newcg);
+					System.out.println("nodi trovata alt: "+currentMinPath.elementAt(0));
+					System.out.println("edge trovata alt: "+currentMinPath.elementAt(1));
+					currentMinPathLenght=((Vector) currentMinPath.elementAt(0)).size();
+
+					newcg.resetVisit();
+
+					if(currentMinPath!=null && currentMinPath.size()>0 && currentMinPathLenght==minPathLength){//((Vector) currentMinPath.elementAt(0)).size()==minPathLength /*&& !currentMinPath.elementAt(1).equals(edgesMinPath)*/){
+						//TROVATO ALTRO CAMMINO MINIMO
+						allAlternatives.add(currentMinPath);
+
+					}
+					toRemove.addEdge(nameOfEdgeToRemove, newcg.getNode(((ContentGraph.Node) nodesMinPath.elementAt(i)).name));
+
+//					else{
+//					//NON ESISTE CAMMINO MINIMO QUINDI RIPOPOLO IL GRAFO E CONTINUO CON UN ALTRO MINIMO EVENTUALE ALTERNATIVO
+//					newcg=new ContentGraph(graph.name);
+//					newcg.nodes_table=new HashMap(graph.nodes_table);
+//					//						System.out.println("STOP!!");
+//					break;
+//					}
+
+
+				}
+				toRemove=((ContentGraph.Node) nodesMinPath.elementAt(i)); //IL NODO DA CUI TOGLIERE GLI ARCHI SI SPOSTA NEL CAMMINO
+			}
+			if((k+1)<allAlternatives.size()){
+				//SE PRECEDENT E' STATO TROVATO UN MINIMO ALTERNATIVO IL NODO DA CUI RIMUOVERE GLI ARCHI DIVENTA IL PRIMO DI TALE CAMMINO
+				nodesMinPath=(Vector)((Vector) allAlternatives.elementAt(k+1)).elementAt(0);
+				edgesMinPath=(Vector)((Vector) allAlternatives.elementAt(k+1)).elementAt(1);
+				toRemove=newcg.getFirst().getDestination(0);
+			}
+		}
+
+
 		if (minPathLength==0){
 			System.out.print("alternatives for "+graph.name+"  SIZE 0");
 			return null;
@@ -927,46 +474,25 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			Vector currentAlternative=(Vector) allAlternatives.elementAt(i);
 			Vector edgesCurrentAlternatives=(Vector) currentAlternative.elementAt(1);
 			for(int j=0; j< minPathLength;j++){
-				
+
 				System.out.print(((edgesCurrentAlternatives.elementAt(j) instanceof ContentGraph)?((ContentGraph)edgesCurrentAlternatives.elementAt(j)).name:edgesCurrentAlternatives.elementAt(j))+",");
 			}
 		}
 		return allAlternatives;
-		
-		
-	}
-	
-	protected Vector findCurrentMinPath(ContentGraph graph) throws DtdRulesManagerException {
-		
-		
-		
-		Vector currentMinPath = new Vector();
 
+
+	}
+
+	protected Vector findCurrentMinPath(ContentGraph graph) throws DtdRulesManagerException {
+
+		Vector currentMinPath = new Vector();
 		getDijkstraShortestPath(graph);
 		currentMinPath=getMinPath(graph);
 		return currentMinPath;
-			
-		
-
-		
-		
-//		Vector currentMinPath = new Vector();
-//		// cycle until a default content has been found
-//		while (true) {
-//			if (visitContentGraphAlternatives(graph) < Integer.MAX_VALUE){
-//				//System.err.println("finite path");
-//				currentMinPath=getMinPath(graph);
-//				return currentMinPath;
-//				
-//			}
-//			//System.err.println("!   infinite path:  exploding");
-//			// no default content: substitute each element with its ContentGraph
-//			explodeContentGraphAlternatives(graph);
-//		}
-		
 
 	}
-	
+
+
 	/**
 	 * Controlla se il ContentGraph contiene un contenuto di default: un cammino fatto
 	 * solo di elementi di testo e transizioni vuote dal primo all'ultimo nodo
@@ -978,20 +504,20 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 	static protected Vector getDijkstraShortestPath(ContentGraph graph) {
 		ContentGraph.Node first = graph.getFirst();
 		ContentGraph.Node last = graph.getLast();
-		
+
 		// init visit
 		int distance=Integer.MAX_VALUE;
 		Vector predecessors=new Vector();
-		
+
 		//the set of unsettled vertices
 		Vector queue = new Vector();
 		//the set of settled vertices, the vertices whose shortest distances from the source have been found
 		Vector settledNodes = new Vector();
-		
+
 		for (Iterator i = graph.visitNodes(); i.hasNext();)
 			((ContentGraph.Node) i.next()).resetVisit();
-		
-		
+
+
 		queue.add(first);
 		first.setVisit(0, "", null);
 
@@ -1000,7 +526,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			// pop first element from queue
 			ContentGraph.Node tovisit = extract_minimum(queue);
 			settledNodes.add(tovisit);
-			
+
 			// for all the outgoing edges relax_neighbours(toVisit)
 			for (int i = 0; i < tovisit.getNoEdges(); i++) {
 				// check if the edge is visitable
@@ -1016,7 +542,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 						predecessors.add(tovisit);
 					}
 				}
-				
+
 			}
 		}
 
@@ -1039,9 +565,10 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			queue.removeElementAt(min_node_index);
 			return toRemove;
 		}
-		
+
 		return null;
 	}
+
 
 	/**
 	 * Controlla se il ContentGraph contiene un contenuto di default: un cammino fatto
@@ -1054,7 +581,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 	static protected int visitContentGraphAlternatives(ContentGraph graph) {
 		ContentGraph.Node first = graph.getFirst();
 		ContentGraph.Node last = graph.getLast();
-		
+
 		// init visit
 		Vector queue = new Vector();
 		for (Iterator i = graph.visitNodes(); i.hasNext();)
@@ -1099,8 +626,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 		return last.getVisitLength();
 	}
 
-	
-	
+
 
 	/**
 	 * Ritorna una stringa in formato XML che definisce il contenuto di default di un
@@ -1114,22 +640,9 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			return "";
 		return getDefaultContent(getContentGraph(elem_name));
 	}
-	
-	
-	
-	
-	/**
-	 * Ritorna una stringa in formato XML che definisce il contenuto di default di un
-	 * elemento
-	 * 
-	 * @param elem_name il nome dell'elemento padre
-	 * @throws DtdRulesManagerException
-	 */
-	public String getDTDDefaultContent(String elem_name) throws DtdRulesManagerException {
-		if (elem_name.compareTo("#PCDATA") == 0)
-			return "";
-		return getDefaultContent(getDTDContentGraph(elem_name));
-	}
+
+
+
 
 	/**
 	 * Trasforma la rappresentazione stringa di un contenuto alternativo nella sua
@@ -1154,6 +667,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 		return graph;
 	}
 
+
 	/**
 	 * Ritorna una stringa in formato XML che definisce il contenuto di default di un
 	 * elemento
@@ -1166,53 +680,21 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 		if (elem_name.compareTo("#PCDATA") == 0)
 			return "";
 
-		DFSA elem_rule = (DFSA) rules.get(elem_name);
-		if (elem_rule == null)
-			throw new DtdRulesManagerException("No rule for element <" + elem_name + ">");
+		
+		//FIXME      mettere questo controllo sulle rules XSDFA		
+		
+//		DFSA elem_rule = (DFSA) rules.get(elem_name);
+//		if (elem_rule == null)
+//			throw new DtdRulesManagerException("No rule for element <" + elem_name + ">");
 
 		// init computation, get content of this alternative
 		return getDefaultContent(createAlternativeContentGraph(elem_name, alternative));
 	}
 
+
 	/**
-	 * Ritorna una stringa in formato XML che definisce il contenuto di default di un
-	 * elemento, tale elemento deve contenere i nodi desiderati
+	 * SCHEMA Implementation 
 	 * 
-	 * @param elem_name il nome dell'elemento padre
-	 * @param nodes i nodi che devono essere contenuti nell'elemento
-	 * @throws DtdRulesManagerException
-	 */
-	public String getDefaultContent(String elem_name, Vector nodes) throws DtdRulesManagerException {
-		// get node names
-		Vector node_names = new Vector();
-		for (Iterator i = nodes.iterator(); i.hasNext();) {
-			Node node = (Node) i.next();
-			if (node == null)
-				throw new DtdRulesManagerException("node #" + node_names.size() + " to insert is null");
-			node_names.addElement(getNodeName(node));
-		}
-
-		// create string content
-		String str_content = "";
-		Vector content = getGappedAlignment(elem_name, node_names);
-		if (content == null)
-			throw new DtdRulesManagerException("The nodes does not align with the element content");
-
-		// transform element names in XML content
-		for (int i = 0, l = 0; i < content.size(); i++) {
-			String item = (String) content.elementAt(i);
-			if (l < nodes.size() && item.equals((String) node_names.elementAt(l))) {
-				// insert the desired node with its content
-				str_content += UtilDom.domToString((Node) nodes.elementAt(l++));
-			} else {
-				// insert the default content
-				str_content += getDefaultContent(item);
-			}
-		}
-		return str_content;
-	}
-
-	/**
 	 * Ritorna i possibili contenuti alternativi di un elemento
 	 * 
 	 * @throws DtdRulesManagerException
@@ -1220,15 +702,10 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 	public Vector getAlternativeContents(String elem_name) throws DtdRulesManagerException {
 		if (elem_name.compareTo("#PCDATA") == 0)
 			return new Vector();
-		
-		return getAlternativeContents(getContentGraph(elem_name));
-//		//qui
-//		
-//		Vector alternatives = (Vector) alternative_contents.get(elem_name);
-//		if (alternatives == null)
-//			throw new DtdRulesManagerException("No alternative contents for element <" + elem_name + ">");
-//
-//		return alternatives;
+		Vector alternatives =  getAlternativeContents(getContentGraph(elem_name));
+		if (alternatives == null)
+			throw new DtdRulesManagerException("No alternative contents for element <" + elem_name + ">");
+		return alternatives;
 	}
 
 	/**
@@ -1242,26 +719,8 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 		return graph;
 	}
 
-	/**
-	 * Ritorna il content graph associato ad un elemento
-	 * 
-	 * @param elem_name il nome dell'elemento
-	 * @throws DtdRulesManagerException
-	 */
-	protected ContentGraph getDTDContentGraph(String elem_name) throws DtdRulesManagerException {
-		if (queryTextContent(elem_name)) // don't explode text and mixed
-			// elements to save iterations
-			return createTextContentGraph(elem_name);
 
-		DFSA elem_rule = (DFSA) rules.get(elem_name);
-		if (elem_rule == null)
-			throw new DtdRulesManagerException("No rule for element <" + elem_name + ">");
-		return elem_rule.createContentGraph();
-	}
-	
-	
-	
-	
+
 	/**
 	 * Ritorna il content graph associato ad un elemento    (VERSIONE BASATA SU SCHEMA)
 	 * 
@@ -1270,26 +729,115 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 	 */
 	protected ContentGraph getContentGraph(String elem_name) throws DtdRulesManagerException {
 
-	
-		
-//      FIXME da implementare quando funzionera' il queryTextContent
-		
-		if (queryTextContent(elem_name)) // don't explode text and mixed
-			// elements to save iterations
+		if (queryTextContent(elem_name)) // don't explode text and mixed elements to save iterations
 			return createTextContentGraph(elem_name);
-		
-//
+
 //		DFSA elem_rule = (DFSA) rules.get(elem_name);
 //		if (elem_rule == null)
-//			throw new DtdRulesManagerException("No rule for element <" + elem_name + ">");
+//		throw new DtdRulesManagerException("No rule for element <" + elem_name + ">");
 //		return elem_rule.createContentGraph();
 		return xsdRM.createContentGraph(elem_name);
 	}
+
+	//
+	//			     FINE   GESTIONE   DEFAULT E ALTERNATIVE CONTENT
+	//					
+	///////////////////////////////////////////////////////////////////////////////////
 	
 	
+	
+	///////////////////////////////////////////////////////////////////////////////////
+	//
+	//									SOSPESO
+	//
+	
 
-	// ------------ QUERY SUL CONTENUTO DI UN ELEMENTO --------------------
+//	ELIMINARE   ???      NON E' NELL'INTERFACCIA E NON VIENE CHIAMATO DA NESSUNO 
 
+//	/**
+//	* Ritorna una stringa in formato XML che definisce il contenuto di default di un
+//	* elemento, tale elemento deve contenere i nodi desiderati
+//	* 
+//	* @param elem_name il nome dell'elemento padre
+//	* @param nodes i nodi che devono essere contenuti nell'elemento
+//	* @throws DtdRulesManagerException
+//	*/
+//	public String getDefaultContent(String elem_name, Vector nodes) throws DtdRulesManagerException {
+//		// get node names
+//		Vector node_names = new Vector();
+//		for (Iterator i = nodes.iterator(); i.hasNext();) {
+//			Node node = (Node) i.next();
+//			if (node == null)
+//				throw new DtdRulesManagerException("node #" + node_names.size() + " to insert is null");
+//			node_names.addElement(getNodeName(node));
+//		}
+//
+//		// create string content
+//		String str_content = "";
+//		Vector content = getGappedAlignment(elem_name, node_names);
+//		if (content == null)
+//			throw new DtdRulesManagerException("The nodes does not align with the element content");
+//
+//		// transform element names in XML content
+//		for (int i = 0, l = 0; i < content.size(); i++) {
+//			String item = (String) content.elementAt(i);
+//			if (l < nodes.size() && item.equals((String) node_names.elementAt(l))) {
+//				// insert the desired node with its content
+//				str_content += UtilDom.domToString((Node) nodes.elementAt(l++));
+//			} else {
+//				// insert the default content
+//				str_content += getDefaultContent(item);
+//			}
+//		}
+//		return str_content;
+//	}
+	
+	
+	
+//	ELIMINARE   ???      NON E' NELL'INTERFACCIA E NON VIENE CHIAMATO DA NESSUNO 
+//	
+//	/**
+//	 * Ritorna l'allineamento piu' corto della collezione di nodi desiderata con l'automa
+//	 * che rappresenta il contenuto dell'elemento, inserendo dei gaps dove necessario
+//	 * 
+//	 * @param elem_name il nome dell'elemento padre
+//	 * @param elem_children la collezione dei nomi dei figli
+//	 * @return <code>null</code> se non esiste un allineamento, altrimenti la sequenza
+//	 *         di nodi che allinea con l'automa
+//	 * @throws DtdRulesManagerException
+//	 */
+//	public Vector getGappedAlignment(String elem_name, Collection elem_children) throws DtdRulesManagerException {
+//		// text elements must have no children
+//		if (elem_name.startsWith("#"))
+//			return new Vector();
+//
+//		// get automata
+//		DFSA rule = (DFSA) rules.get(elem_name);
+//		if (rule == null)
+//			throw new DtdRulesManagerException("No rule for element <" + elem_name + ">");
+//
+//		// return the alignment
+//		return rule.getGappedAlignment(elem_children);
+//	}	
+	
+	
+	
+	//
+	//								FINE SOSPESO
+	//
+	//
+	///////////////////////////////////////////////////////////////////////////////////
+	
+	
+	
+	
+	
+	///////////////////////////////////////////////////////////////////////////////////
+	//
+	//					 QUERY SUL CONTENUTO DI UN ELEMENTO 
+	//
+	//
+	
 	/**
 	 * Controlla se una collezione di nomi di elementi puo rappresentare un insieme di
 	 * figli di un nodo
@@ -1311,51 +859,14 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 	 * @param with_gaps <code>true</code> se l'allineamento puo' essere fatto con gaps
 	 * @throws DtdRulesManagerException
 	 */
-	public boolean isValid(String elem_name, Collection elem_children, boolean with_gaps) throws DtdRulesManagerException {
-		// text elements must have no children
-		if (elem_name.startsWith("#"))
-			return (elem_children.size() == 0);
-
-		// get automata
-		DFSA rule = (DFSA) rules.get(elem_name);
-		if (rule == null)
-			throw new DtdRulesManagerException("No rule for element <" + elem_name + ">");
-
-		// check if the children list is valid
-		if (!rule.align(elem_children, with_gaps)) {
-			// if the children list is empty try to add an empty text
-			Vector empty_list = new Vector();
-			empty_list.add("#PCDATA");
-			return rule.align(elem_children, with_gaps);
-		}
-		return true;
+	public boolean isValid(String elem_name, Collection elem_children, boolean with_gaps) throws DtdRulesManagerException {		
+		return xsdRM.isValid(elem_name, elem_children, with_gaps);
 	}
 
+	
 	/**
-	 * Ritorna l'allineamento piu' corto della collezione di nodi desiderata con l'automa
-	 * che rappresenta il contenuto dell'elemento, inserendo dei gaps dove necessario
+	 * SCHEMA IMPLEMENTATION
 	 * 
-	 * @param elem_name il nome dell'elemento padre
-	 * @param elem_children la collezione dei nomi dei figli
-	 * @return <code>null</code> se non esiste un allineamento, altrimenti la sequenza
-	 *         di nodi che allinea con l'automa
-	 * @throws DtdRulesManagerException
-	 */
-	public Vector getGappedAlignment(String elem_name, Collection elem_children) throws DtdRulesManagerException {
-		// text elements must have no children
-		if (elem_name.startsWith("#"))
-			return new Vector();
-
-		// get automata
-		DFSA rule = (DFSA) rules.get(elem_name);
-		if (rule == null)
-			throw new DtdRulesManagerException("No rule for element <" + elem_name + ">");
-
-		// return the alignment
-		return rule.getGappedAlignment(elem_children);
-	}
-
-	/**
 	 * Enumera le alternative possibili dati il nodo padre ed i nomi dei nodi figli.
 	 * 
 	 * @param elem_name il nome dell'elemento padre
@@ -1365,14 +876,12 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 	 * @throws DtdRulesManagerException
 	 */
 	public Collection getAlternatives(String elem_name, Collection elem_children, int choice_point) throws DtdRulesManagerException {
-		if (elem_name.startsWith("#"))
-			return new Vector();
 
-		DFSA rule = (DFSA) rules.get(elem_name);
-		if (rule == null)
-			throw new DtdRulesManagerException("No rule for element <" + elem_name + ">");
+//		DFSA rule = (DFSA) rules.get(elem_name);
+//		if (rule == null)
+//			throw new DtdRulesManagerException("No rule for element <" + elem_name + ">");
 
-		return rule.alignAlternatives(elem_children, choice_point);
+		return xsdRM.getAlternatives(elem_name, elem_children, choice_point);
 	}
 
 	/**
@@ -1397,10 +906,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 				// if( value!=null && value.length()>0 )
 				str_children.add(new String("#PCDATA"));
 			} else
-				str_children.add(new String("#ANY")); // comment and
-			// processing
-			// instructions can go
-			// everywhere
+				str_children.add(new String("#ANY")); // comment and processing/ instructions can go everywhere
 		}
 		return str_children;
 	}
@@ -1446,14 +952,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 	}
 
 	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	//
@@ -1478,8 +977,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			throw new DtdRulesManagerException("node is null");
 		if (dom_node.getNodeType() != Node.ELEMENT_NODE)
 			return true;
-		return xsdRM.isValid(getNodeName(dom_node), getChildren(dom_node));
-		//return isValid(getNodeName(dom_node), getChildren(dom_node));
+		return isValid(getNodeName(dom_node), getChildren(dom_node));
 	}
 
 	/**
@@ -1493,8 +991,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			throw new DtdRulesManagerException("node is null");
 		if (dom_node.getNodeType() != Node.ELEMENT_NODE)
 			return true;
-		return xsdRM.isValid(getNodeName(dom_node), UtilLang.singleton("#PCDATA"));
-		//return isValid(getNodeName(dom_node), UtilLang.singleton("#PCDATA"));
+		return isValid(getNodeName(dom_node), UtilLang.singleton("#PCDATA"));
 	}
 
 	/**
@@ -1506,7 +1003,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 	public boolean queryTextContent(String elem_name) throws DtdRulesManagerException {
 		if (elem_name.compareTo("#PCDATA") == 0)
 			return true;
-		return xsdRM.isValid(elem_name, UtilLang.singleton("#PCDATA"));
+		return isValid(elem_name, UtilLang.singleton("#PCDATA"));
 	}
 
 	/**
@@ -1523,11 +1020,11 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			throw new DtdRulesManagerException("node to append is null");
 
 		Vector str_children = getChildren(parent);
-		if (pre_check && !xsdRM.isValid(getNodeName(parent), str_children))
+		if (pre_check && !isValid(getNodeName(parent), str_children))
 			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		str_children.add(getNodeName(new_node));
-		return xsdRM.isValid(getNodeName(parent), str_children);
+		return isValid(getNodeName(parent), str_children);
 	}
 
 	/**
@@ -1543,7 +1040,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 
 		int c = 0;
 		Vector str_children = getChildren(parent);
-		if (pre_check && !xsdRM.isValid(getNodeName(parent), str_children))
+		if (pre_check && !isValid(getNodeName(parent), str_children))
 			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		for (Iterator i = new_nodes.iterator(); i.hasNext(); c++) {
@@ -1553,7 +1050,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			str_children.add(getNodeName(new_node));
 		}
 
-		return xsdRM.isValid(getNodeName(parent), str_children);
+		return isValid(getNodeName(parent), str_children);
 	}
 
 	/**
@@ -1567,10 +1064,10 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			throw new DtdRulesManagerException("parent is null");
 
 		Vector str_children = getChildren(parent);
-		if (pre_check && !xsdRM.isValid(getNodeName(parent), str_children))
+		if (pre_check && !isValid(getNodeName(parent), str_children))
 			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
-		return xsdRM.getAlternatives(getNodeName(parent), str_children, str_children.size() - 1);
+		return getAlternatives(getNodeName(parent), str_children, str_children.size() - 1);
 	}
 
 	/**
@@ -1587,11 +1084,11 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			throw new DtdRulesManagerException("node to prepend is null");
 
 		Vector str_children = getChildren(parent);
-		if (pre_check && !xsdRM.isValid(getNodeName(parent), str_children))
+		if (pre_check && !isValid(getNodeName(parent), str_children))
 			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		str_children.insertElementAt(getNodeName(new_node), 0);
-		return xsdRM.isValid(getNodeName(parent), str_children);
+		return isValid(getNodeName(parent), str_children);
 	}
 
 	/**
@@ -1607,7 +1104,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 
 		int inserted = 0;
 		Vector str_children = getChildren(parent);
-		if (pre_check && !xsdRM.isValid(getNodeName(parent), str_children))
+		if (pre_check && !isValid(getNodeName(parent), str_children))
 			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		for (Iterator i = new_nodes.iterator(); i.hasNext(); inserted++) {
@@ -1617,7 +1114,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			str_children.insertElementAt(getNodeName(new_node), inserted);
 		}
 
-		return xsdRM.isValid(getNodeName(parent), str_children);
+		return isValid(getNodeName(parent), str_children);
 	}
 
 	/**
@@ -1631,10 +1128,10 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			throw new DtdRulesManagerException("parent is null");
 
 		Vector str_children = getChildren(parent);
-		if (pre_check && !xsdRM.isValid(getNodeName(parent), str_children))
+		if (pre_check && !isValid(getNodeName(parent), str_children))
 			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
-		return xsdRM.getAlternatives(getNodeName(parent), str_children, -1);
+		return getAlternatives(getNodeName(parent), str_children, -1);
 	}
 
 	/**
@@ -1654,13 +1151,13 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			throw new DtdRulesManagerException("node to insert is null");
 
 		Vector str_children = getChildren(parent);
-		if (pre_check && !xsdRM.isValid(getNodeName(parent), str_children))
+		if (pre_check && !isValid(getNodeName(parent), str_children))
 			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		int child_index = getChildIndex(parent, child_node);
 		str_children.insertElementAt(getNodeName(new_node), child_index + 1);
 
-		return xsdRM.isValid(getNodeName(parent), str_children);
+		return isValid(getNodeName(parent), str_children);
 	}
 
 	/**
@@ -1680,7 +1177,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 
 		int inserted = 0;
 		Vector str_children = getChildren(parent);
-		if (pre_check && !xsdRM.isValid(getNodeName(parent), str_children))
+		if (pre_check && !isValid(getNodeName(parent), str_children))
 			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		int child_index = getChildIndex(parent, child_node);
@@ -1691,7 +1188,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			str_children.insertElementAt(getNodeName(new_node), child_index + inserted + 1);
 		}
 
-		return xsdRM.isValid(getNodeName(parent), str_children);
+		return isValid(getNodeName(parent), str_children);
 	}
 
 	/**
@@ -1708,11 +1205,11 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			throw new DtdRulesManagerException("child is null");
 
 		Vector str_children = getChildren(parent);
-		if (pre_check && !xsdRM.isValid(getNodeName(parent), str_children))
+		if (pre_check && !isValid(getNodeName(parent), str_children))
 			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		int child_index = getChildIndex(parent, child_node);
-		return xsdRM.getAlternatives(getNodeName(parent), str_children, child_index);
+		return getAlternatives(getNodeName(parent), str_children, child_index);
 	}
 
 	/**
@@ -1733,12 +1230,12 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			throw new DtdRulesManagerException("node to insert is null");
 
 		Vector str_children = getChildren(parent);
-		if (pre_check && !xsdRM.isValid(getNodeName(parent), str_children))
+		if (pre_check && !isValid(getNodeName(parent), str_children))
 			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		int child_index = getChildIndex(parent, child_node);
 		str_children.insertElementAt(getNodeName(new_node), child_index);
-		return xsdRM.isValid(getNodeName(parent), str_children);
+		return isValid(getNodeName(parent), str_children);
 	}
 
 	/**
@@ -1758,7 +1255,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 
 		int inserted = 0;
 		Vector str_children = getChildren(parent);
-		if (pre_check && !xsdRM.isValid(getNodeName(parent), str_children))
+		if (pre_check && !isValid(getNodeName(parent), str_children))
 			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		int child_index = getChildIndex(parent, child_node);
@@ -1769,7 +1266,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			str_children.insertElementAt(getNodeName(new_node), child_index + inserted);
 		}
 
-		return xsdRM.isValid(getNodeName(parent), str_children);
+		return isValid(getNodeName(parent), str_children);
 	}
 
 	/**
@@ -1787,13 +1284,11 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			throw new DtdRulesManagerException("child is null");
 
 		Vector str_children = getChildren(parent);
-		if (pre_check && !xsdRM.isValid(getNodeName(parent), str_children))
+		if (pre_check && !isValid(getNodeName(parent), str_children))
 			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		int child_index = getChildIndex(parent, child_node);
-		// System.out.println("parent=" + getNodeName(parent) + " children=" +
-		// str_children + " point=" + child_index);
-		return xsdRM.getAlternatives(getNodeName(parent), str_children, child_index - 1);
+		return getAlternatives(getNodeName(parent), str_children, child_index - 1);
 	}
 
 	private Vector extractSubList(Vector list, int first, int size) {
@@ -1824,7 +1319,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			throw new DtdRulesManagerException("node to insert is null");
 
 		Vector str_children = getChildren(parent);
-		if (pre_check && !xsdRM.isValid(getNodeName(parent), str_children))
+		if (pre_check && !isValid(getNodeName(parent), str_children))
 			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		// find the first child
@@ -1834,14 +1329,14 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 		Vector toenclose = extractSubList(str_children, child_index, no_children);
 
 		// check if the container node can enclose the children
-		if (!xsdRM.isValid(getNodeName(new_node), toenclose, true))
+		if (!isValid(getNodeName(new_node), toenclose, true))
 			return false;
 
 		// replace the children to enclose with the container node
 		str_children.insertElementAt(getNodeName(new_node), child_index);
 
 		// check if the parent can contain this new set of children
-		return xsdRM.isValid(getNodeName(parent), str_children);
+		return isValid(getNodeName(parent), str_children);
 	}
 
 	/**
@@ -1861,7 +1356,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			throw new DtdRulesManagerException("child is null");
 
 		Vector str_children = getChildren(parent);
-		if (pre_check && !xsdRM.isValid(getNodeName(parent), str_children))
+		if (pre_check && !isValid(getNodeName(parent), str_children))
 			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		// find the first child
@@ -1878,7 +1373,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 		Vector containers = new Vector();
 		for (Iterator i = insertable.iterator(); i.hasNext();) {
 			String elem = (String) i.next();
-			if (xsdRM.isValid(elem, toenclose, true))
+			if (isValid(elem, toenclose, true))
 				containers.add(elem);
 		}
 		return containers;
@@ -1904,14 +1399,14 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			throw new DtdRulesManagerException("node to insert is null");
 
 		Vector str_children = getChildren(parent);
-		if (pre_check && !xsdRM.isValid(getNodeName(parent), str_children))
+		if (pre_check && !isValid(getNodeName(parent), str_children))
 			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		// find the text node
 		int child_index = getChildIndex(parent, child_node);
 
 		// check if the container node can contain text
-		if (!xsdRM.isValid(getNodeName(new_node), UtilLang.singleton("#PCDATA")))
+		if (!isValid(getNodeName(new_node), UtilLang.singleton("#PCDATA")))
 			return false;
 
 		// insert the container node inside the text
@@ -1919,7 +1414,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 		str_children.insertElementAt("#PCDATA", child_index + 2);
 
 		// check if the parent can contain this new set of children
-		return xsdRM.isValid(getNodeName(parent), str_children);
+		return isValid(getNodeName(parent), str_children);
 	}
 
 	/**
@@ -1938,7 +1433,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			throw new DtdRulesManagerException("child is null");
 
 		Vector str_children = getChildren(parent);
-		if (pre_check && !xsdRM.isValid(getNodeName(parent), str_children))
+		if (pre_check && !isValid(getNodeName(parent), str_children))
 			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		// find the text node
@@ -1946,13 +1441,13 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 		str_children.insertElementAt("#PCDATA", child_index + 1);
 
 		// get all the nodes that can be inserted in the text
-		Collection insertable = xsdRM.getAlternatives(getNodeName(parent), str_children, child_index);
+		Collection insertable = getAlternatives(getNodeName(parent), str_children, child_index);
 
 		// check which of the alternatives can contain text
 		Vector containers = new Vector();
 		for (Iterator i = insertable.iterator(); i.hasNext();) {
 			String elem = (String) i.next();
-			if (xsdRM.isValid(elem, UtilLang.singleton("#PCDATA")))
+			if (isValid(elem, UtilLang.singleton("#PCDATA")))
 				containers.add(elem);
 		}
 
@@ -1977,15 +1472,11 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 
 		// get the children
 		Vector str_children = getChildren(parent);
-		if (pre_check && !xsdRM.isValid(getNodeName(parent), str_children))
+		if (pre_check && !isValid(getNodeName(parent), str_children))
 			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		// find the first child
 		int child_index = getChildIndex(parent, child_node);
-
-		// get the children to enclose
-		// Vector toreplace = extractSubList(str_children, child_index,
-		// no_children);
 
 		// replace the children to enclose with the new nodes
 		int inserted = 0;
@@ -1997,7 +1488,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 		}
 
 		// check if the parent can contain this new set of children
-		return xsdRM.isValid(getNodeName(parent), str_children);
+		return isValid(getNodeName(parent), str_children);
 	}
 
 	/**
@@ -2019,7 +1510,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 
 		// get the children
 		Vector str_children = getChildren(parent);
-		if (pre_check && !xsdRM.isValid(getNodeName(parent), str_children))
+		if (pre_check && !isValid(getNodeName(parent), str_children))
 			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		// find the text node
@@ -2036,7 +1527,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 		}
 
 		// check if the parent can contain this new set of children
-		return xsdRM.isValid(getNodeName(parent), str_children);
+		return isValid(getNodeName(parent), str_children);
 	}
 
 	/**
@@ -2053,12 +1544,12 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			throw new DtdRulesManagerException("child is null");
 
 		Vector str_children = getChildren(parent);
-		if (pre_check && !xsdRM.isValid(getNodeName(parent), str_children))
+		if (pre_check && !isValid(getNodeName(parent), str_children))
 			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		int child_index = getChildIndex(parent, child_node);
 		str_children.removeElementAt(child_index);
-		return xsdRM.isValid(getNodeName(parent), str_children);
+		return isValid(getNodeName(parent), str_children);
 	}
 
 	/**
@@ -2076,7 +1567,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			throw new DtdRulesManagerException("child is null");
 
 		Vector str_children = getChildren(parent);
-		if (pre_check && !xsdRM.isValid(getNodeName(parent), str_children))
+		if (pre_check && !isValid(getNodeName(parent), str_children))
 			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		int from_index = getChildIndex(parent, child_node);
@@ -2086,7 +1577,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			str_children.removeElementAt(from_index);
 		}
 
-		return xsdRM.isValid(getNodeName(parent), str_children);
+		return isValid(getNodeName(parent), str_children);
 	}
 
 	/**
@@ -2110,13 +1601,13 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			throw new DtdRulesManagerException("Cannot insert inside: child node is not a text node");
 
 		Vector str_children = getChildren(parent);
-		if (pre_check && !xsdRM.isValid(getNodeName(parent), str_children))
+		if (pre_check && !isValid(getNodeName(parent), str_children))
 			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		int child_index = getChildIndex(parent, child_node);
 		str_children.insertElementAt(getNodeName(new_node), child_index + 1);
 		str_children.insertElementAt(new String("#PCDATA"), child_index + 2);
-		return xsdRM.isValid(getNodeName(parent), str_children);
+		return isValid(getNodeName(parent), str_children);
 	}
 
 	/**
@@ -2139,7 +1630,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 
 		int inserted = 0;
 		Vector str_children = getChildren(parent);
-		if (pre_check && !xsdRM.isValid(getNodeName(parent), str_children))
+		if (pre_check && !isValid(getNodeName(parent), str_children))
 			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		int child_index = getChildIndex(parent, child_node);
@@ -2150,7 +1641,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			str_children.insertElementAt(getNodeName(new_node), child_index + inserted + 1);
 		}
 		str_children.insertElementAt(new String("#PCDATA"), child_index + inserted + 1);
-		return xsdRM.isValid(getNodeName(parent), str_children);
+		return isValid(getNodeName(parent), str_children);
 	}
 
 	/**
@@ -2171,14 +1662,14 @@ public class SchemaRulesManagerImpl implements DtdRulesManager, DeclHandler, Log
 			throw new DtdRulesManagerException("Cannot insert inside: child node is not a text node");
 
 		Vector str_children = getChildren(parent);
-		if (pre_check && !xsdRM.isValid(getNodeName(parent), str_children))
+		if (pre_check && !isValid(getNodeName(parent), str_children))
 			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		int child_index = getChildIndex(parent, child_node);
 		if (((String) str_children.get(child_index)).compareTo("#PCDATA") != 0)
 			throw new DtdRulesManagerException("Cannot insert inside: child node is not a text node");
 		str_children.insertElementAt(new String("#PCDATA"), child_index + 1);
-		return xsdRM.getAlternatives(getNodeName(parent), str_children, child_index);
+		return getAlternatives(getNodeName(parent), str_children, child_index);
 	}
 
 	
