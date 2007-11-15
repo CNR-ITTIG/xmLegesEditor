@@ -122,7 +122,7 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 	ExportBrowserAction exportBrowserAction;
 
 	ExportHTMLAction exportHTMLAction;
-
+	
 	ExportPDFAction exportPDFAction;
 	
 	ExportRTFAction exportRTFAction;
@@ -186,6 +186,7 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 
 		exportBrowserAction = new ExportBrowserAction();
 		actionManager.registerAction("file.export.browser", exportBrowserAction);
+		
 		exportHTMLAction = new ExportHTMLAction();
 		actionManager.registerAction("file.export.html", exportHTMLAction);
 		exportPDFAction = new ExportPDFAction();
@@ -246,8 +247,7 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 		 }
 		 return false;
 	}
-		
-		
+	
 	// ///////////////////// esporta su browser
 	public boolean doExportBrowser() {	
 		form.showDialog();
