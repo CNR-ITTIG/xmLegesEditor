@@ -165,8 +165,10 @@ public class UtilXml {
 				dbf.setValidating(true);
 				dbf.setIgnoringElementContentWhitespace(true);
 				// FIXME   c'e' nell'interfaccia standard di Jaxp dalla 1.5
+				// questo serve per abilitare la validazione con schema
 				((DocumentBuilderFactoryImpl)dbf).setFeature("http://xml.org/sax/features/validation", true);
 				((DocumentBuilderFactoryImpl)dbf).setFeature("http://apache.org/xml/features/validation/schema", true);	
+				//((DocumentBuilderFactoryImpl)dbf).setFeature("http://apache.org/xml/features/validation/id-idref-checking", false);					
 			}
 			dbf.setIgnoringComments(false);
 
