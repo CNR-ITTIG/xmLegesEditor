@@ -157,11 +157,6 @@ public class DocumentManagerImpl implements DocumentManager, EventListener, Logg
 		Document doc = open(source);
 		if (doc != null) {
 			this.document = doc;
-			
-			Node assess = (Node)doc.getElementsByTagName("mediumDressSize").item(0);
-			
-			rulesManager.assess(assess);
-			
 			DOMWriter.setDefaultEncoding(getEncoding());
 
 			for (Enumeration en = beforeInitActions.elements(); en.hasMoreElements();) {
@@ -240,16 +235,31 @@ public class DocumentManagerImpl implements DocumentManager, EventListener, Logg
 		return null;
 	}
 
-	private String getDtdPath(Document doc) {
+	private String getGrammarPath(Document doc) {
 		try{
 		if (doc != null){
 			return (doc.getDoctype().getSystemId());
 		}
 		}catch(Exception e){
-			return null;
+			return(getSchemaLocation(doc));
 		}
 		return null;
 	}
+	
+	
+		
+	private String getSchemaLocation(Document doc){		
+		String schemaLoc = UtilDom.getAttributeValueAsString((Node)doc.getDocumentElement(), "xsi:schemaLocation");
+		if(schemaLoc==null)
+			return null;
+	
+		String[] elems = schemaLoc.split(" ");
+		if(elems.length>0)
+			return elems[elems.length-1];
+	  
+		return null;
+	}
+
 
 	public Document getDocumentAsDom() {
 		return this.document;
@@ -473,23 +483,7 @@ public class DocumentManagerImpl implements DocumentManager, EventListener, Logg
 		logger.debug("DOM EVENT END");
 	}
 
-	// protected void pippo(DomTransactionImpl edits) {
-	// for (int i = 1; i < edits.size(); i++) {
-	// DomEdit e = (DomEdit) edits.get(i);
-	// for (int j = 0; j < i; j++) {
-	// DomEdit a = (DomEdit) edits.get(j);
-	// if (e.getType() != a.getType() || e.getType() ==
-	// DomEdit.ATTR_NODE_MODIFIED ||
-	// e.getType() == DomEdit.CHAR_NODE_MODIFIED)
-	// continue;
-	// if (UtilDom.isAncestor(a.getNode(), e.getNode())) {
-	// edits.remove(i);
-	// i--;
-	// break;
-	// }
-	// }
-	// }
-	// }
+
 
 	protected Document open(String filename) {
 		errors.clear();
@@ -509,7 +503,8 @@ public class DocumentManagerImpl implements DocumentManager, EventListener, Logg
 		} else {
 			UtilDom.trimTextNode(doc, true);
 			logger.info("Reading rules from DTDs...");
-			rulesManager.loadRules(filename, getDtdPath(doc));
+			System.err.println("----------> GRAMMAR PATH:   "+getGrammarPath(doc));
+			rulesManager.loadRules(filename, getGrammarPath(doc));
 			logger.info("Reading rules OK");
 		}
 		logger.info("Reading file Ok");
