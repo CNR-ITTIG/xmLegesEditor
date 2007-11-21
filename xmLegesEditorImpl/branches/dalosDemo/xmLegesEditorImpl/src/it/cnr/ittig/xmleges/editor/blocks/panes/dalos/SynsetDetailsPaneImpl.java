@@ -8,15 +8,13 @@ import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.services.manager.Startable;
 import it.cnr.ittig.xmleges.core.services.action.ActionManager;
-import it.cnr.ittig.xmleges.core.services.bars.Bars;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.frame.FindIterator;
 import it.cnr.ittig.xmleges.core.services.frame.Frame;
 import it.cnr.ittig.xmleges.core.services.frame.PaneException;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
-import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
-import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
+import it.cnr.ittig.xmleges.core.util.file.UtilFile;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.dalos.util.UtilDalos;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetDetailsPane;
@@ -24,18 +22,10 @@ import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSelectionEvent;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.EventObject;
 
-import javax.swing.AbstractAction;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.ListCellRenderer;
 
 /**						
  * <h1>Implementazione del servizio
@@ -120,6 +110,17 @@ public class SynsetDetailsPaneImpl implements SynsetDetailsPane, EventManagerLis
 	
 	/////////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws Exception {
+		
+		
+		String[] icons = new String[] { 		
+				"images/kontact_journal.png", "images/lexical.png","images/signature.png"
+	    };
+		
+		for (int i = 0; i < icons.length; i++) {
+			UtilFile.copyFileInTempDir(getClass().getResourceAsStream(icons[i]),"dalos", icons[i]);
+		}
+		
+		
 		
 		panel.add(utilDalos.getLanguageSwitchPanel(), BorderLayout.SOUTH);
 		
