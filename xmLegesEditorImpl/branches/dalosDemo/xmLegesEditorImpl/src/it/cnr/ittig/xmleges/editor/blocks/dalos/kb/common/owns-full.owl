@@ -1,0 +1,195 @@
+<rdf:RDF
+    xmlns:owns="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
+    xmlns="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
+    xmlns:langf="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#"
+  xml:base="file:owns-full-mod.owl">
+  <owl:Ontology rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl">
+    <owl:imports rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl"/>
+    <owl:imports rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl"/>
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >v. 1.0</owl:versionInfo>
+  </owl:Ontology>
+  <owl:ObjectProperty rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property">
+    <rdfs:range rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <rdfs:domain rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+  </owl:ObjectProperty>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#involved_result">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#has_pertained">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#co_result_instrument">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#has_hyperonym">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#pertains_to">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#be_in_state">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#state_of">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#is_means_for">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#has_mero_member">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#belongs_to_class">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#is_purpose_of">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#has_instance">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#liable_to">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#has_subevent">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#antonym">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#role_instrument">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#derivation">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#co_instrument_result">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#has_mero_part">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#role_agent">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#results_in">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#fuzzynym">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#has_means">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#involved_location">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#xpos_fuzzynym">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#co_role">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#co_agent_result">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#has_value">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#has_mero_madeof">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#has_holo_part">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#co_result_agent">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#near_synonym">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#related_term">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#co_agent_patient">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#is_caused_by">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#role">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#involved_patient">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#is_subevent_of">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#causes">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#is_a_value_of">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#has_hyponym">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#has_meronym">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#co_patient_agent">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#has_holonym">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#has_liability">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#has_holo_madeof">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#role_patient">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#has_xpos_hyperonym">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#involved">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#xpos_near_synonym">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#is_result_of">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#involved_instrument">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#has_holo_member">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#for_purpose_of">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#role_result">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#role_location">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#involved_agent">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#has_xpos_hyponym">
+    <rdfs:subPropertyOf rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns-full.owl#language-property"/>
+  </rdf:Description>
+</rdf:RDF>
