@@ -6,7 +6,9 @@ import it.cnr.ittig.services.manager.Logger;
 import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
+import it.cnr.ittig.services.manager.Startable;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
+import it.cnr.ittig.xmleges.core.util.file.UtilFile;
 import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.SynsetTree;
@@ -49,7 +51,33 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 	}
 	
 	
+	
+	private void copyDalosInTemp(){
+		
+		//  COMMON FILES
+		String[] commonFiles = new String[] { 		
+				"common/concepts.owl", "common/consumer-law.owl","common/consumer-law-merge.owl","common/language-properties-full.owl","common/metasources.owl", 
+				"common/owns.owl", "common/owns-full.owl"
+	    };
+		
+		//  IT
+		String[] it = new String[]{"IT/individuals.owl", "IT/individuals-word.owl", "IT/ind-to-consumer.owl", "IT/sources.owl",
+				"IT/types.owl"};
+		
+		
+		for (int i = 0; i < commonFiles.length; i++) {
+			UtilFile.copyFileInTempDir(getClass().getResourceAsStream(commonFiles[i]),"dalos", commonFiles[i]);
+		}
+		
+		
+		for (int i = 0; i < it.length; i++) {
+			UtilFile.copyFileInTempDir(getClass().getResourceAsStream(it[i]), "dalos/IT", it[i]);
+		}						
+	}
+	
 	public void initialize() throws Exception {	
+		
+	    copyDalosInTemp();
 		
 		langToContainer = new HashMap();
 		pivotToForeign = null;
@@ -174,5 +202,7 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 		}
 
 		return kbc;
-	}	
+	}
+
+
 }
