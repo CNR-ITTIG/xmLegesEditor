@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 import java.util.Vector;
 
@@ -48,6 +49,8 @@ public class xsdRulesManagerImpl{
 	protected HashMap alternative_contents;
 	public HashMap attributes;
 	protected String targetNameSpace;
+	protected Map prefixToNamespace;
+	
 	protected XSDSchema schema;
 	
 	
@@ -83,6 +86,9 @@ public class xsdRulesManagerImpl{
  	            return;
  	       }
  		  targetNameSpace = schema.getTargetNamespace();
+ 		  prefixToNamespace = schema.getQNamePrefixToNamespaceMap();
+ 		  
+ 		  System.err.println("@@@@@@@@@@@@@@@@@        PrefixToNameSpace = "+prefixToNamespace.toString());
  		  
  		  List allElements = schema.getElementDeclarations();
  		  
@@ -90,12 +96,13 @@ public class xsdRulesManagerImpl{
  	            XSDElementDeclaration elemDecl = (XSDElementDeclaration)iter.next();
  	            createRuleForElement(elemDecl);
  	            createRuleForAttributes(elemDecl);
- 	            //createAlternativeContents(elemDecl);  
+ 	            // createAlternativeContents(elemDecl);  
  	           
  	            
  	      }
  		}catch(Exception e){
- 			System.err.println("exception");
+ 			//System.err.println(e..getMessage());
+ 			e.printStackTrace();
  		}
         
 		System.err.println("loaded schema");
@@ -126,10 +133,13 @@ public class xsdRulesManagerImpl{
    		  	}
         }
         	
-//		printRules();
+		printRules();
 		printAttrRules();
    
         System.err.println("Creating Rules DONE");
+        
+        
+        
 	}
 	
 	
@@ -149,16 +159,6 @@ public class xsdRulesManagerImpl{
 	 */
 	public Collection createAlternativeContents(XSDElementDeclaration elemDecl){
 			
-		// secondo me:
-		// i contents_strings per ogni elemento dovrebbero essere  come minimo la lista di tutti i possibili cammini minimi
-		// ancora piu' utile, la lista di tutti i cammini senza cicli da start ad end nel grafo. 
-		// il formato dell'output dovrebbe essere un Vector in cui ogni elemento e' fatto da una string contenente 
-		// la lista delle label delle transizioni separate da virgole, tipo:
-		// meta,intestazione,formulainiziale,articolato,formulafinale,conclusione   (cammino per l'elemento DocArticolato)
-		// in questi due casi posso riempire la tabella alternativecontents una volta per tutte e consultare quella.
-		
-		// altrimenti si puo' fare in modo di richiedere un "cammino" (sequenza di label) che contiene una o piu' label in particolare.
-		// in questo caso pero' deve essere fatto in linea e non si puo' backuppare sulla hashtable
 		
 		Vector contents_strings = null; //readAlternativeContents(elemDecl.getTypeDefinition());
 		alternative_contents.put(elemDecl.getQName(), contents_strings);
@@ -449,44 +449,7 @@ public class xsdRulesManagerImpl{
 	       }
 	}
 
-			
 	
-	
-		
-	// FIXME serve ?
-	public void createRuleForANY(){
-		        
-	        XSDParticle xsdParticle; 
-	        xsdParticle = XSDFactory.eINSTANCE.createXSDParticle();
-	        
-	        XSDParticleImpl.XSDNFA dfa = (XSDParticleImpl.XSDNFA)xsdParticle.getDFA();
-	        
-	    	rules.put("#ANY", dfa);
-	    	
-	        
-	        System.err.println("********** AUTOMA DI #ANY ************");
-	        printDFA(dfa);
-	      
-	}
-
-		
-	// FIXME serve ?
-	public void createRuleForPCDATA(){
-	        
-	        XSDParticle xsdParticle; 
-	        xsdParticle = XSDFactory.eINSTANCE.createXSDParticle();
-	        
-	        XSDParticleImpl.XSDNFA dfa = (XSDParticleImpl.XSDNFA)xsdParticle.getDFA();
-	        
-	    	rules.put("#PCDATA", dfa);
-	    	XSDElementDeclaration xsdElementDeclaration = (XSDElementDeclaration)xsdParticle.getTerm();  // e' null (il term)
-	    	elemDeclNames.put("#PCDATA", xsdElementDeclaration);
-	        
-//	        System.err.println("********** AUTOMA DI #PCDATA ************");
-//	        printDFA(dfa);
-	      
-	}
-		
 	
 	/**
 	 * 
@@ -809,13 +772,39 @@ public class xsdRulesManagerImpl{
 	 * @return
 	 */
 	private XSDParticle.DFA.State getNextState(String ruleName, XSDParticle.DFA.State fromState, String label){
-		if(isMixed(ruleName) && label.equalsIgnoreCase("#PCDATA")){
-			return fromState;
-		}
-		return getAcceptingTransition(fromState,label)!=null?getAcceptingTransition(fromState,label).getState():null;		
+		
+		if(label.equalsIgnoreCase("#PCDATA"))     
+			return isMixed(ruleName)?fromState:null;       // se l'elemento ha mixed content accetta testo
+		 
+		return getAcceptingTransition(fromState,label)!=null?getAcceptingTransition(fromState,label).getState():null;
+		
 	}
 	
 
+	/**
+	 * 
+	 * @param label
+	 * @return
+	 */
+	private String getPrefix(String label){
+		if(label.indexOf(":")==-1)
+			return null;
+		return label.substring(0,label.indexOf(":"));
+	}
+	
+	
+	/**
+	 * 
+	 * @param label
+	 * @return
+	 */
+	private String getUnqualifiedName(String label){
+		if(label.indexOf(":")==-1)
+			return label;
+		return label.substring(label.indexOf(":")+1);
+	}
+	
+	
 	/**
 	 * 
 	 * @param fromState
@@ -823,29 +812,71 @@ public class xsdRulesManagerImpl{
 	 * @return
 	 */
 	private XSDParticle.DFA.Transition getAcceptingTransition(XSDParticle.DFA.State fromState, String label){
+	
+		String nameSpaceUri = (String) prefixToNamespace.get(getPrefix(label));
+		label = getUnqualifiedName(label);
 		
-		// FIXME     sistemare prefissi e namespace
-		String nameSpaceUri;
-		if(label.startsWith("h:")){
-		    nameSpaceUri = "http://www.w3.org/HTML/1998/html4";
-		    label = label.substring(label.indexOf(":")+1);
+		
+		
+		// gli automi di contentModel di tipo Any sono fatti   cosi    [0]---http://www.normeinrete.it/nir/2.2---->[1*]
+		// per crearne il contentGraph abbiamo bisogno di visitarne tutti gli stati
+		// a quellarco li' viene data l'etichetta #EPS
+		// dall'arco si passa se   lo stato di partenza accetta il namespace specificato; manca l'informazione su ANY, NOT, SET (namespaceConstraintCategory)
+		// che per NIR e'   "##OTHER"   corrispondente a NOT;   questa servirebbe per settare il namespaceUri giusto
+		if(label.startsWith("#")){        
+			nameSpaceUri = "";         // Questo nameSpace FUNZIONA PER ANY e PER NOT ; Non funziona per SET (vedi sotto, metodo allows)
 		}
-		else if(label.startsWith("dsp:")){
-			nameSpaceUri = "http://www.normeinrete.it/nir/disposizioni/2.2/";
-			label = label.substring(label.indexOf(":")+1);
-		//FIXME verifica se va bene su xsd:any	
-		}else if(label.startsWith("#")){
-			nameSpaceUri = "";
-		}else 
-			nameSpaceUri = targetNameSpace;
+		
+	
+		// nel rulesManager DFSA  si faceva
+		//		/**
+		//		 * Applica la funzione di transizione ad un simbolo
+		//		 * 
+		//		 * @param value simbolo da cercare sugli archi del DFSA
+		//		 * @return il nodo destinazione della transizione,
+		//		 *         <code>null</null> se il simbolo non fa parte del
+		//		 * vocabolario del nodo
+		//		 */
+		//		public Node getNext(String value) {
+		//			if (value.compareTo("#ANY") == 0)
+		//				return this;
+		//			return (Node) transition_table.get(value);
+		//		}
+		
 		
 		XSDParticle.DFA.Transition accepting = fromState.accept(nameSpaceUri,label);
 		return  accepting;
 	}
 	
 	
+
 	
-	//   questo ?
+//	public boolean allows(String namespace)
+//	  {
+//	    switch (getNamespaceConstraintCategory().getValue())
+//	    {
+//	      case XSDNamespaceConstraintCategory.ANY:
+//	      {
+//	        return true;
+//	      }
+//	      case XSDNamespaceConstraintCategory.NOT:
+//	      {
+//	        return namespace != null && !getNamespaceConstraint().contains(namespace);
+//	      }
+//	      case XSDNamespaceConstraintCategory.SET:
+//	      {
+//	        return getNamespaceConstraint().contains(namespace);
+//	      }
+//	      default:
+//	      {
+//	        return false;
+//	      }
+//	    }
+//	  }
+	
+	
+	
+	//   questo ?    E' il metodo accept di XSDParticleImpl
 	
 //	public XSDParticle.DFA.Transition accept(String namespaceURI, String localName)
 //    {
@@ -881,8 +912,9 @@ public class xsdRulesManagerImpl{
 	
 	
 	
+	
 	/**
-	 * 
+	 * Restituisce l'insieme delle label degli archi uscenti da uno stato del DFA
 	 * @param node
 	 * @return
 	 */
@@ -899,30 +931,17 @@ public class xsdRulesManagerImpl{
 	            v.add(xsdElementDeclaration.getQName());
 	          }else if (xsdTerm instanceof XSDWildcard){
 	            XSDWildcard xsdWildcard = (XSDWildcard)xsdTerm;
-	            v.add("#EPS");
-	            System.err.println("xsdWildCard: "+xsdWildcard.getStringNamespaceConstraint());
-	          }          
-//            da dtdRulesManagerImpl:
-	          
-//	          if (model == "ANY")
-//	  			// rule.addTransition(start,end,"#ANY");
-//	  			rule.addTransition(start, end, "#PCDATA");
-	          
-//           ________________________________________________________________________________	          
-	          
-//	          da XSDParticleImpl .accept    NOTA andra' modificato anche il nostro getNext ?
-	          
-//	          else if (xsdTerm instanceof XSDWildcard)
-//	          {
-//	            XSDWildcard xsdWildcard = (XSDWildcard)xsdTerm;
-//	            if (xsdWildcard.allows(namespaceURI))
-//	            {
-//	              return transition;
-//	            }
-//	          }
-	          
-	          
-			
+	            v.add("#EPS");   // [QUESTO RICOMPARE NEL RIGHT CLICK E NON CI PIACE] ok per la creazione del ContentGraph, meno per i tag inseribili da tasto destro
+	            
+	            //da dtdRulesManagerImpl:
+		        //  if (model == "ANY")
+		  		//	// rule.addTransition(start,end,"#ANY");
+		  		//	rule.addTransition(start, end, "#PCDATA");
+	            System.err.println("---------------------------------------------");
+	            System.err.println("xsdWildCard     NameSpaceConstraint: "+xsdWildcard.getStringNamespaceConstraint());
+	            System.err.println("xsdWildCard:    LexicalNameSpaceConstraint "+xsdWildcard.getStringLexicalNamespaceConstraint());
+	            System.err.println("---------------------------------------------");
+	          }          			
 		}
 		return v;
 	}
@@ -1049,6 +1068,7 @@ public class xsdRulesManagerImpl{
 		XSDParticle.DFA.State choice_node = last_node;
 		Vector alternatives = new Vector();
 		Collection vocabulary = getVocabulary(choice_node);
+	
 		for (Iterator v = vocabulary.iterator(); v.hasNext();) {
 			String symbol = (String) v.next();
 
@@ -1061,7 +1081,7 @@ public class xsdRulesManagerImpl{
 			if (last_node != null && last_node.isAccepting())
 				alternatives.add(symbol);
 		}
-		// ?
+		// se l'elemento ha mixed content aggiungi testo (#PCDATA) fra le possibili alternative
 		if(isMixed(ruleName))
 			alternatives.add("#PCDATA");
 		
