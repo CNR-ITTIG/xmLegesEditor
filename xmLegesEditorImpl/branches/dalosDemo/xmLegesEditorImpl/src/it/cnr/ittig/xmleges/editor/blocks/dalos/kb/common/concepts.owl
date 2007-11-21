@@ -14,10 +14,6 @@
     xmlns:type="http://localhost/dalos/IT/types.owl#"
     xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
   xml:base="http://localhost/dalos/concepts.owl" > 
-  <rdf:Description rdf:about="#concept-ottica_membro-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-livello_di_protezione_consumatore-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
@@ -30,10 +26,6 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-misura_sufficiente-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-forma_appropriato-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
@@ -42,19 +34,15 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-frazione_anno-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-bene-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-liberta-_scelta-noun-1">
+  <rdf:Description rdf:about="#concept-frazione_anno-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-commissione_consiglio-noun-1">
+  <rdf:Description rdf:about="#concept-liberta-_scelta-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -106,19 +94,11 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-membro_diverso-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-mercato-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="#concept-controllo_volontario-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-comitato_economico-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -155,10 +135,6 @@
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="#concept-gioco_azzardo-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-questione_riguardante-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -206,10 +182,6 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-assicurato_presente-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-parere_comitato_economico-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
@@ -218,19 +190,11 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-conto_di_lo_natura_bene-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-pagamento_onere-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="#concept-interesse_consumatore-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-numero_ordine-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -246,27 +210,11 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-senso_regolamento-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-base_accordo-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-liberta-_stabilimento-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-nazionale_relativo-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-tutela-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-bene_mittente-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -310,19 +258,11 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-una_di_lo_lingua_membro-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-bene_consumo-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="#concept-protezione-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-termine_violazione-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -334,15 +274,11 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-materia_di_tutela_interesse_di_il_consumatore-noun-1">
+  <rdf:Description rdf:about="#concept-tradizione_giuridico-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="#concept-pratica_commerciale_aggressivo-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-tradizione_giuridico-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -366,10 +302,6 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-una_lingua-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-contratto_acquisizione-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
@@ -386,15 +318,15 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-persona-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-protezione_di_lo_interesse_consumatore-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="#concept-modalita-_pagamento-noun-1">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="#Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="#concept-persona-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -418,11 +350,11 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-scambio_informazione-noun-1">
+  <rdf:Description rdf:about="#concept-mezzo_comunicazione-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-mezzo_comunicazione-noun-1">
+  <rdf:Description rdf:about="#concept-scambio_informazione-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -490,10 +422,6 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-confronto_responsabile_di_il_codice-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-mercato_comune-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
@@ -526,10 +454,6 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-estremo_autorita--noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-sesso_persona-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
@@ -554,19 +478,11 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-situazione_paragonabile-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-interesse_collettivo-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-prodotto_offerto-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-aspetto_vendita-noun-1">
+  <rdf:Description rdf:about="#concept-interesse_collettivo-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -594,15 +510,7 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-misura_necessario_attuazione_di_il_presente_articolo-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-senso_paragrafo-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-parte-noun-1">
+  <rdf:Description rdf:about="#concept-rimozione_informazione-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -610,7 +518,7 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-rimozione_informazione-noun-1">
+  <rdf:Description rdf:about="#concept-parte-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -622,19 +530,7 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-fattore_attuariale-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-riferimento_presente-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-prezzo_prodotto_offerto-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-riferimento_atto-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -658,10 +554,6 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-prassi_corrente-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-ambito_attivita-_commerciale-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
@@ -671,10 +563,6 @@
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="#concept-osservanza_disposizione-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-elemento_essenziale-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -690,23 +578,11 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-linea_massima-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-accordo_iniziale_servizio-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-materia_tutela-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-negoziato_individuale-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-trattamento_uomo-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -750,14 +626,6 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-merito_attuazione-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-termine_attuazione-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-attivita-_servizio_di_lo_societa--noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
@@ -770,15 +638,7 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-membro_questione-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-requisito_fede-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-membro_interessato-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -827,10 +687,6 @@
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="#concept-procedimento_giudiziario-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-possibilita-_membro-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -890,15 +746,7 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-preliminare_mezzo-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-stipulazione_contratto-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-quadro_normativo-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -911,6 +759,10 @@
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="#concept-consultazione_preliminare-noun-1">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="#Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="#concept-quadro_normativo-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -934,10 +786,6 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-materia_pubblicita--noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-discriminazione_diretto-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
@@ -955,18 +803,6 @@
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="#concept-legge_applicabile-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-senso_articolo-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-membro_materia-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-impiego_tecnica-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -1006,11 +842,11 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-applicazione_regolamento-noun-1">
+  <rdf:Description rdf:about="#concept-consumatore-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-consumatore-noun-1">
+  <rdf:Description rdf:about="#concept-applicazione_regolamento-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -1026,27 +862,11 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-conto_caratteristica-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-fatta_salvo-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-relazione-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-segreto_professionale-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="#concept-moneta_nazionale-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-decimale_specifico-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -1059,10 +879,6 @@
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="#concept-parlamento-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-relazione_applicazione-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -1087,14 +903,6 @@
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="#concept-banca_dato-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-una_di_lo_lingua_ufficiale-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-eliminazione_ostacolo-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -1138,10 +946,6 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-conto_di_lo_evoluzione_economico-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-regolamentazione_pubblicita-_comparativo-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
@@ -1154,19 +958,11 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-criterio_stabilito-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-ordinamento_giuridico-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="#concept-membro-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-prima_serie-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -1222,11 +1018,7 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-condotta_livello_comunitario-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-principio-noun-1">
+  <rdf:Description rdf:about="#concept-tempo_parziale-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -1234,23 +1026,11 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-tempo_parziale-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-terzo_base-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-senso-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-consultazione_autorita--noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-codice_di_condotta_condotta_a_livello_comunitario-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -1274,15 +1054,7 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-legislazione_di_lo_essere_stare_membro_relativo-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-clausola_contrattuale-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-requisito_legge-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -1315,10 +1087,6 @@
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="#concept-sanita-_pubblico-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-controllo_di_il_rispetto_codice-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -1370,15 +1138,7 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-pubblico_indipendente-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-legislazione_applicabile_contratto-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-economica_europeo-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -1394,10 +1154,6 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-parere_parlamento-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-luogo_stabilimento-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
@@ -1406,19 +1162,11 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-ultimo_direttiva-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-regolamento-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="#concept-decisione_consapevole-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-conto_circostanza-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -1438,15 +1186,11 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-tasso_interesse_annuo-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-accordo_iniziale-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-interesse_economico-noun-1">
+  <rdf:Description rdf:about="#concept-tasso_interesse_annuo-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -1454,15 +1198,11 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
+  <rdf:Description rdf:about="#concept-interesse_economico-noun-1">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="#Concept"/>
+  </rdf:Description>
   <rdf:Description rdf:about="#concept-protezione_di_il_consumatore_settore-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-livello_tutela-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-comitato_conciliazione-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -1471,10 +1211,6 @@
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="#concept-sentenza_definitivo-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-misura_sufficiente_membro-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -1494,11 +1230,11 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-prestazione_servizio-noun-1">
+  <rdf:Description rdf:about="#concept-composizione_extragiudiziale_controversia-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-composizione_extragiudiziale_controversia-noun-1">
+  <rdf:Description rdf:about="#concept-prestazione_servizio-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -1507,10 +1243,6 @@
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="#concept-prestatore_stabilito-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-membro_concernente-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -1535,10 +1267,6 @@
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="#concept-periodo_riflessione-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-accordata_presente-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -1594,11 +1322,11 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-contratto-noun-1">
+  <rdf:Description rdf:about="#concept-conto-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-conto-noun-1">
+  <rdf:Description rdf:about="#concept-contratto-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -1639,10 +1367,6 @@
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="#concept-difetto_conformita--noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-previsto_presente-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -1698,15 +1422,7 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-consiglio_programma-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-pratica-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-modalita-_riferimento-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -1766,10 +1482,6 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-fine_see-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-principio_di_lo_parita-_trattamento_tra_uomo-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
@@ -1778,23 +1490,11 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-base_principio-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-rispetto_obbligo_derivante-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="#concept-divieto_infrazione-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-conformita-_procedura-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-operazione_successivo-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -1830,10 +1530,6 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-progetto_comune-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-scopo_ente-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
@@ -1858,15 +1554,7 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-cifra_decimale-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-godimento_tempo_parziale-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-norma_articolo-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -1890,23 +1578,15 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-bene_usato-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-esecuzione-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-parte_membro-noun-1">
+  <rdf:Description rdf:about="#concept-protezione_interesse_economico-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="#concept-programma_preliminare-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-protezione_interesse_economico-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -1918,11 +1598,11 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-carta_credito-noun-1">
+  <rdf:Description rdf:about="#concept-uso_umano-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-uso_umano-noun-1">
+  <rdf:Description rdf:about="#concept-carta_credito-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -1942,11 +1622,11 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-disposizione_essenziale-noun-1">
+  <rdf:Description rdf:about="#concept-fornitore-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-fornitore-noun-1">
+  <rdf:Description rdf:about="#concept-disposizione_essenziale-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -2030,15 +1710,11 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-parte_fornitore-noun-1">
+  <rdf:Description rdf:about="#concept-ostacolo_funzionamento-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="#concept-stabilimento_prestatore-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-ostacolo_funzionamento-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -2047,10 +1723,6 @@
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="#concept-diritto_godimento-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-societa-_informazione_consistente-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -2066,10 +1738,6 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-conto_natura-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-salvaguardia_di_il_diritto_uomo-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
@@ -2078,19 +1746,11 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-aspetto_contratto_relativo-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-comunita--noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="#concept-circolazione_servizio-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-nazionale_adottato-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -2114,10 +1774,6 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-fatto_salvo-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-circostanza_caso-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
@@ -2127,10 +1783,6 @@
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="#concept-indicazione_di_il_prezzo_unita-_di_misura-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-livello_elevato-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -2178,11 +1830,11 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-materia_di_pubblicita-_comparativo-noun-1">
+  <rdf:Description rdf:about="#concept-durata_indeterminato-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-durata_indeterminato-noun-1">
+  <rdf:Description rdf:about="#concept-materia_di_pubblicita-_comparativo-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -2210,23 +1862,15 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-base-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-attivita-_sorveglianza-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-materia_indicazione-noun-1">
+  <rdf:Description rdf:about="#concept-credito_consumo-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="#concept-contratto_distanza-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-credito_consumo-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -2254,10 +1898,6 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-livello_protezione-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-caso_difetto_di_conformita--noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
@@ -2266,19 +1906,7 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-aspetto_di_il_contratto_relativo_acquisizione_di_un_diritto-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-quadro_attivita-_professionale-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-credito_concesso-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-livello_comunitario-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -2287,10 +1915,6 @@
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="#concept-scelta_contraente-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-conto_evoluzione-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -2303,10 +1927,6 @@
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="#concept-pratica_commerciale_ingannevole-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-merito_ricorso-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -2326,7 +1946,7 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-momento_consegna-noun-1">
+  <rdf:Description rdf:about="#concept-accordo_parte_diverso-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -2334,7 +1954,7 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-accordo_parte_diverso-noun-1">
+  <rdf:Description rdf:about="#concept-momento_consegna-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -2347,10 +1967,6 @@
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="#concept-caratteristica_principale-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-consumatore_caso-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -2374,19 +1990,7 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-modifica_direttiva-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-giustizia_comunita--noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-realizzazione_obiettivo-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-ottica_di_il_membro_medio-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -2430,10 +2034,6 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-modo_chiaro-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-liberta-_di_scelta_consumatore-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
@@ -2446,10 +2046,6 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-termine_anno-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
   <rdf:Description rdf:about="#concept-regime_autorizzazione-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
@@ -2458,11 +2054,11 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-prezzo_unita--noun-1">
+  <rdf:Description rdf:about="#concept-termine_anno-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-vincita_equivalente-noun-1">
+  <rdf:Description rdf:about="#concept-prezzo_unita--noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -2470,11 +2066,11 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-principio_di_lo_parita-_trattamento-noun-1">
+  <rdf:Description rdf:about="#concept-esercizio_attivita-_commerciale-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="#concept-esercizio_attivita-_commerciale-noun-1">
+  <rdf:Description rdf:about="#concept-principio_di_lo_parita-_trattamento-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -2491,10 +2087,6 @@
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="#concept-direttiva-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-distanza_servizio_finanziario-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -2523,10 +2115,6 @@
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="#concept-venditore_momento-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-modo-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
@@ -2587,10 +2175,6 @@
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="#concept-materia_pubblicita-_ingannevole-noun-1">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="#Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="#concept-elenco_indicativo-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>
   </rdf:Description>
