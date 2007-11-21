@@ -91,14 +91,21 @@ public class SchemaRulesManagerImpl implements DtdRulesManager,  Loggable {
 
 	// ------------ INIZIALIZZAZIONE DELLE REGOLE --------------------
 
-	public void loadRules(String filename) {
-		File xml_file = new File(filename);
-		loadRules(xml_file);
+//	public void loadRules(String filename) {
+//		File xml_file = new File(filename);
+//		loadRules(xml_file);
+//	}
+	
+	
+	public void loadRules(String schemaPath) {
+		clear();
+		xsdRM.loadRules(schemaPath);
+		
 	}
 	
 	
 	public void loadRules(String filename, String schemaPath) {
-		logger.info("START loading rules from SCHEMA");
+		//logger.info("START loading rules from SCHEMA");
 	
 		File xml_file = new File(filename);
 		
@@ -106,11 +113,17 @@ public class SchemaRulesManagerImpl implements DtdRulesManager,  Loggable {
 			schemaPath = xml_file.getParent().concat(File.separator+schemaPath.substring(2));
 		
 		File schema_file = UtilFile.getGrammarFile(schemaPath);
-		logger.info("------------>   schemaURL= "+schema_file.getAbsolutePath());
+		//logger.info("------------>   schemaURL= "+schema_file.getAbsolutePath());
 		// clear old rules
 		clear();
 		xsdRM.loadRules(schema_file.getAbsolutePath());
-		logger.info("END loading rules from SCHEMA");
+		try{
+		System.err.println("Default content for NIR: "+getDefaultContent("NIR"));
+		}
+		catch(Exception ex){
+			
+		}
+		//logger.info("END loading rules from SCHEMA");
 	}
 
 	
@@ -236,8 +249,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager,  Loggable {
 		String output = "<" + graph.getName() + ">";
 		for (Iterator i = path.iterator(); i.hasNext();)
 			//in questo modo il path non è esploso
-			//output += getXMLContent((ContentGraph) i.next());
-			output += ((ContentGraph) i.next()).name;
+			output += getXMLContent((ContentGraph) i.next());
 		output = output + "</" + graph.getName() + ">";
 
 		return output;
@@ -570,61 +582,6 @@ public class SchemaRulesManagerImpl implements DtdRulesManager,  Loggable {
 	}
 
 
-	/**
-	 * Controlla se il ContentGraph contiene un contenuto di default: un cammino fatto
-	 * solo di elementi di testo e transizioni vuote dal primo all'ultimo nodo
-	 * 
-	 * @param graph il ContentGraph
-	 * @return <code>Integer.MAX_VALUE</code> se non esiste un cammino, altrimenti
-	 *         ritorna la lunghezza del cammino minimo
-	 */
-	static protected int visitContentGraphAlternatives(ContentGraph graph) {
-		ContentGraph.Node first = graph.getFirst();
-		ContentGraph.Node last = graph.getLast();
-
-		// init visit
-		Vector queue = new Vector();
-		for (Iterator i = graph.visitNodes(); i.hasNext();)
-			((ContentGraph.Node) i.next()).resetVisit();
-		first.setVisit(0, "", null);
-		queue.add(first);
-
-		// visit the graph
-		while (queue.size() > 0) {
-			// pop first element from queue
-			ContentGraph.Node tovisit = (ContentGraph.Node) queue.elementAt(0);
-			queue.remove(0);
-
-			// for all the outgoing edges
-			for (int i = 0; i < tovisit.getNoEdges(); i++) {
-				// check if the edge is visitable
-
-				int step = Integer.MAX_VALUE;
-				Object edge = tovisit.getEdge(i);
-				String edgename = tovisit.getEdgeName(i);
-
-				if (edge instanceof ContentGraph)
-					step = visitContentGraphAlternatives((ContentGraph) edge);
-				else if (edgename.compareTo("#PCDATA") == 0)
-					step = 1;
-				else if (edgename.compareTo("#EPS") == 0)
-					step = 0;
-
-				if (step < Integer.MAX_VALUE) {
-					// if this path is shorter set the new path
-					ContentGraph.Node destination = tovisit.getDestination(i);
-					int visit_length = tovisit.getVisitLength() + step;
-					if (destination.getVisitLength() > visit_length) {
-						// push the next node of the path in the queue
-						destination.setVisit(visit_length, edge, tovisit);
-						queue.add(destination);
-					}
-				}
-			}
-		}
-
-		return last.getVisitLength();
-	}
 
 
 
@@ -745,89 +702,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager,  Loggable {
 	///////////////////////////////////////////////////////////////////////////////////
 	
 	
-	
-	///////////////////////////////////////////////////////////////////////////////////
-	//
-	//									SOSPESO
-	//
-	
 
-//	ELIMINARE   ???      NON E' NELL'INTERFACCIA E NON VIENE CHIAMATO DA NESSUNO 
-
-//	/**
-//	* Ritorna una stringa in formato XML che definisce il contenuto di default di un
-//	* elemento, tale elemento deve contenere i nodi desiderati
-//	* 
-//	* @param elem_name il nome dell'elemento padre
-//	* @param nodes i nodi che devono essere contenuti nell'elemento
-//	* @throws DtdRulesManagerException
-//	*/
-//	public String getDefaultContent(String elem_name, Vector nodes) throws DtdRulesManagerException {
-//		// get node names
-//		Vector node_names = new Vector();
-//		for (Iterator i = nodes.iterator(); i.hasNext();) {
-//			Node node = (Node) i.next();
-//			if (node == null)
-//				throw new DtdRulesManagerException("node #" + node_names.size() + " to insert is null");
-//			node_names.addElement(getNodeName(node));
-//		}
-//
-//		// create string content
-//		String str_content = "";
-//		Vector content = getGappedAlignment(elem_name, node_names);
-//		if (content == null)
-//			throw new DtdRulesManagerException("The nodes does not align with the element content");
-//
-//		// transform element names in XML content
-//		for (int i = 0, l = 0; i < content.size(); i++) {
-//			String item = (String) content.elementAt(i);
-//			if (l < nodes.size() && item.equals((String) node_names.elementAt(l))) {
-//				// insert the desired node with its content
-//				str_content += UtilDom.domToString((Node) nodes.elementAt(l++));
-//			} else {
-//				// insert the default content
-//				str_content += getDefaultContent(item);
-//			}
-//		}
-//		return str_content;
-//	}
-	
-	
-	
-//	ELIMINARE   ???      NON E' NELL'INTERFACCIA E NON VIENE CHIAMATO DA NESSUNO 
-//	
-//	/**
-//	 * Ritorna l'allineamento piu' corto della collezione di nodi desiderata con l'automa
-//	 * che rappresenta il contenuto dell'elemento, inserendo dei gaps dove necessario
-//	 * 
-//	 * @param elem_name il nome dell'elemento padre
-//	 * @param elem_children la collezione dei nomi dei figli
-//	 * @return <code>null</code> se non esiste un allineamento, altrimenti la sequenza
-//	 *         di nodi che allinea con l'automa
-//	 * @throws DtdRulesManagerException
-//	 */
-//	public Vector getGappedAlignment(String elem_name, Collection elem_children) throws DtdRulesManagerException {
-//		// text elements must have no children
-//		if (elem_name.startsWith("#"))
-//			return new Vector();
-//
-//		// get automata
-//		DFSA rule = (DFSA) rules.get(elem_name);
-//		if (rule == null)
-//			throw new DtdRulesManagerException("No rule for element <" + elem_name + ">");
-//
-//		// return the alignment
-//		return rule.getGappedAlignment(elem_children);
-//	}	
-	
-	
-	
-	//
-	//								FINE SOSPESO
-	//
-	//
-	///////////////////////////////////////////////////////////////////////////////////
-	
 	
 	
 	
