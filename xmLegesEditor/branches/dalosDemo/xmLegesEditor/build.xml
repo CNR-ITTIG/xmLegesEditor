@@ -64,6 +64,7 @@
 		<include name="**/*.bat" />
 		<include name="**/*.sh" />
 		<include name="**/*.dar" />
+		<include name="**/*.owl" />
 	</patternset>
 
 	<target name="init">
