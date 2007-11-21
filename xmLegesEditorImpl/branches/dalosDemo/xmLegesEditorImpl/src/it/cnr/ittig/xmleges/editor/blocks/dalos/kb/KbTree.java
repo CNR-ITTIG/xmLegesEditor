@@ -236,7 +236,7 @@ public class KbTree {
 		
 		//Non aggiungere per il momento i synset non classificati,
 		//sono visibili nell'elenco dei synset totali
-		//addRemainingSynsets();
+		addRemainingSynsets();
 		
 		linked = null;
 	}
