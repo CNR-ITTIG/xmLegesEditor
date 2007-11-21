@@ -18,10 +18,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-rete_comunicazione-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-bene_mittente-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-bene_mittente-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-principio_sussidiarieta--noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-principio_sussidiarieta--noun-1"/>
@@ -29,10 +25,6 @@
   <rdf:Description rdf:about="individuals.owl#synset-allegazione_fattuale-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-allegazione_fattuale-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-questione_riguardante-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-questione_riguardante-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-aspetto_giuridico-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -62,25 +54,13 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-legislazione_comunitario_protezione-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-elenco_indicativo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-elenco_indicativo-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-gazzetta_ufficiale-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-gazzetta_ufficiale-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-realizzazione_obiettivo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-realizzazione_obiettivo-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-sesso_persona-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-sesso_persona-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-membro_questione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-membro_questione-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-pubblicazione_in_lo_gazzetta_ufficiale-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -102,17 +82,9 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-utilizzazione_a_tempo_parziale_uno-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-conto_caratteristica-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-conto_caratteristica-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-caratteristica_principale-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-caratteristica_principale-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-materia_pubblicita--noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-materia_pubblicita--noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-modalita-_pagamento-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -126,10 +98,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-dato_attuariale-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-livello_protezione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-livello_protezione-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-autorita-_amministrativo-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-autorita-_amministrativo-noun-1"/>
@@ -142,13 +110,13 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-membro-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-distanza-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-distanza-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-giustizia_di_lo_comunita-_europeo-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-giustizia_di_lo_comunita-_europeo-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-distanza-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <rdf:type rdf:resource="../concepts.owl#concept-distanza-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-esercizio_attivita-_commerciale-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -194,10 +162,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-infrazione_intracomunitario-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-misura_sufficiente-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-misura_sufficiente-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-risoluzione_contratto-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-risoluzione_contratto-noun-1"/>
@@ -205,10 +169,6 @@
   <rdf:Description rdf:about="individuals.owl#synset-durata_minimo-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-durata_minimo-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-principio-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-principio-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-organo_giurisdizionale-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -238,14 +198,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-pubblicazione_ufficiale-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-nazionale_adottato-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-nazionale_adottato-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-conto_di_lo_evoluzione_economico-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-conto_di_lo_evoluzione_economico-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-indicazione_di_il_prezzo_prodotto-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-indicazione_di_il_prezzo_prodotto-noun-1"/>
@@ -270,10 +222,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-prezzo_per_unita-_misura-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-senso-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-senso-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-autorita-_competente-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-autorita-_competente-noun-1"/>
@@ -294,10 +242,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-scadenza_termine-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-codice_di_condotta_condotta_a_livello_comunitario-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-codice_di_condotta_condotta_a_livello_comunitario-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-azione-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-azione-noun-1"/>
@@ -310,21 +254,9 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-esecuzione-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-quadro_attivita-_professionale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-quadro_attivita-_professionale-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-aspetto_di_il_contratto_relativo_acquisizione_di_un_diritto-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-aspetto_di_il_contratto_relativo_acquisizione_di_un_diritto-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-godimento_tempo_parziale-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-godimento_tempo_parziale-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-base_principio-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-base_principio-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-commercializzazione_distanza-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -333,10 +265,6 @@
   <rdf:Description rdf:about="individuals.owl#synset-credito-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-credito-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-norma_articolo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-norma_articolo-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-transazione_effettuato-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -354,10 +282,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-contratto_acquisizione-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-modo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-modo-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-decisione_consapevole-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-decisione_consapevole-noun-1"/>
@@ -366,13 +290,13 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-contratto_fornitura-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-consiglio_comunita--noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-consiglio_comunita--noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-controllo_rispetto-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-controllo_rispetto-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-consiglio_comunita--noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <rdf:type rdf:resource="../concepts.owl#concept-consiglio_comunita--noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-luogo_stabilimento-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -402,21 +326,9 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-coordinamento_disposizione_legislativo-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-elemento_essenziale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-elemento_essenziale-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-una_di_lo_lingua_membro-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-una_di_lo_lingua_membro-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-lesione_personale-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-lesione_personale-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-fattore_attuariale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-fattore_attuariale-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-osservanza_disposizione-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -437,10 +349,6 @@
   <rdf:Description rdf:about="individuals.owl#synset-protezione_interesse-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-protezione_interesse-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-ottica_di_il_membro_medio-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-ottica_di_il_membro_medio-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-giorno_lavorativo-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -502,13 +410,13 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-prezzo_unita--noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-intervento_operatore-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-intervento_operatore-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-negoziato_individuale-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-negoziato_individuale-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-intervento_operatore-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <rdf:type rdf:resource="../concepts.owl#concept-intervento_operatore-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-tutela_acquirente-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -522,10 +430,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-assenza_risposta-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-testo_di_lo_disposizione_essenziale_interno-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-testo_di_lo_disposizione_essenziale_interno-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-procedimento_urgenza-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-procedimento_urgenza-noun-1"/>
@@ -534,13 +438,13 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-discriminazione_diretto-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-testo_di_lo_disposizione_essenziale_interno-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <rdf:type rdf:resource="../concepts.owl#concept-testo_di_lo_disposizione_essenziale_interno-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-fiducia_consumatore-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-fiducia_consumatore-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-merito_ricorso-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-merito_ricorso-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-esercizio_attivita-_televisivo-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -549,10 +453,6 @@
   <rdf:Description rdf:about="individuals.owl#synset-contratto_di_acquisizione_diritto_di_utilizzazione-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-contratto_di_acquisizione_diritto_di_utilizzazione-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-parere_parlamento-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-parere_parlamento-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-termine_mese-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -586,17 +486,9 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-momento_consegna-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-conto_natura-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-conto_natura-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-operatore_pubblicitario-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-operatore_pubblicitario-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-progetto_comune-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-progetto_comune-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-venditore_momento-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -621,10 +513,6 @@
   <rdf:Description rdf:about="individuals.owl#synset-oggetto-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-oggetto-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-membro_concernente-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-membro_concernente-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-inserzione_clausola_abusivo-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -662,18 +550,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-pubblicita-_ingannevole-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-membro_diverso-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-membro_diverso-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-fatto_salvo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-fatto_salvo-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-parte_fornitore-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-parte_fornitore-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-tecnica_comunicazione-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-tecnica_comunicazione-noun-1"/>
@@ -690,10 +566,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-caso-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-fine_see-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-fine_see-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-consultazione_autorita--noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-consultazione_autorita--noun-1"/>
@@ -709,10 +581,6 @@
   <rdf:Description rdf:about="individuals.owl#synset-servizio_investimento-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-servizio_investimento-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-aspetto_contratto_relativo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-aspetto_contratto_relativo-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-completamento_mercato-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -734,10 +602,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-unita-_misura-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-servizio_societa--noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-servizio_societa--noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-obbligo_contrattuale-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-obbligo_contrattuale-noun-1"/>
@@ -745,6 +609,10 @@
   <rdf:Description rdf:about="individuals.owl#synset-divieto_infrazione-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-divieto_infrazione-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-servizio_societa--noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <rdf:type rdf:resource="../concepts.owl#concept-servizio_societa--noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-invito_acquisto-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -766,17 +634,9 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-direttiva-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-operazione_successivo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-operazione_successivo-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-interesse_legittimo-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-interesse_legittimo-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-consumatore_caso-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-consumatore_caso-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-informazione_preliminare-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -814,10 +674,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-fornitore_autorita-_giudiziario-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-una_lingua-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-una_lingua-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-esattezza_allegazione_fattuale-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-esattezza_allegazione_fattuale-noun-1"/>
@@ -838,14 +694,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-comunita-_europeo-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-preliminare_mezzo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-preliminare_mezzo-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-ultimo_direttiva-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-ultimo_direttiva-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-fornitore-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-fornitore-noun-1"/>
@@ -865,10 +713,6 @@
   <rdf:Description rdf:about="individuals.owl#synset-organizzazione_professionale-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-organizzazione_professionale-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-materia_indicazione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-materia_indicazione-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-principio_proporzionalita--noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -918,21 +762,17 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-ambito_attivita-_commerciale-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-consiglio_programma-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-consiglio_programma-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-diligenza_professionale-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-diligenza_professionale-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-informazione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-informazione-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-stabilimento_prestatore-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-stabilimento_prestatore-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-informazione-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <rdf:type rdf:resource="../concepts.owl#concept-informazione-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-vantaggio_mercato-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -942,17 +782,13 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-norma-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-misura_necessario_attuazione_di_il_presente_articolo-noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-carta_credito-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-misura_necessario_attuazione_di_il_presente_articolo-noun-1"/>
+    <rdf:type rdf:resource="../concepts.owl#concept-carta_credito-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-visita_commerciante-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-visita_commerciante-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-carta_credito-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-carta_credito-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-diritto_fondamentale-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -1033,10 +869,6 @@
   <rdf:Description rdf:about="individuals.owl#synset-periodo_transitorio-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-periodo_transitorio-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-prima_serie-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-prima_serie-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-diritto_autore-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -1186,10 +1018,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-prezzo_prodotto-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-assicurato_presente-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-assicurato_presente-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-misura_appropriato-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-misura_appropriato-noun-1"/>
@@ -1201,10 +1029,6 @@
   <rdf:Description rdf:about="individuals.owl#synset-parita-_uomo-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-parita-_uomo-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-senso_regolamento-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-senso_regolamento-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-tutela-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -1254,10 +1078,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-servizio_finanziario-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-membro_materia-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-membro_materia-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-obbligo_derivante-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-obbligo_derivante-noun-1"/>
@@ -1269,10 +1089,6 @@
   <rdf:Description rdf:about="individuals.owl#synset-memorizzazione_dato-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-memorizzazione_dato-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-senso_paragrafo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-senso_paragrafo-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-applicazione_regolamento-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -1290,10 +1106,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-difetto_conformita--noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-senso_articolo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-senso_articolo-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-data_prestito-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-data_prestito-noun-1"/>
@@ -1305,10 +1117,6 @@
   <rdf:Description rdf:about="individuals.owl#synset-conclusione_di_il_contratto_distanza-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-conclusione_di_il_contratto_distanza-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-modifica_direttiva-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-modifica_direttiva-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-momento_di_lo_consegna_bene-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -1322,14 +1130,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-comportamento_economico_consumatore-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-pubblico_indipendente-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-pubblico_indipendente-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-protezione_accordato-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-protezione_accordato-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-livello_di_protezione_consumatore-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-livello_di_protezione_consumatore-noun-1"/>
@@ -1338,9 +1138,9 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-circolazione_servizio-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-materia_di_tutela_interesse_di_il_consumatore-noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-protezione_accordato-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-materia_di_tutela_interesse_di_il_consumatore-noun-1"/>
+    <rdf:type rdf:resource="../concepts.owl#concept-protezione_accordato-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-consultazione_di_lo_autorita-_richiedente-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -1362,10 +1162,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-massimale_credito-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-linea_massima-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-linea_massima-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-denominazione_commerciale-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-denominazione_commerciale-noun-1"/>
@@ -1386,10 +1182,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-presente_direttivo-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-relazione_applicazione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-relazione_applicazione-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-forma_appropriato-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-forma_appropriato-noun-1"/>
@@ -1397,10 +1189,6 @@
   <rdf:Description rdf:about="individuals.owl#synset-diritto_godimento-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-diritto_godimento-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-modo_chiaro-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-modo_chiaro-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-mezzo_adeguato-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -1462,10 +1250,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-importo_totale-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-previsto_presente-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-previsto_presente-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-medicinale_uso_umano-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-medicinale_uso_umano-noun-1"/>
@@ -1502,10 +1286,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-garanzia_di_il_bene_consumo-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-comitato_conciliazione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-comitato_conciliazione-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-accordo_parte_diverso-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-accordo_parte_diverso-noun-1"/>
@@ -1521,14 +1301,6 @@
   <rdf:Description rdf:about="individuals.owl#synset-supporto_duraturo-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-supporto_duraturo-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-ottica_membro-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-ottica_membro-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-estremo_autorita--noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-estremo_autorita--noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-consiglio_di_lo_comunita-_europeo-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -1546,17 +1318,13 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-funzionamento_di_il_mercato_comune-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-termine_attuazione-noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-codice_condotta-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-termine_attuazione-noun-1"/>
+    <rdf:type rdf:resource="../concepts.owl#concept-codice_condotta-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-supporto_durevole-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-supporto_durevole-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-codice_condotta-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-codice_condotta-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-stato_conoscenza_scientifico-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -1593,10 +1361,6 @@
   <rdf:Description rdf:about="individuals.owl#synset-consultazione_preliminare-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-consultazione_preliminare-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-livello_comunitario-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-livello_comunitario-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-attivita-_di_sorveglianza_mercato-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -1666,10 +1430,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-persona_sesso-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-trattamento_uomo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-trattamento_uomo-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-livello-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-livello-noun-1"/>
@@ -1698,14 +1458,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-piano_azione-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-vincita_equivalente-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-vincita_equivalente-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-conto_di_lo_natura_bene-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-conto_di_lo_natura_bene-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-segno_distintivo-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-segno_distintivo-noun-1"/>
@@ -1722,17 +1474,9 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-mercato_interno-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-materia_tutela-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-materia_tutela-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-tasso_annuo-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-tasso_annuo-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-fatta_salvo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-fatta_salvo-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-contratto_distanza-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -1745,14 +1489,6 @@
   <rdf:Description rdf:about="individuals.owl#synset-autorita-_interpellato-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-autorita-_interpellato-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-decimale_specifico-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-decimale_specifico-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-situazione_paragonabile-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-situazione_paragonabile-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-diritto-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -1786,10 +1522,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-dichiarazione_rettificativo-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-eliminazione_ostacolo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-eliminazione_ostacolo-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-importo-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-importo-noun-1"/>
@@ -1797,10 +1529,6 @@
   <rdf:Description rdf:about="individuals.owl#synset-serie_operazione-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-serie_operazione-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-misura_sufficiente_membro-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-misura_sufficiente_membro-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-gruppo_professionista-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -1822,13 +1550,13 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-procedura_giudiziario-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-persona-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-persona-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-anno_entrata-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-anno_entrata-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-persona-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <rdf:type rdf:resource="../concepts.owl#concept-persona-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-organo_amministrativo-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -1858,25 +1586,17 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-somma_versato-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-riferimento_atto-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-riferimento_atto-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-proposta_modifica-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-proposta_modifica-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-interesse_economico-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-interesse_economico-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-quadro_attivita-_commerciale-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-quadro_attivita-_commerciale-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-confronto_responsabile_di_il_codice-noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-interesse_economico-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-confronto_responsabile_di_il_codice-noun-1"/>
+    <rdf:type rdf:resource="../concepts.owl#concept-interesse_economico-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-comunita-_economico-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -1910,10 +1630,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-tutela_di_lo_acquirente_aspetto_di_il_contratto_relativo-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-membro_interessato-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-membro_interessato-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-danno_risultante-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-danno_risultante-noun-1"/>
@@ -1937,10 +1653,6 @@
   <rdf:Description rdf:about="individuals.owl#synset-identita-_fornitore-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-identita-_fornitore-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-bene_usato-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-bene_usato-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-trattato-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -1974,10 +1686,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-firma_elettronico-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-termine_violazione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-termine_violazione-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-bene_immobile-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-bene_immobile-noun-1"/>
@@ -1986,25 +1694,17 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-legge_applicabile_contratto-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-termine_anno-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-termine_anno-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-conto-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-conto-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-termine_anno-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <rdf:type rdf:resource="../concepts.owl#concept-termine_anno-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-informazione_consistente-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-informazione_consistente-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-aspetto_vendita-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-aspetto_vendita-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-conto_circostanza-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-conto_circostanza-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-atto_pubblicazione-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -2013,14 +1713,6 @@
   <rdf:Description rdf:about="individuals.owl#synset-composizione_extragiudiziale_controversia-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-composizione_extragiudiziale_controversia-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-base_accordo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-base_accordo-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-distanza_servizio_finanziario-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-distanza_servizio_finanziario-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-commercializzazione_a_distanza_distanza_di_servizio_finanziario-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -2033,10 +1725,6 @@
   <rdf:Description rdf:about="individuals.owl#synset-accordo_iniziale_servizio-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-accordo_iniziale_servizio-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-commissione_consiglio-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-commissione_consiglio-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-acquirente_aspetto-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -2061,18 +1749,6 @@
   <rdf:Description rdf:about="individuals.owl#synset-organismo_autonomo-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-organismo_autonomo-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-conto_evoluzione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-conto_evoluzione-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-una_di_lo_lingua_ufficiale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-una_di_lo_lingua_ufficiale-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-riferimento_presente-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-riferimento_presente-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-principio_di_lo_parita-_trattamento-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -2102,21 +1778,9 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-termine_giorno-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-legislazione_di_lo_essere_stare_membro_relativo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-legislazione_di_lo_essere_stare_membro_relativo-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-ricorso_giurisdizionale-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-ricorso_giurisdizionale-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-parte_membro-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-parte_membro-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-numero_ordine-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-numero_ordine-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-prezzo_prodotto_offerto-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -2125,10 +1789,6 @@
   <rdf:Description rdf:about="individuals.owl#synset-cooperazione_commissione-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-cooperazione_commissione-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-merito_attuazione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-merito_attuazione-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-banca_dato-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -2154,13 +1814,13 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-concessione_credito-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-scopo_ente-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-scopo_ente-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-fornitore_servizio_finanziario-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-fornitore_servizio_finanziario-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-scopo_ente-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <rdf:type rdf:resource="../concepts.owl#concept-scopo_ente-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-funzionamento_di_il_mercato_interno-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -2174,13 +1834,13 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-consumatore_medio-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-programma_preliminare-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-programma_preliminare-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-termine-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-termine-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-programma_preliminare-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <rdf:type rdf:resource="../concepts.owl#concept-programma_preliminare-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-contratto_credito-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -2190,10 +1850,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-pratica_commerciale_aggressivo-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-requisito_legge-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-requisito_legge-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-esecuzione_contratto-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-esecuzione_contratto-noun-1"/>
@@ -2201,10 +1857,6 @@
   <rdf:Description rdf:about="individuals.owl#synset-mercato-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-mercato-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-accordata_presente-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-accordata_presente-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-autorita-_pubblico-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -2218,10 +1870,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-divieto_di_lo_infrazione_intracomunitario-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-relazione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-relazione-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-vendita-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-vendita-noun-1"/>
@@ -2234,10 +1882,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-testo_rilevante-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-conformita-_procedura-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-conformita-_procedura-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-contratto_negoziato-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-contratto_negoziato-noun-1"/>
@@ -2245,14 +1889,6 @@
   <rdf:Description rdf:about="individuals.owl#synset-principio_parita--noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-principio_parita--noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-livello_elevato-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-livello_elevato-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-prassi_corrente-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-prassi_corrente-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-revisione_codice-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -2274,10 +1910,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-testo_disposizione_essenziale-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-economica_europeo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-economica_europeo-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-rispetto_obbligo_derivante-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-rispetto_obbligo_derivante-noun-1"/>
@@ -2286,13 +1918,13 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-direttiva_modificato-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-funzionamento_mercato-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-funzionamento_mercato-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-circostanza_caso-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-circostanza_caso-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-funzionamento_mercato-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <rdf:type rdf:resource="../concepts.owl#concept-funzionamento_mercato-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-attivita-_sorveglianza-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -2306,17 +1938,13 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-attivita--noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-livello_tutela-noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-responsabilita-_prestatore-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-livello_tutela-noun-1"/>
+    <rdf:type rdf:resource="../concepts.owl#concept-responsabilita-_prestatore-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-legislazione_applicabile_contratto-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-legislazione_applicabile_contratto-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-responsabilita-_prestatore-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-responsabilita-_prestatore-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-attivita-_televisivo-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -2346,13 +1974,13 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-diritto_proprieta--noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-ricorso_a_lo_forza_fisico-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-ricorso_a_lo_forza_fisico-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-responsabile_codice-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-responsabile_codice-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-ricorso_a_lo_forza_fisico-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <rdf:type rdf:resource="../concepts.owl#concept-ricorso_a_lo_forza_fisico-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-professionista-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -2370,18 +1998,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-pagamento_onere-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-cifra_decimale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-cifra_decimale-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-societa-_informazione_consistente-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-societa-_informazione_consistente-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-condotta_livello_comunitario-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-condotta_livello_comunitario-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-giorno_successivo_pubblicazione_in_lo_gazzetta-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-giorno_successivo_pubblicazione_in_lo_gazzetta-noun-1"/>
@@ -2389,10 +2005,6 @@
   <rdf:Description rdf:about="individuals.owl#synset-modalita-_esercizio-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-modalita-_esercizio-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-possibilita-_membro-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-possibilita-_membro-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-fine_di_lo_protezione_consumatore-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -2406,17 +2018,9 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-professionista_settore_economico-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-comitato_economico-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-comitato_economico-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-prestazione-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-prestazione-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-impiego_tecnica-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-impiego_tecnica-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-indirizzo_geografico_rilevante-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -2434,10 +2038,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-servizio_di_lo_societa-_informazione-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-base-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-base-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-quadro_normativo-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-quadro_normativo-noun-1"/>
@@ -2445,10 +2045,6 @@
   <rdf:Description rdf:about="individuals.owl#synset-frazione_anno-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-frazione_anno-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-nazionale_relativo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-nazionale_relativo-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-carattere_abusivo-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -2482,13 +2078,13 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-attivita-_commerciale-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-obbligazione_contrattuale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-obbligazione_contrattuale-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-scambio_informazione-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-scambio_informazione-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-obbligazione_contrattuale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <rdf:type rdf:resource="../concepts.owl#concept-obbligazione_contrattuale-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-documento_scritto-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -2509,10 +2105,6 @@
   <rdf:Description rdf:about="individuals.owl#synset-periodo_riflessione-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-periodo_riflessione-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-controllo_di_il_rispetto_codice-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-controllo_di_il_rispetto_codice-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-allegato_direttiva-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -2558,13 +2150,13 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-rispetto_disposizione-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-prestazione_servizio-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-prestazione_servizio-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-esecuzione_prestazione-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-esecuzione_prestazione-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-prestazione_servizio-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <rdf:type rdf:resource="../concepts.owl#concept-prestazione_servizio-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-tecnica_di_comunicazione_distanza-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -2574,10 +2166,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-forza_fisico-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-trasmissione_informazione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-trasmissione_informazione-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-protezione_consumatore-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-protezione_consumatore-noun-1"/>
@@ -2585,6 +2173,10 @@
   <rdf:Description rdf:about="individuals.owl#synset-legge_applicabile-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-legge_applicabile-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-trasmissione_informazione-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <rdf:type rdf:resource="../concepts.owl#concept-trasmissione_informazione-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-spedizione_di_il_bene_mittente-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -2598,10 +2190,6 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-denominazione_origine-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-criterio_stabilito-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-criterio_stabilito-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-natura_commerciale-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-natura_commerciale-noun-1"/>
@@ -2609,10 +2197,6 @@
   <rdf:Description rdf:about="individuals.owl#synset-accordo_iniziale-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="../concepts.owl#concept-accordo_iniziale-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-modalita-_riferimento-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="../concepts.owl#concept-modalita-_riferimento-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-comunicazione_distanza-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
