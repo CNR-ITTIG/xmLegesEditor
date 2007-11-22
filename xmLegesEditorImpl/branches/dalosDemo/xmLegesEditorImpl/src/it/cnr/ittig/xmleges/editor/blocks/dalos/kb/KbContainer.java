@@ -2,12 +2,15 @@ package it.cnr.ittig.xmleges.editor.blocks.dalos.kb;
 
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
+import it.cnr.ittig.xmleges.editor.services.dalos.objects.OntoClass;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Source;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.SynsetTree;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collection;
@@ -17,6 +20,9 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
+
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeModel;
 
 import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.ontology.OntClass;
@@ -30,6 +36,7 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.ModelMaker;
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.RDFNode;
+import com.hp.hpl.jena.rdf.model.RDFWriter;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
@@ -523,8 +530,7 @@ public class KbContainer {
 			}
 		}		
 		syn.setSemanticPropCached(true);
-	}
-	
+	}	
 	
 	private void addLinguisticProperty(Synset syn, Property prop, RDFNode obj) {
 		
@@ -608,4 +614,136 @@ public class KbContainer {
 		
 		return false;
 	}
+	
+	/*
+	 * 
+	 * FUNZIONI SPERIMENTALI
+	 * 
+	 */
+	
+	void saveOwlClasses() {
+		
+		SynsetTree tree = getTree();
+		
+		ModelMaker maker = ModelFactory.createMemModelMaker();
+		OntModelSpec spec = new OntModelSpec( OntModelSpec.OWL_MEM );
+		spec.setImportModelMaker(maker);
+		OntModel om = ModelFactory.createOntologyModel(spec, null);
+		
+		TreeModel model = tree.getModel();
+		Object root = model.getRoot();
+		walkClass(model, root, null, om, 0);
+
+		write(om, "/home/lorenzo/ontologies/consumer-law-classes.owl");
+
+	}
+	
+	private void walkClass(TreeModel model, Object o, 
+			OntClass oc, OntModel om, int indent) {
+		
+		int  cc = model.getChildCount(o);
+		for( int i = 0; i < cc; i++) {
+			Object child = model.getChild(o, i);
+			Object data = ((DefaultMutableTreeNode) child).getUserObject();
+			if(data instanceof OntoClass) {
+				OntClass newOc = om.createClass((
+						"file://home/lorenzo/ontologies/consumer-law-classes.owl#" +
+							((OntoClass) data).name));
+				if(oc != null) {
+					oc.addSubClass(newOc);
+				}
+				String ind = " ";
+				for(int c = 0; c < indent; c++) {
+					ind += "   ";
+				}
+				System.out.println(ind + "+ " + newOc.getLocalName());
+				walkClass(model, child, newOc, om, ++indent);
+			}
+		}
+	}
+	
+	private static void write(OntModel om, String outputFile) {
+		
+		System.out.println("Serializing ontology model to " + outputFile + "...");
+
+		RDFWriter writer = om.getWriter("RDF/XML-ABBREV"); //faster than RDF/XML-ABBREV
+		
+		//RDFWriter configuration
+		
+		//More info about properties and error handler (RDFWriter/RDFReader) at:
+		//http://jena.sourceforge.net/IO/iohowto.html
+		//http://jena.sourceforge.net/javadoc/com/hp/hpl/jena/xmloutput/RDFXMLWriterI.html
+		
+		//Get relative file name and use it as base..
+		String relativeOutputFileName = "file:consumer-law-classes.owl";
+		
+		//set base property
+		writer.setProperty("xmlbase", relativeOutputFileName);
+		
+		try {
+			OutputStream out = new FileOutputStream(outputFile);
+			//Write down the BASE model only (don't follow imports...)
+			writer.write(om.getBaseModel(), out, relativeOutputFileName);
+			out.close();
+		} catch(Exception e) {
+			System.err.println("Exception serializing model:" + e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
+	void checkFrameRepresentation() {
+		
+		long t1 = System.currentTimeMillis();
+		
+		Set properties = new HashSet();
+
+		OntModel om = getModel("domain", "micro");
+		
+		System.out.println("\n\n\n\n@@@@@@@@@@ KB - FRAME REPRESENTATION @@@@@@@@");
+		for(Iterator i = om.listClasses(); i.hasNext();) { 
+			OntClass oc = (OntClass) i.next();
+			if(!oc.isAnon() && 
+					!oc.getNameSpace().equalsIgnoreCase(KbConf.DOMAIN_ONTO_NS)) {
+				continue;
+			}
+
+			System.out.println("\n\n@ OntClass: " + oc.getLocalName());
+			for(Iterator p = oc.listDeclaredProperties(false); p.hasNext(); ) {
+				OntProperty op = (OntProperty) p.next();
+				if(properties.contains(op)) {
+					continue;
+				} else {
+					properties.add(op);
+				}
+				if(!op.isAnon() &&
+						!op.getNameSpace().equalsIgnoreCase(KbConf.DOMAIN_ONTO_NS)) {
+					continue;
+				}
+				System.out.println("@@@ OntProperty: " + op.getLocalName());
+				int anons = 0;
+				for(Iterator r = op.listRange(); r.hasNext();) {
+					OntClass range = (OntClass) r.next();
+					if(!range.isAnon() && 
+							!range.getNameSpace().equalsIgnoreCase(KbConf.DOMAIN_ONTO_NS)) {
+						continue;
+					}
+					if(!range.isAnon()) {
+						System.out.println("@@@@@ Range: " + range.getLocalName());
+					} else {
+						if(range.isRestriction()) {
+							System.out.println("@@@@@ Range Restriction: " +
+									range.toString());
+						}
+						anons++;
+					}
+				}
+				System.out.println("@@@@@ Range # Anon Classes: " + anons);
+			}
+		}	
+
+		long t2 = System.currentTimeMillis();
+		System.out.println("...Done with Frame Representation! (" 
+				+ Long.toString(t2 - t1) + " ms)\n");
+	}
+
 }
