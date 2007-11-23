@@ -1319,7 +1319,11 @@
 						<xsl:variable name="novellando">
 							<xsl:value-of select="../*[name()='dsp:novellando']/*[name()='dsp:pos']/@xlink:href"/>
 						</xsl:variable>	
-						<a name="n{$id}" href="#t{$id}">[<xsl:value-of select="$numeronota"/>]</a>
+
+						<xsl:if test="position()=1">
+							<a name="n{$id}" href="#t{$id}">[<xsl:value-of select="$numeronota"/>]</a>
+		   				</xsl:if>
+
 						<xsl:text> - </xsl:text>
 						<xsl:choose>
 							<xsl:when test="$novellando">
@@ -1356,6 +1360,7 @@
    					</xsl:if>					
 					<xsl:text> da: </xsl:text>
 					<a href="http://www.nir.it/cgi-bin/N2Ln?{$urn}" title=" Dest. = http://www.nir.it/cgi-bin/N2Ln?{$urn}"><xsl:value-of select="$autonota"/></a>
+					<xsl:text>. </xsl:text>
 			      </xsl:for-each>
 				</xsl:when>
 				<xsl:otherwise>
@@ -1363,9 +1368,9 @@
 					<a name="n{$id}" href="#t{$id}">[<xsl:value-of select="$numeronota"/>]</a>
 					<xsl:text> - Modificato da: </xsl:text>
 					<a href="http://www.nir.it/cgi-bin/N2Ln?{$urn}" title=" Dest. = http://www.nir.it/cgi-bin/N2Ln?{$urn}"> <xsl:value-of select="$urn" /> </a>
+					<xsl:text>. </xsl:text>
 				</xsl:otherwise>			
 			</xsl:choose>
-			<xsl:text>. </xsl:text>
 				<xsl:choose>
 					<!-- ================= data_fine!='' =========-->
 						<xsl:when test="$data_fine!=''">
@@ -1409,14 +1414,14 @@
 		<xsl:value-of select="concat(substring(date:date-time(),1,4),substring(date:date-time(),6,2),substring(date:date-time(),9,2))"/>
 	 </xsl:variable>
 	 <p>
-		Date di vigenza che interessano il documento:
+		- Date di vigenza che interessano il documento:
 		<xsl:text> </xsl:text> 
 		<xsl:for-each select="//*[name()='eventi']/*[@data!='']">
 			<xsl:variable name="data">
 				<xsl:value-of select="concat(substring(@data,7,2),'/',substring(@data,5,2),'/',substring(@data,1,4))"/>
 			</xsl:variable>
 			<xsl:value-of select="$data"/>
-			<xsl:text> </xsl:text> 
+			<xsl:text> - </xsl:text> 
 		</xsl:for-each>
 	 </p>		
 	</xsl:template>
