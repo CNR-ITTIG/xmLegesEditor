@@ -77,7 +77,7 @@
 					font-size: 100%;
 				}
 				.articolo { 
-					font-size: 90% ; 
+					font-size: 100% ; 
 					margin-top: 15px; 
 					text-align: center;
 				}
