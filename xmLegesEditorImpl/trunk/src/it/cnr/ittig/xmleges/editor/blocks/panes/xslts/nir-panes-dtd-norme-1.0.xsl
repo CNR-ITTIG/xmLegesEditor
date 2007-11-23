@@ -112,7 +112,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <!-- ================================================================ DECORAZIONE === -->
 <!-- ================================================================================ -->
 <xsl:template match="*[name()='decorazione']">
-    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
+    <!--	xsl:element name="span" use-attribute-sets="XsltMapperSetClass"	-->
+    <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
         <xsl:apply-templates />
     </xsl:element>
