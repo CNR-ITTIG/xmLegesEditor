@@ -98,6 +98,12 @@
 					font-weight: lighter;
 					font-size: 100%;
 				}
+				p.decorazione {
+					text-align: center;
+					margin-top: 0;
+					font-weight: lighter;
+					font-size: 100%;
+				}
 				.comma { 
 					font-size: 100% ; 
 					font-weight: normal;
@@ -408,6 +414,12 @@
 		</p>
 	</xsl:template>
 
+	<xsl:template match="//*[name()='decorazione']">
+		<p class="decorazione">
+			<xsl:apply-templates/>
+		</p>
+	</xsl:template>
+	
 <!--	<xsl:template match="nir:*">
 				<div class="{local-name()}">
 						<xsl:apply-templates select="nir:num">

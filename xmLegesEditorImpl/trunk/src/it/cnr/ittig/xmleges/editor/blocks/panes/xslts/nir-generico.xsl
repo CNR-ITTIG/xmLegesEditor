@@ -251,6 +251,12 @@
 		</xsl:choose>				
 		</p>
 	</xsl:template>
+	
+	<xsl:template match="//*[name()='decorazione']">
+		<p class="decorazione">
+			<xsl:apply-templates/>
+		</p>
+	</xsl:template>
 
 <!--	<xsl:template match="nir:*">
 				<div class="{local-name()}">

@@ -63,6 +63,12 @@
 					font-weight: lighter;
 					font-size: 100%;
 				}
+				p.decorazione {
+					text-align: center;
+					margin-top: 0;
+					font-weight: lighter;
+					font-size: 100%;
+				}
 				.comma { 
 					font-size: 100% ; 
 					font-weight: normal;
