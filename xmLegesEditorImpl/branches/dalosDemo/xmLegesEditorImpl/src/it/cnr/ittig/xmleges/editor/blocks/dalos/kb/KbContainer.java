@@ -745,5 +745,12 @@ public class KbContainer {
 		System.out.println("...Done with Frame Representation! (" 
 				+ Long.toString(t2 - t1) + " ms)\n");
 	}
+	
+	void compute(String type) {
+		
+		SPEngine spe = new SPEngine(getModel("full", "micro"));
+		spe.compute(type);
+		System.out.println("COMPUTE processing done.");
+	}
 
 }

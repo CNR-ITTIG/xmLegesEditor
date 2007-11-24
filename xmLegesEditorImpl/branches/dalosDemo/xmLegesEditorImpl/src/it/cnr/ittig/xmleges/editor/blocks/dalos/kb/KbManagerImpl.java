@@ -6,7 +6,6 @@ import it.cnr.ittig.services.manager.Logger;
 import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
-import it.cnr.ittig.services.manager.Startable;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
 import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
@@ -103,7 +102,8 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 		
 		String lang = syn.getLanguage();
 		KbContainer kbc = getContainer(lang);
-		kbc.addSemanticProperties(syn);
+		//kbc.addSemanticProperties(syn);
+		kbc.compute("dp");
 	}
 	
 	public void addLexicalProperties(Synset syn) {
