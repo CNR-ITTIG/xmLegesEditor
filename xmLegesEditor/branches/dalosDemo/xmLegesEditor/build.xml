@@ -55,6 +55,7 @@
 		<include name="**/*.html" />
 		<include name="**/*.txt" />
 		<include name="**/*.png" />
+		<include name="**/*.gif" />		
 		<include name="**/*.exe" />
 		<include name="**/*.dll" />
 		<include name="**/*.so" />
