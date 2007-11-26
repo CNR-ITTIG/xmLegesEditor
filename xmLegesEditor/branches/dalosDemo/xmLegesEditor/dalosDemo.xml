@@ -237,15 +237,13 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <item action="file.saveas" />
                     <!--	item action="file.removepi" /	-->   
                     <separator/>
-                    <menu action="file.connect">
-                        <menu action="connect.ftp">
-	                        <item action="connect.ftp.open" />
-	                        <item action="connect.ftp.save" />	                        
-						</menu>
-                        <menu action="connect.webdav"> 
-	                        <item action="connect.webdav.open" />
-	                        <item action="connect.webdav.save" />	                        
-                        </menu>
+                    
+					<!--	item action="file.savemonovig" />
+                    <separator/	-->
+                    
+                    <menu action="file.connect">                       
+                        <item action="connect.webdav.open" />
+                        <item action="connect.webdav.save" />	                        
                     </menu>          
                     <separator/>
                     <item action="file.print" />
