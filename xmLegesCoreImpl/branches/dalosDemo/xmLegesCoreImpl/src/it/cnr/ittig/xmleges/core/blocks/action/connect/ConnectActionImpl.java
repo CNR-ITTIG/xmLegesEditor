@@ -7,10 +7,10 @@ import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.services.manager.Startable;
-import it.cnr.ittig.xmleges.core.services.action.file.open.FileOpenAction;
-import it.cnr.ittig.xmleges.core.services.action.file.save.FileSaveAction;
 import it.cnr.ittig.xmleges.core.services.action.ActionManager;
 import it.cnr.ittig.xmleges.core.services.action.connect.ConnectAction;
+import it.cnr.ittig.xmleges.core.services.action.file.open.FileOpenAction;
+import it.cnr.ittig.xmleges.core.services.action.file.save.FileSaveAction;
 import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentOpenedEvent;
@@ -18,23 +18,32 @@ import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.frame.Frame;
+import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.preference.PreferenceManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.util.domwriter.DOMWriter;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.EventObject;
 import java.util.Properties;
 
 import javax.swing.AbstractAction;
+import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.ListCellRenderer;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 
@@ -44,21 +53,6 @@ import org.apache.commons.httpclient.HttpURL;
 import org.apache.commons.httpclient.HttpsURL;
 import org.apache.webdav.lib.WebdavResource;
 import org.apache.webdav.lib.methods.LockMethod;
-
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.util.StringTokenizer;
-
-import sun.net.TelnetInputStream;
-import sun.net.ftp.FtpClient;
-
 
 /**
  * <h1>Implementazione del servizio
@@ -80,7 +74,7 @@ import sun.net.ftp.FtpClient;
 
 public class ConnectActionImpl implements ConnectAction, EventManagerListener, Loggable, Serviceable, Initializable, Startable {
 
-	private HttpURL httpURL;
+	HttpURL httpURL;
 
 	WebdavResource webdavResource = null;
 	
@@ -98,87 +92,82 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 	
 	EventManager eventManager;
 	
-	FtpOpenAction ftpOpenAction;
-
-	FtpSaveAction ftpSaveAction;
-
 	WebdavOpenAction webdavOpenAction;
 	
 	WebdavSaveAction webdavSaveAction;
 	
-	ConnettiAction connectAction;
+	AzioneConnetti connectAction;
 	
-	LockUnlockAction lockUnlockAction;
+	AzioneCollection collectionAction; 
+	
+	AzioneDelete deleteAction;
+	
+	AzioneLock lockAction;
+	
+	AzioneUnlock unlockAction;
+	
+	AzioneRefresh refreshAction;
+	
+	AzioneHistory historyAction;
 	
 	FileOpenAction fileOpenAction;
 	
 	FileSaveAction fileSaveAction;
 	
-	String type;
-	
 	Frame frame;
 	
 	Form form;
+	Form formNewFolder;
 	
-	FtpClient ftpClient = new FtpClient();
+	WebdavResource fileLocked = null;
 	
 	JLabel typehost;
 	JLabel etiUser;
 	JLabel etiPassword;
 	JLabel etiDir;
+	JTextField newDir;
+	JLabel currentDir;
 	JTextField host;
 	JTextField user;
-	JTextField password;
+	JPasswordField password;
 	JTextField file;
 	JLabel currDir;
+	
 	JList filedir;
+	I18n i18n;
+	Icon tipoDirectory;
+	Icon tipoFile;
+	Icon tipoLock;
+	
 	JButton connect;
-	JButton lockUnlock;
-	String lastFtpHost = null;
-	String lastFtpUser = null;
-	String lastFtpPass = null;
+	JButton collection;
+	JButton delete;
+	JButton lock;
+	JButton unlock;
+	JButton refresh;
+	JButton history;
+
 	String lastDavHost = null;
 	String lastDavUser = null;
 	String lastDavPass = null;
-	String dirFtp;
-	
-	DefaultListModel listModel = new DefaultListModel();
 	
 	MouseAdapter mouseAdapter = new MouseAdapter() {
 		public void mouseClicked(MouseEvent e) {
-			if (SwingUtilities.isLeftMouseButton(e) && filedir.getSelectedIndex()!=-1) {
+			if (SwingUtilities.isLeftMouseButton(e) && filedir.getSelectedIndex()!=-1 && e.getClickCount() == 2) {
 				
-				String temp = ((String) listModel.getElementAt(filedir.getSelectedIndex()));
-				String pre = temp.substring(0, 6);
-				temp = temp.substring(6,temp.length());
-				
-				if (type.equals("ftp")) {
-					
-					//aggiornare come fatto per DAV!!!!!!!!!!!
-					
-					if (cwdFTP(temp)) {	//test se è una directory
-						file.setText("");
-						readDirFTP("");
-					} else	{
-						file.setText(temp);
-						file.setEnabled(true);
-					}	
+				if (filedir.getSelectedIndex()==0) {
+					readDirDAV("..");
+					file.setText("");
 				}
-				if (type.equals("webdav")) {		
-					if (pre.trim().equals("DIR:")) {	//test se è una directory
-						lockUnlock.setVisible(false);
-						//file.setText("");
-						readDirDAV(temp);
-					} else {	
-						
-						//NON LO ATTIVO... cerca Strategia beinformed qui nel codice 
-						//lockUnlock.setVisible(true);
-						
-						if (pre.trim().equals("Lock!"))
-							lockUnlock.setText("Unlock");
-						else
-							lockUnlock.setText("Lock");
-						file.setText(temp);
+				else {
+					WebdavResource selezione = list[filedir.getSelectedIndex()-1];  
+
+					if(selezione.isCollection()) {
+						readDirDAV(selezione.getDisplayName());
+						file.setText("");
+					}
+					else {
+						file.setText(selezione.getDisplayName());
 						file.setEnabled(true);
 					}	
 				}
@@ -200,35 +189,52 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 		frame = (Frame) serviceManager.lookup(Frame.class);
 		form = (Form) serviceManager.lookup(Form.class);
+		formNewFolder = (Form) serviceManager.lookup(Form.class);
 		fileOpenAction = (FileOpenAction) serviceManager.lookup(FileOpenAction.class); 
 		fileSaveAction = (FileSaveAction) serviceManager.lookup(FileSaveAction.class);
+		i18n = (I18n) serviceManager.lookup(I18n.class);
 	}
 
 
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws Exception {
 		
-		ftpOpenAction = new FtpOpenAction();
-		actionManager.registerAction("connect.ftp.open", ftpOpenAction);
-		ftpSaveAction = new FtpSaveAction();
-		actionManager.registerAction("connect.ftp.save", ftpSaveAction);
 		webdavOpenAction = new WebdavOpenAction();
 		actionManager.registerAction("connect.webdav.open", webdavOpenAction);
 		webdavSaveAction = new WebdavSaveAction();
 		actionManager.registerAction("connect.webdav.save", webdavSaveAction);	
-		connectAction = new ConnettiAction();
+		connectAction = new AzioneConnetti();
 		actionManager.registerAction("editor.form.connetti.connect", connectAction);
-		lockUnlockAction = new LockUnlockAction();
-		actionManager.registerAction("editor.form.connetti.lockUnlock", lockUnlockAction);		
+		
+		collectionAction = new AzioneCollection();
+		actionManager.registerAction("editor.form.connetti.collection", collectionAction);
+		deleteAction = new AzioneDelete();
+		actionManager.registerAction("editor.form.connetti.delete", deleteAction);
+		lockAction = new AzioneLock();
+		actionManager.registerAction("editor.form.connetti.lock", lockAction);
+		unlockAction = new AzioneUnlock();
+		actionManager.registerAction("editor.form.connetti.unlock", unlockAction);
+		refreshAction = new AzioneRefresh();
+		actionManager.registerAction("editor.form.connetti.refresh", refreshAction);
+		historyAction = new AzioneHistory();
+		actionManager.registerAction("editor.form.connetti.history", historyAction);	
+
 		eventManager.addListener(this, DocumentOpenedEvent.class);
 		eventManager.addListener(this, DocumentClosedEvent.class);
 		
-		
+		tipoDirectory = i18n.getIconFor("editor.form.connetti.icondir");
+		tipoFile = i18n.getIconFor("editor.form.connetti.icondocument");
+		tipoLock = i18n.getIconFor("editor.form.connetti.iconlock");
 		form.setSize(450, 430);
 		form.setName("file.connect.form");
 		form.setMainComponent(getClass().getResourceAsStream("Connetti.jfrm"));
-		
 		form.setHelpKey("help.contents.form.connect");
+		
+		formNewFolder.setSize(300, 160);
+		formNewFolder.setName("file.connect.form.newfolder");
+		formNewFolder.setMainComponent(getClass().getResourceAsStream("NewFolder.jfrm"));
+		currentDir = (JLabel) formNewFolder.getComponentByName("editor.form.connetti.dir");
+		newDir = (JTextField) formNewFolder.getComponentByName("editor.form.connetti.newfolder");
 		
 		typehost = (JLabel) form.getComponentByName("editor.form.connetti.typehost");
 		etiUser = (JLabel) form.getComponentByName("editor.form.connetti.etiUser");
@@ -236,76 +242,70 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 		etiDir = (JLabel) form.getComponentByName("editor.form.connetti.etiDir");
 		host = (JTextField) form.getComponentByName("editor.form.connetti.host");
 		user = (JTextField) form.getComponentByName("editor.form.connetti.user");
-		password = (JTextField) form.getComponentByName("editor.form.connetti.password");
+		password = (JPasswordField) form.getComponentByName("editor.form.connetti.password");
 		file = (JTextField) form.getComponentByName("editor.form.connetti.file");
 		currDir = (JLabel) form.getComponentByName("editor.form.connetti.dir");
 		filedir = (JList) form.getComponentByName("editor.form.connetti.filedir");
 		
 		filedir.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		filedir.setEnabled(true);
-		filedir.setModel(listModel);
-		
+			
 		connect = (JButton) form.getComponentByName("editor.form.connetti.connect");
 		connect.addActionListener(connectAction);
-		lockUnlock = (JButton) form.getComponentByName("editor.form.connetti.lockUnlock");
-		lockUnlock.setVisible(false);
-		lockUnlock.addActionListener(lockUnlockAction);
-
+		collection = (JButton) form.getComponentByName("editor.form.connetti.collection");
+		collection.addActionListener(collectionAction);
+		delete = (JButton) form.getComponentByName("editor.form.connetti.delete");
+		delete.addActionListener(deleteAction);
+		lock = (JButton) form.getComponentByName("editor.form.connetti.lock");
+		lock.addActionListener(lockAction);
+		unlock = (JButton) form.getComponentByName("editor.form.connetti.unlock");
+		unlock.addActionListener(unlockAction);
+		refresh = (JButton) form.getComponentByName("editor.form.connetti.refresh");
+		refresh.addActionListener(refreshAction);
+		history = (JButton) form.getComponentByName("editor.form.connetti.history");
+		history.addActionListener(historyAction);
+		history.setVisible(false); //non implementata
+		
 		Properties p = preferenceManager.getPreferenceAsProperties(this.getClass().getName());
 		try {
-			lastFtpHost = p.getProperty("lastftphost");
-			lastFtpUser = p.getProperty("lastftpuser");
-			lastFtpPass = p.getProperty("lastftppass");
 			lastDavHost = p.getProperty("lastdavhost");
 			lastDavUser = p.getProperty("lastdavuser");
-			lastDavPass = p.getProperty("lastdavpass");
-		} catch (Exception ex) {
-		}
+		} catch (Exception ex) {}
 		manageEvent(null);
 	}
 
 	// /////////////////////////////////////////////////// Startable Interface
-	public void start() throws Exception {
-	}
+	public void start() throws Exception {}
 
 	public void stop() throws Exception {
 
 		logger.debug("saving last host/user/pass...");
 		Properties p = preferenceManager.getPreferenceAsProperties(getClass().getName());
 		try {
-			p.setProperty("lastftphost", lastFtpHost);
-			p.setProperty("lastftpuser", lastFtpUser);
-			p.setProperty("lastftppass", lastFtpPass);
 			p.setProperty("lastdavhost", lastDavHost);
 			p.setProperty("lastdavuser", lastDavUser);
-			p.setProperty("lastdavpass", lastDavPass);
 		} catch (Exception ex) {
 		}
 		preferenceManager.setPreference(getClass().getName(), p);
 		logger.debug("saving OK");
+		try {
+			if (fileLocked != null) {
+				fileLocked.unlockMethod();
+				logger.debug("Tento lo sblocco di: " + fileLocked.getDisplayName());
+			}
+		} catch (Exception e) {}	
 	}
 
 	// //////////////////////////////////////// EventManagerListener Interface
 	public void manageEvent(EventObject event) {
-		ftpOpenAction.setEnabled(true);
-		ftpSaveAction.setEnabled(!documentManager.isEmpty());
 		webdavOpenAction.setEnabled(true);
 		webdavSaveAction.setEnabled(!documentManager.isEmpty());
 	}
 
-	protected class ConnettiAction extends AbstractAction {
+	protected class AzioneConnetti extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
-			if (type.equals("ftp"))
-				if (openFTP(host.getText(), 21, user.getText(), password.getText())) {
-					if (!readDirFTP(""))
-						utilMsg.msgError("connect.ftp.dirftp.error");
-					else {
-						lastFtpHost=host.getText();
-						lastFtpUser=user.getText();
-						lastFtpPass=password.getText();
-					}
-				} else  utilMsg.msgError("connect.ftp.open.error");
-			if (type.equals("webdav"))
+
+
 				if (openDAV(host.getText(), user.getText(), password.getText())) {
 					if (!readDirDAV(""))
 						utilMsg.msgError("connect.webdav.dirdav.error");
@@ -318,87 +318,88 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 		}
 	}	
 	
-	protected class LockUnlockAction extends AbstractAction {
+	protected class AzioneCollection extends AbstractAction {
+		public void actionPerformed(ActionEvent e) {		
+			try {
+				currentDir.setText("Dir: " + currDir.getText());
+				formNewFolder.showDialog();
+				if (formNewFolder.isOk()) {
+					webdavResource.mkcolMethod(webdavResource.getPath()+"/"+newDir.getText()); 
+					readDirDAV("");
+				}	
+			} catch (Exception ex) {}			
+				
+		}
+	}	
+	
+	protected class AzioneDelete extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
 			try {
-				
-				//NOTA: non imposto nessun parametro sul LOCK tipo:
-				//				LockMethod.DEPTH_INFINITY
-				//				LockMethod.SCOPE_EXCLUSIVE
-				// neanche il proprietario.... tutto in default !!!
-				
 				WebdavResource temp = list[filedir.getSelectedIndex()-1];	
-				if (temp.isLocked()) {
-					logger.debug("Unlock: " + temp.getDisplayName());
-					if (!temp.unlockMethod())
-						utilMsg.msgError("connect.dav.unlock.error");
-				}
-				else {
-					logger.debug("Lock: " + temp.getDisplayName());
-					if (!temp.lockMethod())
-						utilMsg.msgError("connect.dav.lock.error");
-				}
+				temp.deleteMethod();
 				readDirDAV("");
-			} catch (HttpException we) {
-            	//utilMsg.msgError("Error " + we.getStatusCode() + ": " + we.getMessage());
-				utilMsg.msgError("Error " + we.getReasonCode() + ": " + we.getMessage());
-            } catch (Exception we) {
-            	utilMsg.msgError("Error: " + we.getMessage());
-            }
+			} catch (Exception ex) {}
 		}
 	}
 	
-	private void initField(String connectionType) {
-		type = connectionType;
+	protected class AzioneLock extends AbstractAction {
+		public void actionPerformed(ActionEvent e) {
+			try {
+				WebdavResource temp = list[filedir.getSelectedIndex()-1];	
+				temp.lockMethod();
+			} catch (Exception ex) {}
+			readDirDAV("");
+		}
+	}
+	
+	protected class AzioneUnlock extends AbstractAction {
+		public void actionPerformed(ActionEvent e) {
+			try {
+				WebdavResource temp = list[filedir.getSelectedIndex()-1];	
+				temp.unlockMethod();
+			} catch (Exception ex) {}
+			readDirDAV("");
+		}
+	}
+	
+	protected class AzioneRefresh extends AbstractAction {
+		public void actionPerformed(ActionEvent e) {
+			readDirDAV("");
+		}
+	}
+	
+	protected class AzioneHistory extends AbstractAction {
+		public void actionPerformed(ActionEvent e) {
+			System.err.println("6 - history");
+		}
+	}
+	
+	private void initField() {
 		etiDir.setVisible(false);
-		if (type.equals("ftp")) {			
-			host.setText(lastFtpHost);
-			user.setText(lastFtpUser);
-			password.setText(lastFtpPass);
-			dirFtp="/";
-		}
-		if (type.equals("webdav")) {
-			host.setText(lastDavHost);
-			user.setText(lastDavUser);
-			password.setText(lastDavPass);
-		}
-		typehost.setText("Host " + connectionType);
+		collection.setEnabled(false);
+		delete.setEnabled(false);
+		lock.setEnabled(false);
+		unlock.setEnabled(false);
+		refresh.setEnabled(false);
+		history.setEnabled(false);		
+		
+		host.setText(lastDavHost);
+		user.setText(lastDavUser);
+		password.setText(lastDavPass);
+		filedir.setCellRenderer( new davListCellRenderer());
+		
+		typehost.setText("Host");
 		currDir.setText("*** non connesso ***");
 		file.setText("");
 		file.setEnabled(false);
 		filedir.removeMouseListener(mouseAdapter);
 		
-		listModel.removeAllElements();
-		lockUnlock.setVisible(false);
+		filedir.setListData(new Object[0]);
 	}
-	
-	protected class FtpOpenAction extends AbstractAction {
-		public void actionPerformed(ActionEvent e) {
-			
-			initField("ftp");
-			form.showDialog();
-			if (form.isOk())
-				if (!readFTP(file.getText(),""))
-					utilMsg.msgError("connect.ftp.read.error");
-			closeFTP();
-		}
-	}
-
-	protected class FtpSaveAction extends AbstractAction {
-		public void actionPerformed(ActionEvent e) {
-			
-			initField("ftp");
-			form.showDialog();
-			if (form.isOk())
-				if (!writeFTP(file.getText(),""))
-					utilMsg.msgError("connect.ftp.wite.error");
-			closeFTP();
-		}
-	}
-	
+		
 	protected class WebdavOpenAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
-			initField("webdav");
+			initField();
 			form.showDialog();
 			if (form.isOk())
 				if (!readDAV(file.getText(),""))
@@ -409,24 +410,20 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 	
 	protected class WebdavSaveAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
-
-			initField("webdav");
+			initField();
 			form.showDialog();
 			if (form.isOk())
 				if (!writeDAV(file.getText(),""))
 					utilMsg.msgError("connect.webdav.wite.error");
-			closeFTP();
+			closeDAV();
 		}
 	}
 	
-	
-	
-	//Funzioni WebDAV	
 	private boolean openDAV(String url, String user, String password) {
-				
+						
 		if (url.substring(url.length()-1, url.length()).equals("/"))
 			url=url.substring(0, url.length()-1);
-		currDir.setText(">>> Mi connetto ...");
+		currDir.setText(">>> Connetto ...");
         try {        	
         	if (url.startsWith("https"))
         		httpURL = new HttpsURL(url);
@@ -441,7 +438,6 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
             }
 
         } catch (HttpException we) {
-        	//if (we.getStatusCode() == HttpStatus.SC_UNAUTHORIZED) {
         	if (we.getReasonCode() == HttpStatus.SC_UNAUTHORIZED) {
         		try {
                     try {
@@ -456,7 +452,6 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
                 		httpURL = new HttpsURL(url);
                 	else
                 		httpURL = new HttpURL(url);
-                    //httpURL.setUserInfo(user, password);
                     httpURL.setUserinfo(user, password);
                     if (webdavResource != null) {
                         webdavResource.setHttpURL(url);                        
@@ -466,7 +461,6 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
                     }
        
                 } catch (HttpException e) {
-                	//utilMsg.msgError("Error " + e.StatusCode() + ": " + e.getMessage());
                 	utilMsg.msgError("Error " + e.getReasonCode() + ": " + e.getMessage());
                     httpURL = null;
                     currDir.setText("*** non connesso ***");
@@ -479,7 +473,6 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
                 }
         	}	
         	else {
-        		//utilMsg.msgError("Error " + we.getStatusCode() + ": " + we.getMessage());
         		utilMsg.msgError("Error " + we.getReasonCode() + ": " + we.getMessage());
         		httpURL = null;
         		currDir.setText("*** non connesso ***");
@@ -496,6 +489,12 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
         currDir.setText(webdavResource.getPath());
         filedir.addMouseListener(mouseAdapter);
         file.setEnabled(true);
+		collection.setEnabled(true);
+		delete.setEnabled(true);
+		lock.setEnabled(true);
+		unlock.setEnabled(true);
+		refresh.setEnabled(true);
+		history.setEnabled(true);
 	    return true;
 		
 	}
@@ -518,7 +517,6 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 				return false;
 			if (!cwdDAV(dir))
 				return false;
-			
 			
 			File file=new File("temp/tempDAV.xml");
 			String encoding;
@@ -546,22 +544,16 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 			UtilFile.copyFile("temp/tempDAV.xml", "temp/tempDAV.zip");
 			File file2= UtilFile.getFileFromTemp("tempDAV.zip");
 			
-			
-			
 			logger.debug("Write: " + httpURL.getScheme()+"//"+httpURL.getHost()+":"+httpURL.getPort()+webdavResource.getPath()+"/"+fileName);			
-			
-			//STRATEGIA beinformed
 			webdavResource.unlockMethod(webdavResource.getPath()+"/"+fileName, password.getText());
+			
+			//indico che non ho file bloccati
+			fileLocked = null;
 						
-			//if (!webdavResource.putMethod(webdavResource.getPath()+"/"+fileName, file))
 			if (!webdavResource.putMethod(webdavResource.getPath()+"/"+fileName, file2))
 				utilMsg.msgError(webdavResource.getStatusCode() + ": " + webdavResource.getStatusMessage());
-				
-			
-			
-						
+		
         } catch (HttpException we) {
-        	//utilMsg.msgError("Error " + we.getStatusCode() + ": " + we.getMessage());
         	utilMsg.msgError("Error " + we.getReasonCode() + ": " + we.getMessage());
 			return false;							
 		} catch (IOException e) {
@@ -575,24 +567,17 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 		try {
 			if (!cwdDAV(dir))
 				return false;
-			listModel.removeAllElements();
 			list = webdavResource.listWebdavResources();
-
-			//scommentare per le info su Date Size ..
-//			Date data = new Date();
-			listModel.addElement("DIR:  ..");
-			String pre;
-            for (int i = 0; i < list.length; i++) {            	
-            	if (list[i].isLocked())
-            		pre = "Lock! ";
-            	else if (list[i].isCollection())
-            		pre = "DIR:  ";
-            	else pre = "File: ";
-//            	data = new Date(list[i].getGetLastModified());
-//              listModel.addElement(pre + list[i].getDisplayName() + " " + list[i].getGetContentType() + " " + list[i].getGetContentLength() + " " + data.toLocaleString()); 
-                listModel.addElement(pre + list[i].getDisplayName());
-            }
+			
+			WebdavResource[] listafile = new WebdavResource[list.length+1];
+        	listafile[0] = new WebdavResource(httpURL);
+        	listafile[0].setPath(webdavResource.getPath());
+            for (int i = 0; i < list.length; i++) 
+            	listafile[i+1] = list[i];
+            	
+			filedir.setListData(listafile);
             
+			
 		} catch (Exception e) {
 			return false;
 		}
@@ -604,32 +589,38 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 			if (fileName.equals(""))
 				return false;
 			if (!cwdDAV(dir))
-				return false;			
+				return false;
+			
+			try {
+				if (fileLocked != null)
+					fileLocked.unlockMethod();
+			} catch (Exception e) {}
+			
 			File file=new File("temp/"+fileName);
-			
-			logger.debug("Read: " + httpURL.getScheme()+"//"+httpURL.getHost()+":"+httpURL.getPort()+webdavResource.getPath()+"/"+fileName);
-			
-			//STRATEGIA beinformed
-			webdavResource.lockMethod(webdavResource.getPath()+"/"+fileName, password.getText(), LockMethod.DEPTH_INFINITY, LockMethod.SCOPE_EXCLUSIVE);
 
+			logger.debug("Read: " + httpURL.getScheme()+"//"+httpURL.getHost()+":"+httpURL.getPort()+webdavResource.getPath()+"/"+fileName);
+			webdavResource.lockMethod(webdavResource.getPath()+"/"+fileName, password.getText(), LockMethod.DEPTH_INFINITY, LockMethod.SCOPE_EXCLUSIVE);			
+			
 			if (!webdavResource.getMethod(webdavResource.getPath()+"/"+fileName, file))
 				utilMsg.msgError(webdavResource.getStatusCode() + ": " + webdavResource.getStatusMessage());				
 
-			
+			//Tengo traccia del file che sto aprendo e bloccando
+			fileLocked = list[filedir.getSelectedIndex()];
 			
 			fileOpenAction.doOpen(file.getAbsolutePath(), false);
 
         } catch (HttpException we) {
-        	//utilMsg.msgError("Error " + we.getStatusCode() + ": " + we.getMessage());
         	utilMsg.msgError("Error " + we.getReasonCode() + ": " + we.getMessage());
 			return false;										
-		} catch (IOException e) {
+		} catch (Exception ex) {
 			return false;
 		}
+		
 		return true;
 	}
 			
-	private boolean cwdDAV(String dir){	
+	private boolean cwdDAV(String dir){
+		String vecchiaDir = webdavResource.getPath();
 		try {
 			if (!dir.equals(""))
 				if (dir.equals("..")) {
@@ -652,183 +643,43 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 					return false;					
 				}			
 		} catch (HttpException we) {
-			//utilMsg.msgError("Error " + we.getStatusCode() + ": " + we.getMessage());
 			utilMsg.msgError("Error " + we.getReasonCode() + ": " + we.getMessage());
-			return false;
-		} catch (IOException e) {
-			return false;
-		}	
-		return true;
-	}	
-
-
-	
-	//Funzioni FTP
-	private boolean openFTP(String url, int port, String user, String password) {
-		try {
-			ftpClient.openServer(url);
-			ftpClient.login(user, password);
-			filedir.addMouseListener(mouseAdapter);
-			file.setEnabled(true);
-			dirFtp = ".";
-			currDir.setText(dirFtp);
-			etiDir.setVisible(true);
-		    return true;
-		}
-		catch (IOException e) {
-		    return false;
-		}		
-	}
-	
-	private boolean closeFTP(){	
-		try {
-			ftpClient.closeServer();
-		} catch (IOException e) {
-			return false;
-		}
-		return true;
-	}
-			
-	private boolean writeFTP(String fileName, String dir){	
-		try {
-			if (fileName.equals(""))
-				return false;
-			if (!cwdFTP(dir))
-				return false;
-			
-			File file=new File("temp/tempFTP.xml");
-			
-			
-			//TODO utilizzare (SE POSSIBILE) qualcosa del tipo 
-			//fileSaveAction.doSave();  o il metodo privato:  saveFile(File file);
-			
-			String encoding;
-			if (documentManager.getEncoding() == null) {
-				logger.warn("No encoding found. Using default: UTF-8");
-				encoding = "UTF-8";
-			} else
-				encoding = documentManager.getEncoding();
-			DOMWriter domWriter = new DOMWriter();
-			domWriter.setCanonical(false);
-			domWriter.setFormat(true);
 			try {
-				domWriter.setOutput(file, encoding);
-				domWriter.write(documentManager.getDocumentAsDom());
-				documentManager.setChanged(false);
-				documentManager.setSourceName(file.getAbsolutePath());
-				documentManager.setNew(false);
-			} catch (UnsupportedEncodingException ex) {
-				utilMsg.msgError("action.file.save.error.encoding");
-				logger.error(ex.toString(), ex);
-			} catch (FileNotFoundException ex) {
-				utilMsg.msgError("action.file.save.error.file");
-				logger.error(ex.toString(), ex);
-			}
-
-			
-			String nomeFileDest=fileName;
-			OutputStream out = ftpClient.put(nomeFileDest);
-			InputStream in = new FileInputStream(file);
-			byte c[] = new byte[4096];
-			int read = 0;
-			while ((read = in.read(c)) != -1 )
-				out.write(c, 0, read);			
-			in.close();
-			out.close();
-							
-		} catch (IOException e) {
+				webdavResource.setPath(vecchiaDir);
+			} catch (Exception e) {}
 			return false;
-		}
-		return true;
-	}
-
-	private boolean readDirFTP(String dir){	
-		try {
-			if (!cwdFTP(dir))
-				return false;
-			listModel.removeAllElements();
-		    TelnetInputStream lst = ftpClient.list();
-		    
-		    //if (!ftpClient.pwd().equals("/"))		LO COMMENTO molti ftp piantano la connessione su questa richiesta
-		    	listModel.addElement("DIR:  ..");
-		    String str = "";
-		    String etiDir;
-		    while (true) {
-			  etiDir = "DIR:  ";
-		      int c = lst.read();
-		      char ch = (char) c;
-		      if (c < 0 || ch == '\n') {
-
-		          StringTokenizer tk = new StringTokenizer(str);
-		          if (tk.hasMoreTokens() && !tk.nextToken().substring(0,1).equals("d"))
-		        	  etiDir="File: ";
-		          String nomeFile="";
-		          while (tk.hasMoreTokens()) 
-		            nomeFile = tk.nextToken();
-
-		          if (!nomeFile.equals("")) 
-		        	  listModel.addElement(etiDir + nomeFile);
-		          str = "";
-		      }
-		      if (c <= 0)
-		        break;
-		      str += ch;
-		    }
-		    
-		} catch (Exception e) {
-			return false;
-		}
-		return true;
-	}
-	
-	private boolean readFTP(String fileName, String dir){	
-		try {
-			if (fileName.equals(""))
-				return false;
-			if (!cwdFTP(dir))
-				return false;
-			
-			File file=new File("temp/"+fileName);
-			
-			InputStream in = ftpClient.get(file.getName());
-			OutputStream out = new FileOutputStream(file);
-			byte c[] = new byte[4096];
-			int read = 0;
-			while ((read = in.read(c)) != -1 )
-				out.write(c, 0, read);
-			in.close();
-			out.close();
-			
-			fileOpenAction.doOpen(file.getAbsolutePath(), false);
-									
-		} catch (Exception e) {
-			return false;
-		}
-		return true;
-	}
-			
-	private boolean cwdFTP(String dir){	
-		try {
-			if (!dir.equals("")) {
-				ftpClient.cd(dir);
-				if (dir.equals(".."))
-					if (dirFtp.lastIndexOf('/')!=-1)
-						dirFtp = dirFtp.substring(0,dirFtp.lastIndexOf('/')-1);
-					else
-						dirFtp = ".";
-				else
-					dirFtp = dirFtp+"/"+dir;
-				if (dirFtp.length()<30)
-					currDir.setText(dirFtp);
-				else
-					currDir.setText("... " + dirFtp.substring(dirFtp.length()-30,dirFtp.length()));
-			}	
 		} catch (IOException e) {
 			return false;
 		}	
 		return true;
 	}	
-				    
+	
+	public class davListCellRenderer extends JLabel implements ListCellRenderer {
+
+		public davListCellRenderer() {
+			setOpaque(true);
+			setVerticalAlignment(CENTER);
+		}
+	
+		public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+			if(value instanceof WebdavResource){
+				setBackground(isSelected ? Color.LIGHT_GRAY : Color.WHITE);
+				setText(((WebdavResource)value).getDisplayName());
+				if (((WebdavResource)value).isCollection()) {
+					setIcon(tipoDirectory);
+					try {
+					if (webdavResource.getPath().equals(((WebdavResource)value).getPath()))
+						setText("..");
+					} catch (Exception e) {}
+				} else
+					if (((WebdavResource)value).isLocked())
+						setIcon(tipoLock);
+					else
+						setIcon(tipoFile);
+			}			
+			return this;
+		}
+	}
 	
 }
 
