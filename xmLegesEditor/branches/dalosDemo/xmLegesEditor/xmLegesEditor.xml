@@ -38,15 +38,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 			</layout>
 		</appender>
 		
-		<!--	logger name=".xxx" additivity="false">
-                        <priority value ="debug" />
-                        <appender-ref ref="ConsoleAppender" />
-        </logger	-->
-       
        	<root>
 			<priority value ="error" /> 
 			<appender-ref ref="ConsoleAppender" />
- 			<appender-ref ref="BugReportAppender" /> 
+ 			<!--	appender-ref ref="BugReportAppender" /	--> 
  			<!--appender-ref ref="FileAppender" /-->
 		</root>
         	
@@ -158,7 +153,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  class="it.cnr.ittig.xmleges.core.blocks.version.VersionImpl"
         >
         <configuration>
-            <version>2.0 rc6</version>
+            <version>2.0 rc8.1</version>
             <url>http://repo.ittig.cnr.it/nireditor2/versions.txt</url>
         </configuration>
     </component>
@@ -170,8 +165,12 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <!-- ================================================================== -->
     <component  class="it.cnr.ittig.xmleges.core.blocks.i18n.I18nImpl">
         <configuration>
-            <locale language="it" country="IT" variant="16" />
-			<!-- locale language="en" country="EN" /	-->            
+            <!--	locale language="it" country="IT" variant="16" /	-->
+			<!-- locale language="en" country="EN" /	--> 
+            
+         	<!-- scommentare la riga sotto nella versione per creare l'installer -->
+            <locale language="$ISO3_LANG" country="$ISO3_LANG" variant="16" />    
+            
             <base>i18n/editor</base>
             <base>i18n/editor-dom</base>
             <base>i18n/core</base>
@@ -236,15 +235,13 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <item action="file.saveas" />
                     <!--	item action="file.removepi" /	-->   
                     <separator/>
-                    <menu action="file.connect">
-                        <menu action="connect.ftp">
-	                        <item action="connect.ftp.open" />
-	                        <item action="connect.ftp.save" />	                        
-						</menu>
-                        <menu action="connect.webdav"> 
-	                        <item action="connect.webdav.open" />
-	                        <item action="connect.webdav.save" />	                        
-                        </menu>
+                    
+					<!--	item action="file.savemonovig" />
+                    <separator/	-->
+                    
+                    <menu action="file.connect">                       
+                        <item action="connect.webdav.open" />
+                        <item action="connect.webdav.save" />	                        
                     </menu>          
                     <separator/>
                     <item action="file.print" />
@@ -382,12 +379,13 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                         <item action="editor.partizioni.numero" />
                         <item action="editor.partizioni.punto" />
                         <item action="editor.partizioni.rubrica" />
-                        <!--	item action="editor.partizioni.vigenza" /	-->
-                        
+                        <!--	item action="editor.partizioni.vigenza" /	-->                        
                         <item action="editor.disposizioni.passive" />
-                        
-
 						<item action="editor.disposizioni.rimuovipassive" />
+                        
+                        
+                        <item action="editor.disposizioni.attive" />
+                        
                         
                         
                         <item action="editor.annessi.annesso" />
@@ -550,12 +548,11 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <item action="editor.partizioni.punto" />
                     <item action="editor.partizioni.rubrica" />
                     <!--	item action="editor.partizioni.vigenza" /	-->
-                    
                     <item action="editor.disposizioni.passive" />
-                    
-
 					<item action="editor.disposizioni.rimuovipassive" />
 
+
+                    <item action="editor.disposizioni.attive" />
 
                     
                     <item action="editor.annessi.annesso" />
@@ -775,6 +772,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 class="it.cnr.ittig.xmleges.editor.blocks.action.cambiadtd.CambiaDtdActionImpl"
     />
     
+    <!--	component  lifestyle="singleton" activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.action.monovigenti.SalvaMonovigentiActionImpl"
+    /	-->
+    
     <component  lifestyle="singleton" activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.action.annessi.AnnessiActionImpl"
     />
@@ -846,14 +847,16 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 class="it.cnr.ittig.xmleges.editor.blocks.action.vigenza.VigenzaActionImpl"
     />
 
-
-
-
     <component  activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.action.disposizioni.passive.DispPassiveActionImpl"
     />
 
 
+
+
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.action.disposizioni.attive.DispAttiveActionImpl"
+    />
 
 
 
@@ -964,8 +967,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 class="it.cnr.ittig.xmleges.editor.blocks.form.rinvii.interni.RinviiInterniFormImpl"
     />
     
-
-
     <component  lifestyle="singleton" activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.passive.ModificaDispPassiveFormImpl"
     />
@@ -977,6 +978,19 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     />
     <component  lifestyle="pool"
                 class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.passive.NovellaFormImpl"
+    />
+    
+
+
+
+
+
+    <component  lifestyle="singleton" activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.attive.DispAttiveFormImpl"
+    />
+
+    <component  lifestyle="pool"
+                class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.attive.NovellandoNovellaFormImpl"
     />
     
     
@@ -1291,7 +1305,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
         </configuration>                
     </component>
     
-  
+
     <component  activation="startup"
                 class="it.cnr.ittig.xmleges.core.blocks.panes.xslteditor.XsltEditorImpl"
         >
