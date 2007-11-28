@@ -117,12 +117,13 @@ public class SchemaRulesManagerImpl implements DtdRulesManager,  Loggable {
 		// clear old rules
 		clear();
 		xsdRM.loadRules(schema_file.getAbsolutePath());
-		try{
-		System.err.println("Default content for NIR: "+getDefaultContent("NIR"));
-		}
-		catch(Exception ex){
-			
-		}
+//		try{
+//		System.err.println("Default content for NIR: "+getDefaultContent("NIR"));
+//		}
+//		catch(Exception ex){
+//			
+//		}
+		
 		//logger.info("END loading rules from SCHEMA");
 	}
 
