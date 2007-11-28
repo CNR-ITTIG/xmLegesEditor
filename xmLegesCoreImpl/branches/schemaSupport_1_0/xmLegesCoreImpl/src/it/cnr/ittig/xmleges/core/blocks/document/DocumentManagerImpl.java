@@ -224,10 +224,13 @@ public class DocumentManagerImpl implements DocumentManager, EventListener, Logg
 		return ddi != null ? ddi.getXmlEncoding() : null;
 	}
 
+	
+	
+	// FIXME    vedere tutti i posti dove viene chiamato getDtdName()  e correggere; fare un refactor del nome del metodo
 	public String getDtdName() {
 		Document doc = this.document;
 		if (doc != null) {
-			String dtdPath = doc.getDoctype().getSystemId();
+			String dtdPath = getGrammarPath(doc);//doc.getDoctype().getSystemId();
 			String[] pathChunks = dtdPath.split("/");
 			String currentDTD = pathChunks[pathChunks.length - 1];
 			return (currentDTD);
