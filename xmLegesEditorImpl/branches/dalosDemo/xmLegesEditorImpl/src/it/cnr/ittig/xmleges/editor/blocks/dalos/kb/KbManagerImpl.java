@@ -102,8 +102,8 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 		
 		String lang = syn.getLanguage();
 		KbContainer kbc = getContainer(lang);
-		//kbc.addSemanticProperties(syn);
-		kbc.compute("dp");
+		kbc.addSemanticProperties(syn);
+		//kbc.compute("dp");
 	}
 	
 	public void addLexicalProperties(Synset syn) {
