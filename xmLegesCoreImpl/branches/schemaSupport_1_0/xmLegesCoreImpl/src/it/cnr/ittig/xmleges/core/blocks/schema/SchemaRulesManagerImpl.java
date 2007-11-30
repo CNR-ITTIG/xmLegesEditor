@@ -67,7 +67,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	protected boolean pre_check = false;
 	
 	
-	protected xsdRulesManagerImpl xsdRM;
+	protected UtilXsd utilXsd;
 
 
 
@@ -87,12 +87,12 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 
 	public SchemaRulesManagerImpl(Logger logger) {
 		enableLogging(logger);
-		xsdRM = new xsdRulesManagerImpl();		
+		utilXsd = new UtilXsd();		
 	}
 	
 
 	public void clear() {
-		xsdRM.clear();
+		utilXsd.clear();
 	}
 
 	// ------------ INIZIALIZZAZIONE DELLE REGOLE --------------------
@@ -105,7 +105,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	
 	public void loadRules(String schemaPath) {
 		clear();
-		xsdRM.loadRules(schemaPath);
+		utilXsd.loadRules(schemaPath);
 		
 	}
 	
@@ -122,7 +122,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 		//logger.info("------------>   schemaURL= "+schema_file.getAbsolutePath());
 		// clear old rules
 		clear();
-		xsdRM.loadRules(schema_file.getAbsolutePath());
+		utilXsd.loadRules(schema_file.getAbsolutePath());
 //		try{
 //		System.err.println("Default content for NIR: "+getDefaultContent("NIR"));
 //		}
@@ -159,12 +159,12 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	
 	
 	public boolean assessAttribute(Node node, String attributeName){
-		return xsdRM.assessAttribute(node,attributeName);
+		return utilXsd.assessAttribute(node,attributeName);
 	}
 	
 	
 	public boolean assess(Node node){
-		return xsdRM.assess(node);
+		return utilXsd.assess(node);
 	}
 	
 	
@@ -702,7 +702,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 //		if (elem_rule == null)
 //		throw new DtdRulesManagerException("No rule for element <" + elem_name + ">");
 //		return elem_rule.createContentGraph();
-		return xsdRM.createContentGraph(elem_name);
+		return utilXsd.createContentGraph(elem_name);
 	}
 
 	//
@@ -744,7 +744,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * @throws DtdRulesManagerException
 	 */
 	public boolean isValid(String elem_name, Collection elem_children, boolean with_gaps) throws DtdRulesManagerException {		
-		return xsdRM.isValid(elem_name, elem_children, with_gaps);
+		return utilXsd.isValid(elem_name, elem_children, with_gaps);
 	}
 
 	
@@ -765,7 +765,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 //		if (rule == null)
 //			throw new DtdRulesManagerException("No rule for element <" + elem_name + ">");
 
-		return xsdRM.getAlternatives(elem_name, elem_children, choice_point);
+		return utilXsd.getAlternatives(elem_name, elem_children, choice_point);
 	}
 
 	/**
@@ -1571,10 +1571,10 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	private AttributeDeclaration getAttributeDeclaration(String elem_name, String att_name) throws DtdRulesManagerException {
 		if (elem_name == "#PCDATA")
 			throw new DtdRulesManagerException("No attributes for element <" + elem_name + ">");
-		if (!xsdRM.rules.containsKey(elem_name))
+		if (!utilXsd.rules.containsKey(elem_name))
 			throw new DtdRulesManagerException("No rule for element <" + elem_name + ">");
 
-		HashMap att_hash = (HashMap) xsdRM.attributes.get(elem_name);
+		HashMap att_hash = (HashMap) utilXsd.attributes.get(elem_name);
 		if (att_hash == null)
 			throw new DtdRulesManagerException("No attributes for element <" + elem_name + ">");
 
@@ -1593,10 +1593,10 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	public Collection queryGetAttributes(String elem_name) throws DtdRulesManagerException {
 		if (elem_name == "#PCDATA")
 			return new Vector();
-		if (!xsdRM.rules.containsKey(elem_name))
+		if (!utilXsd.rules.containsKey(elem_name))
 			throw new DtdRulesManagerException("No rule for element <" + elem_name + ">");
 
-		HashMap att_hash = (HashMap) xsdRM.attributes.get(elem_name);
+		HashMap att_hash = (HashMap) utilXsd.attributes.get(elem_name);
 		if (att_hash == null)
 			return new Vector(); // no attributes for element
 
@@ -1652,9 +1652,9 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	public boolean queryIsValidAttribute(String elem_name, String att_name) throws DtdRulesManagerException {
 		if (elem_name == "#PCDATA")
 			throw new DtdRulesManagerException("No attributes for element <" + elem_name + ">");
-		if (!xsdRM.rules.containsKey(elem_name))
+		if (!utilXsd.rules.containsKey(elem_name))
 			throw new DtdRulesManagerException("No rule for element <" + elem_name + ">");
-		return (xsdRM.attributes.containsKey(elem_name) && ((HashMap) xsdRM.attributes.get(elem_name)).containsKey(att_name));
+		return (utilXsd.attributes.containsKey(elem_name) && ((HashMap) utilXsd.attributes.get(elem_name)).containsKey(att_name));
 	}
 
 	/**
