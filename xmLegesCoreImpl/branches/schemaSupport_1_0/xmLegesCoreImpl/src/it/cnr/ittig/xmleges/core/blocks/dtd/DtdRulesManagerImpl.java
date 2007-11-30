@@ -11,7 +11,6 @@
 
 package it.cnr.ittig.xmleges.core.blocks.dtd;
 
-import it.cnr.ittig.services.manager.Loggable;
 import it.cnr.ittig.services.manager.Logger;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
@@ -40,10 +39,14 @@ import org.xml.sax.ext.DeclHandler;
  * Implementazione del servizio it.cnr.ittig.xmleges.editor.services.dtdrulesmanager.DtdRulesManager;
  * 
  */
-public class DtdRulesManagerImpl implements DtdRulesManager, DeclHandler, Loggable {
+public class DtdRulesManagerImpl implements DtdRulesManager, DeclHandler{
 
 	Logger logger;
 
+	
+	public boolean assessAttribute(Node node, String attributeName){
+		return true;
+	}
 	
 	public boolean assess(Node node){
 		return true;
@@ -127,7 +130,8 @@ public class DtdRulesManagerImpl implements DtdRulesManager, DeclHandler, Loggab
 
 	// ------------ COSTRUTTORI --------------------
 
-	public DtdRulesManagerImpl() {
+	public DtdRulesManagerImpl(Logger logger) {
+		enableLogging(logger);
 		rules = new HashMap();
 		alternative_contents = new HashMap();
 		attributes = new HashMap();
@@ -137,6 +141,12 @@ public class DtdRulesManagerImpl implements DtdRulesManager, DeclHandler, Loggab
 		rules = new HashMap();
 		alternative_contents = new HashMap();
 		attributes = new HashMap();
+	}
+	
+	
+	public void createRulesManager(String extension) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	// ------------ INIZIALIZZAZIONE DELLE REGOLE --------------------
@@ -171,7 +181,7 @@ public class DtdRulesManagerImpl implements DtdRulesManager, DeclHandler, Loggab
 		// Generazione della chiave
 		try {
 			key = UtilLang.bytesToHexString(UtilFile.calculateMD5(dtd_file));
-			logger.debug("key for " + dtdPath + " = " + key.toString());
+			//logger.debug("key for " + dtdPath + " = " + key.toString());
 		} catch (Exception ex) {
 			logger.error(ex.getMessage(), ex);
 		}
