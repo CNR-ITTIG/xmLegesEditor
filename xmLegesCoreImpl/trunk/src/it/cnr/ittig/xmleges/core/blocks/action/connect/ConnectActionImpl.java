@@ -46,6 +46,8 @@ import javax.swing.JTextField;
 import javax.swing.ListCellRenderer;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.HttpStatus;
@@ -98,6 +100,8 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 	
 	AzioneConnetti connectAction;
 	
+	AzioneDisconnetti disconnectAction;
+	
 	AzioneCollection collectionAction; 
 	
 	AzioneDelete deleteAction;
@@ -131,6 +135,7 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 	JTextField user;
 	JPasswordField password;
 	JTextField file;
+	JLabel etifile;
 	JLabel currDir;
 	
 	JList filedir;
@@ -140,6 +145,7 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 	Icon tipoLock;
 	
 	JButton connect;
+	JButton disconnect;
 	JButton collection;
 	JButton delete;
 	JButton lock;
@@ -155,23 +161,24 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 		public void mouseClicked(MouseEvent e) {
 			if (SwingUtilities.isLeftMouseButton(e) && filedir.getSelectedIndex()!=-1 && e.getClickCount() == 2) {
 				
-				if (filedir.getSelectedIndex()==0) {
+				if (filedir.getSelectedIndex()==0)
 					readDirDAV("..");
-					file.setText("");
-				}
 				else {
-					WebdavResource selezione = list[filedir.getSelectedIndex()-1];  
-
-					if(selezione.isCollection()) {
+					WebdavResource selezione = list[filedir.getSelectedIndex()-1];
+					if(selezione.isCollection())
 						readDirDAV(selezione.getDisplayName());
-						file.setText("");
-					}
 					else {
 						file.setText(selezione.getDisplayName());
 						file.setEnabled(true);
 					}	
 				}
 			}
+//			if (SwingUtilities.isLeftMouseButton(e) && filedir.getSelectedIndex()>0 && e.getClickCount() == 1) {
+//				
+//					WebdavResource selezione = list[filedir.getSelectedIndex()-1];
+//					if(!selezione.isCollection())
+//						file.setText(selezione.getDisplayName());
+//			}
 		}
 	};
 	
@@ -200,12 +207,13 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 	public void initialize() throws Exception {
 		
 		webdavOpenAction = new WebdavOpenAction();
-		actionManager.registerAction("connect.webdav.open", webdavOpenAction);
+		actionManager.registerAction("connect.webdav.open", webdavOpenAction);		
 		webdavSaveAction = new WebdavSaveAction();
 		actionManager.registerAction("connect.webdav.save", webdavSaveAction);	
 		connectAction = new AzioneConnetti();
 		actionManager.registerAction("editor.form.connetti.connect", connectAction);
-		
+		disconnectAction = new AzioneDisconnetti();
+		actionManager.registerAction("editor.form.connetti.disconnect", disconnectAction);
 		collectionAction = new AzioneCollection();
 		actionManager.registerAction("editor.form.connetti.collection", collectionAction);
 		deleteAction = new AzioneDelete();
@@ -225,7 +233,7 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 		tipoDirectory = i18n.getIconFor("editor.form.connetti.icondir");
 		tipoFile = i18n.getIconFor("editor.form.connetti.icondocument");
 		tipoLock = i18n.getIconFor("editor.form.connetti.iconlock");
-		form.setSize(450, 430);
+		form.setSize(650, 530);
 		form.setName("file.connect.form");
 		form.setMainComponent(getClass().getResourceAsStream("Connetti.jfrm"));
 		form.setHelpKey("help.contents.form.connect");
@@ -244,14 +252,26 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 		user = (JTextField) form.getComponentByName("editor.form.connetti.user");
 		password = (JPasswordField) form.getComponentByName("editor.form.connetti.password");
 		file = (JTextField) form.getComponentByName("editor.form.connetti.file");
+		etifile = (JLabel) form.getComponentByName("editor.form.connetti.etifile");
+		etifile.setText("File: ");
 		currDir = (JLabel) form.getComponentByName("editor.form.connetti.dir");
 		filedir = (JList) form.getComponentByName("editor.form.connetti.filedir");
-		
+		filedir.addListSelectionListener(new ListSelectionListener() {
+		      public void valueChanged(ListSelectionEvent evt) {		        
+		    	  if (filedir.getSelectedIndex()>0) {
+		    		  WebdavResource selezione = list[filedir.getSelectedIndex()-1];
+		    		  if(!selezione.isCollection())
+		    			  file.setText(selezione.getDisplayName());
+		    	  }
+		      }
+		    });
 		filedir.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		filedir.setEnabled(true);
 			
 		connect = (JButton) form.getComponentByName("editor.form.connetti.connect");
 		connect.addActionListener(connectAction);
+		disconnect = (JButton) form.getComponentByName("editor.form.connetti.disconnect");
+		disconnect.addActionListener(disconnectAction);
 		collection = (JButton) form.getComponentByName("editor.form.connetti.collection");
 		collection.addActionListener(collectionAction);
 		delete = (JButton) form.getComponentByName("editor.form.connetti.delete");
@@ -313,11 +333,21 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 						lastDavHost=host.getText();
 						lastDavUser=user.getText();
 						lastDavPass=password.getText();
+						connect.setEnabled(false);
+						disconnect.setEnabled(true);
+
 					}
 				} else  utilMsg.msgError("connect.dav.open.error");
 		}
 	}	
 	
+	protected class AzioneDisconnetti extends AbstractAction {
+		public void actionPerformed(ActionEvent e) {
+			closeDAV();
+			initField();
+		}
+	}	
+			
 	protected class AzioneCollection extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {		
 			try {
@@ -375,6 +405,22 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 	}
 	
 	private void initField() {
+		
+		if (webdavResource != null)
+			if (readDirDAV("")) {
+				connect.setEnabled(false);
+				disconnect.setEnabled(true);
+				return;
+			}	
+
+		connect.setEnabled(true);
+		disconnect.setEnabled(false);
+
+		host.setText(lastDavHost);
+		user.setText(lastDavUser);
+		password.setText(lastDavPass);
+		typehost.setText("Host");
+			
 		etiDir.setVisible(false);
 		collection.setEnabled(false);
 		delete.setEnabled(false);
@@ -383,39 +429,51 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 		refresh.setEnabled(false);
 		history.setEnabled(false);		
 		
-		host.setText(lastDavHost);
-		user.setText(lastDavUser);
-		password.setText(lastDavPass);
 		filedir.setCellRenderer( new davListCellRenderer());
-		
-		typehost.setText("Host");
+
 		currDir.setText("*** non connesso ***");
 		file.setText("");
 		file.setEnabled(false);
 		filedir.removeMouseListener(mouseAdapter);
 		
-		filedir.setListData(new Object[0]);
+		filedir.setListData(new Object[0]);	
 	}
 		
 	protected class WebdavOpenAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
 			initField();
+			etifile.setVisible(false);
+			file.setVisible(false);
+			form.setName("file.connect.form-download");
 			form.showDialog();
-			if (form.isOk())
-				if (!readDAV(file.getText(),""))
+			if (form.isOk()) {
+				String nomefile="";
+				try {
+					nomefile = list[filedir.getSelectedIndex()-1].getDisplayName();
+				} catch (Exception ex) {}	
+				if (!readDAV(nomefile,""))
 					utilMsg.msgError("connect.webdav.read.error");
-			closeDAV();
+			}	
 		}
 	}
 	
 	protected class WebdavSaveAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
 			initField();
+			String nomefile=documentManager.getSourceName();
+			try {
+				nomefile = nomefile.substring(1+nomefile.lastIndexOf("\\"),nomefile.length());
+			} catch (Exception ex) {
+				nomefile="";
+			}
+			file.setText(nomefile);
+			etifile.setVisible(true);
+			file.setVisible(true);
+			form.setName("file.connect.form-upload");
 			form.showDialog();
 			if (form.isOk())
 				if (!writeDAV(file.getText(),""))
 					utilMsg.msgError("connect.webdav.wite.error");
-			closeDAV();
 		}
 	}
 	
@@ -508,6 +566,7 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 			httpURL = null;
         	webdavResource = null;
 		}
+		
 		return true;
 	}
 			
@@ -541,10 +600,15 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 				utilMsg.msgError("action.file.save.error.file");
 				logger.error(ex.toString(), ex);
 			}			
-			UtilFile.copyFile("temp/tempDAV.xml", "temp/tempDAV.zip");
-			File file2= UtilFile.getFileFromTemp("tempDAV.zip");
+			UtilFile.copyFile("temp/tempDAV.xml", "temp/tempDAV2.xml");
+			File file2= UtilFile.getFileFromTemp("tempDAV2.xml");
 			
 			logger.debug("Write: " + httpURL.getScheme()+"//"+httpURL.getHost()+":"+httpURL.getPort()+webdavResource.getPath()+"/"+fileName);			
+			
+			//potrei fare upload con nome diverso dal download
+			if (!(webdavResource.getPath()+"/"+fileName).equals(fileLocked.getPath()))
+				fileLocked.unlockMethod();
+			
 			webdavResource.unlockMethod(webdavResource.getPath()+"/"+fileName, password.getText());
 			
 			//indico che non ho file bloccati
@@ -605,7 +669,7 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 				utilMsg.msgError(webdavResource.getStatusCode() + ": " + webdavResource.getStatusMessage());				
 
 			//Tengo traccia del file che sto aprendo e bloccando
-			fileLocked = list[filedir.getSelectedIndex()];
+			fileLocked = list[filedir.getSelectedIndex()-1];
 			
 			fileOpenAction.doOpen(file.getAbsolutePath(), false);
 
@@ -625,19 +689,19 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 			if (!dir.equals(""))
 				if (dir.equals("..")) {
 					webdavResource.setPath(webdavResource.getPath().substring(0,webdavResource.getPath().lastIndexOf('/')));
-					if (webdavResource.getPath().length()<30)
+					if (webdavResource.getPath().length()<60)
     					currDir.setText(webdavResource.getPath());
     				else
-    					currDir.setText("... " + webdavResource.getPath().substring(webdavResource.getPath().length()-30,webdavResource.getPath().length()));					
+    					currDir.setText("... " + webdavResource.getPath().substring(webdavResource.getPath().length()-60,webdavResource.getPath().length()));					
 				}	
 				else {			 
 					webdavResource.setPath(webdavResource.getPath()+ '/' +  dir);
 					if (webdavResource.exists()) 
 		                if (webdavResource.isCollection()) { 
-		    				if (webdavResource.getPath().length()<30)
+		    				if (webdavResource.getPath().length()<60)
 		    					currDir.setText(webdavResource.getPath());
 		    				else
-		    					currDir.setText("... " + webdavResource.getPath().substring(webdavResource.getPath().length()-30,webdavResource.getPath().length()));
+		    					currDir.setText("... " + webdavResource.getPath().substring(webdavResource.getPath().length()-60,webdavResource.getPath().length()));
 		                	return true;
 		                }	
 					return false;					
