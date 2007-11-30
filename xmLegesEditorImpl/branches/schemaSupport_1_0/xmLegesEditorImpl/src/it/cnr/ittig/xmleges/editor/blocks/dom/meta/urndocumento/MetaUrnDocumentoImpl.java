@@ -15,8 +15,8 @@ import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.date.UtilDate;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
@@ -42,7 +42,7 @@ public class MetaUrnDocumentoImpl implements MetaUrnDocumento, Loggable, Service
 	
 	NirUtilDom nirUtilDom;	
 	
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 	
 	Autorita regAutorita;
 	
@@ -58,7 +58,7 @@ public class MetaUrnDocumentoImpl implements MetaUrnDocumento, Loggable, Service
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);		
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		provvedimenti = (Provvedimenti) serviceManager.lookup(Provvedimenti.class);
 		regAutorita = (Autorita) serviceManager.lookup(Autorita.class);	
 	}
@@ -189,9 +189,9 @@ public class MetaUrnDocumentoImpl implements MetaUrnDocumento, Loggable, Service
 		for (int i = 0; i < children.getLength(); i++) {
 			if (children.item(i).getNodeName().equals("emanante") && UtilDom.getTextNode(children.item(i)).indexOf("[") != -1) {
 				try {
-					if (dtdRulesManager.queryCanDelete(emananteParent, children.item(i)))
+					if (rulesManager.queryCanDelete(emananteParent, children.item(i)))
 						emananteParent.removeChild(children.item(i));
-				} catch (DtdRulesManagerException e) {
+				} catch (RulesManagerException e) {
 				}
 			}
 		}

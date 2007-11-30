@@ -9,8 +9,8 @@ import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
 import it.cnr.ittig.xmleges.core.services.dom.extracttext.ExtractText;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
@@ -56,7 +56,7 @@ import org.w3c.dom.NodeList;
 public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 	Logger logger;
 
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 
 	DocumentManager documentManager;
 	
@@ -79,7 +79,7 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
 		extractText = (ExtractText) serviceManager.lookup(ExtractText.class);
@@ -91,10 +91,10 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 		if (node != null && node.getParentNode() != null) {
 			try {
 				return (node.getNodeName()!=null && 
-						(dtdRulesManager.queryIsValidAttribute(node.getNodeName(), "iniziovigore")
+						(rulesManager.queryIsValidAttribute(node.getNodeName(), "iniziovigore")
 								|| UtilDom.isTextNode(node)) 
 						);
-			} catch (DtdRulesManagerException e) {
+			} catch (RulesManagerException e) {
 				return UtilDom.isTextNode(node);
 			}
 		}
@@ -171,20 +171,20 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 			// ?   A CHE SERVONO QUESTE OPERAZIONI SE ELIMINO LO SPAN ? 	
 				
 //				try{
-//					if(!dtdRulesManager.queryIsRequiredAttribute(span.getNodeName(),"iniziovigore"))
+//					if(!rulesManager.queryIsRequiredAttribute(span.getNodeName(),"iniziovigore"))
 //					    span.removeAttribute("iniziovigore");
 //					else 
 //						UtilDom.setAttributeValue(span,"iniziovigore","");
-//					if(!dtdRulesManager.queryIsRequiredAttribute(span.getNodeName(),"finevigore"))
+//					if(!rulesManager.queryIsRequiredAttribute(span.getNodeName(),"finevigore"))
 //					    span.removeAttribute("finevigore");
 //					else 
 //						UtilDom.setAttributeValue(span,"finevigore","");
-//					if(!dtdRulesManager.queryIsRequiredAttribute(span.getNodeName(),"status"))
+//					if(!rulesManager.queryIsRequiredAttribute(span.getNodeName(),"status"))
 //					    span.removeAttribute("status");
 //					else 
 //						UtilDom.setAttributeValue(span,"status","");
 //				}
-//				catch(DtdRulesManagerException ex){}
+//				catch(RulesManagerException ex){}
 				
 				Node padre=span.getParentNode();
 				//	appiattisce lo span
@@ -198,12 +198,12 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 				UtilDom.setAttributeValue(span,"finevigore",vigenza.getEFineVigore().getId());				
 			else{
 				try{
-					if(!dtdRulesManager.queryIsRequiredAttribute(span.getNodeName(),"finevigore"))
+					if(!rulesManager.queryIsRequiredAttribute(span.getNodeName(),"finevigore"))
 					    span.removeAttribute("finevigore");
 					else 
 						UtilDom.setAttributeValue(span,"finevigore","");
 				}
-				catch(DtdRulesManagerException ex){}
+				catch(RulesManagerException ex){}
 			}	
 		    return span;
 		

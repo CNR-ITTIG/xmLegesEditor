@@ -8,8 +8,8 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.revisioni.Revisioni;
@@ -53,7 +53,7 @@ import org.w3c.dom.NodeList;
 public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 	Logger logger;
 
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 
 	DocumentManager documentManager;
 
@@ -70,7 +70,7 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 		nirUtilUrn = (NirUtilUrn) serviceManager.lookup(NirUtilUrn.class);
@@ -312,9 +312,9 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 		else if (nirUtilDom.isContainer(node) && UtilDom.getAttributeValueAsString(node, "status") != null
 				&& UtilDom.getAttributeValueAsString(node, "status").equals(Revisioni.SOPPRESSO)) {
 			try {
-				if (null != node.getParentNode() && dtdRulesManager.queryCanDelete(node.getParentNode(), node))
+				if (null != node.getParentNode() && rulesManager.queryCanDelete(node.getParentNode(), node))
 					node.getParentNode().removeChild(node);
-			} catch (DtdRulesManagerException ex) {
+			} catch (RulesManagerException ex) {
 				return null;
 			}
 		} else if (isStatusSpan(node)) {
@@ -717,9 +717,9 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 		// logger.debug("makeMod str1:"+str1+" virg1:"+virg1+" str2:"+str2+"
 		// virg2:"+virg2+" str3:"+str3);
 		try {
-			if (dtdRulesManager.queryCanAppend(newCorpo, newMod))
+			if (rulesManager.queryCanAppend(newCorpo, newMod))
 				newCorpo.appendChild(newMod);
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 			System.out.println("Warning! canAppend Exception");
 			return null;
 		}
@@ -728,9 +728,9 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 		if (virg1.equals("") == false) {
 			newVirg = utilRulesManager.getNodeTemplate(newDoc, "virgolette");
 			try {
-				if (dtdRulesManager.queryCanAppend(newMod, newVirg))
+				if (rulesManager.queryCanAppend(newMod, newVirg))
 					newMod.appendChild(newVirg);
-			} catch (DtdRulesManagerException ex) {
+			} catch (RulesManagerException ex) {
 				System.out.println("Warning! canAppend Exception");
 				return null;
 			}
@@ -741,9 +741,9 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 			if (virg2.equals("") == false) {
 				newVirg = utilRulesManager.getNodeTemplate(newDoc, "virgolette");
 				try {
-					if (dtdRulesManager.queryCanAppend(newMod, newVirg))
+					if (rulesManager.queryCanAppend(newMod, newVirg))
 						newMod.appendChild(newVirg);
-				} catch (DtdRulesManagerException ex) {
+				} catch (RulesManagerException ex) {
 					System.out.println("Warning! canAppend Exception");
 					return null;
 				}
@@ -784,9 +784,9 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 			// <h:span>...
 		}
 		try {
-			if (dtdRulesManager.queryCanAppend(newCorpo, newMod))
+			if (rulesManager.queryCanAppend(newCorpo, newMod))
 				newCorpo.appendChild(newMod);
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 			System.out.println("Warning! canAppend Exception!");
 			return null;
 		}
@@ -798,14 +798,14 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 			// tipo="struttura"
 			// !!
 			try {
-				if (dtdRulesManager.queryCanAppend(newMod, newVirg))
+				if (rulesManager.queryCanAppend(newMod, newVirg))
 					newMod.appendChild(newVirg);
-				if (dtdRulesManager.queryCanAppend(newVirg, node))
+				if (rulesManager.queryCanAppend(newVirg, node))
 					newVirg.appendChild(node);
 				txt = newDoc.createTextNode("».");
-				if (dtdRulesManager.queryCanAppend(newMod, txt))
+				if (rulesManager.queryCanAppend(newMod, txt))
 					newMod.appendChild(txt);
-			} catch (DtdRulesManagerException ex) {
+			} catch (RulesManagerException ex) {
 				System.out.println("Warning! canAppend Exception!!");
 				return null;
 			}

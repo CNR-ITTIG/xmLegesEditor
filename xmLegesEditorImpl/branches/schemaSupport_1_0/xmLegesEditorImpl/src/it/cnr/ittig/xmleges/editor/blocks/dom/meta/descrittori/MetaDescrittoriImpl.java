@@ -6,8 +6,8 @@ import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
@@ -54,7 +54,7 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 
 	Logger logger;
 
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 	DocumentManager documentManager;
 	NirUtilDom nirUtilDom;
 
@@ -65,7 +65,7 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 	}
@@ -146,19 +146,19 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 			boolean inserted = false;
 			do {
 				try {
-					if (dtdRulesManager.queryCanInsertBefore(descrittoriNode, child, aliasTag)) {
+					if (rulesManager.queryCanInsertBefore(descrittoriNode, child, aliasTag)) {
 						UtilDom.insertAfter(aliasTag, child.getPreviousSibling());
 						inserted = true;
 					}
 					child = child.getNextSibling();
-				} catch (DtdRulesManagerException ex) {
+				} catch (RulesManagerException ex) {
 					logger.error(ex.getMessage(), ex);
 				}
 			} while (!inserted && child != null);
 			try {
-				if (!inserted && dtdRulesManager.queryCanAppend(descrittoriNode, aliasTag))
+				if (!inserted && rulesManager.queryCanAppend(descrittoriNode, aliasTag))
 					descrittoriNode.appendChild(aliasTag);
-			} catch (DtdRulesManagerException ex) {
+			} catch (RulesManagerException ex) {
 				logger.error(ex.getMessage(), ex);
 			}
 		}
@@ -226,19 +226,19 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 				boolean inserted = false;
 				do {
 					try {
-						if (dtdRulesManager.queryCanInsertBefore(descrittoriNode, child, redazioneTag)) {
+						if (rulesManager.queryCanInsertBefore(descrittoriNode, child, redazioneTag)) {
 							UtilDom.insertAfter(redazioneTag, child.getPreviousSibling());
 							inserted = true;
 						}
 						child = child.getNextSibling();
-					} catch (DtdRulesManagerException ex) {
+					} catch (RulesManagerException ex) {
 						logger.error(ex.getMessage(), ex);
 					}
 				} while (!inserted && child != null);
 				try {
-					if (!inserted && dtdRulesManager.queryCanAppend(descrittoriNode, redazioneTag))
+					if (!inserted && rulesManager.queryCanAppend(descrittoriNode, redazioneTag))
 						descrittoriNode.appendChild(redazioneTag);
-				} catch (DtdRulesManagerException ex) {
+				} catch (RulesManagerException ex) {
 					logger.error(ex.getMessage(), ex);
 				}
 			}
@@ -250,19 +250,19 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 				boolean inserted = false;
 				do {
 					try {
-						if (dtdRulesManager.queryCanInsertBefore(descrittoriNode, child, redazioneTag)) {
+						if (rulesManager.queryCanInsertBefore(descrittoriNode, child, redazioneTag)) {
 							UtilDom.insertAfter(redazioneTag, child.getPreviousSibling());
 							inserted = true;
 						}
 						child = child.getNextSibling();
-					} catch (DtdRulesManagerException ex) {
+					} catch (RulesManagerException ex) {
 						logger.error(ex.getMessage(), ex);
 					}
 				} while (!inserted && child != null);
 				try {
-					if (!inserted && dtdRulesManager.queryCanAppend(descrittoriNode, redazioneTag))
+					if (!inserted && rulesManager.queryCanAppend(descrittoriNode, redazioneTag))
 						descrittoriNode.appendChild(redazioneTag);
-				} catch (DtdRulesManagerException ex) {
+				} catch (RulesManagerException ex) {
 					logger.error(ex.getMessage(), ex);
 				}
 				

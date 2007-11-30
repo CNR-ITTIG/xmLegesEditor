@@ -9,7 +9,7 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.editor.services.dom.partizioni.Partizioni;
@@ -39,7 +39,7 @@ import org.w3c.dom.Node;
 public class PartizioniImpl implements Partizioni, Loggable, Serviceable, Initializable {
 	Logger logger;
 
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 
 	DocumentManager documentManager;
 
@@ -60,7 +60,7 @@ public class PartizioniImpl implements Partizioni, Loggable, Serviceable, Initia
 
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
@@ -85,7 +85,7 @@ public class PartizioniImpl implements Partizioni, Loggable, Serviceable, Initia
 	public Node nuovaPartizione(Node node, Node partizione, int action) {
 		try {
 			EditTransaction tr = documentManager.beginEdit();
-			if (!nodeInserter.insertNewNode(partizione, node.getOwnerDocument(), node, dtdRulesManager, action)) {
+			if (!nodeInserter.insertNewNode(partizione, node.getOwnerDocument(), node, rulesManager, action)) {
 				documentManager.rollbackEdit(tr);
 				utilMsg.msgError("editor.partizioni.errore." + partizione.getNodeName());
 				return node;
@@ -103,7 +103,7 @@ public class PartizioniImpl implements Partizioni, Loggable, Serviceable, Initia
 	public Node nuovaPartizione(Node node, String elemName, int action) {
 		try {
 			EditTransaction tr = documentManager.beginEdit();
-			if (!nodeInserter.insertNewNode(elemName, node.getOwnerDocument(), node, dtdRulesManager, action)) {
+			if (!nodeInserter.insertNewNode(elemName, node.getOwnerDocument(), node, rulesManager, action)) {
 				documentManager.rollbackEdit(tr);
 				utilMsg.msgError("editor.partizioni.errore." + elemName);
 				return node;
@@ -123,7 +123,7 @@ public class PartizioniImpl implements Partizioni, Loggable, Serviceable, Initia
 	}
 
 	public int canInsertNuovaPartizione(Node node, Node partizione) {
-		return (nodeInserter.canInsertNewNode(partizione, node.getOwnerDocument(), node, dtdRulesManager));
+		return (nodeInserter.canInsertNewNode(partizione, node.getOwnerDocument(), node, rulesManager));
 
 	}
 

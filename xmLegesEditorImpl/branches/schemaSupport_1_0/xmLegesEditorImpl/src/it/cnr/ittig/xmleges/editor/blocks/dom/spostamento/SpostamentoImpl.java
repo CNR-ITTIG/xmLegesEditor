@@ -7,8 +7,8 @@ import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
@@ -44,7 +44,7 @@ public class SpostamentoImpl implements Spostamento, Loggable, Serviceable {
 
 	Logger logger;
 
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 
 	DocumentManager documentManager;
 
@@ -65,7 +65,7 @@ public class SpostamentoImpl implements Spostamento, Loggable, Serviceable {
 
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 		rinumerazione = (Rinumerazione) serviceManager.lookup(Rinumerazione.class);
@@ -78,7 +78,7 @@ public class SpostamentoImpl implements Spostamento, Loggable, Serviceable {
 
 	public Node canMoveUp(Node node) {
 		try {
-			if (dtdRulesManager.queryCanDelete(node.getParentNode(), node))
+			if (rulesManager.queryCanDelete(node.getParentNode(), node))
 				return (queryCanMoveUp(getPathIndex(node), nirUtilDom.getNIRElement(node.getOwnerDocument()).getFirstChild(), node, null));
 			return null;
 		} catch (Exception ex) {
@@ -88,7 +88,7 @@ public class SpostamentoImpl implements Spostamento, Loggable, Serviceable {
 
 	public Node canMoveDown(Node node) {
 		try {
-			if (dtdRulesManager.queryCanDelete(node.getParentNode(), node))
+			if (rulesManager.queryCanDelete(node.getParentNode(), node))
 				return (queryCanMoveDown(getPathIndex(node), nirUtilDom.getNIRElement(node.getOwnerDocument()).getFirstChild(), node, null));
 			return null;
 		} catch (Exception ex) {
@@ -99,7 +99,7 @@ public class SpostamentoImpl implements Spostamento, Loggable, Serviceable {
 	public Node moveUp(Node target, Node newNode) {
 		try {
 			EditTransaction tr = documentManager.beginEdit();
-			if (dtdRulesManager.queryCanInsertBefore(target.getParentNode(), target, newNode)) {
+			if (rulesManager.queryCanInsertBefore(target.getParentNode(), target, newNode)) {
 				target.getParentNode().insertBefore(newNode, target);
 				rinumerazione.aggiorna(target.getOwnerDocument());
 				documentManager.commitEdit(tr);
@@ -117,7 +117,7 @@ public class SpostamentoImpl implements Spostamento, Loggable, Serviceable {
 	public Node moveDown(Node target, Node newNode) {
 		try {
 			EditTransaction tr = documentManager.beginEdit();
-			if (dtdRulesManager.queryCanInsertAfter(target.getParentNode(), target, newNode)) {
+			if (rulesManager.queryCanInsertAfter(target.getParentNode(), target, newNode)) {
 				target.getParentNode().insertBefore(newNode, target.getNextSibling());
 				rinumerazione.aggiorna(target.getOwnerDocument());
 				documentManager.commitEdit(tr);
@@ -294,7 +294,7 @@ public class SpostamentoImpl implements Spostamento, Loggable, Serviceable {
 		if (hasAlinea(newElement)) // se il nodo che ho upgradato ha l'alinea
 			newElement = swapElEn(newElement);
 		try {
-			if (!dtdRulesManager.queryIsValid(parent)) { // il nodo
+			if (!rulesManager.queryIsValid(parent)) { // il nodo
 				// contenitore ha
 				// perso validita'
 				Node corpo = (Node) doc.createElement("corpo");
@@ -314,7 +314,7 @@ public class SpostamentoImpl implements Spostamento, Loggable, Serviceable {
 				}
 				parent.appendChild(corpo);
 			}
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 			return false;
 		}
 		parent.getParentNode().insertBefore(newElement, parent.getNextSibling()); // insertAfter
@@ -396,7 +396,7 @@ public class SpostamentoImpl implements Spostamento, Loggable, Serviceable {
 			}
 			// cerca punto di inserimento a partire dal fondo
 			Node lastChild = brother.getLastChild();
-			while (!dtdRulesManager.queryCanInsertAfter(brother, lastChild, newElement))
+			while (!rulesManager.queryCanInsertAfter(brother, lastChild, newElement))
 				lastChild = lastChild.getPreviousSibling();
 			if (lastChild != null) {
 				brother.insertBefore(newElement, lastChild.getNextSibling()); // non
@@ -431,16 +431,16 @@ public class SpostamentoImpl implements Spostamento, Loggable, Serviceable {
 
 	private boolean isInsertableBefore(Node parent, Node node, Node newNode) {
 		try {
-			return (dtdRulesManager.queryCanInsertBefore(parent, node, newNode));
-		} catch (DtdRulesManagerException ex) {
+			return (rulesManager.queryCanInsertBefore(parent, node, newNode));
+		} catch (RulesManagerException ex) {
 			return false;
 		}
 	}
 
 	private boolean isInsertableAfter(Node parent, Node node, Node newNode) {
 		try {
-			return (dtdRulesManager.queryCanInsertAfter(parent, node, newNode));
-		} catch (DtdRulesManagerException ex) {
+			return (rulesManager.queryCanInsertAfter(parent, node, newNode));
+		} catch (RulesManagerException ex) {
 			return false;
 		}
 	}

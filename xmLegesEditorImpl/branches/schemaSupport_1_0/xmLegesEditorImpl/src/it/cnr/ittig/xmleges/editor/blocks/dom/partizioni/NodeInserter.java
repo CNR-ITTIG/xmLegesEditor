@@ -8,8 +8,8 @@ package it.cnr.ittig.xmleges.editor.blocks.dom.partizioni;
  */
 
 import it.cnr.ittig.services.manager.Logger;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
@@ -40,89 +40,89 @@ public class NodeInserter {
 		this.utilRulesManager = partizioniImpl.getUtilRulesManager();
 	}
 
-	public int canInsertNewNode(Node template, Document doc, Node activeNode, DtdRulesManager dtdRulesManager) {
+	public int canInsertNewNode(Node template, Document doc, Node activeNode, RulesManager rulesManager) {
 		logger.debug("ask for canInsertNewNode");
 
 		Node activeNodeContainer = getContainer(activeNode); // PARENT
 
 		// rubrica trattata come caso a parte (non e' un contenitore)
 		if (template.getNodeName().equalsIgnoreCase("rubrica")) {
-			if (canInsertNewRubrica(activeNodeContainer, dtdRulesManager))
+			if (canInsertNewRubrica(activeNodeContainer, rulesManager))
 				return 0;
 			return -1;
 		}
 
 		// 0- inserimento allo stesso livello es: template: comma - activeNode:
 		// comma
-		if (canInsertTemplateAsBrother(template, activeNodeContainer, dtdRulesManager))
+		if (canInsertTemplateAsBrother(template, activeNodeContainer, rulesManager))
 			return 0;
 
 		// 1- inserimento a livello superiore con split es: template: articolo -
 		// activeNode: comma
-		Node splitNode = getSplitNode(template, activeNodeContainer, dtdRulesManager);
+		Node splitNode = getSplitNode(template, activeNodeContainer, rulesManager);
 		Node insertPoint = getParentContainer(splitNode);
-		if (canInsertTemplateAsBrother(template, insertPoint, dtdRulesManager))
+		if (canInsertTemplateAsBrother(template, insertPoint, rulesManager))
 			return 1;
 
 		// 2- inserimento a livello superiore senza split; appeso al parent. es:
 		// template:articolo - activeNode:comma (es appende l'articolo a un
 		// capo)
-		Node parentContainer = getFirstParentContainerForTemplate(template, activeNodeContainer, dtdRulesManager);
-		if (parentContainer != null && canAppendTemplate(template, parentContainer, dtdRulesManager))
+		Node parentContainer = getFirstParentContainerForTemplate(template, activeNodeContainer, rulesManager);
+		if (parentContainer != null && canAppendTemplate(template, parentContainer, rulesManager))
 			return 2;
 
 		// 3- partizione racchiusa in una partizione di livello superiore; es:
 		// template: capo - activeNode: articolo -> capo racchiude articoli
-		if (parentContainer != null && canInsertTemplateAsParent(template, parentContainer, dtdRulesManager))
+		if (parentContainer != null && canInsertTemplateAsParent(template, parentContainer, rulesManager))
 			return 3;
 
-		if (canSwapCorpo2Alinea(template, activeNodeContainer, dtdRulesManager))
+		if (canSwapCorpo2Alinea(template, activeNodeContainer, rulesManager))
 			return 4;
 
 		return -1;
 	}
 
-	public boolean insertNewNode(String elem_name, Document doc, Node activeNode, DtdRulesManager dtdRulesManager, int action) {
-		Node template = getNodeTemplate(elem_name, doc, dtdRulesManager);
-		return (insertNewNode(template, doc, activeNode, dtdRulesManager, action));
+	public boolean insertNewNode(String elem_name, Document doc, Node activeNode, RulesManager rulesManager, int action) {
+		Node template = getNodeTemplate(elem_name, doc, rulesManager);
+		return (insertNewNode(template, doc, activeNode, rulesManager, action));
 	}
 
-	public boolean insertNewNode(Node template, Document doc, Node activeNode, DtdRulesManager dtdRulesManager, int action) {
+	public boolean insertNewNode(Node template, Document doc, Node activeNode, RulesManager rulesManager, int action) {
 
 		Node activeNodeContainer = getContainer(activeNode); // PARENT
 		if (template != null) {
 			// rubrica caso trattato a parte: non e' un container
 			if (template.getNodeName().equalsIgnoreCase("rubrica"))
-				return (insertNewRubrica(template, doc, activeNode, dtdRulesManager));
+				return (insertNewRubrica(template, doc, activeNode, rulesManager));
 			switch (action) {
 			case -1:
-				return (tryToInsert(template, doc, activeNode, dtdRulesManager));
+				return (tryToInsert(template, doc, activeNode, rulesManager));
 			case 0:
 				logger.debug("insertTemplateASBrother");
 				logger.debug("activeNodeContainer ");
 				logger.debug("activeNodeContainer " + activeNodeContainer != null ? UtilDom.getPathName(activeNodeContainer) : "null");
-				return (insertTemplateAsBrother(template, activeNodeContainer, dtdRulesManager));
+				return (insertTemplateAsBrother(template, activeNodeContainer, rulesManager));
 			case 1:
 				logger.debug("splitAndInsert");
 				logger.debug("activeNodeContainer ");
 				logger.debug("activeNodeContainer " + activeNodeContainer != null ? UtilDom.getPathName(activeNodeContainer) : "null");
-				return (splitAndInsert(template, doc, activeNodeContainer, dtdRulesManager));
+				return (splitAndInsert(template, doc, activeNodeContainer, rulesManager));
 			case 2:
 				logger.debug("splitAndAppend");
 				logger.debug("activeNodeContainer ");
 				logger.debug("activeNodeContainer " + activeNodeContainer != null ? UtilDom.getPathName(activeNodeContainer) : "null");
-				return (splitAndAppend(template, doc, activeNodeContainer, dtdRulesManager));
+				return (splitAndAppend(template, doc, activeNodeContainer, rulesManager));
 			case 3:
 				logger.debug("insertTemplateAsParent");
 				logger.debug("activeNodeContainer ");
 				logger.debug("activeNodeContainer " + activeNodeContainer != null ? UtilDom.getPathName(activeNodeContainer) : "null");
-				Node parentContainer = getFirstParentContainerForTemplate(template, activeNodeContainer, dtdRulesManager);
-				return (insertTemplateAsParent(template, parentContainer, dtdRulesManager));
+				Node parentContainer = getFirstParentContainerForTemplate(template, activeNodeContainer, rulesManager);
+				return (insertTemplateAsParent(template, parentContainer, rulesManager));
 			case 4:
 				logger.debug("swapCorpo2Alinea");
 				logger.debug("activeNodeContainer ");
 				logger.debug("activeNodeContainer " + activeNodeContainer != null ? UtilDom.getPathName(activeNodeContainer) : "null");
-				return (swapCorpo2Alinea(activeNodeContainer, doc, dtdRulesManager));
+				return (swapCorpo2Alinea(activeNodeContainer, doc, rulesManager));
 			default:
 				return false;
 			}
@@ -134,51 +134,51 @@ public class NodeInserter {
 		return this.modificato;
 	}
 
-	private boolean canInsertNewRubrica(Node activeNodeContainer, DtdRulesManager dtdRulesManager) {
+	private boolean canInsertNewRubrica(Node activeNodeContainer, RulesManager rulesManager) {
 		try {
-			if (dtdRulesManager.queryAppendable(activeNodeContainer).contains("rubrica"))
+			if (rulesManager.queryAppendable(activeNodeContainer).contains("rubrica"))
 				return true;
 			NodeList nl = activeNodeContainer.getChildNodes();
 			for (int i = 0; i < nl.getLength(); i++) {
-				if (dtdRulesManager.queryInsertableAfter(activeNodeContainer, nl.item(i)).contains("rubrica"))
+				if (rulesManager.queryInsertableAfter(activeNodeContainer, nl.item(i)).contains("rubrica"))
 					return true;
 			}
 			return false;
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 			return false;
 		}
 	}
 
-	private boolean insertNewRubrica(Node rubrica, Document doc, Node activeNode, DtdRulesManager dtdRulesManager) {
+	private boolean insertNewRubrica(Node rubrica, Document doc, Node activeNode, RulesManager rulesManager) {
 		Node activeNodeContainer = getContainer(activeNode);
 		try {
-			if (dtdRulesManager.queryCanAppend(activeNodeContainer, rubrica)) {
+			if (rulesManager.queryCanAppend(activeNodeContainer, rubrica)) {
 				activeNodeContainer.appendChild(rubrica);
 				return true;
 			}
 			NodeList nl = activeNodeContainer.getChildNodes();
 			for (int i = 0; i < nl.getLength(); i++) {
-				if (dtdRulesManager.queryCanInsertAfter(activeNodeContainer, nl.item(i), rubrica)) {
+				if (rulesManager.queryCanInsertAfter(activeNodeContainer, nl.item(i), rubrica)) {
 					UtilDom.insertAfter(rubrica, nl.item(i));
 					return true;
 				}
 			}
 			return false;
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 			return false;
 		}
 	}
 
-	private boolean tryToInsert(Node template, Document doc, Node activeNode, DtdRulesManager dtdRulesManager) {
+	private boolean tryToInsert(Node template, Document doc, Node activeNode, RulesManager rulesManager) {
 		Node activeNodeContainer = getContainer(activeNode); // PARENT
 
 		// 0- inserimento allo stesso livello es: template: comma - activeNode:
 		// comma
-		if (canInsertTemplateAsBrother(template, activeNodeContainer, dtdRulesManager))
-			return (insertTemplateAsBrother(template, activeNodeContainer, dtdRulesManager));
+		if (canInsertTemplateAsBrother(template, activeNodeContainer, rulesManager))
+			return (insertTemplateAsBrother(template, activeNodeContainer, rulesManager));
 
-		Node splitNode = getSplitNode(template, activeNodeContainer, dtdRulesManager);
-		//Vector move = split(splitNode, dtdRulesManager);
+		Node splitNode = getSplitNode(template, activeNodeContainer, rulesManager);
+		//Vector move = split(splitNode, rulesManager);
 		Node insertPoint = getParentContainer(splitNode);
 
 		logger.debug("splitNode   " + nirUtilDom.getPathName(splitNode));
@@ -188,41 +188,41 @@ public class NodeInserter {
 
 		// 1- inserimento a livello superiore con split es: template: articolo -
 		// activeNode: comma
-		if (canInsertTemplateAsBrother(template, insertPoint, dtdRulesManager))
-			return (splitAndInsert(template, doc, activeNodeContainer, dtdRulesManager));
+		if (canInsertTemplateAsBrother(template, insertPoint, rulesManager))
+			return (splitAndInsert(template, doc, activeNodeContainer, rulesManager));
 
-		Node parentContainer = getFirstParentContainerForTemplate(template, activeNodeContainer, dtdRulesManager);
+		Node parentContainer = getFirstParentContainerForTemplate(template, activeNodeContainer, rulesManager);
 
 		// 2- inserimento a livello superiore senza split; appeso al parent. es:
 		// template:articolo - activeNode:comma (es appende l'articolo a un
 		// capo)
-		if (parentContainer != null && canAppendTemplate(template, parentContainer, dtdRulesManager))
-			return (splitAndAppend(template, doc, activeNodeContainer, dtdRulesManager));
+		if (parentContainer != null && canAppendTemplate(template, parentContainer, rulesManager))
+			return (splitAndAppend(template, doc, activeNodeContainer, rulesManager));
 
 		// 3- partizione racchiusa in una partizione di livello superiore; es:
 		// template: capo - activeNode: articolo -> capo racchiude articoli
-		if (parentContainer != null && canInsertTemplateAsParent(template, parentContainer, dtdRulesManager))
-			return (insertTemplateAsParent(template, parentContainer, dtdRulesManager));
+		if (parentContainer != null && canInsertTemplateAsParent(template, parentContainer, rulesManager))
+			return (insertTemplateAsParent(template, parentContainer, rulesManager));
 
 		// 4- provo a trasformare corpo in alinea
-		if (canSwapCorpo2Alinea(template, activeNodeContainer, dtdRulesManager))
-			return (swapCorpo2Alinea(activeNodeContainer, doc, dtdRulesManager));
+		if (canSwapCorpo2Alinea(template, activeNodeContainer, rulesManager))
+			return (swapCorpo2Alinea(activeNodeContainer, doc, rulesManager));
 
 		return false;
 	}
 
-	private boolean canInsertTemplateAsBrother(Node template, Node activeNodeContainer, DtdRulesManager dtdRulesManager) {
+	private boolean canInsertTemplateAsBrother(Node template, Node activeNodeContainer, RulesManager rulesManager) {
 		if (template != null && activeNodeContainer != null) {
 			try {
-				return (dtdRulesManager.queryCanInsertAfter(activeNodeContainer.getParentNode(), activeNodeContainer, template));
-			} catch (DtdRulesManagerException ex) {
+				return (rulesManager.queryCanInsertAfter(activeNodeContainer.getParentNode(), activeNodeContainer, template));
+			} catch (RulesManagerException ex) {
 				return false;
 			}
 		}
 		return (false);
 	}
 
-	private boolean insertTemplateAsBrother(Node template, Node activeNodeContainer, DtdRulesManager dtdRulesManager) {
+	private boolean insertTemplateAsBrother(Node template, Node activeNodeContainer, RulesManager rulesManager) {
 		// Inserimento come fratello immediatamente successivo del nodo corrente
 		// di tipo container
 		try {
@@ -240,17 +240,17 @@ public class NodeInserter {
 		}
 	}
 
-	private boolean canInsertTemplateAsParent(Node template, Node parentContainer, DtdRulesManager dtdRulesManager) {
+	private boolean canInsertTemplateAsParent(Node template, Node parentContainer, RulesManager rulesManager) {
 		try {
 			// Verifico se posso appendere i figli container di parentContainer
 			// a template
 			// Prendo solo i figli container di parentContainer
 			Vector pcChildren = getContainerChildren(parentContainer);
-			Node prunedTemplate = removeContainerChild(template, dtdRulesManager);
+			Node prunedTemplate = removeContainerChild(template, rulesManager);
 			if(pcChildren.size()>0)
-			  return (dtdRulesManager.queryCanEncloseIn(parentContainer, (Node) pcChildren.get(0), pcChildren.size(), prunedTemplate));
+			  return (rulesManager.queryCanEncloseIn(parentContainer, (Node) pcChildren.get(0), pcChildren.size(), prunedTemplate));
 		    return false;
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 			return (false);
 		}
 	}
@@ -262,12 +262,12 @@ public class NodeInserter {
 	 * |--fratelli
 	 */
 
-	private boolean insertTemplateAsParent(Node template, Node parentContainer, DtdRulesManager dtdRulesManager) {
+	private boolean insertTemplateAsParent(Node template, Node parentContainer, RulesManager rulesManager) {
 		try {
 			// Prendo solo i figli container di parentContainer
 			Vector pcChildren = getContainerChildren(parentContainer);
 
-			Node prunedTemplate = removeContainerChild(template, dtdRulesManager);
+			Node prunedTemplate = removeContainerChild(template, rulesManager);
 			for (int i = 0; i < pcChildren.size(); i++)
 				prunedTemplate.appendChild((Node) (pcChildren.get(i)));
 			parentContainer.appendChild(prunedTemplate);
@@ -278,43 +278,43 @@ public class NodeInserter {
 		}
 	}
 
-	private boolean canAppendTemplate(Node template, Node parentContainer, DtdRulesManager dtdRulesManager) {
+	private boolean canAppendTemplate(Node template, Node parentContainer, RulesManager rulesManager) {
 		try {
-			return (dtdRulesManager.queryCanAppend(parentContainer, template));
-		} catch (DtdRulesManagerException ex) {
+			return (rulesManager.queryCanAppend(parentContainer, template));
+		} catch (RulesManagerException ex) {
 			return false;
 		}
 	}
 
-	private boolean splitAndAppend(Node newNode, Document doc, Node activeNodeContainer, DtdRulesManager dtdRulesManager) {
+	private boolean splitAndAppend(Node newNode, Document doc, Node activeNodeContainer, RulesManager rulesManager) {
 
-		Node splitNode = getSplitNode(newNode, activeNodeContainer, dtdRulesManager);
-		Vector move = split(splitNode, dtdRulesManager);
+		Node splitNode = getSplitNode(newNode, activeNodeContainer, rulesManager);
+		Vector move = split(splitNode, rulesManager);
 
-		Node parentContainer = getFirstParentContainerForTemplate(newNode, activeNodeContainer, dtdRulesManager);
+		Node parentContainer = getFirstParentContainerForTemplate(newNode, activeNodeContainer, rulesManager);
 		Node splitParent = getParentContainer(splitNode);
-		Node completedTemplate = completeTemplate(newNode, move, dtdRulesManager);
+		Node completedTemplate = completeTemplate(newNode, move, rulesManager);
 
 		if (splitParent != null && UtilDom.findDirectChild(splitParent, splitNode.getNodeName()) == null) // splitParent
 																											// svuotato
-			splitParent.appendChild(getNodeTemplate(splitNode.getNodeName(), doc, dtdRulesManager));
+			splitParent.appendChild(getNodeTemplate(splitNode.getNodeName(), doc, rulesManager));
 
 		parentContainer.appendChild(completedTemplate);
 		modificato = completedTemplate;
 		return true;
 	}
 
-	private boolean splitAndInsert(Node newNode, Document doc, Node activeNodeContainer, DtdRulesManager dtdRulesManager) {
+	private boolean splitAndInsert(Node newNode, Document doc, Node activeNodeContainer, RulesManager rulesManager) {
 
-		Node splitNode = getSplitNode(newNode, activeNodeContainer, dtdRulesManager);
-		Vector move = split(splitNode, dtdRulesManager);
+		Node splitNode = getSplitNode(newNode, activeNodeContainer, rulesManager);
+		Vector move = split(splitNode, rulesManager);
 		Node insertPoint = getParentContainer(splitNode);
 
 		Node splitParent = getParentContainer(splitNode);
-		Node completedTemplate = completeTemplate(newNode, move, dtdRulesManager);
+		Node completedTemplate = completeTemplate(newNode, move, rulesManager);
 		if ((UtilDom.findDirectChild(splitParent, splitNode.getNodeName())) == null)
-			splitParent.appendChild(getNodeTemplate(splitNode.getNodeName(), doc, dtdRulesManager));
-		return (insertTemplateAsBrother(completedTemplate, insertPoint, dtdRulesManager));
+			splitParent.appendChild(getNodeTemplate(splitNode.getNodeName(), doc, rulesManager));
+		return (insertTemplateAsBrother(completedTemplate, insertPoint, rulesManager));
 	}
 
 	/**
@@ -322,19 +322,19 @@ public class NodeInserter {
 	 * inserire template come figlio
 	 */
 
-	private Node getFirstParentContainerForTemplate(Node template, Node activeNodeContainer, DtdRulesManager dtdRulesManager) {
+	private Node getFirstParentContainerForTemplate(Node template, Node activeNodeContainer, RulesManager rulesManager) {
 		Node prevParentContainer;
 		Node parentContainer = activeNodeContainer;
 		try {
 			do {
-				if (dtdRulesManager.getAlternativeContents(parentContainer.getNodeName()).contains(template.getNodeName())
-						|| dtdRulesManager.getAlternativeContents(parentContainer.getNodeName()).contains("num," + template.getNodeName()))
+				if (rulesManager.getAlternativeContents(parentContainer.getNodeName()).contains(template.getNodeName())
+						|| rulesManager.getAlternativeContents(parentContainer.getNodeName()).contains("num," + template.getNodeName()))
 					return parentContainer;
 
 				prevParentContainer = parentContainer;
 				parentContainer = getParentContainer(parentContainer);
 			} while (!prevParentContainer.getNodeName().equals("articolato"));
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 			return null;
 		}
 		return null;
@@ -398,7 +398,7 @@ public class NodeInserter {
 	 * inglobare in template altri nodi e non inserire nodi vuoti inutili
 	 */
 
-	private Node removeContainerChild(Node template, DtdRulesManager dtdRulesManager) {
+	private Node removeContainerChild(Node template, RulesManager rulesManager) {
 		NodeList child = template.getChildNodes();
 		for (int i = 0; i < child.getLength(); i++) {
 			if (nirUtilDom.isContainer(child.item(i)))
@@ -407,16 +407,16 @@ public class NodeInserter {
 		return template;
 	}
 
-	private boolean canSwapCorpo2Alinea(Node template, Node activeNodeContainer, DtdRulesManager dtdRulesManager) {
+	private boolean canSwapCorpo2Alinea(Node template, Node activeNodeContainer, RulesManager rulesManager) {
 
 		Vector contents = new Vector();
 
 		try {
 			// logger.debug("alternative contents
 			// for:"+activeNodeContainer.getNodeName()+ " : "
-			// +dtdRulesManager.getAlternativeContents(activeNodeContainer.getNodeName()).toString());
+			// +rulesManager.getAlternativeContents(activeNodeContainer.getNodeName()).toString());
 			if (UtilDom.findDirectChild(activeNodeContainer, "corpo") != null) {
-				contents = dtdRulesManager.getAlternativeContents(activeNodeContainer.getNodeName());
+				contents = rulesManager.getAlternativeContents(activeNodeContainer.getNodeName());
 				for (int j = 0; j < contents.size(); j++)
 					if (((String) contents.get(j)).indexOf(template.getNodeName()) != -1) // il
 																							// template
@@ -429,12 +429,12 @@ public class NodeInserter {
 						return true;
 			}
 			return false;
-		} catch (DtdRulesManagerException e) {
+		} catch (RulesManagerException e) {
 			return false;
 		}
 	}
 
-	private boolean swapCorpo2Alinea(Node activeNodeContainer, Document doc, DtdRulesManager dtdRulesManager) {
+	private boolean swapCorpo2Alinea(Node activeNodeContainer, Document doc, RulesManager rulesManager) {
 
 		Node tmpParent, newNode, dummyNode;
 		Vector children;
@@ -452,13 +452,13 @@ public class NodeInserter {
 		// corpo con l'alinea)
 		tmpParent.replaceChild(newNode, corpo);
 		// riempito con una lettera o un numero vuoti
-		dummyNode = getNodeTemplate("el", doc, dtdRulesManager);
+		dummyNode = getNodeTemplate("el", doc, rulesManager);
 
 		try {
-			if (dtdRulesManager.queryCanInsertAfter(tmpParent, newNode, dummyNode))
+			if (rulesManager.queryCanInsertAfter(tmpParent, newNode, dummyNode))
 				tmpParent.insertBefore(dummyNode, newNode.getNextSibling()); // insertAfter
 			else { // altrimenti ci appendo un numero
-				dummyNode = getNodeTemplate("en", doc, dtdRulesManager);
+				dummyNode = getNodeTemplate("en", doc, rulesManager);
 				tmpParent.insertBefore(dummyNode, newNode.getNextSibling()); // insertAfter
 			}
 		} catch (Exception ex) {
@@ -467,7 +467,7 @@ public class NodeInserter {
 
 		// controllo se ho creato un nodo valido
 		try {
-			if (!dtdRulesManager.queryIsValid(tmpParent) || tmpParent.getNodeName().equalsIgnoreCase("en")) {
+			if (!rulesManager.queryIsValid(tmpParent) || tmpParent.getNodeName().equalsIgnoreCase("en")) {
 				tmpParent.replaceChild(corpo, newNode);
 				tmpParent.removeChild(dummyNode);
 				return false;
@@ -483,18 +483,18 @@ public class NodeInserter {
 	// fornisce un template del nodo minimale, arricchedolo sempre, se
 	// possibile, per necessita' di visualizzazione
 	// di un numero e di una rubrica
-	private Node getNodeTemplate(String elem_name, Document doc, DtdRulesManager dtdRulesManager) {
+	private Node getNodeTemplate(String elem_name, Document doc, RulesManager rulesManager) {
 		Node newNode = utilRulesManager.getNodeTemplate(doc, elem_name);
 		// inserisci ovunque possibile il num
 		// FIXME attendere risposta dtd2.1
-		addElement("num", doc, newNode, dtdRulesManager);
+		addElement("num", doc, newNode, rulesManager);
 		// inserisci ovunque possibile la rubrica
 		// FIXME attendere risposta dtd2.1
-		addElement("rubrica", doc, newNode, dtdRulesManager);
+		addElement("rubrica", doc, newNode, rulesManager);
 		return newNode;
 	}
 
-	private Node completeTemplate(Node template, Vector move, DtdRulesManager dtdRulesManager) {
+	private Node completeTemplate(Node template, Vector move, RulesManager rulesManager) {
 		Node replace;
 		int j = 0;
 
@@ -507,18 +507,18 @@ public class NodeInserter {
 
 			for (int i = j; i < move.size(); i++) {
 				try {
-					if (dtdRulesManager.queryCanAppend(template, (Node) (move.elementAt(i))))
+					if (rulesManager.queryCanAppend(template, (Node) (move.elementAt(i))))
 						template.appendChild((Node) move.elementAt(i));
-				} catch (DtdRulesManagerException ex) {
+				} catch (RulesManagerException ex) {
 				}
 			}
 		}
 		return (template);
 	}
 
-	// aggiunge, se possibile secondo il dtdRulesManager un
+	// aggiunge, se possibile secondo il rulesManager un
 	// elemento di tipo elem_name al nodo node
-	private void addElement(String elem_name, Document doc, Node node, DtdRulesManager dtdRulesManager) {
+	private void addElement(String elem_name, Document doc, Node node, RulesManager rulesManager) {
 		NodeList childList;
 		Vector childVect = new Vector();
 		Node tmpNode, newNode;
@@ -539,18 +539,18 @@ public class NodeInserter {
 				tmpNode = (Node) iterator.next();
 				try {
 					// FIXME per dtd2.1; causa CMArticolo errato aggiunto !brothersContain() && canInsertBeforeRubNum
-					if (dtdRulesManager.queryCanInsertBefore(node, tmpNode, newNode) && canInsertBeforeRubNum(tmpNode,newNode) && !brothersContain(node,elem_name)) {
+					if (rulesManager.queryCanInsertBefore(node, tmpNode, newNode) && canInsertBeforeRubNum(tmpNode,newNode) && !brothersContain(node,elem_name)) {
 						node.insertBefore(newNode, tmpNode);
 						newNode = doc.createElement(elem_name);
 					}
 				} catch (Exception ex) {
 				}
 				// lo aggiunge anche a tutti i figli [es ai commi figli di articolo]
-				addElement(elem_name, doc, tmpNode, dtdRulesManager);
+				addElement(elem_name, doc, tmpNode, rulesManager);
 			}
 
 			try {
-				if (dtdRulesManager.queryCanAppend(node, newNode)) {
+				if (rulesManager.queryCanAppend(node, newNode)) {
 					node.appendChild(newNode);
 				}
 			} catch (Exception exc) {
@@ -574,23 +574,23 @@ public class NodeInserter {
 		return false;
 	}
 
-	private Node getSplitNode(Node template, Node activeNodeContainer, DtdRulesManager dtdRulesManager) {
+	private Node getSplitNode(Node template, Node activeNodeContainer, RulesManager rulesManager) {
 
 		if (activeNodeContainer != null) {
 			try {
-				while (!dtdRulesManager.queryCanAppend(template, activeNodeContainer)) {
+				while (!rulesManager.queryCanAppend(template, activeNodeContainer)) {
 					activeNodeContainer = getParentContainer(activeNodeContainer);
 					if (activeNodeContainer == null)
 						break;
 				}
-			} catch (DtdRulesManagerException ex) {
+			} catch (RulesManagerException ex) {
 				// logger.error(ex.toString(),ex);
 			}
 		}
 		return activeNodeContainer;
 	}
 
-	private Vector split(Node splitNode, DtdRulesManager dtdRulesManager) {
+	private Vector split(Node splitNode, RulesManager rulesManager) {
 
 		Node parent = null;
 		Vector moveNodes = new Vector();

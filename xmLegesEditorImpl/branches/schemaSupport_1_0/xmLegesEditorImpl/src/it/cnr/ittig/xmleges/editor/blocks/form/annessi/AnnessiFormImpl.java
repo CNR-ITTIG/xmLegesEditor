@@ -7,9 +7,9 @@ import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
 import it.cnr.ittig.xmleges.core.services.form.Form;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.editor.services.form.annessi.AnnessiForm;
 import it.cnr.ittig.xmleges.editor.services.form.filenew.FileNewForm;
@@ -66,7 +66,7 @@ public class AnnessiFormImpl implements AnnessiForm, Loggable, Serviceable, Init
 
 	FileNewForm fileNewForm;
 
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 
 	JRadioButton internoTemplate;
 
@@ -110,7 +110,7 @@ public class AnnessiFormImpl implements AnnessiForm, Loggable, Serviceable, Init
 		fileNewForm = (FileNewForm) serviceManager.lookup(FileNewForm.class);
 		provvedimenti = (Provvedimenti) serviceManager.lookup(Provvedimenti.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
@@ -243,8 +243,8 @@ public class AnnessiFormImpl implements AnnessiForm, Loggable, Serviceable, Init
 	private boolean canAnnessoInterno() {
 		Node annesso = (Node) documentManager.getDocumentAsDom().createElement("annesso");
 		try {
-			return ((dtdRulesManager.queryAppendable(annesso)).contains("DocumentoNIR"));
-		} catch (DtdRulesManagerException e) {
+			return ((rulesManager.queryAppendable(annesso)).contains("DocumentoNIR"));
+		} catch (RulesManagerException e) {
 			return false;
 		}
 	}

@@ -11,11 +11,11 @@ import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.frame.Frame;
 import it.cnr.ittig.xmleges.core.services.panes.xsltpane.DeleteNextPrevAction;
 import it.cnr.ittig.xmleges.core.services.panes.xsltpane.InsertBreakAction;
 import it.cnr.ittig.xmleges.core.services.panes.xsltpane.XsltPane;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
@@ -73,7 +73,7 @@ public class NirXsltPanesImpl implements NirXsltPanes, Loggable, Serviceable, Co
 
 	DocumentManager documentManager;
 
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 
 	UtilRulesManager utilRulesManager;
 
@@ -96,7 +96,7 @@ public class NirXsltPanesImpl implements NirXsltPanes, Loggable, Serviceable, Co
 		frame = (Frame) serviceManager.lookup(Frame.class);
 		xslts = (NirXslts) serviceManager.lookup(NirXslts.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
@@ -220,7 +220,7 @@ public class NirXsltPanesImpl implements NirXsltPanes, Loggable, Serviceable, Co
 						tr = documentManager.beginEdit(this);
 						Node n = utilRulesManager.getNodeTemplate(node.getOwnerDocument(), nodeName);
 						UtilDom.insertAfter(n, parent);
-						if (text != null && start < text.length() && dtdRulesManager.queryTextContent(n)) {
+						if (text != null && start < text.length() && rulesManager.queryTextContent(n)) {
 							Node[] nexts = UtilDom.getAllNextSibling(node);
 							Node t = node.getOwnerDocument().createTextNode(text.substring(start));
 							n.appendChild(t);
@@ -257,12 +257,12 @@ public class NirXsltPanesImpl implements NirXsltPanes, Loggable, Serviceable, Co
 		try {
 			Node currPar = curr.getParentNode();
 			Node prevPar = prev.getParentNode();
-			if (dtdRulesManager.queryCanDelete(currPar, curr) && dtdRulesManager.queryCanInsertAfter(prevPar, prev, curr)) {
+			if (rulesManager.queryCanDelete(currPar, curr) && rulesManager.queryCanInsertAfter(prevPar, prev, curr)) {
 				tr = documentManager.beginEdit();
 				int cursor = prev.getNodeValue().length();
 				UtilDom.insertAfter(curr, prev);
 				UtilDom.mergeTextNodes(prevPar);
-				if (!currPar.hasChildNodes() && dtdRulesManager.queryCanDelete(currPar.getParentNode(), currPar))
+				if (!currPar.hasChildNodes() && rulesManager.queryCanDelete(currPar.getParentNode(), currPar))
 					currPar.getParentNode().removeChild(currPar);
 				documentManager.commitEdit(tr);
 				selectionManager.setSelectedText(this, prev, cursor, cursor);
@@ -281,12 +281,12 @@ public class NirXsltPanesImpl implements NirXsltPanes, Loggable, Serviceable, Co
 		try {
 			Node currPar = curr.getParentNode();
 			Node nextPar = next.getParentNode();
-			if (dtdRulesManager.queryCanDelete(nextPar, next) && dtdRulesManager.queryCanInsertAfter(currPar, curr, next)) {
+			if (rulesManager.queryCanDelete(nextPar, next) && rulesManager.queryCanInsertAfter(currPar, curr, next)) {
 				tr = documentManager.beginEdit();
 				int cursor = curr.getNodeValue().length();
 				UtilDom.insertAfter(next, curr);
 				UtilDom.mergeTextNodes(curr.getParentNode());
-				if (!nextPar.hasChildNodes() && dtdRulesManager.queryCanDelete(nextPar.getParentNode(), nextPar))
+				if (!nextPar.hasChildNodes() && rulesManager.queryCanDelete(nextPar.getParentNode(), nextPar))
 					nextPar.getParentNode().removeChild(nextPar);
 				documentManager.commitEdit(tr);
 				selectionManager.setSelectedText(this, curr, cursor, cursor);
