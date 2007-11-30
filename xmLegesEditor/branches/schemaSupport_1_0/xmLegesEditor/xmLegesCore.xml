@@ -98,7 +98,11 @@ File di composizione dell'applicazione xmLegesEditor CORE
 
     <!--component  class="it.cnr.ittig.xmleges.core.blocks.dtd.DtdRulesManagerImpl" /-->
     
-    <component  class="it.cnr.ittig.xmleges.core.blocks.schema.SchemaRulesManagerImpl" />
+    <!--component  class="it.cnr.ittig.xmleges.core.blocks.schema.SchemaRulesManagerImpl" /-->
+    
+    <component  class="it.cnr.ittig.xmleges.core.blocks.rules.RulesManagerImpl" />
+    
+    
     
     <component  class="it.cnr.ittig.xmleges.core.blocks.selection.SelectionManagerImpl" />
     

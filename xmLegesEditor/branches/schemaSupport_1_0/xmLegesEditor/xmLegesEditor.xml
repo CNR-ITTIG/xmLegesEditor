@@ -119,9 +119,12 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
         </configuration>
     </component>
 
+
+	<component  class="it.cnr.ittig.xmleges.core.blocks.rules.RulesManagerImpl" />
+
     <!--component  class="it.cnr.ittig.xmleges.core.blocks.dtd.DtdRulesManagerImpl" /-->
     
-    <component  class="it.cnr.ittig.xmleges.core.blocks.schema.SchemaRulesManagerImpl" />
+    <!--component  class="it.cnr.ittig.xmleges.core.blocks.schema.SchemaRulesManagerImpl" /-->
     
     <component  class="it.cnr.ittig.xmleges.core.blocks.selection.SelectionManagerImpl" />
     
