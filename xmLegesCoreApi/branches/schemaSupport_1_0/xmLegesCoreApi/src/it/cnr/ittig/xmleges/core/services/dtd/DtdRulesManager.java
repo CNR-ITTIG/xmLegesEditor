@@ -19,8 +19,31 @@ import org.w3c.dom.Node;
  */
 public interface DtdRulesManager extends Service {
 
+	/**
+	 * 
+	 * @param extension
+	 */
+	public void createRulesManager(String extension);
+	
+	/**
+	 * 
+	 *
+	 */
 	public void clear();
+	
+	/**
+	 * 
+	 * @param node
+	 * @param attributeName
+	 * @return
+	 */
+	public boolean assessAttribute(Node node, String attributeName);
 
+	/**
+	 * 
+	 * @param node
+	 * @return
+	 */
 	public boolean assess(Node node);
 	
 	/**
