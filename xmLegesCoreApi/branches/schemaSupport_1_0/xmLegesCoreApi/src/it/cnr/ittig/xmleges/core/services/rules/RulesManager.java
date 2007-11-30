@@ -1,4 +1,4 @@
-package it.cnr.ittig.xmleges.core.services.dtd;
+package it.cnr.ittig.xmleges.core.services.rules;
 
 import it.cnr.ittig.services.manager.Service;
 
@@ -10,14 +10,14 @@ import org.w3c.dom.Node;
 
 /**
  * Servizio per che gestisce le regole scritte nella DTD di un documento XML.
- * DtdRulesManager legge una DTD e trasforma il content di ogni elemento in un
+ * RulesManager legge una DTD e trasforma il content di ogni elemento in un
  * automa a stati finiti che rappresenta le regole a cui deve sottostare il
  * contenuto dell'elemento. Questo automa pu&ograve essere usate per interrogare
  * la classe su come &egrave possibile modificare un elemento.
  * 
  * @author Alessio Ceroni
  */
-public interface DtdRulesManager extends Service {
+public interface RulesManager extends Service {
 
 	/**
 	 * 
@@ -67,10 +67,10 @@ public interface DtdRulesManager extends Service {
 	 * default di un elemento
 	 * 
 	 * @param elem_name il nome dell'elemento padre
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public String getDefaultContent(String elem_name) throws DtdRulesManagerException;
+	public String getDefaultContent(String elem_name) throws RulesManagerException;
 
 	/**
 	 * Restituisce una stringa in formato XML che definisce il contenuto di
@@ -78,19 +78,19 @@ public interface DtdRulesManager extends Service {
 	 * 
 	 * @param elem_name il nome dell'elemento padre
 	 * @param alternative uno dei possibili contenuti alternativi dell'elemento
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public String getDefaultContent(String elem_name, String alternative) throws DtdRulesManagerException;
+	public String getDefaultContent(String elem_name, String alternative) throws RulesManagerException;
 
 	/**
 	 * Restituisce i possibili contenuti alternativi di un elemento
 	 * 
 	 * @param elem_name
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public Vector getAlternativeContents(String elem_name) throws DtdRulesManagerException;
+	public Vector getAlternativeContents(String elem_name) throws RulesManagerException;
 
 	/**
 	 * Controlla se una collezione di nomi di elementi puo rappresentare un
@@ -98,10 +98,10 @@ public interface DtdRulesManager extends Service {
 	 * 
 	 * @param elem_name il nome dell'elemento padre
 	 * @param elem_children la collezione dei nomi dei figli
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public boolean isValid(String elem_name, Collection elem_children) throws DtdRulesManagerException;
+	public boolean isValid(String elem_name, Collection elem_children) throws RulesManagerException;
 
 	/**
 	 * Enumera le alternative possibili dati il nodo padre ed i nomi dei nodi
@@ -111,76 +111,76 @@ public interface DtdRulesManager extends Service {
 	 * @param elem_children la collezione dei nomi dei figli
 	 * @param choice_point la posizione nella sequenza di figli in cui valutare
 	 *        le alternative
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public Collection getAlternatives(String elem_name, Collection elem_children, int choice_point) throws DtdRulesManagerException;
+	public Collection getAlternatives(String elem_name, Collection elem_children, int choice_point) throws RulesManagerException;
 
 	/**
 	 * Restituisce un vettore di stringhe contenente il nome dei figli di un
 	 * nodo I nodi che non sono testo o elementi vengono ignorati
 	 * 
 	 * @param node il nodo padre
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public Vector getChildren(Node node) throws DtdRulesManagerException;
+	public Vector getChildren(Node node) throws RulesManagerException;
 
 	/**
 	 * Restituisce il nome di un nodo
 	 * 
 	 * @param dom_node
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public String getNodeName(Node dom_node) throws DtdRulesManagerException;
+	public String getNodeName(Node dom_node) throws RulesManagerException;
 
 	/**
 	 * Restituisce l'indice di un nodo all'interno del padre
 	 * 
 	 * @param parent il nodo padre
 	 * @param child il nodo figlio
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public int getChildIndex(Node parent, Node child) throws DtdRulesManagerException;
+	public int getChildIndex(Node parent, Node child) throws RulesManagerException;
 
 	/**
 	 * Controlla se il contenuto di un nodo &egrave valido
 	 * 
 	 * @param dom_node
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public boolean queryIsValid(Node dom_node) throws DtdRulesManagerException;
+	public boolean queryIsValid(Node dom_node) throws RulesManagerException;
 
 	/**
 	 * Controlla se un nodo pu&ograve contenere del testo
 	 * 
 	 * @param dom_node
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public boolean queryTextContent(Node dom_node) throws DtdRulesManagerException;
+	public boolean queryTextContent(Node dom_node) throws RulesManagerException;
 
 	/**
 	 * Controlla se un nodo pu&ograve contenere del testo
 	 * 
 	 * @param elem_name il nome del nodo in esame
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public boolean queryTextContent(String elem_name) throws DtdRulesManagerException;
+	public boolean queryTextContent(String elem_name) throws RulesManagerException;
 
 	/**
 	 * Controlla se &egrave possibile appendere un nodo ad un elemento
 	 * 
 	 * @param parent il nodo padre
 	 * @param new_node il nodo da appendere
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public boolean queryCanAppend(Node parent, Node new_node) throws DtdRulesManagerException;
+	public boolean queryCanAppend(Node parent, Node new_node) throws RulesManagerException;
 
 	/**
 	 * Controlla se &egrave possibile appendere una collezione di nodi ad un
@@ -188,29 +188,29 @@ public interface DtdRulesManager extends Service {
 	 * 
 	 * @param parent il nodo padre
 	 * @param new_nodes i nodi da appendere
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public boolean queryCanAppend(Node parent, Collection new_nodes) throws DtdRulesManagerException;
+	public boolean queryCanAppend(Node parent, Collection new_nodes) throws RulesManagerException;
 
 	/**
 	 * Restituisce i possibili nodi da appendere ad un elemento
 	 * 
 	 * @param parent il nodo padre
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public Collection queryAppendable(Node parent) throws DtdRulesManagerException;
+	public Collection queryAppendable(Node parent) throws RulesManagerException;
 
 	/**
 	 * Controlla se &egrave possibile pre-pendere un nodo ad un elemento
 	 * 
 	 * @param parent il nodo padre
 	 * @param new_node il nodo da pre-pendere
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public boolean queryCanPrepend(Node parent, Node new_node) throws DtdRulesManagerException;
+	public boolean queryCanPrepend(Node parent, Node new_node) throws RulesManagerException;
 
 	/**
 	 * Controlla se &egrave possibile pre-pendere una collezione di nodi ad un
@@ -218,19 +218,19 @@ public interface DtdRulesManager extends Service {
 	 * 
 	 * @param parent il nodo padre
 	 * @param new_nodes i nodi da pre-pendere
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public boolean queryCanPrepend(Node parent, Collection new_nodes) throws DtdRulesManagerException;
+	public boolean queryCanPrepend(Node parent, Collection new_nodes) throws RulesManagerException;
 
 	/**
 	 * Restituisce i possibili nodi da pre-pendere ad un elemento
 	 * 
 	 * @param parent il nodo padre
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public Collection queryPrependable(Node parent) throws DtdRulesManagerException;
+	public Collection queryPrependable(Node parent) throws RulesManagerException;
 
 	/**
 	 * Controlla se &egrave possibile inserire un nodo dopo un certo figlio di
@@ -239,10 +239,10 @@ public interface DtdRulesManager extends Service {
 	 * @param parent il nodo padre
 	 * @param child_node il figlio dopo cui inserire il nuovo nodo
 	 * @param new_node il nodo da inserire
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public boolean queryCanInsertAfter(Node parent, Node child_node, Node new_node) throws DtdRulesManagerException;
+	public boolean queryCanInsertAfter(Node parent, Node child_node, Node new_node) throws RulesManagerException;
 
 	/**
 	 * Controlla se &egrave possibile inserire una collezione di nodi dopo un
@@ -251,10 +251,10 @@ public interface DtdRulesManager extends Service {
 	 * @param parent il nodo padre
 	 * @param child_node il figlio dopo cui inserire il nuovo nodo
 	 * @param new_nodes i nodi da inserire
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public boolean queryCanInsertAfter(Node parent, Node child_node, Collection new_nodes) throws DtdRulesManagerException;
+	public boolean queryCanInsertAfter(Node parent, Node child_node, Collection new_nodes) throws RulesManagerException;
 
 	/**
 	 * Restituisce i nodi che &egrave possibile inserire dopo un certo figlio di
@@ -262,10 +262,10 @@ public interface DtdRulesManager extends Service {
 	 * 
 	 * @param parent il nodo padre
 	 * @param child_node il figlio dopo cui inserire il nuovo nodo
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public Collection queryInsertableAfter(Node parent, Node child_node) throws DtdRulesManagerException;
+	public Collection queryInsertableAfter(Node parent, Node child_node) throws RulesManagerException;
 
 	/**
 	 * Controlla se &egrave possibile inserire un nodo prima di un certo figlio
@@ -274,10 +274,10 @@ public interface DtdRulesManager extends Service {
 	 * @param parent il nodo padre
 	 * @param child_node il figlio prima di cui inserire il nuovo nodo
 	 * @param new_node il nodo da inserire
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public boolean queryCanInsertBefore(Node parent, Node child_node, Node new_node) throws DtdRulesManagerException;
+	public boolean queryCanInsertBefore(Node parent, Node child_node, Node new_node) throws RulesManagerException;
 
 	/**
 	 * Controlla se &egrave possibile inserire una collezione di nodi prima di
@@ -286,10 +286,10 @@ public interface DtdRulesManager extends Service {
 	 * @param parent il nodo padre
 	 * @param child_node il figlio prima di cui inserire il nuovo nodo
 	 * @param new_nodes i nodi da inserire
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public boolean queryCanInsertBefore(Node parent, Node child_node, Collection new_nodes) throws DtdRulesManagerException;
+	public boolean queryCanInsertBefore(Node parent, Node child_node, Collection new_nodes) throws RulesManagerException;
 
 	/**
 	 * Restituisce i nodi che &egrave possibile inserire prima di un certo
@@ -297,10 +297,10 @@ public interface DtdRulesManager extends Service {
 	 * 
 	 * @param parent il nodo padre
 	 * @param child_node il figlio prima di cui inserire il nuovo nodo
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public Collection queryInsertableBefore(Node parent, Node child_node) throws DtdRulesManagerException;
+	public Collection queryInsertableBefore(Node parent, Node child_node) throws RulesManagerException;
 
 	/**
 	 * Controlla se &egrave possibile racchiudere un insieme di figli di un
@@ -310,10 +310,10 @@ public interface DtdRulesManager extends Service {
 	 * @param child_node il primo figlio da racchiudere
 	 * @param no_children il numero di figli da racchiudere
 	 * @param new_node il nodo contenitore
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public boolean queryCanEncloseIn(Node parent, Node child_node, int no_children, Node new_node) throws DtdRulesManagerException;
+	public boolean queryCanEncloseIn(Node parent, Node child_node, int no_children, Node new_node) throws RulesManagerException;
 
 	/**
 	 * Restituisce gli elementi in cui &egrave possibile racchiudere un insieme
@@ -323,9 +323,9 @@ public interface DtdRulesManager extends Service {
 	 * @param child_node il primo figlio da racchiudere
 	 * @param no_children il numero di figli da racchiudere
 	 * @return gli elementi contenitore
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public Collection queryContainers(Node parent, Node child_node, int no_children) throws DtdRulesManagerException;
+	public Collection queryContainers(Node parent, Node child_node, int no_children) throws RulesManagerException;
 
 	/**
 	 * Controlla se &egrave possibile racchiudere una parte di testo di un
@@ -334,10 +334,10 @@ public interface DtdRulesManager extends Service {
 	 * @param parent il nodo padre
 	 * @param child_node il nodo testo da racchiudere
 	 * @param new_node il nodo contenitore
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public boolean queryCanEncloseTextIn(Node parent, Node child_node, Node new_node) throws DtdRulesManagerException;
+	public boolean queryCanEncloseTextIn(Node parent, Node child_node, Node new_node) throws RulesManagerException;
 
 	/**
 	 * Restituisce gli elementi in cui &egrave possibile racchiudere una parte
@@ -346,9 +346,9 @@ public interface DtdRulesManager extends Service {
 	 * @param parent il nodo padre
 	 * @param child_node il nodo di testo da racchiudere
 	 * @return gli elementi contenitore
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public Collection queryTextContainers(Node parent, Node child_node) throws DtdRulesManagerException;
+	public Collection queryTextContainers(Node parent, Node child_node) throws RulesManagerException;
 
 	/**
 	 * Controlla se &egrave possibile sostituire un insieme di figli di un
@@ -358,10 +358,10 @@ public interface DtdRulesManager extends Service {
 	 * @param child_node il primo figlio da racchiudere
 	 * @param no_children il numero di figli da racchiudere
 	 * @param new_nodes gli elementi con cui sostituire i figli specificati
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public boolean queryCanReplaceWith(Node parent, Node child_node, int no_children, Collection new_nodes) throws DtdRulesManagerException;
+	public boolean queryCanReplaceWith(Node parent, Node child_node, int no_children, Collection new_nodes) throws RulesManagerException;
 
 	/**
 	 * Controlla se &egrave possibile sostituire una parte di testo con un
@@ -370,20 +370,20 @@ public interface DtdRulesManager extends Service {
 	 * @param parent il nodo padre
 	 * @param child_node il nodo testo da racchiudere
 	 * @param new_nodes gli elementi con cui sostituire il testo specificato
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public boolean queryCanReplaceTextWith(Node parent, Node child_node, Collection new_nodes) throws DtdRulesManagerException;
+	public boolean queryCanReplaceTextWith(Node parent, Node child_node, Collection new_nodes) throws RulesManagerException;
 
 	/**
 	 * Controlla se &egrave possibile eliminare un certo figlio di un elemento
 	 * 
 	 * @param parent il nodo padre
 	 * @param child_node il figlio da eliminare
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public boolean queryCanDelete(Node parent, Node child_node) throws DtdRulesManagerException;
+	public boolean queryCanDelete(Node parent, Node child_node) throws RulesManagerException;
 
 	/**
 	 * Controlla se &egrave possibile eliminare un certo insieme di figli di un
@@ -392,10 +392,10 @@ public interface DtdRulesManager extends Service {
 	 * @param parent il nodo padre
 	 * @param child_node il primo figlio da eliminare
 	 * @param no_children il numero di figli da eliminare
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public boolean queryCanDelete(Node parent, Node child_node, int no_children) throws DtdRulesManagerException;
+	public boolean queryCanDelete(Node parent, Node child_node, int no_children) throws RulesManagerException;
 
 	/**
 	 * Controlla se &egrave possibile inserire un nodo all'interno di un certo
@@ -405,10 +405,10 @@ public interface DtdRulesManager extends Service {
 	 * @param child_node il figlio in cui inserire il nuovo nodo, deve essere un
 	 *        nodo testo
 	 * @param new_node il nodo da inserire
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public boolean queryCanInsertInside(Node parent, Node child_node, Node new_node) throws DtdRulesManagerException;
+	public boolean queryCanInsertInside(Node parent, Node child_node, Node new_node) throws RulesManagerException;
 
 	/**
 	 * Controlla se &egrave possibile inserire una collezione di nodi
@@ -418,10 +418,10 @@ public interface DtdRulesManager extends Service {
 	 * @param child_node il figlio in cui inserire il nuovo nodo, deve essere un
 	 *        nodo testo
 	 * @param new_nodes i nodi da inserire
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public boolean queryCanInsertInside(Node parent, Node child_node, Collection new_nodes) throws DtdRulesManagerException;
+	public boolean queryCanInsertInside(Node parent, Node child_node, Collection new_nodes) throws RulesManagerException;
 
 	/**
 	 * Restituisce i nodi che &egrave possibile inserire all'interno di un certo
@@ -430,20 +430,20 @@ public interface DtdRulesManager extends Service {
 	 * @param parent il nodo padre
 	 * @param child_node il figlio in cui inserire il nuovo nodo, deve essere un
 	 *        nodo testo
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public Collection queryInsertableInside(Node parent, Node child_node) throws DtdRulesManagerException;
+	public Collection queryInsertableInside(Node parent, Node child_node) throws RulesManagerException;
 
 	/**
 	 * Restituisce la lista dei nomi degli attributi di un elemento
 	 * 
 	 * @param elem_name il nome dell'elemento di cui si vuole la lista degli
 	 *        attributi
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public Collection queryGetAttributes(String elem_name) throws DtdRulesManagerException;
+	public Collection queryGetAttributes(String elem_name) throws RulesManagerException;
 
 	/**
 	 * Restituisce il valore di default (se esiste) di un attributo di un
@@ -453,9 +453,9 @@ public interface DtdRulesManager extends Service {
 	 *        default dell'attributo
 	 * @param att_name il nome dell'attributo
 	 * @return la stringa vuota se non esiste il valore di default
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public String queryGetAttributeDefaultValue(String elem_name, String att_name) throws DtdRulesManagerException;
+	public String queryGetAttributeDefaultValue(String elem_name, String att_name) throws RulesManagerException;
 
 	/**
 	 * Restituisce i valori possibili per un attributo
@@ -464,9 +464,9 @@ public interface DtdRulesManager extends Service {
 	 *        default dell'attributo
 	 * @param att_name il nome dell'attributo
 	 * @return <code>null</code> se l'attributo puo' avere qualsiasi valore
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public Collection queryGetAttributePossibleValues(String elem_name, String att_name) throws DtdRulesManagerException;
+	public Collection queryGetAttributePossibleValues(String elem_name, String att_name) throws RulesManagerException;
 
 	/**
 	 * Restituisce <code>true</code> se esiste l'attributo specificato per
@@ -475,10 +475,10 @@ public interface DtdRulesManager extends Service {
 	 * @param elem_name il nome dell'elemento di cui si chiede l'esistena
 	 *        dell'attributo
 	 * @param att_name il nome dell'attributo
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public boolean queryIsValidAttribute(String elem_name, String att_name) throws DtdRulesManagerException;
+	public boolean queryIsValidAttribute(String elem_name, String att_name) throws RulesManagerException;
 
 	/**
 	 * Restituisce <code>true</code> se l'attributo specificato &egrave di
@@ -487,10 +487,10 @@ public interface DtdRulesManager extends Service {
 	 * @param elem_name il nome dell'elemento di cui si chiede l'esistena
 	 *        dell'attributo
 	 * @param att_name il nome dell'attributo
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public boolean queryIsRequiredAttribute(String elem_name, String att_name) throws DtdRulesManagerException;
+	public boolean queryIsRequiredAttribute(String elem_name, String att_name) throws RulesManagerException;
 
 	/**
 	 * Restituisce <code>true</code> se l'attributo specificato &egrave di
@@ -499,10 +499,10 @@ public interface DtdRulesManager extends Service {
 	 * @param elem_name il nome dell'elemento di cui si chiede l'esistena
 	 *        dell'attributo
 	 * @param att_name il nome dell'attributo
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 * @return
 	 */
-	public boolean queryIsFixedAttribute(String elem_name, String att_name) throws DtdRulesManagerException;
+	public boolean queryIsFixedAttribute(String elem_name, String att_name) throws RulesManagerException;
 
 	/**
 	 * Restituisce <code>true</code> se l'attributo specificato per questo
@@ -513,15 +513,15 @@ public interface DtdRulesManager extends Service {
 	 *        del valore dell'attributo
 	 * @param att_name il nome dell'attributo
 	 * @param value il valore dell'attributo
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public boolean queryIsValidAttributeValue(String elem_name, String att_name, String value) throws DtdRulesManagerException;
+	public boolean queryIsValidAttributeValue(String elem_name, String att_name, String value) throws RulesManagerException;
 
 	/**
 	 * Riempie il nodo con gli attributi necessari
 	 * 
 	 * @param elem il nodo di cui si vogliono settare gli attributi
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public void fillRequiredAttributes(Node elem) throws DtdRulesManagerException;
+	public void fillRequiredAttributes(Node elem) throws RulesManagerException;
 }
