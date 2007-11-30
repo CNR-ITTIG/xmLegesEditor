@@ -179,6 +179,7 @@ public class DocumentManagerImpl implements DocumentManager, EventListener, Logg
 			n.addEventListener(MutationEventImpl.DOM_NODE_REMOVED, this, true);
 			n.addEventListener(MutationEventImpl.DOM_SUBTREE_MODIFIED, this, true);
 			setNew(isNew);
+			
 			eventManager.fireEvent(new DocumentOpenedEvent(this, document));
 			if (logger.isDebugEnabled())
 				logger.debug("doc opened:" + UtilDom.domToString(document));
@@ -249,7 +250,12 @@ public class DocumentManagerImpl implements DocumentManager, EventListener, Logg
 		return null;
 	}
 	
-	
+	private String getGrammarExtension(Document doc) {
+		String path = getGrammarPath(doc);
+		if(path!=null)
+			return(path.substring(path.lastIndexOf(".")+1));
+		return null;
+	}
 		
 	private String getSchemaLocation(Document doc){		
 		String schemaLoc = UtilDom.getAttributeValueAsString((Node)doc.getDocumentElement(), "xsi:schemaLocation");
@@ -507,7 +513,10 @@ public class DocumentManagerImpl implements DocumentManager, EventListener, Logg
 			UtilDom.trimTextNode(doc, true);
 			logger.info("Reading rules from DTDs...");
 			System.err.println("----------> GRAMMAR PATH:   "+getGrammarPath(doc));
+			
+			rulesManager.createRulesManager(getGrammarExtension(doc));
 			rulesManager.loadRules(filename, getGrammarPath(doc));
+			
 			logger.info("Reading rules OK");
 		}
 		logger.info("Reading file Ok");
