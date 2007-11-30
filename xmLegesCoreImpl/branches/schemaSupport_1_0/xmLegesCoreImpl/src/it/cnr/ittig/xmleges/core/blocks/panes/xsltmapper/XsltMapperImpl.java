@@ -8,12 +8,12 @@ import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.panes.xsltmapper.XsltMapper;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
 
 import java.util.EventObject;
@@ -69,7 +69,7 @@ public class XsltMapperImpl implements XsltMapper, EventManagerListener, Loggabl
 	DocumentManager documentManager = null;
 
 	/** Rules Manager per i nodi vuoti. */
-	DtdRulesManager rulesManager = null;
+	RulesManager rulesManager = null;
 
 	/** Internazionalizzazione */
 	I18n i18n;
@@ -103,7 +103,7 @@ public class XsltMapperImpl implements XsltMapper, EventManagerListener, Loggabl
 	public void service(ServiceManager serviceManager) throws ServiceException {
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
-		rulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		i18n = (I18n) serviceManager.lookup(I18n.class);
 	}
 
@@ -233,7 +233,7 @@ public class XsltMapperImpl implements XsltMapper, EventManagerListener, Loggabl
 					}
 				}
 			}
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 			instance.logger.error(ex.toString(), ex);
 			return null;
 		}

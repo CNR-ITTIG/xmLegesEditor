@@ -18,7 +18,6 @@ import it.cnr.ittig.xmleges.core.services.document.DocumentOpenedEvent;
 import it.cnr.ittig.xmleges.core.services.document.DocumentSavedEvent;
 import it.cnr.ittig.xmleges.core.services.document.DomEdit;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.frame.FindIterator;
@@ -31,6 +30,7 @@ import it.cnr.ittig.xmleges.core.services.panes.xsltmapper.XsltMapper;
 import it.cnr.ittig.xmleges.core.services.panes.xsltpane.DeleteNextPrevAction;
 import it.cnr.ittig.xmleges.core.services.panes.xsltpane.InsertBreakAction;
 import it.cnr.ittig.xmleges.core.services.panes.xsltpane.XsltPane;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.spellcheck.dom.DomSpellCheck;
@@ -86,7 +86,7 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 
 	DocumentManager documentManager;
 
-	DtdRulesManager rulesManager;
+	RulesManager rulesManager;
 
 	EventManager eventManager;
 
@@ -147,7 +147,7 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 	public void service(ServiceManager serviceManager) throws ServiceException {
 		xsltMapper = (XsltMapper) serviceManager.lookup(XsltMapper.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
-		rulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 		frame = (Frame) serviceManager.lookup(Frame.class);
 		bars = (Bars) serviceManager.lookup(Bars.class);
@@ -503,7 +503,7 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 		return this.documentManager;
 	}
 
-	public DtdRulesManager getRulesManager() {
+	public RulesManager getRulesManager() {
 		return this.rulesManager;
 	}
 

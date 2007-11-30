@@ -1,7 +1,7 @@
 package it.cnr.ittig.xmleges.core.blocks.action.edit.importdom;
 
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 
 import java.awt.datatransfer.DataFlavor;
@@ -83,7 +83,7 @@ public class ImportTransferHandler extends TransferHandler {
 						boolean all = nl.getLength() > 0;
 						for (int i = 0; i < nl.getLength(); i++) {
 							Node n = nl.item(i);
-							if (importDomActionImpl.dtdRulesManager.queryCanAppend(dest, n)) {
+							if (importDomActionImpl.rulesManager.queryCanAppend(dest, n)) {
 								dest.appendChild(dest.getOwnerDocument().importNode(n.cloneNode(true), true));
 								v.addElement(n);
 								importDomActionImpl.addImported(n);
@@ -100,7 +100,7 @@ public class ImportTransferHandler extends TransferHandler {
 						rebuildSubTree(target, treeNode);
 						source.invalidate();
 						source.repaint();
-					} else if (importDomActionImpl.dtdRulesManager.queryCanAppend(dest, node)) {
+					} else if (importDomActionImpl.rulesManager.queryCanAppend(dest, node)) {
 						importDomActionImpl.logger.error("CAN APPEND to " + dest);
 						Node toImp = dest.getOwnerDocument().importNode(node.cloneNode(true), true);
 						tr = importDomActionImpl.documentManager.beginEdit();
@@ -110,7 +110,7 @@ public class ImportTransferHandler extends TransferHandler {
 						rebuildSubTree(target, treeNode);
 						source.invalidate();
 						source.repaint();
-					} else if (importDomActionImpl.dtdRulesManager.queryCanInsertBefore(dest.getParentNode(), dest, node)) {
+					} else if (importDomActionImpl.rulesManager.queryCanInsertBefore(dest.getParentNode(), dest, node)) {
 						importDomActionImpl.logger.error("CAN INSERT BEFORE to " + dest);
 						Node toImp = dest.getOwnerDocument().importNode(node.cloneNode(true), true);
 						tr = importDomActionImpl.documentManager.beginEdit();
@@ -120,7 +120,7 @@ public class ImportTransferHandler extends TransferHandler {
 						rebuildSubTree(target, treeNode);
 						source.invalidate();
 						source.repaint();
-					} else if (importDomActionImpl.dtdRulesManager.queryCanInsertAfter(dest.getParentNode(), dest, node)) {
+					} else if (importDomActionImpl.rulesManager.queryCanInsertAfter(dest.getParentNode(), dest, node)) {
 						Node toImp = dest.getOwnerDocument().importNode(node.cloneNode(true), true);
 						importDomActionImpl.logger.error("CAN INSERT AFTER to " + dest);
 						tr = importDomActionImpl.documentManager.beginEdit();
@@ -133,7 +133,7 @@ public class ImportTransferHandler extends TransferHandler {
 					} else
 						importDomActionImpl.utilMsg.msgError("edit.importdom.msg.error");
 
-				} catch (DtdRulesManagerException ex) {
+				} catch (RulesManagerException ex) {
 					importDomActionImpl.logger.error(ex.toString(), ex);
 				}
 			} catch (Exception ex) {

@@ -12,8 +12,8 @@
 package it.cnr.ittig.xmleges.core.blocks.schema;
 
 import it.cnr.ittig.services.manager.Logger;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
 import it.cnr.ittig.xmleges.core.util.lang.UtilLang;
 
@@ -30,7 +30,7 @@ import org.w3c.dom.NodeList;
  * Implementazione del servizio it.cnr.ittig.xmleges.editor.services.dtdrulesmanager.DtdRulesManager;
  * 
  */
-public class SchemaRulesManagerImpl implements DtdRulesManager {
+public class SchemaRulesManagerImpl implements RulesManager {
 
 	Logger logger;
 
@@ -304,9 +304,9 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * ContentGraph. Scende ricorsivamente negli archi gia' esplosi
 	 * 
 	 * @param graph il ContentGraph da esplodere
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	protected void explodeContentGraph(ContentGraph graph) throws DtdRulesManagerException {
+	protected void explodeContentGraph(ContentGraph graph) throws RulesManagerException {
 		// check every edge of the old graph
 		for (Iterator i = graph.visitNodes(); i.hasNext();) {
 			ContentGraph.Node src = (ContentGraph.Node) i.next();
@@ -331,9 +331,9 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * ContentGraph. Scende ricorsivamente negli archi gia' esplosi
 	 * 
 	 * @param graph il ContentGraph da esplodere
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	protected void explodeContentGraphAlternatives(ContentGraph graph) throws DtdRulesManagerException {
+	protected void explodeContentGraphAlternatives(ContentGraph graph) throws RulesManagerException {
 
 		// check every edge of the old graph
 		for (Iterator i = graph.visitNodes(); i.hasNext();) {
@@ -364,9 +364,9 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * 
 	 * @param elem_name il nome dell'elemento padre
 	 * @param graph ContentGraph da cui iniziare a definire il contenuto di default
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	protected String getDefaultContent(ContentGraph graph) throws DtdRulesManagerException {
+	protected String getDefaultContent(ContentGraph graph) throws RulesManagerException {
 		// cycle until a default content has been found
 		while (true) {
 			if (visitContentGraph(graph) < Integer.MAX_VALUE){
@@ -385,9 +385,9 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * 
 	 * @param elem_name il nome dell'elemento padre
 	 * @param graph ContentGraph da cui iniziare a definire il contenuto di default
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	protected Vector getAlternativeContents(ContentGraph graph) throws DtdRulesManagerException {
+	protected Vector getAlternativeContents(ContentGraph graph) throws RulesManagerException {
 		//FIXME: non riesco a fare il clone del grafo originale
 		graph.resetVisit();
 		System.out.println("grafo su cui cercherà il minimo: \n"+graph);
@@ -504,7 +504,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 
 	}
 
-	protected Vector findCurrentMinPath(ContentGraph graph) throws DtdRulesManagerException {
+	protected Vector findCurrentMinPath(ContentGraph graph) throws RulesManagerException {
 
 		Vector currentMinPath = new Vector();
 		getDijkstraShortestPath(graph);
@@ -599,9 +599,9 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * elemento
 	 * 
 	 * @param elem_name il nome dell'elemento padre
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public String getDefaultContent(String elem_name) throws DtdRulesManagerException {
+	public String getDefaultContent(String elem_name) throws RulesManagerException {
 		if (elem_name.compareTo("#PCDATA") == 0)
 			return "";
 		return getDefaultContent(getContentGraph(elem_name));
@@ -640,9 +640,9 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * 
 	 * @param elem_name il nome dell'elemento padre
 	 * @param alternative uno dei possibili contenuti alternativi dell'elemento
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public String getDefaultContent(String elem_name, String alternative) throws DtdRulesManagerException {
+	public String getDefaultContent(String elem_name, String alternative) throws RulesManagerException {
 		if (elem_name.compareTo("#PCDATA") == 0)
 			return "";
 
@@ -651,7 +651,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 		
 //		DFSA elem_rule = (DFSA) rules.get(elem_name);
 //		if (elem_rule == null)
-//			throw new DtdRulesManagerException("No rule for element <" + elem_name + ">");
+//			throw new RulesManagerException("No rule for element <" + elem_name + ">");
 
 		// init computation, get content of this alternative
 		return getDefaultContent(createAlternativeContentGraph(elem_name, alternative));
@@ -663,14 +663,14 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * 
 	 * Ritorna i possibili contenuti alternativi di un elemento
 	 * 
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public Vector getAlternativeContents(String elem_name) throws DtdRulesManagerException {
+	public Vector getAlternativeContents(String elem_name) throws RulesManagerException {
 		if (elem_name.compareTo("#PCDATA") == 0)
 			return new Vector();
 		Vector alternatives =  getAlternativeContents(getContentGraph(elem_name));
 		if (alternatives == null)
-			throw new DtdRulesManagerException("No alternative contents for element <" + elem_name + ">");
+			throw new RulesManagerException("No alternative contents for element <" + elem_name + ">");
 		return alternatives;
 	}
 
@@ -691,16 +691,16 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * Ritorna il content graph associato ad un elemento    (VERSIONE BASATA SU SCHEMA)
 	 * 
 	 * @param elem_name il nome dell'elemento
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	protected ContentGraph getContentGraph(String elem_name) throws DtdRulesManagerException {
+	protected ContentGraph getContentGraph(String elem_name) throws RulesManagerException {
 
 		if (queryTextContent(elem_name)) // don't explode text and mixed elements to save iterations
 			return createTextContentGraph(elem_name);
 
 //		DFSA elem_rule = (DFSA) rules.get(elem_name);
 //		if (elem_rule == null)
-//		throw new DtdRulesManagerException("No rule for element <" + elem_name + ">");
+//		throw new RulesManagerException("No rule for element <" + elem_name + ">");
 //		return elem_rule.createContentGraph();
 		return utilXsd.createContentGraph(elem_name);
 	}
@@ -728,9 +728,9 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * 
 	 * @param elem_name il nome dell'elemento padre
 	 * @param elem_children la collezione dei nomi dei figli
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public boolean isValid(String elem_name, Collection elem_children) throws DtdRulesManagerException {
+	public boolean isValid(String elem_name, Collection elem_children) throws RulesManagerException {
 		return isValid(elem_name, elem_children, false);
 	}
 
@@ -741,9 +741,9 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * @param elem_name il nome dell'elemento padre
 	 * @param elem_children la collezione dei nomi dei figli
 	 * @param with_gaps <code>true</code> se l'allineamento puo' essere fatto con gaps
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public boolean isValid(String elem_name, Collection elem_children, boolean with_gaps) throws DtdRulesManagerException {		
+	public boolean isValid(String elem_name, Collection elem_children, boolean with_gaps) throws RulesManagerException {		
 		return utilXsd.isValid(elem_name, elem_children, with_gaps);
 	}
 
@@ -757,13 +757,13 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * @param elem_children la collezione dei nomi dei figli
 	 * @param choice_point la posizione nella sequenza di figli dopo la quale valutare le
 	 *            alternative
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public Collection getAlternatives(String elem_name, Collection elem_children, int choice_point) throws DtdRulesManagerException {
+	public Collection getAlternatives(String elem_name, Collection elem_children, int choice_point) throws RulesManagerException {
 
 //		DFSA rule = (DFSA) rules.get(elem_name);
 //		if (rule == null)
-//			throw new DtdRulesManagerException("No rule for element <" + elem_name + ">");
+//			throw new RulesManagerException("No rule for element <" + elem_name + ">");
 
 		return utilXsd.getAlternatives(elem_name, elem_children, choice_point);
 	}
@@ -773,9 +773,9 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * non sono testo o elementi vengono ignorati
 	 * 
 	 * @param node il nodo padre
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public Vector getChildren(Node node) throws DtdRulesManagerException {
+	public Vector getChildren(Node node) throws RulesManagerException {
 		if (node.getNodeType() != Node.ELEMENT_NODE)
 			return new Vector();
 
@@ -800,9 +800,9 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * Ritorna il nome di un nodo
 	 * 
 	 * @param dom_node il nodo di cui si richiede il nome
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public String getNodeName(Node dom_node) throws DtdRulesManagerException {		
+	public String getNodeName(Node dom_node) throws RulesManagerException {		
 		if (dom_node.getNodeType() == Node.ELEMENT_NODE)
 			return dom_node.getNodeName();
 		if (dom_node.getNodeType() == Node.TEXT_NODE)
@@ -816,9 +816,9 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * 
 	 * @param parent il nodo padre
 	 * @param child il nodo figlio
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public int getChildIndex(Node parent, Node child) throws DtdRulesManagerException {
+	public int getChildIndex(Node parent, Node child) throws RulesManagerException {
 		int child_index = 0;
 		NodeList dom_children = parent.getChildNodes();
 		for (int i = 0; i < dom_children.getLength(); i++) {
@@ -832,7 +832,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 				return child_index;
 			child_index++;
 		}
-		throw new DtdRulesManagerException("Cannot find the child element in the children list");
+		throw new RulesManagerException("Cannot find the child element in the children list");
 	}
 
 	
@@ -854,11 +854,11 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * Controlla se il contenuto di un nodo &egrave valido
 	 * 
 	 * @param dom_node il nodo da validare
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public boolean queryIsValid(Node dom_node) throws DtdRulesManagerException {
+	public boolean queryIsValid(Node dom_node) throws RulesManagerException {
 		if (dom_node == null)
-			throw new DtdRulesManagerException("node is null");
+			throw new RulesManagerException("node is null");
 		if (dom_node.getNodeType() != Node.ELEMENT_NODE)
 			return true;
 		return isValid(getNodeName(dom_node), getChildren(dom_node));
@@ -868,11 +868,11 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * Controlla se un nodo pu&ograve contenere del testo
 	 * 
 	 * @param dom_node il nodo in esame
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public boolean queryTextContent(Node dom_node) throws DtdRulesManagerException {
+	public boolean queryTextContent(Node dom_node) throws RulesManagerException {
 		if (dom_node == null)
-			throw new DtdRulesManagerException("node is null");
+			throw new RulesManagerException("node is null");
 		if (dom_node.getNodeType() != Node.ELEMENT_NODE)
 			return true;
 		return isValid(getNodeName(dom_node), UtilLang.singleton("#PCDATA"));
@@ -882,9 +882,9 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * Controlla se un nodo pu&ograve contenere del testo
 	 * 
 	 * @param elem_name il nome del nodo in esame
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public boolean queryTextContent(String elem_name) throws DtdRulesManagerException {
+	public boolean queryTextContent(String elem_name) throws RulesManagerException {
 		if (elem_name.compareTo("#PCDATA") == 0)
 			return true;
 		return isValid(elem_name, UtilLang.singleton("#PCDATA"));
@@ -895,17 +895,17 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * 
 	 * @param parent il nodo padre
 	 * @param new_node il nodo da appendere
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public boolean queryCanAppend(Node parent, Node new_node) throws DtdRulesManagerException {
+	public boolean queryCanAppend(Node parent, Node new_node) throws RulesManagerException {
 		if (parent == null)
-			throw new DtdRulesManagerException("parent is null");
+			throw new RulesManagerException("parent is null");
 		if (new_node == null)
-			throw new DtdRulesManagerException("node to append is null");
+			throw new RulesManagerException("node to append is null");
 
 		Vector str_children = getChildren(parent);
 		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		str_children.add(getNodeName(new_node));
 		return isValid(getNodeName(parent), str_children);
@@ -916,21 +916,21 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * 
 	 * @param parent il nodo padre
 	 * @param new_nodes i nodi da appendere
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public boolean queryCanAppend(Node parent, Collection new_nodes) throws DtdRulesManagerException {
+	public boolean queryCanAppend(Node parent, Collection new_nodes) throws RulesManagerException {
 		if (parent == null)
-			throw new DtdRulesManagerException("parent is null");
+			throw new RulesManagerException("parent is null");
 
 		int c = 0;
 		Vector str_children = getChildren(parent);
 		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		for (Iterator i = new_nodes.iterator(); i.hasNext(); c++) {
 			Node new_node = (Node) i.next();
 			if (new_node == null)
-				throw new DtdRulesManagerException("node #" + c + " to append is null");
+				throw new RulesManagerException("node #" + c + " to append is null");
 			str_children.add(getNodeName(new_node));
 		}
 
@@ -941,15 +941,15 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * Ritorna i possibili nodi da appendere ad un elemento
 	 * 
 	 * @param parent il nodo padre
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public Collection queryAppendable(Node parent) throws DtdRulesManagerException {
+	public Collection queryAppendable(Node parent) throws RulesManagerException {
 		if (parent == null)
-			throw new DtdRulesManagerException("parent is null");
+			throw new RulesManagerException("parent is null");
 
 		Vector str_children = getChildren(parent);
 		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		return getAlternatives(getNodeName(parent), str_children, str_children.size() - 1);
 	}
@@ -959,17 +959,17 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * 
 	 * @param parent il nodo padre
 	 * @param new_node il nodo da pre-pendere
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public boolean queryCanPrepend(Node parent, Node new_node) throws DtdRulesManagerException {
+	public boolean queryCanPrepend(Node parent, Node new_node) throws RulesManagerException {
 		if (parent == null)
-			throw new DtdRulesManagerException("parent is null");
+			throw new RulesManagerException("parent is null");
 		if (new_node == null)
-			throw new DtdRulesManagerException("node to prepend is null");
+			throw new RulesManagerException("node to prepend is null");
 
 		Vector str_children = getChildren(parent);
 		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		str_children.insertElementAt(getNodeName(new_node), 0);
 		return isValid(getNodeName(parent), str_children);
@@ -980,21 +980,21 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * 
 	 * @param parent il nodo padre
 	 * @param new_nodes i nodi da pre-pendere
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public boolean queryCanPrepend(Node parent, Collection new_nodes) throws DtdRulesManagerException {
+	public boolean queryCanPrepend(Node parent, Collection new_nodes) throws RulesManagerException {
 		if (parent == null)
-			throw new DtdRulesManagerException("parent is null");
+			throw new RulesManagerException("parent is null");
 
 		int inserted = 0;
 		Vector str_children = getChildren(parent);
 		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		for (Iterator i = new_nodes.iterator(); i.hasNext(); inserted++) {
 			Node new_node = (Node) i.next();
 			if (new_node == null)
-				throw new DtdRulesManagerException("node #" + inserted + " to prepend is null");
+				throw new RulesManagerException("node #" + inserted + " to prepend is null");
 			str_children.insertElementAt(getNodeName(new_node), inserted);
 		}
 
@@ -1005,15 +1005,15 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * Ritorna i possibili nodi da pre-pendere ad un elemento
 	 * 
 	 * @param parent il nodo padre
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public Collection queryPrependable(Node parent) throws DtdRulesManagerException {
+	public Collection queryPrependable(Node parent) throws RulesManagerException {
 		if (parent == null)
-			throw new DtdRulesManagerException("parent is null");
+			throw new RulesManagerException("parent is null");
 
 		Vector str_children = getChildren(parent);
 		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		return getAlternatives(getNodeName(parent), str_children, -1);
 	}
@@ -1024,19 +1024,19 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * @param parent il nodo padre
 	 * @param child_node il figlio dopo cui inserire il nuovo nodo
 	 * @param new_node il nodo da inserire
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public boolean queryCanInsertAfter(Node parent, Node child_node, Node new_node) throws DtdRulesManagerException {
+	public boolean queryCanInsertAfter(Node parent, Node child_node, Node new_node) throws RulesManagerException {
 		if (parent == null)
-			throw new DtdRulesManagerException("parent is null");
+			throw new RulesManagerException("parent is null");
 		if (child_node == null)
-			throw new DtdRulesManagerException("child is null");
+			throw new RulesManagerException("child is null");
 		if (new_node == null)
-			throw new DtdRulesManagerException("node to insert is null");
+			throw new RulesManagerException("node to insert is null");
 
 		Vector str_children = getChildren(parent);
 		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		int child_index = getChildIndex(parent, child_node);
 		str_children.insertElementAt(getNodeName(new_node), child_index + 1);
@@ -1051,24 +1051,24 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * @param parent il nodo padre
 	 * @param child_node il figlio dopo cui inserire il nuovo nodo
 	 * @param new_nodes i nodi da inserire
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public boolean queryCanInsertAfter(Node parent, Node child_node, Collection new_nodes) throws DtdRulesManagerException {
+	public boolean queryCanInsertAfter(Node parent, Node child_node, Collection new_nodes) throws RulesManagerException {
 		if (parent == null)
-			throw new DtdRulesManagerException("parent is null");
+			throw new RulesManagerException("parent is null");
 		if (child_node == null)
-			throw new DtdRulesManagerException("child is null");
+			throw new RulesManagerException("child is null");
 
 		int inserted = 0;
 		Vector str_children = getChildren(parent);
 		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		int child_index = getChildIndex(parent, child_node);
 		for (Iterator i = new_nodes.iterator(); i.hasNext(); inserted++) {
 			Node new_node = (Node) i.next();
 			if (new_node == null)
-				throw new DtdRulesManagerException("node #" + inserted + " to insert is null");
+				throw new RulesManagerException("node #" + inserted + " to insert is null");
 			str_children.insertElementAt(getNodeName(new_node), child_index + inserted + 1);
 		}
 
@@ -1080,17 +1080,17 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * 
 	 * @param parent il nodo padre
 	 * @param child_node il figlio dopo cui inserire il nuovo nodo
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public Collection queryInsertableAfter(Node parent, Node child_node) throws DtdRulesManagerException {
+	public Collection queryInsertableAfter(Node parent, Node child_node) throws RulesManagerException {
 		if (parent == null)
-			throw new DtdRulesManagerException("parent is null");
+			throw new RulesManagerException("parent is null");
 		if (child_node == null)
-			throw new DtdRulesManagerException("child is null");
+			throw new RulesManagerException("child is null");
 
 		Vector str_children = getChildren(parent);
 		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		int child_index = getChildIndex(parent, child_node);
 		return getAlternatives(getNodeName(parent), str_children, child_index);
@@ -1103,19 +1103,19 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * @param parent il nodo padre
 	 * @param child_node il figlio prima di cui inserire il nuovo nodo
 	 * @param new_node il nodo da inserire
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public boolean queryCanInsertBefore(Node parent, Node child_node, Node new_node) throws DtdRulesManagerException {
+	public boolean queryCanInsertBefore(Node parent, Node child_node, Node new_node) throws RulesManagerException {
 		if (parent == null)
-			throw new DtdRulesManagerException("parent is null");
+			throw new RulesManagerException("parent is null");
 		if (child_node == null)
-			throw new DtdRulesManagerException("child is null");
+			throw new RulesManagerException("child is null");
 		if (new_node == null)
-			throw new DtdRulesManagerException("node to insert is null");
+			throw new RulesManagerException("node to insert is null");
 
 		Vector str_children = getChildren(parent);
 		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		int child_index = getChildIndex(parent, child_node);
 		str_children.insertElementAt(getNodeName(new_node), child_index);
@@ -1129,24 +1129,24 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * @param parent il nodo padre
 	 * @param child_node il figlio prima di cui inserire il nuovo nodo
 	 * @param new_nodes i nodi da inserire
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public boolean queryCanInsertBefore(Node parent, Node child_node, Collection new_nodes) throws DtdRulesManagerException {
+	public boolean queryCanInsertBefore(Node parent, Node child_node, Collection new_nodes) throws RulesManagerException {
 		if (parent == null)
-			throw new DtdRulesManagerException("parent is null");
+			throw new RulesManagerException("parent is null");
 		if (child_node == null)
-			throw new DtdRulesManagerException("child is null");
+			throw new RulesManagerException("child is null");
 
 		int inserted = 0;
 		Vector str_children = getChildren(parent);
 		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		int child_index = getChildIndex(parent, child_node);
 		for (Iterator i = new_nodes.iterator(); i.hasNext(); inserted++) {
 			Node new_node = (Node) i.next();
 			if (new_node == null)
-				throw new DtdRulesManagerException("node #" + inserted + " to insert is null");
+				throw new RulesManagerException("node #" + inserted + " to insert is null");
 			str_children.insertElementAt(getNodeName(new_node), child_index + inserted);
 		}
 
@@ -1159,17 +1159,17 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * 
 	 * @param parent il nodo padre
 	 * @param child_node il figlio prima di cui inserire il nuovo nodo
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public Collection queryInsertableBefore(Node parent, Node child_node) throws DtdRulesManagerException {
+	public Collection queryInsertableBefore(Node parent, Node child_node) throws RulesManagerException {
 		if (parent == null)
-			throw new DtdRulesManagerException("parent is null");
+			throw new RulesManagerException("parent is null");
 		if (child_node == null)
-			throw new DtdRulesManagerException("child is null");
+			throw new RulesManagerException("child is null");
 
 		Vector str_children = getChildren(parent);
 		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		int child_index = getChildIndex(parent, child_node);
 		return getAlternatives(getNodeName(parent), str_children, child_index - 1);
@@ -1192,19 +1192,19 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * @param child_node il primo figlio da racchiudere
 	 * @param no_children il numero di figli da racchiudere
 	 * @param new_node il nodo contenitore
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public boolean queryCanEncloseIn(Node parent, Node child_node, int no_children, Node new_node) throws DtdRulesManagerException {
+	public boolean queryCanEncloseIn(Node parent, Node child_node, int no_children, Node new_node) throws RulesManagerException {
 		if (parent == null)
-			throw new DtdRulesManagerException("parent is null");
+			throw new RulesManagerException("parent is null");
 		if (child_node == null)
-			throw new DtdRulesManagerException("child is null");
+			throw new RulesManagerException("child is null");
 		if (new_node == null)
-			throw new DtdRulesManagerException("node to insert is null");
+			throw new RulesManagerException("node to insert is null");
 
 		Vector str_children = getChildren(parent);
 		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		// find the first child
 		int child_index = getChildIndex(parent, child_node);
@@ -1231,17 +1231,17 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * @param child_node il primo figlio da racchiudere
 	 * @param no_children il numero di figli da racchiudere
 	 * @return gli elementi contenitore
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public Collection queryContainers(Node parent, Node child_node, int no_children) throws DtdRulesManagerException {
+	public Collection queryContainers(Node parent, Node child_node, int no_children) throws RulesManagerException {
 		if (parent == null)
-			throw new DtdRulesManagerException("parent is null");
+			throw new RulesManagerException("parent is null");
 		if (child_node == null)
-			throw new DtdRulesManagerException("child is null");
+			throw new RulesManagerException("child is null");
 
 		Vector str_children = getChildren(parent);
 		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		// find the first child
 		int child_index = getChildIndex(parent, child_node);
@@ -1270,21 +1270,21 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * @param parent il nodo padre
 	 * @param child_node il nodo testo da racchiudere
 	 * @param new_node il nodo contenitore
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public boolean queryCanEncloseTextIn(Node parent, Node child_node, Node new_node) throws DtdRulesManagerException {
+	public boolean queryCanEncloseTextIn(Node parent, Node child_node, Node new_node) throws RulesManagerException {
 		if (parent == null)
-			throw new DtdRulesManagerException("parent is null");
+			throw new RulesManagerException("parent is null");
 		if (child_node == null)
-			throw new DtdRulesManagerException("child is null");
+			throw new RulesManagerException("child is null");
 		if (child_node.getNodeType() != Node.TEXT_NODE)
-			throw new DtdRulesManagerException("Cannot enclose text: child node is not a text node");
+			throw new RulesManagerException("Cannot enclose text: child node is not a text node");
 		if (new_node == null)
-			throw new DtdRulesManagerException("node to insert is null");
+			throw new RulesManagerException("node to insert is null");
 
 		Vector str_children = getChildren(parent);
 		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		// find the text node
 		int child_index = getChildIndex(parent, child_node);
@@ -1308,17 +1308,17 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * @param parent il nodo padre
 	 * @param child_node il nodo di testo da racchiudere
 	 * @return gli elementi contenitore
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public Collection queryTextContainers(Node parent, Node child_node) throws DtdRulesManagerException {
+	public Collection queryTextContainers(Node parent, Node child_node) throws RulesManagerException {
 		if (parent == null)
-			throw new DtdRulesManagerException("parent is null");
+			throw new RulesManagerException("parent is null");
 		if (child_node == null)
-			throw new DtdRulesManagerException("child is null");
+			throw new RulesManagerException("child is null");
 
 		Vector str_children = getChildren(parent);
 		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		// find the text node
 		int child_index = getChildIndex(parent, child_node);
@@ -1346,18 +1346,18 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * @param child_node il primo figlio da racchiudere
 	 * @param no_children il numero di figli da racchiudere
 	 * @param new_nodes gli elementi con cui sostituire i figli specificati
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public boolean queryCanReplaceWith(Node parent, Node child_node, int no_children, Collection new_nodes) throws DtdRulesManagerException {
+	public boolean queryCanReplaceWith(Node parent, Node child_node, int no_children, Collection new_nodes) throws RulesManagerException {
 		if (parent == null)
-			throw new DtdRulesManagerException("parent is null");
+			throw new RulesManagerException("parent is null");
 		if (child_node == null)
-			throw new DtdRulesManagerException("child is null");
+			throw new RulesManagerException("child is null");
 
 		// get the children
 		Vector str_children = getChildren(parent);
 		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		// find the first child
 		int child_index = getChildIndex(parent, child_node);
@@ -1367,7 +1367,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 		for (Iterator i = new_nodes.iterator(); i.hasNext(); inserted++) {
 			Node new_node = (Node) i.next();
 			if (new_node == null)
-				throw new DtdRulesManagerException("node #" + inserted + " to insert is null");
+				throw new RulesManagerException("node #" + inserted + " to insert is null");
 			str_children.insertElementAt(getNodeName(new_node), child_index + inserted);
 		}
 
@@ -1382,20 +1382,20 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * @param parent il nodo padre
 	 * @param child_node il nodo testo da racchiudere
 	 * @param new_nodes gli elementi con cui sostituire il testo specificato
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public boolean queryCanReplaceTextWith(Node parent, Node child_node, Collection new_nodes) throws DtdRulesManagerException {
+	public boolean queryCanReplaceTextWith(Node parent, Node child_node, Collection new_nodes) throws RulesManagerException {
 		if (parent == null)
-			throw new DtdRulesManagerException("parent is null");
+			throw new RulesManagerException("parent is null");
 		if (child_node == null)
-			throw new DtdRulesManagerException("child is null");
+			throw new RulesManagerException("child is null");
 		if (child_node.getNodeType() != Node.TEXT_NODE)
-			throw new DtdRulesManagerException("Cannot enclose text: child node is not a text node");
+			throw new RulesManagerException("Cannot enclose text: child node is not a text node");
 
 		// get the children
 		Vector str_children = getChildren(parent);
 		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		// find the text node
 		int child_index = getChildIndex(parent, child_node);
@@ -1406,7 +1406,7 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 		for (Iterator i = new_nodes.iterator(); i.hasNext(); inserted++) {
 			Node new_node = (Node) i.next();
 			if (new_node == null)
-				throw new DtdRulesManagerException("node #" + inserted + " to insert is null");
+				throw new RulesManagerException("node #" + inserted + " to insert is null");
 			str_children.insertElementAt(getNodeName(new_node), child_index + inserted);
 		}
 
@@ -1419,17 +1419,17 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * 
 	 * @param parent il nodo padre
 	 * @param child_node il figlio da eliminare
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public boolean queryCanDelete(Node parent, Node child_node) throws DtdRulesManagerException {
+	public boolean queryCanDelete(Node parent, Node child_node) throws RulesManagerException {
 		if (parent == null)
-			throw new DtdRulesManagerException("parent is null");
+			throw new RulesManagerException("parent is null");
 		if (child_node == null)
-			throw new DtdRulesManagerException("child is null");
+			throw new RulesManagerException("child is null");
 
 		Vector str_children = getChildren(parent);
 		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		int child_index = getChildIndex(parent, child_node);
 		str_children.removeElementAt(child_index);
@@ -1442,22 +1442,22 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * @param parent il nodo padre
 	 * @param child_node il primo figlio da eliminare
 	 * @param no_children il numero di figli da eliminare
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public boolean queryCanDelete(Node parent, Node child_node, int no_children) throws DtdRulesManagerException {
+	public boolean queryCanDelete(Node parent, Node child_node, int no_children) throws RulesManagerException {
 		if (parent == null)
-			throw new DtdRulesManagerException("parent is null");
+			throw new RulesManagerException("parent is null");
 		if (child_node == null)
-			throw new DtdRulesManagerException("child is null");
+			throw new RulesManagerException("child is null");
 
 		Vector str_children = getChildren(parent);
 		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		int from_index = getChildIndex(parent, child_node);
 		for (int i = 0; i < no_children; i++) {
 			if (str_children.size() == from_index)
-				throw new DtdRulesManagerException("invalid number of children to remove");
+				throw new RulesManagerException("invalid number of children to remove");
 			str_children.removeElementAt(from_index);
 		}
 
@@ -1472,21 +1472,21 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * @param child_node il figlio in cui inserire il nuovo nodo, deve essere un nodo
 	 *            testo
 	 * @param new_node il nodo da inserire
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public boolean queryCanInsertInside(Node parent, Node child_node, Node new_node) throws DtdRulesManagerException {
+	public boolean queryCanInsertInside(Node parent, Node child_node, Node new_node) throws RulesManagerException {
 		if (parent == null)
-			throw new DtdRulesManagerException("parent is null");
+			throw new RulesManagerException("parent is null");
 		if (child_node == null)
-			throw new DtdRulesManagerException("child is null");
+			throw new RulesManagerException("child is null");
 		if (new_node == null)
-			throw new DtdRulesManagerException("node to insert is null");
+			throw new RulesManagerException("node to insert is null");
 		if (child_node.getNodeType() != Node.TEXT_NODE)
-			throw new DtdRulesManagerException("Cannot insert inside: child node is not a text node");
+			throw new RulesManagerException("Cannot insert inside: child node is not a text node");
 
 		Vector str_children = getChildren(parent);
 		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		int child_index = getChildIndex(parent, child_node);
 		str_children.insertElementAt(getNodeName(new_node), child_index + 1);
@@ -1502,26 +1502,26 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * @param child_node il figlio in cui inserire il nuovo nodo, deve essere un nodo
 	 *            testo
 	 * @param new_nodes i nodi da inserire
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public boolean queryCanInsertInside(Node parent, Node child_node, Collection new_nodes) throws DtdRulesManagerException {
+	public boolean queryCanInsertInside(Node parent, Node child_node, Collection new_nodes) throws RulesManagerException {
 		if (parent == null)
-			throw new DtdRulesManagerException("parent is null");
+			throw new RulesManagerException("parent is null");
 		if (child_node == null)
-			throw new DtdRulesManagerException("child is null");
+			throw new RulesManagerException("child is null");
 		if (child_node.getNodeType() != Node.TEXT_NODE)
-			throw new DtdRulesManagerException("Cannot insert inside: child node is not a text node");
+			throw new RulesManagerException("Cannot insert inside: child node is not a text node");
 
 		int inserted = 0;
 		Vector str_children = getChildren(parent);
 		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		int child_index = getChildIndex(parent, child_node);
 		for (Iterator i = new_nodes.iterator(); i.hasNext(); inserted++) {
 			Node new_node = (Node) i.next();
 			if (new_node == null)
-				throw new DtdRulesManagerException("node #" + inserted + " to insert is null");
+				throw new RulesManagerException("node #" + inserted + " to insert is null");
 			str_children.insertElementAt(getNodeName(new_node), child_index + inserted + 1);
 		}
 		str_children.insertElementAt(new String("#PCDATA"), child_index + inserted + 1);
@@ -1535,23 +1535,23 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * @param parent il nodo padre
 	 * @param child_node il figlio in cui inserire il nuovo nodo, deve essere un nodo
 	 *            testo
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public Collection queryInsertableInside(Node parent, Node child_node) throws DtdRulesManagerException {
+	public Collection queryInsertableInside(Node parent, Node child_node) throws RulesManagerException {
 		if (parent == null)
-			throw new DtdRulesManagerException("parent is null");
+			throw new RulesManagerException("parent is null");
 		if (child_node == null)
-			throw new DtdRulesManagerException("child is null");
+			throw new RulesManagerException("child is null");
 		if (child_node.getNodeType() != Node.TEXT_NODE)
-			throw new DtdRulesManagerException("Cannot insert inside: child node is not a text node");
+			throw new RulesManagerException("Cannot insert inside: child node is not a text node");
 
 		Vector str_children = getChildren(parent);
 		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new DtdRulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		int child_index = getChildIndex(parent, child_node);
 		if (((String) str_children.get(child_index)).compareTo("#PCDATA") != 0)
-			throw new DtdRulesManagerException("Cannot insert inside: child node is not a text node");
+			throw new RulesManagerException("Cannot insert inside: child node is not a text node");
 		str_children.insertElementAt(new String("#PCDATA"), child_index + 1);
 		return getAlternatives(getNodeName(parent), str_children, child_index);
 	}
@@ -1568,19 +1568,19 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
     //
 	//
 	//
-	private AttributeDeclaration getAttributeDeclaration(String elem_name, String att_name) throws DtdRulesManagerException {
+	private AttributeDeclaration getAttributeDeclaration(String elem_name, String att_name) throws RulesManagerException {
 		if (elem_name == "#PCDATA")
-			throw new DtdRulesManagerException("No attributes for element <" + elem_name + ">");
+			throw new RulesManagerException("No attributes for element <" + elem_name + ">");
 		if (!utilXsd.rules.containsKey(elem_name))
-			throw new DtdRulesManagerException("No rule for element <" + elem_name + ">");
+			throw new RulesManagerException("No rule for element <" + elem_name + ">");
 
 		HashMap att_hash = (HashMap) utilXsd.attributes.get(elem_name);
 		if (att_hash == null)
-			throw new DtdRulesManagerException("No attributes for element <" + elem_name + ">");
+			throw new RulesManagerException("No attributes for element <" + elem_name + ">");
 
 		AttributeDeclaration att_decl = (AttributeDeclaration) att_hash.get(att_name);
 		if (att_decl == null)
-			throw new DtdRulesManagerException("No attribute <" + att_name + "> for element <" + elem_name + ">");
+			throw new RulesManagerException("No attribute <" + att_name + "> for element <" + elem_name + ">");
 		return att_decl;
 	}
 
@@ -1588,13 +1588,13 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * Ritorna la lista dei nomi degli attributi di un elemento
 	 * 
 	 * @param elem_name il nome dell'elemento di cui si vuole la lista degli attributi
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public Collection queryGetAttributes(String elem_name) throws DtdRulesManagerException {
+	public Collection queryGetAttributes(String elem_name) throws RulesManagerException {
 		if (elem_name == "#PCDATA")
 			return new Vector();
 		if (!utilXsd.rules.containsKey(elem_name))
-			throw new DtdRulesManagerException("No rule for element <" + elem_name + ">");
+			throw new RulesManagerException("No rule for element <" + elem_name + ">");
 
 		HashMap att_hash = (HashMap) utilXsd.attributes.get(elem_name);
 		if (att_hash == null)
@@ -1610,9 +1610,9 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 *            dell'attributo
 	 * @param att_name il nome dell'attributo
 	 * @return la stringa vuota se non esiste il valore di default
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public String queryGetAttributeDefaultValue(String elem_name, String att_name) throws DtdRulesManagerException {
+	public String queryGetAttributeDefaultValue(String elem_name, String att_name) throws RulesManagerException {
 		AttributeDeclaration att_decl = getAttributeDeclaration(elem_name, att_name);
 		if (att_decl.value == null) {
 			if (att_decl.type.startsWith("(") && att_decl.type.endsWith(")")) {
@@ -1633,9 +1633,9 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 *            dell'attributo
 	 * @param att_name il nome dell'attributo
 	 * @return <code>null</code> se l'attributo puo' avere qualsiasi valore
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public Collection queryGetAttributePossibleValues(String elem_name, String att_name) throws DtdRulesManagerException {
+	public Collection queryGetAttributePossibleValues(String elem_name, String att_name) throws RulesManagerException {
 		AttributeDeclaration att_decl = getAttributeDeclaration(elem_name, att_name);
 		if (att_decl.type.startsWith("(") && att_decl.type.endsWith(")"))
 			return java.util.Arrays.asList(att_decl.type.substring(1, att_decl.type.length() - 1).split("\\|"));
@@ -1647,13 +1647,13 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * 
 	 * @param elem_name il nome dell'elemento di cui si chiede l'esistena dell'attributo
 	 * @param att_name il nome dell'attributo
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public boolean queryIsValidAttribute(String elem_name, String att_name) throws DtdRulesManagerException {
+	public boolean queryIsValidAttribute(String elem_name, String att_name) throws RulesManagerException {
 		if (elem_name == "#PCDATA")
-			throw new DtdRulesManagerException("No attributes for element <" + elem_name + ">");
+			throw new RulesManagerException("No attributes for element <" + elem_name + ">");
 		if (!utilXsd.rules.containsKey(elem_name))
-			throw new DtdRulesManagerException("No rule for element <" + elem_name + ">");
+			throw new RulesManagerException("No rule for element <" + elem_name + ">");
 		return (utilXsd.attributes.containsKey(elem_name) && ((HashMap) utilXsd.attributes.get(elem_name)).containsKey(att_name));
 	}
 
@@ -1663,9 +1663,9 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * 
 	 * @param elem_name il nome dell'elemento di cui si chiede l'esistena dell'attributo
 	 * @param att_name il nome dell'attributo
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public boolean queryIsRequiredAttribute(String elem_name, String att_name) throws DtdRulesManagerException {
+	public boolean queryIsRequiredAttribute(String elem_name, String att_name) throws RulesManagerException {
 		AttributeDeclaration att_decl = getAttributeDeclaration(elem_name, att_name);
 		return ((att_decl.valueDefault != null) && (att_decl.valueDefault.equalsIgnoreCase("#REQUIRED") || att_decl.valueDefault.equalsIgnoreCase("#FIXED") 
 				|| att_decl.valueDefault.equalsIgnoreCase("required") || att_decl.valueDefault.equalsIgnoreCase("fixed")));
@@ -1677,9 +1677,9 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * 
 	 * @param elem_name il nome dell'elemento di cui si chiede l'esistena dell'attributo
 	 * @param att_name il nome dell'attributo
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public boolean queryIsFixedAttribute(String elem_name, String att_name) throws DtdRulesManagerException {
+	public boolean queryIsFixedAttribute(String elem_name, String att_name) throws RulesManagerException {
 		AttributeDeclaration att_decl = getAttributeDeclaration(elem_name, att_name);
 		return (att_decl.valueDefault == "#FIXED" || att_decl.valueDefault.equalsIgnoreCase("fixed"));
 	}
@@ -1692,9 +1692,9 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 *            valore dell'attributo
 	 * @param att_name il nome dell'attributo
 	 * @param value il valore dell'attributo
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public boolean queryIsValidAttributeValue(String elem_name, String att_name, String value) throws DtdRulesManagerException {
+	public boolean queryIsValidAttributeValue(String elem_name, String att_name, String value) throws RulesManagerException {
 		AttributeDeclaration att_decl = getAttributeDeclaration(elem_name, att_name);
 		if (att_decl.valueDefault == "#FIXED" || att_decl.valueDefault.equalsIgnoreCase("fixed")) {
 			// fixed value
@@ -1718,9 +1718,9 @@ public class SchemaRulesManagerImpl implements DtdRulesManager {
 	 * Riempie il nodo con gli attributi necessari
 	 * 
 	 * @param elem il nodo di cui si vogliono settare gli attributi
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public void fillRequiredAttributes(Node elem) throws DtdRulesManagerException {
+	public void fillRequiredAttributes(Node elem) throws RulesManagerException {
 		String elem_name = elem.getNodeName();
 		org.w3c.dom.Document doc = elem.getOwnerDocument();
 		Collection att_names = queryGetAttributes(elem_name);

@@ -1,7 +1,7 @@
 package it.cnr.ittig.xmleges.core.blocks.panes.tree;
 
 import it.cnr.ittig.services.manager.Logger;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.util.dnd.DomTransferHandler;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
@@ -78,8 +78,8 @@ public class TreeTransferHandler extends DomTransferHandler {
 		boolean canAppend = false;
 
 		try {
-			canAppend = treePaneImpl.dtdRulesManager.queryCanAppend(dropped, dragged);
-		} catch (DtdRulesManagerException drme) {
+			canAppend = treePaneImpl.rulesManager.queryCanAppend(dropped, dragged);
+		} catch (RulesManagerException drme) {
 		}
 
 		if (canAppend)

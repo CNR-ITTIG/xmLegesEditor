@@ -5,7 +5,7 @@
 
 package it.cnr.ittig.xmleges.core.blocks.dtd;
 
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 
 import java.io.Serializable;
 import java.util.Vector;
@@ -127,11 +127,11 @@ public class FSA implements Serializable {
 		 * Crea una transizione epsilon e la aggiunge al nodo
 		 * 
 		 * @param dest nodo destinazione della transizione
-		 * @throws DtdRulesManagerException
+		 * @throws RulesManagerException
 		 */
-		public void addTransition(Node dest) throws DtdRulesManagerException {
+		public void addTransition(Node dest) throws RulesManagerException {
 			if (this.index == dest.index)
-				throw new DtdRulesManagerException("Cowardly refusing to add an eps-transition with the node itself");
+				throw new RulesManagerException("Cowardly refusing to add an eps-transition with the node itself");
 			transitions.add(new Transition(dest));
 		}
 
@@ -139,11 +139,11 @@ public class FSA implements Serializable {
 		 * Aggiunge una transizione al nodo
 		 * 
 		 * @param toadd transizione da aggiungere
-		 * @throws DtdRulesManagerException
+		 * @throws RulesManagerException
 		 */
-		public void addTransition(Transition toadd) throws DtdRulesManagerException {
+		public void addTransition(Transition toadd) throws RulesManagerException {
 			if (this.index == toadd.getDestination().index)
-				throw new DtdRulesManagerException("Cowardly refusing to add an eps-transition with the node itself");
+				throw new RulesManagerException("Cowardly refusing to add an eps-transition with the node itself");
 			transitions.add(toadd);
 		}
 
@@ -303,11 +303,11 @@ public class FSA implements Serializable {
 	 * 
 	 * @param source nodo di inizio della transizione
 	 * @param dest nodo destinazione della transizione
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public void addTransition(int source, int dest) throws DtdRulesManagerException {
+	public void addTransition(int source, int dest) throws RulesManagerException {
 		if (source == dest)
-			throw new DtdRulesManagerException("Cowardly refusing to add an eps-transition with the node itself");
+			throw new RulesManagerException("Cowardly refusing to add an eps-transition with the node itself");
 		getNode(source).addTransition(getNode(dest));
 	}
 

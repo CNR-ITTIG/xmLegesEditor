@@ -1,7 +1,7 @@
 package it.cnr.ittig.xmleges.core.blocks.schema;
 
 
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 
 import java.io.File;
@@ -1037,7 +1037,7 @@ public class UtilXsd{
 	 * @param with_gaps <code>true</code> se l'allineamento pu&ograve essere fatto con
 	 *            gaps
 	 * @return <code>true</code> se la sequenza di nodi allinea con l'automa
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
 	private boolean align(String ruleName, Collection sequence, boolean with_gaps) {
 		XSDParticle.DFA rule = (XSDParticle.DFA) rules.get(ruleName);
@@ -1081,7 +1081,7 @@ public class UtilXsd{
 	 * @param startFrom collezione di nodi da cui iniziare l'allineamento
 	 * @param nodes_table Lista dei nodi indirizzati dal loro nome
 	 * @return <code>true</code> se la sequenza di nodi allinea con l'automa
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
 	private boolean alignWithGaps(String ruleName, Iterator nav, Vector startFrom, List nodes){
 
@@ -1123,7 +1123,7 @@ public class UtilXsd{
 	 * @param choice_point posizione in cui enumerare le alternative (-1 indica il nodo
 	 *            inizio)
 	 * @return la collezione di alternative
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
 	private Collection alignAlternatives(Collection sequence, String ruleName, int choice_point) {
 		

@@ -17,10 +17,10 @@ import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.DocumentOpenedEvent;
 import it.cnr.ittig.xmleges.core.services.document.DomEdit;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.panes.problems.Problem;
 import it.cnr.ittig.xmleges.core.services.panes.problems.ProblemsPane;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
@@ -77,7 +77,7 @@ public class DocumentManagerImpl implements DocumentManager, EventListener, Logg
 
 	Logger logger;
 
-	DtdRulesManager rulesManager = null;
+	RulesManager rulesManager = null;
 
 	EventManager eventManager = null;
 
@@ -123,7 +123,7 @@ public class DocumentManagerImpl implements DocumentManager, EventListener, Logg
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
-		rulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 		problemsPane = (ProblemsPane) serviceManager.lookup(ProblemsPane.class);

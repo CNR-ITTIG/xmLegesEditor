@@ -11,9 +11,9 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
@@ -72,7 +72,7 @@ import org.w3c.dom.NodeList;
 public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Serviceable, Configurable {
 	Logger logger;
 
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 
 	DocumentManager documentManager;
 
@@ -91,7 +91,7 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 		utilUI = (UtilUI) serviceManager.lookup(UtilUI.class);
@@ -163,7 +163,7 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 		if (node == null || node.getParentNode() == null)
 			return menu;
 		try {
-			Collection coll = getFilteredSortedMenu(dtdRulesManager.queryInsertableBefore(node.getParentNode(), node));
+			Collection coll = getFilteredSortedMenu(rulesManager.queryInsertableBefore(node.getParentNode(), node));
 
 			for (Iterator it = coll.iterator(); it.hasNext();) {
 				String next = (String) it.next();
@@ -172,7 +172,7 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 				menu.add(menuItem);
 				menu.setEnabled(true);
 			}
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 		}
 		return menu;
 	}
@@ -182,7 +182,7 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 		if (node == null || node.getParentNode() == null)
 			return menu;
 		try {
-			Collection coll = getFilteredSortedMenu(dtdRulesManager.queryInsertableAfter(node.getParentNode(), node));
+			Collection coll = getFilteredSortedMenu(rulesManager.queryInsertableAfter(node.getParentNode(), node));
 
 			for (Iterator it = coll.iterator(); it.hasNext();) {
 				String next = (String) it.next();
@@ -191,7 +191,7 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 				menu.add(menuItem);
 				menu.setEnabled(true);
 			}
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 		}
 		return menu;
 	}
@@ -201,7 +201,7 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 		if (node == null || node.getParentNode() == null)
 			return menu;
 		try {
-			Collection coll = getFilteredSortedMenu(dtdRulesManager.queryAppendable(node));
+			Collection coll = getFilteredSortedMenu(rulesManager.queryAppendable(node));
 			for (Iterator it = coll.iterator(); it.hasNext();) {
 				String next = (String) it.next();
 				JMenuItem menuItem = new JMenuItem(getMenuItemText(next));
@@ -209,7 +209,7 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 				menu.add(menuItem);
 				menu.setEnabled(true);
 			}
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 		}
 		return menu;
 	}
@@ -222,9 +222,9 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 		if (node == null || node.getParentNode() == null)
 			return ret;
 		try {
-			Collection coll1 = dtdRulesManager.queryInsertableAfter(node.getParentNode(), node);
-			Collection coll2 = dtdRulesManager.queryAppendable(node);
-			Collection coll3 = dtdRulesManager.queryInsertableBefore(node.getParentNode(), node);
+			Collection coll1 = rulesManager.queryInsertableAfter(node.getParentNode(), node);
+			Collection coll2 = rulesManager.queryAppendable(node);
+			Collection coll3 = rulesManager.queryInsertableBefore(node.getParentNode(), node);
 
 			for (Iterator it = coll1.iterator(); it.hasNext();) {
 				String next = (String) it.next();
@@ -244,7 +244,7 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 			}
 
 			return ret;
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 		}
 		return null;
 	}
@@ -295,12 +295,12 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
     		// prova ad inserirlo AFTER
     		while (!inserted && child != null) {
         		try {
-        			if (dtdRulesManager.queryCanInsertAfter(parent, child, toInsert)) {
+        			if (rulesManager.queryCanInsertAfter(parent, child, toInsert)) {
         				UtilDom.insertAfter(toInsert, child);
         				inserted = true;
         			}
         			child = child.getPreviousSibling();
-        		} catch (DtdRulesManagerException ex) {
+        		} catch (RulesManagerException ex) {
         			logger.error(ex.getMessage(), ex);
         			return false;
         		}
@@ -310,11 +310,11 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
     			child= parent.getFirstChild();
     			if(child != null){
     				try {
-            			if (dtdRulesManager.queryCanInsertBefore(parent, child, toInsert)) {
+            			if (rulesManager.queryCanInsertBefore(parent, child, toInsert)) {
             				parent.insertBefore(toInsert, child);
             				inserted = true;
             			}
-            		} catch (DtdRulesManagerException ex) {
+            		} catch (RulesManagerException ex) {
             			logger.error(ex.getMessage(), ex);
             			return false;
             		}
@@ -322,11 +322,11 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
     		}
         	try {
         		// prova ad APPENDerlo
-        		if (!inserted && dtdRulesManager.queryCanAppend(parent, toInsert)){
+        		if (!inserted && rulesManager.queryCanAppend(parent, toInsert)){
         			parent.appendChild(toInsert);
         			inserted = true;
         		}
-        	} catch (DtdRulesManagerException ex) {
+        	} catch (RulesManagerException ex) {
         		logger.error(ex.getMessage(), ex);
         		return false;
         	}
@@ -372,8 +372,8 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 		Vector v = new Vector();
 		v.add(new_Node);
 		try {
-			return (dtdRulesManager.queryCanReplaceWith(parent, child_node, 1, v));
-		} catch (DtdRulesManagerException e) {
+			return (rulesManager.queryCanReplaceWith(parent, child_node, 1, v));
+		} catch (RulesManagerException e) {
 			logger.error(e.getMessage(), e);
 			return false;
 		}
@@ -436,7 +436,7 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 			// FIXME  ho aggiunto come namespace xmlns quello dei ddl; organizzarlo per toglierlo modificando i fogli di stile in modo che non richiedano il namespace settato (come il generico; no match su nir:)
 			
 			templateXml = "<utilrulesmanager xmlns:h=\"http://www.w3.org/HTML/1998/html4\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:dsp=\"http://www.normeinrete.it/nir/disposizioni/1.0\" xmlns:cnr=\"http://www.cnr.it/provvedimenti/2.1\"  xmlns=\"http://www.normeinrete.it/disegnilegge/1.0\" >"
-					+ dtdRulesManager.getDefaultContent(elem_name) + "</utilrulesmanager>";
+					+ rulesManager.getDefaultContent(elem_name) + "</utilrulesmanager>";
 
 			domFactory.setValidating(false); // deactivate validation
 			domFactory.setNamespaceAware(true);
@@ -455,13 +455,13 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 		try{
 			
 			if(node != null)
-				dtdRulesManager.fillRequiredAttributes(node);
+				rulesManager.fillRequiredAttributes(node);
 			NodeList list = node.getChildNodes();
 			for (int i = 0; i < list.getLength(); i++) {
-				dtdRulesManager.fillRequiredAttributes(list.item(i));
+				rulesManager.fillRequiredAttributes(list.item(i));
 			}
 		}
-		catch(DtdRulesManagerException ex){
+		catch(RulesManagerException ex){
 			return node;
 		}
 		return node;
@@ -469,7 +469,7 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 
 	public boolean canInsertBefore(Node node, String name) {
 		try {
-			return dtdRulesManager.queryInsertableBefore(node.getParentNode(), node).contains(name);
+			return rulesManager.queryInsertableBefore(node.getParentNode(), node).contains(name);
 		} catch (Exception ex) {
 			return false;
 		}
@@ -477,7 +477,7 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 
 	public boolean canInsertAfter(Node node, String name) {
 		try {
-			Collection coll = dtdRulesManager.queryInsertableAfter(node.getParentNode(), node);
+			Collection coll = rulesManager.queryInsertableAfter(node.getParentNode(), node);
 			return coll.contains(name);
 		} catch (Exception ex) {
 			return false;
@@ -489,14 +489,14 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 		// per il momento trascuro start ed end; dovrebbe andare bene lo stesso
 		if (UtilDom.isTextNode(node) && node.getNodeValue() != null) {
 			try {
-				return dtdRulesManager.queryAppendable(node.getParentNode());
-			} catch (DtdRulesManagerException e) {
+				return rulesManager.queryAppendable(node.getParentNode());
+			} catch (RulesManagerException e) {
 				return null;
 			}
 		} else {
 			try {
-				return dtdRulesManager.queryAppendable(node);
-			} catch (DtdRulesManagerException ex) {
+				return rulesManager.queryAppendable(node);
+			} catch (RulesManagerException ex) {
 				return null;
 			}
 		}
@@ -511,11 +511,11 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 			text = node.getNodeValue();
 
 			try {
-				if (replaceSelected && dtdRulesManager.queryTextContent(newNode))
+				if (replaceSelected && rulesManager.queryTextContent(newNode))
 					replaceSelected = true;
 				else
 					replaceSelected = false;
-			} catch (DtdRulesManagerException ex) {
+			} catch (RulesManagerException ex) {
 				replaceSelected = false;
 			}
 
@@ -548,12 +548,12 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 			return true;
 		} else {
 			try {
-				if (dtdRulesManager.queryCanAppend(node, newNode)) {
+				if (rulesManager.queryCanAppend(node, newNode)) {
 					node.appendChild(newNode);
 					return true;
 				}
 				return false;
-			} catch (DtdRulesManagerException ex) {
+			} catch (RulesManagerException ex) {
 				logger.error(ex.getMessage(), ex);
 				return false;
 			}
