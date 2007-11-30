@@ -11,7 +11,6 @@
 
 package it.cnr.ittig.xmleges.core.blocks.schema;
 
-import it.cnr.ittig.services.manager.Loggable;
 import it.cnr.ittig.services.manager.Logger;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
@@ -31,7 +30,7 @@ import org.w3c.dom.NodeList;
  * Implementazione del servizio it.cnr.ittig.xmleges.editor.services.dtdrulesmanager.DtdRulesManager;
  * 
  */
-public class SchemaRulesManagerImpl implements DtdRulesManager,  Loggable {
+public class SchemaRulesManagerImpl implements DtdRulesManager {
 
 	Logger logger;
 
@@ -72,6 +71,12 @@ public class SchemaRulesManagerImpl implements DtdRulesManager,  Loggable {
 
 
 
+	public void createRulesManager(String extension) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 	///////////////////////////////////////////////////////////////////////
 	//
 	//				 INIZIALIZZAZIONE     SCHEMA
@@ -80,7 +85,8 @@ public class SchemaRulesManagerImpl implements DtdRulesManager,  Loggable {
 	
 	// ------------ COSTRUTTORI --------------------
 
-	public SchemaRulesManagerImpl() {				
+	public SchemaRulesManagerImpl(Logger logger) {
+		enableLogging(logger);
 		xsdRM = new xsdRulesManagerImpl();		
 	}
 	
@@ -152,7 +158,9 @@ public class SchemaRulesManagerImpl implements DtdRulesManager,  Loggable {
 	
 	
 	
-	
+	public boolean assessAttribute(Node node, String attributeName){
+		return xsdRM.assessAttribute(node,attributeName);
+	}
 	
 	
 	public boolean assess(Node node){
@@ -1735,5 +1743,6 @@ public class SchemaRulesManagerImpl implements DtdRulesManager,  Loggable {
 			}
 		}
 	}
+
 
 }

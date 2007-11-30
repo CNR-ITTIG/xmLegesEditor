@@ -21,7 +21,7 @@ public class AttributeDeclaration implements Serializable {
 	}
 	
 	public String toString(){
-		return "type="+type+" default="+valueDefault+" value="+value;
+		return "type="+(type.equals("")?null:type)+" default="+valueDefault+" value="+value;
 	}
 	
 }

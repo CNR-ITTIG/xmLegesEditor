@@ -297,6 +297,11 @@ public class xsdRulesManagerImpl{
 
             for (Iterator iterA = allAttributeUses.iterator();iterA.hasNext();/* no-op */){
                 XSDAttributeUse attruse = (XSDAttributeUse)iterA.next();
+                attrName="";
+                type="";
+                defaultValue="";
+                value="";
+                
                 attrName = attruse.getAttributeDeclaration().getQName();
                
                 XSDSimpleTypeDefinition typeDef=attruse.getAttributeDeclaration().getTypeDefinition();
@@ -310,8 +315,7 @@ public class xsdRulesManagerImpl{
                         baseType=/*", cioè"+*/typeDef.getBaseTypeDefinition().getAliasName();
                     }
                     simpleType+=baseType;
-                }else
-                    simpleType="no type-->no name";
+               
 
 
                 defaultValue=attruse.getUse().getLiteral();
@@ -326,18 +330,19 @@ public class xsdRulesManagerImpl{
                 }   
                
                 List allTypeFacets = typeDef.getSimpleType().getFacetContents();
-                // FIXME tommaso    type = baseType al posto di "NO TYPE"
-                type=baseType;//"NO TYPE";
                 if(allTypeFacets.size()>0){ //è una enumeration
                     type="(";
                     for (Iterator iterB = allTypeFacets.iterator();iterB.hasNext();/* no-op */){
                         XSDConstrainingFacet restriction = (XSDConstrainingFacet)iterB.next();
-//                        System.out.println("     facet name: "+restriction.getFacetName()); //c'è scritto enumeration
-//                        System.out.println("         lexical value:    "+restriction.getLexicalValue());
-                        type+=restriction.getLexicalValue()+"|";
+                        String facetName=restriction.getFacetName();
+                        if(facetName.equals("enumeration")){
+                        	type+=restriction.getLexicalValue()+"|";
+                        }
                     }
-                    type=type.substring(0, type.length()-1)+")";
-
+                    if(!type.equals("("))
+                      type=type.substring(0, type.length()-1)+")";
+                    else
+                    	type="";
                 }
            
                 //System.out.println(elemDecl.getQName()+" -attr: "+attrName+"["+simpleType+"], type= "+type+", defaultValue = "+defaultValue+"value = "+(value!=null?value:" null"));
@@ -349,9 +354,12 @@ public class xsdRulesManagerImpl{
                 // add a new attribute definition
                 AttributeDeclaration attrDecl = new AttributeDeclaration(type,defaultValue,value);
                 mergedAddAttribute(elemDecl,att_hash,attrName,attrDecl);
+            }else{
+            	simpleType="no type --> no name";
+            	System.out.println("exception: typeDef of"+attrName+" of elem "+elemDecl.getQName()+" is null");
             }
+           }
         }
-       
     }
 
 	
@@ -713,6 +721,80 @@ public class xsdRulesManagerImpl{
 		if (rule == null)
 			System.err.println("No rule for element <" + elem_name + ">");
 		return alignAlternatives(elem_children, elem_name, choice_point);
+	}
+	
+	
+	/**
+	 * 
+	 * @param node
+	 * @param attributeName
+	 * @return
+	 */
+	public boolean assessAttribute(Node node, String attributeName){
+        boolean isvalid=false;
+        String diagnosticMessages="";
+        XSDElementDeclaration elemDecl = (XSDElementDeclaration)elemDeclNames.get(node.getNodeName());       
+        String toTest=UtilDom.getAttributeValueAsString(node, attributeName);
+        XSDTypeDefinition typedef = elemDecl.getType ();        
+           
+        
+        // FIXME te non servi !
+        if (typedef instanceof XSDSimpleTypeDefinition){
+            XSDSimpleTypeDefinition simpleTypeDef=(XSDSimpleTypeDefinition) typedef;
+         
+            System.out.println("\n ----> assess "+toTest+ " su "+attributeName+" dell'elemento: "+simpleTypeDef.getAliasName());
+            if(simpleTypeDef.assess(toTest).getDiagnostics().size()==0){
+            //    System.out.println(toTest+" è valido su "+simpleTypeDef.getAliasName());
+                isvalid=true;
+            }
+            else{
+                for (Iterator i = simpleTypeDef.assess(toTest).getDiagnostics().iterator(); i.hasNext(); ) {
+                   
+                    XSDDiagnosticImpl diagnostic = (XSDDiagnosticImpl) i.next();
+                    isvalid=false;
+        //            System.out.println(toTest+" non valido: "+diagnostic.getMessage());
+                    diagnosticMessages+=diagnostic.getMessage()+"\n";
+                   
+                }
+            }
+            return isvalid;
+        }else{
+        	List allAttributeUses = ((XSDComplexTypeDefinition)elemDecl.getType()).getAttributeUses();
+
+            for (Iterator iterA = allAttributeUses.iterator();iterA.hasNext();/* no-op */){
+                XSDAttributeUse attruse = (XSDAttributeUse)iterA.next();
+                              
+                if(attruse.getAttributeDeclaration().getQName().equals(attributeName)){
+                	XSDSimpleTypeDefinition simpleTypeDef=attruse.getAttributeDeclaration().getTypeDefinition();
+//                	XSDSimpleTypeDefinition typeDef=attruse.getAttributeDeclaration().getTypeDefinition();
+//                	XSDSimpleTypeDefinition simpleTypeDef=(XSDSimpleTypeDefinition) typedef;
+                    
+                    System.out.println("\n ----> assess "+toTest+ " su "+attributeName+" dell'elemento: "+simpleTypeDef.getAliasName());
+                    if(simpleTypeDef.assess(toTest).getDiagnostics().size()==0){
+                        System.out.println(toTest+" è valido su "+simpleTypeDef.getAliasName());
+                        isvalid=true;
+                    }
+                    else{
+                        for (Iterator i = simpleTypeDef.assess(toTest).getDiagnostics().iterator(); i.hasNext(); ) {
+                           
+                            XSDDiagnosticImpl diagnostic = (XSDDiagnosticImpl) i.next();
+                            isvalid=false;
+                            System.out.println(toTest+" non valido perchè : "+diagnostic.getMessage());
+                            diagnosticMessages+=diagnostic.getMessage()+"\n";
+                           
+                        }
+                    }
+                    return isvalid;
+                	
+                }
+            }
+            System.out.println("attribute not found!");
+            return false;
+
+        	
+//            System.out.println("assess di "+ node.getNodeName()+"solo su simpletype!");
+//            return false;
+        }
 	}
 	
 	
