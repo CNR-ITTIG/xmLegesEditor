@@ -118,9 +118,11 @@ public class UtilDalosImpl implements UtilDalos, EventManagerListener, Loggable,
 		toLangCombo.setSelectedIndex(0);	
 		
 		JLabel lblIT = new JLabel(i18n.getIconFor("editor.dalos.action.tolanguage.it.icon"));
+		JLabel lblEN = new JLabel(i18n.getIconFor("editor.dalos.action.tolanguage.en.icon"));
 		JLabel lblTO = new JLabel(i18n.getIconFor("editor.dalos.action.tolanguage.to.icon"));
 		
-		languageSwitchPanel.add(lblIT);
+		//languageSwitchPanel.add(lblIT);
+		languageSwitchPanel.add(lblEN);
 		languageSwitchPanel.add(lblTO);
 		languageSwitchPanel.add(toLangCombo);
 		return languageSwitchPanel;
