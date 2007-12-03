@@ -173,12 +173,6 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 					}	
 				}
 			}
-//			if (SwingUtilities.isLeftMouseButton(e) && filedir.getSelectedIndex()>0 && e.getClickCount() == 1) {
-//				
-//					WebdavResource selezione = list[filedir.getSelectedIndex()-1];
-//					if(!selezione.isCollection())
-//						file.setText(selezione.getDisplayName());
-//			}
 		}
 	};
 	
@@ -335,7 +329,6 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 						lastDavPass=password.getText();
 						connect.setEnabled(false);
 						disconnect.setEnabled(true);
-
 					}
 				} else  utilMsg.msgError("connect.dav.open.error");
 		}
@@ -358,7 +351,6 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 					readDirDAV("");
 				}	
 			} catch (Exception ex) {}			
-				
 		}
 	}	
 	
@@ -542,7 +534,7 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
             currDir.setText("*** non connesso ***");
 		    return false;
         }			
-        
+
         etiDir.setVisible(true);
         currDir.setText(webdavResource.getPath());
         filedir.addMouseListener(mouseAdapter);
@@ -554,7 +546,6 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 		refresh.setEnabled(true);
 		history.setEnabled(true);
 	    return true;
-		
 	}
 	
 	private boolean closeDAV(){	
@@ -566,7 +557,6 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 			httpURL = null;
         	webdavResource = null;
 		}
-		
 		return true;
 	}
 			
@@ -606,7 +596,7 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 			logger.debug("Write: " + httpURL.getScheme()+"//"+httpURL.getHost()+":"+httpURL.getPort()+webdavResource.getPath()+"/"+fileName);			
 			
 			//potrei fare upload con nome diverso dal download
-			if (!(webdavResource.getPath()+"/"+fileName).equals(fileLocked.getPath()))
+			if (fileLocked!=null && !(webdavResource.getPath()+"/"+fileName).equals(fileLocked.getPath()))
 				fileLocked.unlockMethod();
 			
 			webdavResource.unlockMethod(webdavResource.getPath()+"/"+fileName, password.getText());
@@ -640,8 +630,7 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
             	listafile[i+1] = list[i];
             	
 			filedir.setListData(listafile);
-            
-			
+
 		} catch (Exception e) {
 			return false;
 		}
@@ -679,7 +668,6 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 		} catch (Exception ex) {
 			return false;
 		}
-		
 		return true;
 	}
 			
@@ -744,6 +732,5 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 			return this;
 		}
 	}
-	
 }
 
