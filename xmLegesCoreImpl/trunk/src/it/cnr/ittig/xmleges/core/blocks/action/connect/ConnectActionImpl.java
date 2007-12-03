@@ -157,6 +157,8 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 	String lastDavUser = null;
 	String lastDavPass = null;
 	
+	String separatore;
+	
 	MouseAdapter mouseAdapter = new MouseAdapter() {
 		public void mouseClicked(MouseEvent e) {
 			if (SwingUtilities.isLeftMouseButton(e) && filedir.getSelectedIndex()!=-1 && e.getClickCount() == 2) {
@@ -286,6 +288,11 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 			lastDavUser = p.getProperty("lastdavuser");
 		} catch (Exception ex) {}
 		manageEvent(null);
+		
+		if (System.getProperty("os.name").toLowerCase().matches("windows.*"))
+			separatore = "\\";
+		else
+			separatore = "/";
 	}
 
 	// /////////////////////////////////////////////////// Startable Interface
@@ -454,7 +461,7 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 			initField();
 			String nomefile=documentManager.getSourceName();
 			try {
-				nomefile = nomefile.substring(1+nomefile.lastIndexOf("\\"),nomefile.length());
+				nomefile = nomefile.substring(1+nomefile.lastIndexOf(separatore),nomefile.length());
 			} catch (Exception ex) {
 				nomefile="";
 			}
