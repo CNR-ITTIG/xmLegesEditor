@@ -35,7 +35,7 @@ public class KbTree {
 	
 	private KbContainer kbc;
 	
-	private Set topClasses;
+	private Set headClasses;
 	private Map linked;
 	
 	private I18n i18n;
@@ -44,7 +44,7 @@ public class KbTree {
 		
 		kbc = k;
 		i18n = in;		
-		topClasses = null;
+		headClasses = null;
 		linked = null;
 		
 		tree = null;
@@ -57,7 +57,7 @@ public class KbTree {
 			return tree;
 		}
 		
-		topClasses = new HashSet();
+		headClasses = new HashSet();
 		
 		long t1 = System.currentTimeMillis();		
 		System.out.println("Init tree...");
@@ -76,26 +76,21 @@ public class KbTree {
 		tmpTree.setRootVisible(true);
 		
 		OntModel om = kbc.getModel("domain", "micro");
-		if(!KbConf.MERGE_DOMAIN) {			
-			OntClass ocRoot = om.getOntClass(KbConf.ROOT_CLASS);
-			expandClass(ocRoot, null, tmpTree);
-		} else {
-			Collection topClasses = kbc.getTopClasses();
-			for(Iterator i = topClasses.iterator(); i.hasNext();) {
-				String ocName = (String) i.next();
-				OntoClass cl = new OntoClass(ocName);
-				DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(cl);
-				((SynsetTree) tmpTree).addNode(newNode);
-				//Prendi la relativa OntClass in *questo* OntModel:
-				String ocNameNs = KbConf.DOMAIN_ONTO_NS + ocName;				
-				OntClass oc = om.getOntClass(ocNameNs);
-				if(oc == null) {
-					System.out.println("## ERROR ## top class is null!! " +
-							"name: " + ocNameNs);
-					return null;
-				}
-				expandClass(oc, newNode, tmpTree);
+		Collection topClasses = kbc.getTopClasses();
+		for(Iterator i = topClasses.iterator(); i.hasNext();) {
+			String ocName = (String) i.next();
+			OntoClass cl = new OntoClass(ocName);
+			DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(cl);
+			((SynsetTree) tmpTree).addNode(newNode);
+			//Prendi la relativa OntClass in *questo* OntModel:
+			String ocNameNs = KbConf.DOMAIN_ONTO_NS + ocName;				
+			OntClass oc = om.getOntClass(ocNameNs);
+			if(oc == null) {
+				System.out.println("## ERROR ## top class is null!! " +
+						"name: " + ocNameNs);
+				return null;
 			}
+			expandClass(oc, newNode, tmpTree);
 		}
 		
 		addSynsets();
@@ -190,8 +185,8 @@ public class KbTree {
 				OntoClass cl = new OntoClass(localName);
 				newNode = new DefaultMutableTreeNode(cl);
 				if(node == null) {
-					if(!topClasses.contains(cl)) {
-						topClasses.add(cl);
+					if(!headClasses.contains(cl)) {
+						headClasses.add(cl);
 						((SynsetTree) tmpTree).addNode(newNode);
 					}
 				} else {

@@ -91,7 +91,7 @@ public class SynsetDetails extends JEditorPane {
 		String html = "<html><body><table><tr><td>" +  img +
 			"</td><td><h2><i>Definition</i></h2><h3>" + def +
 			"</h3></td>" +
-			"<td><h3><a href=\"file://32002L0065-20050612-it-art2-par1-pntb\">32002L0065-20050612-it-art2-par1-pntb</a></h3>" +
+			"<td><h3><a href=\"file://32002L0065-20050612-en-art2-par1-pntb\">32002L0065-20050612-it-art2-par1-pntb</a></h3>" +
 			"</td></tr></table><h2><i>Variants</i></h2><table>"; 
 		
 		html += "<tr><td><img src=\"./lexical.png\"></td><td>financial service</td></tr>";

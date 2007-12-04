@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -59,6 +60,8 @@ public class KbContainer {
 	public String infDpExtFile;
 	
 	private I18n i18n;
+	
+	private OntDocumentManager odm; 
 
 	//Dati
 	Map synsets = null;
@@ -86,9 +89,32 @@ public class KbContainer {
 		infDpExtFile = infRepository + KbConf.DPEXT_INF;
 		conceptsFile = KbConf.dalosRepository + KbConf.CONCEPTS;
 		
+		//init OntDocumentManager
+		File file = null;
+		odm = OntDocumentManager.getInstance();
+		if(KbConf.MERGE_DOMAIN) {
+			file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_DOMAIN_MERGE_ONTO);
+		} else {
+			file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_DOMAIN_ONTO);
+		}
+		odm.addAltEntry(KbConf.DOMAIN_ONTO, "file://" + file.getAbsolutePath());
+		System.out.println("ALTERNATIVE ENTRY: " + KbConf.DOMAIN_ONTO + " --> file://" + file.getAbsolutePath());
+		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_METALEVEL_ONTO);
+		odm.addAltEntry(KbConf.METALEVEL_ONTO, "file://" + file.getAbsolutePath());
+		System.out.println("ALTERNATIVE ENTRY: " + KbConf.METALEVEL_ONTO + " --> file://" + file.getAbsolutePath());
+		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_METALEVEL_PROP);
+		odm.addAltEntry(KbConf.METALEVEL_PROP, "file://" + file.getAbsolutePath());
+		System.out.println("ALTERNATIVE ENTRY: " + KbConf.METALEVEL_PROP + " --> file://" + file.getAbsolutePath());
+		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_METALEVEL_FULL);
+		odm.addAltEntry(KbConf.METALEVEL_FULL, "file://" + file.getAbsolutePath());
+		System.out.println("ALTERNATIVE ENTRY: " + KbConf.METALEVEL_FULL + " --> file://" + file.getAbsolutePath());
+		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_SOURCE_SCHEMA);
+		odm.addAltEntry(KbConf.SOURCE_SCHEMA, "file://" + file.getAbsolutePath());
+		System.out.println("ALTERNATIVE ENTRY: " + KbConf.SOURCE_SCHEMA + " --> file://" + file.getAbsolutePath());		
+		
 		if(!checkFiles()) {
 			System.err.println("## ERROR ## KbContainer - Data files not found! Repo: " +
-					localRepository);			
+					localRepository);
 		} else {			
 			synsets = new HashMap(2048, 0.70f);
 			sortedSynsets = new Vector(512);
@@ -108,10 +134,6 @@ public class KbContainer {
 		 * Return a set of String that represent the local names
 		 * of direct sub classes of Thing in DOMAIN ontology.
 		 */
-		
-		if(!KbConf.MERGE_DOMAIN) {
-			return null;
-		}
 		
 		Set classes = new HashSet();
 		OntModel om = getModel("domain");
@@ -180,27 +202,9 @@ public class KbContainer {
 		 * reasoner: sceglie il reasoner da utilizzare nel modello
 		 */
 		
-		File file = null;
-		
 		//Remote ontologies are locally cached...
 		//Aggiungere una funzione che, se on-line, scarica le ontologie remote
 		//in modo da avere sempre l'ultima versione?
-		OntDocumentManager odm = OntDocumentManager.getInstance();
-		if(KbConf.MERGE_DOMAIN) {
-			file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_DOMAIN_MERGE_ONTO);			
-		} else {
-			file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_DOMAIN_ONTO);
-		}
-		odm.addAltEntry(KbConf.DOMAIN_ONTO, "file://" + file.getAbsolutePath());
-		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_METALEVEL_ONTO);
-		odm.addAltEntry(KbConf.METALEVEL_ONTO, "file://" + file.getAbsolutePath());
-		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_METALEVEL_PROP);
-		odm.addAltEntry(KbConf.METALEVEL_PROP, "file://" + file.getAbsolutePath());
-		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_METALEVEL_FULL);
-		odm.addAltEntry(KbConf.METALEVEL_FULL, "file://" + file.getAbsolutePath());
-		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_SOURCE_SCHEMA);
-		odm.addAltEntry(KbConf.SOURCE_SCHEMA, "file://" + file.getAbsolutePath());
-
 		ModelMaker maker = ModelFactory.createMemModelMaker();
 
 		OntModelSpec spec = null;
@@ -289,9 +293,11 @@ public class KbContainer {
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+			System.out.println("#### URL unreachable! Trying to load local data...");
+			String localFile = odm.doAltURLMapping(url);
+			System.out.println("localFile: " + localFile);
+			om.read(localFile);
+		}		
 	}
 	
 	private void readData(OntModel om, String fileStr) {
