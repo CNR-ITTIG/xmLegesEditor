@@ -189,6 +189,51 @@ public class SemanticRelationPaneImpl implements SemanticRelationPane, EventMana
 		tree.reloadModel();
 	}
 	
+//	void showSemanticRelations(Synset syn) {
+//		
+//		Collection relations = syn.semanticToSynset.keySet(); 
+//		
+//		DefaultMutableTreeNode top = null, node = null;
+//
+//		clearTree(relazioniTree);
+//
+//		relazioniTree.setRootUserObject(syn.toString());
+//		relazioniTree.setRootVisible(true);
+//	
+//		if(relations == null || relations.size() < 1) {
+//			return;
+//		}
+//		
+//		String rel = "";
+//
+//		for(Iterator i = relations.iterator(); i.hasNext();) {
+//			String thisRel = (String) i.next();
+//			if(thisRel.equalsIgnoreCase("semantic-property")) {
+//				continue;
+//			}
+//			if( !rel.equals(thisRel) ) {
+//				relazioniTree.expandChilds(top);
+//				rel = thisRel;
+//				top = new DefaultMutableTreeNode(rel);
+//				relazioniTree.addNode(top);
+//			}
+//			Collection values = (Collection) syn.semanticToSynset.get(thisRel);
+//			for(Iterator k = values.iterator(); k.hasNext();) {
+//				Synset item = (Synset) k.next();
+//				node = new DefaultMutableTreeNode(item);
+//				top.add(node);				
+//			}
+//		}
+//		
+//		relazioniTree.expandChilds(top);
+//		
+//		JScrollBar vbar = scrollPane.getVerticalScrollBar();
+//		vbar.setValue(vbar.getMinimum());
+//		JScrollBar hbar = scrollPane.getHorizontalScrollBar();
+//		hbar.setValue(hbar.getMinimum());
+//	}
+	
+	//FAKE TREE:
 	void showSemanticRelations(Synset syn) {
 		
 		Collection relations = syn.semanticToSynset.keySet(); 
@@ -196,43 +241,49 @@ public class SemanticRelationPaneImpl implements SemanticRelationPane, EventMana
 		DefaultMutableTreeNode top = null, node = null;
 
 		clearTree(relazioniTree);
-
-		relazioniTree.setRootUserObject(syn.toString());
+		
+		relazioniTree.setRootUserObject("financial service");
 		relazioniTree.setRootVisible(true);
-	
-		if(relations == null || relations.size() < 1) {
-			return;
-		}
-		
-		String rel = "";
 
-		for(Iterator i = relations.iterator(); i.hasNext();) {
-			String thisRel = (String) i.next();
-			if(thisRel.equalsIgnoreCase("semantic-property")) {
-				continue;
-			}
-			if( !rel.equals(thisRel) ) {
-				relazioniTree.expandChilds(top);
-				rel = thisRel;
-				top = new DefaultMutableTreeNode(rel);
-				relazioniTree.addNode(top);
-			}
-			Collection values = (Collection) syn.semanticToSynset.get(thisRel);
-			for(Iterator k = values.iterator(); k.hasNext();) {
-				Synset item = (Synset) k.next();
-				node = new DefaultMutableTreeNode(item);
-				top.add(node);				
-			}
-		}
-		
-		relazioniTree.expandChilds(top);
-		
+		DefaultMutableTreeNode propNode = new DefaultMutableTreeNode("qualified_by");
+		((SynsetTree) relazioniTree).addNode(propNode);
+		DefaultMutableTreeNode classNode = new DefaultMutableTreeNode("Legal Contract");
+		propNode.add(classNode);
+		DefaultMutableTreeNode leafNode = new DefaultMutableTreeNode("contract");
+		classNode.add(leafNode);
+		leafNode = new DefaultMutableTreeNode("sale contract");
+		classNode.add(leafNode);
+		propNode = new DefaultMutableTreeNode("supplied_by");
+		((SynsetTree) relazioniTree).addNode(propNode);
+		classNode = new DefaultMutableTreeNode("Legal Person");
+		propNode.add(classNode);
+		leafNode = new DefaultMutableTreeNode("authority");
+		classNode.add(leafNode);
+		leafNode = new DefaultMutableTreeNode("administrative authority");
+		classNode.add(leafNode);
+		leafNode = new DefaultMutableTreeNode("commission");
+		classNode.add(leafNode);
+		leafNode = new DefaultMutableTreeNode("courts");
+		classNode.add(leafNode);
+		leafNode = new DefaultMutableTreeNode("European Parliament");
+		classNode.add(leafNode);
+		leafNode = new DefaultMutableTreeNode("public health");
+		classNode.add(leafNode);
+		leafNode = new DefaultMutableTreeNode("trade groups");
+		classNode.add(leafNode);
+		classNode = new DefaultMutableTreeNode("Natural Person");
+		propNode.add(classNode);
+		leafNode = new DefaultMutableTreeNode("natural person");
+		classNode.add(leafNode);
+		leafNode = new DefaultMutableTreeNode("person");
+		classNode.add(leafNode);
+
 		JScrollBar vbar = scrollPane.getVerticalScrollBar();
 		vbar.setValue(vbar.getMinimum());
 		JScrollBar hbar = scrollPane.getHorizontalScrollBar();
 		hbar.setValue(hbar.getMinimum());
 	}
-	
+
 	public boolean canCut() {
 		return false;
 	}

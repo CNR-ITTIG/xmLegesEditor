@@ -48,12 +48,15 @@ public class KbContainer {
 	private String LANGUAGE;
 	
 	public String localRepository;
+	public String infRepository;
 	public String indFile;
 	public String indwFile;
 	public String indcFile;
 	public String typesFile;
 	public String conceptsFile;
 	public String sourcesFile;
+	public String infDpFile;
+	public String infDpExtFile;
 	
 	private I18n i18n;
 
@@ -71,12 +74,16 @@ public class KbContainer {
 
 		LANGUAGE = lang;
 
-		localRepository = KbConf.dalosRepository + LANGUAGE + "/";
+		localRepository = KbConf.dalosRepository + LANGUAGE + File.separatorChar;
+		infRepository = KbConf.dalosRepository + lang + File.separatorChar +
+							KbConf.inferenceDir + File.separatorChar;
 		indFile = localRepository + KbConf.IND;
 		indwFile = localRepository + KbConf.INDW;
 		indcFile = localRepository + KbConf.INDC;
 		typesFile = localRepository + KbConf.TYPES;
 		sourcesFile = localRepository + KbConf.SOURCES;
+		infDpFile = infRepository + KbConf.DP_INF;
+		infDpExtFile = infRepository + KbConf.DPEXT_INF;
 		conceptsFile = KbConf.dalosRepository + KbConf.CONCEPTS;
 		
 		if(!checkFiles()) {
@@ -119,7 +126,7 @@ public class KbContainer {
 			for(Iterator k = oc.listSuperClasses(true); k.hasNext();) {
 				OntClass sup = (OntClass) k.next();
 				if(sup.isAnon()) {
-					//che si fa se è anonima?? significa che non è top?
+					//che si fa se ï¿½ anonima?? significa che non ï¿½ top?
 				} else {
 					if(sup.getNameSpace().equalsIgnoreCase(KbConf.DOMAIN_ONTO_NS)) {
 						top = false;
@@ -255,6 +262,13 @@ public class KbContainer {
 			readSchema(om, KbConf.SOURCE_SCHEMA); //Ci vuole questo metalivello??
 			readData(om, indFile);
 			readData(om, sourcesFile);			
+		}
+		if(type.equalsIgnoreCase("dpinf")) {
+			readData(om, infDpFile);
+		}
+		if(type.equalsIgnoreCase("dpextinf")) {
+			readData(om, infDpFile);
+			readData(om, infDpExtFile);
 		}
 		
 		odm.setProcessImports(true);
@@ -490,45 +504,26 @@ public class KbContainer {
 			return;
 		}
 
-		OntModel om = getModel("full", "micro");
+		OntModel om = getModel("dpinf");
 		
 		Individual ind = om.getIndividual(syn.getURI());
-		System.out.println("@@@@@@@@@@@@@@@ Analyzing " + ind + " semantics...");
-		for(Iterator i = ind.listRDFTypes(false); i.hasNext();) {
-			Resource res = (Resource) i.next();
-			if(res.isAnon()) {
-				continue;
-			}
-			if(res.getNameSpace().equalsIgnoreCase(KbConf.DOMAIN_ONTO_NS)) {
-				System.out.println("@ RDF TYPE: " + res);
-				OntClass oc = (OntClass) res.as(OntClass.class);
-				System.out.println("@@ ONTCLASS: " + oc);
-				for(Iterator p = oc.listDeclaredProperties(false); p.hasNext();) {
-					OntProperty op = (OntProperty) p.next();
-					if(op.isDatatypeProperty() || !op.getNameSpace().equalsIgnoreCase(KbConf.DOMAIN_ONTO_NS)) {
-						continue;
-					}
-					System.out.println("@@@ PROP: " + op);
-					for(Iterator r = op.listRange(); r.hasNext();) {
-						OntClass range = (OntClass) r.next();
-						if(range.isAnon() || 
-							range.toString().equalsIgnoreCase(
-									"http://www.w3.org/2002/07/owl#Thing") ||
-							range.toString().equalsIgnoreCase(
-									"http://www.w3.org/2000/01/rdf-schema#Resource") ||
-							!range.getNameSpace().equalsIgnoreCase(KbConf.DOMAIN_ONTO_NS)) {
-							continue;
-						}
-						System.out.println("@@@@ RANGE: " + range);
-						for(Iterator ist = range.listInstances(false); ist.hasNext();) {
-							Resource obj = (Resource) ist.next();
-							System.out.println("@@@@@ OBJECT: " + obj);
-							addSemanticProperty(syn, op, obj);
-						}
-					}
-				}
-			}
-		}		
+		
+		//Questo funziona per le declared properties:
+		for(StmtIterator si = om.listStatements(
+				ind, (Property) null, (RDFNode) null); 
+				si.hasNext();) {
+			Statement stm = si.nextStatement();
+			Property op = stm.getPredicate();
+			RDFNode obj = stm.getObject();
+			addSemanticProperty(syn, op, obj);
+		}
+		
+		/*
+		 * Occorre una schema ontologico per le semantic property,
+		 * che deve essere caricato, dal quale prendere i link
+		 * semantici verso gli altri synset e i nomi dei link.
+		 */		
+
 		syn.setSemanticPropCached(true);
 	}	
 	
@@ -748,7 +743,7 @@ public class KbContainer {
 	
 	void compute(String type) {
 		
-		SPEngine spe = new SPEngine(getModel("full", "micro"));
+		SPEngine spe = new SPEngine(getModel("full", "micro"), this.LANGUAGE);
 		spe.compute(type);
 		System.out.println("COMPUTE processing done.");
 	}

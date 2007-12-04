@@ -50,7 +50,7 @@ public class KbTree {
 		tree = null;
 		tmpTree = null;
 	}
-	
+		
 	public SynsetTree getTree() {
 
 		if(tree != null) {
@@ -117,7 +117,7 @@ public class KbTree {
 		
 		System.out.println(">> Trying to find and select \"" + syn + "\" within tree...");		
 			
-		//Non va bene questo: cerca solo nei nodi e foglie già espansi e cerca
+		//Non va bene questo: cerca solo nei nodi e foglie giï¿½ espansi e cerca
 		//con un prefisso non con l'exact matching.
 		//TreePath path = tree.getNextMatch(syn.toString(), 0, Position.Bias.Forward);
 
@@ -236,7 +236,7 @@ public class KbTree {
 		
 		//Non aggiungere per il momento i synset non classificati,
 		//sono visibili nell'elenco dei synset totali
-		addRemainingSynsets();
+		//addRemainingSynsets();
 		
 		linked = null;
 	}

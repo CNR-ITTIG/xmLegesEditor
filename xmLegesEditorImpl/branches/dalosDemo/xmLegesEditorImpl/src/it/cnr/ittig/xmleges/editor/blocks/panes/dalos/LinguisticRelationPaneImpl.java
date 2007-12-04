@@ -185,46 +185,71 @@ public class LinguisticRelationPaneImpl implements LinguisticRelationPane, Event
 		tree.reloadModel();
 	}
 	
-	void showLinguisticRelations(Synset syn) {
-		
-		Collection relations = syn.lexicalToSynset.keySet(); 
-		
-		DefaultMutableTreeNode top = null, node = null;
-
-		clearTree(lexicalTree);
-
-		lexicalTree.setRootUserObject(syn.toString());
-		lexicalTree.setRootVisible(true);
+//	void showLinguisticRelations(Synset syn) {
+//		
+//		Collection relations = syn.lexicalToSynset.keySet(); 
+//		
+//		DefaultMutableTreeNode top = null, node = null;
+//
+//		clearTree(lexicalTree);
+//
+//		lexicalTree.setRootUserObject(syn.toString());
+//		lexicalTree.setRootVisible(true);
+//	
+//		if(relations == null || relations.size() < 1) {
+//			System.out.println(">> relations is empty!!");
+//			return;
+//		}
+//		
+//		String rel = "";
+//
+//		for(Iterator i = relations.iterator(); i.hasNext();) {
+//			String thisRel = (String) i.next();
+//			if(thisRel.equalsIgnoreCase("language-property")) {
+//				continue;
+//			}
+//			if( !rel.equals(thisRel) ) {
+//				lexicalTree.expandChilds(top);
+//				rel = thisRel;
+//				top = new DefaultMutableTreeNode(rel);
+//				lexicalTree.addNode(top);
+//				//System.out.println("++ NODE: " + rel);
+//			}
+//			Collection values = (Collection) syn.lexicalToSynset.get(thisRel);
+//			for(Iterator k = values.iterator(); k.hasNext();) {
+//				Synset item = (Synset) k.next();
+//				node = new DefaultMutableTreeNode(item);
+//				//System.out.println("++++ LEAF: " + item);
+//				top.add(node);				
+//			}
+//		}
+//		
+//		lexicalTree.expandChilds(top);
+//		
+//		JScrollBar vbar = scrollPane.getVerticalScrollBar();
+//		vbar.setValue(vbar.getMinimum());
+//		JScrollBar hbar = scrollPane.getHorizontalScrollBar();
+//		hbar.setValue(hbar.getMinimum());
+//	}
 	
-		if(relations == null || relations.size() < 1) {
-			System.out.println(">> relations is empty!!");
-			return;
-		}
+	//FAKE TREE:
+	void showLinguisticRelations(Synset syn) {
+	
+		clearTree(lexicalTree);
 		
-		String rel = "";
+		lexicalTree.setRootUserObject("financial service");
+		lexicalTree.setRootVisible(true);
 
-		for(Iterator i = relations.iterator(); i.hasNext();) {
-			String thisRel = (String) i.next();
-			if(thisRel.equalsIgnoreCase("language-property")) {
-				continue;
-			}
-			if( !rel.equals(thisRel) ) {
-				lexicalTree.expandChilds(top);
-				rel = thisRel;
-				top = new DefaultMutableTreeNode(rel);
-				lexicalTree.addNode(top);
-				//System.out.println("++ NODE: " + rel);
-			}
-			Collection values = (Collection) syn.lexicalToSynset.get(thisRel);
-			for(Iterator k = values.iterator(); k.hasNext();) {
-				Synset item = (Synset) k.next();
-				node = new DefaultMutableTreeNode(item);
-				//System.out.println("++++ LEAF: " + item);
-				top.add(node);				
-			}
-		}
-		
-		lexicalTree.expandChilds(top);
+		DefaultMutableTreeNode propNode = new DefaultMutableTreeNode("has_hyperonym");
+		((SynsetTree) lexicalTree).addNode(propNode);
+		DefaultMutableTreeNode leafNode = new DefaultMutableTreeNode("service");
+		propNode.add(leafNode);
+		propNode = new DefaultMutableTreeNode("fuzzynym");
+		((SynsetTree) lexicalTree).addNode(propNode);
+		leafNode = new DefaultMutableTreeNode("account");
+		propNode.add(leafNode);
+		leafNode = new DefaultMutableTreeNode("file");
+		propNode.add(leafNode);			
 		
 		JScrollBar vbar = scrollPane.getVerticalScrollBar();
 		vbar.setValue(vbar.getMinimum());

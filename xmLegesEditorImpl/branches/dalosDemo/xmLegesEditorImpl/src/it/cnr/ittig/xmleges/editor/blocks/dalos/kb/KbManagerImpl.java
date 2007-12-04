@@ -163,7 +163,7 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 	}
 	
 	public SynsetTree getTree(String lang) {
-
+		
 		KbContainer kbc = getContainer(lang);
 		return kbc.getTree();
 	}

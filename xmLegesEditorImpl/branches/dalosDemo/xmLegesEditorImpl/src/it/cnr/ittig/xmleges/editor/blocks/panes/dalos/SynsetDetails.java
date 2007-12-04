@@ -50,38 +50,76 @@ public class SynsetDetails extends JEditorPane {
 		this.synset = synset;
 	}
 	
+//	public void draw() {
+//		
+//		if(synset == null) {
+//			setText("<html></html>");
+//			return;
+//		}
+//		
+//		String img = "<img src=\"./kontact_journal.png\">";
+//		
+//		String def = synset.getDef();
+//		if(def == null) {
+//			def = "(empty definition)";
+//		}
+//		
+//		String html = "<html><body><table><tr><td>" +  img +
+//			"</td><td><h2><i>Definition</i></h2><h3>" + 
+//			def +  "</h3></td></tr></table><h2><i>Variants</i></h2><table>"; 
+//		
+//		for(Iterator i = synset.getVariants().iterator(); i.hasNext();) {
+//			String variant = (String) i.next();
+//			html += "<tr><td><img src=\"./lexical.png\"></td><td>" +
+//					variant + "</td></tr>";
+//		}
+//		
+//		html += "</table></body></html>";
+//
+//		setText(html);
+//		
+//		//System.out.println("DEBUG HTML: " + html + "\n");
+//	}
+
+	//Fake draw!! EN
 	public void draw() {
 		
-		if(synset == null) {
-			setText("<html></html>");
-			return;
-		}
+		String def = "Any service of a banking, credit, insurance, personal pension, investment or payment nature.";
 		
 		String img = "<img src=\"./kontact_journal.png\">";
 		
-		String def = synset.getDef();
-		if(def == null) {
-			def = "(empty definition)";
-		}
-		
 		String html = "<html><body><table><tr><td>" +  img +
-			"</td><td><h2><i>Definition</i></h2><h3>" + 
-			def +  "</h3></td></tr></table><h2><i>Variants</i></h2><table>"; 
+			"</td><td><h2><i>Definition</i></h2><h3>" + def +
+			"</h3></td></tr></table><h2><i>Variants</i></h2><table>"; 
 		
-		for(Iterator i = synset.getVariants().iterator(); i.hasNext();) {
-			String variant = (String) i.next();
-//			html += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - " + 
-//						variant + "<br>";
-			html += "<tr><td><img src=\"./lexical.png\"></td><td>" +
-					variant + "</td></tr>";
-		}
-		
+		html += "<tr><td><img src=\"./lexical.png\"></td><td>financial service</td></tr>";
+		html += "<tr><td><img src=\"./lexical.png\"></td><td>financial services</td></tr>";
+
 		html += "</table></body></html>";
 
 		setText(html);
 		
-		//System.out.println("DEBUG HTML: " + html + "\n");
 	}
+	
+	//Fake draw!! ITA
+//	public void draw() {
+//		
+//		String def = "Qualsiasi servizio di natura bancaria, creditizia, assicurativa, servizi pensionistici individuali, di investimento o di pagamento.";
+//		
+//		String img = "<img src=\"./kontact_journal.png\">";
+//		
+//		String html = "<html><body><table><tr><td>" +  img +
+//			"</td><td><h2><i>Definition</i></h2><h3>" + def +
+//			"</h3></td></tr></table><h2><i>Variants</i></h2><table>"; 
+//		
+//		html += "<tr><td><img src=\"./lexical.png\"></td><td>servizio finanziario</td></tr>";
+//		html += "<tr><td><img src=\"./lexical.png\"></td><td>servizi finanziari</td></tr>";
+//
+//		html += "</table></body></html>";
+//
+//		setText(html);
+//		
+//	}
 	
 	public void clearContent() {
 		

@@ -1,1357 +1,1118 @@
 <rdf:RDF
-    xmlns:sources="http://turing.ittig.cnr.it/jwn/ontologies/metasources.owl#"
+    xmlns:source="http://localhost/dalos/IT/sources.owl#"
+    xmlns:conc="http://localhost/dalos/concepts.owl#"
+    xmlns:indw="http://localhost/dalos/IT/individuals-word.owl#"
+    xmlns:langf="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#"
     xmlns:owns="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
+    xmlns:ind="http://localhost/dalos/IT/individuals.owl#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:sources="http://turing.ittig.cnr.it/jwn/ontologies/metasources.owl#"
+    xmlns:indclaw="http://localhost/dalos/IT/ind-to-consumer.owl#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:claw="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#"
-    xmlns:source="http://localhost/dalos/IT/sources.owl#"
-    xmlns:langf="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#"
-    xmlns:conc="http://localhost/dalos/concepts.owl#"
-    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:indclaw="http://localhost/dalos/IT/ind-to-consumer.owl#"
-    xmlns:ind="http://localhost/dalos/IT/individuals.owl#"
-    xmlns:indw="http://localhost/dalos/IT/individuals-word.owl#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:type="http://localhost/dalos/IT/types.owl#"
-    xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
   xml:base="http://localhost/dalos/IT/ind-to-consumer.owl" > 
-  <rdf:Description rdf:about="individuals.owl#synset-rete_comunicazione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#durable-medium"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Physical_Object"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-allegazione_fattuale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-realizzazione_di_il_mercato_interno-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-fine_protezione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-legislazione_comunitario_protezione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-pubblicazione_gazzetta-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-pubblicazione_in_lo_gazzetta_ufficiale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-raggiungimento_obiettivo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-informazione_trasmesso-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#commercial_communication"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-legislazione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-utilizzazione_a_tempo_parziale_uno-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#temporal-use"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-caratteristica_principale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Quality"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-protezione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-autorita-_amministrativo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#consumer_law-authority"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-esercizio_attivita-_commerciale-noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-esercizio_attivita-_televisivo-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-parlamento-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
+  <rdf:Description rdf:about="individuals.owl#synset-parlamento_europeo-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal-person"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-unione_europeo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#consumer_law-authority"/>
+  <rdf:Description rdf:about="individuals.owl#synset-consiglio_comunita--noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal-person"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-lotta_a_lo_discriminazione_fondato-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
+  <rdf:Description rdf:about="individuals.owl#synset-autorita-_pubblico-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal-person"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-conto_bancario-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
+  <rdf:Description rdf:about="individuals.owl#synset-attivita-_televisivo-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-applicazione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-accesso_attivita--noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#access_to_supply"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-somma_prestato-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-infrazione_intracomunitario-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#leasing_contract"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#laws_that_protect_consumers_interests"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-risoluzione_contratto-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-durata_minimo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#time-interval"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-organo_giurisdizionale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#consumer_law-authority"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-materia-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#raw_material"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-metro_quadrato-noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-indirizzo_geografico_rilevante-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#spatial-region"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-limitazione_responsabilita--noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-applicazione_regolamento-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-pubblicazione_ufficiale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  <rdf:Description rdf:about="individuals.owl#synset-difetto_conformita--noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#defectiveness"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#quality_region"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-prodotto-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#product"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#coordinated_field"/>
+  <rdf:Description rdf:about="individuals.owl#synset-fornitura_bene-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-indicazione_di_il_prezzo_prodotto-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Quality"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-servizio-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#services"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-prezzo_per_unita-_misura-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#price"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#unit-price"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-prestatore-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#service_provider"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#supplier"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-autorita-_competente-noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-operatore_pubblicitario-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#consumer_law-authority"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-onere_prova-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-transazione_contemplato-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Task"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-prodotto_difettoso-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#product"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-scadenza_termine-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#temporal-region"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-azione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-interesse_consumatore-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#collective_interests_of_consumers"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-esecuzione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-godimento_tempo_parziale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#temporal-use"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-commercializzazione_distanza-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-transazione_effettuato-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Task"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-commercio_elettronico-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Commercial_transaction"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-contratto_acquisizione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Task"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-controllo_rispetto-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-consiglio_comunita--noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-contratto_fornitura-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Task"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-luogo_stabilimento-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#spatial-region"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-autorita-_giudiziario-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-organo_amministrativo_competente-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-revisione_di_un_codice_condotta-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-concorrenza_impresa-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-consiglio_di_lo_unione_europeo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-coordinamento_disposizione_legislativo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-lesione_personale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#defectiveness"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-osservanza_disposizione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-indirizzo_geografico-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#spatial-region"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-pratica_commerciale_ingannevole-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#unfair-terms"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-protezione_interesse-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-giorno_lavorativo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#time-interval"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-articolo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#movable-object"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Physical_Object"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-credito_forma-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-differenza_premio-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-protezione_interesse_economico-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-moneta_nazionale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#coordinated_field"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-bene_consumo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#consumer_goods"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-indicazione_di_il_prezzo_unita-_di_misura-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Quality"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-direttiva_integro-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-legislazione_nazionale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-negoziato_individuale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Task"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-intervento_operatore-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-prezzo_unita--noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#price"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#unit-price"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-tutela_acquirente-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-mezzo_comunicazione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#durable-medium"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#digital_means_of_communication"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-persona-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#natural_person"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Subject"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-trasmissione_informazione-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-organismo_autonomo-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal-person"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-accesso_rete-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-periodo_transitorio-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#temporal-region"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-acquisto_bene-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Commercial_transaction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-pubblicazione_ufficiale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-attivita-_commerciale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-venditore_finale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#seller"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-assenza_risposta-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-discriminazione_diretto-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
+  <rdf:Description rdf:about="individuals.owl#synset-venditore-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#seller"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-esercizio_attivita-_televisivo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+  <rdf:Description rdf:about="individuals.owl#synset-garanzia_bene-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#guarantee"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-contratto_di_acquisizione_diritto_di_utilizzazione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Task"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#corrispondence_to_alleged_quality"/>
+  <rdf:Description rdf:about="individuals.owl#synset-massimale_credito-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-termine_mese-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#time-interval"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-contratto_durata_indeterminato-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Task"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-convenzione_internazionale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-evoluzione_economico-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
+  <rdf:Description rdf:about="individuals.owl#synset-parte-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-pubblicita-_comparativo-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#advertising"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-periodo_anno-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#three-years-period"/>
+  <rdf:Description rdf:about="individuals.owl#synset-conclusione_di_il_contratto_distanza-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#distance-contract"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-momento_consegna-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#time-interval"/>
+  <rdf:Description rdf:about="individuals.owl#synset-supporto_duraturo-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#durable-medium"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-operatore_pubblicitario-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#coordinated_field"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-venditore_momento-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#coordinated_field"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-sanita-_pubblico-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-disposizione_nazionale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-calcolo_di_il_tasso_annuo_effettivo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-acquisizione_diritto-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-dispositivo_automatico-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Physical_Object"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#coordinated_field"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-materia_di_pubblicita-_comparativo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#advertising"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-momento_di_lo_conclusione_contratto-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-pubblicita-_ingannevole-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#misleading_advertising"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-tecnica_comunicazione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#means-of-distance-communication"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-esercizio_effettivo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-invio_posta-noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-commercializzazione_distanza-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-consultazione_autorita--noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-calcolo_tasso_annuo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-servizio_investimento-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#guarantee"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-completamento_mercato-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-comunicazione_commerciale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#advertising"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-acquisizione_di_un_diritto_godimento_a_tempo_parziale-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#right_to_use_immovable_properties"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#temporal-use"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-servizio_societa--noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-forza_fisico-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-unita-_misura-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#spatial-region"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-invito_acquisto-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Commercial_transaction"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-normativa_comunitario-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-contratto-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Commercial_transaction"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-acquisto_bene-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Commercial_transaction"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-tutela_di_il_consumatore_caso-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-esercizio_minuto-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-paese_terzo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-terzo_base-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#coordinated_field"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-spedizione_bene-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-corte_giustizia-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-fornitore_autorita-_giudiziario-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#coordinated_field"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-esattezza_allegazione_fattuale-noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-sesso_persona-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Quality"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-scopo_ottemperanza-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-comunita-_europeo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#consumer_law-authority"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#competent-authority"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-fornitore-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#supplier"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#coordinated_field"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-interesse-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-tutela_di_lo_interesse_collettivo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-organizzazione_professionale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-materia_contratto_a_distanza-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Task"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#e_commerce_contract"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-tasso_interesse-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#annual-percentage-rate-of-charge"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-settore_economico-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-legislazione_membro-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-attivita-_servizio_di_lo_societa--noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-carta_pagamento-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Physical_Object"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-richiesta_assistenza-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-ambito_attivita-_commerciale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Region"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-diligenza_professionale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Quality"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-stabilimento_prestatore-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Physical_Object"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#spatial-region"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-vantaggio_mercato-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-norma-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-carta_credito-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#coordinated_field"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Physical_Object"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-visita_commerciante-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-parita-_trattamento-noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-caso-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-testo_disposizione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-prezzo_vendita-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#price"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#selling-price"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-protezione_di_il_consumatore_materia_di_indicazione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-costo_totale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-commissione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-momento_conclusione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#temporal-region"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-esecuzione_decisione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-carta_diritto_fondamentale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-salvaguardia_diritto-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-periodo_transitorio-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#temporal-region"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-utilizzazione_tempo_parziale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#temporal-use"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-credito_consumo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#consumer_credit"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-regolamento-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-contratto_concluso-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Task"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-operatore_tecnica-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#operator-of-a_means-of-communication"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-finalita-_legittimo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-violazione_disposizione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#laws_that_protect_consumers_interests"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-assicurazione_vita-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Task"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-calcolo_prezzo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-giurisprudenza_corte-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-liberta-_di_scelta_consumatore-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-uso_contratto_elettronico-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-tasso_annuo_effettivo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#annual-percentage-rate-of-charge"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-godimento_a_tempo_parziale_uno-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#temporal-use"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-attuazione_articolo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-servizio_compreso-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#all-inclusive-service"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-residenza_consumatore-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#coordinated_field"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#quality_region"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-interesse_collettivo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#collective_interests_of_consumers"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-stipulazione_contratto-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Task"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-controllo_volontario-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-consegna_bene-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-legislazione_applicabile-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-materia_pubblicita-_ingannevole-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#misleading_advertising"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-parte_convenuto-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#coordinated_field"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-bene-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#consumer_goods"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Physical_Object"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#coordinated_field"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-consumo_privato-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-credito_concesso-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#consumer_credit"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-giorno_pubblicazione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#temporal-region"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-legge_membro-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-prezzo_prodotto-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#price"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#selling-price"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-pubblicita--noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#advertising"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-misura_appropriato-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-messaggio_posta-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#commercial_communication"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-tutela-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-pratica_commerciale_sleale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#unfair-terms"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-bene_mobile-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#movable-object"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-circolazione_di_il_servizio_societa-_di_lo_informazione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-durata_indeterminato-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#temporal-region"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-composizione_extragiudiziale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-realizzazione_mercato-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-disposizione_legislativo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-autorita-_richiedente-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#competent-authority"/>
+  <rdf:Description rdf:about="individuals.owl#synset-comunita-_europeo-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal-person"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#consumer_law-authority"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-servizio_finanziario-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#guarantee"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#service_providing"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-ente_legittimato-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#consumer_law-authority"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#competent_official"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#competent-authority"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-molestia_sessuale-noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-acquirente_aspetto-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#buyer"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-revisione_di_un_codice_condotta-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-memorizzazione_dato-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-applicazione_regolamento-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-prestatore_di_servizio_societa-_di_lo_informazione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#coordinated_field"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#supplier_of_a_means_of_distance_communication"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#service_provider"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-clausola_minimo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-difetto_conformita--noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#distance-contract"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#quality_region"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-data_prestito-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#temporal-region"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-settore_disciplinato-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-conclusione_di_il_contratto_distanza-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#e_commerce_contract"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-momento_di_lo_consegna_bene-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#temporal-region"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-parte_interessato-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#coordinated_field"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-comportamento_economico_consumatore-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-circolazione_servizio-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-livello_di_protezione_consumatore-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-protezione_accordato-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-consultazione_di_lo_autorita-_richiedente-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-richiesta_assistenza_reciproco-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-direttiva_parlamento-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-massimale_credito-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-denominazione_commerciale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#coordinated_field"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-salvaguardia_di_il_diritto_uomo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-pubblicita-_medicinale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#advertising"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-comportamento_economico-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-fornitore_bene-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#coordinated_field"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#supplier"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-tradizione_giuridico-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-disposizione_essenziale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-pagamento_carta-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-ordinamento_giuridico-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-identita-_professionista-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Quality"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-importo_totale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-medicinale_uso_umano-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Physical_Object"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-anno_data-noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-giorno_lavorativo-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#time-interval"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-disposizione_rigoroso-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-misura_adottato-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-assistenza_reciproco-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-giorno_successivo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#time-interval"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-accordo_parte_diverso-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Task"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-supporto_duraturo-noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-credito-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-venditore_finale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#coordinated_field"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#seller"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-consiglio_di_lo_comunita-_europeo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-gioco_azzardo-noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-esercizio_attivita-_commerciale-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-programma_comunita--noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-funzionamento_di_il_mercato_comune-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-codice_condotta-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-supporto_durevole-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-stato_conoscenza_scientifico-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-distorsione_concorrenza-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-consumatore-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#consumer"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Subject"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#physical_agent"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#coordinated_field"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-conclusione_contratto-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-venditore-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#seller"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#coordinated_field"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-regolamentazione_pubblicita-_comparativo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-consultazione_preliminare-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-attivita-_di_sorveglianza_mercato-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#market_survellance-activities"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-adozione_parte_di_lo_essere_stare_membro-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-settore-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#spatial-region"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-completamento_di_il_mercato_interno-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-membro_autorita-_interpellato-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#consumer_law-authority"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-omissione_ingannevole-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-tutela_di_lo_interesse_consumatore-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-tutela_consumatore-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-ufficio_unico-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-condizione_stabilito-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-misura_necessario-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-diritto_di_utilizzazione_utilizzazione_a_tempo_parziale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#right_to_use_immovable_properties"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-consiglio_unione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-persona_sesso-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Quality"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-pratica_commerciale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-livello-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#spatial-region"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-parere_comitato_economico-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-politica_protezione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-valore_mobiliare-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#coordinated_field"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Quality"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-protezione_di_il_consumatore_materia-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-mercato_interno-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-tasso_annuo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-contratto_distanza-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#e_commerce_contract"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-scopo_in_ottemperanza_principio_di_proporzionalita--noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-autorita-_interpellato-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#consumer_law-authority"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#competent-authority"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#competent_official"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-settore_servizio_finanziario-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
+  <rdf:Description rdf:about="individuals.owl#synset-persona_sesso-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Quality"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-protezione_minore-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
+  <rdf:Description rdf:about="individuals.owl#synset-servizio_di_lo_societa-_informazione-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#service_providing"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-prodotto_offerto-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#product"/>
+  <rdf:Description rdf:about="individuals.owl#synset-servizio_compreso-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#all-inclusive-service"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-interesse_economico_consumatore-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-posta_elettronico-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#durable-medium"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-importo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-serie_operazione-noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-consegna_bene-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-gruppo_professionista-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#coordinated_field"/>
+  <rdf:Description rdf:about="individuals.owl#synset-tecnica_di_comunicazione_distanza-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#digital_means_of_communication"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-quadro_giuridico-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
+  <rdf:Description rdf:about="individuals.owl#synset-concorrenza_impresa-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-circolazione_merce-noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-distanza_di_servizio_finanziario_consumatore-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#services"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#service_providing"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-materia_pubblicita-_ingannevole-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#misleading_advertising"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-metro_quadrato-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#spatial-region"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-danno_risultante-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#damage"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-esecuzione_prestazione-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-richiesta_assistenza-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-anno_entrata-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#time-interval"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-persona-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#natural_person"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Subject"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-organo_amministrativo-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal-person"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-osservanza_disposizione-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-parere_comitato_economico-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal-person"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-interesse_consumatore-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#collective_interests_of_consumers"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-comunicazione_distanza-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-pagamento_carta-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-rimozione_informazione-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-unione_europeo-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal-person"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#consumer_law-authority"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-servizio_societa--noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-uso_contratto_elettronico-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-ambito_attivita-_commerciale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Region"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-denominazione_origine-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-prezzo_prodotto_offerto-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-operatore_tecnica-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#operator-of-a_means-of-communication"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-prestatore_servizio-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#service_provider"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-acquirente-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-esattezza_allegazione_fattuale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Quality"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-consumatore-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#consumer"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Subject"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#physical_agent"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-conclusione_contratto-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-firma_elettronico-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-consultazione_di_lo_autorita-_richiedente-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-territorio_membro-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Physical_Object"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#spatial-region"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-prestatore_servizio-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#coordinated_field"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#service_provider"/>
+  <rdf:Description rdf:about="individuals.owl#synset-consiglio_unione-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal-person"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-divergenza_legislazione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  <rdf:Description rdf:about="individuals.owl#synset-pubblicita--noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#advertising"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-somma_versato-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
+  <rdf:Description rdf:about="individuals.owl#synset-organismo_pubblico-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal-person"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-proposta_modifica-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-interesse_economico-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-comunita-_economico-noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-venditore_momento-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-funzionario_competente-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#coordinated_field"/>
+  <rdf:Description rdf:about="individuals.owl#synset-funzionamento_di_il_mercato_interno-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-tutela_interesse-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
+  <rdf:Description rdf:about="individuals.owl#synset-comunicazione_commerciale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#advertising"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-tempo_parziale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#temporal-region"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-distorsione_concorrenza-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-prodotto-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#product"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-fornitore_autorita-_giudiziario-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-attivita-_di_sorveglianza_mercato-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-conto_bancario-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-tecnica_comunicazione-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#means-of-distance-communication"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-giorno_successivo_pubblicazione_in_lo_gazzetta-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#time-interval"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-carta_pagamento-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Physical_Object"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-materia_di_pubblicita-_comparativo-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#advertising"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-contratto_negoziato-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Commercial_transaction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-invio_posta-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-gruppo_professionista-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-prodotto_difettoso-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#product"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-prestazione_servizio-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#service_providing"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-funzionamento_mercato-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-utilizzazione_tempo_parziale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#temporal-use"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-accesso_attivita--noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#access_to_supply"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-messaggio_posta-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#commercial_communication"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-persona_fisico-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#natural_person"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#physical_agent"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Subject"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-frontiera_interno-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#spatial-region"/>
+  <rdf:Description rdf:about="individuals.owl#synset-commercio_elettronico-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Commercial_transaction"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-tutela_di_lo_acquirente_aspetto_di_il_contratto_relativo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-danno_risultante-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#defectiveness"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-contratto_relativo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Task"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-revisione_importo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-autorita-_amministrativo_competente-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-identita-_fornitore-noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-indicazione_di_il_prezzo_unita-_di_misura-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Quality"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-mercato_comune-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
+  <rdf:Description rdf:about="individuals.owl#synset-visita_commerciante-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-trattato-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
+  <rdf:Description rdf:about="individuals.owl#synset-organo_amministrativo_competente-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal-person"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-scambio_informazione-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-credito_consumo-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#consumer_credit"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-pubblicita-_ingannevole-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#misleading_advertising"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-fornitore-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#supplier"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-consiglio_di_lo_unione_europeo-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal-person"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-vantaggio_mercato-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-settore_servizio_finanziario-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-omissione_ingannevole-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-luogo_stabilimento-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#spatial-region"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-momento_di_lo_conclusione_contratto-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-oggetto_contratto-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-fornitore_servizio_finanziario-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#service_provider"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-valore_mobiliare-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Quality"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-carta_credito-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Physical_Object"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-somma_versato-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-tasso_interesse-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#annual-percentage-rate-of-charge"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-diritto_di_utilizzazione_utilizzazione_a_tempo_parziale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#right_to_use_immovable_properties"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-prezzo_per_unita-_misura-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#price"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#unit-price"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-consiglio-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal-person"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-consiglio_di_lo_comunita-_europeo-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal-person"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-terzo_base-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-acquisizione_diritto-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-revisione_codice-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-posta_elettronico-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#digital_means_of_communication"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-interesse_economico_consumatore-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-vendita_bene-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Commercial_transaction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-sanita-_pubblico-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal-person"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-realizzazione_di_il_mercato_interno-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-accesso_bene-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#access_to_supply"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-fornitore_bene-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#supplier"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-contratto_credito-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#credit-agreement"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-distanza-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#spatial-region"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-data_prestito-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#temporal-region"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-ufficio_unico-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal-person"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-tasso_annuo_effettivo-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#annual-percentage-rate-of-charge"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-frazione_anno-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#period-of-the-year"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-periodo_riflessione-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#temporal-region"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-circolazione_merce-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-risoluzione_contratto-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-onere_prova-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-autorita-_amministrativo_competente-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal-person"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-scadenza_termine-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#temporal-region"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-stipulazione_contratto-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-contratto_distanza-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#distance-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-garanzia_di_il_bene_consumo-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#guarantee"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-prestatore-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#service_provider"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#supplier"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-tasso_annuo-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-prestazione-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-commissione-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal-person"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-ricorso_forza-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-segno_distintivo-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Physical_Object"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-comportamento_economico-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-invito_acquisto-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Commercial_transaction"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-prezzo_prodotto-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#price"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#selling-price"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-giorno_pubblicazione-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#temporal-region"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-infrazione_intracomunitario-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#intra-Community_infringement"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#infringment"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-fattispecie_concreto-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-aspetto_giuridico_servizio_di_lo_societa--noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-molestia_sessuale-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-termine_giorno_lavorativo-noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-godimento_tempo_parziale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#temporal-use"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-importo_totale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-denominazione_commerciale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-attuazione_articolo-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-completamento_mercato-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-calcolo_di_il_tasso_annuo_effettivo-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-durata_minimo-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#time-interval"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-stabilimento_prestatore-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Physical_Object"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#spatial-region"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-firma_elettronico-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#coordinated_field"/>
+  <rdf:Description rdf:about="individuals.owl#synset-attivita-_professionale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#regulated_profession"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-termine_giorno-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#time-interval"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-momento_consegna-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#time-interval"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-esecuzione-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-legge_applicabile_contratto-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
+  <rdf:Description rdf:about="individuals.owl#synset-modalita-_risoluzione-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-bene_immobile-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#infringment"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Physical_Object"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-conto-noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-servizio_finanziario-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#service_providing"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-coordinamento_disposizione_legislativo-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-supporto_durevole-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#durable-medium"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-somma_prestato-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-esecuzione_normativa-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-credito_concesso-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#consumer_credit"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-prestatore_di_servizio_societa-_di_lo_informazione-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#supplier_of_a_means_of_distance_communication"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#service_provider"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-termine_anno-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#three-years-period"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-consultazione_autorita--noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-interesse-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-oggetto_negoziato_individuale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Commercial_transaction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-serie_operazione-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-caratteristica_principale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Quality"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-concessione_credito-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-forma_appropriato-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Quality"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-lesione_personale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#damage"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-rispetto_disposizione-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-pratica_illecito-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-differenza_premio-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-livello_nazionale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Region"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#spatial-region"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-costo_totale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-violazione_disposizione-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#infringment"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-caso_difetto_di_conformita--noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Quality"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#defectiveness"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-comunita--noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal-person"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-carattere_abusivo-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Quality"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-giorno_successivo-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#time-interval"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-interesse_collettivo-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#collective_interests_of_consumers"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-rete_comunicazione-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#digital_means_of_communication"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Physical_Object"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-azione-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-prezzo-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#price"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-entrata_vigore-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-attivita-_servizio_di_lo_societa--noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-giorno_ricevimento-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#temporal-region"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-identita-_fornitore-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Quality"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-circolazione_di_il_servizio_societa-_di_lo_informazione-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-organo_giurisdizionale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal-person"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#consumer_law-authority"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-termine-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#time-interval"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#temporal-region"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-prezzo_vendita-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#price"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#selling-price"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-professionista-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#professional"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-professionista_settore_economico-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#professional"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-calcolo_tasso_annuo-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-autorita-_giudiziario-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal-person"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-giorno_calendario-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#time-interval"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-discriminazione_fondato-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-comportamento_economico_consumatore-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-bene_mobile-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#movable-object"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-uso_umano-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-parte_interessato-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-mercato_interno-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-esecuzione_decisione-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-memorizzazione_dato-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-ravvicinamento_disposizione_legislativo-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-esercizio_minuto-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-esercizio_di_il_diritto_recesso-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#withdrawal-right"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-parte_convenuto-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-gioco_azzardo-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-membro_autorita-_interpellato-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#consumer_law-authority"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-ricorso_a_lo_forza_fisico-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-diligenza_professionale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Quality"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-materia_contratto_a_distanza-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#distance-contract"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-pubblicita-_medicinale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#advertising"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-calcolo_prezzo-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-stato_conoscenza_scientifico-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-parlamento-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal-person"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-limitazione_responsabilita--noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-interesse_economico-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-scelta_contraente-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-destinatario_servizio-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#recipient-of-the-service"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-proposta_modifica-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-dispositivo_automatico-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Physical_Object"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-pratica_commerciale_sleale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#unfair-terms"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-cooperazione_commissione-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-modalita-_pagamento-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Commercial_transaction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-attivita--noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-vita_privato-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-ente_legittimato-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal-person"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#consumer_law-authority"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#competent_official"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#competent-authority"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-corte_giustizia-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal-person"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-moneta_nazionale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-bene_immobile-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#immovable_property"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Physical_Object"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-funzionamento_di_il_mercato_comune-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-spedizione_di_il_bene_mittente-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-completamento_di_il_mercato_interno-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-autorita-_competente-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal-person"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#consumer_law-authority"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-revisione_importo-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-anno_entrata-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#time-interval"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-prodotto_offerto-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#product"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-diritto_recesso-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#withdrawal-right"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-assistenza_reciproco-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-prestatore_stabilito-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#supplier"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-allegazione_fattuale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-circostanza_caso-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-esercizio_effettivo-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-livello-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#spatial-region"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-residenza_consumatore-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#quality_region"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-frontiera_interno-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#spatial-region"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-utilizzazione_a_tempo_parziale_uno-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#temporal-use"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-atto_pubblicazione-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-momento_di_lo_consegna_bene-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#temporal-region"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-natura_commerciale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Quality"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-bene-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#consumer_goods"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Physical_Object"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-autorita--noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal-person"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-evoluzione_economico-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-settore-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#spatial-region"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-adozione_parte_di_lo_essere_stare_membro-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-esecuzione_contratto-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-funzionario_competente-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal-person"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-contratto_di_acquisizione_diritto_di_utilizzazione-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-autorita-_amministrativo-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal-person"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#consumer_law-authority"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-consultazione_preliminare-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-segreto_professionale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-servizio_investimento-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-durata_indeterminato-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#temporal-region"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-mercato_comune-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-autorita-_richiedente-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#competent-authority"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#consumer_law-authority"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal-person"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-realizzazione_mercato-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-medicinale_uso_umano-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Physical_Object"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-identita-_professionista-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Quality"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-settore_economico-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-credito_forma-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-tempo_utile-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#temporal-region"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-prezzo_unita--noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#price"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#unit-price"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-organizzazione_professionale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal-person"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-spedizione_bene-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-parita-_trattamento-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-periodo_anno-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#three-years-period"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-pratica-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-locale_commerciale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Physical_Object"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#spatial-region"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-pubblicazione_in_lo_gazzetta_ufficiale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-consumo_privato-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-mercato-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-commercializzazione_a_distanza_distanza_di_servizio_finanziario-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Commercial_transaction"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-accordo_iniziale_servizio-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Task"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-acquirente_aspetto-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#coordinated_field"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#buyer"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-prestatore_stabilito-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#coordinated_field"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#supplier"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-giorno_calendario-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#time-interval"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-organismo_autonomo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-accesso_rete-noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-intervento_operatore-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-consiglio-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
+  <rdf:Description rdf:about="individuals.owl#synset-aspetto_giuridico_servizio_di_lo_societa--noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-destinatario_servizio-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#recipient-of-the-service"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#coordinated_field"/>
+  <rdf:Description rdf:about="individuals.owl#synset-unita-_misura-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#spatial-region"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-accesso_bene-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#access_to_supply"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-ordinamento_membro-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-termine_giorno-noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-anno_data-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#time-interval"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-prezzo_prodotto_offerto-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-cooperazione_commissione-noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-accordo_iniziale-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-vendita_di_il_bene_consumo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Task"/>
+  <rdf:Description rdf:about="individuals.owl#synset-conto-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-vita_privato-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-concessione_credito-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-tutela_lo_interesse_consumatore-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-fornitore_servizio_finanziario-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#coordinated_field"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#service_provider"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-scopo_ente-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
+  <rdf:Description rdf:about="individuals.owl#synset-pratica_commerciale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-consumatore_medio-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#consumer"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#coordinated_field"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-protezione_di_lo_interesse_consumatore-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-funzionamento_di_il_mercato_interno-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-termine-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#time-interval"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#temporal-region"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-programma_preliminare-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-contratto_credito-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#damage"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-pratica_commerciale_aggressivo-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Commercial_transaction"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-esecuzione_contratto-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-autorita-_pubblico-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-distanza_di_servizio_finanziario_consumatore-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#services"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#service_providing"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-vendita-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Task"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-giorno_ricevimento-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#temporal-region"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-testo_rilevante-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-contratto_negoziato-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Commercial_transaction"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-revisione_codice-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-disposizione_favorevole-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-parlamento_europeo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-esercizio_di_il_diritto_recesso-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#withdrawal-right"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-testo_disposizione_essenziale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-direttiva_modificato-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-circostanza_caso-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-funzionamento_mercato-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-attivita-_sorveglianza-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#market_survellance-activities"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-organismo_pubblico-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-legislazione_applicabile_contratto-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-attivita-_televisivo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-tasso_interesse_annuo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#annual-percentage-rate-of-charge"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-pratica_illecito-noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-esistenza_difetto-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#damage"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-pubblicazione_gazzetta-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-fornitura_bene-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+  <rdf:Description rdf:about="individuals.owl#synset-bene_consumo-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#consumer_goods"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-modalita-_risoluzione-noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-divergenza_legislazione-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-responsabile_codice-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#coordinated_field"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-ricorso_a_lo_forza_fisico-noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-composizione_extragiudiziale-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-professionista-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#professional"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-attivita-_professionale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#regulated_profession"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-pagamento_onere-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-giorno_successivo_pubblicazione_in_lo_gazzetta-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#time-interval"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-modalita-_esercizio-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-protezione_di_il_consumatore_settore-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-fine_di_lo_protezione_consumatore-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-professionista_settore_economico-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#coordinated_field"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#professional"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-prestazione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-indirizzo_geografico_rilevante-noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-indirizzo_geografico-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#spatial-region"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-entrata_vigore-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-esecuzione_normativa-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-servizio_di_lo_societa-_informazione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#service_providing"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-quadro_normativo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-frazione_anno-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#period-of-the-year"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-tempo_utile-noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-momento_conclusione-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#temporal-region"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-carattere_abusivo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Quality"/>
+  <rdf:Description rdf:about="individuals.owl#synset-importo-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Economic_Concept"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-tempo_parziale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#temporal-region"/>
+  <rdf:Description rdf:about="individuals.owl#synset-informazione_trasmesso-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#commercial_communication"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-contratto_adesione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Task"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-livello_nazionale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Region"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#spatial-region"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-locale_commerciale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Physical_Object"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#spatial-region"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-attivita-_commerciale-noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-circolazione_servizio-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-autorita--noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-pratica_commerciale_ingannevole-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#unfair-terms"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-responsabile_codice-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-ricorso_forza-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  <rdf:Description rdf:about="individuals.owl#synset-comunita-_economico-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal-person"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-segreto_professionale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+  <rdf:Description rdf:about="individuals.owl#synset-paese_terzo-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal-person"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-periodo_riflessione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#temporal-region"/>
+  <rdf:Description rdf:about="individuals.owl#synset-termine_mese-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#time-interval"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-allegato_direttiva-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-comunita--noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Role"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-protezione_di_lo_interesse_economico_consumatore-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-caso_difetto_di_conformita--noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Quality"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#distance-contract"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-vendita_bene-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Commercial_transaction"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-ravvicinamento_disposizione_legislativo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-legislazione_comunitario-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-esecuzione_prestazione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-prestazione_servizio-noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-servizio-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#service_providing"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-rispetto_disposizione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-tecnica_di_comunicazione_distanza-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#durable-medium"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-protezione_consumatore-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-legge_applicabile-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Normative_Framework"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-uso_umano-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-spedizione_di_il_bene_mittente-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-denominazione_origine-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#coordinated_field"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-natura_commerciale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#coordinated_field"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Quality"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-accordo_iniziale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Task"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-comunicazione_distanza-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#services"/>
   </rdf:Description>
 </rdf:RDF>

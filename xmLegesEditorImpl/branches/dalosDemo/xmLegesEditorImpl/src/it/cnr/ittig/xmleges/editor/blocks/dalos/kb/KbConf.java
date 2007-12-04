@@ -38,4 +38,11 @@ public class KbConf {
 	public static String LOCAL_SOURCE_SCHEMA = "metasources.owl";
 	public static String LOCAL_METALEVEL_FULL = "language-properties-full.owl";
 	
+	//Inferred Data	
+	public static String inferenceDir = "inf/";
+	public static String DP_INF = "dpInf.owl";
+	public static String DPEXT_INF = "dpExtInf.owl";
+	public static String RES_INF = "resInf.owl";
+	public static String RESEXT_INF = "resExtInf.owl";
+	
 }
