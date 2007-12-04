@@ -77,6 +77,21 @@ public class UtilFile {
 		copyFile(new FileInputStream(file), temp);
 		return temp;
 	}
+	
+	public static File createDirInTemp(String dname) {
+		
+//		String fileTempName = getTempDirName() + File.separatorChar + base;
+//		File temp = new File(fileTempName);
+//		if(!temp.canWrite()) {
+//			return null;
+//		}
+//		temp.mkdir()
+		
+		String fileTempName = getTempDirName() + File.separatorChar + dname;
+		File tempDir = new File(fileTempName);
+		tempDir.mkdir();
+		return tempDir;
+	}
 
 	/**
 	 * Copia il file <code>source</code> in <code>dest</code>.
