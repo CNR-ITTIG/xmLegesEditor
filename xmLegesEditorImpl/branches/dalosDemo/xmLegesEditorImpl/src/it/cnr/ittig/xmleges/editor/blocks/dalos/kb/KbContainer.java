@@ -61,7 +61,7 @@ public class KbContainer {
 	
 	private I18n i18n;
 	
-	private OntDocumentManager odm; 
+	private OntDocumentManager odm; //farlo static? cacha i doc. comuni...
 
 	//Dati
 	Map synsets = null;
