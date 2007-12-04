@@ -33,7 +33,7 @@ import com.hp.hpl.jena.rdf.model.Resource;
  */
 public class SPEngine {
 	
-	private String lang;	
+	private String lang;
 	
 	private OntModel om;
 	

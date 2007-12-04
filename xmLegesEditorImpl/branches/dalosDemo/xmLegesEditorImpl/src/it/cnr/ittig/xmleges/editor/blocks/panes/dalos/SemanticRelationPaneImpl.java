@@ -236,10 +236,6 @@ public class SemanticRelationPaneImpl implements SemanticRelationPane, EventMana
 	//FAKE TREE:
 	void showSemanticRelations(Synset syn) {
 		
-		Collection relations = syn.semanticToSynset.keySet(); 
-		
-		DefaultMutableTreeNode top = null, node = null;
-
 		clearTree(relazioniTree);
 		
 		relazioniTree.setRootUserObject("financial service");
@@ -247,36 +243,40 @@ public class SemanticRelationPaneImpl implements SemanticRelationPane, EventMana
 
 		DefaultMutableTreeNode propNode = new DefaultMutableTreeNode("qualified_by");
 		((SynsetTree) relazioniTree).addNode(propNode);
-		DefaultMutableTreeNode classNode = new DefaultMutableTreeNode("Legal Contract");
-		propNode.add(classNode);
+		DefaultMutableTreeNode classNode1 = new DefaultMutableTreeNode("Legal Contract");
+		propNode.add(classNode1);
 		DefaultMutableTreeNode leafNode = new DefaultMutableTreeNode("contract");
-		classNode.add(leafNode);
+		classNode1.add(leafNode);
 		leafNode = new DefaultMutableTreeNode("sale contract");
-		classNode.add(leafNode);
+		classNode1.add(leafNode);
 		propNode = new DefaultMutableTreeNode("supplied_by");
 		((SynsetTree) relazioniTree).addNode(propNode);
-		classNode = new DefaultMutableTreeNode("Legal Person");
-		propNode.add(classNode);
+		DefaultMutableTreeNode classNode2 = new DefaultMutableTreeNode("Legal Person");
+		propNode.add(classNode2);
 		leafNode = new DefaultMutableTreeNode("authority");
-		classNode.add(leafNode);
+		classNode2.add(leafNode);
 		leafNode = new DefaultMutableTreeNode("administrative authority");
-		classNode.add(leafNode);
+		classNode2.add(leafNode);
 		leafNode = new DefaultMutableTreeNode("commission");
-		classNode.add(leafNode);
+		classNode2.add(leafNode);
 		leafNode = new DefaultMutableTreeNode("courts");
-		classNode.add(leafNode);
+		classNode2.add(leafNode);
 		leafNode = new DefaultMutableTreeNode("European Parliament");
-		classNode.add(leafNode);
+		classNode2.add(leafNode);
 		leafNode = new DefaultMutableTreeNode("public health");
-		classNode.add(leafNode);
+		classNode2.add(leafNode);
 		leafNode = new DefaultMutableTreeNode("trade groups");
-		classNode.add(leafNode);
-		classNode = new DefaultMutableTreeNode("Natural Person");
-		propNode.add(classNode);
+		classNode2.add(leafNode);
+		DefaultMutableTreeNode classNode3 = new DefaultMutableTreeNode("Natural Person");
+		propNode.add(classNode3);
 		leafNode = new DefaultMutableTreeNode("natural person");
-		classNode.add(leafNode);
+		classNode3.add(leafNode);
 		leafNode = new DefaultMutableTreeNode("person");
-		classNode.add(leafNode);
+		classNode3.add(leafNode);
+		
+		relazioniTree.expandChilds(classNode1);
+		relazioniTree.expandChilds(classNode2);
+		relazioniTree.expandChilds(classNode3);
 
 		JScrollBar vbar = scrollPane.getVerticalScrollBar();
 		vbar.setValue(vbar.getMinimum());

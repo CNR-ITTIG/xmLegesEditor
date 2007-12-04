@@ -240,16 +240,19 @@ public class LinguisticRelationPaneImpl implements LinguisticRelationPane, Event
 		lexicalTree.setRootUserObject("financial service");
 		lexicalTree.setRootVisible(true);
 
-		DefaultMutableTreeNode propNode = new DefaultMutableTreeNode("has_hyperonym");
-		((SynsetTree) lexicalTree).addNode(propNode);
+		DefaultMutableTreeNode propNode1 = new DefaultMutableTreeNode("has_hyperonym");
+		((SynsetTree) lexicalTree).addNode(propNode1);
 		DefaultMutableTreeNode leafNode = new DefaultMutableTreeNode("service");
-		propNode.add(leafNode);
-		propNode = new DefaultMutableTreeNode("fuzzynym");
-		((SynsetTree) lexicalTree).addNode(propNode);
+		propNode1.add(leafNode);
+		DefaultMutableTreeNode propNode2 = new DefaultMutableTreeNode("fuzzynym");
+		((SynsetTree) lexicalTree).addNode(propNode2);
 		leafNode = new DefaultMutableTreeNode("account");
-		propNode.add(leafNode);
+		propNode2.add(leafNode);
 		leafNode = new DefaultMutableTreeNode("file");
-		propNode.add(leafNode);			
+		propNode2.add(leafNode);
+		
+		lexicalTree.expandChilds(propNode1);
+		lexicalTree.expandChilds(propNode2);
 		
 		JScrollBar vbar = scrollPane.getVerticalScrollBar();
 		vbar.setValue(vbar.getMinimum());
