@@ -49,36 +49,72 @@ public class SourceDetails extends JEditorPane {
 		this.synset = synset;
 	}
 	
+//	public void draw() {
+//
+//		if(synset == null) {
+//			setText("<html></html>");
+//			return;
+//		}
+//		
+//		String html = "<html><body>" +
+//			"</h3><h2><i>Sources</i></h2><table>"; 
+//		
+//		for(Iterator i = synset.getSources().iterator(); i.hasNext();) {
+//			Source source = (Source) i.next();
+//			String def = source.getContent();
+//			if(def == null || def.trim().length() < 1) {
+//				def = "Source text not available";
+//			}
+//			
+//			html += "<tr><td><img src=\"./signature.png\"></td><td><i>" + 
+//						def + "</i></td><td>&nbsp;</td><td>" +
+//						"<A HREF=\"" + source.getLink() + 
+//						"\">" + source.getId() + "</A></td></tr>";			
+//		}
+//		
+//		html += "</table></body></html>";
+//
+//		setText(html);
+//		
+//		//System.out.println("DEBUG HTML: " + html + "\n");
+//	}
+	
 	public void draw() {
 
-		if(synset == null) {
-			setText("<html></html>");
-			return;
-		}
-		
 		String html = "<html><body>" +
 			"</h3><h2><i>Sources</i></h2><table>"; 
 		
-		for(Iterator i = synset.getSources().iterator(); i.hasNext();) {
-			Source source = (Source) i.next();
-			String def = source.getContent();
-			if(def == null || def.trim().length() < 1) {
-				def = "Source text not available";
-			}
-			
-			html += "<tr><td><img src=\"./signature.png\"></td><td><i>" + 
-						def + "</i></td><td>&nbsp;</td><td>" +
-						"<A HREF=\"" + source.getLink() + 
-						"\">" + source.getId() + "</A></td></tr>";			
-		}
+	String def = "Both for consumers and suppliers of financial services, the distance marketing of financial services will constitute one of the main tangible results of the completion of the internal market.";
+	String source = "32002L0065-20050612-it-pre-rec2";
+
+	html += "<tr><td><img src=\"./signature.png\"></td><td><i>" + 
+	def + "</i></td><td>&nbsp;</td><td>" +
+	"<A HREF=\"" + source + 
+	"\">" + source + "</A></td></tr>";			
+
+		def = "the total price to be paid by the consumer to the supplier for the financial service, including all related fees, charges and expenses, and all taxes paid via the supplier or, when an exact price cannot be indicated, the basis for the calculation of the price enabling the consumer to verify it;";
+		source = "32002L0065-20050612-it-art3-par2-pntb";
 		
+		html += "<tr><td><img src=\"./signature.png\"></td><td><i>" + 
+						def + "</i></td><td>&nbsp;</td><td>" +
+						"<A HREF=\"" + source + 
+						"\">" + source + "</A></td></tr>";			
+
+		def = "At any time during the contractual relationship the consumer is entitled, at his request, to receive the contractual terms and conditions on paper. In addition, the consumer is entitled to change the means of distance communication used, unless this is incompatible with the contract concluded or the nature of the financial service provided.";
+		source = "32002L0065-20050612-it-art5-par3";
+			
+		html += "<tr><td><img src=\"./signature.png\"></td><td><i>" + 
+		def + "</i></td><td>&nbsp;</td><td>" +
+		"<A HREF=\"" + source + 
+		"\">" + source + "</A></td></tr>";			
+
 		html += "</table></body></html>";
 
 		setText(html);
 		
 		//System.out.println("DEBUG HTML: " + html + "\n");
 	}
-	
+
 	public void clearContent() {
 		
 		setText("<html><body></body></html>");

@@ -238,32 +238,24 @@ public class SemanticRelationPaneImpl implements SemanticRelationPane, EventMana
 		
 		clearTree(relazioniTree);
 		
-		relazioniTree.setRootUserObject("financial service");
+		relazioniTree.setRootUserObject("service providing");
 		relazioniTree.setRootVisible(true);
 
 		DefaultMutableTreeNode propNode = new DefaultMutableTreeNode("qualified_by");
 		((SynsetTree) relazioniTree).addNode(propNode);
-		DefaultMutableTreeNode classNode1 = new DefaultMutableTreeNode("Legal Contract");
+		DefaultMutableTreeNode classNode1 = new DefaultMutableTreeNode("Contract");
 		propNode.add(classNode1);
-		DefaultMutableTreeNode leafNode = new DefaultMutableTreeNode("contract");
+		DefaultMutableTreeNode leafNode = new DefaultMutableTreeNode("distance contract");
 		classNode1.add(leafNode);
 		leafNode = new DefaultMutableTreeNode("sale contract");
 		classNode1.add(leafNode);
-		propNode = new DefaultMutableTreeNode("supplied_by");
+		propNode = new DefaultMutableTreeNode("has_partecipant");
 		((SynsetTree) relazioniTree).addNode(propNode);
 		DefaultMutableTreeNode classNode2 = new DefaultMutableTreeNode("Legal Person");
 		propNode.add(classNode2);
 		leafNode = new DefaultMutableTreeNode("authority");
 		classNode2.add(leafNode);
 		leafNode = new DefaultMutableTreeNode("administrative authority");
-		classNode2.add(leafNode);
-		leafNode = new DefaultMutableTreeNode("commission");
-		classNode2.add(leafNode);
-		leafNode = new DefaultMutableTreeNode("courts");
-		classNode2.add(leafNode);
-		leafNode = new DefaultMutableTreeNode("European Parliament");
-		classNode2.add(leafNode);
-		leafNode = new DefaultMutableTreeNode("public health");
 		classNode2.add(leafNode);
 		leafNode = new DefaultMutableTreeNode("trade groups");
 		classNode2.add(leafNode);
@@ -273,10 +265,26 @@ public class SemanticRelationPaneImpl implements SemanticRelationPane, EventMana
 		classNode3.add(leafNode);
 		leafNode = new DefaultMutableTreeNode("person");
 		classNode3.add(leafNode);
+		propNode = new DefaultMutableTreeNode("has_role");
+		((SynsetTree) relazioniTree).addNode(propNode);
+		DefaultMutableTreeNode classNode4 = new DefaultMutableTreeNode("Service Provider");
+		propNode.add(classNode4);
+		leafNode = new DefaultMutableTreeNode("information society service provider");
+		classNode4.add(leafNode);
+		leafNode = new DefaultMutableTreeNode("service provider");
+		classNode4.add(leafNode);
+		leafNode = new DefaultMutableTreeNode("supplier");
+		classNode4.add(leafNode);
+		DefaultMutableTreeNode classNode5 = new DefaultMutableTreeNode("Recipient of the Service");
+		propNode.add(classNode5);
+		leafNode = new DefaultMutableTreeNode("recipient of the service");
+		classNode5.add(leafNode);
 		
 		relazioniTree.expandChilds(classNode1);
 		relazioniTree.expandChilds(classNode2);
 		relazioniTree.expandChilds(classNode3);
+		relazioniTree.expandChilds(classNode4);
+		relazioniTree.expandChilds(classNode5);
 
 		JScrollBar vbar = scrollPane.getVerticalScrollBar();
 		vbar.setValue(vbar.getMinimum());
