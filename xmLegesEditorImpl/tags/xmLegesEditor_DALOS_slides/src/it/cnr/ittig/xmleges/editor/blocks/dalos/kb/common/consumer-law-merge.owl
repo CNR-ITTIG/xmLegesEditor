@@ -1,0 +1,1468 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:iol="http://www.loa-cnr.it/ontologies/IOLite.owl#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:nor="http://www.loa-cnr.it/ontologies/CLO/NormativePositions.owl#"
+    xmlns:dul="http://www.loa-cnr.it/ontologies/DUL.owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#"
+    xmlns:clo="http://www.loa-cnr.it/ontologies/CLO/CoreLegal.owl#"
+    xmlns:p4="http://www.loa-cnr.it/ontologies/DULowl#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xml:base="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="http://www.loa-cnr.it/ontologies/CLO/CoreLegal.owl"/>
+    <owl:imports rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/clo-dul.owl"/>
+  </owl:Ontology>
+  <owl:Class rdf:ID="immovable_property">
+    <rdfs:subClassOf rdf:resource="http://www.loa-cnr.it/ontologies/CLO/CoreLegal.owl#LegalAsset"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Physical_Object"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="legal-person">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#isActedBy"/>
+        <owl:someValuesFrom>
+          <owl:Class rdf:ID="physical_agent"/>
+        </owl:someValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.loa-cnr.it/ontologies/CLO/CoreLegal.owl#LegallyConstructedInstitution"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Legal_Subject"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="withdrawal-right">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.loa-cnr.it/ontologies/CLO/NormativePositions.owl#LegalModalDescription"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="normative-position"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="social_object"/>
+  <owl:Class rdf:ID="period-of-the-year">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:ID="contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="is-duration-of"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="time-interval"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="creditor">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Legal_Role"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#isRoleDefinedIn"/>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="credit-agreement"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:ID="natural_person"/>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#isRoleOf"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="single_liaison_office">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="consumer_law-authority"/>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >means the public authority in each Member State designated as responsible for coordinating the application of this Regulation within that Member State. reg.2006/2004</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="service_provider">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Legal_Role"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#isParticipantIn"/>
+        <owl:someValuesFrom>
+          <owl:Class rdf:ID="service_providing"/>
+        </owl:someValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="consumer-complaint">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >consumer complaint" means a statement, supported by reasonable evidence, that a seller or supplier has committed, or is likely to commit, an infringement of the laws that protect consumers' interests</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="has_object"/>
+        </owl:onProperty>
+        <owl:someValuesFrom>
+          <owl:Class rdf:ID="infringment"/>
+        </owl:someValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#normative-position"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="advertising">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >the making of a representation in any form in connection with a trade, business, craft or profession in order to promote the supply of goods or services, including immovable property, rights and obligations(1984/450)</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+              <owl:Class rdf:ID="consumer_goods"/>
+              <owl:Class rdf:ID="services"/>
+              <owl:Class rdf:about="#immovable_property"/>
+            </owl:unionOf>
+          </owl:Class>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#isAbout"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="activities"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#natural_person">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#physical_agent"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Legal_Subject"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="#creditor"/>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#hasRole"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="raw_material">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Physical_Object"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="movable-object"/>
+    </rdfs:subClassOf>
+    <owl:disjointWith>
+      <owl:Class rdf:ID="product"/>
+    </owl:disjointWith>
+  </owl:Class>
+  <owl:Class rdf:ID="price">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+              <owl:Class rdf:about="#services"/>
+              <owl:Class rdf:about="#consumer_goods"/>
+              <owl:Class rdf:about="#immovable_property"/>
+            </owl:unionOf>
+          </owl:Class>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#isAbout"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Economic_Concept"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="operator-of-a_means-of-communication">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >means any public or private natural or legal person whose trade, business or profession involves making one or more means of distance communication available to suppliers 1993-13</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="commercial_communication"/>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#isParticipantIn"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="supplier"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#time-interval">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.loa-cnr.it/ontologies/DUL.owl#TimeInterval"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="temporal-region"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="damage">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Legal_Situation"/>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >damage 
+(a) damage caused by death or by personal injuries; (b) damage to, or destruction of, any item of property other than the defective product itself, with a lower threshold of 500 ECU, provided that the item of property: (i) is of a type ordinarily intended for private use or consumption, and (ii) was used by the injured person mainly for his own private use or consumption (1985/374)</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="away_from_business_premises">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="spatial-region"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="competent-authority">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >means any public authority established either at national, regional or local level with specific responsibilities to enforce the laws that protect consumers' interests Reg.2006/2004</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#consumer_law-authority"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="sale-contract">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class>
+            <owl:intersectionOf rdf:parseType="Collection">
+              <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                  <owl:Class rdf:ID="buyer"/>
+                  <owl:Class rdf:ID="consumer"/>
+                </owl:unionOf>
+              </owl:Class>
+              <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                  <owl:Class rdf:ID="organizer"/>
+                  <owl:Class rdf:ID="producer"/>
+                  <owl:Class rdf:ID="seller"/>
+                  <owl:Class rdf:about="#supplier"/>
+                  <owl:Class rdf:ID="trader"/>
+                </owl:unionOf>
+              </owl:Class>
+            </owl:intersectionOf>
+          </owl:Class>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#hasParticipant"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#definesRole"/>
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:intersectionOf rdf:parseType="Collection">
+              <owl:Class rdf:about="#consumer"/>
+              <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                  <owl:Class rdf:about="#organizer"/>
+                  <owl:Class rdf:about="#seller"/>
+                </owl:unionOf>
+              </owl:Class>
+            </owl:intersectionOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#has_object"/>
+        </owl:onProperty>
+        <owl:someValuesFrom>
+          <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+              <owl:Class rdf:about="#product"/>
+              <owl:Class rdf:about="#service_providing"/>
+            </owl:unionOf>
+          </owl:Class>
+        </owl:someValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="contract"/>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >contratto: l'accordo che lega il consumatore all'organizzatore e/o al venditore. 1990/314</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="e_commerce_contract">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="digital_means_of_communication"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="is-concludeby"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="distance-contract"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#consumer_law-authority">
+    <rdfs:subClassOf rdf:resource="#legal-person"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Region">
+    <owl:disjointWith>
+      <owl:Class rdf:about="#activities"/>
+    </owl:disjointWith>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.loa-cnr.it/ontologies/DUL.owl#Region"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </owl:Class>
+  <owl:Class rdf:ID="leasing_contract">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#contract"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.loa-cnr.it/ontologies/IOLite.owl#DigitalResource"/>
+  <owl:Class rdf:ID="unit-price">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >unit price 
+the final price, including VAT and all other taxes, for one kilogramme, one litre, one metre, one square metre or one cubic metre of the product or a different single unit of quantity which is widely and customarily used in the Member State concerned in the marketing of specific products 1998/6</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="#price"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Economic_Concept">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.loa-cnr.it/ontologies/DUL.owl#SocialObject"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="#Legal_Situation"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="is-a-component-of"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#social_object"/>
+  </owl:Class>
+  <owl:Class rdf:ID="consumer-protection">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="legal-effect"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Physical_Object">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.loa-cnr.it/ontologies/DUL.owl#PhysicalObject"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.loa-cnr.it/ontologies/DUL.owl#PhysicalAgent"/>
+  <owl:Class rdf:ID="selling-price">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1998/6
+selling price 
+the final price for a unit of the product, or a given quantity of the product, including VAT and all other taxes</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="#price"/>
+  </owl:Class>
+  <owl:Class rdf:ID="quality_region">
+    <rdfs:subClassOf rdf:resource="#Region"/>
+  </owl:Class>
+  <owl:Class rdf:ID="legal_concept">
+    <rdfs:subClassOf rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#SocialObject"/>
+    <rdfs:subClassOf rdf:resource="#social_object"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >any entity whose social existence depends on legal rules</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="#Legal_Situation">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Legal Facts (including cases) are situations depending on norms (only facts relevant for legal systems are legal facts). Legal facts may include Natural Facts (e.g. a death), which are dependent on phenomena, but not on (inherently intentional) human actions. On the other hand, Human Facts depend on conscious intentional human ac-tions. Human facts include: i) Institutional Facts, which are the legal counterpart of natural phenomena, being directly created by the application of constitutive norms, ii) Legal Acts, which depend on the will of some legal agent, iii) Legal Transactions, which depend on the intentionality of some legal agent.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="#legal_concept"/>
+    <rdfs:subClassOf rdf:resource="http://www.loa-cnr.it/ontologies/CLO/CoreLegal.owl#LegalFact"/>
+  </owl:Class>
+  <owl:Class rdf:ID="total-cost-of-the-credit-to-the-consumer">
+    <rdfs:subClassOf rdf:resource="#price"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >total cost of the credit to the consumer 
+all the costs of the credit including interest and other charges directly connected with the credit agreement, determined in accordance with the provisions or practices existing in, or to be established by, the Member States 1987/102)</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="market_survellance-activities">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="collective_interests_of_consumers"/>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#hasTask"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/CLO/NormativePositions.owl#hasPowerTowards"/>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="#collective_interests_of_consumers"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#activities"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#consumer_law-authority"/>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#hasParticipant"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >means the actions of a competent authority designed to detect whether intra-Community infringements have taken place within its territory;(2006/2004)</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="finished_product">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#product"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#spatial-region">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.loa-cnr.it/ontologies/DUL.owl#SpaceRegion"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#Region"/>
+  </owl:Class>
+  <owl:Class rdf:ID="supplier_of_a_means_of_distance_communication">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#supplier"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="three-years-period">
+    <rdfs:subClassOf rdf:resource="#time-interval"/>
+  </owl:Class>
+  <owl:Class rdf:ID="misleading_advertising">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >any advertising which in any way, including its presentation, deceives or is likely to deceive the persons to whom it is addressed or whom it reaches and which, by reason of its deceptive nature, is likely to affect their economic behaviour or which, for those reasons, injures or is likely to injure a competitor 450/1984</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="#Legal_Situation"/>
+    <rdfs:subClassOf rdf:resource="#advertising"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="#Legal_Role"/>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#isTaskOf"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+              <owl:Class rdf:about="#seller"/>
+              <owl:Class rdf:about="#producer"/>
+              <owl:Class rdf:about="#supplier"/>
+              <owl:Class rdf:ID="professional"/>
+              <owl:Class rdf:about="#trader"/>
+            </owl:unionOf>
+          </owl:Class>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/CLO/NormativePositions.owl#isLiabilityTargetOf"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#legal-effect">
+    <rdfs:subClassOf rdf:resource="#legal_concept"/>
+  </owl:Class>
+  <owl:Class rdf:ID="unfair-terms">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1993/13
+
+unfair terms 
+the contractual terms defined in Article</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="#Legal_Situation"/>
+  </owl:Class>
+  <owl:Class rdf:ID="refund">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#normative-position"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#digital_means_of_communication">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="means-of-distance-communication"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="intra-Community_infringement">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >means any act or omission contrary to the laws that protect consumers' interests, as defined in (a), that harms, or is likely to harm, the collective interests of consumers residing in a Member State or Member States other than the Member State where the act or omission originated or took place; or where the responsible seller or supplier is established; or where evidence or assets pertaining to the act or omission are to be found. Reg.2006/2004</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#infringment"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#credit-agreement">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#hasParticipant"/>
+        <owl:someValuesFrom>
+          <owl:Class>
+            <owl:intersectionOf rdf:parseType="Collection">
+              <owl:Class rdf:about="#creditor"/>
+              <owl:Class rdf:about="#consumer"/>
+            </owl:intersectionOf>
+          </owl:Class>
+        </owl:someValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:ID="financial-service"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#has_object"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#definesRole"/>
+        <owl:someValuesFrom rdf:resource="#creditor"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#contract"/>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >credit agreement 
+an agreement whereby a creditor grants or promises to grant to a consumer a credit in the form of a deferred payment, a loan or other similar financial accommodation. Agreements for the provision on a continuing basis of a service or a utility, where the consumer has the right to pay for them, for the duration of their provision, by means of instalments, are not deemed to be credit agreements for the purpose of this Directive (1987/102)</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.loa-cnr.it/ontologies/DUL.owl#ContractText"/>
+  <owl:Class rdf:about="#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#three-years-period"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="has-duration"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#sale-contract"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >hereinafter referred to as 'contract`, shall mean any contract or group of contracts concluded for at least three years under which, directly or indirectly, on payment of a certain global price, a real property right or any other right relating to the use of one or more immovable properties for a specified or specifiable period of the year, which may not be less than one week, is established or is the subject of a transfer or an undertaking to transfer, 1994/47</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="legal-document">
+    <rdfs:subClassOf rdf:resource="http://www.loa-cnr.it/ontologies/CLO/CoreLegal.owl#LegalDocument"/>
+  </owl:Class>
+  <owl:Class rdf:about="#movable-object">
+    <rdfs:subClassOf rdf:resource="#Physical_Object"/>
+  </owl:Class>
+  <owl:Class rdf:about="#trader">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Legal_Role"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="products_sold_in_bulk_">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#product"/>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >products which are not pre-packaged and are measured in the presence of the consumer</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="competent_official">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="member-of"/>
+        </owl:onProperty>
+        <owl:someValuesFrom rdf:resource="#consumer_law-authority"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#legal-person"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >means an official of a competent authority designated as responsible for the application of this Regulation; REg.2004/2006</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="#seller">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Legal_Role"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#isParticipantIn"/>
+        <owl:allValuesFrom rdf:resource="#sale-contract"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Legal_Role">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A role defined by legal rules played by a legal Agent</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://www.loa-cnr.it/ontologies/CLO/CoreLegal.owl#LegalRole"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+              <owl:Class rdf:ID="Commercial_transaction"/>
+              <owl:Class rdf:about="#advertising"/>
+              <owl:Class rdf:about="#market_survellance-activities"/>
+              <owl:Class rdf:about="#service_providing"/>
+            </owl:unionOf>
+          </owl:Class>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="acts_in"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#legal_concept"/>
+  </owl:Class>
+  <owl:Class rdf:ID="consumer_credit">
+    <rdfs:subClassOf rdf:resource="#credit-agreement"/>
+  </owl:Class>
+  <owl:Class rdf:ID="temporal-use">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="right_to_use_immovable_properties"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Commercial_transaction">
+    <rdfs:subClassOf rdf:resource="#Legal_Situation"/>
+  </owl:Class>
+  <owl:Class rdf:about="#service_providing">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#activities"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class>
+            <owl:intersectionOf rdf:parseType="Collection">
+              <owl:Class rdf:about="#service_provider"/>
+              <owl:Class rdf:ID="recipient-of-the-service"/>
+            </owl:intersectionOf>
+          </owl:Class>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#hasParticipant"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="corrispondence_to_alleged_quality">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Quality"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="durable-medium">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="#commercial_communication"/>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#isParticipantIn"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.loa-cnr.it/ontologies/DUL.owl#PhysicalArtifact"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#movable-object"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >durable medium 
+any instrument which enables the consumer to store information addressed personally to him in a way accessible for future reference for a period of time adequate for the purposes of the information and which allows the unchanged reproduction of the information stored</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="hiring_contract">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#contract"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#financial-service">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#services"/>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >any service of a banking, credit, insurance, personal pension, investment or payment nature</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="annual-percentage-rate-of-charge">
+    <rdfs:subClassOf rdf:resource="#Economic_Concept"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >the total cost of the credit to the consumer expressed as an annual percentage of the amount of the credit granted and calculated according to existing methods of the Member States(1987/102)</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="#temporal-region">
+    <rdfs:subClassOf rdf:resource="#Region"/>
+  </owl:Class>
+  <owl:Class rdf:about="#activities">
+    <owl:disjointWith rdf:resource="#Region"/>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#Legal_Subject"/>
+    </owl:disjointWith>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.loa-cnr.it/ontologies/DUL.owl#Action"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Event"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#infringment">
+    <rdfs:subClassOf rdf:resource="#Legal_Situation"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1998/27
+infringement 
+any act contrary to the Directives listed in the Annex as transposed into the internal legal order of the Member States which harms the collective interests referred to in paragraph</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="access_to_supply">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/CLO/NormativePositions.owl#isRightTargetOf"/>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="#consumer"/>
+        </owl:someValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#normative-position"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Quality">
+    <rdfs:subClassOf rdf:resource="http://www.loa-cnr.it/ontologies/CLO/CoreLegal.owl#LegalQuality"/>
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </owl:Class>
+  <owl:Class rdf:about="#services">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="is_object_of"/>
+        </owl:onProperty>
+        <owl:someValuesFrom rdf:resource="#service_providing"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#Economic_Concept"/>
+  </owl:Class>
+  <owl:Class rdf:ID="coordinated_field">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="laws_that_protect_consumers_interests"/>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >requirements laid down in Member States' legal systems applicable to information society service providers or information society services, regardless of whether they are of a general nature or specifically designed for them 2000- 31</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="#producer">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >the manufacturer of a finished product, the producer of any raw material or the manufacturer of a component part and any person who, by putting his name, trade mark or other distinguishing feature on the product presents himself as its producer. 2. Without prejudice to the liability of the producer, any person who imports into the Community a product for sale, hire, leasing or any form of distribution in the course of his business shall be deemed to be a producer within the meaning of this Directive and shall be responsible as a producer 1985-374</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="#Legal_Role"/>
+  </owl:Class>
+  <owl:Class rdf:about="#organizer">
+    <rdfs:subClassOf rdf:resource="#Legal_Role"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="#service_providing"/>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#isParticipantIn"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="agricultural_products">
+    <rdfs:subClassOf rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#PhysicalObject"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#product"/>
+    </rdfs:subClassOf>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#product"/>
+    </owl:disjointWith>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Primary_agricultural_products: the products of the soil, of stock-farming and of fisheries, excluding products which have undergone initial processing</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="#buyer">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/CLO/NormativePositions.owl#hasRightTowards"/>
+        <owl:someValuesFrom>
+          <owl:Class>
+            <owl:intersectionOf rdf:parseType="Collection">
+              <owl:Class rdf:about="#access_to_supply"/>
+              <owl:Class rdf:about="#withdrawal-right"/>
+              <owl:Class rdf:ID="damage_compensation"/>
+            </owl:intersectionOf>
+          </owl:Class>
+        </owl:someValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="has-buyer-role_1"/>
+        </owl:onProperty>
+        <owl:someValuesFrom rdf:resource="#Commercial_transaction"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#isRoleOf"/>
+        <owl:allValuesFrom rdf:resource="#natural_person"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#Legal_Role"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#sale-contract"/>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#isRoleDefinedIn"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#isParticipantIn"/>
+        <owl:someValuesFrom rdf:resource="#sale-contract"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#means-of-distance-communication">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#isParticipantIn"/>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="#commercial_communication"/>
+        </owl:someValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#PhysicalArtifact"/>
+    <rdfs:subClassOf rdf:resource="#movable-object"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >any means which, without the simultaneous physical presence of the supplier and the consumer, may be used for the conclusion of a contract between those parties. An indicative list of the means covered by this Directive is contained in Annex I</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="information_object">
+    <rdfs:subClassOf rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#InformationObject"/>
+    <rdfs:subClassOf rdf:resource="#social_object"/>
+  </owl:Class>
+  <owl:Class rdf:about="#commercial_communication">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >any form of communication designed to promote, directly or indirectly, the goods, services or image of a company, organisation or person pursuing a commercial, industrial or craft activity or exercising a regulated profession. The following do not in themselves constitute commercial communications: - information allowing direct access to the activity of the company, organisation or person, in particular a domain name or an electronic-mail address, - communications relating to the goods, services or image of the company, organisation or person compiled in an independent manner, particularly when this is without financial consideration</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="#advertising"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Legal_Subject">
+    <owl:disjointWith rdf:resource="#activities"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >any natural or legal person</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="#legal_concept"/>
+    <rdfs:subClassOf rdf:resource="http://www.loa-cnr.it/ontologies/CLO/CoreLegal.owl#LegalSubject"/>
+  </owl:Class>
+  <owl:Class rdf:about="#normative-position">
+    <rdfs:subClassOf rdf:resource="http://www.loa-cnr.it/ontologies/CLO/NormativePositions.owl#LegalModalDescription"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="norm"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#professional">
+    <rdfs:subClassOf rdf:resource="#Legal_Role"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:ID="regulated_profession"/>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#isParticipantIn"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#consumer">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/CLO/NormativePositions.owl#hasRightTowards"/>
+        <owl:someValuesFrom>
+          <owl:Class>
+            <owl:intersectionOf rdf:parseType="Collection">
+              <owl:Class rdf:about="#withdrawal-right"/>
+              <owl:Class rdf:about="#damage_compensation"/>
+              <owl:Class rdf:about="#consumer-complaint"/>
+            </owl:intersectionOf>
+          </owl:Class>
+        </owl:someValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+              <owl:Class rdf:about="#sale-contract"/>
+              <owl:Class rdf:about="#credit-agreement"/>
+              <owl:Class rdf:about="#hiring_contract"/>
+              <owl:Class rdf:about="#hiring_contract"/>
+            </owl:unionOf>
+          </owl:Class>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#isRoleDefinedIn"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="#access_to_supply"/>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/CLO/NormativePositions.owl#hasRightTowards"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#natural_person"/>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#isRoleOf"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#Legal_Role"/>
+  </owl:Class>
+  <owl:Class rdf:ID="defectiveness">
+    <rdfs:subClassOf rdf:resource="#Quality"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#isQualityOf"/>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="#product"/>
+        </owl:someValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#norm">
+    <rdfs:subClassOf rdf:resource="http://www.loa-cnr.it/ontologies/CLO/CoreLegal.owl#LegalNorm"/>
+    <rdfs:subClassOf rdf:resource="#legal_concept"/>
+  </owl:Class>
+  <owl:Class rdf:about="#damage_compensation">
+    <rdfs:subClassOf rdf:resource="#normative-position"/>
+  </owl:Class>
+  <owl:Class rdf:ID="all-inclusive-service">
+    <rdfs:subClassOf rdf:resource="#services"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >servizio tutto compreso: la prefissata combinazione di almeno due degli elementi in appresso, venduta o offerta in vendita ad un prezzo forfettario, laddove questa prestazione superi le 24 ore o comprenda una notte: 82000/319</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="applicant_authority">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >means the competent authority that makes a request for mutual assistance;</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="#consumer_law-authority"/>
+  </owl:Class>
+  <owl:Class rdf:ID="legal-procedure">
+    <rdfs:subClassOf rdf:resource="#legal_concept"/>
+    <rdfs:subClassOf rdf:resource="#activities"/>
+    <rdfs:subClassOf rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#Process"/>
+  </owl:Class>
+  <owl:Class rdf:about="#recipient-of-the-service">
+    <rdfs:subClassOf rdf:resource="#Legal_Role"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#isParticipantIn"/>
+        <owl:someValuesFrom rdf:resource="#service_providing"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#collective_interests_of_consumers">
+    <rdfs:subClassOf rdf:resource="#normative-position"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >means the interests of a number of consumers that have been harmed or are likely to be harmed by an infringement. 2004/2006</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="guarantee">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#has_object"/>
+        </owl:onProperty>
+        <owl:someValuesFrom rdf:resource="#Quality"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/CLO/CoreLegal.owl#isObligationTargetOf"/>
+        <owl:someValuesFrom rdf:resource="#refund"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#contract"/>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >any undertaking by a seller or producer to the consumer, given without extra charge, to reimburse the price paid or to replace, repair or handle consumer goods in any way if they do not meet the specifications set out in the guarantee statement or in the relevant advertising- 1999-44</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="#product">
+    <owl:disjointWith rdf:resource="#raw_material"/>
+    <owl:disjointWith rdf:resource="#agricultural_products"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="#advertising"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#is_object_of"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#hasQuality"/>
+        <owl:someValuesFrom rdf:resource="#defectiveness"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#consumer_goods"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#hasQuality"/>
+        <owl:allValuesFrom rdf:resource="#Quality"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1985/374
+
+product 
+all movables, with the exception of primary agricultural products and game, even though incorporated into another movable or into an immovable; 'product' includes electricity</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="repair">
+    <rdfs:subClassOf rdf:resource="#Legal_Situation"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >in the event of lack of conformity, bringing consumer goods into conformity with the contract of sale 1999/44</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="information-society-services">
+    <rdfs:subClassOf rdf:resource="#services"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >services within the meaning of Article 1(2) of Directive 98/34/EC as amended by Directive 98/48/EC(200/31)</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="#laws_that_protect_consumers_interests">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#has_object"/>
+        </owl:onProperty>
+        <owl:someValuesFrom rdf:resource="#collective_interests_of_consumers"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#norm"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >means the Directives as transposed into the internal legal order of the Member States and the Regulations listed in the Annex 2006/2004</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="#consumer_goods">
+    <rdfs:subClassOf rdf:resource="#Economic_Concept"/>
+    <rdfs:subClassOf rdf:resource="#movable-object"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >consumer goods 
+any tangible movable item, with the exception of: - goods sold by way of execution or otherwise by authority of law, - water and gas where they are not put up for sale in a limited volume or set quantity, - electricity</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="#physical_agent">
+    <rdfs:subClassOf rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#PhysicalAgent"/>
+    <rdfs:subClassOf rdf:resource="#Physical_Object"/>
+  </owl:Class>
+  <owl:Class rdf:about="#right_to_use_immovable_properties">
+    <rdfs:subClassOf rdf:resource="http://www.loa-cnr.it/ontologies/CLO/NormativePositions.owl#LegalModalDescription"/>
+    <rdfs:subClassOf rdf:resource="#normative-position"/>
+  </owl:Class>
+  <owl:Class rdf:about="#contract">
+    <rdfs:subClassOf rdf:resource="http://www.loa-cnr.it/ontologies/CLO/CoreLegal.owl#LegalContract"/>
+    <rdfs:subClassOf rdf:resource="#norm"/>
+  </owl:Class>
+  <owl:Class rdf:about="#distance-contract">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#is-concludeby"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#means-of-distance-communication"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#sale-contract"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#hasLocation"/>
+        <owl:someValuesFrom rdf:resource="#away_from_business_premises"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#hasParticipant"/>
+        <owl:someValuesFrom>
+          <owl:Class>
+            <owl:intersectionOf rdf:parseType="Collection">
+              <owl:Class rdf:about="#consumer"/>
+              <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                  <owl:Class rdf:about="#operator-of-a_means-of-communication"/>
+                  <owl:Class rdf:about="#supplier_of_a_means_of_distance_communication"/>
+                </owl:unionOf>
+              </owl:Class>
+            </owl:intersectionOf>
+          </owl:Class>
+        </owl:someValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >distance contract 
+means any contract concerning goods or services concluded between a supplier and a consumer under an organized distance sales or service-provision scheme run by the supplier, who, for the purpose of the contract, makes exclusive use of one or more means of distance communication up to and including the moment at which the contract is concluded 1997/7</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="#regulated_profession">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >any profession within the meaning of either Article 1(d) of Council Directive 89/48/EEC of 21 December 1988 on a general system for the recognition of higher-education diplomas awarded on completion of professional education and training of at least three-years' duration(26) or of Article 1(f) of Council Directive 92/51/EEC of 18 June 1992 on a second general system for the recognition of professional education and training to supplement Directive 89/48/EEC(27).  2000/31</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="#activities"/>
+  </owl:Class>
+  <owl:Class rdf:about="#supplier">
+    <rdfs:subClassOf rdf:resource="#Legal_Role"/>
+  </owl:Class>
+  <owl:ObjectProperty rdf:ID="has-seller-role">
+    <rdfs:subPropertyOf rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#hasRole"/>
+    <rdfs:domain rdf:resource="#Legal_Subject"/>
+    <rdfs:range>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.loa-cnr.it/ontologies/DUL.owl#Role"/>
+          <owl:Class rdf:about="#organizer"/>
+          <owl:Class rdf:about="#producer"/>
+          <owl:Class rdf:about="#professional"/>
+          <owl:Class rdf:about="#service_provider"/>
+          <owl:Class rdf:about="#seller"/>
+          <owl:Class rdf:about="#supplier"/>
+          <owl:Class rdf:about="#trader"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:range>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="inverse_of_has-buyer-role_1_2"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#member-of">
+    <rdfs:domain rdf:resource="#Legal_Subject"/>
+    <rdfs:range rdf:resource="#Legal_Subject"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="has-member"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="deceives">
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:ID="affect"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#is-concludeby">
+    <rdfs:subPropertyOf rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#isRealizedBy"/>
+    <rdfs:range rdf:resource="http://www.loa-cnr.it/ontologies/IOLite.owl#DigitalResource"/>
+    <rdfs:domain rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#ContractText"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="is_acted_in">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#acts_in"/>
+    </owl:inverseOf>
+    <rdfs:range rdf:resource="#Legal_Role"/>
+    <rdfs:domain rdf:resource="#Legal_Situation"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="inverse_of_isParticipantIn_1">
+    <rdfs:subPropertyOf rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#hasParticipant"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="buy"/>
+    </owl:inverseOf>
+    <rdfs:domain rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#Event"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="inverse_of_hasParameter_3">
+    <rdfs:subPropertyOf rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#isParameterFor"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#has-member">
+    <rdfs:range rdf:resource="#Legal_Subject"/>
+    <rdfs:domain rdf:resource="#Legal_Subject"/>
+    <owl:inverseOf rdf:resource="#member-of"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#has-duration">
+    <rdfs:subPropertyOf rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#hasValue"/>
+    <rdfs:range>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="http://www.loa-cnr.it/ontologies/DUL.owl#Region"/>
+          <owl:Class rdf:about="#Region"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:range>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#contract"/>
+          <rdf:Description rdf:about="http://www.loa-cnr.it/ontologies/DUL.owl#Entity"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#is-duration-of"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="is-composed-of">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#is-a-component-of"/>
+    </owl:inverseOf>
+    <rdfs:domain rdf:resource="#Economic_Concept"/>
+    <rdfs:range rdf:resource="#Economic_Concept"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#is-duration-of">
+    <rdfs:subPropertyOf rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#isValueOf"/>
+    <owl:inverseOf rdf:resource="#has-duration"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="http://www.loa-cnr.it/ontologies/DUL.owl#Region"/>
+          <owl:Class rdf:about="#Region"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#contract"/>
+          <rdf:Description rdf:about="http://www.loa-cnr.it/ontologies/DUL.owl#Entity"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:range>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="inverse_of_isRealizedBy_1">
+    <rdfs:subPropertyOf rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#realizes"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#inverse_of_has-buyer-role_1_2">
+    <owl:inverseOf rdf:resource="#has-seller-role"/>
+    <rdfs:range rdf:resource="#Legal_Subject"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.loa-cnr.it/ontologies/DUL.owl#Role"/>
+          <owl:Class rdf:about="#organizer"/>
+          <owl:Class rdf:about="#producer"/>
+          <owl:Class rdf:about="#professional"/>
+          <owl:Class rdf:about="#service_provider"/>
+          <owl:Class rdf:about="#seller"/>
+          <owl:Class rdf:about="#supplier"/>
+          <owl:Class rdf:about="#trader"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:ID="inverse_of_hasRole_1"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="constitutes">
+    <rdfs:range rdf:resource="#right_to_use_immovable_properties"/>
+    <rdfs:domain rdf:resource="#sale-contract"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#is_object_of">
+    <rdfs:range rdf:resource="#sale-contract"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#product"/>
+          <owl:Class rdf:about="#service_providing"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#has_object"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#is-a-component-of">
+    <owl:inverseOf rdf:resource="#is-composed-of"/>
+    <rdfs:domain rdf:resource="#Economic_Concept"/>
+    <rdfs:range rdf:resource="#Economic_Concept"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#buy">
+    <owl:inverseOf rdf:resource="#inverse_of_isParticipantIn_1"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#isParticipantIn"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#has-buyer-role_1">
+    <rdfs:domain rdf:resource="#natural_person"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#inverse_of_hasRole_1"/>
+    </owl:inverseOf>
+    <rdfs:subPropertyOf rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#hasRole"/>
+    <rdfs:range>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.loa-cnr.it/ontologies/DUL.owl#Role"/>
+          <owl:Class rdf:about="#buyer"/>
+          <owl:Class rdf:about="#creditor"/>
+          <owl:Class rdf:about="#recipient-of-the-service"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:range>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#affect">
+    <rdfs:domain rdf:resource="#activities"/>
+    <rdfs:range rdf:resource="#Legal_Subject"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#acts_in">
+    <owl:inverseOf rdf:resource="#is_acted_in"/>
+    <rdfs:range rdf:resource="#Legal_Situation"/>
+    <rdfs:domain rdf:resource="#Legal_Role"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#has_object">
+    <rdfs:domain rdf:resource="#sale-contract"/>
+    <rdfs:range>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#product"/>
+          <owl:Class rdf:about="#service_providing"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:range>
+    <owl:inverseOf rdf:resource="#is_object_of"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#inverse_of_hasRole_1">
+    <rdfs:subPropertyOf rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#isRoleOf"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.loa-cnr.it/ontologies/DUL.owl#Role"/>
+          <owl:Class rdf:about="#buyer"/>
+          <owl:Class rdf:about="#creditor"/>
+          <owl:Class rdf:about="#recipient-of-the-service"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="#natural_person"/>
+    <owl:inverseOf rdf:resource="#has-buyer-role_1"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="is-regulated_by">
+    <rdfs:subPropertyOf rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#satisfies"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="regulates"/>
+    </owl:inverseOf>
+    <rdfs:domain rdf:resource="#Legal_Situation"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#regulates">
+    <owl:inverseOf rdf:resource="#is-regulated_by"/>
+    <rdfs:range rdf:resource="#Legal_Situation"/>
+  </owl:ObjectProperty>
+  <owl:SymmetricProperty rdf:ID="has-value">
+    <owl:inverseOf rdf:resource="#has-value"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.loa-cnr.it/ontologies/DUL.owl#Entity"/>
+          <owl:Class rdf:about="#contract"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#Region"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#hasValue"/>
+  </owl:SymmetricProperty>
+  <buyer rdf:ID="buyer_1">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >la persona fisica a cui, nelle transazioni contemplate dalla presente direttiva, per scopi che si possono considerare estranei alla sua attivita professionale, viene trasferito il diritto oggetto del contratto, o a favore della quale è costituito il diritto oggetto del contratto.(1994/47)</rdfs:comment>
+  </buyer>
+  <supplier rdf:ID="supplier_1">
+    <rdf:type rdf:resource="#seller"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >any natural or legal person who, in contracts covered by this Directive, is acting for purposes relating to his trade, business or profession, whether publicly owned or privately owne(1993/16)</rdfs:comment>
+  </supplier>
+  <organizer rdf:ID="organizzatore">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >organizzatore: la persona che organizza in modo non occasionale servizi tutto compreso e li vende o li offre in vendita direttamente o tramite un venditore; 1990/314</rdfs:comment>
+  </organizer>
+  <time-interval rdf:ID="durata_indeterminata"/>
+  <activities rdf:ID="attivita"/>
+  <supplier rdf:ID="supplier_2">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >means any natural or legal person who, in contracts covered by this Directive, is acting in his commercial or professional capacity(1997/7)</rdfs:comment>
+  </supplier>
+  <activities rdf:ID="pratiche_commerciali"/>
+  <activities rdf:ID="applicazione"/>
+  <Legal_Role rdf:ID="fornitore"/>
+  <agricultural_products rdf:ID="prodotti"/>
+  <service_provider rdf:ID="service_provider_37">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >any natural or legal person providing an information society service(2000/31)</rdfs:comment>
+  </service_provider>
+  <supplier rdf:ID="supplier_3">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >any natural or legal person, public or private, who, acting in his commercial or professional capacity, is the contractual provider of services subject to distance contracts(2002/65)</rdfs:comment>
+  </supplier>
+  <supplier rdf:ID="supplier_4">
+    <rdf:type rdf:resource="#seller"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >seller or supplier" means any natural or legal person who, in respect of the laws that protect consumers' interests, is acting for purposes relating to his trade, business, craft or profession;(Reg. 2006/2004)</rdfs:comment>
+  </supplier>
+  <professional rdf:ID="professional_1">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></rdfs:comment>
+  </professional>
+  <service_providing rdf:ID="servizi"/>
+  <Economic_Concept rdf:ID="conto"/>
+  <activities rdf:ID="accesso_"/>
+  <seller rdf:ID="seller_2">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >la persona fisica o giuridica che, nelle transazioni contemplate dalle presente direttiva e nell'ambito della sua attivita professionale, costituisce, trasferisce o s'impegna a trasferire il diritto oggetto del contratto;(1994/47)</rdfs:comment>
+  </seller>
+  <operator-of-a_means-of-communication rdf:ID="operator_of_a_means_of_communications">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >operator or supplier of a means of distance communication 
+any public or private, natural or legal person whose trade, business or profession involves making one or more means of distance communication available to suppliers</rdfs:comment>
+  </operator-of-a_means-of-communication>
+  <legal-person rdf:ID="legal-person_12"/>
+  <Legal_Role rdf:ID="membro"/>
+  <advertising rdf:ID="pubblicita"/>
+  <spatial-region rdf:ID="distanza"/>
+  <trader rdf:ID="trader_1">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >any natural or legal person who sells or offers for sale products which fall within his commercial or professional activity
+(1988/6)
+)</rdfs:comment>
+  </trader>
+  <Legal_Role rdf:ID="parte"/>
+  <consumer rdf:ID="consumer_2">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >any natural person who buys a product for purposes that do not fall within the sphere of his commercial or professional activity
+(1998/6)</rdfs:comment>
+  </consumer>
+  <trader rdf:ID="trader_2">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >a natural or legal person who, for the transaction in question, acts in his commercial or professional capacity, and anyone acting in the name or on behalf of a trader(1985/577)</rdfs:comment>
+  </trader>
+  <recipient-of-the-service rdf:ID="recipient-of-the-service_40">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >any natural or legal person who, for professional ends or otherwise, uses an information society service, in particular for the purposes of seeking information or making it accessible(2000/31)</rdfs:comment>
+  </recipient-of-the-service>
+  <producer rdf:ID="producer_2">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1999/44 the manufacturer of consumer goods, the importer of consumer goods into the territory of the Community or any person purporting to be a producer by placing his name, trade mark or other distinctive sign on the consumer goods</rdfs:comment>
+  </producer>
+  <legal-person rdf:ID="autorita"/>
+  <Economic_Concept rdf:ID="mercato"/>
+  <Legal_Role rdf:ID="venditore"/>
+  <natural_person rdf:ID="persona_fisica"/>
+  <Economic_Concept rdf:ID="credito"/>
+  <activities rdf:ID="activities_7"/>
+  <contract rdf:ID="legal-transaction_1"/>
+  <supplier_of_a_means_of_distance_communication rdf:ID="supplier_of_a_means_of_distance_communication_29">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >operator or supplier of a means of distance communication 
+any public or private, natural or legal person whose trade, business or profession involves making one or more means of distance communication available to suppliers(1998/6)</rdfs:comment>
+  </supplier_of_a_means_of_distance_communication>
+  <temporal-region rdf:ID="temporal-region_49"/>
+  <Economic_Concept rdf:ID="prezzo"/>
+  <time-interval rdf:ID="termine"/>
+  <price rdf:ID="tasso_di_interesse"/>
+  <creditor rdf:ID="creditor_1">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >a natural or legal person who grants credit in the course of his trade, business or profession, or a group of such persons(1987/2)</rdfs:comment>
+  </creditor>
+  <activities rdf:ID="comunicazione"/>
+  <service_provider rdf:ID="established-_service_provider_38">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >a service provider who effectively pursues an economic activity using a fixed establishment for an indefinite period. The presence and use of the technical means and technologies required to provide the service do not, in themselves, constitute an establishment of the provider</rdfs:comment>
+  </service_provider>
+  <consumer rdf:ID="consumer-1">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >a natural person who, in transactions covered by this Directive, is acting for purposes which can be regarded as outside his trade or profession (1985/577; 1987/102; 1993/13; 1997/7; 1999/449
+;200/31; 2002/65)</rdfs:comment>
+  </consumer>
+  <trader rdf:ID="trader_3">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >any natural or legal person who sells or offers for sale products which fall within his commercial or professional activity(1998/6</rdfs:comment>
+  </trader>
+  <consumer rdf:ID="all-inclusive-consumer">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >la persona che acquista o si impegna ad acquistare servizi tutto compreso (« il contraente principale ») o qualsiasi persona per conto della quale il contraente principale si impegna ad acquistare servizi tutto compreso (« gli altri beneficiari ») o qualsiasi persona cui il contraente principale o uno degli altri beneficiari cede i servizi tutto compreso (« il cessionario »); (1990/314)</rdfs:comment>
+  </consumer>
+  <Legal_Role rdf:ID="consumatore"/>
+  <Legal_Role rdf:ID="prestatore"/>
+  <seller rdf:ID="seller-3">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >venditore: la persona che vende o offre in vendita servizi tutto compreso proposti dall'organizzatore(1990/314)</rdfs:comment>
+  </seller>
+  <contract rdf:ID="vendita"/>
+  <rdf:Description rdf:about="http://www.loa-cnr.it/ontologies/IOLite.owl#reproducedBy">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#contract"/>
+          <rdf:Description rdf:about="http://www.loa-cnr.it/ontologies/DUL.owl#Entity"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#Region"/>
+  </rdf:Description>
+  <Legal_Role rdf:ID="professionista"/>
+  <time-interval rdf:ID="giorno"/>
+  <Economic_Concept rdf:ID="interessi"/>
+  <producer rdf:ID="producer-1">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >(1985/374)il fabbricante di un prodotto finito, il produttore di una materia prima o il fabbricante di una parte componente, nonché ogni persona che, apponendo il proprio nome, marchi marchio o altro segno distintivo sul prodotto, si presenta come produttore dello stesso. 2. Senza pregiudizio della responsabilita del produttore, chiunque importi un prodotto nella Comunità europea ai fini della vendita, della locazione, del « leasing » o di qualsiasi altra forma di distribuzione nell'ambito della sua attivita commerciale, è considerato produttore del medesimo ai sensi della presente direttiva ed è responsabile allo stesso titolo del produttore</rdfs:comment>
+  </producer>
+</rdf:RDF>
+
+<!-- Created with Protege (with OWL Plugin 3.2.1, Build 365)  http://protege.stanford.edu -->

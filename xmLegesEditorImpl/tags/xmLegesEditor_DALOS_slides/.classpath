@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="/xmLegesCoreApi"/>
+	<classpathentry kind="src" path="/xmLegesEditorApi"/>
+	<classpathentry kind="lib" path="lib/dom4j-1.5.2.jar"/>
+	<classpathentry kind="lib" path="lib/jaxen-1.1-beta-4.jar"/>
+	<classpathentry kind="lib" path="lib/jdic/jdic.jar"/>
+	<classpathentry kind="lib" path="lib/commons-httpclient-3.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/jena.jar"/>
+	<classpathentry kind="lib" path="lib/antlr-2.7.5.jar"/>
+	<classpathentry kind="lib" path="lib/arq.jar"/>
+	<classpathentry kind="lib" path="lib/arq-extra.jar"/>
+	<classpathentry kind="lib" path="lib/concurrent.jar"/>
+	<classpathentry kind="lib" path="lib/icu4j_3_4.jar"/>
+	<classpathentry kind="lib" path="lib/iri.jar"/>
+	<classpathentry kind="lib" path="lib/jenatest.jar"/>
+	<classpathentry kind="lib" path="lib/json.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-core-2.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/stax-api-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/wstx-asl-3.0.0.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

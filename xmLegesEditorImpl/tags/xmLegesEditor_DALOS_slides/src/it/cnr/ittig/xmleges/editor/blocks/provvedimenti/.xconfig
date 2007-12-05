@@ -1,0 +1,177 @@
+<!-- ===========================================================================
+                TABELLA PROVVEDIMENTI
+                ---------------------
+- Una classe contiene più provvedimenti della stessa natura.
+- Un provvedimento compare una volta sola, ma può avere più template, 
+  secondo le combinazioni articolato (si/no) e numerato (si/no).
+- I provvedimenti senza template possono essere solo citati, ma non editati.
+
+<classe name=descrizione della natura del provvedimento nell'elenco di 1.o livello>
+    <provvedimento name=descrizione del provvedimento nell'elenco di 2.o livello
+	               emananti="SI|NO" (gestione emananti)>
+    	<urn>
+    		<atto>--tipo provvedimento da utilizzare nella urn--</atto>
+    		<citazione autorita="SI|NO">
+    		    --descrizione nella forma estesa della citazione--</citazione>
+    		<autorita>--espressione regolare per interrogare il registro autorita'--</autorita>
+    		<valore>--da utilizzare se l'atto ha una urn predefinita (es. Costituzione)--</valore>
+    	</urn>
+		<template tipo="Articolato|SemiArticolato" numerato="SI|NO"
+		          tag="tipo atto della DTD" nome="specificazione dell'atto generico">
+		    --nome file--</template>
+		<template tipo= ...>--nomefile--</template>
+    </provvedimento>
+</classe>
+=========================================================================== -->
+
+<!-- ================================================================ LEGGE -->
+<classe name="Legge">
+    <provvedimento name="Legge" emananti="NO">
+	    <urn>
+	        <atto>legge</atto>
+	        <citazione>legge</citazione>
+	        <autorita>=^stato$</autorita>
+	    </urn>
+	    <template tipo="Articolato" numerato="SI" tag="Legge">LEGGE.xml</template>
+    </provvedimento>
+</classe>
+<!-- ================================================= LEGGE COSTITUZIONALE -->
+<classe name="Legge costituzionale">
+    <provvedimento name="Legge corituzionale" emananti="NO">
+	    <urn>
+	        <atto>legge.costituzionale</atto>
+	        <citazione>legge costituzionale</citazione>
+	        <autorita>=^stato$</autorita>
+	    </urn>
+	    <template tipo="Articolato" numerato="SI" tag="Legge">LCOST.xml</template>
+    </provvedimento>
+</classe>
+<!-- ======================================================== DECRETO LEGGE -->
+<classe name="Decreto-legge">
+    <provvedimento name="Decreto-legge" emananti="NO">
+	    <urn>
+	        <atto>decreto.legge</atto>
+	        <citazione>decreto-legge</citazione>
+	        <autorita>=^stato$</autorita>
+	    </urn>
+	    <template tipo="Articolato" numerato="SI" tag="DecretoLegge">DL.xml</template>
+    </provvedimento>
+</classe>
+<!-- ================================================== DECRETO LEGISLATIVO -->
+<classe name="Decreto legislativo">
+    <provvedimento name="Decreto legislativo" emananti="NO">
+	    <urn>
+	        <atto>decreto.legislativo</atto>
+	        <citazione>decreto legislativo</citazione>
+	        <autorita>=^stato$</autorita>
+	    </urn>
+	    <template tipo="Articolato" numerato="SI" tag="DecretoLegislativo">DLGS.xml</template>
+    </provvedimento>
+</classe>
+<!-- ====================================================== LEGGE REGIONALE -->
+<classe name="Legge regionale">
+    <provvedimento name="Legge regionale" emananti="SI">
+	    <urn>
+	        <atto>legge</atto>
+	        <citazione>legge regionale</citazione>
+	        <autorita>=^regione.*</autorita>
+	    </urn>
+	    <template tipo="Articolato" numerato="SI" tag="LeggeRegionale">LR.xml</template>
+    </provvedimento>
+</classe>
+<!-- ============================================================= DECRETO  -->
+<classe name="Decreti">
+<!-- ******************************************************** DPR -->
+    <provvedimento name="Decreto Presidente Repubblica" emananti="NO">
+	    <urn>
+	        <atto>decreto</atto>
+	        <citazione>decreto del Presidente della Repubblica</citazione>
+	        <autorita>=^presidente\.repubblica$</autorita>
+	    </urn>
+	    <template tipo="Articolato" numerato="SI" tag="Dpr">DPR-Art.xml</template>
+	    <template tipo="Articolato" numerato="NO" tag="DprNN">DPR-ArtNN.xml</template>
+	    <template tipo="SemiArticolato" numerato="NO" tag="DprNN">DPR-SemiNN.xml</template>
+    </provvedimento>
+<!-- ******************************************************* DPCM -->
+    <provvedimento name="Decreto Presidente Consiglio Ministri" emananti="NO">
+	    <urn>
+	        <atto>decreto</atto>
+	        <citazione>decreto del Presidente del Consiglio dei Ministri</citazione>
+	        <autorita>=^presidente\.consiglio\.ministri$</autorita>
+	    </urn>
+	    <template tipo="Articolato" numerato="SI" tag="Dpcm">DPCM-Art.xml</template>
+	    <template tipo="Articolato" numerato="NO" tag="DpcmNN">DPCM-ArtNN.xml</template>
+	    <template tipo="SemiArticolato" numerato="NO" tag="DpcmNN">DPCM-SemiNN.xml</template>
+    </provvedimento>
+<!-- **************************************** DECRETO MINISTERIALE-->
+    <provvedimento name="Decreto Ministeriale" emananti="SI">
+	    <urn>
+	        <atto>decreto</atto>
+	        <citazione>Decreto Ministeriale</citazione>
+	        <autorita>=^ministe?ro.*</autorita>
+	    </urn>
+	    <template tipo="Articolato" numerato="SI" tag="DecretoMinisteriale">DM-Art.xml</template>
+	    <template tipo="Articolato" numerato="NO" tag="DecretoMinisterialeNN">DM-ArtNN.xml</template>
+	    <template tipo="SemiArticolato" numerato="NO" tag="DecretoMinisterialeNN">DM-SemiNN.xml</template>
+    </provvedimento>
+<!-- ********************************************** ALTRI DECRETI -->
+    <provvedimento name="Decreto di altre autorità" emananti="SI">
+	    <urn>
+	        <atto>decreto</atto>
+	        <citazione autorita=SI>Decreto</citazione>
+	        <autorita>!(^stato$|^presidente.*|^ministe?ro.*)</autorita>
+	    </urn>
+	    <template tipo="Articolato" tag="DocArticolato" nome="decreto">XX-Art.xml</template>
+	    <template tipo="SemiArticolato" tag="SemiArticolato" nome="decreto">XX-Semi.xml</template>
+    </provvedimento>
+</classe>
+<!-- ========================================================= COSTITUZIONE -->
+<classe name="Costituzione">
+    <provvedimento name="Costituzione" emananti="NO">
+	    <urn>
+	        <atto>costituzione</atto>
+	        <citazione>Costituzione</citazione>
+	        <autorita>=^stato$</autorita>
+	        <valore>urn:nir:stato:costituzione:1947-12-27;nir-1</valore>
+	    </urn>
+    </provvedimento>
+</classe>
+<!-- =============================================================== CODICI -->
+<classe name="Codici">
+<!-- ***************************************************** CIVILE -->
+    <provvedimento name="Codice civile" emananti="NO">
+	    <urn>
+	        <atto>codice.civile</atto>
+	        <citazione>codice civile</citazione>
+	        <autorita>=^stato$</autorita>
+	        <valore>urn:nir:stato:codice.civile:1942-03-16;262</valore>
+	    </urn>
+    </provvedimento>
+<!-- ***************************************************** PENALE -->
+    <provvedimento name="Codice penale" emananti="NO">
+	    <urn>
+	        <atto>codice.penale</atto>
+	        <citazione>codice penale</citazione>
+	        <autorita>=^stato$</autorita>
+	        <valore>urn:nir:stato:codice.penale:1930-10-19;1398</valore>
+	    </urn>
+    </provvedimento>
+<!-- ******************************************* PROCEDURA CIVILE -->
+    <provvedimento name="Codice procedura civile" emananti="NO">
+	    <urn>
+	        <atto>codice.procedura.civile</atto>
+	        <citazione>codice di procedura civile</citazione>
+	        <autorita>=^stato$</autorita>
+	        <valore>urn:nir:stato:codice.procedura.civile:1940-10-28;1443</valore>
+	    </urn>
+    </provvedimento>
+<!-- ******************************************* PROCEDURA PENALE -->
+    <provvedimento name="Codice procedura penale" emananti="NO">
+	    <urn>
+	        <atto>codice.procedura.penale</atto>
+	        <citazione>codice di procedura penale</citazione>
+	        <autorita>=^stato$</autorita>
+	        <valore>urn:nir:stato:codice.procedura.penale:1988-09-22;447</valore>
+	    </urn>
+    </provvedimento>
+</classe>
