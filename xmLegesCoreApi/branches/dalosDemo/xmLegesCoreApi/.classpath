@@ -4,5 +4,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/log4j-1.2.9.jar"/>
 	<classpathentry kind="lib" path="lib/xercesImpl-2.7.1.jar"/>
+	<classpathentry kind="lib" path="/xmLegesCoreImpl/lib/xml-apis-2.7.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
