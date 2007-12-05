@@ -1,0 +1,132 @@
+<project name="XmLegesEditor" default="jar" basedir=".">
+	<description>XmLegesEditor</description>
+
+	<property name="core-api" value="../xmLegesCoreApi" />
+	<property name="core-impl" value="../xmLegesCoreImpl" />
+	<property name="editor-api" value="../xmLegesEditorApi" />
+	<property name="editor-impl" value="../xmLegesEditorImpl" />
+
+	<property name="src" location="src/" />
+	<property name="src-core-api" location="${core-api}/src/" />
+	<property name="src-core-impl" location="${core-impl}/src/" />
+	<property name="src-editor-api" location="${editor-api}/src/" />
+	<property name="src-editor-impl" location="${editor-impl}/src/" />
+
+	<property name="build" location="build/" />
+	<property name="build-core-api" location="${build}/core-api" />
+	<property name="build-core-impl" location="${build}/core-impl" />
+	<property name="build-editor-api" location="${build}/editor-api" />
+	<property name="build-editor-impl" location="${build}/editor-impl" />
+
+	<property name="dist" location="dist/" />
+
+	<path id="path-core-api">
+		<fileset dir="${core-api}/lib">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+	<path id="path-core-impl">
+		<fileset dir="${core-impl}/lib">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+	<path id="path-editor-api">
+	</path>
+	<path id="path-editor-impl">
+		<fileset dir="${editor-impl}/lib">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+	<path id="path-editor-jdic-impl">
+			<fileset dir="${editor-impl}/lib/jdic">
+				<include name="*.jar" />
+			</fileset>
+	</path>
+
+	<patternset id="resources">
+		<include name="**/*.dtd" />
+		<include name="**/*.pen" />
+		<include name="**/*.xml" />
+		<include name="**/*.xsl" />
+		<include name="**/*.css" />
+		<include name="**/*.xconfig" />
+		<include name="**/*.properties" />
+		<include name="**/*.jfrm" />
+		<include name="**/*.html" />
+		<include name="**/*.txt" />
+		<include name="**/*.png" />
+		<include name="**/*.gif" />		
+		<include name="**/*.exe" />
+		<include name="**/*.dll" />
+		<include name="**/*.so" />
+		<include name="**/*.dic" />
+		<include name="**/*.ent" />
+		<include name="**/*.spp" />
+		<include name="**/*.bat" />
+		<include name="**/*.sh" />
+		<include name="**/*.dar" />
+		<include name="**/*.owl" />
+	</patternset>
+
+	<target name="init">
+		<tstamp />
+		<mkdir dir="${build}" />
+		<mkdir dir="${build-core-api}" />
+		<mkdir dir="${build-core-impl}" />
+		<mkdir dir="${build-editor-api}" />
+		<mkdir dir="${build-editor-impl}" />
+		<mkdir dir="${dist}" />
+	</target>
+
+	<target name="compile" depends="init" description="Compiling">
+		<javac srcdir="${src-core-api}" destdir="${build-core-api}">
+			<classpath refid="path-core-api">
+			</classpath>
+		</javac>
+		<javac srcdir="${src-core-impl}" destdir="${build-core-impl}">
+			<classpath path="${build-core-api}" />
+			<classpath refid="path-core-api" />
+			<classpath refid="path-core-impl" />
+		</javac>
+		<javac srcdir="${src-editor-api}" destdir="${build-editor-api}">
+			<classpath path="${build-core-api}" />
+			<classpath refid="path-editor-api" />
+		</javac>
+		<javac srcdir="${src-editor-impl}" destdir="${build-editor-impl}">
+			<classpath path="${build-core-api}" />
+			<classpath path="${build-editor-api}" />
+			<classpath refid="path-editor-impl" />
+			<classpath refid="path-editor-jdic-impl"/>
+		</javac>
+	</target>
+
+	<target name="resources" depends="compile" description="Copy resources ">
+		<copy todir="${build-core-impl}">
+			<fileset dir="${src-core-impl}">
+				<patternset refid="resources" />
+			</fileset>
+		</copy>
+		<copy todir="${build-editor-impl}">
+			<fileset dir="${src-editor-impl}">
+				<patternset refid="resources" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="jar" depends="resources" description="Making jars ">
+		<jar destfile="${dist}/xmLegesCoreApi.jar" basedir="${build-core-api}" compress="false" />
+		<jar destfile="${dist}/xmLegesCoreImpl.jar" basedir="${build-core-impl}" compress="false" />
+		<jar destfile="${dist}/xmLegesEditorApi.jar" basedir="${build-editor-api}" compress="false" />
+		<jar destfile="${dist}/xmLegesEditorImpl.jar" basedir="${build-editor-impl}" compress="false" />
+	</target>
+
+	<target name="clean" description="clean up">
+		<delete dir="${build}" />
+		<delete dir="${build-core-api}" />
+		<delete dir="${build-core-impl}" />
+		<delete dir="${build-editor-api}" />
+		<delete dir="${build-editor-impl}" />
+		<delete dir="${dist}" />
+	</target>
+
+</project>

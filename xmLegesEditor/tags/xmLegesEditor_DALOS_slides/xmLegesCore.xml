@@ -1,0 +1,686 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+============================================================================================
+File di composizione dell'applicazione xmLegesEditor CORE
+============================================================================================
+-->
+
+<container name="XmLeges" xmlns:log4j="log4j">
+
+	<log4j:configuration debug="true" xmlns:log4j="http://jakarta.apache.org/log4j/">
+		<appender name="FileAppender" class="org.apache.log4j.DailyRollingFileAppender">
+			<param name="File" value="NirEditor.log"/>
+			<param name="Append" value="true"/>
+			<param name="DatePattern" value="'.'yyyy-MM-dd"/>
+			<layout class="org.apache.log4j.PatternLayout">
+				<param name="ConversionPattern" value="%-5p, %8r, %-30c, - %m%n"/>
+			</layout>
+		</appender>
+
+		<appender name="ConsoleAppender" class="org.apache.log4j.ConsoleAppender">
+			<layout class="org.apache.log4j.PatternLayout">
+				<param name="ConversionPattern" value="%-5p, %8r, %-30c, - %m%n"/>
+			</layout>
+		</appender>
+		
+		<appender name="BugReportAppender" class="it.cnr.ittig.xmleges.core.blocks.bugreport.BugReportAppender">
+			<layout class="org.apache.log4j.PatternLayout">
+				<param name="ConversionPattern" value="%-5p, %8r, %-30c, - %m%n"/>
+			</layout>
+		</appender>
+		
+		<root>
+			<priority value ="error" /> 
+			<appender-ref ref="ConsoleAppender" />
+ 			<!--appender-ref ref="BugReportAppender" /--> 
+ 			<!--appender-ref ref="FileAppender" /-->
+		</root>
+		
+	
+	</log4j:configuration>
+	
+    <!-- ================================================================== -->
+    <!-- =============================================== THREAD MANAGER === -->
+    <!-- ================================================================== -->
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.threads.ThreadManagerImpl">
+        <configuration>
+        	<max>200</max>
+        	<min>10</min>
+        	<spare>10</spare>
+        </configuration>
+    </component>
+    
+    <!-- ================================================================== -->
+    <!-- ================================================ EVENT MANAGER === -->
+    <!-- ================================================================== -->
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.event.EventManagerImpl"
+    >
+    	<configuration>
+    		<multithread>false</multithread>
+    	</configuration>
+    </component>
+    
+    <!-- ================================================================== -->
+    <!-- ================================================ LOOK AND FEEL === -->
+    <!-- ================================================================== -->
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.lookandfeel.LookAndFeelImpl"
+        >
+        <configuration>
+            <lookandfeel>com.jgoodies.plaf.plastic.Plastic3DLookAndFeel</lookandfeel>
+        </configuration>
+    </component>
+
+    <!-- ================================================================== -->
+    <!-- ================================================== BUG REPORT  === -->
+    <!-- ================================================================== -->
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.bugreport.BugReportImpl"
+    >
+    	<configuration>
+            <mailto>xmleges-editor@ittig.cnr.it</mailto>
+            <maxlines>1000</maxlines>
+        </configuration>
+    </component>
+
+    <!-- ================================================================== -->
+    <!-- ============================================= DOCUMENT MANAGER === -->
+    <!-- ================================================================== -->
+    <component  class="it.cnr.ittig.xmleges.core.blocks.document.DocumentManagerImpl"
+    	>
+		<configuration>
+            <maxundos>20</maxundos>
+        </configuration>
+    </component>
+
+    <component  class="it.cnr.ittig.xmleges.core.blocks.dtd.DtdRulesManagerImpl" />
+    
+    <component  class="it.cnr.ittig.xmleges.core.blocks.selection.SelectionManagerImpl" />
+    
+    <!-- ================================================================== -->
+    <!-- ============================================== LICENSE MANAGER === -->
+    <!-- ================================================================== -->
+    <component  class="it.cnr.ittig.xmleges.core.blocks.license.LicenseManagerImpl" />
+    
+    <!-- ================================================================== -->
+    <!-- ========================================================= EXEC === -->
+    <!-- ================================================================== -->
+    <component  class="it.cnr.ittig.xmleges.core.blocks.exec.ExecImpl"
+                lifestyle="pool"
+    />
+    
+    <component  lifestyle="pool"
+                class="it.cnr.ittig.xmleges.core.blocks.exec.monitor.ExecMonitorImpl"
+    />
+    
+    <!-- ================================================================== -->
+    <!-- ============================================= MSWORD CONVERTER === -->
+    <!-- ================================================================== -->
+    <component  lifestyle="pool"
+                class="it.cnr.ittig.xmleges.core.blocks.mswordconverter.MSWordConverterImpl"
+    />
+    
+    <!-- ================================================================== -->
+    <!-- ====================================================== VERSION === -->
+    <!-- ================================================================== -->
+    <component  class="it.cnr.ittig.xmleges.core.blocks.version.VersionImpl"
+        >
+        <configuration>
+            <version>2.0 rc4</version>
+            <url>http://repo.ittig.cnr.it/nireditor2/versions.txt</url>
+        </configuration>
+    </component>
+    
+    <!-- ================================================================== -->
+    <!-- ========================================================= I18n === -->
+    <!-- ================================================================== -->
+    <component  class="it.cnr.ittig.xmleges.core.blocks.i18n.I18nImpl">
+        <configuration>
+	   	    <!--<locale language="it" country="IT" variant="16" /> -->         
+			<locale language="en" country="EN" variant="1" />       
+            <base>i18n/editor</base>
+            <base>i18n/editor-dom</base>
+            <base>i18n/core</base>
+        </configuration>
+    </component>
+    
+    <!-- ================================================================== -->
+    <!-- ================================================== SPELL CHECK === -->
+    <!-- ================================================================== -->  
+    <component	class="it.cnr.ittig.xmleges.core.blocks.spellcheck.SpellCheckImpl" />
+    <component	class="it.cnr.ittig.xmleges.core.blocks.spellcheck.dom.DomSpellCheckImpl" />
+
+    <!-- ================================================================== -->
+    <!-- ====================================================== PRINTER === -->
+    <!-- ================================================================== -->
+    <component  class="it.cnr.ittig.xmleges.core.blocks.printer.PrinterImpl" />
+    
+   
+        
+    <!-- ================================================================== -->
+    <!-- ========================================================= BARS === -->
+    <!-- ================================================================== -->
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.bars.BarsImpl"
+        >
+        <configuration>
+            <menus>
+                <menu action="menu.file">
+                    <item action="file.new" />
+                    <separator/>
+                    <item action="file.open" />
+                    <menu action="menu.recent">
+                        <item action="file.openrecent.0" />
+                        <item action="file.openrecent.1" />
+                        <item action="file.openrecent.2" />
+                        <item action="file.openrecent.3" />
+                    </menu>
+                    <separator/>
+                    <menu action="file.export">
+                    	<item action="file.export.browser" />
+                        <item action="file.export.pdf" />      
+                        <item action="file.export.rtf" />         
+                        <item action="file.export.html" />
+                    </menu>                    
+                    <separator/>
+                    <item action="file.save" />
+                    <item action="file.saveas" />
+                    <item action="file.removepi" />                    
+                    <separator/>
+                    <item action="file.print" />
+                    <separator/>
+                    <item action="file.close" />
+                    <separator/>
+                    <item action="file.exit" />
+                </menu>
+                <menu action="menu.edit">
+                    <item action="edit.undo" />
+                    <item action="edit.redo" />
+                    <separator/>
+                    <item action="edit.cut" />
+                    <item action="edit.copy" />
+                    <item action="edit.paste" />
+                    <item action="edit.pastetext" />
+                    <item action="edit.delete" />
+                    <separator/>
+                    <item action="edit.find" />
+                    <item action="edit.findnext" />
+                    <item action="edit.replace" />
+                    <separator/>
+                    <item action="edit.importdom" />
+                    <separator/>
+                    <item action="edit.comment" />
+                    <item action="edit.procinstr" />
+                    <separator/>
+                    <item action="edit.extracttext" />
+                    <item action="edit.unmark" />
+                </menu>
+                <menu action="menu.view">
+                    <menu action="menu.view.toolbars">
+                        <check action="view.toolbar.file" />
+                        <check action="view.toolbar.edit" />
+                        <check action="view.toolbar.tools" />
+                        <check action="view.toolbar.frame" />
+                    </menu>
+                    <menu action="menu.view.panes">
+                        <item action="view.pane.editor.panes.strutturaxml" />
+                        <item action="view.pane.editor.panes.attributi" />                     
+                        <item action="view.pane.panes.notes" />
+                        <item action="view.pane.editor.panes.documento" />
+                        <item action="view.pane.panes.source" />
+                        <item action="view.pane.panes.xslteditor" />
+                        <item action="view.pane.editor.panes.commenti" />
+                        <item action="view.pane.panes.problems" />
+                        <item action="view.pane.panes.segnalazioni" />
+                    </menu>
+                    <check action="view.statusbar" />
+                </menu>
+                <menu action="menu.tools">
+                    <item action="tool.bugreport" />
+                    <separator />
+                    <!-- action contents validator -->
+                    <!-- item action="tool.contents" /-->
+                    <!-- separator /-->
+                    <item action="tool.spellcheck" />
+                    <!-- item action="tool.spellcheck.auto" /-->
+                    <separator />
+                    <item action="tool.version" />
+                    <!-- separator /-->
+                    <item action="tool.xpatheval" />
+               </menu>
+     <!--      <menu action="menu.editor">
+                    <menu action="menu.editor.testo">
+                    </menu>
+                </menu>
+      -->  
+                <menu action="menu.help">
+                    <item action="help.contents" />
+		            <separator />
+	                <item action="help.about" />
+                </menu>
+            </menus>
+            <popup>
+            	<item action="edit.extracttext" />
+            <!--	<separator/>
+            	<menu ref="menu.editor" />   -->
+            	<separator/>
+                <item action="edit.undo" />
+                <item action="edit.redo" />
+                <separator/>
+                <item action="edit.cut" />
+                <item action="edit.copy" />
+                <item action="edit.paste" />
+                <item action="edit.pastetext" />
+                <item action="edit.delete" />
+                <separator/>
+                <item action="edit.find" />
+                <item action="edit.findnext" />
+                <item action="edit.replace" />
+            </popup>
+            
+            <tools>
+                <toolbar name="file" floatable="false" rollover="true">
+                    <item action="file.new" />
+                    <item action="file.open" />
+                    <separator/>
+                    <item action="file.save" />
+                    <item action="file.saveas" />
+                    <item action="file.removepi" />                                        
+                    <separator/>
+                    <item action="file.print" />
+                </toolbar>
+                <toolbar name="edit" floatable="false" rollover="true">
+                    <!-- item action="tool.contents" /-->
+                    <!-- separator /-->
+                    <item action="tool.spellcheck" />
+                    <!--item action="tool.spellcheck.auto" /-->
+                </toolbar>
+                <toolbar name="tools" floatable="false" rollover="true">
+                    <item action="edit.cut" />
+                    <item action="edit.copy" />
+                    <item action="edit.paste" />
+                    <item action="edit.delete" />
+                    <separator />
+                    <item action="edit.undo" />
+                    <item action="edit.redo" />
+                    <separator />
+                    <item action="edit.find" />
+                    <separator />
+                    <item action="edit.unmark" />
+                </toolbar>
+                <toolbar name="frame" floatable="false" rollover="true">
+                    <item action="frame.pane.maximize" />
+                    <item action="frame.pane.restore" />
+                    <item action="frame.pane.close" />
+                    <item action="frame.pane.reload" />
+                </toolbar>
+            </tools>
+            <status>
+                <slot relsize="0.6" name="info" delay="5000" />
+                <!-- slot relsize="0.1" name="renum" action="editor.rinumerazione"/-->
+                <!-- slot relsize="0.1" name="contents" action="tool.contents"/-->
+                <!--slot relsize="0.1" name="spellcheck" action="tool.spellcheck.auto"/-->
+                <slot relsize="0.1" name="file-validator" action="file.validator"/>
+            </status>
+        </configuration>
+    </component>
+
+    <!-- ================================================================== -->
+    <!-- ========================================================= FORM === -->
+    <!-- ================================================================== -->
+    <component  lifestyle="pool"
+                class="it.cnr.ittig.xmleges.core.blocks.form.FormImpl"
+    />
+    
+    <component  lifestyle="pool"
+                class="it.cnr.ittig.xmleges.core.blocks.form.date.DateFormImpl"
+    />
+
+    <component  lifestyle="pool"
+                class="it.cnr.ittig.xmleges.core.blocks.form.sourcedestlistWTF.SourceDestListWTFImpl"
+    />
+
+    <component  lifestyle="pool"
+                class="it.cnr.ittig.xmleges.core.blocks.form.table.TableImpl"
+    />
+
+    <component  lifestyle="pool"
+                class="it.cnr.ittig.xmleges.core.blocks.form.listtextfield.ListTextFieldImpl"
+    />    
+    
+    <component  lifestyle="pool"
+                class="it.cnr.ittig.xmleges.core.blocks.form.filetextfield.FileTextFieldImpl"
+    />    
+    
+    <component  class="it.cnr.ittig.xmleges.core.blocks.spellcheck.dom.form.SpellCheckFormImpl" /> 
+    
+    <!-- ================================================================== -->
+    <!-- =========================================== PREFERENCE MANAGER === -->
+    <!-- ================================================================== -->
+    <component  class="it.cnr.ittig.xmleges.core.blocks.preference.PreferenceManagerImpl">
+        <configuration>
+            <file>preference.xml</file>
+        </configuration>
+    </component>
+    
+    <!-- ================================================================== -->
+    <!-- ====================================================== ACTIONS === -->
+    <!-- ================================================================== -->
+    <component 	class="it.cnr.ittig.xmleges.core.blocks.action.ActionManagerImpl" />
+        
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.action.filenew.FileNewActionImpl"
+    />
+    
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.action.file.open.FileOpenActionImpl"
+        >
+        <configuration>
+            <maxlast>4</maxlast>
+            <filter>
+                <description>Xml files</description>
+                <mask>.*\.xml</mask>
+            </filter>
+        </configuration>
+    </component>
+
+
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.action.file.export.FileExportActionImpl">
+        <configuration external="true" resource="FileExportActionImpl.xconfig" />
+    </component>
+   
+
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.action.file.save.FileSaveActionImpl"
+        >
+        <configuration>
+            <encoding>windows-1252</encoding>
+            <filter> 
+                <description>Xml files</description> 
+                <extension>xml</extension> 
+            </filter>
+        </configuration>
+    </component>
+
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.action.file.print.FilePrintActionImpl"
+    />
+    
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.action.file.close.FileCloseActionImpl"
+    />
+    
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.action.file.exit.FileExitActionImpl"
+    />
+
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.action.file.validator.FileValidatorActionImpl"
+    />
+
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.action.edit.undoredo.EditUndoRedoActionImpl"
+    />
+    
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.action.edit.cutcopypaste.EditCutCopyPasteActionImpl"
+    />
+    
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.action.edit.findreplace.FindReplaceActionImpl"
+    />
+    
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.action.edit.comment.CommentActionImpl"
+    />
+    
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.action.edit.extracttext.ExtractTextActionImpl"
+    />
+    
+     <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.action.tool.unmark.UnmarkActionImpl"
+    />
+    
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.action.edit.importdom.ImportDomActionImpl"
+    />
+    
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.action.tool.bugreport.BugReportActionImpl"
+    />
+    
+    
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.action.tool.newversion.ToolNewVersionActionImpl"
+    />
+    
+    <component  lifestyle="singleton" activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.action.tool.spellcheck.ToolSpellCheckActionImpl"
+    />
+    
+    <component  lifestyle="singleton" activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.action.tool.xpatheval.XPathEvalActionImpl"
+    />
+                            
+
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.action.help.HelpActionImpl"
+    />
+    
+    
+        
+    <!-- ================================================================== -->
+    <!-- ========================================================= DOMS === -->
+    <!-- ================================================================== -->
+    <component  class="it.cnr.ittig.xmleges.core.blocks.dom.comment.CommentImpl" />
+    
+    <component  class="it.cnr.ittig.xmleges.core.blocks.dom.extracttext.ExtractTextImpl" />
+    
+    
+    <!-- ================================================================== -->
+    <!-- ======================================================== FORMS === -->
+    <!-- ================================================================== -->
+
+    <component  class="it.cnr.ittig.xmleges.editor.blocks.form.filenew.FileNewFormImpl" />
+    
+<!-- EXPORT commento x il momento
+    <component  class="it.cnr.ittig.xmleges.editor.blocks.form.fileexport.FileExportFormImpl" />
+-->
+    
+    <!-- ================================================================== -->
+    <!-- ========================================================== NIR === -->
+    <!-- ================================================================== -->
+
+<!-- SAREBBE DA ELIMINARE -->
+    <component  class="it.cnr.ittig.xmleges.editor.blocks.provvedimenti.ProvvedimentiImpl">
+        <configuration external="true" resource="ProvvedimentiImpl.xconfig" />
+    </component>
+
+<!-- SAREBBE DA ELIMINARE -->    
+    <component  class="it.cnr.ittig.xmleges.editor.blocks.template.TemplateImpl" />       
+           
+    <!-- ================================================================== -->
+    <!-- ======================================================== FRAME === -->
+    <!-- ================================================================== -->
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.frame.FrameImpl"
+        >
+        <configuration>
+            <title>xmLegesCore</title>
+            <!-- where=top-center | top-left | bottom-center | bottom-left -->
+            <!-- index=numero -->
+            <panes>
+                <pane name="editor.panes.strutturaxml"     where="top-left"    	index="0" />
+                <pane name="editor.panes.attributi"		where="bottom-left" 	index="0" />
+                <pane name="editor.panes.documento"		where="top-center"  	index="0" />
+                <pane name="panes.source"            	where="top-center"		index="1" />
+                <pane name="panes.xslteditor"           where="top-center"  	index="2" />
+                <pane name="editor.panes.commenti"			where="bottom-center"	index="0" />
+                <pane name="panes.notes"				where="bottom-center"  	index="1" />
+                <pane name="panes.problems"				where="bottom-center"  	index="2" />
+				<pane name="panes.segnalazioni"				where="bottom-center"  	index="3" />
+            </panes>
+        </configuration>
+    </component>
+    
+    <!-- ================================================================== -->
+    <!-- ======================================================== PANES === -->
+    <!-- ================================================================== -->
+    <component  class="it.cnr.ittig.xmleges.core.blocks.panes.attributes.AttributesPaneImpl">
+        <configuration>
+        	<readonly>id</readonly>
+        </configuration>
+	</component>
+
+    <component  class="it.cnr.ittig.xmleges.core.blocks.panes.tree.TreePaneImpl" />
+    
+    <component  class="it.cnr.ittig.xmleges.core.blocks.panes.xsltmapper.XsltMapperImpl" />
+    
+    <component  lifestyle="pool" 
+                class="it.cnr.ittig.xmleges.core.blocks.panes.xsltextpane.XsltPaneImpl">
+	    <configuration external="true" resource="XsltPaneImpl.xconfig" />
+    </component>
+    
+    <!-- SOSTITUITO NirXslts -->
+    
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.panes.xslts.XsltsImpl"
+        >
+        <configuration>
+            <xslt   name="dtd-norme"     		file="nir-panes-dtd-norme-1.0.xsl"		startup="true"/>
+            <xslt   name="dtd-testo"     		file="nir-panes-dtd-testo-1.0.xsl"		startup="true"/>
+            <xslt   name="dtd-globali"   		file="nir-panes-dtd-globali-1.0.xsl"	startup="true"/>
+            <xslt   name="dtd-meta"     		file="nir-panes-dtd-meta-1.0.xsl"		startup="true"/>
+            
+            
+            <xslt   name="edit-documento"		file="panes-edit-minimale-1.0.xsl"	startup="true" />
+            
+            
+            <xslt   name="edit-annessi"			file="nir-panes-edit-annessi-1.0.xsl" 		/>
+            <xslt   name="edit-meta"			file="nir-panes-edit-meta-1.0.xsl"			/>
+            <xslt   name="riferimenti"			file="nir-panes-view-riferimenti-1.0.xsl"	/>
+            <xslt   name="rifincompleti"		file="nir-panes-view-rifincompleti-1.0.xsl"	/>
+            <xslt   name="errori"				file="nir-panes-view-errori-1.0.xsl"		/>
+            <xslt   name="commenti"				file="nir-panes-view-commenti-1.0.xsl"		/>
+            <xslt   name="ndr"					file="nir-panes-view-ndr-1.0.xsl"			/>
+            <xslt   name="xsl-disegnilegge-testoafronte" 	file="nir-disegnilegge-testoafronte.xsl"     		startup="true" />
+            <xslt   name="xsl-disegnilegge" 	file="nir-disegnilegge.xsl"     		startup="true" />
+            <xslt   name="xsl-disegnilegge-nocss" 	file="nir-disegnilegge-nocss.xsl"	startup="true" />
+            <xslt   name="xsl-nir"				file="nir-generico.xsl"     			startup="true" />
+            <xslt   name="xsl-nir-nocss"		file="nir-generico-nocss.xsl"  			startup="true" />
+            <css    name="disegnilegge-style"   file="nir-disegnilegge-style.css"       startup="true" />
+            <css    name="nir-style"      		file="nir-generico-style.css"           startup="true" />
+            <xslt   name="pdf-gazzettaufficiale" file="nir-fo-gazzettaufficiale.xsl"	startup="true" />
+            <xslt   name="xsl-cnr"              file="cnrHTML.xsl"						startup="true" />
+            <xslt   name="pdf-cnr"              file="cnrFO.xsl"						startup="true" />
+        </configuration>
+    </component>
+    
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.panes.corepanes.CoreXsltPanesImpl"
+        >
+        <configuration>
+            <pane name="editor.panes.documento">
+                <xslt name="edit-documento"/>
+            </pane>
+            <pane name="editor.panes.commenti">
+                <xslt name="commenti"/>
+            </pane>
+        </configuration>
+    </component>
+
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.panes.corepanes.CoreTreePaneImpl"
+        >
+        <configuration>
+            <name>editor.panes.strutturaxml</name>
+        </configuration>
+    </component>
+    
+
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.panes.corepanes.CoreAttributesPaneImpl"
+        >
+        <configuration>
+            <name>editor.panes.attributi</name>
+        </configuration>
+    </component>
+ 
+    
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.panes.xslteditor.XsltEditorImpl"
+        >
+        <configuration>
+            <name>panes.xslteditor</name>
+        </configuration>
+    </component>
+
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.panes.source.SourcePaneImpl"
+    />
+
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.panes.notes.NotesPaneImpl"
+    />
+    
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.panes.problems.ProblemsPaneImpl"
+    />
+
+	<component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.panes.segnalazioni.SegnalazioniPaneImpl"
+    />
+
+
+    <!-- ================================================================== -->
+    <!-- =================================================== XML EDITOR === -->
+    <!-- ================================================================== -->
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.xmleditor.XmlEditorImpl"
+    />    
+ 
+ 
+    
+<!-- 
+    
+     ================================================================== 
+     =============================================== XMLEGES EDITOR === 
+     ================================================================== 
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.editor.XmLegesEditorImpl"
+    />
+    
+ -->
+
+ 
+    <!-- ================================================================== -->
+    <!-- ======================================================== UTILS === -->
+    <!-- ================================================================== -->
+    <component  class="it.cnr.ittig.xmleges.core.blocks.util.msg.UtilMsgImpl" />
+    
+    <component  class="it.cnr.ittig.xmleges.core.blocks.util.pdf.UtilPdfImpl" />
+
+    <component  class="it.cnr.ittig.xmleges.core.blocks.util.rtf.UtilRtfImpl" />
+
+    <component  class="it.cnr.ittig.xmleges.core.blocks.util.rulesmanager.UtilRulesManagerImpl">
+        <configuration>
+            <exclude>
+                <element name="#PCDATA"/>
+            </exclude>           
+        </configuration>
+    </component>
+    
+    <component  class="it.cnr.ittig.xmleges.core.blocks.util.ui.UtilUIImpl" />
+    
+   <!-- <component  class="it.cnr.ittig.xmleges.editor.blocks.util.dom.NirUtilDomImpl" />  -->
+    
+    <component  class="it.cnr.ittig.xmleges.core.blocks.help.HelpImpl" >
+	    <configuration external="true" resource="HelpImpl.xconfig" />
+    </component>
+    
+</container>
