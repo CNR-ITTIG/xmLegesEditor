@@ -47,7 +47,7 @@ public interface Autorita extends Service {
 	public final static int LIVELLO_2 = 2;
 
 	/**
-	 * Restituisce il path del registro delle autorita' setttato nella
+	 * Restituisce il path del registro delle autorita' settato nella
 	 * configurazione del componente
 	 * 
 	 * @return Stringa contenente il path

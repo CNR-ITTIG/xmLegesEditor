@@ -51,7 +51,7 @@ public interface XmLegesMarker extends Service {
 			"Decreto Pres. Cons. Ministri - non numerato", "Decreto Ministeriale", "Decreto Ministeriale - non numerato", "Legge Regionale", 
 			"Regolamento Regionale", "Regolamento", "Circolare", "Provvedimento", "Disegno di Legge", "Documento NIR", "Provvedimento CNR", "Statuto Comunale", "Regolamento Comunale", "Delibera Consiliare"};
 
-	final public static String[] TIPO_DOC_VALORE = new String[] { "l", "lcost", "dl", "dlgs", "rd", "dpr", "dprNN", "dpcm", "dpcmNN", "dm", "dmNN", "lr", "rreg", "reg", "circ", "prov", "ddl", "nir", "cnr", "stc", "regc", "delc" };
+	final public static String[] TIPO_DOC_VALORE = new String[] { "l", "lcost", "dl", "dlgs", "rd", "dpr", "dprNN", "dpcm", "dpcmNN", "dm", "dmNN", "lr", "rreg", "reg", "circ", "prov", "ddl", "nir", "cnr", "stc", "regc", "del" };
 
 	/**
 	 * Array di valori per presentare il testo nelle form per
