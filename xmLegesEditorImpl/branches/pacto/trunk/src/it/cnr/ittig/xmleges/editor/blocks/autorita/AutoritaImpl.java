@@ -116,19 +116,11 @@ public class AutoritaImpl implements Autorita, Loggable, Serviceable, Configurab
 
 	private void loadRae() {
 		Document reg;
-		if ((reg = getRaeFromPath()) == null) { // se non c'e' in dirRae lo
-												// prende dal componente
-			reg = UtilXml.readXML(getClass().getResourceAsStream("rae.xml"));// se
-																				// non
-																				// c'e'
-																				// lo
-																				// legge
-																				// dal
-																				// componente
-																				// e lo
-																				// copia
-																				// nel
-																				// path
+		// se non c'e' in dirRae lo prende dal componente
+		if ((reg = getRaeFromPath()) == null) { 
+			//	 se non c'è lo legge dal componente e lo copia nel path
+			reg = UtilXml.readXML(getClass().getResourceAsStream("rae.xml"));
+			
 			/**
 			 * TODO qui vanno create tutte le directory del path
 			 */
@@ -270,18 +262,21 @@ public class AutoritaImpl implements Autorita, Loggable, Serviceable, Configurab
 						subist1.setDatafine(parseDateString(null));
 					istcorrente.addSottoIstituzione(subist1);
 				}
-
+				/* ++++++++++++++++++++ Modifica I+ ++++++++++++++++++++ */
 				if (nodoIstituzione.selectSingleNode("./LIVELLO2/NOME/text()") != null) {
-					subist1.setUrn(nodoIstituzione.selectSingleNode("./LIVELLO2/NOME/text()").getStringValue());
+					subist2.setUrn(nodoIstituzione.selectSingleNode("./LIVELLO2/NOME/text()").getStringValue());
 					if (nodoIstituzione.selectSingleNode("./LIVELLO2/DATA_INIZIO/text()") != null)
-						subist1.setDatainizio(parseDateString(nodoIstituzione.selectSingleNode("./LIVELLO2/DATA_INIZIO/text()").getStringValue()));
+						subist2.setDatainizio(parseDateString(nodoIstituzione.selectSingleNode("./LIVELLO2/DATA_INIZIO/text()").getStringValue()));
 					else
-						subist1.setDatainizio(parseDateString(null));
+						subist2.setDatainizio(parseDateString(null));
 					if (nodoIstituzione.selectSingleNode("./LIVELLO2/DATA_FINE/text()") != null)
-						subist1.setDatafine(parseDateString(nodoIstituzione.selectSingleNode("./LIVELLO2/DATA_FINE/text()").getStringValue()));
+						subist2.setDatafine(parseDateString(nodoIstituzione.selectSingleNode("./LIVELLO2/DATA_FINE/text()").getStringValue()));
 					else
-						subist1.setDatafine(parseDateString(null));
-					((Istituzione) (istcorrente.getSottoIstituzioni().get(0))).addSottoIstituzione(subist2);
+						subist2.setDatafine(parseDateString(null));
+					
+					//((Istituzione) (istcorrente.getSottoIstituzioni().get(0))).addSottoIstituzione(subist2);
+					istcorrente.addSottoIstituzione(subist2);
+
 				}
 
 				if (((RegExp.substring(0, 1).equals("=")) && (istcorrente.getUrn().matches(RegExp.substring(1))))

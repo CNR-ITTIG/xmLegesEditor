@@ -59,6 +59,9 @@ public class MetaDescrittoriMaterieImpl implements MetaDescrittoriMaterie,
 	}
 
 	//IPIU-TODO comment
+	/* (non-Javadoc)
+	 * @see it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.MetaDescrittoriMaterie#setVocabolari(org.w3c.dom.Node, it.ipiu.digest.parse.Vocabolario[])
+	 */
 	public void setVocabolari(Node node, Vocabolario[] vocabolari) {
 
 		Document doc = documentManager.getDocumentAsDom();
@@ -103,12 +106,15 @@ public class MetaDescrittoriMaterieImpl implements MetaDescrittoriMaterie,
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.MetaDescrittoriMaterie#getVocabolari(org.w3c.dom.Node)
+	 */
 	public Vocabolario[] getVocabolari(Node node) {
 
 		/* Modifica I+ */
 		Vocabolario[] vocabolariOnDoc = this.getVocabolario();
 
-		/* Codice ITTIG */
+		
 
 		Document doc = documentManager.getDocumentAsDom();
 		Node activeMeta = nirUtilDom.findActiveMeta(doc, node);
@@ -159,7 +165,6 @@ public class MetaDescrittoriMaterieImpl implements MetaDescrittoriMaterie,
 	private Vocabolario[] getVocabolario() {
 
 		try {
-			//IPIU-TODO configuration
 			String filename = ConfigurationFacade.get("config.properties/archivio.path");
 			String path = FileUtility.getInstance().getPath(filename);
 			

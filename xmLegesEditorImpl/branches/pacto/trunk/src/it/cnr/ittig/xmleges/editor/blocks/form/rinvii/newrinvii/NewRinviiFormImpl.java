@@ -200,11 +200,11 @@ public class NewRinviiFormImpl implements NewRinviiForm, Loggable, Serviceable, 
 		combosottolivello1 = (JComboBox) form.getComponentByName("editor.form.rinvii.newrinvii.combo.sottolivello1");
 		combosottolivello2 = (JComboBox) form.getComponentByName("editor.form.rinvii.newrinvii.combo.sottolivello2");
 		comboprovvedimenti.addActionListener(this);
-
 		comboautorita.addActionListener(this);
 		combosottolivello1.addActionListener(this);
 		combosottolivello2.addActionListener(this);
 
+		
 		numerolegge = (JTextField) form.getComponentByName("editor.form.rinvii.newrinvii.txtfield.numero");
 		datadispositivo = (JFormattedTextField) form.getComponentByName("editor.form.rinvii.newrinvii.txtfield.data");
 
@@ -378,6 +378,7 @@ public class NewRinviiFormImpl implements NewRinviiForm, Loggable, Serviceable, 
 			partizioni.setModel(lmd);
 			partizioni.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			lmautorita = new DefaultListModel();
+			lmautorita.add(0, "prova");
 			autorita.setModel(lmautorita);
 			autorita.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			lmurn = new DefaultListModel();
@@ -397,7 +398,7 @@ public class NewRinviiFormImpl implements NewRinviiForm, Loggable, Serviceable, 
 					comboprovvedimenti.addItem(listaclassi[i].getProvvedimentoAt(j));
 			}
 			comboprovvedimenti.getModel().setSelectedItem(listaclassi[0].getProvvedimentoAt(0));
-
+			
 		} catch (Exception e) {
 			logger.error(e.toString());
 		}
@@ -563,7 +564,8 @@ public class NewRinviiFormImpl implements NewRinviiForm, Loggable, Serviceable, 
 					if (autorita.startsWith("regione"))
 						comboprovvedimenti.setSelectedIndex(getIndexOf("Legge regionale"));
 				}
-			} else
+			} 			
+			else
 				comboprovvedimenti.setSelectedIndex(getIndexOf(provvedimenti.getProvvedimentoByUrn(u.getProvvedimento()).toString()));
 
 			// /////////////////////////// Popola Lista Autorit?
@@ -787,12 +789,9 @@ public class NewRinviiFormImpl implements NewRinviiForm, Loggable, Serviceable, 
 				stdata.nextToken();
 				stdata.nextToken();
 				String aaaa = stdata.nextToken();
-				if (datadispositivo.getText().indexOf("_") < 0 || aaaa.indexOf("_") < 0) { // ?
-																							// specificata
-																							// una
-																							// data
-																							// o
-					// almeno l'anno
+				
+				if (datadispositivo.getText().indexOf("_") < 0 || aaaa.indexOf("_") < 0) { 
+					// specificata una data o almeno l'anno
 					String datadispositivostring = "";
 					if (datadispositivo.getText().indexOf("_") < 0)
 						datadispositivostring = datadispositivo.getText();
@@ -901,23 +900,23 @@ public class NewRinviiFormImpl implements NewRinviiForm, Loggable, Serviceable, 
 		}
 	}
 
-	// private void setVisibleEmananti(boolean visible){
-	// labelautorita.setEnabled(visible);
-	// labelsottolivello1.setEnabled(visible);
-	// labelsottolivello2.setEnabled(visible);
-	// comboautorita.setEnabled(visible);
-	// combosottolivello1.setEnabled(visible);
-	// combosottolivello2.setEnabled(visible);
-	// inserisciautorita.setEnabled(visible);
-	// eliminaautorita.setEnabled(visible);
-	// autorita.setEnabled(visible);
-	// if (!visible)
-	// lmautorita.addElement(comboautorita.getSelectedItem());
-	// else{
-	// lmautorita.removeAllElements();
-	// }
-	//			
-	// }
+//	 private void setVisibleEmananti(boolean visible){
+//		 labelautorita.setEnabled(visible);
+//		 labelsottolivello1.setEnabled(visible);
+//		 labelsottolivello2.setEnabled(visible);
+//		 comboautorita.setEnabled(visible);
+//		 combosottolivello1.setEnabled(visible);
+//		 combosottolivello2.setEnabled(visible);
+//		 inserisciautorita.setEnabled(visible);
+//		 eliminaautorita.setEnabled(visible);
+//		 autorita.setEnabled(visible);
+//	 if (!visible)
+//		 lmautorita.addElement(comboautorita.getSelectedItem());
+//	 else{
+//		 lmautorita.removeAllElements();
+//	 }
+//				
+//	 }
 
 	private void addAutoritaToList() {
 		try {

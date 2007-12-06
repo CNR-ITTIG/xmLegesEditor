@@ -20,7 +20,12 @@ import it.cnr.ittig.xmleges.editor.services.form.xmleges.linker.XmLegesLinkerFor
 import it.cnr.ittig.xmleges.editor.services.xmleges.linker.XmLegesLinker;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.Vector;
 
 import javax.swing.AbstractAction;
 import javax.swing.AbstractButton;
@@ -68,7 +73,7 @@ import org.w3c.dom.Node;
  * @author <a href="mailto:sarti@dii.unisi.it">Lorenzo Sarti </a>, <a
  *         href="mailto:mirco.taddei@gmail.com">Mirco Taddei </a>
  */
-public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Serviceable, Configurable, Initializable {
+public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Serviceable, Configurable, Initializable, ActionListener {
 	Logger logger;
 
 	Form form;
@@ -88,24 +93,22 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 	JTextArea sorgente;
 
 	JTextArea risultati;
-	
+
 	AbstractButton analizza;
 
 	JRadioButton radioSel;
 
 	JRadioButton radioDoc;
-	
+
 	JCheckBox checkInt;
-	
+
 	JCheckBox checkInc;
 
-	String[] elencoregioni = new String[22];
-	
-	String[] elencoregioniUrn = new String[22];
-	
-	String[] elencoenti = new String[5];
-	
-	String[] elencoentiUrn = new String[5];
+	Ente enteObj;
+
+	Localizzazione localizzazione;
+
+	Hashtable archivio = new Hashtable();
 
 	File fileRisultato;
 
@@ -140,7 +143,7 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 	String error;
 
 	I18n i18n;
-	
+
 	String mesErr;
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -160,18 +163,10 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 	// ////////////////////////////////////////////////// Configurable Interface
 	public void configure(Configuration configuration) throws ConfigurationException {
 		try {
-			Configuration[] elencoConf = configuration.getChildren();
-			int j=0, k=0;
-			for (int i = 0; i < elencoConf.length; i++){
-				if(elencoConf[i].getName().toLowerCase().startsWith("region")){
-				   elencoregioni[j] = elencoConf[i].getAttribute("name");
-				   elencoregioniUrn[j++] = elencoConf[i].getAttribute("urn");
-				}
-				else{
-				   elencoenti[k]= elencoConf[i].getAttribute("name");	
-				   elencoentiUrn[k++]= elencoConf[i].getAttribute("urn");
-				}
-			}
+
+			ArchivioLocalizzazioni archivioLocalizzazioni = new ArchivioLocalizzazioni();
+			archivio = archivioLocalizzazioni.load(configuration);
+
 		} catch (ConfigurationException e) {
 			logger.error("Impossibile leggere il file di configurazione");
 		}
@@ -182,10 +177,15 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 		form.setMainComponent(this.getClass().getResourceAsStream("xmLegesLinker.jfrm"));
 		form.setSize(700, 500);
 		form.setName("editor.form.xmleges.link");
-		
+
 		form.setHelpKey("help.contents.form.xmlegeslinker");
-		
+
 		regione = (JComboBox) form.getComponentByName("editor.form.xmleges.link.regione");
+
+		/* ++++++++++++ Modifica I+ ++++++++++++ */
+		regione.addActionListener(this);
+
+
 		ente = (JComboBox) form.getComponentByName("editor.form.xmleges.link.ente");
 		// FIXME si potrebbe mettere anche editabile ma al parser non si passa questa stringa ma la urn dell'ente selezionato
 		//ente.setEditable(true);
@@ -194,33 +194,51 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 		sorgente.setWrapStyleWord(true);
 		risultati = (JTextArea) form.getComponentByName("editor.form.xmleges.link.risultati");
 		risultati.setWrapStyleWord(true);
-		
+
 		radioDoc = (JRadioButton) form.getComponentByName("editor.form.xmleges.link.radio.intero");
 		radioDoc.setAction(new radioDocAction());
-		
+
 		radioSel = (JRadioButton) form.getComponentByName("editor.form.xmleges.link.radio.selezione");
 		radioSel.setAction(new radioSelAction());
-		
+
 		ButtonGroup grupporadio = new ButtonGroup();
 		grupporadio.add(radioDoc);
 		grupporadio.add(radioSel);
-		
-		
+
+
 		checkInt = (JCheckBox) form.getComponentByName("editor.form.xmleges.link.check.interni");
 		checkInc = (JCheckBox) form.getComponentByName("editor.form.xmleges.link.check.incompleti");
-		
+
 		analizza = (AbstractButton) form.getComponentByName("editor.form.xmleges.link.analizza");
 		analizza.setAction(new AnalizzaDocAction());
-		
+
+
 		regione.removeAllItems();
-		for (int i = 0; i < elencoregioni.length; i++)
-			regione.addItem(elencoregioni[i]);
-		
-		ente.removeAllItems();
-		for (int i = 0; i < elencoenti.length; i++)
-			ente.addItem(elencoenti[i]);
-		
+		/* ++++++++++++ Modifica I+ ++++++++++++ */
+		Vector set = new Vector(archivio.keySet());
+		Collections.sort(set);
+		Enumeration en = set.elements();
+		while (en.hasMoreElements()) {
+			regione.addItem(en.nextElement());
+		}
+
+		/* ++++++++++++ Modifica I+ ++++++++++++ */
+
 		mesErr = i18n.getTextFor("xmlegeslinker.errore");
+	}
+
+	/* ++++++++++++ Modifica I+ ++++++++++++ */
+	public void actionPerformed(ActionEvent arg0) {
+		ente.removeAllItems();
+
+		Localizzazione localiz = (Localizzazione)archivio.get(regione.getSelectedItem().toString());
+		if (localiz.getEnti() != null) {
+			Vector entiVector = localiz.getEnti();
+			for (int i = 0; i < entiVector.size(); i++) {
+
+				ente.addItem(((Ente)entiVector.get(i)).getNome());
+			}
+		}
 	}
 
 	// ///////////////////////////////////////// ParserRiferimentiForm Interface
@@ -275,23 +293,23 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 	}
 
 	protected boolean openForm() {
-		
+
 		if (!form.hasMainComponent())
 			try {
 				initialize();
 			} catch (Exception ex) {
 				logger.error(ex.toString(), ex);
 			}
-		radioSel.setEnabled(!parseAll);
-		radioDoc.setSelected(true);
-		checkInt.setEnabled(true);
-		checkInc.setEnabled(true);
-		checkInt.setSelected(true);
-		checkInc.setSelected(false);
-		regione.setSelectedIndex(0);
-		ente.setSelectedIndex(0);
-		form.showDialog();
-		return form.isOk();
+			radioSel.setEnabled(!parseAll);
+			radioDoc.setSelected(true);
+			checkInt.setEnabled(true);
+			checkInc.setEnabled(true);
+			checkInt.setSelected(true);
+			checkInc.setSelected(false);
+			//regione.setSelectedIndex(0);
+			//ente.setSelectedIndex(0);
+			form.showDialog();
+			return form.isOk();
 	}
 
 	protected void setSorgente(String text) {
@@ -312,14 +330,14 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 			checkInc.setEnabled(true);	
 		}
 	}
-	
+
 	protected class radioSelAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
 			checkInt.setEnabled(false);
 			checkInc.setEnabled(false);
 		}
 	}
-	
+
 	protected class AnalizzaDocAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
 			form.setDialogWaiting(true);
@@ -330,14 +348,21 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 			form.setDialogWaiting(false);
 		}
 	}
-	
+
 	private void AnalizzaSel(){
 		form.setDialogWaiting(true);
+
 		try {
-			if (regione.getSelectedIndex() != 0)
-				parser.setRegione(elencoregioniUrn[regione.getSelectedIndex()]);
-			if (ente.getSelectedIndex() != 0)
-				parser.setEnte(elencoentiUrn[ente.getSelectedIndex()]);
+			/* ++++++++++++ Modifica I+ ++++++++++++ */
+			Localizzazione localizza = (Localizzazione)archivio.get(regione.getSelectedItem().toString());
+			if (regione.getSelectedIndex() != 0){
+				parser.setRegione(localizza.getUrn());
+			}
+			if (ente.getSelectedIndex() != 0){
+				Vector entiVect = localizza.getEnti();
+				parser.setEnte(((Ente)entiVect.get(ente.getSelectedIndex())).getUrn());
+			}
+			/* ++++++++++++ Modifica I+ ++++++++++++ */
 			parser.setEnabledRifIncompleti(false);
 			parser.setEnabledRifInterni(false);
 			switch (tipo) {
@@ -375,14 +400,23 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 		if (error != null)			
 			utilMsg.msgError(form.getAsComponent(), mesErr + error);
 	}
-	
-	
+
+
 	private void AnalizzaDoc(){
 		try {
-			if (regione.getSelectedIndex() != 0)
-				parser.setRegione(elencoregioniUrn[regione.getSelectedIndex()]);
-			if (ente.getSelectedIndex() != 0)
-				parser.setEnte(elencoentiUrn[ente.getSelectedIndex()]);
+
+			/* ++++++++++++ Modifica I+ ++++++++++++ */
+			Localizzazione localizza = (Localizzazione)archivio.get(regione.getSelectedItem().toString());
+			if (regione.getSelectedIndex() != 0){
+				parser.setRegione(localizza.getUrn());
+			}
+			if (ente.getSelectedIndex() != 0){
+				Vector entiVect = localizza.getEnti();
+				parser.setEnte(((Ente)entiVect.get(ente.getSelectedIndex())).getUrn());
+			}
+			/* ++++++++++++ Modifica I+ ++++++++++++ */
+
+
 			parser.setEnabledRifIncompleti(checkInc.isSelected());
 			parser.setEnabledRifInterni(checkInt.isSelected());
 			risAll = UtilFile.inputStreamToString(parser.parse(dm.getRootElement()));
@@ -398,5 +432,6 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 		if (error != null) 
 			utilMsg.msgError(form.getAsComponent(), mesErr + error);
 	}
+
 
 }

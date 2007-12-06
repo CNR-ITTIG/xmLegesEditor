@@ -91,7 +91,7 @@
 	    <urn>
 	        <atto>statuto.comunale</atto>
 	        <citazione>statuto comunale</citazione>
-	        <autorita>=^comune$</autorita>
+	        <autorita>=^comune.*$</autorita>
 	    </urn>
 	    <template tipo="Articolato" numerato="SI" tag="stc">STC-Art.xml</template>
 	    <dtd name="DTD Nir Completo">nircompleto.dtd</dtd>
@@ -103,7 +103,7 @@
 	    <urn>
 	        <atto>regolamento.comunale</atto>
 	        <citazione>regolamento comunale</citazione>
-	        <autorita>=^comune$</autorita>
+	        <autorita>=^comune.*$</autorita>
 	    </urn>
 	    <template tipo="Articolato" numerato="NO" tag="regc">REGC-Art.xml</template>
 	    <dtd name="DTD Nir Completo">nircompleto.dtd</dtd>
@@ -115,9 +115,9 @@
 	    <urn>
 	        <atto>delibera.consiliare</atto>
 	        <citazione>delibera consiliare</citazione>
-	        <autorita>=^comune$</autorita>
+	        <autorita>=^comune.*$</autorita>
 	    </urn>
-	    <template tipo="SemiArticolato" numerato="SI" tag="delc">DELC-Semi.xml</template>
+	    <template tipo="Articolato" tag="del" nome="delibera">DELC-Art.xml</template>
 	    <dtd name="DTD Nir Completo">nircompleto.dtd</dtd>
 		<dtd name="DTD Nir Flessibile">nirflessibile.dtd</dtd>
 		<dtd name="DTD Nir Base">nirbase.dtd</dtd>

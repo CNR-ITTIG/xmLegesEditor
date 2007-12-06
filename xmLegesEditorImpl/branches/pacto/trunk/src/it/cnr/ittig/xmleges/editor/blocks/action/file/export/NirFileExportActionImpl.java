@@ -122,7 +122,7 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 	ExportHTMLAction exportHTMLAction;
 	
 	/* *********** Modifica I+ ************* */
-	//ExportLenyaAction exportLenyaAction;
+	//ExportLenyaAction exportPactoAction;
 	/* ************************************* */
 
 	ExportPDFAction exportPDFAction;
@@ -190,8 +190,8 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 		actionManager.registerAction("file.export.html", exportHTMLAction);
 		
 		/* ******************** Modifica I+ ************************** */
-//		exportLenyaAction = new ExportLenyaAction();
-//		actionManager.registerAction("file.export.lenya", exportLenyaAction);
+//		exportPactoAction = new ExportPactoAction();
+//		actionManager.registerAction("file.export.Pacto", exportPactoAction);
 		/* ************************************************************* */
 		
 		exportPDFAction = new ExportPDFAction();
@@ -232,7 +232,7 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 		exportHTMLAction.setEnabled(!documentManager.isEmpty());
 		
 		/* ******************* Modifica I+ ************************ */
-//		exportLenyaAction.setEnabled(!documentManager.isEmpty());
+//		exportPactoAction.setEnabled(!documentManager.isEmpty());
 		/* ****************************************************** */
 		
 		//export per i DDL non è implementato (disabilito)
@@ -242,24 +242,23 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 
 	// ////////////////////////////////////////////// FileExportAction Interface
 
-//	 ///////////////////// salva su Lenya - Modifica I+
-	public boolean doExportLenya() {
-		
-			//cerco di aprire una finestra nel browser
-			String path= "C:\\Programmi\\Mozilla Firefox\\firefox.exe";
-			
-
-			String[] command={path};
-			try {
-				Process process = Runtime.getRuntime ().exec (command);
-			}
-			catch (Exception e) {
-				//TODO inserire il log4j
-				System.out.println("Errore " + e);
-		
-		}
-		return false;
-	}
+//	 ///////////////////// salva su Pacto - Modifica I+
+//	public boolean doExportPacto() {
+//		
+//			//cerco di aprire una finestra nel browser
+//			String path= "C:\\Programmi\\Mozilla Firefox\\firefox.exe";
+//			
+//
+//			String[] command={path};
+//			try {
+//				Process process = Runtime.getRuntime ().exec (command);
+//			}
+//			catch (Exception e) {
+//				logger.error("Errore " + e);
+//		
+//		}
+//		return false;
+//	}
 	
 	public boolean doExportPDF() {
 
@@ -603,7 +602,7 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 	 * package 	: it.cnr.ittig.xmleges.core.blocks.action.file.export<br>
 	 * Type Name : <b>ExportHTMLAction</b><br>
 	 * Comment	:<br>
-	 * Esporta il documento corrente su Lenya
+	 * Esporta il documento corrente su Pacto
 	 * <hr>
 	 * I+ S.r.l. 05/nov/07<br>
 	 * <hr>
@@ -611,11 +610,11 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 	 * <hr>
 	 * 
 	 */
-	protected class ExportLenyaAction extends AbstractAction {
-		public void actionPerformed(ActionEvent e) {
-			doExportLenya();
-		}
-	}	
+//	protected class ExportPactoAction extends AbstractAction {
+//		public void actionPerformed(ActionEvent e) {
+//			doExportPacto();
+//		}
+//	}	
 	
 	protected class ExportRTFAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {

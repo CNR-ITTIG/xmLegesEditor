@@ -237,7 +237,6 @@ Loggable, Serviceable, Initializable, ActionListener {
 		sottoFormTeseo.setMainComponent(getClass().getResourceAsStream("TeseoBrowser.jfrm"));
 		materie_teseo_listtextfield.setEditor(new MaterieTeseoListTextFieldEditor(sottoFormTeseo));
 	
-		//IPIU-TODO configuration
 		
 		String filename = ConfigurationFacade.get("config.properties/archivio.path");
 		String path = FileUtility.getInstance().getPath(filename);

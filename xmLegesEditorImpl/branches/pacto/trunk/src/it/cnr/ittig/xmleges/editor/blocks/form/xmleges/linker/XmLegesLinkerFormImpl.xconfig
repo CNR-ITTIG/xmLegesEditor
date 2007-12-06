@@ -1,26 +1,92 @@
 <configuration>
-<regione name="" urn="" />
-<regione name="Abruzzo" urn="abruzzo" />
-<regione name="Basilicata" urn="basilicata" />
-<regione name="Calabria" urn="calabria" />
-<regione name="Campania" urn="campania" />
-<regione name="Emilia Romagna" urn="emilia.romagna" />
-<regione name="Friuli Venezia Giulia" urn="friuli.venezia.giulia" />
-<regione name="Lazio" urn="lazio" />
-<regione name="Liguria" urn="liguria" />
-<regione name="Lombardia" urn="lombardia" />
-<regione name="Marche" urn="marche" />
-<regione name="Molise" urn="molise" />
-<regione name="Piemonte" urn="piemonte" />
-<regione name="Puglia" urn="puglia" />
-<regione name="Sardegna" urn="sardegna" />
-<regione name="Sicilia" urn="sicilia" />
-<regione name="Toscana" urn="toscana" />
-<regione name="Trentino Alto Adige" urn="trentino.alto.adige" />
-<regione name="Umbria" urn="umbria" />
-<regione name="Valle d'Aosta" urn="valle.aosta" />
-<regione name="Veneto" urn="veneto" />
-<ente name="" urn="" />
-<ente name="CNR" urn="consiglio.nazionale.ricerche" />
-<ente name="CNIPA" urn="centro.nazionale.informatica.pubblica.amministrazione" />
+<localizzazione name="" urn="" />
+<localizzazione name="Abruzzo" urn="abruzzo" >
+	<ente name="CNR" urn="consiglio.nazionale.ricerche" />
+	<ente name="CNIPA" urn="centro.nazionale.informatica.pubblica.amministrazione" />
+</localizzazione>
+<localizzazione name="Basilicata" urn="basilicata" >
+	<ente name="CNR" urn="consiglio.nazionale.ricerche" />
+	<ente name="CNIPA" urn="centro.nazionale.informatica.pubblica.amministrazione" />
+</localizzazione>
+<localizzazione name="Calabria" urn="calabria" >
+	<ente name="CNR" urn="consiglio.nazionale.ricerche" />
+	<ente name="CNIPA" urn="centro.nazionale.informatica.pubblica.amministrazione" />
+</localizzazione>
+<localizzazione name="Campania" urn="campania" >
+	<ente name="CNR" urn="consiglio.nazionale.ricerche" />
+	<ente name="CNIPA" urn="centro.nazionale.informatica.pubblica.amministrazione" />
+</localizzazione>
+<localizzazione name="Emilia Romagna" urn="emilia.romagna" >
+	<ente name="CNR" urn="consiglio.nazionale.ricerche" />
+	<ente name="CNIPA" urn="centro.nazionale.informatica.pubblica.amministrazione" />
+</localizzazione>
+<localizzazione name="Friuli Venezia Giulia" urn="friuli.venezia.giulia" >
+	<ente name="CNR" urn="consiglio.nazionale.ricerche" />
+	<ente name="CNIPA" urn="centro.nazionale.informatica.pubblica.amministrazione" />
+</localizzazione>
+<localizzazione name="Lazio" urn="lazio" >
+	<ente name="CNR" urn="consiglio.nazionale.ricerche" />
+	<ente name="CNIPA" urn="centro.nazionale.informatica.pubblica.amministrazione" />
+</localizzazione>
+<localizzazione name="Liguria" urn="liguria" >
+	<ente name="CNR" urn="consiglio.nazionale.ricerche" />
+	<ente name="CNIPA" urn="centro.nazionale.informatica.pubblica.amministrazione" />
+</localizzazione>
+<localizzazione name="Lombardia" urn="lombardia" >
+	<ente name="CNR" urn="consiglio.nazionale.ricerche" />
+	<ente name="CNIPA" urn="centro.nazionale.informatica.pubblica.amministrazione" />
+</localizzazione>
+<localizzazione name="Marche" urn="marche" >
+	<ente name="CNR" urn="consiglio.nazionale.ricerche" />
+	<ente name="CNIPA" urn="centro.nazionale.informatica.pubblica.amministrazione" />
+</localizzazione>
+<localizzazione name="Molise" urn="molise" >
+	<ente name="CNR" urn="consiglio.nazionale.ricerche" />
+	<ente name="CNIPA" urn="centro.nazionale.informatica.pubblica.amministrazione" />
+</localizzazione>
+<localizzazione name="Piemonte" urn="piemonte" >
+	<ente name="CNR" urn="consiglio.nazionale.ricerche" />
+	<ente name="CNIPA" urn="centro.nazionale.informatica.pubblica.amministrazione" />
+</localizzazione>
+<localizzazione name="Puglia" urn="puglia" >
+	<ente name="CNR" urn="consiglio.nazionale.ricerche" />
+	<ente name="CNIPA" urn="centro.nazionale.informatica.pubblica.amministrazione" />
+</localizzazione>
+<localizzazione name="Sardegna" urn="sardegna" >
+	<ente name="CNR" urn="consiglio.nazionale.ricerche" />
+	<ente name="CNIPA" urn="centro.nazionale.informatica.pubblica.amministrazione" />
+</localizzazione>
+<localizzazione name="Sicilia" urn="sicilia" >
+	<ente name="CNR" urn="consiglio.nazionale.ricerche" />
+	<ente name="CNIPA" urn="centro.nazionale.informatica.pubblica.amministrazione" />
+</localizzazione>
+<localizzazione name="Toscana" urn="toscana" >
+	<ente name="CNR" urn="consiglio.nazionale.ricerche" />
+	<ente name="CNIPA" urn="centro.nazionale.informatica.pubblica.amministrazione" />
+	<ente name="Consiglio comunale di Firenze" urn="comune.firenze;consiglio" />
+	<ente name="Consiglio comunale di Scandicci" urn="comune.scandicci;consiglio" />
+	<ente name="Consiglio comunale di Sesto Fiorentino" urn="comune.sesto.fiorentino;consiglio" />
+	<ente name="Consiglio comunale di Bagno a Ripoli" urn="comune.bagno.ripoli;consiglio" />
+	<ente name="Consiglio comunale di Prato" urn="comune.prato;consiglio" />
+</localizzazione>
+<localizzazione name="Trentino Alto Adige" urn="trentino.alto.adige" >
+	<ente name="CNR" urn="consiglio.nazionale.ricerche" />
+	<ente name="CNIPA" urn="centro.nazionale.informatica.pubblica.amministrazione" />
+</localizzazione>
+<localizzazione name="Umbria" urn="umbria" >
+	<ente name="CNR" urn="consiglio.nazionale.ricerche" />
+	<ente name="CNIPA" urn="centro.nazionale.informatica.pubblica.amministrazione" />
+</localizzazione>
+<localizzazione name="Valle d'Aosta" urn="valle.aosta" >
+	<ente name="CNR" urn="consiglio.nazionale.ricerche" />
+	<ente name="CNIPA" urn="centro.nazionale.informatica.pubblica.amministrazione" />
+</localizzazione>
+<localizzazione name="Veneto" urn="veneto" >
+	<ente name="CNR" urn="consiglio.nazionale.ricerche" />
+	<ente name="CNIPA" urn="centro.nazionale.informatica.pubblica.amministrazione" />
+</localizzazione>
+<localizzazione name="Nazionale" urn="nazionale">
+	<ente name="CNR" urn="consiglio.nazionale.ricerche" />
+	<ente name="CNIPA" urn="centro.nazionale.informatica.pubblica.amministrazione" />
+</localizzazione>
 </configuration>
