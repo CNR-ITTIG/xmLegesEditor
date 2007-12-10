@@ -45,45 +45,50 @@ public class XsltKeyTypedAction extends XsltAction {
 
 		AntiAliasedTextPane pane = (AntiAliasedTextPane) getTextComponent(e);
 
-		HTMLDocument doc = (HTMLDocument) pane.getDocument();
+		int caret = pane.getCaretPosition();
 
-		Element currElem = doc.getCharacterElement(pane.getCaretPosition());
-		Element enclosingSpan = pane.getSpan(pane.getCaretPosition());
-		currElem = enclosingSpan;
-		
-		if (enclosingSpan == null)
+		Element span = pane.getSpan(caret);
+
+		// Allow writing at end of span.
+		if(span == null) 
+			span = pane.getSpan(caret-1);
+
+		if (span == null)
 			return;
 
 		// verifica di spazi prima o dopo il cursore. 
 		// se ci sono  o siamo a inizio tag non inserisce
+		/* FIXME: 
+		 * va fatta verificando di essere all'interno dello stesso elemento
 		if (SPACE.equals(actionCommand)) {
-			int caret = pane.getCaretPosition();
-			try {    
-				if (SPACE.equals(pane.getText(caret - 1, 1)) /* || caret-1 == currElem.getStartOffset() */)
-					return;
-			} catch (BadLocationException ex) {
-			}
 			try {
-				if (SPACE.equals(pane.getText(caret, 1)) /* && caret + 1 != currElem.getEndOffset()*/)
-					return;
-			} catch (BadLocationException ex) {
-			}
+				if (SPACE.equals(pane.getText(caret - 1, 1))) return;
+			} catch (BadLocationException ex) { }
+			try {
+				if (SPACE.equals(pane.getText(caret, 1))) return;
+			} catch (BadLocationException ex) {	}
 		}
-		
-		Node modNode = pane.getXsltMapper().getDomById(pane.getElementId(currElem));
+		*/
+		Node modNode = pane.getXsltMapper().getDomById(pane.getElementId(span));
 
+		if(modNode == null) return;
+		
 		// FIXME spostare il controllo da xmLegesCore a xmLegesEditor
 		// aggiunto controllo Processing Instruction ?rif readonly
 		if(modNode.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE && modNode.getNodeValue().startsWith("<rif")) {
 			return;
 		}
-		
-		if (pane.getXsltMapper().getParentByGen(modNode) != null
-				/* || (modNode.getNodeType() == Node.COMMENT_NODE && getText(e, currElem).equals(pane.getXsltMapper().getI18nNodeText(modNode)))
-				|| (modNode.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE && getText(e, currElem).equals(pane.getXsltMapper().getI18nNodeText(modNode)))*/) {
-			pane.select(enclosingSpan.getStartOffset(), enclosingSpan.getEndOffset());
+				
+		try {
+			if(pane.getText(span.getStartOffset(), 
+						span.getEndOffset()-span.getStartOffset()).equals(pane.getDefaultText(span))) {
+				pane.select(span.getStartOffset(), span.getEndOffset());
+			}
+		} catch (BadLocationException e1) {
+			// There is no logger instance here!
+			e1.printStackTrace();
 		}
-
+	    	
 		super.actionPerformed(e);
 	}
 

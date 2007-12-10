@@ -486,7 +486,7 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 	}
 
 	public synchronized void fireSelectionChanged(Node node, int start, int end) {
-		logger.debug("new selection:" + start + "," + end);
+		logger.debug("fired Selection Changed: new selection:" + start + "," + end);
 		selectionManager.setSelectedText(this, node, start, end);
 	}
 
@@ -507,7 +507,7 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 		return this.rulesManager;
 	}
 
-	Logger getLogger() {
+	public Logger getLogger() {
 		return this.logger;
 	}
 
@@ -565,8 +565,9 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 		public void run() {
 			if (textPane.isShowing() && !updated){
 				updateTextPane();
-				// FIXME Tommaso: l'ho aggiunto io perche' partiva il thread di aggiornamento del pannello e perdeva il nodo (?)
-				textPane.selectNode(new Node[] { selectionManager.getActiveNode() });
+				// FIXME Tommaso: l'ho aggiunto io perche' partiva il thread 
+				// di aggiornamento del pannello e perdeva il nodo (?)
+				// textPane.selectNode(new Node[] { selectionManager.getActiveNode() });
 			}
 		}
 

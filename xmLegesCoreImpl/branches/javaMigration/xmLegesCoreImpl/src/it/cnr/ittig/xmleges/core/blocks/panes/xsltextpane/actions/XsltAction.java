@@ -86,41 +86,29 @@ public class XsltAction extends TextAction {
 		return getValue(Action.NAME).toString();
 	}
 	
-	protected String getText(ActionEvent evt, Element e)
+	protected String getText(ActionEvent evt, Element span)
 	{
+		if(!AntiAliasedTextPane.isMappedElement(span)) return null;
 		AntiAliasedTextPane pane = (AntiAliasedTextPane)getTextComponent(evt);
+		pane.getPane().getLogger().debug("XsltAction.getText()");
 		String retVal = null;
-		Element containingSpan = pane.getEnclosingSpan(e);
-		int start = e.getStartOffset(), end = e.getEndOffset();
-		if (containingSpan != null)
-		{
-			start = containingSpan.getStartOffset();
-			end = containingSpan.getEndOffset();
-		}
-		try
-		{
+		int start = span.getStartOffset();
+		int end = span.getEndOffset();
+		try	{
 			retVal = pane.getText(start, end - start).trim();
-		}
-		catch (BadLocationException ble) {}
-		
+		} catch (BadLocationException ble) {}
 		return retVal;
 	}
 
-	public void insertDefaultText(AntiAliasedTextPane pane, Element currElem, HTMLDocument doc)
+	public void insertDefaultText(AntiAliasedTextPane pane, Element span, HTMLDocument doc)
 	{
-		Element containingSpan = pane.getEnclosingSpan(currElem);
-		int start = currElem.getStartOffset();
-		if (containingSpan != null)
-		{
-			start = containingSpan.getStartOffset();
-			if (!currElem.getName().equals("content"))
-				currElem = doc.getCharacterElement(start);
-		}
+		if(!AntiAliasedTextPane.isMappedElement(span)) return;
+		pane.getPane().getLogger().debug("XsltAction.insertDefaultText(" + pane.getElementId(span) +")");
+		int start = span.getStartOffset();
     	try
 		{
-    		doc.insertString(start, pane.getDefaultText(currElem), currElem.getAttributes());
-		} catch (BadLocationException ble) {}
-		catch (NullPointerException npe) {}
-	
+    		doc.insertString(start, pane.getDefaultText(span), span.getAttributes());
+		} 
+    	catch (BadLocationException ble) { }
 	}
 }

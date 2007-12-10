@@ -26,20 +26,21 @@ public class NavigationFilter extends javax.swing.text.NavigationFilter {
 		if (direction == SwingConstants.EAST) {
 			int maxLen = textPane.getHTMLDocument().getDefaultRootElement().getEndOffset();
 			// muovi in avanti e fermati alla prima posizione che sta dentro uno span
-			for (int i = pos + 1; i < maxLen; i++) {
+			for (int i = pos+1; i < maxLen; i++) {
 				Element span = textPane.getSpan(i);
-				if (span != null /* && i != span.getStartOffset() */) {
+				Element prevSpan = textPane.getSpan(i-1);
+				// posizione consentita se dentro ad uno span o alla sua fine.
+				if(span != null || (span == null && prevSpan != null))
 					return i;
-				}
 			}
 			return pos;
 		} else if (direction == SwingConstants.WEST) {
 			// muovi all'indietro e fermati alla prima posizione che sta dentro uno span
-			for (int i = pos - 1; i >= 0; i--) {
+			for (int i = pos-1; i >= 0; i--) {
 				Element span = textPane.getSpan(i);
-				if (span != null /* && i != span.getStartOffset() */) {
+				Element prevSpan = textPane.getSpan(i-1);
+				if(span != null || (span == null && prevSpan != null))
 					return i;
-				}
 			}
 			return pos;
 		} else if (direction == SwingConstants.SOUTH) {
@@ -76,7 +77,7 @@ public class NavigationFilter extends javax.swing.text.NavigationFilter {
 	public void moveDot(FilterBypass fb, int dot, Bias bias) {
 		// se l'elemento si trova all'interno di uno span mappato, muoviti,
 		// altrimenti ignora l'azione.
-		if (textPane.getSpan(dot) != null) 
+		if (textPane.getSpan(dot) != null || textPane.getSpan(dot-1) != null) 
 			super.moveDot(fb, dot, bias);
 	}
 
@@ -108,6 +109,8 @@ public class NavigationFilter extends javax.swing.text.NavigationFilter {
 //			}
 			Element enclosingSpan = textPane.getSpan(dot);
 			boolean isEnclosed = enclosingSpan != null; // && ((newElem.getName().equals("content") && dot != enclosingSpan.getStartOffset()) || dot == enclosingSpan.getEndOffset());
+			if(!isEnclosed) enclosingSpan = textPane.getSpan(dot-1);
+			isEnclosed = enclosingSpan != null; // && ((newElem.getName().equals("content") && dot != enclosingSpan.getStartOffset()) || dot == enclosingSpan.getEndOffset());
 
 			if (isEnclosed)
 				// Quando l'utente clicca dentro uno span mappato, posiziona il cursors 

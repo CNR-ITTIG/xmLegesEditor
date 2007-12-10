@@ -30,6 +30,7 @@ import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.event.DocumentEvent.ElementChange;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
@@ -181,6 +182,7 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 		replaceSelection(UtilClipboard.getAsNode().getNodeValue());
 	}
 
+		
 	// ///////////////////////////////////////////////////////////////// CUT COPY PASTE
 
 	public synchronized void caretUpdate(CaretEvent e) {
@@ -211,13 +213,8 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 		}
 
 		int currpos = e.getDot();
-
-		// FIXME: Mirko (usare una getCurrentElement 
-				// ad hoc, al posto di getCharacterElement(pos)
-				// per poter selezionare accuratamente l'elemento
-				// correntemente sotto il cursore.
-		Element currelem = //getCurrentElement(); 
-		getHTMLDocument().getCharacterElement(currpos);
+		Element currelem = getSpan(currpos);
+		if(currelem==null) currelem = getSpan(currpos-1);
 
 		String id = getElementId(currelem);
 
@@ -226,28 +223,44 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 		removeAllHighlights();
 		highlightElement(currelem);
 
-		int selStart = Math.min(e.getDot(), e.getMark()), selEnd = Math.max(e.getDot(), e.getMark());
+		int selStart = Math.min(e.getDot(), e.getMark());
+		int selEnd = Math.max(e.getDot(), e.getMark());
 
 		if (e.getDot() != e.getMark()) {
+			logger.debug("caretUpdate: with dot!=mark");
 			// Se la selezione si estende su nodi diversi lanciamo l'evento
 			// SelectedNodesChanged
-			Element selDot = getHTMLDocument().getCharacterElement(e.getDot());
-			Element selDotEnclosing = getSpan(e.getDot());
-			int selDotStart = selDot.getStartOffset(), selDotEnd = selDot.getEndOffset();
-			if (selDotEnclosing != null) {
-				selDotStart = selDotEnclosing.getStartOffset();
-				selDotEnd = selDotEnclosing.getEndOffset();
-			}
-			Element selMark = getHTMLDocument().getCharacterElement(e.getMark());
-			Element selMarkEnclosing = getSpan(e.getMark());
-			int selMarkStart = selMark.getStartOffset(), selMarkEnd = selMark.getEndOffset();
-			if (selMarkEnclosing != null) {
-				selMarkStart = selMarkEnclosing.getStartOffset();
-				selMarkEnd = selMarkEnclosing.getEndOffset();
-			}
-			if (selDotEnclosing == null
-					|| selMarkEnclosing == null
-					|| (selDotEnclosing != null && selMarkEnclosing != null && (selDotEnclosing != selMarkEnclosing))) {
+			// MIRKO: 
+			// L'elemento sotto il caret (o dot o mark) viene individuato
+			// in modo "intelligente", quindi se ce n' solo uno a dx o
+			// a sx viene ritornato quello, mentre se ce ne sono due
+			// viene in genere ritornato quello di destra (con la conseguenza
+			// che non  possibile scrivere alla fine di un elemento che
+			// combacia con il successivo).
+			// In questo caso siamo pi interessati a sapere se  possibile
+			// che il cursore si trovi sullo stesso elemento (e stranamente
+			// il pane sembra non esserlo). Quindi non ci resta che provare
+			// tutte le combinazioni.
+			Element selDotA = getSpan(e.getDot());
+			Element selDotB = getSpan(e.getDot()-1);
+			Element selMarkA = getSpan(e.getMark());
+			Element selMarkB = getSpan(e.getMark()-1);
+			Element selDot = null, selMark = null;
+			if(selDotA == selMarkA) 
+				selDot = selMark = selDotA;
+			else if(selDotA == selMarkB)
+				selDot = selMark = selDotA;
+			else if(selDotB == selMarkA)
+				selDot = selMark = selDotB;
+			else 
+				{ selDot = selDotA; selMark = selMarkA; }
+			if(selMark == null || selDot == null) return;
+
+			int selDotStart = selDot.getStartOffset(), 
+				selDotEnd = selDot.getEndOffset();
+			int selMarkStart = selMark.getStartOffset(), 
+				selMarkEnd = selMark.getEndOffset();
+			if(selDot != selMark) {
 				int from = Math.min(selDotStart, selMarkStart);
 				int to = Math.max(selDotEnd, selMarkEnd);
 				Element[] enclosedElems = getEnclosedElements(from, to);
@@ -259,15 +272,12 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 				pane.fireSelectedNodesChanged(ancestorBros);
 				return;
 			}
+		} else {
+			logger.debug("caretUpdate: with dot==mark");
 		}
 
-		Element enclosingSpan = getSpan(currpos);
-		int relSelStart = selStart - currelem.getStartOffset();
+		int relSelStart = selStart  - currelem.getStartOffset();
 		int relSelEnd = selEnd - currelem.getStartOffset();
-		if (enclosingSpan != null) {
-			relSelStart = selStart - enclosingSpan.getStartOffset();
-			relSelEnd = selEnd - enclosingSpan.getStartOffset();
-		}
 
 		pane.fireSelectionChanged(selNode, relSelStart, relSelEnd);
 		pane.firePaneStatusChanged();
@@ -294,6 +304,8 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 		return -1;
 	}
 
+	/** Default text (used to fill empty elements) for the dom node
+	 * 	associated to the given element */
 	public String getDefaultText(Element e) {
 		try {
 			Node node = getXsltMapper().getDomById(getElementId(e));
@@ -306,20 +318,11 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 		}
 	}
 
+	/** Returns the string id of the given element (or null) */
 	public String getElementId(Element e) {
 		if (e == null)
 			return null;
-
-		String id = getIdInAttributeSet(e.getAttributes());
-
-		if (id == null) {
-			Element startSpan = getEnclosingSpan(e);
-			if (startSpan != null) {
-				id = getIdInAttributeSet(startSpan.getAttributes());
-			}
-		}
-
-		return id;
+		return getIdInAttributeSet(e.getAttributes());
 	}
 
 	protected String[] getElementId(Element[] elems) {
@@ -362,29 +365,31 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 		return array;
 	}
 	
-	// TODO: A partire da Java 5 non esiste piÃ¹ un tag di chiusura
+	// A partire da Java 5 non esiste pi un tag di chiusura
 	// esplicito per gli elementi span, che diventano di tipo content
+	/** Gets the mapped span surrounding the given element (or null) */
 	public static Element getEnclosingSpan(Element e) {
-		while(e != null && !(isSpan(e) && isMapped(e)))
-			e = e.getParentElement();
-		return e;
+		if(e != null && isSpan(e) && isMapped(e))
+			return e;
+		else
+			return null;
 	}
 	
-	public Element getSpan(int dot) {
-		Element e = getHTMLDocument().getCharacterElement(dot);
-
-		while(e != null && !(isSpan(e) && isMapped(e)))
-			e = e.getParentElement();
-
-		if(e == null) {
-			e = getHTMLDocument().getCharacterElement(dot - 1);
-			while(e != null && !(isSpan(e) && isMapped(e)))
-				e = e.getParentElement();
-		}	
-
-		return e;
+	/** Tells mapped elements */
+	public static boolean isMappedElement(Element e) {
+		return (e != null && isMapped(e));
 	}
 
+	/** Gets the mapped span at point (or null)*/
+	public Element getSpan(int dot) {
+		Element e = getHTMLDocument().getCharacterElement(dot);
+		if(e != null && isSpan(e) && isMapped(e))
+			return e;
+		else
+			return null;
+	}
+
+	/** Tells mapped elements from elements without a mapped id. */
 	protected static boolean isMapped(Element e) 
 	{
 		AttributeSet as = e.getAttributes();
@@ -396,6 +401,7 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 			return false;
 	}
 
+	/** Somewhat complicated method to identify span elements. */
 	protected static boolean isSpan(Element e) {
 		if(e == null) return false;
 		if("content".equals(e.getName())) {
@@ -412,8 +418,7 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 	}	
 
 	protected String getHtml(Node node) {
-		if (logger.isDebugEnabled())
-			logger.debug("BEGIN getHTML(Node)");
+		logger.debug("BEGIN getHTML(Node)");
 		String ret = HTML_ERROR;
 		Node nodeHtml = null;
 		try {
@@ -500,9 +505,7 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 	protected void highlightElement(Element e) {
 		if (e == null)
 			return;
-
 		Highlighter hl = getHighlighter();
-
 		Element enclosingSpan = getEnclosingSpan(e);
 		int hlStart = e.getStartOffset();
 		int hlEnd = e.getEndOffset();
@@ -529,36 +532,31 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 		if (ignoreDocumentEvents)
 			return;
 
-		try {
-			Element modElem = getHTMLDocument().getCharacterElement(e.getOffset());
-
-			String id = getElementId(modElem);
-
-			Node modNode = pane.getXsltMapper().getDomById(id);
-			String newText = "";
-
-			try {
-
-				Element containingSpan = getEnclosingSpan(modElem);
-				int start = modElem.getStartOffset();
-				int end = modElem.getEndOffset();
-				if (containingSpan != null) {
-					start = containingSpan.getStartOffset();
-					end = containingSpan.getEndOffset();
-				}
-
-				newText = getText(start, end - start);
-
-				if (e.getLength() > 1 && newText.equals(getXsltMapper().getI18nNodeText(modNode.getParentNode()))) {
-					newText = null;
-				}
-			} catch (BadLocationException ble) {
+		Element modElem = getSpan(getCaretPosition()); 
+		if(modElem == null) 
+			{
+			logger.debug("insertUpdate: Span not found, using next one.");
+			modElem = getSpan(getCaretPosition()+1);
 			}
-			pane.updateNode(modNode, newText);
-		} catch (Exception ex) {
 
+		if(modElem == null) return;
+			
+		String id = getElementId(modElem);
+		logger.debug("insertUpdate: id == " + id);
+		Node modNode = pane.getXsltMapper().getDomById(id);
+		logger.debug("with content: " + modNode.getTextContent());
+		String newText = "";
+
+		try {
+			int start = modElem.getStartOffset();
+			int end = modElem.getEndOffset();
+			newText = getText(start, end - start);
+			if (e.getLength() > 1 && newText.equals(getXsltMapper().getI18nNodeText(modNode.getParentNode()))) {
+				newText = null;
+			}
+		} catch (BadLocationException ble) {
 		}
-
+		pane.updateNode(modNode, newText);
 	}
 
 	/**
@@ -592,7 +590,7 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 		if (ignoreDocumentEvents)
 			return;
 
-		Element modElem = getHTMLDocument().getCharacterElement(e.getOffset());
+		Element modElem = getHTMLDocument().getCharacterElement(getCaretPosition()/*e.getOffset()*/);
 
 		String id = getElementId(modElem);
 
@@ -747,6 +745,7 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 				setText("");
 			} else {
 				String text = getHtml(dom);
+				logger.debug(text);
 				setText(text);
 				setEnabled(true);
 			}
@@ -765,7 +764,7 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 			ignoreDocumentEvents = true;
 			ignoreCaretEvents = true;
 			try {
-				if (isSpan(elem)) {
+				if (isSpan(elem) && isMapped(elem)) {
 					Element curr = elem.getParentElement();
 					boolean found = false;
 					String idDiv = null;
