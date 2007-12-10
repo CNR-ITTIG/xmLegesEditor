@@ -2,7 +2,7 @@ package it.cnr.ittig.xmleges.editor.blocks.dalos.kb;
 
 public class KbConf {
 
-	public static boolean MERGE_DOMAIN = false;
+	public static boolean MERGE_DOMAIN = true;
 	
 	public static String dalosRepository = "dalos/";
 		

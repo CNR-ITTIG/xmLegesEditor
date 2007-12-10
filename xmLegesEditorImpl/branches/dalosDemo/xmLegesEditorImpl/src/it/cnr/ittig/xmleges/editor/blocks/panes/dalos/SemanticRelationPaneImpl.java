@@ -189,109 +189,50 @@ public class SemanticRelationPaneImpl implements SemanticRelationPane, EventMana
 		tree.reloadModel();
 	}
 	
-//	void showSemanticRelations(Synset syn) {
-//		
-//		Collection relations = syn.semanticToSynset.keySet(); 
-//		
-//		DefaultMutableTreeNode top = null, node = null;
-//
-//		clearTree(relazioniTree);
-//
-//		relazioniTree.setRootUserObject(syn.toString());
-//		relazioniTree.setRootVisible(true);
-//	
-//		if(relations == null || relations.size() < 1) {
-//			return;
-//		}
-//		
-//		String rel = "";
-//
-//		for(Iterator i = relations.iterator(); i.hasNext();) {
-//			String thisRel = (String) i.next();
-//			if(thisRel.equalsIgnoreCase("semantic-property")) {
-//				continue;
-//			}
-//			if( !rel.equals(thisRel) ) {
-//				relazioniTree.expandChilds(top);
-//				rel = thisRel;
-//				top = new DefaultMutableTreeNode(rel);
-//				relazioniTree.addNode(top);
-//			}
-//			Collection values = (Collection) syn.semanticToSynset.get(thisRel);
-//			for(Iterator k = values.iterator(); k.hasNext();) {
-//				Synset item = (Synset) k.next();
-//				node = new DefaultMutableTreeNode(item);
-//				top.add(node);				
-//			}
-//		}
-//		
-//		relazioniTree.expandChilds(top);
-//		
-//		JScrollBar vbar = scrollPane.getVerticalScrollBar();
-//		vbar.setValue(vbar.getMinimum());
-//		JScrollBar hbar = scrollPane.getHorizontalScrollBar();
-//		hbar.setValue(hbar.getMinimum());
-//	}
-	
-	//FAKE TREE:
 	void showSemanticRelations(Synset syn) {
 		
+		Collection relations = syn.semanticToSynset.keySet(); 
+		
+		DefaultMutableTreeNode top = null, node = null;
+
 		clearTree(relazioniTree);
-		
-		relazioniTree.setRootUserObject("service providing");
+
+		relazioniTree.setRootUserObject(syn.toString());
 		relazioniTree.setRootVisible(true);
-
-		DefaultMutableTreeNode propNode = new DefaultMutableTreeNode("qualified_by");
-		((SynsetTree) relazioniTree).addNode(propNode);
-		DefaultMutableTreeNode classNode1 = new DefaultMutableTreeNode("Contract");
-		propNode.add(classNode1);
-		DefaultMutableTreeNode leafNode = new DefaultMutableTreeNode("distance contract");
-		classNode1.add(leafNode);
-		leafNode = new DefaultMutableTreeNode("sale contract");
-		classNode1.add(leafNode);
-		propNode = new DefaultMutableTreeNode("has_partecipant");
-		((SynsetTree) relazioniTree).addNode(propNode);
-		DefaultMutableTreeNode classNode2 = new DefaultMutableTreeNode("Legal Person");
-		propNode.add(classNode2);
-		leafNode = new DefaultMutableTreeNode("authority");
-		classNode2.add(leafNode);
-		leafNode = new DefaultMutableTreeNode("administrative authority");
-		classNode2.add(leafNode);
-		leafNode = new DefaultMutableTreeNode("trade groups");
-		classNode2.add(leafNode);
-		DefaultMutableTreeNode classNode3 = new DefaultMutableTreeNode("Natural Person");
-		propNode.add(classNode3);
-		leafNode = new DefaultMutableTreeNode("natural person");
-		classNode3.add(leafNode);
-		leafNode = new DefaultMutableTreeNode("person");
-		classNode3.add(leafNode);
-		propNode = new DefaultMutableTreeNode("has_role");
-		((SynsetTree) relazioniTree).addNode(propNode);
-		DefaultMutableTreeNode classNode4 = new DefaultMutableTreeNode("Service Provider");
-		propNode.add(classNode4);
-		leafNode = new DefaultMutableTreeNode("information society service provider");
-		classNode4.add(leafNode);
-		leafNode = new DefaultMutableTreeNode("service provider");
-		classNode4.add(leafNode);
-		leafNode = new DefaultMutableTreeNode("supplier");
-		classNode4.add(leafNode);
-		DefaultMutableTreeNode classNode5 = new DefaultMutableTreeNode("Recipient of the Service");
-		propNode.add(classNode5);
-		leafNode = new DefaultMutableTreeNode("recipient of the service");
-		classNode5.add(leafNode);
+	
+		if(relations == null || relations.size() < 1) {
+			return;
+		}
 		
-		relazioniTree.expandChilds(classNode1);
-		relazioniTree.expandChilds(classNode2);
-		relazioniTree.expandChilds(classNode3);
-		relazioniTree.expandChilds(classNode4);
-		relazioniTree.expandChilds(classNode5);
+		String rel = "";
 
+		for(Iterator i = relations.iterator(); i.hasNext();) {
+			String thisRel = (String) i.next();
+			if(thisRel.equalsIgnoreCase("semantic-property")) {
+				continue;
+			}
+			if( !rel.equals(thisRel) ) {
+				relazioniTree.expandChilds(top);
+				rel = thisRel;
+				top = new DefaultMutableTreeNode(rel);
+				relazioniTree.addNode(top);
+			}
+			Collection values = (Collection) syn.semanticToSynset.get(thisRel);
+			for(Iterator k = values.iterator(); k.hasNext();) {
+				Synset item = (Synset) k.next();
+				node = new DefaultMutableTreeNode(item);
+				top.add(node);				
+			}
+		}
+		
+		relazioniTree.expandChilds(top);
+		
 		JScrollBar vbar = scrollPane.getVerticalScrollBar();
 		vbar.setValue(vbar.getMinimum());
 		JScrollBar hbar = scrollPane.getHorizontalScrollBar();
 		hbar.setValue(hbar.getMinimum());
 	}
-
+	
 	public boolean canCut() {
 		return false;
 	}
