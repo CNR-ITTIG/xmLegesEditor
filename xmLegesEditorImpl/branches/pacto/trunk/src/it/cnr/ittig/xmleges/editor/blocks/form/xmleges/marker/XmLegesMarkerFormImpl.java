@@ -261,6 +261,9 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 		 16   Disegno di Legge
 		 17   Documento NIR
 		 18   Provvedimento CNR
+		 19	  Statuto Comunale	
+		 20	  Regolamento Comunale
+		 21	  Delibera Consiliare
 		 */
 		
 		String comboItem = null;
@@ -276,7 +279,7 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 			else if((unknownTipoDoc.startsWith("decreto") && unknownTipoDoc.indexOf("legislativo")!=-1) || unknownTipoDoc.indexOf("lgs")!=-1 || unknownTipoDoc.indexOf("dlgs")!=-1)
 				comboItem = parser.TIPO_DOC[3];
 			else if((unknownTipoDoc.startsWith("decreto") && unknownTipoDoc.indexOf("legge")!=-1) || unknownTipoDoc.indexOf("d.l")!=-1 || unknownTipoDoc.indexOf("dl")!=-1)
-				comboItem = parser.TIPO_DOC[2];
+				comboItem = parser.TIPO_DOC[2];	
 			else if((unknownTipoDoc.indexOf("regio")!=-1))
 				comboItem = parser.TIPO_DOC[4];
 			else if(unknownTipoDoc.indexOf("repubblica")!=-1 || unknownTipoDoc.indexOf("dpr")!=-1 || unknownTipoDoc.indexOf("d.p.r")!=-1)
@@ -289,6 +292,12 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 				comboItem = parser.TIPO_DOC[16];
 			else if(unknownTipoDoc.indexOf("provvedimento")!=-1)
 				comboItem = parser.TIPO_DOC[18];
+			else if(unknownTipoDoc.startsWith("statuto") && unknownTipoDoc.indexOf("comunale")!=-1 || unknownTipoDoc.indexOf("stc")!=-1)
+				comboItem = parser.TIPO_DOC[19];
+			else if(unknownTipoDoc.startsWith("regolamento") && unknownTipoDoc.indexOf("comunale")!=-1 || unknownTipoDoc.indexOf("regc")!=-1)
+				comboItem = parser.TIPO_DOC[20];
+			else if(unknownTipoDoc.startsWith("delibera") && unknownTipoDoc.indexOf("consiliare")!=-1 || unknownTipoDoc.indexOf("delc")!=-1)
+				comboItem = parser.TIPO_DOC[21];
 			else 
 				comboItem = parser.TIPO_DOC[0];
 			
@@ -298,9 +307,7 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 		else
 			tipoDoc.setSelectedIndex(0);
 	}
-	
-	
-	
+
 	protected class AnalyzeAction extends AbstractAction {
 
 		public void actionPerformed(ActionEvent e) {
@@ -384,7 +391,6 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 			return tipoDtd.getSelectedIndex();
 	}
 	
-	
 	public void actionPerformed(ActionEvent e) {
 			
 		if (e.getSource().equals(tipoDoc)) {
@@ -392,7 +398,6 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 		}
 	}
 
-	
 	public String getErrorMessage() {
 		return "editor.form.xmleges.marker.msg.error.analizza";
 	}
