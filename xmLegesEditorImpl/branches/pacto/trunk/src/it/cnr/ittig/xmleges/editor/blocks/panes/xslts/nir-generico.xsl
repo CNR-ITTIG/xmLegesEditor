@@ -78,7 +78,6 @@
 	<xsl:template match="/*[name()='NIR']/*/*[name()='formulainiziale']">
 		<a name="{@id}"></a>
 		<div class="formulainiziale">
-		<span></span>
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
 				<xsl:call-template name="vigenza"/>
@@ -101,15 +100,31 @@
 	
 	<xsl:template match="/*[name()='NIR']/*/*[name()='intestazione']">
 		<div class="intestazione">
-		<span></span>
-			<xsl:apply-templates/>
+			<xsl:apply-templates/>						
 		</div>
 		<hr/>
 	</xsl:template>
 	
+	
+	<xsl:template match="//*[name()='tipoDoc']">
+		<span> 
+			<xsl:value-of select="."/>&#160;
+		</span>
+	</xsl:template>
+	<xsl:template match="//*[name()='dataDoc']">
+		<span> 
+			<xsl:value-of select="."/>&#160;
+		</span>
+	</xsl:template>	
+	<xsl:template match="//*[name()='numDoc']">
+		<span> 
+			<xsl:value-of select="."/>&#160;
+		</span>
+	</xsl:template>
+	
+	
 	<xsl:template match="//*[name()='emanante']">
 		<div class="title"> 
-		<span></span>
 			<xsl:apply-templates/>
 		</div>
 	</xsl:template>
@@ -117,7 +132,6 @@
 	<xsl:template match="//*[name()='titoloDoc']">
 		<a name="{@id}"></a>
 		<div class="titoloDoc">
-		<span></span>
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
 				<xsl:call-template name="vigenza"/>
