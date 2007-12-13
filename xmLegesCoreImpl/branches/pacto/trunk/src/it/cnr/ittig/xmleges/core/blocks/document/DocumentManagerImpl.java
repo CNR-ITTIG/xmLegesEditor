@@ -236,8 +236,9 @@ public class DocumentManagerImpl implements DocumentManager, EventListener, Logg
 	}
 
 	private String getDtdPath(Document doc) {
-		if (doc != null)
+		if (doc != null){
 			return (doc.getDoctype().getSystemId());
+		}
 		return null;
 	}
 
