@@ -51,16 +51,13 @@ font-size: 150%;
 
 .preambolo {
 	text-align: left;
-	font-size: 90%;
-	font-weight:normal;
+	font-size: 100%;
 }
 
 .articolo { 
-	font-size: 90% ; 
+	font-size: 100% ; 
 	margin-top: 15px; 
 	text-align: center;
-	font-weight:bold;
-	color:#990000;
 }
 
 .articolo {
@@ -101,7 +98,6 @@ p.rubrica {
 	text-indent: 2em;
 	margin-top: 2px;
 	padding: 3px;
-	background: #f9f9f9;
 }
 .en {
 	text-align: justify;
