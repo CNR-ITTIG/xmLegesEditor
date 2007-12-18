@@ -1,0 +1,2197 @@
+<?xml version="1.0" encoding="iso-8859-15"?>
+	<!DOCTYPE NIR SYSTEM 'nircompleto.dtd'>
+	<NIR tipo="originale" xmlns="http://www.normeinrete.it/nir/2.2/" xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<DocumentoNIR nome="STATUTO">
+			<meta>
+				<descrittori>
+					<pubblicazione norm="" num="" tipo="BURT" />
+					<entratainvigore norm="" />
+					<redazione id="red1" nome="" norm="" />
+					<urn valore="urn:nir:comune.firenze:statuto:2000-11-13;1206" />
+					<urn valore="urn:nir:comune.firenze;consiglio:deliberazione:2000-11-13;1206:allegato.1" />
+				</descrittori>
+			</meta>
+			<intestazione>
+				<emanante>Comune di Firenze</emanante>
+				<tipoDoc>STATUTO</tipoDoc>
+				<dataDoc norm="20001113">13 novembre 2000</dataDoc>
+				n. 
+				<numDoc>1206</numDoc>
+				<titoloDoc>
+					<rif xlink:href="urn:nir:comune.firenze:statuto:" xlink:type="simple">Statuto</rif>
+				</titoloDoc>
+			</intestazione>
+			<formulainiziale />
+			<articolato>
+				<titolo id="tit1">
+					<num>Titolo I</num>
+					<rubrica>Principi </rubrica>
+					<capo id="tit1-cap1">
+						<num>Capo I</num>
+						<rubrica>Profili istituzionali </rubrica>
+						<articolo id="art1">
+							<num>Art. 1</num>
+							<rubrica>(Autonomia comunale) </rubrica>
+							<comma id="art1-com1">
+								<num>1.</num>
+								<corpo>Il Comune di Firenze è l'Ente autonomo rappresentativo della comunità cittadina. </corpo>
+							</comma>
+							<comma id="art1-com2">
+								<num>2.</num>
+								<corpo>
+									Il Comune di Firenze fonda la propria azione sui principi e valori della Costituzione italiana ed esercita tutte le funzioni non attribuite espressamente dall'ordinamento ad altri enti, disciplina la propria organizzazione nell'ambito dei principi fissati dalle leggi e dallo 
+									<rif xlink:href="urn:nir:comune.firenze:statuto:" xlink:type="simple">Statuto</rif>
+									. 
+								</corpo>
+							</comma>
+							<comma id="art1-com3">
+								<num>3.</num>
+								<corpo>La gestione dei servizi e le attività amministrative sono informate al metodo della programmazione ricercando la cooperazione con la Regione e gli altri enti locali. </corpo>
+							</comma>
+							<comma id="art1-com4">
+								<num>4.</num>
+								<corpo>Il Comune di Firenze ha autonomia normativa, organizzativa ed amministrativa, nonché impositiva e finanziaria nell'ambito dei propri regolamenti e delle leggi di coordinamento della finanza locale. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art2">
+							<num>Art. 2</num>
+							<rubrica>(Territorio, sede, stemma) </rubrica>
+							<comma id="art2-com1">
+								<num>1.</num>
+								<corpo>Sono elementi costitutivi del Comune di Firenze il territorio e la comunità. </corpo>
+							</comma>
+							<comma id="art2-com2">
+								<num>2.</num>
+								<corpo>La sede del Comune è Palazzo Vecchio. </corpo>
+							</comma>
+							<comma id="art2-com3">
+								<num>3.</num>
+								<corpo>Lo stemma del Comune di Firenze raffigura un giglio aperto di colore rosso in campo bianco come descritto nel Decreto di riconoscimento del 25 luglio 1929. Le modalità d'uso dello stemma e del gonfalone e la loro riproduzione sono disciplinate con norme regolamentari. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art3">
+							<num>Art. 3</num>
+							<rubrica>(Principio di Sussidiarietà) </rubrica>
+							<comma id="art3-com1">
+								<num>1.</num>
+								<corpo>Il Comune svolge le proprie funzioni di interesse pubblico secondo il principio di sussidiarietà, anche attraverso le attività che possono essere adeguatamente esercitate dall'autonoma iniziativa dei cittadini e delle loro formazioni sociali. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art4">
+							<num>Art. 4</num>
+							<rubrica>(Partecipazione e informazione) </rubrica>
+							<comma id="art4-com1">
+								<num>1.</num>
+								<corpo>Il Comune di Firenze attua e sperimenta un sistema di relazioni partecipate su materie scelte dell'Amministrazione riguardanti la città e l'ambito territoriale metropolitano, ritenute di particolare rilievo ed interesse per la cittadinanza e per un'effettiva partecipazione popolare. </corpo>
+							</comma>
+							<comma id="art4-com2">
+								<num>2.</num>
+								<corpo>Tale sistema partecipativo dovrà consentire l'individuazione di forme di coinvolgimento più incisive, con particolare riferimento ai cittadini singoli o associati, oltre alle rappresentanze delle diverse realtà socio-economiche della città, con criteri di attuazione della rappresentatività, anche articolata in funzione delle materie in discussione. </corpo>
+							</comma>
+							<comma id="art4-com3">
+								<num>3.</num>
+								<corpo>Nel rispetto del dettato costituzionale riconosce e valorizza il ruolo di confronto, di proposta e di contrattazione dei sindacati dei lavoratori. </corpo>
+							</comma>
+							<comma id="art4-com4">
+								<num>4.</num>
+								<corpo>Il Comune di Firenze, oltre a ricercare un'effettiva e responsabilizzata partecipazione per il raggiungimento di soluzioni ottimali, con la più ampia condivisione possibile, garantisce un'efficace, completa e imparziale informazione sull'operato e le scelte dell'Amministrazione, anche attraverso sistemi di comunicazione con i cittadini. </corpo>
+							</comma>
+							<comma id="art4-com5">
+								<num>5.</num>
+								<corpo>Il Comune organizza i propri uffici con il fine della massima efficienza amministrative e del costante adeguamento alle esigenze del cittadino. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art5">
+							<num>Art. 5</num>
+							<rubrica>(Pari opportunità) </rubrica>
+							<comma id="art5-com1">
+								<num>1.</num>
+								<corpo>Il Comune attua condizioni di pari opportunità tra uomo e donna nell'esercizio delle funzioni istituzionali e nella gestione dei pubblici servizi. </corpo>
+							</comma>
+							<comma id="art5-com2">
+								<num>2.</num>
+								<corpo>Il Comune promuove la presenza dei due sessi nella Giunta, nell'Ufficio di Presidenza del Consiglio comunale, nelle Commissioni consiliari e di quartiere, nelle rappresentanze del Comune negli enti partecipati. </corpo>
+							</comma>
+							<comma id="art5-com3">
+								<num>3.</num>
+								<corpo>Il Comune è impegnato per creare le condizioni di pari opportunità nello svolgimento della vita sociale in tutti i suoi aspetti. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art6">
+							<num>Art. 6</num>
+							<rubrica>(Diritti di cittadinanza) </rubrica>
+							<comma id="art6-com1">
+								<num>1.</num>
+								<corpo>Il Comune informa la sua attività ai valori della partecipazione e della solidarietà e garantisce il diritto di pari dignità nella società e nel lavoro, operando per impedire qualsiasi forma di discriminazione legata al genere, all'orientamento sessuale, all'etnia, alla lingua, alla religione e all'handicap. </corpo>
+							</comma>
+							<comma id="art6-com2">
+								<num>2.</num>
+								<corpo>Garantisce e valorizza il diritto della persona, in forma singola o associata, a concorrere all'indirizzo, allo svolgimento e al controllo delle attività dell'amministrazione locale. A tal fine assicura la partecipazione dei cittadini alla gestione dei servizi. </corpo>
+							</comma>
+							<comma id="art6-com3">
+								<num>3.</num>
+								<alinea>
+									Sono titolari individuali dei diritti di iniziativa, partecipazione, accesso ed informazione, salvo diversa esplicita disposizione di legge, 
+									<rif xlink:href="urn:nir:comune.firenze:statuto:" xlink:type="simple">Statuto</rif>
+									, regolamento: 
+								</alinea>
+								<el id="art6-com3-leta">
+									<num>a)</num>
+									<corpo>i cittadini iscritti nelle liste elettorali del Comune di Firenze; </corpo>
+								</el>
+								<el id="art6-com3-letb">
+									<num>b)</num>
+									<corpo>i cittadini residenti nel Comune, non ancora elettori, che abbiano compiuto il sedicesimo anno di età; </corpo>
+								</el>
+								<el id="art6-com3-letc">
+									<num>c)</num>
+									<corpo>i cittadini italiani, stranieri, apolidi, maggiorenni ancorché non residenti ma che nel Comune esercitano la propria prevalente attività di lavoro e di studio. </corpo>
+								</el>
+							</comma>
+						</articolo>
+						<articolo id="art7">
+							<num>Art. 7</num>
+							<rubrica>(Potestà regolamentare) </rubrica>
+							<comma id="art7-com1">
+								<num>1.</num>
+								<corpo>I regolamenti, atti normativi approvati dal Consiglio comunale, disciplinano le materie ad esso rinviate dalla legge e dal presente Statuto. </corpo>
+							</comma>
+							<comma id="art7-com2">
+								<num>2.</num>
+								<corpo>Le contravvenzioni ai regolamenti comunali e alle relative ordinanze sono punite con sanzioni amministrative la cui entità è stabilita nei regolamenti stessi. </corpo>
+							</comma>
+						</articolo>
+					</capo>
+					<capo id="tit1-cap2">
+						<num>Capo II</num>
+						<rubrica>Finalità </rubrica>
+						<articolo id="art8">
+							<num>Art. 8</num>
+							<rubrica>(Solidarietà internazionale) </rubrica>
+							<comma id="art8-com1">
+								<num>1.</num>
+								<corpo>Il Comune favorisce la libertà, la pace e l'incontro fra i popoli. Si impegna per il rispetto, la dignità e l'accoglienza di ogni essere umano, attiva forme di cooperazione, scambi e gemellaggi con le città di tutto il mondo. </corpo>
+							</comma>
+							<comma id="art8-com2">
+								<num>2.</num>
+								<corpo>Promuove e sostiene iniziative che sviluppano il processo di integrazione europea, persegue gli intenti della Carta europea dell'autonomia locale e si impegna per la sua attuazione. </corpo>
+							</comma>
+							<comma id="art8-com3">
+								<num>3.</num>
+								<corpo>Ricerca, nello spirito di solidarietà ed impegnandosi per offrire opportunità di lavoro ed accesso alla casa, l'integrazione sociale degli immigrati e garantisce il rispetto dei loro diritti. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art9">
+							<num>Art. 9</num>
+							<rubrica>(Cultura) </rubrica>
+							<comma id="art9-com1">
+								<num>1.</num>
+								<corpo>Il Comune valorizza il patrimonio culturale della città in tutte le sue forme, sostiene la produzione di nuove espressioni culturali, favorisce iniziative fondate sulla tradizione storica locale, promuove nel rispetto delle reciproche autonomie la più ampia collaborazione con l'Università di Firenze e le altre istituzioni culturali. </corpo>
+							</comma>
+							<comma id="art9-com2">
+								<num>2.</num>
+								<corpo>Opera per la conservazione e valorizzazione del patrimonio monumentale, artistico, archivistico, documentale e librario e per garantire alla cittadinanza il diritto alla fruizione ed alla consultazione di tale patrimonio. </corpo>
+							</comma>
+							<comma id="art9-com3">
+								<num>3.</num>
+								<corpo>Provvede ad incentivare occasioni di formazione professionale per il restauro, l'artigianato artistico, le espressioni culturali. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art10">
+							<num>Art. 10</num>
+							<rubrica>(Istruzione) </rubrica>
+							<comma id="art10-com1">
+								<num>1.</num>
+								<corpo>Il Comune opera perché, oltre al superamento di ogni forma di analfabetismo, sia reso effettivo il diritto allo studio ed alla formazione permanente dei cittadini, concorrendo alla realizzazione di un sistema educativo che garantisca a tutti ed a tutte le età eguali opportunità di istruzione e di cultura. </corpo>
+							</comma>
+							<comma id="art10-com2">
+								<num>2.</num>
+								<corpo>Riconosce la primarietà degli interventi rivolti alla prima infanzia e, nella propria attività amministrativa, persegue il fine del pieno accesso delle bambine e dei bambini ai servizi educativi. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art11">
+							<num>Art. 11</num>
+							<rubrica>(Ambiente, acqua e territorio) </rubrica>
+							<comma id="art11-com1">
+								<num>1.</num>
+								<corpo>Il Comune riconosce la tutela dell'ambiente e del paesaggio fra i valori fondamentali della comunità. A tal fine, nell'ambito delle competenze attribuitegli dalla legge, sostiene interventi e progetti di recupero ambientale, naturale, di riqualificazione dell'estetica cittadina, adotta tutte le misure per contrastare e ridurre l'inquinamento atmosferico, acustico, delle acque e garantire la salubrità dei luoghi di lavoro, opera per l'abbattimento delle barriere architettoniche, può costituire società per azioni per progettare e realizzare interventi di trasformazione urbana in attuazione degli strumenti urbanistici vigenti. </corpo>
+							</comma>
+							<comma id="art11-com2">
+								<num>2.</num>
+								<corpo>Il Comune riconosce l'acqua come bene comune dell'umanità, appartenente a tutti gli organismi viventi. L'accesso all'acqua è un diritto umano e sociale, individuale e collettivo. </corpo>
+							</comma>
+							<comma id="art11-com3">
+								<num>3.</num>
+								<corpo>Predispone la costante verifica sulle trasformazioni urbanistiche ed edilizie nel centro storico prevedendo limiti e vincoli per le modifiche di destinazione d'uso. </corpo>
+							</comma>
+							<comma id="art11-com4">
+								<num>4.</num>
+								<corpo>Sottopone a particolare garanzia di conservazione e salvaguardia l'area collinare e le aree di pertinenza dei fiumi, tutela le aree agricole, le coltivazioni e le alberature. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art12">
+							<num>Art. 12</num>
+							<rubrica>(Politiche sociali e sanitarie) </rubrica>
+							<comma id="art12-com1">
+								<num>1.</num>
+								<corpo>Il Comune pone al centro della sua azione amministrativa il riconoscimento e la tutela della persona umana. </corpo>
+							</comma>
+							<comma id="art12-com2">
+								<num>2.</num>
+								<corpo>Concorre a garantire il diritto alla salute e promuove una diffusa educazione sanitaria per un'efficace opera di prevenzione. Assicura i servizi per l'informazione e l'emergenza sanitaria. </corpo>
+							</comma>
+							<comma id="art12-com3">
+								<num>3.</num>
+								<corpo>Sviluppa un efficiente servizio di assistenza sociale a favore delle categorie più deboli ed emarginate, riconoscendo pari dignità a tutti i soggetti pubblici, privati e del volontariato operanti nel settore. </corpo>
+							</comma>
+							<comma id="art12-com4">
+								<num>4.</num>
+								<corpo>Si impegna a garantire alla popolazione anziana l'accoglienza ed il sostegno necessario e a rimuovere particolari situazioni di povertà e di emarginazione. </corpo>
+							</comma>
+							<comma id="art12-com5">
+								<num>5.</num>
+								<corpo>Attua una politica di interventi sociali a tutela delle famiglie. </corpo>
+							</comma>
+							<comma id="art12-com6">
+								<num>6.</num>
+								<corpo>Opera per assicurare ad ogni cittadino il diritto alla casa. Interviene per il pieno utilizzo del patrimonio immobiliare e favorisce il mercato delle locazioni. </corpo>
+							</comma>
+							<comma id="art12-com7">
+								<num>7.</num>
+								<corpo>Promuove l'attività fisico-motoria e la pratica sportiva quali momenti formativi ed occasioni di incontro e di espressione della persona assicurando l'accesso agli impianti comunali e collabora con le associazioni e le società sportive per garantire l'educazione motoria in ogni fascia d'età. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art13">
+							<num>Art. 13</num>
+							<rubrica>(Economia e lavoro) </rubrica>
+							<comma id="art13-com1">
+								<num>1.</num>
+								<corpo>Il Comune favorisce il sistema produttivo locale, valorizza la rete di servizi ed infrastrutture, promuove iniziative tendenti a sviluppare un sistema di imprese tecnologicamente avanzate, sostiene l'artigianato e le attività di supporto al turismo, tutela gli esercizi ed i mestieri tipici, anche con agevolazioni e la definizione di vincoli e prescrizioni urbanistiche. </corpo>
+							</comma>
+							<comma id="art13-com2">
+								<num>2.</num>
+								<corpo>Interviene per offrire opportunità di lavoro e progetti formativi ai cittadini in cerca di occupazione, agevola l'associazionismo cooperativo e consortile. Favorisce una formazione professionale adeguata alla rapida evoluzione del sistema produttivo, nonché le esperienze di lavoro socialmente utili e quelle di inserimento professionale di inabili e portatori di handicap. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art14">
+							<num>Art. 14</num>
+							<rubrica>(Tutela del contribuente) </rubrica>
+							<comma id="art14-com1">
+								<num>1.</num>
+								<corpo>
+									Il Comune riconosce e tutela i principi generali dell'ordinamento tributario stabiliti dalle disposizioni in materia di 
+									<rif xlink:href="urn:nir:comune.firenze:statuto:" xlink:type="simple">statuto</rif>
+									dei diritti del contribuente, essenzialmente in materia di informazione, conoscenza degli atti, semplificazione e interpello, e rinvia ai regolamenti di natura tributaria la definizione degli istituti specifici. 
+								</corpo>
+							</comma>
+						</articolo>
+						<articolo id="art15">
+							<num>Art. 15</num>
+							<rubrica>(Tutela del consumatore e degli utenti) </rubrica>
+							<comma id="art15-com1">
+								<num>1.</num>
+								<corpo>Il Comune riconosce e tutela i diritti dei consumatori e degli utenti, cioè di coloro che utilizzano o acquistano beni o servizi, per scopi non riferibili alla attività imprenditoriale e professionale eventualmente svolta. </corpo>
+							</comma>
+							<comma id="art15-com2">
+								<num>2.</num>
+								<corpo>Interviene, nell'ambito dei propri poteri e delle prerogative consentite dalla legge, per garantire gli interessi individuali e collettivi dei cittadini utenti e consumatori. </corpo>
+							</comma>
+							<comma id="art15-com3">
+								<num>3.</num>
+								<corpo>Opera attraverso l'azione amministrativa, affinché siano applicate ed osservate precise regole di trasparenza da parte di aziende e enti, di natura pubblica o privata, che svolgono attività di fornitura di beni e servizi alla pubblica utenza; in particolare sulla semplificazione dell'informazione, sulla qualità e sul costo finale ed effettivo dei beni e dei servizi. </corpo>
+							</comma>
+						</articolo>
+					</capo>
+				</titolo>
+				<titolo id="tit2">
+					<num>Titolo II</num>
+					<rubrica>Gli organi del Comune: il Consiglio comunale </rubrica>
+					<articolo id="art16">
+						<num>Art. 16</num>
+						<rubrica>(Consiglio comunale) </rubrica>
+						<comma id="art16-com1">
+							<num>1.</num>
+							<corpo>Il Consiglio comunale è l'organo di indirizzo e controllo politico-amministrativo del Comune. </corpo>
+						</comma>
+						<comma id="art16-com2">
+							<num>2.</num>
+							<corpo>Il Consiglio comunale è convocato e presieduto dal Presidente eletto fra i Consiglieri, escluso il Sindaco. </corpo>
+						</comma>
+						<comma id="art16-com3">
+							<num>3.</num>
+							<corpo>Il Consiglio comunale è altresì convocato, su richiesta del Sindaco, da un quinto dei Consiglieri comunali, di tre Consigli di quartiere. </corpo>
+						</comma>
+						<comma id="art16-com4">
+							<num>4.</num>
+							<corpo>La convocazione dei Consiglieri è effettuata dal Presidente del Consiglio, con le modalità e nei termini previsti dal Regolamento del Consiglio Comunale e degli altri Organi Istituzionali. </corpo>
+						</comma>
+						<comma id="art16-com5">
+							<num>5.</num>
+							<corpo>La consegna delle convocazioni deve risultare da dichiarazione scritta ed è effettuata dal personale incaricato dell'Ufficio del Consiglio. </corpo>
+						</comma>
+						<comma id="art16-com6">
+							<num>6.</num>
+							<corpo>Il regolamento del Consiglio comunale e degli altri organi istituzionali disciplina, tra l'altro, il funzionamento degli organi consiliari, il loro rapporto con gli altri organi comunali e con gli organismi di partecipazione, stabilisce la struttura organizzativa degli uffici del Consiglio, nonché le materie e le funzioni connesse al funzionamento dello stesso Consiglio. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art17">
+						<num>Art. 17</num>
+						<rubrica>(Presidente del Consiglio) </rubrica>
+						<comma id="art17-com1">
+							<num>1.</num>
+							<corpo>Il Presidente rappresenta il Consiglio comunale, cura la programmazione dei lavori del Consiglio, la formazione dell'ordine del giorno delle riunioni, assicura il collegamento politico istituzionale con il Sindaco ed i Gruppi consiliari, convoca e presiede la Conferenza di programmazione, sovrintende e coordina l'attività delle Commissioni consiliari, è garante del rispetto delle norme sul funzionamento del Consiglio. </corpo>
+						</comma>
+						<comma id="art17-com2">
+							<num>2.</num>
+							<corpo>Il Presidente del Consiglio è eletto nella seduta di insediamento subito dopo la convalida degli eletti, a maggioranza dei due terzi dei componenti il Consiglio. </corpo>
+						</comma>
+						<comma id="art17-com3">
+							<num>3.</num>
+							<corpo>Nella terza votazione si effettua il ballottaggio a maggioranza semplice fra i due candidati che hanno riportato il maggior numero di voti nella seconda votazione. </corpo>
+						</comma>
+						<comma id="art17-com4">
+							<num>4.</num>
+							<corpo>In caso di parità di voti è eletto il candidato più anziano di età. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art18">
+						<num>Art. 18</num>
+						<rubrica>(Vice Presidenti) </rubrica>
+						<comma id="art18-com1">
+							<num>1.</num>
+							<corpo>Nella seduta di insediamento il Consiglio comunale elegge due Vice Presidenti con unica votazione a voto limitato. </corpo>
+						</comma>
+						<comma id="art18-com2">
+							<num>2.</num>
+							<corpo>Uno dei due Vice Presidenti, con funzioni di Vice Presidente vicario, è comunque scelto tra i Consiglieri appartenenti alla minoranza, salvo che ciò non sia già avvenuto per l'elezione del Presidente del Consiglio. In quest'ultima ipotesi i due Vice Presidenti sono scelti fra i Consiglieri appartenenti alla maggioranza. </corpo>
+						</comma>
+						<comma id="art18-com3">
+							<num>3.</num>
+							<corpo>Sono eletti Vice Presidenti i due Consiglieri che hanno riportato il maggior numero di voti. </corpo>
+						</comma>
+						<comma id="art18-com4">
+							<num>4.</num>
+							<corpo>In caso di parità di voti sono eletti Vice Presidenti i due candidati più anziani di età. </corpo>
+						</comma>
+						<comma id="art18-com5">
+							<num>5.</num>
+							<corpo>I Vice Presidenti, con priorità al Vice Presidente vicario, sostituiscono il Presidente in caso di sua assenza, impedimento e vacanza. Nel caso di assenza, impedimento o vacanza anche dei Vice Presidenti, le funzioni di Presidente vengono svolte dal Consigliere anziano. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art19">
+						<num>Art. 19</num>
+						<rubrica>(Ufficio di Presidenza) </rubrica>
+						<comma id="art19-com1">
+							<num>1.</num>
+							<corpo>Il Presidente e i Vice Presidenti costituiscono l'Ufficio di Presidenza, nel quale sono previamente esaminati e discussi gli argomenti di maggiore rilevanza che attengono allo svolgimento dei compiti di presidenza, secondo le modalità stabilite dal regolamento del Consiglio comunale e degli altri organi istituzionali. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art20">
+						<num>Art. 20</num>
+						<rubrica>(Durata del mandato e revoca del Presidente e dei Vice Presidenti) </rubrica>
+						<comma id="art20-com1">
+							<num>1.</num>
+							<corpo>Il Presidente ed i Vice Presidenti durano in carica fino all'elezione del nuovo Consiglio ovvero fino allo scioglimento del Consiglio comunale che li ha eletti. </corpo>
+						</comma>
+						<comma id="art20-com2">
+							<num>2.</num>
+							<corpo>
+								Il Presidente ed i Vice Presidenti possono essere revocati nei casi di gravi inadempienze o violazioni di legge o dello 
+								<rif xlink:href="urn:nir:comune.firenze:statuto:" xlink:type="simple">Statuto</rif>
+								con mozione motivata approvata con la maggioranza dei 2/3 dei Consiglieri assegnati. Qualora tale maggioranza non venga raggiunta, la votazione è ripetuta nella seduta successiva e la revoca è approvata se ottiene la maggioranza assoluta dei componenti il Consiglio comunale. 
+							</corpo>
+						</comma>
+					</articolo>
+					<articolo id="art21">
+						<num>Art. 21</num>
+						<rubrica>(Programmazione consiliare) </rubrica>
+						<comma id="art21-com1">
+							<num>1.</num>
+							<corpo>Il programma dell'attività del Consiglio è periodicamente predisposto dalla Conferenza di programmazione consiliare, formata dal Presidente del Consiglio comunale, dai Vice Presidenti, dal Sindaco, dai Capigruppo consiliari, dai Presidenti delle Commissioni consiliari permanenti. In caso di mancato accordo dispone il Presidente del Consiglio comunale. </corpo>
+						</comma>
+						<comma id="art21-com2">
+							<num>2.</num>
+							<corpo>L'ordine dei lavori di ciascuna seduta contenente l'elenco degli atti e le materie da trattare è formato dal Presidente del Consiglio comunale sulla base delle indicazioni della Conferenza dei Capigruppo composta dal Presidente, che la presiede, dai Vice Presidente e dai Capigruppo consiliari. In caso di mancato accordo dispone il Presidente del Consiglio comunale. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art22">
+						<num>Art. 22</num>
+						<rubrica>(Pubblicità delle sedute e votazioni) </rubrica>
+						<comma id="art22-com1">
+							<num>1.</num>
+							<corpo>Il Consiglio si riunisce in seduta pubblica, salvo i casi previsti dalla legge e dal regolamento del Consiglio comunale e degli altri organi istituzionali. </corpo>
+						</comma>
+						<comma id="art22-com2">
+							<num>2.</num>
+							<corpo>Il Presidente predispone adeguate forme di pubblicità delle convocazioni del Consiglio e delle decisioni assunte, di diffusione radio-televisiva delle sedute del Consiglio comunale. </corpo>
+						</comma>
+						<comma id="art22-com3">
+							<num>3.</num>
+							<corpo>Le votazioni hanno luogo con voto palese; avvengono per voto segreto nelle questioni riguardanti persone e negli altri casi previsti dalla legge e dal regolamento del Consiglio comunale e degli altri organi istituzionali. </corpo>
+						</comma>
+						<comma id="art22-com4">
+							<num>4.</num>
+							<corpo>Il regolamento del Consiglio comunale e degli altri organi istituzionali ha facoltà di disciplinare particolari procedure per l'esame e l'approvazione di proposte di deliberazione aventi specifiche ed individuate caratteristiche. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art23">
+						<num>Art. 23</num>
+						<rubrica>(Regolamenti statutari) </rubrica>
+						<comma id="art23-com1">
+							<num>1.</num>
+							<alinea>Sono approvati a maggioranza assoluta dei componenti del Consiglio i regolamenti: </alinea>
+							<el id="art23-com1-leta">
+								<num>a)</num>
+								<corpo>del Consiglio comunale e degli altri organi istituzionali; </corpo>
+							</el>
+							<el id="art23-com1-letb">
+								<num>b)</num>
+								<corpo>dei Consigli di quartiere; </corpo>
+							</el>
+							<el id="art23-com1-letc">
+								<num>c)</num>
+								<corpo>per le elezioni dei Consigli di quartiere; </corpo>
+							</el>
+							<el id="art23-com1-letd">
+								<num>d)</num>
+								<corpo>per i referendum; </corpo>
+							</el>
+							<el id="art23-com1-lete">
+								<num>e)</num>
+								<corpo>del Consiglio delle cittadine e dei cittadini stranieri ed apolidi; </corpo>
+							</el>
+							<el id="art23-com1-letf">
+								<num>f)</num>
+								<corpo>del Difensore civico. </corpo>
+							</el>
+						</comma>
+					</articolo>
+					<articolo id="art24">
+						<num>Art. 24</num>
+						<rubrica>(Consigliere comunale) </rubrica>
+						<comma id="art24-com1">
+							<num>1.</num>
+							<corpo>Il Consigliere comunale assume la carica con la proclamazione degli eletti o con la deliberazione di surroga. </corpo>
+						</comma>
+						<comma id="art24-com2">
+							<num>2.</num>
+							<corpo>Il Consigliere nell'esercizio del potere di iniziativa può formulare interrogazioni, interpellanze, risoluzioni, mozioni su tutte le attività del Comune e presentare proposte di deliberazione per le materie di competenza del Consiglio, secondo le modalità stabilite dal regolamento del Consiglio comunale e degli altri organi istituzionali. </corpo>
+						</comma>
+						<comma id="art24-com3">
+							<num>3.</num>
+							<corpo>Il Consigliere che abbia un qualsiasi interesse personale diretto o indiretto alle proposte di deliberazione deve astenersi dal partecipare al dibattito ed alla votazione. </corpo>
+						</comma>
+						<comma id="art24-com4">
+							<num>4.</num>
+							<corpo>I Consiglieri comunali hanno diritto alla copia degli atti, dei provvedimenti e dei verbali degli organi del Comune, dei Consigli di quartiere, delle aziende speciali, dei consorzi, delle istituzioni e delle società a prevalente capitale pubblico locale cui partecipa il Comune, e, nel rispetto del segreto d'ufficio, hanno diritto di accesso agli uffici di tali enti. </corpo>
+						</comma>
+						<comma id="art24-com5">
+							<num>5.</num>
+							<corpo>Nell'esercizio delle funzioni il Consigliere si avvale della collaborazione degli uffici comunali. </corpo>
+						</comma>
+						<comma id="art24-com6">
+							<num>6.</num>
+							<corpo>Il Consigliere può chiedere che il gettone di presenza venga trasformato in una indennità di funzione. </corpo>
+						</comma>
+						<comma id="art24-com7">
+							<num>7.</num>
+							<corpo>
+								E' istituita la figura del Consigliere straniero aggiunto, eletto con le modalità previste dall'
+								<rif xlink:href="#art100" xlink:type="simple">articolo 100</rif>
+								, il quale partecipa alle sedute del Consiglio Comunale e delle Commissioni Consiliari con diritto di parola e senza diritto di voto. Il Consigliere straniero aggiunto ha diritto di iniziativa sugli atti, con le forme e le modalità previste dal regolamento del Consiglio delle cittadine e dei cittadini stranieri ed apolidi. 
+							</corpo>
+						</comma>
+					</articolo>
+					<articolo id="art25">
+						<num>Art. 25</num>
+						<rubrica>(Pubblicità delle spese elettorali) </rubrica>
+						<comma id="art25-com1">
+							<num>1.</num>
+							<corpo>Il deposito delle liste e delle candidature alle elezioni comunali e circoscrizionali deve essere accompagnato dalla presentazione di distinti bilanci preventivi di spesa cui le liste ed i candidati intendono vincolarsi. </corpo>
+						</comma>
+						<comma id="art25-com2">
+							<num>2.</num>
+							<corpo>Entro trenta giorni dal termine della campagna elettorale ciascun candidato e ciascuna lista deve presentare presso la Segreteria generale il rendiconto delle spese elettorali sostenute. </corpo>
+						</comma>
+						<comma id="art25-com3">
+							<num>3.</num>
+							<corpo>I documenti di cui ai precedenti comma sono resi pubblici tramite affissione all'Albo Pretorio del Comune. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art26">
+						<num>Art. 26</num>
+						<rubrica>(Dimissioni e decadenza) </rubrica>
+						<comma id="art26-com1">
+							<num>1.</num>
+							<corpo>Le dimissioni dalla carica di Consigliere sono presentate per iscritto al Presidente del Consiglio comunale che ne dispone l'immediata assunzione al protocollo. </corpo>
+						</comma>
+						<comma id="art26-com2">
+							<num>2.</num>
+							<corpo>Nell'ipotesi in cui sussistano condizioni per la decadenza di Consiglieri, questa può essere pronunciata dal Consiglio anche su istanza di un singolo elettore. </corpo>
+						</comma>
+						<comma id="art26-com3">
+							<num>3.</num>
+							<corpo>Dopo quattro assenze consecutive, senza giustificato motivo, il Presidente del Consiglio diffida il Consigliere a presentare le cause giustificative e se quest'ultimo non provvede e l'assenza persiste per ulteriori due sedute consecutive il Consiglio lo dichiara decaduto. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art27">
+						<num>Art. 27</num>
+						<rubrica>(Gruppi consiliari) </rubrica>
+						<comma id="art27-com1">
+							<num>1.</num>
+							<corpo>I Gruppi consiliari sono costituiti da più Consiglieri comunali. Si possono costituire Gruppi consiliari anche formati da un unico Consigliere nei casi e con le modalità stabilite dal regolamento del Consiglio comunale e degli altri organi istituzionali. Ciascun Gruppo è rappresentato dal Capogruppo. </corpo>
+						</comma>
+						<comma id="art27-com2">
+							<num>2.</num>
+							<corpo>Il Regolamento del Consiglio comunale prevede l'istituzione di un portavoce dell'opposizione espresso dai Gruppi consiliari della coalizione di minoranza maggiormente rappresentativa e ne garantisce il funzionamento. </corpo>
+						</comma>
+						<comma id="art27-com3">
+							<num>3.</num>
+							<corpo>Il bilancio del Comune prevede per l'attività dei gruppi contributi finalizzati allo svolgimento dell'attività istituzionale, in relazione alla loro consistenza numerica, nel rispetto della legge vigente. </corpo>
+						</comma>
+						<comma id="art27-com4">
+							<num>4.</num>
+							<corpo>I Gruppi hanno una propria sede e dispongono di locali, attrezzature, servizi e personale comunale in relazione anche alla loro consistenza numerica. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art28">
+						<num>Art. 28</num>
+						<rubrica>(Commissioni consiliari permanenti) </rubrica>
+						<comma id="art28-com1">
+							<num>1.</num>
+							<corpo>Il Consiglio comunale istituisce al suo interno Commissioni permanenti costituite da Consiglieri. Il regolamento del Consiglio comunale e degli altri organi istituzionali disciplina la composizione, l'organizzazione ed il funzionamento delle Commissioni. La Presidenza delle Commissioni Affari Istituzionali e Controllo è comunque attribuita alle due minoranze maggiormente rappresentative. </corpo>
+						</comma>
+						<comma id="art28-com2">
+							<num>2.</num>
+							<corpo>Le Commissioni consiliari permanenti nelle materie di propria competenza svolgono nei confronti del Consiglio attività referente, redigente e di iniziativa su atti e provvedimenti di competenza del Consiglio. Le Commissioni esprimono parere obbligatorio sugli atti di competenza consiliare loro sottoposti entro i termini stabiliti dal regolamento. </corpo>
+						</comma>
+						<comma id="art28-com3">
+							<num>3.</num>
+							<corpo>Le Commissioni hanno diritto di ottenere l'intervento alle proprie riunioni del Sindaco, degli Assessori, dei Presidenti dei Quartieri, dei dirigenti e funzionari del Comune, degli amministratori e dirigenti delle istituzioni, delle aziende, delle società a prevalente partecipazione di capitale pubblico locale, degli enti dipendenti o concessionari nonché dei rappresentanti del Comune negli organi di amministrazione degli enti con partecipazione comunale ancorché consortili. </corpo>
+						</comma>
+						<comma id="art28-com4">
+							<num>4.</num>
+							<corpo>Il regolamento del Consiglio comunale e degli altri organi istituzionali determina le procedure di lavoro delle Commissioni e prevede l'attribuzione ad esse di personale, sedi, mezzi adeguati. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art29">
+						<num>Art. 29</num>
+						<rubrica>(Commissioni d'indagine e speciali) </rubrica>
+						<comma id="art29-com1">
+							<num>1.</num>
+							<corpo>Il Consiglio comunale con proposta sottoscritta da un quarto dei Consiglieri comunali o approvata da due Consigli di quartiere, delibera a maggioranza assoluta dei Consiglieri assegnati la costituzione di una commissione d'indagine formata da Consiglieri che rappresentino i Gruppi di maggioranza e di minoranza consiliari per accertare la regolarità e la correttezza delle attività amministrative comunali. La Presidenza della commissione è attribuita ai gruppi di minoranza consiliare. </corpo>
+						</comma>
+						<comma id="art29-com2">
+							<num>2.</num>
+							<corpo>Il Consiglio comunale delibera la costituzione di commissioni speciali per l'esame di particolari questioni o problemi. </corpo>
+						</comma>
+						<comma id="art29-com3">
+							<num>3.</num>
+							<corpo>Il regolamento del Consiglio comunale e degli altri organi istituzionali stabilisce le modalità di costituzione e la disciplina delle commissioni d'indagine e speciali. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art30">
+						<num>Art. 30</num>
+						<rubrica>(Uffici del Consiglio) </rubrica>
+						<comma id="art30-com1">
+							<num>1.</num>
+							<corpo>Sono istituiti uffici per il supporto e l'organizzazione dell'attività del Consiglio comunale, cui sovrintende il Presidente dello stesso. </corpo>
+						</comma>
+						<comma id="art30-com2">
+							<num>2.</num>
+							<corpo>Il Consiglio comunale ha autonomia organizzativa e funzionale che esercita secondo le modalità stabilite dal regolamento del Consiglio comunale e degli altri organi istituzionali. </corpo>
+						</comma>
+						<comma id="art30-com3">
+							<num>3.</num>
+							<corpo>Il Consiglio comunale dispone di propri uffici organizzati in una struttura di massima dimensione per il supporto organizzativo, informativo, giuridico, amministrativo alle attività degli organi consiliari e dei Gruppi. </corpo>
+						</comma>
+						<comma id="art30-com4">
+							<num>4.</num>
+							<corpo>Gli atti di organizzazione relativi al personale degli uffici del Consiglio sono assunti dal Sindaco d'intesa con il Presidente del Consiglio comunale; gli incarichi di collaborazione esterna attinenti all'attività degli uffici del Consiglio sono attribuiti dal Sindaco su proposta del Presidente del Consiglio comunale. </corpo>
+						</comma>
+						<comma id="art30-com5">
+							<num>5.</num>
+							<corpo>Il Consiglio per la propria attività utilizza adeguate risorse previste in apposito capitolo di bilancio. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art31">
+						<num>Art. 31</num>
+						<rubrica>(Pubblicità della situazione economica ed associativa dei Consiglieri) </rubrica>
+						<comma id="art31-com1">
+							<num>1.</num>
+							<alinea>I Consiglieri, al momento dell'elezione o della nomina e per ogni anno del mandato, sono tenuti, ai sensi della legge, a rendere pubbliche mediante deposito di dichiarazioni e documenti presso la Presidenza del Consiglio Comunale: </alinea>
+							<el id="art31-com1-leta">
+								<num>a)</num>
+								<corpo>la propria situazione reddituale e patrimoniale; </corpo>
+							</el>
+							<el id="art31-com1-letb">
+								<num>b)</num>
+								<corpo>la propria situazione associativa, con l'indicazione della natura e degli scopi delle associazioni o organizzazioni di appartenenza, con espressa dichiarazione di non appartenenza a società segrete. </corpo>
+							</el>
+						</comma>
+					</articolo>
+				</titolo>
+				<titolo id="tit3">
+					<num>Titolo III</num>
+					<rubrica>Gli organi del Comune: Giunta e Sindaco </rubrica>
+					<capo id="tit3-cap1">
+						<num>Capo I</num>
+						<rubrica>La Giunta </rubrica>
+						<articolo id="art32">
+							<num>Art. 32</num>
+							<rubrica>(La Giunta) </rubrica>
+							<comma id="art32-com1">
+								<num>1.</num>
+								<corpo>La Giunta è composta dal Sindaco, che la presiede, e da un numero di assessori non superiore a sedici (16). </corpo>
+							</comma>
+							<comma id="art32-com2">
+								<num>2.</num>
+								<corpo>Possono essere nominati Assessori persone in possesso dei requisiti di compatibilità e di eleggibilità alla carica di Consigliere comunale. Il Sindaco verifica la presenza dei requisiti di eleggibilità e compatibilità degli Assessori. Il Sindaco dà comunicazione al Consiglio, nella prima seduta successiva alle elezioni, della nomina degli Assessori e delle deleghe singolarmente conferite. </corpo>
+							</comma>
+							<comma id="art32-com3">
+								<num>3.</num>
+								<corpo>Le dimissioni degli Assessori sono presentate per iscritto al Sindaco ed hanno efficacia dalla loro accettazione. L'efficacia è immediata nel caso di dimissioni per motivi di ineleggibilità ed incompatibilità. </corpo>
+							</comma>
+							<comma id="art32-com4">
+								<num>4.</num>
+								<corpo>Della revoca e della sostituzione degli Assessori il Sindaco dà motivata comunicazione al Consiglio comunale nella prima riunione successiva. </corpo>
+							</comma>
+							<comma id="art32-com5">
+								<num>5.</num>
+								<alinea>La Giunta: </alinea>
+								<el id="art32-com5-leta">
+									<num>a)</num>
+									<corpo>collabora con il Sindaco nell'attuazione del programma di governo e degli indirizzi politico-amministrativi stabiliti dal Consiglio comunale; </corpo>
+								</el>
+								<el id="art32-com5-letb">
+									<num>b)</num>
+									<corpo>svolge attività di proposta nei confronti del Consiglio comunale; </corpo>
+								</el>
+								<el id="art32-com5-letc">
+									<num>c)</num>
+									<corpo>
+										compie tutti gli atti di amministrazione non riservati espressamente dalla legge, dallo 
+										<rif xlink:href="urn:nir:comune.firenze:statuto:" xlink:type="simple">Statuto</rif>
+										e dai regolamenti al Sindaco, al Consiglio comunale, agli organi di decentramento, ai dirigenti, ivi compresa l'adozione dei regolamenti sull'ordinamento degli uffici e dei servizi nel rispetto dei principi generali stabiliti dal Consiglio. 
+									</corpo>
+								</el>
+							</comma>
+						</articolo>
+						<articolo id="art33">
+							<num>Art. 33</num>
+							<rubrica>(Funzionamento della Giunta) </rubrica>
+							<comma id="art33-com1">
+								<num>1.</num>
+								<corpo>La Giunta è convocata e presieduta dal Sindaco che ne definisce l'ordine del giorno e ne dirige l'attività. </corpo>
+							</comma>
+							<comma id="art33-com2">
+								<num>2.</num>
+								<corpo>Le sedute sono valide con la presenza della maggioranza dei componenti; in caso di parità di voto prevale il voto del Sindaco o di chi in sua assenza svolge funzioni vicarie. </corpo>
+							</comma>
+							<comma id="art33-com3">
+								<num>3.</num>
+								<corpo>Su decisione del Sindaco la Giunta può riunirsi in seduta pubblica. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art34">
+							<num>Art. 34</num>
+							<rubrica>(Pubblicità della situazione economica ed associativa del Sindaco e degli Assessori) </rubrica>
+							<comma id="art34-com1">
+								<num>1.</num>
+								<corpo>
+									Al Sindaco ed agli Assessori si applicano le disposizioni stabilite dall'
+									<rif xlink:href="#art31" xlink:type="simple">articolo 31</rif>
+									. 
+								</corpo>
+							</comma>
+						</articolo>
+					</capo>
+					<capo id="tit3-cap2">
+						<num>Capo II</num>
+						<rubrica>Il Sindaco </rubrica>
+						<articolo id="art35">
+							<num>Art. 35</num>
+							<rubrica>(Il Sindaco) </rubrica>
+							<comma id="art35-com1">
+								<num>1.</num>
+								<alinea>Il Sindaco esercita tutte le funzioni previste dalla legge, dal presente Statuto e dai regolamenti comunali ed inoltre: </alinea>
+								<el id="art35-com1-leta">
+									<num>a)</num>
+									<corpo>attua gli indirizzi di politica amministrativa del Consiglio comunale; </corpo>
+								</el>
+								<el id="art35-com1-letb">
+									<num>b)</num>
+									<corpo>riferisce semestralmente al Consiglio comunale sullo stato di attuazione degli accordi di programma; </corpo>
+								</el>
+								<el id="art35-com1-letc">
+									<num>c)</num>
+									<corpo>può attribuire la trattazione di affari e materie a singoli Assessori e delegare ad essi atti di sua competenza, con potere di avocazione e di riassunzione; </corpo>
+								</el>
+								<el id="art35-com1-letd">
+									<num>d)</num>
+									<corpo>può delegare la propria partecipazione in rappresentanza del Comune in assemblee di società e di altri enti partecipati; </corpo>
+								</el>
+								<el id="art35-com1-lete">
+									<num>e)</num>
+									<corpo>nomina e revoca, con le specifiche procedure previste dalle leggi vigenti, il Direttore generale ed il Vice Segretario generale; </corpo>
+								</el>
+								<el id="art35-com1-letf">
+									<num>f)</num>
+									<corpo>può attribuire ai dirigenti anche funzioni non comprese fra quelle degli uffici cui sono preposti; </corpo>
+								</el>
+								<el id="art35-com1-letg">
+									<num>g)</num>
+									<corpo>adotta gli atti generali di indirizzo, in ordine allo svolgimento dei compiti, nonché per l'adozione di atti e provvedimenti amministrativi attribuiti ai dirigenti; </corpo>
+								</el>
+								<el id="art35-com1-leth">
+									<num>h)</num>
+									<corpo>può richiedere al Segretario generale, qualora ritenga che atti di competenza dei dirigenti siano illegittimi, o al Direttore generale qualora ritenga che siano in contrasto con gli obiettivi e gli indirizzi degli organi elettivi e comunque non corrispondenti agli interessi del Comune, di provvedere alla sospensione, all'annullamento o alla revoca degli atti medesimi. In questi casi, quando occorra, i relativi procedimenti sono avocati dal Segretario generale o dal Direttore generale, o da loro rimessi ad altri dirigenti con specifiche istruzioni; </corpo>
+								</el>
+								<el id="art35-com1-leti">
+									<num>i)</num>
+									<corpo>adotta i provvedimenti inerenti il rapporto di lavoro dei dirigenti; </corpo>
+								</el>
+								<el id="art35-com1-letl">
+									<num>l)</num>
+									<corpo>
+										autorizza a resistere in giudizio, fatto salvo quanto previsto all'
+										<rif xlink:href="#art59-com4" xlink:type="simple">articolo 59, comma 4</rif>
+										del presente Statuto; 
+									</corpo>
+								</el>
+								<el id="art35-com1-letm">
+									<num>m)</num>
+									<corpo>rilascia autorizzazioni e concessioni quando non sia altrimenti prevista la competenza dei dirigenti; </corpo>
+								</el>
+								<el id="art35-com1-letn">
+									<num>n)</num>
+									<corpo>stipula i gemellaggi e i patti di amicizia sulla base di deliberazioni consiliari; </corpo>
+								</el>
+								<el id="art35-com1-leto">
+									<num>o)</num>
+									<corpo>concede il patrocinio del Comune; </corpo>
+								</el>
+								<el id="art35-com1-letp">
+									<num>p)</num>
+									<corpo>riferisce al Consiglio comunale sull'attività della Giunta almeno due volte nel corso dell'anno in coincidenza con l'approvazione del conto consuntivo e la ricognizione sullo stato di attuazione dei programmi. </corpo>
+								</el>
+							</comma>
+							<comma id="art35-com2">
+								<num>2.</num>
+								<corpo>Il Sindaco, sulla base degli indirizzi espressi dal Consiglio comunale, coordina e riorganizza gli orari degli esercizi commerciali, degli uffici e servizi pubblici per armonizzarli alle esigenze degli utenti, elabora il piano regolatore dei tempi e degli orari di concerto con altri enti erogatori di servizi pubblici non comunali. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art36">
+							<num>Art. 36</num>
+							<rubrica>(Rappresentanza dell'ente) </rubrica>
+							<comma id="art36-com1">
+								<num>1.</num>
+								<corpo>Il Sindaco è legale rappresentante dell'ente. </corpo>
+							</comma>
+							<comma id="art36-com2">
+								<num>2.</num>
+								<corpo>L'esercizio della rappresentanza, compresa quella in giudizio, è attribuibile a ciascun dirigente in base a una delega rilasciata dal Sindaco. </corpo>
+							</comma>
+							<comma id="art36-com3">
+								<num>3.</num>
+								<corpo>La delega può essere di natura generale: con essa il Sindaco assegna al dirigente delegato l'esercizio della rappresentanza dell'ente nell'ambito delle competenze degli uffici cui è preposto, per tutta la durata dell'incarico dirigenziale, in particolare per il compimento dei seguenti atti: o rappresentanza in giudizio, per gli atti e le attività di propria competenza, ivi compresa la possibilità di conciliare, transigere e rinunciare agli atti; o stipulazione di convenzioni tra comuni o altri enti per lo svolgimento di funzioni e servizi, in attuazione degli obiettivi e dei programmi definiti con gli atti di indirizzo adottati dagli organi di governo dell'ente. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art37">
+							<num>Art. 37</num>
+							<rubrica>(Vice Sindaco) </rubrica>
+							<comma id="art37-com1">
+								<num>1.</num>
+								<corpo>Il Sindaco nomina fra gli Assessori un Vice Sindaco che lo sostituisce in caso di assenza o impedimento. </corpo>
+							</comma>
+							<comma id="art37-com2">
+								<num>2.</num>
+								<corpo>In caso di assenza o di impedimento anche del Vice Sindaco le funzioni di Sindaco vengono svolte dall'Assessore più anziano di età. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art38">
+							<num>Art. 38</num>
+							<rubrica>(Linee programmatiche) </rubrica>
+							<comma id="art38-com1">
+								<num>1.</num>
+								<corpo>Il Sindaco entro 90 giorni dall'insediamento del Consiglio comunale, presenta al Consiglio le linee programmatiche relative alle azioni ed ai progetti da realizzare in corso di mandato, per la relativa approvazione. </corpo>
+							</comma>
+							<comma id="art38-com2">
+								<num>2.</num>
+								<corpo>Le linee programmatiche sono portate a conoscenza dei Consiglieri almeno 10 giorni prima della discussione in Consiglio. </corpo>
+							</comma>
+							<comma id="art38-com3">
+								<num>3.</num>
+								<corpo>Il Sindaco, contestualmente alla discussione del conto consuntivo, presenta al Consiglio la relazione sullo stato di attuazione delle linee programmatiche. </corpo>
+							</comma>
+						</articolo>
+					</capo>
+				</titolo>
+				<titolo id="tit4">
+					<num>Titolo IV</num>
+					<rubrica>Il Decentramento </rubrica>
+					<articolo id="art39">
+						<num>Art. 39</num>
+						<rubrica>(Quartiere) </rubrica>
+						<comma id="art39-com1">
+							<num>1.</num>
+							<corpo>Il quartiere costituisce la circoscrizione di decentramento in cui è diviso il territorio comunale di Firenze. </corpo>
+						</comma>
+						<comma id="art39-com2">
+							<num>2.</num>
+							<corpo>Il regolamento dei Consigli di quartiere stabilisce la delimitazione, il numero, la denominazione dei quartieri, le procedure per le modifiche territoriali. </corpo>
+						</comma>
+						<comma id="art39-com3">
+							<num>3.</num>
+							<corpo>Il Comune di Firenze valorizza il Consiglio di quartiere come organismo di gestione di servizi di base, di esercizio delle funzioni delegate, di consultazione, di partecipazione e al tal fine gli attribuisce autonomia funzionale e organizzativa nelle forme e nei modi previsti dal regolamento dei Consigli di quartiere. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art40">
+						<num>Art. 40</num>
+						<rubrica>(Il Consiglio di quartiere) </rubrica>
+						<comma id="art40-com1">
+							<num>1.</num>
+							<corpo>Il Consiglio di quartiere è eletto a suffragio diretto contestualmente all'elezione del Consiglio comunale. In caso di scioglimento anticipato del Consiglio comunale anche i Consigli di quartiere devono essere contemporaneamente rinnovati. Essi esercitano le proprie funzioni fino alla proclamazione degli eletti dei nuovi Consigli di quartiere. </corpo>
+						</comma>
+						<comma id="art40-com2">
+							<num>2.</num>
+							<corpo>Ciascun Consiglio è composto da un numero di Consiglieri pari alla metà dei Consiglieri che la legge attribuisce al Consiglio comunale di Firenze. </corpo>
+						</comma>
+						<comma id="art40-com3">
+							<num>3.</num>
+							<corpo>La sede del Consiglio di quartiere è costituita dal centro civico, individuato dal Consiglio comunale sentito il parere del rispettivo Consiglio di quartiere. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art41">
+						<num>Art. 41</num>
+						<rubrica>(Sistema elettorale) </rubrica>
+						<comma id="art41-com1">
+							<num>1.</num>
+							<corpo>L'elezione del Consiglio di quartiere si effettua a scrutinio di lista e con sistema proporzionale con premio di maggioranza secondo quanto stabilito dal regolamento per le elezioni dei Consigli di quartiere. </corpo>
+						</comma>
+						<comma id="art41-com2">
+							<num>2.</num>
+							<corpo>Nessuno può essere candidato in più di due Consigli di quartiere. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art42">
+						<num>Art. 42</num>
+						<rubrica>(Consigliere di quartiere) </rubrica>
+						<comma id="art42-com1">
+							<num>1.</num>
+							<corpo>Si applicano ai Consiglieri di quartiere le norme sull'ineleggibilità, incompatibilità e sospensione dei Consiglieri comunali nonché tutte le altre disposizioni che concernono gli stessi previste dal presente Statuto. </corpo>
+						</comma>
+						<comma id="art42-com2">
+							<num>2.</num>
+							<corpo>La carica di Consigliere di quartiere è incompatibile con quella di Consigliere o Assessore comunale e di Consigliere di altro quartiere. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art43">
+						<num>Art. 43</num>
+						<rubrica>(Scioglimento del Consiglio) </rubrica>
+						<comma id="art43-com1">
+							<num>1.</num>
+							<alinea>I Consigli di quartiere sono sciolti anticipatamente alla loro scadenza ordinaria con ordinanza del Sindaco: </alinea>
+							<el id="art43-com1-leta">
+								<num>a)</num>
+								<corpo>per contemporanee dimissioni della maggioranza dei componenti il Consiglio; </corpo>
+							</el>
+							<el id="art43-com1-letb">
+								<num>b)</num>
+								<corpo>quando non possa essere assicurato il normale funzionamento degli organi per la mancata elezione del Presidente entro sessanta giorni dalla proclamazione degli eletti ovvero dalla vacanza della carica o dalla comunicazione al Consiglio delle dimissioni. </corpo>
+							</el>
+						</comma>
+						<comma id="art43-com2">
+							<num>2.</num>
+							<alinea>I Consigli di quartiere sono sciolti anticipatamente alla loro scadenza ordinaria con ordinanza del Sindaco, previa deliberazione conforme assunta dal Consiglio comunale a maggioranza dei due terzi dei Consiglieri assegnati: </alinea>
+							<el id="art43-com2-leta">
+								<num>a)</num>
+								<corpo>
+									per gravi e persistenti violazioni di legge o dello 
+									<rif xlink:href="urn:nir:comune.firenze:statuto:" xlink:type="simple">Statuto</rif>
+									; 
+								</corpo>
+							</el>
+							<el id="art43-com2-letb">
+								<num>b)</num>
+								<corpo>quando si riscontrino gravi irregolarità nella gestione dei servizi loro attribuiti o delegati e delle risorse ad essi assegnate. </corpo>
+							</el>
+						</comma>
+						<comma id="art43-com3">
+							<num>3.</num>
+							<corpo>
+								Qualora, nei casi previsti dal 
+								<rif xlink:href="#art43-com2" xlink:type="simple">comma 2</rif>
+								del presente articolo, non venga raggiunta la maggioranza dei due terzi dei consiglieri assegnati, nella seduta successiva il Consiglio Comunale ripete la votazione deliberando a maggioranza assoluta. 
+							</corpo>
+						</comma>
+						<comma id="art43-com4">
+							<num>4.</num>
+							<corpo>Nel caso in cui lo scioglimento del Consiglio di quartiere avvenga dopo che sia trascorso un periodo maggiore o uguale ai tre quinti del mandato elettorale non si procede al rinnovo di tale organo. Il Consiglio comunale può decidere, a maggioranza dei due terzi dei Consiglieri assegnati, di procedere all'elezione di un nuovo Consiglio di quartiere. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art44">
+						<num>Art. 44</num>
+						<rubrica>(Il Presidente) </rubrica>
+						<comma id="art44-com1">
+							<num>1.</num>
+							<corpo>Il Presidente del Consiglio di quartiere è eletto dal Consiglio a maggioranza assoluta dei Consiglieri assegnati nella prima riunione successiva alle elezioni. L'elezione deve avvenire entro sessanta giorni dalla data di proclamazione degli eletti. </corpo>
+						</comma>
+						<comma id="art44-com2">
+							<num>2.</num>
+							<corpo>Con le modalità di cui al comma precedente è eletto un Vice Presidente che coadiuva il Presidente e lo sostituisce in caso di temporanea assenza ed impedimento. </corpo>
+						</comma>
+						<comma id="art44-com3">
+							<num>3.</num>
+							<corpo>Il Presidente ed il Vice Presidente possono essere revocati con mozione di sfiducia approvata a maggioranza assoluta dei Consiglieri assegnati. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art45">
+						<num>Art. 45</num>
+						<rubrica>(Competenze del Presidente) </rubrica>
+						<comma id="art45-com1">
+							<num>1.</num>
+							<alinea>Il Presidente del Consiglio di quartiere: </alinea>
+							<el id="art45-com1-leta">
+								<num>a)</num>
+								<corpo>rappresenta il Consiglio di quartiere; </corpo>
+							</el>
+							<el id="art45-com1-letb">
+								<num>b)</num>
+								<corpo>convoca e presiede il Consiglio e ne indirizza e promuove l'attività; </corpo>
+							</el>
+							<el id="art45-com1-letc">
+								<num>c)</num>
+								<corpo>dà esecuzione, coadiuvato dal Collegio di Presidenza, alle decisioni assunte dal Consiglio; </corpo>
+							</el>
+							<el id="art45-com1-letd">
+								<num>d)</num>
+								<corpo>coordina l'attività delle Commissioni di lavoro; </corpo>
+							</el>
+							<el id="art45-com1-lete">
+								<num>e)</num>
+								<corpo>sovrintende al funzionamento dei servizi e degli uffici del Consiglio di quartiere; </corpo>
+							</el>
+							<el id="art45-com1-letf">
+								<num>f)</num>
+								<corpo>adotta gli atti che non rientrano nelle competenze del Consiglio o dei dirigenti degli uffici del quartiere; </corpo>
+							</el>
+							<el id="art45-com1-letg">
+								<num>g)</num>
+								<corpo>esercita le funzioni delegate dal Sindaco; </corpo>
+							</el>
+							<el id="art45-com1-leth">
+								<num>h)</num>
+								<corpo>partecipa, con diritto di parola alle sedute del Consiglio comunale nei casi previsti dal Regolamento del Consiglio Comunale e degli altri organi istituzionali e da quello dei Consigli di quartiere. Può altresì delegare a rappresentarlo un membro del Collegio di Presidenza. </corpo>
+							</el>
+						</comma>
+					</articolo>
+					<articolo id="art46">
+						<num>Art. 46</num>
+						<rubrica>(Conferenza del decentramento) </rubrica>
+						<comma id="art46-com1">
+							<num>1.</num>
+							<corpo>La Conferenza del decentramento costituisce l'organismo di raccordo delle attività dei quartieri e di consultazione del Consiglio comunale, della Giunta e del Sindaco per tutte le materie e questioni riguardanti lo stato del decentramento, con particolare riferimento alla programmazione dell'attività, alle risorse finanziarie e di personale assegnate ai Consigli di quartiere. La sua composizione è stabilita dal regolamento del Consiglio comunale e degli altri organi istituzionali. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art47">
+						<num>Art. 47</num>
+						<rubrica>(Gruppi Consiliari) </rubrica>
+						<comma id="art47-com1">
+							<num>1.</num>
+							<corpo>I Gruppi consiliari sono costituiti da uno o più Consiglieri circoscrizionali e ciascun Gruppo è rappresentato dal Capogruppo. </corpo>
+						</comma>
+						<comma id="art47-com2">
+							<num>2.</num>
+							<corpo>La disciplina del funzionamento, delle attività e delle dotazioni dei Gruppi consiliari è definita dal regolamento dei Consigli di quartiere. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art48">
+						<num>Art. 48</num>
+						<rubrica>(Commissioni Permanenti e Collegio di Presidenza) </rubrica>
+						<comma id="art48-com1">
+							<num>1.</num>
+							<corpo>Il Consiglio di quartiere costituisce Commissioni di lavoro permanenti con funzioni consultive ed istruttorie. Il Consiglio di quartiere con apposito regolamento stabilisce la composizione, il funzionamento, le materie di competenza delle Commissioni di lavoro permanenti e il loro numero comunque non superiore a otto, di cui una avente funzioni di controllo e garanzia presieduta da un rappresentante delle minoranze consiliari. Le commissioni possono avvalersi di soggetti esterni con particolari competenze ed esperienze nelle materie attribuite. </corpo>
+						</comma>
+						<comma id="art48-com2">
+							<num>2.</num>
+							<corpo>Ciascuna Commissione è presieduta da un Consigliere eletto dal Consiglio. </corpo>
+						</comma>
+						<comma id="art48-com3">
+							<num>3.</num>
+							<corpo>Il Collegio di Presidenza è organo esecutivo del Consiglio di quartiere con poteri definiti dal regolamento dei Consigli di quartiere ed è equiparato a tutti gli effetti alle Commissioni permanenti. Il Collegio di Presidenza è costituito dal Presidente e dal Vice Presidente del Consiglio di quartiere e dai Presidenti delle Commissioni permanenti che facciano parte della maggioranza consiliare. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art49">
+						<num>Art. 49</num>
+						<rubrica>(Funzioni di iniziativa e vigilanza) </rubrica>
+						<comma id="art49-com1">
+							<num>1.</num>
+							<corpo>Il Consiglio di quartiere può presentare ai competenti organi del Comune mozioni, interpellanze, interrogazioni e proposte di deliberazione in ordine ai servizi comunali di interesse del quartiere secondo le modalità e i termini stabiliti dal regolamento del Consiglio comunale e degli altri organi istituzionali. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art50">
+						<num>Art. 50</num>
+						<rubrica>(Funzioni consultive) </rubrica>
+						<comma id="art50-com1">
+							<num>1.</num>
+							<alinea>Il Consiglio di quartiere secondo le modalità ed i termini previsti dal regolamento dei Consigli di quartiere esprime pareri obbligatori: </alinea>
+							<el id="art50-com1-leta">
+								<num>a)</num>
+								<corpo>sui piani urbanistici generali, i piani attuativi, i piani di settore e le varianti urbanistiche che interessano il territorio dei quartieri; </corpo>
+							</el>
+							<el id="art50-com1-letb">
+								<num>b)</num>
+								<corpo>sugli schemi di bilancio annuale e pluriennale e sulla proposta di conto consuntivo; </corpo>
+							</el>
+							<el id="art50-com1-letc">
+								<num>c)</num>
+								<corpo>sulle proposte di regolamenti e deliberazioni che attengono le competenze dei Consigli di quartiere. </corpo>
+							</el>
+						</comma>
+						<comma id="art50-com2">
+							<num>2.</num>
+							<corpo>I pareri dei Consigli di quartiere costituiscono parte integrante dei provvedimenti adottati dal Consiglio comunale che in caso di difformità devono essere adeguatamente motivati. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art51">
+						<num>Art. 51</num>
+						<rubrica>(Servizi di base e funzioni delegate) </rubrica>
+						<comma id="art51-com1">
+							<num>1.</num>
+							<corpo>Il Consiglio di quartiere è competente per la gestione dei servizi di base e dei servizi alla persona che per caratteristiche tecniche e ragioni di efficienza non richiedano una gestione in ambiti territoriali più ampi. La gestione di tali servizi è attribuita dal Consiglio comunale con provvedimento specifico approvato a maggioranza assoluta dei Consiglieri assegnati. </corpo>
+						</comma>
+						<comma id="art51-com2">
+							<num>2.</num>
+							<corpo>Il Consiglio comunale con specifico atto deliberativo, su proposta della Giunta, può delegare ai Consigli di quartiere ulteriori funzioni prevedendo contestualmente le necessarie risorse finanziarie, di personale, strumentali. </corpo>
+						</comma>
+						<comma id="art51-com3">
+							<num>3.</num>
+							<corpo>Il Consiglio di quartiere gestisce i servizi attribuiti e le funzioni delegate nel rispetto degli indirizzi programmatici definiti nella relazione previsionale e programmatica approvata dal Consiglio comunale. </corpo>
+						</comma>
+						<comma id="art51-com4">
+							<num>4.</num>
+							<corpo>Il Consiglio di quartiere favorisce il decentramento dei servizi sul proprio territorio. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art52">
+						<num>Art. 52</num>
+						<rubrica>(Personale) </rubrica>
+						<comma id="art52-com1">
+							<num>1.</num>
+							<corpo>Presso ciascun Consiglio di quartiere è costituito un ufficio inquadrato nella struttura organizzativa del Comune ed affidato alla responsabilità di un dirigente. </corpo>
+						</comma>
+						<comma id="art52-com2">
+							<num>2.</num>
+							<corpo>Il dirigente dell'ufficio di quartiere svolge le funzioni di segretario del Consiglio di quartiere, cura l'istruttoria degli atti sottoposti all'approvazione degli organi del Consiglio di quartiere, esprime i pareri previsti per legge sulle proposte di deliberazione sottoposte al Consiglio di quartiere. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art53">
+						<num>Art. 53</num>
+						<rubrica>(Risorse finanziarie) </rubrica>
+						<comma id="art53-com1">
+							<num>1.</num>
+							<corpo>Ai Consigli di quartiere per la gestione dei servizi di base sono assegnati degli stanziamenti secondo le modalità stabilite dal regolamento di contabilità. </corpo>
+						</comma>
+						<comma id="art53-com2">
+							<num>2.</num>
+							<corpo>Il regolamento di economato stabilisce e disciplina le funzioni di economato da svolgersi nell'ambito del quartiere. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art54">
+						<num>Art. 54</num>
+						<rubrica>(Atti e provvedimenti) </rubrica>
+						<comma id="art54-com1">
+							<num>1.</num>
+							<corpo>Le deliberazioni del Consiglio di quartiere sono pubblicate all'Albo Pretorio comunale ed all'Albo del centro civico per quindici giorni consecutivi e divengono esecutive nei termini previsti per le deliberazioni del Consiglio comunale. </corpo>
+						</comma>
+						<comma id="art54-com2">
+							<num>2.</num>
+							<corpo>Le deliberazioni del Consiglio di quartiere concernenti la disciplina regolamentare e la gestione dei servizi di base ed alla persona e dei servizi delegati sono soggette a controllo con le modalità stabilite dal Regolamento dei consigli di quartiere. </corpo>
+						</comma>
+						<comma id="art54-com3">
+							<num>3.</num>
+							<corpo>Le deliberazioni del Consiglio di quartiere devono essere trasmesse, contestualmente alla loro pubblicazione, al Sindaco e al Presidente del Consiglio comunale. </corpo>
+						</comma>
+					</articolo>
+				</titolo>
+				<titolo id="tit5">
+					<num>Titolo V</num>
+					<rubrica>Ordinamento degli uffici, dirigenza, personale </rubrica>
+					<capo id="tit5-cap1">
+						<num>Capo I</num>
+						<rubrica>Organizzazione degli uffici </rubrica>
+						<articolo id="art55">
+							<num>Art. 55</num>
+							<rubrica>(Principi di organizzazione) </rubrica>
+							<comma id="art55-com1">
+								<num>1.</num>
+								<corpo>Gli uffici del Comune sono articolati ed organizzati in funzione dell'entità e della complessità dei compiti dell'Ente, per il raggiungimento degli obiettivi di efficienza, efficacia, produttività ed in funzione del più ampio decentramento. Gli uffici possono essere coordinati per progetti e programmi o per funzioni. </corpo>
+							</comma>
+							<comma id="art55-com2">
+								<num>2.</num>
+								<corpo>Per l'elaborazione e l'attuazione di particolari programmi e progetti possono essere istituiti dalla Giunta uffici speciali temporanei. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art56">
+							<num>Art. 56</num>
+							<rubrica>(Personale e dotazione organica) </rubrica>
+							<comma id="art56-com1">
+								<num>1.</num>
+								<corpo>La dotazione organica consiste nel programma annuale contenente il numero complessivo delle unità di lavoro disponibile per lo svolgimento dei compiti attribuiti. </corpo>
+							</comma>
+							<comma id="art56-com2">
+								<num>2.</num>
+								<corpo>Il Comune promuove e realizza iniziative dirette alla formazione ed all'aggiornamento professionale del personale. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art57">
+							<num>Art. 57</num>
+							<rubrica>(Direttore generale) </rubrica>
+							<comma id="art57-com1">
+								<num>1.</num>
+								<corpo>Il Sindaco, previa deliberazione della giunta, può nominare un Direttore generale anche al di fuori della dotazione organica e con contratto a tempo determinato secondo i criteri stabiliti dal regolamento sull'ordinamento degli uffici e dei servizi. </corpo>
+							</comma>
+							<comma id="art57-com2">
+								<num>2.</num>
+								<corpo>Il Direttore generale sovrintende a tutte le attività necessarie ed utili per la realizzazione del programma di governo della città esercitando i conseguenti poteri di impulso e di controllo. Spetta al Direttore generale la predisposizione del piano dettagliato degli obiettivi e della proposta di piano esecutivo di gestione. Al Direttore generale rispondono, nell'esercizio delle funzioni loro assegnate, i dirigenti comunali ad eccezione del Segretario generale. </corpo>
+							</comma>
+						</articolo>
+					</capo>
+					<capo id="tit5-cap2">
+						<num>Capo II</num>
+						<rubrica>Il Segretario Generale </rubrica>
+						<articolo id="art58">
+							<num>Art. 58</num>
+							<rubrica>(Il Segretario generale) </rubrica>
+							<comma id="art58-com1">
+								<num>1.</num>
+								<corpo>
+									Il Segretario generale svolge compiti di collaborazione e funzioni di assistenza giuridico-amministrativa nei confronti del Consiglio, del Sindaco e della Giunta in ordine alla conformità dell'azione amministrativa alle leggi, allo 
+									<rif xlink:href="urn:nir:comune.firenze:statuto:" xlink:type="simple">Statuto</rif>
+									e ai regolamenti. Esercita inoltre tutte le altre funzioni attribuitegli dalla legge e dai regolamenti nonché quelle conferitegli dal Sindaco. 
+								</corpo>
+							</comma>
+						</articolo>
+					</capo>
+					<capo id="tit5-cap3">
+						<num>Capo III</num>
+						<rubrica>Dirigenza </rubrica>
+						<articolo id="art59">
+							<num>Art. 59</num>
+							<rubrica>(Dirigenti) </rubrica>
+							<comma id="art59-com1">
+								<num>1.</num>
+								<corpo>Ai dirigenti spetta la gestione finanziaria, tecnica ed amministrativa, compresa l'adozione degli atti che impegnano l'Amministrazione verso l'esterno mediante autonomi poteri di spesa, di organizzazione delle risorse umane, strumentali e di controllo. </corpo>
+							</comma>
+							<comma id="art59-com2">
+								<num>2.</num>
+								<corpo>Essi rispondono del risultato dell'attività svolta dagli uffici cui sono preposti, della realizzazione dei programmi, del raggiungimento degli obiettivi loro affidati e sono direttamente responsabili, in via esclusiva, in relazione agli obiettivi dell'Ente, della correttezza amministrativa, dell'efficienza e dei risultati della gestione. </corpo>
+							</comma>
+							<comma id="art59-com3">
+								<num>3.</num>
+								<corpo>
+									Ai sensi dell' 
+									<mrif>
+										<rif xlink:href="urn:nir:stato:decreto.legislativo:2000-08-18;267#art107-com2" xlink:type="simple">art. 107, 2°</rif>
+										e
+										<rif xlink:href="urn:nir:stato:decreto.legislativo:2000-08-18;267#art107-com3" xlink:type="simple">comma 3</rif>
+									</mrif>
+									, del T.U. delle leggi sull'ordinamento degli enti locali, ad essi spettano tutti i compiti di attuazione degli obiettivi e dei programmi definiti con atti d'indirizzo adottati dai competenti organi di governo dell'Amministrazione. 
+								</corpo>
+							</comma>
+							<comma id="art59-com4">
+								<num>4.</num>
+								<corpo>
+									In particolare, sono compresi tra i suddetti compiti tutti gli atti di gestione, e, salvo quanto previsto dall' 
+									<mrif>
+										<rif xlink:href="urn:nir:stato:decreto.legislativo:2000-08-18;267#art51-com3" xlink:type="simple">articolo 51, comma 3</rif>
+										,e dall'
+										<rif xlink:href="urn:nir:stato:decreto.legislativo:2000-08-18;267#art55-co" xlink:type="simple">articolo 55 </rif>
+										del sudetto T.U.
+									</mrif>
+									, tutti gli atti e provvedimenti amministrativi, tra i quali oltre a quelli di cui al sopracitato
+									<mrif>
+										<rif xlink:href="urn:nir:stato:decreto.legislativo:2000-08-18;267#art107-com3-letf" xlink:type="simple">art. 107, 3° comma, lettere f)</rif>
+										,
+										<rif xlink:href="urn:nir:stato:decreto.legislativo:2000-08-18;267#art107-com3-letg" xlink:type="simple">g)</rif>
+										e
+										<rif xlink:href="urn:nir:stato:decreto.legislativo:2000-08-18;267#art107-com3-leth" xlink:type="simple">h)</rif>
+									</mrif>
+									, anche gli ordini, le sanzioni amministrative, le occupazioni d'urgenza, gli espropri e analoghi. Nell'ambito della delega loro conferita dal Sindaco ai sensi dell'
+									<rif xlink:href="#art36" xlink:type="simple">articolo 36</rif>
+									del presente Statuto, è altresì compito dei dirigenti, per gli atti e le attività di propria competenza, disporre la resistenza in giudizio o promuovere azioni legali a tutela dell'Amministrazione, adottando allo scopo apposita motivata determinazione. In materia di contenzioso tributario la motivata determinazione è sostituita dall'atto motivato di costituzione in giudizio e/o promozione dell'azione legale dinanzi alle Commissioni Tributarie, secondo le modalità previste dai rispettivi regolamenti. Non occorre determinazione preventiva per la costituzione e resistenza in giudizio nel contenzioso relativo a violazioni del codice della strada e a violazioni di norme regolamentari, per la cui definizione la rappresentanza dell'Amministrazione sia stata delegata a funzionari del Corpo di Polizia Municipale ai sensi dell'
+									<rif xlink:href="urn:nir:stato:legge:1981-11-24;689#art23" xlink:type="simple">art. 23 della L. 24.11.1981 n. 689</rif>
+									. 
+								</corpo>
+							</comma>
+							<comma id="art59-com5">
+								<num>5.</num>
+								<corpo>
+									Per quanto concerne i compiti di cui al 
+									<rif xlink:href="#art59-com4" xlink:type="simple">comma 4</rif>
+									, la cui adozione o rilascio presupponga accertamenti o valutazioni di carattere discrezionale, le relative modalità e criteri, se non rilevabili dagli stessi programmi e obiettivi di cui al 
+									<rif xlink:href="#art59-com3" xlink:type="simple">comma 3</rif>
+									, o già predeterminati da norme contenute nel presente statuto o nei regolamenti adottati dal competente organo dell'Amministrazione, oppure compiutamente definiti da disposizioni di legge, sono stabiliti da appositi atti d'indirizzo del Sindaco o Assessore delegato. 
+								</corpo>
+							</comma>
+							<comma id="art59-com6">
+								<num>6.</num>
+								<corpo>
+									Nel rispetto del principio, attuato con le suddette disposizioni, che spettano ai dirigenti, che rispondono di quanto indicato nel 
+									<rif xlink:href="#art59-com2" xlink:type="simple">comma 2</rif>
+									, tutti i compiti non ricompresi espressamente dalla legge e dal presente Statuto tra le funzioni di indirizzo e di controllo politico-amministrativo, col regolamento sull'ordinamento degli uffici e dei servizi, nonché, su proposta del Direttore Generale, col PEG ed eventuali atti integrativi, potranno essere specificati ulteriormente gli atti di gestione e gli atti e provvedimenti amministrativi di cui ai precedenti commi, e le relative modalità e criteri, tenendo anche conto dell'assetto organizzativo delle direzioni, e delle relative responsabilità in ordine alla realizzazione dei programmi ed il raggiungimento degli obiettivi loro affidati. 
+								</corpo>
+							</comma>
+							<comma id="art59-com7">
+								<num>7.</num>
+								<corpo>In attesa del loro adeguamento alla normativa di legge e del presente statuto le disposizioni contenute nei regolamenti che conferiscono agli organi di governo dell'Amministrazione l'adozione degli atti di gestione e degli atti o provvedimenti amministrativi di cui ai precedenti commi si intendono nel senso che la relativa competenza spetta ai dirigenti. Non sono applicate le norme contenute nei regolamenti incompatibili con leggi sopravvenute nonché con i principi e le disposizioni di cui al presente articolo. </corpo>
+							</comma>
+							<comma id="art59-com8">
+								<num>8.</num>
+								<corpo>Nei casi d'incompatibilità s'intendono, comunque, direttamente applicabili le disposizioni di legge e del presente Statuto. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art60">
+							<num>Art. 60</num>
+							<rubrica>(Conferimento responsabilità dirigenziale) </rubrica>
+							<comma id="art60-com1">
+								<num>1.</num>
+								<corpo>Gli incarichi di direzione degli uffici sono assegnati dal Sindaco con provvedimento motivato sulla base di criteri di professionalità, attitudine, esperienza con le modalità stabilite dal regolamento sull'ordinamento degli uffici e dei servizi. </corpo>
+							</comma>
+							<comma id="art60-com2">
+								<num>2.</num>
+								<corpo>Tali incarichi hanno durata determinata, sono rinnovabili e revocabili in ogni tempo. </corpo>
+							</comma>
+							<comma id="art60-com3">
+								<num>3.</num>
+								<corpo>La copertura di posizione di direzione o di alta specializzazione può avvenire mediante incarichi a persone in possesso dei requisiti richiesti per l'accesso alla posizione da ricoprire. </corpo>
+							</comma>
+							<comma id="art60-com4">
+								<num>4.</num>
+								<corpo>I provvedimenti di rinnovo e di revoca devono essere motivati. </corpo>
+							</comma>
+							<comma id="art60-com5">
+								<num>5.</num>
+								<corpo>In sede di presentazione del conto consuntivo il Sindaco trasmette al Consiglio una relazione sullo stato della dirigenza con specifico riferimento, per i diversi uffici, ai risultati conseguiti nello svolgimento dell'attività ed alle esigenze dei servizi. </corpo>
+							</comma>
+						</articolo>
+					</capo>
+				</titolo>
+				<titolo id="tit6">
+					<num>Titolo VI</num>
+					<rubrica>Ordinamento dei servizi </rubrica>
+					<capo id="tit6-cap1">
+						<num>Capo I</num>
+						<rubrica>Caratteristiche generali </rubrica>
+						<articolo id="art61">
+							<num>Art. 61</num>
+							<rubrica>(I servizi pubblici locali) </rubrica>
+							<comma id="art61-com1">
+								<num>1.</num>
+								<corpo>Il Comune nell'ordinamento dei servizi pubblici locali attua modalità di gestione che rispondono ad obiettivi di accessibilità e di qualità, nonché di autonomia imprenditoriale, efficienza, efficacia, economicità e redditività. La scelta degli amministratori e dei dirigenti si fonda sulla professionalità e competenza degli stessi. </corpo>
+							</comma>
+							<comma id="art61-com2">
+								<num>2.</num>
+								<corpo>I regolamenti delle istituzioni, gli statuti delle aziende speciali e dei consorzi nonché delle società di cui al Titolo V, Parte I, del vigente Testo Unico delle leggi sull'ordinamento degli enti locali stabiliscono le modalità di indirizzo, di vigilanza e di controllo sulla loro attività da parte del Comune e di pubblicità degli atti fondamentali relativi alla gestione dei servizi. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art62">
+							<num>Art. 62</num>
+							<rubrica>(Gestione dei servizi) </rubrica>
+							<comma id="art62-com1">
+								<num>1.</num>
+								<corpo>La Giunta presenta all'approvazione del Consiglio la proposta di indirizzi gestionali per ogni servizio pubblico. </corpo>
+							</comma>
+							<comma id="art62-com2">
+								<num>2.</num>
+								<corpo>L'approvazione degli atti fondamentali da parte dei rappresentanti del Comune in enti, aziende, istituzioni e società è preceduta da una comunicazione preventiva al Consiglio comunale, effettuata nei termini previsti per l'assegnazione degli affari alle Commissioni consiliari. </corpo>
+							</comma>
+							<comma id="art62-com3">
+								<num>3.</num>
+								<corpo>Unitamente al conto consuntivo la Giunta presenta al Consiglio il quadro completo di tutti i servizi pubblici locali in cui sono indicate le forme gestionali adottate, i risultati economici ottenuti nell'esercizio precedente, le eventuali proposte di modifica delle forme gestionali. </corpo>
+							</comma>
+							<comma id="art62-com4">
+								<num>4.</num>
+								<corpo>
+									Il Consiglio comunale dedica almeno una seduta annuale all'esame dei bilanci consuntivi dei soggetti gestori dei servizi pubblici locali in relazione agli indirizzi di cui al 
+									<rif xlink:href="#art62-com1" xlink:type="simple">comma 1</rif>
+									. 
+								</corpo>
+							</comma>
+						</articolo>
+						<articolo id="art63">
+							<num>Art. 63</num>
+							<rubrica>(Controllo della gestione dei servizi) </rubrica>
+							<comma id="art63-com1">
+								<num>1.</num>
+								<corpo>
+									Il Consiglio comunale promuove il costante controllo, monitoraggio e valutazione delle attività degli enti, aziende, istituzioni e società cui partecipa il Comune, al fine di verificare se essa genera i risultati attesi, e se siano rispettati gli indirizzi generali stabiliti dal Consiglio ai sensi dell'
+									<rif xlink:href="#art76" xlink:type="simple">articolo 76</rif>
+									e gli indirizzi gestionali di cui all'
+									<rif xlink:href="#art62" xlink:type="simple">articolo 62</rif>
+									. 
+								</corpo>
+							</comma>
+							<comma id="art63-com2">
+								<num>2.</num>
+								<corpo>Gli atti istitutivi e regolamentari degli enti, aziende, istituzioni e società cui partecipa il Comune debbono comprendere clausole che indichino i tempi e le modalità con cui tali enti sono tenuti a produrre informazioni ai fini dell'esercizio dei poteri del Consiglio comunale e della Commissione consiliare di controllo. </corpo>
+							</comma>
+							<comma id="art63-com3">
+								<num>3.</num>
+								<corpo>Il Consiglio comunale, su iniziativa della Commissione consiliare di controllo, su proposta di un quinto dei Consiglieri promuove con specifica deliberazione la verifica dei risultati economici, sociali e qualitativi di un singolo servizio pubblico locale. </corpo>
+							</comma>
+							<comma id="art63-com4">
+								<num>4.</num>
+								<corpo>Entro un tempo determinato non superiore a sei mesi i risultati della verifica sono sottoposti all'esame del Consiglio. </corpo>
+							</comma>
+							<comma id="art63-com5">
+								<num>5.</num>
+								<corpo>E' istituito l'Osservatorio sui servizi pubblici locali, quale soggetto di supporto alla Giunta e al Consiglio comunale nell'esercizio delle funzioni di indirizzo e di controllo sui servizi pubblici locali, gestiti attraverso istituzioni, aziende speciali, enti strumentali, società di capitali a partecipazione comunale, consorzi, concessioni a terzi. L'organizzazione e le modalità operative dell'Osservatorio sono disciplinate con apposito Regolamento. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art64">
+							<num>Art. 64</num>
+							<rubrica>(Scelta delle forme gestionali dei servizi pubblici) </rubrica>
+							<comma id="art64-com1">
+								<num>1.</num>
+								<corpo>La costituzione di istituzioni e di aziende speciali, l'adesione a società per azioni e a responsabilità limitata ed a consorzi è approvata dal Consiglio comunale a maggioranza assoluta dei Consiglieri assegnati. </corpo>
+							</comma>
+							<comma id="art64-com2">
+								<num>2.</num>
+								<corpo>La stessa maggioranza è richiesta per la trasformazione della forma gestionale di un servizio pubblico locale, nonché per la sua dismissione. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art65">
+							<num>Art. 65</num>
+							<rubrica>(Carta dei servizi pubblici) </rubrica>
+							<comma id="art65-com1">
+								<num>1.</num>
+								<corpo>L'erogazione dei servizi pubblici, anche svolti in regime di concessione, deve ispirarsi ai principi di uguaglianza, imparzialità, continuità, partecipazione, tutela delle esigenze degli utenti e garantire il raggiungimento degli obiettivi di efficienza ed efficacia. In base a tali principi ciascun soggetto erogatore adotta una propria Carta dei servizi. </corpo>
+							</comma>
+							<comma id="art65-com2">
+								<num>2.</num>
+								<corpo>La Carta dei servizi individua, rende pubbliche e garantisce le modalità di prestazione del servizio ed i fattori da cui dipende la sua qualità, prevede i meccanismi di tutela per gli utenti e le procedure di reclamo, assicura la piena informazione degli utenti, l'adozione e l'aggiornamento della Carta dei servizi erogati dal Comune direttamente o in regime di concessione. </corpo>
+							</comma>
+							<comma id="art65-com3">
+								<num>3.</num>
+								<corpo>Il Consiglio comunale verifica l'esistenza dei necessari sistemi di monitoraggio sull'effettiva applicazione delle carte dei servizi, sul rispetto degli standard dei servizi erogati, sull'adeguata pubblicità agli utenti. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art66">
+							<num>Art. 66</num>
+							<rubrica>(Commissione consiliare permanente di controllo) </rubrica>
+							<comma id="art66-com1">
+								<num>1.</num>
+								<corpo>E' costituita la Commissione consiliare di controllo su istituzioni, aziende, consorzi, società per azioni, enti concessionari, nonché su società, associazioni, fondazioni e comitati cui partecipa il Comune. </corpo>
+							</comma>
+							<comma id="art66-com2">
+								<num>2.</num>
+								<corpo>La Commissione consiliare di controllo esamina il bilancio economico e finanziario e gli altri atti. Dispone audizioni, convoca gli amministratori designati o nominati dal Comune, esprime parere su tutti gli atti consiliari che attengono agli enti di cui al comma precedente. </corpo>
+							</comma>
+							<comma id="art66-com3">
+								<num>3.</num>
+								<corpo>La Commissione presenta annualmente al Consiglio una relazione sulla propria attività, evidenziando il rispetto da parte degli enti degli indirizzi adottati dal Comune. </corpo>
+							</comma>
+							<comma id="art66-com4">
+								<num>4.</num>
+								<corpo>
+									La Presidenza della commissione è attribuita alla minoranza consiliare, in base alle disposizioni di cui all'
+									<rif xlink:href="#art28-com1" xlink:type="simple">articolo 28, comma 1</rif>
+									. 
+								</corpo>
+							</comma>
+						</articolo>
+					</capo>
+					<capo id="tit6-cap2">
+						<num>Capo II</num>
+						<rubrica>Le modalità e l'assetto di gestione </rubrica>
+						<articolo id="art67">
+							<num>Art. 67</num>
+							<rubrica>(Istituzione) </rubrica>
+							<comma id="art67-com1">
+								<num>1.</num>
+								<corpo>L'istituzione costituisce organismo di gestione di servizi sociali senza rilevanza imprenditoriale, dotato di autonomia giuridica. </corpo>
+							</comma>
+							<comma id="art67-com2">
+								<num>2.</num>
+								<corpo>Il Consiglio comunale con la deliberazione costitutiva dell'istituzione stabilisce il capitale di dotazione, il patrimonio ed il personale; alla deliberazione è allegato il regolamento per il funzionamento e la gestione che individua altresì gli atti fondamentali sottoposti all'approvazione del Consiglio comunale, la costituzione degli organi, le modalità di indirizzo e vigilanza, le forme di controllo dei risultati di gestione e verifica economico-contabile da parte dei revisori dei conti. </corpo>
+							</comma>
+							<comma id="art67-com3">
+								<num>3.</num>
+								<corpo>La soppressione dell'istituzione è deliberata dal Consiglio comunale a maggioranza assoluta dei Consiglieri assegnati. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art68">
+							<num>Art. 68</num>
+							<rubrica>(Ordinamento, funzionamento e contabilità delle istituzioni) </rubrica>
+							<comma id="art68-com1">
+								<num>1.</num>
+								<corpo>Gli organi dell'istituzione restano in carica per la durata del Consiglio comunale ed esercitano le funzioni fino al loro rinnovo. </corpo>
+							</comma>
+							<comma id="art68-com2">
+								<num>2.</num>
+								<corpo>Il consiglio di amministrazione, nominato dal Sindaco, è composto da un numero di consiglieri non superiore a cinque definito dal regolamento dell'istituzione; il consiglio di amministrazione esercita funzioni di indirizzo e di amministrazione secondo quanto previsto dal regolamento dell'istituzione. Non possono essere nominati consiglieri di amministrazione dell'istituzione i Consiglieri e gli Assessori comunali nonché i Consiglieri di quartiere. </corpo>
+							</comma>
+							<comma id="art68-com3">
+								<num>3.</num>
+								<corpo>Il presidente è nominato dal Sindaco fra i membri del consiglio di amministrazione. </corpo>
+							</comma>
+							<comma id="art68-com4">
+								<num>4.</num>
+								<corpo>Il direttore ha responsabilità sulla gestione amministrativa e può essere dipendente del Comune, assunto anche con contratto a tempo determinato nominato dal Sindaco sentito il consiglio di amministrazione dell'istituzione. </corpo>
+							</comma>
+							<comma id="art68-com5">
+								<num>5.</num>
+								<corpo>I bilanci delle istituzioni sono presentati alla Giunta che li adotta con propria deliberazione e li trasmette al Consiglio comunale che li approva entro trenta giorni dalla loro trasmissione. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art69">
+							<num>Art. 69</num>
+							<rubrica>(Azienda speciale) </rubrica>
+							<comma id="art69-com1">
+								<num>1.</num>
+								<corpo>L'azienda speciale costituisce ente strumentale per la gestione dei servizi a rilevanza economica ed imprenditoriale. </corpo>
+							</comma>
+							<comma id="art69-com2">
+								<num>2.</num>
+								<corpo>
+									Lo 
+									<rif xlink:href="urn:nir:comune.firenze:statuto:" xlink:type="simple">statuto</rif>
+									dell'azienda, approvato dal Consiglio comunale, indica gli atti fondamentali sottoposti all'approvazione del Consiglio comunale, tra cui il bilancio annuale cui è allegata una relazione dove gli organi dell'azienda danno atto del rispetto degli indirizzi adottati dal Comune, delle cause del mancato raggiungimento degli obiettivi gestionali, degli interventi correttivi previsti, dell'acquisizione ed alienazione di partecipazioni azionarie. 
+								</corpo>
+							</comma>
+							<comma id="art69-com3">
+								<num>3.</num>
+								<corpo>Gli organi dell'azienda restano in carica per la durata del Consiglio comunale ed esercitano le funzioni fino al loro rinnovo. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art70">
+							<num>Art. 70</num>
+							<rubrica>(Consorzi) </rubrica>
+							<comma id="art70-com1">
+								<num>1.</num>
+								<corpo>Il Comune per la gestione associata di uno o più servizi può costituire con altri comuni e province un consorzio secondo le norme previste per le aziende speciali. </corpo>
+							</comma>
+							<comma id="art70-com2">
+								<num>2.</num>
+								<corpo>Il Consiglio comunale approva a maggioranza assoluta dei Consiglieri assegnati lo statuto del consorzio e la convenzione fra gli enti consorziati ove sono individuati gli atti fondamentali del consorzio da trasmettere al Consiglio comunale. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art71">
+							<num>Art. 71</num>
+							<rubrica>(Convenzioni) </rubrica>
+							<comma id="art71-com1">
+								<num>1.</num>
+								<corpo>Il Consiglio comunale può deliberare apposite convenzioni con altri comuni e province per lo svolgimento, in modo coordinato e continuativo, di funzioni e servizi determinati. </corpo>
+							</comma>
+							<comma id="art71-com2">
+								<num>2.</num>
+								<corpo>Le convenzioni devono stabilire i fini, la durata, le forme di consultazione degli enti contraenti, i loro rapporti finanziari ed i reciproci obblighi e garanzie. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art72">
+							<num>Art. 72</num>
+							<rubrica>(Società per azioni e a responsabilità limitata) </rubrica>
+							<comma id="art72-com1">
+								<num>1.</num>
+								<corpo>Il Comune può costituire e partecipare a società per azioni con quote di capitale sociale nei limiti previsti dalla legislazione vigente, riservandosi quei diritti e quelle prerogative necessarie a dare prevalenza al ruolo del soggetto pubblico. Ove alla società per azioni partecipino altri enti locali e la Regione, i reciproci rapporti sono prevalentemente determinati attraverso specifica convenzione. Il Comune può altresì costituire società a responsabilità limitata a prevalente capitale pubblico locale o parteciparvi, qualora ciò si renda opportuno in relazione alla natura o all'ambito territoriale del servizio. </corpo>
+							</comma>
+							<comma id="art72-com2">
+								<num>2.</num>
+								<corpo>
+									Sono specificate nell'atto costitutivo e nello 
+									<rif xlink:href="urn:nir:comune.firenze:statuto:" xlink:type="simple">statuto</rif>
+									della società le forme di controllo, vigilanza e coordinamento con gli indirizzi e le direttive dell'ente locale a cui la società è vincolata nella sua azione. Lo 
+									<rif xlink:href="urn:nir:comune.firenze:statuto:" xlink:type="simple">statuto</rif>
+									stabilisce altresì che il Comune può revocare con atto motivato in ogni tempo e senza alcuna indennità gli amministratori da esso nominati. Lo 
+									<rif xlink:href="urn:nir:comune.firenze:statuto:" xlink:type="simple">statuto</rif>
+									della società dovrà inoltre prevedere che le sostanziali modifiche delle condizioni di adesione devono essere approvate dal Consiglio comunale. 
+								</corpo>
+							</comma>
+							<comma id="art72-com3">
+								<num>3.</num>
+								<corpo>
+									L'atto costitutivo e lo 
+									<rif xlink:href="urn:nir:comune.firenze:statuto:" xlink:type="simple">statuto</rif>
+									della società devono comprendere clausole che stabiliscano tempi e modalità per la trasmissione al Consiglio comunale di informazioni relative alla propria attività e garantire il diritto di accesso agli atti ed agli uffici per amministratori comunali e di quartiere. 
+								</corpo>
+							</comma>
+							<comma id="art72-com4">
+								<num>4.</num>
+								<corpo>Le società per azioni cui partecipa il Comune sono sottoposte ad obbligo di certificazione del bilancio. </corpo>
+							</comma>
+							<comma id="art72-com5">
+								<num>5.</num>
+								<corpo>Il Comune favorisce attraverso specifiche iniziative la sottoscrizione da parte di cittadini ed utenti di quote azionarie delle società per azioni che gestiscono servizi pubblici di particolare interesse sociale. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art73">
+							<num>Art. 73</num>
+							<rubrica>(Società collegate e controllate) </rubrica>
+							<comma id="art73-com1">
+								<num>1.</num>
+								<corpo>Le società per azioni o a responsabilità limitata a prevalente capitale pubblico locale e le aziende speciali possono, in armonia con i fini statutariamente perseguiti, partecipare all'istituzione di società di capitali o assumervi partecipazioni. </corpo>
+							</comma>
+							<comma id="art73-com2">
+								<num>2.</num>
+								<corpo>
+									Qualora tali società svolgano servizi pubblici locali i relativi statuti dovranno contenere disposizioni volte a consentire la vigilanza ed il controllo da parte del Comune. In particolare, tali società saranno tenute a rispettare le disposizioni di cui all'
+									<rif xlink:href="#art61" xlink:type="simple">articolo 61</rif>
+									, nonché dell' 
+									<mrif>
+										<rif xlink:href="#art72-com3" xlink:type="simple">articolo 72 commi 3</rif>
+										e
+										<rif xlink:href="#art72-com4" xlink:type="simple">4</rif>
+									</mrif>
+									. 
+								</corpo>
+							</comma>
+							<comma id="art73-com3">
+								<num>3.</num>
+								<corpo>Le determinazioni di istituire o partecipare a società di capitali dovranno essere oggetto di specifica approvazione da parte della Giunta, previo parere obbligatorio del Consiglio comunale. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art74">
+							<num>Art. 74</num>
+							<rubrica>(Concessione a terzi) </rubrica>
+							<comma id="art74-com1">
+								<num>1.</num>
+								<corpo>I servizi pubblici sono gestiti con concessione a terzi quando le ragioni tecniche, economiche o di opportunità sociale siano approfonditamente motivate con analisi dello stato della gestione e concrete verifiche. </corpo>
+							</comma>
+							<comma id="art74-com2">
+								<num>2.</num>
+								<corpo>Le concessioni devono avere una durata commisurata alle spese di investimento richieste al concessionario da valutarsi attraverso un quadro economico-finanziario certificato. </corpo>
+							</comma>
+							<comma id="art74-com3">
+								<num>3.</num>
+								<corpo>Nel relativo capitolato sono disciplinate modalità, procedure, controlli, potere di emanare direttive, in particolare in materia tariffaria, e loro vincolabilità da parte del Comune, facoltà di recesso e di riscatto. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art75">
+							<num>Art. 75</num>
+							<rubrica>(Finanza di progetto) </rubrica>
+							<comma id="art75-com1">
+								<num>1.</num>
+								<corpo>Con apposito Regolamento sono disciplinate le modalità di partecipazione del Consiglio comunale ai procedimenti finalizzati all'attuazione di interventi da realizzarsi tramite strumenti di finanza di progetto. </corpo>
+							</comma>
+						</articolo>
+					</capo>
+					<capo id="tit6-cap3">
+						<num>Capo III</num>
+						<rubrica>Nomine degli amministratori </rubrica>
+						<articolo id="art76">
+							<num>Art. 76</num>
+							<rubrica>(Designazione e requisiti) </rubrica>
+							<comma id="art76-com1">
+								<num>1.</num>
+								<corpo>Il Consiglio comunale a maggioranza assoluta dei Consiglieri assegnati approva, entro trenta giorni dal suo insediamento, gli indirizzi generali per la nomina, designazione e revoca dei rappresentanti del Comune presso enti, aziende, istituzioni, società. Tali indirizzi devono prevedere l'emanazione da parte del Sindaco, prima di procedere ad ogni nomina, di un avviso pubblico attraverso il quale dare pubblicità alle nomine o designazioni dei rappresentanti negli enti che intende effettuare. </corpo>
+							</comma>
+							<comma id="art76-com2">
+								<num>2.</num>
+								<corpo>Nell'avviso pubblico sono resi noti in particolare i requisiti di studio e di professionalità e le cause di incompatibilità per l'accesso alle cariche.   </corpo>
+							</comma>
+						</articolo>
+					</capo>
+				</titolo>
+				<titolo id="tit7">
+					<num>Titolo VII</num>
+					<rubrica>Procedimento amministrativo </rubrica>
+					<capo id="tit7-cap1">
+						<num>Capo I</num>
+						<rubrica>Il procedimento </rubrica>
+						<articolo id="art77">
+							<num>Art. 77</num>
+							<rubrica>(Principi procedurali) </rubrica>
+							<comma id="art77-com1">
+								<num>1.</num>
+								<corpo>
+									Il Comune di Firenze informa l'attività amministrativa a criteri di trasparenza, pubblicità, partecipazione, collaborazione, semplificazione, economicità, determinando le procedure amministrative nel rispetto della 
+									<rif xlink:href="urn:nir:stato:legge:1990-08-07;241" xlink:type="simple">legge 7 agosto 1990, n. 241</rif>
+									e successive modificazioni. 
+								</corpo>
+							</comma>
+							<comma id="art77-com2">
+								<num>2.</num>
+								<corpo>Con regolamento sul procedimento amministrativo si disciplinano i criteri generali per la corretta organizzazione e conservazione dei documenti, lo sviluppo del procedimento, la comunicazione agli interessati, la definizione di termini, la pubblicità, i profili di responsabilità e quant'altro sia necessario a garantire omogeneità, imparzialità, trasparenza nell'azione amministrativa. </corpo>
+							</comma>
+							<comma id="art77-com3">
+								<num>3.</num>
+								<corpo>Il Sindaco disciplina i singoli procedimenti, individua gli uffici competenti all'istruzione e definizione degli atti, garantisce i diritti di accesso e d'informazione. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art78">
+							<num>Art. 78</num>
+							<rubrica>(Svolgimento) </rubrica>
+							<comma id="art78-com1">
+								<num>1.</num>
+								<corpo>Il procedimento amministrativo si sviluppa attraverso la comunicazione ai soggetti che per legge devono intervenire ed ai destinatari degli effetti del provvedimento finale, dell'inizio dello stesso, dell'ufficio e del responsabile, delle modalità per l'accesso agli atti. </corpo>
+							</comma>
+							<comma id="art78-com2">
+								<num>2.</num>
+								<corpo>Le esigenze di celerità che impediscono la comunicazione dell'inizio della fase procedimentale devono essere adeguatamente motivate dal responsabile del procedimento che si assume la responsabilità della mancata comunicazione, evidenziando il fine pubblico che rischia di essere pregiudicato. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art79">
+							<num>Art. 79</num>
+							<rubrica>(Partecipazione) </rubrica>
+							<comma id="art79-com1">
+								<num>1.</num>
+								<corpo>Chiunque vi abbia interesse, anche di mero fatto, nonché i portatori di interessi diffusi costituiti in associazioni o comitati, possono presentare memorie, proposte, anche di modifica di atti in corso di definizione, ottenendo valutazione con risposta motivata, ove pertinente all'oggetto del procedimento. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art80">
+							<num>Art. 80</num>
+							<rubrica>(Accordi) </rubrica>
+							<comma id="art80-com1">
+								<num>1.</num>
+								<corpo>Il Comune può concludere accordi aventi ad oggetto l'esercizio di potestà amministrative e le prestazioni corrispettive di persone fisiche e giuridiche col fine di raggiungere obiettivi di interesse pubblico. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art81">
+							<num>Art. 81</num>
+							<rubrica>(Responsabile) </rubrica>
+							<comma id="art81-com1">
+								<num>1.</num>
+								<corpo>
+									Il responsabile del procedimento è determinato per ciascun atto di competenza comunale in conformità alla legge, allo 
+									<rif xlink:href="urn:nir:comune.firenze:statuto:" xlink:type="simple">Statuto</rif>
+									, ai regolamenti, alle disposizioni sul procedimento ed è comunque individuabile sino alla designazione del funzionario preposto al procedimento, nel dirigente responsabile del servizio o, in mancanza, direttamente del settore funzionale, sotto la cui competenza ricade l'istruzione procedimentale. 
+								</corpo>
+							</comma>
+							<comma id="art81-com2">
+								<num>2.</num>
+								<corpo>Il responsabile del procedimento assolve gli obblighi da esso derivanti per il rispetto dei termini, garantendo la partecipazione dei soggetti interessati; l'inadempimento è soggetto alle forme di responsabilità previste dalle norme vigenti, salvo condizioni di particolare e giustificato motivo. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art82">
+							<num>Art. 82</num>
+							<rubrica>(Procedure interne) </rubrica>
+							<comma id="art82-com1">
+								<num>1.</num>
+								<corpo>Il regolamento sul procedimento disciplina la procedura di esame e consegna delle comunicazioni in arrivo e partenza e tutte le fasi conseguenti. </corpo>
+							</comma>
+							<comma id="art82-com2">
+								<num>2.</num>
+								<corpo>L'esame delle domande e la trattazione degli affari sono svolti secondo l'ordine cronologico di presentazione, quando il procedimento sia attivato da soggetti privati. </corpo>
+							</comma>
+							<comma id="art82-com3">
+								<num>3.</num>
+								<corpo>Nei casi in cui si imponga un ordine particolare nella trattazione degli affari o si richiedano procedure d'urgenza, si provvede ad esplicita disciplina stabilita dal responsabile del procedimento in base ai principi posti dal regolamento sul procedimento. </corpo>
+							</comma>
+							<comma id="art82-com4">
+								<num>4.</num>
+								<corpo>L'Amministrazione comunale promuove iniziative specifiche per agevolare l'espletamento di pratiche amministrative, favorendo l'apertura degli uffici al pubblico in punti decentrati, promuovendo iniziative a favore degli utenti in collaborazione con gli altri enti pubblici operanti sul territorio e prevedendo disposizioni normative ed organizzative per l'applicazione diffusa dell'autocertificazione. </corpo>
+							</comma>
+						</articolo>
+					</capo>
+					<capo id="tit7-cap2">
+						<num>Capo II</num>
+						<rubrica>Efficacia, pubblicità, accesso agli atti </rubrica>
+						<articolo id="art83">
+							<num>Art. 83</num>
+							<rubrica>(Efficacia degli atti amministrativi) </rubrica>
+							<comma id="art83-com1">
+								<num>1.</num>
+								<corpo>L'ordinanza del Sindaco è immediatamente esecutiva ed affissa per cinque giorni all'Albo Pretorio del Comune. </corpo>
+							</comma>
+							<comma id="art83-com2">
+								<num>2.</num>
+								<corpo>Il Sindaco può sospendere in ogni momento l'efficacia delle ordinanze proprie o delegate. </corpo>
+							</comma>
+							<comma id="art83-com3">
+								<num>3.</num>
+								<corpo>Le determinazioni dei dirigenti, dotate di numerazione unica progressiva, sono immediatamente esecutive, pubblicate per cinque giorni all'Albo Pretorio del Comune e raccolte in un unico archivio cui è garantita la piena accessibilità. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art84">
+							<num>Art. 84</num>
+							<rubrica>(Pubblicità degli atti e dell'attività comunale) </rubrica>
+							<comma id="art84-com1">
+								<num>1.</num>
+								<corpo>Tutti gli atti sono pubblici. Il Comune individua le misure idonee per favorirne la diffusione e la conoscenza, cura la raccolta aggiornata ed accessibile al pubblico dei regolamenti comunali e degli atti normativi adottati dagli enti, istituzioni, aziende, consorzi, società a partecipazione comunale. </corpo>
+							</comma>
+							<comma id="art84-com2">
+								<num>2.</num>
+								<corpo>
+									Nella sede del Comune sono riservati idonei spazi per la collocazione dell'Albo Pretorio, ove vengono pubblicati atti, provvedimenti ed avvisi secondo le previsioni di legge, 
+									<rif xlink:href="urn:nir:comune.firenze:statuto:" xlink:type="simple">Statuto</rif>
+									, regolamento. 
+								</corpo>
+							</comma>
+							<comma id="art84-com3">
+								<num>3.</num>
+								<corpo>La pubblicità è inoltre assicurata con l'inserimento nella rete civica del comune degli atti di cui ai commi precedenti. Nella rete civica sono inseriti obbligatoriamente i regolamenti, le deliberazioni, le ordinanze, le determinazioni dirigenziali e gli atti di iniziativa dei Consiglieri. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art85">
+							<num>Art. 85</num>
+							<rubrica>(Ufficio per le relazioni con il pubblico) </rubrica>
+							<comma id="art85-com1">
+								<num>1.</num>
+								<corpo>L'ufficio per le relazioni con il pubblico cura la raccolta e l'aggiornamento costante delle disposizioni che disciplinano i singoli procedimenti e ne garantisce la facile conoscenza a tutti gli interessati, assicura la pubblicizzazione dei servizi resi dall'Amministrazione in modo diretto o indiretto, la conoscenza dei diritti e dei doveri degli utenti della struttura pubblica. </corpo>
+							</comma>
+							<comma id="art85-com2">
+								<num>2.</num>
+								<corpo>L'ufficio ha il compito di fornire chiarimenti sull'iter seguito da provvedimenti e pratiche amministrative, individuando e comunicando il nominativo del responsabile del procedimento e quanto possa essere utile al cittadino per l'esercizio dei propri diritti. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art86">
+							<num>Art. 86</num>
+							<rubrica>(Accesso agli atti) </rubrica>
+							<comma id="art86-com1">
+								<num>1.</num>
+								<corpo>Chiunque vi abbia interesse, anche di mero fatto, può accedere agli atti ed ai documenti amministrativi del Comune e, in generale, alle informazioni di cui è in possesso l'Amministrazione, ad eccezione di quanto previsto dalla legge e norme regolamentari, o per effetto di una motivata e temporanea dichiarazione del Sindaco. Le modalità generali di esercizio del diritto di accesso sono stabilite dal regolamento sull'accesso ai documenti amministrativi. </corpo>
+							</comma>
+							<comma id="art86-com2">
+								<num>2.</num>
+								<corpo>Le istituzioni, le aziende, i consorzi, gli enti a partecipazione comunale, le società a prevalente capitale pubblico locale, i concessionari di pubblici esercizi, rilasciano ai cittadini copia degli atti deliberati dai loro organi sulla base di specifica richiesta scritta presentata all'ufficio per le relazioni con il pubblico. </corpo>
+							</comma>
+							<comma id="art86-com3">
+								<num>3.</num>
+								<corpo>I documenti dell'Archivio Storico del Comune sono consultabili secondo le modalità previste dal regolamento. </corpo>
+							</comma>
+						</articolo>
+					</capo>
+					<capo id="tit7-cap3">
+						<num>Capo III</num>
+						<rubrica>Il Difensore civico </rubrica>
+						<articolo id="art87">
+							<num>Art. 87</num>
+							<rubrica>(Caratteristiche generali) </rubrica>
+							<comma id="art87-com1">
+								<num>1.</num>
+								<corpo>E' istituito il Difensore civico del Comune di Firenze, eletto a scrutinio segreto dal Consiglio Comunale con la maggioranza dei due terzi dei Consiglieri assegnati. Qualora tale maggioranza non venga raggiunta, la votazione è ripetuta nella seduta successiva ed il Difensore civico è eletto con la maggioranza assoluta dei Consiglieri assegnati. </corpo>
+							</comma>
+							<comma id="art87-com2">
+								<num>2.</num>
+								<corpo>Il Difensore civico, quale garante dell'imparzialità e del buon andamento della pubblica amministrazione, si attiva per eliminare abusi, disfunzioni, carenze e ritardi dell'Amministrazione, sia di propria iniziativa, che a domanda di singoli ed associazioni anche su comunicazione orale. </corpo>
+							</comma>
+							<comma id="art87-com3">
+								<num>3.</num>
+								<corpo>Il Difensore civico quale promotore di equità può intervenire presso l'Amministrazione per suggerire, nell'adozione di un atto, la soluzione più conforme nell'interesse del cittadino. </corpo>
+							</comma>
+							<comma id="art87-com4">
+								<num>4.</num>
+								<corpo>Il Difensore civico esercita inoltre tutte le altre competenze ad esso attribuite dalla legge e dai regolamenti consiliari. </corpo>
+							</comma>
+							<comma id="art87-com5">
+								<num>5.</num>
+								<corpo>Il Difensore civico deve essere persona di riconosciuto prestigio morale e professionale, dotata di provata competenza ed esperienza in discipline giuridico-amministrative, in grado di assicurare imparzialità ed indipendenza di giudizio. I requisiti, le condizioni di incompatibilità, ineleggibilità, di decadenza sono stabilite da apposito regolamento. </corpo>
+							</comma>
+							<comma id="art87-com6">
+								<num>6.</num>
+								<corpo>La durata del mandato è di tre anni e può essere riconfermato solo per un secondo mandato. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art88">
+							<num>Art. 88</num>
+							<rubrica>(Funzioni) </rubrica>
+							<comma id="art88-com1">
+								<num>1.</num>
+								<corpo>Il Difensore civico esercita le sue funzioni in relazione all'attività degli uffici del Comune di Firenze, dei Consigli di quartiere, degli enti dipendenti, delle società a partecipazione comunale, dei concessionari di pubblici servizi, dei consorzi pubblici. </corpo>
+							</comma>
+							<comma id="art88-com2">
+								<num>2.</num>
+								<corpo>Egli accerta lo stato dei fatti prospettato dai cittadini ed utenti, con facoltà di verificare con i dirigenti o responsabili d'ufficio interessati per competenza la veridicità di inadempienze, illegittimità, fatti a lui prospettati, accedendo agli uffici interessati, ottenendo copia di atti o documenti senza il limite del segreto d'ufficio. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art89">
+							<num>Art. 89</num>
+							<rubrica>(Obbligo di risposta) </rubrica>
+							<comma id="art89-com1">
+								<num>1.</num>
+								<corpo>Qualsiasi richiesta o sollecitazione del Difensore civico anche se non accolta impone l'obbligo della risposta motivata da parte dei responsabili dei servizi ed uffici, entro congruo termine non superiore a trenta giorni dal ricevimento. </corpo>
+							</comma>
+							<comma id="art89-com2">
+								<num>2.</num>
+								<corpo>
+									La richiesta del Difensore civico costituisce provvedimento legalmente emesso da autorità per ragioni di giustizia; il responsabile del servizio o dell'ufficio competente che omette risposta o la rende in modo palesemente insufficiente è sottoposto alle sanzioni ed alla responsabilità previste dalla legge, dallo 
+									<rif xlink:href="urn:nir:comune.firenze:statuto:" xlink:type="simple">Statuto</rif>
+									e dai regolamenti. 
+								</corpo>
+							</comma>
+						</articolo>
+						<articolo id="art90">
+							<num>Art. 90</num>
+							<rubrica>(Poteri di conciliazione) </rubrica>
+							<comma id="art90-com1">
+								<num>1.</num>
+								<corpo>Quando le richieste si riferiscono alla produzione di atti amministrativi il Difensore civico può convocare il responsabile dell'ufficio per l'esame congiunto dello stato del procedimento o informarsi della relativa istruttoria al fine di assicurare un corretto sviluppo delle procedure e della definizione dell'atto, nella salvaguardia del rispetto delle esigenze del cittadino. </corpo>
+							</comma>
+							<comma id="art90-com2">
+								<num>2.</num>
+								<corpo>Il mancato accoglimento da parte del responsabile del servizio o dell'ufficio competente di eventuali proposte avanzate dal Difensore civico è comunicato al Sindaco che esprimerà la propria valutazione entro 30 giorni. </corpo>
+							</comma>
+							<comma id="art90-com3">
+								<num>3.</num>
+								<corpo>Il Difensore civico può svolgere funzioni di diretta sollecitazione agli organi comunali competenti per il riesame di atti già emanati nel caso si ravvisino dubbi di legittimità sul provvedimento là dove sia richiesto da singoli o associazioni portatrici di interessi diffusi. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art91">
+							<num>Art. 91</num>
+							<rubrica>(Poteri nei confronti degli uffici) </rubrica>
+							<comma id="art91-com1">
+								<num>1.</num>
+								<corpo>
+									Il Difensore civico, con idonea motivazione, può denunciare all'Amministrazione comunale, che si pronuncerà nei termini di cui all'
+									<rif xlink:href="#art89-com1" xlink:type="simple">articolo 89, comma 1</rif>
+									, le cause delle inefficienze dei servizi e degli uffici prospettando la sostituzione dei responsabili se si riscontrano negligenze ed inidoneità gravi e reiterate. 
+								</corpo>
+							</comma>
+							<comma id="art91-com2">
+								<num>2.</num>
+								<corpo>Quando ricorrono i casi indicati dalla legge il Difensore civico può proporre agli organi competenti l'apertura del procedimento a carico del personale di fronte alla Commissione di disciplina del Comune e degli enti dipendenti. </corpo>
+							</comma>
+							<comma id="art91-com3">
+								<num>3.</num>
+								<corpo>Nei casi di violazione di legge in cui emergono profili di responsabilità penale al Difensore civico compete l'obbligo di denuncia all'autorità giudiziaria. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art92">
+							<num>Art. 92</num>
+							<rubrica>(Informazione) </rubrica>
+							<comma id="art92-com1">
+								<num>1.</num>
+								<corpo>Il Difensore civico entro il 28 febbraio di ogni anno presenta al Sindaco e al Presidente del Consiglio comunale, che la trasmette ai Consiglieri, la relazione riepilogativa dell'attività svolta evidenziando i casi di disfunzioni ed omissioni e formulando specifiche proposte in merito. </corpo>
+							</comma>
+							<comma id="art92-com2">
+								<num>2.</num>
+								<corpo>Entro 45 giorni il Presidente iscrive all'ordine del giorno del Consiglio Comunale la relazione annuale per l'illustrazione da parte del Difensore civico e la conseguente discussione. </corpo>
+							</comma>
+							<comma id="art92-com3">
+								<num>3.</num>
+								<corpo>In casi di particolare importanza o urgenza, il Difensore civico può inoltrare una relazione al Presidente del Consiglio comunale che la trasmette alle Commissioni consiliari competenti. </corpo>
+							</comma>
+							<comma id="art92-com4">
+								<num>4.</num>
+								<corpo>Il Difensore civico può inviare note e richiedere audizioni alle Commissioni consiliari, al Consiglio comunale, alla Giunta, al Sindaco, ai Consigli di quartiere, agli organi degli enti cui il Comune partecipa. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art93">
+							<num>Art. 93</num>
+							<rubrica>(Ufficio del Difensore civico) </rubrica>
+							<comma id="art93-com1">
+								<num>1.</num>
+								<corpo>Il Difensore civico, per l'esercizio delle sue funzioni, si avvale di proprio ufficio, composto da personale comunale. E' prevista la possibilità, per le più dirette mansioni di collaborazione, del ricorso a personale esterno assunto con contratto a tempo determinato pubblico o privato, come la stipula di convenzioni a termine per la previsione di collaborazioni esterne per la natura di alta specializzazione e contenuto di professionalità inerente la particolare funzione. </corpo>
+							</comma>
+							<comma id="art93-com2">
+								<num>2.</num>
+								<corpo>L'organizzazione dell'ufficio del Difensore civico è definita con regolamento istitutivo approvato dal Consiglio; la proposta alla Giunta dei nominativi dei collaboratori esterni è formulata dallo stesso Difensore civico. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art94">
+							<num>Art. 94</num>
+							<rubrica>(Posizione giuridica) </rubrica>
+							<comma id="art94-com1">
+								<num>1.</num>
+								<corpo>Il Difensore civico esercita l'attività in piena libertà ed indipendenza. </corpo>
+							</comma>
+							<comma id="art94-com2">
+								<num>2.</num>
+								<corpo>Il regolamento individua le forme di collaborazione con il Difensore civico della Regione di cui sono fatte salve le competenze; si prevedono possibilità di collaborazione mediante convenzioni con tutte le amministrazioni pubbliche. </corpo>
+							</comma>
+							<comma id="art94-com3">
+								<num>3.</num>
+								<corpo>Il regolamento istitutivo determina il trattamento economico, comunque non inferiore a quanto stabilito per gli Assessori comunali.   </corpo>
+							</comma>
+						</articolo>
+					</capo>
+				</titolo>
+				<titolo id="tit8">
+					<num>Titolo VIII</num>
+					<rubrica>La partecipazione </rubrica>
+					<capo id="tit8-cap1">
+						<num>Capo I</num>
+						<rubrica>Partecipazione individuale e collettiva </rubrica>
+						<articolo id="art95">
+							<num>Art. 95</num>
+							<rubrica>(Diritti individuali) </rubrica>
+							<comma id="art95-com1">
+								<num>1.</num>
+								<corpo>Il Comune di Firenze considera la tutela dei diritti della persona principio fondamentale della propria azione e ne favorisce l'esercizio. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art96">
+							<num>Art. 96</num>
+							<rubrica>(Libere forme associative) </rubrica>
+							<comma id="art96-com1">
+								<num>1.</num>
+								<corpo>Il Comune favorisce le libere forme associative senza scopo di lucro che operano in ogni sfera socialmente significativa, si adopera per migliorare la loro azione, garantisce la loro informazione sulle materie di specifico interesse. </corpo>
+							</comma>
+							<comma id="art96-com2">
+								<num>2.</num>
+								<corpo>Il Comune rende pubblici i criteri e le procedure di assegnazione alle libere forme associative di contributi economici e mezzi strumentali, di sedi e spazi pubblici. </corpo>
+							</comma>
+							<comma id="art96-com3">
+								<num>3.</num>
+								<corpo>È pubblicato nella rete civica comunale, con scadenza annuale, l'elenco delle libere forme associative che hanno ottenuto agevolazioni o hanno usufruito di beni del Comune, nonché di quelle che hanno fatto richiesta. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art97">
+							<num>Art. 97</num>
+							<rubrica>(Volontariato) </rubrica>
+							<comma id="art97-com1">
+								<num>1.</num>
+								<corpo>Il Comune favorisce e sostiene l'apporto fondamentale delle organizzazioni di volontariato al conseguimento delle finalità pubbliche, sviluppa l'integrazione di attività nell'erogazione dei servizi, privilegia le iniziative che consentono più elevati livelli di socialità, solidarietà, crescita civile, promuove la formazione e l'aggiornamento dei volontari, incentiva la nascita di nuove occasioni di volontariato. </corpo>
+							</comma>
+							<comma id="art97-com2">
+								<num>2.</num>
+								<corpo>E' garantito, nel rispetto delle leggi, l'apporto di volontari in forma individuale ed associata a finalità istituzionali del Comune previo accertamento delle capacità operative ed adeguata formazione. </corpo>
+							</comma>
+							<comma id="art97-com3">
+								<num>3.</num>
+								<corpo>Il Sindaco presenta annualmente al Consiglio comunale una relazione sull'apporto del volontariato allo svolgimento dell'attività del Comune, contenente l'indicazione dei rapporti convenzionali, delle iniziative di collaborazione, degli indirizzi programmatici, dei dati quantitativi sul coinvolgimento dei volontari e dell'utenza. </corpo>
+							</comma>
+						</articolo>
+					</capo>
+					<capo id="tit8-cap2">
+						<num>Capo II</num>
+						<rubrica>Organismi di partecipazione </rubrica>
+						<articolo id="art98">
+							<num>Art. 98</num>
+							<rubrica>(Le Consulte) </rubrica>
+							<comma id="art98-com1">
+								<num>1.</num>
+								<corpo>Le Consulte sono organismi di partecipazione ove sono rappresentate libere forme associative, organizzazioni di volontariato, categorie professionali ed economiche, organizzazioni sindacali, enti, istituzioni. </corpo>
+							</comma>
+							<comma id="art98-com2">
+								<num>2.</num>
+								<corpo>Il Consiglio comunale istituisce le Consulte con specifica deliberazione, stabilendone la composizione, le modalità di elezione del Presidente e degli altri eventuali organi da parte della Consulta stessa, le procedure di convocazione e di voto. </corpo>
+							</comma>
+							<comma id="art98-com3">
+								<num>3.</num>
+								<corpo>Il Sindaco ed il Consiglio comunale possono convocare specifiche riunioni delle Consulte per l'esame di provvedimenti nelle materie di loro competenza e per la definizione degli obiettivi e degli strumenti necessari al loro perseguimento. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art99">
+							<num>Art. 99</num>
+							<rubrica>(Consiglio delle donne) </rubrica>
+							<comma id="art99-com1">
+								<num>1.</num>
+								<corpo>Il Comune di Firenze istituisce il Consiglio delle donne, composto dalle elette nel Consiglio comunale, nei Consigli di quartiere e da una rappresentanza dei gruppi e delle associazioni femminili presenti nella città. </corpo>
+							</comma>
+							<comma id="art99-com2">
+								<num>2.</num>
+								<corpo>Il Consiglio delle donne si propone di promuovere il ruolo della donna nella società, di valorizzare il fare ed il sapere femminile in tutte le sue forme, di sostenere le pari opportunità nel lavoro, di promuovere interventi contro la violenza sessuale. </corpo>
+							</comma>
+							<comma id="art99-com3">
+								<num>3.</num>
+								<corpo>Con regolamento vengono disciplinate le modalità costitutive, la composizione, gli ambiti privilegiati di proposta e gli atti da sottoporre a preventivo parere obbligatorio. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art100">
+							<num>Art. 100</num>
+							<rubrica>(Consiglio delle cittadine e dei cittadini stranieri ed apolidi) </rubrica>
+							<comma id="art100-com1">
+								<num>1.</num>
+								<corpo>Il Comune di Firenze istituisce il Consiglio delle cittadine e dei cittadini stranieri che provengono da Stati non appartenenti all'Unione Europea o Apolidi che risiedono nella città di Firenze. </corpo>
+							</comma>
+							<comma id="art100-com2">
+								<num>2.</num>
+								<corpo>Il Consiglio delle cittadine e dei cittadini stranieri ed apolidi, quale organo consultivo della Giunta e del Consiglio Comunale, costituisce il punto di riferimento per l'esercizio da parte dei soggetti di cui al comma precedente dei diritti di partecipazione, di accesso e di informazione. </corpo>
+							</comma>
+							<comma id="art100-com3">
+								<num>3.</num>
+								<corpo>Il Consiglio delle cittadine e dei cittadini stranieri ed apolidi elegge nel proprio seno un Presidente il quale partecipa alle sedute del Consiglio Comunale e delle Commissioni Consiliari in qualità di Consigliere straniero aggiunto. </corpo>
+							</comma>
+							<comma id="art100-com4">
+								<num>4.</num>
+								<corpo>Il Consiglio Comunale disciplina con regolamento le elezioni, la composizione, gli atti da sottoporre a parere preventivo obbligatorio, le forme di partecipazione del Presidente al Consiglio Comunale ed alle Commissioni Consiliari nonché gli atti di iniziativa e le relative modalità di presentazione alla Giunta ed al Consiglio Comunale. </corpo>
+							</comma>
+							<comma id="art100-com5">
+								<num>5.</num>
+								<corpo>Il Consiglio delle cittadine e dei cittadini stranieri ed apolidi, per le finalità previste dai commi precedenti e dall'apposito Regolamento, è rappresentato in ciascuno dei Consigli di Quartiere del Comune di Firenze da un proprio membro effettivo in qualità di consigliere straniero aggiunto. </corpo>
+							</comma>
+						</articolo>
+					</capo>
+					<capo id="tit8-cap3">
+						<num>Capo III</num>
+						<rubrica>Iniziativa, consultazioni popolari e referendum </rubrica>
+						<articolo id="art101">
+							<num>Art. 101</num>
+							<rubrica>(Istanza) </rubrica>
+							<comma id="art101-com1">
+								<num>1.</num>
+								<corpo>L'istanza costituisce formale richiesta scritta, formulata da soggetti singoli o associati, rivolta al Consiglio comunale, alla Giunta, ai dirigenti per sollecitare audizioni, presentare memorie sul contenuto di atti amministrativi o normativi da adottare od in corso di adozione da parte degli organi competenti, al fine di evidenziare esigenze di interesse comune. All'istanza viene data risposta motivata entro 30 giorni dalla presentazione. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art102">
+							<num>Art. 102</num>
+							<rubrica>(Proposte e petizioni) </rubrica>
+							<comma id="art102-com1">
+								<num>1.</num>
+								<corpo>Duecentocinquanta soggetti titolari del diritto di iniziativa e di partecipazione possono, con atto scritto e sottoscritto, esporre problemi e chiedere al Sindaco l'adozione di provvedimenti, ovvero presentare al Sindaco od al Consiglio comunale proposte di adozioni di provvedimenti. Le petizioni e le proposte devono indicare tre sottoscrittori che possono essere uditi dal Sindaco o dagli organi collegiali competenti. </corpo>
+							</comma>
+							<comma id="art102-com2">
+								<num>2.</num>
+								<corpo>Il regolamento del Consiglio comunale e degli altri organi istituzionali stabilisce le modalità di sottoscrizione ed i criteri di esame delle petizioni e delle proposte prevedendo comunque, entro 45 giorni dalla presentazione, una risposta motivata in cui si dà atto degli atti consequenziali assunti ovvero dell'impossibilità a provvedere. </corpo>
+							</comma>
+							<comma id="art102-com3">
+								<num>3.</num>
+								<corpo>Il Comune garantisce un adeguato supporto ai soggetti proponenti, anche ai fini della loro predisposizione. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art103">
+							<num>Art. 103</num>
+							<rubrica>(Consultazioni) </rubrica>
+							<comma id="art103-com1">
+								<num>1.</num>
+								<corpo>Il Comune favorisce il più ampio coinvolgimento della comunità alle scelte amministrative e promuove forme di consultazione popolare per avere una maggiore conoscenza degli orientamenti che maturano nella realtà sociale, economica, civile, anche utilizzando strumenti statistici. </corpo>
+							</comma>
+							<comma id="art103-com2">
+								<num>2.</num>
+								<corpo>Le consultazioni possono consistere in sondaggi di opinione, distribuzione e raccolta di questionari, verifiche a campione, consultazioni di settore per categorie professionali o utenti di servizi. Possono essere delimitate a zone specifiche della città, o particolari fasce della popolazione. </corpo>
+							</comma>
+							<comma id="art103-com3">
+								<num>3.</num>
+								<corpo>Le consultazioni possono essere proposte da almeno 7.500 soggetti maggiorenni residenti nel Comune. </corpo>
+							</comma>
+							<comma id="art103-com4">
+								<num>4.</num>
+								<corpo>Le modalità delle consultazioni sono disciplinate dal regolamento. </corpo>
+							</comma>
+							<comma id="art103-com5">
+								<num>5.</num>
+								<corpo>Il Presidente del Consiglio comunale promuove la discussione in Consiglio sui risultati della consultazione o sui dati acquisiti entro due mesi dalla loro comunicazione. </corpo>
+							</comma>
+							<comma id="art103-com6">
+								<num>6.</num>
+								<corpo>
+									Le consultazioni possono essere proposte anche da almeno 5.000 soggetti maggiorenni residenti in un Quartiere su materie di competenza del Quartiere o di interesse per la popolazione ivi residente. Le modalità delle consultazioni sono disciplinate dal regolamento di cui al 
+									<rif xlink:href="#art103-com4" xlink:type="simple">comma 4</rif>
+									. 
+								</corpo>
+							</comma>
+						</articolo>
+						<articolo id="art104">
+							<num>Art. 104</num>
+							<rubrica>(Referendum consultivo) </rubrica>
+							<comma id="art104-com1">
+								<num>1.</num>
+								<corpo>Il referendum consultivo è indetto dal Sindaco su iniziativa popolare, quale consultazione inerente le scelte dell'Amministrazione in relazione ad indirizzi e decisioni che riguardano la vita della città ed il suo sviluppo. Può essere sottoposta a referendum la richiesta di revoca o modifica di singole deliberazioni già assunte. </corpo>
+							</comma>
+							<comma id="art104-com2">
+								<num>2.</num>
+								<corpo>La proposta di referendum è articolata in unica domanda formulata in modo breve, chiaro, tale da lasciare obiettiva libertà di opzione. </corpo>
+							</comma>
+							<comma id="art104-com3">
+								<num>3.</num>
+								<corpo>Il risultato del referendum consultivo è discusso dal Consiglio comunale entro trenta giorni dall'ufficiale comunicazione dell'esito, quando vi abbia partecipato la maggioranza degli aventi diritto ed abbia ottenuto la maggioranza dei voti espressi. </corpo>
+							</comma>
+							<comma id="art104-com4">
+								<num>4.</num>
+								<corpo>Il referendum consultivo è proposto da almeno 10.000 soggetti residenti maggiorenni anche se non forniti di cittadinanza italiana, con sottoscrizione nell'arco di quattro mesi. L'ammissibilità dei quesiti da sottoporre a referendum è stabilita dal collegio di tre esperti nominati dal Consiglio comunale a maggioranza dei due terzi dei suoi componenti. Il giudizio degli esperti deve essere espresso prima dell'inizio della raccolta delle firme. Il Consiglio comunale a maggioranza dei due terzi può pronunciarsi difformemente da una decisione non unanime degli esperti. </corpo>
+							</comma>
+							<comma id="art104-com5">
+								<num>5.</num>
+								<corpo>Hanno diritto a partecipare al referendum tutti i residenti maggiorenni, anche se non forniti di cittadinanza italiana. </corpo>
+							</comma>
+							<comma id="art104-com6">
+								<num>6.</num>
+								<corpo>Il regolamento sul referendum disciplina le procedure per lo svolgimento della consultazione. </corpo>
+							</comma>
+						</articolo>
+						<articolo id="art105">
+							<num>Art. 105</num>
+							<rubrica>(Limiti e materie) </rubrica>
+							<comma id="art105-com1">
+								<num>1.</num>
+								<corpo>Nel corso dell'anno può essere indetta un'unica giornata di votazione per lo svolgimento di referendum consultivi. Il regolamento sul referendum disciplina le priorità ed i criteri di scelta nel caso di iniziative referendarie superiori al numero massimo ammissibile ogni anno da esso stabilito. </corpo>
+							</comma>
+							<comma id="art105-com2">
+								<num>2.</num>
+								<alinea>I referendum non possono essere indetti su materie di non esclusiva competenza locale e su questioni attinenti: </alinea>
+								<el id="art105-com2-leta">
+									<num>a)</num>
+									<corpo>elezioni, nomine, designazioni, revoche e decadenze; </corpo>
+								</el>
+								<el id="art105-com2-letb">
+									<num>b)</num>
+									<corpo>il personale comunale o di enti, aziende, istituzioni dipendenti e società a partecipazione comunale; </corpo>
+								</el>
+								<el id="art105-com2-letc">
+									<num>c)</num>
+									<corpo>
+										lo 
+										<rif xlink:href="urn:nir:comune.firenze:statuto:" xlink:type="simple">Statuto</rif>
+										ed i regolamenti che disciplinano il funzionamento degli organi comunali; 
+									</corpo>
+								</el>
+								<el id="art105-com2-letd">
+									<num>d)</num>
+									<corpo>provvedimenti inerenti il bilancio, la contabilità, l'assunzione di mutui, l'emissione di prestiti e l'applicazione di tributi e tariffe. e.oggetti già sottoposti a referendum negli ultimi cinque anni.   </corpo>
+								</el>
+							</comma>
+						</articolo>
+					</capo>
+				</titolo>
+				<titolo id="tit9">
+					<num>Titolo IX</num>
+					<rubrica>Norme transitorie </rubrica>
+					<articolo id="art106">
+						<num>Art. 106</num>
+						<rubrica>(Norme in vigore) </rubrica>
+						<comma id="art106-com1">
+							<num>1.</num>
+							<corpo>I regolamenti richiamati dal presente Statuto integrano l'efficacia costitutiva dello stesso. I principi statutari che rinviano per la disciplina di dettaglio a norme regolamentari sono comunque immediatamente applicabili. </corpo>
+						</comma>
+						<comma id="art106-com2">
+							<num>2.</num>
+							<corpo>Per quanto compatibili con le disposizioni statutarie continuano a rimanere in vigore le disposizioni regolamentari precedenti. Le norme dei regolamenti comunali in contrasto con il presente Statuto sono da considerarsi prive di ogni effetto. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art107">
+						<num>Art. 107</num>
+						<rubrica>
+							(Attuazione dello 
+							<rif xlink:href="urn:nir:comune.firenze:statuto:" xlink:type="simple">Statuto</rif>
+							) 
+						</rubrica>
+						<comma id="art107-com1">
+							<num>1.</num>
+							<corpo>
+								E' istituita la Commissione consiliare permanente per gli affari istituzionali. Ad essa è attribuito il compito di verificare lo stato di attuazione dello 
+								<rif xlink:href="urn:nir:comune.firenze:statuto:" xlink:type="simple">Statuto</rif>
+								, predisporre e coordinare la stesura dei regolamenti che hanno rilievo statutario, sovrintendere alla concreta predisposizione delle misure organizzative e dei provvedimenti per l'attuazione degli istituti richiamati dallo 
+								<rif xlink:href="urn:nir:comune.firenze:statuto:" xlink:type="simple">Statuto</rif>
+								, proporre modifiche o integrazioni dello 
+								<rif xlink:href="urn:nir:comune.firenze:statuto:" xlink:type="simple">Statuto</rif>
+								e misure organizzative e provvedimenti necessari per una sua funzionale attuazione. 
+							</corpo>
+						</comma>
+						<comma id="art107-com2">
+							<num>2.</num>
+							<corpo>Ciascun Consigliere comunale può proporre modifiche statutarie, su cui si esprime preventivamente la Commissione consiliare permanente per gli affari istituzionali. </corpo>
+						</comma>
+						<comma id="art107-com3">
+							<num>3.</num>
+							<corpo>
+								Le proposte di modifica dello 
+								<rif xlink:href="urn:nir:comune.firenze:statuto:" xlink:type="simple">Statuto</rif>
+								possono essere proposte al Consiglio comunale da soggetti titolari dei diritti di cittadinanza se fatte proprie dalla Commissione consiliare permanente per gli affari istituzionali. 
+							</corpo>
+						</comma>
+						<comma id="art107-com4">
+							<num>4.</num>
+							<corpo>
+								Ogni anno il Presidente della Commissione consiliare permanente per gli affari istituzionali presenta al Consiglio una specifica relazione sullo stato di attuazione dello 
+								<rif xlink:href="urn:nir:comune.firenze:statuto:" xlink:type="simple">Statuto</rif>
+								. 
+							</corpo>
+						</comma>
+						<comma id="art107-com5">
+							<num>5.</num>
+							<corpo>
+								La Presidenza della commissione è attribuita alla minoranza consiliare, in base alle disposizioni di cui all'
+								<rif xlink:href="#art28-com1" xlink:type="simple">articolo 28, comma 1</rif>
+								. 
+							</corpo>
+						</comma>
+					</articolo>
+				</titolo>
+			</articolato>
+			<formulafinale />
+			<conclusione />
+		</DocumentoNIR>
+	</NIR>
