@@ -96,7 +96,7 @@
 	    <template tipo="Articolato" numerato="SI" tag="stc">STC-Art.xml</template>
 	    <dtd name="DTD Nir Completo">nircompleto.dtd</dtd>
 		<dtd name="DTD Nir Flessibile">nirflessibile.dtd</dtd>
-		<dtd name="DTD Nir Base">nirbase.dtd</dtd>
+		<!--	dtd name="DTD Nir Base">nirbase.dtd</dtd	-->
     </provvedimento>
 <!-- ******************************************************* REGOLAMENTO COMUNALE -->
         <provvedimento name="Regolamento Comunale" emananti="NO">
@@ -108,7 +108,7 @@
 	    <template tipo="Articolato" numerato="NO" tag="regc">REGC-Art.xml</template>
 	    <dtd name="DTD Nir Completo">nircompleto.dtd</dtd>
 		<dtd name="DTD Nir Flessibile">nirflessibile.dtd</dtd>
-		<dtd name="DTD Nir Base">nirbase.dtd</dtd>
+		<!--	dtd name="DTD Nir Base">nirbase.dtd</dtd	-->
     </provvedimento>
 <!-- ******************************************************* DELIBERA CONSILIARE -->
         <provvedimento name="Delibera Consiliare" emananti="NO">
@@ -120,7 +120,7 @@
 	    <template tipo="Articolato" tag="del" nome="delibera">DELC-Art.xml</template>
 	    <dtd name="DTD Nir Completo">nircompleto.dtd</dtd>
 		<dtd name="DTD Nir Flessibile">nirflessibile.dtd</dtd>
-		<dtd name="DTD Nir Base">nirbase.dtd</dtd>
+		<!--	dtd name="DTD Nir Base">nirbase.dtd</dtd	-->
     </provvedimento>
 </classe>
 
@@ -560,7 +560,7 @@
 	    <template tipo="SemiArticolato" tag="SemiArticolato" nome="deliberazione">XX-Semi.xml</template>
 	    <dtd name="DTD Nir Completo">nircompleto.dtd</dtd>
 		<dtd name="DTD Nir Flessibile">nirflessibile.dtd</dtd>
-		<dtd name="DTD Nir Base">nirbase.dtd</dtd>
+		<!--	dtd name="DTD Nir Base">nirbase.dtd</dtd	-->
     </provvedimento>
 </classe>
 <!-- =============================================================== PARERI -->
