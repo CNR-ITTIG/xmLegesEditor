@@ -242,7 +242,8 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 		}else{
 				Element redazioneTag;
 				redazioneTag = doc.createElement("redazione");
-				
+				UtilDom.setAttributeValue(redazioneTag, "nome", "");
+				UtilDom.setAttributeValue(redazioneTag, "norm", "");				
 				Node child = descrittoriNode.getFirstChild();
 				boolean inserted = false;
 				do {
