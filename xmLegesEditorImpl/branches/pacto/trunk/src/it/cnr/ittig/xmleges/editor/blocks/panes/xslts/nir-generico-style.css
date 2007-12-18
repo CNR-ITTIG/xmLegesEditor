@@ -36,7 +36,6 @@ em {
 	font-size: 110% ;
 	font-weight: bold;
 	font-style:normal;
-	text-align: center;
 	color: #990000;
 }	
 .titoloDoc:first-letter{
@@ -81,6 +80,12 @@ p.rubrica {
 	font-weight: lighter;
 	font-size: 100%;
 }
+				p.decorazione {
+					text-align: center;
+					margin-top: 0;
+					font-weight: lighter;
+					font-size: 100%;
+				}
 .comma { 
 	font-size: 100% ; 
 	font-weight: normal;
@@ -160,3 +165,8 @@ p {
 	text-align: right;
 	margin-bottom: 20px;
 }
+				.allineasx {
+					width: 100%;
+					text-align: left;
+					margin-bottom: 20px;
+				}
