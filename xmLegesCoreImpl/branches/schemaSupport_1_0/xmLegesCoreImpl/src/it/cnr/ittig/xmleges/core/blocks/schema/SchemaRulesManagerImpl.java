@@ -39,20 +39,28 @@ public class SchemaRulesManagerImpl implements RulesManager {
 		this.logger = logger;
 	}
 
+	
+	protected boolean pre_check = false;
+	
+	
+	protected UtilXsd utilXsd;
+	
+	
 	/**
 	 * Tabella hash contenente le regole per l'interrogazione sotto-forma di automi
 	 * deterministici. Ogni regola &egrave associata ad un elemento.
 	 */
-	//protected HashMap rules;
-
+	protected HashMap rules;
+	protected HashMap elemDeclNames;
+	
 	/**
 	 * Tabella hash dei possibili contenuti alternativi dei vari elementi. Ogni valore
 	 * della tabella hash &egrave costituito da un vettore di stringhe formate da nomi di
 	 * elementi separati da virgole che rappresentano le possibili alternative. La tabella
 	 * hash &egrave indirizzata dai nomi degli elementi.
 	 */
-	//protected HashMap alternative_contents;
-
+	protected HashMap alternative_contents;
+	
 	/**
 	 * Tabella hash degli attributi associati agli elementi. La tabella hash &egrave
 	 * indirizzata dai nomi degli elementi. Ogni valore della tabella hash &grave
@@ -62,12 +70,7 @@ public class SchemaRulesManagerImpl implements RulesManager {
 	 * costituito da un'istanza della classe AttributeDecl, e definisce l'attributo
 	 * specifico.
 	 */
-	//protected HashMap attributes;
-
-	protected boolean pre_check = false;
-	
-	
-	protected UtilXsd utilXsd;
+	protected HashMap attributes;
 
 
 
@@ -87,12 +90,22 @@ public class SchemaRulesManagerImpl implements RulesManager {
 
 	public SchemaRulesManagerImpl(Logger logger) {
 		enableLogging(logger);
-		utilXsd = new UtilXsd();		
+		
+		rules = new HashMap();
+		elemDeclNames = new HashMap();
+		alternative_contents = new HashMap();
+		attributes = new HashMap();
+			
+		utilXsd = new UtilXsd(this);	
+		
 	}
 	
 
 	public void clear() {
-		utilXsd.clear();
+		rules = new HashMap();
+		elemDeclNames = new HashMap();
+		alternative_contents = new HashMap();
+		attributes = new HashMap();
 	}
 
 	// ------------ INIZIALIZZAZIONE DELLE REGOLE --------------------
@@ -645,13 +658,9 @@ public class SchemaRulesManagerImpl implements RulesManager {
 	public String getDefaultContent(String elem_name, String alternative) throws RulesManagerException {
 		if (elem_name.compareTo("#PCDATA") == 0)
 			return "";
-
 		
-		//FIXME      mettere questo controllo sulle rules XSDFA		
-		
-//		DFSA elem_rule = (DFSA) rules.get(elem_name);
-//		if (elem_rule == null)
-//			throw new RulesManagerException("No rule for element <" + elem_name + ">");
+		if (rules.get(elem_name) == null)
+		   throw new RulesManagerException("No rule for element <" + elem_name + ">");
 
 		// init computation, get content of this alternative
 		return getDefaultContent(createAlternativeContentGraph(elem_name, alternative));
@@ -698,10 +707,8 @@ public class SchemaRulesManagerImpl implements RulesManager {
 		if (queryTextContent(elem_name)) // don't explode text and mixed elements to save iterations
 			return createTextContentGraph(elem_name);
 
-//		DFSA elem_rule = (DFSA) rules.get(elem_name);
-//		if (elem_rule == null)
-//		throw new RulesManagerException("No rule for element <" + elem_name + ">");
-//		return elem_rule.createContentGraph();
+		if (rules.get(elem_name) == null)
+		   throw new RulesManagerException("No rule for element <" + elem_name + ">");
 		return utilXsd.createContentGraph(elem_name);
 	}
 
@@ -761,9 +768,8 @@ public class SchemaRulesManagerImpl implements RulesManager {
 	 */
 	public Collection getAlternatives(String elem_name, Collection elem_children, int choice_point) throws RulesManagerException {
 
-//		DFSA rule = (DFSA) rules.get(elem_name);
-//		if (rule == null)
-//			throw new RulesManagerException("No rule for element <" + elem_name + ">");
+		if (rules.get(elem_name) == null)
+		   throw new RulesManagerException("No rule for element <" + elem_name + ">");
 
 		return utilXsd.getAlternatives(elem_name, elem_children, choice_point);
 	}
@@ -1564,17 +1570,17 @@ public class SchemaRulesManagerImpl implements RulesManager {
 	//
 	//
 	//
-	// ------------ QUERY SUGLI ATTRIBUTI DI UN ELEMENTO --------------------
+	// 				 QUERY SUGLI ATTRIBUTI DI UN ELEMENTO 
     //
 	//
 	//
 	private AttributeDeclaration getAttributeDeclaration(String elem_name, String att_name) throws RulesManagerException {
 		if (elem_name == "#PCDATA")
 			throw new RulesManagerException("No attributes for element <" + elem_name + ">");
-		if (!utilXsd.rules.containsKey(elem_name))
+		if (!rules.containsKey(elem_name))
 			throw new RulesManagerException("No rule for element <" + elem_name + ">");
 
-		HashMap att_hash = (HashMap) utilXsd.attributes.get(elem_name);
+		HashMap att_hash = (HashMap) attributes.get(elem_name);
 		if (att_hash == null)
 			throw new RulesManagerException("No attributes for element <" + elem_name + ">");
 
@@ -1593,10 +1599,10 @@ public class SchemaRulesManagerImpl implements RulesManager {
 	public Collection queryGetAttributes(String elem_name) throws RulesManagerException {
 		if (elem_name == "#PCDATA")
 			return new Vector();
-		if (!utilXsd.rules.containsKey(elem_name))
+		if (!rules.containsKey(elem_name))
 			throw new RulesManagerException("No rule for element <" + elem_name + ">");
 
-		HashMap att_hash = (HashMap) utilXsd.attributes.get(elem_name);
+		HashMap att_hash = (HashMap) attributes.get(elem_name);
 		if (att_hash == null)
 			return new Vector(); // no attributes for element
 
@@ -1652,9 +1658,9 @@ public class SchemaRulesManagerImpl implements RulesManager {
 	public boolean queryIsValidAttribute(String elem_name, String att_name) throws RulesManagerException {
 		if (elem_name == "#PCDATA")
 			throw new RulesManagerException("No attributes for element <" + elem_name + ">");
-		if (!utilXsd.rules.containsKey(elem_name))
+		if (!rules.containsKey(elem_name))
 			throw new RulesManagerException("No rule for element <" + elem_name + ">");
-		return (utilXsd.attributes.containsKey(elem_name) && ((HashMap) utilXsd.attributes.get(elem_name)).containsKey(att_name));
+		return (attributes.containsKey(elem_name) && ((HashMap) attributes.get(elem_name)).containsKey(att_name));
 	}
 
 	/**
@@ -1742,6 +1748,11 @@ public class SchemaRulesManagerImpl implements RulesManager {
 				}
 			}
 		}
+	}
+	
+	
+	Logger getLogger() {
+		return this.logger;
 	}
 
 
