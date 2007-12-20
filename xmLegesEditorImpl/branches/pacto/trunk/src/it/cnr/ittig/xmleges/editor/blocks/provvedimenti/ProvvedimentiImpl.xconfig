@@ -552,7 +552,7 @@
 <classe name="Deliberazione">
     <provvedimento name="Deliberazione" emananti="SI">
 	    <urn>
-	        <atto>deliberarazione</atto>
+	        <atto>deliberazione</atto>
 	        <citazione autorita="SI">deliberazione</citazione>
 	        <autorita>!(^stato$|^presidente\.repubblica)</autorita>
 	    </urn>

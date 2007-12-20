@@ -170,7 +170,9 @@ public class NirUtilUrnImpl implements NirUtilUrn, Loggable, Serviceable {
 								// ultima
 								formatestuale += formatestualeautorita;
 						} else
-							formatestuale += formatestualeautorita;
+							//FIXME posso arrivare qui con formatestualeautorita=null
+							if (formatestualeautorita != null)
+								formatestuale += formatestualeautorita;
 					}
 				}
 			}
