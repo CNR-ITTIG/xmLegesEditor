@@ -37,6 +37,11 @@ File di composizione dell'applicazione xmLegesEditor CORE
  			<!--appender-ref ref="FileAppender" /-->
 		</root>
 		
+		<logger name=".RulesManager" additivity="false">
+                        <priority value ="debug" />
+                        <appender-ref ref="ConsoleAppender" />
+        </logger>
+		
 	
 	</log4j:configuration>
 	
