@@ -260,6 +260,8 @@ public class DocumentManagerImpl implements DocumentManager, EventListener, Logg
 	private String getSchemaLocation(Document doc){		
 		String schemaLoc = UtilDom.getAttributeValueAsString((Node)doc.getDocumentElement(), "xsi:schemaLocation");
 		if(schemaLoc==null)
+			schemaLoc = UtilDom.getAttributeValueAsString((Node)doc.getDocumentElement(), "xsi:noNamespaceSchemaLocation");
+		if(schemaLoc == null)
 			return null;
 	
 		String[] elems = schemaLoc.split(" ");
