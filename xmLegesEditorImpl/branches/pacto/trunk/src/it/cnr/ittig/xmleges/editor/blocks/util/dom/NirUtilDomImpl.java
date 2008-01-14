@@ -72,6 +72,14 @@ public class NirUtilDomImpl implements NirUtilDom, Loggable, Serviceable{
 		
 	}
 	
+	public boolean isDocPACTO(Node activeNode) {
+		Document doc = documentManager.getDocumentAsDom();
+		if ("DocumentoNIR".equals(doc.getDocumentElement().getFirstChild().getNodeName())) {
+			//TODO: implementare qualche altro tipo di controllo
+			return true;
+		}
+		return false;
+	}
 	
 	public Node getNIRElement(Document doc) {
 		NodeList nl = doc.getChildNodes();

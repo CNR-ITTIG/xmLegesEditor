@@ -28,7 +28,9 @@
 
 <!ENTITY % cnrMeta "cnr:meta" >
 
-<!ENTITY % ProprietarioMeta "(%cnrMeta;)*" >
+<!ENTITY % pactoMeta "pacto:meta" >
+
+<!ENTITY % ProprietarioMeta "(%cnrMeta; | %pactoMeta;)*" >
 
 <!--    =====================================================================        
           Metadati proprietari del CNR                                               
@@ -45,6 +47,15 @@
 <!ENTITY % ittigDTD SYSTEM "./ittig.dtd">
 
 %ittigDTD;
+
+
+<!--    =====================================================================        
+          Metadati proprietari PACTO                                               
+        =====================================================================  -->
+
+<!ENTITY % pactoDTD SYSTEM "./pacto.dtd">
+
+%pactoDTD;
 
 <!--    =====================================================================        
             fine del file proprietario                                               

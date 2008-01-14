@@ -22,6 +22,7 @@ import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.MetaCiclodivita;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.cnr.MetaCnr;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.pacto.MetaPacto;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.MetaDescrittori;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.MetaDescrittoriMaterie;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.inquadramento.MetaInquadramento;
@@ -31,6 +32,7 @@ import it.cnr.ittig.xmleges.editor.services.dom.vigenza.Vigenza;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 import it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita.CiclodiVitaForm;
 import it.cnr.ittig.xmleges.editor.services.form.meta.cnr.CnrProprietariForm;
+import it.cnr.ittig.xmleges.editor.services.form.meta.pacto.PactoProprietariForm;
 import it.cnr.ittig.xmleges.editor.services.form.meta.descrittori.MaterieVocabolariForm;
 import it.cnr.ittig.xmleges.editor.services.form.meta.descrittori.MetaDescrittoriForm;
 import it.cnr.ittig.xmleges.editor.services.form.meta.inquadramento.InquadramentoForm;
@@ -96,6 +98,8 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 
 	AbstractAction cnrAction = new cnrAction();
 
+	AbstractAction pactoAction = new pactoAction();
+	
 	MetaDescrittori descrittori;
 
 	MetaCiclodivita ciclodivita; //dom
@@ -107,7 +111,9 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 	MetaDescrittoriMaterie materie;
 
 	MetaCnr metaCnr;
-
+	
+	MetaPacto metaPacto;
+	
 	MetaDescrittoriForm descrittoriForm;
 
 	CiclodiVitaForm ciclodivitaForm;
@@ -115,6 +121,8 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 	UrnDocumentoForm urnDocumentoForm;
 
 	CnrProprietariForm cnrForm;
+	
+	PactoProprietariForm pactoForm;
 
 	InquadramentoForm inquadramentoForm;
 
@@ -146,6 +154,7 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		inquadramento = (MetaInquadramento) serviceManager.lookup(MetaInquadramento.class);
 		materie = (MetaDescrittoriMaterie) serviceManager.lookup(MetaDescrittoriMaterie.class);
 		metaCnr = (MetaCnr) serviceManager.lookup(MetaCnr.class);
+		metaPacto = (MetaPacto) serviceManager.lookup(MetaPacto.class);
 		metaUrnDocumento = (MetaUrnDocumento) serviceManager.lookup(MetaUrnDocumento.class);
 		descrittoriForm = (MetaDescrittoriForm) serviceManager.lookup(MetaDescrittoriForm.class);
 		ciclodivitaForm = (CiclodiVitaForm) serviceManager.lookup(CiclodiVitaForm.class);
@@ -156,6 +165,7 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
 		urnDocumentoForm = (UrnDocumentoForm) serviceManager.lookup(UrnDocumentoForm.class);
 		cnrForm = (CnrProprietariForm) serviceManager.lookup(CnrProprietariForm.class);
+		pactoForm = (PactoProprietariForm) serviceManager.lookup(PactoProprietariForm.class);
 		vigenza = (Vigenza) serviceManager.lookup(Vigenza.class);
 	}
 
@@ -167,6 +177,7 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		actionManager.registerAction("editor.meta.descrittori.materie", materieAction);
 		actionManager.registerAction("editor.meta.urn", urnAction);
 		actionManager.registerAction("editor.meta.cnr", cnrAction);
+		actionManager.registerAction("editor.meta.pacto", pactoAction);
 		eventManager.addListener(this, DocumentOpenedEvent.class);
 		eventManager.addListener(this, SelectionChangedEvent.class);
 		// aggiungere un listener su DocumentChanged ????
@@ -176,7 +187,8 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		inquadramentoAction.setEnabled(false);
 		materieAction.setEnabled(false);
 		urnAction.setEnabled(false);
-		cnrAction.setEnabled(false);		
+		cnrAction.setEnabled(false);	
+		pactoAction.setEnabled(false);	
 	}
 
 	// ////////////////////////////////////////// EventManagerListener Interface
@@ -189,6 +201,9 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 
 		urnAction.setEnabled(!documentManager.isEmpty());
 		cnrAction.setEnabled(!documentManager.isEmpty() && nirUtilDom.isDocCNR(selectionManager.getActiveNode()));    
+	
+		//TODO: decidere la condizione per abilitare l'azione
+		pactoAction.setEnabled(!documentManager.isEmpty() && nirUtilDom.isDocPACTO(selectionManager.getActiveNode()));
 	}
 
 	// //////////////////////////////////////////// MetaGeneraliAction Interface
@@ -322,6 +337,28 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 	}
 
 	/////////////////////////////////////////
+	//////////////////////////////  PACTO 
+
+	public void doPacto() {
+		Document doc = documentManager.getDocumentAsDom();
+		Node node = selectionManager.getActiveNode();
+		pactoForm.setProprietari(metaPacto.getProprietario(node));
+
+
+		if (pactoForm.openForm()) {
+			try {
+				EditTransaction tr = documentManager.beginEdit();
+				metaPacto.setProprietario(node, pactoForm.getProprietari());
+				rinumerazione.aggiorna(doc);
+				documentManager.commitEdit(tr);
+			} catch (DocumentManagerException ex) {
+				logger.error(ex.getMessage(), ex);
+			}
+		}
+
+	}
+
+	/////////////////////////////////////////
 	//////////////////////////////  URN 
 
 	public void doUrn() {
@@ -375,6 +412,12 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 	public class cnrAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
 			doCnr();
+		}
+	}
+	
+	public class pactoAction extends AbstractAction {
+		public void actionPerformed(ActionEvent e) {
+			doPacto();
 		}
 	}
 }

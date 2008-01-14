@@ -89,7 +89,7 @@ Loggable, Serviceable, Initializable, ActionListener {
 	String vocabolariSelectedItem;
 	
 	public boolean openForm() {
-		form.setSize(450, 300);
+		form.setSize(450, 320);
 		form.showDialog();
 		return form.isOk();
 

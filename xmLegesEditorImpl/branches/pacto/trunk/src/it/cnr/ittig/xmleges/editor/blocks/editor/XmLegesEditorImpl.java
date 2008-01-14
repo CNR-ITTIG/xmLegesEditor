@@ -104,7 +104,10 @@ public class XmLegesEditorImpl implements XmLegesEditor, Loggable, Serviceable, 
 							"dtd-cnr/cnr.dtd",
 
 							// ITTIG
-							"dtd-ittig/ittig.dtd"
+							"dtd-ittig/ittig.dtd",
+							
+							// PACTO
+							"dtd-pacto/pacto.dtd"
 				            };
 					
 					for (int i = 0; i < files.length; i++) {

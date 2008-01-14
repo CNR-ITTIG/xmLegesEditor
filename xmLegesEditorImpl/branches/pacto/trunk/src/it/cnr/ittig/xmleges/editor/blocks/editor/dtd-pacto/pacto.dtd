@@ -1,0 +1,9 @@
+<!ENTITY % pactoNS  "xmlns:pacto CDATA #FIXED 'http://www.comune.fi.it/deliberazione/1.0'" >
+
+<!ELEMENT pacto:meta (pacto:nproposta?, pacto:ufficio?, pacto:relatore?)>
+
+<!ATTLIST pacto:meta %pactoNS; >
+
+<!ELEMENT pacto:nproposta (#PCDATA)>
+<!ELEMENT pacto:ufficio	(#PCDATA)>
+<!ELEMENT pacto:relatore (#PCDATA)>
