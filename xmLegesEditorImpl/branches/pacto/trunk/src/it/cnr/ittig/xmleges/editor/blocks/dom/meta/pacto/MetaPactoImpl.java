@@ -95,13 +95,14 @@ public class MetaPactoImpl implements MetaPacto, Loggable, Serviceable {
 			boolean missingProprietario = false;
 			
 			if (proprietarioNode==null){
-				proprietarioNode = doc.createElementNS("http://www.comune.fi.it/deliberazione/1.0","proprietario");
+				proprietarioNode = utilRulesManager.getNodeTemplate("proprietario");
+						//createElementNS("http://www.comune.fi.it/deliberazione/1.0","proprietario");
 				missingProprietario = true;
 			}
 			
 			Node pactoNode = UtilDom.findRecursiveChild(activeMeta,"pacto:meta");
 			if (pactoNode==null)
-			    pactoNode = utilRulesManager.getNodeTemplate("pacto:meta");
+			    pactoNode =  doc.createElementNS("http://www.comune.fi.it/deliberazione/1.0","pacto:meta");
 			
 			String[] elementsName=new String[]{"pacto:nproposta","pacto:ufficio","pacto:relatore"};
 			 
@@ -114,8 +115,7 @@ public class MetaPactoImpl implements MetaPacto, Loggable, Serviceable {
 				pactoNode.appendChild((Node)toInsertElement);	
 			}
 			
-			utilRulesManager.orderedInsertChild(proprietarioNode,pactoNode);			
-			
+			proprietarioNode.appendChild(pactoNode);
 			
 			if(missingProprietario){
 				Node metaNode = doc.getElementsByTagName("meta").item(0);

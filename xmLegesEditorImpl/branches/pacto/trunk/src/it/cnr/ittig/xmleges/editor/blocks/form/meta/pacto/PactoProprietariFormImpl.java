@@ -86,7 +86,7 @@ public class PactoProprietariFormImpl implements PactoProprietariForm, Loggable,
 	// ////////////////////////////////////////////// MetaDescrittoriFormInterface
 	public boolean openForm() {
 		form.setSize(400, 200);
-		form.showDialog(false);
+		form.showDialog();
 		return form.isOk();
 	}
 
