@@ -37,6 +37,13 @@ public interface NirUtilDom extends Service {
 	 * @return <code>true</code> se &egrave; un provvedimento del CNR
 	 */
 	public boolean isDocCNR(Node activeNode);
+
+	/**
+	 * Indica se il documento aperto potrebbe essere un documento di PACTO
+	 * 
+	 * @return <code>true</code> se potrebbe essere un documento di PACTO
+	 */
+	public boolean isDocPACTO(Node activeNode);
 	
 	/**
 	 * Restituisce il nodo Nir del documento <code>doc</code>
