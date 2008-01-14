@@ -37,7 +37,6 @@ public class XsltKeyTypedAction extends XsltAction {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-
 		String actionCommand = e.getActionCommand();
 
 		if (!checkKeys(actionCommand, e.getModifiers()))
@@ -46,12 +45,7 @@ public class XsltKeyTypedAction extends XsltAction {
 		AntiAliasedTextPane pane = (AntiAliasedTextPane) getTextComponent(e);
 
 		int caret = pane.getCaretPosition();
-
-		Element span = pane.getSpan(caret);
-
-		// Allow writing at end of span.
-		if(span == null) 
-			span = pane.getSpan(caret-1);
+		Element span = pane.getMappedSpan(caret);
 
 		if (span == null)
 			return;
@@ -60,6 +54,7 @@ public class XsltKeyTypedAction extends XsltAction {
 		// se ci sono  o siamo a inizio tag non inserisce
 		/* FIXME: 
 		 * va fatta verificando di essere all'interno dello stesso elemento
+		 */
 		if (SPACE.equals(actionCommand)) {
 			try {
 				if (SPACE.equals(pane.getText(caret - 1, 1))) return;
@@ -68,7 +63,7 @@ public class XsltKeyTypedAction extends XsltAction {
 				if (SPACE.equals(pane.getText(caret, 1))) return;
 			} catch (BadLocationException ex) {	}
 		}
-		*/
+
 		Node modNode = pane.getXsltMapper().getDomById(pane.getElementId(span));
 
 		if(modNode == null) return;
@@ -80,13 +75,15 @@ public class XsltKeyTypedAction extends XsltAction {
 		}
 				
 		try {
-			if(pane.getText(span.getStartOffset(), 
-						span.getEndOffset()-span.getStartOffset()).equals(pane.getDefaultText(span))) {
-				pane.select(span.getStartOffset(), span.getEndOffset());
+			// il "+1", il "-1" e il "-2" saltano gli spazi alle estremitˆ.
+			if(pane.getText(span.getStartOffset()+1, 
+						span.getEndOffset()-2-span.getStartOffset()).equals(pane.getDefaultText(span))) {
+				pane.select(span.getStartOffset()+1, span.getEndOffset()-1);
 			}
 		} catch (BadLocationException e1) {
 			// There is no logger instance here!
 			e1.printStackTrace();
+			return;
 		}
 	    	
 		super.actionPerformed(e);

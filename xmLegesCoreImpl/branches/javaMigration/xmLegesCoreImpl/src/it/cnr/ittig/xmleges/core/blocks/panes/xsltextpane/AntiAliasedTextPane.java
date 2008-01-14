@@ -162,14 +162,10 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 	}
 
 	public void paste() {
-
-		Element currElem = getHTMLDocument().getCharacterElement(getCaretPosition());
-
+		Element currElem = getMappedSpan(getCaretPosition());
 		Node modNode = getXsltMapper().getDomById(getElementId(currElem));
-
 		if (getXsltMapper().getParentByGen(modNode) != null) {
-			Element enclosingSpan = getEnclosingSpan(currElem);
-			select(enclosingSpan.getStartOffset(), enclosingSpan.getEndOffset());
+			select(currElem.getStartOffset(), currElem.getEndOffset());
 		}
 		replaceSelection(UtilClipboard.getAsString());
 	}
@@ -212,9 +208,8 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 
 		}
 
-		int currpos = e.getDot();
-		Element currelem = getSpan(currpos);
-		if(currelem==null) currelem = getSpan(currpos-1);
+		int currpos = e.getMark();
+		Element currelem = getMappedSpan(currpos);
 
 		String id = getElementId(currelem);
 
@@ -241,10 +236,10 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 			// che il cursore si trovi sullo stesso elemento (e stranamente
 			// il pane sembra non esserlo). Quindi non ci resta che provare
 			// tutte le combinazioni.
-			Element selDotA = getSpan(e.getDot());
-			Element selDotB = getSpan(e.getDot()-1);
-			Element selMarkA = getSpan(e.getMark());
-			Element selMarkB = getSpan(e.getMark()-1);
+			Element selDotA = getMappedSpan(e.getDot());
+			Element selDotB = getMappedSpan(e.getDot()-1);
+			Element selMarkA = getMappedSpan(e.getMark());
+			Element selMarkB = getMappedSpan(e.getMark()-1);
 			Element selDot = null, selMark = null;
 			if(selDotA == selMarkA) 
 				selDot = selMark = selDotA;
@@ -284,25 +279,10 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 	}
 
 	public void changedUpdate(DocumentEvent e) {
-		if (ignoreDocumentEvents)
-			return;
 		// non dovrebbe servire monitorare le modifiche agli attributi
 		// degli Elementi HMTL
 	}
 
-	protected int getChildNum(Element e) {
-		if (e == null)
-			return -1;
-
-		Element parentElem = e.getParentElement();
-		int childIndex = parentElem.getElementCount() - 1;
-		for (; childIndex >= 0; childIndex--) {
-			if (parentElem.getElement(childIndex).equals(e)) {
-				return childIndex;
-			}
-		}
-		return -1;
-	}
 
 	/** Default text (used to fill empty elements) for the dom node
 	 * 	associated to the given element */
@@ -364,24 +344,14 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 		retVal.copyInto(array);
 		return array;
 	}
-	
-	// A partire da Java 5 non esiste più un tag di chiusura
-	// esplicito per gli elementi span, che diventano di tipo content
-	/** Gets the mapped span surrounding the given element (or null) */
-	public static Element getEnclosingSpan(Element e) {
-		if(e != null && isSpan(e) && isMapped(e))
-			return e;
-		else
-			return null;
-	}
-	
+		
 	/** Tells mapped elements */
 	public static boolean isMappedElement(Element e) {
 		return (e != null && isMapped(e));
 	}
 
 	/** Gets the mapped span at point (or null)*/
-	public Element getSpan(int dot) {
+	public Element getMappedSpan(int dot) {
 		Element e = getHTMLDocument().getCharacterElement(dot);
 		if(e != null && isSpan(e) && isMapped(e))
 			return e;
@@ -506,16 +476,12 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 		if (e == null)
 			return;
 		Highlighter hl = getHighlighter();
-		Element enclosingSpan = getEnclosingSpan(e);
 		int hlStart = e.getStartOffset();
 		int hlEnd = e.getEndOffset();
-		if (enclosingSpan != null) {
-			hlStart = enclosingSpan.getStartOffset();
-			hlEnd = enclosingSpan.getEndOffset();
-		}
 		try {
 			hl.addHighlight(hlStart, hlEnd, LEAF_SEL);
 		} catch (BadLocationException ble) {
+			ble.printStackTrace();
 		}
 	}
 
@@ -531,22 +497,18 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 	public void insertUpdate(DocumentEvent e) {
 		if (ignoreDocumentEvents)
 			return;
-
-		Element modElem = getSpan(getCaretPosition()); 
-		if(modElem == null) 
-			{
-			logger.debug("insertUpdate: Span not found, using next one.");
-			modElem = getSpan(getCaretPosition()+1);
-			}
-
+		
+		Element modElem = getMappedSpan(e.getOffset()); 
 		if(modElem == null) return;
 			
 		String id = getElementId(modElem);
 		logger.debug("insertUpdate: id == " + id);
 		Node modNode = pane.getXsltMapper().getDomById(id);
 		logger.debug("with content: " + modNode.getTextContent());
-		String newText = "";
 
+		if(modNode == null) return;
+
+		String newText = "";
 		try {
 			int start = modElem.getStartOffset();
 			int end = modElem.getEndOffset();
@@ -555,6 +517,7 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 				newText = null;
 			}
 		} catch (BadLocationException ble) {
+			ble.printStackTrace();
 		}
 		pane.updateNode(modNode, newText);
 	}
@@ -569,6 +532,7 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 			Graphics2D g2 = (Graphics2D) g;
 			g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		} catch (ClassCastException ex) {
+			ex.printStackTrace();
 		}
 		super.paintComponent(g);
 	}
@@ -582,6 +546,7 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 			try {
 				hl.addHighlight(selStart, selEnd, DEF_SEL);
 			} catch (BadLocationException ble) {
+				ble.printStackTrace();
 			}
 		}
 	}
@@ -590,24 +555,17 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 		if (ignoreDocumentEvents)
 			return;
 
-		Element modElem = getHTMLDocument().getCharacterElement(getCaretPosition()/*e.getOffset()*/);
-
+		// FIXME: Verificare che sia uno span
+		Element modElem = this.getMappedSpan(e.getOffset());
 		String id = getElementId(modElem);
-
 		Node modNode = pane.getXsltMapper().getDomById(id);
 		String newText = null;
 		try {
-
-			Element containingSpan = getEnclosingSpan(modElem);
 			int start = modElem.getStartOffset();
 			int end = modElem.getEndOffset();
-			if (containingSpan != null) {
-				start = containingSpan.getStartOffset();
-				end = containingSpan.getEndOffset();
-			}
-
 			newText = getText(start, end - start);
 		} catch (BadLocationException ble) {
+			ble.printStackTrace();
 		}
 
 		pane.updateNode(modNode, newText);
@@ -682,11 +640,8 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 
 	protected void setCaretAtElement(Element e) {
 		if (e != null) {
-			Element enclosingSpan = getEnclosingSpan(e);
-			if (enclosingSpan != null) {
-				setCaretPosition(enclosingSpan.getEndOffset());
-				setCaretPosition(enclosingSpan.getStartOffset());
-			}
+			setCaretPosition(e.getEndOffset());
+			setCaretPosition(e.getStartOffset());
 		}
 	}
 
@@ -764,41 +719,7 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 			ignoreDocumentEvents = true;
 			ignoreCaretEvents = true;
 			try {
-				if (isSpan(elem) && isMapped(elem)) {
-					Element curr = elem.getParentElement();
-					boolean found = false;
-					String idDiv = null;
-					while (curr != null && !found) {
-						if ("div".equals(curr.getName())) {
-							idDiv = getIdInAttributeSet(curr.getAttributes());
-							//FIXME  14/07/06 Nella gestione delle tabelle arriva qui con idDiv = NULL
-							if (idDiv != null)
-							  if (idDiv.startsWith("map"))
-								found = true;
-						}
-						curr = curr.getParentElement();
-					}
-					if (found)
-						return update(pane.getXsltMapper().getDomById(idDiv));
-					// Element endSpan = getEndSpanOfStartSpan(elem);
-					// int start = elem.getStartOffset();
-					// int end = endSpan.getEndOffset();
-					// getHTMLDocument().insertAfterEnd(endSpan, getHtml(node));
-					// getHTMLDocument().remove(start, end-start);
-				} else {
-					// XsltEditorKit kit = (XsltEditorKit) getEditorKit();
-					// int start = elem.getStartOffset();
-					// int end = elem.getEndOffset();
-					//					
-					// kit.insertHTML(getHTMLDocument(), end, getHtml(node), 0, 0,null);
-					// getHTMLDocument().remove(start, end - start -1);
-					
-					// FIXME 10 Jan 07
-					getHTMLDocument().setOuterHTML(elem, convertEncoding(getHtml(node)));
-					// OLD
-					//getHTMLDocument().setOuterHTML(elem, getHtml(node));					
-				}
-
+				getHTMLDocument().setOuterHTML(elem, convertEncoding(getHtml(node)));
 				return node;
 			} catch (Exception ex) {
 				logger.error(ex.toString(), ex);

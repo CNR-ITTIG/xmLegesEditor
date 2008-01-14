@@ -30,7 +30,12 @@ license      : GNU General Public License http://www.gnu.org/licenses/gpl.html
 <!-- ====================================================================== -->
 <!-- ======================================================= TEXT NODE ==== -->
 <!-- ====================================================================== -->
-<xsl:template match="text()"><xsl:element name="span" use-attribute-sets="XsltMapperSetParentClass"><xsl:value-of select="." /></xsl:element></xsl:template>
+<!-- Spaces before and after real element text are needed to uniquely identify
+     the span element from cursor position. Without the preceding space there
+     is no way to tell textpane to write on the element following caret (even 
+     when the preceding element is not modifiable). Without the ending space 
+     it's difficult to write at the end of the text. -->
+<xsl:template match="text()"><xsl:element name="span" use-attribute-sets="XsltMapperSetParentClass">&#160;<xsl:value-of select="." />&#160;</xsl:element></xsl:template>
 
 
 <!-- ====================================================================== -->
@@ -61,8 +66,8 @@ license      : GNU General Public License http://www.gnu.org/licenses/gpl.html
     <xsl:attribute name="id">
         <xsl:value-of select="mapper:getUniqueId(.)"/>
     </xsl:attribute>
-    <xsl:attribute name="style">
-    	<xsl:choose>
+	<xsl:attribute name="style">
+   	    <xsl:choose>
     		<xsl:when test="@status='soppresso'">color:red;  text-decoration:line-through;</xsl:when>
     		<xsl:when test="@status='inserito'">color:green;</xsl:when>
     		<xsl:when test="@style!=''"><xsl:value-of select="@style"/></xsl:when>

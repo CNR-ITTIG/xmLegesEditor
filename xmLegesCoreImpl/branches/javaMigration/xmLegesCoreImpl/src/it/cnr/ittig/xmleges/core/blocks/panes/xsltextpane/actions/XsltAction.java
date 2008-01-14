@@ -96,7 +96,10 @@ public class XsltAction extends TextAction {
 		int end = span.getEndOffset();
 		try	{
 			retVal = pane.getText(start, end - start).trim();
-		} catch (BadLocationException ble) {}
+		} catch (BadLocationException ble) 
+		{
+			ble.printStackTrace();
+		}
 		return retVal;
 	}
 
@@ -107,8 +110,12 @@ public class XsltAction extends TextAction {
 		int start = span.getStartOffset();
     	try
 		{
-    		doc.insertString(start, pane.getDefaultText(span), span.getAttributes());
+    			// skip starting space
+    		doc.insertString(start+1, pane.getDefaultText(span), span.getAttributes());
 		} 
-    	catch (BadLocationException ble) { }
+    	catch (BadLocationException ble) 
+		{
+			ble.printStackTrace();
+		}
 	}
 }

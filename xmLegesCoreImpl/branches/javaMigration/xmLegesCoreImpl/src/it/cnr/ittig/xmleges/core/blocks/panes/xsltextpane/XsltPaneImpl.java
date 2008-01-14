@@ -258,9 +258,8 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 			} else if (e.isTextSelectedChanged()) {
 				textPane.selectNode(new Node[] { e.getActiveNode() });
 				Element currElem = textPane.getHTMLDocument().getElement(xsltMapper.getIdByDom(e.getActiveNode()));
-				Element enclosingSpan = textPane.getEnclosingSpan(currElem);
-				if (enclosingSpan != null) {
-					int startOff = enclosingSpan.getStartOffset() + 1;
+				if (textPane.isMappedElement(currElem)) {
+					int startOff = currElem.getStartOffset() + 1;
 					textPane.selectText(startOff + e.getTextSelectionStart(), startOff + e.getTextSelectionEnd());
 				}
 			}
@@ -276,7 +275,7 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 
 			// inserisco il parametro del BaseURL
 			Hashtable hashtable = new Hashtable(1);
-			hashtable.put("base", "file:///"+UtilFile.getFolderPath(documentManager.getSourceName()));			
+			hashtable.put("base", "file:///"+UtilFile.getFolderPath(documentManager.getSourceName()));
 			textPane.setParameter(hashtable);
 			
 			
@@ -407,6 +406,7 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 		textPane.selectNode(new Node[] { selectionManager.getActiveNode() });
 	}
 
+	/* Update text of a whole dom node. mm. */
 	public synchronized void updateNode(Node node, String text) {
 		logger.debug("UPDATING NODE BEGIN");
 		

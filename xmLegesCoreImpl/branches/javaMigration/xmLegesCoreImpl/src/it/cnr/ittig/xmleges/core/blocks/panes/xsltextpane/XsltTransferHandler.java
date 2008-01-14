@@ -98,7 +98,7 @@ public class XsltTransferHandler extends DomTransferHandler {
 		HTMLDocument doc = tc.getHTMLDocument();
 
 		Element currElem = doc.getCharacterElement(pos);
-		Element enclosingSpan = tc.getSpan(pos);
+		Element enclosingSpan = tc.getMappedSpan(pos);
 		if (enclosingSpan == null) {
 			shouldRemove = false;
 			return true;
@@ -130,13 +130,8 @@ public class XsltTransferHandler extends DomTransferHandler {
 					HTMLDocument doc = source.getHTMLDocument();
 					Element currElem = source.getHTMLDocument().getCharacterElement(p0.getOffset());
 					Node currNode = source.getXsltMapper().getDomById(source.getElementId(currElem));
-					Element containingSpan = source.getEnclosingSpan(currElem);
 					int start = currElem.getStartOffset(), end = currElem.getEndOffset();
 					String elemText = null;
-					if (containingSpan != null) {
-						start = containingSpan.getStartOffset();
-						end = containingSpan.getEndOffset();
-					}
 					if (p0.getOffset() == start && p1.getOffset() == end) {
 						doc.replace(p0.getOffset(), p1.getOffset() - p0.getOffset(), source.getDefaultText(currElem),
 								currElem.getAttributes());

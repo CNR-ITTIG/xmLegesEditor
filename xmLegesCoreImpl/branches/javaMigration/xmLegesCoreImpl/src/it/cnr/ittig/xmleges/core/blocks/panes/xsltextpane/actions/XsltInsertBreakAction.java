@@ -40,7 +40,7 @@ public class XsltInsertBreakAction extends XsltAction {
 			HTMLDocument doc = (HTMLDocument) pane.getDocument();
 
 			Element currElem = doc.getCharacterElement(pane.getCaretPosition());
-			Element enclosingSpan = pane.getSpan(pane.getCaretPosition());
+			Element enclosingSpan = pane.getMappedSpan(pane.getCaretPosition());
 			if (enclosingSpan == null)
 				return;
 

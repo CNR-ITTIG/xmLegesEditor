@@ -45,13 +45,8 @@ public class XsltDeletePrevCharAction extends XsltAction {
 		if (pane.getXsltMapper().getParentByGen(modNode) != null)
 			return;
 
-		Element containingSpan = pane.getEnclosingSpan(currElem);
 		int start = currElem.getStartOffset();
 		int end = currElem.getEndOffset();
-		if (containingSpan != null) {
-			start = containingSpan.getStartOffset();
-			end = containingSpan.getEndOffset();
-		}
 
 		String elemText = getText(e, currElem);
 		String defText = pane.getXsltMapper().getI18nNodeText(modNode);
@@ -81,7 +76,8 @@ public class XsltDeletePrevCharAction extends XsltAction {
 		}
 
 		elemText = getText(e, currElem);
-		if (elemText != null && elemText.length() == 0) {
+		// 2 because there are two unmodifiable space at the ends
+		if (elemText != null && elemText.length() == 2) {
 			insertDefaultText(pane, currElem, doc);
 		}
 	}

@@ -38,35 +38,34 @@ public class XsltDeleteNextCharAction extends XsltAction {
 
 		HTMLDocument doc = (HTMLDocument) pane.getDocument();
 
-		Element currElem = doc.getCharacterElement(pane.getCaretPosition());
+		Element currElem = pane.getMappedSpan(pane.getCaretPosition());
 
 		Node modNode = pane.getXsltMapper().getDomById(pane.getElementId(currElem));
 
 		if (pane.getXsltMapper().getParentByGen(modNode) != null)
 			return;
 
-		Element containingSpan = pane.getEnclosingSpan(currElem);
-		int start = currElem.getStartOffset() + 1;
+		int start = currElem.getStartOffset();
 		int end = currElem.getEndOffset();
-		if (containingSpan != null) {
-			start = containingSpan.getStartOffset() + 1;
-			end = containingSpan.getEndOffset();
-		}
 
 		String elemText = getText(e, currElem);
 		String defText = pane.getXsltMapper().getI18nNodeText(modNode);
-		if ((modNode.getNodeType() == Node.COMMENT_NODE || modNode.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE) && elemText != null
-				&& elemText.equals(defText))
+		if ((modNode.getNodeType() == Node.COMMENT_NODE 
+				|| modNode.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE) 
+				&& elemText != null
+				&& defText.equals(" " + elemText))
 			return;
 		
 		// FIXME spostare il controllo da xmLegesCore a xmLegesEditor
 		// aggiunto controllo Procesing Instruction <?rif> readonly
-		if(modNode.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE && modNode.getNodeValue().startsWith("<rif")) {
+		if(modNode.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE 
+				&& modNode.getNodeValue().startsWith("<rif")) {
 			return;
 		}
 		
 
-		if (pane.getCaretPosition() < end || pane.getSelectionStart() != pane.getSelectionEnd()) {
+		if (pane.getCaretPosition() < end 
+				|| pane.getSelectionStart() != pane.getSelectionEnd()) {
 			super.actionPerformed(e);
 		} else {
 			DeleteNextPrevAction action = pane.getPane().getDeleteNextPrevAction();
@@ -75,14 +74,14 @@ public class XsltDeleteNextCharAction extends XsltAction {
 				Element nextElem = pane.getNextTextElement(currElem);
 				if (nextElem != null) {
 					Node nextNode = pane.getXsltMapper().getDomById(pane.getElementId(nextElem), true);
-
 					action.deleteOnEnd(modNodeOrParent, nextNode);
 				}
 			}
 		}
 
 		elemText = getText(e, currElem);
-		if (elemText != null && elemText.length() == 0) {
+		// 2 because there are two unmodifiable spaces at element ends.
+		if (elemText != null && elemText.length() == 2) {
 			insertDefaultText(pane, currElem, doc);
 		}
 	}
