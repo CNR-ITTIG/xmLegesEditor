@@ -435,7 +435,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     </menu>
                     <menu action="menu.editor.metadati">
                         <item action="editor.meta.descrittori" />
-                        <item action="editor.meta.cnr" />                        
+                        <item action="editor.meta.cnr" /> 
+                        <item action="editor.meta.pacto" />                       
                         <item action="editor.meta.ciclodivita" />
                         <item action="editor.meta.inquadramento" />
                         <item action="editor.meta.urn" />
@@ -592,7 +593,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 </toolbar>
                 <toolbar name="editor.metadati" floatable="false" rollover="true">
                     <item action="editor.meta.descrittori" />
-                    <item action="editor.meta.cnr" />                    
+                    <item action="editor.meta.cnr" />
+                    <item action="editor.meta.pacto" />
                     <item action="editor.meta.ciclodivita" />
                     <item action="editor.meta.inquadramento" />                    
                     <item action="editor.meta.descrittori.materie" /> 
@@ -896,6 +898,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     
     <component  class="it.cnr.ittig.xmleges.editor.blocks.dom.meta.cnr.MetaCnrImpl" />    
     
+    <component  class="it.cnr.ittig.xmleges.editor.blocks.dom.meta.pacto.MetaPactoImpl" />
+    
     <component  class="it.cnr.ittig.xmleges.editor.blocks.dom.meta.descrittori.MetaDescrittoriMaterieImpl" />    
     
     <component  class="it.cnr.ittig.xmleges.editor.blocks.dom.ndr.NdrImpl" />
@@ -954,6 +958,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.meta.cnr.CnrProprietariFormImpl" >
 	    <configuration external="true" resource="CnrProprietariFormImpl.xconfig" />
     </component>
+    
+    <component  class="it.cnr.ittig.xmleges.editor.blocks.form.meta.pacto.PactoProprietariFormImpl" />
     
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.meta.descrittori.MaterieVocabolariFormImpl" />
 
