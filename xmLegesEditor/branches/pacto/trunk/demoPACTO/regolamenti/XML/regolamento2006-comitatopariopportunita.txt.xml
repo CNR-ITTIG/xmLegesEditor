@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="iso-8859-15"?>
+<!DOCTYPE NIR SYSTEM "nirflessibile.dtd">
+<NIR tipo="originale" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <DocumentoNIR nome="Regolamento Comunale">
+    <meta>
+      <descrittori>
+        <pubblicazione tipo="GU" num="" norm=""/>
+        <entratainvigore norm=""/>
+        <redazione nome="" id="red1" norm=""/>
+        <urn valore=""/>
+      </descrittori>
+    </meta>
+    <intestazione>
+      <tipoDoc></tipoDoc>
+      <dataDoc norm=""></dataDoc>
+      <titoloDoc></titoloDoc>
+    </intestazione>
+<?error COMUNE DI DIRENZE
+REGOLAMENTO n.133 del 14.03.2006
+
+REGOLAMENTO DEL COMITATO PARI OPPORTUNIT&#xC3;&#x80;
+(Delibera di Giunta n. 133 del 14.3.2006)
+
+?>
+    <formulainiziale/>
+    <articolato>
+      <articolo id="art1">
+        <num>ART.1</num>
+        <comma id="art1-com1">
+          <num>   1.</num>
+          <corpo> Il Comune di Firenze, per l’attuazione dei principi di parità ed uguaglianza di opportunità tra lavoratori e lavoratrici, nella logica dell’integrazione dal punto di vista di genere nelle politiche governative (mainstreaming) e per rimuovere i comportamenti discriminatori per sesso ed ogni altro ostacolo che limiti di fatto l’uguaglianza tra le donne e gli uomini nell’accesso al lavoro e sul lavoro, nonché la loro valorizzazione professionale e di carriera, ha istituito il Comitato d’Ente per le Pari Opportunità.</corpo>
+        </comma>
+        <comma id="art1-com2">
+          <num>
+   2.</num>
+          <corpo> Il Comitato ha sede presso il Comune.
+
+</corpo>
+        </comma>
+      </articolo>
+      <articolo id="art2">
+        <num>  ART. 2</num>
+        <comma id="art2-com1">
+          <num>   1.</num>
+          <alinea> Al Comitato sono riconosciute tutte le funzioni attribuite da leggi o normative di carattere europeo, nazionale, regionale, comunale o da accordi sindacali.
+      Il Comitato in particolare:
+</alinea>
+          <en id="art2-com1-num1">
+            <num>         1.</num>
+            <corpo> svolge, con specifico riferimento alla realtà dell’Ente, attività di studio, ricerca e promozione sui principi di parità nel mondo del lavoro previsti dalla normativa vigente, anche alla luce dell’evoluzione della legislazione italiana ed europea in materia;</corpo>
+          </en>
+          <en id="art2-com1-num2">
+            <num>
+         2.</num>
+            <corpo> individua i fattori che ostacolano l’effettiva parità di opportunità tra donne e uomini nel lavoro proponendo iniziative dirette al loro superamento nonchè allo sviluppo e al riconoscimento professionale;</corpo>
+          </en>
+          <en id="art2-com1-num3">
+            <num>
+         3.</num>
+            <corpo> promuove interventi idonei a facilitare il reinserimento delle lavoratrici dopo l’assenza per maternità ed a salvaguardarne la professionalità;</corpo>
+          </en>
+          <en id="art2-com1-num4">
+            <num>
+         4.</num>
+            <corpo> in ottemperanza del "Codice di condotta a tutela della dignità delle lavoratrici e i lavoratori del Comune di Firenze" (D.G. n. 2004/G/00219) propone iniziative dirette a prevenire forme di molestie (sessuali, morali e psicologiche) nei luoghi di lavoro e formula proposte alla Consigliera di Fiducia (risoluzione del Parlamento Europeo A3/0043/94 dell’11/2/94) qualora riceva segnalazioni di molestie o discriminazioni;</corpo>
+          </en>
+          <en id="art2-com1-num5">
+            <num>
+         5.</num>
+            <corpo> propone modifiche al "Codice di condotta a tutela della dignità delle lavoratrici e i lavoratori del Comune di Firenze" qualora lo ritenga opportuno;</corpo>
+          </en>
+          <en id="art2-com1-num6">
+            <num>
+         6.</num>
+            <corpo> formula piani di azioni positive a favore delle lavoratrici promovendo indagini conoscitive, ricerche ed analisi statistiche atte a rilevare le situazioni di debolezza nei confronti delle lavoratrici e proponendo le misure necessarie a consentire la effettiva parità fra lavoratori e lavoratrici;</corpo>
+          </en>
+          <en id="art2-com1-num7">
+            <num>
+         7.</num>
+            <corpo> formula proposte in merito a: accesso all’impiego, organizzazione degli uffici, corsi di formazione, orari di servizio e di lavoro, attribuzione di incarichi, progressione di carriera ed equilibrio della presenza femminile nei centri decisionali.</corpo>
+          </en>
+        </comma>
+        <comma id="art2-com2">
+          <num>
+   2.</num>
+          <corpo> Il Comitato predispone, entro il 31 ottobre di ogni anno, una relazione, trasmessa al Sindaco, al Consiglio Comunale e alla Direzione Organizzazione sull’attività svolta e sulle condizioni oggettive in cui si trovano le lavoratrici e i lavoratori dell’Ente.</corpo>
+        </comma>
+        <comma id="art2-com3">
+          <num>
+   3.</num>
+          <corpo> Il Comitato pubblicizza periodicamente tra i lavoratori e le lavoratrici il lavoro svolto ed i risultati emersi.
+
+</corpo>
+        </comma>
+      </articolo>
+      <articolo id="art3">
+        <num>  ART. 3</num>
+        <comma id="art3-com1">
+          <num>   1.</num>
+          <corpo> L’Amministrazione Comunale assicura al Comitato adeguata e tempestiva informazione sull’andamento della contrattazione decentrata e su ogni altro argomento che il Comitato ritenga utile per lo svolgimento della propria attività. Le proposte formulate dal Comitato atte a creare effettive condizioni di parità, secondo quanto previsto dall’art.19, comma 5 e 6 del C.C.N.L. 1998-2001, sono trasmesse dallo stesso ai soggetti della contrattazione i quali, esaminate le proposte, comunicano le decisioni assunte.</corpo>
+        </comma>
+        <comma id="art3-com2">
+          <num>
+   2.</num>
+          <corpo> In occasione del rinnovo della contrattazione decentrata il Comitato sottopone alle parti le proprie raccomandazioni e valutazioni formulando inoltre proposte sulle materie di propria competenza.</corpo>
+        </comma>
+        <comma id="art3-com3">
+          <num>
+   3.</num>
+          <corpo> Il Comitato ha diritto di accesso ai documenti dell’Amministrazione Comunale attinenti le materie di propria competenza.
+
+</corpo>
+        </comma>
+      </articolo>
+      <articolo id="art4">
+        <num>  ART.4</num>
+        <comma id="art4-com1">
+          <num>   1.</num>
+          <corpo> Il Comitato per le pari opportunità è composto:
+          * da una Presidente, nominata dal Sindaco, sentito il Comitato per le Pari Opportunità, scelta tra le rappresentanti dell’Ente o altrimenti individuata in una figura esterna idonea per competenze;
+          * da componenti designate/i dal sindacato, nonché dai rispettivi supplenti per i casi di assenza prolungata dei titolari, una/o per ogni organizzazione sindacale maggiormente rappresentativa e/o che abbia rappresentanti nella RSU, che comunque abbiano una specifica motivazione, preparazione od esperienza nelle materie attinenti alle problematiche delle pari opportunità;
+          * da componenti designate/i dalla Amministrazione, nonché da supplenti per i casi di assenza prolungata dei titolari, in numero equivalente a quelle/i designate/i dalle organizzazioni sindacali, appartenenti alle varie Direzioni, che abbiano specifica motivazione, preparazione od esperienza nelle materie attinenti alle problematiche delle pari opportunità e/o che abbiano funzioni di responsabilità nella struttura e/o nella gestione delle risorse umane.
+   2. La nomina delle/dei componenti è effettuata con Ordinanza del Sindaco.
+   3. Il Comitato elegge a maggioranza una/un Vicepresidente con funzioni di sostituzione della Presidente in caso di assenza o impedimento. In queste circostanze la/il Vicepresidente coordina le attività del CPO e ne assicura il regolare svolgimento, a tal fine, in accordo con .le decisioni prese dal CPO ed in sua rappresentanza, attiva e mantiene i contatti con rappresentati sia dell’Ente che di altri organismi esterni, promuove e partecipa a incontri e aggiorna la Presidente sull’andamento delle attività.
+   4. oltre al caso di cui sopra, alla Vice Presidente possono essere delegati compiti specifici da parte della Presidente e del Comitato stesso.
+
+</corpo>
+        </comma>
+      </articolo>
+      <articolo id="art5">
+        <num>ART. 5</num>
+        <comma id="art5-com1">
+          <num>   1.</num>
+          <corpo> Il Comitato per le pari opportunità rimane in carica quattro anni.</corpo>
+        </comma>
+        <comma id="art5-com2">
+          <num>
+   2.</num>
+          <corpo> Il Comitato uscente continua a svolgere le proprie funzioni fino all’insediamento del nuovo Comitato.</corpo>
+        </comma>
+        <comma id="art5-com3">
+          <num>
+   3.</num>
+          <corpo> Le/i componenti che non partecipano, senza giustificazione, a più di tre riunioni consecutive, decadono dalla nomina.</corpo>
+        </comma>
+        <comma id="art5-com4">
+          <num>
+   4.</num>
+          <corpo> Le/i componenti dimissionari o decaduti sono sostituiti previa indicazione degli organismi designati. Le/i nuovi componenti rimangono in carica fino alla scadenza del Comitato.
+
+</corpo>
+        </comma>
+      </articolo>
+      <articolo id="art6">
+        <num>  ART. 6</num>
+        <comma id="art6-com1">
+          <num>   1.</num>
+          <corpo> Il Comitato si riunisce di norma una volta al mese e comunque con cadenze da esso stabilite.</corpo>
+        </comma>
+        <comma id="art6-com2">
+          <num>
+   2.</num>
+          <corpo> Il Comitato è convocato su iniziativa della/del Presidente o quando ne facciano richiesta almeno tre componenti.</corpo>
+        </comma>
+        <comma id="art6-com3">
+          <num>
+   3.</num>
+          <corpo> La convocazione ordinaria è effettuata per iscritto almeno sette giorni prima della riunione e contiene l’ordine del giorno predisposto a cura della/del Presidente, tenendo conto delle proposte delle/degli altri componenti.</corpo>
+        </comma>
+        <comma id="art6-com4">
+          <num>
+   4.</num>
+          <corpo> La convocazione straordinaria viene effettuata per fax o e-mail almeno un giorno prima della riunione.</corpo>
+        </comma>
+        <comma id="art6-com5">
+          <num>
+   5.</num>
+          <corpo> Le riunioni sono valide quando è presente un terzo delle/dei componenti.</corpo>
+        </comma>
+        <comma id="art6-com6">
+          <num>
+   6.</num>
+          <corpo> Le decisioni sono assunte a maggioranza dei voti espressi dalle/dai presenti.</corpo>
+        </comma>
+        <comma id="art6-com7">
+          <num>
+   7.</num>
+          <corpo> Il Comitato, per l’attività istruttoria, può operare in gruppi o commissioni di lavoro.</corpo>
+        </comma>
+        <comma id="art6-com8">
+          <num>
+   8.</num>
+          <corpo> L’attività svolta dalle/dai componenti del Comitato è da considerarsi, a tutti gli effetti, orario di lavoro.</corpo>
+        </comma>
+        <comma id="art6-com9">
+          <num>
+   9.</num>
+          <corpo> Rientra nelle attività del Comitato la partecipazione a corsi, seminari e convegni su temi attinenti le proprie competenze.
+
+</corpo>
+        </comma>
+      </articolo>
+      <articolo id="art7">
+        <num>  ART. 7</num>
+        <comma id="art7-com1">
+          <num>   1.</num>
+          <corpo> Per l’espletamento delle proprie funzioni il Comitato può avvalersi della collaborazione di esperti interni ed esterni anche mediante la costituzione di gruppi di lavoro, secondo quanto previsto dalla normativa vigente.</corpo>
+        </comma>
+        <comma id="art7-com2">
+          <num>
+   2.</num>
+          <corpo> Il Comitato utilizza il capitolo, appositamente istituito nel bilancio annuale del Comune, all’interno del PEG della Direzione Organizzazione, ed altri capitoli idonei a finanziare le iniziative promosse, nonché eventuali fondi messi a disposizione dalla Regione, dallo Stato, o dalla Comunità Europea.</corpo>
+        </comma>
+        <comma id="art7-com3">
+          <num>
+   3.</num>
+          <corpo> L’ Amministrazione Comunale fornisce al Comitato tutti gli atti, le informazioni, la documentazione occorrenti per lo svolgimento dei propri compiti.</corpo>
+        </comma>
+        <comma id="art7-com4">
+          <num>
+   4.</num>
+          <corpo> L’Amministrazione Comunale assicura il buon funzionamento del Comitato con apposito ufficio, dotato di adeguato personale, e assicurando le condizioni e le attrezzature necessarie per la realizzazione delle finalità del Comitato.
+</corpo>
+        </comma>
+      </articolo>
+    </articolato>
+    <formulafinale/>
+    <conclusione/>
+  </DocumentoNIR>
+</NIR>

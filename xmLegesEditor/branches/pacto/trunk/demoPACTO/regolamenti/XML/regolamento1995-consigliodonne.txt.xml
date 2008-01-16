@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="iso-8859-15"?>
+<!DOCTYPE NIR SYSTEM "nirflessibile.dtd">
+<NIR tipo="originale" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <DocumentoNIR nome="Regolamento Comunale">
+    <meta>
+      <descrittori>
+        <pubblicazione tipo="GU" num="" norm=""/>
+        <entratainvigore norm=""/>
+        <redazione nome="" id="red1" norm=""/>
+        <urn valore=""/>
+      </descrittori>
+    </meta>
+    <intestazione>
+      <tipoDoc></tipoDoc>
+      <dataDoc norm=""></dataDoc>
+      <titoloDoc></titoloDoc>
+    </intestazione>
+<?error COMUNE DI FIRENZE
+
+REGOLAMENTO n. 220 del 10.03.1995 
+
+Regolamento del Consiglio delle Donne
+(Deliberazioni n. 220 del 10.03.1995, n. 2123 del 15.05.1995 e n. 65 del 26.04.2004)
+
+
+
+ 
+ 
+?>
+    <formulainiziale/>
+    <articolato>
+      <articolo id="art1">
+        <num>Art. 1 </num>
+        <rubrica>– Istituzione e Sede
+
+</rubrica>
+        <comma id="art1-com1">
+          <num>1.</num>
+          <corpo> E' istituito il Consiglio delle Donne
+2. Il Consiglio delle Donne ha sede nei locali del Comune di Firenze in Palazzo Vecchio.
+
+
+ 
+</corpo>
+        </comma>
+      </articolo>
+      <articolo id="art2">
+        <num>Art. 2 </num>
+        <rubrica>- Finalità
+
+</rubrica>
+        <comma id="art2-com1">
+          <num>   1.</num>
+          <corpo> Il Consiglio delle Donne è organo di partecipazione femminile alle decisioni, all'azione al funzionamento dell'Amministrazione comunale.</corpo>
+        </comma>
+        <comma id="art2-com2">
+          <num>
+   2.</num>
+          <alinea> Il Consiglio delle Donne si propone i seguenti scopi:
+</alinea>
+          <en id="art2-com2-num1">
+            <num>         1.</num>
+            <corpo> valorizzare la presenza, la cultura e l'attività delle donne nella società e nelle istituzioni;</corpo>
+          </en>
+          <en id="art2-com2-num2">
+            <num>
+         2.</num>
+            <corpo> sostenere le pari opportunità nel lavoro, nella politica e nella società;</corpo>
+          </en>
+          <en id="art2-com2-num3">
+            <num>
+         3.</num>
+            <corpo> promuovere interventi contro tutte le forme di esclusione e di violenza verso le donne e azioni volte alla salvaguardia della salute delle donne;</corpo>
+          </en>
+          <en id="art2-com2-num4">
+            <num>
+         4.</num>
+            <corpo> valorizzare e sostenere le eventuali commissioni pari opportunità costituite nei Consigli di quartiere.</corpo>
+          </en>
+        </comma>
+        <comma id="art2-com3">
+          <num>
+   3.</num>
+          <corpo> Per il conseguimento dei suoi fini, il Consiglio delle Donne si coordina con altre istituzioni e gli altri enti del territorio. A tal fine incontra, al proprio insediamento e periodicamente, il Sindaco, gli Assessori e le Commissioni consiliari nelle materie di competenza.
+
+
+ 
+</corpo>
+        </comma>
+      </articolo>
+      <articolo id="art3">
+        <num>Art. 3 </num>
+        <rubrica>- Funzioni
+
+</rubrica>
+        <comma id="art3-com1">
+          <num>   1.</num>
+          <corpo> Il Consiglio delle Donne svolge funzioni referenti, di studio e di ricerca, istruttorie, consultive e di proposta sulle materie di competenza del Consiglio comunale e della Giunta comunale.</corpo>
+        </comma>
+        <comma id="art3-com2">
+          <num>
+   2.</num>
+          <alinea> Il Consiglio delle Donne esprime parere, con le modalità e nei tempi delle Commissioni Consiliari permanenti, sui seguenti atti:
+</alinea>
+          <en id="art3-com2-num1">
+            <num>         1.</num>
+            <corpo> istituzione ed organizzazione dei servizi alla persona e collettivi;</corpo>
+          </en>
+          <en id="art3-com2-num2">
+            <num>
+         2.</num>
+            <corpo> bilancio di previsione e conto consuntivo;</corpo>
+          </en>
+          <en id="art3-com2-num3">
+            <num>
+         3.</num>
+            <corpo> piani urbanistici e piani di servizi territoriali, generali e particolareggiati;</corpo>
+          </en>
+          <en id="art3-com2-num4">
+            <num>
+         4.</num>
+            <corpo> documenti e indirizzi generali.</corpo>
+          </en>
+        </comma>
+        <comma id="art3-com3">
+          <num>
+   3.</num>
+          <alinea> In relazione alle proprie finalità, il Consiglio delle Donne può:
+</alinea>
+          <en id="art3-com3-num1">
+            <num>         1.</num>
+            <corpo> chiedere l'iscrizione all'ordine del giorno del Consiglio comunale di proprie comunicazioni, interrogazioni, interpellanze, ordini del giorno e mozioni e proposte;</corpo>
+          </en>
+          <en id="art3-com3-num2">
+            <num>
+         2.</num>
+            <corpo> svolgere indagini conoscitive e consultazioni;</corpo>
+          </en>
+          <en id="art3-com3-num3">
+            <num>
+         3.</num>
+            <corpo> organizzare convegni e seminari.</corpo>
+          </en>
+        </comma>
+        <comma id="art3-com4">
+          <num>
+   4.</num>
+          <corpo> La trattazione in Consiglio comunale degli argomenti di cui alla lettera a. del comma precedente è affidata alla Consigliera od alle Consigliere comunali appositamente incaricate dal Consiglio delle Donne.
+
+</corpo>
+        </comma>
+      </articolo>
+      <articolo id="art4">
+        <num>Art. 4 </num>
+        <rubrica>- Composizione
+
+</rubrica>
+        <comma id="art4-com1">
+          <num>   1.</num>
+          <alinea> Il Consiglio delle Donne è composto:
+</alinea>
+          <en id="art4-com1-num1">
+            <num>         1.</num>
+            <corpo> dalle donne elette nel Consiglio comunale;</corpo>
+          </en>
+          <en id="art4-com1-num2">
+            <num>
+         2.</num>
+            <corpo> dalle donne elette nei Consigli di quartiere;</corpo>
+          </en>
+          <en id="art4-com1-num3">
+            <num>
+         3.</num>
+            <corpo> dalle donne elette nel Consiglio degli stranieri;</corpo>
+          </en>
+          <en id="art4-com1-num4">
+            <num>
+         4.</num>
+            <corpo> dalle rappresentanti delle associazioni femminili, sindacali o comunque operanti su temi di genere e di pari opportunità. Le Associazioni devono essere presenti ed effettivamente operanti nella città di Firenze.
+
+
+ 
+</corpo>
+          </en>
+        </comma>
+      </articolo>
+      <articolo id="art5">
+        <num>Art. 5 </num>
+        <rubrica>- Domanda di partecipazione
+
+</rubrica>
+        <comma id="art5-com1">
+          <num>   1.</num>
+          <corpo> La domanda di partecipazione al Consiglio delle Donne da parte delle associazioni deve essere presentata al Presidente del Consiglio comunale entro trenta giorni dalla istituzione e successivamente per le associazioni di nuova formazione, entro il 31 dicembre di ogni anno.</corpo>
+        </comma>
+        <comma id="art5-com2">
+          <num>
+   2.</num>
+          <corpo> La domanda deve essere corredata da documentazione attestante la natura della associazione, i suoi scopi e la effettiva presenza e operatività nel territorio comunale.</corpo>
+        </comma>
+        <comma id="art5-com3">
+          <num>
+   3.</num>
+          <corpo> La domanda deve contenere, altresì, la indicazione della persona designata alla rappresentanza e della supplente della designata.</corpo>
+        </comma>
+        <comma id="art5-com4">
+          <num>
+   4.</num>
+          <corpo> L'accoglimento della domanda, nella sussistenza dei presupposti, è deliberato, entro 30 giorni dalla presentazione, dallo stesso Consiglio delle Donne.</corpo>
+        </comma>
+        <comma id="art5-com5">
+          <num>
+   5.</num>
+          <corpo> Le rappresentanti delle associazioni decadono dopo sei assenze non giustificate.</corpo>
+        </comma>
+        <comma id="art5-com6">
+          <num>
+   6.</num>
+          <corpo> Le associazioni possono revocare e sostituire in ogni momento le loro rappresentanti.
+
+</corpo>
+        </comma>
+      </articolo>
+      <articolo id="art6">
+        <num>Art. 6 </num>
+        <rubrica>- Insediamento, durata e rinnovo
+
+</rubrica>
+        <comma id="art6-com1">
+          <num>   1.</num>
+          <corpo> Il Consiglio delle Donne dura in carica per un periodo pari al mandato del Consiglio comunale.</corpo>
+        </comma>
+        <comma id="art6-com2">
+          <num>
+   2.</num>
+          <corpo> Il Consiglio delle Donne è rinnovato entro 30 giorni dall'insediamento del Consiglio Comunale.</corpo>
+        </comma>
+        <comma id="art6-com3">
+          <num>
+   3.</num>
+          <corpo> L'insediamento avviene a cura della Consigliera anziana.</corpo>
+        </comma>
+        <comma id="art6-com4">
+          <num>
+   4.</num>
+          <corpo> L'insediamento e la prima convocazione si riferiscono alle Consigliere Comunali, di Quartiere e del Consiglio degli stranieri.</corpo>
+        </comma>
+        <comma id="art6-com5">
+          <num>
+   5.</num>
+          <corpo> La Consigliera anziana presiede il Consiglio delle Donne fino alla nomina della referente.
+
+
+ 
+</corpo>
+        </comma>
+      </articolo>
+      <articolo id="art7">
+        <num>Art. 7 </num>
+        <rubrica>- Incarichi e responsabilità
+
+</rubrica>
+        <comma id="art7-com1">
+          <num>   1.</num>
+          <alinea> Il Consiglio delle Donne, a metà del mandato, rinnova al suo interno, a scrutinio segreto:
+</alinea>
+          <en id="art7-com1-num1">
+            <num>         1.</num>
+            <corpo> un Comitato esecutivo;</corpo>
+          </en>
+          <en id="art7-com1-num2">
+            <num>
+         2.</num>
+            <corpo> una Referente.</corpo>
+          </en>
+        </comma>
+        <comma id="art7-com2">
+          <num>
+   2.</num>
+          <corpo> Il comitato esecutivo è composto da otto donne in modo da assicurare la rappresentanza delle varie componenti del Consiglio. Esso è composto per il 50% dalle rappresentanti delle associazioni e per il rimanente 50% dalle elette nel Consiglio comunale, nei Consigli di quartiere e nel Consiglio degli stranieri.</corpo>
+        </comma>
+        <comma id="art7-com3">
+          <num>
+   3.</num>
+          <corpo> Il Comitato esecutivo ha compiti di coordinamento e di organizzazione, dà esecuzione alle decisioni del consiglio, assume iniziative che per ragioni di urgenza non può sottoporre al Consiglio e ne dà comunicazione obbligatoria nel primo Consiglio utile.
+
+      Il Comitato esecutivo si riunisce, di norma, una volta al mese in via ordinaria.</corpo>
+        </comma>
+        <comma id="art7-com4">
+          <num>
+   4.</num>
+          <corpo> Esso può essere convocato, in via straordinaria, per iniziativa della Referente o di almeno 1/3 delle sue componenti. La Referente convoca e presiede il Consiglio delle Donne per la trattazione dell'ordine del giorno definito dal comitato esecutivo, presiede le riunioni del comitato esecutivo, e svolge compiti di raccordo tra il Consiglio delle Donne e gli organismi istituzionali del Comune.</corpo>
+        </comma>
+        <comma id="art7-com5">
+          <num>
+   5.</num>
+          <corpo> In caso di assenza o di impedimento temporanei della Referente, i suoi compiti vengono svolti da una componente del comitato esecutivo dallo stesso designata.</corpo>
+        </comma>
+        <comma id="art7-com6">
+          <num>
+   6.</num>
+          <corpo> Il Consiglio delle Donne può assegnare la trattazione di singoli problemi a Gruppi di lavoro nominati nel suo seno.</corpo>
+        </comma>
+        <comma id="art7-com7">
+          <num>
+   7.</num>
+          <corpo> Il Consiglio delle Donne designa, di volta in volta, la propria rappresentanza per gli incontri ufficiali, o le proprie relatrici su pareri e proposte ed altri atti, tenuto conto delle attitudini e delle competenze.
+
+</corpo>
+        </comma>
+      </articolo>
+      <articolo id="art8">
+        <num>Art. 8 </num>
+        <rubrica>- Convocazioni e votazioni
+
+</rubrica>
+        <comma id="art8-com1">
+          <num>   1.</num>
+          <alinea> Il Consiglio delle Donne si riunisce:
+</alinea>
+          <en id="art8-com1-num1">
+            <num>         1.</num>
+            <corpo> in via ordinaria almeno ogni tre mesi;</corpo>
+          </en>
+          <en id="art8-com1-num2">
+            <num>
+         2.</num>
+            <corpo> in via straordinaria, quando ne facciano richiesta almeno 1/5 delle associazioni rappresentate o 1/5 delle donne elette.</corpo>
+          </en>
+        </comma>
+        <comma id="art8-com2">
+          <num>
+   2.</num>
+          <corpo> Il Consiglio è convocato con avviso scritto, da far pervenire alle componenti almeno quattro giorni prima, con l'indicazione del luogo, del giorno e dell'ora della riunione e con l'elenco degli argomenti da trattare.</corpo>
+        </comma>
+        <comma id="art8-com3">
+          <num>
+   3.</num>
+          <corpo> Il Consiglio delibera a maggioranza assoluta, in prima convocazione. Il diritto di voto è attribuito alla rappresentante o alla supplente di ciascuna associazione. Il Consiglio delle Donne, in seconda convocazione, delibera con 1/4 delle aventi diritto.</corpo>
+        </comma>
+        <comma id="art8-com4">
+          <num>
+   4.</num>
+          <corpo> Per le forme di votazione si seguono quelle del Regolamento del Consiglio comunale.
+
+
+ 
+</corpo>
+        </comma>
+      </articolo>
+      <articolo id="art9">
+        <num>Art. 9 </num>
+        <rubrica>- Ufficio di supporto e previsione di spese
+
+</rubrica>
+        <comma id="art9-com1">
+          <num>   1.</num>
+          <corpo> Il Consiglio delle Donne, per il disbrigo dell'attività, è assistito da apposita segreteria, assegnata all’Ufficio del Consiglio comunale.</corpo>
+        </comma>
+        <comma id="art9-com2">
+          <num>
+   2.</num>
+          <corpo> Il Bilancio comunale deve prevedere la spesa per le attività del Consiglio delle Donne.
+</corpo>
+        </comma>
+      </articolo>
+    </articolato>
+    <formulafinale/>
+    <conclusione/>
+  </DocumentoNIR>
+</NIR>

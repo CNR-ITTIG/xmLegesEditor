@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="iso-8859-15"?>
+<!DOCTYPE NIR SYSTEM "nirflessibile.dtd">
+<NIR tipo="originale" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <DocumentoNIR nome="Delibera">
+    <meta>
+      <descrittori>
+        <redazione id="" nome="" norm=""/>
+        <urn valore=""/>
+      </descrittori>
+    </meta>
+    <intestazione><emanante>COMUNE DI FIRENZE
+                                              ______________________
+                                  </emanante><tipoDoc>DELIBERAZIONE DI GIUNTA
+                    </tipoDoc><?error Numero:       ?><numDoc>2005/G/00019 - 2004/00981</numDoc><?error Data Adozione:          ?><dataDoc norm="20050118">18/01/2005</dataDoc><titoloDoc>Oggetto:      Denominazione giardino: Giardino del Gratta
+                      </titoloDoc><?error Ufficio:    Direzione Generale
+                   Relatore:      Eugenio Giani
+               Esecutivita &#xC3;&#xA0;:       18/01/2005
+   Data pubblicazione:            ?>25/01/2005
+                                                    <?error LA GIUNTA
+          ?><preambolo><h:p>Visto il Regolamento per la Toponomastica approvato con deliberazione del Consiglio Comunale
+n. 135/24 del 10 marzo 2003, art. 15;</h:p><h:p>          Considerato la necessità di identificare il giardino pubblico situato fra Via Michelangiolo
+Buonarroti, Piazza dei Ciompi e Borgo Allegri;</h:p><h:p>          Visto il punto 3.B4 del verbale n. 228 del 25/11/2004 della Commissione Consultiva per la
+Toponomastica e le Iscrizioni Commemorative, allegato alla presente deliberazione, con cui si approva il
+nome IL GRATTA, dal soprannome del famoso circense Evaristo Caroli che teneva spettacoli in Firenze;</h:p><h:p>          Vista l’autorizzazione del Collegio di Presidenza del Quartiere 1 allegata;</h:p><h:p>          Preso atto che la presente deliberazione è conforme agli adempimenti ecografici di cui all'art. 41
+del D.P.R. n. 223 del 30.5.1989;</h:p><h:p>          Preso atto del parere favorevole relativo alla regolarità tecnica del provvedimento ai sensi e per
+gli effetti dell'art. 49 del T.U.E.L.;</h:p><h:p>          Ritenuto per l'urgenza di provvedere in merito e di dichiarare il presente provvedimento
+immediatamente esecutivo;</h:p><h:p>                                                   DELIBERA</h:p></preambolo></intestazione>
+    <formulainiziale/>
+    <contenitore nome="" id=""><h:p>1)di assegnare la seguente denominazione, nella dizione indicata, al giardino pubblico descritto di seguito
+e riportato nella planimetria allegata, che forma parte integrante della presente deliberazione:
+</h:p>
+<h:p>GIARDINO DEL GRATTA: l’area situata fra Via Michelangiolo Buonarroti, Piazza dei Ciompi e Borgo
+Allegri;
+</h:p>
+<h:p>2)             di dichiarare il presente provvedimento immediatamente esecutivo.
+</h:p>
+<h:p>
+</h:p>
+</contenitore>
+    <formulafinale/>
+    <conclusione/>
+  </DocumentoNIR>
+</NIR>
