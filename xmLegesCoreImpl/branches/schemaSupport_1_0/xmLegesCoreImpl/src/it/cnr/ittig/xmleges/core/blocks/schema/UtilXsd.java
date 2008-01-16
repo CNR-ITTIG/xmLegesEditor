@@ -1285,16 +1285,27 @@ public class UtilXsd{
 		XSDElementDeclaration elemDecl = (XSDElementDeclaration) schemaRules.elemDeclNames.get(elemName);
 		XSDTypeDefinition elemType = elemDecl.getType();
 		try{
-			return((elemType.getComplexType()!=null && ((XSDComplexTypeDefinition)elemType).isMixed())
-					||(elemDecl.getType().getBaseType().getComplexType()!=null && ((XSDComplexTypeDefinition)elemDecl.getType().getBaseType()).isMixed()));
+			return((elemType.getComplexType()!=null && ((XSDComplexTypeDefinition)elemType).isMixed()));
+			//		||(elemDecl.getType().getBaseType().getComplexType()!=null && ((XSDComplexTypeDefinition)elemDecl.getType().getBaseType()).isMixed()));
 		}catch(Exception e){
 			return false;
 		}
-		// eredita mixed anche dal tipo base che estende [vedi ad esempio dataDoc, numDoc]
+		// eredita mixed anche dal tipo base che estende [vedi ad esempio dataDoc, numDoc] !! 
+		// la seconda condizione del'or: non andare fino alla root ! (anyType)
 	}
 
 
 
+	/**
+	 * 
+	 * @param elemName
+	 * @return
+	 */
+	public boolean isSimpleType(String elemName){
+		XSDElementDeclaration elemDecl = (XSDElementDeclaration) schemaRules.elemDeclNames.get(elemName);
+		XSDTypeDefinition elemType = elemDecl.getType();
+		return (elemType instanceof XSDSimpleTypeDefinition);
+	}
 
 
 

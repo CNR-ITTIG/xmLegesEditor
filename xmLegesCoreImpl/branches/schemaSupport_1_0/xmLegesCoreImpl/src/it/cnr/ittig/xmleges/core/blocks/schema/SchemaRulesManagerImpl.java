@@ -17,7 +17,13 @@ import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
 import it.cnr.ittig.xmleges.core.util.lang.UtilLang;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -27,7 +33,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- * Implementazione del servizio it.cnr.ittig.xmleges.editor.services.dtdrulesmanager.DtdRulesManager;
+ * Implementazione del servizio it.cnr.ittig.xmleges.editor.services.rulesmanager.RulesManager;
  * 
  */
 public class SchemaRulesManagerImpl implements RulesManager {
@@ -96,8 +102,7 @@ public class SchemaRulesManagerImpl implements RulesManager {
 		alternative_contents = new HashMap();
 		attributes = new HashMap();
 			
-		utilXsd = new UtilXsd(this);	
-		
+		utilXsd = new UtilXsd(this);		
 	}
 	
 
@@ -125,26 +130,51 @@ public class SchemaRulesManagerImpl implements RulesManager {
 	
 	public void loadRules(String filename, String schemaPath) {
 		//logger.info("START loading rules from SCHEMA");
-	
+		
+		String key = null;
 		File xml_file = new File(filename);
 		
 		if (schemaPath.startsWith(".")) // crea path name assoluto
 			schemaPath = xml_file.getParent().concat(File.separator+schemaPath.substring(2));
 		
 		File schema_file = UtilFile.getGrammarFile(schemaPath);
-		//logger.info("------------>   schemaURL= "+schema_file.getAbsolutePath());
+		
+		
+		
+//		java.io.NotSerializableException: org.eclipse.xsd.impl.XSDParticleImpl$XSDNFA
+		
+//		try {
+//			key = UtilLang.bytesToHexString(UtilFile.calculateMD5(schema_file));
+//			//logger.debug("key for " + schemaPath + " = " + key.toString());
+//		} catch (Exception ex) {
+//			logger.error(ex.getMessage(), ex);
+//		}
+//		
+//		
+//		
+//		String md5Path = new String("schemamd5");
+//		new File(md5Path).mkdir();
+//		File rulesMap = new File(md5Path + File.separator, key + "_rules");
+//		File elemDeclMap = new File(md5Path + File.separator, key + "_elemDecl");
+//		File alternativesMap = new File(md5Path, key + "_alternatives");
+//		File attributesMap = new File(md5Path, key + "_attributes");
+//
+//		if (key != null && rulesMap.exists() && elemDeclMap.exists() && alternativesMap.exists() && attributesMap.exists()) {
+//			loadRulesFromCachedMap(rulesMap, elemDeclMap, alternativesMap, attributesMap);
+//		} else {
+//			clear();
+//			utilXsd.loadRules(schema_file.getAbsolutePath());
+//			saveRulesOnCachedMap(rulesMap, elemDeclMap, alternativesMap, attributesMap);
+//		}
+		
+        // OLD (Uncached)
 		// clear old rules
 		clear();
 		utilXsd.loadRules(schema_file.getAbsolutePath());
-//		try{
-//		System.err.println("Default content for NIR: "+getDefaultContent("NIR"));
-//		}
-//		catch(Exception ex){
-//			
-//		}
-		
-		//logger.info("END loading rules from SCHEMA");
+
 	}
+	
+	
 
 	
 	public void loadRules(File xml_file) {
@@ -152,16 +182,109 @@ public class SchemaRulesManagerImpl implements RulesManager {
 	}
 	
 
+	
+	
+	
 	// lettura delle regole dalle mappe salvate su file
 
-	private void loadRulesFromCachedMap(File rulesMap, File alternativesMap, File attributesMap) {
+	private void loadRulesFromCachedMap(File rulesMap, File elemDeclMap, File alternativesMap, File attributesMap) {
+				
+		logger.info("START loading rules from files");
+
+		FileInputStream fis = null;
+		ObjectInputStream in = null;
+
+		// reading rules
+		try {
+			fis = new FileInputStream(rulesMap);
+			in = new ObjectInputStream(new BufferedInputStream(fis));
+			rules = (HashMap) in.readObject();
+			in.close();
+		} catch (Exception ex) {
+			logger.error("Error reading rules map " + ex.getMessage(), ex);
+		}
+		
+		// reading elemDeclNames
+		try {
+			fis = new FileInputStream(elemDeclMap);
+			in = new ObjectInputStream(new BufferedInputStream(fis));
+			elemDeclNames = (HashMap) in.readObject();
+			in.close();
+		} catch (Exception ex) {
+			logger.error("Error reading elemDeclNames map " + ex.getMessage(), ex);
+		}
+
+		// reading alternative_contents
+		try {
+			fis = new FileInputStream(alternativesMap);
+			in = new ObjectInputStream(new BufferedInputStream(fis));
+			alternative_contents = (HashMap) in.readObject();
+			in.close();
+		} catch (Exception ex) {
+			logger.error("Error reading alternatives map " + ex.getMessage(), ex);
+		}
+
+		// reading attributes
+		try {
+			fis = new FileInputStream(attributesMap);
+			in = new ObjectInputStream(new BufferedInputStream(fis));
+			attributes = (HashMap) in.readObject();
+			in.close();
+		} catch (Exception ex) {
+			logger.error("Error reading attributes map " + ex.getMessage(), ex);
+		}
+
+		logger.info("END loading rules from files");
 
 	}
 
 	// scrittura delle regole su mappe salvate su file
 
-	private void saveRulesOnCachedMap(File rulesMap, File alternativesMap, File attributesMap) {
+	private void saveRulesOnCachedMap(File rulesMap, File elemDeclMap, File alternativesMap, File attributesMap) {
 		
+		FileOutputStream fos = null;
+		ObjectOutputStream out = null;
+
+		// saving rules
+		try {
+			fos = new FileOutputStream(rulesMap);
+			out = new ObjectOutputStream(new BufferedOutputStream(fos));
+			out.writeObject(rules);
+			out.close();
+		} catch (Exception ex) {
+			logger.error("Error saving rules map " + ex.getMessage(), ex);
+		}
+		
+		// saving elemDeclNames
+		try {
+			fos = new FileOutputStream(elemDeclMap);
+			out = new ObjectOutputStream(new BufferedOutputStream(fos));
+			out.writeObject(elemDeclNames);
+			out.close();
+		} catch (Exception ex) {
+			logger.error("Error saving elemDeclNames map " + ex.getMessage(), ex);
+		}
+
+
+		// saving alternative_contents
+		try {
+			fos = new FileOutputStream(alternativesMap);
+			out = new ObjectOutputStream(new BufferedOutputStream(fos));
+			out.writeObject(alternative_contents);
+			out.close();
+		} catch (Exception ex) {
+			logger.error("Error saving alternatives map " + ex.getMessage(), ex);
+		}
+
+		// saving attributes
+		try {
+			fos = new FileOutputStream(attributesMap);
+			out = new ObjectOutputStream(new BufferedOutputStream(fos));
+			out.writeObject(attributes);
+			out.close();
+		} catch (Exception ex) {
+			logger.error("Error saving attributes map " + ex.getMessage(), ex);
+		}	
 	}
 	
 	//
@@ -327,47 +450,16 @@ public class SchemaRulesManagerImpl implements RulesManager {
 				Object edge = src.getEdge(j);
 				String edge_name = src.getEdgeName(j);
 				if (edge instanceof ContentGraph) {
-					//oraSystem.err.println("recursively explore subgraph "+((ContentGraph)edge).name);
+					System.err.println("recursively explore subgraph "+((ContentGraph)edge).name);
 					// recursively explore subgraph
 					explodeContentGraph((ContentGraph) edge);
 				} else if (edge_name.compareTo("#PCDATA") != 0 && edge_name.compareTo("#EPS") != 0) {
-					//oraSystem.err.println("replace edge with ContentGraph");
+					System.err.println("replace edge with ContentGraph of "+edge_name);
 					// replace edge with ContentGraph
 					src.setEdge(getContentGraph(edge_name), j);
 				}
 			}
 		}
-	}
-
-	/**
-	 * Sostituisce ogni arco del ContentGraph che rappresenta un elemento, con il suo
-	 * ContentGraph. Scende ricorsivamente negli archi gia' esplosi
-	 * 
-	 * @param graph il ContentGraph da esplodere
-	 * @throws RulesManagerException
-	 */
-	protected void explodeContentGraphAlternatives(ContentGraph graph) throws RulesManagerException {
-
-		// check every edge of the old graph
-		for (Iterator i = graph.visitNodes(); i.hasNext();) {
-			ContentGraph.Node src = (ContentGraph.Node) i.next();
-			for (int j = 0; j < src.getNoEdges(); j++) {
-				Object edge = src.getEdge(j);
-				String edge_name = src.getEdgeName(j);
-				if (edge instanceof ContentGraph) {
-					//oraSystem.err.println("recursively explore subgraph "+((ContentGraph)edge).name);
-					// recursively explore subgraph
-					explodeContentGraph((ContentGraph) edge);
-				} else if (edge_name.compareTo("#PCDATA") != 0 && edge_name.compareTo("#EPS") != 0) {
-					//oraSystem.err.println("replace edge with ContentGraph");
-					// replace edge with ContentGraph
-					src.setEdge(getContentGraph(edge_name), j);
-
-
-				}
-			}
-		}
-
 	}
 
 
@@ -386,7 +478,12 @@ public class SchemaRulesManagerImpl implements RulesManager {
 				//System.err.println("finite path");
 				return getXMLContent(graph);
 			}
-			//System.err.println("!   infinite path:  exploding");
+			System.err.println("!   infinite path:  exploding");
+			System.err.println("");
+			System.err.println("**************************************************************");
+			System.err.println(graph.toString());
+			System.err.println("**************************************************************");
+			System.err.println("");
 			// no default content: substitute each element with its ContentGraph
 			explodeContentGraph(graph);
 		}
@@ -792,8 +889,6 @@ public class SchemaRulesManagerImpl implements RulesManager {
 			if (dom_child.getNodeType() == Node.ELEMENT_NODE)
 				str_children.add(dom_child.getNodeName());
 			else if (dom_child.getNodeType() == Node.TEXT_NODE) {
-				// String value = UtilLang.trimText(dom_child.getNodeValue());
-				// if( value!=null && value.length()>0 )
 				str_children.add(new String("#PCDATA"));
 			} else
 				str_children.add(new String("#ANY")); // comment and processing/ instructions can go everywhere
@@ -881,9 +976,27 @@ public class SchemaRulesManagerImpl implements RulesManager {
 			throw new RulesManagerException("node is null");
 		if (dom_node.getNodeType() != Node.ELEMENT_NODE)
 			return true;
-		return isValid(getNodeName(dom_node), UtilLang.singleton("#PCDATA"));
+		return queryTextContent(getNodeName(dom_node));
+		// MODIFICA (Tommaso) 10-1-2008
+		//return isValid(getNodeName(dom_node), UtilLang.singleton("#PCDATA"));
 	}
 
+	
+//	/**
+//	 * Controlla se un nodo pu&ograve contenere del testo
+//	 * 
+//	 * @param elem_name il nome del nodo in esame
+//	 * @throws RulesManagerException
+//	 */
+//	public boolean queryTextContent(String elem_name) throws RulesManagerException {
+//		if (elem_name.compareTo("#PCDATA") == 0)
+//			return true;
+//		return isValid(elem_name, UtilLang.singleton("#PCDATA"));
+//	}
+	
+	
+	
+	
 	/**
 	 * Controlla se un nodo pu&ograve contenere del testo
 	 * 
@@ -891,9 +1004,22 @@ public class SchemaRulesManagerImpl implements RulesManager {
 	 * @throws RulesManagerException
 	 */
 	public boolean queryTextContent(String elem_name) throws RulesManagerException {
-		if (elem_name.compareTo("#PCDATA") == 0)
+		if (elem_name.compareTo("#PCDATA") == 0){
 			return true;
-		return isValid(elem_name, UtilLang.singleton("#PCDATA"));
+		}
+		if(rules.get(elem_name)==null){   // modifica per l'elemento <p> presente sui documenti METALEX e non dichiarato nell'xsd
+			return false;
+		}
+		if (isValid(elem_name, UtilLang.singleton("#PCDATA"))){
+			System.err.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "+elem_name +" is singleton #PCDATA");
+			return true;
+		}
+		if (utilXsd.isSimpleType(elem_name)){
+		//if (isValid(elem_name,new Vector())){
+			System.err.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "+elem_name +" is LEAF");
+			return true;
+		}
+		return false;
 	}
 
 	/**
