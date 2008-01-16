@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="iso-8859-15"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE NIR SYSTEM "nirflessibile.dtd">
 <NIR tipo="originale" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <DocumentoNIR nome="Delibera">
+  <DocumentoNIR nome="Delibera Consiliare">
     <meta>
       <descrittori>
         <pubblicazione norm="20040824" num="" tipo=""/>
@@ -20,7 +20,7 @@
                                 - II stralcio - Approvazione progetto esecutivo
                    </titoloDoc>Ufficio:     Direzione Nuove Infrastrutture
                 Relatore:       Paolo Coggiola
-              Esecutivita &amp;#xC3;&amp;#xA0;:      11/08/2004
+              Esecutivita &amp;#xE0;:      11/08/2004
     Data pubblicazione:         24/08/2004
                                                     LA GIUNTA
 </intestazione>
@@ -61,4 +61,115 @@ PG 1 Stralci di intervento - Quadro di insieme
 PG 2 Planimetria Stato Attuale con rilievo planoaltimetrico (su base C.T.R.)
 PG 3 Planimetria sovrapposta al P.R.G.</h:p>
         <h:p>PG 4 Planimetria sovrapposta alla zonazione di cui al DCR 12/2000 (DCR 230/94)
-PG 5 Planimetria sovrapposta alla zonazione di cui al DLGS
+PG 5 Planimetria sovrapposta alla zonazione di cui al DLGS 490/2000
+PG 6 Profilo longitudinale
+PG 7 Sezioni stradali
+PG 8 Sezioni tipo1 - tipo2 (su viabilità esistente e su viabilità di progetto)
+PG 9 Tracciato analitico
+PG 10 Planimetria sistemazioni di progetto
+PG 11 Planimetria con indicazione delle principali lavorazioni
+IL1 ILLUMINAZIONE – Planimetria
+SM1 SMALTIMENTO ACQUE –Planimetria
+SM2 SMALTIMENTO ACQUE –Profili
+CA 1 Planimetria di intervento su base catastale
+CT 1 Planimetria FASI di cantierizzazione
+SE 1 Planimetria con segnaletica stradale
+Rilevato che il quadro economico dell’intervento risulta il seguente:
+Lavori                                                       Euro           586.150,00
+Oneri della sicurezza non soggetti a r.a.                    Euro            30.850,00
+                                                                            617.000,00
+ iva 10% sui lavori                                          Euro            61.700,00
+                    TOTALE LAVORI                            Euro           678.700,00
+Somme a disposizione dell’Amministrazione:
+ Spese tecniche compresa iva 20%                             Euro              3.000,00
+ Espropri                                                    Euro           538.850,00
+Incentivo art.18 L.109/94 (1,5%)                             Euro              9.255,00
+Assicurazione progettisti interni                            Euro              1.086,16
+Imprevisti e lavori in economia                              Euro                978,84
+                                                  TOTALE Euro             1.231.870,00
+Preso atto che pertanto non viene modificata la ripartizione dei capitoli di bilancio sui quali far gravare
+le varie voci che compongono il quadro economico, rispetto a quello già approvato con il progetto
+definitivo;</h:p>
+        <h:p>Vista altresì la Relazione tecnica e descrittiva del R.U.P. in cui è detto quanto segue:
+          L’intervento è soggetto ad aliquota iva agevolata al 10%, secondo la normativa vigente, perché</h:p>
+        <h:p>     -
+          trattasi di opere di urbanizzazione;</h:p>
+        <h:p>          Il progetto tiene conto dell’intero costo dell’opera ed i prezzi sono congrui;</h:p>
+        <h:p>     -
+          Il progetto è conforme al D.lgsn.494/96 e s.m.i.</h:p>
+        <h:p>     -
+          Il progetto è conforme alle prescrizioni di cui all’art.2, 60� comma, L.n.662/96, ai fini del rispetto
+     -
+          dei vincoli ambientali;</h:p>
+        <h:p>          a seguito della verifica effettuata ai sensi dell’art.47 DPR n.554/1999, il progetto risulta conforme
+     -
+          alla normativa vigente;</h:p>
+        <h:p>Rilevato che è prevista una spesa annuale per gli oneri di gestione della nuova opera, a decorrere dal
+2006 comporteranno annualmente una spesa così suddivisa:
+€ 1.800,00 per consumi ENEL sul Cap.33780
+€ 1.000,00 per canone Silfi sul Cap.33710
+€ 2.300,00 per manutenzione verde sul Cap.18510
+€ 470,00 per fornitura acqua per irrigazione sul Cap.46605
+e, per quanto riguarda la segnaletica stradale e la manutenzione ordinaria della strada, si fa riferimento
+al piano di manutenzione dell’opera, parte del progetto di cui trattasi;</h:p>
+        <h:p>Preso atto che tutti gli atti gestionali per l’attuazione del presente provvedimento, ivi compresa
+l’indicazione delle procedure di scelta del contraente, l’assunzione dell’impegno di spesa, saranno
+oggetto di successiva determinazione dirigenziale;</h:p>
+        <h:p>Vista L. n.109/94 così come modificata dalla L.n.166 del 1.8.2002;</h:p>
+        <h:p>Visto il D.P.R. n.554/99;</h:p>
+        <h:p>Visti gli artt.42 e 48 del D.lgs.n.267/2000;</h:p>
+        <h:p>Ritenuto di adottare in merito un provvedimento deliberativo immediatamente eseguibile, ai sensi
+dell’art.134, 4� comma del T.U.E.L., onde consentire l’esperimento della gara d’appalto al più presto;</h:p>
+        <h:p>Preso atto dei pareri favorevoli sulla regolarità tecnica e contabile del presente provvedimento, ai sensi
+dell’art.49 del D.lgs.n.267/2000;</h:p>
+        <h:p>                                                DELIBERA</h:p>
+      </preambolo>
+    </formulainiziale>
+    <contenitore nome="" id=""><h:p>1. Di approvare il progetto esecutivo relativo all’intervento di realizzazione della Viabilità di accesso da
+Nord-Ovest al Polo Ospedaliero di Careggi – secondo stralcio funzionale, costituito dagli elaborati tecnici
+sopra indicati, tutti parte integrante del presente provvedimento;
+</h:p>
+<h:p>2.Di approvare il quadro economico dell’intervento che risulta così ripartito:
+</h:p>
+<h:p>Lavori                                                    Euro           586.150,00
+Oneri della sicurezza non soggetti a r.a.                 Euro            30.850,00
+                                                                         617.000,00
+ iva 10% sui lavori                                       Euro            61.700,00
+                   TOTALE LAVORI                          Euro           678.700,00
+Somme a disposizione dell’Amministrazione:
+</h:p>
+<h:p> Spese tecniche compresa iva 20%                          Euro             3.000,00
+ Espropri                                                 Euro           538.850,00
+Incentivo art.18 L.109/94 (1,5%)                          Euro             9.255,00
+Assicurazione progettisti interni                         Euro             1.086,16
+Imprevisti e lavori in economia                           Euro               978,84
+                                                TOTALE Euro            1.231.870,00
+3. Di prendere atto che è già stato concesso dalla Cassa Depositi e prestiti il relativo mutuo, come risulta
+    dalla determinazione dirigenziale n.6325/2004, e che rimane invariata la ripartizione della spesa sui
+    vari capitoli di bilancio;
+</h:p>
+<h:p>4. di prendere atto che gli oneri di gestione della nuova opera, a decorrere dal 2006, comporteranno
+annualmente una spesa così suddivisa:
+</h:p>
+<h:p>€ 1.800,00 per consumi ENEL sul Cap.33780
+€ 1.000,00 per canone Silfi sul Cap.33710
+€ 2.300,00 per manutenzione verde sul Cap.18510
+€      470,00 per fornitura acqua per irrigazione sul Cap.46605
+e, per quanto riguarda la segnaletica stradale e la manutenzione ordinaria della strada, si fa riferimento
+al piano di manutenzione dell’opera, parte del progetto di cui trattasi;
+</h:p>
+<h:p>5. di confermare quale Responsabile unico del procedimento il Dott.Pietro Rubellini;
+</h:p>
+<h:p>6. di stabilire che tutti gli atti gestionali per l’attuazione del presente provvedimento, ivi compresa
+l’indicazione delle procedure di scelta del contraente, l’assunzione dell’impegno di spesa, sarranno
+oggetto di successiva determinazione dirigenziale;
+</h:p>
+<h:p>7. Di dichiarare il presente provvedimento immediatamente eseguibile.
+</h:p>
+<h:p>
+</h:p>
+</contenitore>
+    <formulafinale/>
+    <conclusione/>
+  </DocumentoNIR>
+</NIR>

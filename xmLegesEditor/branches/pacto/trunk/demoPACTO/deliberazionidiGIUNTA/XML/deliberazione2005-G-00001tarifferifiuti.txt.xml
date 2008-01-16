@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE NIR SYSTEM "nirflessibile.dtd">
+<NIR tipo="originale" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <DocumentoNIR nome="Delibera Consiliare">
+    <meta>
+      <descrittori>
+        <pubblicazione norm="20050120" num="" tipo=""/>
+        <entratainvigore norm="20050110"/>
+        <redazione id="red1" nome="" norm=""/>
+        <urn valore="urn:nir:autorita:provvedimento:"/>
+      </descrittori>
+      <proprietario xlink:type="simple"><pacto:meta xmlns:pacto="http://www.comune.fi.it/deliberazione/1.0"><pacto:nproposta></pacto:nproposta><pacto:ufficio>Direzione Risorse finanziarie
+                 </pacto:ufficio><pacto:relatore>Tea Albini
+               </pacto:relatore></pacto:meta></proprietario>
+    </meta>
+    <intestazione><emanante>COMUNE DI FIRENZE
+                                               ______________________
+                                 </emanante><tipoDoc>DELIBERAZIONE DI GIUNTA
+                  </tipoDoc>Numero:        <numDoc>2005/G/00001 - 2004/00974</numDoc>Data Adozione:         <dataDoc norm="20050110">10/01/2005</dataDoc><titoloDoc>Oggetto:       Determinazione delle misure della Tariffa per la gestione dei rifiuti urbani per
+                                 l’anno 2005 in applicazione dell’art. 49 del D. Lgs 5 febbraio 1997, n� 22.
+
+                    </titoloDoc>Ufficio:     Direzione Risorse finanziarie
+                 Relatore:       Tea Albini
+               Esecutivita &amp;#xE0;:      10/01/2005
+   Data pubblicazione:           20/01/2005
+                                              LA GIUNTA </intestazione>
+    <formulainiziale>
+      <preambolo>
+        <h:p>COMUNALE
+Premesso:
+          Che, l’art.49 del D.lgs. n. 22 del 5 febbraio 1997 ha previsto l’istituzione della tariffa per la gestione
+dei rifiuti urbani e la soppressione, inizialmente a decorrere dal 1 gennaio 1999, della tassa per lo
+smaltimento dei rifiuti solidi di cui al Capo III del D.Lgs. 15 novembre 1993, n. 507;</h:p>
+        <h:p>            Che con il DPR n. 158 del 27 aprile 1999 è stato adottato il regolamento per l’elaborazione del
+metodo normalizzato di cui all’art. 49, comma 5, del D. Lgs. 22/97, per la definizione della tariffa del servizio
+di gestione del ciclo dei rifiuti urbani, contenente, tra l’altro, una nuova classificazione delle categorie
+produttive con indicazione per ciascuna di parametri minimi e massimi di produzione dei rifiuti;</h:p>
+        <h:p>          Che l’art. 1 comma 28 della legge n. 426 del 9 dicembre 1998 ha differito all’1 gennaio 2000 il
+termine per l’attuazione del nuovo sistema tariffario;</h:p>
+        <h:p>          Che l’art. 33 comma 1 della legge n. 488 del 23 dicembre 1999 (legge finanziaria 2000) stabilendo
+che la tassa smaltimento rifiuti è soppressa a decorrere dai termini previsti dal regime transitorio, disciplinato
+dall’art. 11 comma 1 del D.P.R. n. 158/99, ha spostato il termine per l’introduzione della tariffa nel seguente
+schema:
+a) tre anni per i comuni che abbiano raggiunto nell’anno 1999 un grado di copertura dei
+costi superiore all’85%;</h:p>
+        <h:p>b) cinque anni per i comuni che abbiano raggiunto un grado di copertura dei costi tra il
+55% e 85%;</h:p>
+        <h:p>c) otto anni per i comuni che abbiano raggiunti un grado di copertura dei costi inferiore
+al 55%;</h:p>
+        <h:p>          Considerato che nel 1999, il tasso di copertura dei costi del servizio di gestione dei rifiuti urbani, nel
+Comune di Firenze , così come indicato nel Bilancio di previsione annuale 1999, pluriennale 1999-2001 e
+relazione previsionale e programmatica, è stato pari al 64,3%;</h:p>
+        <h:p>          Considerato che secondo quanto disposto dall’art. 11 del D.P.R. 27/04/1999 n� 158 vigente, il
+Comune deve adottare il sistema tariffario ai sensi dell’art. 49 del D. Lgs. 5/2/1997 n� 22 e successive
+integrazioni e modifiche, in sostituzione del sistema impositivo di cui al Capo III del D. Lgs 15/11/1993 n� 507
+e successive modificazioni, al fine di coprire interamente (100%) il costo dei servizi relativi alla gestione dei
+rifiuti per il territorio del Comune di Firenze, a partire dal 1 gennaio 2005;</h:p>
+        <h:p>Considerato che con deliberazione del Consiglio Comunale n� 963/2004 è stato stabilito di adottare il
+sistema tariffario per la copertura dei costi del servizio di gestione dei rifiuti urbani, di cui al comma 2, dell’art.</h:p>
+        <h:p>49, del D. Lgs 5/2/1997 n� 22, in sostituzione del sistema impositivo di cui al Capo III del D. Lgs. 15/11/1993
+n� 507, con effetto dal 1 gennaio 2005 ed è stato affidata la gestione della tariffa alla società Quadrifoglio
+SPA;</h:p>
+        <h:p>       Considerato che con deliberazione del Consiglio Comunale n� 951/2004 è stato approvato il Piano
+Finanziario Tariffa Rifiuti, con riferimento al servizio di gestione dei rifiuti urbani per il triennio 2005-2007, di
+cui all’art. 8 del D.P.R. 27/4/1999 n� 158;</h:p>
+        <h:p>       Considerato che con deliberazione del Consiglio Comunale n� 971/2004 è stato approvato il
+Regolamento per l’applicazione della tariffa per la gestione dei rifiuti urbani ex art. 49 D.Lgs. 5 febbraio 1997
+n. 22 nel Comune di Firenze, a decorrere dal 1 gennaio 2005;</h:p>
+        <h:p>       Ritenuto che attraverso l’applicazione della tariffa si rende possibile sviluppare le finalità di politica
+ambientale contenute nel D.lgs. n. 22/97, nell’ambito di un sistema capace di prevedere forme di
+incentivazione e stimolo all’innovazione organizzativa e tecnologica delle attività a        ttinenti al ciclo dei rifiuti
+urbani, incrementando la differenziazione, il recupero e il riciclo dei rifiuti;</h:p>
+        <h:p>       Atteso che ai fini della determinazione del complessivo gettito da acquisire attraverso la Tariffa per la
+gestione dei rifiuti urbani, nell’ambito delle previsioni di cui all’apposito regolamento approvato con
+deliberazione del Consiglio Comunale n� 971/2004, lo stesso Consiglio Comunale, ai fini della gradualità</h:p>
+        <h:p>nell’applicazione del sistema, con deliberazione n� 951/2004 ha ritenuto di definire la tariffa di riferimento
+per il 2005 in complessivi Euro 68.600.000= (oltre IVA) riducendo l’importo (di Euro 69.784.849,00= oltre
+IVA) indicato nel prospetto Tariffa di riferimento anno 2005 trasmesso da Quadrifoglio SPA, attraverso il
+contenimento dell’applicazione della remunerazione del capitale investito (Rn);</h:p>
+        <h:p>       Ritenuto che tale Piano finanziario consente di assicurare un elevato livello del servizio di raccolta e
+smaltimento dei rifiuti, anche sotto il profilo degli investimenti necessari per il continuo adeguamento della
+rete di impianti e strutture, funzionale alla piena realizzazione di una moderna gestione del ciclo integrato dei
+rifiuti, contemperando peraltro, come indicato nella stessa deliberazione di approvazione, l’applicazione di
+un criterio di gradualità nella individuazione dei coefficienti di produzione dei rifiuti previsti dal D.P.R. 158/99;</h:p>
+        <h:p>       Ritenuto che, in considerazione delle motivazioni esposte nei punti precedenti, ai fini della ripartizione
+tra i diversi soggetti del predetto carico di prelievo complessivo e al fine di assicurare una gradualità degli
+adeguamenti, come disposto dall’art. 49, comma 10 del D. Lgs n� 22/1997, si applicano i seguenti criteri:
+      •    ripartizione del prelievo tra utenze domestiche e utenze non domestiche: tale ripartizione, ai sensi
+           dell’art. 4 del citato DPR 158/99 deve essere effettuata a cura del comune, secondo criteri di
+           razionalità ovviamente derivanti dalle specificità locali. ai fini della determinazione delle quote di
+           ripartizione in questione ed in particolar modo tale da garantire l’agevolazione prevista per le utenze
+           domestiche di cui all’art. 49, comma 10, del D. Lgs 5/2/1997, n� 22. Pertanto, tenendo conto anche
+           della ripartizione percentuale del gettito negli anni di vigenza della TARSU, occorre individuare una
+           ripartizione dei carichi in relazione alla suddetta tariffa di riferimento in 30% alle utenze domestiche
+           e 70% alle utenze non domestiche;</h:p>
+        <h:p>    •     per ciò che riguarda la ripartizione del prelievo all’interno del comparto delle utenze non domestiche
+          e, quindi, la determinazione delle misure tariffarie di ciascuna delle categorie di cui all’art. 8 del citato
+          Regolamento (Deliberazione del C.C. n. 971/2004), sono stati integralmente applicati i coefficienti di
+          produzione dei rifiuti di cui alla tabella 4a del decreto 158/99, determinando le misure di ciascun
+          coefficiente nell’ambito degli intervalli tra misura minima e misura massima ivi previsti.;</h:p>
+        <h:p>    •     per ciò che riguarda la ripartizione del prelievo all’interno del comparto utenze domestiche,
+          l’introduzione del parametro “numerosità del nucleo familiare” senza adeguati correttivi avrebbe
+          portato a variazioni repentine e fortemente inique del prelievo, suscettibili di determinare fenomeni di
+          rigetto della nuova disciplina, per effetto degli aumenti particolarmente elevati riservati alle abitazioni
+          caratterizzate da minor superficie e maggior numero di occupanti e – correlativamente – per effetto
+          delle diminuzioni di tariffa risultanti per le abitazioni caratterizzate da maggior superficie e occupate
+          da nuclei di un solo componente. Al fine di assicurare la necessaria gradualità nell’applicazione della
+          tariffa ed evitare aggravi di prelievo insostenibili, almeno nel breve periodo, per le famiglie numerose
+          ed in particolare quelle occupanti abitazioni di piccole dimensioni, risulta pertanto necessario
+          prevedere un loro riequilibrio       ai sensi dell’art. 5 comma 1 del DPR 158/99. A tal fine è stato
+          introdotto un meccanismo di salvaguardia prevedendo che nella ripartizione del gettito della tariffa,
+          con riferimento alla copertura dei costi della sola utenza domestica, si operi una traslazione dalla
+          parte variabile a quella fissa per il 90% della parte variabile stessa;</h:p>
+        <h:p>Visto il D.lgs. n. 22/97;</h:p>
+        <h:p>Visto il DPR n. 158/99;</h:p>
+        <h:p>Visto il D. Lgs. 446/97 art.52
+Visto lo Statuto del Comune di Firenze
+Visto il parere favorevole del Dirigente responsabile del servizio espresso, ai sensi dell’art.49 del D. Lgs n�
+267/2000.</h:p>
+        <h:p>per i motivi di cui in premessa,
+                                                                         delibera</h:p>
+      </preambolo>
+    </formulainiziale>
+    <contenitore nome="" id=""><h:p>    1.    di dare atto che la tariffa di riferimento relativa alla gestione dei rifiuti urbani, di cui all’art.2 del D.P.R.
+</h:p>
+<h:p>          27/04/1999, n° 158, per l’anno 2005, ammonta a complessivi Euro 68.600.000,00= (oltre IVA);
+</h:p>
+<h:p>    2.    Di fissare nella misura rispettivamente del 30% per le utenze domestiche e del 70% per le utenze
+          non domestiche, la ripartizione dell’ammontare della tariffa di riferimento di cui al punto n. 1) in tal
+          modo assicurando l’agevolazione per l’utenza domestica di cui all’art. 49, comma 10, del D.Lgs. n.
+</h:p>
+<h:p>          22/1997;
+</h:p>
+<h:p>    3.    Di stabilire per le utenze domestiche, per l’anno 2005, i coefficienti Ka e Kb utili ai fini della
+          determinazione della parte fissa e variabile della tariffa, in relazione al numero dei componenti il
+          nucleo familiare, rispettivamente nella misura indicata nella tabella 1a e nella misura massima
+          indicata nella tabella 2, di cui all’allegato 1 del DPR n° 158/1999, così come risulta dal PROSPETTO
+          LETTERA A che si allega alla presente deliberazione quale sua parte integrante;
+</h:p>
+<h:p>    4.    Di stabilire per le utenze non domestiche, per l’anno 2005, i coefficienti Kc (coefficiente potenziale di
+          produzione) e Kd (Coefficiente di produzione Kg/mq all’anno) utili ai fini della determinazione delle
+          parti fisse e variabili della tariffa, entro i limiti previsti dalle tabelle 3 e 4, di cui all’allegato 1 del
+          D.P.R. n° 158/1999, così come risulta nel PROSPETTO LETTERA B, che si allega alla presente
+          deliberazione quale sua parte integrante;
+</h:p>
+<h:p>    5.    Di stabilire che -ai sensi e per gli effetti dell’art.49, comma 10 del D.Lgs. 22/1997 e al fine di
+          assicurare la necessaria gradualità nell’applicazione della tariffa ed evitare, nel primo anno di
+          applicazione, eccessivi aumenti di tariffa in particolare per le famiglie numerose che occupano
+          abitazioni di piccole dimensioni- venga applicato un meccanismo di salvaguardia che nella
+ripartizione della tariffa di riferimento per il 2005, relativamente alla parte a carico dell’utenza
+domestica, preveda l’effettuazione del calcolo della tariffa trasferendo il 90% della parte variabile
+sulla parte fissa.
+</h:p>
+<h:p>
+</h:p>
+</contenitore>
+    <formulafinale/>
+    <conclusione/>
+  </DocumentoNIR>
+</NIR>
