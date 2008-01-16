@@ -74,9 +74,7 @@ em {
 	font-style:normal;
 	color: #990000;
 }	
-.titoloDoc:first-letter{
-font-size: 150%;
-}
+
 .formulainiziale {
 	text-align: center;
 	font-size: 100%;
@@ -140,16 +138,14 @@ p.rubrica {
 	margin-top: 2px;
 	padding: 3px;
 }
-.en {
+.en , .ep {
+	font-size: 100%;
 	text-align: justify;
 	margin-left: 65px;
-	text-indent: -10px;
+	/*text-indent: -10px;*/
 	margin-top: 2px;
-	font-size: 85%; 
 	font-weight: normal;
-	padding: 3px;
-	padding-left: 15px;
-	border: 1px solid #ccc;
+	
 }
 b b { font-weight: normal; }
 .ndr {
