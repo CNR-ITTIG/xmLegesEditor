@@ -4,27 +4,27 @@
   <DocumentoNIR nome="Regolamento Comunale">
     <meta>
       <descrittori>
-        <pubblicazione tipo="GU" num="" norm=""/>
+        <pubblicazione norm="" num="" tipo=""/>
         <entratainvigore norm=""/>
-        <redazione nome="" id="red1" norm=""/>
-        <urn valore=""/>
+        <redazione id="red1" nome="" norm=""/>
+        <urn valore="urn:nir:autorita:provvedimento:"/>
       </descrittori>
     </meta>
     <intestazione>
-      <tipoDoc></tipoDoc>
-      <dataDoc norm=""></dataDoc>
-      <titoloDoc></titoloDoc>
-    </intestazione>
-<?error COMUNE DI FIRENZE
-REGOLAMENTO  13 marzo 1996  n. 327/1996
+      <emanante>COMUNE DI FIRENZE
+</emanante>
+      <tipoDoc>REGOLAMENTO  </tipoDoc>
+      <dataDoc norm="19960313">13 marzo 1996</dataDoc>
+      <titoloDoc>n. 327/1996
 
 Regolamento per la gestione del servizio civile degli obiettori di coscienza assegnati al Comune di Firenze 
 
 PREMESSA
-Il Comune Firenze nello stipulare la convenzione per l&#xE2;&#x80;&#x99;impiego di obiettori  di Coscienza ammessi al servizio civile fa propri i valori di pace, libert&#xC3;&#xA0;, solidariet&#xC3;&#xA0; e non violenza che la scelta di obiezione sottende e con tale impegno intende dare significato alla vocazione di Firenze  quale &#xE2;&#x80;&#x9C;Citt&#xC3;&#xA0; operatrice di pace&#xE2;&#x80;&#x9D;.
-Il Regolamento stabilisce il rapporto esistente tra l&#xE2;&#x80;&#x99;Amministrazione Comunale e gli obiettori di coscienza ad essa assegnati. La prima intesa come elemento territoriale del sistema di &#xE2;&#x80;&#x9C;difesa&#xE2;&#x80;&#x9D; verso le minacce ambientali e sociali; i secondi come cittadini impegnati ad assolvere i doveri  inderogabili di solidariet&#xC3;&#xA0; e di difesa cui sono chiamati dalla Costituzione.
+Il Comune Firenze nello stipulare la convenzione per l’impiego di obiettori  di Coscienza ammessi al servizio civile fa propri i valori di pace, libertà, solidarietà e non violenza che la scelta di obiezione sottende e con tale impegno intende dare significato alla vocazione di Firenze  quale “Città operatrice di pace”.
+Il Regolamento stabilisce il rapporto esistente tra l’Amministrazione Comunale e gli obiettori di coscienza ad essa assegnati. La prima intesa come elemento territoriale del sistema di “difesa” verso le minacce ambientali e sociali; i secondi come cittadini impegnati ad assolvere i doveri  inderogabili di solidarietà e di difesa cui sono chiamati dalla Costituzione.
 
-?>
+</titoloDoc>
+    </intestazione>
     <formulainiziale/>
     <articolato>
       <articolo id="art1">

@@ -4,17 +4,13 @@
   <DocumentoNIR nome="Regolamento Comunale">
     <meta>
       <descrittori>
-        <pubblicazione tipo="GU" num="" norm=""/>
+        <pubblicazione norm="" num="" tipo=""/>
         <entratainvigore norm=""/>
-        <redazione nome="" id="red1" norm=""/>
-        <urn valore=""/>
+        <redazione id="red1" nome="" norm=""/>
+        <urn valore="urn:nir:autorita:provvedimento:"/>
       </descrittori>
     </meta>
     <intestazione>
-      <tipoDoc></tipoDoc>
-      <dataDoc norm=""></dataDoc>
-      <titoloDoc></titoloDoc>
-    </intestazione>
 <?error COMUNE DI FIRENZE
 
 REGOLAMENTO n. 220 del 10.03.1995 
@@ -27,6 +23,7 @@ Regolamento del Consiglio delle Donne
  
  
 ?>
+    </intestazione>
     <formulainiziale/>
     <articolato>
       <articolo id="art1">

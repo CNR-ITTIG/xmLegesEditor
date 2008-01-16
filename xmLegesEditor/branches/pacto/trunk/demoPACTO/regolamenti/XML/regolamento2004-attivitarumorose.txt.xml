@@ -4,23 +4,20 @@
   <DocumentoNIR nome="Regolamento Comunale">
     <meta>
       <descrittori>
-        <pubblicazione tipo="GU" num="" norm=""/>
+        <pubblicazione norm="" num="" tipo=""/>
         <entratainvigore norm=""/>
-        <redazione nome="" id="red1" norm=""/>
-        <urn valore=""/>
+        <redazione id="red1" nome="" norm=""/>
+        <urn valore="urn:nir:autorita:provvedimento:"/>
       </descrittori>
     </meta>
     <intestazione>
-      <tipoDoc></tipoDoc>
-      <dataDoc norm=""></dataDoc>
-      <titoloDoc></titoloDoc>
-    </intestazione>
 <?error COMUNE DI FIRENZE
 REGOLAMENTO n.12 16.02.2004
 Regolamento attivit&#xC3;&#xA0; rumorose
 (Deliberazione del Consiglio Comunale n. 12 del 16.02.2004)
 
 ?>
+    </intestazione>
     <formulainiziale/>
     <articolato>
       <titolo id="tit1">

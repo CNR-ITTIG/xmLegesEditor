@@ -4,27 +4,27 @@
   <DocumentoNIR nome="Regolamento Comunale">
     <meta>
       <descrittori>
-        <pubblicazione tipo="GU" num="" norm=""/>
+        <pubblicazione norm="" num="" tipo=""/>
         <entratainvigore norm=""/>
-        <redazione nome="" id="red1" norm=""/>
-        <urn valore=""/>
+        <redazione id="red1" nome="" norm=""/>
+        <urn valore="urn:nir:autorita:provvedimento:"/>
       </descrittori>
     </meta>
     <intestazione>
-      <tipoDoc></tipoDoc>
-      <dataDoc norm=""></dataDoc>
-      <titoloDoc></titoloDoc>
-    </intestazione>
-<?error COMUNE DI FIRENZE
+      <emanante>COMUNE DI FIRENZE
 
-REGOLAMENTO 10 giugno 2002 n. 366
+</emanante>
+      <tipoDoc>REGOLAMENTO </tipoDoc>
+      <dataDoc norm="20020610">10 giugno 2002</dataDoc>
+      <titoloDoc>n. 366
 
 
 Regolamento del Consiglio di Quartiere
 (Deliberazioni del Consiglio Comunale n. 366 del 10.06.2002, n. 63 del 26.04.2004 e n.36 del 18.04.2005)
 
 
-?>
+</titoloDoc>
+    </intestazione>
     <formulainiziale/>
     <articolato>
       <titolo id="tit1">

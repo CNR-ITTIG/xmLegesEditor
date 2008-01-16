@@ -4,17 +4,13 @@
   <DocumentoNIR nome="Regolamento Comunale">
     <meta>
       <descrittori>
-        <pubblicazione tipo="GU" num="" norm=""/>
+        <pubblicazione norm="" num="" tipo=""/>
         <entratainvigore norm=""/>
-        <redazione nome="" id="red1" norm=""/>
-        <urn valore=""/>
+        <redazione id="red1" nome="" norm=""/>
+        <urn valore="urn:nir:autorita:provvedimento:"/>
       </descrittori>
     </meta>
     <intestazione>
-      <tipoDoc></tipoDoc>
-      <dataDoc norm=""></dataDoc>
-      <titoloDoc></titoloDoc>
-    </intestazione>
 <?error REGOLAMENTO n.28 del 15.05.2006
 Regolamento Antidoping delle Feste e Tradizioni Fiorentine e del Calcio Fiorentino
 (Delibera Consiglio Comunale n. 28 del 15.05.2006)
@@ -22,6 +18,7 @@ Regolamento Antidoping delle Feste e Tradizioni Fiorentine e del Calcio Fiorenti
  
 
 ?>
+    </intestazione>
     <formulainiziale/>
     <articolato>
       <articolo id="art1">

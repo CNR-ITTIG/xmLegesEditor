@@ -4,17 +4,13 @@
   <DocumentoNIR nome="Regolamento Comunale">
     <meta>
       <descrittori>
-        <pubblicazione tipo="GU" num="" norm=""/>
+        <pubblicazione norm="" num="" tipo=""/>
         <entratainvigore norm=""/>
-        <redazione nome="" id="red1" norm=""/>
-        <urn valore=""/>
+        <redazione id="red1" nome="" norm=""/>
+        <urn valore="urn:nir:autorita:provvedimento:"/>
       </descrittori>
     </meta>
     <intestazione>
-      <tipoDoc></tipoDoc>
-      <dataDoc norm=""></dataDoc>
-      <titoloDoc></titoloDoc>
-    </intestazione>
 <?error COMUNE DI DIRENZE
 REGOLAMENTO n.133 del 14.03.2006
 
@@ -22,6 +18,7 @@ REGOLAMENTO DEL COMITATO PARI OPPORTUNIT&#xC3;&#x80;
 (Delibera di Giunta n. 133 del 14.3.2006)
 
 ?>
+    </intestazione>
     <formulainiziale/>
     <articolato>
       <articolo id="art1">
