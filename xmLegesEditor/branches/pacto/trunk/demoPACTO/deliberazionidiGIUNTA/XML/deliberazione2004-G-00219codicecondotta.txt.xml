@@ -4,9 +4,12 @@
   <DocumentoNIR nome="Delibera">
     <meta>
       <descrittori>
-        <redazione id="" nome="" norm=""/>
-        <urn valore=""/>
+        <pubblicazione norm="" num="" tipo=""/>
+        <entratainvigore norm=""/>
+        <redazione id="red1" nome="" norm=""/>
+        <urn valore="urn:nir:autorita:provvedimento:"/>
       </descrittori>
+      <proprietario xlink:type="simple"><pacto:meta xmlns:pacto="http://www.comune.fi.it/deliberazione/1.0"><pacto:nproposta/><pacto:ufficio/><pacto:relatore/></pacto:meta></proprietario>
     </meta>
     <intestazione>
 <?error COMUNE DI FIRENZE

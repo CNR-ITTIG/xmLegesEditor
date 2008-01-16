@@ -4,29 +4,42 @@
   <DocumentoNIR nome="Delibera">
     <meta>
       <descrittori>
-        <redazione id="" nome="" norm=""/>
-        <urn valore=""/>
+        <pubblicazione norm="20040824" num="" tipo=""/>
+        <entratainvigore norm="20040811"/>
+        <redazione id="red1" nome="" norm=""/>
+        <urn valore="urn:nir:autorita:provvedimento:"/>
       </descrittori>
+      <proprietario xlink:type="simple"><pacto:meta xmlns:pacto="http://www.comune.fi.it/deliberazione/1.0"><pacto:nproposta></pacto:nproposta><pacto:ufficio>Direzione Nuove Infrastrutture
+                </pacto:ufficio><pacto:relatore>Paolo Coggiola
+              </pacto:relatore></pacto:meta></proprietario>
     </meta>
     <intestazione><emanante>COMUNE DI FIRENZE
                                              ______________________
                                </emanante><tipoDoc>DELIBERAZIONE DI GIUNTA
-                 </tipoDoc><?error Numero:        ?><numDoc>2004/G/00427 - 2004/00587</numDoc><?error Data Adozione:         ?><dataDoc norm="20040811">11/08/2004</dataDoc><titoloDoc>Oggetto:       POLO OSPEDALIERO CAREGGI - Nuova viabilità di accesso da nord-ovest
+                 </tipoDoc>Numero:        <numDoc>2004/G/00427 - 2004/00587</numDoc>Data Adozione:         <dataDoc norm="20040811">11/08/2004</dataDoc><titoloDoc>Oggetto:       POLO OSPEDALIERO CAREGGI - Nuova viabilità di accesso da nord-ovest
                                 - II stralcio - Approvazione progetto esecutivo
-                   </titoloDoc><?error Ufficio:     Direzione Nuove Infrastrutture
+                   </titoloDoc>Ufficio:     Direzione Nuove Infrastrutture
                 Relatore:       Paolo Coggiola
-              Esecutivita &#xC3;&#xA0;:      11/08/2004
-    Data pubblicazione:         ?>24/08/2004
-                                                    <?error LA GIUNTA
-?><preambolo><h:p>Premesso che:
+              Esecutivita &amp;#xC3;&amp;#xA0;:      11/08/2004
+    Data pubblicazione:         24/08/2004
+                                                    LA GIUNTA
+</intestazione>
+    <formulainiziale>
+      <preambolo>
+        <h:p>Premesso che:
 - con propria deliberazione n. 1193 del 30.12.2002 è stato approvato il progetto preliminare relativo al
-Polo Ospedaliero Careggi – Nuova viabilità di accesso da nord ovest – II stralcio;</h:p><h:p>- a seguito della Conferenza dei Servizi del 29.12.2003 in cui erano stati espressi i pareri favorevoli degli
+Polo Ospedaliero Careggi – Nuova viabilità di accesso da nord ovest – II stralcio;</h:p>
+        <h:p>- a seguito della Conferenza dei Servizi del 29.12.2003 in cui erano stati espressi i pareri favorevoli degli
 enti competenti, compresa la Soprintendenza ai beni ambientali ed architettonici, con deliberazione
 G.M.n. 317 del 8.6.2004 è stato approvato il progetto definitivo, dichiarata la pubblica utilità dell’opera per
 l’avvio della procedura espropriativa ai sensi del D.P.R.n.327/2001 e dato mandato alla Direzione
-Ragioneria di assumere il relativo mutuo;</h:p><h:p>- l’opera era stata prevista dalla variante al PRG adottata dal Consiglio Comunale con deliberazione. n.</h:p><h:p>702 del 23/09/2002 e approvata dal CC con deliberazione n. 36 del 17.2.2003, cosicchè era sorto il
-vincolo preordinato all’esproprio;</h:p><h:p>- l’intervento era stato altresì previsto nel Piano Triennale Investimenti 2003-2005, funz.08 servizio 01,
-cod.opera n.010276, per la somma di Euro 1.231.870,00;</h:p><h:p>Visti gli elaborati redatti da tecnici interni all’Amministrazione e costituenti il progetto esecutivo relativo al
+Ragioneria di assumere il relativo mutuo;</h:p>
+        <h:p>- l’opera era stata prevista dalla variante al PRG adottata dal Consiglio Comunale con deliberazione. n.</h:p>
+        <h:p>702 del 23/09/2002 e approvata dal CC con deliberazione n. 36 del 17.2.2003, cosicchè era sorto il
+vincolo preordinato all’esproprio;</h:p>
+        <h:p>- l’intervento era stato altresì previsto nel Piano Triennale Investimenti 2003-2005, funz.08 servizio 01,
+cod.opera n.010276, per la somma di Euro 1.231.870,00;</h:p>
+        <h:p>Visti gli elaborati redatti da tecnici interni all’Amministrazione e costituenti il progetto esecutivo relativo al
 secondo stralcio funzionale per la viabilità di accesso Nord-Ovest al Polo Ospedaliero di Careggi, tutti
 parte integrante del presente provvedimento:
 RE   1 Relazione Tecnica Descrittiva
@@ -46,17 +59,6 @@ LC 2 Elenco descrittivo delle voci
 IM 1 Incidenza della manodopera
 PG 1 Stralci di intervento - Quadro di insieme
 PG 2 Planimetria Stato Attuale con rilievo planoaltimetrico (su base C.T.R.)
-PG 3 Planimetria sovrapposta al P.R.G.</h:p><h:p>PG 4 Planimetria sovrapposta alla zonazione di cui al DCR 12/2000 (DCR 230/94)
-PG 5 Planimetria sovrapposta alla zonazione di cui al DLGS 490/2000
-PG 6 Profilo longitudinale
-PG 7 Sezioni stradali
-PG 8 Sezioni tipo1 - tipo2 (su viabilità esistente e su viabilità di progetto)
-PG 9 Tracciato analitico
-PG 10 Planimetria sistemazioni di progetto
-PG 11 Planimetria con indicazione delle principali lavorazioni
-IL1 ILLUMINAZIONE – Planimetria
-SM1 SMALTIMENTO ACQUE –Planimetria
-SM2 SMALTIMENTO ACQUE –Profili
-CA 1 Planimetria di intervento su base catastale
-CT 1 Planimetria FASI di cantierizzazione
-SE 1 Planimetria con segnaletica stradale
+PG 3 Planimetria sovrapposta al P.R.G.</h:p>
+        <h:p>PG 4 Planimetria sovrapposta alla zonazione di cui al DCR 12/2000 (DCR 230/94)
+PG 5 Planimetria sovrapposta alla zonazione di cui al DLGS

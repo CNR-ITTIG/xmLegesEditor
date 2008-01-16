@@ -4,36 +4,50 @@
   <DocumentoNIR nome="Delibera">
     <meta>
       <descrittori>
-        <redazione id="" nome="" norm=""/>
-        <urn valore=""/>
+        <pubblicazione norm="20061201" num="" tipo=""/>
+        <entratainvigore norm="20061114"/>
+        <redazione id="red1" nome="" norm=""/>
+        <urn valore="urn:nir:autorita:provvedimento:"/>
       </descrittori>
+      <proprietario xlink:type="simple"><pacto:meta xmlns:pacto="http://www.comune.fi.it/deliberazione/1.0"><pacto:nproposta>2006/00838
+         </pacto:nproposta><pacto:ufficio>Direzione Servizi Tecnici
+                  </pacto:ufficio><pacto:relatore>Graziano Cioni
+              </pacto:relatore></pacto:meta></proprietario>
     </meta>
     <intestazione><emanante>COMUNE DI FIRENZE
                                                 ______________________
                                   </emanante><tipoDoc>DELIBERAZIONE DI GIUNTA
-                   </tipoDoc><?error Numero:        ?><numDoc>2006/G/00688</numDoc> - <?error Proposta N. 2006/00838
-         Data Adozione:           ?><dataDoc norm="20061114">14/11/2006</dataDoc><titoloDoc>Oggetto:       APPROVAZIONE PROGETTO ESECUTIVO PER I LAVORI DI
+                   </tipoDoc>Numero:        <numDoc>2006/G/00688</numDoc> - Proposta N. 2006/00838
+         Data Adozione:           <dataDoc norm="20061114">14/11/2006</dataDoc><titoloDoc>Oggetto:       APPROVAZIONE PROGETTO ESECUTIVO PER I LAVORI DI
                                   "REALIZZAZIONE 3 PIAZZE CITTADINE -2006- PIAZZA DEL SODO
                                   Q.5"
-                    </titoloDoc><?error Ufficio:      Direzione Servizi Tecnici
+                    </titoloDoc>Ufficio:      Direzione Servizi Tecnici
                   Relatore:       Graziano Cioni
-              Esecutivita &#xC3;&#xA0;:        14/11/2006
-    Data pubblicazione:           ?>01/12/2006
-                                                    <?error LA GIUNTA
-?><preambolo><h:p>Premesso che:
+              Esecutivita &amp;#xC3;&amp;#xA0;:        14/11/2006
+    Data pubblicazione:           01/12/2006
+                                                    LA GIUNTA
+</intestazione>
+    <formulainiziale>
+      <preambolo>
+        <h:p>Premesso che:
 -con Deliberazione n.120/1025 del 20/12/2005, esecutiva a norma di legge, Il Consiglio Comunale ha
 approvato il Bilancio annuale di previsione 2006 ed il Bilancio triennale 2006/2008 e relazione revisionale e
-programmatica;</h:p><h:p>-con Deliberazione di Giunta 416/296 del 30/5/2006 anch’essa esecutiva a norma di legge, è stato approvato
+programmatica;</h:p>
+        <h:p>-con Deliberazione di Giunta 416/296 del 30/5/2006 anch’essa esecutiva a norma di legge, è stato approvato
 il PEG 2006 ed i Responsabili delle Direzioni e dei Servizi sono stati autorizzati a compiere gli atti gestionali
-necessari alla realizzazione dei Programmi ad essi assegnati;</h:p><h:p>       Rilevata la necessità nell’ambito del Progetto di “Riqualificazione partecipata per 3 Piazze cittadine”,
+necessari alla realizzazione dei Programmi ad essi assegnati;</h:p>
+        <h:p>       Rilevata la necessità nell’ambito del Progetto di “Riqualificazione partecipata per 3 Piazze cittadine”,
 per cui è stato indetto concorso per la fase di progettazione con Determinazione 2005/DD/11740 ( integrata
 con Det.n. 2005/DD/2122 ), approvata la graduatoria dei vincitori con Determinazione 2005/DD/09298, ed
 infine affidati i relativi incarichi ai gruppi progettuali con Determinazione 2005/DD/08181, esecutive a norma
-di legge;</h:p><h:p>        Dato atto come nei programmi dell’Amministrazione Comunale sia previsto nel piano degli investimenti
+di legge;</h:p>
+        <h:p>        Dato atto come nei programmi dell’Amministrazione Comunale sia previsto nel piano degli investimenti
 alla funzione 08, Servizio 01, con responsabilità di budget e di procedura V.O. per l’anno 2006, da finanziare
 con alienazioni al Capitolo 60440, l’opera di Realizzazione di sistemazione 3 piazze cittadine - anno 2006-
-Realizzazione Piazza del Sodo - Codice Opera 060144 –– C.U.P.H93D05000070024;</h:p><h:p>       Vista la Deliberazione 259/G/2006 del 16/5/06 con la quale veniva approvato in linea tecnica il Progetto
-per i lavori di “Realizzazione 3 piazze cittadine anno 2006- Cod opera 060144- Piazza del Sodo Q.5 ;</h:p><h:p>         Visto il progetto esecutivo per i lavori di “Realizzazione 3 piazze cittadine anno 2006- Cod opera
+Realizzazione Piazza del Sodo - Codice Opera 060144 –– C.U.P.H93D05000070024;</h:p>
+        <h:p>       Vista la Deliberazione 259/G/2006 del 16/5/06 con la quale veniva approvato in linea tecnica il Progetto
+per i lavori di “Realizzazione 3 piazze cittadine anno 2006- Cod opera 060144- Piazza del Sodo Q.5 ;</h:p>
+        <h:p>         Visto il progetto esecutivo per i lavori di “Realizzazione 3 piazze cittadine anno 2006- Cod opera
 060144- Piazza del Sodo Q.5 C.U.P.H93D05000070024-”, predisposto dai gruppi di progettazione esterni
 incaricati, comprensivo di: Quadro tecnico-economico, Cronoprogramma, Documentazione fotografica,
 Elaborati grafici cui alle Tavola1- Tavola2- Tavola3- Tavola4- Tavola5- Tavola6- Tavola7- Tavola8-, Tavola9-
@@ -52,20 +66,34 @@ B)    PER SOMME A DISPOSIZIONE
       Per spese Tecniche                                       €       60.000,00
       Sommano                                                  €     139.500,00
       Importo complessivo (A+B)                                €.    800.000,00
-          Preso atto che la progettazione è esterna e parzialmente interna, mentre la Direzione dei lavori sarà</h:p><h:p>svolta dal personale Tecnico della Direzione Servizi Tecnici, al quale spetta pertanto l’indennità di cui all’art.</h:p><h:p>92 comma 5 del D.lgs.163/2006 per un accantonamento totale pari a €. 13.210,00;</h:p><h:p>          Preso atto che il responsabile unico del procedimento è l’Ing. Franco Tagliabue Direttore dei Servizi
+          Preso atto che la progettazione è esterna e parzialmente interna, mentre la Direzione dei lavori sarà</h:p>
+        <h:p>svolta dal personale Tecnico della Direzione Servizi Tecnici, al quale spetta pertanto l’indennità di cui all’art.</h:p>
+        <h:p>92 comma 5 del D.lgs.163/2006 per un accantonamento totale pari a €. 13.210,00;</h:p>
+        <h:p>          Preso atto che il responsabile unico del procedimento è l’Ing. Franco Tagliabue Direttore dei Servizi
 Tecnici,
-          Preso atto che l’opera è di proprietà comunale;</h:p><h:p>          Rilevato come il progetto di cui trattasi deve essere raccordato con l’intervento limitrofo della “nuova
+          Preso atto che l’opera è di proprietà comunale;</h:p>
+        <h:p>          Rilevato come il progetto di cui trattasi deve essere raccordato con l’intervento limitrofo della “nuova
 viabilità di accesso nord-ovest al Polo Ospedaliero di Careggi” curato dalla Direzione Nuove Infrastrutture, in
 modo tale da assicurare un coerente coordinamento delle opere da porre in essere, anche al fine di tutelare
-la viabilità e la sicurezza della circolazione pedonale e veicolare;</h:p><h:p>           Visto a questo proposito la Relazione tecnica congiunta dei Rup dei due interventi Ing. F Tagliabue e
+la viabilità e la sicurezza della circolazione pedonale e veicolare;</h:p>
+        <h:p>           Visto a questo proposito la Relazione tecnica congiunta dei Rup dei due interventi Ing. F Tagliabue e
 Dott. P. Rubellini del 3/10/2006, ove viene progettata la sistemazione della nuova viabilità dell’incrocio tra
-via Caldieri e via delle Panche, in modo tale che ciascun ufficio realizzi le parti di propria competenza;</h:p><h:p>          Visto altresì il parere favorevole del Direttore della Mobilità Dott. Eraldo Collini, del 10/10/2006 prot.</h:p><h:p>3754/500, al progetto per la sistemazione dell’incrocio di cui sopra, nonché il parere favorevole del
-Presidente del Q 5 Stefania Collesei del 27/10/2006 prot 9799;</h:p><h:p>       Ritenuto pertanto opportuno con il presente provvedimento approvare altresì il Progetto di
+via Caldieri e via delle Panche, in modo tale che ciascun ufficio realizzi le parti di propria competenza;</h:p>
+        <h:p>          Visto altresì il parere favorevole del Direttore della Mobilità Dott. Eraldo Collini, del 10/10/2006 prot.</h:p>
+        <h:p>3754/500, al progetto per la sistemazione dell’incrocio di cui sopra, nonché il parere favorevole del
+Presidente del Q 5 Stefania Collesei del 27/10/2006 prot 9799;</h:p>
+        <h:p>       Ritenuto pertanto opportuno con il presente provvedimento approvare altresì il Progetto di
 inquadramento urbano di “Sistemazione della nuova viabilità dell’incrocio fra Via Caldieri e Via delle
-Panche”, al fine di consentire agli uffici interessati di far eseguire i lavori di propria competenza;</h:p><h:p>          Visto l’art. 48 del D.lgs. 267/00;</h:p><h:p>          Viste le deliberazioni nn. 5/933 del 11.01.2005 e 13/12 del 2005;</h:p><h:p>          Ritenuto di adottare in merito un provvedimento deliberativo immediatamente eseguibile, ai sensi
-dell’art. 134 comma4 del D.lgs.267/00;</h:p><h:p>          Preso atto dei pareri favorevoli relativi alla regolarità tecnica e contabile del provvedimento ai sensi
-dell’art. 49 comma 1 del D.lgs 267/00;</h:p><h:p>                                                    DELIBERA</h:p></preambolo></intestazione>
-    <formulainiziale/>
+Panche”, al fine di consentire agli uffici interessati di far eseguire i lavori di propria competenza;</h:p>
+        <h:p>          Visto l’art. 48 del D.lgs. 267/00;</h:p>
+        <h:p>          Viste le deliberazioni nn. 5/933 del 11.01.2005 e 13/12 del 2005;</h:p>
+        <h:p>          Ritenuto di adottare in merito un provvedimento deliberativo immediatamente eseguibile, ai sensi
+dell’art. 134 comma4 del D.lgs.267/00;</h:p>
+        <h:p>          Preso atto dei pareri favorevoli relativi alla regolarità tecnica e contabile del provvedimento ai sensi
+dell’art. 49 comma 1 del D.lgs 267/00;</h:p>
+        <h:p>                                                    DELIBERA</h:p>
+      </preambolo>
+    </formulainiziale>
     <contenitore nome="" id=""><h:p>       1)- Di approvare il Progetto esecutivo per “P.zza del Sodo” nell’ambito della “Realizzazione e
 sistemazione di 3 piazze cittadine partecipate” - Codice Opera 060144 –– C.U.P.H93D05000070024,
 predisposto dai gruppi di progettazione esterni incaricati, comprensivo di: Quadro tecnico-economico,

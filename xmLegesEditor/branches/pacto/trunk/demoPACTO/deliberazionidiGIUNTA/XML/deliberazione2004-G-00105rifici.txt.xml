@@ -4,57 +4,83 @@
   <DocumentoNIR nome="Delibera">
     <meta>
       <descrittori>
-        <redazione id="" nome="" norm=""/>
-        <urn valore=""/>
+        <pubblicazione norm="20040409" num="" tipo=""/>
+        <entratainvigore norm="20040419"/>
+        <redazione id="red1" nome="" norm=""/>
+        <urn valore="urn:nir:autorita:provvedimento:"/>
       </descrittori>
+      <proprietario xlink:type="simple"><pacto:meta xmlns:pacto="http://www.comune.fi.it/deliberazione/1.0"><pacto:nproposta></pacto:nproposta><pacto:ufficio>Direzione Entrate
+                  </pacto:ufficio><pacto:relatore>Giuseppe Matulli
+               </pacto:relatore></pacto:meta></proprietario>
     </meta>
     <intestazione><emanante>COMUNE DI FIRENZE
                                                ______________________
                                  </emanante><tipoDoc>DELIBERAZIONE DI GIUNTA
-                   </tipoDoc><?error Numero:      ?><numDoc>2004/G/00105 - 2003/01156</numDoc><?error Data Adozione:         ?><dataDoc norm="20040330">30/03/2004</dataDoc><titoloDoc>Oggetto:     Imposta Comunale sugli Immobili (ICI) - Approvazione delle aliquote e delle
+                   </tipoDoc>Numero:      <numDoc>2004/G/00105 - 2003/01156</numDoc>Data Adozione:         <dataDoc norm="20040330">30/03/2004</dataDoc><titoloDoc>Oggetto:     Imposta Comunale sugli Immobili (ICI) - Approvazione delle aliquote e delle
                                 detrazioni d'imposta per l'anno 2004
-                     </titoloDoc><?error Ufficio:   Direzione Entrate
+                     </titoloDoc>Ufficio:   Direzione Entrate
                   Relatore:     Giuseppe Matulli
-               Esecutivita &#xC3;&#xA0;:     19/04/2004
-   Data pubblicazione:          ?>09/04/2004
-                                                      <?error LA GIUNTA
-        ?><preambolo><h:p>Visto il Decreto Legislativo 30 dicembre 1992, n. 504, istitutivo dell’Imposta Comunale sugli Immobili
-(ICI) e successive modifiche ed integrazioni;</h:p><h:p>        Visto quanto dispone il regolamento per l’applicazione dell’ICI, adottato dal Consiglio comunale ai
-sensi degli articoli 52 e 59, comma 1, del decreto legislativ 15 dicembre 1997, n. 446;</h:p><h:p>                                                                o
+               Esecutivita &amp;#xC3;&amp;#xA0;:     19/04/2004
+   Data pubblicazione:          09/04/2004
+                                                      LA GIUNTA
+        </intestazione>
+    <formulainiziale>
+      <preambolo>
+        <h:p>Visto il Decreto Legislativo 30 dicembre 1992, n. 504, istitutivo dell’Imposta Comunale sugli Immobili
+(ICI) e successive modifiche ed integrazioni;</h:p>
+        <h:p>        Visto quanto dispone il regolamento per l’applicazione dell’ICI, adottato dal Consiglio comunale ai
+sensi degli articoli 52 e 59, comma 1, del decreto legislativ 15 dicembre 1997, n. 446;</h:p>
+        <h:p>                                                                o
         Vista la propria deliberazione n. 147/122 del 31/03/2003 con cui venivano stabilite le aliquote e le
-detrazioni ICI per l’anno 2003;</h:p><h:p>        Preso atto degli indirizzi generali espressi dal Consiglio Comunale in materia di aliquote e detrazioni
-ICI;</h:p><h:p>        Richiamati i riferimenti normativi e le motivazioni addotte a sostegno delle deliberazioni sopra citate, a
-cui si fa rinvio;</h:p><h:p>        Ritenuto, quindi, di confermare per l’anno d’imposta 2004 le stesse aliquote, detrazioni ICI e relative
-fattispecie applicative vigenti per l’anno 2003;</h:p><h:p>        Confermato, come espressamente previsto dal richiamato regolamento sull’applicazione dell’ICI:
+detrazioni ICI per l’anno 2003;</h:p>
+        <h:p>        Preso atto degli indirizzi generali espressi dal Consiglio Comunale in materia di aliquote e detrazioni
+ICI;</h:p>
+        <h:p>        Richiamati i riferimenti normativi e le motivazioni addotte a sostegno delle deliberazioni sopra citate, a
+cui si fa rinvio;</h:p>
+        <h:p>        Ritenuto, quindi, di confermare per l’anno d’imposta 2004 le stesse aliquote, detrazioni ICI e relative
+fattispecie applicative vigenti per l’anno 2003;</h:p>
+        <h:p>        Confermato, come espressamente previsto dal richiamato regolamento sull’applicazione dell’ICI:
      §    la necessità che (esclusi gli immobili direttamente adibiti ad abitazione principale di residenza e loro
           pertinenze, a cui appartiene di diritto l’aliquota ridotta) la fruizione del beneficio dell’applicazione
           dell’aliquota agevolata, sia sottoposta all’onere per i contribuenti di presentare apposita
           autocertificazione alla Direzione Entrate - Servizio ICI entro il termine di scadenza della seconda
-          rata, dichiarando, ai sensi del D.P.R. n. 445 del 28.12.2000, il possesso dei requisiti previsti;</h:p><h:p>     §    la necessità di sottoporre al suddetto onere di autocertificazione i soggetti passivi al fine di usufruire
+          rata, dichiarando, ai sensi del D.P.R. n. 445 del 28.12.2000, il possesso dei requisiti previsti;</h:p>
+        <h:p>     §    la necessità di sottoporre al suddetto onere di autocertificazione i soggetti passivi al fine di usufruire
           dell’applicazione dell’aliquota ordinaria (7 per mille) - anziché dell’aliquota derogatoria del 9 per mille
           deliberata ai sensi della Legge n. 431 del 23.12.1998 - “Disciplina delle locazioni e del rilascio degli
           immobili adibiti a uso abitativo” (art. 2, comma 4) - nel caso di unità immobiliari ad uso abitativo per
           le quali non risultino essere stati registrati contratti di locazione da almeno due anni ma siano
           concesse in uso gratuito ai familiari del soggetto passivo (intendendosi per tali il coniuge, i parenti
           entro il terzo grado e gli affini entro il secondo grado) che vi risiedano anagraficamente e di fatto vi
-          abitino stabilmente;</h:p><h:p>     §    la necessità che i contribuenti - con l’esclusione di coloro che possono beneficiare solo della
+          abitino stabilmente;</h:p>
+        <h:p>     §    la necessità che i contribuenti - con l’esclusione di coloro che possono beneficiare solo della
           detrazione complessiva di € 103,29 - i quali intendono usufruire delle agevolazioni d’imposta
           presentino apposita autocertificazione alla Direzione Entrate - Servizio ICI entro il termine di
           scadenza della seconda rata, dichiarando, ai sensi del D.P.R. n. 445 del 28.12.2000, il possesso dei
-          requisiti previsti;</h:p><h:p>        Ritenuto opportuno esonerare dai sopra riportati oneri di dichiarazione i contribuenti che hanno già</h:p><h:p>presentato analoga documentazione relativa agli anni precedenti, a condizione che perduri nel 2004 il
-possesso dei requisiti richiesti per la fruizione del beneficio;</h:p><h:p>        Richiamato quanto disposto dall’art. 5 del vigente regolamento comunale per l’applicazione dell’ICI,
+          requisiti previsti;</h:p>
+        <h:p>        Ritenuto opportuno esonerare dai sopra riportati oneri di dichiarazione i contribuenti che hanno già</h:p>
+        <h:p>presentato analoga documentazione relativa agli anni precedenti, a condizione che perduri nel 2004 il
+possesso dei requisiti richiesti per la fruizione del beneficio;</h:p>
+        <h:p>        Richiamato quanto disposto dall’art. 5 del vigente regolamento comunale per l’applicazione dell’ICI,
 che stabilisce il concetto di “pertinenza” ai fini dell’applicazione dell’imposta e secondo il quale, nel caso in
 cui la detrazione d’imposta prevista per l’abitazione principale di residenza sia superiore all’imposta dovuta
-per tale abitazione, è possibile detrarre l’eccedenza dall’imposta dovuta per le relative pertinenze;</h:p><h:p>        Preso atto che, secondo le previsioni elaborate dalla Direzione Entrate, il gettito presunto complessivo
+per tale abitazione, è possibile detrarre l’eccedenza dall’imposta dovuta per le relative pertinenze;</h:p>
+        <h:p>        Preso atto che, secondo le previsioni elaborate dalla Direzione Entrate, il gettito presunto complessivo
 per l’esercizio 2004 derivante dall’applicazione delle aliquote sopra riportate approssima la previsione di
-bilancio;</h:p><h:p>        Visto il D. Lgs. n. 267 del 18/8/00 “Testo unico delle leggi sull’ordinamento degli enti locali” e,
-segnatamente, l’art. 42, comma 1, lett. f) e l’art. 48;</h:p><h:p>        Visto il Decreto del Ministero dell’Interno 23/12/2003 (pubblicato sulla G.U. 31/12/2003 n. 302), con il
+bilancio;</h:p>
+        <h:p>        Visto il D. Lgs. n. 267 del 18/8/00 “Testo unico delle leggi sull’ordinamento degli enti locali” e,
+segnatamente, l’art. 42, comma 1, lett. f) e l’art. 48;</h:p>
+        <h:p>        Visto il Decreto del Ministero dell’Interno 23/12/2003 (pubblicato sulla G.U. 31/12/2003 n. 302), con il
 quale il termine per l’approvazione delle aliquote e tariffe dei tributi locali è stato prorogato, per l’anno 2004,
-al 31 marzo;</h:p><h:p>        Visto l’art. 58, comma 4 del Decreto Legislativo 15 dicembre 1997, n. 446, il quale dispone che le
+al 31 marzo;</h:p>
+        <h:p>        Visto l’art. 58, comma 4 del Decreto Legislativo 15 dicembre 1997, n. 446, il quale dispone che le
 deliberazioni comunali relative alla determinazione dell’aliquota e alle detrazioni dell’imposta comunale sugli
-immobili sono pubblicate per estratto nella Gazzetta Ufficiale;</h:p><h:p>        Preso atto del parere favorevole relativo alla regolarità tecnica del provvedimento, ai sensi e per gli
-effetti dell’art. 49 del richiamato Testo Unico (D. Lgs. n. 267 del 18/8/00);</h:p><h:p>                                                     DELIBERA</h:p></preambolo></intestazione>
-    <formulainiziale/>
+immobili sono pubblicate per estratto nella Gazzetta Ufficiale;</h:p>
+        <h:p>        Preso atto del parere favorevole relativo alla regolarità tecnica del provvedimento, ai sensi e per gli
+effetti dell’art. 49 del richiamato Testo Unico (D. Lgs. n. 267 del 18/8/00);</h:p>
+        <h:p>                                                     DELIBERA</h:p>
+      </preambolo>
+    </formulainiziale>
     <contenitore nome="" id=""><h:p>1) - di stabilire per l’anno 2004, secondo le motivazioni espresse in narrativa, le seguenti aliquote ICI:
 </h:p>
 <h:p>        a) una aliquota ridotta del 5,6 (cinque virgola sei) per mille in favore:
