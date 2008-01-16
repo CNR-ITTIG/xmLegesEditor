@@ -4,46 +4,66 @@
   <DocumentoNIR nome="Delibera">
     <meta>
       <descrittori>
-        <redazione id="" nome="" norm=""/>
-        <urn valore=""/>
+        <pubblicazione norm="20050119" num="" tipo=""/>
+        <entratainvigore norm="20050111"/>
+        <redazione id="red1" nome="" norm=""/>
+        <urn valore="urn:nir:autorita:provvedimento:"/>
       </descrittori>
+      <proprietario xlink:type="simple"><pacto:meta xmlns:pacto="http://www.comune.fi.it/deliberazione/1.0"><pacto:nproposta></pacto:nproposta><pacto:ufficio>Direzione Risorse finanziarie
+                 </pacto:ufficio><pacto:relatore>Tea Albini
+               </pacto:relatore></pacto:meta></proprietario>
     </meta>
     <intestazione><emanante>COMUNE DI FIRENZE
                                              ______________________
                                </emanante><tipoDoc>DELIBERAZIONE DI CONSIGLIO
-                  </tipoDoc><?error Numero:        ?><numDoc>2005/C/00002 - 2004/00935</numDoc><?error Data Adozione:          ?><dataDoc norm="20050111">11/01/2005</dataDoc><titoloDoc>Oggetto:       IMPOSTA COMUNALE SUGLI IMMOBILI (ICI)- Anno 2005 - Indirizzi per
+                  </tipoDoc>Numero:        <numDoc>2005/C/00002 - 2004/00935</numDoc>Data Adozione:          <dataDoc norm="20050111">11/01/2005</dataDoc><titoloDoc>Oggetto:       IMPOSTA COMUNALE SUGLI IMMOBILI (ICI)- Anno 2005 - Indirizzi per
                                  l'approvazione delle aliquote e delle detrazioni.
 
-                    </titoloDoc><?error Ufficio:     Direzione Risorse finanziarie
+                    </titoloDoc>Ufficio:     Direzione Risorse finanziarie
                  Relatore:       Tea Albini
-               Esecutivita &#xC3;&#xA0;:      11/01/2005
-   Data pubblicazione:           ?>19/01/2005
-                                                     <?error OMISSIS
-                                                    ?><preambolo><h:p>IL CONSIGLIO
+               Esecutivita &amp;#xC3;&amp;#xA0;:      11/01/2005
+   Data pubblicazione:           19/01/2005
+                                                     OMISSIS
+                                                    </intestazione>
+    <formulainiziale>
+      <preambolo>
+        <h:p>IL CONSIGLIO
         Visto il Decreto Legislativo 30 dicembre 1992, n. 504, istitutivo dell’Imposta Comunale sugli Immobili
-(ICI) e successive modifiche ed integrazioni;</h:p><h:p>        Visto quanto dispone il regolamento per l’applicazione dell’ICI, adottato dal Consiglio comunale ai
-sensi degli articoli 52 e 59, comma 1, del decreto legislativ 15 dicembre 1997, n. 446;</h:p><h:p>                                                               o
+(ICI) e successive modifiche ed integrazioni;</h:p>
+        <h:p>        Visto quanto dispone il regolamento per l’applicazione dell’ICI, adottato dal Consiglio comunale ai
+sensi degli articoli 52 e 59, comma 1, del decreto legislativ 15 dicembre 1997, n. 446;</h:p>
+        <h:p>                                                               o
         Vista la deliberazione consiliare n. 2004/C/32 del 30.03.2004 con cui il Consiglio Comunale ha
-tracciato gli indirizzi per l’approvazione delle aliquote e detrazioni ICI relative all’anno d’imposta 2004 nonché</h:p><h:p>la deliberazione della Giunta Municipale n. 2004/G/105 del 30.03.2004 con cui venivano determinate le
-aliquote e le detrazioni ICI per l’anno 2004;</h:p><h:p>        Atteso che la Legge Finanziaria per l’anno 2005, adottando misure sia sul sistema dei trasferimenti
+tracciato gli indirizzi per l’approvazione delle aliquote e detrazioni ICI relative all’anno d’imposta 2004 nonché</h:p>
+        <h:p>la deliberazione della Giunta Municipale n. 2004/G/105 del 30.03.2004 con cui venivano determinate le
+aliquote e le detrazioni ICI per l’anno 2004;</h:p>
+        <h:p>        Atteso che la Legge Finanziaria per l’anno 2005, adottando misure sia sul sistema dei trasferimenti
 erariali sia su quello delle compartecipazioni ai tributi erariali con la conferma della sospensione
 dell’addizionale IRPEF in favore dei Comuni, causerà oggettive difficoltà nei bilanci delle Amministrazioni
-Comunali;</h:p><h:p>        Considerato che, conseguentemente a siffatti interventi normativi, si produrranno minori entrate da
+Comunali;</h:p>
+        <h:p>        Considerato che, conseguentemente a siffatti interventi normativi, si produrranno minori entrate da
 compensare attraverso un corrispondente taglio sulle spese per i servizi ovvero attraverso una manovra
-fiscale alternativa che non può che prevedere, fra l’altro, un incremento del gettito base dell’I.C.I.;</h:p><h:p>        Verificato che un incremento del gettito base è possibile attraverso la modifica del sistema impositivo
+fiscale alternativa che non può che prevedere, fra l’altro, un incremento del gettito base dell’I.C.I.;</h:p>
+        <h:p>        Verificato che un incremento del gettito base è possibile attraverso la modifica del sistema impositivo
 I.C.I. approvato per il 2004, eliminando le fattispecie ascrivibili all’aliquota agevolata con l’unica esclusione di
 quella relativa agli immobili concessi in locazione ai sensi dell’art. 2, comma 3, della L. n. 431/1998 e
 confermando le rimanenti categorie di aliquote, ivi compresa quella maggiorata, sempre ex L. n. 431/1998,
 per le unità immobiliari ad uso abitativo per le quali non risultino essere stati registrati contratti di locazione
-da almeno due anni;</h:p><h:p>        Considerato, peraltro, opportuno confermare la detrazione per l’abitazione principale sia nell’importo
+da almeno due anni;</h:p>
+        <h:p>        Considerato, peraltro, opportuno confermare la detrazione per l’abitazione principale sia nell’importo
 minimo di legge sia nell’importo maggiorato per categorie di contribuenti in situazione di disagio socio-
-economico;</h:p><h:p>        Ritenuto, ai sensi e per gli effetti dell’art. 42, comma 2, lettera f), e dell’art. 48 del D. Lgs. n. 267/2000,
+economico;</h:p>
+        <h:p>        Ritenuto, ai sensi e per gli effetti dell’art. 42, comma 2, lettera f), e dell’art. 48 del D. Lgs. n. 267/2000,
 di demandare alla Giunta Comunale, tenendo presenti gli indirizzi sopra esposti, la determinazione della
-misura dei parametri impositivi I.C.I. (aliquote e detrazioni);</h:p><h:p>        Visto il D. Lgs. n. 267 del 18/8/00 “Testo unico delle leggi sull’ordinamento degli enti locali” e,
-segnatamente, l’art. 42, comma 1, lett. f) e l’art. 48;</h:p><h:p>        Preso atto del parere favorevole relativo alla regolarità tecnica del provvedimento, ai sensi e per gli
+misura dei parametri impositivi I.C.I. (aliquote e detrazioni);</h:p>
+        <h:p>        Visto il D. Lgs. n. 267 del 18/8/00 “Testo unico delle leggi sull’ordinamento degli enti locali” e,
+segnatamente, l’art. 42, comma 1, lett. f) e l’art. 48;</h:p>
+        <h:p>        Preso atto del parere favorevole relativo alla regolarità tecnica del provvedimento, ai sensi e per gli
 effetti dell’art. 49 del richiamato “Testo Unico”, precisando che da questo non deriveranno riflessi contabili
-consistenti in impegni di spesa o diminuzioni d’entrata;</h:p><h:p>                                                        DELIBERA</h:p></preambolo></intestazione>
-    <formulainiziale/>
+consistenti in impegni di spesa o diminuzioni d’entrata;</h:p>
+        <h:p>                                                        DELIBERA</h:p>
+      </preambolo>
+    </formulainiziale>
     <contenitore nome="" id=""><h:p>1) - di approvare, quali indirizzi generali per le successive determinazioni della Giunta Comunale, sulla base
 di quanto descritto nella premessa, gli indirizzi applicativi per l’ICI relativa all’anno d’imposta 2005, nel senso
 di modificare il sistema impositivo prevedendo:

@@ -4,88 +4,136 @@
   <DocumentoNIR nome="Delibera">
     <meta>
       <descrittori>
-        <redazione id="" nome="" norm=""/>
-        <urn valore=""/>
+        <pubblicazione norm="20061206" num="" tipo=""/>
+        <entratainvigore norm="20061216"/>
+        <redazione id="red1" nome="" norm=""/>
+        <urn valore="urn:nir:autorita:provvedimento:"/>
       </descrittori>
+      <proprietario xlink:type="simple"><pacto:meta xmlns:pacto="http://www.comune.fi.it/deliberazione/1.0"><pacto:nproposta>2006/00776
+        </pacto:nproposta><pacto:ufficio>Direzione Urbanistica
+               </pacto:ufficio><pacto:relatore>Gianni Biagi
+             </pacto:relatore></pacto:meta></proprietario>
     </meta>
     <intestazione><emanante>COMUNE DI FIRENZE
                                               ______________________
                             </emanante><tipoDoc>DELIBERAZIONE DI CONSIGLIO
-                </tipoDoc><?error Numero:         ?><numDoc>2006/C/00077</numDoc> - <?error Proposta N. 2006/00776
-        Data Adozione:          ?><dataDoc norm="20061113">13/11/2006</dataDoc><titoloDoc>Oggetto:        Adozione della variante al P.R.G. relativa al progetto della Nuova viabilità di
+                </tipoDoc>Numero:         <numDoc>2006/C/00077</numDoc> - Proposta N. 2006/00776
+        Data Adozione:          <dataDoc norm="20061113">13/11/2006</dataDoc><titoloDoc>Oggetto:        Adozione della variante al P.R.G. relativa al progetto della Nuova viabilità di
                                 Cascine del Riccio ex art. 17 della L.R. n. 1/2005.
 
-                  </titoloDoc><?error Ufficio:      Direzione Urbanistica
+                  </titoloDoc>Ufficio:      Direzione Urbanistica
                Relatore:        Gianni Biagi
-             Esecutivita &#xC3;&#xA0;:       16/12/2006
-  Data pubblicazione:           ?>06/12/2006
-                                                  -<?error OMISSIS-
-                                               ?><preambolo><h:p>IL   CONSIGLIO
+             Esecutivita &amp;#xC3;&amp;#xA0;:       16/12/2006
+  Data pubblicazione:           06/12/2006
+                                                  -OMISSIS-
+                                               </intestazione>
+    <formulainiziale>
+      <preambolo>
+        <h:p>IL   CONSIGLIO
         Premesso che:
 §  a seguito degli accordi procedimentali e protocolli d’intesa stato-regione siglati in sede delle conferenze
    di servizi del 21.04.1999, 01.06.1999 e 17.06.1999 per il potenziamento e messa in sicurezza
    dell’autostrada A1 nel tratto Firenze Nord – Firenze Sud e opere connesse, è stato elaborato da parte
    della Società Autostrade per l’Italia, in collaborazione con gli uffici del Comune di Firenze, il progetto
-   preliminare della nuova viabilità in località Cascine del Riccio;</h:p><h:p>§  la Direzione Nuove Infrastrutture del Comune di Firenze in seguito all’esame del progetto preliminare,
+   preliminare della nuova viabilità in località Cascine del Riccio;</h:p>
+        <h:p>§  la Direzione Nuove Infrastrutture del Comune di Firenze in seguito all’esame del progetto preliminare,
    verificata la correttezza dei contenuti degli elaborati progettuali, ha trasmesso, con nota del 14 marzo
    2006, prot. n. 1189/37, alla Direzione Urbanistica del Comune di Firenze la richiesta di adeguamento
-   dello strumento urbanistico;</h:p><h:p>§  lo stesso risulta in parziale difformità con le previsioni del vigente P.R.G. e pertanto è stato necessario
+   dello strumento urbanistico;</h:p>
+        <h:p>§  lo stesso risulta in parziale difformità con le previsioni del vigente P.R.G. e pertanto è stato necessario
    avviare con delibera di Giunta Comunale n. 2006/G/00212 – 2006/00297 del 26 aprile 2006 il
    procedimento per la formazione della connessa variante urbanistica, ai sensi dell’art. 15 della legge
-   regionale n 1 del 3.1.2005;</h:p><h:p>§  la citata deliberazione n. 212/297 e gli elaborati grafici e descrittivi ad essa allegati, sono stati inviati, ai
-   sensi e per gli effetti dell’art.15 della LR 1/2005, alla Regione e alla Provincia;</h:p><h:p>§  l’avvio del procedimento si è perfezionato in conformità a quanto disposto dagli articoli 15 e 16 della
+   regionale n 1 del 3.1.2005;</h:p>
+        <h:p>§  la citata deliberazione n. 212/297 e gli elaborati grafici e descrittivi ad essa allegati, sono stati inviati, ai
+   sensi e per gli effetti dell’art.15 della LR 1/2005, alla Regione e alla Provincia;</h:p>
+        <h:p>§  l’avvio del procedimento si è perfezionato in conformità a quanto disposto dagli articoli 15 e 16 della
    legge regionale n. 1/2005, e pertanto può ora essere attivata la successiva fase di adozione della
-   variante urbanistica proposta;</h:p><h:p>        Dato atto che:
-§  inoltre, ai soli fini urbanistici, trattandosi di singola opera pubblica, ai sensi dell’art. 11 del D.P.R. n.</h:p><h:p>   327/01, Testo Unico Espropri, come modificato dal D.Lgs. n. 302/02, sono stati comunicati ai soggetti
-   privati proprietari delle aree interessate dalla variante gli avvisi di avvio del procedimento;</h:p><h:p>§  in ordine a quanto sopra, il responsabile unico del procedimento, nella certificazione redatta ai sensi
+   variante urbanistica proposta;</h:p>
+        <h:p>        Dato atto che:
+§  inoltre, ai soli fini urbanistici, trattandosi di singola opera pubblica, ai sensi dell’art. 11 del D.P.R. n.</h:p>
+        <h:p>   327/01, Testo Unico Espropri, come modificato dal D.Lgs. n. 302/02, sono stati comunicati ai soggetti
+   privati proprietari delle aree interessate dalla variante gli avvisi di avvio del procedimento;</h:p>
+        <h:p>§  in ordine a quanto sopra, il responsabile unico del procedimento, nella certificazione redatta ai sensi
    dell’art. 16 della Legge Regione Toscana n. 1 del 3.1.2005, n. prot. 5704/06/07 del 24.10.06, e allegata
    al presente atto quale sua parte integrante e sostanziale, ha dichiarato che nei termini di legge sono
    pervenuti:
     1.    ex art. 15 LR 1/95 un contributo della Provincia di Firenze, acquisito al protocollo della Direzione
           Urbanistica in data 17 luglio 2006, con il numero 39105/07, dove si esprime un parere favorevole a
-          condizione;</h:p><h:p>    2. ex art. 11 del D.P.R. n. 327/01, sopra citato, numero 5 contributi di vario contenuto da parte dei
-          soggetti privati interessati dalla variante;</h:p><h:p>§    dei contributi di cui al precedente punto è stato tenuto conto nella Relazione Tecnica Urbanistica
-     allegata al presente atto a formarne sua parte integrante e sostanziale e di seguito citata;</h:p><h:p>§    che il Garante della Comunicazione, nominato con DD n. 3361 del 4.04.2006, ai sensi dell’art. 19 e ss
+          condizione;</h:p>
+        <h:p>    2. ex art. 11 del D.P.R. n. 327/01, sopra citato, numero 5 contributi di vario contenuto da parte dei
+          soggetti privati interessati dalla variante;</h:p>
+        <h:p>§    dei contributi di cui al precedente punto è stato tenuto conto nella Relazione Tecnica Urbanistica
+     allegata al presente atto a formarne sua parte integrante e sostanziale e di seguito citata;</h:p>
+        <h:p>§    che il Garante della Comunicazione, nominato con DD n. 3361 del 4.04.2006, ai sensi dell’art. 19 e ss
     della L.R. n. 1/05, ha reso noto al pubblico l’avvio del procedimento a far data dal 5 maggio 2006
     mediante la pubblicazione delle relative informazioni sulla Rete Civica del Comune di Firenze nella
-    sezione “ambiente e territorio” all’interno della nuova rubrica “Garante della comunicazione”</h:p><h:p>    appositamente istituita e mediante comunicato stampa del 26 aprile 2006, come da rapporto n. prot.</h:p><h:p>    U/55751/06/07 del 17 ottobre 2006, allegato, ai sensi dell’art. 16 della LR 1/05 al presente atto quale sua
-    parte integrante e sostanziale;</h:p><h:p>          Visto il progetto preliminare, come indicato in premessa, trasmesso alla Direzione Urbanistica in data
+    sezione “ambiente e territorio” all’interno della nuova rubrica “Garante della comunicazione”</h:p>
+        <h:p>    appositamente istituita e mediante comunicato stampa del 26 aprile 2006, come da rapporto n. prot.</h:p>
+        <h:p>    U/55751/06/07 del 17 ottobre 2006, allegato, ai sensi dell’art. 16 della LR 1/05 al presente atto quale sua
+    parte integrante e sostanziale;</h:p>
+        <h:p>          Visto il progetto preliminare, come indicato in premessa, trasmesso alla Direzione Urbanistica in data
 14 marzo 2006, già oggetto della delibera di avvio del procedimento n. 212/297 del 26.04.06, e la Relazione
 Tecnica Urbanistica redatta dal Servizio Pianificazione e Grandi Progetti della Direzione Urbanistica, in
 collaborazione con il Servizio Attività Geologiche e Impatto Ambientale della Direzione Nuove Infrastrutture,
 allegata al presente atto a formarne sua parte integrante e sostanziale e preso atto dalla stessa che:
 1.        l’area interessata dall’intervento ricade nelle seguenti sottozone:
-     - parte in Sottozona E2: agricola di particolare interesse paesistico-ambientale;</h:p><h:p>     - parte in Sottozona F3: viabilità di progetto a raso;</h:p><h:p>     - parte in Sottozona G1p: verde pubblico e sportivo di progetto con simbolo di verde pubblico;</h:p><h:p>     - parte in Sottozona G1p: verde pubblico e sportivo di progetto con simbolo di attrezzatura sportiva;</h:p><h:p>     - parte in Sottozona G2p: attrezzature e servizi di progetto con simbolo di parcheggio;</h:p><h:p>     - parte in aree di tutela boscate e cespugliate;</h:p><h:p>     - parte in Sottozona H1: aree di verde privato e di pertinenza;</h:p><h:p>2.        la finalità che detta variante urbanistica persegue è quella:
+     - parte in Sottozona E2: agricola di particolare interesse paesistico-ambientale;</h:p>
+        <h:p>     - parte in Sottozona F3: viabilità di progetto a raso;</h:p>
+        <h:p>     - parte in Sottozona G1p: verde pubblico e sportivo di progetto con simbolo di verde pubblico;</h:p>
+        <h:p>     - parte in Sottozona G1p: verde pubblico e sportivo di progetto con simbolo di attrezzatura sportiva;</h:p>
+        <h:p>     - parte in Sottozona G2p: attrezzature e servizi di progetto con simbolo di parcheggio;</h:p>
+        <h:p>     - parte in aree di tutela boscate e cespugliate;</h:p>
+        <h:p>     - parte in Sottozona H1: aree di verde privato e di pertinenza;</h:p>
+        <h:p>2.        la finalità che detta variante urbanistica persegue è quella:
      §              di apporre per la prima volta il vincolo preordinato all’esproprio ai sensi e per gli effetti di cui
           alla LR n. 30/05 e/o reiterare quei vincoli già apposti e decaduti per decorrenza quinquennale dei
           termini di legge, ricadendo queste ultime aree sotto la disciplina delle aree non pianificate di cui
-          all’art. 9 del Testo Unico in materia edilizia approvato con il DPR 6 giugno 2001, n. 380;</h:p><h:p>     §              di consentire di attivare le procedure espropriative sulle aree necessarie all’esecuzione
-          materiale dell’opera;</h:p><h:p>     §              di adeguare la destinazione di piccole e poco significative porzioni del territorio comunale in
-          quanto ricadute conseguenti al progetto viario in oggetto, come indicato nel dispositivo;</h:p><h:p>3.        la porzione di territorio presa in considerazione rientra in parte nel perimetro del centro abitato
-     definito dall’Amministrazione Comunale ai sensi dell’art. 17 della L. 765/67 con delibera di C.C. n.</h:p><h:p>     239/43 del 28.4.2003, e l’indennità di cui all’art. 39 del D.P.R. n. 327/01, Testo Unico Espropri, come
+          all’art. 9 del Testo Unico in materia edilizia approvato con il DPR 6 giugno 2001, n. 380;</h:p>
+        <h:p>     §              di consentire di attivare le procedure espropriative sulle aree necessarie all’esecuzione
+          materiale dell’opera;</h:p>
+        <h:p>     §              di adeguare la destinazione di piccole e poco significative porzioni del territorio comunale in
+          quanto ricadute conseguenti al progetto viario in oggetto, come indicato nel dispositivo;</h:p>
+        <h:p>3.        la porzione di territorio presa in considerazione rientra in parte nel perimetro del centro abitato
+     definito dall’Amministrazione Comunale ai sensi dell’art. 17 della L. 765/67 con delibera di C.C. n.</h:p>
+        <h:p>     239/43 del 28.4.2003, e l’indennità di cui all’art. 39 del D.P.R. n. 327/01, Testo Unico Espropri, come
      modificato dal D.Lgs. n. 302/02, se e in quanto dovuta sarà a carico di Società Autostrade per l’Italia
      S.p.A in quanto, come risulta dagli accordi sottoscritti nel 1999, titolare della procedura relativa agli
-     espropri;</h:p><h:p>          Dato atto che l’interesse pubblico alla realizzazione dell’opera di cui trattasi è tuttora concreto ed
+     espropri;</h:p>
+        <h:p>          Dato atto che l’interesse pubblico alla realizzazione dell’opera di cui trattasi è tuttora concreto ed
 attuale, trattandosi di intervento necessario a consentire di ottimizzare e di migliorare le condizioni ambientali
 e territoriali della zona in quanto realizza un nuovo sistema viario locale, necessario per aggirare l’abitato di
 Cascine del Riccio, e ad attuare gli accordi procedimentali stato-regione del 1999, citati in premessa,
-sottoscritti con Società Autostrade per l’Italia S.p.A.;</h:p><h:p>       Dato atto altresì che:
+sottoscritti con Società Autostrade per l’Italia S.p.A.;</h:p>
+        <h:p>       Dato atto altresì che:
 §      il Comune di Firenze, con deliberazione consiliare n. 59/39 del 20.4.2004, ha adottato il Piano
      Strutturale di cui all’art. 9 della legge regionale n. 1 del 3.1.2005 e non è dotato del Regolamento
-     Urbanistico di cui all’art. 10 della legge stessa;</h:p><h:p>§      la variante che si adotta con il presente provvedimento è coerente con le finalità e con gli obiettivi del
-     Piano Strutturale adottato, come meglio specificato nella Relazione Tecnica Urbanistica citata;</h:p><h:p>§      la variante proposta non comporta riduzione delle dotazioni complessive degli standards di cui al D.M.</h:p><h:p>     2.4.1968 n. 1444;</h:p><h:p>§     la documentazione afferente la variante in oggetto è stata depositata presso l’Ufficio Regionale per la
-     Tutela del Territorio in data 24 ottobre 2006;</h:p><h:p>§     la variante in oggetto è corredata dalla Valutazione degli Effetti Ambientali, secondo quanto previsto
-     dalla deliberazione della Giunta Regionale n. 289 del 21.2.2005;</h:p><h:p>         Ritenuto pertanto di procedere, ai sensi dell’art. 17 della Legge Regione Toscana n. 1 del 3.1.2005,
-all’adozione della variante urbanistica connessa al progetto preliminare dell’opera pubblica in argomento;</h:p><h:p>         Preso atto che è stato richiesto il parere del Consiglio di Quartiere n. 3, ai sensi dell’art. 49 dello
-Statuto e dell’art. 27 del Regolamento dei C.d.Q.;</h:p><h:p>         Considerato che il suddetto Consiglio di Quartiere, in ordine alla richiesta di cui sopra ha espresso
-parere favorevole con osservazioni;</h:p><h:p>         Visto l’art. 49 del D.Lgs. 18.8.2000 n. 267, e preso atto del parere di regolarità tecnica reso in ordine
+     Urbanistico di cui all’art. 10 della legge stessa;</h:p>
+        <h:p>§      la variante che si adotta con il presente provvedimento è coerente con le finalità e con gli obiettivi del
+     Piano Strutturale adottato, come meglio specificato nella Relazione Tecnica Urbanistica citata;</h:p>
+        <h:p>§      la variante proposta non comporta riduzione delle dotazioni complessive degli standards di cui al D.M.</h:p>
+        <h:p>     2.4.1968 n. 1444;</h:p>
+        <h:p>§     la documentazione afferente la variante in oggetto è stata depositata presso l’Ufficio Regionale per la
+     Tutela del Territorio in data 24 ottobre 2006;</h:p>
+        <h:p>§     la variante in oggetto è corredata dalla Valutazione degli Effetti Ambientali, secondo quanto previsto
+     dalla deliberazione della Giunta Regionale n. 289 del 21.2.2005;</h:p>
+        <h:p>         Ritenuto pertanto di procedere, ai sensi dell’art. 17 della Legge Regione Toscana n. 1 del 3.1.2005,
+all’adozione della variante urbanistica connessa al progetto preliminare dell’opera pubblica in argomento;</h:p>
+        <h:p>         Preso atto che è stato richiesto il parere del Consiglio di Quartiere n. 3, ai sensi dell’art. 49 dello
+Statuto e dell’art. 27 del Regolamento dei C.d.Q.;</h:p>
+        <h:p>         Considerato che il suddetto Consiglio di Quartiere, in ordine alla richiesta di cui sopra ha espresso
+parere favorevole con osservazioni;</h:p>
+        <h:p>         Visto l’art. 49 del D.Lgs. 18.8.2000 n. 267, e preso atto del parere di regolarità tecnica reso in ordine
 al presente provvedimento, precisando che d questo non deriveranno diretti effetti contabili consistenti in
                                                  a
 impegni di spesa o riduzioni di entrata in quanto all’intero finanziamento della spesa per la realizzazione
 dell’opera farà fronte Soc. Autostrade S.p.A., come stabilito negli accordi siglati nel 1999 citati in premessa,
-comprese eventuali indennità per la reiterazioni dei vincoli urbanistici preordinati all’esproprio;</h:p><h:p>         Vista la Legge Regionale n. 1 del 3.1.2005;</h:p><h:p>         Visto il DPR n. 327/2001 (T.U. Espropri), come modificato dal D.Lgs. 27.12.2002, n. 302 e la Legge
-Regionale n. 30 del 17.2.2005;</h:p><h:p>                                                 DELIBERA</h:p></preambolo></intestazione>
-    <formulainiziale/>
+comprese eventuali indennità per la reiterazioni dei vincoli urbanistici preordinati all’esproprio;</h:p>
+        <h:p>         Vista la Legge Regionale n. 1 del 3.1.2005;</h:p>
+        <h:p>         Visto il DPR n. 327/2001 (T.U. Espropri), come modificato dal D.Lgs. 27.12.2002, n. 302 e la Legge
+Regionale n. 30 del 17.2.2005;</h:p>
+        <h:p>                                                 DELIBERA</h:p>
+      </preambolo>
+    </formulainiziale>
     <contenitore nome="" id=""><h:p>1) di adottare per tutti i motivi espressi in narrativa - ai sensi dell’art. 17 della legge regionale n. 1 del
 3.1.2005 - una variante al P.R.G. vigente, relativa ad alcuni tratti della viabilità e aree circostanti in località
 Cascine del Riccio con le seguenti modifiche:

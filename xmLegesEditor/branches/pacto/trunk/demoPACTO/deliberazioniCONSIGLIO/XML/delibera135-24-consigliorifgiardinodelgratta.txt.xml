@@ -4,28 +4,30 @@
   <DocumentoNIR nome="Delibera">
     <meta>
       <descrittori>
-        <redazione id="" nome="" norm=""/>
-        <urn valore=""/>
+        <pubblicazione norm="" num="" tipo=""/>
+        <entratainvigore norm="20030310"/>
+        <redazione id="red1" nome="" norm=""/>
+        <urn valore="urn:nir:autorita:provvedimento:"/>
       </descrittori>
+      <proprietario xlink:type="simple"><pacto:meta xmlns:pacto="http://www.comune.fi.it/deliberazione/1.0"><pacto:nproposta></pacto:nproposta><pacto:ufficio>0002. Ufficio del Consiglio
+
+ 
+
+</pacto:ufficio><pacto:relatore></pacto:relatore></pacto:meta></proprietario>
     </meta>
-    <intestazione>
-      <emanante>COMUNE   DI   FIRENZE
+    <intestazione><emanante>COMUNE   DI   FIRENZE
 
 ___________________________
 
  
 
-</emanante>
-      <tipoDoc>DELIBERA
+</emanante><tipoDoc>DELIBERA
 
  
 
  
 
-</tipoDoc>
-<?error Data stesura atto......: ?>
-      <dataDoc norm="20030305">05/03/2003</dataDoc>
-<?error In Rete civica dal: 04/04/2003
+</tipoDoc>Data stesura atto......: <dataDoc norm="20030305">05/03/2003</dataDoc>In Rete civica dal: 04/04/2003
 
  
 
@@ -37,9 +39,7 @@ Numero proposta di delibera: 00135
 
  
 
-Num. approvazione.: ?>
-      <numDoc>00024-Consiglio</numDoc>
-<?error Data approvazione delibera: 10/03/2003
+Num. approvazione.: <numDoc>00024-Consiglio</numDoc>Data approvazione delibera: 10/03/2003
 
  
 
@@ -47,19 +47,18 @@ Direzione proponente: 0002. Ufficio del Consiglio
 
  
 
-?>
-      <titoloDoc>OGGETTO:
+<titoloDoc>OGGETTO:
 
 Approvazione nuovo “Regolamento per la Toponomastica”.
 
 
 
-- </titoloDoc>
-<?error OMISSIS -
+- </titoloDoc>OMISSIS -
 
  
 
-?>
+</intestazione>
+    <formulainiziale>
       <preambolo>
         <h:p>I L     C O N S I G L I O
 Visto il “Regolamento per la Toponomastica”, esecutivo ai sensi di legge, approvato con propria deliberazione n. 133/57 del 28.02.1994;</h:p>
@@ -79,8 +78,7 @@ ALLEGATI  PARTE  INTEGRANTE
 REGOLAMENTO PER LA TOPONOMASTICA
 (Deliberazioni del Consiglio comunale n. 135 del 10.03.2003 e n. 3 del 06.02.2006)</h:p>
       </preambolo>
-    </intestazione>
-    <formulainiziale/>
+    </formulainiziale>
     <articolato>
       <articolo id="art1">
         <num>Art.1</num>
