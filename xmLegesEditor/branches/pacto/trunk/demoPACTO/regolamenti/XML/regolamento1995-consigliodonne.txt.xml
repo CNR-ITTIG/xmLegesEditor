@@ -7,23 +7,19 @@
         <pubblicazione norm="" num="" tipo=""/>
         <entratainvigore norm=""/>
         <redazione id="red1" nome="" norm=""/>
-        <urn valore="urn:nir:autorita:provvedimento:"/>
+        <urn valore=""/>
       </descrittori>
     </meta>
-    <intestazione>
-<?error COMUNE DI FIRENZE
+    <intestazione><emanante>COMUNE DI FIRENZE
 
-REGOLAMENTO n. 220 del 10.03.1995 
-
-Regolamento del Consiglio delle Donne
+</emanante><tipoDoc>REGOLAMENTO </tipoDoc>n. <numDoc>220</numDoc>del <dataDoc norm="19950310">10.03.1995</dataDoc><titoloDoc>Regolamento del Consiglio delle Donne
 (Deliberazioni n. 220 del 10.03.1995, n. 2123 del 15.05.1995 e n. 65 del 26.04.2004)
 
 
 
  
  
-?>
-    </intestazione>
+</titoloDoc></intestazione>
     <formulainiziale/>
     <articolato>
       <articolo id="art1">

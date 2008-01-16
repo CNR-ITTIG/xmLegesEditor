@@ -7,20 +7,18 @@
         <pubblicazione norm="" num="" tipo=""/>
         <entratainvigore norm=""/>
         <redazione id="red1" nome="" norm=""/>
-        <urn valore="urn:nir:autorita:provvedimento:"/>
+        <urn valore=""/>
       </descrittori>
     </meta>
-    <intestazione>
-<?error COMUNE DI FIRENZE
-REGOLAMENTO n. 1224/202 del 22.09.1998
+    <intestazione><emanante>COMUNE DI FIRENZE
+</emanante><tipoDoc>REGOLAMENTO </tipoDoc>n. <numDoc>1224</numDoc>/<titoloDoc>202 del 22.09.1998
  
 REGOLAMENTO PER LA CONCESSIONE DI AREE COMUNALI PER L'INSTALLAZIONE E L'ESERCIZIO DI SINGOLE ATTRAZIONI DELLO SPETTACOLO VIAGGIANTE DI PARCHI DIVERTIMENTO NON PERMANENTI E PICCOLI COMPLESSI DI ATTRAZIONI DI SPETTACOLI CIRCENSI DEGLI SPETTACOLI ACROBATICI DI AUTO E MOTO E DEI BALLI A PALCHETTO
  
 (Deliberazione del Consiglio comunale n. 1224/202 del 22.09.1998, modificata da Deliberazione del Consiglio Comunale n. 266 del 19.04.2000, modificata con Deliberazione del Consiglio Comunale n.89 del 21/12/2006)) 
  
  
-?>
-    </intestazione>
+</titoloDoc></intestazione>
     <formulainiziale/>
     <articolato>
       <articolo id="art1">

@@ -7,18 +7,15 @@
         <pubblicazione norm="" num="" tipo=""/>
         <entratainvigore norm=""/>
         <redazione id="red1" nome="" norm=""/>
-        <urn valore="urn:nir:autorita:provvedimento:"/>
+        <urn valore=""/>
       </descrittori>
     </meta>
-    <intestazione>
-<?error REGOLAMENTO n.28 del 15.05.2006
-Regolamento Antidoping delle Feste e Tradizioni Fiorentine e del Calcio Fiorentino
+    <intestazione><tipoDoc>REGOLAMENTO </tipoDoc>n.<numDoc>28</numDoc>del <dataDoc norm="20060515">15.05.2006</dataDoc><titoloDoc>Regolamento Antidoping delle Feste e Tradizioni Fiorentine e del Calcio Fiorentino
 (Delibera Consiglio Comunale n. 28 del 15.05.2006)
 
  
 
-?>
-    </intestazione>
+</titoloDoc></intestazione>
     <formulainiziale/>
     <articolato>
       <articolo id="art1">

@@ -7,24 +7,19 @@
         <pubblicazione norm="" num="" tipo=""/>
         <entratainvigore norm=""/>
         <redazione id="red1" nome="" norm=""/>
-        <urn valore="urn:nir:autorita:provvedimento:"/>
+        <urn valore=""/>
       </descrittori>
     </meta>
-    <intestazione>
-      <emanante>COMUNE DI FIRENZE
-</emanante>
-      <tipoDoc>REGOLAMENTO  </tipoDoc>
-      <dataDoc norm="19960313">13 marzo 1996</dataDoc>
-      <titoloDoc>n. 327/1996
+    <intestazione><emanante>COMUNE DI FIRENZE
+</emanante><tipoDoc>REGOLAMENTO  </tipoDoc><dataDoc norm="19960313">13 marzo 1996</dataDoc><titoloDoc>n. 327/1996
 
 Regolamento per la gestione del servizio civile degli obiettori di coscienza assegnati al Comune di Firenze 
 
-PREMESSA
-Il Comune Firenze nello stipulare la convenzione per l’impiego di obiettori  di Coscienza ammessi al servizio civile fa propri i valori di pace, libertà, solidarietà e non violenza che la scelta di obiezione sottende e con tale impegno intende dare significato alla vocazione di Firenze  quale “Città operatrice di pace”.
-Il Regolamento stabilisce il rapporto esistente tra l’Amministrazione Comunale e gli obiettori di coscienza ad essa assegnati. La prima intesa come elemento territoriale del sistema di “difesa” verso le minacce ambientali e sociali; i secondi come cittadini impegnati ad assolvere i doveri  inderogabili di solidarietà e di difesa cui sono chiamati dalla Costituzione.
+</titoloDoc>PREMESSA
+Il Comune Firenze nello stipulare la convenzione per l&amp;#xE2;&amp;#x80;&amp;#x99;impiego di obiettori  di Coscienza ammessi al servizio civile fa propri i valori di pace, libert&amp;#xC3;&amp;#xA0;, solidariet&amp;#xC3;&amp;#xA0; e non violenza che la scelta di obiezione sottende e con tale impegno intende dare significato alla vocazione di Firenze  quale &amp;#xE2;&amp;#x80;&amp;#x9C;Citt&amp;#xC3;&amp;#xA0; operatrice di pace&amp;#xE2;&amp;#x80;&amp;#x9D;.
+Il Regolamento stabilisce il rapporto esistente tra l&amp;#xE2;&amp;#x80;&amp;#x99;Amministrazione Comunale e gli obiettori di coscienza ad essa assegnati. La prima intesa come elemento territoriale del sistema di &amp;#xE2;&amp;#x80;&amp;#x9C;difesa&amp;#xE2;&amp;#x80;&amp;#x9D; verso le minacce ambientali e sociali; i secondi come cittadini impegnati ad assolvere i doveri  inderogabili di solidariet&amp;#xC3;&amp;#xA0; e di difesa cui sono chiamati dalla Costituzione.
 
-</titoloDoc>
-    </intestazione>
+</intestazione>
     <formulainiziale/>
     <articolato>
       <articolo id="art1">

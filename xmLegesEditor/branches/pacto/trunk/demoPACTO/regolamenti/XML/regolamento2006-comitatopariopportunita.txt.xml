@@ -7,18 +7,14 @@
         <pubblicazione norm="" num="" tipo=""/>
         <entratainvigore norm=""/>
         <redazione id="red1" nome="" norm=""/>
-        <urn valore="urn:nir:autorita:provvedimento:"/>
+        <urn valore=""/>
       </descrittori>
     </meta>
-    <intestazione>
-<?error COMUNE DI DIRENZE
-REGOLAMENTO n.133 del 14.03.2006
-
-REGOLAMENTO DEL COMITATO PARI OPPORTUNIT&#xC3;&#x80;
+    <intestazione><?error COMUNE DI DIRENZE
+?><tipoDoc>REGOLAMENTO </tipoDoc>n.<numDoc>133</numDoc>del <dataDoc norm="20060314">14.03.2006</dataDoc><titoloDoc>REGOLAMENTO DEL COMITATO PARI OPPORTUNITÀ
 (Delibera di Giunta n. 133 del 14.3.2006)
 
-?>
-    </intestazione>
+</titoloDoc></intestazione>
     <formulainiziale/>
     <articolato>
       <articolo id="art1">

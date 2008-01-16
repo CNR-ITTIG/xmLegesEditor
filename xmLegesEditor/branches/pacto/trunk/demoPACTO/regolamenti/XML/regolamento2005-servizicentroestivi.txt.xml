@@ -7,20 +7,16 @@
         <pubblicazione norm="" num="" tipo=""/>
         <entratainvigore norm=""/>
         <redazione id="red1" nome="" norm=""/>
-        <urn valore="urn:nir:autorita:provvedimento:"/>
+        <urn valore=""/>
       </descrittori>
     </meta>
-    <intestazione>
-<?error COMUNE DI FIRENZE
-REGOLAMENTO n. 29 DEL 11.04.2005
- 
-REGOLAMENTO PER LA FRUIZIONE DEL SERVIZIO CENTRI ESTIVI
+    <intestazione><emanante>COMUNE DI FIRENZE
+</emanante><tipoDoc>REGOLAMENTO </tipoDoc>n. <numDoc>29</numDoc>DEL <dataDoc norm="20050411">11.04.2005</dataDoc><titoloDoc>REGOLAMENTO PER LA FRUIZIONE DEL SERVIZIO CENTRI ESTIVI
 (Delibera C.C. n. 29 del 11.04.2005)
 
  
 
-?>
-    </intestazione>
+</titoloDoc></intestazione>
     <formulainiziale/>
     <articolato>
       <articolo id="art1">
