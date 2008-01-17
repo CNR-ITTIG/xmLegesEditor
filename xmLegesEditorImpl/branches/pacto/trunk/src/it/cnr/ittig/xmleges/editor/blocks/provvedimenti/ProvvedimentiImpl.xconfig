@@ -547,7 +547,28 @@
 		<dtd name="DTD Nir Flessibile">nirflessibile.dtd</dtd>
 		<!--dtd name="DTD Nir Base">nirbase.dtd</dtd-->
     </provvedimento>
+
+
+<!-- ********************************************* DELIBERA DI CONSIGLIO -->
+     <provvedimento name="Delibera di Consiglio" emananti="SI">
+	    <urn>
+	        <atto>delibera</atto>
+	        <citazione>delibera di consiglio</citazione>
+	        <autorita>!(^stato$|^presidente\.repubblica)</autorita>
+	    </urn>
+    </provvedimento>
+<!-- ********************************************* DELIBERA DI GIUNTA -->
+     <provvedimento name="Delibera di Giunta" emananti="SI">
+	    <urn>
+	        <atto>delibera</atto>
+	        <citazione>delibera di giunta</citazione>
+	        <autorita>!(^stato$|^presidente\.repubblica)</autorita>
+	    </urn>
+    </provvedimento>
+
+
 </classe>
+
 <!-- ======================================================== DELIBERAZIONI -->
 <classe name="Deliberazione">
     <provvedimento name="Deliberazione" emananti="SI">
@@ -562,7 +583,30 @@
 		<dtd name="DTD Nir Flessibile">nirflessibile.dtd</dtd>
 		<!--	dtd name="DTD Nir Base">nirbase.dtd</dtd	-->
     </provvedimento>
+
+
+<!-- ********************************************* DELIBERAZIONE DI CONSIGLIO -->
+     <provvedimento name="Deliberazione di Consiglio" emananti="SI">
+	    <urn>
+	        <atto>deliberazione</atto>
+	        <citazione>deliberazione di consiglio</citazione>
+	        <autorita>!(^stato$|^presidente\.repubblica)</autorita>
+	    </urn>
+    </provvedimento>
+<!-- ********************************************* DELIBERAZIONE DI GIUNTA -->
+     <provvedimento name="Deliberazione di Giunta" emananti="SI">
+	    <urn>
+	        <atto>deliberazione</atto>
+	        <citazione>deliberazione di giunta</citazione>
+	        <autorita>!(^stato$|^presidente\.repubblica)</autorita>
+	    </urn>
+    </provvedimento>
+
+
 </classe>
+
+
+
 <!-- =============================================================== PARERI -->
 <classe name="Parere">
     <provvedimento name="Parere" emananti="SI">

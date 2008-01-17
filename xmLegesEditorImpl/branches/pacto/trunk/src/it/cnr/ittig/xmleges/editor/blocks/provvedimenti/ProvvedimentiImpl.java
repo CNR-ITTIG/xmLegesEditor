@@ -250,7 +250,7 @@ public class ProvvedimentiImpl implements Provvedimenti, Loggable, Serviceable, 
 			Configuration[] listaprovvedimenti = listaclassi[i].getChildren();
 			for (int j = 0; j < listaprovvedimenti.length; j++) {
 				try {
-					if (listaprovvedimenti[j].getAttribute("name").equalsIgnoreCase(nomeprovvedimento)) {
+					if (listaprovvedimenti[j].getAttribute("name").equalsIgnoreCase(nomeprovvedimento.trim())) {
 						provvedimento = CreateProvvedimento(listaprovvedimenti[j]);
 						logger.debug("Ricerca del provvedimento terminata con successo");
 						return provvedimento;

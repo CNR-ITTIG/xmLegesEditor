@@ -96,7 +96,8 @@ public class MetaPactoImpl implements MetaPacto, Loggable, Serviceable {
 			
 			if (proprietarioNode==null){
 				proprietarioNode = utilRulesManager.getNodeTemplate("proprietario");
-						//createElementNS("http://www.comune.fi.it/deliberazione/1.0","proprietario");
+				UtilDom.setAttributeValue(proprietarioNode,"soggetto","Comune di Firenze");
+						
 				missingProprietario = true;
 			}
 			

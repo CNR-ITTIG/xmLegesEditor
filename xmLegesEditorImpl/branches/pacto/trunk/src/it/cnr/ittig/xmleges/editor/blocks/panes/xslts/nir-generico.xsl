@@ -47,6 +47,16 @@
 				</xsl:when>
 			</xsl:choose>
 
+			<div class="meta">
+				<br/>Numero Proposta: <xsl:apply-templates select="/*/*/*[name()='meta']/*[name()='proprietario']/*[name()='pacto:meta']/*[name()='pacto:nproposta']" />
+ 			    <br/>Ufficio: <xsl:apply-templates select="/*/*/*[name()='meta']/*[name()='proprietario']/*[name()='pacto:meta']/*[name()='pacto:ufficio']" />
+			    <br/>Relatore: <xsl:apply-templates select="/*/*/*[name()='meta']/*[name()='proprietario']/*[name()='pacto:meta']/*[name()='pacto:relatore']" />
+			    <br/>
+				<br/>MATERIE: <xsl:apply-templates select="/*/*/*[name()='meta']/*[name()='descrittori']/*[name()='materie']" />
+			
+			</div>
+
+
 			<xsl:apply-templates select="/*[name()='NIR']/*" />
            	<div class="allineasx">
    	        	<xsl:call-template name="notemultivigente" /> 
@@ -91,7 +101,11 @@
 		<hr/>
 	</xsl:template>
 	
-
+	<xsl:template match="//*[name()='materie']">			
+	  	<xsl:for-each select="*">
+			<xsl:value-of select="@valore"/><xsl:text>, </xsl:text>	
+	  	</xsl:for-each>
+	</xsl:template>
 
 	<!-- ======================================================== -->
 	<!--                                                          -->

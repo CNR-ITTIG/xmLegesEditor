@@ -353,4 +353,22 @@ fine rimosso dalla dtd 2.2-->
 	</xsl:for-each>
 </xsl:template>
 
+<xsl:template match="*[name()='pacto:meta']" mode="oneroot" >
+	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
+	   	<xsl:attribute name="style">
+	            margin: 30 15 15 25;
+	            color: red;
+	    </xsl:attribute>
+	    (PACTO) meta
+	</xsl:element>	    
+	<xsl:for-each select="*">
+		<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
+		    <xsl:value-of select="substring(name(),7)"/>
+		    <xsl:text>: </xsl:text>
+			<font color="blue"><xsl:value-of select="."/></font>
+		</xsl:element>		
+	</xsl:for-each>
+</xsl:template>
+
+
 </xsl:transform>
