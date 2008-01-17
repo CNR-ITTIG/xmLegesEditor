@@ -95,7 +95,7 @@ public class FileImportActionImpl extends AbstractAction implements FileImportAc
 		}
 		fileChooser = new JFileChooser();
 		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		fileChooser.setFileFilter(new RegexpFileFilter("doc, html, txt", ".*\\.(doc|html?|txt)"));
+		fileChooser.setFileFilter(new RegexpFileFilter("doc, html, pdf, txt", ".*\\.(doc|html?|pdf|txt)"));
 	}
 
 	public void start() throws Exception {
@@ -124,7 +124,7 @@ public class FileImportActionImpl extends AbstractAction implements FileImportAc
 				if (fileOpenAction.doOpen(UtilFile.getFileFromTemp("import.xml").getAbsolutePath(), false)) {
 					documentManager.setNew(true);
 					
-					//imposto la Rinumerazione DISATTIVA (se non lo è già)
+					//imposto la Rinumerazione DISATTIVA (se non lo ï¿½ giï¿½)
 					if (rinumerazione.isRinumerazione())
 						rinumerazioneAction.doSetRinumerazione(false);
 					
