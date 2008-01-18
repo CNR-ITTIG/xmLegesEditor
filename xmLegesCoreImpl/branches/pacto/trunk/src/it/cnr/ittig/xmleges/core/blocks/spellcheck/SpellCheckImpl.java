@@ -96,8 +96,9 @@ public class SpellCheckImpl implements SpellCheck, Loggable, Serviceable, Initia
 		    libreriaCaricata = true;
 		  }
 		  catch(Exception ex){
-			   logger.error(ex.getMessage(),ex);
-			   utilMsg.msgInfo("spellcheck.error.library");
+			   //commento almeno per ora
+			   //logger.error(ex.getMessage(),ex);
+			   //utilMsg.msgInfo("spellcheck.error.library");
 			   libreriaCaricata = false;
 		  }
 		}
