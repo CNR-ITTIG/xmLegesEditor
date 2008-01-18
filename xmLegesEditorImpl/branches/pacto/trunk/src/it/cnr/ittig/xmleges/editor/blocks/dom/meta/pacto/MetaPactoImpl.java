@@ -46,6 +46,7 @@ public class MetaPactoImpl implements MetaPacto, Loggable, Serviceable {
 
 		Document doc = documentManager.getDocumentAsDom();
 		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
+		String aproposta=null;
 		String nproposta=null;	
 		String ufficio=null;		
 		String relatore=null;		
@@ -56,15 +57,16 @@ public class MetaPactoImpl implements MetaPacto, Loggable, Serviceable {
 						
 			NodeList pactoMeta_elementList = n.getChildNodes();
 			for (int i = 0; i < pactoMeta_elementList.getLength();i++) {
-				String valore=UtilDom.getTextNode(pactoMeta_elementList.item(i));
-				if(pactoMeta_elementList.item(i).getNodeName().equals("pacto:nproposta"))
-					nproposta=valore;					
+				if(pactoMeta_elementList.item(i).getNodeName().equals("pacto:proposta")) {
+					aproposta=UtilDom.getAttributeValueAsString(pactoMeta_elementList.item(i),"anno");
+					nproposta=UtilDom.getAttributeValueAsString(pactoMeta_elementList.item(i),"numero");
+				}	
 				if(pactoMeta_elementList.item(i).getNodeName().equals("pacto:ufficio"))					
-					ufficio=valore;
+					ufficio=UtilDom.getAttributeValueAsString(pactoMeta_elementList.item(i),"valore");
 				if(pactoMeta_elementList.item(i).getNodeName().equals("pacto:relatore"))
-					relatore = valore;
+					relatore=UtilDom.getAttributeValueAsString(pactoMeta_elementList.item(i),"valore");
 			}
-			return (new String[]{nproposta, ufficio, relatore});
+			return (new String[]{aproposta, nproposta, ufficio, relatore});
 		}else return null;
 	}
 
@@ -96,25 +98,33 @@ public class MetaPactoImpl implements MetaPacto, Loggable, Serviceable {
 			
 			if (proprietarioNode==null){
 				proprietarioNode = utilRulesManager.getNodeTemplate("proprietario");
-				UtilDom.setAttributeValue(proprietarioNode,"soggetto","Comune di Firenze");
+				UtilDom.setAttributeValue(proprietarioNode,"soggetto","PACTO");
 						
 				missingProprietario = true;
 			}
 			
 			Node pactoNode = UtilDom.findRecursiveChild(activeMeta,"pacto:meta");
 			if (pactoNode==null)
-			    pactoNode =  doc.createElementNS("http://www.comune.fi.it/deliberazione/1.0","pacto:meta");
-			
-			String[] elementsName=new String[]{"pacto:nproposta","pacto:ufficio","pacto:relatore"};
-			 
+			    pactoNode =  doc.createElementNS("http://www.pacto.it/norme/1.0","pacto:meta");
+	 
 			UtilDom.removeAllChildren(pactoNode);
 			
-			for(int i=0;i<elementsName.length;i++){
-				Element toInsertElement = doc.createElement(elementsName[i]);
-				if((metadati[i]!=null)&&(!metadati[i].trim().equals("")))
-					UtilDom.setTextNode(toInsertElement, metadati[i]);
-				pactoNode.appendChild((Node)toInsertElement);	
-			}
+			Element toInsertElement = doc.createElement("pacto:proposta");
+			if((metadati[0]!=null)&&(!metadati[0].trim().equals("")))				
+				UtilDom.setAttributeValue(toInsertElement,"anno",metadati[0]);
+			if((metadati[1]!=null)&&(!metadati[1].trim().equals("")))				
+				UtilDom.setAttributeValue(toInsertElement,"numero",metadati[1]);
+			pactoNode.appendChild((Node)toInsertElement);
+			
+			toInsertElement = doc.createElement("pacto:ufficio");
+			if((metadati[2]!=null)&&(!metadati[2].trim().equals("")))				
+				UtilDom.setAttributeValue(toInsertElement,"valore",metadati[2]);
+			pactoNode.appendChild((Node)toInsertElement);
+			
+			toInsertElement = doc.createElement("pacto:relatore");
+			if((metadati[3]!=null)&&(!metadati[3].trim().equals("")))				
+				UtilDom.setAttributeValue(toInsertElement,"valore",metadati[3]);
+			pactoNode.appendChild((Node)toInsertElement);
 			
 			proprietarioNode.appendChild(pactoNode);
 			

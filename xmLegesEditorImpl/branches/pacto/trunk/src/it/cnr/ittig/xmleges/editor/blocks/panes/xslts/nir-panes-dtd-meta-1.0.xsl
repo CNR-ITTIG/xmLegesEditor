@@ -143,7 +143,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 <xsl:template match="*[name()='materia']"  mode="oneroot" >
     <xsl:value-of select="@valore"/>
-    <xsl:text> </xsl:text>
+    <xsl:text>, </xsl:text>
 </xsl:template>
 
 <xsl:template match="*[name()='pubblicazione']"  mode="oneroot" >
@@ -365,7 +365,15 @@ fine rimosso dalla dtd 2.2-->
 		<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 		    <xsl:value-of select="substring(name(),7)"/>
 		    <xsl:text>: </xsl:text>
-			<font color="blue"><xsl:value-of select="."/></font>
+		    <xsl:choose>
+				<xsl:when test="@valore!=''">
+					<font color="blue"><xsl:value-of select="@valore"/></font>
+	   			</xsl:when>	
+	   			<xsl:otherwise>
+					<font color="blue"><xsl:value-of select="@anno"/><xsl:text>/</xsl:text><xsl:value-of select="@numero"/></font>
+	   			</xsl:otherwise>			
+			</xsl:choose>
+
 		</xsl:element>		
 	</xsl:for-each>
 </xsl:template>

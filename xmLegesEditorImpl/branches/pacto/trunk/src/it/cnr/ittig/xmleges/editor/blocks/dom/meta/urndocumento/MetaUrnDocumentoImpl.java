@@ -198,7 +198,7 @@ public class MetaUrnDocumentoImpl implements MetaUrnDocumento, Loggable, Service
 	}
 
 	private boolean findEmanante(Document doc, String autorita) {
-		if (doc != null) {
+		if (doc != null & autorita != null) {
 			// FIXME andrebbe cercato solo nel documento principale
 			NodeList emanantiList = doc.getElementsByTagName("emanante");
 			for (int i = 0; i < emanantiList.getLength(); i++) {

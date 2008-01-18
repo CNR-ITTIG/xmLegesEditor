@@ -47,16 +47,6 @@
 				</xsl:when>
 			</xsl:choose>
 
-			<div class="meta">
-				<br/>Numero Proposta: <xsl:apply-templates select="/*/*/*[name()='meta']/*[name()='proprietario']/*[name()='pacto:meta']/*[name()='pacto:nproposta']" />
- 			    <br/>Ufficio: <xsl:apply-templates select="/*/*/*[name()='meta']/*[name()='proprietario']/*[name()='pacto:meta']/*[name()='pacto:ufficio']" />
-			    <br/>Relatore: <xsl:apply-templates select="/*/*/*[name()='meta']/*[name()='proprietario']/*[name()='pacto:meta']/*[name()='pacto:relatore']" />
-			    <br/>
-				<br/>MATERIE: <xsl:apply-templates select="/*/*/*[name()='meta']/*[name()='descrittori']/*[name()='materie']" />
-			
-			</div>
-
-
 			<xsl:apply-templates select="/*[name()='NIR']/*" />
            	<div class="allineasx">
    	        	<xsl:call-template name="notemultivigente" /> 
@@ -101,8 +91,8 @@
 		<hr/>
 	</xsl:template>
 	
-	<xsl:template match="//*[name()='materie']">			
-	  	<xsl:for-each select="*">
+	<xsl:template match="/*/*/*[name()='meta']/*[name()='descrittori']/*[name()='materie']">		
+	  	<xsl:for-each select="*[name()='materia']">
 			<xsl:value-of select="@valore"/><xsl:text>, </xsl:text>	
 	  	</xsl:for-each>
 	</xsl:template>
@@ -115,7 +105,17 @@
 	
 	<xsl:template match="/*[name()='NIR']/*/*[name()='intestazione']">
 		<div class="intestazione">
-			<xsl:apply-templates/>						
+			<xsl:apply-templates/>					
+			
+			<div class="meta">
+				<br/>Numero Proposta: <xsl:value-of select="/*/*/*[name()='meta']/*[name()='proprietario']/*[name()='pacto:meta']/*[name()='pacto:proposta']/@anno" />
+				<xsl:text>/</xsl:text><xsl:value-of select="/*/*/*[name()='meta']/*[name()='proprietario']/*[name()='pacto:meta']/*[name()='pacto:proposta']/@numero" />
+ 			    <br/>Ufficio: <xsl:value-of select="/*/*/*[name()='meta']/*[name()='proprietario']/*[name()='pacto:meta']/*[name()='pacto:ufficio']/@valore" />
+			    <br/>Relatore: <xsl:value-of select="/*/*/*[name()='meta']/*[name()='proprietario']/*[name()='pacto:meta']/*[name()='pacto:relatore']/@valore" />
+			    <br/>
+				<br/>MATERIE: <xsl:apply-templates select="/*/*/*[name()='meta']/*[name()='descrittori']/*[name()='materie']" />
+			</div>	
+			
 		</div>
 		<hr/>
 	</xsl:template>

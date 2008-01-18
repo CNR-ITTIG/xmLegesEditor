@@ -51,6 +51,13 @@ em {
 	font-size: 100%;
 }
 
+.meta {
+	text-align: left;
+	font-size: 60%;
+	font-weight:bold;
+	font-style:normal;
+}
+
 .articolo { 
 	font-size: 100% ; 
 	margin-top: 15px; 

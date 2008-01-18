@@ -34,7 +34,7 @@
 				<!--                                                          -->
 				<!-- ======================================================== -->				
 				<style type="text/css">
-			/*Style CSS Generico*/
+/*Style CSS Generico*/
 body {
 	margin-left: 5px;
 	font-family: Verdana, Arial, Helvetica, sans-serif ;
@@ -85,6 +85,13 @@ em {
 .preambolo {
 	text-align: left;
 	font-size: 100%;
+}
+
+.meta {
+	text-align: left;
+	font-size: 60%;
+	font-weight:bold;
+	font-style:normal;
 }
 
 .articolo { 
@@ -271,7 +278,11 @@ p {
 		<hr/>
 	</xsl:template>
 	
-
+	<xsl:template match="/*/*/*[name()='meta']/*[name()='descrittori']/*[name()='materie']">		
+	  	<xsl:for-each select="*[name()='materia']">
+			<xsl:value-of select="@valore"/><xsl:text>, </xsl:text>	
+	  	</xsl:for-each>
+	</xsl:template>
 
 	<!-- ======================================================== -->
 	<!--                                                          -->
@@ -281,7 +292,17 @@ p {
 	
 	<xsl:template match="/*[name()='NIR']/*/*[name()='intestazione']">
 		<div class="intestazione">
-			<xsl:apply-templates/>						
+			<xsl:apply-templates/>					
+			
+			<div class="meta">
+				<br/>Numero Proposta: <xsl:value-of select="/*/*/*[name()='meta']/*[name()='proprietario']/*[name()='pacto:meta']/*[name()='pacto:proposta']/@anno" />
+				<xsl:text>/</xsl:text><xsl:value-of select="/*/*/*[name()='meta']/*[name()='proprietario']/*[name()='pacto:meta']/*[name()='pacto:proposta']/@numero" />
+ 			    <br/>Ufficio: <xsl:value-of select="/*/*/*[name()='meta']/*[name()='proprietario']/*[name()='pacto:meta']/*[name()='pacto:ufficio']/@valore" />
+			    <br/>Relatore: <xsl:value-of select="/*/*/*[name()='meta']/*[name()='proprietario']/*[name()='pacto:meta']/*[name()='pacto:relatore']/@valore" />
+			    <br/>
+				<br/>MATERIE: <xsl:apply-templates select="/*/*/*[name()='meta']/*[name()='descrittori']/*[name()='materie']" />
+			</div>	
+			
 		</div>
 		<hr/>
 	</xsl:template>
@@ -1476,4 +1497,4 @@ p {
 	</xsl:template>
  
 
-</xsl:stylesheet>							
+</xsl:stylesheet>

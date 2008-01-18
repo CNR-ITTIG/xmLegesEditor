@@ -55,6 +55,8 @@ public class PactoProprietariFormImpl implements PactoProprietariForm, Loggable,
 
 	Form form;
 	
+	JTextField aproposta;
+	
 	JTextField nproposta;
 	
 	JTextField ufficio;
@@ -78,6 +80,7 @@ public class PactoProprietariFormImpl implements PactoProprietariForm, Loggable,
 		form.setName("editor.form.meta.pacto");
 		//form.setHelpKey("help.contents.form.pactoproprietari");
 		
+		aproposta = (JTextField) form.getComponentByName("editor.form.meta.pacto.aproposta");
 		nproposta = (JTextField) form.getComponentByName("editor.form.meta.pacto.nproposta");
 		ufficio = (JTextField) form.getComponentByName("editor.form.meta.pacto.ufficio");
 		relatore = (JTextField) form.getComponentByName("editor.form.meta.pacto.relatore");						
@@ -85,22 +88,24 @@ public class PactoProprietariFormImpl implements PactoProprietariForm, Loggable,
 
 	// ////////////////////////////////////////////// MetaDescrittoriFormInterface
 	public boolean openForm() {
-		form.setSize(400, 200);
+		form.setSize(400, 250);
 		form.showDialog();
 		return form.isOk();
 	}
 
 	public String[] getProprietari() {
-		return new String[] {nproposta.getText().trim(),ufficio.getText().trim(),relatore.getText().trim()};
+		return new String[] {aproposta.getText().trim(),nproposta.getText().trim(),ufficio.getText().trim(),relatore.getText().trim()};
 	}
 	
 	public void setProprietari(String[] metadati) {
 		if(metadati!=null){
-			nproposta.setText(metadati[0]);
-			ufficio.setText(metadati[1]);
-			relatore.setText(metadati[2]);
+			aproposta.setText(metadati[0]);
+			nproposta.setText(metadati[1]);
+			ufficio.setText(metadati[2]);
+			relatore.setText(metadati[3]);
 		}
 		else {
+			aproposta.setText("");
 			nproposta.setText("");
 			ufficio.setText("");
 			relatore.setText("");
