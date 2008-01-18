@@ -1,328 +1,312 @@
 <?xml version="1.0" encoding="iso-8859-15"?>
-<!DOCTYPE NIR SYSTEM "nirflessibile.dtd">
-<NIR tipo="originale" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <DocumentoNIR nome="Delibera">
-    <meta>
-      <descrittori>
-        <pubblicazione norm="" num="" tipo=""/>
-        <entratainvigore norm="20030310"/>
-        <redazione id="red1" nome="" norm=""/>
-        <urn valore="urn:nir:autorita:provvedimento:"/>
-      </descrittori>
-      <proprietario xlink:type="simple"><pacto:meta xmlns:pacto="http://www.comune.fi.it/deliberazione/1.0"><pacto:nproposta></pacto:nproposta><pacto:ufficio>0002. Ufficio del Consiglio
-
- 
-
-</pacto:ufficio><pacto:relatore></pacto:relatore></pacto:meta></proprietario>
-    </meta>
-    <intestazione><emanante>COMUNE   DI   FIRENZE
-
-___________________________
-
- 
-
-</emanante><tipoDoc>DELIBERA
-
- 
-
- 
-
-</tipoDoc>Data stesura atto......: <dataDoc norm="20030305">05/03/2003</dataDoc>In Rete civica dal: 04/04/2003
-
- 
-
-Protocollo interno ufficio: 00006
-
- 
-
-Numero proposta di delibera: 00135
-
- 
-
-Num. approvazione.: <numDoc>00024-Consiglio</numDoc>Data approvazione delibera: 10/03/2003
-
- 
-
-Direzione proponente: 0002. Ufficio del Consiglio
-
- 
-
-<titoloDoc>OGGETTO:
-
-Approvazione nuovo “Regolamento per la Toponomastica”.
-
-
-
-- </titoloDoc>OMISSIS -
-
- 
-
-</intestazione>
-    <formulainiziale>
-      <preambolo>
-        <h:p>I L     C O N S I G L I O
-Visto il “Regolamento per la Toponomastica”, esecutivo ai sensi di legge, approvato con propria deliberazione n. 133/57 del 28.02.1994;</h:p>
-        <h:p>Ritenuto di riconoscere all’organo consiliare, rappresentativo dell’intera comunità, un ruolo più fattivo in materia di toponomastica, nel rispetto della normativa vigente, oltre a disciplinare alcuni aspetti della materia non previsti dall’attuale regolamento;</h:p>
-        <h:p>Vista la proposta di regolamento allegata che risponde pienamente alle esigenze summenzionate;</h:p>
-        <h:p>Ritenuto di accogliere la suddetta proposta di regolamento;</h:p>
-        <h:p>Visto il parere in ordine alla sola regolarità tecnica del responsabile del servizio interessato ai sensi dell’art. 49 D. Legisl.vo n. 267/2000 “Testo unico delle leggi sull’ordinamento degli enti locali”;</h:p>
-        <h:p>Visti gli artt. 7 e 42 del D.Lgs. 267/2000;</h:p>
-        <h:p>Visto l’art. 7 dello Statuto Comunale;</h:p>
-        <h:p>D E L I B E R A
-1.  di approvare il nuovo “Regolamento per la Toponomastica”, allegato al presente provvedimento quale parte integrante e sostanziale;</h:p>
-        <h:p>2.  di abrogare il “Regolamento per la Toponomastica” approvato con propria deliberazione n.133/57 del 28.02.1994, a decorrere alla esecutività del nuovo Regolamento.</h:p>
-        <h:p>            Si da corso alla votazione dalla quale risulta che LA PROPOSTA E’ APPROVATA ALL’UNANIMITA’.</h:p>
-        <h:p>SEGUE ALLEGATO
-ALLEGATI  PARTE  INTEGRANTE
-- Regolamento per la toponomastica (copiato in delibera)
-REGOLAMENTO PER LA TOPONOMASTICA
-(Deliberazioni del Consiglio comunale n. 135 del 10.03.2003 e n. 3 del 06.02.2006)</h:p>
-      </preambolo>
-    </formulainiziale>
-    <articolato>
-      <articolo id="art1">
-        <num>Art.1</num>
-        <rubrica>
-I provvedimenti concernenti la denominazione di aree di circolazione e di luoghi in genere sono adottati della Giunta Comunale nel rispetto delle vigenti disposizioni di legge in materia e del presente regolamento.
-
-</rubrica>
-        <comma id="art1-com1">
-          <num/>
-          <corpo/>
-        </comma>
-      </articolo>
-      <articolo id="art2">
-        <num>Art. 2</num>
-        <rubrica>
-L’Amministrazione Comunale per l’adozione dei provvedimenti di cui al precedente articolo si avvale, come organo consultivo, della Commissione Consultiva per la Toponomastica e le Iscrizioni Commemorative.
-
-</rubrica>
-        <comma id="art2-com1">
-          <num/>
-          <corpo/>
-        </comma>
-      </articolo>
-      <articolo id="art3">
-        <num>Art. 3</num>
-        <rubrica>
-Nel provvedimento deliberativo di cui all’art. 1 deve essere menzionato il parere espresso dalla Commissione Consultiva per la Toponomastica e le Iscrizioni Commemorative e deve essere motivata l’eventuale decisione in difformità col parere medesimo.
-
-</rubrica>
-        <comma id="art3-com1">
-          <num/>
-          <corpo/>
-        </comma>
-      </articolo>
-      <articolo id="art4">
-        <num>Art. 4</num>
-        <rubrica>
-In casi di particolare urgenza, l’Assessore al ramo può chiedere la discussione urgente nella Giunta Comunale su una proposta di deliberazione predisposta dal Servizio Statistica - ufficio toponomastica.
-
-</rubrica>
-        <comma id="art4-com1">
-          <num/>
-          <corpo/>
-        </comma>
-      </articolo>
-      <articolo id="art5">
-        <num>Art.5</num>
-        <rubrica>
-Nell’espressione dei pareri la Commissione Toponomastica deve tutelare la storia toponomastica di Firenze e del suo territorio e curare che le nuove denominazioni rispettino l’identità culturale e civile, antica e moderna, della città, nonché i toponimi tradizionali, storici o formatisi spontaneamente nella tradizione orale.
-E’ compito della Commissione suggerire ed indicare all’Amministrazione comunale tutte le modalità toponomastiche diverse dalla normale segnaletica stradale, e regolate da apposita normativa, che riguardino aree di circolazione e luoghi significativi della città.
-Il parere della Commissione sulla materia inerente il presente regolamento prevale su altri espressi eventualmente da altri organi, purché non stabiliti per legge.
-
-</rubrica>
-        <comma id="art5-com1">
-          <num/>
-          <corpo/>
-        </comma>
-      </articolo>
-      <articolo id="art6">
-        <num>Art.6</num>
-        <rubrica>
-La Commissione è composta dai consiglieri comunali componenti la Commissione consiliare Cultura, da cinque esperti nominati dal Sindaco e dal Dirigente pro tempore del Servizio Statistica. Il Segretario della Commissione è nominato dal Dirigente tra i dipendenti in servizio presso l’ufficio toponomastica.
-I cinque esperti devono, per professione, per incarichi istituzionali, per chiara fama, essere esperti di storia e cultura fiorentina (segnatamente per i periodi dal medioevo ad oggi), di architettura, di topografia fiorentina, di glottologia, di musica, di scienze matematiche fisiche e naturali, di diritto, di scienze umane, di archivistica, o di altra materia la cui conoscenza possa al meglio contribuire ai compiti assegnati alla commissione.
-Alle riunioni partecipano, come membri esterni, esperti designati da ogni Quartiere, nei casi che interessano il territorio di un Quartiere.
-Non sono membri della Commissione eventuali esperti di argomenti specifici invitati formalmente dal Presidente della Commissione a partecipare a determinate riunioni.
-Alle riunioni della Commissione sono invitati permanenti il Sindaco e l’Assessore delegato.
-
-</rubrica>
-        <comma id="art6-com1">
-          <num/>
-          <corpo/>
-        </comma>
-      </articolo>
-      <articolo id="art7">
-        <num>Art. 7</num>
-        <rubrica>
-L’Amministrazione Comunale garantisce nel proprio bilancio idonee risorse per far fronte alle esigenze connesse alle attività previste nel presente regolamento.
-
-</rubrica>
-        <comma id="art7-com1">
-          <num/>
-          <corpo/>
-        </comma>
-      </articolo>
-      <articolo id="art8">
-        <num>Art. 8</num>
-        <rubrica>
-Ai membri esperti della Commissione è corrisposto un gettone di presenza pari a quello spettante ai membri delle commissioni consiliari.
-
-</rubrica>
-        <comma id="art8-com1">
-          <num/>
-          <corpo/>
-        </comma>
-      </articolo>
-      <articolo id="art9">
-        <num>Art.9</num>
-        <rubrica>
-La Commissione ha la stessa durata del Consiglio Comunale.
-La Commissione è insediata dal Sindaco entro 45 giorni dall’insediamento del Consiglio Comunale.
-Il Presidente e il Vicepresidente della Commissione sono nominati nella prima seduta, rispettivamente tra i membri esperti nominati dal Sindaco e tra i membri consiglieri comunali.
-Per la validità delle sedute delle Commissioni è richiesta la presenza di almeno un terzo dei componenti.
-Le Commissioni sono convocate dal Presidente, almeno 15 giorni prima della seduta, salvo i casi di urgenza. La convocazione deve essere inviata presso il domicilio indicato dai componenti, anche per posta elettronica.
-In caso di cessazione dalla carica del Presidente per qualsiasi causa, il Vicepresidente provvede alla convocazione della Commissione entro i trenta (30) giorni successivi alla cessazione per l’elezione del nuovo Presidente.
-
-</rubrica>
-        <comma id="art9-com1">
-          <num/>
-          <corpo/>
-        </comma>
-      </articolo>
-      <articolo id="art10">
-        <num>Art. 10</num>
-        <rubrica>
-La sede della Commissione è presso gli uffici del Servizio Statistica.
-La Commissione si avvale delle prestazioni del Servizio Statistica – ufficio toponomastica e, per quanto necessario, degli altri uffici comunali.
-I suddetti uffici sono tenuti a prestare la loro opera, per quanto di competenza, ed a presenziare con il loro Dirigente o delegato ai lavori della commissione quando richiesto.
-
-</rubrica>
-        <comma id="art10-com1">
-          <num/>
-          <corpo/>
-        </comma>
-      </articolo>
-      <articolo id="art11">
-        <num>Art.11</num>
-        <rubrica>
-Criteri informatori per la denominazione di aree di circolazione e di luoghi sono:
-
-</rubrica>
-        <comma id="art11-com1">
-          <num>   1.</num>
-          <corpo>
-            <mod id="art11-com1-mod1"> che il toponimo, indichi esso persone, località od altro, sia idoneo, sotto ogni aspetto, ad una funzione toponomastica e non sia motivato esclusivamente da fini onorifici;
-   2. che prima di ogni attribuzione di nuovo toponimo sia rispettata la toponomastica preesistente nei documenti storici o nella memoria e, per le nuove aree di circolazione, sia verificata l’esistenza di eventuali denominazioni spontanee nate fra gli abitanti della zona, anche se ciò non avrà valore vincolante per il parere della Commissione;
-   3. che i nuovi nomi da assegnare siano strettamente legati alla città ed al suo territorio o di tale rilevanza nazionale o internazionale per cui la scelta della denominazione sia indicativa dell’interesse della comunità fiorentina;
-   4. non vengano apportate modifiche di nomi ad aree di circolazione già esistenti, al fine di non variare l’assetto territoriale già valido ai fini toponomastici e storici e non apportare disagi ai cittadini ivi residenti;
-   5. nell’esame dei toponimi di cui alla lettera c. sarà data priorità ai nominativi riguardanti le persone decedute che hanno ricoperto la carica di Sindaco della città di Firenze.
-
-La disposizione di cui al punto d) non è operante nel caso di parziali modifiche a parti di aree di circolazione che successivamente alla prima denominazione abbiano acquisito la caratteristica di area autonoma o che creino problemi di individuazione per i cittadini. Altre deroghe al punto d), che comunque escludano i toponimi di valore storico, dovranno essere ampiamente motivate; è possibile mediante cartelli aggiuntivi, commemorare antiche e popolari denominazioni senza variare la toponomastica attuale.
-Nel caso di variazioni dei toponimi ad aree di circolazione esistenti, il Servizio Statistica –<virgolette id="art11-com1-mod1-vir1"> Ufficio Toponomastica-, una volta esecutiva la relativa deliberazione informa i cittadini residenti e le attività economiche interessate dando loro tutti gli elementi per tutti gli adeguamenti del caso.<h:br/>
-In questo caso l’apposizione delle targhette indicanti i nuovi numeri civici è a carico dell’Amministrazione Comunale in deroga a quanto disposto dalla Legge n°1228 del 24.12.1954 e successivo Regolamento anagrafico della popolazione residente approvato con Decreto n°223 del 30.5.1989 dal Presidente della Repubblica.<h:br/>
-<h:br/>
-Art. 12<h:br/>
-La direzione delle aree di circolazione è: per quelle parallele al fiume Armo, da monte a valle; per quelle trasversali e poste sulle riva destra, dall’Arno verso nord e per quelle poste sulla riva sinistra dall’Arno verso sud.<h:br/>
-Per le aree di circolazione tipo piazza dal punto più vicino all’Arno posto a monte, in senso antiorario, per quelle poste sulla riva destra e, in senso orario, per quelle poste sulla riva sinistra.<h:br/>
-Salvo quanto disposto dal nuovo codice della strada le targhe toponomastiche dovranno riportare per esteso l’onomastica del toponimo.<h:br/>
-Le targhe, all’interno della cerchia dei viali e in alcune zone di particolare pregio paesaggistico, dovranno essere di marmo o ceramica affisse a muro o su palina.<h:br/>
-<h:br/>
-Art.13<h:br/>
-Le aperture poste sulle aree di circolazione sono contraddistinte da numerazione civica nera.<h:br/>
-L’attuale numerazione civica rossa resta valida fino ad esaurimento.<h:br/>
-I criteri per la numerazione civica delle aperture poste nelle aree di circolazione sono:<h:br/>
-<h:br/>
-   1. nelle tipologie via, viale, ecc. le aperture sono contraddistinte da numerazione civica continua, dispari sul lato sinistro, pari sul lato destro;<h:br/>
-   2. nelle tipologie piazza, largo, ecc. la numerazione sarà continua.<h:br/>
-<h:br/>
-L’inizio della numerazione civica farà riferimento ai criteri indicati per le direzioni delle aree di circolazione.<h:br/>
-Quando si rende necessario, le aperture su strada potranno essere contraddistinte da un numero con l’aggiunta di un esponente alfabetico.<h:br/>
-Le aperture poste all’interno di quelle su strada e non direttamente accessibili, saranno contraddistinte con il numero dell’apertura su strada con l’aggiunta di un esponente numerico.<h:br/>
-<h:br/>
-Art.14<h:br/>
-La Commissione può costituire nel suo seno delle sottocommissioni per casi particolari, per istruzioni pratiche, per studi, per stesura di testi; può incaricare uno dei suoi membri di svolgere incombenze ben definite, può creare dei gruppi di lavoro senza spese per l’Amministrazione, per svolgere lavori ben definiti di interesse toponomastico fiorentino.<h:br/>
-<h:br/>
-Art.15<h:br/>
-La Commissione si pronuncia su:<h:br/>
-<h:br/>
-   1. le richieste generiche di cui all’art. 23 e, se le ritiene ammissibili, da’ incarico al Servizio Statistica - ufficio toponomastica di reperire idonee aree di circolazione, eventualmente formulando indicazioni in proposito;<h:br/>
-   2. l’ammissibilità delle richieste specifiche di cui al predetto art. 23 e sulle proposte dell’ufficio toponomastica nell’espletamento del compito di cui al punto a);<h:br/>
-   3. la preferenza da accordare fra più toponimi specificamente ammessi o proposti in riferimento ad una stessa area di circolazione e a nomi di nuovi isolati o edifici. La Commissione dovrà prioritariamente esaminare le proposte di toponimo, sia specifiche che generiche, approvate con mozione o risoluzione del Consiglio Comunale.<h:br/>
-<h:br/>
-I toponimi presentati a titolo di richiesta specifica qualora non prescelti, passano fra le richieste generiche e sono trattati alla stessa stregua, inseriti cioè nell’elenco di toponimi idonei per area.<h:br/>
-Nei casi di particolare urgenza l’ufficio toponomastica, informato il Presidente della commissione, può ricorrere nella predisposizione di proposte di deliberazione all’elenco dei toponimi approvati senza destinazione specifica.<h:br/>
-La competenza circa la tipologia delle aree di circolazione da denominare (se vie, viali, piazze, larghi etc.) è riservata al Servizio Statistica - ufficio toponomastica.<h:br/>
-Per ogni toponimo approvato deve essere indicato il luogo o area di circolazione, previa ricerca storica sui toponimi preesistenti, in cui gli stessi potranno trovare applicazione.<h:br/>
-<h:br/>
-Art.16<h:br/>
-Il parere della Commissione in materia di toponomastica è obbligatorio ed è dato di norma a maggioranza. Il parere deve essere unanime:<h:br/>
-<h:br/>
-    * per l’assegnazione di toponimi da nominativi di persone decedute da meno di dieci anni, fatti salvi quelli dei Sindaci deceduti per il servizio reso alla città in qualità di primo cittadino;<h:br/>
-    * per cambiamenti di denominazione di aree di circolazione;<h:br/>
-    * per denominazioni rispetto alle quali l’ufficio toponomastica abbia evidenziato difficoltà di pronuncia, di ortografia o di comprensione;<h:br/>
-    * per casi di quasi-omonimia con altre denominazioni esistenti.<h:br/>
-<h:br/>
-Art.17<h:br/>
-In tutti i casi in cui la Commissione, pur non avendo accolto la richiesta di denominazione di aree, si esprime nel senso di ritenere opportuna l'apposizione di una iscrizione commemorativa, ferma restando la procedura di cui all’art. 20, Il Servizio Statistica - ufficio toponomastica ne dà comunicazione agli interessati, rendendo loro noto, per estratto, il verbale che reca il predetto parere; il fatto che la Commissione ritenga più opportuna una lapide non obbliga l’Amministrazione a sostenere le spese ed il richiedente dovrà attivarsi in base all’art. 25.<h:br/>
-<h:br/>
-Art.18<h:br/>
-Anche in materia di iscrizioni commemorative, nei casi di cui all’art. 20, il parere della Commissione è obbligatorio. Esso peraltro è vincolante unicamente per quanto attiene al testo delle iscrizioni medesime.<h:br/>
-<h:br/>
-Art.19<h:br/>
-Il parere della Commissione per la Toponomastica è obbligatorio anche in merito alla tutela dei toponimi dei luoghi, rispetto ai quali la commissione si attiene ai toponimi antichi, e della toponomastica orale, sulla base sia di prove documentarie che testimoniali; a tale scopo le denominazioni delle aree di nuova edificazione, ancorché private, dovranno essere sottoposte al parere della Commissione.<h:br/>
-<h:br/>
-Art.20<h:br/>
-La competenza di cui all’art.18 della Commissione Consultiva per la Toponomastica e le Iscrizioni Commemorative, per quanto attiene a queste ultime, si riferisce per materia specificamente a:<h:br/>
-<h:br/>
-    * iscrizioni lapidarie da apporre a iniziativa di privati, o di Enti diversi dal Comune, in luoghi pubblici o aperti al pubblico o da esso immediatamente leggibili;<h:br/>
-    * iscrizioni lapidarie da apporre a cura e spese del Comune.<h:br/>
-<h:br/>
-La predetta competenza non si limita all’approvazione del testo delle iscrizioni lapidarie, ma si estende anche al luogo della loro apposizione ed alle loro caratteristiche materiali sulla scorta di quanto riferisce in proposito il Servizio Statistica - ufficio toponomastica.<h:br/>
-<h:br/>
-Art.21<h:br/>
-Il Servizio statistica – ufficio toponomastica deve garantire il collegamento fra la Commissione, gli altri organi comunali e uffici comunali per la realizzazione di tutto ciò che è ritenuto opportuno. Ogni settore comunale che predisponga atti o provvedimenti che abbiano conseguenze toponomastiche, è tenuto ad inviare copia degli stessi all’ufficio predetto.<h:br/>
-<h:br/>
-Art.22<h:br/>
-Gli atti attuativi delle previsioni di Piano Regolatore Generale, sue varianti o piani particolareggiati che riguardino nuove edificazioni nonché aree di circolazione in fieri o in corso di modifica del tracciato, devono essere trasmesse, unitamente alla cartografia tecnica relativa, al Servizio Statistica - Ufficio Toponomastica, affinché si predisponga alla denominazione di dette aree anche previa ricerca storica, sopralluogo e consultazione dei documenti e di chiunque conservi la memoria sulla toponomastica dei luoghi interessati.<h:br/>
-Le risultanze dell’attività della Commissione Toponomastica saranno, oltre che inserite nella proposta di delibera di denominazione, comunicate ufficialmente alla Commissione Edilizia e ai cittadini direttamente interessati a cura del Servizio statistica – ufficio toponomastica.<h:br/>
-<h:br/>
-Art.23<h:br/>
-Le richieste di denominazione, per qualsiasi tipo di area di circolazione, possono essere avanzate da ciascun membro della Commissione Toponomastica, Consiglieri Comunali, Consigli di Quartiere, Enti pubblici o privati, Associazioni a carattere nazionale o locale, partiti politici, istituti, circoli, organizzazioni sindacali, comitati e almeno 50 cittadini.<h:br/>
-Le richieste medesime possono essere generiche, ossia con la sola indicazione del toponimo, lasciando al Comune di determinare a quale area di circolazione attribuirlo, oppure specifiche se comprensive di tale determinazione.<h:br/>
-In ambedue i casi, chiunque avanzi proposte di denominazione deve presentare, oltre alla richiesta, anche una esauriente relazione che spieghi i motivi per cui si vuole intitolare un’area e illustri gli elementi che avvalorano l’accoglimento dell’istanza tenendo sempre presenti i criteri di cui all’art. 11.<h:br/>
-Le presentazioni di tali istanze non fanno sorgere nei confronti del cittadino alcun diritto tutelato dalla legge 241/90 e successive modificazioni ed integrazioni; la commissione può richiedere supplementi di documentazione o rigettare in toto la richiesta che non può essere discussa nuovamente per almeno tre anni successivi al rigetto.<h:br/>
-<h:br/>
-Art.24<h:br/>
-L’Amministrazione sente il parere della Commissione Consultiva per la Toponomastica e le Iscrizioni Commemorative anche circa la denominazione di scuole, impianti sportivi, giardini, edifici, lottizzazioni e, in generale, località, strutture e aree diverse da quelle di circolazione pubblica.<h:br/>
-<h:br/>
-Art.25<h:br/>
-Chi propone le iscrizioni lapidarie deve accludere nella richiesta l’autorizzazione scritta del proprietario dell’immobile e l’autorizzazione, per gli immobili sottoposti ai vincoli storico paesaggistici, alla Sovrintendenza ai Monumenti e garantire la copertura finanziaria per la predisposizione e messa in opera, nonché la stretta osservanza dei dettati della Commissione per quanto attiene al testo.<h:br/>
-<h:br/>
-Art.26<h:br/>
-In ogni caso l’approvazione della Commissione non sostituisce altre autorizzazioni o permessi comunali, quando questi siano necessari per altro titolo e per altre norme.<h:br/>
-<h:br/>
-Art.27<h:br/>
-Nel caso in cui la Commissione ravvisi l’opportunità di ricordare in modo particolare personaggi o avvenimenti legati fisicamente a edifici particolari la stessa ha facoltà di raccomandare all’Amministrazione l’apposizione di determinate iscrizioni lapidarie a spese del Comune.<h:br/>
-<h:br/>
-Art.28<h:br/>
-Per tutto quanto non previsto espressamente dal presente regolamento, si rinvia alla legislazione in materia ed alle istruzioni dell’Istituto Nazionale di Statistica (ISTAT).<h:br/>
-<h:br/>
-Art. 29<h:br/>
-In via transitoria, fino alla pubblicazione della nuova edizione dello Stradario Storico Amministrativo, resta insediata l’apposita Sottocommissione nominata prima dell’entrata in vigore del presente regolamento, integrata con ulteriori componenti, secondo le determinazioni che saranno assunte dalla Commissione.<h:br/>
-Il Servizio Statistica – ufficio toponomastica deve provvedere, anche in relazione ai toponimi approvati precedentemente all’entrata in vigore del presente regolamento, ad individuare e proporre alla Commissione la migliore localizzazione territoriale delle denominazioni approvate, secondo i criteri del presente regolamento.<h:br/>
-<h:br/>
-<h:br/>
-<h:br/>
-<h:br/>
-<h:br/>
-<h:br/>
-</virgolette></mod>
-          </corpo>
-        </comma>
-      </articolo>
-    </articolato>
-    <formulafinale/>
-    <conclusione/>
-  </DocumentoNIR>
-</NIR>
+	<!DOCTYPE NIR SYSTEM 'nirflessibile.dtd'>
+	<NIR tipo="originale" xmlns="http://www.normeinrete.it/nir/2.2/" xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<DocumentoNIR nome="Delibera">
+			<meta>
+				<descrittori>
+					<pubblicazione norm="" num="" tipo="" />
+					<entratainvigore norm="20030310" />
+					<redazione id="red1" nome="" norm="" />
+					<urn valore="urn:nir:autorita:provvedimento:" />
+				</descrittori>
+				<proprietario xlink:type="simple">
+					<pacto:meta xmlns:pacto="http://www.comune.fi.it/deliberazione/1.0">
+						<pacto:nproposta />
+						<pacto:ufficio>0002. Ufficio del Consiglio </pacto:ufficio>
+						<pacto:relatore />
+					</pacto:meta>
+				</proprietario>
+			</meta>
+			<intestazione>
+				<emanante>COMUNE DI FIRENZE ___________________________ </emanante>
+				<tipoDoc>DELIBERA </tipoDoc>
+				Data stesura atto......: 
+				<dataDoc norm="20030305">05/03/2003</dataDoc>
+				In Rete civica dal: 04/04/2003 Protocollo interno ufficio: 00006 Numero proposta di delibera: 00135 Num. approvazione.: 
+				<numDoc>00024-Consiglio</numDoc>
+				Data approvazione delibera: 10/03/2003 Direzione proponente: 0002. Ufficio del Consiglio 
+				<titoloDoc>OGGETTO: Approvazione nuovo “Regolamento per la Toponomastica”. - </titoloDoc>
+				OMISSIS - 
+			</intestazione>
+			<formulainiziale>
+				<preambolo>
+					<h:p>I L C O N S I G L I O Visto il “Regolamento per la Toponomastica”, esecutivo ai sensi di legge, approvato con propria deliberazione n. 133/57 del 28.02.1994;</h:p>
+					<h:p>Ritenuto di riconoscere all’organo consiliare, rappresentativo dell’intera comunità, un ruolo più fattivo in materia di toponomastica, nel rispetto della normativa vigente, oltre a disciplinare alcuni aspetti della materia non previsti dall’attuale regolamento;</h:p>
+					<h:p>Vista la proposta di regolamento allegata che risponde pienamente alle esigenze summenzionate;</h:p>
+					<h:p>Ritenuto di accogliere la suddetta proposta di regolamento;</h:p>
+					<h:p>Visto il parere in ordine alla sola regolarità tecnica del responsabile del servizio interessato ai sensi dell’art. 49 D. Legisl.vo n. 267/2000 “Testo unico delle leggi sull’ordinamento degli enti locali”;</h:p>
+					<h:p>Visti gli artt. 7 e 42 del D.Lgs. 267/2000;</h:p>
+					<h:p>Visto l’art. 7 dello Statuto Comunale;</h:p>
+					<h:p>D E L I B E R A 1. di approvare il nuovo “Regolamento per la Toponomastica”, allegato al presente provvedimento quale parte integrante e sostanziale;</h:p>
+					<h:p>2. di abrogare il “Regolamento per la Toponomastica” approvato con propria deliberazione n.133/57 del 28.02.1994, a decorrere alla esecutività del nuovo Regolamento.</h:p>
+					<h:p>Si da corso alla votazione dalla quale risulta che LA PROPOSTA E’ APPROVATA ALL’UNANIMITA’.</h:p>
+				</preambolo>
+			</formulainiziale>
+			<formulafinale />
+			<conclusione />
+			<annessi>
+				<annesso id="ann1">
+					<testata>
+						<denAnnesso>REGOLAMENTO</denAnnesso>
+					</testata>
+					<DocumentoNIR nome="Delibera">
+						<meta>
+							<descrittori>
+								<redazione id="red2" nome="" norm="" />
+								<urn valore="urn:nir:autorita:provvedimento::regolamento" />
+							</descrittori>
+						</meta>
+						<intestazione />
+						<formulainiziale />
+						<articolato>
+							<articolo id="ann1-art1">
+								<num>Art.1 </num>
+								<comma id="ann1-art1-com1">
+									<num />
+									<corpo>I provvedimenti concernenti la denominazione di aree di circolazione e di luoghi in genere sono adottati della Giunta Comunale nel rispetto delle vigenti disposizioni di legge in materia e del presente regolamento. </corpo>
+								</comma>
+							</articolo>
+							<articolo id="ann1-art2">
+								<num>Art. 2 </num>
+								<comma id="ann1-art2-com1">
+									<num />
+									<corpo>LAmministrazione Comunale per ladozione dei provvedimenti di cui al precedente articolo si avvale, come organo consultivo, della Commissione Consultiva per la Toponomastica e le Iscrizioni Commemorative. </corpo>
+								</comma>
+							</articolo>
+							<articolo id="ann1-art3">
+								<num>Art. 3 </num>
+								<comma id="ann1-art3-com1">
+									<num />
+									<corpo>Nel provvedimento deliberativo di cui allart. 1 deve essere menzionato il parere espresso dalla Commissione Consultiva per la Toponomastica e le Iscrizioni Commemorative e deve essere motivata leventuale decisione in difformit� col parere medesimo. </corpo>
+								</comma>
+							</articolo>
+							<articolo id="ann1-art4">
+								<num>Art. 4 </num>
+								<comma id="ann1-art4-com1">
+									<num />
+									<corpo>In casi di particolare urgenza, lAssessore al ramo pu� chiedere la discussione urgente nella Giunta Comunale su una proposta di deliberazione predisposta dal Servizio Statistica - ufficio toponomastica. </corpo>
+								</comma>
+							</articolo>
+							<articolo id="ann1-art5">
+								<num>Art.5 </num>
+								<comma id="ann1-art5-com1">
+									<num />
+									<corpo>Nellespressione dei pareri la Commissione Toponomastica deve tutelare la storia toponomastica di Firenze e del suo territorio e curare che le nuove denominazioni rispettino lidentit� culturale e civile, antica e moderna, della citt�, nonch� i toponimi tradizionali, storici o formatisi spontaneamente nella tradizione orale. E compito della Commissione suggerire ed indicare allAmministrazione comunale tutte le modalit� toponomastiche diverse dalla normale segnaletica stradale, e regolate da apposita normativa, che riguardino aree di circolazione e luoghi significativi della citt�. Il parere della Commissione sulla materia inerente il presente regolamento prevale su altri espressi eventualmente da altri organi, purch� non stabiliti per legge. </corpo>
+								</comma>
+							</articolo>
+							<articolo id="ann1-art6">
+								<num>Art.6 </num>
+								<comma id="ann1-art6-com1">
+									<num />
+									<corpo>La Commissione � composta dai consiglieri comunali componenti la Commissione consiliare Cultura, da cinque esperti nominati dal Sindaco e dal Dirigente pro tempore del Servizio Statistica. Il Segretario della Commissione � nominato dal Dirigente tra i dipendenti in servizio presso lufficio toponomastica. I cinque esperti devono, per professione, per incarichi istituzionali, per chiara fama, essere esperti di storia e cultura fiorentina (segnatamente per i periodi dal medioevo ad oggi), di architettura, di topografia fiorentina, di glottologia, di musica, di scienze matematiche fisiche e naturali, di diritto, di scienze umane, di archivistica, o di altra materia la cui conoscenza possa al meglio contribuire ai compiti assegnati alla commissione. Alle riunioni partecipano, come membri esterni, esperti designati da ogni Quartiere, nei casi che interessano il territorio di un Quartiere. Non sono membri della Commissione eventuali esperti di argomenti specifici invitati formalmente dal Presidente della Commissione a partecipare a determinate riunioni. Alle riunioni della Commissione sono invitati permanenti il Sindaco e lAssessore delegato. </corpo>
+								</comma>
+							</articolo>
+							<articolo id="ann1-art7">
+								<num>Art. 7 </num>
+								<comma id="ann1-art7-com1">
+									<num />
+									<corpo>LAmministrazione Comunale garantisce nel proprio bilancio idonee risorse per far fronte alle esigenze connesse alle attivit� previste nel presente regolamento. </corpo>
+								</comma>
+							</articolo>
+							<articolo id="ann1-art8">
+								<num>Art. 8 </num>
+								<comma id="ann1-art8-com1">
+									<num />
+									<corpo>Ai membri esperti della Commissione � corrisposto un gettone di presenza pari a quello spettante ai membri delle commissioni consiliari. </corpo>
+								</comma>
+							</articolo>
+							<articolo id="ann1-art9">
+								<num>Art.9 </num>
+								<comma id="ann1-art9-com1">
+									<num />
+									<corpo>La Commissione ha la stessa durata del Consiglio Comunale. La Commissione � insediata dal Sindaco entro 45 giorni dallinsediamento del Consiglio Comunale. Il Presidente e il Vicepresidente della Commissione sono nominati nella prima seduta, rispettivamente tra i membri esperti nominati dal Sindaco e tra i membri consiglieri comunali. Per la validit� delle sedute delle Commissioni � richiesta la presenza di almeno un terzo dei componenti. Le Commissioni sono convocate dal Presidente, almeno 15 giorni prima della seduta, salvo i casi di urgenza. La convocazione deve essere inviata presso il domicilio indicato dai componenti, anche per posta elettronica. In caso di cessazione dalla carica del Presidente per qualsiasi causa, il Vicepresidente provvede alla convocazione della Commissione entro i trenta (30) giorni successivi alla cessazione per lelezione del nuovo Presidente. </corpo>
+								</comma>
+							</articolo>
+							<articolo id="ann1-art10">
+								<num>Art. 10 </num>
+								<comma id="ann1-art10-com1">
+									<num />
+									<corpo>La sede della Commissione � presso gli uffici del Servizio Statistica. La Commissione si avvale delle prestazioni del Servizio Statistica ufficio toponomastica e, per quanto necessario, degli altri uffici comunali. I suddetti uffici sono tenuti a prestare la loro opera, per quanto di competenza, ed a presenziare con il loro Dirigente o delegato ai lavori della commissione quando richiesto. </corpo>
+								</comma>
+							</articolo>
+							<articolo id="ann1-art11">
+								<num>Art.11 </num>
+								<comma id="ann1-art11-com1">
+									<num />
+									<alinea>Criteri informatori per la denominazione di aree di circolazione e di luoghi sono: </alinea>
+									<el id="ann1-art11-com1-leta">
+										<num>a.</num>
+										<corpo>che il toponimo, indichi esso persone, localit� od altro, sia idoneo, sotto ogni aspetto, ad una funzione toponomastica e non sia motivato esclusivamente da fini onorifici; </corpo>
+									</el>
+									<el id="ann1-art11-com1-letb">
+										<num>b.</num>
+										<corpo>che prima di ogni attribuzione di nuovo toponimo sia rispettata la toponomastica preesistente nei documenti storici o nella memoria e, per le nuove aree di circolazione, sia verificata lesistenza di eventuali denominazioni spontanee nate fra gli abitanti della zona, anche se ci� non avr� valore vincolante per il parere della Commissione; </corpo>
+									</el>
+									<el id="ann1-art11-com1-letc">
+										<num>c.</num>
+										<corpo>che i nuovi nomi da assegnare siano strettamente legati alla citt� ed al suo territorio o di tale rilevanza nazionale o internazionale per cui la scelta della denominazione sia indicativa dellinteresse della comunit� fiorentina; </corpo>
+									</el>
+									<el id="ann1-art11-com1-letd">
+										<num>d.</num>
+										<corpo>non vengano apportate modifiche di nomi ad aree di circolazione gi� esistenti, al fine di non variare lassetto territoriale gi� valido ai fini toponomastici e storici e non apportare disagi ai cittadini ivi residenti; </corpo>
+									</el>
+									<el id="ann1-art11-com1-lete">
+										<num>e.</num>
+										<corpo>nellesame dei toponimi di cui alla lettera c. sar� data priorit� ai nominativi riguardanti le persone decedute che hanno ricoperto la carica di Sindaco della citt� di Firenze. La disposizione di cui al punto d) non � operante nel caso di parziali modifiche a parti di aree di circolazione che successivamente alla prima denominazione abbiano acquisito la caratteristica di area autonoma o che creino problemi di individuazione per i cittadini. Altre deroghe al punto d), che comunque escludano i toponimi di valore storico, dovranno essere ampiamente motivate; � possibile mediante cartelli aggiuntivi, commemorare antiche e popolari denominazioni senza variare la toponomastica attuale. Nel caso di variazioni dei toponimi ad aree di circolazione esistenti, il Servizio Statistica Ufficio Toponomastica-, una volta esecutiva la relativa deliberazione informa i cittadini residenti e le attivit� economiche interessate dando loro tutti gli elementi per tutti gli adeguamenti del caso. In questo caso lapposizione delle targhette indicanti i nuovi numeri civici � a carico dellAmministrazione Comunale in deroga a quanto disposto dalla Legge n�1228 del 24.12.1954 e successivo Regolamento anagrafico della popolazione residente approvato con Decreto n�223 del 30.5.1989 dal Presidente della Repubblica. </corpo>
+									</el>
+								</comma>
+							</articolo>
+							<articolo id="ann1-art12">
+								<num>Art. 12 </num>
+								<comma id="ann1-art12-com1">
+									<num />
+									<corpo>La direzione delle aree di circolazione �: per quelle parallele al fiume Armo, da monte a valle; per quelle trasversali e poste sulle riva destra, dallArno verso nord e per quelle poste sulla riva sinistra dallArno verso sud. Per le aree di circolazione tipo piazza dal punto pi� vicino allArno posto a monte, in senso antiorario, per quelle poste sulla riva destra e, in senso orario, per quelle poste sulla riva sinistra. Salvo quanto disposto dal nuovo codice della strada le targhe toponomastiche dovranno riportare per esteso lonomastica del toponimo. Le targhe, allinterno della cerchia dei viali e in alcune zone di particolare pregio paesaggistico, dovranno essere di marmo o ceramica affisse a muro o su palina. </corpo>
+								</comma>
+							</articolo>
+							<articolo id="ann1-art13">
+								<num>Art.13 </num>
+								<comma id="ann1-art13-com1">
+									<num />
+									<alinea>Le aperture poste sulle aree di circolazione sono contraddistinte da numerazione civica nera. Lattuale numerazione civica rossa resta valida fino ad esaurimento. I criteri per la numerazione civica delle aperture poste nelle aree di circolazione sono: </alinea>
+									<el id="ann1-art13-com1-leta">
+										<num>a.</num>
+										<corpo>nelle tipologie via, viale, ecc. le aperture sono contraddistinte da numerazione civica continua, dispari sul lato sinistro, pari sul lato destro; </corpo>
+									</el>
+									<el id="ann1-art13-com1-letb">
+										<num>b.</num>
+										<corpo>nelle tipologie piazza, largo, ecc. la numerazione sar� continua. Linizio della numerazione civica far� riferimento ai criteri indicati per le direzioni delle aree di circolazione. Quando si rende necessario, le aperture su strada potranno essere contraddistinte da un numero con laggiunta di un esponente alfabetico. Le aperture poste allinterno di quelle su strada e non direttamente accessibili, saranno contraddistinte con il numero dellapertura su strada con laggiunta di un esponente numerico. </corpo>
+									</el>
+								</comma>
+							</articolo>
+							<articolo id="ann1-art14">
+								<num>Art.14 </num>
+								<comma id="ann1-art14-com1">
+									<num />
+									<corpo>La Commissione pu� costituire nel suo seno delle sottocommissioni per casi particolari, per istruzioni pratiche, per studi, per stesura di testi; pu� incaricare uno dei suoi membri di svolgere incombenze ben definite, pu� creare dei gruppi di lavoro senza spese per lAmministrazione, per svolgere lavori ben definiti di interesse toponomastico fiorentino. </corpo>
+								</comma>
+							</articolo>
+							<articolo id="ann1-art15">
+								<num>Art.15 </num>
+								<comma id="ann1-art15-com1">
+									<num />
+									<alinea>La Commissione si pronuncia su: </alinea>
+									<el id="ann1-art15-com1-leta">
+										<num>a.</num>
+										<corpo>le richieste generiche di cui allart. 23 e, se le ritiene ammissibili, da incarico al Servizio Statistica - ufficio toponomastica di reperire idonee aree di circolazione, eventualmente formulando indicazioni in proposito; </corpo>
+									</el>
+									<el id="ann1-art15-com1-letb">
+										<num>b.</num>
+										<corpo>lammissibilit� delle richieste specifiche di cui al predetto art. 23 e sulle proposte dellufficio toponomastica nellespletamento del compito di cui al punto a); </corpo>
+									</el>
+									<el id="ann1-art15-com1-letc">
+										<num>c.</num>
+										<corpo>la preferenza da accordare fra pi� toponimi specificamente ammessi o proposti in riferimento ad una stessa area di circolazione e a nomi di nuovi isolati o edifici. La Commissione dovr� prioritariamente esaminare le proposte di toponimo, sia specifiche che generiche, approvate con mozione o risoluzione del Consiglio Comunale.I toponimi presentati a titolo di richiesta specifica qualora non prescelti, passano fra le richieste generiche e sono trattati alla stessa stregua, inseriti cio� nellelenco di toponimi idonei per area. Nei casi di particolare urgenza lufficio toponomastica, informato il Presidente della commissione, pu� ricorrere nella predisposizione di proposte di deliberazione allelenco dei toponimi approvati senza destinazione specifica. La competenza circa la tipologia delle aree di circolazione da denominare (se vie, viali, piazze, larghi etc.) � riservata al Servizio Statistica - ufficio toponomastica.Per ogni toponimo approvato deve essere indicato il luogo o area di circolazione, previa ricerca storica sui toponimi preesistenti, in cui gli stessi potranno trovare applicazione. </corpo>
+									</el>
+								</comma>
+							</articolo>
+							<articolo id="ann1-art16">
+								<num>Art.16 </num>
+								<comma id="ann1-art16-com1">
+									<num />
+									<corpo>Il parere della Commissione in materia di toponomastica � obbligatorio ed � dato di norma a maggioranza. Il parere deve essere unanime: - per lassegnazione di toponimi da nominativi di persone decedute da meno di dieci anni, fatti salvi quelli dei Sindaci deceduti per il servizio reso alla citt� in qualit� di primo cittadino; - per cambiamenti di denominazione di aree di circolazione; - per denominazioni rispetto alle quali lufficio toponomastica abbia evidenziato difficolt� di pronuncia, di ortografia o di comprensione; - per casi di quasi-omonimia con altre denominazioni esistenti. </corpo>
+								</comma>
+							</articolo>
+							<articolo id="ann1-art17">
+								<num>Art.17 </num>
+								<comma id="ann1-art17-com1">
+									<num />
+									<corpo>In tutti i casi in cui la Commissione, pur non avendo accolto la richiesta di denominazione di aree, si esprime nel senso di ritenere opportuna l'apposizione di una iscrizione commemorativa, ferma restando la procedura di cui allart. 20, Il Servizio Statistica - ufficio toponomastica ne d� comunicazione agli interessati, rendendo loro noto, per estratto, il verbale che reca il predetto parere; il fatto che la Commissione ritenga pi� opportuna una lapide non obbliga lAmministrazione a sostenere le spese ed il richiedente dovr� attivarsi in base allart. 25. </corpo>
+								</comma>
+							</articolo>
+							<articolo id="ann1-art18">
+								<num>Art.18 </num>
+								<comma id="ann1-art18-com1">
+									<num />
+									<corpo>Anche in materia di iscrizioni commemorative, nei casi di cui allart. 20, il parere della Commissione � obbligatorio. Esso peraltro � vincolante unicamente per quanto attiene al testo delle iscrizioni medesime. </corpo>
+								</comma>
+							</articolo>
+							<articolo id="ann1-art19">
+								<num>Art.19 </num>
+								<comma id="ann1-art19-com1">
+									<num />
+									<corpo>Il parere della Commissione per la Toponomastica � obbligatorio anche in merito alla tutela dei toponimi dei luoghi, rispetto ai quali la commissione si attiene ai toponimi antichi, e della toponomastica orale, sulla base sia di prove documentarie che testimoniali; a tale scopo le denominazioni delle aree di nuova edificazione, ancorch� private, dovranno essere sottoposte al parere della Commissione. </corpo>
+								</comma>
+							</articolo>
+							<articolo id="ann1-art20">
+								<num>Art.20 </num>
+								<comma id="ann1-art20-com1">
+									<num />
+									<corpo>La competenza di cui allart.18 della Commissione Consultiva per la Toponomastica e le Iscrizioni Commemorative, per quanto attiene a queste ultime, si riferisce per materia specificamente a: - iscrizioni lapidarie da apporre a iniziativa di privati, o di Enti diversi dal Comune, in luoghi pubblici o aperti al pubblico o da esso immediatamente leggibili; - iscrizioni lapidarie da apporre a cura e spese del Comune. La predetta competenza non si limita allapprovazione del testo delle iscrizioni lapidarie, ma si estende anche al luogo della loro apposizione ed alle loro caratteristiche materiali sulla scorta di quanto riferisce in proposito il Servizio Statistica - ufficio toponomastica. </corpo>
+								</comma>
+							</articolo>
+							<articolo id="ann1-art21">
+								<num>Art.21 </num>
+								<comma id="ann1-art21-com1">
+									<num />
+									<corpo>Il Servizio statistica ufficio toponomastica deve garantire il collegamento fra la Commissione, gli altri organi comunali e uffici comunali per la realizzazione di tutto ci� che � ritenuto opportuno. Ogni settore comunale che predisponga atti o provvedimenti che abbiano conseguenze toponomastiche, � tenuto ad inviare copia degli stessi allufficio predetto. </corpo>
+								</comma>
+							</articolo>
+							<articolo id="ann1-art22">
+								<num>Art.22 </num>
+								<comma id="ann1-art22-com1">
+									<num />
+									<corpo>Gli atti attuativi delle previsioni di Piano Regolatore Generale, sue varianti o piani particolareggiati che riguardino nuove edificazioni nonch� aree di circolazione in fieri o in corso di modifica del tracciato, devono essere trasmesse, unitamente alla cartografia tecnica relativa, al Servizio Statistica - Ufficio Toponomastica, affinch� si predisponga alla denominazione di dette aree anche previa ricerca storica, sopralluogo e consultazione dei documenti e di chiunque conservi la memoria sulla toponomastica dei luoghi interessati. Le risultanze dellattivit� della Commissione Toponomastica saranno, oltre che inserite nella proposta di delibera di denominazione, comunicate ufficialmente alla Commissione Edilizia e ai cittadini direttamente interessati a cura del Servizio statistica ufficio toponomastica. </corpo>
+								</comma>
+							</articolo>
+							<articolo id="ann1-art23">
+								<num>Art.23 </num>
+								<comma id="ann1-art23-com1">
+									<num />
+									<corpo>Le richieste di denominazione, per qualsiasi tipo di area di circolazione, possono essere avanzate da ciascun membro della Commissione Toponomastica, Consiglieri Comunali, Consigli di Quartiere, Enti pubblici o privati, Associazioni a carattere nazionale o locale, partiti politici, istituti, circoli, organizzazioni sindacali, comitati e almeno 50 cittadini. Le richieste medesime possono essere generiche, ossia con la sola indicazione del toponimo, lasciando al Comune di determinare a quale area di circolazione attribuirlo, oppure specifiche se comprensive di tale determinazione. In ambedue i casi, chiunque avanzi proposte di denominazione deve presentare, oltre alla richiesta, anche una esauriente relazione che spieghi i motivi per cui si vuole intitolare unarea e illustri gli elementi che avvalorano laccoglimento dellistanza tenendo sempre presenti i criteri di cui allart. 11. Le presentazioni di tali istanze non fanno sorgere nei confronti del cittadino alcun diritto tutelato dalla legge 241/90 e successive modificazioni ed integrazioni; la commissione pu� richiedere supplementi di documentazione o rigettare in toto la richiesta che non pu� essere discussa nuovamente per almeno tre anni successivi al rigetto. </corpo>
+								</comma>
+							</articolo>
+							<articolo id="ann1-art24">
+								<num>Art.24 </num>
+								<comma id="ann1-art24-com1">
+									<num />
+									<corpo>LAmministrazione sente il parere della Commissione Consultiva per la Toponomastica e le Iscrizioni Commemorative anche circa la denominazione di scuole, impianti sportivi, giardini, edifici, lottizzazioni e, in generale, localit�, strutture e aree diverse da quelle di circolazione pubblica. </corpo>
+								</comma>
+							</articolo>
+							<articolo id="ann1-art25">
+								<num>Art.25 </num>
+								<comma id="ann1-art25-com1">
+									<num />
+									<corpo>Chi propone le iscrizioni lapidarie deve accludere nella richiesta lautorizzazione scritta del proprietario dellimmobile e lautorizzazione, per gli immobili sottoposti ai vincoli storico paesaggistici, alla Sovrintendenza ai Monumenti e garantire la copertura finanziaria per la predisposizione e messa in opera, nonch� la stretta osservanza dei dettati della Commissione per quanto attiene al testo. </corpo>
+								</comma>
+							</articolo>
+							<articolo id="ann1-art26">
+								<num>Art.26 </num>
+								<comma id="ann1-art26-com1">
+									<num />
+									<corpo>In ogni caso lapprovazione della Commissione non sostituisce altre autorizzazioni o permessi comunali, quando questi siano necessari per altro titolo e per altre norme. </corpo>
+								</comma>
+							</articolo>
+							<articolo id="ann1-art27">
+								<num>Art.27 </num>
+								<comma id="ann1-art27-com1">
+									<num />
+									<corpo>Nel caso in cui la Commissione ravvisi lopportunit� di ricordare in modo particolare personaggi o avvenimenti legati fisicamente a edifici particolari la stessa ha facolt� di raccomandare allAmministrazione lapposizione di determinate iscrizioni lapidarie a spese del Comune. </corpo>
+								</comma>
+							</articolo>
+							<articolo id="ann1-art28">
+								<num>Art.28 </num>
+								<comma id="ann1-art28-com1">
+									<num />
+									<corpo>Per tutto quanto non previsto espressamente dal presente regolamento, si rinvia alla legislazione in materia ed alle istruzioni dellIstituto Nazionale di Statistica (ISTAT). </corpo>
+								</comma>
+							</articolo>
+							<articolo id="ann1-art29">
+								<num>Art. 29 </num>
+								<comma id="ann1-art29-com1">
+									<num />
+									<corpo>In via transitoria, fino alla pubblicazione della nuova edizione dello Stradario Storico Amministrativo, resta insediata lapposita Sottocommissione nominata prima dellentrata in vigore del presente regolamento, integrata con ulteriori componenti, secondo le determinazioni che saranno assunte dalla Commissione. </corpo>
+								</comma>
+							</articolo>
+						</articolato>
+						<formulafinale />
+						<conclusione />
+					</DocumentoNIR>
+				</annesso>
+			</annessi>
+		</DocumentoNIR>
+	</NIR>
