@@ -18,8 +18,9 @@ import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamSource;
 
-import org.apache.xerces.impl.xs.opti.AttrImpl;
-import org.apache.xerces.impl.xs.opti.ElementImpl;
+import org.apache.xerces.dom.AttrImpl;
+import org.apache.xerces.dom.ElementImpl;
+
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
