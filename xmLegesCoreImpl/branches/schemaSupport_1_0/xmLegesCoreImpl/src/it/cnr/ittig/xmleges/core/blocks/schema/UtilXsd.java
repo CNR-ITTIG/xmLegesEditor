@@ -115,7 +115,7 @@ public class UtilXsd{
 				XSDElementDeclaration elemDecl = (XSDElementDeclaration)iter.next();
 				createRuleForElement(elemDecl);
 				createRuleForAttributes(elemDecl);
-				// createAlternativeContents(elemDecl);       
+				createAlternativeContents(elemDecl);       
 			}			  
 		}catch(Exception e){
 			logger.error(e.getMessage());
@@ -165,7 +165,7 @@ public class UtilXsd{
 			for (Iterator iter = allElements.iterator(); iter.hasNext(); /* no-op */){
 				XSDElementDeclaration elemDecl = (XSDElementDeclaration)iter.next();
 				createRuleForElement(elemDecl);  
-				//createAlternativeContents(elemDecl);
+				createAlternativeContents(elemDecl);
 				createRuleForAttributes(elemDecl); 
 			}
 
@@ -281,11 +281,19 @@ public class UtilXsd{
 	 * 
 	 * @param elemDecl
 	 * @return
+	 * @throws RulesManagerException 
 	 */
 	public Collection createAlternativeContents(XSDElementDeclaration elemDecl){
 
 
-		Vector contents_strings = null; //readAlternativeContents(elemDecl.getTypeDefinition());
+		Vector contents_strings=null;
+		try {
+			contents_strings = schemaRules.getAlternativeContents(elemDecl.getAliasName());
+		} catch (RulesManagerException e) {
+			// TODO Auto-generated catch block
+			System.err.println("exception in createAlternativecontents..");
+			e.printStackTrace();
+		}
 		schemaRules.alternative_contents.put(elemDecl.getQName(), contents_strings);
 
 		return contents_strings;		
