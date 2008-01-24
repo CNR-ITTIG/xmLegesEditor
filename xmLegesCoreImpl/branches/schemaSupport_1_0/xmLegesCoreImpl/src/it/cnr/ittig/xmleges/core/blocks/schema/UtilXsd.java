@@ -115,7 +115,7 @@ public class UtilXsd{
 				XSDElementDeclaration elemDecl = (XSDElementDeclaration)iter.next();
 				createRuleForElement(elemDecl);
 				createRuleForAttributes(elemDecl);
-				createAlternativeContents(elemDecl);       
+				//createAlternativeContents(elemDecl);       
 			}			  
 		}catch(Exception e){
 			logger.error(e.getMessage());
@@ -165,7 +165,7 @@ public class UtilXsd{
 			for (Iterator iter = allElements.iterator(); iter.hasNext(); /* no-op */){
 				XSDElementDeclaration elemDecl = (XSDElementDeclaration)iter.next();
 				createRuleForElement(elemDecl);  
-				createAlternativeContents(elemDecl);
+				//createAlternativeContents(elemDecl);
 				createRuleForAttributes(elemDecl); 
 			}
 
