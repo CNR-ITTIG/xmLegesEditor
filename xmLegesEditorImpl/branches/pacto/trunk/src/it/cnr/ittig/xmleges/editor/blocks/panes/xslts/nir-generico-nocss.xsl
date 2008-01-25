@@ -79,7 +79,6 @@ em {
 	text-align: center;
 	font-size: 100%;
 	margin-bottom: 30px;
-	font-weight:bold;
 }
 
 .preambolo {
