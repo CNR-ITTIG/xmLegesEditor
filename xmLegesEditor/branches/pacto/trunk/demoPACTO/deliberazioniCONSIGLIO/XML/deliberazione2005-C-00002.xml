@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="iso-8859-15"?>
+	<!DOCTYPE NIR SYSTEM 'nirflessibile.dtd'>
+	<NIR tipo="originale" xmlns="http://www.normeinrete.it/nir/2.2/" xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<DocumentoNIR nome="Delibera">
+			<meta>
+				<descrittori>
+					<pubblicazione norm="20050119" num="" tipo="" />
+					<entratainvigore norm="20050111" />
+					<redazione id="red1" nome="" norm="" />
+					<urn valore="urn:nir:comune.firenze;consiglio:deliberazione:2005-01-11;2005-c-00002" />
+					<materie vocabolario="Atti Normativi">
+						<materia valore="Imposta Comunale sugli Immobili" />
+					</materie>
+				</descrittori>
+				<proprietario xlink:type="simple">
+					<pacto:meta xmlns:pacto="http://www.pacto.it/norme/1.0">
+						<pacto:proposta anno="2004" numero="00935" />
+						<pacto:ufficio valore="Direzione Risorse finanziarie" />
+						<pacto:relatore valore="Tea Albini" />
+					</pacto:meta>
+				</proprietario>
+			</meta>
+			<intestazione>
+				<emanante>COMUNE DI FIRENZE </emanante>
+				<tipoDoc>DELIBERAZIONE DI CONSIGLIO </tipoDoc>
+				Numero: 
+				<numDoc>2005/C/00002 </numDoc>
+				Data Adozione: 
+				<dataDoc norm="20050111">11 gennaio 2005</dataDoc>
+				<titoloDoc>Oggetto: IMPOSTA COMUNALE SUGLI IMMOBILI (ICI)- Anno 2005 - Indirizzi per l'approvazione delle aliquote e delle detrazioni. </titoloDoc>
+			</intestazione>
+			<formulainiziale>
+				<preambolo>
+					<h:p>OMISSIS </h:p>
+					<h:p>IL CONSIGLIO</h:p>
+					<h:p>
+						Visto il 
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:1992-12-30;504" xlink:type="simple">Decreto Legislativo 30 dicembre 1992, n. 504</rif>
+						, istitutivo dell'Imposta Comunale sugli Immobili (ICI) e successive modifiche ed integrazioni; 
+					</h:p>
+					<h:p>
+						Visto quanto dispone il regolamento per l'applicazione dell'ICI, adottato dal Consiglio comunale ai sensi degli articoli 
+						<mrif>
+							<rif xlink:href="urn:nir:stato:decreto.legislativo:587;446#art52" xlink:type="simple">52</rif>
+							e 
+							<rif xlink:href="urn:nir:stato:decreto.legislativo:587;446#art59-com1" xlink:type="simple">59, comma 1</rif>
+						</mrif>
+						, del 
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:1997-12-15;446" xlink:type="simple">decreto legislativo 15 dicembre 1997, n. 446</rif>
+						; 
+					</h:p>
+					<h:p>
+						Vista la 
+						<rif xlink:href="urn:nir:comune.firenze;consiglio:deliberazione:2004-03-30;2004-c-00032" xlink:type="simple">deliberazione consiliare n. 2004/C/32 del 30.03.2004</rif>
+						con cui il Consiglio Comunale ha tracciato gli indirizzi per l'approvazione delle aliquote e detrazioni ICI relative all'anno d'imposta 2004 nonchè la 
+						<rif xlink:href="urn:nir:comune.firenze;giunta:deliberazione:2004-03-30;2004-g-00105" xlink:type="simple">deliberazione della Giunta Municipale n. 2004/G/105 del 30.03.2004</rif>
+						con cui venivano determinate le aliquote e le detrazioni ICI per l'anno 2004; 
+					</h:p>
+					<h:p>Atteso che la Legge Finanziaria per l'anno 2005, adottando misure sia sul sistema dei trasferimenti erariali sia su quello delle compartecipazioni ai tributi erariali con la conferma della sospensione dell'addizionale IRPEF in favore dei Comuni, causerà  oggettive difficoltà  nei bilanci delle Amministrazioni Comunali;</h:p>
+					<h:p>Considerato che, conseguentemente a siffatti interventi normativi, si produrranno minori entrate da compensare attraverso un corrispondente taglio sulle spese per i servizi ovvero attraverso una manovra fiscale alternativa che non può che prevedere, fra l'altro, un incremento del gettito base dell'I. C.I .;</h:p>
+					<h:p>
+						Verificato che un incremento del gettito base è possibile attraverso la modifica del sistema impositivo I. C.I . approvato per il 2004, eliminando le fattispecie ascrivibili all'aliquota agevolata con l'unica esclusione di quella relativa agli immobili concessi in locazione ai sensi dell' 
+						<rif xlink:href="urn:nir:stato:legge:1998;431#art2-com3" xlink:type="simple">art. 2, comma 3, della L. n. 431/1998</rif>
+						e confermando le rimanenti categorie di aliquote, ivi compresa quella maggiorata, sempre ex 
+						<rif xlink:href="urn:nir:stato:legge:1998;431" xlink:type="simple">L. n. 431/1998</rif>
+						, per le unità  immobiliari ad uso abitativo per le quali non risultino essere stati registrati contratti di locazione da almeno due anni; 
+					</h:p>
+					<h:p>Considerato, peraltro, opportuno confermare la detrazione per l'abitazione principale sia nell'importo minimo di legge sia nell'importo maggiorato per categorie di contribuenti in situazione di disagio socio- economico;</h:p>
+					<h:p>
+						Ritenuto, ai sensi e per gli effetti dell' 
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:2000-08-18;267#art42-com2-letf" xlink:type="simple">art. 42, comma 2, lettera f)</rif>
+						, e dell' 
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:2000;267#art48" xlink:type="simple">art. 48 del D. Lgs. n. 267/2000</rif>
+						, di demandare alla Giunta Comunale, tenendo presenti gli indirizzi sopra esposti, la determinazione della misura dei parametri impositivi I. C.I . (aliquote e detrazioni); 
+					</h:p>
+					<h:p>
+						Visto il 
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:2000-08-18;267" xlink:type="simple">D. Lgs. n. 267 del 18/8/00</rif>
+						&quot; Testo unico delle leggi sull'ordinamento degli enti locali&quot; e, segnatamente, l' 
+						<mrif>
+							<rif xlink:href="urn:nir:stato:decreto.legislativo:2000-08-18;267#art42-com1-letf" xlink:type="simple">art. 42, comma 1, lett. f)</rif>
+							e l' 
+							<rif xlink:href="urn:nir:stato:decreto.legislativo:2000-08-18;267#art48" xlink:type="simple">art. 48</rif>
+						</mrif>
+						; 
+					</h:p>
+					<h:p>Preso atto del parere favorevole relativo alla regolarità  tecnica del provvedimento , ai sensi e per gli effetti dell' art. 49 del richiamato &quot; Testo Unico &quot;, precisando che da questo non deriveranno riflessi contabili consistenti in impegni di spesa o diminuzioni d'entrata;</h:p>
+				</preambolo>
+			</formulainiziale>
+			<contenitore id="con1" nome="dispositivo">
+				<h:p>DELIBERA</h:p>
+				<h:p>1) - di approvare, quali indirizzi generali per le successive determinazioni della Giunta Comunale, sulla base di quanto descritto nella premessa, gli indirizzi applicativi per l'ICI relativa all'anno d'imposta 2005, nel senso di modificare il sistema impositivo prevedendo: </h:p>
+				<h:p>la fattispecie riconducibile all'abitazione principale (con la conferma della detrazione principale - nell'importo minimo di legge e nell'importo maggiorato per categorie di contribuenti in situazione di disagio socio-economico); </h:p>
+				<h:p>
+					un'unica fattispecie ascrivibile all'aliquota agevolata relativa agli immobili concessi in locazione ai - sensi dell' 
+					<rif xlink:href="urn:nir:stato:legge:1998;431#art2-com3" xlink:type="simple">art. 2, comma 3, della L. n. 431/1998</rif>
+					; 
+				</h:p>
+				<h:p>
+					la fattispecie di aliquota maggiorata, sempre ex 
+					<rif xlink:href="urn:nir:stato:legge:1998;431" xlink:type="simple">L. n. 431/1998</rif>
+					, per le unità  immobiliari ad uso - abitativo per le quali non risultino essere stati registrati contratti di locazione da almeno due anni; 
+				</h:p>
+				<h:p>la fattispecie residuale, con aliquota ordinaria, per tutte le altre unità  immobiliari; </h:p>
+				<h:p>- 2) - di stabilire che gli indirizzi sopra espressi, che vengono imposti dalla situazione contingente, siano comunque validi - a parità  di presupposti - anche per gli anni successivi, pur in mancanza di adozione di provvedimenti espressi, fino a ulteriori e diverse decisioni in merito; </h:p>
+				<h:p>
+					3) - di dare atto che a cura della Giunta Comunale, ai sensi e per gli effetti dell' art. 42, comma 2, lettera f) , e dell' 
+					<rif xlink:href="urn:nir:stato:decreto.legislativo:2000;267#art48" xlink:type="simple">art. 48 del D. Lgs. n. 267/2000</rif>
+					, verrà  determinata - con proprio atto deliberativo - la misura delle aliquote e delle detrazioni d'imposta da applicare alle fattispecie e categorie generali di cui ai punti precedenti del presente dispositivo, sulla base delle esigenze di bilancio. 
+				</h:p>
+			</contenitore>
+			<formulafinale />
+			<conclusione />
+		</DocumentoNIR>
+	</NIR>

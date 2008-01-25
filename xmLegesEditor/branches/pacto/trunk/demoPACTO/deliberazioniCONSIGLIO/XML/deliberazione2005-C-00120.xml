@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="iso-8859-15"?>
+	<!DOCTYPE NIR SYSTEM 'nirflessibile.dtd'>
+	<NIR tipo="originale" xmlns="http://www.normeinrete.it/nir/2.2/" xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<DocumentoNIR nome="Delibera">
+			<meta>
+				<descrittori>
+					<pubblicazione norm="20060103" num="" tipo="" />
+					<entratainvigore norm="20051220" />
+					<redazione id="red1" nome="" norm="" />
+					<urn valore="urn:nir:comune.firenze;consiglio:deliberazione:2005-12-20;2005-c-00120" />
+					<materie vocabolario="Atti Normativi">
+						<materia valore="Contabilità" />
+						<materia valore="Entrate Tributarie" />
+					</materie>
+				</descrittori>
+				<proprietario xlink:type="simple">
+					<pacto:meta xmlns:pacto="http://www.pacto.it/norme/1.0">
+						<pacto:proposta anno="2005" numero="01025" />
+						<pacto:ufficio valore="Direzione Risorse finanziarie" />
+						<pacto:relatore valore="Tea Albini" />
+					</pacto:meta>
+				</proprietario>
+			</meta>
+			<intestazione>
+				<emanante>COMUNE DI FIRENZE </emanante>
+				<tipoDoc>DELIBERAZIONE DI CONSIGLIO </tipoDoc>
+				Numero: 
+				<numDoc>2005/C/00120</numDoc>
+				Data Adozione: 
+				<dataDoc norm="20051220">20 dicembre 2005</dataDoc>
+				<titoloDoc>Oggetto: Approvazione bilancio annuale di previsione 2006, bilancio triennale 2006/2008 e relazione previsionale e programmatica. </titoloDoc>
+			</intestazione>
+			<formulainiziale>
+				<preambolo>
+					<h:p>-OMISSIS-</h:p>
+					<h:p>IL CONSIGLIO</h:p>
+					<h:p>
+						VISTO il 
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:2000-08-18;267" xlink:type="simple">D. Lgs. 18 agosto 2000 n. 267</rif>
+						, il quale stabilisce: 
+					</h:p>
+					<h:p>- all' art. 151 che gli Enti Locali deliberano entro il 31 dicembre il bilancio di previsione per l'anno successivo, che deve essere corredato di una relazione previsionale e programmatica e di un bilancio pluriennale di durata uguale a quello della Regione di appartenenza;</h:p>
+					<h:p>
+						- all' art. 172 che al bilancio devono essere allegati: 
+						<h:br />
+						il rendiconto deliberato del penultimo esercizio antecedente quello cui si riferisce il bilancio di previsione; 
+						<h:br />
+						le risultanze dei rendiconti o conti consolidati delle aziende speciali, consorzi, istituzioni, società  di capitali, costituite per l'esercizio di servizi pubblici, relativi al penultimo esercizio antecedente quello cui il bilancio si riferisce; 
+						<h:br />
+						la deliberazione da adottarsi annualmente prima dell'approvazione del bilancio, con la quale i comuni verificano la quantità  e qualità di aree e fabbricati da destinarsi alla residenza, alle attività produttive e terziarie, da cedere in proprietà  o in diritto di superficie; 
+						<h:br />
+						programma triennale dei lavori pubblici, di cui alla 
+						<rif xlink:href="urn:nir:stato:legge:1994;109" xlink:type="simple">legge 109/94</rif>
+						; 
+						<h:br />
+						le deliberazioni con le quali sono determinate per l'esercizio successivo le tariffe, le aliquote d'imposta e le eventuali maggiori detrazioni, le variazioni dei limiti di reddito per i tributi locali e per i servizi locali, nonchè per i servizi a domanda individuale, i tassi di copertura in percentuale del costo di gestione dei servizi stessi; 
+						<h:br />
+						la tabella relativa ai parametri di riscontro sulla situazione di deficitarietà strutturale; 
+					</h:p>
+					<h:p>
+						- VISTA la 
+						<rif xlink:href="urn:nir:stato:legge:2004;311" xlink:type="simple">legge n. 311/2004</rif>
+						(finanziaria per il 2005), la quale disciplina, all' art. 1, comma 22 , il patto di stabilità interno per gli Enti Locali, prevedendo per il 2005 un tetto per il complesso delle spese correnti ed in conto capitale, limite di spesa che per l'anno 2006 è incrementato del due per cento; 
+					</h:p>
+					<h:p>
+						PRESO ATTO dei seguenti documenti che compongono il bilancio, redatti secondo i criteri e le modalità  stabiliti nell'ordinamento finanziario contabile, di cui al 
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:2000;267" xlink:type="simple">D.lgs. 267/2000</rif>
+						: 
+						<h:br />
+						- bilancio annuale di previsione per l'esercizio 2006; 
+						<h:br />
+						- relazione previsionale e programmatica 2006/2008; 
+						<h:br />
+						- bilancio pluriennale 2006/2008; 
+					</h:p>
+					<h:p>
+						VISTI i seguenti allegati al bilancio: 
+						<h:br />
+						il rendiconto del 2004, approvato con deliberazione C.C. n. 49 del 27 giugno 2005; 
+						<h:br />
+						i bilanci delle società  partecipate dal Comune di Firenze, relativi all'anno 2004; 
+						<h:br />
+						la deliberazione Giunta Municipale n. 768 /987 del 22 novembre 2005, con la quale sono state individuate le aree PEEP da cedere in proprietà  e determinato il prezzo, ai sensi dell' 
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:2000;267#art172-com1-letc" xlink:type="simple">art. 172, comma 1, lettera c, del D.lgs. 267/2000</rif>
+						; 
+						<h:br />
+						il programma triennale dei lavori pubblici, di cui alla 
+						<rif xlink:href="urn:nir:stato:legge:1994;109" xlink:type="simple">legge n. 109/94</rif>
+						, adottato dalla Giunta con 
+						<rif xlink:href="urn:nir:comune.firenze;consiglio:delibera:2005-10-15;642" xlink:type="simple">delibera n. 642 del 15 ottobre 2005</rif>
+						e pubblicato all'Albo Pretorio dal 19 ottobre scorso; 
+						<h:br />
+						le delibere relative alle tariffe ed ai limiti di reddito per servizi locali ed i servizi a domanda individuale; 
+						<h:br />
+						la deliberazione G. M. n. 842 del 30/11/2005 con la quale sono state determinate, per l'anno 2006, le aliquote e le detrazioni dell'Imposta Comunale sugli Immobili; 
+					</h:p>
+					<h:p>VISTO, altresì l'allegato piano triennale 2006-2008 degli investimenti;</h:p>
+					<h:p>
+						DATO ATTO, come risulta dalla relazione revisionale e programmatica che il Comune di Firenze non si trova in condizioni strutturalmente deficitarie e l'indebitamento previsto rispetta le condizioni di cui all' 
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:2000;267#art204" xlink:type="simple">art. 204 del D.Lgs. 267/00</rif>
+						; 
+					</h:p>
+					<h:p>
+						DATO ATTO, inoltre, che il Fondo di Riserva ordinario, previsto tra le spese di parte corrente, è costituito nei limiti di cui all' 
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:2000;267#art166" xlink:type="simple">art. 166 del D.Lgs. 267/2000</rif>
+						; 
+					</h:p>
+					<h:p>
+						VISTO il parere sulla regolarità  tecnica e contabile del presente provvedimento, ai sensi dell' 
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:2000;267#art153" xlink:type="simple">art.153 del D.Lgs. 267/2000</rif>
+						, formante parte integrante al presente provvedimento; 
+					</h:p>
+					<h:p>
+						VISTO il parere espresso dal Collegio dei Sindaci Revisori in ordine a quanto previsto all' 
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:2000;267#art239" xlink:type="simple">art. 239 del D.Lgs 267/2000</rif>
+						, ed all' art. 115 del vigente 
+						<rif xlink:href="urn:nir:comune.firenze:statuto:" xlink:type="simple">Statuto</rif>
+						Comunale; 
+					</h:p>
+					<h:p>
+						PRESO ATTO che è stato richiesto il parere di tutti i Consigli di Quartiere, ai sensi dell' 
+						<rif xlink:href="urn:nir:comune.firenze:statuto:#art49" xlink:type="simple">art. 49 dello Statuto</rif>
+						e dell' art. 27 del 
+						<rif xlink:href="urn:nir:comune.firenze:regolamento;consigli.quartiere:" xlink:type="simple">Regolamento dei C.d.Q</rif>
+						.; 
+					</h:p>
+					<h:p>
+						CONSIDERATO che i Consigli di Quartiere, in ordine alla richiesta di cui sopra si sono espressi nel seguente modo: 
+						<h:br />
+						Consiglio di Quartiere n. 1 : parere favorevole con richiesta di emendamento; 
+						<h:br />
+						Consiglio di Quartiere n. 2 : parere favorevole con osservazione; 
+						<h:br />
+						Consiglio di Quartiere n. 3 : parere favorevole con mozioni; 
+						<h:br />
+						Consiglio di Quartiere n. 4 : parere favorevole; 
+						<h:br />
+						Consiglio di Quartiere n. 5 : parere favorevole; 
+					</h:p>
+					<h:p>
+						VISTI lo 
+						<rif xlink:href="urn:nir:comune.firenze:statuto:" xlink:type="simple">Statuto</rif>
+						Comunale ed il 
+						<rif xlink:href="urn:nir:comune.firenze:regolamento.contabilita:" xlink:type="simple">Regolamento di Contabilità</rif>
+						 ; 
+					</h:p>
+				</preambolo>
+			</formulainiziale>
+			<contenitore id="con1" nome="dispositivo">
+				<h:p>DELIBERA</h:p>
+				<h:p>1. DI APPROVARE il bilancio di previsione per l'esercizio 2006, parte integrante del presente provvedimento, che comprende le seguenti risultanze finali: </h:p>
+				<h:p>
+					ENTRATA 
+					<h:br />
+					Tit. 1 Entrate Tributarie 243.632.515,00 
+					<h:br />
+					Tit. 2 Entrate deriv. da contrib. e trasf. Correnti 90.827.492,96 
+					<h:br />
+					Tit. 3 Entrate extratributarie 200.308.795,72 
+					<h:br />
+					Tit. 4 Entrate deriv. da alienaz., da trasf. di capitali 89.077.233,50 
+					<h:br />
+					Tit. 5 Entrate derivanti da accensioni di prestiti 207.121.790,86 
+					<h:br />
+					Tit. 6 Entrate da servizi per conto terzi 203.638.000,00 
+					<h:br />
+					--------------------- 
+					<h:br />
+					TOTALE GENERALE ENTRATA 1.034.605.828,04 
+					<h:br />
+					SPESA 
+					<h:br />
+					Tit. 1 Spese Correnti 484.052.867,68 
+					<h:br />
+					Tit. 2 Spese in conto capitale 120.395.106,24 
+					<h:br />
+					Tit. 3 Spese per rimborso prestiti 226.519.854,12 
+					<h:br />
+					Tit. 4 Spese per servizi per conto terzi 203.638.000,00 
+					<h:br />
+					------------------------- 
+					<h:br />
+					TOTALE GENERALE SPESA 1.034.605.828,04 
+					<h:br />
+				</h:p>
+				<h:p>2. DI APPROVARE il bilancio di previsione pluriennale 2006/2008, che forma parte integrante del presente atto, che comprende i risultati sottoindicati: </h:p>
+				<h:p>omissis</h:p>
+				<h:p>
+					3. DI APPROVARE la relazione previsionale e programmatica per gli anni 2006/2008, predisposta dalla Giunta ai sensi dell' 
+					<rif xlink:href="urn:nir:stato:decreto.legislativo:2000;267#art170" xlink:type="simple">art. 170 del D.Lgs. 267/2000</rif>
+					, il programma triennale dei lavori pubblici, di cui alla 
+					<rif xlink:href="urn:nir:stato:legge:1994;109" xlink:type="simple">L. 109/94</rif>
+					e successive modificazioni ed integrazioni, ed il piano triennale degli investimenti 2006/2008. 
+				</h:p>
+				<h:p>4. DI PRENDERE ATTO che le tariffe e i limiti di reddito per i servizi locali e per i servizi a domanda individuale restano invariati, come risulta dalle deliberazioni allegate. </h:p>
+				<h:p>5. DI PRENDERE ATTO che le aliquote e le detrazioni relativi all'ICI rimangono invariate rispetto al 2005, come risulta dalla deliberazione allegata. </h:p>
+			</contenitore>
+			<formulafinale />
+			<conclusione />
+		</DocumentoNIR>
+	</NIR>

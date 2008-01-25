@@ -1,0 +1,851 @@
+<?xml version="1.0" encoding="windows-1252"?>
+	<!DOCTYPE NIR SYSTEM 'nirflessibile.dtd'>
+	<NIR tipo="originale" xmlns="http://www.normeinrete.it/nir/2.2/" xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<DocumentoNIR nome="Regolamento Comunale">
+			<meta>
+				<descrittori>
+					<pubblicazione norm="" num="" tipo="GU" />
+					<entratainvigore norm="20040304" />
+					<redazione id="red1" nome="" norm="" />
+					<urn valore="urn:nir:comune.firenze:regolamento;attivita.rumorose:2004-02-16;12" />
+					<urn valore="urn:nir:comune.firenze;consiglio:deliberazione:2004-02-16;12:allegato;regolamento.attivita.rumorose" />
+					<materie vocabolario="Atti Normativi">
+						<materia valore="Rumore" />
+					</materie>
+				</descrittori>
+				<ciclodivita>
+					<eventi>
+						<evento data="20040304" fonte="ro1" id="t1" tipo="entrata in vigore" />
+					</eventi>
+					<relazioni>
+						<originale id="ro1" xlink:href="urn:nir:comune.firenze:regolamento;attivita.rumorose:2004-02-16;12" xlink:type="simple" />
+					</relazioni>
+				</ciclodivita>
+				<redazionale xlink:type="simple">
+					<nota id="n1">
+						<h:p>(Deliberazione del Consiglio Comunale n 12 del 16.02.2004)</h:p>
+					</nota>
+				</redazionale>
+				<proprietario soggetto="PACTO" xlink:type="simple">
+					<pacto:meta xmlns:pacto="http://www.pacto.it/norme/1.0">
+						<pacto:proposta anno="2004" numero="00052" />
+						<pacto:ufficio valore="Direzione Ambiente" />
+						<pacto:relatore valore="Vincenzo Bugliani" />
+					</pacto:meta>
+				</proprietario>
+			</meta>
+			<intestazione>
+				<emanante>COMUNE DI FIRENZE</emanante>
+				<tipoDoc>REGOLAMENTO COMUNALE</tipoDoc>
+				<dataDoc norm="20040216">16 febbraio 2004</dataDoc>
+				n. 
+				<numDoc>12 </numDoc>
+				<titoloDoc>
+					Regolamento attività rumorose 
+					<ndr num="n1" valore="" xlink:type="simple">(1)</ndr>
+				</titoloDoc>
+			</intestazione>
+			<formulainiziale />
+			<articolato>
+				<titolo id="tit1">
+					<num>Titolo I</num>
+					<rubrica>DISPOSIZIONI GENERALI </rubrica>
+					<articolo id="art1">
+						<num>Art. 1</num>
+						<rubrica>Campo di applicazione </rubrica>
+						<comma id="art1-com1">
+							<num>1.</num>
+							<corpo>
+								Il presente regolamento disciplina le competenze comunali in materia di inquinamento acustico ai sensi della 
+								<rif xlink:href="urn:nir:stato:legge:1995;447" xlink:type="simple">L. 447/95</rif>
+								e della 
+								<rif xlink:href="urn:nir:regione.toscana:legge:1998;89" xlink:type="simple">L.R. 89/98</rif>
+								. 
+							</corpo>
+						</comma>
+						<comma id="art1-com2">
+							<num>2.</num>
+							<corpo>
+								Al fine di cui al comma precedente valgono le definizioni indicate dalla 
+								<rif xlink:href="urn:nir:stato:legge:1995;447" xlink:type="simple">L. 447/95</rif>
+								e dai relativi decreti attuativi. 
+							</corpo>
+						</comma>
+					</articolo>
+					<articolo id="art2">
+						<num>Art. 2</num>
+						<rubrica>Limiti e definizioni </rubrica>
+						<comma id="art2-com1">
+							<num>1.</num>
+							<corpo>
+								Con il Piano Comunale di Classificazione Acustica (P.C.C.A.) il territorio comunale è suddiviso in zone omogenee alle quali sono assegnati i valori limite di emissione, i valori limite di immissione assoluti e differenziali, i valori di attenzione ed i valori di qualità previsti dal 
+								<rif xlink:href="urn:nir:presidente.consiglio.ministri:decreto:1997-11-14" xlink:type="simple">D.P.C.M. 14.11.97</rif>
+								. 
+							</corpo>
+						</comma>
+						<comma id="art2-com2">
+							<num>2.</num>
+							<corpo>Le attività rumorose di carattere permanente regolamentate dalle presenti normative sono quelle attività di carattere aziendale e produttivo con l’esclusione di quelle di tipo domestico e condominiale, che siano ubicate stabilmente e che si svolgano con uso di impianti o attrezzature potenzialmente rumorosi.</corpo>
+						</comma>
+						<comma id="art2-com3">
+							<num>3.</num>
+							<corpo>
+								Le attività rumorose di carattere temporaneo regolamentate dalle presenti normative sono attività limitate nel tempo, quali manifestazioni, spettacoli e cantieri, che possono essere autorizzate in deroga ai limiti di rumorosità definiti dalla 
+								<rif xlink:href="urn:nir:stato:legge:1995;447" xlink:type="simple">legge 447/95</rif>
+								con le modalità previste dal presente regolamento. Sono fatte salve le disposizioni di cui al 
+								<rif xlink:href="urn:nir:presidente.consiglio.ministri:decreto:1999;215" xlink:type="simple">D.P.C.M. n. 215/99</rif>
+								in merito ai requisiti acustici delle sorgenti sonore nei luoghi di intrattenimento danzante e di pubblico spettacolo. 
+							</corpo>
+						</comma>
+						<comma id="art2-com4">
+							<num>4.</num>
+							<corpo>
+								Resta altresì salvo quanto stabilito dal 
+								<rif xlink:href="#art18" xlink:type="simple">articolo 18</rif>
+								per le altre attività rumorose, non disciplinate dalla 
+								<rif xlink:href="urn:nir:stato:legge:1995;447" xlink:type="simple">L. 447/95</rif>
+								, quali piccoli lavori edili effettuati in proprio, traslochi e comunque qualsiasi altra attività potenzialmente rumorosa e svolta a fini privati. 
+							</corpo>
+						</comma>
+						<comma id="art2-com5">
+							<num>5.</num>
+							<corpo>
+								Le attività rumorose di carattere permanente o temporaneo di cui ai successivi 
+								<rif xlink:href="#tit2" xlink:type="simple">titolo 2</rif>
+								e III devono rispettare i limiti di emissione e di immissione previsti dal P.C.C.A. fino dalla loro attivazione, qualora la medesima avvenga successivamente all’entrata in vigore del Piano stesso. 
+							</corpo>
+						</comma>
+						<comma id="art2-com6">
+							<num>6.</num>
+							<corpo>Per le attività rumorose preesistenti all’entrata in vigore del Piano di classificazione Acustica, i limiti di emissione e di immissione attribuiti alle singole zone sono vincolanti dalla data di sei mesi dopo l’entrata in vigore del P.C.C.A., fatto salvo quanto previsto dall’articolo successivo.</corpo>
+						</comma>
+						<comma id="art2-com7">
+							<num>7.</num>
+							<corpo>
+								Nelle more dell’entrata in vigore del P.C.C.A e dell’applicazione dei limiti dallo stesso attribuiti, si applicano per le singole zone i valori di immissione assoluti e differenziali previsti dalla 
+								<rif xlink:href="urn:nir:comune.firenze;consiglio:delibera:1991-12-20;5577,1905" xlink:type="simple">delibera del Consiglio Comunale n. 5577/1905 del 20.12.91</rif>
+								in applicazione dell’ 
+								<rif xlink:href="urn:nir:presidente.consiglio.ministri:decreto:1991-03-01#art6" xlink:type="simple">art. 6 del D.P.C.M. 01.03.91</rif>
+								. 
+							</corpo>
+						</comma>
+					</articolo>
+					<articolo id="art3">
+						<num>Art. 3</num>
+						<rubrica>Piani Aziendali di Risanamento Acustico </rubrica>
+						<comma id="art3-com1">
+							<num>1.</num>
+							<corpo>
+								Le imprese che esercitano attività rumorose di carattere permanente che alla data di entrata in vigore del P.C.C.A. non rispettino i limiti di emissione o di immissione dallo stesso introdotti, o che siano tenute a rispettare valori di immissione assoluti più rigorosi di quelli preesistenti fissati dalla 
+								<rif xlink:href="urn:nir:comune.firenze;consiglio:delibera:1991-12-20;5577,1905" xlink:type="simple">delibera del Consiglio Comunale n. 5577/1905 del 20.12.91</rif>
+								, devono presentare al Comune, entro sei mesi dall’entrata in vigore del P.C.C.A., apposito Piano Aziendale di Risanamento Acustico, con le modalità indicate dall’ 
+								<rif xlink:href="urn:nir:regione.toscana:legge:1998;89#art13" xlink:type="simple">art. 13 della L.R. 89/98</rif>
+								e dalla D.C.R. 77/00 . 
+							</corpo>
+						</comma>
+						<comma id="art3-com2">
+							<num>2.</num>
+							<corpo>Il Piano Aziendale di Risanamento Acustico deve espressamente indicare il termine entro il quale le imprese prevedono di adeguarsi ai limiti stabiliti. Tale termine non può comunque essere superiore ai dodici mesi dalla presentazione del Piano Aziendale di Risanamento Acustico.</corpo>
+						</comma>
+						<comma id="art3-com3">
+							<num>3.</num>
+							<corpo>
+								La mancata presentazione del Piano Aziendale di Risanamento Acustico nei termini previsti dal 
+								<rif xlink:href="#art3-com1" xlink:type="simple">comma 1</rif>
+								comporta l’obbligo di adeguamento ai limiti stabiliti dal P.C.C.A. nei termini previsti dal medesimo 
+								<rif xlink:href="#art3-com1" xlink:type="simple">comma 1</rif>
+								e l’applicazione delle sanzioni di cui ai successivi artt. 20 comma 1 e 21. 
+							</corpo>
+						</comma>
+					</articolo>
+				</titolo>
+				<titolo id="tit2">
+					<num>Titolo II</num>
+					<rubrica>ATTIVITA’ DI CARATTERE PERMANENTE </rubrica>
+					<articolo id="art4">
+						<num>Art. 4</num>
+						<rubrica>Definizioni </rubrica>
+						<comma id="art4-com1">
+							<num>1.</num>
+							<corpo>Ai fini del presente regolamento si definisce attività rumorosa di carattere permanente qualsiasi attività che non abbia carattere di temporaneità, incluse le attività temporanee ma ripetitive che abbiano una durata superiore a 30 giorni per anno. </corpo>
+						</comma>
+						<comma id="art4-com2">
+							<num>2.</num>
+							<corpo>
+								Nell'ambito delle procedure di cui ai successivi artt. 5 e 6, per la valutazione della documentazione e per il rilascio del nulla osta acustico, ove previsto, la Direzione Ambiente del Comune di Firenze si avvale del supporto tecnico dell'A.R.P.A.T. ai sensi dell'art. 3, comma 1, lettera c) e dell' 
+								<rif xlink:href="#art5" xlink:type="simple">articolo 5</rif>
+								, commi 1, 2 e 3 della 
+								<rif xlink:href="urn:nir:regione.toscana:legge:1995;66" xlink:type="simple">L.R. 66/95</rif>
+								e successive modifiche e integrazioni. 
+							</corpo>
+						</comma>
+					</articolo>
+					<articolo id="art5">
+						<num>Art. 5</num>
+						<rubrica>Valutazione previsionale d’impatto acustico e nulla osta acustico </rubrica>
+						<comma id="art5-com1">
+							<num>1.</num>
+							<alinea>
+								I seguenti soggetti che intendono richiedere atti abilitanti espressi (Autorizzazione, Concessione, ecc…) o che presentino Denuncie di inizio attività relative alle casistiche di cui all’ 
+								<rif xlink:href="#art8-com2" xlink:type="simple">articolo 8, comma 2</rif>
+								e 
+								<rif xlink:href="#art5-com4" xlink:type="simple">comma 4</rif>
+								della 
+								<rif xlink:href="urn:nir:stato:legge:1995;447" xlink:type="simple">L. 447/95</rif>
+								: 
+							</alinea>
+							<el id="art5-com1-leta">
+								<num>a)</num>
+								<corpo>
+									titolari dei progetti per la realizzazione, la modifica e il potenziamento delle opere elencate dall’ 
+									<rif xlink:href="urn:nir:stato:legge:1995;447#art8-com2" xlink:type="simple">art. 8 comma 2 della L. 447/95</rif>
+									; 
+								</corpo>
+							</el>
+							<el id="art5-com1-letb">
+								<num>b)</num>
+								<corpo>i richiedenti di concessioni edilizie relative a nuovi impianti ed infrastrutture adibite ad attività produttive, sportive e ricreative ed a postazioni di servizi commerciali polifunzionali; </corpo>
+							</el>
+							<el id="art5-com1-letc">
+								<num>c)</num>
+								<corpo>i richiedenti di altri provvedimenti comunali di abilitazione all’utilizzazione degli immobili e delle infrastrutture di cui sopra, qualora non siano state presentate al momento della richiesta di concessione edilizia; </corpo>
+							</el>
+							<el id="art5-com1-letd">
+								<num>d)</num>
+								<alinea>di qualunque altro atto abilitante espresso o meno finalizzato all’esercizio delle attività produttive; </alinea>
+								<ep id="art5-com1-letd-pun1">
+									<num>-</num>
+									<corpo>sono tenuti a presentare in allegato all’istanza di atto abilitante espresso o alla Denuncia di inizio attività documentazione di valutazione previsionale di impatto acustico, con le modalità indicate dalla D.G.R. 788/99. </corpo>
+								</ep>
+							</el>
+						</comma>
+						<comma id="art5-com2">
+							<num>2.</num>
+							<corpo>La presentazione della valutazione previsionale di impatto acustico redatta ai sensi della D.G.R. 788/99 costituisce elemento essenziale per il rilascio dell’atto abilitante espresso di cui al comma precedente e condizione indispensabile per l’efficacia nelle D.I.A.. </corpo>
+						</comma>
+						<comma id="art5-com3">
+							<num>3.</num>
+							<corpo>
+								Per le attività commerciali artigianali e di servizio che non utilizzano apparecchi rumorosi di cui all’ 
+								<rif xlink:href="#art2" xlink:type="simple">articolo 2</rif>
+								la valutazione previsionale di impatto acustico potrà essere sostituita da una dichiarazione sostitutiva di atto notorio che comprovi espressamente il non utilizzo di apparecchi rumorosi nei luoghi in cui si svolge la sua attività, da redigere con i contenuti di cui all’All. n. 1. 
+							</corpo>
+						</comma>
+						<comma id="art5-com4">
+							<num>4.</num>
+							<corpo>
+								Per le attività che utilizzano apparecchi rumorosi anche non strettamente finalizzati all’attività come evidenziati nell’All. n. 1 o di analoga tipologia la valutazione previsionale di impatto acustico deve essere prodotta a cura della Ditta installatrice in allegato alla dichiarazione di conformità rilasciata ai sensi della 
+								<rif xlink:href="urn:nir:stato:legge:1990;46" xlink:type="simple">L. 46/90</rif>
+								, prima della messa in esercizio dell’apparecchiatura stessa. 
+							</corpo>
+						</comma>
+						<comma id="art5-com5">
+							<num>5.</num>
+							<corpo>
+								Le aziende che esercitano attività di cui all’ 
+								<rif xlink:href="urn:nir:stato:legge:1995;447#art8-com4" xlink:type="simple">art. 8, comma 4 della L. 447/95</rif>
+								sono sottoposte al rilascio del nulla osta acustico ai sensi dell’ 
+								<rif xlink:href="#art8-com6" xlink:type="simple">articolo 8, comma 6</rif>
+								della suddetta 
+								<rif xlink:href="urn:nir:stato:legge:1995;447" xlink:type="simple">L. 447/95</rif>
+								. In tali casistiche la valutazione previsionale di impatto acustico al momento della richiesta dell’atto abilitante espresso per l’esercizio dell’attività è trasmessa dalla Direzione preposta alla Direzione Ambiente, titolare per il rilascio del nulla osta acustico. 
+							</corpo>
+						</comma>
+					</articolo>
+					<articolo id="art6">
+						<num>Art. 6</num>
+						<rubrica>Valutazione previsionale di clima acustico </rubrica>
+						<comma id="art6-com1">
+							<num>1.</num>
+							<alinea>
+								I soggetti che intendono richiedere atti abilitanti espressi (Autorizzazione, Concessione, ecc…) o che presentino Denuncie di inizio attività relative alle seguenti casistiche di cui all’ 
+								<rif xlink:href="urn:nir:stato:legge:1995;447#art8-com3" xlink:type="simple">art. 8, comma 3 della L. 447/95</rif>
+								: 
+							</alinea>
+							<ep id="art6-com1-pun1">
+								<num>-</num>
+								<corpo>scuole e asili nido,</corpo>
+							</ep>
+							<ep id="art6-com1-pun2">
+								<num>-</num>
+								<corpo>ospedali, </corpo>
+							</ep>
+							<ep id="art6-com1-pun3">
+								<num>-</num>
+								<corpo>case di cura e di riposo,</corpo>
+							</ep>
+							<ep id="art6-com1-pun4">
+								<num>-</num>
+								<corpo>parchi pubblici urbani ed extraurbani,</corpo>
+							</ep>
+							<ep id="art6-com1-pun5">
+								<num>-</num>
+								<alinea>
+									nuovi insediamenti residenziali prossimi alle opere indicate all’ 
+									<rif xlink:href="urn:nir:stato:legge:1995;447#art8-com2" xlink:type="simple">art. 8, comma 2 della L. 447/95</rif>
+									; 
+								</alinea>
+							</ep>
+							<ep id="art6-com1-pun6">
+								<num>-</num>
+								<corpo>sono tenuti a presentare in allegato la relazione previsionale di clima acustico, con le modalità indicate dalla D.G.R. 788/99. </corpo>
+							</ep>
+						</comma>
+						<comma id="art6-com2">
+							<num>2.</num>
+							<alinea>
+								Per le opere pubbliche o comunque sottoposte alla disciplina della 
+								<rif xlink:href="urn:nir:stato:decreto.legislativo:1994;109" xlink:type="simple">D.Lgs. 109/94</rif>
+								e successive modifiche e integrazioni, relative agli interventi di cui al 
+								<rif xlink:href="#art6-com1" xlink:type="simple">comma 1</rif>
+								, la relazione previsionale di clima acustico di cui sopra deve essere presentata in due fasi distinte: 
+							</alinea>
+							<en id="art6-com2-num1">
+								<num>1)</num>
+								<corpo>la prima, in sede di progettazione preliminare e dovrà contenere: indicazione dell’ubicazione, dell’orientamento dell’opera, della sua altezza da terra, della sua compatibilità acustica con l’area circostante; </corpo>
+							</en>
+							<en id="art6-com2-num2">
+								<num>2)</num>
+								<alinea>la seconda in sede di progettazione definitiva e dovrà contenere: </alinea>
+								<ep id="art6-com2-num2-pun1">
+									<num>-</num>
+									<corpo>una valutazione acustica previsionale di dettaglio che prenda in considerazione gli impatti derivanti dall’opera di progetto sui ricettori preesistenti, con le prescrizioni dell’isolamento acustico di facciata, il progetto di dettaglio di tutte mitigazioni volte a limitare il rumore, che diventano parte integrante degli elaborati progettuali.</corpo>
+								</ep>
+							</en>
+						</comma>
+					</articolo>
+				</titolo>
+				<titolo id="tit3">
+					<num>Titolo III</num>
+					<rubrica>ATTIVITA’ TEMPORANEE </rubrica>
+					<articolo id="art7">
+						<num>Art. 7</num>
+						<rubrica>Definizioni </rubrica>
+						<comma id="art7-com1">
+							<num>1.</num>
+							<corpo>Ai fini del presente regolamento si definiscono attività rumorose temporanee quelle che si svolgono in periodi di tempo limitati e/o legate ad ubicazioni variabili. Fatti salvi i cantieri edili, stradali e assimilabili di cui alla successiva Sezione I, sono da escludersi le attività ripetitive che abbiano una durata superiore a 30 giorni l'anno. </corpo>
+						</comma>
+						<comma id="art7-com2">
+							<num>2.</num>
+							<corpo>
+								Le attività temporanee si intendono sempre autorizzate qualora rispettino i limiti di emissione e di immissione previsti dal 
+								<rif xlink:href="urn:nir:presidente.consiglio.ministri:decreto:1997-11-14" xlink:type="simple">D.P.C.M. 14/11/97</rif>
+								attribuiti alle zone in cui sono ubicate dal P.C.C.A. e, nelle more dell'entrata in vigore del P.C.C.A., i valori assoluti e differenziali previsti dalla 
+								<rif xlink:href="urn:nir:comune.firenze;consiglio:deliberazione:1991-12-20;5577,1905" xlink:type="simple">delibera del Consiglio Comunale n. 5577/1905 del 20.12.1991</rif>
+								in applicazione dell’ 
+								<rif xlink:href="urn:nir:presidente.consiglio.ministri:decreto:1991-03-01#art6" xlink:type="simple">art. 6 del DPCM 01.03.91</rif>
+								. 
+							</corpo>
+						</comma>
+						<comma id="art7-com3">
+							<num>3.</num>
+							<corpo>Qualora tali attività possano superare i limiti sopraindicati, in seguito a particolari esigenze locali o ragioni di pubblica utilità, deve essere richiesta preventiva autorizzazione in deroga. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art8">
+						<num>Art. 8</num>
+						<rubrica>Deroghe </rubrica>
+						<comma id="art8-com1">
+							<num>1.</num>
+							<corpo>
+								Le autorizzazioni in deroga ai limiti di rumorosità definiti dalla 
+								<rif xlink:href="urn:nir:stato:legge:1995;447" xlink:type="simple">L. 447/95</rif>
+								e dai suoi provvedimenti attuativi, per quelle attività che non abbiano i requisiti per una deroga di tipo di semplificato ai sensi del punto 3.3 delle Linee Guidedella Regione Toscana (parte 3 dell’allegato alla D.C.R. 77/00), sono rilasciate dalla Direzione Ambiente del Comune di Firenze previo parere della A.S.L., qualora lo richiedano particolari esigenze locali o ragioni di pubblica utilità previa domanda da presentarsi nei termini e con le modalità di seguito indicate. 
+							</corpo>
+						</comma>
+						<comma id="art8-com2">
+							<num>2.</num>
+							<corpo>Presso la Direzione Ambiente è tenuto il registro delle deroghe rilasciate su ciascuna zona del territorio comunale, previsto dalla D.C.R. 77/00.</corpo>
+						</comma>
+						<comma id="art8-com3">
+							<num>3.</num>
+							<corpo>Le domande per ottenere le autorizzazioni in deroga, redatte utilizzando l’apposita documentazione allegata al presente regolamento, devono essere presentate almeno 45 giorni prima dell’inizio dell’attività alla Direzione Ambiente, con le modalità previste dalle Linee Guida della Regione Toscana (parte 3 dell’allegato alla D.C.R. 77/00) e dal presente regolamento.</corpo>
+						</comma>
+						<comma id="art8-com4">
+							<num>4.</num>
+							<corpo>Il termine di 45 giorni di cui al comma precedente costituisce il termine per la conclusione del procedimento da parte dell’Amministrazione Comunale, fatta salva l’interruzione degli stessi a termine di Legge.</corpo>
+						</comma>
+						<comma id="art8-com5">
+							<num>5.</num>
+							<corpo>Nel caso di attività temporanee che si svolgano in prossimità di asili, scuole, ospedali e case di cura le domande di autorizzazione in deroga devono essere comunque presentate 45 giorni prima dell’inizio dell’attività. </corpo>
+						</comma>
+						<comma id="art8-com6">
+							<num>6.</num>
+							<corpo>E’ facoltà della Direzione Ambiente nell’ambito del procedimento di autorizzazione in deroga richiedere specifici piani di monitoraggio del rumore a carico del richiedente la medesima autorizzazione.</corpo>
+						</comma>
+					</articolo>
+					<articolo id="art9">
+						<num>Art. 9</num>
+						<rubrica>Deroghe semplificate </rubrica>
+						<comma id="art9-com1">
+							<num>1.</num>
+							<corpo>
+								Le autorizzazioni in deroga ai limiti di rumorosità definiti dalla 
+								<rif xlink:href="urn:nir:stato:legge:1995;447" xlink:type="simple">L. 447/95</rif>
+								e dai suoi provvedimenti attuativi per quelle attività che abbiano i requisiti per una deroga di tipo di semplificato ai sensi del punto 3.3 delle Linee Guide della Regione Toscana (parte 3 dell’allegato alla D.C.R. 77/00), sono rilasciate dalla Direzione Ambiente del Comune di Firenze previa domanda da presentarsi nei termini e con le modalità di seguito indicate. 
+							</corpo>
+						</comma>
+						<comma id="art9-com2">
+							<num>2.</num>
+							<corpo>Le richieste di autorizzazione in deroga semplificate e la relativa documentazione, ove prevista, devono essere presentate alla Direzione Ambiente almeno 15 giorni prima dell’inizio dell’attività. Il termine di 15 giorni di cui al comma precedente costituisce il termine per la conclusione del procedimento da parte dell’Amministrazione Comunale, fatta salva l’interruzione degli stessi a termine di Legge.</corpo>
+						</comma>
+						<comma id="art9-com3">
+							<num>3.</num>
+							<corpo>Per le autorizzazioni in deroga semplificate il limite massimo di emissione da non superare è di 70 dB (A) in orario diurno e 60 dB(A) in orario notturno.</corpo>
+						</comma>
+						<comma id="art9-com4">
+							<num>4.</num>
+							<corpo>Tale limite si intende fissato in facciata agli edifici, in corrispondenza dei recettori più disturbati o più vicini. Quando non altrimenti specificato è sempre implicita la deroga al criterio differenziale. </corpo>
+						</comma>
+						<comma id="art9-com5">
+							<num>5.</num>
+							<corpo>I cantieri edili per gli interventi interni sul patrimonio edilizio esistente devono rispettare il limite di 65 dB(A) misurati all’interno delle abitazioni o dei locali più vicini.</corpo>
+						</comma>
+						<comma id="art9-com6">
+							<num>6.</num>
+							<corpo>Le modalità di misura del livello equivalente di pressione sonora ponderato A sono quelle indicate dal D.M. 16.3.1998, per un tempo di almeno 30 minuti per i cantieri stradali, e di 15 minuti per tutte le altre attività. </corpo>
+						</comma>
+					</articolo>
+				</titolo>
+				<sezione id="sez1">
+					<num>Sezione I</num>
+					<rubrica>Cantieri edili, stradali e assimilabili </rubrica>
+					<articolo id="art10">
+						<num>Art. 10</num>
+						<rubrica>Impianti e attrezzature </rubrica>
+						<comma id="art10-com1">
+							<num>1.</num>
+							<corpo>In caso di attivazione di cantieri, le macchine e gli impianti in uso sia fissi che mobili dovranno essere conformi alle rispettive norme di omologazione e certificazione e dovranno essere collocate in postazioni che possano limitare al massimo la rumorosità nell’ambiente circostante e soprattutto nei confronti di soggetti disturbabili.</corpo>
+						</comma>
+						<comma id="art10-com2">
+							<num>2.</num>
+							<corpo>Per le attrezzature non considerate nella normativa nazionale vigente, quali gli attrezzi manuali, dovranno essere utilizzati tutti gli accorgimenti e comportamenti per rendere meno rumoroso il loro uso.</corpo>
+						</comma>
+						<comma id="art10-com3">
+							<num>3.</num>
+							<corpo>Gli avvisatori acustici potranno essere utilizzati solo se non sostituibili con altri di tipo luminoso e nel rispetto delle vigenti norme antinfortunistiche. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art11">
+						<num>Art. 11</num>
+						<rubrica>Emergenze </rubrica>
+						<comma id="art11-com1">
+							<num>1.</num>
+							<corpo>Ai cantieri edili o stradali da attivarsi per il ripristino urgente dell’erogazione di servizi pubblici (linee telefoniche ed elettriche, condotte fognarie, acqua potabile, gas, interventi inderogabili su sistemi viari ecc.) e in situazioni di pericolo per l’incolumità della popolazione e di pericolo immediato per l’ambiente e il territorio, è concessa deroga agli orari, ai limiti massimi di rumorosità ed agli adempimenti amministrativi previsti dal presente regolamento.</corpo>
+						</comma>
+						<comma id="art11-com2">
+							<num>2.</num>
+							<corpo>Le Imprese e gli Enti che possono intervenire nei casi sopra citati sono stabiliti dalla Direzione Mobilità del Comune di Firenze che ne approverà l’elenco e le modalità d’intervento con provvedimento dirigenziale.</corpo>
+						</comma>
+					</articolo>
+					<articolo id="art12">
+						<num>Art. 12</num>
+						<rubrica>Grandi opere </rubrica>
+						<comma id="art12-com1">
+							<num>1.</num>
+							<corpo>
+								Ai fini del presente articolo vengono individuate come grandi opere tutti quegli interventi infrastrutturali, edilizi e urbanistici, realizzati ai sensi del 
+								<rif xlink:href="urn:nir:stato:decreto.legislativo:1994;109" xlink:type="simple">D.Lgs. 109/94</rif>
+								e successive modifiche e integrazioni, che si caratterizzano come di interesse cittadino o che comunque per la loro complessità richiedano un’articolazione particolare delle autorizzazioni in deroga ai limiti di rumorosità. 
+							</corpo>
+						</comma>
+						<comma id="art12-com2">
+							<num>2.</num>
+							<corpo>Entro il mese di dicembre di ogni anno la Giunta Comunale, su proposta della direzione competente alla programmazione dei lavori pubblici, approva l’elenco delle opere da sottoporre alle procedure di cui al presente articolo per l’anno successivo.</corpo>
+						</comma>
+						<comma id="art12-com3">
+							<num>3.</num>
+							<corpo>Nei bandi di gara per l’appalto delle opere di cui al comma precedente dovrà essere inserito l’obbligo per le imprese aggiudicatarie di ottenere le autorizzazioni in deroga ai limiti di rumore ai sensi della normativa vigente e del presente regolamento. </corpo>
+						</comma>
+						<comma id="art12-com4">
+							<num>4.</num>
+							<alinea>Le autorizzazioni in deroga rilasciate dalla Direzione Ambiente, previo parere dell’A.S.L., per le grandi opere sono suddivise in due fasi distinte: </alinea>
+							<el id="art12-com4-leta">
+								<num>a)</num>
+								<corpo>una parte generale che ha valore per tutta la durata dei lavori per ottenere la quale, il soggetto appaltante deve presentare una domanda contenente:</corpo>
+							</el>
+							<en id="art12-com4-num1">
+								<num>1)</num>
+								<corpo>una relazione generale descrittiva dell’attività, redatta da tecnico competente in acustica con i valori limite da conseguire anche presso i recettori potenzialmente più disturbati da individuare con apposita planimetria; </corpo>
+							</en>
+							<en id="art12-com4-num2">
+								<num>2)</num>
+								<corpo>una procedura di accettazione redatta dalla direzione del cantiere, dei macchinari che vi operano che sostituisce l’elenco previsto dalla D.C.R. 77/00 e contenente:</corpo>
+							</en>
+							<ep id="art12-com4-pun1">
+								<num>-</num>
+								<corpo>le caratteristiche delle macchine che possono essere accettate nel cantiere,</corpo>
+							</ep>
+							<ep id="art12-com4-pun2">
+								<num>-</num>
+								<corpo>il nominativo del responsabile di tale decisione, </corpo>
+							</ep>
+							<ep id="art12-com4-pun3">
+								<num>-</num>
+								<corpo>le modalità con cui viene accertata l’idoneità dei macchinari,</corpo>
+							</ep>
+							<ep id="art12-com4-pun4">
+								<num>-</num>
+								<corpo>le modalità di registrazione delle macchine accettate e della apposizione di contrassegno identificativo; </corpo>
+							</ep>
+							<en id="art12-com4-num3">
+								<num>3)</num>
+								<corpo>l’individuazione dei percorsi di accesso al cantiere.</corpo>
+							</en>
+							<el id="art12-com4-letb">
+								<num>b)</num>
+								<corpo>una parte di dettaglio per ogni fase della lavorazione, per ottenere la quale il soggetto appaltante dell’esecuzione dei lavori deve presentare la documentazione prevista dalla D.C.R. 77/00, con l’eccezione di quanto già prodotto nella parte generale.</corpo>
+							</el>
+						</comma>
+					</articolo>
+					<articolo id="art13">
+						<num>Art. 13</num>
+						<rubrica>Appalti annuali per manutenzione strade e dei sottoservizi </rubrica>
+						<comma id="art13-com1">
+							<num>1.</num>
+							<corpo>Per quanto riguarda gli appalti annuali che gli uffici comunali o altri Enti o Aziende titolari di servizi pubblici affidano per la manutenzione delle strade e/o dei sottoservizi, sarà cura degli uffici e delle Aziende stessi inserire nei bandi di gara l’obbligo per le imprese appaltanti di ottenere le autorizzazioni in deroga ai limiti di rumore ai sensi della normativa vigente e del presente regolamento, ove ne ricorrano le condizioni. </corpo>
+						</comma>
+						<comma id="art13-com2">
+							<num>2.</num>
+							<alinea>Le ditte risultanti aggiudicatarie dei lavori dovranno presentare alla Direzione Ambiente una richiesta di autorizzazione in deroga di carattere generale che ha valore per tutta la durata dell’appalto e contenente: </alinea>
+							<en id="art13-com2-num1">
+								<num>1)</num>
+								<corpo>i valori limite da conseguire; </corpo>
+							</en>
+							<en id="art13-com2-num2">
+								<num>2)</num>
+								<corpo>dichiarazione che i macchinari presenti in cantiere e utilizzati rientrano nei limiti di emissione sonora previsti per la messa in commercio dalla normativa nazionale e comunitaria più recente, in vigore da più di tre anni al momento della richiesta dell’autorizzazione. </corpo>
+							</en>
+						</comma>
+						<comma id="art13-com3">
+							<num>3.</num>
+							<corpo>
+								Qualora per singoli interventi programmati, e quindi non effettuati in condizione di emergenza così come definita nell’ 
+								<rif xlink:href="#art12" xlink:type="simple">articolo 12</rif>
+								del presente regolamento, si preveda di superare i limiti stabiliti nell’autorizzazione in deroga di carattere generale, le ditte risultate aggiudicatarie degli appalti oggetto del presente articolo dovranno presentare alla Direzione Ambiente la documentazione prevista dalla D.C.R. 77/00 per ottenere l’autorizzazione in deroga ai limiti di rumore con l’eccezione di quanto già prodotto per ottenere l’autorizzazione in deroga di carattere generale. 
+							</corpo>
+						</comma>
+					</articolo>
+					<articolo id="art14">
+						<num>Art. 14</num>
+						<rubrica>Deroghe semplificate con dichiarazione sostitutiva di atto notorio </rubrica>
+						<comma id="art14-com1">
+							<num>1.</num>
+							<corpo>I cantieri edili che rispettino le condizioni di cui al punto 3.2 delle Linee Guida della Regione Toscana (parte 3 dell’allegato alla D.C.R. 77/00) e che abbiano una durata inferiore ai 5 giorni devono presentare una comunicazione alla Direzione Ambiente All. n. 2 da conservare in copia presso il cantiere e che sostituisce l’autorizzazione in deroga. Sezione II - Spettacoli e manifestazioni a carattere temporaneo, ovvero mobile, ovvero all’aperto </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art15">
+						<num>Art. 15</num>
+						<rubrica>Autorizzazioni </rubrica>
+						<comma id="art15-com1">
+							<num>1.</num>
+							<corpo>Per spettacoli e manifestazioni a carattere temporaneo, ovvero mobile, ovvero all’aperto che si svolgano per più di 3 giorni e che si collochino al di fuori delle aree destinate a tali attività nel piano di classificazione acustica, occorre presentare richiesta di autorizzazione in deroga semplificata ai sensi del punto 3.2.3 delle Linee Guida della Regione Toscana (parte 3 dell’allegato alla D.C.R. 77/00), utilizzando la modulistica allegata al presente regolamento All. n. 5 e almeno 15 giorni prima dell’inizio dell’attività.</corpo>
+						</comma>
+						<comma id="art15-com2">
+							<num>2.</num>
+							<corpo>Nel caso dette attività non abbiano i requisiti per una deroga semplificata la richiesta di autorizzazione dovrà essere presentata ai sensi del punto 3.3 delle Linee Guida della Regione Toscana (parte 3 dell’allegato alla D.C.R. 77/00), utilizzando la modulistica allegata al presente regolamento All. n. 6 e almeno 45 giorni prima l’inizio dell’attività.</corpo>
+						</comma>
+						<comma id="art15-com3">
+							<num>3.</num>
+							<corpo>Gli spettacoli e manifestazioni a carattere temporaneo, ovvero mobile, ovvero all’aperto che rispettino le condizioni di cui al punto 3.2 delle Linee Guida della Regione Toscana (parte 3 dell’allegato alla D.C.R. 77/00) e che abbiano una durata inferiore ai 3 giorni devono presentare una comunicazione alla Direzione Ambiente (All. n. 4) da conservare in copia nel luogo dove si tiene l’iniziativa e che sostituisce l’autorizzazione in deroga.</corpo>
+						</comma>
+						<comma id="art15-com4">
+							<num>4.</num>
+							<corpo>Le iniziative di cui al presente comma sono sempre autorizzate in deroga, a seguito di tale comunicazione, a condizione che la durata non concorra al superamento del limite di 30 giorni nel corso dell’anno solare (anche riferito a sorgenti ed eventi diversi tra loro), previsto dal punto 3.2.3. delle Linee Guida della Regione Toscana (parte 3 dell’allegato alla D.C.R. 77/00). </corpo>
+						</comma>
+					</articolo>
+				</sezione>
+				<titolo id="tit4">
+					<num>Titolo IV</num>
+					<rubrica>ALTRE ATTIVITA’ RUMOROSE </rubrica>
+					<articolo id="art16">
+						<num>Art. 16</num>
+						<rubrica>Macchine da giardino </rubrica>
+						<comma id="art16-com1">
+							<num>1.</num>
+							<corpo>L’uso di macchine e impianti rumorosi per l’esecuzione dei lavori di giardinaggio è consentito nei giorni feriali, escluso il sabato, dalle ore 8.00 alle ore 13.00 e dalle ore 15.00 alle ore 20.00. Il sabato e i giorni festivi dalle ore 9.00 alle ore 12.00 e dalle ore 16.00 alle ore 20.00. Le macchine e gli impianti in uso per l’esecuzione dei lavori di giardinaggio devono essere tali da ridurre l’inquinamento acustico nelle aree adiacenti ai più bassi livelli consentiti dalla tecnica corrente, ovvero conformi alle direttive comunitarie recepite dalla normativa nazionale, in vigore da più di tre anni. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art17">
+						<num>Art. 17</num>
+						<rubrica>Allarmi acustici </rubrica>
+						<comma id="art17-com1">
+							<num>1.</num>
+							<corpo>Per l’emissioni sonore provenienti da sistemi di allarme, non si applicano i limiti del presente regolamento, ma la durata di tali emissioni non può superare i 15 minuti totali di attivazione (comprensivi della pause tra emissioni intermittenti generate dal medesimo evento), sia nel periodo di riferimento diurno che notturno. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art18">
+						<num>Art. 18</num>
+						<rubrica>Altre attività </rubrica>
+						<comma id="art18-com1">
+							<num>1.</num>
+							<alinea>
+								L’esercizio di tutte le altre attività rumorose o potenzialmente rumorosa, non disciplinate dalla 
+								<rif xlink:href="urn:nir:stato:legge:1995;447" xlink:type="simple">L. 447/95</rif>
+								, quali piccoli lavori edili effettuati in proprio, traslochi e comunque svolte a fini privati, potrà essere effettuato soltanto: 
+							</alinea>
+							<ep id="art18-com1-pun1">
+								<num>-</num>
+								<corpo>dalle ore 6 alle ore 21 - dal 1° aprile a tutto il 30 settembre; </corpo>
+							</ep>
+							<ep id="art18-com1-pun2">
+								<num>-</num>
+								<corpo>dalle ore 7 alle ore 21 - dal 1° ottobre a tutto il 31 marzo. </corpo>
+							</ep>
+						</comma>
+						<comma id="art18-com2">
+							<num>2.</num>
+							<corpo>Le suddette attività non possono svolgersi la domenica e nei giorni festivi.</corpo>
+						</comma>
+					</articolo>
+				</titolo>
+				<titolo id="tit5">
+					<num>Titolo V</num>
+					<rubrica>CONTROLLI, SISTEMA SANZIONATORIO E DISPOSIZIONI FINALI </rubrica>
+					<articolo id="art19">
+						<num>Art. 19</num>
+						<rubrica>Controlli </rubrica>
+						<comma id="art19-com1">
+							<num>1.</num>
+							<corpo>Le attività di controllo circa il rispetto della normativa vigente in materia di rumore e del presente regolamento sono di competenza della Direzione Ambiente del Comune di Firenze, del Corpo di Polizia Municipale e dell’A.R.P.A.T..</corpo>
+						</comma>
+						<comma id="art19-com2">
+							<num>2.</num>
+							<alinea>A tale proposito: </alinea>
+							<en id="art19-com2-num1">
+								<num>1)</num>
+								<corpo>il Corpo di Polizia Municipale effettua prioritariamente i controlli relativi al rumore prodotto da:</corpo>
+							</en>
+							<ep id="art19-com2-pun1">
+								<num>-</num>
+								<corpo>pubblici spettacoli,</corpo>
+							</ep>
+							<ep id="art19-com2-pun2">
+								<num>-</num>
+								<corpo>circoli privati,</corpo>
+							</ep>
+							<ep id="art19-com2-pun3">
+								<num>-</num>
+								<corpo>pubblici esercizi,</corpo>
+							</ep>
+							<ep id="art19-com2-pun4">
+								<num>-</num>
+								<corpo>alberghi,</corpo>
+							</ep>
+							<ep id="art19-com2-pun5">
+								<num>-</num>
+								<corpo>attività commerciali;</corpo>
+							</ep>
+							<en id="art19-com2-num2">
+								<num>2)</num>
+								<corpo>l'A.R.P.A.T. effettua prioritariamente i controlli relativi al rumore prodotto da:</corpo>
+							</en>
+							<ep id="art19-com2-pun6">
+								<num>-</num>
+								<corpo>attività industriali,</corpo>
+							</ep>
+							<ep id="art19-com2-pun7">
+								<num>-</num>
+								<corpo>attività artigianali,</corpo>
+							</ep>
+							<ep id="art19-com2-pun8">
+								<num>-</num>
+								<corpo>attività sportive,</corpo>
+							</ep>
+							<ep id="art19-com2-pun9">
+								<num>-</num>
+								<corpo>infrastrutture di trasporto.</corpo>
+							</ep>
+						</comma>
+						<comma id="art19-com3">
+							<num>3.</num>
+							<corpo>L ’A.R.P.A.T. e il Corpo di Polizia Municipale, in quanto organi accertatori, provvedono ad effettuare le misurazioni fonometriche, ad elevare sanzioni (ove dovute) e ad inviare a mezzo fax e per posta alla Direzione Ambiente un rapporto con l’indicazione dei rilievi fonometrici effettuati nonché di eventuali misure da adottare.</corpo>
+						</comma>
+					</articolo>
+					<articolo id="art20">
+						<num>Art. 20</num>
+						<rubrica>Sanzioni </rubrica>
+						<comma id="art20-com1">
+							<num>1.</num>
+							<corpo>
+								Il mancato rispetto del presente regolamento è soggetto alle sanzioni amministrative previste dall’ 
+								<rif xlink:href="urn:nir:stato:legge:1995;447#art10" xlink:type="simple">art. 10 della L. 447/1995</rif>
+								e dall’ 
+								<rif xlink:href="urn:nir:regione.toscana:legge:1998;89#art17" xlink:type="simple">art. 17 della L.R. 89/98</rif>
+								. 
+							</corpo>
+						</comma>
+						<comma id="art20-com2">
+							<num>2.</num>
+							<corpo>
+								Il mancato rispetto delle norme di cui all’ 
+								<rif xlink:href="#art16" xlink:type="simple">articolo 16</rif>
+								, all' 
+								<rif xlink:href="#art17" xlink:type="simple">articolo 17</rif>
+								, e all’ 
+								<rif xlink:href="#art18" xlink:type="simple">articolo 18</rif>
+								del presente regolamento è soggetto alle sanzioni previste dall’articolo 7-bis della 
+								<rif xlink:href="urn:nir:stato:legge:2000;267" xlink:type="simple">L. 267/00</rif>
+								, con le seguenti modalità: 
+								<h:table>
+									<h:tbody>
+										<h:tr>
+											<h:td>
+												Uso di macchine e impianti rumorosi per l’esecuzione dei lavori di giardinaggio fuori dagli orari consenti dall’ 
+												<rif xlink:href="#art16-com1" xlink:type="simple">articolo 16, comma 1</rif>
+											</h:td>
+											<h:td>Min.25 max. 75 Euro se in orario diurno (6.00 -22.00) Min. 50 max. 150 Euro se in orario notturno(22.00 – 6.00)</h:td>
+										</h:tr>
+										<h:tr>
+											<h:td>Uso di macchine e impianti rumorosi per l’esecuzione dei lavori di giardinaggio non conformi alle disposizioni dell’art. 16 comma 2 </h:td>
+											<h:td>Min. 25 max. 75 Euro</h:td>
+										</h:tr>
+										<h:tr>
+											<h:td>
+												Utilizzo di allarmi acustici oltre la durata consentita dall’ 
+												<rif xlink:href="#art17" xlink:type="simple">articolo 17</rif>
+											</h:td>
+											<h:td>Min. 25 max. 75 Euro</h:td>
+										</h:tr>
+										<h:tr>
+											<h:td>
+												Esercizio di attività rumorose di cui all’ 
+												<rif xlink:href="#art18" xlink:type="simple">articolo 18</rif>
+												fuori dagli orari e dai giorni consentiti 
+											</h:td>
+											<h:td>Min. 50 max. 150 Euro</h:td>
+										</h:tr>
+									</h:tbody>
+								</h:table>
+							</corpo>
+						</comma>
+					</articolo>
+					<articolo id="art21">
+						<num>Art. 21</num>
+						<rubrica>Sospensione delle attività </rubrica>
+						<comma id="art21-com1">
+							<num>1.</num>
+							<corpo>
+								Le autorità competenti - A.R.P.A.T. e Corpo di Polizia Municipale – nel caso in cui verifichino, tramite apposite misurazioni, il mancato rispetto dei valori limite di immissione di cui al 
+								<rif xlink:href="urn:nir:presidente.consiglio.ministri:decreto:1997-11-14" xlink:type="simple">D.P.C.M. 14.11.1997</rif>
+								o dei limiti stabiliti con le autorizzazioni in deroga, oltre a comminare le sanzioni previste dalla legge e dal presente regolamento, provvederanno a trasmettere il risultato di dette misurazioni alla Direzione Ambiente che emanerà o proporrà i provvedimenti consequenziali. In particolare il titolare dell’attività sanzionata verrà diffidato dal proseguire l’attività senza rispettare i limiti di legge e a comunicare alla Direzione Ambiente quali provvedimenti abbia posto in essere per ottenere tale obiettivo. 
+							</corpo>
+						</comma>
+						<comma id="art21-com2">
+							<num>2.</num>
+							<corpo>
+								Qualora a seguito della diffida di cui al comma precedente l’attività continui a superare i valori limite di immissione di cui al 
+								<rif xlink:href="urn:nir:presidente.consiglio.ministri:decreto:1997-11-14" xlink:type="simple">D.P.C.M. 14.11.1997</rif>
+								o dei limiti concessi in deroga ai sensi della normativa vigente e del presente regolamento, l’Amministrazione Comunale oltre alle sanzioni previste dalle vigenti leggi e dal presente regolamento, potrà disporre la sospensione dell’attività rumorosa e/o della licenza o autorizzazione all’esercizio fino all’avvenuto adeguamento ai limiti fissati dalla normativa. 
+							</corpo>
+						</comma>
+						<comma id="art21-com3">
+							<num>3.</num>
+							<alinea>In particolare, la dimostrazione di aver effettuato interventi tali da garantire il rispetto di limiti fissati dalla normativa, dovrà avvenire con la presentazione della documentazione di seguito elencata: </alinea>
+							<el id="art21-com3-leta">
+								<num>a)</num>
+								<corpo>dichiarazione sostituiva di atto notorio redatta dal titolare dell’attività, secondo il modello prestampato (All. n. 7 al presente regolamento);</corpo>
+							</el>
+							<el id="art21-com3-letb">
+								<num>b)</num>
+								<corpo>valutazione di impatto acustico, se prevista per quel tipo di attività e se non già prodotta in fase di autorizzazione o di D.I.A., redatta da tecnico competente in acustica;</corpo>
+							</el>
+							<el id="art21-com3-letc">
+								<num>c)</num>
+								<corpo>relazione tecnica redatta da tecnico competente in acustica contenente la descrizione degli interventi posti in essere e la dichiarazione che tali interventi garantiscono il rispetto dei limiti di legge.</corpo>
+							</el>
+						</comma>
+						<comma id="art21-com4">
+							<num>4.</num>
+							<corpo>La sospensione e la successiva riapertura dell’attività rumorosa e/o della licenza o autorizzazione all’esercizio sono di competenza della Direzione responsabile del procedimento autorizzatorio o titolata a ricevere la D.I.A., dietro parere scritto della Direzione Ambiente. La riapertura potrà avvenire anche con modifiche all’orario di esercizio dell’attività, allo scopo di tutelare il riposo notturno.</corpo>
+						</comma>
+						<comma id="art21-com5">
+							<num>5.</num>
+							<corpo>E' fatta salva l'applicazione, qualora ne ricorra la fattispecie, dei provvedimenti contingibili e urgenti. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art22">
+						<num>Art. 22</num>
+						<rubrica>Istanze e segnalazioni di disturbo </rubrica>
+						<comma id="art22-com1">
+							<num>1.</num>
+							<corpo>Per segnalare situazioni di disturbo legate all’inquinamento acustico i cittadini singoli o associati possono rivolgersi alla Direzione Ambiente del Comune di Firenze (allegato n. 8). </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art23">
+						<num>Art. 23</num>
+						<rubrica>Abrogazione di norme </rubrica>
+						<comma id="art23-com1">
+							<num>1.</num>
+							<corpo>Sono abrogati gli artt. 79 e 90 del regolamento di Polizia Municipale.</corpo>
+						</comma>
+					</articolo>
+					<articolo id="art24">
+						<num>Art. 24</num>
+						<rubrica>Allegati </rubrica>
+						<comma id="art24-com1">
+							<num>1.</num>
+							<corpo>Gli allegati al presente regolamento sono da considerarsi modelli indicativi ed esplicativi per la presentazione della documentazione richiesta e non costituiscono parte integrante al presente atto. La loro modifica è sempre possibile con atto dirigenziale.</corpo>
+						</comma>
+					</articolo>
+					<articolo id="art25">
+						<num>Art. 25</num>
+						<rubrica>Norma transitoria </rubrica>
+						<comma id="art25-com1">
+							<num>1.</num>
+							<corpo>La Direzione Ambiente del Comune di Firenze ha facoltà di introdurre una procedura sperimentale per la durata di anni 3, con l’obiettivo, fin dall’estate 2004, di integrare efficacemente quanto previsto dalla normativa vigente e dal presente regolamento in materia di prescrizioni, procedure e criteri per il rilascio di autorizzazioni in deroga ai limiti previsti dalle norme in materia di inquinamento acustico per attività temporanee di pubblico spettacolo. </corpo>
+						</comma>
+						<comma id="art25-com2">
+							<num>2.</num>
+							<corpo>Tale procedura, da approvarsi con atto dirigenziale, dopo un’attenta valutazione da un punto di vista acustico dei luoghi maggiormente soggetti ad ospitare queste attività, dovrà per ciascuno di questi luoghi individuare prescrizioni e criteri di utilizzo generali tali da garantire la massima riduzione possibile del disturbo alla cittadinanza. Il consiglio comunale procederà alla verifica della sperimentazione integrando, se del caso, il presente regolamento con le procedure di cui ai commi precedenti.</corpo>
+						</comma>
+					</articolo>
+				</titolo>
+			</articolato>
+			<formulafinale />
+			<conclusione />
+			<annessi>
+				<annesso id="ann1">
+					<testata>
+						<denAnnesso>Allegati</denAnnesso>
+					</testata>
+					<DocumentoNIR nome="xxxxx">
+						<meta>
+							<descrittori>
+								<pubblicazione norm="" num="" tipo="GU" />
+								<entratainvigore norm="" />
+								<redazione id="red2" nome="" norm="" />
+								<urn valore="urn:nir:comune.firenze:regolamento;attivita.rumorose:2004-02-16;12:allegato" />
+							</descrittori>
+						</meta>
+						<contenitore id="con1" nome="corpo">
+							<h:p>
+								<h:a xlink:href="http://centroservizi.lineacomune.it/portal/pls/portal/docs/269598.PDF" xlink:type="simple">Allegato n. 1</h:a>
+							</h:p>
+							<h:p>
+								<h:a xlink:href="http://centroservizi.lineacomune.it/portal/pls/portal/docs/267598.PDF" xlink:type="simple">Allegato n. 2</h:a>
+							</h:p>
+							<h:p>
+								<h:a xlink:href="http://centroservizi.lineacomune.it/portal/pls/portal/docs/267599.PDF" xlink:type="simple">Allegato n. 3</h:a>
+							</h:p>
+							<h:p>
+								<h:a xlink:href="http://centroservizi.lineacomune.it/portal/pls/portal/docs/267600.PDF" xlink:type="simple">Allegato n. 4</h:a>
+							</h:p>
+							<h:p>
+								<h:a xlink:href="http://centroservizi.lineacomune.it/portal/pls/portal/docs/267601.PDF" xlink:type="simple">Allegato n. 5</h:a>
+							</h:p>
+							<h:p>
+								<h:a xlink:href="http://centroservizi.lineacomune.it/portal/pls/portal/docs/267602.PDF" xlink:type="simple">Allegato n. 6</h:a>
+							</h:p>
+							<h:p>
+								<h:a xlink:href="http://centroservizi.lineacomune.it/portal/pls/portal/docs/269599.PDF" xlink:type="simple">Allegato n. 7</h:a>
+							</h:p>
+							<h:p>
+								<h:a xlink:href="http://centroservizi.lineacomune.it/portal/pls/portal/docs/269600.PDF" xlink:type="simple">Allegato n. 8 </h:a>
+							</h:p>
+						</contenitore>
+					</DocumentoNIR>
+				</annesso>
+			</annessi>
+		</DocumentoNIR>
+	</NIR>

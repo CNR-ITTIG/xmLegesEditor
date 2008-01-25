@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="iso-8859-15"?>
+	<!DOCTYPE NIR SYSTEM 'nirflessibile.dtd'>
+	<NIR tipo="originale" xmlns="http://www.normeinrete.it/nir/2.2/" xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<DocumentoNIR nome="Regolamento Comunale">
+			<meta>
+				<descrittori>
+					<pubblicazione norm="20060525" num="" tipo="" />
+					<entratainvigore norm="20060515" />
+					<redazione id="red1" nome="" norm="" />
+					<urn valore="urn:nir:comune.firenze:regolamento;antidoping.feste.tradizioni.fiorentine.calcio:2006-05-15;28" />
+					<urn valore="urn:nir:comune.firenze;consiglio:deliberazione:2006-05-15;28:allegato;regolamento" />
+					<materie vocabolario="Atti Normativi">
+						<materia valore="Calcio Storico" />
+					</materie>
+				</descrittori>
+				<ciclodivita>
+					<eventi>
+						<evento data="20060515" fonte="ro1" id="t1" tipo="entrata in vigore" />
+					</eventi>
+					<relazioni>
+						<originale id="ro1" xlink:href="urn:nir:comune.firenze:regolamento;antidoping.feste.tradizioni.fiorentine.calcio:2006-05-15;28" xlink:type="simple" />
+					</relazioni>
+				</ciclodivita>
+				<redazionale xlink:type="simple">
+					<nota id="n1">
+						<h:p>(Delibera Consiglio Comunale n. 28 del 15.05.2006)</h:p>
+					</nota>
+				</redazionale>
+				<proprietario soggetto="PACTO" xlink:type="simple">
+					<pacto:meta xmlns:pacto="http://www.pacto.it/norme/1.0">
+						<pacto:proposta anno="2006" numero="00343" />
+						<pacto:ufficio valore="Direzione Ufficio del Consiglio" />
+						<pacto:relatore valore="Rlisabetta Meucci" />
+					</pacto:meta>
+				</proprietario>
+			</meta>
+			<intestazione>
+				<emanante>COMUNE DI FIRENZE</emanante>
+				<tipoDoc>REGOLAMENTO COMUNALE</tipoDoc>
+				<dataDoc norm="20060515">15 maggio 2006</dataDoc>
+				n. 
+				<numDoc>28 </numDoc>
+				<titoloDoc>
+					Regolamento Antidoping delle Feste e Tradizioni Fiorentine e del Calcio Fiorentino
+					<ndr num="n1" valore="" xlink:type="simple">(1)</ndr>
+				</titoloDoc>
+			</intestazione>
+			<formulainiziale />
+			<articolato>
+				<articolo id="art1">
+					<num>ART. 1</num>
+					<comma id="art1-com1">
+						<num />
+						<alinea>
+							Il Presidente del Calcio Fiorentino istituisce una Commissioni Antidoping, composta da esperti in materia e dal Maestro di Campo o suo delegato. 
+							<h:br />
+							Alla commissione, presieduta dal Presidente del Calcio e assistita da un segretario da questi nominato, sono demandati: 
+						</alinea>
+						<en id="art1-com1-num1">
+							<num>1.</num>
+							<corpo>Istruttoria dei procedimenti di deferimento alla Commissione Disciplinare dei casi accertati di positività  al controllo antidoping a norma del presente regolamento;</corpo>
+						</en>
+						<en id="art1-com1-num2">
+							<num>2.</num>
+							<corpo>Parere consultivo su quanto il Presidente riterrà  opportuno sottoporre in materia di prevenzione e abuso di narcotici;</corpo>
+						</en>
+						<en id="art1-com1-num3">
+							<num>3.</num>
+							<corpo>proposte operative per attività  di prevenzione nell'ambito delle squadre e dei Quartieri;</corpo>
+						</en>
+						<en id="art1-com1-num4">
+							<num>4.</num>
+							<corpo>
+								Proposte di revisione e modifica al presente regolamento. 
+								<h:br />
+								Il segretario della Commissione potrà altresì essere delegato con atto formale del Presidente all'espletamento di incombenze a lui riservate dal presente regolamento. 
+							</corpo>
+						</en>
+					</comma>
+				</articolo>
+				<articolo id="art2">
+					<num>ART. 2</num>
+					<comma id="art2-com1">
+						<num />
+						<alinea>Il Servizio Feste e Tradizioni Fiorentine assicurerà , tramite apposite convenzioni con: </alinea>
+						<ep id="art2-com1-pun1">
+							<num>-</num>
+							<corpo>L' istituto di Medicina dello Sport della F.M.S.I. di Firenze, i prelievi per il controlli antidoping; </corpo>
+						</ep>
+						<ep id="art2-com1-pun2">
+							<num>-</num>
+							<corpo>Il Laboratorio Antidoping del C.O.N.I. - F.M.S.I. di Firenze, i controlli antidoping e le analisi contestuali; </corpo>
+						</ep>
+						<ep id="art2-com1-pun3">
+							<num>-</num>
+							<corpo>La Sezione di tossicologia Forense dell' Istituto di Medicina Legale dell'Università  di Firenze, i controlli tossicologici periodici con i relativi prelievi </corpo>
+						</ep>
+						<ep id="art2-com1-pun4">
+							<num>-</num>
+							<corpo>In tali convenzioni saranno definiti anche gli oneri che i giocatori dovranno sostenere in proprio a norma del presente regolamento. </corpo>
+						</ep>
+					</comma>
+				</articolo>
+				<articolo id="art3">
+					<num>ART. 3</num>
+					<comma id="art3-com1">
+						<num />
+						<corpo>
+							I giocatori che si iscrivono al Servizio Feste e Tradizioni Fiorentine per partecipare agli allenamenti e alle partite del Calcio Fiorentino devono accettare per iscritto l'obbligo di sottoporsi per sorteggio, su richiesta del Presidente, a controllo antidoping nel periodo degli allenamenti e al termine delle partite relativamente alle sostanze ed ai metodi di cui all' 
+							<rif xlink:href="#art6" xlink:type="simple">art. 6</rif>
+							. 
+						</corpo>
+					</comma>
+				</articolo>
+				<articolo id="art4">
+					<num>ART. 4</num>
+					<comma id="art4-com1">
+						<num />
+						<corpo>
+							I giocatori da sottoporre a controlli antidoping a sorpresa nel periodo dell'allenamento saranno scelti in ciascuna delle squadre mediante sorteggio effettuato dal presidente del Calcio Fiorentino o suo delegato alla presenza di un membro della Commissione Disciplinare e di un rappresentante di ciascun colore. I Presidenti delle squadre hanno facoltà  di presenziare al sorteggio, che comunque si potrà svolgere anche in loro assenza. 
+							<h:br />
+							Il numero dei controlli da effettuare sarà  deciso di volta in volta dal Presidente del Calcio e comunque sarà  uguale per ciascun colore. 
+							<h:br />
+							Il sorteggio si svolgerà  in modo che il prelievo possa essere effettuato di sabato o la sera dei giorni feriali, per venire incontro alle esigenze di lavoro degli interessati. 
+							<h:br />
+							Una volta effettuato il sorteggio, la notifica certa dei nomi al Presidente del Colore o suo delegato fa fede dell'avvenuta comunicazione. 
+							<h:br />
+							I sorteggiati dovranno presentarsi, muniti di documento di identità , al luogo e all'ora indicati nella lettera di convocazione per il prelievo che comunque dovrà  avvenire entro 24 ore dall'avvenuta comunicazione. 
+							<h:br />
+							Il Presidente del Calcio può concedere una deroga a tale termine con motivazione scritta da produrre anche agli incaricati del prelievo. 
+							<h:br />
+							Chi non si presenterà  nei termini sopra prescritti sarà sanzionato a norma dell' 
+							<rif xlink:href="#art8" xlink:type="simple">art. 8</rif>
+							. 
+						</corpo>
+					</comma>
+				</articolo>
+				<articolo id="art5">
+					<num>ART. 5</num>
+					<comma id="art5-com1">
+						<num />
+						<corpo>
+							Gli elenchi dei giocatori che, da un minimo di 3 a un massimo di 27 per ciascuna squadra, saranno sottoposti al controllo antidoping alla fine delle partite del Torneo, saranno sorteggiati dal Presidente del Calcio Fiorentino e consegnati al termine della gara al responsabile dei medici di servizio in campo ai due capitani ed al responsabile dei prelievi. 
+							<h:br />
+							Il Presidente potrà  decidere di sorteggiare un numero superiore a quello stabilito, ma sempre uguale per entrambe le squadre, per provvedere, se del caso, alla sostituzione di eventuali infortunati. In tale evenienza anche questo elenco supplementare deve essere consegnato al termine della gara al responsabile dei medici di servizio in campo, ai due capitani e al responsabile dei prelievi; le sostituzioni potranno essere disposte solo dal Presidente del Calcio o da persona da lui delegata per iscritto e dovranno avvenire seguendo l'ordine decrescente (dal primo all'ultimo della lista). 
+							<h:br />
+							Anche per questi giocatori si applicano le norme che disciplinano l'eventuale assenza del prelievo. 
+							<h:br />
+							Qualora un giocatore, tra quelli sorteggiati per il controllo e che abbia portato o meno a termine la partita, dovesse accusare malesseri di varia natura, tali da richiedere interventi di primo soccorso, potrà  essere esentato dal presentarsi al prelievo solo previa autorizzazione. In mancanza di tale autorizzazione, che dovrà  essere richiesta al Presidente del calcio ovvero a persona/e da questi specificamente delegata/e con atto scritto prima della gara, il giocatore sarà ritenuto assente e sanzionato a norma dell' 
+							<rif xlink:href="#art8" xlink:type="simple">art. 8</rif>
+							. 
+							<h:br />
+							E' comunque sempre disposto il prelievo sul giocatore di cui al comma precedente anche in altro momento e diversa sede, ove l'impedimento venga meno, purchè entro le 72 ore dopo la fine delle partite. 
+						</corpo>
+					</comma>
+				</articolo>
+				<articolo id="art6">
+					<num>ART. 6</num>
+					<comma id="art6-com1">
+						<num />
+						<alinea>Sono considerati doping, per i giocatori del Calcio Fiorentino, i seguenti farmaci: </alinea>
+						<en id="art6-com1-num1">
+							<num>1)</num>
+							<corpo>STIMOLANTI: Amfetamina, Amfetaminosimili, Caffeina, Efradina e Norefedrina, Pseudoefedrina, Fnmetrazina e Fendimetrazina, Fancanfamina, Fenfluramina, Eptaminolo, Niketamide, Fentermina, Cropropamide e Crotetamide (MICOREN), Pemolina, Stricnina, Fenilpropanolamina, Etilefrina, e sostanze affini </corpo>
+						</en>
+						<en id="art6-com1-num2">
+							<num>2)</num>
+							<corpo>
+								NARCOTICI e DROGHE D'ABUSO: Cocaina, Morfina, Eroina, Metadone, Derivati dalla Cannabis (Marijuana, Haschisch ecc.), Pentazocina, Petidina, e sostanze affini. 
+								<h:br />
+								NOTA: Sono consentiti alcuni sedativi della tosse (Destromorfano, Destropropossifene, Difenossilato, Folcodina) e la Codeina (Metilmorfina) purchè la morfina che si libera a causa del metabolismo della codeina non superi un migrogrammo per ml di urine. 3) 
+							</corpo>
+						</en>
+					</comma>
+					<comma id="art6-com2">
+						<num />
+						<alinea>SOSTANZE ANABOLIZZANTI: </alinea>
+						<el id="art6-com2-leta">
+							<num>a)</num>
+							<corpo>
+								Steroidi anabolizzanti androgeni (S.A.A.): Clostebol, Deidroepiandrosterone (DHEA), Flossimesterone, Metandienone, Metenolene, Nandrolone, Ossandrolone, Stanozololo, Testosterone e sostanze affine 
+								<h:br />
+								NOTA: Se il rapporto Testosterone/Epitestosterone (T/E) nelle urine è superiore a 6, l'atleta è considerato a rischio di positività  e sarà  sottoposto ad ulteriori accertamenti (clinici ed analitici) scaglionati nel tempo per accertare se l'alterazione è dovuta ad utilizzazione di Testosterone esogeno od a particolari situazioni fisiologiche e patologiche. 
+							</corpo>
+						</el>
+						<el id="art6-com2-letb">
+							<num>b)</num>
+							<corpo>
+								Beta - 2 agonisti: Clenbuterolo, Fenoterolo, Salbutamolo, Terbutalina e sostanze affini. 
+								<h:br />
+								NOTA: L'utilizzazione di Salbutamolo e Terbutalina è permessa agli atleti sofferenti di asma bronchiale. Tale stato morboso deve essere dichiarato mediante certificazione medica da consegnare al medico che esegue il prelievo. 
+								<h:br />
+								NOTA BENE 
+								<h:br />
+								Con la dizione &quot;sostanze affini&quot; si intendono farmaci aventi strettissimi rapporti di somiglianza strutturale chimica con quelli elencati. 
+								<h:br />
+								Si ricorda che sono proibiti anche quei farmaci che, pur con differente azione chimica, per motivi metabolici si eliminano, sia pure parzialmente, sotto forma di una sostanza doping (Es. Selegilina, EGIBREN, che si elimina parzialmente sotto forma di amfetamina). 
+								<h:br />
+								Le ricerche analitiche nelle urine vengono eseguite qualitativamente; solo per alcuni farmaci elencati di seguito vi sono limitazioni quantitative (Le quantità  sono riferite a microgrammi per ml di urine): Caffeina 12 mcg, Efedrina e norefedrina 5 mcg Pseudoefedrina 10 mcg, Morfina 1 mcg, THC 100 mcg. 
+								<h:br />
+								Se è presente una o più di queste sostanze le singole quantità  devono essere sommate e, se la somma eccede i 10mcg/ml il campione è da considerarsi positivo. 
+								<h:br />
+								Sono altresì considerati doping per i giocatori a tutti gli effetti previsti dal presente regolamento le sostanze ed i metodi di cui alla lista WADA allegata al presente regolamento. 
+								<h:br />
+								Ogni aggiornamento della lista si intende direttamente recepita nel presente regolamento a far data dalla relativa determinazione del CONI. 
+							</corpo>
+						</el>
+					</comma>
+				</articolo>
+				<articolo id="art7">
+					<num>ART. 7</num>
+					<comma id="art7-com1">
+						<num />
+						<corpo>
+							I prelievi devono essere eseguiti in un locale attrezzato, fornito di acqua corrente e servizi igienici. Nella stanza, oltre al giocatore, deve essere presente il medico prelevatore, possono presenziare anche un rappresentante della squadra e un rappresentante della Presidenza del Calcio. 
+							<h:br />
+							Il giocatore deve presentarsi alla data e ora convenute del prelievo con la tessera di iscrizione al proprio colore e documento di identità . Egli deve inoltre produrre, prima del prelievo, tutte le eventuali certificazioni mediche attestanti patologie e/o somministrazioni di farmaci e dichiarare l'eventuale assunzione di farmaci e/o altre sostanze nei 15 giorni precedenti al prelievo. 
+							<h:br />
+							Le urine dovranno essere raccolte in unico contenitore e divise in due flaconi, uno contrassegnato dalla lettera &quot;A&quot; e l'altro dalla lettera &quot;B&quot;, ed entrambi sigillati in presenza dell'interessato, che dovrà  anche firmare le prime due copie del verbale di prelievo. 
+							<h:br />
+							Il verbale di prelievo sarà  in tre copie: delle prime due che riporteranno i dati identificativi dell'atleta e i codici dei sigilli dei due flaconi, una sarà  consegnata all'interessato, l'altra al Presidente del Calcio Fiorentino. La terza copia - che conterrà  solo i codici dei flaconi essendo per il resto del tutto anonima - sarà  recapitata al Laboratorio Antidoping unitamente ai relativi flaconi per l'analisi. 
+							<h:br />
+							I flaconi, i sigilli e le borse per l'eventuale trasporto, nonchè i verbali di prelievo dovranno essere forniti dal Servizio Feste e Tradizioni Fiorentine. 
+							<h:br />
+							Le analisi devono essere anonime e i risultati, sia positivi che negativi, devono essere comunicati per iscritto dal Responsabile del Laboratorio al Presidente del Calcio Fiorentino che procederà  all'identificazione attraverso la copia del verbale in suo possesso e li trasmetterà  agli aventi diritto (giocatore e Presidente del Colore di appartenenza) nel rispetto delle norme vigenti sulla tutela della privacy, con notifica certa. 
+							<h:br />
+							In caso di positività  alla prima analisi è facoltà  dell'interessato (e solo di questi) richiedere per iscritto al Presidente del Calcio Fiorentino entro 24 ore dalla notifica, l'effettuazione dell'analisi contestuale che dovrà  svolgersi entro 48 ore dalla richiesta. All'analisi contestuale, effettuata sul campione raccolto nel flacone &quot;B&quot; potranno assistere l'interessato e il rappresentante di parte. 
+							<h:br />
+							E' facoltà  delle squadre o dei singoli giocatori nominare, per assistere all'analisi contestuale, un perito che presenzierà  al posto del rappresentante di parte. All'analisi contestuale assisterà  anche un rappresentante della Sezione Tossicologica Forense dell'Istituto di Medicina Legale dell'Università  di Firenze. 
+							<h:br />
+							Al termine dell'analisi contestuale sarà  redatto verbale di risposta, firmato dai presenti e in duplice copia: una da consegnare all'interessato e l'altra da inviare al Presidente del Calcio di appartenenza che ne curerà  l'inoltro alla Commissione Antidoping per l'istruttoria del procedimento di deferimento alla Commissione di Disciplina. Tutti gli oneri relativi all'analisi contestuale sono a totale carico degli interessati che dovranno versare la cifra concordata con una struttura pubblica contestualmente alla domanda di effettuazione. In caso di negatività  a tale analisi l'interessato avrà  diritto al rimborso della cifra versata. Se l'interessato non richiederà  l'analisi contestuale nei tempi e con le modalità  sopra descritte, il Presidente del Calcio Fiorentino trasmetterà  alla Commissione Antidoping il Verbale di positività  dell'analisi effettuata sul campione contenuto nel flacone &quot;A&quot; per l'istruttoria del procedimento di deferimento alla Commissione Disciplinare. 
+						</corpo>
+					</comma>
+				</articolo>
+				<articolo id="art8">
+					<num>ART. 8</num>
+					<comma id="art8-com1">
+						<num />
+						<alinea>Al giocatore che non si presenti a taluno dei prelievi previsti dal presente regolamento in difetto di impedimento assoluto certificato da struttura pubblica saranno comminate le seguenti sanzioni: </alinea>
+						<en id="art8-com1-num1">
+							<num>1)</num>
+							<corpo>se non è mai risultato positivo a precedenti analisi </corpo>
+						</en>
+						<el id="art8-com1-leta">
+							<num>a)</num>
+							<corpo>la prima volta due anni di squalifica dal gioco, comunque comprendenti almeno due Tornei di S. Giovanni;</corpo>
+						</el>
+						<el id="art8-com1-letb">
+							<num>b)</num>
+							<corpo>la seconda volta tre anni di squalifica del gioco comunque comprendenti almeno tre Tornei di S. Giovanni;</corpo>
+						</el>
+						<el id="art8-com1-letc">
+							<num>c)</num>
+							<corpo>la terza volta la Radiazione dai ruoli del Calcio Fiorentino </corpo>
+						</el>
+						<en id="art8-com1-num2">
+							<num>2)</num>
+							<corpo>se è stato in precedenza già  sanzionato per positività  al controllo antidoping </corpo>
+						</en>
+						<el id="art8-com1-leta">
+							<num>a)</num>
+							<corpo>la prima volta tre anni di squalifica del gioco comunque comprendenti almeno tre Tornei di S. Giovanni; </corpo>
+						</el>
+						<el id="art8-com1-letb">
+							<num>b)</num>
+							<corpo>
+								la seconda volta la Radiazione dai ruoli del Calcio Fiorentino 
+								<h:br />
+								Similmente le sanzioni di cui ai paragrafi precedenti saranno adottate nei confronti del giocatore che si presenti in ritardo tale da aver determinato l'opzione di scelta di un nominativo preso dall'elenco supplementare previsto dall' 
+								<rif xlink:href="#art5" xlink:type="simple">art. 5</rif>
+								. Qualora il ritardo non pregiudichi la utile effettuazione e la effettiva rappresentatività  dei prelievi e delle conseguenti analisi il giocatore sarà  sanzionato con la squalifica per una partita. 
+							</corpo>
+						</el>
+					</comma>
+				</articolo>
+				<articolo id="art9">
+					<num>ART. 9</num>
+					<comma id="art9-com1">
+						<num />
+						<corpo>
+							Agli effetti del Calcio Fiorentino e delle altre gare o manifestazioni organizzate dal Servizio Feste e Tradizioni Fiorentine viene considerato positivo al controllo antidoping il giocatore i cui liquidi organici contengano una o più delle sostanze di cui all' 
+							<rif xlink:href="#art6" xlink:type="simple">art. 6</rif>
+							rilevate in prima analisi e confermate con l'analisi contestuale ove richiesta. Nel caso l'analisi contestuale non venga richiesta, sarà  valida agli effetti sanzionatori la positività  della prima analisi. Allo stesso modo viene considerato positivo il giocatore nei confronti del quale sia accertata la sottoposizione a taluno dei metodi proibiti di cui all' 
+							<rif xlink:href="#art6" xlink:type="simple">art. 6</rif>
+							penultimo comma. 
+							<h:br />
+							Comunque, la positività  rilevata alla prima analisi comporta - con atto scritto dal Presidente del Calcio Fiorentino - l'immediata sospensione cautelativa dell'interessato da tutte le gare o manifestazioni organizzate dal Servizio Feste e Tradizioni Fiorentine. 
+							<h:br />
+							Le sanzioni che la Commissione Disciplinare potrà  applicare in caso di positività  a taluna delle sostanze o metodi vietati sono le seguenti: 
+							<h:br />
+							PRIMA VIOLAZIONE: mesi 24 di squalifica 
+							<h:br />
+							SECONDA VIOLAZIONE: mesi 36 di squalifica 
+							<h:br />
+							TERZA VIOLAZIONE: squalifica a vita 
+							<h:br />
+							Ai fini della presente disposizione l'omessa presentazione di cui all' 
+							<rif xlink:href="#art8" xlink:type="simple">art. 8</rif>
+							equivale ad una violazione. 
+							<h:br />
+							Il periodo di squalifica comminato dalla Commissione Disciplinare decorre dalla sospensione cautelativa sancita con le modalità  di cui al presente Articolo, ovvero comprenda anche l'intervallo temporale trascorso tra questa e la sanzione ufficiale. 
+							<h:br />
+							A tutela di dati sensibili, prima dell'adozione dei provvedimenti di squalifica o radiazione per doping, la Commissione Disciplinare ne dà  notizia esclusivamente all'interessato che potrà  evitare l'emanazione del provvedimento presentando spontaneamente le dimissioni dalla manifestazione. 
+							<h:br />
+							La Commissione Disciplinare non ammette nuove iscrizioni di persone che prima delle spontanee dimissioni erano sanzionabili con radiazione o squalifica fino a che non sarà  trascorso un periodo pari al doppio della sanzione comminabile. 
+						</corpo>
+					</comma>
+				</articolo>
+				<articolo id="art10">
+					<num>ART. 10</num>
+					<comma id="art10-com1">
+						<num />
+						<corpo>
+							Il giocatore squalificato che dimostri di aver concluso positivamente un programma di recupero dalla tossicodipendenza tenuto da una struttura pubblica ovvero accreditata ai sensi del 
+							<rif xlink:href="urn:nir:presidente.repubblica:decreto:1990;309" xlink:type="simple">D.P.R. n. 309/90</rif>
+							, potrà  chiedere alla Commissione Disciplinare la riduzione della sanzione fino ad un massimo di 6 mesi. Questa disposizione non si applica alla sanzione della squalifica a vita. La squalifica a vita non può essere oggetto di alcun provvedimento clemenziale. 
+						</corpo>
+					</comma>
+				</articolo>
+				<articolo id="art11">
+					<num>ART. 11</num>
+					<comma id="art11-com1">
+						<num />
+						<corpo>Tutti i provvedimenti assunti nella vigenza del precedente regolamento antidoping rimangono efficaci. </corpo>
+					</comma>
+				</articolo>
+				<articolo id="art12">
+					<num>ART. 12</num>
+					<comma id="art12-com1">
+						<num />
+						<corpo>
+							Per quanto non espressamente stabilito dal presente regolamento si applica il codice mondiale Antidoping approvato dal C.N. del Coni con 
+							<rif xlink:href="urn:nir:comune.firenze;consiglio:delibera:2005-06-30;1311" xlink:type="simple">deliberazione n. 1311 del 30 giugno 2005</rif>
+							allegato al presente regolamento in quanto compatibile 
+							<h:br />
+							Ogni aggiornamento del predetto codice si intende direttamente recepito nel presente regolamento a far data dalla relativa deliberazione del CONI. 
+						</corpo>
+					</comma>
+				</articolo>
+			</articolato>
+			<formulafinale />
+			<conclusione />
+		</DocumentoNIR>
+	</NIR>

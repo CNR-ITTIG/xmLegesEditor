@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="iso-8859-15"?>
+	<!DOCTYPE NIR SYSTEM 'nirflessibile.dtd'>
+	<NIR tipo="originale" xmlns="http://www.normeinrete.it/nir/2.2/" xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<DocumentoNIR nome="Delibera">
+			<meta>
+				<descrittori>
+					<pubblicazione norm="20060504" num="" tipo="" />
+					<entratainvigore norm="20060426" />
+					<redazione id="red1" nome="" norm="" />
+					<urn valore="urn:nir:comune.firenze;giunta:deliberazione:2006-04-26;2006-g-00212  " />
+					<materie vocabolario="Atti Normativi">
+						<materia valore="Urbanistica" />
+					</materie>
+				</descrittori>
+				<ciclodivita>
+					<eventi>
+						<evento data="20060426" fonte="ro1" id="t1" tipo="entrata in vigore" />
+					</eventi>
+					<relazioni>
+						<originale id="ro1" xlink:href="urn:nir:comune.firenze;giunta:deliberazione:2006-04-26;2006-g-00212  " xlink:type="simple" />
+					</relazioni>
+				</ciclodivita>
+				<proprietario xlink:type="simple">
+					<pacto:meta xmlns:pacto="http://www.pacto.it/norme/1.0">
+						<pacto:proposta anno="2006" numero="00297" />
+						<pacto:ufficio valore="Direzione Urbanistica" />
+						<pacto:relatore valore="Gianni Biagi" />
+					</pacto:meta>
+				</proprietario>
+			</meta>
+			<intestazione>
+				<emanante>COMUNE DI FIRENZE </emanante>
+				<tipoDoc>DELIBERAZIONE DI GIUNTA </tipoDoc>
+				Numero: 
+				<numDoc>2006/G/00212 </numDoc>
+				Data Adozione: 
+				<dataDoc norm="20060426">26 aprile 2006</dataDoc>
+				<titoloDoc>
+					Oggetto: Avvio del procedimento per la formazione di una variante urbanistica relativa al progetto sulla Nuova viabilità  di cascine del Riccio ex 
+					<rif xlink:href="urn:nir:regione.toscana:legge:2005;1#art15" xlink:type="simple">art. 15 della LR n. 1/2005</rif>
+				</titoloDoc>
+			</intestazione>
+			<formulainiziale>
+				<preambolo>
+					<h:p>LA GIUNTA</h:p>
+					<h:p>Premesso che: </h:p>
+					<h:p>- nell'ambito dell'ampliamento della terza corsia dell'Autostrada A1 Milano-Napoli da Barberino di Mugello a Incisa Valdarno, tratto Firenze Nord - Firenze Sud (tratta C),èstato predisposto il ripristino ambientale della ex cava di Monteripaldi al fine di allocarvi a deposito il materiale inerte proveniente dagli esuberi degli scavi attinenti la realizzazione dell'ampliamento dell'asse autostradale;</h:p>
+					<h:p>- nell'ambito dell'ampliamento della terza corsia dell'Autostrada A1 Milano-Napoli da Barberino di Mugello a Incisa Valdarno, tratto Firenze Nord - Firenze Sud (tratta C),èstato predisposto il ripristino ambientale della ex cava di Monteripaldi al fine di allocarvi a deposito il materiale inerte proveniente dagli esuberi degli scavi attinenti la realizzazione dell'ampliamento dell'asse autostradale;</h:p>
+					<h:p>- il deposito interessa un'area estrattiva abbandonata sul versante meridionale del rilievo di San Michele a Monteripaldi nei pressi della località  Cascine del Riccio nel Comune di Firenze;</h:p>
+					<h:p>- il Comune di Firenze, nella Conferenza dei Servizi del 17.06.1999 ha richiesto che l'accesso alla cava doveva avvenire attraverso un'apposita viabilità  di collegamento tra il cantiere e la cava stessa, predisposta in variante all'attuale strada di accesso all'abitato di Cascine del Riccio;</h:p>
+					<h:p>- nella medesima Conferenzaèstato inoltre prescritto che la viabilità  di servizio, compreso il nuovo ponte sul torrente Ema, venga realizzata con caratteristiche costruttive tali da poter essere consegnata all'Amministrazione Comunale al termine dei lavori quale viabilità  definitiva a servizio dell'insediamento artigianale e industriale di Cascine del Riccio; conseguentemente parte della suddetta viabilità  di servizio verrà  smantellata a fine lavori. Inoltreèprevisto che venga realizzata e resa fruibile la nuova viabilità  di Cascine del Riccio e adeguata quella esistente, così come previsto dal vigente P. R. G. e sulla base delle indicazioni preliminari dell'Amministrazione Comunale;</h:p>
+					<h:p>Ricordato che: - il verbale della Conferenza dei Servizi del 17.06.1999 inerente il progetto per l'ampliamento della terza corsia del tratto Firenze Nord - Firenze Sudèstato confermato e sottoscritto anche dai rappresentanti della Regione Toscana e della Provincia di Firenze;</h:p>
+					<h:p>- l'Accordo Procedimentale per l'attuazione degli interventi di potenziamento e messa in sicurezza dell'autostrada A1 nel tratto Firenze Nord - Firenze Sud e delle opere connesse, definito e sottoscritto tra l'altro, dai rappresentanti della Regione Toscana e della Provincia di Firenze, in data 17.06.1999, fa parte integrante e sostanziale della Conferenza suddetta;</h:p>
+					<h:p>
+						- in data 08.10.1999 il Provveditore regionale alle opere pubbliche per la Toscana - Firenze ha acclarato formalmente l'intesa Stato-Regione ex 
+						<rif xlink:href="urn:nir:presidente.repubblica:decreto:1977;616#art81" xlink:type="simple">art.81 D.P.R. n.616/77</rif>
+						e 
+						<rif xlink:href="urn:nir:presidente.repubblica:decreto:1994;384#art2" xlink:type="simple">art.2 del D.P.R. 384/94</rif>
+						, riguardante il progetto per l'ampliamento della terza corsia del tratto Firenze Nord - Firenze Sud dell'Autostrada A1 Milano - Napoli, con le raccomandazioni e prescrizioni nonchè nell'osservanza dell'accordo procedimentale e dei protocolli d'intesa tutti contenuti nei verbali della Conferenza di Servizi del 21.04.1999, del 01.06.1999 e del 17.06.1999; 
+					</h:p>
+					<h:p>Considerato che a seguito di quanto sopra esposto:</h:p>
+					<h:p>- E' stato elaborato da parte della Società  Autostrade per l'Italia e in collaborazione con gli uffici comunali, il progetto preliminare della nuova viabilità  di Cascine del Riccio e che lo stesso risulta in parziale difformità  con le previsioni del vigente P. R. G;</h:p>
+					<h:p>
+						- E' necessario avviare il procedimento per la formazione della relativa variante urbanistica, ai sensi dell' 
+						<rif xlink:href="urn:nir:regione.toscana:legge:2005-01-03;1#art15" xlink:type="simple">art. 15 della legge regionale 3.1.2005 n. 1</rif>
+						con conseguente apposizione di vincolo di esproprio ai sensi di quanto disposto dal Testo Unico sugli Espropri; 
+					</h:p>
+					<h:p>Viste le relazioni del Servizio Pianificazione e Grandi Progetti e del Servizio Attività  Geologiche e V.I.A., e preso atto dalle stesse che: a) quanto agli obiettivi, alle azioni conseguenti e agli effetti territoriali e ambientali attesi, la variante urbanistica qui proposta: </h:p>
+					<h:p>- rende compatibile il progetto di opera pubblica citato in premessa con le previsioni del vigente P. R. G;</h:p>
+					<h:p>- migliora le condizioni ambientali e territoriali della zona in quanto realizza un nuovo sistema viario locale, necessario per aggirare l'abitato di Cascine del Riccio costituito da un nuovo collegamento compreso tra la nuova rotatoria fino al suo innesto, poco dopo la scuola, su Via delle Cinque Vie, ed un nuovo collegamento, che in parte sfrutta la viabilità  attualmente adibita a solo uso di cantiere, per aggirare dalla predetta rotatoria i campi sportivi ed innestarsi su Via di Ponte a Iozzi, collegandosi così alla zona artigianale e industriale situata nel Comune di Impruneta;</h:p>
+					<h:p>
+						- persegue la finalità  di apporre per la prima volta il vincolo preordinato all'esproprio e/o reiterare quei vincoli già  apposti e decaduti per decorrenza quinquennale dei termini di legge , ricadendo attualmente le aree sotto la disciplina di cui all' art. 9 del testo unico in materia edilizia approvato con il 
+						<rif xlink:href="urn:nir:presidente.repubblica:decreto:2001-06-06;380" xlink:type="simple">DPR 6 giugno 2001, n. 380</rif>
+						, 
+					</h:p>
+					<h:p>- consente pertanto di attivare, le procedure espropriative sulle aree necessarie all'esecuzione materiale dell'opera;</h:p>
+					<h:p>b) quanto al quadro conoscitivo, allo stato delle risorse e alle ulteriori ricerche da svolgere la variante urbanistica: - non comporta alcun decremento della dotazione complessiva degli standard di cui al D.M. 2.4.1968 n.1444 ;</h:p>
+					<h:p>
+						- E' coerente con gli obiettivi del Piano Strutturale, approvato dal Comune di Firenze con 
+						<rif xlink:href="urn:nir:comune.firenze;consiglio:delibera:2004-04-20;59,39" xlink:type="simple">deliberazione consiliare n. 59/39 del 20.4.2004</rif>
+						, dove l'area oggetto di interventoèindividuata nella Tav.11- Unità  
+					</h:p>
+					<h:p>territoriali omogenee elementari- degli elaborati di progetto del Tomo III, all'interno dell'UTOE n.14 Collina Sud; inoltre nella Tav.4- Sistema della mobilità - degli elaborati di progetto, l'areaèidentificata nel Sub-sistema della mobilità  su strada, come viabilità  da potenziare;</h:p>
+					<h:p>- E' compatibile con i vincoli sovraordinati al P. R. G. gravanti sull'area che neèoggetto;</h:p>
+					<h:p>
+						- delimitazione del perimetro del Centro Abitato ( 
+						<rif xlink:href="urn:nir:stato:legge:1967;765#art17" xlink:type="simple">Art.17 L.765/67</rif>
+						): l'area ricade in gran parte fuori dal perimetro del centro abitato ed in piccola parte entro il perimetro del centro abitato; 
+					</h:p>
+					<h:p>c) quanto agli eventuali apporti conoscitivi da parte di Enti ed organismi pubblici si prescinde da essi dal momento che la variante urbanistica qui proposta non interferisce con gli strumenti della pianificazione regionale e provinciale,èconnessa alla realizzazione dell'opera pubblica richiamata in premessa, edèpertanto di esclusivo interesse comunale;</h:p>
+					<h:p>d) quanto agli eventuali pareri, nulla - osta o assensi da parte di Enti o organi pubblici ai fini della approvazione della variante urbanistica in oggetto si precisa che gli atti costituenti la variante stessa sono soggetti unicamente al deposito presso l'Ufficio Regionale per la tutela del territorio, al quale sarà  provveduto prima della sua formale adozione da parte del Consiglio Comunale;</h:p>
+					<h:p>il tutto come meglio rappresentato nella relazione urbanistica e nella certificazione dirigenziale, entrambe allegate al presente atto a formarne sua parte integrante e sostanziale.</h:p>
+					<h:p>
+						Considerato che - ai sensi degli articoli 19 e 20 della 
+						<rif xlink:href="urn:nir:regione.toscana:legge:2005-01-03;1" xlink:type="simple">legge regionale n. 1 del 3.1.2005</rif>
+						- gli atti di pianificazione devono essere assistiti, in ogni loro fase, dalla figura del Garante d ella comunicazione che deve assicurare una diffusa informazione in merito agli atti stessi; 
+					</h:p>
+					<h:p>Preso atto che, ai fini di cui sopra, con propria determinazione n. 2006 /DD/03361 del 4.04.2006 il Direttore della Direzione Urbanistica ha individuato - in via provvisoria e limitatamente al procedimento in oggetto - la figura del Garante nella persona della Dott.ssa Silvia Scarsella, dipenendente della Direzione stessa;</h:p>
+					<h:p>Tutto quanto sopra premesso, e ritenuto di provvedere in merito;</h:p>
+					<h:p>Ravvisata la propria competenza in ordine al presente avvio del procedimento, trattandosi di proposta preliminare intesa a promuovere una variante urbanistica di esclusivo interesse comunale, da sottoporre poi all'attenzione del Consiglio Comunale per la sua successiva adozione ed approvazione;</h:p>
+					<h:p>
+						Di dare atto che ai sensi di quanto disposto dall' art. 7 e ss della 
+						<rif xlink:href="urn:nir:regione.toscana:legge:2005-02-17;30" xlink:type="simple">L.R. n.30 del 17.2.2005</rif>
+						, avente ad oggetto &quot;Disposizioni in materia di espropriazione per pubblica utilità &quot;, e a far data dall'atto di approvazione della presente variante, sulle aree private sarà  apposto il vincolo preordinato all'esproprio; 
+					</h:p>
+					<h:p>
+						Visto l' 
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:2000-08-18;267#art49" xlink:type="simple">art. 49 del D.Lgs. 18.8.2000 n. 267</rif>
+						e preso atto del parere di regolarità  reso in ordine al presente provvedimento, precisando che da questo non deriveranno diretti effetti contabili consistenti in impegni di spesa o riduzioni di entrata; 
+					</h:p>
+					<h:p>
+						Vista la 
+						<rif xlink:href="urn:nir:regione.toscana:legge:2005-01-03;1" xlink:type="simple">legge regionale n. 1 del 3.1.2005</rif>
+						; 
+					</h:p>
+					<h:p>
+						Visto il 
+						<rif xlink:href="urn:nir:presidente.repubblica:decreto:2001;327" xlink:type="simple">DPR n. 327/2001</rif>
+						( T.U. Espropri), come modificato dal 
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:2002-12-27;302" xlink:type="simple">D.Lgs. 27/12/02, n.302</rif>
+						e la 
+						<rif xlink:href="urn:nir:regione.toscana:legge:2005-02-17;30" xlink:type="simple">Legge Regionale n. 30 del 17.2.05</rif>
+						; 
+					</h:p>
+				</preambolo>
+			</formulainiziale>
+			<contenitore id="con1" nome="dispositivo">
+				<h:p>DELIBERA</h:p>
+				<h:p>
+					1. di avviare - ai sensi dell' 
+					<rif xlink:href="urn:nir:regione.toscana:legge:2005-01-03;1#art15" xlink:type="simple">art. 15 della legge regionale n. 1 del 3.1.2005</rif>
+					- il procedimento per la formazione di una variante al vigente P. R. G. relativa alle aree meglio descritte nella relazione urbanistica allegata, correlata al progetto di opera p ubblica avente ad oggetto: &quot;Nuova viabilità  di cascine del Riccio&quot; 
+				</h:p>
+				<h:p>2. di dare atto che con il progetto di variante di cui al precedente punto 1 le attuali destinazioni vincolistiche del vigente P. R. G. subiranno le seguenti modifiche: </h:p>
+				<h:table>
+					<h:thead>
+						<h:tr>
+							<h:td>Da:</h:td>
+							<h:td>A:</h:td>
+						</h:tr>
+					</h:thead>
+					<h:tbody>
+						<h:tr>
+							<h:td>Sottozona F3: Viabilità  di progetto a raso</h:td>
+							<h:td>Sottozona F3: Viabilità  di progetto a raso</h:td>
+						</h:tr>
+						<h:tr>
+							<h:td>Sottozona E2: agricola di particolare interesse</h:td>
+							<h:td>Sottozona F3: Viabilità  di progetto a raso</h:td>
+						</h:tr>
+						<h:tr>
+							<h:td>Sottozona G1p: verde pubblico e sportivo di progetto,con simbolo di attrezzatura </h:td>
+							<h:td>Sottozona F3: Viabilità  di progetto a raso</h:td>
+						</h:tr>
+						<h:tr>
+							<h:td>Aree di tutela boscate e cespugliate</h:td>
+							<h:td>Sottozona F3: Viabilità  di progetto a raso</h:td>
+						</h:tr>
+						<h:tr>
+							<h:td>Sottozona H1: aree di verde privato e di pertinenza</h:td>
+							<h:td>Sottozona F3: Viabilità  di progetto a raso</h:td>
+						</h:tr>
+						<h:tr>
+							<h:td>Sottozona E2: agricola di particolare interesse</h:td>
+							<h:td>Sottozona F3: Viabilità  di progetto in galleria</h:td>
+						</h:tr>
+						<h:tr>
+							<h:td>Sottozona F3: Viabilità  di progetto a raso</h:td>
+							<h:td>Sottozona F3: verde di corredo stradale</h:td>
+						</h:tr>
+						<h:tr>
+							<h:td>Sottozona E2: agricola di particolare interesse</h:td>
+							<h:td>Sottozona F3: verde di corredo stradale</h:td>
+						</h:tr>
+						<h:tr>
+							<h:td>Sottozona G1p: verde pubblico e sportivo di progetto, con simbolo di attrezzatura sportiva</h:td>
+							<h:td>Sottozona F3: verde di corredo stradale</h:td>
+						</h:tr>
+						<h:tr>
+							<h:td>Sottozona G1p: verde pubblico e sportivo di progetto, con simbolo di verde pubblico</h:td>
+							<h:td>Sottozona F3: verde di corredo stradale</h:td>
+						</h:tr>
+						<h:tr>
+							<h:td>Sottozona G2p: attrezzature e servizi di progetto, con simbolo di parcheggio</h:td>
+							<h:td>Sottozona F3: verde di corredo stradale </h:td>
+						</h:tr>
+						<h:tr>
+							<h:td>Aree di tutela boscate e cespugliate</h:td>
+							<h:td>Sottozona F3: verde di corredo stradale</h:td>
+						</h:tr>
+						<h:tr>
+							<h:td>Sottozona G1p: verde pubblico e sportivo di , con simbolo di attrezzatura sportiva</h:td>
+							<h:td>Sottozona G1p: verde pubblico e sportivo di progetto,con simbolo di verde pubblico</h:td>
+						</h:tr>
+						<h:tr>
+							<h:td />
+							<h:td />
+						</h:tr>
+					</h:tbody>
+				</h:table>
+				<h:p>3. di dare atto che con la presente procedura di variante urbanistica le aree di cui al precedente punto saranno sottoposte al vincolo preordinato all'esproprio ai sensi e per gli effetti di cui all' art. 7 e ss. </h:p>
+				<h:p>
+					della citata 
+					<rif xlink:href="urn:nir:regione.toscana:legge:2005;30" xlink:type="simple">L.R. n. 30/05</rif>
+					; 
+				</h:p>
+				<h:p>4. di riservarsi, prima dell'adozione del provvedimento di variante urbanistica al PRG, di adeguare la destinazione di piccole e poco significative porzioni del territorio comunale, in quanto ricadute conseguenti al progetto viario in oggetto; </h:p>
+				<h:p>
+					5. di dare atto che il Garante della comunicazione di cui all' 
+					<rif xlink:href="urn:nir:regione.toscana:legge:2005;1#art19" xlink:type="simple">art. 19 della legge regionale n. 1/2005</rif>
+					èstato individuato nella persona della dr. Silvia Scarsella, a tale ruolo nominata con determinazione direttoriale n. 2006 /DD/03361 del 4.04.2006; 
+				</h:p>
+				<h:p>6. di prendere atto che gli elaborati grafici e descrittivi costituenti il progetto di variante di cui trattasi sono quelli di seguito indicati, allegati al presente atto a formarne sua parte integrante e sostanziale: </h:p>
+				<h:p>a. - relazione urbanistica del Servizio Pianificazione e Grandi Progetti e suoi allegati; </h:p>
+				<h:p>allegato 1- inquadramento territoriale CTR 1:5.000 con individuazione dell'area; </h:p>
+				<h:p>allegato 2- vincoli sovraordinati al PRG; </h:p>
+				<h:p>allegato 3- schema grafico di proposta; </h:p>
+				<h:p>allegato 4- relazione sulla pericolosità  geologica ed idrogeologica-idraulica; </h:p>
+				<h:p>b. - certificazione del Responsabile del procedimento prot n. 22398/06/07 del 24 aprile 2006; </h:p>
+				<h:p>c. - determinazione direttoriale n. 2006 /DD/03361 del 4.04.2006. </h:p>
+				<h:p>d. - di dichiarare il seguente provvedimento immediatamente eseguibile. </h:p>
+			</contenitore>
+			<formulafinale />
+			<conclusione />
+		</DocumentoNIR>
+	</NIR>

@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!DOCTYPE NIR SYSTEM 'nirflessibile.dtd'>
+	<NIR tipo="originale" xmlns="http://www.normeinrete.it/nir/2.2/" xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<DocumentoNIR nome="Delibera Consiliare">
+			<meta>
+				<descrittori>
+					<pubblicazione norm="20040824" num="" tipo="" />
+					<entratainvigore norm="20040811" />
+					<redazione id="red1" nome="" norm="" />
+					<urn valore="urn:nir:comune.firenze;giunta:deliberazione:2004-08-11;2004-g-00427" />
+					<materie vocabolario="Atti Normativi">
+						<materia valore="Traffico" />
+					</materie>
+				</descrittori>
+				<ciclodivita>
+					<eventi>
+						<evento data="20040811" fonte="ro1" id="t1" tipo="entrata in vigore" />
+					</eventi>
+					<relazioni>
+						<originale id="ro1" xlink:href="urn:nir:comune.firenze;giunta:deliberazione:2004-08-11;2004-g-00427" xlink:type="simple" />
+					</relazioni>
+				</ciclodivita>
+				<proprietario xlink:type="simple">
+					<pacto:meta xmlns:pacto="http://www.pacto.it/norme/1.0">
+						<pacto:proposta anno="2004" numero="00587" />
+						<pacto:ufficio valore="Direzione Nuove Infrastrutture" />
+						<pacto:relatore valore="Paolo Coggiola" />
+					</pacto:meta>
+				</proprietario>
+			</meta>
+			<intestazione>
+				<emanante>COMUNE DI FIRENZE </emanante>
+				<tipoDoc>DELIBERAZIONE DI GIUNTA </tipoDoc>
+				Numero: 
+				<numDoc>2004/G/00427</numDoc>
+				Data Adozione: 
+				<dataDoc norm="20040811">11 agosto 2004</dataDoc>
+				<titoloDoc>Oggetto: POLO OSPEDALIERO CAREGGI - Nuova viabilità  di accesso da nord-ovest - II stralcio - Approvazione progetto esecutivo </titoloDoc>
+			</intestazione>
+			<formulainiziale>
+				<preambolo>
+					<h:p>LA GIUNTA </h:p>
+					<h:p>
+						Premesso che: - con propria 
+						<rif xlink:href="urn:nir:comune.firenze;consiglio:delibera:2002-12-30;1193" xlink:type="simple">deliberazione n. 1193 del 30.12.2002</rif>
+						è stato approvato il progetto preliminare relativo al Polo Ospedaliero Careggi - Nuova viabilità  di accesso da nord ovest - II stralcio; 
+					</h:p>
+					<h:p>
+						- con propria 
+						<rif xlink:href="urn:nir:comune.firenze;consiglio:delibera:2002-12-30;1193" xlink:type="simple">deliberazione n. 1193 del 30.12.2002</rif>
+						èstato approvato il progetto preliminare relativo al Polo Ospedaliero Careggi - Nuova viabilità  di accesso da nord ovest - II stralcio; 
+					</h:p>
+					<h:p>
+						- a seguito della Conferenza dei Servizi del 29.12.2003 in cui erano stati espressi i pareri favorevoli degli enti competenti, compresa la Soprintendenza ai beni ambientali ed architettonici, con 
+						<rif xlink:href="urn:nir:comune.firenze;giunta:deliberazione:2004-06-08;317" xlink:type="simple">deliberazione G.M. n. 317 del 8.6.200</rif>
+						4 è stato approvato il progetto definitivo, dichiarata la pubblica utilità  dell'opera per l'avvio della procedura espropriativa ai sensi del 
+						<rif xlink:href="urn:nir:presidente.repubblica:decreto:2001;327" xlink:type="simple">D.P.R.n.327/2001</rif>
+						e dato mandato alla Direzione Ragioneria di assumere il relativo mutuo; 
+					</h:p>
+					<h:p>
+						- l'opera era stata prevista dalla variante al PRG adottata dal Consiglio Comunale con 
+						<rif xlink:href="urn:nir:comune.firenze;consiglio:deliberazione:2002-09-23;702" xlink:type="simple">deliberazione . n. 702 del 23/09/2002</rif>
+						e approvata dal CC con 
+						<rif xlink:href="urn:nir:comune.firenze;consiglio:delibera:2003-02-17;36" xlink:type="simple">deliberazione n. 36 del 17.2.2003</rif>
+						, cosicchè era sorto il vincolo preordinato all'esproprio; 
+					</h:p>
+					<h:p>- l'intervento era stato altresì previsto nel Piano Triennale Investimenti 2003-2005, funz.08 servizio 01, cod. opera n.010276 , per la somma di Euro 1.231.870,00;</h:p>
+					<h:p>
+						Visti gli elaborati redatti da tecnici interni all'Amministrazione e costituenti il progetto esecutivo relativo al secondo stralcio funzionale per la viabilità  di accesso Nord-Ovest al Polo Ospedaliero di Careggi, tutti parte integrante del presente provvedimento: 
+						<h:br />
+						RE 1 Relazione Tecnica Descrittiva 
+						<h:br />
+						RE 2 Relazione geologica e idrogeologica 
+						<h:br />
+						RE 3 Calcoli delle strutture dell'impianto di illuminazione 
+						<h:br />
+						RE 4 Relazione tecnica dell'impianto di smaltimento delle acque piovane 
+						<h:br />
+						RE 5 Capitolato Speciale di Appalto 
+						<h:br />
+						RE 6 Analisi del prezzi a corpo 
+						<h:br />
+						RE 7 Computo metrico estimativo 
+						<h:br />
+						RE 8 Quadro economico 
+						<h:br />
+						RE 9 Elenco prezzi 
+						<h:br />
+						RE 10 Piano della sicurezza e coordinamento 
+						<h:br />
+						RE 11 Cronoprogramma dei lavori 
+						<h:br />
+						RE 12 Piano della manutenzione ed indicazione degli oneri relativi 
+						<h:br />
+						LC 1 Lista delle categorie 
+						<h:br />
+						LC 2 Elenco descrittivo delle voci 
+						<h:br />
+						IM 1 Incidenza della manodopera 
+						<h:br />
+						PG 1 Stralci di intervento - Quadro di insieme 
+						<h:br />
+						PG 2 Planimetria Stato Attuale con rilievo planoaltimetrico (su base C.T. R. ) 
+						<h:br />
+						PG 3 Planimetria sovrapposta al P. R. G. 
+						<h:br />
+						PG 4 Planimetria sovrapposta alla zonazione di cui al DCR 12/2000 (DCR 230/94) 
+						<h:br />
+						PG 5 Planimetria sovrapposta alla zonazione di cui al 
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:2000;490" xlink:type="simple">DLGS 490/2000</rif>
+						<h:br />
+						PG 6 Profilo longitudinale 
+						<h:br />
+						PG 7 Sezioni stradali 
+						<h:br />
+						PG 8 Sezioni tipo1 - tipo2 (su viabilità  esistente e su viabilità  di progetto) 
+						<h:br />
+						PG 9 Tracciato analitico 
+						<h:br />
+						PG 10 Planimetria sistemazioni di progetto 
+						<h:br />
+						PG 11 Planimetria con indicazione delle principali lavorazioni 
+						<h:br />
+						IL1 ILLUMINAZIONE - Planimetria 
+						<h:br />
+						SM1 SMALTIMENTO ACQUE -Planimetria 
+						<h:br />
+						SM2 SMALTIMENTO ACQUE -Profili 
+						<h:br />
+						CA 1 Planimetria di intervento su base catastale 
+						<h:br />
+						CT 1 Planimetria FASI di cantierizzazione 
+						<h:br />
+						SE 1 Planimetria con segnaletica stradale 
+						<h:br />
+						Rilevato che il quadro economico dell'intervento risulta il seguente: 
+					</h:p>
+					<h:table>
+						<h:tbody>
+							<h:tr>
+								<h:td>Lavori</h:td>
+								<h:td>Euro</h:td>
+								<h:td>586.150,00</h:td>
+							</h:tr>
+							<h:tr>
+								<h:td>Oneri della sicurezza non soggetti a r. a.</h:td>
+								<h:td>Euro</h:td>
+								<h:td>30.850,00</h:td>
+							</h:tr>
+							<h:tr>
+								<h:td />
+								<h:td />
+								<h:td>617.000,00</h:td>
+							</h:tr>
+							<h:tr>
+								<h:td>iva 10% sui lavori</h:td>
+								<h:td>Euro</h:td>
+								<h:td>61.700,00</h:td>
+							</h:tr>
+							<h:tr>
+								<h:td>TOTALE LAVORI</h:td>
+								<h:td>Euro</h:td>
+								<h:td>678.700,00</h:td>
+							</h:tr>
+							<h:tr>
+								<h:td>Somme a disposizione dell'Amministrazione:</h:td>
+								<h:td />
+								<h:td />
+							</h:tr>
+							<h:tr>
+								<h:td>Spese tecniche compresa iva 20%</h:td>
+								<h:td>Euro</h:td>
+								<h:td>3.000,00</h:td>
+							</h:tr>
+							<h:tr>
+								<h:td>Espropri </h:td>
+								<h:td>Euro</h:td>
+								<h:td>538.850,00</h:td>
+							</h:tr>
+							<h:tr>
+								<h:td>
+									Incentivo 
+									<rif xlink:href="urn:nir:stato:legge:1994;109#art18" xlink:type="simple">art.18 L.109/94</rif>
+									(1,5%) 
+								</h:td>
+								<h:td>Euro</h:td>
+								<h:td>9.255,00</h:td>
+							</h:tr>
+							<h:tr>
+								<h:td>Assicurazione progettisti interni</h:td>
+								<h:td>Euro</h:td>
+								<h:td>1.086,16 </h:td>
+							</h:tr>
+							<h:tr>
+								<h:td>Imprevisti e lavori in economia</h:td>
+								<h:td>Euro</h:td>
+								<h:td>978,84</h:td>
+							</h:tr>
+							<h:tr>
+								<h:td>TOTALE</h:td>
+								<h:td>Euro</h:td>
+								<h:td>1.231.870,00</h:td>
+							</h:tr>
+						</h:tbody>
+					</h:table>
+					<h:p>Preso atto che pertanto non viene modificata la ripartizione dei capitoli di bilancio sui quali far gravare le varie voci che compongono il quadro economico, rispetto a quello già  approvato con il progetto definitivo; </h:p>
+					<h:p>
+						Vista altresì la Relazione tecnica e descrittiva del R. U.P. in cui è detto quanto segue: 
+						<h:br />
+						L'intervento è soggetto ad aliquota iva agevolata al 10%, secondo la normativa vigente, perché trattasi di opere di urbanizzazione; 
+					</h:p>
+					<h:p>Il progetto tiene conto dell'intero costo dell'opera ed i prezzi sono congrui;</h:p>
+					<h:p>- Il progetto è conforme al D.lgsn.494/96 e s.m.i.</h:p>
+					<h:p>
+						- Il progetto è conforme alle prescrizioni di cui all' 
+						<rif xlink:href="urn:nir:stato:legge:1996;662#art2-com60" xlink:type="simple">art.2, 60° comma, L.n.662/96</rif>
+						, ai fini del rispetto - dei vincoli ambientali; 
+					</h:p>
+					<h:p>
+						a seguito della verifica effettuata ai sensi dell' 
+						<rif xlink:href="urn:nir:presidente.repubblica:decreto:1999;554#art47" xlink:type="simple">art.47 DPR n.554/1999</rif>
+						, il progetto risulta conforme - alla normativa vigente; 
+					</h:p>
+					<h:p>
+						Rilevato che è prevista una spesa annuale per gli oneri di gestione della nuova opera, a decorrere dal 2006 comporteranno annualmente una spesa così suddivisa: 
+						<h:br />
+						€ 1.800,00 per consumi ENEL sul Cap.33780 
+						<h:br />
+						€ 1.000,00 per canone Silfi sul Cap.33710 
+						<h:br />
+						€ 2.300,00 per manutenzione verde sul Cap.18510 
+						<h:br />
+						€ 470,00 per fornitura acqua per irrigazione sul Cap.46605 
+						<h:br />
+						e, per quanto riguarda la segnaletica stradale e la manutenzione ordinaria della strada, si fa riferimento al piano di manutenzione dell'opera, parte del progetto di cui trattasi; 
+					</h:p>
+					<h:p>Preso atto che tutti gli atti gestionali per l'attuazione del presente provvedimento, ivi compresa l'indicazione delle procedure di scelta del contraente, l'assunzione dell'impegno di spesa, saranno oggetto di successiva determinazione dirigenziale;</h:p>
+					<h:p>
+						Vista 
+						<rif xlink:href="urn:nir:stato:legge:1994;109" xlink:type="simple">L. n.109/94</rif>
+						così come modificata dalla 
+						<rif xlink:href="urn:nir:stato:legge:2002-08-01;166" xlink:type="simple">L.n.166 del 1.8.2002</rif>
+						; 
+					</h:p>
+					<h:p>
+						Visto il 
+						<rif xlink:href="urn:nir:presidente.repubblica:decreto:1999;554" xlink:type="simple">D.P.R. n.554/99</rif>
+						; 
+					</h:p>
+					<h:p>
+						Visti gli artt.42 e 48 del 
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:2000;267" xlink:type="simple">D.lgs.n.267/2000</rif>
+						; 
+					</h:p>
+					<h:p>Ritenuto di adottare in merito un provvedimento deliberativo immediatamente eseguibile, ai sensi dell' art.134, 4° comma del T.U. E. L. , onde consentire l'esperimento della gara d'appalto al più presto;</h:p>
+					<h:p>
+						Preso atto dei pareri favorevoli sulla regolarità  tecnica e contabile del presente provvedimento, ai sensi dell' 
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:2000;267#art49" xlink:type="simple">art.49 del D.lgs.n.267/2000</rif>
+						; 
+					</h:p>
+				</preambolo>
+			</formulainiziale>
+			<contenitore id="con1" nome="dispositivo">
+				<h:p>DELIBERA</h:p>
+				<h:p>1. Di approvare il progetto esecutivo relativo all'intervento di realizzazione della Viabilità  di accesso da Nord-Ovest al Polo Ospedaliero di Careggi - secondo stralcio funzionale, costituito dagli elaborati tecnici sopra indicati, tutti parte integrante del presente provvedimento; </h:p>
+				<h:p>2.Di approvare il quadro economico dell'intervento che risulta così ripartito: </h:p>
+				<h:table>
+					<h:tbody>
+						<h:tr>
+							<h:td>Lavori</h:td>
+							<h:td>Euro</h:td>
+							<h:td>586.150,00</h:td>
+						</h:tr>
+						<h:tr>
+							<h:td>Oneri della sicurezza non soggetti a r. a.</h:td>
+							<h:td>Euro</h:td>
+							<h:td>30.850,00</h:td>
+						</h:tr>
+						<h:tr>
+							<h:td />
+							<h:td />
+							<h:td>617.000,00</h:td>
+						</h:tr>
+						<h:tr>
+							<h:td>iva 10% sui lavori </h:td>
+							<h:td>Euro</h:td>
+							<h:td>61.700,00</h:td>
+						</h:tr>
+						<h:tr>
+							<h:td>TOTALE LAVORI</h:td>
+							<h:td>Euro</h:td>
+							<h:td>678.700,00</h:td>
+						</h:tr>
+						<h:tr>
+							<h:td>Somme a disposizione dell'Amministrazione:</h:td>
+							<h:td />
+							<h:td />
+						</h:tr>
+						<h:tr>
+							<h:td>Spese tecniche compresa iva 20%</h:td>
+							<h:td>Euro</h:td>
+							<h:td>3.000,00</h:td>
+						</h:tr>
+						<h:tr>
+							<h:td>Espropri</h:td>
+							<h:td>Euro</h:td>
+							<h:td>538.850,00</h:td>
+						</h:tr>
+						<h:tr>
+							<h:td>
+								Incentivo 
+								<rif xlink:href="urn:nir:stato:legge:1994;109#art18" xlink:type="simple">art.18 L.109/94</rif>
+								(1,5%) 
+							</h:td>
+							<h:td>Euro</h:td>
+							<h:td>9.255,00</h:td>
+						</h:tr>
+						<h:tr>
+							<h:td>Assicurazione progettisti interni</h:td>
+							<h:td>Euro</h:td>
+							<h:td>1.086,16 </h:td>
+						</h:tr>
+						<h:tr>
+							<h:td>Imprevisti e lavori in economia</h:td>
+							<h:td>Euro</h:td>
+							<h:td>978,84</h:td>
+						</h:tr>
+						<h:tr>
+							<h:td>TOTALE</h:td>
+							<h:td>Euro</h:td>
+							<h:td>1.231.870,00</h:td>
+						</h:tr>
+					</h:tbody>
+				</h:table>
+				<h:p>3. Di prendere atto che è già  stato concesso dalla Cassa Depositi e prestiti il relativo mutuo, come risulta dalla determinazione dirigenziale n.6325 /2004, e che rimane invariata la ripartizione della spesa sui vari capitoli di bilancio; </h:p>
+				<h:p>4. di prendere atto che gli oneri di gestione della nuova opera, a decorrere dal 2006, comporteranno annualmente una spesa così suddivisa: </h:p>
+				<h:p>
+					€ 1.800,00 per consumi ENEL sul Cap.33780 
+					<h:br />
+					€ 1.000,00 per canone Silfi sul Cap.33710 
+					<h:br />
+					€ 2.300,00 per manutenzione verde sul Cap.18510 
+					<h:br />
+					€ 470,00 per fornitura acqua per irrigazione sul Cap.46605 
+					<h:br />
+					e, per quanto riguarda la segnaletica stradale e la manutenzione ordinaria della strada, si fa riferimento al piano di manutenzione dell'opera, parte del progetto di cui trattasi; 
+				</h:p>
+				<h:p>5. di confermare quale Responsabile unico del procedimento il Dott.Pietro Rubellini; </h:p>
+				<h:p>6. di stabilire che tutti gli atti gestionali per l'attuazione del presente provvedimento, ivi compresa l'indicazione delle procedure di scelta del contraente, l'assunzione dell'impegno di spesa, sarranno oggetto di successiva determinazione dirigenziale; </h:p>
+				<h:p>7. Di dichiarare il presente provvedimento immediatamente eseguibile. </h:p>
+			</contenitore>
+			<formulafinale />
+			<conclusione />
+		</DocumentoNIR>
+	</NIR>

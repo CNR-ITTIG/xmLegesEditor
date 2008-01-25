@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="windows-1252"?>
+	<!DOCTYPE NIR SYSTEM 'nircompleto.dtd'>
+	<NIR tipo="originale" xmlns="http://www.normeinrete.it/nir/2.2/" xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<DocumentoNIR nome="Delibera">
+			<meta>
+				<descrittori>
+					<pubblicazione norm="20070706" num="" tipo="" />
+					<entratainvigore norm="20070625" />
+					<redazione id="red1" nome="" norm="" />
+					<urn valore="urn:nir:comune.firenze;consiglio:deliberazione:2007-06-25;2007-c-00036" />
+					<materie vocabolario="Atti Normativi">
+						<materia valore="Urbanistica" />
+					</materie>
+				</descrittori>
+				<ciclodivita>
+					<eventi>
+						<evento data="20070625" fonte="ro1" id="t1" tipo="entrata in vigore" />
+					</eventi>
+					<relazioni>
+						<originale id="ro1" xlink:href="urn:nir:comune.firenze;consiglio:deliberazione:2007-06-25;2007-c-00036" xlink:type="simple" />
+					</relazioni>
+				</ciclodivita>
+				<proprietario soggetto="Comune di Firenze" xlink:type="simple">
+					<pacto:meta xmlns:pacto="http://www.pacto.it/norme/1.0">
+						<pacto:proposta anno="2007" numero="00381" />
+						<pacto:ufficio valore="Direzione Urbanistica" />
+						<pacto:relatore valore="Gianni Biagi" />
+					</pacto:meta>
+				</proprietario>
+			</meta>
+			<intestazione>
+				<emanante>COMUNE DI FIRENZE </emanante>
+				<tipoDoc>DELIBERAZIONE DI CONSIGLIO </tipoDoc>
+				numero: 
+				<numDoc>2007/C/00036</numDoc>
+				Data Adozione: 
+				<dataDoc norm="20070625">25 giugno 2007</dataDoc>
+				<titoloDoc>
+					Oggetto: PIANO REGOLATORE CASCINE DEL RICCIO - Approvazione della variante urbanistica, ex 
+					<rif xlink:href="urn:nir:regione.toscana:legge:2005;1#art17" xlink:type="simple">art. 17 della LR 1/2005</rif>
+					, relativa al progetto della nuova viabilità 
+				</titoloDoc>
+			</intestazione>
+			<formulainiziale>
+				<preambolo>
+					<h:p>I L C O N S I G L I O</h:p>
+					<h:p>Premesso che:</h:p>
+					<h:p>
+						con 
+						<rif xlink:href="urn:nir:comune.firenze;giunta:deliberazione:2006-04-26;2006-g-00212" xlink:type="simple">delibera di Giunta municipale n. 2006/G/00212 del 26 aprile 2006</rif>
+						il Comune di Firenze dava avvio ad un procedimento per la formazione della connessa variante urbanistica ai sensi e per gli effetti dell’art. 15 e ss della 
+						<rif xlink:href="urn:nir:regione.toscana:legge:2005;1" xlink:type="simple">LR 1/2005</rif>
+						, al fine di adeguare il PRG vigente al progetto preliminare presentato da Società Autostrade per il by-pass di Cascine del Riccio a seguito di una serie di protocolli ed intese stato-regione siglati nel 1999; 
+					</h:p>
+					<h:p>
+						ai soli fini urbanistici, trattandosi di singola opera pubblica, ai sensi dell’ 
+						<rif xlink:href="urn:nir:presidente.repubblica:decreto:2001;327#art11" xlink:type="simple">art. 11 del D.P.R. n. 327/01</rif>
+						, Testo Unico Espropri, come modificato dal 
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:2002;302" xlink:type="simple">D.Lgs. n. 302/02</rif>
+						, sono stati comunicati ai soggetti privati proprietari delle aree interessate dalla variante gli avvisi di avvio del procedimento e ai sensi dell’ 
+						<rif xlink:href="urn:nir:regione.toscana:legge:1995;1#art15" xlink:type="simple">art. 15 LR 1/95</rif>
+						gli atti sono stati trasmessi a Regione e Provincia; 
+					</h:p>
+					<h:p>in ordine a quanto sopra sono pervenuti, nei termini di legge, un contributo della Provincia di Firenze, dove si esprime un parere favorevole a condizione e 5 contributi di vario contenuto da parte dei soggetti privati interessati dalla variante;</h:p>
+					<h:p>dei contributi di cui al precedente punto è stato tenuto conto nella Relazione Tecnica Urbanistica allegata all’atto di adozione sotto indicato, a formarne sua parte integrante e sostanziale;</h:p>
+					<h:p>
+						con propria 
+						<rif xlink:href="urn:nir:comune.firenze;consiglio:deliberazione:2006-11-13;2006-c-00077" xlink:type="simple">delibera n. 2006/C/00077, del 13 novembre 2006</rif>
+						, il Consiglio Comunale adottava la relativa variante urbanistica tenendo conto dei contributi di cui al precedente punto; 
+					</h:p>
+					<h:p>
+						il Consiglio di Quartiere 3 esprimeva con deliberazione 30033/06 del 6/11/2006, ai sensi dell’ 
+						<rif xlink:href="urn:nir:regione.toscana:statuto:#art49" xlink:type="simple">art. 49 dello Statuto</rif>
+						e dell’art. 27 del 
+						<rif xlink:href="urn:nir:comune.firenze:regolamento;consigli.quartiere:2002-06-10;366" xlink:type="simple">Regolamento dei consigli di quartiere</rif>
+						, parere favorevole con osservazioni; 
+					</h:p>
+					<h:p>nella seduta del 13 novembre 2007 la Terza Commissione Consiliare si è espressa sulla deliberazione del consiglio di Quartiere con propria mozione, individuando alcuni indirizzi da tenere presenti e valutare nel corso della procedura di approvazione della variante in oggetto;</h:p>
+					<h:p>Ricordato che la finalità che detta variante urbanistica persegue è quella:</h:p>
+					<h:p>
+						di apporre per la prima volta il vincolo preordinato all’esproprio e/o reiterare quei vincoli già apposti e decaduti per decorrenza quinquennale dei termini di legge, ricadendo queste ultime aree sotto la disciplina di cui all’art. 9 del testo unico in materia edilizia approvato con il 
+						<rif xlink:href="urn:nir:presidente.repubblica:decreto:2001-06-06;380" xlink:type="simple">DPR 6 giugno 2001, n. 380</rif>
+						; 
+					</h:p>
+					<h:p>di consentire di attivare le procedure espropriative sulle aree necessarie all’esecuzione materiale dell’opera;</h:p>
+					<h:p>di adeguare la destinazione di piccole e poco significative porzioni del territorio comunale in quanto ricadute conseguenti al progetto viario in oggetto;</h:p>
+					<h:p>
+						Premesso inoltre che ai sensi di quanto previsto dal citato 
+						<rif xlink:href="urn:nir:regione.toscana:legge:2005;1#art17-com2" xlink:type="simple">art. 17, comma 2, della L.R. n. 1/05</rif>
+						il provvedimento adottato, unitamente ai suoi allegati, è stato depositato presso la sede comunale per quarantacinque giorni consecutivi a decorrere dalla data di pubblicazione del relativo avviso sul Bollettino Ufficiale della Regione Toscana (14 marzo 2007) e lo stesso è stato trasmesso alla Regione Toscana e alla Provincia di Firenze per quanto di competenza; 
+					</h:p>
+					<h:p>Dato atto che:</h:p>
+					<h:p>
+						in ordine a quanto sopra, il responsabile unico del procedimento, nella certificazione redatta ai sensi dell’ 
+						<rif xlink:href="urn:nir:regione.toscana:legge:2005;1#art16" xlink:type="simple">art. 16 della Legge Regione Toscana n. 1/2005</rif>
+						, prot. 29800/07/07 del 29/05/2007, e allegata al presente atto quale sua parte integrante e sostanziale, ha dichiarato, che nei quarantacinque giorni successivi alla scadenza del deposito presso la casa comunale è pervenuta una sola osservazione da parte della Società Ricreativa Culturale “La Rinascente”, prot. n. 23610/07, composta da più punti; 
+					</h:p>
+					<h:p>da parte della Provincia di Firenze sono pervenuti, come parimenti attestato nella sopra citata certificazione, in data 20/02/2007 una segnalazione (Direzione Urbanistica e Pianificazione Territoriale - Ufficio Gestione PTCP - sez. A - Prot. 65531 cl. 8 cat. 2 cas. 15) e in data 25/05/2007 un chiarimento (Direzione Territorio e Servizi Urbanistici – Ufficio Gestione PTCP – sez. A – Prot. n. 153494 cl. 6 cat. 3 cas. 15 N. 2007 del 16/5/2007, sollecitato dagli uffici comunali competenti;</h:p>
+					<h:p>in data 01/03/2007 da parte della Regione Toscana, a seguito del deposito della variante presso l’U.R.T.A.T., è pervenuto il parere di competenza (Regione Toscana-U.R.T.A.T di Firenze-Prot. A00GRT/59299.46);</h:p>
+					<h:p>
+						Viste le Controdeduzioni alla osservazione presentata a seguito dell’adozione della variante urbanistica adottata con 
+						<rif xlink:href="urn:nir:comune.firenze;consiglio:deliberazione:2006-11-13;2006-c-00077" xlink:type="simple">delibera di Consiglio Comunale n. 2006/C/00077 del 13 novembre 2006</rif>
+						, elaborate dalla Direzione Urbanistica, Servizio Pianificazione, Gestione del Piano e Grandi Progetti in collaborazione con la Direzione Nuove Infrastrutture, Servizio Attività Geologiche e Valutazione di Impatto Ambientale e Servizio Controllo e Attuazione Accordi di Programma con TAV, Società Autostrade e Tranvia, allegate al presente atto, complete degli allegati, a formarne parte integrante e sostanziale; 
+					</h:p>
+					<h:p>Evidenziato che nelle stesse si prende atto oltre che dell’osservazione presentata dalla società ricreativa culturale “La Rinascente” e del parere favorevole con prescrizioni espresso dal Consiglio di Quartiere 3, a cui la Mozione della Terza Commissione del 13 novembre 2006, come anticipato in premessa, chiedeva espressamente di controdedurre, anche di quanto espresso da Regione e Provincia, in qualità di enti territoriali competenti in materia di rischio idraulico, nelle note sopra citate;</h:p>
+					<h:p>Considerato che l’osservazione pervenuta è articolata in 15 punti, che alcuni di essi sono omogenei con quanto richiesto dal Quartiere 3 con il parere del 6 novembre 2006 e di conseguenza con parte di quanto osservato con la Mozione consiliare sopracitata e gli stessi riguardano:</h:p>
+					<h:p>- alcuni aspetti già evidenziati in fase di avvio del procedimento e dei quali è stato dato atto in sede di adozione della variante, alla relazione della quale si rimanda;</h:p>
+					<h:p>- altri aspetti relativi la mobilità, l’ambiente, il rischio idraulico e la necessità di procedere all’approvazione di ulteriori varianti;</h:p>
+					<h:p>Considerato altresì che nelle Controdeduzioni si propone: </h:p>
+					<h:p>- di respingere tutti i 15 punti in cui è articolata l’osservazione con motivazioni varie;</h:p>
+					<h:p>- di respingere anche le ulteriori due osservazioni contenute nella Mozione consiliare del 13 novembre 2006;</h:p>
+					<h:p>- per quanto riguarda i pareri espressi dagli enti territoriali in materia di rischio idraulico (URTAT e Provincia di Firenze), si prende atto che sono favorevoli alla variante in oggetto ponendo la seguente condizione: “qualora emerga che il recupero dei volumi sottratti alla laminazione non sia, sulla base di un ragionevole rapporto costi/benefici, effettivamente perseguibile nella stessa area, contestualmente sarà</h:p>
+					<h:p>necessario che il Comune di Firenze (rappresentato all’interno del gruppo di progettazione che sta curando, sotto la responsabilità di procedimento del Consorzio di Bonifica delle Colline del Chianti, lo studio idraulico di area vasta dell’Ema) tenga in considerazione quanto riportato dall’Autorità di Bacino dell’Arno (Prot. 6037 del 20 Giugno 2005) in merito al ‘reperimento in altra sede all’interno dei bacini interessati’ dei volumi sottratti alla laminazione delle piene”;</h:p>
+					<h:p>il tutto come meglio specificato nelle Controdeduzioni alle osservazioni sopra citate;</h:p>
+					<h:p>Dato atto che il Garante della Comunicazione, nominato con D.D n. 9824 del 31.10.05, ha redatto in data 25/5/2007, prot. n. 29258/07, il rapporto sull’attività svolta ai sensi dell’art. 20 della più volte citata L.R. n. 1/2005, allegato al presente atto quale sua parte integrante e sostanziale.</h:p>
+					<h:p>Tutto quanto sopra premesso, e valutato che ai sensi di quanto disposto dal comma 4 del più volte citato art. 17 della L.R. 1/2005 decorsi i termini di cui ai commi 2 e 3, la variante come sopra adottata è suscettibile di diretta, definitiva approvazione da parte di questo Consiglio Comunale;</h:p>
+					<h:p>
+						Visto l’ 
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:2000-08-18;267#art49" xlink:type="simple">art. 49 del D.Lgs. 18.8.2000 n. 267</rif>
+						, e preso atto del parere di regolarità tecnica reso in ordine al presente provvedimento, precisando che da questo non deriveranno diretti effetti contabili consistenti in impegni di spesa o riduzioni di entrata in quanto all’intero finanziamento della spesa per la realizzazione dell’opera farà fronte Soc. Autostrade per l’Italia S.p.A., come stabilito negli accordi siglati nel 1999, comprese le indennità di esproprio e l’eventuale indennizzo di cui all’ 
+						<rif xlink:href="urn:nir:presidente.repubblica:decreto:2001-06-08;327#art39" xlink:type="simple">art. 39 del D.P.R. 8.6.2001 n. 327</rif>
+						; 
+					</h:p>
+					<h:p>
+						Visto il 
+						<rif xlink:href="urn:nir:presidente.repubblica:decreto:2001-06-08;327" xlink:type="simple">D.P.R. 8.6.2001 n. 327</rif>
+						e la 
+						<rif xlink:href="urn:nir:regione.toscana:legge:2005-02-18;30" xlink:type="simple">Legge Regione Toscana n. 30 del 18.2.05</rif>
+						; 
+					</h:p>
+					<h:p>
+						Vista la 
+						<rif xlink:href="urn:nir:regione.toscana:legge:2005-01-03;1" xlink:type="simple">Legge Regione Toscana n. 1 del 3.1.2005</rif>
+						; 
+					</h:p>
+				</preambolo>
+			</formulainiziale>
+			<contenitore id="con1" nome="dispositivo">
+				<h:p>DELIBERA</h:p>
+				<h:p>Per tutti i motivi espressi in narrativa: </h:p>
+				<h:p>
+					1. di approvare - ai sensi dell’ 
+					<rif xlink:href="urn:nir:regione.toscana:legge:2005-01-03;1#art17" xlink:type="simple">art. 17 della legge regionale n. 1 del 3.1.2005</rif>
+					- la variante al P.R.G. vigente necessaria alla realizzazione del progetto definitivo relativo all’opera pubblica avente ad oggetto la realizzazione di alcuni tratti della viabilità e aree circostanti in località Cascine del Riccio, precisando che la presente procedura comprende anche gli adeguamenti della destinazione di piccole e poco significative porzioni del territorio comunale in quanto ricadute conseguenti al progetto viario in oggetto, il tutto come meglio descritto e specificato nella relazione allegata quale parte integrante alla delibera consiliare di adozione richiamata al successivo punto 2; 
+				</h:p>
+				<h:p>
+					2. di dare atto che gli elaborati della variante che si approva con il presente provvedimento sono quelli allegati, quale parte integrante e sostanziale, alla delibera consiliare di adozione della variante stessa, 
+					<rif xlink:href="urn:nir:comune.firenze;consiglio:deliberazione:2006-11-13;2006-c-00077" xlink:type="simple">n. 77/2006 del 13 novembre 2006</rif>
+					, che si intendono dunque tutti integralmente confermati e sono: 
+				</h:p>
+				<h:p>fascicolo unico contenente: </h:p>
+				<h:p>1. Relazione Tecnica urbanistica e suoi allegati; </h:p>
+				<h:p>2. schede grafiche di variante al P.R.G.“disciplina del suolo e degli edifici” in scala 1:5.000; </h:p>
+				<h:p>Relazione geologica di fattibilità e suoi allegati; </h:p>
+				<h:p>Scheda di certificazione indagini geologico-tecniche; </h:p>
+				<h:p>Scheda di certificazione studi idrogeologici e/o idraulici; </h:p>
+				<h:p>Attestazione di conformità dell’Atto Urbanistico agli esiti delle indagini geologico-tecniche depositate; </h:p>
+				<h:p>Valutazione degli Effetti Ambientali; </h:p>
+				<h:p>Certificato Responsabile Unico del Procedimento; </h:p>
+				<h:p>Rapporto del Garante della comunicazione; </h:p>
+				<h:p>
+					3. di dare atto, come dichiarato nel certificato del RUP redatto ai sensi dell’ 
+					<rif xlink:href="urn:nir:regione.toscana:legge:1995;1#art16" xlink:type="simple">art. 16 della LR 1/95</rif>
+					, prot. n. 29800/07/07 del 29/05/2007, che a seguito della deposito è pervenuta nei termini di 
+					<rif xlink:href="urn:nir:stato:legge:2007-04-27" xlink:type="simple">legge, in data 27 aprile 2007</rif>
+					, una sola osservazione da parte della Società Ricreativa Culturale “La Rinascente”, n. prot. 23610/07 del 30/04/2007 composta da più punti; 
+				</h:p>
+				<h:p>4. di dare atto, inoltre, che: </h:p>
+				<h:p>a. in data 6 novembre 2006 il Consiglio di Quartiere 3, ha espresso parere favorevole con osservazioni; </h:p>
+				<h:p>b. in data 13 novembre 2006 la Terza Commissione, con Mozione, chiedeva espressamente di controdedurre al parere di cui sopra; </h:p>
+				<h:p>c. pervenivano contributi anche da parte degli enti territoriali in materia di rischio idraulico; </h:p>
+				<h:p>- da parte della Provincia in data 20/02/2007, una segnalazione (Provincia di Firenze- Direzione Urbanistica e Pianificazione Territoriale-Ufficio Gestione PTCP -sez. A - Prot. 65531 cl. 8 cat. 2 cas. 15) e in data 25/05/2007 un chiarimento (Direzione Territorio e Servizi Urbanistici – Ufficio Gestione PTCP - sez. A - Prot. n. 153494 cl. 6 cat. 3 cas. 15 N. 2007 del 16/5/2007, sollecitato dagli uffici comunali competenti; </h:p>
+				<h:p>- da parte della Regione Toscana in data 01/03/2007, a seguito del deposito della variante presso l’U.R.T.A.T., il parere di competenza (Regione Toscana-U.R.T.A.T di Firenze-Prot. A00GRT/59299.46); </h:p>
+				<h:p>5. di approvare le Controdeduzioni alle osservazioni, redatte dal Servizio Pianificazione, Gestione del Piano e Grandi Progetti della Direzione Urbanistica, in collaborazione con il Servi zio Attività Geologiche e Impatto Ambientale e Servizio Controllo e Attuazione Accordi di Programma con TAV, Società Autostrade e Tranvia della Direzione Nuove Infrastrutture, respingendo tutte le osservazioni presentate sulla variante, il tutto come meglio specificato nelle Controdeduzioni stesse, allegate, complete degli allegati, al presente atto a formarne, parte integrante e sostanziale; </h:p>
+				<h:p>6. di prendere atto che gli enti territoriali competenti in materia di rischio idraulico di cui al precedente punto 4 lettera c hanno espresso parere favorevole alla presente variante ponendo la seguente condizione: “qualora emerga che il recupero dei volumi sottratti alla laminazione non sia, sulla base di un ragionevole rapporto costi/benefici, effettivamente perseguibile nella stessa area, contestualmente sarà necessario che il Comune di Firenze (rappresentato all’interno del gruppo di progettazione che sta curando, sotto la responsabilità di procedimento del Consorzio di Bonifica delle Colline del Chianti, lo studio idraulico di area vasta dell’Ema) tenga in considerazione quanto riportato dall’Autorità di Bacino dell’Arno (Prot. 6037 del 20 Giugno 2005) in merito al ‘reperimento in altra sede all’interno dei bacini interessati dei volumi sottratti alla laminazione delle piene”; </h:p>
+				<h:p>
+					7. di dare atto che il Garante della comunicazione ha redatto in data 25/5/2007, prot. n. 29258/07, ai sensi dell’art. 19 dalla 
+					<rif xlink:href="urn:nir:regione.toscana:legge:2005;1" xlink:type="simple">L.R. n. 1/05</rif>
+					, il Rapporto sull’attività svolta di sua competenza e il Responsabile Unico del Procedimento ha prodotto in data, 29/5/2007 prot. n. 29800/07/07 la certificazione di cui all’art. 16, stessa legge, entrambi allegati al presente atto quale sua parte integrante e sostanziale; 
+				</h:p>
+				<h:p>
+					8. di dare atto ai sensi di quanto disposto dall’ 
+					<rif xlink:href="urn:nir:regione.toscana:legge:2005;30#art7" xlink:type="simple">art. 7 della L.R. n. 30/05</rif>
+					che – per effetto della variante urbanistica– sulle aree individuate e descritte nella Relazione urbanistica allegata alla delibera consiliare di adozione della variante 
+					<rif xlink:href="urn:nir:comune.firenze;consiglio:deliberazione:2006-11-13;2006-c-00077" xlink:type="simple">n.77/2006 del 13 novembre 2006</rif>
+					, vengono opposti per la prima volta e/o rinnovati i vincoli preordinati all’esproprio, precisando che i loro effetti decorreranno a far data dalla intervenuta efficacia del presente atto di approvazione; 
+				</h:p>
+				<h:p>
+					9. di dare atto che ai sensi di quanto disposto al 
+					<rif xlink:href="urn:nir:regione.toscana:legge:2005;1#art17-com6" xlink:type="simple">comma 6 dell’art. 17 della L.R. n. 1/2005</rif>
+					il presente atto acquisterà efficacia dalla data di pubblicazione sul Bollettino Ufficiale della Regione Toscana, pubblicazione da effettuarsi trascorsi almeno 30 giorni dall’approvazione del presente atto. 
+				</h:p>
+			</contenitore>
+			<formulafinale />
+			<conclusione />
+		</DocumentoNIR>
+	</NIR>

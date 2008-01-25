@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="iso-8859-15"?>
+	<!DOCTYPE NIR SYSTEM 'nirflessibile.dtd'>
+	<NIR tipo="originale" xmlns="http://www.normeinrete.it/nir/2.2/" xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<DocumentoNIR nome="Regolamento Comunale">
+			<meta>
+				<descrittori>
+					<pubblicazione norm="20051115" num="" tipo="" />
+					<entratainvigore norm="20051024" />
+					<redazione id="red1" nome="" norm="" />
+					<urn valore="urn:nir:comune.firenze:regolamento;stipula.patto.solidarieta:2005-10-24;97" />
+					<urn valore="urn:nir:comune.firenze;delibera:2005-10-24;97:allegato;regolamento" />
+					<materie vocabolario="Atti Normativi">
+						<materia valore="Cerimoniale" />
+					</materie>
+				</descrittori>
+				<ciclodivita>
+					<eventi>
+						<evento data="20051024" fonte="ro1" id="t1" tipo="entrata in vigore" />
+					</eventi>
+					<relazioni>
+						<originale id="ro1" xlink:href="urn:nir:comune.firenze:regolamento;stipula.patto.solidarieta:2005-10-24;97" xlink:type="simple" />
+					</relazioni>
+				</ciclodivita>
+				<redazionale xlink:type="simple">
+					<nota id="n1">
+						<h:p>(Delibera di Consiglio Comunale n. 97 del 24.10.2005)</h:p>
+					</nota>
+				</redazionale>
+				<proprietario soggetto="PACTO" xlink:type="simple">
+					<pacto:meta xmlns:pacto="http://www.pacto.it/norme/1.0">
+						<pacto:proposta anno="2005" numero="787" />
+						<pacto:ufficio valore="Direzione Ufficio del Consiglio" />
+						<pacto:relatore valore="Lorenzo Marzullo" />
+					</pacto:meta>
+				</proprietario>
+			</meta>
+			<intestazione>
+				<emanante>COMUNE DI FIRENZE</emanante>
+				<tipoDoc>REGOLAMENTO COMUNALE</tipoDoc>
+				<dataDoc norm="20051024">24 ottobre 2005</dataDoc>
+				n. 
+				<numDoc>97 </numDoc>
+				<titoloDoc>
+					Regolamento per la stipula del patto di solidarietà 
+					<ndr num="n1" valore="" xlink:type="simple">(1)</ndr>
+				</titoloDoc>
+			</intestazione>
+			<formulainiziale />
+			<articolato>
+				<articolo id="art1">
+					<num>Art. 1</num>
+					<rubrica>NATURA E FINALITA' </rubrica>
+					<comma id="art1-com1">
+						<num>1.</num>
+						<corpo>Il Patto di Solidarietà costituisce un formale legame fra il Comune di Firenze ed altre realtà istituzionali o associative.</corpo>
+					</comma>
+					<comma id="art1-com2">
+						<num>2.</num>
+						<corpo>Con il Patto di Solidarietà si persegue la finalità di una comune azione tesa alla salvaguardia e alla valorizzazione dei principi statutari.</corpo>
+					</comma>
+					<comma id="art1-com3">
+						<num>3.</num>
+						<corpo>Il Patto di Solidarietà può anche scaturire da eventi o fatti particolarmente significativi ed evidenzia il legame fra l'azione che può svolgere il Comune di Firenze ed i soggetti maggiormente coinvolti.</corpo>
+					</comma>
+				</articolo>
+				<articolo id="art2">
+					<num>Art. 2</num>
+					<rubrica>PROCEDURA DI ASSEGNAZIONE </rubrica>
+					<comma id="art2-com1">
+						<num>1.</num>
+						<corpo>Il Patto di Solidarietà è approvato con deliberazione , adeguatamente motivata, del Consiglio Comunale, previo parere della Commissione Pace e Solidarietà Internazionale.</corpo>
+					</comma>
+				</articolo>
+				<articolo id="art3">
+					<num>Art. 3</num>
+					<rubrica>STIPULA </rubrica>
+					<comma id="art3-com1">
+						<num>1.</num>
+						<corpo>L'avvenuta approvazione del Patto di Solidarietà impegna il Sindaco o un suo delegato alla stipula del medesimo. La stipula può avvenire anche tramite una reciproca attestazione sottoscritta dal Sindaco, o da un suo delegato, e da un rappresentante della realtà istituzionale o associativa con cui il Comune di Firenze instaura il Patto di Solidarietà.</corpo>
+					</comma>
+				</articolo>
+				<articolo id="art4">
+					<num>Art. 4</num>
+					<rubrica>RELAZIONE ANNUALE DELLA GIUNTA MUNICIPALE </rubrica>
+					<comma id="art4-com1">
+						<num>1.</num>
+						<corpo>Ogni anno la Giunta Municipale relaziona in Consiglio Comunale sullo stato dei Patti di Solidarietà e sulle iniziative conseguenti.</corpo>
+					</comma>
+				</articolo>
+				<articolo id="art5">
+					<num>Art. 5</num>
+					<rubrica>ALBO UFFICIALE </rubrica>
+					<comma id="art5-com1">
+						<num>1.</num>
+						<corpo>E' istituito un Albo Ufficiale dei soggetti con cui il Comune di Firenze ha stipulato il Patto di Solidarietà. Esso viene conservato presso l'Ufficio Cerimoniale dell'Ufficio del Sindaco.</corpo>
+					</comma>
+				</articolo>
+			</articolato>
+			<formulafinale />
+			<conclusione />
+		</DocumentoNIR>
+	</NIR>

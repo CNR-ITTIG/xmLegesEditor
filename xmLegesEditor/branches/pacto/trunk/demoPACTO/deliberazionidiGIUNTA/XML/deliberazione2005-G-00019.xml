@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="windows-1252"?>
+	<!DOCTYPE NIR SYSTEM 'nirflessibile.dtd'>
+	<NIR tipo="originale" xmlns="http://www.normeinrete.it/nir/2.2/" xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<DocumentoNIR nome="">
+			<meta>
+				<descrittori>
+					<pubblicazione norm="20050125" num="" tipo="" />
+					<entratainvigore norm="20050118" />
+					<redazione id="red1" nome="" norm="" />
+					<urn valore="urn:nir:comune.firenze;giunta:deliberazione:2005-01-18;2005-g-00019" />
+					<materie vocabolario="Atti Normativi">
+						<materia valore="Toponomastica" />
+					</materie>
+				</descrittori>
+				<ciclodivita>
+					<eventi>
+						<evento data="20050118" fonte="ro1" id="t1" tipo="entrata in vigore" />
+					</eventi>
+					<relazioni>
+						<originale id="ro1" xlink:href="urn:nir:comune.firenze;giunta:deliberazione:2005-01-18;2005-g-00019" xlink:type="simple" />
+					</relazioni>
+				</ciclodivita>
+				<proprietario soggetto="PACTO" xlink:type="simple">
+					<pacto:meta xmlns:pacto="http://www.pacto.it/norme/1.0">
+						<pacto:proposta anno="2004" numero="00981" />
+						<pacto:ufficio valore="Direzione Generale" />
+						<pacto:relatore valore="Eugenio Giani" />
+					</pacto:meta>
+				</proprietario>
+			</meta>
+			<intestazione>
+				<emanante>COMUNE DI FIRENZE</emanante>
+				<tipoDoc>DELIBERAZIONE DI GIUNTA</tipoDoc>
+				Numero: 
+				<numDoc>2005/G/00019</numDoc>
+				Data Adozione: 
+				<dataDoc norm="20050118">18 gennaio 2005</dataDoc>
+				<titoloDoc>Oggetto: Denominazione giardino: Giardino del Gratta</titoloDoc>
+			</intestazione>
+			<formulainiziale>
+				<preambolo>
+					<h:p>La Giunta</h:p>
+					<h:p>
+						Visto il Regolamento per la Toponomastica approvato con 
+						<rif xlink:href="urn:nir:comune.firenze:deliberazione:2003-03-10;135,24#art15" xlink:type="simple">deliberazione del Consiglio Comunale n. 135/24 del 10 marzo 2003 , art. 15</rif>
+						; 
+					</h:p>
+					<h:p>Considerato la necessità di identificare il giardino pubblico situato fra Via Michelangiolo Buonarroti, Piazza dei Ciompi e Borgo Allegri;</h:p>
+					<h:p>Visto il punto 3.B4 del verbale n. 228 del 25/11/2004 della Commissione Consultiva per la Toponomastica e le Iscrizioni Commemorative, allegato alla presente deliberazione , con cui si approva il nome IL GRATTA, dal soprannome del famoso circense Evaristo Caroli che teneva spettacoli in Firenze;</h:p>
+					<h:p>Vista l'autorizzazione del Collegio di Presidenza del Quartiere 1 allegata;</h:p>
+					<h:p>
+						Preso atto che la presente deliberazione è conforme agli adempimenti ecografici di cui all' 
+						<rif xlink:href="urn:nir:presidente.repubblica:decreto:1989-05-30;223#art41" xlink:type="simple">art. 41 del D.P.R. n. 223 del 30.5.1989</rif>
+						; 
+					</h:p>
+					<h:p>Preso atto del parere favorevole relativo alla regolarità tecnica del provvedimento ai sensi e per gli effetti dell' art. 49 del T.U. E. L. ;</h:p>
+					<h:p>Ritenuto per l'urgenza di provvedere in merito e di dichiarare il presente provvedimento immediatamente esecutivo; </h:p>
+				</preambolo>
+			</formulainiziale>
+			<contenitore id="con1" nome="dispositivo">
+				<h:p>DELIBERA</h:p>
+				<contenitore id="con2" nome="dispositivo">
+					<h:p>1) di assegnare la seguente denominazione, nella dizione indicata, al giardino pubblico descritto di seguito e riportato nella planimetria allegata, che forma parte integrante della presente deliberazione: </h:p>
+					<h:p>GIARDINO DEL GRATTA: l'area situata fra Via Michelangiolo Buonarroti, Piazza dei Ciompi e Borgo Allegri; </h:p>
+					<h:p>2) di dichiarare il presente provvedimento immediatamente esecutivo. </h:p>
+				</contenitore>
+			</contenitore>
+			<formulafinale />
+			<conclusione />
+		</DocumentoNIR>
+	</NIR>

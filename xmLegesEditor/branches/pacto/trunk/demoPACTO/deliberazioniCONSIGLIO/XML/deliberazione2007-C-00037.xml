@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!DOCTYPE NIR SYSTEM 'nirflessibile.dtd'>
+	<NIR tipo="originale" xmlns="http://www.normeinrete.it/nir/2.2/" xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<DocumentoNIR nome="Delibera Consiliare">
+			<meta>
+				<descrittori>
+					<pubblicazione norm="20070706" num="" tipo="" />
+					<entratainvigore norm="20070625" />
+					<redazione id="red1" nome="" norm="" />
+					<urn valore="urn:nir:comune.firenze;consiglio:deliberazione:2007-06-25;2007-c-00037" />
+					<materie vocabolario="Atti Normativi">
+						<materia valore="P.R.G." />
+					</materie>
+				</descrittori>
+				<ciclodivita>
+					<eventi>
+						<evento data="20070625" fonte="ro1" id="t1" tipo="entrata in vigore" />
+					</eventi>
+					<relazioni>
+						<originale id="ro1" xlink:href="urn:nir:comune.firenze;consiglio:deliberazione:2007-06-25;2007-c-00037" xlink:type="simple" />
+					</relazioni>
+				</ciclodivita>
+				<proprietario xlink:type="simple">
+					<pacto:meta xmlns:pacto="http://www.pacto.it/norme/1.0">
+						<pacto:proposta anno="2007" numero="00401" />
+						<pacto:ufficio valore="Direzione Urbanistica" />
+						<pacto:relatore valore="Gianni Biagi" />
+					</pacto:meta>
+				</proprietario>
+			</meta>
+			<intestazione>
+				<emanante>COMUNE DI FIRENZE </emanante>
+				<tipoDoc>DELIBERAZIONE DI CONSIGLIO </tipoDoc>
+				Numero: 
+				<numDoc>2007/C/00037</numDoc>
+				Data Adozione: 
+				<dataDoc norm="20070625">25 giugno 2007</dataDoc>
+				<titoloDoc>Oggetto: POLO OSPEDALIERO DI CAREGGI - Adeguamento cartografico del PRG riguardante la nuova viabilità di accesso da nord/ovest (II stralcio) </titoloDoc>
+			</intestazione>
+			<formulainiziale>
+				<preambolo>
+					<h:p>– OMISSIS-</h:p>
+					<h:p>IL CONSIGLIO</h:p>
+					<h:p>Premesso:</h:p>
+					<h:p>
+						- con propria 
+						<rif xlink:href="urn:nir:comune.firenze;giunta:deliberazione:2004-08-11;427,587" xlink:type="simple">deliberazione n. 427/587 del 11.8.2004</rif>
+						, la Giunta Comunale approvava il progetto esecutivo avente ad oggetto “Polo ospedaliero di Careggi – Nuova viabilità di accesso da nord –ovest, II stralcio”, intervento questo previsto nel Piano triennale investimenti 2003/2005; 
+					</h:p>
+					<h:p>
+						- con propria 
+						<rif xlink:href="urn:nir:comune.firenze;giunta:deliberazione:2006-11-14;688,838" xlink:type="simple">deliberazione n. 688/838 del 14.11.2006</rif>
+						, la Giunta Comunale – nell’ambito del programma “Riqualificazione partecipata per tre piazze cittadine” – approvava il progetto esecutivo per la realizzazione della piazza del Sodo, nel Quartiere n. 5 , ed approvava altresì il quadro economico relativo alla prevista opera pubblica; 
+					</h:p>
+					<h:p>
+						- con la 
+						<rif xlink:href="urn:nir:comune.firenze;giunta:deliberazione:2006-11-14;688,838" xlink:type="simple">deliberazione n. 688/838/2006</rif>
+						sopra richiamata, la Giunta Comunale prendeva altresì atto della necessità che il progetto della piazza del Sodo d ovesse coordinarsi con quello della nuova viabilità di accesso al Polo ospedaliero di Careggi, con particolare riferimento al suo innesto con via delle Panche; 
+					</h:p>
+					<h:p>
+						- a tal fine, con la stessa deliberazione veniva approvato il progetto di “Sistemazione della nuova viabilità dell’incrocio tra via Caldieri e via delle Panche” , in parziale variante rispetto a quello originariamente approvato con la 
+						<rif xlink:href="urn:nir:comune.firenze;giunta:deliberazione:2004-08-11;427,587" xlink:type="simple">deliberazione</rif>
+						n. 427/587/2004 , sopra citata. 
+					</h:p>
+					<h:p>Premesso ancora:</h:p>
+					<h:p>
+						<rif xlink:href="urn:nir:comune.firenze;giunta:deliberazione:2006-11-14;688,838" xlink:type="simple">deliberazione n. 688/838 del 14.11.2006</rif>
+						, interessa due modeste porzioni di terreno di superficie complessiva mq. 110, di proprietà l’una della Parrocchia di S. Pio X e l’altra della Società Finbest SpA, la cui destinazione urbanistica è quella di seguito indicata: quanto all’area di proprietà della Parrocchia: zona G, sottozona G2e “attrezzature e servizi - pubblici di quartiere esistenti”, con simbolo di attrezzature religiose; 
+					</h:p>
+					- il progetto di sistemazione della nuova viabilità approvato con la citata 
+					<h:p>
+						- quanto all’area di proprietà Finbest: già destinata a zona G, sottozona G2p “attrezzature e - servizi pubblici di quartiere di progetto” con simbolo di attrezzature per l’istruzione – e dunque gravata da vincolo preordinato all’esproprio – ed ora “area non pianificata”, ai sensi e per gli effetti dell’ 
+						<rif xlink:href="urn:nir:presidente.repubblica:decreto:2001-06-08;327#art9" xlink:type="simple">art. 9 del DPR 8.6.2001 n. 327</rif>
+						“ Testo Unico in materia di espropriazione per pubblica utilità”. 
+					</h:p>
+					<h:p>- la realizzazione della nuova viabilità nella sua versione modificata, rende necessario che le aree di cui sopra siano destinate a zona F sottozona F3 “viabilità di progetto a raso” con conseguente, relativo adeguamento della cartografia del vigente PRG.</h:p>
+					<h:p>Premesso infine:</h:p>
+					<h:p>- le aree come sopra individuate – in quanto collegate al progetto di opera pubblica, e gravate dal conseguente vincolo preordinato all’esproprio – sono destinate ad essere acquisite nella proprietà</h:p>
+					<h:p>del Comune, attraverso l’apposita procedura coattiva;</h:p>
+					<h:p>- a tal proposito i proprietari interessati – e più precisamente, l’Ente parrocchiale con nota del 29.6.2006 prot. n. DSTE 5735/03, e la Società Finbest SpA con nota del 14.3.2007 prot. n. DP 514/093, entrambe allegate al presente atto quale sua parte integrante e sostanziale – hanno manifestato la propria disponibilità ad un accordo di cessione volontaria delle aree stesse, in sostituzione del decreto di esproprio.</h:p>
+					<h:p>Tutto quanto sopra premesso, e ritenuto di provvedere in merito;</h:p>
+					<h:p>Vista la relazione tecnica allegata al presente atto quale sua parte integrante e sostanziale;</h:p>
+					<h:p>
+						Visto l’ 
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:2000-08-18;267#art49" xlink:type="simple">art. 49 del D.Lgs. 18.8.2000 n. 267</rif>
+						, e preso atto del parere di regolarità tecnica reso in ordine al presente provvedimento, precisando che da esso non deriveranno diretti effetti contabili consistenti in impegni di spesa o riduzioni di entrata; 
+					</h:p>
+					<h:p>
+						Ritenuto – attesa l’urgenza – di rendere il presente provvedimento immediatamente es eguibile ai sensi dell’ 
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:2000;267#art134" xlink:type="simple">art. 134 del D.Lgs. n. 267/2000</rif>
+						sopra richiamato 
+					</h:p>
+				</preambolo>
+			</formulainiziale>
+			<contenitore id="con1" nome="dispositivo">
+				<h:p>DELIBERA</h:p>
+				<h:p>
+					1. di approvare – per le ragioni espresse in narrativa – l’adeguamento cartografico del vigente PRG, limitatamente alle nuove, diverse aree interessate dal progetto di “Sistemazione della nuova viabilità dell’incrocio fra via Caldieri e via delle Panche”, approvato dalla Giunta Comunale con propria 
+					<rif xlink:href="urn:nir:comune.firenze;giunta:delibera:2006-11-14;688,838" xlink:type="simple">deliberazione n. 688/838 del 14.11.2006</rif>
+					; 
+				</h:p>
+				<h:p>
+					2. di dare atto – in forza dell’adeguamento di cui al punto che precede – che la destinazione delle aree da esso interessate è quella di seguito indicata: 
+					<h:br />
+					- da zona G, sottozona G2e “attrezzature e servizi pubblici di quartiere esistenti” con simbolo - di attrezzature religiose, a zona F, sottozona F3 “viabilità di progetto a raso”; 
+					<h:br />
+					- da zona G, sottozona G2p “attrezzature e servizi pubblici di quartiere di progetto” con - simbolo di attrezzature per l’istruzione, a zona F sottozona F3 “viabilità di progetto a raso” il tutto meglio rappresentato nelle planimetrie del PRG “ Disciplina del suolo e degli edifici” – stato di diritto e stato modificato – allegate al presente provvedimento quale sua parte integrante e sostanziale; 
+				</h:p>
+				<h:p>
+					3. di dare atto che le destinazioni a zona F sottozona F3 come sopra impresse, costituiscono per le aree da esse interessate vincolo preordinato all’esproprio, ai sensi e per gli effetti dell’ 
+					<rif xlink:href="urn:nir:presidente.repubblica:decreto:2001-06-08;327#art9" xlink:type="simple">art. 9 del DPR 8.6.2001 n. 327</rif>
+					; 
+				</h:p>
+				<h:p>
+					4. di prendere atto che i proprietari delle aree di cui al precedente punto 3 – la Parrocchia S.Pio X e la Società Finbest SpA – intendono concludere l’accordo di cessione volontaria delle aree stesse, secondo quanto previsto dall’ 
+					<rif xlink:href="urn:nir:presidente.repubblica:decreto:2001;327#art45" xlink:type="simple">art. 45 del DPR n. 327/2001</rif>
+					sopra richiamato; 
+				</h:p>
+				<h:p>5. di autorizzare – per quanto sopra – il competente Ufficio Espropri ad adottare tutti gli atti necessari alla conclusione dell’accordo di cessione volontaria, di cui al punto che precede. </h:p>
+			</contenitore>
+			<formulafinale />
+			<conclusione />
+		</DocumentoNIR>
+	</NIR>

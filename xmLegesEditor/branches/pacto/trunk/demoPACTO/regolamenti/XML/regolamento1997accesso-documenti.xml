@@ -1,0 +1,650 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!DOCTYPE NIR SYSTEM 'nirflessibile.dtd'>
+	<NIR tipo="originale" xmlns="http://www.normeinrete.it/nir/2.2/" xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<DocumentoNIR nome="Regolamento Comunale">
+			<meta>
+				<descrittori>
+					<pubblicazione norm="" num="" tipo="" />
+					<entratainvigore norm="19970226" />
+					<redazione id="red1" nome="" norm="" />
+					<urn valore="urn:nir:comune.firenze:regolamento;accesso.atti.documenti.normativi:1997-11-17;235" />
+					<urn valore="urn:nir:comune.firenze;consiglio:deliberazione:1997-11-17;235:allegato;regolamento" />
+					<materie vocabolario="Atti Normativi">
+						<materia valore="Trasparenza" />
+					</materie>
+				</descrittori>
+				<ciclodivita>
+					<eventi>
+						<evento data="19970226" fonte="ro1" id="t1" tipo="entrata in vigore" />
+					</eventi>
+					<relazioni>
+						<originale id="ro1" xlink:href="urn:nir:comune.firenze:regolamento;accesso.atti.documenti.normativi:1997-11-17;235" xlink:type="simple" />
+					</relazioni>
+				</ciclodivita>
+				<redazionale xlink:type="simple">
+					<nota id="n1">
+						<h:p>Deliberazioni del Consiglio Comunale n. 3599/235 del 17.11.1997, n. 49/28 del 15-02-99 e n. 311 del 11.06.01 Integrato con Deliberazione n. 434/1999</h:p>
+					</nota>
+				</redazionale>
+				<proprietario soggetto="PACTO" xlink:type="simple">
+					<pacto:meta xmlns:pacto="http://www.pacto.it/norme/1.0">
+						<pacto:proposta anno="1997" numero="03599" />
+						<pacto:ufficio valore="ufficio del Consiglio" />
+						<pacto:relatore valore="Lastri Daniela" />
+					</pacto:meta>
+				</proprietario>
+			</meta>
+			<intestazione>
+				<emanante>COMUNE DI FIRENZE</emanante>
+				<tipoDoc>REGOLAMENTO COMUNALE</tipoDoc>
+				<dataDoc norm="19971117">17 novembre 1997</dataDoc>
+				n. 
+				<numDoc>235</numDoc>
+				<titoloDoc>
+					Regolamento sull'accesso agli atti e documenti amministrativi
+					<ndr num="n1" valore="" xlink:type="simple">(1)</ndr>
+				</titoloDoc>
+			</intestazione>
+			<formulainiziale />
+			<articolato>
+				<capo id="cap1">
+					<num>Capo I</num>
+					<rubrica>PRINCIPI GENERALI </rubrica>
+					<articolo id="art1">
+						<num>Art. 1</num>
+						<rubrica>(Fonti) </rubrica>
+						<comma id="art1-com1">
+							<num>1.</num>
+							<corpo>
+								Il presente regolamento, adottato in attuazione dello Statuto , disciplina il diritto di accesso agli atti, alle informazioni e ai documenti amministrativi del Comune di Firenze, ai sensi dell’ 
+								<rif xlink:href="urn:nir:stato:legge:1990-06-08;142#art7" xlink:type="simple">art. 7 della legge 8.6.1990 n. 142</rif>
+								e degli artt. 22 e seguenti della 
+								<rif xlink:href="urn:nir:stato:legge:1990-08-07;241" xlink:type="simple">L. 7.8.1990, n. 241</rif>
+								e successive modificazioni. 
+							</corpo>
+						</comma>
+						<comma id="art1-com2">
+							<num>2.</num>
+							<corpo>
+								Le comunicazioni di cui agli artt. 7 e successivi della 
+								<rif xlink:href="urn:nir:stato:legge:1990;241" xlink:type="simple">L. 241/90</rif>
+								sono disciplinate dal regolamento sul procedimento amministrativo. 
+							</corpo>
+						</comma>
+					</articolo>
+					<articolo id="art2">
+						<num>Art. 2</num>
+						<rubrica>(Oggetto) </rubrica>
+						<comma id="art2-com1">
+							<num>1.</num>
+							<corpo>Per &quot;accesso&quot; si intende la possibilità di prendere conoscenza dei documenti amministrativi mediante visione o estrazione di copia ovvero mediante altra modalità idonea a consentire l’esame dell’atto in qualsiasi forma ne sia rappresentato il contenuto.</corpo>
+						</comma>
+						<comma id="art2-com2">
+							<num>2.</num>
+							<corpo>Per &quot;documento amministrativo&quot; si intende ogni rappresentazione grafica, fotocinematografica, elettromagnetica o di qualunque altra specie del contenuto di documenti o atti, anche interni, del Comune o comunque utilizzati per l’attività amministrativa e conservati dal Comune.</corpo>
+						</comma>
+						<comma id="art2-com3">
+							<num>3.</num>
+							<alinea>
+								Di norma tutti i documenti amministrativi sono pubblici, salvi i casi indicati all’ 
+								<rif xlink:href="#art5" xlink:type="simple">art. 5</rif>
+								. In particolare, sono accessibili: 
+							</alinea>
+							<el id="art2-com3-leta">
+								<num>a.</num>
+								<corpo>gli atti e i documenti di cui sia espressamente prevista la pubblicizzazione dalle leggi, dallo Statuto e dai regolamenti;</corpo>
+							</el>
+							<el id="art2-com3-letb">
+								<num>b.</num>
+								<corpo>le deliberazioni adottate dal Consiglio comunale, dalla Giunta e dai Consigli di quartiere e le ordinanze sindacali, anche se non ancora esecutive ai sensi di legge ;</corpo>
+							</el>
+							<el id="art2-com3-letc">
+								<num>c.</num>
+								<corpo>i provvedimenti emessi dai dirigenti;</corpo>
+							</el>
+							<el id="art2-com3-letd">
+								<num>d.</num>
+								<corpo>i verbali delle sedute del Consiglio comunale e delle Commissioni consiliari, nonché i verbali dei Consigli di quartiere;</corpo>
+							</el>
+							<el id="art2-com3-lete">
+								<num>e.</num>
+								<corpo>le direttive, istruzioni ed in generale i documenti in cui si determina la interpretazione di norme giuridiche applicate dall'Amministrazione nell'attività rilevante per l'esterno;</corpo>
+							</el>
+							<el id="art2-com3-letf">
+								<num>f.</num>
+								<corpo>le elaborazioni statistiche dei dati contenuti nelle banche dati informatizzate, gestite dall'Amministrazione comunale. Entro 60 giorni dall’entrata in vigore del presente regolamento, il Sindaco rende pubblico l'elenco delle singole elaborazioni ottenibili dalle singole banche dati che, per loro natura o per disposizione di legge, sono coperte da segreto, di quelle che sono conoscibili solamente da determinate categorie di soggetti pubblici o privati e di quelle cui tutti possono accedere;</corpo>
+							</el>
+							<el id="art2-com3-letg">
+								<num>g.</num>
+								<corpo>gli atti e i documenti in possesso delle Aziende autonome, degli enti e delle società a prevalente partecipazione comunale, delle concessionarie di pubblici servizi. Ognuno di questi soggetti è tenuto, entro il termine di 60 giorni dall’entrata in vigore del presente regolamento, a trasmettere al Sindaco l’elenco dei documenti esclusi dall’accesso che sarà reso pubblico;</corpo>
+							</el>
+							<el id="art2-com3-leth">
+								<num>h.</num>
+								<corpo>i dati, gli studi, le cartografie e ogni altro, richiamati, allegati o presupposti nell’adozione degli atti di cui ai punti precedenti.</corpo>
+							</el>
+						</comma>
+					</articolo>
+					<articolo id="art3">
+						<num>Art. 3</num>
+						<rubrica>(I soggetti) </rubrica>
+						<comma id="art3-com1">
+							<num>1.</num>
+							<corpo>
+								Sono accessibili a chiunque ne faccia richiesta i documenti amministrativi indicati nel precedente 
+								<mrif>
+									<rif xlink:href="#art2-com3-leta" xlink:type="simple">art. 2, lett. a)</rif>
+									, 
+									<rif xlink:href="#art2-com3-letb" xlink:type="simple">b)</rif>
+									, 
+									<rif xlink:href="#art2-com3-letc" xlink:type="simple">c)</rif>
+									, 
+									<rif xlink:href="#art2-com3-letd" xlink:type="simple">d)</rif>
+									, 
+									<rif xlink:href="#art2-com3-lete" xlink:type="simple">e)</rif>
+								</mrif>
+								, nonché i documenti degli enti indicati alla lett. g) che abbiano caratteristiche analoghe ai precedenti. 
+							</corpo>
+						</comma>
+						<comma id="art3-com2">
+							<num>2.</num>
+							<corpo>
+								I documenti indicati nel precedente 
+								<mrif>
+									<rif xlink:href="#art2-com3-letf" xlink:type="simple">art. 2, lett. f)</rif>
+									e 
+									<rif xlink:href="#art2-com3-leth" xlink:type="simple">h)</rif>
+								</mrif>
+								sono accessibili, su domanda motivata, alle organizzazioni sindacali e di categoria, nonché alle associazioni anche non riconosciute il cui interesse sia dimostrabile in relazione agli scopi elencati nel rispettivo statuto . L’accesso può essere richiesto inoltre con domanda motivata, sottoscritta da almeno 100 residenti nel Comune con modalità analoghe a quelle previste per la richiesta di referendum e con indicazione della persona incaricata di prendere visione del documento richiesto. 
+							</corpo>
+						</comma>
+						<comma id="art3-com3">
+							<num>3.</num>
+							<corpo>
+								Salvo diversa disposizione di legge, viene garantito, anche per i documenti soggetti ad esclusione ai sensi del 
+								<rif xlink:href="#art5" xlink:type="simple">successivo art. 5</rif>
+								, il diritto di chiunque di conoscere le informazioni concernenti la propria persona, di cui l'Amministrazione sia in possesso, e la correzione gratuita di eventuali errori ed omissioni. 
+							</corpo>
+						</comma>
+					</articolo>
+					<articolo id="art4">
+						<num>Art. 4</num>
+						<rubrica>(Termini del procedimento) </rubrica>
+						<comma id="art4-com1">
+							<num>1.</num>
+							<corpo>La visione degli atti o il rilascio di copie sono assicurati con immediatezza compatibilmente con le esigenze dell’ufficio e comunque entro il termine di cui al comma successivo .</corpo>
+						</comma>
+						<comma id="art4-com2">
+							<num>2.</num>
+							<corpo>Il procedimento di accesso deve concludersi nel termine di trenta giorni decorrenti dalla ricezione della richiesta da parte dell’Ufficio Relazioni col Pubblico. Qualora la richiesta sia stata presentata ad ufficio diverso, quest’ultimo deve trasmetterla, senza indugio all’U. R. P il quale comunica al richiedente la data in cui ha ricevuto la richiesta, precisando che da tale data decorre il termine di 30 giorni.</corpo>
+						</comma>
+						<comma id="art4-com3">
+							<num>3.</num>
+							<corpo>
+								Ai sensi dell’ 
+								<rif xlink:href="urn:nir:stato:legge:1990-08-07;241#art25-com4" xlink:type="simple">art. 25, comma 4, della Legge 7.8.1990 n. 241</rif>
+								, decorsi inutilmente trenta giorni dalla ricezione della richiesta da parte dell’U. R. P., questa si intende respinta. 
+							</corpo>
+						</comma>
+					</articolo>
+				</capo>
+				<capo id="cap2">
+					<num>Capo II</num>
+					<rubrica>ESCLUSIONE E DIFFERIMENTO DEL DIRITTO DI ACCESSO </rubrica>
+					<articolo id="art5">
+						<num>Art. 5</num>
+						<rubrica>(Casi di esclusione) </rubrica>
+						<comma id="art5-com1">
+							<num>1.</num>
+							<alinea>
+								Il diritto di accesso è escluso, senza limiti di tempo, per i documenti amministrativi coperti dal segreto di Stato ai sensi dell’ 
+								<rif xlink:href="urn:nir:stato:legge:1977-10-24;801#art12" xlink:type="simple">art.12 della L. 24.10.1977, n. 801</rif>
+								, o la cui esclusione sia prevista da altre disposizioni di legge. Sono esclusi in particolare i seguenti atti: 
+							</alinea>
+							<el id="art5-com1-leta">
+								<num>a)</num>
+								<corpo>progetti e cartografie di edifici adibiti ad installazioni militari e penitenziarie, ad aziende a rischio di incidente rilevante, ad edifici destinati all'esercizio delle attività creditizie;</corpo>
+							</el>
+							<el id="art5-com1-letb">
+								<num>b)</num>
+								<corpo>documenti e provvedimenti in materia di ordine pubblico, prevenzione e repressione della criminalità;</corpo>
+							</el>
+							<el id="art5-com1-letc">
+								<num>c)</num>
+								<corpo>denunce, esposti, verbali di accertamento relativi a violazioni e infrazioni soggette a comunicazioni di notizie di reato all'autorità giudiziaria, se e in quanto coperti dalla segretezza delle indagini;</corpo>
+							</el>
+							<el id="art5-com1-letd">
+								<num>d)</num>
+								<corpo>atti relativi a procedimenti disciplinari nei confronti del personale comunale e degli enti dipendenti, escluso il provvedimento di applicazione della sanzione;</corpo>
+							</el>
+							<el id="art5-com1-lete">
+								<num>e)</num>
+								<corpo>verbali e atti istruttori relativi alle commissioni di indagine il cui atto istitutivo preveda la segretezza dei lavori;</corpo>
+							</el>
+							<el id="art5-com1-letf">
+								<num>f)</num>
+								<corpo>
+									atti e documenti di cui alla 
+									<rif xlink:href="#art5-com1-letj" xlink:type="simple">successiva lettera j)</rif>
+									del presente comma compresi nel fascicolo personale dei dipendenti comunali; 
+								</corpo>
+							</el>
+							<el id="art5-com1-letg">
+								<num>g)</num>
+								<corpo>le informazioni e i documenti che riguardano i metodi di produzione o le strategie aziendali delle imprese;</corpo>
+							</el>
+							<el id="art5-com1-leth">
+								<num>h)</num>
+								<corpo>atti e documenti relativi a procedimenti tributari, escluso il provvedimento definito di accertamento tributario;</corpo>
+							</el>
+							<el id="art5-com1-leti">
+								<num>i)</num>
+								<corpo>pareri legali redatti dagli uffici comunali, nonché quelli di professionisti esterni acquisiti, in relazione a liti in atto o potenziali, atti defensionali e la relativa corrispondenza;</corpo>
+							</el>
+							<el id="art5-com1-letj">
+								<num>j)</num>
+								<corpo>notizie e documenti relativi alla vita privata e familiare, al domicilio ed alla corrispondenza delle persone fisiche, utilizzati ai fini dell’attività amministrativa;</corpo>
+							</el>
+							<el id="art5-com1-letk">
+								<num>k)</num>
+								<corpo>gli atti provenienti da soggetti privati non utilizzati ai fini dell’attività amministrativa. Sono esclusi in particolare tutti gli atti e le informazioni relativi: </corpo>
+							</el>
+							<en id="art5-com1-num1">
+								<num>1)</num>
+								<corpo>ai trattamenti sanitari obbligatori;</corpo>
+							</en>
+							<en id="art5-com1-num2">
+								<num>2)</num>
+								<corpo>
+									ai dati sensibili, di cui all’ 
+									<rif xlink:href="urn:nir:stato:legge:1996-12-31;675#art22" xlink:type="simple">art. 22 della legge 31 dicembre 1996, n. 675</rif>
+									e successive modifiche e integrazioni, nei limiti previsti dalla stessa legge ; 
+								</corpo>
+							</en>
+							<en id="art5-com1-num3">
+								<num>3)</num>
+								<corpo>
+									alle schede anagrafiche, tranne che per le persone appositamente incaricate ( 
+									<rif xlink:href="urn:nir:presidente.repubblica:decreto:1989;223#art37" xlink:type="simple">art.37 D.P.R. 223/89</rif>
+									); 
+								</corpo>
+							</en>
+							<en id="art5-com1-num4">
+								<num>4)</num>
+								<corpo>
+									alle informazioni e notizie sul rapporto di adozione risultante agli atti, salva espressa autorizzazione dell'autorità giudiziaria (artt.28 e 73 
+									<rif xlink:href="urn:nir:stato:legge:1983;184" xlink:type="simple">L. 184/83</rif>
+									); 
+								</corpo>
+							</en>
+							<en id="art5-com1-num5">
+								<num>5)</num>
+								<corpo>
+									alle cause di inidoneità al servizio militare, fatta salva la richiesta del diretto interessato ( 
+									<rif xlink:href="urn:nir:stato:legge:1977;890#art1" xlink:type="simple">art. 1 L. 890/77</rif>
+									); 
+								</corpo>
+							</en>
+							<en id="art5-com1-num6">
+								<num>6)</num>
+								<corpo>
+									ai dati statistici dei riferimenti di tipo individuale ( 
+									<rif xlink:href="urn:nir:stato:decreto.legislativo:1989;322#art9" xlink:type="simple">art. 9 D. Lgs. 322/89</rif>
+									); 
+								</corpo>
+							</en>
+							<en id="art5-com1-num7">
+								<num>7)</num>
+								<corpo>
+									alle schede I.S.T.A.T. di morte ( 
+									<rif xlink:href="urn:nir:presidente.repubblica:decreto:1990;285#art1" xlink:type="simple">art. 1 D.P.R. 285/90</rif>
+									); 
+								</corpo>
+							</en>
+							<en id="art5-com1-num8">
+								<num>8)</num>
+								<corpo>
+									ai documenti contenenti l'indicazione di paternità e maternità di una persona, fatta salva la richiesta dell'interessato o dell'amministrazione in vista dell'esercizio di diritti o doveri derivanti dallo stato di filiazione ( 
+									<rif xlink:href="urn:nir:stato:legge:1955;1064" xlink:type="simple">L. 1064/55</rif>
+									; 
+									<rif xlink:href="urn:nir:presidente.repubblica:decreto:1957;432" xlink:type="simple">D.P.R. 432/57</rif>
+									); 
+								</corpo>
+							</en>
+							<en id="art5-com1-num9">
+								<num>9)</num>
+								<corpo>
+									alle notizie in ordine ai collaboratori della giustizia che hanno cambiato generalità e residenza ( 
+									<rif xlink:href="urn:nir:stato:legge:1991;82" xlink:type="simple">L. 82/91</rif>
+									; 
+									<rif xlink:href="urn:nir:stato:decreto.legislativo:1993;119" xlink:type="simple">D. Lgs.119/93</rif>
+									); 
+								</corpo>
+							</en>
+							<en id="art5-com1-num10">
+								<num>10)</num>
+								<corpo>
+									agli atti di stato civile, tranne la preventiva autorizzazione del Procuratore della Repubblica ( 
+									<rif xlink:href="urn:nir:stato:regio.decreto:1939;1238#art185" xlink:type="simple">art. 185 R.D. 1238/39</rif>
+									); 
+								</corpo>
+							</en>
+							<en id="art5-com1-num11">
+								<num>11)</num>
+								<corpo>
+									alle vecchie generalità e sesso, per le persone cui è stata giudizialmente rettificata l'attribuzione di sesso ( 
+									<rif xlink:href="urn:nir:stato:legge:1982;164#art5" xlink:type="simple">art. 5 L. 164/82</rif>
+									). 
+								</corpo>
+							</en>
+						</comma>
+						<comma id="art5-com2">
+							<num>2.</num>
+							<corpo>Non è ammesso l’accesso agli atti preparatori nel corso della formazione degli atti regolamentari, amministrativi generali, di pianificazione e programmazione. </corpo>
+						</comma>
+						<comma id="art5-com3">
+							<num>3.</num>
+							<corpo>Non sono ammesse richieste relative ad intere categorie di documenti che comportino lo svolgimento di attività di indagine e di ricerca da parte degli uffici comunali.</corpo>
+						</comma>
+						<comma id="art5-com4">
+							<num>4.</num>
+							<corpo>Deve comunque essere garantita ai richiedenti la visione degli atti la cui conoscenza sia necessaria per curare o per difendere i loro interessi giuridici. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art6">
+						<num>Art. 6</num>
+						<rubrica>(Esclusione temporanea) (ABROGATO) </rubrica>
+					</articolo>
+					<articolo id="art7">
+						<num>Art. 7</num>
+						<rubrica>(Differimento del diritto di accesso) </rubrica>
+						<comma id="art7-com1">
+							<num>1.</num>
+							<corpo>
+								I documenti di cui al 
+								<rif xlink:href="#art5" xlink:type="simple">precedente art. 5</rif>
+								non possono essere sottratti all’accesso nei casi in cui sia sufficiente fare ricorso al potere di differimento. 
+							</corpo>
+						</comma>
+						<comma id="art7-com2">
+							<num>2.</num>
+							<alinea>Il Responsabile dell’unità organizzativa competente a formare l’atto o a detenerlo stabilmente, con provvedimento motivato può disporre il differimento dell’accesso nei seguenti casi: </alinea>
+							<ep id="art7-com2-pun1">
+								<num>-</num>
+								<corpo>per la salvaguardia di motivate esigenze di riservatezza dell’Amministrazione, specialmente nella fase preparatoria dei provvedimenti, incidenti sul buon andamento e sull’imparzialità dell’azione amministrativa; </corpo>
+							</ep>
+							<ep id="art7-com2-pun2">
+								<num>-</num>
+								<corpo>quando si verifichino documentabili difficoltà per l’acquisizione dei documenti amministrativi richiesti, e quando l’alto numero delle richieste, in rapporto alla dotazione degli uffici che le devono soddisfare, non consenta il loro accoglimento nel termine prescritto;</corpo>
+							</ep>
+							<ep id="art7-com2-pun3">
+								<num>-</num>
+								<corpo>nella fase istruttoria dei ricorsi amministrativi o giurisdizionali. </corpo>
+							</ep>
+						</comma>
+						<comma id="art7-com3">
+							<num>3.</num>
+							<corpo>
+								Il provvedimento di cui al 
+								<rif xlink:href="#art7-com1" xlink:type="simple">primo comma</rif>
+								indica la data in cui potrà essere esercitato il diritto di accesso. Detto provvedimento è comunicato al richiedente. 
+							</corpo>
+						</comma>
+						<comma id="art7-com4">
+							<num>4.</num>
+							<corpo>Nel caso in cui il differimento riguardi solamente parte del contenuto di un documento amministrativo, sono accessibili per visione e rilascio di copia le altre parti del medesimo. </corpo>
+						</comma>
+					</articolo>
+				</capo>
+				<capo id="cap3">
+					<num>Capo III</num>
+					<rubrica>MODALITÀ DI ESERCIZIO DEL DIRITTO DI ACCESSO </rubrica>
+					<articolo id="art8">
+						<num>Art. 8</num>
+						<rubrica>(Modalità di accesso) </rubrica>
+						<comma id="art8-com1">
+							<num>1.</num>
+							<corpo>Il diritto di accesso è assicurato dagli U. R. P., eventualmente in collaborazione con gli altri uffici del Comune.</corpo>
+						</comma>
+						<comma id="art8-com2">
+							<num>2.</num>
+							<corpo>Il diritto di accesso ai documenti amministrativi inseriti in Rete civica si esercita mediante richiesta verbale a uno degli U. R. P. il quale registra: nome, residenza e numero telefonico del richiedente, data e oggetto della richiesta.</corpo>
+						</comma>
+						<comma id="art8-com3">
+							<num>3.</num>
+							<corpo>Il richiedente deve indicare gli estremi del documento amministrativo oggetto della richiesta, ovvero gli elementi che ne consentano l’individuazione.</corpo>
+						</comma>
+						<comma id="art8-com4">
+							<num>4.</num>
+							<corpo>La richiesta, esaminata immediatamente senza formalità, è accolta mediante esibizione del documento richiesto o estrazione di copia.</corpo>
+						</comma>
+						<comma id="art8-com5">
+							<num>5.</num>
+							<corpo>Per le richieste di copie conformi o autentiche, l’U. R. P. le richiede all’ufficio che ha emanato il documento amministrativo o lo detiene.</corpo>
+						</comma>
+						<comma id="art8-com6">
+							<num>6.</num>
+							<corpo>Qualora l’U. R. P. non abbia la disponibilità del documento amministrativo richiesto, il richiedente deve presentare richiesta scritta indicando, oltre ai dati di cui ai commi secondo e terzo, anche l’interesse di mero fatto da soddisfare con la richiesta di accesso.</corpo>
+						</comma>
+						<comma id="art8-com7">
+							<num>7.</num>
+							<alinea>Qualora sia richiesta copia dell’atto, l’U. R. P.: </alinea>
+							<el id="art8-com7-leta">
+								<num>a.</num>
+								<corpo>
+									provvede a procurare la copia dall’ufficio competente nel tempo più breve possibile e comunque in modo che sia rispettato il termine di cui all’ 
+									<rif xlink:href="#art4-com2" xlink:type="simple">art. 4, secondo comma</rif>
+									; 
+								</corpo>
+							</el>
+							<el id="art8-com7-letb">
+								<num>b.</num>
+								<corpo>convoca presso di sé il richiedente per la consegna della copia richiesta;</corpo>
+							</el>
+							<el id="art8-com7-letc">
+								<num>c.</num>
+								<corpo>qualora il responsabile della unità organizzativa competente a formare l’atto o a detenerlo stabilmente ritenga di non poter accogliere o di differire la richiesta, consegna il provvedimento motivato all’U. R. P. che lo trasmette al richiedente;</corpo>
+							</el>
+							<el id="art8-com7-letd">
+								<num>d.</num>
+								<corpo>qualora sia richiesta la sola visione di un documento amministrativo, l’U. R. P. fissa con l’ufficio competente il giorno e l’ora per la visione e ne dà comunicazione al richiedente;</corpo>
+							</el>
+						</comma>
+						<comma id="art8-com8">
+							<num>8.</num>
+							<corpo>L’U. R. P. registra le richieste scritte. I dati risultanti dalle richieste scritte e orali sono trasmessi periodicamente al responsabile degli U. R. P. </corpo>
+						</comma>
+						<comma id="art8-com9">
+							<num>9.</num>
+							<corpo>
+								Qualora il richiedente, nella domanda scritta, abbia motivatamente richiesto copia del documento amministrativo in un termine più breve di quello previsto dall’ 
+								<rif xlink:href="#art4-com2" xlink:type="simple">art. 4, secondo comma</rif>
+								, l’U. R. P. dovrà motivare l’eventuale mancato accoglimento della richiesta di abbreviazione del termine. 
+							</corpo>
+						</comma>
+						<comma id="art8-com10">
+							<num>10.</num>
+							<corpo>
+								Ove la richiesta sia incompleta, il termine di cui all’ 
+								<rif xlink:href="#art4-com2" xlink:type="simple">art.4, secondo comma</rif>
+								, comincia a decorrere dalla data di completamento della richiesta. 
+							</corpo>
+						</comma>
+						<comma id="art8-com11">
+							<num>11.</num>
+							<corpo>
+								L’accoglimento della richiesta di accesso di un documento amministrativo comporta l’accesso agli altri documenti nello stesso richiamati, se richiesto dall’interessato, salvo le limitazioni di cui al 
+								<rif xlink:href="#cap2" xlink:type="simple">Capo II</rif>
+								. 
+							</corpo>
+						</comma>
+						<comma id="art8-com12">
+							<num>12.</num>
+							<corpo>Le richieste di documenti relativi a progetti edilizi ed agli strumenti urbanistici continuano ad essere rivolte direttamente ai competenti uffici della Direzione Urbanistica. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art9">
+						<num>Art. 9</num>
+						<rubrica>(Accesso mediante altro mezzo di invio della richiesta) </rubrica>
+						<comma id="art9-com1">
+							<num>1.</num>
+							<corpo>
+								La richiesta a mezzo posta, telefax, o per via informatica deve essere indirizzata all’U. R. P. il quale provvede ai sensi dell’ 
+								<rif xlink:href="#art8" xlink:type="simple">art. 8</rif>
+								, in quanto applicabile. 
+							</corpo>
+						</comma>
+						<comma id="art9-com2">
+							<num>2.</num>
+							<corpo>Su richiesta dell’interessato, la copia potrà essere trasmessa direttamente al recapito da questi indicato con addebito delle eventuali spese di riproduzione. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art10">
+						<num>Art. 10</num>
+						<rubrica>(Accesso ad archivi informatici) </rubrica>
+						<comma id="art10-com1">
+							<num>1.</num>
+							<corpo>Il responsabile dell’ufficio competente cui appartiene l’archivio informatico provvede a consentire la visione salvaguardando i dati dalla distruzione, dalla perdita accidentale, dall’alterazione o dalla divulgazione non autorizzata. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art11">
+						<num>Art. 11</num>
+						<rubrica>(Visione dei documenti) </rubrica>
+						<comma id="art11-com1">
+							<num>1.</num>
+							<corpo>La visione dei documenti è gratuita. L’esame viene effettuato dall’interessato o da persona da lui incaricata in locali idonei e sotto la sorveglianza di personale addetto.</corpo>
+						</comma>
+						<comma id="art11-com2">
+							<num>2.</num>
+							<corpo>L’interessato ha facoltà di prendere appunti, di trascrivere in tutto o in parte i documenti presi in visione.</corpo>
+						</comma>
+						<comma id="art11-com3">
+							<num>3.</num>
+							<corpo>Salva comunque l’applicazione delle norme penali e civili, è vietato asportare i documenti dal luogo presso cui sono dati in visione, tracciare segni su di essi o comunque alterarli in qualsiasi modo. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art12">
+						<num>Art. 12</num>
+						<rubrica>(Rilascio di copie) </rubrica>
+						<comma id="art12-com1">
+							<num>1.</num>
+							<corpo>Il rilascio di copia di documenti amministrativi mediante stampa dalla Rete civica o fotocopiatura è subordinato al rimborso del solo costo di riproduzione nella misura determinata con delibera del Consiglio comunale , la quale determina altresì le modalità di pagamento delle somme dovute.</corpo>
+						</comma>
+						<comma id="art12-com2">
+							<num>2.</num>
+							<corpo>
+								Il rilascio delle copie di cui al 
+								<rif xlink:href="#art12-com1" xlink:type="simple">primo comma</rif>
+								è gratuito se le copie richieste non superano le quattro (4) facciate. 
+							</corpo>
+						</comma>
+					</articolo>
+					<articolo id="art13">
+						<num>Art. 13</num>
+						<rubrica>(Rilascio di copie conformi ed autenticate) </rubrica>
+						<comma id="art13-com1">
+							<num>1.</num>
+							<corpo>L’interessato, per ottenere copia conforme o autenticata deve precisarlo nella richiesta.</corpo>
+						</comma>
+						<comma id="art13-com2">
+							<num>2.</num>
+							<corpo>
+								Ai fini del rilascio di copie autenticate, oltre alle norme del presente regolamento, si applicano le disposizioni contenute nella 
+								<rif xlink:href="urn:nir:stato:legge:1968-01-04;15" xlink:type="simple">L. 4.1.1968 n.15</rif>
+								e successive modificazioni in quanto compatibili con la normativa vigente in materia di accesso, fatte salve le disposizioni vigenti in materia di bollo e di diritti di segreteria. 
+							</corpo>
+						</comma>
+					</articolo>
+					<articolo id="art14">
+						<num>Art. 14</num>
+						<rubrica>(Ricorsi e reclami) </rubrica>
+						<comma id="art14-com1">
+							<num>1.</num>
+							<corpo>
+								In caso di diniego, esplicito o per decorso del termine, o di differimento del diritto di accesso, il richiedente può, oltre che presentare ricorso al T.A. R. ai sensi dell' 
+								<rif xlink:href="urn:nir:stato:legge:1990;241#art25-com5" xlink:type="simple">art. 25 comma 5 della L. 241/90</rif>
+								, chiedere al Difensore civico che sia riesaminato l’atto emanato. 
+							</corpo>
+						</comma>
+						<comma id="art14-com2">
+							<num>2.</num>
+							<corpo>Se il Difensore civico ritiene illegittimo il diniego o il differimento disposto, lo comunica a chi ha emanato il relativo provvedimento . Se questi non emana provvedimento confermativo motivato entro sette giorni dal ricevimento della comunicazione del Difensore civico l’accesso è consentito. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art15">
+						<num>Art. 15</num>
+						<rubrica>(Relazione al Consiglio) </rubrica>
+						<comma id="art15-com1">
+							<num>1.</num>
+							<corpo>Il Sindaco presenta al Consiglio ogni anno una relazione sull'applicazione del presente regolamento. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art16">
+						<num>Art. 16</num>
+						<rubrica>(Diritto alle informazioni del Comune) </rubrica>
+						<comma id="art16-com1">
+							<num>1.</num>
+							<corpo>Il Comune di Firenze garantisce a chiunque il diritto dei cittadini di accedere, in generale, alle informazioni in possesso dei propri uffici, tramite gli URP e mediante l’inserimento in Rete civica di tutti gli atti, dati e notizie di interesse dei cittadini. </corpo>
+						</comma>
+					</articolo>
+					<articolo id="art16bis">
+						<num>Art. 16-bis</num>
+						<rubrica>(Trasmissione e scambio di dati con soggetti pubblici e privati) </rubrica>
+						<comma id="art16bis-com1">
+							<num>1.</num>
+							<corpo>
+								Il Comune gestisce il trattamento dei dati personali contenuti nelle banche dati di cui è titolare nei limiti strettamente necessari e nel rispetto dei principi di correttezza contenuti nell’ 
+								<rif xlink:href="urn:nir:stato:legge:1996;675#art9" xlink:type="simple">art. 9 della L. n. 675/96</rif>
+								e successive modifiche ed integrazioni. 
+							</corpo>
+						</comma>
+						<comma id="art16bis-com2">
+							<num>2.</num>
+							<corpo>
+								Il Comune, con i limiti previsti dall’ 
+								<rif xlink:href="#art5-com1-letj" xlink:type="simple">art. 5 comma 1 lett. j</rif>
+								, favorisce attraverso accordi la trasmissione e lo scambio di atti, dati o documenti tra le proprie banche dati e gli archivi degli altri enti territoriali, degli enti pubblici, dei gestori, esercenti ed incaricati di pubblici servizi, nonché di altri soggetti pubblici e privati, anche a carattere associativo, che sviluppino, in collaborazione con l’amministrazione comunale, attività connesse alla realizzazione di finalità istituzionali. 
+							</corpo>
+						</comma>
+						<comma id="art16bis-com3">
+							<num>3.</num>
+							<corpo>Gli accordi dovranno contenere l’indicazione del titolare e del responsabile della banca dati, delle finalità e delle operazioni di trattamento, nonché le modalità di connessione e comunicazione dei dati e le misure di sicurezza adottate.</corpo>
+						</comma>
+						<comma id="art16bis-com4">
+							<num>4.</num>
+							<corpo>Le garanzie di cui sopra dovranno essere formalmente assicurate anche in tutte le situazioni che prevedono l’accesso alle banche dati del Comune da parte di soggetti affidatari di attività e servizi per conto dell’Amministrazione il cui svolgimento presupponga la comunicazione di dati personali.</corpo>
+						</comma>
+						<comma id="art16bis-com5">
+							<num>5.</num>
+							<corpo>
+								Ai sensi della 
+								<rif xlink:href="urn:nir:stato:legge:2000-11-24;340" xlink:type="simple">legge 24 novembre 2000, n. 340</rif>
+								, il Comune rilascia, per l’accertamento d’ufficio di stati, fatti e qualità ovvero per il controllo sulle dichiarazioni sostitutive presentate dai cittadini, apposita autorizzazione all’Amministrazione procedente . 
+							</corpo>
+						</comma>
+						<comma id="art16bis-com6">
+							<num>6.</num>
+							<corpo>
+								L’autorizzazione di cui al 
+								<rif xlink:href="#art16bis-com5" xlink:type="simple">comma 5</rif>
+								può essere contenuta in una convenzione stipulata tra l’Amministrazione certificante e quella procedente. 
+							</corpo>
+						</comma>
+					</articolo>
+				</capo>
+				<capo id="cap4">
+					<num>Capo IV</num>
+					<rubrica>DISPOSIZIONI FINALI </rubrica>
+					<articolo id="art17">
+						<num>Art. 17</num>
+						<rubrica>(Disposizioni speciali) </rubrica>
+						<comma id="art17-com1">
+							<num>1.</num>
+							<corpo>Sono fatte salve le disposizioni che regolano l'accesso agli atti conservati presso l'Archivio Storico e le disposizioni di legge sul diritto di accesso alle informazioni sullo stato dell’ambiente. </corpo>
+						</comma>
+					</articolo>
+				</capo>
+			</articolato>
+			<formulafinale />
+			<conclusione />
+		</DocumentoNIR>
+	</NIR>
