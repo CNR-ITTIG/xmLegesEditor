@@ -31,6 +31,7 @@ import java.util.Collection;
 import java.util.EventObject;
 import java.util.Iterator;
 
+import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
@@ -108,6 +109,8 @@ public class LinguisticRelationPaneImpl implements LinguisticRelationPane, Event
 	
 	UtilDalos utilDalos;
 	
+	JPanel comboPanel = null;
+	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
@@ -138,7 +141,8 @@ public class LinguisticRelationPaneImpl implements LinguisticRelationPane, Event
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		panel.add(scrollPane);
 		
-		panel.add(utilDalos.getLanguageSwitchPanel(), BorderLayout.SOUTH);
+		comboPanel = utilDalos.getLanguageSwitchPanel();
+		panel.add(comboPanel, BorderLayout.SOUTH);
 			
 		scrollPane.setViewportView(lexicalTree);		
 		frame.addPane(this, false);
@@ -154,8 +158,10 @@ public class LinguisticRelationPaneImpl implements LinguisticRelationPane, Event
 		
 		
 		
-		if (event instanceof SynsetSelectionEvent)
+		if (event instanceof SynsetSelectionEvent) {
 				selectedSyn = ((SynsetSelectionEvent) event).getActiveSynset();
+				setFlag();
+		}
 		
 		if (event instanceof PaneFocusGainedEvent && ((PaneFocusGainedEvent)event).getPane().equals(this)){
 			clearTree(lexicalTree);
@@ -163,6 +169,34 @@ public class LinguisticRelationPaneImpl implements LinguisticRelationPane, Event
 			kbManager.addLexicalProperties(selectedSyn);
 			showLinguisticRelations(selectedSyn);			
 		}
+	}
+	
+	private void setFlag() {
+		Component[] components = comboPanel.getComponents();
+		JComboBox cbx = null;		
+		for(int i = 0; i < components.length; i++) {
+			Component item = components[i];
+			if(item instanceof JComboBox) {
+				cbx = (JComboBox) item;
+			}
+		}
+		if(cbx == null) {
+			System.err.println("ERROR! setFlag() cbx is null!");
+			return;
+		}
+		String lang = selectedSyn.getLanguage();
+		int index = 0;
+		if(lang.equalsIgnoreCase("en")) {
+			index = 1;
+		}
+		if(lang.equalsIgnoreCase("es")) {
+			index = 2;
+		}
+		if(lang.equalsIgnoreCase("nl")) {
+			index = 3;
+		}
+		System.out.println("Setting flag " + index + "...");
+		cbx.setSelectedIndex(2);
 	}
 	
 	// ///////////////////////////////////////////////////// Startable Interface
