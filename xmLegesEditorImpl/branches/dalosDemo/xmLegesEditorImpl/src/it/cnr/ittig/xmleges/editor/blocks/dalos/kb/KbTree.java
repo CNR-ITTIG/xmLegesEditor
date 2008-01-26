@@ -110,7 +110,7 @@ public class KbTree {
 		
 		collapseTree();
 		
-		System.out.println(">> Trying to find and select \"" + syn + "\" within tree...");		
+		//System.out.println(">> Trying to find and select \"" + syn + "\" within tree...");		
 			
 		//Non va bene questo: cerca solo nei nodi e foglie gi� espansi e cerca
 		//con un prefisso non con l'exact matching.

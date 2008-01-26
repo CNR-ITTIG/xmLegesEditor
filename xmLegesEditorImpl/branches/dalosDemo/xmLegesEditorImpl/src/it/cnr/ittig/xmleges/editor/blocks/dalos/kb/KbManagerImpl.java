@@ -62,12 +62,10 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 		//  IT
 		String[] it = new String[]{"IT/individuals.owl", "IT/individuals-word.owl", "IT/ind-to-consumer.owl", "IT/sources.owl",
 				"IT/types.owl"};
-		
-		
+				
 		for (int i = 0; i < commonFiles.length; i++) {
 			UtilFile.copyFileInTempDir(getClass().getResourceAsStream(commonFiles[i]),"dalos", commonFiles[i]);
-		}
-		
+		}		
 		
 		for (int i = 0; i < it.length; i++) {
 			UtilFile.copyFileInTempDir(getClass().getResourceAsStream(it[i]), "dalos/IT", it[i]);
@@ -100,16 +98,17 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 
 	public void addSemanticProperties(Synset syn) {
 		
-		String lang = syn.getLanguage();
-		KbContainer kbc = getContainer(lang);
+		//UNDER CONSTRUCTION, DON'T GO ON!
+		if(true) return;
+		
+		KbContainer kbc = getContainer(syn.getLanguage());
 		kbc.addSemanticProperties(syn);
 		//kbc.compute("dp");
 	}
 	
 	public void addLexicalProperties(Synset syn) {
 		
-		String lang = syn.getLanguage();
-		KbContainer kbc = getContainer(lang);
+		KbContainer kbc = getContainer(syn.getLanguage());
 		kbc.addLexicalProperties(syn);
 	}
 	
@@ -180,9 +179,9 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 		return kbc.search(search, type);
 	}
 	
-	public boolean setTreeSelection(Synset syn, String lang) {
+	public boolean setTreeSelection(Synset syn) {
 		
-		KbContainer kbc = getContainer(lang);
+		KbContainer kbc = getContainer(syn.getLanguage());
 		return kbc.setTreeSelection(syn);
 	}
 	

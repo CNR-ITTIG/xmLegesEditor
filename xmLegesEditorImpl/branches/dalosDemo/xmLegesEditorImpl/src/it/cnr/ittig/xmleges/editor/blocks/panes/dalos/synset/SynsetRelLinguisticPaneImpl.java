@@ -31,7 +31,7 @@ Initializable, Startable, SynsetRelLinguisticPane {
 	}
 
 	void focusGainedEvent() {
-		System.err.println("Synchronize LinguisticRelationPane on "	+ selectedSynset.getLexicalForm());    		
+		//System.err.println("Synchronize LinguisticRelationPane on "	+ selectedSynset.getLexicalForm());    		
 		kbManager.addLexicalProperties(selectedSynset);
 		showLinguisticRelations(selectedSynset);					
 	}

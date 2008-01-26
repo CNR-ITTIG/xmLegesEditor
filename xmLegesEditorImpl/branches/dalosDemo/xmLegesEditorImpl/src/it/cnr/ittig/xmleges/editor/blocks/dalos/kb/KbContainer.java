@@ -447,9 +447,10 @@ public class KbContainer {
 	void addLexicalProperties(Synset syn) {		
 		//Aggiunge le propriet� generiche e quelle lessicali
 
-		System.out.println("Adding lexical properties...");
+//		System.out.println("Adding lexical properties to " 
+//				+ syn.getLexicalForm() + "...");
 		if(syn.isLexicalPropCached()) {
-			System.out.println("..already cached!");
+//			System.out.println("..already cached!");
 			return;
 		}
 
@@ -506,7 +507,10 @@ public class KbContainer {
 	void addSemanticProperties(Synset syn) {
 		//Aggiunge le propriet� semantiche
 		
+//		System.out.println("Adding semantic properties to " 
+//		+ syn.getLexicalForm() + "...");
 		if(syn.isSemanticPropCached()) {
+//			System.out.println("..already cached!");
 			return;
 		}
 
