@@ -105,7 +105,7 @@ public interface Frame extends Service {
 	 * @param scrollable <code>true</code> se il pannello deve essere gestito
 	 *        con JScrollPane
 	 */
-	public void addPane(Pane pane, boolean scrollable);
+	public void addPane(Object paneObject, boolean scrollable);
 
 	/**
 	 * Restituisce il pannello di modifica attivo.
