@@ -1,4 +1,4 @@
-package it.cnr.ittig.xmleges.editor.services.panes.dalos;
+package it.cnr.ittig.xmleges.editor.services.panes.dalos.tabbed;
 
 import it.cnr.ittig.services.manager.Service;
 import it.cnr.ittig.xmleges.core.services.frame.Pane;
@@ -21,6 +21,6 @@ import it.cnr.ittig.xmleges.core.services.frame.Pane;
  * @author <a href="agnoloni@ittig.cnr.it">Tommaso Agnoloni</a>
  */
 
-public interface SemanticRelationPane extends Service, Pane {
+public interface SynsetRelSemanticPane extends Service, Pane {
 
 }
