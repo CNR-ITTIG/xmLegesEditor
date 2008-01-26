@@ -27,7 +27,8 @@ import java.util.Map;
  * </ul>
  */
 
-public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initializable {
+public class KbManagerImpl 
+implements KbManager, Loggable, Serviceable, Initializable {
 	
 	Logger logger;
 
@@ -96,6 +97,12 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 		langToContainer.put(lang, new KbContainer(lang, i18n));
 	}
 
+	public void addLexicalProperties(Synset syn) {
+		
+		KbContainer kbc = getContainer(syn.getLanguage());
+		kbc.addLexicalProperties(syn);
+	}
+	
 	public void addSemanticProperties(Synset syn) {
 		
 		//UNDER CONSTRUCTION, DON'T GO ON!
@@ -106,14 +113,11 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 		//kbc.compute("dp");
 	}
 	
-	public void addLexicalProperties(Synset syn) {
-		
-		KbContainer kbc = getContainer(syn.getLanguage());
-		kbc.addLexicalProperties(syn);
-	}
-	
 	public void addSources(Synset syn) {
 		
+		//UNDER CONSTRUCTION, DON'T GO ON!
+		if(true) return;
+
 		String lang = syn.getLanguage();
 		KbContainer kbc = getContainer(lang);
 		kbc.addSources(syn);

@@ -53,14 +53,12 @@ implements EventManagerListener, Loggable, Serviceable,
 	SynsetMarkupAction synsetMarkupAction;
 	FindAction findAction = new FindAction();
 	String[] searchTypes={"Contains", "Starts with","Ends with","Matches"};
-	
-	//SynsetDetailsPaneImpl synsetDetailsPane;
-		
+			
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
 
 		synsetMarkupAction = (SynsetMarkupAction) serviceManager.lookup(SynsetMarkupAction.class);
-		//synsetDetailsPane = (SynsetDetailsPaneImpl) serviceManager.lookup(SynsetDetailsPane.class);
+
 		super.service(serviceManager);
 	}
 
@@ -113,7 +111,7 @@ implements EventManagerListener, Loggable, Serviceable,
 		
 		if (event instanceof SynsetSelectionEvent){
 		
-			//frame.setShowingPane(synsetDetailsPane, true);			
+			frame.setShowingPane(synsetDetailsPane, true);			
 			//System.err.println("synsetdetailspane setvisible true");			
 		}
 		if (event instanceof SelectionChangedEvent){
@@ -171,7 +169,7 @@ implements EventManagerListener, Loggable, Serviceable,
 		public void valueChanged(ListSelectionEvent e) {
 			if(list.getSelectedValue()!=null){
 				
-				//frame.setShowingPane(synsetDetailsPane, true);
+				frame.setShowingPane(synsetDetailsPane, true);
 				//System.err.println("synsetdetailspane setvisible true");
 				selectSynset((Synset)list.getSelectedValue());
 			}

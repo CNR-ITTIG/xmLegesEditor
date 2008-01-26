@@ -11,10 +11,12 @@ import it.cnr.ittig.xmleges.core.services.frame.Frame;
 import it.cnr.ittig.xmleges.core.services.frame.PaneException;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
+import it.cnr.ittig.xmleges.editor.blocks.panes.dalos.synset.SynsetDetailsPaneImpl;
 import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.dalos.util.UtilDalos;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSelectionEvent;
+import it.cnr.ittig.xmleges.editor.services.panes.dalos.synset.SynsetDetailsPane;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -53,6 +55,8 @@ public abstract class DalosPane {
 	
 	protected JPanel comboPanel = null;
 	
+	protected SynsetDetailsPaneImpl synsetDetailsPane;
+	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
@@ -68,6 +72,8 @@ public abstract class DalosPane {
 		kbManager = (KbManager) serviceManager.lookup(KbManager.class);
 		utilUI = (UtilUI) serviceManager.lookup(UtilUI.class);
 		bars = (Bars) serviceManager.lookup(Bars.class);
+		synsetDetailsPane = (SynsetDetailsPaneImpl) 
+			serviceManager.lookup(SynsetDetailsPane.class);
 	}
 		
 	/////////////////////////////////////////////////// Initializable Interface
