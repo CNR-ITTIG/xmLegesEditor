@@ -166,8 +166,9 @@ public class SynsetTreePaneImpl implements SynsetTreePane, EventManagerListener,
 			if(selected == null || !selected.equals(sel)) {
 				selected = sel;
 			}
-			System.err.println("Synchronize tree from " + 
-					event.getSource().toString() + "on    " + selected);
+//			System.err.println("Synchronize tree from " + 
+//					event.getSource().toString() + "on    " + selected);
+			
 			kbManager.setTreeSelection(selected, "IT");
 			
 			JScrollBar vbar = scrollPane.getVerticalScrollBar();

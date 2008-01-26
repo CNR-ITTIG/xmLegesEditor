@@ -1,4 +1,4 @@
-package it.cnr.ittig.xmleges.editor.blocks.panes.dalos;
+package it.cnr.ittig.xmleges.editor.blocks.panes.dalos.tabbed;
 
 
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
@@ -15,12 +15,12 @@ import javax.swing.JEditorPane;
 import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLEditorKit;
 
-public class SynsetDetails extends JEditorPane {
+public class DetailsContainer extends JEditorPane {
 	
 	Synset synset = null;
 	I18n i18n;
 	
-	public SynsetDetails() {
+	public DetailsContainer() {
 		
 		super();
 		
@@ -34,7 +34,7 @@ public class SynsetDetails extends JEditorPane {
 			File file = UtilFile.getFileFromTemp(KbConf.dalosRepository);
 			URL url = new URL("file:////" + file.getAbsolutePath() + "/");
 			doc.setBase(url);
-			//System.out.println("URL: " + url);
+			//System.out.println("BASE URL IN DETAILS CONTAINER: " + url);
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

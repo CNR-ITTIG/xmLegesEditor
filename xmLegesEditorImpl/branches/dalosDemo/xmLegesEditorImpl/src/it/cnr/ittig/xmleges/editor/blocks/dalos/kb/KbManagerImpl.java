@@ -196,7 +196,7 @@ public class KbManagerImpl implements KbManager, Loggable, Serviceable, Initiali
 	
 	private KbContainer getContainer(String lang) {
 		
-		KbContainer kbc = (KbContainer) langToContainer.get(lang);
+		KbContainer kbc = (KbContainer) langToContainer.get(lang.toUpperCase());
 		if(kbc == null) {
 			System.err.println("## ERROR ## kbContainer not found for language: " + lang);
 		}

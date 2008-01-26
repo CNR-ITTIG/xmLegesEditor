@@ -1,4 +1,4 @@
-package it.cnr.ittig.xmleges.editor.blocks.panes.dalos;
+package it.cnr.ittig.xmleges.editor.blocks.panes.dalos.tabbed;
 
 
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
@@ -15,12 +15,12 @@ import java.util.Iterator;
 import javax.swing.JEditorPane;
 import javax.swing.text.html.HTMLDocument;
 
-public class SourceDetails extends JEditorPane {
+public class SourceContainer extends JEditorPane {
 	
 	Synset synset = null;
 	I18n i18n;
 	
-	public SourceDetails() {
+	public SourceContainer() {
 		
 		super();
 		

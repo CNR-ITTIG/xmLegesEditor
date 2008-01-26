@@ -17,10 +17,11 @@ import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
+import it.cnr.ittig.xmleges.editor.blocks.panes.dalos.tabbed.SynsetDetailsPaneImpl;
 import it.cnr.ittig.xmleges.editor.services.dalos.action.SynsetMarkupAction;
 import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
-import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetDetailsPane;
+import it.cnr.ittig.xmleges.editor.services.panes.dalos.tabbed.SynsetDetailsPane;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetListPane;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSelectionEvent;
 
@@ -127,7 +128,7 @@ public class SynsetListPaneImpl implements SynsetListPane, EventManagerListener,
 	
 	String[] searchTypes={"Contains", "Starts with","Ends with","Matches"};
 	
-	SynsetDetailsPane synsetDetailsPane;
+	SynsetDetailsPaneImpl synsetDetailsPane;
 	
 	
 	
@@ -146,7 +147,7 @@ public class SynsetListPaneImpl implements SynsetListPane, EventManagerListener,
 		kbManager = (KbManager) serviceManager.lookup(KbManager.class);
 		i18n = (I18n) serviceManager.lookup(I18n.class);
 		synsetMarkupAction = (SynsetMarkupAction) serviceManager.lookup(SynsetMarkupAction.class);
-		synsetDetailsPane = (SynsetDetailsPane) serviceManager.lookup(SynsetDetailsPane.class);
+		synsetDetailsPane = (SynsetDetailsPaneImpl) serviceManager.lookup(SynsetDetailsPane.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
