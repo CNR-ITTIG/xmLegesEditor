@@ -21,6 +21,7 @@ implements EventManagerListener, Loggable, Serviceable,
 		
 		tabbedPaneName = "editor.panes.dalos.synsetdetails";
 		
+		///////////////////////////////////////////
 		//METTERE DA UN'ALTRA PARTE !!!!
 		String[] icons = new String[] { 		
 				"../images/kontact_journal.png", 
@@ -29,9 +30,10 @@ implements EventManagerListener, Loggable, Serviceable,
 		
 		for (int i = 0; i < icons.length; i++) {
 			UtilFile.copyFileInTempDir(getClass().
-					getResourceAsStream(icons[i]),"dalos", icons[i]);
+					getResourceAsStream(icons[i]),"dalos",icons[i]);
 		}		
-
+		///////////////////////////////////////////
+		
 		synsetPane = new DetailsContainer();
 		synsetPane.setI18n(i18n);
 		
