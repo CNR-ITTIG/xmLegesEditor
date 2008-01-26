@@ -1343,6 +1343,47 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 class="it.cnr.ittig.xmleges.core.blocks.panes.segnalazioni.SegnalazioniPaneImpl"
     />
     
+        <!-- =================================================================== -->
+    <!-- =================================================== DALOS DEMO ==== -->
+    <!-- =================================================================== -->
+    
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.dalos.kb.KbManagerImpl"
+    />
+    
+    <component  class="it.cnr.ittig.xmleges.editor.blocks.dalos.util.UtilDalosImpl"/>
+    
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.action.dalos.DalosMenuActionImpl"
+    />
+    
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.panes.dalos.SynsetListPaneImpl"
+    />
+    
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.panes.dalos.SynsetTreePaneImpl"
+    />
+    
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.panes.dalos.tabbed.SynsetDetailsPaneImpl"
+    />    
+    
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.panes.dalos.tabbed.SynsetRelLinguisticPaneImpl"
+    />
+    
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.panes.dalos.tabbed.SynsetRelSemanticPaneImpl"
+    />
+    
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.panes.dalos.tabbed.SynsetSourcePaneImpl"
+    />	
+    
+    <component  class="it.cnr.ittig.xmleges.editor.blocks.dalos.action.SynsetMarkupActionImpl"/>
+    
+    <component  class="it.cnr.ittig.xmleges.editor.blocks.dalos.dom.SynsetMarkupImpl"/>
     
     
     <!-- ================================================================== -->
@@ -1433,49 +1474,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     
     
     
-    <!-- =================================================================== -->
-    <!-- =================================================== DALOS DEMO ==== -->
-    <!-- =================================================================== -->
-    
-    <component  activation="startup"
-                class="it.cnr.ittig.xmleges.editor.blocks.dalos.kb.KbManagerImpl"
-    />
-    
-    <component  class="it.cnr.ittig.xmleges.editor.blocks.dalos.util.UtilDalosImpl"/>
-    
-    <component  activation="startup"
-                class="it.cnr.ittig.xmleges.editor.blocks.action.dalos.DalosMenuActionImpl"
-    />
-    
-    <component  activation="startup"
-                class="it.cnr.ittig.xmleges.editor.blocks.panes.dalos.SynsetListPaneImpl"
-    />
-    
-    <component  activation="startup"
-                class="it.cnr.ittig.xmleges.editor.blocks.panes.dalos.SynsetTreePaneImpl"
-    />
-    
-    <component  activation="startup"
-                class="it.cnr.ittig.xmleges.editor.blocks.panes.dalos.SynsetDetailsPaneImpl"
-    />
-    
-    
-    <component  activation="startup"
-                class="it.cnr.ittig.xmleges.editor.blocks.panes.dalos.SemanticRelationPaneImpl"
-    />
-    
-    <component  activation="startup"
-                class="it.cnr.ittig.xmleges.editor.blocks.panes.dalos.LinguisticRelationPaneImpl"
-    />
-    
-    <component  activation="startup"
-                class="it.cnr.ittig.xmleges.editor.blocks.panes.dalos.SynsetSourcePaneImpl"
-    />
-	
-    
-    <component  class="it.cnr.ittig.xmleges.editor.blocks.dalos.action.SynsetMarkupActionImpl"/>
-    
-    <component  class="it.cnr.ittig.xmleges.editor.blocks.dalos.dom.SynsetMarkupImpl"/>
     
    
     
