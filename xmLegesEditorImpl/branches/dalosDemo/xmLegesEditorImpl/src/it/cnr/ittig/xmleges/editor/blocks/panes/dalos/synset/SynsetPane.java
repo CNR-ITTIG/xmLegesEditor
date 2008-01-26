@@ -95,7 +95,7 @@ public abstract class SynsetPane {
 			}
 		}
 		if(cbx == null) {
-			System.err.println("ERROR! setFlag() cbx is null!");
+			logger.error("ERROR! setFlag() cbx is null!");
 			return;
 		}
 		String lang = selectedSynset.getLanguage();
