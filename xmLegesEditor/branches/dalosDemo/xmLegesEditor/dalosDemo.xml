@@ -1343,7 +1343,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 class="it.cnr.ittig.xmleges.core.blocks.panes.segnalazioni.SegnalazioniPaneImpl"
     />
     
-        <!-- =================================================================== -->
+    <!-- =================================================================== -->
     <!-- =================================================== DALOS DEMO ==== -->
     <!-- =================================================================== -->
     
@@ -1392,8 +1392,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  activation="startup"
                 class="it.cnr.ittig.xmleges.core.blocks.xmleditor.XmlEditorImpl"
     />
-    
-    
+        
     
     <!-- ================================================================== -->
     <!-- =============================================== XMLEGES EDITOR === -->
@@ -1401,8 +1400,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.editor.XmLegesEditorImpl"
     />
-    
-    
+        
     
     <!-- ================================================================== -->
     <!-- ======================================================== UTILS === -->
@@ -1471,13 +1469,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  class="it.cnr.ittig.xmleges.core.blocks.help.HelpImpl" >
 	    <configuration external="true" resource="HelpImpl.xconfig" />
     </component>
-    
-    
-    
-    
-   
-    
-    
+
 </container>
 
 
