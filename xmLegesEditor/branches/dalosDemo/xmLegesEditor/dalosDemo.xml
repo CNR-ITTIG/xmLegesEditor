@@ -1366,19 +1366,19 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     />
     
     <component  activation="startup"
-                class="it.cnr.ittig.xmleges.editor.blocks.panes.dalos.tabbed.SynsetDetailsPaneImpl"
+                class="it.cnr.ittig.xmleges.editor.blocks.panes.dalos.synset.SynsetDetailsPaneImpl"
     />    
     
     <component  activation="startup"
-                class="it.cnr.ittig.xmleges.editor.blocks.panes.dalos.tabbed.SynsetRelLinguisticPaneImpl"
+                class="it.cnr.ittig.xmleges.editor.blocks.panes.dalos.synset.SynsetRelLinguisticPaneImpl"
     />
     
     <component  activation="startup"
-                class="it.cnr.ittig.xmleges.editor.blocks.panes.dalos.tabbed.SynsetRelSemanticPaneImpl"
+                class="it.cnr.ittig.xmleges.editor.blocks.panes.dalos.synset.SynsetRelSemanticPaneImpl"
     />
     
     <component  activation="startup"
-                class="it.cnr.ittig.xmleges.editor.blocks.panes.dalos.tabbed.SynsetSourcePaneImpl"
+                class="it.cnr.ittig.xmleges.editor.blocks.panes.dalos.synset.SynsetSourcePaneImpl"
     />	
     
     <component  class="it.cnr.ittig.xmleges.editor.blocks.dalos.action.SynsetMarkupActionImpl"/>
