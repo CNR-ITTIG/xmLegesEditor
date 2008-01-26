@@ -17,13 +17,13 @@ import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
-import it.cnr.ittig.xmleges.editor.blocks.panes.dalos.tabbed.SynsetDetailsPaneImpl;
+import it.cnr.ittig.xmleges.editor.blocks.panes.dalos.synset.SynsetDetailsPaneImpl;
 import it.cnr.ittig.xmleges.editor.services.dalos.action.SynsetMarkupAction;
 import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
-import it.cnr.ittig.xmleges.editor.services.panes.dalos.tabbed.SynsetDetailsPane;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetListPane;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSelectionEvent;
+import it.cnr.ittig.xmleges.editor.services.panes.dalos.synset.SynsetDetailsPane;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -129,8 +129,6 @@ public class SynsetListPaneImpl implements SynsetListPane, EventManagerListener,
 	String[] searchTypes={"Contains", "Starts with","Ends with","Matches"};
 	
 	SynsetDetailsPaneImpl synsetDetailsPane;
-	
-	
 	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
