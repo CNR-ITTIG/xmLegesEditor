@@ -91,5 +91,5 @@ public interface KbManager extends Service {
 	 * @param lang
 	 * @return
 	 */
-	public boolean setTreeSelection(Synset syn, String lang);
+	public boolean setTreeSelection(Synset syn);
 }
