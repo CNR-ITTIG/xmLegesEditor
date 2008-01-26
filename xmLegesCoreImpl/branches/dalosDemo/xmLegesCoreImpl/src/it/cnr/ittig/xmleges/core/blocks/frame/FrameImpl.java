@@ -363,7 +363,13 @@ public class FrameImpl implements Frame, Loggable, Serviceable, Configurable, In
 		}
 	}
 
-	public void addPane(Pane pane, boolean scrollable) {
+	public void addPane(Object paneObject, boolean scrollable) {
+		if ( !(paneObject instanceof Pane) ) {
+			logger.error("This paneObject is not a Pane instance (" +
+					paneObject.toString() + ").");
+			return;
+		}
+		Pane pane = (Pane) paneObject;
 		if (pane == null) {
 			logger.error("Null pane not added.");
 			return;
