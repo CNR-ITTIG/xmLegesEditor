@@ -6,6 +6,7 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.services.manager.Startable;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.frame.PaneFocusGainedEvent;
+import it.cnr.ittig.xmleges.editor.services.dalos.util.LangChangedEvent;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSelectionEvent;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.synset.SynsetSourcePane;
 
@@ -30,6 +31,7 @@ Initializable, Startable, SynsetSourcePane {
 		
 		eventManager.addListener(this, SynsetSelectionEvent.class);
 		eventManager.addListener(this, PaneFocusGainedEvent.class);
+		eventManager.addListener(this, LangChangedEvent.class);
 		
 		super.initialize();
 	}

@@ -3,6 +3,7 @@ package it.cnr.ittig.xmleges.core.services.frame;
 import it.cnr.ittig.services.manager.Service;
 
 import java.awt.Component;
+import java.util.Properties;
 
 /**
  * Servizio per la gestione della finestra principale dell'applicazione. <br>
@@ -105,7 +106,7 @@ public interface Frame extends Service {
 	 * @param scrollable <code>true</code> se il pannello deve essere gestito
 	 *        con JScrollPane
 	 */
-	public void addPane(Object paneObject, boolean scrollable);
+	public void addPane(Pane pane, boolean scrollable);
 
 	/**
 	 * Restituisce il pannello di modifica attivo.
@@ -166,5 +167,11 @@ public interface Frame extends Service {
 	 * @param show
 	 */
 	public void setShowingPane(Pane pane, boolean show);
+	
+	/**
+	 * 
+	 * @param prop
+	 */
+	public void reloadPerspective(Properties prop, boolean defaultValue);
 	
 }

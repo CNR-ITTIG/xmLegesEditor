@@ -7,17 +7,18 @@ import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.action.ActionManager;
+import it.cnr.ittig.xmleges.core.services.bars.Bars;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
-import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
-import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
-import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
+import it.cnr.ittig.xmleges.core.services.frame.Frame;
+import it.cnr.ittig.xmleges.core.services.preference.PreferenceManager;
 import it.cnr.ittig.xmleges.editor.services.action.dalos.DalosMenuAction;
-import it.cnr.ittig.xmleges.editor.services.dom.allineamento.Allineamento;
-import it.cnr.ittig.xmleges.editor.services.dom.tabelle.Tabelle;
+import it.cnr.ittig.xmleges.editor.services.dalos.util.LangChangedEvent;
 
 import java.awt.event.ActionEvent;
+import java.util.Enumeration;
 import java.util.EventObject;
+import java.util.Properties;
 
 import javax.swing.AbstractAction;
 
@@ -68,6 +69,14 @@ public class DalosMenuActionImpl implements DalosMenuAction, Loggable, Serviceab
 
 	ShowViewAction showViewAction;
 	
+	Frame frame;
+	
+	Bars bars;
+	
+	PreferenceManager preferenceManager;
+	
+	boolean isDalosShown = false;
+	
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -78,16 +87,19 @@ public class DalosMenuActionImpl implements DalosMenuAction, Loggable, Serviceab
 	public void service(ServiceManager serviceManager) throws ServiceException {
 		actionManager = (ActionManager) serviceManager.lookup(ActionManager.class);
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
+		frame = (Frame) serviceManager.lookup(Frame.class);
+		bars = (Bars) serviceManager.lookup(Bars.class);
+		preferenceManager = (PreferenceManager) serviceManager.lookup(PreferenceManager.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws java.lang.Exception {
 		showViewAction = new ShowViewAction();
 		actionManager.registerAction("editor.dalos.showview", showViewAction);
-		actionManager.registerAction("editor.dalos.switchlang.it", new SwitchLangAction());
-		actionManager.registerAction("editor.dalos.switchlang.en", new SwitchLangAction());
-		actionManager.registerAction("editor.dalos.switchlang.nl", new SwitchLangAction());
-		actionManager.registerAction("editor.dalos.switchlang.es", new SwitchLangAction());
+		actionManager.registerAction("editor.dalos.switchlang.it", new SwitchLangAction("it"));
+		actionManager.registerAction("editor.dalos.switchlang.en", new SwitchLangAction("en"));
+		actionManager.registerAction("editor.dalos.switchlang.nl", new SwitchLangAction("nl"));
+		actionManager.registerAction("editor.dalos.switchlang.es", new SwitchLangAction("es"));
 	}
 
 	public void manageEvent(EventObject event) {
@@ -96,12 +108,11 @@ public class DalosMenuActionImpl implements DalosMenuAction, Loggable, Serviceab
 	protected void enableActions(Node n) {
 		showViewAction.setEnabled(true);
 	}
+	
 
 	public class ShowViewAction extends AbstractAction {
-		String tipo;
-
-		public ShowViewAction() {
-			
+		
+		public ShowViewAction() {		
 		}
 
 		public boolean canDoAction(Node n) {
@@ -109,23 +120,98 @@ public class DalosMenuActionImpl implements DalosMenuAction, Loggable, Serviceab
 		}
 
 		public void actionPerformed(ActionEvent e) {
+			
+			// panels properties
+			Properties panelsProps = preferenceManager.getPreferenceAsProperties(frame.getClass().getName());   // le preference di Frame
+			Properties oldPanelsProps = (Properties)panelsProps.clone();   // le oldProps sono quelle dell'avvio lette dal file delle pref
+			boolean defaultValue = false;
+			
+			Enumeration en=panelsProps.keys();
+							
+			while(en.hasMoreElements()){
+				String el = en.nextElement().toString();
+				if(el.indexOf("show")!=-1){
+					if(el.indexOf("dalos")!=-1 || el.indexOf("document")!=-1){   // mostrare tutti i pannelli dalos e quello del documento
+						panelsProps.setProperty(el,Boolean.toString(true));
+					}
+					else
+						panelsProps.setProperty(el,Boolean.toString(false));		
+				}
+			}
+			
+			
+			if(panelsProps.size()==0){      // al primo avvio non esiste il file delle preference
+				defaultValue = true;
+				panelsProps.setProperty("show.editor.panes.documento", "true");
+				panelsProps.setProperty("show.editor.panes.dalos.synsettree", "true");
+				panelsProps.setProperty("show.editor.panes.dalos.synsetlist", "true");
+				panelsProps.setProperty("show.editor.panes.dalos.synsetdetails", "true");
+				panelsProps.setProperty("show.editor.panes.dalos.linguisticrelation", "true");
+				panelsProps.setProperty("show.editor.panes.dalos.semanticrelation", "true");
+				panelsProps.setProperty("show.editor.panes.dalos.source", "true");
+			}
+			//////////////////////////////////////
+			//
+			// BARS properties    ???
+			//
+			
+			Properties barsProps = preferenceManager.getPreferenceAsProperties(bars.getClass().getName());   // le preference di Frame
+			Properties oldbarsProps = (Properties)barsProps.clone();
+			
+			en=barsProps.keys();
+							
+			while(en.hasMoreElements()){
+				String el = en.nextElement().toString();
+				if(el.indexOf("check.view")!=-1){
+					if(el.indexOf("dalos")!=-1 || el.indexOf("document")!=-1){   // mostrare tutti i pannelli dalos e quello del documento
+						barsProps.setProperty(el,Boolean.toString(true));
+					}
+					else
+						barsProps.setProperty(el,Boolean.toString(false));		
+				}
+			}
+			
+			
+			if(barsProps.size()==0){      // al primo avvio non esiste il file delle preference; va gestito a parte
+				defaultValue = true;
+				barsProps.setProperty("check.view.pane.editor.panes.documento", "true");
+				barsProps.setProperty("check.view.pane.editor.panes.dalos.synsettree", "true");
+				barsProps.setProperty("check.view.pane.editor.panes.dalos.synsetlist", "true");
+				barsProps.setProperty("check.view.pane.editor.panes.dalos.synsetdetails", "true");
+				barsProps.setProperty("check.view.pane.editor.panes.dalos.linguisticrelation", "true");
+				barsProps.setProperty("check.view.pane.editor.panes.dalos.semanticrelation", "true");
+				barsProps.setProperty("check.view.pane.editor.panes.panes.dalos.source", "true");
+			}
+			//
+			//
+			/////////////////////////////////////////////////////////
+			
+			
+			
+			// RELOAD
+			if(!isDalosShown){
+			   frame.reloadPerspective(panelsProps,false);
+			   isDalosShown = true;
+			}else{
+				frame.reloadPerspective(oldPanelsProps,defaultValue);
+				isDalosShown = false;
+			}
+				
 			System.err.println("--------SHOW DALOS VIEW----------");
 		}
 	}
 	
+	
+	
 	public class SwitchLangAction extends AbstractAction {
-		String tipo;
+		String lang;
 
-		public SwitchLangAction() {
-			
-		}
-
-		public boolean canDoAction(Node n) {
-			return true;
+		public SwitchLangAction(String lang) {
+			this.lang = lang;
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			System.err.println("--------SWITCH MASTER LANGUAGE----------");
+			eventManager.fireEvent(new LangChangedEvent(this, true, lang, 0));
 		}
 	}
 

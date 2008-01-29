@@ -11,11 +11,12 @@ import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
+import it.cnr.ittig.xmleges.editor.services.dalos.util.LangChangedEvent;
+import it.cnr.ittig.xmleges.editor.services.dalos.util.LangPanel;
 import it.cnr.ittig.xmleges.editor.services.dalos.util.UtilDalos;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSelectionEvent;
 
 import java.awt.Component;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.EventObject;
@@ -24,7 +25,6 @@ import javax.swing.AbstractAction;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
 
 /**
@@ -50,7 +50,6 @@ public class UtilDalosImpl implements UtilDalos, EventManagerListener, Loggable,
 	Synset selectedSynset = null;
 		
 	AbstractAction[]  toLangActions;
-	
 	
 	
 	// //////////////////////////////////////////////////// LogEnabled Interface
@@ -93,7 +92,11 @@ public class UtilDalosImpl implements UtilDalos, EventManagerListener, Loggable,
 				}
 			}else
 				System.err.println("----SYNSET IS NULL");
+			
+			// FIXME abilitarla solo su Synset != null ?
+			eventManager.fireEvent(new LangChangedEvent(this, false, null, index));
 		}
+		
 		
 		public String toString(){
 			return lang;
@@ -109,23 +112,13 @@ public class UtilDalosImpl implements UtilDalos, EventManagerListener, Loggable,
 	}
 	
 		
-	public JPanel getLanguageSwitchPanel(){
-		JPanel languageSwitchPanel  = new JPanel(new FlowLayout(FlowLayout.LEFT, 12, 2));
-		JComboBox toLangCombo = new JComboBox(toLangActions);
-		toLangCombo.addActionListener(new toLangComboActionListener());
-		ComboBoxRenderer renderer = new ComboBoxRenderer();
-		toLangCombo.setRenderer(renderer);
-		toLangCombo.setSelectedIndex(0);	
+	public LangPanel getLanguageSwitchPanel(){
+		LangPanel lp = new LangPanel(new ComboBoxRenderer(),toLangActions,new toLangComboActionListener());
 		
-		JLabel lblIT = new JLabel(i18n.getIconFor("editor.dalos.action.tolanguage.it.icon"));
-		JLabel lblEN = new JLabel(i18n.getIconFor("editor.dalos.action.tolanguage.en.icon"));
-		JLabel lblTO = new JLabel(i18n.getIconFor("editor.dalos.action.tolanguage.to.icon"));
-		
-		//languageSwitchPanel.add(lblIT);
-		languageSwitchPanel.add(lblEN);
-		languageSwitchPanel.add(lblTO);
-		languageSwitchPanel.add(toLangCombo);
-		return languageSwitchPanel;
+		// FIXME la bandierina from andrebbe presa dalle preference (chosen master language)
+		lp.setFromIcon(i18n.getIconFor("editor.dalos.action.tolanguage.en.icon"));
+		lp.setArrowIcon(i18n.getIconFor("editor.dalos.action.tolanguage.to.icon"));
+	    return lp;
 	}
 	
 	
@@ -163,7 +156,7 @@ public class UtilDalosImpl implements UtilDalos, EventManagerListener, Loggable,
 
 	public void manageEvent(EventObject event) {
 		if (event instanceof SynsetSelectionEvent)
-			selectedSynset = ((SynsetSelectionEvent)event).getActiveSynset();// TODO Auto-generated method stub
+			selectedSynset = ((SynsetSelectionEvent)event).getActiveSynset();
 	}
 	
 }

@@ -8,12 +8,14 @@ import it.cnr.ittig.xmleges.core.services.bars.Bars;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.frame.FindIterator;
 import it.cnr.ittig.xmleges.core.services.frame.Frame;
+import it.cnr.ittig.xmleges.core.services.frame.Pane;
 import it.cnr.ittig.xmleges.core.services.frame.PaneException;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import it.cnr.ittig.xmleges.editor.blocks.panes.dalos.synset.SynsetDetailsPaneImpl;
 import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
+import it.cnr.ittig.xmleges.editor.services.dalos.util.LangPanel;
 import it.cnr.ittig.xmleges.editor.services.dalos.util.UtilDalos;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSelectionEvent;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.synset.SynsetDetailsPane;
@@ -25,7 +27,7 @@ import java.util.EventObject;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-public abstract class DalosPane {
+public abstract class DalosPane implements Pane{
 
 	protected Logger logger;
 	
@@ -53,7 +55,7 @@ public abstract class DalosPane {
 	
 	protected KbManager kbManager = null;
 	
-	protected JPanel comboPanel = null;
+	protected LangPanel langPanel = null;
 	
 	protected SynsetDetailsPaneImpl synsetDetailsPane;
 	
@@ -72,8 +74,7 @@ public abstract class DalosPane {
 		kbManager = (KbManager) serviceManager.lookup(KbManager.class);
 		utilUI = (UtilUI) serviceManager.lookup(UtilUI.class);
 		bars = (Bars) serviceManager.lookup(Bars.class);
-		synsetDetailsPane = (SynsetDetailsPaneImpl) 
-			serviceManager.lookup(SynsetDetailsPane.class);
+		synsetDetailsPane = (SynsetDetailsPaneImpl)serviceManager.lookup(SynsetDetailsPane.class);
 	}
 		
 	/////////////////////////////////////////////////// Initializable Interface

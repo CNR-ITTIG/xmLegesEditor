@@ -362,18 +362,33 @@ public class FrameImpl implements Frame, Loggable, Serviceable, Configurable, In
 			}
 		}
 	}
+	
+	public void reloadPerspective(Properties prop, boolean defaultValue){
+		Enumeration en = name2PaneFrames.keys();
+		
+		String defaultVal = Boolean.toString(defaultValue);
+		
+		while (en.hasMoreElements()) {
+			String name = en.nextElement().toString();
+			try {
+				PaneFrame paneFrame = (PaneFrame) name2PaneFrames.get(name);
+				
+				if (paneFrame != null) {
+					
+					boolean show = Boolean.valueOf(prop.getProperty("show." + paneFrame.getPane().getName(),defaultVal)).booleanValue();
+					paneFrame.setShow(show);
+					updateTab();
+				} else
+					logger.warn("cannot reload pane: " + paneFrame.getPane().getName());
+			} catch (Throwable tr) {
+				logger.error("Error reloading: " + name);
+			}
+		}
+	}
+	
+	
 
-	public void addPane(Object paneObject, boolean scrollable) {
-		if ( !(paneObject instanceof Pane) ) {
-			logger.error("This paneObject is not a Pane instance (" +
-					paneObject.toString() + ").");
-			return;
-		}
-		Pane pane = (Pane) paneObject;
-		if (pane == null) {
-			logger.error("Null pane not added.");
-			return;
-		}
+	public void addPane(Pane pane, boolean scrollable) {
 		PaneFrame paneFrame = (PaneFrame) name2PaneFrames.get(pane.getName());
 		if (paneFrame != null) {
 			ViewPaneAction paneAction = new ViewPaneAction(paneFrame);
@@ -617,7 +632,7 @@ public class FrameImpl implements Frame, Loggable, Serviceable, Configurable, In
 	}
 	
 	
-//	 si potrebbe fare con ViewPaneAction   ????
+	//	 si potrebbe fare con ViewPaneAction   ????
 	public void setShowingPane(Pane pane, boolean show){		
 		PaneFrame pf = (PaneFrame) name2PaneFrames.get(pane.getName());
 		if (pf.isShow()) {

@@ -1,7 +1,5 @@
 package it.cnr.ittig.xmleges.editor.services.dalos.util;
 
-import javax.swing.JPanel;
-
 import it.cnr.ittig.services.manager.Service;
 
 
@@ -27,7 +25,7 @@ public interface UtilDalos extends Service {
 	 * 
 	 * @return
 	 */
-	public JPanel getLanguageSwitchPanel();
+	public LangPanel getLanguageSwitchPanel();
 
 
 }
