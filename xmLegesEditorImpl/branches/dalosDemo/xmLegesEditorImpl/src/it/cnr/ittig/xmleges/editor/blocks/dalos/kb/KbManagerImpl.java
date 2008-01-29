@@ -63,14 +63,23 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		//  IT
 		String[] it = new String[]{"IT/individuals.owl", "IT/individuals-word.owl", "IT/ind-to-consumer.owl", "IT/sources.owl",
 				"IT/types.owl"};
-				
+		
+		//	EN
+		String[] en = new String[]{"EN/individuals.owl", "EN/individuals-word.owl", "EN/ind-to-consumer.owl", "EN/sources.owl",
+				"EN/types.owl"};
+		
+		
 		for (int i = 0; i < commonFiles.length; i++) {
 			UtilFile.copyFileInTempDir(getClass().getResourceAsStream(commonFiles[i]),"dalos", commonFiles[i]);
 		}		
 		
 		for (int i = 0; i < it.length; i++) {
 			UtilFile.copyFileInTempDir(getClass().getResourceAsStream(it[i]), "dalos/IT", it[i]);
-		}						
+		}					
+		
+		for (int i = 0; i < en.length; i++) {
+			UtilFile.copyFileInTempDir(getClass().getResourceAsStream(en[i]), "dalos/EN", en[i]);
+		}	
 	}
 	
 	public void initialize() throws Exception {	
@@ -98,9 +107,11 @@ implements KbManager, Loggable, Serviceable, Initializable {
 	}
 
 	public void addLexicalProperties(Synset syn) {
-		
-		KbContainer kbc = getContainer(syn.getLanguage());
-		kbc.addLexicalProperties(syn);
+		if(syn!=null && syn.getLanguage()!=null){
+			KbContainer kbc = getContainer(syn.getLanguage());
+			kbc.addLexicalProperties(syn);
+		}else
+			logger.error("Synset not found in selected lang");
 	}
 	
 	public void addSemanticProperties(Synset syn) {
