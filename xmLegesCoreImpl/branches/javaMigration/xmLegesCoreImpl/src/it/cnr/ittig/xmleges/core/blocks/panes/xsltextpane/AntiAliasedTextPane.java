@@ -89,6 +89,7 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 	//  SpellThread spellThread = new SpellThread();
 
 	public AntiAliasedTextPane(XsltPaneImpl xsltPane) {
+		super();
 		pane = xsltPane;
 		logger = pane.getLogger();
 		setDoubleBuffered(true);
@@ -98,7 +99,7 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 		setTransferHandler(new XsltTransferHandler());
 		setDragEnabled(true);
 		addCaretListener(this);
-		HTMLDocument doc = new HTMLDocument();
+		HTMLDocument doc = (HTMLDocument)getEditorKit().createDefaultDocument();
 		doc.setPreservesUnknownTags(true);
 		setDocument(doc);
 		setSelectedTextColor(Color.black);
@@ -227,12 +228,12 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 			// SelectedNodesChanged
 			// MIRKO: 
 			// L'elemento sotto il caret (o dot o mark) viene individuato
-			// in modo "intelligente", quindi se ce n'è solo uno a dx o
+			// in modo "intelligente", quindi se ce n'ÔøΩ solo uno a dx o
 			// a sx viene ritornato quello, mentre se ce ne sono due
 			// viene in genere ritornato quello di destra (con la conseguenza
-			// che non è possibile scrivere alla fine di un elemento che
+			// che non ÔøΩ possibile scrivere alla fine di un elemento che
 			// combacia con il successivo).
-			// In questo caso siamo più interessati a sapere se è possibile
+			// In questo caso siamo piÔøΩ interessati a sapere se ÔøΩ possibile
 			// che il cursore si trovi sullo stesso elemento (e stranamente
 			// il pane sembra non esserlo). Quindi non ci resta che provare
 			// tutte le combinazioni.
@@ -479,7 +480,7 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 		int hlStart = e.getStartOffset();
 		int hlEnd = e.getEndOffset();
 		try {
-			hl.addHighlight(hlStart, hlEnd, LEAF_SEL);
+			hl.addHighlight(hlStart+1, hlEnd-1, LEAF_SEL);
 		} catch (BadLocationException ble) {
 			ble.printStackTrace();
 		}
@@ -719,7 +720,8 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 			ignoreDocumentEvents = true;
 			ignoreCaretEvents = true;
 			try {
-				getHTMLDocument().setOuterHTML(elem, convertEncoding(getHtml(node)));
+				getHTMLDocument().setOuterHTML(elem, getHtml(node));
+				//getHTMLDocument().setOuterHTML(elem, convertEncoding(getHtml(node)));
 				return node;
 			} catch (Exception ex) {
 				logger.error(ex.toString(), ex);

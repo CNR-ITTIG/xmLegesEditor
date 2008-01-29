@@ -23,24 +23,16 @@ public class NavigationFilter extends javax.swing.text.NavigationFilter {
 	}
 
 	public int getNextVisualPositionFrom(JTextComponent text, int pos, Bias bias, int direction, Bias[] biasRet) throws BadLocationException {
-		if (direction == SwingConstants.EAST) {
-			int maxLen = textPane.getHTMLDocument().getDefaultRootElement().getEndOffset();
-			// muovi in avanti e fermati alla prima posizione che sta dentro uno span
-			for (int i = pos+1; i < maxLen; i++) {
+		if (direction == SwingConstants.EAST || direction == SwingConstants.WEST) {
+			int i = pos, prev = pos;
+			while((i = super.getNextVisualPositionFrom(text, i, bias, direction, biasRet)) != prev ) {
 				Element span = textPane.getMappedSpan(i);
 				// posizione consentita se dentro ad uno span o alla sua fine.
 				if(span != null && i != span.getStartOffset())// || (span == null && prevSpan != null))
 					return i;
+				prev = i;
 			}
-			return pos;
-		} else if (direction == SwingConstants.WEST) {
-			// muovi all'indietro e fermati alla prima posizione che sta dentro uno span
-			for (int i = pos-1; i >= 0; i--) {
-				Element span = textPane.getMappedSpan(i);
-				if(span != null && i != span.getStartOffset()) // || (span == null && prevSpan != null))
-					return i;
-			}
-			return pos;
+			return i;
 		} else if (direction == SwingConstants.SOUTH) {
 			int newPos = pos, newEast, newWest, oldPos;
 			double newPosLine, eastLine, westLine;
@@ -75,7 +67,8 @@ public class NavigationFilter extends javax.swing.text.NavigationFilter {
 	public void moveDot(FilterBypass fb, int dot, Bias bias) {
 		// se l'elemento si trova all'interno di uno span mappato, muoviti,
 		// altrimenti ignora l'azione.
-		if (textPane.getMappedSpan(dot) != null)
+		Element span = textPane.getMappedSpan(dot);
+		if(span != null && dot != span.getStartOffset())
 			super.moveDot(fb, dot, bias);
 	}
 

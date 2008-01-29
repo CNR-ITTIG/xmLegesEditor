@@ -53,7 +53,7 @@ public class XsltDeleteNextCharAction extends XsltAction {
 		if ((modNode.getNodeType() == Node.COMMENT_NODE 
 				|| modNode.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE) 
 				&& elemText != null
-				&& defText.equals(" " + elemText))
+				&& elemText.equals(" " + defText + " "))
 			return;
 		
 		// FIXME spostare il controllo da xmLegesCore a xmLegesEditor
@@ -63,6 +63,7 @@ public class XsltDeleteNextCharAction extends XsltAction {
 			return;
 		}
 		
+		if(pane.getCaretPosition() == end || pane.getCaretPosition() == end-1) return;
 
 		if (pane.getCaretPosition() < end 
 				|| pane.getSelectionStart() != pane.getSelectionEnd()) {

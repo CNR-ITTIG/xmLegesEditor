@@ -108,8 +108,8 @@ public class XsltTransferHandler extends DomTransferHandler {
 
 		if (tc.getXsltMapper().getParentByGen(currNode) != null) {
 			try {
-				doc.replace(enclosingSpan.getStartOffset(), enclosingSpan.getEndOffset()
-						- enclosingSpan.getStartOffset(), str, currElem.getAttributes());
+				doc.replace(enclosingSpan.getStartOffset()+1, enclosingSpan.getEndOffset()
+						- enclosingSpan.getStartOffset()-2, str, currElem.getAttributes());
 			} catch (BadLocationException ble) {
 			}
 		} else {
@@ -132,7 +132,7 @@ public class XsltTransferHandler extends DomTransferHandler {
 					Node currNode = source.getXsltMapper().getDomById(source.getElementId(currElem));
 					int start = currElem.getStartOffset(), end = currElem.getEndOffset();
 					String elemText = null;
-					if (p0.getOffset() == start && p1.getOffset() == end) {
+					if (p0.getOffset() == start+1 && p1.getOffset() == end-1) {
 						doc.replace(p0.getOffset(), p1.getOffset() - p0.getOffset(), source.getDefaultText(currElem),
 								currElem.getAttributes());
 					} else {

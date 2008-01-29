@@ -35,7 +35,7 @@ license      : GNU General Public License http://www.gnu.org/licenses/gpl.html
      is no way to tell textpane to write on the element following caret (even 
      when the preceding element is not modifiable). Without the ending space 
      it's difficult to write at the end of the text. -->
-<xsl:template match="text()"><xsl:element name="span" use-attribute-sets="XsltMapperSetParentClass">&#160;<xsl:value-of select="." />&#160;</xsl:element></xsl:template>
+<xsl:template match="text()"><xsl:element name="span" use-attribute-sets="XsltMapperSetClass">&#160;<xsl:value-of select="." />&#160;</xsl:element></xsl:template>
 
 
 <!-- ====================================================================== -->
@@ -77,23 +77,5 @@ license      : GNU General Public License http://www.gnu.org/licenses/gpl.html
     </xsl:attribute>
 </xsl:attribute-set>
 
-
-<!-- ====================================================================== -->
-<!-- ==================================== XSLT MAPPER SET PARENT CLASS ==== -->
-<!-- ====================================================================== -->
-<xsl:attribute-set name="XsltMapperSetParentClass">
-<!--
-    <xsl:attribute name="class">
-        <xsl:value-of select="translate(name(..),':','_')"/>
-    </xsl:attribute>
--->
-    <xsl:attribute name="id">
-        <xsl:value-of select="mapper:getUniqueId(.)"/>
-    </xsl:attribute>
-    <xsl:attribute name="style">
-	    <xsl:if test="../@status='soppresso'">color:red</xsl:if>
-	    <xsl:if test="../@status='inserito'">color:green</xsl:if>
-    </xsl:attribute>
-</xsl:attribute-set>
 
 </xsl:transform>

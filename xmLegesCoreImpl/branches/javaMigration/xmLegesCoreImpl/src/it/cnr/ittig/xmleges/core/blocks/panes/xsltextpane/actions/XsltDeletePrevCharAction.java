@@ -38,7 +38,7 @@ public class XsltDeletePrevCharAction extends XsltAction {
 
 		HTMLDocument doc = (HTMLDocument) pane.getDocument();
 
-		Element currElem = doc.getCharacterElement(pane.getCaretPosition() - 1);
+		Element currElem = doc.getCharacterElement(pane.getCaretPosition());
 
 		Node modNode = pane.getXsltMapper().getDomById(pane.getElementId(currElem));
 
@@ -51,7 +51,7 @@ public class XsltDeletePrevCharAction extends XsltAction {
 		String elemText = getText(e, currElem);
 		String defText = pane.getXsltMapper().getI18nNodeText(modNode);
 		if ((modNode.getNodeType() == Node.COMMENT_NODE || modNode.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE) && elemText != null
-				&& elemText.equals(defText))
+				&& elemText.equals(" " + defText + " "))
 			return;
 		
 		// FIXME spostare il controllo da xmLegesCore a xmLegesEditor
@@ -60,6 +60,8 @@ public class XsltDeletePrevCharAction extends XsltAction {
 			return;
 		}
 
+		if(pane.getCaretPosition() == start || pane.getCaretPosition() == start+1) return;
+		
 		if (pane.getCaretPosition() > start || pane.getSelectionStart() != pane.getSelectionEnd()) {
 			super.actionPerformed(e);
 		} else {
