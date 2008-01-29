@@ -372,6 +372,7 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 			return false;
 	}
 
+
 	/** Somewhat complicated method to identify span elements. */
 	protected static boolean isSpan(Element e) {
 		if(e == null) return false;
@@ -388,6 +389,19 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 		return false;
 	}	
 
+	public static String getIdInAttributeSet(AttributeSet as) {
+		String id = null;
+		Enumeration en = as.getAttributeNames();
+		while (en.hasMoreElements() && id == null) {
+			Object k = en.nextElement();
+			Object v = as.getAttribute(k);
+			if ("id".equals(k.toString())) 
+				id = v.toString();
+			else if(v instanceof AttributeSet)
+				id = getIdInAttributeSet((AttributeSet)v);
+		}
+		return id;
+	}
 	protected String getHtml(Node node) {
 		logger.debug("BEGIN getHTML(Node)");
 		String ret = HTML_ERROR;
@@ -419,24 +433,6 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 
 	protected HTMLDocument getHTMLDocument() {
 		return ((HTMLDocument) getDocument());
-	}
-
-	public static String getIdInAttributeSet(AttributeSet a) {
-		String id = null;
-		Enumeration en = a.getAttributeNames();
-		while (en.hasMoreElements() && id == null) {
-			Object k = en.nextElement();
-			Object v = a.getAttribute(k);
-			// se è presente un attributeset scorrilo
-			// ricorsivamente
-			if(v instanceof AttributeSet)
-				return getIdInAttributeSet((AttributeSet)v);
-			if ("id".equals(k.toString())) {
-				id = v.toString();
-				// break;
-			}
-		}
-		return id;
 	}
 
 	public Element getNextTextElement(Element e) {

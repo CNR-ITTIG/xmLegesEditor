@@ -3,6 +3,7 @@ package it.cnr.ittig.xmleges.core.blocks.panes.xsltextpane;
 import java.awt.Rectangle;
 
 import javax.swing.SwingConstants;
+import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Element;
 import javax.swing.text.JTextComponent;
@@ -33,20 +34,7 @@ public class NavigationFilter extends javax.swing.text.NavigationFilter {
 				prev = i;
 			}
 			return i;
-		} else if (direction == SwingConstants.SOUTH) {
-			int newPos = pos, newEast, newWest, oldPos;
-			double newPosLine, eastLine, westLine;
-			do {
-				oldPos = newPos;
-				newPos = super.getNextVisualPositionFrom(text, newPos, bias, direction, biasRet);
-				newEast = getNextVisualPositionFrom(text, newPos, bias, SwingConstants.EAST, new Position.Bias[1]);
-				newWest = getNextVisualPositionFrom(text, newPos, bias, SwingConstants.WEST, new Position.Bias[1]);
-				newPosLine = textPane.modelToView(newPos).getY();
-				eastLine = textPane.modelToView(newEast).getY();
-				westLine = textPane.modelToView(newWest).getY();
-			} while (oldPos != newPos && newPosLine != eastLine && newPosLine != westLine);
-			return newPos;
-		} else if (direction == SwingConstants.NORTH) {
+		} else if (direction == SwingConstants.SOUTH || direction == SwingConstants.NORTH) {
 			int newPos = pos, newEast, newWest, oldPos;
 			double newPosLine, eastLine, westLine;
 			do {
@@ -76,32 +64,32 @@ public class NavigationFilter extends javax.swing.text.NavigationFilter {
 		try {
 			Element newElem = textPane.getHTMLDocument().getCharacterElement(dot);
 			
-			Object attr = newElem.getAttributes().getAttribute(HTML.Tag.A);
-			if (attr != null) {
-				textPane.href = attr.toString().trim();
-				return;
+			if(newElem != null) {
+				Object attr = newElem.getAttributes().getAttribute(HTML.Tag.A);
+				if (attr != null) {
+					textPane.href = attr.toString().trim();
+					return;
+				}
+			}
+
+
+			Element span = textPane.getMappedSpan(dot);
+			/*
+			 * 	Debugging
+			System.err.println("currElement: " + (newElem !=null ? newElem.getName() : null));
+			System.err.println("Count: " + newElem.getElementCount());
+			AttributeSet as  = newElem.getAttributes();
+			java.util.Enumeration ae = as.getAttributeNames();
+			while(ae.hasMoreElements())
+			{
+				Object key = ae.nextElement();
+				System.err.println("AsName: (" + key.getClass() + ")" + key + " = (" + as.getAttribute(key).getClass() + ")" + as.getAttribute(key));
 			}
 			
-// OLD			
-//			Enumeration en = newElem.getAttributes().getAttributeNames();
-//			while (en.hasMoreElements()) {
-//				Object k = en.nextElement();
-//				if ("a".equalsIgnoreCase(k.toString())) {
-//					String[] browsers = xsltPaneImpl.getBrowsers();
-//					for (int i = 0; i < browsers.length; i++)
-//						try {
-//							String href = newElem.getAttributes().getAttribute(k).toString();
-//							String cmd = browsers[i] + " " + href.substring(5);
-//							Runtime.getRuntime().exec(cmd);
-//							break;
-//						} catch (Exception ex) {
-//						}
-//				}
-//			}
-			Element enclosingSpan = textPane.getMappedSpan(dot);
-			boolean isEnclosed = enclosingSpan != null; // && ((newElem.getName().equals("content") && dot != enclosingSpan.getStartOffset()) || dot == enclosingSpan.getEndOffset());
-
-			if (isEnclosed)
+			System.err.println("isMapped " + textPane.isMapped(newElem) + " isSpan " + textPane.isSpan(newElem));
+			System.err.println("Posizione dot: " + dot + " " + (span !=null ? span.getName() : null));
+			 */
+			if(span != null && dot != span.getStartOffset())
 				// Quando l'utente clicca dentro uno span mappato, posiziona il cursors 
 				super.setDot(fb, dot, bias);
 			else {
@@ -138,10 +126,11 @@ public class NavigationFilter extends javax.swing.text.NavigationFilter {
 				}
 
 				catch (BadLocationException ble) {
+					ble.printStackTrace();
 				}
 			}
 		} catch (Throwable tr) {
-
+			tr.printStackTrace();
 		}
 	}
 }

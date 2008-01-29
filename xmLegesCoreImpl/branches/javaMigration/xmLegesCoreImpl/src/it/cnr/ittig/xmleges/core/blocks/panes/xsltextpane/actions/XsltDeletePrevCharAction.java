@@ -56,7 +56,7 @@ public class XsltDeletePrevCharAction extends XsltAction {
 		
 		// FIXME spostare il controllo da xmLegesCore a xmLegesEditor
 		// aggiunto controllo Procesing Instruction <?rif> readonly
-		if(modNode.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE && modNode.getNodeValue().startsWith("<rif")) {
+		if(modNode.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE && modNode.getNodeValue().startsWith("<?rif")) {
 			return;
 		}
 
