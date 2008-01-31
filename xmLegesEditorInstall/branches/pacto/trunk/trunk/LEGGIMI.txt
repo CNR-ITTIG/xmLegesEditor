@@ -1,0 +1,30 @@
+NOTE PER LA CREAZIONE DELL'INSTALLER
+
+Per generare l'installatore del NirEditor v. 2 occorre eseguire due
+passi essenziali, in modo da rendere disponibili i jar del programma al
+software che genererà l'installer:
+
+1) Creare un link alla cartella delle librerie utilizzate dal NirEditor. Sono contenute nella 
+cartella lib/ all'interno della root directory del progetto:
+
+ln -s ../NE2/lib lib
+
+2) Creare il jar del programma utlizzando lo script bash presente nella root del progetto:
+create_nir_jar.sh
+
+2) Creare un link al jar generato:
+
+ln -s ../NE2/nir.jar nir.jar
+
+A questo punto è possibile generare l'installer con il comando:
+
+percorso_di_installazione_IzPack/bin/compile install.xml -b . -o install.jar -k standard
+
+Il file install.jar conterrà il programm: per installarlo:
+
+java -jar install.jar
+
+Happy hacking!
+
+Maurizio Mollicone
+<mollicone@ittig.cnr.it>

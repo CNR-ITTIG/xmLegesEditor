@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="iso-8859-15"?>
+<preference>
+<it.cnr.ittig.xmleges.core.blocks.bars.BarsImpl>
+view.toolbar.editor.revisioni=false
+check.view.toolbar.editor.revisioni=false
+check.view.toolbar.editor.tabelle=false
+view.toolbar.editor.tabelle=false
+</it.cnr.ittig.xmleges.core.blocks.bars.BarsImpl>
+</preference>
