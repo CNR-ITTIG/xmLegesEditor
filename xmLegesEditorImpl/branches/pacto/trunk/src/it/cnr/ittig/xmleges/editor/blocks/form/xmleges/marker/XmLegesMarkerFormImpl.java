@@ -263,8 +263,8 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 		 18   Provvedimento CNR
 		 19	  Statuto Comunale	
 		 20	  Regolamento Comunale
-		 21	  Delibera Consiliare
-		 */
+		 21	  Delibera Comunale
+	 */
 		
 		String comboItem = null;
 		
@@ -296,7 +296,7 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 				comboItem = parser.TIPO_DOC[19];
 			else if(unknownTipoDoc.startsWith("regolamento") && unknownTipoDoc.indexOf("comunale")!=-1 || unknownTipoDoc.indexOf("regc")!=-1)
 				comboItem = parser.TIPO_DOC[20];
-			else if(unknownTipoDoc.startsWith("delibera") && unknownTipoDoc.indexOf("consiliare")!=-1 || unknownTipoDoc.indexOf("delc")!=-1)
+			else if(unknownTipoDoc.startsWith("delibera"))
 				comboItem = parser.TIPO_DOC[21];
 			else 
 				comboItem = parser.TIPO_DOC[0];

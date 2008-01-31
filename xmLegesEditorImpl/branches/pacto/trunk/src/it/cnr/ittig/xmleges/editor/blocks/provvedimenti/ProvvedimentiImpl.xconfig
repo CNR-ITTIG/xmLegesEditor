@@ -89,7 +89,7 @@
 <!-- ******************************************************* STATUTO COMUNALE -->
     <provvedimento name="Statuto Comunale" emananti="NO">
 	    <urn>
-	        <atto>statuto.comunale</atto>
+	        <atto>statuto</atto>
 	        <citazione>statuto comunale</citazione>
 	        <autorita>=^comune.*$</autorita>
 	    </urn>
@@ -101,7 +101,7 @@
 <!-- ******************************************************* REGOLAMENTO COMUNALE -->
         <provvedimento name="Regolamento Comunale" emananti="NO">
 	    <urn>
-	        <atto>regolamento.comunale</atto>
+	        <atto>regolamento</atto>
 	        <citazione>regolamento comunale</citazione>
 	        <autorita>=^comune.*$</autorita>
 	    </urn>
@@ -111,13 +111,25 @@
 		<!--	dtd name="DTD Nir Base">nirbase.dtd</dtd	-->
     </provvedimento>
 <!-- ******************************************************* DELIBERA CONSILIARE -->
-        <provvedimento name="Delibera Consiliare" emananti="NO">
+        <provvedimento name="Delibera del Comune" emananti="NO">
 	    <urn>
-	        <atto>delibera.consiliare</atto>
-	        <citazione>delibera consiliare</citazione>
+	        <atto>delibera</atto>
+	        <citazione>delibera</citazione>
 	        <autorita>=^comune.*$</autorita>
 	    </urn>
 	    <template tipo="Articolato" tag="del" nome="delibera">DELC-Art.xml</template>
+	    <dtd name="DTD Nir Completo">nircompleto.dtd</dtd>
+		<dtd name="DTD Nir Flessibile">nirflessibile.dtd</dtd>
+		<!--	dtd name="DTD Nir Base">nirbase.dtd</dtd	-->
+    </provvedimento>
+    <!-- ******************************************************* DELIBERA CONSILIARE -->
+        <provvedimento name="Delibera di Giunta" emananti="NO">
+	    <urn>
+	        <atto>delibera</atto>
+	        <citazione>delibera di giunta</citazione>
+	        <autorita>=^comune.*$</autorita>
+	    </urn>
+	    <template tipo="Articolato" tag="del" nome="delibera">DELG-Art.xml</template>
 	    <dtd name="DTD Nir Completo">nircompleto.dtd</dtd>
 		<dtd name="DTD Nir Flessibile">nirflessibile.dtd</dtd>
 		<!--	dtd name="DTD Nir Base">nirbase.dtd</dtd	-->
