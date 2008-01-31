@@ -274,6 +274,13 @@ public class KbContainer {
 			readData(om, infDpFile);
 			readData(om, infDpExtFile);
 		}
+		if(type.equalsIgnoreCase("segment.lex")) {
+			readSchema(om, KbConf.METALEVEL_ONTO);
+			readSchema(om, KbConf.METALEVEL_PROP);
+			readData(om, indFile);
+			//readData(om, indwFile);
+			readData(om, typesFile);
+		}			
 		
 		odm.setProcessImports(true);
 		odm.loadImports(om);
@@ -454,6 +461,7 @@ public class KbContainer {
 			return;
 		}
 
+		//OntModel om = getModel("individual", "micro");
 		OntModel om = getModel("individual", "micro");
 		
 		Individual ind = om.getIndividual(syn.getURI());

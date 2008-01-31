@@ -91,14 +91,8 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		
 		if(KbConf.MERGE_DOMAIN) {
 			KbConf.DOMAIN_ONTO = 
-				"http://turing.ittig.cnr.it/jwn/ontologies/consumer-law-merge.owl";
-		}
-		
-		//La lingua italiana dovrebbe essere inizializzata da qualche altra parte...
-		addLanguage("IT");
-		addLanguage("EN");
-		addLanguage("ES");
-		addLanguage("NL");
+			"http://turing.ittig.cnr.it/jwn/ontologies/consumer-law-merge.owl";
+		}		
 	}
 
 	public void addLanguage(String lang) {
@@ -178,7 +172,7 @@ implements KbManager, Loggable, Serviceable, Initializable {
 	
 	public SynsetTree getTree(String lang) {
 		
-		KbContainer kbc = getContainer(lang);
+		KbContainer kbc = getContainer(lang);		
 		return kbc.getTree();
 	}
 		
@@ -212,7 +206,13 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		
 		KbContainer kbc = (KbContainer) langToContainer.get(lang.toUpperCase());
 		if(kbc == null) {
-			System.err.println("## ERROR ## kbContainer not found for language: " + lang);
+			System.out.println(">> ADDING LANGUAGE SUPPORT FOR: " + lang);
+			addLanguage(lang.toUpperCase());
+		}
+		
+		kbc = (KbContainer) langToContainer.get(lang.toUpperCase());
+		if(kbc == null) {
+			System.err.println("## ERROR ## kbContainer not found for language: " + lang );
 		}
 
 		return kbc;
