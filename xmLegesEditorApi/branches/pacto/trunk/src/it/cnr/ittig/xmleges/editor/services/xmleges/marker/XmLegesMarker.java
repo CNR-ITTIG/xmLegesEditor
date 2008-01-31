@@ -49,7 +49,7 @@ public interface XmLegesMarker extends Service {
 	final public static String[] TIPO_DOC = new String[] { "Legge", "Legge Costituzionale", "Decreto Legge", "Decreto Legislativo", "Regio Decreto",
 			"Decreto Presidente Repubblica", "Decreto Presidente Repubblica - non numerato", "Decreto Pres. Cons. Ministri",
 			"Decreto Pres. Cons. Ministri - non numerato", "Decreto Ministeriale", "Decreto Ministeriale - non numerato", "Legge Regionale", 
-			"Regolamento Regionale", "Regolamento", "Circolare", "Provvedimento", "Disegno di Legge", "Documento NIR", "Provvedimento CNR", "Statuto Comunale", "Regolamento Comunale", "Delibera Consiliare"};
+			"Regolamento Regionale", "Regolamento", "Circolare", "Provvedimento", "Disegno di Legge", "Documento NIR", "Provvedimento CNR", "Statuto Comunale", "Regolamento Comunale", "Delibera Comunale"};
 
 	final public static String[] TIPO_DOC_VALORE = new String[] { "l", "lcost", "dl", "dlgs", "rd", "dpr", "dprNN", "dpcm", "dpcmNN", "dm", "dmNN", "lr", "rreg", "reg", "circ", "prov", "ddl", "nir", "cnr", "stc", "regc", "delc" };
 
