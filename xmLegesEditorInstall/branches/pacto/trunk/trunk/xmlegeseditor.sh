@@ -39,6 +39,16 @@ export CLASSPATH=$CLASSPATH:lib/commons-httpclient.jar
 export CLASSPATH=$CLASSPATH:lib/jakarta-slide-webdavlib-2.1.jar
 export CLASSPATH=$CLASSPATH:lib/jdom-1.0.jar
 
+export CLASSPATH=$CLASSPATH:lib/commons-beanutils.jar
+export CLASSPATH=$CLASSPATH:lib/commons-collections-3.2.jar
+export CLASSPATH=$CLASSPATH:lib/commons-digester-1.8.jar
+export CLASSPATH=$CLASSPATH:lib/xmLegesEditorVocabolario.jar
+export CLASSPATH=$CLASSPATH:lib/xmLegesEditorVocabolarioTest.jar
+export CLASSPATH=$CLASSPATH:lib/commons-codec-1.3.jar
+export CLASSPATH=$CLASSPATH:lib/it.ipiu.jaime.configuration.jar
+export CLASSPATH=$CLASSPATH:lib/it.ipiu.jaime.utils.jar
+export CLASSPATH=$CLASSPATH:lib/jaxen-1.1-beta-4.jar
+
 export LC_ALL=it_IT@euro
 export LANG=it_IT@euro
 

@@ -7,7 +7,7 @@
 	-->
 	<info>
 		<appname>xmLegesEditor</appname>
-		<appversion>2.0 rc8</appversion>
+		<appversion>2.0 Pacto</appversion>
 		<authors>
 		    <author name="Mirco Taddei" email="m.taddei@ittig.cnr.it"/>
 			<author name="Tommaso Agnoloni" email="agnoloni@ittig.cnr.it"/>
@@ -17,7 +17,7 @@
 			<author name="Francesca Uccheddu" email="francesca.uccheddu@gmail.com"/>
 			<author name="Gerardo Giardiello" email="g.giardiello@gmail.com"/>
 		</authors>
-		<url>http://www.ittig.cnr.it/xmleges</url>
+		<url>http://www.xmleges.org</url>
 	</info>
 	
 	<!-- 
@@ -92,6 +92,9 @@
 			<file src="uninstall.sh" targetdir="$INSTALL_PATH" os="unix"/>
 			<file src="uninstall.bat" targetdir="$INSTALL_PATH" os="win"/>
 			
+			<file src="config.properties" targetdir="$INSTALL_PATH" />
+			<file src="archivio.xml" targetdir="$INSTALL_PATH" />
+
 			<file src="xmLegesCoreApi.jar" targetdir="$INSTALL_PATH" />
 			<file src="xmLegesCoreImpl.jar" targetdir="$INSTALL_PATH" />
 			

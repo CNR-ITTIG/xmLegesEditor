@@ -30,4 +30,14 @@ set CLASSPATH=%CLASSPATH%;lib/commons-httpclient.jar
 set CLASSPATH=%CLASSPATH%;lib/jakarta-slide-webdavlib-2.1.jar
 set CLASSPATH=%CLASSPATH%;lib/jdom-1.0.jar
 
+set CLASSPATH=%CLASSPATH%;lib/commons-beanutils.jar
+set CLASSPATH=%CLASSPATH%;lib/commons-collections-3.2.jar
+set CLASSPATH=%CLASSPATH%;lib/commons-digester-1.8.jar
+set CLASSPATH=%CLASSPATH%;lib/xmLegesEditorVocabolario.jar
+set CLASSPATH=%CLASSPATH%;lib/xmLegesEditorVocabolarioTest.jar
+set CLASSPATH=%CLASSPATH%;lib/commons-codec-1.3.jar
+set CLASSPATH=%CLASSPATH%;lib/it.ipiu.jaime.configuration.jar
+set CLASSPATH=%CLASSPATH%;lib/it.ipiu.jaime.utils.jar
+set CLASSPATH=%CLASSPATH%;lib/jaxen-1.1-beta-4.jar
+
 start /MIN jre\bin\javaw -Xmx256m it.cnr.ittig.services.manager.Run xmLegesEditor.xml images\editor\xmLegesEditor.png
