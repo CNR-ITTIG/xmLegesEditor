@@ -31,6 +31,9 @@
 		</fileset>
 	</path>
 	<path id="path-editor-api">
+		<fileset dir="${editor-api}/lib">
+			<include name="*.jar" />
+		</fileset>	
 	</path>
 	<path id="path-editor-impl">
 		<fileset dir="${editor-impl}/lib">
