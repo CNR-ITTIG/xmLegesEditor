@@ -8,8 +8,11 @@ import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.SynsetTree;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -49,6 +52,7 @@ public class KbContainer {
 	
 	public String localRepository;
 	public String infRepository;
+	public String segRepository;
 	public String indFile;
 	public String indwFile;
 	public String indcFile;
@@ -65,6 +69,10 @@ public class KbContainer {
 	//Dati
 	Map synsets = null;
 	Vector sortedSynsets = null; //meglio un TreeSet ??
+	
+	Map uriToLexSeg = null;
+	Map uriToSourceSeg = null;
+	Map uriToSemSeg = null;
 
 	Set langProperties = null;
 	
@@ -79,6 +87,8 @@ public class KbContainer {
 		localRepository = KbConf.dalosRepository + LANGUAGE + File.separatorChar;
 		infRepository = KbConf.dalosRepository + lang + File.separatorChar +
 							KbConf.inferenceDir + File.separatorChar;
+		segRepository = KbConf.dalosRepository + lang + File.separatorChar +
+			KbConf.segmentDirName + File.separatorChar;
 		indFile = localRepository + KbConf.IND;
 		indwFile = localRepository + KbConf.INDW;
 		indcFile = localRepository + KbConf.INDC;
@@ -126,6 +136,63 @@ public class KbContainer {
 			initSynsets();
 			long t2 = System.currentTimeMillis();
 			System.out.println("...synsets loaded! (" + Long.toString(t2 - t1) + " ms)\n");
+		}
+		
+		//init segment map
+		try {
+			initMaps();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void initMaps() 
+		throws FileNotFoundException, IOException, ClassNotFoundException {
+		
+		System.out.println("KbContainer: checking KB segmentation support...");
+		
+		String mapFileName = segRepository + KbConf.lexicalSegmentName +
+					File.separatorChar + KbConf.mapSegmentFileName;
+		
+		File mapFile = UtilFile.getFileFromTemp(mapFileName);
+		if(mapFile != null && mapFile.exists()) {
+			FileInputStream fis = new FileInputStream(mapFile);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			uriToLexSeg = new HashMap();
+			uriToLexSeg = (Map) ois.readObject();
+			ois.close();
+			fis.close();
+		}
+		
+		mapFileName = segRepository + KbConf.sourceSegmentName +
+			File.separatorChar + KbConf.mapSegmentFileName;
+		mapFile = UtilFile.getFileFromTemp(mapFileName);
+		if(mapFile != null && mapFile.exists()) {
+			FileInputStream fis = new FileInputStream(mapFile);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			uriToSourceSeg = new HashMap();
+			uriToSourceSeg = (Map) ois.readObject();
+			ois.close();
+			fis.close();
+		}
+		
+		mapFileName = segRepository + KbConf.semanticSegmentName +
+		File.separatorChar + KbConf.mapSegmentFileName;
+		mapFile = UtilFile.getFileFromTemp(mapFileName);
+		if(mapFile != null && mapFile.exists()) {
+			FileInputStream fis = new FileInputStream(mapFile);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			uriToSemSeg = new HashMap();
+			uriToSemSeg = (Map) ois.readObject();
+			ois.close();
+			fis.close();
 		}
 	}
 
@@ -196,6 +263,11 @@ public class KbContainer {
 	}
 	
 	OntModel getModel(String type, String reasoner) {
+		
+		return getModel(type, reasoner, null);
+	}
+			
+	OntModel getModel(String type, String reasoner, Synset syn) {
 		/*
 		 * Ritorna un OntModel in base a varie configurazioni.
 		 * type: sceglie i moduli ontologici da caricare
@@ -274,12 +346,30 @@ public class KbContainer {
 			readData(om, infDpFile);
 			readData(om, infDpExtFile);
 		}
-		if(type.equalsIgnoreCase("segment.lex")) {
+		if(type.equalsIgnoreCase("seg.lex")) {
 			readSchema(om, KbConf.METALEVEL_ONTO);
 			readSchema(om, KbConf.METALEVEL_PROP);
-			readData(om, indFile);
-			//readData(om, indwFile);
-			readData(om, typesFile);
+			
+			if(uriToLexSeg != null) {
+				if(syn == null) {
+					System.out.println("Segmentation: synset is null!");
+				}
+				Object segObj = uriToLexSeg.get(syn.getURI());
+				if(segObj == null) {
+					System.err.println(
+							"Segmentation is active, but cannot resolve "
+							+ syn.getURI());
+					return null;
+				}
+				String segFileName = segRepository + 
+					KbConf.lexicalSegmentName + File.separatorChar +
+					segObj.toString();
+				System.out.println("Segmentation: retrieving data from " + segFileName);
+				readData(om, segFileName);
+			} else {						
+				readData(om, indFile);
+				readData(om, typesFile);
+			}
 		}			
 		
 		odm.setProcessImports(true);
@@ -290,21 +380,32 @@ public class KbContainer {
 	
 	private void readSchema(OntModel om, String url) {
 		
-		URL u = null;
-		try {
-			u = new URL(url);			
-			System.out.println("URL: " + u.toString());
-			om.read(u.openStream(), null);
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("#### URL unreachable! Trying to load local data...");
+		readSchema(om, url, false);
+	}
+			
+	private void readSchema(OntModel om, String url, boolean useRemote) {
+		
+		if(useRemote) {
+			URL u = null;
+			try {
+				u = new URL(url);			
+				System.out.println("URL: " + u.toString());
+				om.read(u.openStream(), null);
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.out.println("#### URL unreachable! Trying to load local data...");
+				String localFile = odm.doAltURLMapping(url);
+				System.out.println("localFile: " + localFile);
+				om.read(localFile);
+			}
+		} else {
 			String localFile = odm.doAltURLMapping(url);
 			System.out.println("localFile: " + localFile);
-			om.read(localFile);
-		}		
+			om.read(localFile);			
+		}
 	}
 	
 	private void readData(OntModel om, String fileStr) {
@@ -461,8 +562,8 @@ public class KbContainer {
 			return;
 		}
 
-		//OntModel om = getModel("individual", "micro");
 		OntModel om = getModel("individual", "micro");
+		//OntModel om = getModel("seg.lex", "micro", syn);
 		
 		Individual ind = om.getIndividual(syn.getURI());
 		OntProperty glossProp = om.getOntProperty(KbConf.METALEVEL_ONTO_NS + "gloss");
@@ -548,7 +649,13 @@ public class KbContainer {
 	private void addLinguisticProperty(Synset syn, Property prop, RDFNode obj) {
 		
 		String propName = prop.getLocalName();
-		Synset objSynset = (Synset) synsets.get(((Resource) obj).getLocalName());
+		String resName = ((Resource) obj).getLocalName();
+		Synset objSynset = (Synset) synsets.get(resName);
+		System.out.println("addLingProp: prop:" + propName + " resName:" + resName + " obj:" + objSynset);
+		if(objSynset == null) {
+			System.err.println("addLinguisticProperty() - objSynset is null!");
+			return;
+		}
 		Collection mappedSynsets = (Collection) syn.lexicalToSynset.get(propName);
 		if(mappedSynsets == null) {
 			mappedSynsets = new HashSet();

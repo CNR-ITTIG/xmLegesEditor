@@ -5,6 +5,12 @@ public class KbConf {
 	public static boolean MERGE_DOMAIN = false;
 	
 	public static String dalosRepository = "dalos/";
+	
+	public static String mapSegmentFileName = "segmap.dat";
+	public static String segmentDirName = "segment";
+	public static String lexicalSegmentName = "lexical";
+	public static String sourceSegmentName = "source";
+	public static String semanticSegmentName = "semantic";
 		
 	public static String DOMAIN_ONTO = 
 		"http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl";
