@@ -6,8 +6,8 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.services.manager.Startable;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.frame.PaneFocusGainedEvent;
+import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.dalos.util.LangChangedEvent;
-import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSelectionEvent;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.synset.SynsetSourcePane;
 
 import java.util.EventObject;
@@ -29,7 +29,6 @@ Initializable, Startable, SynsetSourcePane {
 		
 		synsetPane.clearContent();
 		
-		eventManager.addListener(this, SynsetSelectionEvent.class);
 		eventManager.addListener(this, PaneFocusGainedEvent.class);
 		eventManager.addListener(this, LangChangedEvent.class);
 		
@@ -43,10 +42,18 @@ Initializable, Startable, SynsetSourcePane {
 		if (event instanceof PaneFocusGainedEvent && 
 				((PaneFocusGainedEvent)event).getPane().equals(this)) {
 			
+			Synset selectedSynset = observableSynset.getSynset();
 			synsetPane.clearContent();
 			kbManager.addSources(selectedSynset);
 			synsetPane.setSynset(selectedSynset);
 			synsetPane.draw();		
 		}
+	}
+	
+	protected void updateObserver(Synset syn) {
+
+		
+		//clear now and update panel on focus gained
+		synsetPane.clearContent();
 	}
 }

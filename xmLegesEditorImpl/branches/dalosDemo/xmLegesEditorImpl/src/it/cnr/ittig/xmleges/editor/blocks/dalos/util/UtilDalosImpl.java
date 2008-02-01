@@ -10,11 +10,9 @@ import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
-import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.dalos.util.LangChangedEvent;
 import it.cnr.ittig.xmleges.editor.services.dalos.util.LangPanel;
 import it.cnr.ittig.xmleges.editor.services.dalos.util.UtilDalos;
-import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSelectionEvent;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -47,7 +45,7 @@ public class UtilDalosImpl implements UtilDalos, EventManagerListener, Loggable,
 	
 	KbManager kbManager;
 	
-	Synset selectedSynset = null;
+	//Synset selectedSynset = null;
 		
 	AbstractAction[]  toLangActions;
 	
@@ -66,8 +64,8 @@ public class UtilDalosImpl implements UtilDalos, EventManagerListener, Loggable,
 	
 	
 	public void initialize() throws Exception {	
+
 		toLangActions = new AbstractAction[] { new toLangAction("it",0), new toLangAction("en",1),new toLangAction("nl",2),new toLangAction("es",3)};	
-		eventManager.addListener(this, SynsetSelectionEvent.class);
 	}
 	
 	
@@ -84,15 +82,7 @@ public class UtilDalosImpl implements UtilDalos, EventManagerListener, Loggable,
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			if(selectedSynset!=null){
-				try{
-				   eventManager.fireEvent(new SynsetSelectionEvent(this,  kbManager.getSynset(selectedSynset.getURI(), lang)));
-				}catch(Exception ex){
-					System.err.println("Synset not found in "+lang);
-				}
-			}else
-				System.err.println("----SYNSET IS NULL");
-			
+
 			// FIXME abilitarla solo su Synset != null ?
 			eventManager.fireEvent(new LangChangedEvent(this, false, null, index));
 		}
@@ -155,10 +145,7 @@ public class UtilDalosImpl implements UtilDalos, EventManagerListener, Loggable,
 	
 
 	public void manageEvent(EventObject event) {
-		if (event instanceof SynsetSelectionEvent)
-			selectedSynset = ((SynsetSelectionEvent)event).getActiveSynset();
-	}
-	
+	}	
 }
 
 

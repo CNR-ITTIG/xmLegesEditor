@@ -8,7 +8,6 @@ import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.frame.PaneFocusGainedEvent;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.dalos.util.LangChangedEvent;
-import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSelectionEvent;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.synset.SynsetRelLinguisticPane;
 
 import java.util.Collection;
@@ -25,17 +24,16 @@ Initializable, Startable, SynsetRelLinguisticPane {
 		
 		tabbedPaneName = "editor.panes.dalos.linguisticrelation";
 				
-		eventManager.addListener(this, SynsetSelectionEvent.class);
 		eventManager.addListener(this, PaneFocusGainedEvent.class);
 		eventManager.addListener(this, LangChangedEvent.class);
 		
 		super.initialize();
 	}
 
-	void focusGainedEvent() {
-		//System.err.println("Synchronize LinguisticRelationPane on "	+ selectedSynset.getLexicalForm());    		
-		kbManager.addLexicalProperties(selectedSynset);
-		showLinguisticRelations(selectedSynset);					
+	void focusGainedEvent(Synset syn) {
+
+		kbManager.addLexicalProperties(syn);
+		showLinguisticRelations(syn);					
 	}
 	
 	void showLinguisticRelations(Synset syn) {

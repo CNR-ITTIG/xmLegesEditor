@@ -12,7 +12,6 @@ import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dalos.action.SynsetMarkupAction;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetListPane;
-import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSelectionEvent;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -46,8 +45,8 @@ extends DalosPane
 implements EventManagerListener, Loggable, Serviceable, 
 	Initializable, Startable, SynsetListPane {
 
-	JList list = new JList();
-	JTextField  textWords = new JTextField();
+	JList list;
+	JTextField  textWords;
 	JPopupMenu popupMenu;
 	JComboBox searchType;
 	SynsetMarkupAction synsetMarkupAction;
@@ -67,6 +66,8 @@ implements EventManagerListener, Loggable, Serviceable,
 		
 		tabbedPaneName = "editor.panes.dalos.synsetlist";
 		
+		list = new JList();
+		textWords = new JTextField();
 		popupMenu = new JPopupMenu();
 		JToolBar bar = new JToolBar();
 		
@@ -99,7 +100,6 @@ implements EventManagerListener, Loggable, Serviceable,
         list.setCellRenderer(renderer);
         list.setListData(synsets.toArray());
      
-		eventManager.addListener(this,SynsetSelectionEvent.class);
 		eventManager.addListener(this, SelectionChangedEvent.class);
 		
 		super.initialize();
@@ -109,21 +109,22 @@ implements EventManagerListener, Loggable, Serviceable,
 
 		super.manageEvent(event);
 		
-		if (event instanceof SynsetSelectionEvent){
-		
-			frame.setShowingPane(synsetDetailsPane, true);			
-			//System.err.println("synsetdetailspane setvisible true");			
-		}
+		//Selezione del termine sull'editor XML...
+		//Da rivedere?  -- Non deve stare qui...
 		if (event instanceof SelectionChangedEvent){
 			Node activeNode = ((SelectionChangedEvent)event).getActiveNode();
 			if(isDalosSpan(activeNode)){
-				list.setSelectedValue(kbManager.getSynset(getSynsetURI(activeNode), "IT"), true);
-				//selectSynset(kbManager.getSynset(getSynsetURI(activeNode), "IT"));
-				System.err.println("Synchronize on "+getSynsetURI(activeNode));
+				Synset syn = kbManager.getSynset(getSynsetURI(activeNode), "IT");
+				selectSynset(syn);
 			}	
 		}
-	}	
-
+	}
+	
+	protected void updateObserver(Synset syn) {
+		
+		list.setSelectedValue(syn, true);
+	}
+	
 	// ///////////////////////////////////////////////////////// Toolbar Actions
 	/**
 	 * Azione per l'apertura del BugReport.
@@ -160,17 +161,14 @@ implements EventManagerListener, Loggable, Serviceable,
 	}
 
 	private void selectSynset(Synset activeSynset){
-		if(activeSynset!=null)
-			eventManager.fireEvent(new SynsetSelectionEvent(this, activeSynset));
+
+		observableSynset.setSynset(activeSynset);
 	}
 	
 	protected class SynsetListSelectionListener implements ListSelectionListener {
 		
 		public void valueChanged(ListSelectionEvent e) {
-			if(list.getSelectedValue()!=null){
-				
-				frame.setShowingPane(synsetDetailsPane, true);
-				//System.err.println("synsetdetailspane setvisible true");
+			if(list.getSelectedValue() != null){				
 				selectSynset((Synset)list.getSelectedValue());
 			}
 		}

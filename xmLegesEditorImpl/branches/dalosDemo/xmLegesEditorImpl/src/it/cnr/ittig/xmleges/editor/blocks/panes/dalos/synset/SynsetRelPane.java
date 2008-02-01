@@ -3,7 +3,6 @@ package it.cnr.ittig.xmleges.editor.blocks.panes.dalos.synset;
 import it.cnr.ittig.xmleges.core.services.frame.PaneFocusGainedEvent;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.SynsetTree;
-import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSelectionEvent;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -22,10 +21,9 @@ public abstract class SynsetRelPane extends SynsetPane {
 		DefaultMutableTreeNode tmpRoot = new DefaultMutableTreeNode(" - ");
      	DefaultTreeModel tmpModel = new DefaultTreeModel(tmpRoot);     	
      	tree = new SynsetTree(tmpModel,i18n);
-     	tree.addMouseListener(new RelationTreeMouseAdapter());
-			
-		scrollPane.setViewportView(tree);		
-				
+     	tree.addMouseListener(new RelationTreeMouseAdapter());			
+		scrollPane.setViewportView(tree);
+		
 		super.initialize();
 	}
 
@@ -33,13 +31,21 @@ public abstract class SynsetRelPane extends SynsetPane {
 
 		super.manageEvent(event);
 		
-		if (event instanceof PaneFocusGainedEvent && ((PaneFocusGainedEvent)event).getPane().equals(this)){
+		if (event instanceof PaneFocusGainedEvent && 
+				((PaneFocusGainedEvent)event).getPane().equals(this)){
+			Synset syn = observableSynset.getSynset();
 			clearTree();
-			focusGainedEvent();
+			focusGainedEvent(syn);			
 		}		
 	}
 
-	abstract void focusGainedEvent();
+	protected void updateObserver(Synset syn) {
+
+		//clear now and update tree on focus gained
+		clearTree();
+	}
+	
+	abstract void focusGainedEvent(Synset syn);
 	
 	void clearTree() {
 
@@ -49,7 +55,8 @@ public abstract class SynsetRelPane extends SynsetPane {
 	}
 	
 	void selectSynset(Synset activeSynset){
-		eventManager.fireEvent(new SynsetSelectionEvent(this, activeSynset));
+
+		observableSynset.setSynset(activeSynset);
 	}
 	
 	protected class RelationTreeMouseAdapter extends MouseAdapter {
@@ -71,7 +78,5 @@ public abstract class SynsetRelPane extends SynsetPane {
 				}
 			}
 		}
-
-		
 	}
 }

@@ -6,7 +6,7 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.services.manager.Startable;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
-import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSelectionEvent;
+import it.cnr.ittig.xmleges.editor.services.dalos.util.LangChangedEvent;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetTreePane;
 
 import java.awt.BorderLayout;
@@ -33,15 +33,11 @@ implements EventManagerListener, Loggable, Serviceable,
 		tabbedPaneName = "editor.panes.dalos.synsettree";
 		
 		tree = kbManager.getTree("IT");		
-		//tree.setRootVisible(false);
 		tree.setShowsRootHandles(false);
 		tree.putClientProperty("JTree.lineStyle", "None");
-		//selectedSynset = null;
 		tree.addMouseListener(new SynsetTreePaneMouseAdapter());
 
 		scrollPane.getViewport().setOpaque(false);
-//		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-//		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
 		Image logoDalos = null;		
 		logoDalos = i18n.getImageFor("editor.panes.dalos.logo");		
@@ -51,17 +47,10 @@ implements EventManagerListener, Loggable, Serviceable,
 		iPanel.add(tree, BorderLayout.CENTER);
 		iPanel.setBackground(Color.WHITE);
 		scrollPane.getViewport().setView(iPanel);
-		//scrollPane.add(iPanel);
 				
 		tree.setOpaque(false);
 		iPanel.setOpaque(true);
 
-//		panel.add(scrollPane, BorderLayout.CENTER);
-//		
-//		frame.addPane(this, false);
-        
-		eventManager.addListener(this, SynsetSelectionEvent.class);
-		
 		super.initialize();
 	}
 	
@@ -70,19 +59,28 @@ implements EventManagerListener, Loggable, Serviceable,
 		
 		super.manageEvent(event);
 		
-		if (event instanceof SynsetSelectionEvent){
-
-			kbManager.setTreeSelection(selectedSynset);
-			
-			JScrollBar vbar = scrollPane.getVerticalScrollBar();
-			vbar.setValue(vbar.getMinimum());
-			JScrollBar hbar = scrollPane.getHorizontalScrollBar();
-			hbar.setValue(hbar.getMinimum());
+		if(event instanceof LangChangedEvent){
+			if(((LangChangedEvent)event).getIsGlobalLang()) {
+				
+				String lang = ((LangChangedEvent)event).getGlobalLang();
+				tree = kbManager.getTree(lang);
+			}
 		}
+
+	}
+	
+	protected void updateObserver(Synset syn) {
+		
+		kbManager.setTreeSelection(syn);		
+		JScrollBar vbar = scrollPane.getVerticalScrollBar();
+		vbar.setValue(vbar.getMinimum());
+		JScrollBar hbar = scrollPane.getHorizontalScrollBar();
+		hbar.setValue(hbar.getMinimum());
 	}
 
-	private void selectSynset(Synset activeSynset){
-		eventManager.fireEvent(new SynsetSelectionEvent(this, activeSynset));
+	private void selectSynset(Synset activeSynset) {
+
+		observableSynset.setSynset(activeSynset);
 	}
 	
 	protected class SynsetTreePaneMouseAdapter extends MouseAdapter {

@@ -13,21 +13,23 @@ import it.cnr.ittig.xmleges.core.services.frame.PaneException;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import it.cnr.ittig.xmleges.editor.blocks.panes.dalos.synset.SynsetDetailsPaneImpl;
+import it.cnr.ittig.xmleges.editor.services.dalos.SynsetHolder;
 import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.dalos.util.LangPanel;
 import it.cnr.ittig.xmleges.editor.services.dalos.util.UtilDalos;
-import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSelectionEvent;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.synset.SynsetDetailsPane;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.util.EventObject;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-public abstract class DalosPane implements Pane{
+public abstract class DalosPane implements Pane, Observer {
 
 	protected Logger logger;
 	
@@ -43,7 +45,7 @@ public abstract class DalosPane implements Pane{
 	
 	protected ActionManager actionManager;
 	
-	protected Synset selectedSynset = null;
+	//protected Synset selectedSynset = null;
 	
 	protected UtilDalos utilDalos;
 	
@@ -58,6 +60,8 @@ public abstract class DalosPane implements Pane{
 	protected LangPanel langPanel = null;
 	
 	protected SynsetDetailsPaneImpl synsetDetailsPane;
+	
+	protected SynsetHolder observableSynset = null; 
 	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -75,6 +79,7 @@ public abstract class DalosPane implements Pane{
 		utilUI = (UtilUI) serviceManager.lookup(UtilUI.class);
 		bars = (Bars) serviceManager.lookup(Bars.class);
 		synsetDetailsPane = (SynsetDetailsPaneImpl)serviceManager.lookup(SynsetDetailsPane.class);
+		observableSynset = (SynsetHolder) serviceManager.lookup(SynsetHolder.class);
 	}
 		
 	/////////////////////////////////////////////////// Initializable Interface
@@ -84,15 +89,32 @@ public abstract class DalosPane implements Pane{
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		panel.add(scrollPane);
 		frame.addPane(this, false);
+		
+		((Observable) observableSynset).addObserver(this);
 	}
 	
 	// ////////////////////////////////////////// EventManagerListener Interface
 	public void manageEvent(EventObject event) {
-		if (event instanceof SynsetSelectionEvent){
-			selectedSynset = ((SynsetSelectionEvent)event).getActiveSynset();
+	}
+	
+	public void update(Observable observable, Object obj) {
+		
+		if( !(observable instanceof SynsetHolder) ) {
+			logger.error("observable is not a synset holder!");
+			return;
 		}
+		
+		if( !(obj instanceof Synset)) {
+			logger.error("obj is not a synset instance!");
+			return;			
+		}
+		
+		//go on with specific implementations...
+		updateObserver((Synset) obj);
 	}
 
+	protected abstract void updateObserver(Synset syn);
+	
 	// ///////////////////////////////////////////////////// Startable Interface
 	public void start() throws Exception {
 		frame.addPane(this, false);

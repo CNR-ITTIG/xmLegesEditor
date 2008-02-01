@@ -8,7 +8,6 @@ import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.frame.PaneFocusGainedEvent;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.dalos.util.LangChangedEvent;
-import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetSelectionEvent;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.synset.SynsetRelSemanticPane;
 
 import java.util.Collection;
@@ -25,19 +24,16 @@ Initializable, Startable, SynsetRelSemanticPane {
 
 		tabbedPaneName = "editor.panes.dalos.semanticrelation";
 
-		eventManager.addListener(this, SynsetSelectionEvent.class);
 		eventManager.addListener(this, PaneFocusGainedEvent.class);
 		eventManager.addListener(this, LangChangedEvent.class);
 		
 		super.initialize();
 	}
 
-	void focusGainedEvent() {
-		if(selectedSynset != null){
-			System.err.println("Synchronize SemanticRelationPane on "	+ selectedSynset.getLexicalForm());    		
-			kbManager.addSemanticProperties(selectedSynset);
-			showSemanticRelations(selectedSynset);
-		}
+	void focusGainedEvent(Synset syn) {
+
+		kbManager.addSemanticProperties(syn);
+		showSemanticRelations(syn);
 	}
 	
 	void showSemanticRelations(Synset syn) {

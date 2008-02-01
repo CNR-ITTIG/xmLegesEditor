@@ -562,8 +562,8 @@ public class KbContainer {
 			return;
 		}
 
-		OntModel om = getModel("individual", "micro");
-		//OntModel om = getModel("seg.lex", "micro", syn);
+		//OntModel om = getModel("individual", "micro");
+		OntModel om = getModel("seg.lex", "micro", syn);
 		
 		Individual ind = om.getIndividual(syn.getURI());
 		OntProperty glossProp = om.getOntProperty(KbConf.METALEVEL_ONTO_NS + "gloss");
@@ -651,7 +651,7 @@ public class KbContainer {
 		String propName = prop.getLocalName();
 		String resName = ((Resource) obj).getLocalName();
 		Synset objSynset = (Synset) synsets.get(resName);
-		System.out.println("addLingProp: prop:" + propName + " resName:" + resName + " obj:" + objSynset);
+		//System.out.println("addLingProp: prop:" + propName + " resName:" + resName + " obj:" + objSynset);
 		if(objSynset == null) {
 			System.err.println("addLinguisticProperty() - objSynset is null!");
 			return;
