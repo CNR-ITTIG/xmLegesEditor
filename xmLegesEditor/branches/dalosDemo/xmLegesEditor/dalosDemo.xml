@@ -1353,6 +1353,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     
     <component  class="it.cnr.ittig.xmleges.editor.blocks.dalos.util.UtilDalosImpl"/>
     
+    <component  class="it.cnr.ittig.xmleges.editor.blocks.panes.dalos.SynsetHolderImpl"/>
+        
     <component  activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.action.dalos.DalosMenuActionImpl"
     />
