@@ -364,7 +364,7 @@ public class KbContainer {
 				String segFileName = segRepository + 
 					KbConf.lexicalSegmentName + File.separatorChar +
 					segObj.toString();
-				System.out.println("Segmentation: retrieving data from " + segFileName);
+				//System.out.println("Segmentation: retrieving data from " + segFileName);
 				readData(om, segFileName);
 			} else {						
 				readData(om, indFile);
@@ -403,7 +403,7 @@ public class KbContainer {
 			}
 		} else {
 			String localFile = odm.doAltURLMapping(url);
-			System.out.println("localFile: " + localFile);
+			//System.out.println("localFile: " + localFile);
 			om.read(localFile);			
 		}
 	}
