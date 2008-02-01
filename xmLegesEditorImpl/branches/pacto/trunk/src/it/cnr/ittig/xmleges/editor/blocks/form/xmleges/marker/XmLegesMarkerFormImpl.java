@@ -15,6 +15,7 @@ import it.cnr.ittig.xmleges.core.services.form.filetextfield.FileTextField;
 import it.cnr.ittig.xmleges.core.services.form.filetextfield.FileTextFieldListener;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.mswordconverter.MSWordConverter;
+import it.cnr.ittig.xmleges.core.services.pdfconverter.PDFConverter;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.util.file.RegexpFileFilter;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
@@ -74,6 +75,8 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 	FileTextField fileTextField;
 
 	MSWordConverter wordConverter;
+	
+	PDFConverter pdfConverter;
 
 	UtilMsg utilMsg;
 
@@ -110,6 +113,8 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 	DefaultComboBoxModel encodingModel = new DefaultComboBoxModel();
 
 	File wordFileConv;
+	
+	File pdfFileConv;
 
 	I18n i18n;
 	// //////////////////////////////////////////////////// LogEnabled Interface
@@ -124,6 +129,7 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 		fileTextField = (FileTextField) serviceManager.lookup(FileTextField.class);
 		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 		wordConverter = (MSWordConverter) serviceManager.lookup(MSWordConverter.class);
+		pdfConverter = (PDFConverter) serviceManager.lookup(PDFConverter.class);
 		i18n = (I18n) serviceManager.lookup(I18n.class);
 	}
 
@@ -201,6 +207,9 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 			if (UtilFile.hasExtension(file, "doc", false)) {
 				wordFileConv = wordConverter.convert(file);
 				sorgente.setText(UtilFile.fileToString(wordFileConv));
+			  } else if (UtilFile.hasExtension(file, "pdf", false)) { 
+				 sorgente.setText(UtilFile.fileToString(pdfConverter.convert(file))); 
+				 pdfFileConv = pdfConverter.convert(file,false); 				 		    
 			} else {
 				sorgente.setText(UtilFile.fileToString(file));
 			}
@@ -227,6 +236,8 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 			
 			if (UtilFile.hasExtension(fileTextField.getFile(), "doc", false))
 				unknownTipoDoc = UtilFile.inputStreamToString(parser.parseAutoTipoDoc(wordFileConv));
+			else if  (UtilFile.hasExtension(fileTextField.getFile(), "pdf", false)) 
+		 	    unknownTipoDoc = UtilFile.inputStreamToString(parser.parseAutoTipoDoc(pdfFileConv)); 
 			else
 				unknownTipoDoc = UtilFile.inputStreamToString(parser.parseAutoTipoDoc(fileTextField.getFile()));
 			
@@ -338,6 +349,8 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 						
 						if (UtilFile.hasExtension(fileTextField.getFile(), "doc", false))
 							res = parser.parse(wordFileConv);
+                        else if (UtilFile.hasExtension(fileTextField.getFile(), "pdf", false)) 
+                            res = parser.parse(pdfFileConv); 
 						else
 							res = parser.parse(fileTextField.getFile());
 						
