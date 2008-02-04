@@ -49,6 +49,9 @@ export CLASSPATH=$CLASSPATH:lib/it.ipiu.jaime.configuration.jar
 export CLASSPATH=$CLASSPATH:lib/it.ipiu.jaime.utils.jar
 export CLASSPATH=$CLASSPATH:lib/jaxen-1.1-beta-4.jar
 
+export CLASSPATH=$CLASSPATH:lib/FontBox-0.1.0-dev.jar
+export CLASSPATH=$CLASSPATH:lib/PDFBox-0.7.3.jar
+
 export LC_ALL=it_IT@euro
 export LANG=it_IT@euro
 
