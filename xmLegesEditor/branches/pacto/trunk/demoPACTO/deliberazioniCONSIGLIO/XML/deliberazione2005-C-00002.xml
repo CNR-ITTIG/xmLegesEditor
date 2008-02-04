@@ -30,23 +30,21 @@
 				<titoloDoc>Oggetto: IMPOSTA COMUNALE SUGLI IMMOBILI (ICI)- Anno 2005 - Indirizzi per l'approvazione delle aliquote e delle detrazioni. </titoloDoc>
 			</intestazione>
 			<formulainiziale>
+				<h:p>OMISSIS </h:p>
+				<h:p>IL CONSIGLIO</h:p>
 				<preambolo>
-					<h:p>OMISSIS </h:p>
-					<h:p>IL CONSIGLIO</h:p>
 					<h:p>
 						Visto il 
 						<rif xlink:href="urn:nir:stato:decreto.legislativo:1992-12-30;504" xlink:type="simple">Decreto Legislativo 30 dicembre 1992, n. 504</rif>
 						, istitutivo dell'Imposta Comunale sugli Immobili (ICI) e successive modifiche ed integrazioni; 
 					</h:p>
 					<h:p>
-						Visto quanto dispone il regolamento per l'applicazione dell'ICI, adottato dal Consiglio comunale ai sensi degli articoli 
+						Visto quanto dispone il regolamento per l'applicazione dell'ICI, adottato dal Consiglio comunale ai sensi degli 
 						<mrif>
-							<rif xlink:href="urn:nir:stato:decreto.legislativo:587;446#art52" xlink:type="simple">52</rif>
+							<rif xlink:href="urn:nir:stato:decreto.legislativo:1997-12-15;446#art52" xlink:type="simple">articoli 52</rif>
 							e 
-							<rif xlink:href="urn:nir:stato:decreto.legislativo:587;446#art59-com1" xlink:type="simple">59, comma 1</rif>
+							<rif xlink:href="urn:nir:stato:decreto.legislativo:1997-12-15;446#art59-com1" xlink:type="simple">59, comma 1, del decreto legislativo 15 dicembre 1997, n. 446</rif>
 						</mrif>
-						, del 
-						<rif xlink:href="urn:nir:stato:decreto.legislativo:1997-12-15;446" xlink:type="simple">decreto legislativo 15 dicembre 1997, n. 446</rif>
 						; 
 					</h:p>
 					<h:p>
@@ -86,9 +84,9 @@
 					</h:p>
 					<h:p>Preso atto del parere favorevole relativo alla regolarità  tecnica del provvedimento , ai sensi e per gli effetti dell' art. 49 del richiamato &quot; Testo Unico &quot;, precisando che da questo non deriveranno riflessi contabili consistenti in impegni di spesa o diminuzioni d'entrata;</h:p>
 				</preambolo>
+				<h:p>DELIBERA</h:p>
 			</formulainiziale>
 			<contenitore id="con1" nome="dispositivo">
-				<h:p>DELIBERA</h:p>
 				<h:p>1) - di approvare, quali indirizzi generali per le successive determinazioni della Giunta Comunale, sulla base di quanto descritto nella premessa, gli indirizzi applicativi per l'ICI relativa all'anno d'imposta 2005, nel senso di modificare il sistema impositivo prevedendo: </h:p>
 				<h:p>la fattispecie riconducibile all'abitazione principale (con la conferma della detrazione principale - nell'importo minimo di legge e nell'importo maggiorato per categorie di contribuenti in situazione di disagio socio-economico); </h:p>
 				<h:p>

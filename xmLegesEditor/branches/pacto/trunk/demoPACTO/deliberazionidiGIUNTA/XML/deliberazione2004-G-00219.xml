@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 	<!DOCTYPE NIR SYSTEM 'nirflessibile.dtd'>
 	<NIR tipo="originale" xmlns="http://www.normeinrete.it/nir/2.2/" xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
-		<DocumentoNIR nome="Delibera">
+		<DocumentoNIR nome="Delibera Consiliare">
 			<meta>
 				<descrittori>
 					<pubblicazione norm="20040528" num="" tipo="" />
@@ -38,9 +38,10 @@
 				<titoloDoc>Oggetto: approvazione Regolamento del codice di condotta a tutela della dignità del personale del Comune di Firenze </titoloDoc>
 			</intestazione>
 			<formulainiziale>
+				<h:p>LA GIUNTA</h:p>
 				<preambolo>
-					<h:p>LA GIUNTA</h:p>
-					<h:p>Premesso che: la Raccomandazione della Commissione Europea del 27/11/1991 n. 92 /131/CEE sulla tutela della - dignità delle donne e degli uomini sul lavoro all’ art. 2 raccomanda che gli Stati membri si adoperino affinché nel settore pubblico sia attuato il codice di condotta relativo ai provvedimenti da adottare nella lotta contro le molestie sessuali;</h:p>
+					<h:p>Premesso che: </h:p>
+					<h:p>la Raccomandazione della Commissione Europea del 27/11/1991 n. 92 /131/CEE sulla tutela della - dignità delle donne e degli uomini sul lavoro all’ art. 2 raccomanda che gli Stati membri si adoperino affinché nel settore pubblico sia attuato il codice di condotta relativo ai provvedimenti da adottare nella lotta contro le molestie sessuali;</h:p>
 					<h:p>
 						la 
 						<rif xlink:href="urn:nir:stato:legge:1991;125" xlink:type="simple">legge n. 125/1991</rif>
@@ -58,8 +59,13 @@
 						; 
 					</h:p>
 					<h:p>
-						Visto l’ art. 2 e l’ 
-						<rif xlink:href="urn:nir:stato:decreto.legislativo:2001;165#art7" xlink:type="simple">art. 7 del D.Lgs. 165/2001</rif>
+						Visto l’ 
+						<mrif>
+							<rif xlink:href="urn:nir:stato:decreto.legislativo:2001;165#art2" xlink:type="simple">art. 2</rif>
+							e 
+							<rif xlink:href="urn:nir:stato:decreto.legislativo:2001;165#art7" xlink:type="simple">l'art. 7</rif>
+							del D.Lgs. 165/2001 
+						</mrif>
 						; 
 					</h:p>
 					<h:p>
@@ -68,12 +74,19 @@
 						; 
 					</h:p>
 				</preambolo>
+				<h:p>DELIBERA</h:p>
 			</formulainiziale>
 			<contenitore id="con1" nome="dispositivo">
-				<h:p>DELIBERA</h:p>
-				<h:p>1. di approvare il “ CODICE DI CONDOTTA A TUTELA DELLA DIGNITA’ DEL PERSONALE DEL COMUNE DI FIRENZE”, allegato parte integrante del presente provvedimento.</h:p>
+				<h:p>
+					1. di approvare il “ 
+					<rif xlink:href="#ann1" xlink:type="simple">CODICE DI CONDOTTA A TUTELA DELLA DIGNITA’ DEL PERSONALE DEL COMUNE DI FIRENZE</rif>
+					”, allegato parte integrante del presente provvedimento. 
+				</h:p>
 				<h:p>2. di dichiarare il presente provvedimento immediatamente eseguibile</h:p>
-				<h:p>SEGUE ALLEGATO: CODICE DI CONDOTTA A TUTELA DELLA DIGNITA’DEL PERSONALE DEL COMUNE DI FIRENZE</h:p>
+				<h:p>
+					SEGUE ALLEGATO: 
+					<rif xlink:href="#ann1" xlink:type="simple">CODICE DI CONDOTTA A TUTELA DELLA DIGNITA’DEL PERSONALE DEL COMUNE DI FIRENZE</rif>
+				</h:p>
 			</contenitore>
 			<formulafinale />
 			<conclusione />
@@ -88,12 +101,13 @@
 								<pubblicazione norm="" num="" tipo="GU" />
 								<entratainvigore norm="" />
 								<redazione id="red2" nome="" norm="" />
-								<urn valore="urn:nir:comune.firenze:deliberazione:2004-05-18;2004-g-00219:allegato;codice.condotta.tutela.dignita.personale" />
+								<urn valore="urn:nir:comune.firenze:deliberazione:2004-05-18;2004-g-00219:allegato;regolamento.codice.condotta.tutela.dignita.personale" />
+								<urn valore="urn:nir:comune.firenze:regolamento:codice.condotta.tutela.dignita.personale:2004-05-18;2004-g-00219" />
 							</descrittori>
 						</meta>
 						<intestazione>
 							<tipoDoc />
-							<dataDoc norm="" />
+							<dataDoc norm="20040518" />
 							<titoloDoc>Codice di Condotta a tutela della dignità del personale del Comune di Firenze </titoloDoc>
 						</intestazione>
 						<formulainiziale />
@@ -103,17 +117,23 @@
 								<rubrica>Principi e finalità</rubrica>
 								<comma id="ann1-art1-com1">
 									<num />
-									<corpo>
-										Tutte le lavoratrici ed i lavoratori hanno diritto ad un ambiente di lavoro sicuro, sereno e favorevole alle relazioni interpersonali, su un piano di eguaglianza, reciproca correttezza e rispetto delle libertà e dignità della persona. 
-										<h:br />
-										Le molestie sessuali, morali e psicologiche insidiano la dignità di chi le subisce compromettendone la personalità morale e l'integrità fisica e psichica, l'autostima e la motivazione al lavoro. Le lavoratrici e i lavoratori del Comune di Firenze hanno il diritto di svolgere le proprie funzioni in un ambiente che garantisca il rispetto della dignità umana di ciascuno, evitando ogni tipo di discriminazione e di comportamento inopportuno ed indesiderato. 
-										<h:br />
-										L'Amministrazione comunale garantisce ad ogni dipendente il diritto alla tutela da qualsiasi atto o comportamento che produca un effetto pregiudizievole e discriminazioni di genere, anche in via indiretta. 
-										<h:br />
-										Adotta le iniziative volte a favorire un maggiore rispetto reciproco dell'inviolabilità della persona, attraverso la formazione, l'informazione e la prevenzione. Ognuno, nei rapporti interpersonali, è tenuto a contribuire alla promozione e al mantenimento di un ambiente e di una organizzazione del lavoro che siano ispirati e fondati su principi di correttezza, libertà , dignità e uguaglianza. 
-										<h:br />
-										La posizione di superiorità gerarchica non deve legittimare comportamenti o atti discriminatori o molesti nei confronti delle/dei dipendenti. 
-									</corpo>
+									<corpo>Tutte le lavoratrici ed i lavoratori hanno diritto ad un ambiente di lavoro sicuro, sereno e favorevole alle relazioni interpersonali, su un piano di eguaglianza, reciproca correttezza e rispetto delle libertà e dignità della persona. </corpo>
+								</comma>
+								<comma id="ann1-art1-com2">
+									<num />
+									<corpo>Le molestie sessuali, morali e psicologiche insidiano la dignità di chi le subisce compromettendone la personalità morale e l'integrità fisica e psichica, l'autostima e la motivazione al lavoro. Le lavoratrici e i lavoratori del Comune di Firenze hanno il diritto di svolgere le proprie funzioni in un ambiente che garantisca il rispetto della dignità umana di ciascuno, evitando ogni tipo di discriminazione e di comportamento inopportuno ed indesiderato. </corpo>
+								</comma>
+								<comma id="ann1-art1-com3">
+									<num />
+									<corpo>L'Amministrazione comunale garantisce ad ogni dipendente il diritto alla tutela da qualsiasi atto o comportamento che produca un effetto pregiudizievole e discriminazioni di genere, anche in via indiretta. </corpo>
+								</comma>
+								<comma id="ann1-art1-com4">
+									<num />
+									<corpo>Adotta le iniziative volte a favorire un maggiore rispetto reciproco dell'inviolabilità della persona, attraverso la formazione, l'informazione e la prevenzione. Ognuno, nei rapporti interpersonali, è tenuto a contribuire alla promozione e al mantenimento di un ambiente e di una organizzazione del lavoro che siano ispirati e fondati su principi di correttezza, libertà , dignità e uguaglianza. </corpo>
+								</comma>
+								<comma id="ann1-art1-com5">
+									<num />
+									<corpo>La posizione di superiorità gerarchica non deve legittimare comportamenti o atti discriminatori o molesti nei confronti delle/dei dipendenti. </corpo>
 								</comma>
 							</articolo>
 							<articolo id="ann1-art2">
@@ -121,37 +141,67 @@
 								<rubrica>MOLESTIE SESSUALI: definizione e tipologia</rubrica>
 								<comma id="ann1-art2-com1">
 									<num />
-									<alinea>
-										Per molestia sessuale si intende ogni atto o comportamento indesiderato, anche verbale, a connotazione sessuale arrecante offesa alla dignità e alla libertà della persona che lo subisce, ovvero che sia suscettibile di creare ritorsioni o un clima di intimidazione nei suoi confronti, ivi inclusi atteggiamenti malaccetti di tipo fisico, verbale e non verbale (racc. CEE del 27/11/1991). 
-										<h:br />
-										Le molestie sessuali più diffuse sono: 
-										<h:br />
-										- gli apprezzamenti verbali; 
-										<h:br />
-										- le richieste implicite o esplicite di rapporti sessuali non graditi; 
-										<h:br />
-										- gli sguardi insistenti; 
-										<h:br />
-										- gli ammiccamenti; 
-										<h:br />
-										- le foto pornografiche o altro materiale analogo esposto nei luoghi di lavoro; 
-										<h:br />
-										- i messaggi scritti o gli oggetti provocatori o allusivi; 
-										<h:br />
-										- i contatti fisici intenzionali indesiderati; 
-										<h:br />
-										- le promesse esplicite o implicite di carriera o di agevolazione e privilegi sul posto di lavoro in cambio di prestazioni sessuali; 
-										<h:br />
-										- le intimidazioni, minacce e ricatti subiti per aver respinto comportamenti finalizzati al rapporto sessuale. 
-										<h:br />
-										Ogni comportamento va valutato secondo il principio di seguito riportato: 
-										<h:br />
-										spetta a ciascuno stabilire, secondo ragionevolezza, quale comportamento possa tollerare e quale consideri offensivo o sconveniente; 
-										<h:br />
-										una semplice attenzione a sfondo sessuale diventa molestia se viene reiterata verso chi non l'accetta. 
-										<h:br />
-										La/il dipendente che abbia subito molestie sessuali ha diritto all'interruzione della condotta molesta anche avvalendosi di procedure diversificate, tempestive e imparziali, di cui l'Amministrazione assicura l'adempimento ed inoltre, nel caso di denuncia di molestie, alla riservatezza delle notizie che garantiscano la persona offesa da possibili atteggiamenti, diretti o indiretti, di ritorsione. 
-									</alinea>
+									<corpo>Per molestia sessuale si intende ogni atto o comportamento indesiderato, anche verbale, a connotazione sessuale arrecante offesa alla dignità e alla libertà della persona che lo subisce, ovvero che sia suscettibile di creare ritorsioni o un clima di intimidazione nei suoi confronti, ivi inclusi atteggiamenti malaccetti di tipo fisico, verbale e non verbale (racc. CEE del 27/11/1991). </corpo>
+								</comma>
+								<comma id="ann1-art2-com2">
+									<num />
+									<alinea>Le molestie sessuali più diffuse sono:</alinea>
+									<ep id="ann1-art2-com2-pun1">
+										<num>-</num>
+										<corpo>gli apprezzamenti verbali; </corpo>
+									</ep>
+									<ep id="ann1-art2-com2-pun2">
+										<num>-</num>
+										<corpo>le richieste implicite o esplicite di rapporti sessuali non graditi;</corpo>
+									</ep>
+									<ep id="ann1-art2-com2-pun3">
+										<num>-</num>
+										<corpo>gli sguardi insistenti;</corpo>
+									</ep>
+									<ep id="ann1-art2-com2-pun4">
+										<num>-</num>
+										<corpo>gli ammiccamenti;</corpo>
+									</ep>
+									<ep id="ann1-art2-com2-pun5">
+										<num>-</num>
+										<corpo>le foto pornografiche o altro materiale analogo esposto nei luoghi di lavoro;</corpo>
+									</ep>
+									<ep id="ann1-art2-com2-pun6">
+										<num>-</num>
+										<corpo>i messaggi scritti o gli oggetti provocatori o allusivi;</corpo>
+									</ep>
+									<ep id="ann1-art2-com2-pun7">
+										<num>-</num>
+										<corpo>i contatti fisici intenzionali indesiderati;</corpo>
+									</ep>
+									<ep id="ann1-art2-com2-pun8">
+										<num>-</num>
+										<corpo>le promesse esplicite o implicite di carriera o di agevolazione e privilegi sul posto di lavoro in cambio di prestazioni sessuali; </corpo>
+									</ep>
+									<ep id="ann1-art2-com2-pun9">
+										<num>-</num>
+										<corpo>le intimidazioni, minacce e ricatti subiti per aver respinto comportamenti finalizzati al rapporto sessuale. </corpo>
+									</ep>
+								</comma>
+								<comma id="ann1-art2-com3">
+									<num />
+									<alinea>Ogni comportamento va valutato secondo il principio di seguito riportato: </alinea>
+									<ep id="ann1-art2-com3-pun1">
+										<num />
+										<corpo>
+											<h:i>spetta a ciascuno stabilire, secondo ragionevolezza, quale comportamento possa tollerare e quale consideri offensivo o sconveniente;</h:i>
+										</corpo>
+									</ep>
+									<ep id="ann1-art2-com3-pun2">
+										<num />
+										<corpo>
+											<h:i>una semplice attenzione a sfondo sessuale diventa molestia se viene reiterata verso chi non l'accetta. </h:i>
+										</corpo>
+									</ep>
+								</comma>
+								<comma id="ann1-art2-com4">
+									<num />
+									<corpo>La/il dipendente che abbia subito molestie sessuali ha diritto all'interruzione della condotta molesta anche avvalendosi di procedure diversificate, tempestive e imparziali, di cui l'Amministrazione assicura l'adempimento ed inoltre, nel caso di denuncia di molestie, alla riservatezza delle notizie che garantiscano la persona offesa da possibili atteggiamenti, diretti o indiretti, di ritorsione. </corpo>
 								</comma>
 							</articolo>
 							<articolo id="ann1-art3">
@@ -159,33 +209,55 @@
 								<rubrica>MOBBING: definizione e tipologia</rubrica>
 								<comma id="ann1-art3-com1">
 									<num />
-									<corpo>
-										Si definisce mobbing ogni forma di violenza morale o psichica in occasione di lavoro - attuato dal datore di lavoro o da altri dipendenti - nei confronti di un lavoratore. Esso è caratterizzato da una serie di atti, atteggiamenti o comportamenti, diversi e ripetuti nel tempo in modo sistematico ed abituale, aventi connotazioni aggressive, denigratorie e vessatorie tali da comportare un degrado delle condizioni di lavoro e idonei a compromettere la salute o la professionalità o la dignità del lavoratore stesso nell'ambito dell'ufficio di appartenenza o, addirittura, tali da escluderlo dal contesto lavorativo di riferimento. 
-										<h:br />
-										Il comportamento mobbizzante sussiste quando possiede le seguenti caratteristiche: 
-										<h:br />
-										è reiterato e protratto nel tempo 
-										<h:br />
-										- è sistematico 
-										<h:br />
-										- è mirato a danneggiare la persona. 
-										<h:br />
-										- Varie sono le forme di persecuzione psicologica che possono costituire indice di comportamento mobbizzante, quali, ad esempio, quelle del seguente elenco necessariamente non esaustivo: 
-										<h:br />
-										calunniare o diffamare una persona, oppure la sua famiglia; 
-										<h:br />
-										- negare deliberatamente informazioni relative al lavoro, oppure fornire informazioni non corrette, incomplete, insufficienti; sabotare o impedire deliberatamente l'esecuzione del lavoro; 
-										<h:br />
-										- isolare in modo esplicito il lavoratore oppure boicottarlo; 
-										<h:br />
-										- esercitare minacce, intimorire o avvilire la persona; 
-										<h:br />
-										- controllare il lavoratore senza che lo sappia e con l'intento di danneggiarlo; 
-										<h:br />
-										- effettuare uno spostamento immotivato dal posto di lavoro o dai suoi doveri. 
-										<h:br />
-										Gli atteggiamenti mobbizzanti sono quelli caratterizzati da mancanza di rispetto della dignità della persona e lesivi dei principi di ordine generale sui quali si fonda un rapporto interpersonale corretto, rispettoso e non discriminante. Si tratta di atteggiamenti che incidono negativamente sia sui singoli individui, sia sui gruppi di lavoro e quindi sul &quot;clima&quot; di ufficio. 
-									</corpo>
+									<corpo>Si definisce mobbing ogni forma di violenza morale o psichica in occasione di lavoro - attuato dal datore di lavoro o da altri dipendenti - nei confronti di un lavoratore. Esso è caratterizzato da una serie di atti, atteggiamenti o comportamenti, diversi e ripetuti nel tempo in modo sistematico ed abituale, aventi connotazioni aggressive, denigratorie e vessatorie tali da comportare un degrado delle condizioni di lavoro e idonei a compromettere la salute o la professionalità o la dignità del lavoratore stesso nell'ambito dell'ufficio di appartenenza o, addirittura, tali da escluderlo dal contesto lavorativo di riferimento. </corpo>
+								</comma>
+								<comma id="ann1-art3-com2">
+									<num />
+									<alinea>Il comportamento mobbizzante sussiste quando possiede le seguenti caratteristiche: </alinea>
+									<ep id="ann1-art3-com2-pun1">
+										<num>-</num>
+										<corpo>è reiterato e protratto nel tempo</corpo>
+									</ep>
+									<ep id="ann1-art3-com2-pun2">
+										<num>-</num>
+										<corpo>è sistematico</corpo>
+									</ep>
+									<ep id="ann1-art3-com2-pun3">
+										<num>-</num>
+										<corpo>è mirato a danneggiare la persona. </corpo>
+									</ep>
+								</comma>
+								<comma id="ann1-art3-com3">
+									<num />
+									<alinea>Varie sono le forme di persecuzione psicologica che possono costituire indice di comportamento mobbizzante, quali, ad esempio, quelle del seguente elenco necessariamente non esaustivo: </alinea>
+									<ep id="ann1-art3-com3-pun1">
+										<num>-</num>
+										<corpo>calunniare o diffamare una persona, oppure la sua famiglia;</corpo>
+									</ep>
+									<ep id="ann1-art3-com3-pun2">
+										<num>-</num>
+										<corpo>negare deliberatamente informazioni relative al lavoro, oppure fornire informazioni non corrette, incomplete, insufficienti; sabotare o impedire deliberatamente l'esecuzione del lavoro;</corpo>
+									</ep>
+									<ep id="ann1-art3-com3-pun3">
+										<num>-</num>
+										<corpo>isolare in modo esplicito il lavoratore oppure boicottarlo;</corpo>
+									</ep>
+									<ep id="ann1-art3-com3-pun4">
+										<num>-</num>
+										<corpo>esercitare minacce, intimorire o avvilire la persona;</corpo>
+									</ep>
+									<ep id="ann1-art3-com3-pun5">
+										<num>-</num>
+										<corpo>controllare il lavoratore senza che lo sappia e con l'intento di danneggiarlo; </corpo>
+									</ep>
+									<ep id="ann1-art3-com3-pun6">
+										<num>-</num>
+										<corpo>effettuare uno spostamento immotivato dal posto di lavoro o dai suoi doveri. </corpo>
+									</ep>
+								</comma>
+								<comma id="ann1-art3-com4">
+									<num />
+									<corpo>Gli atteggiamenti mobbizzanti sono quelli caratterizzati da mancanza di rispetto della dignità della persona e lesivi dei principi di ordine generale sui quali si fonda un rapporto interpersonale corretto, rispettoso e non discriminante. Si tratta di atteggiamenti che incidono negativamente sia sui singoli individui, sia sui gruppi di lavoro e quindi sul &quot;clima&quot; di ufficio. </corpo>
 								</comma>
 							</articolo>
 							<articolo id="ann1-art4">
@@ -196,32 +268,37 @@
 									<corpo>E' inammissibile ogni atto o comportamento che si configuri come molestia sessuale, morale e psicologica nelle definizioni sopra riportate;</corpo>
 								</comma>
 								<comma id="ann1-art4-com2">
-									<num />
-									<corpo>- è sancito il diritto delle lavoratrici e dei lavoratori ad essere trattati con dignità e ad essere tutelati nella propria libertà personale;</corpo>
+									<num>-</num>
+									<corpo>è sancito il diritto delle lavoratrici e dei lavoratori ad essere trattati con dignità e ad essere tutelati nella propria libertà personale;</corpo>
 								</comma>
 								<comma id="ann1-art4-com3">
-									<num />
-									<corpo>- è sancito il diritto delle lavoratrici e dei lavoratori a denunciare le eventuali intimidazioni o ritorsioni subite sul luogo di lavoro derivanti da atti o comportamenti molesti; </corpo>
+									<num>-</num>
+									<corpo>è sancito il diritto delle lavoratrici e dei lavoratori a denunciare le eventuali intimidazioni o ritorsioni subite sul luogo di lavoro derivanti da atti o comportamenti molesti; </corpo>
 								</comma>
 								<comma id="ann1-art4-com4">
-									<num />
-									<corpo>- è garantito l'impegno dell'Ente a sostenere ogni dipendente che si avvalga dell'intervento della/del Consigliera/e di Fiducia o che sporga denuncia di molestie, fornendo chiare ed esaurienti indicazioni circa la procedura da seguire, mantenendo la riservatezza e prevenendo ogni eventuale ritorsione. Analoghe garanzie sono estese agli eventuali testimoni;</corpo>
+									<num>-</num>
+									<corpo>è garantito l'impegno dell'Ente a sostenere ogni dipendente che si avvalga dell'intervento della/del Consigliera/e di Fiducia o che sporga denuncia di molestie, fornendo chiare ed esaurienti indicazioni circa la procedura da seguire, mantenendo la riservatezza e prevenendo ogni eventuale ritorsione. Analoghe garanzie sono estese agli eventuali testimoni;</corpo>
 								</comma>
 								<comma id="ann1-art4-com5">
-									<num />
-									<corpo>- è assicurata, nel corso degli accertamenti, l'assoluta riservatezza dei soggetti coinvolti;</corpo>
+									<num>-</num>
+									<corpo>è assicurata, nel corso degli accertamenti, l'assoluta riservatezza dei soggetti coinvolti;</corpo>
 								</comma>
 								<comma id="ann1-art4-com6">
-									<num />
+									<num>-</num>
 									<corpo>
-										- nei confronti delle lavoratrici e dei lavoratori autori di molestie sessuali si applicano le misure disciplinari ai sensi di quanto previsto dagli articoli 55 e 56 del 
-										<rif xlink:href="urn:nir:stato:decreto.legislativo:2001;165" xlink:type="simple">Decreto Legislativo n. 165/2001</rif>
-										e delle disposizioni normative e contrattuali vigenti; 
+										nei confronti delle lavoratrici e dei lavoratori autori di molestie sessuali si applicano le misure disciplinari ai sensi di quanto previsto dagli 
+										<mrif>
+											<rif xlink:href="urn:nir:stato:decreto.legislativo:2001;165#art55" xlink:type="simple">articoli 55</rif>
+											e 
+											<rif xlink:href="urn:nir:stato:decreto.legislativo:2001;165#art56" xlink:type="simple">56</rif>
+											del Decreto Legislativo n. 165/2001
+										</mrif>
+										articoli 55 e 56 del Decreto Legislativo n. 165/2001 e delle disposizioni normative e contrattuali vigenti; 
 									</corpo>
 								</comma>
 								<comma id="ann1-art4-com7">
-									<num />
-									<corpo>- nei casi denunciati di molestie, l'Amministrazione può procedere (anche su segnalazione del/della Consigliera di Fiducia) alla verifica su eventuali azioni discriminatorie subite dal soggetto interessato in merito a trasferimenti, percorsi di carriera, riconoscimenti professionali, orari di lavoro, partecipazione ad attività di formazione professionale.</corpo>
+									<num>-</num>
+									<corpo>nei casi denunciati di molestie, l'Amministrazione può procedere (anche su segnalazione del/della Consigliera di Fiducia) alla verifica su eventuali azioni discriminatorie subite dal soggetto interessato in merito a trasferimenti, percorsi di carriera, riconoscimenti professionali, orari di lavoro, partecipazione ad attività di formazione professionale.</corpo>
 								</comma>
 							</articolo>
 							<articolo id="ann1-art5">
@@ -273,15 +350,19 @@
 								</comma>
 								<comma id="ann1-art6-com6">
 									<num />
-									<corpo>
-										Su richiesta della persona interessata: 
-										<h:br />
-										1) prende in carico il caso e informa sulle modalità più idonee per affrontarlo; 
-										<h:br />
-										2) sente il/la presunto/a autore/trice dei comportamenti molesti ed acquisisce eventuali testimonianze; 
-										<h:br />
-										3) promuove incontri congiunti tra la persona vittima della molesta e il/la presunto/a autore/autrice della medesima. 
-									</corpo>
+									<alinea>Su richiesta della persona interessata: </alinea>
+									<en id="ann1-art6-com6-num1">
+										<num>1)</num>
+										<corpo>prende in carico il caso e informa sulle modalità più idonee per affrontarlo;</corpo>
+									</en>
+									<en id="ann1-art6-com6-num2">
+										<num>2)</num>
+										<corpo>sente il/la presunto/a autore/trice dei comportamenti molesti ed acquisisce eventuali testimonianze; </corpo>
+									</en>
+									<en id="ann1-art6-com6-num3">
+										<num>3)</num>
+										<corpo>promuove incontri congiunti tra la persona vittima della molesta e il/la presunto/a autore/autrice della medesima.</corpo>
+									</en>
 								</comma>
 								<comma id="ann1-art6-com7">
 									<num />
@@ -303,47 +384,77 @@
 							<articolo id="ann1-art7">
 								<num>Art. 7</num>
 								<rubrica>Procedure previste in caso di molestie</rubrica>
-								<comma id="ann1-art7-com1">
+								<comma id="ann1-art7-com01">
 									<num />
 									<corpo>Qualora si verifichi un atto o un comportamento indesiderato a sfondo sessuale o di persecuzione morale e psicologica sul posto di lavoro la/il dipendente potrà rivolgersi alla/al Consigliera/e designata/o per avviare una procedura informale nel tentativo di dare soluzione al caso</corpo>
 								</comma>
-								<comma id="ann1-art7-com2">
+								<comma id="ann1-art7-com76bis">
 									<num />
-									<corpo>
-										. L'intervento della/del Consigliera/e dovrà concludersi in tempi ragionevolmente brevi in rapporto alla delicatezza dell'argomento affrontato (massimo 30 giorni) salvo specifiche ragioni dovute alla complessità del caso. 
-										<h:br />
-										A) PROCEDURA INFORMALE - INTERVENTO DELLA/DEL CONSIGLIERA/E 
-										<h:br />
-										La/il Consigliera/e, qualora ritenga la segnalazione attendibile, e ove la/il dipendente oggetto di molestie lo ritenga opportuno, interviene al fine di favorire il superamento della situazione di disagio e ripristinare un sereno ambiente di lavoro, facendo presente alla persona che il suo comportamento deve cessare perché offende, crea disagio e interferisce con lo svolgimento del lavoro. 
-										<h:br />
-										L'intervento della/del Consigliera/e deve avvenire mantenendo la riservatezza che il caso richiede. 
-										<h:br />
-										Ogni iniziativa della/del Consigliera/e, riguardo al caso preso in esame, deve avere l'espresso consenso dell'interessato/a e deve essere assunta sollecitamente e comunque non oltre il trentesimo giorno dalla conoscenza del fatto. 
-										<h:br />
-										La parte lesa può interrompere, in ogni momento la procedura prevista nel presente articolo, ritirando la segnalazione o altrimenti presentando denuncia per l'attivazione della procedura formale. 
-										<h:br />
-										B) PROCEDURA FORMALE 
-										<h:br />
-										La procedura formale prende avvio con la segnalazione scritta del comportamento molesto da parte dell'interessata/o al Direttore/Direttrice dell'ufficio di appartenenza, al/alla Dirigente dell'ufficio competente per i procedimenti disciplinari, al superiore gerarchico qualora l'autore di molestia sia lo/la stesso/a Dirigente. Nel caso in cui l'autore sia un Amministratore, la segnalazione va inviata rispettivamente al Sindaco o al Presidente del Consiglio. 
-										<h:br />
-										Il Direttore/Direttrice dell'ufficio competente per i procedimenti disciplinari, avvalendosi della consulenza della/del Consigliera/e, promuove gli accertamenti preliminari e, qualora emergano elementi sufficienti, avvia il procedimento disciplinare ai sensi della normativa vigente, fatta salva, comunque, ogni altra forma di tutela giurisdizionale. In ogni altro caso, il Sindaco o il Presidente del Consiglio inviano gli atti al Direttore/Direttrice Generale il quale attiverà la/il Consigliera/e per i necessari accertamenti e per la necessaria tutela, a tutti i livelli, del soggetto vittima della molestia. 
-										<h:br />
-										Nel corso degli accertamenti è assicurata l'assoluta riservatezza dei soggetti coinvolti. 
-										<h:br />
-										- Nel rispetto dei principi che informano la 
-										<rif xlink:href="urn:nir:stato:legge:1991;125" xlink:type="simple">legge n. 125/91</rif>
-										, qualora l'Amministrazione, nel corso del procedimento disciplinare, ritenga fondati i dati, adotterà , ove lo ritenga opportuno, sentite le OO.SS. e sentita la/il Consigliera/e, le misure organizzative ritenute di volta in volta utili alla cessazione immediata dei comportamenti di molestie ed a ripristinare un ambiente di lavoro in cui uomini e donne rispettino reciprocamente l'inviolabilità della persona. 
-										<h:br />
-										- L'Amministrazione comunale, accertata la fondatezza della denuncia, avrà cura di tutelare il/la dipendente che l'ha presentata da qualsiasi forma di ritorsione o penalizzazione, ricorrendo eventualmente anche al trasferimento del molestatore/trice dal luogo di lavoro. 
-										<h:br />
-										- Sempre nel rispetto dei principi che informano la 
-										<rif xlink:href="urn:nir:stato:legge:1991;125" xlink:type="simple">legge n. 125/91</rif>
-										e nel caso in cui l'Amministrazione nel corso del procedimento disciplinare ritenga fondati i f tti, la/il denunciante ha la possibilità di a chiedere di rimanere al suo posto di lavoro o di essere trasferito altrove in una sede che non gli comporti disagio. 
-										<h:br />
-										- Qualora la denuncia si dimostri infondata, l'Amministrazione comunale opererà in modo da garantire il rispetto del buon nome dell'accusato/a riservandosi di adottare iniziative opportune, di natura disciplinare e organizzativa, nei confronti dell'accusatore/trice al fine di rimuovere le cause che hanno portato alla denuncia rivelatasi priva di fondamento. 
-										<h:br />
-										Il Comune garantisce consulenza legale con la propria struttura interna, cosicché il soggetto che si ritiene leso possa acquisire piena consapevolezza dei suoi diritti e delle azioni esperibili fermo restando che le spese legali successive rimangono a carico del singolo individuo, salvo il principio della soccombenza. 
-									</corpo>
+									<corpo>. L'intervento della/del Consigliera/e dovrà concludersi in tempi ragionevolmente brevi in rapporto alla delicatezza dell'argomento affrontato (massimo 30 giorni) salvo specifiche ragioni dovute alla complessità del caso. </corpo>
+								</comma>
+								<comma id="ann1-art7-coma">
+									<num>A)</num>
+									<corpo>PROCEDURA INFORMALE - INTERVENTO DELLA/DEL CONSIGLIERA/E</corpo>
+								</comma>
+								<comma id="ann1-art7-com55bis">
+									<num />
+									<corpo>La/il Consigliera/e, qualora ritenga la segnalazione attendibile, e ove la/il dipendente oggetto di molestie lo ritenga opportuno, interviene al fine di favorire il superamento della situazione di disagio e ripristinare un sereno ambiente di lavoro, facendo presente alla persona che il suo comportamento deve cessare perché offende, crea disagio e interferisce con lo svolgimento del lavoro.</corpo>
+								</comma>
+								<comma id="ann1-art7-com55ter">
+									<num />
+									<corpo>L'intervento della/del Consigliera/e deve avvenire mantenendo la riservatezza che il caso richiede.</corpo>
+								</comma>
+								<comma id="ann1-art7-com55quater">
+									<num />
+									<corpo>Ogni iniziativa della/del Consigliera/e, riguardo al caso preso in esame, deve avere l'espresso consenso dell'interessato/a e deve essere assunta sollecitamente e comunque non oltre il trentesimo giorno dalla conoscenza del fatto. </corpo>
+								</comma>
+								<comma id="ann1-art7-com55quinquies">
+									<num />
+									<alinea>La parte lesa può interrompere, in ogni momento la procedura prevista nel presente articolo, ritirando la segnalazione o altrimenti presentando denuncia per l'attivazione della procedura formale.</alinea>
+								</comma>
+								<comma id="ann1-art7-comb">
+									<num>B)</num>
+									<corpo>PROCEDURA FORMALE</corpo>
+								</comma>
+								<comma id="ann1-art7-com3">
+									<num />
+									<corpo>La procedura formale prende avvio con la segnalazione scritta del comportamento molesto da parte dell'interessata/o al Direttore/Direttrice dell'ufficio di appartenenza, al/alla Dirigente dell'ufficio competente per i procedimenti disciplinari, al superiore gerarchico qualora l'autore di molestia sia lo/la stesso/a Dirigente. Nel caso in cui l'autore sia un Amministratore, la segnalazione va inviata rispettivamente al Sindaco o al Presidente del Consiglio.</corpo>
+								</comma>
+								<comma id="ann1-art7-com4">
+									<num />
+									<corpo>Il Direttore/Direttrice dell'ufficio competente per i procedimenti disciplinari, avvalendosi della consulenza della/del Consigliera/e, promuove gli accertamenti preliminari e, qualora emergano elementi sufficienti, avvia il procedimento disciplinare ai sensi della normativa vigente, fatta salva, comunque, ogni altra forma di tutela giurisdizionale. In ogni altro caso, il Sindaco o il Presidente del Consiglio inviano gli atti al Direttore/Direttrice Generale il quale attiverà la/il Consigliera/e per i necessari accertamenti e per la necessaria tutela, a tutti i livelli, del soggetto vittima della molestia.</corpo>
+								</comma>
+								<comma id="ann1-art7-com5">
+									<num />
+									<alinea>Nel corso degli accertamenti è assicurata l'assoluta riservatezza dei soggetti coinvolti.</alinea>
+									<ep id="ann1-art7-com5-pun1">
+										<num>-</num>
+										<corpo>
+											Nel rispetto dei principi che informano la 
+											<rif xlink:href="urn:nir:stato:legge:1991;125" xlink:type="simple">legge n. 125/91</rif>
+											, qualora l'Amministrazione, nel corso del procedimento disciplinare, ritenga fondati i dati, adotterà , ove lo ritenga opportuno, sentite le OO.SS. e sentita la/il Consigliera/e, le misure organizzative ritenute di volta in volta utili alla cessazione immediata dei comportamenti di molestie ed a ripristinare un ambiente di lavoro in cui uomini e donne rispettino reciprocamente l'inviolabilità della persona.
+										</corpo>
+									</ep>
+									<ep id="ann1-art7-com5-pun2">
+										<num>-</num>
+										<corpo>L'Amministrazione comunale, accertata la fondatezza della denuncia, avrà cura di tutelare il/la dipendente che l'ha presentata da qualsiasi forma di ritorsione o penalizzazione, ricorrendo eventualmente anche al trasferimento del molestatore/trice dal luogo di lavoro. </corpo>
+									</ep>
+									<ep id="ann1-art7-com5-pun3">
+										<num>-</num>
+										<corpo>
+											Sempre nel rispetto dei principi che informano la 
+											<rif xlink:href="urn:nir:stato:legge:1991;125" xlink:type="simple">legge n. 125/91</rif>
+											e nel caso in cui l'Amministrazione nel corso del procedimento disciplinare ritenga fondati i fatti, la/il denunciante ha la possibilità di a chiedere di rimanere al suo posto di lavoro o di essere trasferito altrove in una sede che non gli comporti disagio. 
+										</corpo>
+									</ep>
+									<ep id="ann1-art7-com5-pun4">
+										<num>-</num>
+										<corpo>Qualora la denuncia si dimostri infondata, l'Amministrazione comunale opererà in modo da garantire il rispetto del buon nome dell'accusato/a riservandosi di adottare iniziative opportune, di natura disciplinare e organizzativa, nei confronti dell'accusatore/trice al fine di rimuovere le cause che hanno portato alla denuncia rivelatasi priva di fondamento.</corpo>
+									</ep>
+								</comma>
+								<comma id="ann1-art7-com6">
+									<num />
+									<corpo>Il Comune garantisce consulenza legale con la propria struttura interna, cosicché il soggetto che si ritiene leso possa acquisire piena consapevolezza dei suoi diritti e delle azioni esperibili fermo restando che le spese legali successive rimangono a carico del singolo individuo, salvo il principio della soccombenza. </corpo>
 								</comma>
 							</articolo>
 							<articolo id="ann1-art8">
@@ -351,13 +462,15 @@
 								<rubrica>Riservatezza e tutela</rubrica>
 								<comma id="ann1-art8-com1">
 									<num />
-									<corpo>
-										Tutte le persone interessate alla soluzione dei casi sono tenuti al riserbo sui fatti e sulle notizie di cui vengono a conoscenza nel corso della trattazione. 
-										<h:br />
-										Nei casi di assunzione di provvedimenti amministrativi soggetti a pubblicazione, conseguenti o correlati a procedimenti per molestie sessuali, il nominativo del/della dipendente è omesso d'ufficio nel documento pubblicato. 
-										<h:br />
-										Ogni forma di ritorsione diretta e indiretta nei confronti di chi denuncia casi di molestia, compresi testimoni e terzi, è valutabile anche sotto il profilo disciplinare fatta salva la possibilità della persone che le subisce di tutelarsi in ogni sede. 
-									</corpo>
+									<corpo>Tutte le persone interessate alla soluzione dei casi sono tenuti al riserbo sui fatti e sulle notizie di cui vengono a conoscenza nel corso della trattazione. </corpo>
+								</comma>
+								<comma id="ann1-art8-com2">
+									<num />
+									<corpo>Nei casi di assunzione di provvedimenti amministrativi soggetti a pubblicazione, conseguenti o correlati a procedimenti per molestie sessuali, il nominativo del/della dipendente è omesso d'ufficio nel documento pubblicato. </corpo>
+								</comma>
+								<comma id="ann1-art8-com3">
+									<num />
+									<corpo>Ogni forma di ritorsione diretta e indiretta nei confronti di chi denuncia casi di molestia, compresi testimoni e terzi, è valutabile anche sotto il profilo disciplinare fatta salva la possibilità della persone che le subisce di tutelarsi in ogni sede. </corpo>
 								</comma>
 							</articolo>
 							<articolo id="ann1-art9">
@@ -365,13 +478,15 @@
 								<rubrica>Attività di sensibilizzazione</rubrica>
 								<comma id="ann1-art9-com1">
 									<num />
-									<corpo>
-										Nei programmi di formazione del personale e dei dirigenti gli Enti dovranno includere informazioni circa gli orientamenti adottati in merito alla prevenzione delle molestie sessuali, morali e psicologiche ed alle procedure da seguire qualora la molestia abbia luogo. 
-										<h:br />
-										L'Amministrazione predisporrà specifici interventi di sensibilizzazione in materia di tutela della libertà e della dignità della persona al fine di prevenire il verificarsi di comportamenti configurabili come molestie. Particolare attenzione dovrà essere posta alla formazione delle Dirigenti e dei Dirigenti che dovranno promuovere e diffondere la cultura del rispetto della persona volta alla prevenzione delle molestie sessuali, morali e psicologiche sul posto di lavoro. 
-										<h:br />
-										Verrà inoltre predisposto del materiale informativo destinato alle dipendenti e ai dipendenti sul comportamento da adottare in caso di molestie. 
-									</corpo>
+									<corpo>Nei programmi di formazione del personale e dei dirigenti gli Enti dovranno includere informazioni circa gli orientamenti adottati in merito alla prevenzione delle molestie sessuali, morali e psicologiche ed alle procedure da seguire qualora la molestia abbia luogo. </corpo>
+								</comma>
+								<comma id="ann1-art9-com2">
+									<num />
+									<corpo>L'Amministrazione predisporrà specifici interventi di sensibilizzazione in materia di tutela della libertà e della dignità della persona al fine di prevenire il verificarsi di comportamenti configurabili come molestie. Particolare attenzione dovrà essere posta alla formazione delle Dirigenti e dei Dirigenti che dovranno promuovere e diffondere la cultura del rispetto della persona volta alla prevenzione delle molestie sessuali, morali e psicologiche sul posto di lavoro. </corpo>
+								</comma>
+								<comma id="ann1-art9-com3">
+									<num />
+									<corpo>Verrà inoltre predisposto del materiale informativo destinato alle dipendenti e ai dipendenti sul comportamento da adottare in caso di molestie. </corpo>
 								</comma>
 							</articolo>
 						</articolato>

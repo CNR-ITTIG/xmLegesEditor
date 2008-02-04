@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 	<!DOCTYPE NIR SYSTEM 'nirflessibile.dtd'>
 	<NIR tipo="originale" xmlns="http://www.normeinrete.it/nir/2.2/" xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
-		<DocumentoNIR nome="Delibera">
+		<DocumentoNIR nome="Delibera Consiliare">
 			<meta>
 				<descrittori>
 					<pubblicazione norm="20050120" num="" tipo="" />
@@ -45,8 +45,8 @@
 				</titoloDoc>
 			</intestazione>
 			<formulainiziale>
+				<h:p>LA GIUNTA COMUNALE</h:p>
 				<preambolo>
-					<h:p>LA GIUNTA COMUNALE</h:p>
 					<h:p>Premesso: </h:p>
 					<h:p>
 						Che, l' 
@@ -140,9 +140,7 @@
 						<h:br />
 						- per ciò che riguarda la ripartizione del prelievo all'interno del comparto delle utenze non domestiche e, quindi, la determinazione delle misure tariffarie di ciascuna delle categorie di cui all' art. 8 del citato Regolamento ( 
 						<rif xlink:href="urn:nir:comune.firenze;consiglio:deliberazione:2004-12-21;971-2004" xlink:type="simple">Deliberazione del C.C. n. 971 /2004</rif>
-						), sono stati integralmente applicati i coefficienti di produzione dei rifiuti di cui alla tabella 4a del 
-						<rif xlink:href="urn:nir:comune.firenze;consiglio:decreto:1999;158" xlink:type="simple">decreto 158/99</rif>
-						, determinando le misure di ciascun coefficiente nell'ambito degli intervalli tra misura minima e misura massima ivi previsti.; 
+						), sono stati integralmente applicati i coefficienti di produzione dei rifiuti di cui alla tabella 4a del decreto 158/99 , determinando le misure di ciascun coefficiente nell'ambito degli intervalli tra misura minima e misura massima ivi previsti.; 
 						<h:br />
 						- per ciò che riguarda la ripartizione del prelievo all'interno del comparto utenze domestiche, l'introduzione del parametro &quot;numerosità  del nucleo familiare&quot; senza adeguati correttivi avrebbe portato a variazioni repentine e fortemente inique del prelievo, suscettibili di determinare fenomeni di rigetto della nuova disciplina, per effetto degli aumenti particolarmente elevati riservati alle abitazioni caratterizzate da minor superficie e maggior numero di occupanti e - correlativamente - per effetto delle diminuzioni di tariffa risultanti per le abitazioni caratterizzate da maggior superficie e occupate da nuclei di un solo componente. Al fine di assicurare la necessaria gradualità  nell'applicazione della tariffa ed evitare aggravi di prelievo insostenibili, almeno nel breve periodo, per le famiglie numerose ed in particolare quelle occupanti abitazioni di piccole dimensioni, risulta pertanto necessario prevedere un loro riequilibrio ai sensi dell' 
 						<rif xlink:href="urn:nir:presidente.repubblica:decreto:1999;158#art5-com1" xlink:type="simple">art. 5 comma 1 del DPR 158/99</rif>
@@ -175,9 +173,9 @@
 					</h:p>
 					<h:p>per i motivi di cui in premessa,</h:p>
 				</preambolo>
+				<h:p>delibera</h:p>
 			</formulainiziale>
 			<contenitore id="con1" nome="dispositivo">
-				<h:p>delibera</h:p>
 				<h:p>
 					1. di dare atto che la tariffa di riferimento relativa alla gestione dei rifiuti urbani, di cui all' 
 					<rif xlink:href="urn:nir:presidente.repubblica:decreto:1999-04-27;158#art2" xlink:type="simple">art.2 del D.P.R. 27/04/1999, n° 158</rif>
@@ -199,9 +197,9 @@
 					, così come risulta nel PROSPETTO LETTERA B , che si allega alla presente deliberazione quale sua parte integrante; 
 				</h:p>
 				<h:p>
-					5. Di stabilire che -ai sensi e per gli effetti dell' 
+					5. Di stabilire che - ai sensi e per gli effetti dell' 
 					<rif xlink:href="urn:nir:stato:decreto.legislativo:1997;22#art49-com10" xlink:type="simple">art.49, comma 10 del D.Lgs. 22/1997</rif>
-					e al fine di assicurare la necessaria gradualità  nell'applicazione della tariffa ed evitare, nel primo anno di applicazione, eccessivi aumenti di tariffa in particolare per le famiglie numerose che occupano abitazioni di piccole dimensioni- venga applicato un meccanismo di salvaguardia che nella ripartizione della tariffa di riferimento per il 2005, relativamente alla parte a carico dell'utenza domestica, preveda l'effettuazione del calcolo della tariffa trasferendo il 90% della parte variabile sulla parte fissa. 
+					e al fine di assicurare la necessaria gradualità  nell'applicazione della tariffa ed evitare, nel primo anno di applicazione, eccessivi aumenti di tariffa in particolare per le famiglie numerose che occupano abitazioni di piccole dimensioni - venga applicato un meccanismo di salvaguardia che nella ripartizione della tariffa di riferimento per il 2005, relativamente alla parte a carico dell'utenza domestica, preveda l'effettuazione del calcolo della tariffa trasferendo il 90% della parte variabile sulla parte fissa. 
 				</h:p>
 			</contenitore>
 			<formulafinale />

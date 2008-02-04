@@ -31,12 +31,13 @@
 				<titoloDoc>Oggetto: Realizzazione di rampe per attraversamento pedo-ciclabile a livelli sfalsati Ponte di Varlungo riva destra e sinistra </titoloDoc>
 			</intestazione>
 			<formulainiziale>
+<h:p>LA GIUNTA </h:p>
 				<preambolo>
-					<h:p>LA GIUNTA </h:p>
+					
 					<h:p>Premesso che:</h:p>
 					<h:p>
 						- con 
-						<rif xlink:href="urn:nir:comune.firenze;consiglio:delibera:2005-12-20;120,1025" xlink:type="simple">Deliberazione n.120/1025 del 20/12/2005</rif>
+						<rif xlink:href="urn:nir:comune.firenze;consiglio:delibera:2005-12-20;120-1025" xlink:type="simple">Deliberazione n.120/1025 del 20/12/2005</rif>
 						, esecutiva a norma di legge, il Consiglio Comunale ha approvato il Bilancio annuale di previsione 2006 ed il Bilancio triennale 2006/2008 e relazione revisionale e programmatica; 
 					</h:p>
 					<h:p>
@@ -148,9 +149,10 @@
 						; 
 					</h:p>
 				</preambolo>
+<h:p>DELIBERA </h:p>
 			</formulainiziale>
 			<contenitore id="con1" nome="dispositivo">
-				<h:p>DELIBERA </h:p>
+				
 				<h:p>
 					1) Di approvare il progetto esecutivo, allegato al presente atto, relativo agli interventi di&quot;Realizzazione di rampe per l'attraversamento pedociclabile a livelli sfalsati ponte di Varlungo riva destra e sinistra&quot;, predisposto dalla U.O.C. Rischio Idraulico, della Direzione Ambiente, comprensivo di: 
 					<h:br />

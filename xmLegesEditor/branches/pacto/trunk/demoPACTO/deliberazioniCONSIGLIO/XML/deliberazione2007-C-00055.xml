@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 	<!DOCTYPE NIR SYSTEM 'nirflessibile.dtd'>
 	<NIR tipo="originale" xmlns="http://www.normeinrete.it/nir/2.2/" xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
-		<DocumentoNIR nome="Delibera">
+		<DocumentoNIR nome="Delibera Consiliare">
 			<meta>
 				<descrittori>
 					<pubblicazione norm="20070928" num="" tipo="" />
@@ -38,8 +38,9 @@
 				<titoloDoc>Oggetto: Complesso immobiliare posto in via Perfetti Ricasoli - Costituzione del diritto di superficie a favore della Fondazione Pignone. </titoloDoc>
 			</intestazione>
 			<formulainiziale>
+<h:p>IL CONSIGLIO</h:p>
 				<preambolo>
-					<h:p>IL CONSIGLIO</h:p>
+					
 					<h:p>Premesso che con nota datata 6 agosto 2007 la Fondazione Pignone comunica quanto segue:</h:p>
 					<h:p>Nuovo Pignone intende realizzare un asilo nido ad uso dei propri dipendenti, in linea con la politica - di attenzione sociale e del territorio della Società , anche contemplata nello statuto della Fondazione Pignone a tale scopo costituita nell'Agosto 2005; </h:p>
 					<h:p>che ha individuato a tale fine un immobile di proprietà  del Comune di Firenze in via Perfetti Ricasoli, - attiguo al complesso industriale della medesima società , facente parte del più ampio complesso immobiliare di proprietà  comunale che comprende la struttura del PLF Learning Center, realizzata a suo tempo da GE Nuovo Pignone mediante una convenzione con il Comune di Firenze, ed attualmente in locazione alla stessa società ;</h:p>
@@ -60,9 +61,10 @@
 					</h:p>
 					<h:p>VISTO lo Statuto dell'Ente;</h:p>
 				</preambolo>
+<h:p>DELIBERA</h:p>
 			</formulainiziale>
 			<contenitore id="con1" nome="dispositivo">
-				<h:p>DELIBERA</h:p>
+				
 				<h:p>1. di costituire il diritto di superficie a favore della Fondazione Pignone con sede in Firenze, via Felice Matteucci 2, sull'immobile appresso descritto: complesso immobiliare posto in Firenze, via Perfetti Ricasoli 74 - 76, composto da fabbricati con superficie utile di mq. 3.489 oltre ad aree esterne pertinenziali, avente destinazione urbanistica D1. Su tale immobile la Fondazione Pignone potrà  realizzare, a propria cura e spesa, una struttura essenzialmente dedicata ad asilo nido aziendale, e ad uffici per la parte residua; la struttura sarà  realizzata e gestita sotto l'esclusiva responsabilità  della Fondazione suddetta, nel rispetto delle normative vigenti; </h:p>
 				<h:p>2. la durata del diritto di superficie viene stabilita in venticinque anni; </h:p>
 				<h:p>3. la Fondazione dovrà  effettuare, a propria cura e spese, gli aggiornamenti catastali necessari per la stipula del successivo contratto di costituzione del diritto di superficie, e gli ulteriori aggiornamenti catastali eventualmente necessari dopo la realizzazione dei lavori; </h:p>

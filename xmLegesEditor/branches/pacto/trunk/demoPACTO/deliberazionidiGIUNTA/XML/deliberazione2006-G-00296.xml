@@ -42,11 +42,17 @@
 						<rif xlink:href="urn:nir:stato:decreto.legislativo:2000;267#art169" xlink:type="simple">art. 169 del D. Lgs. 267/2000</rif>
 						con il quale si stabilisce che, sulla base del Bilancio di Previsione annuale, la Giunta definisce il PEG determinando in dettaglio gli obiettivi gestionali che dovranno essere raggiunti nel corso dell'anno e affidando ai Direttori e ai Dirigenti responsabili delle strutture tali obiettivi unitamente alle necessarie dotazioni di risorse umane e strumentali; 
 					</h:p>
-					<h:p>Tenuto conto che il Regolamento di Contabilità  nonchè il Regolamento degli Uffici e dei Servizi disciplinano le modalità  di definizione del PEG e che, in particolare, ai sensi dell'art. 20 del Regolamento di contabilità  e dell'art. 15 del Regolamento sull'ordinamento degli uffici e dei servizi, è stato definito dal Direttore Generale, d'intesa con i responsabili delle Direzioni, degli Uffici Tematici e di progetto e dei Servizi, un analitico Piano Dettagliato degli Obiettivi (PDO), di carattere operativo che viene a costituire il documento di sviluppo delle previsioni di PEG;</h:p>
+					<h:p>
+						Tenuto conto che il 
+						<rif xlink:href="urn:nir:comune.firenze:regolamento;contabilita:" xlink:type="simple">Regolamento di Contabilità </rif>
+						nonchè il Regolamento degli Uffici e dei Servizi disciplinano le modalità  di definizione del PEG e che, in particolare, ai sensi dell' 
+						<rif xlink:href="urn:nir:comune.firenze:regolamento;contabilita:#art20" xlink:type="simple">art. 20 del Regolamento di contabilità  </rif>
+						e dell'art. 15 del Regolamento sull'ordinamento degli uffici e dei servizi, è stato definito dal Direttore Generale, d'intesa con i responsabili delle Direzioni, degli Uffici Tematici e di progetto e dei Servizi, un analitico Piano Dettagliato degli Obiettivi (PDO), di carattere operativo che viene a costituire il documento di sviluppo delle previsioni di PEG; 
+					</h:p>
 					<h:p>Dato atto che le previsioni attuative gestionali del programma dei lavori pubblici nel quadro degli investimenti sono state definite con i singoli responsabili delle strutture interessate attraverso l'opera del responsabile della programmazione in materia di lavori pubblici ai sensi del citato art. 5 del Regolamento sull'ordinamento degli uffici e dei servizi;</h:p>
 					<h:p>
 						Dato altresì atto che il responsabile della programmazione, a seguito della 
-						<rif xlink:href="urn:nir:comune.firenze;giunta:delibera:2006-03-14;189,117" xlink:type="simple">deliberazione 189/117 del 14.3.2006</rif>
+						<rif xlink:href="urn:nir:comune.firenze;giunta:delibera:2006-03-14;189-117" xlink:type="simple">deliberazione 189/117 del 14.3.2006</rif>
 						esecutiva ai sensi di legge, ha provveduto, nelle more dell'approvazione del PEG 2006, a pubblicare l'annuale lista degli incarichi da affidare, e che pertanto si riconfermano, con il presente atto, le individuazioni di incarichi già  effettuate e si integrano con i nuovi incarichi segnalati negli elaborati allegati, che verranno successivamente aggiornate dalle eventuali variazioni al PEG 2006; 
 					</h:p>
 					<h:p>Considerato altresì che l'assegnazione delle risorse di entrata e degli interventi di spesa ai responsabili della realizzazione di ciascun programma gestionale è effettuata, nel PEG, attraverso la disaggregazione delle risorse e interventi del Bilancio in capitoli di entrata e di spesa e che, sulla base degli stanziamenti indicati sia per la parte corrente che per il Piano Triennale degli Investimenti, a tali responsabili è affidata sia la realizzazione delle entrate, compreso l'accertamento delle stesse, che la disponibilità  delle spese, compresa l'assunzione degli impegni, con attribuzione delle responsabilità  di budget e di procedura;</h:p>
@@ -64,8 +70,16 @@
 					<h:p>Preso atto che i Quartieri hanno adottato i Piani di gestione per l'anno 2005 concernenti le attività  di loro competenza;</h:p>
 					<h:p>Visto che in relazione a quanto stabilito all'art. 7.3 del vigente regolamento delle spese in economia è previsto che le Direzioni e Uffici in sede di articolazione del PEG possano proporre l'integrazione della tabella allegata allo stesso Regolamento concordando ulteriori beni e servizi che possono essere acquistati in economia;</h:p>
 					<h:p>Visto il Regolamento sull'ordinamento degli Uffici e dei Servizi riguardo alle competenze gestionali dei responsabili delle strutture nonchè in ordine alle procedure di pianificazione gestionale;</h:p>
-					<h:p>Preso atto dei pareri favorevoli relativi alla regolarità  tecnica del provvedimento ai sensi dell'art. 49 del D.lg. n. 267/2000;</h:p>
-					<h:p>Visto l'art. 134 del D.lg. n. 267/2000 </h:p>
+					<h:p>
+						Preso atto dei pareri favorevoli relativi alla regolarità  tecnica del provvedimento ai sensi dell'
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:2000;267#art49" xlink:type="simple">art. 49 del D.lg. n. 267/2000</rif>
+						;
+					</h:p>
+					<h:p>
+						Visto l'
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:2000;267#art134" xlink:type="simple">art.134 del D.lg. n. 267/2000</rif>
+						;
+					</h:p>
 				</preambolo>
 			</formulainiziale>
 			<contenitore id="con1" nome="dispositivo">
@@ -85,7 +99,7 @@
 				<h:p>9) di dare atto che, per la realizzazione degli obiettivi del PEG, è stato contestualmente predisposto dai vari centri di responsabilità  dell'Ente, con la Direzione Generale, il Piano Dettagliato degli Obiettivi (PDO) che, approvato dalla stessa Direzione Generale, viene a costituire, unitamente al PEG, l'insieme degli atti di programmazione annuale di riferimento per l'Ente; </h:p>
 				<h:p>
 					10) di confermare le individuazioni di incarichi da affidare per il Lavori Pubblici, già  pubblicati a seguito dall'adozione della 
-					<rif xlink:href="urn:nir:comune.firenze;giunta:delibera:2006-03-14;189,117" xlink:type="simple">deliberazione 189/117 del 14.3.2006</rif>
+					<rif xlink:href="urn:nir:comune.firenze;giunta:delibera:2006-03-14;189-117" xlink:type="simple">deliberazione 189/117 del 14.3.2006</rif>
 					stabilendo che tale elenco sarà  aggiornato dalle eventuali variazioni al PEG 2006; 
 				</h:p>
 				<h:p>11) di dichiarare il presente provvedimento immediatamente esecutivo. </h:p>

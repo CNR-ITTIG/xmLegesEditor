@@ -38,8 +38,8 @@
 				<titoloDoc>Oggetto: Imposta Comunale sugli Immobili (ICI) - Approvazione delle aliquote e delle detrazioni d'imposta per l'anno 2004 </titoloDoc>
 			</intestazione>
 			<formulainiziale>
+				<h:p>LA GIUNTA</h:p>
 				<preambolo>
-					<h:p>LA GIUNTA</h:p>
 					<h:p>
 						Visto il 
 						<rif xlink:href="urn:nir:stato:decreto.legislativo:1992-12-30;504" xlink:type="simple">Decreto Legislativo 30 dicembre 1992, n. 504</rif>
@@ -48,7 +48,7 @@
 					<h:p>Visto quanto dispone il regolamento per l'applicazione dell'ICI, adottato dal Consiglio comunale ai sensi degli articoli 52 e 59, comma 1, del decreto legislativ 15 dicembre 1997, n. 446;</h:p>
 					<h:p>
 						Vista la propria 
-						<rif xlink:href="urn:nir:comune.firenze;giunta:delibera:2003-03-31;147,122" xlink:type="simple">deliberazione n. 147/122 del 31/03/2003</rif>
+						<rif xlink:href="urn:nir:comune.firenze;giunta:delibera:2003-03-31;147-122" xlink:type="simple">deliberazione n. 147/122 del 31/03/2003</rif>
 						con cui venivano stabilite le aliquote e le detrazioni ICI per l'anno 2003; 
 					</h:p>
 					<h:p>Preso atto degli indirizzi generali espressi dal Consiglio Comunale in materia di aliquote e detrazioni ICI;</h:p>
@@ -75,9 +75,19 @@
 					<h:p>
 						Visto il 
 						<rif xlink:href="urn:nir:stato:decreto.legislativo:2000-08-18;267" xlink:type="simple">D. Lgs. n. 267 del 18/8/00</rif>
-						&quot;Testo unico delle leggi sull'ordinamento degli enti locali&quot; e, segnatamente, l'art. 42, comma 1, lett. f) e l'art. 48; 
+						&quot;Testo unico delle leggi sull'ordinamento degli enti locali&quot; e, segnatamente, l'
+						<mrif>
+							<rif xlink:href="urn:nir:stato:decreto.legislativo:2000-08-18;267#art42-com1-letf" xlink:type="simple">art. 42, comma 1, lett. f)</rif>
+							e 
+							<rif xlink:href="urn:nir:stato:decreto.legislativo:2000-08-18;267#art48" xlink:type="simple">l'art. 48</rif>
+						</mrif>
+						; 
 					</h:p>
-					<h:p>Visto il Decreto del Ministero dell'Interno 23/12/2003 (pubblicato sulla G.U. 31/12/2003 n. 302), con il quale il termine per l'approvazione delle aliquote e tariffe dei tributi locali è stato prorogato, per l'anno 2004, al 31 marzo;</h:p>
+					<h:p>
+						Visto il 
+						<rif xlink:href="urn:nir:ministero.interno:decreto:2003-12-23;nir-s2308122" xlink:type="simple">Decreto del Ministero dell'Interno 23/12/2003</rif>
+						(pubblicato sulla G.U. 31/12/2003 n. 302), con il quale il termine per l'approvazione delle aliquote e tariffe dei tributi locali è stato prorogato, per l'anno 2004, al 31 marzo;
+					</h:p>
 					<h:p>
 						Visto l' 
 						<rif xlink:href="urn:nir:stato:decreto.legislativo:1997-12-15;446#art58-com4" xlink:type="simple">art. 58, comma 4 del Decreto Legislativo 15 dicembre 1997, n. 446</rif>
@@ -89,9 +99,9 @@
 						); 
 					</h:p>
 				</preambolo>
+				<h:p>DELIBERA</h:p>
 			</formulainiziale>
 			<contenitore id="con1" nome="dispositivo">
-				<h:p>DELIBERA</h:p>
 				<h:p>1) - di stabilire per l'anno 2004, secondo le motivazioni espresse in narrativa, le seguenti aliquote ICI: </h:p>
 				<h:p>a) una aliquota ridotta del 5,6 (cinque virgola sei) per mille in favore: </h:p>
 				<h:p>- delle persone fisiche soggetti passivi e dei soci delle cooperative edilizie a proprietà  indivisa, residenti nel Comune, per l'unità  immobiliare direttamente adibita ad abitazione principale; </h:p>

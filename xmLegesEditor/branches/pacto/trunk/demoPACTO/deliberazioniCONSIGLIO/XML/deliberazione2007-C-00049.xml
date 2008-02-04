@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 	<!DOCTYPE NIR SYSTEM 'nirflessibile.dtd'>
 	<NIR tipo="originale" xmlns="http://www.normeinrete.it/nir/2.2/" xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
-		<DocumentoNIR nome="Delibera">
+		<DocumentoNIR nome="Delibera Consiliare">
 			<meta>
 				<descrittori>
 					<pubblicazione norm="20070813" num="" tipo="" />
@@ -41,12 +41,12 @@
 				</titoloDoc>
 			</intestazione>
 			<formulainiziale>
+				<h:p>-OMISSIS- </h:p>
+				<h:p>IL CONSIGLIO</h:p>
 				<preambolo>
-					<h:p>-OMISSIS- </h:p>
-					<h:p>IL CONSIGLIO</h:p>
 					<h:p>Premesso:</h:p>
 					<h:p>
-						• che il Comune di Firenze con deliberazione C.C. n. 14 del 4/3/2002, parzialmente modificata con 
+						• che il Comune di Firenze con deliberazione C.C. n. 14 del 4/3/2002 , parzialmente modificata con
 						<rif xlink:href="urn:nir:comune.firenze;consiglio:delibera:2002-12-02;106" xlink:type="simple">deliberazione n. 106 del 2/12/2002</rif>
 						, ha dato avvio al procedimento di formazione del Piano Strutturale, in conformità con quanto disposto dall’ 
 						<rif xlink:href="urn:nir:regione.toscana:legge:1995;5#art36" xlink:type="simple">art. 36 della L.R. 5/1995</rif>
@@ -158,9 +158,9 @@
 						; 
 					</h:p>
 				</preambolo>
+				<h:p>DELIBERA</h:p>
 			</formulainiziale>
 			<contenitore id="con1" nome="dispositivo">
-				<h:p>DELIBERA</h:p>
 				<h:p>Per tutti i motivi espressi in narrativa: </h:p>
 				<h:p>
 					1. di ratificare, ai sensi e per gli effetti di cui all’ 

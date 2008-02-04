@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 	<!DOCTYPE NIR SYSTEM 'nirflessibile.dtd'>
 	<NIR tipo="originale" xmlns="http://www.normeinrete.it/nir/2.2/" xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
-		<DocumentoNIR nome="Delibera">
+		<DocumentoNIR nome="Delibera Consiliare">
 			<meta>
 				<descrittori>
 					<pubblicazione norm="20040824" num="" tipo="" />
@@ -38,22 +38,23 @@
 				<titoloDoc>Oggetto: POLO OSPEDALIERO CAREGGI - Nuova viabilità  di accesso da nord-ovest - II stralcio - Approvazione progetto esecutivo </titoloDoc>
 			</intestazione>
 			<formulainiziale>
+				<h:p>LA GIUNTA </h:p>
 				<preambolo>
-					<h:p>LA GIUNTA </h:p>
+					<h:p>Premesso che:</h:p>
 					<h:p>
-						Premesso che: - con propria 
-						<rif xlink:href="urn:nir:comune.firenze;consiglio:delibera:2002-12-30;1193" xlink:type="simple">deliberazione n. 1193 del 30.12.2002</rif>
+						- con propria 
+						<rif xlink:href="urn:nir:comune.firenze;giunta:delibera:2002-12-30;1193" xlink:type="simple">deliberazione n. 1193 del 30.12.2002</rif>
 						è stato approvato il progetto preliminare relativo al Polo Ospedaliero Careggi - Nuova viabilità  di accesso da nord ovest - II stralcio; 
 					</h:p>
 					<h:p>
 						- con propria 
-						<rif xlink:href="urn:nir:comune.firenze;consiglio:delibera:2002-12-30;1193" xlink:type="simple">deliberazione n. 1193 del 30.12.2002</rif>
+						<rif xlink:href="urn:nir:comune.firenze;giunta:delibera:2002-12-30;1193" xlink:type="simple">deliberazione n. 1193 del 30.12.2002</rif>
 						èstato approvato il progetto preliminare relativo al Polo Ospedaliero Careggi - Nuova viabilità  di accesso da nord ovest - II stralcio; 
 					</h:p>
 					<h:p>
 						- a seguito della Conferenza dei Servizi del 29.12.2003 in cui erano stati espressi i pareri favorevoli degli enti competenti, compresa la Soprintendenza ai beni ambientali ed architettonici, con 
-						<rif xlink:href="urn:nir:comune.firenze;giunta:deliberazione:2004-06-08;317" xlink:type="simple">deliberazione G.M. n. 317 del 8.6.200</rif>
-						4 è stato approvato il progetto definitivo, dichiarata la pubblica utilità  dell'opera per l'avvio della procedura espropriativa ai sensi del 
+						<rif xlink:href="urn:nir:comune.firenze;giunta:deliberazione:2004-06-08;317" xlink:type="simple">deliberazione G.M. n. 317 del 8.6.2004</rif>
+						è stato approvato il progetto definitivo, dichiarata la pubblica utilità  dell'opera per l'avvio della procedura espropriativa ai sensi del 
 						<rif xlink:href="urn:nir:presidente.repubblica:decreto:2001;327" xlink:type="simple">D.P.R.n.327/2001</rif>
 						e dato mandato alla Direzione Ragioneria di assumere il relativo mutuo; 
 					</h:p>
@@ -259,9 +260,9 @@
 						; 
 					</h:p>
 				</preambolo>
+				<h:p>DELIBERA</h:p>
 			</formulainiziale>
 			<contenitore id="con1" nome="dispositivo">
-				<h:p>DELIBERA</h:p>
 				<h:p>1. Di approvare il progetto esecutivo relativo all'intervento di realizzazione della Viabilità  di accesso da Nord-Ovest al Polo Ospedaliero di Careggi - secondo stralcio funzionale, costituito dagli elaborati tecnici sopra indicati, tutti parte integrante del presente provvedimento; </h:p>
 				<h:p>2.Di approvare il quadro economico dell'intervento che risulta così ripartito: </h:p>
 				<h:table>

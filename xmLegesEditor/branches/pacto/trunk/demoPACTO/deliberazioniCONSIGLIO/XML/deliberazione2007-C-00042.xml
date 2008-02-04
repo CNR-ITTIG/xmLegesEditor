@@ -38,9 +38,10 @@
 				<titoloDoc>Oggetto: Conferimento della Cittadinanza Onoraria di Firenze a Mohamed El-Baradei </titoloDoc>
 			</intestazione>
 			<formulainiziale>
-				<preambolo>
-					<h:p>- OMISSIS - </h:p>
+<h:p>- OMISSIS - </h:p>
 					<h:p>I L C O N S I G L I O </h:p>
+				<preambolo>
+					
 					<h:p>Considerato come le armi nucleari rappresentino una gravissima minaccia per la sopravvivenza dell'umanità e del pianeta Terra e che Firenze, da sempre, si è contraddistinta quale città operatrice di pace, in particolare oggi, con la vicepresidenza del Sindaco Leonardo Domenici della campagna mondiale - Mayors for Peace - per il completo disarmo nucleare;</h:p>
 					<h:p>Dato atto che l'International Energy Agency (IAEA) delle Nazioni Unite si pone a guardia contro la proliferazione nucleare nel mondo e particolarmente contro l'attuale &quot;Nuova proliferazione militare&quot; segnata dall'estendersi del numero di Paesi - come la Corea del Nord e l'Iran - che si dotano o cercano di dotarsi di arsenali atomici e contemporaneamente dallo sviluppo tecnologico occidentale di nuovo armamento nucleare tattico e strategico;</h:p>
 					<h:p>Considerato anche che la direzione generale di tale Agenzia è stata conferita, e riconfermata, al Dr. Mohamed El-Baradei a partire dal 1 dicembre 1997, in un periodo di congiuntura internazionale particolarmente delicata nella quale i rischi della proliferazione nucleare si sono resi sempre più subdoli e minacciosi, come testimoniano i progressivi test nucleari di India, Pakistan e della Corea del Nord;</h:p>
@@ -62,9 +63,10 @@
 						&quot; Testo unico delle leggi sull'ordinamento degli enti locali&quot;; 
 					</h:p>
 				</preambolo>
+<h:p>D E L I B E R A</h:p>
 			</formulainiziale>
 			<contenitore id="con1" nome="dispositivo">
-				<h:p>D E L I B E R A</h:p>
+				
 				<h:p>1. di conferire, per i motivi suddetti, la Cittadinanza Onoraria di Firenze a Mohamed El-Baradei.</h:p>
 			</contenitore>
 			<formulafinale />

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 	<!DOCTYPE NIR SYSTEM 'nirflessibile.dtd'>
 	<NIR tipo="originale" xmlns="http://www.normeinrete.it/nir/2.2/" xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
-		<DocumentoNIR nome="Delibera">
+		<DocumentoNIR nome="Delibera Consiliare">
 			<meta>
 				<descrittori>
 					<pubblicazione norm="20070706" num="" tipo="" />
@@ -38,33 +38,34 @@
 				<titoloDoc>Oggetto: POLO OSPEDALIERO DI CAREGGI - Adeguamento cartografico del PRG riguardante la nuova viabilità di accesso da nord/ovest (II stralcio) </titoloDoc>
 			</intestazione>
 			<formulainiziale>
-				<preambolo>
-					<h:p>– OMISSIS-</h:p>
+<h:p>– OMISSIS-</h:p>
 					<h:p>IL CONSIGLIO</h:p>
+				<preambolo>
+					
 					<h:p>Premesso:</h:p>
 					<h:p>
 						- con propria 
-						<rif xlink:href="urn:nir:comune.firenze;giunta:deliberazione:2004-08-11;427,587" xlink:type="simple">deliberazione n. 427/587 del 11.8.2004</rif>
+						<rif xlink:href="urn:nir:comune.firenze;giunta:deliberazione:2004-08-11;427-587" xlink:type="simple">deliberazione n. 427/587 del 11.8.2004</rif>
 						, la Giunta Comunale approvava il progetto esecutivo avente ad oggetto “Polo ospedaliero di Careggi – Nuova viabilità di accesso da nord –ovest, II stralcio”, intervento questo previsto nel Piano triennale investimenti 2003/2005; 
 					</h:p>
 					<h:p>
 						- con propria 
-						<rif xlink:href="urn:nir:comune.firenze;giunta:deliberazione:2006-11-14;688,838" xlink:type="simple">deliberazione n. 688/838 del 14.11.2006</rif>
+						<rif xlink:href="urn:nir:comune.firenze;giunta:deliberazione:2006-11-14;688-838" xlink:type="simple">deliberazione n. 688/838 del 14.11.2006</rif>
 						, la Giunta Comunale – nell’ambito del programma “Riqualificazione partecipata per tre piazze cittadine” – approvava il progetto esecutivo per la realizzazione della piazza del Sodo, nel Quartiere n. 5 , ed approvava altresì il quadro economico relativo alla prevista opera pubblica; 
 					</h:p>
 					<h:p>
 						- con la 
-						<rif xlink:href="urn:nir:comune.firenze;giunta:deliberazione:2006-11-14;688,838" xlink:type="simple">deliberazione n. 688/838/2006</rif>
+						<rif xlink:href="urn:nir:comune.firenze;giunta:deliberazione:2006-11-14;688-838" xlink:type="simple">deliberazione n. 688/838/2006</rif>
 						sopra richiamata, la Giunta Comunale prendeva altresì atto della necessità che il progetto della piazza del Sodo d ovesse coordinarsi con quello della nuova viabilità di accesso al Polo ospedaliero di Careggi, con particolare riferimento al suo innesto con via delle Panche; 
 					</h:p>
 					<h:p>
 						- a tal fine, con la stessa deliberazione veniva approvato il progetto di “Sistemazione della nuova viabilità dell’incrocio tra via Caldieri e via delle Panche” , in parziale variante rispetto a quello originariamente approvato con la 
-						<rif xlink:href="urn:nir:comune.firenze;giunta:deliberazione:2004-08-11;427,587" xlink:type="simple">deliberazione</rif>
-						n. 427/587/2004 , sopra citata. 
+						<rif xlink:href="urn:nir:comune.firenze;giunta:deliberazione:2004-08-11;427-587" xlink:type="simple">deliberazione n. 427/587/2004</rif>
+						, sopra citata. 
 					</h:p>
 					<h:p>Premesso ancora:</h:p>
 					<h:p>
-						<rif xlink:href="urn:nir:comune.firenze;giunta:deliberazione:2006-11-14;688,838" xlink:type="simple">deliberazione n. 688/838 del 14.11.2006</rif>
+						<rif xlink:href="urn:nir:comune.firenze;giunta:deliberazione:2006-11-14;688-838" xlink:type="simple">deliberazione n. 688/838 del 14.11.2006</rif>
 						, interessa due modeste porzioni di terreno di superficie complessiva mq. 110, di proprietà l’una della Parrocchia di S. Pio X e l’altra della Società Finbest SpA, la cui destinazione urbanistica è quella di seguito indicata: quanto all’area di proprietà della Parrocchia: zona G, sottozona G2e “attrezzature e servizi - pubblici di quartiere esistenti”, con simbolo di attrezzature religiose; 
 					</h:p>
 					- il progetto di sistemazione della nuova viabilità approvato con la citata 
@@ -91,12 +92,13 @@
 						sopra richiamato 
 					</h:p>
 				</preambolo>
+<h:p>DELIBERA</h:p>
 			</formulainiziale>
 			<contenitore id="con1" nome="dispositivo">
-				<h:p>DELIBERA</h:p>
+				
 				<h:p>
 					1. di approvare – per le ragioni espresse in narrativa – l’adeguamento cartografico del vigente PRG, limitatamente alle nuove, diverse aree interessate dal progetto di “Sistemazione della nuova viabilità dell’incrocio fra via Caldieri e via delle Panche”, approvato dalla Giunta Comunale con propria 
-					<rif xlink:href="urn:nir:comune.firenze;giunta:delibera:2006-11-14;688,838" xlink:type="simple">deliberazione n. 688/838 del 14.11.2006</rif>
+					<rif xlink:href="urn:nir:comune.firenze;giunta:delibera:2006-11-14;688-838" xlink:type="simple">deliberazione n. 688/838 del 14.11.2006</rif>
 					; 
 				</h:p>
 				<h:p>

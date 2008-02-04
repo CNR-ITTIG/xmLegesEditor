@@ -31,17 +31,23 @@
 				<titoloDoc>Oggetto: Approvazione bilancio annuale di previsione 2006, bilancio triennale 2006/2008 e relazione previsionale e programmatica. </titoloDoc>
 			</intestazione>
 			<formulainiziale>
+				<h:p>-OMISSIS-</h:p>
+				<h:p>IL CONSIGLIO</h:p>
 				<preambolo>
-					<h:p>-OMISSIS-</h:p>
-					<h:p>IL CONSIGLIO</h:p>
 					<h:p>
 						VISTO il 
 						<rif xlink:href="urn:nir:stato:decreto.legislativo:2000-08-18;267" xlink:type="simple">D. Lgs. 18 agosto 2000 n. 267</rif>
 						, il quale stabilisce: 
 					</h:p>
-					<h:p>- all' art. 151 che gli Enti Locali deliberano entro il 31 dicembre il bilancio di previsione per l'anno successivo, che deve essere corredato di una relazione previsionale e programmatica e di un bilancio pluriennale di durata uguale a quello della Regione di appartenenza;</h:p>
 					<h:p>
-						- all' art. 172 che al bilancio devono essere allegati: 
+						- all' 
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:2000-08-18;267#art151" xlink:type="simple">art. 151</rif>
+						che gli Enti Locali deliberano entro il 31 dicembre il bilancio di previsione per l'anno successivo, che deve essere corredato di una relazione previsionale e programmatica e di un bilancio pluriennale di durata uguale a quello della Regione di appartenenza; 
+					</h:p>
+					<h:p>
+						- all' 
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:2000-08-18;267#art172" xlink:type="simple">art. 172</rif>
+						che al bilancio devono essere allegati: 
 						<h:br />
 						il rendiconto deliberato del penultimo esercizio antecedente quello cui si riferisce il bilancio di previsione; 
 						<h:br />
@@ -60,7 +66,9 @@
 					<h:p>
 						- VISTA la 
 						<rif xlink:href="urn:nir:stato:legge:2004;311" xlink:type="simple">legge n. 311/2004</rif>
-						(finanziaria per il 2005), la quale disciplina, all' art. 1, comma 22 , il patto di stabilità interno per gli Enti Locali, prevedendo per il 2005 un tetto per il complesso delle spese correnti ed in conto capitale, limite di spesa che per l'anno 2006 è incrementato del due per cento; 
+						(finanziaria per il 2005), la quale disciplina, all' 
+						<rif xlink:href="urn:nir:stato:legge:2004;311#art1-com22" xlink:type="simple">art. 1, comma 22</rif>
+						, il patto di stabilità interno per gli Enti Locali, prevedendo per il 2005 un tetto per il complesso delle spese correnti ed in conto capitale, limite di spesa che per l'anno 2006 è incrementato del due per cento; 
 					</h:p>
 					<h:p>
 						PRESO ATTO dei seguenti documenti che compongono il bilancio, redatti secondo i criteri e le modalità  stabiliti nell'ordinamento finanziario contabile, di cui al 
@@ -76,11 +84,15 @@
 					<h:p>
 						VISTI i seguenti allegati al bilancio: 
 						<h:br />
-						il rendiconto del 2004, approvato con deliberazione C.C. n. 49 del 27 giugno 2005; 
+						il rendiconto del 2004, approvato con 
+						<rif xlink:href="urn:nir:comune.firenze;consiglio:delibera:2005-06-27;49" xlink:type="simple">deliberazione C.C. n. 49 del 27 giugno 2005</rif>
+						; 
 						<h:br />
 						i bilanci delle società  partecipate dal Comune di Firenze, relativi all'anno 2004; 
 						<h:br />
-						la deliberazione Giunta Municipale n. 768 /987 del 22 novembre 2005, con la quale sono state individuate le aree PEEP da cedere in proprietà  e determinato il prezzo, ai sensi dell' 
+						la 
+						<rif xlink:href="urn:nir:comune.firenze;giunta:delibera:2005-11-22;768-987" xlink:type="simple">deliberazione Giunta Municipale n. 768 /987 del 22 novembre 2005</rif>
+						, con la quale sono state individuate le aree PEEP da cedere in proprietà  e determinato il prezzo, ai sensi dell' 
 						<rif xlink:href="urn:nir:stato:decreto.legislativo:2000;267#art172-com1-letc" xlink:type="simple">art. 172, comma 1, lettera c, del D.lgs. 267/2000</rif>
 						; 
 						<h:br />
@@ -92,7 +104,9 @@
 						<h:br />
 						le delibere relative alle tariffe ed ai limiti di reddito per servizi locali ed i servizi a domanda individuale; 
 						<h:br />
-						la deliberazione G. M. n. 842 del 30/11/2005 con la quale sono state determinate, per l'anno 2006, le aliquote e le detrazioni dell'Imposta Comunale sugli Immobili; 
+						la 
+						<rif xlink:href="urn:nir:comune.firenze:deliberazione:2005-11-30;842" xlink:type="simple">deliberazione G.M. n. 842 del 30/11/2005</rif>
+						con la quale sono state determinate, per l'anno 2006, le aliquote e le detrazioni dell'Imposta Comunale sugli Immobili; 
 					</h:p>
 					<h:p>VISTO, altresì l'allegato piano triennale 2006-2008 degli investimenti;</h:p>
 					<h:p>
@@ -118,9 +132,7 @@
 						Comunale; 
 					</h:p>
 					<h:p>
-						PRESO ATTO che è stato richiesto il parere di tutti i Consigli di Quartiere, ai sensi dell' 
-						<rif xlink:href="urn:nir:comune.firenze:statuto:#art49" xlink:type="simple">art. 49 dello Statuto</rif>
-						e dell' art. 27 del 
+						PRESO ATTO che è stato richiesto il parere di tutti i Consigli di Quartiere, ai sensi dell' art. 49 dello Statuto e dell' art. 27 del 
 						<rif xlink:href="urn:nir:comune.firenze:regolamento;consigli.quartiere:" xlink:type="simple">Regolamento dei C.d.Q</rif>
 						.; 
 					</h:p>
@@ -145,9 +157,9 @@
 						 ; 
 					</h:p>
 				</preambolo>
+				<h:p>DELIBERA</h:p>
 			</formulainiziale>
 			<contenitore id="con1" nome="dispositivo">
-				<h:p>DELIBERA</h:p>
 				<h:p>1. DI APPROVARE il bilancio di previsione per l'esercizio 2006, parte integrante del presente provvedimento, che comprende le seguenti risultanze finali: </h:p>
 				<h:p>
 					ENTRATA 

@@ -39,22 +39,26 @@
 				<titoloDoc>Oggetto: APPROVAZIONE PROGETTO ESECUTIVO PER I LAVORI DI &quot;REALIZZAZIONE 3 PIAZZE CITTADINE -2006- PIAZZA DEL SODO Q.5&quot; </titoloDoc>
 			</intestazione>
 			<formulainiziale>
+				<h:p>LA GIUNTA</h:p>
 				<preambolo>
-					<h:p>LA GIUNTA</h:p>
 					<h:p>Premesso che:</h:p>
 					<h:p>
 						- con 
-						<rif xlink:href="urn:nir:comune.firenze;consiglio:delibera:2005-12-20;120,1025" xlink:type="simple">Deliberazione n.120/1025 del 20/12/2005</rif>
+						<rif xlink:href="urn:nir:comune.firenze;consiglio:delibera:2005-12-20;120-1025" xlink:type="simple">Deliberazione n.120/1025 del 20/12/2005</rif>
 						, esecutiva a norma di legge, Il Consiglio Comunale ha approvato il Bilancio annuale di previsione 2006 ed il Bilancio triennale 2006/2008 e relazione revisionale e programmatica; 
 					</h:p>
 					<h:p>
 						- con 
-						<rif xlink:href="urn:nir:comune.firenze;giunta:deliberazione:2006-05-30;416,296" xlink:type="simple">Deliberazione di Giunta 416/296 del 30/5/2006</rif>
+						<rif xlink:href="urn:nir:comune.firenze;giunta:deliberazione:2006-05-30;416-296" xlink:type="simple">Deliberazione di Giunta 416/296 del 30/5/2006</rif>
 						anch'essa esecutiva a norma di legge, è stato approvato il PEG 2006 ed i Responsabili delle Direzioni e dei Servizi sono stati autorizzati a compiere gli atti gestionali necessari alla realizzazione dei Programmi ad essi assegnati; 
 					</h:p>
 					<h:p>Rilevata la necessità  nell'ambito del Progetto di &quot;Riqualificazione partecipata per 3 Piazze cittadine&quot;, per cui è stato indetto concorso per la fase di progettazione con Determinazione 2005/DD/11740 ( integrata con Det. n. 2005 /DD/2122 ), approvata la graduatoria dei vincitori con Determinazione 2005/DD/09298, ed infine affidati i relativi incarichi ai gruppi progettuali con Determinazione 2005/DD/08181, esecutive a norma di legge;</h:p>
 					<h:p>Dato atto come nei programmi dell'Amministrazione Comunale sia previsto nel piano degli investimenti alla funzione 08, Servizio 01, con responsabilità  di budget e di procedura V.O. per l'anno 2006, da finanziare con alienazioni al Capitolo 60440, l'opera di Realizzazione di sistemazione 3 piazze cittadine - anno 2006- Realizzazione Piazza del Sodo - Codice Opera 060144 - C. U.P.H93D05000070024;</h:p>
-					<h:p>Vista la Deliberazione 259 /G/2006 del 16/5/06 con la quale veniva approvato in linea tecnica il Progetto per i lavori di &quot;Realizzazione 3 piazze cittadine anno 2006- Cod opera 060144- Piazza del Sodo Q.5 ;</h:p>
+					<h:p>
+						Vista la 
+						<rif xlink:href="urn:nir:comune.firenze;giunta:delibera:2006-05-16;2006-g-00259" xlink:type="simple">Deliberazione 259/G/2006 del 16/5/06</rif>
+						con la quale veniva approvato in linea tecnica il Progetto per i lavori di &quot;Realizzazione 3 piazze cittadine anno 2006- Cod opera 060144- Piazza del Sodo Q.5 ;
+					</h:p>
 					<h:p>Visto il progetto esecutivo per i lavori di &quot;Realizzazione 3 piazze cittadine anno 2006- Cod opera 060144- Piazza del Sodo Q. 5 C. U.P.H93D05000070024-&quot;, predisposto dai gruppi di progettazione esterni incaricati, comprensivo di: Quadro tecnico-economico, Cronoprogramma, Documentazione fotografica, Elaborati grafici cui alle Tavola1- Tavola2- Tavola3- Tavola4- Tavola5- Tavola6- Tavola7- Tavola8-, Tavola9- Tavola 10, Computo metrico, Relazione di Progetto, Elenco prezzi, Capitolato speciale di Appalto,Progetto Illuminotecnica della piazza, Piano di Sicurezza, Piano di Sicurezza fascicolo n.1 , Piano di Sicurezza fascicolo n.2 , per un totale complessivo di ¤. 800.000,00, secondo il seguente quadro economico:  </h:p>
 					<h:table>
 						<h:thead>
@@ -164,7 +168,7 @@
 					<h:p>Viste le deliberazioni nn. 5/933 del 11.01.2005 e 13/12 del 2005;</h:p>
 					<h:p>
 						Ritenuto di adottare in merito un provvedimento deliberativo immediatamente eseguibile, ai sensi dell' 
-						<rif xlink:href="urn:nir:stato:decreto.legislativo:2000;267#art134-com4" xlink:type="simple">art. 134 comma4 del D.lgs.267/00</rif>
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:2000;267#art134-com4" xlink:type="simple">art. 134 comma 4 del D.lgs.267/00</rif>
 						; 
 					</h:p>
 					<h:p>
@@ -173,11 +177,11 @@
 						; 
 					</h:p>
 				</preambolo>
-			</formulainiziale>
-			<contenitore id="con1" nome="">
 				<h:p>DELIBERA</h:p>
+			</formulainiziale>
+			<contenitore id="con1" nome="dispositivo">
 				<h:p>
-					1) - Di approvare il Progetto esecutivo per &quot;P.zza del Sodo&quot; nell'ambito della &quot;
+					1) - Di approvare il Progetto esecutivo per &quot;P.zza del Sodo&quot; nell'ambito della &quot; 
 					<h:i>Realizzazione e sistemazione di 3 piazze cittadine partecipate</h:i>
 					&quot; - Codice Opera 060144 - C. U.P.H93D05000070024, predisposto dai gruppi di progettazione esterni incaricati, comprensivo di: Quadro tecnico-economico, Cronoprogramma, Documentazione fotografica, Elaborati grafici cui alle Tavola1- Tavola2- Tavola3- Tavola4- Tavola5- Tavola6- Tavola7- Tavola8-, Tavola9- Tavola 10, Computo metrico, Relazione di Progetto, Elenco prezzi, Capitolato speciale di Appalto,Progetto Illuminotecnica della piazza, Piano di Sicurezza, Piano di Sicurezza fascicolo n.1 , Piano di Sicurezza fascicolo n.2 , per un totale complessivo di ¤. 800.000,00, secondo il seguente quadro economico: 
 				</h:p>

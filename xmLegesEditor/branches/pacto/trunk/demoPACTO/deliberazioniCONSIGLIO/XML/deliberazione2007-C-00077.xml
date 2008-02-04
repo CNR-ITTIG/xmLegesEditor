@@ -35,9 +35,10 @@
 				</titoloDoc>
 			</intestazione>
 			<formulainiziale>
-				<preambolo>
-					<h:p>-OMISSIS- </h:p>
+<h:p>-OMISSIS- </h:p>
 					<h:p>IL CONSIGLIO</h:p>
+				<preambolo>
+					
 					<h:p>Premesso che:</h:p>
 					<h:p>- a seguito degli accordi procedimentali e protocolli d'intesa stato-regione siglati in sede delle conferenze di servizi del 21.04.1999, 01.06.1999 e 17.06.1999 per il potenziamento e messa in sicurezza dell'autostrada A1 nel tratto Firenze Nord -Firenze Sud e opere connesse, è stato elaborato da parte della Società  Autostrade per l'Italia, in collaborazione con gli uffici del Comune di Firenze, il progetto preliminare della nuova viabilità  in località  Cascine del Riccio;</h:p>
 					<h:p>- la Direzione Nuove Infrastrutture del Comune di Firenze in seguito all'esame del progetto preliminare, verificata la correttezza dei contenuti degli elaborati progettuali, ha trasmesso, con nota del 14 marzo 2006, prot. n. 1189/37, alla Direzione Urbanistica del Comune di Firenze la richiesta di adeguamento dello strumento urbanistico;</h:p>
@@ -50,7 +51,7 @@
 					</h:p>
 					<h:p>
 						- la citata 
-						<rif xlink:href="urn:nir:comune.firenze;giunta:deliberazione:2006-04-26;212,297" xlink:type="simple">deliberazione n. 212/297</rif>
+						<rif xlink:href="urn:nir:comune.firenze;giunta:deliberazione:2006-04-26;212-297" xlink:type="simple">deliberazione n. 212/297</rif>
 						e gli elaborati grafici e descrittivi ad essa allegati, sono stati inviati, ai sensi e per gli effetti dell' 
 						<rif xlink:href="urn:nir:regione.toscana:legge:2005;1#art15" xlink:type="simple">art.15 della LR 1/2005</rif>
 						, alla Regione e alla Provincia; 
@@ -123,7 +124,7 @@
 					<h:p>Dato atto altresì che:</h:p>
 					<h:p>
 						- il Comune di Firenze, con 
-						<rif xlink:href="urn:nir:comune.firenze;consiglio:delibera:2004-04-20;59,39" xlink:type="simple">deliberazione consiliare n. 59/39 del 20.4.2004</rif>
+						<rif xlink:href="urn:nir:comune.firenze;consiglio:delibera:2004-04-20;59-39" xlink:type="simple">deliberazione consiliare n. 59/39 del 20.4.2004</rif>
 						, ha adottato il Piano Strutturale di cui all' 
 						<rif xlink:href="urn:nir:regione.toscana:legge:2005-01-03;1#art9" xlink:type="simple">art. 9 della legge regionale n. 1 del 3.1.2005</rif>
 						e non è dotato del Regolamento Urbanistico di cui all' art. 10 della legge stessa; 
@@ -165,9 +166,10 @@
 						; 
 					</h:p>
 				</preambolo>
+<h:p>DELIBERA</h:p>
 			</formulainiziale>
 			<contenitore id="con1" nome="dispositivo">
-				<h:p>DELIBERA</h:p>
+				
 				<h:p>
 					1) di adottare per tutti i motivi espressi in narrativa - ai sensi dell' 
 					<rif xlink:href="urn:nir:regione.toscana:legge:2005-01-03;1#art17" xlink:type="simple">art. 17 della legge regionale n. 1 del 3.1.2005</rif>

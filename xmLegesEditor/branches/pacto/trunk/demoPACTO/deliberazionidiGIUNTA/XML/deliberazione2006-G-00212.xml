@@ -41,8 +41,9 @@
 				</titoloDoc>
 			</intestazione>
 			<formulainiziale>
+<h:p>LA GIUNTA</h:p>
 				<preambolo>
-					<h:p>LA GIUNTA</h:p>
+					
 					<h:p>Premesso che: </h:p>
 					<h:p>- nell'ambito dell'ampliamento della terza corsia dell'Autostrada A1 Milano-Napoli da Barberino di Mugello a Incisa Valdarno, tratto Firenze Nord - Firenze Sud (tratta C),èstato predisposto il ripristino ambientale della ex cava di Monteripaldi al fine di allocarvi a deposito il materiale inerte proveniente dagli esuberi degli scavi attinenti la realizzazione dell'ampliamento dell'asse autostradale;</h:p>
 					<h:p>- nell'ambito dell'ampliamento della terza corsia dell'Autostrada A1 Milano-Napoli da Barberino di Mugello a Incisa Valdarno, tratto Firenze Nord - Firenze Sud (tratta C),èstato predisposto il ripristino ambientale della ex cava di Monteripaldi al fine di allocarvi a deposito il materiale inerte proveniente dagli esuberi degli scavi attinenti la realizzazione dell'ampliamento dell'asse autostradale;</h:p>
@@ -77,7 +78,7 @@
 					<h:p>b) quanto al quadro conoscitivo, allo stato delle risorse e alle ulteriori ricerche da svolgere la variante urbanistica: - non comporta alcun decremento della dotazione complessiva degli standard di cui al D.M. 2.4.1968 n.1444 ;</h:p>
 					<h:p>
 						- E' coerente con gli obiettivi del Piano Strutturale, approvato dal Comune di Firenze con 
-						<rif xlink:href="urn:nir:comune.firenze;consiglio:delibera:2004-04-20;59,39" xlink:type="simple">deliberazione consiliare n. 59/39 del 20.4.2004</rif>
+						<rif xlink:href="urn:nir:comune.firenze;consiglio:delibera:2004-04-20;59-39" xlink:type="simple">deliberazione consiliare n. 59/39 del 20.4.2004</rif>
 						, dove l'area oggetto di interventoèindividuata nella Tav.11- Unità  
 					</h:p>
 					<h:p>territoriali omogenee elementari- degli elaborati di progetto del Tomo III, all'interno dell'UTOE n.14 Collina Sud; inoltre nella Tav.4- Sistema della mobilità - degli elaborati di progetto, l'areaèidentificata nel Sub-sistema della mobilità  su strada, come viabilità  da potenziare;</h:p>
@@ -123,9 +124,10 @@
 						; 
 					</h:p>
 				</preambolo>
+<h:p>DELIBERA</h:p>
 			</formulainiziale>
 			<contenitore id="con1" nome="dispositivo">
-				<h:p>DELIBERA</h:p>
+				
 				<h:p>
 					1. di avviare - ai sensi dell' 
 					<rif xlink:href="urn:nir:regione.toscana:legge:2005-01-03;1#art15" xlink:type="simple">art. 15 della legge regionale n. 1 del 3.1.2005</rif>

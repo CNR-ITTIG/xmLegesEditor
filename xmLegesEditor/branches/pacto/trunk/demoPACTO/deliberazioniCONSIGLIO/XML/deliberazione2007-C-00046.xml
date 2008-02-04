@@ -31,20 +31,16 @@
 				<titoloDoc>Oggetto: Consorzio Società della Salute di Firenze - Approvazione Bilancio di esercizio 2006 e Bilancio preventivo 2007. </titoloDoc>
 			</intestazione>
 			<formulainiziale>
+				<h:p>- OMISSIS - </h:p>
+				<h:p>I L C O N S I G L I O</h:p>
 				<preambolo>
-					<h:p>- OMISSIS - </h:p>
-					<h:p>I L C O N S I G L I O</h:p>
 					<h:p>Premesso che:</h:p>
 					<h:p>
 						- con 
-						<rif xlink:href="urn:nir:comune.firenze;consiglio:deliberazione:2003-11-17;919,121" xlink:type="simple">deliberazioni Consiglio Comunale n. 919/121 del 17 novembre 2003</rif>
+						<rif xlink:href="urn:nir:comune.firenze;consiglio:deliberazione:2003-11-17;919-121" xlink:type="simple">deliberazioni Consiglio Comunale n. 919/121 del 17 novembre 2003</rif>
 						e del Direttore Generale dell'Azienda Sanitaria di Firenze n. 814 del 28/11/03 sono stati approvati la Convenzione costitutiva e lo Statuto del Consorzio pubblico tra Comune di Firenze e Azienda Sanitaria di Firenze denominato &quot;Società della Salute di Firenze&quot;; 
 					</h:p>
-					<h:p>
-						- a seguito della stipula, in data 26/07/04, della Convenzione costitutiva da parte degli enti consorziati con propria 
-						<rif xlink:href="urn:nir:comune.firenze;consiglio:deliberazione:2004-07-30;1" xlink:type="simple">deliberazione n. 1 del 30/07/04</rif>
-						si è insediata la Giunta Consortile e sono stati nominati i componenti dell'Esecutivo; 
-					</h:p>
+					<h:p>- a seguito della stipula, in data 26/07/04, della Convenzione costitutiva da parte degli enti consorziati con propria deliberazione n. 1 del 30/07/04 si è insediata la Giunta Consortile e sono stati nominati i componenti dell'Esecutivo; </h:p>
 					<h:p>- con la sottoscrizione della convenzione costitutiva, la SdS è subentrata agli enti consorziati nelle funzioni di indirizzo, programmazione e governo delle attività socio assistenziali, socio sanitarie, sanitarie territoriali e specialistiche di base di rispettiva competenza nel territorio corrispondente alla zona-distretto di Firenze;</h:p>
 					<h:p>
 						- con 
@@ -52,13 +48,7 @@
 						e del Direttore Generale dell'Azienda Sanitaria di Firenze n. 542 del 19.7.2006 è stata prorogata, fino al 31.12.2007, l'attività sperimentale del Consorzio ed è stata altresì disposta la proroga parziale dell'Accordo di Programma Comune/Azienda Sanitaria di Firenze sottoscritto in data 29.12.2000; 
 					</h:p>
 					<h:p>- in data 25 luglio 2006 sono state sottoscritte, da parte degli enti consorziati, le modifiche ed integrazioni alla Convenzione costitutiva, approvate con i sopra citati atti del Consiglio Comunale e dall'Azienda Sanitaria;</h:p>
-					<h:p>
-						- a seguito della riconferma dei suoi componenti, con propria 
-						<rif xlink:href="urn:nir:comune.firenze;consiglio:delibera:2006-07-26;6" xlink:type="simple">deliberazione n. 6 del 26.7.2006</rif>
-						si è insediata la Giunta Consortile e con 
-						<rif xlink:href="urn:nir:comune.firenze;consiglio:delibera:2007-07-26;7" xlink:type="simple">deliberazione n. 7 del 26.7.2007</rif>
-						sono stati nominati i componenti dell'Esecutivo; 
-					</h:p>
+					<h:p>- a seguito della riconferma dei suoi componenti, con propria deliberazione n. 6 del 26.7.2006 si è insediata la Giunta Consortile e con deliberazione n. 7 del 26.7.2007 sono stati nominati i componenti dell'Esecutivo; </h:p>
 					<h:p>Visti:</h:p>
 					<h:p>
 						- l'art. 8 della sopra citata Convenzione, richiamato dall' 
@@ -98,9 +88,9 @@
 						; 
 					</h:p>
 				</preambolo>
+				<h:p>D E L I B E R A</h:p>
 			</formulainiziale>
 			<contenitore id="con1" nome="dispositivo">
-				<h:p>D E L I B E R A</h:p>
 				<h:p>1) di approvare lo schema di Bilancio di esercizio 2006, nonché lo schema di Bilancio preventivo 2007 del Consorzio Società della Salute di Firenze con i relativi allegati, redatti secondo i criteri previsti per le aziende speciali, tutti facenti parte integrante e sostanziale del presente atto (All. A, B, C, D, E, F); </h:p>
 				<h:p>2) di dare atto che la Direzione Sicurezza Sociale provvederà ad adottare gli atti gestionali conseguenti all'approvazione del presente atto; </h:p>
 				<h:p>3) di partecipare copia del presente atto al Consorzio Società della Salute di Firenze, all'Azienda Sanitaria di Firenze e alla Regione Toscana.</h:p>

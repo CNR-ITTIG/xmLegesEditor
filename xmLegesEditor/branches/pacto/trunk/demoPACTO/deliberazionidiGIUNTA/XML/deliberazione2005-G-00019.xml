@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="windows-1252"?>
 	<!DOCTYPE NIR SYSTEM 'nirflessibile.dtd'>
 	<NIR tipo="originale" xmlns="http://www.normeinrete.it/nir/2.2/" xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
-		<DocumentoNIR nome="Delibera">
+		<DocumentoNIR nome="">
 			<meta>
 				<descrittori>
 					<pubblicazione norm="20050125" num="" tipo="" />
@@ -38,11 +38,13 @@
 				<titoloDoc>Oggetto: Denominazione giardino: Giardino del Gratta</titoloDoc>
 			</intestazione>
 			<formulainiziale>
+<h:p>La Giunta</h:p>
 				<preambolo>
-					<h:p>La Giunta</h:p>
+					
 					<h:p>
-						Visto il Regolamento per la Toponomastica approvato con 
-						<rif xlink:href="urn:nir:comune.firenze:deliberazione:2003-03-10;135,24#art15" xlink:type="simple">deliberazione del Consiglio Comunale n. 135/24 del 10 marzo 2003 , art. 15</rif>
+						Visto il
+ <rif xlink:href="urn:nir:comune.firenze;consiglio:delibera:2003-03-05;00024:allegato;regolamento.toponomastica" xlink:type="simple">Regolamento per la Toponomastica</rif> approvato con 
+						<rif xlink:href="urn:nir:comune.firenze:deliberazione:2003-03-10;135-24#art15" xlink:type="simple">deliberazione del Consiglio Comunale n. 135/24 del 10 marzo 2003 , art. 15</rif>
 						; 
 					</h:p>
 					<h:p>Considerato la necessità di identificare il giardino pubblico situato fra Via Michelangiolo Buonarroti, Piazza dei Ciompi e Borgo Allegri;</h:p>
@@ -56,9 +58,10 @@
 					<h:p>Preso atto del parere favorevole relativo alla regolarità tecnica del provvedimento ai sensi e per gli effetti dell' art. 49 del T.U. E. L. ;</h:p>
 					<h:p>Ritenuto per l'urgenza di provvedere in merito e di dichiarare il presente provvedimento immediatamente esecutivo; </h:p>
 				</preambolo>
+<h:p>DELIBERA</h:p>
 			</formulainiziale>
 			<contenitore id="con1" nome="dispositivo">
-				<h:p>DELIBERA</h:p>
+				
 				<contenitore id="con2" nome="dispositivo">
 					<h:p>1) di assegnare la seguente denominazione, nella dizione indicata, al giardino pubblico descritto di seguito e riportato nella planimetria allegata, che forma parte integrante della presente deliberazione: </h:p>
 					<h:p>GIARDINO DEL GRATTA: l'area situata fra Via Michelangiolo Buonarroti, Piazza dei Ciompi e Borgo Allegri; </h:p>

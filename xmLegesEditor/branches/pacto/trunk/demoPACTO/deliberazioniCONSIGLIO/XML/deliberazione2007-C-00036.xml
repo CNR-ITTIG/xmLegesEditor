@@ -42,8 +42,8 @@
 				</titoloDoc>
 			</intestazione>
 			<formulainiziale>
+				<h:p>I L C O N S I G L I O</h:p>
 				<preambolo>
-					<h:p>I L C O N S I G L I O</h:p>
 					<h:p>Premesso che:</h:p>
 					<h:p>
 						con 
@@ -69,10 +69,10 @@
 						, il Consiglio Comunale adottava la relativa variante urbanistica tenendo conto dei contributi di cui al precedente punto; 
 					</h:p>
 					<h:p>
-						il Consiglio di Quartiere 3 esprimeva con deliberazione 30033/06 del 6/11/2006, ai sensi dell’ 
-						<rif xlink:href="urn:nir:regione.toscana:statuto:#art49" xlink:type="simple">art. 49 dello Statuto</rif>
-						e dell’art. 27 del 
-						<rif xlink:href="urn:nir:comune.firenze:regolamento;consigli.quartiere:2002-06-10;366" xlink:type="simple">Regolamento dei consigli di quartiere</rif>
+						il Consiglio di Quartiere 3 esprimeva con deliberazione 30033/06 del 6/11/2006 , ai sensi dell’ 
+						<rif xlink:href="urn:nir:comune.firenze:statuto:#art49" xlink:type="simple">art. 49 dello Statuto</rif>
+						e dell’ 
+						<rif xlink:href="urn:nir:comune.firenze:regolamento;consigli.quartiere:2002-06-10;366#art27" xlink:type="simple">art. 27 del Regolamento dei consigli di quartiere</rif>
 						, parere favorevole con osservazioni; 
 					</h:p>
 					<h:p>nella seduta del 13 novembre 2007 la Terza Commissione Consiliare si è espressa sulla deliberazione del consiglio di Quartiere con propria mozione, individuando alcuni indirizzi da tenere presenti e valutare nel corso della procedura di approvazione della variante in oggetto;</h:p>
@@ -112,8 +112,16 @@
 					<h:p>- per quanto riguarda i pareri espressi dagli enti territoriali in materia di rischio idraulico (URTAT e Provincia di Firenze), si prende atto che sono favorevoli alla variante in oggetto ponendo la seguente condizione: “qualora emerga che il recupero dei volumi sottratti alla laminazione non sia, sulla base di un ragionevole rapporto costi/benefici, effettivamente perseguibile nella stessa area, contestualmente sarà</h:p>
 					<h:p>necessario che il Comune di Firenze (rappresentato all’interno del gruppo di progettazione che sta curando, sotto la responsabilità di procedimento del Consorzio di Bonifica delle Colline del Chianti, lo studio idraulico di area vasta dell’Ema) tenga in considerazione quanto riportato dall’Autorità di Bacino dell’Arno (Prot. 6037 del 20 Giugno 2005) in merito al ‘reperimento in altra sede all’interno dei bacini interessati’ dei volumi sottratti alla laminazione delle piene”;</h:p>
 					<h:p>il tutto come meglio specificato nelle Controdeduzioni alle osservazioni sopra citate;</h:p>
-					<h:p>Dato atto che il Garante della Comunicazione, nominato con D.D n. 9824 del 31.10.05, ha redatto in data 25/5/2007, prot. n. 29258/07, il rapporto sull’attività svolta ai sensi dell’art. 20 della più volte citata L.R. n. 1/2005, allegato al presente atto quale sua parte integrante e sostanziale.</h:p>
-					<h:p>Tutto quanto sopra premesso, e valutato che ai sensi di quanto disposto dal comma 4 del più volte citato art. 17 della L.R. 1/2005 decorsi i termini di cui ai commi 2 e 3, la variante come sopra adottata è suscettibile di diretta, definitiva approvazione da parte di questo Consiglio Comunale;</h:p>
+					<h:p>
+						Dato atto che il Garante della Comunicazione, nominato con D.D n. 9824 del 31.10.05, ha redatto in data 25/5/2007, prot. n. 29258/07, il rapporto sull’attività svolta ai sensi dell’art. 20 della più volte citata 
+						<rif xlink:href="urn:nir:regione.toscana:legge:2005;1" xlink:type="simple">L.R. n. 1/2005</rif>
+						, allegato al presente atto quale sua parte integrante e sostanziale. 
+					</h:p>
+					<h:p>
+						Tutto quanto sopra premesso, e valutato che ai sensi di quanto disposto dal comma 4 del più volte citato 
+						<rif xlink:href="urn:nir:regione.toscana:legge:2005;1#art17" xlink:type="simple">art. 17 della L.R. 1/2005</rif>
+						decorsi i termini di cui ai commi 2 e 3, la variante come sopra adottata è suscettibile di diretta, definitiva approvazione da parte di questo Consiglio Comunale; 
+					</h:p>
 					<h:p>
 						Visto l’ 
 						<rif xlink:href="urn:nir:stato:decreto.legislativo:2000-08-18;267#art49" xlink:type="simple">art. 49 del D.Lgs. 18.8.2000 n. 267</rif>
@@ -134,9 +142,9 @@
 						; 
 					</h:p>
 				</preambolo>
+				<h:p>DELIBERA</h:p>
 			</formulainiziale>
 			<contenitore id="con1" nome="dispositivo">
-				<h:p>DELIBERA</h:p>
 				<h:p>Per tutti i motivi espressi in narrativa: </h:p>
 				<h:p>
 					1. di approvare - ai sensi dell’ 
@@ -161,9 +169,7 @@
 				<h:p>
 					3. di dare atto, come dichiarato nel certificato del RUP redatto ai sensi dell’ 
 					<rif xlink:href="urn:nir:regione.toscana:legge:1995;1#art16" xlink:type="simple">art. 16 della LR 1/95</rif>
-					, prot. n. 29800/07/07 del 29/05/2007, che a seguito della deposito è pervenuta nei termini di 
-					<rif xlink:href="urn:nir:stato:legge:2007-04-27" xlink:type="simple">legge, in data 27 aprile 2007</rif>
-					, una sola osservazione da parte della Società Ricreativa Culturale “La Rinascente”, n. prot. 23610/07 del 30/04/2007 composta da più punti; 
+					, prot. n. 29800/07/07 del 29/05/2007, che a seguito della deposito è pervenuta nei termini di legge, in data 27 aprile 2007 , una sola osservazione da parte della Società Ricreativa Culturale “La Rinascente”, n. prot. 23610/07 del 30/04/2007 composta da più punti; 
 				</h:p>
 				<h:p>4. di dare atto, inoltre, che: </h:p>
 				<h:p>a. in data 6 novembre 2006 il Consiglio di Quartiere 3, ha espresso parere favorevole con osservazioni; </h:p>
