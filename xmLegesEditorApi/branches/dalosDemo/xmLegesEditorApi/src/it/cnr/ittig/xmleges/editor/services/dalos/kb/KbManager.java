@@ -24,6 +24,9 @@ import java.util.Collection;
  * @author <a href="mailto:l.bacci@ittig.cnr.it">Lorenzo Bacci</a>
  */
 public interface KbManager extends Service {
+	
+	
+
 
 	/**
 	 * 
@@ -92,4 +95,8 @@ public interface KbManager extends Service {
 	 * @return
 	 */
 	public boolean setTreeSelection(Synset syn);
+	
+	
+	public boolean isLangSupported(String lang);
+	
 }

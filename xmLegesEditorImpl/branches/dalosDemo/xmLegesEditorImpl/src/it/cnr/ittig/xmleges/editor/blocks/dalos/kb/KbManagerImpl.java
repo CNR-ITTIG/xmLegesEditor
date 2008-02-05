@@ -12,6 +12,7 @@ import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.SynsetTree;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -54,32 +55,44 @@ implements KbManager, Loggable, Serviceable, Initializable {
 	
 	private void copyDalosInTemp(){
 		
-		//  COMMON FILES
+		//   COMMON FILES  //////////////////////
 		String[] commonFiles = new String[] { 		
 				"common/concepts.owl", "common/consumer-law.owl","common/consumer-law-merge.owl","common/language-properties-full.owl","common/metasources.owl", 
 				"common/owns.owl", "common/owns-full.owl"
 	    };
 		
-		//  IT
+		for (int i = 0; i < commonFiles.length; i++) {
+			UtilFile.copyFileInTempDir(getClass().getResourceAsStream(commonFiles[i]),"dalos", commonFiles[i]);
+		}	
+		/////////////////////////////////////////
+		
+		
+		
+		//   IT   ///////////////////////////////
 		String[] it = new String[]{"IT/individuals.owl", "IT/individuals-word.owl", "IT/ind-to-consumer.owl", "IT/sources.owl",
 				"IT/types.owl"};
 		
-		//	EN
-		String[] en = new String[]{"EN/individuals.owl", "EN/individuals-word.owl", "EN/ind-to-consumer.owl", "EN/sources.owl",
-				"EN/types.owl"};
-		
-		
-		for (int i = 0; i < commonFiles.length; i++) {
-			UtilFile.copyFileInTempDir(getClass().getResourceAsStream(commonFiles[i]),"dalos", commonFiles[i]);
-		}		
-		
 		for (int i = 0; i < it.length; i++) {
 			UtilFile.copyFileInTempDir(getClass().getResourceAsStream(it[i]), "dalos/IT", it[i]);
-		}					
+		}
+				
+		UtilFile.copyDirectoryInTemp(getClass().getResource("IT/segment/lexical").getFile(),"dalos/IT/segment/lexical");
+		
+		/////////////////////////////////////////
+		
+				
+		
+		//	  EN   ///////////////////////////////
+		String[] en = new String[]{"EN/individuals.owl", "EN/individuals-word.owl", "EN/ind-to-consumer.owl", "EN/sources.owl",
+				"EN/types.owl"};
 		
 		for (int i = 0; i < en.length; i++) {
 			UtilFile.copyFileInTempDir(getClass().getResourceAsStream(en[i]), "dalos/EN", en[i]);
 		}	
+		
+		UtilFile.copyDirectoryInTemp(getClass().getResource("EN/segment/lexical").getFile(),"dalos/EN/segment/lexical");
+		
+		/////////////////////////////////////////		
 	}
 	
 	public void initialize() throws Exception {	
@@ -95,8 +108,7 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		}		
 	}
 
-	public void addLanguage(String lang) {
-		
+	public void addLanguage(String lang) {	
 		langToContainer.put(lang, new KbContainer(lang, i18n));
 	}
 
@@ -216,6 +228,18 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		}
 
 		return kbc;
+	}
+	
+	
+	public boolean isLangSupported(String lang){
+		KbContainer kbc = (KbContainer) langToContainer.get(lang.toUpperCase());
+		if(kbc == null) {
+			System.out.println(">> ADDING LANGUAGE SUPPORT FOR: " + lang);
+			addLanguage(lang.toUpperCase());
+		}
+		kbc = (KbContainer) langToContainer.get(lang.toUpperCase());
+		return kbc != null;
+		
 	}
 
 
