@@ -93,6 +93,27 @@ public class UtilFile {
 		return tempDir;
 	}
 
+	
+	/**
+	 * Copia il file <code>source</code> in <code>dest</code>.
+	 * 
+	 * @param source file da copiare
+	 * @param dest destinazione
+	 * @return <code>true</code> se la copia &egrave; terminata con successo
+	 */
+	public static boolean copyFile(File source, File dest) {
+		try {
+			FileInputStream fis = new FileInputStream(source);
+			copyFile(fis, dest);
+			fis.close();
+		} catch (Exception ex) {
+			return false;
+		}
+		return true;
+	}
+
+	
+	
 	/**
 	 * Copia il file <code>source</code> in <code>dest</code>.
 	 * 
@@ -486,6 +507,86 @@ public class UtilFile {
 		} catch (Exception ex) {
 			return false;
 		}
+	}
+	
+	
+	/**
+	 * Copy a directory and all of its contents in temp
+	 * 
+	 * @param from
+	 * @param to
+	 * @return
+	 */
+	public static boolean copyDirectoryInTemp(String from, String to) {
+		to = tempDir + File.separatorChar +to;	
+		return copyDirectory(new File(from), new File(to));
+	}
+	
+	/**
+	 * Copy a directory and all of its contents.
+	 *         
+	 * @param from
+	 * @param to
+	 * @return
+	 */
+	public static boolean copyDirectory(File from, File to) {
+		return copyDirectory(from, to, (String[]) null);
+	}
+
+	/**
+	 * Copy a directory and all of its contents.
+	 * 
+	 * @param from
+	 * @param to
+	 * @param filter - array of names not to copy.
+	 * @return
+	 */
+	public static boolean copyDirectory(File from, File to, String[] filter) {
+		
+		
+		if (from == null)
+			return false;
+		if (!from.exists())
+			return true;
+		if (!from.isDirectory())
+			return false;
+
+		if (to.exists()) {
+			return false;
+		}
+		if (!to.mkdirs()) {
+			return false;
+		}
+
+		String[] list = from.list();
+
+		// Some JVMs return null for File.list() when the
+		// directory is empty.
+		if (list != null) {
+			
+			nextFile: for (int i = 0; i < list.length; i++) {
+
+				String fileName = list[i];
+
+				if (filter != null) {
+					for (int j = 0; j < filter.length; j++) {
+						if (fileName.equals(filter[j]))
+							continue nextFile;
+					}
+				}
+
+				File entry = new File(from, fileName);
+				
+				if (entry.isDirectory()) {
+					if (!copyDirectory(entry, new File(to, fileName), filter))
+						return false;
+				} else {
+					if (!copyFile(entry, new File(to, fileName)))
+						return false;
+				}
+			}
+		}
+		return true;
 	}
 	
 	
