@@ -6,9 +6,11 @@ import it.cnr.ittig.services.manager.Logger;
 import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
+import it.cnr.ittig.services.manager.Startable;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
+import it.cnr.ittig.xmleges.core.services.preference.PreferenceManager;
 import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
 import it.cnr.ittig.xmleges.editor.services.dalos.util.LangChangedEvent;
 import it.cnr.ittig.xmleges.editor.services.dalos.util.LangPanel;
@@ -18,6 +20,7 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.EventObject;
+import java.util.Properties;
 
 import javax.swing.AbstractAction;
 import javax.swing.JComboBox;
@@ -35,8 +38,9 @@ import javax.swing.ListCellRenderer;
  * </ul>
  */
 
-public class UtilDalosImpl implements UtilDalos, EventManagerListener, Loggable, Serviceable, Initializable {
+public class UtilDalosImpl implements UtilDalos, EventManagerListener, Loggable, Serviceable, Initializable, Startable {
 	
+
 	Logger logger;
 	
 	I18n i18n;
@@ -45,10 +49,14 @@ public class UtilDalosImpl implements UtilDalos, EventManagerListener, Loggable,
 	
 	KbManager kbManager;
 	
-	//Synset selectedSynset = null;
-		
+	PreferenceManager preferenceManager;
+
 	AbstractAction[]  toLangActions;
 	
+	String globalLang = UtilDalos.IT; 	// DEFAULT LANG
+	
+	Properties prefs = null;
+		
 	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -59,15 +67,48 @@ public class UtilDalosImpl implements UtilDalos, EventManagerListener, Loggable,
 	public void service(ServiceManager serviceManager) throws ServiceException {
 		i18n = (I18n) serviceManager.lookup(I18n.class);
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
+		preferenceManager = (PreferenceManager) serviceManager.lookup(PreferenceManager.class);
 		kbManager = (KbManager) serviceManager.lookup(KbManager.class);
 	}
 	
 	
-	public void initialize() throws Exception {	
-
-		toLangActions = new AbstractAction[] { new toLangAction("it",0), new toLangAction("en",1),new toLangAction("nl",2),new toLangAction("es",3)};	
+	public void initialize() throws Exception {			
+		toLangActions = new AbstractAction[] { new toLangAction(UtilDalos.IT,0), new toLangAction(UtilDalos.EN,1),new toLangAction(UtilDalos.NL,2),new toLangAction(UtilDalos.ES,3)};	
+		eventManager.addListener(this, LangChangedEvent.class);
 	}
 	
+	
+	public void start() throws Exception {
+		prefs = preferenceManager.getPreferenceAsProperties(getClass().getName());
+		String s = prefs.getProperty("lang");
+		if(s!=null)
+			setGlobalLang(s);
+	}
+
+	
+	public void stop() throws Exception {
+		prefs.put("lang", globalLang);
+		preferenceManager.setPreference(getClass().getName(), prefs);
+	}
+	
+	
+	public void manageEvent(EventObject event) {
+		if(event instanceof LangChangedEvent){
+			if(((LangChangedEvent)event).getIsGlobalLang()){
+				setGlobalLang(((LangChangedEvent)event).getGlobalLang());
+			}
+		}	
+	}
+	
+	
+	public String getGlobalLang(){
+		return this.globalLang;
+	}
+	
+	
+	private void setGlobalLang(String lang){
+		this.globalLang = lang;
+	}
 	
 	public class toLangAction extends AbstractAction {	
 		
@@ -78,12 +119,10 @@ public class UtilDalosImpl implements UtilDalos, EventManagerListener, Loggable,
 		public toLangAction(String lang, int index){
 			this.lang = lang;
 			this.index = index;
-			this.iconKey = "editor.dalos.action.tolanguage."+lang+".icon";
+			this.iconKey = "editor.dalos.action.tolanguage."+lang.toLowerCase()+".icon";
 		}
 
 		public void actionPerformed(ActionEvent e) {
-
-			// FIXME abilitarla solo su Synset != null ?
 			eventManager.fireEvent(new LangChangedEvent(this, false, null, index));
 		}
 		
@@ -104,9 +143,6 @@ public class UtilDalosImpl implements UtilDalos, EventManagerListener, Loggable,
 		
 	public LangPanel getLanguageSwitchPanel(){
 		LangPanel lp = new LangPanel(new ComboBoxRenderer(),toLangActions,new toLangComboActionListener());
-		
-		// FIXME la bandierina from andrebbe presa dalle preference (chosen master language)
-		lp.setFromIcon(i18n.getIconFor("editor.dalos.action.tolanguage.en.icon"));
 		lp.setArrowIcon(i18n.getIconFor("editor.dalos.action.tolanguage.to.icon"));
 	    return lp;
 	}
@@ -143,9 +179,6 @@ public class UtilDalosImpl implements UtilDalos, EventManagerListener, Loggable,
 		}		
 	}
 	
-
-	public void manageEvent(EventObject event) {
-	}	
 }
 
 

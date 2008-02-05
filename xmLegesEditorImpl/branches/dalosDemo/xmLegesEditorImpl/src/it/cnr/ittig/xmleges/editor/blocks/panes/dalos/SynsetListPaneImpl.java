@@ -11,6 +11,7 @@ import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dalos.action.SynsetMarkupAction;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
+import it.cnr.ittig.xmleges.editor.services.dalos.util.LangChangedEvent;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetListPane;
 
 import java.awt.BorderLayout;
@@ -52,6 +53,8 @@ implements EventManagerListener, Loggable, Serviceable,
 	SynsetMarkupAction synsetMarkupAction;
 	FindAction findAction = new FindAction();
 	String[] searchTypes={"Contains", "Starts with","Ends with","Matches"};
+	
+	Collection synsets;
 			
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
@@ -63,6 +66,8 @@ implements EventManagerListener, Loggable, Serviceable,
 
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws Exception {
+		
+		eventManager.addListener(this, LangChangedEvent.class);
 		
 		tabbedPaneName = "editor.panes.dalos.synsetlist";
 		
@@ -89,7 +94,7 @@ implements EventManagerListener, Loggable, Serviceable,
 
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
-        Collection synsets = kbManager.getSynsets("IT");
+        synsets = kbManager.getSynsets(utilDalos.getGlobalLang());
         
         //Usa un cell renderer per i lemmi
         LemmaListCellRenderer renderer = new LemmaListCellRenderer();
@@ -108,6 +113,14 @@ implements EventManagerListener, Loggable, Serviceable,
 	public void manageEvent(EventObject event) {
 
 		super.manageEvent(event);
+		
+		if(event instanceof LangChangedEvent){
+			if(((LangChangedEvent)event).getIsGlobalLang()) {
+				String lang = ((LangChangedEvent)event).getGlobalLang();
+				synsets = kbManager.getSynsets(lang);
+				list.setListData(synsets.toArray());
+			}
+		}
 		
 		//Selezione del termine sull'editor XML...
 		//Da rivedere?  -- Non deve stare qui...

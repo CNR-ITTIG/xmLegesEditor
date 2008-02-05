@@ -12,8 +12,11 @@ import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.frame.Frame;
 import it.cnr.ittig.xmleges.core.services.preference.PreferenceManager;
+import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.editor.services.action.dalos.DalosMenuAction;
+import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
 import it.cnr.ittig.xmleges.editor.services.dalos.util.LangChangedEvent;
+import it.cnr.ittig.xmleges.editor.services.dalos.util.UtilDalos;
 
 import java.awt.event.ActionEvent;
 import java.util.Enumeration;
@@ -75,6 +78,12 @@ public class DalosMenuActionImpl implements DalosMenuAction, Loggable, Serviceab
 	
 	PreferenceManager preferenceManager;
 	
+	KbManager kbManager;
+	
+	UtilDalos utilDalos;
+	
+	UtilMsg utilMsg;
+	
 	boolean isDalosShown = false;
 	
 
@@ -88,7 +97,10 @@ public class DalosMenuActionImpl implements DalosMenuAction, Loggable, Serviceab
 		actionManager = (ActionManager) serviceManager.lookup(ActionManager.class);
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 		frame = (Frame) serviceManager.lookup(Frame.class);
+		kbManager = (KbManager) serviceManager.lookup(KbManager.class);
 		bars = (Bars) serviceManager.lookup(Bars.class);
+		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
+		utilDalos = (UtilDalos) serviceManager.lookup(UtilDalos.class);
 		preferenceManager = (PreferenceManager) serviceManager.lookup(PreferenceManager.class);
 	}
 
@@ -105,9 +117,6 @@ public class DalosMenuActionImpl implements DalosMenuAction, Loggable, Serviceab
 	public void manageEvent(EventObject event) {
 	}
 
-	protected void enableActions(Node n) {
-		showViewAction.setEnabled(true);
-	}
 	
 
 	public class ShowViewAction extends AbstractAction {
@@ -211,7 +220,13 @@ public class DalosMenuActionImpl implements DalosMenuAction, Loggable, Serviceab
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			eventManager.fireEvent(new LangChangedEvent(this, true, lang, 0));
+			
+			if(utilMsg.msgWarning("editor.dalos.switchlang.msg")){
+				if(kbManager.isLangSupported(lang))
+					eventManager.fireEvent(new LangChangedEvent(this, true, lang, 0));
+				else 
+				   utilMsg.msgError("editor.dalos.switchlang.unsupportedlang");
+			}
 		}
 	}
 

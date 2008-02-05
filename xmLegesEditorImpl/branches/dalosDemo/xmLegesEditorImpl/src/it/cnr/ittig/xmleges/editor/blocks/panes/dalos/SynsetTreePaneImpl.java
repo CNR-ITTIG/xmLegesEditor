@@ -30,9 +30,16 @@ implements EventManagerListener, Loggable, Serviceable,
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws Exception {
 		
-		tabbedPaneName = "editor.panes.dalos.synsettree";
+		eventManager.addListener(this, LangChangedEvent.class);
 		
-		tree = kbManager.getTree("IT");		
+		tabbedPaneName = "editor.panes.dalos.synsettree";
+		showTree(utilDalos.getGlobalLang());
+		super.initialize();
+	}
+	
+
+	private void showTree(String lang){
+		tree = kbManager.getTree(lang);
 		tree.setShowsRootHandles(false);
 		tree.putClientProperty("JTree.lineStyle", "None");
 		tree.addMouseListener(new SynsetTreePaneMouseAdapter());
@@ -50,8 +57,6 @@ implements EventManagerListener, Loggable, Serviceable,
 				
 		tree.setOpaque(false);
 		iPanel.setOpaque(true);
-
-		super.initialize();
 	}
 	
 	// ////////////////////////////////////////// EventManagerListener Interface
@@ -61,9 +66,14 @@ implements EventManagerListener, Loggable, Serviceable,
 		
 		if(event instanceof LangChangedEvent){
 			if(((LangChangedEvent)event).getIsGlobalLang()) {
-				
-				String lang = ((LangChangedEvent)event).getGlobalLang();
-				tree = kbManager.getTree(lang);
+				String lang = ((LangChangedEvent)event).getGlobalLang();			
+				// BACCI! un  modo migliore per fare refresh dell'albero
+				showTree(lang);
+				try{
+					super.initialize();
+				}catch(Exception e){
+					e.printStackTrace();
+				}
 			}
 		}
 

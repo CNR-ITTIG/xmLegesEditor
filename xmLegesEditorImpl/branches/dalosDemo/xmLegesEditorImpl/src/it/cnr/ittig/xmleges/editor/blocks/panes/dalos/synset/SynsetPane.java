@@ -1,7 +1,6 @@
 package it.cnr.ittig.xmleges.editor.blocks.panes.dalos.synset;
 
 import it.cnr.ittig.xmleges.editor.blocks.panes.dalos.DalosPane;
-import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.dalos.util.LangChangedEvent;
 
 import java.awt.BorderLayout;
@@ -15,6 +14,7 @@ public abstract class SynsetPane extends DalosPane {
 	//Init Combo Box containing flags
 	public void initialize() throws Exception {
 		langPanel = utilDalos.getLanguageSwitchPanel();
+		setGlobalFlag(utilDalos.getGlobalLang());
 		panel.add(langPanel.getPanel(), BorderLayout.SOUTH);
 		super.initialize();
 	}
@@ -66,6 +66,9 @@ public abstract class SynsetPane extends DalosPane {
 				return;
 			}
 			fromLang.setIcon(i18n.getIconFor("editor.dalos.action.tolanguage."+lang.toLowerCase()+".icon"));
+			
+			// qui andrebbe settata anche la localFlag = globalFlag
+			
 		}
 	}
 	

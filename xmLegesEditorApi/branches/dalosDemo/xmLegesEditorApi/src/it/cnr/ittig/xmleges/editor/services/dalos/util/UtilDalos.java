@@ -21,11 +21,29 @@ import it.cnr.ittig.services.manager.Service;
  */
 public interface UtilDalos extends Service {
 	
+	public final static String IT = "IT";
+
+	public final static String EN = "EN";
+
+	public final static String NL = "NL";
+
+	public final static String ES = "ES";
+	
+	//public final  String[] Lang = {IT,EN,NL,ES};
+	
 	/**
 	 * 
 	 * @return
 	 */
 	public LangPanel getLanguageSwitchPanel();
-
+	
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String getGlobalLang();
+	
+	
 
 }
