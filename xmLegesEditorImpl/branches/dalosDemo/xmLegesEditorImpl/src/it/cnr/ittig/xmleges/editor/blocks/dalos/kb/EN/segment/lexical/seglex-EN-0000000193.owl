@@ -1,0 +1,119 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://turing.ittig.cnr.it/jwn/ontologies/metasources.owl#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:j.1="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
+    xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-quantity_of_waste-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-quantity_of_waste"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-quantity_of_waste-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-bochum-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-bochum"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-bochum-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-witness-noun-1">
+    <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-witness"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-witness-noun-1"/>
+    <rdf:type rdf:nodeID="A0"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#word-quantity_of_waste">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.1:sense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-quantity_of_waste-noun-1"/>
+    <j.1:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">quantity of waste</j.1:protoForm>
+    <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">quantity of waste</j.1:lexicalForm>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#word-enforcement_measure">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.1:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">enforcement measure</j.1:protoForm>
+    <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">enforcement measure</j.1:lexicalForm>
+    <j.1:sense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-enforcement_measure-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#word-equivalent_cash-settled_instrument">
+    <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">equivalent cash-settled instruments</j.1:lexicalForm>
+    <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">equivalent cash-settled instrument</j.1:lexicalForm>
+    <j.1:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">equivalent cash-settled instrument</j.1:protoForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.1:sense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-equivalent_cash-settled_instrument-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-witness-noun-1">
+    <j.1:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000027999</j.1:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27999-62004J0229-en-par32"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.1:containsWordSense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-witness-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-quantity_of_waste-noun-1">
+    <j.1:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000027235</j.1:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27235-61999J0392-en-par9-rft3"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27235-61999J0392-en-par13-rft3"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.1:containsWordSense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-quantity_of_waste-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#word-witness">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.1:sense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-witness-noun-1"/>
+    <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">witness</j.1:lexicalForm>
+    <j.1:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">witness</j.1:protoForm>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#word-bochum">
+    <j.1:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bochum</j.1:protoForm>
+    <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bochum</j.1:lexicalForm>
+    <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Bochum</j.1:lexicalForm>
+    <j.1:sense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-bochum-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-enforcement_measure-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-enforcement_measure-noun-1"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-enforcement_measure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-equivalent_cash-settled_instrument-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25982-32002L0065-20050612-en-art6-par2-pnta-pnt5"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.1:containsWordSense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-equivalent_cash-settled_instrument-noun-1"/>
+    <j.1:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000025982</j.1:synsetId>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-equivalent_cash-settled_instrument-noun-1">
+    <rdf:type rdf:nodeID="A0"/>
+    <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-equivalent_cash-settled_instrument"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-equivalent_cash-settled_instrument-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-bochum-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.1:containsWordSense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-bochum-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25301-62003J0350-en-crf"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25301-62003J0350-en-par33"/>
+    <j.1:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000025301</j.1:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25301-62003J0350-en-par37"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25301-62003J0350-en-par35"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25301-62003J0350-en-par27"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-enforcement_measure-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25954-32004R2006-20050612-en-art8-par1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25954-32004R2006-20050612-en-art8-par3"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25954-32004R2006-20050612-en-art8-par2"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25954-32004R2006-20050612-en-art7-par2"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.1:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000025954</j.1:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25954-32004R2006-20050612-en-art15-par2"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.1:containsWordSense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-enforcement_measure-noun-1"/>
+  </rdf:Description>
+</rdf:RDF>

@@ -1,0 +1,100 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://turing.ittig.cnr.it/jwn/ontologies/metasources.owl#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:j.1="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
+    xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#word-analysis">
+    <j.1:sense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-analysis-noun-1"/>
+    <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">analysis</j.1:lexicalForm>
+    <j.1:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">analysis</j.1:protoForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Analysis</j.1:lexicalForm>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-environmental_inspection-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25969-61999J0392-en-par159"/>
+    <j.1:containsWordSense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-environmental_inspection-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25969-61999J0392-en-par54-rft5"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25969-61999J0392-en-par54-rft2"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25969-61999J0392-en-par160"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25969-61999J0392-en-par54-rft1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.1:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000025969</j.1:synsetId>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-billing_of_various_components-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-billing_of_various_components"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-billing_of_various_components-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#word-environmental_inspection">
+    <j.1:sense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-environmental_inspection-noun-1"/>
+    <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Environmental Inspection</j.1:lexicalForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">environmental inspection</j.1:lexicalForm>
+    <j.1:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">environmental inspection</j.1:protoForm>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-environmental_inspection-noun-1">
+    <rdf:type rdf:nodeID="A0"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-environmental_inspection"/>
+    <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-environmental_inspection-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#word-billing_of_various_components">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.1:sense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-billing_of_various_components-noun-1"/>
+    <j.1:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">billing of various components</j.1:protoForm>
+    <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">billing of various components</j.1:lexicalForm>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-analysis-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-analysis"/>
+    <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-analysis-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#word-looslus">
+    <j.1:sense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-looslus-noun-1"/>
+    <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Loosli</j.1:lexicalForm>
+    <j.1:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">looslus</j.1:protoForm>
+    <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">looslus</j.1:lexicalForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-analysis-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25135-62005J0315-en-par27"/>
+    <j.1:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000025135</j.1:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25135-62002A0177-en-par18-rft1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25135-62002A0177-en-par63"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25135-62002A0177-en-par64"/>
+    <j.1:containsWordSense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-analysis-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25135-62002A0177-en-par40"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-looslus-noun-1">
+    <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-looslus-noun-1"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-looslus"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-looslus-noun-1">
+    <j.1:containsWordSense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-looslus-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26595-62002J0264-en-obs2"/>
+    <j.1:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000026595</j.1:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-billing_of_various_components-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.1:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000025297</j.1:synsetId>
+    <j.1:containsWordSense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-billing_of_various_components-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25297-31990L0314-en-art2-par1-pnt1a"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25297-31990L0314-en-art3-par2-sub1-pntb"/>
+  </rdf:Description>
+</rdf:RDF>

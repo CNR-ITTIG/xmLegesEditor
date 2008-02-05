@@ -1,0 +1,100 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://turing.ittig.cnr.it/jwn/ontologies/metasources.owl#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:j.1="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
+    xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-affair-noun-1">
+    <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-affair-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-affair"/>
+    <rdf:type rdf:nodeID="A0"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-affair-noun-1">
+    <j.1:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000025088</j.1:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25088-61996J0045-en-obs4"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.1:containsWordSense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-affair-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25088-61997A0112-en-sup1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-authorisation-noun-1">
+    <rdf:type rdf:nodeID="A0"/>
+    <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-authorisation-noun-1"/>
+    <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-authorisation"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#word-unfair_nature">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.1:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">unfair nature</j.1:protoForm>
+    <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">unfair nature</j.1:lexicalForm>
+    <j.1:sense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-unfair_nature-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-unfair_nature-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-unfair_nature"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-unfair_nature-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-gadea-noun-1">
+    <j.1:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000026161</j.1:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26161-62003J0070-en-prt2"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.1:containsWordSense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-gadea-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#word-gadea">
+    <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gadea</j.1:lexicalForm>
+    <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">gadea</j.1:lexicalForm>
+    <j.1:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">gadea</j.1:protoForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.1:sense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-gadea-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#word-affair">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.1:sense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-affair-noun-1"/>
+    <j.1:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">affair</j.1:protoForm>
+    <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">affair</j.1:lexicalForm>
+    <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Affairs</j.1:lexicalForm>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-unfair_nature-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27876-62000J0473-en-par5"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27876-31993L0013-en-art4-par2"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27876-61999J0144-en-par4-rft2"/>
+    <j.1:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000027876</j.1:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.1:containsWordSense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-unfair_nature-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27876-62000J0473-en-par34"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27876-61998J0240-en-par26"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-gadea-noun-1">
+    <rdf:type rdf:nodeID="A0"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-gadea"/>
+    <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-gadea-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-authorisation-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25232-62000A0074-en-kwd1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25232-62000A0074-en-par1"/>
+    <j.1:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000025232</j.1:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25232-62000A0074-en-par100"/>
+    <j.1:containsWordSense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-authorisation-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25232-61996A0120-en-par76"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-28112-02002l0065-20050612-en-art3-par1-pnt1-pnte"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#word-authorisation">
+    <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">authorisation</j.1:lexicalForm>
+    <j.1:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">authorisation</j.1:protoForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.1:sense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-authorisation-noun-1"/>
+    <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Authorisations</j.1:lexicalForm>
+  </rdf:Description>
+</rdf:RDF>

@@ -1,0 +1,98 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://turing.ittig.cnr.it/jwn/ontologies/metasources.owl#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:j.1="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
+    xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#word-series">
+    <j.1:sense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-series-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">series</j.1:lexicalForm>
+    <j.1:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">series</j.1:protoForm>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#word-ninth_recital">
+    <j.1:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ninth recital</j.1:protoForm>
+    <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ninth recital</j.1:lexicalForm>
+    <j.1:sense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-ninth_recital-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-series-noun-1">
+    <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-series-noun-1"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-series"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-ninth_recital-noun-1">
+    <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-ninth_recital-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-ninth_recital"/>
+    <rdf:type rdf:nodeID="A0"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-giloy-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.1:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000026200</j.1:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26200-62004J0302-en-par33"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.1:containsWordSense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-giloy-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#word-giloy">
+    <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Giloy</j.1:lexicalForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.1:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">giloy</j.1:protoForm>
+    <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">giloy</j.1:lexicalForm>
+    <j.1:sense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-giloy-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-ninth_recital-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26815-62002J0264-en-par25"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26815-62003A0158-en-par122"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26815-62003A0158-en-par5"/>
+    <j.1:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000026815</j.1:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26815-62003A0158-en-par62"/>
+    <j.1:containsWordSense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-ninth_recital-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26815-62003A0158-en-par73"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-series-noun-1">
+    <j.1:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000027524</j.1:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27524-32002L0065-20050612-en-pre-rec16"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27524-01997L0007-20050612-en-pre-rec10"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.1:containsWordSense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-series-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-recital-noun-1">
+    <rdf:type rdf:nodeID="A0"/>
+    <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-recital"/>
+    <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-recital-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-recital-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27278-62000A0074-en-par175"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27278-62000A0074-en-par109"/>
+    <j.1:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000027278</j.1:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27278-62000A0074-en-par132"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27278-62000A0074-en-par133"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27278-61997J0423-en-par42"/>
+    <j.1:containsWordSense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-recital-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#word-recital">
+    <j.1:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">recital</j.1:protoForm>
+    <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">recital</j.1:lexicalForm>
+    <j.1:sense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-recital-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-giloy-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-giloy-noun-1"/>
+    <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-giloy"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
+  </rdf:Description>
+</rdf:RDF>

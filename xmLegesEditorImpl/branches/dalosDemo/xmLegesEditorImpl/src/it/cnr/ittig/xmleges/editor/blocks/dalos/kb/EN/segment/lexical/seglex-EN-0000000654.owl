@@ -1,0 +1,98 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://turing.ittig.cnr.it/jwn/ontologies/metasources.owl#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:j.1="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
+    xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#word-maximum_number">
+    <j.1:sense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-maximum_number-noun-1"/>
+    <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">maximum number</j.1:lexicalForm>
+    <j.1:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">maximum number</j.1:protoForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-consumer-noun-1">
+    <rdf:type rdf:nodeID="A0"/>
+    <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-consumer"/>
+    <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-consumer-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-fogyaszt_val-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.1:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000026117</j.1:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26117-62004J0302-en-par18"/>
+    <j.1:containsWordSense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-fogyaszt_val-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-microbiological_parameter-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26709-62000J0316-en-par1-pnt1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26709-62000J0316-en-par12"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26709-62000J0316-en-opp1-pnt1"/>
+    <j.1:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000026709</j.1:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26709-62000J0316-en-par25"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26709-62000J0316-en-par34"/>
+    <j.1:containsWordSense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-microbiological_parameter-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-fogyaszt_val-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-fogyaszt_val-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-fogyaszt_val"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-maximum_number-noun-1">
+    <rdf:type rdf:nodeID="A0"/>
+    <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-maximum_number-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-maximum_number"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#word-microbiological_parameter">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.1:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">microbiological parameter</j.1:protoForm>
+    <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">microbiological parameter</j.1:lexicalForm>
+    <j.1:sense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-microbiological_parameter-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-consumer-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-01985L0374-19990604-en-pre-rec13"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-01985L0374-19990604-en-pre-rec12"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-28101-02002l0065-20050612-en-art2-par1-pntd"/>
+    <j.1:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000025574</j.1:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-01985L0374-19990604-en-art16-par2"/>
+    <j.1:containsWordSense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-consumer-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-01985L0374-19990604-en-art15-par3"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-01985L0374-19990604-en-pre-rec1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#word-fogyaszt_val">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.1:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">fogyaszt=val</j.1:protoForm>
+    <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">fogyaszt=val</j.1:lexicalForm>
+    <j.1:sense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-fogyaszt_val-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#word-consumer">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">consumers</j.1:lexicalForm>
+    <j.1:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">consumer</j.1:protoForm>
+    <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">consumer</j.1:lexicalForm>
+    <j.1:sense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-consumer-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-microbiological_parameter-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-microbiological_parameter-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-microbiological_parameter"/>
+    <rdf:type rdf:nodeID="A0"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-maximum_number-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26659-01987L0102-19980421-en-art2-par1-pntg-pnt2"/>
+    <j.1:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000026659</j.1:synsetId>
+    <j.1:containsWordSense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-maximum_number-noun-1"/>
+  </rdf:Description>
+</rdf:RDF>
