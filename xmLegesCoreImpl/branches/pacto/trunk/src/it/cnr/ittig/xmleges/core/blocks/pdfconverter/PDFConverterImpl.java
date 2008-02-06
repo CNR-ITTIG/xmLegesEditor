@@ -51,21 +51,26 @@ public class PDFConverterImpl implements PDFConverter, Loggable {
 
 	
 	public File convert(File src){
-		return convert(src,false);
+		
+		return convert(src, false);
+	}
+	
+	public File convert(File src, boolean toHtml) {
+		
+		return convert(src, toHtml, "UTF-8");
 	}
 	
 	// /////////////////////////////////////////////// PDFConverter Interface
-	public File convert(File src, boolean toHtml) {
+	public File convert(File src, boolean toHtml, String encoding) {
 		
 		String pdfFile = src.getAbsolutePath();		
 		String outFileName = UtilFile.getTempDirName() + File.separatorChar + "antipdf.out";
 		
 		File outputFile = null; 
 		
-		
 		// FIXME manca la gestione del setting dell'encoding dall'esterno
 		
-        String encoding = null;   //DEFAULT_ENCODING;
+		//Possible encoding values:
         //"ISO-8859-1";
         //"ISO-8859-6"; //arabic
         //"US-ASCII";
@@ -73,8 +78,7 @@ public class PDFConverterImpl implements PDFConverter, Loggable {
         //"UTF-16";
         //"UTF-16BE";
         //"UTF-16LE";
-		
-     
+		     
 		Writer output = null;
         PDDocument document = null;
         try
@@ -92,12 +96,23 @@ public class PDFConverterImpl implements PDFConverter, Loggable {
             }
             
             PDFTextStripper stripper = null;
-            if(toHtml) 
+            if(toHtml) {
                stripper = new PDFText2HTML();
-            else 
+            } else { 
                stripper = new PDFTextStripper();
+            }
            
+            //Default values from ExtractText.java:
+            boolean sort = false;
+            int startPage = 1;
+            int endPage = Integer.MAX_VALUE;            
+            stripper.setSortByPosition( sort );
+            stripper.setStartPage( startPage );
+            stripper.setEndPage( endPage );
+            
+            //Extract text!
             stripper.writeText( document, output );
+            
             return outputFile;
         }
         catch(Exception ex){
