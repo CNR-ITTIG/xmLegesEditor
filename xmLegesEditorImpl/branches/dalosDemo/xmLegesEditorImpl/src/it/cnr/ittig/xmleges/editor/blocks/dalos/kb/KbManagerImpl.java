@@ -108,11 +108,13 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		}		
 	}
 
-	public void addLanguage(String lang) {	
+	public void addLanguage(String lang) {
+		
 		langToContainer.put(lang, new KbContainer(lang, i18n));
 	}
 
 	public void addLexicalProperties(Synset syn) {
+		
 		if(syn!=null && syn.getLanguage()!=null){
 			KbContainer kbc = getContainer(syn.getLanguage());
 			kbc.addLexicalProperties(syn);
@@ -220,11 +222,7 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		if(kbc == null) {
 			System.out.println(">> ADDING LANGUAGE SUPPORT FOR: " + lang);
 			addLanguage(lang.toUpperCase());
-		}
-		
-		kbc = (KbContainer) langToContainer.get(lang.toUpperCase());
-		if(kbc == null) {
-			System.err.println("## ERROR ## kbContainer not found for language: " + lang );
+			kbc = (KbContainer) langToContainer.get(lang.toUpperCase());
 		}
 
 		return kbc;
@@ -232,15 +230,8 @@ implements KbManager, Loggable, Serviceable, Initializable {
 	
 	
 	public boolean isLangSupported(String lang){
-		KbContainer kbc = (KbContainer) langToContainer.get(lang.toUpperCase());
-		if(kbc == null) {
-			System.out.println(">> ADDING LANGUAGE SUPPORT FOR: " + lang);
-			addLanguage(lang.toUpperCase());
-		}
-		kbc = (KbContainer) langToContainer.get(lang.toUpperCase());
-		return kbc != null;
 		
+		KbContainer kbc = getContainer(lang);
+		return kbc.isConcreteContainer();
 	}
-
-
 }

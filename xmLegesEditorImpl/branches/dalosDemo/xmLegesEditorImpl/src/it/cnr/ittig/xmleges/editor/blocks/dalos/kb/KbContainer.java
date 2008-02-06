@@ -65,6 +65,8 @@ public class KbContainer {
 	private I18n i18n;
 	
 	private OntDocumentManager odm; //farlo static? cacha i doc. comuni...
+	
+	private boolean concreteContainer = false;
 
 	//Dati
 	Map synsets = null;
@@ -125,7 +127,8 @@ public class KbContainer {
 		if(!checkFiles()) {
 			System.err.println("## ERROR ## KbContainer - Data files not found! Repo: " +
 					localRepository);
-		} else {			
+		} else {
+			concreteContainer = true;
 			synsets = new HashMap(2048, 0.70f);
 			sortedSynsets = new Vector(512);
 			
@@ -151,6 +154,11 @@ public class KbContainer {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public boolean isConcreteContainer() {
+		
+		return concreteContainer;
 	}
 	
 	private void initMaps() 
@@ -872,5 +880,4 @@ public class KbContainer {
 		spe.compute(type);
 		System.out.println("COMPUTE processing done.");
 	}
-
 }
