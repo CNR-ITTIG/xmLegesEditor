@@ -207,9 +207,9 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 			if (UtilFile.hasExtension(file, "doc", false)) {
 				wordFileConv = wordConverter.convert(file);
 				sorgente.setText(UtilFile.fileToString(wordFileConv));
-			  } else if (UtilFile.hasExtension(file, "pdf", false)) { 
-				 sorgente.setText(UtilFile.fileToString(pdfConverter.convert(file))); 
-				 pdfFileConv = pdfConverter.convert(file,false); 				 		    
+			  } else if (UtilFile.hasExtension(file, "pdf", false)) {
+				 pdfFileConv = pdfConverter.convert(file, true);	 		    
+				 sorgente.setText(UtilFile.fileToString(pdfFileConv)); 
 			} else {
 				sorgente.setText(UtilFile.fileToString(file));
 			}
@@ -329,7 +329,9 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 			new Thread() {
 				public void run() {
 					try {
-						if (UtilFile.hasExtension(fileTextField.getFile(), "html", false) || UtilFile.hasExtension(fileTextField.getFile(), "htm", false)) {
+						if (UtilFile.hasExtension(fileTextField.getFile(), "html", false) 
+								|| UtilFile.hasExtension(fileTextField.getFile(), "htm", false)
+								|| UtilFile.hasExtension(fileTextField.getFile(), "pdf", false)) {
 							parser.setTipoInput(XmLegesMarker.TIPO_INPUT_VALORE[0]);
 						} else {
 							parser.setTipoInput(XmLegesMarker.TIPO_INPUT_VALORE[1]);
