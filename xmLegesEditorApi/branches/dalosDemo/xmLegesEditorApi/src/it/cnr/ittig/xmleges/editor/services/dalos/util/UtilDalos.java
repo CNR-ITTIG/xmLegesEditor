@@ -29,8 +29,6 @@ public interface UtilDalos extends Service {
 
 	public final static String ES = "ES";
 	
-	//public final  String[] Lang = {IT,EN,NL,ES};
-	
 	/**
 	 * 
 	 * @return
@@ -44,6 +42,18 @@ public interface UtilDalos extends Service {
 	 */
 	public String getGlobalLang();
 	
+	/**
+	 * 
+	 * @param lang
+	 * @return
+	 */
+	public int dalosLangToIndex(String lang);
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String[] getDalosLang();
 	
 
 }

@@ -28,10 +28,10 @@ public abstract class SynsetPane extends DalosPane {
 		// gestione eventi LangChanged
 		if(event instanceof LangChangedEvent){
 			if(((LangChangedEvent)event).getIsGlobalLang()){
-				setGlobalFlag(((LangChangedEvent)event).getGlobalLang());
+				setGlobalFlag(utilDalos.getGlobalLang());
 			}
 			else{
-				setLocalFlag(((LangChangedEvent)event).getLangToIndex());	
+				setLocalFlag(((LangChangedEvent)event).getLang());	
 			}
 		}
 	}
@@ -39,10 +39,10 @@ public abstract class SynsetPane extends DalosPane {
 	/*
 	 * Set selected flag in the combo box.
 	 */
-	protected void setLocalFlag(int index) {
+	protected void setLocalFlag(String lang) {
 		if(langPanel != null){		
 		    JComboBox langCombo = langPanel.getLangCombo();	
-			
+			int index = utilDalos.dalosLangToIndex(lang);
 			if(langCombo == null) {
 				logger.error("ERROR! setFlag() cbx is null!");
 				return;
@@ -66,9 +66,7 @@ public abstract class SynsetPane extends DalosPane {
 				return;
 			}
 			fromLang.setIcon(i18n.getIconFor("editor.dalos.action.tolanguage."+lang.toLowerCase()+".icon"));
-			
-			// qui andrebbe settata anche la localFlag = globalFlag
-			
+			setLocalFlag(lang);			
 		}
 	}
 	

@@ -52,7 +52,7 @@ implements EventManagerListener, Loggable, Serviceable,
 	JComboBox searchType;
 	SynsetMarkupAction synsetMarkupAction;
 	FindAction findAction = new FindAction();
-	String[] searchTypes={"Contains", "Starts with","Ends with","Matches"};
+	String[] searchTypes={"Contains", "Starts wh","Ends with","Matches"};
 	
 	Collection synsets;
 			
@@ -115,10 +115,15 @@ implements EventManagerListener, Loggable, Serviceable,
 		super.manageEvent(event);
 		
 		if(event instanceof LangChangedEvent){
-			if(((LangChangedEvent)event).getIsGlobalLang()) {
-				String lang = ((LangChangedEvent)event).getGlobalLang();
+			String lang = ((LangChangedEvent)event).getLang();
+			if(((LangChangedEvent)event).getIsGlobalLang()) {		
 				synsets = kbManager.getSynsets(lang);
 				list.setListData(synsets.toArray());
+			}else{
+				Synset selSyn = (Synset)list.getSelectedValue();
+				if(selSyn != null){		
+					selectSynset(kbManager.getSynset(selSyn.getURI(),lang.toUpperCase()));
+				}
 			}
 		}
 		
@@ -127,14 +132,13 @@ implements EventManagerListener, Loggable, Serviceable,
 		if (event instanceof SelectionChangedEvent){
 			Node activeNode = ((SelectionChangedEvent)event).getActiveNode();
 			if(isDalosSpan(activeNode)){
-				Synset syn = kbManager.getSynset(getSynsetURI(activeNode), "IT");
+				Synset syn = kbManager.getSynset(getSynsetURI(activeNode), utilDalos.getGlobalLang());
 				selectSynset(syn);
 			}	
 		}
 	}
 	
-	protected void updateObserver(Synset syn) {
-		
+	protected void updateObserver(Synset syn) {	
 		list.setSelectedValue(syn, true);
 	}
 	
@@ -165,7 +169,7 @@ implements EventManagerListener, Loggable, Serviceable,
 	}
 	
 	private void searchAndDisplaySynsets(){
-		Collection res = kbManager.search(textWords.getText(), (String)searchType.getSelectedItem(), "IT");
+		Collection res = kbManager.search(textWords.getText(), (String)searchType.getSelectedItem(), utilDalos.getGlobalLang());
 		if(res!=null && !res.isEmpty()){
 			list.setListData(res.toArray());
 			list.setSelectedIndex(0);
@@ -174,7 +178,6 @@ implements EventManagerListener, Loggable, Serviceable,
 	}
 
 	private void selectSynset(Synset activeSynset){
-
 		observableSynset.setSynset(activeSynset);
 	}
 	

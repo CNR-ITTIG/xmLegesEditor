@@ -23,9 +23,8 @@ import java.util.EventObject;
  */
 public class LangChangedEvent extends EventObject {
 
-	int langToIndex;
 	boolean isGlobalLang;
-	String golbalLang;
+	String lang;
 
 	
 	/**
@@ -35,22 +34,14 @@ public class LangChangedEvent extends EventObject {
 	 * @param globalLang
 	 * @param langToIndex
 	 */
-	public LangChangedEvent(Object source, boolean isGlobalLang, String globalLang, int langToIndex) {
+	public LangChangedEvent(Object source, boolean isGlobalLang, String lang) {
 		super(source);
-		this.langToIndex = langToIndex;
 		this.isGlobalLang = isGlobalLang;
-		this.golbalLang = globalLang;
+		this.lang = lang;
 	}
 
 	
-	/**
-	 * 
-	 * @return
-	 */
-	public int getLangToIndex() {
-		return this.langToIndex;
-	}
-	
+
 	/**
 	 * 
 	 * @return
@@ -63,8 +54,8 @@ public class LangChangedEvent extends EventObject {
 	 * 
 	 * @return
 	 */
-	public String getGlobalLang(){
-		return this.golbalLang;
+	public String getLang(){
+		return this.lang;
 	}
 	
 }

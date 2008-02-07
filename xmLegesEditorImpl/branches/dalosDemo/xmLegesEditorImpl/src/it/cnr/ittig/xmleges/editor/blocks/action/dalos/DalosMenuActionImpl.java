@@ -108,10 +108,11 @@ public class DalosMenuActionImpl implements DalosMenuAction, Loggable, Serviceab
 	public void initialize() throws java.lang.Exception {
 		showViewAction = new ShowViewAction();
 		actionManager.registerAction("editor.dalos.showview", showViewAction);
-		actionManager.registerAction("editor.dalos.switchlang.it", new SwitchLangAction("it"));
-		actionManager.registerAction("editor.dalos.switchlang.en", new SwitchLangAction("en"));
-		actionManager.registerAction("editor.dalos.switchlang.nl", new SwitchLangAction("nl"));
-		actionManager.registerAction("editor.dalos.switchlang.es", new SwitchLangAction("es"));
+		
+		for(int i=0;i<utilDalos.getDalosLang().length;i++){
+			actionManager.registerAction("editor.dalos.switchlang."+utilDalos.getDalosLang()[i].toLowerCase(), new SwitchLangAction(utilDalos.getDalosLang()[i].toUpperCase()));
+		}
+		
 	}
 
 	public void manageEvent(EventObject event) {
@@ -223,7 +224,7 @@ public class DalosMenuActionImpl implements DalosMenuAction, Loggable, Serviceab
 			
 			if(utilMsg.msgWarning("editor.dalos.switchlang.msg")){
 				if(kbManager.isLangSupported(lang))
-					eventManager.fireEvent(new LangChangedEvent(this, true, lang, 0));
+					eventManager.fireEvent(new LangChangedEvent(this, true, lang));
 				else 
 				   utilMsg.msgError("editor.dalos.switchlang.unsupportedlang");
 			}

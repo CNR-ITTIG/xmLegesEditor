@@ -19,6 +19,7 @@ import it.cnr.ittig.xmleges.editor.services.dalos.util.UtilDalos;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import java.util.EventObject;
 import java.util.Properties;
 
@@ -56,6 +57,8 @@ public class UtilDalosImpl implements UtilDalos, EventManagerListener, Loggable,
 	String globalLang = UtilDalos.IT; 	// DEFAULT LANG
 	
 	Properties prefs = null;
+	
+	String[] dalosLang;
 		
 	
 	// //////////////////////////////////////////////////// LogEnabled Interface
@@ -72,8 +75,11 @@ public class UtilDalosImpl implements UtilDalos, EventManagerListener, Loggable,
 	}
 	
 	
-	public void initialize() throws Exception {			
-		toLangActions = new AbstractAction[] { new toLangAction(UtilDalos.IT,0), new toLangAction(UtilDalos.EN,1),new toLangAction(UtilDalos.NL,2),new toLangAction(UtilDalos.ES,3)};	
+	public void initialize() throws Exception {		
+		
+		dalosLang = new String[]{UtilDalos.IT,UtilDalos.EN,UtilDalos.NL,UtilDalos.ES};
+		
+		toLangActions = new AbstractAction[] { new toLangAction(dalosLang[0]), new toLangAction(dalosLang[1]),new toLangAction(dalosLang[2]),new toLangAction(dalosLang[3])};	
 		eventManager.addListener(this, LangChangedEvent.class);
 	}
 	
@@ -95,7 +101,7 @@ public class UtilDalosImpl implements UtilDalos, EventManagerListener, Loggable,
 	public void manageEvent(EventObject event) {
 		if(event instanceof LangChangedEvent){
 			if(((LangChangedEvent)event).getIsGlobalLang()){
-				setGlobalLang(((LangChangedEvent)event).getGlobalLang());
+				setGlobalLang(((LangChangedEvent)event).getLang());
 			}
 		}	
 	}
@@ -107,7 +113,7 @@ public class UtilDalosImpl implements UtilDalos, EventManagerListener, Loggable,
 	
 	
 	private void setGlobalLang(String lang){
-		this.globalLang = lang;
+		this.globalLang = lang.toUpperCase();
 	}
 	
 	public class toLangAction extends AbstractAction {	
@@ -116,14 +122,14 @@ public class UtilDalosImpl implements UtilDalos, EventManagerListener, Loggable,
 		int index;
 		String iconKey;
 
-		public toLangAction(String lang, int index){
+		public toLangAction(String lang){
 			this.lang = lang;
-			this.index = index;
+			this.index = dalosLangToIndex(lang);
 			this.iconKey = "editor.dalos.action.tolanguage."+lang.toLowerCase()+".icon";
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			eventManager.fireEvent(new LangChangedEvent(this, false, null, index));
+			eventManager.fireEvent(new LangChangedEvent(this, false, lang));
 		}
 		
 		
@@ -177,6 +183,14 @@ public class UtilDalosImpl implements UtilDalos, EventManagerListener, Loggable,
 			setIcon(i18n.getIconFor(tL.getIconKey()));
 			return this;
 		}		
+	}
+	
+	public int dalosLangToIndex(String lang){
+		return Arrays.asList(dalosLang).indexOf(lang.toUpperCase());
+	}
+	
+	public String[] getDalosLang(){
+		return dalosLang;
 	}
 	
 }

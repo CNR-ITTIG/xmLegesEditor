@@ -66,7 +66,7 @@ implements EventManagerListener, Loggable, Serviceable,
 		
 		if(event instanceof LangChangedEvent){
 			if(((LangChangedEvent)event).getIsGlobalLang()) {
-				String lang = ((LangChangedEvent)event).getGlobalLang();			
+				String lang = ((LangChangedEvent)event).getLang();			
 				// BACCI! un  modo migliore per fare refresh dell'albero
 				showTree(lang);
 				try{
