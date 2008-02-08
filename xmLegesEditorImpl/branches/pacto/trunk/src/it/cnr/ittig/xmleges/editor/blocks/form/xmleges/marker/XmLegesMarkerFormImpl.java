@@ -235,11 +235,11 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 		    String unknownTipoDoc = null;
 			
 			if (UtilFile.hasExtension(fileTextField.getFile(), "doc", false))
-				unknownTipoDoc = UtilFile.inputStreamToString(parser.parseAutoTipoDoc(wordFileConv));
+				unknownTipoDoc = UtilFile.inputStreamToString(parser.parseAutoTipoDoc(wordFileConv,false));
 			else if  (UtilFile.hasExtension(fileTextField.getFile(), "pdf", false)) 
-		 	    unknownTipoDoc = UtilFile.inputStreamToString(parser.parseAutoTipoDoc(pdfFileConv)); 
+		 	    unknownTipoDoc = UtilFile.inputStreamToString(parser.parseAutoTipoDoc(pdfFileConv, true)); 
 			else
-				unknownTipoDoc = UtilFile.inputStreamToString(parser.parseAutoTipoDoc(fileTextField.getFile()));
+				unknownTipoDoc = UtilFile.inputStreamToString(parser.parseAutoTipoDoc(fileTextField.getFile(), false));
 			
 			return unknownTipoDoc;
 		}
