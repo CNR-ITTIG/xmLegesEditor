@@ -702,8 +702,6 @@ public class SchemaRulesManagerImpl implements RulesManager {
 
 
 
-
-
 	/**
 	 * Ritorna una stringa in formato XML che definisce il contenuto di default di un
 	 * elemento
@@ -714,6 +712,7 @@ public class SchemaRulesManagerImpl implements RulesManager {
 	public String getDefaultContent(String elem_name) throws RulesManagerException {
 		if (elem_name.compareTo("#PCDATA") == 0)
 			return "";
+		
 		return getDefaultContent(getContentGraph(elem_name));
 	}
 
@@ -806,6 +805,10 @@ public class SchemaRulesManagerImpl implements RulesManager {
 
 		if (rules.get(elem_name) == null)
 		   throw new RulesManagerException("No rule for element <" + elem_name + ">");
+		if (utilXsd.contentGraphs.get(elem_name) == null)
+			   throw new RulesManagerException("No contentgraph for element <" + elem_name + ">");
+		//((ContentGraph)utilXsd.contentGraphs.get(elem_name)).resetVisit();
+		//return (ContentGraph)utilXsd.contentGraphs.get(elem_name);
 		return utilXsd.createContentGraph(elem_name);
 	}
 

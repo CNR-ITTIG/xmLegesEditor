@@ -54,6 +54,8 @@ public class UtilXsd{
 	protected XSDSchema schema;
 
 	List nonTopElements;
+	
+	public HashMap contentGraphs;
 
 
 	protected SchemaRulesManagerImpl schemaRules = null;
@@ -74,6 +76,8 @@ public class UtilXsd{
 
 		schema = null;
 		List allElements;
+		
+		contentGraphs =new HashMap();
 
 		// SCHEMA PRINCIPALE
 
@@ -116,7 +120,7 @@ public class UtilXsd{
 				createRuleForElement(elemDecl);
 				createRuleForAttributes(elemDecl);
 				//createAlternativeContents(elemDecl);       
-			}			  
+			}	
 		}catch(Exception e){
 			logger.error(e.getMessage());
 		}
@@ -169,6 +173,12 @@ public class UtilXsd{
 				createRuleForAttributes(elemDecl); 
 			}
 
+		}
+		
+		String name;
+		for(Iterator it = schemaRules.rules.keySet().iterator(); it.hasNext();){
+			name = (String)it.next();
+			contentGraphs.put(name, createContentGraph(name));
 		}
 
 		printRules();
