@@ -187,7 +187,7 @@ public class XmLegesMarkerImpl implements XmLegesMarker, Loggable, Serviceable, 
 	}
 	
 	
-	public InputStream parseAutoTipoDoc(File file) {
+	public InputStream parseAutoTipoDoc(File file, boolean isPdf) {
 		
 		execMonitor.clear();
 		
@@ -198,7 +198,12 @@ public class XmLegesMarkerImpl implements XmLegesMarker, Loggable, Serviceable, 
 		// firsTime = false;
 		// }
 
-		File commandFile = UtilFile.getFileFromTemp("xmLeges-Marker.exe");
+		File commandFile = null;
+		if (isPdf) 
+			commandFile = UtilFile.getFileFromTemp("xmLeges-Marker-xPdf.exe");
+		else 	
+			commandFile = UtilFile.getFileFromTemp("xmLeges-Marker.exe");
+			
 		UtilFile.setExecPermission(commandFile);
 		StringBuffer sb = new StringBuffer(commandFile.getAbsolutePath());
 		sb.append(" -i ");
@@ -319,9 +324,9 @@ public class XmLegesMarkerImpl implements XmLegesMarker, Loggable, Serviceable, 
 
 		String[] files = null;
 		if (osName.equalsIgnoreCase("linux") && osArch.equalsIgnoreCase("i386"))
-			files = new String[] { "linux-i386/xmLeges-Marker.exe" };
+			files = new String[] { "linux-i386/xmLeges-Marker.exe", "linux-i386/xmLeges-Marker-xPdf.exe" };
 		if (osName.toLowerCase().matches("windows.*"))
-			files = new String[] { "win-32/cygiconv-2.dll", "win-32/cygwin1.dll", "win-32/cygxml2-2.dll", "win-32/cygz.dll", "win-32/xmLeges-Marker.exe" };
+			files = new String[] { "win-32/cygiconv-2.dll", "win-32/cygwin1.dll", "win-32/cygxml2-2.dll", "win-32/cygz.dll", "win-32/xmLeges-Marker.exe", "win-32/xmLeges-Marker-xPdf.exe" };
 
 		if (files != null)
 			for (int i = 0; i < files.length; i++)
