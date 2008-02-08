@@ -236,13 +236,19 @@ p {
 			<xsl:apply-templates select="/*[name()='NIR']/*" />
            	<div class="allineasx">
    	        	<xsl:call-template name="notemultivigente" /> 
-       	    </div>
+       	    </div>			
        	    <xsl:if test="/*/*/*[name()='meta']/*[name()='redazionale']/*[name()='nota']">
 				<div class="allineasx">
 					<h1>Note della redazione</h1>
 					<xsl:apply-templates select="/*/*/*[name()='meta']/*[name()='redazionale']/*[name()='nota']" />
 				</div>	
-			</xsl:if>
+			</xsl:if>		
+			<xsl:if test="/*/*/*[name()='annessi']/*[name()='annesso']/*/*[name()='meta']/*[name()='redazionale']/*[name()='nota']">
+				<div class="allineasx">
+					<h1>Note in allegati</h1>
+					<xsl:apply-templates select="/*/*/*[name()='annessi']/*[name()='annesso']/*/*[name()='meta']/*[name()='redazionale']/*[name()='nota']" />
+				</div>	
+			</xsl:if>			
 			</body>
 		</html>
 	</xsl:template>
@@ -761,6 +767,7 @@ p {
 		<xsl:apply-templates/>
 	</xsl:template>
 	<xsl:template match="//*[name()='annesso']">
+		<a name="{@id}"></a>
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
 				<xsl:call-template name="vigenza"/>
