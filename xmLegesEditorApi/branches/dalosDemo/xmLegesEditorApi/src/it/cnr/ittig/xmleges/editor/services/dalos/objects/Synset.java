@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.Vector;
 
-public class Synset {
+public class Synset implements Comparable {
 	
 	private String URI;
 	
@@ -200,4 +200,14 @@ public class Synset {
 		
 		return 1;
 	}
+	
+	public int compareTo(Object obj) throws ClassCastException {
+		
+		if(!(obj instanceof Synset)) {
+			throw new ClassCastException("Object is not a valid synset!");
+		}
+		String objForm = ((Synset) obj).toString();
+		return this.toString().compareTo(objForm);
+	}
+
 }

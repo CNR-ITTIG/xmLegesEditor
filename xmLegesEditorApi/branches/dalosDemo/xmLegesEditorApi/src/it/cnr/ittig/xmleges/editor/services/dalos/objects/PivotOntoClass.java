@@ -25,12 +25,12 @@ public class PivotOntoClass extends DalosOntoClass {
 		terms = new HashSet();
 	}
 
-	public boolean addClass(DalosOntoClass dc) {
+	public boolean addClass(TreeOntoClass dc) {
 		
 		return links.add(dc);
 	}
 	
-	public boolean removeClass(DalosOntoClass dc) {
+	public boolean removeClass(TreeOntoClass dc) {
 		
 		return links.remove(dc);
 	}

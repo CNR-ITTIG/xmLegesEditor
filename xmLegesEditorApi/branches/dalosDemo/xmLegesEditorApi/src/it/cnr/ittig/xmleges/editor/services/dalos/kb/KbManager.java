@@ -62,7 +62,7 @@ public interface KbManager extends Service {
 	 * 
 	 * @return
 	 */
-	public Collection getSynsets(String lang);
+	public Collection getSynsetsList(String lang);
 	
 	/**
 	 * 
