@@ -18,11 +18,16 @@ public class Synset {
 	
 	private String lexicalForm; //sostituire con un vettore di forme lessicali?
 	
+	//Is it a concrete synset or it just contains the URI reference?
+	private boolean concreteSynset = false;
+	
 	private boolean isLexicalPropCached = false;
 	
 	private boolean isSemanticPropCached = false;
 	
 	private boolean isSourceCached = false;
+	
+	private PivotOntoClass pivotClass = null;
 
 	private Collection sources; //rispettare l'ordine alfabetico
 
@@ -30,7 +35,7 @@ public class Synset {
 	
 	public Map lexicalToSynset = null;
 		
-	public Map semanticToSynset = null;
+	public Map semanticToSynset = null;		
 	
 	public Synset() {
 				
@@ -62,6 +67,26 @@ public class Synset {
 	public String getLexicalForm() {
 		
 		return lexicalForm;
+	}
+	
+	public void setPivotClass(PivotOntoClass oc) {
+		
+		pivotClass = oc;
+	}
+	
+	public PivotOntoClass getPivotClass() {
+		
+		return pivotClass;
+	}
+
+	public void setConcreteSynset(boolean status) {
+		
+		concreteSynset = status;
+	}
+	
+	public boolean isConcreteSynset() {
+		
+		return concreteSynset;
 	}
 
 	public void setLexicalPropCached(boolean status) {
