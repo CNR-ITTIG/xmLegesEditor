@@ -6,104 +6,103 @@
     xmlns:j.2="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
     xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-quesito_scritto-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-quesito_scritto-noun-1"/>
-    <rdf:type rdf:nodeID="A0"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-quesito_scritto"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-cardiopatia_valvolare-noun-1">
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-cardiopatia_valvolare"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-gu-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
     <rdf:type rdf:nodeID="A0"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-cardiopatia_valvolare-noun-1"/>
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-gu-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-gu"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-quesito_scritto-noun-1">
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000688</j.2:synsetId>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-688-62000A0074-it-par82"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-688-62000A0074-it-par167"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-688-62000A0074-it-par164"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-688-62000A0074-it-par214"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-688-62000A0074-it-par18"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-quesito_scritto-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-richiesta_risarcimento">
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-richiesta_risarcimento-noun-1"/>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RICHIESTE DI RISARCIMENTO</j.2:lexicalForm>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-effetto_nocivo">
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-effetto_nocivo-noun-1"/>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EFFETTO NOCIVO</j.2:lexicalForm>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EFFETTO NOCIVO</j.2:protoForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EFFETTI NOCIVI</j.2:lexicalForm>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RICHIESTA RISARCIMENTO</j.2:protoForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RICHIESTA RISARCIMENTO</j.2:lexicalForm>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-carattere_vincolante-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-denominazione_commerciale-noun-1">
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-denominazione_commerciale-noun-1"/>
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-denominazione_commerciale"/>
     <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-carattere_vincolante-noun-1"/>
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-carattere_vincolante"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-richiesta_risarcimento-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-richiesta_risarcimento"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-gu">
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GU</j.2:protoForm>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-gu-noun-1"/>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GU</j.2:lexicalForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-effetto_nocivo-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1126-62003J0198-it-par84"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1126-62003A0158-it-par103"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-effetto_nocivo-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1126-62003A0158-it-par76"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1126-62002A0177-it-par55"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001126</j.2:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1126-61999J0392-it-par51-rft1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-effetto-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-gu-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-76-01998L0027-20061228-it-ann-par2"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-76-01998L0027-20061228-it-ann-par10"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-76-01998L0027-20061228-it-ann-par1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-76-01998L0027-20061228-it-ann-par13"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-gu-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-76-01998L0027-20061228-it-ann-par11"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000076</j.2:synsetId>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-encefalopatia_spongiforme_bovino-noun-1">
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-encefalopatia_spongiforme_bovino-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1344-62003A0138-it-par5"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1344-62003A0138-it-par13"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001344</j.2:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1344-62003A0138-it-kwd1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1344-62003A0138-it-sbj"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1344-62003A0138-it-par1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-encefalopatia_spongiforme_bovino-noun-1">
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-encefalopatia_spongiforme_bovino"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-encefalopatia_spongiforme_bovino-noun-1"/>
     <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-richiesta_risarcimento-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-cardiopatia_valvolare">
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-cardiopatia_valvolare-noun-1"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-denominazione_commerciale">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CARDIOPATIA VALVOLARE</j.2:lexicalForm>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CARDIOPATIA VALVOLARE</j.2:protoForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CARDIOPATIE VALVOLARI</j.2:lexicalForm>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-denominazione_commerciale-noun-1"/>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DENOMINAZIONE COMMERCIALE</j.2:lexicalForm>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DENOMINAZIONE COMMERCIALE</j.2:protoForm>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-richiesta_risarcimento-noun-1">
-    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-richiesta-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-992-62003A0138-it-par38"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000992</j.2:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-992-62003A0138-it-par85"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-richiesta_risarcimento-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-992-32005L0029-it-ann1-par27"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-992-62003A0138-it-par84"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-992-62003A0138-it-par83"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-quesito_scritto">
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-encefalopatia_spongiforme_bovino">
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ENCEFALOPATIA SPONGIFORME BOVINA</j.2:lexicalForm>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-encefalopatia_spongiforme_bovino-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-quesito_scritto-noun-1"/>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">QUESITI SCRITTI</j.2:lexicalForm>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">QUESITO SCRITTO</j.2:protoForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">QUESITO SCRITTO</j.2:lexicalForm>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ENCEFALOPATIA SPONGIFORME BOVINO</j.2:protoForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ENCEFALOPATIA SPONGIFORME BOVINO</j.2:lexicalForm>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-carattere_vincolante-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-808-62000J0316-it-par1-pnt2"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-808-62000J0316-it-opp1-pnt2"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-carattere_vincolante-noun-1"/>
-    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-carattere-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-808-61999J0392-it-par108"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-denominazione_commerciale-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-802-32006L0114-it-art4-par1-pntd"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-802-32005L0029-it-art14-par1-pnt3-nov-blk10"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000802</j.2:synsetId>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-808-62000J0316-it-par49"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000808</j.2:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-808-62000J0316-it-par25"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-carattere_vincolante">
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-carattere_vincolante-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CARATTERE VINCOLANTE</j.2:lexicalForm>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CARATTERE VINCOLANTE</j.2:protoForm>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-cardiopatia_valvolare-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-801-62000A0074-it-par58"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-801-62000A0074-it-par71"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000801</j.2:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-801-62000A0074-it-par203"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-cardiopatia_valvolare-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-801-62000A0074-it-par43"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-denominazione_commerciale-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-802-32005L0029-it-art14-par1-pnt3-nov-blk9"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-802-32005L0029-it-art14-par1-pnt3-nov-blk8"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-802-32005L0029-it-art14-par1-pnt3-nov-blk6"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-effetto_nocivo-noun-1">
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-effetto_nocivo-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-effetto_nocivo"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
   </rdf:Description>
 </rdf:RDF>

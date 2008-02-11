@@ -1,107 +1,115 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:j.0="http://turing.ittig.cnr.it/jwn/ontologies/metasources.owl#"
+    xmlns:j.1="http://localhost/dalos/concepts.owl#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:j.1="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#"
-    xmlns:j.2="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
-    xmlns:j.3="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#"
+    xmlns:j.2="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#"
+    xmlns:j.3="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
     xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-residenza-noun-1">
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000028106</j.2:synsetId>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-28106-02002L0065-20050612-it-art3-par1-pnt1-pntb"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-residenza-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-ordinamento_stato_membro-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1443-32000L0031-it-art12-par3"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1443-32000L0031-it-art14-par3"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1443-32000L0031-it-art2-par1-pnth"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-ordinamento_stato_membro-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1443-32000L0031-it-art13-par2"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001443</j.2:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1443-61999J0144-it-par14"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-stato_conoscenza_scientifico-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1345-62000A0074-it-par68"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1345-01985L0374-19990604-it-pre-rec16"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1345-01985L0374-19990604-it-art15-par1-pntb"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-stato_conoscenza_scientifico-noun-1"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001345</j.2:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1345-62003A0138-it-par111"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1345-01985L0374-19990604-it-art7-par1-pnte"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-natura_bene-noun-1">
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-natura_bene-noun-1"/>
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-natura_bene"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-discriminazione_fondato-noun-1">
+    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-discriminazione_fondato-noun-1"/>
+    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-discriminazione_fondato"/>
     <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-ordinamento_stato_membro-noun-1">
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-ordinamento_stato_membro-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <rdf:type rdf:nodeID="A0"/>
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-ordinamento_stato_membro"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-residenza-noun-1">
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-residenza"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-regno_svezia-noun-1">
+    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-regno_svezia"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-regno_svezia-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <rdf:type rdf:nodeID="A0"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-residenza-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-stato_conoscenza_scientifico-noun-1">
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-esistenza_inadempimento-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-stato_conoscenza_scientifico-noun-1"/>
+    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-esistenza_inadempimento"/>
     <rdf:type rdf:nodeID="A0"/>
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-stato_conoscenza_scientifico"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-esistenza_inadempimento-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-ordinamento_stato_membro">
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ORDINAMENTI DEGLI STATI MEMBRI</j.2:lexicalForm>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ORDINAMENTO STATO MEMBRO</j.2:protoForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ORDINAMENTO STATO MEMBRO</j.2:lexicalForm>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-ordinamento_stato_membro-noun-1"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-esistenza_inadempimento">
+    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ESISTENZA INADEMPIMENTO</j.3:protoForm>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ESISTENZA INADEMPIMENTO</j.3:lexicalForm>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ESISTENZA DI UN INADEMPIMENTO</j.3:lexicalForm>
+    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-esistenza_inadempimento-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-stato_conoscenza_scientifico">
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">STATO DELLE CONOSCENZE SCIENTIFICHE</j.2:lexicalForm>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-stato_conoscenza_scientifico-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">STATO CONOSCENZA SCIENTIFICO</j.2:lexicalForm>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">STATO CONOSCENZA SCIENTIFICO</j.2:protoForm>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-residenza">
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">residenza</j.2:lexicalForm>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">residenza</j.2:protoForm>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-residenza-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-natura_bene-noun-1">
-    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-natura-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-805-31999L0044-it-art5-par3"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-regno_svezia-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-772-61999J0478-it-par25"/>
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-kingdom_of_sweden-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-805-31993L0013-it-pre-rec18"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-805-31993L0013-it-art4-par1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-805-31999L0044-it-art3-par3-sub3"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-natura_bene-noun-1"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000805</j.2:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-772-61999J0478-it-par27"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-772-61999J0478-it-par24"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-805-31999L0044-it-art2-par2-pntd"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-772-61999J0478-it-par19"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-772-61999J0478-it-par1"/>
+    <j.2:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-regno-noun-1"/>
+    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000772</j.3:synsetId>
+    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-regno_svezia-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-natura_bene">
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-natura_bene-noun-1"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-esistenza_inadempimento-noun-1">
+    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000829</j.3:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-829-62000J0316-it-par33"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-829-62002J0022-it-par7"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-829-61999J0392-it-par87"/>
+    <j.2:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-esistenza-noun-1"/>
+    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-esistenza_inadempimento-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-829-62002J0074-it-par14"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-829-62002J0074-it-par15"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-locale_commerciale">
+    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LOCALE COMMERCIALE</j.3:protoForm>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LOCALE COMMERCIALE</j.3:lexicalForm>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NATURA DEI BENI</j.2:lexicalForm>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NATURA BENE</j.2:protoForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NATURA BENE</j.2:lexicalForm>
+    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-locale_commerciale-noun-1"/>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LOCALI COMMERCIALI</j.3:lexicalForm>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-regno_svezia">
+    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">REGNO SVEZIA</j.3:protoForm>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">REGNO SVEZIA</j.3:lexicalForm>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">REGNO DI SVEZIA</j.3:lexicalForm>
+    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-regno_svezia-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-discriminazione_fondato">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-discriminazione_fondato-noun-1"/>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DISCRIMINAZIONE FONDATO</j.3:lexicalForm>
+    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DISCRIMINAZIONE FONDATO</j.3:protoForm>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DISCRIMINAZIONE FONDATA</j.3:lexicalForm>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-locale_commerciale-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-260-01997L0007-20050612-it-art3-par1-pnt2"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-260-02004R2006-20050612-it-ann-par2"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-260-31985L0577-it-pre-rec1"/>
+    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-locale_commerciale-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-260-01998L0027-20061228-it-ann-par2"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-260-31985L0577-it-art1-par1-pnt1"/>
+    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000260</j.3:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-disposizione-noun-1"/>
+    <j.2:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-locale-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-locale_commerciale-noun-1">
+    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-locale_commerciale"/>
+    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-locale_commerciale-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-discriminazione_fondato-noun-1">
+    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000865</j.3:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-865-32004L0113-it-pre-rec10"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-discriminazione_fondato-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-865-32004L0113-it-pre-rec24"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-865-32004L0113-it-pre-rec11"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-865-32004L0113-it-pre-rec25"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-865-32004L0113-it-art4-par3"/>
   </rdf:Description>
 </rdf:RDF>

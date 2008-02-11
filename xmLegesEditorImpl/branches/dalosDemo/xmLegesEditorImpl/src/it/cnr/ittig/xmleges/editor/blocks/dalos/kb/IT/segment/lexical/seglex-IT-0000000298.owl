@@ -1,112 +1,118 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:j.0="http://turing.ittig.cnr.it/jwn/ontologies/metasources.owl#"
+    xmlns:j.1="http://localhost/dalos/concepts.owl#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:j.1="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#"
-    xmlns:j.2="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
-    xmlns:j.3="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#"
+    xmlns:j.2="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#"
+    xmlns:j.3="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
     xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-prodotto_fitosanitario-noun-1">
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-prodotto_fitosanitario-noun-1"/>
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-prodotto_fitosanitario"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-adempimento_obbligo-noun-1">
+    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-adempimento_obbligo-noun-1"/>
+    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-adempimento_obbligo"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
     <rdf:type rdf:nodeID="A0"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-prodotto_fitosanitario">
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PRODOTTI FITOSANITARI</j.2:lexicalForm>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-prodotto_fitosanitario-noun-1"/>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PRODOTTO FITOSANITARIO</j.2:lexicalForm>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PRODOTTO FITOSANITARIO</j.2:protoForm>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-veterinario_contenente-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-567-62000A0344-it-par101"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-567-61996A0120-it-par11-rft1"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-veterinario_contenente-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-567-61999A0212-it-par54"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000567</j.2:synsetId>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-567-62000A0344-it-par27-rft1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-567-61999A0212-it-par12-rft1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-visita_commerciante">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">VISITA DEL COMMERCIANTE</j.2:lexicalForm>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-visita_commerciante-noun-1"/>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">VISITA COMMERCIANTE</j.2:protoForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">VISITA COMMERCIANTE</j.2:lexicalForm>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-istituto_credito-noun-1">
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-istituto_credito"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-istituto_credito-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <rdf:type rdf:nodeID="A0"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-veterinario_contenente">
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">VETERINARIO CONTENENTE</j.2:lexicalForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">VETERINARI CONTENENTI</j.2:lexicalForm>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">VETERINARIO CONTENENTE</j.2:protoForm>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-veterinario_contenente-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-istituto_credito">
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ISTITUTO CREDITO</j.2:lexicalForm>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ISTITUTO CREDITO</j.2:protoForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ISTITUTO DI CREDITO</j.2:lexicalForm>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-istituto_credito-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-prodotto_fitosanitario-noun-1">
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000452</j.2:synsetId>
-    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-prodotto-noun-1"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-prodotto_fitosanitario-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-452-62003A0158-it-par116"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-452-62003A0158-it-kwd3"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-452-62003A0158-it-kwd1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-452-62003A0158-it-ctt3"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-452-62003A0158-it-kwd2"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-istituto_credito-noun-1">
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-istituto_credito-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-680-01987L0102-19980421-it-art2-par1-pnte"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-680-61999J0481-it-par50"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000680</j.2:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-680-61999J0481-it-par47"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-680-61996J0045-it-par10-rft1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-680-01987L0102-19980421-it-art6-par1-sub1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-visita_commerciante-noun-1">
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-visita_commerciante"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-visita_commerciante-noun-1"/>
-    <rdf:type rdf:nodeID="A0"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-veterinario_contenente-noun-1">
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-veterinario_contenente-noun-1"/>
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-veterinario_contenente"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-pratica_riassunto">
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PRATICA RIASSUNTO</j.3:lexicalForm>
+    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PRATICA RIASSUNTO</j.3:protoForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-pratica_riassunto-noun-1"/>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PRATICA RIASSUNTA</j.3:lexicalForm>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-normativa-noun-1">
+    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-normativa"/>
+    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-normativa-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-pratica_riassunto-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-pratica_riassunto"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <rdf:type rdf:nodeID="A0"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-pratica_riassunto-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-visita_commerciante-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-visita_commerciante-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-874-31985L0577-it-art3-par3"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-874-31985L0577-it-art1-par2"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000874</j.2:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-874-61996J0045-it-par3-rft4"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-874-61997J0423-it-par3-rft3"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-874-31985L0577-it-art1-par1-pnt2"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-misura_necessario_attuazione">
+    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-misura_necessario_attuazione-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MISURE NECESSARIE PER L' ATTUAZIONE</j.3:lexicalForm>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MISURA NECESSARIO ATTUAZIONE</j.3:lexicalForm>
+    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MISURA NECESSARIO ATTUAZIONE</j.3:protoForm>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-adempimento_obbligo-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-555-31990L0314-it-pre-rec19"/>
+    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-adempimento_obbligo-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-555-31994L0047-it-pre-rec15"/>
+    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000555</j.3:synsetId>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-555-61999J0372-it-par11"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-555-01987L0102-19980421-it-art4-par2-pntd"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-555-31993L0013-it-ann-par1-pnto"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-adempimento_obbligo">
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ADEMPIMENTO DELL' OBBLIGO</j.3:lexicalForm>
+    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ADEMPIMENTO OBBLIGO</j.3:protoForm>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ADEMPIMENTO OBBLIGO</j.3:lexicalForm>
+    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-adempimento_obbligo-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-normativa">
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NORMATIVA</j.3:lexicalForm>
+    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-normativa-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NORMATIVA</j.3:protoForm>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-pratica_riassunto-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-833-62003A0158-it-par26"/>
+    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000833</j.3:synsetId>
+    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-pratica_riassunto-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.2:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-pratica-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-833-62003A0158-it-par35"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-833-62003A0158-it-par34"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-833-62003A0158-it-par41"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-833-62003A0158-it-par38"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-misura_necessario_attuazione-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1269-02004R2006-20050612-it-art12-par6"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1269-02004R2006-20050612-it-art10-par3"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1269-02004R2006-20050612-it-art13-par5"/>
+    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-misura_necessario_attuazione-noun-1"/>
+    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001269</j.3:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1269-02004R2006-20050612-it-art6-par4"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1269-02004R2006-20050612-it-art15-par6"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-misura_necessario_attuazione-noun-1">
+    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-misura_necessario_attuazione"/>
+    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-misura_necessario_attuazione-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-normativa-noun-1">
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-proposta-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-74-02002L0065-20050612-it-pre-rec22"/>
+    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-normativa-noun-1"/>
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-legal_system-noun-1"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-divieto-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-legge-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-74-02002L0065-20050612-it-pre-rec29"/>
+    <j.2:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-normativa_comunitario-noun-1"/>
+    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000074</j.3:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-74-01997L0007-20050612-it-art13-par2"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-direttiva-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-74-02002L0065-20050612-it-art20-par2"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-art.-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-74-01997L0007-20050612-it-art13-par1"/>
+    <j.2:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-normativa_nazionale-noun-1"/>
   </rdf:Description>
 </rdf:RDF>

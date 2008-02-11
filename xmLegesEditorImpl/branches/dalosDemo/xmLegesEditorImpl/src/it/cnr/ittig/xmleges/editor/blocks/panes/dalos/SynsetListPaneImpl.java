@@ -94,7 +94,7 @@ implements EventManagerListener, Loggable, Serviceable,
 
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
-        synsets = kbManager.getSynsets(utilDalos.getGlobalLang());
+        synsets = kbManager.getSynsetsList(utilDalos.getGlobalLang());
         
         //Usa un cell renderer per i lemmi
         LemmaListCellRenderer renderer = new LemmaListCellRenderer();
@@ -117,12 +117,12 @@ implements EventManagerListener, Loggable, Serviceable,
 		if(event instanceof LangChangedEvent){
 			String lang = ((LangChangedEvent)event).getLang();
 			if(((LangChangedEvent)event).getIsGlobalLang()) {		
-				synsets = kbManager.getSynsets(lang);
+				synsets = kbManager.getSynsetsList(lang);
 				list.setListData(synsets.toArray());
 			}else{
 				Synset selSyn = (Synset)list.getSelectedValue();
 				if(selSyn != null){		
-					selectSynset(kbManager.getSynset(selSyn.getURI(),lang.toUpperCase()));
+					selectSynset(kbManager.getSynset(selSyn.getURI(),lang));
 				}
 			}
 		}

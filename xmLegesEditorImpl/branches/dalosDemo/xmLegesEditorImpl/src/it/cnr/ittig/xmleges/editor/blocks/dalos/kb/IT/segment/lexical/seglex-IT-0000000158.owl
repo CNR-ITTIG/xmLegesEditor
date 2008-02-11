@@ -1,113 +1,109 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:j.0="http://turing.ittig.cnr.it/jwn/ontologies/metasources.owl#"
-    xmlns:j.1="http://localhost/dalos/concepts.owl#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:j.2="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#"
-    xmlns:j.3="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
-    xmlns:j.4="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#"
+    xmlns:j.1="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#"
+    xmlns:j.2="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
     xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-informare-noun-1">
-    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-informare-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000028074</j.3:synsetId>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-28074-02004R2006-20050612-it-art7-par1"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-origine_controversia">
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ORIGINE CONTROVERSIA</j.2:protoForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ORIGINE CONTROVERSIA</j.2:lexicalForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-origine_controversia-noun-1"/>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ORIGINE DELLA CONTROVERSIA</j.2:lexicalForm>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-origine-noun-1">
-    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-origine"/>
-    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-origine-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-prova_clinico-noun-1">
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-prova_clinico"/>
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-prova_clinico-noun-1"/>
     <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-origine-noun-1">
-    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000220</j.3:synsetId>
-    <j.2:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-origine_controversia-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-220-01998L0027-20061228-it-art2-par2"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-domanda_autorizzazione">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DOMANDA DI AUTORIZZAZIONE</j.2:lexicalForm>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DOMANDA AUTORIZZAZIONE</j.2:protoForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DOMANDA AUTORIZZAZIONE</j.2:lexicalForm>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-domanda_autorizzazione-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-origine_controversia-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-220-02004R2006-20050612-it-art14-par2"/>
-    <j.2:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-origine_francese-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-782-61999A0212-it-sec-grd-ssc2"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-782-61997A0112-it-sec-grd-ssc2"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-rispetto-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-220-02004R2006-20050612-it-art3-par1-pntb"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-220-01998L0027-20061228-it-art4-par1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-220-01998L0027-20061228-it-pre-rec3"/>
-    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-origin-noun-1"/>
-    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-ultimo-noun-1"/>
-    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-origine-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-782-62000A0344-it-sec-grd-ssc1"/>
+    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-origine-noun-1"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-origine_controversia-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-782-61996A0105-it-sec-grd-ssc2"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-782-62000A0074-it-sec-grd-ssc2"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000782</j.2:synsetId>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-procedimento_precontenzioso-noun-1">
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-parita-_uomo">
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PARITÀ TRA GLI UOMINI</j.2:lexicalForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PARITA' UOMO</j.2:lexicalForm>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PARITA' UOMO</j.2:protoForm>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-parita-_uomo-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-parita-_uomo-noun-1">
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-parita-_uomo-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-procedimento_precontenzioso"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-parita-_uomo"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-domanda_autorizzazione-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-domanda-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-465-61996A0120-it-par17"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-465-61999J0392-it-par107"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-465-61999J0392-it-par100"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-domanda_autorizzazione-noun-1"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000465</j.2:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-465-62000A0074-it-par157"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-465-62000A0074-it-par7-rft1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-prova_clinico-noun-1">
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001025</j.2:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1025-61996A0120-it-par11-rft1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-prova_clinico-noun-1"/>
+    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-prova-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1025-62000A0344-it-par68"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1025-62000A0074-it-par216"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1025-62000A0074-it-par29"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-domanda_autorizzazione-noun-1">
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-domanda_autorizzazione"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
     <rdf:type rdf:nodeID="A0"/>
-    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-procedimento_precontenzioso-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-tutela_interesse-noun-1">
-    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-tutela_interesse-noun-1"/>
-    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-tutela_interesse"/>
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-domanda_autorizzazione-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-prova_clinico">
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PROVE CLINICHE</j.2:lexicalForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PROVA CLINICO</j.2:lexicalForm>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PROVA CLINICO</j.2:protoForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-prova_clinico-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-origine_controversia-noun-1">
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-origine_controversia"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-origine_controversia-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <rdf:type rdf:nodeID="A0"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-procedimento_precontenzioso">
-    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-procedimento_precontenzioso-noun-1"/>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PROCEDIMENTO PRECONTENZIOSO</j.3:lexicalForm>
-    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PROCEDIMENTO PRECONTENZIOSO</j.3:protoForm>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-informare-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <rdf:type rdf:nodeID="A0"/>
-    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-informare-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-informare"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-tutela_interesse">
-    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-tutela_interesse-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TUTELA INTERESSE</j.3:protoForm>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TUTELA INTERESSE</j.3:lexicalForm>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TUTELA DEGLI INTERESSI</j.3:lexicalForm>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-informare">
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">informa</j.3:lexicalForm>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-informare-noun-1"/>
-    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">informare</j.3:protoForm>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">informare</j.3:lexicalForm>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-tutela_interesse-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.2:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-tutela-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-427-01998L0027-20061228-it-pre-rec9"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-427-01998L0027-20061228-it-pre-rec5"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#contracts_relating_to_the_purchase_of_the_right_to_use_immovable_properties_on_a_timeshare_basis"/>
-    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-tutela_interesse-noun-1"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-parita-_uomo-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-427-01998L0027-20061228-it-art3-par1-pnta"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-427-01998L0027-20061228-it-art6-par2-sub1-pnt1"/>
-    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000427</j.3:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-427-01998L0027-20061228-it-pre-rec1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-origine">
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ORIGINE</j.3:lexicalForm>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-origine-noun-1"/>
-    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ORIGINE</j.3:protoForm>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-procedimento_precontenzioso-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-629-61999J0392-it-par123"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-629-61999J0392-it-kwd2"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-629-61999J0392-it-par133"/>
-    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000629</j.3:synsetId>
-    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-procedimento_precontenzioso-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-629-61999J0392-it-par132"/>
-    <j.2:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-procedimento-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-629-61999J0144-it-sec-grd-ssc3"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-parita-_uomo-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1177-32004L0113-it-art6-par1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1177-32004L0113-it-pre-rec4"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1177-32004L0113-it-pre-rec5"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001177</j.2:synsetId>
   </rdf:Description>
 </rdf:RDF>

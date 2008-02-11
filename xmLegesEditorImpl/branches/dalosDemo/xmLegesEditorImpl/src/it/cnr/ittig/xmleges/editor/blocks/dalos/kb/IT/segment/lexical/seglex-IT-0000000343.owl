@@ -6,106 +6,101 @@
     xmlns:j.2="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
     xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-informazione_fornito">
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-informazione_fornito-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INFORMAZIONI FORNITE</j.2:lexicalForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INFORMAZIONE FORNITO</j.2:lexicalForm>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INFORMAZIONE FORNITO</j.2:protoForm>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-notificazione_collettivo-noun-1">
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-quadro_attivita-_commerciale-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-quadro_attivita-_commerciale-noun-1"/>
     <rdf:type rdf:nodeID="A0"/>
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-notificazione_collettivo"/>
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-quadro_attivita-_commerciale"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-notificazione_collettivo-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-notificazione_collettivo">
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NOTIFICAZIONE COLLETTIVA</j.2:lexicalForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NOTIFICAZIONE COLLETTIVO</j.2:lexicalForm>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NOTIFICAZIONE COLLETTIVO</j.2:protoForm>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-notificazione_collettivo-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-progetto_regolamento-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-556-61996A0105-it-par16"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-556-61996A0105-it-par49"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-556-61996A0105-it-par15"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-progetto_regolamento-noun-1"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000556</j.2:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-556-61996A0120-it-par42"/>
+    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-progetto-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-556-61996A0120-it-par26"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-rifiuto_imballaggio">
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RIFIUTO IMBALLAGGIO</j.2:lexicalForm>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RIFIUTO IMBALLAGGIO</j.2:protoForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RIFIUTI DI IMBALLAGGIO</j.2:lexicalForm>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-rifiuto_imballaggio-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-termine_prescrizione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-grado_causa-noun-1">
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-grado_causa-noun-1"/>
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-grado_causa"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <rdf:type rdf:nodeID="A0"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-termine_prescrizione-noun-1"/>
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-termine_prescrizione"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-informazione_fornito-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-informazione_fornito"/>
-    <rdf:type rdf:nodeID="A0"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-informazione_fornito-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-rifiuto_imballaggio-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-279-62000J0444-it-par13-rft2"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-279-62000J0444-it-kwd1"/>
-    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-rifiuto-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-279-62000J0444-it-opp1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-279-62000J0444-it-par13-rft1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-279-62000J0444-it-kwd2"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000279</j.2:synsetId>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-rifiuto_imballaggio-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-informazione_fornito-noun-1">
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-informazione_fornito-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-673-02004R2006-20050612-it-art12-par5"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-673-02002L0065-20050612-it-pre-rec21"/>
-    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-informazione-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-673-01997L0007-20050612-it-pre-rec11"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-673-32000L0031-it-art12-par1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-673-02002L0065-20050612-it-art3-par1-pnt2-pnte"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000673</j.2:synsetId>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-notificazione_collettivo-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-958-62003A0158-it-par71"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-958-62003A0158-it-sum1-sub1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-958-62003A0158-it-par62"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-958-62003A0158-it-par21"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000958</j.2:synsetId>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-notificazione_collettivo-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-termine_prescrizione">
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TERMINE DI PRESCRIZIONE</j.2:lexicalForm>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-termine_prescrizione-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TERMINE PRESCRIZIONE</j.2:protoForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TERMINE PRESCRIZIONE</j.2:lexicalForm>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-rifiuto_imballaggio-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <rdf:type rdf:nodeID="A0"/>
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-rifiuto_imballaggio"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-rifiuto_imballaggio-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-quadro_attivita-_commerciale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001334</j.2:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1334-32005L0029-it-art14-par1-pnt2-pnt1-nov"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1334-32005L0029-it-art2-par1-pntb"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1334-32005L0029-it-ann1-par22"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-quadro_attivita-_commerciale-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1334-32005L0029-it-art2-par1-pnta"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1334-02002L0065-20050612-it-art2-par1-pntd"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-proprieta_intelletuale-noun-1">
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-proprieta_intelletuale-noun-1"/>
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-proprieta_intelletuale"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-termine_prescrizione-noun-1">
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-quadro_attivita-_commerciale">
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">QUADRO DELLA SUA ATTIVITÀ COMMERCIALE</j.2:lexicalForm>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-quadro_attivita-_commerciale-noun-1"/>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">QUADRO ATTIVITA' COMMERCIALE</j.2:protoForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">QUADRO ATTIVITA' COMMERCIALE</j.2:lexicalForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-proprieta_intelletuale">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-proprieta_intelletuale-noun-1"/>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">proprietà intelletuale</j.2:lexicalForm>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">proprietà intelletuale</j.2:protoForm>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-grado_causa">
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GRADO CAUSA</j.2:lexicalForm>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GRADO CAUSA</j.2:protoForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-grado_causa-noun-1"/>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GRADO NELLA CAUSA</j.2:lexicalForm>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-progetto_regolamento">
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-progetto_regolamento-noun-1"/>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PROGETTO DI REGOLAMENTO</j.2:lexicalForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PROGETTO REGOLAMENTO</j.2:lexicalForm>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PROGETTO REGOLAMENTO</j.2:protoForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-grado_causa-noun-1">
+    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-grado-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-837-62000J0473-it-par30"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-termine_prescrizione-noun-1"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000837</j.2:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-837-01985L0374-19990604-it-pre-rec10"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1078-62000J0023-it-par36-pnt1"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-grado_causa-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1078-62003J0198-it-prt3-rol"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1078-62003J0198-it-prt2-rol"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001078</j.2:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1078-62000J0023-it-prt3-rol2"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1078-62000J0023-it-prt3-rol1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-termine-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-837-62003A0138-it-par49"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-837-31999L0044-it-pre-rec17"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-837-62004J0127-it-par16"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-proprieta_intelletuale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-28085-02004R2006-20050612-it-art13-par3-pnt2"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-proprieta_intelletuale-noun-1"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000028085</j.2:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-progetto_regolamento-noun-1">
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-progetto_regolamento"/>
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-progetto_regolamento-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
   </rdf:Description>
 </rdf:RDF>

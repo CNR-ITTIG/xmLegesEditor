@@ -1,115 +1,108 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:j.0="http://turing.ittig.cnr.it/jwn/ontologies/metasources.owl#"
+    xmlns:j.1="http://localhost/dalos/concepts.owl#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:j.1="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#"
-    xmlns:j.2="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
+    xmlns:j.2="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#"
+    xmlns:j.3="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
     xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-rischio_inerente-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <rdf:type rdf:nodeID="A0"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-rischio_inerente"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-rischio_inerente-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-immobile-noun-1">
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-immobile"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-immobile-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <rdf:type rdf:nodeID="A0"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-catena_distribuzione-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1011-62004J0127-it-par21"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1011-62002A0177-it-sum2"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-catena_distribuzione-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1011-62004J0127-it-sum1-sub2"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1011-62002A0177-it-par51"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001011</j.2:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1011-62004J0127-it-par29"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-catena_distribuzione">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CATENA DISTRIBUZIONE</j.2:protoForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CATENA DISTRIBUZIONE</j.2:lexicalForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CATENA DI DISTRIBUZIONE</j.2:lexicalForm>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-catena_distribuzione-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-clausola_contrattuale">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CLAUSOLA CONTRATTUALE</j.2:lexicalForm>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CLAUSOLA CONTRATTUALE</j.2:protoForm>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-clausola_contrattuale-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-immobile">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-immobile-noun-1"/>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IMMOBILE</j.2:lexicalForm>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IMMOBILE</j.2:protoForm>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-clausola_contrattuale-noun-1">
-    <rdf:type rdf:nodeID="A0"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-punto_di_vista_tecnico-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-clausola_contrattuale"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-clausola_contrattuale-noun-1"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-punto_di_vista_tecnico"/>
+    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-punto_di_vista_tecnico-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-rischio_inerente">
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RISCHI INERENTI</j.2:lexicalForm>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RISCHIO INERENTE</j.2:protoForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RISCHIO INERENTE</j.2:lexicalForm>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-punto_di_vista_tecnico">
+    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-punto_di_vista_tecnico-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-rischio_inerente-noun-1"/>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PUNTO DI VISTA TECNICO</j.3:lexicalForm>
+    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PUNTO DI VISTA TECNICO</j.3:protoForm>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-clausola_contrattuale-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-348-02002L0065-20050612-it-art3-par1-pnt3-pntf"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-regno_spagna">
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">REGNO DI SPAGNA</j.3:lexicalForm>
+    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-regno_spagna-noun-1"/>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">REGNO SPAGNA</j.3:lexicalForm>
+    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">REGNO SPAGNA</j.3:protoForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-informazione_relativo_ambiente-noun-1">
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-information_relating_to_the_environment-noun-1"/>
+    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-informazione_relativo_ambiente-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1230-62001J0316-it-par13-rft1"/>
+    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001230</j.3:synsetId>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-elemento-noun-1"/>
-    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-gestione-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-348-01985L0374-19990604-it-pre-rec12"/>
-    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-regola-noun-1"/>
-    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-clausola-noun-1"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-clausola_contrattuale-noun-1"/>
-    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-etichettatura-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-348-31990L0314-it-art4-par2-pntb"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000348</j.2:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-348-02002L0065-20050612-it-art15-par2"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1230-62001J0316-it-par13-rft2"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1230-62001J0316-it-par13-rft3"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-presentazione-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-348-02002L0065-20050612-it-pre-rec8"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1230-62001J0316-it-kwd1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1230-62001J0316-it-opp1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-rischio_inerente-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-746-32005L0029-it-pre-rec9"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-746-62003J0350-it-par98"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-rischio_inerente-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-746-01985L0374-19990604-it-pre-rec2"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-746-62003J0350-it-opp3-sub2"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-regno_spagna-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-331-62004J0026-it-par10"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000746</j.2:synsetId>
-    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-rischio-noun-1"/>
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-kingdom_of_spain-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-331-62004J0026-it-par11"/>
+    <j.2:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-regno-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-331-62004J0026-it-par12"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-331-62004J0026-it-opp1"/>
+    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-regno_spagna-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-746-62003J0350-it-sum3-sub2-pnt4"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-331-62004J0026-it-opp3"/>
+    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000331</j.3:synsetId>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-immobile-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-110-01987L0102-19980421-it-art2-par1-pnta-pnt2"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-110-01985L0374-19990604-it-pre-rec3"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000110</j.2:synsetId>
-    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-servizio_finanziario-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-110-01987L0102-19980421-it-art2-par1-pnta-pnt1"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-immobile-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-110-01987L0102-19980421-it-art2-par3"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-ispezione-noun-1">
+    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-ispezione"/>
+    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-ispezione-noun-1"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-regno_spagna-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-regno_spagna"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-regno_spagna-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-punto_di_vista_tecnico-noun-1">
+    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001438</j.3:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1438-61997J0102-it-sum3"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1438-61997J0102-it-par48"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1438-61997J0102-it-par3-rft2"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1438-61997J0102-it-par36"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1438-61997J0102-it-par49"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-110-01985L0374-19990604-it-art2-par1"/>
+    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-punto_di_vista_tecnico-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-catena_distribuzione-noun-1">
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-ispezione">
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ispezioni</j.3:lexicalForm>
+    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ispezione</j.3:protoForm>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ispezione</j.3:lexicalForm>
+    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-ispezione-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-ispezione-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-28087-02004R2006-20050612-it-art13-par3-pnt4"/>
+    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000028087</j.3:synsetId>
+    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-ispezione-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-informazione_relativo_ambiente-noun-1">
+    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-informazione_relativo_ambiente"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <rdf:type rdf:nodeID="A0"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-catena_distribuzione-noun-1"/>
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-catena_distribuzione"/>
+    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-informazione_relativo_ambiente-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-informazione_relativo_ambiente">
+    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-informazione_relativo_ambiente-noun-1"/>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INFORMAZIONE RELATIVO AMBIENTE</j.3:lexicalForm>
+    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INFORMAZIONE RELATIVO AMBIENTE</j.3:protoForm>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INFORMAZIONI RELATIVE ALL' AMBIENTE</j.3:lexicalForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
   </rdf:Description>
 </rdf:RDF>

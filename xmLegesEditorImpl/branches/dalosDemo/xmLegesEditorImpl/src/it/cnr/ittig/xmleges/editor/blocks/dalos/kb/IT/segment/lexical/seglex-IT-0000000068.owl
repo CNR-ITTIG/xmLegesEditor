@@ -1,113 +1,111 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:j.0="http://turing.ittig.cnr.it/jwn/ontologies/metasources.owl#"
-    xmlns:j.1="http://localhost/dalos/concepts.owl#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:j.2="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#"
-    xmlns:j.3="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
+    xmlns:j.1="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#"
+    xmlns:j.2="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
     xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-situazione_vendita">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-situazione_vendita-noun-1"/>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SITUAZIONE DI VENDITA</j.3:lexicalForm>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SITUAZIONE VENDITA</j.3:lexicalForm>
-    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SITUAZIONE VENDITA</j.3:protoForm>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-forza_art.-noun-1">
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-forza_art."/>
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-forza_art.-noun-1"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-progetto_misura-noun-1">
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-misura_trasposizione-noun-1">
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-misura_trasposizione-noun-1"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-misura_trasposizione"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-assenza_di_un_lmr_progesterone-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1417-62000A0344-it-par107"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001417</j.2:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1417-62000A0344-it-par104"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1417-62000A0344-it-par106"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-394-61996A0105-it-par73"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-assenza_di_un_lmr_progesterone-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-394-61996A0105-it-par14"/>
-    <j.2:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-progetto-noun-1"/>
-    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-progetto_misura-noun-1"/>
-    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000394</j.3:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-394-61996A0105-it-par6-rft1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-394-61996A0105-it-par54"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-394-61996A0105-it-par29"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1417-62003J0198-it-par35-rft1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-progetto_misura">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-progetto_misura-noun-1"/>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PROGETTO DELLE MISURE</j.3:lexicalForm>
-    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PROGETTO MISURA</j.3:protoForm>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PROGETTO MISURA</j.3:lexicalForm>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-ambiente-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <rdf:type rdf:nodeID="A0"/>
-    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-ambiente-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-ambiente"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-ambito_procedura-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-ambito_procedura-noun-1"/>
-    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-ambito_procedura"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <rdf:type rdf:nodeID="A0"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-progetto_misura-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-progetto_misura"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-progetto_misura-noun-1"/>
-    <rdf:type rdf:nodeID="A0"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-ambito_procedura">
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AMBITO DELLA PROCEDURA</j.3:lexicalForm>
-    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-ambito_procedura-noun-1"/>
-    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AMBITO PROCEDURA</j.3:protoForm>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AMBITO PROCEDURA</j.3:lexicalForm>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-assenza_di_un_lmr_progesterone">
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ASSENZA DI UN LMR PER IL PROGESTERONE</j.2:lexicalForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ASSENZA DI UN LMR PROGESTERONE</j.2:lexicalForm>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ASSENZA DI UN LMR PROGESTERONE</j.2:protoForm>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-assenza_di_un_lmr_progesterone-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-ambiente-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-112-62000A0074-it-par184"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-ambiente-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-112-62000A0074-it-par183"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-112-32004L0113-it-art2-par1-pntd"/>
-    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000112</j.3:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-112-32004L0113-it-art2-par1-pntc"/>
-    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-environment-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-112-32000L0031-it-pre-rec63"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-ambito_procedura-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-487-62000A0074-it-kwd1"/>
-    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-ambito_procedura-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-487-31993L0013-it-art5-par1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-487-62000A0074-it-par12-sub3"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.2:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-ambito-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-487-62000A0074-it-par103"/>
-    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000487</j.3:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-487-62000A0074-it-par122"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-situazione_vendita-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <rdf:type rdf:nodeID="A0"/>
-    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-situazione_vendita"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-considerazione_ambito-noun-1">
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-considerazione_ambito"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-situazione_vendita-noun-1"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-considerazione_ambito-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-situazione_vendita-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-500-62003J0350-it-par12"/>
-    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-situazione_vendita-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-500-62004J0229-it-opp1"/>
-    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000500</j.3:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-500-62004J0229-it-kwd1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.2:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-situazione-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-500-62004J0229-it-par13"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-500-62003J0350-it-par57"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-ambiente">
-    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AMBIENTE</j.3:protoForm>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AMBIENTE</j.3:lexicalForm>
-    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-ambiente-noun-1"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-misura_trasposizione">
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-misura_trasposizione-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MISURE DI TRASPOSIZIONE</j.2:lexicalForm>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MISURA TRASPOSIZIONE</j.2:protoForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MISURA TRASPOSIZIONE</j.2:lexicalForm>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-considerazione_ambito-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1031-61999J0392-it-par171"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001031</j.2:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1031-61999J0392-it-par169"/>
+    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-considerazione-noun-1"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-considerazione_ambito-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1031-61999J0392-it-par76"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1031-61999J0392-it-par149"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1031-61999J0392-it-par211"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-misura_trasposizione-noun-1">
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-misura_trasposizione-noun-1"/>
+    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-misura-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-814-62002J0074-it-par6"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-814-61999J0392-it-par207"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-814-62002J0074-it-par17"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-814-62002J0074-it-sum2"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000814</j.2:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-814-62002J0161-it-opp1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-forza_art.-noun-1">
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-forza_art.-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-359-62000A0074-it-par2"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-359-62000A0074-it-par110"/>
+    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-forza-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-359-61997J0423-it-par24"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000359</j.2:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-359-61998J0240-it-par9"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-359-61998J0240-it-par11"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-considerazione_ambito">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-considerazione_ambito-noun-1"/>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CONSIDERAZIONE AMBITO</j.2:protoForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CONSIDERAZIONE AMBITO</j.2:lexicalForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CONSIDERAZIONE NELL' AMBITO</j.2:lexicalForm>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-forza_art.">
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FORZA DELL' ART.</j.2:lexicalForm>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FORZA ART.</j.2:protoForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FORZA ART.</j.2:lexicalForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-forza_art.-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-assenza_di_un_lmr_progesterone-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-assenza_di_un_lmr_progesterone-noun-1"/>
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-assenza_di_un_lmr_progesterone"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
   </rdf:Description>
 </rdf:RDF>

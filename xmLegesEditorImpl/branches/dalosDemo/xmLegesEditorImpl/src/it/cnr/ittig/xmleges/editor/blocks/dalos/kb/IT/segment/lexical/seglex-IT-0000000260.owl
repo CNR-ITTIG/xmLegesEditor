@@ -6,106 +6,89 @@
     xmlns:j.2="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
     xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-alimentare_derivato-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-897-62001J0316-it-par6"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-897-62001J0316-it-opp1"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-entrata_vigore-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-409-01997L0007-20050612-it-art17-par1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-409-01997L0007-20050612-it-art15-par4"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-897-62001J0316-it-par13-rft1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-409-01985L0374-19990604-it-art17-par1"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-entrata_vigore-noun-1"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000409</j.2:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-409-01997L0007-20050612-it-art15-par1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-409-01998L0027-20061228-it-art6-par1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000897</j.2:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-897-62001J0316-it-par31"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-897-62001J0316-it-kwd1"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-alimentare_derivato-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-autorizzazione_immissione-noun-1">
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-autorizzazione_immissione-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <rdf:type rdf:nodeID="A0"/>
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-autorizzazione_immissione"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-questione_sollevato">
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">QUESTIONE SOLLEVATA</j.2:lexicalForm>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-questione_sollevato-noun-1"/>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">QUESTIONE SOLLEVATO</j.2:lexicalForm>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">QUESTIONE SOLLEVATO</j.2:protoForm>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-risarcimento_danno">
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-risarcimento_danno-noun-1"/>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RISARCIMENTO DANNO</j.2:protoForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RISARCIMENTO DANNO</j.2:lexicalForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RISARCIMENTO DEL DANNO</j.2:lexicalForm>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-agenzia_europeo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-975-61997A0112-it-par10"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-975-62000A0074-it-par12-sub1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-975-62000A0074-it-par1"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000975</j.2:synsetId>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-975-61996A0120-it-par12"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-agenzia_europeo-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-975-62000A0074-it-par9"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-autorizzazione_immissione">
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AUTORIZZAZIONE ALL' IMMISSIONE</j.2:lexicalForm>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AUTORIZZAZIONE IMMISSIONE</j.2:protoForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AUTORIZZAZIONE IMMISSIONE</j.2:lexicalForm>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-autorizzazione_immissione-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-alimentare_derivato-noun-1">
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-alimentare_derivato"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-criterio-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
     <rdf:type rdf:nodeID="A0"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-alimentare_derivato-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-criterio-noun-1"/>
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-criterio"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-questione_sollevato-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-678-62003J0350-it-par62"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-678-62000J0473-it-par17"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000678</j.2:synsetId>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-questione_sollevato-noun-1"/>
-    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-questione-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-678-61996J0045-it-par23"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-678-62000J0473-it-par25"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-678-62000J0473-it-par38"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-questione_sollevato-noun-1">
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-questione_sollevato-noun-1"/>
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-questione_sollevato"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-risarcimento_danno-noun-1">
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-risarcimento_danno-noun-1"/>
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-risarcimento_danno"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
     <rdf:type rdf:nodeID="A0"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-entrata_vigore-noun-1">
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-entrata_vigore"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-entrata_vigore-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-alimentare_derivato">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ALIMENTARE DERIVATO</j.2:lexicalForm>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-alimentare_derivato-noun-1"/>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ALIMENTARE DERIVATO</j.2:protoForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ALIMENTARI DERIVATI</j.2:lexicalForm>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-agenzia_europeo">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AGENZIA EUROPEA</j.2:lexicalForm>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-agenzia_europeo-noun-1"/>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AGENZIA EUROPEO</j.2:lexicalForm>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AGENZIA EUROPEO</j.2:protoForm>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-autorizzazione_immissione-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-353-62000A0074-it-par2"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-353-62000A0074-it-kwd2"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-353-62000A0074-it-par132"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000353</j.2:synsetId>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-criterio-noun-1">
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-principio-noun-1"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000245</j.2:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-245-01998L0027-20061228-it-art3-par1-pntb"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-criterio-noun-1"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-rispetto-noun-1"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-data-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-245-01998L0027-20061228-it-pre-rec9"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-353-62000A0074-it-kwd3"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-autorizzazione_immissione-noun-1"/>
-    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-autorizzazione-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-353-62000A0074-it-kwd1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-245-02002L0065-20050612-it-pre-rec20"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-infrazione-noun-1"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-prestatore-noun-1"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-disposizione-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-245-01997L0007-20050612-it-pre-rec21"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.1:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-criterio_efficacia-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-245-31985L0577-it-art3-par2-pntc"/>
+    <j.1:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-criterio_valutazione-noun-1"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-obbligo-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-agenzia_europeo-noun-1">
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-agenzia_europeo"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-agenzia_europeo-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <rdf:type rdf:nodeID="A0"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-risarcimento_danno-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-429-61996A0105-it-sbj"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-429-62002A0177-it-sbj"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-risarcimento_danno-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-risarcimento-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-429-62002A0177-it-par24-pnt1"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000429</j.2:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-429-62002A0177-it-par28"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-429-01985L0374-19990604-it-pre-rec9"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-criterio">
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CRITERIO</j.2:protoForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CRITERI</j.2:lexicalForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CRITERIO</j.2:lexicalForm>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-criterio-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-entrata_vigore">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ENTRATA IN VIGORE</j.2:lexicalForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ENTRATA VIGORE</j.2:lexicalForm>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ENTRATA VIGORE</j.2:protoForm>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-entrata_vigore-noun-1"/>
   </rdf:Description>
 </rdf:RDF>

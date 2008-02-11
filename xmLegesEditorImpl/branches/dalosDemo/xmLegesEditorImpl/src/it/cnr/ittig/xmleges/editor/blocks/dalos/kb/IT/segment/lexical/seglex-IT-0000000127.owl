@@ -1,111 +1,124 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:j.0="http://turing.ittig.cnr.it/jwn/ontologies/metasources.owl#"
+    xmlns:j.1="http://localhost/dalos/concepts.owl#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:j.1="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#"
-    xmlns:j.2="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
-    xmlns:j.3="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#"
+    xmlns:j.2="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#"
+    xmlns:j.3="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
     xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-riapertura_fase_orale-noun-1">
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-riapertura_fase_orale"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-riapertura_fase_orale-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-udienza-noun-1">
+    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-udienza"/>
+    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-udienza-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
     <rdf:type rdf:nodeID="A0"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-tasso_annuo_effettivo">
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TASSO ANNUO EFFETTIVO</j.2:protoForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TASSO ANNUO EFFETTIVO</j.2:lexicalForm>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-tasso_annuo_effettivo-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-tasso_annuo_effettivo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-tasso_annuo_effettivo"/>
-    <rdf:type rdf:nodeID="A0"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-tasso_annuo_effettivo-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-indicazione_obbligatorio-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <rdf:type rdf:nodeID="A0"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-indicazione_obbligatorio-noun-1"/>
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-indicazione_obbligatorio"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-spesa_sostenuto-noun-1">
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000521</j.2:synsetId>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-spesa_sostenuto-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-521-61997J0423-it-par61"/>
-    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-spesa-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-521-61998J0240-it-par33"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-udienza-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-254-61997J0102-it-par31"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-254-62000A0074-it-par109"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-254-62000A0074-it-par102"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-521-61999J0481-it-par55"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-521-61996J0083-it-par21"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-521-61996J0045-it-par24"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-254-62000A0074-it-par110"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-udienza-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-254-61997J0102-it-par14"/>
+    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000254</j.3:synsetId>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-indicazione_obbligatorio-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1085-61996J0083-it-kwd1"/>
-    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-indicazione-noun-1"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-indicazione_obbligatorio-noun-1"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001085</j.2:synsetId>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-professionista-noun-1">
+    <j.2:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-professionista_confronto-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-95-31993L0013-it-ann-par1-pntc"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-iqv-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-95-31993L0013-it-ann-par1-pntb"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1085-61996J0083-it-par6-sub1-rft1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1085-62005J0315-it-ctt3"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-95-02004R2006-20050612-it-pre-rec10"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-commissione-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1085-62005J0315-it-par45"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1085-62005J0315-it-tit7"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-fornitore-noun-1"/>
+    <j.2:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-professionista_settore_economico-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-95-02002L0065-20050612-it-art3-par1-pnt1-pntc"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-banca-noun-1"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-commerciante-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-95-31993L0013-it-ann-par1-pnta"/>
+    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-professionista-noun-1"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-membro-noun-1"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-prestatore-noun-1"/>
+    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000095</j.3:synsetId>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-legge-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-tasso_annuo_effettivo-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1228-01987L0102-19980421-it-art1-par2-pnte"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-tasso_annuo_effettivo-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1228-01987L0102-19980421-it-art1bis-par4-pnta"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1228-01987L0102-19980421-it-ann3-blkb"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1228-01987L0102-19980421-it-art1bis-par2"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1228-01987L0102-19980421-it-art1bis-par1-pnta"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001228</j.2:synsetId>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#annual-percentage-rate-of-charge"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-indicazione_obbligatorio">
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-indicazione_obbligatorio-noun-1"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-fine">
+    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FINE</j.3:protoForm>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INDICAZIONE OBBLIGATORIA</j.2:lexicalForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INDICAZIONE OBBLIGATORIO</j.2:lexicalForm>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INDICAZIONE OBBLIGATORIO</j.2:protoForm>
+    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-fine-noun-1"/>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FINE</j.3:lexicalForm>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-spesa_sostenuto-noun-1">
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-fine-noun-1">
+    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-fine"/>
+    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-fine-noun-1"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-udienza">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-udienza-noun-1"/>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UDIENZA</j.3:lexicalForm>
+    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UDIENZA</j.3:protoForm>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-fine-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-36-01987L0102-19980421-it-art1-par2-pntc1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-ricorso-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-36-01985L0374-19990604-it-pre-rec4"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-36-01985L0374-19990604-it-art2-par1"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-azione-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-commissione-noun-1"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-comunita--noun-1"/>
+    <j.2:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-fine_applicazione-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-36-01985L0374-19990604-it-art3-par2"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-36-01985L0374-19990604-it-pre-rec12"/>
+    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000036</j.3:synsetId>
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-purpose-noun-1"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-sistema-noun-1"/>
+    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-fine-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-somma_prestato">
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SOMMA PRESTATA</j.3:lexicalForm>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SOMMA PRESTATO</j.3:lexicalForm>
+    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SOMMA PRESTATO</j.3:protoForm>
+    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-somma_prestato-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-professionista-noun-1">
+    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-professionista"/>
+    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-professionista-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-spesa_sostenuto-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-somma_prestato-noun-1">
+    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-somma_prestato"/>
+    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-somma_prestato-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-spesa_sostenuto"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-riapertura_fase_orale-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1117-62003J0336-it-par15"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-riapertura_fase_orale-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1117-62003J0336-it-par16"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-somma_prestato-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-904-01987L0102-19980421-it-ann3-blka-blk3-par1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1117-62003J0336-it-par17"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001117</j.2:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1117-62003J0336-it-sec-grd-ssc3"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-904-01987L0102-19980421-it-ann3-blka-blk4-par1"/>
+    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-somma_prestato-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000904</j.3:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-904-01987L0102-19980421-it-ann3-blkb-blk1-par1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-904-01987L0102-19980421-it-ann3-blka-blk2-par1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-904-01987L0102-19980421-it-ann3-blka-blk1-par1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-spesa_sostenuto">
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-spesa_sostenuto-noun-1"/>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SPESA SOSTENUTO</j.2:protoForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SPESA SOSTENUTO</j.2:lexicalForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SPESE SOSTENUTE</j.2:lexicalForm>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-professionista">
+    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PROFESSIONISTA</j.3:protoForm>
+    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-professionista-noun-1"/>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PROFESSIONISTA</j.3:lexicalForm>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-riapertura_fase_orale">
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RIAPERTURA FASE ORALE</j.2:lexicalForm>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RIAPERTURA FASE ORALE</j.2:protoForm>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-riapertura_fase_orale-noun-1"/>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RIAPERTURA DELLA FASE ORALE</j.2:lexicalForm>
   </rdf:Description>
 </rdf:RDF>

@@ -5,95 +5,108 @@
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:j.2="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#"
     xmlns:j.3="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
-    xmlns:j.4="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#"
     xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-fondamento_normativo-noun-1">
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-certezza_diritto-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-412-32000L0031-it-pre-rec22"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-412-32005L0029-it-pre-rec5"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-412-32005L0029-it-pre-rec12"/>
+    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000412</j.3:synsetId>
+    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-certezza_diritto-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-412-32000L0031-it-pre-rec5"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-412-32005L0029-it-pre-rec17"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-certezza_diritto">
+    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CERTEZZA DIRITTO</j.3:protoForm>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CERTEZZA DIRITTO</j.3:lexicalForm>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CERTEZZA DEL DIRITTO</j.3:lexicalForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-certezza_diritto-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-regno_paese_basso-noun-1">
+    <rdf:type rdf:nodeID="A0"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-regno_paese_basso-noun-1"/>
+    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-regno_paese_basso"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-regno_paese_basso-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-756-61999J0144-it-par1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-756-61999J0144-it-opp2"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-756-61999J0144-it-par19"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-756-61999J0144-it-par12"/>
+    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-regno_paese_basso-noun-1"/>
+    <j.2:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-regno-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-756-61999J0144-it-opp1"/>
+    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000756</j.3:synsetId>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-regno_paese_basso">
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">REGNO DEI PAESI BASSI</j.3:lexicalForm>
+    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-regno_paese_basso-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">REGNO PAESE BASSO</j.3:lexicalForm>
+    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">REGNO PAESE BASSO</j.3:protoForm>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-sostituzione_parte-noun-1">
+    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-sostituzione_parte-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-sostituzione_parte"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-sostituzione_parte">
+    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SOSTITUZIONE PARTE</j.3:protoForm>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SOSTITUZIONE PARTE</j.3:lexicalForm>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SOSTITUZIONE DI UNA PARTE</j.3:lexicalForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-sostituzione_parte-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-comportamento_illegittimo">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-comportamento_illegittimo-noun-1"/>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COMPORTAMENTO ILLEGITTIMO</j.3:lexicalForm>
+    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COMPORTAMENTO ILLEGITTIMO</j.3:protoForm>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-comportamento_illegittimo-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-823-62000A0344-it-par89"/>
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-unlawful_conduct-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-823-62000A0344-it-kwd1"/>
+    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000823</j.3:synsetId>
+    <j.2:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-comportamento-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-comportamento_illegittimo-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-823-62000A0344-it-par96"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-823-61996A0105-it-kwd3"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-823-62000A0344-it-par87"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-sostituzione_parte-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1131-62004J0127-it-par34"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1131-62004J0127-it-sum2-sub1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1131-62004J0127-it-par38"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1131-62004J0127-it-par39"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1131-62004J0127-it-opp2"/>
+    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-sostituzione_parte-noun-1"/>
+    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001131</j.3:synsetId>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-certezza_diritto-noun-1">
+    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-certezza_diritto"/>
+    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-certezza_diritto-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
     <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-fondamento_normativo"/>
-    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-fondamento_normativo-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-prestazione">
-    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-prestazione-noun-1"/>
-    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PRESTAZIONE</j.3:protoForm>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PRESTAZIONI</j.3:lexicalForm>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PRESTAZIONE</j.3:lexicalForm>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-prestazione-noun-1">
-    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-aspetto-noun-1"/>
-    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-pagamento-noun-1"/>
-    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-elemento-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-249-01997L0007-20050612-it-art2-par1-pnt1"/>
-    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-studio-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-249-01997L0007-20050612-it-art13-par2"/>
-    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000249</j.3:synsetId>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#activities"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-249-01987L0102-19980421-it-art1-par2-pntc1"/>
-    <j.2:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-prestazione_servizio-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-249-01997L0007-20050612-it-art4-par1-pnti"/>
-    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-servizio-noun-1"/>
-    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-operazione-noun-1"/>
-    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-prestazione-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-249-01997L0007-20050612-it-art3-par2-pnt2"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-commerciante-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-trader-noun-1"/>
-    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-commissione-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-150-31985L0577-it-art1-par2"/>
-    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-banca-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-150-31985L0577-it-art1-par1-pnt2"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-150-31985L0577-it-art1-par1-pnt1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-150-31985L0577-it-art1-par1"/>
-    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-commerciante-noun-1"/>
-    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-istituzione_comunitario-noun-1"/>
-    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-istituzione-noun-1"/>
-    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-professionista-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-150-01987L0102-19980421-it-pre-rec5"/>
-    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000150</j.3:synsetId>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-commerciante">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COMMERCIANTE</j.3:lexicalForm>
-    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COMMERCIANTE</j.3:protoForm>
-    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-commerciante-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-fondamento_normativo">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-fondamento_normativo-noun-1"/>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FONDAMENTO NORMATIVO</j.3:lexicalForm>
-    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FONDAMENTO NORMATIVO</j.3:protoForm>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-commerciante-noun-1">
-    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-commerciante-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <rdf:type rdf:nodeID="A0"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-commerciante"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-prestazione-noun-1">
-    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-prestazione"/>
-    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-prestazione-noun-1"/>
-    <rdf:type rdf:nodeID="A0"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-comportamento_illegittimo-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-fondamento_normativo-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-944-62000A0074-it-par127"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-944-62003J0350-it-par61"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-fondamento_normativo-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-944-62000A0074-it-par155"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-944-62000A0074-it-par94"/>
-    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000944</j.3:synsetId>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-944-62003J0350-it-sum1"/>
+    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-comportamento_illegittimo"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-comportamento_illegittimo-noun-1"/>
   </rdf:Description>
 </rdf:RDF>

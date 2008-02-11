@@ -1,118 +1,106 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:j.0="http://turing.ittig.cnr.it/jwn/ontologies/metasources.owl#"
-    xmlns:j.1="http://localhost/dalos/concepts.owl#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:j.2="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#"
-    xmlns:j.3="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
+    xmlns:j.1="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#"
+    xmlns:j.2="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
     xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-garanzia_di_il_bene_consumo-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1398-31999L0044-it-art10-par1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1398-32000L0031-it-pre-rec11"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1398-02004R2006-20050612-it-ann-par11"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1398-01998L0027-20061228-it-ann-par10"/>
-    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-garanzia_di_il_bene_consumo-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1398-31999L0044-it-tit-sbj"/>
-    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001398</j.3:synsetId>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-politica_agricolo-noun-1">
-    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-politica_agricolo-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-illiceita-_comportamento_contestato-noun-1">
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-illiceita-_comportamento_contestato-noun-1"/>
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-illiceita-_comportamento_contestato"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
     <rdf:type rdf:nodeID="A0"/>
-    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-politica_agricolo"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-garanzia_di_il_bene_consumo-noun-1">
-    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-garanzia_di_il_bene_consumo"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <rdf:type rdf:nodeID="A0"/>
-    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-garanzia_di_il_bene_consumo-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-comportamento-noun-1">
-    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-comportamento-noun-1"/>
-    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-comportamento"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-illiceita-_comportamento_contestato">
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-illiceita-_comportamento_contestato-noun-1"/>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ILLICEITA' COMPORTAMENTO CONTESTATO</j.2:protoForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ILLICEITA' COMPORTAMENTO CONTESTATO</j.2:lexicalForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ILLICEITÀ DEL COMPORTAMENTO CONTESTATO</j.2:lexicalForm>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-credito_consumo-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-credito_consumo"/>
     <rdf:type rdf:nodeID="A0"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-credito_consumo-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-politica_agricolo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1063-62003A0138-it-par60"/>
-    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-politica_agricolo-noun-1"/>
-    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001063</j.3:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1063-62003A0158-it-kwd4"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1063-62003A0138-it-kwd1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1063-62003A0138-it-par62"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1063-62003A0138-it-par61"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-credito_consumo">
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CREDITO CONSUMO</j.2:lexicalForm>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CREDITO CONSUMO</j.2:protoForm>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-credito_consumo-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CREDITO AL CONSUMO</j.2:lexicalForm>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-scopo_terapeutico">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SCOPO TERAPEUTICO</j.2:protoForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SCOPO TERAPEUTICO</j.2:lexicalForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SCOPI TERAPEUTICI</j.2:lexicalForm>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-scopo_terapeutico-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-credito_consumo-noun-1">
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-credito_consumo-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-344-01987L0102-19980421-it-pre-rec14"/>
+    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-credito-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-comportamento">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COMPORTAMENTO</j.3:protoForm>
-    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-comportamento-noun-1"/>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COMPORTAMENTO</j.3:lexicalForm>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-clausola_abusivo_contenuto-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1290-61999J0478-it-par16"/>
-    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001290</j.3:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1290-61998J0240-it-par7-rft1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1290-62004J0302-it-par11-rft1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-344-01987L0102-19980421-it-pre-rec25"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-344-01987L0102-19980421-it-pre-rec1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1290-62000J0473-it-par6-rft1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-344-01987L0102-19980421-it-pre-rec6"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-344-01987L0102-19980421-it-pre-rec5"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000344</j.2:synsetId>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-foro_competente">
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-foro_competente-noun-1"/>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">foro competente</j.2:protoForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">foro competente</j.2:lexicalForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-illiceita-_comportamento_contestato-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1150-61996A0105-it-par47"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1150-62000A0344-it-par95"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-clausola_abusivo_contenuto-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1290-31993L0013-it-art6-par1"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-illiceita-_comportamento_contestato-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1150-62002A0177-it-par32"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001150</j.2:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1150-61996A0105-it-sum3"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1150-62002A0177-it-sum1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-clausola_abusivo_contenuto">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CLAUSOLE ABUSIVE CONTENUTE</j.3:lexicalForm>
-    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CLAUSOLA ABUSIVO CONTENUTO</j.3:protoForm>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CLAUSOLA ABUSIVO CONTENUTO</j.3:lexicalForm>
-    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-clausola_abusivo_contenuto-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-politica_agricolo">
-    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-politica_agricolo-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">POLITICA AGRICOLO</j.3:lexicalForm>
-    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">POLITICA AGRICOLO</j.3:protoForm>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">POLITICA AGRICOLA</j.3:lexicalForm>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-garanzia_di_il_bene_consumo">
-    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-garanzia_di_il_bene_consumo-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GARANZIA DI IL BENE CONSUMO</j.3:lexicalForm>
-    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GARANZIA DI IL BENE CONSUMO</j.3:protoForm>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GARANZIE DEI BENI DI CONSUMO</j.3:lexicalForm>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-clausola_abusivo_contenuto-noun-1">
-    <rdf:type rdf:nodeID="A0"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-foro_competente-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-clausola_abusivo_contenuto"/>
-    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-clausola_abusivo_contenuto-noun-1"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-foro_competente"/>
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-foro_competente-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-comportamento-noun-1">
-    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-responsabilita--noun-1"/>
-    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-rete-noun-1"/>
-    <j.2:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-comportamento_contestato-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-197-32000L0031-it-art2-par1-pnth-pnt1-pnt2"/>
-    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-unlawful_conduct-noun-1"/>
-    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-interesse-noun-1"/>
-    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-periodo-noun-1"/>
-    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000197</j.3:synsetId>
-    <j.2:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-comportamento_illegittimo-noun-1"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-foro_competente-noun-1">
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-foro_competente-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-197-01997L0007-20050612-it-pre-rec18"/>
-    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-comportamento-noun-1"/>
-    <j.2:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-comportamento_illecito-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-197-02002L0065-20050612-it-pre-rec9"/>
-    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-contratto-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-197-02004R2006-20050612-it-art17-par1-sub1-pnte"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000028129</j.2:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-28129-02002L0065-20050612-it-art3-par1-pnt3-pntf"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-197-01997L0007-20050612-it-pre-rec19"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-scopo_terapeutico-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-660-62000A0344-it-par70"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000660</j.2:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-660-62000J0023-it-par10"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-scopo-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-660-62000J0023-it-par19-pnt1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-660-62000A0344-it-par71"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-scopo_terapeutico-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-660-62000J0023-it-par20-pnt1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-scopo_terapeutico-noun-1">
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-scopo_terapeutico-noun-1"/>
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-scopo_terapeutico"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
   </rdf:Description>
 </rdf:RDF>

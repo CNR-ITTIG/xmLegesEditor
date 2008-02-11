@@ -1,116 +1,116 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:j.0="http://turing.ittig.cnr.it/jwn/ontologies/metasources.owl#"
-    xmlns:j.1="http://localhost/dalos/concepts.owl#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:j.2="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#"
-    xmlns:j.3="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
+    xmlns:j.1="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#"
+    xmlns:j.2="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
     xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-sfera_di_applicazione_direttiva-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1244-61996J0045-it-par23"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001244</j.3:synsetId>
-    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-sfera_di_applicazione_direttiva-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1244-61996J0045-it-opp1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1244-61996J0045-it-par11"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1244-61996J0045-it-par14"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1244-61996J0045-it-par16"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-parere_aggiuntivo-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-591-61996A0105-it-par32"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-591-61996A0105-it-par20"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-parere-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-591-61996A0105-it-par19"/>
-    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000591</j.3:synsetId>
-    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-parere_aggiuntivo-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-591-61996A0105-it-par33"/>
-    <j.2:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-parere-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-591-61996A0105-it-par21"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-fornitura">
-    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FORNITURA</j.3:protoForm>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-agente_infettivo">
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AGENTE INFETTIVO</j.2:protoForm>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-agente_infettivo-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FORNITURA</j.3:lexicalForm>
-    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-fornitura-noun-1"/>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AGENTE INFETTIVO</j.2:lexicalForm>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-prestatore_servizio-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-547-32000L0031-it-art15-par2"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-547-31990L0314-it-art5-par4-sub1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-547-31990L0314-it-art5-par1"/>
-    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000547</j.3:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-547-31990L0314-it-pre-rec19"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-547-31990L0314-it-art5-par2-sub1"/>
-    <j.2:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-prestatore-noun-1"/>
-    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-prestatore_servizio-noun-1"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-situazione_giuridico-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-situazione_giuridico"/>
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-situazione_giuridico-noun-1"/>
+    <rdf:type rdf:nodeID="A0"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-agente_infettivo-noun-1">
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-agente_infettivo-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-agente_infettivo"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-risparmio_carburante">
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RISPARMIO DI CARBURANTE</j.2:lexicalForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RISPARMIO CARBURANTE</j.2:lexicalForm>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RISPARMIO CARBURANTE</j.2:protoForm>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-risparmio_carburante-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-situazione_giuridico-noun-1">
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-informazione-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-603-61999A0212-it-par41"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-603-61996A0120-it-par38"/>
+    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-situazione-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-603-61996A0120-it-sum1-sub1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-603-61996A0120-it-par49"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000603</j.2:synsetId>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-situazione_giuridico-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-603-61996A0120-it-par55"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-fornitura-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-250-01987L0102-19980421-it-art11-par2-sub1-pnta"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-250-01987L0102-19980421-it-art1-par2-pntc1"/>
-    <j.2:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-fornitura_servizio_avente-noun-1"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-situazione_giuridico">
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SITUAZIONE GIURIDICO</j.2:lexicalForm>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SITUAZIONE GIURIDICO</j.2:protoForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SITUAZIONE GIURIDICA</j.2:lexicalForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-situazione_giuridico-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-risparmio_carburante-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-risparmio_carburante"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-risparmio_carburante-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-proroga_termine-noun-1">
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-proroga_termine-noun-1"/>
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-proroga_termine"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-proroga_termine-noun-1">
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000941</j.2:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-941-62003A0158-it-par142"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-941-62003A0158-it-par83"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-941-62003A0158-it-par91"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-941-62003A0158-it-par96"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-941-62003A0158-it-par97"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.2:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-fornitura_servizio-noun-1"/>
-    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-supply-noun-1"/>
-    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-fornitura-noun-1"/>
-    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000250</j.3:synsetId>
-    <j.2:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-fornitura_servizio_relativo-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-250-01987L0102-19980421-it-ann1-par1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-250-01987L0102-19980421-it-art11-par1"/>
-    <j.2:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-fornitura_bene-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-250-01987L0102-19980421-it-art11-par2-sub1-pntd"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-proroga_termine-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-parere_aggiuntivo">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-parere_aggiuntivo-noun-1"/>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PARERE AGGIUNTIVO</j.3:lexicalForm>
-    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PARERE AGGIUNTIVO</j.3:protoForm>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-agente_infettivo-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-881-62003A0138-it-par137"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-agente_infettivo-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-881-62003A0138-it-par117"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-rispetto-noun-1"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000881</j.2:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-881-62003A0138-it-par151"/>
+    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-agente-noun-1"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-sostanza_attivo-noun-1"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-nome-noun-1"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-contratto-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-elemento-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-881-62003A0138-it-par118"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-881-62003A0138-it-par1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-sfera_di_applicazione_direttiva-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <rdf:type rdf:nodeID="A0"/>
-    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-sfera_di_applicazione_direttiva-noun-1"/>
-    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-sfera_di_applicazione_direttiva"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-risparmio_carburante-noun-1">
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000854</j.2:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-854-62002J0022-it-opp1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-854-62002J0022-it-sbj"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-854-62002J0022-it-par1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-risparmio_carburante-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-854-62002J0074-it-par1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-854-62002J0074-it-opp1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-parere_aggiuntivo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-parere_aggiuntivo"/>
-    <rdf:type rdf:nodeID="A0"/>
-    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-parere_aggiuntivo-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-prestatore_servizio">
-    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-prestatore_servizio-noun-1"/>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PRESTATORE DI SERVIZI</j.3:lexicalForm>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PRESTATORE SERVIZIO</j.3:protoForm>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PRESTATORE SERVIZIO</j.3:lexicalForm>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-fornitura-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-fornitura-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <rdf:type rdf:nodeID="A0"/>
-    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-fornitura"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-prestatore_servizio-noun-1">
-    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-prestatore_servizio-noun-1"/>
-    <rdf:type rdf:nodeID="A0"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-prestatore_servizio"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-sfera_di_applicazione_direttiva">
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SFERA DI APPLICAZIONE DELLA DIRETTIVA</j.3:lexicalForm>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SFERA DI APPLICAZIONE DIRETTIVA</j.3:lexicalForm>
-    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SFERA DI APPLICAZIONE DIRETTIVA</j.3:protoForm>
-    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-sfera_di_applicazione_direttiva-noun-1"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-proroga_termine">
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-proroga_termine-noun-1"/>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PROROGA TERMINE</j.2:protoForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PROROGA TERMINE</j.2:lexicalForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PROROGA DEL TERMINE</j.2:lexicalForm>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
   </rdf:Description>
 </rdf:RDF>

@@ -4,104 +4,103 @@
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:j.1="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#"
     xmlns:j.2="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
-    xmlns:j.3="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#"
     xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-vendita_immobile-noun-1">
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-vendita_immobile-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-veste-noun-1">
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-veste"/>
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-veste-noun-1"/>
     <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-vendita_immobile"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-disponibilita-_informazione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-875-62002J0074-it-opp1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-875-62002J0022-it-opp1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-875-62002J0022-it-sbj"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-875-62002J0022-it-par1"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-disponibilita-_informazione-noun-1"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000875</j.2:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-875-62002J0074-it-par1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-costituzione_ipoteca-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-ricorso_irricevibile">
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RICORSO IRRICEVIBILE</j.2:lexicalForm>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RICORSO IRRICEVIBILE</j.2:protoForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-ricorso_irricevibile-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-diritto_recesso_istituito-noun-1">
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-diritto_recesso_istituito-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-diritto_recesso_istituito"/>
+    <rdf:type rdf:nodeID="A0"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-ricorso_irricevibile-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1005-62000J0023-it-par40-pnt1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1005-61997A0112-it-par31-pnt1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-ricorso_irricevibile-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1005-61996A0120-it-par35-pnt1"/>
+    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-ricorso-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1005-61996A0120-it-par36"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1005-62000A0344-it-par51-pnt1"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001005</j.2:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-diritto_recesso_istituito">
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DIRITTO DI RECESSO ISTITUITO</j.2:lexicalForm>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DIRITTO RECESSO ISTITUITO</j.2:protoForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DIRITTO RECESSO ISTITUITO</j.2:lexicalForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-diritto_recesso_istituito-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-conto_commerciante">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CONTO DI UN COMMERCIANTE</j.2:lexicalForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CONTO COMMERCIANTE</j.2:lexicalForm>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CONTO COMMERCIANTE</j.2:protoForm>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-conto_commerciante-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-conto_commerciante-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-conto_commerciante"/>
     <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-costituzione_ipoteca"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-costituzione_ipoteca-noun-1"/>
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-conto_commerciante-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-disponibilita-_informazione-noun-1">
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-disponibilita-_informazione"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-veste-noun-1">
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-veste-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000028108</j.2:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-28108-02002L0065-20050612-it-art3-par1-pnt1-pntc"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-ricorso_irricevibile-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-disponibilita-_informazione-noun-1"/>
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-ricorso_irricevibile-noun-1"/>
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-ricorso_irricevibile"/>
     <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-costituzione_ipoteca">
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COSTITUZIONE DELL' IPOTECA</j.2:lexicalForm>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-costituzione_ipoteca-noun-1"/>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COSTITUZIONE IPOTECA</j.2:lexicalForm>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COSTITUZIONE IPOTECA</j.2:protoForm>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-durata_minima-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <rdf:type rdf:nodeID="A0"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-durata_minima-noun-1"/>
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-durata_minima"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-vendita_immobile">
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-vendita_immobile-noun-1"/>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">VENDITA DELL' IMMOBILE</j.2:lexicalForm>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">VENDITA IMMOBILE</j.2:lexicalForm>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">VENDITA IMMOBILE</j.2:protoForm>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-vendita_immobile-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-766-62003J0350-it-par77"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-766-62003J0350-it-par72"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-766-62003J0350-it-par81-pnt1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-766-62003J0350-it-sum2"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-diritto_recesso_istituito-noun-1">
+    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-diritto-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-760-61999J0481-it-opp2"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-760-61999J0481-it-par41"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-760-61999J0481-it-opp1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-vendita-noun-1"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-vendita_immobile-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-766-62003J0350-it-par80"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000766</j.2:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-760-61999J0481-it-par26"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000760</j.2:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-760-61999J0481-it-par40"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-diritto_recesso_istituito-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-costituzione_ipoteca-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1137-62003J0350-it-par79"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-costituzione_ipoteca-noun-1"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-conto_commerciante-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1137-61999J0481-it-par14-rft3"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1137-62003J0350-it-par12"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1137-62004J0229-it-par13"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001137</j.2:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1137-62003J0350-it-par68"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-durata_minima">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-durata_minima-noun-1"/>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">durata minima</j.2:protoForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">durata minima</j.2:lexicalForm>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-disponibilita-_informazione">
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-disponibilita-_informazione-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DISPONIBILITA' INFORMAZIONE</j.2:protoForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DISPONIBILITA' INFORMAZIONE</j.2:lexicalForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DISPONIBILITÀ DI INFORMAZIONI</j.2:lexicalForm>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-durata_minima-noun-1">
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000028125</j.2:synsetId>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-durata_minima-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-28125-02002L0065-20050612-it-art3-par1-pnt3-pntb"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#time-interval"/>
+    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-conto-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-834-62004J0229-it-par41"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-834-61996J0045-it-par4-rft3"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-conto_commerciante-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-834-62004J0229-it-kwd1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-834-62004J0229-it-opp1"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000834</j.2:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-834-31985L0577-it-art2-par1-pnt2"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-veste">
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">veste</j.2:lexicalForm>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">veste</j.2:protoForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-veste-noun-1"/>
   </rdf:Description>
 </rdf:RDF>

@@ -1,10 +1,12 @@
 package it.cnr.ittig.xmleges.editor.blocks.dalos.kb;
 
+import java.io.File;
+
 public class KbConf {
 
 	public static boolean MERGE_DOMAIN = false;
 	
-	public static String dalosRepository = "dalos/";
+	public static String dalosRepository = "dalos" + File.separatorChar;
 	
 	public static String mapSegmentFileName = "segmap.dat";
 	public static String segmentDirName = "segment";
@@ -46,7 +48,7 @@ public class KbConf {
 	public static String LOCAL_METALEVEL_FULL = "language-properties-full.owl";
 	
 	//Inferred Data	
-	public static String inferenceDir = "inf/";
+	public static String inferenceDir = "inf" + File.separatorChar;
 	public static String DP_INF = "dpInf.owl";
 	public static String DPEXT_INF = "dpExtInf.owl";
 	public static String RES_INF = "resInf.owl";
@@ -57,4 +59,5 @@ public class KbConf {
 
 	public static String DALOS_CONCEPTS_NS = DALOS_NS + CONCEPTS + "#";
 
+	public static String conceptClassName = DALOS_CONCEPTS_NS + "Concept";
 }

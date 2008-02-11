@@ -1,114 +1,113 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:j.0="http://turing.ittig.cnr.it/jwn/ontologies/metasources.owl#"
+    xmlns:j.1="http://localhost/dalos/concepts.owl#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:j.1="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#"
-    xmlns:j.2="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
-    xmlns:j.3="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#"
+    xmlns:j.2="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#"
+    xmlns:j.3="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
     xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-condizione_impiego-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-988-62000A0074-it-par172"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-condizione_impiego-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-988-62000A0074-it-par157"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-988-62000A0074-it-par2"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-988-62000A0074-it-par190"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-988-62000A0074-it-par168"/>
-    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-condizione-noun-1"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000988</j.2:synsetId>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-consumo_umano-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-385-62000J0316-it-opp1-pnt1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-385-62000J0316-it-par14-rft2"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000385</j.2:synsetId>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-385-62000J0316-it-par11-rft3"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-385-62000J0316-it-par1-pnt1"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-consumo_umano-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-385-62000J0316-it-par10"/>
-    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-consumo-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-servizio_compreso-noun-1">
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-servizio_compreso-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-servizio_compreso"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <rdf:type rdf:nodeID="A0"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-ambito_scar">
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-ambito_scar-noun-1"/>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AMBITO DELLO SCAR</j.2:lexicalForm>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-governo_regno_unito">
+    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-governo_regno_unito-noun-1"/>
+    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GOVERNO REGNO UNITO</j.3:protoForm>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GOVERNO REGNO UNITO</j.3:lexicalForm>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AMBITO SCAR</j.2:lexicalForm>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AMBITO SCAR</j.2:protoForm>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GOVERNO DEL REGNO UNITO</j.3:lexicalForm>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-consumo_umano-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <rdf:type rdf:nodeID="A0"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-consumo_umano-noun-1"/>
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-consumo_umano"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-servizio_compreso">
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SERVIZIO COMPRESO</j.2:lexicalForm>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SERVIZIO COMPRESO</j.2:protoForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SERVIZIO TUTTO COMPRESO</j.2:lexicalForm>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-servizio_compreso-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-ambito_scar-noun-1">
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-ambito_scar-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-ambito_scar"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-interesse_tasso-noun-1">
+    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-interesse_tasso-noun-1"/>
+    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-interesse_tasso"/>
     <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-servizio_compreso-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-334-31990L0314-it-ann-par1-pntd"/>
-    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-servizio-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-334-31990L0314-it-ann-par1-pntf"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#all-inclusive-service"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-334-31990L0314-it-ann-par1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-334-31990L0314-it-ann-par1-pntc"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-servizio_compreso-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000334</j.2:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-334-31990L0314-it-ann-par1-pnth"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-condizione_impiego-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <rdf:type rdf:nodeID="A0"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-condizione_impiego-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-condizione_impiego"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-ambito_scar-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-755-62002A0177-it-par47"/>
-    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-ambito-noun-1"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-ambito_scar-noun-1"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-fissazione_lmr-noun-1">
+    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-fissazione_lmr-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-455-61999A0212-it-par37"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-455-61997A0112-it-par53"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-455-61997A0112-it-par11"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-455-61997A0112-it-par54"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-455-61996A0120-it-par25-rft2"/>
+    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000455</j.3:synsetId>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-interesse_tasso">
+    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-interesse_tasso-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INTERESSI AL TASSO</j.3:lexicalForm>
+    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INTERESSE TASSO</j.3:protoForm>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INTERESSE TASSO</j.3:lexicalForm>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-fissazione_lmr-noun-1">
+    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-fissazione_lmr"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-fissazione_lmr-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-disponibilita-_di_informazione_risparmio_di_carburante-noun-1">
+    <rdf:type rdf:nodeID="A0"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-disponibilita-_di_informazione_risparmio_di_carburante-noun-1"/>
+    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-disponibilita-_di_informazione_risparmio_di_carburante"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-fissazione_lmr">
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FISSAZIONE DI UN LMR</j.3:lexicalForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FISSAZIONE LMR</j.3:protoForm>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FISSAZIONE LMR</j.3:lexicalForm>
+    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-fissazione_lmr-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-disponibilita-_di_informazione_risparmio_di_carburante">
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DISPONIBILITÀ DI INFORMAZIONI SUL RISPARMIO DI CARBURANTE</j.3:lexicalForm>
+    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-disponibilita-_di_informazione_risparmio_di_carburante-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DISPONIBILITA' DI INFORMAZIONE RISPARMIO DI CARBURANTE</j.3:protoForm>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DISPONIBILITA' DI INFORMAZIONE RISPARMIO DI CARBURANTE</j.3:lexicalForm>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-interesse_tasso-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-652-62003J0350-it-sum3-sub2-pnt4"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-652-62003J0350-it-par93"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-interesse_tasso-noun-1"/>
+    <j.2:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-interesse-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-652-62003J0350-it-par90"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-652-62003J0350-it-par94"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-652-62003J0350-it-opp3-sub1-pnt3"/>
+    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000652</j.3:synsetId>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-governo_regno_unito-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-governo_regno_unito"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-governo_regno_unito-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-governo_regno_unito-noun-1">
+    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-governo_regno_unito-noun-1"/>
+    <j.2:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-governo-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-722-62000J0444-it-par42"/>
+    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000722</j.3:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-722-62000J0444-it-obs4"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-722-62000J0444-it-par41"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-722-62000J0444-it-par40"/>
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-united_kingdom_government-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000755</j.2:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-755-62002A0177-it-par30"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-755-62002A0177-it-par19"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-755-62002A0177-it-par48"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-755-62002A0177-it-par9"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-722-62000J0444-it-par94"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-condizione_impiego">
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-condizione_impiego-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CONDIZIONE IMPIEGO</j.2:protoForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CONDIZIONE IMPIEGO</j.2:lexicalForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CONDIZIONI D' IMPIEGO</j.2:lexicalForm>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-consumo_umano">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CONSUMO UMANO</j.2:lexicalForm>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CONSUMO UMANO</j.2:protoForm>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-consumo_umano-noun-1"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-disponibilita-_di_informazione_risparmio_di_carburante-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1276-62002J0022-it-sbj"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001276</j.3:synsetId>
+    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-disponibilita-_di_informazione_risparmio_di_carburante-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1276-62002J0074-it-par1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1276-62002J0022-it-opp1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1276-62002J0074-it-opp1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1276-62002J0022-it-par1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
   </rdf:Description>
 </rdf:RDF>

@@ -5,96 +5,100 @@
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:j.2="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#"
     xmlns:j.3="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
-    xmlns:j.4="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#"
     xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-contratto_fornitura">
-    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-contratto_fornitura-noun-1"/>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CONTRATTO FORNITURA</j.3:lexicalForm>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CONTRATTO FORNITURA</j.3:protoForm>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CONTRATTI DI FORNITURA</j.3:lexicalForm>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-principio-noun-1">
-    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-principio"/>
-    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-principio-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <rdf:type rdf:nodeID="A0"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-allegazione_fattuale">
-    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-allegazione_fattuale-noun-1"/>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ALLEGAZIONE FATTUALE</j.3:lexicalForm>
-    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ALLEGAZIONE FATTUALE</j.3:protoForm>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ALLEGAZIONI FATTUALI</j.3:lexicalForm>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-contratto_fornitura-noun-1">
-    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-contratto_fornitura-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-contratto_fornitura"/>
-    <rdf:type rdf:nodeID="A0"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-principio">
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PRINCIPIO</j.3:lexicalForm>
-    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-principio-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PRINCIPIO</j.3:protoForm>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-allegazione_fattuale-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1116-32005L0029-it-art12-ptt"/>
-    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-allegazione_fattuale-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1116-32005L0029-it-art12-par1-pntb"/>
-    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001116</j.3:synsetId>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-effetto-noun-1">
+    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000104</j.3:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-104-01985L0374-19990604-it-pre-rec19"/>
+    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-effetto-noun-1"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-esecuzione-noun-1"/>
+    <j.2:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-effetto_nocivo-noun-1"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-tutela-noun-1"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-uso-noun-1"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-efficacia-noun-1"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-carattere_abusivo-noun-1"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-situazione-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-104-01987L0102-19980421-it-pre-rec20"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1116-32006L0114-it-pre-rec19"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1116-32005L0029-it-art12-par1-pnta"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1116-32005L0029-it-pre-rec21"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Legal_Situation"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-esercizio-noun-1"/>
+    <j.2:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-effetto_giuridico-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-104-01998L0027-20061228-it-art2-par1-pntb"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-utilizzazione-noun-1"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-rapporto-noun-1"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-effetto_giuridico-noun-1"/>
+    <j.2:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-effetto_utile-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-104-01997L0007-20050612-it-pre-rec4"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-relatore-noun-1"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-attuazione-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-104-01998L0027-20061228-it-art2-par2"/>
+    <j.2:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-effetto_terapeutico-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-allegazione_fattuale-noun-1">
-    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-allegazione_fattuale-noun-1"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-punto_vista-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-620-61997J0102-it-par36"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-620-61997J0102-it-par49"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-620-01985L0374-19990604-it-pre-rec6"/>
+    <j.2:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-punto-noun-1"/>
+    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-punto_vista-noun-1"/>
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-point_of_view-noun-1"/>
+    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000620</j.3:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-620-61997J0102-it-par3-rft2"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-620-61997J0102-it-par48"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-sanita--noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-317-32000L0031-it-art3-par4-pnta-pnt1-pnt2"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-sanita--noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-317-32000L0031-it-pre-rec11"/>
+    <j.2:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-sanita-_pubblico-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-317-32000L0031-it-pre-rec32"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-317-32000L0031-it-pre-rec10"/>
+    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000317</j.3:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-317-32000L0031-it-art1-par3"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-punto_vista">
+    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-punto_vista-noun-1"/>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PUNTO DI VISTA</j.3:lexicalForm>
+    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PUNTO VISTA</j.3:protoForm>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PUNTO VISTA</j.3:lexicalForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-sanita--noun-1">
+    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-sanita-"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-sanita--noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-effetto-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-allegazione_fattuale"/>
+    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-effetto-noun-1"/>
+    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-effetto"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-effetto">
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EFFETTO</j.3:lexicalForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EFFETTI</j.3:lexicalForm>
+    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EFFETTO</j.3:protoForm>
+    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-effetto-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-sanita-">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SANITÀ</j.3:lexicalForm>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SANITA'</j.3:lexicalForm>
+    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SANITA'</j.3:protoForm>
+    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-sanita--noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-punto_vista-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-punto_vista-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-principio-noun-1">
-    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000062</j.3:synsetId>
-    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-punto-noun-1"/>
-    <j.2:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-principio_certezza-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-rule-noun-1"/>
-    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-principio-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-62-01987L0102-19980421-it-art3-par1"/>
-    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-criterio-noun-1"/>
-    <j.2:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-principio_parita--noun-1"/>
-    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-ultimo-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-62-01985L0374-19990604-it-pre-rec17"/>
-    <j.2:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-principio_proporzionalita--noun-1"/>
-    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-art.-noun-1"/>
-    <j.2:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-principio_sussidiarieta--noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-62-01998L0027-20061228-it-pre-rec11"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-62-01997L0007-20050612-it-pre-rec17"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-62-01997L0007-20050612-it-art4-par2"/>
-    <j.2:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-principio_amministrazione-noun-1"/>
-    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-regola-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-obbligo-noun-1"/>
-    <j.2:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-principio_precauzione-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-contratto_fornitura-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.2:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-contratto-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-451-01997L0007-20050612-it-art3-par2-pnt2"/>
-    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000451</j.3:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-451-01997L0007-20050612-it-art3-par2-pnt1"/>
-    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-contratto_fornitura-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-451-01987L0102-19980421-it-art11-par1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-451-01997L0007-20050612-it-art4-par1-pnti"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-451-01987L0102-19980421-it-art11-par2-sub1-pntd"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-punto_vista"/>
   </rdf:Description>
 </rdf:RDF>

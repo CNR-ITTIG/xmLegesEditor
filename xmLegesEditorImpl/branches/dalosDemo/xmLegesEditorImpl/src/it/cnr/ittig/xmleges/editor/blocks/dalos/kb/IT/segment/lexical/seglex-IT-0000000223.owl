@@ -1,114 +1,96 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:j.0="http://turing.ittig.cnr.it/jwn/ontologies/metasources.owl#"
-    xmlns:j.1="http://localhost/dalos/concepts.owl#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:j.2="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#"
-    xmlns:j.3="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
+    xmlns:j.1="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#"
+    xmlns:j.2="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
     xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-interpretazione_art.-noun-1">
-    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-interpretazione_art."/>
-    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-interpretazione_art.-noun-1"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-elemento">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ELEMENTO</j.2:lexicalForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ELEMENTI</j.2:lexicalForm>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-elemento-noun-1"/>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ELEMENTO</j.2:protoForm>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-elemento-noun-1">
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-residuo-noun-1"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-nome-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-145-02002L0065-20050612-it-art3-par1-pnt1-pntd"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-indicazione-noun-1"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-limite-noun-1"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-informazione-noun-1"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000145</j.2:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-145-01987L0102-19980421-it-art4-par2-pntd"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-clausola_contrattuale-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-145-01987L0102-19980421-it-art4-par3-sub1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-145-01987L0102-19980421-it--art4-par3-sub2"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-agente_infettivo-noun-1"/>
+    <j.1:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-elemento_prova-noun-1"/>
+    <j.1:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-elemento_ambiente-noun-1"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-elemento-noun-1"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-prestazione-noun-1"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-riferimento-noun-1"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-giurisprudenza-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-145-01987L0102-19980421-it-ann1-ptt"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-definizione-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-penale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-28127-02002L0065-20050612-it-art3-par1-pnt3-pntc"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-penale-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000028127</j.2:synsetId>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-elemento-noun-1">
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-elemento-noun-1"/>
+    <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <rdf:type rdf:nodeID="A0"/>
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-elemento"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-assenza_lmr">
-    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ASSENZA LMR</j.3:protoForm>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ASSENZA LMR</j.3:lexicalForm>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-assenza_lmr-noun-1"/>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ASSENZA DI UN LMR</j.3:lexicalForm>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-senso_direttiva-noun-1">
-    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-senso_direttiva-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-animale-noun-1">
     <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-senso_direttiva"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-senso_direttiva-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-377-32000L0031-it-pre-rec18"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-377-62000A0074-it-par1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-377-61996J0045-it-par21"/>
-    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000377</j.3:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-377-61997A0112-it-par19"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-377-02002L0065-20050612-it-art15-par2"/>
-    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-senso_direttiva-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.2:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-senso-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-senso_direttiva">
-    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-senso_direttiva-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SENSO DIRETTIVA</j.3:protoForm>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SENSO DIRETTIVA</j.3:lexicalForm>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SENSI DELLA DIRETTIVA</j.3:lexicalForm>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-contratto_mutuo-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <rdf:type rdf:nodeID="A0"/>
-    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-contratto_mutuo-noun-1"/>
-    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-contratto_mutuo"/>
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-animale-noun-1"/>
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-animale"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-contratto_mutuo">
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-animale">
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ANIMALE</j.2:lexicalForm>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CONTRATTO DI MUTUO</j.3:lexicalForm>
-    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-contratto_mutuo-noun-1"/>
-    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CONTRATTO MUTUO</j.3:protoForm>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CONTRATTO MUTUO</j.3:lexicalForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ANIMALI</j.2:lexicalForm>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ANIMALE</j.2:protoForm>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-animale-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-assenza_lmr-noun-1">
-    <rdf:type rdf:nodeID="A0"/>
-    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-assenza_lmr"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-penale-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-assenza_lmr-noun-1"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-penale-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-penale"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-assenza_lmr-noun-1">
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-animale-noun-1">
+    <j.1:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-animale_produzione-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-165-61996A0105-it-par59"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-assenza_lmr-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1014-61996A0120-it-par66"/>
-    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001014</j.3:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1014-62000A0344-it-par107"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1014-62003J0198-it-par35-rft1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-165-61996A0120-it-par11-rft1"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000165</j.2:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-165-61996A0105-it-par3"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1014-62000A0344-it-par106"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1014-62000A0344-it-par104"/>
+    <j.1:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-animale_allevamento-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-165-61996A0105-it-sum4-sub1"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-animale-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-165-61996A0120-it-par13"/>
+    <j.1:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-animale_azienda-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-interpretazione_art.">
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-penale">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-interpretazione_art.-noun-1"/>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INTERPRETAZIONE ART.</j.3:lexicalForm>
-    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INTERPRETAZIONE ART.</j.3:protoForm>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INTERPRETAZIONE DELL' ART.</j.3:lexicalForm>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-contratto_mutuo-noun-1">
-    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-contratto_mutuo-noun-1"/>
-    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000310</j.3:synsetId>
-    <j.2:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-contratto-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-310-61999J0481-it-par18"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-310-61999J0481-it-par35"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-310-61999J0481-it-par17"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-310-61999J0481-it-par34"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-310-61999J0481-it-par16"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-interpretazione_art.-noun-1">
-    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-interpretation_of_article-noun-1"/>
-    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000476</j.3:synsetId>
-    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-interpretazione_art.-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-476-62000A0074-it-par150"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-476-62000A0074-it-par145"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-476-62000A0074-it-par110"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-476-62000A0074-it-sum1-sub3"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-476-62000A0074-it-par144"/>
-    <j.2:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-interpretazione-noun-1"/>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">penali</j.2:lexicalForm>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">penale</j.2:protoForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">penale</j.2:lexicalForm>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-penale-noun-1"/>
   </rdf:Description>
 </rdf:RDF>

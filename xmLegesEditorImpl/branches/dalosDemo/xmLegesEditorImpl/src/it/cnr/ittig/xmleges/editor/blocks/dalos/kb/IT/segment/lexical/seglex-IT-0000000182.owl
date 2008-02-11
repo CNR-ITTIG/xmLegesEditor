@@ -4,114 +4,119 @@
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:j.1="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#"
     xmlns:j.2="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
-    xmlns:j.3="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#"
     xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-interesse_collettivo-noun-1">
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-interesse_collettivo"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-interesse_collettivo-noun-1"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-priorita-_rigenerazione-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-828-61997J0102-it-par10"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000828</j.2:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-828-61997J0102-it-par23"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-828-61997J0102-it-par22"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-828-61997J0102-it-par24"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-priorita-_rigenerazione-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-828-61997J0102-it-par11"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-priorita-_rigenerazione-noun-1">
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-priorita-_rigenerazione"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-priorita-_rigenerazione-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <rdf:type rdf:nodeID="A0"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-comunicazione_commerciale-noun-1">
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-comunicazione_commerciale"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-esistenza_di_un_nesso_causalita-_fra_il_comportamento">
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ESISTENZA DI UN NESSO CAUSALITA' FRA IL COMPORTAMENTO</j.2:lexicalForm>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ESISTENZA DI UN NESSO CAUSALITA' FRA IL COMPORTAMENTO</j.2:protoForm>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-esistenza_di_un_nesso_causalita-_fra_il_comportamento-noun-1"/>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ESISTENZA DI UN NESSO DI CAUSALITÀ FRA IL COMPORTAMENTO</j.2:lexicalForm>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-posizione-noun-1">
-    <j.1:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-posizione_commissione-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000297</j.2:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-297-32005L0029-it-art2-par1-pntj"/>
-    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-provvedimento-noun-1"/>
-    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-norma-noun-1"/>
-    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-risultato-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-297-32004L0113-it-art16-par2"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-297-32000L0031-it-pre-rec59"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-posizione-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-297-01987L0102-19980421-it-pre-rec19"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-297-31993L0013-it-pre-rec16"/>
-    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-rispetto-noun-1"/>
-    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-diritto-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-vigore-noun-1">
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-vigore-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000184</j.2:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-184-01997L0007-20050612-it-art15-par1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-184-01987L0102-19980421-it-art1bis-par4-pntb"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-184-01987L0102-19980421-it-art16-par1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-184-01987L0102-19980421-it-art6-par2"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-184-01985L0374-19990604-it-art17-par1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-esistenza_di_un_nesso_causalita-_fra_il_comportamento-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1395-62002A0177-it-par32"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1395-62002A0177-it-sum1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1395-61996A0105-it-par47"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1395-62000A0344-it-par95"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1395-61996A0105-it-sum3"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001395</j.2:synsetId>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-esistenza_di_un_nesso_causalita-_fra_il_comportamento-noun-1"/>
-    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-esistenza_di_un_nesso_causalita--noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-vigore-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-vigore-noun-1"/>
-    <rdf:type rdf:nodeID="A0"/>
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-vigore"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-posizione">
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-posizione-noun-1"/>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">POSIZIONE</j.2:lexicalForm>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">POSIZIONE</j.2:protoForm>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-vigore">
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-vigore-noun-1"/>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">VIGORE</j.2:protoForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">VIGORE</j.2:lexicalForm>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-esistenza_di_un_nesso_causalita-_fra_il_comportamento-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-esistenza_di_un_nesso_causalita-_fra_il_comportamento"/>
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-comunicazione_commerciale-noun-1"/>
     <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-esistenza_di_un_nesso_causalita-_fra_il_comportamento-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-interesse_collettivo-noun-1">
-    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-interesse-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-571-01998L0027-20061228-it-pre-rec2"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-interesse_collettivo-noun-1"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-comunicazione_commerciale-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-364-32000L0031-it-art1-par2"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-comunicazione-noun-1"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000364</j.2:synsetId>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-571-01998L0027-20061228-it-art1-par2"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000571</j.2:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-571-01998L0027-20061228-it-art1-par1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#collective_interests_of_consumers"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-571-01998L0027-20061228-it-pre-rec5"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-571-01998L0027-20061228-it-art6-par2-sub1-pnt1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-364-32000L0031-it-ann-par1-pnt8"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-comunicazione_commerciale-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-364-32000L0031-it-art21-par2"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-controllo-noun-1"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-richiesta-noun-1"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-azione-noun-1"/>
+    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-comunicazione-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-364-32000L0031-it-art2-par1-pntf"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-364-32000L0031-it-art6-par1-pnta"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-valutazione-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-interesse_collettivo">
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INTERESSI COLLETTIVI</j.2:lexicalForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INTERESSE COLLETTIVO</j.2:lexicalForm>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INTERESSE COLLETTIVO</j.2:protoForm>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-priorita-_rigenerazione">
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PRIORITA' RIGENERAZIONE</j.2:lexicalForm>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PRIORITA' RIGENERAZIONE</j.2:protoForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PRIORITÀ ALLA RIGENERAZIONE</j.2:lexicalForm>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-interesse_collettivo-noun-1"/>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-priorita-_rigenerazione-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-posizione-noun-1">
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-posizione"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-comunicazione_commerciale">
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COMUNICAZIONE COMMERCIALE</j.2:lexicalForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-comunicazione_commerciale-noun-1"/>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COMUNICAZIONE COMMERCIALE</j.2:protoForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COMUNICAZIONI COMMERCIALI</j.2:lexicalForm>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-domicilio">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DOMICILIO</j.2:protoForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DOMICILIO</j.2:lexicalForm>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-domicilio-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-commercializzazione-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-268-01997L0007-20050612-it-pre-rec24"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-268-02002L0065-20050612-it-art1-par1"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-medicinale-noun-1"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-commercializzazione-noun-1"/>
+    <j.1:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-commercializzazione_autovettura_nuovo-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-268-01998L0027-20061228-it-ann-par12"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-268-01997L0007-20050612-it-art3-par1-pnt1"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000268</j.2:synsetId>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-utilizzazione-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-268-01997L0007-20050612-it-art14-par1"/>
+    <j.1:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-commercializzazione_distanza-noun-1"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-pubblicita--noun-1"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-gestione-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-violazione-noun-1"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-pratica_commerciale-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-domicilio-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000151</j.2:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-151-01997L0007-20050612-it-art3-par2-pnt1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-domicilio-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-151-31985L0577-it-pre-rec3"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-151-01997L0007-20050612-it-pre-rec6"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-151-31985L0577-it-art1-par1-pnt2-pnt1"/>
+    <j.1:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-domicilio_eletto-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-151-31985L0577-it-pre-rec4"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-commercializzazione-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-posizione-noun-1"/>
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-commercializzazione-noun-1"/>
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-commercializzazione"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-commercializzazione">
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COMMERCIALIZZAZIONE</j.2:lexicalForm>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-commercializzazione-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COMMERCIALIZZAZIONE</j.2:protoForm>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-domicilio-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-domicilio-noun-1"/>
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-domicilio"/>
   </rdf:Description>
 </rdf:RDF>

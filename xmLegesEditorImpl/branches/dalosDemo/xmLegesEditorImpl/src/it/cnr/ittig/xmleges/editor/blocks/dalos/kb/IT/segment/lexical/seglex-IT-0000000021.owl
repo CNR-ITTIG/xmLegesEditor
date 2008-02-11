@@ -1,106 +1,113 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:j.0="http://turing.ittig.cnr.it/jwn/ontologies/metasources.owl#"
+    xmlns:j.1="http://localhost/dalos/concepts.owl#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:j.1="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#"
-    xmlns:j.2="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
+    xmlns:j.2="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#"
+    xmlns:j.3="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
     xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-presa_posizione">
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PRESA POSIZIONE</j.2:lexicalForm>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-combustione_olio_usato-noun-1">
+    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-combustione_olio_usato"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-combustione_olio_usato-noun-1"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-prestazione_servizio">
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PRESTAZIONE SERVIZIO</j.3:lexicalForm>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PRESA POSIZIONE</j.2:protoForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PRESA DI POSIZIONE</j.2:lexicalForm>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-presa_posizione-noun-1"/>
+    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PRESTAZIONE SERVIZIO</j.3:protoForm>
+    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-prestazione_servizio-noun-1"/>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PRESTAZIONE DI SERVIZI</j.3:lexicalForm>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-presa_posizione-noun-1">
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-combustione_olio_usato-noun-1">
+    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000462</j.3:synsetId>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-411-61999A0212-it-par41"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-411-61996A0105-it-par43"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-presa_posizione-noun-1"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000411</j.2:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-411-61996A0105-it-kwd2"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-411-61999A0212-it-par32-rft4"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-462-61999J0392-it-par1-pnt2"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-411-61996A0105-it-sum2"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-462-61999J0392-it-opp1-pnt2"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-462-61997J0102-it-par37"/>
+    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-combustione_olio_usato-noun-1"/>
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-combustion_of_waste_oil-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-462-61999J0392-it-par105"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-462-61997J0102-it-par3-rft3"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-msr_comunita--noun-1">
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-seguito_trattazione_orale-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
     <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-msr_comunita--noun-1"/>
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-msr_comunita-"/>
+    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-seguito_trattazione_orale"/>
+    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-seguito_trattazione_orale-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-msr_comunita--noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1178-62003A0138-it-par132"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-msr_comunita--noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1178-62003A0138-it-par133"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1178-62003A0138-it-par138"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-seguito_trattazione_orale">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-seguito_trattazione_orale-noun-1"/>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SEGUITO ALLA TRATTAZIONE ORALE</j.3:lexicalForm>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SEGUITO TRATTAZIONE ORALE</j.3:lexicalForm>
+    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SEGUITO TRATTAZIONE ORALE</j.3:protoForm>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-adeguamento_progresso_tecnico-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1050-61997A0112-it-par7"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1050-61999A0212-it-par9"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001178</j.2:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1050-61996A0120-it-par8"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001050</j.3:synsetId>
+    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-adeguamento_progresso_tecnico-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1050-61996A0105-it-par7"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1050-62000A0344-it-par9"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-linea_guida-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-624-62000A0074-it-par162"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-linea_guida-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-624-62000A0074-it-par212"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-624-62000A0074-it-par164"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000624</j.2:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-624-62000A0074-it-par210"/>
-    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-linea-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-624-62000A0074-it-par216"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-presa_posizione-noun-1">
-    <rdf:type rdf:nodeID="A0"/>
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-presa_posizione"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-presa_posizione-noun-1"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-prestazione_servizio-noun-1">
+    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-prestazione_servizio-noun-1"/>
+    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-prestazione_servizio"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-linea_guida">
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LINEA GUIDA</j.2:lexicalForm>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LINEA GUIDA</j.2:protoForm>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-linea_guida-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-margine_discrezionale">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MARGINE DISCREZIONALE</j.2:lexicalForm>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MARGINE DISCREZIONALE</j.2:protoForm>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-margine_discrezionale-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-msr_comunita-">
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MSR COMUNITA'</j.2:lexicalForm>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MSR COMUNITA'</j.2:protoForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MSR NELL' INTERA COMUNITÀ</j.2:lexicalForm>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-msr_comunita--noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-linea_guida-noun-1">
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-linea_guida-noun-1"/>
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-linea_guida"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <rdf:type rdf:nodeID="A0"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-margine_discrezionale-noun-1">
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-margine_discrezionale"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-margine_discrezionale-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <rdf:type rdf:nodeID="A0"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-margine_discrezionale-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000933</j.2:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-933-62003J0198-it-par67"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-933-62003J0198-it-par75"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-933-61996A0105-it-par65"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-933-62003J0198-it-kwd2"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-933-62000J0444-it-par41"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-margine_discrezionale-noun-1"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-prestazione_servizio-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-389-01997L0007-20050612-it-art4-par1-pnti"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-389-01997L0007-20050612-it-art2-par1-pnt1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-389-01997L0007-20050612-it-art13-par2"/>
+    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-prestazione_servizio-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-389-02002L0065-20050612-it-art2-par1-pnta"/>
+    <j.2:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-prestazione-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-389-01997L0007-20050612-it-pre-rec9"/>
+    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000389</j.3:synsetId>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-adeguamento_progresso_tecnico">
+    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-adeguamento_progresso_tecnico-noun-1"/>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ADEGUAMENTO AL PROGRESSO TECNICO</j.3:lexicalForm>
+    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ADEGUAMENTO PROGRESSO TECNICO</j.3:protoForm>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ADEGUAMENTO PROGRESSO TECNICO</j.3:lexicalForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-seguito_trattazione_orale-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-737-61996A0105-it-rec1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.2:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-seguito-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-737-62000A0074-it-rec1"/>
+    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000737</j.3:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-737-62000A0344-it-rec1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-737-61997A0112-it-rec1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-737-61996A0120-it-rec1"/>
+    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-seguito_trattazione_orale-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-adeguamento_progresso_tecnico-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-adeguamento_progresso_tecnico-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-adeguamento_progresso_tecnico"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-combustione_olio_usato">
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COMBUSTIONE DEGLI OLI USATI</j.3:lexicalForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-combustione_olio_usato-noun-1"/>
+    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COMBUSTIONE OLIO USATO</j.3:protoForm>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COMBUSTIONE OLIO USATO</j.3:lexicalForm>
   </rdf:Description>
 </rdf:RDF>

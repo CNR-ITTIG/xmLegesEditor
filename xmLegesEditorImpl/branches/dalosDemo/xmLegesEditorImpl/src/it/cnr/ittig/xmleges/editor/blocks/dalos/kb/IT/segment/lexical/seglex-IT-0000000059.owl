@@ -6,106 +6,87 @@
     xmlns:j.2="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
     xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-revoca_autorizzazione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-revoca_autorizzazione-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-481-62000A0074-it-par110"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-481-62000A0074-it-kwd2"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-481-62000A0074-it-kwd1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-481-62000A0074-it-par112"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000481</j.2:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-481-62000A0074-it-kwd3"/>
-    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-revoca-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-alimentazione_ruminante">
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-alimentazione_ruminante-noun-1"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-impresa">
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IMPRESE</j.2:lexicalForm>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IMPRESA</j.2:protoForm>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ALIMENTAZIONE DEI RUMINANTI</j.2:lexicalForm>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ALIMENTAZIONE RUMINANTE</j.2:protoForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ALIMENTAZIONE RUMINANTE</j.2:lexicalForm>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-impresa-noun-1"/>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IMPRESA</j.2:lexicalForm>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-alimentazione_ruminante-noun-1">
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-alimentazione_ruminante"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-monsanto_company">
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MONSANTO COMPANY</j.2:lexicalForm>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-monsanto_company-noun-1"/>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MONSANTO COMPANY</j.2:protoForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-trattamento_rigenerazione-noun-1">
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-trattamento_rigenerazione"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
     <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-alimentazione_ruminante-noun-1"/>
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-trattamento_rigenerazione-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-alimentazione_ruminante-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1089-62003A0138-it-par66"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1089-62003A0138-it-par124"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1089-62003A0138-it-par70"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001089</j.2:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1089-62003A0138-it-par117"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-impresa-noun-1">
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-lettera-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-117-01998L0027-20061228-it-ann-par1"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-consumatore-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-117-01997L0007-20050612-it-pre-rec3"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-autorita--noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-alimentazione_ruminante-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1089-62003A0138-it-par7"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-controversia-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-117-02002L0065-20050612-it-art9-par1"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-rigenerazione-noun-1"/>
+    <j.1:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-impresa_interessato-noun-1"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-iqv-noun-1"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-commissione-noun-1"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-impresa-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000117</j.2:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-117-01997L0007-20050612-it-pre-rec4"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-117-01997L0007-20050612-it-art9-par1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-transazione_contemplato-noun-1">
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-transazione_contemplato-noun-1"/>
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-transazione_contemplato"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-trattamento_rigenerazione-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-605-61997J0102-it-par16"/>
+    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-trattamento-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-605-61997J0102-it-par15"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-605-61997J0102-it-par35"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-605-61997J0102-it-opp1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-trattamento_rigenerazione-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-605-61997J0102-it-par34"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000605</j.2:synsetId>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-monsanto_company-noun-1">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-694-61997A0112-it-par17"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-694-61997A0112-it-par16"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-monsanto_company-noun-1"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000694</j.2:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-694-61997A0112-it-par41"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-694-61997A0112-it-par42"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-694-61997A0112-it-par28"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-monsanto_company-noun-1">
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-monsanto_company-noun-1"/>
+    <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-monsanto_company"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <rdf:type rdf:nodeID="A0"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-revoca_autorizzazione-noun-1">
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-revoca_autorizzazione"/>
-    <rdf:type rdf:nodeID="A0"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-revoca_autorizzazione-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-imballaggio_contenente-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-558-62000J0444-it-par61"/>
-    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-imballaggio-noun-1"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000558</j.2:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-558-62000J0444-it-opp1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-558-62000J0444-it-par62"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-imballaggio_contenente-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-558-62000J0444-it-par59"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-558-62000J0444-it-kwd2"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-imballaggio_contenente">
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-trattamento_rigenerazione">
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-trattamento_rigenerazione-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IMBALLAGGIO CONTENENTE</j.2:protoForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IMBALLAGGIO CONTENENTE</j.2:lexicalForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IMBALLAGGIO CONTENENTI</j.2:lexicalForm>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-imballaggio_contenente-noun-1"/>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TRATTAMENTO PER RIGENERAZIONE</j.2:lexicalForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TRATTAMENTO RIGENERAZIONE</j.2:lexicalForm>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TRATTAMENTO RIGENERAZIONE</j.2:protoForm>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-transazione_contemplato-noun-1">
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1008-62003J0350-it-par6-rft1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1008-31985L0577-it-art4-par1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-transazione_contemplato-noun-1"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001008</j.2:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1008-31994L0047-it-art2-par1-pnt3"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1008-61999J0481-it-par5-rft1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1008-31994L0047-it-art2-par1-pnt4"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-transazione_contemplato">
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TRANSAZIONI CONTEMPLATE</j.2:lexicalForm>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TRANSAZIONE CONTEMPLATO</j.2:protoForm>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-transazione_contemplato-noun-1"/>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TRANSAZIONE CONTEMPLATO</j.2:lexicalForm>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-imballaggio_contenente-noun-1">
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-imballaggio_contenente"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-imballaggio_contenente-noun-1"/>
-    <rdf:type rdf:nodeID="A0"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-impresa-noun-1">
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-impresa"/>
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-impresa-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-revoca_autorizzazione">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">REVOCA DI UN' AUTORIZZAZIONE</j.2:lexicalForm>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-revoca_autorizzazione-noun-1"/>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">REVOCA AUTORIZZAZIONE</j.2:lexicalForm>
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">REVOCA AUTORIZZAZIONE</j.2:protoForm>
+    <rdf:type rdf:nodeID="A0"/>
   </rdf:Description>
 </rdf:RDF>

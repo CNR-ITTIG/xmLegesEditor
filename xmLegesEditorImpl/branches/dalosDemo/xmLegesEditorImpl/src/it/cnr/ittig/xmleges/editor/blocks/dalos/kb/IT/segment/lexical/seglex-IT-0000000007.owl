@@ -6,12 +6,26 @@
     xmlns:j.2="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
     xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-governo_tedesco-noun-1">
-    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-governo_tedesco"/>
-    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-governo_tedesco-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-pubblicita-_comparativo">
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PUBBLICITÀ COMPARATIVA</j.2:lexicalForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PUBBLICITA' COMPARATIVO</j.2:lexicalForm>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-pubblicita-_comparativo-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PUBBLICITA' COMPARATIVO</j.2:protoForm>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-giudice_penale-noun-1">
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000028039</j.2:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-28039-02004R2006-20050612-it-pre-rec8"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-giudice_penale-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-pubblicita-_comparativo-noun-1">
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-pubblicita-_comparativo-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
     <rdf:type rdf:nodeID="A0"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-pubblicita-_comparativo"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-provvedimento">
     <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PROVVEDIMENTI</j.2:lexicalForm>
@@ -44,27 +58,9 @@
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-provvedimento-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
     <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-provvedimento"/>
-    <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
     <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-provvedimento-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-governo_tedesco-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-354-61997J0102-it-par14"/>
-    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-governo_tedesco-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-354-61997J0102-it-par20"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-354-61997J0102-it-par12"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-354-61997J0102-it-par17"/>
-    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000354</j.2:synsetId>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-354-61997J0102-it-par16"/>
-    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-governo-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-governo_tedesco">
-    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GOVERNO TEDESCO</j.2:protoForm>
-    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GOVERNO TEDESCO</j.2:lexicalForm>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-governo_tedesco-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-luogo_rifusione-noun-1">
     <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-572-61996J0083-it-par21"/>
@@ -85,11 +81,41 @@
     <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
   </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-giudice_penale">
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-giudice_penale-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">giudice penale</j.2:protoForm>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">giudice penale</j.2:lexicalForm>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-giudice_penale-noun-1">
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-giudice_penale-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-giudice_penale"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-luogo_rifusione">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
     <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LUOGO RIFUSIONE</j.2:protoForm>
     <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LUOGO RIFUSIONE</j.2:lexicalForm>
     <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-luogo_rifusione-noun-1"/>
     <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LUOGO A RIFUSIONE</j.2:lexicalForm>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-pubblicita-_comparativo-noun-1">
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000421</j.2:synsetId>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-aspetto-noun-1"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-misura-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-421-32005L0029-it-art6-par2-pnta"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-421-02004R2006-20050612-it-ann-par9"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-421-32005L0029-it-art14-par1-pnt3-nov-blk2"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-acquisto-noun-1"/>
+    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-pubblicita--noun-1"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-pubblicita-_comparativo-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-421-32005L0029-it-art14-par1-pnt1-nov-blk2"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-vendita-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-421-32005L0029-it-art14-par1-pnt4-nov-blk1"/>
+    <j.1:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-esame-noun-1"/>
   </rdf:Description>
 </rdf:RDF>

@@ -5,15 +5,21 @@
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:j.2="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#"
     xmlns:j.3="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
-    xmlns:j.4="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#"
     xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-causa_t-noun-1">
+    <rdf:type rdf:nodeID="A0"/>
     <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-causa_t"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-causa_t-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-esercizio-noun-1">
+    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-esercizio"/>
+    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-esercizio-noun-1"/>
     <rdf:type rdf:nodeID="A0"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-causa_t-noun-1">
     <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-causa_t-noun-1"/>
@@ -28,19 +34,33 @@
     <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-causa-noun-1"/>
     <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-125-62000A0074-it-cas4-prt1-rol"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-zona_balneazione-noun-1">
-    <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-zona_balneazione-noun-1"/>
-    <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-zona_balneazione"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <rdf:type rdf:nodeID="A0"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-causa_t">
     <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CAUSA T-125</j.3:lexicalForm>
     <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CAUSA T</j.3:protoForm>
     <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-causa_t-noun-1"/>
     <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CAUSA T</j.3:lexicalForm>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-esercizio-noun-1">
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-contratto-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-176-01997L0007-20050612-it-art6-par1-sub2"/>
+    <j.2:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-esercizio_diritto-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-176-01997L0007-20050612-it-art5-par1-sub2-pnt1"/>
+    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000176</j.3:synsetId>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-176-01987L0102-19980421-it-art1-par2-pntb"/>
+    <j.2:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-esercizio_attivita-_televisivo-noun-1"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-applicazione-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-176-01987L0102-19980421-it-art12-par2-sub1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.2:has_hyponym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-esercizio_attivita-_industriale-noun-1"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-confronto-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-protezione-noun-1"/>
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-exercise-noun-1"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-effetto-noun-1"/>
+    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-esercizio-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-176-01997L0007-20050612-it-art6-par1-sub1"/>
+    <j.2:fuzzynym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-utilizzazione-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-luce_considerazione-noun-1">
     <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-918-61996J0083-it-par20"/>
@@ -62,7 +82,6 @@
     <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LUCE CONSIDERAZIONE</j.3:protoForm>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-prezzo_per_unita-_misura-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#financial-service"/>
     <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000001226</j.3:synsetId>
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-unit_price_of_products-noun-1"/>
     <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1226-31998L0006-it-art3-par1"/>
@@ -71,48 +90,34 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1226-31998L0006-it-art1-par1"/>
     <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1226-31998L0006-it-art3-par3"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#price"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#unit-price"/>
-    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-prezzo_per_unita-_misura-noun-1"/>
     <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-1226-31998L0006-it-art2-par1-pntb"/>
+    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-prezzo_per_unita-_misura-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-luce_considerazione-noun-1">
     <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-luce_considerazione-noun-1"/>
     <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-luce_considerazione"/>
-    <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-prezzo_per_unita-_misura-noun-1">
-    <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
     <j.3:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-prezzo_per_unita-_misura-noun-1"/>
     <j.3:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-prezzo_per_unita-_misura"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-zona_balneazione">
-    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ZONA BALNEAZIONE</j.3:protoForm>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ZONA BALNEAZIONE</j.3:lexicalForm>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ZONE DI BALNEAZIONE</j.3:lexicalForm>
-    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-zona_balneazione-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-prezzo_per_unita-_misura">
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
     <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PREZZO PER UNITÀ DI MISURA</j.3:lexicalForm>
     <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PREZZO PER UNITA' MISURA</j.3:lexicalForm>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
     <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PREZZO PER UNITA' MISURA</j.3:protoForm>
     <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-prezzo_per_unita-_misura-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-zona_balneazione-noun-1">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-761-62004J0026-it-par15"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-761-62004J0026-it-par14"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-761-62004J0026-it-ctt3"/>
-    <j.3:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-zona_balneazione-noun-1"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-761-62004J0026-it-par16"/>
-    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-761-62004J0026-it-kwd1"/>
-    <j.3:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000761</j.3:synsetId>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-esercizio">
+    <j.3:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ESERCIZIO</j.3:protoForm>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.3:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ESERCIZIO</j.3:lexicalForm>
+    <j.3:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-esercizio-noun-1"/>
   </rdf:Description>
 </rdf:RDF>

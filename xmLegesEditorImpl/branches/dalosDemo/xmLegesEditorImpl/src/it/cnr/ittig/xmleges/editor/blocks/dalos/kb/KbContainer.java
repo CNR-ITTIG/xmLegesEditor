@@ -21,6 +21,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.Vector;
 
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -51,34 +52,15 @@ public class KbContainer {
 	public String infRepository;
 	public String segRepository;
 
-//	public String indFile;
-//	public String indwFile;
-//	//public String indclawFile;
-//	public String typesFile;
-//	public String conceptsFile;
-//	public String sourcesFile;
-//	public String infDpFile;
-//	public String infDpExtFile;
-	
-//	public static String INDIVIDUAL_NS = KbConf.DALOS_NS + "individuals.owl" + "#";
-//	public static String INDIVIDUAL_WORDS_NS = KbConf.DALOS_NS + "individuals-word.owl" + "#";
-//	public static String INDIVIDUAL_CLAW_NS = KbConf.DALOS_NS + "ind-to-consumer.owl" + "#";
-//	public static String TYPES_NS = KbConf.DALOS_NS + "types.owl" + "#";
-//	public static String SOURCES_NS = KbConf.DALOS_NS + "sources.owl" + "#";
-
 	private I18n i18n;
 	
 	private boolean concreteContainer = false;
 
 	//Dati
-	Map synsets = null;
-	Vector sortedSynsets = null; //meglio un TreeSet ??
-	
-//	Map uriToLexSeg = null;
-//	Map uriToSourceSeg = null;
-//	Map uriToSemSeg = null;
+	private Map synsets;
+	private Set sortedSynsets; //meglio un TreeSet ??
 
-	Set langProperties = null;
+	private Set langProperties = null;
 	
 	private KbTree kbt;
 
@@ -87,13 +69,51 @@ public class KbContainer {
 		i18n = i;
 
 		LANGUAGE = lang;
+		
+		synsets = null;
+		sortedSynsets = null;
 
 		if(!checkFiles()) {
-			System.err.println("## ERROR ## KbContainer - Data files not found! Repo: " +
+			System.err.println(">> WARNING - KbContainer: Data files not found! Repo: " +
 					localRepository);
 		} else {			
 			concreteContainer = true;
 		}
+	}
+	
+	public String getLanguage() {
+		
+		return LANGUAGE;
+	}
+	
+	public Collection getSynsets() {
+		
+		return getSynsets(false);
+	}
+	
+	//TEMPORANEA, toglierla in futuro...
+	public Object getSynsetFromMap(Object key) {
+		
+		return synsets.get(key);
+	}
+
+	public Collection getSynsets(boolean sorted) {
+	
+		if(!concreteContainer) {
+			System.err.println(
+					"KbContainer Error - This is an empty container!");
+			return null;
+		}
+		
+		if(synsets == null) {
+			initData();
+		}
+		
+		if(sorted) {
+			return sortedSynsets;
+		} else {
+			return synsets.values();
+		}		
 	}
 	
 	boolean initData() {		
@@ -102,13 +122,13 @@ public class KbContainer {
 			return false;
 		}
 		
+		System.out.println("KbContainer - Initializing data...");
 		synsets = new HashMap(2048, 0.70f);
-		sortedSynsets = new Vector(512);
+		sortedSynsets = new TreeSet();
 		
 		kbt = new KbTree(this, i18n);
 
 		long t1 = System.currentTimeMillis();		
-		System.out.println("Init synsets...");
 		initSynsets();
 		long t2 = System.currentTimeMillis();
 		System.out.println("...synsets loaded! (" +
@@ -134,52 +154,6 @@ public class KbContainer {
 	boolean isConcreteContainer() {
 		
 		return concreteContainer;
-	}
-	
-	void initPivotMapping(Map pivotToForeign) {
-		
-		System.out.println("Initializing Pivot Classes...");
-		OntModel mod = KbModelFactory.getModel("concepts");
-		
-		Set pivots = pivotToForeign.keySet();
-		
-		//Assumptions: no reasoning, no anonymous resources
-		//and objects are OntResources
-		for(Iterator i = mod.listStatements(
-				(Resource) null, RDFS.subClassOf, (RDFNode) null);
-				i.hasNext();) {
-			Statement stm = (Statement) i.next();
-			Resource subj = stm.getSubject();
-			OntResource obj = (OntResource) stm.getObject();
-
-			String subjNS = subj.getNameSpace();
-			String objNS = obj.getNameSpace();
-			String subjName = subj.getLocalName();
-			String objName = obj.getLocalName();
-			
-			if(!subjNS.equalsIgnoreCase(KbConf.DALOS_CONCEPTS_NS)) {
-				System.err.println("initPivotMapping() - subjNS: " + subjNS);
-				continue;
-			}
-			if(!objNS.equalsIgnoreCase(KbConf.DOMAIN_ONTO_NS)) {
-				System.err.println("initPivotMapping() - subjNS: " + subjNS);
-				continue;
-			}
-			
-			PivotOntoClass poc = new PivotOntoClass();
-			poc.setURI(subjName + subjNS);
-			if(pivots.contains(poc)) {
-				//Retrieve the original pivot class...
-				for(Iterator pi = pivots.iterator(); pi.hasNext();) {
-					Object item = pi.next();
-					if(poc.equals(item)) {
-						poc = (PivotOntoClass) item;
-						break;
-					}
-				}
-			}
-			
-		}
 	}
 	
 	private void initMaps() 
@@ -302,33 +276,30 @@ public class KbContainer {
 		
 		String indFile = localRepository + KbConf.IND;
 		String indwFile = localRepository + KbConf.INDW;
-		//indclawFile = localRepository + KbConf.INDCLAW;
 		String typesFile = localRepository + KbConf.TYPES;
 		String sourcesFile = localRepository + KbConf.SOURCES;
-//		String infDpFile = infRepository + KbConf.DP_INF;
-//		String infDpExtFile = infRepository + KbConf.DPEXT_INF;
 		
-		if(!UtilFile.fileExistInTemp(indFile)) {
+		if(!UtilFile.fileExistInTemp(indFile)) {			
+			return false;
+		} else {
 			KbModelFactory.addDocument(KbConf.IND, LANGUAGE, indFile);
-			return false;
 		}
+		
 		if(!UtilFile.fileExistInTemp(indwFile)) {
+			return false;
+		} else {
 			KbModelFactory.addDocument(KbConf.INDW, LANGUAGE, indwFile);
-			return false;
 		}
-//		if(!UtilFile.fileExistInTemp(indclawFile)) {
-//			return false;
-//		}
+		
 		if(!UtilFile.fileExistInTemp(typesFile)) {
+			return false;
+		} else {
 			KbModelFactory.addDocument(KbConf.TYPES, LANGUAGE, typesFile);
-			return false;
 		}
-//		if(!UtilFile.fileExistInTemp(conceptsFile)) {
-//			return false;
-//		}
 		if(!UtilFile.fileExistInTemp(sourcesFile)) {
-			KbModelFactory.addDocument(KbConf.SOURCES, LANGUAGE, sourcesFile);
 			return false;
+		} else {
+			KbModelFactory.addDocument(KbConf.SOURCES, LANGUAGE, sourcesFile);
 		}
 		
 		return true;
@@ -346,7 +317,7 @@ public class KbContainer {
 	
 	private void initSynsets() {
 		
-		OntModel ind_m = KbModelFactory.getModel("individual", "micro");
+		OntModel ind_m = KbModelFactory.getModel("individual", "micro", LANGUAGE);
 		
 		OntProperty contains = ind_m.getOntProperty(KbConf.METALEVEL_ONTO_NS + "containsWordSense");
 		OntProperty word = ind_m.getOntProperty(KbConf.METALEVEL_ONTO_NS + "word");
@@ -388,27 +359,28 @@ public class KbContainer {
 			
 			//System.out.println("Adding " + ores.getLocalName() + " --> " + syn);			
 			synsets.put(ores.getLocalName(), syn); //meglio questa come chiave??
-			addSortedSynset(syn);
-		}
-	}
-	
-	private void addSortedSynset(Synset syn) {
-		
-		boolean ins = false;
-		for(int i = 0; i < sortedSynsets.size(); i++) {
-			Synset item = (Synset) sortedSynsets.get(i);
-			if(item.toString().compareToIgnoreCase(syn.toString()) < 0) continue;
-			if(item.toString().compareToIgnoreCase(syn.toString()) > 0) {
-				sortedSynsets.add(i, syn);
-				ins = true;
-				break;
-			}
-		}
-		if(!ins) {
-			//Inserisci alla fine del vettore
+			//addSortedSynset(syn);
 			sortedSynsets.add(syn);
 		}
 	}
+	
+//	private void addSortedSynset(Synset syn) {
+//		
+//		boolean ins = false;
+//		for(int i = 0; i < sortedSynsets.size(); i++) {
+//			Synset item = (Synset) sortedSynsets.get(i);
+//			if(item.toString().compareToIgnoreCase(syn.toString()) < 0) continue;
+//			if(item.toString().compareToIgnoreCase(syn.toString()) > 0) {
+//				sortedSynsets.add(i, syn);
+//				ins = true;
+//				break;
+//			}
+//		}
+//		if(!ins) {
+//			//Inserisci alla fine del vettore
+//			sortedSynsets.add(syn);
+//		}
+//	}
 	
 	Synset getSynset(String uri) {
 		
@@ -427,7 +399,7 @@ public class KbContainer {
 		
 		System.out.println(">> adding sources to " + syn + "...");
 		
-		OntModel om = KbModelFactory.getModel("source", "micro");
+		OntModel om = KbModelFactory.getModel("source", "micro", LANGUAGE);
 		
 		Individual ind = om.getIndividual(syn.getURI());
 
@@ -483,7 +455,7 @@ public class KbContainer {
 		}
 
 		//OntModel om = KbModelFactory.getModel("individual", "micro");
-		OntModel om = KbModelFactory.getModel("seg.lex", "micro", syn);
+		OntModel om = KbModelFactory.getModel("seg.lex", "micro", LANGUAGE, syn);
 		
 		Individual ind = om.getIndividual(syn.getURI());
 		OntProperty glossProp = om.getOntProperty(KbConf.METALEVEL_ONTO_NS + "gloss");
@@ -532,7 +504,8 @@ public class KbContainer {
 		syn.setLexicalPropCached(true);
 	}
 	
-	
+	//TODO
+	//MODIFICARE !!!!	
 	void addSemanticProperties(Synset syn) {
 		//Aggiunge le propriet� semantiche
 		
@@ -542,7 +515,7 @@ public class KbContainer {
 //			System.out.println("..already cached!");
 			return;
 		}
-
+		
 		OntModel om = KbModelFactory.getModel("dpinf");
 		
 		Individual ind = om.getIndividual(syn.getURI());
@@ -613,8 +586,8 @@ public class KbContainer {
 		search = search.toLowerCase();
 		
 		Vector results = new Vector();
-		for(int i = 0; i < sortedSynsets.size(); i++) {
-			Synset syn = (Synset) sortedSynsets.get(i);
+		for(Iterator i = sortedSynsets.iterator(); i.hasNext(); ) {
+			Synset syn = (Synset) i.next();
 			Collection variants = syn.getVariants();
 			for(Iterator k = variants.iterator(); k.hasNext();) {
 				String lemma = (String) k.next();
@@ -737,7 +710,7 @@ public class KbContainer {
 		
 		Set properties = new HashSet();
 
-		OntModel om = KbModelFactory.getModel("domain", "micro");
+		OntModel om = KbModelFactory.getModel("domain", "micro", LANGUAGE);
 		
 		System.out.println("\n\n\n\n@@@@@@@@@@ KB - FRAME REPRESENTATION @@@@@@@@");
 		for(Iterator i = om.listClasses(); i.hasNext();) { 
@@ -788,7 +761,7 @@ public class KbContainer {
 	
 	void compute(String type) {
 		
-		SPEngine spe = new SPEngine(KbModelFactory.getModel("full", "micro"), this.LANGUAGE);
+		SPEngine spe = new SPEngine(KbModelFactory.getModel("full", "micro", LANGUAGE), this.LANGUAGE);
 		spe.compute(type);
 		System.out.println("COMPUTE processing done.");
 	}

@@ -75,7 +75,7 @@ public class KbTree {
 		tmpTree.setRootUserObject("CONSUMER LAW");
 		tmpTree.setRootVisible(true);
 		
-		OntModel om = KbModelFactory.getModel("domain", "micro");
+		OntModel om = KbModelFactory.getModel("domain", "micro", kbc.getLanguage());
 		Collection topClasses = kbc.getTopClasses();
 		for(Iterator i = topClasses.iterator(); i.hasNext();) {
 			String ocName = (String) i.next();
@@ -270,7 +270,7 @@ public class KbTree {
 			if(syns != null) {
 				for(int k = 0; k < syns.size(); k++) {
 					//System.out.println("Asking object mapped by " + syns.get(k));
-					Synset syn = (Synset) kbc.synsets.get(syns.get(k));
+					Synset syn = (Synset) kbc.getSynsetFromMap(syns.get(k));
 					//System.out.println("++ Adding " + syn + " to " + child.toString());
 					DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(syn);
 					((DefaultMutableTreeNode) child).add(newNode);
@@ -291,7 +291,7 @@ public class KbTree {
 			}
 		}
 		
-		Collection syns = kbc.synsets.values(); 
+		Collection syns = kbc.getSynsets(); 
 		System.out.println("# synsets: " + syns.size() + 
 				" (already classified: " + addedSyns.size() + ")");
 		for(Iterator i = syns.iterator(); i.hasNext();) {

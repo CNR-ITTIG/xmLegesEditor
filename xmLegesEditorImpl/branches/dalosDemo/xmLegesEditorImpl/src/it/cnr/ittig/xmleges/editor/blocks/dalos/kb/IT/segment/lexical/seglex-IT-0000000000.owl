@@ -4,9 +4,20 @@
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:j.1="http://turing.ittig.cnr.it/jwn/ontologies/language-properties-full.owl#"
     xmlns:j.2="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
-    xmlns:j.3="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#"
     xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-ricorso_annullamento-noun-1">
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-474-61996A0105-it-sum2"/>
+    <j.2:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000000474</j.2:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-ricorso-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-474-61996A0105-it-par43"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-474-61996A0120-it-par56"/>
+    <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-ricorso_annullamento-noun-1"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-474-61996A0120-it-par61"/>
+    <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-474-61996A0120-it-kwd1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-organismo-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
     <rdf:type rdf:nodeID="A0"/>
@@ -18,8 +29,8 @@
     <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-censura_commissione"/>
     <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-censura_commissione-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-medicinale_uso_umano">
     <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MEDICINALE USO UMANO</j.2:protoForm>
@@ -47,9 +58,9 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-medicinale_uso_umano-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
     <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-medicinale_uso_umano"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <rdf:type rdf:nodeID="A0"/>
     <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-medicinale_uso_umano-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-organismo">
@@ -58,6 +69,13 @@
     <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ORGANISMI</j.2:lexicalForm>
     <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ORGANISMO</j.2:lexicalForm>
     <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ORGANISMO</j.2:protoForm>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#wordsense-ricorso_annullamento-noun-1">
+    <j.2:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-ricorso_annullamento"/>
+    <rdf:type rdf:nodeID="A0"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <j.2:inSynset rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-ricorso_annullamento-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-censura_commissione-noun-1">
     <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-824-61999J0392-it-par112"/>
@@ -70,12 +88,18 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
   </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-ricorso_annullamento">
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RICORSO DI ANNULLAMENTO</j.2:lexicalForm>
+    <j.2:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-ricorso_annullamento-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+    <j.2:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RICORSO ANNULLAMENTO</j.2:lexicalForm>
+    <j.2:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RICORSO ANNULLAMENTO</j.2:protoForm>
+  </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-medicinale_uso_umano-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <j.1:has_hyperonym rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-medicinale-noun-1"/>
     <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-583-01998L0027-20061228-it-ann-par6"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Physical_Object"/>
     <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-583-62000A0074-it-par111"/>
     <j.0:source rdf:resource="http://localhost/dalos/IT/sources.owl#source-583-01997L0007-20050612-it-pre-rec24"/>
     <j.2:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-medicinale_uso_umano-noun-1"/>

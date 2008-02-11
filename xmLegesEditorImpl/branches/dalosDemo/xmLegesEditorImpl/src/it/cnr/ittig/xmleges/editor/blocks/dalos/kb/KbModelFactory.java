@@ -31,6 +31,7 @@ public class KbModelFactory {
 	public static void addDocument(String fileCode, String lang, String fileName) {
 		
 		String key = lang + fileCode;
+		System.out.println("@@ addDocument(): " + key + " -> " + fileName);
 		localDocuments.put(key, fileName);
 	}
 	

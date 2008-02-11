@@ -110,7 +110,7 @@ public class DalosMenuActionImpl implements DalosMenuAction, Loggable, Serviceab
 		actionManager.registerAction("editor.dalos.showview", showViewAction);
 		
 		for(int i=0;i<utilDalos.getDalosLang().length;i++){
-			actionManager.registerAction("editor.dalos.switchlang."+utilDalos.getDalosLang()[i].toLowerCase(), new SwitchLangAction(utilDalos.getDalosLang()[i].toUpperCase()));
+			actionManager.registerAction("editor.dalos.switchlang."+utilDalos.getDalosLang()[i].toLowerCase(), new SwitchLangAction(utilDalos.getDalosLang()[i]));
 		}
 		
 	}
