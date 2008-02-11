@@ -685,10 +685,10 @@ public class TreePaneImpl implements TreePane, EventManagerListener, Loggable, S
 	}
 
 	protected class TreePaneMouseAdapter extends MouseAdapter {
-		// JMenu insertBefore = null;
-		// JMenu insertAfter = null;
-		// JMenu insertNode = null;
-		JMenu insert = null;
+		JMenu insertBefore = null;
+		JMenu insertAfter = null;
+		JMenu insertNode = null;
+		//JMenu insert = null;
 
 		boolean firstTime = true;
 
@@ -715,22 +715,22 @@ public class TreePaneImpl implements TreePane, EventManagerListener, Loggable, S
 				firstTime = false;
 				popupMenu.addSeparator();
 			}
-			if (insert != null) {
-				// popupMenu.remove(insertBefore);
-				// popupMenu.remove(insertAfter);
-				// popupMenu.remove(insertNode);
-				popupMenu.remove(insert);
+			if (insertBefore != null || insertAfter!=null || insertNode!=null) {
+				popupMenu.remove(insertBefore);
+			    popupMenu.remove(insertAfter);
+			    popupMenu.remove(insertNode);
+				//popupMenu.remove(insert);
 			}
 			// TODO lasciare solo il menu insert ed eliminare insertBefore, insertAfter,
 			// insetNode
-			insert = utilRulesManager.createMenuInsert(node);
-			// insertBefore = utilRulesManager.createMenuInsertBefore(node);
-			// insertAfter = utilRulesManager.createMenuInsertAfter(node);
-			// insertNode = utilRulesManager.createMenuInsertNode(node);
-			popupMenu.add(insert);
-			// popupMenu.add(insertBefore);
-			// popupMenu.add(insertAfter);
-			// popupMenu.add(insertNode);
+			//insert = utilRulesManager.createMenuInsert(node);
+			 insertBefore = utilRulesManager.createMenuInsertBefore(node);
+			 insertAfter = utilRulesManager.createMenuInsertAfter(node);
+			 insertNode = utilRulesManager.createMenuInsertNode(node);
+			 //popupMenu.add(insert);
+			 popupMenu.add(insertBefore);
+			 popupMenu.add(insertAfter);
+			 popupMenu.add(insertNode);
 		}
 	}
 }
