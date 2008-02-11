@@ -213,8 +213,8 @@ public class MetaUrnDocumentoImpl implements MetaUrnDocumento, Loggable, Service
 
 	private ProvvedimentiItem identifyProvvedimento(Document doc) {
 
-		String tipoDoc = UtilDom.getTextNode(doc.getElementsByTagName("tipoDoc").item(0));
-		String tag = nirUtilDom.getTipoAtto(doc).getNodeName();
+		String tipoDoc = UtilDom.getTextNode(doc.getElementsByTagName("tipoDoc").item(0)).trim();
+		String tag = nirUtilDom.getTipoAtto(doc).getNodeName().trim();
 
 		ProvvedimentiItem prov = null;
 		if (tipoDoc != null && tipoDoc.trim().length() > 0) {
