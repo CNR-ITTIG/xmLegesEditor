@@ -62,9 +62,12 @@ public class KbContainer {
 
 	private Set langProperties = null;
 	
+	private KbManagerImpl kbm;
 	private KbTree kbt;
 
-	public KbContainer(String lang, I18n i) {
+	public KbContainer(String lang, KbManagerImpl kbm, I18n i) {
+		
+		this.kbm = kbm;
 		
 		i18n = i;
 
@@ -115,7 +118,9 @@ public class KbContainer {
 			return synsets.values();
 		}		
 	}
-	
+
+	//Using this method means that this container
+	//now holds the global language.
 	boolean initData() {		
 		
 		if(!concreteContainer) {
@@ -357,30 +362,36 @@ public class KbContainer {
 				}
 			}
 			
+			//Fill pivot classes
+			for(Iterator k = ores.listRDFTypes(true); k.hasNext(); ) {
+				Resource res = (Resource) k.next();
+				if(res.getNameSpace().equalsIgnoreCase(KbConf.DALOS_CONCEPTS_NS)) {
+					String conceptURI = res.getNameSpace() + res.getLocalName();
+					Collection pivots = kbm.getPivotClasses();
+					PivotOntoClass poc = null;					
+					for(Iterator ci = pivots.iterator(); ci.hasNext(); ) {
+						PivotOntoClass item = (PivotOntoClass) ci.next();
+						if(item.getURI().equals(conceptURI)) {
+							poc = item;
+							break;
+						}
+					}
+					if(poc == null) {
+						System.err.println("ERROR! Pivot Class not found: " + conceptURI);
+						continue;
+					} else {
+						poc.addTerm(syn);
+						syn.setPivotClass(poc);
+					}
+				}
+			}
+			
 			//System.out.println("Adding " + ores.getLocalName() + " --> " + syn);			
 			synsets.put(ores.getLocalName(), syn); //meglio questa come chiave??
 			//addSortedSynset(syn);
 			sortedSynsets.add(syn);
 		}
 	}
-	
-//	private void addSortedSynset(Synset syn) {
-//		
-//		boolean ins = false;
-//		for(int i = 0; i < sortedSynsets.size(); i++) {
-//			Synset item = (Synset) sortedSynsets.get(i);
-//			if(item.toString().compareToIgnoreCase(syn.toString()) < 0) continue;
-//			if(item.toString().compareToIgnoreCase(syn.toString()) > 0) {
-//				sortedSynsets.add(i, syn);
-//				ins = true;
-//				break;
-//			}
-//		}
-//		if(!ins) {
-//			//Inserisci alla fine del vettore
-//			sortedSynsets.add(syn);
-//		}
-//	}
 	
 	Synset getSynset(String uri) {
 		

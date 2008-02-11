@@ -53,7 +53,7 @@ implements KbManager, Loggable, Serviceable, Initializable {
 	private Map langToContainer;
 	
 	private Set treeClasses;
-	private Set pivotClasses;
+	private Set pivotClasses; 
 	
 	I18n i18n;
 	
@@ -133,7 +133,7 @@ implements KbManager, Loggable, Serviceable, Initializable {
 
 	public void addLanguage(String lang) {
 		
-		langToContainer.put(lang, new KbContainer(lang, i18n));
+		langToContainer.put(lang, new KbContainer(lang, this, i18n));
 	}
 
 	public void addLexicalProperties(Synset syn) {
@@ -237,6 +237,16 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		
 		KbContainer kbc = getContainer(syn.getLanguage());
 		return kbc.setTreeSelection(syn);
+	}
+	
+	Collection getPivotClasses() {
+		
+		return pivotClasses;
+	}
+	
+	Collection getTreeClasses() {
+		
+		return treeClasses;
 	}
 	
 	private void initPivotMapping() {
