@@ -18,6 +18,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import com.hp.hpl.jena.ontology.OntDocumentManager;
+
 /**
  * <h1>Implementazione del servizio
  * <code>it.cnr.ittig.xmleges.editor.services.dalos.kbmanager.KbManager</code>.</h1>
@@ -37,6 +39,7 @@ implements KbManager, Loggable, Serviceable, Initializable {
 	private Map langToContainer;
 	
 	//Maps pivot language synsets to foreign languages synsets
+	//TreeOntoClass.getURI() -> Collection<Synset.getURI()>
 	private Map pivotToForeign;
 	
 	I18n i18n;
@@ -105,7 +108,30 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		if(KbConf.MERGE_DOMAIN) {
 			KbConf.DOMAIN_ONTO = 
 			"http://turing.ittig.cnr.it/jwn/ontologies/consumer-law-merge.owl";
-		}		
+		}
+
+		File file = null;
+		OntDocumentManager odm = KbModelFactory.getOdm();
+		if(KbConf.MERGE_DOMAIN) {
+			file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_DOMAIN_MERGE_ONTO);
+		} else {
+			file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_DOMAIN_ONTO);
+		}
+		String fileStr = "file:///";
+		odm.addAltEntry(KbConf.DOMAIN_ONTO, fileStr + file.getAbsolutePath());
+		System.out.println("ALTERNATIVE ENTRY: " + KbConf.DOMAIN_ONTO + " --> file://" + file.getAbsolutePath());
+		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_METALEVEL_ONTO);
+		odm.addAltEntry(KbConf.METALEVEL_ONTO, fileStr + file.getAbsolutePath());
+		System.out.println("ALTERNATIVE ENTRY: " + KbConf.METALEVEL_ONTO + " --> file://" + file.getAbsolutePath());
+		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_METALEVEL_PROP);
+		odm.addAltEntry(KbConf.METALEVEL_PROP, fileStr + file.getAbsolutePath());
+		System.out.println("ALTERNATIVE ENTRY: " + KbConf.METALEVEL_PROP + " --> file://" + file.getAbsolutePath());
+		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_METALEVEL_FULL);
+		odm.addAltEntry(KbConf.METALEVEL_FULL, fileStr + file.getAbsolutePath());
+		System.out.println("ALTERNATIVE ENTRY: " + KbConf.METALEVEL_FULL + " --> file://" + file.getAbsolutePath());
+		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_SOURCE_SCHEMA);
+		odm.addAltEntry(KbConf.SOURCE_SCHEMA, fileStr + file.getAbsolutePath());
+		System.out.println("ALTERNATIVE ENTRY: " + KbConf.SOURCE_SCHEMA + " --> file://" + file.getAbsolutePath());		
 	}
 
 	public void addLanguage(String lang) {
@@ -142,12 +168,20 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		kbc.addSources(syn);
 	}
 	
+	public boolean isLangSupported(String lang){
+		
+		KbContainer kbc = getContainer(lang);
+		return kbc.isConcreteContainer();
+	}
+	
 	public Collection getSynsets(String lang) {
 
 		KbContainer kbc = getContainer(lang);
 		return kbc.sortedSynsets;
 	}
-	
+
+	//Ridondante con getForeignSynset() ?
+	//A che serve la lingua qui?
 	public Synset getSynset(String uri, String lang) {
 		
 		KbContainer kbc = getContainer(lang);
@@ -186,7 +220,11 @@ implements KbManager, Loggable, Serviceable, Initializable {
 	
 	public SynsetTree getTree(String lang) {
 		
-		KbContainer kbc = getContainer(lang);		
+		KbContainer kbc = getContainer(lang);
+		if(pivotToForeign == null) {
+			initPivotMapping(kbc);
+		}
+		
 		return kbc.getTree();
 	}
 		
@@ -216,6 +254,11 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		//oppure parti direttamente dai types.owl ?
 	}	
 	
+	private void initPivotMapping(KbContainer kbc) {
+		
+		kbc.initPivotMapping(pivotToForeign);
+	}
+
 	private KbContainer getContainer(String lang) {
 		
 		KbContainer kbc = (KbContainer) langToContainer.get(lang.toUpperCase());
@@ -227,11 +270,5 @@ implements KbManager, Loggable, Serviceable, Initializable {
 
 		return kbc;
 	}
-	
-	
-	public boolean isLangSupported(String lang){
 		
-		KbContainer kbc = getContainer(lang);
-		return kbc.isConcreteContainer();
-	}
 }

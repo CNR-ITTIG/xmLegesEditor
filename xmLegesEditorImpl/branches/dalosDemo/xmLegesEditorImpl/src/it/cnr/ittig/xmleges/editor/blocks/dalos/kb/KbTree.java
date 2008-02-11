@@ -1,9 +1,9 @@
 package it.cnr.ittig.xmleges.editor.blocks.dalos.kb;
 
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
-import it.cnr.ittig.xmleges.editor.services.dalos.objects.OntoClass;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.SynsetTree;
+import it.cnr.ittig.xmleges.editor.services.dalos.objects.TreeOntoClass;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -75,11 +75,11 @@ public class KbTree {
 		tmpTree.setRootUserObject("CONSUMER LAW");
 		tmpTree.setRootVisible(true);
 		
-		OntModel om = kbc.getModel("domain", "micro");
+		OntModel om = KbModelFactory.getModel("domain", "micro");
 		Collection topClasses = kbc.getTopClasses();
 		for(Iterator i = topClasses.iterator(); i.hasNext();) {
 			String ocName = (String) i.next();
-			OntoClass cl = new OntoClass(ocName);
+			TreeOntoClass cl = new TreeOntoClass(ocName);
 			DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(cl);
 			((SynsetTree) tmpTree).addNode(newNode);
 			//Prendi la relativa OntClass in *questo* OntModel:
@@ -182,7 +182,7 @@ public class KbTree {
 			if(!c.isAnon() && !c.isRestriction()) {
 				String localName = c.getLocalName();
 
-				OntoClass cl = new OntoClass(localName);
+				TreeOntoClass cl = new TreeOntoClass(localName);
 				newNode = new DefaultMutableTreeNode(cl);
 				if(node == null) {
 					if(!headClasses.contains(cl)) {
@@ -202,18 +202,19 @@ public class KbTree {
 	private void addSynsets() {
 		
 		System.out.println("Adding synsets to tree...");
-		OntModel mapModel = kbc.getModel("mapping", "micro");
+		//OntModel mapModel = kbc.getModel("mapping", "micro");
+		OntModel mapModel = KbModelFactory.getModel("concept.mapping");
 		
-		linked = new HashMap(256, 0.70f);
-		
+		linked = new HashMap(256, 0.70f);		
 		Resource subj = null;
 		RDFNode obj = null;
+		
 		for(Iterator i = mapModel.listStatements(subj, RDF.type, obj); i.hasNext();) {
 			Statement stm = (Statement) i.next();
 			Resource thisSubj = stm.getSubject();
 			RDFNode thisObjNode = stm.getObject();
 			if(!thisObjNode.isResource()) {
-				continue;				
+				continue;
 			}
 			Resource thisObj = (Resource) thisObjNode;
 			if(thisObj.isAnon() ||
@@ -238,9 +239,8 @@ public class KbTree {
 	
 	private void addLink(Resource oc, Resource syn) {
 	
-		Vector syns = null;
 		String key = oc.getLocalName();
-		syns = (Vector) linked.get(key);
+		Vector syns = (Vector) linked.get(key);
 		if(syns == null) {
 			syns = new Vector();
 			linked.put(key, syns);
@@ -254,15 +254,15 @@ public class KbTree {
 		for( int i = 0; i < cc; i++) {
 			Object child = model.getChild(o, i);
 			Object data = ((DefaultMutableTreeNode) child).getUserObject();
-			boolean isOntoClass = false;
-			if(data instanceof OntoClass) {
-				isOntoClass = true;
+			boolean isTreeOntoClass = false;
+			if(data instanceof TreeOntoClass) {
+				isTreeOntoClass = true;
 			} else  {
 				//Sono i synset che vengono aggiunti??
 				if(data instanceof Synset) {
 					continue;
 				}
-				System.out.println(">>>>> " + data + " - " + isOntoClass);
+				System.out.println(">>>>> " + data + " - " + isTreeOntoClass);
 				return;
 			}
 			
@@ -352,9 +352,9 @@ public class KbTree {
 			Object data = child.getUserObject();
 //			if(!(data instanceof Synset)) {
 //				System.out.println("@@ " + child + " " + model.isLeaf(child) +
-//						" " + (data instanceof OntoClass));
+//						" " + (data instanceof TreeOntoClass));
 //			}
-			if(model.isLeaf(child) && data instanceof OntoClass) {
+			if(model.isLeaf(child) && data instanceof TreeOntoClass) {
 				//Aggiungi un nodo fittizio
 				DefaultMutableTreeNode newNode = new DefaultMutableTreeNode("(empty)");
 				child.add(newNode);
@@ -372,11 +372,11 @@ public class KbTree {
 		}
 		boolean ins = false;
 		Object userObj = node.getUserObject();
-		if(userObj instanceof OntoClass) {
+		if(userObj instanceof TreeOntoClass) {
 			for(int i = 0; i < sortedNodes.size(); i++) {
 				DefaultMutableTreeNode item = (DefaultMutableTreeNode) sortedNodes.get(i);
 				Object itemObj = item.getUserObject();
-				if(itemObj instanceof OntoClass) {					
+				if(itemObj instanceof TreeOntoClass) {					
 					if(itemObj.toString().compareToIgnoreCase(userObj.toString()) < 0) {
 						continue;
 					}
@@ -396,7 +396,7 @@ public class KbTree {
 			for(int i = 0; i < sortedNodes.size(); i++) {
 				DefaultMutableTreeNode item = (DefaultMutableTreeNode) sortedNodes.get(i);
 				Object itemObj = item.getUserObject();
-				if(itemObj instanceof OntoClass) {
+				if(itemObj instanceof TreeOntoClass) {
 					continue;
 				} else {
 					if(itemObj.toString().compareToIgnoreCase(userObj.toString()) < 0) {

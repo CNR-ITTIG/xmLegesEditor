@@ -2,10 +2,11 @@ package it.cnr.ittig.xmleges.editor.blocks.dalos.kb;
 
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
-import it.cnr.ittig.xmleges.editor.services.dalos.objects.OntoClass;
+import it.cnr.ittig.xmleges.editor.services.dalos.objects.PivotOntoClass;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Source;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.SynsetTree;
+import it.cnr.ittig.xmleges.editor.services.dalos.objects.TreeOntoClass;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,8 +15,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.OutputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -29,7 +28,6 @@ import javax.swing.tree.TreeModel;
 
 import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.ontology.OntClass;
-import com.hp.hpl.jena.ontology.OntDocumentManager;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntModelSpec;
 import com.hp.hpl.jena.ontology.OntProperty;
@@ -43,8 +41,7 @@ import com.hp.hpl.jena.rdf.model.RDFWriter;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
-import com.hp.hpl.jena.reasoner.Reasoner;
-import com.hp.hpl.jena.reasoner.ReasonerRegistry;
+import com.hp.hpl.jena.vocabulary.RDFS;
 
 public class KbContainer {
 
@@ -53,18 +50,23 @@ public class KbContainer {
 	public String localRepository;
 	public String infRepository;
 	public String segRepository;
-	public String indFile;
-	public String indwFile;
-	public String indcFile;
-	public String typesFile;
-	public String conceptsFile;
-	public String sourcesFile;
-	public String infDpFile;
-	public String infDpExtFile;
+
+//	public String indFile;
+//	public String indwFile;
+//	//public String indclawFile;
+//	public String typesFile;
+//	public String conceptsFile;
+//	public String sourcesFile;
+//	public String infDpFile;
+//	public String infDpExtFile;
 	
+//	public static String INDIVIDUAL_NS = KbConf.DALOS_NS + "individuals.owl" + "#";
+//	public static String INDIVIDUAL_WORDS_NS = KbConf.DALOS_NS + "individuals-word.owl" + "#";
+//	public static String INDIVIDUAL_CLAW_NS = KbConf.DALOS_NS + "ind-to-consumer.owl" + "#";
+//	public static String TYPES_NS = KbConf.DALOS_NS + "types.owl" + "#";
+//	public static String SOURCES_NS = KbConf.DALOS_NS + "sources.owl" + "#";
+
 	private I18n i18n;
-	
-	private OntDocumentManager odm; //farlo static? cacha i doc. comuni...
 	
 	private boolean concreteContainer = false;
 
@@ -72,9 +74,9 @@ public class KbContainer {
 	Map synsets = null;
 	Vector sortedSynsets = null; //meglio un TreeSet ??
 	
-	Map uriToLexSeg = null;
-	Map uriToSourceSeg = null;
-	Map uriToSemSeg = null;
+//	Map uriToLexSeg = null;
+//	Map uriToSourceSeg = null;
+//	Map uriToSemSeg = null;
 
 	Set langProperties = null;
 	
@@ -86,61 +88,32 @@ public class KbContainer {
 
 		LANGUAGE = lang;
 
-		localRepository = KbConf.dalosRepository + LANGUAGE + File.separatorChar;
-		infRepository = KbConf.dalosRepository + lang + File.separatorChar +
-							KbConf.inferenceDir + File.separatorChar;
-		segRepository = KbConf.dalosRepository + lang + File.separatorChar +
-			KbConf.segmentDirName + File.separatorChar;
-		indFile = localRepository + KbConf.IND;
-		indwFile = localRepository + KbConf.INDW;
-		indcFile = localRepository + KbConf.INDC;
-		typesFile = localRepository + KbConf.TYPES;
-		sourcesFile = localRepository + KbConf.SOURCES;
-		infDpFile = infRepository + KbConf.DP_INF;
-		infDpExtFile = infRepository + KbConf.DPEXT_INF;
-		conceptsFile = KbConf.dalosRepository + KbConf.CONCEPTS;
-		
-		//init OntDocumentManager
-		File file = null;
-		odm = OntDocumentManager.getInstance();
-		if(KbConf.MERGE_DOMAIN) {
-			file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_DOMAIN_MERGE_ONTO);
-		} else {
-			file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_DOMAIN_ONTO);
-		}
-		String fileStr = "file:///";
-		odm.addAltEntry(KbConf.DOMAIN_ONTO, fileStr + file.getAbsolutePath());
-		System.out.println("ALTERNATIVE ENTRY: " + KbConf.DOMAIN_ONTO + " --> file://" + file.getAbsolutePath());
-		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_METALEVEL_ONTO);
-		odm.addAltEntry(KbConf.METALEVEL_ONTO, fileStr + file.getAbsolutePath());
-		System.out.println("ALTERNATIVE ENTRY: " + KbConf.METALEVEL_ONTO + " --> file://" + file.getAbsolutePath());
-		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_METALEVEL_PROP);
-		odm.addAltEntry(KbConf.METALEVEL_PROP, fileStr + file.getAbsolutePath());
-		System.out.println("ALTERNATIVE ENTRY: " + KbConf.METALEVEL_PROP + " --> file://" + file.getAbsolutePath());
-		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_METALEVEL_FULL);
-		odm.addAltEntry(KbConf.METALEVEL_FULL, fileStr + file.getAbsolutePath());
-		System.out.println("ALTERNATIVE ENTRY: " + KbConf.METALEVEL_FULL + " --> file://" + file.getAbsolutePath());
-		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_SOURCE_SCHEMA);
-		odm.addAltEntry(KbConf.SOURCE_SCHEMA, fileStr + file.getAbsolutePath());
-		System.out.println("ALTERNATIVE ENTRY: " + KbConf.SOURCE_SCHEMA + " --> file://" + file.getAbsolutePath());		
-		
 		if(!checkFiles()) {
 			System.err.println("## ERROR ## KbContainer - Data files not found! Repo: " +
 					localRepository);
-		} else {
+		} else {			
 			concreteContainer = true;
-			synsets = new HashMap(2048, 0.70f);
-			sortedSynsets = new Vector(512);
-			
-			kbt = new KbTree(this, i18n);
+		}
+	}
 	
-			long t1 = System.currentTimeMillis();		
-			System.out.println("Init synsets...");
-			initSynsets();
-			long t2 = System.currentTimeMillis();
-			System.out.println("...synsets loaded! (" + Long.toString(t2 - t1) + " ms)\n");
+	boolean initData() {		
+		
+		if(!concreteContainer) {
+			return false;
 		}
 		
+		synsets = new HashMap(2048, 0.70f);
+		sortedSynsets = new Vector(512);
+		
+		kbt = new KbTree(this, i18n);
+
+		long t1 = System.currentTimeMillis();		
+		System.out.println("Init synsets...");
+		initSynsets();
+		long t2 = System.currentTimeMillis();
+		System.out.println("...synsets loaded! (" +
+				Long.toString(t2 - t1) + " ms)\n");
+
 		//init segment map
 		try {
 			initMaps();
@@ -154,11 +127,59 @@ public class KbContainer {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		return true;
 	}
 	
-	public boolean isConcreteContainer() {
+	boolean isConcreteContainer() {
 		
 		return concreteContainer;
+	}
+	
+	void initPivotMapping(Map pivotToForeign) {
+		
+		System.out.println("Initializing Pivot Classes...");
+		OntModel mod = KbModelFactory.getModel("concepts");
+		
+		Set pivots = pivotToForeign.keySet();
+		
+		//Assumptions: no reasoning, no anonymous resources
+		//and objects are OntResources
+		for(Iterator i = mod.listStatements(
+				(Resource) null, RDFS.subClassOf, (RDFNode) null);
+				i.hasNext();) {
+			Statement stm = (Statement) i.next();
+			Resource subj = stm.getSubject();
+			OntResource obj = (OntResource) stm.getObject();
+
+			String subjNS = subj.getNameSpace();
+			String objNS = obj.getNameSpace();
+			String subjName = subj.getLocalName();
+			String objName = obj.getLocalName();
+			
+			if(!subjNS.equalsIgnoreCase(KbConf.DALOS_CONCEPTS_NS)) {
+				System.err.println("initPivotMapping() - subjNS: " + subjNS);
+				continue;
+			}
+			if(!objNS.equalsIgnoreCase(KbConf.DOMAIN_ONTO_NS)) {
+				System.err.println("initPivotMapping() - subjNS: " + subjNS);
+				continue;
+			}
+			
+			PivotOntoClass poc = new PivotOntoClass();
+			poc.setURI(subjName + subjNS);
+			if(pivots.contains(poc)) {
+				//Retrieve the original pivot class...
+				for(Iterator pi = pivots.iterator(); pi.hasNext();) {
+					Object item = pi.next();
+					if(poc.equals(item)) {
+						poc = (PivotOntoClass) item;
+						break;
+					}
+				}
+			}
+			
+		}
 	}
 	
 	private void initMaps() 
@@ -173,10 +194,20 @@ public class KbContainer {
 		if(mapFile != null && mapFile.exists()) {
 			FileInputStream fis = new FileInputStream(mapFile);
 			ObjectInputStream ois = new ObjectInputStream(fis);
-			uriToLexSeg = new HashMap();
-			uriToLexSeg = (Map) ois.readObject();
+			Map segMap = new HashMap();
+			segMap = (Map) ois.readObject();
 			ois.close();
 			fis.close();
+			
+			Collection keys = segMap.keySet();
+			for(Iterator k = keys.iterator(); k.hasNext();) {
+				String key = (String) k.next();
+				String value = (String) segMap.get(key);
+				String segFileName = segRepository + KbConf.lexicalSegmentName 
+						+ File.separatorChar + value;
+				KbModelFactory.addSegment(key, segFileName,
+						KbConf.lexicalSegmentName);
+			}
 		}
 		
 		mapFileName = segRepository + KbConf.sourceSegmentName +
@@ -185,10 +216,20 @@ public class KbContainer {
 		if(mapFile != null && mapFile.exists()) {
 			FileInputStream fis = new FileInputStream(mapFile);
 			ObjectInputStream ois = new ObjectInputStream(fis);
-			uriToSourceSeg = new HashMap();
-			uriToSourceSeg = (Map) ois.readObject();
+			Map segMap = new HashMap();
+			segMap = (Map) ois.readObject();
 			ois.close();
 			fis.close();
+			
+			Collection keys = segMap.keySet();
+			for(Iterator k = keys.iterator(); k.hasNext();) {
+				String key = (String) k.next();
+				String value = (String) segMap.get(key);
+				String segFileName = segRepository + KbConf.sourceSegmentName 
+						+ File.separatorChar + value;
+				KbModelFactory.addSegment(key, segFileName,
+						KbConf.sourceSegmentName);
+			}
 		}
 		
 		mapFileName = segRepository + KbConf.semanticSegmentName +
@@ -197,10 +238,20 @@ public class KbContainer {
 		if(mapFile != null && mapFile.exists()) {
 			FileInputStream fis = new FileInputStream(mapFile);
 			ObjectInputStream ois = new ObjectInputStream(fis);
-			uriToSemSeg = new HashMap();
-			uriToSemSeg = (Map) ois.readObject();
+			Map segMap = new HashMap();
+			segMap = (Map) ois.readObject();
 			ois.close();
 			fis.close();
+			
+			Collection keys = segMap.keySet();
+			for(Iterator k = keys.iterator(); k.hasNext();) {
+				String key = (String) k.next();
+				String value = (String) segMap.get(key);
+				String segFileName = segRepository + KbConf.semanticSegmentName 
+						+ File.separatorChar + value;
+				KbModelFactory.addSegment(key, segFileName,
+						KbConf.semanticSegmentName);
+			}
 		}
 	}
 
@@ -211,7 +262,7 @@ public class KbContainer {
 		 */
 		
 		Set classes = new HashSet();
-		OntModel om = getModel("domain");
+		OntModel om = KbModelFactory.getModel("domain");
 
 		for(Iterator i = om.listClasses(); i.hasNext();) {
 			OntClass oc = (OntClass) i.next();
@@ -243,185 +294,46 @@ public class KbContainer {
 		
 	private boolean checkFiles() {
 		
+		localRepository = KbConf.dalosRepository + LANGUAGE + File.separatorChar;
+		infRepository = KbConf.dalosRepository + LANGUAGE + File.separatorChar +
+							KbConf.inferenceDir + File.separatorChar;
+		segRepository = KbConf.dalosRepository + LANGUAGE + File.separatorChar +
+			KbConf.segmentDirName + File.separatorChar;
+		
+		String indFile = localRepository + KbConf.IND;
+		String indwFile = localRepository + KbConf.INDW;
+		//indclawFile = localRepository + KbConf.INDCLAW;
+		String typesFile = localRepository + KbConf.TYPES;
+		String sourcesFile = localRepository + KbConf.SOURCES;
+//		String infDpFile = infRepository + KbConf.DP_INF;
+//		String infDpExtFile = infRepository + KbConf.DPEXT_INF;
+		
 		if(!UtilFile.fileExistInTemp(indFile)) {
+			KbModelFactory.addDocument(KbConf.IND, LANGUAGE, indFile);
 			return false;
 		}
 		if(!UtilFile.fileExistInTemp(indwFile)) {
+			KbModelFactory.addDocument(KbConf.INDW, LANGUAGE, indwFile);
 			return false;
 		}
-		if(!UtilFile.fileExistInTemp(indcFile)) {
-			return false;
-		}
+//		if(!UtilFile.fileExistInTemp(indclawFile)) {
+//			return false;
+//		}
 		if(!UtilFile.fileExistInTemp(typesFile)) {
+			KbModelFactory.addDocument(KbConf.TYPES, LANGUAGE, typesFile);
 			return false;
 		}
-		if(!UtilFile.fileExistInTemp(conceptsFile)) {
-			return false;
-		}
+//		if(!UtilFile.fileExistInTemp(conceptsFile)) {
+//			return false;
+//		}
 		if(!UtilFile.fileExistInTemp(sourcesFile)) {
+			KbModelFactory.addDocument(KbConf.SOURCES, LANGUAGE, sourcesFile);
 			return false;
 		}
 		
 		return true;
 	}
 
-	OntModel getModel(String type) {
-		
-		return getModel(type, "");
-	}
-	
-	OntModel getModel(String type, String reasoner) {
-		
-		return getModel(type, reasoner, null);
-	}
-			
-	OntModel getModel(String type, String reasoner, Synset syn) {
-		/*
-		 * Ritorna un OntModel in base a varie configurazioni.
-		 * type: sceglie i moduli ontologici da caricare
-		 * reasoner: sceglie il reasoner da utilizzare nel modello
-		 */
-		
-		//Remote ontologies are locally cached...
-		//Aggiungere una funzione che, se on-line, scarica le ontologie remote
-		//in modo da avere sempre l'ultima versione?
-		ModelMaker maker = ModelFactory.createMemModelMaker();
-
-		OntModelSpec spec = null;
-		if(reasoner.length() > 0) {
-			Reasoner r = null;
-			if(reasoner.equalsIgnoreCase("rdf")) {
-				r = ReasonerRegistry.getRDFSReasoner();
-			}
-			if(reasoner.equalsIgnoreCase("micro")) {
-				r = ReasonerRegistry.getOWLMicroReasoner();
-			}
-			if(reasoner.equalsIgnoreCase("mini")) {
-				r = ReasonerRegistry.getOWLMiniReasoner();
-			}
-			if(reasoner.equalsIgnoreCase("owl")) {
-				r = ReasonerRegistry.getOWLReasoner();
-			}
-			if(reasoner.equalsIgnoreCase("pellet")) {
-				//pu� servire pellet ? oppure un external reasoner?
-			}
-			if(r == null) {
-				System.err.println("getModel() - Reasoner type not found: " + type);
-				return null;
-			}
-			spec =  OntModelSpec.OWL_MEM ;
-			spec.setReasoner(r);
-		} else {
-			spec = new OntModelSpec( OntModelSpec.OWL_MEM );
-		}
-		spec.setImportModelMaker(maker);
-		OntModel om = ModelFactory.createOntologyModel(spec, null);
-		
-		if(type.equalsIgnoreCase("full")) {			
-			readSchema(om, KbConf.METALEVEL_PROP);
-			readSchema(om, KbConf.DOMAIN_ONTO);
-			readData(om, conceptsFile);
-			readData(om, indFile);
-			readData(om, indwFile);
-			readData(om, indcFile);		
-			readData(om, typesFile);
-		}
-		if(type.equalsIgnoreCase("domain")) {
-			readSchema(om, KbConf.DOMAIN_ONTO);
-		}
-		if(type.equalsIgnoreCase("mapping")) {
-			readSchema(om, KbConf.METALEVEL_ONTO);	
-			readData(om, indcFile);		
-		}
-		if(type.equalsIgnoreCase("individual")) {
-			readSchema(om, KbConf.METALEVEL_ONTO);
-			readSchema(om, KbConf.METALEVEL_PROP);
-//			om.read(KbConf.METALEVEL_ONTO);
-//			om.read(KbConf.METALEVEL_PROP);
-			readData(om, indFile);
-			readData(om, indwFile);
-			readData(om, typesFile);
-		}
-		if(type.equalsIgnoreCase("source")) {
-			readSchema(om, KbConf.SOURCE_SCHEMA); //Ci vuole questo metalivello??
-			readData(om, indFile);
-			readData(om, sourcesFile);			
-		}
-		if(type.equalsIgnoreCase("dpinf")) {
-			readData(om, infDpFile);
-		}
-		if(type.equalsIgnoreCase("dpextinf")) {
-			readData(om, infDpFile);
-			readData(om, infDpExtFile);
-		}
-		if(type.equalsIgnoreCase("seg.lex")) {
-			readSchema(om, KbConf.METALEVEL_ONTO);
-			readSchema(om, KbConf.METALEVEL_PROP);
-			
-			if(uriToLexSeg != null) {
-				if(syn == null) {
-					System.out.println("Segmentation: synset is null!");
-				}
-				Object segObj = uriToLexSeg.get(syn.getURI());
-				if(segObj == null) {
-					System.err.println(
-							"Segmentation is active, but cannot resolve "
-							+ syn.getURI());
-					return null;
-				}
-				String segFileName = segRepository + 
-					KbConf.lexicalSegmentName + File.separatorChar +
-					segObj.toString();
-				//System.out.println("Segmentation: retrieving data from " + segFileName);
-				readData(om, segFileName);
-			} else {						
-				readData(om, indFile);
-				readData(om, typesFile);
-			}
-		}			
-		
-		odm.setProcessImports(true);
-		odm.loadImports(om);
-		
-		return om;
-	}
-	
-	private void readSchema(OntModel om, String url) {
-		
-		readSchema(om, url, false);
-	}
-			
-	private void readSchema(OntModel om, String url, boolean useRemote) {
-		
-		if(useRemote) {
-			URL u = null;
-			try {
-				u = new URL(url);			
-				System.out.println("URL: " + u.toString());
-				om.read(u.openStream(), null);
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				System.out.println("#### URL unreachable! Trying to load local data...");
-				String localFile = odm.doAltURLMapping(url);
-				System.out.println("localFile: " + localFile);
-				om.read(localFile);
-			}
-		} else {
-			String localFile = odm.doAltURLMapping(url);
-			//System.out.println("localFile: " + localFile);
-			om.read(localFile);			
-		}
-	}
-	
-	private void readData(OntModel om, String fileStr) {
-		
-		File file = UtilFile.getFileFromTemp(fileStr);
-		om.read("file:///" + file.getAbsolutePath());
-	}
-	
 	SynsetTree getTree() {
 		
 		return kbt.getTree();
@@ -434,7 +346,7 @@ public class KbContainer {
 	
 	private void initSynsets() {
 		
-		OntModel ind_m = getModel("individual", "micro");
+		OntModel ind_m = KbModelFactory.getModel("individual", "micro");
 		
 		OntProperty contains = ind_m.getOntProperty(KbConf.METALEVEL_ONTO_NS + "containsWordSense");
 		OntProperty word = ind_m.getOntProperty(KbConf.METALEVEL_ONTO_NS + "word");
@@ -515,7 +427,7 @@ public class KbContainer {
 		
 		System.out.println(">> adding sources to " + syn + "...");
 		
-		OntModel om = getModel("source", "micro");
+		OntModel om = KbModelFactory.getModel("source", "micro");
 		
 		Individual ind = om.getIndividual(syn.getURI());
 
@@ -570,8 +482,8 @@ public class KbContainer {
 			return;
 		}
 
-		//OntModel om = getModel("individual", "micro");
-		OntModel om = getModel("seg.lex", "micro", syn);
+		//OntModel om = KbModelFactory.getModel("individual", "micro");
+		OntModel om = KbModelFactory.getModel("seg.lex", "micro", syn);
 		
 		Individual ind = om.getIndividual(syn.getURI());
 		OntProperty glossProp = om.getOntProperty(KbConf.METALEVEL_ONTO_NS + "gloss");
@@ -631,7 +543,7 @@ public class KbContainer {
 			return;
 		}
 
-		OntModel om = getModel("dpinf");
+		OntModel om = KbModelFactory.getModel("dpinf");
 		
 		Individual ind = om.getIndividual(syn.getURI());
 		
@@ -773,10 +685,10 @@ public class KbContainer {
 		for( int i = 0; i < cc; i++) {
 			Object child = model.getChild(o, i);
 			Object data = ((DefaultMutableTreeNode) child).getUserObject();
-			if(data instanceof OntoClass) {
+			if(data instanceof TreeOntoClass) {
 				OntClass newOc = om.createClass((
 						"file://home/lorenzo/ontologies/consumer-law-classes.owl#" +
-							((OntoClass) data).name));
+							((TreeOntoClass) data).name));
 				if(oc != null) {
 					oc.addSubClass(newOc);
 				}
@@ -825,7 +737,7 @@ public class KbContainer {
 		
 		Set properties = new HashSet();
 
-		OntModel om = getModel("domain", "micro");
+		OntModel om = KbModelFactory.getModel("domain", "micro");
 		
 		System.out.println("\n\n\n\n@@@@@@@@@@ KB - FRAME REPRESENTATION @@@@@@@@");
 		for(Iterator i = om.listClasses(); i.hasNext();) { 
@@ -876,7 +788,7 @@ public class KbContainer {
 	
 	void compute(String type) {
 		
-		SPEngine spe = new SPEngine(getModel("full", "micro"), this.LANGUAGE);
+		SPEngine spe = new SPEngine(KbModelFactory.getModel("full", "micro"), this.LANGUAGE);
 		spe.compute(type);
 		System.out.println("COMPUTE processing done.");
 	}

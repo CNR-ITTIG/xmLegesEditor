@@ -30,15 +30,16 @@ public class KbConf {
 
 	public static String ROOT_CLASS = "http://www.w3.org/2002/07/owl#Thing";
 	
+	public static String CONCEPTS = "concepts.owl";
+
 	public static String IND = "individuals.owl";
 	public static String INDW = "individuals-word.owl";
-	public static String INDC = "ind-to-consumer.owl";
+	//public static String INDCLAW = "ind-to-consumer.owl";
 	public static String TYPES = "types.owl";
-	public static String CONCEPTS = "concepts.owl";
 	public static String SOURCES = "sources.owl";
 	
-	public static String LOCAL_DOMAIN_ONTO =  "consumer-law.owl";
-	public static String LOCAL_DOMAIN_MERGE_ONTO =  "consumer-law-merge.owl";
+	public static String LOCAL_DOMAIN_ONTO = "consumer-law.owl";
+	public static String LOCAL_DOMAIN_MERGE_ONTO = "consumer-law-merge.owl";
 	public static String LOCAL_METALEVEL_ONTO = "owns.owl";
 	public static String LOCAL_METALEVEL_PROP = "owns-full.owl";
 	public static String LOCAL_SOURCE_SCHEMA = "metasources.owl";
@@ -51,4 +52,9 @@ public class KbConf {
 	public static String RES_INF = "resInf.owl";
 	public static String RESEXT_INF = "resExtInf.owl";
 	
+	public static String DALOS_NS = "http://localhost/dalos/";
+	//public static String DALOS_lang_ns =  dalos_ns + LANGUAGE + "/";
+
+	public static String DALOS_CONCEPTS_NS = DALOS_NS + CONCEPTS + "#";
+
 }
