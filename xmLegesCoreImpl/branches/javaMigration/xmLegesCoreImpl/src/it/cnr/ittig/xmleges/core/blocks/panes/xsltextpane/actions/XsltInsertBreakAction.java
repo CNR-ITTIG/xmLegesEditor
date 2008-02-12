@@ -52,8 +52,8 @@ public class XsltInsertBreakAction extends XsltAction {
 				return;
 			}
 			
-			int relSelStart = pane.getSelectionStart() - enclosingSpan.getStartOffset();
-			int relSelEnd = pane.getSelectionEnd() - enclosingSpan.getStartOffset();
+			int relSelStart = pane.getSelectionStart() - enclosingSpan.getStartOffset() - 1;
+			int relSelEnd = pane.getSelectionEnd() - enclosingSpan.getEndOffset() - 1;
 
 			action.insertBreak(modNode, relSelStart, relSelEnd);
 		}
