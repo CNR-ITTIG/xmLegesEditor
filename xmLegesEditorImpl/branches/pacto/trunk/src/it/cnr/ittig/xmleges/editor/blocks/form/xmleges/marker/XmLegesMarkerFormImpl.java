@@ -234,12 +234,14 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 			
 		    String unknownTipoDoc = null;
 			
+		    //Setto se il doc da importare è un pdf (uso il marker modificato)
+			parser.setIsPdf(UtilFile.hasExtension(fileTextField.getFile(), "pdf", false));
 			if (UtilFile.hasExtension(fileTextField.getFile(), "doc", false))
-				unknownTipoDoc = UtilFile.inputStreamToString(parser.parseAutoTipoDoc(wordFileConv,false));
+				unknownTipoDoc = UtilFile.inputStreamToString(parser.parseAutoTipoDoc(wordFileConv));
 			else if  (UtilFile.hasExtension(fileTextField.getFile(), "pdf", false)) 
-		 	    unknownTipoDoc = UtilFile.inputStreamToString(parser.parseAutoTipoDoc(pdfFileConv, true)); 
+		 	    unknownTipoDoc = UtilFile.inputStreamToString(parser.parseAutoTipoDoc(pdfFileConv)); 
 			else
-				unknownTipoDoc = UtilFile.inputStreamToString(parser.parseAutoTipoDoc(fileTextField.getFile(), false));
+				unknownTipoDoc = UtilFile.inputStreamToString(parser.parseAutoTipoDoc(fileTextField.getFile()));
 			
 			return unknownTipoDoc;
 		}
@@ -349,6 +351,8 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 						// parser.setLoggerLevel(ParserStruttura.LOGGER_VALORE[loggerLevel.getSelectedIndex()]);
 						InputStream res;
 						
+						//Setto se il doc da importare è un pdf (uso il marker modificato)
+						parser.setIsPdf(UtilFile.hasExtension(fileTextField.getFile(), "pdf", false));
 						if (UtilFile.hasExtension(fileTextField.getFile(), "doc", false))
 							res = parser.parse(wordFileConv);
                         else if (UtilFile.hasExtension(fileTextField.getFile(), "pdf", false)) 

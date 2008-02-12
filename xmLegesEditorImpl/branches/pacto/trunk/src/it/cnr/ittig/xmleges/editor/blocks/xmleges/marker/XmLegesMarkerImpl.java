@@ -85,6 +85,8 @@ public class XmLegesMarkerImpl implements XmLegesMarker, Loggable, Serviceable, 
 
 	String error = null;
 
+	boolean isPdf = false;
+	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
@@ -187,7 +189,7 @@ public class XmLegesMarkerImpl implements XmLegesMarker, Loggable, Serviceable, 
 	}
 	
 	
-	public InputStream parseAutoTipoDoc(File file, boolean isPdf) {
+	public InputStream parseAutoTipoDoc(File file) {
 		
 		execMonitor.clear();
 		
@@ -212,6 +214,7 @@ public class XmLegesMarkerImpl implements XmLegesMarker, Loggable, Serviceable, 
 		String command = sb.toString();
 		
 		logger.debug("Command=" + command);
+		
 		try {
 			UtilFile.copyFileInTemp(new FileInputStream(file), "unknown_type.in");
 			command += " -f "  + UtilFile.getTempDirName() + File.separatorChar + "unknown_type.in";
@@ -275,7 +278,12 @@ public class XmLegesMarkerImpl implements XmLegesMarker, Loggable, Serviceable, 
 		
 		
 		// xmLeges-Marker.exe gia' copiato nella temp da parseAutoTipoDoc
-		File command = UtilFile.getFileFromTemp("xmLeges-Marker.exe");
+		File command = null;
+		if (isPdf) 
+			command = UtilFile.getFileFromTemp("xmLeges-Marker-xPdf.exe");
+		else 	
+			command = UtilFile.getFileFromTemp("xmLeges-Marker.exe");
+		
 		UtilFile.setExecPermission(command);
 		StringBuffer sb = new StringBuffer(command.getAbsolutePath());
 		sb.append(" -i ");
@@ -308,6 +316,7 @@ public class XmLegesMarkerImpl implements XmLegesMarker, Loggable, Serviceable, 
 		sb.append(" -v ");
 		sb.append(logLevel);
 		sb.append(" -L file=" + UtilFile.getTempDirName() + "/ps.err");
+		
 		return sb.toString();
 	}
 
@@ -332,5 +341,9 @@ public class XmLegesMarkerImpl implements XmLegesMarker, Loggable, Serviceable, 
 			for (int i = 0; i < files.length; i++)
 				UtilFile.copyFileInTemp(getClass().getResourceAsStream(files[i]), files[i]);
 
+	}
+
+	public void setIsPdf(boolean isPdf) {
+		this.isPdf = isPdf;		
 	}
 }
