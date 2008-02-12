@@ -182,11 +182,10 @@ public interface XmLegesMarker extends Service {
 	 * Estrae il tipoDoc dal file <code>file</code>.
 	 * 
 	 * @param file file da cui estrarre il tipo
-	 * @param isPdf 
 	 * @return tipo di documento
 	 * @throws XmLegesMarkerException se avviene un errore durante l'analisi
 	 */
-	public InputStream parseAutoTipoDoc(File file, boolean isPdf) throws XmLegesMarkerException;
+	public InputStream parseAutoTipoDoc(File file) throws XmLegesMarkerException;
 	
 	/**
 	 * Converte il file <code>file</code> in XML.
@@ -204,4 +203,11 @@ public interface XmLegesMarker extends Service {
 	 * @return stringa contente l'errore oppure <code>null</code>.
 	 */
 	public String getError();
+	
+	/**
+	 * Indica se deve essere usato il marker modificato per i pdf.
+	 * 
+	 * @param isPdf <code>true</code> se deve essere usato
+	 */
+	public void setIsPdf(boolean isPdf);
 }
