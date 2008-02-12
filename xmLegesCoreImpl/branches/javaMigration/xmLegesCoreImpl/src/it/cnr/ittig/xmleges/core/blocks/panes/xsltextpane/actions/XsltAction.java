@@ -95,7 +95,7 @@ public class XsltAction extends TextAction {
 		int start = span.getStartOffset();
 		int end = span.getEndOffset();
 		try	{
-			retVal = pane.getText(start, end - start).trim();
+			retVal = pane.getText(start+1, end - start-2);
 		} catch (BadLocationException ble) 
 		{
 			ble.printStackTrace();
