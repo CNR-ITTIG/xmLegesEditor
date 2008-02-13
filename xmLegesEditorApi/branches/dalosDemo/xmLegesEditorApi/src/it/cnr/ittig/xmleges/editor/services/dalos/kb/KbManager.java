@@ -3,6 +3,7 @@ package it.cnr.ittig.xmleges.editor.services.dalos.kb;
 import it.cnr.ittig.services.manager.Service;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.SynsetTree;
+import it.cnr.ittig.xmleges.editor.services.dalos.objects.TreeOntoClass;
 
 import java.util.Collection;
 
@@ -64,20 +65,23 @@ public interface KbManager extends Service {
 	 */
 	public Collection getSynsetsList(String lang);
 	
+	public Collection getSynset(TreeOntoClass toc);
+	
 	/**
 	 * 
-	 * @param uri
+	 * @param uri 
 	 * @param lang
-	 * @return
+	 * @return l'oggetto synset relativo alla uri specificata
 	 */
 	public Synset getSynset(String uri, String lang);
 	
 	/**
 	 * 
-	 * @param search
-	 * @return
+	 * @param syn oggetto di partenza
+	 * @param lang lingua di destinazione
+	 * @return il relativo synset nella lingua specificata
 	 */
-	public Collection search(String search);
+	public Synset getSynset(Synset syn, String lang);
 	
 	/**
 	 * 
