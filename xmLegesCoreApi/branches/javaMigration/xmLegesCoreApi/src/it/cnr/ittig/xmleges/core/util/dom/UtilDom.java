@@ -1116,6 +1116,7 @@ public class UtilDom {
 				if (isAncestor(node, child))
 					return true;
 			} catch (ClassCastException ex) {
+				ex.printStackTrace();
 			}
 		return false;
 	}
