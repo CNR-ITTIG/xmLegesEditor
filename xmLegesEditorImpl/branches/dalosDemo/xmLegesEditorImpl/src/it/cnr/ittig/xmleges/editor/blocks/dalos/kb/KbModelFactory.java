@@ -24,9 +24,9 @@ public class KbModelFactory {
 	private static OntDocumentManager odm = OntDocumentManager.getInstance(); //null;
 
 	private static Map localDocuments = new HashMap();	
-	private static Map uriToLexSeg = new HashMap(256, 0.70f);
-	private static Map uriToSourceSeg = new HashMap(256, 0.70f);
-	private static Map uriToSemSeg = new HashMap(256, 0.70f);
+	private static Map uriToLexSeg = new HashMap(512, 0.70f);
+	private static Map uriToSourceSeg = new HashMap(512, 0.70f);
+	private static Map uriToSemSeg = new HashMap(512, 0.70f);
 	
 	public static void addDocument(String fileCode, String lang, String fileName) {
 		
@@ -76,11 +76,11 @@ public class KbModelFactory {
 	
 	public static OntModel getModel(String type, String reasoner, Synset syn) {
 		
-		return getModel(type, reasoner, "", syn);
+		return getModel(type, reasoner, "", "");
 	}
 			
 	public static OntModel getModel(String type, String reasoner, 
-			String lang, Synset syn) {
+			String lang, String URI) {
 		/*
 		 * Ritorna un OntModel in base a varie configurazioni.
 		 * type: sceglie i moduli ontologici da caricare
@@ -125,69 +125,56 @@ public class KbModelFactory {
 		if(type.equalsIgnoreCase("full")) {
 			readSchema(om, KbConf.METALEVEL_PROP);
 			readSchema(om, KbConf.DOMAIN_ONTO);
-			readDocument(om, lang, KbConf.CONCEPTS);
-			readDocument(om, lang, KbConf.IND);
-			readDocument(om, lang, KbConf.INDW);
-			//readDocument(om, lang, indclawFile);		
-			readDocument(om, lang, KbConf.TYPES);
+			readLocalDocument(om, lang, KbConf.CONCEPTS);
+			readLocalDocument(om, lang, KbConf.IND);
+			readLocalDocument(om, lang, KbConf.INDW);
+			//readLocalDocument(om, lang, indclawFile);		
+			readLocalDocument(om, lang, KbConf.TYPES);
 		}
 		if(type.equalsIgnoreCase("domain")) {
 			readSchema(om, KbConf.DOMAIN_ONTO);
 		}
 		if(type.equalsIgnoreCase("mapping")) {
 			readSchema(om, KbConf.METALEVEL_ONTO);	
-			//readDocument(om, lang, indclawFile);		
+			//readLocalDocument(om, lang, indclawFile);		
 		}
 		if(type.equalsIgnoreCase("concepts")) {
-			readDocument(om, lang, KbConf.CONCEPTS);
+			readLocalDocument(om, lang, KbConf.CONCEPTS);
 		}
 		if(type.equalsIgnoreCase("concept.mapping")) {
-			readDocument(om, lang, KbConf.CONCEPTS);
-			readDocument(om, lang, KbConf.TYPES);
+			readLocalDocument(om, lang, KbConf.CONCEPTS);
+			readLocalDocument(om, lang, KbConf.TYPES);
 		}
 		if(type.equalsIgnoreCase("individual")) {
 			readSchema(om, KbConf.METALEVEL_ONTO);
 			readSchema(om, KbConf.METALEVEL_PROP);
-			readDocument(om, lang, KbConf.IND);
-			readDocument(om, lang, KbConf.INDW);
-			readDocument(om, lang, KbConf.TYPES);
+			readLocalDocument(om, lang, KbConf.IND);
+			readLocalDocument(om, lang, KbConf.INDW);
+			readLocalDocument(om, lang, KbConf.TYPES);
 		}
 		if(type.equalsIgnoreCase("source")) {
 			readSchema(om, KbConf.SOURCE_SCHEMA); //Ci vuole questo metalivello??
-			readDocument(om, lang, KbConf.IND);
-			readDocument(om, lang, KbConf.SOURCES);			
+			readLocalDocument(om, lang, KbConf.IND);
+			readLocalDocument(om, lang, KbConf.SOURCES);			
 		}
-//		if(type.equalsIgnoreCase("dpinf")) {
-//			readDocument(om, lang, infDpFile);
-//		}
-//		if(type.equalsIgnoreCase("dpextinf")) {
-//			readDocument(om, lang, infDpFile);
-//			readDocument(om, lang, infDpExtFile);
-//		}
 		if(type.equalsIgnoreCase("seg.lex")) {
 			readSchema(om, KbConf.METALEVEL_ONTO);
 			readSchema(om, KbConf.METALEVEL_PROP);
 			
 			if(uriToLexSeg != null) {
-				if(syn == null) {
-					System.out.println("Segmentation: synset is null!");
-				}
-				Object segObj = uriToLexSeg.get(syn.getURI());
+				Object segObj = uriToLexSeg.get(URI);
 				if(segObj == null) {
 					System.err.println(
 							"Segmentation is active, but cannot resolve "
-							+ syn.getURI());
+							+ URI);
 					return null;
 				}
-//				String segFileName = segRepository + 
-//					KbConf.lexicalSegmentName + File.separatorChar +
-//					segObj.toString();
 				String segFileName = segObj.toString();
 				//System.out.println("Segmentation: retrieving data from " + segFileName);
-				readDocument(om, lang, segFileName);
+				readSegment(om, segFileName);
 			} else {						
-				readDocument(om, lang, KbConf.IND);
-				readDocument(om, lang, KbConf.TYPES);
+				readLocalDocument(om, lang, KbConf.IND);
+				readLocalDocument(om, lang, KbConf.TYPES);
 			}
 		}			
 		
@@ -233,14 +220,26 @@ public class KbModelFactory {
 //		om.read("file:///" + file.getAbsolutePath());
 //	}
 
-	private static void readDocument(OntModel om, String lang, String fileCode) {
+	private static void readLocalDocument(OntModel om, String lang, String fileCode) {
 		
 		String key = lang + fileCode;
 		Object fileName = (localDocuments.get(key));
 		if(fileName == null) {
-			System.err.println("readDocument() - doc not found! key: " + key);
+			System.err.println("readLocalDocument() - doc not found! key: " + key);
 			return;
 		}
+		File file = UtilFile.getFileFromTemp((String) fileName);
+		om.read("file:///" + file.getAbsolutePath());
+	}
+
+	private static void readSegment(OntModel om, String fileName) {
+		
+//		String key = lang + fileCode;
+//		Object fileName = (localDocuments.get(key));
+//		if(fileName == null) {
+//			System.err.println("readDocument() - doc not found! key: " + key);
+//			return;
+//		}
 		File file = UtilFile.getFileFromTemp((String) fileName);
 		om.read("file:///" + file.getAbsolutePath());
 	}

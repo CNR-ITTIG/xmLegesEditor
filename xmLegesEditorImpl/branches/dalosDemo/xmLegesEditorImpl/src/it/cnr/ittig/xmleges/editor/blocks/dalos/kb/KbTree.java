@@ -1,15 +1,14 @@
 package it.cnr.ittig.xmleges.editor.blocks.dalos.kb;
 
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
+import it.cnr.ittig.xmleges.editor.services.dalos.objects.PivotOntoClass;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.SynsetTree;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.TreeOntoClass;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
@@ -21,10 +20,6 @@ import javax.swing.tree.TreePath;
 
 import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntModel;
-import com.hp.hpl.jena.rdf.model.RDFNode;
-import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.rdf.model.Statement;
-import com.hp.hpl.jena.vocabulary.RDF;
 
 public class KbTree {
 	
@@ -36,17 +31,22 @@ public class KbTree {
 	private KbContainer kbc;
 	
 	private Set headClasses;
-	private Map linked;
 	
 	private I18n i18n;
 	
-	public KbTree(KbContainer k, I18n in) {
+	private KbManagerImpl kbm;
+	
+	private String lang;
+	
+	public KbTree(KbContainer kbc, KbManagerImpl kbm, I18n in) {
 		
-		kbc = k;
-		i18n = in;		
+		this.kbc = kbc;
+		this.kbm = kbm;
+		i18n = in;
+		lang = kbc.getLanguage();
+		
 		headClasses = null;
-		linked = null;
-		
+
 		tree = null;
 		tmpTree = null;
 	}
@@ -78,22 +78,21 @@ public class KbTree {
 		OntModel om = KbModelFactory.getModel("domain", "micro", kbc.getLanguage());
 		Collection topClasses = kbc.getTopClasses();
 		for(Iterator i = topClasses.iterator(); i.hasNext();) {
-			String ocName = (String) i.next();
-			TreeOntoClass cl = new TreeOntoClass(ocName);
+			String ocUri = (String) i.next();			
+			TreeOntoClass cl = getOntoClass(ocUri, om);
 			DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(cl);
 			((SynsetTree) tmpTree).addNode(newNode);
 			//Prendi la relativa OntClass in *questo* OntModel:
-			String ocNameNs = KbConf.DOMAIN_ONTO_NS + ocName;				
-			OntClass oc = om.getOntClass(ocNameNs);
+			OntClass oc = om.getOntClass(ocUri);
 			if(oc == null) {
 				System.out.println("## ERROR ## top class is null!! " +
-						"name: " + ocNameNs);
+						"name: " + ocUri);
 				return null;
 			}
-			expandClass(oc, newNode, tmpTree);
+			expandClass(om, oc, newNode, tmpTree);
 		}
 		
-//		addSynsets();
+		addSynsets();
 		
 		adjustTree();
 		
@@ -110,8 +109,6 @@ public class KbTree {
 		
 		collapseTree();
 		
-		//System.out.println(">> Trying to find and select \"" + syn + "\" within tree...");		
-			
 		//Non va bene questo: cerca solo nei nodi e foglie gi� espansi e cerca
 		//con un prefisso non con l'exact matching.
 		//TreePath path = tree.getNextMatch(syn.toString(), 0, Position.Bias.Forward);
@@ -151,24 +148,18 @@ public class KbTree {
 			Object data = ((DefaultMutableTreeNode) child).getUserObject();
 			if(data instanceof Synset &&
 					key.equalsIgnoreCase((data.toString()))) {
-				//TreePath exPath = new TreePath(((DefaultMutableTreeNode) child).getParent());
 				TreePath thisPath = new TreePath(((DefaultMutableTreeNode) child).getPath());
-				//System.out.println(">> Expanding path " + exPath);
 				tree.expandPath(thisPath);
 				paths.add(thisPath);
 				tree.scrollPathToVisible(thisPath);
-				//tree.addSelectionPath(thisPath);
 			}			
 			walkAndExpand(child, key, paths);
 		}
 	}
 	
-	private void expandClass(OntClass oc, DefaultMutableTreeNode node, JTree tmpTree) {
-		//Problema: se una classe non ha sotto-classi e non ha synset
-		//viene visualizzata come foglia!
-		//Aggiungere dei children fittizi? (empty) ?
-		
-		//System.out.println("Expanding " + oc.getNameSpace() + oc.getLocalName() + "...");
+	private void expandClass(OntModel om, OntClass oc, 
+			DefaultMutableTreeNode node, JTree tmpTree) {
+
 		DefaultMutableTreeNode newNode = null;
 		
 		for(Iterator i = oc.listSubClasses(true); i.hasNext();) {
@@ -180,9 +171,9 @@ public class KbTree {
 			}
 			
 			if(!c.isAnon() && !c.isRestriction()) {
-				String localName = c.getLocalName();
+				String uri = c.getNameSpace() + c.getLocalName();
 
-				TreeOntoClass cl = new TreeOntoClass(localName);
+				TreeOntoClass cl = getOntoClass(uri, om);
 				newNode = new DefaultMutableTreeNode(cl);
 				if(node == null) {
 					if(!headClasses.contains(cl)) {
@@ -192,119 +183,92 @@ public class KbTree {
 				} else {
 					node.add(newNode);
 				}
-				expandClass(c, newNode, tmpTree);
+				expandClass(om, c, newNode, tmpTree);
 			} else {
-				expandClass(c, node, tmpTree);
+				expandClass(om, c, node, tmpTree);
 			}			
 		}		
+	}
+	
+	private TreeOntoClass getOntoClass(String uri, OntModel om) {
+		
+		TreeOntoClass toc = kbm.getTreeClass(uri);
+		if(toc == null) {
+			//It must be added!
+			OntClass oc = om.getOntClass(uri);
+			toc = kbm.addTreeClass(uri, oc.getLocalName());
+		}
+		
+		return toc;
 	}
 	
 	private void addSynsets() {
 		
 		System.out.println("Adding synsets to tree...");
-		//OntModel mapModel = kbc.getModel("mapping", "micro");
-		OntModel mapModel = KbModelFactory.getModel("concept.mapping");
-		
-		linked = new HashMap(256, 0.70f);		
-		Resource subj = null;
-		RDFNode obj = null;
-		
-		for(Iterator i = mapModel.listStatements(subj, RDF.type, obj); i.hasNext();) {
-			Statement stm = (Statement) i.next();
-			Resource thisSubj = stm.getSubject();
-			RDFNode thisObjNode = stm.getObject();
-			if(!thisObjNode.isResource()) {
-				continue;
-			}
-			Resource thisObj = (Resource) thisObjNode;
-			if(thisObj.isAnon() ||
-					!thisObj.getNameSpace().equalsIgnoreCase(KbConf.DOMAIN_ONTO_NS)) {
-				continue;
-			}
-//			System.out.println("Adding to linked: " + thisObj.getLocalName() +
-//					" --> " + thisSubj.getLocalName());
-			addLink(thisObj, thisSubj);
-		}
 		
 		TreeModel model = tmpTree.getModel();
 		Object root = model.getRoot();
 		walk(model, root);
 		
-		//Non aggiungere per il momento i synset non classificati,
-		//sono visibili nell'elenco dei synset totali
-		//addRemainingSynsets();
-		
-		linked = null;
-	}
-	
-	private void addLink(Resource oc, Resource syn) {
-	
-		String key = oc.getLocalName();
-		Vector syns = (Vector) linked.get(key);
-		if(syns == null) {
-			syns = new Vector();
-			linked.put(key, syns);
-		}
-		syns.add(syn.getLocalName());
-	}
-	
+		//Show also non-classified synsets?
+		//addRemainingSynsets();		
+	}	
+
 	private void walk(TreeModel model, Object o) {
 		
 		int  cc = model.getChildCount(o);
 		for( int i = 0; i < cc; i++) {
 			Object child = model.getChild(o, i);
 			Object data = ((DefaultMutableTreeNode) child).getUserObject();
-			boolean isTreeOntoClass = false;
-			if(data instanceof TreeOntoClass) {
-				isTreeOntoClass = true;
-			} else  {
-				//Sono i synset che vengono aggiunti??
+			if( !(data instanceof TreeOntoClass) ) {
 				if(data instanceof Synset) {
+					//Sono i synset che vengono aggiunti!?
 					continue;
 				}
-				System.out.println(">>>>> " + data + " - " + isTreeOntoClass);
+				System.err.println(">> ERROR on walk() data:" + data);
 				return;
 			}
 			
-			Vector syns = (Vector) linked.get(data.toString());
-			if(syns != null) {
-				for(int k = 0; k < syns.size(); k++) {
-					//System.out.println("Asking object mapped by " + syns.get(k));
-					Synset syn = (Synset) kbc.getSynsetFromMap(syns.get(k));
-					//System.out.println("++ Adding " + syn + " to " + child.toString());
-					DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(syn);
-					((DefaultMutableTreeNode) child).add(newNode);
-				}
+			TreeOntoClass toc = (TreeOntoClass) data;			
+			Collection pocs = kbm.getPivotClasses(toc);
+			for(Iterator pi = pocs.iterator(); pi.hasNext(); ) {
+				PivotOntoClass poc = (PivotOntoClass) pi.next();
+				Synset syn = poc.getTerm(lang);
+				toc.addTerm(syn);				
+				DefaultMutableTreeNode newNode =
+					new DefaultMutableTreeNode(syn);
+				((DefaultMutableTreeNode) child).add(newNode);
 			}
+			
 			walk(model, child);
 		}
 	} 
 
-	private void addRemainingSynsets() {
-		
-		Set addedSyns = new HashSet();
-		Collection values = linked.values();
-		for(Iterator i = values.iterator(); i.hasNext();) {
-			Vector item = (Vector) i.next();
-			for(int k = 0; k < item.size(); k++) {
-				addedSyns.add(item.get(k));
-			}
-		}
-		
-		Collection syns = kbc.getSynsets(); 
-		System.out.println("# synsets: " + syns.size() + 
-				" (already classified: " + addedSyns.size() + ")");
-		for(Iterator i = syns.iterator(); i.hasNext();) {
-			Synset syn = (Synset) i.next();
-			String localName = syn.getURI().substring(syn.getURI().lastIndexOf('#') + 1);
-			if(!addedSyns.contains(localName)) {
-				//System.out.println("++ Adding synset to root node: " + syn );
-				DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(syn);
-				//((DefaultMutableTreeNode) root).add(newNode); //Usare se il nodo non � la root
-				tmpTree.addNode(newNode);
-			}
-		}
-	}
+//	private void addRemainingSynsets() {
+//		
+//		Set addedSyns = new HashSet();
+//		Collection values = linked.values();
+//		for(Iterator i = values.iterator(); i.hasNext();) {
+//			Vector item = (Vector) i.next();
+//			for(int k = 0; k < item.size(); k++) {
+//				addedSyns.add(item.get(k));
+//			}
+//		}
+//		
+//		Collection syns = kbc.getSynsets(); 
+//		System.out.println("# synsets: " + syns.size() + 
+//				" (already classified: " + addedSyns.size() + ")");
+//		for(Iterator i = syns.iterator(); i.hasNext();) {
+//			Synset syn = (Synset) i.next();
+//			String localName = syn.getURI().substring(syn.getURI().lastIndexOf('#') + 1);
+//			if(!addedSyns.contains(localName)) {
+//				//System.out.println("++ Adding synset to root node: " + syn );
+//				DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(syn);
+//				//((DefaultMutableTreeNode) root).add(newNode); //Usare se il nodo non � la root
+//				tmpTree.addNode(newNode);
+//			}
+//		}
+//	}
 	
 	private void adjustTree() {
 		
@@ -350,10 +314,6 @@ public class KbTree {
 		for(int i = 0; i < cc; i++) {
 			DefaultMutableTreeNode child = (DefaultMutableTreeNode) model.getChild(o, i);
 			Object data = child.getUserObject();
-//			if(!(data instanceof Synset)) {
-//				System.out.println("@@ " + child + " " + model.isLeaf(child) +
-//						" " + (data instanceof TreeOntoClass));
-//			}
 			if(model.isLeaf(child) && data instanceof TreeOntoClass) {
 				//Aggiungi un nodo fittizio
 				DefaultMutableTreeNode newNode = new DefaultMutableTreeNode("(empty)");
@@ -417,6 +377,4 @@ public class KbTree {
 			sortedNodes.add(node);
 		}		
 	}
-
 }
-

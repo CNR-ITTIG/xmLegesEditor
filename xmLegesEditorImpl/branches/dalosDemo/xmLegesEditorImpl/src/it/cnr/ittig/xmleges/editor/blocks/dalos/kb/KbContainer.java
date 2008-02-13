@@ -43,7 +43,6 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.RDF;
-import com.hp.hpl.jena.vocabulary.RDFS;
 
 public class KbContainer {
 
@@ -59,7 +58,7 @@ public class KbContainer {
 
 	//Dati
 	private Map synsets;
-	private Set sortedSynsets; //meglio un TreeSet ??
+	private Set sortedSynsets;
 
 	private Set langProperties = null;
 	
@@ -84,8 +83,8 @@ public class KbContainer {
 
 		LANGUAGE = lang;
 		
-		synsets = null;
-		sortedSynsets = null;
+		synsets = new HashMap(2048, 0.70f);
+		sortedSynsets = new TreeSet();
 
 		if(!checkFiles()) {
 			System.err.println(">> WARNING - KbContainer: Data files not found! Repo: " +
@@ -105,12 +104,6 @@ public class KbContainer {
 		return getSynsets(false);
 	}
 	
-	//TEMPORANEA, toglierla in futuro...
-	public Object getSynsetFromMap(Object key) {
-		
-		return synsets.get(key);
-	}
-
 	public Collection getSynsets(boolean sorted) {
 	
 		if(!concreteContainer) {
@@ -119,9 +112,7 @@ public class KbContainer {
 			return null;
 		}
 		
-		if(synsets == null) {
-			initData();
-		}
+		initData();
 		
 		if(sorted) {
 			return sortedSynsets;
@@ -139,10 +130,8 @@ public class KbContainer {
 		}
 		
 		System.out.println("KbContainer - Initializing data...");
-		synsets = new HashMap(2048, 0.70f);
-		sortedSynsets = new TreeSet();
 		
-		kbt = new KbTree(this, i18n);
+		kbt = new KbTree(this, kbm, i18n);
 
 		long t1 = System.currentTimeMillis();		
 		initSynsets();
@@ -172,82 +161,46 @@ public class KbContainer {
 		return concreteContainer;
 	}
 	
+	private void initMap(String segmentName) throws 
+		FileNotFoundException, IOException, ClassNotFoundException {
+		
+		String mapFileName = segRepository + segmentName +
+					File.separatorChar + KbConf.mapSegmentFileName;
+
+		File mapFile = UtilFile.getFileFromTemp(mapFileName);
+		if(mapFile != null && mapFile.exists()) {
+		FileInputStream fis = new FileInputStream(mapFile);
+		ObjectInputStream ois = new ObjectInputStream(fis);
+		Map segMap = new HashMap();
+		segMap = (Map) ois.readObject();
+		ois.close();
+		fis.close();
+		
+		Collection keys = segMap.keySet();
+		for(Iterator k = keys.iterator(); k.hasNext();) {
+			String key = (String) k.next();
+			String value = (String) segMap.get(key);
+			String segFileName = segRepository + segmentName 
+					+ File.separatorChar + value;
+			//System.out.println("::: addSegment ::: " + key + " -> " + segFileName);
+			KbModelFactory.addSegment(key, segFileName, segmentName);
+			}
+		}		
+	}
+	
 	private void initMaps() 
 		throws FileNotFoundException, IOException, ClassNotFoundException {
 		
 		System.out.println("KbContainer: checking KB segmentation support...");
 		
-		String mapFileName = segRepository + KbConf.lexicalSegmentName +
-					File.separatorChar + KbConf.mapSegmentFileName;
-		
-		File mapFile = UtilFile.getFileFromTemp(mapFileName);
-		if(mapFile != null && mapFile.exists()) {
-			FileInputStream fis = new FileInputStream(mapFile);
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			Map segMap = new HashMap();
-			segMap = (Map) ois.readObject();
-			ois.close();
-			fis.close();
-			
-			Collection keys = segMap.keySet();
-			for(Iterator k = keys.iterator(); k.hasNext();) {
-				String key = (String) k.next();
-				String value = (String) segMap.get(key);
-				String segFileName = segRepository + KbConf.lexicalSegmentName 
-						+ File.separatorChar + value;
-				KbModelFactory.addSegment(key, segFileName,
-						KbConf.lexicalSegmentName);
-			}
-		}
-		
-		mapFileName = segRepository + KbConf.sourceSegmentName +
-			File.separatorChar + KbConf.mapSegmentFileName;
-		mapFile = UtilFile.getFileFromTemp(mapFileName);
-		if(mapFile != null && mapFile.exists()) {
-			FileInputStream fis = new FileInputStream(mapFile);
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			Map segMap = new HashMap();
-			segMap = (Map) ois.readObject();
-			ois.close();
-			fis.close();
-			
-			Collection keys = segMap.keySet();
-			for(Iterator k = keys.iterator(); k.hasNext();) {
-				String key = (String) k.next();
-				String value = (String) segMap.get(key);
-				String segFileName = segRepository + KbConf.sourceSegmentName 
-						+ File.separatorChar + value;
-				KbModelFactory.addSegment(key, segFileName,
-						KbConf.sourceSegmentName);
-			}
-		}
-		
-		mapFileName = segRepository + KbConf.semanticSegmentName +
-		File.separatorChar + KbConf.mapSegmentFileName;
-		mapFile = UtilFile.getFileFromTemp(mapFileName);
-		if(mapFile != null && mapFile.exists()) {
-			FileInputStream fis = new FileInputStream(mapFile);
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			Map segMap = new HashMap();
-			segMap = (Map) ois.readObject();
-			ois.close();
-			fis.close();
-			
-			Collection keys = segMap.keySet();
-			for(Iterator k = keys.iterator(); k.hasNext();) {
-				String key = (String) k.next();
-				String value = (String) segMap.get(key);
-				String segFileName = segRepository + KbConf.semanticSegmentName 
-						+ File.separatorChar + value;
-				KbModelFactory.addSegment(key, segFileName,
-						KbConf.semanticSegmentName);
-			}
-		}
+		initMap(KbConf.lexicalSegmentName);
+		initMap(KbConf.sourceSegmentName);
+		initMap(KbConf.semanticSegmentName);
 	}
 
 	Collection getTopClasses() {
 		/*
-		 * Return a set of String that represent the local names
+		 * Return a set of String that represent the URI
 		 * of direct sub classes of Thing in DOMAIN ontology.
 		 */
 		
@@ -273,9 +226,9 @@ public class KbContainer {
 				}
 			}
 			if(top) {
-				classes.add(oc.getLocalName());
-				System.out.println("++ TOP CLASS: " 
-						+ oc.getNameSpace() + oc.getLocalName());
+				String ocUri = oc.getNameSpace() + oc.getLocalName();
+				classes.add(ocUri);
+				System.out.println("++ TOP CLASS: " + ocUri);
 			}
 		}		
 		
@@ -365,19 +318,23 @@ public class KbContainer {
 		
 		return kbt.setSelection(syn);
 	}
+
+	private void initOntResources(OntModel om) {
+		
+		contains = om.getOntProperty(KbConf.METALEVEL_ONTO_NS + "containsWordSense");
+		word = om.getOntProperty(KbConf.METALEVEL_ONTO_NS + "word");
+		lexical = om.getOntProperty(KbConf.METALEVEL_ONTO_NS + "lexicalForm");
+		proto = om.getOntProperty(KbConf.METALEVEL_ONTO_NS + "protoForm");
+		nSynClass = om.getOntClass(KbConf.METALEVEL_ONTO_NS + "NounSynset");
+		vSynClass = om.getOntClass(KbConf.METALEVEL_ONTO_NS + "VerbSynset");
+		ajSynClass = om.getOntClass(KbConf.METALEVEL_ONTO_NS + "AdjectiveSynset");
+		avSynClass = om.getOntClass(KbConf.METALEVEL_ONTO_NS + "AdverbSynset");		
+	}
 	
 	private void initSynsets() {
 		
 		OntModel ind_m = KbModelFactory.getModel("individual", "", LANGUAGE);
-		
-		contains = ind_m.getOntProperty(KbConf.METALEVEL_ONTO_NS + "containsWordSense");
-		word = ind_m.getOntProperty(KbConf.METALEVEL_ONTO_NS + "word");
-		lexical = ind_m.getOntProperty(KbConf.METALEVEL_ONTO_NS + "lexicalForm");
-		proto = ind_m.getOntProperty(KbConf.METALEVEL_ONTO_NS + "protoForm");
-		nSynClass = ind_m.getOntClass(KbConf.METALEVEL_ONTO_NS + "NounSynset");
-		vSynClass = ind_m.getOntClass(KbConf.METALEVEL_ONTO_NS + "VerbSynset");
-		ajSynClass = ind_m.getOntClass(KbConf.METALEVEL_ONTO_NS + "AdjectiveSynset");
-		avSynClass = ind_m.getOntClass(KbConf.METALEVEL_ONTO_NS + "AdverbSynset");
+		initOntResources(ind_m);
 		
 		if(contains == null || word == null || lexical == null) {
 			System.out.println("ERROR: null properties.");
@@ -405,12 +362,46 @@ public class KbContainer {
 		}
 	}
 	
+	/**
+	 * Makes syn a concrete synset
+	 * 
+	 * @param syn
+	 */
+	void initSynset(Synset syn) {
+		
+		OntModel om = KbModelFactory.getModel(
+				"seg.lex", "micro", LANGUAGE, syn.getURI());
+		
+		initOntResources(om);
+		OntResource ores = (OntResource) om.getResource(syn.getURI());
+		analyzeSynsetResource(ores, syn);
+	}
+	
+	void initSynset(String uri) {
+		
+		OntModel om = KbModelFactory.getModel(
+				"seg.lex", "micro", LANGUAGE, uri);
+		
+		initOntResources(om);
+		OntResource ores = (OntResource) om.getResource(uri);
+		analyzeSynsetResource(ores);
+	}
+	
 	private void analyzeSynsetResource(OntResource ores) {
-					
-		Synset syn = null;
-
-		syn = new Synset(LANGUAGE);
-		syn.setURI(ores.getNameSpace() + ores.getLocalName());
+		
+		analyzeSynsetResource(ores, null);
+	}
+	
+	private void analyzeSynsetResource(OntResource ores, Synset syn) {
+		//If syn != null, make it a concrete synset
+		
+		boolean newSynset = false;
+		
+		if(syn == null) {
+			newSynset = true;
+			syn = new Synset(LANGUAGE);
+			syn.setURI(ores.getNameSpace() + ores.getLocalName());
+		}
 
 		for(Iterator k = ores.listPropertyValues(contains); k.hasNext();) {
 			OntResource ws = (OntResource) k.next();
@@ -427,71 +418,8 @@ public class KbContainer {
 			}
 		}
 		
-		//Fill pivot classes
-		for(Iterator k = ores.listRDFTypes(true); k.hasNext(); ) {
-			Resource res = (Resource) k.next();
-			if(res.getNameSpace().equalsIgnoreCase(KbConf.DALOS_CONCEPTS_NS)) {
-				String conceptURI = res.getNameSpace() + res.getLocalName();
-				PivotOntoClass poc = kbm.getPivotClass(conceptURI);
-				if(poc == null) {
-					System.err.println("ERROR! Pivot Class not found: " + conceptURI);
-					continue;
-				} else {
-					poc.addTerm(syn);
-					syn.setPivotClass(poc);
-				}
-			}
-		}
-		
-		//System.out.println("Adding " + ores.getLocalName() + " --> " + syn);			
-		synsets.put(ores.getLocalName(), syn); //meglio questa come chiave??
-		//addSortedSynset(syn);
-		sortedSynsets.add(syn);
-
-	}
-	
-	private void initSynsetsOLD() {
-		
-		OntModel ind_m = KbModelFactory.getModel("individual", "micro", LANGUAGE);
-		
-		OntProperty contains = ind_m.getOntProperty(KbConf.METALEVEL_ONTO_NS + "containsWordSense");
-		OntProperty word = ind_m.getOntProperty(KbConf.METALEVEL_ONTO_NS + "word");
-		OntProperty lexical = ind_m.getOntProperty(KbConf.METALEVEL_ONTO_NS + "lexicalForm");
-		OntProperty proto = ind_m.getOntProperty(KbConf.METALEVEL_ONTO_NS + "protoForm");
-		OntClass synClass = ind_m.getOntClass(KbConf.METALEVEL_ONTO_NS + "Synset");
-		if(contains == null || word == null || lexical == null) {
-			System.out.println("ERROR: null properties.");
-			return;
-		}
-		if(synClass == null) {
-			System.out.println("ERROR: null synClass.");
-			return;
-		}
-		
-		for(Iterator i = synClass.listInstances(false); i.hasNext();) {
-
-			Synset syn = null;
-			OntResource ores = (OntResource) i.next();		
-
-			syn = new Synset(LANGUAGE);
-			syn.setURI(ores.getNameSpace() + ores.getLocalName());
-
-			for(Iterator k = ores.listPropertyValues(contains); k.hasNext();) {
-				OntResource ws = (OntResource) k.next();
-				OntResource w = (OntResource) ws.getPropertyValue(word);
-				RDFNode protoNode = (RDFNode) w.getPropertyValue(proto);
-				if(protoNode != null) {
-					String protoForm = ((Literal) protoNode).getString();
-					syn.setLexicalForm(protoForm);					
-				}
-				for(Iterator l = w.listPropertyValues(lexical); l.hasNext(); ) {
-					RDFNode lexNode = (RDFNode) l.next();
-					String lexForm = ((Literal) lexNode).getString();
-					((Collection) syn.getVariants()).add(lexForm);
-				}
-			}
-			
-			//Fill pivot classes
+		//Fill pivot classes (only if syn is a new synset)
+		if(newSynset) {
 			for(Iterator k = ores.listRDFTypes(true); k.hasNext(); ) {
 				Resource res = (Resource) k.next();
 				if(res.getNameSpace().equalsIgnoreCase(KbConf.DALOS_CONCEPTS_NS)) {
@@ -505,22 +433,24 @@ public class KbContainer {
 						syn.setPivotClass(poc);
 					}
 				}
-			}
-			
-			//System.out.println("Adding " + ores.getLocalName() + " --> " + syn);			
-			synsets.put(ores.getLocalName(), syn); //meglio questa come chiave??
-			//addSortedSynset(syn);
-			sortedSynsets.add(syn);
+			}		
+		} else {
+			syn.setConcreteSynset(true);
 		}
+
+		String key = ores.getNameSpace() + ores.getLocalName();
+		synsets.put(key, syn);
+		sortedSynsets.add(syn);
 	}
 	
 	Synset getSynset(String uri) {
 		
-		if(uri.indexOf("#") > -1) {
-			uri = uri.substring(uri.indexOf("#") + 1);
+		Synset syn = (Synset) synsets.get(uri);
+		if(syn == null) {
+			initSynset(uri);
 		}
 		
-		return (Synset) synsets.get(uri);
+		return syn; 
 	}
 	
 	void addSources(Synset syn) {
@@ -587,7 +517,7 @@ public class KbContainer {
 		}
 
 		//OntModel om = KbModelFactory.getModel("individual", "micro");
-		OntModel om = KbModelFactory.getModel("seg.lex", "micro", LANGUAGE, syn);
+		OntModel om = KbModelFactory.getModel("seg.lex", "micro", LANGUAGE, syn.getURI());
 		
 		Individual ind = om.getIndividual(syn.getURI());
 		OntProperty glossProp = om.getOntProperty(KbConf.METALEVEL_ONTO_NS + "gloss");
@@ -675,7 +605,8 @@ public class KbContainer {
 		
 		String propName = prop.getLocalName();
 		String resName = ((Resource) obj).getLocalName();
-		Synset objSynset = (Synset) synsets.get(resName);
+		String resNS = ((Resource) obj).getNameSpace();
+		Synset objSynset = (Synset) synsets.get(resNS + resName);
 		//System.out.println("addLingProp: prop:" + propName + " resName:" + resName + " obj:" + objSynset);
 		if(objSynset == null) {
 			System.err.println("addLinguisticProperty() - objSynset is null!");
@@ -694,7 +625,9 @@ public class KbContainer {
 	private void addSemanticProperty(Synset syn, Property prop, RDFNode obj) {
 		
 		String propName = prop.getLocalName();
-		Synset objSynset = (Synset) synsets.get(((Resource) obj).getLocalName());
+		String resUri = ((Resource) obj).getNameSpace() +
+			((Resource) obj).getLocalName();
+		Synset objSynset = (Synset) synsets.get(resUri);
 		if(objSynset == null) {
 			System.err.println("Unknown instance found: " + objSynset);
 			return;

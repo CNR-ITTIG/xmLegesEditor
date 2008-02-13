@@ -21,7 +21,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
 import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntDocumentManager;
@@ -53,9 +52,8 @@ implements KbManager, Loggable, Serviceable, Initializable {
 	//Maps from language to KbContainer objects.
 	private Map langToContainer;
 	
-	private Set treeClasses;
-	private Set pivotClasses; 
-	private Map uriToPivot;
+	private Map uriToPivotClass;
+	private Map uriToTreeClass;
 	
 	I18n i18n;
 	
@@ -75,9 +73,8 @@ implements KbManager, Loggable, Serviceable, Initializable {
 	    copyDalosInTemp();
 		
 		langToContainer = new HashMap();
-		treeClasses = new HashSet();
-		pivotClasses = new HashSet();
-		uriToPivot = new HashMap(256, 0.70f);
+		uriToPivotClass = new HashMap(256, 0.70f);
+		uriToTreeClass = new HashMap(128, 0.70f);
 		
 		if(KbConf.MERGE_DOMAIN) {
 			KbConf.DOMAIN_ONTO = 
@@ -183,43 +180,47 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		KbContainer kbc = getContainer(lang);
 		return kbc.getSynsets(true);
 	}
-	
-	//Ridondante con getForeignSynset() ?
-	//A che serve la lingua qui?
+
+	/**
+	 * 
+	 * @param uri 
+	 * @param lang
+	 * @return l'oggetto synset relativo alla uri specificata
+	 */
 	public Synset getSynset(String uri, String lang) {
 		
 		KbContainer kbc = getContainer(lang);
 		return kbc.getSynset(uri);
 	}
 	
-	public Synset getForeignSynset(String uri, String lang) {
+	/**
+	 * 
+	 * @param syn oggetto di partenza
+	 * @param lang lingua di destinazione
+	 * @return il relativo synset nella lingua specificata
+	 */
+	public Synset getSynset(Synset syn, String lang) {
 		
-		//Gets foreign KB container:
-		if(getContainer(lang) == null) {
-			System.out.println("## ERROR ## getForeignSynset() " +
-					" - language not initialized: " + lang);
+		KbContainer kbc = getContainer(lang);
+
+		PivotOntoClass poc = syn.getPivotClass();
+		if(poc == null) {
+			System.err.println("ERROR getSynset() - poc is null for " + syn);
 			return null;
 		}
-
-		//Gets pivot to foreign synsets mapping
-//		if(pivotToForeign == null) {
-//			initForeignLanguages();
-//		}
-//		
-//		Collection foreignSyns = (Collection) pivotToForeign.get(uri);
-//		
-//		if(foreignSyns == null) {
-//			return null;
-//		}
-//		
-//		for(Iterator i = foreignSyns.iterator(); i.hasNext();) {
-//			Synset item = (Synset) i.next();
-//			if(item.getLanguage().equalsIgnoreCase(lang)) {
-//				return item;
-//			}
-//		}
 		
-		return null;
+		Synset fsyn = poc.getTerm(lang);
+		if(fsyn == null) {
+			//No aligment!
+			return null;
+		}
+		
+		if(!fsyn.isConcreteSynset()) {
+			//Make it concrete!
+			kbc.initSynset(fsyn);
+		}
+
+		return fsyn;		
 	}
 	
 	public SynsetTree getTree(String lang) {
@@ -247,33 +248,53 @@ implements KbManager, Loggable, Serviceable, Initializable {
 	}
 	
 	public PivotOntoClass getPivotClass(String uri) {
-		/*
-		 * Alternativa:
-		 * usando un hashmap <URI> -> <PivotOntoClass>
-		 * si perde memoria ma si guadagna tempo !?
-		 */
-//		PivotOntoClass poc = null;					
-//		for(Iterator ci = pivotClasses.iterator(); ci.hasNext(); ) {
-//			PivotOntoClass item = (PivotOntoClass) ci.next();
-//			if(item.getURI().equals(uri)) {
-//				poc = item;
-//				break;
-//			}
-//		}
-//		return poc;
-		
-		return (PivotOntoClass) uriToPivot.get(uri);
+
+		return (PivotOntoClass) uriToPivotClass.get(uri);
 	}
 	
-//	Collection getPivotClasses() {
-//		
-//		return pivotClasses;
-//	}
-//	
-//	Collection getTreeClasses() {
-//		
-//		return treeClasses;
-//	}
+	public TreeOntoClass getTreeClass(String uri) {
+
+		return (TreeOntoClass) uriToTreeClass.get(uri);
+	}
+
+	/**
+	 * Find which concepts are classified under 'toc' class
+	 * 
+	 * @param toc
+	 * @return a Collection of PivotOntoClass
+	 */
+	public Collection getPivotClasses(TreeOntoClass toc) {
+		
+		Collection pocs = new HashSet();
+		
+		Collection pivots = uriToPivotClass.values();
+		for(Iterator i = pivots.iterator(); i.hasNext(); ) {
+			PivotOntoClass pitem = (PivotOntoClass) i.next();
+			Collection links = pitem.getLinks();
+			for(Iterator k = links.iterator(); k.hasNext(); ) {
+				TreeOntoClass titem = (TreeOntoClass) k.next();
+				if(titem.equals(toc)) {
+					pocs.add(pitem);
+				}
+			}
+		}
+		
+		return pocs;
+	}
+	
+	TreeOntoClass addTreeClass(String uri, String name) {
+		
+		TreeOntoClass toc = (TreeOntoClass) uriToTreeClass.get(uri);
+		if(toc != null) {
+			System.err.println("addTreeClass() - already here: " + uri);
+		} else {
+			toc = new TreeOntoClass(name);
+			toc.setURI(uri);
+			uriToTreeClass.put(uri, toc);
+		}
+		
+		return toc;		
+	}
 	
 	private void initPivotMapping() {
 		
@@ -292,8 +313,7 @@ implements KbManager, Loggable, Serviceable, Initializable {
 			PivotOntoClass poc = new PivotOntoClass();
 			String puri = ores.getNameSpace() + ores.getLocalName();
 			poc.setURI(puri);
-			pivotClasses.add(poc);
-			uriToPivot.put(puri, poc);
+			uriToPivotClass.put(puri, poc);
 			for(StmtIterator k = mod.listStatements(
 					(Resource) ores, RDFS.subClassOf, (RDFNode) null);
 					k.hasNext();) {
@@ -307,9 +327,11 @@ implements KbManager, Loggable, Serviceable, Initializable {
 				}
 				
 				TreeOntoClass toc = new TreeOntoClass(objName);
-				toc.setURI(objNS + objName);
-				poc.addClass(toc);
-				treeClasses.add(toc);
+				String turi = objNS + objName;
+				toc.setURI(turi);
+				poc.addLink(toc);
+				
+				uriToTreeClass.put(turi, toc);
 			}
 		}
 	}

@@ -59,5 +59,5 @@ public class KbConf {
 
 	public static String DALOS_CONCEPTS_NS = DALOS_NS + CONCEPTS + "#";
 
-	public static String conceptClassName = DALOS_CONCEPTS_NS + "Concept";
+	public static String conceptClassName = DALOS_CONCEPTS_NS + "Concept";	
 }
