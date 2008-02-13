@@ -7,8 +7,8 @@
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-baseline-noun-1">
     <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-baseline-noun-1"/>
-    <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
     <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-baseline"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
@@ -16,8 +16,8 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-river"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-river-noun-1"/>
     <rdf:type rdf:nodeID="A0"/>
+    <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-river-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-river-noun-1">
     <j.1:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000027427</j.1:synsetId>
@@ -58,10 +58,10 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-request_for_information-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-request_for_information-noun-1"/>
     <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-request_for_information"/>
-    <rdf:type rdf:nodeID="A0"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#word-opinion_of_advocate">
     <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Opinion of Advocate</j.1:lexicalForm>

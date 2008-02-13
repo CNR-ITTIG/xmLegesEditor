@@ -14,24 +14,24 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-amount_of_credit-noun-1">
     <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-amount_of_credit"/>
-    <rdf:type rdf:nodeID="A0"/>
     <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-amount_of_credit-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-tolerance-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
     <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-tolerance"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <rdf:type rdf:nodeID="A0"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-tolerance-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-arsfne-noun-1">
+    <rdf:type rdf:nodeID="A0"/>
     <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-arsfne-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-arsfne"/>
-    <rdf:type rdf:nodeID="A0"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#word-arsfne">
     <j.1:sense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-arsfne-noun-1"/>
@@ -106,8 +106,8 @@
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-home-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-home"/>
+    <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
     <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-home-noun-1"/>
-    <rdf:type rdf:nodeID="A0"/>
   </rdf:Description>
 </rdf:RDF>

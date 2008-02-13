@@ -37,11 +37,11 @@
     <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Amaro</j.1:lexicalForm>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-event_of_failure-noun-1">
+    <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
     <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-event_of_failure-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-event_of_failure"/>
-    <rdf:type rdf:nodeID="A0"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#word-tuula_pynns">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
@@ -90,10 +90,10 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-builder-noun-1">
-    <rdf:type rdf:nodeID="A0"/>
     <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-builder-noun-1"/>
     <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-builder"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-tuula_pynns-noun-1">

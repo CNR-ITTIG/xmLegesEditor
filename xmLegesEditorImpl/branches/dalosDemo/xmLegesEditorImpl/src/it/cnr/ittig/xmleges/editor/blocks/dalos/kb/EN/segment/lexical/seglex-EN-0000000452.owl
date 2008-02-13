@@ -29,10 +29,10 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-rapidity-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-rapidity"/>
     <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-rapidity-noun-1"/>
-    <rdf:type rdf:nodeID="A0"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#word-rapidity">
     <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rapidity</j.1:lexicalForm>
@@ -41,9 +41,9 @@
     <j.1:sense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-rapidity-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-child-noun-1">
-    <rdf:type rdf:nodeID="A0"/>
     <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-child"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-child-noun-1"/>
   </rdf:Description>
@@ -73,11 +73,11 @@
     <j.1:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000027510</j.1:synsetId>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-amount_of_damages-noun-1">
+    <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
     <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-amount_of_damages-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-amount_of_damages"/>
-    <rdf:type rdf:nodeID="A0"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#word-amount_of_damages">
     <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">amount of damages</j.1:lexicalForm>
@@ -93,17 +93,17 @@
     <j.1:sense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-insight-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-security-noun-1">
-    <rdf:type rdf:nodeID="A0"/>
     <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-security-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-security"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-insight-noun-1">
     <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-insight"/>
-    <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-insight-noun-1"/>
+    <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#word-child">

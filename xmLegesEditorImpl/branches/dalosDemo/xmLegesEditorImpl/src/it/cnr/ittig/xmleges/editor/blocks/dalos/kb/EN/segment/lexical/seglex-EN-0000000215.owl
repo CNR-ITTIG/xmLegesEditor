@@ -18,9 +18,9 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-computer_software-noun-1">
     <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-computer_software"/>
-    <rdf:type rdf:nodeID="A0"/>
     <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-computer_software-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-installation_in_relation-noun-1">
@@ -38,11 +38,11 @@
     <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">netherlands government</j.1:lexicalForm>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-holding-noun-1">
-    <rdf:type rdf:nodeID="A0"/>
     <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-holding"/>
     <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-holding-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-installation_in_relation-noun-1">
     <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-installation_in_relation"/>
@@ -53,10 +53,10 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-netherlands_government-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
     <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-netherlands_government-noun-1"/>
     <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-netherlands_government"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <rdf:type rdf:nodeID="A0"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-holding-noun-1">
     <j.1:containsWordSense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-holding-noun-1"/>

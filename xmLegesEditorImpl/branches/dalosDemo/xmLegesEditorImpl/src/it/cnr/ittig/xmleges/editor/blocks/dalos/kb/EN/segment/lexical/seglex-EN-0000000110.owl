@@ -7,16 +7,16 @@
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-preparatory_work-noun-1">
     <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-preparatory_work"/>
-    <rdf:type rdf:nodeID="A0"/>
     <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-preparatory_work-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-credit_contract-noun-1">
     <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-credit_contract"/>
-    <rdf:type rdf:nodeID="A0"/>
     <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-credit_contract-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#word-method_of_disposal">
@@ -49,11 +49,11 @@
     <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27375-61996A0105-en-par2"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-veterinarian-noun-1">
+    <rdf:type rdf:nodeID="A0"/>
     <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-veterinarian-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-veterinarian"/>
-    <rdf:type rdf:nodeID="A0"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#word-credit_contract">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
@@ -98,9 +98,9 @@
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-residue_limit-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-residue_limit-noun-1"/>
+    <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
     <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-residue_limit"/>
-    <rdf:type rdf:nodeID="A0"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#word-residue_limit">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>

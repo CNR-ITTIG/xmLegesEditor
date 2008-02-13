@@ -8,15 +8,15 @@
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-amendment_without_delay-noun-1">
     <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-amendment_without_delay-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <rdf:type rdf:nodeID="A0"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-amendment_without_delay"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-supplier_of_means-noun-1">
     <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-supplier_of_means"/>
-    <rdf:type rdf:nodeID="A0"/>
     <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-supplier_of_means-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-rules_of_community_law-noun-1">

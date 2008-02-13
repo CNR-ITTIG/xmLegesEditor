@@ -13,8 +13,8 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-principal_place-noun-1">
     <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-principal_place-noun-1"/>
-    <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-principal_place"/>
   </rdf:Description>
@@ -56,17 +56,17 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-raw_material-noun-1">
     <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-raw_material"/>
+    <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-raw_material-noun-1"/>
-    <rdf:type rdf:nodeID="A0"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-financing_of_indemnity-noun-1">
-    <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-financing_of_indemnity"/>
     <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-financing_of_indemnity-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-financing_of_indemnity-noun-1">
     <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26110-61997J0102-en-par5-rft5"/>
@@ -77,11 +77,11 @@
     <j.1:containsWordSense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-financing_of_indemnity-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-ratio-noun-1">
-    <rdf:type rdf:nodeID="A0"/>
     <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-ratio"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-ratio-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#word-financing_of_indemnity">
     <j.1:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">financing of indemnities</j.1:lexicalForm>
@@ -109,10 +109,10 @@
     <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27110-61998J0240-en-sum1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-compound-noun-1">
-    <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-compound"/>
     <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-compound-noun-1"/>
+    <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
   </rdf:Description>
 </rdf:RDF>

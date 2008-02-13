@@ -15,8 +15,8 @@
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-salvat_editores-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
-    <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-salvat_editores"/>
     <rdf:type rdf:nodeID="A0"/>
+    <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-salvat_editores"/>
     <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-salvat_editores-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#word-favourable_opinion">
@@ -26,11 +26,11 @@
     <j.1:sense rdf:resource="http://localhost/dalos/EN/individuals.owl#wordsense-favourable_opinion-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-productg-noun-1">
-    <rdf:type rdf:nodeID="A0"/>
     <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-productg"/>
     <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-productg-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-salvat_editores-noun-1">
     <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27474-61998J0240-en-rec2"/>
@@ -44,11 +44,11 @@
     <j.0:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27474-61998J0240-en-cas2-prt1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-recipient-noun-1">
+    <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
     <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-recipient-noun-1"/>
     <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-recipient"/>
-    <rdf:type rdf:nodeID="A0"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-recipient-noun-1">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
@@ -84,9 +84,9 @@
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#wordsense-favourable_opinion-noun-1">
     <j.1:word rdf:resource="http://localhost/dalos/EN/individuals.owl#word-favourable_opinion"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+    <rdf:type rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#WordSense"/>
     <j.1:inSynset rdf:resource="http://localhost/dalos/EN/individuals.owl#synset-favourable_opinion-noun-1"/>
-    <rdf:type rdf:nodeID="A0"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#word-productg">
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>

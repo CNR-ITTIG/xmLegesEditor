@@ -383,7 +383,11 @@ public class KbContainer {
 				"seg.lex", "micro", LANGUAGE, uri);
 		
 		initOntResources(om);
-		OntResource ores = (OntResource) om.getResource(uri);
+		Resource res = om.getResource(uri);
+		if(res == null) {
+			return;
+		}
+		OntResource ores = (OntResource) res; 
 		analyzeSynsetResource(ores);
 	}
 	

@@ -181,6 +181,11 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		return kbc.getSynsets(true);
 	}
 
+	public Collection getSynset(TreeOntoClass toc) {
+		
+		return null;
+	}
+	
 	/**
 	 * 
 	 * @param uri 
