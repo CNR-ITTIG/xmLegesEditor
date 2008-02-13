@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.Element;
-import javax.swing.text.html.HTMLDocument;
 
 import org.w3c.dom.Node;
 
@@ -41,7 +40,7 @@ public class XsltKeyTypedAction extends XsltAction {
 
 		if (!checkKeys(actionCommand, e.getModifiers()))
 			return;
-
+				
 		AntiAliasedTextPane pane = (AntiAliasedTextPane) getTextComponent(e);
 
 		int caret = pane.getCaretPosition();
@@ -73,19 +72,25 @@ public class XsltKeyTypedAction extends XsltAction {
 		if(modNode.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE && modNode.getNodeValue().startsWith("<rif")) {
 			return;
 		}
-				
-		try {
-			// il "+1", il "-1" e il "-2" saltano gli spazi alle estremitˆ.
-			if(pane.getText(span.getStartOffset()+1, 
-						span.getEndOffset()-2-span.getStartOffset()).equals(pane.getDefaultText(span))) {
-				pane.select(span.getStartOffset()+1, span.getEndOffset()-1);
-			}
-		} catch (BadLocationException e1) {
-			// There is no logger instance here!
-			e1.printStackTrace();
-			return;
-		}
-	    	
+		
+		int start = span.getStartOffset();
+		int end = span.getEndOffset();
+
+		if (pane.getXsltMapper().getParentByGen(modNode) != null) {	
+			pane.select(start+1, end-1);
+		} 
+//		QUESTO E' INUTILE PERCHE' I NODI CON TESTO DI DEFAULT SONO MAPPATI :  getParentByGen(modNode) != null		
+//		else {
+//			String elemText = getText(e, span);
+//			String defText = pane.getDefaultText(span);
+//		
+//			if(elemText != null && defText != null && defText.equals(elemText)) {
+//				pane.select(start+1, end-1);
+//			} else if(elemText == null || defText == null) {
+//				return;
+//			}
+//		}
+		
 		super.actionPerformed(e);
 	}
 

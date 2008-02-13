@@ -110,7 +110,7 @@ public class XsltAction extends TextAction {
 		int start = span.getStartOffset();
     	try
 		{
-    			// skip starting space
+    		// skip starting space
     		doc.insertString(start+1, pane.getDefaultText(span), span.getAttributes());
 		} 
     	catch (BadLocationException ble) 
