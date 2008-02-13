@@ -30,6 +30,7 @@ import com.hp.hpl.jena.ontology.OntResource;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
+import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.RDFS;
 
 /**
@@ -54,6 +55,7 @@ implements KbManager, Loggable, Serviceable, Initializable {
 	
 	private Set treeClasses;
 	private Set pivotClasses; 
+	private Map uriToPivot;
 	
 	I18n i18n;
 	
@@ -73,8 +75,9 @@ implements KbManager, Loggable, Serviceable, Initializable {
 	    copyDalosInTemp();
 		
 		langToContainer = new HashMap();
-		pivotClasses = null;
-		treeClasses = null;
+		treeClasses = new HashSet();
+		pivotClasses = new HashSet();
+		uriToPivot = new HashMap(256, 0.70f);
 		
 		if(KbConf.MERGE_DOMAIN) {
 			KbConf.DOMAIN_ONTO = 
@@ -83,9 +86,9 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		
 		loadCommonDocuments();
 		
-		loadLanguages();
-
 		initPivotMapping();
+
+		loadLanguages();
 	}
 	
 	private void loadLanguages() {		
@@ -134,6 +137,10 @@ implements KbManager, Loggable, Serviceable, Initializable {
 	public void addLanguage(String lang) {
 		
 		langToContainer.put(lang, new KbContainer(lang, this, i18n));
+		
+		//Add new language alignements
+		KbContainer kbc = getContainer(lang);
+		kbc.addAlignments();
 	}
 
 	public void addLexicalProperties(Synset syn) {
@@ -239,15 +246,34 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		return kbc.setTreeSelection(syn);
 	}
 	
-	Collection getPivotClasses() {
+	public PivotOntoClass getPivotClass(String uri) {
+		/*
+		 * Alternativa:
+		 * usando un hashmap <URI> -> <PivotOntoClass>
+		 * si perde memoria ma si guadagna tempo !?
+		 */
+//		PivotOntoClass poc = null;					
+//		for(Iterator ci = pivotClasses.iterator(); ci.hasNext(); ) {
+//			PivotOntoClass item = (PivotOntoClass) ci.next();
+//			if(item.getURI().equals(uri)) {
+//				poc = item;
+//				break;
+//			}
+//		}
+//		return poc;
 		
-		return pivotClasses;
+		return (PivotOntoClass) uriToPivot.get(uri);
 	}
 	
-	Collection getTreeClasses() {
-		
-		return treeClasses;
-	}
+//	Collection getPivotClasses() {
+//		
+//		return pivotClasses;
+//	}
+//	
+//	Collection getTreeClasses() {
+//		
+//		return treeClasses;
+//	}
 	
 	private void initPivotMapping() {
 		
@@ -261,21 +287,22 @@ implements KbManager, Loggable, Serviceable, Initializable {
 			return;
 		}
 
-		for(Iterator i = conceptClass.listInstances(); i.hasNext(); ) {
+		for(Iterator i = conceptClass.listSubClasses(); i.hasNext(); ) {
 			OntResource ores = (OntResource) i.next();
 			PivotOntoClass poc = new PivotOntoClass();
-			poc.setURI(ores.getNameSpace() + ores.getLocalName());
+			String puri = ores.getNameSpace() + ores.getLocalName();
+			poc.setURI(puri);
 			pivotClasses.add(poc);
-			for(Iterator k = mod.listStatements(
+			uriToPivot.put(puri, poc);
+			for(StmtIterator k = mod.listStatements(
 					(Resource) ores, RDFS.subClassOf, (RDFNode) null);
 					k.hasNext();) {
-				Statement stm = (Statement) i.next();
-				OntResource obj = (OntResource) stm.getObject();
+				Statement stm = k.nextStatement();
+				Resource obj = (Resource) stm.getObject();
 				String objNS = obj.getNameSpace();
 				String objName = obj.getLocalName();
 
 				if(!objNS.equalsIgnoreCase(KbConf.DOMAIN_ONTO_NS)) {
-					System.err.println("initPivotMapping() - objNS: " + objNS);
 					continue;
 				}
 				

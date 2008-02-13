@@ -42,6 +42,7 @@ import com.hp.hpl.jena.rdf.model.RDFWriter;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
+import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 
 public class KbContainer {
@@ -64,6 +65,16 @@ public class KbContainer {
 	
 	private KbManagerImpl kbm;
 	private KbTree kbt;
+	
+	OntProperty contains = null;
+	OntProperty word = null;
+	OntProperty lexical = null;
+	OntProperty proto = null;
+	OntClass nSynClass = null;
+	OntClass vSynClass = null;
+	OntClass ajSynClass = null;
+	OntClass avSynClass = null;
+
 
 	public KbContainer(String lang, KbManagerImpl kbm, I18n i) {
 		
@@ -118,7 +129,7 @@ public class KbContainer {
 			return synsets.values();
 		}		
 	}
-
+	
 	//Using this method means that this container
 	//now holds the global language.
 	boolean initData() {		
@@ -309,6 +320,41 @@ public class KbContainer {
 		
 		return true;
 	}
+	
+	/*
+	 * Adds empty synsets to KbManager pivot classes.
+	 */
+	void addAlignments() {
+		
+		if(!concreteContainer) {
+			return;
+		}
+		
+		System.out.println(">> Adding language alignments for: "
+				+ LANGUAGE + "...");
+		OntModel mod = KbModelFactory.getModel("types", "", LANGUAGE);
+		
+		for(StmtIterator i = mod.listStatements(
+				null, RDF.type, (RDFNode) null); i.hasNext(); ) {
+			Statement stm = i.nextStatement();
+			Resource subj = stm.getResource();
+			Resource obj = (Resource) stm.getObject();
+			String subjNs = subj.getNameSpace();			
+			String subjName = subj.getLocalName();
+			String objNs = obj.getNameSpace();			
+			String objName = obj.getLocalName();
+			if(!objNs.equalsIgnoreCase(KbConf.DALOS_CONCEPTS_NS)) {
+				continue;
+			}
+			//Create an empty synset
+			Synset syn = new Synset(LANGUAGE);
+			syn.setURI(subjNs + subjName);
+			//Retrieve matching concept
+			PivotOntoClass poc = kbm.getPivotClass(objNs + objName);
+			poc.addTerm(syn);
+			syn.setPivotClass(poc);			
+		}		
+	}
 
 	SynsetTree getTree() {
 		
@@ -321,6 +367,90 @@ public class KbContainer {
 	}
 	
 	private void initSynsets() {
+		
+		OntModel ind_m = KbModelFactory.getModel("individual", "", LANGUAGE);
+		
+		contains = ind_m.getOntProperty(KbConf.METALEVEL_ONTO_NS + "containsWordSense");
+		word = ind_m.getOntProperty(KbConf.METALEVEL_ONTO_NS + "word");
+		lexical = ind_m.getOntProperty(KbConf.METALEVEL_ONTO_NS + "lexicalForm");
+		proto = ind_m.getOntProperty(KbConf.METALEVEL_ONTO_NS + "protoForm");
+		nSynClass = ind_m.getOntClass(KbConf.METALEVEL_ONTO_NS + "NounSynset");
+		vSynClass = ind_m.getOntClass(KbConf.METALEVEL_ONTO_NS + "VerbSynset");
+		ajSynClass = ind_m.getOntClass(KbConf.METALEVEL_ONTO_NS + "AdjectiveSynset");
+		avSynClass = ind_m.getOntClass(KbConf.METALEVEL_ONTO_NS + "AdverbSynset");
+		
+		if(contains == null || word == null || lexical == null) {
+			System.out.println("ERROR: null properties.");
+			return;
+		}
+		if(nSynClass == null || vSynClass == null || ajSynClass == null || avSynClass == null ) {
+			System.out.println("ERROR: null synset class!");
+			return;
+		}
+		
+		for(Iterator i = nSynClass.listInstances(false); i.hasNext();) {
+			analyzeSynsetResource((OntResource) i.next());
+		}
+
+		for(Iterator i = vSynClass.listInstances(false); i.hasNext();) {
+			analyzeSynsetResource((OntResource) i.next());
+		}
+
+		for(Iterator i = ajSynClass.listInstances(false); i.hasNext();) {
+			analyzeSynsetResource((OntResource) i.next());
+		}
+
+		for(Iterator i = avSynClass.listInstances(false); i.hasNext();) {
+			analyzeSynsetResource((OntResource) i.next());
+		}
+	}
+	
+	private void analyzeSynsetResource(OntResource ores) {
+					
+		Synset syn = null;
+
+		syn = new Synset(LANGUAGE);
+		syn.setURI(ores.getNameSpace() + ores.getLocalName());
+
+		for(Iterator k = ores.listPropertyValues(contains); k.hasNext();) {
+			OntResource ws = (OntResource) k.next();
+			OntResource w = (OntResource) ws.getPropertyValue(word);
+			RDFNode protoNode = (RDFNode) w.getPropertyValue(proto);
+			if(protoNode != null) {
+				String protoForm = ((Literal) protoNode).getString();
+				syn.setLexicalForm(protoForm);					
+			}
+			for(Iterator l = w.listPropertyValues(lexical); l.hasNext(); ) {
+				RDFNode lexNode = (RDFNode) l.next();
+				String lexForm = ((Literal) lexNode).getString();
+				((Collection) syn.getVariants()).add(lexForm);
+			}
+		}
+		
+		//Fill pivot classes
+		for(Iterator k = ores.listRDFTypes(true); k.hasNext(); ) {
+			Resource res = (Resource) k.next();
+			if(res.getNameSpace().equalsIgnoreCase(KbConf.DALOS_CONCEPTS_NS)) {
+				String conceptURI = res.getNameSpace() + res.getLocalName();
+				PivotOntoClass poc = kbm.getPivotClass(conceptURI);
+				if(poc == null) {
+					System.err.println("ERROR! Pivot Class not found: " + conceptURI);
+					continue;
+				} else {
+					poc.addTerm(syn);
+					syn.setPivotClass(poc);
+				}
+			}
+		}
+		
+		//System.out.println("Adding " + ores.getLocalName() + " --> " + syn);			
+		synsets.put(ores.getLocalName(), syn); //meglio questa come chiave??
+		//addSortedSynset(syn);
+		sortedSynsets.add(syn);
+
+	}
+	
+	private void initSynsetsOLD() {
 		
 		OntModel ind_m = KbModelFactory.getModel("individual", "micro", LANGUAGE);
 		
@@ -343,8 +473,7 @@ public class KbContainer {
 			Synset syn = null;
 			OntResource ores = (OntResource) i.next();		
 
-			syn = new Synset();
-			syn.setLanguage(LANGUAGE);
+			syn = new Synset(LANGUAGE);
 			syn.setURI(ores.getNameSpace() + ores.getLocalName());
 
 			for(Iterator k = ores.listPropertyValues(contains); k.hasNext();) {
@@ -367,15 +496,7 @@ public class KbContainer {
 				Resource res = (Resource) k.next();
 				if(res.getNameSpace().equalsIgnoreCase(KbConf.DALOS_CONCEPTS_NS)) {
 					String conceptURI = res.getNameSpace() + res.getLocalName();
-					Collection pivots = kbm.getPivotClasses();
-					PivotOntoClass poc = null;					
-					for(Iterator ci = pivots.iterator(); ci.hasNext(); ) {
-						PivotOntoClass item = (PivotOntoClass) ci.next();
-						if(item.getURI().equals(conceptURI)) {
-							poc = item;
-							break;
-						}
-					}
+					PivotOntoClass poc = kbm.getPivotClass(conceptURI);
 					if(poc == null) {
 						System.err.println("ERROR! Pivot Class not found: " + conceptURI);
 						continue;

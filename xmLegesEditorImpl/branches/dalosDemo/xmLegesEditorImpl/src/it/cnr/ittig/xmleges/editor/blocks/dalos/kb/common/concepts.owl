@@ -14,6 +14,7 @@
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:type="http://localhost/dalos/IT/types.owl#"
   xml:base="http://localhost/dalos/concepts.owl" > 
+  <owl:Class rdf:ID="Concept"/>
   <rdf:Description rdf:about="#concept-communication-noun-1">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="#Concept"/>

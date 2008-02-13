@@ -93,7 +93,7 @@ public class KbTree {
 			expandClass(oc, newNode, tmpTree);
 		}
 		
-		addSynsets();
+//		addSynsets();
 		
 		adjustTree();
 		
