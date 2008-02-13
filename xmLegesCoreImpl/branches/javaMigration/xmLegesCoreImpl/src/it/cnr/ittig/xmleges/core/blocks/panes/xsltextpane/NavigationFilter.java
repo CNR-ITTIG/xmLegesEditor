@@ -1,9 +1,6 @@
 package it.cnr.ittig.xmleges.core.blocks.panes.xsltextpane;
 
-import java.awt.Rectangle;
-
 import javax.swing.SwingConstants;
-import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Element;
 import javax.swing.text.JTextComponent;
@@ -26,7 +23,7 @@ public class NavigationFilter extends javax.swing.text.NavigationFilter {
 	public int getNextVisualPositionFrom(JTextComponent text, int pos, Bias bias, int direction, Bias[] biasRet) throws BadLocationException {
 		if (direction == SwingConstants.EAST || direction == SwingConstants.WEST) {
 			int i = pos, prev = pos;
-			while((i = super.getNextVisualPositionFrom(text, i, bias, direction, biasRet)) != prev ) {
+			while((i = super.getNextVisualPositionFrom(text, i, bias, direction, biasRet)) != prev) {
 				Element span = textPane.getMappedSpan(i);
 				// posizione consentita se dentro ad uno span o alla sua fine.
 				if(span != null && i != span.getStartOffset())// || (span == null && prevSpan != null))
@@ -61,6 +58,7 @@ public class NavigationFilter extends javax.swing.text.NavigationFilter {
 	}
 
 	public void setDot(FilterBypass fb, int dot, Bias bias) {
+		//System.err.println(textPane.getPane().getName()+"  setDot - DOT = "+dot );
 		try {
 			Element newElem = textPane.getHTMLDocument().getCharacterElement(dot);
 			
@@ -72,8 +70,8 @@ public class NavigationFilter extends javax.swing.text.NavigationFilter {
 				}
 			}
 
-
 			Element span = textPane.getMappedSpan(dot);
+		
 			/*
 			 * 	Debugging
 			System.err.println("currElement: " + (newElem !=null ? newElem.getName() : null));
@@ -89,42 +87,31 @@ public class NavigationFilter extends javax.swing.text.NavigationFilter {
 			System.err.println("isMapped " + textPane.isMapped(newElem) + " isSpan " + textPane.isSpan(newElem));
 			System.err.println("Posizione dot: " + dot + " " + (span !=null ? span.getName() : null));
 			 */
-			if(span != null && dot != span.getStartOffset())
-				// Quando l'utente clicca dentro uno span mappato, posiziona il cursors 
+			
+			if(span != null && dot != span.getStartOffset() && dot != span.getEndOffset())
+				// Quando l'utente clicca dentro uno span mappato, posiziona il cursore
 				super.setDot(fb, dot, bias);
 			else {
-				// Quando l'utente clicca fuori di uno span
+				// Quando l'utente clicca fuori da uno span ricerca la piu' vicina posizione ammissibile
+			
 				try {
 					int east, west;
 					east = getNextVisualPositionFrom(textPane, dot, bias, SwingConstants.EAST, new Position.Bias[1]);
 					west = getNextVisualPositionFrom(textPane, dot, bias, SwingConstants.WEST, new Position.Bias[1]);
-
-					Rectangle rectPos = textPane.modelToView(dot);
-					Rectangle rectEast = textPane.modelToView(east);
-					Rectangle rectWest = textPane.modelToView(west);
-
-					double eastRectDiff = Math.abs(rectPos.getY() - rectEast.getY());
-					double westRectDiff = Math.abs(rectPos.getY() - rectWest.getY());
-
-					int eastDiff = Math.abs(dot - east);
-					int westDiff = Math.abs(dot - west);
-					if (east != west) {
-						int newDest;
-						if (eastRectDiff < westRectDiff) {
-							newDest = eastDiff == 0 ? west : east;
-						} else if (eastRectDiff > westRectDiff) {
-							newDest = westDiff == 0 ? east : west;
-						} else {
-							if (eastDiff <= westDiff) {
-								newDest = eastDiff == 0 ? west : east;
-							} else {
-								newDest = westDiff == 0 ? east : west;
-							}
-						}
-						super.setDot(fb, newDest, bias);
-					} 
+					
+					//System.err.println(textPane.getPane().getName()+"  OUTSIDE SPAN - Setting dot "+dot +" east  "+east +"  west  "+west);
+					
+					int newDest = 0;
+					if (Math.abs(west-dot) <= Math.abs(east-dot))
+						newDest = west;
+					else
+						newDest = east;
+					
+					//System.err.println(textPane.getPane().getName()+"  OUTSIDE SPAN - to newDest  "+newDest);	
+					
+					super.setDot(fb, newDest, bias);
+					
 				}
-
 				catch (BadLocationException ble) {
 					ble.printStackTrace();
 				}

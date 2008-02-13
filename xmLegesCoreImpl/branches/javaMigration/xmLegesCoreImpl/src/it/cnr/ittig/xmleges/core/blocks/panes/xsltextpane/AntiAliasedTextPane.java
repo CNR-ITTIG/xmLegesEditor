@@ -30,7 +30,6 @@ import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.event.DocumentEvent.ElementChange;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
@@ -145,11 +144,34 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 		return getSelectedText() != null;
 	}
 
+	
+//	public void cut() {
+//		UtilClipboard.set(getSelectedText());
+//		replaceSelection("");
+//	}
+	
+	
 	public void cut() {
-		UtilClipboard.set(getSelectedText());
-		replaceSelection("");
+		
+		int selStart = getSelectionStart();
+		int selEnd = getSelectionEnd();
+		try {
+		HTMLDocument doc = getHTMLDocument();
+		Element currElem = getHTMLDocument().getCharacterElement(selStart);
+		int start = currElem.getStartOffset(), end = currElem.getEndOffset();
+		if (selStart == start+1 && selEnd == end-1) {
+			UtilClipboard.set(getSelectedText());
+			doc.replace(selStart, selEnd-selStart, getDefaultText(currElem),currElem.getAttributes());
+		} else {
+			UtilClipboard.set(getSelectedText());
+			replaceSelection("");
+		}
+		} catch (BadLocationException e) {
+			e.printStackTrace();
+		}
 	}
-
+		
+	
 	public boolean canDelete() {
 		return getSelectedText() != null;
 	}
@@ -166,7 +188,7 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 		Element currElem = getMappedSpan(getCaretPosition());
 		Node modNode = getXsltMapper().getDomById(getElementId(currElem));
 		if (getXsltMapper().getParentByGen(modNode) != null) {
-			select(currElem.getStartOffset(), currElem.getEndOffset());
+			select(currElem.getStartOffset()+1, currElem.getEndOffset()-1);
 		}
 		replaceSelection(UtilClipboard.getAsString());
 	}
@@ -211,7 +233,7 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 
 		int currpos = e.getMark();
 		Element currelem = getMappedSpan(currpos);
-
+		if(currelem == null) return;
 		String id = getElementId(currelem);
 
 		Node selNode = getXsltMapper().getDomById(id, true);
@@ -271,9 +293,9 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 		} else {
 			logger.debug("caretUpdate: with dot==mark");
 		}
-
-		int relSelStart = selStart  - currelem.getStartOffset();
-		int relSelEnd = selEnd - currelem.getStartOffset();
+		
+		int relSelStart = selStart  - currelem.getStartOffset() - 1;
+		int relSelEnd = selEnd - currelem.getStartOffset() - 1;
 
 		pane.fireSelectionChanged(selNode, relSelStart, relSelEnd);
 		pane.firePaneStatusChanged();
@@ -417,17 +439,14 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 				//ret = UtilXslt.serializedApplyXslt(node, xslt);
 				nodeHtml = UtilXslt.applyXslt(node, xslt);
 			}
-			if (logger.isDebugEnabled())
-				//logger.debug("html:" + UtilDom.domToString(nodeHtml, true, null, false));
-				logger.debug("HTML: " + ret);
-			ret = UtilDom.domToString(nodeHtml, false, null, false, true);//UtilXslt.serializedApplyXslt(node, xslt, xsltParam);//
+			if (logger.isDebugEnabled()){
+				logger.debug("html:" + UtilDom.domToString(nodeHtml, true, "\t", false));
+			}
+			ret = UtilDom.domToString(nodeHtml,false,null,false,true);
 			ret = ret.substring(ret.indexOf('\n'));
 		} catch (Exception ex) {
 			logger.error(ex.toString(), ex);
 		}
-		if (logger.isDebugEnabled() && nodeHtml != null)
-			logger.debug("END getHTML(Node): " + UtilDom.domToString(nodeHtml, true));
-
 		return ret;
 	}
 
@@ -509,7 +528,7 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 		try {
 			int start = modElem.getStartOffset();
 			int end = modElem.getEndOffset();
-			newText = getText(start, end - start);
+			newText = getText(start+1, end - start-2);
 			if (e.getLength() > 1 && newText.equals(getXsltMapper().getI18nNodeText(modNode.getParentNode()))) {
 				newText = null;
 			}
@@ -560,7 +579,7 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 		try {
 			int start = modElem.getStartOffset();
 			int end = modElem.getEndOffset();
-			newText = getText(start, end - start);
+			newText = getText(start+1, end - start -2);
 		} catch (BadLocationException ble) {
 			ble.printStackTrace();
 		}
@@ -688,7 +707,7 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 
 	public void update() {
 		if (logger.isDebugEnabled())
-			logger.debug("BEGIN update()");
+			logger.debug("BEGIN update() on panel "+pane.getName());
 		setEnabled(false);
 		ignoreDocumentEvents = true;
 		ignoreCaretEvents = true;
@@ -697,8 +716,11 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 				setText("");
 			} else {
 				String text = getHtml(dom);
-				logger.debug(text);
+				if(logger.isDebugEnabled())
+					logger.debug(text);
 				setText(text);
+				// forza il posizionamento del cursore in testa al documento su update totale
+				getCaret().setDot(0);
 				setEnabled(true);
 			}
 		} catch (Exception ex) {
@@ -710,14 +732,16 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 	}
 
 	public Node update(Node node) {
+		
 		String id = pane.getXsltMapper().getIdByDom(node);
 		Element elem = getHTMLDocument().getElement(id);
+		
 		if (elem != null) {
 			ignoreDocumentEvents = true;
 			ignoreCaretEvents = true;
 			try {
-				getHTMLDocument().setOuterHTML(elem, getHtml(node));
-				//getHTMLDocument().setOuterHTML(elem, convertEncoding(getHtml(node)));
+				//getHTMLDocument().setOuterHTML(elem, getHtml(node));
+				getHTMLDocument().setInnerHTML(elem, convertEncoding(getHtml(node)));
 				return node;
 			} catch (Exception ex) {
 				logger.error(ex.toString(), ex);
@@ -748,7 +772,7 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 		    	return text;
 		    }	
 	}
-
+	
 	
 	public void viewDomSpellCheckEvent(DomSpellCheckEvent e) {
 		ignoreCaretEvents = true;

@@ -198,6 +198,7 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 
 	// ////////////////////////////////////////// EventManagerListener Interface
 	public void manageEvent(EventObject event) {
+		
 		if (event instanceof DocumentChangedEvent) {
 			if (!textPane.isShowing()) {
 				// TODO dividere in updatedDom e updatedSelection
@@ -272,7 +273,6 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 				logger.debug("DOM=" + UtilDom.domToString(e.getDocument()));
 			textPane.setDom(e.getDocument());
 			
-
 			// inserisco il parametro del BaseURL
 			Hashtable hashtable = new Hashtable(1);
 			hashtable.put("base", "file:///"+UtilFile.getFolderPath(documentManager.getSourceName()));

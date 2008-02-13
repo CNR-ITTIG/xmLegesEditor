@@ -133,8 +133,7 @@ public class XsltTransferHandler extends DomTransferHandler {
 					int start = currElem.getStartOffset(), end = currElem.getEndOffset();
 					String elemText = null;
 					if (p0.getOffset() == start+1 && p1.getOffset() == end-1) {
-						doc.replace(p0.getOffset(), p1.getOffset() - p0.getOffset(), source.getDefaultText(currElem),
-								currElem.getAttributes());
+						doc.replace(p0.getOffset(), p1.getOffset() - p0.getOffset(), source.getDefaultText(currElem),currElem.getAttributes());
 					} else {
 						doc.remove(p0.getOffset(), p1.getOffset() - p0.getOffset());
 					}
