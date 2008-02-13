@@ -233,7 +233,7 @@ public class XsltEditorImpl implements XsltEditor, Pane, Loggable, Serviceable, 
 			try {
 				UtilXslt.remove(xslt);	//rimuovo il file altrimenti riprende "il vecchio" dalla cache
 				Node node = UtilXslt.applyXslt(documentManager.getDocumentAsDom(), xslt);
-				convTextArea.setText(UtilDom.domToString(node));
+				convTextArea.setText(UtilDom.domToString(node,true,"\t",false));
 			} catch (Exception ex) {
 				// TODO MSG
 				logger.error(ex.toString(), ex);
