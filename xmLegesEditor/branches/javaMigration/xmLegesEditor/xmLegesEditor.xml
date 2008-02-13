@@ -87,13 +87,13 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <!-- ================================================================== -->
     <!-- ================================================ LOOK AND FEEL === -->
     <!-- ================================================================== -->
-    <!--component  activation="startup"
+    <component  activation="startup"
                 class="it.cnr.ittig.xmleges.core.blocks.lookandfeel.LookAndFeelImpl"
         >
         <configuration>
             <lookandfeel>com.jgoodies.plaf.plastic.Plastic3DLookAndFeel</lookandfeel>
         </configuration>
-    </component-->
+    </component>
     
 
 
