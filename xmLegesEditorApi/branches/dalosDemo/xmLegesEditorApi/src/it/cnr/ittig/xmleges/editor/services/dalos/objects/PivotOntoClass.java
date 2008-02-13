@@ -14,7 +14,7 @@ public class PivotOntoClass extends DalosOntoClass {
 	
 	public PivotOntoClass() {
 		
-		super("");
+		this("");
 	}
 	
 	public PivotOntoClass(String name) {
@@ -25,14 +25,14 @@ public class PivotOntoClass extends DalosOntoClass {
 		terms = new HashSet();
 	}
 
-	public boolean addClass(TreeOntoClass dc) {
+	public boolean addClass(TreeOntoClass toc) {
 		
-		return links.add(dc);
+		return links.add(toc);
 	}
 	
-	public boolean removeClass(TreeOntoClass dc) {
+	public boolean removeClass(TreeOntoClass toc) {
 		
-		return links.remove(dc);
+		return links.remove(toc);
 	}
 	
 	public boolean addTerm(Synset syn) {

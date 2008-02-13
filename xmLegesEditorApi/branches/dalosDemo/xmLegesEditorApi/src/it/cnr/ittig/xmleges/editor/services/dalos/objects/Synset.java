@@ -2,17 +2,14 @@ package it.cnr.ittig.xmleges.editor.services.dalos.objects;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeSet;
-import java.util.Vector;
 
 public class Synset implements Comparable {
 	
 	private String URI;
 	
-	private String lang;
+	private String LANGUAGE;
 	
 	private String def;
 	
@@ -37,8 +34,10 @@ public class Synset implements Comparable {
 		
 	public Map semanticToSynset = null;		
 	
-	public Synset() {
+	public Synset(String language) {
 				
+		LANGUAGE = language;
+		
 		lexicalToSynset = new HashMap();
 		semanticToSynset = new HashMap();
 		
@@ -51,6 +50,7 @@ public class Synset implements Comparable {
 
 	public void setDef(String str) {
 		
+		concreteSynset = true;
 		def = str;
 	}
 	
@@ -61,6 +61,7 @@ public class Synset implements Comparable {
 	
 	public void setLexicalForm(String lex) {
 		
+		concreteSynset = true;
 		lexicalForm = lex;
 	}
 	
@@ -69,9 +70,9 @@ public class Synset implements Comparable {
 		return lexicalForm;
 	}
 	
-	public void setPivotClass(PivotOntoClass oc) {
+	public void setPivotClass(PivotOntoClass poc) {
 		
-		pivotClass = oc;
+		pivotClass = poc;
 	}
 	
 	public PivotOntoClass getPivotClass() {
@@ -121,12 +122,12 @@ public class Synset implements Comparable {
 
 	public void setLanguage(String str) {
 		
-		lang = str;
+		LANGUAGE = str;
 	}
 	
 	public String getLanguage() {
 		
-		return lang;
+		return LANGUAGE;
 	}
 
 	public void setURI(String uri) {
@@ -138,24 +139,6 @@ public class Synset implements Comparable {
 	
 		return URI;
 	}
-	
-//	public void addSource(String s) {
-//
-//		boolean ins = false;
-//		for(int i = 0; i < sources.size(); i++) {
-//			String item = (String) sources.get(i);
-//			if(item.toString().compareToIgnoreCase(s.toString()) < 0) continue;
-//			if(item.toString().compareToIgnoreCase(s.toString()) > 0) {
-//				sources.add(i, s);
-//				ins = true;
-//				break;
-//			}
-//		}
-//		if(!ins) {
-//			//Inserisci alla fine del vettore
-//			sources.add(s);
-//		}
-//	}
 
 	public void addSource(Source source) {
 
@@ -169,6 +152,7 @@ public class Synset implements Comparable {
 
 	public void addVariant(String var) {
 
+		concreteSynset = true;
 		variants.add(var);
 	}
 	
@@ -189,7 +173,7 @@ public class Synset implements Comparable {
 
 		if(obj instanceof Synset) {
 			if(lexicalForm.equalsIgnoreCase(((Synset) obj).getLexicalForm())
-					&& lang.equalsIgnoreCase(((Synset) obj).getLanguage()) ) {
+					&& LANGUAGE.equalsIgnoreCase(((Synset) obj).getLanguage()) ) {
 				return true;
 			}
 		}
