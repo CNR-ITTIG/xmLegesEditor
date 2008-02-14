@@ -49,6 +49,6 @@ implements EventManagerListener, Loggable, Serviceable,
 		
 		synsetPane.setSynset(syn);
 		synsetPane.draw();
-		frame.setShowingPane(this, true);
+		//frame.setShowingPane(this, true);
 	}
 }
