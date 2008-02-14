@@ -137,7 +137,7 @@ public class SynsetMarkupImpl implements SynsetMarkup, Loggable, Serviceable {
 				span = (Element) utilRulesManager.encloseTextInTag(node, start, end,"h:span","h");	
 			}
 			UtilDom.setAttributeValue(span,"h:style","dalos");
-			UtilDom.setAttributeValue(span, "h:class", synset.getURI().substring(synset.getURI().indexOf("#")+1));
+			UtilDom.setAttributeValue(span, "h:class", synset.getURI());
 			UtilDom.setTextNode(span, variant);
 			return (Node) span;
 		}
