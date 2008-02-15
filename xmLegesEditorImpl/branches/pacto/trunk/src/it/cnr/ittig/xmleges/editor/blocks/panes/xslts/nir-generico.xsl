@@ -40,7 +40,8 @@
 				</xsl:choose>
 			</p>
 			<xsl:choose>
-				<xsl:when test="//*[name()='evento']/@data!=''">
+				<!--	xsl:when test="//*[name()='evento']/@data!=''"	-->
+				<xsl:when test="//*[name()='evento']/@fonte!='ro1'">
 					<div id="timeline">
 						<xsl:call-template name="TimeLine" />
 					</div>
@@ -1180,9 +1181,11 @@
 							</xsl:otherwise>
 						</xsl:choose>
 					</xsl:variable>
-					<xsl:variable name="urn">
+					
+					<!-- commento qui -->
+					<!--	xsl:variable name="urn">
 						<xsl:value-of select="id($fonte)/@xlink:href"/>
-					</xsl:variable>
+					</xsl:variable	-->
 									
 			<xsl:choose>
 				<xsl:when test="$numeronota=1">
@@ -1216,9 +1219,15 @@
 
 						<xsl:text> - </xsl:text>
 						<xsl:choose>
-							<xsl:when test="$novellando">
+						
+							<!--	xsl:when test="$novellando">
 							<xsl:choose>
-								<xsl:when test="$novella">
+								<xsl:when test="$novella"	-->
+							
+							<xsl:when test="$novellando!=''">
+							<xsl:choose>
+								<xsl:when test="$novella!=''">
+								
 									<!--	sostituzione	-->
 									Sostituzione
 		   						</xsl:when>
@@ -1230,7 +1239,10 @@
    						</xsl:when>
 						<xsl:otherwise>
 							<xsl:choose>
-								<xsl:when test="$novella">
+							
+								<!--	xsl:when test="$novella"	-->
+								<xsl:when test="$novella!=''">
+								
 									<!--	integrazione	-->
 									Integrazione
    								</xsl:when>
@@ -1241,8 +1253,12 @@
 						<xsl:text> implicita</xsl:text>
 					</xsl:if>
 					
-					<xsl:if test="$novellando">
-						<xsl:if test="$novella">
+					<!--	xsl:if test="$novellando">
+						<xsl:if test="$novella"	-->
+					<xsl:if test="$novellando!=''">
+						<xsl:if test="$novella!=''">						
+						
+											
 							<!--	sostituzione	-->
 							<xsl:if test="$novella=$id"> (testo inserito)</xsl:if>
 		   					<xsl:if test="$novellando=$id"> (testo eliminato)</xsl:if>
@@ -1254,7 +1270,14 @@
 			      </xsl:for-each>
 				</xsl:when>
 				<xsl:otherwise>
-					<!--	NON ho le informazione nei metadati -->			
+					<!--	NON ho le informazione nei metadati -->	
+										
+					<!--	qui lo aggiungo -->	
+					<xsl:variable name="urn">
+						<xsl:value-of select="//*[name()='evento'][@fonte=$fonte]/@xlink:href"/>
+					</xsl:variable>					
+					
+			
 					<a name="n{$id}" href="#t{$id}">[<xsl:value-of select="$numeronota"/>]</a>
 					<xsl:text> - Modificato da: </xsl:text>
 					<a href="http://www.nir.it/cgi-bin/N2Ln?{$urn}" title=" Dest. = http://www.nir.it/cgi-bin/N2Ln?{$urn}"> <xsl:value-of select="$urn" /> </a>
