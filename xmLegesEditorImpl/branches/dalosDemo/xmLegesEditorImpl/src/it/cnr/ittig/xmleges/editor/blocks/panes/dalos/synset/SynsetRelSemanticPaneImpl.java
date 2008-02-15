@@ -32,6 +32,10 @@ Initializable, Startable, SynsetRelSemanticPane {
 
 	void focusGainedEvent(Synset syn) {
 
+		if(syn == null) {
+			return;
+		}
+		
 		kbManager.addSemanticProperties(syn);
 		showSemanticRelations(syn);
 	}

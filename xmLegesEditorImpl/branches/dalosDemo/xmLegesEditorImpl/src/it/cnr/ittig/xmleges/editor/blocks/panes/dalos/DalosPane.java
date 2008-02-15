@@ -44,9 +44,7 @@ public abstract class DalosPane implements Pane, Observer {
 	protected I18n i18n;
 	
 	protected ActionManager actionManager;
-	
-	//protected Synset selectedSynset = null;
-	
+
 	protected UtilDalos utilDalos;
 	
 	protected UtilUI utilUI;
@@ -104,7 +102,7 @@ public abstract class DalosPane implements Pane, Observer {
 			return;
 		}
 		
-		if( !(obj instanceof Synset)) {
+		if( obj != null && !(obj instanceof Synset)) {
 			logger.error("obj is not a synset instance!");
 			return;			
 		}

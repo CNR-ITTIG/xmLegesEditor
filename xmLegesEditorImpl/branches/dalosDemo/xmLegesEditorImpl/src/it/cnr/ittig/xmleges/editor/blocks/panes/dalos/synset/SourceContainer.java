@@ -17,7 +17,6 @@ import javax.swing.text.html.HTMLDocument;
 
 public class SourceContainer extends JEditorPane {
 	
-	Synset synset = null;
 	I18n i18n;
 	
 	public SourceContainer() {
@@ -45,14 +44,10 @@ public class SourceContainer extends JEditorPane {
 		this.i18n = i18n;
 	}
 	
-	public void setSynset(Synset synset){
-		this.synset = synset;
-	}
-	
-	public void draw() {
+	public void draw(Synset synset) {
 
 		if(synset == null) {
-			setText("<html></html>");
+			setText("<html>No match!</html>");
 			return;
 		}
 		

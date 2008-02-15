@@ -1,6 +1,7 @@
 package it.cnr.ittig.xmleges.editor.blocks.panes.dalos.synset;
 
 import it.cnr.ittig.xmleges.editor.blocks.panes.dalos.DalosPane;
+import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.dalos.util.LangChangedEvent;
 
 import java.awt.BorderLayout;
@@ -18,11 +19,9 @@ public abstract class SynsetPane extends DalosPane {
 		panel.add(langPanel.getPanel(), BorderLayout.SOUTH);
 		super.initialize();
 	}
-	
-	/**
-	 * 
-	 */
+
 	public void manageEvent(EventObject event) {
+		
 		super.manageEvent(event);
 		
 		// gestione eventi LangChanged
@@ -51,8 +50,7 @@ public abstract class SynsetPane extends DalosPane {
 				langCombo.setSelectedIndex(index);
 			}
 		}
-	}
-	
+	}	
 	
 	/*
 	 * Set selected flag in the JLabel.
@@ -69,9 +67,11 @@ public abstract class SynsetPane extends DalosPane {
 			setLocalFlag(lang);			
 		}
 	}
-	
-	
-	
-	
-	
+
+	protected void updateObserver(Synset syn) {
+		
+		if(syn != null) {
+			setLocalFlag(syn.getLanguage());
+		}
+	}
 }

@@ -141,6 +141,9 @@ public class KbModelFactory {
 		if(type.equalsIgnoreCase("concepts")) {
 			readLocalDocument(om, lang, KbConf.CONCEPTS);
 		}
+		if(type.equalsIgnoreCase("types")) {
+			readLocalDocument(om, lang, KbConf.TYPES);
+		}
 		if(type.equalsIgnoreCase("concept.mapping")) {
 			readLocalDocument(om, lang, KbConf.CONCEPTS);
 			readLocalDocument(om, lang, KbConf.TYPES);
@@ -153,7 +156,7 @@ public class KbModelFactory {
 			readLocalDocument(om, lang, KbConf.TYPES);
 		}
 		if(type.equalsIgnoreCase("source")) {
-			readSchema(om, KbConf.SOURCE_SCHEMA); //Ci vuole questo metalivello??
+			readSchema(om, KbConf.SOURCE_SCHEMA);
 			readLocalDocument(om, lang, KbConf.IND);
 			readLocalDocument(om, lang, KbConf.SOURCES);			
 		}
@@ -161,27 +164,40 @@ public class KbModelFactory {
 			readSchema(om, KbConf.METALEVEL_ONTO);
 			readSchema(om, KbConf.METALEVEL_PROP);
 			
-			if(uriToLexSeg != null) {
-				Object segObj = uriToLexSeg.get(URI);
-				if(segObj == null) {
-					System.err.println(
-							"Segmentation is active, but cannot resolve "
-							+ URI);
-					return null;
-				}
-				String segFileName = segObj.toString();
-				//System.out.println("Segmentation: retrieving data from " + segFileName);
-				readSegment(om, segFileName);
-			} else {						
-				readLocalDocument(om, lang, KbConf.IND);
-				readLocalDocument(om, lang, KbConf.TYPES);
-			}
+			readSegment(om, uriToLexSeg, URI);
+		}			
+		if(type.equalsIgnoreCase("seg.source")) {
+			readSchema(om, KbConf.SOURCE_SCHEMA);
+			
+			readSegment(om, uriToSourceSeg, URI);
 		}			
 		
 		odm.setProcessImports(true);
 		odm.loadImports(om);
 		
 		return om;
+	}
+	
+	private static boolean readSegment(OntModel om, Map segMap, String URI) {
+		
+		if(segMap != null) {
+			Object segObj = segMap.get(URI);
+			if(segObj == null) {
+				System.err.println(
+						"Segmentation is active, but cannot resolve "
+						+ URI);
+				return false;
+			}
+			String segFileName = segObj.toString();
+			//System.out.println("Segmentation: retrieving data from " + segFileName);
+			readSegment(om, segFileName);
+
+		} else {						
+			System.err.println("Source segmentation is not active.");
+			return false;
+		}
+
+		return true;
 	}
 	
 	private static void readSchema(OntModel om, String url) {

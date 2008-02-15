@@ -120,9 +120,10 @@ implements EventManagerListener, Loggable, Serviceable,
 				synsets = kbManager.getSynsetsList(lang);
 				list.setListData(synsets.toArray());
 			}else{
-				Synset selSyn = (Synset)list.getSelectedValue();
+				//Synset selSyn = (Synset)list.getSelectedValue();
+				Synset selSyn = observableSynset.getSynset();
 				if(selSyn != null){		
-					selectSynset(kbManager.getSynset(selSyn.getURI(),lang));
+					selectSynset(kbManager.getSynset(selSyn,lang));
 				}
 			}
 		}
@@ -132,7 +133,7 @@ implements EventManagerListener, Loggable, Serviceable,
 		if (event instanceof SelectionChangedEvent){
 			Node activeNode = ((SelectionChangedEvent)event).getActiveNode();
 			if(isDalosSpan(activeNode)){
-				Synset syn = kbManager.getSynset(getSynsetURI(activeNode), utilDalos.getGlobalLang());
+				Synset syn = kbManager.getSynset(getSynsetURI(activeNode));
 				selectSynset(syn);
 			}	
 		}

@@ -55,6 +55,8 @@ implements KbManager, Loggable, Serviceable, Initializable {
 	private Map uriToPivotClass;
 	private Map uriToTreeClass;
 	
+	private KbTree kbt;
+	
 	I18n i18n;
 	
 	// //////////////////////////////////////////////////// LogEnabled Interface
@@ -75,6 +77,8 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		langToContainer = new HashMap();
 		uriToPivotClass = new HashMap(256, 0.70f);
 		uriToTreeClass = new HashMap(128, 0.70f);
+		
+		kbt = null;
 		
 		if(KbConf.MERGE_DOMAIN) {
 			KbConf.DOMAIN_ONTO = 
@@ -142,14 +146,15 @@ implements KbManager, Loggable, Serviceable, Initializable {
 
 	public void addLexicalProperties(Synset syn) {
 		
-		if(syn!=null && syn.getLanguage()!=null){
-			KbContainer kbc = getContainer(syn.getLanguage());
-			kbc.addLexicalProperties(syn);
-		}else
-			logger.error("Synset not found in selected lang");
+		if(syn == null) { return; }
+
+		KbContainer kbc = getContainer(syn.getLanguage());
+		kbc.addLexicalProperties(syn);
 	}
 	
 	public void addSemanticProperties(Synset syn) {
+		
+		if(syn == null) { return; }
 		
 		//UNDER CONSTRUCTION, DON'T GO ON!
 		if(true) return;
@@ -161,9 +166,7 @@ implements KbManager, Loggable, Serviceable, Initializable {
 	
 	public void addSources(Synset syn) {
 		
-		//UNDER CONSTRUCTION, DON'T GO ON!
-		if(true) return;
-
+		if(syn == null) { return; }
 		String lang = syn.getLanguage();
 		KbContainer kbc = getContainer(lang);
 		kbc.addSources(syn);
@@ -186,25 +189,17 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		return null;
 	}
 	
-	/**
-	 * 
-	 * @param uri 
-	 * @param lang
-	 * @return l'oggetto synset relativo alla uri specificata
-	 */
-	public Synset getSynset(String uri, String lang) {
+	public Synset getSynset(String uri) {
 		
+		System.out.println("%%% getSynset() uri:" + uri);
+		String lang = extractLangFromUri(uri);
 		KbContainer kbc = getContainer(lang);
 		return kbc.getSynset(uri);
 	}
 	
-	/**
-	 * 
-	 * @param syn oggetto di partenza
-	 * @param lang lingua di destinazione
-	 * @return il relativo synset nella lingua specificata
-	 */
 	public Synset getSynset(Synset syn, String lang) {
+		
+		System.out.println("%%% getSynset() syn:" + syn + " - lang:" + lang);
 		
 		KbContainer kbc = getContainer(lang);
 
@@ -215,6 +210,8 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		}
 		
 		Synset fsyn = poc.getTerm(lang);
+		System.out.println("getSynset - poc: " + poc + " - fsyn: " + fsyn +
+				" fsUri: " + fsyn.getURI());
 		if(fsyn == null) {
 			//No aligment!
 			return null;
@@ -226,6 +223,11 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		}
 
 		return fsyn;		
+	}
+	
+	void setKbTree(KbTree kbt) {
+		
+		this.kbt = kbt;
 	}
 	
 	public SynsetTree getTree(String lang) {
@@ -246,10 +248,11 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		return kbc.search(search, type);
 	}
 	
-	public boolean setTreeSelection(Synset syn) {
+	public void setTreeSelection(Synset syn) {
 		
-		KbContainer kbc = getContainer(syn.getLanguage());
-		return kbc.setTreeSelection(syn);
+//		KbContainer kbc = getContainer(syn.getLanguage());
+//		return kbc.setTreeSelection(syn);
+		kbt.setSelection(syn);
 	}
 	
 	public PivotOntoClass getPivotClass(String uri) {
@@ -351,6 +354,19 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		}
 
 		return kbc;
+	}
+	
+	private String extractLangFromUri(String uri) {
+		//Esempio:
+		//http://localhost/dalos/IT/individuals.owl#synset-acqua-noun-1
+		
+		if(uri.indexOf(KbConf.DALOS_NS) != 0) {
+			System.err.println("extractLangFromUri() - invalid uri: " + uri);
+			return "";
+		}
+		
+		int start = KbConf.DALOS_NS.length();
+		return uri.substring(start, start + 2);		
 	}
 
 	private void copyDalosInTemp(){

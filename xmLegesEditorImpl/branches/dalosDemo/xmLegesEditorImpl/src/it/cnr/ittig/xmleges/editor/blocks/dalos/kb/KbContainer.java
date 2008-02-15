@@ -91,6 +91,20 @@ public class KbContainer {
 					localRepository);
 		} else {			
 			concreteContainer = true;
+			
+			//init segment map
+			try {
+				initMaps();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -112,7 +126,7 @@ public class KbContainer {
 			return null;
 		}
 		
-		initData();
+		init();
 		
 		if(sorted) {
 			return sortedSynsets;
@@ -123,7 +137,7 @@ public class KbContainer {
 	
 	//Using this method means that this container
 	//now holds the global language.
-	boolean initData() {		
+	boolean init() {		
 		
 		if(!concreteContainer) {
 			return false;
@@ -132,26 +146,13 @@ public class KbContainer {
 		System.out.println("KbContainer - Initializing data...");
 		
 		kbt = new KbTree(this, kbm, i18n);
+		kbm.setKbTree(kbt);
 
 		long t1 = System.currentTimeMillis();		
 		initSynsets();
 		long t2 = System.currentTimeMillis();
 		System.out.println("...synsets loaded! (" +
 				Long.toString(t2 - t1) + " ms)\n");
-
-		//init segment map
-		try {
-			initMaps();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 		return true;
 	}
@@ -169,23 +170,24 @@ public class KbContainer {
 
 		File mapFile = UtilFile.getFileFromTemp(mapFileName);
 		if(mapFile != null && mapFile.exists()) {
-		FileInputStream fis = new FileInputStream(mapFile);
-		ObjectInputStream ois = new ObjectInputStream(fis);
-		Map segMap = new HashMap();
-		segMap = (Map) ois.readObject();
-		ois.close();
-		fis.close();
-		
-		Collection keys = segMap.keySet();
-		for(Iterator k = keys.iterator(); k.hasNext();) {
-			String key = (String) k.next();
-			String value = (String) segMap.get(key);
-			String segFileName = segRepository + segmentName 
-					+ File.separatorChar + value;
-			//System.out.println("::: addSegment ::: " + key + " -> " + segFileName);
-			KbModelFactory.addSegment(key, segFileName, segmentName);
+			FileInputStream fis = new FileInputStream(mapFile);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			Map segMap = new HashMap();
+			segMap = (Map) ois.readObject();
+			ois.close();
+			fis.close();
+			
+			Collection keys = segMap.keySet();
+			for(Iterator k = keys.iterator(); k.hasNext();) {
+				String key = (String) k.next();
+				String value = (String) segMap.get(key);
+				String segFileName = segRepository + segmentName 
+						+ File.separatorChar + value;
+				KbModelFactory.addSegment(key, segFileName, segmentName);
 			}
-		}		
+		} else {
+			//System.err.println("SEGMAP not found: " + mapFileName);
+		}
 	}
 	
 	private void initMaps() 
@@ -286,11 +288,12 @@ public class KbContainer {
 		System.out.println(">> Adding language alignments for: "
 				+ LANGUAGE + "...");
 		OntModel mod = KbModelFactory.getModel("types", "", LANGUAGE);
+		System.out.println("mod size: " + mod.size());
 		
 		for(StmtIterator i = mod.listStatements(
 				null, RDF.type, (RDFNode) null); i.hasNext(); ) {
 			Statement stm = i.nextStatement();
-			Resource subj = stm.getResource();
+			Resource subj = stm.getSubject();
 			Resource obj = (Resource) stm.getObject();
 			String subjNs = subj.getNameSpace();			
 			String subjName = subj.getLocalName();
@@ -305,7 +308,8 @@ public class KbContainer {
 			//Retrieve matching concept
 			PivotOntoClass poc = kbm.getPivotClass(objNs + objName);
 			poc.addTerm(syn);
-			syn.setPivotClass(poc);			
+			syn.setPivotClass(poc);
+			//System.out.println("_-^-_ addAlignment() poc:" + poc + " sUri:" + syn.getURI());
 		}		
 	}
 
@@ -314,10 +318,10 @@ public class KbContainer {
 		return kbt.getTree();
 	}
 	
-	boolean setTreeSelection(Synset syn) {
-		
-		return kbt.setSelection(syn);
-	}
+//	boolean setTreeSelection(Synset syn) {
+//		
+//		return kbt.setSelection(syn);
+//	}
 
 	private void initOntResources(OntModel om) {
 		
@@ -373,7 +377,7 @@ public class KbContainer {
 				"seg.lex", "micro", LANGUAGE, syn.getURI());
 		
 		initOntResources(om);
-		OntResource ores = (OntResource) om.getResource(syn.getURI());
+		OntResource ores = (OntResource) om.getOntResource(syn.getURI());
 		analyzeSynsetResource(ores, syn);
 	}
 	
@@ -387,7 +391,7 @@ public class KbContainer {
 		if(res == null) {
 			return;
 		}
-		OntResource ores = (OntResource) res; 
+		OntResource ores = (OntResource) res;
 		analyzeSynsetResource(ores);
 	}
 	
@@ -465,7 +469,8 @@ public class KbContainer {
 		
 		System.out.println(">> adding sources to " + syn + "...");
 		
-		OntModel om = KbModelFactory.getModel("source", "micro", LANGUAGE);
+		//OntModel om = KbModelFactory.getModel("source", "micro", LANGUAGE);
+		OntModel om = KbModelFactory.getModel("seg.source", "micro", LANGUAGE, syn.getURI());
 		
 		Individual ind = om.getIndividual(syn.getURI());
 

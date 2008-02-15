@@ -45,13 +45,13 @@ Initializable, Startable, SynsetSourcePane {
 			Synset selectedSynset = observableSynset.getSynset();
 			synsetPane.clearContent();
 			kbManager.addSources(selectedSynset);
-			synsetPane.setSynset(selectedSynset);
-			synsetPane.draw();		
+			synsetPane.draw(selectedSynset);
 		}
 	}
 	
 	protected void updateObserver(Synset syn) {
 
+		super.updateObserver(syn);
 		
 		//clear now and update panel on focus gained
 		synsetPane.clearContent();

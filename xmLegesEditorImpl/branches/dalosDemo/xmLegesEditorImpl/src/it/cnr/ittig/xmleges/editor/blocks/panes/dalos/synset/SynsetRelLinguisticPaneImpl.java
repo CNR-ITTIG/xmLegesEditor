@@ -32,6 +32,10 @@ Initializable, Startable, SynsetRelLinguisticPane {
 
 	void focusGainedEvent(Synset syn) {
 
+		if(syn == null) {
+			return;
+		}
+		
 		kbManager.addLexicalProperties(syn);
 		showLinguisticRelations(syn);					
 	}

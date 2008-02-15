@@ -102,12 +102,16 @@ public class KbTree {
 		return tree;
 	}
 	
-	boolean setSelection(Synset syn) {
+	void setSelection(Synset syn) {
 		
 		treeModel = tree.getModel();
 		Object root = treeModel.getRoot();
-		
+				
 		collapseTree();
+		
+		if(syn == null) {
+			return;
+		}
 		
 		//Non va bene questo: cerca solo nei nodi e foglie gi� espansi e cerca
 		//con un prefisso non con l'exact matching.
@@ -118,7 +122,7 @@ public class KbTree {
 		
 		if(paths.size() == 0) {
 			//System.out.println(">> ...not found!");
-			return false;
+			return;
 		}
 		
 		//System.out.println(">> founded! Selecting paths " + paths);
@@ -126,8 +130,6 @@ public class KbTree {
 		//tree.setSelectionPaths((TreePath[]) paths.toArray(new TreePath[0]));
         //tree.setSelectionPath((TreePath) ((Vector) paths).get(0));
 		tree.addSelectionPaths((TreePath[]) paths.toArray(new TreePath[0]));
-		
-		return true;
 	}
 	
 	private void collapseTree() {

@@ -47,8 +47,9 @@ implements EventManagerListener, Loggable, Serviceable,
 
 	protected void updateObserver(Synset syn) {
 		
-		synsetPane.setSynset(syn);
-		synsetPane.draw();
+		super.updateObserver(syn);
+		
+		synsetPane.draw(syn);
 		//frame.setShowingPane(this, true);
 	}
 }
