@@ -25,11 +25,6 @@ public class PivotOntoClass extends DalosOntoClass {
 		terms = new HashSet();
 	}
 
-	public Collection getTerms() {
-		
-		return terms;
-	}
-	
 	public Collection getLinks() {
 				
 		return links;
@@ -60,12 +55,7 @@ public class PivotOntoClass extends DalosOntoClass {
 		for(Iterator i = terms.iterator(); i.hasNext(); ) {
 			Synset item = (Synset) i.next();
 			if(item.getLanguage().equalsIgnoreCase(lang)) {
-				if(item.isConcreteSynset()) {
-					return item;					
-				} else {
-					System.err.println(
-							"Not concrete synset, it must be loaded now...");
-				}
+				return item;
 			}
 		}
 		

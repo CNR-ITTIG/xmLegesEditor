@@ -68,14 +68,16 @@ public interface KbManager extends Service {
 	public Collection getSynset(TreeOntoClass toc);
 	
 	/**
+	 * Utile per ottenere l'oggetto synset a partire dalla URI 
+	 * presente in un testo marcato.
 	 * 
 	 * @param uri 
-	 * @param lang
 	 * @return l'oggetto synset relativo alla uri specificata
 	 */
-	public Synset getSynset(String uri, String lang);
+	public Synset getSynset(String uri);
 	
 	/**
+	 * Utile per traduzione del termine.
 	 * 
 	 * @param syn oggetto di partenza
 	 * @param lang lingua di destinazione
@@ -98,7 +100,7 @@ public interface KbManager extends Service {
 	 * @param lang
 	 * @return
 	 */
-	public boolean setTreeSelection(Synset syn);
+	public void setTreeSelection(Synset syn);
 	
 	
 	public boolean isLangSupported(String lang);
