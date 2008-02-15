@@ -40,6 +40,8 @@ public abstract class SynsetRelPane extends SynsetPane {
 	}
 
 	protected void updateObserver(Synset syn) {
+		
+		super.updateObserver(syn);
 
 		//clear now and update tree on focus gained or isShowing
 	    if(this.getPaneAsComponent().isShowing()){
