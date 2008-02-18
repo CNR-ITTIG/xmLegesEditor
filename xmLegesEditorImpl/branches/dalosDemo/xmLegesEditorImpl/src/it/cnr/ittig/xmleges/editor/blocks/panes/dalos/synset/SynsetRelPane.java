@@ -33,9 +33,12 @@ public abstract class SynsetRelPane extends SynsetPane {
 		
 		if (event instanceof PaneFocusGainedEvent && 
 				((PaneFocusGainedEvent)event).getPane().equals(this)){
-			Synset syn = observableSynset.getSynset();
+			Object syn = observableSynset.getSynset();
+			if( !(syn instanceof Synset) ) {
+				return;
+			}
 			clearTree();
-			focusGainedEvent(syn);			
+			focusGainedEvent((Synset) syn);			
 		}		
 	}
 

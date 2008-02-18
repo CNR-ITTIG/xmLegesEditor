@@ -16,6 +16,7 @@ import it.cnr.ittig.xmleges.editor.blocks.panes.dalos.synset.SynsetDetailsPaneIm
 import it.cnr.ittig.xmleges.editor.services.dalos.SynsetHolder;
 import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
+import it.cnr.ittig.xmleges.editor.services.dalos.objects.TreeOntoClass;
 import it.cnr.ittig.xmleges.editor.services.dalos.util.LangPanel;
 import it.cnr.ittig.xmleges.editor.services.dalos.util.UtilDalos;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.synset.SynsetDetailsPane;
@@ -102,16 +103,25 @@ public abstract class DalosPane implements Pane, Observer {
 			return;
 		}
 		
-		if( obj != null && !(obj instanceof Synset)) {
-			logger.error("obj is not a synset instance!");
+		if( obj != null && obj instanceof Synset) {
+			//go on with specific implementations...
+			updateObserver((Synset) obj);
 			return;			
 		}
 		
-		//go on with specific implementations...
-		updateObserver((Synset) obj);
+		if( obj != null && obj instanceof TreeOntoClass) {
+			//go on with specific implementations...
+			updateObserver((TreeOntoClass) obj);
+			return;			
+		}
+		
+		logger.error("obj is not a known instance!");
 	}
 
 	protected abstract void updateObserver(Synset syn);
+	
+	protected void updateObserver(TreeOntoClass toc){		
+	}
 	
 	// ///////////////////////////////////////////////////// Startable Interface
 	public void start() throws Exception {

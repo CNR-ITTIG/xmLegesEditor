@@ -42,10 +42,13 @@ Initializable, Startable, SynsetSourcePane {
 		if (event instanceof PaneFocusGainedEvent && 
 				((PaneFocusGainedEvent)event).getPane().equals(this)) {
 			
-			Synset selectedSynset = observableSynset.getSynset();
+			Object selectedSynset = observableSynset.getSynset();
+			if( !(selectedSynset instanceof Synset) ) {
+				return;
+			}
 			synsetPane.clearContent();
-			kbManager.addSources(selectedSynset);
-			synsetPane.draw(selectedSynset);
+			kbManager.addSources((Synset) selectedSynset);
+			synsetPane.draw((Synset) selectedSynset);
 		}
 	}
 	

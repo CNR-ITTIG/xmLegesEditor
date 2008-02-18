@@ -8,16 +8,17 @@ import java.util.Observable;
 public class SynsetHolderImpl extends Observable
 implements SynsetHolder {
 
-	private Synset selectedSynset = null;
+	//This object can be a Synset or a TreeOntoClass
+	private Object selectedSynset = null;
 	
-	public void setSynset(Synset syn) {
+	public void setSynset(Object synObject) {
 		
-		selectedSynset = syn;
+		selectedSynset = synObject;
 		setChanged();
 		notifyObservers(selectedSynset);
 	}
 	
-	public Synset getSynset() {
+	public Object getSynset() {
 		
 		return selectedSynset;
 	}

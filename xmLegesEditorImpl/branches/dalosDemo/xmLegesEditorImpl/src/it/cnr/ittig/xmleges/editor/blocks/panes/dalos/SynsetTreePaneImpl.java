@@ -6,6 +6,7 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.services.manager.Startable;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
+import it.cnr.ittig.xmleges.editor.services.dalos.objects.TreeOntoClass;
 import it.cnr.ittig.xmleges.editor.services.dalos.util.LangChangedEvent;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetTreePane;
 
@@ -88,7 +89,7 @@ implements EventManagerListener, Loggable, Serviceable,
 		hbar.setValue(hbar.getMinimum());
 	}
 
-	private void selectSynset(Synset activeSynset) {
+	private void selectSynset(Object activeSynset) {
 
 		observableSynset.setSynset(activeSynset);
 	}
@@ -100,11 +101,15 @@ implements EventManagerListener, Loggable, Serviceable,
 			if (path != null) {
 				DefaultMutableTreeNode n = (DefaultMutableTreeNode) path.getLastPathComponent();
 				try {
-					if(n.getUserObject() instanceof Synset){
-						selectSynset((Synset)n.getUserObject());
-					}
-					else
+					Object selObj = n.getUserObject();
+					if( selObj instanceof Synset){
+						selectSynset(n.getUserObject());
+					} else if( selObj instanceof TreeOntoClass){
+						//TODO Show classified term in the list panel ?
+						selectSynset(n.getUserObject());
+					} else {
 						System.err.println("NOT Synset selected on tree");
+					}
 				} catch (ClassCastException exc) {
 				}
 				if (e.getButton() == MouseEvent.BUTTON3) {

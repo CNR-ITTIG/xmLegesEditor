@@ -11,6 +11,7 @@ import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dalos.action.SynsetMarkupAction;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
+import it.cnr.ittig.xmleges.editor.services.dalos.objects.TreeOntoClass;
 import it.cnr.ittig.xmleges.editor.services.dalos.util.LangChangedEvent;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetListPane;
 
@@ -121,9 +122,9 @@ implements EventManagerListener, Loggable, Serviceable,
 				list.setListData(synsets.toArray());
 			}else{
 				//Synset selSyn = (Synset)list.getSelectedValue();
-				Synset selSyn = observableSynset.getSynset();
-				if(selSyn != null){		
-					selectSynset(kbManager.getSynset(selSyn,lang));
+				Object selSyn = observableSynset.getSynset();
+				if(selSyn != null && selSyn instanceof Synset){
+					selectSynset(kbManager.getSynset((Synset) selSyn,lang));
 				}
 			}
 		}
@@ -141,6 +142,14 @@ implements EventManagerListener, Loggable, Serviceable,
 	
 	protected void updateObserver(Synset syn) {	
 		list.setSelectedValue(syn, true);
+	}
+	
+	protected void updateObserver(TreeOntoClass toc) {
+		
+		Collection tocSynsets = kbManager.getSynset(toc);
+		if(tocSynsets.size() > 0)
+		list.setListData(synsets.toArray());
+		//list.setSelectedValue(syn, true);
 	}
 	
 	// ///////////////////////////////////////////////////////// Toolbar Actions

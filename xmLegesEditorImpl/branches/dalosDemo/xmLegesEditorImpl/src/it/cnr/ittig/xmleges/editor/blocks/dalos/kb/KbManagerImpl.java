@@ -186,7 +186,7 @@ implements KbManager, Loggable, Serviceable, Initializable {
 
 	public Collection getSynset(TreeOntoClass toc) {
 		
-		return null;
+		return toc.getResources();
 	}
 	
 	public Synset getSynset(String uri) {
