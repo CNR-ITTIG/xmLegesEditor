@@ -371,44 +371,17 @@ implements KbManager, Loggable, Serviceable, Initializable {
 
 	private void copyDalosInTemp(){
 		
-		//   COMMON FILES  //////////////////////
-		String[] commonFiles = new String[] { 		
-				"common/concepts.owl", "common/consumer-law.owl","common/consumer-law-merge.owl","common/language-properties-full.owl","common/metasources.owl", 
-				"common/owns.owl", "common/owns-full.owl"
-	    };
+		// common
+		UtilFile.copyDirectoryInTemp(getClass().getResource("common").getFile(),"dalos");
 		
-		for (int i = 0; i < commonFiles.length; i++) {
-			UtilFile.copyFileInTempDir(getClass().getResourceAsStream(commonFiles[i]),"dalos", commonFiles[i]);
-		}	
-		/////////////////////////////////////////
+		// IT
+		if(!UtilFile.copyDirectoryInTemp(getClass().getResource("IT").getFile(),"dalos/IT"))
+			logger.error("FAILED TO COPY IT");
 		
+		// EN
+		if(!UtilFile.copyDirectoryInTemp(getClass().getResource("EN").getFile(),"dalos/EN"))
+			logger.error("FAILED TO COPY EN");
 		
-		
-		//   IT   ///////////////////////////////
-		String[] it = new String[]{"IT/individuals.owl", "IT/individuals-word.owl", "IT/ind-to-consumer.owl", "IT/sources.owl",
-				"IT/types.owl"};
-		
-		for (int i = 0; i < it.length; i++) {
-			UtilFile.copyFileInTempDir(getClass().getResourceAsStream(it[i]), "dalos/IT", it[i]);
-		}
-				
-		UtilFile.copyDirectoryInTemp(getClass().getResource("IT/segment/lexical").getFile(),"dalos/IT/segment/lexical");
-		
-		/////////////////////////////////////////
-		
-				
-		
-		//	  EN   ///////////////////////////////
-		String[] en = new String[]{"EN/individuals.owl", "EN/individuals-word.owl", "EN/ind-to-consumer.owl", "EN/sources.owl",
-				"EN/types.owl"};
-		
-		for (int i = 0; i < en.length; i++) {
-			UtilFile.copyFileInTempDir(getClass().getResourceAsStream(en[i]), "dalos/EN", en[i]);
-		}	
-		
-		UtilFile.copyDirectoryInTemp(getClass().getResource("EN/segment/lexical").getFile(),"dalos/EN/segment/lexical");
-		
-		/////////////////////////////////////////		
 	}	
 
 }
