@@ -27,7 +27,10 @@ import java.util.Collection;
 public interface KbManager extends Service {
 	
 	
-
+	public final String CONTAINS="Contains";
+	public final String STARTSWITH = "Starts with";
+	public final String ENDSWITH = "Ends with";
+	public final String MATCHES = "Matches";
 
 	/**
 	 * 
