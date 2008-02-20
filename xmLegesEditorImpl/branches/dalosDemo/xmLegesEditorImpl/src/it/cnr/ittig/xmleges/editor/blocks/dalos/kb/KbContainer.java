@@ -241,8 +241,6 @@ public class KbContainer {
 	private boolean checkFiles() {
 		
 		localRepository = KbConf.dalosRepository + LANGUAGE + File.separatorChar;
-		infRepository = KbConf.dalosRepository + LANGUAGE + File.separatorChar +
-							KbConf.inferenceDir + File.separatorChar;
 		segRepository = KbConf.dalosRepository + LANGUAGE + File.separatorChar +
 			KbConf.segmentDirName + File.separatorChar;
 		

@@ -36,7 +36,6 @@ public class KbConf {
 
 	public static String IND = "individuals.owl";
 	public static String INDW = "individuals-word.owl";
-	//public static String INDCLAW = "ind-to-consumer.owl";
 	public static String TYPES = "types.owl";
 	public static String SOURCES = "sources.owl";
 	
@@ -47,15 +46,7 @@ public class KbConf {
 	public static String LOCAL_SOURCE_SCHEMA = "metasources.owl";
 	public static String LOCAL_METALEVEL_FULL = "language-properties-full.owl";
 	
-	//Inferred Data	
-	public static String inferenceDir = "inf" + File.separatorChar;
-	public static String DP_INF = "dpInf.owl";
-	public static String DPEXT_INF = "dpExtInf.owl";
-	public static String RES_INF = "resInf.owl";
-	public static String RESEXT_INF = "resExtInf.owl";
-	
 	public static String DALOS_NS = "http://localhost/dalos/";
-	//public static String DALOS_lang_ns =  dalos_ns + LANGUAGE + "/";
 
 	public static String DALOS_CONCEPTS_NS = DALOS_NS + CONCEPTS + "#";
 

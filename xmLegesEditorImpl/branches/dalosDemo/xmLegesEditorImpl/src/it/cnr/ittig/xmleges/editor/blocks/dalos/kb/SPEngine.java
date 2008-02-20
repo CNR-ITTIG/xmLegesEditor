@@ -44,8 +44,6 @@ public class SPEngine {
 	
 	private Set allowedNS;
 	
-	private String infRepo;
-	
 //	private Map directTypes;
 //	private Map indirectTypes;
 	private Map directResources;
@@ -62,9 +60,6 @@ public class SPEngine {
 		this.lang = lang;
 		allowedNS = new HashSet();
 		allowedNS.add(KbConf.DOMAIN_ONTO_NS);
-		
-		infRepo = KbConf.dalosRepository + lang + 
-				File.separatorChar + KbConf.inferenceDir;
 		
 		initModels();
 
@@ -99,7 +94,7 @@ public class SPEngine {
 			return;
 		}
 		
-		save(type);
+		//save(type);
 	}
 	
 	private void initData() {
@@ -364,7 +359,7 @@ public class SPEngine {
 				System.out.println(">>>>>>>>>> Actual size: " + dpExtInf.size());
 				System.out.println(">>>>>>>>>> Processed resources: " + resources_counter);
 				System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-				save("dp");
+				//save("dp");
 			}
 		}
 		
@@ -442,64 +437,64 @@ public class SPEngine {
 		}
 	}
 	
-	private void save(String type) {
-		
-		if(type.equalsIgnoreCase("dp")) {
-			
-			for(Iterator i = dpInf.iterator(); i.hasNext();) {
-				Vector item = (Vector) i.next();
-				OntResource source = (OntResource) item.get(0);
-				OntProperty prop = (OntProperty) item.get(1);
-				OntResource dest = (OntResource) item.get(2);
-				dpModel.add(source, prop, dest);
-			}						
-						
-			checkAndWrite(dpModel, KbConf.DP_INF);
-
-			for(Iterator i = dpExtInf.iterator(); i.hasNext();) {
-				Vector item = (Vector) i.next();
-				OntResource source = (OntResource) item.get(0);
-				OntProperty prop = (OntProperty) item.get(1);
-				OntResource dest = (OntResource) item.get(2);
-				dpExtModel.add(source, prop, dest);
-			}						
-						
-			checkAndWrite(dpExtModel, KbConf.DPEXT_INF);
-
-			flushCollections();
-			
-		} else {
-			return;
-		}
-		
-	}
-	
-	private void flushCollections() {
-		
-		dpInf.clear();
-		dpExtInf.clear();
-	}
-	
-	private void checkAndWrite(OntModel om, String outName) {
-		
-		String tempFileName = infRepo + File.separatorChar + outName;
-		
-		try {
-			
-			UtilFile.createDirInTemp(infRepo);
-			if(!UtilFile.fileExistInTemp(tempFileName)) {
-				UtilFile.createTemp(tempFileName);
-			}
-
-			File outFile = UtilFile.getFileFromTemp(tempFileName);
-			write(om, outFile.getAbsolutePath());
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
+//	private void save(String type) {
+//		
+//		if(type.equalsIgnoreCase("dp")) {
+//			
+//			for(Iterator i = dpInf.iterator(); i.hasNext();) {
+//				Vector item = (Vector) i.next();
+//				OntResource source = (OntResource) item.get(0);
+//				OntProperty prop = (OntProperty) item.get(1);
+//				OntResource dest = (OntResource) item.get(2);
+//				dpModel.add(source, prop, dest);
+//			}						
+//						
+//			checkAndWrite(dpModel, KbConf.DP_INF);
+//
+//			for(Iterator i = dpExtInf.iterator(); i.hasNext();) {
+//				Vector item = (Vector) i.next();
+//				OntResource source = (OntResource) item.get(0);
+//				OntProperty prop = (OntProperty) item.get(1);
+//				OntResource dest = (OntResource) item.get(2);
+//				dpExtModel.add(source, prop, dest);
+//			}						
+//						
+//			checkAndWrite(dpExtModel, KbConf.DPEXT_INF);
+//
+//			flushCollections();
+//			
+//		} else {
+//			return;
+//		}
+//		
+//	}
+//	
+//	private void flushCollections() {
+//		
+//		dpInf.clear();
+//		dpExtInf.clear();
+//	}
+//	
+//	private void checkAndWrite(OntModel om, String outName) {
+//		
+//		String tempFileName = infRepo + File.separatorChar + outName;
+//		
+//		try {
+//			
+//			UtilFile.createDirInTemp(infRepo);
+//			if(!UtilFile.fileExistInTemp(tempFileName)) {
+//				UtilFile.createTemp(tempFileName);
+//			}
+//
+//			File outFile = UtilFile.getFileFromTemp(tempFileName);
+//			write(om, outFile.getAbsolutePath());
+//			
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//
+//	}
 	
 	private void write(OntModel om, String outputFile) {
 		
