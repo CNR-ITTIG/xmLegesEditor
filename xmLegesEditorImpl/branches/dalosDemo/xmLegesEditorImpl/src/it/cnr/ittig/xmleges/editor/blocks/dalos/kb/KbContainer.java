@@ -2,6 +2,7 @@ package it.cnr.ittig.xmleges.editor.blocks.dalos.kb;
 
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
+import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.PivotOntoClass;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Source;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
@@ -678,22 +679,22 @@ public class KbContainer {
 	private boolean checkLemma(String lemma, String search, String type) {
 		//ricerca full-text con ranking...??
 		
-		if(type.equalsIgnoreCase("contains")) {
+		if(type.equalsIgnoreCase(KbManager.CONTAINS)) {
 			if(lemma.toLowerCase().indexOf(search) > -1) {
 				return true;
 			}
 		}
-		if(type.equalsIgnoreCase("startsWith")) {
+		if(type.equalsIgnoreCase(KbManager.STARTSWITH)) {
 			if(lemma.toLowerCase().startsWith(search)) {
 				return true;
 			}			
 		}
-		if(type.equalsIgnoreCase("endsWith")) {
+		if(type.equalsIgnoreCase(KbManager.ENDSWITH)) {
 			if(lemma.toLowerCase().endsWith(search)) {
 				return true;
 			}
 		}
-		if(type.equalsIgnoreCase("exact")) {
+		if(type.equalsIgnoreCase(KbManager.MATCHES)) {
 			if(lemma.equalsIgnoreCase(search)) {
 				return true;
 			}	

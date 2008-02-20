@@ -239,14 +239,15 @@ implements KbManager, Loggable, Serviceable, Initializable {
 	public Collection search(String search) {
 		//Dovrebbe prendere la lingua dalle Preference?	
 		//Dovrebbe prendere il tipo di ricerca dalle Preference? (ultima usata)		
-		return search(search, "contains", "IT");
+		return search(search, KbManager.CONTAINS, utilDalos.getGlobalLang());
 	}
 	
+	
 	public Collection search(String search, String type, String lang) {
-		
 		KbContainer kbc = getContainer(lang);
 		return kbc.search(search, type);
 	}
+	
 	
 	public void setTreeSelection(Synset syn) {
 		
@@ -374,14 +375,13 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		// common
 		UtilFile.copyDirectoryInTemp(getClass().getResource("common").getFile(),"dalos");
 		
-		// IT
-		if(!UtilFile.copyDirectoryInTemp(getClass().getResource("IT").getFile(),"dalos/IT"))
-			logger.error("FAILED TO COPY IT");
+		// lang
+		String[] dalosLang = utilDalos.getDalosLang();
 		
-		// EN
-		if(!UtilFile.copyDirectoryInTemp(getClass().getResource("EN").getFile(),"dalos/EN"))
-			logger.error("FAILED TO COPY EN");
-		
+		for(int i=0; i<dalosLang.length; i++){
+			if(!UtilFile.copyDirectoryInTemp(getClass().getResource(dalosLang[i]).getFile(),"dalos/"+dalosLang[i]))
+				logger.error("FAILED TO COPY "+dalosLang[i]);
+		}		
 	}	
 
 }

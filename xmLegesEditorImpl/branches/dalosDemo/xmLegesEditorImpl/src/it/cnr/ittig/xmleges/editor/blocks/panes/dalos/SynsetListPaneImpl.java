@@ -10,6 +10,7 @@ import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dalos.action.SynsetMarkupAction;
+import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.TreeOntoClass;
 import it.cnr.ittig.xmleges.editor.services.dalos.util.LangChangedEvent;
@@ -53,7 +54,7 @@ implements EventManagerListener, Loggable, Serviceable,
 	JComboBox searchType;
 	SynsetMarkupAction synsetMarkupAction;
 	FindAction findAction = new FindAction();
-	String[] searchTypes={"Contains", "Starts wh","Ends with","Matches"};
+	String[] searchTypes={KbManager.CONTAINS,KbManager.STARTSWITH, KbManager.ENDSWITH,KbManager.MATCHES};
 	
 	Collection synsets;
 			
@@ -203,7 +204,6 @@ implements EventManagerListener, Loggable, Serviceable,
 	protected class TextFieldActionListener implements ActionListener {
 		
 		public void actionPerformed(ActionEvent e) {
-			System.err.println("action performed on textfieldddd");
 			searchAndDisplaySynsets();
 		}
 	}
