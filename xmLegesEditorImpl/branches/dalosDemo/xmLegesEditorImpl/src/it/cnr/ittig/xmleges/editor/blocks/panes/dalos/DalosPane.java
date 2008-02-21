@@ -103,9 +103,10 @@ public abstract class DalosPane implements Pane, Observer {
 			return;
 		}
 		
-		if( obj != null && obj instanceof Synset) {
+		if( obj == null || obj instanceof Synset) {
 			//go on with specific implementations...
-			updateObserver((Synset) obj);
+			//manage 'null' value too...
+			updateObserver((Synset) obj);				
 			return;			
 		}
 		
@@ -115,7 +116,7 @@ public abstract class DalosPane implements Pane, Observer {
 			return;			
 		}
 		
-		logger.error("obj is not a known instance!");
+		logger.error("obj is not a known instance! " + obj.getClass());
 	}
 
 	protected abstract void updateObserver(Synset syn);
