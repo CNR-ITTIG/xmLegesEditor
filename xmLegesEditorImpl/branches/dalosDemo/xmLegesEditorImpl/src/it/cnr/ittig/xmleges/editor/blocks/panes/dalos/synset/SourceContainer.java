@@ -70,6 +70,8 @@ public class SourceContainer extends JEditorPane {
 		html += "</table></body></html>";
 
 		setText(html);
+		getCaret().setDot(0);
+		
 		
 		//System.out.println("DEBUG HTML: " + html + "\n");
 	}

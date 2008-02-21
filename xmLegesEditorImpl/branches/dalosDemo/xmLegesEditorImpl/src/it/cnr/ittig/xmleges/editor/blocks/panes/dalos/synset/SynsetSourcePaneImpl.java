@@ -46,9 +46,7 @@ Initializable, Startable, SynsetSourcePane {
 			if( !(selectedSynset instanceof Synset) ) {
 				return;
 			}
-			synsetPane.clearContent();
-			kbManager.addSources((Synset) selectedSynset);
-			synsetPane.draw((Synset) selectedSynset);
+			showSynsetSource((Synset)selectedSynset);
 		}
 	}
 	
@@ -56,7 +54,15 @@ Initializable, Startable, SynsetSourcePane {
 
 		super.updateObserver(syn);
 		
-		//clear now and update panel on focus gained
-		synsetPane.clearContent();
+		 if(this.getPaneAsComponent().isShowing())
+			 showSynsetSource(syn);
+			 
 	}
+	
+	void showSynsetSource(Synset syn) {
+		synsetPane.clearContent();
+		kbManager.addSources(syn);
+		synsetPane.draw(syn);
+	}
+	
 }
