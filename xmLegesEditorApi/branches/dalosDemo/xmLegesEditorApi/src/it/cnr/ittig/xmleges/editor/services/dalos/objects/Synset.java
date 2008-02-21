@@ -13,7 +13,7 @@ public class Synset implements Comparable {
 	
 	private String def;
 	
-	private String lexicalForm; //sostituire con un vettore di forme lessicali?
+	private String lexicalForm;
 	
 	//Is it a concrete synset or it just contains the URI reference?
 	private boolean concreteSynset = false;
@@ -26,9 +26,9 @@ public class Synset implements Comparable {
 	
 	private PivotOntoClass pivotClass = null;
 
-	private Collection sources; //rispettare l'ordine alfabetico
+	private Collection sources;
 
-	private Collection variants = null; //lemmi come normali stringhe..? ORDINE ALFABETICO !
+	private Collection variants = null;
 	
 	public Map lexicalToSynset = null;
 		
