@@ -213,7 +213,7 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		System.out.println("getSynset - poc: " + poc + " - fsyn: " + fsyn +
 				" fsUri: " + fsyn.getURI());
 		if(fsyn == null) {
-			//No aligment!
+			//No alignment!
 			return null;
 		}
 		
@@ -313,7 +313,7 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		OntClass conceptClass = mod.getOntClass(KbConf.conceptClassName);
 		if(conceptClass == null) {
 			System.err.println(
-				"ERRROR! initPivotMapping() - conceptClass is null");
+				"ERROR! initPivotMapping() - conceptClass is null");
 			return;
 		}
 
@@ -323,6 +323,9 @@ implements KbManager, Loggable, Serviceable, Initializable {
 			String puri = ores.getNameSpace() + ores.getLocalName();
 			poc.setURI(puri);
 			uriToPivotClass.put(puri, poc);
+//			if(puri.indexOf("price") > 0) {
+//				System.out.println("[][][] POC: " + puri + " poc:" + poc);
+//			}
 			for(StmtIterator k = mod.listStatements(
 					(Resource) ores, RDFS.subClassOf, (RDFNode) null);
 					k.hasNext();) {

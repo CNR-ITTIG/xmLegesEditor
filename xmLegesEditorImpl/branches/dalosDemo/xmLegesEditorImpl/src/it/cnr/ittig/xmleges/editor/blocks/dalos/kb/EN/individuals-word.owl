@@ -156,6 +156,11 @@
     <owns:sense rdf:resource="individuals.owl#wordsense-authority_with_competence-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#wordsense-direct_discrimination-noun-1">
+    <owns:inSynset rdf:resource="individuals.owl#synset-direct_discrimination-noun-1"/>
+    <owns:word rdf:resource="individuals.owl#word-direct_discrimination"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#wordsense-valvular-noun-1">
     <owns:inSynset rdf:resource="individuals.owl#synset-valvular-noun-1"/>
     <owns:word rdf:resource="individuals.owl#word-valvular"/>
@@ -4149,6 +4154,9 @@
   <rdf:Description rdf:about="individuals.owl#synset-technical_expertise-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-technical_expertise-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-professional_diligence-noun-1">
+    <owns:containsWordSense rdf:resource="individuals.owl#wordsense-professional_diligence-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-amount_at_stake-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-amount_at_stake-noun-1"/>
   </rdf:Description>
@@ -6543,6 +6551,11 @@
     <owns:word rdf:resource="individuals.owl#word-subparagraph_of_article"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#wordsense-harassment-noun-1">
+    <owns:inSynset rdf:resource="individuals.owl#synset-harassment-noun-1"/>
+    <owns:word rdf:resource="individuals.owl#word-harassment"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#wordsense-credit_card_account-noun-1">
     <owns:inSynset rdf:resource="individuals.owl#synset-credit_card_account-noun-1"/>
     <owns:word rdf:resource="individuals.owl#word-credit_card_account"/>
@@ -6571,6 +6584,12 @@
     <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dTsben</owns:lexicalForm>
     <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dTsben</owns:protoForm>
     <owns:sense rdf:resource="individuals.owl#wordsense-dtsben-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#word-recipient_of_the_service">
+    <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">recipient of the service</owns:lexicalForm>
+    <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">recipient of the service</owns:protoForm>
+    <owns:sense rdf:resource="individuals.owl#wordsense-recipient_of_the_service-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#word-transport_service">
@@ -6775,6 +6794,13 @@
     <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Groupe</owns:lexicalForm>
     <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">groupe</owns:protoForm>
     <owns:sense rdf:resource="individuals.owl#wordsense-groupe-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#word-information_soviety_service">
+    <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">information soviety service</owns:lexicalForm>
+    <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">information soviety services</owns:lexicalForm>
+    <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">information soviety service</owns:protoForm>
+    <owns:sense rdf:resource="individuals.owl#wordsense-information_soviety_service-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-coil-noun-1">
@@ -7094,6 +7120,11 @@
   <rdf:Description rdf:about="individuals.owl#wordsense-delivery-noun-1">
     <owns:inSynset rdf:resource="individuals.owl#synset-delivery-noun-1"/>
     <owns:word rdf:resource="individuals.owl#word-delivery"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#wordsense-professional_diligence-noun-1">
+    <owns:inSynset rdf:resource="individuals.owl#synset-professional_diligence-noun-1"/>
+    <owns:word rdf:resource="individuals.owl#word-professional_diligence"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-recht-noun-1">
@@ -8253,6 +8284,12 @@
   <rdf:Description rdf:about="individuals.owl#synset-transaction-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-transaction-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#word-professional_diligence">
+    <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">professional diligence</owns:lexicalForm>
+    <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">professional diligence</owns:protoForm>
+    <owns:sense rdf:resource="individuals.owl#wordsense-professional_diligence-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-implementing_order-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-implementing_order-noun-1"/>
   </rdf:Description>
@@ -8383,6 +8420,9 @@
     <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">reconsider</owns:protoForm>
     <owns:sense rdf:resource="individuals.owl#wordsense-reconsider-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-information_soviety_service-noun-1">
+    <owns:containsWordSense rdf:resource="individuals.owl#wordsense-information_soviety_service-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#wordsense-measurement-noun-1">
     <owns:inSynset rdf:resource="individuals.owl#synset-measurement-noun-1"/>
@@ -8519,14 +8559,14 @@
     <owns:sense rdf:resource="individuals.owl#wordsense-weight-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#wordsense-psychotherapy-noun-1">
-    <owns:inSynset rdf:resource="individuals.owl#synset-psychotherapy-noun-1"/>
-    <owns:word rdf:resource="individuals.owl#word-psychotherapy"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#wordsense-contrary-noun-1">
     <owns:inSynset rdf:resource="individuals.owl#synset-contrary-noun-1"/>
     <owns:word rdf:resource="individuals.owl#word-contrary"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#wordsense-psychotherapy-noun-1">
+    <owns:inSynset rdf:resource="individuals.owl#synset-psychotherapy-noun-1"/>
+    <owns:word rdf:resource="individuals.owl#word-psychotherapy"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#wordsense-deduction-noun-1">
@@ -10499,6 +10539,12 @@
   <rdf:Description rdf:about="individuals.owl#synset-establishment_without_prior_issue-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-establishment_without_prior_issue-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#word-liable">
+    <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">liable</owns:lexicalForm>
+    <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">liable</owns:protoForm>
+    <owns:sense rdf:resource="individuals.owl#wordsense-liable-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#word-functioning">
     <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">functioning</owns:lexicalForm>
     <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">functioning</owns:protoForm>
@@ -11182,14 +11228,14 @@
     <owns:sense rdf:resource="individuals.owl#wordsense-equivalent_transport-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#wordsense-portuguese_authority-noun-1">
-    <owns:inSynset rdf:resource="individuals.owl#synset-portuguese_authority-noun-1"/>
-    <owns:word rdf:resource="individuals.owl#word-portuguese_authority"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#wordsense-stress-noun-1">
     <owns:inSynset rdf:resource="individuals.owl#synset-stress-noun-1"/>
     <owns:word rdf:resource="individuals.owl#word-stress"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#wordsense-portuguese_authority-noun-1">
+    <owns:inSynset rdf:resource="individuals.owl#synset-portuguese_authority-noun-1"/>
+    <owns:word rdf:resource="individuals.owl#word-portuguese_authority"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-cooperate-noun-1">
@@ -12342,6 +12388,9 @@
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-establishment_of_mrls-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-establishment_of_mrls-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-direct_discrimination-noun-1">
+    <owns:containsWordSense rdf:resource="individuals.owl#wordsense-direct_discrimination-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#word-selfregulatory">
     <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">selfregulatory</owns:lexicalForm>
@@ -14699,6 +14748,12 @@
   <rdf:Description rdf:about="individuals.owl#synset-parra-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-parra-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#word-established_service_provider">
+    <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">established service provider</owns:lexicalForm>
+    <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">established service provider</owns:protoForm>
+    <owns:sense rdf:resource="individuals.owl#wordsense-established_service_provider-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#word-appartenanza">
     <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">appartenanza</owns:lexicalForm>
     <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">appartenanza</owns:protoForm>
@@ -15102,6 +15157,9 @@
     <owns:word rdf:resource="individuals.owl#word-ngiger_verwaltungssenat_wien"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-established_service_provider-noun-1">
+    <owns:containsWordSense rdf:resource="individuals.owl#wordsense-established_service_provider-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#wordsense-draft_measure-noun-1">
     <owns:inSynset rdf:resource="individuals.owl#synset-draft_measure-noun-1"/>
     <owns:word rdf:resource="individuals.owl#word-draft_measure"/>
@@ -15286,16 +15344,16 @@
     <owns:word rdf:resource="individuals.owl#word-regulationg"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#word-review">
-    <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">review</owns:lexicalForm>
-    <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">review</owns:protoForm>
-    <owns:sense rdf:resource="individuals.owl#wordsense-review-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#word-contrary">
     <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">contrary</owns:lexicalForm>
     <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">contrary</owns:protoForm>
     <owns:sense rdf:resource="individuals.owl#wordsense-contrary-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#word-review">
+    <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">review</owns:lexicalForm>
+    <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">review</owns:protoForm>
+    <owns:sense rdf:resource="individuals.owl#wordsense-review-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-acetate-noun-1">
@@ -15681,6 +15739,12 @@
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-precedence-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-precedence-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#word-service_provider">
+    <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">service provider</owns:lexicalForm>
+    <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">service provider</owns:protoForm>
+    <owns:sense rdf:resource="individuals.owl#wordsense-service_provider-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#wordsense-solicitation-noun-1">
     <owns:inSynset rdf:resource="individuals.owl#synset-solicitation-noun-1"/>
@@ -16352,6 +16416,9 @@
     <owns:sense rdf:resource="individuals.owl#wordsense-law_on_information-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-harassment-noun-1">
+    <owns:containsWordSense rdf:resource="individuals.owl#wordsense-harassment-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#wordsense-courtoi-noun-1">
     <owns:inSynset rdf:resource="individuals.owl#synset-courtoi-noun-1"/>
     <owns:word rdf:resource="individuals.owl#word-courtoi"/>
@@ -16481,6 +16548,11 @@
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-additional_cost-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-additional_cost-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#wordsense-liable-noun-1">
+    <owns:inSynset rdf:resource="individuals.owl#synset-liable-noun-1"/>
+    <owns:word rdf:resource="individuals.owl#word-liable"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#word-rules_of_community_law">
     <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rules of community law</owns:lexicalForm>
@@ -20262,6 +20334,9 @@
     <owns:word rdf:resource="individuals.owl#word-apparatus"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-recipient_of_the_service-noun-1">
+    <owns:containsWordSense rdf:resource="individuals.owl#wordsense-recipient_of_the_service-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#word-case_of_communication">
     <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case of communication</owns:lexicalForm>
     <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case of communication</owns:protoForm>
@@ -22475,6 +22550,11 @@
   <rdf:Description rdf:about="individuals.owl#synset-ortfz-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-ortfz-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#wordsense-sexual_harassment-noun-1">
+    <owns:inSynset rdf:resource="individuals.owl#synset-sexual_harassment-noun-1"/>
+    <owns:word rdf:resource="individuals.owl#word-sexual_harassment"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#wordsense-legal_certainty-noun-1">
     <owns:inSynset rdf:resource="individuals.owl#synset-legal_certainty-noun-1"/>
     <owns:word rdf:resource="individuals.owl#word-legal_certainty"/>
@@ -22716,6 +22796,11 @@
     <owns:sense rdf:resource="individuals.owl#wordsense-spain-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#wordsense-contributor-noun-1">
+    <owns:inSynset rdf:resource="individuals.owl#synset-contributor-noun-1"/>
+    <owns:word rdf:resource="individuals.owl#word-contributor"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#word-principle_of_subsidiarity">
     <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">principle of subsidiarity</owns:lexicalForm>
     <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">principle of subsidiarity</owns:protoForm>
@@ -22727,11 +22812,6 @@
     <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">judgment under appeal</owns:protoForm>
     <owns:sense rdf:resource="individuals.owl#wordsense-judgment_under_appeal-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#wordsense-contributor-noun-1">
-    <owns:inSynset rdf:resource="individuals.owl#synset-contributor-noun-1"/>
-    <owns:word rdf:resource="individuals.owl#word-contributor"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#word-sound_administration">
     <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sound administration</owns:lexicalForm>
@@ -24990,6 +25070,11 @@
     <owns:sense rdf:resource="individuals.owl#wordsense-aventis_pasteur_msd_ltd-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#wordsense-recipient_of_the_service-noun-1">
+    <owns:inSynset rdf:resource="individuals.owl#synset-recipient_of_the_service-noun-1"/>
+    <owns:word rdf:resource="individuals.owl#word-recipient_of_the_service"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-cofidi-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-cofidi-noun-1"/>
   </rdf:Description>
@@ -25783,6 +25868,11 @@
   <rdf:Description rdf:about="individuals.owl#wordsense-sabater-noun-1">
     <owns:inSynset rdf:resource="individuals.owl#synset-sabater-noun-1"/>
     <owns:word rdf:resource="individuals.owl#word-sabater"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#wordsense-established_service_provider-noun-1">
+    <owns:inSynset rdf:resource="individuals.owl#synset-established_service_provider-noun-1"/>
+    <owns:word rdf:resource="individuals.owl#word-established_service_provider"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-directive-noun-1">
@@ -31565,6 +31655,12 @@
     <owns:inSynset rdf:resource="individuals.owl#synset-arbitration_procedure-noun-1"/>
     <owns:word rdf:resource="individuals.owl#word-arbitration_procedure"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#word-direct_discrimination">
+    <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">direct discrimination</owns:lexicalForm>
+    <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">direct discrimination</owns:protoForm>
+    <owns:sense rdf:resource="individuals.owl#wordsense-direct_discrimination-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-reference_period-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-reference_period-noun-1"/>
@@ -37694,6 +37790,9 @@
   <rdf:Description rdf:about="individuals.owl#synset-undergo-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-undergo-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-sexual_harassment-noun-1">
+    <owns:containsWordSense rdf:resource="individuals.owl#wordsense-sexual_harassment-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#wordsense-language-noun-1">
     <owns:inSynset rdf:resource="individuals.owl#synset-language-noun-1"/>
     <owns:word rdf:resource="individuals.owl#word-language"/>
@@ -38679,6 +38778,11 @@
   <rdf:Description rdf:about="individuals.owl#wordsense-regenerate-noun-1">
     <owns:inSynset rdf:resource="individuals.owl#synset-regenerate-noun-1"/>
     <owns:word rdf:resource="individuals.owl#word-regenerate"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#wordsense-information_soviety_service-noun-1">
+    <owns:inSynset rdf:resource="individuals.owl#synset-information_soviety_service-noun-1"/>
+    <owns:word rdf:resource="individuals.owl#word-information_soviety_service"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#wordsense-european_parliament-noun-1">
@@ -40623,6 +40727,9 @@
     <owns:sense rdf:resource="individuals.owl#wordsense-icelandic-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-liable-noun-1">
+    <owns:containsWordSense rdf:resource="individuals.owl#wordsense-liable-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-case-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-case-noun-1"/>
   </rdf:Description>
@@ -40660,6 +40767,9 @@
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-measure-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-measure-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-service_provider-noun-1">
+    <owns:containsWordSense rdf:resource="individuals.owl#wordsense-service_provider-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-consumer_protection-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-consumer_protection-noun-1"/>
@@ -41656,15 +41766,15 @@
   <rdf:Description rdf:about="individuals.owl#synset-verwaltungssenat_wien-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-verwaltungssenat_wien-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-streptomycin-noun-1">
+    <owns:containsWordSense rdf:resource="individuals.owl#wordsense-streptomycin-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#word-community_policy_on_tourism">
     <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">community policy on tourism</owns:lexicalForm>
     <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Community policy on tourism</owns:lexicalForm>
     <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">community policy on tourism</owns:protoForm>
     <owns:sense rdf:resource="individuals.owl#wordsense-community_policy_on_tourism-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-streptomycin-noun-1">
-    <owns:containsWordSense rdf:resource="individuals.owl#wordsense-streptomycin-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-gmbh-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-gmbh-noun-1"/>
@@ -42621,6 +42731,12 @@
     <owns:word rdf:resource="individuals.owl#word-entity"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#word-sexual_harassment">
+    <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sexual harassment</owns:lexicalForm>
+    <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sexual harassment</owns:protoForm>
+    <owns:sense rdf:resource="individuals.owl#wordsense-sexual_harassment-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#wordsense-die-noun-1">
     <owns:inSynset rdf:resource="individuals.owl#synset-die-noun-1"/>
     <owns:word rdf:resource="individuals.owl#word-die"/>
@@ -43401,6 +43517,12 @@
     <owns:sense rdf:resource="individuals.owl#wordsense-pfizer-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#word-harassment">
+    <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">harassment</owns:lexicalForm>
+    <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">harassment</owns:protoForm>
+    <owns:sense rdf:resource="individuals.owl#wordsense-harassment-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-metg-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-metg-noun-1"/>
   </rdf:Description>
@@ -43980,6 +44102,11 @@
     <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">presentation of foodstuffs</owns:protoForm>
     <owns:sense rdf:resource="individuals.owl#wordsense-presentation_of_foodstuffs-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#wordsense-service_provider-noun-1">
+    <owns:inSynset rdf:resource="individuals.owl#synset-service_provider-noun-1"/>
+    <owns:word rdf:resource="individuals.owl#word-service_provider"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#wordsense-water_supply-noun-1">
     <owns:inSynset rdf:resource="individuals.owl#synset-water_supply-noun-1"/>

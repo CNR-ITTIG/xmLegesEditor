@@ -306,10 +306,13 @@ public class KbContainer {
 			syn.setURI(subjNs + subjName);
 			//Retrieve matching concept
 			PivotOntoClass poc = kbm.getPivotClass(objNs + objName);
+//			if(objName.indexOf("price") > 0) {
+//				System.out.println("_-^-_ addAlignment() poc:" + poc +
+//						" sUri:" + syn.getURI() + " cUri:" + objNs + objName);
+//			}
 			poc.addTerm(syn);
 			syn.setPivotClass(poc);
-			//System.out.println("_-^-_ addAlignment() poc:" + poc + " sUri:" + syn.getURI());
-		}		
+		}
 	}
 
 	SynsetTree getTree() {

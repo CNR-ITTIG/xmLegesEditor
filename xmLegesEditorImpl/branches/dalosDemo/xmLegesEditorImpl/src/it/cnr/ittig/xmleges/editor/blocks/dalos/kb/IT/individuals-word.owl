@@ -632,6 +632,11 @@
     <owns:word rdf:resource="individuals.owl#word-annullamento"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#wordsense-molestia_sessuale-noun-1">
+    <owns:inSynset rdf:resource="individuals.owl#synset-molestia_sessuale-noun-1"/>
+    <owns:word rdf:resource="individuals.owl#word-molestia_sessuale"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#wordsense-legge_nazionale-noun-1">
     <owns:inSynset rdf:resource="individuals.owl#synset-legge_nazionale-noun-1"/>
     <owns:word rdf:resource="individuals.owl#word-legge_nazionale"/>
@@ -737,6 +742,12 @@
     <owns:sense rdf:resource="individuals.owl#wordsense-giudice_nazionale-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#word-molestia_sessuale">
+    <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">molestia sessuale</owns:lexicalForm>
+    <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">molestia sessuale</owns:protoForm>
+    <owns:sense rdf:resource="individuals.owl#wordsense-molestia_sessuale-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#wordsense-disponibilita-_informazione-noun-1">
     <owns:inSynset rdf:resource="individuals.owl#synset-disponibilita-_informazione-noun-1"/>
     <owns:word rdf:resource="individuals.owl#word-disponibilita-_informazione"/>
@@ -770,6 +781,11 @@
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-merito-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-merito-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#wordsense-responsabile-noun-1">
+    <owns:inSynset rdf:resource="individuals.owl#synset-responsabile-noun-1"/>
+    <owns:word rdf:resource="individuals.owl#word-responsabile"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#word-contratto_credito_fondiario">
     <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CONTRATTO CREDITO FONDIARIO</owns:lexicalForm>
@@ -1351,6 +1367,12 @@
     <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GU</owns:lexicalForm>
     <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GU</owns:protoForm>
     <owns:sense rdf:resource="individuals.owl#wordsense-gu-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#word-costo_del_credito_al_consumatore">
+    <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">costo del credito al consumatore</owns:lexicalForm>
+    <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">costo del credito al consumatore</owns:protoForm>
+    <owns:sense rdf:resource="individuals.owl#wordsense-costo_del_credito_al_consumatore-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#wordsense-proroga_termine-noun-1">
@@ -1966,6 +1988,13 @@
     <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rivelazione</owns:lexicalForm>
     <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rivelazione</owns:protoForm>
     <owns:sense rdf:resource="individuals.owl#wordsense-rivelazione-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#word-molestia">
+    <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">molestia</owns:lexicalForm>
+    <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">molestie</owns:lexicalForm>
+    <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">molestia</owns:protoForm>
+    <owns:sense rdf:resource="individuals.owl#wordsense-molestia-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#wordsense-momento_consegna-noun-1">
@@ -3734,6 +3763,11 @@
     <owns:sense rdf:resource="individuals.owl#wordsense-diritto_recesso_istituito-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#wordsense-prestatore_stabilito-noun-1">
+    <owns:inSynset rdf:resource="individuals.owl#synset-prestatore_stabilito-noun-1"/>
+    <owns:word rdf:resource="individuals.owl#word-prestatore_stabilito"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#wordsense-parita-_trattamento-noun-1">
     <owns:inSynset rdf:resource="individuals.owl#synset-parita-_trattamento-noun-1"/>
     <owns:word rdf:resource="individuals.owl#word-parita-_trattamento"/>
@@ -3866,6 +3900,9 @@
     <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">APPROVVIGIONAMENTO IDRICO GRUPPO DI POPOLAZIONE</owns:protoForm>
     <owns:sense rdf:resource="individuals.owl#wordsense-approvvigionamento_idrico_gruppo_di_popolazione-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-diligenza_professionale-noun-1">
+    <owns:containsWordSense rdf:resource="individuals.owl#wordsense-diligenza_professionale-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#word-controllo_periodico">
     <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CONTROLLO PERIODICO</owns:lexicalForm>
@@ -4267,6 +4304,11 @@
     <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">IMMISSIONE</owns:protoForm>
     <owns:sense rdf:resource="individuals.owl#wordsense-immissione-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#wordsense-discriminazione_indiretta-noun-1">
+    <owns:inSynset rdf:resource="individuals.owl#synset-discriminazione_indiretta-noun-1"/>
+    <owns:word rdf:resource="individuals.owl#word-discriminazione_indiretta"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#word-locazione_bene_immobile">
     <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LOCAZIONE BENE IMMOBILE</owns:lexicalForm>
@@ -4746,6 +4788,9 @@
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-grado-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-grado-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-costo_del_credito_al_consumatore-noun-1">
+    <owns:containsWordSense rdf:resource="individuals.owl#wordsense-costo_del_credito_al_consumatore-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-v._sentenza-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-v._sentenza-noun-1"/>
@@ -10202,6 +10247,12 @@
     <owns:word rdf:resource="individuals.owl#word-imballaggio_contenente"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#word-difetto">
+    <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">difetto</owns:lexicalForm>
+    <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">difetto</owns:protoForm>
+    <owns:sense rdf:resource="individuals.owl#wordsense-difetto-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#wordsense-produzione_alimento-noun-1">
     <owns:inSynset rdf:resource="individuals.owl#synset-produzione_alimento-noun-1"/>
     <owns:word rdf:resource="individuals.owl#word-produzione_alimento"/>
@@ -13088,6 +13139,12 @@
     <owns:word rdf:resource="individuals.owl#word-certezza_diritto"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#word-creditore">
+    <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">creditore</owns:lexicalForm>
+    <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">creditore</owns:protoForm>
+    <owns:sense rdf:resource="individuals.owl#wordsense-creditore-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#wordsense-accordo-noun-1">
     <owns:inSynset rdf:resource="individuals.owl#synset-accordo-noun-1"/>
     <owns:word rdf:resource="individuals.owl#word-accordo"/>
@@ -13315,6 +13372,11 @@
     <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">QUESTIONE</owns:protoForm>
     <owns:sense rdf:resource="individuals.owl#wordsense-questione-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#wordsense-prodotto_commercializzato_sfuso-noun-1">
+    <owns:inSynset rdf:resource="individuals.owl#synset-prodotto_commercializzato_sfuso-noun-1"/>
+    <owns:word rdf:resource="individuals.owl#word-prodotto_commercializzato_sfuso"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-fine_protezione_di_il_consumatore-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-fine_protezione_di_il_consumatore-noun-1"/>
@@ -14538,6 +14600,9 @@
     <owns:inSynset rdf:resource="individuals.owl#synset-caso_eccezionale-noun-1"/>
     <owns:word rdf:resource="individuals.owl#word-caso_eccezionale"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-discriminazione_indiretta-noun-1">
+    <owns:containsWordSense rdf:resource="individuals.owl#wordsense-discriminazione_indiretta-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#word-tribunale">
     <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TRIBUNALE</owns:lexicalForm>
@@ -16438,6 +16503,11 @@
   <rdf:Description rdf:about="individuals.owl#synset-risultato-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-risultato-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#wordsense-molestia-noun-1">
+    <owns:inSynset rdf:resource="individuals.owl#synset-molestia-noun-1"/>
+    <owns:word rdf:resource="individuals.owl#word-molestia"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#word-risposta_quesito">
     <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RISPOSTA QUESITO</owns:lexicalForm>
     <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RISPOSTE AI QUESITI</owns:lexicalForm>
@@ -16486,6 +16556,9 @@
     <owns:word rdf:resource="individuals.owl#word-materia_etichettatura"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-prestatore_stabilito-noun-1">
+    <owns:containsWordSense rdf:resource="individuals.owl#wordsense-prestatore_stabilito-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#word-ispettorato_generale">
     <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ISPETTORATO GENERALE</owns:lexicalForm>
     <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ISPETTORATO GENERALE</owns:protoForm>
@@ -16510,6 +16583,11 @@
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-risparmio_carburante-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-risparmio_carburante-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#wordsense-diligenza_professionale-noun-1">
+    <owns:inSynset rdf:resource="individuals.owl#synset-diligenza_professionale-noun-1"/>
+    <owns:word rdf:resource="individuals.owl#word-diligenza_professionale"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#word-consultazione_preliminare">
     <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CONSULTAZIONE PRELIMINARE</owns:lexicalForm>
@@ -16583,6 +16661,11 @@
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-limite-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-limite-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#wordsense-difetto-noun-1">
+    <owns:inSynset rdf:resource="individuals.owl#synset-difetto-noun-1"/>
+    <owns:word rdf:resource="individuals.owl#word-difetto"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#word-determinazione_limite_massimo">
     <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DETERMINAZIONE LIMITE MASSIMO</owns:lexicalForm>
@@ -16832,6 +16915,11 @@
     <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">COMPETENZA STATO MEMBRO</owns:protoForm>
     <owns:sense rdf:resource="individuals.owl#wordsense-competenza_stato_membro-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#wordsense-creditore-noun-1">
+    <owns:inSynset rdf:resource="individuals.owl#synset-creditore-noun-1"/>
+    <owns:word rdf:resource="individuals.owl#word-creditore"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#wordsense-rischio_potenziale-noun-1">
     <owns:inSynset rdf:resource="individuals.owl#synset-rischio_potenziale-noun-1"/>
@@ -17453,6 +17541,9 @@
   <rdf:Description rdf:about="individuals.owl#synset-fascicolo_syngenta-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-fascicolo_syngenta-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-molestia_sessuale-noun-1">
+    <owns:containsWordSense rdf:resource="individuals.owl#wordsense-molestia_sessuale-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-ambito_scar-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-ambito_scar-noun-1"/>
   </rdf:Description>
@@ -17522,6 +17613,9 @@
     <owns:inSynset rdf:resource="individuals.owl#synset-sanzione_amministrativo-noun-1"/>
     <owns:word rdf:resource="individuals.owl#word-sanzione_amministrativo"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-prodotto_commercializzato_sfuso-noun-1">
+    <owns:containsWordSense rdf:resource="individuals.owl#wordsense-prodotto_commercializzato_sfuso-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#wordsense-potere_investigativo-noun-1">
     <owns:inSynset rdf:resource="individuals.owl#synset-potere_investigativo-noun-1"/>
@@ -17806,6 +17900,12 @@
     <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CONCESSIONE DI CREDITI</owns:lexicalForm>
     <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CONCESSIONE CREDITO</owns:protoForm>
     <owns:sense rdf:resource="individuals.owl#wordsense-concessione_credito-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#word-prodotto_commercializzato_sfuso">
+    <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">prodotto commercializzato sfuso</owns:lexicalForm>
+    <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">prodotto commercializzato sfuso</owns:protoForm>
+    <owns:sense rdf:resource="individuals.owl#wordsense-prodotto_commercializzato_sfuso-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#wordsense-competenza_stato_membro-noun-1">
@@ -18616,6 +18716,9 @@
     <owns:word rdf:resource="individuals.owl#word-vacca_latte"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-responsabile-noun-1">
+    <owns:containsWordSense rdf:resource="individuals.owl#wordsense-responsabile-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#wordsense-sentenza_impugnato-noun-1">
     <owns:inSynset rdf:resource="individuals.owl#synset-sentenza_impugnato-noun-1"/>
     <owns:word rdf:resource="individuals.owl#word-sentenza_impugnato"/>
@@ -18733,6 +18836,12 @@
     <owns:word rdf:resource="individuals.owl#word-allegato"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#word-prestatore_stabilito">
+    <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">prestatore stabilito</owns:lexicalForm>
+    <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">prestatore stabilito</owns:protoForm>
+    <owns:sense rdf:resource="individuals.owl#wordsense-prestatore_stabilito-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-protezione_salute-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-protezione_salute-noun-1"/>
   </rdf:Description>
@@ -18798,6 +18907,12 @@
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-contesto_normativo-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-contesto_normativo-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#word-responsabile">
+    <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">responsabile</owns:lexicalForm>
+    <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">responsabile</owns:protoForm>
+    <owns:sense rdf:resource="individuals.owl#wordsense-responsabile-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#word-repubblica_ungheria">
     <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">REPUBBLICA UNGHERIA</owns:lexicalForm>
@@ -19230,6 +19345,11 @@
     <owns:word rdf:resource="individuals.owl#word-soluzione_controversia"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#wordsense-costo_del_credito_al_consumatore-noun-1">
+    <owns:inSynset rdf:resource="individuals.owl#synset-costo_del_credito_al_consumatore-noun-1"/>
+    <owns:word rdf:resource="individuals.owl#word-costo_del_credito_al_consumatore"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-membro_diverso-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-membro_diverso-noun-1"/>
   </rdf:Description>
@@ -19421,6 +19541,9 @@
     <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LIMITE</owns:protoForm>
     <owns:sense rdf:resource="individuals.owl#wordsense-limite-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-molestia-noun-1">
+    <owns:containsWordSense rdf:resource="individuals.owl#wordsense-molestia-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-residuo_combustione-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-residuo_combustione-noun-1"/>
@@ -19793,6 +19916,12 @@
     <owns:word rdf:resource="individuals.owl#word-infrazione"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#word-discriminazione_indiretta">
+    <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">discriminazione indiretta</owns:lexicalForm>
+    <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">discriminazione indiretta</owns:protoForm>
+    <owns:sense rdf:resource="individuals.owl#wordsense-discriminazione_indiretta-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#wordsense-racc-noun-1">
     <owns:inSynset rdf:resource="individuals.owl#synset-racc-noun-1"/>
     <owns:word rdf:resource="individuals.owl#word-racc"/>
@@ -19846,14 +19975,14 @@
     <owns:word rdf:resource="individuals.owl#word-ufficio_unico"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#wordsense-prodotto-noun-1">
-    <owns:inSynset rdf:resource="individuals.owl#synset-prodotto-noun-1"/>
-    <owns:word rdf:resource="individuals.owl#word-prodotto"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#wordsense-origine_francese-noun-1">
     <owns:inSynset rdf:resource="individuals.owl#synset-origine_francese-noun-1"/>
     <owns:word rdf:resource="individuals.owl#word-origine_francese"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#wordsense-prodotto-noun-1">
+    <owns:inSynset rdf:resource="individuals.owl#synset-prodotto-noun-1"/>
+    <owns:word rdf:resource="individuals.owl#word-prodotto"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#wordsense-prezzo-noun-1">
@@ -20328,6 +20457,9 @@
   <rdf:Description rdf:about="individuals.owl#synset-programma_di_riduzione_inquinamento-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-programma_di_riduzione_inquinamento-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-creditore-noun-1">
+    <owns:containsWordSense rdf:resource="individuals.owl#wordsense-creditore-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#word-applicabilita">
     <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">applicabilità</owns:lexicalForm>
     <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">applicabilità</owns:protoForm>
@@ -20713,6 +20845,9 @@
   <rdf:Description rdf:about="individuals.owl#synset-protezione-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-protezione-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-difetto-noun-1">
+    <owns:containsWordSense rdf:resource="individuals.owl#wordsense-difetto-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-linea_principio-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-linea_principio-noun-1"/>
   </rdf:Description>
@@ -20763,15 +20898,15 @@
   <rdf:Description rdf:about="individuals.owl#synset-rigenerazione_olio_usato-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-rigenerazione_olio_usato-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-composizione_extragiudiziale-noun-1">
-    <owns:containsWordSense rdf:resource="individuals.owl#wordsense-composizione_extragiudiziale-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#word-informazione_richiesto">
     <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INFORMAZIONE RICHIESTO</owns:lexicalForm>
     <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INFORMAZIONI RICHIESTE</owns:lexicalForm>
     <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INFORMAZIONE RICHIESTO</owns:protoForm>
     <owns:sense rdf:resource="individuals.owl#wordsense-informazione_richiesto-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-composizione_extragiudiziale-noun-1">
+    <owns:containsWordSense rdf:resource="individuals.owl#wordsense-composizione_extragiudiziale-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#wordsense-ufficio_unico|unico_collegamento-noun-1">
     <owns:inSynset rdf:resource="individuals.owl#synset-ufficio_unico|unico_collegamento-noun-1"/>
@@ -21853,6 +21988,12 @@
     <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">OSSERVANZA DELLE DISPOSIZIONI</owns:lexicalForm>
     <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">OSSERVANZA DISPOSIZIONE</owns:protoForm>
     <owns:sense rdf:resource="individuals.owl#wordsense-osservanza_disposizione-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#word-diligenza_professionale">
+    <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">diligenza professionale</owns:lexicalForm>
+    <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">diligenza professionale</owns:protoForm>
+    <owns:sense rdf:resource="individuals.owl#wordsense-diligenza_professionale-noun-1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#word-presentazione_pratica_completo">
