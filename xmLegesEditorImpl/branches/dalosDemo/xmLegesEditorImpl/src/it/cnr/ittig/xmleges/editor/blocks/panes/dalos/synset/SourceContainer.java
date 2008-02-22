@@ -13,11 +13,16 @@ import java.net.URL;
 import java.util.Iterator;
 
 import javax.swing.JEditorPane;
+import javax.swing.event.HyperlinkEvent;
+import javax.swing.event.HyperlinkListener;
 import javax.swing.text.html.HTMLDocument;
 
-public class SourceContainer extends JEditorPane {
+public class SourceContainer extends JEditorPane implements HyperlinkListener{
 	
 	I18n i18n;
+	
+	String[] browsers={"firefox", "mozilla-firefox", "cmd /C start"};
+	
 	
 	public SourceContainer() {
 		
@@ -25,6 +30,8 @@ public class SourceContainer extends JEditorPane {
 		
 		setEditable(false);
 		setContentType("text/html");
+		addHyperlinkListener(this);
+
 		
 		HTMLDocument doc = (HTMLDocument) this.getDocument();
 
@@ -61,10 +68,13 @@ public class SourceContainer extends JEditorPane {
 				def = "Source text not available";
 			}
 			
+			// SETTARE LA URL
+			source.setLink("http://www.ittig.cnr.it");
+			
 			html += "<tr><td><img src=\"./signature.png\"></td><td><i>" + 
 						def + "</i></td><td>&nbsp;</td><td>" +
-						"<A HREF=\"" + source.getLink() + 
-						"\">" + source.getId() + "</A></td></tr>";			
+						"<a href=\"" + source.getLink() + 
+						"\">" + source.getId() + "</a></td></tr>";			
 		}
 		
 		html += "</table></body></html>";
@@ -79,6 +89,20 @@ public class SourceContainer extends JEditorPane {
 	public void clearContent() {
 		
 		setText("<html><body></body></html>");
+	}
+
+
+	public void hyperlinkUpdate(HyperlinkEvent e) {
+		HyperlinkEvent.EventType type = e.getEventType();
+		if (type == HyperlinkEvent.EventType.ACTIVATED) {
+			for (int i = 0; i < browsers.length; i++)
+				try {
+					String cmd = browsers[i] + " " +e.getURL();
+					Runtime.getRuntime().exec(cmd);
+					break;
+				} catch (Exception ex) {
+				}
+		}
 	}
 
 }
