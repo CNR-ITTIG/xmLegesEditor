@@ -12,7 +12,12 @@ import java.io.InputStream;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Enumeration;
+import java.util.SortedSet;
 import java.util.StringTokenizer;
+import java.util.TreeSet;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 /**
  * Classe di utilit&agrave; per i file.
@@ -34,6 +39,8 @@ public class UtilFile {
 
 	final static String tempDir;
 	final static String suffixFolder = "_xmlfile/";
+		
+	protected static SortedSet dirsMade;
 	
 	static {
 		tempDir = "temp";
@@ -560,10 +567,7 @@ public class UtilFile {
 
 		String[] list = from.list();
 
-		// Some JVMs return null for File.list() when the
-		// directory is empty.
-		if (list != null) {
-			
+		if (list != null) {			
 			nextFile: for (int i = 0; i < list.length; i++) {
 
 				String fileName = list[i];
@@ -576,12 +580,14 @@ public class UtilFile {
 				}
 
 				File entry = new File(from, fileName);
-				
+
 				if (entry.isDirectory()) {
 					if (!copyDirectory(entry, new File(to, fileName), filter))
 						return false;
 				} else {
-					if (!copyFile(entry, new File(to, fileName)))
+					if(entry.getName().toLowerCase().endsWith("zip")){
+						unZip(entry.getAbsolutePath(),to.getAbsolutePath());
+					}else if (!copyFile(entry, new File(to, fileName)))
 						return false;
 				}
 			}
@@ -590,4 +596,97 @@ public class UtilFile {
 	}
 	
 	
+	
+	
+	//////////////////////////////////////////////
+	// 		UNZIP
+	//////////////////////////////////////////////
+	
+	/**
+	 * 
+	 */
+	public static void unZip(String fileName){
+		  unZip(fileName,"");
+	}
+	
+	  
+	/**
+	 * 
+	 * @param fileName
+	 * @param toDir
+	 */
+	public static void unZip(String fileName, String toDir) {
+		ZipFile zipFile;
+	    dirsMade = new TreeSet();
+	    try {
+	      zipFile = new ZipFile(fileName);
+	      Enumeration all = zipFile.entries();
+	      while (all.hasMoreElements()) {
+	        getFile(zipFile,(ZipEntry) all.nextElement(),toDir);
+	      }
+	    } catch (IOException err) {
+	      System.err.println("IO Error: " + err);
+	      return;
+	    }
+	}
+
+	
+	/**
+	 * Process one file from the zip, given its name. Either print the name, or
+	 * create the file on disk.
+	 */
+	protected static void getFile(ZipFile zipFile, ZipEntry e, String toDir) throws IOException {
+
+		byte[] b = new byte[8092];  
+
+		String zipName = e.getName();
+		if (zipName.startsWith("/")) {
+			System.out.println("Ignoring absolute paths");    
+			zipName = zipName.substring(1);
+		}
+
+		zipName=toDir+'/'+zipName;
+
+		// if a directory, just return. We mkdir for every file,
+		// since some widely-used Zip creators don't put out
+		// any directory entries, or put them in the wrong place.
+		if (zipName.endsWith("/")) {
+			return;
+		}
+		// Else must be a file; open the file for output
+		// Get the directory part.
+		int ix = zipName.lastIndexOf('/');
+		if (ix > 0) {
+			String dirName = zipName.substring(0, ix);
+			if (!dirsMade.contains(dirName)) {
+				File d = new File(dirName);
+				// If it already exists as a dir, don't do anything
+				if (!(d.exists() && d.isDirectory())) {
+					// Try to create the directory, warn if it fails
+					System.out.println("Creating Directory: " + dirName);
+					if (!d.mkdirs()) {
+						System.err.println("Warning: unable to mkdir "+ dirName);
+					}
+					dirsMade.add(dirName);
+				}
+			}
+		}
+		System.err.println("Creating " + zipName);
+		FileOutputStream os = new FileOutputStream(zipName);
+		InputStream is = zipFile.getInputStream(e);
+		int n = 0;
+		while ((n = is.read(b)) > 0)
+			os.write(b, 0, n);
+		is.close();
+		os.close();
+	}
 }
+	
+	
+
+
+
+
+
+	
+
