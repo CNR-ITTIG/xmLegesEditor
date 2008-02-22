@@ -1909,4 +1909,10 @@ public class SchemaRulesManagerImpl implements RulesManager {
 	}
 
 
+	public String getDefaultContent(String elem_name, Vector nodes) throws RulesManagerException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 }
