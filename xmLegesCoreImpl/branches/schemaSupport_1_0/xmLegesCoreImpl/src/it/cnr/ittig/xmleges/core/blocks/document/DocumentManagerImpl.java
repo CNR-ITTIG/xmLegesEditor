@@ -21,6 +21,7 @@ import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.panes.problems.Problem;
 import it.cnr.ittig.xmleges.core.services.panes.problems.ProblemsPane;
 import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
@@ -157,6 +158,21 @@ public class DocumentManagerImpl implements DocumentManager, EventListener, Logg
 		Document doc = open(source);
 		if (doc != null) {
 			this.document = doc;
+			
+			
+			try{
+			//rulesManager.getAlternativeContents("articolo");
+			Vector nodes = new Vector();
+			
+			//nodes.add((Node) doc.createElement("ciclodivita"));
+			nodes.add((Node) doc.createElement("num"));
+			nodes.add((Node) doc.createElement("corpo"));
+			System.err.println(rulesManager.getDefaultContent("comma",nodes));
+			
+			}catch(RulesManagerException e){
+				e.printStackTrace();
+			}
+			
 			DOMWriter.setDefaultEncoding(getEncoding());
 
 			for (Enumeration en = beforeInitActions.elements(); en.hasMoreElements();) {
