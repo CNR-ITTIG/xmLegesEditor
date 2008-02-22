@@ -82,6 +82,9 @@ public interface RulesManager extends Service {
 	 * @return
 	 */
 	public String getDefaultContent(String elem_name, String alternative) throws RulesManagerException;
+	
+	
+	public String getDefaultContent(String elem_name, Vector nodes) throws RulesManagerException;
 
 	/**
 	 * Restituisce i possibili contenuti alternativi di un elemento
