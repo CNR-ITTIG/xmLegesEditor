@@ -339,5 +339,11 @@ public class RulesManagerImpl implements RulesManager, Initializable, Loggable {
 	public boolean queryTextContent(String elem_name) throws RulesManagerException {
 		return rm.queryTextContent(elem_name);	
 	}
+
+
+
+	public String getDefaultContent(String elem_name, Vector nodes) throws RulesManagerException {
+		return rm.getDefaultContent(elem_name, nodes);
+	}
 	
 }
