@@ -322,13 +322,16 @@ public class SchemaRulesManagerImpl implements RulesManager {
 	 *         ritorna la lunghezza del cammino minimo
 	 */
 	static protected int visitContentGraph(ContentGraph graph) {
+		
+		
+		// init visit		
+		graph.resetVisit();
 		ContentGraph.Node first = graph.getFirst();
 		ContentGraph.Node last = graph.getLast();
 
-		// init visit
+
 		Vector queue = new Vector();
-		for (Iterator i = graph.visitNodes(); i.hasNext();)
-			((ContentGraph.Node) i.next()).resetVisit();
+
 		first.setVisit(0, "", null);
 		queue.add(first);
 
@@ -365,7 +368,7 @@ public class SchemaRulesManagerImpl implements RulesManager {
 				}
 			}
 		}
-
+		
 		return last.getVisitLength();
 	}
 
@@ -396,7 +399,7 @@ public class SchemaRulesManagerImpl implements RulesManager {
 			//in questo modo il path non è esploso
 			output += getXMLContent((ContentGraph) i.next());
 		output = output + "</" + graph.getName() + ">";
-
+		
 		return output;
 	}
 
@@ -423,13 +426,6 @@ public class SchemaRulesManagerImpl implements RulesManager {
 			nav = before;
 		}
 
-//		// get xml content
-//		String output = "<" + graph.getName() + ">";
-//		for (Iterator i = path.iterator(); i.hasNext();)
-//		output += ((ContentGraph) i.next()).name;
-
-//		output = output + "</" + graph.getName() + ">";
-
 		path.add(0,nodePath);
 		path.add(1,edgePath);
 		return path;
@@ -442,24 +438,24 @@ public class SchemaRulesManagerImpl implements RulesManager {
 	 * @param graph il ContentGraph da esplodere
 	 * @throws RulesManagerException
 	 */
-	protected void explodeContentGraph(ContentGraph graph) throws RulesManagerException {
-		// check every edge of the old graph
-		for (Iterator i = graph.visitNodes(); i.hasNext();) {
-			ContentGraph.Node src = (ContentGraph.Node) i.next();
-			for (int j = 0; j < src.getNoEdges(); j++) {
-				Object edge = src.getEdge(j);
-				String edge_name = src.getEdgeName(j);
-				if (edge instanceof ContentGraph) {
-					System.err.println("recursively explore subgraph "+((ContentGraph)edge).name);
-					// recursively explore subgraph
-					explodeContentGraph((ContentGraph) edge);
-				} else if (edge_name.compareTo("#PCDATA") != 0 && edge_name.compareTo("#EPS") != 0) {
-					System.err.println("replace edge with ContentGraph of "+edge_name);
-					// replace edge with ContentGraph
-					src.setEdge(getContentGraph(edge_name), j);
-				}
-			}
-		}
+	
+	
+	protected void explodeEdge(ContentGraph edgeToExplode) throws RulesManagerException {
+			for (Iterator i = edgeToExplode.visitNodes(); i.hasNext();) {
+					ContentGraph.Node sub_src = (ContentGraph.Node) i.next();
+					for (int k = 0; k < sub_src.getNoEdges(); k++) {
+						Object sub_edge = sub_src.getEdge(k);
+						String subedge_name = sub_src.getEdgeName(k);
+						// sub_edge is instanceof ContentGraph iif is already exploded!
+						//perchè il createContentGraph() crea un grafo con archi di tipo stringa e NON di tipo ContentGraph
+						if (!(sub_edge instanceof ContentGraph) 
+								&& (subedge_name.compareTo("#PCDATA") != 0 && subedge_name.compareTo("#EPS") != 0)) {
+							// replace edge with ContentGraph of level 1
+							sub_src.setEdge(getContentGraph(subedge_name), k);
+						} 
+					}
+					
+			}		
 	}
 
 
@@ -472,20 +468,44 @@ public class SchemaRulesManagerImpl implements RulesManager {
 	 * @throws RulesManagerException
 	 */
 	protected String getDefaultContent(ContentGraph graph) throws RulesManagerException {
-		// cycle until a default content has been found
-		while (true) {
-			if (visitContentGraph(graph) < Integer.MAX_VALUE){
-				//System.err.println("finite path");
-				return getXMLContent(graph);
+	
+		int length_visit= visitContentGraph(graph);
+		
+		System.err.println("-------Lunghezza visita iniziale di "+graph.name+": "+length_visit);
+		if (length_visit < Integer.MAX_VALUE){
+			return getXMLContent(graph);
+		}
+
+			// cycle until a default content has been found
+		while (true) {			
+						
+			System.err.println("!   scendo di livello ");
+
+			for (Iterator i = graph.visitNodes(); i.hasNext();) {
+				
+				ContentGraph.Node nodeToExplode = (ContentGraph.Node) i.next();
+				
+				for (int j = 0; j < nodeToExplode.getNoEdges(); j++) {
+					Object edgeToExplode = nodeToExplode.getEdge(j);
+					String edge_name = nodeToExplode.getEdgeName(j);
+					if (edgeToExplode instanceof ContentGraph) {
+						
+						explodeEdge((ContentGraph) edgeToExplode);
+						
+					}else if (edge_name.compareTo("#PCDATA") != 0 && edge_name.compareTo("#EPS") != 0) {
+						// replace edge with ContentGraph
+						nodeToExplode.setEdge(getContentGraph(edge_name), j);
+						
+					}
+					length_visit= visitContentGraph(graph);
+					System.err.println("-------Lunghezza visita di "+nodeToExplode.name+" --> "+edge_name+" = "+length_visit);
+					
+					if (length_visit < Integer.MAX_VALUE){
+						return getXMLContent(graph);
+					}
+					
+				}		
 			}
-			System.err.println("!   infinite path:  exploding");
-			System.err.println("");
-			System.err.println("**************************************************************");
-			System.err.println(graph.toString());
-			System.err.println("**************************************************************");
-			System.err.println("");
-			// no default content: substitute each element with its ContentGraph
-			explodeContentGraph(graph);
 		}
 	}
 
@@ -503,6 +523,7 @@ public class SchemaRulesManagerImpl implements RulesManager {
 		System.out.println("grafo su cui cercherà il minimo: \n"+graph);
 
 		ContentGraph newcg=(ContentGraph) graph.clone();
+		
 //		new ContentGraph(graph.name); //GRAFO CORRENTE A CUI VENGONO SOTTRATTI GLI ARCHI DEL CAMMINO MINIMO PRECEDENTEM TROVATO
 //		newcg.nodes_table=new HashMap(graph.nodes_table);
 
@@ -540,8 +561,7 @@ public class SchemaRulesManagerImpl implements RulesManager {
 			System.out.println("eliminero' "+minPathLength+" archi");
 			for(int i=0; i< minPathLength;i++){
 				newcg=(ContentGraph) graph.clone();
-//				newcg=new ContentGraph(graph.name);
-//				newcg.nodes_table=new HashMap(graph.nodes_table);
+				
 				System.out.println("grafo su cui cercherà il minimo (come orig): \n"+newcg);
 
 				//per tutti gli archi del cammino minimo corrente
@@ -799,16 +819,13 @@ public class SchemaRulesManagerImpl implements RulesManager {
 	 * @throws RulesManagerException
 	 */
 	protected ContentGraph getContentGraph(String elem_name) throws RulesManagerException {
-
+		
+		
 		if (queryTextContent(elem_name)) // don't explode text and mixed elements to save iterations
 			return createTextContentGraph(elem_name);
 
 		if (rules.get(elem_name) == null)
 		   throw new RulesManagerException("No rule for element <" + elem_name + ">");
-		if (utilXsd.contentGraphs.get(elem_name) == null)
-			   throw new RulesManagerException("No contentgraph for element <" + elem_name + ">");
-		//((ContentGraph)utilXsd.contentGraphs.get(elem_name)).resetVisit();
-		//return (ContentGraph)utilXsd.contentGraphs.get(elem_name);
 		return utilXsd.createContentGraph(elem_name);
 	}
 
@@ -1014,7 +1031,7 @@ public class SchemaRulesManagerImpl implements RulesManager {
 			return false;
 		}
 		if (isValid(elem_name, UtilLang.singleton("#PCDATA"))){
-			System.err.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "+elem_name +" is singleton #PCDATA");
+			//System.err.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "+elem_name +" is singleton #PCDATA");
 			return true;
 		}
 		if (utilXsd.isSimpleType(elem_name)){

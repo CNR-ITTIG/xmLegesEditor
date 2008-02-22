@@ -55,9 +55,6 @@ public class UtilXsd{
 
 	List nonTopElements;
 	
-	public HashMap contentGraphs;
-
-
 	protected SchemaRulesManagerImpl schemaRules = null;
 	protected Logger logger;
 
@@ -77,8 +74,6 @@ public class UtilXsd{
 		schema = null;
 		List allElements;
 		
-		contentGraphs =new HashMap();
-
 		// SCHEMA PRINCIPALE
 
 		try{
@@ -178,7 +173,6 @@ public class UtilXsd{
 		String name;
 		for(Iterator it = schemaRules.rules.keySet().iterator(); it.hasNext();){
 			name = (String)it.next();
-			contentGraphs.put(name, createContentGraph(name));
 		}
 
 		printRules();
