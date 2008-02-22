@@ -448,8 +448,10 @@ public class SchemaRulesManagerImpl implements RulesManager {
 						String subedge_name = sub_src.getEdgeName(k);
 						// sub_edge is instanceof ContentGraph iif is already exploded!
 						//perchè il createContentGraph() crea un grafo con archi di tipo stringa e NON di tipo ContentGraph
-						if (!(sub_edge instanceof ContentGraph) 
-								&& (subedge_name.compareTo("#PCDATA") != 0 && subedge_name.compareTo("#EPS") != 0)) {
+						if (sub_edge instanceof ContentGraph) {
+							explodeEdge((ContentGraph) sub_edge);
+							
+						}else if (subedge_name.compareTo("#PCDATA") != 0 && subedge_name.compareTo("#EPS") != 0) {
 							// replace edge with ContentGraph of level 1
 							sub_src.setEdge(getContentGraph(subedge_name), k);
 						} 
@@ -476,13 +478,15 @@ public class SchemaRulesManagerImpl implements RulesManager {
 			return getXMLContent(graph);
 		}
 
+		
 			// cycle until a default content has been found
 		while (true) {			
 						
 			System.err.println("!   scendo di livello ");
 
+			
 			for (Iterator i = graph.visitNodes(); i.hasNext();) {
-				
+						
 				ContentGraph.Node nodeToExplode = (ContentGraph.Node) i.next();
 				
 				for (int j = 0; j < nodeToExplode.getNoEdges(); j++) {
@@ -504,8 +508,11 @@ public class SchemaRulesManagerImpl implements RulesManager {
 						return getXMLContent(graph);
 					}
 					
-				}		
+				}
+				
 			}
+			
+			
 		}
 	}
 
