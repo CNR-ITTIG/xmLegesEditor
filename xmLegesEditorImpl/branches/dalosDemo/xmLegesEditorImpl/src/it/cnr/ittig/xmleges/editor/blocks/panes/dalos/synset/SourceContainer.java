@@ -69,7 +69,7 @@ public class SourceContainer extends JEditorPane implements HyperlinkListener{
 			}
 			
 			// SETTARE LA URL
-			source.setLink("http://www.ittig.cnr.it");
+			source.setLink("http://www.dalosproject.eu");
 			
 			html += "<tr><td><img src=\"./signature.png\"></td><td><i>" + 
 						def + "</i></td><td>&nbsp;</td><td>" +

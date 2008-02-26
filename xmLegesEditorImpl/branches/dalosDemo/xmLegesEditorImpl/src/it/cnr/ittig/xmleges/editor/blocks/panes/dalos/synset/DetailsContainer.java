@@ -26,7 +26,6 @@ public class DetailsContainer extends JEditorPane {
 		setEditable(false);
 		setContentType("text/html");
 		
-		HTMLEditorKit kit = (HTMLEditorKit) this.getEditorKit();
 		HTMLDocument doc = (HTMLDocument) this.getDocument();
 
 		try {
@@ -73,8 +72,7 @@ public class DetailsContainer extends JEditorPane {
 		html += "</table></body></html>";
 
 		setText(html);
-		
-		//System.out.println("DEBUG HTML: " + html + "\n");
+		getCaret().setDot(0);
 	}
 
 	public void clearContent() {
