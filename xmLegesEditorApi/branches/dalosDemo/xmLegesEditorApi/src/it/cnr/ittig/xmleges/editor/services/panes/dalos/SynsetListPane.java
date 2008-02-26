@@ -3,6 +3,8 @@ package it.cnr.ittig.xmleges.editor.services.panes.dalos;
 import it.cnr.ittig.services.manager.Service;
 import it.cnr.ittig.xmleges.core.services.frame.Pane;
 
+import java.util.Collection;
+
 /**
  * Servizio per la visualizzazione del pannello ........
  * <p>
@@ -22,5 +24,11 @@ import it.cnr.ittig.xmleges.core.services.frame.Pane;
  */
 
 public interface SynsetListPane extends Service, Pane {
+	
+	public void setSynsetListData(Collection synsets);
+	
+	public void setSearchField(String text);
+	
+	public String getSearchType();
 
 }

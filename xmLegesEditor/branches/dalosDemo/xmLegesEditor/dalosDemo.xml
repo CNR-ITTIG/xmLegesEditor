@@ -462,6 +462,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	                		<item action="editor.dalos.switchlang.nl" />
 	                		<item action="editor.dalos.switchlang.es" />																		
 	                </menu>
+	                <separator />
+	                <item action="editor.dalos.check.forward" />
+	                <!--item action="editor.dalos.check.backward" /-->
                 </menu>
                 
                 
@@ -621,6 +624,11 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <item action="editor.revisioni.testoafronte" />
                     <item action="editor.revisioni.messaggio" />
                     <item action="editor.revisioni.emendamenti" />
+                </toolbar>
+                <toolbar name="editor.dalos" floatable="false" rollover="true">
+                    <item action="editor.dalos.showview" />
+		            <item action="editor.dalos.check.forward" />
+	                <!--item action="editor.dalos.check.backward" /-->
                 </toolbar>
                 <toolbar name="frame" floatable="false" rollover="true">
                     <item action="frame.pane.maximize" />

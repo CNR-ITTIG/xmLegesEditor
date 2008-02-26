@@ -153,6 +153,22 @@ implements EventManagerListener, Loggable, Serviceable,
 		//list.setSelectedValue(syn, true);
 	}
 	
+	
+	
+	public void setSynsetListData(Collection synsets) {
+		list.setListData(synsets.toArray());
+		list.setSelectedIndex(0);
+	}
+	
+	
+	public void setSearchField(String text) {
+		textWords.setText(text);
+	}
+	
+	public String getSearchType() {
+		return searchTypes[searchType.getSelectedIndex()];
+	}
+	
 	// ///////////////////////////////////////////////////////// Toolbar Actions
 	/**
 	 * Azione per l'apertura del BugReport.

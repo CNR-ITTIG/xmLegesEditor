@@ -8,24 +8,32 @@ import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.action.ActionManager;
 import it.cnr.ittig.xmleges.core.services.bars.Bars;
+import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
+import it.cnr.ittig.xmleges.core.services.document.DocumentOpenedEvent;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.frame.Frame;
 import it.cnr.ittig.xmleges.core.services.preference.PreferenceManager;
+import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
+import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.editor.services.action.dalos.DalosMenuAction;
 import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
 import it.cnr.ittig.xmleges.editor.services.dalos.util.LangChangedEvent;
 import it.cnr.ittig.xmleges.editor.services.dalos.util.UtilDalos;
+import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetListPane;
 
 import java.awt.event.ActionEvent;
+import java.util.Collection;
 import java.util.Enumeration;
 import java.util.EventObject;
 import java.util.Properties;
+import java.util.Vector;
 
 import javax.swing.AbstractAction;
 
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * <h1>Implementazione del servizio
@@ -69,14 +77,16 @@ public class DalosMenuActionImpl implements DalosMenuAction, Loggable, Serviceab
 	EventManager eventManager;
 	
 	Node activeNode = null;
-
-	ShowViewAction showViewAction;
 	
 	Frame frame;
 	
 	Bars bars;
 	
 	PreferenceManager preferenceManager;
+	
+	DocumentManager documentManager;
+	
+	SelectionManager selectionManager;
 	
 	KbManager kbManager;
 	
@@ -86,6 +96,11 @@ public class DalosMenuActionImpl implements DalosMenuAction, Loggable, Serviceab
 	
 	boolean isDalosShown = false;
 	
+	SynsetListPane synsetListPane;
+	
+	AbstractAction showViewAction = new ShowViewAction();
+	
+	AbstractAction checkAction = new CheckAction(true);
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -102,20 +117,31 @@ public class DalosMenuActionImpl implements DalosMenuAction, Loggable, Serviceab
 		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 		utilDalos = (UtilDalos) serviceManager.lookup(UtilDalos.class);
 		preferenceManager = (PreferenceManager) serviceManager.lookup(PreferenceManager.class);
+		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
+		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
+		synsetListPane = (SynsetListPane) serviceManager.lookup(SynsetListPane.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws java.lang.Exception {
-		showViewAction = new ShowViewAction();
+		
 		actionManager.registerAction("editor.dalos.showview", showViewAction);
 		
 		for(int i=0;i<utilDalos.getDalosLang().length;i++){
 			actionManager.registerAction("editor.dalos.switchlang."+utilDalos.getDalosLang()[i].toLowerCase(), new SwitchLangAction(utilDalos.getDalosLang()[i]));
 		}
 		
+		actionManager.registerAction("editor.dalos.check.forward", checkAction);
+		checkAction.setEnabled(false);
+		//actionManager.registerAction("editor.dalos.check.backward", new CheckAction(false));
+		
+		eventManager.addListener(this, DocumentOpenedEvent.class);
+		eventManager.addListener(this, SelectionChangedEvent.class);
+		
 	}
 
 	public void manageEvent(EventObject event) {
+		checkAction.setEnabled(!documentManager.isEmpty() && selectionManager.getActiveNode()!=null);
 	}
 
 	
@@ -230,5 +256,163 @@ public class DalosMenuActionImpl implements DalosMenuAction, Loggable, Serviceab
 			}
 		}
 	}
+	
+	
+	
+	
+	
+	
+	
+	///////////////////////////////////////////////////////////////////////////////
+	//   
+	//						CHECK LEXICON
+	//
+	///////////////////////////////////////////////////////////////////////////////
+	
+	public Vector getTextNodes(Node node, Vector nodes) {
 
-}
+		if (node.getNodeType() == Node.TEXT_NODE)
+			nodes.add(node);
+
+		if (node.getNodeType() == Node.ELEMENT_NODE) {
+			NodeList list = node.getChildNodes();
+			for (int i = 0; i < list.getLength(); i++) {
+				getTextNodes(list.item(i), nodes);
+			}
+		}
+		return nodes;
+	}
+	
+	
+	private class DalosWord{
+		String word;
+		Node node;
+		int offset;
+		
+		private DalosWord(String word, int offset){
+			this.word = word;
+			this.offset = offset;
+		}
+		
+		private int getOffset(){
+			return this.offset;
+		}
+		
+		private String getWord(){
+			return this.word;
+		}
+		
+	}
+	
+	
+	private class DalosWordNode{
+		String word;
+		Node node;
+		int startOffset;
+		
+		private DalosWordNode(Node node, String word, int startOffset){
+			this.node=node;
+			this.word = word;
+			this.startOffset = startOffset;
+		}
+		
+		private Node getNode(){
+			return this.node;
+		}
+		
+		private int getStartOffset(){
+			return this.startOffset;
+		}
+		
+		private String getWord(){
+			return this.word;
+		}
+		
+	}
+	
+	
+	public DalosWord checkLexicon(String text, int from){
+		if(from<0)
+			from=0;
+//		if(from>0){   // se parto da meta' parola torna indietro all'inizio della parola
+//			from=text.substring(0,from).lastIndexOf(" ");
+//		}
+		text = text.substring(from);
+		String[] tokens = text.split(" ");
+		Collection results = null;
+		for(int i=0; i<tokens.length; i++){
+			results=kbManager.search(tokens[i],synsetListPane.getSearchType(),utilDalos.getGlobalLang());
+			if(tokens[i].trim().length()>0 && results!=null && ! results.isEmpty()){
+				synsetListPane.setSynsetListData(results);
+				synsetListPane.setSearchField(tokens[i]);
+				return new DalosWord(tokens[i],from+text.indexOf(tokens[i]));	
+			}
+		}
+		return null;
+	}
+	
+	public DalosWordNode checkLexicon(Node node, int from) {
+		
+		if (node != null) {
+			Vector childNodes = new Vector();
+			childNodes = getTextNodes(node, childNodes);
+			for (int i = 0; i < childNodes.size(); i++) {
+				DalosWord dalosWord = checkLexicon(((Node) childNodes.get(i)).getNodeValue(),from);
+				if (dalosWord!=null) 
+					return new DalosWordNode((Node) childNodes.get(i),dalosWord.getWord(),dalosWord.getOffset()); 
+			}
+			return (null);
+		}
+		return null;
+	}
+	
+	
+	
+	
+	public class CheckAction extends AbstractAction {
+		boolean forward;
+
+
+
+		public CheckAction(boolean forward) {
+			this.forward = forward;
+		}
+
+		private void check(){
+			//int start = selectionManager.getTextSelectionStart();
+			int end = selectionManager.getTextSelectionEnd();
+			activeNode = selectionManager.getActiveNode();
+			DalosWordNode dwn = checkLexicon(activeNode,end);
+			if(dwn!=null){
+				selectionManager.setActiveNode(this,dwn.getNode());
+				selectionManager.setSelectedText(this,dwn.getNode(),dwn.getStartOffset(), dwn.getStartOffset()+dwn.getWord().length());
+			}else{
+				//System.err.println("end of node reached: WHERE DO I GO FROM HERE ????");
+				Vector childNodes = new Vector();
+				Vector v = getTextNodes(documentManager.getRootElement(), childNodes);
+				int i = v.indexOf(activeNode);
+				Node nextNode = (Node) v.get(i+1);
+				if(nextNode!=null){
+					selectionManager.setActiveNode(this,nextNode);
+					selectionManager.setSelectedText(this, nextNode, 0, 0);
+					check();
+				}	
+			}
+		}
+
+		public void actionPerformed(ActionEvent e) {
+
+//			if(this.forward)
+//				System.err.println("Check Forward");
+//			else
+//				System.err.println("Check BackWard");
+			check();
+		}
+
+	}
+
+		
+	}
+	
+
+

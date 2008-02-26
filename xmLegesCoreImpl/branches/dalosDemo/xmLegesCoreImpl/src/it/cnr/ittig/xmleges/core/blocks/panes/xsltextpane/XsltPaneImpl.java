@@ -256,13 +256,17 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 			} else if (e.isSelectedNodesChanged()) {
 				textPane.selectNode(e.getSelectedNodes());
 			} else if (e.isTextSelectedChanged()) {
-				textPane.selectNode(new Node[] { e.getActiveNode() });
+				//textPane.selectNode(new Node[] { e.getActiveNode() });
 				Element currElem = textPane.getHTMLDocument().getElement(xsltMapper.getIdByDom(e.getActiveNode()));
 				Element[] enclosingSpans = textPane.getEnclosingSpans(currElem);
 				if (enclosingSpans != null) {
 					int startOff = enclosingSpans[0].getStartOffset() + 2;
+					// FIXME: mistero; senza questo lacchezzo la selezione del testo sul pannello rimane indietro; v. XsltFindIterator
 					textPane.selectText(startOff + e.getTextSelectionStart(), startOff + e.getTextSelectionEnd());
-				}
+					textPane.selectNode(new Node[] { e.getActiveNode() });
+					textPane.selectText(startOff + e.getTextSelectionStart(), startOff + e.getTextSelectionEnd());
+				}else
+					textPane.selectNode(new Node[] { e.getActiveNode() });
 			}
 		} else if (event instanceof PaneActivatedEvent) {
 			if (!updated)
