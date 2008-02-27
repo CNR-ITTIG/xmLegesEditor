@@ -464,7 +464,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	                </menu>
 	                <separator />
 	                <item action="editor.dalos.check.forward" />
-	                <!--item action="editor.dalos.check.backward" /-->
+	                <item action="editor.dalos.check.backward" />
                 </menu>
                 
                 
@@ -628,7 +628,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 <toolbar name="editor.dalos" floatable="false" rollover="true">
                     <item action="editor.dalos.showview" />
 		            <item action="editor.dalos.check.forward" />
-	                <!--item action="editor.dalos.check.backward" /-->
+	                <item action="editor.dalos.check.backward" />
                 </toolbar>
                 <toolbar name="frame" floatable="false" rollover="true">
                     <item action="frame.pane.maximize" />

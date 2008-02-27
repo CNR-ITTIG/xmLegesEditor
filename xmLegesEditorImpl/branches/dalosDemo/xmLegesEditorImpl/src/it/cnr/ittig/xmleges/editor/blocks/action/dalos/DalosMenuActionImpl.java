@@ -100,7 +100,9 @@ public class DalosMenuActionImpl implements DalosMenuAction, Loggable, Serviceab
 	
 	AbstractAction showViewAction = new ShowViewAction();
 	
-	AbstractAction checkAction = new CheckAction(true);
+	AbstractAction checkForwardAction = new CheckAction(true);
+	
+	AbstractAction checkBackWardAction = new CheckAction(false);
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -131,9 +133,11 @@ public class DalosMenuActionImpl implements DalosMenuAction, Loggable, Serviceab
 			actionManager.registerAction("editor.dalos.switchlang."+utilDalos.getDalosLang()[i].toLowerCase(), new SwitchLangAction(utilDalos.getDalosLang()[i]));
 		}
 		
-		actionManager.registerAction("editor.dalos.check.forward", checkAction);
-		checkAction.setEnabled(false);
-		//actionManager.registerAction("editor.dalos.check.backward", new CheckAction(false));
+		actionManager.registerAction("editor.dalos.check.forward", checkForwardAction);
+		actionManager.registerAction("editor.dalos.check.backward", checkBackWardAction);
+		checkForwardAction.setEnabled(false);
+		checkBackWardAction.setEnabled(false);
+		
 		
 		eventManager.addListener(this, DocumentOpenedEvent.class);
 		eventManager.addListener(this, SelectionChangedEvent.class);
@@ -141,7 +145,8 @@ public class DalosMenuActionImpl implements DalosMenuAction, Loggable, Serviceab
 	}
 
 	public void manageEvent(EventObject event) {
-		checkAction.setEnabled(!documentManager.isEmpty() && selectionManager.getActiveNode()!=null);
+		checkForwardAction.setEnabled(!documentManager.isEmpty() && selectionManager.getActiveNode()!=null);
+		checkBackWardAction.setEnabled(!documentManager.isEmpty() && selectionManager.getActiveNode()!=null);
 	}
 
 	
@@ -287,15 +292,15 @@ public class DalosMenuActionImpl implements DalosMenuAction, Loggable, Serviceab
 	private class DalosWord{
 		String word;
 		Node node;
-		int offset;
+		int startOffset;
 		
-		private DalosWord(String word, int offset){
+		private DalosWord(String word, int startOffset){
 			this.word = word;
-			this.offset = offset;
+			this.startOffset = startOffset;
 		}
 		
-		private int getOffset(){
-			return this.offset;
+		private int getStartOffset(){
+			return this.startOffset;
 		}
 		
 		private String getWord(){
@@ -331,12 +336,13 @@ public class DalosMenuActionImpl implements DalosMenuAction, Loggable, Serviceab
 	}
 	
 	
-	public DalosWord checkLexicon(String text, int from){
+	public DalosWord checkLexiconFW(String text, int from){
 		if(from<0)
 			from=0;
 //		if(from>0){   // se parto da meta' parola torna indietro all'inizio della parola
 //			from=text.substring(0,from).lastIndexOf(" ");
 //		}
+		int offset = from;
 		text = text.substring(from);
 		String[] tokens = text.split(" ");
 		Collection results = null;
@@ -345,21 +351,23 @@ public class DalosMenuActionImpl implements DalosMenuAction, Loggable, Serviceab
 			if(tokens[i].trim().length()>0 && results!=null && ! results.isEmpty()){
 				synsetListPane.setSynsetListData(results);
 				synsetListPane.setSearchField(tokens[i]);
-				return new DalosWord(tokens[i],from+text.indexOf(tokens[i]));	
+				return new DalosWord(tokens[i],offset);//from+text.indexOf(tokens[i]));
 			}
+			offset= offset+tokens[i].length()+1;  // 1 = token separator length
 		}
 		return null;
 	}
 	
-	public DalosWordNode checkLexicon(Node node, int from) {
+	
+	public DalosWordNode checkLexiconFW(Node node, int from) {
 		
 		if (node != null) {
 			Vector childNodes = new Vector();
 			childNodes = getTextNodes(node, childNodes);
 			for (int i = 0; i < childNodes.size(); i++) {
-				DalosWord dalosWord = checkLexicon(((Node) childNodes.get(i)).getNodeValue(),from);
+				DalosWord dalosWord = checkLexiconFW(((Node) childNodes.get(i)).getNodeValue(),from);
 				if (dalosWord!=null) 
-					return new DalosWordNode((Node) childNodes.get(i),dalosWord.getWord(),dalosWord.getOffset()); 
+					return new DalosWordNode((Node) childNodes.get(i),dalosWord.getWord(),dalosWord.getStartOffset()); 
 			}
 			return (null);
 		}
@@ -367,6 +375,59 @@ public class DalosMenuActionImpl implements DalosMenuAction, Loggable, Serviceab
 	}
 	
 	
+	///////////////////////////////////////////////////////////////////////////////
+	//   
+	//						BACKWARD
+	//
+	///////////////////////////////////////////////////////////////////////////////
+	
+	
+	public DalosWordNode checkLexiconBW(Node node, int from) {
+		
+		if (node != null) {
+				DalosWord dalosWord = checkLexiconBW(node.getNodeValue(),from);
+				if (dalosWord!=null) 
+					return new DalosWordNode(node,dalosWord.getWord(),dalosWord.getStartOffset()); 
+			
+			return (null);
+		}
+		return null;
+	}
+	
+	
+	public DalosWord checkLexiconBW(String text, int from){
+		if(from<0)
+			from=0;
+
+		int offset = from;
+		text = text.substring(0,from);
+		
+		
+		if(from!=text.length() || text.lastIndexOf(" ")==from-1)    // parti dal primo spazio non finale
+			offset = text.lastIndexOf(" ");
+		
+		String[] tokens = text.split(" ");
+		Collection results = null;
+		for(int i=tokens.length-1; i>=0; i--){
+			//System.err.println("analyzing token "+i);
+			//System.err.println("offset BW ="+offset);
+			results=kbManager.search(tokens[i],synsetListPane.getSearchType(),utilDalos.getGlobalLang());
+			if(tokens[i].trim().length()>0 && results!=null && ! results.isEmpty()){
+				//System.err.println("found word BW "+tokens[i]);
+				synsetListPane.setSynsetListData(results);
+				synsetListPane.setSearchField(tokens[i]);
+				return new DalosWord(tokens[i],offset-tokens[i].length());
+			}
+			offset= offset-tokens[i].length()-1;  // 1 = token separator length
+		}
+		return null;
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////
+	//   
+	//						
+	//
+	///////////////////////////////////////////////////////////////////////////////
 	
 	
 	public class CheckAction extends AbstractAction {
@@ -377,12 +438,25 @@ public class DalosMenuActionImpl implements DalosMenuAction, Loggable, Serviceab
 		public CheckAction(boolean forward) {
 			this.forward = forward;
 		}
+		
+		
+		
+		public void actionPerformed(ActionEvent e) {
 
-		private void check(){
+			if(this.forward)
+				checkForward();
+			else
+				checkBackWard();	
+			
+		}
+		
+
+		private void checkForward(){
+			// NON FUNZIONA IL CHECK DI TESTO SELEZIONATO
 			//int start = selectionManager.getTextSelectionStart();
 			int end = selectionManager.getTextSelectionEnd();
 			activeNode = selectionManager.getActiveNode();
-			DalosWordNode dwn = checkLexicon(activeNode,end);
+			DalosWordNode dwn = checkLexiconFW(activeNode,end);
 			if(dwn!=null){
 				selectionManager.setActiveNode(this,dwn.getNode());
 				selectionManager.setSelectedText(this,dwn.getNode(),dwn.getStartOffset(), dwn.getStartOffset()+dwn.getWord().length());
@@ -391,22 +465,42 @@ public class DalosMenuActionImpl implements DalosMenuAction, Loggable, Serviceab
 				Vector childNodes = new Vector();
 				Vector v = getTextNodes(documentManager.getRootElement(), childNodes);
 				int i = v.indexOf(activeNode);
-				Node nextNode = (Node) v.get(i+1);
-				if(nextNode!=null){
-					selectionManager.setActiveNode(this,nextNode);
-					selectionManager.setSelectedText(this, nextNode, 0, 0);
-					check();
-				}	
+				if(i<v.size()){
+					Node nextNode = (Node) v.get(i+1);
+					if(nextNode!=null){
+						selectionManager.setActiveNode(this,nextNode);
+						selectionManager.setSelectedText(this, nextNode, 0, 0);
+						checkForward();
+					}	
+				}
 			}
 		}
-
-		public void actionPerformed(ActionEvent e) {
-
-//			if(this.forward)
-//				System.err.println("Check Forward");
-//			else
-//				System.err.println("Check BackWard");
-			check();
+		
+		
+		private void checkBackWard(){
+			// NON FUNZIONA IL CHECK DI TESTO SELEZIONATO
+			int start = selectionManager.getTextSelectionStart();
+			//int end = selectionManager.getTextSelectionEnd();
+			activeNode = selectionManager.getActiveNode();
+			DalosWordNode dwn = checkLexiconBW(activeNode,start);
+			if(dwn!=null){
+				selectionManager.setActiveNode(this,dwn.getNode());
+				selectionManager.setSelectedText(this,dwn.getNode(),dwn.getStartOffset(), dwn.getStartOffset()+dwn.getWord().length());
+			}else{
+				//System.err.println("end of node reached: WHERE DO I GO FROM HERE ????");
+				Vector childNodes = new Vector();
+				Vector v = getTextNodes(documentManager.getRootElement(), childNodes);
+				int i = v.indexOf(activeNode);
+				if(i>0){
+					Node nextNode = (Node) v.get(i-1);
+					if(nextNode!=null){
+						selectionManager.setActiveNode(this,nextNode);
+						int end = nextNode.getNodeValue().length()-1;
+						selectionManager.setSelectedText(this, nextNode, end, end);
+						checkBackWard();
+					}
+				}
+			}
 		}
 
 	}
