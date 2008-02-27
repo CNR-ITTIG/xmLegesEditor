@@ -16,6 +16,8 @@ import it.cnr.ittig.xmleges.editor.services.dalos.objects.TreeOntoClass;
 import it.cnr.ittig.xmleges.editor.services.dalos.util.UtilDalos;
 
 import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -373,17 +375,27 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		return uri.substring(start, start + 2);		
 	}
 
-	private void copyDalosInTemp(){
+	private void copyDalosInTemp() {
+			
+		// new URI("--").getPath()   normalizza i nomi con spazi in windows
 		
 		// common
-		UtilFile.copyDirectoryInTemp(getClass().getResource("common").getFile(),"dalos");
+		try {
+			UtilFile.copyDirectoryInTemp(new URI(getClass().getResource("common").getFile()).getPath(),"dalos");
+		} catch (URISyntaxException e) {
+			logger.error(e.getMessage());
+		}
 		
 		// lang
 		String[] dalosLang = utilDalos.getDalosLang();
 		
 		for(int i=0; i<dalosLang.length; i++){
-			if(!UtilFile.copyDirectoryInTemp(getClass().getResource(dalosLang[i]).getFile(),"dalos/"+dalosLang[i]))
-				logger.error("FAILED TO COPY "+dalosLang[i]);
+			try {
+				if(!UtilFile.copyDirectoryInTemp(new URI(getClass().getResource(dalosLang[i]).getFile()).getPath(),"dalos"+File.separator+dalosLang[i]))
+					System.err.println("FAILED TO COPY "+dalosLang[i]);
+			} catch (URISyntaxException e) {
+				logger.error(e.getMessage());
+			}
 		}		
 	}	
 

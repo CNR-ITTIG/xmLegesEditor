@@ -550,11 +550,12 @@ public class UtilFile {
 	 */
 	public static boolean copyDirectory(File from, File to, String[] filter) {
 		
-		
 		if (from == null)
 			return false;
+		
 		if (!from.exists())
-			return true;
+			return false;
+		
 		if (!from.isDirectory())
 			return false;
 
@@ -629,6 +630,14 @@ public class UtilFile {
 	      return;
 	    }
 	}
+	
+	
+	private static ZipEntry convertZipEntryFileSeparator(ZipEntry ze){
+		String s = ze.getName();
+		if ( File.separatorChar != '/')
+		  s = s.replace('/', File.separatorChar);
+		return new ZipEntry(s);
+	}
 
 	
 	/**
@@ -639,23 +648,23 @@ public class UtilFile {
 
 		byte[] b = new byte[8092];  
 
-		String zipName = e.getName();
-		if (zipName.startsWith("/")) {
+		String zipName = convertZipEntryFileSeparator(e).getName();
+		if (zipName.startsWith(File.separator)) {
 			System.out.println("Ignoring absolute paths");    
 			zipName = zipName.substring(1);
 		}
 
-		zipName=toDir+'/'+zipName;
+		zipName=toDir+File.separatorChar+zipName;
 
 		// if a directory, just return. We mkdir for every file,
 		// since some widely-used Zip creators don't put out
 		// any directory entries, or put them in the wrong place.
-		if (zipName.endsWith("/")) {
+		if (zipName.endsWith(File.separator)) {
 			return;
 		}
 		// Else must be a file; open the file for output
 		// Get the directory part.
-		int ix = zipName.lastIndexOf('/');
+		int ix = zipName.lastIndexOf(File.separatorChar);
 		if (ix > 0) {
 			String dirName = zipName.substring(0, ix);
 			if (!dirsMade.contains(dirName)) {
