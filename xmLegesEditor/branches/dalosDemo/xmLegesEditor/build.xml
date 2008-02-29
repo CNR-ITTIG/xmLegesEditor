@@ -66,6 +66,7 @@
 		<include name="**/*.sh" />
 		<include name="**/*.dar" />
 		<include name="**/*.owl" />
+		<include name="**/*.zip" />
 	</patternset>
 
 	<target name="init">
