@@ -5,11 +5,22 @@
 
 package it.cnr.ittig.xmleges.core.blocks.schema;
 
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
+import it.cnr.ittig.xmleges.core.util.lang.Queue;
+import it.cnr.ittig.xmleges.core.util.lang.UtilLang;
+
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Stack;
 import java.util.Vector;
+
+import org.eclipse.xsd.XSDParticle.DFA.State;
+import org.eclipse.xsd.XSDParticle.DFA.Transition;
+import org.w3c.dom.Node;
 
 public class ContentGraph implements Serializable {
 
@@ -274,6 +285,135 @@ public class ContentGraph implements Serializable {
 	 */
 	public Node getNode(String id) {
 		return (Node) nodes_table.get(id);
+	}
+	
+
+	/**
+	 * Ritorna lo shortest path fra due nodi o <code>null</code> se non esiste nessun
+	 * path
+	 */
+	private Vector reach(Node from, Node to) {
+		HashMap visited = new HashMap(); // tabella dei nodi visitati con le loro paths
+
+		Queue tovisit_nodes = new Queue(); // nodi da visitare
+		Queue tovisit_paths = new Queue(); // path ai nodi da visitare
+
+		// initialize the search
+		tovisit_nodes.push(from);
+		tovisit_paths.push(new Vector());
+
+		// perform a breadth first search until all the graph have
+		// been visited or the destination have been reached
+		while (!tovisit_nodes.empty()) {
+			// visit the top of the stack
+			Node src = (Node) tovisit_nodes.pop();
+			Vector path = (Vector) tovisit_paths.pop();
+
+			// if the visiting nodes is the destination stop
+			if (src == to)
+				return path;
+
+			// if the visiting node has never been visited or
+			// its path is shorter than a preceding one, visit
+			// its followers
+			String name = src.getName();
+			Vector last_path = (Vector) visited.get(name);
+			if (last_path == null || last_path.size() > path.size()) {
+				visited.put(name, path);
+
+				// schedule the following nodes for a visit
+				
+				for (int i = 0; i<src.getNoEdges();i++) {
+					
+					Node dest = src.getDestination(i);
+					if (dest != null) {
+						Vector new_path = UtilLang.append(path, src.getEdgeName(i));
+						tovisit_nodes.push(dest);
+						tovisit_paths.push(new_path);
+					}
+				}
+			}
+		}
+		return null;
+	}
+
+
+	/**
+	 * Allinea una sequenza di string con l'automa, con la possibilita' di inserire dei
+	 * gaps fra i token, ritorna l'allineamento piu' corto
+	 * 
+	 * @param nav iteratore per navigare sulla sequenza di string
+	 * @param startFrom collezione di nodi da cui iniziare l'allineamento
+	 * @param paths collezione delle path dal nodo iniziale dell'automa fino ai nodi start
+	 * @return <code>null</code> se non esiste un allineamento, altrimenti la sequenza
+	 *         di nodi che allinea con l'automa
+	 * @throws RulesManagerException
+	 */
+	public Vector getGappedAlignment(Iterator nav, Vector startFrom, Vector paths) throws RulesManagerException {
+		if (!nav.hasNext()) {
+			Vector shortest_path = null;
+
+			// ottiene lo shortest path verso uno dei nodi terminali
+			for (int i = 0; i < startFrom.size(); i++) {
+				Vector end_path = null;
+				Node start = (Node) startFrom.elementAt(i);
+				if (start.name.equals("E")) {
+					// se l'ultimo nodo e' un nodo terminale
+					// il path e' vuoto
+					end_path = new Vector();
+				} else {
+					// cerca il path piu' corto verso un nodo terminale
+					
+						Node end = getLast();
+						Vector reach_path = reach(start, end);
+						if (reach_path != null && (end_path == null || end_path.size() > reach_path.size())) {
+							end_path = reach_path;
+						}
+					
+				}
+
+				// controlla se il path trovato e' piu' corto di quello corrente
+				Vector path = (Vector) paths.elementAt(i);
+				path.addAll(end_path);
+				if (shortest_path == null || shortest_path.size() > path.size()) {
+					shortest_path = path;
+				}
+			}
+			return shortest_path;
+		}
+
+		String token = (String) nav.next();
+
+		// cerca tutti i nodi che riconoscono il token
+		Vector new_startFrom = new Vector();
+		Vector new_paths = new Vector();
+		for (Iterator id = nodes_table.values().iterator(); id.hasNext();) {
+			Node src = (Node) id.next();
+			Node dest = src.getDestination(token);
+			if (dest != null) {
+				// verifica che il nodo attuale sia raggiungible
+				// dall'insieme dei nodi di partenza
+				for (int i = 0; i < startFrom.size(); i++) {
+					Node start = (Node) startFrom.elementAt(i);
+					Vector path = (Vector) paths.elementAt(i);
+
+					Vector reach_path = reach(start, src);
+					if (reach_path != null) {
+						// aggiunge il nodo al nuovo insieme dei nodi di partenza
+						new_startFrom.addElement(dest);
+
+						// aggiunge la path all'insieme delle paths dal nodo iniziale
+						Vector new_path = new Vector();
+						new_path.addAll(path);
+						new_path.addAll(reach_path);
+						new_path.addElement(token);
+						new_paths.addElement(new_path);
+					}
+				}
+			}
+		}
+
+		return ((new_startFrom.size() == 0) ? null : getGappedAlignment(nav, new_startFrom, new_paths));
 	}
 
 	/**
