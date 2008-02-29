@@ -12,8 +12,10 @@
 package it.cnr.ittig.xmleges.core.blocks.schema;
 
 import it.cnr.ittig.services.manager.Logger;
+import it.cnr.ittig.xmleges.core.blocks.dtd.DFSA;
 import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
 import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
+import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
 import it.cnr.ittig.xmleges.core.util.lang.UtilLang;
 
@@ -29,6 +31,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Vector;
 
+import org.eclipse.xsd.XSDParticle;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -38,281 +41,141 @@ import org.w3c.dom.NodeList;
  */
 public class SchemaRulesManagerImpl implements RulesManager {
 
-	Logger logger;
+	private static ContentGraph.Node extract_minimum(Vector queue) {
+		int min_length=Integer.MAX_VALUE;
+		int min_node_index=-1;
+		for(int i=0; i<queue.size();i++){
+			int current_length = ((ContentGraph.Node)queue.elementAt(i)).visit_length;
+			if(current_length<min_length){
+				min_length=current_length;
+				min_node_index=i;
+			}
+		}
+		if (min_length<Integer.MAX_VALUE){
+			ContentGraph.Node toRemove=(ContentGraph.Node) queue.elementAt(min_node_index);
+			queue.removeElementAt(min_node_index);
+			return toRemove;
+		}
 
-	// //////////////////////////////////////////////////// LogEnabled Interface
-	public void enableLogging(Logger logger) {
-		this.logger = logger;
+		return null;
+	}
+
+	/**
+	 * Controlla se il ContentGraph contiene un contenuto di default: un cammino fatto
+	 * solo di elementi di testo e transizioni vuote dal primo all'ultimo nodo
+	 * 
+	 * @param graph il ContentGraph
+	 * @return <code>Integer.MAX_VALUE</code> se non esiste un cammino, altrimenti
+	 *         ritorna la lunghezza del cammino minimo
+	 */
+	static protected Vector getDijkstraShortestPath(ContentGraph graph) {
+		ContentGraph.Node first = graph.getFirst();
+		ContentGraph.Node last = graph.getLast();
+
+		// init visit
+		int distance=Integer.MAX_VALUE;
+		Vector predecessors=new Vector();
+
+		//the set of unsettled vertices
+		Vector queue = new Vector();
+		//the set of settled vertices, the vertices whose shortest distances from the source have been found
+		Vector settledNodes = new Vector();
+
+		for (Iterator i = graph.visitNodes(); i.hasNext();)
+			((ContentGraph.Node) i.next()).resetVisit();
+
+
+		queue.add(first);
+		first.setVisit(0, "", null);
+
+		// visit the graph
+		while (queue.size() > 0) {
+			// pop first element from queue
+			ContentGraph.Node tovisit = extract_minimum(queue);
+			settledNodes.add(tovisit);
+
+			// for all the outgoing edges relax_neighbours(toVisit)
+			for (int i = 0; i < tovisit.getNoEdges(); i++) {
+				// check if the edge is visitable
+				Object edge = tovisit.getEdge(i);
+				String edgename = tovisit.getEdgeName(i);
+				ContentGraph.Node destination = tovisit.getDestination(i);
+				if(!settledNodes.contains(destination)){
+					int visit_length = tovisit.getVisitLength();
+					if (destination.getVisitLength() > visit_length+1) {
+						// push the next node of the path in the queue
+						destination.setVisit(visit_length+1, edge, tovisit);
+						queue.add(destination);
+						predecessors.add(tovisit);
+					}
+				}
+
+			}
+		}
+
+		return predecessors;
 	}
 
 	
-	protected boolean pre_check = false;
-	
-	
-	protected UtilXsd utilXsd;
+	/**
+	 * Restituisce una stringa in formato XML a partire dal contenuto di default
+	 * dell'elemento
+	 * 
+	 * @param graph il ContentGraph dell'elemento
+	 */
+	static protected Vector getMinPath(ContentGraph graph) {
+
+		Vector path=new Vector(2);
+		// get visit path
+		Vector nodePath = new Vector();
+		Vector edgePath = new Vector();
+		ContentGraph.Node nav = graph.getLast();
+		while (nav != null) {
+			Object edge = nav.getVisitEdge();
+			ContentGraph.Node before = nav.getVisitBefore();
+			if (before != null && !edge.equals("#EPS") && !edge.equals("#PCDATA")){ //instanceof ContentGraph){//non lo visualizza l'eps
+				edgePath.add(0, edge);
+				nodePath.add(0,nav);
+			}
+			nav = before;
+		}
+
+		path.add(0,nodePath);
+		path.add(1,edgePath);
+		return path;
+	}
 	
 	
 	/**
-	 * Tabella hash contenente le regole per l'interrogazione sotto-forma di automi
-	 * deterministici. Ogni regola &egrave associata ad un elemento.
+	 * Restituisce una stringa in formato XML a partire dal contenuto di default
+	 * dell'elemento
+	 * 
+	 * @param graph il ContentGraph dell'elemento
 	 */
-	protected HashMap rules;
-	protected HashMap elemDeclNames;
-	
-	/**
-	 * Tabella hash dei possibili contenuti alternativi dei vari elementi. Ogni valore
-	 * della tabella hash &egrave costituito da un vettore di stringhe formate da nomi di
-	 * elementi separati da virgole che rappresentano le possibili alternative. La tabella
-	 * hash &egrave indirizzata dai nomi degli elementi.
-	 */
-	protected HashMap alternative_contents;
-	
-	/**
-	 * Tabella hash degli attributi associati agli elementi. La tabella hash &egrave
-	 * indirizzata dai nomi degli elementi. Ogni valore della tabella hash &grave
-	 * costituito da una seconda tabella hash che contiene tutti gli attributi
-	 * dell'elemento associato. Questa seconda tabella hash &egrave indirizzata dai nomi
-	 * degli attibuti dell'elemento. Ogni valore di questa seconda tabella &egrave
-	 * costituito da un'istanza della classe AttributeDecl, e definisce l'attributo
-	 * specifico.
-	 */
-	protected HashMap attributes;
+	static protected String getXMLContent(ContentGraph graph) {
 
-
-
-	public void createRulesManager(String extension) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	
-	///////////////////////////////////////////////////////////////////////
-	//
-	//				 INIZIALIZZAZIONE     SCHEMA
-	//
-	
-	
-	// ------------ COSTRUTTORI --------------------
-
-	public SchemaRulesManagerImpl(Logger logger) {
-		enableLogging(logger);
-		
-		rules = new HashMap();
-		elemDeclNames = new HashMap();
-		alternative_contents = new HashMap();
-		attributes = new HashMap();
-			
-		utilXsd = new UtilXsd(this);		
-	}
-	
-
-	public void clear() {
-		rules = new HashMap();
-		elemDeclNames = new HashMap();
-		alternative_contents = new HashMap();
-		attributes = new HashMap();
-	}
-
-	// ------------ INIZIALIZZAZIONE DELLE REGOLE --------------------
-
-//	public void loadRules(String filename) {
-//		File xml_file = new File(filename);
-//		loadRules(xml_file);
-//	}
-	
-	
-	public void loadRules(String schemaPath) {
-		clear();
-		utilXsd.loadRules(schemaPath);
-		
-	}
-	
-	
-	public void loadRules(String filename, String schemaPath) {
-		//logger.info("START loading rules from SCHEMA");
-		
-		String key = null;
-		File xml_file = new File(filename);
-		
-		if (schemaPath.startsWith(".")) // crea path name assoluto
-			schemaPath = xml_file.getParent().concat(File.separator+schemaPath.substring(2));
-		
-		File schema_file = UtilFile.getGrammarFile(schemaPath);
-		
-		
-		
-//		java.io.NotSerializableException: org.eclipse.xsd.impl.XSDParticleImpl$XSDNFA
-		
-//		try {
-//			key = UtilLang.bytesToHexString(UtilFile.calculateMD5(schema_file));
-//			//logger.debug("key for " + schemaPath + " = " + key.toString());
-//		} catch (Exception ex) {
-//			logger.error(ex.getMessage(), ex);
-//		}
-//		
-//		
-//		
-//		String md5Path = new String("schemamd5");
-//		new File(md5Path).mkdir();
-//		File rulesMap = new File(md5Path + File.separator, key + "_rules");
-//		File elemDeclMap = new File(md5Path + File.separator, key + "_elemDecl");
-//		File alternativesMap = new File(md5Path, key + "_alternatives");
-//		File attributesMap = new File(md5Path, key + "_attributes");
-//
-//		if (key != null && rulesMap.exists() && elemDeclMap.exists() && alternativesMap.exists() && attributesMap.exists()) {
-//			loadRulesFromCachedMap(rulesMap, elemDeclMap, alternativesMap, attributesMap);
-//		} else {
-//			clear();
-//			utilXsd.loadRules(schema_file.getAbsolutePath());
-//			saveRulesOnCachedMap(rulesMap, elemDeclMap, alternativesMap, attributesMap);
-//		}
-		
-        // OLD (Uncached)
-		// clear old rules
-		clear();
-		utilXsd.loadRules(schema_file.getAbsolutePath());
-
-	}
-	
-	
-
-	
-	public void loadRules(File xml_file) {
-		// TODO dal file xml estrarre lo schemaURL dall'intestazione		
-	}
-	
-
-	
-	
-	
-	// lettura delle regole dalle mappe salvate su file
-
-	private void loadRulesFromCachedMap(File rulesMap, File elemDeclMap, File alternativesMap, File attributesMap) {
-				
-		logger.info("START loading rules from files");
-
-		FileInputStream fis = null;
-		ObjectInputStream in = null;
-
-		// reading rules
-		try {
-			fis = new FileInputStream(rulesMap);
-			in = new ObjectInputStream(new BufferedInputStream(fis));
-			rules = (HashMap) in.readObject();
-			in.close();
-		} catch (Exception ex) {
-			logger.error("Error reading rules map " + ex.getMessage(), ex);
-		}
-		
-		// reading elemDeclNames
-		try {
-			fis = new FileInputStream(elemDeclMap);
-			in = new ObjectInputStream(new BufferedInputStream(fis));
-			elemDeclNames = (HashMap) in.readObject();
-			in.close();
-		} catch (Exception ex) {
-			logger.error("Error reading elemDeclNames map " + ex.getMessage(), ex);
+		// get visit path
+		Vector path = new Vector();
+		ContentGraph.Node nav = graph.getLast();
+		while (nav != null) {
+			Object edge = nav.getVisitEdge();
+			ContentGraph.Node before = nav.getVisitBefore();
+			if (before != null && edge instanceof ContentGraph)
+				path.add(0, edge);
+			nav = before;
 		}
 
-		// reading alternative_contents
-		try {
-			fis = new FileInputStream(alternativesMap);
-			in = new ObjectInputStream(new BufferedInputStream(fis));
-			alternative_contents = (HashMap) in.readObject();
-			in.close();
-		} catch (Exception ex) {
-			logger.error("Error reading alternatives map " + ex.getMessage(), ex);
-		}
-
-		// reading attributes
-		try {
-			fis = new FileInputStream(attributesMap);
-			in = new ObjectInputStream(new BufferedInputStream(fis));
-			attributes = (HashMap) in.readObject();
-			in.close();
-		} catch (Exception ex) {
-			logger.error("Error reading attributes map " + ex.getMessage(), ex);
-		}
-
-		logger.info("END loading rules from files");
-
-	}
-
-	// scrittura delle regole su mappe salvate su file
-
-	private void saveRulesOnCachedMap(File rulesMap, File elemDeclMap, File alternativesMap, File attributesMap) {
+		// get xml content
+		String output = "<" + graph.getName() + ">";
+		for (Iterator i = path.iterator(); i.hasNext();)
+			//in questo modo il path non è esploso
+			output += getXMLContent((ContentGraph) i.next());
+		output = output + "</" + graph.getName() + ">";
 		
-		FileOutputStream fos = null;
-		ObjectOutputStream out = null;
-
-		// saving rules
-		try {
-			fos = new FileOutputStream(rulesMap);
-			out = new ObjectOutputStream(new BufferedOutputStream(fos));
-			out.writeObject(rules);
-			out.close();
-		} catch (Exception ex) {
-			logger.error("Error saving rules map " + ex.getMessage(), ex);
-		}
-		
-		// saving elemDeclNames
-		try {
-			fos = new FileOutputStream(elemDeclMap);
-			out = new ObjectOutputStream(new BufferedOutputStream(fos));
-			out.writeObject(elemDeclNames);
-			out.close();
-		} catch (Exception ex) {
-			logger.error("Error saving elemDeclNames map " + ex.getMessage(), ex);
-		}
-
-
-		// saving alternative_contents
-		try {
-			fos = new FileOutputStream(alternativesMap);
-			out = new ObjectOutputStream(new BufferedOutputStream(fos));
-			out.writeObject(alternative_contents);
-			out.close();
-		} catch (Exception ex) {
-			logger.error("Error saving alternatives map " + ex.getMessage(), ex);
-		}
-
-		// saving attributes
-		try {
-			fos = new FileOutputStream(attributesMap);
-			out = new ObjectOutputStream(new BufferedOutputStream(fos));
-			out.writeObject(attributes);
-			out.close();
-		} catch (Exception ex) {
-			logger.error("Error saving attributes map " + ex.getMessage(), ex);
-		}	
-	}
-	
-	//
-	//
-	//
-	////////////////////   FINE   INIZIALIZZAZIONE SCHEMA   /////////////////////////
-	
-	
-	
-	public boolean assessAttribute(Node node, String attributeName){
-		return utilXsd.assessAttribute(node,attributeName);
+		return output;
 	}
 	
 	
-	public boolean assess(Node node){
-		return utilXsd.assess(node);
-	}
-	
-	
-	
-	
-	
-	//////////////////////////////////////////////////////////////////////////////////
-	//
-	// 				 GESTIONE CONTENUTO DI DEFAULT DI UN ELEMENTO
-	//
-	//
-
 	/**
 	 * Controlla se il ContentGraph contiene un contenuto di default: un cammino fatto
 	 * solo di elementi di testo e transizioni vuote dal primo all'ultimo nodo
@@ -371,64 +234,159 @@ public class SchemaRulesManagerImpl implements RulesManager {
 		
 		return last.getVisitLength();
 	}
+	Logger logger;
+	
+	protected boolean pre_check = false;
+	
+	protected UtilXsd utilXsd;
 
 
 
 	/**
-	 * Restituisce una stringa in formato XML a partire dal contenuto di default
-	 * dell'elemento
-	 * 
-	 * @param graph il ContentGraph dell'elemento
+	 * Tabella hash contenente le regole per l'interrogazione sotto-forma di automi
+	 * deterministici. Ogni regola &egrave associata ad un elemento.
 	 */
-	static protected String getXMLContent(ContentGraph graph) {
+	protected HashMap rules;
+	
+	
+	///////////////////////////////////////////////////////////////////////
+	//
+	//				 INIZIALIZZAZIONE     SCHEMA
+	//
+	
+	
+	// ------------ COSTRUTTORI --------------------
 
-		// get visit path
-		Vector path = new Vector();
-		ContentGraph.Node nav = graph.getLast();
-		while (nav != null) {
-			Object edge = nav.getVisitEdge();
-			ContentGraph.Node before = nav.getVisitBefore();
-			if (before != null && edge instanceof ContentGraph)
-				path.add(0, edge);
-			nav = before;
-		}
+	protected HashMap elemDeclNames;
+	
 
-		// get xml content
-		String output = "<" + graph.getName() + ">";
-		for (Iterator i = path.iterator(); i.hasNext();)
-			//in questo modo il path non è esploso
-			output += getXMLContent((ContentGraph) i.next());
-		output = output + "</" + graph.getName() + ">";
+	/**
+	 * Tabella hash dei possibili contenuti alternativi dei vari elementi. Ogni valore
+	 * della tabella hash &egrave costituito da un vettore di stringhe formate da nomi di
+	 * elementi separati da virgole che rappresentano le possibili alternative. La tabella
+	 * hash &egrave indirizzata dai nomi degli elementi.
+	 */
+	protected HashMap alternative_contents;
+
+	// ------------ INIZIALIZZAZIONE DELLE REGOLE --------------------
+
+//	public void loadRules(String filename) {
+//		File xml_file = new File(filename);
+//		loadRules(xml_file);
+//	}
+	
+	
+	/**
+	 * Tabella hash degli attributi associati agli elementi. La tabella hash &egrave
+	 * indirizzata dai nomi degli elementi. Ogni valore della tabella hash &grave
+	 * costituito da una seconda tabella hash che contiene tutti gli attributi
+	 * dell'elemento associato. Questa seconda tabella hash &egrave indirizzata dai nomi
+	 * degli attibuti dell'elemento. Ogni valore di questa seconda tabella &egrave
+	 * costituito da un'istanza della classe AttributeDecl, e definisce l'attributo
+	 * specifico.
+	 */
+	protected HashMap attributes;
+	
+	
+	public SchemaRulesManagerImpl(Logger logger) {
+		enableLogging(logger);
 		
-		return output;
+		rules = new HashMap();
+		elemDeclNames = new HashMap();
+		alternative_contents = new HashMap();
+		attributes = new HashMap();
+			
+		utilXsd = new UtilXsd(this);		
+	}
+	
+	
+
+	
+	public boolean assess(Node node){
+		return utilXsd.assess(node);
+	}
+	
+
+	
+	
+	
+	// lettura delle regole dalle mappe salvate su file
+
+	public boolean assessAttribute(Node node, String attributeName){
+		return utilXsd.assessAttribute(node,attributeName);
 	}
 
+	// scrittura delle regole su mappe salvate su file
+
+	public void clear() {
+		rules = new HashMap();
+		elemDeclNames = new HashMap();
+		alternative_contents = new HashMap();
+		attributes = new HashMap();
+	}
+	
+	//
+	//
+	//
+	////////////////////   FINE   INIZIALIZZAZIONE SCHEMA   /////////////////////////
+	
+	
+	
 	/**
-	 * Restituisce una stringa in formato XML a partire dal contenuto di default
-	 * dell'elemento
+	 * Trasforma la rappresentazione stringa di un contenuto alternativo nella sua
+	 * rappresentazione come ContentGraph
 	 * 
-	 * @param graph il ContentGraph dell'elemento
+	 * @param alternative un contenuto alternativo di un elemento
+	 * @return la sua rappresentazione come ContentGraph
 	 */
-	static protected Vector getMinPath(ContentGraph graph) {
+	protected ContentGraph createAlternativeContentGraph(String elem_name, String alternative) {
 
-		Vector path=new Vector(2);
-		// get visit path
-		Vector nodePath = new Vector();
-		Vector edgePath = new Vector();
-		ContentGraph.Node nav = graph.getLast();
-		while (nav != null) {
-			Object edge = nav.getVisitEdge();
-			ContentGraph.Node before = nav.getVisitBefore();
-			if (before != null && !edge.equals("#EPS") && !edge.equals("#PCDATA")){ //instanceof ContentGraph){//non lo visualizza l'eps
-				edgePath.add(0, edge);
-				nodePath.add(0,nav);
-			}
-			nav = before;
+		ContentGraph graph = new ContentGraph(elem_name);
+		String[] tokens = alternative.split(","); // regex for the comma mark
+
+		ContentGraph.Node src = graph.getFirst();
+		for (int i = 0; i < tokens.length; i++) {
+			ContentGraph.Node dst = graph.addNode();
+			src.addEdge(tokens[i], dst);
+			src = dst;
 		}
+		src.addEdge("#EPS", graph.getLast());
 
-		path.add(0,nodePath);
-		path.add(1,edgePath);
-		return path;
+		return graph;
+	}
+	
+	
+	public void createRulesManager(String extension) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	
+	
+	
+	//////////////////////////////////////////////////////////////////////////////////
+	//
+	// 				 GESTIONE CONTENUTO DI DEFAULT DI UN ELEMENTO
+	//
+	//
+
+	/**
+	 * Crea un ContentGraph che rappresenta un elemento di testo
+	 * 
+	 * @param elem_name il nome dell'elemento
+	 */
+	protected ContentGraph createTextContentGraph(String elem_name) {
+		ContentGraph graph = new ContentGraph(elem_name);
+		graph.getFirst().addEdge("#PCDATA", graph.getLast());
+		return graph;
+	}
+
+
+
+	// //////////////////////////////////////////////////// LogEnabled Interface
+	public void enableLogging(Logger logger) {
+		this.logger = logger;
 	}
 
 	/**
@@ -460,60 +418,53 @@ public class SchemaRulesManagerImpl implements RulesManager {
 			}		
 	}
 
+	private Vector extractSubList(Vector list, int first, int size) {
+		Vector sublist = new Vector();
+		for (int i = 0; i < size; i++) {
+			sublist.add(list.elementAt(first));
+			list.removeElementAt(first);
+		}
+		return sublist;
+	}
+
 
 	/**
-	 * Ritorna una stringa in formato XML che definisce il contenuto di default di un
-	 * elemento
+	 * Riempie il nodo con gli attributi necessari
 	 * 
-	 * @param elem_name il nome dell'elemento padre
-	 * @param graph ContentGraph da cui iniziare a definire il contenuto di default
+	 * @param elem il nodo di cui si vogliono settare gli attributi
 	 * @throws RulesManagerException
 	 */
-	protected String getDefaultContent(ContentGraph graph) throws RulesManagerException {
-	
-		int length_visit= visitContentGraph(graph);
-		
-		System.err.println("-------Lunghezza visita iniziale di "+graph.name+": "+length_visit);
-		if (length_visit < Integer.MAX_VALUE){
-			return getXMLContent(graph);
-		}
+	public void fillRequiredAttributes(Node elem) throws RulesManagerException {
+		String elem_name = elem.getNodeName();
+		org.w3c.dom.Document doc = elem.getOwnerDocument();
+		Collection att_names = queryGetAttributes(elem_name);
+		if (att_names == null)
+			return;
 
-		
-			// cycle until a default content has been found
-		while (true) {			
-						
-			System.err.println("!   scendo di livello ");
-
-			
-			for (Iterator i = graph.visitNodes(); i.hasNext();) {
-						
-				ContentGraph.Node nodeToExplode = (ContentGraph.Node) i.next();
-				
-				for (int j = 0; j < nodeToExplode.getNoEdges(); j++) {
-					Object edgeToExplode = nodeToExplode.getEdge(j);
-					String edge_name = nodeToExplode.getEdgeName(j);
-					if (edgeToExplode instanceof ContentGraph) {
-						
-						explodeEdge((ContentGraph) edgeToExplode);
-						
-					}else if (edge_name.compareTo("#PCDATA") != 0 && edge_name.compareTo("#EPS") != 0) {
-						// replace edge with ContentGraph
-						nodeToExplode.setEdge(getContentGraph(edge_name), j);
-						
-					}
-					length_visit= visitContentGraph(graph);
-					System.err.println("-------Lunghezza visita di "+nodeToExplode.name+" --> "+edge_name+" = "+length_visit);
-					
-					if (length_visit < Integer.MAX_VALUE){
-						return getXMLContent(graph);
-					}
-					
+		org.w3c.dom.NamedNodeMap att_nodes = elem.getAttributes();
+		for (Iterator i = att_names.iterator(); i.hasNext();) {
+			String att_name = (String) i.next();
+			if (queryIsRequiredAttribute(elem_name, att_name)) {
+				// the attribute is required
+				Node att = att_nodes.getNamedItem(att_name);
+				if (att == null) {
+					// the attribute is not set, add a new one with the correct
+					// value
+					org.w3c.dom.Attr new_att = doc.createAttribute(att_name);
+					new_att.setValue(queryGetAttributeDefaultValue(elem_name, att_name));
+					att_nodes.setNamedItem(new_att);
 				}
-				
 			}
-			
-			
 		}
+	}
+
+	protected Vector findCurrentMinPath(ContentGraph graph) throws RulesManagerException {
+
+		Vector currentMinPath = new Vector();
+		getDijkstraShortestPath(graph);
+		currentMinPath=getMinPath(graph);
+		return currentMinPath;
+
 	}
 
 	/**
@@ -641,154 +592,6 @@ public class SchemaRulesManagerImpl implements RulesManager {
 
 	}
 
-	protected Vector findCurrentMinPath(ContentGraph graph) throws RulesManagerException {
-
-		Vector currentMinPath = new Vector();
-		getDijkstraShortestPath(graph);
-		currentMinPath=getMinPath(graph);
-		return currentMinPath;
-
-	}
-
-
-	/**
-	 * Controlla se il ContentGraph contiene un contenuto di default: un cammino fatto
-	 * solo di elementi di testo e transizioni vuote dal primo all'ultimo nodo
-	 * 
-	 * @param graph il ContentGraph
-	 * @return <code>Integer.MAX_VALUE</code> se non esiste un cammino, altrimenti
-	 *         ritorna la lunghezza del cammino minimo
-	 */
-	static protected Vector getDijkstraShortestPath(ContentGraph graph) {
-		ContentGraph.Node first = graph.getFirst();
-		ContentGraph.Node last = graph.getLast();
-
-		// init visit
-		int distance=Integer.MAX_VALUE;
-		Vector predecessors=new Vector();
-
-		//the set of unsettled vertices
-		Vector queue = new Vector();
-		//the set of settled vertices, the vertices whose shortest distances from the source have been found
-		Vector settledNodes = new Vector();
-
-		for (Iterator i = graph.visitNodes(); i.hasNext();)
-			((ContentGraph.Node) i.next()).resetVisit();
-
-
-		queue.add(first);
-		first.setVisit(0, "", null);
-
-		// visit the graph
-		while (queue.size() > 0) {
-			// pop first element from queue
-			ContentGraph.Node tovisit = extract_minimum(queue);
-			settledNodes.add(tovisit);
-
-			// for all the outgoing edges relax_neighbours(toVisit)
-			for (int i = 0; i < tovisit.getNoEdges(); i++) {
-				// check if the edge is visitable
-				Object edge = tovisit.getEdge(i);
-				String edgename = tovisit.getEdgeName(i);
-				ContentGraph.Node destination = tovisit.getDestination(i);
-				if(!settledNodes.contains(destination)){
-					int visit_length = tovisit.getVisitLength();
-					if (destination.getVisitLength() > visit_length+1) {
-						// push the next node of the path in the queue
-						destination.setVisit(visit_length+1, edge, tovisit);
-						queue.add(destination);
-						predecessors.add(tovisit);
-					}
-				}
-
-			}
-		}
-
-		return predecessors;
-	}
-
-
-	private static ContentGraph.Node extract_minimum(Vector queue) {
-		int min_length=Integer.MAX_VALUE;
-		int min_node_index=-1;
-		for(int i=0; i<queue.size();i++){
-			int current_length = ((ContentGraph.Node)queue.elementAt(i)).visit_length;
-			if(current_length<min_length){
-				min_length=current_length;
-				min_node_index=i;
-			}
-		}
-		if (min_length<Integer.MAX_VALUE){
-			ContentGraph.Node toRemove=(ContentGraph.Node) queue.elementAt(min_node_index);
-			queue.removeElementAt(min_node_index);
-			return toRemove;
-		}
-
-		return null;
-	}
-
-
-
-	/**
-	 * Ritorna una stringa in formato XML che definisce il contenuto di default di un
-	 * elemento
-	 * 
-	 * @param elem_name il nome dell'elemento padre
-	 * @throws RulesManagerException
-	 */
-	public String getDefaultContent(String elem_name) throws RulesManagerException {
-		if (elem_name.compareTo("#PCDATA") == 0)
-			return "";
-		
-		return getDefaultContent(getContentGraph(elem_name));
-	}
-
-
-
-
-	/**
-	 * Trasforma la rappresentazione stringa di un contenuto alternativo nella sua
-	 * rappresentazione come ContentGraph
-	 * 
-	 * @param alternative un contenuto alternativo di un elemento
-	 * @return la sua rappresentazione come ContentGraph
-	 */
-	protected ContentGraph createAlternativeContentGraph(String elem_name, String alternative) {
-
-		ContentGraph graph = new ContentGraph(elem_name);
-		String[] tokens = alternative.split(","); // regex for the comma mark
-
-		ContentGraph.Node src = graph.getFirst();
-		for (int i = 0; i < tokens.length; i++) {
-			ContentGraph.Node dst = graph.addNode();
-			src.addEdge(tokens[i], dst);
-			src = dst;
-		}
-		src.addEdge("#EPS", graph.getLast());
-
-		return graph;
-	}
-
-
-	/**
-	 * Ritorna una stringa in formato XML che definisce il contenuto di default di un
-	 * elemento
-	 * 
-	 * @param elem_name il nome dell'elemento padre
-	 * @param alternative uno dei possibili contenuti alternativi dell'elemento
-	 * @throws RulesManagerException
-	 */
-	public String getDefaultContent(String elem_name, String alternative) throws RulesManagerException {
-		if (elem_name.compareTo("#PCDATA") == 0)
-			return "";
-		
-		if (rules.get(elem_name) == null)
-		   throw new RulesManagerException("No rule for element <" + elem_name + ">");
-
-		// init computation, get content of this alternative
-		return getDefaultContent(createAlternativeContentGraph(elem_name, alternative));
-	}
-
 
 	/**
 	 * SCHEMA Implementation 
@@ -806,79 +609,7 @@ public class SchemaRulesManagerImpl implements RulesManager {
 		return alternatives;
 	}
 
-	/**
-	 * Crea un ContentGraph che rappresenta un elemento di testo
-	 * 
-	 * @param elem_name il nome dell'elemento
-	 */
-	protected ContentGraph createTextContentGraph(String elem_name) {
-		ContentGraph graph = new ContentGraph(elem_name);
-		graph.getFirst().addEdge("#PCDATA", graph.getLast());
-		return graph;
-	}
 
-
-
-	/**
-	 * Ritorna il content graph associato ad un elemento    (VERSIONE BASATA SU SCHEMA)
-	 * 
-	 * @param elem_name il nome dell'elemento
-	 * @throws RulesManagerException
-	 */
-	protected ContentGraph getContentGraph(String elem_name) throws RulesManagerException {
-		
-		
-		if (queryTextContent(elem_name)) // don't explode text and mixed elements to save iterations
-			return createTextContentGraph(elem_name);
-
-		if (rules.get(elem_name) == null)
-		   throw new RulesManagerException("No rule for element <" + elem_name + ">");
-		return utilXsd.createContentGraph(elem_name);
-	}
-
-	//
-	//			     FINE   GESTIONE   DEFAULT E ALTERNATIVE CONTENT
-	//					
-	///////////////////////////////////////////////////////////////////////////////////
-	
-	
-
-	
-	
-	
-	
-	///////////////////////////////////////////////////////////////////////////////////
-	//
-	//					 QUERY SUL CONTENUTO DI UN ELEMENTO 
-	//
-	//
-	
-	/**
-	 * Controlla se una collezione di nomi di elementi puo rappresentare un insieme di
-	 * figli di un nodo
-	 * 
-	 * @param elem_name il nome dell'elemento padre
-	 * @param elem_children la collezione dei nomi dei figli
-	 * @throws RulesManagerException
-	 */
-	public boolean isValid(String elem_name, Collection elem_children) throws RulesManagerException {
-		return isValid(elem_name, elem_children, false);
-	}
-
-	/**
-	 * Controlla se una collezione di nomi di elementi puo rappresentare un insieme di
-	 * figli di un nodo
-	 * 
-	 * @param elem_name il nome dell'elemento padre
-	 * @param elem_children la collezione dei nomi dei figli
-	 * @param with_gaps <code>true</code> se l'allineamento puo' essere fatto con gaps
-	 * @throws RulesManagerException
-	 */
-	public boolean isValid(String elem_name, Collection elem_children, boolean with_gaps) throws RulesManagerException {		
-		return utilXsd.isValid(elem_name, elem_children, with_gaps);
-	}
-
-	
 	/**
 	 * SCHEMA IMPLEMENTATION
 	 * 
@@ -897,6 +628,63 @@ public class SchemaRulesManagerImpl implements RulesManager {
 
 		return utilXsd.getAlternatives(elem_name, elem_children, choice_point);
 	}
+
+
+
+	//
+	//				END QUERY SU ELEMENTI
+	//
+	////////////////////////////////////////////////////////////////////////////////
+	//
+	//
+	//
+	// 				 QUERY SUGLI ATTRIBUTI DI UN ELEMENTO 
+    //
+	//
+	//
+	private AttributeDeclaration getAttributeDeclaration(String elem_name, String att_name) throws RulesManagerException {
+		if (elem_name == "#PCDATA")
+			throw new RulesManagerException("No attributes for element <" + elem_name + ">");
+		if (!rules.containsKey(elem_name))
+			throw new RulesManagerException("No rule for element <" + elem_name + ">");
+
+		HashMap att_hash = (HashMap) attributes.get(elem_name);
+		if (att_hash == null)
+			throw new RulesManagerException("No attributes for element <" + elem_name + ">");
+
+		AttributeDeclaration att_decl = (AttributeDeclaration) att_hash.get(att_name);
+		if (att_decl == null)
+			throw new RulesManagerException("No attribute <" + att_name + "> for element <" + elem_name + ">");
+		return att_decl;
+	}
+
+
+
+
+	/**
+	 * Ritorna l'indice di un nodo all'interno del padre
+	 * 
+	 * @param parent il nodo padre
+	 * @param child il nodo figlio
+	 * @throws RulesManagerException
+	 */
+	public int getChildIndex(Node parent, Node child) throws RulesManagerException {
+		int child_index = 0;
+		NodeList dom_children = parent.getChildNodes();
+		for (int i = 0; i < dom_children.getLength(); i++) {
+			Node dom_child = dom_children.item(i);
+			/*
+			 * if( dom_child.getNodeType() == dom_child.TEXT_NODE ) { // skip empty text
+			 * nodes String value = UtilLang.trimText(dom_child.getNodeValue()); if(
+			 * value==null || value.length()==0 ) continue; }
+			 */
+			if (dom_child == child)
+				return child_index;
+			child_index++;
+		}
+		throw new RulesManagerException("Cannot find the child element in the children list");
+	}
+
 
 	/**
 	 * Ritorna un vettore di stringhe contenente il nome dei figli di un nodo I nodi che
@@ -925,6 +713,210 @@ public class SchemaRulesManagerImpl implements RulesManager {
 
 
 	/**
+	 * Ritorna il content graph associato ad un elemento    (VERSIONE BASATA SU SCHEMA)
+	 * 
+	 * @param elem_name il nome dell'elemento
+	 * @throws RulesManagerException
+	 */
+	protected ContentGraph getContentGraph(String elem_name) throws RulesManagerException {
+		
+		
+		if (queryTextContent(elem_name)) // don't explode text and mixed elements to save iterations
+			return createTextContentGraph(elem_name);
+
+		if (rules.get(elem_name) == null)
+		   throw new RulesManagerException("No rule for element <" + elem_name + ">");
+		return utilXsd.createContentGraph(elem_name);
+	}
+
+	/**
+	 * Ritorna una stringa in formato XML che definisce il contenuto di default di un
+	 * elemento
+	 * 
+	 * @param elem_name il nome dell'elemento padre
+	 * @param graph ContentGraph da cui iniziare a definire il contenuto di default
+	 * @throws RulesManagerException
+	 */
+	protected String getDefaultContent(ContentGraph graph) throws RulesManagerException {
+	
+		int length_visit= visitContentGraph(graph);
+		
+		System.err.println("-------Lunghezza visita iniziale di "+graph.name+": "+length_visit);
+		if (length_visit < Integer.MAX_VALUE){
+			return getXMLContent(graph);
+		}
+
+		
+			// cycle until a default content has been found
+		while (true) {			
+						
+			System.err.println("!   scendo di livello ");
+
+			
+			for (Iterator i = graph.visitNodes(); i.hasNext();) {
+						
+				ContentGraph.Node nodeToExplode = (ContentGraph.Node) i.next();
+				
+				for (int j = 0; j < nodeToExplode.getNoEdges(); j++) {
+					Object edgeToExplode = nodeToExplode.getEdge(j);
+					String edge_name = nodeToExplode.getEdgeName(j);
+					if (edgeToExplode instanceof ContentGraph) {
+						
+						explodeEdge((ContentGraph) edgeToExplode);
+						
+					}else if (edge_name.compareTo("#PCDATA") != 0 && edge_name.compareTo("#EPS") != 0) {
+						// replace edge with ContentGraph
+						nodeToExplode.setEdge(getContentGraph(edge_name), j);
+						
+					}
+					length_visit= visitContentGraph(graph);
+					System.err.println("-------Lunghezza visita di "+nodeToExplode.name+" --> "+edge_name+" = "+length_visit);
+					
+					if (length_visit < Integer.MAX_VALUE){
+						return getXMLContent(graph);
+					}
+					
+				}
+				
+			}
+			
+			
+		}
+	}
+
+
+
+	/**
+	 * Ritorna una stringa in formato XML che definisce il contenuto di default di un
+	 * elemento
+	 * 
+	 * @param elem_name il nome dell'elemento padre
+	 * @throws RulesManagerException
+	 */
+	public String getDefaultContent(String elem_name) throws RulesManagerException {
+		if (elem_name.compareTo("#PCDATA") == 0)
+			return "";
+		if (elem_name.compareTo("#EPS") == 0)
+			return "";
+		
+		return getDefaultContent(getContentGraph(elem_name));
+	}
+
+	//
+	//			     FINE   GESTIONE   DEFAULT E ALTERNATIVE CONTENT
+	//					
+	///////////////////////////////////////////////////////////////////////////////////
+	
+	
+
+	
+	
+	
+	
+	///////////////////////////////////////////////////////////////////////////////////
+	//
+	//					 QUERY SUL CONTENUTO DI UN ELEMENTO 
+	//
+	//
+	
+	/**
+	 * Ritorna una stringa in formato XML che definisce il contenuto di default di un
+	 * elemento
+	 * 
+	 * @param elem_name il nome dell'elemento padre
+	 * @param alternative uno dei possibili contenuti alternativi dell'elemento
+	 * @throws RulesManagerException
+	 */
+	public String getDefaultContent(String elem_name, String alternative) throws RulesManagerException {
+		if (elem_name.compareTo("#PCDATA") == 0)
+			return "";
+		
+		if (rules.get(elem_name) == null)
+		   throw new RulesManagerException("No rule for element <" + elem_name + ">");
+
+		// init computation, get content of this alternative
+		return getDefaultContent(createAlternativeContentGraph(elem_name, alternative));
+	}
+
+	public String getDefaultContent(String elem_name, Vector nodes) throws RulesManagerException {
+		// get node names
+		Vector node_names = new Vector();
+		for (Iterator i = nodes.iterator(); i.hasNext();) {
+			Node node = (Node) i.next();
+			if (node == null)
+				throw new RulesManagerException("node #" + node_names.size() + " to insert is null");
+			node_names.addElement(getNodeName(node));
+		}
+
+		// create string content
+		String str_content = "";
+		Vector content = getGappedAlignment(elem_name, node_names);
+		if (content == null)
+			throw new RulesManagerException("The nodes does not align with the element content");
+
+		// transform element names in XML content
+		for (int i = 0/*, l = 0*/; i < content.size(); i++) {
+			String item = (String) content.elementAt(i);
+//			Per mantenere i nodi di partenza "non esplosi" togliere il commento.
+//			if (l < nodes.size() && item.equals((String) node_names.elementAt(l))) {
+//				// insert the desired node with its content
+//				str_content += UtilDom.domToString((Node) nodes.elementAt(l++));
+//			} else {
+				// insert the default content
+				str_content += getDefaultContent(item);
+//			}
+		}
+		return str_content;
+	}
+
+	public Vector getGappedAlignment(ContentGraph graph, Collection sequence) {
+		if (graph.nodes_table.size() == 0)
+			try {
+				throw new RulesManagerException("Empty automata");
+			} catch (RulesManagerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		try {
+			return graph.getGappedAlignment(sequence.iterator(), UtilLang.singleton(graph.getFirst()), UtilLang.singleton(new Vector()));
+		} catch (RulesManagerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+	 * Ritorna l'allineamento piu' corto della collezione di nodi desiderata con l'automa
+	 * che rappresenta il contenuto dell'elemento, inserendo dei gaps dove necessario
+	 * 
+	 * @param elem_name il nome dell'elemento padre
+	 * @param elem_children la collezione dei nomi dei figli
+	 * @return <code>null</code> se non esiste un allineamento, altrimenti la sequenza
+	 *         di nodi che allinea con l'automa
+	 * @throws RulesManagerException
+	 */
+	public Vector getGappedAlignment(String elem_name, Collection elem_children) throws RulesManagerException {
+		// text elements must have no children
+		if (elem_name.startsWith("#"/*queryTextContent(elem_name)*/))
+			return new Vector();
+
+		// get automata
+		XSDParticle.DFA  rule = (XSDParticle.DFA) rules.get(elem_name);
+		if (rule == null)
+			throw new RulesManagerException("No rule for element <" + elem_name + ">");
+
+		// return the alignment
+		return getGappedAlignment(getContentGraph(elem_name), elem_children);
+	}
+
+	Logger getLogger() {
+		return this.logger;
+	}
+
+
+	/**
 	 * Ritorna il nome di un nodo
 	 * 
 	 * @param dom_node il nodo di cui si richiede il nome
@@ -939,28 +931,30 @@ public class SchemaRulesManagerImpl implements RulesManager {
 		
 	}
 
+
 	/**
-	 * Ritorna l'indice di un nodo all'interno del padre
+	 * Controlla se una collezione di nomi di elementi puo rappresentare un insieme di
+	 * figli di un nodo
 	 * 
-	 * @param parent il nodo padre
-	 * @param child il nodo figlio
+	 * @param elem_name il nome dell'elemento padre
+	 * @param elem_children la collezione dei nomi dei figli
 	 * @throws RulesManagerException
 	 */
-	public int getChildIndex(Node parent, Node child) throws RulesManagerException {
-		int child_index = 0;
-		NodeList dom_children = parent.getChildNodes();
-		for (int i = 0; i < dom_children.getLength(); i++) {
-			Node dom_child = dom_children.item(i);
-			/*
-			 * if( dom_child.getNodeType() == dom_child.TEXT_NODE ) { // skip empty text
-			 * nodes String value = UtilLang.trimText(dom_child.getNodeValue()); if(
-			 * value==null || value.length()==0 ) continue; }
-			 */
-			if (dom_child == child)
-				return child_index;
-			child_index++;
-		}
-		throw new RulesManagerException("Cannot find the child element in the children list");
+	public boolean isValid(String elem_name, Collection elem_children) throws RulesManagerException {
+		return isValid(elem_name, elem_children, false);
+	}
+
+	/**
+	 * Controlla se una collezione di nomi di elementi puo rappresentare un insieme di
+	 * figli di un nodo
+	 * 
+	 * @param elem_name il nome dell'elemento padre
+	 * @param elem_children la collezione dei nomi dei figli
+	 * @param with_gaps <code>true</code> se l'allineamento puo' essere fatto con gaps
+	 * @throws RulesManagerException
+	 */
+	public boolean isValid(String elem_name, Collection elem_children, boolean with_gaps) throws RulesManagerException {		
+		return utilXsd.isValid(elem_name, elem_children, with_gaps);
 	}
 
 	
@@ -978,34 +972,14 @@ public class SchemaRulesManagerImpl implements RulesManager {
 	//
 	//
 	
-	/**
-	 * Controlla se il contenuto di un nodo &egrave valido
-	 * 
-	 * @param dom_node il nodo da validare
-	 * @throws RulesManagerException
-	 */
-	public boolean queryIsValid(Node dom_node) throws RulesManagerException {
-		if (dom_node == null)
-			throw new RulesManagerException("node is null");
-		if (dom_node.getNodeType() != Node.ELEMENT_NODE)
-			return true;
-		return isValid(getNodeName(dom_node), getChildren(dom_node));
+	public void loadRules(File xml_file) {
+		// TODO dal file xml estrarre lo schemaURL dall'intestazione		
 	}
 
-	/**
-	 * Controlla se un nodo pu&ograve contenere del testo
-	 * 
-	 * @param dom_node il nodo in esame
-	 * @throws RulesManagerException
-	 */
-	public boolean queryTextContent(Node dom_node) throws RulesManagerException {
-		if (dom_node == null)
-			throw new RulesManagerException("node is null");
-		if (dom_node.getNodeType() != Node.ELEMENT_NODE)
-			return true;
-		return queryTextContent(getNodeName(dom_node));
-		// MODIFICA (Tommaso) 10-1-2008
-		//return isValid(getNodeName(dom_node), UtilLang.singleton("#PCDATA"));
+	public void loadRules(String schemaPath) {
+		clear();
+		utilXsd.loadRules(schemaPath);
+		
 	}
 
 	
@@ -1024,50 +998,118 @@ public class SchemaRulesManagerImpl implements RulesManager {
 	
 	
 	
-	/**
-	 * Controlla se un nodo pu&ograve contenere del testo
-	 * 
-	 * @param elem_name il nome del nodo in esame
-	 * @throws RulesManagerException
-	 */
-	public boolean queryTextContent(String elem_name) throws RulesManagerException {
-		if (elem_name.compareTo("#PCDATA") == 0){
-			return true;
+	public void loadRules(String filename, String schemaPath) {
+		//logger.info("START loading rules from SCHEMA");
+		
+		String key = null;
+		File xml_file = new File(filename);
+		
+		if (schemaPath.startsWith(".")) // crea path name assoluto
+			schemaPath = xml_file.getParent().concat(File.separator+schemaPath.substring(2));
+		
+		File schema_file = UtilFile.getGrammarFile(schemaPath);
+		
+		
+		
+//		java.io.NotSerializableException: org.eclipse.xsd.impl.XSDParticleImpl$XSDNFA
+		
+//		try {
+//			key = UtilLang.bytesToHexString(UtilFile.calculateMD5(schema_file));
+//			//logger.debug("key for " + schemaPath + " = " + key.toString());
+//		} catch (Exception ex) {
+//			logger.error(ex.getMessage(), ex);
+//		}
+//		
+//		
+//		
+//		String md5Path = new String("schemamd5");
+//		new File(md5Path).mkdir();
+//		File rulesMap = new File(md5Path + File.separator, key + "_rules");
+//		File elemDeclMap = new File(md5Path + File.separator, key + "_elemDecl");
+//		File alternativesMap = new File(md5Path, key + "_alternatives");
+//		File attributesMap = new File(md5Path, key + "_attributes");
+//
+//		if (key != null && rulesMap.exists() && elemDeclMap.exists() && alternativesMap.exists() && attributesMap.exists()) {
+//			loadRulesFromCachedMap(rulesMap, elemDeclMap, alternativesMap, attributesMap);
+//		} else {
+//			clear();
+//			utilXsd.loadRules(schema_file.getAbsolutePath());
+//			saveRulesOnCachedMap(rulesMap, elemDeclMap, alternativesMap, attributesMap);
+//		}
+		
+        // OLD (Uncached)
+		// clear old rules
+		clear();
+		utilXsd.loadRules(schema_file.getAbsolutePath());
+
+	}
+
+	private void loadRulesFromCachedMap(File rulesMap, File elemDeclMap, File alternativesMap, File attributesMap) {
+				
+		logger.info("START loading rules from files");
+
+		FileInputStream fis = null;
+		ObjectInputStream in = null;
+
+		// reading rules
+		try {
+			fis = new FileInputStream(rulesMap);
+			in = new ObjectInputStream(new BufferedInputStream(fis));
+			rules = (HashMap) in.readObject();
+			in.close();
+		} catch (Exception ex) {
+			logger.error("Error reading rules map " + ex.getMessage(), ex);
 		}
-		if(rules.get(elem_name)==null){   // modifica per l'elemento <p> presente sui documenti METALEX e non dichiarato nell'xsd
-			return false;
+		
+		// reading elemDeclNames
+		try {
+			fis = new FileInputStream(elemDeclMap);
+			in = new ObjectInputStream(new BufferedInputStream(fis));
+			elemDeclNames = (HashMap) in.readObject();
+			in.close();
+		} catch (Exception ex) {
+			logger.error("Error reading elemDeclNames map " + ex.getMessage(), ex);
 		}
-		if (isValid(elem_name, UtilLang.singleton("#PCDATA"))){
-			//System.err.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "+elem_name +" is singleton #PCDATA");
-			return true;
+
+		// reading alternative_contents
+		try {
+			fis = new FileInputStream(alternativesMap);
+			in = new ObjectInputStream(new BufferedInputStream(fis));
+			alternative_contents = (HashMap) in.readObject();
+			in.close();
+		} catch (Exception ex) {
+			logger.error("Error reading alternatives map " + ex.getMessage(), ex);
 		}
-		if (utilXsd.isSimpleType(elem_name)){
-		//if (isValid(elem_name,new Vector())){
-			System.err.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "+elem_name +" is LEAF");
-			return true;
+
+		// reading attributes
+		try {
+			fis = new FileInputStream(attributesMap);
+			in = new ObjectInputStream(new BufferedInputStream(fis));
+			attributes = (HashMap) in.readObject();
+			in.close();
+		} catch (Exception ex) {
+			logger.error("Error reading attributes map " + ex.getMessage(), ex);
 		}
-		return false;
+
+		logger.info("END loading rules from files");
+
 	}
 
 	/**
-	 * Controlla se &egrave possibile appendere un nodo ad un elemento
+	 * Ritorna i possibili nodi da appendere ad un elemento
 	 * 
 	 * @param parent il nodo padre
-	 * @param new_node il nodo da appendere
 	 * @throws RulesManagerException
 	 */
-	public boolean queryCanAppend(Node parent, Node new_node) throws RulesManagerException {
+	public Collection queryAppendable(Node parent) throws RulesManagerException {
 		if (parent == null)
 			throw new RulesManagerException("parent is null");
-		if (new_node == null)
-			throw new RulesManagerException("node to append is null");
 
 		Vector str_children = getChildren(parent);
 		if (pre_check && !isValid(getNodeName(parent), str_children))
 			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
-		str_children.add(getNodeName(new_node));
-		return isValid(getNodeName(parent), str_children);
+		return getAlternatives(getNodeName(parent), str_children, str_children.size() - 1);
 	}
 
 	/**
@@ -1097,479 +1139,23 @@ public class SchemaRulesManagerImpl implements RulesManager {
 	}
 
 	/**
-	 * Ritorna i possibili nodi da appendere ad un elemento
+	 * Controlla se &egrave possibile appendere un nodo ad un elemento
 	 * 
 	 * @param parent il nodo padre
+	 * @param new_node il nodo da appendere
 	 * @throws RulesManagerException
 	 */
-	public Collection queryAppendable(Node parent) throws RulesManagerException {
-		if (parent == null)
-			throw new RulesManagerException("parent is null");
-
-		Vector str_children = getChildren(parent);
-		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
-
-		return getAlternatives(getNodeName(parent), str_children, str_children.size() - 1);
-	}
-
-	/**
-	 * Controlla se &egrave possibile pre-pendere un nodo ad un elemento
-	 * 
-	 * @param parent il nodo padre
-	 * @param new_node il nodo da pre-pendere
-	 * @throws RulesManagerException
-	 */
-	public boolean queryCanPrepend(Node parent, Node new_node) throws RulesManagerException {
+	public boolean queryCanAppend(Node parent, Node new_node) throws RulesManagerException {
 		if (parent == null)
 			throw new RulesManagerException("parent is null");
 		if (new_node == null)
-			throw new RulesManagerException("node to prepend is null");
+			throw new RulesManagerException("node to append is null");
 
 		Vector str_children = getChildren(parent);
 		if (pre_check && !isValid(getNodeName(parent), str_children))
 			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
-		str_children.insertElementAt(getNodeName(new_node), 0);
-		return isValid(getNodeName(parent), str_children);
-	}
-
-	/**
-	 * Controlla se &egrave possibile pre-pendere una collezione di nodi ad un elemento
-	 * 
-	 * @param parent il nodo padre
-	 * @param new_nodes i nodi da pre-pendere
-	 * @throws RulesManagerException
-	 */
-	public boolean queryCanPrepend(Node parent, Collection new_nodes) throws RulesManagerException {
-		if (parent == null)
-			throw new RulesManagerException("parent is null");
-
-		int inserted = 0;
-		Vector str_children = getChildren(parent);
-		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
-
-		for (Iterator i = new_nodes.iterator(); i.hasNext(); inserted++) {
-			Node new_node = (Node) i.next();
-			if (new_node == null)
-				throw new RulesManagerException("node #" + inserted + " to prepend is null");
-			str_children.insertElementAt(getNodeName(new_node), inserted);
-		}
-
-		return isValid(getNodeName(parent), str_children);
-	}
-
-	/**
-	 * Ritorna i possibili nodi da pre-pendere ad un elemento
-	 * 
-	 * @param parent il nodo padre
-	 * @throws RulesManagerException
-	 */
-	public Collection queryPrependable(Node parent) throws RulesManagerException {
-		if (parent == null)
-			throw new RulesManagerException("parent is null");
-
-		Vector str_children = getChildren(parent);
-		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
-
-		return getAlternatives(getNodeName(parent), str_children, -1);
-	}
-
-	/**
-	 * Controlla se &egrave possibile inserire un nodo dopo un certo figlio di un elemento
-	 * 
-	 * @param parent il nodo padre
-	 * @param child_node il figlio dopo cui inserire il nuovo nodo
-	 * @param new_node il nodo da inserire
-	 * @throws RulesManagerException
-	 */
-	public boolean queryCanInsertAfter(Node parent, Node child_node, Node new_node) throws RulesManagerException {
-		if (parent == null)
-			throw new RulesManagerException("parent is null");
-		if (child_node == null)
-			throw new RulesManagerException("child is null");
-		if (new_node == null)
-			throw new RulesManagerException("node to insert is null");
-
-		Vector str_children = getChildren(parent);
-		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
-
-		int child_index = getChildIndex(parent, child_node);
-		str_children.insertElementAt(getNodeName(new_node), child_index + 1);
-
-		return isValid(getNodeName(parent), str_children);
-	}
-
-	/**
-	 * Controlla se &egrave possibile inserire una collezione di nodi dopo un certo figlio
-	 * di un elemento
-	 * 
-	 * @param parent il nodo padre
-	 * @param child_node il figlio dopo cui inserire il nuovo nodo
-	 * @param new_nodes i nodi da inserire
-	 * @throws RulesManagerException
-	 */
-	public boolean queryCanInsertAfter(Node parent, Node child_node, Collection new_nodes) throws RulesManagerException {
-		if (parent == null)
-			throw new RulesManagerException("parent is null");
-		if (child_node == null)
-			throw new RulesManagerException("child is null");
-
-		int inserted = 0;
-		Vector str_children = getChildren(parent);
-		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
-
-		int child_index = getChildIndex(parent, child_node);
-		for (Iterator i = new_nodes.iterator(); i.hasNext(); inserted++) {
-			Node new_node = (Node) i.next();
-			if (new_node == null)
-				throw new RulesManagerException("node #" + inserted + " to insert is null");
-			str_children.insertElementAt(getNodeName(new_node), child_index + inserted + 1);
-		}
-
-		return isValid(getNodeName(parent), str_children);
-	}
-
-	/**
-	 * Ritorna i nodi che &egrave possibile inserire dopo un certo figlio di un elemento
-	 * 
-	 * @param parent il nodo padre
-	 * @param child_node il figlio dopo cui inserire il nuovo nodo
-	 * @throws RulesManagerException
-	 */
-	public Collection queryInsertableAfter(Node parent, Node child_node) throws RulesManagerException {
-		if (parent == null)
-			throw new RulesManagerException("parent is null");
-		if (child_node == null)
-			throw new RulesManagerException("child is null");
-
-		Vector str_children = getChildren(parent);
-		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
-
-		int child_index = getChildIndex(parent, child_node);
-		return getAlternatives(getNodeName(parent), str_children, child_index);
-	}
-
-	/**
-	 * Controlla se &egrave possibile inserire un nodo prima di un certo figlio di un
-	 * elemento
-	 * 
-	 * @param parent il nodo padre
-	 * @param child_node il figlio prima di cui inserire il nuovo nodo
-	 * @param new_node il nodo da inserire
-	 * @throws RulesManagerException
-	 */
-	public boolean queryCanInsertBefore(Node parent, Node child_node, Node new_node) throws RulesManagerException {
-		if (parent == null)
-			throw new RulesManagerException("parent is null");
-		if (child_node == null)
-			throw new RulesManagerException("child is null");
-		if (new_node == null)
-			throw new RulesManagerException("node to insert is null");
-
-		Vector str_children = getChildren(parent);
-		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
-
-		int child_index = getChildIndex(parent, child_node);
-		str_children.insertElementAt(getNodeName(new_node), child_index);
-		return isValid(getNodeName(parent), str_children);
-	}
-
-	/**
-	 * Controlla se &egrave possibile inserire una collezione di nodi prima di un certo
-	 * figlio di un elemento
-	 * 
-	 * @param parent il nodo padre
-	 * @param child_node il figlio prima di cui inserire il nuovo nodo
-	 * @param new_nodes i nodi da inserire
-	 * @throws RulesManagerException
-	 */
-	public boolean queryCanInsertBefore(Node parent, Node child_node, Collection new_nodes) throws RulesManagerException {
-		if (parent == null)
-			throw new RulesManagerException("parent is null");
-		if (child_node == null)
-			throw new RulesManagerException("child is null");
-
-		int inserted = 0;
-		Vector str_children = getChildren(parent);
-		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
-
-		int child_index = getChildIndex(parent, child_node);
-		for (Iterator i = new_nodes.iterator(); i.hasNext(); inserted++) {
-			Node new_node = (Node) i.next();
-			if (new_node == null)
-				throw new RulesManagerException("node #" + inserted + " to insert is null");
-			str_children.insertElementAt(getNodeName(new_node), child_index + inserted);
-		}
-
-		return isValid(getNodeName(parent), str_children);
-	}
-
-	/**
-	 * Ritorna i nodi che &egrave possibile inserire prima di un certo figlio di un
-	 * elemento
-	 * 
-	 * @param parent il nodo padre
-	 * @param child_node il figlio prima di cui inserire il nuovo nodo
-	 * @throws RulesManagerException
-	 */
-	public Collection queryInsertableBefore(Node parent, Node child_node) throws RulesManagerException {
-		if (parent == null)
-			throw new RulesManagerException("parent is null");
-		if (child_node == null)
-			throw new RulesManagerException("child is null");
-
-		Vector str_children = getChildren(parent);
-		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
-
-		int child_index = getChildIndex(parent, child_node);
-		return getAlternatives(getNodeName(parent), str_children, child_index - 1);
-	}
-
-	private Vector extractSubList(Vector list, int first, int size) {
-		Vector sublist = new Vector();
-		for (int i = 0; i < size; i++) {
-			sublist.add(list.elementAt(first));
-			list.removeElementAt(first);
-		}
-		return sublist;
-	}
-
-	/**
-	 * Controlla se &egrave possibile racchiudere un insieme di figli di un elemento in un
-	 * altro elemento
-	 * 
-	 * @param parent il nodo padre
-	 * @param child_node il primo figlio da racchiudere
-	 * @param no_children il numero di figli da racchiudere
-	 * @param new_node il nodo contenitore
-	 * @throws RulesManagerException
-	 */
-	public boolean queryCanEncloseIn(Node parent, Node child_node, int no_children, Node new_node) throws RulesManagerException {
-		if (parent == null)
-			throw new RulesManagerException("parent is null");
-		if (child_node == null)
-			throw new RulesManagerException("child is null");
-		if (new_node == null)
-			throw new RulesManagerException("node to insert is null");
-
-		Vector str_children = getChildren(parent);
-		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
-
-		// find the first child
-		int child_index = getChildIndex(parent, child_node);
-
-		// get the children to enclose
-		Vector toenclose = extractSubList(str_children, child_index, no_children);
-
-		// check if the container node can enclose the children
-		if (!isValid(getNodeName(new_node), toenclose, true))
-			return false;
-
-		// replace the children to enclose with the container node
-		str_children.insertElementAt(getNodeName(new_node), child_index);
-
-		// check if the parent can contain this new set of children
-		return isValid(getNodeName(parent), str_children);
-	}
-
-	/**
-	 * Ritorna gli elementi in cui &egrave possibile racchiudere un insieme di figli di un
-	 * elemento
-	 * 
-	 * @param parent il nodo padre
-	 * @param child_node il primo figlio da racchiudere
-	 * @param no_children il numero di figli da racchiudere
-	 * @return gli elementi contenitore
-	 * @throws RulesManagerException
-	 */
-	public Collection queryContainers(Node parent, Node child_node, int no_children) throws RulesManagerException {
-		if (parent == null)
-			throw new RulesManagerException("parent is null");
-		if (child_node == null)
-			throw new RulesManagerException("child is null");
-
-		Vector str_children = getChildren(parent);
-		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
-
-		// find the first child
-		int child_index = getChildIndex(parent, child_node);
-
-		// get the children to enclose
-		Vector toenclose = extractSubList(str_children, child_index, no_children);
-
-		// get all the nodes that can be inserted in the position of the first
-		// child
-		Collection insertable = getAlternatives(getNodeName(parent), str_children, child_index - 1);
-
-		// check which of the alternatives can contain the children
-		Vector containers = new Vector();
-		for (Iterator i = insertable.iterator(); i.hasNext();) {
-			String elem = (String) i.next();
-			if (isValid(elem, toenclose, true))
-				containers.add(elem);
-		}
-		return containers;
-	}
-
-	/**
-	 * Controlla se &egrave possibile racchiudere una parte di testo di un elemento in un
-	 * altro elemento
-	 * 
-	 * @param parent il nodo padre
-	 * @param child_node il nodo testo da racchiudere
-	 * @param new_node il nodo contenitore
-	 * @throws RulesManagerException
-	 */
-	public boolean queryCanEncloseTextIn(Node parent, Node child_node, Node new_node) throws RulesManagerException {
-		if (parent == null)
-			throw new RulesManagerException("parent is null");
-		if (child_node == null)
-			throw new RulesManagerException("child is null");
-		if (child_node.getNodeType() != Node.TEXT_NODE)
-			throw new RulesManagerException("Cannot enclose text: child node is not a text node");
-		if (new_node == null)
-			throw new RulesManagerException("node to insert is null");
-
-		Vector str_children = getChildren(parent);
-		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
-
-		// find the text node
-		int child_index = getChildIndex(parent, child_node);
-
-		// check if the container node can contain text
-		if (!isValid(getNodeName(new_node), UtilLang.singleton("#PCDATA")))
-			return false;
-
-		// insert the container node inside the text
-		str_children.insertElementAt(getNodeName(new_node), child_index + 1);
-		str_children.insertElementAt("#PCDATA", child_index + 2);
-
-		// check if the parent can contain this new set of children
-		return isValid(getNodeName(parent), str_children);
-	}
-
-	/**
-	 * Ritorna gli elementi in cui &egrave possibile racchiudere una parte di testo di un
-	 * elemento
-	 * 
-	 * @param parent il nodo padre
-	 * @param child_node il nodo di testo da racchiudere
-	 * @return gli elementi contenitore
-	 * @throws RulesManagerException
-	 */
-	public Collection queryTextContainers(Node parent, Node child_node) throws RulesManagerException {
-		if (parent == null)
-			throw new RulesManagerException("parent is null");
-		if (child_node == null)
-			throw new RulesManagerException("child is null");
-
-		Vector str_children = getChildren(parent);
-		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
-
-		// find the text node
-		int child_index = getChildIndex(parent, child_node);
-		str_children.insertElementAt("#PCDATA", child_index + 1);
-
-		// get all the nodes that can be inserted in the text
-		Collection insertable = getAlternatives(getNodeName(parent), str_children, child_index);
-
-		// check which of the alternatives can contain text
-		Vector containers = new Vector();
-		for (Iterator i = insertable.iterator(); i.hasNext();) {
-			String elem = (String) i.next();
-			if (isValid(elem, UtilLang.singleton("#PCDATA")))
-				containers.add(elem);
-		}
-
-		return containers;
-	}
-
-	/**
-	 * Controlla se &egrave possibile sostituire un insieme di figli di un elemento con un
-	 * altro insieme di elementi
-	 * 
-	 * @param parent il nodo padre
-	 * @param child_node il primo figlio da racchiudere
-	 * @param no_children il numero di figli da racchiudere
-	 * @param new_nodes gli elementi con cui sostituire i figli specificati
-	 * @throws RulesManagerException
-	 */
-	public boolean queryCanReplaceWith(Node parent, Node child_node, int no_children, Collection new_nodes) throws RulesManagerException {
-		if (parent == null)
-			throw new RulesManagerException("parent is null");
-		if (child_node == null)
-			throw new RulesManagerException("child is null");
-
-		// get the children
-		Vector str_children = getChildren(parent);
-		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
-
-		// find the first child
-		int child_index = getChildIndex(parent, child_node);
-
-		// replace the children to enclose with the new nodes
-		int inserted = 0;
-		for (Iterator i = new_nodes.iterator(); i.hasNext(); inserted++) {
-			Node new_node = (Node) i.next();
-			if (new_node == null)
-				throw new RulesManagerException("node #" + inserted + " to insert is null");
-			str_children.insertElementAt(getNodeName(new_node), child_index + inserted);
-		}
-
-		// check if the parent can contain this new set of children
-		return isValid(getNodeName(parent), str_children);
-	}
-
-	/**
-	 * Controlla se &egrave possibile sostituire una parte di testo con un insieme di
-	 * elementi
-	 * 
-	 * @param parent il nodo padre
-	 * @param child_node il nodo testo da racchiudere
-	 * @param new_nodes gli elementi con cui sostituire il testo specificato
-	 * @throws RulesManagerException
-	 */
-	public boolean queryCanReplaceTextWith(Node parent, Node child_node, Collection new_nodes) throws RulesManagerException {
-		if (parent == null)
-			throw new RulesManagerException("parent is null");
-		if (child_node == null)
-			throw new RulesManagerException("child is null");
-		if (child_node.getNodeType() != Node.TEXT_NODE)
-			throw new RulesManagerException("Cannot enclose text: child node is not a text node");
-
-		// get the children
-		Vector str_children = getChildren(parent);
-		if (pre_check && !isValid(getNodeName(parent), str_children))
-			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
-
-		// find the text node
-		int child_index = getChildIndex(parent, child_node);
-
-		// insert the new nodes inside the text
-		int inserted = 0;
-		str_children.insertElementAt("#PCDATA", child_index + 1);
-		for (Iterator i = new_nodes.iterator(); i.hasNext(); inserted++) {
-			Node new_node = (Node) i.next();
-			if (new_node == null)
-				throw new RulesManagerException("node #" + inserted + " to insert is null");
-			str_children.insertElementAt(getNodeName(new_node), child_index + inserted);
-		}
-
-		// check if the parent can contain this new set of children
+		str_children.add(getNodeName(new_node));
 		return isValid(getNodeName(parent), str_children);
 	}
 
@@ -1624,24 +1210,128 @@ public class SchemaRulesManagerImpl implements RulesManager {
 	}
 
 	/**
-	 * Controlla se &egrave possibile inserire un nodo all'interno di un certo figlio di
-	 * un elemento
+	 * Controlla se &egrave possibile racchiudere un insieme di figli di un elemento in un
+	 * altro elemento
 	 * 
 	 * @param parent il nodo padre
-	 * @param child_node il figlio in cui inserire il nuovo nodo, deve essere un nodo
-	 *            testo
-	 * @param new_node il nodo da inserire
+	 * @param child_node il primo figlio da racchiudere
+	 * @param no_children il numero di figli da racchiudere
+	 * @param new_node il nodo contenitore
 	 * @throws RulesManagerException
 	 */
-	public boolean queryCanInsertInside(Node parent, Node child_node, Node new_node) throws RulesManagerException {
+	public boolean queryCanEncloseIn(Node parent, Node child_node, int no_children, Node new_node) throws RulesManagerException {
 		if (parent == null)
 			throw new RulesManagerException("parent is null");
 		if (child_node == null)
 			throw new RulesManagerException("child is null");
 		if (new_node == null)
 			throw new RulesManagerException("node to insert is null");
+
+		Vector str_children = getChildren(parent);
+		if (pre_check && !isValid(getNodeName(parent), str_children))
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+
+		// find the first child
+		int child_index = getChildIndex(parent, child_node);
+
+		// get the children to enclose
+		Vector toenclose = extractSubList(str_children, child_index, no_children);
+
+		// check if the container node can enclose the children
+		if (!isValid(getNodeName(new_node), toenclose, true))
+			return false;
+
+		// replace the children to enclose with the container node
+		str_children.insertElementAt(getNodeName(new_node), child_index);
+
+		// check if the parent can contain this new set of children
+		return isValid(getNodeName(parent), str_children);
+	}
+
+	/**
+	 * Controlla se &egrave possibile racchiudere una parte di testo di un elemento in un
+	 * altro elemento
+	 * 
+	 * @param parent il nodo padre
+	 * @param child_node il nodo testo da racchiudere
+	 * @param new_node il nodo contenitore
+	 * @throws RulesManagerException
+	 */
+	public boolean queryCanEncloseTextIn(Node parent, Node child_node, Node new_node) throws RulesManagerException {
+		if (parent == null)
+			throw new RulesManagerException("parent is null");
+		if (child_node == null)
+			throw new RulesManagerException("child is null");
 		if (child_node.getNodeType() != Node.TEXT_NODE)
-			throw new RulesManagerException("Cannot insert inside: child node is not a text node");
+			throw new RulesManagerException("Cannot enclose text: child node is not a text node");
+		if (new_node == null)
+			throw new RulesManagerException("node to insert is null");
+
+		Vector str_children = getChildren(parent);
+		if (pre_check && !isValid(getNodeName(parent), str_children))
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+
+		// find the text node
+		int child_index = getChildIndex(parent, child_node);
+
+		// check if the container node can contain text
+		if (!isValid(getNodeName(new_node), UtilLang.singleton("#PCDATA")))
+			return false;
+
+		// insert the container node inside the text
+		str_children.insertElementAt(getNodeName(new_node), child_index + 1);
+		str_children.insertElementAt("#PCDATA", child_index + 2);
+
+		// check if the parent can contain this new set of children
+		return isValid(getNodeName(parent), str_children);
+	}
+
+	/**
+	 * Controlla se &egrave possibile inserire una collezione di nodi dopo un certo figlio
+	 * di un elemento
+	 * 
+	 * @param parent il nodo padre
+	 * @param child_node il figlio dopo cui inserire il nuovo nodo
+	 * @param new_nodes i nodi da inserire
+	 * @throws RulesManagerException
+	 */
+	public boolean queryCanInsertAfter(Node parent, Node child_node, Collection new_nodes) throws RulesManagerException {
+		if (parent == null)
+			throw new RulesManagerException("parent is null");
+		if (child_node == null)
+			throw new RulesManagerException("child is null");
+
+		int inserted = 0;
+		Vector str_children = getChildren(parent);
+		if (pre_check && !isValid(getNodeName(parent), str_children))
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+
+		int child_index = getChildIndex(parent, child_node);
+		for (Iterator i = new_nodes.iterator(); i.hasNext(); inserted++) {
+			Node new_node = (Node) i.next();
+			if (new_node == null)
+				throw new RulesManagerException("node #" + inserted + " to insert is null");
+			str_children.insertElementAt(getNodeName(new_node), child_index + inserted + 1);
+		}
+
+		return isValid(getNodeName(parent), str_children);
+	}
+
+	/**
+	 * Controlla se &egrave possibile inserire un nodo dopo un certo figlio di un elemento
+	 * 
+	 * @param parent il nodo padre
+	 * @param child_node il figlio dopo cui inserire il nuovo nodo
+	 * @param new_node il nodo da inserire
+	 * @throws RulesManagerException
+	 */
+	public boolean queryCanInsertAfter(Node parent, Node child_node, Node new_node) throws RulesManagerException {
+		if (parent == null)
+			throw new RulesManagerException("parent is null");
+		if (child_node == null)
+			throw new RulesManagerException("child is null");
+		if (new_node == null)
+			throw new RulesManagerException("node to insert is null");
 
 		Vector str_children = getChildren(parent);
 		if (pre_check && !isValid(getNodeName(parent), str_children))
@@ -1649,7 +1339,64 @@ public class SchemaRulesManagerImpl implements RulesManager {
 
 		int child_index = getChildIndex(parent, child_node);
 		str_children.insertElementAt(getNodeName(new_node), child_index + 1);
-		str_children.insertElementAt(new String("#PCDATA"), child_index + 2);
+
+		return isValid(getNodeName(parent), str_children);
+	}
+
+	/**
+	 * Controlla se &egrave possibile inserire una collezione di nodi prima di un certo
+	 * figlio di un elemento
+	 * 
+	 * @param parent il nodo padre
+	 * @param child_node il figlio prima di cui inserire il nuovo nodo
+	 * @param new_nodes i nodi da inserire
+	 * @throws RulesManagerException
+	 */
+	public boolean queryCanInsertBefore(Node parent, Node child_node, Collection new_nodes) throws RulesManagerException {
+		if (parent == null)
+			throw new RulesManagerException("parent is null");
+		if (child_node == null)
+			throw new RulesManagerException("child is null");
+
+		int inserted = 0;
+		Vector str_children = getChildren(parent);
+		if (pre_check && !isValid(getNodeName(parent), str_children))
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+
+		int child_index = getChildIndex(parent, child_node);
+		for (Iterator i = new_nodes.iterator(); i.hasNext(); inserted++) {
+			Node new_node = (Node) i.next();
+			if (new_node == null)
+				throw new RulesManagerException("node #" + inserted + " to insert is null");
+			str_children.insertElementAt(getNodeName(new_node), child_index + inserted);
+		}
+
+		return isValid(getNodeName(parent), str_children);
+	}
+
+	/**
+	 * Controlla se &egrave possibile inserire un nodo prima di un certo figlio di un
+	 * elemento
+	 * 
+	 * @param parent il nodo padre
+	 * @param child_node il figlio prima di cui inserire il nuovo nodo
+	 * @param new_node il nodo da inserire
+	 * @throws RulesManagerException
+	 */
+	public boolean queryCanInsertBefore(Node parent, Node child_node, Node new_node) throws RulesManagerException {
+		if (parent == null)
+			throw new RulesManagerException("parent is null");
+		if (child_node == null)
+			throw new RulesManagerException("child is null");
+		if (new_node == null)
+			throw new RulesManagerException("node to insert is null");
+
+		Vector str_children = getChildren(parent);
+		if (pre_check && !isValid(getNodeName(parent), str_children))
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+
+		int child_index = getChildIndex(parent, child_node);
+		str_children.insertElementAt(getNodeName(new_node), child_index);
 		return isValid(getNodeName(parent), str_children);
 	}
 
@@ -1688,19 +1435,22 @@ public class SchemaRulesManagerImpl implements RulesManager {
 	}
 
 	/**
-	 * Ritorna i nodi che &egrave possibile inserire all'interno di un certo figlio di un
-	 * elemento
+	 * Controlla se &egrave possibile inserire un nodo all'interno di un certo figlio di
+	 * un elemento
 	 * 
 	 * @param parent il nodo padre
 	 * @param child_node il figlio in cui inserire il nuovo nodo, deve essere un nodo
 	 *            testo
+	 * @param new_node il nodo da inserire
 	 * @throws RulesManagerException
 	 */
-	public Collection queryInsertableInside(Node parent, Node child_node) throws RulesManagerException {
+	public boolean queryCanInsertInside(Node parent, Node child_node, Node new_node) throws RulesManagerException {
 		if (parent == null)
 			throw new RulesManagerException("parent is null");
 		if (child_node == null)
 			throw new RulesManagerException("child is null");
+		if (new_node == null)
+			throw new RulesManagerException("node to insert is null");
 		if (child_node.getNodeType() != Node.TEXT_NODE)
 			throw new RulesManagerException("Cannot insert inside: child node is not a text node");
 
@@ -1709,57 +1459,172 @@ public class SchemaRulesManagerImpl implements RulesManager {
 			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
 		int child_index = getChildIndex(parent, child_node);
-		if (((String) str_children.get(child_index)).compareTo("#PCDATA") != 0)
-			throw new RulesManagerException("Cannot insert inside: child node is not a text node");
-		str_children.insertElementAt(new String("#PCDATA"), child_index + 1);
-		return getAlternatives(getNodeName(parent), str_children, child_index);
-	}
-
-	
-	//
-	//				END QUERY SU ELEMENTI
-	//
-	////////////////////////////////////////////////////////////////////////////////
-	//
-	//
-	//
-	// 				 QUERY SUGLI ATTRIBUTI DI UN ELEMENTO 
-    //
-	//
-	//
-	private AttributeDeclaration getAttributeDeclaration(String elem_name, String att_name) throws RulesManagerException {
-		if (elem_name == "#PCDATA")
-			throw new RulesManagerException("No attributes for element <" + elem_name + ">");
-		if (!rules.containsKey(elem_name))
-			throw new RulesManagerException("No rule for element <" + elem_name + ">");
-
-		HashMap att_hash = (HashMap) attributes.get(elem_name);
-		if (att_hash == null)
-			throw new RulesManagerException("No attributes for element <" + elem_name + ">");
-
-		AttributeDeclaration att_decl = (AttributeDeclaration) att_hash.get(att_name);
-		if (att_decl == null)
-			throw new RulesManagerException("No attribute <" + att_name + "> for element <" + elem_name + ">");
-		return att_decl;
+		str_children.insertElementAt(getNodeName(new_node), child_index + 1);
+		str_children.insertElementAt(new String("#PCDATA"), child_index + 2);
+		return isValid(getNodeName(parent), str_children);
 	}
 
 	/**
-	 * Ritorna la lista dei nomi degli attributi di un elemento
+	 * Controlla se &egrave possibile pre-pendere una collezione di nodi ad un elemento
 	 * 
-	 * @param elem_name il nome dell'elemento di cui si vuole la lista degli attributi
+	 * @param parent il nodo padre
+	 * @param new_nodes i nodi da pre-pendere
 	 * @throws RulesManagerException
 	 */
-	public Collection queryGetAttributes(String elem_name) throws RulesManagerException {
-		if (elem_name == "#PCDATA")
-			return new Vector();
-		if (!rules.containsKey(elem_name))
-			throw new RulesManagerException("No rule for element <" + elem_name + ">");
+	public boolean queryCanPrepend(Node parent, Collection new_nodes) throws RulesManagerException {
+		if (parent == null)
+			throw new RulesManagerException("parent is null");
 
-		HashMap att_hash = (HashMap) attributes.get(elem_name);
-		if (att_hash == null)
-			return new Vector(); // no attributes for element
+		int inserted = 0;
+		Vector str_children = getChildren(parent);
+		if (pre_check && !isValid(getNodeName(parent), str_children))
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
 
-		return att_hash.keySet();
+		for (Iterator i = new_nodes.iterator(); i.hasNext(); inserted++) {
+			Node new_node = (Node) i.next();
+			if (new_node == null)
+				throw new RulesManagerException("node #" + inserted + " to prepend is null");
+			str_children.insertElementAt(getNodeName(new_node), inserted);
+		}
+
+		return isValid(getNodeName(parent), str_children);
+	}
+
+	/**
+	 * Controlla se &egrave possibile pre-pendere un nodo ad un elemento
+	 * 
+	 * @param parent il nodo padre
+	 * @param new_node il nodo da pre-pendere
+	 * @throws RulesManagerException
+	 */
+	public boolean queryCanPrepend(Node parent, Node new_node) throws RulesManagerException {
+		if (parent == null)
+			throw new RulesManagerException("parent is null");
+		if (new_node == null)
+			throw new RulesManagerException("node to prepend is null");
+
+		Vector str_children = getChildren(parent);
+		if (pre_check && !isValid(getNodeName(parent), str_children))
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+
+		str_children.insertElementAt(getNodeName(new_node), 0);
+		return isValid(getNodeName(parent), str_children);
+	}
+
+	/**
+	 * Controlla se &egrave possibile sostituire una parte di testo con un insieme di
+	 * elementi
+	 * 
+	 * @param parent il nodo padre
+	 * @param child_node il nodo testo da racchiudere
+	 * @param new_nodes gli elementi con cui sostituire il testo specificato
+	 * @throws RulesManagerException
+	 */
+	public boolean queryCanReplaceTextWith(Node parent, Node child_node, Collection new_nodes) throws RulesManagerException {
+		if (parent == null)
+			throw new RulesManagerException("parent is null");
+		if (child_node == null)
+			throw new RulesManagerException("child is null");
+		if (child_node.getNodeType() != Node.TEXT_NODE)
+			throw new RulesManagerException("Cannot enclose text: child node is not a text node");
+
+		// get the children
+		Vector str_children = getChildren(parent);
+		if (pre_check && !isValid(getNodeName(parent), str_children))
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+
+		// find the text node
+		int child_index = getChildIndex(parent, child_node);
+
+		// insert the new nodes inside the text
+		int inserted = 0;
+		str_children.insertElementAt("#PCDATA", child_index + 1);
+		for (Iterator i = new_nodes.iterator(); i.hasNext(); inserted++) {
+			Node new_node = (Node) i.next();
+			if (new_node == null)
+				throw new RulesManagerException("node #" + inserted + " to insert is null");
+			str_children.insertElementAt(getNodeName(new_node), child_index + inserted);
+		}
+
+		// check if the parent can contain this new set of children
+		return isValid(getNodeName(parent), str_children);
+	}
+
+	/**
+	 * Controlla se &egrave possibile sostituire un insieme di figli di un elemento con un
+	 * altro insieme di elementi
+	 * 
+	 * @param parent il nodo padre
+	 * @param child_node il primo figlio da racchiudere
+	 * @param no_children il numero di figli da racchiudere
+	 * @param new_nodes gli elementi con cui sostituire i figli specificati
+	 * @throws RulesManagerException
+	 */
+	public boolean queryCanReplaceWith(Node parent, Node child_node, int no_children, Collection new_nodes) throws RulesManagerException {
+		if (parent == null)
+			throw new RulesManagerException("parent is null");
+		if (child_node == null)
+			throw new RulesManagerException("child is null");
+
+		// get the children
+		Vector str_children = getChildren(parent);
+		if (pre_check && !isValid(getNodeName(parent), str_children))
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+
+		// find the first child
+		int child_index = getChildIndex(parent, child_node);
+
+		// replace the children to enclose with the new nodes
+		int inserted = 0;
+		for (Iterator i = new_nodes.iterator(); i.hasNext(); inserted++) {
+			Node new_node = (Node) i.next();
+			if (new_node == null)
+				throw new RulesManagerException("node #" + inserted + " to insert is null");
+			str_children.insertElementAt(getNodeName(new_node), child_index + inserted);
+		}
+
+		// check if the parent can contain this new set of children
+		return isValid(getNodeName(parent), str_children);
+	}
+
+	/**
+	 * Ritorna gli elementi in cui &egrave possibile racchiudere un insieme di figli di un
+	 * elemento
+	 * 
+	 * @param parent il nodo padre
+	 * @param child_node il primo figlio da racchiudere
+	 * @param no_children il numero di figli da racchiudere
+	 * @return gli elementi contenitore
+	 * @throws RulesManagerException
+	 */
+	public Collection queryContainers(Node parent, Node child_node, int no_children) throws RulesManagerException {
+		if (parent == null)
+			throw new RulesManagerException("parent is null");
+		if (child_node == null)
+			throw new RulesManagerException("child is null");
+
+		Vector str_children = getChildren(parent);
+		if (pre_check && !isValid(getNodeName(parent), str_children))
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+
+		// find the first child
+		int child_index = getChildIndex(parent, child_node);
+
+		// get the children to enclose
+		Vector toenclose = extractSubList(str_children, child_index, no_children);
+
+		// get all the nodes that can be inserted in the position of the first
+		// child
+		Collection insertable = getAlternatives(getNodeName(parent), str_children, child_index - 1);
+
+		// check which of the alternatives can contain the children
+		Vector containers = new Vector();
+		for (Iterator i = insertable.iterator(); i.hasNext();) {
+			String elem = (String) i.next();
+			if (isValid(elem, toenclose, true))
+				containers.add(elem);
+		}
+		return containers;
 	}
 
 	/**
@@ -1802,18 +1667,107 @@ public class SchemaRulesManagerImpl implements RulesManager {
 	}
 
 	/**
-	 * Ritorna <code>true</code> se esiste l'attributo specificato per questo elemento
+	 * Ritorna la lista dei nomi degli attributi di un elemento
+	 * 
+	 * @param elem_name il nome dell'elemento di cui si vuole la lista degli attributi
+	 * @throws RulesManagerException
+	 */
+	public Collection queryGetAttributes(String elem_name) throws RulesManagerException {
+		if (elem_name == "#PCDATA")
+			return new Vector();
+		if (!rules.containsKey(elem_name))
+			throw new RulesManagerException("No rule for element <" + elem_name + ">");
+
+		HashMap att_hash = (HashMap) attributes.get(elem_name);
+		if (att_hash == null)
+			return new Vector(); // no attributes for element
+
+		return att_hash.keySet();
+	}
+
+	/**
+	 * Ritorna i nodi che &egrave possibile inserire dopo un certo figlio di un elemento
+	 * 
+	 * @param parent il nodo padre
+	 * @param child_node il figlio dopo cui inserire il nuovo nodo
+	 * @throws RulesManagerException
+	 */
+	public Collection queryInsertableAfter(Node parent, Node child_node) throws RulesManagerException {
+		if (parent == null)
+			throw new RulesManagerException("parent is null");
+		if (child_node == null)
+			throw new RulesManagerException("child is null");
+
+		Vector str_children = getChildren(parent);
+		if (pre_check && !isValid(getNodeName(parent), str_children))
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+
+		int child_index = getChildIndex(parent, child_node);
+		return getAlternatives(getNodeName(parent), str_children, child_index);
+	}
+
+	/**
+	 * Ritorna i nodi che &egrave possibile inserire prima di un certo figlio di un
+	 * elemento
+	 * 
+	 * @param parent il nodo padre
+	 * @param child_node il figlio prima di cui inserire il nuovo nodo
+	 * @throws RulesManagerException
+	 */
+	public Collection queryInsertableBefore(Node parent, Node child_node) throws RulesManagerException {
+		if (parent == null)
+			throw new RulesManagerException("parent is null");
+		if (child_node == null)
+			throw new RulesManagerException("child is null");
+
+		Vector str_children = getChildren(parent);
+		if (pre_check && !isValid(getNodeName(parent), str_children))
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+
+		int child_index = getChildIndex(parent, child_node);
+		return getAlternatives(getNodeName(parent), str_children, child_index - 1);
+	}
+
+	
+	/**
+	 * Ritorna i nodi che &egrave possibile inserire all'interno di un certo figlio di un
+	 * elemento
+	 * 
+	 * @param parent il nodo padre
+	 * @param child_node il figlio in cui inserire il nuovo nodo, deve essere un nodo
+	 *            testo
+	 * @throws RulesManagerException
+	 */
+	public Collection queryInsertableInside(Node parent, Node child_node) throws RulesManagerException {
+		if (parent == null)
+			throw new RulesManagerException("parent is null");
+		if (child_node == null)
+			throw new RulesManagerException("child is null");
+		if (child_node.getNodeType() != Node.TEXT_NODE)
+			throw new RulesManagerException("Cannot insert inside: child node is not a text node");
+
+		Vector str_children = getChildren(parent);
+		if (pre_check && !isValid(getNodeName(parent), str_children))
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+
+		int child_index = getChildIndex(parent, child_node);
+		if (((String) str_children.get(child_index)).compareTo("#PCDATA") != 0)
+			throw new RulesManagerException("Cannot insert inside: child node is not a text node");
+		str_children.insertElementAt(new String("#PCDATA"), child_index + 1);
+		return getAlternatives(getNodeName(parent), str_children, child_index);
+	}
+
+	/**
+	 * Ritorna <code>true</code> se l'attributo specificato &egrave di tipo
+	 * <code>#FIXED</code>
 	 * 
 	 * @param elem_name il nome dell'elemento di cui si chiede l'esistena dell'attributo
 	 * @param att_name il nome dell'attributo
 	 * @throws RulesManagerException
 	 */
-	public boolean queryIsValidAttribute(String elem_name, String att_name) throws RulesManagerException {
-		if (elem_name == "#PCDATA")
-			throw new RulesManagerException("No attributes for element <" + elem_name + ">");
-		if (!rules.containsKey(elem_name))
-			throw new RulesManagerException("No rule for element <" + elem_name + ">");
-		return (attributes.containsKey(elem_name) && ((HashMap) attributes.get(elem_name)).containsKey(att_name));
+	public boolean queryIsFixedAttribute(String elem_name, String att_name) throws RulesManagerException {
+		AttributeDeclaration att_decl = getAttributeDeclaration(elem_name, att_name);
+		return (att_decl.valueDefault == "#FIXED" || att_decl.valueDefault.equalsIgnoreCase("fixed"));
 	}
 
 	/**
@@ -1831,16 +1785,32 @@ public class SchemaRulesManagerImpl implements RulesManager {
 	}
 
 	/**
-	 * Ritorna <code>true</code> se l'attributo specificato &egrave di tipo
-	 * <code>#FIXED</code>
+	 * Controlla se il contenuto di un nodo &egrave valido
+	 * 
+	 * @param dom_node il nodo da validare
+	 * @throws RulesManagerException
+	 */
+	public boolean queryIsValid(Node dom_node) throws RulesManagerException {
+		if (dom_node == null)
+			throw new RulesManagerException("node is null");
+		if (dom_node.getNodeType() != Node.ELEMENT_NODE)
+			return true;
+		return isValid(getNodeName(dom_node), getChildren(dom_node));
+	}
+
+	/**
+	 * Ritorna <code>true</code> se esiste l'attributo specificato per questo elemento
 	 * 
 	 * @param elem_name il nome dell'elemento di cui si chiede l'esistena dell'attributo
 	 * @param att_name il nome dell'attributo
 	 * @throws RulesManagerException
 	 */
-	public boolean queryIsFixedAttribute(String elem_name, String att_name) throws RulesManagerException {
-		AttributeDeclaration att_decl = getAttributeDeclaration(elem_name, att_name);
-		return (att_decl.valueDefault == "#FIXED" || att_decl.valueDefault.equalsIgnoreCase("fixed"));
+	public boolean queryIsValidAttribute(String elem_name, String att_name) throws RulesManagerException {
+		if (elem_name == "#PCDATA")
+			throw new RulesManagerException("No attributes for element <" + elem_name + ">");
+		if (!rules.containsKey(elem_name))
+			throw new RulesManagerException("No rule for element <" + elem_name + ">");
+		return (attributes.containsKey(elem_name) && ((HashMap) attributes.get(elem_name)).containsKey(att_name));
 	}
 
 	/**
@@ -1874,44 +1844,147 @@ public class SchemaRulesManagerImpl implements RulesManager {
 	}
 
 	/**
-	 * Riempie il nodo con gli attributi necessari
+	 * Ritorna i possibili nodi da pre-pendere ad un elemento
 	 * 
-	 * @param elem il nodo di cui si vogliono settare gli attributi
+	 * @param parent il nodo padre
 	 * @throws RulesManagerException
 	 */
-	public void fillRequiredAttributes(Node elem) throws RulesManagerException {
-		String elem_name = elem.getNodeName();
-		org.w3c.dom.Document doc = elem.getOwnerDocument();
-		Collection att_names = queryGetAttributes(elem_name);
-		if (att_names == null)
-			return;
+	public Collection queryPrependable(Node parent) throws RulesManagerException {
+		if (parent == null)
+			throw new RulesManagerException("parent is null");
 
-		org.w3c.dom.NamedNodeMap att_nodes = elem.getAttributes();
-		for (Iterator i = att_names.iterator(); i.hasNext();) {
-			String att_name = (String) i.next();
-			if (queryIsRequiredAttribute(elem_name, att_name)) {
-				// the attribute is required
-				Node att = att_nodes.getNamedItem(att_name);
-				if (att == null) {
-					// the attribute is not set, add a new one with the correct
-					// value
-					org.w3c.dom.Attr new_att = doc.createAttribute(att_name);
-					new_att.setValue(queryGetAttributeDefaultValue(elem_name, att_name));
-					att_nodes.setNamedItem(new_att);
-				}
-			}
+		Vector str_children = getChildren(parent);
+		if (pre_check && !isValid(getNodeName(parent), str_children))
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+
+		return getAlternatives(getNodeName(parent), str_children, -1);
+	}
+
+	/**
+	 * Ritorna gli elementi in cui &egrave possibile racchiudere una parte di testo di un
+	 * elemento
+	 * 
+	 * @param parent il nodo padre
+	 * @param child_node il nodo di testo da racchiudere
+	 * @return gli elementi contenitore
+	 * @throws RulesManagerException
+	 */
+	public Collection queryTextContainers(Node parent, Node child_node) throws RulesManagerException {
+		if (parent == null)
+			throw new RulesManagerException("parent is null");
+		if (child_node == null)
+			throw new RulesManagerException("child is null");
+
+		Vector str_children = getChildren(parent);
+		if (pre_check && !isValid(getNodeName(parent), str_children))
+			throw new RulesManagerException("element <" + getNodeName(parent) + "> has invalid content: " + str_children);
+
+		// find the text node
+		int child_index = getChildIndex(parent, child_node);
+		str_children.insertElementAt("#PCDATA", child_index + 1);
+
+		// get all the nodes that can be inserted in the text
+		Collection insertable = getAlternatives(getNodeName(parent), str_children, child_index);
+
+		// check which of the alternatives can contain text
+		Vector containers = new Vector();
+		for (Iterator i = insertable.iterator(); i.hasNext();) {
+			String elem = (String) i.next();
+			if (isValid(elem, UtilLang.singleton("#PCDATA")))
+				containers.add(elem);
 		}
+
+		return containers;
+	}
+
+	/**
+	 * Controlla se un nodo pu&ograve contenere del testo
+	 * 
+	 * @param dom_node il nodo in esame
+	 * @throws RulesManagerException
+	 */
+	public boolean queryTextContent(Node dom_node) throws RulesManagerException {
+		if (dom_node == null)
+			throw new RulesManagerException("node is null");
+		if (dom_node.getNodeType() != Node.ELEMENT_NODE)
+			return true;
+		return queryTextContent(getNodeName(dom_node));
+		// MODIFICA (Tommaso) 10-1-2008
+		//return isValid(getNodeName(dom_node), UtilLang.singleton("#PCDATA"));
 	}
 	
 	
-	Logger getLogger() {
-		return this.logger;
+	/**
+	 * Controlla se un nodo pu&ograve contenere del testo
+	 * 
+	 * @param elem_name il nome del nodo in esame
+	 * @throws RulesManagerException
+	 */
+	public boolean queryTextContent(String elem_name) throws RulesManagerException {
+		if (elem_name.compareTo("#PCDATA") == 0){
+			return true;
+		}
+		if(rules.get(elem_name)==null){   // modifica per l'elemento <p> presente sui documenti METALEX e non dichiarato nell'xsd
+			return false;
+		}
+		if (isValid(elem_name, UtilLang.singleton("#PCDATA"))){
+			//System.err.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "+elem_name +" is singleton #PCDATA");
+			return true;
+		}
+		if (utilXsd.isSimpleType(elem_name)){
+		//if (isValid(elem_name,new Vector())){
+			System.err.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% "+elem_name +" is LEAF");
+			return true;
+		}
+		return false;
 	}
 
 
-	public String getDefaultContent(String elem_name, Vector nodes) throws RulesManagerException {
-		// TODO Auto-generated method stub
-		return null;
+	private void saveRulesOnCachedMap(File rulesMap, File elemDeclMap, File alternativesMap, File attributesMap) {
+		
+		FileOutputStream fos = null;
+		ObjectOutputStream out = null;
+
+		// saving rules
+		try {
+			fos = new FileOutputStream(rulesMap);
+			out = new ObjectOutputStream(new BufferedOutputStream(fos));
+			out.writeObject(rules);
+			out.close();
+		} catch (Exception ex) {
+			logger.error("Error saving rules map " + ex.getMessage(), ex);
+		}
+		
+		// saving elemDeclNames
+		try {
+			fos = new FileOutputStream(elemDeclMap);
+			out = new ObjectOutputStream(new BufferedOutputStream(fos));
+			out.writeObject(elemDeclNames);
+			out.close();
+		} catch (Exception ex) {
+			logger.error("Error saving elemDeclNames map " + ex.getMessage(), ex);
+		}
+
+
+		// saving alternative_contents
+		try {
+			fos = new FileOutputStream(alternativesMap);
+			out = new ObjectOutputStream(new BufferedOutputStream(fos));
+			out.writeObject(alternative_contents);
+			out.close();
+		} catch (Exception ex) {
+			logger.error("Error saving alternatives map " + ex.getMessage(), ex);
+		}
+
+		// saving attributes
+		try {
+			fos = new FileOutputStream(attributesMap);
+			out = new ObjectOutputStream(new BufferedOutputStream(fos));
+			out.writeObject(attributes);
+			out.close();
+		} catch (Exception ex) {
+			logger.error("Error saving attributes map " + ex.getMessage(), ex);
+		}	
 	}
 
 
