@@ -67,6 +67,7 @@
 		<include name="**/*.dar" />
 		<include name="**/*.owl" />
 		<include name="**/*.zip" />
+		<include name="**/*.dat" />
 	</patternset>
 
 	<target name="init">
