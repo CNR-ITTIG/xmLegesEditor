@@ -1,6 +1,7 @@
 package it.cnr.ittig.xmleges.editor.services.dalos.objects;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeSet;
@@ -62,6 +63,11 @@ public class Synset implements Comparable {
 	public void setLexicalForm(String lex) {
 		
 		concreteSynset = true;
+		//FIXME Show lowercase variant for IT
+		//(fix original data...)
+		if(LANGUAGE.equalsIgnoreCase("IT")) {
+			lex = lex.toLowerCase();
+		}
 		lexicalForm = lex;
 	}
 	
@@ -152,13 +158,18 @@ public class Synset implements Comparable {
 
 	public void addVariant(String var) {
 
+		//FIXME Show lowercase variant for IT
+		//(fix original data...)
+		if(LANGUAGE.equalsIgnoreCase("IT")) {
+			var = var.toLowerCase();
+		}
 		concreteSynset = true;
 		variants.add(var);
 	}
 	
 	public Collection getVariants() {
 		
-		return variants;
+		return Collections.unmodifiableCollection(variants);
 	}
 
 	public String toString() {
