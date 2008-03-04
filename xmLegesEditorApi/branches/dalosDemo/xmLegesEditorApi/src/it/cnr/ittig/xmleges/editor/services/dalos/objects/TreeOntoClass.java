@@ -8,12 +8,16 @@ public class TreeOntoClass extends DalosOntoClass {
 	//Links to classified resources 
 	//(DALOS: these are the synsets in the 'global' language)
 	private Collection resources;
+	
+	//Linked concepts
+	private Collection concepts;
 
 	public TreeOntoClass(String name) {
 		
 		super(name);
 		
 		resources = new HashSet();
+		concepts = new HashSet();
 	}
 	
 	public boolean addTerm(Synset syn) {
@@ -31,6 +35,21 @@ public class TreeOntoClass extends DalosOntoClass {
 		return resources;
 	}
 	
+	public boolean addConcept(PivotOntoClass poc) {
+		
+		return concepts.add(poc);
+	}
+	
+	public boolean removeConcept(PivotOntoClass poc) {
+		
+		return concepts.remove(poc);
+	}
+	
+	public Collection getConcepts() {
+		
+		return concepts;
+	}
+		
 	public String toString() {
 		
 		String str = name.trim();

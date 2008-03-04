@@ -191,7 +191,7 @@ public class Synset implements Comparable {
 			throw new ClassCastException("Object is not a valid synset!");
 		}
 		String objForm = ((Synset) obj).toString();
-		return this.toString().compareTo(objForm);
+		return this.toString().compareToIgnoreCase(objForm);
 	}
 
 }
