@@ -246,7 +246,7 @@ implements EventManagerListener, Loggable, Serviceable,
 			popupMenu.removeAll();
 						
 			Collection variants = synset.getVariants();
-			variants.remove(synset.getLexicalForm());			
+				
 			
 			// LEXICAL FORM
 			
