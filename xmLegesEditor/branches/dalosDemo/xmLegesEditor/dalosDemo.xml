@@ -542,12 +542,13 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <item action="editor.testo.apice" />
                     <item action="editor.testo.pedice" />  
                 </toolbar>
-                <toolbar name="editor.allineamento" floatable="false" rollover="true">
+                <!-- ELIMINO UNA TOOLBAR: CAUSA StackOverflowError su win -->
+                <!--toolbar name="editor.allineamento" floatable="false" rollover="true">
                     <item action="editor.allineamento.oriz.sx" />
                     <item action="editor.allineamento.oriz.centro" />
                     <item action="editor.allineamento.oriz.dx" />
                     <item action="editor.allineamento.oriz.giustificato" />
-                </toolbar>
+                </toolbar-->
                 <toolbar name="editor.liste" floatable="false" rollover="true">
                     <item action="editor.liste.numerata" />
                     <item action="editor.liste.puntata" />
