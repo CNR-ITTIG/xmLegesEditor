@@ -484,6 +484,9 @@ public class KbContainer {
 		OntModel om = KbModelFactory.getModel("seg.source", "micro", LANGUAGE, syn.getURI());
 		
 		Individual ind = om.getIndividual(syn.getURI());
+		if(ind == null) {
+			return;
+		}
 
 		OntProperty sourceProp = om.getOntProperty(KbConf.SOURCESCHEMA_NS + "source");
 		OntProperty involvesProp = om.getOntProperty(KbConf.SOURCESCHEMA_NS + "involvesPartition");
