@@ -433,7 +433,7 @@ public class KbContainer {
 			for(Iterator l = w.listPropertyValues(lexical); l.hasNext(); ) {
 				RDFNode lexNode = (RDFNode) l.next();
 				String lexForm = ((Literal) lexNode).getString();
-				((Collection) syn.getVariants()).add(lexForm);
+				syn.addVariant(lexForm);
 			}
 		}
 		

@@ -13,7 +13,6 @@ import java.util.Iterator;
 
 import javax.swing.JEditorPane;
 import javax.swing.text.html.HTMLDocument;
-import javax.swing.text.html.HTMLEditorKit;
 
 public class DetailsContainer extends JEditorPane {
 	
@@ -55,13 +54,15 @@ public class DetailsContainer extends JEditorPane {
 		String img = "<img src=\"./kontact_journal.png\">";
 		
 		String def = synset.getDef();
-		if(def == null) {
-			def = "(empty definition)";
+		
+		String html = "<html><body>";
+		if(def != null) {
+			html += "<table><tr><td>" +  img +
+				"</td><td><h2><i>Definition</i></h2><h3>" + 
+				def +  "</h3></td></tr></table>";
 		}
 		
-		String html = "<html><body><table><tr><td>" +  img +
-			"</td><td><h2><i>Definition</i></h2><h3>" + 
-			def +  "</h3></td></tr></table><h2><i>Variants</i></h2><table>"; 
+		html += "<h2><i>Variants</i></h2><table>"; 
 		
 		for(Iterator i = synset.getVariants().iterator(); i.hasNext();) {
 			String variant = (String) i.next();
