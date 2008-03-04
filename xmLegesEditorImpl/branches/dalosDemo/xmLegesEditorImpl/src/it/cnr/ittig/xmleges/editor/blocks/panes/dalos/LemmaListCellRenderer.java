@@ -6,6 +6,7 @@ import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -24,28 +25,29 @@ public class LemmaListCellRenderer extends JLabel implements ListCellRenderer {
 	
 	public Component getListCellRendererComponent(JList list,Object value,int index,boolean isSelected,boolean cellHasFocus) {
 	
-		Color background;
-		Color foreground;
+		Color background = Color.WHITE;
+		Color foreground = Color.BLACK;
 		
+		Font font = new Font(null, Font.PLAIN, 14);
+
+
+		if(value instanceof Synset){
+			setIcon(i18n.getIconFor("editor.panes.dalos.synsetlist.icon"));
+			if(((Synset)value).getDef()!=null && ((Synset)value).getDef().length()>0){
+				background = Color.YELLOW;
+				foreground = Color.BLACK;
+				font = new Font(null, Font.ITALIC, 14);			
+			}
+		}
+		
+
 		if(isSelected) {
 			background = list.getSelectionBackground();
 			foreground = list.getSelectionForeground();
-		} else {
-			background = Color.WHITE;
-			//foreground = Color.RED;
-			foreground = Color.BLACK;
-		}
+		} 
 
-		if(value instanceof Synset)
-			setIcon(i18n.getIconFor("editor.panes.dalos.synsetlist.icon"));
 		
-//		if(value instanceof Lemma) {
-//			setIcon(UtilEditor.getIcon("lemma1"));
-//		} else if(value instanceof Concetto) {
-//			setIcon(UtilEditor.getIcon("concetto"));
-//		}
-		
-		//setFont();
+		setFont(font);
 		setText(value.toString());
 		
 		setBackground(background);
