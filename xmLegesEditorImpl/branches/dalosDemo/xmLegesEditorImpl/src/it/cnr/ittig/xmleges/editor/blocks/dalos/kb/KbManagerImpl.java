@@ -16,8 +16,6 @@ import it.cnr.ittig.xmleges.editor.services.dalos.objects.TreeOntoClass;
 import it.cnr.ittig.xmleges.editor.services.dalos.util.UtilDalos;
 
 import java.io.File;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -356,28 +354,54 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		return uri.substring(start, start + 2);		
 	}
 
-	private void copyDalosInTemp() {
-			
-		// new URI("--").getPath()   normalizza i nomi con spazi in windows
+	
+	
+	private void copyDalosInTemp(){
+		String commonDirName = "common";
 		
-		// common
-		try {
-			UtilFile.copyDirectoryInTemp(new URI(getClass().getResource("common").getFile()).getPath(),"dalos");
-		} catch (URISyntaxException e) {
-			logger.error(e.getMessage());
-		}
 		
-		// lang
+		
+		// COMMONS
+		
+		String[] commonFiles = new String[] {
+				KbConf.CONCEPTS, 
+				KbConf.LOCAL_DOMAIN_ONTO,
+				KbConf.LOCAL_DOMAIN_MERGE_ONTO,
+				KbConf.LOCAL_METALEVEL_FULL,
+				KbConf.LOCAL_SOURCE_SCHEMA, 
+				KbConf.LOCAL_METALEVEL_ONTO, 
+				KbConf.LOCAL_METALEVEL_PROP
+	    };
+		
+		for (int i = 0; i < commonFiles.length; i++) {
+			UtilFile.copyFileInTempDir(getClass().getResourceAsStream(commonDirName+File.separator+commonFiles[i]),"dalos", commonFiles[i]);
+		}	
+		
+		
+		
+		// LANG DEPENDENT
+		String[] langFiles = new String[] {
+				KbConf.IND, 
+				KbConf.INDW,
+				KbConf.TYPES,
+				KbConf.SOURCES, 
+				KbConf.segmentDirName+".zip"
+	    };
+		
+		
+		
 		String[] dalosLang = utilDalos.getDalosLang();
 		
 		for(int i=0; i<dalosLang.length; i++){
-			try {
-				if(!UtilFile.copyDirectoryInTemp(new URI(getClass().getResource(dalosLang[i]).getFile()).getPath(),"dalos"+File.separator+dalosLang[i]))
-					System.err.println("FAILED TO COPY "+dalosLang[i]);
-			} catch (URISyntaxException e) {
-				logger.error(e.getMessage());
+			for(int j=0; j < langFiles.length; j++){
+				UtilFile.copyFileInTempDir(getClass().getResourceAsStream(dalosLang[i]+File.separator+langFiles[j]),"dalos"+File.separator+dalosLang[i],langFiles[j]);
+				if(langFiles[j].endsWith("zip")){
+					UtilFile.unZip(UtilFile.getFileFromTemp("dalos"+File.separator+dalosLang[i]+File.separator+langFiles[j]).getAbsolutePath(),UtilFile.getTempDirName()+File.separator+"dalos"+File.separator+dalosLang[i]);
+				}
 			}
-		}		
-	}	
+		}
+		
+	}
+	
 
 }
