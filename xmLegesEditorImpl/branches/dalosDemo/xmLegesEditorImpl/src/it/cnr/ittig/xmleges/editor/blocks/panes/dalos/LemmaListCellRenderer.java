@@ -27,8 +27,8 @@ public class LemmaListCellRenderer extends JLabel implements ListCellRenderer {
 	
 		Color background = Color.WHITE;
 		Color foreground = Color.BLACK;
-		
-		Font font = new Font(null, Font.PLAIN, 14);
+		int size = list.getFont().getSize();
+		Font font = new Font(null, Font.PLAIN, size);
 
 
 		if(value instanceof Synset){
@@ -36,7 +36,7 @@ public class LemmaListCellRenderer extends JLabel implements ListCellRenderer {
 			if(((Synset)value).getDef()!=null && ((Synset)value).getDef().length()>0){
 				background = Color.YELLOW;
 				foreground = Color.BLACK;
-				font = new Font(null, Font.ITALIC, 14);			
+				font = new Font(null, Font.ITALIC, size);			
 			}
 		}
 		

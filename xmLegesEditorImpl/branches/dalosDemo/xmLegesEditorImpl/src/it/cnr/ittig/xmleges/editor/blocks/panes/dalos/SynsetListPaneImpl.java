@@ -19,6 +19,7 @@ import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetListPane;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.MenuItem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -248,8 +249,12 @@ implements EventManagerListener, Loggable, Serviceable,
 			variants.remove(synset.getLexicalForm());			
 			
 			// LEXICAL FORM
-			Font font = new Font(null, Font.BOLD, 10);
+			
+			
+			
 			JMenuItem menuItem = new JMenuItem(synset.getLexicalForm(),i18n.getIconFor("editor.panes.dalos.item.lexical"));
+			int size = menuItem.getFont().getSize();
+			Font font = new Font(null, Font.BOLD, size);
 			menuItem.setFont(font);
 			//menuItem.setFont(Font)
 			menuItem.addActionListener(new InsertVariantAction(synset,synset.getLexicalForm()));
