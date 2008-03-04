@@ -144,6 +144,7 @@
     <sources:source rdf:resource="sources.owl#source-32085-62003J0198-es-par5"/>
     <sources:source rdf:resource="sources.owl#source-32085-62005J0168-es-par11"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032085</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-marco-noun-1">
     <sources:source rdf:resource="sources.owl#source-32192-01985L0374-19990604-es-art3-par2"/>
@@ -261,6 +262,7 @@
     <sources:source rdf:resource="sources.owl#source-32192-62005J0315-es-par2"/>
     <sources:source rdf:resource="sources.owl#source-32192-62005J0315-es-par44"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032192</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-presidente-noun-1">
     <sources:source rdf:resource="sources.owl#source-32236-61996A0105-es-aut-cmp1"/>
@@ -305,6 +307,7 @@
     <sources:source rdf:resource="sources.owl#source-32236-62005J0168-es-aut-cmp1"/>
     <sources:source rdf:resource="sources.owl#source-32236-62005J0315-es-aut-cmp1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032236</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-caso-noun-1">
     <sources:source rdf:resource="sources.owl#source-32100-01985L0374-19990604-es-art7-par1-pntf"/>
@@ -683,6 +686,7 @@
     <sources:source rdf:resource="sources.owl#source-32100-62005J0315-es-par45"/>
     <sources:source rdf:resource="sources.owl#source-32100-62005J0315-es-par57"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032100</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-normativa-noun-1">
     <sources:source rdf:resource="sources.owl#source-32207-01997L0007-20050612-es-art13-par1"/>
@@ -779,6 +783,7 @@
     <sources:source rdf:resource="sources.owl#source-32207-62005J0315-es-par55"/>
     <sources:source rdf:resource="sources.owl#source-32207-62005J0315-es-sum2"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032207</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-instancia-noun-1">
     <sources:source rdf:resource="sources.owl#source-32178-62003J0198-es-opp3"/>
@@ -786,6 +791,7 @@
     <sources:source rdf:resource="sources.owl#source-32178-62003J0198-es-par96"/>
     <sources:source rdf:resource="sources.owl#source-32178-62003J0198-es-par97"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032178</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-manera-noun-1">
     <sources:source rdf:resource="sources.owl#source-32191-01985L0374-19990604-es-pre-rec16"/>
@@ -838,6 +844,7 @@
     <sources:source rdf:resource="sources.owl#source-32191-62004J0229-es-par21"/>
     <sources:source rdf:resource="sources.owl#source-32191-62004J0229-es-par39"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032191</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-contrato-noun-1">
     <sources:source rdf:resource="sources.owl#source-32124-01987L0102-19980421-es-ann1-par1"/>
@@ -1699,6 +1706,7 @@
     <sources:source rdf:resource="sources.owl#source-32124-62005J0168-es-sum1"/>
     <sources:source rdf:resource="sources.owl#source-32124-62005J0168-es-tit6"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032124</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-motivo-noun-1">
     <sources:source rdf:resource="sources.owl#source-32202-01997L0007-20050612-es-art6-par1-sub1"/>
@@ -1779,10 +1787,12 @@
     <sources:source rdf:resource="sources.owl#source-32202-62003J0198-es-sec-grd-ssc6-ssc2"/>
     <sources:source rdf:resource="sources.owl#source-32202-62003J0198-es-sec-grd-ssc6-ssc3"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032202</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-materia-noun-1">
     <sources:source rdf:resource="sources.owl#source-32193-62000A0074-es-par6"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032193</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-consejo-noun-1">
     <sources:source rdf:resource="sources.owl#source-32119-01985L0374-19990604-es-art15-par2-sub2"/>
@@ -2180,6 +2190,7 @@
     <sources:source rdf:resource="sources.owl#source-32119-62005J0315-es-par19"/>
     <sources:source rdf:resource="sources.owl#source-32119-62005J0315-es-par46"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032119</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-tribunal_de_justicia-noun-1">
     <sources:source rdf:resource="sources.owl#source-32279-32000L0031-es-pre-rec19"/>
@@ -2413,6 +2424,7 @@
     <sources:source rdf:resource="sources.owl#source-32279-62005J0315-es-par58"/>
     <sources:source rdf:resource="sources.owl#source-32279-62005J0315-es-par61"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032279</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-cantidad-noun-1">
     <sources:source rdf:resource="sources.owl#source-32098-01985L0374-19990604-es-art16-par1"/>
@@ -2444,6 +2456,7 @@
     <sources:source rdf:resource="sources.owl#source-32098-62004J0229-es-par49-sub1-pnt3"/>
     <sources:source rdf:resource="sources.owl#source-32098-62004J0229-es-sum2-pnt3"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032098</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-anulación-noun-1">
     <sources:source rdf:resource="sources.owl#source-32087-01997L0007-20050612-es-art8-par1-pnt1"/>
@@ -2497,6 +2510,7 @@
     <sources:source rdf:resource="sources.owl#source-32087-62003J0336-es-par29"/>
     <sources:source rdf:resource="sources.owl#source-32087-62005J0168-es-par20-rft1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032087</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-período-noun-1">
     <sources:source rdf:resource="sources.owl#source-32226-01987L0102-19980421-es-ann1-par1-pnt7"/>
@@ -2576,6 +2590,7 @@
     <sources:source rdf:resource="sources.owl#source-32226-62003J0336-es-par24"/>
     <sources:source rdf:resource="sources.owl#source-32226-62003J0336-es-par4"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032226</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-decisión-noun-1">
     <sources:source rdf:resource="sources.owl#source-32132-01987L0102-19980421-es-pre-rec9"/>
@@ -2901,6 +2916,7 @@
     <sources:source rdf:resource="sources.owl#source-32132-62004J0302-es-par8-rft1"/>
     <sources:source rdf:resource="sources.owl#source-32132-62005J0168-es-crf"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032132</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-fin-noun-1">
     <sources:source rdf:resource="sources.owl#source-32163-01985L0374-19990604-es-art7-par1-pntc"/>
@@ -2939,6 +2955,7 @@
     <sources:source rdf:resource="sources.owl#source-32163-62003J0198-es-par86"/>
     <sources:source rdf:resource="sources.owl#source-32163-62004J0127-es-par24"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032163</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-venta-noun-1">
     <sources:source rdf:resource="sources.owl#source-32285-01985L0374-19990604-es-art3-par2"/>
@@ -3091,6 +3108,7 @@
     <sources:source rdf:resource="sources.owl#source-32285-62005J0315-es-par20-rft2"/>
     <sources:source rdf:resource="sources.owl#source-32285-62005J0315-es-par6-rft2"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032285</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-objetivo-noun-1">
     <sources:source rdf:resource="sources.owl#source-32208-01997L0007-20050612-es-pre-rec1"/>
@@ -3226,6 +3244,7 @@
     <sources:source rdf:resource="sources.owl#source-32208-62005J0315-es-par46"/>
     <sources:source rdf:resource="sources.owl#source-32208-62005J0315-es-par50"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032208</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-incumplimiento-noun-1">
     <sources:source rdf:resource="sources.owl#source-32170-01987L0102-19980421-es-art1bis-par2-pnt1"/>
@@ -3269,6 +3288,7 @@
     <sources:source rdf:resource="sources.owl#source-32170-62002J0237-es-par5-rft3"/>
     <sources:source rdf:resource="sources.owl#source-32170-62003J0070-es-crf1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032170</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-servicio-noun-1">
     <sources:source rdf:resource="sources.owl#source-32268-01987L0102-19980421-es-art1-par2-pntc1"/>
@@ -3349,6 +3369,7 @@
     <sources:source rdf:resource="sources.owl#source-32268-62003J0336-es-par10"/>
     <sources:source rdf:resource="sources.owl#source-32268-62003J0336-es-par28"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032268</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-empresa-noun-1">
     <sources:source rdf:resource="sources.owl#source-32149-01997L0007-20050612-es-art9-par1"/>
@@ -3469,6 +3490,7 @@
     <sources:source rdf:resource="sources.owl#source-32149-62005J0315-es-par18-rft1"/>
     <sources:source rdf:resource="sources.owl#source-32149-62005J0315-es-par53"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032149</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-vigor-noun-1">
     <sources:source rdf:resource="sources.owl#source-32286-01985L0374-19990604-es-art17-par1"/>
@@ -3543,6 +3565,7 @@
     <sources:source rdf:resource="sources.owl#source-32286-62004J0302-es-par31"/>
     <sources:source rdf:resource="sources.owl#source-32286-62004J0302-es-par9-rft1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032286</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-tribunal_de_primera_instancia-noun-1">
     <sources:source rdf:resource="sources.owl#source-32280-61996A0105-es-par27"/>
@@ -3739,6 +3762,7 @@
     <sources:source rdf:resource="sources.owl#source-32280-62003J0198-es-sum1-sub1"/>
     <sources:source rdf:resource="sources.owl#source-32280-62003J0198-es-sum1-sub2"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032280</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-falta-noun-1">
     <sources:source rdf:resource="sources.owl#source-32160-01985L0374-19990604-es-pre-rec6"/>
@@ -3767,10 +3791,12 @@
     <sources:source rdf:resource="sources.owl#source-32160-62003J0198-es-sum3-sub3"/>
     <sources:source rdf:resource="sources.owl#source-32160-62005J0168-es-par24"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032160</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-causar-noun-1">
     <sources:source rdf:resource="sources.owl#source-32101-62003A0138-es-par23"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032101</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-efecto-noun-1">
     <sources:source rdf:resource="sources.owl#source-32144-01985L0374-19990604-es-pre-rec19"/>
@@ -3900,6 +3926,7 @@
     <sources:source rdf:resource="sources.owl#source-32144-62005J0168-es-par27"/>
     <sources:source rdf:resource="sources.owl#source-32144-62005J0168-es-par6"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032144</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-naturaleza-noun-1">
     <sources:source rdf:resource="sources.owl#source-32203-01987L0102-19980421-es-pre-rec3"/>
@@ -3958,6 +3985,7 @@
     <sources:source rdf:resource="sources.owl#source-32203-62005J0315-es-par58"/>
     <sources:source rdf:resource="sources.owl#source-32203-62005J0315-es-par7-rft3"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032203</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-gobierno-noun-1">
     <sources:source rdf:resource="sources.owl#source-32168-61996J0045-es-obs2"/>
@@ -4150,10 +4178,12 @@
     <sources:source rdf:resource="sources.owl#source-32168-62005J0315-es-obs4"/>
     <sources:source rdf:resource="sources.owl#source-32168-62005J0315-es-obs5"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032168</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-parlamento_europeo-noun-1">
     <sources:source rdf:resource="sources.owl#source-32222-62003J0350-es-par59"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032222</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-acceso-noun-1">
     <sources:source rdf:resource="sources.owl#source-32072-01987L0102-19980421-es-art12-par2-sub1"/>
@@ -4203,6 +4233,7 @@
     <sources:source rdf:resource="sources.owl#source-32072-62003A0158-es-par137"/>
     <sources:source rdf:resource="sources.owl#source-32072-62003A0158-es-par76"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032072</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-consumidor-noun-1">
     <sources:source rdf:resource="sources.owl#source-32121-01985L0374-19990604-es-art15-par3"/>
@@ -5289,6 +5320,7 @@
     <sources:source rdf:resource="sources.owl#source-32121-62005J0315-es-sum2"/>
     <sources:source rdf:resource="sources.owl#source-32121-62005J0315-es-tit7"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032121</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-decreto-noun-1">
     <sources:source rdf:resource="sources.owl#source-32133-61999J0392-es-par100"/>
@@ -5366,6 +5398,7 @@
     <sources:source rdf:resource="sources.owl#source-32133-61999J0392-es-par85"/>
     <sources:source rdf:resource="sources.owl#source-32133-61999J0392-es-par99"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032133</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-recurso-noun-1">
     <sources:source rdf:resource="sources.owl#source-32253-01985L0374-19990604-es-pre-rec16"/>
@@ -5605,6 +5638,7 @@
     <sources:source rdf:resource="sources.owl#source-32253-62005J0315-es-par2"/>
     <sources:source rdf:resource="sources.owl#source-32253-62005J0315-es-par30"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032253</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-obligación-noun-1">
     <sources:source rdf:resource="sources.owl#source-32210-01987L0102-19980421-es-ann1-par1-pnt9"/>
@@ -5910,6 +5944,7 @@
     <sources:source rdf:resource="sources.owl#source-32210-62005J0315-es-sum2"/>
     <sources:source rdf:resource="sources.owl#source-32210-62005J0315-es-tit7"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032210</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-proveedor-noun-1">
     <sources:source rdf:resource="sources.owl#source-32249-01987L0102-19980421-es-art11-par1"/>
@@ -5991,6 +6026,7 @@
     <sources:source rdf:resource="sources.owl#source-32249-62003J0336-es-par5"/>
     <sources:source rdf:resource="sources.owl#source-32249-62005J0315-es-par57"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032249</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-protección-noun-1">
     <sources:source rdf:resource="sources.owl#source-32248-01985L0374-19990604-es-art15-par3"/>
@@ -6397,6 +6433,7 @@
     <sources:source rdf:resource="sources.owl#source-32248-62005J0315-es-par50"/>
     <sources:source rdf:resource="sources.owl#source-32248-62005J0315-es-sum2"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032248</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-domicilio_social-noun-1">
     <sources:source rdf:resource="sources.owl#source-32143-61996A0105-es-prt1"/>
@@ -6434,6 +6471,7 @@
     <sources:source rdf:resource="sources.owl#source-32143-62003J0198-es-prt2"/>
     <sources:source rdf:resource="sources.owl#source-32143-62003J0198-es-prt3"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032143</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-elemento-noun-1">
     <sources:source rdf:resource="sources.owl#source-32148-01987L0102-19980421-es-art4-par2-pntd"/>
@@ -6522,6 +6560,7 @@
     <sources:source rdf:resource="sources.owl#source-32148-62004J0229-es-par7-rft2"/>
     <sources:source rdf:resource="sources.owl#source-32148-62005J0315-es-par15-rft1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032148</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-examen-noun-1">
     <sources:source rdf:resource="sources.owl#source-32156-31985L0577-es-art3-par1"/>
@@ -6561,11 +6600,13 @@
     <sources:source rdf:resource="sources.owl#source-32156-62003J0198-es-sum3-sub1"/>
     <sources:source rdf:resource="sources.owl#source-32156-62005J0168-es-par27"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032156</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-inmuebles-noun-1">
     <sources:source rdf:resource="sources.owl#source-32177-01997L0007-20050612-es-art3-par1-pnt4"/>
     <sources:source rdf:resource="sources.owl#source-32177-62003J0350-es-par64"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032177</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-aceite-noun-1">
     <sources:source rdf:resource="sources.owl#source-32074-61997J0102-es-kwd1"/>
@@ -6694,6 +6735,7 @@
     <sources:source rdf:resource="sources.owl#source-32074-61999J0392-es-tit"/>
     <sources:source rdf:resource="sources.owl#source-32074-62000J0444-es-par84"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032074</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-letra-noun-1">
     <sources:source rdf:resource="sources.owl#source-32184-01985L0374-19990604-es-art15-par1-pntb"/>
@@ -6755,6 +6797,7 @@
     <sources:source rdf:resource="sources.owl#source-32184-62000J0444-es-par15"/>
     <sources:source rdf:resource="sources.owl#source-32184-62000J0444-es-par15-rft3"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032184</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-proyecto-noun-1">
     <sources:source rdf:resource="sources.owl#source-32250-32000L0031-es-art16-par1-pntb"/>
@@ -6834,6 +6877,7 @@
     <sources:source rdf:resource="sources.owl#source-32250-62003J0198-es-par90"/>
     <sources:source rdf:resource="sources.owl#source-32250-62003J0198-es-par91"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032250</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-origen-noun-1">
     <sources:source rdf:resource="sources.owl#source-32218-01998L0027-20061228-es-art4-par1"/>
@@ -6892,6 +6936,7 @@
     <sources:source rdf:resource="sources.owl#source-32218-62005J0315-es-par47"/>
     <sources:source rdf:resource="sources.owl#source-32218-62005J0315-es-par7-rft3"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032218</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-residuo-noun-1">
     <sources:source rdf:resource="sources.owl#source-32260-61996A0105-es-kwd4"/>
@@ -7099,6 +7144,7 @@
     <sources:source rdf:resource="sources.owl#source-32260-62003J0198-es-sum3-sub2"/>
     <sources:source rdf:resource="sources.owl#source-32260-62003J0198-es-tit5"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032260</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-distancia-noun-1">
     <sources:source rdf:resource="sources.owl#source-32140-01997L0007-20050612-es-art10-par2"/>
@@ -7196,6 +7242,7 @@
     <sources:source rdf:resource="sources.owl#source-32140-62003J0336-es-sum1"/>
     <sources:source rdf:resource="sources.owl#source-32140-62003J0336-es-tit7"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032140</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-lugar-noun-1">
     <sources:source rdf:resource="sources.owl#source-32189-01997L0007-20050612-es-art3-par2-pnt1"/>
@@ -7329,10 +7376,12 @@
     <sources:source rdf:resource="sources.owl#source-32189-62005J0315-es-par44"/>
     <sources:source rdf:resource="sources.owl#source-32189-62005J0315-es-par47"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032189</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-pprestación-noun-1">
     <sources:source rdf:resource="sources.owl#source-32232-31993L0013-es-ann-par1-pntf"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032232</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-finalidad-noun-1">
     <sources:source rdf:resource="sources.owl#source-32164-01997L0007-20050612-es-art4-par2"/>
@@ -7366,6 +7415,7 @@
     <sources:source rdf:resource="sources.owl#source-32164-62003J0350-es-par69"/>
     <sources:source rdf:resource="sources.owl#source-32164-62004J0127-es-par26"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032164</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-control-noun-1">
     <sources:source rdf:resource="sources.owl#source-32125-01987L0102-19980421-es-art12-par1-pntb"/>
@@ -7472,6 +7522,7 @@
     <sources:source rdf:resource="sources.owl#source-32125-62005J0315-es-par17-rft1"/>
     <sources:source rdf:resource="sources.owl#source-32125-62005J0315-es-par18-rft3"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032125</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-violación-noun-1">
     <sources:source rdf:resource="sources.owl#source-32287-32000L0031-es-art3-par4-pnta-pnt1-pnt1"/>
@@ -7517,6 +7568,7 @@
     <sources:source rdf:resource="sources.owl#source-32287-62003J0198-es-sum2-sub3"/>
     <sources:source rdf:resource="sources.owl#source-32287-62003J0198-es-sum3-sub2"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032287</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-parlamento-noun-1">
     <sources:source rdf:resource="sources.owl#source-32221-01985L0374-19990604-es-pre-cit3"/>
@@ -7640,6 +7692,7 @@
     <sources:source rdf:resource="sources.owl#source-32221-62005J0315-es-par1"/>
     <sources:source rdf:resource="sources.owl#source-32221-62005J0315-es-par15"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032221</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-situación-noun-1">
     <sources:source rdf:resource="sources.owl#source-32270-31999L0044-es-pre-rec20"/>
@@ -7731,6 +7784,7 @@
     <sources:source rdf:resource="sources.owl#source-32270-62005J0168-es-par25"/>
     <sources:source rdf:resource="sources.owl#source-32270-62005J0315-es-par54"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032270</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-tiempo-noun-1">
     <sources:source rdf:resource="sources.owl#source-32274-01985L0374-19990604-es-pre-rec11"/>
@@ -7801,6 +7855,7 @@
     <sources:source rdf:resource="sources.owl#source-32274-62003J0350-es-par99"/>
     <sources:source rdf:resource="sources.owl#source-32274-62004J0127-es-par26"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032274</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-establecimiento-noun-1">
     <sources:source rdf:resource="sources.owl#source-32152-01998L0027-20061228-es-ann-par2"/>
@@ -7882,6 +7937,7 @@
     <sources:source rdf:resource="sources.owl#source-32152-62004J0229-es-sum2"/>
     <sources:source rdf:resource="sources.owl#source-32152-62004J0229-es-tit6"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032152</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-demandado-noun-1">
     <sources:source rdf:resource="sources.owl#source-32135-01998L0027-20061228-es-art5-par1"/>
@@ -7963,11 +8019,13 @@
     <sources:source rdf:resource="sources.owl#source-32135-62003J0350-es-par32"/>
     <sources:source rdf:resource="sources.owl#source-32135-62004J0127-es-par7-rft1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032135</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-compra-noun-1">
     <sources:source rdf:resource="sources.owl#source-32111-01987L0102-19980421-es-art11-par2-sub1-pnta"/>
     <sources:source rdf:resource="sources.owl#source-32111-62004J0229-es-par21"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032111</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-norma-noun-1">
     <sources:source rdf:resource="sources.owl#source-32206-01985L0374-19990604-es-art7-par1-pntd"/>
@@ -8115,6 +8173,7 @@
     <sources:source rdf:resource="sources.owl#source-32206-62005J0315-es-par40"/>
     <sources:source rdf:resource="sources.owl#source-32206-62005J0315-es-par48"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032206</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-valor-noun-1">
     <sources:source rdf:resource="sources.owl#source-32283-01987L0102-19980421-es-art1bis-par1-pnta"/>
@@ -8151,6 +8210,7 @@
     <sources:source rdf:resource="sources.owl#source-32283-62004J0229-es-par17-rft3"/>
     <sources:source rdf:resource="sources.owl#source-32283-62005J0315-es-par34-rft2"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032283</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-estudio-noun-1">
     <sources:source rdf:resource="sources.owl#source-32153-01997L0007-20050612-es-art17-par1"/>
@@ -8236,6 +8296,7 @@
     <sources:source rdf:resource="sources.owl#source-32153-62003A0158-es-sum2-sub1"/>
     <sources:source rdf:resource="sources.owl#source-32153-62003J0198-es-par16"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032153</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-regeneración-noun-1">
     <sources:source rdf:resource="sources.owl#source-32256-61997J0102-es-kwd1"/>
@@ -8292,6 +8353,7 @@
     <sources:source rdf:resource="sources.owl#source-32256-61999J0392-es-par99"/>
     <sources:source rdf:resource="sources.owl#source-32256-61999J0392-es-sbj-pnt1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032256</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-directiva-noun-1">
     <sources:source rdf:resource="sources.owl#source-32138-01985L0374-19990604-es-art10-par1"/>
@@ -10038,6 +10100,7 @@
     <sources:source rdf:resource="sources.owl#source-32138-62005J0315-es-sum3"/>
     <sources:source rdf:resource="sources.owl#source-32138-62005J0315-es-tit7"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032138</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-operación-noun-1">
     <sources:source rdf:resource="sources.owl#source-32213-02002L0065-20050612-es-art1-par2-sub1"/>
@@ -10104,6 +10167,7 @@
     <sources:source rdf:resource="sources.owl#source-32213-62003J0350-es-par83"/>
     <sources:source rdf:resource="sources.owl#source-32213-62003J0350-es-tit6"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032213</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-inmueble-noun-1">
     <sources:source rdf:resource="sources.owl#source-32176-01985L0374-19990604-es-art2-par1"/>
@@ -10205,6 +10269,7 @@
     <sources:source rdf:resource="sources.owl#source-32176-62004J0302-es-par19"/>
     <sources:source rdf:resource="sources.owl#source-32176-62004J0302-es-par2"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032176</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-precio-noun-1">
     <sources:source rdf:resource="sources.owl#source-32234-01987L0102-19980421-es-ann1-par1-pnt2"/>
@@ -10288,6 +10353,7 @@
     <sources:source rdf:resource="sources.owl#source-32234-62004J0302-es-par22"/>
     <sources:source rdf:resource="sources.owl#source-32234-62004J0302-es-par23"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032234</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-organización-noun-1">
     <sources:source rdf:resource="sources.owl#source-32216-01997L0007-20050612-es-art11-par2-pntb"/>
@@ -10348,6 +10414,7 @@
     <sources:source rdf:resource="sources.owl#source-32216-62003J0198-es-par3-rft3"/>
     <sources:source rdf:resource="sources.owl#source-32216-62003J0198-es-par78"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032216</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-observación-noun-1">
     <sources:source rdf:resource="sources.owl#source-32211-02002L0065-20050612-es-pre-rec11"/>
@@ -10437,6 +10504,7 @@
     <sources:source rdf:resource="sources.owl#source-32211-62005J0315-es-obf"/>
     <sources:source rdf:resource="sources.owl#source-32211-62005J0315-es-par61"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032211</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-prestamo-noun-1">
     <sources:source rdf:resource="sources.owl#source-32239-61999J0481-es-par16"/>
@@ -10517,6 +10585,7 @@
     <sources:source rdf:resource="sources.owl#source-32239-62004J0229-es-sum2"/>
     <sources:source rdf:resource="sources.owl#source-32239-62004J0229-es-tit6"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032239</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-nivel-noun-1">
     <sources:source rdf:resource="sources.owl#source-32204-01987L0102-19980421-es-art1bis-par6"/>
@@ -10610,6 +10679,7 @@
     <sources:source rdf:resource="sources.owl#source-32204-62003J0350-es-sum1"/>
     <sources:source rdf:resource="sources.owl#source-32204-62005J0168-es-par37"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032204</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-ejercicio-noun-1">
     <sources:source rdf:resource="sources.owl#source-32147-01987L0102-19980421-es-art12-par2-sub1"/>
@@ -10669,6 +10739,7 @@
     <sources:source rdf:resource="sources.owl#source-32147-62002J0074-es-kwd2"/>
     <sources:source rdf:resource="sources.owl#source-32147-62003A0138-es-par40"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032147</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-perjuicio-noun-1">
     <sources:source rdf:resource="sources.owl#source-32227-31990L0314-es-pre-rec19"/>
@@ -10765,6 +10836,7 @@
     <sources:source rdf:resource="sources.owl#source-32227-62003J0198-es-par58"/>
     <sources:source rdf:resource="sources.owl#source-32227-62005J0168-es-par10"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032227</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-cláusula-noun-1">
     <sources:source rdf:resource="sources.owl#source-32103-01985L0374-19990604-es-art12-par1"/>
@@ -11043,6 +11115,7 @@
     <sources:source rdf:resource="sources.owl#source-32103-62005J0168-es-sum1"/>
     <sources:source rdf:resource="sources.owl#source-32103-62005J0168-es-tit6"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032103</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-vista-noun-1">
     <sources:source rdf:resource="sources.owl#source-32288-61996A0105-es-par26"/>
@@ -11088,6 +11161,7 @@
     <sources:source rdf:resource="sources.owl#source-32288-62003J0336-es-rec1"/>
     <sources:source rdf:resource="sources.owl#source-32288-62005J0315-es-rec1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032288</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-nombre-noun-1">
     <sources:source rdf:resource="sources.owl#source-32205-01985L0374-19990604-es-art3-par1"/>
@@ -11146,6 +11220,7 @@
     <sources:source rdf:resource="sources.owl#source-32205-62005J0315-es-par45"/>
     <sources:source rdf:resource="sources.owl#source-32205-62005J0315-es-par9"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032205</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-excepción-noun-1">
     <sources:source rdf:resource="sources.owl#source-32157-01997L0007-20050612-es-pre-rec11"/>
@@ -11197,6 +11272,7 @@
     <sources:source rdf:resource="sources.owl#source-32157-62005J0168-es-par33"/>
     <sources:source rdf:resource="sources.owl#source-32157-62005J0168-es-tit6"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032157</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-persona-noun-1">
     <sources:source rdf:resource="sources.owl#source-32228-01985L0374-19990604-es-art3-par1"/>
@@ -11398,6 +11474,7 @@
     <sources:source rdf:resource="sources.owl#source-32228-62005J0315-es-par20-rft1"/>
     <sources:source rdf:resource="sources.owl#source-32228-62005J0315-es-par20-rft3"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032228</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-derecho-noun-1">
     <sources:source rdf:resource="sources.owl#source-32136-01985L0374-19990604-es-art11-par1"/>
@@ -11983,6 +12060,7 @@
     <sources:source rdf:resource="sources.owl#source-32136-62005J0315-es-par58"/>
     <sources:source rdf:resource="sources.owl#source-32136-62005J0315-es-par59"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032136</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-comportamiento-noun-1">
     <sources:source rdf:resource="sources.owl#source-32110-02004R2006-20050612-es-art17-par1-sub1-pnte"/>
@@ -12048,6 +12126,7 @@
     <sources:source rdf:resource="sources.owl#source-32110-62003J0198-es-par57"/>
     <sources:source rdf:resource="sources.owl#source-32110-62003J0198-es-par73"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032110</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-suministro-noun-1">
     <sources:source rdf:resource="sources.owl#source-32272-01987L0102-19980421-es-ann1-par1"/>
@@ -12099,6 +12178,7 @@
     <sources:source rdf:resource="sources.owl#source-32272-62003J0336-es-sum1"/>
     <sources:source rdf:resource="sources.owl#source-32272-62003J0336-es-tit7"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032272</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-objeto-noun-1">
     <sources:source rdf:resource="sources.owl#source-32209-01985L0374-19990604-es-pre-rec9"/>
@@ -12258,6 +12338,7 @@
     <sources:source rdf:resource="sources.owl#source-32209-62005J0168-es-par6"/>
     <sources:source rdf:resource="sources.owl#source-32209-62005J0315-es-crf"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032209</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-apartado-noun-1">
     <sources:source rdf:resource="sources.owl#source-32088-01985L0374-19990604-es-art15-par1-pntb"/>
@@ -12676,6 +12757,7 @@
     <sources:source rdf:resource="sources.owl#source-32088-62005J0315-es-par20-rft3"/>
     <sources:source rdf:resource="sources.owl#source-32088-62005J0315-es-sum3-ref"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032088</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-ponente-noun-1">
     <sources:source rdf:resource="sources.owl#source-32230-61996J0045-es-aut-cmp1"/>
@@ -12748,6 +12830,7 @@
     <sources:source rdf:resource="sources.owl#source-32230-62005J0168-es-aut-cmp1"/>
     <sources:source rdf:resource="sources.owl#source-32230-62005J0315-es-aut-cmp1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032230</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-fecha-noun-1">
     <sources:source rdf:resource="sources.owl#source-32162-01985L0374-19990604-es-art10-par1"/>
@@ -12842,6 +12925,7 @@
     <sources:source rdf:resource="sources.owl#source-32162-62004J0302-es-par36"/>
     <sources:source rdf:resource="sources.owl#source-32162-62004J0302-es-sum1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032162</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-riesgo-noun-1">
     <sources:source rdf:resource="sources.owl#source-32263-01985L0374-19990604-es-pre-rec2"/>
@@ -13040,6 +13124,7 @@
     <sources:source rdf:resource="sources.owl#source-32263-62005J0168-es-par28"/>
     <sources:source rdf:resource="sources.owl#source-32263-62005J0315-es-par18-rft3"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032263</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-informe-noun-1">
     <sources:source rdf:resource="sources.owl#source-32174-01985L0374-19990604-es-art15-par3"/>
@@ -13170,6 +13255,7 @@
     <sources:source rdf:resource="sources.owl#source-32174-62003J0198-es-par23-rft3"/>
     <sources:source rdf:resource="sources.owl#source-32174-62003J0198-es-par84"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032174</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-medio_ambiente-noun-1">
     <sources:source rdf:resource="sources.owl#source-32197-61999J0392-es-opp1-pnt3"/>
@@ -13253,6 +13339,7 @@
     <sources:source rdf:resource="sources.owl#source-32197-62001J0316-es-tit"/>
     <sources:source rdf:resource="sources.owl#source-32197-62002J0074-es-par11"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032197</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-institución-noun-1">
     <sources:source rdf:resource="sources.owl#source-32179-01987L0102-19980421-es-art12-par1-pntb"/>
@@ -13336,6 +13423,7 @@
     <sources:source rdf:resource="sources.owl#source-32179-62003J0350-es-sum1"/>
     <sources:source rdf:resource="sources.owl#source-32179-62004J0302-es-par7"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032179</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-etiquetado-noun-1">
     <sources:source rdf:resource="sources.owl#source-32154-31999L0044-es-art2-par2-pntd"/>
@@ -13391,6 +13479,7 @@
     <sources:source rdf:resource="sources.owl#source-32154-62005J0315-es-sum3"/>
     <sources:source rdf:resource="sources.owl#source-32154-62005J0315-es-tit7"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032154</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-envases-noun-1">
     <sources:source rdf:resource="sources.owl#source-32150-62000J0444-es-opp1"/>
@@ -13441,6 +13530,7 @@
     <sources:source rdf:resource="sources.owl#source-32150-62000J0444-es-sbj"/>
     <sources:source rdf:resource="sources.owl#source-32150-62000J0444-es-tit"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032150</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-límite-noun-1">
     <sources:source rdf:resource="sources.owl#source-32186-01985L0374-19990604-es-art16-par2"/>
@@ -13529,6 +13619,7 @@
     <sources:source rdf:resource="sources.owl#source-32186-62004J0127-es-par26"/>
     <sources:source rdf:resource="sources.owl#source-32186-62005J0315-es-par59"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032186</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-disposición-noun-1">
     <sources:source rdf:resource="sources.owl#source-32139-01985L0374-19990604-es-art10-par2"/>
@@ -13983,6 +14074,7 @@
     <sources:source rdf:resource="sources.owl#source-32139-62005J0315-es-par46"/>
     <sources:source rdf:resource="sources.owl#source-32139-62005J0315-es-par9"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032139</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-comerciante-noun-1">
     <sources:source rdf:resource="sources.owl#source-32106-31985L0577-es-art1-par1"/>
@@ -14079,6 +14171,7 @@
     <sources:source rdf:resource="sources.owl#source-32106-62004J0229-es-par7-rft1"/>
     <sources:source rdf:resource="sources.owl#source-32106-62004J0229-es-sum1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032106</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-competencia-noun-1">
     <sources:source rdf:resource="sources.owl#source-32109-01997L0007-20050612-es-pre-rec8"/>
@@ -14150,6 +14243,7 @@
     <sources:source rdf:resource="sources.owl#source-32109-62003J0350-es-sum3-sub1"/>
     <sources:source rdf:resource="sources.owl#source-32109-62004J0302-es-sec-grd-ssc3"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032109</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-sistema-noun-1">
     <sources:source rdf:resource="sources.owl#source-32269-01985L0374-19990604-es-pre-rec13"/>
@@ -14243,6 +14337,7 @@
     <sources:source rdf:resource="sources.owl#source-32269-62005J0315-es-par42"/>
     <sources:source rdf:resource="sources.owl#source-32269-62005J0315-es-par44"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032269</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-organismo-noun-1">
     <sources:source rdf:resource="sources.owl#source-32215-01987L0102-19980421-es-art12-par1-pntc"/>
@@ -14296,6 +14391,7 @@
     <sources:source rdf:resource="sources.owl#source-32215-62003A0158-es-par33"/>
     <sources:source rdf:resource="sources.owl#source-32215-62003J0198-es-par82"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032215</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-banco-noun-1">
     <sources:source rdf:resource="sources.owl#source-32096-61996J0045-es-par2"/>
@@ -14365,6 +14461,7 @@
     <sources:source rdf:resource="sources.owl#source-32096-62004J0229-es-par49-sub2"/>
     <sources:source rdf:resource="sources.owl#source-32096-62004J0229-es-sum2-pnt3"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032096</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-infracción-noun-1">
     <sources:source rdf:resource="sources.owl#source-32175-02004R2006-20050612-es-art10-par2"/>
@@ -14419,6 +14516,7 @@
     <sources:source rdf:resource="sources.owl#source-32175-62005J0315-es-par29"/>
     <sources:source rdf:resource="sources.owl#source-32175-62005J0315-es-par55"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032175</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-medicamento-noun-1">
     <sources:source rdf:resource="sources.owl#source-32194-01997L0007-20050612-es-art14-par1"/>
@@ -14666,6 +14764,7 @@
     <sources:source rdf:resource="sources.owl#source-32194-62003J0198-es-sum1-sub2"/>
     <sources:source rdf:resource="sources.owl#source-32194-62003J0198-es-sum3-sub2"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032194</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-criterio-noun-1">
     <sources:source rdf:resource="sources.owl#source-32129-01997L0007-20050612-es-pre-rec21"/>
@@ -14736,6 +14835,7 @@
     <sources:source rdf:resource="sources.owl#source-32129-62004J0302-es-par21"/>
     <sources:source rdf:resource="sources.owl#source-32129-62005J0168-es-par22"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032129</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-inclusión-noun-1">
     <sources:source rdf:resource="sources.owl#source-32169-61996A0105-es-par18"/>
@@ -14788,6 +14888,7 @@
     <sources:source rdf:resource="sources.owl#source-32169-62000A0344-es-tit"/>
     <sources:source rdf:resource="sources.owl#source-32169-62003J0336-es-kwd1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032169</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-omisión-noun-1">
     <sources:source rdf:resource="sources.owl#source-32212-61996A0105-es-kwd1"/>
@@ -14831,6 +14932,7 @@
     <sources:source rdf:resource="sources.owl#source-32212-62003J0198-es-par39"/>
     <sources:source rdf:resource="sources.owl#source-32212-62003J0198-es-par40"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032212</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-cuestión-noun-1">
     <sources:source rdf:resource="sources.owl#source-32130-02004R2006-20050612-es-art16-par2"/>
@@ -15090,6 +15192,7 @@
     <sources:source rdf:resource="sources.owl#source-32130-62005J0315-es-sec-grd-ssc2"/>
     <sources:source rdf:resource="sources.owl#source-32130-62005J0315-es-sec-grd-ssc3"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032130</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-conocimiento-noun-1">
     <sources:source rdf:resource="sources.owl#source-32117-01985L0374-19990604-es-art10-par1"/>
@@ -15141,6 +15244,7 @@
     <sources:source rdf:resource="sources.owl#source-32117-62004J0229-es-par17-rft2"/>
     <sources:source rdf:resource="sources.owl#source-32117-62004J0229-es-par18-rft2"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032117</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-posición-noun-1">
     <sources:source rdf:resource="sources.owl#source-32231-01987L0102-19980421-es-pre-rec19"/>
@@ -15181,6 +15285,7 @@
     <sources:source rdf:resource="sources.owl#source-32231-62003A0158-es-par87"/>
     <sources:source rdf:resource="sources.owl#source-32231-62003A0158-es-sec-grd-ssc5-ssc1-ssc2"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032231</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-plazo-noun-1">
     <sources:source rdf:resource="sources.owl#source-32229-01985L0374-19990604-es-art11-par1"/>
@@ -15456,6 +15561,7 @@
     <sources:source rdf:resource="sources.owl#source-32229-62005J0168-es-par17"/>
     <sources:source rdf:resource="sources.owl#source-32229-62005J0315-es-par20-rft3"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032229</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-producto-noun-1">
     <sources:source rdf:resource="sources.owl#source-32243-01985L0374-19990604-es-art11-par1"/>
@@ -15812,6 +15918,7 @@
     <sources:source rdf:resource="sources.owl#source-32243-62005J0315-es-sum3"/>
     <sources:source rdf:resource="sources.owl#source-32243-62005J0315-es-tit7"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032243</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-lista-noun-1">
     <sources:source rdf:resource="sources.owl#source-32187-01987L0102-19980421-es-art4-par2-pntd"/>
@@ -15879,6 +15986,7 @@
     <sources:source rdf:resource="sources.owl#source-32187-62005J0315-es-par37"/>
     <sources:source rdf:resource="sources.owl#source-32187-62005J0315-es-par8"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032187</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-prestación-noun-1">
     <sources:source rdf:resource="sources.owl#source-32237-01987L0102-19980421-es-art1-par2-pntc1"/>
@@ -15940,6 +16048,7 @@
     <sources:source rdf:resource="sources.owl#source-32237-62004J0229-es-par17-rft3"/>
     <sources:source rdf:resource="sources.owl#source-32237-62004J0229-es-par9-rft1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032237</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-comunitario-noun-1">
     <sources:source rdf:resource="sources.owl#source-32113-01985L0374-19990604-es-pre-rec16"/>
@@ -16142,6 +16251,7 @@
     <sources:source rdf:resource="sources.owl#source-32113-62005J0315-es-par58"/>
     <sources:source rdf:resource="sources.owl#source-32113-62005J0315-es-par59"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032113</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-existencia-noun-1">
     <sources:source rdf:resource="sources.owl#source-32159-01985L0374-19990604-es-art15-par1-pntb"/>
@@ -16205,6 +16315,7 @@
     <sources:source rdf:resource="sources.owl#source-32159-62002J0161-es-par9"/>
     <sources:source rdf:resource="sources.owl#source-32159-62003A0138-es-par110"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032159</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-bien-noun-1">
     <sources:source rdf:resource="sources.owl#source-32097-01985L0374-19990604-es-art2-par1"/>
@@ -16435,6 +16546,7 @@
     <sources:source rdf:resource="sources.owl#source-32097-62004J0229-es-sum2-pnt1"/>
     <sources:source rdf:resource="sources.owl#source-32097-62004J0229-es-tit6"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032097</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-adopción-noun-1">
     <sources:source rdf:resource="sources.owl#source-32078-01987L0102-19980421-es-art13-par1-sub1"/>
@@ -16487,6 +16599,7 @@
     <sources:source rdf:resource="sources.owl#source-32078-62003A0158-es-par137"/>
     <sources:source rdf:resource="sources.owl#source-32078-62003J0198-es-par15"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032078</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-vendedor-noun-1">
     <sources:source rdf:resource="sources.owl#source-32284-31993L0013-es-ann-par1-pntl"/>
@@ -16579,6 +16692,7 @@
     <sources:source rdf:resource="sources.owl#source-32284-62005J0315-es-par46"/>
     <sources:source rdf:resource="sources.owl#source-32284-62005J0315-es-par9"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032284</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-comunicación-noun-1">
     <sources:source rdf:resource="sources.owl#source-32112-01997L0007-20050612-es-ann1-ptt"/>
@@ -16674,6 +16788,7 @@
     <sources:source rdf:resource="sources.owl#source-32112-62002A0177-es-par46"/>
     <sources:source rdf:resource="sources.owl#source-32112-62002J0161-es-tit"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032112</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-acuerdo-noun-1">
     <sources:source rdf:resource="sources.owl#source-32076-01987L0102-19980421-es-art11-par2-sub1-pntb"/>
@@ -16726,6 +16841,7 @@
     <sources:source rdf:resource="sources.owl#source-32076-62004J0302-es-par5"/>
     <sources:source rdf:resource="sources.owl#source-32076-62004J0302-es-tit6"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032076</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-contexto-noun-1">
     <sources:source rdf:resource="sources.owl#source-32123-02002L0065-20050612-es-pre-rec11"/>
@@ -16781,6 +16897,7 @@
     <sources:source rdf:resource="sources.owl#source-32123-62005J0315-es-par54"/>
     <sources:source rdf:resource="sources.owl#source-32123-62005J0315-es-par56"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032123</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-uso-noun-1">
     <sources:source rdf:resource="sources.owl#source-32281-01985L0374-19990604-es-art6-par1-pntb"/>
@@ -16838,6 +16955,7 @@
     <sources:source rdf:resource="sources.owl#source-32281-62003A0158-es-par7"/>
     <sources:source rdf:resource="sources.owl#source-32281-62003J0070-es-par26"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032281</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-principio-noun-1">
     <sources:source rdf:resource="sources.owl#source-32240-01985L0374-19990604-es-pre-rec17"/>
@@ -16993,6 +17111,7 @@
     <sources:source rdf:resource="sources.owl#source-32240-62005J0315-es-par59"/>
     <sources:source rdf:resource="sources.owl#source-32240-62005J0315-es-sum3"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032240</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-ley-noun-1">
     <sources:source rdf:resource="sources.owl#source-32185-01985L0374-19990604-es-pre-rec9"/>
@@ -17098,6 +17217,7 @@
     <sources:source rdf:resource="sources.owl#source-32185-62005J0168-es-par8"/>
     <sources:source rdf:resource="sources.owl#source-32185-62005J0168-es-par9"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032185</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-ejecución-noun-1">
     <sources:source rdf:resource="sources.owl#source-32146-01987L0102-19980421-es-pre-rec24"/>
@@ -17152,6 +17272,7 @@
     <sources:source rdf:resource="sources.owl#source-32146-62003J0350-es-par23"/>
     <sources:source rdf:resource="sources.owl#source-32146-62003J0350-es-par39"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032146</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-autorización-noun-1">
     <sources:source rdf:resource="sources.owl#source-32095-01987L0102-19980421-es-art12-par1-pnta"/>
@@ -17368,6 +17489,7 @@
     <sources:source rdf:resource="sources.owl#source-32095-62003J0198-es-par35-rft1"/>
     <sources:source rdf:resource="sources.owl#source-32095-62003J0198-es-par60"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032095</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-alegaciones-noun-1">
     <sources:source rdf:resource="sources.owl#source-32082-61996A0105-es-sec-grd-ssc4-ssc1"/>
@@ -17394,6 +17516,7 @@
     <sources:source rdf:resource="sources.owl#source-32082-62003J0070-es-sec-grd-ssc3-ssc2"/>
     <sources:source rdf:resource="sources.owl#source-32082-62005J0168-es-par17"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032082</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-órgano_jurisdiccional-noun-1">
     <sources:source rdf:resource="sources.owl#source-32217-61996J0045-es-par24"/>
@@ -17504,6 +17627,7 @@
     <sources:source rdf:resource="sources.owl#source-32217-62005J0315-es-par51"/>
     <sources:source rdf:resource="sources.owl#source-32217-62005J0315-es-par61"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032217</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-prestador-noun-1">
     <sources:source rdf:resource="sources.owl#source-32238-31990L0314-es-art5-par1"/>
@@ -17561,6 +17685,7 @@
     <sources:source rdf:resource="sources.owl#source-32238-32000L0031-es-pre-rec57"/>
     <sources:source rdf:resource="sources.owl#source-32238-32000L0031-es-pre-rec58"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032238</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-solicitud-noun-1">
     <sources:source rdf:resource="sources.owl#source-32271-01997L0007-20050612-es-art7-par3"/>
@@ -17726,6 +17851,7 @@
     <sources:source rdf:resource="sources.owl#source-32271-62003J0198-es-sum3-sub3"/>
     <sources:source rdf:resource="sources.owl#source-32271-62004J0229-es-par21"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032271</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-resultado-noun-1">
     <sources:source rdf:resource="sources.owl#source-32261-02002L0065-20050612-es-art3-par1-pnt2-pntc"/>
@@ -17803,6 +17929,7 @@
     <sources:source rdf:resource="sources.owl#source-32261-62005J0315-es-par49"/>
     <sources:source rdf:resource="sources.owl#source-32261-62005J0315-es-sum2"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032261</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-sustancia-noun-1">
     <sources:source rdf:resource="sources.owl#source-32273-61996A0105-es-par11"/>
@@ -18083,6 +18210,7 @@
     <sources:source rdf:resource="sources.owl#source-32273-62003J0198-es-par91"/>
     <sources:source rdf:resource="sources.owl#source-32273-62003J0198-es-sum3-sub3"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032273</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-tratado-noun-1">
     <sources:source rdf:resource="sources.owl#source-32277-01985L0374-19990604-es-art15-par3"/>
@@ -18161,6 +18289,7 @@
     <sources:source rdf:resource="sources.owl#source-32277-62003J0198-es-par3-rft1"/>
     <sources:source rdf:resource="sources.owl#source-32277-62005J0315-es-par14-rft2"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032277</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-dictamen-noun-1">
     <sources:source rdf:resource="sources.owl#source-32137-01985L0374-19990604-es-pre-cit3"/>
@@ -18397,6 +18526,7 @@
     <sources:source rdf:resource="sources.owl#source-32137-62003J0198-es-par90"/>
     <sources:source rdf:resource="sources.owl#source-32137-62003J0198-es-sum1-sub2"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032137</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-sala-noun-1">
     <sources:source rdf:resource="sources.owl#source-32264-61996J0083-es-aut-cmp1"/>
@@ -18429,6 +18559,7 @@
     <sources:source rdf:resource="sources.owl#source-32264-62005J0168-es-aut-cmp1"/>
     <sources:source rdf:resource="sources.owl#source-32264-62005J0315-es-aut-cmp1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032264</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-momento-noun-1">
     <sources:source rdf:resource="sources.owl#source-32201-01985L0374-19990604-es-art13-par1"/>
@@ -18542,6 +18673,7 @@
     <sources:source rdf:resource="sources.owl#source-32201-62004J0302-es-par22"/>
     <sources:source rdf:resource="sources.owl#source-32201-62004J0302-es-par31"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032201</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-aplicación-noun-1">
     <sources:source rdf:resource="sources.owl#source-32089-01985L0374-19990604-es-art11-par1"/>
@@ -18719,6 +18851,7 @@
     <sources:source rdf:resource="sources.owl#source-32089-62004J0302-es-par7"/>
     <sources:source rdf:resource="sources.owl#source-32089-62004J0302-es-sum1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032089</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-referencia-noun-1">
     <sources:source rdf:resource="sources.owl#source-32255-01997L0007-20050612-es-art15-par2"/>
@@ -18750,6 +18883,7 @@
     <sources:source rdf:resource="sources.owl#source-32255-62003J0198-es-par53"/>
     <sources:source rdf:resource="sources.owl#source-32255-62003J0198-es-par54"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032255</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-modificación-noun-1">
     <sources:source rdf:resource="sources.owl#source-32200-01985L0374-19990604-es-art15-par2-sub2"/>
@@ -18796,6 +18930,7 @@
     <sources:source rdf:resource="sources.owl#source-32200-62003A0158-es-sum4-sub2"/>
     <sources:source rdf:resource="sources.owl#source-32200-62004J0302-es-par14"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032200</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-jurisprudencia-noun-1">
     <sources:source rdf:resource="sources.owl#source-32182-31999L0044-es-pre-rec23"/>
@@ -18885,6 +19020,7 @@
     <sources:source rdf:resource="sources.owl#source-32182-62005J0315-es-par42"/>
     <sources:source rdf:resource="sources.owl#source-32182-62005J0315-es-par58"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032182</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-auto-noun-1">
     <sources:source rdf:resource="sources.owl#source-32094-61996A0120-es-par31"/>
@@ -18919,6 +19055,7 @@
     <sources:source rdf:resource="sources.owl#source-32094-62003A0158-es-par54"/>
     <sources:source rdf:resource="sources.owl#source-32094-62003A0158-es-par55"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032094</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-conclusión-noun-1">
     <sources:source rdf:resource="sources.owl#source-32115-02002L0065-20050612-es-pre-rec15"/>
@@ -19015,6 +19152,7 @@
     <sources:source rdf:resource="sources.owl#source-32115-62005J0315-es-par51"/>
     <sources:source rdf:resource="sources.owl#source-32115-62005J0315-es-rec2"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032115</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-francia-noun-1">
     <sources:source rdf:resource="sources.owl#source-32166-61999A0212-es-par17"/>
@@ -19073,6 +19211,7 @@
     <sources:source rdf:resource="sources.owl#source-32166-62003J0198-es-par87"/>
     <sources:source rdf:resource="sources.owl#source-32166-62003J0198-es-prt2"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032166</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-concepto-noun-1">
     <sources:source rdf:resource="sources.owl#source-32114-32000L0031-es-pre-rec19"/>
@@ -19155,6 +19294,7 @@
     <sources:source rdf:resource="sources.owl#source-32114-62004J0127-es-tit8"/>
     <sources:source rdf:resource="sources.owl#source-32114-62004J0229-es-par42"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032114</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-acto-noun-1">
     <sources:source rdf:resource="sources.owl#source-32075-01998L0027-20061228-es-art1-par2"/>
@@ -19216,6 +19356,7 @@
     <sources:source rdf:resource="sources.owl#source-32075-62004J0302-es-par7"/>
     <sources:source rdf:resource="sources.owl#source-32075-62005J0315-es-par40"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032075</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-animal-noun-1">
     <sources:source rdf:resource="sources.owl#source-32086-61996A0105-es-kwd4"/>
@@ -19341,6 +19482,7 @@
     <sources:source rdf:resource="sources.owl#source-32086-62003J0198-es-sum1-sub2"/>
     <sources:source rdf:resource="sources.owl#source-32086-62003J0198-es-sum3-sub2"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032086</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-procedimiento-noun-1">
     <sources:source rdf:resource="sources.owl#source-32241-01985L0374-19990604-es-art15-par1-pntb"/>
@@ -19712,6 +19854,7 @@
     <sources:source rdf:resource="sources.owl#source-32241-62005J0315-es-par15"/>
     <sources:source rdf:resource="sources.owl#source-32241-62005J0315-es-par61"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032241</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-propuesta-noun-1">
     <sources:source rdf:resource="sources.owl#source-32247-01985L0374-19990604-es-art15-par2-sub2"/>
@@ -19796,6 +19939,7 @@
     <sources:source rdf:resource="sources.owl#source-32247-62003J0350-es-par59"/>
     <sources:source rdf:resource="sources.owl#source-32247-62003J0350-es-sum1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032247</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-eficacia-noun-1">
     <sources:source rdf:resource="sources.owl#source-32145-01998L0027-20061228-es-pre-rec3"/>
@@ -19857,6 +20001,7 @@
     <sources:source rdf:resource="sources.owl#source-32145-62003J0350-es-par69"/>
     <sources:source rdf:resource="sources.owl#source-32145-62005J0168-es-par34"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032145</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-asunto-noun-1">
     <sources:source rdf:resource="sources.owl#source-32093-61996A0105-es-cid"/>
@@ -20029,6 +20174,7 @@
     <sources:source rdf:resource="sources.owl#source-32093-62005J0315-es-par53"/>
     <sources:source rdf:resource="sources.owl#source-32093-62005J0315-es-tit1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032093</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-prohibición-noun-1">
     <sources:source rdf:resource="sources.owl#source-32246-01997L0007-20050612-es-art14-par1"/>
@@ -20079,6 +20225,7 @@
     <sources:source rdf:resource="sources.owl#source-32246-62003J0198-es-par35-rft1"/>
     <sources:source rdf:resource="sources.owl#source-32246-62005J0315-es-par37"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032246</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-sentencia-noun-1">
     <sources:source rdf:resource="sources.owl#source-32267-02004R2006-20050612-es-art15-par2-pnta"/>
@@ -20459,6 +20606,7 @@
     <sources:source rdf:resource="sources.owl#source-32267-62005J0315-es-par58"/>
     <sources:source rdf:resource="sources.owl#source-32267-62005J0315-es-sec-kwd"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032267</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-código-noun-1">
     <sources:source rdf:resource="sources.owl#source-32104-01997L0007-20050612-es-art16-par1"/>
@@ -20515,6 +20663,7 @@
     <sources:source rdf:resource="sources.owl#source-32104-62004J0229-es-par35"/>
     <sources:source rdf:resource="sources.owl#source-32104-62004J0302-es-par16"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032104</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-interes-noun-1">
     <sources:source rdf:resource="sources.owl#source-32180-01987L0102-19980421-es-art1bis-par2-pnt3"/>
@@ -20729,6 +20878,7 @@
     <sources:source rdf:resource="sources.owl#source-32180-62004J0229-es-sum2-pnt3"/>
     <sources:source rdf:resource="sources.owl#source-32180-62004J0302-es-par25"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032180</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-presentación-noun-1">
     <sources:source rdf:resource="sources.owl#source-32235-01985L0374-19990604-es-art6-par1-pnta"/>
@@ -20777,6 +20927,7 @@
     <sources:source rdf:resource="sources.owl#source-32235-62005J0315-es-par5-rft1"/>
     <sources:source rdf:resource="sources.owl#source-32235-62005J0315-es-sum1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032235</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-medida-noun-1">
     <sources:source rdf:resource="sources.owl#source-32195-01985L0374-19990604-es-art15-par2-sub1"/>
@@ -21228,6 +21379,7 @@
     <sources:source rdf:resource="sources.owl#source-32195-62005J0315-es-par14-rft1"/>
     <sources:source rdf:resource="sources.owl#source-32195-62005J0315-es-par18-rft4"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032195</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-profesional-noun-1">
     <sources:source rdf:resource="sources.owl#source-32245-02002L0065-20050612-es-art3-par1-pnt1-pntc"/>
@@ -21326,6 +21478,7 @@
     <sources:source rdf:resource="sources.owl#source-32245-62005J0168-es-par4-rft1"/>
     <sources:source rdf:resource="sources.owl#source-32245-62005J0168-es-par5-rft1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032245</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-forma-noun-1">
     <sources:source rdf:resource="sources.owl#source-32165-01985L0374-19990604-es-art3-par2"/>
@@ -21420,6 +21573,7 @@
     <sources:source rdf:resource="sources.owl#source-32165-62004J0127-es-par4-rft2"/>
     <sources:source rdf:resource="sources.owl#source-32165-62005J0315-es-par20-rft2"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032165</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-adaptación-noun-1">
     <sources:source rdf:resource="sources.owl#source-32077-61997J0102-es-par11"/>
@@ -21494,6 +21648,7 @@
     <sources:source rdf:resource="sources.owl#source-32077-62003J0070-es-sec-grd-ssc2"/>
     <sources:source rdf:resource="sources.owl#source-32077-62003J0070-es-sec-grd-ssc3"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032077</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-revocación-noun-1">
     <sources:source rdf:resource="sources.owl#source-32262-32005L0029-es-art7-par4-pnte"/>
@@ -21593,6 +21748,7 @@
     <sources:source rdf:resource="sources.owl#source-32262-62004J0229-es-sum2-pnt1"/>
     <sources:source rdf:resource="sources.owl#source-32262-62004J0229-es-tit6"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032262</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-comite-noun-1">
     <sources:source rdf:resource="sources.owl#source-32108-01997L0007-20050612-es-pre-cit4"/>
@@ -21702,6 +21858,7 @@
     <sources:source rdf:resource="sources.owl#source-32108-62003J0198-es-par48"/>
     <sources:source rdf:resource="sources.owl#source-32108-62003J0198-es-sum1-sub2"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032108</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-credito-noun-1">
     <sources:source rdf:resource="sources.owl#source-32128-01987L0102-19980421-es-ann1-par1"/>
@@ -21918,6 +22075,7 @@
     <sources:source rdf:resource="sources.owl#source-32128-62004J0229-es-par49-sub1-pnt3"/>
     <sources:source rdf:resource="sources.owl#source-32128-62004J0229-es-sum2-pnt3"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032128</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-aspecto-noun-1">
     <sources:source rdf:resource="sources.owl#source-32092-01997L0007-20050612-es-art13-par2"/>
@@ -21975,6 +22133,7 @@
     <sources:source rdf:resource="sources.owl#source-32092-62005J0315-es-par15-rft1"/>
     <sources:source rdf:resource="sources.owl#source-32092-62005J0315-es-par5-rft1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032092</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-daño-noun-1">
     <sources:source rdf:resource="sources.owl#source-32131-01985L0374-19990604-es-art10-par1"/>
@@ -22058,6 +22217,7 @@
     <sources:source rdf:resource="sources.owl#source-32131-62005J0315-es-par19"/>
     <sources:source rdf:resource="sources.owl#source-32131-62005J0315-es-par19-rft1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032131</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-indicación-noun-1">
     <sources:source rdf:resource="sources.owl#source-32172-01987L0102-19980421-es-ann1-par1-pnt4"/>
@@ -22107,6 +22267,7 @@
     <sources:source rdf:resource="sources.owl#source-32172-62005J0315-es-par12"/>
     <sources:source rdf:resource="sources.owl#source-32172-62005J0315-es-tit7"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032172</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-luz-noun-1">
     <sources:source rdf:resource="sources.owl#source-32190-01985L0374-19990604-es-art16-par2"/>
@@ -22152,6 +22313,7 @@
     <sources:source rdf:resource="sources.owl#source-32190-62004J0127-es-par30"/>
     <sources:source rdf:resource="sources.owl#source-32190-62004J0302-es-par28"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032190</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-salud-noun-1">
     <sources:source rdf:resource="sources.owl#source-32265-01985L0374-19990604-es-pre-rec1"/>
@@ -22286,6 +22448,7 @@
     <sources:source rdf:resource="sources.owl#source-32265-62003J0198-es-par77"/>
     <sources:source rdf:resource="sources.owl#source-32265-62003J0198-es-par91"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032265</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-coste-noun-1">
     <sources:source rdf:resource="sources.owl#source-32127-01987L0102-19980421-es-ann1-par1-pnt8"/>
@@ -22344,6 +22507,7 @@
     <sources:source rdf:resource="sources.owl#source-32127-62003A0158-es-par36"/>
     <sources:source rdf:resource="sources.owl#source-32127-62003A0158-es-par93"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032127</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-definición-noun-1">
     <sources:source rdf:resource="sources.owl#source-32134-02002L0065-20050612-es-pre-rec20"/>
@@ -22391,6 +22555,7 @@
     <sources:source rdf:resource="sources.owl#source-32134-62005J0315-es-par6"/>
     <sources:source rdf:resource="sources.owl#source-32134-62005J0315-es-sum2"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032134</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-comisión-noun-1">
     <sources:source rdf:resource="sources.owl#source-32107-01985L0374-19990604-es-art15-par2-sub1"/>
@@ -23380,6 +23545,7 @@
     <sources:source rdf:resource="sources.owl#source-32107-62004J0302-es-par25"/>
     <sources:source rdf:resource="sources.owl#source-32107-62005J0315-es-par12"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032107</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-acción-noun-1">
     <sources:source rdf:resource="sources.owl#source-32073-01985L0374-19990604-es-art10-par1"/>
@@ -23489,6 +23655,7 @@
     <sources:source rdf:resource="sources.owl#source-32073-62004J0127-es-sum2-sub1"/>
     <sources:source rdf:resource="sources.owl#source-32073-62005J0168-es-par6-rft1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032073</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-red-noun-1">
     <sources:source rdf:resource="sources.owl#source-32254-02002L0065-20050612-es-pre-rec28"/>
@@ -23536,6 +23703,7 @@
     <sources:source rdf:resource="sources.owl#source-32254-62000J0316-es-sbj-pnt2"/>
     <sources:source rdf:resource="sources.owl#source-32254-62000J0316-es-sec-grd-ssc6"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032254</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-legislación-noun-1">
     <sources:source rdf:resource="sources.owl#source-32183-01985L0374-19990604-es-art10-par1"/>
@@ -23665,6 +23833,7 @@
     <sources:source rdf:resource="sources.owl#source-32183-62005J0315-es-par53"/>
     <sources:source rdf:resource="sources.owl#source-32183-62005J0315-es-sum1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032183</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-litigio-noun-1">
     <sources:source rdf:resource="sources.owl#source-32188-32000L0031-es-art19-par4-pnta"/>
@@ -23739,6 +23908,7 @@
     <sources:source rdf:resource="sources.owl#source-32188-62005J0315-es-par34"/>
     <sources:source rdf:resource="sources.owl#source-32188-62005J0315-es-sec-grd-ssc2"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032188</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-artículo-noun-1">
     <sources:source rdf:resource="sources.owl#source-32091-01985L0374-19990604-es-art1"/>
@@ -24360,6 +24530,7 @@
     <sources:source rdf:resource="sources.owl#source-32091-62005J0315-es-par34-rft1"/>
     <sources:source rdf:resource="sources.owl#source-32091-62005J0315-es-par34-rft2"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032091</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-medio-noun-1">
     <sources:source rdf:resource="sources.owl#source-32196-01997L0007-20050612-es-art11-par1"/>
@@ -24429,6 +24600,7 @@
     <sources:source rdf:resource="sources.owl#source-32196-62005J0168-es-par5-rft1"/>
     <sources:source rdf:resource="sources.owl#source-32196-62005J0168-es-par6-rft1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032196</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-documento-noun-1">
     <sources:source rdf:resource="sources.owl#source-32141-02004R2006-20050612-es-art13-par2"/>
@@ -24475,6 +24647,7 @@
     <sources:source rdf:resource="sources.owl#source-32141-62003A0158-es-par75"/>
     <sources:source rdf:resource="sources.owl#source-32141-62003J0336-es-par20"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032141</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-condición-noun-1">
     <sources:source rdf:resource="sources.owl#source-32116-01987L0102-19980421-es-ann1-par1-pnt5"/>
@@ -24625,6 +24798,7 @@
     <sources:source rdf:resource="sources.owl#source-32116-62005J0168-es-par25"/>
     <sources:source rdf:resource="sources.owl#source-32116-62005J0168-es-par4-rft1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032116</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-aproximación-noun-1">
     <sources:source rdf:resource="sources.owl#source-32090-01985L0374-19990604-es-tit-sbj"/>
@@ -24704,6 +24878,7 @@
     <sources:source rdf:resource="sources.owl#source-32090-62005J0315-es-par46"/>
     <sources:source rdf:resource="sources.owl#source-32090-62005J0315-es-sum1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032090</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-tratamiento-noun-1">
     <sources:source rdf:resource="sources.owl#source-32278-02004R2006-20050612-es-art10-par1"/>
@@ -24809,6 +24984,7 @@
     <sources:source rdf:resource="sources.owl#source-32278-62003J0198-es-par34-rft1"/>
     <sources:source rdf:resource="sources.owl#source-32278-62003J0198-es-par52"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032278</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-adquisición-noun-1">
     <sources:source rdf:resource="sources.owl#source-32079-01987L0102-19980421-es-art11-par2-sub1-pntb"/>
@@ -24836,6 +25012,7 @@
     <sources:source rdf:resource="sources.owl#source-32079-62003J0350-es-sum3-sub2"/>
     <sources:source rdf:resource="sources.owl#source-32079-62004J0229-es-par20"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032079</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-práctica-noun-1">
     <sources:source rdf:resource="sources.owl#source-32233-01987L0102-19980421-es-pre-rec13"/>
@@ -24930,6 +25107,7 @@
     <sources:source rdf:resource="sources.owl#source-32233-62004J0229-es-par46"/>
     <sources:source rdf:resource="sources.owl#source-32233-62005J0168-es-par24"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032233</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-seguridad-noun-1">
     <sources:source rdf:resource="sources.owl#source-32266-01985L0374-19990604-es-art6-par1"/>
@@ -24991,6 +25169,7 @@
     <sources:source rdf:resource="sources.owl#source-32266-62005J0315-es-par15-rft1"/>
     <sources:source rdf:resource="sources.owl#source-32266-62005J0315-es-par16-rft1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032266</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-interpretación-noun-1">
     <sources:source rdf:resource="sources.owl#source-32181-31993L0013-es-art5-par1"/>
@@ -25096,6 +25275,7 @@
     <sources:source rdf:resource="sources.owl#source-32181-62005J0315-es-par1"/>
     <sources:source rdf:resource="sources.owl#source-32181-62005J0315-es-par42"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032181</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-información-noun-1">
     <sources:source rdf:resource="sources.owl#source-32173-01987L0102-19980421-es-art12-par1-pntc"/>
@@ -25506,6 +25686,7 @@
     <sources:source rdf:resource="sources.owl#source-32173-62005J0315-es-par50"/>
     <sources:source rdf:resource="sources.owl#source-32173-62005J0315-es-sum2"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032173</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-consideración-noun-1">
     <sources:source rdf:resource="sources.owl#source-32120-01985L0374-19990604-es-pre-rec8"/>
@@ -25568,6 +25749,7 @@
     <sources:source rdf:resource="sources.owl#source-32120-62005J0168-es-par34"/>
     <sources:source rdf:resource="sources.owl#source-32120-62005J0168-es-par36"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032120</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-mercado-noun-1">
     <sources:source rdf:resource="sources.owl#source-32198-01985L0374-19990604-es-art15-par3"/>
@@ -25756,6 +25938,7 @@
     <sources:source rdf:resource="sources.owl#source-32198-62004J0229-es-par49-sub1-pnt3"/>
     <sources:source rdf:resource="sources.owl#source-32198-62004J0229-es-sum2-pnt3"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032198</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-relación-noun-1">
     <sources:source rdf:resource="sources.owl#source-32258-02002L0065-20050612-es-art3-par1-pnt1-pnta"/>
@@ -25800,6 +25983,7 @@
     <sources:source rdf:resource="sources.owl#source-32258-62003J0070-es-par30"/>
     <sources:source rdf:resource="sources.owl#source-32258-62003J0198-es-par58"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032258</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-producción-noun-1">
     <sources:source rdf:resource="sources.owl#source-32242-01985L0374-19990604-es-pre-rec2"/>
@@ -25863,6 +26047,7 @@
     <sources:source rdf:resource="sources.owl#source-32242-62005J0315-es-par18-rft3"/>
     <sources:source rdf:resource="sources.owl#source-32242-62005J0315-es-par53"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032242</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-fase-noun-1">
     <sources:source rdf:resource="sources.owl#source-32161-02002L0065-20050612-es-art3-par4"/>
@@ -25895,6 +26080,7 @@
     <sources:source rdf:resource="sources.owl#source-32161-62003J0336-es-sec-grd-ssc3"/>
     <sources:source rdf:resource="sources.owl#source-32161-62003J0350-es-par29"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032161</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-abogado-noun-1">
     <sources:source rdf:resource="sources.owl#source-32071-61996J0045-es-aut-cmp2"/>
@@ -25965,6 +26151,7 @@
     <sources:source rdf:resource="sources.owl#source-32071-62005J0315-es-aut-cmp2"/>
     <sources:source rdf:resource="sources.owl#source-32071-62005J0315-es-rec2"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032071</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-reciclado-noun-1">
     <sources:source rdf:resource="sources.owl#source-32252-61997J0102-es-par1"/>
@@ -26016,6 +26203,7 @@
     <sources:source rdf:resource="sources.owl#source-32252-62000J0444-es-par93"/>
     <sources:source rdf:resource="sources.owl#source-32252-62000J0444-es-tit"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032252</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-parte-noun-1">
     <sources:source rdf:resource="sources.owl#source-32224-01985L0374-19990604-es-art3-par1"/>
@@ -26221,6 +26409,7 @@
     <sources:source rdf:resource="sources.owl#source-32224-62005J0315-es-par20-rft1"/>
     <sources:source rdf:resource="sources.owl#source-32224-62005J0315-es-par42"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032224</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-párrafo-noun-1">
     <sources:source rdf:resource="sources.owl#source-32223-01997L0007-20050612-es-art6-par1-sub2-pnt2"/>
@@ -26323,6 +26512,7 @@
     <sources:source rdf:resource="sources.owl#source-32223-62005J0315-es-par12"/>
     <sources:source rdf:resource="sources.owl#source-32223-62005J0315-es-par39"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032223</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-ordenamiento_jurídico-noun-1">
     <sources:source rdf:resource="sources.owl#source-32214-01998L0027-20061228-es-art1-par2"/>
@@ -26361,6 +26551,7 @@
     <sources:source rdf:resource="sources.owl#source-32214-62003J0070-es-par19"/>
     <sources:source rdf:resource="sources.owl#source-32214-62003J0350-es-par40-rft2"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032214</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-trabajo-noun-1">
     <sources:source rdf:resource="sources.owl#source-32276-01997L0007-20050612-es-art3-par2-pnt1"/>
@@ -26398,6 +26589,7 @@
     <sources:source rdf:resource="sources.owl#source-32276-62003J0350-es-par15-rft2"/>
     <sources:source rdf:resource="sources.owl#source-32276-62004J0229-es-par16-rft2"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032276</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-agente-noun-1">
     <sources:source rdf:resource="sources.owl#source-32080-32005L0029-es-art6-par1-pntf"/>
@@ -26513,6 +26705,7 @@
     <sources:source rdf:resource="sources.owl#source-32080-62005J0315-es-obs5"/>
     <sources:source rdf:resource="sources.owl#source-32080-62005J0315-es-obs6"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032080</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-utilización-noun-1">
     <sources:source rdf:resource="sources.owl#source-32282-01997L0007-20050612-es-art10-ptt"/>
@@ -26628,6 +26821,7 @@
     <sources:source rdf:resource="sources.owl#source-32282-62003J0070-es-par9"/>
     <sources:source rdf:resource="sources.owl#source-32282-62003J0198-es-par8"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032282</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-consecuencia-noun-1">
     <sources:source rdf:resource="sources.owl#source-32118-02002L0065-20050612-es-art3-par1-pnt3-pnta"/>
@@ -26685,6 +26879,7 @@
     <sources:source rdf:resource="sources.owl#source-32118-62004J0229-es-par49-sub2"/>
     <sources:source rdf:resource="sources.owl#source-32118-62004J0229-es-sum2-pnt3"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032118</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-exigencia-noun-1">
     <sources:source rdf:resource="sources.owl#source-32158-02002L0065-20050612-es-pre-rec21"/>
@@ -26727,6 +26922,7 @@
     <sources:source rdf:resource="sources.owl#source-32158-62005J0168-es-par10"/>
     <sources:source rdf:resource="sources.owl#source-32158-62005J0168-es-par3-rft1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032158</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-domicilio-noun-1">
     <sources:source rdf:resource="sources.owl#source-32142-01997L0007-20050612-es-art3-par2-pnt1"/>
@@ -26849,6 +27045,7 @@
     <sources:source rdf:resource="sources.owl#source-32142-62004J0229-es-sum1"/>
     <sources:source rdf:resource="sources.owl#source-32142-62004J0229-es-tit6"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032142</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-evaluación-noun-1">
     <sources:source rdf:resource="sources.owl#source-32155-31993L0013-es-pre-rec16"/>
@@ -26929,6 +27126,7 @@
     <sources:source rdf:resource="sources.owl#source-32155-62003J0198-es-par78"/>
     <sources:source rdf:resource="sources.owl#source-32155-62003J0198-es-par79"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032155</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-país-noun-1">
     <sources:source rdf:resource="sources.owl#source-32220-01997L0007-20050612-es-art12-par2"/>
@@ -26980,6 +27178,7 @@
     <sources:source rdf:resource="sources.owl#source-32220-62003J0070-es-par30"/>
     <sources:source rdf:resource="sources.owl#source-32220-62004J0302-es-par4-rft1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032220</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-requisito-noun-1">
     <sources:source rdf:resource="sources.owl#source-32259-02002L0065-20050612-es-art4-par1"/>
@@ -27036,6 +27235,7 @@
     <sources:source rdf:resource="sources.owl#source-32259-62003J0070-es-par28"/>
     <sources:source rdf:resource="sources.owl#source-32259-62005J0315-es-par15"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032259</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-gestión-noun-1">
     <sources:source rdf:resource="sources.owl#source-32167-02002L0065-20050612-es-pre-rec17"/>
@@ -27087,6 +27287,7 @@
     <sources:source rdf:resource="sources.owl#source-32167-62003J0350-es-par50"/>
     <sources:source rdf:resource="sources.owl#source-32167-62003J0350-es-par77"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032167</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-productor-noun-1">
     <sources:source rdf:resource="sources.owl#source-32244-01985L0374-19990604-es-art10-par1"/>
@@ -27163,6 +27364,7 @@
     <sources:source rdf:resource="sources.owl#source-32244-62005J0315-es-par33"/>
     <sources:source rdf:resource="sources.owl#source-32244-62005J0315-es-par57"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032244</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-pago-noun-1">
     <sources:source rdf:resource="sources.owl#source-32219-01987L0102-19980421-es-ann2-par3"/>
@@ -27230,6 +27432,7 @@
     <sources:source rdf:resource="sources.owl#source-32219-62004J0229-es-par9-rft1"/>
     <sources:source rdf:resource="sources.owl#source-32219-62005J0315-es-par55"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032219</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-indemnización-noun-1">
     <sources:source rdf:resource="sources.owl#source-32171-32004L0113-es-art8-par2"/>
@@ -27277,6 +27480,7 @@
     <sources:source rdf:resource="sources.owl#source-32171-62003J0198-es-par63"/>
     <sources:source rdf:resource="sources.owl#source-32171-62003J0198-es-sum2-sub1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032171</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-españa-noun-1">
     <sources:source rdf:resource="sources.owl#source-32151-61997J0423-es-crf"/>
@@ -27293,6 +27497,7 @@
     <sources:source rdf:resource="sources.owl#source-32151-62003A0158-es-par20"/>
     <sources:source rdf:resource="sources.owl#source-32151-62003J0336-es-par21"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032151</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-alimento-noun-1">
     <sources:source rdf:resource="sources.owl#source-32083-61996A0105-es-kwd4"/>
@@ -27346,6 +27551,7 @@
     <sources:source rdf:resource="sources.owl#source-32083-62005J0315-es-par31"/>
     <sources:source rdf:resource="sources.owl#source-32083-62005J0315-es-par53"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032083</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-tipo-noun-1">
     <sources:source rdf:resource="sources.owl#source-32275-01987L0102-19980421-es-art1bis-par6"/>
@@ -27386,6 +27592,7 @@
     <sources:source rdf:resource="sources.owl#source-32275-62004J0229-es-par49-sub1-pnt3"/>
     <sources:source rdf:resource="sources.owl#source-32275-62004J0229-es-sum2-pnt3"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032275</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-reglamento-noun-1">
     <sources:source rdf:resource="sources.owl#source-32257-01985L0374-19990604-es-art18-par1"/>
@@ -27795,6 +28002,7 @@
     <sources:source rdf:resource="sources.owl#source-32257-62005J0315-es-par18"/>
     <sources:source rdf:resource="sources.owl#source-32257-62005J0315-es-par53"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032257</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-ámbito-noun-1">
     <sources:source rdf:resource="sources.owl#source-32084-01985L0374-19990604-es-art20-par1"/>
@@ -27883,6 +28091,7 @@
     <sources:source rdf:resource="sources.owl#source-32084-62004J0302-es-par5-rft1"/>
     <sources:source rdf:resource="sources.owl#source-32084-62005J0315-es-par16-rft1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032084</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-consumo-noun-1">
     <sources:source rdf:resource="sources.owl#source-32122-01985L0374-19990604-es-art9-par1-sub1-pntb-pnt1"/>
@@ -28003,6 +28212,7 @@
     <sources:source rdf:resource="sources.owl#source-32122-62003J0350-es-par17"/>
     <sources:source rdf:resource="sources.owl#source-32122-62005J0168-es-par11"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032122</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-parte_dispositiva-noun-1">
     <sources:source rdf:resource="sources.owl#source-32225-61996A0105-es-sec-opp"/>
@@ -28038,6 +28248,7 @@
     <sources:source rdf:resource="sources.owl#source-32225-62002J0264-es-sec-opp"/>
     <sources:source rdf:resource="sources.owl#source-32225-62003J0070-es-sec-opp"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032225</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-circunstancia-noun-1">
     <sources:source rdf:resource="sources.owl#source-32102-01985L0374-19990604-es-art6-par1"/>
@@ -28132,6 +28343,7 @@
     <sources:source rdf:resource="sources.owl#source-32102-62004J0302-es-par38"/>
     <sources:source rdf:resource="sources.owl#source-32102-62005J0168-es-par22"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032102</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-comercialización-noun-1">
     <sources:source rdf:resource="sources.owl#source-32105-01997L0007-20050612-es-art14-par1"/>
@@ -28253,6 +28465,7 @@
     <sources:source rdf:resource="sources.owl#source-32105-62005J0315-es-par59"/>
     <sources:source rdf:resource="sources.owl#source-32105-62005J0315-es-sum3"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032105</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-carácter-noun-1">
     <sources:source rdf:resource="sources.owl#source-32099-01985L0374-19990604-es-pre-rec6"/>
@@ -28337,6 +28550,7 @@
     <sources:source rdf:resource="sources.owl#source-32099-62005J0168-es-tit6"/>
     <sources:source rdf:resource="sources.owl#source-32099-62005J0315-es-par58"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032099</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-agua-noun-1">
     <sources:source rdf:resource="sources.owl#source-32081-31994L0047-es-ann-par1-pntd-pnt4"/>
@@ -28388,6 +28602,7 @@
     <sources:source rdf:resource="sources.owl#source-32081-62001J0316-es-par8-rft2"/>
     <sources:source rdf:resource="sources.owl#source-32081-62001J0316-es-par8-rft5"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032081</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-prueba-noun-1">
     <sources:source rdf:resource="sources.owl#source-32251-01985L0374-19990604-es-pre-rec16"/>
@@ -28460,6 +28675,7 @@
     <sources:source rdf:resource="sources.owl#source-32251-62003J0198-es-sum1-sub1"/>
     <sources:source rdf:resource="sources.owl#source-32251-62005J0168-es-par6-rft1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032251</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-miembro-noun-1">
     <sources:source rdf:resource="sources.owl#source-32199-01985L0374-19990604-es-art10-par1"/>
@@ -29412,6 +29628,7 @@
     <sources:source rdf:resource="sources.owl#source-32199-62005J0315-es-sum1"/>
     <sources:source rdf:resource="sources.owl#source-32199-62005J0315-es-tit7"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032199</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="#synset-costa-noun-1">
     <sources:source rdf:resource="sources.owl#source-32126-61996A0105-es-opp4"/>
@@ -29554,5 +29771,6 @@
     <sources:source rdf:resource="sources.owl#source-32126-62005J0168-es-par40"/>
     <sources:source rdf:resource="sources.owl#source-32126-62005J0315-es-par61"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032126</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
 </rdf:RDF>

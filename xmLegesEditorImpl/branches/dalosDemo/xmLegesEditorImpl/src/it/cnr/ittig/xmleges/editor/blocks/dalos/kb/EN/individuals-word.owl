@@ -602,6 +602,9 @@
   <rdf:Description rdf:about="individuals.owl#synset-human-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-human-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-transposition_-noun-1">
+    <owns:containsWordSense rdf:resource="individuals.owl#wordsense-transposition_-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#wordsense-periodical-noun-1">
     <owns:inSynset rdf:resource="individuals.owl#synset-periodical-noun-1"/>
     <owns:word rdf:resource="individuals.owl#word-periodical"/>
@@ -6033,9 +6036,6 @@
   <rdf:Description rdf:about="individuals.owl#synset-legal_position-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-legal_position-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-transposition_|_date-noun-1">
-    <owns:containsWordSense rdf:resource="individuals.owl#wordsense-transposition_|_date-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-equidad-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-equidad-noun-1"/>
   </rdf:Description>
@@ -9898,13 +9898,6 @@
   <rdf:Description rdf:about="individuals.owl#synset-prejudice-noun-1">
     <owns:containsWordSense rdf:resource="individuals.owl#wordsense-prejudice-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#word-transposition_|_date">
-    <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">transposition | date</owns:lexicalForm>
-    <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">transposition | Date</owns:lexicalForm>
-    <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">transposition | date</owns:protoForm>
-    <owns:sense rdf:resource="individuals.owl#wordsense-transposition_|_date-noun-1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#word-car">
     <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">car</owns:lexicalForm>
     <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">car</owns:protoForm>
@@ -13074,6 +13067,14 @@
     <owns:inSynset rdf:resource="individuals.owl#synset-engagement-noun-1"/>
     <owns:word rdf:resource="individuals.owl#word-engagement"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#word-transposition_">
+    <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">transposition </owns:lexicalForm>
+    <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string"> date</owns:lexicalForm>
+    <owns:lexicalForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">transposition | Date</owns:lexicalForm>
+    <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">transposition </owns:protoForm>
+    <owns:sense rdf:resource="individuals.owl#wordsense-transposition_-noun-1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#wordsense-principle_of_sound_administration-noun-1">
     <owns:inSynset rdf:resource="individuals.owl#synset-principle_of_sound_administration-noun-1"/>
@@ -32434,11 +32435,6 @@
     <owns:word rdf:resource="individuals.owl#word-option"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#wordsense-transposition_|_date-noun-1">
-    <owns:inSynset rdf:resource="individuals.owl#synset-transposition_|_date-noun-1"/>
-    <owns:word rdf:resource="individuals.owl#word-transposition_|_date"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#wordsense-disposal_site-noun-1">
     <owns:inSynset rdf:resource="individuals.owl#synset-disposal_site-noun-1"/>
     <owns:word rdf:resource="individuals.owl#word-disposal_site"/>
@@ -32735,6 +32731,11 @@
   <rdf:Description rdf:about="individuals.owl#wordsense-observance_of_laws-noun-1">
     <owns:inSynset rdf:resource="individuals.owl#synset-observance_of_laws-noun-1"/>
     <owns:word rdf:resource="individuals.owl#word-observance_of_laws"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#wordsense-transposition_-noun-1">
+    <owns:inSynset rdf:resource="individuals.owl#synset-transposition_-noun-1"/>
+    <owns:word rdf:resource="individuals.owl#word-transposition_"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounWordSense"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#word-stanbrook">

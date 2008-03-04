@@ -199,6 +199,8 @@ public class KbTree {
 			//It must be added!
 			OntClass oc = om.getOntClass(uri);
 			toc = kbm.addTreeClass(uri, oc.getLocalName());
+		} else {
+//			System.out.println("getOntoClass() - class found: " + uri);
 		}
 		
 		return toc;
@@ -232,7 +234,7 @@ public class KbTree {
 			}
 			
 			TreeOntoClass toc = (TreeOntoClass) data;			
-			Collection pocs = kbm.getPivotClasses(toc);
+			Collection pocs = toc.getConcepts();
 			for(Iterator pi = pocs.iterator(); pi.hasNext(); ) {
 				PivotOntoClass poc = (PivotOntoClass) pi.next();
 				Synset syn = poc.getTerm(lang);

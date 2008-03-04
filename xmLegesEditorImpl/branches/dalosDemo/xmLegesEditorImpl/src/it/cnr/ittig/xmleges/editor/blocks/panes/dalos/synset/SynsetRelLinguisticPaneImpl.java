@@ -52,7 +52,6 @@ Initializable, Startable, SynsetRelLinguisticPane {
 		tree.setRootVisible(true);
 	
 		if(relations == null || relations.size() < 1) {
-			System.out.println(">> relations is empty!!");
 			return;
 		}
 		

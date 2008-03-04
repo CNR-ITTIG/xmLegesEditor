@@ -20,7 +20,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -212,8 +211,7 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		}
 		
 		Synset fsyn = poc.getTerm(lang);
-		System.out.println("getSynset - poc: " + poc + " - fsyn: " + fsyn +
-				" fsUri: " + fsyn.getURI());
+		System.out.println("getSynset - poc: " + poc + " - fsyn: " + fsyn);
 		if(fsyn == null) {
 			//No alignment!
 			return null;
@@ -221,6 +219,7 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		
 		if(!fsyn.isConcreteSynset()) {
 			//Make it concrete!
+			System.out.println("Not concrete! Initializing...");
 			kbc.initSynset(fsyn);
 		}
 
@@ -260,37 +259,16 @@ implements KbManager, Loggable, Serviceable, Initializable {
 	
 	public PivotOntoClass getPivotClass(String uri) {
 
-		return (PivotOntoClass) uriToPivotClass.get(uri);
+		PivotOntoClass poc = (PivotOntoClass) uriToPivotClass.get(uri);
+		if(poc == null) {
+			System.err.println("Error! Unable to get pivot for " + uri);
+		}
+		return poc;
 	}
 	
 	public TreeOntoClass getTreeClass(String uri) {
 
 		return (TreeOntoClass) uriToTreeClass.get(uri);
-	}
-
-	/**
-	 * Find which concepts are classified under 'toc' class
-	 * 
-	 * @param toc
-	 * @return a Collection of PivotOntoClass
-	 */
-	public Collection getPivotClasses(TreeOntoClass toc) {
-		
-		Collection pocs = new HashSet();
-		
-		Collection pivots = uriToPivotClass.values();
-		for(Iterator i = pivots.iterator(); i.hasNext(); ) {
-			PivotOntoClass pitem = (PivotOntoClass) i.next();
-			Collection links = pitem.getLinks();
-			for(Iterator k = links.iterator(); k.hasNext(); ) {
-				TreeOntoClass titem = (TreeOntoClass) k.next();
-				if(titem.equals(toc)) {
-					pocs.add(pitem);
-				}
-			}
-		}
-		
-		return pocs;
 	}
 	
 	TreeOntoClass addTreeClass(String uri, String name) {
@@ -344,6 +322,9 @@ implements KbManager, Loggable, Serviceable, Initializable {
 				String turi = objNS + objName;
 				toc.setURI(turi);
 				poc.addLink(toc);
+				toc.addConcept(poc);
+//				System.out.println("Adding pivot class " + poc + 
+//						" to tree class " + toc + " turi:" + turi);
 				
 				uriToTreeClass.put(turi, toc);
 			}

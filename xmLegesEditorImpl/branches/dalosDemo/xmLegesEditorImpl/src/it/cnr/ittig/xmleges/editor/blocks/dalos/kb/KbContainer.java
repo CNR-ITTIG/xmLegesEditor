@@ -70,6 +70,7 @@ public class KbContainer {
 	OntProperty word = null;
 	OntProperty lexical = null;
 	OntProperty proto = null;
+	OntProperty glossProperty = null;
 	OntClass nSynClass = null;
 	OntClass vSynClass = null;
 	OntClass ajSynClass = null;
@@ -97,13 +98,10 @@ public class KbContainer {
 			try {
 				initMaps();
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -187,7 +185,9 @@ public class KbContainer {
 				KbModelFactory.addSegment(key, segFileName, segmentName);
 			}
 		} else {
-			//System.err.println("SEGMAP not found: " + mapFileName);
+			System.err.println("Segmentation type: \"" + segmentName +
+					"\" for language \"" + this.LANGUAGE + 
+					"\" ...SEGMAP file not found!");
 		}
 	}
 	
@@ -331,6 +331,7 @@ public class KbContainer {
 		word = om.getOntProperty(KbConf.METALEVEL_ONTO_NS + "word");
 		lexical = om.getOntProperty(KbConf.METALEVEL_ONTO_NS + "lexicalForm");
 		proto = om.getOntProperty(KbConf.METALEVEL_ONTO_NS + "protoForm");
+		glossProperty = om.getOntProperty(KbConf.METALEVEL_ONTO_NS + "gloss");
 		nSynClass = om.getOntClass(KbConf.METALEVEL_ONTO_NS + "NounSynset");
 		vSynClass = om.getOntClass(KbConf.METALEVEL_ONTO_NS + "VerbSynset");
 		ajSynClass = om.getOntClass(KbConf.METALEVEL_ONTO_NS + "AdjectiveSynset");
@@ -405,12 +406,20 @@ public class KbContainer {
 	private void analyzeSynsetResource(OntResource ores, Synset syn) {
 		//If syn != null, make it a concrete synset
 		
+		//TODO GESTIRE LA GLOSSA / DEFINIZIONE
+		
 		boolean newSynset = false;
 		
 		if(syn == null) {
 			newSynset = true;
 			syn = new Synset(LANGUAGE);
 			syn.setURI(ores.getNameSpace() + ores.getLocalName());
+		}
+		
+		
+		RDFNode glossNode = ores.getPropertyValue(glossProperty);
+		if(glossNode != null) {			
+			syn.setDef( ((Literal) glossNode).getString());
 		}
 
 		for(Iterator k = ores.listPropertyValues(contains); k.hasNext();) {
