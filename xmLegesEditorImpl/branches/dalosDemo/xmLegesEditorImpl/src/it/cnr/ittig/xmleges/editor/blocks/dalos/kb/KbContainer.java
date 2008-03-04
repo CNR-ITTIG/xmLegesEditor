@@ -478,7 +478,7 @@ public class KbContainer {
 			return;
 		}
 		
-		System.out.println(">> adding sources to " + syn + "...");
+		//System.out.println(">> adding sources to " + syn + "...");
 		
 		//OntModel om = KbModelFactory.getModel("source", "micro", LANGUAGE);
 		OntModel om = KbModelFactory.getModel("seg.source", "micro", LANGUAGE, syn.getURI());
