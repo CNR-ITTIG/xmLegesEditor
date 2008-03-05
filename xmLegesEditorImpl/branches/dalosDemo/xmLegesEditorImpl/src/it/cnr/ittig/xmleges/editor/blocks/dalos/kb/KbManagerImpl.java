@@ -374,7 +374,12 @@ implements KbManager, Loggable, Serviceable, Initializable {
 	    };
 		
 		for (int i = 0; i < commonFiles.length; i++) {
-			UtilFile.copyFileInTempDir(getClass().getResourceAsStream(commonDirName+File.separator+commonFiles[i]),"dalos", commonFiles[i]);
+			if(!UtilFile.fileExistInTemp(KbConf.dalosRepository+File.separator+commonFiles[i])){
+				UtilFile.copyFileInTempDir(getClass().getResourceAsStream(commonDirName+"/"+commonFiles[i]),KbConf.dalosRepository, commonFiles[i]);
+			}else{
+				System.err.println("common: already in temp");
+			}
+			
 		}	
 		
 		
@@ -394,9 +399,13 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		
 		for(int i=0; i<dalosLang.length; i++){
 			for(int j=0; j < langFiles.length; j++){
-				UtilFile.copyFileInTempDir(getClass().getResourceAsStream(dalosLang[i]+File.separator+langFiles[j]),"dalos"+File.separator+dalosLang[i],langFiles[j]);
-				if(langFiles[j].endsWith("zip")){
-					UtilFile.unZip(UtilFile.getFileFromTemp("dalos"+File.separator+dalosLang[i]+File.separator+langFiles[j]).getAbsolutePath(),UtilFile.getTempDirName()+File.separator+"dalos"+File.separator+dalosLang[i]);
+				if(!UtilFile.fileExistInTemp(KbConf.dalosRepository+File.separator+dalosLang[i]+File.separator+langFiles[j])){
+					UtilFile.copyFileInTempDir(getClass().getResourceAsStream(dalosLang[i]+"/"+langFiles[j]),KbConf.dalosRepository+"/"+dalosLang[i],langFiles[j]);
+					if(langFiles[j].endsWith("zip")){
+						UtilFile.unZip(UtilFile.getFileFromTemp(KbConf.dalosRepository+"/"+dalosLang[i]+"/"+langFiles[j]).getAbsolutePath(),UtilFile.getTempDirName()+"/"+KbConf.dalosRepository+"/"+dalosLang[i]);
+					}
+				}else{
+					System.err.println("lang: already in temp");
 				}
 			}
 		}
