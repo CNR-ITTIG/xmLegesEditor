@@ -22,14 +22,14 @@ implements EventManagerListener, Loggable, Serviceable,
 		
 		///////////////////////////////////////////
 		//METTERE DA UN'ALTRA PARTE !!!!
+		
 		String[] icons = new String[] { 		
-				"../images/kontact_journal.png", 
-				"../images/lexical.png",
-				"../images/signature.png" };
+				"kontact_journal.png", 
+				"lexical.png",
+				"signature.png" };
 		
 		for (int i = 0; i < icons.length; i++) {
-			UtilFile.copyFileInTempDir(getClass().
-					getResourceAsStream(icons[i]),"dalos",icons[i]);
+			UtilFile.copyFileInTempDir(getClass().getResourceAsStream("images/"+icons[i]),"dalos",icons[i]);
 		}		
 		///////////////////////////////////////////
 		
