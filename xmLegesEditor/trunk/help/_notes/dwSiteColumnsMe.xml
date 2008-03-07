@@ -1,0 +1,8 @@
+<columnlist>
+<column name="Cartella%20locale" align="left" show="TRUE" share="FALSE" builtin="TRUE" localwidth="258" remotewidth="180" />
+<column name="Note" align="center" show="TRUE" share="FALSE" builtin="TRUE" localwidth="36" remotewidth="36" />
+<column name="Dimensione" align="right" show="TRUE" share="FALSE" builtin="TRUE" localwidth="40" remotewidth="-2" />
+<column name="Tipo" align="left" show="TRUE" share="FALSE" builtin="TRUE" localwidth="60" remotewidth="60" />
+<column name="Modificato" align="left" show="TRUE" share="FALSE" builtin="TRUE" localwidth="102" remotewidth="102" />
+<column name="Ritirato%20da" align="left" show="TRUE" share="FALSE" builtin="TRUE" localwidth="-1" remotewidth="-1" />
+</columnlist>
