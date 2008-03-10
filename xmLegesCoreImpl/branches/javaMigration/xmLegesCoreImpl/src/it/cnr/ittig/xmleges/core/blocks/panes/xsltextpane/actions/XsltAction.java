@@ -88,7 +88,7 @@ public class XsltAction extends TextAction {
 	
 	protected String getText(ActionEvent evt, Element span)
 	{
-		if(!AntiAliasedTextPane.isMappedElement(span)) return null;
+		if(!AntiAliasedTextPane.isMappedElement(span)) return null;    // qui sarebbe a dire isMappedSpan() ma ci si arriva sicuramente con uno span per il NavigationFilter
 		AntiAliasedTextPane pane = (AntiAliasedTextPane)getTextComponent(evt);
 		pane.getPane().getLogger().debug("XsltAction.getText()");
 		String retVal = null;
