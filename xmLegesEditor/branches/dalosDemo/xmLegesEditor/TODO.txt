@@ -3,33 +3,30 @@ xmLeges - Dalos version
 
 DATI:
 ----
-- dati DALOS mancanti nelle lingue inglese, olandese, spagnolo;
-- implementare la funzione getForeignSynset() decidendo come rappresentare
-in memoria i concetti pivot di "concepts.owl";
+- rappresentare la definizione non come glossa di wordnet ma come un'istanza di Source
+(magari creando una nuova objectProperty per riconoscerla dalle altre);
 - una volta disponibile l'ontologia definitiva, separare l'ontologia di dominio
 dall'ontologia clo-dul.owl e dal modulo owl contenente il modo in cui le classi di dominio
 sono collegate alla clo-dul (questi tre file saranno caricati dinamicamente come gli altri),
 al momento la variabile MERGE_DOMAIN di KbConf stabilisce se usare la nuova ontologia
 che comprende la clo-dul oppure la vecchia da sola (init più rapido...);
-- pensare alla possibilità di pre-calcolare le semantic relations e salvare i risultati
-in un ulteriore modulo owl;
 - cercare o creare un algoritmo per il calcolo (anche qualitativo) della prossimità 
-semantica dei termini una volta collegata l'ontologia;
-- ulteriore modulo owl per specificare quali concetti che nel lessico sono ipo/iper
-diventano subClassOf nel dominio della cons.law;
-
+semantica dei termini (o delle classi!) una volta collegata l'ontologia;
 
 
 INTERFACCIA:
 -----------
-- evidenziare in qualche modo i synset definiti (che hanno una def. nei testi
-sulla consumer law) da quelli non definiti;
 - dare un comportamento di default ai pannelli se il synset selezionato è null
 (es.: creare un pannello html vuoto, etc.), serve quando si cambia lingua e non c'è
-corrispondenza;
-- pulire i pannelli contenenti JTree al momento in cui il tabbedPane che li contiene
-non è più visibile, evitare che si veda il tree precendente mentre carica il nuovo,
-eventualmente cambiare il cursore per impedire all'utente di cliccare mentre carica;
+corrispondenza; <-- Non settare il "selected synset" a null altrimenti si perde 
+l'ultima selezione corretta (problema che si verifica switchando le lingue quando
+c'è un "No match").
+- non utilizzare il treemodel di default nell'ontology browser in modo da specificare
+cosa è leaf e cosa è node, per poter togliere le foglie "empty".
+- decidere se visualizzare o meno i termini nell'ontology browser, forse è meglio di no;
+settare un evento per le classi (nodi dell'albero) per mostrare l'elenco dei termini
+classificati nel pannello synset list ed eventualmente le semantic relation verso
+altre classi nel semantic relation panel.
 
 
 -right click su pannello Ontology Browser per inserimento synset nel testo
