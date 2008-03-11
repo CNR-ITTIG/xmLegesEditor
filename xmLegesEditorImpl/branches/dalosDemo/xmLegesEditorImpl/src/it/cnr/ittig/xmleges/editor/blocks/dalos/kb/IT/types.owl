@@ -16,6 +16,9 @@
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-uso-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-human_use-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-misura_adottato-noun-1">
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000173"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-mezzo_comunicazione-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000070"/>
   </rdf:Description>
@@ -82,6 +85,9 @@
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-governo-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-government-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-condizione_stabilito-noun-1">
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000174"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-codice_condotta-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-code_of_conduct-noun-1"/>
   </rdf:Description>
@@ -121,6 +127,9 @@
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-obiettivo-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-objective-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-negoziato_individuale-noun-1">
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000178"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-osservanza_disposizione-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000125"/>
   </rdf:Description>
@@ -153,6 +162,9 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-immobile-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-immobile-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-ordinamento_stato_membro-noun-1">
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000177"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-consumatore-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-consumer-noun-1"/>
@@ -199,6 +211,9 @@
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-condizione-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-condizione-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-caso_di_contrarre-noun-1">
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000163"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-principio_di_lo_certezza_diritto-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-principle_of_legal_certainty-noun-1"/>
   </rdf:Description>
@@ -219,6 +234,9 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-rete-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-rete-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-contratto_fornitura-noun-1">
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000164"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-indicazione_di_il_prezzo_unita-_di_misura-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000146"/>
@@ -250,6 +268,9 @@
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-codice_civile-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-civil_code-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-testo_disposizione-noun-1">
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000162"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-produzione-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-production-noun-1"/>
   </rdf:Description>
@@ -273,6 +294,9 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-consiglio-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-council-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-disposizione_nazionale-noun-1">
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000158"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-costo-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-costo-noun-1"/>
@@ -307,6 +331,12 @@
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-circolazione_merce-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000052"/>
   </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-transazione_contemplato-noun-1">
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000180"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-contratto_distanza-noun-1">
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000157"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-stipulazione_contratto-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000126"/>
   </rdf:Description>
@@ -339,6 +369,9 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-misura-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-misura-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-testo_disposizione_essenziale-noun-1">
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000167"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-legislazione-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-legal_system-noun-1"/>
@@ -378,6 +411,9 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-pagamento-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-deferred_payment-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-supporto_durevole-noun-1">
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000172"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-materia-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-subject-noun-1"/>
@@ -427,11 +463,17 @@
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-azione-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-action-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-normativa_comunitario-noun-1">
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000161"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-documento-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-documento-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-medicinale-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-medicinale-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-misura_appropriato-noun-1">
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000166"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-rapporto-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-relation-noun-1"/>
@@ -453,6 +495,9 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-articolo-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-articolo-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-disposizione_legislativo-noun-1">
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000155"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-fornitura-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-supply-noun-1"/>
@@ -514,11 +559,11 @@
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-governo_spagnolo-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-spanish_government-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-protezione_di_il_consumatore_materia-noun-1">
-    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-consumer_protection-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-requisito-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-requisito-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-protezione_di_il_consumatore_materia-noun-1">
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-consumer_protection-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-ordinamento_giuridico-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-legal_system-noun-1"/>
@@ -583,6 +628,9 @@
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-segreto_professionale-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000094"/>
   </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-allegato_direttiva-noun-1">
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000176"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-mercato_comune-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000055"/>
   </rdf:Description>
@@ -594,6 +642,9 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-tasso-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-tasso-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-legge_stato_membro-noun-1">
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000168"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-livello_di_protezione_elevato-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-maximum_degree_of_protection-noun-1"/>
@@ -817,6 +868,9 @@
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-organo_amministrativo-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000079"/>
   </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-legge_applicabile-noun-1">
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000165"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-comunicazione_distanza-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-distance_communication-noun-1"/>
   </rdf:Description>
@@ -919,6 +973,9 @@
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-prezzo_per_unita-_misura-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-unit_price_of_products-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-legislazione_applicabile-noun-1">
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000170"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-comitato_permanente-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-standing_committee-noun-1"/>
   </rdf:Description>
@@ -949,6 +1006,9 @@
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-distanza-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-distanza-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-contratto_credito-noun-1">
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000156"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-tutela_interesse_collettivo-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000144"/>
   </rdf:Description>
@@ -976,14 +1036,14 @@
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-scadenza_termine-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-date_of_expiry-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-prestazione-noun-1">
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-prestazione-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-commissione-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-commission-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-operazione-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-operazione-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-prestazione-noun-1">
-    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-prestazione-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-interpretazione-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-interpretazione-noun-1"/>
@@ -1090,6 +1150,9 @@
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-controversia-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-dispute-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-settore_disciplinato-noun-1">
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000160"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-conclusione-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-conclusione-noun-1"/>
   </rdf:Description>
@@ -1108,17 +1171,20 @@
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-comunita--noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000004"/>
   </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-tradizione_giuridico-noun-1">
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000179"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-funzionamento_mercato_comune-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000139"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-risarcimento-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-risarcimento-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-interesse_collettivo-noun-1">
-    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000047"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-competenza-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-competence-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-interesse_collettivo-noun-1">
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000047"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-rete_comunicazione-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000090"/>
@@ -1198,6 +1264,9 @@
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-materia_contratto_a_distanza-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000151"/>
   </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-convenzione_internazionale-noun-1">
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000169"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-scopo-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-intention-noun-1"/>
   </rdf:Description>
@@ -1212,6 +1281,9 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-interesse_economico-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000043"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-legislazione_applicabile_contratto-noun-1">
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000181"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-informazione-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-informazione-noun-1"/>
@@ -1264,6 +1336,9 @@
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-contratto-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-consumer_contract-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-giurisprudenza_corte-noun-1">
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000175"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-locale-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-locale-noun-1"/>
   </rdf:Description>
@@ -1281,6 +1356,9 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-combustione_olio_usato-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-combustion_of_waste_oil-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-contratto_concluso-noun-1">
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000159"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-incertezza_scientifico-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-scientific_uncertainty-noun-1"/>
@@ -1327,6 +1405,9 @@
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-limite-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-limite-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-direttiva_modificato-noun-1">
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000171"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-considerazione-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-considerazione-noun-1"/>
   </rdf:Description>
@@ -1345,11 +1426,11 @@
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-mercato-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-mercato-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-domanda-noun-1">
-    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-question-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-unita-_misura-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000030"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-domanda-noun-1">
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-question-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-trattamento-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-differences_in_treatment-noun-1"/>
@@ -1381,11 +1462,11 @@
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-nome_produttore-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-product_name-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-indicazione-noun-1">
-    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-indication-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-governo_austriaco-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-austrian_government-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-indicazione-noun-1">
+    <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#concept-indication-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#synset-responsabile_codice-noun-1">
     <rdf:type rdf:resource="http://localhost/dalos/concepts.owl#artconc-0000000072"/>
