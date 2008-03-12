@@ -17,30 +17,27 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <xsl:transform  xmlns:xsl   = "http://www.w3.org/1999/XSL/Transform"
                 xmlns:xlink = "http://www.w3.org/1999/xlink"
                 xmlns:h     = "http://www.w3.org/HTML/1998/html4"
-                xmlns       = "http://www.normeinrete.it/nir/2.2"
+                xmlns       = "http://www.w3.org/HTML/1998/html4"
+                
                 xmlns:mapper= "xalan://it.cnr.ittig.xmleges.core.blocks.panes.xsltmapper.XsltMapperImpl"
                 version     = "1.0"
 >
-
-<xsl:output method="html" />
 
 <xsl:include href="xsltmapper-1.0.xsl"/>
 
 <!-- mettere elementi gestiti da questo file -->
 <xsl:strip-space elements="h:*" />
 
-
-
 <!-- ================================================================================ -->
 <!-- ============================================================= ELEMENTI VUOTI === -->
 <!-- ================================================================================ -->
 
 <xsl:template match="h:br">
-	<font color="blue" weight="bold">¶</font><br/>
+	<h:font color="blue" weight="bold">¶</h:font><h:br/>
 </xsl:template>
 
 <xsl:template match="h:hr">
-	<hr/>
+	<h:hr/>
 </xsl:template>
 
 <xsl:template match="h:img">
@@ -206,8 +203,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <xsl:template match="h:table">
     <div align="center">
     <xsl:element name="table" use-attribute-sets="XsltMapperSetClass">
-
-<!--
  	    <xsl:if test="not(@width)">
 	        <xsl:attribute name="width">95%</xsl:attribute>
         </xsl:if>
@@ -220,11 +215,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
  	    <xsl:if test="not(@center)">
             <xsl:attribute name="align">center</xsl:attribute>
         </xsl:if>
--->
- 	    <xsl:if test="not(@h:style)">
-	        <xsl:attribute name="h:style">width: 95%; border: 0; cellpadding: 2; text-align: center;</xsl:attribute>
-        </xsl:if>
-        
 		<xsl:apply-templates select="@*"/>
         <xsl:apply-templates select="./h:caption" />
         <xsl:apply-templates select="./h:thead" />
@@ -303,13 +293,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <xsl:element name="td" use-attribute-sets="XsltMapperSetClass">
 	<xsl:attribute name="style">margin: 1</xsl:attribute>
 	<xsl:attribute name="bgcolor">white</xsl:attribute>
-	
-	<!--	xsl:if test="@align">
+	<xsl:if test="@align">
 		<xsl:attribute name="align"><xsl:value-of select="@align"/></xsl:attribute>
-	</xsl:if	-->
-	<xsl:apply-templates select="@*"/>
-		
-	
+	</xsl:if>
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
         <xsl:apply-templates />
     </xsl:element>

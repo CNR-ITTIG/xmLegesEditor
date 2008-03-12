@@ -80,14 +80,14 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	        
 		        <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
 					<font color="blue">
-					{<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>
+					[<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>
 					<xsl:if test="$novellando">
 						<xsl:if test="$novella">
 							<!--	sostituzione	-->
 							<xsl:if test="$novella=$idnota">i</xsl:if>
 		   					<xsl:if test="$novellando=$idnota">e</xsl:if>
 	   					</xsl:if>
-   					</xsl:if>}
+   					</xsl:if>]
    					</font>
 				</xsl:element>					
 				<xsl:text> </xsl:text>
@@ -122,10 +122,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	   					</xsl:if>
    					</xsl:if>
 					<xsl:text> da: </xsl:text>
-
-				<!--	attenzione voglio ricambiare ancora il testo di autonota (eliminando il vigore) -->							
-				<xsl:value-of select="substring-before($autonota,' In vigore')"/> 				
-				
+					<xsl:value-of select="$autonota"/> 	
+					<xsl:text>. </xsl:text>				
 					<xsl:choose>
 					<!-- ================= data_fine!='' =========-->
 						<xsl:when test="$data_fine!=''">

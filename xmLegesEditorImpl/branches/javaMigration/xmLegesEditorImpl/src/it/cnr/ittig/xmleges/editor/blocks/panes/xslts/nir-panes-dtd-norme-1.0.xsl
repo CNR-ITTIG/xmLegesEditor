@@ -112,7 +112,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <!-- ================================================================ DECORAZIONE === -->
 <!-- ================================================================================ -->
 <xsl:template match="*[name()='decorazione']">
-    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
+    <!--	xsl:element name="span" use-attribute-sets="XsltMapperSetClass"	-->
+    <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
         <xsl:apply-templates />
     </xsl:element>
@@ -552,14 +553,14 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:novellando']/*[name()='dsp:pos']/@xlink:href"/>
 			</xsl:variable>	
 			<sup>
-				{<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>
+				[<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>
 					<xsl:if test="$novellando">
 						<xsl:if test="$novella">
 							<!--	sostituzione	-->
 							<xsl:if test="$novella=$id">i</xsl:if>
 		   					<xsl:if test="$novellando=$id">e</xsl:if>
 	   					</xsl:if>
-   					</xsl:if>}
+   					</xsl:if>]
 			</sup>
 		</xsl:when>
 		<xsl:otherwise>
@@ -615,14 +616,14 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:novellando']/*[name()='dsp:pos']/@xlink:href"/>
 			</xsl:variable>	
 			<sup>
-				{<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>
+				[<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>
 					<xsl:if test="$novellando">
 						<xsl:if test="$novella">
 							<!--	sostituzione	-->
 							<xsl:if test="$novella=$id">i</xsl:if>
 		   					<xsl:if test="$novellando=$id">e</xsl:if>
 	   					</xsl:if>
-   					</xsl:if>}
+   					</xsl:if>]
 			</sup>
 		</xsl:when>
 		<xsl:otherwise>
@@ -683,14 +684,14 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:novellando']/*[name()='dsp:pos']/@xlink:href"/>
 			</xsl:variable>	
 			<sup>
-				{<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>
+				[<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>
 					<xsl:if test="$novellando">
 						<xsl:if test="$novella">
 							<!--	sostituzione	-->
 							<xsl:if test="$novella=$id">i</xsl:if>
 		   					<xsl:if test="$novellando=$id">e</xsl:if>
 	   					</xsl:if>
-   					</xsl:if>}
+   					</xsl:if>]
 			</sup>
 
 		</xsl:when>
@@ -734,14 +735,14 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:novellando']/*[name()='dsp:pos']/@xlink:href"/>
 			</xsl:variable>	
 			<sup>
-				{<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>
+				[<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>
 					<xsl:if test="$novellando">
 						<xsl:if test="$novella">
 							<!--	sostituzione	-->
 							<xsl:if test="$novella=$id">i</xsl:if>
 		   					<xsl:if test="$novellando=$id">e</xsl:if>
 	   					</xsl:if>
-   					</xsl:if>}
+   					</xsl:if>]
 			</sup>
 
 		</xsl:when>

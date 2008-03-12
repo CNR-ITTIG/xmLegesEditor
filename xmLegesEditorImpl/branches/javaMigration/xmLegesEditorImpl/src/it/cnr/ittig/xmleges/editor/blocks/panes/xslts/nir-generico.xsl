@@ -240,9 +240,6 @@
 	<!-- ========================== 	RUBRICA	 	============================== -->
 	
 	<xsl:template match="//*[name()='rubrica']">
-		<xsl:element name="a">
-			<xsl:attribute name="name"><xsl:value-of select="../@id" />-rub</xsl:attribute>
-		</xsl:element>
 		<p class="rubrica">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
@@ -252,6 +249,12 @@
 				<xsl:call-template name="multivigenza"/>
 			</xsl:otherwise>
 		</xsl:choose>				
+		</p>
+	</xsl:template>
+	
+	<xsl:template match="//*[name()='decorazione']">
+		<p class="decorazione">
+			<xsl:apply-templates/>
 		</p>
 	</xsl:template>
 
@@ -379,7 +382,6 @@
 		</span>
 	</xsl:template>
 	<xsl:template match="//*[name()='rif']">
-		<xsl:param name="colorerif"/>
 		<xsl:variable name="url">
 			<xsl:value-of select="@xlink:href" />
 		</xsl:variable>
@@ -393,12 +395,12 @@
 			<xsl:when test="contains($url,'urn:nir:')">
 				<xsl:choose>
 					<xsl:when test="$strina='&#59;' or $strina='&#46;' or $strina='&#58;' or $strina='&#44;'  or $strina='&#45;'">		 
-						<a style="color:{$colorerif}" href="http://www.nir.it/cgi-bin/N2Ln?{@xlink:href}" title="Destinazione: http://www.nir.it/cgi-bin/N2Ln?{@xlink:href}">
+						<a href="http://www.nir.it/cgi-bin/N2Ln?{@xlink:href}" title="Destinazione: http://www.nir.it/cgi-bin/N2Ln?{@xlink:href}">
 							<xsl:apply-templates/>
 						</a>
 					</xsl:when>
 					<xsl:otherwise>					 
-						<a style="color:{$colorerif}" href="http://www.nir.it/cgi-bin/N2Ln?{@xlink:href}" title="Destinazione: http://www.nir.it/cgi-bin/N2Ln?{@xlink:href}">						
+						<a href="http://www.nir.it/cgi-bin/N2Ln?{@xlink:href}" title="Destinazione: http://www.nir.it/cgi-bin/N2Ln?{@xlink:href}">						
 							<xsl:apply-templates/>						
 						</a>&#160;
 					</xsl:otherwise>
@@ -407,12 +409,12 @@
 			<xsl:otherwise>
 				<xsl:choose>
 					<xsl:when test="$strina='&#59;' or $strina='&#46;' or $strina='&#58;' or $strina='&#44;'  or $strina='&#45;'">		 
-						<a style="color:{$colorerif}" href="{@xlink:href}" title="Destinazione: {@xlink:href}">
+						<a href="{@xlink:href}" title="Destinazione: {@xlink:href}">
 							<xsl:apply-templates/>
 						</a>
 					</xsl:when>
 					<xsl:otherwise>					 
-						<a style="color:{$colorerif}" href="{@xlink:href}" title="Destinazione: {@xlink:href}">						
+						<a href="{@xlink:href}" title="Destinazione: {@xlink:href}">						
 						<xsl:apply-templates/>						
 						</a>&#160;
 					</xsl:otherwise>
@@ -783,15 +785,7 @@
 						</xsl:when>
 						<xsl:when test="$data_inizio&gt;number(number($datafine)-1)">
 							<span style="color:#060;">
-								<xsl:variable name="colore">#060</xsl:variable> 
-								<xsl:apply-templates>
-									<xsl:with-param name="colorerif" select="$colore"/>
-								</xsl:apply-templates>	
-								
-								
-								<!--************
-								<xsl:call-template name="makeNotavigenza" />
-								-->
+							 	[<xsl:apply-templates/>]
 								<xsl:variable name="id">
 									<xsl:value-of select="@id" />
 								</xsl:variable>
@@ -800,24 +794,13 @@
 										<a href="#n{$id}" name="t{$id}"><sup>[<xsl:value-of select="position()" />]</sup></a>
 									</xsl:if>		
 								</xsl:for-each>
-								
-								
 							</span>
 						</xsl:when>						
 						<xsl:otherwise>
 							<xsl:choose>			
 								<xsl:when test="$stato!=''">
-									<!-- <span style="color:#f00;" title="{$stato}"><xsl:apply-templates /> -->												
 									<span style="color:#f00;">
-										<xsl:variable name="colore">#f00</xsl:variable> 
-										<xsl:apply-templates>
-											<xsl:with-param name="colorerif" select="$colore"/>
-										</xsl:apply-templates>
-										
-										
-										<!--************
-										<xsl:call-template name="makeNotavigenza" />
-										-->
+										[<xsl:apply-templates/>]
 										<xsl:variable name="id">
 											<xsl:value-of select="@id" />
 										</xsl:variable>
@@ -826,21 +809,11 @@
 												<a href="#n{$id}" name="t{$id}"><sup>[<xsl:value-of select="position()" />]</sup></a>
 											</xsl:if>		
 										</xsl:for-each>
-										
-										
 									</span>
 								</xsl:when>
 								<xsl:otherwise>
 									<span style="color:#f00;">
-										<xsl:variable name="colore">#f00</xsl:variable> 
-										<xsl:apply-templates>
-											<xsl:with-param name="colorerif" select="$colore"/>
-										</xsl:apply-templates>
-										
-										
-										<!--************
-										<xsl:call-template name="makeNotavigenza" />
-										-->
+										[<xsl:apply-templates/>]
 										<xsl:variable name="id">
 											<xsl:value-of select="@id" />
 										</xsl:variable>
@@ -849,8 +822,6 @@
 												<a href="#n{$id}" name="t{$id}"><sup>[<xsl:value-of select="position()" />]</sup></a>
 											</xsl:if>		
 										</xsl:for-each>
-										
-										
 									</span>
 								</xsl:otherwise>
 							</xsl:choose>
@@ -863,14 +834,7 @@
 						<xsl:when test="$data_inizio&gt;$datafine or $data_fine&lt;$datafine">
 							<!--===================== n{@id}, t{@id}:'n' e 't' differenziano il testo dalle note
 							    ===================== <xsl:value-of select="@id"/>: il valore accanto a 'VigNota', l'id della partizione
-							-->
-							
-							
-							<!--************
-							<span> 
-								<xsl:call-template name="makeNotavigenza" />
-							</span>
-							-->
+							-->							
 							<xsl:variable name="id">
 								<xsl:value-of select="@id" />
 							</xsl:variable>
@@ -879,20 +843,10 @@
 									<a href="#n{$id}" name="t{$id}"><sup>[<xsl:value-of select="position()" />]</sup></a>
 								</xsl:if>		
 							</xsl:for-each>							
-							
-							
 						</xsl:when>
 						<xsl:otherwise>
 							<span style="color:#060;">
-								<xsl:variable name="colore">#060</xsl:variable> 
-								<xsl:apply-templates>
-									<xsl:with-param name="colorerif" select="$colore"/>
-								</xsl:apply-templates>
-								
-								
-								<!--************
-								<xsl:call-template name="makeNotavigenza" />
-								-->
+								<xsl:apply-templates/>
 								<xsl:variable name="id">
 									<xsl:value-of select="@id" />
 								</xsl:variable>
@@ -901,8 +855,6 @@
 										<a href="#n{$id}" name="t{$id}"><sup>[<xsl:value-of select="position()" />]</sup></a>
 									</xsl:if>		
 								</xsl:for-each>								
-								
-								
 							</span>
 						</xsl:otherwise>
 					</xsl:choose>
@@ -1217,7 +1169,11 @@
 						<xsl:variable name="novellando">
 							<xsl:value-of select="../*[name()='dsp:novellando']/*[name()='dsp:pos']/@xlink:href"/>
 						</xsl:variable>	
-						<a name="n{$id}" href="#t{$id}">[<xsl:value-of select="$numeronota"/>]</a>
+
+						<xsl:if test="position()=1">
+							<a name="n{$id}" href="#t{$id}">[<xsl:value-of select="$numeronota"/>]</a>
+		   				</xsl:if>
+
 						<xsl:text> - </xsl:text>
 						<xsl:choose>
 							<xsl:when test="$novellando">
@@ -1251,14 +1207,10 @@
 							<xsl:if test="$novella=$id"> (testo inserito)</xsl:if>
 		   					<xsl:if test="$novellando=$id"> (testo eliminato)</xsl:if>
 	   					</xsl:if>
-   					</xsl:if>
-					
-					
+   					</xsl:if>					
 					<xsl:text> da: </xsl:text>
-					<a href="http://www.nir.it/cgi-bin/N2Ln?{$urn}" title=" Dest. = http://www.nir.it/cgi-bin/N2Ln?{$urn}"> 
-						<!--	attenzione voglio ricambiare ancora il testo di autonota (eliminando il vigore) -->							
-						<xsl:value-of select="substring-before($autonota,' In vigore')"/> 
-					</a>
+					<a href="http://www.nir.it/cgi-bin/N2Ln?{$urn}" title=" Dest. = http://www.nir.it/cgi-bin/N2Ln?{$urn}"><xsl:value-of select="$autonota"/></a>
+					<xsl:text>. </xsl:text>
 			      </xsl:for-each>
 				</xsl:when>
 				<xsl:otherwise>
@@ -1266,9 +1218,9 @@
 					<a name="n{$id}" href="#t{$id}">[<xsl:value-of select="$numeronota"/>]</a>
 					<xsl:text> - Modificato da: </xsl:text>
 					<a href="http://www.nir.it/cgi-bin/N2Ln?{$urn}" title=" Dest. = http://www.nir.it/cgi-bin/N2Ln?{$urn}"> <xsl:value-of select="$urn" /> </a>
+					<xsl:text>. </xsl:text>
 				</xsl:otherwise>			
 			</xsl:choose>
-			
 				<xsl:choose>
 					<!-- ================= data_fine!='' =========-->
 						<xsl:when test="$data_fine!=''">
@@ -1312,14 +1264,14 @@
 		<xsl:value-of select="concat(substring(date:date-time(),1,4),substring(date:date-time(),6,2),substring(date:date-time(),9,2))"/>
 	 </xsl:variable>
 	 <p>
-		Date di vigenza che interessano il documento:
+		- Date di vigenza che interessano il documento:
 		<xsl:text> </xsl:text> 
 		<xsl:for-each select="//*[name()='eventi']/*[@data!='']">
 			<xsl:variable name="data">
 				<xsl:value-of select="concat(substring(@data,7,2),'/',substring(@data,5,2),'/',substring(@data,1,4))"/>
 			</xsl:variable>
 			<xsl:value-of select="$data"/>
-			<xsl:text> </xsl:text> 
+			<xsl:text> - </xsl:text> 
 		</xsl:for-each>
 	 </p>		
 	</xsl:template>
