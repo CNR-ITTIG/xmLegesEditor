@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ENTITY % PredefinedSimpleTypes SYSTEM "./pst.dtd">
+%PredefinedSimpleTypes;
+
+<!ENTITY % value "EMPTY" >
+<!ELEMENT x %value; >
+<!ATTLIST x value CDATA #REQUIRED >

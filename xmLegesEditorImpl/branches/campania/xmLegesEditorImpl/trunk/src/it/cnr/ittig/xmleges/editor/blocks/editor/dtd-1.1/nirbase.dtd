@@ -1,0 +1,1133 @@
+<!-- =====================================================================
+		DTD dei documenti di NormeInRete (NIR)
+
+		nirbase.dtd: DTD semplificato di Norme In Rete
+		Dipende da: niente
+
+        	Versione 1.1 del 01/11/2003                                               
+
+		Per un'introduzione al DTD, si veda il documento 'note.html'
+    ===================================================================== -->
+
+<!-- =====================================================================
+
+		Entita' esterne: caratteri
+		
+		Definizione dei sette file di entita' caratteri per le lettere
+		accentate e altri caratteri particolari. Immediatamente derivate
+		dalle analoghe entita' carattere di HTML 4.0 
+
+    ===================================================================== -->
+
+<!ENTITY % ISOlat1 SYSTEM "./ISOlat1.pen"> %ISOlat1; 
+<!ENTITY % ISOlat2 SYSTEM "./ISOlat2.pen"> %ISOlat2;
+<!ENTITY % ISOgrk3 SYSTEM "./ISOgrk3.pen"> %ISOgrk3;
+<!ENTITY % ISOdia  SYSTEM "./ISOdia.pen">  %ISOdia;
+<!ENTITY % ISOnum  SYSTEM "./ISOnum.pen">  %ISOnum;
+<!ENTITY % ISOpub  SYSTEM "./ISOpub.pen">  %ISOpub; 
+<!ENTITY % ISOtech SYSTEM "./ISOtech.pen"> %ISOtech; 
+
+<!-- =====================================================================
+
+		Entita' principali
+
+		Definizione delle entita' parametriche utilizzate nel resto del
+		DTD. In particolare: 
+		* HTMLattrs definisce alcuni attributi che permettono una personalizzazione
+		  puramente tipografica e di presentazione per alcuni elementi del DTD. 
+		  Essa definisce le entita' class (che fanno riferimento ad una classe 
+		  CSS posta in un file esterno), style (che contiene alcune specifiche
+		  istruzioni CSS al suo interno) e title (che definisce un testo alternativo
+		  all'elemento). 
+		* link contiene gli attributi degli elementi con caratteristica
+		  ipertestuale (in particolare, ref). Gli attributi sono quelli
+		  richiesti dalla Raccomandazione W3C XLink 
+		  (http://www.w3.org/TR/xlink)
+		* status va usato quanto un frammento di documento e' assente 
+		  dalla risorsa. In questo caso si usera' omissis se l'assenza 
+		  e' dovuta a decisioni redazionali o abrogato se l'omissione e'
+		  dovuta ad abrogazione del legislatore ma redazionalmente si vuole
+		  comunque mantenerne una traccia. In generale i frammenti abrogati
+		  possono essere semplicemente omessi. Nel DTD base, l'attributo 
+		  status puo' essere usato su tutti gli elementi del documento, ma 
+		  non su frammenti di elementi (ad esempio, singole parole). 
+		* idfac, idreq e idnorma: molti elementi richiedono un valore identificativo
+		  univoco su tutto il documento. Ad esempio, tutte le parti della 
+		  gerarchia dell'articolato. A volte l'identificativo e' facoltativo, 
+		  altre volte e' obbligatorio. Sulla sintassi dei valori 
+		  identificativi, si veda la sezione 8.2 del documento note.html
+		* data: l'attributo norm viene usato quando il testo indica una data
+		  in maniera potenzialmente ambigua. In questo caso, allora, si usa 
+		  l'attributo norm per fornire fuori testo il valore equivalente in 
+		  forma non ambigua. Si veda la sezione 8.3 del documento note.html
+		  per la sintassi dei valori di questo attributo. 
+		* elinline: la lista di elementi con caratteristiche inline 
+		  (cioe' tali da non provocare la creazione di un nuovo capoverso)
+		* elblocchi: la lista di elementi con caratteristiche di blocco 
+		  (cioe' tali da richiedere un capoverso prima e dopo. 
+		* inline, blocchi e blocchipreambolo: il content model di elementi 
+		  che possono contenere solo elementi inline, o solo elementi blocco, 
+		  o elementi blocco piu' il preambolo. 
+		  
+    ===================================================================== -->
+<!-- N.B. nella dtd ufficiale non c'e' l'entita' namespace -->
+<!ENTITY % namespace "
+      xmlns:xlink   CDATA      #FIXED 'http://www.w3.org/1999/xlink'
+      xmlns:h       CDATA      #FIXED 'http://www.w3.org/HTML/1998/html4'
+      xmlns         CDATA      #FIXED 'http://www.normeinrete.it/nir/1.0'
+">
+<!-- ===================================================================== -->
+<!ENTITY % HTMLattrs
+		   "class      CDATA				#IMPLIED
+		    style      CDATA				#IMPLIED
+		    title      CDATA				#IMPLIED">
+		    
+<!ENTITY % link "
+		xlink:href    CDATA		#IMPLIED
+		xlink:type    CDATA		#FIXED     'simple'
+">
+
+<!ENTITY % status  "status    (omissis|abrogato)  #IMPLIED">
+<!ENTITY % idreq   "id		        ID		      #REQUIRED">
+<!ENTITY % idfac   "id		        ID		      #IMPLIED">
+<!ENTITY % idnorma "id		        CDATA		  #IMPLIED">
+<!ENTITY % data    "norm		    CDATA		  #REQUIRED">
+
+<!ENTITY % elinline		 "#PCDATA | rif | mrif | mod | ndr">
+<!ENTITY % elblocchi		"h:div | h:p">
+
+<!ENTITY % inline		   "(%elinline;)*" >
+<!ENTITY % blocchi		  "(%elblocchi;)+" >
+<!ENTITY % blocchipreambolo  "(%elblocchi;|preambolo)+" >
+
+<!-- =====================================================================
+
+		Definizione dell'elemento radice
+
+		Uso:
+			<NIR tipo="originale"
+				xmlns:xlink='http://www.w3.org/1999/xlink'
+				xmlns:h='http://www.w3.org/HTML/1998/html4'
+				xmlns='http://www.normeinrete.it/nir/1.0'>
+				<Legge> 
+					<meta>...</meta> 
+					<intestazione>...</intestazione> 
+					<formulainiziale>...</formulainiziale> 
+					<articolato>...</articolato> 
+					<formulafinale>...</formulafinale> 
+					<conclusione>...</conclusione> 
+					<annessi>...</annessi> 
+				</Legge> 
+			</NIR> 
+
+		L'elemento NIR e' l'elemento radice di tutti i documenti di
+		NormeInRete. L'elemento NIR puo' contenere solo uno dei nove
+		tipi di documento qui elencati. Si usi DocumentoNIR solo per
+		quei documenti che non sono esplicitamente elencati con il loro
+		nome. 
+		
+		L'elemento NIR contiene la dichiarazione dei namespace come 
+		indicato nell'esempio qui sopra. L'attributo tipo specifica 
+		l'intervento redazionale sul documento: se il contenuto del 
+		documento e' esattamente come approvato dall'organismo normante, 
+		allora il documento e' "originale", e l'attributo tipo puo'
+		essere omesso. Se viceversa ci sono stati interventi redazionali
+		per aggiornare il contenuto del documento alla norma vigente,
+		allora l'attributo tipo dovra' essere specificato con valore "vigente". 
+		
+    ===================================================================== -->
+
+<!ENTITY % tipodocumento   "Legge		      | LeggeCostituzionale |
+						 DecretoLegge        | DecretoLegislativo  | 
+						 DecretoMinisteriale | RegioDecreto        |
+						 Dpr		        | Dpcm		       |
+						 DocumentoNIR  ">
+
+<!ELEMENT NIR  (%tipodocumento;) >
+<!ATTLIST NIR  tipo	(originale|vigente)	"originale"  
+    %namespace; 
+    >
+
+<!-- =====================================================================
+
+		Elenco dei documenti articolati
+		
+		Un documento articolato e' quello che contiene una parte di
+		articolato propriamente detta e ben formata secondo le regole
+		espresse nella circolare del 2001. Otto dei nove tipi di 
+		documento NIR sono di tipo articolato. Nel DTD base quasi tutti gli 
+		elementi costitutivi il documento articolato sono obbligatori: 
+		intestazione, formula iniziale, articolato, formula finale, 
+		conclusione. Solo gli annessi sono facoltativi. 
+
+    ===================================================================== -->
+
+<!ENTITY % docarticolato       "intestazione, 
+						     formulainiziale, 
+						     articolato, 
+						     formulafinale, 
+						     conclusione, 
+						     annessi?">
+
+<!ELEMENT Legge				   (meta, %docarticolato;)  >
+<!ELEMENT LeggeCostituzionale       (meta, %docarticolato;)  >
+<!ELEMENT DecretoLegge		     (meta, %docarticolato;)  >
+<!ELEMENT DecretoLegislativo        (meta, %docarticolato;)  >
+<!ELEMENT DecretoMinisteriale       (meta, %docarticolato;)  >
+<!ELEMENT RegioDecreto		     (meta, %docarticolato;)  >
+<!ELEMENT Dpr				     (meta, %docarticolato;)  >
+<!ELEMENT Dpcm				    (meta, %docarticolato;)  >
+
+<!ATTLIST Legge				   %idnorma;   %status;>
+<!ATTLIST LeggeCostituzionale       %idnorma;   %status;>
+<!ATTLIST DecretoLegge		     %idnorma;   %status;>
+<!ATTLIST DecretoLegislativo        %idnorma;   %status;>
+<!ATTLIST DecretoMinisteriale       %idnorma;   %status;>
+<!ATTLIST RegioDecreto		     %idnorma;   %status;>
+<!ATTLIST Dpr				     %idnorma;   %status;>
+<!ATTLIST Dpcm				    %idnorma;   %status;>
+
+
+<!-- =====================================================================
+
+		Elementi dell'intestazione
+		
+		L'intestazione contiene dichiarazioni come il tipo del documento,
+		la data, il numero, il titolo, l'ente emanante. Scopo di questo 
+		elemento e' di essere descrittivo dell'intestazione cosi' come 
+		appare nel documento: vanno quindi rispettati del documento l'ordine
+		degli elementi, gli eventuali errori di ortografia o senso, o 
+		caratteristiche come l'uso delle maiuscole o i separatori (virgole, 
+		punti, ecc.).
+
+    ===================================================================== -->
+
+<!ELEMENT intestazione (#PCDATA| tipoDoc | dataDoc | numDoc | titoloDoc | emanante)* >
+<!ELEMENT tipoDoc      %inline; >
+<!ELEMENT numDoc       %inline; >
+<!ELEMENT titoloDoc    %inline; >
+<!ELEMENT emanante     %inline; >
+<!ELEMENT dataDoc      %inline; >
+<!ATTLIST dataDoc      %data; >
+
+<!-- =====================================================================
+
+		Formula iniziale e finale
+		
+		Formula iniziale e finale sono gli elementi che contengono le 
+		parti ritualmente poste all'inizio e alla fine delle norme. Nei
+		tipi di norma in cui e' previsto, la formula iniziale contiene 
+		il preambolo. Se non sono presenti nella risorsa marcata, e' 
+		necessario specificarne lo status come "omissis".
+		
+		Ad esempio: 
+		
+		<formulainiziale>
+			<h:p>La Camera dei deputati ed il Senato della Repubblica hanno approvato: </h:p>
+			<h:p>IL PRESIDENTE DELLA REPUBBLICA</h:p>
+			<h:p>PROMULGA</h:p>
+			<h:p>la seguente legge:</h:p>
+		</formulainiziale> 
+
+		<formulafinale>
+			<h:p>La presente legge, munita del sigillo dello Stato sar&agrave;
+			inserita nella Raccolta ufficiale degli atti normativi della Repubblica
+			italiana. &egrave; fatto obbligo a chiunque spetti di osservarla e di farla osservare
+			come legge dello Stato. </h:p>
+		</formulafinale> 
+		
+
+    ===================================================================== -->
+
+<!ELEMENT formulainiziale      %blocchipreambolo;>
+<!ELEMENT formulafinale        %blocchi;>
+<!ELEMENT preambolo		   %blocchi;>
+
+<!ATTLIST formulainiziale      %status; >
+<!ATTLIST formulafinale        %status; >
+
+<!-- =====================================================================
+
+		Elementi dell'articolato
+		
+		Gli elementi dell'articolato sono strutturati gerarchicamente 
+		in maniera rigorosa: l'articolato puo' contenere o libri, o titoli,
+		o capi, o articoli. A loro volta questi possono contenere soltanto 
+		una collezione omogenea di partizioni gerarchicamente inferiori 
+		(eccezione e' fatta per il capo che puo' contenere sezioni), il 
+		tutto in accordo con la circolare dell'aprile 2001. Ad ogni 
+		partizione corrisponde un numero obbligatorio e una rubrica 
+		facoltativa. 
+		
+		A tutti questi elementi DEVE essere associato un ID secondo la 
+		sintassi specificata nella sezione 8.2 del documento note.html.
+		
+		L'elemento num contiene il numero, gli eventuali suffissi (come bis, 
+		ter, etc.) e segni tipografici di divisione (come i punti, le parentesi, 
+		gli spazi). Questo elemento e' solo descrittivo del numero 
+		dell'elemento, e quindi deve rispettare esattamente la norma come 
+		pubblicata. In particolare, errori materiali nella numerazione vanno
+		corretti negli identificatori, ma lasciati invariati nel testo. 
+		
+		L'elemento rubrica contiene la rubrica, se presente, della partizione. 
+		Se non esiste rubrica nella partizione l'elemento deve essere assente, 
+		e non semplicemente vuoto. Da notare inoltre che nel DTD base l'elemento
+		rubrica ha un content model molto semplice, che impedisce, ad esempio, 
+		la divisione in righe del contenuto. Quindi norme che abbiano rubriche 
+		divise in righe non possono essere marcati con questo DTD. 
+
+    ===================================================================== -->
+<!ELEMENT articolato		   (libro+|parte+|titolo+|capo+|articolo+) >
+<!ELEMENT libro       (num, rubrica?,  (parte+|titolo+|capo+|articolo+))>
+<!ELEMENT parte       (num, rubrica?,		(titolo+|capo+|articolo+))>
+<!ELEMENT titolo      (num, rubrica?,		        (capo+|articolo+))>
+<!ELEMENT capo        (num, rubrica?,		     (sezione+|articolo+))>
+<!ELEMENT sezione     (num, rubrica?,				     (articolo+))>
+<!ELEMENT articolo    (num, rubrica?,				        (comma+))>
+
+<!ATTLIST articolato				   %status; >
+<!ATTLIST libro		       %idreq;   %status; >
+<!ATTLIST parte		       %idreq;   %status; >
+<!ATTLIST titolo		      %idreq;   %status; >
+<!ATTLIST capo		        %idreq;   %status; >
+<!ATTLIST sezione		     %idreq;   %status; >
+<!ATTLIST articolo		    %idreq;   %status; >
+
+<!ELEMENT num				%inline; >
+<!ELEMENT rubrica		     %inline; >
+
+<!-- =====================================================================
+
+		Elementi sotto l'articolo
+		
+		L'articolo e' diviso in commi, necessariamente numerati. Documenti
+		i cui commi non siano numerati non possono essere marcati con il DTD
+		base. E' un errore in questo caso inserire un elemento num e lasciarlo 
+		vuoto: la soluzione obbligata per documenti con commi non numerati
+		e' usare il DTD flessibile. 
+		
+		Ogni comma contiene un corpo o un elenco di elementi lettera. Nel
+		DTD base il corpo del comma non puo' essere diviso in capoversi, ne'
+		puo' contenere strutture diverse dal testo (come tabelle o immagini). 
+		Documenti con il corpo dei comma piu' complesso di semplice testo 
+		non diviso in capoversi debbono usare uno degli altri DTD.
+		
+		L'elenco di elementi lettera e' preceduto da un elemento alinea, 
+		dove un blocco di testo (senza suddivisione in capoversi) introduce
+		l'elenco stesso. Ogni elemento dell'elenco e' caratterizzato da un 
+		elemento num che contiene il numero o la lettera dell'elemento, e da, 
+		a sua volta, o un corpo o un elenco di elementi, questa volta di tipo
+		numerico. 
+		
+		Alla fine dell'elenco e' data facolta' di inserire una coda, cioe'
+		un ulteriore blocco di testo che, sebbene sconsigliata dalla circolare
+		2001, e' tuttavia presente in moltissimi testi. 
+		
+		Ad esempio (tratto dal DECRETO LEGISLATIVO 16 aprile 1994, n. 297): 
+
+  		<comma id="art477-com2">
+  			<num>2.</num>
+			<alinea>Per ciascun tipo di incarico di presidenza il provveditore
+				agli studi compila due distinte graduatorie:</alinea>
+    		<el id="art477-com2-let1">
+    			<num>a)</num>
+    			<corpo>sono iscritti nella prima graduatoria...;</corpo>
+    		</el>
+    		<el id="art477-com2-let2">
+    			<num>b)</num>
+    			<corpo>sono iscritti nella seconda graduatoria ...</corpo>
+    		</el>
+    		<coda>La  domanda  per l'iscrizione...</coda>
+    	</comma>
+				
+		I commi debbono avere un identificativo secondo la sintassi espressa
+		nella sezione 8.2 del documento note.html. L'identificativo degli 
+		elementi numerici e lettera, invece, e' facoltativo. 
+
+		Mod. 011103 E' stato aggiunto un nuovo elemento interno al corpo del
+		comma nel solo DTD flessibile, chiamato ep (elemento puntato), per
+		indicare quegli elementi di lista che sono introdotti da pallini o
+		trattini invece che da numeri o lettere. Nel DTD base l'elemento
+		ep puo' contenere a sua volta altre liste di tipo numerico, letterale o
+		puntato, senza vincoli.
+		
+		Mod. 011103 E' stata rilassata la regola di contenimento di el e en nei
+		DTD base e flessibile. In particolare, adesso i commi e le liste di
+		numeri, lettere (o le appena inserite liste puntate) possono contenere o
+		un corpo o una lista di altri elementi, senza vincoli sul tipo della
+		lista, che puo' essere sia numerica, che letterale, che puntata.
+
+    ===================================================================== -->
+
+<!ELEMENT comma		    (num,  (corpo | (alinea, (el|en|ep)+, coda?)))>
+<!ELEMENT el			(num,  (corpo | (alinea, (el|en|ep)+, coda?))) >
+<!ELEMENT en			(num,  (corpo | (alinea, (el|en|ep)+, coda?))) >
+<!ELEMENT ep			(num,  (corpo | (alinea, (el|en|ep)+, coda?))) >
+
+<!ATTLIST comma		    %idreq;   %status; >
+<!ATTLIST el			%idfac;   %status;>
+<!ATTLIST en			%idfac;   %status;>
+<!ATTLIST ep			%idfac;   %status;>
+
+<!ELEMENT corpo		    %inline; >
+<!ELEMENT alinea		%inline; >
+<!ELEMENT coda		    %inline; >
+
+<!-- =====================================================================
+
+		Elementi della conclusione
+		
+		Nella conclusione vengono riportati la data e il luogo della firma
+		del documento e i firmatari. L'elemento dataeluogo prevede un
+		attributo norm in cui la data della firma e' riportata in maniera
+		non ambigua secondo la sintassi descritta nella sezione 8.3 del
+		documento note.html. 
+		
+		Ad esempio: 
+		
+		<conclusione> 
+			<dataeluogo norm="19991203"> Data a Roma, add&igrave; 3 dicembre 1999</dataeluogo> 
+			<sottoscrizioni> 
+				<sottoscrivente>CIAMPI</sottoscrivente> 
+				<sottoscrivente>D'ALEMA, Presidente del Consiglio dei Ministri</sottoscrivente> 
+				<sottoscrivente>BINDI, Ministro della sanit&agrave;</sottoscrivente> 
+				<sottoscrivente>ZECCHINO, Ministro dell'universit&agrave; e della
+					ricerca scientifica e tecnologica</sottoscrivente> 
+				<visto>Visto, il Guardasigilli: DILIBERTO</visto> 
+			</sottoscrizioni> 
+		</conclusione> 
+
+    ===================================================================== -->
+
+<!ELEMENT conclusione		(dataeluogo?, sottoscrizioni?) >
+<!ELEMENT dataeluogo		  %inline; >
+<!ATTLIST dataeluogo		  %data;>
+
+<!ELEMENT sottoscrizioni      (sottoscrivente*, visto) >
+<!ELEMENT sottoscrivente       %inline; >
+<!ELEMENT visto		       %inline; >
+
+<!-- =====================================================================
+
+		Elementi degli annessi
+		
+		Nel DTD base gli annessi sono necessariamente esterni al documento
+		ospitante. All'interno di questo, infatti, e' possibile porre 
+		l'elemento annessi, che contiene una lista di elementi annesso. 
+		Ciascuno di questi permette una testata facoltativa e un riferimento
+		ad un URN esterno, ove e' presente il testo dell'annesso. 
+		
+		Ogni annesso deve essere fornito di un identificativo univoco, secondo 
+		la sintassi descritta nella sezione 8.2 del documento note.html.
+		
+		La testata contiene quel testo che introduce l'annesso nel documento ma 
+		non ne fa logicamente parte: ad esempio, una denominazione come "Allegato A", 
+		o un titolo (laddove questo non sia parte del testo allegato ma un 
+		modo per il documemnto allegante di introdurre l'allegato), o eventuali
+		testi introduttivi all'annesso. 
+		
+
+    ===================================================================== -->
+
+<!ELEMENT annessi		    (annesso+) >
+<!ELEMENT annesso		    (testata?, rifesterno) >
+<!ATTLIST annesso		     %idreq;   %status;>
+
+<!ELEMENT rifesterno		  EMPTY >
+<!ATTLIST rifesterno		  %link; >
+
+<!ELEMENT testata		    (denAnnesso?, titAnnesso?, preAnnesso?) >
+<!ELEMENT denAnnesso		  %blocchi; >
+<!ELEMENT titAnnesso		  %blocchi; >
+<!ELEMENT preAnnesso		  %blocchi; >
+
+<!-- =====================================================================
+
+		Elementi inline e speciali con semantica rilevante
+		
+		Gli elementi inline sono quegli elementi che non spezzano il testo
+		in capoversi indipendenti, ma sono inseriti nel flusso normale del
+		testo senza divisioni verticali. 
+		
+		Il DTD base di NormeInRete esclude ogni elemento inline con 
+		caratteristiche solo tipografiche (come grassetto, corsivo, ecc.), 
+		lasciando solo quelle con caratteristiche semanticamente precise. 
+		
+		Sono dunque elementi inline accettabili nel DTD base di NormeInRete:
+		
+		* ndr: la Nota del Redattore lega una posizione del testo della norma 
+		  ad una nota posta nella sezione metainformazioni. Poiche' ogni nota
+		  e' necessariamente associata ad un identificativo univoco, l'elemento 
+		  ndr, che a quella nota deve far riferimento, contiene questo 
+		  identificativo. L'attributo value contiene il testo che la redazione
+		  vuole venga visualizzato come rimando alla nota all'interno del testo
+		  della norma. 
+		  
+			Mod. 011103: Il testo associato al riferimento di nota puo' da
+			questa versione essere arricchito di markup, pur rimanendo sempre ed
+			esclusivamente intervento redazionale (e quindi da non confondere
+			con il testo della norma come stabilito dal legislatore). Quindi la
+			nota del redattore puo' ora contenere testo ed elementi inline.
+			L'attributo value, che nelle versioni precedenti conteneva il testo
+			da visualizzare presso la nota, e' funzionalmente sostituito dal
+			contenuto dell'elemento ndr e diventa deprecato (viene solo
+			mantenuto nel DTD per compatibilita' con il passato). In caso di
+			compresenza di attributo value e contenuto non vuoto dell'elemento
+			ndr, si suggerisce di considerare solo il contenuto dell'elemento.
+			Si aggiunge anche la possibilita' di identificare i riferimenti di
+			nota e di attribuirvi specifici formati tipografici, come per gli
+			altri elementi inline.
+
+		* rif: l'elemento rif circonda un riferimento esplicito ad un'altra
+		  norma o a qualunque documento per il quale esista un URN secondo lo
+		  standard relativo. L'attributo xlink:href contiene l'URN del documento
+		  citato. 
+		  Ad esempio, una dizione simile a 
+		  
+			1. Agli effetti dell'applicazione del presente decreto si applicano le
+			definizioni elencate nell'articolo 1, comma 2, della legge 31 dicembre 
+			1996, n. 675.
+
+		  va resa cosi':
+		  
+			<comma id="art1-com1">
+				<num>1.</num>
+				<corpo>Agli effetti dell'applicazione del presente decreto si 
+				applicano le definizioni elencate nell'
+				<rif href="urn:nir:stato:legge:1996-12-31;675#art1-com2">
+				articolo 1, comma 2, della legge 31 dicembre 1996, n. 675</rif>.
+				</corpo>
+			</comma>
+	  
+		* mrif: l'elemento mrif circonda tutte le parti di un riferimento multiplo, 
+		  ovvero un riferimento a piu' parti della stessa norma. In questo caso, 
+		  la citazione completa del documento e' condivisa da piu' riferimenti. 
+		  Per questo motivo, ogni elemento rif circonda il singolo riferimento, e
+		  questo assume un significato all'interno di un elemento mrif che comprenda
+		  tutti i singoli riferimenti e l'indicazione del documento completo. 
+		  Ad esempio, la dizione: 
+		  
+			4. Le disposizioni di cui all'articolo 7, commi 3, 4, 5, 5-bis, 5-ter,
+			5-quater e 5-quinquies, 13, comma 1, lettera b) e 28, comma 7, della legge 31
+			dicembre 1996, n. 675 sono abrogate a decorrere dalla data di entrata in
+			vigore delle modifiche apportate al regolamento di cui all'articolo 33, comma
+			3, della medesima legge in applicazione del comma 1 del presente articolo.
+		  
+		  va resa cosi':
+		  
+			<comma id="art3-com4">
+				<num>4. </num>
+				<corpo>Le disposizioni di cui all'<mrif>articolo 7, commi 
+				<rif href="urn:nir:stato:legge:1996-12-31;675#art7-com3">3</rif>, 
+				<rif href="urn:nir:stato:legge:1996-12-31;675#art7-com4">4</rif>, 
+				<rif href="urn:nir:stato:legge:1996-12-31;675#art7-com5">5</rif>, 
+				<rif href="urn:nir:stato:legge:1996-12-31;675#art7-com5bis">5-bis</rif>, 
+				<rif href="urn:nir:stato:legge:1996-12-31;675#art7-com5ter">5-ter</rif>, 
+				<rif href="urn:nir:stato:legge:1996-12-31;675#art7-com5quater">5-quater</rif> e 
+				<rif href="urn:nir:stato:legge:1996-12-31;675#art7-com5-quinquies">5-quinquies</rif>, 
+				<rif href="urn:nir:stato:legge:1996-12-31;675#art13-com1-let2">13, comma 1, lettera b)</rif> e 
+				<rif href="urn:nir:stato:legge:1996-12-31;675#art28-com7">28, comma 7,</rif> 
+				della legge 31 dicembre 1996, n. 675</mrif> sono abrogate a decorrere dalla 
+				data di entrata in vigore delle modifiche apportate al regolamento di cui all'
+				<rif href="urn:nir:stato:legge:1996-12-31;675#art33-com3">articolo 33, comma 3,</rif>
+				della medesima legge in applicazione del 
+				<rif href="urn:nir:stato:decreto.legislativo:2001-12-28;467#art3-com1">comma 1 
+				del presente articolo</rif>.</corpo>
+			</comma>
+		  
+				Mod. 011103: Aggiunta la possibilita' di specificare id anche
+				per elementi mrif, ma solo facoltativamente.
+	
+		* mod, virgolette: l'elemento mod circonda tutte le componenti di un riferimento 
+		  modificativo. Esso contiene testo qualunque, uno o piu' riferimenti, e zero o piu' 
+		  indicazioni di testo esistente o da sostituire. L'elemento "virgolette" serve 
+		  per identificare quelle parti della norma, solitamente tra virgolette, che 
+		  specificano le parti di testo da sostituire, cancellare o aggiungere. 
+		  L'attributo "tipo" permette di determinare se le virgolette contengono una 
+		  struttura o soltanto alcune parole. Questo permette, ad esempio a fogli di stile, 
+		  di decidere se il testo va posto su un capoverso autonomo o di seguito nel corpo
+		  del comma. Ad esempio, qui sono sostituite solo alcune parole:
+
+			<comma id="art5-com1">
+				<num>1.</num>
+				<corpo><mod id="mod1">Nell'<rif href="urn:nir:stato:legge:1996-12-31;675#art12-com1-let2">
+				articolo 12, comma 1, lettera b), della legge 31 dicembre 1996, n. 675</rif>, le parole:
+				<virgolette id="mod1-vir1">per l'acquisizione di informative precontrattuali attivate</virgolette>
+				sono sostituite dalle seguenti: <virgolette id="mod1-vir2">per l'esecuzione di misure 
+				precontrattuali adottate</virgolette>.</mod></corpo>
+			</comma>
+
+		  e qui un intero comma: 
+		  
+			<comma id="art8-com2">
+				<num>1.</num>
+				<corpo><mod id="mod5">Nell'<rif href="urn:nir:stato:legge:1996-12-31;675#art22-com4">articolo 22 
+				della legge 31 dicembre 1996, n. 675, il comma 4</rif> e' sostituito dal seguente:
+					<virgolette tipo="struttura" id="mod5-vir1">
+						<comma id="mod5-vir1-art22-com4">
+						<num>4.</num>
+							<alinea>I dati personali indicati al 
+							<rif href="urn:nir:stato:legge:1996-12-31;675#art22-com1">comma 1</rif>
+							possono essere oggetto di trattamento previa autorizzazione del Garante:</alinea>
+							<el id="mod5-vir1-art22-com4-let1">
+								<num>a)</num>
+								<corpo>qualora il trattamento sia effettuato da associazioni, enti od
+								organismi  senza  scopo di lucro, anche non riconosciuti, a carattere
+								politico,  filosofico,  religioso o sindacale, ivi compresi partiti e
+								movimenti   politici,  confessioni  e  comunita'  religiose,  ...
+							</el>
+							...
+						</comma>
+					</virgolette>
+				</mod></corpo>
+			</comma>
+
+		  
+    ===================================================================== -->
+
+<!ELEMENT ndr       %inline; >
+<!ATTLIST ndr       %idfac;
+					%link;
+					%HTMLattrs; 
+					num			IDREF		#IMPLIED
+					value		CDATA		#IMPLIED  >
+
+
+<!ELEMENT rif				%inline; >
+<!ATTLIST rif				%link;   %idfac;   %status; >
+
+<!ELEMENT mrif		        %inline; >
+<!ATTLIST mrif				%idfac;   %status; >
+
+<!ELEMENT mod		        (%elinline;| virgolette)* >
+<!ATTLIST mod				%idreq;   %status; >
+
+<!ELEMENT virgolette		  (%elinline; | libro | parte | titolo | capo | 
+						    sezione | articolo | comma | el | en | ep)* >
+<!ATTLIST virgolette		  tipo		(parola|struttura)  "parola" 
+						    %idreq;   %status; >
+
+<!-- =====================================================================
+
+		Elementi HTML del documento articolato
+
+		Nel DTD base, il documento articolato prevede un numero limitato 
+		di situazioni in cui sia possibile inserire testo diviso in capoversi, 
+		come il preambolo o il pre-annesso. 
+		
+		In questi casi, dunque, e' necessario poter specificare del testo
+		diviso in capoversi attraverso l'uso di elementi direttamente 
+		tratti da HTML, come gli elementi div e p. 
+		
+		Tuttavia, a differenza di HTML, nel DTD NormeInRete NON VI E' 
+		DIFFERENZA D'USO tra div e p: i due elementi sono totalmente 
+		intercambiabili. A questi elementi e' possibile associare, 
+		attraverso attributi, uno stile CSS che permetta di specificare
+		caratteristiche tipografiche particolari. Cio' tuttavia e' 
+		opportuno soltanto quando le caratteristiche tipografiche del
+		testo stampato richiedano effettivamente di essere registrate
+		esplicitamente. 
+		
+    ===================================================================== -->
+
+<!ELEMENT h:p		  %inline; >
+<!ELEMENT h:div		%inline; >
+<!ATTLIST h:p		  %idfac; %HTMLattrs; >
+<!ATTLIST h:div		%idfac; %HTMLattrs; >
+
+<!-- =====================================================================
+
+		Strutture fondamentali del documento semi-articolato
+		
+		Oltre al documento articolato (caratteristico di leggi, 
+		decreti, ecc.), il DTD NormeInRete prevede anche il cosiddetto
+		documento semi-articolato, che ha un formato molto piu' libero
+		e privo di vincoli. Nel DTD base solo il tipo documentoNIR e'
+		un documento semiarticolato. 
+		
+		Si usi il tipo documentoNIR per tutti i documenti che non sono 
+		esplicitamente elencati tra i documenti articolati. Ad esempio, 
+		si usi documentoNIR per tutti gli annessi che non siano a loro
+		volta documenti articolati. 
+		
+		I documenti semi-articolati hanno maggiore flessibilita' al loro
+		interno, e possono contenere parti articolate cosi' come immagini, 
+		tabelle, gerarchie diverse dall'articolato.		
+
+    ===================================================================== -->
+
+<!ENTITY % nome "nome		 CDATA		#IMPLIED  ">
+<!ENTITY % strutture    "(contenitore|gerarchia|articolato)+" >
+<!ENTITY % tuttiblocchi "(h:div|h:p|h:img|h:ul|h:ol|h:table)+" >
+
+<!ENTITY % semiarticolato      "intestazione?, 
+						     %strutture;, 
+						     annessi? ">
+
+<!ELEMENT DocumentoNIR		(meta, %semiarticolato;) >
+<!ATTLIST DocumentoNIR		%idfac;   %status;>
+
+<!-- =====================================================================
+
+		Elementi generici del documento semi-articolato
+		
+		Gli elementi generici sono elementi dalle caratteristiche semantiche
+		e strutturali ben precise, ma non elencate esplicitamente tra le 
+		strutture del DTD NormeInRete. 
+		
+		Il DTD base eredita solo due elementi generici, il contenitore e la 
+		gerarchia. Si usi il contenitore generico quando si debba organizzare
+		una sequenza di elementi di tipo blocco (capoversi, immagini, liste, 
+		tabelle, ecc.). Si usi invece l'elemento gerarchia quando si ha a che
+		fare con strutture gerarchiche diverse dall'articolato. 
+		
+		L'attributo nome permette di riportare il nome della struttura generica
+		utilizzata. Attributi facoltativi come num e tit permettono di numerare
+		e titolare esplicitamente gli elementi gerarchici. 
+
+    ===================================================================== -->
+
+<!ELEMENT contenitore    ((%tuttiblocchi;)+) >
+<!ATTLIST contenitore    %idfac; %HTMLattrs;    %nome; >
+
+<!ELEMENT gerarchia						    (l1|l2|l3|l4|l5|l6|l7|l8|l9)+  >
+<!ELEMENT l1		(num?, tit?, (%tuttiblocchi;    |l2|l3|l4|l5|l6|l7|l8|l9)+) >
+<!ELEMENT l2		(num?, tit?, (%tuttiblocchi;       |l3|l4|l5|l6|l7|l8|l9)+) >
+<!ELEMENT l3		(num?, tit?, (%tuttiblocchi;		 |l4|l5|l6|l7|l8|l9)+) >
+<!ELEMENT l4		(num?, tit?, (%tuttiblocchi;		    |l5|l6|l7|l8|l9)+) >
+<!ELEMENT l5		(num?, tit?, (%tuttiblocchi;		       |l6|l7|l8|l9)+) >
+<!ELEMENT l6		(num?, tit?, (%tuttiblocchi;				 |l7|l8|l9)+) >
+<!ELEMENT l7		(num?, tit?, (%tuttiblocchi;				    |l8|l9)+) >
+<!ELEMENT l8		(num?, tit?, (%tuttiblocchi;				       |l9)+) >
+<!ELEMENT l9		(num?, tit?, (%tuttiblocchi;						 )+) >
+
+<!ELEMENT tit	%inline; >
+<!ATTLIST tit	%idfac; %HTMLattrs; >
+
+<!ATTLIST gerarchia    %idreq; %HTMLattrs;    %nome; >
+<!ATTLIST l1		  %idreq; %HTMLattrs;    %nome; >
+<!ATTLIST l2		  %idreq; %HTMLattrs;    %nome; >
+<!ATTLIST l3		  %idreq; %HTMLattrs;    %nome; >
+<!ATTLIST l4		  %idreq; %HTMLattrs;    %nome; >
+<!ATTLIST l5		  %idreq; %HTMLattrs;    %nome; >
+<!ATTLIST l6		  %idreq; %HTMLattrs;    %nome; >
+<!ATTLIST l7		  %idreq; %HTMLattrs;    %nome; >
+<!ATTLIST l8		  %idreq; %HTMLattrs;    %nome; >
+<!ATTLIST l9		  %idreq; %HTMLattrs;    %nome; >
+
+
+
+<!-- =====================================================================
+
+		Elementi HTML del documento semi-articolato
+		
+		I documenti semi-articolati (in particolare gli allegati)
+		permettono un contenuto piu' ricco e meno vincolato dei documenti
+		articolati. 
+		
+		Ad esempio, permettono immagini, liste e tabelle. Questi elementi
+		nel DTD di NormeInRete sono direttamente ereditati da HTML 4.0, 
+		anche se con notevoli semplificazioni. 
+		
+		Il tag img permette solo un sottoinsieme degli attributi del tag img 
+		di HTML. Analogamente, il DTD NIR prevede solo liste a pallini e liste
+		numeriche, e non fornisce i meccanismi di raggruppamento di righe o 
+		colonne nelle tabelle. 
+
+    ===================================================================== -->
+
+<!ELEMENT h:img		EMPTY    >
+<!ATTLIST h:img
+				      %idfac; %HTMLattrs; 
+				      src        CDATA        #REQUIRED
+				      alt        CDATA        #IMPLIED
+				      width      CDATA        #IMPLIED
+				      height     CDATA        #IMPLIED
+>
+
+<!ELEMENT h:ul (h:li)+ >
+<!ELEMENT h:ol (h:li)+ >
+<!ELEMENT h:li %inline;>
+
+<!ATTLIST h:ul  %idfac; %HTMLattrs;>
+<!ATTLIST h:ol  %idfac; %HTMLattrs;>
+<!ATTLIST h:li  %idfac; %HTMLattrs;>
+
+<!ENTITY % cellattrs    'rowspan     CDATA		 "1"
+				       colspan     CDATA		 "1"  '>
+
+<!ELEMENT h:table   (h:tr+)>
+<!ATTLIST h:table   %idfac; %HTMLattrs; 
+				  width        CDATA		 #IMPLIED
+				  border       CDATA		 #IMPLIED
+				  cellspacing  CDATA		 #IMPLIED
+				  cellpadding  CDATA		 #IMPLIED
+>
+
+<!ELEMENT h:tr		  (h:th|h:td)+>
+<!ATTLIST h:tr		  %idfac; %HTMLattrs; >
+
+<!ELEMENT h:th		  %inline;>
+<!ELEMENT h:td		  %inline;>
+
+<!ATTLIST h:th		  %cellattrs; %idfac; %HTMLattrs; >
+<!ATTLIST h:td		  %cellattrs; %idfac; %HTMLattrs; >
+
+<!-- =====================================================================
+
+		Definizione di elementi di metainformazione
+		
+		Le metainformazioni sono dati e specifiche extra-testuali, inserite
+		redazionalmente, che permettono di descrivere il documento ma 
+		non fanno parte del suo contenuto in senso stretto. 
+		
+		I DTD di NormeInRete specificano una grande quantita' di elementi 
+		attraverso i quali inserire metainformazioni sul documento. 
+		Tuttavia, per maggiore semplicita', il DTD base di NormeInRete 
+		restringe la quantita' ed il tipo di metainformazioni specificabili.
+		
+		Il DTD base, infatti, fornisce un unica posizione nel documento dove 
+		specificare queste informazioni, l'elemento meta, posto all'inizio del 
+		documento. In secondo luogo, restringe le classi di metainformazioni a 
+		due classi: i descrittori del documento e gli interventi redazionali. 
+		
+    ===================================================================== -->
+
+<!ENTITY % tipopubbl  "
+				 tipo   CDATA   'GU' 
+				 num    CDATA   #IMPLIED
+				 %data;    ">
+				 
+<!ELEMENT meta		 (descrittori, redazionale?)>
+
+<!-- =====================================================================
+
+		Elementi descrittori
+		
+		Gli elementi descrittori permettono di specificare le seguenti informazioni:
+		
+		* pubblicazione: le specifiche della pubblicazione originale, ed in
+		  particolare il tipo di pubblicazione, il numero e la data di pubblicazione. 
+		  L'elemento pubblicazione e' obbligatorio. 
+		  
+		* altrepubblicazioni: un elemento facoltativo che permette di raccogliere
+		  informazioni su altre pubblicazioni successive, come la ripubblicazione, 
+		  la pubblicazione di errata o di rettifiche. Questi elementi sono 
+		  sintatticamente simili all'elemento pubblicazione. Dentro all'elemento
+		  altrepubblicazioni puo' anche essere specificato il produttore, ovvero
+		  informazioni sulla redazione responsabile del documento che viene marcato. 
+		  Di se', il produttore deve fornire un nome ed un url (facoltativo) ad una 
+		  home page o ad un'altra risorsa Web che fornisca informazioni su di esso. 
+		* urn: uno o piu' URN secondo la sintassi dello standard URN, con cui il 
+		  documento dovrebbe essere noto. 
+		  
+		* alias: altri nomi comuni con cui il documento e' familiarmente chiamato. 
+		  Ad esempio: codice civile, legge sulla privacy, legge Tremonti bis, ecc. 
+
+		* vigenza: viene qui specificato il periodo di vigenza del documento. Poiche'
+		  il DTD base non prevede documenti multi-vigenti, solo un periodo di vigenza
+		  deve essere specificato. L'attributo id, necessariamente unico, deve essere
+		  posto al valore "v1", come indicato nella sezione 8.2 di note.html. 
+		  Gli attributi inizio e fine riportano, nella sintassi prevista nella sezione
+		  8.3 del documento note.html, la data di inizio e, se appropriato, fine della 
+		  vigenza del documento. L'attributo fonte riporta l'id dell'elemento relazione 
+		  che conclude la vigenza specificata. In questo caso deve esistere un elemento 
+		  'passiva' con l'indicazione del provvedimento che ne conclude la vigenza. 
+		  Si danno allora i seguenti casi: 
+		  - il provvedimento e' originale e ancora vigente (cioe' esattamente conforme
+		    alla sua pubblicazione originaria sulla Gazzetta Ufficiale). In questo caso 
+		    l'attributo tipo dell'elemento NIR vale "originale" (o e' omesso in quanto 
+		    default), l'elemento pubblicazione riporta la data di pubblicazione in Gazzetta 
+		    Ufficiale e l'elemento vigenza riporta la data di inizio vigenza (come calcolata
+		    sulla base della data della Gazzetta Ufficiale). Non esiste data di fine vigenza
+		    in quanto il provvedimento e' ancora vigente. Non esiste specificazione della
+		    fonte in quanto il provvedimento deriva la sua vigenza dalla pubblicazione 
+		    originaria sulla Gazzetta Ufficiale. Nel caso seguente, il DPR 466 dell'11 dicembre 2001
+		    e' ancora vigente nella sua forma di prima approvazione: 
+		    
+			<NIR tipo="originale"
+				 xmlns:xlink='http://www.w3.org/1999/xlink'
+				 xmlns:h='http://www.w3.org/HTML/1998/html4'
+				 xmlns='http://www.normeinrete.it/nir/1.0'>
+				<Dpr>
+					<meta>
+						<descrittori>
+							<pubblicazione tipo="GU" num="10" norm="20020112"/>
+							<urn>urn:nir:presidente.repubblica:decreto:2002-01-12;466</urn>
+							<vigenza id="v1" inizio="20020127"/>
+						</descrittori>
+					</meta>
+					<intestazione>
+						<tipoDoc>DECRETO DEL PRESIDENTE DELLA REPUBBLICA</tipoDoc>
+						<dataDoc norm="20011211">11 dicembre 2001</dataDoc>, 
+						<numDoc>n. 466</numDoc>.
+						<titoloDoc>Regolamento   recante   modifiche  ed  integrazioni  al
+						<rif xlink:href="urn:nir:presidente.repubblica:decreto:2001-03-01;126">decreto 
+						del Presidente  della  Repubblica  1  marzo  2001,  n. 126,</rif>
+						in materia di versamento   del   contributo  unificato  per  le 
+						spese  degli  atti giudiziari.</titoloDoc>
+					</intestazione> 
+					 ...
+				</Dpr>
+			 </NIR>
+
+		  - il provvedimento e' originale ma non piu' vigente (cioe' esiste vigente un
+		    provvedimento successivo, tale per cui la lettera di questo provvedimento non e'
+		    aggiornata. E' irrilevante qui che cio' sia dovuto ad abrogazione o modifica). In 
+		    questo caso l'attributo tipo dell'elemento NIR vale "originale" (o e' omesso in quanto 
+		    default), l'elemento pubblicazione riporta la data di pubblicazione in Gazzetta 
+		    Ufficiale e l'elemento vigenza riporta la data di inizio vigenza (come calcolata
+		    sulla base della data della Gazzetta Ufficiale), la data di fine vigenza (come
+		    calcolata dal provvedimento di modifica o abrogazione), e la fonte, ovvero l'id
+		    dell'elemento "passiva" associato alla relazione passiva con il provvedimento che 
+		    contiene la modifica o l'abrogazione di questo. Nel caso seguente, il DPR 137 del 
+		    29.3.1993, pubblicato nella GU 13.5.1993, n. 110 ed entrato in vigore il 28.5.93,  
+		    e' stato abrogato e sostituito dal DPR 529 del 2.10.1996, entrato in vigore il 29.10.1996. 
+
+		    
+			<NIR tipo="originale"
+				 xmlns:xlink='http://www.w3.org/1999/xlink'
+				 xmlns:h='http://www.w3.org/HTML/1998/html4'
+				 xmlns='http://www.normeinrete.it/nir/1.0'>
+				<Dpr>
+					<meta>
+						<descrittori>
+							<pubblicazione tipo="GU" num="110" norm="19930513"/>
+							<urn>urn:nir:presidente.repubblica:decreto:1993-03-29;137</urn>
+							<vigenza id="v1" inizio="19930528" fine="19961029" fonte="p1"/>
+							<relazioni>
+								<passiva id="rp1" xlink:href="urn:nir:presidente.repubblica:decreto:1996-10-02:529"/>
+							</relazioni>
+						</descrittori>
+					</meta>
+					<intestazione>
+						<tipoDoc>DECRETO DEL PRESIDENTE DELLA REPUBBLICA</tipoDoc>
+						<dataDoc norm="19930329">29 marzo 1993</dataDoc>, 
+						<numDoc>n. 137</numDoc>
+						<titoloDoc>Regolamento  recante  la  determinazione  dei comandi e
+						dei reparti territoriali della Guardia di finanza.</titoloDoc>
+					</intestazione> 
+					 ...
+				</Dpr>
+			 </NIR>
+
+		  - il provvedimento non e' originale, ma vigente ad oggi. E' cioe' il risultato di 
+		    elaborazioni redazionali per portarne il contenuto alla lettera odierna della 
+		    norma, tenendo conto di uno o piu' documenti di modifica. In questo caso
+		    l'attributo tipo dell'elemento NIR vale "vigente" (o non puo' essere omesso), 
+		    l'elemento pubblicazione riporta la data di pubblicazione in Gazzetta 
+		    Ufficiale dell'ultimo provvedimento di modifica, e l'elemento vigenza riporta 
+		    la data di inizio vigenza di questa specifica forma del documento (come calcolata
+		    sulla base della data della Gazzetta Ufficiale dell'ultimo provvedimento di modifica). 
+		    Manca la data di fine vigenza, cosi' come l'attributo fonte, in quanto il 
+		    provvedimento e' ancora vigente. Per completezza, l'elemento relazioni dovrebbe 
+		    allora riportare un elemento 'originale' che specifichi l'URN del documento nella 
+		    sua forma originaria, e uno o piu' elementi 'passiva', uno per ciascun provvedimento 
+		    di modifica che sia intervenuto nel tempo a modificare il provvedimento in questione. 
+		    Nel caso seguente, il decreto del ministero dell'industria, del commercio e dell'artigianato
+		    20.10.1995, n. 527 e' stato inizialmente pubblicato nella GU n. 292 del 15.12.1995, poi 
+		    modificato una prima volta dal Decreto 31.7.1997, n. 319, e poi ancora dal Decreto 9.3.2000, 
+		    n. 133, vigente dal 9.6.2000 e pubblicato in GU n. 120 del 25.5.2000
+
+		   <NIR tipo="vigente"
+				xmlns:xlink='http://www.w3.org/1999/xlink'
+				xmlns:h='http://www.w3.org/HTML/1998/html4'
+				xmlns='http://www.normeinrete.it/nir/1.0'>
+				<DecretoMinisteriale>
+					<meta>
+						<descrittori>
+							<pubblicazione tipo="GU" num="120" norm="20000525"/>
+							<urn>urn:nir:ministero.industria:decreto:1995-10-12;527@2000-03-09</urn>
+							<vigenza id="v1" inizio="20000609"/>
+							<relazioni>
+								<originale id="ro1" xlink:href="urn:nir:ministero.industria:decreto:1995-10-12;527"/>
+								<passiva   id="rp1" xlink:href="urn:nir:ministero.industria:decreto:1997-07-31;319"/>
+								<passiva   id="rp2" xlink:href="urn:nir:ministero.industria:decreto:2000-03-09;133"/>
+							</relazioni>
+						</descrittori>
+					</meta>
+					<intestazione>
+						<emanante>MINISTERO DELL'INDUSTRIA, DEL COMMERCIO E DELL'ARTIGIANATO</emanante>
+						<tipoDoc>DECRETO</tipoDoc>
+						<dataDoc norm="19951020">20 ottobre 1995</dataDoc>, 
+						<numDoc>n. 527</numDoc>.
+						<titoloDoc>Regolamento recante le modalit&agrave; e le procedure
+						per la  concessione ed erogazione delle agevolazioni in favore
+						delle attivit&agrave; produttive</titoloDoc>
+					</intestazione> 
+				   ...
+				</DecretoMinisteriale>
+		   </NIR>
+
+		  - il provvedimento non e' originale, ne' vigente ad oggi. E' invece il risultato di 
+		    elaborazioni redazionali per portarne il contenuto alla lettera della norma
+		    relativamente ad un periodo oggi concluso. In questo caso l'attributo tipo dell'elemento 
+		    NIR vale "vigente" (o non puo' essere omesso), l'elemento pubblicazione riporta la 
+		    data di pubblicazione in Gazzetta Ufficiale dell'ultimo provvedimento di modifica, 
+		    e l'elemento vigenza riporta la data di inizio vigenza di questa specifica forma 
+		    del documento (come calcolata sulla base della data della Gazzetta Ufficiale 
+		    dell'ultimo provvedimento di modifica), nonche' la data di fine vigenza e 
+		    l'attributo fonte, il cui valore e' l'id dell'elemento passiva che abroga o 
+		    modifica il testo nella forma qui presentata. Per completezza, l'elemento relazioni 
+		    dovrebbe riportare anche un elemento 'originale' che specifichi l'URN del documento 
+		    nella sua forma originaria, e tutti gli ulteriori elementi 'passiva', uno per ciascun 
+		    provvedimento di modifica che sia intervenuto nel tempo a modificare il provvedimento 
+		    in questione prima di quello che ha concluso la vigenza qui presentata. Si noti che 
+		    almeno l'ultimo elemento 'passiva' e' dunque obbigatorio. 
+		    Si consideri ad esempio il caso del Decreto Legislativo 3.2.1993, n.29. Pubblicato nella 
+		    GU n. 30 del 6.2.1993, Supplemento ordinario n. 14, e' entrato in vigore il 21.2.1993. 
+		    Da allora ha avuto 41 modifiche:
+		     1. art. 14 decreto legislativo 3 aprile 1993, n. 96
+		     2. art. 12 legge 14 luglio 1993 , n. 222
+		     3. art. 1 decreto legislativo 19 luglio 1993, n. 247
+		      ... ecc. 
+		    40. art. 51 della legge 23 dicembre 2000, n. 388, pubblicata nella GU n. 302 del 29.12.2000, 
+		        Supplemento ordinario n. 219, entrata in vigore l'1.1.2001. Questo e' il testo che supponiamo 
+		        di pubblicare qui. 
+		    41. art. 72, comma 1), lettera t) del decreto legislativo 30 marzo 2001, n. 165, pubblicato nella 
+		        GU n. 106 del 9.5.2001, Supplemento ordinario n. 112. Questo provvedimento abroga definitivamente
+		        il decreto legislativo ed e' entrato in vigore il 24.5.2001.
+		     
+		   <NIR tipo="vigente"
+				xmlns:xlink='http://www.w3.org/1999/xlink'
+				xmlns:h='http://www.w3.org/HTML/1998/html4'
+				xmlns='http://www.normeinrete.it/nir/1.0'>
+				<DecretoLegislativo>
+					<meta>
+						<descrittori>
+							<pubblicazione tipo="GU" num="302" norm="20001229"/>
+							<urn>urn:nir:stato:decreto.legislativo:1993-02-03;29@2000-12-23</urn>
+							<vigenza id="v1" inizio="20010101" fine="20010524" fonte="rp41"/>
+							<relazioni>
+								<originale id="ro1" xlink:href="urn:nir:stato:decreto.legislativo:1993-02-03;29"/>
+								<passiva   id="rp1" xlink:href="urn:nir:stato:decreto.legislativo:1993-04-03;96"/>
+								<passiva   id="rp2" xlink:href="urn:nir:stato:legge:1993-07-14;222"/>
+								<passiva   id="rp3" xlink:href="urn:nir:stato:decreto.legislativo:1993-07-19;247"/>
+								... altre trentasei relazioni passive  ...
+								<passiva   id="rp40" xlink:href="urn:nir:stato:legge:2000-12-23;388"/>
+								<passiva   id="rp41" xlink:href="urn:nir:stato:decreto.legislativo:2001-03-30;165"/>								
+							</relazioni>
+						</descrittori>
+					</meta>
+					<intestazione>
+						<tipoDoc>DECRETO LEGISLATIVO</tipoDoc>
+						<dataDoc norm="19930203">3 febbraio 1993</dataDoc>, 
+						<numDoc>n. 29</numDoc>.
+						<titoloDoc>Razionalizzazione della   organizzazione  delle
+						Amministrazioni pubbliche  e  revisione  della  disciplina  in
+						materia  di  pubblico impiego, a norma dell'<rif
+						xlink:href="urn:nir:stato:legge:1992-10-23;421#art2">articolo 2
+						della legge 23 ottobre 1992, n. 421</rif></titoloDoc>
+					</intestazione> 
+				  ...
+				</DecretoLegislativo>
+		   </NIR>
+
+		* relazioni: Sono qui elencate tutte le relazioni ad altri provvedimenti in 
+		  qualunque maniera connessi al provvedimento in questione. Tutti gli 
+		  elementi qui sono facoltativi, anche se fortemente raccomandati, in quanto
+		  permettono di specificare il contesto in cui il provvedimento e' inserito. 
+		  L'unico caso di obbligo e' per i documenti non piu' vigenti, come spiegato
+		  qui sopra. Di ogni relazione va specificato un id univoco secondo la sintassi
+		  esposta nella sezione 8.2 di note.html, e l'urn del documento in relazione. 
+		  Le relazioni possibili sono le seguenti:  
+		  - originale: l'urn del provvedimento originale di cui il presente e' variante
+		    redazionale aggiornata ad una particolare data di vigenza. Non si usa se il 
+		    documento marcato e' esso stesso originale. 
+		  - attiva: l'urn di un provvedimento per il quale il presente contiene indicazioni
+		    di modifica o abrogazione. 
+		  - passiva: l'urn di un provvedimento che modifica o abroga il presente. In caso 
+		    di piu' provedimenti che nel tempo lo modificano, essi vanno posti in rigoroso
+		    ordine temporale. 
+		  - giurisprudenza: l'urn di un intervento giurisprudenziale che ha modificato la 
+		    lettera o l'interpretazione consolidata delle norme contenute nel presente
+		    provvedimento. 
+		
+		* keywords: parole chiave aggiunte redazionalmente sulla base di un 
+		  vocabolario predefinito e dichiarato. E' possibile aggiungere piu' blocchi
+		  di keyword, ciascuno associato ad un vocabolario diverso. L'attributo 
+		  'vocabolario' riporta un nome descrittivo del vocabolario usato. Ogni elemento
+		  keyword riporta nell'attributo 'val' un vocabolo tratto dal vocabolario indicato. 
+		  Ad esempio: 
+		  
+			<keywords vocabolario="TESEO">
+				<keyword val="CULTURA, SPETTACOLO, SPORT E TURISMO"/>
+			</keywords>
+		
+    ===================================================================== -->
+
+<!ELEMENT descrittori   (pubblicazione, altrepubblicazioni?, urn+, 
+				       alias*, vigenza, relazioni?,keywords*) >
+
+<!ELEMENT altrepubblicazioni (ripubblicazione | errata | rettifica | produttore)+ >
+
+<!ELEMENT pubblicazione    EMPTY >    
+<!ELEMENT ripubblicazione  EMPTY >    
+<!ELEMENT errata		  EMPTY >    
+<!ELEMENT rettifica        EMPTY >    
+<!ELEMENT produttore       EMPTY>
+<!ATTLIST pubblicazione    %tipopubbl; >    
+<!ATTLIST ripubblicazione  %tipopubbl; >    
+<!ATTLIST errata		  %tipopubbl; >    
+<!ATTLIST rettifica        %tipopubbl; >
+<!ATTLIST produttore       %data;
+						nome    CDATA   #REQUIRED
+						url     CDATA   #IMPLIED >
+
+<!ELEMENT urn		     (#PCDATA) >
+<!ELEMENT alias		   (#PCDATA) >
+
+<!ELEMENT vigenza		 EMPTY >
+<!ATTLIST vigenza		 %idreq; 
+					      inizio	CDATA	#REQUIRED
+					      fine     CDATA   #IMPLIED
+					      fonte	IDREF	#IMPLIED>
+					
+<!ELEMENT relazioni        (originale?,attiva*,passiva*,giurisprudenza*) >
+
+<!ELEMENT originale	       EMPTY>
+<!ELEMENT attiva		  EMPTY>
+<!ELEMENT passiva	       EMPTY>
+<!ELEMENT giurisprudenza   EMPTY>
+
+<!ATTLIST originale        %link; %idreq;>
+<!ATTLIST attiva		  %link; %idreq;>
+<!ATTLIST passiva		 %link; %idreq;>
+<!ATTLIST giurisprudenza   %link; %idreq;>
+
+<!ELEMENT keywords	      (keyword+)>
+<!ATTLIST keywords        vocabolario CDATA   #REQUIRED >
+<!ELEMENT keyword	      EMPTY>
+<!ATTLIST keyword		val		CDATA   #REQUIRED>
+
+<!-- =====================================================================
+		Elementi redazionali
+		
+		Gli elementi redazionali sono testi aggiunti dalla redazione come 
+		valore aggiunto al testo del provvedimento. Essi contengono note
+		(ovvero testi esplicitamente referenziati da elementi ndr all'interno
+		del testo), avvertenze (testi sulla norma non esplicitamente 
+		referenziati dal testo) o altri testi di natura libera.
+		
+		Ciascuno di questi elementi puo' contenere blocchi di testo in forma 
+		qualunque.  
+
+		Mod. 011103: Aggiunta la possibilita' di specificare stili e effetti di
+		presentazione agli elementi del redazionale. 
+				
+    ===================================================================== -->
+
+<!ELEMENT redazionale  (nota | avvertenza | altro)+ >
+<!ELEMENT nota		   %blocchi; >
+<!ELEMENT avvertenza   %blocchi; >
+<!ELEMENT altro		   %blocchi; >
+
+<!ATTLIST nota		   %idreq; %HTMLattrs; >
+<!ATTLIST avvertenza   %idreq; %HTMLattrs; >
+<!ATTLIST altro		   %idreq; %HTMLattrs; >
+
+
+<!-- =====================================================================
+		fine DTD
+    ===================================================================== -->
+

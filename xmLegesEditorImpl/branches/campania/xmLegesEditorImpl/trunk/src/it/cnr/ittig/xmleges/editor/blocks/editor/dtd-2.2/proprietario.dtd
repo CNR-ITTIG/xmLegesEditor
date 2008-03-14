@@ -1,0 +1,51 @@
+<!--  =====================================================================        
+          Modello dei documenti di NormeInRete (NIR)                                 
+                                                                                     
+          proprietario: estensioni proprietarie dello schema NIR                     
+          Dipende da: 'nirstrict' oppure 'nirloose'                                  
+                                                                                     
+          Versione  2.2                                                              
+          Release   26/02/2007                                                       
+          Fabio Vitali - UniBo                                                       
+                                                                                     
+          Questo file e' volutamente vuoto. Inserire le proprie estensioni           
+          qui dentro o sostituire il file con uno dallo stesso nome                  
+        ===================================================================== -->
+
+<!--    =====================================================================        
+          Elenco dei Metadati proprietari
+	   =====================================================================        
+		N.B. per aggiungere altri metadati proprietari, si consiglia di:
+		1. definire il valore dell'entita' meta con relativo namespace
+		   (es. <!ENTITY % xxxMeta "xxx:meta" >
+		2. aggiungere in OR (|) la nuova entita' meta a ProprietarioMeta
+		   (es. <!ENTITY % ProprietarioMeta "(%cnrMeta; | %xxxMeta;)*">
+		3. creare un file con la DTD dei nuovi meta e associarla ad una entita'
+		   (es. <!ENTITY % xxxDTD SYSTEM "./xxx.dtd">)
+		4. importare la DTD creata attraverso l'entita' associata
+		   (es. %xxxDTD;)
+        =====================================================================  -->
+
+<!ENTITY % cnrMeta "cnr:meta" >
+
+<!ENTITY % ProprietarioMeta "(%cnrMeta;)*" >
+
+<!--    =====================================================================        
+          Metadati proprietari del CNR                                               
+        =====================================================================  -->
+
+<!ENTITY % cnrDTD SYSTEM "./cnr.dtd">
+
+%cnrDTD;
+
+<!--    =====================================================================        
+          Metadati proprietari ITTIG                                               
+        =====================================================================  -->
+
+<!ENTITY % ittigDTD SYSTEM "./ittig.dtd">
+
+%ittigDTD;
+
+<!--    =====================================================================        
+            fine del file proprietario                                               
+        =====================================================================  -->
