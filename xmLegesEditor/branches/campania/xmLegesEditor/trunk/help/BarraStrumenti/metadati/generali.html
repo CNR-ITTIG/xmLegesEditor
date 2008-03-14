@@ -1,0 +1,200 @@
+<html>
+<head>
+<title>Inserimento Metadati Generali (Descrittori)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../../nireditor2help.css" type="text/css">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" class="testo">
+<p class="titolo">Inserimento Metadati Generali (Descrittori)</p>
+<p>I metadati descrittori (o generali) dello standard NIR possono si dividono 
+  nelle seguenti categorie:</p>
+<p>- <a href="#pub">pubblicazione</a>: le specifiche della pubblicazione originale, 
+  ed in particolare il tipo di pubblicazione, il numero e la data di pubblicazione. 
+  L'elemento pubblicazione e' obbligatorio. <br>
+  <br>
+  - <a href="#altrepub">altrepubblicazioni</a>: un elemento facoltativo che permette 
+  di raccogliere informazioni su altre pubblicazioni successive, come la ripubblicazione, 
+  la pubblicazione di errata o di rettifiche. Questi elementi sono sintatticamente 
+  simili all'elemento pubblicazione. Dentro all'elemento altrepubblicazioni puo' 
+  anche essere specificato il produttore, ovvero<br>
+  informazioni sulla redazione responsabile del documento che viene marcato. Di 
+  se', il produttore deve fornire un nome ed un url (facoltativo) ad una home 
+  page o ad un'altra risorsa Web che fornisca informazioni su di esso.</p>
+<p> - <a href="#vigenza">vigenza</a>: vengono qui specificati i periodi di vigenza 
+  del documento;</p>
+<p>- relazioni: Sono qui elencate le <a href="#relazioni">relazioni</a> a provvedimenti 
+  che hanno messo fine alla vigenza di un atto o <a href="#ulteriorirel">ulteriori 
+  relazioni </a>ad altri provvedimenti in qualunque maniera connessi al provvedimento 
+  in questione. Tutti gli elementi qui sono facoltativi, anche se fortemente raccomandati, 
+  in quanto permettono di specificare il contesto in cui il provvedimento e' inserito. 
+  L'unico caso di obbligo e' per i documenti non piu' vigenti, come spiegato<br>
+  qui sopra. Di ogni relazione va specificato un id univoco secondo la sintassi 
+  esposta nella sezione 8.2 di note.html, e l'urn del documento in relazione. 
+  <br>
+  Le relazioni possibili sono le seguenti:</p>
+<ul>
+  <li> originale: l'urn del provvedimento originale di cui il presente e' variante<br>
+    redazionale aggiornata ad una particolare data di vigenza.;</li>
+  <li>attiva: l'urn di un provvedimento per il quale il presente contiene indicazioni<br>
+    di modifica o abrogazione;</li>
+  <li>passiva: l'urn di un provvedimento che modifica o abroga il presente. In 
+    caso <br>
+    di piu' provedimenti che nel tempo lo modificano, essi vanno posti in rigoroso<br>
+    ordine temporale;</li>
+  <li> giurisprudenza: l'urn di un intervento giurisprudenziale che ha modificato 
+    la <br>
+    lettera o l'interpretazione consolidata delle norme contenute nel presente<br>
+    provvedimento.</li>
+</ul>
+<p>- <a href="#alias">alias</a>: altri nomi comuni con cui il documento e' familiarmente 
+  chiamato. Ad esempio: codice civile, legge sulla privacy, legge Tremonti bis, 
+  ecc. </p>
+<p>- keywords: parole chiave aggiunte redazionalmente sulla base di un vocabolario 
+  predefinito e dichiarato. E' possibile aggiungere piu' blocchi di keyword, ciascuno 
+  associato ad un vocabolario diverso. L'attributo 'vocabolario' riporta un nome 
+  descrittivo del vocabolario usato. Ogni elemento keyword riporta nell'attributo 
+  'val' un vocabolo tratto dal vocabolario indicato. <br>
+</p>
+<p>- <a href="urn.html">urn</a>: uno o piu' URN secondo la sintassi dello standard 
+  URN, con cui il documento dovrebbe essere noto. </p>
+<p><b><a name="pub"></a>Inserimento &quot;Pubblicazione&quot;</b></p>
+<ol>
+  <li>Fare clic su <img src="../../images/nuvola/16x16/view_remove.png" width="16" height="16"> 
+    <b>Modifica </b>del men&ugrave; <b>Altre pubblicazioni</b>;</li>
+  <li>Nella casella <b>Numero pubblicazione</b> inserire il numero della pubblicazione 
+    dell'atto;</li>
+  <li>Nella casella <b>Data pubblicazione</b> inserire la data di pubblicazione 
+    dell'atto;</li>
+  <li>Per inserire <b>Altre pubblicazioni</b> fare clic su <b>Aggiungi</b> 
+    <ul>
+      <li>Nella casella <b>Tipo</b> scegliere il tipo di pubblicazione;</li>
+      <li>Nella casella <b>Data</b> inserire la data di pubblicazione dell'atto;</li>
+      <li>Nella casella <b>Numero</b> inserire il numero di pubblicazione dell'atto;</li>
+    </ul>
+  </li>
+  <li>Fare clic su <b>Modifica/Rimuovi</b> per modificare/eliminare una pubblicazione 
+    selezionata introdotta;</li>
+  <li>Fare clic su <b>Ok</b>;</li>
+</ol>
+<p><b><a name="alias"></a>Inserimento &quot;Alias&quot;</b></p>
+<p>L'elemento <b>alias</b> contiene le altre denominazioni con cui il documento 
+  e' comunemente noto. <br>
+  Ad esempio: codice civile, legge sulla privacy, ecc.</p>
+<p>Per inserire uno o pi&ugrave; elementi <b>alias</b>:</p>
+<ol>
+  <li>Fare clic su <img src="../../images/nuvola/16x16/view_remove.png" width="16" height="16"> 
+    <b>Modifica </b>del men&ugrave; <b>Alias</b>;</li>
+  <li>Fare clic su <b>Aggiungi, </b>inserire un nuovo Alias, quindi fare clic 
+    su <b>OK</b>;</li>
+  <li>Fare clic su <b>Modifica/Rimuovi</b> per modificare/eliminare un alias selezionato 
+    introdotto;</li>
+  <li>Fare clic su <b>OK </b>per inserire gli alias nel documento</li>
+</ol>
+<p><b><a name="vigenza"></a>Inserimento &quot;Vigenza&quot;</b></p>
+<ol>
+  <li>Fare clic <img src="../../images/nuvola/16x16/view_remove.png" width="16" height="16"> 
+    <b>Modifica </b>del men&ugrave; <b>Vigenza</b>;</li>
+  <li>Selezionare il tipo di provvedimento<br>
+    Si danno i seguenti casi: <br>
+    <br>
+    - il provvedimento e' originale e ancora vigente (cioe' esattamente conforme 
+    alla sua pubblicazione originaria sulla Gazzetta Ufficiale). In questo caso 
+    l'attributo tipo dell'elemento NIR vale &quot;originale&quot; (o e' omesso 
+    in quanto <br>
+    default), l'elemento pubblicazione riporta la data di pubblicazione in Gazzetta 
+    Ufficiale e l'elemento vigenza riporta la data di inizio vigenza (come calcolata 
+    sulla base della data della Gazzetta Ufficiale). Non esiste data di fine vigenza<br>
+    in quanto il provvedimento e' ancora vigente. Non esiste specificazione della 
+    fonte in quanto il provvedimento deriva la sua vigenza dalla pubblicazione 
+    originaria sulla Gazzetta Ufficiale.<br>
+    <br>
+    - il provvedimento e' originale ma non piu' vigente (cioe' esiste vigente 
+    un provvedimento successivo, tale per cui la lettera di questo provvedimento 
+    non e' aggiornata. E' irrilevante qui che cio' sia dovuto ad abrogazione o 
+    modifica). In questo caso l'attributo tipo dell'elemento NIR vale &quot;originale&quot; 
+    (o e' omesso in quanto default), l'elemento pubblicazione riporta la data 
+    di pubblicazione in Gazzetta Ufficiale e l'elemento vigenza riporta la data 
+    di inizio vigenza (come calcolata sulla base della data della Gazzetta Ufficiale), 
+    la data di fine vigenza (come calcolata dal provvedimento di modifica o abrogazione), 
+    e la fonte, ovvero l'id dell'elemento &quot;passiva&quot; associato alla relazione 
+    passiva con il provvedimento che contiene la modifica o l'abrogazione di questo. 
+    <br>
+    <br>
+    - il provvedimento non e' originale, ma vigente ad oggi. E' cioe' il risultato 
+    di elaborazioni redazionali per portarne il contenuto alla lettera odierna 
+    della norma, tenendo conto di uno o piu' documenti di modifica. In questo 
+    caso<br>
+    l'attributo tipo dell'elemento NIR vale &quot;vigente&quot; (o non puo' essere 
+    omesso), l'elemento pubblicazione riporta la data di pubblicazione in Gazzetta 
+    Ufficiale dell'ultimo provvedimento di modifica, e l'elemento vigenza riporta 
+    la data di inizio vigenza di questa specifica forma del documento (come calcolata 
+    sulla base della data della Gazzetta Ufficiale dell'ultimo provvedimento di 
+    modifica). <br>
+    Manca la data di fine vigenza, cosi' come l'attributo fonte, in quanto il 
+    provvedimento e' ancora vigente. Per completezza, l'elemento relazioni dovrebbe 
+    allora riportare un elemento 'originale' che specifichi l'URN del documento 
+    nella sua forma originaria, e uno o piu' elementi 'passiva', uno per ciascun 
+    provvedimento di modifica che sia intervenuto nel tempo a modificare il provvedimento 
+    in questione.<br>
+    <br>
+    - il provvedimento non e' originale, ne' vigente ad oggi. E' invece il risultato 
+    di elaborazioni redazionali per portarne il contenuto alla lettera della norma 
+    relativamente ad un periodo oggi concluso. In questo caso l'attributo tipo 
+    dell'elemento NIR vale &quot;vigente&quot; (o non puo' essere omesso), l'elemento 
+    pubblicazione riporta la data di pubblicazione in Gazzetta Ufficiale dell'ultimo 
+    provvedimento di modifica, e l'elemento vigenza riporta la data di inizio 
+    vigenza di questa specifica forma del documento (come calcolata sulla base 
+    della data della Gazzetta Ufficiale <br>
+    dell'ultimo provvedimento di modifica), nonche' la data di fine vigenza e 
+    l'attributo fonte, il cui valore e' l'id dell'elemento passiva che abroga 
+    o modifica il testo nella forma qui presentata. Per completezza, l'elemento 
+    relazioni <br>
+    dovrebbe riportare anche un elemento 'originale' che specifichi l'URN del 
+    documento nella sua forma originaria, e tutti gli ulteriori elementi 'passiva', 
+    uno per ciascun provvedimento di modifica che sia intervenuto nel tempo a 
+    modificare il provvedimento in questione prima di quello che ha concluso la 
+    vigenza qui presentata. Si noti che almeno l'ultimo elemento 'passiva' e' 
+    dunque obbigatorio.<br>
+    <br>
+    - il provvedimento e' multivigente. E' cioe' il risultato di elaborazioni 
+    redazionali che forniscono i testi esatti della norma per due o piu' periodi 
+    di vigenza. Al fine di permettere, in fase di visualizzazione, di distinguere<br>
+    con chiarezza gli elementi che sono stati introdotti o abrogati, il marcatore 
+    registra, a fianco di ogni frammento, il periodo di vigenza iniziale ed eventualmente 
+    finale a cui il frammento fa riferimento. In questo caso<br>
+    l'attributo tipo dell'elemento NIR vale &quot;multivigente&quot; (o non puo' 
+    essere omesso), l'elemento pubblicazione riporta la data di pubblicazione 
+    in Gazzetta Ufficiale dell'ultimo provvedimento di modifica, e gli elementi 
+    vigenza<br>
+    riportano la data di inizio vigenza di ogni versione del documento esplicitamente 
+    gestita (la data e' calcolata sulla base della Gazzetta Ufficiale di ciascun 
+    provvedimento di modifica), nonche' la data di fine vigenza e l'attributo 
+    fonte, il cui valore e' l'id dell'elemento passiva che abroga o modifica il 
+    testo della specifica vigenza. Per completezza,<br>
+    l'elemento relazioni deve riportare anche un elemento 'originale' che specifichi 
+    l'URN del documento nella sua forma originaria, e tutti gli ulteriori elementi 
+    'passiva', uno per ciascun provvedimento di modifica che sia intervenuto nel 
+    tempo a modificare il provvedimento in questione prima di quello che ha concluso 
+    la vigenza qui presentata.<br>
+    <br>
+  </li>
+  <li><a name="relazioni"></a>Inserire i periodi di vigenza in funzione del tipo 
+    di provvedimento:</li>
+  <ul>
+    <li> inserire <b>Data Inizio</b> ed eventualmente <b>Data Fine </b>della Vigenza;</li>
+    <li>l'eventuale <b>Tipo di Relazione</b> rispetto ad un atto che ha messo 
+      fine al periodo di vigenza e la <b>URN</b> dell'atto.</li>
+  </ul>
+</ol>
+<p><b><a name="ulteriorirel"></a>Inserimento &quot;Ulteriori Relazioni&quot;</b></p>
+<ol>
+  <li>Fare clic <img src="../../images/nuvola/16x16/view_remove.png" width="16" height="16"> 
+    <b>Modifica </b>del men&ugrave; <b>Ulteriori Relazioni</b>;</li>
+  <li>Scegliere il <b>Tipo di Relazione</b> rispetto ad un atto e la relativa 
+    <b>URN</b>;</li>
+  <li>Fare clic su <b>Modifica/Rimuovi</b> per modificare/eliminare una relazione 
+    introdotta.</li>
+</ol>
+</body>
+</html>
