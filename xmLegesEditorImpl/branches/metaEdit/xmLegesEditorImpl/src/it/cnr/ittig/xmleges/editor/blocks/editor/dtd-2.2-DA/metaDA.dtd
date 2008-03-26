@@ -1,0 +1,657 @@
+<!--  =====================================================================        
+          Modello dei documenti di NormeInRete (NIR)                                 
+                                                                                     
+          meta: metainformazioni sui documenti di NIR                                
+          Dipende da: 'nirstrict' oppure 'nirloose'                                  
+                                                                                     
+          Versione  2.2                                                              
+          Release   18/04/2007                                                       
+          Fabio Vitali - UniBo                                                       
+                                                                                     
+          Per un'introduzione, si veda il documento 'meta.html'                      
+        =====================================================================        
+        =====================================================================        
+                                                                                     
+            Elementi base: meta e metainline                                         
+                                                                                     
+        =====================================================================  -->
+
+<!ELEMENT meta (descrittori,inquadramento?,ciclodivita?,lavoripreparatori?,redazionale*,proprietario*,risoluzione?,disposizioni*)>
+
+<!ELEMENT inlinemeta (redazionale?,proprietario*,disposizioni?)>
+
+<!--  =====================================================================        
+                                                                                     
+            Descrittori                                                              
+                                                                                     
+        =====================================================================  -->
+<!ELEMENT descrittori (pubblicazione,entratainvigore?,redazione+,urn+,alias*,materie*)>
+
+<!ENTITY % tipopubbl "EMPTY" >
+
+<!ELEMENT pubblicazione      %tipopubbl; >
+<!ATTLIST pubblicazione tipo %tipopubblicazione; 'GU'  num %numeropubblicazione; #IMPLIED %data;  >
+
+<!ELEMENT entratainvigore EMPTY >
+
+<!ATTLIST entratainvigore %data;  >
+<!ELEMENT redazione EMPTY >
+
+<!ATTLIST redazione %idreq;  %data;  nome %NIRnome; #REQUIRED url %uri; #IMPLIED contributo %tipocontributo; #IMPLIED >
+
+<!ELEMENT urn %valore; >
+<!ATTLIST urn %val;  >
+
+<!ATTLIST urn %tempi;  >
+<!ELEMENT alias %valore; >
+<!ATTLIST alias %val;  >
+
+<!ELEMENT materie (materia+)>
+
+<!ATTLIST materie vocabolario %anystring; #REQUIRED >
+<!ELEMENT materia %valore; >
+<!ATTLIST materia %val;  >
+
+<!--  =====================================================================        
+                                                                                     
+            Inquadramento                                                            
+                                                                                     
+        =====================================================================  -->
+<!ELEMENT inquadramento (infodoc,infomancanti?,oggetto?,proponenti?)>
+<!ELEMENT infodoc EMPTY >
+
+<!ATTLIST infodoc natura %anystring; #REQUIRED normativa %sino; #REQUIRED funzione %funzione; #REQUIRED fonte %ranghi; #REQUIRED registrazione %NIRdate; #IMPLIED >
+
+<!ELEMENT infomancanti (mTitolodoc?,mTipodoc?,mDatadoc?,mNumdoc*,mEmanante?)>
+<!ELEMENT mTitolodoc %valore; >
+<!ATTLIST mTitolodoc %val;  >
+<!ELEMENT mTipodoc %valore; >
+<!ATTLIST mTipodoc %val;  >
+<!ELEMENT mDatadoc %valore; >
+<!ATTLIST mDatadoc %val;  >
+<!ELEMENT mNumdoc %valore; >
+<!ATTLIST mNumdoc %val;  >
+
+<!ATTLIST mNumdoc %nomefac;  >
+<!ELEMENT mEmanante %valore; >
+<!ATTLIST mEmanante %val;  >
+<!ELEMENT oggetto (finalita | destinatario | territorio | attivita)*>
+<!ELEMENT finalita %valore; >
+<!ATTLIST finalita %val;  >
+<!ELEMENT destinatario %valore; >
+<!ATTLIST destinatario %val;  >
+<!ELEMENT territorio %valore; >
+<!ATTLIST territorio %val;  >
+<!ELEMENT attivita %valore; >
+<!ATTLIST attivita %val;  >
+<!ELEMENT proponenti (proponente+)>
+<!ELEMENT proponente %valore; >
+<!ATTLIST proponente %val;  >
+<!--  =====================================================================        
+                                                                                     
+            Ciclodivita                                                              
+                                                                                     
+        =====================================================================  -->
+<!ELEMENT ciclodivita (eventi?,relazioni)>
+<!ELEMENT eventi (evento+)>
+<!ELEMENT evento EMPTY >
+
+<!ATTLIST evento %idreq;  data %NIRdate; #REQUIRED fonte %uri; #REQUIRED tipo %tipoeventi; #IMPLIED >
+<!ELEMENT relazioni (originale?,attiva*,passiva*,giurisprudenza*,haallegato*,allegatodi*)>
+<!ENTITY % relazioni "EMPTY" >
+
+<!ELEMENT originale      %relazioni; >
+<!ATTLIST originale %link;  %idreq;  >
+<!ELEMENT attiva         %relazioni; >
+<!ATTLIST attiva %link;  %idreq;  >
+<!ELEMENT passiva        %relazioni; >
+<!ATTLIST passiva %link;  %idreq;  >
+<!ELEMENT haallegato     %relazioni; >
+<!ATTLIST haallegato %link;  %idreq;  >
+
+<!ATTLIST haallegato tipo %tipoallegato; #IMPLIED >
+<!ELEMENT allegatodi     %relazioni; >
+<!ATTLIST allegatodi %link;  %idreq;  >
+
+<!ATTLIST allegatodi tipo %tipoallegato; #IMPLIED >
+<!ELEMENT giurisprudenza %relazioni; >
+<!ATTLIST giurisprudenza %link;  %idreq;  >
+
+<!ATTLIST giurisprudenza effetto (normativo|interpretativo) #IMPLIED >
+
+<!--  =====================================================================        
+                                                                                     
+            Lavori preparatori, redazionale, proprietario, risoluzione               
+                                                                                     
+        =====================================================================  -->
+<!ENTITY % note "%blocchireq;" >
+
+<!ELEMENT lavoripreparatori %blocchifac; >
+<!ATTLIST lavoripreparatori %globalifac;  >
+<!ELEMENT redazionale (nota | avvertenza | altro | %Rproprietario;)+>
+
+<!ATTLIST redazionale %link;  >
+
+<!ELEMENT nota              %note; >
+<!ATTLIST nota %globalireq;  >
+
+<!ATTLIST nota %nomefac;  >
+<!ELEMENT avvertenza        %note; >
+<!ATTLIST avvertenza %globalireq;  >
+
+<!ATTLIST avvertenza %nomefac;  >
+<!ELEMENT altro             %note; >
+<!ATTLIST altro %globalireq;  >
+
+<!ATTLIST altro %nomefac;  >
+
+<!ELEMENT proprietario %ProprietarioMeta; >
+
+<!ATTLIST proprietario soggetto %NIRnome; #IMPLIED %link;  >
+
+<!ELEMENT risoluzioni (risoluzione+)>
+<!ELEMENT risoluzione EMPTY >
+
+<!ATTLIST risoluzione %idfac;  urn %uri; #REQUIRED url %uri; #REQUIRED >
+
+<!-- ===================================================================== 
+  
+   Disposizioni conformi al modello D-A (8 febbraio 2008)
+
+D-A
+	|
+	Regole
+				|
+				|=== Costituzione
+				|								|
+				|								|=== Introduzione
+				|								|								|=== ambito
+				|								|								|=== finalita
+				|								|								|=== finanziaria
+				|								|
+				|								|
+				|								|=== Definizione
+				|								|								|=== procedura
+				|								|								|=== termine_dominio
+				|								|
+				|								|=== Creazione
+				|								|								|=== destitutiva
+				|								|								|=== istitutiva
+				|								|								|=== organizzativa
+				|								|
+				|								|=== Attribuzione				
+				|								|								|=== diritto
+				|								|								|=== dovere
+				|								|								|=== potere
+				|
+				|=== Regolazione
+				|								|
+				|								|=== Azione
+				|								|								|=== divieto
+				|								|								|=== obbligo
+				|								|								|=== permesso
+				|								|								|=== pretesa
+				|								|
+				|								|=== Riparazione
+				|								|								|=== nullita
+				|								|								|=== violazione
+				|
+	Modifiche
+				|								
+				|=== Derogazione
+				|								|=== conferma
+				|								|=== eccezione
+				|								|=== estensione
+				|								
+				|=== Modificazione
+				|								|=== abrogazione
+				|								|=== integrazione
+				|								|=== sostituzione
+
+ ===================================================================== -->
+ 
+ <!-- =====================================================================  
+   modelo D-A: aggiunto elemento Keywords per impostare il valore degli argomenti
+ ===================================================================== -->
+ <!ENTITY % keywords "dsp:keywords">
+ <!ELEMENT dsp:keywords (dsp:keyword)+>
+ <!ATTLIST dsp:keywords schema CDATA #IMPLIED versione CDATA #IMPLIED>
+ <!ELEMENT dsp:keyword EMPTY>
+ <!ATTLIST dsp:keyword valore CDATA #REQUIRED codice CDATA #REQUIRED>
+
+<!ENTITY % subargomenti "(ANY | %keywords;)" >
+<!ENTITY % posizioni "((dsp:testo | dsp:pos)+)" >
+
+<!ENTITY % posizionitermini "(%posizioni;,(dsp:termine?,dsp:condizione?))" >
+<!ENTITY % modifica "(%posizionitermini;,(dsp:norma,dsp:altradata*))" >
+<!ENTITY % modificadidominio "(%posizionitermini;,(dsp:norma,dsp:altradata*,dsp:dominio?))" >
+
+<!-- DTD2.2 ELEMENT disposizioni (motivazioni?,regole?,dimodificheattive?,modifichepassive?,comunicazioni?) -->
+<!--- =======================================================================
+						modello D-A: commentato disposizioni della DTD 2.2
+			======================================================================= -->
+<!ELEMENT disposizioni (motivazioni?,regole?,modifiche?,comunicazioni?)>
+<!ATTLIST disposizioni %link; >
+
+<!ELEMENT dsp:testo %valore; >
+<!ATTLIST dsp:testo %val; >
+<!ELEMENT dsp:pos EMPTY >
+
+<!ATTLIST dsp:pos %link; >
+<!ELEMENT dsp:termine %subargomenti; >
+
+<!ATTLIST dsp:termine da %uri; #IMPLIED a %uri; #IMPLIED >
+<!ELEMENT dsp:condizione %subargomenti; >
+
+<!-- ===================================================================== 
+    Definizione delle disposizioni di motivazione 
+  ===================================================================== -->
+<!ENTITY % motivazioni "(dsp:visto | dsp:sentito | dsp:considerato | dsp:suproposta | dsp:basegiuridica | dsp:proposta | dsp:parere | dsp:richiesta | dsp:procedura | dsp:considerando | dsp:motivazione)+" >
+<!ELEMENT motivazioni %motivazioni; >
+
+ <!ENTITY  % dsp_visto_entity "(%posizioni;,(dsp:norma))" ><!ELEMENT dsp:visto %dsp_visto_entity;>
+ <!ENTITY % dsp_sentito_entity "(%posizioni;,(dsp:soggetto))" ><!ELEMENT dsp:sentito %dsp_sentito_entity;>
+ <!ENTITY  % dsp_considerato_entity "(%posizioni;,(dsp:fatto))" ><!ELEMENT dsp:considerato %dsp_considerato_entity;>
+ <!ENTITY  % dsp_suproposta_entity "(%posizioni;,(dsp:soggetto))" ><!ELEMENT dsp:suproposta %dsp_suproposta_entity;>
+ <!ENTITY % dsp_basegiuridica_entity "(%posizioni;,(dsp:soggetto))" ><!ELEMENT dsp:basegiuridica %dsp_basegiuridica_entity;>
+ <!ENTITY   % dsp_proposta_entity "(%posizioni;,(dsp:organo))" ><!ELEMENT dsp:proposta %dsp_proposta_entity;>
+ <!ENTITY % dsp_parere_entity "(%posizioni;,(dsp:organo))" ><!ELEMENT dsp:parere %dsp_parere_entity;>
+ <!ENTITY   % dsp_richiesta_entity "(%posizioni;,(dsp:organo))" ><!ELEMENT dsp:richiesta %dsp_richiesta_entity;>
+
+ <!ENTITY % dsp_considerando_entity "(%posizioni;,(dsp:fatto,dsp:fine))" ><!ELEMENT dsp:considerando %dsp_considerando_entity;>
+<!ELEMENT dsp:motivazione  %posizioni; >
+
+<!--- =======================================================================
+
+						Definizione delle disposizioni di regola   
+
+			======================================================================= -->
+
+<!-- DTD2.2 ENTITY % atto 	"dsp:finalita | dsp:finanziaria | dsp:ambito" -->
+<!-- DTD 2.2 ENTITY % costitutive "dsp:metaregola | dsp:definitoria | dsp:istitutiva | dsp:organizzativa | dsp:status | dsp:competenza | dsp:delega | dsp:revoca" -->
+<!-- DTD 2.2 ENTITY % regolative "dsp:diritto | dsp:dovere | dsp:pretesa | dsp:obbligo | dsp:divieto | dsp:permesso | dsp:procedimento | dsp:sanzione | dsp:riparazione | dsp:informazione" -->
+<!-- DTD2.2 ENTITY % regole "(%atto; | %costitutive; | %regolative; | dsp:regola)+" -->
+
+<!--- =======================================================================
+						modello D-A: nuova classe Regole
+			======================================================================= -->
+<!ENTITY % regole "(costituzione?, regolazione?)">
+<!ELEMENT regole %regole; >
+
+<!--- =======================================================================
+						modello D-A: nuova sottoclasse Regole.Costituzione
+			======================================================================= -->
+<!ENTITY % costituzione "(introduzione?, definizione?, creazione?, attribuzione?)">
+<!ELEMENT costituzione %costituzione; >
+
+<!--- =======================================================================
+						modello D-A: nuova sottoclasse Regole.Regolazione
+			======================================================================= -->
+<!ENTITY % regolazione "(azione?, riparazione?)">
+<!ELEMENT regolazione %regolazione; >
+
+<!--- =======================================================================
+						modello D-A: nuova sottoclasse Regole.Costituzione.Introduzione
+			======================================================================= -->
+<!ENTITY % introduzione "(dsp:ambito | dsp:finalita | dsp:finanziaria)+">
+<!ELEMENT introduzione %introduzione; >
+
+<!--- =======================================================================
+						modello D-A: nuova sottoclasse Regole.Costituzione.Definizione
+			======================================================================= -->
+<!ENTITY % definizione "(dsp:procedura | dsp:termine_dominio)+">
+<!ELEMENT definizione %definizione; >
+
+<!--- =======================================================================
+						modello D-A: nuova sottoclasse Regole.Costituzione.Creazione
+			======================================================================= -->
+<!ENTITY % creazione "(dsp:destitutiva | dsp:istitutiva | dsp:organizzativa)+">
+<!ELEMENT creazione %creazione; >
+
+<!--- =======================================================================
+						modello D-A: nuova sottoclasse Regole.Costituzione.Attribuzione
+			======================================================================= -->
+<!ENTITY % attribuzione "(dsp:diritto | dsp:dovere | dsp:potere)+">
+<!ELEMENT attribuzione %attribuzione; >
+
+<!--- =======================================================================
+						modello D-A: nuova sottoclasse Regole.Regolazione.Azione
+			======================================================================= -->
+<!ENTITY % azione "(dsp:divieto | dsp:obbligo | dsp:permesso | dsp:pretesa)+">
+<!ELEMENT azione %azione; >
+
+<!--- =======================================================================
+						modello D-A: nuova sottoclasse Regole.Regolazione.Riparazione
+			======================================================================= -->
+<!ENTITY % riparazione "(dsp:nullita | dsp:violazione)+">
+<!ELEMENT riparazione %riparazione; >
+
+<!--- =======================================================================
+						modello D-A: nuova classe Modifiche.Derogazione
+			======================================================================= -->
+<!ENTITY % derogazione "(dsp:conferma | dsp:eccezione | dsp:estensione)+">
+<!ELEMENT derogazione %derogazione; >
+
+<!--- =======================================================================
+						modello D-A: nuova classe Modifiche.Modificazione
+			======================================================================= -->
+<!ENTITY % modificazione "(dsp:abrogazione | dsp:integrazione | dsp:sostituzione)+">
+<!ELEMENT modificazione %modificazione; >
+
+
+<!--- =======================================================================
+						modello D-A: nuova classe Modifiche
+			======================================================================= -->
+
+<!ENTITY % modifiche "(derogazione?, modificazione?)">
+<!ELEMENT modifiche %modifiche; >
+
+
+<!-- DTD2.2 ENTITY % dsp_ambito_entity "(%posizionitermini;,(dsp:destinatario,dsp:territorio,dsp:attivita))" -->
+<!--- =======================================================================
+						modello D-A: nuovi argomenti per la disposizione ambito
+			======================================================================= -->
+<!ENTITY % dsp_ambito_entity "(%posizionitermini;,(dsp:attivita,dsp:destinatario,dsp:norma, dsp:oggetto))">
+<!ELEMENT dsp:ambito %dsp_ambito_entity;>
+<!ATTLIST dsp:ambito %tempi; %implicita; >
+
+<!ELEMENT dsp:finalita   %posizionitermini; >
+<!ATTLIST dsp:finalita %tempi; %implicita; >
+
+<!ELEMENT dsp:finanziaria  %modifica; >
+<!ATTLIST dsp:finanziaria %tempi; %implicita; >
+
+<!--- =======================================================================
+						modello D-A: nuovi argomenti per la disposizione procedura
+			======================================================================= -->
+<!ENTITY   % dsp_procedura_entity "(%posizionitermini;,(dsp:destinatario,dsp:controparte,dsp:azione,dsp:oggetto))" >
+<!ELEMENT dsp:procedura %dsp_procedura_entity;>
+<!ATTLIST dsp:procedura %tempi; %implicita; >
+
+<!--- =======================================================================
+						modello D-A: nuovi argomenti per la disposizione termine_dominio
+			======================================================================= -->
+<!ENTITY   % dsp_termine_dominio_entity "(%posizionitermini;,(dsp:definiendum,dsp:definiens))" >
+<!ELEMENT dsp:termine_dominio %dsp_termine_dominio_entity;>
+<!ATTLIST dsp:termine_dominio %tempi; %implicita; >
+
+<!--- =======================================================================
+						modello D-A: nuovi argomenti per la disposizione destitutiva
+			======================================================================= -->
+<!ENTITY   % dsp_destitutiva_entity "(%posizionitermini;,(dsp:destinatario))" >
+<!ELEMENT dsp:destitutiva %dsp_destitutiva_entity;>
+<!ATTLIST dsp:destitutiva %tempi; %implicita; >
+
+<!--- =======================================================================
+						modello D-A: nuovi argomenti per la disposizione istitutiva
+			======================================================================= -->
+<!ENTITY   % dsp_istitutiva_entity "(%posizionitermini;,(dsp:destinatario))" >
+<!ELEMENT dsp:istitutiva %dsp_istitutiva_entity;>
+<!ATTLIST dsp:istitutiva %tempi; %implicita; >
+
+<!ENTITY % dsp_organizzativa_entity "(%posizionitermini;,(dsp:destinatario))" >
+<!ELEMENT dsp:organizzativa %dsp_organizzativa_entity;>
+<!ATTLIST dsp:organizzativa %tempi; %implicita; >
+
+<!--- =======================================================================
+						modello D-A: nuovi argomenti per la disposizione diritto
+			======================================================================= -->
+<!ENTITY % dsp_diritto_entity "(%posizionitermini;,(dsp:destinatario,dsp:controparte,dsp:attivita,dsp:oggetto))" >
+<!ELEMENT dsp:diritto %dsp_diritto_entity;>
+<!ATTLIST dsp:diritto %tempi; %implicita; >
+
+<!--- =======================================================================
+						modello D-A: nuovi argomenti per la disposizione dovere
+			======================================================================= -->
+<!ENTITY % dsp_dovere_entity "(%posizionitermini;,(dsp:destinatario,dsp:controparte,dsp:attivita,dsp:oggetto))" >
+<!ELEMENT dsp:dovere %dsp_dovere_entity;>
+<!ATTLIST dsp:dovere %tempi; %implicita; >
+
+<!--- =======================================================================
+						modello D-A: aggiunto disposizione potere
+			======================================================================= -->
+<!ENTITY   % dsp_potere_entity "(%posizionitermini;,(dsp:destinatario,dsp:controparte,dsp:attivita,dsp:oggetto))" >
+<!ELEMENT dsp:potere %dsp_potere_entity;>
+<!ATTLIST dsp:potere %tempi; %implicita; >
+
+<!--- =======================================================================
+						modello D-A: nuovi argomenti per la disposizione divieto
+			======================================================================= -->
+<!ENTITY % dsp_divieto_entity "(%posizionitermini;,(dsp:destinatario,dsp:controparte,dsp:azione,dsp:oggetto))" >
+<!ELEMENT dsp:divieto %dsp_divieto_entity;>
+<!ATTLIST dsp:divieto %tempi; %implicita; >
+
+<!--- =======================================================================
+						modello D-A: nuovi argomenti per la disposizione obbligo
+			======================================================================= -->
+ <!ENTITY % dsp_obbligo_entity "(%posizionitermini;,(dsp:destinatario,dsp:controparte,dsp:azione,dsp:oggetto))" >
+<!ELEMENT dsp:obbligo %dsp_obbligo_entity;>
+<!ATTLIST dsp:obbligo %tempi; %implicita; >
+
+<!--- =======================================================================
+						modello D-A: nuovi argomenti per la disposizione permesso
+			======================================================================= -->
+<!ENTITY   % dsp_permesso_entity "(%posizionitermini;,(dsp:destinatario,dsp:controparte,dsp:azione,dsp:oggetto))" >
+<!ELEMENT dsp:permesso %dsp_permesso_entity;>
+<!ATTLIST dsp:permesso %tempi; %implicita; >
+
+<!--- =======================================================================
+						modello D-A: nuovi argomenti per la disposizione pretesa
+			======================================================================= -->
+<!ENTITY % dsp_pretesa_entity "(%posizionitermini;,(dsp:destinatario,dsp:controparte,dsp:azione,dsp:oggetto))" >
+<!ELEMENT dsp:pretesa %dsp_pretesa_entity;>
+<!ATTLIST dsp:pretesa %tempi; %implicita; >
+
+<!--- =======================================================================
+						modello D-A: aggiunta la disposizione violazione
+			======================================================================= -->
+<!ENTITY   % dsp_violazione_entity "(%posizionitermini;,(dsp:destinatario,dsp:pena,dsp:azione, dsp:oggetto))" >
+<!ELEMENT dsp:violazione %dsp_violazione_entity;>
+<!ATTLIST dsp:violazione %tempi; %implicita; >
+
+
+<!--- =======================================================================
+						modello D-A: nuova disposizione nullita
+			======================================================================= -->
+<!ENTITY % dsp_nullita_entity "(%posizionitermini;,(dsp:destinatario,dsp:azione,dsp:effetto,dsp:oggetto))" >
+<!ELEMENT dsp:nullita %dsp_nullita_entity;>
+<!ATTLIST dsp:nullita %tempi; %implicita; >
+
+<!-- DTD2.2 ENTITY  % dsp_metaregola_entity "(%posizionitermini;,(dsp:tiporegola))" -->
+<!-- DTD2.2 ELEMENT dsp:metaregola %dsp_metaregola_entity; -->
+<!-- DTD2.2 ATTLIST dsp:metaregola %tempi; %implicita; -->
+
+<!-- DTD2.2 ENTITY  % dsp_definitoria_entity "(%posizionitermini;,(dsp:definiendum,dsp:definiens))" -->
+<!-- DTD2.2 ELEMENT dsp:definitoria %dsp_definitoria_entity; -->
+<!--ATTLIST dsp:definitoria %tempi; %implicita; -->
+
+<!-- DTD2.2 ENTITY % dsp_status_entity "(%posizionitermini;,(dsp:destinatario,dsp:qualifica))" -->
+<!-- DTD2.2 ELEMENT dsp:status %dsp_status_entity;-->
+<!-- DTD2.2 ATTLIST dsp:status %tempi; %implicita; -->
+
+<!-- DTD2.2 ENTITY  % dsp_competenza_entity "(%posizionitermini;,(dsp:destinatario,dsp:attivita))" -->
+<!-- DTD2.2 ELEMENT dsp:competenza %dsp_competenza_entity;-->
+<!-- DTD2.2 ATTLIST dsp:competenza %tempi; %implicita; -->
+
+<!-- DTD2.2 ENTITY % dsp_delega_entity "(%posizionitermini;,(dsp:destinatario,dsp:delegante,dsp:attivita))" -->
+<!-- DTD2.2 ELEMENT dsp:delega %dsp_delega_entity;-->
+<!-- DTD2.2 ATTLIST dsp:delega %tempi; %implicita; -->
+
+<!-- DTD2.2 ENTITY % dsp_revoca_entity "(%posizionitermini;,(dsp:destinatario,dsp:delegante,dsp:attivita))" -->
+<!-- DTD2.2 ELEMENT dsp:revoca %dsp_revoca_entity;-->
+<!-- DTD2.2 ATTLIST dsp:revoca %tempi; %implicita; -->
+
+<!ENTITY % dsp_procedimento_entity "(%posizionitermini;,(dsp:destinatario,dsp:azione))" >
+<!ELEMENT dsp:procedimento %dsp_procedimento_entity;>
+<!ATTLIST dsp:procedimento %tempi; %implicita; >
+
+<!-- DTD2.2 ENTITY   % dsp_sanzione_entity "(%posizionitermini;,(dsp:destinatario,dsp:pena,dsp:azione))" -->
+<!-- DTD2.2 ELEMENT dsp:sanzione %dsp_sanzione_entity;-->
+<!-- DTD2.2 ATTLIST dsp:sanzione %tempi; %implicita; -->
+
+<!-- DTD2.2 ENTITY  % dsp_riparazione_entity "(%posizionitermini;,(dsp:destinatario,dsp:effetto,dsp:azione))" -->
+<!-- DTD2.2 ELEMENT dsp:riparazione %dsp_riparazione_entity;-->
+<!-- DTD2.2 ATTLIST dsp:riparazione %tempi; %implicita; -->
+
+<!-- DTD2.2 ELEMENT dsp:informazione %posizionitermini; -->
+<!-- DTD2.2 ATTLIST dsp:informazione %tempi; %implicita; -->
+
+<!-- DTD2.2 ELEMENT dsp:regola %posizionitermini; -->
+<!-- DTD2.2 ATTLIST dsp:regola %tempi; %implicita; -->
+
+
+<!-- ===================================================================== 
+  
+   Definizione delle disposizioni di modifica  
+  
+ ===================================================================== -->
+<!ENTITY % contenuto  "dsp:abrogazione | dsp:sostituzione | dsp:integrazione | dsp:ricollocazione | dsp:intautentica | dsp:variazione | dsp:modtermini" >
+<!ENTITY % tempo "dsp:vigenza | dsp:annullamento | dsp:proroga | dsp:reviviscenza | dsp:posticipo | dsp:sospensione | dsp:retroattivita | dsp:ultrattivita | dsp:inapplicazione" >
+<!ENTITY % portata   "dsp:deroga | dsp:estensione" >
+<!ENTITY % ordinamento "dsp:recepisce | dsp:attua | dsp:ratifica | dsp:attuadelega | dsp:attuadelegifica | dsp:converte | dsp:reitera" >
+<!ENTITY % modifiche  "(%contenuto; | %tempo; | %portata; | %ordinamento; | dsp:modifica)+" >
+
+<!ELEMENT modificheattive %modifiche; >
+<!ELEMENT modifichepassive %modifiche; >
+
+<!--- =======================================================================
+						modello D-A: aggiunta la disposizione conferma
+			======================================================================= -->
+<!ELEMENT dsp:conferma      %modificadidominio; >
+<!ATTLIST dsp:conferma %tempi;  %implicita;  >
+
+<!--- =======================================================================
+						modello D-A: aggiunta la disposizione eccezione
+			======================================================================= -->
+<!ELEMENT dsp:eccezione      %modificadidominio; >
+<!ATTLIST dsp:eccezione %tempi;  %implicita;  >
+
+<!ELEMENT dsp:estensione      %modificadidominio; >
+<!ATTLIST dsp:estensione %tempi;  %implicita;  >
+
+<!ENTITY   % dsp_abrogazione_entity "(%modifica;,(dsp:novellando?))" >
+<!ELEMENT dsp:abrogazione %dsp_abrogazione_entity;>
+<!ATTLIST dsp:abrogazione %tempi; %implicita; >
+
+<!-- riunione NIR 2/2/07: tolto novellando da integrazione 
+ELEMENT dsp:integrazione  (@modifica;, (dsp:novella?, dsp:novellando?))  -->
+<!ENTITY  % dsp_integrazione_entity "(%modifica;,(dsp:novella?))" >
+<!ELEMENT dsp:integrazione %dsp_integrazione_entity;>
+<!ATTLIST dsp:integrazione %tempi; %implicita; >
+
+<!ENTITY  % dsp_sostituzione_entity "(%modifica;,(dsp:novella?,dsp:novellando?))" >
+<!ELEMENT dsp:sostituzione %dsp_sostituzione_entity;>
+<!ATTLIST dsp:sostituzione %tempi; %implicita; >
+
+
+<!-- DTD 2.2 ENTITY % dsp_ricollocazione_entity "(%modifica;,(dsp:partizione?))" -->
+<!-- DTD 2.2 ELEMENT dsp:ricollocazione %dsp_ricollocazione_entity;-->
+<!-- DTD 2.2 ATTLIST dsp:ricollocazione %tempi; %implicita; -->
+<!-- DTD 2.2 ELEMENT dsp:intautentica  %modificadidominio; -->
+<!-- DTD 2.2 ATTLIST dsp:intautentica %tempi; %implicita; -->
+<!-- DTD 2.2 ELEMENT dsp:variazione   %modificadidominio; -->
+<!-- DTD 2.2 ATTLIST dsp:variazione %tempi; %implicita; -->
+<!-- DTD 2.2 ELEMENT dsp:modtermini   %modificadidominio; -->
+<!-- DTD 2.2 ATTLIST dsp:modtermini %tempi; %implicita; -->
+<!-- DTD 2.2 ELEMENT dsp:vigenza  %modifica; -->
+<!-- DTD 2.2 ATTLIST dsp:vigenza %tempi; %implicita; -->
+<!-- DTD 2.2 ELEMENT dsp:annullamento  %modifica; -->
+<!-- DTD 2.2 ATTLIST dsp:annullamento %tempi; %implicita; -->
+<!-- DTD 2.2 ELEMENT dsp:proroga  %modifica; -->
+<!-- DTD 2.2 ATTLIST dsp:proroga %tempi; %implicita; -->
+<!-- DTD 2.2 ELEMENT dsp:reviviscenza  %modifica; -->
+<!-- DTD 2.2 ATTLIST dsp:reviviscenza %tempi; %implicita; -->
+<!-- DTD 2.2 ELEMENT dsp:posticipo %modifica; -->
+<!-- DTD 2.2 ATTLIST dsp:posticipo %tempi; %implicita; -->
+<!-- DTD 2.2 ELEMENT dsp:sospensione   %modifica; -->
+<!-- DTD 2.2 ATTLIST dsp:sospensione %tempi; %implicita; -->
+<!-- DTD 2.2 ELEMENT dsp:retroattivita  %modifica; -->
+<!-- DTD 2.2 ATTLIST dsp:retroattivita %tempi; %implicita; -->
+<!-- DTD 2.2 ELEMENT dsp:ultrattivita  %modifica; -->
+<!-- DTD 2.2 ATTLIST dsp:ultrattivita %tempi; %implicita; -->
+<!-- DTD 2.2 ELEMENT dsp:inapplicazione %modifica; -->
+<!-- DTD 2.2 ATTLIST dsp:inapplicazione %tempi; %implicita; -->
+<!-- DTD 2.2 ELEMENT dsp:deroga  %modificadidominio; -->
+<!-- DTD 2.2 ATTLIST dsp:deroga %tempi; %implicita; -->
+<!-- DTD 2.2 ELEMENT dsp:recepisce %modifica; -->
+<!-- DTD 2.2 ATTLIST dsp:recepisce %tempi; %implicita; -->
+<!-- DTD 2.2 ELEMENT dsp:attua   %modifica; -->
+<!-- DTD 2.2 ATTLIST dsp:attua %tempi; %implicita; -->
+<!-- DTD 2.2 ELEMENT dsp:ratifica %modifica; -->
+<!-- DTD 2.2 ATTLIST dsp:ratifica %tempi; %implicita; -->
+<!-- DTD 2.2 ELEMENT dsp:attuadelega   %modifica; -->
+<!-- DTD 2.2 ATTLIST dsp:attuadelega %tempi; %implicita; -->
+<!-- DTD 2.2 ELEMENT dsp:attuadelegifica %modifica; -->
+<!-- DTD 2.2 ATTLIST dsp:attuadelegifica %tempi; %implicita; -->
+<!-- DTD 2.2 ELEMENT dsp:converte %modifica; -->
+<!-- DTD 2.2 ATTLIST dsp:converte %tempi; %implicita; -->
+<!-- DTD 2.2 ELEMENT dsp:reitera  %modifica; -->
+<!-- DTD 2.2 ATTLIST dsp:reitera %tempi; %implicita; -->
+<!-- DTD 2.2 ELEMENT dsp:modifica %modifica; -->
+<!-- DTD 2.2 ATTLIST dsp:modifica %tempi; %implicita; -->
+
+<!ENTITY % suType "(efficacia|vigore)" >
+<!ENTITY % EsuType "((efficacia|vigore))" >
+<!ATTLIST dsp:proroga su %suType; #REQUIRED >
+
+<!-- ===================================================================== 
+  
+   Definizione delle disposizioni di comunicazione   
+  
+ ===================================================================== -->
+<!ENTITY % comunicazioni "(dsp:abrogazione | dsp:sostituzione | dsp:integrazione | dsp:vigenza | dsp:decadimento | dsp:comunicazione)+" >
+
+<!ENTITY % argomenti "dsp:norma | dsp:soggetto | dsp:effetto | dsp:partizione | dsp:tiporegola | dsp:fatto | dsp:organo | dsp:fine | dsp:destinatario | dsp:territorio | dsp:attivita | dsp:definiendum | dsp:definiens | dsp:qualifica | dsp:delegante | dsp:controparte | dsp:azione | dsp:pena | dsp:novella | dsp:novellando | dsp:dominio | dsp:altradata | dsp:argomento" >
+
+<!ELEMENT comunicazioni  %comunicazioni; >
+<!ELEMENT dsp:decadimento %modifica; >
+<!ATTLIST dsp:decadimento %tempi; %implicita; >
+ <!ENTITY % dsp_comunicazione_entity "(%posizionitermini;,((%argomenti;)+))" ><!ELEMENT dsp:comunicazione %dsp_comunicazione_entity;>
+<!ATTLIST dsp:comunicazione %tempi; %implicita; >
+
+<!ATTLIST dsp:comunicazione %nome; >
+
+<!-- ===================================================================== 
+  
+   Definizione degli argomenti delle disposizioni 
+  
+ ===================================================================== -->
+
+<!ATTLIST dsp:norma %link; %nomefac; tiporegola %tiporegola; #IMPLIED >
+
+<!ELEMENT dsp:soggetto   %subargomenti; >
+<!ELEMENT dsp:partizione  %subargomenti; >
+<!ELEMENT dsp:tiporegola  %subargomenti; >
+<!ELEMENT dsp:fatto %subargomenti; >
+<!ELEMENT dsp:organo %subargomenti; >
+<!ELEMENT dsp:fine  %subargomenti; >
+<!ELEMENT dsp:territorio  %subargomenti; >
+
+<!-- =====================================================================  
+   modello D-A: Argomenti usati dal modello
+ ===================================================================== -->
+
+<!ELEMENT dsp:destinatario %subargomenti; >
+<!ELEMENT dsp:attivita   %subargomenti; >
+<!ELEMENT dsp:norma %subargomenti; >
+<!ELEMENT dsp:oggetto %subargomenti; >
+<!ELEMENT dsp:controparte %subargomenti; >
+<!ELEMENT dsp:azione %subargomenti; >
+<!ELEMENT dsp:effetto   %subargomenti; >
+<!ELEMENT dsp:definiendum %subargomenti; >
+<!ELEMENT dsp:definiens  %subargomenti; >
+<!ELEMENT dsp:pena %subargomenti; >
+
+<!ELEMENT dsp:qualifica  %subargomenti; >
+<!ELEMENT dsp:delegante  %subargomenti; >
+<!ELEMENT dsp:novella   %subargomenti; >
+<!ELEMENT dsp:novellando  %subargomenti; >
+<!ELEMENT dsp:dominio   %subargomenti; >
+<!ELEMENT dsp:altradata  %subargomenti; >
+<!ATTLIST dsp:altradata rif %uri; #REQUIRED %nome; ><!ELEMENT dsp:argomento  %subargomenti; >
+
+<!ATTLIST dsp:argomento %nome; >
+
+<!-- ===================================================================== 
+   fine del file meta.dtd   
+ ===================================================================== -->

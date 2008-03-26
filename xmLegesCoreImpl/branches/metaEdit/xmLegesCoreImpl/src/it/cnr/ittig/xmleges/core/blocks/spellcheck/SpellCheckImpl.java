@@ -73,7 +73,7 @@ public class SpellCheckImpl implements SpellCheck, Loggable, Serviceable, Initia
 
 	public void initialize() throws Exception {
 		
-		// copia dictName in dictPath se non esiste già
+		// copia dictName in dictPath se non esiste giï¿½
 		new File(dictPath).mkdir();
 	    File dictFile = new File(dictPath + File.separator,dictName);
 	    if(!dictFile.exists()){
@@ -85,7 +85,7 @@ public class SpellCheckImpl implements SpellCheck, Loggable, Serviceable, Initia
 		if (null==checker){
 		  try{	
 			checker = new SpellChecker(dictPath);					
-			try{	//Intercetto se è scaduta la demo della libreria "xsc.jar"
+			try{	//Intercetto se ï¿½ scaduta la demo della libreria "xsc.jar"
 			   checker.setPersonalDictionaryPath("dizionarioUtente_%L%.txt");
 			   checker.setSelectedLanguage("it");	
 			}
@@ -97,7 +97,7 @@ public class SpellCheckImpl implements SpellCheck, Loggable, Serviceable, Initia
 		  }
 		  catch(Exception ex){
 			   logger.error(ex.getMessage(),ex);
-			   utilMsg.msgInfo("spellcheck.error.library");
+			   //utilMsg.msgInfo("spellcheck.error.library");
 			   libreriaCaricata = false;
 		  }
 		}
@@ -233,7 +233,7 @@ public class SpellCheckImpl implements SpellCheck, Loggable, Serviceable, Initia
 		  String dictionary = null;
 		  if (temporaryDict) dictionary = SpellChecker.TEMPORARY_DICT;
 		  else dictionary = SpellChecker.PERSONAL_DICT;		
-	      //se la parola ERRATA è corretta con una NON PRESENTE fra i suggerimenti
+	      //se la parola ERRATA ï¿½ corretta con una NON PRESENTE fra i suggerimenti
 	      if (!isSuggestion(word, suggestion)) {
 	             //Inserisce la parola errata e il suggerimento per la parola impostato
 		         checker.learnSuggestion(word,suggestion,dictionary);
@@ -242,7 +242,7 @@ public class SpellCheckImpl implements SpellCheck, Loggable, Serviceable, Initia
 		         
 		         
    		         
-		         //Salva il dizionario utente (QUESTO può essere MESSO ALTROVE)
+		         //Salva il dizionario utente (QUESTO puï¿½ essere MESSO ALTROVE)
 		         if (!temporaryDict) checker.savePersonalDictionaries();
 		  }    
 		     

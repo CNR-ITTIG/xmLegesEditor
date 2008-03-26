@@ -90,12 +90,20 @@ public class XmLegesEditorImpl implements XmLegesEditor, Loggable, Serviceable, 
 					String[] files = new String[] { 
 							
 							// NIR 2.2 
-							"dtd-2.2/globali.dtd", "dtd-2.2/meta.dtd", "dtd-2.2/nirbase.dtd","dtd-2.2/nircompleto.dtd", "dtd-2.2/nirflessibile.dtd", 
-							"dtd-2.2/norme.dtd", "dtd-2.2/testo.dtd", "dtd-2.2/tipi.dtd", "dtd-2.2/pst.dtd", "dtd-2.2/proprietario.dtd",
+							//"dtd-2.2/globali.dtd", "dtd-2.2/meta.dtd", "dtd-2.2/nirbase.dtd","dtd-2.2/nircompleto.dtd", "dtd-2.2/nirflessibile.dtd", 
+							//"dtd-2.2/norme.dtd", "dtd-2.2/testo.dtd", "dtd-2.2/tipi.dtd", "dtd-2.2/pst.dtd", "dtd-2.2/proprietario.dtd",
 							
 							// ENTITIES
-							"dtd-2.2/ISOdia.ent", "dtd-2.2/ISOgrk3.ent", "dtd-2.2/ISOlat1.ent", "dtd-2.2/ISOlat2.ent",
-							"dtd-2.2/ISOnum.ent", "dtd-2.2/ISOpub.ent", "dtd-2.2/ISOtech.ent",
+							//"dtd-2.2/ISOdia.ent", "dtd-2.2/ISOgrk3.ent", "dtd-2.2/ISOlat1.ent", "dtd-2.2/ISOlat2.ent",
+							//"dtd-2.2/ISOnum.ent", "dtd-2.2/ISOpub.ent", "dtd-2.2/ISOtech.ent",
+														
+							// NIR 2.2 D-A 
+							"dtd-2.2-DA/globali.dtd", "dtd-2.2-DA/metaDA.dtd", "dtd-2.2-DA/nirbase.dtd","dtd-2.2-DA/nircompleto.dtd", "dtd-2.2-DA/nirflessibile.dtd", 
+							"dtd-2.2-DA/norme.dtd", "dtd-2.2-DA/testo.dtd", "dtd-2.2-DA/tipi.dtd", "dtd-2.2-DA/pst.dtd", "dtd-2.2-DA/proprietario.dtd",
+							
+							// ENTITIES D-A
+							"dtd-2.2-DA/ISOdia.ent", "dtd-2.2-DA/ISOgrk3.ent", "dtd-2.2-DA/ISOlat1.ent", "dtd-2.2-DA/ISOlat2.ent",
+							"dtd-2.2-DA/ISOnum.ent", "dtd-2.2-DA/ISOpub.ent", "dtd-2.2-DA/ISOtech.ent",
 							
 							// DISEGNI DI LEGGE
 							"dtd-dl/dllight.dtd", "dtd-dl/dllight.spp",
@@ -112,8 +120,8 @@ public class XmLegesEditorImpl implements XmLegesEditor, Loggable, Serviceable, 
 					}
 					
 					
-					String[] entities = new String[]{"dtd-2.2/ISOdia.ent", "dtd-2.2/ISOgrk3.ent", "dtd-2.2/ISOlat1.ent", "dtd-2.2/ISOlat2.ent", "dtd-2.2/ISOnum.ent",
-							"dtd-2.2/ISOpub.ent",  "dtd-2.2/ISOtech.ent"};
+					String[] entities = new String[]{"dtd-2.2-DA/ISOdia.ent", "dtd-2.2-DA/ISOgrk3.ent", "dtd-2.2-DA/ISOlat1.ent", "dtd-2.2-DA/ISOlat2.ent", "dtd-2.2-DA/ISOnum.ent",
+							"dtd-2.2-DA/ISOpub.ent",  "dtd-2.2-DA/ISOtech.ent"};
 					
 					// copia nella sottodirectory entities
 					
