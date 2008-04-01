@@ -5,7 +5,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/xmLegesCoreApi"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/xmLegesCoreImpl"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/xmLegesEditorApi"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/xmLegesEditorImpl"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/xmLegesEditorImpl"/>
 	<classpathentry kind="lib" path="lib/plastic-1.2.0.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>
