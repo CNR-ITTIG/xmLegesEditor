@@ -31,15 +31,5 @@ classificati nel pannello synset list ed eventualmente le semantic relation vers
 altre classi nel semantic relation panel.
 
 
--right click su pannello Ontology Browser per inserimento synset nel testo
--gestione click sui synset nei pannelli Linguistic/Semantic relation
--gestione Lingua Master
--set/get lingua master dalle preference
--gestione della temp di dalos
--Dalos View Action
--blink pannelli su avvio applicazione
--sincronizzazione delle 4 combo di switch della lingua
--riguardare eventi
-
 
  
