@@ -4,7 +4,9 @@ xmLeges - Dalos version
 DATI:
 ----
 - rappresentare la definizione non come glossa di wordnet ma come un'istanza di Source
-(magari creando una nuova objectProperty per riconoscerla dalle altre);
+(magari creando una nuova objectProperty per riconoscerla dalle altre)...
+meglio presentare il testo nei details e poi mettere comunque quella entry nelle sources?
+- inserire il testo delle sources !! link delle sources?
 - una volta disponibile l'ontologia definitiva, separare l'ontologia di dominio
 dall'ontologia clo-dul.owl e dal modulo owl contenente il modo in cui le classi di dominio
 sono collegate alla clo-dul (questi tre file saranno caricati dinamicamente come gli altri),
