@@ -30,11 +30,11 @@ import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.panes.xsltmapper.XsltMapper;
 import it.cnr.ittig.xmleges.core.services.panes.xsltpane.DeleteNextPrevAction;
 import it.cnr.ittig.xmleges.core.services.panes.xsltpane.InsertBreakAction;
+import it.cnr.ittig.xmleges.core.services.panes.xsltpane.KeyTypedAction;
 import it.cnr.ittig.xmleges.core.services.panes.xsltpane.XsltPane;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.spellcheck.dom.DomSpellCheck;
-//import it.cnr.ittig.xmleges.core.services.spellcheck.dom.DomSpellCheckEvent;
 import it.cnr.ittig.xmleges.core.services.threads.ThreadManager;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
@@ -109,6 +109,8 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 	AntiAliasedTextPane textPane;
 
 	InsertBreakAction insertBreakAction = null;
+	
+	KeyTypedAction keyTypedAction = null;
 
 	DeleteNextPrevAction deleteNextPrevAction = null;
 
@@ -186,7 +188,6 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 		panel.add(new JScrollPane(textPane), BorderLayout.CENTER);
 		xsltFindIterator = new XsltFindIterator(this);
 		popupMenu = bars.getPopup(false);
-		// xsltTextPane.addMouseListener(new XsltPaneMouseListener());
 		panel.setDoubleBuffered(true);
 
 		Timer timer = new Timer();
@@ -201,17 +202,20 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 		
 		if (event instanceof DocumentChangedEvent) {
 			if (!textPane.isShowing()) {
-				// TODO dividere in updatedDom e updatedSelection
 				updated = false;
 				return;
 			}
+			
 			if (!updated) {
 				updateTextPane();
 				return;
 			}
+			
 			DocumentChangedEvent e = (DocumentChangedEvent) event;
 			boolean all = false;
-			DomEdit[] edits = getEditsToUpdate(e.getTransaction().getEdits(), e.isUndo());
+			DomEdit[] edits = getEditsToUpdate(e.getTransaction().getEdits(), e.isUndo());	
+			boolean globalUpdateAllowed = !isTextualUpdate(edits);
+			
 			Vector updatedNode = new Vector();
 			for (int i = 0; i < edits.length; i++) {
 				if (logger.isDebugEnabled())
@@ -221,14 +225,19 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 					Node u = textPane.update(edits[i].getNode());
 					if (u == null) {
 					    if(logger.isDebugEnabled())
-					    	logger.debug("return null updating "+edits[i].toString()+" starting global update");
+					    	logger.debug("return null updating "+edits[i].getNode().getNodeName()+" starting global update IN "+this.getName());
 						all = true;
 						break;
-					} else
+					} else{
 						updatedNode.addElement(u);
+					}
 				}
 			}
 			updated = !all;
+			
+			if(!globalUpdateAllowed){ // prevents global update of panes if not strictly necessary [modified text not visible on the active pane]
+				updated = true;
+			}
 			
 			if (!updated){ 
 				updateTextPane();
@@ -244,7 +253,6 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 			
 		} else if (event instanceof SelectionChangedEvent) {
 			if (!textPane.isShowing()) {
-				// TODO dividere in updatedDom e updatedSelection
 				updated = false;
 				return;
 			}
@@ -293,13 +301,23 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 			hashtable.put("base", "file:///"+UtilFile.getFolderPath(documentManager.getSourceName()));			
 			textPane.setParameter(hashtable);
 
-		} //	else if (event instanceof DomSpellCheckEvent) {
-		  //	// FIXME Tommaso: aggiunto io; non so se va bene qui e non funziona (elem null)
-		  //	textPane.viewDomSpellCheckEvent((DomSpellCheckEvent)event);
-		  //	//updateTextPane();
-		  //	}
+		} 
+		//	else if (event instanceof DomSpellCheckEvent) {
+		//	textPane.viewDomSpellCheckEvent((DomSpellCheckEvent)event);
+		//	//updateTextPane();
+		//	}
 	}
 
+	
+	private boolean isTextualUpdate(DomEdit[] edits){
+		boolean isTextualUpdate = true;
+		for (int i = 0; i < edits.length; i++) {
+			if(!UtilDom.isTextNode(edits[i].getNode()))
+					return false;
+		}
+		return isTextualUpdate;
+	}
+	
 	// ////////////////////////////////////////////////////// XsltPane Interface
 	public void set(File xslt, File css, Hashtable param) {
 		textPane.setXslt(xslt);
@@ -400,6 +418,10 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 	public void setDeleteNextPrevAction(DeleteNextPrevAction deleteNextPrevAction) {
 		this.deleteNextPrevAction = deleteNextPrevAction;
 	}
+	
+	public void setKeyTypedAction(KeyTypedAction keyTypedAction){
+		this.keyTypedAction = keyTypedAction;
+	}
 
 	public void reload() {
 		textPane.update();
@@ -422,9 +444,7 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 			if (parentNode != null) // nodo testo creato dall'xslt
 			{
 				parentNode.appendChild(node); // collegalo al suo padre
-				xsltMapper.removeGen2Parent(node); // rimuovili dalle tabelle
-				// di
-				// mapping
+				xsltMapper.removeGen2Parent(node); // rimuovili dalle tabelle di mapping
 				fireActiveNodeChanged(node);
 			}
 
@@ -435,7 +455,7 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 					parentNode = node.getParentNode();
 					xsltMapper.mapGen2Parent(node, parentNode);
 					parentNode.removeChild(node);
-					node.setNodeValue(xsltMapper.getI18nNodeText(parentNode));
+					node.setNodeValue(xsltMapper.getI18nNodeText(parentNode));  
 					fireActiveNodeChanged(parentNode);
 				}
 			} else if (node!=null && node.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE) {
@@ -533,6 +553,10 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 
 	public DeleteNextPrevAction getDeleteNextPrevAction() {
 		return deleteNextPrevAction;
+	}
+	
+	public KeyTypedAction getKeyTypedAction(){
+		return keyTypedAction;
 	}
 
 	public AntiAliasedTextPane getTextPane() {
