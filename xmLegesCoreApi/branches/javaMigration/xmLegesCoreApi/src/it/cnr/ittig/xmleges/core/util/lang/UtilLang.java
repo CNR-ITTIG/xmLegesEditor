@@ -68,7 +68,7 @@ public class UtilLang {
 		if (str == null)
 			return str;
 
-		str = str.replace('\n', ' ').replace('\t', ' ').replaceAll("[ +]", " ");// .trim();
+		str = str.replace('\n', ' ').replace('\t', ' ').replaceAll("[ +]", " ").trim();   // 26-03-08 ho rimesso il trim(); 
 		str = squeeze(str, ' ');
 		return str;
 	}
