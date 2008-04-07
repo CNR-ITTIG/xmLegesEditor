@@ -35,6 +35,7 @@ public class XsltDeleteNextCharAction extends XsltAction {
 
 	public void actionPerformed(ActionEvent e) {
 		AntiAliasedTextPane pane = (AntiAliasedTextPane) getTextComponent(e);
+		DeleteNextPrevAction action = pane.getPane().getDeleteNextPrevAction();
 
 		HTMLDocument doc = (HTMLDocument) pane.getDocument();
 
@@ -44,32 +45,30 @@ public class XsltDeleteNextCharAction extends XsltAction {
 
 		if (pane.getXsltMapper().getParentByGen(modNode) != null)
 			return;
+		
+		if(action!=null && !action.canDeleteOnEnd(modNode, null))               // azione non ammissibile per il nodo
+			return;
 
 		int end = currElem.getEndOffset();
 		
+		
 		String elemText = getText(e, currElem);
+		String defText = pane.getXsltMapper().getI18nNodeText(modNode);
 		
-//		QUESTO E' INUTILE PERCHE' I NODI CON TESTO DI DEFAULT SONO MAPPATI :  getParentByGen(modNode) != null
-//		String defText = pane.getXsltMapper().getI18nNodeText(modNode);
-//		if (elemText != null && elemText.equals(defText))
-//			return;
-		
-		// FIXME spostare il controllo da xmLegesCore a xmLegesEditor
-		// aggiunto controllo Procesing Instruction <?rif> readonly
-		if(modNode.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE && modNode.getNodeValue().startsWith("<rif")) {
+		if ((modNode.getNodeType() == Node.COMMENT_NODE || modNode.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE) && elemText != null && elemText.equals(defText))
 			return;
-		}
 		
-		// se siamo alla fine del tag e non c'e' selezione
-		//if(pane.getCaretPosition() == end-1 && pane.getSelectionStart() == pane.getSelectionEnd()) return;
-
+		// gestione etichette testo (#PCDATA)
+		if((getText(e, currElem).equals(pane.getXsltMapper().getI18nNodeText(modNode.getParentNode()))))
+				return;
+				
 		if (pane.getCaretPosition() < end-1 || pane.getSelectionStart() != pane.getSelectionEnd()) {   // se non siamo alla fine del tag o c'e' selezione
 			super.actionPerformed(e);
 			elemText = getText(e, currElem);	
 			if (elemText != null && elemText.length() == 0)   // elemento svuotato;  
 				insertDefaultText(pane, currElem, doc);
-		} else {     // su fine tag attivazione della action specifica
-			DeleteNextPrevAction action = pane.getPane().getDeleteNextPrevAction();
+		} else {     										  // su fine tag attivazione della action specifica
+			
 			if (action != null) {
 				Node modNodeOrParent = pane.getXsltMapper().getDomById(pane.getElementId(currElem), true);
 				Element nextElem = pane.getNextTextElement(currElem);

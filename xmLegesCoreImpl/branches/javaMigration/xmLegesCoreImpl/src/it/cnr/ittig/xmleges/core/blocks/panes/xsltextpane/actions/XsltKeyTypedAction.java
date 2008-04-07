@@ -1,6 +1,7 @@
 package it.cnr.ittig.xmleges.core.blocks.panes.xsltextpane.actions;
 
 import it.cnr.ittig.xmleges.core.blocks.panes.xsltextpane.AntiAliasedTextPane;
+import it.cnr.ittig.xmleges.core.services.panes.xsltpane.KeyTypedAction;
 
 import java.awt.event.ActionEvent;
 
@@ -42,9 +43,15 @@ public class XsltKeyTypedAction extends XsltAction {
 			return;
 				
 		AntiAliasedTextPane pane = (AntiAliasedTextPane) getTextComponent(e);
+		KeyTypedAction action = pane.getPane().getKeyTypedAction();
+		
 
 		int caret = pane.getCaretPosition();
 		Element span = pane.getMappedSpan(caret);
+		
+		//DEBUG
+		//System.err.println("XsltKeyTypedAction: writes on caret "+caret);
+		//System.err.println("XsltKeyTypedAction: writes on span "+span.toString());
 
 		if (span == null)
 			return;
@@ -64,32 +71,31 @@ public class XsltKeyTypedAction extends XsltAction {
 		}
 
 		Node modNode = pane.getXsltMapper().getDomById(pane.getElementId(span));
+		
+		//DEBUG
+		//System.err.println("XsltKeyTypedAction: writes on ID "+pane.getElementId(span));
+		//System.err.println("XsltKeyTypedAction: writes on Node "+modNode.getNodeValue());
 
 		if(modNode == null) return;
 		
-		// FIXME spostare il controllo da xmLegesCore a xmLegesEditor
-		// aggiunto controllo Processing Instruction ?rif readonly
-		if(modNode.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE && modNode.getNodeValue().startsWith("<rif")) {
-			return;
-		}
-		
 		int start = span.getStartOffset();
 		int end = span.getEndOffset();
+		
+		if(action != null && !action.canKeyTyped(modNode, start, end))     // azione specifica su keyTyped
+			return;
 
-		if (pane.getXsltMapper().getParentByGen(modNode) != null) {	
-			pane.select(start+1, end-1);
-		} 
-//		QUESTO E' INUTILE PERCHE' I NODI CON TESTO DI DEFAULT SONO MAPPATI :  getParentByGen(modNode) != null		
-//		else {
-//			String elemText = getText(e, span);
-//			String defText = pane.getDefaultText(span);
-//		
-//			if(elemText != null && defText != null && defText.equals(elemText)) {
-//				pane.select(start+1, end-1);
-//			} else if(elemText == null || defText == null) {
-//				return;
-//			}
-//		}
+		// casi in cui va sostituita l'etichetta vuota
+		// 1 scrittura su nodi etichetta generati [generated node]
+		// 2[COMMENT e PI hanno una gestione diversa non avendo figli testo]
+		// 3 gestione etichette testo che compaiono su inserimento (#PCDATA)
+		
+		if (pane.getXsltMapper().getParentByGen(modNode) != null   
+			|| (modNode.getNodeType() == Node.COMMENT_NODE && getText(e, span).equals(pane.getXsltMapper().getI18nNodeText(modNode))) 
+			|| (modNode.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE && getText(e, span).equals(pane.getXsltMapper().getI18nNodeText(modNode)))
+			|| (getText(e, span).equals(pane.getXsltMapper().getI18nNodeText(modNode.getParentNode())))   // testo = etichetta 
+			){		
+				pane.select(start+1, end-1);
+			 } 
 		
 		super.actionPerformed(e);
 	}

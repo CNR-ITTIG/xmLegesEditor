@@ -13,6 +13,7 @@ import it.cnr.ittig.xmleges.core.services.frame.Frame;
 import it.cnr.ittig.xmleges.core.services.panes.corepanes.CoreXsltPanes;
 import it.cnr.ittig.xmleges.core.services.panes.xsltpane.DeleteNextPrevAction;
 import it.cnr.ittig.xmleges.core.services.panes.xsltpane.InsertBreakAction;
+import it.cnr.ittig.xmleges.core.services.panes.xsltpane.KeyTypedAction;
 import it.cnr.ittig.xmleges.core.services.panes.xsltpane.XsltPane;
 import it.cnr.ittig.xmleges.core.services.panes.xslts.Xslts;
 
@@ -54,7 +55,7 @@ import org.w3c.dom.Node;
  * @version 1.0
  * @author <a href="mailto:agnoloni@ittig.cnr.it">Tommaso Agnoloni</a>
  */
-public class CoreXsltPanesImpl implements CoreXsltPanes, Loggable, Serviceable, Configurable, Initializable, InsertBreakAction, DeleteNextPrevAction {
+public class CoreXsltPanesImpl implements CoreXsltPanes, Loggable, Serviceable, Configurable, Initializable, InsertBreakAction, DeleteNextPrevAction, KeyTypedAction {
 	Logger logger;
 
 	Frame frame;
@@ -120,6 +121,7 @@ public class CoreXsltPanesImpl implements CoreXsltPanes, Loggable, Serviceable, 
 					xsltPane.set(xslts.getXslt(xslt), null, null);
 				xsltPane.setInsertBreakAction(this);
 				xsltPane.setDeleteNextPrevAction(this);
+				xsltPane.setKeyTypedAction(this);
 				frame.addPane(xsltPane, false);
 				logger.debug("Adding '" + name + "' to frame OK");
 			} catch (ConfigurationException ex) {
@@ -137,11 +139,25 @@ public class CoreXsltPanesImpl implements CoreXsltPanes, Loggable, Serviceable, 
 	}
 
 	// ////////////////////////////////////////// DeleteNextPrevAction Interface
+	public boolean canBackSpaceOnStart(Node curr, Node prev) {
+		return true;
+	}
+	
 	public int backspaceOnStart(Node curr, Node prev) {
 		return -1;
 	}
 
+	
+	public boolean canDeleteOnEnd(Node curr, Node next) {
+		return true;
+	}
+	
 	public int deleteOnEnd(Node curr, Node next) {
 		return -1;
 	}
+
+	public boolean canKeyTyped(Node node, int start, int end) {
+		return true;
+	}
+
 }
