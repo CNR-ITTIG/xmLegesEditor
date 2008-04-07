@@ -9,16 +9,12 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.form.Form;
-import it.cnr.ittig.xmleges.core.services.form.FormException;
 import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextField;
 import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextFieldEditor;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.editor.blocks.form.browser.BrowserEvent;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Vocabolario;
 import it.cnr.ittig.xmleges.editor.services.form.meta.descrittori.MaterieVocabolariForm;
-
-//disabilito il teseo
-//import it.cnr.ittig.xmleges.editor.services.form.browser.BrowserForm;
 
 import java.awt.Component;
 import java.awt.Dimension;
@@ -27,8 +23,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.EventObject;
 import java.util.Vector;
 
@@ -37,8 +31,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JEditorPane;
 import javax.swing.JList;
-
-import org.jdesktop.jdic.init.JdicManager;
 
 public class MaterieVocabolariFormImpl implements MaterieVocabolariForm , Loggable,
 Serviceable, Initializable, ActionListener {
