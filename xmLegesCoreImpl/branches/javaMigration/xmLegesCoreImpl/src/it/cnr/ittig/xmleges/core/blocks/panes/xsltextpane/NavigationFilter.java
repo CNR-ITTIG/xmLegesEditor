@@ -26,7 +26,7 @@ public class NavigationFilter extends javax.swing.text.NavigationFilter {
 			while((i = super.getNextVisualPositionFrom(text, i, bias, direction, biasRet)) != prev) {
 				Element span = textPane.getMappedSpan(i);
 				// posizione consentita se dentro ad uno span o alla sua fine.
-				if(span != null && i != span.getStartOffset())// || (span == null && prevSpan != null))
+				if(span != null && i != span.getStartOffset() && i != span.getEndOffset())
 					return i;
 				prev = i;
 			}
@@ -45,7 +45,6 @@ public class NavigationFilter extends javax.swing.text.NavigationFilter {
 			} while (oldPos != newPos && newPosLine != eastLine && newPosLine != westLine);
 			return newPos;
 		}
-
 		return super.getNextVisualPositionFrom(text, pos, bias, direction, biasRet);
 	}
 
@@ -57,8 +56,11 @@ public class NavigationFilter extends javax.swing.text.NavigationFilter {
 			super.moveDot(fb, dot, bias);
 	}
 
+	
+	
 	public void setDot(FilterBypass fb, int dot, Bias bias) {
-		//System.err.println(textPane.getPane().getName()+"  setDot - DOT = "+dot );
+		// Debugging
+	    // System.err.println(textPane.getPane().getName()+"  setDot - DOT = "+dot );
 		try {
 			Element newElem = textPane.getHTMLDocument().getCharacterElement(dot);
 			
@@ -88,9 +90,10 @@ public class NavigationFilter extends javax.swing.text.NavigationFilter {
 			System.err.println("Posizione dot: " + dot + " " + (span !=null ? span.getName() : null));
 			 */
 			
-			if(span != null && dot != span.getStartOffset() && dot != span.getEndOffset())
+			if(span != null && dot != span.getStartOffset() && dot != span.getEndOffset()){
 				// Quando l'utente clicca dentro uno span mappato, posiziona il cursore
 				super.setDot(fb, dot, bias);
+			}
 			else {
 				// Quando l'utente clicca fuori da uno span ricerca la piu' vicina posizione ammissibile
 			
@@ -98,16 +101,17 @@ public class NavigationFilter extends javax.swing.text.NavigationFilter {
 					int east, west;
 					east = getNextVisualPositionFrom(textPane, dot, bias, SwingConstants.EAST, new Position.Bias[1]);
 					west = getNextVisualPositionFrom(textPane, dot, bias, SwingConstants.WEST, new Position.Bias[1]);
-					
-					//System.err.println(textPane.getPane().getName()+"  OUTSIDE SPAN - Setting dot "+dot +" east  "+east +"  west  "+west);
-					
+												
 					int newDest = 0;
-					if (Math.abs(west-dot) <= Math.abs(east-dot))
-						newDest = west;
-					else
-						newDest = east;
 					
-					//System.err.println(textPane.getPane().getName()+"  OUTSIDE SPAN - to newDest  "+newDest);	
+					if(east != dot && west != dot){    
+						if (Math.abs(west-dot) <= Math.abs(east-dot))
+							newDest = west;
+						else
+							newDest = east;
+					}else{								// elimina posizioni inammissibili; se siamo qui dot non lo era !
+						newDest = east==dot?west:east;
+					}	
 					
 					super.setDot(fb, newDest, bias);
 					
