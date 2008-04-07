@@ -19,6 +19,11 @@ import org.w3c.dom.Node;
  * <code>XsltPaneImpl</code>.
  * 
  * <p>
+ *  http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=5036141
+ *  Bug ID:   	 5036141
+ *  Synopsis 	JTextArea stops firing CaretEvents after Drag-And-Drop			
+ * </p>
+ * 
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
  * <dd>2003 - 2004</dd>
@@ -59,12 +64,6 @@ public class XsltTransferHandler extends DomTransferHandler {
 	}
 
 	protected boolean isStringSupported(JComponent c) {
-		// SelectionManager selectionManager =
-		// ((AntiAliasedTextPane)c).getPane().getSelectionManager();
-		// Node n = selectionManager.getActiveNode();
-		// int start = selectionManager.getTextSelectionStart();
-		// int end = selectionManager.getTextSelectionEnd();
-		// return n != null && start != end && start >= 0;
 		return c instanceof JTextComponent;
 	}
 
@@ -80,6 +79,7 @@ public class XsltTransferHandler extends DomTransferHandler {
 			p0 = doc.createPosition(start);
 			p1 = doc.createPosition(end);
 		} catch (BadLocationException e) {
+			e.printStackTrace();
 		}
 		shouldRemove = true;
 		return source.getSelectedText();
@@ -95,6 +95,8 @@ public class XsltTransferHandler extends DomTransferHandler {
 		}
 
 		int pos = tc.getCaretPosition();
+		// DEBUGGING
+		// System.err.println("XsltTransferHandler.importString() : TARGET POSITION = "+pos+" PANE: "+tc.getPane().getName());
 		HTMLDocument doc = tc.getHTMLDocument();
 
 		Element currElem = doc.getCharacterElement(pos);
@@ -105,18 +107,46 @@ public class XsltTransferHandler extends DomTransferHandler {
 		}
 
 		Node currNode = tc.getXsltMapper().getDomById(tc.getElementId(currElem));
+		
+		// DEBUGGING
+		// System.err.println("XsltTransferHandler.importString() : TARGET NODE CONTENT = "+currNode.getNodeValue()+ " PANE: "+tc.getPane().getName());
+		
 
 		if (tc.getXsltMapper().getParentByGen(currNode) != null) {
 			try {
-				doc.replace(enclosingSpan.getStartOffset()+1, enclosingSpan.getEndOffset()
-						- enclosingSpan.getStartOffset()-2, str, currElem.getAttributes());
+				doc.replace(enclosingSpan.getStartOffset()+1, enclosingSpan.getEndOffset() - enclosingSpan.getStartOffset()-2, str, currElem.getAttributes());
 			} catch (BadLocationException ble) {
+				ble.printStackTrace();
 			}
 		} else {
 			try {
-				doc.insertString(pos, str, doc.getCharacterElement(enclosingSpan.getStartOffset())
-						.getAttributes());
+				doc.insertString(pos, str, doc.getCharacterElement(enclosingSpan.getStartOffset()).getAttributes());
+				
+				
+				// a questo punto parte il setDot ma non arriva il caretEvent a AntialiasedTextPane.caretUpdate; 
+				int currpos = pos+str.length();
+				String id = null;
+				Element currelem = tc.getMappedSpan(currpos);
+				if(currelem != null){ 
+					id = tc.getElementId(currelem);
+					//Node selNode = tc.getXsltMapper().getDomById(id, true);
+					//tc.update(selNode);
+					tc.removeAllHighlights();
+					tc.highlightElement(currelem);
+				}
+				
+				//tc.getPane().getSelectionManager().setActiveNode(this, currNode);
+				//tc.getPane().fireSelectionChanged(currNode,-1,-1);
+				//tc.getPane().firePaneStatusChanged();
+				
+				tc.getCaret().setDot(pos+str.length());
+				
+				// DEBUGGING
+				//System.err.println("XsltTransferHandler.importString() -->     setDot   : NEW TARGET POSITION = "+pos+str.length()+" PANE: "+tc.getPane().getName());
+				//System.err.println("XsltTransferHandler.importString() -->     should write on "+id);
+				
 			} catch (BadLocationException ble) {
+				ble.printStackTrace();
 			}
 		}
 
@@ -129,15 +159,17 @@ public class XsltTransferHandler extends DomTransferHandler {
 				try {
 					HTMLDocument doc = source.getHTMLDocument();
 					Element currElem = source.getHTMLDocument().getCharacterElement(p0.getOffset());
-					Node currNode = source.getXsltMapper().getDomById(source.getElementId(currElem));
+					//Node currNode = source.getXsltMapper().getDomById(source.getElementId(currElem));
 					int start = currElem.getStartOffset(), end = currElem.getEndOffset();
-					String elemText = null;
 					if (p0.getOffset() == start+1 && p1.getOffset() == end-1) {
 						doc.replace(p0.getOffset(), p1.getOffset() - p0.getOffset(), source.getDefaultText(currElem),currElem.getAttributes());
 					} else {
+						//System.err.println("XsltTranferHandler: ---> cleaning up");
 						doc.remove(p0.getOffset(), p1.getOffset() - p0.getOffset());
 					}
+					//source.update(currNode);
 				} catch (BadLocationException e) {
+					e.printStackTrace();
 				}
 			}
 		}
