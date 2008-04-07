@@ -42,15 +42,15 @@ license      : GNU General Public License http://www.gnu.org/licenses/gpl.html
 <!-- =========================== COMMENT E PROCESSING INSTRUCTION NODE ==== -->
 <!-- ====================================================================== -->
 <xsl:template match="processing-instruction()">
-	<pre color="red">
-	<xsl:element name="span" use-attribute-sets="XsltMapperSetClass"><xsl:attribute name="color">red</xsl:attribute><xsl:if test="string-length(.) = 0"><xsl:value-of select="mapper:getTextStringIfEmpty(.)" /></xsl:if><xsl:if test="string-length(.) != 0"><xsl:value-of select="." /></xsl:if></xsl:element>
-	</pre>
+	<font color="red">
+	<xsl:element name="span" use-attribute-sets="XsltMapperSetClass">&#160;<xsl:if test="string-length(.) = 0"><xsl:value-of select="mapper:getTextStringIfEmpty(.)" /></xsl:if><xsl:if test="string-length(.) != 0"><xsl:value-of select="." /></xsl:if>&#160;</xsl:element>
+	</font>
 </xsl:template>
 
 <xsl:template match="comment()">
-	<pre color="green">
-	<xsl:element name="span" use-attribute-sets="XsltMapperSetClass"><xsl:attribute name="color">green</xsl:attribute><xsl:if test="string-length(.) = 0"><xsl:value-of select="mapper:getTextStringIfEmpty(.)" /></xsl:if><xsl:if test="string-length(.) != 0"><xsl:value-of select="." /></xsl:if></xsl:element>
-	</pre>
+	<font color="green">
+	<xsl:element name="span" use-attribute-sets="XsltMapperSetClass">&#160;<xsl:if test="string-length(.) = 0"><xsl:value-of select="mapper:getTextStringIfEmpty(.)" /></xsl:if><xsl:if test="string-length(.) != 0"><xsl:value-of select="." /></xsl:if>&#160;</xsl:element>
+	</font>
 </xsl:template>
 
 
