@@ -157,8 +157,8 @@ public class XsltEditorImpl implements XsltEditor, Pane, Loggable, Serviceable, 
 	public class OpenAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
 			
-			//FIXME Caricare più file
-			//interessante la possibilità di caricare più file per volta ma dovrebbero essere, al più,
+			//FIXME Caricare piï¿½ file
+			//interessante la possibilitï¿½ di caricare piï¿½ file per volta ma dovrebbero essere, al piï¿½,
 			//un XSL e un CSS altrimenti considera solo l'ultimo dei XSL e l'ultimo dei CSS caricati!!
 			
 			if (fileChooser.showOpenDialog(SwingUtilities.getRoot(tabbedPane)) == JFileChooser.APPROVE_OPTION)
@@ -233,7 +233,7 @@ public class XsltEditorImpl implements XsltEditor, Pane, Loggable, Serviceable, 
 			try {
 				UtilXslt.remove(xslt);	//rimuovo il file altrimenti riprende "il vecchio" dalla cache
 				Node node = UtilXslt.applyXslt(documentManager.getDocumentAsDom(), xslt);
-				convTextArea.setText(UtilDom.domToString(node));
+				convTextArea.setText(UtilDom.domToString(node,true,"  "));
 			} catch (Exception ex) {
 				// TODO MSG
 				logger.error(ex.toString(), ex);
