@@ -14,6 +14,7 @@ import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
+import it.cnr.ittig.xmleges.core.services.panes.xsltmapper.XsltMapper;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
@@ -71,6 +72,8 @@ import org.w3c.dom.NodeList;
 
 public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Serviceable, Configurable {
 	Logger logger;
+	
+	XsltMapper xsltMapper;
 
 	DtdRulesManager dtdRulesManager;
 
@@ -91,6 +94,7 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
+		xsltMapper = (XsltMapper) serviceManager.lookup(XsltMapper.class);
 		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
@@ -112,8 +116,8 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 
 	// //////////////////////////////////////// UtilRulesManager Interface
 
-	// crea il men? cumulativo fondendo insertAfter, append, insertBefore
-
+	// crea il menu' cumulativo fondendo insertAfter, append, insertBefore
+	// questo viene chiamato da right click su tree
 	public JMenu createMenuInsert(Node node) {
 		JMenu menu = createMenu("utilrulesmanager.menu.insert");
 		if (node == null || node.getParentNode() == null)
@@ -579,9 +583,28 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 			try {
 				tr = documentManager.beginEdit();
 				Node parent = node.getParentNode();
-				Node child = "#PCDATA".equals(newNodeName) ? parent.getOwnerDocument().createTextNode("") : getNodeTemplate(newNodeName);
-				parent.insertBefore(child, node);
-				selectionManager.setActiveNode(this, child);
+				Node child = null;
+				Node toSelect = null;
+				
+				
+				if("#PCDATA".equals(newNodeName)){
+					child = node.getOwnerDocument().createTextNode(xsltMapper.getI18nNodeText(parent));
+					if(!UtilDom.isTextNode(node) && !UtilDom.isTextNode(node.getPreviousSibling())){
+						parent.insertBefore(child, node);
+						toSelect = child;
+					}else{
+						toSelect = node.getPreviousSibling()!=null?node.getPreviousSibling():node;
+					}
+				}else{
+					child = getNodeTemplate(newNodeName);
+					parent.insertBefore(child, node);
+					toSelect = child;
+				}
+				
+				logger.debug("------------------ INSERT BEFORE --------------------");
+				
+		
+				selectionManager.setActiveNode(this, toSelect);
 				documentManager.commitEdit(tr);
 			} catch (DocumentManagerException ex) {
 				logger.error(ex.toString(), ex);
@@ -614,12 +637,38 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 			try {
 				tr = documentManager.beginEdit();
 				Node parent = node.getParentNode();
-				Node child = "#PCDATA".equals(newNodeName) ? parent.getOwnerDocument().createTextNode("") : getNodeTemplate(newNodeName);
-				if (node.getNextSibling() == null)
-					parent.appendChild(child);
-				else
-					parent.insertBefore(child, node.getNextSibling());
-				selectionManager.setActiveNode(this, child);
+				Node child = null;
+				Node toSelect = null;
+				
+				if("#PCDATA".equals(newNodeName)){
+					child = node.getOwnerDocument().createTextNode(xsltMapper.getI18nNodeText(parent));
+			
+					if (node.getNextSibling() == null){
+							if(!UtilDom.isTextNode(parent.getLastChild())){
+								parent.appendChild(child);
+								toSelect = child;
+							}else{
+								toSelect = parent.getLastChild();
+							}
+					}else{
+							if(!UtilDom.isTextNode(node) && !UtilDom.isTextNode(node.getNextSibling())){
+								parent.insertBefore(child, node.getNextSibling());
+								toSelect = child;
+							}else{
+								toSelect = node.getNextSibling()!=null?node.getNextSibling():node;
+							}
+					}	
+				}else{
+					child = getNodeTemplate(newNodeName);
+					if (node.getNextSibling() == null)
+						parent.appendChild(child);
+					else
+						parent.insertBefore(child, node.getNextSibling());
+					toSelect = child;
+				}
+				logger.debug("------------------ INSERT AFTER --------------------");
+				
+				selectionManager.setActiveNode(this, toSelect);
 				documentManager.commitEdit(tr);
 			} catch (DocumentManagerException ex) {
 				logger.error(ex.toString(), ex);
@@ -650,9 +699,24 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 			EditTransaction tr = null;
 			try {
 				tr = documentManager.beginEdit();
-				Node child = "#PCDATA".equals(newNodeName) ? node.getOwnerDocument().createTextNode("") : getNodeTemplate(newNodeName);
-				node.appendChild(child);
-				selectionManager.setActiveNode(this, child);
+				Node child = null;
+				if("#PCDATA".equals(newNodeName)){   // caso inserimento #PCDATA
+					child=node.getOwnerDocument().createTextNode(xsltMapper.getI18nNodeText(node));
+					// inserisce il nodo testo solo se non ce n'e' uno adiacente
+					if(!UtilDom.isTextNode(node.getLastChild())){
+						node.appendChild(child);
+						selectionManager.setActiveNode(this, child);
+					}else{
+						selectionManager.setActiveNode(this, node.getLastChild());
+					}
+				}else{
+					child =  getNodeTemplate(newNodeName);
+					node.appendChild(child);
+					selectionManager.setActiveNode(this, child);
+				}
+				
+				logger.debug("------------------  APPEND  --------------------");
+				
 				documentManager.commitEdit(tr);
 			} catch (DocumentManagerException ex) {
 				logger.error(ex.toString(), ex);
@@ -692,7 +756,7 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 			try {
 				tr = documentManager.beginEdit();
 				Node parent = node.getParentNode();
-				Node child = "#PCDATA".equals(newNodeName) ? parent.getOwnerDocument().createTextNode("") : getNodeTemplate(newNodeName);
+				Node child = "#PCDATA".equals(newNodeName) ? parent.getOwnerDocument().createTextNode(xsltMapper.getI18nNodeText(parent)) : getNodeTemplate(newNodeName);
 				insertNodeInText(node, start, end, child, replaceSelected);
 				selectionManager.setActiveNode(this, child);
 				documentManager.commitEdit(tr);
