@@ -185,9 +185,31 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 	}
 
 	public void paste() {
+		
 		Element currElem = getMappedSpan(getCaretPosition());
 		Node modNode = getXsltMapper().getDomById(getElementId(currElem));
-		if (getXsltMapper().getParentByGen(modNode) != null) {
+		
+		String text = null;
+		try{
+			int start = currElem.getStartOffset();
+			int end = currElem.getEndOffset();
+			text = getText(start+1, end-start-2);
+		}catch(BadLocationException ble){
+		}
+		
+		if(text == null)
+			text="";
+		
+		// casi in cui va sostituita l'etichetta vuota
+		// 1 scrittura su nodi etichetta generati [generated node]
+		// 2[COMMENT e PI hanno una gestione diversa non avendo figli testo]
+		// 3 gestione etichette testo che compaiono su inserimento (#PCDATA)
+		
+		if (pane.getXsltMapper().getParentByGen(modNode) != null   
+			|| (modNode.getNodeType() == Node.COMMENT_NODE && text.equals(pane.getXsltMapper().getI18nNodeText(modNode))) 
+			|| (modNode.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE && text.equals(pane.getXsltMapper().getI18nNodeText(modNode)))
+			|| (text.equals(pane.getXsltMapper().getI18nNodeText(modNode.getParentNode())))   // testo = etichetta 
+			){
 			select(currElem.getStartOffset()+1, currElem.getEndOffset()-1);
 		}
 		replaceSelection(UtilClipboard.getAsString());
@@ -250,12 +272,12 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 			// SelectedNodesChanged
 			// MIRKO: 
 			// L'elemento sotto il caret (o dot o mark) viene individuato
-			// in modo "intelligente", quindi se ce n'� solo uno a dx o
+			// in modo "intelligente", quindi se ce n'e' solo uno a dx o
 			// a sx viene ritornato quello, mentre se ce ne sono due
 			// viene in genere ritornato quello di destra (con la conseguenza
-			// che non � possibile scrivere alla fine di un elemento che
+			// che non e' possibile scrivere alla fine di un elemento che
 			// combacia con il successivo).
-			// In questo caso siamo pi� interessati a sapere se � possibile
+			// In questo caso siamo piu' interessati a sapere se e' possibile
 			// che il cursore si trovi sullo stesso elemento (e stranamente
 			// il pane sembra non esserlo). Quindi non ci resta che provare
 			// tutte le combinazioni.
@@ -424,6 +446,8 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 		}
 		return id;
 	}
+	
+	
 	protected String getHtml(Node node) {
 		logger.debug("BEGIN getHTML(Node)");
 		String ret = HTML_ERROR;
@@ -720,7 +744,7 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 					logger.debug(text);
 				setText(text);
 				// forza il posizionamento del cursore in testa al documento su update totale
-				getCaret().setDot(0);
+				//getCaret().setDot(0);
 				setEnabled(true);
 			}
 		} catch (Exception ex) {
@@ -733,23 +757,70 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 
 	public Node update(Node node) {
 		
-		String id = pane.getXsltMapper().getIdByDom(node);
+		String id = pane.getXsltMapper().getIdByDom(node);   
+		
+//      ESPERIMENTI PER EVITARE DI METTERE IL DOPPIO SPAN NEGLI XSL INTERNI    (FAILED)
+//		
+//		quando arrivo qui col num, getIdByDom(num) mi da' null anche se il suo testo e' mappato; dovrei scendere sul gen2parent o sull'etichetta
+// 		per evitare di racchiudere tutti i testi mappati in altri span
+		
+//		String id = getXsltMapper().getIdByDom(node);     // DA USARE SE NON METTESSI IL CONTENITORE SPAN 
+//		while(id == null && node !=null){
+//			node = node.getParentNode();
+//			id = getXsltMapper().getIdByDom(node);
+//		}
+		
+		// dovrei trovare un altro nodo mappato parente stretto di quello che da' id null;
+		// oppure mappare tutti gli span che racchiudono
+		
+//		System.err.println("***************** html **********************");
+//		System.err.println(getHtml(node));   // se non refresho questo prima cosi' il getGenByParent mi da' null
+			
+//		if(id == null){
+//			//node = node.getFirstChild(); // il firstChild non c'e' perche' num e' vuoto:     <num></num>
+//										   // ci dovrebbe essere il generated; quando lo mette ???		
+//			//id = pane.getXsltMapper().getIdByDom(node);
+//			System.err.println("id null for   "+node.getNodeName()+"  with content  "+node.getNodeValue());
+//			System.err.println("id null: genByParent = "+pane.getXsltMapper().getGenByParent(node).getNodeName()+" with content "+pane.getXsltMapper().getGenByParent(node).getNodeValue());
+//			id = pane.getXsltMapper().getIdByDom(pane.getXsltMapper().getGenByParent(node));
+//		}else
+//			System.err.println("id "+id +" for "+node.getNodeName()+"  with content  "+node.getNodeValue());
+//    
+// 		END    - ESPERIMENTI
+	
+		
 		Element elem = getHTMLDocument().getElement(id);
 		
 		if (elem != null) {
 			ignoreDocumentEvents = true;
 			ignoreCaretEvents = true;
 			try {
-				//getHTMLDocument().setOuterHTML(elem, getHtml(node));
-				getHTMLDocument().setInnerHTML(elem, convertEncoding(getHtml(node)));
+				if(isSpan(elem)){     // se devo aggiornare uno span ricerco il contenitore superiore e aggiorno lui; altrimenti non aggiorna gli attributi (html) della partizione che contiene il testo
+					Element curr = elem.getParentElement();
+					String idContainer = null;
+					boolean found = false;
+					while(curr!=null && !found){
+						if(isMappedElement(curr) && !isSpan(curr)){
+							idContainer = getElementId(curr);
+							found = true;
+						}
+						curr = curr.getParentElement();
+					}
+					if(found)
+						return update(pane.getXsltMapper().getDomById(idContainer));			
+				}else{
+					getHTMLDocument().setOuterHTML(elem, convertEncoding(getHtml(node)));
+				}
 				return node;
 			} catch (Exception ex) {
-				logger.error(ex.toString(), ex);
+				logger.error(node.getNodeName()+" : "+ex.toString(), ex);
 			} finally {
 				ignoreDocumentEvents = false;
 				ignoreCaretEvents = false;
 			}
 		}
+		if(logger.isDebugEnabled())
+			logger.debug("elem  null for   "+id);
 		return null;
 	}
 	
@@ -846,40 +917,6 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 				}
 
 			}
-
-			// ignoreCaretEvents = true;
-			// Element curr =
-			// getHTMLDocument().getParagraphElement(getHTMLDocument().getStartPosition().getOffset());
-			// Element prev = null;
-			// while (!curr.equals(prev)) {
-			// prev = curr;
-			// int start = prev.getStartOffset();
-			// int end = prev.getEndOffset();
-			// try {
-			// SpellCheckWord[] words =
-			// pane.domSpellCheck.getSpellCheck().spellCheck(getText(start, end
-			// - start));
-			// for (int i = 0; i < words.length; i++) {
-			// int s = words[i].getStartOffset();
-			// int e = words[i].getEndOffset();
-			// select(start + s, start + e);
-			//
-			// AttributeSet attrs = getHTMLDocument().getCharacterElement(start
-			// + 1).getAttributes();
-			// SimpleAttributeSet modAttrs = new SimpleAttributeSet(attrs);
-			//
-			// StyleConstants.setForeground(modAttrs, Color.red);
-			// StyleConstants.setUnderline(modAttrs, true);
-			//
-			// setCharacterAttributes(modAttrs, false);
-			// }
-			// } catch (BadLocationException ex) {
-			// }
-			// curr =
-			// getHTMLDocument().getParagraphElement(curr.getEndOffset());
-			// }
-			// ignoreCaretEvents = false;
-
 		}
 	}
 }
