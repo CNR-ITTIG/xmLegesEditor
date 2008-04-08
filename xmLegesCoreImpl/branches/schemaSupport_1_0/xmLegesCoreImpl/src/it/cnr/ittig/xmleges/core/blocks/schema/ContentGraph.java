@@ -10,17 +10,10 @@ import it.cnr.ittig.xmleges.core.util.lang.Queue;
 import it.cnr.ittig.xmleges.core.util.lang.UtilLang;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Stack;
 import java.util.Vector;
-
-import org.eclipse.xsd.XSDParticle.DFA.State;
-import org.eclipse.xsd.XSDParticle.DFA.Transition;
-import org.w3c.dom.Node;
 
 public class ContentGraph implements Serializable {
 
