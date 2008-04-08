@@ -6,7 +6,7 @@
 
 package it.cnr.ittig.xmleges.core.blocks.dtd;
 
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.util.lang.Queue;
 import it.cnr.ittig.xmleges.core.util.lang.UtilLang;
 
@@ -121,11 +121,11 @@ public class DFSA implements Serializable {
 		 * 
 		 * @param value valore della transizione
 		 * @param dest nodo destinazione della transizione
-		 * @throws DtdRulesManagerException
+		 * @throws RulesManagerException
 		 */
-		public void addTransition(String value, Node dest) throws DtdRulesManagerException {
+		public void addTransition(String value, Node dest) throws RulesManagerException {
 			if (transition_table.containsKey(value))
-				throw new DtdRulesManagerException("The transition table contains already this symbol");
+				throw new RulesManagerException("The transition table contains already this symbol");
 			transition_table.put(value, dest);
 		}
 
@@ -203,13 +203,13 @@ public class DFSA implements Serializable {
 	 * Crea un automa deterministico a partire da uno non deterministico
 	 * @param _name etichetta della regola
 	 * @param nd_fsa l'automa da trasformare
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public DFSA(String _name, FSA nd_fsa) throws DtdRulesManagerException {
+	public DFSA(String _name, FSA nd_fsa) throws RulesManagerException {
 		name = _name;
 		nodes_table = new HashMap();
 		if (nd_fsa.getNoNodes() == 0)
-			throw new DtdRulesManagerException("Empty FSA");
+			throw new RulesManagerException("Empty FSA");
 
 		// crea il nodo di inizio
 		start_node = epsChiusuraStart(nd_fsa.getNode(0));
@@ -387,9 +387,9 @@ public class DFSA implements Serializable {
 	 * @param with_gaps <code>true</code> se l'allineamento pu&ograve essere fatto con
 	 *            gaps
 	 * @return <code>true</code> se la sequenza di nodi allinea con l'automa
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public boolean align(Collection sequence, boolean with_gaps) throws DtdRulesManagerException {
+	public boolean align(Collection sequence, boolean with_gaps) throws RulesManagerException {
 		if (with_gaps)
 			return alignWithGaps(sequence);
 		return align(sequence);
@@ -400,11 +400,11 @@ public class DFSA implements Serializable {
 	 * 
 	 * @param sequence la sequenza da allineare
 	 * @return <code>true</code> se la sequenza di nodi allinea con l'automa
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public boolean align(Collection sequence) throws DtdRulesManagerException {
+	public boolean align(Collection sequence) throws RulesManagerException {
 		if (nodes_table.size() == 0)
-			throw new DtdRulesManagerException("Empty automata");
+			throw new RulesManagerException("Empty automata");
 
 		Node last_node = start_node;
 		for (Iterator i = sequence.iterator(); i.hasNext() && last_node != null;) {
@@ -420,11 +420,11 @@ public class DFSA implements Serializable {
 	 * 
 	 * @param sequence la sequenza da allineare
 	 * @return <code>true</code> se la sequenza di nodi allinea con l'automa
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public boolean alignWithGaps(Collection sequence) throws DtdRulesManagerException {
+	public boolean alignWithGaps(Collection sequence) throws RulesManagerException {
 		if (nodes_table.size() == 0)
-			throw new DtdRulesManagerException("Empty automata");
+			throw new RulesManagerException("Empty automata");
 
 		return alignWithGaps(sequence.iterator(), UtilLang.singleton(start_node));
 	}
@@ -436,11 +436,11 @@ public class DFSA implements Serializable {
 	 * @param sequence la sequenza da allineare
 	 * @return <code>null</code> se non esiste un allineamento, altrimenti la sequenza
 	 *         di nodi che allinea con l'automa
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public Vector getGappedAlignment(Collection sequence) throws DtdRulesManagerException {
+	public Vector getGappedAlignment(Collection sequence) throws RulesManagerException {
 		if (nodes_table.size() == 0)
-			throw new DtdRulesManagerException("Empty automata");
+			throw new RulesManagerException("Empty automata");
 
 		return getGappedAlignment(sequence.iterator(), UtilLang.singleton(start_node), UtilLang.singleton(new Vector()));
 	}
@@ -452,9 +452,9 @@ public class DFSA implements Serializable {
 	 * @param nav iteratore per navigare sulla sequenza di string
 	 * @param startFrom collezione di nodi da cui iniziare l'allineamento
 	 * @return <code>true</code> se la sequenza di nodi allinea con l'automa
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	private boolean alignWithGaps(Iterator nav, Vector startFrom) throws DtdRulesManagerException {
+	private boolean alignWithGaps(Iterator nav, Vector startFrom) throws RulesManagerException {
 		if (!nav.hasNext())
 			return true;
 		String token = (String) nav.next();
@@ -492,9 +492,9 @@ public class DFSA implements Serializable {
 	 * @param paths collezione delle path dal nodo iniziale dell'automa fino ai nodi start
 	 * @return <code>null</code> se non esiste un allineamento, altrimenti la sequenza
 	 *         di nodi che allinea con l'automa
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	private Vector getGappedAlignment(Iterator nav, Vector startFrom, Vector paths) throws DtdRulesManagerException {
+	private Vector getGappedAlignment(Iterator nav, Vector startFrom, Vector paths) throws RulesManagerException {
 		if (!nav.hasNext()) {
 			Vector shortest_path = null;
 
@@ -649,11 +649,11 @@ public class DFSA implements Serializable {
 	 * @param choice_point posizione in cui enumerare le alternative (-1 indica il nodo
 	 *            inizio)
 	 * @return la collezione di alternative
-	 * @throws DtdRulesManagerException
+	 * @throws RulesManagerException
 	 */
-	public Collection alignAlternatives(Collection sequence, int choice_point) throws DtdRulesManagerException {
+	public Collection alignAlternatives(Collection sequence, int choice_point) throws RulesManagerException {
 		if (nodes_table.size() == 0)
-			throw new DtdRulesManagerException("Empty automata");
+			throw new RulesManagerException("Empty automata");
 
 		Node last_node = start_node;
 		Object[] seq_array = sequence.toArray();
@@ -663,7 +663,7 @@ public class DFSA implements Serializable {
 			last_node = last_node.getNext((String) seq_array[i]);
 		}
 		if (last_node == null)
-			throw new DtdRulesManagerException("The sequence does not align, cannot find alternatives");
+			throw new RulesManagerException("The sequence does not align, cannot find alternatives");
 
 		// try all the alternatives
 		Node choice_node = last_node;
