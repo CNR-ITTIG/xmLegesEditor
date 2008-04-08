@@ -1,4 +1,4 @@
-package it.cnr.ittig.xmleges.core.services.dtd;
+package it.cnr.ittig.xmleges.core.services.rules;
 
 import it.cnr.ittig.services.manager.Service;
 

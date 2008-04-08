@@ -1,4 +1,4 @@
-package it.cnr.ittig.xmleges.core.services.dtd;
+package it.cnr.ittig.xmleges.core.services.rules;
 
 /**
  * Classe per la gestione delle eccezioni nel <code>DtdRulesManager</code>.
