@@ -1346,7 +1346,7 @@ public class UtilXsd{
 		// aggiunge un nodo al grafo per ogni nodo del DFSA
 		HashMap graph_nodes_table = new HashMap();
 		for (Iterator i = rule.getStates().iterator(); i.hasNext();) {
-			graph_nodes_table.put(((State)i.next()).toString(), graph.addNode());
+			graph_nodes_table.put(((State)i.next()).toString(), graph.addNewNode());
 		}
 
 		// per ogni nodo del DFSA
