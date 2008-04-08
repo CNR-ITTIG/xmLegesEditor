@@ -14,11 +14,8 @@ import it.cnr.ittig.xmleges.core.services.panes.xsltutil.XsltUtil;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
 
-
 import java.util.EventObject;
 import java.util.Hashtable;
-import javax.swing.JEditorPane;
-
 
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -27,7 +24,7 @@ public class XsltUtilImpl implements XsltUtil, EventManagerListener, Loggable, S
 	Logger logger;
 
 	
-	//NON TUTTO è UTILIZZATO
+	//NON TUTTO ï¿½ UTILIZZATO
 	
 	/** Event Manager per gli eventi. */
 	EventManager eventManager = null;

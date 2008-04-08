@@ -34,7 +34,6 @@ import java.util.EventObject;
 import javax.swing.AbstractAction;
 
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 /**
  * <h1>Implementazione del servizio
@@ -218,7 +217,7 @@ public class TabelleActionImpl implements TabelleAction, Loggable, Serviceable, 
 
 		public boolean canDoAction(Node[] n) {
 			
-			//Se non è selezionato nulla le funzioni canInsertTable non funzionano
+			//Se non ï¿½ selezionato nulla le funzioni canInsertTable non funzionano
 			if (end==-1) 
 	            end =1;
 			if (start==-1) 
@@ -362,9 +361,9 @@ public class TabelleActionImpl implements TabelleAction, Loggable, Serviceable, 
 
 	public class EliminaRigaAction extends MyAbstractAction {
 		//
-		// Per elimina righe lascio la possibilità della selezione multipla, quindi
-		// non è più suff.controllare "canDeleteRiga" x singole righe, bisogna anche
-		// considerare il numero di righe che andrò a cancellare e il tipo.
+		// Per elimina righe lascio la possibilitï¿½ della selezione multipla, quindi
+		// non ï¿½ piï¿½ suff.controllare "canDeleteRiga" x singole righe, bisogna anche
+		// considerare il numero di righe che andrï¿½ a cancellare e il tipo.
 		//     (Al momento accantonato)
 		//
 
@@ -454,9 +453,9 @@ public class TabelleActionImpl implements TabelleAction, Loggable, Serviceable, 
 	public class EliminaColonnaAction extends MyAbstractAction {
 		public boolean canDoAction(Node[] n) {
 			//
-			// Per elimina colonna lascio la possibilità della selezione multipla, quindi
-			// non è più suff.controllare "canDeleteColonna" x singole colonne, ma bisogna
-			// contare il numero di colonne che andrò a cancellare.
+			// Per elimina colonna lascio la possibilitï¿½ della selezione multipla, quindi
+			// non ï¿½ piï¿½ suff.controllare "canDeleteColonna" x singole colonne, ma bisogna
+			// contare il numero di colonne che andrï¿½ a cancellare.
 			//     (Al momento accantonato)
 			//
 

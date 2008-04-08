@@ -2,9 +2,6 @@ package it.cnr.ittig.xmleges.core.services.panes.xsltutil;
 
 import it.cnr.ittig.services.manager.Service;
 
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
 /**
  * Servizio per 
  */

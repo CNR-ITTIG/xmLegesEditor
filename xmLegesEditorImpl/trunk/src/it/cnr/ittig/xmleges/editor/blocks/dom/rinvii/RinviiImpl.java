@@ -10,7 +10,6 @@ import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
-import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.rinumerazione.Rinumerazione;

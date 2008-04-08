@@ -13,7 +13,6 @@ import it.cnr.ittig.xmleges.core.services.document.DocumentOpenedEvent;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
-import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.action.disposizioni.attive.DispAttiveAction;
 import it.cnr.ittig.xmleges.editor.services.form.disposizioni.attive.DispAttiveForm;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;

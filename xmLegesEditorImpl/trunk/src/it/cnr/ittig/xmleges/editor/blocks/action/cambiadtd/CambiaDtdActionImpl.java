@@ -1,10 +1,25 @@
 package it.cnr.ittig.xmleges.editor.blocks.action.cambiadtd;
 
+import it.cnr.ittig.services.manager.Initializable;
+import it.cnr.ittig.services.manager.Loggable;
+import it.cnr.ittig.services.manager.Logger;
+import it.cnr.ittig.services.manager.ServiceException;
+import it.cnr.ittig.services.manager.ServiceManager;
+import it.cnr.ittig.services.manager.Serviceable;
+import it.cnr.ittig.xmleges.core.services.action.ActionManager;
+import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
+import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
+import it.cnr.ittig.xmleges.core.services.document.DocumentOpenedEvent;
+import it.cnr.ittig.xmleges.core.services.event.EventManager;
+import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
+import it.cnr.ittig.xmleges.core.services.form.Form;
+import it.cnr.ittig.xmleges.core.util.file.UtilFile;
+import it.cnr.ittig.xmleges.editor.services.action.cambiadtd.CambiaDtdAction;
+
 import java.awt.event.ActionEvent;
 import java.io.CharArrayReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.EventObject;
 
 import javax.swing.AbstractAction;
@@ -13,7 +28,6 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
@@ -22,28 +36,9 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-import org.w3c.dom.Document;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
-
-import it.cnr.ittig.services.manager.Initializable;
-import it.cnr.ittig.services.manager.Loggable;
-import it.cnr.ittig.services.manager.Logger;
-import it.cnr.ittig.services.manager.ServiceException;
-import it.cnr.ittig.services.manager.ServiceManager;
-import it.cnr.ittig.services.manager.Serviceable;
-import it.cnr.ittig.xmleges.core.services.action.ActionManager;
-
-import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
-import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
-import it.cnr.ittig.xmleges.core.services.document.DocumentOpenedEvent;
-import it.cnr.ittig.xmleges.core.services.event.EventManager;
-import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
-import it.cnr.ittig.xmleges.core.services.form.Form;
-import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
-import it.cnr.ittig.xmleges.core.util.file.UtilFile;
-import it.cnr.ittig.xmleges.editor.services.action.cambiadtd.CambiaDtdAction;
 
 public class CambiaDtdActionImpl implements CambiaDtdAction, EventManagerListener, Loggable, Serviceable, Initializable, ErrorHandler {
 
@@ -170,7 +165,7 @@ public class CambiaDtdActionImpl implements CambiaDtdAction, EventManagerListene
 				converti.transform(source,dest);
 				db.parse(UtilFile.getFileFromTemp("tempChangeDtdTo.xml"));
 				if (valido) { 
-					test.setText("Si può effettuare il cambio di DTD");
+					test.setText("Si puï¿½ effettuare il cambio di DTD");
 					logger.debug("Test superato");
 				}	
 				else

@@ -1,7 +1,5 @@
 package it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita;
 
-import java.util.Vector;
-
 import it.cnr.ittig.services.manager.Service;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;

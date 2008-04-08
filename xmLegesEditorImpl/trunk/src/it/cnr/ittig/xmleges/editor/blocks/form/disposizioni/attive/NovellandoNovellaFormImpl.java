@@ -8,7 +8,6 @@ import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.form.Form;
@@ -19,8 +18,8 @@ import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.disposizioni.Disposizioni;
-import it.cnr.ittig.xmleges.editor.services.form.disposizioni.attive.NovellandoNovellaForm;
 import it.cnr.ittig.xmleges.editor.services.form.disposizioni.attive.DispAttiveForm;
+import it.cnr.ittig.xmleges.editor.services.form.disposizioni.attive.NovellandoNovellaForm;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 import it.cnr.ittig.xmleges.editor.services.util.urn.NirUtilUrn;
 
@@ -29,14 +28,10 @@ import java.awt.event.ActionListener;
 import java.util.EventObject;
 import java.util.Vector;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JRadioButton;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 import org.w3c.dom.Node;
 

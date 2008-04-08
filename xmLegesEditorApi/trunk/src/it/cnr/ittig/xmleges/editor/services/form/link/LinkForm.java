@@ -1,7 +1,6 @@
 package it.cnr.ittig.xmleges.editor.services.form.link;
 
 import it.cnr.ittig.services.manager.Service;
-import java.net.URL;
 
 import org.w3c.dom.Node;
 

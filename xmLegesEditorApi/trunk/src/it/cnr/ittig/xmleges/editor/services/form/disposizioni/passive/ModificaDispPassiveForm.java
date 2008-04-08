@@ -1,9 +1,8 @@
 package it.cnr.ittig.xmleges.editor.services.form.disposizioni.passive;
 
-import org.w3c.dom.Node;
-
 import it.cnr.ittig.services.manager.Service;
-import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
+
+import org.w3c.dom.Node;
 
 /**
  * Servizio per la visualizzazione della form per la modifica/eliminazione delle disposizioni passive

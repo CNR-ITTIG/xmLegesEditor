@@ -17,7 +17,6 @@ import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
-import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.action.meta.MetaAction;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.MetaCiclodivita;
@@ -209,7 +208,7 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 			try {
 				EditTransaction tr = documentManager.beginEdit();
 				
-				//L'attributo non è mai settato nella form. ELIMINATO
+				//L'attributo non ï¿½ mai settato nella form. ELIMINATO
 				//UtilDom.setAttributeValue(doc.getDocumentElement(), "tipo", descrittoriForm.getTipoPubblicazione());
 				
 				descrittori.setAlias(node, descrittoriForm.getAlias());

@@ -21,7 +21,6 @@ import it.cnr.ittig.xmleges.editor.services.provvedimenti.Provvedimenti;
 import it.cnr.ittig.xmleges.editor.services.util.urn.NirUtilUrn;
 import it.cnr.ittig.xmleges.editor.services.util.urn.Urn;
 
-import java.text.ParseException;
 import java.util.Collections;
 import java.util.Vector;
 

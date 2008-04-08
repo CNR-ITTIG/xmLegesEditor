@@ -1,12 +1,10 @@
 package it.cnr.ittig.xmleges.editor.services.form.evento;
 
-import java.util.Vector;
-
-import javax.swing.JTextField;
-
 import it.cnr.ittig.services.manager.Service;
 import it.cnr.ittig.xmleges.core.services.form.CommonForm;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
+
+import javax.swing.JTextField;
 
 /**
  * Servizio per presentare un oggetto grafico per la visualizzazione e la

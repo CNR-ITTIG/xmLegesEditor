@@ -14,12 +14,11 @@ import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
-import it.cnr.ittig.xmleges.core.util.xml.UtilXml;
+import it.cnr.ittig.xmleges.editor.services.dom.disposizioni.Disposizioni;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
 import it.cnr.ittig.xmleges.editor.services.dom.partizioni.Partizioni;
 import it.cnr.ittig.xmleges.editor.services.dom.rinumerazione.Rinumerazione;
-import it.cnr.ittig.xmleges.editor.services.dom.disposizioni.Disposizioni;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 
@@ -164,14 +163,14 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		 */
 		
 		Node posNode = UtilDom.findDirectChild(n, "dsp:pos");
-		if (posNode == null) {// Non è stato inserito dal template minimale
+		if (posNode == null) {// Non ï¿½ stato inserito dal template minimale
 			posNode = utilRulesManager.getNodeTemplate("dsp:pos");
 			n.appendChild(posNode);
 		}	
 		UtilDom.setAttributeValue(posNode, "xlink:href", pos);
 		
 		Node normaNode = UtilDom.findDirectChild(n, "dsp:norma");
-		if (normaNode == null) {// Non è stato inserito dal template minimale
+		if (normaNode == null) {// Non ï¿½ stato inserito dal template minimale
 			normaNode = utilRulesManager.getNodeTemplate("dsp:norma");
 			n.appendChild(normaNode);
 		}	
@@ -205,7 +204,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		 */
 
 		Node novellandoNode = UtilDom.findDirectChild(n, "dsp:novellando");
-		if (novellandoNode == null) {// Non è stato inserito dal template minimale
+		if (novellandoNode == null) {// Non ï¿½ stato inserito dal template minimale
 			novellandoNode = utilRulesManager.getNodeTemplate("dsp:novellando");
 			n.appendChild(novellandoNode);
 		}	
@@ -225,7 +224,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		 */
 		
 		Node novellaNode = UtilDom.findDirectChild(n, "dsp:novella");
-		if (novellaNode == null) {// Non è stato inserito dal template minimale
+		if (novellaNode == null) {// Non ï¿½ stato inserito dal template minimale
 			novellaNode = utilRulesManager.getNodeTemplate("dsp:novella");
 			n.appendChild(novellaNode);
 		}	
@@ -347,7 +346,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 				selectedText=node.getNodeValue();
 			}
 			else{        // racchiude il testo in uno span e lo riestrae ????
-            // il testo selezionato è una sottoparte del nodo di testo (va creato lo span)				
+            // il testo selezionato ï¿½ una sottoparte del nodo di testo (va creato lo span)				
 				
 				//qui crea uno span dal testo selezionato 
 				span = (Element) utilRulesManager.encloseTextInTag(node, start, end,"h:span","h");
@@ -392,7 +391,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		    return span;
 		
 		}else{   
-			//non è un nodo di testo
+			//non ï¿½ un nodo di testo
 		    NamedNodeMap nnm = node.getAttributes();
 		    // Assegnazione attributi di vigenza al nodo
 			if(vigenza.getEInizioVigore()!=null)
@@ -429,7 +428,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		if (id!=null) 
 			undo = doc.getElementById(id);
 		if (undo==null) {
-			logger.error("fallito undo perchè non trovo id: " + id);
+			logger.error("fallito undo perchï¿½ non trovo id: " + id);
 		}
 		else {
 			EditTransaction tr;
@@ -455,7 +454,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		if (id!=null) 
 			undo = doc.getElementById(id);
 		if (undo==null) {
-			logger.error("fallito undo perchè non trovo id: " + id);
+			logger.error("fallito undo perchï¿½ non trovo id: " + id);
 		}
 		else {
 			EditTransaction tr;
@@ -578,7 +577,7 @@ public VigenzaEntity getVigenza(Node node, int start, int end) {
 	selectedText="";
 	
 	if(!UtilDom.isTextNode(node)){
-		//non c'è selezione di testo sono su nodo generico
+		//non c'ï¿½ selezione di testo sono su nodo generico
 		if(node.getNodeValue()==null){
 			if(UtilDom.getTextNode(node)==null || UtilDom.getTextNode(node).trim().equals(""))
 				//	caso di selzione solo su nodo generici (articolato, formulainiziale, formulafinale ecc..)
@@ -599,7 +598,7 @@ public VigenzaEntity getVigenza(Node node, int start, int end) {
 	   // Recupero contenuto Nodo
 		selectedText=UtilDom.getTextNode(parentNode);
 
-		//se il testo selezionato non coincide con quello dello span di cui è figlio
+		//se il testo selezionato non coincide con quello dello span di cui ï¿½ figlio
 		//si crea una nuova vigenza		
 		if(start!=end && selectedText.substring(start,end).length()<selectedText.length()){
 				selectedText=selectedText.substring(start,end);
@@ -726,7 +725,7 @@ public VigenzaEntity getVigenza(Node node, int start, int end) {
 				if(nnm!=null){
 					EditTransaction tr = documentManager.beginEdit();
 					
-					//se esisteva già l'evento inizio sul dom si aggiorna al nuovo o si elimina se il nuovo è null
+					//se esisteva giï¿½ l'evento inizio sul dom si aggiorna al nuovo o si elimina se il nuovo ï¿½ null
 					if(nnm.getNamedItem("iniziovigore")!=null){
 						if(vig.getEInizioVigore()!=null){
 //							UtilDom.setAttributeValue(node, "iniziovigore", vig.getEInizioVigore().getId());
@@ -736,7 +735,7 @@ public VigenzaEntity getVigenza(Node node, int start, int end) {
 							nnm.removeNamedItem("iniziovigore");	
 
 					}
-	//				se esisteva già l'evento fine sul dom si aggiorna al nuovo o si elimina se il nuovo è null	
+	//				se esisteva giï¿½ l'evento fine sul dom si aggiorna al nuovo o si elimina se il nuovo ï¿½ null	
 					if(nnm.getNamedItem("finevigore")!=null){
 						if(vig.getEFineVigore()!=null){
 //							UtilDom.setAttributeValue(node, "finevigore", vig.getEFineVigore().getId());

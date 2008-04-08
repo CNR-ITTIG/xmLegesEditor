@@ -1,11 +1,5 @@
 package it.cnr.ittig.xmleges.editor.blocks.form.immagini;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.ImageFilter;
-import java.io.File;
-import java.io.IOException;
-
 import it.cnr.ittig.services.manager.Initializable;
 import it.cnr.ittig.services.manager.Loggable;
 import it.cnr.ittig.services.manager.Logger;
@@ -18,17 +12,21 @@ import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
-import it.cnr.ittig.xmleges.editor.services.form.immagini.ImmaginiForm;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.core.util.file.RegexpFileFilter;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
 import it.cnr.ittig.xmleges.editor.services.dom.immagini.Immagini;
+import it.cnr.ittig.xmleges.editor.services.form.immagini.ImmaginiForm;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JTextField;
-import javax.swing.filechooser.FileFilter;
 
 import org.w3c.dom.Node;
 

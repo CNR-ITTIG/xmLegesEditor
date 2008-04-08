@@ -1,10 +1,5 @@
 package it.cnr.ittig.xmleges.editor.blocks.form.rifincompleti;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.util.Vector;
-
 import it.cnr.ittig.services.manager.Configurable;
 import it.cnr.ittig.services.manager.Configuration;
 import it.cnr.ittig.services.manager.ConfigurationException;
@@ -19,16 +14,19 @@ import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.form.Form;
-import it.cnr.ittig.xmleges.core.services.form.FormClosedListener;
 import it.cnr.ittig.xmleges.core.services.form.FormVerifier;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
-import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.rifincompleti.RifIncompleti;
 import it.cnr.ittig.xmleges.editor.services.form.rifincompleti.RifIncompletiForm;
 import it.cnr.ittig.xmleges.editor.services.form.urn.UrnForm;
 import it.cnr.ittig.xmleges.editor.services.util.urn.NirUtilUrn;
 import it.cnr.ittig.xmleges.editor.services.util.urn.Urn;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
