@@ -226,25 +226,41 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 			Collection coll2 = rulesManager.queryAppendable(node);
 			Collection coll3 = rulesManager.queryInsertableBefore(node.getParentNode(), node);
 
-			for (Iterator it = coll1.iterator(); it.hasNext();) {
-				String next = (String) it.next();
-				ret.add(next + ",after");
-			}
+			
+			if(coll1==null)
+				System.err.println("InsertableAfter collection IS NULL");
+			
+			if(coll2==null)
+				System.err.println("Appendable collection IS NULL");
+			
+			if(coll3==null)
+				System.err.println("InsertableBefore collection IS NULL");
+			
+			if(coll1!=null)
+				for (Iterator it = coll1.iterator(); it.hasNext();) {
+					String next = (String) it.next();
+					ret.add(next + ",after");
+				}
 
-			for (Iterator it = coll2.iterator(); it.hasNext();) {
-				String next = (String) it.next();
-				if (ret.indexOf(next + ",after") == -1)
-					ret.add(next + ",append");
-			}
+			if(coll2!=null)
+				for (Iterator it = coll2.iterator(); it.hasNext();) {
+					String next = (String) it.next();
+					if (ret.indexOf(next + ",after") == -1)
+						ret.add(next + ",append");
+				}
 
-			for (Iterator it = coll3.iterator(); it.hasNext();) {
-				String next = (String) it.next();
-				if (ret.indexOf(next + ",after") == -1 && ret.indexOf(next + ",append") == -1)
-					ret.add(next + ",before");
-			}
+			if(coll3!=null)
+				for (Iterator it = coll3.iterator(); it.hasNext();) {
+					String next = (String) it.next();
+					if (ret.indexOf(next + ",after") == -1 && ret.indexOf(next + ",append") == -1)
+						ret.add(next + ",before");
+				}
 
 			return ret;
 		} catch (RulesManagerException ex) {
+			
+			System.err.println("  exception in   UtilRulesManager.getMergedInsertable ");
+			
 		}
 		return null;
 	}
@@ -435,9 +451,9 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 			
 			// FIXME  ho aggiunto come namespace xmlns quello dei ddl; organizzarlo per toglierlo modificando i fogli di stile in modo che non richiedano il namespace settato (come il generico; no match su nir:)
 			
-			templateXml = "<utilrulesmanager xmlns:h=\"http://www.w3.org/HTML/1998/html4\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:dsp=\"http://www.normeinrete.it/nir/disposizioni/1.0\" xmlns:cnr=\"http://www.cnr.it/provvedimenti/2.1\"  xmlns=\"http://www.normeinrete.it/disegnilegge/1.0\" >"
+			templateXml = "<utilrulesmanager xmlns:csfi=\"http://provincia.fi.it/csfiML\" xmlns:h=\"http://www.w3.org/HTML/1998/html4\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:dsp=\"http://www.normeinrete.it/nir/disposizioni/1.0\" xmlns:cnr=\"http://www.cnr.it/provvedimenti/2.1\"  xmlns=\"http://www.normeinrete.it/disegnilegge/1.0\" >"
 					+ rulesManager.getDefaultContent(elem_name) + "</utilrulesmanager>";
-
+	
 			domFactory.setValidating(false); // deactivate validation
 			domFactory.setNamespaceAware(true);
 			Document parsed = (Document) domFactory.newDocumentBuilder().parse(new ByteArrayInputStream(templateXml.getBytes("UTF-8")));
