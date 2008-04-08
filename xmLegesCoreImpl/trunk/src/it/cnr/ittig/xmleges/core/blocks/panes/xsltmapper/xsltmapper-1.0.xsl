@@ -30,22 +30,27 @@ license      : GNU General Public License http://www.gnu.org/licenses/gpl.html
 <!-- ====================================================================== -->
 <!-- ======================================================= TEXT NODE ==== -->
 <!-- ====================================================================== -->
-<xsl:template match="text()"><xsl:element name="span" use-attribute-sets="XsltMapperSetParentClass">&#160;<xsl:value-of select="." /></xsl:element></xsl:template>
+<!-- Spaces before and after real element text are needed to uniquely identify
+     the span element from cursor position. Without the preceding space there
+     is no way to tell textpane to write on the element following caret (even 
+     when the preceding element is not modifiable). Without the ending space 
+     it's difficult to write at the end of the text. -->
+<xsl:template match="text()"><xsl:element name="span" use-attribute-sets="XsltMapperSetClass">&#160;<xsl:value-of select="." />&#160;</xsl:element></xsl:template>
 
 
 <!-- ====================================================================== -->
 <!-- =========================== COMMENT E PROCESSING INSTRUCTION NODE ==== -->
 <!-- ====================================================================== -->
 <xsl:template match="processing-instruction()">
-	<pre color="red">
-	<xsl:element name="span" use-attribute-sets="XsltMapperSetClass"><xsl:attribute name="color">red</xsl:attribute>&#160;<xsl:if test="string-length(.) = 0"><xsl:value-of select="mapper:getTextStringIfEmpty(.)" /></xsl:if><xsl:if test="string-length(.) != 0"><xsl:value-of select="." /></xsl:if></xsl:element>
-	</pre>
+	<font color="red">
+	<xsl:element name="span" use-attribute-sets="XsltMapperSetClass">&#160;<xsl:if test="string-length(.) = 0"><xsl:value-of select="mapper:getTextStringIfEmpty(.)" /></xsl:if><xsl:if test="string-length(.) != 0"><xsl:value-of select="." /></xsl:if>&#160;</xsl:element>
+	</font>
 </xsl:template>
 
 <xsl:template match="comment()">
-	<pre color="green">
-	<xsl:element name="span" use-attribute-sets="XsltMapperSetClass"><xsl:attribute name="color">green</xsl:attribute>&#160;<xsl:if test="string-length(.) = 0"><xsl:value-of select="mapper:getTextStringIfEmpty(.)" /></xsl:if><xsl:if test="string-length(.) != 0"><xsl:value-of select="." /></xsl:if></xsl:element>
-	</pre>
+	<font color="green">
+	<xsl:element name="span" use-attribute-sets="XsltMapperSetClass">&#160;<xsl:if test="string-length(.) = 0"><xsl:value-of select="mapper:getTextStringIfEmpty(.)" /></xsl:if><xsl:if test="string-length(.) != 0"><xsl:value-of select="." /></xsl:if>&#160;</xsl:element>
+	</font>
 </xsl:template>
 
 
@@ -61,8 +66,8 @@ license      : GNU General Public License http://www.gnu.org/licenses/gpl.html
     <xsl:attribute name="id">
         <xsl:value-of select="mapper:getUniqueId(.)"/>
     </xsl:attribute>
-    <xsl:attribute name="style">
-    	<xsl:choose>
+	<xsl:attribute name="style">
+   	    <xsl:choose>
     		<xsl:when test="@status='soppresso'">color:red;  text-decoration:line-through;</xsl:when>
     		<xsl:when test="@status='inserito'">color:green;</xsl:when>
     		<xsl:when test="@style!=''"><xsl:value-of select="@style"/></xsl:when>
@@ -72,23 +77,5 @@ license      : GNU General Public License http://www.gnu.org/licenses/gpl.html
     </xsl:attribute>
 </xsl:attribute-set>
 
-
-<!-- ====================================================================== -->
-<!-- ==================================== XSLT MAPPER SET PARENT CLASS ==== -->
-<!-- ====================================================================== -->
-<xsl:attribute-set name="XsltMapperSetParentClass">
-<!--
-    <xsl:attribute name="class">
-        <xsl:value-of select="translate(name(..),':','_')"/>
-    </xsl:attribute>
--->
-    <xsl:attribute name="id">
-        <xsl:value-of select="mapper:getUniqueId(.)"/>
-    </xsl:attribute>
-    <xsl:attribute name="style">
-	    <xsl:if test="../@status='soppresso'">color:red</xsl:if>
-	    <xsl:if test="../@status='inserito'">color:green</xsl:if>
-    </xsl:attribute>
-</xsl:attribute-set>
 
 </xsl:transform>

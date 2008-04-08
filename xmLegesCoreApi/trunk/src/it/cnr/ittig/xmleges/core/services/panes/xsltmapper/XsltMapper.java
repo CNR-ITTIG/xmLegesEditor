@@ -129,4 +129,14 @@ public interface XsltMapper extends Service {
 	 * @return testo di default
 	 */
 	public String getI18nNodeText(Node node);
+	
+	
+	/**
+	 * Restituisce il testo internazionalizzato da visualizzare per i nodi
+	 * vuoti.
+	 * 
+	 * @param node il nodo di cui ottenere il valore di default
+	 * @return testo di default
+	 */
+	public String getI18nNodeText(String nodeName);
 }

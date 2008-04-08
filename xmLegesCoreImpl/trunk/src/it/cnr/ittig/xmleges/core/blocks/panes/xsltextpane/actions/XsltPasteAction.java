@@ -31,7 +31,6 @@ public class XsltPasteAction extends XsltAction {
 
 	public void actionPerformed(ActionEvent e) {
 		AntiAliasedTextPane pane = (AntiAliasedTextPane) getTextComponent(e);
-
 		if (pane.canPaste())
 			pane.paste();
 	}

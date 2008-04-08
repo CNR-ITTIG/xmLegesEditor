@@ -1,13 +1,13 @@
 package it.cnr.ittig.xmleges.core.blocks.panes.xsltextpane.actions;
 
 import it.cnr.ittig.xmleges.core.blocks.panes.xsltextpane.AntiAliasedTextPane;
+import it.cnr.ittig.xmleges.core.services.panes.xsltpane.KeyTypedAction;
 
 import java.awt.event.ActionEvent;
 
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.Element;
-import javax.swing.text.html.HTMLDocument;
 
 import org.w3c.dom.Node;
 
@@ -37,52 +37,66 @@ public class XsltKeyTypedAction extends XsltAction {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-
 		String actionCommand = e.getActionCommand();
 
 		if (!checkKeys(actionCommand, e.getModifiers()))
 			return;
-
+				
 		AntiAliasedTextPane pane = (AntiAliasedTextPane) getTextComponent(e);
+		KeyTypedAction action = pane.getPane().getKeyTypedAction();
+		
 
-		HTMLDocument doc = (HTMLDocument) pane.getDocument();
+		int caret = pane.getCaretPosition();
+		Element span = pane.getMappedSpan(caret);
+		
+		//DEBUG
+		//System.err.println("XsltKeyTypedAction: writes on caret "+caret);
+		//System.err.println("XsltKeyTypedAction: writes on span "+span.toString());
 
-		Element currElem = doc.getCharacterElement(pane.getCaretPosition());
-		Element[] enclosingSpans = pane.getEnclosingSpans(currElem);
-
-		if (enclosingSpans == null)
+		if (span == null)
 			return;
 
-		// verifica di spazi prima o dopo il cursore. se ci sono  o siamo a inizio tag non inserisce
+		// verifica di spazi prima o dopo il cursore. 
+		// se ci sono  o siamo a inizio tag non inserisce
+		/* FIXME: 
+		 * va fatta verificando di essere all'interno dello stesso elemento
+		 */
 		if (SPACE.equals(actionCommand)) {
-			int caret = pane.getCaretPosition();
-			try {    
-				if (SPACE.equals(pane.getText(caret - 1, 1)) || caret-1 == currElem.getStartOffset())
-					return;
-			} catch (BadLocationException ex) {
-			}
 			try {
-				if (SPACE.equals(pane.getText(caret, 1)) && caret + 1 != currElem.getEndOffset())
-					return;
-			} catch (BadLocationException ex) {
-			}
+				if (SPACE.equals(pane.getText(caret - 1, 1))) return;
+			} catch (BadLocationException ex) { }
+			try {
+				if (SPACE.equals(pane.getText(caret, 1))) return;
+			} catch (BadLocationException ex) {	}
 		}
 
-		Node modNode = pane.getXsltMapper().getDomById(pane.getElementId(currElem));
-
+		Node modNode = pane.getXsltMapper().getDomById(pane.getElementId(span));
 		
-		// FIXME spostare il controllo da xmLegesCore a xmLegesEditor
-		// aggiunto controllo Processing Instruction ?rif readonly
-		if(modNode.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE && modNode.getNodeValue().startsWith("<rif")) {
+		//DEBUG
+		//System.err.println("XsltKeyTypedAction: writes on ID "+pane.getElementId(span));
+		//System.err.println("XsltKeyTypedAction: writes on Node "+modNode.getNodeValue());
+
+		if(modNode == null) return;
+		
+		int start = span.getStartOffset();
+		int end = span.getEndOffset();
+		
+		if(action != null && !action.canKeyTyped(modNode, start, end))     // azione specifica su keyTyped
 			return;
-		}
-		
-		if (pane.getXsltMapper().getParentByGen(modNode) != null
-				|| (modNode.getNodeType() == Node.COMMENT_NODE && getText(e, currElem).equals(pane.getXsltMapper().getI18nNodeText(modNode)))
-				|| (modNode.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE && getText(e, currElem).equals(pane.getXsltMapper().getI18nNodeText(modNode)))) {
-			pane.select(enclosingSpans[0].getEndOffset() + 1, enclosingSpans[1].getStartOffset());
-		}
 
+		// casi in cui va sostituita l'etichetta vuota
+		// 1 scrittura su nodi etichetta generati [generated node]
+		// 2[COMMENT e PI hanno una gestione diversa non avendo figli testo]
+		// 3 gestione etichette testo che compaiono su inserimento (#PCDATA)
+		
+		if (pane.getXsltMapper().getParentByGen(modNode) != null   
+			|| (modNode.getNodeType() == Node.COMMENT_NODE && getText(e, span).equals(pane.getXsltMapper().getI18nNodeText(modNode))) 
+			|| (modNode.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE && getText(e, span).equals(pane.getXsltMapper().getI18nNodeText(modNode)))
+			|| (getText(e, span).equals(pane.getXsltMapper().getI18nNodeText(modNode.getParentNode())))   // testo = etichetta 
+			){		
+				pane.select(start+1, end-1);
+			 } 
+		
 		super.actionPerformed(e);
 	}
 

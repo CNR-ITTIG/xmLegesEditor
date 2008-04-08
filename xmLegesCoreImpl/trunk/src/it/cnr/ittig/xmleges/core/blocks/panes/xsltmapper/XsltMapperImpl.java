@@ -170,7 +170,7 @@ public class XsltMapperImpl implements XsltMapper, EventManagerListener, Loggabl
 		}
 	}
 
-	public String getIdByDom(Node node) {
+	public String getIdByDom(Node node) {		
 		try {
 			return (String) dom2id.get(node);
 		} catch (Exception ex) {
@@ -220,8 +220,6 @@ public class XsltMapperImpl implements XsltMapper, EventManagerListener, Loggabl
 					Node newNode = instance.getGenByParent(node);
 					if (newNode == null) {
 						newNode = instance.documentManager.getDocumentAsDom().createTextNode(instance.getI18nNodeText(node));
-						// newNode =
-						// node.getOwnerDocument().createTextNode(instance.getI18nNodeText(node));
 						instance.mapGen2Parent(newNode, node);
 					}
 					Node parentNode = newNode.getOwnerDocument().createElement(node.getNodeName());
@@ -243,13 +241,18 @@ public class XsltMapperImpl implements XsltMapper, EventManagerListener, Loggabl
 
 	public String getI18nNodeText(Node node) {
 		String nodeName = node.getNodeName();
+		return getI18nNodeText(nodeName);
+	}
+	
+	public String getI18nNodeText(String nodeName) {
 		String ret = (String) i18nNodeName.get(nodeName);
 		if (ret == null) {
-			ret = "[" + i18n.getTextFor("dom." + node.getNodeName()) + "]";
+			ret = "[" + i18n.getTextFor("dom." + nodeName) + "]";
 			i18nNodeName.put(nodeName, ret);
 		}
 		return ret;
 	}
+	
 
 	public void mapGen2Parent(Node newNode, Node parentNode) {
 		synchronized (gen2parent) {

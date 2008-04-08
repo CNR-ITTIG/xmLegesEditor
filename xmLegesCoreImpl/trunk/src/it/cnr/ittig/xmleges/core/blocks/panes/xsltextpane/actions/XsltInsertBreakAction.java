@@ -40,20 +40,14 @@ public class XsltInsertBreakAction extends XsltAction {
 			HTMLDocument doc = (HTMLDocument) pane.getDocument();
 
 			Element currElem = doc.getCharacterElement(pane.getCaretPosition());
-			Element[] enclosingSpans = pane.getEnclosingSpans(currElem);
-			if (enclosingSpans == null)
+			Element enclosingSpan = pane.getMappedSpan(pane.getCaretPosition());
+			if (enclosingSpan == null)
 				return;
 
 			Node modNode = pane.getXsltMapper().getDomById(pane.getElementId(currElem), true);
 			
-			// FIXME spostare il controllo da xmLegesCore a xmLegesEditor
-			// aggiunto controllo Procesing Instruction <?rif> readonly
-			if(modNode.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE && modNode.getNodeValue().startsWith("<rif")) {
-				return;
-			}
-			
-			int relSelStart = pane.getSelectionStart() - enclosingSpans[0].getEndOffset() - 1;
-			int relSelEnd = pane.getSelectionEnd() - enclosingSpans[0].getEndOffset() - 1;
+			int relSelStart = pane.getSelectionStart() - enclosingSpan.getStartOffset() - 1;
+			int relSelEnd = pane.getSelectionEnd() - enclosingSpan.getEndOffset() - 1;
 
 			action.insertBreak(modNode, relSelStart, relSelEnd);
 		}

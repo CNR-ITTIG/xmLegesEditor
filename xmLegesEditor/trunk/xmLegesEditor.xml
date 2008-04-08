@@ -44,6 +44,11 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
  			<appender-ref ref="BugReportAppender" /> 
  			<!--appender-ref ref="FileAppender" /-->
 		</root>
+		
+		<!--logger name=".XsltPane" additivity="false">
+                        <priority value ="debug" />
+                        <appender-ref ref="ConsoleAppender" />
+        </logger-->
         	
 	</log4j:configuration>
 	
@@ -82,7 +87,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
         >
         <configuration>
             <lookandfeel>com.jgoodies.plaf.plastic.Plastic3DLookAndFeel</lookandfeel>
-            <!--lookandfeel>com.jgoodies.looks.plastic.Plastic3DLookAndFeel</lookandfeel-->
         </configuration>
     </component>
     

@@ -45,6 +45,7 @@ public class XsltEditorKit extends HTMLEditorKit {
 
 	/** Crea una nuova istanza di XsltEditorKit */
 	public XsltEditorKit(AntiAliasedTextPane textPane) {
+		super();
 		XsltDeleteNextCharAction xsltDeleteNextCharAction = new XsltDeleteNextCharAction();
 		XsltDeletePrevCharAction xsltDeletePrevCharAction = new XsltDeletePrevCharAction();
 		XsltKeyTypedAction xsltKeyTypedAction = new XsltKeyTypedAction();

@@ -15,6 +15,7 @@ import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.frame.Frame;
 import it.cnr.ittig.xmleges.core.services.panes.xsltpane.DeleteNextPrevAction;
 import it.cnr.ittig.xmleges.core.services.panes.xsltpane.InsertBreakAction;
+import it.cnr.ittig.xmleges.core.services.panes.xsltpane.KeyTypedAction;
 import it.cnr.ittig.xmleges.core.services.panes.xsltpane.XsltPane;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
@@ -62,7 +63,7 @@ import org.w3c.dom.Node;
  * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */
-public class NirXsltPanesImpl implements NirXsltPanes, Loggable, Serviceable, Configurable, Initializable, InsertBreakAction, DeleteNextPrevAction {
+public class NirXsltPanesImpl implements NirXsltPanes, Loggable, Serviceable, Configurable, Initializable, InsertBreakAction, DeleteNextPrevAction, KeyTypedAction {
 	Logger logger;
 
 	Frame frame;
@@ -146,6 +147,7 @@ public class NirXsltPanesImpl implements NirXsltPanes, Loggable, Serviceable, Co
 					xsltPane.set(xslts.getXslt(xslt), null, null);
 				xsltPane.setInsertBreakAction(this);
 				xsltPane.setDeleteNextPrevAction(this);
+				xsltPane.setKeyTypedAction(this);
 				frame.addPane(xsltPane, false);
 				logger.debug("Adding '" + name + "' to frame OK");
 			} catch (ConfigurationException ex) {
@@ -164,8 +166,12 @@ public class NirXsltPanesImpl implements NirXsltPanes, Loggable, Serviceable, Co
 		String nodeName = node.getNodeName();
 		Node container = nirUtilDom.getParentContainer(node);
 		String contName = container.getNodeName();
+		
+		
 
-		if ("comma".equals(contName) || "el".equals(contName) || "en".equals(contName) || "ep".equals(contName)) {
+		if(node.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE && node.getNodeValue().startsWith("<rif")) {   // processing instruction di tipo rif (rif incompleti)
+			return;
+		}else if ("comma".equals(contName) || "el".equals(contName) || "en".equals(contName) || "ep".equals(contName)) {
 			String contained = node.getNodeValue();
 			Node[] nexts = UtilDom.getAllNextSibling(node);
 			int azione = partizioni.canInsertNuovaPartizione(node, container);
@@ -252,7 +258,18 @@ public class NirXsltPanesImpl implements NirXsltPanes, Loggable, Serviceable, Co
 	}
 
 	// ////////////////////////////////////////// DeleteNextPrevAction Interface
+	
+	public boolean canBackSpaceOnStart(Node curr, Node prev) {
+		
+		if(curr.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE && curr.getNodeValue().startsWith("<rif")) {
+			return false;
+		}
+		return true;
+	}
+	
+	
 	public int backspaceOnStart(Node curr, Node prev) {
+		
 		EditTransaction tr = null;
 		try {
 			Node currPar = curr.getParentNode();
@@ -274,6 +291,16 @@ public class NirXsltPanesImpl implements NirXsltPanes, Loggable, Serviceable, Co
 			documentManager.rollbackEdit(tr);
 		}
 		return -1;
+	}
+	
+	
+	public boolean canDeleteOnEnd(Node curr, Node next) {
+		
+		if(curr.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE && curr.getNodeValue().startsWith("<rif")) {
+			return false;
+		}
+		return true;
+		
 	}
 
 	public int deleteOnEnd(Node curr, Node next) {
@@ -298,4 +325,17 @@ public class NirXsltPanesImpl implements NirXsltPanes, Loggable, Serviceable, Co
 		}
 		return -1;
 	}
+
+	
+	
+	/**
+	 * previene l'editing di processing instruction di tipo rif (tiferimenti incompleti)
+	 */
+	public boolean canKeyTyped(Node node, int start, int end) {    
+		if(node.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE && node.getNodeValue().startsWith("<rif")) {
+			return false;
+		}
+		return true;
+	}
+
 }

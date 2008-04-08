@@ -6,6 +6,8 @@
 	<classpathentry kind="lib" path="lib/dom4j-1.5.2.jar"/>
 	<classpathentry kind="lib" path="lib/jaxen-1.1-beta-4.jar"/>
 	<classpathentry kind="lib" path="lib/xercesImpl-2.7.1.jar"/>
+	<classpathentry kind="lib" path="lib/xalan.jar"/>
+	<classpathentry kind="lib" path="lib/serializer.jar"/>
 	<classpathentry kind="lib" path="lib/xml-apis-2.7.1.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-1.2.9.jar"/>
 	<classpathentry kind="lib" path="lib/activation.jar"/>

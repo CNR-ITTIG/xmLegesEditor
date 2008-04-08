@@ -16,8 +16,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 <xsl:transform  xmlns:xsl   = "http://www.w3.org/1999/XSL/Transform"
                 xmlns:xlink = "http://www.w3.org/1999/xlink"
-                xmlns:h     = "http://www.w3.org/HTML/1998/html4"
-                xmlns       = "http://www.normeinrete.it/nir/2.2"
+                xmlns       = "http://www.w3.org/HTML/1998/html4"
+                xmlns:nir   = "http://www.normeinrete.it/nir/2.2"
                 xmlns:mapper= "xalan://it.cnr.ittig.xmleges.core.blocks.panes.xsltmapper.XsltMapperImpl"
                 version     = "1.0"
 >
@@ -453,18 +453,15 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <!-- riferimenti incompleti -->
 
 <xsl:template match="processing-instruction('rif')">
-	  <font color="FF3300"><u>
-	  <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">&#160;
-		<xsl:if test="string-length(.) = 0">
-			<xsl:value-of select="mapper:getTextStringIfEmpty(.)" />
-		</xsl:if>
-		<xsl:if test="string-length(.) != 0">    
-			<xsl:value-of select="substring-before(substring-after(.,'&gt;'),'&lt;')" />
-		</xsl:if>
-	 </xsl:element>
-	 </u></font>
+	<xsl:variable name="content">
+		<xsl:value-of select="substring-before(substring-after(.,'&gt;'),'&lt;')"/>
+	</xsl:variable>
+	<font color="red">
+		<u><xsl:element name="span" use-attribute-sets="XsltMapperSetClass">&#160;<xsl:if test="string-length($content) = 0"><xsl:value-of select="mapper:getTextStringIfEmpty(.)"/></xsl:if><xsl:if test="string-length(.) != 0"><xsl:value-of select="$content"/></xsl:if>&#160;</xsl:element></u>
+	</font>
 </xsl:template>
-
+		
+		
 										
 <xsl:template name="vigenza">
 	<xsl:variable name="id">

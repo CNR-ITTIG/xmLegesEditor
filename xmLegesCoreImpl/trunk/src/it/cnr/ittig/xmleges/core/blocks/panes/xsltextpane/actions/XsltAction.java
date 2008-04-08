@@ -86,41 +86,36 @@ public class XsltAction extends TextAction {
 		return getValue(Action.NAME).toString();
 	}
 	
-	protected String getText(ActionEvent evt, Element e)
+	protected String getText(ActionEvent evt, Element span)
 	{
+		if(!AntiAliasedTextPane.isMappedElement(span)) return null;    // qui sarebbe a dire isMappedSpan() ma ci si arriva sicuramente con uno span per il NavigationFilter
 		AntiAliasedTextPane pane = (AntiAliasedTextPane)getTextComponent(evt);
+		pane.getPane().getLogger().debug("XsltAction.getText()");
 		String retVal = null;
-		Element[] containingSpans = pane.getEnclosingSpans(e);
-		int start = e.getStartOffset() + 1, end = e.getEndOffset();
-		if (containingSpans != null)
+		int start = span.getStartOffset();
+		int end = span.getEndOffset();
+		try	{
+			retVal = pane.getText(start+1, end - start-2);
+		} catch (BadLocationException ble) 
 		{
-			start = containingSpans[0].getEndOffset() + 1;
-			end = containingSpans[1].getStartOffset();
+			ble.printStackTrace();
 		}
-		try
-		{
-			retVal = pane.getText(start, end - start).trim();
-		}
-		catch (BadLocationException ble) {}
-		
 		return retVal;
 	}
 
-	public void insertDefaultText(AntiAliasedTextPane pane, Element currElem, HTMLDocument doc)
+	public void insertDefaultText(AntiAliasedTextPane pane, Element span, HTMLDocument doc)
 	{
-		Element[] containingSpans = pane.getEnclosingSpans(currElem);
-		int start = currElem.getStartOffset() + 1;
-		if (containingSpans != null)
-		{
-			start = containingSpans[0].getEndOffset() + 1;
-			if (!currElem.getName().equals("content"))
-				currElem = doc.getCharacterElement(start);
-		}
+		if(!AntiAliasedTextPane.isMappedElement(span)) return;
+		pane.getPane().getLogger().debug("XsltAction.insertDefaultText(" + pane.getElementId(span) +")");
+		int start = span.getStartOffset();
     	try
 		{
-    		doc.insertString(start, pane.getDefaultText(currElem), currElem.getAttributes());
-		} catch (BadLocationException ble) {}
-		catch (NullPointerException npe) {}
-	
+    		// skip starting space
+    		doc.insertString(start+1, pane.getDefaultText(span), span.getAttributes());
+		} 
+    	catch (BadLocationException ble) 
+		{
+			ble.printStackTrace();
+		}
 	}
 }

@@ -118,7 +118,7 @@ public class FileNewActionImpl extends AbstractAction implements FileNewAction, 
 				if (fileOpenAction.doOpen(templatefile.getAbsolutePath(), false)) {
 					dm.setNew(true);
 					
-					//imposto la Rinumerazione ATTIVA (se non lo è già)
+					//imposto la Rinumerazione ATTIVA (se non lo ï¿½ giï¿½)
 					if (!rinumerazione.isRinumerazione())
 						rinumerazioneAction.doSetRinumerazione(true);
 					

@@ -1,7 +1,5 @@
 package it.cnr.ittig.xmleges.core.blocks.panes.xsltextpane;
 
-import java.awt.Rectangle;
-
 import javax.swing.SwingConstants;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Element;
@@ -23,37 +21,17 @@ public class NavigationFilter extends javax.swing.text.NavigationFilter {
 	}
 
 	public int getNextVisualPositionFrom(JTextComponent text, int pos, Bias bias, int direction, Bias[] biasRet) throws BadLocationException {
-		if (direction == SwingConstants.EAST) {
-			int maxLen = textPane.getHTMLDocument().getDefaultRootElement().getEndOffset();
-			for (int i = pos + 1; i < maxLen; i++) {
-				Element newElem = textPane.getHTMLDocument().getCharacterElement(i - 1);
-				if (newElem.getName().equals("content") && textPane.getEnclosingSpans(newElem) != null) {
+		if (direction == SwingConstants.EAST || direction == SwingConstants.WEST) {
+			int i = pos, prev = pos;
+			while((i = super.getNextVisualPositionFrom(text, i, bias, direction, biasRet)) != prev) {
+				Element span = textPane.getMappedSpan(i);
+				// posizione consentita se dentro ad uno span o alla sua fine.
+				if(span != null && i != span.getStartOffset() && i != span.getEndOffset())
 					return i;
-				}
+				prev = i;
 			}
-			return pos;
-		} else if (direction == SwingConstants.WEST) {
-			for (int i = pos - 1; i >= 0; i--) {
-				Element newElem = textPane.getHTMLDocument().getCharacterElement(i - 1);
-				if (newElem.getName().equals("content") && textPane.getEnclosingSpans(newElem) != null) {
-					return i;
-				}
-			}
-			return pos;
-		} else if (direction == SwingConstants.SOUTH) {
-			int newPos = pos, newEast, newWest, oldPos;
-			double newPosLine, eastLine, westLine;
-			do {
-				oldPos = newPos;
-				newPos = super.getNextVisualPositionFrom(text, newPos, bias, direction, biasRet);
-				newEast = getNextVisualPositionFrom(text, newPos, bias, SwingConstants.EAST, new Position.Bias[1]);
-				newWest = getNextVisualPositionFrom(text, newPos, bias, SwingConstants.WEST, new Position.Bias[1]);
-				newPosLine = textPane.modelToView(newPos).getY();
-				eastLine = textPane.modelToView(newEast).getY();
-				westLine = textPane.modelToView(newWest).getY();
-			} while (oldPos != newPos && newPosLine != eastLine && newPosLine != westLine);
-			return newPos;
-		} else if (direction == SwingConstants.NORTH) {
+			return i;
+		} else if (direction == SwingConstants.SOUTH || direction == SwingConstants.NORTH) {
 			int newPos = pos, newEast, newWest, oldPos;
 			double newPosLine, eastLine, westLine;
 			do {
@@ -67,86 +45,83 @@ public class NavigationFilter extends javax.swing.text.NavigationFilter {
 			} while (oldPos != newPos && newPosLine != eastLine && newPosLine != westLine);
 			return newPos;
 		}
-
 		return super.getNextVisualPositionFrom(text, pos, bias, direction, biasRet);
 	}
 
 	public void moveDot(FilterBypass fb, int dot, Bias bias) {
-		Element newElem = textPane.getHTMLDocument().getCharacterElement(dot);
-		if (textPane.getEnclosingSpans(newElem) != null && !newElem.equals(textPane.getStartSpan(newElem))
-				&& dot != (textPane.getStartSpan(newElem).getEndOffset()))
+		// se l'elemento si trova all'interno di uno span mappato, muoviti,
+		// altrimenti ignora l'azione.
+		Element span = textPane.getMappedSpan(dot);
+		if(span != null && dot != span.getStartOffset())
 			super.moveDot(fb, dot, bias);
 	}
 
+	
+	
 	public void setDot(FilterBypass fb, int dot, Bias bias) {
+		// Debugging
+	    // System.err.println(textPane.getPane().getName()+"  setDot - DOT = "+dot );
 		try {
 			Element newElem = textPane.getHTMLDocument().getCharacterElement(dot);
 			
-			Object attr = newElem.getAttributes().getAttribute(HTML.Tag.A);
-			if (attr != null) {
-				textPane.href = attr.toString().trim();
-				return;
+			if(newElem != null) {
+				Object attr = newElem.getAttributes().getAttribute(HTML.Tag.A);
+				if (attr != null) {
+					textPane.href = attr.toString().trim();
+					return;
+				}
+			}
+
+			Element span = textPane.getMappedSpan(dot);
+		
+			/*
+			 * 	Debugging
+			System.err.println("currElement: " + (newElem !=null ? newElem.getName() : null));
+			System.err.println("Count: " + newElem.getElementCount());
+			AttributeSet as  = newElem.getAttributes();
+			java.util.Enumeration ae = as.getAttributeNames();
+			while(ae.hasMoreElements())
+			{
+				Object key = ae.nextElement();
+				System.err.println("AsName: (" + key.getClass() + ")" + key + " = (" + as.getAttribute(key).getClass() + ")" + as.getAttribute(key));
 			}
 			
-// OLD			
-//			Enumeration en = newElem.getAttributes().getAttributeNames();
-//			while (en.hasMoreElements()) {
-//				Object k = en.nextElement();
-//				if ("a".equalsIgnoreCase(k.toString())) {
-//					String[] browsers = xsltPaneImpl.getBrowsers();
-//					for (int i = 0; i < browsers.length; i++)
-//						try {
-//							String href = newElem.getAttributes().getAttribute(k).toString();
-//							String cmd = browsers[i] + " " + href.substring(5);
-//							Runtime.getRuntime().exec(cmd);
-//							break;
-//						} catch (Exception ex) {
-//						}
-//				}
-//			}
-			Element[] enclosingSpans = textPane.getEnclosingSpans(newElem);
-			boolean isEnclosed = enclosingSpans != null
-					&& ((newElem.getName().equals("content") && dot != enclosingSpans[0].getEndOffset()) || dot == enclosingSpans[1].getStartOffset());
-
-			if (isEnclosed)
+			System.err.println("isMapped " + textPane.isMapped(newElem) + " isSpan " + textPane.isSpan(newElem));
+			System.err.println("Posizione dot: " + dot + " " + (span !=null ? span.getName() : null));
+			 */
+			
+			if(span != null && dot != span.getStartOffset() && dot != span.getEndOffset()){
+				// Quando l'utente clicca dentro uno span mappato, posiziona il cursore
 				super.setDot(fb, dot, bias);
+			}
 			else {
+				// Quando l'utente clicca fuori da uno span ricerca la piu' vicina posizione ammissibile
+			
 				try {
 					int east, west;
 					east = getNextVisualPositionFrom(textPane, dot, bias, SwingConstants.EAST, new Position.Bias[1]);
 					west = getNextVisualPositionFrom(textPane, dot, bias, SwingConstants.WEST, new Position.Bias[1]);
-
-					Rectangle rectPos = textPane.modelToView(dot);
-					Rectangle rectEast = textPane.modelToView(east);
-					Rectangle rectWest = textPane.modelToView(west);
-
-					double eastRectDiff = Math.abs(rectPos.getY() - rectEast.getY());
-					double westRectDiff = Math.abs(rectPos.getY() - rectWest.getY());
-
-					int eastDiff = Math.abs(dot - east);
-					int westDiff = Math.abs(dot - west);
-					if (east != west) {
-						int newDest;
-						if (eastRectDiff < westRectDiff) {
-							newDest = eastDiff == 0 ? west : east;
-						} else if (eastRectDiff > westRectDiff) {
-							newDest = westDiff == 0 ? east : west;
-						} else {
-							if (eastDiff <= westDiff) {
-								newDest = eastDiff == 0 ? west : east;
-							} else {
-								newDest = westDiff == 0 ? east : west;
-							}
-						}
-						super.setDot(fb, newDest, bias);
-					}
+												
+					int newDest = 0;
+					
+					if(east != dot && west != dot){    
+						if (Math.abs(west-dot) <= Math.abs(east-dot))
+							newDest = west;
+						else
+							newDest = east;
+					}else{								// elimina posizioni inammissibili; se siamo qui dot non lo era !
+						newDest = east==dot?west:east;
+					}	
+					
+					super.setDot(fb, newDest, bias);
+					
 				}
-
 				catch (BadLocationException ble) {
+					ble.printStackTrace();
 				}
 			}
 		} catch (Throwable tr) {
-
+			tr.printStackTrace();
 		}
 	}
 }

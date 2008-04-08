@@ -30,11 +30,11 @@ import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.panes.xsltmapper.XsltMapper;
 import it.cnr.ittig.xmleges.core.services.panes.xsltpane.DeleteNextPrevAction;
 import it.cnr.ittig.xmleges.core.services.panes.xsltpane.InsertBreakAction;
+import it.cnr.ittig.xmleges.core.services.panes.xsltpane.KeyTypedAction;
 import it.cnr.ittig.xmleges.core.services.panes.xsltpane.XsltPane;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.spellcheck.dom.DomSpellCheck;
-//import it.cnr.ittig.xmleges.core.services.spellcheck.dom.DomSpellCheckEvent;
 import it.cnr.ittig.xmleges.core.services.threads.ThreadManager;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
@@ -109,6 +109,8 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 	AntiAliasedTextPane textPane;
 
 	InsertBreakAction insertBreakAction = null;
+	
+	KeyTypedAction keyTypedAction = null;
 
 	DeleteNextPrevAction deleteNextPrevAction = null;
 
@@ -186,7 +188,6 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 		panel.add(new JScrollPane(textPane), BorderLayout.CENTER);
 		xsltFindIterator = new XsltFindIterator(this);
 		popupMenu = bars.getPopup(false);
-		// xsltTextPane.addMouseListener(new XsltPaneMouseListener());
 		panel.setDoubleBuffered(true);
 
 		Timer timer = new Timer();
@@ -198,19 +199,23 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 
 	// ////////////////////////////////////////// EventManagerListener Interface
 	public void manageEvent(EventObject event) {
+		
 		if (event instanceof DocumentChangedEvent) {
 			if (!textPane.isShowing()) {
-				// TODO dividere in updatedDom e updatedSelection
 				updated = false;
 				return;
 			}
+			
 			if (!updated) {
 				updateTextPane();
 				return;
 			}
+			
 			DocumentChangedEvent e = (DocumentChangedEvent) event;
 			boolean all = false;
-			DomEdit[] edits = getEditsToUpdate(e.getTransaction().getEdits(), e.isUndo());
+			DomEdit[] edits = getEditsToUpdate(e.getTransaction().getEdits(), e.isUndo());	
+			boolean globalUpdateAllowed = !isTextualUpdate(edits);
+			
 			Vector updatedNode = new Vector();
 			for (int i = 0; i < edits.length; i++) {
 				if (logger.isDebugEnabled())
@@ -220,14 +225,19 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 					Node u = textPane.update(edits[i].getNode());
 					if (u == null) {
 					    if(logger.isDebugEnabled())
-					    	logger.debug("return null updating "+edits[i].toString()+" starting global update");
+					    	logger.debug("return null updating "+edits[i].getNode().getNodeName()+" starting global update IN "+this.getName());
 						all = true;
 						break;
-					} else
+					} else{
 						updatedNode.addElement(u);
+					}
 				}
 			}
 			updated = !all;
+			
+			if(!globalUpdateAllowed){ // prevents global update of panes if not strictly necessary [modified text not visible on the active pane]
+				updated = true;
+			}
 			
 			if (!updated){ 
 				updateTextPane();
@@ -243,7 +253,6 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 			
 		} else if (event instanceof SelectionChangedEvent) {
 			if (!textPane.isShowing()) {
-				// TODO dividere in updatedDom e updatedSelection
 				updated = false;
 				return;
 			}
@@ -258,9 +267,8 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 			} else if (e.isTextSelectedChanged()) {
 				textPane.selectNode(new Node[] { e.getActiveNode() });
 				Element currElem = textPane.getHTMLDocument().getElement(xsltMapper.getIdByDom(e.getActiveNode()));
-				Element[] enclosingSpans = textPane.getEnclosingSpans(currElem);
-				if (enclosingSpans != null) {
-					int startOff = enclosingSpans[0].getStartOffset() + 2;
+				if (textPane.isMappedElement(currElem)) {
+					int startOff = currElem.getStartOffset() + 1;
 					textPane.selectText(startOff + e.getTextSelectionStart(), startOff + e.getTextSelectionEnd());
 				}
 			}
@@ -273,10 +281,9 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 				logger.debug("DOM=" + UtilDom.domToString(e.getDocument()));
 			textPane.setDom(e.getDocument());
 			
-
 			// inserisco il parametro del BaseURL
 			Hashtable hashtable = new Hashtable(1);
-			hashtable.put("base", "file:///"+UtilFile.getFolderPath(documentManager.getSourceName()));			
+			hashtable.put("base", "file:///"+UtilFile.getFolderPath(documentManager.getSourceName()));
 			textPane.setParameter(hashtable);
 			
 			
@@ -294,13 +301,23 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 			hashtable.put("base", "file:///"+UtilFile.getFolderPath(documentManager.getSourceName()));			
 			textPane.setParameter(hashtable);
 
-		} //	else if (event instanceof DomSpellCheckEvent) {
-		  //	// FIXME Tommaso: aggiunto io; non so se va bene qui e non funziona (elem null)
-		  //	textPane.viewDomSpellCheckEvent((DomSpellCheckEvent)event);
-		  //	//updateTextPane();
-		  //	}
+		} 
+		//	else if (event instanceof DomSpellCheckEvent) {
+		//	textPane.viewDomSpellCheckEvent((DomSpellCheckEvent)event);
+		//	//updateTextPane();
+		//	}
 	}
 
+	
+	private boolean isTextualUpdate(DomEdit[] edits){
+		boolean isTextualUpdate = true;
+		for (int i = 0; i < edits.length; i++) {
+			if(!UtilDom.isTextNode(edits[i].getNode()))
+					return false;
+		}
+		return isTextualUpdate;
+	}
+	
 	// ////////////////////////////////////////////////////// XsltPane Interface
 	public void set(File xslt, File css, Hashtable param) {
 		textPane.setXslt(xslt);
@@ -401,12 +418,17 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 	public void setDeleteNextPrevAction(DeleteNextPrevAction deleteNextPrevAction) {
 		this.deleteNextPrevAction = deleteNextPrevAction;
 	}
+	
+	public void setKeyTypedAction(KeyTypedAction keyTypedAction){
+		this.keyTypedAction = keyTypedAction;
+	}
 
 	public void reload() {
 		textPane.update();
 		textPane.selectNode(new Node[] { selectionManager.getActiveNode() });
 	}
 
+	/* Update text of a whole dom node. mm. */
 	public synchronized void updateNode(Node node, String text) {
 		logger.debug("UPDATING NODE BEGIN");
 		
@@ -422,9 +444,7 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 			if (parentNode != null) // nodo testo creato dall'xslt
 			{
 				parentNode.appendChild(node); // collegalo al suo padre
-				xsltMapper.removeGen2Parent(node); // rimuovili dalle tabelle
-				// di
-				// mapping
+				xsltMapper.removeGen2Parent(node); // rimuovili dalle tabelle di mapping
 				fireActiveNodeChanged(node);
 			}
 
@@ -435,7 +455,7 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 					parentNode = node.getParentNode();
 					xsltMapper.mapGen2Parent(node, parentNode);
 					parentNode.removeChild(node);
-					node.setNodeValue(xsltMapper.getI18nNodeText(parentNode));
+					node.setNodeValue(xsltMapper.getI18nNodeText(parentNode));  
 					fireActiveNodeChanged(parentNode);
 				}
 			} else if (node!=null && node.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE) {
@@ -486,7 +506,7 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 	}
 
 	public synchronized void fireSelectionChanged(Node node, int start, int end) {
-		logger.debug("new selection:" + start + "," + end);
+		logger.debug("fired Selection Changed: new selection:" + start + "," + end);
 		selectionManager.setSelectedText(this, node, start, end);
 	}
 
@@ -507,7 +527,7 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 		return this.rulesManager;
 	}
 
-	Logger getLogger() {
+	public Logger getLogger() {
 		return this.logger;
 	}
 
@@ -533,6 +553,10 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 
 	public DeleteNextPrevAction getDeleteNextPrevAction() {
 		return deleteNextPrevAction;
+	}
+	
+	public KeyTypedAction getKeyTypedAction(){
+		return keyTypedAction;
 	}
 
 	public AntiAliasedTextPane getTextPane() {
@@ -565,8 +589,9 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 		public void run() {
 			if (textPane.isShowing() && !updated){
 				updateTextPane();
-				// FIXME Tommaso: l'ho aggiunto io perche' partiva il thread di aggiornamento del pannello e perdeva il nodo (?)
-				textPane.selectNode(new Node[] { selectionManager.getActiveNode() });
+				// FIXME Tommaso: l'ho aggiunto io perche' partiva il thread 
+				// di aggiornamento del pannello e perdeva il nodo (?)
+				// textPane.selectNode(new Node[] { selectionManager.getActiveNode() });
 			}
 		}
 

@@ -83,6 +83,15 @@ public interface XsltPane extends Service, Pane {
 	 */
 	public void setName(String name);
 
+	
+	/**
+	 * Imposta l'azione da compiere sulla pressione di un tasto.
+	 * 
+	 * @param  keyTypedAction azione
+	 */
+	public void setKeyTypedAction(KeyTypedAction keyTypedAction);
+
+	
 	/**
 	 * Imposta l'azione da compiere sulla pressione del tasto invio.
 	 * 

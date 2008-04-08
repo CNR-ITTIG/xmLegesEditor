@@ -20,6 +20,17 @@ import org.w3c.dom.Node;
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>,
  */
 public interface DeleteNextPrevAction {
+	
+	/**
+	 * Metodo invocato sulla pressione del tasto <code>backspace</code> quando
+	 * il cursore si trova all'inizio del testo.
+	 * 
+	 * @param curr nodo corrente
+	 * @param prev node precedente visualizzato
+	 * @return <code>true</code> se l'azione e' abilitata
+	 */
+	public boolean canBackSpaceOnStart(Node curr, Node prev);
+	
 	/**
 	 * Metodo invocato sulla pressione del tasto <code>backspace</code> quando
 	 * il cursore si trova all'inizio del testo.
@@ -30,6 +41,17 @@ public interface DeleteNextPrevAction {
 	 */
 	public int backspaceOnStart(Node curr, Node prev);
 
+	
+	/**
+	 * Metodo invocato sulla pressione del tasto <code>delete</code> quando il
+	 * cursore si trova alla fine del testo.
+	 * 
+	 * @param curr nodo corrente
+	 * @param next node successivo visualizzato
+	 * @return <code>true</code> se l'azione e' abilitata
+	 */
+	public boolean canDeleteOnEnd(Node curr, Node next);
+	
 	/**
 	 * Metodo invocato sulla pressione del tasto <code>delete</code> quando il
 	 * cursore si trova alla fine del testo.
