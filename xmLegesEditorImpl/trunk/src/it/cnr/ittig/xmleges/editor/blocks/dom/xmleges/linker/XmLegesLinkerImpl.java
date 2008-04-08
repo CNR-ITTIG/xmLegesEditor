@@ -7,8 +7,8 @@ import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.frame.Frame;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.core.util.xml.UtilXml;
 import it.cnr.ittig.xmleges.editor.services.dom.rinumerazione.Rinumerazione;
@@ -40,7 +40,7 @@ import org.w3c.dom.NodeList;
 public class XmLegesLinkerImpl implements XmLegesLinker, Loggable, Serviceable {
 	Logger logger;
 
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 
 	DocumentManager documentManager;
 
@@ -59,7 +59,7 @@ public class XmLegesLinkerImpl implements XmLegesLinker, Loggable, Serviceable {
 
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		rinumerazione = (Rinumerazione) serviceManager.lookup(Rinumerazione.class);

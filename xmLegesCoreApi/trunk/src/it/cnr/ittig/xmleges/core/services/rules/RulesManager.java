@@ -19,8 +19,33 @@ import org.w3c.dom.Node;
  */
 public interface RulesManager extends Service {
 
+	/**
+	 * 
+	 * @param extension
+	 */
+	public void createRulesManager(String extension);
+	
+	/**
+	 * 
+	 *
+	 */
 	public void clear();
+	
+	/**
+	 * 
+	 * @param node
+	 * @param attributeName
+	 * @return
+	 */
+	public boolean assessAttribute(Node node, String attributeName);
 
+	/**
+	 * 
+	 * @param node
+	 * @return
+	 */
+	public boolean assess(Node node);
+	
 	/**
 	 * @param filename
 	 */
@@ -57,6 +82,9 @@ public interface RulesManager extends Service {
 	 * @return
 	 */
 	public String getDefaultContent(String elem_name, String alternative) throws RulesManagerException;
+	
+	
+	public String getDefaultContent(String elem_name, Vector nodes) throws RulesManagerException;
 
 	/**
 	 * Restituisce i possibili contenuti alternativi di un elemento

@@ -8,8 +8,8 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.tabelle.Tabelle;
 
@@ -51,7 +51,7 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 
 	Node tabella;
 
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 
 	DocumentManager documentManager;
 
@@ -62,7 +62,7 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 	}
 
@@ -70,21 +70,21 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 	public int canInsertTable(Node node) {
 		try {
 			if (node != null) {
-				if (dtdRulesManager.queryAppendable(node).contains("h:table")) 
+				if (rulesManager.queryAppendable(node).contains("h:table")) 
 					return 1;
-				if (dtdRulesManager.queryPrependable(node).contains("h:table")) 
+				if (rulesManager.queryPrependable(node).contains("h:table")) 
 				    return 2;
 				
 				if (node.getParentNode() != null) {
-					if(dtdRulesManager.queryInsertableInside(node.getParentNode(), node).contains("h:table"))
+					if(rulesManager.queryInsertableInside(node.getParentNode(), node).contains("h:table"))
 						return 3;
-					if (dtdRulesManager.queryInsertableAfter(node.getParentNode(), node).contains("h:table")) 
+					if (rulesManager.queryInsertableAfter(node.getParentNode(), node).contains("h:table")) 
 						return 4;
-					if (dtdRulesManager.queryInsertableBefore(node.getParentNode(), node).contains("h:table")) 
+					if (rulesManager.queryInsertableBefore(node.getParentNode(), node).contains("h:table")) 
 						return 5;
 				}
 			}
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 			return 0;
 		}
 		return 0;
@@ -94,10 +94,10 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 	public boolean canDeleteTable(Node node) {
 		try {
 			Node nodoTab = UtilDom.findParentByName(node, "h:table");
-			if (nodoTab != null && nodoTab.getParentNode() != null && dtdRulesManager.queryCanDelete(nodoTab.getParentNode(), nodoTab)) {
+			if (nodoTab != null && nodoTab.getParentNode() != null && rulesManager.queryCanDelete(nodoTab.getParentNode(), nodoTab)) {
 				return true;
 			}
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 			return false;
 		}
 		return false;
@@ -111,14 +111,14 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 				if (nodoRiga.getParentNode() != null) {
 					Node parent = nodoRiga.getParentNode();
 					if (parent.getNodeName().equals("h:tbody")) {
-						Collection coll = dtdRulesManager.queryInsertableBefore(nodoRiga.getParentNode(), nodoRiga);
+						Collection coll = rulesManager.queryInsertableBefore(nodoRiga.getParentNode(), nodoRiga);
 						if (nodoRiga != null && parent != null && coll.contains("h:tr")) {
 							return true;
 						}
 					}
 				}
 			}
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 			return false;
 		}
 		return false;
@@ -132,14 +132,14 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 				if (nodoRiga.getParentNode() != null) {
 					Node parent = nodoRiga.getParentNode();
 					if (parent.getNodeName().equals("h:tbody")) {
-						Collection coll = dtdRulesManager.queryInsertableAfter(parent, nodoRiga);
+						Collection coll = rulesManager.queryInsertableAfter(parent, nodoRiga);
 						if (nodoRiga != null && coll.contains("h:tr")) {
 							return true;
 						}
 					}
 				}
 			}
-		} catch (DtdRulesManagerException ex) {	
+		} catch (RulesManagerException ex) {	
 			return false;
 		}
 		return false;
@@ -163,9 +163,9 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 					return true;
 				else {
 					try {
-						if (dtdRulesManager.queryCanDelete(parent, nodoRiga))
+						if (rulesManager.queryCanDelete(parent, nodoRiga))
 							return true;
-					} catch (DtdRulesManagerException ex) {
+					} catch (RulesManagerException ex) {
 						return false;
 					}
 				}
@@ -181,13 +181,13 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 				Node nodoCella = UtilDom.findParentByName(node, "h:td");
 				if (nodoCella.getParentNode() != null) {
 					Node parent = nodoCella.getParentNode();
-					Collection coll = dtdRulesManager.queryInsertableBefore(parent, nodoCella);
+					Collection coll = rulesManager.queryInsertableBefore(parent, nodoCella);
 					if (nodoCella != null && parent != null && coll.contains("h:td")) {
 						return true;
 					}
 				}
 			}
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 			return false;
 		}
 
@@ -201,13 +201,13 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 				Node nodoCella = UtilDom.findParentByName(node, "h:td");
 				if (nodoCella.getParentNode() != null) {
 					Node parent = nodoCella.getParentNode();
-					Collection coll = dtdRulesManager.queryInsertableBefore(parent, nodoCella);
+					Collection coll = rulesManager.queryInsertableBefore(parent, nodoCella);
 					if (nodoCella != null && parent != null && coll.contains("h:td")) {
 						return true;
 					}
 				}
 			}
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 			//logger.error(ex.getMessage(), ex);
 			return false;
 		}
@@ -222,13 +222,13 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 				Node nodoCella = UtilDom.findParentByName(node, "h:td");
 				if (nodoCella.getParentNode() != null) {
 					Node parent = nodoCella.getParentNode();
-					if (dtdRulesManager.queryCanDelete(parent, nodoCella)) {
+					if (rulesManager.queryCanDelete(parent, nodoCella)) {
 						return true;
 					}
 				}
 
 			}
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 			logger.error(ex.getMessage(), ex);
 			return false;
 		}
@@ -241,14 +241,14 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 		    if (UtilDom.findParentByName(node, "h:td") != null) {
 		      Node nodoCella = UtilDom.findParentByName(node, "h:td");
 		      if (nodoCella.getPreviousSibling() != null) { 
-	 		    if (dtdRulesManager.queryCanDelete(nodoCella.getParentNode(), nodoCella)) {
+	 		    if (rulesManager.queryCanDelete(nodoCella.getParentNode(), nodoCella)) {
 				  logger.debug("candoaction-MergeSxColonne");
 				  return true;
 			    }
 		      }
 		    }
 
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 			logger.error(ex.getMessage(), ex);
 			return false;
 		}
@@ -262,14 +262,14 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 		    if (UtilDom.findParentByName(node, "h:td") != null) {
 		      Node nodoCella = UtilDom.findParentByName(node, "h:td");
 		      if (nodoCella.getNextSibling() != null) { 
-	 		    if (dtdRulesManager.queryCanDelete(nodoCella.getParentNode(), nodoCella)) {
+	 		    if (rulesManager.queryCanDelete(nodoCella.getParentNode(), nodoCella)) {
 				  logger.debug("candoaction-MergeDxColonne");
 				  return true;
 			    }
 		      }
 		    }
 
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 			logger.error(ex.getMessage(), ex);
 			return false;
 		}
@@ -291,14 +291,14 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 		    	  return false;
 		      if ((nodoRiga2 != null) && (nodoRiga2.getNodeName().equals("h:tr"))) {
 			    Node parent = nodoRiga2.getParentNode();
-	 		    if (dtdRulesManager.queryCanDelete(parent, nodoRiga2)) {
+	 		    if (rulesManager.queryCanDelete(parent, nodoRiga2)) {
 				  logger.debug("candoaction-MergeUpRighe");
 				  return true;
 			    }
 		      }
 		    }
 
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 			logger.error(ex.getMessage(), ex);
 			return false;
 		}
@@ -324,14 +324,14 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 		    	else return false;
 		      if ((nodoRiga2 != null) && (nodoRiga2.getNodeName().equals("h:tr"))) {
 			    Node parent = nodoRiga2.getParentNode();
-	 		    if (dtdRulesManager.queryCanDelete(parent, nodoRiga2)) {
+	 		    if (rulesManager.queryCanDelete(parent, nodoRiga2)) {
 				  logger.debug("candoaction-MergeDownRighe");
 				  return true;
 			    }
 		      }
 		    }
 
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 			logger.error(ex.getMessage(), ex);
 			return false;
 		}
@@ -352,7 +352,7 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 							|| UtilDom.getCommonAncestor(nodoRiga2, nodoRiga1).getNodeName().equals("h:thead") || UtilDom.getCommonAncestor(nodoRiga2,
 							nodoRiga1).getNodeName().equals("h:tbody"))) {
 
-						if (dtdRulesManager.queryCanDelete(parentnext, nodoRiga2)) {
+						if (rulesManager.queryCanDelete(parentnext, nodoRiga2)) {
 							// logger.debug("candoactionMERGE5");
 							return true;
 						}
@@ -362,7 +362,7 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 
 			}
 
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 			//logger.error(ex.getMessage(), ex);
 			return false;
 		}
@@ -391,10 +391,10 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 			try {
 			 	Node nodoTesto = tabella.getOwnerDocument().createElementNS(UtilDom.getNameSpaceURIforElement(root, "h"), "h:caption");
 			 	
-				if (dtdRulesManager.queryCanAppend(titolo, nodoTesto)) {
+				if (rulesManager.queryCanAppend(titolo, nodoTesto)) {
 					titolo.appendChild(nodoTesto);
 				}
-			} catch (DtdRulesManagerException ex) {
+			} catch (RulesManagerException ex) {
 				logger.error(ex.getMessage(), ex);
 			}
 			tabella.appendChild(titolo);
@@ -622,7 +622,7 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 
 	}
 
-	// inserisce una colonna prima o dopo pos, dove pos è una cella
+	// inserisce una colonna prima o dopo pos, dove pos ï¿½ una cella
 	// della colonna di riferimento
 	public Node[] creaColonna(Node pos, boolean appendi) {
 
@@ -740,7 +740,7 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 						NodeList colonne = righe.item(i).getChildNodes(); 
 						Node nodoIndice = colonne.item(indice);
 						if (nodoIndice != null) {
-						  //TODO: bisognerebbe recuperare eventuali altri valori già presenti in h:style
+						  //TODO: bisognerebbe recuperare eventuali altri valori giï¿½ presenti in h:style
 						  //		(questo errore si ripete anche in allineamentoImpl
 						  UtilDom.setAttributeValue(nodoIndice, "h:style", "text-align: " + allinea + ";");
 						}  

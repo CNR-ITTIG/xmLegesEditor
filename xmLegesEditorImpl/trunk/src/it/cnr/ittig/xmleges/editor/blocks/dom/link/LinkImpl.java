@@ -9,14 +9,14 @@ import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.link.Link;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 import it.cnr.ittig.xmleges.editor.services.util.urn.NirUtilUrn;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 
 import org.w3c.dom.Element;
@@ -59,7 +59,7 @@ public class LinkImpl implements Link, Loggable, Serviceable {
 
 	NirUtilUrn nirutilurn;
 
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 
 	DocumentManager documentManager;
 
@@ -77,7 +77,7 @@ public class LinkImpl implements Link, Loggable, Serviceable {
 
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
@@ -135,7 +135,7 @@ public class LinkImpl implements Link, Loggable, Serviceable {
 
 	private String setProtocollo(String url) {
 		
-		//il controllo è un pò troppo banale. Se l'url non è valida
+		//il controllo ï¿½ un pï¿½ troppo banale. Se l'url non ï¿½ valida
 		//aggiunge il protocollo http 
 		try {
 			new URL(url);
@@ -195,14 +195,14 @@ public class LinkImpl implements Link, Loggable, Serviceable {
 
 	public boolean canInsert(Node node) {
 		
-		//Non capisco perchè ma mi permette di inserire h:a nei rif (e non credo sia giusto)
+		//Non capisco perchï¿½ ma mi permette di inserire h:a nei rif (e non credo sia giusto)
 		if (node != null && !isRif(node) && node.getParentNode() != null) {
 			try {
-				return (dtdRulesManager.queryAppendable(node).contains("h:a") || 
-						dtdRulesManager.queryInsertableInside(node.getParentNode(), node).contains("h:a") || 
-						//dtdRulesManager.queryInsertableAfter(node.getParentNode(), node).contains("h:a") || 
-						dtdRulesManager.queryInsertableBefore(node.getParentNode(), node).contains("h:a"));
-			} catch (DtdRulesManagerException ex) {
+				return (rulesManager.queryAppendable(node).contains("h:a") || 
+						rulesManager.queryInsertableInside(node.getParentNode(), node).contains("h:a") || 
+						//rulesManager.queryInsertableAfter(node.getParentNode(), node).contains("h:a") || 
+						rulesManager.queryInsertableBefore(node.getParentNode(), node).contains("h:a"));
+			} catch (RulesManagerException ex) {
 				return false;
 			}
 		}

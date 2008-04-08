@@ -8,8 +8,8 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.immagini.Immagini;
@@ -50,7 +50,7 @@ public class ImmaginiImpl implements Immagini, Loggable, Serviceable {
 
 	Logger logger;
 
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 
 	DocumentManager documentManager;
 	
@@ -65,7 +65,7 @@ public class ImmaginiImpl implements Immagini, Loggable, Serviceable {
 
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
 	}
@@ -93,11 +93,11 @@ public class ImmaginiImpl implements Immagini, Loggable, Serviceable {
 		if (node != null && node.getParentNode() != null) {
 			try {
 				return (node.getNodeName().equals("h:img")
-						|| dtdRulesManager.queryAppendable(node).contains("h:img")
-						|| dtdRulesManager.queryInsertableInside(node.getParentNode(), node).contains("h:img")
-						|| dtdRulesManager.queryInsertableAfter(node.getParentNode(), node).contains("h:img") 
-						|| dtdRulesManager.queryInsertableBefore(node.getParentNode(), node).contains("h:img"));			
-			} catch (DtdRulesManagerException ex) {
+						|| rulesManager.queryAppendable(node).contains("h:img")
+						|| rulesManager.queryInsertableInside(node.getParentNode(), node).contains("h:img")
+						|| rulesManager.queryInsertableAfter(node.getParentNode(), node).contains("h:img") 
+						|| rulesManager.queryInsertableBefore(node.getParentNode(), node).contains("h:img"));			
+			} catch (RulesManagerException ex) {
 				return false;
 			}
 		}

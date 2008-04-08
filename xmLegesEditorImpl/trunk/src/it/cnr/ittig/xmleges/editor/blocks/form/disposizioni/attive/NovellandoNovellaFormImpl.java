@@ -7,11 +7,11 @@ import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.FormClosedListener;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
@@ -96,7 +96,7 @@ public class NovellandoNovellaFormImpl implements NovellandoNovellaForm, EventMa
 	
 	Node activeNode;
 	
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 	
 	SelectionManager selectionManager;
 
@@ -113,7 +113,7 @@ public class NovellandoNovellaFormImpl implements NovellandoNovellaForm, EventMa
 		utilmsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 		disposizioni = (DispAttiveForm) serviceManager.lookup(DispAttiveForm.class);
 		domDisposizioni  = (Disposizioni) serviceManager.lookup(Disposizioni.class);
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 	}
 

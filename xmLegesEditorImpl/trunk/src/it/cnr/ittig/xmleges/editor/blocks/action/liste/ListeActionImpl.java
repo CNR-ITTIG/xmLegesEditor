@@ -11,10 +11,10 @@ import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.editor.services.action.liste.ListeAction;
@@ -61,7 +61,7 @@ public class ListeActionImpl implements ListeAction, EventManagerListener, Logga
 
 	EventManager eventManager;
 
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 
 	DocumentManager documentManager;
 
@@ -85,7 +85,7 @@ public class ListeActionImpl implements ListeAction, EventManagerListener, Logga
 		actionManager = (ActionManager) serviceManager.lookup(ActionManager.class);
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		liste = (Liste) serviceManager.lookup(Liste.class);
 	}
@@ -148,26 +148,26 @@ public class ListeActionImpl implements ListeAction, EventManagerListener, Logga
 					if (activeNode.getNextSibling() != null) {
 						Node next = activeNode.getNextSibling();
 
-						if (dtdRulesManager.queryCanInsertBefore(parent, next, lista)) {
+						if (rulesManager.queryCanInsertBefore(parent, next, lista)) {
 							parent.insertBefore(lista, next);
 							documentManager.commitEdit(tr);
 						}
-					} else if (dtdRulesManager.queryCanAppend(parent, lista)) {
+					} else if (rulesManager.queryCanAppend(parent, lista)) {
 						parent.appendChild(lista);
 						documentManager.commitEdit(tr);
 					}
 				} else if (liste.canCreaLista(activeNode, tipolista) == 4) {
-					if (dtdRulesManager.queryCanInsertBefore(parent, activeNode, lista)) {
+					if (rulesManager.queryCanInsertBefore(parent, activeNode, lista)) {
 						parent.insertBefore(lista, activeNode);
 						documentManager.commitEdit(tr);
 					}
 				} else if (liste.canCreaLista(activeNode, tipolista) == 1) {
-					if (dtdRulesManager.queryCanAppend(activeNode, lista)) {
+					if (rulesManager.queryCanAppend(activeNode, lista)) {
 						activeNode.appendChild(lista);
 						documentManager.commitEdit(tr);
 					}
 				} else if (liste.canCreaLista(activeNode, tipolista) == 2) {
-					if (dtdRulesManager.queryCanPrepend(activeNode, lista)) {
+					if (rulesManager.queryCanPrepend(activeNode, lista)) {
 						activeNode.insertBefore(lista, activeNode.getFirstChild());
 						documentManager.commitEdit(tr);
 					}
@@ -178,7 +178,7 @@ public class ListeActionImpl implements ListeAction, EventManagerListener, Logga
 				logger.error(ex.getMessage(), ex);
 			}
 
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 			logger.error(ex.getMessage(), ex);
 		}
 		selectionManager.setActiveNode(this, lista);
@@ -193,22 +193,22 @@ public class ListeActionImpl implements ListeAction, EventManagerListener, Logga
 	 * (liste.canCreaListaNUM(activeNode) == 3) { if
 	 * (activeNode.getNextSibling() != null) { Node next =
 	 * activeNode.getNextSibling(); if
-	 * (dtdRulesManager.queryCanInsertBefore(parent, next, lista)) {
+	 * (rulesManager.queryCanInsertBefore(parent, next, lista)) {
 	 * parent.insertBefore(lista, next); documentManager.commitEdit(tr); } }
-	 * else if (dtdRulesManager.queryCanAppend(parent, lista)) {
+	 * else if (rulesManager.queryCanAppend(parent, lista)) {
 	 * parent.appendChild(lista); documentManager.commitEdit(tr); } } else if
 	 * (liste.canCreaListaNUM(activeNode) == 4) { if
-	 * (dtdRulesManager.queryCanInsertBefore(parent, activeNode, lista)) {
+	 * (rulesManager.queryCanInsertBefore(parent, activeNode, lista)) {
 	 * parent.insertBefore(lista, activeNode); documentManager.commitEdit(tr); } }
 	 * else if (liste.canCreaListaNUM(activeNode) == 1) { if
-	 * (dtdRulesManager.queryCanAppend(activeNode, lista)) {
+	 * (rulesManager.queryCanAppend(activeNode, lista)) {
 	 * activeNode.appendChild(lista); documentManager.commitEdit(tr); } } else
 	 * if (liste.canCreaListaNUM(activeNode) == 2) { if
-	 * (dtdRulesManager.queryCanPrepend(activeNode, lista)) {
+	 * (rulesManager.queryCanPrepend(activeNode, lista)) {
 	 * activeNode.insertBefore(lista, activeNode.getFirstChild());
 	 * documentManager.commitEdit(tr); } } else
 	 * documentManager.rollbackEdit(tr); } catch (DocumentManagerException ex) {
-	 * logger.error(ex.getMessage(),ex); } } catch (DtdRulesManagerException ex) {
+	 * logger.error(ex.getMessage(),ex); } } catch (RulesManagerException ex) {
 	 * logger.error(ex.getMessage(), ex); } }
 	 */
 

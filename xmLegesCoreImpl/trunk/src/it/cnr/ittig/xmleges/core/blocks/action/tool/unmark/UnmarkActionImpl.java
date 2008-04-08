@@ -14,10 +14,10 @@ import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.DocumentOpenedEvent;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
 import it.cnr.ittig.xmleges.core.services.dom.extracttext.ExtractText;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
@@ -72,7 +72,7 @@ public class UnmarkActionImpl implements UnmarkAction, EventManagerListener, Log
 	
 	DocumentManager documentManager;
 	
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 	
 	ExtractText extractText;
 
@@ -93,7 +93,7 @@ public class UnmarkActionImpl implements UnmarkAction, EventManagerListener, Log
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		extractText = (ExtractText) serviceManager.lookup(ExtractText.class);
 	}
 
@@ -173,10 +173,10 @@ public class UnmarkActionImpl implements UnmarkAction, EventManagerListener, Log
 				
 				try{
 					if(extractedNode.getPreviousSibling().getChildNodes().getLength()==0  &&
-					   dtdRulesManager.queryCanDelete(extractedNode.getParentNode(),extractedNode.getPreviousSibling()))
+					   rulesManager.queryCanDelete(extractedNode.getParentNode(),extractedNode.getPreviousSibling()))
 							extractedNode.getParentNode().removeChild(extractedNode.getPreviousSibling());
 				}
-				catch(DtdRulesManagerException ex){	
+				catch(RulesManagerException ex){	
 				}
 				
     			Node toSelect=extractedNode.getParentNode();

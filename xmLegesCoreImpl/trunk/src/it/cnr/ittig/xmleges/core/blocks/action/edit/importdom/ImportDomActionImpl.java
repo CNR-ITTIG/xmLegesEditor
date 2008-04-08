@@ -11,12 +11,12 @@ import it.cnr.ittig.xmleges.core.services.action.edit.importdom.ImportDomAction;
 import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentOpenedEvent;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.filetextfield.FileTextField;
 import it.cnr.ittig.xmleges.core.services.form.filetextfield.FileTextFieldListener;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
@@ -52,7 +52,7 @@ import org.w3c.dom.Node;
  * <li>it.cnr.ittig.xmleges.editor.services.document.DocumentManager:1.0</li>
  * <li>it.cnr.ittig.xmleges.editor.services.action.ActionManager:1.0</li>
  * <li>it.cnr.ittig.xmleges.editor.services.event.EventManager:1.0</li>
- * <li>it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager:1.0</li>
+ * <li>it.cnr.ittig.xmleges.core.services.rules.RulesManager:1.0</li>
  * <li>it.cnr.ittig.xmleges.core.services.form.Form:1.0</li>
  * <li>it.cnr.ittig.xmleges.core.services.form.filetextfield.FileTextField:1.0</li>
  * <li>it.cnr.ittig.xmleges.core.blocks.util.ui.UtilUI:1.0</li>
@@ -79,7 +79,7 @@ import org.w3c.dom.Node;
  * 
  * @see it.cnr.ittig.xmleges.core.services.document.DocumentManager
  * @see it.cnr.ittig.xmleges.core.services.action.ActionManager
- * @see it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager
+ * @see it.cnr.ittig.xmleges.core.services.rules.RulesManager
  * @see it.cnr.ittig.xmleges.core.services.util.ui.UtilUI
  * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
@@ -91,7 +91,7 @@ public class ImportDomActionImpl implements ImportDomAction, EventManagerListene
 
 	DocumentManager documentManager;
 
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 
 	EventManager eventManager;
 
@@ -124,7 +124,7 @@ public class ImportDomActionImpl implements ImportDomAction, EventManagerListene
 	public void service(ServiceManager serviceManager) throws ServiceException {
 		actionManager = (ActionManager) serviceManager.lookup(ActionManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 		form = (Form) serviceManager.lookup(Form.class);
 		fileTextField = (FileTextField) serviceManager.lookup(FileTextField.class);
@@ -145,7 +145,7 @@ public class ImportDomActionImpl implements ImportDomAction, EventManagerListene
 		form.setSize(600, 500);
 		form.setName("edit.importdom.form");
 
-		//TODO verificare necessità di questo help
+		//TODO verificare necessitï¿½ di questo help
 		form.setHelpKey("help.contents.form.importdom");
 		
 		form.replaceComponent("edit.importdom.form.file", fileTextField.getAsComponent());

@@ -8,8 +8,8 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.rinumerazione.Rinumerazione;
@@ -61,7 +61,7 @@ public class RinviiImpl implements Rinvii, Loggable, Serviceable {
 
 	NirUtilUrn nirutilurn;
 
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 
 	DocumentManager documentManager;
 	
@@ -78,7 +78,7 @@ public class RinviiImpl implements Rinvii, Loggable, Serviceable {
 
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
@@ -218,11 +218,11 @@ public class RinviiImpl implements Rinvii, Loggable, Serviceable {
 	public boolean canInsert(Node node) {
 		if (node != null && node.getParentNode() != null && UtilDom.findParentByName(node, "mrif") == null && UtilDom.findParentByName(node, "rif") == null) {
 			try {
-				return (dtdRulesManager.queryAppendable(node).contains("rif")
-						|| dtdRulesManager.queryInsertableInside(node.getParentNode(), node).contains("rif")
-						|| dtdRulesManager.queryInsertableAfter(node.getParentNode(), node).contains("rif") || dtdRulesManager.queryInsertableBefore(
+				return (rulesManager.queryAppendable(node).contains("rif")
+						|| rulesManager.queryInsertableInside(node.getParentNode(), node).contains("rif")
+						|| rulesManager.queryInsertableAfter(node.getParentNode(), node).contains("rif") || rulesManager.queryInsertableBefore(
 						node.getParentNode(), node).contains("rif"));
-			} catch (DtdRulesManagerException ex) {
+			} catch (RulesManagerException ex) {
 				return false;
 			}
 		}

@@ -4,8 +4,8 @@
 package it.cnr.ittig.xmleges.editor.blocks.dom.rinumerazione;
 
 import it.cnr.ittig.services.manager.Logger;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.core.util.lang.UtilLang;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
@@ -26,7 +26,7 @@ public class AggiornaIdFrozenLaw {
 
 	Logger logger;
 
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 
 	RinumerazioneImpl rinum;
 
@@ -102,7 +102,7 @@ public class AggiornaIdFrozenLaw {
 	/** Creates a new instance of AggiornaIDFrozenLaw */
 	public AggiornaIdFrozenLaw(RinumerazioneImpl rinumerazioneImpl) {
 		this.logger = rinumerazioneImpl.getLogger();
-		this.dtdRulesManager = rinumerazioneImpl.dtdRulesManager;
+		this.rulesManager = rinumerazioneImpl.rulesManager;
 		this.rinum = rinumerazioneImpl;
 		this.nirUtilDom = rinumerazioneImpl.nirUtilDom;
 	}
@@ -671,7 +671,7 @@ public class AggiornaIdFrozenLaw {
 		 // in questo modo setta gli id solo agli elementi che hanno id REQUIRED
 		 // + forza il setId anche alle lettere, numeri, ep: gli id servono per la rinumerazione di quegli elementi
 		 try{
-			 if(dtdRulesManager.queryIsRequiredAttribute(figlio.getNodeName(),"id") || getElementType(figlio)==LETTERA || getElementType(figlio)==NUMERO || getElementType(figlio)==ELENCO_PUNT || getElementType(figlio)==SPAN){
+			 if(rulesManager.queryIsRequiredAttribute(figlio.getNodeName(),"id") || getElementType(figlio)==LETTERA || getElementType(figlio)==NUMERO || getElementType(figlio)==ELENCO_PUNT || getElementType(figlio)==SPAN){
 				 // FIXME previene il setId degli eventi; la soluzione corretta e' quella di settare sia gli id che gli idref 
 				   return true;
 			 }
@@ -681,7 +681,7 @@ public class AggiornaIdFrozenLaw {
 				 return false;
 			 }
 		 }
-		 catch(DtdRulesManagerException e){
+		 catch(RulesManagerException e){
 			 if(logger.isDebugEnabled())
 				 logger.debug("no id for "+figlio.getNodeName());
 			 return false;

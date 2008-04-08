@@ -9,8 +9,8 @@ import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
 import it.cnr.ittig.xmleges.core.services.dom.extracttext.ExtractText;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
@@ -56,7 +56,7 @@ import org.w3c.dom.NodeList;
 public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 	Logger logger;
 
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 
 	DocumentManager documentManager;
 	
@@ -79,7 +79,7 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
 		extractText = (ExtractText) serviceManager.lookup(ExtractText.class);
@@ -91,10 +91,10 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 		if (node != null && node.getParentNode() != null) {
 			try {
 				return (node.getNodeName()!=null && 
-						(dtdRulesManager.queryIsValidAttribute(node.getNodeName(), "iniziovigore")
+						(rulesManager.queryIsValidAttribute(node.getNodeName(), "iniziovigore")
 								|| UtilDom.isTextNode(node)) 
 						);
-			} catch (DtdRulesManagerException e) {
+			} catch (RulesManagerException e) {
 				return UtilDom.isTextNode(node);
 			}
 		}
@@ -145,7 +145,7 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 				selectedText=node.getNodeValue();
 			}
 			else{        // racchiude il testo in uno span e lo riestrae ????
-            // il testo selezionato è una sottoparte del nodo di testo (va creato lo span)				
+            // il testo selezionato ï¿½ una sottoparte del nodo di testo (va creato lo span)				
 				
 				//qui crea uno span dal testo selezionato 
 				span = (Element) utilRulesManager.encloseTextInTag(node, start, end,"h:span","h");
@@ -171,20 +171,20 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 			// ?   A CHE SERVONO QUESTE OPERAZIONI SE ELIMINO LO SPAN ? 	
 				
 //				try{
-//					if(!dtdRulesManager.queryIsRequiredAttribute(span.getNodeName(),"iniziovigore"))
+//					if(!rulesManager.queryIsRequiredAttribute(span.getNodeName(),"iniziovigore"))
 //					    span.removeAttribute("iniziovigore");
 //					else 
 //						UtilDom.setAttributeValue(span,"iniziovigore","");
-//					if(!dtdRulesManager.queryIsRequiredAttribute(span.getNodeName(),"finevigore"))
+//					if(!rulesManager.queryIsRequiredAttribute(span.getNodeName(),"finevigore"))
 //					    span.removeAttribute("finevigore");
 //					else 
 //						UtilDom.setAttributeValue(span,"finevigore","");
-//					if(!dtdRulesManager.queryIsRequiredAttribute(span.getNodeName(),"status"))
+//					if(!rulesManager.queryIsRequiredAttribute(span.getNodeName(),"status"))
 //					    span.removeAttribute("status");
 //					else 
 //						UtilDom.setAttributeValue(span,"status","");
 //				}
-//				catch(DtdRulesManagerException ex){}
+//				catch(RulesManagerException ex){}
 				
 				Node padre=span.getParentNode();
 				//	appiattisce lo span
@@ -198,17 +198,17 @@ public class VigenzaImpl implements Vigenza, Loggable, Serviceable {
 				UtilDom.setAttributeValue(span,"finevigore",vigenza.getEFineVigore().getId());				
 			else{
 				try{
-					if(!dtdRulesManager.queryIsRequiredAttribute(span.getNodeName(),"finevigore"))
+					if(!rulesManager.queryIsRequiredAttribute(span.getNodeName(),"finevigore"))
 					    span.removeAttribute("finevigore");
 					else 
 						UtilDom.setAttributeValue(span,"finevigore","");
 				}
-				catch(DtdRulesManagerException ex){}
+				catch(RulesManagerException ex){}
 			}	
 		    return span;
 		
 		}else{   
-			//non è un nodo di testo
+			//non ï¿½ un nodo di testo
 		    NamedNodeMap nnm = node.getAttributes();
 		    // Assegnazione attributi di vigenza al nodo
 			if(vigenza.getEInizioVigore()!=null)
@@ -260,7 +260,7 @@ public VigenzaEntity getVigenza(Node node, int start, int end) {
 	selectedText="";
 	
 	if(!UtilDom.isTextNode(node)){
-		//non c'è selezione di testo sono su nodo generico
+		//non c'ï¿½ selezione di testo sono su nodo generico
 		if(node.getNodeValue()==null){
 			if(UtilDom.getTextNode(node)==null || UtilDom.getTextNode(node).trim().equals(""))
 				//	caso di selzione solo su nodo generici (articolato, formulainiziale, formulafinale ecc..)
@@ -281,7 +281,7 @@ public VigenzaEntity getVigenza(Node node, int start, int end) {
 	   // Recupero contenuto Nodo
 		selectedText=UtilDom.getTextNode(parentNode);
 
-		//se il testo selezionato non coincide con quello dello span di cui è figlio
+		//se il testo selezionato non coincide con quello dello span di cui ï¿½ figlio
 		//si crea una nuova vigenza		
 		if(start!=end && selectedText.substring(start,end).length()<selectedText.length()){
 				selectedText=selectedText.substring(start,end);
@@ -408,7 +408,7 @@ public VigenzaEntity getVigenza(Node node, int start, int end) {
 				if(nnm!=null){
 					EditTransaction tr = documentManager.beginEdit();
 					
-					//se esisteva già l'evento inizio sul dom si aggiorna al nuovo o si elimina se il nuovo è null
+					//se esisteva giï¿½ l'evento inizio sul dom si aggiorna al nuovo o si elimina se il nuovo ï¿½ null
 					if(nnm.getNamedItem("iniziovigore")!=null){
 						if(vig.getEInizioVigore()!=null){
 //							UtilDom.setAttributeValue(node, "iniziovigore", vig.getEInizioVigore().getId());
@@ -418,7 +418,7 @@ public VigenzaEntity getVigenza(Node node, int start, int end) {
 							nnm.removeNamedItem("iniziovigore");	
 
 					}
-	//				se esisteva già l'evento fine sul dom si aggiorna al nuovo o si elimina se il nuovo è null	
+	//				se esisteva giï¿½ l'evento fine sul dom si aggiorna al nuovo o si elimina se il nuovo ï¿½ null	
 					if(nnm.getNamedItem("finevigore")!=null){
 						if(vig.getEFineVigore()!=null){
 //							UtilDom.setAttributeValue(node, "finevigore", vig.getEFineVigore().getId());

@@ -8,8 +8,8 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.testo.Testo;
@@ -54,7 +54,7 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 
 	Node testoNode;
 
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 
 	DocumentManager documentManager;
 
@@ -73,7 +73,7 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
@@ -109,12 +109,12 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 			return false;
 		try {
 			if (node.getParentNode() != null)
-				return (dtdRulesManager.queryAppendable(node.getParentNode()).contains(action)
-						|| dtdRulesManager.queryInsertableInside(node.getParentNode(), node).contains(action)
-						|| dtdRulesManager.queryInsertableAfter(node.getParentNode(), node).contains(action) || dtdRulesManager.queryInsertableBefore(
+				return (rulesManager.queryAppendable(node.getParentNode()).contains(action)
+						|| rulesManager.queryInsertableInside(node.getParentNode(), node).contains(action)
+						|| rulesManager.queryInsertableAfter(node.getParentNode(), node).contains(action) || rulesManager.queryInsertableBefore(
 						node.getParentNode(), node).contains(action));
 			return false;
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 			return false;
 		}
 	}
@@ -137,10 +137,10 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 				// verifica se e' possibile rimuovere il nodo found dall'albero
 				// ed agganciare i suoi figli al padre
 				for (int i = 0; i < len; i++) {
-					if (!dtdRulesManager.queryCanInsertBefore(found.getParentNode(), found, childList.item(i)))
+					if (!rulesManager.queryCanInsertBefore(found.getParentNode(), found, childList.item(i)))
 						return false;
 				}
-				if (!dtdRulesManager.queryCanDelete(found.getParentNode(), found))
+				if (!rulesManager.queryCanDelete(found.getParentNode(), found))
 					return false;
 
 				// scorre il sottoalbero; il primo figlio per cui
@@ -157,7 +157,7 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 				}
 				return true;
 			}
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 			return false;
 		}
 		return returnValue;
@@ -178,9 +178,9 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 					returnValue = canAddTag(node, action);
 				else {
 					Node p = child.getParentNode();
-					if (!dtdRulesManager.queryAppendable(child).contains(action))
+					if (!rulesManager.queryAppendable(child).contains(action))
 						localFlag = 1;
-					if (!dtdRulesManager.queryInsertableBefore(p, child.getNextSibling()).contains(action))
+					if (!rulesManager.queryInsertableBefore(p, child.getNextSibling()).contains(action))
 						localFlag = 1;
 				}
 			}
@@ -188,9 +188,9 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 			// verificare
 			if (nodeOnlyTag(child, action)) {
 				Node p = child.getParentNode();
-				if (!dtdRulesManager.queryAppendable(child).contains(action))
+				if (!rulesManager.queryAppendable(child).contains(action))
 					localFlag = 1;
-				if (!dtdRulesManager.queryInsertableBefore(p, child.getNextSibling()).contains(action))
+				if (!rulesManager.queryInsertableBefore(p, child.getNextSibling()).contains(action))
 					localFlag = 1;
 			}
 
@@ -211,7 +211,7 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 						returnValue = 1;
 			}
 		} // end of try
-		catch (DtdRulesManagerException ex) {
+		catch (RulesManagerException ex) {
 		}
 		return returnValue;
 	}
@@ -278,9 +278,9 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 	public boolean canTestoActionRemoveTag(Node node, String azione) {
 		try {
 			Node p = node.getParentNode();
-			if ((node.getNodeName() == azione) && (dtdRulesManager.queryCanDelete(p, node)))
+			if ((node.getNodeName() == azione) && (rulesManager.queryCanDelete(p, node)))
 				return true;
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 			return false;
 		}
 		return false;
@@ -426,9 +426,9 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 			Node p = node.getParentNode();
 
 			if (p != null)
-				if (dtdRulesManager.queryInsertableBefore(p, node).contains(action))
+				if (rulesManager.queryInsertableBefore(p, node).contains(action))
 					return 0;
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 			return 1;
 		}
 		return 1;
@@ -442,9 +442,9 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 			Node p = node.getParentNode();
 			Node ancestor = p.getParentNode();
 
-			if (dtdRulesManager.queryCanInsertBefore(ancestor, p, node) && dtdRulesManager.queryCanDelete(ancestor, p))
+			if (rulesManager.queryCanInsertBefore(ancestor, p, node) && rulesManager.queryCanDelete(ancestor, p))
 				return true;
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 			return false;
 		}
 		return false;
@@ -537,10 +537,10 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 						Node p = node.getParentNode();
 						Node brother = node.getNextSibling();
 						if (brother != null) {
-							if (!(dtdRulesManager.queryCanAppend(newTag, node) && dtdRulesManager.queryCanInsertBefore(p, brother, newTag)))
+							if (!(rulesManager.queryCanAppend(newTag, node) && rulesManager.queryCanInsertBefore(p, brother, newTag)))
 								returnValue = false;
 						} else {
-							if (!(dtdRulesManager.queryCanAppend(newTag, node) && dtdRulesManager.queryCanAppend(p, newTag)))
+							if (!(rulesManager.queryCanAppend(newTag, node) && rulesManager.queryCanAppend(p, newTag)))
 								returnValue = false;
 						}
 					}
@@ -561,7 +561,7 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 						returnValue = false;
 				}
 			}
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 			returnValue = false;
 		}
 		return returnValue;
@@ -605,10 +605,10 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 
 				for (j = 0; j < len1; j++) {
 					Node child1 = vector1[j];
-					if (!dtdRulesManager.queryCanInsertBefore(p, node, child1))
+					if (!rulesManager.queryCanInsertBefore(p, node, child1))
 						returnValue = false;
 				}
-				if (!dtdRulesManager.queryCanDelete(p, node))
+				if (!rulesManager.queryCanDelete(p, node))
 					returnValue = false;
 				return returnValue;
 				// appena trova un nodo azione da rimuovere, deve smettere con
@@ -629,7 +629,7 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 				}
 			}// end of else
 		} // end of try
-		catch (DtdRulesManagerException ex) {
+		catch (RulesManagerException ex) {
 			// logger.error(ex.getMessage(),ex);
 		}
 		return returnValue;
@@ -873,14 +873,14 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 
 					flagValidCondition = 1;
 
-					if (!dtdRulesManager.queryCanDelete(node, nl.item(i)))
+					if (!rulesManager.queryCanDelete(node, nl.item(i)))
 						returnValue = false;
 
 				} else {
 					if (flagValidCondition == 1) {
 						if (p.getChildNodes().getLength() == 0) {
 							Node child = documento.createTextNode("");
-							if (!dtdRulesManager.queryCanAppend(p, child))
+							if (!rulesManager.queryCanAppend(p, child))
 								returnValue = false;
 						}
 						flagValidCondition = 0;
@@ -892,13 +892,13 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 			if (flagValidCondition == 1) {
 				if (p.getChildNodes().getLength() == 0) {
 					Node child = documento.createTextNode("");
-					if (!dtdRulesManager.queryCanAppend(p, child))
+					if (!rulesManager.queryCanAppend(p, child))
 						returnValue = false;
 				}
 			}
 		}
 
-		catch (DtdRulesManagerException ex) {
+		catch (RulesManagerException ex) {
 			returnValue = false;
 			// logger.error(ex.getMessage(),ex);
 		}

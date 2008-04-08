@@ -6,7 +6,7 @@ import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 
@@ -36,7 +36,7 @@ import org.w3c.dom.NodeList;
 public class NirUtilDomImpl implements NirUtilDom, Loggable, Serviceable{
 	Logger logger;
 
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 	DocumentManager documentManager;
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
@@ -46,7 +46,7 @@ public class NirUtilDomImpl implements NirUtilDom, Loggable, Serviceable{
 
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 	}
 
@@ -103,7 +103,7 @@ public class NirUtilDomImpl implements NirUtilDom, Loggable, Serviceable{
 		Collection coll;
 		Iterator iter;
 
-		if (node == null || dtdRulesManager == null)
+		if (node == null || rulesManager == null)
 			return false;
 
 		// con la precedente regola il comma non veniva considerato un container
@@ -116,7 +116,7 @@ public class NirUtilDomImpl implements NirUtilDom, Loggable, Serviceable{
 			return true;
 
 		try {
-			coll = dtdRulesManager.queryAppendable(node);
+			coll = rulesManager.queryAppendable(node);
 		} catch (Exception e) {
 			return false;
 		}
@@ -224,7 +224,7 @@ public class NirUtilDomImpl implements NirUtilDom, Loggable, Serviceable{
 			try {
 				// qui orderedInsertChild
 				if (meta.getFirstChild() != null) {
-					while (!dtdRulesManager.queryCanInsertAfter(meta, child, found))
+					while (!rulesManager.queryCanInsertAfter(meta, child, found))
 						child = child.getNextSibling();
 					meta.insertBefore(found, child.getNextSibling());
 				} else
@@ -265,8 +265,8 @@ public class NirUtilDomImpl implements NirUtilDom, Loggable, Serviceable{
 		nodo = activeNode;
 		try {
 			while (nodo.getParentNode() != null && !executed) {
-				if (dtdRulesManager.queryCanInsertBefore(nodo.getParentNode(), nodo.getParentNode().getFirstChild(), inlinemeta)) {
-					if (dtdRulesManager.queryIsValid(inlinemeta)) {
+				if (rulesManager.queryCanInsertBefore(nodo.getParentNode(), nodo.getParentNode().getFirstChild(), inlinemeta)) {
+					if (rulesManager.queryIsValid(inlinemeta)) {
 						nodo.getParentNode().insertBefore(inlinemeta, nodo.getParentNode().getFirstChild());
 						executed = true;
 						inlinemeta = UtilDom.findDirectChild(nodo.getParentNode(), "inlinemeta");

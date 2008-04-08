@@ -9,8 +9,8 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.services.manager.Startable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentBeforeInitUndoAction;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.preference.PreferenceManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
 import it.cnr.ittig.xmleges.editor.services.dom.rinumerazione.Rinumerazione;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 import it.cnr.ittig.xmleges.editor.services.util.urn.NirUtilUrn;
@@ -58,7 +58,7 @@ public class RinumerazioneImpl implements Rinumerazione, DocumentBeforeInitUndoA
 
 	DocumentManager documentManager;
 
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 
 	PreferenceManager preferenceManager;
 
@@ -78,7 +78,7 @@ public class RinumerazioneImpl implements Rinumerazione, DocumentBeforeInitUndoA
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 		nirUtilUrn = (NirUtilUrn) serviceManager.lookup(NirUtilUrn.class);
 		preferenceManager = (PreferenceManager) serviceManager.lookup(PreferenceManager.class);
@@ -136,8 +136,8 @@ public class RinumerazioneImpl implements Rinumerazione, DocumentBeforeInitUndoA
 		return this.logger;
 	}
 
-	protected DtdRulesManager getDtdRulesManager() {
-		return this.dtdRulesManager;
+	protected RulesManager getDtdRulesManager() {
+		return this.rulesManager;
 	}
 
 	public String getRinumerazioneNdr() {

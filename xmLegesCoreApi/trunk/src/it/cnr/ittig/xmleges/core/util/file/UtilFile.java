@@ -430,20 +430,20 @@ public class UtilFile {
 	}
 
 	/**
-	 * @param dtdAbsolutePath
+	 * @param grammarAbsolutePath
 	 * @return
 	 */
-	public static File getDTDFile(String dtdAbsolutePath) {
+	public static File getGrammarFile(String grammarAbsolutePath) {
 		File ret = null;
-		if (dtdAbsolutePath.startsWith(File.separator)||dtdAbsolutePath.indexOf(":")!=-1) { // dtd con percorso
+		if (grammarAbsolutePath.startsWith(File.separator)||grammarAbsolutePath.indexOf(":")!=-1) { // dtd con percorso
 			// specificato nel documento
-			ret = new File(dtdAbsolutePath);
+			ret = new File(grammarAbsolutePath);
 			if (!ret.exists()) { // se non ha trovato la dtd associata al documento, la cerca nella temp
-				String[] pathChunks = dtdAbsolutePath.split("/");
+				String[] pathChunks = grammarAbsolutePath.split("/");
 				ret = getFileFromTemp(pathChunks[pathChunks.length - 1]);
 			}
 		} else
-			ret = getFileFromTemp(dtdAbsolutePath);
+			ret = getFileFromTemp(grammarAbsolutePath);
 
 		return ret.exists() ? ret : null;
 	}

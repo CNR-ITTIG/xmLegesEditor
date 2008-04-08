@@ -15,10 +15,10 @@ import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.DocumentOpenedEvent;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
@@ -108,7 +108,7 @@ public class TabelleActionImpl implements TabelleAction, Loggable, Serviceable, 
 
 	Node[] selectedNodes;
 
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 	
 	UtilRulesManager utilRulesManager;
 
@@ -125,7 +125,7 @@ public class TabelleActionImpl implements TabelleAction, Loggable, Serviceable, 
 
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		actionManager = (ActionManager) serviceManager.lookup(ActionManager.class);
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
@@ -259,29 +259,29 @@ public class TabelleActionImpl implements TabelleAction, Loggable, Serviceable, 
 							else if (tabelle.canInsertTable(selectedNodes[0]) == 4) {
 								if (selectedNodes[0].getNextSibling() != null) {
 									Node next = selectedNodes[0].getNextSibling();
-									if (dtdRulesManager.queryCanInsertBefore(parent, next, tabella)) {
+									if (rulesManager.queryCanInsertBefore(parent, next, tabella)) {
 										parent.insertBefore(tabella, next);
 										documentManager.commitEdit(tr);
 									}
-								} else if (dtdRulesManager.queryCanAppend(parent, tabella)) {
+								} else if (rulesManager.queryCanAppend(parent, tabella)) {
 									parent.appendChild(tabella);
 									documentManager.commitEdit(tr);
 								}
 							// INSERT BEFORE	
 							} else if (tabelle.canInsertTable(selectedNodes[0]) == 5) {
-								if (dtdRulesManager.queryCanInsertBefore(parent, selectedNodes[0], tabella)) {
+								if (rulesManager.queryCanInsertBefore(parent, selectedNodes[0], tabella)) {
 									parent.insertBefore(tabella, selectedNodes[0]);
 									documentManager.commitEdit(tr);
 								}
 							// APPEND
 							} else if (tabelle.canInsertTable(selectedNodes[0]) == 1) {
-								if (dtdRulesManager.queryCanAppend(selectedNodes[0], tabella)) {
+								if (rulesManager.queryCanAppend(selectedNodes[0], tabella)) {
 									selectedNodes[0].appendChild(tabella);
 									documentManager.commitEdit(tr);
 								}
 							// PREPEND
 							} else if (tabelle.canInsertTable(selectedNodes[0]) == 2) {
-								if (dtdRulesManager.queryCanPrepend(selectedNodes[0], tabella)) {
+								if (rulesManager.queryCanPrepend(selectedNodes[0], tabella)) {
 									selectedNodes[0].insertBefore(tabella, selectedNodes[0].getFirstChild());
 									documentManager.commitEdit(tr);
 								}
@@ -295,7 +295,7 @@ public class TabelleActionImpl implements TabelleAction, Loggable, Serviceable, 
 
 					}
 				}
-			} catch (DtdRulesManagerException ex) {
+			} catch (RulesManagerException ex) {
 				logger.error(ex.getMessage(), ex);
 			}
 		}

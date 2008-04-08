@@ -9,8 +9,8 @@ import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
 import it.cnr.ittig.xmleges.core.services.dom.extracttext.ExtractText;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
@@ -59,7 +59,7 @@ import org.w3c.dom.NodeList;
 public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 	Logger logger;
 
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 
 	DocumentManager documentManager;
 	
@@ -86,7 +86,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
 		extractText = (ExtractText) serviceManager.lookup(ExtractText.class);
@@ -381,12 +381,12 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 				UtilDom.setAttributeValue(span,"finevigore",vigenza.getEFineVigore().getId());				
 			else{
 				try{
-					if(!dtdRulesManager.queryIsRequiredAttribute(span.getNodeName(),"finevigore"))
+					if(!rulesManager.queryIsRequiredAttribute(span.getNodeName(),"finevigore"))
 					    span.removeAttribute("finevigore");
 					else 
 						UtilDom.setAttributeValue(span,"finevigore","");
 				}
-				catch(DtdRulesManagerException ex){}
+				catch(RulesManagerException ex){}
 			}	
 		    return span;
 		
@@ -546,10 +546,10 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		if (node != null && node.getParentNode() != null) {
 			try {
 				return (node.getNodeName()!=null && 
-						(dtdRulesManager.queryIsValidAttribute(node.getNodeName(), "iniziovigore")
+						(rulesManager.queryIsValidAttribute(node.getNodeName(), "iniziovigore")
 								|| UtilDom.isTextNode(node)) 
 						);
-			} catch (DtdRulesManagerException e) {
+			} catch (RulesManagerException e) {
 				return UtilDom.isTextNode(node);
 			}
 		}

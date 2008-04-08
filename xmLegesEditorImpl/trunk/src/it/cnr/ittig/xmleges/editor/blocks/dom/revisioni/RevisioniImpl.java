@@ -8,8 +8,8 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.revisioni.Revisioni;
@@ -53,7 +53,7 @@ import org.w3c.dom.NodeList;
 public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 	Logger logger;
 
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 
 	DocumentManager documentManager;
 
@@ -70,7 +70,7 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 		nirUtilUrn = (NirUtilUrn) serviceManager.lookup(NirUtilUrn.class);
@@ -312,9 +312,9 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 		else if (nirUtilDom.isContainer(node) && UtilDom.getAttributeValueAsString(node, "status") != null
 				&& UtilDom.getAttributeValueAsString(node, "status").equals(Revisioni.SOPPRESSO)) {
 			try {
-				if (null != node.getParentNode() && dtdRulesManager.queryCanDelete(node.getParentNode(), node))
+				if (null != node.getParentNode() && rulesManager.queryCanDelete(node.getParentNode(), node))
 					node.getParentNode().removeChild(node);
-			} catch (DtdRulesManagerException ex) {
+			} catch (RulesManagerException ex) {
 				return null;
 			}
 		} else if (isStatusSpan(node)) {
@@ -557,7 +557,7 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 		String sopstr = "le parole", insstr = "le parole", dopostr = "le parole";
 		String sopsopstr = " sono soppresse ", insinsstr = " sono inserite ";
 		String soststr = " sono sostituite con ";
-		String vA = "«", vC = "»"; // Simbolo di virgolette Aperte e Chiuse
+		String vA = "ï¿½", vC = "ï¿½"; // Simbolo di virgolette Aperte e Chiuse
 		Node newNode = null;
 
 		// logger.debug("t: " + t + " mod: " + mod + " rif: "+rif+" pos: "+pos+"
@@ -571,12 +571,12 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 		ins = ins.trim();
 		if (sop.indexOf(" ") == -1) {
 			sopstr = "la parola";
-			sopsopstr = " è soppressa ";
-			soststr = " è sostituita con ";
+			sopsopstr = " ï¿½ soppressa ";
+			soststr = " ï¿½ sostituita con ";
 		}
 		if (ins.indexOf(" ") == -1) {
 			insstr = "la parola";
-			insinsstr = " è inserita ";
+			insinsstr = " ï¿½ inserita ";
 		}
 		if (dopo.indexOf(" ") == -1)
 			dopostr = "la parola";
@@ -649,13 +649,13 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 				tipostr = "lettera";
 			}
 			if (mod == 0) { // soppresso
-				str1 = part + rif + " è soppresso.";
+				str1 = part + rif + " ï¿½ soppresso.";
 				if (t == 4)
-					str1 = part + rif + " è soppressa.";
+					str1 = part + rif + " ï¿½ soppressa.";
 			}
 			if (mod == 1) { // inserito
 				if (pos == 0) {
-					// Non sempre è corretto mettere "all'inizio della
+					// Non sempre ï¿½ corretto mettere "all'inizio della
 					// partizione" ecc...?!
 					if (t == 1)
 						cont = "dell'" + doporif;
@@ -663,28 +663,28 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 						cont = "del " + doporif;
 					if (t == 3)
 						cont = "dell'articolato";
-					str1 = "All'inizio " + cont + " è inserito il seguente "/*
+					str1 = "All'inizio " + cont + " ï¿½ inserito il seguente "/*
 																			 * +
 																			 * tipostr
 																			 */
 							+ ": " + vA;
 					if (t == 4)
-						str1 = "Nell'" + doporif + " è inserita la seguente lettera: " + vA;
+						str1 = "Nell'" + doporif + " ï¿½ inserita la seguente lettera: " + vA;
 				}
 				if (pos == 1) {
-					str1 = "Dopo " + part + doporif + " è inserito il seguente "/*
+					str1 = "Dopo " + part + doporif + " ï¿½ inserito il seguente "/*
 																				 * +
 																				 * tipostr
 																				 */+ ": " + vA;
 					if (t == 4)
-						str1 = "Dopo " + part + doporif + " è inserita la seguente lettera: " + vA;
+						str1 = "Dopo " + part + doporif + " ï¿½ inserita la seguente lettera: " + vA;
 				}
 			}
 			if (mod == 2) { // sostituito
-				str1 = part + rif + " è sostituito dal seguente "/* + tipostr */
+				str1 = part + rif + " ï¿½ sostituito dal seguente "/* + tipostr */
 						+ ": " + vA;
 				if (t == 4)
-					str1 = part + rif + " è sostituita dalla seguente lettera: " + vA;
+					str1 = part + rif + " ï¿½ sostituita dalla seguente lettera: " + vA;
 			}
 			// Maiuscola all'inizio di ogni comma dell'emendamento
 			String str1a = str1.trim().substring(0, 1);
@@ -696,7 +696,7 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 	}
 
 	/*
-	 * CASO PAROLE (ovvero <virgolette tipo="parole"> ) Verifica se è possibile
+	 * CASO PAROLE (ovvero <virgolette tipo="parole"> ) Verifica se ï¿½ possibile
 	 * costruire un nodo 'comma' che rappresenti la modifica nel nuovo
 	 * documento. In caso affermativo restituisci il nodo comma (con 'mod' ed
 	 * eventuali 'virgolette').
@@ -708,8 +708,8 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 		// se
 		// il
 		// primo
-		// è
-		// vuotoè
+		// ï¿½
+		// vuotoï¿½
 		Node newCorpo = UtilDom.findDirectChild(newComma, "corpo");
 		Node newMod = utilRulesManager.getNodeTemplate(newDoc, "mod");
 		Node newVirg = null;
@@ -717,9 +717,9 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 		// logger.debug("makeMod str1:"+str1+" virg1:"+virg1+" str2:"+str2+"
 		// virg2:"+virg2+" str3:"+str3);
 		try {
-			if (dtdRulesManager.queryCanAppend(newCorpo, newMod))
+			if (rulesManager.queryCanAppend(newCorpo, newMod))
 				newCorpo.appendChild(newMod);
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 			System.out.println("Warning! canAppend Exception");
 			return null;
 		}
@@ -728,9 +728,9 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 		if (virg1.equals("") == false) {
 			newVirg = utilRulesManager.getNodeTemplate(newDoc, "virgolette");
 			try {
-				if (dtdRulesManager.queryCanAppend(newMod, newVirg))
+				if (rulesManager.queryCanAppend(newMod, newVirg))
 					newMod.appendChild(newVirg);
-			} catch (DtdRulesManagerException ex) {
+			} catch (RulesManagerException ex) {
 				System.out.println("Warning! canAppend Exception");
 				return null;
 			}
@@ -741,9 +741,9 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 			if (virg2.equals("") == false) {
 				newVirg = utilRulesManager.getNodeTemplate(newDoc, "virgolette");
 				try {
-					if (dtdRulesManager.queryCanAppend(newMod, newVirg))
+					if (rulesManager.queryCanAppend(newMod, newVirg))
 						newMod.appendChild(newVirg);
-				} catch (DtdRulesManagerException ex) {
+				} catch (RulesManagerException ex) {
 					System.out.println("Warning! canAppend Exception");
 					return null;
 				}
@@ -756,7 +756,7 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 	}
 
 	/*
-	 * CASO PARTIZIONI (ovvero <virgolette tipo="struttura"> ) Verifica se è
+	 * CASO PARTIZIONI (ovvero <virgolette tipo="struttura"> ) Verifica se ï¿½
 	 * possibile costruire un nodo 'comma' che rappresenti la modifica nel nuovo
 	 * documento. In caso affermativo restituisci il nodo comma (con 'mod' ed
 	 * eventuali 'virgolette' e i nodi/struttura sottostanti).
@@ -768,7 +768,7 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 		// se
 		// il
 		// primo
-		// è
+		// ï¿½
 		// vuoto?
 		Node newCorpo = UtilDom.findDirectChild(newComma, "corpo");
 		Node newMod = utilRulesManager.getNodeTemplate(newDoc, "mod");
@@ -784,9 +784,9 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 			// <h:span>...
 		}
 		try {
-			if (dtdRulesManager.queryCanAppend(newCorpo, newMod))
+			if (rulesManager.queryCanAppend(newCorpo, newMod))
 				newCorpo.appendChild(newMod);
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 			System.out.println("Warning! canAppend Exception!");
 			return null;
 		}
@@ -798,14 +798,14 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 			// tipo="struttura"
 			// !!
 			try {
-				if (dtdRulesManager.queryCanAppend(newMod, newVirg))
+				if (rulesManager.queryCanAppend(newMod, newVirg))
 					newMod.appendChild(newVirg);
-				if (dtdRulesManager.queryCanAppend(newVirg, node))
+				if (rulesManager.queryCanAppend(newVirg, node))
 					newVirg.appendChild(node);
-				txt = newDoc.createTextNode("».");
-				if (dtdRulesManager.queryCanAppend(newMod, txt))
+				txt = newDoc.createTextNode("ï¿½.");
+				if (rulesManager.queryCanAppend(newMod, txt))
 					newMod.appendChild(txt);
-			} catch (DtdRulesManagerException ex) {
+			} catch (RulesManagerException ex) {
 				System.out.println("Warning! canAppend Exception!!");
 				return null;
 			}
@@ -926,7 +926,7 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 			// Analizza solo nodi di tipo Element:
 			if (node.getNodeType() != 1)
 				continue;
-			// Analizza solo nodi in cui è presente l'attributo 'status':
+			// Analizza solo nodi in cui ï¿½ presente l'attributo 'status':
 			if (((Element) node).hasAttribute("status") == false)
 				continue;
 			status = ((Element) node).getAttribute("status"); // Valore

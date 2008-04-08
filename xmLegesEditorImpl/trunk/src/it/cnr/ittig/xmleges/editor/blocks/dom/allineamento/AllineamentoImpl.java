@@ -6,8 +6,8 @@ import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.allineamento.Allineamento;
 
@@ -28,7 +28,7 @@ public class AllineamentoImpl implements Allineamento, Loggable, Serviceable {
 
 	Node tabella;
 
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 
 	DocumentManager documentManager;
 
@@ -39,7 +39,7 @@ public class AllineamentoImpl implements Allineamento, Loggable, Serviceable {
 
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 	}
 
@@ -51,14 +51,14 @@ public class AllineamentoImpl implements Allineamento, Loggable, Serviceable {
 			if (node != null) {
 				if (UtilDom.isTextNode(node)) {
 					Node parent = node.getParentNode();
-					if (dtdRulesManager.queryIsValidAttribute(parent.getNodeName(), "h:style")
-							|| dtdRulesManager.queryIsValidAttribute(parent.getNodeName(), "style"))
+					if (rulesManager.queryIsValidAttribute(parent.getNodeName(), "h:style")
+							|| rulesManager.queryIsValidAttribute(parent.getNodeName(), "style"))
 						return true;
-				} else if (dtdRulesManager.queryIsValidAttribute(node.getNodeName(), "h:style")
-						|| dtdRulesManager.queryIsValidAttribute(node.getNodeName(), "style"))
+				} else if (rulesManager.queryIsValidAttribute(node.getNodeName(), "h:style")
+						|| rulesManager.queryIsValidAttribute(node.getNodeName(), "style"))
 					return true;
 			}
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 			logger.warn(ex.getMessage());
 			return false;
 		}
@@ -70,20 +70,20 @@ public class AllineamentoImpl implements Allineamento, Loggable, Serviceable {
 		if (UtilDom.isTextNode(pos)) {
 			Node parent = pos.getParentNode();
 			try {
-				if (dtdRulesManager.queryIsValidAttribute(parent.getNodeName(), "h:style"))
+				if (rulesManager.queryIsValidAttribute(parent.getNodeName(), "h:style"))
 					UtilDom.setAttributeValue(parent, "h:style", "text-align: " + allinea + ";");
-				else if (dtdRulesManager.queryIsValidAttribute(parent.getNodeName(), "style"))
+				else if (rulesManager.queryIsValidAttribute(parent.getNodeName(), "style"))
 					UtilDom.setAttributeValue(parent, "style", "text-align: " + allinea + ";");
-			} catch (DtdRulesManagerException ex) {
+			} catch (RulesManagerException ex) {
 				logger.warn(ex.getMessage());
 			}
 		} else {
 			try {
-				if (dtdRulesManager.queryIsValidAttribute(pos.getNodeName(), "h:style"))
+				if (rulesManager.queryIsValidAttribute(pos.getNodeName(), "h:style"))
 					UtilDom.setAttributeValue(pos, "h:style", "text-align: " + allinea + ";");
-				else if (dtdRulesManager.queryIsValidAttribute(pos.getNodeName(), "style"))
+				else if (rulesManager.queryIsValidAttribute(pos.getNodeName(), "style"))
 					UtilDom.setAttributeValue(pos, "style", "text-align: " + allinea + ";");
-			} catch (DtdRulesManagerException ex) {
+			} catch (RulesManagerException ex) {
 				logger.warn(ex.getMessage());
 			}
 		}

@@ -7,12 +7,12 @@ import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.FormClosedListener;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
@@ -103,7 +103,7 @@ public class NovellandoFormImpl implements NovellandoForm, EventManagerListener,
 	
 	Node activeNode;
 	
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 	
 	SelectionManager selectionManager;
 
@@ -120,7 +120,7 @@ public class NovellandoFormImpl implements NovellandoForm, EventManagerListener,
 		utilmsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 		disposizioni = (DispPassiveForm) serviceManager.lookup(DispPassiveForm.class);
 		domDisposizioni  = (Disposizioni) serviceManager.lookup(Disposizioni.class);
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 	}
 
@@ -178,8 +178,8 @@ public class NovellandoFormImpl implements NovellandoForm, EventManagerListener,
 
 	private boolean canSelec(Node node) {
 		
-		//TODO 	teoricamnete credo sia giusto. Non fare selezionare testo che ha già una fine vigenza;
-		//		magari ripristinrlo dopo averlo testato un pò.
+		//TODO 	teoricamnete credo sia giusto. Non fare selezionare testo che ha giï¿½ una fine vigenza;
+		//		magari ripristinrlo dopo averlo testato un pï¿½.
 //		if (domDisposizioni.getVigenza(node,-1,-1)==null)
 //			return true;
 //		else
@@ -281,8 +281,8 @@ public class NovellandoFormImpl implements NovellandoForm, EventManagerListener,
 			 }
 			 else {
 					try {
-						if (activeNode.getNodeName()!=null && dtdRulesManager.queryIsValidAttribute(activeNode.getNodeName(), "iniziovigore")) 
-							if (disposizioni.getTipoDisposizione()==disposizioni.ABROGAZIONE || dtdRulesManager.queryCanAppend(activeNode.getParentNode(), activeNode.getOwnerDocument().createElement(activeNode.getNodeName()))) {
+						if (activeNode.getNodeName()!=null && rulesManager.queryIsValidAttribute(activeNode.getNodeName(), "iniziovigore")) 
+							if (disposizioni.getTipoDisposizione()==disposizioni.ABROGAZIONE || rulesManager.queryCanAppend(activeNode.getParentNode(), activeNode.getOwnerDocument().createElement(activeNode.getNodeName()))) {
 								logger.debug("selezione non testo");
 								idSelezionato = UtilDom.getAttributeValueAsString(activeNode, "id");
 								if (idSelezionato==null)
@@ -292,7 +292,7 @@ public class NovellandoFormImpl implements NovellandoForm, EventManagerListener,
 								sceltopartizione.setSelected(true);
 								avanti.setEnabled(true);
 							}
-					} catch (DtdRulesManagerException e) {}				 
+					} catch (RulesManagerException e) {}				 
 			 }
 			 
 			 

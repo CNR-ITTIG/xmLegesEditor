@@ -8,8 +8,8 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
@@ -58,7 +58,7 @@ public class AnnessiImpl implements Annessi, Loggable, Serviceable {
 
 	NirUtilDom nirUtilDom;
 
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 
 	DocumentManager documentManager;
 
@@ -75,7 +75,7 @@ public class AnnessiImpl implements Annessi, Loggable, Serviceable {
 
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
@@ -246,7 +246,7 @@ public class AnnessiImpl implements Annessi, Loggable, Serviceable {
 				// FIXME errore nel rulesManager ? canReplace rifEsterno con
 				// Legge ?
 				// if(utilRulesManager.queryCanReplaceWith(annesso,annesso.getFirstChild(),annettere_node)){
-				if (dtdRulesManager.queryCanAppend(annesso, annettere_node)) {
+				if (rulesManager.queryCanAppend(annesso, annettere_node)) {
 					annesso.appendChild(annettere_node);
 					UtilDom.setAttributeValue(annesso, "id", idAnnesso);
 				} else {
@@ -316,13 +316,13 @@ public class AnnessiImpl implements Annessi, Loggable, Serviceable {
 					}
 					return false;
 				} else {
-					if (dtdRulesManager.queryCanAppend(annessiList.item(0), annesso)) {
+					if (rulesManager.queryCanAppend(annessiList.item(0), annesso)) {
 						annessiList.item(0).appendChild(annesso);
 						return true;
 					}
 					return false;
 				}
-			} catch (DtdRulesManagerException ex) {
+			} catch (RulesManagerException ex) {
 				logger.error(ex.getMessage(), ex);
 				return false;
 			}

@@ -9,8 +9,8 @@ import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
 import it.cnr.ittig.xmleges.core.services.dom.extracttext.ExtractText;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 
 import org.w3c.dom.Node;
@@ -49,7 +49,7 @@ public class ExtractTextImpl implements ExtractText, Loggable, Serviceable {
 
 	DocumentManager documentManager;
 
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -59,7 +59,7 @@ public class ExtractTextImpl implements ExtractText, Loggable, Serviceable {
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 	}
 
 	public boolean canExtractText(Node node, int start, int end) {
@@ -71,9 +71,9 @@ public class ExtractTextImpl implements ExtractText, Loggable, Serviceable {
 				return true;
 			else {
 				try {
-					if (null != container.getParentNode() && dtdRulesManager.queryInsertableBefore(container.getParentNode(), container).contains("#PCDATA"))
+					if (null != container.getParentNode() && rulesManager.queryInsertableBefore(container.getParentNode(), container).contains("#PCDATA"))
 						return true;
-				} catch (DtdRulesManagerException ex) {
+				} catch (RulesManagerException ex) {
 					return false;
 				}
 			}
@@ -83,9 +83,9 @@ public class ExtractTextImpl implements ExtractText, Loggable, Serviceable {
 				return true;
 			else {
 				try {
-					if (null != container.getParentNode() && dtdRulesManager.queryInsertableAfter(container.getParentNode(), container).contains("#PCDATA"))
+					if (null != container.getParentNode() && rulesManager.queryInsertableAfter(container.getParentNode(), container).contains("#PCDATA"))
 						return true;
-				} catch (DtdRulesManagerException ex) {
+				} catch (RulesManagerException ex) {
 					return false;
 				}
 			}
@@ -137,9 +137,9 @@ public class ExtractTextImpl implements ExtractText, Loggable, Serviceable {
 			if (null != container.getNextSibling() && UtilDom.isTextNode(container.getNextSibling())) {
 				container.getNextSibling().setNodeValue(node.getNodeValue().substring(start, end) + " " + container.getNextSibling().getNodeValue());
 				try {
-					if (start == 0 && dtdRulesManager.queryCanDelete(container, node))
+					if (start == 0 && rulesManager.queryCanDelete(container, node))
 						container.removeChild(node);
-				} catch (DtdRulesManagerException ex) {
+				} catch (RulesManagerException ex) {
 				}
 				if (start > 0)
 					node.setNodeValue(node.getNodeValue().substring(0, start));
@@ -148,9 +148,9 @@ public class ExtractTextImpl implements ExtractText, Loggable, Serviceable {
 				if (null != container.getParentNode()) {
 					Node newText = node.getOwnerDocument().createTextNode(node.getNodeValue().substring(start, end));
 					try {
-						if (start == 0 && dtdRulesManager.queryCanDelete(container, node))
+						if (start == 0 && rulesManager.queryCanDelete(container, node))
 							container.removeChild(node);
-					} catch (DtdRulesManagerException ex) {
+					} catch (RulesManagerException ex) {
 					}
 					if (start > 0)
 						node.setNodeValue(node.getNodeValue().substring(0, start));
@@ -170,11 +170,11 @@ public class ExtractTextImpl implements ExtractText, Loggable, Serviceable {
 			return false;
 		try {
 			// ?
-			// if(!dtdRulesManager.queryTextContainers(node.getParentNode(),node).contains(node.getParentNode().getNodeName()))
-			if (!dtdRulesManager.queryTextContent(node.getParentNode()))
+			// if(!rulesManager.queryTextContainers(node.getParentNode(),node).contains(node.getParentNode().getNodeName()))
+			if (!rulesManager.queryTextContent(node.getParentNode()))
 				return false;
 			return true;
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 			return false;
 		}
 	}

@@ -828,6 +828,10 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 	// vedi   http://www.iam.ubc.ca/guides/javatut99/i18n/text/stream.html
 	protected String convertEncoding(String text){
 		    StringBuffer buffer = new StringBuffer();
+		    
+		    if(pane.getDocumentManager().getEncoding()==null)
+		    	return text;
+		    
 		    try{ 	
 		    	InputStreamReader r = new InputStreamReader(new ByteArrayInputStream(text.getBytes()), pane.documentManager.getEncoding());
 		    	Reader in = new BufferedReader(r);

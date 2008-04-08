@@ -4,7 +4,7 @@
 package it.cnr.ittig.xmleges.editor.blocks.dom.rinumerazione;
 
 import it.cnr.ittig.services.manager.Logger;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 import it.cnr.ittig.xmleges.editor.services.util.urn.NirUtilUrn;
@@ -29,7 +29,7 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 
 	NirUtilDom nirUtilDom;
 
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 
 	// Vettore dei nodi xlink:href interni
 	Vector InternalXlinkHref = new Vector(50, 10);
@@ -40,7 +40,7 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 	public AggiornaNumerazioneAndLink(RinumerazioneImpl rinumerazioneImpl) {
 		super(rinumerazioneImpl);
 		this.logger = rinumerazioneImpl.getLogger();
-		this.dtdRulesManager = rinumerazioneImpl.dtdRulesManager;
+		this.rulesManager = rinumerazioneImpl.rulesManager;
 		this.nirUtilUrn = rinumerazioneImpl.nirUtilUrn;
 		this.nirUtilDom = rinumerazioneImpl.nirUtilDom;
 	}

@@ -12,8 +12,6 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentChangedEvent;
 import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.frame.FindIterator;
@@ -21,6 +19,8 @@ import it.cnr.ittig.xmleges.core.services.frame.PaneStatusChangedEvent;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.panes.attributes.AttributeEditor;
 import it.cnr.ittig.xmleges.core.services.panes.attributes.AttributesPane;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
@@ -100,7 +100,7 @@ public class AttributesPaneImpl implements AttributesPane, EventManagerListener,
 
 	DocumentManager documentManager;
 
-	DtdRulesManager rulesManager;
+	RulesManager rulesManager;
 
 	SelectionManager selectionManager;
 
@@ -156,7 +156,7 @@ public class AttributesPaneImpl implements AttributesPane, EventManagerListener,
 	public void service(ServiceManager serviceManager) throws ServiceException {
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
-		rulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 		utilUi = (UtilUI) serviceManager.lookup(UtilUI.class);
 		i18n = (I18n) serviceManager.lookup(I18n.class);
@@ -238,7 +238,7 @@ public class AttributesPaneImpl implements AttributesPane, EventManagerListener,
 				String def = rulesManager.queryGetAttributeDefaultValue(nodeName, attrName);
 				delAttribute.setEnabled(def.length() == 0 && !rulesManager.queryIsRequiredAttribute(nodeName, attrName)
 						&& !rulesManager.queryIsFixedAttribute(nodeName, attrName));
-			} catch (DtdRulesManagerException ex) {
+			} catch (RulesManagerException ex) {
 				delAttribute.setEnabled(false);
 			}
 		} else

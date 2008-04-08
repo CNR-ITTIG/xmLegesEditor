@@ -1,7 +1,7 @@
 package it.cnr.ittig.xmleges.core.blocks.panes.attributes;
 
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.panes.attributes.AttributeEditor;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
 
 import java.awt.Component;
 import java.util.Collection;
@@ -36,7 +36,7 @@ import org.w3c.dom.Node;
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */
 public class AttributesCellEditor extends DefaultCellEditor {
-	DtdRulesManager rulesManager;
+	RulesManager rulesManager;
 
 	Vector editors = new Vector();
 
@@ -52,7 +52,7 @@ public class AttributesCellEditor extends DefaultCellEditor {
 
 	Node attrib;
 
-	public AttributesCellEditor(DtdRulesManager rulesManager) {
+	public AttributesCellEditor(RulesManager rulesManager) {
 		super(new JTextField());
 		this.rulesManager = rulesManager;
 		defaultEditor = new DefaultAttributeEditor();

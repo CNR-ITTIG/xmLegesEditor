@@ -8,7 +8,7 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.MetaDescrittoriMaterie;
@@ -27,7 +27,7 @@ public class MetaDescrittoriMaterieImpl implements MetaDescrittoriMaterie , Logg
 
 	DocumentManager documentManager;
 	
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 
 	UtilRulesManager utilRulesManager;
 	
@@ -43,7 +43,7 @@ public class MetaDescrittoriMaterieImpl implements MetaDescrittoriMaterie , Logg
 	public void service(ServiceManager serviceManager) throws ServiceException {
 		rinumerazione = (Rinumerazione) serviceManager.lookup(Rinumerazione.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 		

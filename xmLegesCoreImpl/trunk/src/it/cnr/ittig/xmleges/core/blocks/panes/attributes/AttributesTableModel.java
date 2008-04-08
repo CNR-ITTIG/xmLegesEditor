@@ -4,8 +4,8 @@ import it.cnr.ittig.services.manager.Logger;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
 
 import javax.swing.table.AbstractTableModel;
 
@@ -35,7 +35,7 @@ public class AttributesTableModel extends AbstractTableModel {
 
 	DocumentManager documentManager;
 
-	DtdRulesManager rulesManager;
+	RulesManager rulesManager;
 
 	I18n i18n;
 
@@ -50,7 +50,7 @@ public class AttributesTableModel extends AbstractTableModel {
 	 * @param documentManager per attivare le transazioni per la modifica degli attributi
 	 * @param rulesManager per verificare la correttezza delle modifiche degli attributi
 	 */
-	public AttributesTableModel(Logger logger, DocumentManager documentManager, DtdRulesManager rulesManager, I18n i18n, AttributeFilter filter) {
+	public AttributesTableModel(Logger logger, DocumentManager documentManager, RulesManager rulesManager, I18n i18n, AttributeFilter filter) {
 		this.logger = logger;
 		this.documentManager = documentManager;
 		this.rulesManager = rulesManager;

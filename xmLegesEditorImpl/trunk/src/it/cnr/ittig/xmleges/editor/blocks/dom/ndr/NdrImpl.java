@@ -8,8 +8,8 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
@@ -59,7 +59,7 @@ public class NdrImpl implements Ndr, Loggable, Serviceable {
 
 	NirUtilDom nirUtilDom;
 
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 
 	DocumentManager documentManager;
 
@@ -80,7 +80,7 @@ public class NdrImpl implements Ndr, Loggable, Serviceable {
 
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
@@ -96,11 +96,11 @@ public class NdrImpl implements Ndr, Loggable, Serviceable {
 
 		try {
 			if (n.getParentNode() != null && UtilDom.findParentByName(n, "ndr") == null)
-				return (dtdRulesManager.queryAppendable(n).contains("ndr") || dtdRulesManager.queryInsertableInside(n.getParentNode(), n).contains("ndr")
-						|| dtdRulesManager.queryInsertableAfter(n.getParentNode(), n).contains("ndr") || dtdRulesManager.queryInsertableBefore(
+				return (rulesManager.queryAppendable(n).contains("ndr") || rulesManager.queryInsertableInside(n.getParentNode(), n).contains("ndr")
+						|| rulesManager.queryInsertableAfter(n.getParentNode(), n).contains("ndr") || rulesManager.queryInsertableBefore(
 						n.getParentNode(), n).contains("ndr"));
 			return false;
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 			return false;
 		}
 	}
@@ -167,7 +167,7 @@ public class NdrImpl implements Ndr, Loggable, Serviceable {
 		UtilDom.setAttributeValue(ndr, "valore", value);
 
 		try {
-			if (dtdRulesManager.queryTextContent(ndr)) { 
+			if (rulesManager.queryTextContent(ndr)) { 
 				UtilDom.setTextNode((Node) ndr, "(" + value + ")");
 				logger.debug(" (1) mette il testo nella nota ... ");
 			} else

@@ -17,10 +17,11 @@ import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.DocumentOpenedEvent;
 import it.cnr.ittig.xmleges.core.services.document.DomEdit;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.panes.problems.Problem;
 import it.cnr.ittig.xmleges.core.services.panes.problems.ProblemsPane;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
@@ -77,7 +78,7 @@ public class DocumentManagerImpl implements DocumentManager, EventListener, Logg
 
 	Logger logger;
 
-	DtdRulesManager rulesManager = null;
+	RulesManager rulesManager = null;
 
 	EventManager eventManager = null;
 
@@ -123,7 +124,7 @@ public class DocumentManagerImpl implements DocumentManager, EventListener, Logg
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
-		rulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 		problemsPane = (ProblemsPane) serviceManager.lookup(ProblemsPane.class);
@@ -179,6 +180,7 @@ public class DocumentManagerImpl implements DocumentManager, EventListener, Logg
 			n.addEventListener(MutationEventImpl.DOM_NODE_REMOVED, this, true);
 			n.addEventListener(MutationEventImpl.DOM_SUBTREE_MODIFIED, this, true);
 			setNew(isNew);
+			
 			eventManager.fireEvent(new DocumentOpenedEvent(this, document));
 			if (logger.isDebugEnabled())
 				logger.debug("doc opened:" + UtilDom.domToString(document));
@@ -224,10 +226,13 @@ public class DocumentManagerImpl implements DocumentManager, EventListener, Logg
 		return ddi != null ? ddi.getXmlEncoding() : null;
 	}
 
+	
+	
+	// FIXME    vedere tutti i posti dove viene chiamato getDtdName()  e correggere; fare un refactor del nome del metodo
 	public String getDtdName() {
 		Document doc = this.document;
 		if (doc != null) {
-			String dtdPath = doc.getDoctype().getSystemId();
+			String dtdPath = getGrammarPath(doc);//doc.getDoctype().getSystemId();
 			String[] pathChunks = dtdPath.split("/");
 			String currentDTD = pathChunks[pathChunks.length - 1];
 			return (currentDTD);
@@ -235,11 +240,38 @@ public class DocumentManagerImpl implements DocumentManager, EventListener, Logg
 		return null;
 	}
 
-	private String getDtdPath(Document doc) {
-		if (doc != null)
+	private String getGrammarPath(Document doc) {
+		try{
+		if (doc != null){
 			return (doc.getDoctype().getSystemId());
+		}
+		}catch(Exception e){
+			return(getSchemaLocation(doc));
+		}
 		return null;
 	}
+	
+	private String getGrammarExtension(Document doc) {
+		String path = getGrammarPath(doc);
+		if(path!=null)
+			return(path.substring(path.lastIndexOf(".")+1));
+		return null;
+	}
+		
+	private String getSchemaLocation(Document doc){		
+		String schemaLoc = UtilDom.getAttributeValueAsString((Node)doc.getDocumentElement(), "xsi:schemaLocation");
+		if(schemaLoc==null)
+			schemaLoc = UtilDom.getAttributeValueAsString((Node)doc.getDocumentElement(), "xsi:noNamespaceSchemaLocation");
+		if(schemaLoc == null)
+			return null;
+	
+		String[] elems = schemaLoc.split(" ");
+		if(elems.length>0)
+			return elems[elems.length-1];
+	  
+		return null;
+	}
+
 
 	public Document getDocumentAsDom() {
 		return this.document;
@@ -463,23 +495,7 @@ public class DocumentManagerImpl implements DocumentManager, EventListener, Logg
 		logger.debug("DOM EVENT END");
 	}
 
-	// protected void pippo(DomTransactionImpl edits) {
-	// for (int i = 1; i < edits.size(); i++) {
-	// DomEdit e = (DomEdit) edits.get(i);
-	// for (int j = 0; j < i; j++) {
-	// DomEdit a = (DomEdit) edits.get(j);
-	// if (e.getType() != a.getType() || e.getType() ==
-	// DomEdit.ATTR_NODE_MODIFIED ||
-	// e.getType() == DomEdit.CHAR_NODE_MODIFIED)
-	// continue;
-	// if (UtilDom.isAncestor(a.getNode(), e.getNode())) {
-	// edits.remove(i);
-	// i--;
-	// break;
-	// }
-	// }
-	// }
-	// }
+
 
 	protected Document open(String filename) {
 		errors.clear();
@@ -499,7 +515,11 @@ public class DocumentManagerImpl implements DocumentManager, EventListener, Logg
 		} else {
 			UtilDom.trimTextNode(doc, true);
 			logger.info("Reading rules from DTDs...");
-			rulesManager.loadRules(filename, getDtdPath(doc));
+			System.err.println("----------> GRAMMAR PATH:   "+getGrammarPath(doc));
+			
+			rulesManager.createRulesManager(getGrammarExtension(doc));
+			rulesManager.loadRules(filename, getGrammarPath(doc));
+			
 			logger.info("Reading rules OK");
 		}
 		logger.info("Reading file Ok");
@@ -511,21 +531,21 @@ public class DocumentManagerImpl implements DocumentManager, EventListener, Logg
 	public void warning(SAXParseException ex) throws SAXException {
 		errors.add("WARNIG: " + ex.getLocalizedMessage());
 		problemsPane.addProblem(new DocumentProblemImpl(Problem.WARNING, ex.getLocalizedMessage()));
-		//Gerardo: non esegui il log visto che è già stato segnalato nel pannello dei problemi
+		//Gerardo: non esegui il log visto che ï¿½ giï¿½ stato segnalato nel pannello dei problemi
 		//logger.warn(ex.getMessage());
 	}
 
 	public void error(SAXParseException ex) throws SAXException {
 		errors.add("ERROR: " + ex.getLocalizedMessage());
 		problemsPane.addProblem(new DocumentProblemImpl(Problem.ERROR, ex.getLocalizedMessage()));
-		//Gerardo: non esegui il log visto che è già stato segnalato nel pannello dei problemi		
+		//Gerardo: non esegui il log visto che ï¿½ giï¿½ stato segnalato nel pannello dei problemi		
 		//logger.error(ex.getMessage());
 	}
 
 	public void fatalError(SAXParseException ex) throws SAXException {
 		errors.add("FATAL ERROR: " + ex.getLocalizedMessage());
 		problemsPane.addProblem(new DocumentProblemImpl(Problem.FATAL_ERROR, ex.getLocalizedMessage()));
-		//Gerardo: non esegui il log visto che è già stato segnalato nel pannello dei problemi
+		//Gerardo: non esegui il log visto che ï¿½ giï¿½ stato segnalato nel pannello dei problemi
 		//logger.error(ex.getMessage());
 	}
 

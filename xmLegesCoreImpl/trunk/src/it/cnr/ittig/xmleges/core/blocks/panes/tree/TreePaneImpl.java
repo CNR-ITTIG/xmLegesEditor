@@ -14,7 +14,6 @@ import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentOpenedEvent;
 import it.cnr.ittig.xmleges.core.services.document.DomEdit;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.frame.FindIterator;
@@ -22,6 +21,7 @@ import it.cnr.ittig.xmleges.core.services.frame.PaneStatusChangedEvent;
 import it.cnr.ittig.xmleges.core.services.panes.tree.TreePane;
 import it.cnr.ittig.xmleges.core.services.panes.tree.TreePaneCellRenderer;
 import it.cnr.ittig.xmleges.core.services.preference.PreferenceManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
@@ -96,7 +96,7 @@ public class TreePaneImpl implements TreePane, EventManagerListener, Loggable, S
 
 	DocumentManager documentManager;
 
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 
 	UtilRulesManager utilRulesManager;
 
@@ -141,7 +141,7 @@ public class TreePaneImpl implements TreePane, EventManagerListener, Loggable, S
 		preferenceManager = (PreferenceManager) serviceManager.lookup(PreferenceManager.class);
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 		bars = (Bars) serviceManager.lookup(Bars.class);
@@ -358,8 +358,8 @@ public class TreePaneImpl implements TreePane, EventManagerListener, Loggable, S
 				Node selNode = selectionManager.getActiveNode();
 				Node node = UtilClipboard.getAsNode();
 				// TODO altre possibilita - es insertBefore/After
-				return dtdRulesManager.queryCanAppend(selNode, node) || dtdRulesManager.queryCanInsertAfter(selNode.getParentNode(), selNode, node)
-						|| dtdRulesManager.queryCanAppend(selNode.getParentNode(), node);
+				return rulesManager.queryCanAppend(selNode, node) || rulesManager.queryCanInsertAfter(selNode.getParentNode(), selNode, node)
+						|| rulesManager.queryCanAppend(selNode.getParentNode(), node);
 			} catch (Exception ex) {
 				return false;
 			}
@@ -371,15 +371,15 @@ public class TreePaneImpl implements TreePane, EventManagerListener, Loggable, S
 		Node selNode = selectionManager.getActiveNode();
 		Node node = UtilClipboard.getAsNode().cloneNode(true);
 		try {
-			if (dtdRulesManager.queryCanAppend(selNode, node)) {
+			if (rulesManager.queryCanAppend(selNode, node)) {
 				selNode.appendChild(node);
 				UtilDom.mergeTextNodes(selNode);
 				selectNode(node, true);
-			} else if (dtdRulesManager.queryCanInsertAfter(selNode.getParentNode(), selNode, node)) {
+			} else if (rulesManager.queryCanInsertAfter(selNode.getParentNode(), selNode, node)) {
 				UtilDom.insertAfter(node, selNode);
 				UtilDom.mergeTextNodes(selNode.getParentNode());
 				selectNode(node, true);
-			} else if (dtdRulesManager.queryCanAppend(selNode.getParentNode(), node)) {
+			} else if (rulesManager.queryCanAppend(selNode.getParentNode(), node)) {
 				selNode.getParentNode().appendChild(node);
 				UtilDom.mergeTextNodes(selNode.getParentNode());
 				selectNode(node, true);
@@ -391,7 +391,7 @@ public class TreePaneImpl implements TreePane, EventManagerListener, Loggable, S
 	public boolean canPasteAsText() {
 		try {
 			Node selNode = selectionManager.getActiveNode();
-			return (UtilClipboard.hasNode() && dtdRulesManager.queryTextContent(selNode));
+			return (UtilClipboard.hasNode() && rulesManager.queryTextContent(selNode));
 		} catch (Exception ex) {
 			return false;
 		}
@@ -401,7 +401,7 @@ public class TreePaneImpl implements TreePane, EventManagerListener, Loggable, S
 		try {
 			Node selNode = selectionManager.getActiveNode();
 			Node node = UtilClipboard.getAsNode();
-			if (dtdRulesManager.queryTextContent(selNode)) {
+			if (rulesManager.queryTextContent(selNode)) {
 				String oldValue = selNode.getNodeValue();
 				selNode.setNodeValue(oldValue + node.getNodeValue());
 			}
@@ -412,7 +412,7 @@ public class TreePaneImpl implements TreePane, EventManagerListener, Loggable, S
 	public boolean canDelete() {
 		try {
 			Node n = selectionManager.getActiveNode();
-			return dtdRulesManager.queryCanDelete(n.getParentNode(), n);
+			return rulesManager.queryCanDelete(n.getParentNode(), n);
 		} catch (Exception ex) {
 			return false;
 		}
@@ -427,7 +427,7 @@ public class TreePaneImpl implements TreePane, EventManagerListener, Loggable, S
 
 	private void deleteNode(Node node) {
 
-		// TODO verificare con DtdRulesManager
+		// TODO verificare con RulesManager
 
 		Node nodeToSelect = node.getPreviousSibling();
 		if (nodeToSelect == null)

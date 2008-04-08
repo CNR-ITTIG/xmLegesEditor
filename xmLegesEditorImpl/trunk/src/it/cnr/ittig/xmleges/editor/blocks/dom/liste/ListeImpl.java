@@ -11,8 +11,8 @@ import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
-import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
+import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.liste.Liste;
@@ -55,7 +55,7 @@ public class ListeImpl implements Liste, Loggable, Serviceable, Configurable, In
 
 	DocumentManager documentManager;
 
-	DtdRulesManager dtdRulesManager;
+	RulesManager rulesManager;
 
 	UtilRulesManager utilRulesManager;
 
@@ -66,7 +66,7 @@ public class ListeImpl implements Liste, Loggable, Serviceable, Configurable, In
 
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
-		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
 	}
@@ -83,12 +83,12 @@ public class ListeImpl implements Liste, Loggable, Serviceable, Configurable, In
 		try {
 			int azione;
 			if (node != null) {
-				Collection node_coll1 = dtdRulesManager.queryAppendable(node);
+				Collection node_coll1 = rulesManager.queryAppendable(node);
 				if (node_coll1.contains(tipolista)) {
 					azione = 1;
 					return azione;
 				} else {
-					Collection node_coll2 = dtdRulesManager.queryPrependable(node);
+					Collection node_coll2 = rulesManager.queryPrependable(node);
 					if (node_coll2.contains(tipolista)) {
 						azione = 2;
 						return azione;
@@ -96,12 +96,12 @@ public class ListeImpl implements Liste, Loggable, Serviceable, Configurable, In
 				}
 
 				if (node.getParentNode() != null) {
-					Collection node_coll3 = dtdRulesManager.queryInsertableAfter(node.getParentNode(), node);
+					Collection node_coll3 = rulesManager.queryInsertableAfter(node.getParentNode(), node);
 					if (node_coll3.contains(tipolista)) {
 						azione = 3;
 						return azione;
 					} else {
-						Collection node_coll4 = dtdRulesManager.queryInsertableBefore(node.getParentNode(), node);
+						Collection node_coll4 = rulesManager.queryInsertableBefore(node.getParentNode(), node);
 						if (node_coll4.contains(tipolista)) {
 							azione = 4;
 							return azione;
@@ -109,7 +109,7 @@ public class ListeImpl implements Liste, Loggable, Serviceable, Configurable, In
 					}
 				}
 			}
-		} catch (DtdRulesManagerException ex) {
+		} catch (RulesManagerException ex) {
 			return 0;
 		}
 		return 0;
@@ -125,10 +125,10 @@ public class ListeImpl implements Liste, Loggable, Serviceable, Configurable, In
 					// h:li senza nodo
 					// lista padre?
 					if (hli.getPreviousSibling() != null) {
-						if (dtdRulesManager.queryCanDelete(hli.getParentNode(), hli))
+						if (rulesManager.queryCanDelete(hli.getParentNode(), hli))
 							// Node precedente = elemento.getPreviousSibling();
 							// if
-							// (dtdRulesManager.queryCanInsertBefore(nodoLista,precedente,elemento))
+							// (rulesManager.queryCanInsertBefore(nodoLista,precedente,elemento))
 							return true;
 
 					}
@@ -153,10 +153,10 @@ public class ListeImpl implements Liste, Loggable, Serviceable, Configurable, In
 					// h:li senza nodo
 					// lista padre?
 					if (hli.getNextSibling() != null) {
-						if (dtdRulesManager.queryCanDelete(hli.getParentNode(), hli))
+						if (rulesManager.queryCanDelete(hli.getParentNode(), hli))
 							// Node precedente = elemento.getPreviousSibling();
 							// if
-							// (dtdRulesManager.queryCanInsertBefore(nodoLista,precedente,elemento))
+							// (rulesManager.queryCanInsertBefore(nodoLista,precedente,elemento))
 							return true;
 
 					}
@@ -181,11 +181,11 @@ public class ListeImpl implements Liste, Loggable, Serviceable, Configurable, In
 					if (sottoLista.getParentNode() != null) {
 						if (UtilDom.findParentByName(sottoLista.getParentNode(), "h:ol") != null
 								|| UtilDom.findParentByName(sottoLista.getParentNode(), "h:ul") != null) {
-							if (dtdRulesManager.queryCanDelete(sottoLista, hli))
+							if (rulesManager.queryCanDelete(sottoLista, hli))
 								// Node precedente =
 								// elemento.getPreviousSibling();
 								// if
-								// (dtdRulesManager.queryCanInsertBefore(nodoLista,precedente,elemento))
+								// (rulesManager.queryCanInsertBefore(nodoLista,precedente,elemento))
 								return true;
 						}
 
@@ -209,10 +209,10 @@ public class ListeImpl implements Liste, Loggable, Serviceable, Configurable, In
 					// Node nodooLista = hli.getParentNode(); //ma esiste elem
 					// h:li senza nodo lista padre?
 					if (hli.getPreviousSibling() != null) {
-						if (dtdRulesManager.queryCanDelete(hli.getParentNode(), hli))
+						if (rulesManager.queryCanDelete(hli.getParentNode(), hli))
 							// Node precedente = elemento.getPreviousSibling();
 							// if
-							// (dtdRulesManager.queryCanInsertBefore(nodoLista,precedente,elemento))
+							// (rulesManager.queryCanInsertBefore(nodoLista,precedente,elemento))
 							return true;
 
 					}
@@ -231,7 +231,7 @@ public class ListeImpl implements Liste, Loggable, Serviceable, Configurable, In
 		try {
 			EditTransaction tr = documentManager.beginEdit();
 			Node hli = UtilDom.findParentByName(node, "h:li");
-			if (dtdRulesManager.queryCanInsertBefore(hli.getParentNode(), hli.getPreviousSibling(), hli)) {
+			if (rulesManager.queryCanInsertBefore(hli.getParentNode(), hli.getPreviousSibling(), hli)) {
 				hli.getParentNode().insertBefore(hli, hli.getPreviousSibling());
 				documentManager.commitEdit(tr);
 				return node;
@@ -249,7 +249,7 @@ public class ListeImpl implements Liste, Loggable, Serviceable, Configurable, In
 		try {
 			EditTransaction tr = documentManager.beginEdit();
 			Node hli = UtilDom.findParentByName(node, "h:li");
-			if (dtdRulesManager.queryCanInsertAfter(hli.getParentNode(), hli.getNextSibling(), hli)) {
+			if (rulesManager.queryCanInsertAfter(hli.getParentNode(), hli.getNextSibling(), hli)) {
 				UtilDom.insertAfter(hli, hli.getNextSibling());
 				documentManager.commitEdit(tr);
 				return node;
@@ -273,7 +273,7 @@ public class ListeImpl implements Liste, Loggable, Serviceable, Configurable, In
 			Node hliSUP = UtilDom.findParentByName(sottoLista, "h:li");
 			Node listaSup = hliSUP.getParentNode();
 			// listaSup.appendChild(hli);
-			if (dtdRulesManager.queryCanInsertAfter(listaSup, sottoLista.getParentNode(), hli)) {
+			if (rulesManager.queryCanInsertAfter(listaSup, sottoLista.getParentNode(), hli)) {
 				UtilDom.insertAfter(hli, sottoLista.getParentNode());
 				if (!sottoLista.hasChildNodes())
 					sottoLista.getParentNode().removeChild(sottoLista);
@@ -296,7 +296,7 @@ public class ListeImpl implements Liste, Loggable, Serviceable, Configurable, In
 			Node precedente = hli.getPreviousSibling();
 			if (UtilDom.findDirectChild(precedente, tipolista) != null) {
 				Node sottolista = UtilDom.findDirectChild(precedente, tipolista);
-				if (dtdRulesManager.queryCanAppend(sottolista, hli)) {
+				if (rulesManager.queryCanAppend(sottolista, hli)) {
 					sottolista.appendChild(hli);
 					documentManager.commitEdit(tr);
 					return hli;
@@ -309,7 +309,7 @@ public class ListeImpl implements Liste, Loggable, Serviceable, Configurable, In
 				lista = utilRulesManager.getNodeTemplate(tipolista);
 				lista.replaceChild(hli, lista.getFirstChild());
 				// lista.appendChild(hli);
-				if (dtdRulesManager.queryCanAppend(precedente, lista)) {
+				if (rulesManager.queryCanAppend(precedente, lista)) {
 					precedente.appendChild(lista);
 					documentManager.commitEdit(tr);
 					return hli;
