@@ -421,7 +421,7 @@ public class ContentGraph implements Serializable {
 	 * 
 	 * @return il nuovo nodo
 	 */
-	public Node addNode() {
+	public Node addNewNode() {
 		String id = "" + (nodes_table.size() + 1);
 		if (!nodes_table.containsKey(id)) {
 			Node new_node = new Node(id);
@@ -444,6 +444,9 @@ public class ContentGraph implements Serializable {
 		}
 		return (Node) nodes_table.get(id);
 	}
+	public void addNode(Node n) {
+		nodes_table.put(n.name, n);
+	}
 	
 	/**
 	 * Setta la lunghezza del cammino minimo per ogni nodo al valore di default -inf
@@ -463,5 +466,12 @@ public class ContentGraph implements Serializable {
 		out = out + "]";
 
 		return out;
+	}
+	public int getNoEdges() {
+		int total_edges=0;
+		for (Iterator i = this.visitNodes(); i.hasNext();) {
+			total_edges+=((Node) i.next()).getNoEdges();
+		}
+		return total_edges;
 	}
 }
