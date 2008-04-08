@@ -8,7 +8,7 @@
            Dipende da: niente                                                       
                                                                                     
            Versione  2.2                                                            
-           Release   18/04/2007                                                     
+           Release   17/03/2008                                                     
            Fabio Vitali - UniBo                                                     
                                                                                     
            Per un'introduzione, si veda il documento 'note.html'                    
@@ -72,7 +72,8 @@ Entita' esterne: caratteri
 <!ENTITY % CMel         "(num,(corpo | (alinea?,(el | en | ep)*,coda?)),decorazione?)" >
 <!ENTITY % CMen         "(num,(corpo | (alinea?,(el | en | ep)*,coda?)),decorazione?)" >
 <!ENTITY % CMep         "(num,(corpo | (alinea?,(el | en | ep)*,coda?)),decorazione?)" >
-<!ENTITY % CMlista      "(num,(corpo | (alinea?,(lista)*,coda?)))" >
+<!ENTITY % CMlista      "(num,(corpo | (alinea?,lista*,coda?)))" >
+
 
 <!--  ====================================================================        
                                                                                     
@@ -110,6 +111,7 @@ Entita' esterne: caratteri
 <!ENTITY % ProprietarioMeta "ANY" >
 <!ENTITY % Rproprietario "%strutture;" >
 <!ENTITY % metaDTD SYSTEM "./meta.dtd">%metaDTD;
+
 
 
 
@@ -185,6 +187,7 @@ Entita' esterne: caratteri
 <!ATTLIST DocumentoNIR %globalinorma;  >
 <!ELEMENT SemiArticolato          %semiarticolato; >
 <!ATTLIST SemiArticolato %globalinorma;  >
+
 
 
 <!ATTLIST Comunicato %nome;  >
