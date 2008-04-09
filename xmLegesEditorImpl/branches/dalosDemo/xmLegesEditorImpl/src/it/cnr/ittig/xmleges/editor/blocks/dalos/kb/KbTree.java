@@ -229,7 +229,11 @@ public class KbTree {
 					//Sono i synset che vengono aggiunti!?
 					continue;
 				}
-				System.err.println(">> ERROR on walk() data:" + data);
+				if(data == null) {
+					System.err.println(">> ERROR on walk() data is null!");
+				} else {
+					System.err.println(">> ERROR on walk() data:" + data);					
+				}
 				return;
 			}
 			
@@ -238,7 +242,12 @@ public class KbTree {
 			for(Iterator pi = pocs.iterator(); pi.hasNext(); ) {
 				PivotOntoClass poc = (PivotOntoClass) pi.next();
 				Synset syn = poc.getTerm(lang);
-				toc.addTerm(syn);				
+				if(syn == null) {
+					//Language 'lang' not supported within this 'poc' class
+					//System.err.println("ERROR on walk() - syn is null - poc: " + poc);
+					continue;
+				}
+				toc.addTerm(syn);
 				DefaultMutableTreeNode newNode =
 					new DefaultMutableTreeNode(syn);
 				((DefaultMutableTreeNode) child).add(newNode);
@@ -248,32 +257,6 @@ public class KbTree {
 		}
 	} 
 
-//	private void addRemainingSynsets() {
-//		
-//		Set addedSyns = new HashSet();
-//		Collection values = linked.values();
-//		for(Iterator i = values.iterator(); i.hasNext();) {
-//			Vector item = (Vector) i.next();
-//			for(int k = 0; k < item.size(); k++) {
-//				addedSyns.add(item.get(k));
-//			}
-//		}
-//		
-//		Collection syns = kbc.getSynsets(); 
-//		System.out.println("# synsets: " + syns.size() + 
-//				" (already classified: " + addedSyns.size() + ")");
-//		for(Iterator i = syns.iterator(); i.hasNext();) {
-//			Synset syn = (Synset) i.next();
-//			String localName = syn.getURI().substring(syn.getURI().lastIndexOf('#') + 1);
-//			if(!addedSyns.contains(localName)) {
-//				//System.out.println("++ Adding synset to root node: " + syn );
-//				DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(syn);
-//				//((DefaultMutableTreeNode) root).add(newNode); //Usare se il nodo non � la root
-//				tmpTree.addNode(newNode);
-//			}
-//		}
-//	}
-	
 	private void adjustTree() {
 		
 		TreeModel model = tmpTree.getModel();

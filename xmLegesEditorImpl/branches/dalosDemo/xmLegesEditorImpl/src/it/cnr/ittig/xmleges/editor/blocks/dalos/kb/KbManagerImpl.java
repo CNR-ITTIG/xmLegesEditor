@@ -199,7 +199,7 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		}
 		
 		Synset fsyn = poc.getTerm(lang);
-		System.out.println("getSynset - poc: " + poc + " - fsyn: " + fsyn);
+		//System.out.println("getSynset - poc: " + poc + " - fsyn: " + fsyn);
 		if(fsyn == null) {
 			//No alignment!
 			return null;
@@ -207,7 +207,7 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		
 		if(!fsyn.isConcreteSynset()) {
 			//Make it concrete!
-			System.out.println("Not concrete! Initializing...");
+			//System.out.println("Not concrete! Initializing...");
 			kbc.initSynset(fsyn);
 		}
 
