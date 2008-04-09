@@ -680,8 +680,8 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 
 	protected void setCaretAtElement(Element e) {
 		if (e != null) {
-			setCaretPosition(e.getEndOffset());
-			setCaretPosition(e.getStartOffset());
+			setCaretPosition(e.getEndOffset()-1);
+			setCaretPosition(e.getStartOffset()+1);
 		}
 	}
 
