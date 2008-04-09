@@ -230,12 +230,6 @@ public class KbModelFactory {
 		}
 	}
 	
-//	private static void readData(OntModel om, String fileStr) {
-//		
-//		File file = UtilFile.getFileFromTemp(fileStr);
-//		om.read("file:///" + file.getAbsolutePath());
-//	}
-
 	private static void readLocalDocument(OntModel om, String lang, String fileCode) {
 		
 		String key = lang + fileCode;
@@ -250,12 +244,6 @@ public class KbModelFactory {
 
 	private static void readSegment(OntModel om, String fileName) {
 		
-//		String key = lang + fileCode;
-//		Object fileName = (localDocuments.get(key));
-//		if(fileName == null) {
-//			System.err.println("readDocument() - doc not found! key: " + key);
-//			return;
-//		}
 		File file = UtilFile.getFileFromTemp((String) fileName);
 		om.read("file:///" + file.getAbsolutePath());
 	}

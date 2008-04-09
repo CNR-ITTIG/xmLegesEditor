@@ -79,11 +79,6 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		
 		kbt = null;
 		
-		if(KbConf.MERGE_DOMAIN) {
-			KbConf.DOMAIN_ONTO = 
-			"http://turing.ittig.cnr.it/jwn/ontologies/consumer-law-merge.owl";
-		}
-		
 		loadCommonDocuments();
 		
 		initPivotMapping();
@@ -102,13 +97,8 @@ implements KbManager, Loggable, Serviceable, Initializable {
 	
 	private void loadCommonDocuments() {
 		
-		File file = null;
 		OntDocumentManager odm = KbModelFactory.getOdm();
-		if(KbConf.MERGE_DOMAIN) {
-			file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_DOMAIN_MERGE_ONTO);
-		} else {
-			file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_DOMAIN_ONTO);
-		}
+		File file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_DOMAIN_ONTO);
 		String fileStr = "file:///";
 		odm.addAltEntry(KbConf.DOMAIN_ONTO, fileStr + file.getAbsolutePath());
 		System.out.println("ALTERNATIVE ENTRY: " + KbConf.DOMAIN_ONTO + " --> file://" + file.getAbsolutePath());
@@ -301,7 +291,7 @@ implements KbManager, Loggable, Serviceable, Initializable {
 			String puri = ores.getNameSpace() + ores.getLocalName();
 			poc.setURI(puri);
 			uriToPivotClass.put(puri, poc);
-//			if(puri.indexOf("price") > 0) {
+//			if(puri.indexOf("artconc-0000000611") > 0) {
 //				System.out.println("[][][] POC: " + puri + " poc:" + poc);
 //			}
 			for(StmtIterator k = mod.listStatements(
@@ -316,8 +306,12 @@ implements KbManager, Loggable, Serviceable, Initializable {
 					continue;
 				}
 				
-				TreeOntoClass toc = new TreeOntoClass(objName);
 				String turi = objNS + objName;
+				TreeOntoClass toc = (TreeOntoClass) 
+										uriToTreeClass.get(turi); 
+				if(toc == null) {
+					toc = new TreeOntoClass(objName);					
+				}
 				toc.setURI(turi);
 				poc.addLink(toc);
 				toc.addConcept(poc);
@@ -366,7 +360,6 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		String[] commonFiles = new String[] {
 				KbConf.CONCEPTS, 
 				KbConf.LOCAL_DOMAIN_ONTO,
-				KbConf.LOCAL_DOMAIN_MERGE_ONTO,
 				KbConf.LOCAL_METALEVEL_FULL,
 				KbConf.LOCAL_SOURCE_SCHEMA, 
 				KbConf.LOCAL_METALEVEL_ONTO, 

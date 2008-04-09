@@ -4,8 +4,6 @@ import java.io.File;
 
 public class KbConf {
 
-	public static boolean MERGE_DOMAIN = false;
-	
 	public static String dalosRepository = "dalos" + File.separatorChar;
 	
 	public static String mapSegmentFileName = "segmap.dat";
@@ -41,7 +39,6 @@ public class KbConf {
 	//Common
 	public static String CONCEPTS = "concepts.owl";
 	public static String LOCAL_DOMAIN_ONTO = "consumer-law.owl";
-	public static String LOCAL_DOMAIN_MERGE_ONTO = "consumer-law-merge.owl";
 	public static String LOCAL_METALEVEL_ONTO = "owns.owl";
 	public static String LOCAL_METALEVEL_PROP = "owns-full.owl";
 	public static String LOCAL_SOURCE_SCHEMA = "metasources.owl";
