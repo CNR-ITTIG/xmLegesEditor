@@ -14,6 +14,7 @@ al momento la variabile MERGE_DOMAIN di KbConf stabilisce se usare la nuova onto
 che comprende la clo-dul oppure la vecchia da sola (init più rapido...);
 - cercare o creare un algoritmo per il calcolo (anche qualitativo) della prossimità 
 semantica dei termini (o delle classi!) una volta collegata l'ontologia;
+- togliere i file owl che sono stati segmentati, occupano troppo spazio!
 
 
 INTERFACCIA:
