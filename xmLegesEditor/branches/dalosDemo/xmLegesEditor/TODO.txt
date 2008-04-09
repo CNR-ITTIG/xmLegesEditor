@@ -29,6 +29,10 @@ cosa è leaf e cosa è node, per poter togliere le foglie "empty".
 settare un evento per le classi (nodi dell'albero) per mostrare l'elenco dei termini
 classificati nel pannello synset list ed eventualmente le semantic relation verso
 altre classi nel semantic relation panel.
+- selezione su una classe ontologica e swith della lingua per visualizzare i termini
+classificati nelle altre lingue sotto quella classe.
+- mostrare nel pannello details l'elenco delle classi ontologiche 
+(con percorso completo, getTreePath() ? ).
 
 
 
