@@ -20,6 +20,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.TreeSet;
 
 import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntDocumentManager;
@@ -84,6 +85,8 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		initPivotMapping();
 
 		loadLanguages();
+		
+		initSemPaths();
 	}
 	
 	private void loadLanguages() {		
@@ -173,9 +176,20 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		return kbc.getSynsets(true);
 	}
 
-	public Collection getSynset(TreeOntoClass toc) {
+	public Collection getSynsets(TreeOntoClass toc, String lang) {
 		
-		return toc.getResources();
+		Collection terms = new TreeSet();
+		Collection concepts = toc.getConcepts();
+		
+		for(Iterator i = concepts.iterator(); i.hasNext();) {
+			PivotOntoClass poc = (PivotOntoClass) i.next();
+			Synset syn = poc.getTerm(lang);
+			if(syn != null) {
+				terms.add(syn);				
+			}
+		}
+		
+		return terms;
 	}
 	
 	public Synset getSynset(String uri) {
@@ -240,9 +254,8 @@ implements KbManager, Loggable, Serviceable, Initializable {
 	
 	public void setTreeSelection(Synset syn) {
 		
-//		KbContainer kbc = getContainer(syn.getLanguage());
-//		return kbc.setTreeSelection(syn);
-		kbt.setSelection(syn);
+		//Disabled!
+		//kbt.setSelection(syn);
 	}
 	
 	public PivotOntoClass getPivotClass(String uri) {
@@ -321,6 +334,12 @@ implements KbManager, Loggable, Serviceable, Initializable {
 				uriToTreeClass.put(turi, toc);
 			}
 		}
+	}
+	
+	private void initSemPaths() {
+		
+		
+		
 	}
 		
 	private KbContainer getContainer(String lang) {

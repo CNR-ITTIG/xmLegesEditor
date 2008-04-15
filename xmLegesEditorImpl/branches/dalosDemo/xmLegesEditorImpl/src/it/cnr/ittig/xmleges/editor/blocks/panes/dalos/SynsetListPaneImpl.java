@@ -148,10 +148,9 @@ implements EventManagerListener, Loggable, Serviceable,
 	
 	protected void updateObserver(TreeOntoClass toc) {
 		
-		Collection tocSynsets = kbManager.getSynset(toc);
-		if(tocSynsets.size() > 0)
-		list.setListData(synsets.toArray());
-		//list.setSelectedValue(syn, true);
+		Collection tocSynsets = kbManager.getSynsets(toc, 
+				utilDalos.getGlobalLang());
+		list.setListData(tocSynsets.toArray());
 	}
 	
 	

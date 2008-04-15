@@ -19,6 +19,9 @@ import java.util.EventObject;
 
 import javax.swing.JScrollBar;
 import javax.swing.JTree;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 
@@ -44,6 +47,24 @@ implements EventManagerListener, Loggable, Serviceable,
 		tree.setShowsRootHandles(false);
 		tree.putClientProperty("JTree.lineStyle", "None");
 		tree.addMouseListener(new SynsetTreePaneMouseAdapter());
+		tree.addTreeSelectionListener(new TreeSelectionListener() {
+		    public void valueChanged(TreeSelectionEvent e) {
+		        DefaultMutableTreeNode node = (DefaultMutableTreeNode)
+		                           tree.getLastSelectedPathComponent();
+
+		    /* if nothing is selected */ 
+		        if (node == null) return;
+
+		    /* retrieve the node that was selected */ 
+		        Object nodeInfo = node.getUserObject();
+			
+		    /* React to the node selection. */
+		        if(nodeInfo != null) {
+		        	selectSynset(nodeInfo);
+		        }
+			
+		    }
+		});
 
 		scrollPane.getViewport().setOpaque(false);
 		

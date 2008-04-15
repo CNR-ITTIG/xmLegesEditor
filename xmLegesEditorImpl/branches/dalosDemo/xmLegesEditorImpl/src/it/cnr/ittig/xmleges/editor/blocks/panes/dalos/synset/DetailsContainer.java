@@ -4,11 +4,14 @@ package it.cnr.ittig.xmleges.editor.blocks.panes.dalos.synset;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
 import it.cnr.ittig.xmleges.editor.blocks.dalos.kb.KbConf;
+import it.cnr.ittig.xmleges.editor.services.dalos.objects.PivotOntoClass;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
+import it.cnr.ittig.xmleges.editor.services.dalos.objects.TreeOntoClass;
 
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collection;
 import java.util.Iterator;
 
 import javax.swing.JEditorPane;
@@ -68,6 +71,30 @@ public class DetailsContainer extends JEditorPane {
 			String variant = (String) i.next();
 			html += "<tr><td><img src=\"./lexical.png\"></td><td>" +
 					variant + "</td></tr>";
+		}
+		
+		PivotOntoClass poc = synset.getPivotClass();
+		if(poc != null) {			
+			Collection links = poc.getLinks();
+			if(links.size() > 0) {
+				html += "</table><h2><i>Semantic Paths</i></h2><table>";
+				for(Iterator i = links.iterator(); i.hasNext();) {
+					TreeOntoClass toc = (TreeOntoClass) i.next();
+					if(toc != null) {
+						Collection paths = toc.getSemanticPaths();
+						if(paths != null) {
+							for(Iterator p = paths.iterator(); p.hasNext();) {
+								String path = (String) p.next();
+								html += "<tr><td><img src=\"./treeopen.png\"></td><td>" +
+									path + "</td></tr>";
+							}
+						}
+//						html += "<tr><td><img src=\"./treeopen.png\"></td><td>" +
+//						toc.getName() + "</td></tr>";
+						
+					}
+				}				
+			}
 		}
 		
 		html += "</table></body></html>";

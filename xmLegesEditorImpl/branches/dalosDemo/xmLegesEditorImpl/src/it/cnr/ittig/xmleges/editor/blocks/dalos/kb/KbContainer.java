@@ -319,11 +319,6 @@ public class KbContainer {
 		
 		return kbt.getTree();
 	}
-	
-//	boolean setTreeSelection(Synset syn) {
-//		
-//		return kbt.setSelection(syn);
-//	}
 
 	private void initOntResources(OntModel om) {
 		
@@ -394,7 +389,7 @@ public class KbContainer {
 		if(res == null) {
 			return;
 		}
-		OntResource ores = (OntResource) res;
+		OntResource ores = om.getOntResource(res);
 		analyzeSynsetResource(ores);
 	}
 	
@@ -404,9 +399,11 @@ public class KbContainer {
 	}
 	
 	private void analyzeSynsetResource(OntResource ores, Synset syn) {
-		//If syn != null, make it a concrete synset
+		/*
+		 * Add gloss and lexical properties.
+		 */
 		
-		//TODO GESTIRE LA GLOSSA / DEFINIZIONE
+		//If syn != null, make it a concrete synset
 		
 		boolean newSynset = false;
 		
@@ -415,8 +412,7 @@ public class KbContainer {
 			syn = new Synset(LANGUAGE);
 			syn.setURI(ores.getNameSpace() + ores.getLocalName());
 		}
-		
-		
+				
 		RDFNode glossNode = ores.getPropertyValue(glossProperty);
 		if(glossNode != null) {			
 			syn.setDef( ((Literal) glossNode).getString());
@@ -521,6 +517,8 @@ public class KbContainer {
 				} else {
 					source.setContent(((Literal) contentNode).getString());
 				}
+			} else {
+				System.err.println("Null content for source " + source);
 			}
 
 			syn.addSource(source);
@@ -632,8 +630,11 @@ public class KbContainer {
 		Synset objSynset = (Synset) synsets.get(resNS + resName);
 		//System.out.println("addLingProp: prop:" + propName + " resName:" + resName + " obj:" + objSynset);
 		if(objSynset == null) {
-			System.err.println("addLinguisticProperty() - objSynset is null!");
-			return;
+			//System.err.println("addLinguisticProperty() - objSynset is null!");
+			//The obj synset has to be initialized...
+			initSynset(resNS + resName);
+			objSynset = (Synset) synsets.get(resNS + resName);
+			//return;
 		}
 		Collection mappedSynsets = (Collection) syn.lexicalToSynset.get(propName);
 		if(mappedSynsets == null) {

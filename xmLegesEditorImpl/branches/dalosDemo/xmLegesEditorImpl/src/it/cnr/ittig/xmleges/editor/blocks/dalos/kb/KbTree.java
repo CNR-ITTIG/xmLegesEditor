@@ -7,6 +7,7 @@ import it.cnr.ittig.xmleges.editor.services.dalos.objects.SynsetTree;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.TreeOntoClass;
 
 import java.util.Collection;
+import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -16,6 +17,7 @@ import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
+import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
 import com.hp.hpl.jena.ontology.OntClass;
@@ -49,6 +51,7 @@ public class KbTree {
 
 		tree = null;
 		tmpTree = null;
+		
 	}
 		
 	public SynsetTree getTree() {
@@ -92,14 +95,63 @@ public class KbTree {
 			expandClass(om, oc, newNode, tmpTree);
 		}
 		
-		addSynsets();
+		//addSynsets();
 		
 		adjustTree();
+		
+		adjustPaths();
+		
+		expandAll(tree, false);
+		
+		//Expand root node
+		tree.expandPath(new TreePath((
+				(DefaultMutableTreeNode) treeModel.getRoot()).getPath()));
 		
 		long t2 = System.currentTimeMillis();
 		System.out.println("...tree loaded! (" + Long.toString(t2 - t1) + " ms)\n");
 		
 		return tree;
+	}
+	
+	Collection getPaths(TreeOntoClass toc) {
+				
+		if(toc == null) {
+			return null;
+		}
+		
+		treeModel = tree.getModel();
+		Object root = treeModel.getRoot();
+		
+		Collection results = new HashSet();
+		
+		Collection paths = new Vector();
+		walkAndExpand(root, toc.getName(), paths);
+		
+		if(paths.size() == 0) {
+			//System.out.println(">> ...not found!");
+			return null;
+		}
+
+		for(Iterator i = paths.iterator(); i.hasNext(); ) {
+			TreePath tpath = (TreePath) i.next();
+			String strPath = ""; 
+			Object[] objPaths = tpath.getPath();
+			for(int pi = 0; pi < objPaths.length; pi++) {
+				Object item = objPaths[pi];
+				if(pi > 0) {
+					strPath += " -> ";
+				}
+				strPath += item.toString();
+			}
+			results.add(strPath);
+		}
+		
+		//System.out.println("cl: " + cl + " path: " + strPath);
+
+
+		
+		//tree.addSelectionPaths((TreePath[]) paths.toArray(new TreePath[0]));
+		return results;
 	}
 	
 	void setSelection(Synset syn) {
@@ -135,20 +187,49 @@ public class KbTree {
 	private void collapseTree() {
 		
 		Object o = treeModel.getRoot();
-		int  cc = treeModel.getChildCount(o);
+		int cc = treeModel.getChildCount(o);
 		for( int i = 0; i < cc; i++) {
 			Object child = treeModel.getChild(o, i);
 			tree.collapsePath(new TreePath(((DefaultMutableTreeNode) child).getPath()));
 		}
 	}
+		
+	//	 If expand is true, expands all nodes in the tree.
+    // Otherwise, collapses all nodes in the tree.
+    public void expandAll(JTree tree, boolean expand) {
+        TreeNode root = (TreeNode)tree.getModel().getRoot();
+    
+        // Traverse tree from root
+        expandAll(tree, new TreePath(root), expand);
+    }
+    
+    private void expandAll(JTree tree, TreePath parent, boolean expand) {
+        // Traverse children
+        TreeNode node = (TreeNode)parent.getLastPathComponent();
+        if (node.getChildCount() >= 0) {
+            for (Enumeration e=node.children(); e.hasMoreElements(); ) {
+                TreeNode n = (TreeNode)e.nextElement();
+                TreePath path = parent.pathByAddingChild(n);
+                expandAll(tree, path, expand);
+            }
+        }
+    
+        // Expansion or collapse must be done bottom-up
+        if (expand) {
+            tree.expandPath(parent);
+        } else {
+            tree.collapsePath(parent);
+        }
+    }
 	
 	private void walkAndExpand(Object o, String key, Collection paths) {
 		
-		int  cc = treeModel.getChildCount(o);
+		int cc = treeModel.getChildCount(o);
 		for( int i = 0; i < cc; i++) {
 			Object child = treeModel.getChild(o, i);
 			Object data = ((DefaultMutableTreeNode) child).getUserObject();
-			if(data instanceof Synset &&
+			//if(data instanceof Synset &&
+			if(data instanceof TreeOntoClass &&
 					key.equalsIgnoreCase((data.toString()))) {
 				TreePath thisPath = new TreePath(((DefaultMutableTreeNode) child).getPath());
 				tree.expandPath(thisPath);
@@ -177,6 +258,7 @@ public class KbTree {
 
 				TreeOntoClass cl = getOntoClass(uri, om);
 				newNode = new DefaultMutableTreeNode(cl);
+
 				if(node == null) {
 					if(!headClasses.contains(cl)) {
 						headClasses.add(cl);
@@ -247,13 +329,32 @@ public class KbTree {
 					//System.err.println("ERROR on walk() - syn is null - poc: " + poc);
 					continue;
 				}
-				toc.addTerm(syn);
+				//toc.addTerm(syn);
 				DefaultMutableTreeNode newNode =
 					new DefaultMutableTreeNode(syn);
 				((DefaultMutableTreeNode) child).add(newNode);
 			}
 			
 			walk(model, child);
+		}
+	} 
+
+	private void pathsWalk(TreeModel model, Object o) {
+		
+		int  cc = model.getChildCount(o);
+		for( int i = 0; i < cc; i++) {
+			Object child = model.getChild(o, i);
+			Object data = ((DefaultMutableTreeNode) child).getUserObject();
+			if( !(data instanceof TreeOntoClass)) {
+				continue;
+			}			
+			TreeOntoClass toc = (TreeOntoClass) data;
+			Collection paths = getPaths(toc);
+			if(paths != null) {
+				Collection tocPaths = toc.getSemanticPaths();
+				tocPaths.addAll(paths);				
+			}
+			pathsWalk(model, child);
 		}
 	} 
 
@@ -274,6 +375,15 @@ public class KbTree {
 		adjustLeaf(model2, root2);		
 	}
 	
+	private void adjustPaths() {
+		
+		TreeModel model = tree.getModel();
+		Object root = model.getRoot();
+
+		System.out.println("Adjusting paths...");
+		pathsWalk(model, root);		
+	}
+
 	private void sortedWalk(TreeModel model1, Object node1, 
 			TreeModel model2, Object node2) {
 		

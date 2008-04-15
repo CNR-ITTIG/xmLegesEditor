@@ -26,7 +26,8 @@ implements EventManagerListener, Loggable, Serviceable,
 		String[] icons = new String[] { 		
 				"kontact_journal.png", 
 				"lexical.png",
-				"signature.png" };
+				"signature.png",
+				"treeopen.png" };
 		
 		for (int i = 0; i < icons.length; i++) {
 			UtilFile.copyFileInTempDir(getClass().getResourceAsStream("images/"+icons[i]),"dalos",icons[i]);
