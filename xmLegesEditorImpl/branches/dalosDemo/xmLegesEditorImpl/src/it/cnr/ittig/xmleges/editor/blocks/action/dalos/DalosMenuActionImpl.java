@@ -13,6 +13,7 @@ import it.cnr.ittig.xmleges.core.services.document.DocumentOpenedEvent;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.frame.Frame;
+import it.cnr.ittig.xmleges.core.services.help.Help;
 import it.cnr.ittig.xmleges.core.services.preference.PreferenceManager;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
@@ -94,11 +95,15 @@ public class DalosMenuActionImpl implements DalosMenuAction, Loggable, Serviceab
 	
 	UtilMsg utilMsg;
 	
+	Help help;
+	
 	boolean isDalosShown = false;
 	
 	SynsetListPane synsetListPane;
 	
 	AbstractAction showViewAction = new ShowViewAction();
+	
+	AbstractAction dalosHelpAction = new DalosHelpAction();
 	
 	AbstractAction checkForwardAction = new CheckAction(true);
 	
@@ -117,6 +122,7 @@ public class DalosMenuActionImpl implements DalosMenuAction, Loggable, Serviceab
 		kbManager = (KbManager) serviceManager.lookup(KbManager.class);
 		bars = (Bars) serviceManager.lookup(Bars.class);
 		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
+		help = (Help) serviceManager.lookup(Help.class);
 		utilDalos = (UtilDalos) serviceManager.lookup(UtilDalos.class);
 		preferenceManager = (PreferenceManager) serviceManager.lookup(PreferenceManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
@@ -132,6 +138,8 @@ public class DalosMenuActionImpl implements DalosMenuAction, Loggable, Serviceab
 		for(int i=0;i<utilDalos.getDalosLang().length;i++){
 			actionManager.registerAction("editor.dalos.switchlang."+utilDalos.getDalosLang()[i].toLowerCase(), new SwitchLangAction(utilDalos.getDalosLang()[i]));
 		}
+		
+		actionManager.registerAction("editor.dalos.help", dalosHelpAction);
 		
 		actionManager.registerAction("editor.dalos.check.forward", checkForwardAction);
 		actionManager.registerAction("editor.dalos.check.backward", checkBackWardAction);
@@ -264,8 +272,17 @@ public class DalosMenuActionImpl implements DalosMenuAction, Loggable, Serviceab
 	
 	
 	
-	
-	
+	protected class DalosHelpAction extends AbstractAction {
+		public void actionPerformed(ActionEvent e) {
+			showDalosHelp();
+		}
+	}
+
+	private void showDalosHelp() {
+		logger.debug("Call Dalos Help");
+		help.helpOn("editor.dalos.help.browser");
+		//help.helpOnForm("editor.dalos.help.file", null, null);
+	}
 	
 	
 	///////////////////////////////////////////////////////////////////////////////
