@@ -68,7 +68,7 @@ public interface KbManager extends Service {
 	 */
 	public Collection getSynsetsList(String lang);
 	
-	public Collection getSynset(TreeOntoClass toc);
+	public Collection getSynsets(TreeOntoClass toc, String lang);
 	
 	/**
 	 * Utile per ottenere l'oggetto synset a partire dalla URI 
