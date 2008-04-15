@@ -25,7 +25,8 @@ corrispondenza; <-- Non settare il "selected synset" a null altrimenti si perde
 l'ultima selezione corretta (problema che si verifica switchando le lingue quando
 c'è un "No match").
 - non utilizzare il treemodel di default nell'ontology browser in modo da specificare
-cosa è leaf e cosa è node, per poter togliere le foglie "empty".
+cosa è leaf e cosa è node, per poter togliere le foglie "empty", togliere il collapse
+sulla selezione di un altro termine nella lista.
 - decidere se visualizzare o meno i termini nell'ontology browser, forse è meglio di no;
 settare un evento per le classi (nodi dell'albero) per mostrare l'elenco dei termini
 classificati nel pannello synset list ed eventualmente le semantic relation verso
