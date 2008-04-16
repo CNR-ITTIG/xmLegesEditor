@@ -1,6 +1,7 @@
 package it.cnr.ittig.xmleges.editor.services.dom.disposizioni;
 
 import it.cnr.ittig.services.manager.Service;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 
 import org.w3c.dom.Node;
@@ -23,6 +24,14 @@ import org.w3c.dom.Node;
  * @version 1.0
  */
 public interface Disposizioni extends Service {
+	
+	/**
+	 * Funzione per aggiornare le Urn del documento dopo un evento
+	 * 
+	 * @param evento oroginale e di modifica
+	 * @return </code>True</code> operazione correttamente eseguita
+	 */
+	public boolean setUrn(Evento eventoOriginale, Evento eventoVigore);
 	
 	/**
 	 * Funzione per l'aggiornamento dei metadati di disposizione ATTIVE
@@ -137,5 +146,5 @@ public interface Disposizioni extends Service {
 	/**
 	 * Modifica vigenza
 	 */
-	public void doChange(String norma, String pos, Node disposizione, String autonota, boolean implicita, Node novellando, String status);
+	public void doChange(String norma, String pos, Node disposizione, String autonota, boolean implicita, Node novellando, String status, String idEvento, String idNovella);
 }
