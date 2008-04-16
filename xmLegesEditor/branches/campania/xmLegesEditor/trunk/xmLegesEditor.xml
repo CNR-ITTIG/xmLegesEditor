@@ -969,7 +969,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.ndr.NdrFormImpl" />
     
-    <component  class="it.cnr.ittig.xmleges.editor.blocks.form.repository.RepositoryFormImpl" />
+    <!--	component  class="it.cnr.ittig.xmleges.editor.blocks.form.repository.RepositoryFormImpl" /	-->
 
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.rinvii.attogiacitato.AttogiacitatoFormImpl" />
 
