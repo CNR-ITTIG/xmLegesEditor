@@ -1,6 +1,7 @@
 <configuration>
 	<browsers>
 		<browser>mozilla-firefox</browser>
+		<browser>firefox</browser>		
 		<browser>cmd /C start</browser>
 	</browsers>
 </configuration> 
