@@ -114,7 +114,8 @@ public class AttributesTableModel extends AbstractTableModel {
 			if (nnm != null)
 				for (int i = 0; i < nnm.getLength(); i++) {
 					String attrName = nnm.item(i).getNodeName();
-					if (!filter.isHidden(attrName))
+					//TODO: da valutare. Voglio che l'attributi Hidden siano nascosti nella combo di inserimento ma se presenti in xml, vederli fra l'elenco degli attributi
+					//if (!filter.isHidden(attrName))	
 						c++;
 				}
 			return c;
