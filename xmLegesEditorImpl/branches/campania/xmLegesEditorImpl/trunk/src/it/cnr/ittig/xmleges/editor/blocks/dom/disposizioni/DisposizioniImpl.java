@@ -97,9 +97,50 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 	}
 	
+	public boolean setUrn(Evento eventoOriginale, Evento eventoVigore) {
+		
+		Document doc = documentManager.getDocumentAsDom();
+		Node activeMeta = nirUtilDom.findActiveMeta(doc,null);
+		Node descrittoriNode = UtilDom.findRecursiveChild(activeMeta,"descrittori");
+		Node[] urnNode = UtilDom.getElementsByTagName(doc, descrittoriNode, "urn");
+		String urnOriginale = "";
+		String versione = "@";
+		if (urnNode.length>0) {
+			//controllo la urn originale
+			urnOriginale = UtilDom.getAttributeValueAsString(urnNode[0], "valore");
+			//Se non è ancora settato inizio vigore lo imposto all'evento originale
+			if (UtilDom.getAttributeValueAsString(urnNode[0], "iniziovigore")==null)
+				UtilDom.setAttributeValue(urnNode[0], "iniziovigore", eventoOriginale.getId());
+		}
+		try {
+			versione += eventoVigore.getFonte().toString().split(":")[4].replaceAll("-", "");
+			if (versione.indexOf(';')!=-1)
+					versione = versione.split(";")[0];
+		}
+		catch (Exception e) {
+			logger.error("Errore inserimento urn versione");	
+		}
+		String urnVersione = urnOriginale+versione;
+		boolean inserisci = true;
+		for (int i=1; i<urnNode.length; i++)
+			if (urnVersione.equals(UtilDom.getAttributeValueAsString(urnNode[i], "valore")))
+				inserisci = false;
+		
+		if (inserisci) {		
+			//imposto all'ultima urn il finevigore
+			UtilDom.setAttributeValue(urnNode[urnNode.length -1], "finevigore", eventoVigore.getId());
+			//inserisco una nuova urn con iniziovigore
+			Node nuovaUrn = utilRulesManager.getNodeTemplate(doc,"urn");
+			UtilDom.setAttributeValue(nuovaUrn, "valore", urnVersione);
+			UtilDom.setAttributeValue(nuovaUrn, "iniziovigore", eventoVigore.getId());
+			descrittoriNode.appendChild(nuovaUrn);
+		}
+		
+		return true;
+	}
 	public boolean setDOMDisposizioni(String pos, String norma, String partizione, String novellando, String novella, String preNota, String autoNota, String postNota, boolean implicita) {
 		Document doc = documentManager.getDocumentAsDom();
-		
+
 		Node activeMeta = nirUtilDom.findActiveMeta(doc,null);
 
 		//inserisco la disposizione
@@ -482,20 +523,39 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		}
 	}
 	
-	public void doChange(String norma, String pos, Node disposizione, String autonota, boolean implicita, Node novellando, String status) {		
+	public void doChange(String norma, String pos, Node disposizione, String autonota, boolean implicita, Node novellando, String status, String idEvento, String idNovella) {		
 		
 		
 		Document doc = documentManager.getDocumentAsDom();
 
-		
+
 		if (implicita && UtilDom.getAttributeValueAsString(disposizione, "implicita").equalsIgnoreCase("no"))
 			UtilDom.setAttributeValue(disposizione, "implicita","si");
 		else
 			if (!implicita && UtilDom.getAttributeValueAsString(disposizione, "implicita").equalsIgnoreCase("si"))
 				UtilDom.setAttributeValue(disposizione, "implicita","no");
 		Node modifica = UtilDom.getElementsByTagName(doc, disposizione, "dsp:norma")[0];
-		if (!UtilDom.getAttributeValueAsString(modifica, "xlink:href").equals(norma))
+		if (!UtilDom.getAttributeValueAsString(modifica, "xlink:href").equals(norma)) {
 			UtilDom.setAttributeValue(modifica, "xlink:href", norma);
+			//cambio di ID  (per ora no)
+
+
+			//aggiorno attributi inizio/finevigore
+			if (disposizione.getNodeName().equals("dsp:abrogazione")) {
+				UtilDom.setAttributeValue(novellando, "finevigore", idEvento);
+			}
+			else if (disposizione.getNodeName().equals("dsp:integrazione")) {
+					Node novella = doc.getElementById(idNovella);
+					if (novella!=null)
+						UtilDom.setAttributeValue(novella, "iniziovigore", idEvento);
+				 }
+			     else if (disposizione.getNodeName().equals("dsp:sostituzione")) {
+			    	 	UtilDom.setAttributeValue(novellando, "finevigore", idEvento);
+						Node novella = doc.getElementById(idNovella);
+						if (novella!=null)
+							UtilDom.setAttributeValue(novella, "iniziovigore", idEvento);
+			     	  }
+		}
 		modifica = UtilDom.getElementsByTagName(doc, modifica, "dsp:pos")[0]; 
 		if (!UtilDom.getAttributeValueAsString(modifica, "xlink:href").equals(pos))
 			UtilDom.setAttributeValue(modifica, "xlink:href", norma+"#"+pos);		
@@ -504,14 +564,21 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 			UtilDom.setAttributeValue(modifica, "auto", autonota);
 		if (UtilDom.getAttributeValueAsString(novellando, "status")!=null)
 			if (!UtilDom.getAttributeValueAsString(novellando, "status").equals(status))
-				UtilDom.setAttributeValue(novellando, "status", status);
+				UtilDom.setAttributeValue(novellando, "status", status);		
 	}
 	
 	public void doErase(String idNovellando, String idNovella, Node disposizione, Node novellando) {
 
 		if (disposizione.getNodeName().equals("dsp:abrogazione"))
 			if (!"".equals(idNovellando))
-				doUndo(idNovellando, false);	
+				//doUndo(idNovellando, false);	
+				if (novellando.getNodeName().equals("h:span"))
+					doUndo(idNovellando, false);
+				else
+					doUndo(idNovellando, null, null, null);
+		
+		
+		
 		if (disposizione.getNodeName().equals("dsp:integrazione"))	
 			if (!"".equals(idNovella))
 				doUndo(idNovella, true);
