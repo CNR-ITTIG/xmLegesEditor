@@ -39,6 +39,9 @@ export CLASSPATH=$CLASSPATH:lib/commons-httpclient.jar
 export CLASSPATH=$CLASSPATH:lib/jakarta-slide-webdavlib-2.1.jar
 export CLASSPATH=$CLASSPATH:lib/jdom-1.0.jar
 
+export CLASSPATH=$CLASSPATH:lib/FontBox-0.1.0-dev.jar
+export CLASSPATH=$CLASSPATH:lib/PDFBox-0.7.3.jar
+
 export LC_ALL=it_IT@euro
 export LANG=it_IT@euro
 
