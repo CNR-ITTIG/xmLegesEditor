@@ -22,9 +22,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 >
 
 <xsl:output method="html" />
-
 <xsl:include href="xsltmapper-1.0.xsl"/>
-
+<xsl:include href="nir-xslt-utility.xsl"/>
 <xsl:strip-space elements="*" />
 
 <xsl:template match="/">
@@ -71,7 +70,12 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 					<xsl:variable name="data_fine">
 						<xsl:value-of select="id($fine_id)/@data"/>
 					</xsl:variable>
-
+					<xsl:variable name="giornoprima">		
+						<xsl:call-template name="finevigenza">
+							<xsl:with-param name="datafinevigenza" select="$data_fine" />
+						</xsl:call-template>
+					</xsl:variable>		
+		
 		<xsl:if test="$ittignota">
 			<div>
 	    		<xsl:attribute name="style">
@@ -136,7 +140,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 										<xsl:text>fino</xsl:text>
 									</xsl:otherwise>
 								</xsl:choose>	
-								al <xsl:value-of select="concat(substring($data_fine,7,2),'/',substring($data_fine,5,2),'/',substring($data_fine,1,4))"/>
+								al <xsl:value-of select="$giornoprima"/>
 								
 								<!--	xsl:choose>			
 									<xsl:when test="$stato!=''">

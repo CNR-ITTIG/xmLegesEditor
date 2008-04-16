@@ -62,7 +62,24 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 				</xsl:when>
 			</xsl:choose>
 			<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-				<font color="blue"><xsl:value-of select="@valore"/></font>
+				<font color="blue">
+					<xsl:value-of select="@valore"/>
+					<xsl:if test="@iniziovigore">
+						<xsl:variable name="datainizio">
+							<xsl:value-of select="id(@iniziovigore)/@data"/>
+						</xsl:variable>
+	        			<xsl:text> [ Vigore: da </xsl:text><xsl:value-of select="concat(substring($datainizio,7,2),'/',substring($datainizio,5,2),'/',substring($datainizio,1,4))"/> 
+	        		</xsl:if>
+					<xsl:if test="@finevigore">
+						<xsl:variable name="datafine">
+							<xsl:value-of select="id(@finevigore)/@data"/>
+						</xsl:variable>
+	        			<xsl:text> al </xsl:text><xsl:value-of select="concat(substring($datafine,7,2),'/',substring($datafine,5,2),'/',substring($datafine,1,4))"/> 
+	        		</xsl:if>
+	        		<xsl:if test="@iniziovigore">
+	        			<xsl:text> ]</xsl:text>
+	        		</xsl:if>
+				</font>
 			</xsl:element>
 		</xsl:for-each>
 		<xsl:apply-templates select="*[name()='pubblicazione']" mode="oneroot" />
