@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<vocabolario nome="CNIPA">
+	<voce nome="Norme sull'informatica pubblica">
+		<voce nome="Linee guida in materia di e-Government"/>
+		<voce nome="Appendice"/>
+	</voce>
+	<voce nome="Dalla Rete unitaria della pubblica amministrazione (RUPA) al Sistema pubblico di connettività (SPC)"/>
+	<voce nome="Accessibilità"/>
+	<voce nome="Carta d'identità elettronica e carta nazionale dei servizi"/>
+	<voce nome="Comunicazione nell'ambito della Pubblica Amministrazione e posta elettronica certificata (PEC)"/>
+	<voce nome="Documento informatico"/>
+	<voce nome="Domini internet e siti web"/>
+	<voce nome="Firme elettroniche e certificatori"/>
+	<voce nome="Formazione del personale - e-learning"/>
+	<voce nome="Gestione dei flussi documentali">
+		<voce nome="Protocollo informatico"/>
+		<voce nome="Conservazione dei documenti informatici"/>
+	</voce>
+	<voce nome="Monitoraggio dei contratti di grande rilievo"/>
+	<voce nome="Razionalizzazione della spesa pubblica"/>
+	<voce nome="Registro delle imprese"/>
+	<voce nome="Sicurezza informatica"/>
+	<voce nome="Sistema informatico dei pagamenti nell'ambito della Pubblica Amministrazione">
+		<voce nome="Mandato informatico"/>
+		<voce nome="Sistema informativo delle operazioni degli enti pubblici (SIOPE) e Ordinativo informatico locale (OIL)"/>
+	</voce>
+	<voce nome="Software a codice sorgente aperto - open source"/>
+	<voce nome="Telelavoro"/>
+	<voce nome="Leggi regionali"/>
+</vocabolario>
