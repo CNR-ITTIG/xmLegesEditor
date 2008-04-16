@@ -23,6 +23,7 @@ import it.cnr.ittig.xmleges.editor.services.dom.disposizioni.Disposizioni;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.MetaCiclodivita;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
+import it.cnr.ittig.xmleges.editor.services.dom.rinumerazione.Rinumerazione;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.Vigenza;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 import it.cnr.ittig.xmleges.editor.services.form.disposizioni.passive.DispPassiveForm;
@@ -128,6 +129,8 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 	
 	JTextField data;
 
+	Rinumerazione rinumerazione;
+	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
@@ -148,6 +151,8 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 		novellandoForm = (NovellandoForm) serviceManager.lookup(NovellandoForm.class);
 		novellaForm = (NovellaForm) serviceManager.lookup(NovellaForm.class);
 		domDisposizioni  = (Disposizioni) serviceManager.lookup(Disposizioni.class);
+		
+		rinumerazione = (Rinumerazione) serviceManager.lookup(Rinumerazione.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
@@ -297,6 +302,11 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 		operazioneProssima = NO_OPERAZIONE;
 		form.setSize(420, 280);
 		form.showDialog(false);
+		
+		if (rinumerazione.isRinumerazione())
+			utilmsg.msgInfo("editor.form.disposizioni.passive.rinumerazione");
+			
+		
 	}
 
 	public int getTipoDisposizione() {
@@ -387,6 +397,8 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 			
 			if (!domDisposizioni.setDOMDisposizioni(posDisposizione, evento.getText(), partizione, idNovellando, idNovella, preNota, autoNota, postNota, implicita.isSelected()))
 				utilmsg.msgError("editor.form.disposizioni.passive.erroremetadati");
+			else	//aggiorno le urn del documento
+				domDisposizioni.setUrn(eventoriginale, eventovigore);
 			
 			operazioneIniziale = NO_OPERAZIONE;
 		}

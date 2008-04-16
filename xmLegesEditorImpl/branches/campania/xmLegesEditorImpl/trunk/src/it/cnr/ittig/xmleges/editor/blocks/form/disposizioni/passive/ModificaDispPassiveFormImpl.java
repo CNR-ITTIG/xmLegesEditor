@@ -111,6 +111,7 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 	Node pos;
 	Node novellando;
 	String id;
+	String idEvento;
 	String idNovella;
 	String idNovellando;
 	String dispCorrente;
@@ -184,6 +185,7 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 					if (eventovigore.getFonte().getTagTipoRelazione().equalsIgnoreCase("passiva")) {
 						evento.setText(eventovigore.getFonte().getLink());
 						data.setText(UtilDate.normToString(eventovigore.getData()));
+						idEvento = eventovigore.getId();
 					}	
 					else {
 						evento.setText(eventovigore.getFonte().getLink());
@@ -226,7 +228,7 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 				(!vigenzaStatus.isEnabled() || statusCorrente.equals(vigenzaStatus.getSelectedItem())))
 					 utilmsg.msgError("Non hai effettuato nessuna modifica");
 			else {
-				//ricalcolo nota automatica
+				//ricalcolo nota automatica	
 				String autoNota = urnTestoCorrente;
 				if (!dispCorrente.equals(evento.getText())) {
 					autoNota =  evento.getText();
@@ -239,7 +241,7 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 				else	
 					autoNota = partTestoCorrente + autoNota;
 				
-				domDisposizioni.doChange(evento.getText(),dove.getText(),disposizione, autoNota, implicita.isSelected(),novellando, (String) vigenzaStatus.getSelectedItem());
+				domDisposizioni.doChange(evento.getText(),dove.getText(),disposizione, autoNota, implicita.isSelected(), novellando, (String) vigenzaStatus.getSelectedItem(), idEvento, idNovella);
 				form.close();
 			}	
 	}
@@ -252,8 +254,26 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 		doc =documentManager.getDocumentAsDom();
 		
 		if (UtilDom.getElementsByTagName(doc, UtilDom.findParentByName(activeNode,"NIR"), "modifichepassive").length>0) {
-			disposizione = ricercaDisposizione(UtilDom.getElementsByTagName(doc, UtilDom.findParentByName(activeNode,"NIR"), "modifichepassive")[0].getFirstChild());
+			disposizione = ricercaDisposizione(UtilDom.getElementsByTagName(doc, UtilDom.findParentByName(activeNode,"NIR"), "modifichepassive")[0].getLastChild());
 			if (disposizione!=null) {
+				
+				// Controllo anche se la disposizione selezionata non abbia subito ulteriori modifiche.
+				// In questo caso non permetto la modifica.
+				if (disposizione.getNodeName().equals("dsp:abrogazione")) {}
+				else if (disposizione.getNodeName().equals("dsp:integrazione")) {
+						if(UtilDom.getAttributeValueAsString(activeNode,"finevigore")!=null) {
+							utilmsg.msgInfo("editor.disposizioni.passive.noultimamodifica");
+							return;
+						}	
+					 }
+				     else if (disposizione.getNodeName().equals("dsp:sostituzione")) {
+				    	 //il test lo effettuo non per forza sul nodo attivo ma su quello della novella
+				    	 if(UtilDom.getAttributeValueAsString(doc.getElementById(idNovella),"finevigore")!=null) {
+								utilmsg.msgInfo("editor.disposizioni.passive.noultimamodifica");
+								return;
+							}	
+				     }
+				
 				implicitaCorrente = UtilDom.getAttributeValueAsString(disposizione, "implicita").equalsIgnoreCase("si");
 				norma = UtilDom.getElementsByTagName(doc, disposizione, "dsp:norma")[0];
 				pos = UtilDom.getElementsByTagName(doc, norma, "dsp:pos")[0];
@@ -267,16 +287,17 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 				modificaelimina.setText("Hai selezionato una " + tipoDisposizione + ".");
 				evento.setText(dispCorrente);
 				
-				//per il momento lo recupero dal testo... dopo recuperarlo dai metadati (dsp:tempi ....o simile)
 				NodeList eventi = UtilDom.findRecursiveChild(doc, "eventi").getChildNodes();
 				String evento;
-				if (!"".equals(UtilDom.getAttributeValueAsString(activeNode, "finevigore")))
+				if (UtilDom.getAttributeValueAsString(activeNode, "finevigore")!=null)
 					evento = UtilDom.getAttributeValueAsString(activeNode, "finevigore");
 				else
 					evento = UtilDom.getAttributeValueAsString(activeNode, "iniziovigore");
 				for (int i=0; i<eventi.getLength(); i++)
-					if (UtilDom.getAttributeValueAsString(eventi.item(i),"id").equals(evento))
+					if (UtilDom.getAttributeValueAsString(eventi.item(i),"id").equals(evento)) {
 						data.setText(UtilDate.normToString(UtilDom.getAttributeValueAsString(eventi.item(i),"data")));
+						idEvento = UtilDom.getAttributeValueAsString(eventi.item(i),"id");
+					}	
 					
 					
 				dove.setText(partCorrente);
@@ -304,7 +325,7 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 					urnTestoCorrente="";
 				}
 				partTestoCorrente = autoCorrente.substring(0, autoCorrente.indexOf(urnTestoCorrente));
-
+				
 				form.setSize(400, 280);
 				form.showDialog();
 			}
@@ -359,7 +380,7 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 								return cerca;
 							}	
 						}
-				return ricercaDisposizione(cerca.getNextSibling());
+				return ricercaDisposizione(cerca.getPreviousSibling());
 			}
 		} catch (Exception e) {
 			return null;

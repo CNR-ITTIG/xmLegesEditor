@@ -7,6 +7,7 @@ import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
+import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
@@ -82,7 +83,7 @@ public class NovellandoFormImpl implements NovellandoForm, EventManagerListener,
 	UtilUI utilui;
 	UtilMsg utilmsg;
 
-	
+	DocumentManager documentManager;
 	EventManager eventManager;
 	 
 	JTextField idotesto;
@@ -122,6 +123,7 @@ public class NovellandoFormImpl implements NovellandoForm, EventManagerListener,
 		domDisposizioni  = (Disposizioni) serviceManager.lookup(Disposizioni.class);
 		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
+		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 	}
 
 	public void initialize() throws java.lang.Exception {
@@ -208,6 +210,15 @@ public class NovellandoFormImpl implements NovellandoForm, EventManagerListener,
 				
 				
 				idSelezionato = UtilDom.getAttributeValueAsString(n, "id");
+				if (idSelezionato==null) {
+					String prefisso = n.getLocalName();
+					int occorrenze = documentManager.getDocumentAsDom().getElementsByTagName(prefisso).getLength();
+					if (prefisso.length()>3)
+						prefisso = prefisso.substring(0,3);
+					UtilDom.setIdAttribute(n, prefisso + occorrenze);
+					idSelezionato = UtilDom.getAttributeValueAsString(n, "id");
+				}
+				
 				disposizioni.setNovellando(idSelezionato, iniziovigore, finevigore, statusvigore, false);
 				disposizioni.setPosdisposizione(n);
 				
