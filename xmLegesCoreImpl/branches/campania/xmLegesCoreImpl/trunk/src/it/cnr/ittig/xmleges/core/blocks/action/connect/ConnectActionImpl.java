@@ -478,6 +478,8 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 	
 	private boolean openDAV(String url, String user, String password) {
 						
+		if (url==null)
+			return false;
 		if (url.substring(url.length()-1, url.length()).equals("/"))
 			url=url.substring(0, url.length()-1);
 		currDir.setText(">>> Connetto ...");
