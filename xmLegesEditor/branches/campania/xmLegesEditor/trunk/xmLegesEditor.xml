@@ -5,7 +5,7 @@
 File di composizione dell'applicazione xmLegesEditor.
 
 author       : Mirco Taddei
-version      : 2.0 rc8
+version      : 2.0 rc9
 copyright (C): 2004 - 2005
                Istituto di Teoria e Tecniche dell'Informazione Giuridica (ITTIG)
                Consiglio Nazionale delle Ricerche - Italy
@@ -160,7 +160,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  class="it.cnr.ittig.xmleges.core.blocks.version.VersionImpl"
         >
         <configuration>
-            <version>2.0 rc8</version>
+            <version>2.0 rc9</version>
             <url>http://repo.ittig.cnr.it/nireditor2/versions.txt</url>
         </configuration>
     </component>
@@ -386,7 +386,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                         <item action="editor.partizioni.numero" />
                         <item action="editor.partizioni.punto" />
                         <item action="editor.partizioni.rubrica" />
-                        <!--	item action="editor.partizioni.vigenza" /	-->                        
+                      
                         <item action="editor.disposizioni.passive" />
 						<item action="editor.disposizioni.rimuovipassive" />
                         
@@ -554,7 +554,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <item action="editor.partizioni.numero" />
                     <item action="editor.partizioni.punto" />
                     <item action="editor.partizioni.rubrica" />
-                    <!--	item action="editor.partizioni.vigenza" /	-->
+
                     <item action="editor.disposizioni.passive" />
 					<item action="editor.disposizioni.rimuovipassive" />
 
@@ -807,6 +807,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 class="it.cnr.ittig.xmleges.editor.blocks.action.ndr.NdrActionImpl"
     />
     
+
     <component  activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.action.xmleges.linker.XmLegesLinkerActionImpl"
     />
@@ -967,6 +968,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.meta.ciclodivita.CiclodiVitaEventoFormImpl" />
 
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.ndr.NdrFormImpl" />
+    
+    <component  class="it.cnr.ittig.xmleges.editor.blocks.form.repository.RepositoryFormImpl" />
 
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.rinvii.attogiacitato.AttogiacitatoFormImpl" />
 
@@ -979,16 +982,13 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     />
     <component  lifestyle="singleton" activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.passive.DispPassiveFormImpl"
-    />
+    />    
     <component  lifestyle="pool"
                 class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.passive.NovellandoFormImpl"
     />
     <component  lifestyle="pool"
                 class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.passive.NovellaFormImpl"
     />
-    
-
-
 
 
 
@@ -1182,12 +1182,15 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  class="it.cnr.ittig.xmleges.core.blocks.panes.attributes.AttributesPaneImpl">
         <configuration>
         	<readonly>id</readonly>
-        	<readonly>iniziovigore</readonly>
+        	<hidden>iniziovigore</hidden>
+        	<readonly>iniziovigore</readonly>>
         	<readonly>inizioefficacia</readonly>        	
+        	<hidden>finevigore</hidden>
         	<readonly>finevigore</readonly>
         	<readonly>fineefficacia</readonly>
         	<!-- <readonly>tipo</readonly> dtd2.2: e' anche il nome dell'attributo del tag firma--> 
-        	<readonly>status</readonly>
+        	
+        	<!--	SBLOCCO LO VOGLIO USARE PER GLI OMISSIS      readonly>status</readonly	-->
         </configuration>
 	</component>
 
@@ -1227,6 +1230,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             <css    name="disegnilegge-style"   file="nir-disegnilegge-style.css"       startup="true" />
             <css    name="nir-style"      		file="nir-generico-style.css"           startup="true" />
             <xslt   name="pdf-gazzettaufficiale" file="nir-fo-gazzettaufficiale.xsl"	startup="true" />
+            
+            <xslt   name="xslt-utility"			file="nir-xslt-utility.xsl"     		startup="true" />
             
             <xslt   name="xsl-cnr"              		file="cnrHTML.xsl"				startup="true" />
             <css    name="html-cnr-default_style"     	file="cnrLight.css"				startup="true" />
@@ -1398,7 +1403,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 <element name="h:li"/>
                 <element name="h:ul"/>
                 <element name="h:ol"/>
-                <element name="h:span"/>
+                <!--	PROVARE A SBLOCCARE LO SPAN   element name="h:span"/	-->
                 <!-- ciclodivita -->
                 <element name="ciclodivita" />
                 <element name="eventi" />
