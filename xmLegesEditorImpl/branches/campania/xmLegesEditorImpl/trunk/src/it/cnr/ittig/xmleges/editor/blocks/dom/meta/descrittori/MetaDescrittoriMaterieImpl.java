@@ -51,6 +51,9 @@ public class MetaDescrittoriMaterieImpl implements MetaDescrittoriMaterie , Logg
 
 	public void setVocabolari(Node node, Vocabolario[] vocabolari) {
 		
+		//Voglio settare sul documento solo le materie selezionate
+		//questo implica (forse) poter avere nel documento un'unico vocabolario
+		
 		Document doc = documentManager.getDocumentAsDom();
 		try {
 			EditTransaction tr = documentManager.beginEdit();
