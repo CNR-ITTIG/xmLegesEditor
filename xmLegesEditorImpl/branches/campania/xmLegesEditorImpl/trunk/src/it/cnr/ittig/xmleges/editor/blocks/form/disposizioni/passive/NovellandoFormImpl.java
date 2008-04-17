@@ -213,8 +213,10 @@ public class NovellandoFormImpl implements NovellandoForm, EventManagerListener,
 				if (idSelezionato==null) {
 					String prefisso = n.getLocalName();
 					int occorrenze = documentManager.getDocumentAsDom().getElementsByTagName(prefisso).getLength();
-					if (prefisso.length()>3)
-						prefisso = prefisso.substring(0,3);
+					
+					//NO è ok per intero
+//					if (prefisso.length()>3)
+//						prefisso = prefisso.substring(0,3);
 					UtilDom.setIdAttribute(n, prefisso + occorrenze);
 					idSelezionato = UtilDom.getAttributeValueAsString(n, "id");
 				}
