@@ -106,7 +106,10 @@ public class RinumerazioneActionImpl implements RinumerazioneAction, EventManage
 	public void start() throws java.lang.Exception {
 		renumAction.setEnabled(true);  // era false
 		String attiva = preferenceManager.getPreferenceAsString(getClass().getName());
-		doSetRinumerazione(Boolean.valueOf(attiva).booleanValue());
+		
+		//TODO: la lascio disattivata
+		//doSetRinumerazione(Boolean.valueOf(attiva).booleanValue());
+		doSetRinumerazione(false);
 	}
 
 	public void stop() throws java.lang.Exception {
