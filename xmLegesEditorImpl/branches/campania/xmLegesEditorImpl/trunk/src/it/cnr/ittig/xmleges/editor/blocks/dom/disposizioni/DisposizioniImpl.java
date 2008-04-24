@@ -139,6 +139,11 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		return true;
 	}
 	public boolean setDOMDisposizioni(String pos, String norma, String partizione, String novellando, String novella, String preNota, String autoNota, String postNota, boolean implicita) {
+
+		try {
+			EditTransaction t = documentManager.beginEdit();
+					
+		
 		Document doc = documentManager.getDocumentAsDom();
 
 		Node activeMeta = nirUtilDom.findActiveMeta(doc,null);
@@ -187,6 +192,10 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		
 		//marco il documento come multivigente
 		setTipoDocVigenza();
+		
+		documentManager.commitEdit(t);
+		} catch (DocumentManagerException ex) {}
+		
 		return true;
 	}
 
@@ -570,25 +579,37 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 	public void doErase(String idNovellando, String idNovella, Node disposizione, Node novellando) {
 
 		if (disposizione.getNodeName().equals("dsp:abrogazione"))
-			if (!"".equals(idNovellando))
-				//doUndo(idNovellando, false);	
+			if (!"".equals(idNovellando)) {
+				String iniziovigore = UtilDom.getAttributeValueAsString(novellando, "iniziovigore");
 				if (novellando.getNodeName().equals("h:span"))
-					doUndo(idNovellando, false);
-				else
-					doUndo(idNovellando, null, null, null);
-		
-		
+					if (iniziovigore==null || "t1".equals(iniziovigore) )
+						doUndo(idNovellando, false);		
+					else {
+						((Element) novellando).removeAttribute("finevigore");
+						((Element) novellando).removeAttribute("status");
+					}				
+				else 
+					doUndo(idNovellando, ("t1".equals(iniziovigore) ? null : iniziovigore), null, null);
+			}	
 		
 		if (disposizione.getNodeName().equals("dsp:integrazione"))	
 			if (!"".equals(idNovella))
 				doUndo(idNovella, true);
+		
 		if (disposizione.getNodeName().equals("dsp:sostituzione")) {	
-			if (!"".equals(idNovellando))
+			if (!"".equals(idNovellando)) {
+				String iniziovigore = UtilDom.getAttributeValueAsString(novellando, "iniziovigore");
 				if (novellando.getNodeName().equals("h:span"))
-					doUndo(idNovellando, false);
-				else
-					doUndo(idNovellando, null, null, null);
-			if (!"".equals(idNovella))
+					if (iniziovigore==null || "t1".equals(iniziovigore) )
+						doUndo(idNovellando, false);
+					else {
+						((Element) novellando).removeAttribute("finevigore");
+						((Element) novellando).removeAttribute("status");
+					}	
+				else 
+					doUndo(idNovellando, ("t1".equals(iniziovigore) ? null : iniziovigore), null, null);
+			}
+			if (!"".equals(idNovella))								//da fare. OK credo?????????????
 				doUndo(idNovella, true);	
 			Node ndr = UtilDom.findRecursiveChild(novellando,"ndr");
 			if (ndr!=null)
