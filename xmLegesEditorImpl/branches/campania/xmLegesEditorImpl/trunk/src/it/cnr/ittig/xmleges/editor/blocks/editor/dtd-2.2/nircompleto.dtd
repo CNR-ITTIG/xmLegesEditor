@@ -8,7 +8,7 @@
            Dipende da: niente                                                       
                                                                                     
            Versione  2.2                                                            
-           Release   18/04/2007                                                     
+           Release   17/03/2008                                                     
            Fabio Vitali - UniBo                                                     
                                                                                     
            Per un'introduzione, si veda il documento 'note.html'                    
@@ -60,14 +60,14 @@
 <!ENTITY % CMtitolo     "(%Tarticolatobase;,(capo+ | articolo+))" >
 <!ENTITY % CMcapo       "(%Tarticolatobase;,(sezione+ | articolo+))" >
 <!ENTITY % CMsezione    "(%Tarticolatobase;,(articolo+))" >
-<!ENTITY % CMparagrafo  "(%Tarticolatobase;,(libro | parte | titolo | capo | sezione | articolo | partizione | contenitore)*)" >
-<!ENTITY % CMpartizione "(%Tarticolatobase;,(libro | parte | titolo | capo | sezione | paragrafo | articolo | partizione | contenitore)*)" >
+<!ENTITY % CMparagrafo  "(%Tarticolatobase;,(libro | parte | titolo | capo | sezione | articolo | partizione | contenitore)+)" >
+<!ENTITY % CMpartizione "(%Tarticolatobase;,(libro | parte | titolo | capo | sezione | paragrafo | articolo | partizione | contenitore)+)" >
 <!ENTITY % CMarticolo   "(inlinemeta?,num,((rubrica,decorazione?) | (decorazione,rubrica?))?,comma+)" >
 <!ENTITY % CMcomma      "(inlinemeta?,num?,(corpo | (alinea?,el+,coda?)),decorazione?)" >
 <!ENTITY % CMel         "(num,(corpo | (alinea?,en+,coda?)),decorazione?)" >
 <!ENTITY % CMen         "(num,(corpo | (alinea?,en+,coda?)),decorazione?)" >
 <!ENTITY % CMep         "(num)" >
-<!ENTITY % CMlista      "(num)" >
+<!ENTITY % CMlista      "(num,(corpo | (alinea?,lista+,coda?)))" >
 
 <!--  ====================================================================        
                                                                                     

@@ -5,7 +5,7 @@
             Dipende da: 'nirstrict' oppure 'nirloose'                                
                                                                                      
           Versione  2.2                                                              
-          Release   18/04/2007                                                       
+          Release   17/03/2008                                                       
           Fabio Vitali - UniBo                                                       
                                                                                      
             Per un'introduzione, si veda il documento 'note.html'                    
@@ -140,20 +140,27 @@ Elementi degli annessi
 Elementi inline e speciali con semantica rilevante
 
 =====================================================================  -->
+<!ELEMENT rif %inlinefac; >
+<!ATTLIST rif %globalifac;  >
+
+<!ATTLIST rif %link;  >
 <!ELEMENT mrif %inlinefac; >
 <!ATTLIST mrif %globalifac;  >
 <!ELEMENT irif %inlinefac; >
 <!ATTLIST irif %globalifac;  >
 
 <!ATTLIST irif %link;  finoa %uri; #REQUIRED >
-<!ELEMENT rif %inlinefac; >
-<!ATTLIST rif %globalifac;  >
 
-<!ATTLIST rif %link;  >
-<!ELEMENT mod (#PCDATA |%elinline; | virgolette)*>
-
+<!ENTITY % modType_mixed "%elinline; | virgolette" >
+<!ENTITY % modType "(#PCDATA | %modType_mixed;)*" >
+<!ELEMENT mod  %modType; >
 <!ATTLIST mod %globalireq;  >
+<!ELEMENT mmod %modType; >
+<!ATTLIST mmod %globalireq;  >
+<!ELEMENT imod %modType; >
+<!ATTLIST imod %globalireq;  >
 
+<!ATTLIST imod %link;  finoa %uri; #REQUIRED >
 
 <!ENTITY % CMvirg "libro | parte | titolo | capo | sezione | paragrafo | articolo | comma | el | en | ep | contenitore | gerarchia | partizione | %elinline; | %allblocchi;" >
 
