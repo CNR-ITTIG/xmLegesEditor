@@ -118,15 +118,29 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 							</xsl:choose>
 						</xsl:otherwise>			   				
 					</xsl:choose>			
-					<xsl:if test="$novellando">
-						<xsl:if test="$novella">
-							<!--	sostituzione	-->
-							<xsl:if test="$novella=$idnota"> (testo inserito)</xsl:if>
-		   					<xsl:if test="$novellando=$idnota"> (testo eliminato)</xsl:if>
-	   					</xsl:if>
-   					</xsl:if>
-					<xsl:text> da: </xsl:text>
-					<xsl:value-of select="$autonota"/> 	
+					<xsl:choose>
+						<xsl:when test="$novellando">
+							<xsl:choose>
+								<xsl:when test="$novella">
+									<!--	sostituzione	-->
+									<xsl:if test="$novella=$idnota">
+										<xsl:text> (testo inserito) da: </xsl:text><xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*[name()='dsp:novella']/*[name()='dsp:pos'][@xlink:href=$idnota]/../../*[name()='dsp:norma']/*[name()='ittig:notavigenza']/@auto"/>							
+									</xsl:if>
+		   							<xsl:if test="$novellando=$idnota">
+			   							<xsl:text> (testo eliminato) da: </xsl:text><xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*[name()='dsp:novellando']/*[name()='dsp:pos'][@xlink:href=$idnota]/../../*[name()='dsp:norma']/*[name()='ittig:notavigenza']/@auto"/>		   					
+		   							</xsl:if>
+			   					</xsl:when>
+		   						<xsl:otherwise>
+									<xsl:text> da: </xsl:text>
+									<xsl:value-of select="$autonota"/> 
+		   						</xsl:otherwise>
+		   					</xsl:choose>
+						</xsl:when>
+		   				<xsl:otherwise>
+							<xsl:text> da: </xsl:text>
+							<xsl:value-of select="$autonota"/> 
+		   				</xsl:otherwise>
+   					</xsl:choose>
 					<xsl:text>. </xsl:text>				
 					<xsl:choose>
 					<!-- ================= data_fine!='' =========-->
