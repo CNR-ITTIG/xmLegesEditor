@@ -33,7 +33,7 @@
 					text-align: center;
 				}	
 				.formulainiziale {
-					text-align: center;
+					text-align: justify;
 					font-size: 100%;
 					margin-bottom: 30px;
 				}
@@ -147,4 +147,10 @@
 					width: 100%;
 					text-align: left;
 					margin-bottom: 20px;
+				}
+				.virgolette {
+					background: #FFEE99;
+				}
+				.mod {
+					background: #FFDDAA;
 				}

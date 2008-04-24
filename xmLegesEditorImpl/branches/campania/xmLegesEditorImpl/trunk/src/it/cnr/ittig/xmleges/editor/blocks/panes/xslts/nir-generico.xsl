@@ -71,7 +71,7 @@
 	</xsl:template>
 
 	<xsl:template match="/*[name()='NIR']/*">	
-		<a name="{@id}"></a>
+		<a name="{@id}">&#160;</a>
 		<div>
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">		
@@ -107,7 +107,7 @@
 	
 
 	<xsl:template match="/*[name()='NIR']/*/*[name()='formulainiziale']">
-		<a name="{@id}"></a>
+		<a name="{@id}">&#160;</a>
 		<div class="formulainiziale">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
@@ -152,7 +152,7 @@
 	</xsl:template>
 
 	<xsl:template match="//*[name()='titoloDoc']">
-		<a name="{@id}"></a>
+		<a name="{@id}">&#160;</a>
 		<div class="titoloDoc">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
@@ -167,7 +167,7 @@
 	
 	
 	<xsl:template match="//*[name()='preambolo']">
-		<a name="{@id}"></a>
+		<a name="{@id}">&#160;</a>
 		<div class="preambolo">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
@@ -186,9 +186,8 @@
 	<!-- ======================================================== -->
 	
 	<xsl:template match="//*[name()='articolato'] | //*[name()='contenitore']">
-		<a name="{@id}"></a>
-		<div>
-		<table border="0" cellpadding="0" cellspacing="10" width="100%">			
+		<a name="{@id}">&#160;</a>
+		<div width="100%">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
 				<xsl:call-template name="vigenza"/>
@@ -197,13 +196,12 @@
 				<xsl:call-template name="multivigenza"/>
 			</xsl:otherwise>
 		</xsl:choose>				
-		</table>
 		</div>
 	</xsl:template>
 
 	<!-- ========================== 	LIBRO		============================== -->
 	<xsl:template match="//*[name()='libro']">
-		<a name="{@id}"></a>
+		<a name="{@id}">&#160;</a>
 		<div class="libro">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
@@ -218,7 +216,7 @@
 
 	<!-- ========================== 	PARTE		============================== -->
 	<xsl:template match="//*[name()='parte']">
-		<a name="{@id}"></a>
+		<a name="{@id}">&#160;</a>
 		<div class="parte">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
@@ -233,7 +231,7 @@
 
 	<!-- ========================== 	TITOLO		============================== -->
 	<xsl:template match="//*[name()='titolo']">
-		<a name="{@id}"></a>
+		<a name="{@id}">&#160;</a>
 		<div class="titolo">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
@@ -248,7 +246,7 @@
 
 	<!-- ========================== 	SEZIONE		============================== -->
 	<xsl:template match="//*[name()='sezione']">
-		<a name="{@id}"></a>
+		<a name="{@id}">&#160;</a>
 		<div class="sezione">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
@@ -264,7 +262,7 @@
 	<!-- ========================== 	CAPO	============================== -->
 	<xsl:template match="//*[name()='capo']">
 		<hr />
-		<a name="{@id}"></a>
+		<a name="{@id}">&#160;</a>
 		<div class="capo">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
@@ -297,23 +295,11 @@
 			<xsl:apply-templates/>
 		</p>
 	</xsl:template>
-
-<!--	<xsl:template match="nir:*">
-				<div class="{local-name()}">
-						<xsl:apply-templates select="nir:num">
-						</xsl:apply-templates>
-						<xsl:text>&#160;</xsl:text>
-						<xsl:apply-templates select="nir:rubrica | nir:corpo| nir:alinea">
-						</xsl:apply-templates>
-				</div>
-		<xsl:apply-templates />
-	</xsl:template> -->
-	
 	
 	<!-- =========================	ARTICOLO	=============================== -->
 	
 	<xsl:template match="//*[name()='articolo']">
-		<a name="{@id}"></a>
+		<a name="{@id}">&#160;</a>
 		<div class="articolo">
 			<xsl:choose>
 				<xsl:when test="$datafine!=''">
@@ -326,25 +312,10 @@
 		</div>
 	</xsl:template>
 	
-<!--	<xsl:template match="nir:comma | nir:el | nir:en | nir:ep">
-		<xsl:param name="pos">none</xsl:param>
-		<div class="{local-name()}">
-			<xsl:apply-templates select="nir:num">
-				<xsl:with-param name="pos" select="$pos"/>
-			</xsl:apply-templates>
-			<xsl:text> </xsl:text>
-			<xsl:apply-templates select="nir:corpo | nir:alinea">
-				<xsl:with-param name="pos" select="$pos"/>
-			</xsl:apply-templates>
-		</div>
-		<xsl:apply-templates select="nir:el | nir:ep | nir:en | nir:coda">
-			<xsl:with-param name="pos" select="$pos"/>
-		</xsl:apply-templates>
-	</xsl:template> -->
 	<!-- =========================	COMMA e sotto comma	=============================== -->
 
 	<xsl:template match="//*[name()='comma']">
-		<a name="{@id}"></a>
+		<a name="{@id}">&#160;</a>
 		<p class="comma">
 			<xsl:choose>
 				<xsl:when test="$datafine!=''">
@@ -369,7 +340,7 @@
 	</xsl:template>
 	<!-- =========================	EL , EN , EP	=============================== -->
 	<xsl:template match="//*[name()='el'] | //*[name()='en'] | //*[name()='ep']">
-	<a name="{@id}"></a>
+	<a name="{@id}">&#160;</a>
 	<p class="{local-name()}">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
@@ -383,11 +354,34 @@
 
 	</xsl:template>
 	
-	<xsl:template match="nir:corpo | nir:alinea">
-		<xsl:param name="pos">none</xsl:param>
-				<xsl:apply-templates>
-					<xsl:with-param name="pos" select="$pos"/>
-				</xsl:apply-templates>
+	<xsl:template match="//*[name()='corpo']">
+		<a name="{@id}">&#160;</a>
+		<!--	div class="corpo">	
+		<xsl:choose>		
+			<xsl:when test="$datafine!=''">
+				<xsl:call-template name="vigenza"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="multivigenza"/>
+			</xsl:otherwise>
+		</xsl:choose>
+		</div	-->			
+		<xsl:apply-templates/>			
+	</xsl:template>
+	
+	<xsl:template match="//*[name()='alinea']">
+		<a name="{@id}">&#160;</a>
+		<!--	div class="alinea">
+		<xsl:choose>		
+			<xsl:when test="$datafine!=''">
+				<xsl:call-template name="vigenza"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="multivigenza"/>
+			</xsl:otherwise>
+		</xsl:choose>
+		</div	-->	
+		<xsl:apply-templates/>
 	</xsl:template>
 	
 	<!-- ======================================================== -->
@@ -396,26 +390,37 @@
 	<!--                                                          -->
 	<!-- ======================================================== -->
 	
-	
-	<xsl:template match="//*[name()='virgolette']">
-		<xsl:param name="pos">none</xsl:param>
-		<span>
-			<!--	xsl:text>"</xsl:text	-->
-			<xsl:choose>
-				<xsl:when test="$datafine!=''">
-					<xsl:call-template name="vigenza">
-						<xsl:with-param name="pos" select="$pos"/>
-					</xsl:call-template>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:call-template name="multivigenza">
-						<xsl:with-param name="pos" select="$pos"/>
-					</xsl:call-template>
-				</xsl:otherwise>
-			</xsl:choose>	
-			<!--	xsl:text>"</xsl:text	-->
+	<xsl:template match="//*[name()='mod']">
+		<a name="{@id}">&#160;</a>
+		<span class="mod">
+	        <xsl:choose>		
+			<xsl:when test="$datafine!=''">
+				<xsl:call-template name="vigenza"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="multivigenza"/>
+			</xsl:otherwise>
+			</xsl:choose>
 		</span>
+	</xsl:template> 
+		
+	<xsl:template match="//*[name()='virgolette']">
+		<a name="{@id}">&#160;</a>
+		
+		<xsl:choose>
+		<xsl:when test="@tipo='struttura'">
+	   		<table><tr><td class="virgolette">
+				<xsl:apply-templates/>
+			</td></tr></table>	
+		</xsl:when>
+		<xsl:otherwise>
+	    	<span class="virgolette">
+				<xsl:apply-templates/>
+			</span>	
+		</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>
+	
 	<xsl:template match="//*[name()='nome']">
 		<span title="Nome: {.}">
 			<xsl:apply-templates/>
@@ -483,7 +488,7 @@
 	<!--                                                          -->
 	<!-- ======================================================== -->
 	<xsl:template match="//*[name()='formulafinale']">
-		<a name="{@id}"></a>
+		<a name="{@id}">&#160;</a>
 		<div class="formulafinale">
 		<hr/>
 		<xsl:choose>
@@ -639,7 +644,8 @@
 		</a><span class="nota"><xsl:text>&#160;-&#160;</xsl:text></span>
 		<xsl:apply-templates />
 	</xsl:template>
-	<xsl:template match="nir:confronto"/>
+
+	<xsl:template match="//*[name()='confronto']"/>
 	
 	<!-- ======================================================== -->
 	<!--                                                          -->
@@ -680,22 +686,16 @@
 	</xsl:template>	
 	
 	<xsl:template match="h:*">
-		<xsl:param name="pos">none</xsl:param>
 		<xsl:element name="{local-name()}">
 			<xsl:apply-templates select="@*"/>
-			<xsl:apply-templates>
-				<xsl:with-param name="pos" select="$pos"/>
-			</xsl:apply-templates>&#160;
+			<xsl:apply-templates/>&#160;
 		</xsl:element>
 	</xsl:template>
 	
 	<xsl:template match="h:img">
-		<xsl:param name="pos">none</xsl:param>
 		<xsl:element name="{local-name()}">
 			<xsl:apply-templates select="@*" mode="object"/>
-			<xsl:apply-templates>
-				<xsl:with-param name="pos" select="$pos"/>
-			</xsl:apply-templates>&#160;
+			<xsl:apply-templates/>
 		</xsl:element>
 	</xsl:template>
 	<!-- ======================================================== -->
