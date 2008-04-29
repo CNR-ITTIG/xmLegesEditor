@@ -313,7 +313,7 @@ public class NirUtilDomImpl implements NirUtilDom, Loggable, Serviceable{
 		Node previous;
 		String name = "meta";
 		
-		while (node != null )
+		while (node != null && !"annesso".equals(node.getLocalName()))
 			if (node.getNodeName().equals(name))
 				return node;
 			else{
