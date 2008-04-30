@@ -289,6 +289,18 @@
 		<hr/>
 	</xsl:template>
 	
+	<xsl:template match="*[name()='tipoDoc']">
+		&#160;<xsl:value-of select="."/>&#160;
+	</xsl:template>
+	
+	<xsl:template match="*[name()='numDoc']">
+		&#160;<xsl:value-of select="."/>&#160;
+	</xsl:template>
+	
+	<xsl:template match="*[name()='dataDoc']">
+		&#160;<xsl:value-of select="."/>&#160;
+	</xsl:template>	
+			
 	<xsl:template match="/*/*/*[name()='meta']/*[name()='descrittori']/*[name()='materie']">		
 		<br/>MATERIE: 
 	  	<xsl:for-each select="*[name()='materia']">
