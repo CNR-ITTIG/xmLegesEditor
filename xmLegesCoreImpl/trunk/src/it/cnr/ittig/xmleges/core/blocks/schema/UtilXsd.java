@@ -2,11 +2,13 @@ package it.cnr.ittig.xmleges.core.blocks.schema;
 
 
 import it.cnr.ittig.services.manager.Logger;
+import it.cnr.ittig.xmleges.core.blocks.rules.ContentGraph;
 import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 
 import java.io.File;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -15,7 +17,8 @@ import java.util.Map;
 import java.util.Stack;
 import java.util.Vector;
 
-import org.eclipse.emf.common.util.URI;
+import it.cnr.ittig.xmleges.core.blocks.rules.AttributeDeclaration;
+
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -41,9 +44,12 @@ import org.eclipse.xsd.XSDParticle.DFA.Transition;
 import org.eclipse.xsd.impl.XSDComplexTypeDefinitionImpl;
 import org.eclipse.xsd.impl.XSDDiagnosticImpl;
 import org.eclipse.xsd.impl.XSDParticleImpl;
+import org.eclipse.xsd.impl.XSDParticleImpl.XSDNFA.TransitionImpl;
 import org.eclipse.xsd.util.XSDResourceFactoryImpl;
 import org.eclipse.xsd.util.XSDResourceImpl;
 import org.w3c.dom.Node;
+
+import org.eclipse.emf.common.util.URI;
 
 
 public class UtilXsd{
@@ -52,7 +58,6 @@ public class UtilXsd{
 	protected Map prefixToNamespace;
 
 	protected XSDSchema schema;
-
 	List nonTopElements;
 	
 	protected SchemaRulesManagerImpl schemaRules = null;
@@ -62,6 +67,22 @@ public class UtilXsd{
 	public UtilXsd(SchemaRulesManagerImpl schemaRulesManager){	
 		schemaRules = schemaRulesManager;
 		logger = schemaRules.getLogger();
+		
+	}
+	public class UtilTransitionImpl extends TransitionImpl implements Comparable{
+
+		
+		public UtilTransitionImpl(XSDParticle arg0, State arg1) {
+			super(arg0, arg1);
+			// TODO Auto-generated constructor stub
+		}
+
+		public int compareTo(Object arg0) {
+			UtilTransitionImpl transition = (UtilTransitionImpl)arg0;
+			return (this.toString().compareTo(transition.toString()));
+
+		}
+		
 	}
 
 
@@ -1082,6 +1103,7 @@ public class UtilXsd{
 	private Collection getVocabulary(State node){
 		Vector v=new Vector();
 		List allTransitions = node.getTransitions();
+		
 
 		for(Iterator  it=allTransitions.iterator(); it.hasNext(); ){
 			XSDParticle xsdParticle = ((Transition)(it.next())).getParticle();
@@ -1104,6 +1126,7 @@ public class UtilXsd{
 				System.err.println("---------------------------------------------");
 			}          			
 		}
+		Collections.sort(v);
 		return v;
 	}
 
