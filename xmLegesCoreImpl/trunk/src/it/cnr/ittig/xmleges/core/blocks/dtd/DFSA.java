@@ -6,6 +6,7 @@
 
 package it.cnr.ittig.xmleges.core.blocks.dtd;
 
+import it.cnr.ittig.xmleges.core.blocks.rules.ContentGraph;
 import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.util.lang.Queue;
 import it.cnr.ittig.xmleges.core.util.lang.UtilLang;
@@ -697,7 +698,7 @@ public class DFSA implements Serializable {
 		// aggiunge un nodo al grafo per ogni nodo del DFSA
 		HashMap graph_nodes_table = new HashMap();
 		for (Iterator i = nodes_table.keySet().iterator(); i.hasNext();) {
-			graph_nodes_table.put((String) i.next(), graph.addNode());
+			graph_nodes_table.put((String) i.next(), graph.addNewNode());
 		}
 
 		// per ogni nodo del DFSA
