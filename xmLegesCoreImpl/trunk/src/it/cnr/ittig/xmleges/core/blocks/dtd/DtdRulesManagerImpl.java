@@ -18,6 +18,8 @@ import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
 import it.cnr.ittig.xmleges.core.util.lang.UtilLang;
 import it.cnr.ittig.xmleges.core.util.xml.UtilXml;
+import it.cnr.ittig.xmleges.core.blocks.rules.ContentGraph;
+import it.cnr.ittig.xmleges.core.blocks.rules.AttributeDeclaration;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -210,7 +212,7 @@ public class DtdRulesManagerImpl implements RulesManager, DeclHandler{
 
 		ContentGraph.Node src = graph.getFirst();
 		for (int i = 0; i < tokens.length; i++) {
-			ContentGraph.Node dst = graph.addNode();
+			ContentGraph.Node dst = graph.addNewNode();
 			src.addEdge(tokens[i], dst);
 			src = dst;
 		}
@@ -319,34 +321,7 @@ public class DtdRulesManagerImpl implements RulesManager, DeclHandler{
 		}
 	}
 	
-	/**
-	 * Sostituisce ogni arco del ContentGraph che rappresenta un elemento, con il suo
-	 * ContentGraph. Scende ricorsivamente negli archi gia' esplosi
-	 * 
-	 * @param graph il ContentGraph da esplodere
-	 * @throws RulesManagerException
-	 */
 	
-	
-	protected void explodeEdge(ContentGraph edgeToExplode) throws RulesManagerException {
-			for (Iterator i = edgeToExplode.visitNodes(); i.hasNext();) {
-					ContentGraph.Node sub_src = (ContentGraph.Node) i.next();
-					for (int k = 0; k < sub_src.getNoEdges(); k++) {
-						Object sub_edge = sub_src.getEdge(k);
-						String subedge_name = sub_src.getEdgeName(k);
-						// sub_edge is instanceof ContentGraph iif is already exploded!
-						//perchè il createContentGraph() crea un grafo con archi di tipo stringa e NON di tipo ContentGraph
-						if (sub_edge instanceof ContentGraph) 
-							explodeEdge((ContentGraph) sub_edge);
-						else if (subedge_name.compareTo("#PCDATA") != 0 && subedge_name.compareTo("#EPS") != 0) 
-							// replace edge with ContentGraph of level 1
-							sub_src.setEdge(getContentGraph(subedge_name), k);
-					}
-					
-			}		
-	}
-
-
 	public void externalEntityDecl(String name, String publicId, String systemId) {
 		if (logger.isDebugEnabled())
 			logger.debug("EXTERNAL ENTITY: name=" + name + " publicId=" + publicId + " systemId=" + systemId);
@@ -360,6 +335,7 @@ public class DtdRulesManagerImpl implements RulesManager, DeclHandler{
 		}
 		return sublist;
 	}
+
 
 	/**
 	 * Riempie il nodo con gli attributi necessari
@@ -517,24 +493,7 @@ public class DtdRulesManagerImpl implements RulesManager, DeclHandler{
 		return elem_rule.createContentGraph();
 	}
 
-//	/**
-//	 * Ritorna una stringa in formato XML che definisce il contenuto di default di un
-//	 * elemento
-//	 * 
-//	 * @param elem_name il nome dell'elemento padre
-//	 * @param graph ContentGraph da cui iniziare a definire il contenuto di default
-//	 * @throws RulesManagerException
-//	 */
-//	protected String getDefaultContent(ContentGraph graph) throws RulesManagerException {
-//		// cycle until a default content has been found
-//		while (true) {
-//			if (visitContentGraph(graph) < Integer.MAX_VALUE)
-//				return getXMLContent(graph);
-//
-//			// no default content: substitute each element with its ContentGraph
-//			explodeContentGraph(graph);
-//		}
-//	}
+
 	/**
 	 * Ritorna una stringa in formato XML che definisce il contenuto di default di un
 	 * elemento
@@ -544,31 +503,13 @@ public class DtdRulesManagerImpl implements RulesManager, DeclHandler{
 	 * @throws RulesManagerException
 	 */
 	protected String getDefaultContent(ContentGraph graph) throws RulesManagerException {
-		if (visitContentGraph(graph) < Integer.MAX_VALUE)
-			return getXMLContent(graph);
-				
-			// cycle until a default content has been found
-		while (true) {				
-			
-			for (Iterator i = graph.visitNodes(); i.hasNext();) {
-				ContentGraph.Node nodeToExplode = (ContentGraph.Node) i.next();
-				
-				for (int j = 0; j < nodeToExplode.getNoEdges(); j++) {
-					Object edgeToExplode = nodeToExplode.getEdge(j);
-					String edge_name = nodeToExplode.getEdgeName(j);
-					if (edgeToExplode instanceof ContentGraph) 						
-						explodeEdge((ContentGraph) edgeToExplode);						
-					else if (edge_name.compareTo("#PCDATA") != 0 && edge_name.compareTo("#EPS") != 0) 
-						// replace edge with ContentGraph
-						nodeToExplode.setEdge(getContentGraph(edge_name), j);						
-					
-								
-					if (visitContentGraph(graph) < Integer.MAX_VALUE)
-						return getXMLContent(graph);
-										
-				}				
-			}			
-			
+		// cycle until a default content has been found
+		while (true) {
+			if (visitContentGraph(graph) < Integer.MAX_VALUE)
+				return getXMLContent(graph);
+
+			// no default content: substitute each element with its ContentGraph
+			explodeContentGraph(graph);
 		}
 	}
 
