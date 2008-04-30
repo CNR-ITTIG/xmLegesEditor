@@ -41,25 +41,7 @@ import org.w3c.dom.NodeList;
  */
 public class SchemaRulesManagerImpl implements RulesManager {
 
-	private static ContentGraph.Node extract_minimum(Vector queue) {
-		int min_length=Integer.MAX_VALUE;
-		int min_node_index=-1;
-		for(int i=0; i<queue.size();i++){
-			int current_length = ((ContentGraph.Node)queue.elementAt(i)).getVisit_length();
-			if(current_length<min_length){
-				min_length=current_length;
-				min_node_index=i;
-			}
-		}
-		if (min_length<Integer.MAX_VALUE){
-			ContentGraph.Node toRemove=(ContentGraph.Node) queue.elementAt(min_node_index);
-			queue.removeElementAt(min_node_index);
-			return toRemove;
-		}
-
-		return null;
-	}
-
+	
 		
 	
 	/**
@@ -768,7 +750,7 @@ public class SchemaRulesManagerImpl implements RulesManager {
 	public void loadRules(String filename, String schemaPath) {
 		//logger.info("START loading rules from SCHEMA");
 		
-		String key = null;
+//		String key = null;
 		File xml_file = new File(filename);
 		
 		if (schemaPath.startsWith(".")) // crea path name assoluto

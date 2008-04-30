@@ -191,7 +191,7 @@ public class UtilXsd{
 
 		}
 		
-		String name;
+		String name="";
 		for(Iterator it = schemaRules.rules.keySet().iterator(); it.hasNext();){
 			name = (String)it.next();
 		}
