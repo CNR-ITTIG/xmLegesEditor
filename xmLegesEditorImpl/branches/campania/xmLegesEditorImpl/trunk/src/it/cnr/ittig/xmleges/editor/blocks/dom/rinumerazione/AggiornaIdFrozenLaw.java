@@ -336,7 +336,8 @@ public class AggiornaIdFrozenLaw {
 				
 				//aggiorno le disposizioni
 				if (disposizioniId!= null && disposizioniId.contains(OldID))
-					updateDisposizione(OldID, IDValue);
+					if (!OldID.equals(IDValue))
+						updateDisposizione(OldID, IDValue);
 				
 				if(logger.isDebugEnabled())
 				  logger.debug("idChanged: new  " + IDValue + " old " + OldID);
