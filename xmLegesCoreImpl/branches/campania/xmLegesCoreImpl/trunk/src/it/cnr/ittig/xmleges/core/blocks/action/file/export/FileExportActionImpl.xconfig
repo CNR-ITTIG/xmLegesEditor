@@ -11,6 +11,8 @@
 	</browsers>
 	<readerpdf>
 		<reader>xpdf</reader>
+		<reader>gpdf</reader>				
+		<reader>evince</reader>
 		<reader>acroread</reader>
 		<reader>cmd /C start</reader>
 		<reader>command /C start</reader>					
