@@ -54,7 +54,6 @@ public class RulesManagerImpl implements RulesManager, Initializable, Loggable {
 			rm=(RulesManager) new DtdRulesManagerImpl(logger);
 	}
 	
-	
 	public boolean assessAttribute(Node node, String attributeName){
 		return rm.assessAttribute(node, attributeName);
 	}
