@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="iso-8859-15"?>
+
+%DOCTYPE%
+
+<NIR xmlns:xlink="http://www.w3.org/1999/xlink" 
+	 xmlns:h="http://www.w3.org/HTML/1998/html4">
+<DocumentoNIR nome="direttiva">
+	<meta>
+		<descrittori>
+		<pubblicazione norm="" num="" tipo="GU" />
+		<entratainvigore norm="" />
+		<redazione id="red1" nome="" norm="" />
+	        <urn valore="urn:nir:ministero.xxxxx:direttiva:aaaa-mm-gg;nir-nnn"/>
+		</descrittori>
+	</meta>
+	<intestazione>
+		<emanante>MINISTERO {denominazione}</emanante> 
+		<tipoDoc>DIRETTIVA</tipoDoc> 
+		<dataDoc norm=""/>
+		<titoloDoc/>
+	</intestazione> 
+	<formulainiziale>
+		<h:p/>
+		<h:p/>
+		<h:p/>
+		<h:p>IL MINISTRO .....</h:p>
+		<preambolo>
+			<h:p/>
+			<h:p/>
+			<h:p/>
+		</preambolo>		
+	</formulainiziale> 
+	<contenitore id="con1" nome="corpo">
+		<h:p/>
+		<h:p/>
+		<h:p/>
+	</contenitore>
+	<conclusione> 
+		<dataeluogo norm="" codice="">Roma, {gg mese aaaa}</dataeluogo> 
+		<firma tipo="sottoscrizione">Il Ministro: {nome}</firma>
+		<firma tipo="visto"/>
+	</conclusione> 
+</DocumentoNIR>
+</NIR>

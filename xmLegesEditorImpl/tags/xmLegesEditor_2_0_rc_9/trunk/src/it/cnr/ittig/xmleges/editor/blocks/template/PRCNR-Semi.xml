@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="iso-8859-15"?>
+
+%DOCTYPE%
+
+	<NIR tipo="originale" xmlns="http://www.normeinrete.it/nir/2.2/" 
+	     xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" 
+	     xmlns:h="http://www.w3.org/HTML/1998/html4" 
+	     xmlns:xlink="http://www.w3.org/1999/xlink">
+		<DocumentoNIR nome="Provvedimento">
+			<meta>
+				<descrittori>
+					<pubblicazione tipo="BUCNR" num="" norm="" />
+					<redazione id="red1" nome="Urp-Cnr" norm="" />
+					<urn valore="urn:nir:consiglio.nazionale.ricerche:provvedimento:" />
+				</descrittori>
+				<proprietario soggetto="CNR" xlink:href="http://www.cnr.it">
+					<cnr:meta xmlns:cnr="http://www.cnr.it/provvedimenti/2.2">
+						<cnr:strutturaEmanante valore="" />
+						<cnr:autoritaEmanante valore="" />
+						<cnr:tipoDestinatario valore="" />
+						<cnr:strutturaDestinataria valore="" />
+						<cnr:tipoProvvedimento valore="" />
+						<cnr:dipartimento valore="" />
+					</cnr:meta>
+				</proprietario>
+			</meta>
+			<intestazione>
+				<emanante>Consiglio Nazionale delle Ricerche</emanante>
+				<tipoDoc>Provvedimento </tipoDoc>
+				n. 
+				<numDoc />
+				del 
+				<dataDoc norm="" />
+				<titoloDoc>[titolo documento]</titoloDoc>
+				[Protocollo n. {numero} - Data 
+				<data norm="" />
+				] 
+			</intestazione>
+			<formulainiziale>
+				<h:p h:style="text-align: center;">IL PRESIDENTE </h:p>
+				<preambolo>
+					<h:p>- Visto </h:p>
+					<h:p>- Visto </h:p>
+					<h:p>- Visto </h:p>
+				</preambolo>
+				<h:p h:style="text-align: center;">DECRETA</h:p>
+			</formulainiziale>
+			<contenitore id="con1" nome="corpo">
+				<h:p />
+				<h:p />
+				<h:p />
+			</contenitore>
+			<conclusione>
+				<firma tipo="sottoscrizione">
+					IL PRESIDENTE
+					<h:br />
+					(Prof. Fabio Pistella)
+				</firma>
+			</conclusione>
+		</DocumentoNIR>
+	</NIR>
