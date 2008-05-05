@@ -1,59 +1,76 @@
-<html>
-<head>
-<title>Introduzione</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<link rel="stylesheet" href="../nireditor2help.css" type="text/css">
-</head>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
 
-<body bgcolor="#FFFFFF" text="#000000" class="testo">
+<title>Introduzione</title><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="../nireditor2help.css" type="text/css"></head>
+<body class="testo" bgcolor="#ffffff" text="#000000">
 <p class="titolo">Introduzione a xmLeges</p>
+<p>xmLeges-Editor è un ambiente di drafting legislativo per la produzione 
+  di documenti normativi aderenti agli standard NIR (Circolari 22 aprile 2002 
+  n. AIPA/CR/40 "Formato per la rappresentazione elettronica dei provvedimenti 
+  normativi tramite il linguaggio di marcatura XML" e 6 novembre 2001, n. 
+  AIPA/CR/35 "Assegnazione dei nomi uniformi ai documenti giuridici").</p>
+<p> Lavora direttamente sul formato XML-NIR e consente di adeguare (convertire) 
+  o produrre ex-novo i documenti con funzionalità automatiche e/o guidate.</p>
+<p>All'interno di xmLeges-Editor sono pienamente integrati una serie di moduli, 
+  utilizzabili anche indipendentemente:</p>
+<ul>
+  <li>xmLeges-Linker, che individua i riferimenti in testi normativi e li descrive 
+    mediante le corrispondenti URN. Utilizza tecniche LEX e YACC per la generazione 
+    di analizzatori sintattici;</li>
+  <li>xmLeges-Marker, che converte in formato XML-NIR un testo normativo preesistente. 
+    Utilizza tecniche basate sulla implementazione di automi a stati finiti non 
+    deterministici (NFA) e probabilistici (HMM -Hidden Markov Model);</li>
+  <li>xmLeges-Classifier, che classifica porzioni di un testo normativo secondo 
+    il modello semantico delle &#8220;disposizioni&#8221; previsto dallo standard 
+    NIR. Utilizza tecniche di machine learning;</li>
+  <li>xmLeges-Extractor, che estrae gli argomenti da una porzione di testo normativo 
+    classificato tramite xmLeges-Classifier. Sviluppato in collaborazione con 
+    ILC-CNR, utilizza tecniche NLP (Natural Language Process).<br>
+  </li>
+</ul>
 <p><b>Principali caratteristiche</b></p>
 <ul>
-  <li> Conversione nello standard NIR di documenti pre-esistenti in formato testo 
-    (TXT), HTML, Microsoft Word;</li>
-  <li>Produzione di nuovi documenti normativi in accordo con gli standard definiti 
-    dal progetto NIR;</li>
   <li>Adesione alle regole di drafting legislativo: 
     <ul>
-      <li>Strutturali (codificate dallo standard XML-NIR);</li>
-      <li>Stilistiche (implementate a livello applicativo): 
+      <li>strutturali (codificate dallo standard XML-NIR);</li>
+      <li>stilistiche (implementate a livello applicativo): 
         <ul>
-          <li>Formulazione linguistica dei riferimenti;</li>
-          <li>Numerazione automatica delle partizioni;</li>
-          <li>Formule iniziali e finali;</li>
-          <li>Gestione delle date;</li>
+          <li>formulazione linguistica dei riferimenti;</li>
+          <li>numerazione automatica delle partizioni;</li>
+          <li>formule iniziali e finali;</li>
+          <li>gestione delle date.</li>
         </ul>
       </li>
     </ul>
   </li>
-  <li>Esecuzione di sole operazioni valide, tali da preservare la conformit&agrave; 
-    del documento agli standard NIR al termine di ogni modifica;</li>
+  <li>Esecuzione di sole operazioni valide, tali da preservare la conformità 
+    del documento agli standard NIR al termine di ogni modifica.</li>
   <li>Gestione amichevole di: 
     <ul>
-      <li>Tabelle, liste, note di redazione;</li>
-      <li>Allegati;</li>
-      <li>Caratteristiche tipografiche (grassetto, corsivo, sottolineato);</li>
-      <li>Apici e pedici;</li>
-      <li>Giustificazioni del testo;</li>
+      <li>tabelle, liste, note di redazione;</li>
+      <li>allegati;</li>
+      <li>caratteristiche tipografiche (grassetto, corsivo, sottolineato);</li>
+      <li>apici e pedici;</li>
+      <li>giustificazioni del testo.</li>
     </ul>
   </li>
-  <li>Numerazione automatica delle partizioni secondo le regole di drafting;</li>
-  <li>Gestione dei Disegni di Legge con produzione automatica del &quot;testo 
-    a fronte&quot;;</li>
-  <li>Controllo ortografico;</li>
-  <li>Validazione di contenuti (es: verifica della corretta scrittura di una data 
-    (forma testuale e valori di attributi di elementi XML).<br>
+  <li>Numerazione automatica delle partizioni secondo le regole di drafting.</li>
+  <li>Gestione dei disegni di legge con produzione automatica del "testo 
+    a fronte".</li>
+  <li>Controllo ortografico.</li>
+  <li>Validazione di contenuti (es: verifica della corretta scrittura di una data, 
+    forma testuale e valori di attributi di elementi XML).<br>
   </li>
 </ul>
 <p><b>Vantaggi dell'uso di XML</b></p>
 <ul>
   <li>Garanzia di adesione alle regole di drafting legislativo (es: corretta sequenza 
-    delle partizioni in un documento normativo);</li>
-  <li>Visualizzazione e gestione selettiva di porzioni di un documento;</li>
-  <li>Garanzia di interoperabilit&agrave; fra diverse applicazioni;</li>
+    delle partizioni in un documento normativo).</li>
+  <li>Visualizzazione e gestione selettiva di porzioni di un documento.</li>
+  <li>Garanzia di interoperabilità fra diverse applicazioni.</li>
   <li>Unica fase di redazione sufficiente per la pubblicazione di un documento 
     su media e formati diversi (pdf, Web, presentazioni).</li>
 </ul>
 <p>&nbsp;</p>
-</body>
-</html>
+</body></html>
