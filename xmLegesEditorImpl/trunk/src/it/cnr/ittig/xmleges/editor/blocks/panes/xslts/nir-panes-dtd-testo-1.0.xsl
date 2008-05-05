@@ -33,11 +33,11 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <!-- ================================================================================ -->
 
 <xsl:template match="h:br">
-	<h:font color="blue" weight="bold">¶</h:font><h:br/>
+	<font color="blue" weight="bold">¶</font><br/>
 </xsl:template>
 
 <xsl:template match="h:hr">
-	<h:hr/>
+	<hr/>
 </xsl:template>
 
 <xsl:template match="h:img">
