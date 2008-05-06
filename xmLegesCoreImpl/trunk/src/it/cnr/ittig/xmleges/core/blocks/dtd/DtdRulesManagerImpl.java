@@ -42,35 +42,560 @@ import org.xml.sax.ext.DeclHandler;
  * 
  */
 public class DtdRulesManagerImpl implements RulesManager, DeclHandler{
+	
+    Logger logger;
+    
+    //  //////////////////////////////////////////////////// LogEnabled Interface
+	public void enableLogging(Logger logger) {
+		this.logger = logger;
+	}
+	
+	public void createRulesManager(String extension) {
+		// TODO Auto-generated method stub	
+	}
+	
+	/**
+	 * Tabella hash contenente le regole per l'interrogazione sotto-forma di automi
+	 * deterministici. Ogni regola &egrave associata ad un elemento.
+	 */
+	protected HashMap rules;
 
 	/**
-	 * Restituisce una stringa in formato XML a partire dal contenuto di default
-	 * dell'elemento
-	 * 
-	 * @param graph il ContentGraph dell'elemento
+	 * Tabella hash dei possibili contenuti alternativi dei vari elementi. Ogni valore
+	 * della tabella hash &egrave costituito da un vettore di stringhe formate da nomi di
+	 * elementi separati da virgole che rappresentano le possibili alternative. La tabella
+	 * hash &egrave indirizzata dai nomi degli elementi.
 	 */
-	static protected String getXMLContent(ContentGraph graph) {
+	protected HashMap alternative_contents;
 
-		// get visit path
-		Vector path = new Vector();
-		ContentGraph.Node nav = graph.getLast();
-		while (nav != null) {
-			Object edge = nav.getVisitEdge();
-			ContentGraph.Node before = nav.getVisitBefore();
-			if (before != null && edge instanceof ContentGraph)
-				path.add(0, edge);
-			nav = before;
+	/**
+	 * Tabella hash degli attributi associati agli elementi. La tabella hash &egrave
+	 * indirizzata dai nomi degli elementi. Ogni valore della tabella hash &grave
+	 * costituito da una seconda tabella hash che contiene tutti gli attributi
+	 * dell'elemento associato. Questa seconda tabella hash &egrave indirizzata dai nomi
+	 * degli attibuti dell'elemento. Ogni valore di questa seconda tabella &egrave
+	 * costituito da un'istanza della classe AttributeDecl, e definisce l'attributo
+	 * specifico.
+	 */
+	protected HashMap attributes;
+	
+	protected boolean pre_check = false;
+	
+	
+	
+	
+	
+	//////////////////////////////////////////////////////////////////////////
+	//
+	//	 		FUNZIONI PER L'INTERPRETAZIONE DELLA DTD 
+	//
+	//////////////////////////////////////////////////////////////////////////
+	
+	public void attributeDecl(String elementName, String attributeName, String type, String valueDefault, String value) {
+		if (logger.isDebugEnabled())
+			logger.debug("ATTRIBUTE: elem=" + elementName + " name=" + attributeName + " type=" + type + " default=" + valueDefault + " value=" + value);
+
+		// get the hash table of attributes associated with the element
+		// or create a new one if not existing
+		HashMap att_hash = (HashMap) attributes.get(elementName);
+		if (att_hash == null) {
+			att_hash = new HashMap();
+			attributes.put(elementName, att_hash);
 		}
 
-		// get xml content
-		String output = "<" + graph.getName() + ">";
-		for (Iterator i = path.iterator(); i.hasNext();)
-			output += getXMLContent((ContentGraph) i.next());
-		output = output + "</" + graph.getName() + ">";
-
-		return output;
+		// add a new attribute definition
+		att_hash.put(attributeName, new AttributeDeclaration(type, valueDefault, value));
 	}
 
+	
+	public void elementDecl(String name, String model) {
+
+		if (logger.isDebugEnabled())
+			logger.debug("ELEMENT: name=" + name + " model=" + model);
+
+		try {
+			// add element rule
+			createRule(name, model);
+
+			// add alternative contents for element
+			createAlternativeContents(name, model);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
+	}
+	
+	
+	public void externalEntityDecl(String name, String publicId, String systemId) {
+		if (logger.isDebugEnabled())
+			logger.debug("EXTERNAL ENTITY: name=" + name + " publicId=" + publicId + " systemId=" + systemId);
+	}
+	
+	
+	public void internalEntityDecl(String name, String value) {
+		if (logger.isDebugEnabled())
+			logger.debug("INTERNAL ENTITY: name=" + name + " value=" + value);
+	}
+	
+	
+	
+	
+	
+    
+	/////////////////////////////////////////////////////////////
+	//
+	//	 					COSTRUTTORI 
+	//
+	/////////////////////////////////////////////////////////////
+	
+	public DtdRulesManagerImpl(Logger logger) {
+		enableLogging(logger);
+		rules = new HashMap();
+		alternative_contents = new HashMap();
+		attributes = new HashMap();
+	}
+	
+	
+	public void clear() {
+		rules = new HashMap();
+		alternative_contents = new HashMap();
+		attributes = new HashMap();
+	}
+	
+	
+	
+	
+	
+	
+	///////////////////////////////////////////////////////////////////////
+	//
+	//	 				 INIZIALIZZAZIONE DELLE REGOLE 
+	//
+	///////////////////////////////////////////////////////////////////////
+	
+	public void loadRules(File xml_file) {
+
+		logger.info("START loading rules from DTD");
+
+		// clear old rules
+		clear();
+
+		// parse DTD
+		UtilXml.readDTD(xml_file, this);
+
+		logger.info("END loading rules from DTD");
+	}
+	
+
+	public void loadRules(String filename) {
+
+		logger.info("START loading rules from DTD");
+
+		// open file
+		File xml_file = new File(filename);
+
+		// clear old rules
+		clear();
+
+		// parse DTD
+		UtilXml.readDTD(xml_file, this);
+
+		logger.info("END loading rules from DTD");
+
+	}
+
+	public void loadRules(String filename, String dtdPath) {
+
+		String key = null;
+		File xml_file = new File(filename);
+
+		if (dtdPath.startsWith(".")) // crea path name assoluto
+			dtdPath = xml_file.getParent().concat(File.separator+dtdPath.substring(2));
+
+		File dtd_file = UtilFile.getGrammarFile(dtdPath);
+
+		// Generazione della chiave
+		try {
+			key = UtilLang.bytesToHexString(UtilFile.calculateMD5(dtd_file));
+			//logger.debug("key for " + dtdPath + " = " + key.toString());
+		} catch (Exception ex) {
+			logger.error(ex.getMessage(), ex);
+		}
+
+		String md5Path = new String("dtdmd5");
+		new File(md5Path).mkdir();
+		File rulesMap = new File(md5Path + File.separator, key + "_rules");
+		File alternativesMap = new File(md5Path, key + "_alternatives");
+		File attributesMap = new File(md5Path, key + "_attributes");
+
+		if (key != null && rulesMap.exists() && alternativesMap.exists() && attributesMap.exists()) {
+			loadRulesFromCachedMap(rulesMap, alternativesMap, attributesMap);
+		} else {
+			loadRules(xml_file);
+			saveRulesOnCachedMap(rulesMap, alternativesMap, attributesMap);
+		}
+	}
+	
+	
+	// lettura delle regole dalle mappe salvate su file
+	private void loadRulesFromCachedMap(File rulesMap, File alternativesMap, File attributesMap) {
+		logger.info("START loading rules from files");
+
+		FileInputStream fis = null;
+		ObjectInputStream in = null;
+
+		// reading rules
+		try {
+			fis = new FileInputStream(rulesMap);
+			in = new ObjectInputStream(new BufferedInputStream(fis));
+			rules = (HashMap) in.readObject();
+			in.close();
+		} catch (Exception ex) {
+			logger.error("Error reading rules map " + ex.getMessage(), ex);
+		}
+
+		// reading alternative_contents
+		try {
+			fis = new FileInputStream(alternativesMap);
+			in = new ObjectInputStream(new BufferedInputStream(fis));
+			alternative_contents = (HashMap) in.readObject();
+			in.close();
+		} catch (Exception ex) {
+			logger.error("Error reading alternatives map " + ex.getMessage(), ex);
+		}
+
+		// reading attributes
+		try {
+			fis = new FileInputStream(attributesMap);
+			in = new ObjectInputStream(new BufferedInputStream(fis));
+			attributes = (HashMap) in.readObject();
+			in.close();
+		} catch (Exception ex) {
+			logger.error("Error reading attributes map " + ex.getMessage(), ex);
+		}
+
+		logger.info("END loading rules from files");
+	}
+	
+
+	
+
+	// scrittura delle regole su mappe salvate su file
+	
+	private void saveRulesOnCachedMap(File rulesMap, File alternativesMap, File attributesMap) {
+		FileOutputStream fos = null;
+		ObjectOutputStream out = null;
+
+		// saving rules
+		try {
+			fos = new FileOutputStream(rulesMap);
+			out = new ObjectOutputStream(new BufferedOutputStream(fos));
+			out.writeObject(rules);
+			out.close();
+		} catch (Exception ex) {
+			logger.error("Error saving rules map " + ex.getMessage(), ex);
+		}
+
+		// saving alternative_contents
+		try {
+			fos = new FileOutputStream(alternativesMap);
+			out = new ObjectOutputStream(new BufferedOutputStream(fos));
+			out.writeObject(alternative_contents);
+			out.close();
+		} catch (Exception ex) {
+			logger.error("Error saving alternatives map " + ex.getMessage(), ex);
+		}
+
+		// saving attributes
+		try {
+			fos = new FileOutputStream(attributesMap);
+			out = new ObjectOutputStream(new BufferedOutputStream(fos));
+			out.writeObject(attributes);
+			out.close();
+		} catch (Exception ex) {
+			logger.error("Error saving attributes map " + ex.getMessage(), ex);
+		}
+	}
+	
+	
+	/**
+	 * Crea una regola per un elemento a partire da un modello della DTD
+	 * 
+	 * @return la nuova regola
+	 * @throws RulesManagerException
+	 */
+	protected DFSA createRule(String name, String model) throws RulesManagerException {
+		// System.out.println("Creating FSA");
+		FSA qrule = readModel(model);
+
+		// System.out.println("Creating DFSA");
+		DFSA vrule = new DFSA(name, qrule);
+		rules.put(name, vrule);
+
+		return vrule;
+	}
+
+	
+	/**
+	 * Crea i contenuti alternativi per un elemento
+	 * 
+	 * @return il vettore di alternative
+	 * @throws RulesManagerException
+	 */
+	protected Collection createAlternativeContents(String name, String model) throws RulesManagerException {
+		// System.out.println("Reading alternatives");
+		Vector contents_strings = readAlternativeContents(model);
+		alternative_contents.put(name, contents_strings);
+
+		return contents_strings;
+	}
+	
+	
+	
+	/**
+	 * Crea l'automa a stati finiti che rappresenta il content di un elemento
+	 * 
+	 * @param model modello dell'elemento da rappresentare
+	 * @throws RulesManagerException
+	 */
+	protected FSA readModel(String model) throws RulesManagerException {
+		FSA rule = new FSA();
+
+		int start = rule.addNode(); // aggiunge il nodo inizio
+		int end = rule.addNode(true); // aggiunge il nodo fine
+
+		if (model == "ANY")
+			// rule.addTransition(start,end,"#ANY");
+			rule.addTransition(start, end, "#PCDATA");
+		else if (model == "EMPTY")
+			rule.addTransition(start, end);
+		else
+			readContent(rule, start, end, model);
+
+		return rule;
+	}
+	
+	
+	
+	/**
+	 * Aggiunge le transizioni che rappresentano questo content all'automa
+	 * 
+	 * @param automata automa da modificare
+	 * @param start indice del nodo inizio transizione
+	 * @param end indice del nodo fine transizione
+	 * @param item content da parsare
+	 * @param content il modello del contenuto di un elemento
+	 * @throws RulesManagerException
+	 */
+	protected void readContent(FSA automata, int start, int end, String content) throws RulesManagerException {
+		// get cardinality
+
+		boolean is_repeatable = false;
+		boolean is_optional = false;
+		if (content.endsWith("?"))
+			is_optional = true;
+		else if (content.endsWith("+"))
+			is_repeatable = true;
+		else if (content.endsWith("*")) {
+			is_optional = true;
+			is_repeatable = true;
+		}
+		if (is_optional || is_repeatable)
+			content = content.substring(0, content.length() - 1);
+
+		// parse content
+		if (content.startsWith("(") && content.endsWith(")")) {
+			content = content.substring(1, content.length() - 1);
+
+			// check if it is a sequence
+			Collection sequence = splitContent(content, ',');
+			if (sequence.size() > 1) {
+				int last = start;
+				for (Iterator i = sequence.iterator(); i.hasNext();) {
+					// add state for blocking epsilon transitions
+					int new_start = automata.addNode();
+					int new_end = automata.addNode();
+					readContent(automata, new_start, new_end, (String) i.next());
+					automata.addTransition(last, new_start);
+					last = new_end;
+				}
+				automata.addTransition(last, end);
+			} else {
+				// check if it's a choice
+				Collection choice = splitContent(content, '|');
+				if (choice.size() > 1) {
+					if (((String) choice.iterator().next()).equals("#PCDATA")) {
+						// mixed content, cardinality=='*'
+						is_optional = true;
+						is_repeatable = true;
+					}
+
+					for (Iterator i = choice.iterator(); i.hasNext();) {
+						// add state for blocking epsilon transitions
+						int new_start = automata.addNode();
+						int new_end = automata.addNode();
+						readContent(automata, new_start, new_end, (String) i.next());
+						automata.addTransition(start, new_start);
+						automata.addTransition(new_end, end);
+					}
+				} else {
+					// single element
+					readContent(automata, start, end, content);
+				}
+			}
+		} else {
+			// single element
+			automata.addTransition(start, end, content);
+		}
+
+		// cardinality modificator
+		if (is_optional)
+			automata.addTransition(start, end);
+		if (is_repeatable)
+			automata.addTransition(end, start);
+	}
+
+	
+
+	/**
+	 * Divide una stringa in tokens separati da un carattere specificato. Le parti di
+	 * stringa racchiuse da parentesi tonde sono considerate come singoli tokens.
+	 * 
+	 * @param content stringa da separare
+	 * @param separator carattere separatore dei tokens
+	 * @return il vettore dei tokens
+	 */
+
+	protected Collection splitContent(String content, char separator) throws RulesManagerException {
+		int size = content.length();
+		if (size == 0)
+			throw new RulesManagerException("Empty content");
+
+		int last = 0;
+		int open_pars = 0;
+		Vector tokens = new Vector();
+		for (int i = 0; i < size; i++) {
+			char thischar = content.charAt(i);
+
+			if (thischar == '(')
+				open_pars++;
+			else if (thischar == ')')
+				open_pars--;
+
+			if (open_pars < 0)
+				throw new RulesManagerException("Malformed content: " + content);
+			if (open_pars == 0) {
+				if (thischar == separator) {
+					if (last == i)
+						throw new RulesManagerException("Malformed content: " + content);
+					tokens.add(content.substring(last, i));
+					last = i + 1;
+				}
+			}
+		}
+		tokens.add(content.substring(last, size));
+
+		return tokens;
+	}
+	
+	
+	protected Vector mergeAlternatives(Vector before, Vector after) {
+		if (before.size() == 0)
+			return after;
+		if (after.size() == 0)
+			return before;
+
+		Vector alternatives = new Vector();
+		for (Iterator i = before.iterator(); i.hasNext();) {
+			String str_before = (String) i.next();
+			for (Iterator l = after.iterator(); l.hasNext();) {
+				String str_after = (String) l.next();
+				alternatives.add(str_before + "," + str_after);
+			}
+		}
+		return alternatives;
+	}
+	
+	
+	/**
+	 * Crea le possibili alternative del contenuto di un elemento
+	 * 
+	 * @param content il modello del contenuto di un elemento
+	 * @throws RulesManagerException
+	 */
+	protected Vector readAlternativeContents(String content) throws RulesManagerException {
+
+		Vector alternatives = new Vector();
+
+		// get cardinality
+		boolean is_repeatable = false;
+		boolean is_optional = false;
+		if (content.endsWith("?"))
+			is_optional = true;
+		else if (content.endsWith("+"))
+			is_repeatable = true;
+		else if (content.endsWith("*")) {
+			is_optional = true;
+			is_repeatable = true;
+		}
+		if (is_optional || is_repeatable)
+			content = content.substring(0, content.length() - 1);
+
+		// optional contents are ignored, repeating is not considered
+		if (is_optional)
+			return alternatives;
+
+		// parse content
+		if (content.startsWith("(") && content.endsWith(")")) {
+			content = content.substring(1, content.length() - 1);
+
+			// check if it is a sequence
+			Collection sequence = splitContent(content, ',');
+			if (sequence.size() > 1) {
+				for (Iterator i = sequence.iterator(); i.hasNext();)
+					alternatives = mergeAlternatives(alternatives, readAlternativeContents((String) i.next()));
+			} else {
+				// check if it's a choice
+				Collection choice = splitContent(content, '|');
+				if (choice.size() > 1) {
+					// mixed content, cardinality=='*', are ignored
+					if (((String) choice.iterator().next()).equals("#PCDATA"))
+						return alternatives;
+
+					// add all the alternatives given from the possible choices
+					for (Iterator i = choice.iterator(); i.hasNext();)
+						alternatives.addAll(readAlternativeContents((String) i.next()));
+				} else {
+					// single element
+					return readAlternativeContents(content);
+				}
+			}
+		} else {
+			// single element
+			alternatives.add(content);
+		}
+
+		return alternatives;
+	}
+
+	
+	// metodi inseriti per compatibilita' con Schema
+	
+	public boolean assess(Node node){
+		return true;
+	}
+
+	public boolean assessAttribute(Node node, String attributeName){
+		return true;
+	}
+	
+	
+	
+	
+	//////////////////////////////////////////////////////////////////
+	//
+	//			 GESTIONE CONTENUTO DI DEFAULT DI UN ELEMENTO
+	//
+	//////////////////////////////////////////////////////////////////
 	
 	/**
 	 * Controlla se il ContentGraph contiene un contenuto di default: un cammino fatto
@@ -128,174 +653,7 @@ public class DtdRulesManagerImpl implements RulesManager, DeclHandler{
 		return last.getVisitLength();
 	}
 	
-	Logger logger;
 	
-	/**
-	 * Tabella hash contenente le regole per l'interrogazione sotto-forma di automi
-	 * deterministici. Ogni regola &egrave associata ad un elemento.
-	 */
-	protected HashMap rules;
-
-	/**
-	 * Tabella hash dei possibili contenuti alternativi dei vari elementi. Ogni valore
-	 * della tabella hash &egrave costituito da un vettore di stringhe formate da nomi di
-	 * elementi separati da virgole che rappresentano le possibili alternative. La tabella
-	 * hash &egrave indirizzata dai nomi degli elementi.
-	 */
-	protected HashMap alternative_contents;
-
-	/**
-	 * Tabella hash degli attributi associati agli elementi. La tabella hash &egrave
-	 * indirizzata dai nomi degli elementi. Ogni valore della tabella hash &grave
-	 * costituito da una seconda tabella hash che contiene tutti gli attributi
-	 * dell'elemento associato. Questa seconda tabella hash &egrave indirizzata dai nomi
-	 * degli attibuti dell'elemento. Ogni valore di questa seconda tabella &egrave
-	 * costituito da un'istanza della classe AttributeDecl, e definisce l'attributo
-	 * specifico.
-	 */
-	protected HashMap attributes;
-
-	protected boolean pre_check = false;
-
-	public DtdRulesManagerImpl(Logger logger) {
-		enableLogging(logger);
-		rules = new HashMap();
-		alternative_contents = new HashMap();
-		attributes = new HashMap();
-	}
-
-	// --------- Funzioni per l'interpretazione della DTD ---------------------
-
-	public boolean assess(Node node){
-		return true;
-	}
-
-	public boolean assessAttribute(Node node, String attributeName){
-		return true;
-	}
-
-	public void attributeDecl(String elementName, String attributeName, String type, String valueDefault, String value) {
-		if (logger.isDebugEnabled())
-			logger.debug("ATTRIBUTE: elem=" + elementName + " name=" + attributeName + " type=" + type + " default=" + valueDefault + " value=" + value);
-
-		// get the hash table of attributes associated with the element
-		// or create a new one if not existing
-		HashMap att_hash = (HashMap) attributes.get(elementName);
-		if (att_hash == null) {
-			att_hash = new HashMap();
-			attributes.put(elementName, att_hash);
-		}
-
-		// add a new attribute definition
-		att_hash.put(attributeName, new AttributeDeclaration(type, valueDefault, value));
-	}
-
-	public void clear() {
-		rules = new HashMap();
-		alternative_contents = new HashMap();
-		attributes = new HashMap();
-	}
-
-	// ------------ COSTRUTTORI --------------------
-
-	/**
-	 * Trasforma la rappresentazione stringa di un contenuto alternativo nella sua
-	 * rappresentazione come ContentGraph
-	 * 
-	 * @param alternative un contenuto alternativo di un elemento
-	 * @return la sua rappresentazione come ContentGraph
-	 */
-	protected ContentGraph createAlternativeContentGraph(String elem_name, String alternative) {
-
-		ContentGraph graph = new ContentGraph(elem_name);
-		String[] tokens = alternative.split(","); // regex for the comma mark
-
-		ContentGraph.Node src = graph.getFirst();
-		for (int i = 0; i < tokens.length; i++) {
-			ContentGraph.Node dst = graph.addNewNode();
-			src.addEdge(tokens[i], dst);
-			src = dst;
-		}
-		src.addEdge("#EPS", graph.getLast());
-
-		return graph;
-	}
-
-	/**
-	 * Crea i contenuti alternativi per un elemento
-	 * 
-	 * @return il vettore di alternative
-	 * @throws RulesManagerException
-	 */
-	protected Collection createAlternativeContents(String name, String model) throws RulesManagerException {
-		// System.out.println("Reading alternatives");
-		Vector contents_strings = readAlternativeContents(model);
-		alternative_contents.put(name, contents_strings);
-
-		return contents_strings;
-	}
-	
-	
-	/**
-	 * Crea una regola per un elemento a partire da un modello della DTD
-	 * 
-	 * @return la nuova regola
-	 * @throws RulesManagerException
-	 */
-	protected DFSA createRule(String name, String model) throws RulesManagerException {
-		// System.out.println("Creating FSA");
-		FSA qrule = readModel(model);
-
-		// System.out.println("Creating DFSA");
-		DFSA vrule = new DFSA(name, qrule);
-		rules.put(name, vrule);
-
-		return vrule;
-	}
-
-	// ------------ INIZIALIZZAZIONE DELLE REGOLE --------------------
-
-	public void createRulesManager(String extension) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/**
-	 * Crea un ContentGraph che rappresenta un elemento di testo
-	 * 
-	 * @param elem_name il nome dell'elemento
-	 */
-	protected ContentGraph createTextContentGraph(String elem_name) {
-		ContentGraph graph = new ContentGraph(elem_name);
-		graph.getFirst().addEdge("#PCDATA", graph.getLast());
-		return graph;
-	}
-
-	public void elementDecl(String name, String model) {
-
-		if (logger.isDebugEnabled())
-			logger.debug("ELEMENT: name=" + name + " model=" + model);
-
-		try {
-			// add element rule
-			createRule(name, model);
-
-			// add alternative contents for element
-			createAlternativeContents(name, model);
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-		}
-	}
-
-	// lettura delle regole dalle mappe salvate su file
-
-	// //////////////////////////////////////////////////// LogEnabled Interface
-	public void enableLogging(Logger logger) {
-		this.logger = logger;
-	}
-
-	// scrittura delle regole su mappe salvate su file
-
 	/**
 	 * Sostituisce ogni arco del ContentGraph che rappresenta un elemento, con il suo
 	 * ContentGraph. Scende ricorsivamente negli archi gia' esplosi
@@ -321,160 +679,6 @@ public class DtdRulesManagerImpl implements RulesManager, DeclHandler{
 		}
 	}
 	
-	
-	public void externalEntityDecl(String name, String publicId, String systemId) {
-		if (logger.isDebugEnabled())
-			logger.debug("EXTERNAL ENTITY: name=" + name + " publicId=" + publicId + " systemId=" + systemId);
-	}
-
-	private Vector extractSubList(Vector list, int first, int size) {
-		Vector sublist = new Vector();
-		for (int i = 0; i < size; i++) {
-			sublist.add(list.elementAt(first));
-			list.removeElementAt(first);
-		}
-		return sublist;
-	}
-
-
-	/**
-	 * Riempie il nodo con gli attributi necessari
-	 * 
-	 * @param elem il nodo di cui si vogliono settare gli attributi
-	 * @throws RulesManagerException
-	 */
-	public void fillRequiredAttributes(Node elem) throws RulesManagerException {
-		String elem_name = elem.getNodeName();
-		org.w3c.dom.Document doc = elem.getOwnerDocument();
-		Collection att_names = queryGetAttributes(elem_name);
-		if (att_names == null)
-			return;
-
-		org.w3c.dom.NamedNodeMap att_nodes = elem.getAttributes();
-		for (Iterator i = att_names.iterator(); i.hasNext();) {
-			String att_name = (String) i.next();
-			if (queryIsRequiredAttribute(elem_name, att_name)) {
-				// the attribute is required
-				Node att = att_nodes.getNamedItem(att_name);
-				if (att == null) {
-					// the attribute is not set, add a new one with the correct
-					// value
-					org.w3c.dom.Attr new_att = doc.createAttribute(att_name);
-					new_att.setValue(queryGetAttributeDefaultValue(elem_name, att_name));
-					att_nodes.setNamedItem(new_att);
-				}
-			}
-		}
-	}
-
-	/**
-	 * Ritorna i possibili contenuti alternativi di un elemento
-	 * 
-	 * @throws RulesManagerException
-	 */
-	public Vector getAlternativeContents(String elem_name) throws RulesManagerException {
-		if (elem_name.compareTo("#PCDATA") == 0)
-			return new Vector();
-
-		Vector alternatives = (Vector) alternative_contents.get(elem_name);
-		if (alternatives == null)
-			throw new RulesManagerException("No alternative contents for element <" + elem_name + ">");
-
-		return alternatives;
-	}
-
-	/**
-	 * Enumera le alternative possibili dati il nodo padre ed i nomi dei nodi figli.
-	 * 
-	 * @param elem_name il nome dell'elemento padre
-	 * @param elem_children la collezione dei nomi dei figli
-	 * @param choice_point la posizione nella sequenza di figli dopo la quale valutare le
-	 *            alternative
-	 * @throws RulesManagerException
-	 */
-	public Collection getAlternatives(String elem_name, Collection elem_children, int choice_point) throws RulesManagerException {
-		if (elem_name.startsWith("#"))
-			return new Vector();
-
-		DFSA rule = (DFSA) rules.get(elem_name);
-		if (rule == null)
-			throw new RulesManagerException("No rule for element <" + elem_name + ">");
-
-		return rule.alignAlternatives(elem_children, choice_point);
-	}
-
-	private AttributeDeclaration getAttributeDeclaration(String elem_name, String att_name) throws RulesManagerException {
-		if (elem_name == "#PCDATA")
-			throw new RulesManagerException("No attributes for element <" + elem_name + ">");
-		if (!rules.containsKey(elem_name))
-			throw new RulesManagerException("No rule for element <" + elem_name + ">");
-
-		HashMap att_hash = (HashMap) attributes.get(elem_name);
-		if (att_hash == null)
-			throw new RulesManagerException("No attributes for element <" + elem_name + ">");
-
-		AttributeDeclaration att_decl = (AttributeDeclaration) att_hash.get(att_name);
-		if (att_decl == null)
-			throw new RulesManagerException("No attribute <" + att_name + "> for element <" + elem_name + ">");
-		return att_decl;
-	}
-
-	/**
-	 * Ritorna l'indice di un nodo all'interno del padre
-	 * 
-	 * @param parent il nodo padre
-	 * @param child il nodo figlio
-	 * @throws RulesManagerException
-	 */
-	public int getChildIndex(Node parent, Node child) throws RulesManagerException {
-		int child_index = 0;
-		NodeList dom_children = parent.getChildNodes();
-		for (int i = 0; i < dom_children.getLength(); i++) {
-			Node dom_child = dom_children.item(i);
-			/*
-			 * if( dom_child.getNodeType() == dom_child.TEXT_NODE ) { // skip empty text
-			 * nodes String value = UtilLang.trimText(dom_child.getNodeValue()); if(
-			 * value==null || value.length()==0 ) continue; }
-			 */
-			if (dom_child == child)
-				return child_index;
-			child_index++;
-		}
-		throw new RulesManagerException("Cannot find the child element in the children list");
-	}
-
-	// ------------ GESTIONE CONTENUTO DI DEFAULT DI UN ELEMENTO
-	// --------------------
-
-	/**
-	 * Ritorna un vettore di stringhe contenente il nome dei figli di un nodo I nodi che
-	 * non sono testo o elementi vengono ignorati
-	 * 
-	 * @param node il nodo padre
-	 * @throws RulesManagerException
-	 */
-	public Vector getChildren(Node node) throws RulesManagerException {
-		if (node.getNodeType() != Node.ELEMENT_NODE)
-			return new Vector();
-
-		Vector str_children = new Vector();
-		NodeList dom_children = node.getChildNodes();
-		for (int i = 0; i < dom_children.getLength(); i++) {
-			Node dom_child = dom_children.item(i);
-			if (dom_child.getNodeType() == Node.ELEMENT_NODE)
-				str_children.add(dom_child.getNodeName());
-			else if (dom_child.getNodeType() == Node.TEXT_NODE) {
-				// String value = UtilLang.trimText(dom_child.getNodeValue());
-				// if( value!=null && value.length()>0 )
-				str_children.add(new String("#PCDATA"));
-			} else
-				str_children.add(new String("#ANY")); // comment and
-			// processing
-			// instructions can go
-			// everywhere
-		}
-		return str_children;
-	}
 
 	/**
 	 * Ritorna il content graph associato ad un elemento
@@ -610,25 +814,118 @@ public class DtdRulesManagerImpl implements RulesManager, DeclHandler{
 		return rule.getGappedAlignment(elem_children);
 	}
 
+	
 	/**
-	 * Ritorna il nome di un nodo
+	 * Restituisce una stringa in formato XML a partire dal contenuto di default
+	 * dell'elemento
 	 * 
-	 * @param dom_node il nodo di cui si richiede il nome
+	 * @param graph il ContentGraph dell'elemento
+	 */
+	static protected String getXMLContent(ContentGraph graph) {
+
+		// get visit path
+		Vector path = new Vector();
+		ContentGraph.Node nav = graph.getLast();
+		while (nav != null) {
+			Object edge = nav.getVisitEdge();
+			ContentGraph.Node before = nav.getVisitBefore();
+			if (before != null && edge instanceof ContentGraph)
+				path.add(0, edge);
+			nav = before;
+		}
+
+		// get xml content
+		String output = "<" + graph.getName() + ">";
+		for (Iterator i = path.iterator(); i.hasNext();)
+			output += getXMLContent((ContentGraph) i.next());
+		output = output + "</" + graph.getName() + ">";
+
+		return output;
+	}
+
+	
+	/**
+	 * Ritorna i possibili contenuti alternativi di un elemento
+	 * 
 	 * @throws RulesManagerException
 	 */
-	public String getNodeName(Node dom_node) throws RulesManagerException {
-		if (dom_node.getNodeType() == Node.ELEMENT_NODE)
-			return dom_node.getNodeName();
-		if (dom_node.getNodeType() == Node.TEXT_NODE)
-			return new String("#PCDATA");
-		return new String("#ANY");
+	public Vector getAlternativeContents(String elem_name) throws RulesManagerException {
+		if (elem_name.compareTo("#PCDATA") == 0)
+			return new Vector();
+
+		Vector alternatives = (Vector) alternative_contents.get(elem_name);
+		if (alternatives == null)
+			throw new RulesManagerException("No alternative contents for element <" + elem_name + ">");
+
+		return alternatives;
 	}
 
-	public void internalEntityDecl(String name, String value) {
-		if (logger.isDebugEnabled())
-			logger.debug("INTERNAL ENTITY: name=" + name + " value=" + value);
+	/**
+	 * Enumera le alternative possibili dati il nodo padre ed i nomi dei nodi figli.
+	 * 
+	 * @param elem_name il nome dell'elemento padre
+	 * @param elem_children la collezione dei nomi dei figli
+	 * @param choice_point la posizione nella sequenza di figli dopo la quale valutare le
+	 *            alternative
+	 * @throws RulesManagerException
+	 */
+	public Collection getAlternatives(String elem_name, Collection elem_children, int choice_point) throws RulesManagerException {
+		if (elem_name.startsWith("#"))
+			return new Vector();
+
+		DFSA rule = (DFSA) rules.get(elem_name);
+		if (rule == null)
+			throw new RulesManagerException("No rule for element <" + elem_name + ">");
+
+		return rule.alignAlternatives(elem_children, choice_point);
 	}
 
+	
+	
+
+	/**
+	 * Trasforma la rappresentazione stringa di un contenuto alternativo nella sua
+	 * rappresentazione come ContentGraph
+	 * 
+	 * @param alternative un contenuto alternativo di un elemento
+	 * @return la sua rappresentazione come ContentGraph
+	 */
+	protected ContentGraph createAlternativeContentGraph(String elem_name, String alternative) {
+
+		ContentGraph graph = new ContentGraph(elem_name);
+		String[] tokens = alternative.split(","); // regex for the comma mark
+
+		ContentGraph.Node src = graph.getFirst();
+		for (int i = 0; i < tokens.length; i++) {
+			ContentGraph.Node dst = graph.addNewNode();
+			src.addEdge(tokens[i], dst);
+			src = dst;
+		}
+		src.addEdge("#EPS", graph.getLast());
+
+		return graph;
+	}
+
+
+	/**
+	 * Crea un ContentGraph che rappresenta un elemento di testo
+	 * 
+	 * @param elem_name il nome dell'elemento
+	 */
+	protected ContentGraph createTextContentGraph(String elem_name) {
+		ContentGraph graph = new ContentGraph(elem_name);
+		graph.getFirst().addEdge("#PCDATA", graph.getLast());
+		return graph;
+	}
+
+	
+
+	
+	///////////////////////////////////////////////////////////////////////////
+	//
+	//					QUERY SUL CONTENUTO DI UN ELEMENTO
+	//
+    ///////////////////////////////////////////////////////////////////////////
 	/**
 	 * Controlla se una collezione di nomi di elementi puo rappresentare un insieme di
 	 * figli di un nodo
@@ -670,126 +967,8 @@ public class DtdRulesManagerImpl implements RulesManager, DeclHandler{
 		return true;
 	}
 
-	// ------------ QUERY SUL CONTENUTO DI UN ELEMENTO --------------------
 
-	public void loadRules(File xml_file) {
-
-		logger.info("START loading rules from DTD");
-
-		// clear old rules
-		clear();
-
-		// parse DTD
-		UtilXml.readDTD(xml_file, this);
-
-		logger.info("END loading rules from DTD");
-	}
-
-	public void loadRules(String filename) {
-
-		logger.info("START loading rules from DTD");
-
-		// open file
-		File xml_file = new File(filename);
-
-		// clear old rules
-		clear();
-
-		// parse DTD
-		UtilXml.readDTD(xml_file, this);
-
-		logger.info("END loading rules from DTD");
-
-	}
-
-	public void loadRules(String filename, String dtdPath) {
-
-		String key = null;
-		File xml_file = new File(filename);
-
-		if (dtdPath.startsWith(".")) // crea path name assoluto
-			dtdPath = xml_file.getParent().concat(File.separator+dtdPath.substring(2));
-
-		File dtd_file = UtilFile.getGrammarFile(dtdPath);
-
-		// Generazione della chiave
-		try {
-			key = UtilLang.bytesToHexString(UtilFile.calculateMD5(dtd_file));
-			//logger.debug("key for " + dtdPath + " = " + key.toString());
-		} catch (Exception ex) {
-			logger.error(ex.getMessage(), ex);
-		}
-
-		String md5Path = new String("dtdmd5");
-		new File(md5Path).mkdir();
-		File rulesMap = new File(md5Path + File.separator, key + "_rules");
-		File alternativesMap = new File(md5Path, key + "_alternatives");
-		File attributesMap = new File(md5Path, key + "_attributes");
-
-		if (key != null && rulesMap.exists() && alternativesMap.exists() && attributesMap.exists()) {
-			loadRulesFromCachedMap(rulesMap, alternativesMap, attributesMap);
-		} else {
-			loadRules(xml_file);
-			saveRulesOnCachedMap(rulesMap, alternativesMap, attributesMap);
-		}
-	}
-
-	private void loadRulesFromCachedMap(File rulesMap, File alternativesMap, File attributesMap) {
-		logger.info("START loading rules from files");
-
-		FileInputStream fis = null;
-		ObjectInputStream in = null;
-
-		// reading rules
-		try {
-			fis = new FileInputStream(rulesMap);
-			in = new ObjectInputStream(new BufferedInputStream(fis));
-			rules = (HashMap) in.readObject();
-			in.close();
-		} catch (Exception ex) {
-			logger.error("Error reading rules map " + ex.getMessage(), ex);
-		}
-
-		// reading alternative_contents
-		try {
-			fis = new FileInputStream(alternativesMap);
-			in = new ObjectInputStream(new BufferedInputStream(fis));
-			alternative_contents = (HashMap) in.readObject();
-			in.close();
-		} catch (Exception ex) {
-			logger.error("Error reading alternatives map " + ex.getMessage(), ex);
-		}
-
-		// reading attributes
-		try {
-			fis = new FileInputStream(attributesMap);
-			in = new ObjectInputStream(new BufferedInputStream(fis));
-			attributes = (HashMap) in.readObject();
-			in.close();
-		} catch (Exception ex) {
-			logger.error("Error reading attributes map " + ex.getMessage(), ex);
-		}
-
-		logger.info("END loading rules from files");
-	}
-
-	protected Vector mergeAlternatives(Vector before, Vector after) {
-		if (before.size() == 0)
-			return after;
-		if (after.size() == 0)
-			return before;
-
-		Vector alternatives = new Vector();
-		for (Iterator i = before.iterator(); i.hasNext();) {
-			String str_before = (String) i.next();
-			for (Iterator l = after.iterator(); l.hasNext();) {
-				String str_after = (String) l.next();
-				alternatives.add(str_before + "," + str_after);
-			}
-		}
-		return alternatives;
-	}
-
+	
 	/**
 	 * Ritorna i possibili nodi da appendere ad un elemento
 	 * 
@@ -904,6 +1083,7 @@ public class DtdRulesManagerImpl implements RulesManager, DeclHandler{
 		return isValid(getNodeName(parent), str_children);
 	}
 
+	
 	/**
 	 * Controlla se &egrave possibile racchiudere un insieme di figli di un elemento in un
 	 * altro elemento
@@ -1326,64 +1506,7 @@ public class DtdRulesManagerImpl implements RulesManager, DeclHandler{
 		return containers;
 	}
 
-	/**
-	 * Ritorna il valore di default (se esiste) di un attributo di un elemento
-	 * 
-	 * @param elem_name il nome dell'elemento di cui si chiede il valore di default
-	 *            dell'attributo
-	 * @param att_name il nome dell'attributo
-	 * @return la stringa vuota se non esiste il valore di default
-	 * @throws RulesManagerException
-	 */
-	public String queryGetAttributeDefaultValue(String elem_name, String att_name) throws RulesManagerException {
-		AttributeDeclaration att_decl = getAttributeDeclaration(elem_name, att_name);
-		if (att_decl.value == null) {
-			if (att_decl.type.startsWith("(") && att_decl.type.endsWith(")")) {
-				// tokenized value
-				String[] values = att_decl.type.substring(1, att_decl.type.length() - 1).split("\\|");
-				if (values.length > 0)
-					return values[0];
-			}
-			return "";
-		}
-		return att_decl.value;
-	}
-
-	/**
-	 * Ritorna i valori possibili per un attributo
-	 * 
-	 * @param elem_name il nome dell'elemento di cui si chiede il valore di default
-	 *            dell'attributo
-	 * @param att_name il nome dell'attributo
-	 * @return <code>null</code> se l'attributo puo' avere qualsiasi valore
-	 * @throws RulesManagerException
-	 */
-	public Collection queryGetAttributePossibleValues(String elem_name, String att_name) throws RulesManagerException {
-		AttributeDeclaration att_decl = getAttributeDeclaration(elem_name, att_name);
-		if (att_decl.type.startsWith("(") && att_decl.type.endsWith(")"))
-			return java.util.Arrays.asList(att_decl.type.substring(1, att_decl.type.length() - 1).split("\\|"));
-		return null;
-	}
-
-	/**
-	 * Ritorna la lista dei nomi degli attributi di un elemento
-	 * 
-	 * @param elem_name il nome dell'elemento di cui si vuole la lista degli attributi
-	 * @throws RulesManagerException
-	 */
-	public Collection queryGetAttributes(String elem_name) throws RulesManagerException {
-		if (elem_name == "#PCDATA")
-			return new Vector();
-		if (!rules.containsKey(elem_name))
-			throw new RulesManagerException("No rule for element <" + elem_name + ">");
-
-		HashMap att_hash = (HashMap) attributes.get(elem_name);
-		if (att_hash == null)
-			return new Vector(); // no attributes for element
-
-		return att_hash.keySet();
-	}
-
+	
 	/**
 	 * Ritorna i nodi che &egrave possibile inserire dopo un certo figlio di un elemento
 	 * 
@@ -1457,32 +1580,7 @@ public class DtdRulesManagerImpl implements RulesManager, DeclHandler{
 		return getAlternatives(getNodeName(parent), str_children, child_index);
 	}
 
-	/**
-	 * Ritorna <code>true</code> se l'attributo specificato &egrave di tipo
-	 * <code>#FIXED</code>
-	 * 
-	 * @param elem_name il nome dell'elemento di cui si chiede l'esistena dell'attributo
-	 * @param att_name il nome dell'attributo
-	 * @throws RulesManagerException
-	 */
-	public boolean queryIsFixedAttribute(String elem_name, String att_name) throws RulesManagerException {
-		AttributeDeclaration att_decl = getAttributeDeclaration(elem_name, att_name);
-		return (att_decl.valueDefault == "#FIXED");
-	}
-
-	/**
-	 * Ritorna <code>true</code> se l'attributo specificato &egrave di tipo
-	 * <code>#REQUIRED</code>
-	 * 
-	 * @param elem_name il nome dell'elemento di cui si chiede l'esistena dell'attributo
-	 * @param att_name il nome dell'attributo
-	 * @throws RulesManagerException
-	 */
-	public boolean queryIsRequiredAttribute(String elem_name, String att_name) throws RulesManagerException {
-		AttributeDeclaration att_decl = getAttributeDeclaration(elem_name, att_name);
-		return ((att_decl.valueDefault != null) && (att_decl.valueDefault.equalsIgnoreCase("#REQUIRED") || att_decl.valueDefault.equalsIgnoreCase("#FIXED")));
-	}
-
+	
 	/**
 	 * Controlla se il contenuto di un nodo &egrave valido
 	 * 
@@ -1497,52 +1595,8 @@ public class DtdRulesManagerImpl implements RulesManager, DeclHandler{
 		return isValid(getNodeName(dom_node), getChildren(dom_node));
 	}
 
-	/**
-	 * Ritorna <code>true</code> se esiste l'attributo specificato per questo elemento
-	 * 
-	 * @param elem_name il nome dell'elemento di cui si chiede l'esistena dell'attributo
-	 * @param att_name il nome dell'attributo
-	 * @throws RulesManagerException
-	 */
-	public boolean queryIsValidAttribute(String elem_name, String att_name) throws RulesManagerException {
-		if (elem_name == "#PCDATA")
-			throw new RulesManagerException("No attributes for element <" + elem_name + ">");
-		if (!rules.containsKey(elem_name))
-			throw new RulesManagerException("No rule for element <" + elem_name + ">");
-		return (attributes.containsKey(elem_name) && ((HashMap) attributes.get(elem_name)).containsKey(att_name));
-	}
-
-	/**
-	 * Ritorna <code>true</code> se l'attributo specificato per questo elemento
-	 * pu&ograve assumere il valore richiesto
-	 * 
-	 * @param elem_name il nome dell'elemento di cui si chiede la validit&agrave del
-	 *            valore dell'attributo
-	 * @param att_name il nome dell'attributo
-	 * @param value il valore dell'attributo
-	 * @throws RulesManagerException
-	 */
-	public boolean queryIsValidAttributeValue(String elem_name, String att_name, String value) throws RulesManagerException {
-		AttributeDeclaration att_decl = getAttributeDeclaration(elem_name, att_name);
-		if (att_decl.valueDefault == "#FIXED") {
-			// fixed value
-			return (att_decl.value.compareTo(value) == 0);
-		}
-		if (att_decl.type.startsWith("(") && att_decl.type.endsWith(")")) {
-			// tokenized value
-			String[] values = att_decl.type.substring(1, att_decl.type.length() - 1).split("\\|");
-			for (int i = 0; i < values.length; i++) {
-				if (values[i].compareTo(value) == 0)
-					return true;
-			}
-			return false;
-		}
-
-		// unchecked
-		return true;
-	}
-
-	// ------------ QUERY SUGLI ATTRIBUTI DI UN ELEMENTO --------------------
+	
+	
 
 	/**
 	 * Ritorna i possibili nodi da pre-pendere ad un elemento
@@ -1624,244 +1678,200 @@ public class DtdRulesManagerImpl implements RulesManager, DeclHandler{
 		return isValid(elem_name, UtilLang.singleton("#PCDATA"));
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	///////////////////////////////////////////////////////////////////////////
+	//
+	//	 				QUERY SUGLI ATTRIBUTI DI UN ELEMENTO
+	//
+	///////////////////////////////////////////////////////////////////////////
+	
+	private AttributeDeclaration getAttributeDeclaration(String elem_name, String att_name) throws RulesManagerException {
+		if (elem_name == "#PCDATA")
+			throw new RulesManagerException("No attributes for element <" + elem_name + ">");
+		if (!rules.containsKey(elem_name))
+			throw new RulesManagerException("No rule for element <" + elem_name + ">");
+
+		HashMap att_hash = (HashMap) attributes.get(elem_name);
+		if (att_hash == null)
+			throw new RulesManagerException("No attributes for element <" + elem_name + ">");
+
+		AttributeDeclaration att_decl = (AttributeDeclaration) att_hash.get(att_name);
+		if (att_decl == null)
+			throw new RulesManagerException("No attribute <" + att_name + "> for element <" + elem_name + ">");
+		return att_decl;
+	}
+
+	
 	/**
-	 * Crea le possibili alternative del contenuto di un elemento
+	 * Ritorna la lista dei nomi degli attributi di un elemento
 	 * 
-	 * @param content il modello del contenuto di un elemento
+	 * @param elem_name il nome dell'elemento di cui si vuole la lista degli attributi
 	 * @throws RulesManagerException
 	 */
-	protected Vector readAlternativeContents(String content) throws RulesManagerException {
+	public Collection queryGetAttributes(String elem_name) throws RulesManagerException {
+		if (elem_name == "#PCDATA")
+			return new Vector();
+		if (!rules.containsKey(elem_name))
+			throw new RulesManagerException("No rule for element <" + elem_name + ">");
 
-		Vector alternatives = new Vector();
+		HashMap att_hash = (HashMap) attributes.get(elem_name);
+		if (att_hash == null)
+			return new Vector(); // no attributes for element
 
-		// get cardinality
-		boolean is_repeatable = false;
-		boolean is_optional = false;
-		if (content.endsWith("?"))
-			is_optional = true;
-		else if (content.endsWith("+"))
-			is_repeatable = true;
-		else if (content.endsWith("*")) {
-			is_optional = true;
-			is_repeatable = true;
-		}
-		if (is_optional || is_repeatable)
-			content = content.substring(0, content.length() - 1);
-
-		// optional contents are ignored, repeating is not considered
-		if (is_optional)
-			return alternatives;
-
-		// parse content
-		if (content.startsWith("(") && content.endsWith(")")) {
-			content = content.substring(1, content.length() - 1);
-
-			// check if it is a sequence
-			Collection sequence = splitContent(content, ',');
-			if (sequence.size() > 1) {
-				for (Iterator i = sequence.iterator(); i.hasNext();)
-					alternatives = mergeAlternatives(alternatives, readAlternativeContents((String) i.next()));
-			} else {
-				// check if it's a choice
-				Collection choice = splitContent(content, '|');
-				if (choice.size() > 1) {
-					// mixed content, cardinality=='*', are ignored
-					if (((String) choice.iterator().next()).equals("#PCDATA"))
-						return alternatives;
-
-					// add all the alternatives given from the possible choices
-					for (Iterator i = choice.iterator(); i.hasNext();)
-						alternatives.addAll(readAlternativeContents((String) i.next()));
-				} else {
-					// single element
-					return readAlternativeContents(content);
-				}
+		return att_hash.keySet();
+	}
+	
+	/**
+	 * Ritorna il valore di default (se esiste) di un attributo di un elemento
+	 * 
+	 * @param elem_name il nome dell'elemento di cui si chiede il valore di default
+	 *            dell'attributo
+	 * @param att_name il nome dell'attributo
+	 * @return la stringa vuota se non esiste il valore di default
+	 * @throws RulesManagerException
+	 */
+	public String queryGetAttributeDefaultValue(String elem_name, String att_name) throws RulesManagerException {
+		AttributeDeclaration att_decl = getAttributeDeclaration(elem_name, att_name);
+		if (att_decl.value == null) {
+			if (att_decl.type.startsWith("(") && att_decl.type.endsWith(")")) {
+				// tokenized value
+				String[] values = att_decl.type.substring(1, att_decl.type.length() - 1).split("\\|");
+				if (values.length > 0)
+					return values[0];
 			}
-		} else {
-			// single element
-			alternatives.add(content);
+			return "";
 		}
-
-		return alternatives;
+		return att_decl.value;
 	}
 
 	/**
-	 * Aggiunge le transizioni che rappresentano questo content all'automa
+	 * Ritorna i valori possibili per un attributo
 	 * 
-	 * @param automata automa da modificare
-	 * @param start indice del nodo inizio transizione
-	 * @param end indice del nodo fine transizione
-	 * @param item content da parsare
-	 * @param content il modello del contenuto di un elemento
+	 * @param elem_name il nome dell'elemento di cui si chiede il valore di default
+	 *            dell'attributo
+	 * @param att_name il nome dell'attributo
+	 * @return <code>null</code> se l'attributo puo' avere qualsiasi valore
 	 * @throws RulesManagerException
 	 */
-	protected void readContent(FSA automata, int start, int end, String content) throws RulesManagerException {
-		// get cardinality
+	public Collection queryGetAttributePossibleValues(String elem_name, String att_name) throws RulesManagerException {
+		AttributeDeclaration att_decl = getAttributeDeclaration(elem_name, att_name);
+		if (att_decl.type.startsWith("(") && att_decl.type.endsWith(")"))
+			return java.util.Arrays.asList(att_decl.type.substring(1, att_decl.type.length() - 1).split("\\|"));
+		return null;
+	}
 
-		boolean is_repeatable = false;
-		boolean is_optional = false;
-		if (content.endsWith("?"))
-			is_optional = true;
-		else if (content.endsWith("+"))
-			is_repeatable = true;
-		else if (content.endsWith("*")) {
-			is_optional = true;
-			is_repeatable = true;
+	
+	/**
+	 * Ritorna <code>true</code> se l'attributo specificato &egrave di tipo
+	 * <code>#FIXED</code>
+	 * 
+	 * @param elem_name il nome dell'elemento di cui si chiede l'esistena dell'attributo
+	 * @param att_name il nome dell'attributo
+	 * @throws RulesManagerException
+	 */
+	public boolean queryIsFixedAttribute(String elem_name, String att_name) throws RulesManagerException {
+		AttributeDeclaration att_decl = getAttributeDeclaration(elem_name, att_name);
+		return (att_decl.valueDefault == "#FIXED");
+	}
+
+	/**
+	 * Ritorna <code>true</code> se l'attributo specificato &egrave di tipo
+	 * <code>#REQUIRED</code>
+	 * 
+	 * @param elem_name il nome dell'elemento di cui si chiede l'esistena dell'attributo
+	 * @param att_name il nome dell'attributo
+	 * @throws RulesManagerException
+	 */
+	public boolean queryIsRequiredAttribute(String elem_name, String att_name) throws RulesManagerException {
+		AttributeDeclaration att_decl = getAttributeDeclaration(elem_name, att_name);
+		return ((att_decl.valueDefault != null) && (att_decl.valueDefault.equalsIgnoreCase("#REQUIRED") || att_decl.valueDefault.equalsIgnoreCase("#FIXED")));
+	}
+
+	
+	/**
+	 * Ritorna <code>true</code> se esiste l'attributo specificato per questo elemento
+	 * 
+	 * @param elem_name il nome dell'elemento di cui si chiede l'esistena dell'attributo
+	 * @param att_name il nome dell'attributo
+	 * @throws RulesManagerException
+	 */
+	public boolean queryIsValidAttribute(String elem_name, String att_name) throws RulesManagerException {
+		if (elem_name == "#PCDATA")
+			throw new RulesManagerException("No attributes for element <" + elem_name + ">");
+		if (!rules.containsKey(elem_name))
+			throw new RulesManagerException("No rule for element <" + elem_name + ">");
+		return (attributes.containsKey(elem_name) && ((HashMap) attributes.get(elem_name)).containsKey(att_name));
+	}
+
+	/**
+	 * Ritorna <code>true</code> se l'attributo specificato per questo elemento
+	 * pu&ograve assumere il valore richiesto
+	 * 
+	 * @param elem_name il nome dell'elemento di cui si chiede la validit&agrave del
+	 *            valore dell'attributo
+	 * @param att_name il nome dell'attributo
+	 * @param value il valore dell'attributo
+	 * @throws RulesManagerException
+	 */
+	public boolean queryIsValidAttributeValue(String elem_name, String att_name, String value) throws RulesManagerException {
+		AttributeDeclaration att_decl = getAttributeDeclaration(elem_name, att_name);
+		if (att_decl.valueDefault == "#FIXED") {
+			// fixed value
+			return (att_decl.value.compareTo(value) == 0);
 		}
-		if (is_optional || is_repeatable)
-			content = content.substring(0, content.length() - 1);
-
-		// parse content
-		if (content.startsWith("(") && content.endsWith(")")) {
-			content = content.substring(1, content.length() - 1);
-
-			// check if it is a sequence
-			Collection sequence = splitContent(content, ',');
-			if (sequence.size() > 1) {
-				int last = start;
-				for (Iterator i = sequence.iterator(); i.hasNext();) {
-					// add state for blocking epsilon transitions
-					int new_start = automata.addNode();
-					int new_end = automata.addNode();
-					readContent(automata, new_start, new_end, (String) i.next());
-					automata.addTransition(last, new_start);
-					last = new_end;
-				}
-				automata.addTransition(last, end);
-			} else {
-				// check if it's a choice
-				Collection choice = splitContent(content, '|');
-				if (choice.size() > 1) {
-					if (((String) choice.iterator().next()).equals("#PCDATA")) {
-						// mixed content, cardinality=='*'
-						is_optional = true;
-						is_repeatable = true;
-					}
-
-					for (Iterator i = choice.iterator(); i.hasNext();) {
-						// add state for blocking epsilon transitions
-						int new_start = automata.addNode();
-						int new_end = automata.addNode();
-						readContent(automata, new_start, new_end, (String) i.next());
-						automata.addTransition(start, new_start);
-						automata.addTransition(new_end, end);
-					}
-				} else {
-					// single element
-					readContent(automata, start, end, content);
-				}
+		if (att_decl.type.startsWith("(") && att_decl.type.endsWith(")")) {
+			// tokenized value
+			String[] values = att_decl.type.substring(1, att_decl.type.length() - 1).split("\\|");
+			for (int i = 0; i < values.length; i++) {
+				if (values[i].compareTo(value) == 0)
+					return true;
 			}
-		} else {
-			// single element
-			automata.addTransition(start, end, content);
+			return false;
 		}
-
-		// cardinality modificator
-		if (is_optional)
-			automata.addTransition(start, end);
-		if (is_repeatable)
-			automata.addTransition(end, start);
+		// unchecked
+		return true;
 	}
+	
+	
 
 	/**
-	 * Crea l'automa a stati finiti che rappresenta il content di un elemento
+	 * Riempie il nodo con gli attributi necessari
 	 * 
-	 * @param model modello dell'elemento da rappresentare
+	 * @param elem il nodo di cui si vogliono settare gli attributi
 	 * @throws RulesManagerException
 	 */
-	protected FSA readModel(String model) throws RulesManagerException {
-		FSA rule = new FSA();
+	public void fillRequiredAttributes(Node elem) throws RulesManagerException {
+		String elem_name = elem.getNodeName();
+		org.w3c.dom.Document doc = elem.getOwnerDocument();
+		Collection att_names = queryGetAttributes(elem_name);
+		if (att_names == null)
+			return;
 
-		int start = rule.addNode(); // aggiunge il nodo inizio
-		int end = rule.addNode(true); // aggiunge il nodo fine
-
-		if (model == "ANY")
-			// rule.addTransition(start,end,"#ANY");
-			rule.addTransition(start, end, "#PCDATA");
-		else if (model == "EMPTY")
-			rule.addTransition(start, end);
-		else
-			readContent(rule, start, end, model);
-
-		return rule;
-	}
-
-	private void saveRulesOnCachedMap(File rulesMap, File alternativesMap, File attributesMap) {
-		FileOutputStream fos = null;
-		ObjectOutputStream out = null;
-
-		// saving rules
-		try {
-			fos = new FileOutputStream(rulesMap);
-			out = new ObjectOutputStream(new BufferedOutputStream(fos));
-			out.writeObject(rules);
-			out.close();
-		} catch (Exception ex) {
-			logger.error("Error saving rules map " + ex.getMessage(), ex);
-		}
-
-		// saving alternative_contents
-		try {
-			fos = new FileOutputStream(alternativesMap);
-			out = new ObjectOutputStream(new BufferedOutputStream(fos));
-			out.writeObject(alternative_contents);
-			out.close();
-		} catch (Exception ex) {
-			logger.error("Error saving alternatives map " + ex.getMessage(), ex);
-		}
-
-		// saving attributes
-		try {
-			fos = new FileOutputStream(attributesMap);
-			out = new ObjectOutputStream(new BufferedOutputStream(fos));
-			out.writeObject(attributes);
-			out.close();
-		} catch (Exception ex) {
-			logger.error("Error saving attributes map " + ex.getMessage(), ex);
-		}
-	}
-
-	/**
-	 * Divide una stringa in tokens separati da un carattere specificato. Le parti di
-	 * stringa racchiuse da parentesi tonde sono considerate come singoli tokens.
-	 * 
-	 * @param content stringa da separare
-	 * @param separator carattere separatore dei tokens
-	 * @return il vettore dei tokens
-	 */
-
-	protected Collection splitContent(String content, char separator) throws RulesManagerException {
-		int size = content.length();
-		if (size == 0)
-			throw new RulesManagerException("Empty content");
-
-		int last = 0;
-		int open_pars = 0;
-		Vector tokens = new Vector();
-		for (int i = 0; i < size; i++) {
-			char thischar = content.charAt(i);
-
-			if (thischar == '(')
-				open_pars++;
-			else if (thischar == ')')
-				open_pars--;
-
-			if (open_pars < 0)
-				throw new RulesManagerException("Malformed content: " + content);
-			if (open_pars == 0) {
-				if (thischar == separator) {
-					if (last == i)
-						throw new RulesManagerException("Malformed content: " + content);
-					tokens.add(content.substring(last, i));
-					last = i + 1;
+		org.w3c.dom.NamedNodeMap att_nodes = elem.getAttributes();
+		for (Iterator i = att_names.iterator(); i.hasNext();) {
+			String att_name = (String) i.next();
+			if (queryIsRequiredAttribute(elem_name, att_name)) {
+				// the attribute is required
+				Node att = att_nodes.getNamedItem(att_name);
+				if (att == null) {
+					// the attribute is not set, add a new one with the correct
+					// value
+					org.w3c.dom.Attr new_att = doc.createAttribute(att_name);
+					new_att.setValue(queryGetAttributeDefaultValue(elem_name, att_name));
+					att_nodes.setNamedItem(new_att);
 				}
 			}
 		}
-		tokens.add(content.substring(last, size));
-
-		return tokens;
 	}
-
+	
+	
 	/*
 	 * private void printAttributes(Node elem) { org.w3c.dom.NamedNodeMap att_nodes =
 	 * elem.getAttributes(); for (int i = 0; i < att_nodes.getLength(); i++) { Node att =
@@ -1869,4 +1879,94 @@ public class DtdRulesManagerImpl implements RulesManager, DeclHandler{
 	 * value=" + att.getNodeValue()); } }
 	 */
 
+	
+	
+	//////////////////////////////////////////////////////
+	//
+	//    					UTIL
+	//
+    //////////////////////////////////////////////////////
+	
+	private Vector extractSubList(Vector list, int first, int size) {
+		Vector sublist = new Vector();
+		for (int i = 0; i < size; i++) {
+			sublist.add(list.elementAt(first));
+			list.removeElementAt(first);
+		}
+		return sublist;
+	}
+	
+	/**
+	 * Ritorna l'indice di un nodo all'interno del padre
+	 * 
+	 * @param parent il nodo padre
+	 * @param child il nodo figlio
+	 * @throws RulesManagerException
+	 */
+	public int getChildIndex(Node parent, Node child) throws RulesManagerException {
+		int child_index = 0;
+		NodeList dom_children = parent.getChildNodes();
+		for (int i = 0; i < dom_children.getLength(); i++) {
+			Node dom_child = dom_children.item(i);
+			/*
+			 * if( dom_child.getNodeType() == dom_child.TEXT_NODE ) { // skip empty text
+			 * nodes String value = UtilLang.trimText(dom_child.getNodeValue()); if(
+			 * value==null || value.length()==0 ) continue; }
+			 */
+			if (dom_child == child)
+				return child_index;
+			child_index++;
+		}
+		throw new RulesManagerException("Cannot find the child element in the children list");
+	}
+
+
+	/**
+	 * Ritorna un vettore di stringhe contenente il nome dei figli di un nodo I nodi che
+	 * non sono testo o elementi vengono ignorati
+	 * 
+	 * @param node il nodo padre
+	 * @throws RulesManagerException
+	 */
+	public Vector getChildren(Node node) throws RulesManagerException {
+		if (node.getNodeType() != Node.ELEMENT_NODE)
+			return new Vector();
+
+		Vector str_children = new Vector();
+		NodeList dom_children = node.getChildNodes();
+		for (int i = 0; i < dom_children.getLength(); i++) {
+			Node dom_child = dom_children.item(i);
+			if (dom_child.getNodeType() == Node.ELEMENT_NODE)
+				str_children.add(dom_child.getNodeName());
+			else if (dom_child.getNodeType() == Node.TEXT_NODE) {
+				// String value = UtilLang.trimText(dom_child.getNodeValue());
+				// if( value!=null && value.length()>0 )
+				str_children.add(new String("#PCDATA"));
+			} else
+				str_children.add(new String("#ANY")); // comment and
+			// processing
+			// instructions can go
+			// everywhere
+		}
+		return str_children;
+	}
+
+	
+	/**
+	 * Ritorna il nome di un nodo
+	 * 
+	 * @param dom_node il nodo di cui si richiede il nome
+	 * @throws RulesManagerException
+	 */
+	public String getNodeName(Node dom_node) throws RulesManagerException {
+		if (dom_node.getNodeType() == Node.ELEMENT_NODE)
+			return dom_node.getNodeName();
+		if (dom_node.getNodeType() == Node.TEXT_NODE)
+			return new String("#PCDATA");
+		return new String("#ANY");
+	}
+
+
+
+	
 }

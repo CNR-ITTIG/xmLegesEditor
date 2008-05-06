@@ -12,20 +12,14 @@
 package it.cnr.ittig.xmleges.core.blocks.schema;
 
 import it.cnr.ittig.services.manager.Logger;
+import it.cnr.ittig.xmleges.core.blocks.rules.AttributeDeclaration;
 import it.cnr.ittig.xmleges.core.blocks.rules.ContentGraph;
 import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
 import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
 import it.cnr.ittig.xmleges.core.util.lang.UtilLang;
-import it.cnr.ittig.xmleges.core.blocks.rules.AttributeDeclaration;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -41,36 +35,150 @@ import org.w3c.dom.NodeList;
  */
 public class SchemaRulesManagerImpl implements RulesManager {
 
+	Logger logger;
 	
+	//	 //////////////////////////////////////////////////// LogEnabled Interface
+	public void enableLogging(Logger logger) {
+		this.logger = logger;
+	}
+
+	
+	public void createRulesManager(String extension) {
+		// TODO Auto-generated method stub
 		
+	}
+	
+	protected boolean pre_check = false;
+	
+	protected UtilXsd utilXsd;
+	
+
+	/**
+	 * Tabella hash contenente le regole per l'interrogazione sotto-forma di automi
+	 * deterministici. Ogni regola &egrave associata ad un elemento.
+	 */
+	protected HashMap rules;
+	
 	
 	/**
-	 * Restituisce una stringa in formato XML a partire dal contenuto di default
-	 * dell'elemento
-	 * 
-	 * @param graph il ContentGraph dell'elemento
+	 * Tabella hash degli attributi associati agli elementi. La tabella hash &egrave
+	 * indirizzata dai nomi degli elementi. Ogni valore della tabella hash &grave
+	 * costituito da una seconda tabella hash che contiene tutti gli attributi
+	 * dell'elemento associato. Questa seconda tabella hash &egrave indirizzata dai nomi
+	 * degli attibuti dell'elemento. Ogni valore di questa seconda tabella &egrave
+	 * costituito da un'istanza della classe AttributeDecl, e definisce l'attributo
+	 * specifico.
 	 */
-	static protected String getXMLContent(ContentGraph graph) {
+	protected HashMap attributes;
+	
+	/**
+	 * 
+	 */
+	protected HashMap elemDeclNames;
+	
 
-		// get visit path
-		Vector path = new Vector();
-		ContentGraph.Node nav = graph.getLast();
-		while (nav != null) {
-			Object edge = nav.getVisitEdge();
-			ContentGraph.Node before = nav.getVisitBefore();
-			if (before != null && edge instanceof ContentGraph)
-				path.add(0, edge);
-			nav = before;
-		}
+	/**
+	 * Tabella hash dei possibili contenuti alternativi dei vari elementi. Ogni valore
+	 * della tabella hash &egrave costituito da un vettore di stringhe formate da nomi di
+	 * elementi separati da virgole che rappresentano le possibili alternative. La tabella
+	 * hash &egrave indirizzata dai nomi degli elementi.
+	 */
+	protected HashMap alternative_contents;
 
-		// get xml content
-		String output = "<" + graph.getName() + ">";
-		for (Iterator i = path.iterator(); i.hasNext();)
-			output += getXMLContent((ContentGraph) i.next());
-		output = output + "</" + graph.getName() + ">";
-		
-		return output;
+
+	Logger getLogger() {
+		return this.logger;
 	}
+
+
+	
+	/////////////////////////////////////////////////////////////
+	//
+	//	 					COSTRUTTORI 
+	//
+	/////////////////////////////////////////////////////////////	
+	
+	public SchemaRulesManagerImpl(Logger logger) {
+		enableLogging(logger);
+		
+		rules = new HashMap();
+		elemDeclNames = new HashMap();
+		alternative_contents = new HashMap();
+		attributes = new HashMap();
+			
+		utilXsd = new UtilXsd(this);		
+	}
+	
+	
+	public void clear() {
+		rules = new HashMap();
+		elemDeclNames = new HashMap();
+		alternative_contents = new HashMap();
+		attributes = new HashMap();
+	}
+	
+	
+	
+	///////////////////////////////////////////////////////////////////////
+	//
+	//	 				 INIZIALIZZAZIONE DELLE REGOLE 
+	//
+	///////////////////////////////////////////////////////////////////////
+	
+
+	public void loadRules(File xml_file) {
+		// TODO dal file xml estrarre lo schemaURL dall'intestazione		
+	}
+
+	public void loadRules(String schemaPath) {
+		clear();
+		utilXsd.loadRules(schemaPath);		
+	}
+
+	
+	public void loadRules(String filename, String schemaPath) {
+		//logger.info("START loading rules from SCHEMA");
+
+		File xml_file = new File(filename);
+		
+		if (schemaPath.startsWith(".")) // crea path name assoluto
+			schemaPath = xml_file.getParent().concat(File.separator+schemaPath.substring(2));
+		
+		File schema_file = UtilFile.getGrammarFile(schemaPath);
+		clear();
+		utilXsd.loadRules(schema_file.getAbsolutePath());
+	}
+	
+
+	
+	
+	//////////////////////////////////////////////////////////////////
+	//
+	// VALIDAZIONE DEI CONTENUTI
+	//
+	//////////////////////////////////////////////////////////////////
+	
+	
+	
+	
+	public boolean assess(Node node){
+		return utilXsd.assess(node);
+	}
+	
+
+
+	public boolean assessAttribute(Node node, String attributeName){
+		return utilXsd.assessAttribute(node,attributeName);
+	}
+
+	
+
+	
+	//////////////////////////////////////////////////////////////////
+	//
+	//			 GESTIONE CONTENUTO DI DEFAULT DI UN ELEMENTO
+	//
+	//////////////////////////////////////////////////////////////////
 	
 	
 	/**
@@ -133,161 +241,9 @@ public class SchemaRulesManagerImpl implements RulesManager {
 		return last.getVisitLength();
 		
 	}
-	Logger logger;
-	
-	protected boolean pre_check = false;
-	
-	protected UtilXsd utilXsd;
-
-
-
-	/**
-	 * Tabella hash contenente le regole per l'interrogazione sotto-forma di automi
-	 * deterministici. Ogni regola &egrave associata ad un elemento.
-	 */
-	protected HashMap rules;
-	
-	
-	///////////////////////////////////////////////////////////////////////
-	//
-	//				 INIZIALIZZAZIONE     SCHEMA
-	//
-	
-	
-	// ------------ COSTRUTTORI --------------------
-
-	protected HashMap elemDeclNames;
-	
-
-	/**
-	 * Tabella hash dei possibili contenuti alternativi dei vari elementi. Ogni valore
-	 * della tabella hash &egrave costituito da un vettore di stringhe formate da nomi di
-	 * elementi separati da virgole che rappresentano le possibili alternative. La tabella
-	 * hash &egrave indirizzata dai nomi degli elementi.
-	 */
-	protected HashMap alternative_contents;
-
-	// ------------ INIZIALIZZAZIONE DELLE REGOLE --------------------
-
-//	public void loadRules(String filename) {
-//		File xml_file = new File(filename);
-//		loadRules(xml_file);
-//	}
-	
-	
-	/**
-	 * Tabella hash degli attributi associati agli elementi. La tabella hash &egrave
-	 * indirizzata dai nomi degli elementi. Ogni valore della tabella hash &grave
-	 * costituito da una seconda tabella hash che contiene tutti gli attributi
-	 * dell'elemento associato. Questa seconda tabella hash &egrave indirizzata dai nomi
-	 * degli attibuti dell'elemento. Ogni valore di questa seconda tabella &egrave
-	 * costituito da un'istanza della classe AttributeDecl, e definisce l'attributo
-	 * specifico.
-	 */
-	protected HashMap attributes;
-	
-	
-	public SchemaRulesManagerImpl(Logger logger) {
-		enableLogging(logger);
-		
-		rules = new HashMap();
-		elemDeclNames = new HashMap();
-		alternative_contents = new HashMap();
-		attributes = new HashMap();
-			
-		utilXsd = new UtilXsd(this);		
-	}
-	
-	
-
-	
-	public boolean assess(Node node){
-		return utilXsd.assess(node);
-	}
-	
-
 	
 	
 	
-	// lettura delle regole dalle mappe salvate su file
-
-	public boolean assessAttribute(Node node, String attributeName){
-		return utilXsd.assessAttribute(node,attributeName);
-	}
-
-	// scrittura delle regole su mappe salvate su file
-
-	public void clear() {
-		rules = new HashMap();
-		elemDeclNames = new HashMap();
-		alternative_contents = new HashMap();
-		attributes = new HashMap();
-	}
-	
-	//
-	//
-	//
-	////////////////////   FINE   INIZIALIZZAZIONE SCHEMA   /////////////////////////
-	
-	
-	
-	/**
-	 * Trasforma la rappresentazione stringa di un contenuto alternativo nella sua
-	 * rappresentazione come ContentGraph
-	 * 
-	 * @param alternative un contenuto alternativo di un elemento
-	 * @return la sua rappresentazione come ContentGraph
-	 */
-	protected ContentGraph createAlternativeContentGraph(String elem_name, String alternative) {
-
-		ContentGraph graph = new ContentGraph(elem_name);
-		String[] tokens = alternative.split(","); // regex for the comma mark
-
-		ContentGraph.Node src = graph.getFirst();
-		for (int i = 0; i < tokens.length; i++) {
-			ContentGraph.Node dst = graph.addNewNode();
-			src.addEdge(tokens[i], dst);
-			src = dst;
-		}
-		src.addEdge("#EPS", graph.getLast());
-
-		return graph;
-	}
-	
-	
-	public void createRulesManager(String extension) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	
-	
-	
-	
-	//////////////////////////////////////////////////////////////////////////////////
-	//
-	// 				 GESTIONE CONTENUTO DI DEFAULT DI UN ELEMENTO
-	//
-	//
-
-	/**
-	 * Crea un ContentGraph che rappresenta un elemento di testo
-	 * 
-	 * @param elem_name il nome dell'elemento
-	 */
-	protected ContentGraph createTextContentGraph(String elem_name) {
-		ContentGraph graph = new ContentGraph(elem_name);
-		graph.getFirst().addEdge("#PCDATA", graph.getLast());
-		return graph;
-	}
-
-
-
-	// //////////////////////////////////////////////////// LogEnabled Interface
-	public void enableLogging(Logger logger) {
-		this.logger = logger;
-	}
-
 	/**
 	 * Sostituisce ogni arco del ContentGraph che rappresenta un elemento, con il suo
 	 * ContentGraph. Scende ricorsivamente negli archi gia' esplosi
@@ -312,189 +268,9 @@ public class SchemaRulesManagerImpl implements RulesManager {
 			}
 		}
 	}
-	
-	
 
 	
-
-
-
-	private Vector extractSubList(Vector list, int first, int size) {
-		Vector sublist = new Vector();
-		for (int i = 0; i < size; i++) {
-			sublist.add(list.elementAt(first));
-			list.removeElementAt(first);
-		}
-		return sublist;
-	}
-
-
-	/**
-	 * Riempie il nodo con gli attributi necessari
-	 * 
-	 * @param elem il nodo di cui si vogliono settare gli attributi
-	 * @throws RulesManagerException
-	 */
-	public void fillRequiredAttributes(Node elem) throws RulesManagerException {
-		String elem_name = elem.getNodeName();
-		org.w3c.dom.Document doc = elem.getOwnerDocument();
-		Collection att_names = queryGetAttributes(elem_name);
-		if (att_names == null)
-			return;
-
-		org.w3c.dom.NamedNodeMap att_nodes = elem.getAttributes();
-		for (Iterator i = att_names.iterator(); i.hasNext();) {
-			String att_name = (String) i.next();
-			if (queryIsRequiredAttribute(elem_name, att_name)) {
-				// the attribute is required
-				Node att = att_nodes.getNamedItem(att_name);
-				if (att == null) {
-					// the attribute is not set, add a new one with the correct
-					// value
-					org.w3c.dom.Attr new_att = doc.createAttribute(att_name);
-					new_att.setValue(queryGetAttributeDefaultValue(elem_name, att_name));
-					att_nodes.setNamedItem(new_att);
-				}
-			}
-		}
-	}
-
 	
-	/**
-	 * Ritorna una stringa in formato XML che definisce il contenuto di default di un
-	 * elemento
-	 * 
-	 * @param elem_name il nome dell'elemento padre
-	 * @param graph ContentGraph da cui iniziare a definire il contenuto di default
-	 * @throws RulesManagerException
-	 */
-	protected Vector getAlternativeContents(ContentGraph graph) throws RulesManagerException {
-	
-		return null;
-
-
-	}
-
-
-	/**
-	 * SCHEMA Implementation 
-	 * 
-	 * Ritorna i possibili contenuti alternativi di un elemento
-	 * 
-	 * @throws RulesManagerException
-	 */
-	public Vector getAlternativeContents(String elem_name) throws RulesManagerException {
-		if (elem_name.compareTo("#PCDATA") == 0)
-			return new Vector();
-		Vector alternatives =  getAlternativeContents(getContentGraph(elem_name));
-		if (alternatives == null)
-			throw new RulesManagerException("No alternative contents for element <" + elem_name + ">");
-		return alternatives;
-	}
-
-
-	/**
-	 * SCHEMA IMPLEMENTATION
-	 * 
-	 * Enumera le alternative possibili dati il nodo padre ed i nomi dei nodi figli.
-	 * 
-	 * @param elem_name il nome dell'elemento padre
-	 * @param elem_children la collezione dei nomi dei figli
-	 * @param choice_point la posizione nella sequenza di figli dopo la quale valutare le
-	 *            alternative
-	 * @throws RulesManagerException
-	 */
-	public Collection getAlternatives(String elem_name, Collection elem_children, int choice_point) throws RulesManagerException {
-
-		if (rules.get(elem_name) == null)
-		   throw new RulesManagerException("No rule for element <" + elem_name + ">");
-
-		return utilXsd.getAlternatives(elem_name, elem_children, choice_point);
-	}
-
-
-
-	//
-	//				END QUERY SU ELEMENTI
-	//
-	////////////////////////////////////////////////////////////////////////////////
-	//
-	//
-	//
-	// 				 QUERY SUGLI ATTRIBUTI DI UN ELEMENTO 
-    //
-	//
-	//
-	private AttributeDeclaration getAttributeDeclaration(String elem_name, String att_name) throws RulesManagerException {
-		if (elem_name == "#PCDATA")
-			throw new RulesManagerException("No attributes for element <" + elem_name + ">");
-		if (!rules.containsKey(elem_name))
-			throw new RulesManagerException("No rule for element <" + elem_name + ">");
-
-		HashMap att_hash = (HashMap) attributes.get(elem_name);
-		if (att_hash == null)
-			throw new RulesManagerException("No attributes for element <" + elem_name + ">");
-
-		AttributeDeclaration att_decl = (AttributeDeclaration) att_hash.get(att_name);
-		if (att_decl == null)
-			throw new RulesManagerException("No attribute <" + att_name + "> for element <" + elem_name + ">");
-		return att_decl;
-	}
-
-
-
-
-	/**
-	 * Ritorna l'indice di un nodo all'interno del padre
-	 * 
-	 * @param parent il nodo padre
-	 * @param child il nodo figlio
-	 * @throws RulesManagerException
-	 */
-	public int getChildIndex(Node parent, Node child) throws RulesManagerException {
-		int child_index = 0;
-		NodeList dom_children = parent.getChildNodes();
-		for (int i = 0; i < dom_children.getLength(); i++) {
-			Node dom_child = dom_children.item(i);
-			/*
-			 * if( dom_child.getNodeType() == dom_child.TEXT_NODE ) { // skip empty text
-			 * nodes String value = UtilLang.trimText(dom_child.getNodeValue()); if(
-			 * value==null || value.length()==0 ) continue; }
-			 */
-			if (dom_child == child)
-				return child_index;
-			child_index++;
-		}
-		throw new RulesManagerException("Cannot find the child element in the children list");
-	}
-
-
-	/**
-	 * Ritorna un vettore di stringhe contenente il nome dei figli di un nodo I nodi che
-	 * non sono testo o elementi vengono ignorati
-	 * 
-	 * @param node il nodo padre
-	 * @throws RulesManagerException
-	 */
-	public Vector getChildren(Node node) throws RulesManagerException {
-		if (node.getNodeType() != Node.ELEMENT_NODE)
-			return new Vector();
-
-		Vector str_children = new Vector();
-		NodeList dom_children = node.getChildNodes();
-		for (int i = 0; i < dom_children.getLength(); i++) {
-			Node dom_child = dom_children.item(i);
-			if (dom_child.getNodeType() == Node.ELEMENT_NODE)
-				str_children.add(dom_child.getNodeName());
-			else if (dom_child.getNodeType() == Node.TEXT_NODE) {
-				str_children.add(new String("#PCDATA"));
-			} else
-				str_children.add(new String("#ANY")); // comment and processing/ instructions can go everywhere
-		}
-		return str_children;
-	}
-
-
 	/**
 	 * Ritorna il content graph associato ad un elemento    (VERSIONE BASATA SU SCHEMA)
 	 * 
@@ -513,7 +289,7 @@ public class SchemaRulesManagerImpl implements RulesManager {
 	}
 	
 	
-
+	
 	/**
 	 * Ritorna una stringa in formato XML che definisce il contenuto di default di un
 	 * elemento
@@ -546,27 +322,11 @@ public class SchemaRulesManagerImpl implements RulesManager {
 		if (elem_name.compareTo("#PCDATA") == 0)
 			return "";
 		if (elem_name.compareTo("#EPS") == 0)
-			return "";
-		
+			return "";		
 		return getDefaultContent(getContentGraph(elem_name));
 	}
 
-	//
-	//			     FINE   GESTIONE   DEFAULT E ALTERNATIVE CONTENT
-	//					
-	///////////////////////////////////////////////////////////////////////////////////
-	
-	
 
-	
-	
-	
-	
-	///////////////////////////////////////////////////////////////////////////////////
-	//
-	//					 QUERY SUL CONTENUTO DI UN ELEMENTO 
-	//
-	//
 	
 	/**
 	 * Ritorna una stringa in formato XML che definisce il contenuto di default di un
@@ -587,6 +347,15 @@ public class SchemaRulesManagerImpl implements RulesManager {
 		return getDefaultContent(createAlternativeContentGraph(elem_name, alternative));
 	}
 
+	
+	/**
+	 * Ritorna una stringa in formato XML che definisce il contenuto di default di un
+	 * elemento, tale elemento deve contenere i nodi desiderati
+	 * 
+	 * @param elem_name il nome dell'elemento padre
+	 * @param nodes i nodi che devono essere contenuti nell'elemento
+	 * @throws RulesManagerException
+	 */
 	public String getDefaultContent(String elem_name, Vector nodes) throws RulesManagerException {
 		// get node names
 		Vector node_names = new Vector();
@@ -617,24 +386,7 @@ public class SchemaRulesManagerImpl implements RulesManager {
 		}
 		return str_content;
 	}
-
-	public Vector getGappedAlignment(ContentGraph graph, Collection sequence) {
-		if (graph.getNodes_table().size() == 0)
-			try {
-				throw new RulesManagerException("Empty automata");
-			} catch (RulesManagerException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		try {
-			return graph.getGappedAlignment(sequence.iterator(), UtilLang.singleton(graph.getFirst()), UtilLang.singleton(new Vector()));
-		} catch (RulesManagerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
+	
 	
 	/**
 	 * Ritorna l'allineamento piu' corto della collezione di nodi desiderata con l'automa
@@ -659,28 +411,154 @@ public class SchemaRulesManagerImpl implements RulesManager {
 		// return the alignment
 		return getGappedAlignment(getContentGraph(elem_name), elem_children);
 	}
+	
+	
+	
+	public Vector getGappedAlignment(ContentGraph graph, Collection sequence) {
+		if (graph.getNodes_table().size() == 0)
+			try {
+				throw new RulesManagerException("Empty automata");
+			} catch (RulesManagerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
-	Logger getLogger() {
-		return this.logger;
+		try {
+			return graph.getGappedAlignment(sequence.iterator(), UtilLang.singleton(graph.getFirst()), UtilLang.singleton(new Vector()));
+		} catch (RulesManagerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+	/**
+	 * Restituisce una stringa in formato XML a partire dal contenuto di default
+	 * dell'elemento
+	 * 
+	 * @param graph il ContentGraph dell'elemento
+	 */
+	static protected String getXMLContent(ContentGraph graph) {
+
+		// get visit path
+		Vector path = new Vector();
+		ContentGraph.Node nav = graph.getLast();
+		while (nav != null) {
+			Object edge = nav.getVisitEdge();
+			ContentGraph.Node before = nav.getVisitBefore();
+			if (before != null && edge instanceof ContentGraph)
+				path.add(0, edge);
+			nav = before;
+		}
+
+		// get xml content
+		String output = "<" + graph.getName() + ">";
+		for (Iterator i = path.iterator(); i.hasNext();)
+			output += getXMLContent((ContentGraph) i.next());
+		output = output + "</" + graph.getName() + ">";
+		
+		return output;
+	}
+	
+	
+
+	/**
+	 * Ritorna una stringa in formato XML che definisce il contenuto di default di un
+	 * elemento
+	 * 
+	 * @param elem_name il nome dell'elemento padre
+	 * @param graph ContentGraph da cui iniziare a definire il contenuto di default
+	 * @throws RulesManagerException
+	 */
+	protected Vector getAlternativeContents(ContentGraph graph) throws RulesManagerException {
+		//TODO  implement it 
+		return null;
 	}
 
 
 	/**
-	 * Ritorna il nome di un nodo
+	 * SCHEMA Implementation 
 	 * 
-	 * @param dom_node il nodo di cui si richiede il nome
+	 * Ritorna i possibili contenuti alternativi di un elemento
+	 * 
 	 * @throws RulesManagerException
 	 */
-	public String getNodeName(Node dom_node) throws RulesManagerException {		
-		if (dom_node.getNodeType() == Node.ELEMENT_NODE)
-			return dom_node.getNodeName();
-		if (dom_node.getNodeType() == Node.TEXT_NODE)
-			return new String("#PCDATA");
-		return new String("#ANY");
-		
+	public Vector getAlternativeContents(String elem_name) throws RulesManagerException {
+		if (elem_name.compareTo("#PCDATA") == 0)
+			return new Vector();
+		Vector alternatives =  getAlternativeContents(getContentGraph(elem_name));
+		if (alternatives == null)
+			throw new RulesManagerException("No alternative contents for element <" + elem_name + ">");
+		return alternatives;
+	}
+	
+	
+	/**
+	 * Enumera le alternative possibili dati il nodo padre ed i nomi dei nodi figli.
+	 * 
+	 * @param elem_name il nome dell'elemento padre
+	 * @param elem_children la collezione dei nomi dei figli
+	 * @param choice_point la posizione nella sequenza di figli dopo la quale valutare le
+	 *            alternative
+	 * @throws RulesManagerException
+	 */
+	public Collection getAlternatives(String elem_name, Collection elem_children, int choice_point) throws RulesManagerException {
+		if (rules.get(elem_name) == null)
+		   throw new RulesManagerException("No rule for element <" + elem_name + ">");
+		return utilXsd.getAlternatives(elem_name, elem_children, choice_point);
+	}
+	
+	
+	
+	/**
+	 * Trasforma la rappresentazione stringa di un contenuto alternativo nella sua
+	 * rappresentazione come ContentGraph
+	 * 
+	 * @param alternative un contenuto alternativo di un elemento
+	 * @return la sua rappresentazione come ContentGraph
+	 */
+	protected ContentGraph createAlternativeContentGraph(String elem_name, String alternative) {
+
+		ContentGraph graph = new ContentGraph(elem_name);
+		String[] tokens = alternative.split(","); // regex for the comma mark
+
+		ContentGraph.Node src = graph.getFirst();
+		for (int i = 0; i < tokens.length; i++) {
+			ContentGraph.Node dst = graph.addNewNode();
+			src.addEdge(tokens[i], dst);
+			src = dst;
+		}
+		src.addEdge("#EPS", graph.getLast());
+
+		return graph;
+	}
+	
+
+	
+	/**
+	 * Crea un ContentGraph che rappresenta un elemento di testo
+	 * 
+	 * @param elem_name il nome dell'elemento
+	 */
+	protected ContentGraph createTextContentGraph(String elem_name) {
+		ContentGraph graph = new ContentGraph(elem_name);
+		graph.getFirst().addEdge("#PCDATA", graph.getLast());
+		return graph;
 	}
 
 
+
+	
+	
+	
+	///////////////////////////////////////////////////////////////////////////
+	//
+	//					QUERY SUL CONTENUTO DI UN ELEMENTO
+	//
+    ///////////////////////////////////////////////////////////////////////////
+	
+	
 	/**
 	 * Controlla se una collezione di nomi di elementi puo rappresentare un insieme di
 	 * figli di un nodo
@@ -707,142 +585,6 @@ public class SchemaRulesManagerImpl implements RulesManager {
 	}
 
 	
-
-	
-	////////////////////////////////////////////////////////////////////////////////////////////////////
-	//
-	//
-	//
-	/// DA QUI IN POI TUTTE LE QUERY SONO SOSTITUITE CON QUELLE DELLO SCHEMA
-	//
-	//
-	//
-	//
-	//
-	//
-	
-	public void loadRules(File xml_file) {
-		// TODO dal file xml estrarre lo schemaURL dall'intestazione		
-	}
-
-	public void loadRules(String schemaPath) {
-		clear();
-		utilXsd.loadRules(schemaPath);
-		
-	}
-
-	
-//	/**
-//	 * Controlla se un nodo pu&ograve contenere del testo
-//	 * 
-//	 * @param elem_name il nome del nodo in esame
-//	 * @throws RulesManagerException
-//	 */
-//	public boolean queryTextContent(String elem_name) throws RulesManagerException {
-//		if (elem_name.compareTo("#PCDATA") == 0)
-//			return true;
-//		return isValid(elem_name, UtilLang.singleton("#PCDATA"));
-//	}
-	
-	
-	
-	
-	public void loadRules(String filename, String schemaPath) {
-		//logger.info("START loading rules from SCHEMA");
-		
-//		String key = null;
-		File xml_file = new File(filename);
-		
-		if (schemaPath.startsWith(".")) // crea path name assoluto
-			schemaPath = xml_file.getParent().concat(File.separator+schemaPath.substring(2));
-		
-		File schema_file = UtilFile.getGrammarFile(schemaPath);
-		
-		
-		
-//		java.io.NotSerializableException: org.eclipse.xsd.impl.XSDParticleImpl$XSDNFA
-		
-//		try {
-//			key = UtilLang.bytesToHexString(UtilFile.calculateMD5(schema_file));
-//			//logger.debug("key for " + schemaPath + " = " + key.toString());
-//		} catch (Exception ex) {
-//			logger.error(ex.getMessage(), ex);
-//		}
-//		
-//		
-//		
-//		String md5Path = new String("schemamd5");
-//		new File(md5Path).mkdir();
-//		File rulesMap = new File(md5Path + File.separator, key + "_rules");
-//		File elemDeclMap = new File(md5Path + File.separator, key + "_elemDecl");
-//		File alternativesMap = new File(md5Path, key + "_alternatives");
-//		File attributesMap = new File(md5Path, key + "_attributes");
-//
-//		if (key != null && rulesMap.exists() && elemDeclMap.exists() && alternativesMap.exists() && attributesMap.exists()) {
-//			loadRulesFromCachedMap(rulesMap, elemDeclMap, alternativesMap, attributesMap);
-//		} else {
-//			clear();
-//			utilXsd.loadRules(schema_file.getAbsolutePath());
-//			saveRulesOnCachedMap(rulesMap, elemDeclMap, alternativesMap, attributesMap);
-//		}
-		
-        // OLD (Uncached)
-		// clear old rules
-		clear();
-		utilXsd.loadRules(schema_file.getAbsolutePath());
-
-	}
-
-	private void loadRulesFromCachedMap(File rulesMap, File elemDeclMap, File alternativesMap, File attributesMap) {
-				
-		logger.info("START loading rules from files");
-
-		FileInputStream fis = null;
-		ObjectInputStream in = null;
-
-		// reading rules
-		try {
-			fis = new FileInputStream(rulesMap);
-			in = new ObjectInputStream(new BufferedInputStream(fis));
-			rules = (HashMap) in.readObject();
-			in.close();
-		} catch (Exception ex) {
-			logger.error("Error reading rules map " + ex.getMessage(), ex);
-		}
-		
-		// reading elemDeclNames
-		try {
-			fis = new FileInputStream(elemDeclMap);
-			in = new ObjectInputStream(new BufferedInputStream(fis));
-			elemDeclNames = (HashMap) in.readObject();
-			in.close();
-		} catch (Exception ex) {
-			logger.error("Error reading elemDeclNames map " + ex.getMessage(), ex);
-		}
-
-		// reading alternative_contents
-		try {
-			fis = new FileInputStream(alternativesMap);
-			in = new ObjectInputStream(new BufferedInputStream(fis));
-			alternative_contents = (HashMap) in.readObject();
-			in.close();
-		} catch (Exception ex) {
-			logger.error("Error reading alternatives map " + ex.getMessage(), ex);
-		}
-
-		// reading attributes
-		try {
-			fis = new FileInputStream(attributesMap);
-			in = new ObjectInputStream(new BufferedInputStream(fis));
-			attributes = (HashMap) in.readObject();
-			in.close();
-		} catch (Exception ex) {
-			logger.error("Error reading attributes map " + ex.getMessage(), ex);
-		}
-
-		logger.info("END loading rules from files");
-
-	}
 
 	/**
 	 * Ritorna i possibili nodi da appendere ad un elemento
@@ -1123,6 +865,7 @@ public class SchemaRulesManagerImpl implements RulesManager {
 		return isValid(getNodeName(parent), str_children);
 	}
 
+	
 	/**
 	 * Controlla se &egrave possibile inserire un nodo prima di un certo figlio di un
 	 * elemento
@@ -1149,6 +892,7 @@ public class SchemaRulesManagerImpl implements RulesManager {
 		return isValid(getNodeName(parent), str_children);
 	}
 
+	
 	/**
 	 * Controlla se &egrave possibile inserire una collezione di nodi all'interno di un
 	 * certo figlio di un elemento
@@ -1183,6 +927,7 @@ public class SchemaRulesManagerImpl implements RulesManager {
 		return isValid(getNodeName(parent), str_children);
 	}
 
+	
 	/**
 	 * Controlla se &egrave possibile inserire un nodo all'interno di un certo figlio di
 	 * un elemento
@@ -1239,6 +984,7 @@ public class SchemaRulesManagerImpl implements RulesManager {
 		return isValid(getNodeName(parent), str_children);
 	}
 
+	
 	/**
 	 * Controlla se &egrave possibile pre-pendere un nodo ad un elemento
 	 * 
@@ -1259,6 +1005,8 @@ public class SchemaRulesManagerImpl implements RulesManager {
 		str_children.insertElementAt(getNodeName(new_node), 0);
 		return isValid(getNodeName(parent), str_children);
 	}
+
+	
 
 	/**
 	 * Controlla se &egrave possibile sostituire una parte di testo con un insieme di
@@ -1299,6 +1047,7 @@ public class SchemaRulesManagerImpl implements RulesManager {
 		return isValid(getNodeName(parent), str_children);
 	}
 
+	
 	/**
 	 * Controlla se &egrave possibile sostituire un insieme di figli di un elemento con un
 	 * altro insieme di elementi
@@ -1335,7 +1084,9 @@ public class SchemaRulesManagerImpl implements RulesManager {
 		// check if the parent can contain this new set of children
 		return isValid(getNodeName(parent), str_children);
 	}
+	
 
+	
 	/**
 	 * Ritorna gli elementi in cui &egrave possibile racchiudere un insieme di figli di un
 	 * elemento
@@ -1376,63 +1127,7 @@ public class SchemaRulesManagerImpl implements RulesManager {
 		return containers;
 	}
 
-	/**
-	 * Ritorna il valore di default (se esiste) di un attributo di un elemento
-	 * 
-	 * @param elem_name il nome dell'elemento di cui si chiede il valore di default
-	 *            dell'attributo
-	 * @param att_name il nome dell'attributo
-	 * @return la stringa vuota se non esiste il valore di default
-	 * @throws RulesManagerException
-	 */
-	public String queryGetAttributeDefaultValue(String elem_name, String att_name) throws RulesManagerException {
-		AttributeDeclaration att_decl = getAttributeDeclaration(elem_name, att_name);
-		if (att_decl.value == null) {
-			if (att_decl.type.startsWith("(") && att_decl.type.endsWith(")")) {
-				// tokenized value
-				String[] values = att_decl.type.substring(1, att_decl.type.length() - 1).split("\\|");
-				if (values.length > 0)
-					return values[0];
-			}
-			return "";
-		}
-		return att_decl.value;
-	}
-
-	/**
-	 * Ritorna i valori possibili per un attributo
-	 * 
-	 * @param elem_name il nome dell'elemento di cui si chiede il valore di default
-	 *            dell'attributo
-	 * @param att_name il nome dell'attributo
-	 * @return <code>null</code> se l'attributo puo' avere qualsiasi valore
-	 * @throws RulesManagerException
-	 */
-	public Collection queryGetAttributePossibleValues(String elem_name, String att_name) throws RulesManagerException {
-		AttributeDeclaration att_decl = getAttributeDeclaration(elem_name, att_name);
-		if (att_decl.type.startsWith("(") && att_decl.type.endsWith(")"))
-			return java.util.Arrays.asList(att_decl.type.substring(1, att_decl.type.length() - 1).split("\\|"));
-		return null;
-	}
-
-	/**
-	 * Ritorna la lista dei nomi degli attributi di un elemento
-	 * 
-	 * @param elem_name il nome dell'elemento di cui si vuole la lista degli attributi
-	 * @throws RulesManagerException
-	 */
-	public Collection queryGetAttributes(String elem_name) throws RulesManagerException {
-		if (elem_name == "#PCDATA")
-			return new Vector();
-		if (!rules.containsKey(elem_name))
-			throw new RulesManagerException("No rule for element <" + elem_name + ">");
-
-		HashMap att_hash = (HashMap) attributes.get(elem_name);
-		if (att_hash == null)
-			return new Vector(); // no attributes for element
-
-		return att_hash.keySet();
-	}
+	
 
 	/**
 	 * Ritorna i nodi che &egrave possibile inserire dopo un certo figlio di un elemento
@@ -1455,6 +1150,8 @@ public class SchemaRulesManagerImpl implements RulesManager {
 		return getAlternatives(getNodeName(parent), str_children, child_index);
 	}
 
+	
+	
 	/**
 	 * Ritorna i nodi che &egrave possibile inserire prima di un certo figlio di un
 	 * elemento
@@ -1477,6 +1174,7 @@ public class SchemaRulesManagerImpl implements RulesManager {
 		return getAlternatives(getNodeName(parent), str_children, child_index - 1);
 	}
 
+	
 	
 	/**
 	 * Ritorna i nodi che &egrave possibile inserire all'interno di un certo figlio di un
@@ -1506,32 +1204,7 @@ public class SchemaRulesManagerImpl implements RulesManager {
 		return getAlternatives(getNodeName(parent), str_children, child_index);
 	}
 
-	/**
-	 * Ritorna <code>true</code> se l'attributo specificato &egrave di tipo
-	 * <code>#FIXED</code>
-	 * 
-	 * @param elem_name il nome dell'elemento di cui si chiede l'esistena dell'attributo
-	 * @param att_name il nome dell'attributo
-	 * @throws RulesManagerException
-	 */
-	public boolean queryIsFixedAttribute(String elem_name, String att_name) throws RulesManagerException {
-		AttributeDeclaration att_decl = getAttributeDeclaration(elem_name, att_name);
-		return (att_decl.valueDefault == "#FIXED" || att_decl.valueDefault.equalsIgnoreCase("fixed"));
-	}
-
-	/**
-	 * Ritorna <code>true</code> se l'attributo specificato &egrave di tipo
-	 * <code>#REQUIRED</code>
-	 * 
-	 * @param elem_name il nome dell'elemento di cui si chiede l'esistena dell'attributo
-	 * @param att_name il nome dell'attributo
-	 * @throws RulesManagerException
-	 */
-	public boolean queryIsRequiredAttribute(String elem_name, String att_name) throws RulesManagerException {
-		AttributeDeclaration att_decl = getAttributeDeclaration(elem_name, att_name);
-		return ((att_decl.valueDefault != null) && (att_decl.valueDefault.equalsIgnoreCase("#REQUIRED") || att_decl.valueDefault.equalsIgnoreCase("#FIXED") 
-				|| att_decl.valueDefault.equalsIgnoreCase("required") || att_decl.valueDefault.equalsIgnoreCase("fixed")));
-	}
+	
 
 	/**
 	 * Controlla se il contenuto di un nodo &egrave valido
@@ -1546,51 +1219,8 @@ public class SchemaRulesManagerImpl implements RulesManager {
 			return true;
 		return isValid(getNodeName(dom_node), getChildren(dom_node));
 	}
+	
 
-	/**
-	 * Ritorna <code>true</code> se esiste l'attributo specificato per questo elemento
-	 * 
-	 * @param elem_name il nome dell'elemento di cui si chiede l'esistena dell'attributo
-	 * @param att_name il nome dell'attributo
-	 * @throws RulesManagerException
-	 */
-	public boolean queryIsValidAttribute(String elem_name, String att_name) throws RulesManagerException {
-		if (elem_name == "#PCDATA")
-			throw new RulesManagerException("No attributes for element <" + elem_name + ">");
-		if (!rules.containsKey(elem_name))
-			throw new RulesManagerException("No rule for element <" + elem_name + ">");
-		return (attributes.containsKey(elem_name) && ((HashMap) attributes.get(elem_name)).containsKey(att_name));
-	}
-
-	/**
-	 * Ritorna <code>true</code> se l'attributo specificato per questo elemento
-	 * pu&ograve assumere il valore richiesto
-	 * 
-	 * @param elem_name il nome dell'elemento di cui si chiede la validit&agrave del
-	 *            valore dell'attributo
-	 * @param att_name il nome dell'attributo
-	 * @param value il valore dell'attributo
-	 * @throws RulesManagerException
-	 */
-	public boolean queryIsValidAttributeValue(String elem_name, String att_name, String value) throws RulesManagerException {
-		AttributeDeclaration att_decl = getAttributeDeclaration(elem_name, att_name);
-		if (att_decl.valueDefault == "#FIXED" || att_decl.valueDefault.equalsIgnoreCase("fixed")) {
-			// fixed value
-			return (att_decl.value.compareTo(value) == 0);
-		}
-		if (att_decl.type.startsWith("(") && att_decl.type.endsWith(")")) {
-			// tokenized value
-			String[] values = att_decl.type.substring(1, att_decl.type.length() - 1).split("\\|");
-			for (int i = 0; i < values.length; i++) {
-				if (values[i].compareTo(value) == 0)
-					return true;
-			}
-			return false;
-		}
-
-		// unchecked
-		return true;
-	}
 
 	/**
 	 * Ritorna i possibili nodi da pre-pendere ad un elemento
@@ -1608,7 +1238,10 @@ public class SchemaRulesManagerImpl implements RulesManager {
 
 		return getAlternatives(getNodeName(parent), str_children, -1);
 	}
+	
 
+	
+	
 	/**
 	 * Ritorna gli elementi in cui &egrave possibile racchiudere una parte di testo di un
 	 * elemento
@@ -1688,53 +1321,288 @@ public class SchemaRulesManagerImpl implements RulesManager {
 		return false;
 	}
 
+	
+	
+	
+	
+	///////////////////////////////////////////////////////////////////////////
+	//
+	//	 				QUERY SUGLI ATTRIBUTI DI UN ELEMENTO
+	//
+	///////////////////////////////////////////////////////////////////////////
+	
+	
+	private AttributeDeclaration getAttributeDeclaration(String elem_name, String att_name) throws RulesManagerException {
+		if (elem_name == "#PCDATA")
+			throw new RulesManagerException("No attributes for element <" + elem_name + ">");
+		if (!rules.containsKey(elem_name))
+			throw new RulesManagerException("No rule for element <" + elem_name + ">");
 
-	private void saveRulesOnCachedMap(File rulesMap, File elemDeclMap, File alternativesMap, File attributesMap) {
-		
-		FileOutputStream fos = null;
-		ObjectOutputStream out = null;
+		HashMap att_hash = (HashMap) attributes.get(elem_name);
+		if (att_hash == null)
+			throw new RulesManagerException("No attributes for element <" + elem_name + ">");
 
-		// saving rules
-		try {
-			fos = new FileOutputStream(rulesMap);
-			out = new ObjectOutputStream(new BufferedOutputStream(fos));
-			out.writeObject(rules);
-			out.close();
-		} catch (Exception ex) {
-			logger.error("Error saving rules map " + ex.getMessage(), ex);
+		AttributeDeclaration att_decl = (AttributeDeclaration) att_hash.get(att_name);
+		if (att_decl == null)
+			throw new RulesManagerException("No attribute <" + att_name + "> for element <" + elem_name + ">");
+		return att_decl;
+	}
+	
+	
+	/**
+	 * Ritorna la lista dei nomi degli attributi di un elemento
+	 * 
+	 * @param elem_name il nome dell'elemento di cui si vuole la lista degli attributi
+	 * @throws RulesManagerException
+	 */
+	public Collection queryGetAttributes(String elem_name) throws RulesManagerException {
+		if (elem_name == "#PCDATA")
+			return new Vector();
+		if (!rules.containsKey(elem_name))
+			throw new RulesManagerException("No rule for element <" + elem_name + ">");
+
+		HashMap att_hash = (HashMap) attributes.get(elem_name);
+		if (att_hash == null)
+			return new Vector(); // no attributes for element
+
+		return att_hash.keySet();
+	}
+	
+	
+	/**
+	 * Ritorna il valore di default (se esiste) di un attributo di un elemento
+	 * 
+	 * @param elem_name il nome dell'elemento di cui si chiede il valore di default
+	 *            dell'attributo
+	 * @param att_name il nome dell'attributo
+	 * @return la stringa vuota se non esiste il valore di default
+	 * @throws RulesManagerException
+	 */
+	public String queryGetAttributeDefaultValue(String elem_name, String att_name) throws RulesManagerException {
+		AttributeDeclaration att_decl = getAttributeDeclaration(elem_name, att_name);
+		if (att_decl.value == null) {
+			if (att_decl.type.startsWith("(") && att_decl.type.endsWith(")")) {
+				// tokenized value
+				String[] values = att_decl.type.substring(1, att_decl.type.length() - 1).split("\\|");
+				if (values.length > 0)
+					return values[0];
+			}
+			return "";
 		}
-		
-		// saving elemDeclNames
-		try {
-			fos = new FileOutputStream(elemDeclMap);
-			out = new ObjectOutputStream(new BufferedOutputStream(fos));
-			out.writeObject(elemDeclNames);
-			out.close();
-		} catch (Exception ex) {
-			logger.error("Error saving elemDeclNames map " + ex.getMessage(), ex);
+		return att_decl.value;
+	}
+
+	
+	/**
+	 * Ritorna i valori possibili per un attributo
+	 * 
+	 * @param elem_name il nome dell'elemento di cui si chiede il valore di default
+	 *            dell'attributo
+	 * @param att_name il nome dell'attributo
+	 * @return <code>null</code> se l'attributo puo' avere qualsiasi valore
+	 * @throws RulesManagerException
+	 */
+	public Collection queryGetAttributePossibleValues(String elem_name, String att_name) throws RulesManagerException {
+		AttributeDeclaration att_decl = getAttributeDeclaration(elem_name, att_name);
+		if (att_decl.type.startsWith("(") && att_decl.type.endsWith(")"))
+			return java.util.Arrays.asList(att_decl.type.substring(1, att_decl.type.length() - 1).split("\\|"));
+		return null;
+	}
+
+	
+	
+	/**
+	 * Ritorna <code>true</code> se l'attributo specificato &egrave di tipo
+	 * <code>#FIXED</code>
+	 * 
+	 * @param elem_name il nome dell'elemento di cui si chiede l'esistena dell'attributo
+	 * @param att_name il nome dell'attributo
+	 * @throws RulesManagerException
+	 */
+	public boolean queryIsFixedAttribute(String elem_name, String att_name) throws RulesManagerException {
+		AttributeDeclaration att_decl = getAttributeDeclaration(elem_name, att_name);
+		return (att_decl.valueDefault == "#FIXED" || att_decl.valueDefault.equalsIgnoreCase("fixed"));
+	}
+	
+	
+
+	/**
+	 * Ritorna <code>true</code> se l'attributo specificato &egrave di tipo
+	 * <code>#REQUIRED</code>
+	 * 
+	 * @param elem_name il nome dell'elemento di cui si chiede l'esistena dell'attributo
+	 * @param att_name il nome dell'attributo
+	 * @throws RulesManagerException
+	 */
+	public boolean queryIsRequiredAttribute(String elem_name, String att_name) throws RulesManagerException {
+		AttributeDeclaration att_decl = getAttributeDeclaration(elem_name, att_name);
+		return ((att_decl.valueDefault != null) && (att_decl.valueDefault.equalsIgnoreCase("#REQUIRED") || att_decl.valueDefault.equalsIgnoreCase("#FIXED") 
+				|| att_decl.valueDefault.equalsIgnoreCase("required") || att_decl.valueDefault.equalsIgnoreCase("fixed")));
+	}
+
+	
+	/**
+	 * Ritorna <code>true</code> se esiste l'attributo specificato per questo elemento
+	 * 
+	 * @param elem_name il nome dell'elemento di cui si chiede l'esistena dell'attributo
+	 * @param att_name il nome dell'attributo
+	 * @throws RulesManagerException
+	 */
+	public boolean queryIsValidAttribute(String elem_name, String att_name) throws RulesManagerException {
+		if (elem_name == "#PCDATA")
+			throw new RulesManagerException("No attributes for element <" + elem_name + ">");
+		if (!rules.containsKey(elem_name))
+			throw new RulesManagerException("No rule for element <" + elem_name + ">");
+		return (attributes.containsKey(elem_name) && ((HashMap) attributes.get(elem_name)).containsKey(att_name));
+	}
+
+	
+	/**
+	 * Ritorna <code>true</code> se l'attributo specificato per questo elemento
+	 * pu&ograve assumere il valore richiesto
+	 * 
+	 * @param elem_name il nome dell'elemento di cui si chiede la validit&agrave del
+	 *            valore dell'attributo
+	 * @param att_name il nome dell'attributo
+	 * @param value il valore dell'attributo
+	 * @throws RulesManagerException
+	 */
+	public boolean queryIsValidAttributeValue(String elem_name, String att_name, String value) throws RulesManagerException {
+		AttributeDeclaration att_decl = getAttributeDeclaration(elem_name, att_name);
+		if (att_decl.valueDefault == "#FIXED" || att_decl.valueDefault.equalsIgnoreCase("fixed")) {
+			// fixed value
+			return (att_decl.value.compareTo(value) == 0);
 		}
-
-
-		// saving alternative_contents
-		try {
-			fos = new FileOutputStream(alternativesMap);
-			out = new ObjectOutputStream(new BufferedOutputStream(fos));
-			out.writeObject(alternative_contents);
-			out.close();
-		} catch (Exception ex) {
-			logger.error("Error saving alternatives map " + ex.getMessage(), ex);
+		if (att_decl.type.startsWith("(") && att_decl.type.endsWith(")")) {
+			// tokenized value
+			String[] values = att_decl.type.substring(1, att_decl.type.length() - 1).split("\\|");
+			for (int i = 0; i < values.length; i++) {
+				if (values[i].compareTo(value) == 0)
+					return true;
+			}
+			return false;
 		}
+		// unchecked
+		return true;
+	}
+	
+	
 
-		// saving attributes
-		try {
-			fos = new FileOutputStream(attributesMap);
-			out = new ObjectOutputStream(new BufferedOutputStream(fos));
-			out.writeObject(attributes);
-			out.close();
-		} catch (Exception ex) {
-			logger.error("Error saving attributes map " + ex.getMessage(), ex);
-		}	
+	/**
+	 * Riempie il nodo con gli attributi necessari
+	 * 
+	 * @param elem il nodo di cui si vogliono settare gli attributi
+	 * @throws RulesManagerException
+	 */
+	public void fillRequiredAttributes(Node elem) throws RulesManagerException {
+		String elem_name = elem.getNodeName();
+		org.w3c.dom.Document doc = elem.getOwnerDocument();
+		Collection att_names = queryGetAttributes(elem_name);
+		if (att_names == null)
+			return;
+
+		org.w3c.dom.NamedNodeMap att_nodes = elem.getAttributes();
+		for (Iterator i = att_names.iterator(); i.hasNext();) {
+			String att_name = (String) i.next();
+			if (queryIsRequiredAttribute(elem_name, att_name)) {
+				// the attribute is required
+				Node att = att_nodes.getNamedItem(att_name);
+				if (att == null) {
+					// the attribute is not set, add a new one with the correct
+					// value
+					org.w3c.dom.Attr new_att = doc.createAttribute(att_name);
+					new_att.setValue(queryGetAttributeDefaultValue(elem_name, att_name));
+					att_nodes.setNamedItem(new_att);
+				}
+			}
+		}
+	}
+	
+	
+
+
+	//////////////////////////////////////////////////////
+	//
+	//    					UTIL
+	//
+    //////////////////////////////////////////////////////
+	
+	private Vector extractSubList(Vector list, int first, int size) {
+		Vector sublist = new Vector();
+		for (int i = 0; i < size; i++) {
+			sublist.add(list.elementAt(first));
+			list.removeElementAt(first);
+		}
+		return sublist;
 	}
 
 
+	/**
+	 * Ritorna l'indice di un nodo all'interno del padre
+	 * 
+	 * @param parent il nodo padre
+	 * @param child il nodo figlio
+	 * @throws RulesManagerException
+	 */
+	public int getChildIndex(Node parent, Node child) throws RulesManagerException {
+		int child_index = 0;
+		NodeList dom_children = parent.getChildNodes();
+		for (int i = 0; i < dom_children.getLength(); i++) {
+			Node dom_child = dom_children.item(i);
+			/*
+			 * if( dom_child.getNodeType() == dom_child.TEXT_NODE ) { // skip empty text
+			 * nodes String value = UtilLang.trimText(dom_child.getNodeValue()); if(
+			 * value==null || value.length()==0 ) continue; }
+			 */
+			if (dom_child == child)
+				return child_index;
+			child_index++;
+		}
+		throw new RulesManagerException("Cannot find the child element in the children list");
+	}
+
+
+	/**
+	 * Ritorna un vettore di stringhe contenente il nome dei figli di un nodo I nodi che
+	 * non sono testo o elementi vengono ignorati
+	 * 
+	 * @param node il nodo padre
+	 * @throws RulesManagerException
+	 */
+	public Vector getChildren(Node node) throws RulesManagerException {
+		if (node.getNodeType() != Node.ELEMENT_NODE)
+			return new Vector();
+
+		Vector str_children = new Vector();
+		NodeList dom_children = node.getChildNodes();
+		for (int i = 0; i < dom_children.getLength(); i++) {
+			Node dom_child = dom_children.item(i);
+			if (dom_child.getNodeType() == Node.ELEMENT_NODE)
+				str_children.add(dom_child.getNodeName());
+			else if (dom_child.getNodeType() == Node.TEXT_NODE) {
+				str_children.add(new String("#PCDATA"));
+			} else
+				str_children.add(new String("#ANY")); // comment and processing/ instructions can go everywhere
+		}
+		return str_children;
+	}
+
+
+	/**
+	 * Ritorna il nome di un nodo
+	 * 
+	 * @param dom_node il nodo di cui si richiede il nome
+	 * @throws RulesManagerException
+	 */
+	public String getNodeName(Node dom_node) throws RulesManagerException {		
+		if (dom_node.getNodeType() == Node.ELEMENT_NODE)
+			return dom_node.getNodeName();
+		if (dom_node.getNodeType() == Node.TEXT_NODE)
+			return new String("#PCDATA");
+		return new String("#ANY");
+		
+	}
+
+
+	
 }

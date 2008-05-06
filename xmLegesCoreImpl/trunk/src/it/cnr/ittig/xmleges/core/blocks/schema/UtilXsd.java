@@ -1320,8 +1320,8 @@ public class UtilXsd{
 		XSDElementDeclaration elemDecl = (XSDElementDeclaration) schemaRules.elemDeclNames.get(elemName);
 		XSDTypeDefinition elemType = elemDecl.getType();
 		try{
-			return((elemType.getComplexType()!=null && ((XSDComplexTypeDefinition)elemType).isMixed()));
-			//		||(elemDecl.getType().getBaseType().getComplexType()!=null && ((XSDComplexTypeDefinition)elemDecl.getType().getBaseType()).isMixed()));
+			return((elemType.getComplexType()!=null && ((XSDComplexTypeDefinition)elemType).isMixed())
+					||(elemDecl.getType().getBaseType().getComplexType()!=null && ((XSDComplexTypeDefinition)elemDecl.getType().getBaseType()).isMixed()));
 		}catch(Exception e){
 			return false;
 		}
