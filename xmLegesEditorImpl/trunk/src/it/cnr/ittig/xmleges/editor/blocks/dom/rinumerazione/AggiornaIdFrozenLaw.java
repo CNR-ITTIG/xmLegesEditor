@@ -323,6 +323,7 @@ public class AggiornaIdFrozenLaw {
 			
 			
 			// FIXME patch per id degli eventi - disabilita il setId degli eventi ma mantiene il setIdAttribute
+			// probabilmente a causa di un bug su getElementById in MetaCiclodiVitaImpl
   		    if((getElementType(nodo)==EVENTO)){
   		    	IDValue = OldID;
 			}

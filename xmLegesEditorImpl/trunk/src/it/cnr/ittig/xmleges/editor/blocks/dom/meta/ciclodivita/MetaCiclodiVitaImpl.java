@@ -14,6 +14,7 @@ import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.MetaCiclodivita;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
+import it.cnr.ittig.xmleges.editor.services.dom.rinumerazione.Rinumerazione;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 
@@ -64,6 +65,8 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 	
 	NirUtilDom nirUtilDom;
 	
+	Rinumerazione rinumerazione;
+	
 	Node node=null;
 	
 	// //////////////////////////////////////////////////// LogEnabled Interface
@@ -77,6 +80,7 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
+		rinumerazione = (Rinumerazione) serviceManager.lookup(Rinumerazione.class);
 	
 	}
 
@@ -174,7 +178,7 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 		try {
 			EditTransaction tr = documentManager.beginEdit();
 			if (setDOMEventi(eventi) && setDOMRelazioni(relazioni)) {
-				//rinumerazione.aggiorna(documentManager.getDocumentAsDom());
+				rinumerazione.aggiorna(documentManager.getDocumentAsDom());
 				documentManager.commitEdit(tr);
 			} else
 				documentManager.rollbackEdit(tr);
@@ -188,7 +192,7 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 		try {
 			EditTransaction tr = documentManager.beginEdit();
 			if (setDOMRelazioni(relazioni)) {
-				//rinumerazione.aggiorna(documentManager.getDocumentAsDom());
+				rinumerazione.aggiorna(documentManager.getDocumentAsDom());
 				documentManager.commitEdit(tr);
 			} else
 				documentManager.rollbackEdit(tr);
@@ -304,7 +308,7 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 		try {
 			EditTransaction tr = documentManager.beginEdit();
 			if (setDOMEventi(eventi)) {
-				//rinumerazione.aggiorna(documentManager.getDocumentAsDom());
+				rinumerazione.aggiorna(documentManager.getDocumentAsDom());
 				documentManager.commitEdit(tr);
 			} else
 				documentManager.rollbackEdit(tr);

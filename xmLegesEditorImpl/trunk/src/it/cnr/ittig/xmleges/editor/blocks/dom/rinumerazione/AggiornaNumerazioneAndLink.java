@@ -109,7 +109,7 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 				// In questo caso si aggiorna il riferimento interno e la
 				// formulazione linguistica
 				// Lo stesso si fa per gli attributi di tipo IDRif
-				if (!UtilDom.hasIdAttribute(nodo) || !IDValue.equals(OldID)) {
+				if (!UtilDom.hasIdAttribute(nodo) || !IDValue.equals(OldID)) {   // se non ce l'aveva o e' cambiato
 					updateIDRefAttributes(OldID, IDValue);
 					logger.debug("idChanged: new  " + IDValue + " old " + OldID);
 					UtilDom.setIdAttribute(nodo, IDValue);
