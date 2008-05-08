@@ -300,8 +300,9 @@
 			<xsl:with-param name="pos" select="$pos"/>
 		</xsl:apply-templates></i>
 	</xsl:template>	
-	<xsl:template match="nir:virgolette">
+	<xsl:template match="nir:mod">
 		<xsl:param name="pos">none</xsl:param>
+		<div class="mod">
 		<p>
 			<xsl:text>"</xsl:text>
 			<xsl:apply-templates>
@@ -309,6 +310,41 @@
 			</xsl:apply-templates>
 			<xsl:text>"</xsl:text>
 		</p>
+		</div>
+	</xsl:template>
+	<xsl:template match="nir:virgolette">
+		<xsl:param name="pos">none</xsl:param>
+		
+		
+		<xsl:choose>
+		<xsl:when test="@tipo='struttura'">
+			
+	   		<table bgcolor="#FFEE99"><tr><td>
+		
+			<xsl:text>"</xsl:text>
+			<xsl:apply-templates>
+				<xsl:with-param name="pos" select="$pos"/>
+			</xsl:apply-templates>
+			<xsl:text>"</xsl:text>
+	
+			</td></tr></table>	
+			
+		</xsl:when>
+		<xsl:otherwise>
+
+	    				<font bgcolor="#FFEE99">
+			<span>
+			<xsl:text>"</xsl:text>
+			<xsl:apply-templates>
+				<xsl:with-param name="pos" select="$pos"/>
+			</xsl:apply-templates>
+			<xsl:text>"</xsl:text>
+			</span>		
+					</font>
+
+		</xsl:otherwise>
+		</xsl:choose>
+		
 	</xsl:template>
 	<xsl:template match="nir:nome">
 		<span title="Nome: {.}">
@@ -366,7 +402,7 @@
 	<!--  Template MODIFICHE                                      -->
 	<!--                                                          -->
 	<!-- ======================================================== -->
-	<xsl:template match="*[name()='mod']">
+	<!--	xsl:template match="*[name()='mod']">
 		<span class="mod">
  	    	<xsl:apply-templates/>
  		</span>
@@ -377,7 +413,7 @@
 			<xsl:apply-templates />
 		</span>	
 	    <div class="spazio">&#160;</div>				
-	</xsl:template>	
+	</xsl:template	-->	
 	
 	
 	<!-- ======================================================== -->
@@ -450,7 +486,6 @@
 	<xsl:template match="h:span[@status='soppresso']">
 		<xsl:param name="pos">none</xsl:param>
 		<xsl:if test="$pos='left'">
-				
  		 <xsl:choose>
   		  <xsl:when test="following-sibling::node()[1]//@status='inserito'">
 		 	<xsl:apply-templates/>&#160;
