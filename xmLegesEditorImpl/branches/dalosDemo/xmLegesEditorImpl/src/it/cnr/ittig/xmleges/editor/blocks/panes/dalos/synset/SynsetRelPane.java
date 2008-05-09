@@ -74,7 +74,7 @@ public abstract class SynsetRelPane extends SynsetPane {
 			if (path != null) {
 				DefaultMutableTreeNode n = (DefaultMutableTreeNode) path.getLastPathComponent();
 				try {
-					if(n.getUserObject() instanceof Synset){
+					if(n.getUserObject() instanceof Synset){   //&& e.getClickCount()==2
 						selectSynset((Synset)n.getUserObject());
 					}
 					else

@@ -195,6 +195,7 @@ public class DalosMenuActionImpl implements DalosMenuAction, Loggable, Serviceab
 				panelsProps.setProperty("show.editor.panes.dalos.synsettree", "true");
 				panelsProps.setProperty("show.editor.panes.dalos.synsetlist", "true");
 				panelsProps.setProperty("show.editor.panes.dalos.synsetdetails", "true");
+				panelsProps.setProperty("show.editor.panes.dalos.interlingualrelation", "true");
 				panelsProps.setProperty("show.editor.panes.dalos.linguisticrelation", "true");
 				panelsProps.setProperty("show.editor.panes.dalos.semanticrelation", "true");
 				panelsProps.setProperty("show.editor.panes.dalos.source", "true");
@@ -227,6 +228,7 @@ public class DalosMenuActionImpl implements DalosMenuAction, Loggable, Serviceab
 				barsProps.setProperty("check.view.pane.editor.panes.dalos.synsettree", "true");
 				barsProps.setProperty("check.view.pane.editor.panes.dalos.synsetlist", "true");
 				barsProps.setProperty("check.view.pane.editor.panes.dalos.synsetdetails", "true");
+				barsProps.setProperty("check.view.pane.editor.panes.dalos.interlingualrelation", "true");
 				barsProps.setProperty("check.view.pane.editor.panes.dalos.linguisticrelation", "true");
 				barsProps.setProperty("check.view.pane.editor.panes.dalos.semanticrelation", "true");
 				barsProps.setProperty("check.view.pane.editor.panes.panes.dalos.source", "true");

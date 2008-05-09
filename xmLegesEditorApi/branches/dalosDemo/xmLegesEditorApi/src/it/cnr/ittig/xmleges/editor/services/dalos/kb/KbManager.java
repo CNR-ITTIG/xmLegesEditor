@@ -48,6 +48,12 @@ public interface KbManager extends Service {
 	 * 
 	 * @param syn
 	 */
+	public void addInterlingualProperties(Synset syn); 
+	
+	/**
+	 * 
+	 * @param syn
+	 */
 	public void addSemanticProperties(Synset syn); 
 	
 	/**

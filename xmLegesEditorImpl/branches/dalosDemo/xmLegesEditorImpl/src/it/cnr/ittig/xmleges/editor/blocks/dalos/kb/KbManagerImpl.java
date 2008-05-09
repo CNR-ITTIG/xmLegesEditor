@@ -144,6 +144,15 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		kbc.addLexicalProperties(syn);
 	}
 	
+	
+	public void addInterlingualProperties(Synset syn) {
+		
+		if(syn == null) { return; }
+
+		KbContainer kbc = getContainer(syn.getLanguage());
+		kbc.addLexicalProperties(syn);
+	}
+	
 	public void addSemanticProperties(Synset syn) {
 		
 		if(syn == null) { return; }

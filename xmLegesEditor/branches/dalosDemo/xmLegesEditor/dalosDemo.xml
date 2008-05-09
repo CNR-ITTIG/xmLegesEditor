@@ -319,7 +319,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                         
                         <check action="view.pane.editor.panes.dalos.synsettree" />
                         <check action="view.pane.editor.panes.dalos.synsetlist" />
-                        <check action="view.pane.editor.panes.dalos.synsetdetails" />     
+                        <check action="view.pane.editor.panes.dalos.synsetdetails" /> 
+                        <check action="view.pane.editor.panes.dalos.interlingualrelation" />    
                         <check action="view.pane.editor.panes.dalos.linguisticrelation" />
                         <check action="view.pane.editor.panes.dalos.semanticrelation" />
                         <check action="view.pane.editor.panes.dalos.source" />
@@ -1182,9 +1183,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 				<pane name="panes.segnalazioni"				where="bottom-center"  	index="7" />
 				
 				<pane name="editor.panes.dalos.synsetdetails"        where="bottom-center"    	index="8" />
-				<pane name="editor.panes.dalos.linguisticrelation"    where="bottom-center"    	index="9" />
-				<pane name="editor.panes.dalos.semanticrelation"     where="bottom-center"    	index="10" />
-				<pane name="editor.panes.dalos.source"     			 where="bottom-center"    	index="11" />							
+				<pane name="editor.panes.dalos.interlingualrelation"    where="bottom-center"    	index="9" />
+				<pane name="editor.panes.dalos.linguisticrelation"    where="bottom-center"    	index="10" />
+				<pane name="editor.panes.dalos.semanticrelation"     where="bottom-center"    	index="11" />
+				<pane name="editor.panes.dalos.source"     			 where="bottom-center"    	index="12" />							
 					
             </panes>
         </configuration>
@@ -1381,6 +1383,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     
     <component  activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.panes.dalos.synset.SynsetDetailsPaneImpl"
+    />
+    
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.panes.dalos.synset.SynsetRelInterlingualPaneImpl"
     />    
     
     <component  activation="startup"
