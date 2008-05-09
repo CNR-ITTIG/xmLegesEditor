@@ -257,7 +257,7 @@
 			<xsl:when test="($pos='right' and ../@status='soppresso')">
 				<i>Soppresso</i>
 			</xsl:when>
-			<xsl:when test="$pos='right' and not(.//@status) and not(../@status='inserito')">
+			<xsl:when test="$pos='right' and not(.//@status/../@status='inserito') and not(../@status='inserito')">
 				<i>Identico</i>
 			</xsl:when>
 			<xsl:otherwise>
@@ -303,13 +303,13 @@
 	<xsl:template match="nir:mod">
 		<xsl:param name="pos">none</xsl:param>
 		<div class="mod">
-		<p>
-			<xsl:text>"</xsl:text>
+		<!--	p>
+			<xsl:text>"</xsl:text	-->
 			<xsl:apply-templates>
 				<xsl:with-param name="pos" select="$pos"/>
 			</xsl:apply-templates>
-			<xsl:text>"</xsl:text>
-		</p>
+			<!--	xsl:text>"</xsl:text>
+		</p	-->
 		</div>
 	</xsl:template>
 	<xsl:template match="nir:virgolette">
@@ -319,29 +319,19 @@
 		<xsl:choose>
 		<xsl:when test="@tipo='struttura'">
 			
-	   		<table bgcolor="#FFEE99"><tr><td>
-		
-			<xsl:text>"</xsl:text>
+	   		<table bgcolor="#FFEE99" width="100%"><tr><td>
 			<xsl:apply-templates>
 				<xsl:with-param name="pos" select="$pos"/>
 			</xsl:apply-templates>
-			<xsl:text>"</xsl:text>
-	
 			</td></tr></table>	
 			
 		</xsl:when>
 		<xsl:otherwise>
-
-	    				<font bgcolor="#FFEE99">
-			<span>
-			<xsl:text>"</xsl:text>
+			<span class="virgolette">
 			<xsl:apply-templates>
 				<xsl:with-param name="pos" select="$pos"/>
 			</xsl:apply-templates>
-			<xsl:text>"</xsl:text>
 			</span>		
-					</font>
-
 		</xsl:otherwise>
 		</xsl:choose>
 		
@@ -383,38 +373,6 @@
 		</div>
 	</xsl:template>
 
-
-	
-	<!--	RIMOSSI DALLA DTD 2.2
-	<xsl:template match="nir:sottoscrizioni">
-		<ul style="margin-top:5px;">
-			<xsl:apply-templates/>
-		</ul>
-	</xsl:template>
-	<xsl:template match="nir:sottoscrivente">
-		<li>
-			<xsl:apply-templates/>
-		</li>
-	</xsl:template		-->	
-	
-	<!-- ======================================================== -->
-	<!--                                                          -->
-	<!--  Template MODIFICHE                                      -->
-	<!--                                                          -->
-	<!-- ======================================================== -->
-	<!--	xsl:template match="*[name()='mod']">
-		<span class="mod">
- 	    	<xsl:apply-templates/>
- 		</span>
-	</xsl:template> 
-	<xsl:template match="*[name()='virgolette']">
-	    <div class="spazio">&#160;</div>
-	    <span class="virgolette">
-			<xsl:apply-templates />
-		</span>	
-	    <div class="spazio">&#160;</div>				
-	</xsl:template	-->	
-	
 	
 	<!-- ======================================================== -->
 	<!--                                                          -->

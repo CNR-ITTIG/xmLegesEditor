@@ -311,9 +311,18 @@ exclude-result-prefixes="h nir xlink" xmlns="http://www.w3.org/HTML/1998/html4" 
 	</xsl:template> 
 	<xsl:template match="*[name()='virgolette']">
 	    <div class="spazio">&#160;</div>
-	    <span class="virgolette">
+	    <xsl:choose>
+		<xsl:when test="@tipo='struttura'">
+	   		<table bgcolor="#FFEE99"><tr><td>
+				<xsl:apply-templates />
+			</td></tr></table>				
+		</xsl:when>
+		<xsl:otherwise>
+		<span class="virgolette">
 			<xsl:apply-templates />
-		</span>	
+		</span>		
+		</xsl:otherwise>
+		</xsl:choose>	
 	    <div class="spazio">&#160;</div>				
 	</xsl:template>	
 	<!-- ======================================================== -->

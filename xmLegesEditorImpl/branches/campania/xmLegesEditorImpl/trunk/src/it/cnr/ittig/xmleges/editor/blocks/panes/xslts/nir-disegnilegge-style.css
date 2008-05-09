@@ -73,11 +73,9 @@
 	.soppresso {
 		color: red;
 		text-decoration: line-through;
-		background: #FFFFFF;
 	}
 	.inserito {
 		color: green;
-		background: #FFFFFF;
 	}
 	.mod {
 		display: inline;
