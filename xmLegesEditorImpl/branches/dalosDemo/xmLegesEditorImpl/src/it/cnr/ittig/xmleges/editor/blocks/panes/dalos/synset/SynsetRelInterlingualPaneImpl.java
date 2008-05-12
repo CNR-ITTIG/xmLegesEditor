@@ -37,7 +37,7 @@ Initializable, Startable, SynsetRelInterlingualPane {
 		// gestione eventi LangChanged
 		if(event instanceof LangChangedEvent){
 			if(!((LangChangedEvent)event).getIsGlobalLang()){
-				frame.setShowingPane(this, true);	
+				frame.setSelectedPane(this);	
 			}
 		}
 	}

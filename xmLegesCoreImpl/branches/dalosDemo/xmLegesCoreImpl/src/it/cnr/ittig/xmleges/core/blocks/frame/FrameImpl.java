@@ -633,12 +633,24 @@ public class FrameImpl implements Frame, Loggable, Serviceable, Configurable, In
 	
 	
 	//	 si potrebbe fare con ViewPaneAction   ????
-	public void setShowingPane(Pane pane, boolean show){		
+	public void setSelectedPane(Pane pane){		
 		PaneFrame pf = (PaneFrame) name2PaneFrames.get(pane.getName());
 		if (pf.isShow()) {
 			AutoTabbedPane tab = getAutoTabbedPane(pf);
 			tab.setSelected(pf);
 		}
 	}
+	
+	
+	
+	public boolean isSelectedPane(Pane pane){		
+		PaneFrame pf = (PaneFrame) name2PaneFrames.get(pane.getName());
+		if (pf.isShow()) {
+			return pf.isActive();
+		}
+		return false;
+	}
+	
+	
 	
 }

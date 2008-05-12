@@ -42,11 +42,14 @@ public abstract class SynsetRelPane extends SynsetPane {
 		}		
 	}
 
-	protected void updateObserver(Synset syn) {
-		
+	protected void updateObserver(Synset syn) {	
 		super.updateObserver(syn);
-
-		//clear now and update tree on focus gained or isShowing
+		if(!frame.isSelectedPane(this)){  // aggiorna l'alvero solo se non sto navigando sull'albero stesso; in quel caso lo aggiorn con double click
+			refreshTree(syn);
+		}
+	}
+	
+	protected void refreshTree(Synset syn){
 	    if(this.getPaneAsComponent().isShowing()){
 	    	clearTree();
 	    	focusGainedEvent(syn);	
@@ -56,7 +59,6 @@ public abstract class SynsetRelPane extends SynsetPane {
 	abstract void focusGainedEvent(Synset syn);
 	
 	void clearTree() {
-
 		tree.removeChildren();
 		tree.setRootVisible(false);
 		tree.reloadModel();
@@ -74,8 +76,11 @@ public abstract class SynsetRelPane extends SynsetPane {
 			if (path != null) {
 				DefaultMutableTreeNode n = (DefaultMutableTreeNode) path.getLastPathComponent();
 				try {
-					if(n.getUserObject() instanceof Synset){   //&& e.getClickCount()==2
+					if(n.getUserObject() instanceof Synset){   
 						selectSynset((Synset)n.getUserObject());
+						if(e.getClickCount()==2){
+							refreshTree((Synset)n.getUserObject());
+						}
 					}
 					else
 						System.err.println("NOT Synset selected on tree");

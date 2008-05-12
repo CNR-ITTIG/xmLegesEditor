@@ -42,6 +42,8 @@ public class PaneFrame extends JPanel implements FocusListener, HierarchyListene
 	boolean scrollable;
 
 	boolean show = false;
+	
+	boolean isActive = false;
 
 	boolean highlighted = false;
 
@@ -100,7 +102,12 @@ public class PaneFrame extends JPanel implements FocusListener, HierarchyListene
 	}
 
 	public void setPaneBorder(boolean active) {
+		this.isActive = active;
 		setBorder(active ? activeBorder : deactiveBorder);
+	}
+	
+	public boolean isActive(){
+		return this.isActive;
 	}
 
 	public Pane getPane() {

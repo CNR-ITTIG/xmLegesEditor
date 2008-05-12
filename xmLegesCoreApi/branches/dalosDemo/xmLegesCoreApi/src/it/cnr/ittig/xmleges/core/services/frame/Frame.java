@@ -166,7 +166,14 @@ public interface Frame extends Service {
 	 * @param pane
 	 * @param show
 	 */
-	public void setShowingPane(Pane pane, boolean show);
+	public void setSelectedPane(Pane pane);
+	
+	/**
+	 * 
+	 * @param pane
+	 * @return
+	 */
+	public boolean isSelectedPane(Pane pane);
 	
 	/**
 	 * 
