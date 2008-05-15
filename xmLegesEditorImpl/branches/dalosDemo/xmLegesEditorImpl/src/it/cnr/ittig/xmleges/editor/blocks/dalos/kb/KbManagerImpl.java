@@ -313,9 +313,6 @@ implements KbManager, Loggable, Serviceable, Initializable {
 			String puri = ores.getNameSpace() + ores.getLocalName();
 			poc.setURI(puri);
 			uriToPivotClass.put(puri, poc);
-//			if(puri.indexOf("artconc-0000000611") > 0) {
-//				System.out.println("[][][] POC: " + puri + " poc:" + poc);
-//			}
 			for(StmtIterator k = mod.listStatements(
 					(Resource) ores, RDFS.subClassOf, (RDFNode) null);
 					k.hasNext();) {
@@ -333,8 +330,8 @@ implements KbManager, Loggable, Serviceable, Initializable {
 										uriToTreeClass.get(turi); 
 				if(toc == null) {
 					toc = new TreeOntoClass(objName);					
+					toc.setURI(turi);
 				}
-				toc.setURI(turi);
 				poc.addLink(toc);
 				toc.addConcept(poc);
 //				System.out.println("Adding pivot class " + poc + 

@@ -481,6 +481,7 @@ public class KbContainer {
 		
 		Individual ind = om.getIndividual(syn.getURI());
 		if(ind == null) {
+			System.err.println("addSources() - ind is null!");
 			return;
 		}
 

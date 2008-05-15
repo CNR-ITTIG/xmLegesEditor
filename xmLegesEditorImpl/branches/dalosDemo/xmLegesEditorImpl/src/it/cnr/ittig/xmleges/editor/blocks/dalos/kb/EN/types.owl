@@ -5,6 +5,9 @@
     xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
   xml:base="http://localhost/dalos/EN/types.owl#" > 
+  <rdf:Description rdf:about="individuals.owl#synset-points-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-point-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-french_republic-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-french_republic-noun-1"/>
   </rdf:Description>
@@ -17,14 +20,23 @@
   <rdf:Description rdf:about="individuals.owl#synset-manufacturer-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-manufacturer-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-consultations-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-consultation-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-law-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-law-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-months-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-month-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-consumption-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-consumption-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-pension-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-pension-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-loans-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-loan-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-coils-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-coil-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-evidence-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-evidence-noun-1"/>
@@ -41,14 +53,14 @@
   <rdf:Description rdf:about="individuals.owl#synset-level_of_protection-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-level_of_protection-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-intermediary-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-intermediary-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-rule-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-rule-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-sales-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-sale-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-minute-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-minute-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-preparations-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-preparation-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-storage-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-storage-noun-1"/>
@@ -59,6 +71,9 @@
   <rdf:Description rdf:about="individuals.owl#synset-air-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-air-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-individuals-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-individual-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-yield-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-yield-noun-1"/>
   </rdf:Description>
@@ -67,6 +82,9 @@
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-adaptation_committee-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-adaptation_committee-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-principles_of_legal_certainty-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-principle_of_legal_certainty-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-competition-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-competition-noun-1"/>
@@ -77,17 +95,26 @@
   <rdf:Description rdf:about="individuals.owl#synset-means-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-means-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-pesticides-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-pesticide-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-gene-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-gene-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-expectation-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-expectation-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-baseline-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-baseline-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-headings-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-heading-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-forms-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-form-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-right_of_cancellation-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-right_of_cancellation-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-reasons-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-reason-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-indication-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-indication-noun-1"/>
@@ -98,14 +125,8 @@
   <rdf:Description rdf:about="individuals.owl#synset-debt-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-debt-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-gas-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-gas-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-taste-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-taste-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-amendment-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-amendment-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-aggravation-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-aggravation-noun-1"/>
@@ -113,11 +134,20 @@
   <rdf:Description rdf:about="individuals.owl#synset-scientific_uncertainty-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-scientific_uncertainty-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-holder-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-holder-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-trials-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-trial-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-front-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-front-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-measures-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-measure-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-schemes-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-scheme-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-hormones-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-hormone-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-leap_years-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-leap_year-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-meat-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-meat-noun-1"/>
@@ -131,8 +161,8 @@
   <rdf:Description rdf:about="individuals.owl#synset-steel-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-steel-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-use-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-use-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-relationships-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-relationship-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-competence-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-competence-noun-1"/>
@@ -142,9 +172,6 @@
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-resolution-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-resolution-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-promotion-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-promotion-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-maximum_degree_of_protection-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-maximum_degree_of_protection-noun-1"/>
@@ -158,14 +185,8 @@
   <rdf:Description rdf:about="individuals.owl#synset-democracy-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-democracy-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-factor-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-factor-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-transaction-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-transaction-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-hormone-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-hormone-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-neurotransmitters-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-neurotransmitter-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-commission-s_inaction-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-commission-s_inaction-noun-1"/>
@@ -173,32 +194,23 @@
   <rdf:Description rdf:about="individuals.owl#synset-origin-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-origin-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-chamber-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-chamber-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-implementing_order-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-implementing_order-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-draft_decision-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-draft_decision-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-objective-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-objective-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-burners-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-burner-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-plant-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-plant-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-consumer-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-consumer-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-reduction-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-reduction-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-author-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-author-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-note-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-note-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-body_weight-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-body_weight-noun-1"/>
@@ -209,14 +221,14 @@
   <rdf:Description rdf:about="individuals.owl#synset-knowledge-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-knowledge-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-preparation-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-preparation-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-national_legislation-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-national_legislation-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-appeal-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-appeal-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-contracts-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-contract-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-expenditure-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-expenditure-noun-1"/>
@@ -224,14 +236,14 @@
   <rdf:Description rdf:about="individuals.owl#synset-application-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-application-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-purposes-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-purpose-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-review-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-review-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-lubricant-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-lubricant-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-code-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-code-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-functions-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-function-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-end-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-end-noun-1"/>
@@ -242,11 +254,23 @@
   <rdf:Description rdf:about="individuals.owl#synset-pregnancy-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-pregnancy-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-burner-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-burner-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-disadvantages-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-disadvantage-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-victims-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-victim-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-sale_products-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-sale_product-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-conclusions-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-conclusion-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-subsidiary_company-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-subsidiary_company-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-trusts-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-trust-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-exploitation-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-exploitation-noun-1"/>
@@ -254,11 +278,14 @@
   <rdf:Description rdf:about="individuals.owl#synset-mediation-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-mediation-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-instrument-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-instrument-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-drink-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-drink-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-characteristics-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-characteristic-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-principles-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-principle-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-sentence-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-sentence-noun-1"/>
@@ -266,11 +293,8 @@
   <rdf:Description rdf:about="individuals.owl#synset-eec-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-eec-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-form-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-form-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-source-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-source-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-residues-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-residue-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-union-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-union-noun-1"/>
@@ -281,20 +305,23 @@
   <rdf:Description rdf:about="individuals.owl#synset-core-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-core-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-matters-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-matter-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-date-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-date-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-batch-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-batch-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-prices-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-price-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-letter-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-letter-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-omissions-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-omission-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-unlawfulness-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-unlawfulness-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-principle-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-principle-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-ties-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-tie-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-treatment_of_obesity-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-treatment_of_obesity-noun-1"/>
@@ -308,20 +335,14 @@
   <rdf:Description rdf:about="individuals.owl#synset-duration-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-duration-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-person-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-person-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-inequalities-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-inequality-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-dangerous_product-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-dangerous_product-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-consumer_goods-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-consumer_goods-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-oil-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-oil-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-water-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-water-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-shellfish-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-shellfish-noun-1"/>
@@ -332,14 +353,17 @@
   <rdf:Description rdf:about="individuals.owl#synset-advocate_general-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-advocate_general-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-questionnaire-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-questionnaire-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-commitment-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-commitment-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-context-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-context-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-methods-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-method-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-years-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-year-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-human_use-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-human_use-noun-1"/>
@@ -353,20 +377,8 @@
   <rdf:Description rdf:about="individuals.owl#synset-code_of_conduct-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-code_of_conduct-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-payment-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-payment-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-method-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-method-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-number-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-number-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-term-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-term-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-animal-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-animal-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-expectations-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-expectation-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-possibility-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-possibility-noun-1"/>
@@ -374,8 +386,14 @@
   <rdf:Description rdf:about="individuals.owl#synset-maximum_concentration-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-maximum_concentration-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-structures-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-structure-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-time-share_contract-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-time-share_contract-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-codes-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-code-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-food-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-food-noun-1"/>
@@ -398,8 +416,8 @@
   <rdf:Description rdf:about="individuals.owl#synset-transport-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-transport-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-decision-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-decision-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-consumer_contracts-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-consumer_contract-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-therapeutic_efficacy-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-therapeutic_efficacy-noun-1"/>
@@ -407,17 +425,14 @@
   <rdf:Description rdf:about="individuals.owl#synset-preliminary_ruling-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-preliminary_ruling-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-customer-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-customer-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-unemployment-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-unemployment-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-ban-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-ban-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-council_directive-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-council_directive-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-clubs-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-club-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-vendor-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-vendor-noun-1"/>
@@ -440,8 +455,11 @@
   <rdf:Description rdf:about="individuals.owl#synset-compound-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-compound-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-intellectual_property_right-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-intellectual_property_right-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-product_names-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-product_name-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-organizers-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-organizer-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-registrar-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-registrar-noun-1"/>
@@ -451,6 +469,9 @@
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-freedom-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-freedom-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-children-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-child-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-serotonin-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-serotonin-noun-1"/>
@@ -467,8 +488,11 @@
   <rdf:Description rdf:about="individuals.owl#synset-reference-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-reference-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-reason-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-reason-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-tables-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-table-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-customers-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-customer-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-metal-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-metal-noun-1"/>
@@ -476,8 +500,8 @@
   <rdf:Description rdf:about="individuals.owl#synset-cape-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-cape-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-game-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-game-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-purchasers-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-purchaser-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-builder-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-builder-noun-1"/>
@@ -485,20 +509,14 @@
   <rdf:Description rdf:about="individuals.owl#synset-process-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-process-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-designation-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-designation-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-territory-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-territory-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-interpretation_of_article-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-interpretation_of_article-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-version-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-version-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-credit_agreement-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-credit_agreement-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-samples-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-sample-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-human-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-human-noun-1"/>
@@ -506,11 +524,14 @@
   <rdf:Description rdf:about="individuals.owl#synset-personnel-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-personnel-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-credit_agreements-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-credit_agreement-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-arbitration_procedure-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-arbitration_procedure-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-message-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-message-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-taxes-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-tax-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-public_health-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-public_health-noun-1"/>
@@ -521,26 +542,26 @@
   <rdf:Description rdf:about="individuals.owl#synset-authority-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-authority-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-women-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-woman-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-berth-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-berth-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-producer-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-producer-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-consignments-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-consignment-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-institution-noun-1">
+  <rdf:Description rdf:about="individuals.owl#synset-substances-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-substance-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-institutions-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-institution-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-magyar-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-magyar-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-inspection-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-inspection-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-effect-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-effect-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-nation-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-nation-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-transactional_decision-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-transactional_decision-noun-1"/>
@@ -554,23 +575,23 @@
   <rdf:Description rdf:about="individuals.owl#synset-oral_procedure-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-oral_procedure-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-languages-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-language-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-existence-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-existence-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-right_of_renunciation-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-right_of_renunciation-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-effluents-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-effluent-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-france-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-france-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-common_market-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-common_market-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-paragraph-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-paragraph-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-indium-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-indium-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-federal_republic_of_germany-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-federal_republic_of_germany-noun-1"/>
@@ -581,14 +602,23 @@
   <rdf:Description rdf:about="individuals.owl#synset-freight-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-freight-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-guides-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-guide-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-preservation-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-preservation-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-payments-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-payment-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-morbidity-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-morbidity-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-instance-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-instance-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-waters-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-water-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-production-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-production-noun-1"/>
@@ -599,11 +629,17 @@
   <rdf:Description rdf:about="individuals.owl#synset-assessment-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-assessment-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-gases-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-gas-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-undertakings-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-undertaking-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-cooperation-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-cooperation-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-tax-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-tax-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-concerns-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-concern-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-priority-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-priority-noun-1"/>
@@ -611,8 +647,14 @@
   <rdf:Description rdf:about="individuals.owl#synset-ministry-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-ministry-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-right-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-right-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-criticisms-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-criticism-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-sellers-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-seller-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-businesses-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-business-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-alcoholic_beverage-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-alcoholic_beverage-noun-1"/>
@@ -626,26 +668,35 @@
   <rdf:Description rdf:about="individuals.owl#synset-facsimile-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-facsimile-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-residue-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-residue-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-name-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-name-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-questionnaires-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-questionnaire-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-unit-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-unit-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-chambers-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-chamber-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-list-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-list-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-emission-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-emission-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-factors-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-factor-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-expert-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-expert-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-disorders-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-disorder-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-implementation-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-implementation-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-bans-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-ban-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-changes-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-change-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-periodical_inspection-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-periodical_inspection-noun-1"/>
@@ -656,6 +707,12 @@
   <rdf:Description rdf:about="individuals.owl#synset-case_of_doubt-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-case_of_doubt-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-members-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-member-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-sources-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-source-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-address-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-address-noun-1"/>
   </rdf:Description>
@@ -665,14 +722,8 @@
   <rdf:Description rdf:about="individuals.owl#synset-commercial_practice-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-commercial_practice-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-applicant-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-applicant-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-ore-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-ore-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-leap_year-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-leap_year-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-judgment-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-judgment-noun-1"/>
@@ -682,9 +733,6 @@
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-electronic_commerce-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-electronic_commerce-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-practice-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-practice-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-v-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-v-noun-1"/>
@@ -704,14 +752,11 @@
   <rdf:Description rdf:about="individuals.owl#synset-plus-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-plus-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-affair-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-affair-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-discrimination-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-discrimination-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-trust-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-trust-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-columns-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-column-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-intention-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-intention-noun-1"/>
@@ -721,9 +766,6 @@
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-zootechnical_purpose-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-zootechnical_purpose-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-combustion_of_waste_oil-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-combustion_of_waste_oil-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-poisoning-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-poisoning-noun-1"/>
@@ -735,10 +777,19 @@
     <rdf:type rdf:resource="../concepts.owl#concept-ag-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-marketing-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-marketing-noun-1"/>
+    <rdf:type rdf:resource="../concepts.owl#concept-market-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-articles-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-article-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-stability-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-stability-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-doubts-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-doubt-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-directive_certain_forms-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-directive_certain_form-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-labelling-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-labelling-noun-1"/>
@@ -764,6 +815,12 @@
   <rdf:Description rdf:about="individuals.owl#synset-leisure-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-leisure-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-animals-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-animal-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-clauses-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-clause-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-fall-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-fall-noun-1"/>
   </rdf:Description>
@@ -773,17 +830,8 @@
   <rdf:Description rdf:about="individuals.owl#synset-community_procedure-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-community_procedure-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-permit-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-permit-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-recommendation-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-recommendation-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-matter-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-matter-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-neurotransmitter-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-neurotransmitter-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-statement-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-statement-noun-1"/>
@@ -800,9 +848,6 @@
   <rdf:Description rdf:about="individuals.owl#synset-choice-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-choice-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-year-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-year-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-uniform-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-uniform-noun-1"/>
   </rdf:Description>
@@ -811,9 +856,6 @@
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-lack-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-lack-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-purchaser-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-purchaser-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-stand-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-stand-noun-1"/>
@@ -824,29 +866,23 @@
   <rdf:Description rdf:about="individuals.owl#synset-percentage-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-percentage-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-monopoly-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-monopoly-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-week-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-week-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-directive-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-directive-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-documents-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-document-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-tool-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-tool-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-component-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-component-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-language-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-language-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-regions-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-region-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-weight-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-weight-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-supplier-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-supplier-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-modifications-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-modification-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-arrangements-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-arrangement-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-establishment-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-establishment-noun-1"/>
@@ -857,14 +893,17 @@
   <rdf:Description rdf:about="individuals.owl#synset-management-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-management-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-revision-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-revision-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-data-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-datum-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-user-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-user-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-sheets-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-sheet-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-aluminium-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-aluminium-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-sexes-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-sex-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-employment-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-employment-noun-1"/>
@@ -872,17 +911,14 @@
   <rdf:Description rdf:about="individuals.owl#synset-hazard-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-hazard-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-protection_of_consumer-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-protection_of_consumer-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-potential_risk-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-potential_risk-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-means_of_distance_communication-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-means_of_distance_communication-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-function-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-function-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-materials-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-material-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-constitution-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-constitution-noun-1"/>
@@ -890,35 +926,29 @@
   <rdf:Description rdf:about="individuals.owl#synset-burden-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-burden-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-inequality-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-inequality-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-invention-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-invention-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-disadvantage-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-disadvantage-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-serious_risk-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-serious_risk-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-india-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-indium-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-design-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-design-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-lake-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-lake-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-weeks-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-week-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-productivity-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-productivity-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-disorder-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-disorder-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-fuels-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-fuel-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-analysis-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-analysis-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-difference-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-difference-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-distance_communication-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-distance_communication-noun-1"/>
@@ -932,35 +962,47 @@
   <rdf:Description rdf:about="individuals.owl#synset-installation-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-installation-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-developments-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-development-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-differences_in_treatment-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-differences_in_treatment-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-court-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-court-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-arrangement-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-arrangement-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-coil-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-coil-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-regeneration-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-regeneration-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-vehicles-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-vehicle-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-volume-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-volume-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-revisions-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-revision-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-precautionary_principle-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-precautionary_principle-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-chemical_elements-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-chemical_element-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-disputes-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-dispute-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-liability-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-liability-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-relationship-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-relationship-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-notes-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-note-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-infringement_procedure-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-infringement_procedure-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-apples-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-apple-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-holders-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-holder-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-moratorium_on_bst-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-moratorium_on_bst-noun-1"/>
@@ -986,23 +1028,17 @@
   <rdf:Description rdf:about="individuals.owl#synset-pig-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-pig-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-ingredients-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-ingredient-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-community-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-community-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-consignment-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-consignment-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-characteristic-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-characteristic-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-sale_product-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-sale_product-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-agenda-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-agenda-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-home-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-home-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-economic_operators-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-economic_operator-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-declaration-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-declaration-noun-1"/>
@@ -1010,29 +1046,14 @@
   <rdf:Description rdf:about="individuals.owl#synset-agency-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-agency-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-individual-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-individual-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-market-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-market-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-table-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-table-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-omission-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-omission-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-guarantees-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-guarantee-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-germany-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-germany-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-price-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-price-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-health-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-health-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-well-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-well-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-preamble-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-preamble-noun-1"/>
@@ -1040,14 +1061,8 @@
   <rdf:Description rdf:about="individuals.owl#synset-witness-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-witness-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-modification-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-modification-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-tie-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-tie-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-disease-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-disease-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-orders-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-order-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-pasta-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-pasta-noun-1"/>
@@ -1057,6 +1072,9 @@
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-rasff_contact_point-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-rasff_contact_point-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-salts-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-salt-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-attitude-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-attitude-noun-1"/>
@@ -1079,17 +1097,11 @@
   <rdf:Description rdf:about="individuals.owl#synset-book-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-book-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-heading-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-heading-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-belgian_government-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-belgian_government-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-veterinary-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-veterinary-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-procedure-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-procedure-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-point_of_view-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-point_of_view-noun-1"/>
@@ -1100,8 +1112,8 @@
   <rdf:Description rdf:about="individuals.owl#synset-rule_of_law-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-rule_of_law-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-product-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-product-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-uses-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-use-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-dealer-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-dealer-noun-1"/>
@@ -1121,8 +1133,11 @@
   <rdf:Description rdf:about="individuals.owl#synset-quality-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-quality-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-participant-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-participant-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-agreements-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-agreement-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-limits-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-limit-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-press-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-press-noun-1"/>
@@ -1130,17 +1145,14 @@
   <rdf:Description rdf:about="individuals.owl#synset-experience-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-experience-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-change-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-change-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-ec_treaty-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-ec_treaty-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-receipt-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-receipt-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-consumer_contract-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-consumer_contract-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-experts-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-expert-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-purchase-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-purchase-noun-1"/>
@@ -1148,14 +1160,14 @@
   <rdf:Description rdf:about="individuals.owl#synset-border-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-border-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-participants-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-participant-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-compatibility-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-compatibility-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-bank-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-bank-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-loss-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-loss-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-pergola-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-pergola-noun-1"/>
@@ -1166,32 +1178,20 @@
   <rdf:Description rdf:about="individuals.owl#synset-duty-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-duty-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-organizer-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-organizer-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-pascal-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-pascal-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-operation-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-operation-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-procedures-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-procedure-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-driver-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-driver-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-state-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-state-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-undertaking-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-undertaking-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-trial-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-trial-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-federal_republic-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-federal_republic-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-seller-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-seller-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-arguments-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-argument-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-l-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-l-noun-1"/>
@@ -1205,14 +1205,20 @@
   <rdf:Description rdf:about="individuals.owl#synset-country-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-country-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-designations-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-designation-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-simplification-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-simplification-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-times-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-time-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-publication-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-publication-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-level-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-level-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-outlets-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-outlet-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-collection-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-collection-noun-1"/>
@@ -1220,14 +1226,14 @@
   <rdf:Description rdf:about="individuals.owl#synset-original_purpose-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-original_purpose-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-regulation-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-regulation-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-obesity-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-obesity-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-provision_of_service-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-provision_of_service-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-guarantors-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-guarantor-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-secrets-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-secret-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-grade-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-grade-noun-1"/>
@@ -1235,11 +1241,8 @@
   <rdf:Description rdf:about="individuals.owl#synset-ship-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-ship-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-administration-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-administration-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-sheet-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-sheet-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-amounts-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-amount-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-date_of_expiry-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-date_of_expiry-noun-1"/>
@@ -1247,38 +1250,38 @@
   <rdf:Description rdf:about="individuals.owl#synset-emergency-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-emergency-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-business-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-business-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-guide-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-guide-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-sex-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-sex-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-losses-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-loss-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-distributor-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-distributor-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-action-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-action-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-ruling-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-ruling-noun-1"/>
+    <rdf:type rdf:resource="../concepts.owl#concept-rule-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-vote-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-vote-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-child-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-child-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-areas-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-area-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-persons-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-person-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-rights-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-right-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-diet-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-diet-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-advances-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-advance-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-disposition-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-disposition-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-infringement-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-infringement-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-organizations-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-organization-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-airport-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-airport-noun-1"/>
@@ -1286,14 +1289,11 @@
   <rdf:Description rdf:about="individuals.owl#synset-combination-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-combination-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-day-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-day-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-products-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-product-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-environment-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-environment-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-party-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-party-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-claim-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-claim-noun-1"/>
@@ -1304,6 +1304,9 @@
   <rdf:Description rdf:about="individuals.owl#synset-company-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-company-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-acts-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-act-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-recall-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-recall-noun-1"/>
   </rdf:Description>
@@ -1313,41 +1316,35 @@
   <rdf:Description rdf:about="individuals.owl#synset-question-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-question-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-case-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-case-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-professor-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-professor-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-rule_on_interpretation-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-rule_on_interpretation-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-communication-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-communication-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-risks-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-risk-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-summary-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-summary-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-time-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-time-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-religion-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-religion-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-measure-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-measure-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-mr-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-mr-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-courses-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-course-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-consumer_protection-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-consumer_protection-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-damage-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-damage-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-nations-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-nation-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-doubt-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-doubt-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-cereals-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-cereal-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-provision_of_services-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-provision_of_service-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-excise-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-excise-noun-1"/>
@@ -1355,20 +1352,20 @@
   <rdf:Description rdf:about="individuals.owl#synset-united_kingdom_government-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-united_kingdom_government-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-partes-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-part-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-efficacy-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-efficacy-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-applicants-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-applicant-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-intervention-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-intervention-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-guarantor-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-guarantor-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-relation-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-relation-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-package-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-package-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-games-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-game-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-selection-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-selection-noun-1"/>
@@ -1376,32 +1373,38 @@
   <rdf:Description rdf:about="individuals.owl#synset-president-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-president-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-argument-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-argument-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-numbers-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-number-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-approval-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-approval-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-lubricants-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-lubricant-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-dm-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-dm-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-reports-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-report-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-aim-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-aim-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-point-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-point-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-parameters-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-parameter-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-development-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-development-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-mrs-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-mr-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-abolition-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-abolition-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-pesticide-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-pesticide-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-moment-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-moment-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-batches-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-batch-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-solidarity-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-solidarity-noun-1"/>
@@ -1415,17 +1418,17 @@
   <rdf:Description rdf:about="individuals.owl#synset-methodology-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-methodology-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-risk-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-risk-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-level_of_consumer_protection-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-level_of_consumer_protection-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-apple-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-apple-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-competitors-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-competitor-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-contract-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-contract-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-versions-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-version-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-services-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-service-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-feeling-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-feeling-noun-1"/>
@@ -1436,11 +1439,14 @@
   <rdf:Description rdf:about="individuals.owl#synset-group-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-group-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-competitor-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-competitor-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-programmes-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-programme-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-italian_republic-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-italian_republic-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-actions-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-action-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-right_of_withdrawal-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-right_of_withdrawal-noun-1"/>
@@ -1451,20 +1457,20 @@
   <rdf:Description rdf:about="individuals.owl#synset-chancellor-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-chancellor-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-worker-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-worker-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-households-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-household-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-generation-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-generation-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-article-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-article-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-interests-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-interest-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-recycling-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-recycling-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-clause-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-clause-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-affairs-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-affair-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-transactions-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-transaction-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-incineration-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-incineration-noun-1"/>
@@ -1481,14 +1487,26 @@
   <rdf:Description rdf:about="individuals.owl#synset-certainty-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-certainty-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-molluscs-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-mollusc-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-system-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-system-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-credit_cards-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-credit_card-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-commission_decisions-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-commission_decision-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-advertiser-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-advertiser-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-safe_product-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-safe_product-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-powers-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-power-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-scheme_of_chapter-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-scheme_of_chapter-noun-1"/>
@@ -1499,14 +1517,14 @@
   <rdf:Description rdf:about="individuals.owl#synset-illegality-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-illegality-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-salt-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-salt-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-kingdom_of_spain-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-kingdom_of_spain-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-scientific_knowledge-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-scientific_knowledge-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-lakes-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-lake-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-goods-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-goods-noun-1"/>
@@ -1514,29 +1532,11 @@
   <rdf:Description rdf:about="individuals.owl#synset-supply_of_goods-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-supply_of_goods-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-victim-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-victim-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-scheme-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-scheme-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-product_name-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-product_name-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-material-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-material-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-definition-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-definition-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-report-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-report-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-governments-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-government-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-activity-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-activity-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-condition-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-condition-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-feed-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-feed-noun-1"/>
@@ -1547,11 +1547,20 @@
   <rdf:Description rdf:about="individuals.owl#synset-son-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-son-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-terms-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-term-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-pensions-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-pension-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-control-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-control-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-legislation-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-legislation-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-intellectual_property_rights-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-intellectual_property_right-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-combustion_of_waste_oils-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-combustion_of_waste_oil-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-portuguese_government-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-portuguese_government-noun-1"/>
@@ -1568,11 +1577,20 @@
   <rdf:Description rdf:about="individuals.owl#synset-conduct-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-conduct-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-permits-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-permit-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-producers-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-producer-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-letters-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-letter-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-cabin-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-cabin-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-vehicle-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-vehicle-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-infringements-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-infringement-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-responsibility-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-responsibility-noun-1"/>
@@ -1583,11 +1601,11 @@
   <rdf:Description rdf:about="individuals.owl#synset-passage-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-passage-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-element-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-element-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-carrier-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-carrier-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-generations-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-generation-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-prevention-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-prevention-noun-1"/>
@@ -1598,17 +1616,26 @@
   <rdf:Description rdf:about="individuals.owl#synset-surface-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-surface-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-interest-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-interest-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-paragraphs-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-paragraph-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-consumers-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-consumer-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-adoption-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-adoption-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-outlet-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-outlet-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-administrations-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-administration-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-screen-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-screen-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-protections-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-protection-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-communications-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-communication-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-means_of_communication-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-means_of_communication-noun-1"/>
@@ -1616,20 +1643,11 @@
   <rdf:Description rdf:about="individuals.owl#synset-kingdom-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-kingdom-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-trader-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-trader-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-practices-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-practice-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-guarantee-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-guarantee-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-datum-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-datum-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-woman-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-woman-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-man-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-man-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-amendments-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-amendment-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-category-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-category-noun-1"/>
@@ -1640,17 +1658,8 @@
   <rdf:Description rdf:about="individuals.owl#synset-swimming_pool-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-swimming_pool-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-order-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-order-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-contested_decision-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-contested_decision-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-course-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-course-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-minister-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-minister-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-injured_party-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-injured_party-noun-1"/>
@@ -1658,11 +1667,20 @@
   <rdf:Description rdf:about="individuals.owl#synset-portuguese_republic-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-portuguese_republic-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-instruments-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-instrument-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-evaluation-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-evaluation-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-booking-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-booking-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-levels-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-level-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-oils-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-oil-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-haste-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-haste-noun-1"/>
@@ -1673,11 +1691,11 @@
   <rdf:Description rdf:about="individuals.owl#synset-hand-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-hand-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-substance-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-substance-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-conditions-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-condition-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-protection-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-protection-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-ministers-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-minister-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-expression-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-expression-noun-1"/>
@@ -1688,23 +1706,26 @@
   <rdf:Description rdf:about="individuals.owl#synset-refusal-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-refusal-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-programme-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-programme-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-packaging-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-package-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-cancer-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-cancer-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-power-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-power-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-french_government-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-french_government-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-intermediaries-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-intermediary-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-lack_of_conformity-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-lack_of_conformity-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-financing-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-financing-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-differences-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-difference-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-information-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-information-noun-1"/>
@@ -1721,9 +1742,6 @@
   <rdf:Description rdf:about="individuals.owl#synset-contact-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-contact-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-sample-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-sample-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-registry-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-registry-noun-1"/>
   </rdf:Description>
@@ -1732,6 +1750,12 @@
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-civil_code-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-civil_code-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-mammals-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-mammal-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-inspections-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-inspection-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-criterion-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-criterion-noun-1"/>
@@ -1754,14 +1778,20 @@
   <rdf:Description rdf:about="individuals.owl#synset-adverb-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-adverb-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-councils-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-council-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-jurisdiction-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-jurisdiction-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-ingredient-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-ingredient-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-netherlands_government-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-netherlands_government-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-directives-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-directive-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-components-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-component-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-consensus-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-consensus-noun-1"/>
@@ -1778,41 +1808,26 @@
   <rdf:Description rdf:about="individuals.owl#synset-stage-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-stage-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-service-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-service-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-preparatory_work-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-preparatory_work-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-cereal-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-cereal-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-diseases-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-disease-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-luxembourg-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-luxembourg-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-limit-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-limit-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-protection_of_consumers-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-protection_of_consumer-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-organisation_of_procedure-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-organisation_of_procedure-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-parameter-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-parameter-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-club-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-club-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-results-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-result-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-capacity-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-capacity-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-secret-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-secret-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-agreement-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-agreement-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-quantity-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-quantity-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-parent-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-parent-noun-1"/>
@@ -1823,14 +1838,23 @@
   <rdf:Description rdf:about="individuals.owl#synset-justice-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-justice-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-household-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-household-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-tolerance-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-tolerance-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-conclusion-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-conclusion-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-decisions-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-decision-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-days-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-day-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-regulations-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-regulation-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-wells-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-well-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-opinions-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-opinion-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-equality-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-equality-noun-1"/>
@@ -1838,17 +1862,8 @@
   <rdf:Description rdf:about="individuals.owl#synset-period-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-period-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-chemical_element-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-chemical_element-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-annulment-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-annulment-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-effluent-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-effluent-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-loan-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-loan-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-insertion-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-insertion-noun-1"/>
@@ -1859,6 +1874,9 @@
   <rdf:Description rdf:about="individuals.owl#synset-embassy-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-embassy-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-elements-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-element-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-patent-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-patent-noun-1"/>
   </rdf:Description>
@@ -1868,20 +1886,8 @@
   <rdf:Description rdf:about="individuals.owl#synset-course_of_conduct-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-course_of_conduct-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-region-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-region-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-subject-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-subject-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-member-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-member-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-requirement-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-requirement-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-council-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-council-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-apparatus-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-apparatus-noun-1"/>
@@ -1889,20 +1895,23 @@
   <rdf:Description rdf:about="individuals.owl#synset-misuse-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-misuse-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-parties-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-party-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-fronts-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-front-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-users-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-user-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-respect-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-respect-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-ratio-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-ratio-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-purpose-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-purpose-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-presentation-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-presentation-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-economic_operator-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-economic_operator-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-security-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-security-noun-1"/>
@@ -1910,8 +1919,8 @@
   <rdf:Description rdf:about="individuals.owl#synset-pollution-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-pollution-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-document-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-document-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-rivers-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-river-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-file-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-file-noun-1"/>
@@ -1922,17 +1931,11 @@
   <rdf:Description rdf:about="individuals.owl#synset-toxicity-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-toxicity-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-part-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-part-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-c-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-c-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-principle_of_legal_certainty-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-principle_of_legal_certainty-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-commission_decision-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-commission_decision-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-homes-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-home-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-treatment-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-treatment-noun-1"/>
@@ -1943,14 +1946,17 @@
   <rdf:Description rdf:about="individuals.owl#synset-plan-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-plan-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-cases-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-case-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-product_safety-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-product_safety-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-need-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-need-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-advance-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-advance-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-suppliers-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-supplier-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-character-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-character-noun-1"/>
@@ -1958,20 +1964,26 @@
   <rdf:Description rdf:about="individuals.owl#synset-purchase_contract-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-purchase_contract-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-criticism-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-criticism-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-quantities-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-quantity-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-credit_card-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-credit_card-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-amount-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-amount-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-sale-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-sale-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-men-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-man-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-building_permit-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-building_permit-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-messages-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-message-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-traders-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-trader-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-definitions-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-definition-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-damages-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-damage-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-municipality-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-municipality-noun-1"/>
@@ -1979,17 +1991,14 @@
   <rdf:Description rdf:about="individuals.owl#synset-treaty-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-treaty-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-fuel-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-fuel-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-promotions-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-promotion-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-repair-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-repair-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-directive_certain_form-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-directive_certain_form-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-structure-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-structure-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-operations-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-operation-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-tissue-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-tissue-noun-1"/>
@@ -2000,26 +2009,20 @@
   <rdf:Description rdf:about="individuals.owl#synset-compensation-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-compensation-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-opinion-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-opinion-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-result-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-result-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-river-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-river-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-requirement_of_good_faith-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-requirement_of_good_faith-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-distribution-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-distribution-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-legislations-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-legislation-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-kingdom_of_sweden-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-kingdom_of_sweden-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-dispute-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-dispute-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-workers-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-worker-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-defendant-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-defendant-noun-1"/>
@@ -2030,17 +2033,17 @@
   <rdf:Description rdf:about="individuals.owl#synset-credit-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-credit-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-government-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-government-noun-1"/>
+  <rdf:Description rdf:about="individuals.owl#synset-relations-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-relation-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-emissions-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-emission-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-contract_of_guarantee-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-contract_of_guarantee-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-sewage-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-sewage-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-month-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-month-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-expectancy-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-expectancy-noun-1"/>
@@ -2057,8 +2060,14 @@
   <rdf:Description rdf:about="individuals.owl#synset-province-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-province-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-states-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-state-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-public-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-public-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-monopolies-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-monopoly-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-combustion-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-combustion-noun-1"/>
@@ -2066,26 +2075,17 @@
   <rdf:Description rdf:about="individuals.owl#synset-maximum-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-maximum-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-objectives-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-objective-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-milk-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-milk-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-area-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-area-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-organization-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-organization-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-interpretation-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-interpretation-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-mammal-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-mammal-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-example-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-example-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-concern-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-concern-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-legal_system-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-legal_system-noun-1"/>
@@ -2102,25 +2102,19 @@
   <rdf:Description rdf:about="individuals.owl#synset-war-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-war-noun-1"/>
   </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-courts-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-court-noun-1"/>
+  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-principle_of_equal_treatment-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-principle_of_equal_treatment-noun-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="individuals.owl#synset-requirements-noun-1">
+    <rdf:type rdf:resource="../concepts.owl#concept-requirement-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-technology-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-technology-noun-1"/>
   </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-act-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-act-noun-1"/>
-  </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-meaning-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-meaning-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-column-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-column-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-consultation-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-consultation-noun-1"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="individuals.owl#synset-mollusc-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-mollusc-noun-1"/>
   </rdf:Description>
 </rdf:RDF>

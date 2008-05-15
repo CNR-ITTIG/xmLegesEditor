@@ -141,7 +141,7 @@
     <rdf:type rdf:resource="../concepts.owl#concept-origin-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-residuo-noun-1">
-    <rdf:type rdf:resource="../concepts.owl#concept-rifiuto-noun-1"/>
+    <rdf:type rdf:resource="../concepts.owl#concept-residuo-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="individuals.owl#synset-distancia-noun-1">
     <rdf:type rdf:resource="../concepts.owl#concept-distanza-noun-1"/>
