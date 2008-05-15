@@ -14,7 +14,7 @@ public class Synset implements Comparable {
 	
 	private String def;
 	
-	private String lexicalForm;
+	private String lexicalForm = null;
 	
 	//Is it a concrete synset or it just contains the URI reference?
 	private boolean concreteSynset = false;
@@ -62,6 +62,10 @@ public class Synset implements Comparable {
 	
 	public void setLexicalForm(String lex) {
 		
+		if(!lexicalForm.equalsIgnoreCase("")) {
+			System.err.println("ERROR! Trying to set again lexical form on synset " + this.URI);
+			return;
+		}
 		concreteSynset = true;
 		//FIXME Show lowercase variant for IT
 		//(fix original data...)
@@ -69,6 +73,7 @@ public class Synset implements Comparable {
 			lex = lex.toLowerCase();
 		}
 		lexicalForm = lex;
+		addVariant(lex);
 	}
 	
 	public String getLexicalForm() {
