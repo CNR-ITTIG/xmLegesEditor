@@ -420,6 +420,7 @@ implements KbManager, Loggable, Serviceable, Initializable {
 					UtilFile.copyFileInTempDir(getClass().getResourceAsStream(dalosLang[i]+"/"+langFiles[j]),KbConf.dalosRepository+"/"+dalosLang[i],langFiles[j]);
 					if(langFiles[j].endsWith("zip")){
 						UtilFile.unZip(UtilFile.getFileFromTemp(KbConf.dalosRepository+"/"+dalosLang[i]+"/"+langFiles[j]).getAbsolutePath(),UtilFile.getTempDirName()+"/"+KbConf.dalosRepository+"/"+dalosLang[i]);
+						UtilFile.getFileFromTemp(KbConf.dalosRepository+"/"+dalosLang[i]+"/"+langFiles[j]).delete();
 					}
 				}else{
 					System.err.println("lang: already in temp");
