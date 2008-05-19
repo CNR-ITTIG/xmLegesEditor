@@ -407,7 +407,6 @@ implements KbManager, Loggable, Serviceable, Initializable {
 				KbConf.IND, 
 				KbConf.INDW,
 				KbConf.TYPES,
-				KbConf.SOURCES, 
 				KbConf.segmentDirName+".zip"
 	    };
 		

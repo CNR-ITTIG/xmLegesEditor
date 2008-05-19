@@ -266,11 +266,6 @@ public class KbContainer {
 		} else {
 			KbModelFactory.addDocument(KbConf.TYPES, LANGUAGE, typesFile);
 		}
-		if(!UtilFile.fileExistInTemp(sourcesFile)) {
-			return false;
-		} else {
-			KbModelFactory.addDocument(KbConf.SOURCES, LANGUAGE, sourcesFile);
-		}
 		
 		return true;
 	}
