@@ -126,6 +126,10 @@ public class PartizioniImpl implements Partizioni, Loggable, Serviceable, Initia
 		return (nodeInserter.canInsertNewNode(partizione, node.getOwnerDocument(), node, dtdRulesManager));
 
 	}
+	
+	public Node getPartizioneTemplate(String elemName){
+		return(nodeInserter.getNodeTemplate(elemName, documentManager.getDocumentAsDom(), dtdRulesManager));
+	}
 
 	public void aggregaInPartizione(String elemName, Node[] node) {
 		// TODO Auto-generated method stub

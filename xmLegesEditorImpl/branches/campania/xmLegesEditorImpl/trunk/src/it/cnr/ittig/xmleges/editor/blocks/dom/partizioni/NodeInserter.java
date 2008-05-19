@@ -490,10 +490,10 @@ public class NodeInserter {
 	// possibile, per necessita' di visualizzazione
 	// di un numero e di una rubrica
 	//TODO: migliorare gestione dtdFlessibile
-	private Node getNodeTemplate(String elem_name, Document doc, DtdRulesManager dtdRulesManager) {
+	public Node getNodeTemplate(String elem_name, Document doc, DtdRulesManager dtdRulesManager) {
 		
 		Node newNode = utilRulesManager.getNodeTemplate(doc, elem_name);
-		//TODO usare funzionalità del DtdRulesManager
+		//TODO usare funzionalitï¿½ del DtdRulesManager
 		if (doc.getDoctype().getSystemId().equals("nirflessibile.dtd")) {
 			addElement("num", doc, newNode, dtdRulesManager);
 			addElement("rubrica", doc, newNode, dtdRulesManager);

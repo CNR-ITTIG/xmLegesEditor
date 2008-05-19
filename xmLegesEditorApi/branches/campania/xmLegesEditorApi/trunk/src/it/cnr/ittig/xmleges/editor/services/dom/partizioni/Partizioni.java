@@ -110,6 +110,13 @@ public interface Partizioni extends Service {
 	 *         fine
 	 */
 	public Node nuovaPartizione(Node node, Node partizione, int action);
+	
+	/**
+	 * 
+	 * @param elemName
+	 * @return
+	 */
+	public Node getPartizioneTemplate(String elemName);
 
 	/**
 	 * Aggrega i nodi <code>node[]</code> nella nuova partizione di tipo
