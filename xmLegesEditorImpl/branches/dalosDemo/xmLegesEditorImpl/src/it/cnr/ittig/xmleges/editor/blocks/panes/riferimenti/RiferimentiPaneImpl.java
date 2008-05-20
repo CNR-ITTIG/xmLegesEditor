@@ -16,13 +16,13 @@ import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.frame.FindIterator;
 import it.cnr.ittig.xmleges.core.services.frame.Frame;
 import it.cnr.ittig.xmleges.core.services.frame.PaneException;
-import it.cnr.ittig.xmleges.editor.services.panes.riferimenti.RiferimentiPane;
-import it.cnr.ittig.xmleges.editor.services.panes.xslts.NirXslts;
 import it.cnr.ittig.xmleges.core.services.panes.xsltpane.XsltPane;
 import it.cnr.ittig.xmleges.core.services.panes.xsltutil.XsltUtil;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
+import it.cnr.ittig.xmleges.editor.services.panes.riferimenti.RiferimentiPane;
+import it.cnr.ittig.xmleges.editor.services.panes.xslts.NirXslts;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -30,14 +30,13 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.EventObject;
 
-
 import javax.swing.AbstractAction;
 import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
-import javax.swing.JProgressBar;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
