@@ -16,13 +16,13 @@ import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.frame.FindIterator;
 import it.cnr.ittig.xmleges.core.services.frame.Frame;
 import it.cnr.ittig.xmleges.core.services.frame.PaneException;
-import it.cnr.ittig.xmleges.editor.services.panes.riferimenti.RiferimentiPane;
-import it.cnr.ittig.xmleges.editor.services.panes.xslts.NirXslts;
 import it.cnr.ittig.xmleges.core.services.panes.xsltpane.XsltPane;
 import it.cnr.ittig.xmleges.core.services.panes.xsltutil.XsltUtil;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
+import it.cnr.ittig.xmleges.editor.services.panes.riferimenti.RiferimentiPane;
+import it.cnr.ittig.xmleges.editor.services.panes.xslts.NirXslts;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -30,14 +30,12 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.EventObject;
 
-
 import javax.swing.AbstractAction;
 import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-import javax.swing.JToolBar;
 import javax.swing.JProgressBar;
+import javax.swing.JToolBar;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
@@ -82,10 +80,6 @@ public class RiferimentiPaneImpl implements RiferimentiPane, EventManagerListene
 
 	Bars bars;
 
-	JPanel panel = new JPanel(new BorderLayout());
-	
-	JScrollPane scrollPane = new JScrollPane();
-
 	StartAction startAction = new StartAction();
 	
 	StopAction stopAction = new StopAction();
@@ -128,26 +122,22 @@ public class RiferimentiPaneImpl implements RiferimentiPane, EventManagerListene
 
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws Exception {
-		popupMenu = bars.getPopup(false);
+		
+//		popupMenu = bars.getPopup(false);
 		
 		bar.add(utilUI.applyI18n("panes.riferimenti.start", startAction));
 		bar.add(utilUI.applyI18n("panes.riferimenti.stop", stopAction));
 		bar.getComponent(0).setEnabled(true);
 		bar.getComponent(1).setEnabled(false);
 		bar.add(progress);
-		panel.add(bar, BorderLayout.NORTH);
 		
 		//TODO prendere dalla configurazione
 		xsltPane.setName("editor.panes.riferimenti");
 		xsltPane.set(xslts.getXslt("riferimenti"), null, null);
-		frame.addPane(xsltPane, false);
 		
+		((JPanel)xsltPane.getPaneAsComponent()).add(bar, BorderLayout.NORTH);
 			
-		scrollPane.setViewportView(xsltPane.getPaneAsComponent());
-		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		panel.add(scrollPane);
-
+		frame.addPane(xsltPane, false);
 		eventManager.addListener(this, DocumentClosedEvent.class);
 	}
 
@@ -164,7 +154,7 @@ public class RiferimentiPaneImpl implements RiferimentiPane, EventManagerListene
 	
 	// ///////////////////////////////////////////////////// Startable Interface
 	public void start() throws Exception {
-		frame.addPane(this, false);
+		//frame.addPane(xsltPane, false);
 	}
 
 	public void stop() throws Exception {
@@ -176,7 +166,7 @@ public class RiferimentiPaneImpl implements RiferimentiPane, EventManagerListene
 	}
 
 	public Component getPaneAsComponent() {
-		return panel;
+		return xsltPane.getPaneAsComponent();
 	}
 	
 	// ///////////////////////////////////////////////////////// Toolbar Actions
