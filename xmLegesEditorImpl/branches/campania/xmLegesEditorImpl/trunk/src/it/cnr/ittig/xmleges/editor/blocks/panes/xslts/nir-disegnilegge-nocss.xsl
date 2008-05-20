@@ -19,109 +19,102 @@
 				<!--                                                          -->
 				<!-- ======================================================== -->				
 				<style type="text/css">
-				body {
-					margin-left: 15 px;
-					font-family: "Verdana, Arial, Helvetica, sans-serif" ;
-					font-size: 70% ;
-				}
-				.title { 
-					font-size: 110% ;
-					font-weight: bold;
-					text-align: center;
-					color: #0000cc;
-					line-height: 100% ;
-				} 
-				.sinistra { 
-					font-size: 110% ;
-					text-align: left;
-					line-height: 100% ;
-				} 	
-				.toc-articolo, .toc-annessi {
-					margin-left: 7px;
-					font-size: 65%;
-				}
-				.toc-comma {
-					margin-left: 15px;
-					font-size: 65%;
-				}
-				.toc {
-					margin-left: 2px;
-					font-size: 65%;
-					font-weight: bold;
-				}
-				.capo { 
-					font-size: 110% ;
-					font-weight: bold;
-					text-align: center;
-					line-height: 100% ;
-					margin-top: 25px; 
-				} 
-				.articolo { 
-					font-size: 90% ; 
-					text-align: center;
-					font-weight: bold;
-					margin-top: 15px; 
-				}
-				.comma { 
-					font-size: 80% ; 
-					margin-top: 5px; 
-				}
-				div, li {
-					font-size: 80% ;
-				}
-				.small {
-					font-size: 65% ;
-				}
-				.intestazione {
-					margin: 15px, 15%, 0px, 15%;
-					text-align: center;
-				}
-				.el {
-					margin-left: 40px;
-					text-indent: -30px;
-					margin-top: 3px;
-				}
-				.en {
-					margin-left: 50px;
-					text-indent: -30px;
-					margin-top: 3px;
-				}				
-			    b b { font-weight: normal; }
-				.ndr {
-					color: #00cc00;
-					text-decoration: underline;
-				}
-				.soppresso {
-					color: red;
-					text-decoration: line-through;
-				}
-				.inserito {
-					color: green;
-				}
-				.mod {
-					display: inline;
-					font-size: 9pt;  
-					font-weight: normal; 
-					font-style: normal; 
-					font-family: Courier;
-					background: #FFDDAA;
-				}
-				.virgolette {
-					display: inline; 
-					border-width: solid; 
-					background: #FFEE99;
-				}	
-				.spazio {
-					display: inline; 
-					background: #FFFFFF;
-				}				
-				</style>
-				<!-- ======================================================== -->
-				<!--                                                          -->
-				<!--  fine Foglio di Stile                                    -->
-				<!--                                                          -->
-				<!-- ======================================================== --> 					
-			</head>
+	body {
+		margin-left: 15 px;
+		font-family: "Verdana, Arial, Helvetica, sans-serif" ;
+		font-size: 70% ;
+	}
+	.title { 
+		font-size: 110% ;
+		font-weight: bold;
+		text-align: center;
+		color: #0000cc;
+		line-height: 100% ;
+	} 
+	.sinistra { 
+		font-size: 110% ;
+		text-align: left;
+		line-height: 100% ;
+	} 	
+	.toc-articolo, .toc-annessi {
+		margin-left: 7px;
+		font-size: 65%;
+	}
+	.toc-comma {
+		margin-left: 15px;
+		font-size: 65%;
+	}
+	.toc {
+		margin-left: 2px;
+		font-size: 65%;
+		font-weight: bold;
+	}
+	.capo { 
+		font-size: 110% ;
+		font-weight: bold;
+		text-align: center;
+		line-height: 100% ;
+		margin-top: 25px; 
+	} 
+	.articolo { 
+		font-size: 90% ; 
+		text-align: center;
+		font-weight: bold;
+		margin-top: 15px; 
+	}
+	.comma { 
+		font-size: 80% ; 
+		margin-top: 5px; 
+	}
+	div, li {
+		font-size: 80% ;
+	}
+	.small {
+		font-size: 65% ;
+	}
+	.intestazione {
+		margin: 15px, 15%, 0px, 15%;
+		text-align: center;
+	}
+	.el {
+		margin-left: 40px;
+		text-indent: -30px;
+		margin-top: 3px;
+	}
+	.en {
+		margin-left: 50px;
+		text-indent: -30px;
+		margin-top: 3px;
+	}	
+    b b { font-weight: normal; }
+	.ndr {
+		color: #00cc00;
+		text-decoration: underline;
+	}
+	.soppresso {
+		color: red;
+		text-decoration: line-through;
+	}
+	.inserito {
+		color: green;
+	}
+	.mod {
+		display: inline;
+		font-size: 9pt;  
+		font-weight: normal; 
+		font-style: normal; 
+		background: #FFDDAA;
+	}
+	.virgolette {
+		display: inline; 
+		border-width: solid; 
+		background: #FFEE99;
+	}	
+	.spazio {
+		display: inline; 
+		background: #FFFFFF;
+	}
+</head>
 			<body>
 				<table cellpadding="0" cellspacing="5" border="0" width="100%">
 					<tr style="margin:top:30px; margin-bottom:30px;">
@@ -392,9 +385,6 @@
 			<xsl:apply-templates/>
 		</div>
 	</xsl:template>
-	
-	
-	<!--	RIMOSSI DALLA DTD 2.2
 	<xsl:template match="nir:sottoscrizioni">
 		<ul style="margin-top:5px;">
 			<xsl:apply-templates/>
@@ -404,7 +394,7 @@
 		<li>
 			<xsl:apply-templates/>
 		</li>
-	</xsl:template		-->
+	</xsl:template>
 	
 	<!-- ======================================================== -->
 	<!--                                                          -->
@@ -418,9 +408,18 @@
 	</xsl:template> 
 	<xsl:template match="*[name()='virgolette']">
 	    <div class="spazio">&#160;</div>
-	    <span class="virgolette">
+	    <xsl:choose>
+		<xsl:when test="@tipo='struttura'">
+	   		<table bgcolor="#FFEE99" width="100%"><tr><td>
+				<xsl:apply-templates />
+			</td></tr></table>				
+		</xsl:when>
+		<xsl:otherwise>
+		<span class="virgolette">
 			<xsl:apply-templates />
-		</span>	
+		</span>		
+		</xsl:otherwise>
+		</xsl:choose>	
 	    <div class="spazio">&#160;</div>				
 	</xsl:template>	
 	<!-- ======================================================== -->
@@ -528,3 +527,4 @@
 		</xsl:apply-templates>
 	</xsl:template> 
 </xsl:stylesheet>
+	

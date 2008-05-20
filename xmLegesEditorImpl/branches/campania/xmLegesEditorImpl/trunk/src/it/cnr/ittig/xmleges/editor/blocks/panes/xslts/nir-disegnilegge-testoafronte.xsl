@@ -47,22 +47,24 @@
 	<!--                                                          -->
 	<!-- ======================================================== -->
 	<xsl:template match="nir:intestazione">
-		<xsl:apply-templates/>
+		<div class="intestazione">
+			<xsl:apply-templates/>
+		</div>			
 	</xsl:template>
 	<xsl:template match="nir:emanante">
-		<div class="sinistra">
+		<div class="emanante">
 			<xsl:apply-templates/>
 		</div>
 	</xsl:template>
 	<xsl:template match="nir:legislatura">
 		<div class="title">
-			----- <xsl:apply-templates/> -----
+			<xsl:apply-templates/>
 		</div>
 	</xsl:template>
 	<xsl:template match="nir:tipoDoc"/>
 	<xsl:template match="nir:numDoc">
-		<div class="sinistra">
-			N. <xsl:apply-templates/>
+		<div class="numdoc">
+			<xsl:apply-templates/>
 		</div>
 	</xsl:template>	
 	<xsl:template match="nir:intestazione/h:div ">
@@ -86,7 +88,7 @@
 		</div>
 	</xsl:template>
 	<xsl:template match="nir:intestazione/nir:titoloDoc">
-		<div class="intestazione">
+		<div class="titolodoc">
 			<h1>
 				<xsl:apply-templates/>
 			</h1>
@@ -179,8 +181,8 @@
 	<xsl:template match="nir:tipoDoc" mode="parallelo">
 		<xsl:apply-templates/>
 	</xsl:template>
-	<xsl:template match="nir:*
-	" mode="parallelo">
+		
+	<xsl:template match="nir:*" mode="parallelo">
 		<tr>
 			<td width="50%" valign="top">
 				<div class="{local-name()}">
@@ -209,6 +211,11 @@
 						<xsl:with-param name="pos">right</xsl:with-param>
 					</xsl:apply-templates>
 				</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<xsl:apply-templates select="nir:corpo/nir:mod/nir:virgolette" mode="parallelo"/>
 			</td>
 		</tr>
 		<xsl:apply-templates mode="parallelo"/>
@@ -312,32 +319,29 @@
 		</p	-->
 		</div>
 	</xsl:template>
+	
 	<xsl:template match="nir:virgolette">
+		<xsl:param name="pos">none</xsl:param>	
+		<xsl:if test="@tipo='parola'">
+	   		<span class="virgolette">
+				<xsl:apply-templates>
+					<xsl:with-param name="pos" select="$pos"/>
+				</xsl:apply-templates>
+			</span>			
+		</xsl:if>	
+	</xsl:template>
+	<xsl:template match="nir:virgolette" mode="parallelo">
 		<xsl:param name="pos">none</xsl:param>
-		
-		
-		<xsl:choose>
-		<xsl:when test="@tipo='struttura'">
-			
+		<xsl:if test="@tipo='struttura'">
 	   		<table bgcolor="#FFEE99" width="100%"><tr><td>
-			<xsl:apply-templates>
-				<xsl:with-param name="pos" select="$pos"/>
-			</xsl:apply-templates>
+					<xsl:apply-templates mode="parallelo">
+						<xsl:with-param name="pos" select="$pos"/>
+					</xsl:apply-templates>
 			</td></tr></table>	
-			
-		</xsl:when>
-		<xsl:otherwise>
-			<span class="virgolette">
-			<xsl:apply-templates>
-				<xsl:with-param name="pos" select="$pos"/>
-			</xsl:apply-templates>
-			</span>		
-		</xsl:otherwise>
-		</xsl:choose>
-		
+		</xsl:if>		
 	</xsl:template>
 	<xsl:template match="nir:nome">
-		<span title="Nome: {.}">
+		<span class="nome" title="Nome: {.}">
 			<xsl:apply-templates/>
 		</span>
 	</xsl:template>
@@ -368,11 +372,20 @@
 		</div>
 	</xsl:template>
 	<xsl:template match="nir:dataeluogo">
-		<div style="margin-top:5px;">
+		<div class="margin-top:15px;">
 			<xsl:apply-templates/>
 		</div>
 	</xsl:template>
-
+	<xsl:template match="nir:sottoscrizioni">
+		<div class="sottoscrizioni">
+			<xsl:apply-templates/>
+		</div>
+	</xsl:template>
+	<xsl:template match="nir:sottoscrivente">
+		<div class="sottoscrivente">
+			<xsl:apply-templates/>
+		</div>
+	</xsl:template>
 	
 	<!-- ======================================================== -->
 	<!--                                                          -->

@@ -7,14 +7,27 @@
 		font-size: 110% ;
 		font-weight: bold;
 		text-align: center;
-		color: #0000cc;
-		line-height: 100% ;
 	} 
-	.sinistra { 
+	.emanante { 
+		font-size: 200% ;
+		text-align: center;
+		text-decoration: underline;
+	}
+	.numdoc { 
 		font-size: 110% ;
+		text-align: right;
+		font-weight: bold;
+	}
+	.nome { 
+		font-size: 110% ;
+	}
+	
+	.sinistra { 
+		font-size: 130% ;
 		text-align: left;
 		line-height: 100% ;
-	} 	
+	}
+	 	
 	.toc-articolo, .toc-annessi {
 		margin-left: 7px;
 		font-size: 65%;
@@ -45,9 +58,7 @@
 		font-size: 80% ; 
 		margin-top: 5px; 
 	}
-	div, li {
-		font-size: 80% ;
-	}
+	
 	.small {
 		font-size: 65% ;
 	}
@@ -82,7 +93,6 @@
 		font-size: 9pt;  
 		font-weight: normal; 
 		font-style: normal; 
-		font-family: Courier;
 		background: #FFDDAA;
 	}
 	.virgolette {
