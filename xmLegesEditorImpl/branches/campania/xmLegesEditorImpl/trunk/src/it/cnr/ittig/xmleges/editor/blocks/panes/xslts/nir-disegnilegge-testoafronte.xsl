@@ -213,11 +213,6 @@
 				</div>
 			</td>
 		</tr>
-		<tr>
-			<td colspan="2">
-				<xsl:apply-templates select="nir:corpo/nir:mod/nir:virgolette" mode="parallelo"/>
-			</td>
-		</tr>
 		<xsl:apply-templates mode="parallelo"/>
 	</xsl:template>
 	<xsl:template match="nir:num | nir:rubrica | nir:corpo| nir:alinea" mode="parallelo"/>
@@ -322,15 +317,41 @@
 	
 	<xsl:template match="nir:virgolette">
 		<xsl:param name="pos">none</xsl:param>	
-		<xsl:if test="@tipo='parola'">
-	   		<span class="virgolette">
-				<xsl:apply-templates>
-					<xsl:with-param name="pos" select="$pos"/>
-				</xsl:apply-templates>
-			</span>			
-		</xsl:if>	
+		<xsl:choose>
+			<xsl:when test="@tipo='parola'">
+		   		<span class="virgolette">
+					<xsl:apply-templates>
+						<xsl:with-param name="pos" select="$pos"/>
+					</xsl:apply-templates>
+				</span>			
+			</xsl:when>
+			<xsl:when test="@tipo='struttura'">
+				<xsl:choose>
+					<xsl:when test="$pos='left'">
+						<xsl:if test="not(.//@status/../@status='inserito') and not(../@status='inserito')">
+	   					<table bgcolor="#FFEE99" width="100%"><tr><td>
+							<xsl:apply-templates>
+								<xsl:with-param name="pos" select="$pos"/>
+							</xsl:apply-templates>
+						</td></tr></table>	
+						</xsl:if>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:if test="not(not(.//@status/../@status='inserito') and not(../@status='inserito'))">
+						<tr><td colspan="2">
+	   					<table bgcolor="#FFEE99" width="100%"><tr><td>
+							<xsl:apply-templates mode="parallelo">
+								<xsl:with-param name="pos" select="$pos"/>
+							</xsl:apply-templates>
+						</td></tr></table>	
+						</td></tr>
+						</xsl:if>
+					</xsl:otherwise>
+				</xsl:choose>												
+			</xsl:when>
+		</xsl:choose>				
 	</xsl:template>
-	<xsl:template match="nir:virgolette" mode="parallelo">
+	<xsl:template match="nir:virgolette2222222" mode="parallelo">
 		<xsl:param name="pos">none</xsl:param>
 		<xsl:if test="@tipo='struttura'">
 	   		<table bgcolor="#FFEE99" width="100%"><tr><td>
@@ -421,7 +442,7 @@
 	<!-- ======================================================== -->
 	<xsl:template match="nir:meta">
 		<hr/>
-		<table border="1" cellpadding="2" cellspacing="0" width="75%" style="margin-left: 15px;">
+		<table border="0" cellpadding="2" cellspacing="0" width="75%" style="margin-left: 15px;">
 			<xsl:apply-templates/>
 		</table>
 	</xsl:template>
