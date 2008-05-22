@@ -222,7 +222,7 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 		exportHTMLAction.setEnabled(!documentManager.isEmpty());
 		//export per i DDL non è implementato (disabilito)
 		exportPDFAction.setEnabled(!documentManager.isEmpty() && !documentManager.getRootElement().getFirstChild().getNodeName().equals("DisegnoLegge"));
-		exportRTFAction.setEnabled(!documentManager.isEmpty());
+		exportRTFAction.setEnabled(!documentManager.isEmpty() && !documentManager.getRootElement().getFirstChild().getNodeName().equals("DisegnoLegge"));
 	}
 
 	// ////////////////////////////////////////////// FileExportAction Interface
@@ -352,8 +352,8 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 
 				// FIXME prendere il path di OPENOFFICE/WORD dalle preference
 				if (osName.equalsIgnoreCase("linux")) {
-					if (Runtime.getRuntime().exec("oowrite2 " + file.getAbsolutePath()) == null)
-						Runtime.getRuntime().exec("oowriter2 " + file.getAbsolutePath());
+					//if (Runtime.getRuntime().exec("oowrite2 " + file.getAbsolutePath()) == null)
+						Runtime.getRuntime().exec("oowriter " + file.getAbsolutePath());
 				} else if (osName.toLowerCase().matches("windows.*")) {
 					 String nomeFile = cmdWin(file.getAbsolutePath());
 					 Runtime.getRuntime().exec("cmd /C start " + nomeFile);					 
