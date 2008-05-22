@@ -180,22 +180,33 @@ public class Synset implements Comparable {
 	public String toString() {
 
 		if(lexicalForm.trim().length() < 1) {
-			return "(empty)";
+			return "(empty lexical form)";
 		}
 		return lexicalForm;
 	}
 	
+	//Both URI and lexicalForm must match
 	public boolean equals(Object obj) {
-
-		if(obj instanceof Synset) {
-			if(lexicalForm.equalsIgnoreCase(((Synset) obj).getLexicalForm())
-					&& LANGUAGE.equalsIgnoreCase(((Synset) obj).getLanguage()) ) {
-				return true;
-			}
-		}
-		return false;
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final Synset other = (Synset) obj;
+		if (URI == null) {
+			if (other.URI != null)
+				return false;
+		} else if (!URI.equals(other.URI))
+			return false;
+		if (lexicalForm == null) {
+			if (other.lexicalForm != null)
+				return false;
+		} else if (!lexicalForm.equals(other.lexicalForm))
+			return false;
+		return true;
 	}
-	
+
 	public int hashCode() {
 		
 		return 1;

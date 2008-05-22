@@ -6,6 +6,7 @@ import it.cnr.ittig.xmleges.editor.services.dalos.objects.SynsetTree;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.TreeOntoClass;
 
 import java.util.Collection;
+import java.util.Map;
 
 
 /**
@@ -48,7 +49,7 @@ public interface KbManager extends Service {
 	 * 
 	 * @param syn
 	 */
-	public void addInterlingualProperties(Synset syn); 
+	public Map getInterlingualProperties(Synset syn, String lang); 
 	
 	/**
 	 * 
@@ -92,7 +93,7 @@ public interface KbManager extends Service {
 	 * @param lang lingua di destinazione
 	 * @return il relativo synset nella lingua specificata
 	 */
-	public Synset getSynset(Synset syn, String lang);
+	public Collection getSynsets(Synset syn, String lang);
 	
 	/**
 	 * 
