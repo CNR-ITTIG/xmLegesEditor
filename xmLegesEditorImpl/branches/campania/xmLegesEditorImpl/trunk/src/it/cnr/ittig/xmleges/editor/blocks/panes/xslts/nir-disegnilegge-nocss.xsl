@@ -70,13 +70,11 @@
 		margin-top: 25px; 
 	} 
 	.articolo { 
-		font-size: 90% ; 
 		text-align: center;
 		font-weight: bold;
 		margin-top: 15px; 
 	}
 	.comma { 
-		font-size: 80% ; 
 		margin-top: 5px; 
 	}
 	
