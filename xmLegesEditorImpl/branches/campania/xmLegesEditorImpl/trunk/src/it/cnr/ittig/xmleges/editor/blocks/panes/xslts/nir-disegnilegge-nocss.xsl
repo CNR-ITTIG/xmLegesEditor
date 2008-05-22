@@ -109,7 +109,6 @@
 	}
 	.mod {
 		display: inline;
-		font-size: 9pt;  
 		font-weight: normal; 
 		font-style: normal; 
 		background: #FFDDAA;
