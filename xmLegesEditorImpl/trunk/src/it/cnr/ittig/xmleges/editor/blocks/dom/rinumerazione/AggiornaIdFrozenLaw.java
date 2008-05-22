@@ -12,10 +12,13 @@ import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
+import java.util.HashMap;
 import java.util.Vector;
 
+import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -32,9 +35,12 @@ public class AggiornaIdFrozenLaw {
 
 	NirUtilDom nirUtilDom;
 	
-	Vector disposizioniId;
+//	Vector disposizioniId;
 	
-	Node disposizioni;
+//	Node disposizioni;
+	
+	// Mappa degli ID cambiati (non include i cancellati)key=oldID, value=newID
+	HashMap modIDs = new HashMap();
 
 	protected static final int LIBRO = 0;
 
@@ -95,7 +101,7 @@ public class AggiornaIdFrozenLaw {
 	protected String zerozero[] = { "01", "001", "0001", "00001", "000001", "0000001", "00000001", "000000001", "0000000001", "00000000001" };
 
 	// Vettore dei riferimenti interni
-	protected Vector Rif;
+//	protected Vector Rif;
 
 	protected Document doc;
 
@@ -108,16 +114,17 @@ public class AggiornaIdFrozenLaw {
 	}
 
 	public void aggiornaID(Node nodo) {
-
+		modIDs=new HashMap();
 		doc = nodo.getOwnerDocument();
+		NodeList nir = doc.getElementsByTagName("NIR");
 
-		//recupero id referenziati dalle disposizioni
-		try {
-			disposizioni = UtilDom.getElementsByTagName(doc,doc,"modifichepassive")[0].cloneNode(true);
-			disposizioniId = getDisposizioniIdFromDoc(UtilDom.getElementsByTagName(doc,doc,"modifichepassive")[0]);
-		} catch (Exception e) {
-			disposizioniId = null;
-		}
+//		//recupero id referenziati dalle disposizioni
+//		try {
+//			disposizioni = UtilDom.getElementsByTagName(doc,doc,"modifichepassive")[0].cloneNode(true);
+//			disposizioniId = getDisposizioniIdFromDoc(UtilDom.getElementsByTagName(doc,doc,"modifichepassive")[0]);
+//		} catch (Exception e) {
+//			disposizioniId = null;
+//		}
 			
 		// aggiornamento relativo alle note:
 		// le note vengono ordinate in base a come compaiono nel testo
@@ -128,26 +135,28 @@ public class AggiornaIdFrozenLaw {
 		// Per gli elementi che contengono un num genero l'ID sulla base di
 		// <num>
 		// Per gli altri genero l'ID sulla base della posizione
-		updateIDs(nodo);
+		updateIDs(nir.item(0));
+		
+		getAndUpdateReferringAttributes(nir.item(0));
 
-		Rif = getRif();
-		setXlinkHrefInternalRifByContent();
+//		Rif = getRif();
+//		setXlinkHrefInternalRifByContent();
 
 		setNdrLink(ndrId, false);
 	}
 
-	public Vector getDisposizioniIdFromDoc(Node modifichepassive) {
-		Node[] disp = UtilDom.getElementsByTagName(doc,modifichepassive,"dsp:pos");
-		Vector ids = new Vector(50, 10);
-		for (int i = 0; i < disp.length; i++) {
-			if (!UtilDom.getAttributeValueAsString(disp[i],"xlink:href").startsWith("urn")) {
-				String id = UtilDom.getAttributeValueAsString(disp[i], "xlink:href");
-				if (ids.indexOf(id) == -1)
-					ids.add(id);
-			}
-		}
-		return ids;
-	}
+//	public Vector getDisposizioniIdFromDoc(Node modifichepassive) {
+//		Node[] disp = UtilDom.getElementsByTagName(doc,modifichepassive,"dsp:pos");
+//		Vector ids = new Vector(50, 10);
+//		for (int i = 0; i < disp.length; i++) {
+//			if (!UtilDom.getAttributeValueAsString(disp[i],"xlink:href").startsWith("urn")) {
+//				String id = UtilDom.getAttributeValueAsString(disp[i], "xlink:href");
+//				if (ids.indexOf(id) == -1)
+//					ids.add(id);
+//			}
+//		}
+//		return ids;
+//	}
 	
 	public Vector getNdrIdFromDoc() {
 		NodeList ndr = doc.getElementsByTagName("ndr");
@@ -322,22 +331,28 @@ public class AggiornaIdFrozenLaw {
 			OldID = ((Element) nodo).getAttribute("id");
 			
 			
-			// FIXME patch per id degli eventi - disabilita il setId degli eventi ma mantiene il setIdAttribute
-			// probabilmente a causa di un bug su getElementById in MetaCiclodiVitaImpl
-  		    if((getElementType(nodo)==EVENTO)){
-  		    	IDValue = OldID;
-			}
+//			// FIXME patch per id degli eventi - disabilita il setId degli eventi ma mantiene il setIdAttribute
+//			// probabilmente a causa di un bug su getElementById in MetaCiclodiVitaImpl
+//  		    if((getElementType(nodo)==EVENTO)){
+//  		    	IDValue = OldID;
+//			}
 			////////////////////////////////////////////////////////////////////////////////////////////////// 
 
   		    if(logger.isDebugEnabled()) 		    
 			 logger.debug("idChanged: new  " + IDValue + " old " + OldID);
-
+  		    
 			if (!UtilDom.hasIdAttribute(nodo) || !OldID.equals(IDValue)) {
+				
+				if(!OldID.equals(IDValue)){
+					System.out.println("idChanged: new  " + IDValue + " old " + OldID);
+					modIDs.put(OldID, IDValue);
+				}
+				
 				UtilDom.setIdAttribute(nodo, IDValue);
 				
-				//aggiorno le disposizioni
-				if (disposizioniId!= null && disposizioniId.contains(OldID))
-					updateDisposizione(OldID, IDValue);
+//				//aggiorno le disposizioni
+//				if (disposizioniId!= null && disposizioniId.contains(OldID))
+//					updateDisposizione(OldID, IDValue);
 				
 				if(logger.isDebugEnabled())
 				  logger.debug("idChanged: new  " + IDValue + " old " + OldID);
@@ -352,15 +367,15 @@ public class AggiornaIdFrozenLaw {
 		}
 	}
 
-	private void updateDisposizione(String oldID, String newID) {
-		Node[] nuoveDisp = UtilDom.getElementsByTagName(doc,UtilDom.getElementsByTagName(doc,doc,"modifichepassive")[0],"dsp:pos");
-		Node[] vecchieDisp = UtilDom.getElementsByTagName(doc,disposizioni,"dsp:pos");
-		for (int i = 0; i < vecchieDisp.length; i++) {
-			if (oldID.equals(UtilDom.getAttributeValueAsString(vecchieDisp[i], "xlink:href")))
-				UtilDom.setAttributeValue(nuoveDisp[i],"xlink:href",newID);
-		}
-		disposizioniId.remove(oldID);
-	}
+//	private void updateDisposizione(String oldID, String newID) {
+//		Node[] nuoveDisp = UtilDom.getElementsByTagName(doc,UtilDom.getElementsByTagName(doc,doc,"modifichepassive")[0],"dsp:pos");
+//		Node[] vecchieDisp = UtilDom.getElementsByTagName(doc,disposizioni,"dsp:pos");
+//		for (int i = 0; i < vecchieDisp.length; i++) {
+//			if (oldID.equals(UtilDom.getAttributeValueAsString(vecchieDisp[i], "xlink:href")))
+//				UtilDom.setAttributeValue(nuoveDisp[i],"xlink:href",newID);
+//		}
+//		disposizioniId.remove(oldID);
+//	}
 	
 	private boolean isElementWithNum(Node node) {
 		int elemType = getElementType(node);
@@ -534,30 +549,30 @@ public class AggiornaIdFrozenLaw {
 		return NumContent;
 	}
 
-	private Vector getRif() {
-		Rif = new Vector(50, 10);
-		NodeList rif = doc.getElementsByTagName("rif");
-		for (int i = 0; i < rif.getLength(); i++) {
-			if (!UtilDom.findAttribute(rif.item(i), "xlink:href").startsWith("urn"))
-				Rif.addElement(rif.item(i));
-		}
-		return Rif;
-	}
+//	private Vector getRif() {
+//		Rif = new Vector(50, 10);
+//		NodeList rif = doc.getElementsByTagName("rif");
+//		for (int i = 0; i < rif.getLength(); i++) {
+//			if (!UtilDom.findAttribute(rif.item(i), "xlink:href").startsWith("urn"))
+//				Rif.addElement(rif.item(i));
+//		}
+//		return Rif;
+//	}
 
-	private void setXlinkHrefInternalRifByContent() {
-		// il vector Rif contiene tutti i nodi di tipo Rif Interni
-		// per cui posso risalire anche alla partizione che li contiene per
-		// completare gli incompleti
-		for (int i = 0; i < Rif.size(); i++) {
-			String rifText = UtilDom.getRecursiveTextNode((Node) Rif.get(i));
-			String oldXlinkHref = UtilDom.getAttributeValueAsString((Node) Rif.get(i), "xlink:href");
-			if (oldXlinkHref == null || oldXlinkHref.length() == 0) {
-				Node container = nirUtilDom.getContainer((Node) Rif.get(i));
-				String XlinkHref = getXlinkHrefInternalRifByContent(rifText, container);
-				((Element) Rif.get(i)).setAttribute("xlink:href", XlinkHref);
-			}
-		}
-	}
+//	private void setXlinkHrefInternalRifByContent() {
+//		// il vector Rif contiene tutti i nodi di tipo Rif Interni
+//		// per cui posso risalire anche alla partizione che li contiene per
+//		// completare gli incompleti
+//		for (int i = 0; i < Rif.size(); i++) {
+//			String rifText = UtilDom.getRecursiveTextNode((Node) Rif.get(i));
+//			String oldXlinkHref = UtilDom.getAttributeValueAsString((Node) Rif.get(i), "xlink:href");
+//			if (oldXlinkHref == null || oldXlinkHref.length() == 0) {
+//				Node container = nirUtilDom.getContainer((Node) Rif.get(i));
+//				String XlinkHref = getXlinkHrefInternalRifByContent(rifText, container);
+//				((Element) Rif.get(i)).setAttribute("xlink:href", XlinkHref);
+//			}
+//		}
+//	}
 
 	// risetta gli XlinkHref interni a partire dalla forma testuale del rif
 
@@ -1448,5 +1463,34 @@ public class AggiornaIdFrozenLaw {
 		else
 			return false;
 	}
+	
+	protected void getAndUpdateReferringAttributes(Node node) {
+		if (node == null || modIDs.size()==0)
+			return;
+
+		NamedNodeMap attrList = node.getAttributes();
+		if (attrList != null)
+			for (int i = 0; i < attrList.getLength(); i++) {
+				Attr attributo = (Attr) (attrList.item(i));
+				if(!UtilDom.isIdAttribute(attributo) && attributo.getValue()!=null && !((String)(attributo.getValue())).equals("")){
+					if (modIDs.keySet().contains(attributo.getValue())) {
+						
+						System.out.println("nodo "+node.getNodeName()+" cambia attributo da "+attributo.getValue()+" a "+(String) modIDs.get(attributo.getValue()));
+						attributo.setValue((String) modIDs.get(attributo.getValue()));
+					}
+					if(modIDs.keySet().contains( ((String)attributo.getValue()).substring(1) ) ){
+						
+						System.out.println("nodo "+node.getNodeName()+" cambia attributo da "+((String)attributo.getValue())+" a "+"#"+(String) modIDs.get(((String)attributo.getValue()).substring(1)));
+						attributo.setValue("#"+(String) modIDs.get(((String)attributo.getValue()).substring(1)));
+					}
+				}
+				
+			}
+		NodeList figli = node.getChildNodes();
+		for (int i = 0; i < figli.getLength(); i++)
+			getAndUpdateReferringAttributes(figli.item(i));
+		return;
+	}
+
 
 }
