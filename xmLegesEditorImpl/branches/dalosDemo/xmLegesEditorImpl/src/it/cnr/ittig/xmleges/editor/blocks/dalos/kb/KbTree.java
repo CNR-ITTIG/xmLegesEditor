@@ -288,56 +288,56 @@ public class KbTree {
 		return toc;
 	}
 	
-	private void addSynsets() {
-		
-		System.out.println("Adding synsets to tree...");
-		
-		TreeModel model = tmpTree.getModel();
-		Object root = model.getRoot();
-		walk(model, root);
-		
-		//Show also non-classified synsets?
-		//addRemainingSynsets();		
-	}	
-
-	private void walk(TreeModel model, Object o) {
-		
-		int  cc = model.getChildCount(o);
-		for( int i = 0; i < cc; i++) {
-			Object child = model.getChild(o, i);
-			Object data = ((DefaultMutableTreeNode) child).getUserObject();
-			if( !(data instanceof TreeOntoClass) ) {
-				if(data instanceof Synset) {
-					//Sono i synset che vengono aggiunti!?
-					continue;
-				}
-				if(data == null) {
-					System.err.println(">> ERROR on walk() data is null!");
-				} else {
-					System.err.println(">> ERROR on walk() data:" + data);					
-				}
-				return;
-			}
-			
-			TreeOntoClass toc = (TreeOntoClass) data;			
-			Collection pocs = toc.getConcepts();
-			for(Iterator pi = pocs.iterator(); pi.hasNext(); ) {
-				PivotOntoClass poc = (PivotOntoClass) pi.next();
-				Synset syn = poc.getTerm(lang);
-				if(syn == null) {
-					//Language 'lang' not supported within this 'poc' class
-					//System.err.println("ERROR on walk() - syn is null - poc: " + poc);
-					continue;
-				}
-				//toc.addTerm(syn);
-				DefaultMutableTreeNode newNode =
-					new DefaultMutableTreeNode(syn);
-				((DefaultMutableTreeNode) child).add(newNode);
-			}
-			
-			walk(model, child);
-		}
-	} 
+//	private void addSynsets() {
+//		
+//		System.out.println("Adding synsets to tree...");
+//		
+//		TreeModel model = tmpTree.getModel();
+//		Object root = model.getRoot();
+//		walk(model, root);
+//		
+//		//Show also non-classified synsets?
+//		//addRemainingSynsets();		
+//	}	
+//
+//	private void walk(TreeModel model, Object o) {
+//		
+//		int  cc = model.getChildCount(o);
+//		for( int i = 0; i < cc; i++) {
+//			Object child = model.getChild(o, i);
+//			Object data = ((DefaultMutableTreeNode) child).getUserObject();
+//			if( !(data instanceof TreeOntoClass) ) {
+//				if(data instanceof Synset) {
+//					//Sono i synset che vengono aggiunti!?
+//					continue;
+//				}
+//				if(data == null) {
+//					System.err.println(">> ERROR on walk() data is null!");
+//				} else {
+//					System.err.println(">> ERROR on walk() data:" + data);					
+//				}
+//				return;
+//			}
+//			
+//			TreeOntoClass toc = (TreeOntoClass) data;			
+//			Collection pocs = toc.getConcepts();
+//			for(Iterator pi = pocs.iterator(); pi.hasNext(); ) {
+//				PivotOntoClass poc = (PivotOntoClass) pi.next();
+//				Synset syn = poc.getTerm(lang);
+//				if(syn == null) {
+//					//Language 'lang' not supported within this 'poc' class
+//					//System.err.println("ERROR on walk() - syn is null - poc: " + poc);
+//					continue;
+//				}
+//				//toc.addTerm(syn);
+//				DefaultMutableTreeNode newNode =
+//					new DefaultMutableTreeNode(syn);
+//				((DefaultMutableTreeNode) child).add(newNode);
+//			}
+//			
+//			walk(model, child);
+//		}
+//	} 
 
 	private void pathsWalk(TreeModel model, Object o) {
 		
@@ -413,7 +413,7 @@ public class KbTree {
 			Object data = child.getUserObject();
 			if(model.isLeaf(child) && data instanceof TreeOntoClass) {
 				//Aggiungi un nodo fittizio
-				DefaultMutableTreeNode newNode = new DefaultMutableTreeNode("(empty)");
+				DefaultMutableTreeNode newNode = new DefaultMutableTreeNode("(empty node)");
 				child.add(newNode);
 			} else {
 				adjustLeaf(model, (Object) child);

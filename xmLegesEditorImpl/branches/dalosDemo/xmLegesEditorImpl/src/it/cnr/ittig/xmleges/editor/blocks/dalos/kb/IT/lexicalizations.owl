@@ -182,8 +182,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-produzione_di_alimenti-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-european_parliament-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-parlamento-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-parlamento_europeo-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-parlamento-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000000562">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-rischi-noun-1"/>
@@ -714,8 +714,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-osservazioni_orali-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-arbitration_procedure-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-procedura-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-procedura_arbitrale-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-procedura-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-relatore-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-relatore-noun-1"/>
@@ -1477,8 +1477,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-venditore_stabilito_nella_comunita-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-federal_republic-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-repubblica_federale-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-repubblica-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-repubblica_federale-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000000676">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-titolo-noun-1"/>
@@ -1751,8 +1751,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-ministro_dell-_ambiente-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-human_use-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-uso_umano-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-uso-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-uso_umano-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000000707">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-administrative_court-noun-1"/>
@@ -1911,8 +1911,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-presentazione_di_una_pratica_completa-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-employment-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-impiego-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-lavoro-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-impiego-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000000040">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-trattamento_dell-_obesita-noun-1"/>
@@ -2293,8 +2293,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-diritto_di_godimento-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-intention-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-scopo-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-fine-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-scopo-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000000814">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-contratto_di_compravendita-noun-1"/>
@@ -2492,8 +2492,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-imposte_e_diritti-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-subject-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-oggetto-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-materia-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-oggetto-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000000238">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-denominazione_commerciale-noun-1"/>
@@ -2658,8 +2658,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-interpretazione_della_direttiva-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-lack-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-mancanza-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-carenza-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-mancanza-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000000531">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-effetto_utile-noun-1"/>
@@ -2773,8 +2773,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-animali_da_allevamento-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-unlawful_conduct-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-comportamento_illegittimo-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-comportamento_contestato-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-comportamento_illegittimo-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-corte-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-corte-noun-1"/>
@@ -3071,8 +3071,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-carattere_abusivo_di_una_clausola-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-rule-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-legge-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-norma-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-legge-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000000609">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-responsabilita_della_comunita-noun-1"/>
@@ -3189,9 +3189,9 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-informazioni_richieste-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-legal_system-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-legislazione-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-ordinamento_giuridico-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-normativa-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-ordinamento_giuridico-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-legislazione-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000000598">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-giurisprudenza_della_corte_di_giustizia-noun-1"/>
@@ -3233,8 +3233,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-termine_di_decadenza-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-relation-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-rapporto-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-relazione-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-rapporto-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000000141">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/IT/individuals.owl#synset-credito_concesso-noun-1"/>

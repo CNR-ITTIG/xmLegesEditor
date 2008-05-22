@@ -11,8 +11,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-hoofdstuk-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-bench-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-justitie-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-bank-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-justitie-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-unit-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-eenheid-noun-1"/>
@@ -24,8 +24,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-groepen-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-note-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-stuk-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-nota-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-stuk-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001441">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-milieubescherming-noun-1"/>
@@ -37,8 +37,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-bewijslast-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-article-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-artikelen-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-lidwoord-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-artikelen-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-river-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-rivier-noun-1"/>
@@ -53,9 +53,9 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-dieren-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-level-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-graad-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-pas-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-niveaus-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-pas-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-graad-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001440">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-milieubeleid-noun-1"/>
@@ -70,22 +70,22 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-uniform-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-consultation-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-referentie-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-consult-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-referentie-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-assessment-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-beoordelingen-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-time-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-tijdsduur-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-keren-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-uur-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-ten-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-tijdstip-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-ten-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-uur-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-keren-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-tijdsduur-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-prevention-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-voorkoming-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-preventie-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-voorkoming-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-objection-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-bezwaren-noun-1"/>
@@ -97,8 +97,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-milieukwaliteit-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-consumption-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-verbruik-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-consumptie-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-verbruik-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-diet-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-dieet-noun-1"/>
@@ -119,8 +119,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-contracten-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-water-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-zwemwater-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-wateren-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-zwemwater-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-leisure-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-vrijetijdsbesteding-noun-1"/>
@@ -153,8 +153,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-regio-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-modification-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-modificatie-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-aanpassingen-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-modificatie-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-directive-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-richtlijnen-noun-1"/>
@@ -187,15 +187,15 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-vragen-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-reply-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-repliek-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-antwoorden-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-beantwoording-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-antwoorden-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-repliek-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-character-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-persoons-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-aard-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-karakter-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-rol-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-karakter-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-aard-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-persoons-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-technology-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-technologies-noun-1"/>
@@ -213,8 +213,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-milieu-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-law-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-wetgevingen-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-wet-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-wetgevingen-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-scheme-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-schema-noun-1"/>
@@ -226,8 +226,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-verwachtingen-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-sample-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-staal-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-monsters-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-staal-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001300">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-bedrijfsactiviteit-noun-1"/>
@@ -263,8 +263,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-bijstand-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-facsimile-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-telefax-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-faxen-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-telefax-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-series-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-reeksen-noun-1"/>
@@ -273,18 +273,18 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-facturering-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-production-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-producten-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-produktie-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-vervaardiging-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-produkten-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-productie-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-produkten-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-vervaardiging-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-produktie-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-producten-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-insurance-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-verzekeringsbedrijf-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-budget-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-begroting-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-staatsbegroting-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-begroting-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-adverb-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-bijwoord-noun-1"/>
@@ -296,9 +296,9 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-onderscheidingsteken-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-area-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-ruimte-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-gebieden-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-zones-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-gebieden-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-ruimte-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-common_market-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-eeg-noun-1"/>
@@ -325,12 +325,12 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-documents-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-existence-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-bestaan-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-zijn-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-bestaan-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-conclusion-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-slot-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-vaststellingen-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-slot-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-ban-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-verboden-noun-1"/>
@@ -351,8 +351,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-interventie-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-waste-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-afvalstof-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-afval-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-afvalstof-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-health-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-gezondheid-noun-1"/>
@@ -370,15 +370,15 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-huishoudens-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-individual-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-individuen-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-particulieren-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-individuen-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-possibility-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-mogelijkheid-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-building-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-gebouwen-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-bouw-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-gebouwen-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001462">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-overgangsperiode-noun-1"/>
@@ -393,8 +393,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-uitvinding-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-alcoholic_beverage-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-dranken-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-alcohol-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-dranken-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-performance-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-uitvoering-noun-1"/>
@@ -403,15 +403,15 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-analyses-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-control-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-orde-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-beheer-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-orde-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-disease-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-ziekte-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-evidence-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-blijk-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-bewijs-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-blijk-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-tax-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-belastingen-noun-1"/>
@@ -420,9 +420,9 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-oogpunt-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-aim-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-doelen-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-zin-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-kant-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-zin-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-doelen-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-implementation-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-uitvoeren-noun-1"/>
@@ -431,10 +431,10 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-parameters-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-grade-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-klasse-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-plan-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-punten-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-mate-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-punten-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-plan-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-klasse-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-union-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-unie-noun-1"/>
@@ -446,9 +446,9 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-kopers-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-information-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-inlichtingen-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-data-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-informatie-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-data-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-inlichtingen-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-federal_republic_of_germany-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-duitsland-noun-1"/>
@@ -490,8 +490,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-lucht-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-amount-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-som-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-bedragen-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-som-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-religion-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-godsdienst-noun-1"/>
@@ -500,8 +500,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-preparaten-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-recycling-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-hergebruik-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-recycling-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-hergebruik-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-preservation-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-conservering-noun-1"/>
@@ -546,9 +546,9 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-maanden-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-business-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-akte-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-handel-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-handelszaken-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-handel-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-akte-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-expression-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-uitdrukking-noun-1"/>
@@ -560,8 +560,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-hypotheses-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-period-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-tijden-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-periodes-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-tijden-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-name-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-namen-noun-1"/>
@@ -627,8 +627,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-apparaten-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-stand-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-standaarden-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-voet-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-standaarden-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001337">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-hulp-noun-1"/>
@@ -649,8 +649,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-noodsituaties-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-inspection-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-controles-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-inspecties-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-controles-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-illegality-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-onwettigheid-noun-1"/>
@@ -665,15 +665,15 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-schadevergoeding-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-intention-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-bedoeling-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-opzet-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-bedoeling-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001320">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-borgtocht-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-consumer-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-consumenten-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-verbruikers-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-consumenten-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-indication-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-aanduidingen-noun-1"/>
@@ -691,19 +691,19 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-aangelegenheid-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-court-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-court-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-hofs-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-court-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-public-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-gehoor-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-publiek-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-gehoor-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001271">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-aankoop-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-code-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-codes-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-wetboek-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-codes-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001199">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-einde-noun-1"/>
@@ -721,8 +721,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-agenda-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-delivery-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-aflevering-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-leveringen-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-aflevering-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001533">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-rekening-courant-noun-1"/>
@@ -734,8 +734,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-vertrouwelijkheid-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-establishment-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-regeringen-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-instellingen-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-regeringen-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001321">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-bouwbedrijf-noun-1"/>
@@ -744,21 +744,21 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-kolom-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-use-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-genot-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-gebruiken-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-genot-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-position-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-werken-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-baan-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-posten-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-stand-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-situaties-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-positie-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-stellingen-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-positie-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-situaties-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-stand-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-posten-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-baan-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-werken-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-collection-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-inzameling-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-verzameling-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-inzameling-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-tolerance-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-toleranties-noun-1"/>
@@ -788,8 +788,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-vonnissen-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-batch-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-berg-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-partijen-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-berg-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-dm-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-dm-noun-1"/>
@@ -819,11 +819,11 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-produktieproces-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-guarantee-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-borg-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-garantiebewijs-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-waarborgen-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-garanties-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-zekerheidstelling-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-garanties-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-waarborgen-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-garantiebewijs-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-borg-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-presentation-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-presentatie-noun-1"/>
@@ -862,19 +862,19 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-rechtsmacht-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-subject-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-sfeer-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-vlak-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-onderwerpen-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-kwesties-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-subject-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-kwesties-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-onderwerpen-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-vlak-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-sfeer-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001292">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-as-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-somatotrophin-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-groeihormoon-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-somatotropines-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-somatotrofine-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-somatotropines-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-groeihormoon-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001323">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-buitenland-noun-1"/>
@@ -886,16 +886,16 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-volume-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-body-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-organen-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-instanties-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-lichamen-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-instanties-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-organen-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-freedom-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-vrijheid-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-reason-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-considerans-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-overwegingen-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-considerans-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001313">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-beslissingsprocedure-noun-1"/>
@@ -916,9 +916,9 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-energiebron-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-hazard-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-gevaren-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-risico-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-kans-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-risico-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-gevaren-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-ship-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-schip-noun-1"/>
@@ -939,8 +939,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-kern-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-compound-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-samenstelling-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-verbindingen-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-samenstelling-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001491">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-procesgang-noun-1"/>
@@ -964,16 +964,16 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-versie-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-system-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-stelsels-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-systemen-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-stelsels-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-resolution-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-resolutie-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-regulation-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-bepalingen-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-regelingen-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-regels-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-regelingen-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-bepalingen-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001390">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-kleinhandel-noun-1"/>
@@ -1042,8 +1042,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-communicaties-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-term-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-termen-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-bedingen-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-termen-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001593">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-verzekeringspolis-noun-1"/>
@@ -1070,8 +1070,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-effects-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-pollution-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-milieuvervuiling-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-verontreiniging-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-milieuvervuiling-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-value-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-waarde-noun-1"/>
@@ -1107,8 +1107,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-metalen-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-disagreement-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-geschil-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-meningsverschil-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-geschil-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-statement-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-opgave-noun-1"/>
@@ -1117,8 +1117,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-weg-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-order-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-clubs-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-orders-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-clubs-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-contact-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-contacten-noun-1"/>
@@ -1157,8 +1157,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-bondskanselier-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-doubt-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-onzekerheid-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-twijfels-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-onzekerheid-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-factor-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-factoren-noun-1"/>
@@ -1185,8 +1185,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-voertuigen-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-credit-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-kredietverlening-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-kredieten-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-kredietverlening-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001591">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-vertrouwensbeginsel-noun-1"/>
@@ -1216,10 +1216,10 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-gegevens-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-basis-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-gronden-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-substanties-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-basis-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-grondslag-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-basis-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-substanties-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-gronden-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001372">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-informatiemaatschappij-noun-1"/>
@@ -1228,8 +1228,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-werkloosheid-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-context-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-context-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-omstandigheid-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-context-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-pension-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-pensioenen-noun-1"/>
@@ -1289,9 +1289,9 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-hormoon-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-goods-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-goed-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-goederen-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-waar-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-goederen-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-goed-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001600">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-volzin-noun-1"/>
@@ -1309,8 +1309,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-bestrijdingsmiddel-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-aluminium-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-aluminium-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-als-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-aluminium-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-quantity-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-hoeveelheid-noun-1"/>
@@ -1319,8 +1319,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-kustwateren-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-report-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-rapporten-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-verslagen-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-rapporten-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001514">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-rechtspositie-noun-1"/>
@@ -1383,8 +1383,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-consumptiegoederen-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-network-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-netwerken-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-net-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-netwerken-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-exercise-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-oefening-noun-1"/>
@@ -1420,14 +1420,14 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-bureau-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-commission-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-cie-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-commissie-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-cie-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-opinion-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-opinies-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-oordeel-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-standpunten-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-mening-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-standpunten-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-oordeel-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-opinies-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-plus-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-plus-noun-1"/>
@@ -1457,8 +1457,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-bestuurders-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-permit-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-vergunningen-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-licenties-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-vergunningen-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001388">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-kapitaalbelegging-noun-1"/>
@@ -1467,8 +1467,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-lidstaat-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-water_supply-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-drinkwatervoorzieningen-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-waterleidingnet-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-drinkwatervoorzieningen-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001570">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-termijn-noun-1"/>
@@ -1498,8 +1498,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-zwembad-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-material-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-materialen-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-materie-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-materialen-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001220">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-feit-noun-1"/>
@@ -1514,8 +1514,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-schadelijkheid-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-claim-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-vorderingen-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-eisen-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-vorderingen-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001272">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-aanvragen-noun-1"/>
@@ -1539,8 +1539,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-accijns-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-interest-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-rente-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-belangen-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-rente-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001234">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-gezinssfeer-noun-1"/>
@@ -1564,8 +1564,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-behandelingen-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-preamble-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-preambule-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-inleiding-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-preambule-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-child-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-kind-noun-1"/>
@@ -1577,8 +1577,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-naties-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-core-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-essentie-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-wezen-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-essentie-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-structure-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-structuur-noun-1"/>
@@ -1593,13 +1593,13 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-personeel-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-case-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-aanleg-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-geval-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-casus-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-geval-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-aanleg-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-emission-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-emissies-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-uitstoot-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-emissies-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001500">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-rechten-noun-1"/>
@@ -1632,8 +1632,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-prijs-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-agreement-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-overeenkomsten-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-overeenstemming-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-overeenkomsten-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-leap_year-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-schrikkeljaren-noun-1"/>
@@ -1642,8 +1642,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-dienstverlening-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-year-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-jaren-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-kalenderjaar-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-jaren-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-safety-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-veiligheid-noun-1"/>
@@ -1667,16 +1667,16 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-rechtszekerheid-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-capacity-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-capaciteit-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-productiecapaciteit-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-capaciteit-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001582">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-uitvoeringsmaatregel-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-food-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-eten-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-voeding-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-voedsel-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-voeding-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-eten-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001409">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-landbouw-noun-1"/>
@@ -1685,8 +1685,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-arbeid-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-holder-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-dragers-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-houders-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-dragers-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001231">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-gewichtstoename-noun-1"/>
@@ -1734,15 +1734,15 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-pers-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-arbitration-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-arbitrage-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-bemiddeling-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-arbitrage-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-means-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-middelen-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-feed-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-voer-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-voederen-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-voer-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001631">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-zijde-noun-1"/>
@@ -1760,9 +1760,9 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-gewichtsafname-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-transport-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-transport-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-vervoermiddelen-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-vervoer-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-vervoermiddelen-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-transport-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001399">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-kredietlimiet-noun-1"/>
@@ -1786,8 +1786,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-review-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-legal_system-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-rechtsstelsels-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-rechtsordes-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-rechtsstelsels-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001630">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-zij-noun-1"/>
@@ -1799,8 +1799,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-opslag-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-condition-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-voorwaarden-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-staten-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-voorwaarden-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001308">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-belegging-noun-1"/>
@@ -1812,8 +1812,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-televisiescherm-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-haste-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-haast-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-spoed-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-haast-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-act-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-handelingen-noun-1"/>
@@ -1834,8 +1834,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-nummer-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-development-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-ontwikkelingen-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-evolutie-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-ontwikkelingen-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-equality-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-gelijkheid-noun-1"/>
@@ -1844,8 +1844,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-meting-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-competition-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-concurrentie-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-mededinging-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-concurrentie-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-secret-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-geheimen-noun-1"/>
@@ -1854,8 +1854,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-tijdsbestek-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-programme-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-idee-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-programma-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-idee-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-designation-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-benamingen-noun-1"/>
@@ -1885,13 +1885,13 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-cs-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-authority-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-bevoegdheid-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-diensten-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-autoriteiten-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-diensten-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-bevoegdheid-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-decision-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-beslissingen-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-besluiten-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-beslissingen-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-example-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-voorbeelden-noun-1"/>
@@ -1912,9 +1912,9 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-president-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-day-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-dagen-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-feestdag-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-werkdagen-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-feestdag-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-dagen-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001517">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-rechtstreeks-noun-1"/>
@@ -1932,15 +1932,15 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-verkoopprijs-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-club-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-gemeenschap-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-verenigingen-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-gemeenschap-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-agent-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-makelaars-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-infringement-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-overtredingen-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-schendingen-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-overtredingen-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-embassy-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-ambassade-noun-1"/>
@@ -1961,12 +1961,12 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-kredietinstelling-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-border-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-ramen-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-grens-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-ramen-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-component-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-onderdelen-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-bestanddelen-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-onderdelen-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001516">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-rechtsstaat-noun-1"/>
@@ -1978,8 +1978,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-beeldtelefoon-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-repair-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-herstel-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-reparatie-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-herstel-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001616">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-werkingssfeer-noun-1"/>
@@ -1997,8 +1997,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-vlees-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-intermediary-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-bemiddelaar-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-tussenpersoon-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-bemiddelaar-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-obesity-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-zwaarlijvigheid-noun-1"/>
@@ -2016,8 +2016,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-spelen-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-administration-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-administratie-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-toediening-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-administratie-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001579">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-type-noun-1"/>
@@ -2029,8 +2029,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-verbintenissen-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-man-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-heer-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-man-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-heer-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-association-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-associatie-noun-1"/>
@@ -2039,9 +2039,9 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-wetsontwerp-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-result-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-resultaten-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-uitslagen-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-uitkomsten-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-uitslagen-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-resultaten-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001529">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-reis-noun-1"/>
@@ -2062,8 +2062,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-professoren-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-course-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-procedures-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-loop-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-procedures-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-apple-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-appels-noun-1"/>
@@ -2075,17 +2075,17 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-kanker-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-market-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-markten-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-afname-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-markten-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-interpretation-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-opvatting-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-activity-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-activiteiten-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-werkzaamheid-noun-1"/>
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-werking-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-werkzaamheden-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-werking-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-werkzaamheid-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-activiteiten-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000001253">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-grondstof-noun-1"/>
@@ -2118,8 +2118,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-pesticide-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-member-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-lid-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-geslacht-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-lid-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-concern-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-bezorgdheid-noun-1"/>
@@ -2128,8 +2128,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-rechtsvordering-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-oil-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-vet-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-olie-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-vet-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-magyar-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-hongaars-noun-1"/>
@@ -2159,8 +2159,8 @@
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-rechtsgevolg-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-justice-noun-1">
-    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-rechters-noun-1"/>
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-rechts-noun-1"/>
+    <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-rechters-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-stability-noun-1">
     <j.0:hasLexicalization rdf:resource="http://localhost/dalos/NL/individuals.owl#synset-stabiliteit-noun-1"/>

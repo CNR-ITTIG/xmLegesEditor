@@ -125,50 +125,53 @@ public class KbModelFactory {
 		if(type.equalsIgnoreCase("full")) {
 			readSchema(om, KbConf.METALEVEL_PROP);
 			readSchema(om, KbConf.DOMAIN_ONTO);
-			readLocalDocument(om, lang, KbConf.CONCEPTS);
+			readLocalDocument(om, lang, KbConf.LINKS);
 			readLocalDocument(om, lang, KbConf.IND);
 			readLocalDocument(om, lang, KbConf.INDW);
-			//readLocalDocument(om, lang, indclawFile);		
-			readLocalDocument(om, lang, KbConf.TYPES);
+			readLocalDocument(om, lang, KbConf.LEXICALIZATIONS);
 		}
 		if(type.equalsIgnoreCase("domain")) {
 			readSchema(om, KbConf.DOMAIN_ONTO);
 		}
 		if(type.equalsIgnoreCase("mapping")) {
 			readSchema(om, KbConf.METALEVEL_ONTO);	
-			//readLocalDocument(om, lang, indclawFile);		
 		}
 		if(type.equalsIgnoreCase("concepts")) {
-			readLocalDocument(om, lang, KbConf.CONCEPTS);
+			readSchema(om, KbConf.CONCEPT_SCHEMA);
+			readLocalDocument(om, lang, KbConf.LINKS);
+		}
+		if(type.equalsIgnoreCase("interconcepts")) {
+			readSchema(om, KbConf.CONCEPT_SCHEMA);
+			readLocalDocument(om, lang, KbConf.LINKS);
 		}
 		if(type.equalsIgnoreCase("types")) {
-			readLocalDocument(om, lang, KbConf.TYPES);
+			readSchema(om, KbConf.CONCEPT_SCHEMA);
+			readLocalDocument(om, lang, KbConf.LEXICALIZATIONS);
 		}
 		if(type.equalsIgnoreCase("concept.mapping")) {
-			readLocalDocument(om, lang, KbConf.CONCEPTS);
-			readLocalDocument(om, lang, KbConf.TYPES);
+			readLocalDocument(om, lang, KbConf.LINKS);
+			readLocalDocument(om, lang, KbConf.LEXICALIZATIONS);
 		}
 		if(type.equalsIgnoreCase("individual")) {
 			readSchema(om, KbConf.METALEVEL_ONTO);
 			readSchema(om, KbConf.METALEVEL_PROP);
 			readLocalDocument(om, lang, KbConf.IND);
 			readLocalDocument(om, lang, KbConf.INDW);
-			readLocalDocument(om, lang, KbConf.TYPES);
+			readLocalDocument(om, lang, KbConf.LEXICALIZATIONS);
 		}
 		if(type.equalsIgnoreCase("source")) {
 			readSchema(om, KbConf.SOURCE_SCHEMA);
 			readLocalDocument(om, lang, KbConf.IND);
-			readLocalDocument(om, lang, KbConf.SOURCES);			
+			readLocalDocument(om, lang, KbConf.SOURCES);
 		}
 		if(type.equalsIgnoreCase("seg.lex")) {
 			readSchema(om, KbConf.METALEVEL_ONTO);
 			readSchema(om, KbConf.METALEVEL_PROP);
-			
+			readSchema(om, KbConf.CONCEPT_SCHEMA);
 			readSegment(om, uriToLexSeg, URI);
 		}			
 		if(type.equalsIgnoreCase("seg.source")) {
-			readSchema(om, KbConf.SOURCE_SCHEMA);
-			
+			readSchema(om, KbConf.SOURCE_SCHEMA);			
 			readSegment(om, uriToSourceSeg, URI);
 		}			
 		
@@ -245,6 +248,10 @@ public class KbModelFactory {
 	private static void readSegment(OntModel om, String fileName) {
 		
 		File file = UtilFile.getFileFromTemp((String) fileName);
+		if(file == null) {
+			System.err.println("readSegment() - null file: " + fileName);
+			return;
+		}
 		om.read("file:///" + file.getAbsolutePath());
 	}
 

@@ -1306,8 +1306,8 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/metaconcepts.owl#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000000260">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#producer"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#information_object"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#producer"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/metaconcepts.owl#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-feeling-noun-1">
@@ -2197,8 +2197,8 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/metaconcepts.owl#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000000425">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal_role"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal_procedure"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#legal_role"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/metaconcepts.owl#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-animal-noun-1">
@@ -3897,8 +3897,8 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/metaconcepts.owl#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000000232">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Physical_Object"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#information_object"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Physical_Object"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/metaconcepts.owl#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000000685">
@@ -5099,8 +5099,8 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/metaconcepts.owl#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000000738">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#spatial-region"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Physical_Object"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#spatial-region"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/metaconcepts.owl#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000000099">
@@ -8197,8 +8197,8 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/metaconcepts.owl#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000000737">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#spatial-region"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Physical_Object"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#spatial-region"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/metaconcepts.owl#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-case-noun-1">
@@ -8273,8 +8273,8 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/metaconcepts.owl#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#artconc-0000000736">
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#spatial-region"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#Physical_Object"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/consumer-law.owl#spatial-region"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/metaconcepts.owl#Concept"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/concepts.owl#concept-costo-noun-1">

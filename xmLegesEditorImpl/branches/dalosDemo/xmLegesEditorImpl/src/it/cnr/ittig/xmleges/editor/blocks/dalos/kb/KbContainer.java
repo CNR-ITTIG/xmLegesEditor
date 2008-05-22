@@ -135,7 +135,7 @@ public class KbContainer {
 	}
 	
 	//Using this method means that this container
-	//now holds the global language.
+	//now holds the global language. <--- ??
 	boolean init() {		
 		
 		if(!concreteContainer) {
@@ -149,8 +149,13 @@ public class KbContainer {
 
 		long t1 = System.currentTimeMillis();		
 		initSynsets();
+		
+		//prepare sorted synsets
+		for(Iterator i = synsets.values().iterator(); i.hasNext(); ) {
+			sortedSynsets.add((Synset) i.next());
+		}
 		long t2 = System.currentTimeMillis();
-		System.out.println("...synsets loaded! (" +
+		System.out.println("..." + synsets.size() + " synsets loaded! (" +
 				Long.toString(t2 - t1) + " ms)\n");
 
 		return true;
@@ -246,7 +251,7 @@ public class KbContainer {
 		
 		String indFile = localRepository + KbConf.IND;
 		String indwFile = localRepository + KbConf.INDW;
-		String typesFile = localRepository + KbConf.TYPES;
+		String typesFile = localRepository + KbConf.LEXICALIZATIONS;
 		String sourcesFile = localRepository + KbConf.SOURCES;
 		
 		if(!UtilFile.fileExistInTemp(indFile)) {			
@@ -264,7 +269,7 @@ public class KbContainer {
 		if(!UtilFile.fileExistInTemp(typesFile)) {
 			return false;
 		} else {
-			KbModelFactory.addDocument(KbConf.TYPES, LANGUAGE, typesFile);
+			KbModelFactory.addDocument(KbConf.LEXICALIZATIONS, LANGUAGE, typesFile);
 		}
 		
 		return true;
@@ -284,8 +289,14 @@ public class KbContainer {
 		OntModel mod = KbModelFactory.getModel("types", "", LANGUAGE);
 		System.out.println("mod size: " + mod.size());
 		
+		OntProperty lexProp = mod.getOntProperty(KbConf.LEXICALIZATION_PROP);
+		if(lexProp == null) {
+			System.err.println("addAlignments() error - lexProp is null!");
+			return;
+		}
+		
 		for(StmtIterator i = mod.listStatements(
-				null, RDF.type, (RDFNode) null); i.hasNext(); ) {
+				null, lexProp, (RDFNode) null); i.hasNext(); ) {
 			Statement stm = i.nextStatement();
 			Resource subj = stm.getSubject();
 			Resource obj = (Resource) stm.getObject();
@@ -293,21 +304,32 @@ public class KbContainer {
 			String subjName = subj.getLocalName();
 			String objNs = obj.getNameSpace();			
 			String objName = obj.getLocalName();
-			if(!objNs.equalsIgnoreCase(KbConf.DALOS_CONCEPTS_NS)) {
-				continue;
-			}
-			//Create an empty synset
-			Synset syn = new Synset(LANGUAGE);
-			syn.setURI(subjNs + subjName);
+			
+			String suri = objNs + objName;
+			Synset syn = (Synset) synsets.get(suri);
+			if(syn == null) {
+				//Create an empty synset
+				syn = new Synset(LANGUAGE);
+				syn.setURI(suri);
+				synsets.put(suri, syn);
+				//sortedSynsets.add(syn);
+			} else {
+				System.err.println("Synset syn already here!? uri: " + suri);
+			}			
+			
 			//Retrieve matching concept
-			PivotOntoClass poc = kbm.getPivotClass(objNs + objName);
+			PivotOntoClass poc = kbm.getPivotClass(subjNs + subjName);
+			
 //			if(objName.indexOf("price") > 0) {
 //				System.out.println("_-^-_ addAlignment() poc:" + poc +
-//						" sUri:" + syn.getURI() + " cUri:" + objNs + objName);
+//						" sUri:" + syn.getURI() + " cUri:" + poc.getURI());
 //			}
+			
 			poc.addTerm(syn);
 			syn.setPivotClass(poc);
 		}
+		
+		System.out.println("ENDOF addAlignment() - synsets size: " + synsets.size());
 	}
 
 	SynsetTree getTree() {
@@ -325,7 +347,7 @@ public class KbContainer {
 		nSynClass = om.getOntClass(KbConf.METALEVEL_ONTO_NS + "NounSynset");
 		vSynClass = om.getOntClass(KbConf.METALEVEL_ONTO_NS + "VerbSynset");
 		ajSynClass = om.getOntClass(KbConf.METALEVEL_ONTO_NS + "AdjectiveSynset");
-		avSynClass = om.getOntClass(KbConf.METALEVEL_ONTO_NS + "AdverbSynset");		
+		avSynClass = om.getOntClass(KbConf.METALEVEL_ONTO_NS + "AdverbSynset");
 	}
 	
 	private void initSynsets() {
@@ -356,7 +378,7 @@ public class KbContainer {
 
 		for(Iterator i = avSynClass.listInstances(false); i.hasNext();) {
 			analyzeSynsetResource((OntResource) i.next());
-		}
+		}		
 	}
 	
 	/**
@@ -377,7 +399,7 @@ public class KbContainer {
 	void initSynset(String uri) {
 		
 		OntModel om = KbModelFactory.getModel(
-				"seg.lex", "micro", LANGUAGE, uri);
+				"seg.lex", "", LANGUAGE, uri);
 		
 		initOntResources(om);
 		Resource res = om.getResource(uri);
@@ -390,7 +412,8 @@ public class KbContainer {
 	
 	private void analyzeSynsetResource(OntResource ores) {
 		
-		analyzeSynsetResource(ores, null);
+		String suri = ores.getNameSpace() + ores.getLocalName();
+		analyzeSynsetResource(ores, (Synset) synsets.get(suri));
 	}
 	
 	private void analyzeSynsetResource(OntResource ores, Synset syn) {
@@ -405,7 +428,13 @@ public class KbContainer {
 		if(syn == null) {
 			newSynset = true;
 			syn = new Synset(LANGUAGE);
-			syn.setURI(ores.getNameSpace() + ores.getLocalName());
+			String suri = ores.getNameSpace() + ores.getLocalName();
+			if(synsets.get(suri) != null) {
+				System.err.println("analyzeSynsetResource() - not null value for: " + suri);
+			}
+			syn.setURI(suri);
+			synsets.put(suri, syn);
+			//sortedSynsets.add(syn);
 		}
 				
 		RDFNode glossNode = ores.getPropertyValue(glossProperty);
@@ -420,6 +449,8 @@ public class KbContainer {
 			if(protoNode != null) {
 				String protoForm = ((Literal) protoNode).getString();
 				syn.setLexicalForm(protoForm);					
+			} else {
+				System.err.println("protoNode is null for " + w.getLocalName());
 			}
 			for(Iterator l = w.listPropertyValues(lexical); l.hasNext(); ) {
 				RDFNode lexNode = (RDFNode) l.next();
@@ -428,35 +459,45 @@ public class KbContainer {
 			}
 		}
 		
+//		String key = ores.getNameSpace() + ores.getLocalName();
+//		synsets.put(key, syn);
+		//sortedSynsets.add(syn);
+
 		//Fill pivot classes (only if syn is a new synset)
+		//XXX
 		if(newSynset) {
-			for(Iterator k = ores.listRDFTypes(true); k.hasNext(); ) {
-				Resource res = (Resource) k.next();
-				if(res.getNameSpace().equalsIgnoreCase(KbConf.DALOS_CONCEPTS_NS)) {
-					String conceptURI = res.getNameSpace() + res.getLocalName();
-					PivotOntoClass poc = kbm.getPivotClass(conceptURI);
-					if(poc == null) {
-						System.err.println("ERROR! Pivot Class not found: " + conceptURI);
-						continue;
-					} else {
-						poc.addTerm(syn);
-						syn.setPivotClass(poc);
-					}
-				}
-			}		
+			OntModel om = ores.getOntModel();
+			OntProperty hasLexProp = om.getOntProperty(KbConf.LEXICALIZATION_PROP);
+			if(hasLexProp == null) {
+				return;
+			}
+
+			System.out.println("analyzeSynsetResource() - new synset: " + ores.getLocalName());
+			
+			for(StmtIterator i = om.listStatements(
+					null, hasLexProp, ores); i.hasNext(); ) {
+				Statement stm = i.nextStatement();
+				Resource subj = stm.getSubject();
+				String puri = subj.getNameSpace() + subj.getLocalName();
+				PivotOntoClass poc = kbm.getPivotClass(puri);
+				if(poc == null) {
+					System.err.println("ERROR! Pivot Class not found: " + puri);
+					continue;
+				} else {
+					System.err.println(" ---------- \"UNREACHABLE\" ZONE REACHED !!?!");
+					poc.addTerm(syn);
+					syn.setPivotClass(poc);
+				}				
+			}
 		} else {
 			syn.setConcreteSynset(true);
 		}
-
-		String key = ores.getNameSpace() + ores.getLocalName();
-		synsets.put(key, syn);
-		sortedSynsets.add(syn);
 	}
 	
 	Synset getSynset(String uri) {
 		
 		Synset syn = (Synset) synsets.get(uri);
-		if(syn == null) {
+		if(syn == null) {			
 			initSynset(uri);
 		}
 		
@@ -511,7 +552,8 @@ public class KbContainer {
 					System.out.println("## ERROR ## CONTENT IS " 
 							+ contentNode.getClass() + " : " + contentNode );					
 				} else {
-					source.setContent(((Literal) contentNode).getString());
+					String content = ((Literal) contentNode).getString();
+					source.setContent(content);
 				}
 			} else {
 				System.err.println("Null content for source " + source);

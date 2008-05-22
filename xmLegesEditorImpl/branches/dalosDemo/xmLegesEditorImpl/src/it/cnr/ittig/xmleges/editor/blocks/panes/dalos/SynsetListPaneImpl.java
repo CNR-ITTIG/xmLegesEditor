@@ -123,11 +123,16 @@ implements EventManagerListener, Loggable, Serviceable,
 				synsets = kbManager.getSynsetsList(lang);
 				list.setListData(synsets.toArray());
 			}else{
-				//Synset selSyn = (Synset)list.getSelectedValue();
-				Object selSyn = observableSynset.getSynset();
-				if(selSyn != null && selSyn instanceof Synset){
-					selectSynset(kbManager.getSynset((Synset) selSyn,lang));
-				}
+				
+				//A che serve entrare qui?
+				
+//				//Synset selSyn = (Synset)list.getSelectedValue();
+//				Object selSyn = observableSynset.getSynset();
+//				
+				//FIXME
+//				if(selSyn != null && selSyn instanceof Synset){
+//					selectSynset(kbManager.getSynset((Synset) selSyn,lang));
+//				}
 			}
 		}
 		

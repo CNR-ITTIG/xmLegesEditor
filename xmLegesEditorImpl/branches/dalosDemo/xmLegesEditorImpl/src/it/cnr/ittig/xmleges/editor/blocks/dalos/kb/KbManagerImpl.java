@@ -20,16 +20,19 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeSet;
 
 import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntDocumentManager;
 import com.hp.hpl.jena.ontology.OntModel;
+import com.hp.hpl.jena.ontology.OntProperty;
 import com.hp.hpl.jena.ontology.OntResource;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
+import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 
 /**
@@ -83,7 +86,8 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		loadCommonDocuments();
 		
 		initPivotMapping();
-
+		addInterlingualLinks();
+		
 		loadLanguages();
 		
 		initSemPaths();
@@ -119,11 +123,18 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		System.out.println("ALTERNATIVE ENTRY: " + KbConf.SOURCE_SCHEMA + " --> file://" + file.getAbsolutePath());
 		
 		//Concepts Model
-		String conceptsFile = KbConf.dalosRepository + KbConf.CONCEPTS;		
+		String conceptsFile = KbConf.dalosRepository + KbConf.LINKS;		
 		if(!UtilFile.fileExistInTemp(conceptsFile)) {
 			System.err.println("KbManager - concepts file does not exist!!");
 		} else {
-			KbModelFactory.addDocument(KbConf.CONCEPTS, "", conceptsFile);
+			KbModelFactory.addDocument(KbConf.LINKS, "", conceptsFile);
+		}
+		
+		String interConceptsFile = KbConf.dalosRepository + KbConf.INTERCONCEPTS;		
+		if(!UtilFile.fileExistInTemp(interConceptsFile)) {
+			System.err.println("KbManager - interconcepts file does not exist!!");
+		} else {
+			KbModelFactory.addDocument(KbConf.INTERCONCEPTS, "", interConceptsFile);
 		}
 	}
 
@@ -145,12 +156,63 @@ implements KbManager, Loggable, Serviceable, Initializable {
 	}
 	
 	
-	public void addInterlingualProperties(Synset syn) {
+	public Map getInterlingualProperties(Synset syn, String lang) {
+		//returns a Map<String,Collection>
 		
-		if(syn == null) { return; }
+		if(syn == null) { return null; }
+		
+		Map results = new HashMap();
 
-		KbContainer kbc = getContainer(syn.getLanguage());
-		kbc.addLexicalProperties(syn);
+		PivotOntoClass poc = syn.getPivotClass();
+		if(poc == null) {
+			//No Pivot, no aligment...
+			return results;
+		}
+		
+		Set equivs = new TreeSet();
+		Set hypos = new TreeSet();
+		Set hypers = new TreeSet();
+		Set fuzzys = new TreeSet();
+		Set eqsyns = new TreeSet();
+		Set cohypos = new TreeSet();
+		
+		//add equivalents here...
+		results.put(KbConf.MATCH_EQ, equivs);
+		results.put(KbConf.MATCH_BROADER, hypers);
+		results.put(KbConf.MATCH_NARROW, hypos);
+		results.put(KbConf.MATCH_FUZZY, fuzzys);
+		results.put(KbConf.MATCH_COHYPO, cohypos);
+		results.put(KbConf.MATCH_EQSYN, eqsyns);
+		
+		//Equivs
+		Collection inEquivs = getSynsets(syn, lang);
+		if(inEquivs != null) {
+			for(Iterator i = inEquivs.iterator(); i.hasNext(); ) {
+				Synset item = (Synset) i.next();
+				equivs.add(item);
+			}
+		}
+		
+		//Others
+		addLingualLinks(poc.getHyperConcepts(), hypers, lang);
+		addLingualLinks(poc.getHypoConcepts(), hypos, lang);
+		addLingualLinks(poc.getFuzzyConcepts(), fuzzys, lang);
+		addLingualLinks(poc.getCohypoConcepts(), cohypos, lang);
+		addLingualLinks(poc.getEqsynConcepts(), eqsyns, lang);
+		
+		return results;
+	}
+	
+	private void addLingualLinks(Collection in, Collection out, String lang) {
+		
+		for(Iterator i = in.iterator(); i.hasNext();) {
+			PivotOntoClass pitem = (PivotOntoClass) i.next();
+			Collection syns = getSynsets(pitem, lang);
+			for(Iterator s = syns.iterator(); s.hasNext(); ) {
+				Synset sitem = (Synset) s.next();
+				out.add(sitem);
+			}
+		}
 	}
 	
 	public void addSemanticProperties(Synset syn) {
@@ -192,10 +254,8 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		
 		for(Iterator i = concepts.iterator(); i.hasNext();) {
 			PivotOntoClass poc = (PivotOntoClass) i.next();
-			Synset syn = poc.getTerm(lang);
-			if(syn != null) {
-				terms.add(syn);				
-			}
+			Collection syns = poc.getTerms(lang);
+			terms.addAll(syns);
 		}
 		
 		return terms;
@@ -208,33 +268,43 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		KbContainer kbc = getContainer(lang);
 		return kbc.getSynset(uri);
 	}
-	
-	public Synset getSynset(Synset syn, String lang) {
+			
+	public Collection getSynsets(Synset syn, String lang) {
+		/*
+		 * Ritorna un collection, non un synset, gli equivalent synset possono essere più di uno !! <-----
+		 */
 		
 		System.out.println("%%% getSynset() syn:" + syn + " - lang:" + lang);
-		
-		KbContainer kbc = getContainer(lang);
-
 		PivotOntoClass poc = syn.getPivotClass();
 		if(poc == null) {
 			System.err.println("ERROR getSynset() - poc is null for " + syn);
 			return null;
 		}
 		
-		Synset fsyn = poc.getTerm(lang);
+		return getSynsets(poc, lang);
+	}
+	
+	public Collection getSynsets(PivotOntoClass poc, String lang) {
+		
+		KbContainer kbc = getContainer(lang);
+
+		Collection fsyns = poc.getTerms(lang);
 		//System.out.println("getSynset - poc: " + poc + " - fsyn: " + fsyn);
-		if(fsyn == null) {
+		if(fsyns.size() == 0) {
 			//No alignment!
 			return null;
 		}
 		
-		if(!fsyn.isConcreteSynset()) {
-			//Make it concrete!
-			//System.out.println("Not concrete! Initializing...");
-			kbc.initSynset(fsyn);
+		for(Iterator i = fsyns.iterator(); i.hasNext(); ) {
+			Synset fsyn = (Synset) i.next();
+			if(!fsyn.isConcreteSynset()) {
+				//Make it concrete!
+				//System.out.println("Not concrete! Initializing...");
+				kbc.initSynset(fsyn);
+			}
 		}
 
-		return fsyn;		
+		return fsyns;		
 	}
 	
 	void setKbTree(KbTree kbt) {
@@ -300,21 +370,21 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		System.out.println("Initializing Pivot Classes...");
 		OntModel mod = KbModelFactory.getModel("concepts");
 		
-		OntClass conceptClass = mod.getOntClass(KbConf.conceptClassName);
-		if(conceptClass == null) {
-			System.err.println(
-				"ERROR! initPivotMapping() - conceptClass is null");
-			return;
-		}
-
-		for(Iterator i = conceptClass.listSubClasses(); i.hasNext(); ) {
+		OntClass conceptClass = mod.getOntClass(KbConf.CONCEPT_CLASS);
+		
+		for(Iterator i = conceptClass.listInstances(); i.hasNext(); ) {
 			OntResource ores = (OntResource) i.next();
-			PivotOntoClass poc = new PivotOntoClass();
+			
 			String puri = ores.getNameSpace() + ores.getLocalName();
-			poc.setURI(puri);
-			uriToPivotClass.put(puri, poc);
+			PivotOntoClass poc = (PivotOntoClass) uriToPivotClass.get(puri);
+			if(poc == null) {
+				poc = new PivotOntoClass();
+				poc.setURI(puri);
+				uriToPivotClass.put(puri, poc);
+			}
+			
 			for(StmtIterator k = mod.listStatements(
-					(Resource) ores, RDFS.subClassOf, (RDFNode) null);
+					(Resource) ores, RDF.type, (RDFNode) null);
 					k.hasNext();) {
 				Statement stm = k.nextStatement();
 				Resource obj = (Resource) stm.getObject();
@@ -326,8 +396,7 @@ implements KbManager, Loggable, Serviceable, Initializable {
 				}
 				
 				String turi = objNS + objName;
-				TreeOntoClass toc = (TreeOntoClass) 
-										uriToTreeClass.get(turi); 
+				TreeOntoClass toc = (TreeOntoClass) uriToTreeClass.get(turi); 
 				if(toc == null) {
 					toc = new TreeOntoClass(objName);					
 					toc.setURI(turi);
@@ -341,7 +410,66 @@ implements KbManager, Loggable, Serviceable, Initializable {
 			}
 		}
 	}
-	
+
+	//Add interlingual links
+	private void addInterlingualLinks() {
+		
+		System.out.println("Adding interlingual links...");
+		OntModel mod = KbModelFactory.getModel("interconcepts");
+		
+		OntClass conceptClass = mod.getOntClass(KbConf.CONCEPT_CLASS);
+
+		OntProperty narrowProp = mod.getOntProperty(KbConf.CONCEPTSCHEMA_NS + "narrowMatch");
+		OntProperty broaderProp = mod.getOntProperty(KbConf.CONCEPTSCHEMA_NS + "broaderMatch");
+		OntProperty eqsynProp = mod.getOntProperty(KbConf.CONCEPTSCHEMA_NS + "eqsynMatch");
+		OntProperty fuzzyProp = mod.getOntProperty(KbConf.CONCEPTSCHEMA_NS + "fuzzyMatch");
+		OntProperty cohypoProp = mod.getOntProperty(KbConf.CONCEPTSCHEMA_NS + "cohypoMatch");
+		
+		for(Iterator i = conceptClass.listInstances(); i.hasNext(); ) {
+			OntResource subjRes = (OntResource) i.next();
+			String suri = subjRes.getNameSpace() + subjRes.getLocalName();
+			PivotOntoClass spoc = (PivotOntoClass) uriToPivotClass.get(suri);
+			
+			//hypo
+			for(Iterator k = subjRes.listPropertyValues(narrowProp); k.hasNext(); ) {
+				OntResource objRes = (OntResource) k.next();
+				String ouri = objRes.getNameSpace() + objRes.getLocalName();
+				PivotOntoClass opoc = (PivotOntoClass) uriToPivotClass.get(ouri);
+				spoc.addHyperConcept(opoc);
+				opoc.addHypoConcept(spoc);
+			}
+			//hyper
+			for(Iterator k = subjRes.listPropertyValues(broaderProp); k.hasNext(); ) {
+				OntResource objRes = (OntResource) k.next();
+				String ouri = objRes.getNameSpace() + objRes.getLocalName();
+				PivotOntoClass opoc = (PivotOntoClass) uriToPivotClass.get(ouri);
+				opoc.addHyperConcept(spoc);
+				spoc.addHypoConcept(opoc);
+			}
+			//eqsyn
+			for(Iterator k = subjRes.listPropertyValues(eqsynProp); k.hasNext(); ) {
+				OntResource objRes = (OntResource) k.next();
+				String ouri = objRes.getNameSpace() + objRes.getLocalName();
+				PivotOntoClass opoc = (PivotOntoClass) uriToPivotClass.get(ouri);
+				spoc.addEqsynConcept(opoc);
+			}
+			//fuzzy
+			for(Iterator k = subjRes.listPropertyValues(fuzzyProp); k.hasNext(); ) {
+				OntResource objRes = (OntResource) k.next();
+				String ouri = objRes.getNameSpace() + objRes.getLocalName();
+				PivotOntoClass opoc = (PivotOntoClass) uriToPivotClass.get(ouri);
+				spoc.addFuzzyConcept(opoc);
+			}
+			//cohypo
+			for(Iterator k = subjRes.listPropertyValues(cohypoProp); k.hasNext(); ) {
+				OntResource objRes = (OntResource) k.next();
+				String ouri = objRes.getNameSpace() + objRes.getLocalName();
+				PivotOntoClass opoc = (PivotOntoClass) uriToPivotClass.get(ouri);
+				spoc.addCohypoConcept(opoc);
+			}
+		}
+	}
+
 	private void initSemPaths() {
 		
 		
@@ -383,7 +511,8 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		// COMMONS
 		
 		String[] commonFiles = new String[] {
-				KbConf.CONCEPTS, 
+				KbConf.LINKS, 
+				KbConf.INTERCONCEPTS,
 				KbConf.LOCAL_DOMAIN_ONTO,
 				KbConf.LOCAL_METALEVEL_FULL,
 				KbConf.LOCAL_SOURCE_SCHEMA, 
@@ -406,7 +535,7 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		String[] langFiles = new String[] {
 				KbConf.IND, 
 				KbConf.INDW,
-				KbConf.TYPES,
+				KbConf.LEXICALIZATIONS,
 				KbConf.segmentDirName+".zip"
 	    };
 		
