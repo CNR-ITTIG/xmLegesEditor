@@ -44,7 +44,7 @@ public abstract class SynsetRelPane extends SynsetPane {
 
 	protected void updateObserver(Synset syn) {	
 		super.updateObserver(syn);
-		if(!frame.isSelectedPane(this)){  // aggiorna l'alvero solo se non sto navigando sull'albero stesso; in quel caso lo aggiorn con double click
+		if(!frame.isSelectedPane(this)){  // aggiorna l'albero solo se non sto navigando sull'albero stesso; in quel caso lo aggiorn con double click
 			refreshTree(syn);
 		}
 	}
