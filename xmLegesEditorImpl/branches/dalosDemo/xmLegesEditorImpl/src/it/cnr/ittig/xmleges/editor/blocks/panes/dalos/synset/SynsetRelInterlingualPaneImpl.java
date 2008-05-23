@@ -6,6 +6,7 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.services.manager.Startable;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.frame.PaneFocusGainedEvent;
+import it.cnr.ittig.xmleges.editor.blocks.dalos.kb.KbConf;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.dalos.util.LangChangedEvent;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.synset.SynsetRelInterlingualPane;
@@ -88,23 +89,12 @@ Initializable, Startable, SynsetRelInterlingualPane {
 			return;
 		}
 		
-		Collection keys = relationToSynsets.keySet();
-		
-		for(Iterator i = keys.iterator(); i.hasNext(); ) {
-			String relName = (String) i.next();
-			Collection syns = (Collection) relationToSynsets.get(relName);
-			if(syns.size() > 0) {
-				tree.expandChilds(top);
-				top = new DefaultMutableTreeNode(relName);
-				tree.addNode(top);
-			}
-			for(Iterator s = syns.iterator(); s.hasNext(); ) {
-				Synset item = (Synset) s.next();
-				node = new DefaultMutableTreeNode(item);
-				top.add(node);
-			}
-		}
-		
+		addLingualLinks(relationToSynsets, KbConf.MATCH_EQ, top);
+		addLingualLinks(relationToSynsets, KbConf.MATCH_BROADER, top);
+		addLingualLinks(relationToSynsets, KbConf.MATCH_NARROW, top);
+		addLingualLinks(relationToSynsets, KbConf.MATCH_FUZZY, top);
+		addLingualLinks(relationToSynsets, KbConf.MATCH_COHYPO, top);
+		addLingualLinks(relationToSynsets, KbConf.MATCH_EQSYN, top);
 		tree.expandChilds(top);
 		
 		JScrollBar vbar = scrollPane.getVerticalScrollBar();
@@ -113,6 +103,22 @@ Initializable, Startable, SynsetRelInterlingualPane {
 		hbar.setValue(hbar.getMinimum());
 	}
 	
+	private void addLingualLinks(Map rTs, String relName, DefaultMutableTreeNode top) {
+		
+		Collection syns = (Collection) rTs.get(relName);
+		
+		if(syns.size() > 0) {
+			tree.expandChilds(top);
+			top = new DefaultMutableTreeNode(relName);
+			tree.addNode(top);
+		}
+		for(Iterator s = syns.iterator(); s.hasNext(); ) {
+			Synset item = (Synset) s.next();
+			DefaultMutableTreeNode node = new DefaultMutableTreeNode(item);
+			top.add(node);
+		}
+		tree.expandChilds(top);
+	}
 	
 	protected class InterLangTreeMouseAdapter extends MouseAdapter {
 		
@@ -138,7 +144,4 @@ Initializable, Startable, SynsetRelInterlingualPane {
 			}
 		}
 	}
-	
-	
-	
 }

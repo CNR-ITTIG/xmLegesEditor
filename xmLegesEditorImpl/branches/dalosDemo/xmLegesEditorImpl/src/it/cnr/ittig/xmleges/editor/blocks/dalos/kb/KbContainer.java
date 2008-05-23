@@ -59,7 +59,7 @@ public class KbContainer {
 
 	//Dati
 	private Map synsets;
-	private Set sortedSynsets;
+	private Set sortedSynsets; //SORTED AND LINKED SYNSETS
 
 	private Set langProperties = null;
 	
@@ -152,7 +152,10 @@ public class KbContainer {
 		
 		//prepare sorted synsets
 		for(Iterator i = synsets.values().iterator(); i.hasNext(); ) {
-			sortedSynsets.add((Synset) i.next());
+			Synset item = (Synset) i.next();
+			if(item.isLinked()) {				
+				sortedSynsets.add(item);
+			}
 		}
 		long t2 = System.currentTimeMillis();
 		System.out.println("..." + synsets.size() + " synsets loaded! (" +

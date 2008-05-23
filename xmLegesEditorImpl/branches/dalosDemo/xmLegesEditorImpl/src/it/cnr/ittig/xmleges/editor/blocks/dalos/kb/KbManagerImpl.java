@@ -429,16 +429,16 @@ implements KbManager, Loggable, Serviceable, Initializable {
 				OntResource objRes = (OntResource) k.next();
 				String ouri = objRes.getNameSpace() + objRes.getLocalName();
 				PivotOntoClass opoc = (PivotOntoClass) uriToPivotClass.get(ouri);
-				spoc.addHyperConcept(opoc);
-				opoc.addHypoConcept(spoc);
+				spoc.addHypoConcept(opoc);
+				opoc.addHyperConcept(spoc);
 			}
 			//hyper
 			for(Iterator k = subjRes.listPropertyValues(broaderProp); k.hasNext(); ) {
 				OntResource objRes = (OntResource) k.next();
 				String ouri = objRes.getNameSpace() + objRes.getLocalName();
 				PivotOntoClass opoc = (PivotOntoClass) uriToPivotClass.get(ouri);
-				opoc.addHyperConcept(spoc);
-				spoc.addHypoConcept(opoc);
+				opoc.addHypoConcept(spoc);
+				spoc.addHyperConcept(opoc);
 			}
 			//eqsyn
 			for(Iterator k = subjRes.listPropertyValues(eqsynProp); k.hasNext(); ) {
