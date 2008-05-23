@@ -10,6 +10,8 @@ import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.dalos.util.LangChangedEvent;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.synset.SynsetRelInterlingualPane;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Collection;
 import java.util.EventObject;
 import java.util.Iterator;
@@ -17,6 +19,7 @@ import java.util.Map;
 
 import javax.swing.JScrollBar;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreePath;
 
 public class SynsetRelInterlingualPaneImpl extends SynsetRelPane 
 implements EventManagerListener, Loggable, Serviceable, 
@@ -32,27 +35,40 @@ Initializable, Startable, SynsetRelInterlingualPane {
 		eventManager.addListener(this, LangChangedEvent.class);
 		
 		super.initialize();
+		
+		tree.addMouseListener(new InterLangTreeMouseAdapter());
+		
 	}
 	
 	public void manageEvent(EventObject event) {
 		
-		super.manageEvent(event);
+		
 		// gestione eventi LangChanged
 		if(event instanceof LangChangedEvent){
 			if(!((LangChangedEvent)event).getIsGlobalLang()){
-				frame.setSelectedPane(this);
 				destLang = ((LangChangedEvent) event).getLang();
+				if(!destLang.equals(utilDalos.getGlobalLang())){
+						frame.setSelectedPane(this);
+						
+						// ho rimesso questo perche' altriment nel caso in cui il pannello interlingual sia gia' selezionato non lo fa
+						Object syn = observableSynset.getSynset();
+						if( !(syn instanceof Synset) ) {
+							return;
+						}
+						clearTree();
+						focusGainedEvent((Synset) syn);	
+						
+				}
 			}
 		}
+		super.manageEvent(event);
 	}
 
 	void focusGainedEvent(Synset syn) {
 
 		if(syn == null) {
 			return;
-		}
-		
-		//kbManager.getInterlingualProperties(syn, LANGUAGE);
+		}	
 		showInterlingualRelations(syn);					
 	}
 	
@@ -88,27 +104,6 @@ Initializable, Startable, SynsetRelInterlingualPane {
 				top.add(node);
 			}
 		}
-
-//		for(Iterator i = relations.iterator(); i.hasNext();) {
-//			String thisRel = (String) i.next();
-//			if(thisRel.equalsIgnoreCase("language-property")) {
-//				continue;
-//			}
-//			if( !rel.equals(thisRel) ) {
-//				tree.expandChilds(top);
-//				rel = thisRel;
-//				top = new DefaultMutableTreeNode(rel);
-//				tree.addNode(top);
-//				//System.out.println("++ NODE: " + rel);
-//			}
-//			Collection values = (Collection) syn.lexicalToSynset.get(thisRel);
-//			for(Iterator k = values.iterator(); k.hasNext();) {
-//				Synset item = (Synset) k.next();
-//				node = new DefaultMutableTreeNode(item);
-//				//System.out.println("++++ LEAF: " + item);
-//				top.add(node);				
-//			}
-//		}
 		
 		tree.expandChilds(top);
 		
@@ -117,4 +112,33 @@ Initializable, Startable, SynsetRelInterlingualPane {
 		JScrollBar hbar = scrollPane.getHorizontalScrollBar();
 		hbar.setValue(hbar.getMinimum());
 	}
+	
+	
+	protected class InterLangTreeMouseAdapter extends MouseAdapter {
+		
+		public void mouseClicked(MouseEvent e) {
+			TreePath path = tree.getPathForLocation(e.getX(), e.getY());
+			if (path != null) {
+				DefaultMutableTreeNode n = (DefaultMutableTreeNode) path.getLastPathComponent();
+				try {
+					if(n.getUserObject() instanceof Synset){   	
+						if(e.getClickCount()==2){
+							selectSynset((Synset)n.getUserObject());
+							frame.setSelectedPane("editor.panes.dalos.synsetdetails");
+							//refreshTree((Synset)n.getUserObject());
+						}
+					}
+					else
+						System.err.println("NOT Synset selected on tree");
+				} catch (ClassCastException exc) {
+				}
+				if (e.getButton() == MouseEvent.BUTTON3) {
+					System.err.println("right click on tree");
+				}
+			}
+		}
+	}
+	
+	
+	
 }

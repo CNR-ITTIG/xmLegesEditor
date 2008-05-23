@@ -166,6 +166,14 @@ public interface Frame extends Service {
 	 * @param pane
 	 * @param show
 	 */
+	public void setSelectedPane(String paneName);
+	
+	
+	/**
+	 * 
+	 * @param pane
+	 * @param show
+	 */
 	public void setSelectedPane(Pane pane);
 	
 	/**

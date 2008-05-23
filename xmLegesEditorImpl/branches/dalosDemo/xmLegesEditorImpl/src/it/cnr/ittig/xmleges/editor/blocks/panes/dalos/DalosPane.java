@@ -128,10 +128,17 @@ public abstract class DalosPane implements Pane, Observer {
 			return;			
 		}
 		
+		if( obj != null && obj instanceof String) {
+			updateObserver((String) obj);
+		}
+		
 		logger.error("obj is not a known instance! " + obj.getClass());
 	}
 
 	protected abstract void updateObserver(Synset syn);
+	
+	protected void updateObserver(String node) {
+	}
 	
 	protected void updateObserver(TreeOntoClass toc){		
 	}

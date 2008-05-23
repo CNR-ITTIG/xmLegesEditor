@@ -44,9 +44,9 @@ public abstract class SynsetRelPane extends SynsetPane {
 
 	protected void updateObserver(Synset syn) {	
 		super.updateObserver(syn);
-		if(!frame.isSelectedPane(this)){  // aggiorna l'albero solo se non sto navigando sull'albero stesso; in quel caso lo aggiorn con double click
+		//if(!frame.isSelectedPane(this)){  // aggiorna l'albero solo se non sto navigando sull'albero stesso; in quel caso lo aggiorn con double click
 			refreshTree(syn);
-		}
+		//}
 	}
 	
 	protected void refreshTree(Synset syn){
@@ -77,9 +77,12 @@ public abstract class SynsetRelPane extends SynsetPane {
 				DefaultMutableTreeNode n = (DefaultMutableTreeNode) path.getLastPathComponent();
 				try {
 					if(n.getUserObject() instanceof Synset){   
-						selectSynset((Synset)n.getUserObject());
+						
+						
 						if(e.getClickCount()==2){
-							refreshTree((Synset)n.getUserObject());
+							selectSynset((Synset)n.getUserObject());
+							//frame.setSelectedPane("editor.panes.dalos.synsetdetails");
+							//refreshTree((Synset)n.getUserObject());
 						}
 					}
 					else

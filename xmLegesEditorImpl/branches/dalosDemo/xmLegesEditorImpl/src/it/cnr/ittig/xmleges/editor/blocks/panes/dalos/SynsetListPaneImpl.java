@@ -151,6 +151,14 @@ implements EventManagerListener, Loggable, Serviceable,
 		list.setSelectedValue(syn, true);
 	}
 	
+	protected void updateObserver(String node) {
+		
+		textWords.setText("");
+		searchType.setSelectedItem(KbManager.CONTAINS);
+		searchAndDisplaySynsets();
+			
+	}
+	
 	protected void updateObserver(TreeOntoClass toc) {
 		
 		Collection tocSynsets = kbManager.getSynsets(toc, 

@@ -89,7 +89,6 @@ implements EventManagerListener, Loggable, Serviceable,
 		if(event instanceof LangChangedEvent){
 			if(((LangChangedEvent)event).getIsGlobalLang()) {
 				String lang = ((LangChangedEvent)event).getLang();			
-				// BACCI! un  modo migliore per fare refresh dell'albero
 				showTree(lang);
 				try{
 					super.initialize();
@@ -123,14 +122,15 @@ implements EventManagerListener, Loggable, Serviceable,
 				DefaultMutableTreeNode n = (DefaultMutableTreeNode) path.getLastPathComponent();
 				try {
 					Object selObj = n.getUserObject();
-					if( selObj instanceof Synset){
-						selectSynset(n.getUserObject());
-					} else if( selObj instanceof TreeOntoClass){
-						//TODO Show classified term in the list panel ?
-						selectSynset(n.getUserObject());
-					} else {
-						System.err.println("NOT Synset selected on tree");
-					}
+					selectSynset(n.getUserObject());
+//					if( selObj instanceof Synset){
+//						selectSynset(n.getUserObject());
+//					} else if( selObj instanceof TreeOntoClass){
+//						//TODO Show classified term in the list panel ?
+//						selectSynset(n.getUserObject());
+//					} else {
+//						System.err.println("NOT Synset selected on tree");
+//					}
 				} catch (ClassCastException exc) {
 				}
 				if (e.getButton() == MouseEvent.BUTTON3) {
