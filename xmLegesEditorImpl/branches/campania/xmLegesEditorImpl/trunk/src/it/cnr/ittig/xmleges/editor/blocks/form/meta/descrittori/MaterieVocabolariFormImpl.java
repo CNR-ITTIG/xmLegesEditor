@@ -9,7 +9,6 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.form.Form;
-import it.cnr.ittig.xmleges.core.services.form.FormException;
 import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextField;
 import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextFieldEditor;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
@@ -29,11 +28,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.EventObject;
-import java.util.Properties;
 import java.util.Vector;
 
 import javax.swing.DefaultListModel;
@@ -42,7 +39,6 @@ import javax.swing.JComboBox;
 import javax.swing.JEditorPane;
 import javax.swing.JList;
 
-import org.jdesktop.jdic.init.JdicManager;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -276,16 +272,30 @@ Serviceable, Initializable, ActionListener {
 		sottoFormTeseo.setMainComponent(getClass().getResourceAsStream("TeseoBrowser.jfrm"));
 		materie_teseo_listtextfield.setEditor(new MaterieTeseoListTextFieldEditor(sottoFormTeseo));
 		
-		loadVocabulary();
+		try {
+			loadVocabulary();
+		} catch (Exception e) {}
+		
 		
 	}
 
 	private void loadVocabulary() {
 		
-		String[] vocabulary = new String[]{"vocabolari/regioneUmbria.xml", "vocabolari/CNIPA.xml"};
+		String prefix ="vocabolari";
+		String[] vocabulary = new String[]{"regioneUmbria.xml", "CNIPA.xml"};
+
+		for (int i = 0; i < vocabulary.length; i++)		
+			//Non sovrascrivo i vocabolari già presenti
+			if (!new File(UtilFile.getTempDirName() + File.separatorChar + prefix+File.separator+vocabulary[i]).exists())	
+				UtilFile.copyFileInTempDir(getClass().getResourceAsStream(prefix + "/" + vocabulary[i]), prefix, vocabulary[i]);
+				
+		
+		//TODO: recupero anche altri vocabolari presenti nella temp (vocabolari)
+		//TODO: permettere il salvataggio dei vocabolari modifcati e/o nuovi
+		
 		vocabolari = new Vocabolario[vocabulary.length];
 		for (int i = 0; i < vocabulary.length; i++) { 
-			Document voc = UtilXml.readXML(getClass().getResourceAsStream(vocabulary[i]));
+			Document voc = UtilXml.readXML(UtilFile.getTempDirName() + File.separatorChar + prefix+File.separator+vocabulary[i]);
 			Node radice = (Node) voc.getDocumentElement();
 			vocabolari[i] = new Vocabolario();
 			Vector listaMaterie = new Vector();
@@ -305,9 +315,12 @@ Serviceable, Initializable, ActionListener {
 		NodeList figli = nodo.getChildNodes();
         if (figli.getLength() == 0)
         	listaMaterie.add(materia.substring(1));
-		else
+		else {
+			if (!"".equals(materia)) //voglio rendere disponibile anche le voci contenitore, come materie
+				listaMaterie.add(materia.substring(1)); 
 			for (int i=0; i<figli.getLength(); i++)
 				componiMateria(listaMaterie, figli.item(i), materia+";"+UtilDom.getAttributeValueAsString(figli.item(i), "nome"));
+		}	
 	}	
 		
 	public void actionPerformed(ActionEvent e) {
