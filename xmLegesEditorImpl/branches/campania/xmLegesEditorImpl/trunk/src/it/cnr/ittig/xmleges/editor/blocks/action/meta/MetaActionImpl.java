@@ -275,7 +275,8 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		VigenzaEntity[] vigenze = ciclodivita.getVigenze();
 		ciclodivitaForm.setEventiOnVigenze(id_eventiOnVigenze, vigenze);
 				
-		if(ciclodivitaForm.openForm()){
+		ciclodivitaForm.openForm();
+		if (ciclodivitaForm.getModificaEventi()) {
 			Evento[] newEventi = ciclodivitaForm.getEventi();
 //			Relazione[] relazioniUlteriori = ciclodivitaForm.getRelazioniUlteriori();
 			
@@ -289,12 +290,6 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 			}
 		
 			ciclodivita.setCiclodiVita(newEventi,newRelazioni);
-			
-   		    if (ciclodivitaForm.getVigToUpdate()!=null && ciclodivitaForm.getVigToUpdate().length>0) {
-   		    	VigenzaEntity[] elenco =ciclodivitaForm.getVigToUpdate();
-   		    	for(int i=0; i<elenco.length;i++)
-   		    		vigenza.updateVigenzaOnDoc(elenco[i]);
-   		    }
 		}
 		
 	}
