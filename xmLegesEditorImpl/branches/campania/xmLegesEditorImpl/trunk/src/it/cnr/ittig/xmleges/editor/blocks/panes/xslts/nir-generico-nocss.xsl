@@ -988,12 +988,6 @@
 							    ===================== <xsl:value-of select="@id"/>: il valore accanto a 'VigNota', l'id della partizione
 							-->
 							
-							
-							<!--************
-							<span>
-								<xsl:call-template name="makeNotavigenza" />
-							</span>
-							-->
 							<xsl:variable name="id">
 								<xsl:value-of select="@id" />
 							</xsl:variable>
@@ -1258,39 +1252,6 @@
 				</xsl:otherwise>
 			</xsl:choose>
 	</xsl:template>
-
-	<!-- ======================================================== -->
-	<!--                                                          -->
-	<!--  template nota di vigenza (nel testo)                    --> 
-	<!--                                                          -->
-	<!-- ======================================================== -->
-
-   <xsl:template name="makeNotavigenza">
-   		<xsl:variable name="idnota">
-			<xsl:value-of select="@id" />
-		</xsl:variable>
-		<xsl:variable name="ittignota">
-				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$idnota]/../../*[name()='dsp:norma']/*[name()='ittig:notavigenza']/@id"/>
-		</xsl:variable>
-		
-		<xsl:choose>
-			<xsl:when test="$ittignota">
-				<xsl:choose>
-					<!--  Si potrebbe anche inserire i COMMA che hanno figli -->		
-					<xsl:when test="(local-name()='articolo' or local-name()='capo' or local-name()='titolo' or local-name()='libro' or local-name()='parte' or local-name()='sezione')">
-						<div class="allineadx"><a href="#n{@id}" name="t{@id}"><sup>{<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>}</sup></a></div>
-					</xsl:when>
-					<xsl:otherwise>
-						<a href="#n{@id}" name="t{@id}"><sup>{<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>}</sup></a>
-					</xsl:otherwise>
-				</xsl:choose>									
-			</xsl:when>
-			<xsl:otherwise>
-				<!--  Note in vecchio stile-->		
-				<a href="#n{@id}" name="t{@id}"><sup>{??}</sup></a>
-			</xsl:otherwise>
-		</xsl:choose>												
-   </xsl:template>
 
 	<!-- ======================================================== -->
 	<!--                                                          -->
