@@ -122,8 +122,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 				</xsl:element>	    
 			</xsl:when>
 		</xsl:choose>
-		<br/><xsl:value-of select="@vocabolario"/>
-		<xsl:text>: </xsl:text>
+		<br/>VOCABOLARIO<xsl:text>: </xsl:text><font color="blue"><xsl:value-of select="@vocabolario"/></font>	
+		<br/><xsl:text>Materie selezionate: </xsl:text>
 		<font color="blue">
 			<xsl:apply-templates select="*[name()='materia']" mode="oneroot" />
 		</font>	
@@ -159,8 +159,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 </xsl:template>
 
 <xsl:template match="*[name()='materia']"  mode="oneroot" >
-    <xsl:value-of select="@valore"/>
-    <xsl:text> </xsl:text>
+    <br/><xsl:value-of select="@valore"/>
 </xsl:template>
 
 <xsl:template match="*[name()='pubblicazione']"  mode="oneroot" >
