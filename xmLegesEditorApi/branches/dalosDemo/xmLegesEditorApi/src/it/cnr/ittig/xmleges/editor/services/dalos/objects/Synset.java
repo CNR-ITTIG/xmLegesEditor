@@ -81,6 +81,15 @@ public class Synset implements Comparable {
 		return lexicalForm;
 	}
 	
+	public boolean isLinked() {
+		
+		if(pivotClass == null) {
+			return false;
+		}
+		
+		return true;
+	}
+	
 	public void setPivotClass(PivotOntoClass poc) {
 		
 		pivotClass = poc;
