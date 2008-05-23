@@ -3,6 +3,7 @@ package it.cnr.ittig.xmleges.editor.services.form.disposizioni.passive;
 import org.w3c.dom.Node;
 
 import it.cnr.ittig.services.manager.Service;
+import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 
 /**
@@ -45,12 +46,6 @@ public interface DispPassiveForm extends Service {
 	public int getTipoDisposizione();
 	
 	/**
-	 * Setta la prossima operazione da compiere
-	 * 
-	 */
-	public void setOperazioneProssima();
-
-	/**
 	 * Setta la posizione della disposizione
 	 * 
 	 */
@@ -79,4 +74,10 @@ public interface DispPassiveForm extends Service {
 	 * 
 	 */
 	public VigenzaEntity makeVigenza(Node node, String dsp, String status);
+	
+	/**
+	 * Richiama le funzioni DOM per la scrittura dei meta della disposizione
+	 * 
+	 */
+	public void setMeta();
 }

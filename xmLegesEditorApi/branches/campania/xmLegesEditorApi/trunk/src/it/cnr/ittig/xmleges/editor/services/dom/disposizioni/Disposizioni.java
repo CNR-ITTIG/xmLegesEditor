@@ -24,15 +24,7 @@ import org.w3c.dom.Node;
  * @version 1.0
  */
 public interface Disposizioni extends Service {
-	
-	/**
-	 * Funzione per aggiornare le Urn del documento dopo un evento
-	 * 
-	 * @param evento oroginale e di modifica
-	 * @return </code>True</code> operazione correttamente eseguita
-	 */
-	public boolean setUrn(Evento eventoOriginale, Evento eventoVigore);
-	
+		
 	/**
 	 * Funzione per l'aggiornamento dei metadati di disposizione ATTIVE
 	 * 
@@ -46,7 +38,7 @@ public interface Disposizioni extends Service {
 	 * 
 	 * @return </code>True</code> operazione correttamente eseguita
 	 */
-	public boolean setDOMDisposizioni(String pos, String Norma, String partizione, String Novellando, String Novella, String preNota, String autoNota, String postNota, boolean implicita);
+	public boolean setDOMDisposizioni(String pos, String Norma, String partizione, String Novellando, String Novella, String preNota, String autoNota, String postNota, boolean implicita, Evento eventoOriginale, Evento eventoVigore);
 	
 	/**
 	 * Funzione per l'inserimento di una nuova partizione
@@ -72,16 +64,7 @@ public interface Disposizioni extends Service {
 	 * Funzione per l'inserimento della nota ndr (per la vigenza)
 	*/
 	public void makeNotaVigenza(Node node);
-	
-	/**
-	 * Funzione per l'abilitazione dell'azione di assegnazione della vigenza
-	 * 
-	 * @param node nodo sul cui testo si vuole applicare la vigenza
-	 * @return </code>true</code> se l'azione puo' essere abilitata
-	 */
-	public boolean canSetVigenza(Node node);
-	
-	
+		
 	/**
 	 * Funzione Dom per l'assegnazione di un intervallo di vigenza ad una
 	 * porzione di testo
@@ -104,12 +87,7 @@ public interface Disposizioni extends Service {
 	 * @return
 	 */
 	public VigenzaEntity getVigenza(Node node, int start, int end);
-	/**
-	 * Funzione per la lettura del testo marcato
-	 * @return
-	 */
-	public String getSelectedText();
-	
+		
 	/**
 	 * Funzione per verificare se il documento ha almeno una vigenza
 	 * @return 
@@ -121,13 +99,6 @@ public interface Disposizioni extends Service {
 	 */
 	public void setTipoDocVigenza();
 	
-	/**
-	 * Funzione che aggiorna le vigenze che fanno riferimento 
-	 * agli eventi cancellati dal ciclo di vita
-	 * @param vig vigenza da aggiornare
-	 */
-	public void updateVigenzaOnDoc(VigenzaEntity vig);
-
 	/**
 	 * Undo ripristinando una vecchia vigenza
 	 */
@@ -141,7 +112,7 @@ public interface Disposizioni extends Service {
 	/**
 	 * Elimina vigenza
 	 */
-	public void doErase(String idNovellando, String idNovella, Node disposizione, Node novellando);
+	public Node doErase(String idNovellando, String idNovella, Node disposizione, Node novellando);
 	
 	/**
 	 * Modifica vigenza
