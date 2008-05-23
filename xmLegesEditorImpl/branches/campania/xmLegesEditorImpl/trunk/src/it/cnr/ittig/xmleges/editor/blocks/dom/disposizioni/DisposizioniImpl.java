@@ -6,7 +6,6 @@ import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
-import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
 import it.cnr.ittig.xmleges.core.services.dom.extracttext.ExtractText;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
@@ -14,7 +13,6 @@ import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
-import it.cnr.ittig.xmleges.core.util.xml.UtilXml;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
 import it.cnr.ittig.xmleges.editor.services.dom.partizioni.Partizioni;
@@ -79,6 +77,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 	Partizioni partizioni;
 	
 	SelectionManager selectionManager;
+
 	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -97,7 +96,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 	}
 	
-	public boolean setUrn(Evento eventoOriginale, Evento eventoVigore) {
+	private boolean setUrn(Evento eventoOriginale, Evento eventoVigore) {
 		
 		Document doc = documentManager.getDocumentAsDom();
 		Node activeMeta = nirUtilDom.findActiveMeta(doc,null);
@@ -108,7 +107,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		if (urnNode.length>0) {
 			//controllo la urn originale
 			urnOriginale = UtilDom.getAttributeValueAsString(urnNode[0], "valore");
-			//Se non ï¿½ ancora settato inizio vigore lo imposto all'evento originale
+			//Se non è ancora settato inizio vigore lo imposto all'evento originale
 			if (UtilDom.getAttributeValueAsString(urnNode[0], "iniziovigore")==null)
 				UtilDom.setAttributeValue(urnNode[0], "iniziovigore", eventoOriginale.getId());
 		}
@@ -126,7 +125,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 			if (urnVersione.equals(UtilDom.getAttributeValueAsString(urnNode[i], "valore")))
 				inserisci = false;
 		
-		if (inserisci) {		
+		if (inserisci) {
 			//imposto all'ultima urn il finevigore
 			UtilDom.setAttributeValue(urnNode[urnNode.length -1], "finevigore", eventoVigore.getId());
 			//inserisco una nuova urn con iniziovigore
@@ -135,15 +134,12 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 			UtilDom.setAttributeValue(nuovaUrn, "iniziovigore", eventoVigore.getId());
 			descrittoriNode.appendChild(nuovaUrn);
 		}
-		
+				
 		return true;
 	}
-	public boolean setDOMDisposizioni(String pos, String norma, String partizione, String novellando, String novella, String preNota, String autoNota, String postNota, boolean implicita) {
+	
+	public boolean setDOMDisposizioni(String pos, String norma, String partizione, String novellando, String novella, String preNota, String autoNota, String postNota, boolean implicita, Evento eventoOriginale, Evento eventoVigore) {
 
-		try {
-			EditTransaction t = documentManager.beginEdit();
-					
-		
 		Document doc = documentManager.getDocumentAsDom();
 
 		Node activeMeta = nirUtilDom.findActiveMeta(doc,null);
@@ -189,12 +185,10 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 				setNorma(operazioneNode, pos, norma, partizione, preNota, autoNota, postNota);
 				setNovella(operazioneNode, novella);
 			}
-		
+		//aggiorno le urn
+		setUrn(eventoOriginale, eventoVigore);
 		//marco il documento come multivigente
 		setTipoDocVigenza();
-		
-		documentManager.commitEdit(t);
-		} catch (DocumentManagerException ex) {}
 		
 		return true;
 	}
@@ -212,16 +206,16 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		 *  </dsp:norma>
 		 *  
 		 */
-		
+			
 		Node posNode = UtilDom.findDirectChild(n, "dsp:pos");
-		if (posNode == null) {// Non ï¿½ stato inserito dal template minimale
+		if (posNode == null) {// Non è stato inserito dal template minimale
 			posNode = utilRulesManager.getNodeTemplate("dsp:pos");
 			n.appendChild(posNode);
 		}	
 		UtilDom.setAttributeValue(posNode, "xlink:href", pos);
 		
 		Node normaNode = UtilDom.findDirectChild(n, "dsp:norma");
-		if (normaNode == null) {// Non ï¿½ stato inserito dal template minimale
+		if (normaNode == null) {// Non è stato inserito dal template minimale
 			normaNode = utilRulesManager.getNodeTemplate("dsp:norma");
 			n.appendChild(normaNode);
 		}	
@@ -242,6 +236,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		UtilDom.setIdAttribute(notaittigNode, "itt" + documentManager.getDocumentAsDom().getElementsByTagName("ittig:notavigenza").getLength());
 		
 		UtilDom.setAttributeValue(notaittigNode, "auto", autoNota);
+		
 	}
 		
 	private void setNovellando(Node n, String novellando) {
@@ -253,15 +248,16 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		 *  </dsp:norma>
 		 *  
 		 */
-
+			
 		Node novellandoNode = UtilDom.findDirectChild(n, "dsp:novellando");
-		if (novellandoNode == null) {// Non ï¿½ stato inserito dal template minimale
+		if (novellandoNode == null) {// Non è stato inserito dal template minimale
 			novellandoNode = utilRulesManager.getNodeTemplate("dsp:novellando");
 			n.appendChild(novellandoNode);
 		}	
 		Node posNode = utilRulesManager.getNodeTemplate("dsp:pos");
 		UtilDom.setAttributeValue(posNode, "xlink:href", novellando);
 		novellandoNode.appendChild(posNode);
+
 	}
 	
 	private void setNovella(Node n, String novella) {
@@ -273,18 +269,20 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		 *  </dsp:norma>
 		 *  
 		 */
-		
+			
 		Node novellaNode = UtilDom.findDirectChild(n, "dsp:novella");
-		if (novellaNode == null) {// Non ï¿½ stato inserito dal template minimale
+		if (novellaNode == null) {// Non è stato inserito dal template minimale
 			novellaNode = utilRulesManager.getNodeTemplate("dsp:novella");
 			n.appendChild(novellaNode);
 		}	
 		Node posNode = utilRulesManager.getNodeTemplate("dsp:pos");
 		UtilDom.setAttributeValue(posNode, "xlink:href", novella);
 		novellaNode.appendChild(posNode);
+		
 	}
 	
-	public void makeNotaVigenza(Node node) {
+	public void makeNotaVigenza(Node node) {			//non usata... buttare
+			
 		int numeroNota = 1+documentManager.getDocumentAsDom().getElementsByTagName("ittig:notavigenza").getLength();
 		Element ndr = documentManager.getDocumentAsDom().createElement("ndr");
 		UtilDom.setAttributeValue(ndr, "num", "itt"+numeroNota);
@@ -298,19 +296,17 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 	
 	
 	public Node makePartition(Node container, boolean prima, VigenzaEntity vigenza) {
+			
 		Node n;		
-		if (nirUtilDom.isContainer(container))
-			n =partizioni.getPartizioneTemplate(container.getNodeName());//.nuovaPartizione(container, container.getNodeName());
+		if (nirUtilDom.isContainer(container)) 
+			n = partizioni.getPartizioneTemplate(container.getNodeName());			
 		else
 			n= utilRulesManager.getNodeTemplate(container.getNodeName());	
 		try {
 			if (prima)
 				n = container.getParentNode().insertBefore(n, container);
 			else
-				if (container.getParentNode().getLastChild()==container)
-					n = container.getParentNode().appendChild(n);
-				else						
-					n = container.getParentNode().insertBefore(n, container.getNextSibling());
+				n = container.getParentNode().insertBefore(n, container.getNextSibling());
 			n = setVigenza(n, "", -1, -1, vigenza);
 		}
 		catch (DOMException e) {
@@ -320,8 +316,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		
 		//questo inseriva una ndr come notaDIvigenza
 		//makeNotaVigenza(n);
-		
-		
+
 		return n;
 	}
 	
@@ -344,33 +339,22 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		
 		//questo inseriva una ndr come notaDIvigenza
 		//makeNotaVigenza(span);
-		
-		
+
 		return span;
+
 	}
 
 	public Node setVigenza(Node node, String selectedText, int start, int end, VigenzaEntity vigenza) {
 		Node ret = null;
-		try {
-			EditTransaction tr = documentManager.beginEdit();
-			if ((ret=setDOMVigenza(node, selectedText, start, end, vigenza))!=null) {
+		
+		if ((ret=setDOMVigenza(node, selectedText, start, end, vigenza))!=null)
 				rinumerazione.aggiorna(documentManager.getDocumentAsDom());
-				documentManager.commitEdit(tr);
-				
-				
-				//makeNotaVigenza(ret);
-				
-				
-			} else
-				documentManager.rollbackEdit(tr);
-		} catch (DocumentManagerException ex) {
-			logger.error(ex.toString() + " DocumentManagerException in SetVigenza");
-			return null;
-		}
+		
 		return ret;
 	}
 	
 	public Node setDOMVigenza(Node node, String selectedText, int start, int end, VigenzaEntity vigenza) {
+		
 		
 		selectedNode=node;
 		
@@ -397,7 +381,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 				selectedText=node.getNodeValue();
 			}
 			else{        // racchiude il testo in uno span e lo riestrae ????
-            // il testo selezionato ï¿½ una sottoparte del nodo di testo (va creato lo span)				
+            // il testo selezionato è una sottoparte del nodo di testo (va creato lo span)				
 				
 				//qui crea uno span dal testo selezionato 
 				span = (Element) utilRulesManager.encloseTextInTag(node, start, end,"h:span","h");
@@ -439,10 +423,11 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 				}
 				catch(DtdRulesManagerException ex){}
 			}	
+
 		    return span;
 		
 		}else{   
-			//non ï¿½ un nodo di testo
+			//non è un nodo di testo
 		    NamedNodeMap nnm = node.getAttributes();
 		    // Assegnazione attributi di vigenza al nodo
 			if(vigenza.getEInizioVigore()!=null)
@@ -468,49 +453,48 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 				if(nnm.getNamedItem("status")!=null)
 					nnm.removeNamedItem("status");
 			}
+
 			return node;		
 		}
+		
 	}
 
 	
 	public void doUndo(String id, boolean cancellaTesto) {
+			
 		Document doc = documentManager.getDocumentAsDom();
 		Element undo =null;
 		if (id!=null) 
 			undo = doc.getElementById(id);
 		if (undo==null) {
-			logger.error("fallito undo perchï¿½ non trovo id: " + id);
+			logger.error("fallito undo perchè non trovo id: " + id);
 		}
 		else {
-			EditTransaction tr;
 			Node selezione = undo.getParentNode();
-			try {
-				tr = documentManager.beginEdit();
-				
+			try {				
 				if (!cancellaTesto && undo.getFirstChild().getNodeValue()!=null)
 					extractText.extractTextDOM(undo.getFirstChild(),0,undo.getFirstChild().getNodeValue().length());
 				selezione.removeChild(undo);
 				UtilDom.mergeTextNodes(selezione);		
-				documentManager.commitEdit(tr);
 				selectionManager.setSelectedText(this, selezione, 0, 0);				
-			} catch (DocumentManagerException e) {
+			} catch (Exception e) {
 				logger.error("fallito undo su id: " + id);
 			}	
 		}
+
 	}
 
 	public void doUndo(String id, String iniziovigore, String finevigore, String status) {
+			
 		Document doc = documentManager.getDocumentAsDom();
 		Element undo =null;
 		if (id!=null) 
 			undo = doc.getElementById(id);
 		if (undo==null) {
-			logger.error("fallito undo perchï¿½ non trovo id: " + id);
+			logger.error("fallito undo perchè non trovo id: " + id);
 		}
 		else {
-			EditTransaction tr;
 			try {
-				tr = documentManager.beginEdit();
 				//ripristino solo gli attributi pre-esistenti
 				if(iniziovigore!=null && !iniziovigore.equals(""))	
 					undo.setAttribute("iniziovigore", iniziovigore);
@@ -524,9 +508,8 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 					undo.setAttribute("status", status);
 				else
 					undo.removeAttribute("status");
-				documentManager.commitEdit(tr);
 				selectionManager.setSelectedText(this, undo, 0, 0);
-			} catch (DocumentManagerException e) {
+			} catch (Exception e) {
 				logger.error("fallito undo su id: " + id);
 			}	
 		}
@@ -534,7 +517,10 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 	
 	public void doChange(String norma, String pos, Node disposizione, String autonota, boolean implicita, Node novellando, String status, String idEvento, String idNovella) {		
 		
-		
+		EditTransaction t = null;
+		try {
+			t = documentManager.beginEdit();
+			
 		Document doc = documentManager.getDocumentAsDom();
 
 
@@ -574,10 +560,19 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		if (UtilDom.getAttributeValueAsString(novellando, "status")!=null)
 			if (!UtilDom.getAttributeValueAsString(novellando, "status").equals(status))
 				UtilDom.setAttributeValue(novellando, "status", status);		
+		
+		documentManager.commitEdit(t);
+		} catch (Exception ex) {
+			documentManager.rollbackEdit(t);
+		}
 	}
 	
-	public void doErase(String idNovellando, String idNovella, Node disposizione, Node novellando) {
-
+	public Node doErase(String idNovellando, String idNovella, Node disposizione, Node novellando) {
+			
+		EditTransaction t = null;
+		try {
+			t = documentManager.beginEdit();
+			
 		if (disposizione.getNodeName().equals("dsp:abrogazione"))
 			if (!"".equals(idNovellando)) {
 				String iniziovigore = UtilDom.getAttributeValueAsString(novellando, "iniziovigore");
@@ -593,8 +588,9 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 			}	
 		
 		if (disposizione.getNodeName().equals("dsp:integrazione"))	
-			if (!"".equals(idNovella))
+			if (!"".equals(idNovella)) 
 				doUndo(idNovella, true);
+	
 		
 		if (disposizione.getNodeName().equals("dsp:sostituzione")) {	
 			if (!"".equals(idNovellando)) {
@@ -608,12 +604,10 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 					}	
 				else 
 					doUndo(idNovellando, ("t1".equals(iniziovigore) ? null : iniziovigore), null, null);
+				
 			}
-			if (!"".equals(idNovella))								//da fare. OK credo?????????????
+			if (!"".equals(idNovella))
 				doUndo(idNovella, true);	
-			Node ndr = UtilDom.findRecursiveChild(novellando,"ndr");
-			if (ndr!=null)
-				ndr.getParentNode().removeChild(ndr);
 		}
 		
 		int numeroNotaEliminata = Integer.parseInt(UtilDom.getAttributeValueAsString(UtilDom.findRecursiveChild(disposizione, "ittig:notavigenza"), "id").substring(3))-1;
@@ -625,27 +619,16 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 			if (numero>numeroNotaEliminata)
 				UtilDom.setAttributeValue(noteMeta.item(i), "id", "itt"+numero);
 		}
-	}
-	
-	
-	
-	//	non uso nulla da qui in poi (controllare)
-	
-	public boolean canSetVigenza(Node node) {
-		if (node != null && node.getParentNode() != null) {
-			try {
-				return (node.getNodeName()!=null && 
-						(dtdRulesManager.queryIsValidAttribute(node.getNodeName(), "iniziovigore")
-								|| UtilDom.isTextNode(node)) 
-						);
-			} catch (DtdRulesManagerException e) {
-				return UtilDom.isTextNode(node);
-			}
+		
+		documentManager.commitEdit(t);
+		} catch (Exception ex) {
+			documentManager.rollbackEdit(t);
 		}
-		return false;
+		
+		return novellando;
 	}
 	
-public VigenzaEntity getVigenza(Node node, int start, int end) {
+	public VigenzaEntity getVigenza(Node node, int start, int end) {
 
 	Document doc = documentManager.getDocumentAsDom();
 	
@@ -666,7 +649,7 @@ public VigenzaEntity getVigenza(Node node, int start, int end) {
 	selectedText="";
 	
 	if(!UtilDom.isTextNode(node)){
-		//non c'ï¿½ selezione di testo sono su nodo generico
+		//non c'è selezione di testo sono su nodo generico
 		if(node.getNodeValue()==null){
 			if(UtilDom.getTextNode(node)==null || UtilDom.getTextNode(node).trim().equals(""))
 				//	caso di selzione solo su nodo generici (articolato, formulainiziale, formulafinale ecc..)
@@ -687,7 +670,7 @@ public VigenzaEntity getVigenza(Node node, int start, int end) {
 	   // Recupero contenuto Nodo
 		selectedText=UtilDom.getTextNode(parentNode);
 
-		//se il testo selezionato non coincide con quello dello span di cui ï¿½ figlio
+		//se il testo selezionato non coincide con quello dello span di cui è figlio
 		//si crea una nuova vigenza		
 		if(start!=end && selectedText.substring(start,end).length()<selectedText.length()){
 				selectedText=selectedText.substring(start,end);
@@ -770,10 +753,6 @@ public VigenzaEntity getVigenza(Node node, int start, int end) {
 	
 	return new VigenzaEntity(node, e_iniziovig,e_finevig, status!=null?status.getNodeValue():null,selectedText);
 	
-}//metodo
-
-	public String getSelectedText() {
-		return selectedText;
 	}
 
 	public boolean isVigente() {
@@ -804,58 +783,6 @@ public VigenzaEntity getVigenza(Node node, int start, int end) {
 		}
 	}
 	
-	public void updateVigenzaOnDoc(VigenzaEntity vig){
-		
-		Node node=vig.getOnNode();
-		if(node==null)
-			return;
-			try{
-				NamedNodeMap nnm = node.getAttributes();
-				if(nnm!=null){
-					EditTransaction tr = documentManager.beginEdit();
-					
-					//se esisteva giï¿½ l'evento inizio sul dom si aggiorna al nuovo o si elimina se il nuovo ï¿½ null
-					if(nnm.getNamedItem("iniziovigore")!=null){
-						if(vig.getEInizioVigore()!=null){
-//							UtilDom.setAttributeValue(node, "iniziovigore", vig.getEInizioVigore().getId());
-						}
-
-						else
-							nnm.removeNamedItem("iniziovigore");	
-
-					}
-	//				se esisteva giï¿½ l'evento fine sul dom si aggiorna al nuovo o si elimina se il nuovo ï¿½ null	
-					if(nnm.getNamedItem("finevigore")!=null){
-						if(vig.getEFineVigore()!=null){
-//							UtilDom.setAttributeValue(node, "finevigore", vig.getEFineVigore().getId());
-						}
-
-						else
-							nnm.removeNamedItem("finevigore");
-
-					}
-					if(nnm.getNamedItem("iniziovigore")==null && nnm.getNamedItem("finevigore")==null){
-						if(nnm.getNamedItem("status")!=null)
-							nnm.removeNamedItem("status");
-						if(node.getNodeName().equals("h:span")){
-//							appiattisce lo span
-							Node padre=node.getParentNode();				
-							extractText.extractTextDOM(node.getFirstChild(),0,UtilDom.getText(node.getFirstChild()).length());
-							padre.removeChild(node);
-							UtilDom.mergeTextNodes(padre);
-						}
-				
-					}
-					documentManager.commitEdit(tr);	
-				}
-				
-			}catch (DocumentManagerException ex) {
-				logger.error(ex.getMessage(), ex);
-				return;
-			}
-
-		
-	}
 	
 	public boolean setDOMDispAttive(String pos, String norma, String partizione, String novellando, String novella, String autoNota, boolean implicita) {
 		Document doc = documentManager.getDocumentAsDom();

@@ -7,6 +7,7 @@ import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.form.Form;
+import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.util.date.UtilDate;
@@ -94,6 +95,7 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 	Vigenza vigenza;
 	String errorMessage = "";
 	
+	SelectionManager selectionManager;
 	DocumentManager documentManager;
 	
 	String partizione="";
@@ -140,6 +142,7 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 		partizioniForm = (PartizioniForm) serviceManager.lookup(PartizioniForm.class);
 		ciclodivitaForm = (CiclodiVitaForm) serviceManager.lookup(CiclodiVitaForm.class);
 		domDisposizioni  = (Disposizioni) serviceManager.lookup(Disposizioni.class);
+		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
@@ -177,23 +180,28 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 			Evento[] eventiOnDom = ciclodivita.getEventi();
 			ciclodivitaForm.setEventi(eventiOnDom);
 			
-			if (ciclodivitaForm.openForm()) {
-				eventoselezionato = ciclodivitaForm.getEventoSelezionato();
-				if (eventoselezionato != -1) {	
+			boolean formIsOk = ciclodivitaForm.openForm();
+			eventoselezionato = ciclodivitaForm.getEventoSelezionato();
+			if (eventoselezionato != -1 && formIsOk) {
+				
+					
 					eventoriginale = eventiOnDom[0];
 					eventovigore=ciclodivitaForm.getEventi()[eventoselezionato];
 					if (eventovigore.getFonte().getTagTipoRelazione().equalsIgnoreCase("passiva")) {
 						evento.setText(eventovigore.getFonte().getLink());
 						data.setText(UtilDate.normToString(eventovigore.getData()));
 						idEvento = eventovigore.getId();
+						modifica.setEnabled(true);
 					}	
 					else {
 						evento.setText(eventovigore.getFonte().getLink());
 						utilmsg.msgInfo("Dovresti selezionare un evento passivo");
 						evento.setText("");
 						data.setText("");
+						modifica.setEnabled(false);
 					}	
-				}	
+			}
+			if (ciclodivitaForm.getModificaEventi()) {	
 				Evento[] newEventi = ciclodivitaForm.getEventi();
 				Relazione[] newRelazioni = null;
 				if(newEventi!=null){
@@ -203,22 +211,17 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 					}
 				}
 				ciclodivita.setCiclodiVita(newEventi,newRelazioni);
-	   		    if (ciclodivitaForm.getVigToUpdate()!=null && ciclodivitaForm.getVigToUpdate().length>0) {
-	   		    	VigenzaEntity[] elenco =ciclodivitaForm.getVigToUpdate();
-	   		    	for(int i=0; i<elenco.length;i++)
-	   		    		vigenza.updateVigenzaOnDoc(elenco[i]);
-	   		    }
 			}
 		}
 		if (e.getSource() == sceltadove) {
 			partizioniForm.openForm();
-			if (partizioniForm.getPartizioneEstesa().length() > 0) {
-				partizione = partizioniForm.getPartizioneEstesa();
-				dove.setText(makeSub(partizione));
-			}	
+			partizione = partizioniForm.getPartizioneEstesa();
+			dove.setText(makeSub(partizione));	
 		}
 		if (e.getSource() == elimina) {
-			domDisposizioni.doErase(idNovellando,idNovella,disposizione,novellando);
+			Node corrente = domDisposizioni.doErase(idNovellando,idNovella,disposizione,novellando);
+			if (corrente!=null)
+				selectionManager.setActiveNode(this, corrente);
 			form.close();
 		}	
 		if (e.getSource() == modifica)

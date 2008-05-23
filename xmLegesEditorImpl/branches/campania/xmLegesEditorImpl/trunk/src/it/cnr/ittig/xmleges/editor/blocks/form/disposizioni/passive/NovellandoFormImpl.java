@@ -8,6 +8,7 @@ import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
+import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
@@ -20,6 +21,7 @@ import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.disposizioni.Disposizioni;
+import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 import it.cnr.ittig.xmleges.editor.services.form.disposizioni.passive.NovellandoForm;
 import it.cnr.ittig.xmleges.editor.services.form.disposizioni.passive.DispPassiveForm;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
@@ -37,6 +39,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 /**
@@ -180,88 +183,77 @@ public class NovellandoFormImpl implements NovellandoForm, EventManagerListener,
 
 	private boolean canSelec(Node node) {
 		
-		//TODO 	teoricamnete credo sia giusto. Non fare selezionare testo che ha già una fine vigenza;
-		//		magari ripristinrlo dopo averlo testato un pò.
-//		if (domDisposizioni.getVigenza(node,-1,-1)==null)
-//			return true;
-//		else
-//			if (domDisposizioni.getVigenza(activeNode,-1,-1).getEFineVigore()==null)
-//				return true;
-//			else
-//				return false;
-			
-		return true;
+		NamedNodeMap attList = node.getAttributes();
+		if (attList == null)
+			return true;
+		return (attList.getNamedItem("finevigore")==null);
+		
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		
 		if (e.getSource() == avanti) {
-			Node n;
-			if (sceltopartizione.isSelected()) {	//partizione
-				String iniziovigore = UtilDom.getAttributeValueAsString(activeNode, "iniziovigore");
-				String finevigore = UtilDom.getAttributeValueAsString(activeNode, "finevigore");
-				String statusvigore = UtilDom.getAttributeValueAsString(activeNode, "status");
-				n = domDisposizioni.setVigenza(activeNode, activeNode.getNodeValue(), start, end, disposizioni.makeVigenza(activeNode,"novellando",(String) vigenzaStatus.getSelectedItem()));
+			EditTransaction t = null;
+			try {
+				t = documentManager.beginEdit();
+	
+				Node n;
+				if (sceltopartizione.isSelected()) {	//partizione
+					String iniziovigore = UtilDom.getAttributeValueAsString(activeNode, "iniziovigore");
+					String finevigore = UtilDom.getAttributeValueAsString(activeNode, "finevigore");
+					String statusvigore = UtilDom.getAttributeValueAsString(activeNode, "status");
+
+					n = domDisposizioni.setVigenza(activeNode, activeNode.getNodeValue(), start, end, disposizioni.makeVigenza(activeNode,"novellando",(String) vigenzaStatus.getSelectedItem()));
 				
-				
-				//questo inseriva una ndr come notaDIvigenza
-				//domDisposizioni.makeNotaVigenza(n);
-				
-				
-				
-				idSelezionato = UtilDom.getAttributeValueAsString(n, "id");
-				if (idSelezionato==null) {
-					String prefisso = n.getLocalName();
-					int occorrenze = documentManager.getDocumentAsDom().getElementsByTagName(prefisso).getLength();
-					
-					//NO è ok per intero
-//					if (prefisso.length()>3)
-//						prefisso = prefisso.substring(0,3);
-					UtilDom.setIdAttribute(n, prefisso + occorrenze);
 					idSelezionato = UtilDom.getAttributeValueAsString(n, "id");
-				}
+					if (idSelezionato==null) {
+						String prefisso = n.getLocalName();
+						int occorrenze = documentManager.getDocumentAsDom().getElementsByTagName(prefisso).getLength();
+					
+						//NO è ok per intero
+//						if (prefisso.length()>3)
+//							prefisso = prefisso.substring(0,3);
+
+						UtilDom.setIdAttribute(n, prefisso + occorrenze);
+						idSelezionato = UtilDom.getAttributeValueAsString(n, "id");
+					}
 				
-				disposizioni.setNovellando(idSelezionato, iniziovigore, finevigore, statusvigore, false);
-				disposizioni.setPosdisposizione(n);
+					disposizioni.setNovellando(idSelezionato, iniziovigore, finevigore, statusvigore, false);
+					disposizioni.setPosdisposizione(n);
 				
-				if (disposizioni.getTipoDisposizione()==disposizioni.SOSTITUZIONE) {
-					n = domDisposizioni.makePartition(activeNode, false, disposizioni.makeVigenza(activeNode,"novella",(String) vigenzaStatus.getSelectedItem()));				
+					if (disposizioni.getTipoDisposizione()==disposizioni.SOSTITUZIONE) {
+						n = domDisposizioni.makePartition(activeNode, false, disposizioni.makeVigenza(activeNode,"novella",(String) vigenzaStatus.getSelectedItem()));										
+						if (n!=null) {
+							String id = UtilDom.getAttributeValueAsString(n, "id");
+							disposizioni.setNovella(id);
+						}	
+					}
 					selectionManager.setActiveNode(this, n);
-					if (n!=null) {
-						String id = UtilDom.getAttributeValueAsString(n, "id");
-//						if (id==null)
-//							id = getIDNotArticoloByPosition(n);
-						disposizioni.setNovella(id);
-					}	
 				}
-			}
-			else  {//creo un nuovo span
-				n = domDisposizioni.setVigenza(activeNode, "", start, end, disposizioni.makeVigenza(activeNode,"novellando",(String) vigenzaStatus.getSelectedItem()));
-				
-				
-				//questo inseriva una ndr come notaDIvigenza
-				//domDisposizioni.makeNotaVigenza(n);
-				
-				
-				idSelezionato = UtilDom.getAttributeValueAsString(n, "id");
-				disposizioni.setNovellando(idSelezionato, "", "", "", true);
-				disposizioni.setPosdisposizione(n);
+				else  {//creo un nuovo span
+					n = domDisposizioni.setVigenza(activeNode, "", start, end, disposizioni.makeVigenza(activeNode,"novellando",(String) vigenzaStatus.getSelectedItem()));
+								
+					idSelezionato = UtilDom.getAttributeValueAsString(n, "id");
+					disposizioni.setNovellando(idSelezionato, "", "", "", true);
+					disposizioni.setPosdisposizione(n);
 									
-				if (disposizioni.getTipoDisposizione()==disposizioni.SOSTITUZIONE) {
-					n = domDisposizioni.makeSpan(n, -1, disposizioni.makeVigenza(n,"novella",(String) vigenzaStatus.getSelectedItem()),testoaggiunto.getText());
-					selectionManager.setActiveNode(this, n);	
-					if (n!=null) {
-						String id = UtilDom.getAttributeValueAsString(n, "id");
-//						if (id==null)
-//							id = getIDNotArticoloByPosition(n);
-						disposizioni.setNovella(id);
-					}	
-				}					
-			}	
-			disposizioni.setOperazioneProssima();
-			disposizioni.setStatus((String) vigenzaStatus.getSelectedItem());
+					if (disposizioni.getTipoDisposizione()==disposizioni.SOSTITUZIONE) {
+						n = domDisposizioni.makeSpan(n, -1, disposizioni.makeVigenza(n,"novella",(String) vigenzaStatus.getSelectedItem()),testoaggiunto.getText());
+
+						if (n!=null) {
+							String id = UtilDom.getAttributeValueAsString(n, "id");
+							disposizioni.setNovella(id);
+						}	
+					}
+					selectionManager.setActiveNode(this, n);
+				}	
+				disposizioni.setStatus((String) vigenzaStatus.getSelectedItem());
 			
-			form.close();			
+				disposizioni.setMeta();
+				documentManager.commitEdit(t);
+				form.close();	
+			} catch (Exception ex) {
+				documentManager.rollbackEdit(t);
+			}
 		}
 		if (e.getSource() == indietro) {
 			form.close();
@@ -330,5 +322,15 @@ public class NovellandoFormImpl implements NovellandoForm, EventManagerListener,
 		else 
 			testoaggiunto.setVisible(true);
 		form.showDialog(listener);	
+		activeNode = selectionManager.getActiveNode();
+		if (activeNode!=null) {
+			start = selectionManager.getTextSelectionStart();
+			end = selectionManager.getTextSelectionEnd();
+		}
+		else {
+			start=-1;
+			end=-1;
+		}
+		updateContent(activeNode, start, end);
 	}
 }

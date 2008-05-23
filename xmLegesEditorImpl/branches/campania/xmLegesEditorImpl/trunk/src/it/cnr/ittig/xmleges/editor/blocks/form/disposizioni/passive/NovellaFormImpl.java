@@ -7,6 +7,8 @@ import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
+import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
+import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
@@ -81,6 +83,7 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 	UtilUI utilui;
 	UtilMsg utilmsg;
 	
+	DocumentManager documentManager;
 	
 	EventManager eventManager;
 	
@@ -121,6 +124,7 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
 		domDisposizioni  = (Disposizioni) serviceManager.lookup(Disposizioni.class);
 		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 	}
 
 	public void initialize() throws java.lang.Exception {
@@ -172,29 +176,42 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == avanti) {
-			Node n;
-			if (UtilDom.isTextNode(activeNode)) {  	//	creo un nuovo span
-				int posizione;
-				if (prima.isSelected())
-					posizione = start;
-				else
-					posizione = end;
-				n = domDisposizioni.makeSpan(activeNode, posizione, disposizioni.makeVigenza(activeNode,"novella",""),testoaggiunto.getText());	
-				selectionManager.setActiveNode(this, n);
+
+			EditTransaction t = null;
+			try {
+				t = documentManager.beginEdit();
+				
+				Node n;
+				if (UtilDom.isTextNode(activeNode)) {  	//	creo un nuovo span
+					int posizione;
+					if (prima.isSelected())
+						posizione = start;
+					else
+						posizione = end;
+					n = domDisposizioni.makeSpan(activeNode, posizione, disposizioni.makeVigenza(activeNode,"novella",""),testoaggiunto.getText());	
+					selectionManager.setActiveNode(this, n);
+				}
+				else {		//	creo una partizione nuova
+					n = domDisposizioni.makePartition(activeNode, prima.isSelected(), disposizioni.makeVigenza(activeNode,"novella",""));				
+					selectionManager.setActiveNode(this, n);
+				} 					
+				
+				if (n!=null) {
+					String id = UtilDom.getAttributeValueAsString(n, "id");
+//					if (id==null)
+//						id = getIDNotArticoloByPosition(n);
+					disposizioni.setNovella(id);
+				}	
+				disposizioni.setPosdisposizione(n);
+				
+				disposizioni.setMeta();
+				documentManager.commitEdit(t);	
+				form.close();
+			
+			
+			} catch (Exception ex) {
+				documentManager.rollbackEdit(t);
 			}
-			else {		//	creo una partizione nuova
-				n = domDisposizioni.makePartition(activeNode, prima.isSelected(), disposizioni.makeVigenza(activeNode,"novella",""));				
-				selectionManager.setActiveNode(this, n);
-			} 					
-			disposizioni.setOperazioneProssima();
-			if (n!=null) {
-				String id = UtilDom.getAttributeValueAsString(n, "id");
-//				if (id==null)
-//					id = getIDNotArticoloByPosition(n);
-				disposizioni.setNovella(id);
-			}	
-			disposizioni.setPosdisposizione(n);
-			form.close();
 		}
 		if (e.getSource() == indietro) {
 			form.close();
@@ -260,6 +277,7 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 		else {
 			start=-1;
 			end=-1;
-		}	
+		}
+		updateContent(activeNode, start, end);
 	}
 }
