@@ -38,6 +38,12 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 			</layout>
 		</appender>
 		
+
+		<!--	logger name=".DocumentManager" additivity="false">
+        	<priority value ="debug" />
+        	<appender-ref ref="ConsoleAppender" />
+        </logger	-->
+		
        	<root>
 			<priority value ="error" /> 
 			<appender-ref ref="ConsoleAppender" />
@@ -345,6 +351,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <!-- item action="tool.version" /-->
                     <!-- separator /-->
                     <item action="tool.xpatheval" />
+                    <!-- separator /-->                    
+  <!--		item action="tool.repository" /		-->
                 </menu>
                 <menu action="menu.editor.insert">
                     <item action="editor.insert.immagini" />
@@ -386,15 +394,13 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                         <item action="editor.partizioni.numero" />
                         <item action="editor.partizioni.punto" />
                         <item action="editor.partizioni.rubrica" />
-                      
+                        
+                  <!--	item action="editor.disposizioni.verificavigenza" /		-->                        
+                        
+                        
+                        
                         <item action="editor.disposizioni.passive" />
 						<item action="editor.disposizioni.rimuovipassive" />
-                        
-                        
-                        <item action="editor.disposizioni.attive" />
-                        
-                        
-                        
                         <item action="editor.annessi.annesso" />
                         <item action="editor.ndr" />
                         <!--item action="editor.rinumerazione" /-->
@@ -554,14 +560,14 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <item action="editor.partizioni.numero" />
                     <item action="editor.partizioni.punto" />
                     <item action="editor.partizioni.rubrica" />
-
+                    
+                    
+               <!--	item action="editor.disposizioni.verificavigenza" /		-->  
+                    
+                    
+                    
                     <item action="editor.disposizioni.passive" />
 					<item action="editor.disposizioni.rimuovipassive" />
-
-
-                    <item action="editor.disposizioni.attive" />
-
-                    
                     <item action="editor.annessi.annesso" />
                     <item action="editor.ndr" />
                 </toolbar>
@@ -807,6 +813,12 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 class="it.cnr.ittig.xmleges.editor.blocks.action.ndr.NdrActionImpl"
     />
     
+    
+
+<!--	component  lifestyle="singleton" activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.action.repository.RepositoryActionImpl"
+    /	-->
+    
 
     <component  activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.action.xmleges.linker.XmLegesLinkerActionImpl"
@@ -858,16 +870,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.action.disposizioni.passive.DispPassiveActionImpl"
     />
-
-
-
-
-    <component  activation="startup"
-                class="it.cnr.ittig.xmleges.editor.blocks.action.disposizioni.attive.DispAttiveActionImpl"
-    />
-
-
-
 
     <component  activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.action.revisioni.RevisioniActionImpl"
@@ -969,7 +971,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.ndr.NdrFormImpl" />
     
-    <!--	component  class="it.cnr.ittig.xmleges.editor.blocks.form.repository.RepositoryFormImpl" /	-->
+<!--	component  class="it.cnr.ittig.xmleges.editor.blocks.form.repository.RepositoryFormImpl" /	-->
 
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.rinvii.attogiacitato.AttogiacitatoFormImpl" />
 
@@ -989,18 +991,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  lifestyle="pool"
                 class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.passive.NovellaFormImpl"
     />
-
-
-
-    <component  lifestyle="singleton" activation="startup"
-                class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.attive.DispAttiveFormImpl"
-    />
-
-    <component  lifestyle="pool"
-                class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.attive.NovellandoNovellaFormImpl"
-    />
     
-    
+<!--	component  lifestyle="singleton" activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.passive.VerificaDispPassiveFormImpl"
+    /	-->
 
 
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.link.LinkFormImpl">
@@ -1152,11 +1146,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 <pane name="editor.panes.documento"		where="top-center"  	index="0" />
                 <pane name="editor.panes.meta"				where="top-center"  	index="1" />
                 <pane name="editor.panes.annessi"    		where="top-center"  	index="2" />
-
-                <pane name="editor.panes.indice"		where="top-center"  	index="3" />                                
+                               
                 <pane name="editor.panes.indice"		where="top-left"  	index="1" />                
                 <pane name="panes.source"            	where="top-center"		index="4" />
-                <pane name="panes.xslteditor"           where="top-center"  	index="5" />
+                <!--	pane name="panes.xslteditor"           where="top-center"  	index="5" /		-->
                 <pane name="editor.panes.riferimenti" 		where="bottom-center"  	index="0" />
                 <pane name="editor.panes.rifincompleti"     where="bottom-center"  	index="1" />
                 <pane name="editor.panes.ndr" 				where="bottom-center"  	index="2" />
@@ -1380,7 +1373,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 <element name="titolo" />
                 <element name="capo" />
                 <element name="sezione" />
-                <element name="articolo" />
+				<element name="articolo" />
                 <element name="comma" />
                 <!--element name="lettera" /-->
                 <!--element name="numero" /-->
