@@ -82,7 +82,7 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 	
 	String errorMessage = "";
 
-
+	boolean modificaEventi;
 
 
 
@@ -121,6 +121,7 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 
 	// ////////////////////////////////////////////// CiclodiVitaForm Interface
 	public boolean openForm() {
+		modificaEventi=false;
 		form.setSize(650, 400);
 		form.showDialog();
 		return form.isOk();
@@ -128,7 +129,7 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 
 	public void actionPerformed(ActionEvent e) {				
 		 if (e.getSource().equals(eventoButton)) { 			// EVENTI
-			formEventi.setRel_totali(getRelazioniUlteriori());
+			formEventi.setRel_totali(null);
 			formEventi.setEventi(eventi);
 			setEventi(eventi);
 			
@@ -137,11 +138,16 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 			if (formEventi.openForm()) {
 				eventi = formEventi.getEventi();
 				eventiList.setListData(eventi);
+				modificaEventi = true;
 			}
 		}
 		
 	}
 
+	public boolean getModificaEventi() {
+		return modificaEventi;
+	}
+	
 	public int getEventoSelezionato() {
 		if (eventiList.isSelectionEmpty())
 			return -1;
@@ -255,20 +261,4 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 		return errorMessage;
 	}
 
-	public Relazione[] getRelazioniUlteriori() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void setRelazioniUlteriori(Relazione[] relazioniUlteriori) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public VigenzaEntity[] getVigToUpdate() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
 }

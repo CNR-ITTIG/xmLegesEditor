@@ -517,13 +517,22 @@ public class AltreRelazioniFormImpl implements CiclodiVitaForm, Loggable, Servic
 		return newRelazioni;
 	}
 
-	
 	public boolean verifyForm() {
 		return true;
 	}
 
 	public String getErrorMessage() {
 		return errorMessage;
+	}
+
+	public int getEventoSelezionato() {
+		// TODO Auto-generated method stub
+		return -1;
+	}
+
+	public boolean getModificaEventi() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	public Evento[] getEventi() {
@@ -539,16 +548,6 @@ public class AltreRelazioniFormImpl implements CiclodiVitaForm, Loggable, Servic
 	public void setEventiOnVigenze(String[] eventiOnVigenze, VigenzaEntity[] vigenze) {
 		// TODO Auto-generated method stub
 		
-	}
-
-	public VigenzaEntity[] getVigToUpdate() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public int getEventoSelezionato() {
-		// TODO Auto-generated method stub
-		return -1;
 	}
 
 	
