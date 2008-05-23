@@ -143,6 +143,7 @@ public class KbModelFactory {
 		if(type.equalsIgnoreCase("interconcepts")) {
 			readSchema(om, KbConf.CONCEPT_SCHEMA);
 			readLocalDocument(om, lang, KbConf.LINKS);
+			readLocalDocument(om, lang, KbConf.INTERCONCEPTS);
 		}
 		if(type.equalsIgnoreCase("types")) {
 			readSchema(om, KbConf.CONCEPT_SCHEMA);

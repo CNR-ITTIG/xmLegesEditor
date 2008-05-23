@@ -73,7 +73,7 @@ public class KbConf {
 	public static String ADVERB_CLASS = METALEVEL_ONTO_NS + "AdverbSynset";
 	public static String ADJECTIVE_CLASS = METALEVEL_ONTO_NS + "AdjectiveSynset";
 	
-	//Partial Matching relations
+	//Partial Matching relations NAMES
 	public static String MATCH_EQ = "equivalent";
 	public static String MATCH_NARROW = "narrow";
 	public static String MATCH_BROADER = "broader";

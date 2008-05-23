@@ -186,11 +186,9 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		
 		//Equivs
 		Collection inEquivs = getSynsets(syn, lang);
-		if(inEquivs != null) {
-			for(Iterator i = inEquivs.iterator(); i.hasNext(); ) {
-				Synset item = (Synset) i.next();
-				equivs.add(item);
-			}
+		for(Iterator i = inEquivs.iterator(); i.hasNext(); ) {
+			Synset item = (Synset) i.next();
+			equivs.add(item);
 		}
 		
 		//Others
@@ -290,10 +288,6 @@ implements KbManager, Loggable, Serviceable, Initializable {
 
 		Collection fsyns = poc.getTerms(lang);
 		//System.out.println("getSynset - poc: " + poc + " - fsyn: " + fsyn);
-		if(fsyns.size() == 0) {
-			//No alignment!
-			return null;
-		}
 		
 		for(Iterator i = fsyns.iterator(); i.hasNext(); ) {
 			Synset fsyn = (Synset) i.next();

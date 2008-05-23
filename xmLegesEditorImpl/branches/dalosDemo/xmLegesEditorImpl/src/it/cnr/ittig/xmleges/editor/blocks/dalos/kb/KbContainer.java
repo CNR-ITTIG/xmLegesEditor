@@ -512,8 +512,8 @@ public class KbContainer {
 		
 		//System.out.println(">> adding sources to " + syn + "...");
 		
-		//OntModel om = KbModelFactory.getModel("source", "micro", LANGUAGE);
-		OntModel om = KbModelFactory.getModel("seg.source", "micro", LANGUAGE, syn.getURI());
+		//OntModel om = KbModelFactory.getModel("seg.source", "micro", LANGUAGE, syn.getURI());
+		OntModel om = KbModelFactory.getModel("seg.source", "", LANGUAGE, syn.getURI());
 		
 		Individual ind = om.getIndividual(syn.getURI());
 		if(ind == null) {
@@ -575,8 +575,8 @@ public class KbContainer {
 			return;
 		}
 
-		//OntModel om = KbModelFactory.getModel("individual", "micro");
-		OntModel om = KbModelFactory.getModel("seg.lex", "micro", LANGUAGE, syn.getURI());
+		//OntModel om = KbModelFactory.getModel("seg.lex", "micro", LANGUAGE, syn.getURI());
+		OntModel om = KbModelFactory.getModel("seg.lex", "", LANGUAGE, syn.getURI());
 		
 		Individual ind = om.getIndividual(syn.getURI());
 		OntProperty glossProp = om.getOntProperty(KbConf.METALEVEL_ONTO_NS + "gloss");
