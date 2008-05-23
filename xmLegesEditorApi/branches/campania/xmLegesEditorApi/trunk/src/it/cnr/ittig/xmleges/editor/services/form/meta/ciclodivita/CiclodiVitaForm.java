@@ -45,13 +45,9 @@ public interface CiclodiVitaForm extends Service {
 	public int getEventoSelezionato();
 	
 	/**
-	 * Restituisce le relazioni ulteriori (non legate agli eventi) con altri
-	 * documenti.
-	 * 
-	 * @return relazioni con altri documenti
+	 * Restituisce true se bisogna aggiornare gli eventi sul DOM
 	 */
-	public Relazione[] getRelazioniUlteriori();
-
+	public boolean getModificaEventi();
 	
 	/**
 	 * Imposta la DTD del documento (base, completo...)
@@ -60,21 +56,12 @@ public interface CiclodiVitaForm extends Service {
 	 */
 	public void setTipoDTD(String tipoDTD);
 
-
-
 	/**
 	 * Imposta sulla form gli eventi associati al documento
 	 * 
 	 * @param eventi eventi associati al documento
 	 */
 	public void setEventi(Evento[] eventi);
-
-	/**
-	 * Imposta le relazioni ulteriori (non legate agli eventi) del documento
-	 * 
-	 * @param relazioniUlteriori altre relazioni del documento
-	 */
-	public void setRelazioniUlteriori(Relazione[] relazioniUlteriori);
 	
 	/**
 	 * 
@@ -89,12 +76,6 @@ public interface CiclodiVitaForm extends Service {
 	 * @param vigenze
 	 */
 	public void setEventiOnVigenze(String[] eventiOnVigenze, VigenzaEntity[] vigenze);
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public VigenzaEntity[] getVigToUpdate();
 
 
 }
