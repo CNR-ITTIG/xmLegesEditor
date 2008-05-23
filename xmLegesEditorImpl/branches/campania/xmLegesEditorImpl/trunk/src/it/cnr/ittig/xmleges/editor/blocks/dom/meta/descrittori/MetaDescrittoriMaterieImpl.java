@@ -85,8 +85,8 @@ public class MetaDescrittoriMaterieImpl implements MetaDescrittoriMaterie , Logg
 				utilRulesManager.orderedInsertChild(descrittoriNode,vocabTag);
 
 			}
-			documentManager.commitEdit(tr);
 			rinumerazione.aggiorna(doc);
+			documentManager.commitEdit(tr);
 		} catch (DocumentManagerException ex) {
 			logger.error(ex.getMessage(), ex);
 			return;
