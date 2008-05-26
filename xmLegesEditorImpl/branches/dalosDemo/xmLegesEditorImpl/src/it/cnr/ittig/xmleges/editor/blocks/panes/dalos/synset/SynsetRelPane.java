@@ -77,12 +77,8 @@ public abstract class SynsetRelPane extends SynsetPane {
 				DefaultMutableTreeNode n = (DefaultMutableTreeNode) path.getLastPathComponent();
 				try {
 					if(n.getUserObject() instanceof Synset){   
-						
-						
 						if(e.getClickCount()==2){
 							selectSynset((Synset)n.getUserObject());
-							//frame.setSelectedPane("editor.panes.dalos.synsetdetails");
-							//refreshTree((Synset)n.getUserObject());
 						}
 					}
 					else

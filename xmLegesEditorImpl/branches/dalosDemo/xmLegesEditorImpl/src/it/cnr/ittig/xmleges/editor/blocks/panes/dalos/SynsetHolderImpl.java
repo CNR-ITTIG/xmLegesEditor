@@ -1,7 +1,6 @@
 package it.cnr.ittig.xmleges.editor.blocks.panes.dalos;
 
 import it.cnr.ittig.xmleges.editor.services.dalos.SynsetHolder;
-import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 
 import java.util.Observable;
 
