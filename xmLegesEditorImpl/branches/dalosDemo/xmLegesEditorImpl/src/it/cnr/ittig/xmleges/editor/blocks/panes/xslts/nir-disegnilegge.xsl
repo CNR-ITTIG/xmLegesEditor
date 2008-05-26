@@ -43,22 +43,24 @@ exclude-result-prefixes="h nir xlink" xmlns="http://www.w3.org/HTML/1998/html4" 
 	<!--                                                          -->
 	<!-- ======================================================== -->
 	<xsl:template match="nir:intestazione">
-		<xsl:apply-templates/>
+		<div class="intestazione">
+			<xsl:apply-templates/>
+		</div>		
 	</xsl:template>
 	<xsl:template match="nir:emanante">
-		<div class="sinistra">
+		<div class="emanante">
 			<xsl:apply-templates/>
 		</div>
 	</xsl:template>
 	<xsl:template match="nir:legislatura">
 		<div class="title">
-			----- <xsl:apply-templates/> -----
+			<xsl:apply-templates/>
 		</div>
 	</xsl:template>
 	<xsl:template match="nir:tipoDoc"/>
 	<xsl:template match="nir:numDoc">
-		<div class="sinistra">
-			N. <xsl:apply-templates/>
+		<div class="numdoc">
+			<xsl:apply-templates/>
 		</div>
 	</xsl:template>	
 	<xsl:template match="nir:intestazione/h:div ">
@@ -82,7 +84,7 @@ exclude-result-prefixes="h nir xlink" xmlns="http://www.w3.org/HTML/1998/html4" 
 		</div>
 	</xsl:template>
 	<xsl:template match="nir:intestazione/nir:titoloDoc">
-		<div class="intestazione">
+		<div class="titolodoc">
 			<h1>
 				<xsl:apply-templates/>
 			</h1>
@@ -289,14 +291,14 @@ exclude-result-prefixes="h nir xlink" xmlns="http://www.w3.org/HTML/1998/html4" 
 		</div>
 	</xsl:template>
 	<xsl:template match="nir:sottoscrizioni">
-		<ul style="margin-top:5px;">
+		<div class="sottoscrizioni">
 			<xsl:apply-templates/>
-		</ul>
+		</div>
 	</xsl:template>
 	<xsl:template match="nir:sottoscrivente">
-		<li>
+		<div class="sottoscrivente">
 			<xsl:apply-templates/>
-		</li>
+		</div>
 	</xsl:template>
 	
 	<!-- ======================================================== -->
@@ -311,9 +313,18 @@ exclude-result-prefixes="h nir xlink" xmlns="http://www.w3.org/HTML/1998/html4" 
 	</xsl:template> 
 	<xsl:template match="*[name()='virgolette']">
 	    <div class="spazio">&#160;</div>
-	    <span class="virgolette">
+	    <xsl:choose>
+		<xsl:when test="@tipo='struttura'">
+	   		<table bgcolor="#FFEE99" width="100%"><tr><td>
+				<xsl:apply-templates />
+			</td></tr></table>				
+		</xsl:when>
+		<xsl:otherwise>
+		<span class="virgolette">
 			<xsl:apply-templates />
-		</span>	
+		</span>		
+		</xsl:otherwise>
+		</xsl:choose>	
 	    <div class="spazio">&#160;</div>				
 	</xsl:template>	
 	<!-- ======================================================== -->
