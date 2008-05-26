@@ -67,12 +67,15 @@ public class XsltFindIterator implements FindIterator {
 				int e = leaf.getEndOffset();
 				if (caseSens)
 					pos = pane.getText(s, e - s).indexOf(toFind, lastPos - s);
-				else
+				else 
 					pos = pane.getText(s, e - s).toLowerCase().indexOf(toFind.toLowerCase(), lastPos - s);
 				String leafText = pane.getText(s, e - s);
-				if (!caseSens)
+				if (!caseSens) {
 					leafText = leafText.toLowerCase();
-				pos = leafText.indexOf(toFind, lastPos - s);
+					pos = leafText.indexOf(toFind.toLowerCase(), lastPos - s);
+				}
+				else
+					pos = leafText.indexOf(toFind, lastPos - s);
 				if (pos == -1)
 					lastPos = e;
 				else {
