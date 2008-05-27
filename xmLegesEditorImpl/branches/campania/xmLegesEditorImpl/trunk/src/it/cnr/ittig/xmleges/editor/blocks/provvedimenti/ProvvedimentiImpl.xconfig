@@ -662,5 +662,20 @@
 	        <autorita>=^stato$</autorita>
 	    </urn>
     </provvedimento>
+</classe>    
+    
+<!-- ======================================================== STATUTO -->
+<classe name="Statuto">
+<!-- ******************************************************* STATUTO REGIONALE -->
+    <provvedimento name="Statuto Regionale" emananti="NO">
+	    <urn>
+	        <atto>statuto</atto>
+	        <citazione>statuto regionale</citazione>
+			<autorita>=^regione.*</autorita>	        
+	    </urn>
+	    <template tipo="Articolato" numerato="SI" tag="statuto">STR-Art.xml</template>
+	    <dtd name="DTD Nir Completo">nircompleto.dtd</dtd>
+		<dtd name="DTD Nir Flessibile">nirflessibile.dtd</dtd>
+    </provvedimento>
 </classe>
 </provvedimenti>
