@@ -1,0 +1,58 @@
+<!--  =====================================================================  -->
+<!--    Modello dei documenti di NormeInRete (NIR)                           -->
+<!--                                                                         -->
+<!--    tipi: content model e tipi di dato usati da NIR                      -->
+<!--    Dipende da: 'nirstrict' oppure 'nirloose'                            -->
+<!--                                                                         -->
+<!--    Release  25/04/2006                                                  -->
+<!--    Fabio Vitali - UniBo                                                 -->
+<!--                                                                         -->
+<!--    Per un'introduzione, si veda il documento 'info.html'                -->
+<!--  =====================================================================  -->
+<!--  =====================================================================  -->
+<!--                                                                         -->
+<!--      Globali                                                            -->
+<!--                                                                         -->
+<!--  =====================================================================  -->
+<!ENTITY % linktype "(%STRING;)" >
+<!ENTITY % uri "(%STRING;)" >
+<!ENTITY % e-uri "(%STRING;)" >
+<!ENTITY % anytoken "(%STRING;)" >
+<!ENTITY % anystring "(%STRING;)" >
+<!ENTITY % e-anystring "(%STRING;)" >
+<!ENTITY % tipovigenza "(originale|monovigente|multivigente)" >
+<!ENTITY % NIRdate "(%STRING;)" >
+<!ENTITY % NIRdove "(%STRING;)" >
+<!ENTITY % NIRcodice "(%STRING;)" >
+<!ENTITY % tiporango "(L|R|LR)" >
+<!ENTITY % valute "(EU|LIT|USD|LST)" >
+<!ENTITY % numero "(%STRING;)" >
+<!ENTITY % NIRnome "(%STRING;)" >
+<!ENTITY % sino "(si|no)" >
+<!ENTITY % status "(omissis|abrogato|annullato|sospeso)" >
+<!ENTITY % id "(%ID;)" >
+<!ENTITY % idref "(%IDREF;)" >
+<!--  =====================================================================  -->
+<!--                                                                         -->
+<!--      attributi HTML                                                     -->
+<!--                                                                         -->
+<!--  =====================================================================  -->
+<!ENTITY % htmlstyle "(%STRING;)" >
+<!ENTITY % htmlclass "(%STRING;)" >
+<!ENTITY % xmllang "(%STRING;)" >
+<!--  =====================================================================  -->
+<!--                                                                         -->
+<!--      Da meta.dtd                                                        -->
+<!--                                                                         -->
+<!--  =====================================================================  -->
+<!ENTITY % tipopubblicazione "(%STRING;)" >
+<!ENTITY % numeropubblicazione "(%STRING;)" >
+<!ENTITY % funzione "(informativa|regolativa)" >
+<!ENTITY % ranghi "(costituzionale|primario|secondario|terziario|prassi)" >
+<!ENTITY % tiporegola "(%STRING;)" >
+<!ENTITY % tipoeventi "(%STRING;)" >
+<!ENTITY % tipocontributo "(%STRING;)" >
+<!ENTITY % tipoallegato "(attoallegato|allegatointegrante|informativo)" >
+<!--  =====================================================================  -->
+<!--      fine del file tipi                                                 -->
+<!--  =====================================================================  -->

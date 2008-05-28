@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="iso-8859-15"?>
+
+%DOCTYPE%
+
+<NIR xmlns:xlink="http://www.w3.org/1999/xlink" 
+	 xmlns:h="http://www.w3.org/HTML/1998/html4">
+<DocumentoNIR nome="ordinanza">
+	<meta>
+		<descrittori>
+		<pubblicazione norm="" num="" tipo="GU" />
+		<entratainvigore norm="" />
+		<redazione id="red1" nome="" norm="" />
+	        <urn valore="urn:nir:presidente.consiglio.ministri:ordinanza:aaaa-mm-gg;nir-nnn"/>
+		</descrittori>
+	</meta>
+	<intestazione>
+		<emanante>PRESIDENZA DEL CONSIGLIO DEI MINISTRI</emanante> 
+		<tipoDoc>ORDINANZA</tipoDoc> 
+		<dataDoc norm=""/>
+		<titoloDoc/>
+	</intestazione> 
+	<formulainiziale>
+		<h:p/>
+		<h:p/>
+		<h:p/>
+		<h:p>IL PRESIDENTE DEL CONSIGLIO DEI MINISTRI</h:p>
+		<preambolo>
+			<h:p/>
+			<h:p/>
+			<h:p/>
+		</preambolo>		
+	</formulainiziale> 
+	<articolato>
+		<articolo id="art1">
+			<num>Art. 1.</num>
+			<rubrica/>
+			<comma id="art1-com1">
+				<num>1.</num>
+				<corpo/>
+			</comma>
+		</articolo>
+	</articolato>
+	<conclusione> 
+		<dataeluogo norm="" codice="">Roma, {gg mese aaaa}</dataeluogo> 
+		<firma tipo="sottoscrizione">Il Presidente del Consiglio dei Ministri {nome}</firma>
+		<firma tipo="visto"/>
+	</conclusione> 
+</DocumentoNIR>
+</NIR>
