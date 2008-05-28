@@ -5,5 +5,7 @@ view.toolbar.editor.revisioni=false
 check.view.toolbar.editor.revisioni=false
 check.view.toolbar.editor.tabelle=false
 view.toolbar.editor.tabelle=false
+view.toolbar.editor.allineamento=false
+view.toolbar.editor.testo=false
 </it.cnr.ittig.xmleges.core.blocks.bars.BarsImpl>
 </preference>
