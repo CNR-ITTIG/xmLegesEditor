@@ -133,6 +133,8 @@ public class CambiaDtdActionImpl implements CambiaDtdAction, EventManagerListene
 			if (UtilFile.copyFile(UtilFile.getFileFromTemp("tempChangeDtdTo.xml").getAbsolutePath(), documentManager.getSourceName())) {
 					test.setText("Cambio effettuato");
 					documentManager.openSource(documentManager.getSourceName());
+					change.setEnabled(false);
+					verify.setEnabled(false);
 			}		
 			else
 				test.setText("Cambio non riuscito");
