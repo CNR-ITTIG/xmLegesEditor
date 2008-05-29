@@ -35,10 +35,6 @@ public class AggiornaIdFrozenLaw {
 
 	NirUtilDom nirUtilDom;
 	
-//	Vector disposizioniId;
-	
-//	Node disposizioni;
-	
 	// Mappa degli ID cambiati (non include i cancellati)key=oldID, value=newID
 	HashMap modIDs = new HashMap();
 
@@ -100,8 +96,8 @@ public class AggiornaIdFrozenLaw {
 
 	protected String zerozero[] = { "01", "001", "0001", "00001", "000001", "0000001", "00000001", "000000001", "0000000001", "00000000001" };
 
-	// Vettore dei riferimenti interni
-//	protected Vector Rif;
+    //Vettore dei riferimenti interni
+    protected Vector Rif;
 
 	protected Document doc;
 
@@ -117,179 +113,40 @@ public class AggiornaIdFrozenLaw {
 		modIDs=new HashMap();
 		doc = nodo.getOwnerDocument();
 		NodeList nir = doc.getElementsByTagName("NIR");
+		
+		
+		System.err.println("CALLED AggiornaId");
+		
+		
+		// Per gli elementi che contengono un num genero l'ID sulla base di <num>
+		// Per gli altri genero l'ID sulla base della posizione
+		updateIDs(nir.item(0));
+		getAndUpdateReferringAttributes(nir.item(0));   // controllare: come interagisce con le note - ndr
 
-//		//recupero id referenziati dalle disposizioni
-//		try {
-//			disposizioni = UtilDom.getElementsByTagName(doc,doc,"modifichepassive")[0].cloneNode(true);
-//			disposizioniId = getDisposizioniIdFromDoc(UtilDom.getElementsByTagName(doc,doc,"modifichepassive")[0]);
-//		} catch (Exception e) {
-//			disposizioniId = null;
-//		}
-			
+		
+		///////////  RIF - INTERNI  ///////////////
+		// Setta l'attributo xlink:href dei riferimenti che non ce l'hanno gia' settato, 
+		// sulla base del contenuto testuale del riferimento interno
+		Rif = getRif();
+		setXlinkHrefInternalRifByContent();
+		///////////////////////////////////////////
+		
+		
+		
+		///////////     NOTE - NDR /////////////////
 		// aggiornamento relativo alle note:
 		// le note vengono ordinate in base a come compaiono nel testo
 		Vector ndrId = getNdrIdFromDoc();
 		sortNotes(ndrId);
-		// /////////////////////////////////
-
-		// Per gli elementi che contengono un num genero l'ID sulla base di
-		// <num>
-		// Per gli altri genero l'ID sulla base della posizione
-		updateIDs(nir.item(0));
-		
-		getAndUpdateReferringAttributes(nir.item(0));
-
-//		Rif = getRif();
-//		setXlinkHrefInternalRifByContent();
-
 		setNdrLink(ndrId, false);
-	}
-
-//	public Vector getDisposizioniIdFromDoc(Node modifichepassive) {
-//		Node[] disp = UtilDom.getElementsByTagName(doc,modifichepassive,"dsp:pos");
-//		Vector ids = new Vector(50, 10);
-//		for (int i = 0; i < disp.length; i++) {
-//			if (!UtilDom.getAttributeValueAsString(disp[i],"xlink:href").startsWith("urn")) {
-//				String id = UtilDom.getAttributeValueAsString(disp[i], "xlink:href");
-//				if (ids.indexOf(id) == -1)
-//					ids.add(id);
-//			}
-//		}
-//		return ids;
-//	}
-	
-	public Vector getNdrIdFromDoc() {
-		NodeList ndr = doc.getElementsByTagName("ndr");
-		Vector ids = new Vector(50, 10);
-		for (int i = 0; i < ndr.getLength(); i++) {
-			String id = UtilDom.getAttributeValueAsString(ndr.item(i), "num");
-			if (ids.indexOf(id) == -1)
-				ids.add(id);
-		}
-		return ids;
-	}
-
-	public boolean sortNotes(Vector ndrId) {
-		// ordina le note dentro redazionale nello stesso ordine in cu compaiono gli ndr nel testo
-		Vector newNotes = new Vector(50, 10);
-		Node parent = null;
-
-		// copia delle note nell'ordine in cui compaiono nel testo
-		for (int i = 0; i < ndrId.size(); i++) {
-			// FIXME bug su getElementById(); ancora non va
-			// if(doc.getElementById((String)ndrId.get(i))!=null)
-			// newNotes.add(doc.getElementById((String)ndrId.get(i)).cloneNode(true));
-			if (getNotaById((String) ndrId.get(i)) != null)
-				newNotes.add(getNotaById((String) ndrId.get(i)).cloneNode(true));
-			else{
-				if(logger.isDebugEnabled())
-				    logger.debug("il nodo di " + ndrId.get(i) + " e' null");
-			}
-		}
-
-		Vector oldNotes = getOldNotes();
-
-		if (oldNotes.size() > newNotes.size()) {
-			if(logger.isDebugEnabled())
-				logger.debug("ci sono note senza ndr; completa la lista");
-			// completa il vector newNotes da oldNotes con id != note in
-			// newNotes (aggiunge le note che non hanno un ndr)
-			for (int i = 0; i < oldNotes.size(); i++) {
-				if (ndrId.indexOf(UtilDom.getAttributeValueAsString((Node) oldNotes.get(i), "id")) == -1)
-					newNotes.add(oldNotes.get(i));
-			}
-		}
-         
-		if(logger.isDebugEnabled())
-			logger.debug("notaLength " + oldNotes.size() + " ndrLength " + newNotes.size());
-		if (oldNotes.size() == newNotes.size()) {
-//			if (oldNotes.size() > 0)
-//				parent = ((Node) oldNotes.get(0)).getParentNode();
-			for (int i = 0; i < oldNotes.size(); i++) {
-				parent = ((Node) oldNotes.get(i)).getParentNode();
-				if(logger.isDebugEnabled())
-					logger.debug("replace oldNote " + UtilDom.getAttributeValueAsString((Node) oldNotes.get(i), "id") + " with newNote "
-						+ UtilDom.getAttributeValueAsString((Node) newNotes.get(i), "id"));
-				// FIXME: non e' detto che il parent (redazionale) sia lo stesso per tutte le note; 
-				// e.g. note negli allegati
-				parent.replaceChild((Node) newNotes.get(i), (Node) oldNotes.get(i));
-			}
-			return true;
-		} else{
-			if(logger.isDebugEnabled())
-				logger.debug("ci sono ndr senza nota");
-		}
-		return false;
-	}
-
-	private Node getNotaById(String id) {
-
-		NodeList notes = doc.getElementsByTagName("nota");
-		for (int i = 0; i < notes.getLength(); i++) {
-			if (UtilDom.getAttributeValueAsString(notes.item(i), "id").equals(id))
-				return (notes.item(i));
-		}
-		return null;
-	}
-
-	private Vector getOldNotes() {
-		Vector old = new Vector(50, 10);
-		NodeList notes = doc.getElementsByTagName("nota");
-		for (int i = 0; i < notes.getLength(); i++) {
-			old.add(notes.item(i));
-		}
-		return old;
-	}
-
-	
-	private String getNdrNumPrefix(String num){
+		///////////////////////////////////////////		
 		
-		char[] numChar = num.toCharArray();
-		int i=0;
-		
-		for (i=numChar.length-1; i>=0;i--){
-			if(!isDigit(numChar[i]))
-				break;
-		}
-		if(i>0)
-		   return num.substring(0,i+1);
-		return "n";
 	}
+
+
 	
-	public void setNdrLink(Vector ndrId, boolean renum) {
-		NodeList ndr = doc.getElementsByTagName("ndr");
-		NodeList note = doc.getElementsByTagName("nota");
-		String num, value, prefix;
 
-		for (int i = 0; i < ndr.getLength(); i++) {
-			
-			//prefix = getNdrNumPrefix(UtilDom.getAttributeValueAsString((Node) ndr.item(i), "num")); 
-			//num = prefix + (ndrId.indexOf(UtilDom.getAttributeValueAsString((Node) ndr.item(i), "num")) + 1);
-			
-			
-			prefix = getNdrNumPrefix(UtilDom.getAttributeValueAsString((Node) note.item(i), "id")); 
-			num = UtilDom.getAttributeValueAsString((Node) note.item(i), "id");
-			
-			UtilDom.setAttributeValue(ndr.item(i), "num", num);
-			if(logger.isDebugEnabled())
-				logger.debug("renum " + renum);
-			if (renum) {
-				// togliere l'intero prefix e non solo la n
-				value = num.substring(prefix.length());
-				UtilDom.setAttributeValue(ndr.item(i), "valore", value);
-				String tipoNdr = rinum.getRinumerazioneNdr();
-				if(logger.isDebugEnabled())
-					logger.debug("tipoNdr " + tipoNdr);
-				if (tipoNdr.equalsIgnoreCase("cardinale"))
-					UtilDom.setTextNode(ndr.item(i), "(" + value + ")");
-				else if (tipoNdr.equalsIgnoreCase("letterale"))
-					UtilDom.setTextNode(ndr.item(i), "(" + UtilLang.fromArabicToLetter(value).toLowerCase() + ")");
-				else
-					UtilDom.setTextNode(ndr.item(i), "(" + UtilLang.fromArabicToRoman(value).toLowerCase() + ")");
-			}
-		}
-	}
-
+	
 	/**
 	 * Aggiorna gli ID sulla base delle posizioni o dei num
 	 * 
@@ -331,17 +188,19 @@ public class AggiornaIdFrozenLaw {
 			OldID = ((Element) nodo).getAttribute("id");
 			
 			
-//			// FIXME patch per id degli eventi - disabilita il setId degli eventi ma mantiene il setIdAttribute
-//			// probabilmente a causa di un bug su getElementById in MetaCiclodiVitaImpl
-//  		    if((getElementType(nodo)==EVENTO)){
-//  		    	IDValue = OldID;
-//			}
-			////////////////////////////////////////////////////////////////////////////////////////////////// 
+
+			// FIXME patch per id degli eventi - disabilita il setId degli eventi ma mantiene il setIdAttribute
+			// probabilmente a causa di un bug su getElementById in MetaCiclodiVitaImpl
+			//  		    if((getElementType(nodo)==EVENTO)){
+			//  		    	IDValue = OldID;
+			//			}
+
 
   		    if(logger.isDebugEnabled()) 		    
 			 logger.debug("idChanged: new  " + IDValue + " old " + OldID);
   		    
-			if (!UtilDom.hasIdAttribute(nodo) || !OldID.equals(IDValue)) {
+  		    // TODO check sulla prima condizione !UtilDom.hasIdAttribute(nodo) per nodi che hanno l'id ma non e' isId secondo Xerces
+			if (!UtilDom.hasIdAttribute(nodo) || !OldID.equals(IDValue)) {      
 				
 				if(!OldID.equals(IDValue)){
 					System.out.println("idChanged: new  " + IDValue + " old " + OldID);
@@ -350,9 +209,6 @@ public class AggiornaIdFrozenLaw {
 				
 				UtilDom.setIdAttribute(nodo, IDValue);
 				
-//				//aggiorno le disposizioni
-//				if (disposizioniId!= null && disposizioniId.contains(OldID))
-//					updateDisposizione(OldID, IDValue);
 				
 				if(logger.isDebugEnabled())
 				  logger.debug("idChanged: new  " + IDValue + " old " + OldID);
@@ -367,15 +223,7 @@ public class AggiornaIdFrozenLaw {
 		}
 	}
 
-//	private void updateDisposizione(String oldID, String newID) {
-//		Node[] nuoveDisp = UtilDom.getElementsByTagName(doc,UtilDom.getElementsByTagName(doc,doc,"modifichepassive")[0],"dsp:pos");
-//		Node[] vecchieDisp = UtilDom.getElementsByTagName(doc,disposizioni,"dsp:pos");
-//		for (int i = 0; i < vecchieDisp.length; i++) {
-//			if (oldID.equals(UtilDom.getAttributeValueAsString(vecchieDisp[i], "xlink:href")))
-//				UtilDom.setAttributeValue(nuoveDisp[i],"xlink:href",newID);
-//		}
-//		disposizioniId.remove(oldID);
-//	}
+
 	
 	private boolean isElementWithNum(Node node) {
 		int elemType = getElementType(node);
@@ -549,89 +397,6 @@ public class AggiornaIdFrozenLaw {
 		return NumContent;
 	}
 
-//	private Vector getRif() {
-//		Rif = new Vector(50, 10);
-//		NodeList rif = doc.getElementsByTagName("rif");
-//		for (int i = 0; i < rif.getLength(); i++) {
-//			if (!UtilDom.findAttribute(rif.item(i), "xlink:href").startsWith("urn"))
-//				Rif.addElement(rif.item(i));
-//		}
-//		return Rif;
-//	}
-
-//	private void setXlinkHrefInternalRifByContent() {
-//		// il vector Rif contiene tutti i nodi di tipo Rif Interni
-//		// per cui posso risalire anche alla partizione che li contiene per
-//		// completare gli incompleti
-//		for (int i = 0; i < Rif.size(); i++) {
-//			String rifText = UtilDom.getRecursiveTextNode((Node) Rif.get(i));
-//			String oldXlinkHref = UtilDom.getAttributeValueAsString((Node) Rif.get(i), "xlink:href");
-//			if (oldXlinkHref == null || oldXlinkHref.length() == 0) {
-//				Node container = nirUtilDom.getContainer((Node) Rif.get(i));
-//				String XlinkHref = getXlinkHrefInternalRifByContent(rifText, container);
-//				((Element) Rif.get(i)).setAttribute("xlink:href", XlinkHref);
-//			}
-//		}
-//	}
-
-	// risetta gli XlinkHref interni a partire dalla forma testuale del rif
-
-	private String getXlinkHrefInternalRifByContent(String rifText, Node container) {
-		String XlinkHref = new String();
-
-		// Tolgo gli eventuali caratteri inutili (es: ')', '.')
-		rifText = rifText.replaceAll("[\\W*]", " ");
-		rifText = rifText.trim();
-
-		// Splitto il testo rispetto agli spazi (es: articolo | 3 | comma | 2 |)
-		String rifTextComp[] = rifText.split("\\s+");
-
-		// Costruzione di XlinkHref da destra a sinistra (si gestisce meglio il
-		// '-')
-		for (int i = (rifTextComp.length - 1); i >= 0; i--) {
-			if (isNumeric(rifTextComp[i]))
-				XlinkHref = rifTextComp[i] + XlinkHref;
-			else if (isRoman(rifTextComp[i])) // Probabilmente non si verifica
-												// mai
-				XlinkHref = UtilLang.fromRomanToArabic(rifTextComp[i]) + XlinkHref;
-			else if (isLetter(rifTextComp[i]))
-				XlinkHref = UtilLang.fromLetterToNumber(rifTextComp[i]) + XlinkHref;
-			else if (rifTextComp[i].trim().equalsIgnoreCase("articolo"))
-				XlinkHref = "-art" + XlinkHref;
-			else if (rifTextComp[i].trim().equalsIgnoreCase("comma"))
-				XlinkHref = "-com" + XlinkHref;
-			else if (rifTextComp[i].trim().equalsIgnoreCase("lettera"))
-				XlinkHref = "-let" + XlinkHref;
-			else if (rifTextComp[i].trim().equalsIgnoreCase("numero"))
-				XlinkHref = "-num" + XlinkHref;
-			else {
-				// se c'e' qualcos'altro rispetto alla formulazione linguistica
-				// di un riferimento interno => e' un riferimento esterno o non
-				// si
-				// sa determinare il valore dell'XlinkHref
-				XlinkHref = "";
-				break;
-			}
-		}
-
-		if (XlinkHref.length() > 0) {
-			if (XlinkHref.charAt(0) == '-')
-				XlinkHref = "#" + XlinkHref.substring(1);
-			else
-				XlinkHref = "#" + XlinkHref;
-
-			if (XlinkHref.indexOf("com") != -1 && XlinkHref.indexOf("art") == -1) {
-				// aggiungere l'articolo
-			}
-
-		}
-
-		// TODO mettere un controllo xlink:href completi sotto all'articolo
-		// art-com-let-num
-		// e sopra all'articolo cap-sez etc
-
-		return XlinkHref;
-	}
 
 	private boolean isNumeric(String s) {
 		CharacterIterator theIterator = new StringCharacterIterator(s);
@@ -1166,7 +931,7 @@ public class AggiornaIdFrozenLaw {
 		// elelmenti el alla loro posizione nell'alfabeto us (non verificato il
 		// caso posAssolutaElemento)
 		
-		// FIXME non funzioner� piu' con i nuovi id fatti a lettere 
+		// FIXME non funzionera' piu' con i nuovi id fatti a lettere 
 		
 		if (nodeName.equalsIgnoreCase("el")) {
 			if (posizione % 26 > 9 && posizione % 26 <= 20)
@@ -1469,28 +1234,289 @@ public class AggiornaIdFrozenLaw {
 			return;
 
 		NamedNodeMap attrList = node.getAttributes();
-		if (attrList != null)
-			for (int i = 0; i < attrList.getLength(); i++) {
-				Attr attributo = (Attr) (attrList.item(i));
+		if (attrList != null){
+			for (int j = 0; j < attrList.getLength(); j++) {
+				Attr attributo = (Attr) (attrList.item(j));
 				if(!UtilDom.isIdAttribute(attributo) && attributo.getValue()!=null && !((String)(attributo.getValue())).equals("")){
 					if (modIDs.keySet().contains(attributo.getValue())) {
 						
-						System.out.println("nodo "+node.getNodeName()+" cambia attributo da "+attributo.getValue()+" a "+(String) modIDs.get(attributo.getValue()));
+						System.out.println("FOUND REFERRING ATTRIBUTE: nodo "+node.getNodeName()+" cambia attributo da "+attributo.getValue()+" a "+(String) modIDs.get(attributo.getValue()));
 						attributo.setValue((String) modIDs.get(attributo.getValue()));
 					}
 					if(modIDs.keySet().contains( ((String)attributo.getValue()).substring(1) ) ){
 						
-						System.out.println("nodo "+node.getNodeName()+" cambia attributo da "+((String)attributo.getValue())+" a "+"#"+(String) modIDs.get(((String)attributo.getValue()).substring(1)));
+						System.out.println("FOUND REFERRING ATTRIBUTE with #: nodo "+node.getNodeName()+" cambia attributo da "+((String)attributo.getValue())+" a "+"#"+(String) modIDs.get(((String)attributo.getValue()).substring(1)));
 						attributo.setValue("#"+(String) modIDs.get(((String)attributo.getValue()).substring(1)));
 					}
 				}
 				
 			}
+		}	
 		NodeList figli = node.getChildNodes();
-		for (int i = 0; i < figli.getLength(); i++)
-			getAndUpdateReferringAttributes(figli.item(i));
+		for (int j = 0; j < figli.getLength(); j++)
+			getAndUpdateReferringAttributes(figli.item(j));
 		return;
 	}
 
 
+	
+	////////////////////////////////////////////////////////////////////////////////////
+	//
+	//
+	//									GESTIONE RIF-INTERNI
+	//
+	//
+	////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	private Vector getRif() {
+		Rif = new Vector(50, 10);
+		NodeList rif = doc.getElementsByTagName("rif");
+		for (int i = 0; i < rif.getLength(); i++) {
+			if (!UtilDom.findAttribute(rif.item(i), "xlink:href").startsWith("urn"))
+				Rif.addElement(rif.item(i));
+		}
+		return Rif;
+	}
+
+	
+	
+	private void setXlinkHrefInternalRifByContent() {
+		// il vector Rif contiene tutti i nodi di tipo Rif Interni
+		// per cui posso risalire anche alla partizione che li contiene per
+		// completare gli incompleti		
+		for (int i = 0; i < Rif.size(); i++) {
+			String rifText = UtilDom.getRecursiveTextNode((Node) Rif.get(i));
+			String oldXlinkHref = UtilDom.getAttributeValueAsString((Node) Rif.get(i), "xlink:href");
+			// setto l'attributo xlink:href sulla base del testo del testo del rif interno solo a chi non ce l'ha gia' settato 
+			if (oldXlinkHref == null || oldXlinkHref.length() == 0) {
+				Node container = nirUtilDom.getContainer((Node) Rif.get(i));
+				String XlinkHref = getXlinkHrefInternalRifByContent(rifText, container);
+				((Element) Rif.get(i)).setAttribute("xlink:href", XlinkHref);
+			}
+		}
+	}
+
+	
+	// risetta gli XlinkHref interni a partire dalla forma testuale del rif
+	private String getXlinkHrefInternalRifByContent(String rifText, Node container) {
+		String XlinkHref = new String();
+	
+		// Tolgo gli eventuali caratteri inutili (es: ')', '.')
+		rifText = rifText.replaceAll("[\\W*]", " ");
+		rifText = rifText.trim();
+	
+		// Splitto il testo rispetto agli spazi (es: articolo | 3 | comma | 2 |)
+		String rifTextComp[] = rifText.split("\\s+");
+	
+		// Costruzione di XlinkHref da destra a sinistra (si gestisce meglio il '-')
+		for (int i = (rifTextComp.length - 1); i >= 0; i--) {
+			if (isNumeric(rifTextComp[i]))
+				XlinkHref = rifTextComp[i] + XlinkHref;
+			else if (isRoman(rifTextComp[i])) // Probabilmente non si verifica mai
+				XlinkHref = UtilLang.fromRomanToArabic(rifTextComp[i]) + XlinkHref;
+			else if (isLetter(rifTextComp[i]))
+				XlinkHref = UtilLang.fromLetterToNumber(rifTextComp[i]) + XlinkHref;
+			else if (rifTextComp[i].trim().equalsIgnoreCase("articolo"))
+				XlinkHref = "-art" + XlinkHref;
+			else if (rifTextComp[i].trim().equalsIgnoreCase("comma"))
+				XlinkHref = "-com" + XlinkHref;
+			else if (rifTextComp[i].trim().equalsIgnoreCase("lettera"))
+				XlinkHref = "-let" + XlinkHref;
+			else if (rifTextComp[i].trim().equalsIgnoreCase("numero"))
+				XlinkHref = "-num" + XlinkHref;
+			else {
+				// se c'e' qualcos'altro rispetto alla formulazione linguistica
+				// di un riferimento interno => e' un riferimento esterno o 
+				// non si sa determinare il valore dell'XlinkHref
+				XlinkHref = "";
+				break;
+			}
+		}
+	
+		if (XlinkHref.length() > 0) {
+			if (XlinkHref.charAt(0) == '-')
+				XlinkHref = "#" + XlinkHref.substring(1);
+			else
+				XlinkHref = "#" + XlinkHref;
+	
+			if (XlinkHref.indexOf("com") != -1 && XlinkHref.indexOf("art") == -1) {
+				// aggiungere l'articolo
+			}
+	
+		}
+	
+		// TODO mettere un controllo xlink:href completi sotto all'articolo
+		// art-com-let-num
+		// e sopra all'articolo cap-sez etc
+		return XlinkHref;
+	}
+
+	
+	
+	
+	
+	////////////////////////////////////////////////////////////////////////////////////
+	//
+	//
+	//									GESTIONE NOTE-NDR
+	//
+	//
+	////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	public Vector getNdrIdFromDoc() {
+		NodeList ndr = doc.getElementsByTagName("ndr");
+		Vector ids = new Vector(50, 10);
+		for (int i = 0; i < ndr.getLength(); i++) {
+			String id = UtilDom.getAttributeValueAsString(ndr.item(i), "num");
+			if (ids.indexOf(id) == -1)
+				ids.add(id);
+		}
+		return ids;
+	}
+
+	public boolean sortNotes(Vector ndrId) {
+		// ordina le note dentro redazionale nello stesso ordine in cu compaiono gli ndr nel testo
+		Vector newNotes = new Vector(50, 10);
+		Node parent = null;
+
+		// copia delle note nell'ordine in cui compaiono nel testo
+		for (int i = 0; i < ndrId.size(); i++) {
+			// FIXME bug su getElementById(); ancora non va
+			// if(doc.getElementById((String)ndrId.get(i))!=null)
+			// newNotes.add(doc.getElementById((String)ndrId.get(i)).cloneNode(true));
+			if (getNotaById((String) ndrId.get(i)) != null)
+				newNotes.add(getNotaById((String) ndrId.get(i)).cloneNode(true));
+			else{
+				if(logger.isDebugEnabled())
+				    logger.debug("il nodo di " + ndrId.get(i) + " e' null");
+			}
+		}
+
+		Vector oldNotes = getOldNotes();
+
+		if (oldNotes.size() > newNotes.size()) {
+			if(logger.isDebugEnabled())
+				logger.debug("ci sono note senza ndr; completa la lista");
+			// completa il vector newNotes da oldNotes con id != note in
+			// newNotes (aggiunge le note che non hanno un ndr)
+			for (int i = 0; i < oldNotes.size(); i++) {
+				if (ndrId.indexOf(UtilDom.getAttributeValueAsString((Node) oldNotes.get(i), "id")) == -1)
+					newNotes.add(oldNotes.get(i));
+			}
+		}
+         
+		if(logger.isDebugEnabled())
+			logger.debug("notaLength " + oldNotes.size() + " ndrLength " + newNotes.size());
+		if (oldNotes.size() == newNotes.size()) {
+//			if (oldNotes.size() > 0)
+//				parent = ((Node) oldNotes.get(0)).getParentNode();
+			for (int i = 0; i < oldNotes.size(); i++) {
+				parent = ((Node) oldNotes.get(i)).getParentNode();
+				if(logger.isDebugEnabled())
+					logger.debug("replace oldNote " + UtilDom.getAttributeValueAsString((Node) oldNotes.get(i), "id") + " with newNote "
+						+ UtilDom.getAttributeValueAsString((Node) newNotes.get(i), "id"));
+				// FIXME: non e' detto che il parent (redazionale) sia lo stesso per tutte le note; 
+				// e.g. note negli allegati
+				parent.replaceChild((Node) newNotes.get(i), (Node) oldNotes.get(i));
+			}
+			return true;
+		} else{
+			if(logger.isDebugEnabled())
+				logger.debug("ci sono ndr senza nota");
+		}
+		return false;
+	}
+
+	private Node getNotaById(String id) {
+		
+		System.err.println("getNotaById; id= "+id);
+		Node nota = (Node)doc.getElementById(id);
+		//System.err.println("con getElementById: "+nota.getTextContent());
+		
+		if(nota==null)
+			System.err.println("getelementById NON FUNZIONA");
+		else
+			System.err.println("getelementById FUNZIONA");
+		
+		NodeList notes = doc.getElementsByTagName("nota");
+		for (int i = 0; i < notes.getLength(); i++) {
+			if (UtilDom.getAttributeValueAsString(notes.item(i), "id").equals(id))
+				return (notes.item(i));
+		}
+		return null;
+	}
+
+	private Vector getOldNotes() {
+		Vector old = new Vector(50, 10);
+		NodeList notes = doc.getElementsByTagName("nota");
+		for (int i = 0; i < notes.getLength(); i++) {
+			old.add(notes.item(i));
+		}
+		return old;
+	}
+
+	
+	private String getNdrNumPrefix(String num){
+		
+		char[] numChar = num.toCharArray();
+		int i=0;
+		
+		for (i=numChar.length-1; i>=0;i--){
+			if(!isDigit(numChar[i]))
+				break;
+		}
+		if(i>0)
+		   return num.substring(0,i+1);
+		return "n";
+	}
+	
+	public void setNdrLink(Vector ndrId, boolean renum) {
+		NodeList ndr = doc.getElementsByTagName("ndr");
+		NodeList note = doc.getElementsByTagName("nota");
+		String num, value, prefix;
+
+		for (int i = 0; i < ndr.getLength(); i++) {
+			
+			//prefix = getNdrNumPrefix(UtilDom.getAttributeValueAsString((Node) ndr.item(i), "num")); 
+			//num = prefix + (ndrId.indexOf(UtilDom.getAttributeValueAsString((Node) ndr.item(i), "num")) + 1);
+			
+			
+			prefix = getNdrNumPrefix(UtilDom.getAttributeValueAsString((Node) note.item(i), "id")); 
+			num = UtilDom.getAttributeValueAsString((Node) note.item(i), "id");
+			
+			UtilDom.setAttributeValue(ndr.item(i), "num", num);
+			if(logger.isDebugEnabled())
+				logger.debug("renum " + renum);
+			if (renum) {
+				// togliere l'intero prefix e non solo la n
+				value = num.substring(prefix.length());
+				UtilDom.setAttributeValue(ndr.item(i), "valore", value);
+				String tipoNdr = rinum.getRinumerazioneNdr();
+				if(logger.isDebugEnabled())
+					logger.debug("tipoNdr " + tipoNdr);
+				if (tipoNdr.equalsIgnoreCase("cardinale"))
+					UtilDom.setTextNode(ndr.item(i), "(" + value + ")");
+				else if (tipoNdr.equalsIgnoreCase("letterale"))
+					UtilDom.setTextNode(ndr.item(i), "(" + UtilLang.fromArabicToLetter(value).toLowerCase() + ")");
+				else
+					UtilDom.setTextNode(ndr.item(i), "(" + UtilLang.fromArabicToRoman(value).toLowerCase() + ")");
+			}
+		}
+	}
+	
+	
+	////////////////////////////////////////////////////////////////////////////////////
+	//
+	//
+	//						END: 			GESTIONE NOTE-NDR
+	//
+	//
+	////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	
+	
+	
 }

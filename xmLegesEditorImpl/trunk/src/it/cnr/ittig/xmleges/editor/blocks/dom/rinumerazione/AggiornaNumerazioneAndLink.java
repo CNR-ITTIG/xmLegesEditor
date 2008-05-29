@@ -9,7 +9,6 @@ import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 import it.cnr.ittig.xmleges.editor.services.util.urn.NirUtilUrn;
 
-import java.util.HashMap;
 import java.util.Vector;
 
 import org.w3c.dom.Attr;
@@ -32,14 +31,6 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 
 	RulesManager rulesManager;
 
-//	// Vettore dei nodi xlink:href interni
-//	Vector InternalXlinkHref = new Vector(50, 10);
-//
-//	// Vettore gli attributi che sono un IDRef
-//	Vector IDRefAttributes = new Vector(50, 10);
-	
-	
-	
 
 	public AggiornaNumerazioneAndLink(RinumerazioneImpl rinumerazioneImpl) {
 		super(rinumerazioneImpl);
@@ -50,16 +41,15 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 	}
 
 	public void aggiornaNum(Node nodo) {
-
+		
+		
+		System.err.println("CALLED AggiornaNum");
+		
 		doc = nodo.getOwnerDocument();
 		NodeList nir = doc.getElementsByTagName("NIR");
 
-		// aggiornamento relativo alle note:
-		// le note vengono ordinate in base a come compaiono nel testo
-		Vector ndrId = getNdrIdFromDoc();
-		sortNotes(ndrId);
+			
 
-		// Aggiornamento ID e <num> degli elementi da rinumerare
 		// Recupero i nodi contenenti XlinkHref a elementi interni
 //		InternalXlinkHref = new Vector(50, 10);
 //		getInternalXlinkHref(nir.item(0));
@@ -67,25 +57,109 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 //			logger.debug("external call InternalXlinkHref: " + UtilDom.getAttributeValueAsString((Node) InternalXlinkHref.get(i), "xlink:href"));
 //		}
 //
-//		// Recupero gli attributi che sono di tipo idref per poi aggiornarli
-//		// nel caso avessero puntato a nodi che hanno cambiato posizione
-//		// esempio idref: "fonte"; aggiungere gli altri
-//		IDRefAttributes = new Vector(50, 10);
-//		getIDRefAttributes(nir.item(0));
 
+
+		// Aggiornamento ID e <num> degli elementi da rinumerare
 		updateIDsByPosition(nir.item(0));
 		updateNumByID();
 		
-		getAndUpdateReferringAttributes(nir.item(0));
-
-		// Assegnazione degli ID alle partizioni di una Modifica
-		// cio? dentro le virgolette
+		
+		// Assegnazione degli ID alle partizioni di una Modifica (dentro le virgolette) 
+		// Anche con rinumerazione attiva, dentro le modifiche si applica il metodo AggiornaIdFrozenLaw.updateIDs (come se la rinumerazione fosse spenta) 
 		NodeList virgoletteList = doc.getElementsByTagName("virgolette");
 		for (int i = 0; i < virgoletteList.getLength(); i++) {
 			updateIDs(virgoletteList.item(i).getFirstChild());
 		}
+			
+		// Recupero gli attributi che sono di tipo idref per poi aggiornarli
+		// nel caso avessero puntato a nodi che hanno cambiato posizione
+		// esempio idref: "fonte", "xlink:href"  etc. etc. 
+		getAndUpdateReferringAttributes(nir.item(0));   // cablare qui dentro l'updateInternalXlinkHref (FATTO)
+
+			
+		// aggiornamento relativo alle note:
+		// le note vengono ordinate in base a come compaiono nel testo
+		Vector ndrId = getNdrIdFromDoc();
+		sortNotes(ndrId);
 		setNdrLink(ndrId, true);
+		
 	}
+	
+	
+	protected void getAndUpdateReferringAttributes(Node node) {
+		
+		System.err.println("UpdateReferringAttributes VERSIONE NUM ATTIVA");
+		
+		if (node == null || modIDs.size()==0)
+			return;
+
+		NamedNodeMap attrList = node.getAttributes();
+		if (attrList != null){
+			for (int j = 0; j < attrList.getLength(); j++) {
+				Attr attributo = (Attr) (attrList.item(j));
+				if(!UtilDom.isIdAttribute(attributo) && attributo.getValue()!=null && !((String)(attributo.getValue())).equals("")){
+					if (modIDs.keySet().contains(attributo.getValue())) {
+						
+						System.out.println("FOUND REFERRING ATTRIBUTE: nodo "+node.getNodeName()+" cambia attributo da "+attributo.getValue()+" a "+(String) modIDs.get(attributo.getValue()));
+						attributo.setValue((String) modIDs.get(attributo.getValue()));
+					}
+					if(modIDs.keySet().contains( ((String)attributo.getValue()).substring(1) ) ){
+						
+						System.out.println("FOUND REFERRING ATTRIBUTE with #: nodo "+node.getNodeName()+" cambia attributo da "+((String)attributo.getValue())+" a "+"#"+(String) modIDs.get(((String)attributo.getValue()).substring(1)));
+						String newId = (String) modIDs.get(((String)attributo.getValue()).substring(1));
+						attributo.setValue("#"+newId);
+						
+						
+						// ex updateInternalXlinkHref
+						// AGGIUNTO QUESTO IF AL getAndUpdateReferringAttributes() di AggiornaIdFrozenLaw
+						if (node.getNodeName().equals("rif")) {
+									// Se il nodo che ha come attributo xlink:href e' un rif
+									// allora si aggiorna anche il testo del rif
+									Node IntRifTextNode = doc.createTextNode(getTextInternalRifFromID(node, newId));
+									// FIXME non e' detto che la nuova forma testuale debba
+									// essere quella standard; se il rif interno aveva una
+									// forma testuale personalizzata, va lasciata quella
+									node.replaceChild(IntRifTextNode, node.getFirstChild());
+						}
+						
+					}
+				}
+			}
+		}
+		NodeList figli = node.getChildNodes();
+		for (int j = 0; j < figli.getLength(); j++)
+			getAndUpdateReferringAttributes(figli.item(j));
+		return;
+	}
+	
+	
+
+
+	//  nel caso AggiornaId ripristina il contenuto originale dell'attributo xlink:href sulla base del contenuto testuale del rif	
+	//  nel caso AggiornaNum  VICEVERSA  aggiorna il contenuto testuale del rif sulla base del valore assegnato all'id dell'xlink:href
+	private String getTextInternalRifFromID(Node intRif, String NewID) {
+	
+		// estraggo i vari componenti dell'id Ex: art12-com3-let1
+		String[] IDComponent = NewID.split("-");
+		String textRif = new String();
+	
+		// Controllo se il rif fa parte di un mrif in tal caso restituisco solo
+		// il numero dell'unità riferita
+		if (intRif.getParentNode().getNodeName().compareTo("mrif") == 0) {
+			textRif = ((String) IDComponent[IDComponent.length - 1]).substring(3);
+			return textRif;
+		}
+	
+		String callingId = null;
+		if (nirUtilDom.getContainer(intRif) != null)
+			callingId = UtilDom.getAttributeValueAsString(nirUtilDom.getContainer(intRif), "id");
+		textRif = nirUtilUrn.getFormaTestualeById(callingId, NewID);
+	
+		return textRif;
+	}
+
+
+	
 
 	/**
 	 * Aggiorna gli ID sulla base delle posizioni
@@ -107,29 +181,19 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 			IDValue = getIDByPosition(nodo);
 			if (isElementWithID(nodo)) {
 				// IDValue = getIDByPosition(figlio);
-				// Se esiste gi? un id in qualunque elemento
+				// Se esiste già un id in qualunque elemento
 				// lo prendo come OldID
 				String OldID = ((Element) nodo).getAttribute("id");
-				// Controllo se esiste un riferimento interno che punta
-				// all'elemento corrente (figlio)
-				// Il controllo viene fatto solo se il nuovo ID (IDValue) !=
-				// OldID
-				// In questo caso si aggiorna il riferimento interno e la
-				// formulazione linguistica
-				// Lo stesso si fa per gli attributi di tipo IDRif
+				
 				if (!UtilDom.hasIdAttribute(nodo) || !IDValue.equals(OldID)) {   // se non ce l'aveva o e' cambiato
-//					updateIDRefAttributes(OldID, IDValue);
 					System.out.println("idChanged: new  " + IDValue + " old " + OldID);
 					modIDs.put(OldID, IDValue);
 					UtilDom.setIdAttribute(nodo, IDValue);
-//					updateInternalXlinkHref(OldID, IDValue);
 				}
-			} else { // siamo comunque tra gli elementi di tipo
-						// ElementToBeIdUpdated
-				logger.debug("nuovo attributo: " + IDValue);
+				
+			} else { // siamo comunque tra gli elementi di tipo ElementToBeIdUpdated
+				System.out.println("nuovo attributo: " + IDValue);
 				UtilDom.setIdAttribute(nodo, IDValue);
-				// va aggiornato anche qui: chi e' l'oldID ?
-				// updateInternalXlinkHref(OldID, IDValue);
 			}
 		}// Fine if isElementToBeIDUpdated
 
@@ -184,148 +248,9 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 		}
 	}
 
-//	private void getInternalXlinkHref(Node node) {
-//		if (node == null)
-//			return;
-//		if (node.getNodeType() == Node.ELEMENT_NODE)
-//			if (node.getAttributes().getNamedItem("xlink:href") != null && node.getAttributes().getNamedItem("xlink:href").getNodeValue().trim().length() != 0)
-//				if (node.getAttributes().getNamedItem("xlink:href").getNodeValue().charAt(0) == '#')
-//					InternalXlinkHref.addElement(node);
-//		NodeList figli = node.getChildNodes();
-//		for (int i = 0; i < figli.getLength(); i++) {
-//			getInternalXlinkHref(figli.item(i));
-//		}
-//		return;
-//	}
 
-//	private void updateInternalXlinkHref(String OldID, String NewID) {
-//		logger.debug("updating Internal Xlink Href: oldID " + OldID + " newID " + NewID);
-//		logger.debug("IternalXlinHref: size " + InternalXlinkHref.size());
-//
-//		// Vettore degli XlinkHref interni aggiornato
-//		// Dovranno essere tolti dal vettore dopo che sono stati aggiornati
-//		// altrimenti si rischia di aggiornarli piu' volte avendo modificato il
-//		// proprio xlink:href
-//		Vector UpdatedIntXlinkHref = new Vector(50, 10);
-//
-//		for (int i = 0; i < InternalXlinkHref.size(); i++) {
-//			if (((Node) InternalXlinkHref.get(i)).getAttributes().getNamedItem("xlink:href").getNodeValue().substring(1).equals(OldID)) {
-//				// Si verifica se esiste un xlink:href interno ("#..."
-//				// (substring(1))
-//				// e' uguale al vecchio ID dell'elemento corrente, in questo
-//				// caso si
-//				// aggiorna l'xlink:href interno
-//				// Ho trovato un xlink:href interno uguale al vecchio ID
-//				// dell'elemento corrente
-//				// Aggiorno l'xlink:href interno
-//
-//				Element parentXlinkHref = (Element) InternalXlinkHref.get(i);
-//				parentXlinkHref.setAttribute("xlink:href", "#" + NewID);
-//				if (parentXlinkHref.getNodeName().equals("rif")) {
-//					// Se il nodo che ha come attributo xlink:href e' un rif
-//					// allora si aggiorna anche il testo del rif
-//					Node IntRifTextNode = doc.createTextNode(getTextInternalRifFromID(parentXlinkHref, NewID));
-//					// FIXME non e' detto che la nuova forma testuale debba
-//					// essere quella standard; se il rif interno aveva una
-//					// forma testuale personalizzata, va lasciata quella
-//					((Node) parentXlinkHref).replaceChild(IntRifTextNode, parentXlinkHref.getFirstChild());
-//				}
-//				UpdatedIntXlinkHref.addElement(InternalXlinkHref.get(i));
-//
-//			}
-//		}
-//
-//		// Un riferimento aggiornato non deve piu' essere aggiornato
-//		// percio' lo tolgo dal vettore dei rif interni
-//		for (int i = 0; i < UpdatedIntXlinkHref.size(); i++) {
-//			logger.debug("removed updatedIntXlink: " + UtilDom.getAttributeValueAsString((Node) UpdatedIntXlinkHref.get(i), "xlink:href"));
-//			InternalXlinkHref.removeElement(UpdatedIntXlinkHref.get(i));
-//		}
-//
-//	}
 
-//	/*
-//	 * Prendo i nodi che sono attributi di tipo IDRef (es: fonte)
-//	 */
-//	private void getIDRefAttributes(Node node) {
-//		if (node == null)
-//			return;
-//
-//		NamedNodeMap attrList = node.getAttributes();
-//		if (attrList != null)
-//			for (int i = 0; i < attrList.getLength(); i++) {
-//				if (isIDRefAttribute((Attr) (attrList.item(i)))) {
-//					// Inserisco dentro il vettore il nodo che e' un IDRef
-//					IDRefAttributes.addElement(attrList.item(i));
-//				}
-//			}
-//		NodeList figli = node.getChildNodes();
-//		for (int i = 0; i < figli.getLength(); i++)
-//			getIDRefAttributes(figli.item(i));
-//		return;
-//	}
 
-//	private boolean isIDRefAttribute(Attr attr) {
-//
-//		String attrName = attr.getName();
-//		// Aggiungere altri nomi di IDRef quando ci saranno
-//		if (attrName.equals("fonte"))
-//			return true;
-//		else
-//			return false;
-//	}
-
-	/*
-	 * Aggiorna gli attributi di tipo IDRef se c'e' stato un cambiamento negli
-	 * ID dell'elemento corrente ai quali si riferivano che ha avuto l'ID
-	 * cambiato da OldID a NewID
-	 */
-//	private void updateIDRefAttributes(String OldID, String NewID) {
-//		// Vettore degli XlinkHref interni aggiornato
-//		// Dovranno essere tolti dal vettore dopo che sono stati aggiornati
-//		// altrimenti si rischia di aggiornarli piu' volte avendo modificato il
-//		// proprio xlink:href
-//		Vector UpdatedIDRefAttributes = new Vector();
-//
-//		for (int i = 0; i < IDRefAttributes.size(); i++) {
-//			if (((Attr) IDRefAttributes.get(i)).getValue().equals(OldID)) {
-//				// Si verifica se esiste un attributo IDRef
-//				// e' uguale al vecchio ID dell'elemento corrente, in questo
-//				// caso si
-//				// aggiorna l'attributo IDRef
-//
-//				((Attr) IDRefAttributes.get(i)).setValue(NewID);
-//
-//				UpdatedIDRefAttributes.addElement(IDRefAttributes.get(i));
-//			}
-//		}
-//		// Un riferimento aggiornato non deve piu' essere aggiornato
-//		// percio' lo tolgo dal vettore degli attributi IDRef
-//		for (int i = 0; i < UpdatedIDRefAttributes.size(); i++)
-//			IDRefAttributes.removeElement(UpdatedIDRefAttributes.get(i));
-//
-//	}
-
-	private String getTextInternalRifFromID(Node intRif, String NewID) {
-
-		// estraggo i vari componenti dell'id Ex: art12-com3-let1
-		String[] IDComponent = NewID.split("-");
-		String textRif = new String();
-
-		// Controllo se il rif fa parte di un mrif in tal caso restituisco solo
-		// il numero dell'unit? riferita
-		if (intRif.getParentNode().getNodeName().compareTo("mrif") == 0) {
-			textRif = ((String) IDComponent[IDComponent.length - 1]).substring(3);
-			return textRif;
-		}
-
-		String callingId = null;
-		if (nirUtilDom.getContainer(intRif) != null)
-			callingId = UtilDom.getAttributeValueAsString(nirUtilDom.getContainer(intRif), "id");
-		textRif = nirUtilUrn.getFormaTestualeById(callingId, NewID);
-
-		return textRif;
-	}
 
 	/**
 	 * getRoman
