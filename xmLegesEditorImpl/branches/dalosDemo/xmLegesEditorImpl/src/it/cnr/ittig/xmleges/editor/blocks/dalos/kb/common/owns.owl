@@ -1,59 +1,57 @@
 <?xml version="1.0"?>
 <rdf:RDF
-    xmlns="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
   xml:base="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl">
   <owl:Ontology rdf:about="">
-    <owl:versionInfo xml:lang="en">ver. 2.1</owl:versionInfo>
     <rdfs:comment xml:lang="en">OntoWordNetSchema - no Disjoint classes - no language properties - protoForm property added</rdfs:comment>
+    <owl:versionInfo xml:lang="en">ver. 2.1</owl:versionInfo>
   </owl:Ontology>
-  <owl:Class rdf:ID="Collocation">
+  <owl:Class rdf:ID="NounSynset">
     <rdfs:subClassOf>
-      <owl:Class rdf:ID="Word"/>
+      <owl:Class rdf:ID="Synset"/>
     </rdfs:subClassOf>
   </owl:Class>
-  <owl:Class rdf:ID="WordSense"/>
-  <owl:Class rdf:ID="AdverbWordSense">
+  <owl:Class rdf:ID="NounWordSense">
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:someValuesFrom>
-          <owl:Class rdf:ID="AdverbSynset"/>
-        </owl:someValuesFrom>
+        <owl:someValuesFrom rdf:resource="#NounSynset"/>
         <owl:onProperty>
           <owl:FunctionalProperty rdf:ID="inSynset"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <rdfs:subClassOf rdf:resource="#WordSense"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="WordSense"/>
+    </rdfs:subClassOf>
   </owl:Class>
-  <owl:Class rdf:ID="VerbWordSense">
-    <rdfs:subClassOf rdf:resource="#WordSense"/>
+  <owl:Class rdf:ID="AdjectiveSatelliteWordSense">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="AdjectiveWordSense"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="AdverbWordSense">
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:someValuesFrom>
-          <owl:Class rdf:ID="VerbSynset"/>
-        </owl:someValuesFrom>
         <owl:onProperty>
           <owl:FunctionalProperty rdf:about="#inSynset"/>
         </owl:onProperty>
+        <owl:someValuesFrom>
+          <owl:Class rdf:ID="AdverbSynset"/>
+        </owl:someValuesFrom>
       </owl:Restriction>
     </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#WordSense"/>
   </owl:Class>
-  <owl:Class rdf:ID="AdjectiveSynset">
-    <rdfs:subClassOf>
-      <owl:Class rdf:ID="Synset"/>
-    </rdfs:subClassOf>
-  </owl:Class>
-  <owl:Class rdf:ID="AdjectiveSatelliteSynset">
-    <rdfs:subClassOf rdf:resource="#AdjectiveSynset"/>
-  </owl:Class>
-  <owl:Class rdf:ID="AdjectiveWordSense">
+  <owl:Class rdf:about="#AdjectiveWordSense">
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:someValuesFrom rdf:resource="#AdjectiveSynset"/>
+        <owl:someValuesFrom>
+          <owl:Class rdf:ID="AdjectiveSynset"/>
+        </owl:someValuesFrom>
         <owl:onProperty>
           <owl:FunctionalProperty rdf:about="#inSynset"/>
         </owl:onProperty>
@@ -64,79 +62,87 @@
   <owl:Class rdf:about="#AdverbSynset">
     <rdfs:subClassOf rdf:resource="#Synset"/>
   </owl:Class>
-  <owl:Class rdf:ID="NounSynset">
+  <owl:Class rdf:about="#AdjectiveSynset">
     <rdfs:subClassOf rdf:resource="#Synset"/>
   </owl:Class>
-  <owl:Class rdf:ID="NounWordSense">
+  <owl:Class rdf:ID="VerbSynset">
+    <rdfs:subClassOf rdf:resource="#Synset"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Word"/>
+  <owl:Class rdf:ID="VerbWordSense">
+    <rdfs:subClassOf rdf:resource="#WordSense"/>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:onProperty>
           <owl:FunctionalProperty rdf:about="#inSynset"/>
         </owl:onProperty>
-        <owl:someValuesFrom rdf:resource="#NounSynset"/>
+        <owl:someValuesFrom rdf:resource="#VerbSynset"/>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <rdfs:subClassOf rdf:resource="#WordSense"/>
   </owl:Class>
-  <owl:Class rdf:about="#VerbSynset">
-    <rdfs:subClassOf rdf:resource="#Synset"/>
+  <owl:Class rdf:ID="Collocation">
+    <rdfs:subClassOf rdf:resource="#Word"/>
   </owl:Class>
-  <owl:Class rdf:ID="AdjectiveSatelliteWordSense">
-    <rdfs:subClassOf rdf:resource="#AdjectiveWordSense"/>
+  <owl:Class rdf:ID="AdjectiveSatelliteSynset">
+    <rdfs:subClassOf rdf:resource="#AdjectiveSynset"/>
   </owl:Class>
+  <owl:DatatypeProperty rdf:ID="frame">
+    <rdfs:domain rdf:resource="#VerbWordSense"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:ID="tagCount">
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
     <rdfs:domain rdf:resource="#Synset"/>
   </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:ID="frame">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="#VerbWordSense"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:ID="lexicalForm">
-    <rdfs:domain rdf:resource="#Word"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:ID="protoForm">
-    <rdfs:domain rdf:resource="#Word"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-  </owl:DatatypeProperty>
-  <owl:FunctionalProperty rdf:ID="synsetId">
+  <owl:DatatypeProperty rdf:ID="hasDefinition">
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     <rdfs:domain rdf:resource="#Synset"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-  </owl:FunctionalProperty>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="lexicalForm">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#Word"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="protoForm">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#Word"/>
+  </owl:DatatypeProperty>
   <owl:FunctionalProperty rdf:ID="gloss">
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     <rdfs:domain rdf:resource="#Synset"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
   </owl:FunctionalProperty>
-  <owl:FunctionalProperty rdf:ID="word">
-    <rdfs:range rdf:resource="#Word"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <owl:inverseOf>
-      <owl:InverseFunctionalProperty rdf:ID="sense"/>
-    </owl:inverseOf>
-    <rdfs:domain rdf:resource="#WordSense"/>
-  </owl:FunctionalProperty>
   <owl:FunctionalProperty rdf:about="#inSynset">
+    <rdfs:domain rdf:resource="#WordSense"/>
     <rdfs:range rdf:resource="#Synset"/>
     <owl:inverseOf>
       <owl:InverseFunctionalProperty rdf:ID="containsWordSense"/>
     </owl:inverseOf>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="synsetId">
+    <rdfs:domain rdf:resource="#Synset"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="word">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
     <rdfs:domain rdf:resource="#WordSense"/>
+    <rdfs:range rdf:resource="#Word"/>
+    <owl:inverseOf>
+      <owl:InverseFunctionalProperty rdf:ID="sense"/>
+    </owl:inverseOf>
   </owl:FunctionalProperty>
   <owl:InverseFunctionalProperty rdf:about="#sense">
     <owl:inverseOf rdf:resource="#word"/>
-    <rdfs:domain rdf:resource="#Word"/>
     <rdfs:range rdf:resource="#WordSense"/>
+    <rdfs:domain rdf:resource="#Word"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
   </owl:InverseFunctionalProperty>
   <owl:InverseFunctionalProperty rdf:about="#containsWordSense">
-    <rdfs:domain rdf:resource="#Synset"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
     <owl:inverseOf rdf:resource="#inSynset"/>
     <rdfs:range rdf:resource="#WordSense"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="#Synset"/>
   </owl:InverseFunctionalProperty>
 </rdf:RDF>
 

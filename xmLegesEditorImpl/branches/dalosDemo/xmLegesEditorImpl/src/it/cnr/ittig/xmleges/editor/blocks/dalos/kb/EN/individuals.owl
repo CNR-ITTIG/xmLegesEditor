@@ -1068,10 +1068,9 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-applicant_authority-noun-1">
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25173-02004r2006-20050612-en-art3-par1-pntf"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-25173-02004r2006-20050612-en-art3-par1-pntf"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25173-02004r2006-20050612-en-art15-par3-pntb"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000025173</owns:synsetId>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(f) 'applicant authority' means the competent authority that makes a request for mutual assistance;</owns:gloss>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-correct_form-noun-1">
@@ -1571,9 +1570,8 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-law_that_protects_consumer_interests-noun-1">
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-28047-02004r2006-20050612-en-art3-par1-pnta"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-28047-02004r2006-20050612-en-art3-par1-pnta"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000028047</owns:synsetId>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(a) 'laws that protect consumers' interests' means the Directives as transposed into the internal legal order of the Member States and the Regulations listed in the Annex;</owns:gloss>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-chain-noun-1">
@@ -1595,10 +1593,9 @@
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27987-62000A0074-en-par68"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-supplier-noun-1">
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-28050-02004r2006-20050612-en-art3-par1-pnth"/>
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-28050-02002l0065-20050612-en-art2-par1-pntc"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-28050-02004r2006-20050612-en-art3-par1-pnth"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-28050-02002l0065-20050612-en-art2-par1-pntc"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000028050</owns:synsetId>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(h) 'seller or supplier' means any natural or legal person who, in respect of the laws that protect consumers' interests, is acting for purposes relating to his trade, business, craft or profession;</owns:gloss>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-management-noun-1">
@@ -1985,9 +1982,8 @@
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27866-61999J0392-en-par74"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-seller-noun-1">
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-28049-02004r2006-20050612-en-art3-par1-pnth"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-28049-02004r2006-20050612-en-art3-par1-pnth"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000028049</owns:synsetId>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(h) 'seller or supplier' means any natural or legal person who, in respect of the laws that protect consumers' interests, is acting for purposes relating to his trade, business, craft or profession;</owns:gloss>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-prtvio-noun-1">
@@ -2152,9 +2148,8 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-selling_price-noun-1">
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(a) selling price shall mean the final price for a unit of the product, or a given quantity of the product, including VAT and all other taxes;</owns:gloss>
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27518-31998L0006-en-art2-par1-pnta"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27518-31998L0006-en-art4-par1"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-27518-31998L0006-en-art2-par1-pnta"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27518-31998L0006-en-art3-par1"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27518-31998L0006-en-art3-par4"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27518-31998L0006-en-art1-par1"/>
@@ -2694,11 +2689,10 @@
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27069-32005L0029-en-pre-rec6"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-trader-noun-1">
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-32290-32006l0114-en-art2-par1-pntd"/>
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-32290-32005L0029-en-art2-par1-pntb"/>
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-32290-31998L0006-en-art2-par1-pntd"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-32290-32006l0114-en-art2-par1-pntd"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-32290-32005L0029-en-art2-par1-pntb"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-32290-31998L0006-en-art2-par1-pntd"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032290</owns:synsetId>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(d) "trader" means any natural or legal person who is acting for purposes relating to his trade, craft, business or profession and anyone acting in the name of or on behalf of a trader;</owns:gloss>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-itinerant-noun-1">
@@ -3162,11 +3156,11 @@
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-financial_service-noun-1">
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000026108</owns:synsetId>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26108-32004L0113-en-pre-rec18"/>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(b) 'financial service' means any service of a banking, credit, insurance, personal pension, investment or payment nature;</owns:gloss>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26108-32005L0029-en-pre-rec10"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26108-32004L0113-en-art5-par1"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26108-01997L0007-20050612-en-art3-par1-pnt1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-26108-02002l0065-20050612-en-art2-par1-pntb"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26108-32005L0029-en-pre-rec9"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26108-32004L0113-en-pre-rec20"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26108-31993L0013-en-ann-par2-pnta"/>
@@ -3174,7 +3168,6 @@
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26108-32005L0029-en-art3-par9"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26108-31993L0013-en-ann-par2-pntb"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26108-62003J0350-en-par20"/>
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26108-02002l0065-20050612-en-art2-par1-pntb"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-credit_contract-noun-1">
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25666-62002J0264-en-par8-rft1"/>
@@ -3192,9 +3185,8 @@
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26887-62005J0315-en-par40"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26887-62005J0315-en-par35"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26887-62005J0315-en-opp1"/>
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26887-02002l0065-20050612-en-art2-par1-pntg"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-26887-02002l0065-20050612-en-art2-par1-pntg"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000026887</owns:synsetId>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(g) 'operator or supplier of a means of distance communication' means any public or private, natural or legal person whose trade, business or profession involves making one or more means of distance communication available to suppliers.</owns:gloss>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-waste_management-noun-1">
@@ -3795,10 +3787,9 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-comparative_advertising-noun-1">
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25506-32006L0114-en-art2-par1-pntc"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-25506-32006L0114-en-art2-par1-pntc"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25506-32005L0029-en-art14-par1-pnt3-nov-blk2"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000025506</owns:synsetId>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(c) "comparative advertising" means any advertising which explicitly or by implication identifies a competitor or goods or services offered by a competitor;</owns:gloss>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-right_of_cancellation-noun-1">
@@ -3973,10 +3964,9 @@
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25640-61996A0105-en-kwd4-lrf"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-consumer-noun-1">
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-28101-32000l0031-en-art2-par1-pnte"/>
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-28101-02002l0065-20050612-en-art2-par1-pntd"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-28101-32000l0031-en-art2-par1-pnte"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-28101-02002l0065-20050612-en-art2-par1-pntd"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000028101</owns:synsetId>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(e) "consumer": any natural person who is acting for purposes which are outside his or her trade, business or profession;</owns:gloss>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-intervals-noun-1">
@@ -5237,11 +5227,10 @@
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26723-32005L0029-en-pre-rec3"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26723-32006L0114-en-art5-par1-sub2"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26723-01997L0007-20050612-en-pre-rec11"/>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(b) "misleading advertising" means any advertising which in any way, including its presentation, deceives or is likely to deceive the persons to whom it is addressed or whom it reaches and which, by reason of its deceptive nature, is likely to affect their economic behaviour or which, for those reasons, injures or is likely to injure a competitor;</owns:gloss>
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26723-32006L0114-en-art2-par1-pntb"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26723-32006L0114-en-art5-par3-sub1a"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26723-32006L0114-en-art5-par1-sub2-pnta"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26723-32005L0029-en-pre-rec14"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-26723-32006L0114-en-art2-par1-pntb"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000026723</owns:synsetId>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26723-32006L0114-en-art2-par1-pntc"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26723-32006L0114-en-art5-par4-pnta"/>
@@ -5431,9 +5420,8 @@
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-products_sold_in_bulk-noun-1">
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27147-31998L0006-en-pre-rec7"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27147-31998L0006-en-art3-par3"/>
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27147-31998L0006-en-art2-par1-pntc"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-27147-31998L0006-en-art2-par1-pntc"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000027147</owns:synsetId>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(c) products sold in bulk shall mean products which are not pre-packaged and are measured in the presence of the consumer;</owns:gloss>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-bundesgerichtshof-noun-1">
@@ -5988,9 +5976,8 @@
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27722-61999J0392-en-sbj-pnt4"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-professional_diligence-noun-1">
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-32299-32005L0029-en-art2-par1-pnth"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-32299-32005L0029-en-art2-par1-pnth"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032299</owns:synsetId>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(h) "professional diligence" means the standard of special skill and care which a trader may reasonably be expected to exercise towards consumers, commensurate with honest market practice and/or the general principle of good faith in the trader's field of activity;</owns:gloss>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-agency-noun-1">
@@ -6920,9 +6907,8 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-market_survellance_activities-noun-1">
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-28052-02004r2006-20050612-en-art3-par1-pnti"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-28052-02004r2006-20050612-en-art3-par1-pnti"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000028052</owns:synsetId>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(i) 'market surveillance activities' means the actions of a competent authority designed to detect whether intra-Community infringements have taken place within its territory;</owns:gloss>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-loan_agreement-noun-1">
@@ -8089,9 +8075,8 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-intra-community_infringment-noun-1">
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-28032-02004r2006-20050612-en-pre-rec3"/>
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-28032-02004r2006-20050612-en-art3-par1-pntb"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-28032-02004r2006-20050612-en-art3-par1-pntb"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000028032</owns:synsetId>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(b) 'intra-Community infringement' means any act or omission contrary to the laws that protect consumers' interests, as defined in (a), that harms, or is likely to harm, the collective interests of consumers residing in a Member State or Member States other than the Member State where the act or omission originated or took place; or where the responsible seller or supplier is established; or where evidence or assets pertaining to the act or omission are to be found;</owns:gloss>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-matters-noun-1">
@@ -9330,9 +9315,8 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-collective_interests_of_consumer-noun-1">
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-28054-02004r2006-20050612-en-art3-par1-pntk"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-28054-02004r2006-20050612-en-art3-par1-pntk"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000028054</owns:synsetId>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(k) 'collective interests of consumers' means the interests of a number of consumers that have been harmed or are likely to be harmed by an infringement.</owns:gloss>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-regeneratpo-noun-1">
@@ -9755,10 +9739,9 @@
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000027042</owns:synsetId>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-product-noun-1">
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-32297-32005L0029-en-art2-par1-pntc"/>
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-32297-01985l0374-19990604-en-art2-par1"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-32297-32005L0029-en-art2-par1-pntc"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-32297-01985l0374-19990604-en-art2-par1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032297</owns:synsetId>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(c) "product" means any goods or service including immovable property, rights and obligations;</owns:gloss>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-high_court_states-noun-1">
@@ -10263,9 +10246,8 @@
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26445-62002J0022-en-opp2"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-consumer_complaint-noun-1">
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25577-02004r2006-20050612-en-art3-par1-pntj"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-25577-02004r2006-20050612-en-art3-par1-pntj"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000025577</owns:synsetId>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(j) 'consumer complaint' means a statement, supported by reasonable evidence, that a seller or supplier has committed, or is likely to commit, an infringement of the laws that protect consumers' interests;</owns:gloss>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-metalayxl-noun-1">
@@ -10503,7 +10485,6 @@
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-31985L0577-en-art3-par2-pntc-pnt1"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-62003J0350-en-par18-rft2"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-62002J0074-en-opp1"/>
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-31998L0006-en-art2-par1-pnte"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-61999J0541-en-par15"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-62004J0229-en-par14"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-01987L0102-19980421-en-pre-rec1"/>
@@ -10654,6 +10635,7 @@
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-31990L0314-en-art4-par3"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-31990L0314-en-art4-par6-pnta"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-62004J0302-en-par11-rft1"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-32005L0029-en-art2-par1-pnta"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-62003J0070-en-par20"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-61999J0144-en-par2"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-31998L0006-en-pre-rec1"/>
@@ -10661,7 +10643,6 @@
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-61999J0372-en-tit"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-31985L0577-en-pre-rec3"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-31999L0044-en-art1-par4"/>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(a) "consumer" means any natural person who, in commercial practices covered by this Directive, is acting for purposes which are outside his trade, business, craft or profession;</owns:gloss>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-62004J0229-en-par3-rft1"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-62004J0302-en-par5-rft1"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-61997J0423-en-sum5-sub1"/>
@@ -10686,6 +10667,7 @@
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-31998L0006-en-pre-rec2"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-62003J0336-en-par5"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-62002J0237-en-sbj"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-31998L0006-en-art2-par1-pnte"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-62004J0229-en-par1"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-01985L0374-19990604-en-pre-rec1"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-62003J0350-en-par4-rft4"/>
@@ -10748,6 +10730,7 @@
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-01997L0007-20050612-en-art11-par1"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-31999L0044-en-art5-par2-sub1"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-32005L0029-en-ann1-par30"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-01987L0102-19980421-en-art1-par2-pnta"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-01987L0102-19980421-en-art9-par1"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-61998J0240-en-par10"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-61999J0541-en-par10-rft2"/>
@@ -10849,7 +10832,6 @@
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-01997L0007-20050612-en-art12-par1"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-62002J0264-en-opp1"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-61997J0423-en-par60"/>
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-32005L0029-en-art2-par1-pnta"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-61999J0481-en-par46"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-61997J0423-en-opp2"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-32005L0029-en-ann1-par22"/>
@@ -11185,7 +11167,6 @@
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-61999J0481-en-sum1-sub1"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-31993L0013-en-ann-par1-pntp"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-61997J0423-en-par3-rft1"/>
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-01987L0102-19980421-en-art1-par2-pnta"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-62004J0229-en-sum2-pnt1"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-62003J0070-en-par9"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25574-01998L0027-20061228-en-pre-rec1"/>
@@ -13807,7 +13788,6 @@
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25469-32005L0029-en-art2-par1-pnta"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25469-32005L0029-en-art5-par2-pntb"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25469-32005L0029-en-tit-sbj"/>
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25469-32005L0029-en-art2-par1-pntd"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25469-32005L0029-en-art15-par1-pnt2-nov-blk2"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25469-32005L0029-en-ann1-par19"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25469-32005L0029-en-pre-rec8"/>
@@ -13817,6 +13797,7 @@
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25469-32005L0029-en-pre-rec11"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25469-32005L0029-en-chp2-ptt"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25469-32005L0029-en-art10-par1"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-25469-32005L0029-en-art2-par1-pntd"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25469-32005L0029-en-pre-rec9"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25469-32005L0029-en-art9-par1"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
@@ -13830,7 +13811,6 @@
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25469-32005L0029-en-art16-par1-pnt2-nov"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25469-32005L0029-en-pre-rec2"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000025469</owns:synsetId>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(d) "business-to-consumer commercial practices" (hereinafter also referred to as commercial practices) means any act, omission, course of conduct or representation, commercial communication including advertising and marketing, by a trader, directly connected with the promotion, sale or supply of a product to consumers;</owns:gloss>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25469-32005L0029-en-art6-par1"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25469-32005L0029-en-pre-rec12"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25469-01997L0007-20050612-en-art9-par1"/>
@@ -15131,9 +15111,8 @@
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26348-32004L0113-en-art9-par1"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26348-32004L0113-en-art4-par4"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26348-32004L0113-en-art4-par1-pntb"/>
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26348-32004L0113-en-art2-par1-pntb"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-26348-32004L0113-en-art2-par1-pntb"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000026348</owns:synsetId>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(b) indirect discrimination: where an apparently neutral provision, criterion or practice would put persons of one sex at a particular disadvantage compared with persons of the other sex, unless that provision, criterion or practice is objectively justified by a legitimate aim and the means of achieving that aim are appropriate and necessary;</owns:gloss>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-company_-ceva/pharmacia--noun-1">
@@ -15348,9 +15327,8 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-single_liasion_offiice-noun-1">
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-28048-02004r2006-20050612-en-art3-par1-pntd"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-28048-02004r2006-20050612-en-art3-par1-pntd"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000028048</owns:synsetId>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(d) 'single liaison office' means the public authority in each Member State designated as responsible for coordinating the application of this Regulation within that Member State;</owns:gloss>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-date_of_notification-noun-1">
@@ -15452,9 +15430,8 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-competent_official-noun-1">
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25513-02004r2006-20050612-en-art3-par1-pnte"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-25513-02004r2006-20050612-en-art3-par1-pnte"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000025513</owns:synsetId>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(e) 'competent official' means an official of a competent authority designated as responsible for the application of this Regulation;</owns:gloss>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-components-noun-1">
@@ -16503,7 +16480,6 @@
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25076-62000J0473-en-par21"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25076-32006L0114-en-pre-rec9"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25076-32006L0114-en-art8-par2"/>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(a) "advertising" means the making of a representation in any form in connection with a trade, business, craft or profession in order to promote the supply of goods or services, including immovable property, rights and obligations;</owns:gloss>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25076-01997L0007-20050612-en-pre-rec24"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25076-01997L0007-20050612-en-ann1-par1-pnt4"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25076-32005L0029-en-ann1-par5"/>
@@ -16519,7 +16495,7 @@
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25076-62005J0315-en-par1"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25076-62002J0264-en-par26"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25076-32005L0029-en-art14-par1-pnt3-nov-blk2"/>
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25074-32006l0114-en-art2-par1-pnta"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-25074-32006l0114-en-art2-par1-pnta"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25076-32006L0114-en-art2"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25076-62005J0315-en-par46"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25076-32005L0029-en-art14-par1-pnt1-nov-blk2"/>
@@ -18375,16 +18351,15 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-annual_percentage_rate_of_charge-noun-1">
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-25151-01987L0102-19980421-en-art1-par2-pnte"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25151-62002J0264-en-par5"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25151-01987L0102-19980421-en-art1bis-par6"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25151-62002J0264-en-opp1"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25151-01987L0102-19980421-en-art1bis-par4-pnta"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25151-01987L0102-19980421-en-art4-par2-pntd"/>
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25151-01987L0102-19980421-en-art1-par2-pnte"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000025151</owns:synsetId>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25151-01987L0102-19980421-en-art1bis-par1-pnta"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25151-01987L0102-19980421-en-art3-par1"/>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(e) 'annual percentage rate of charge' means the total cost of the credit to the consumer, expressed as an annual percentage of the amount of the credit granted and calculated in accordance with Article 1a.</owns:gloss>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25151-62002J0264-en-sum1"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25151-01987L0102-19980421-en-art4-par2-pntb1"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25151-01987L0102-19980421-en-art4-par2-pntb"/>
@@ -18632,9 +18607,8 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-direct_discrimination-noun-1">
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-32291-32004L0113-en-art2-par1-pnta"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-32291-32004L0113-en-art2-par1-pnta"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032291</owns:synsetId>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(a) direct discrimination: where one person is treated less favourably, on grounds of sex, than another is, has been or would be treated in a comparable situation;</owns:gloss>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-harmful_effects-noun-1">
@@ -18820,10 +18794,9 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-distance_contract-noun-1">
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25848-02002l0065-20050612-en-art2-par1-pnta"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-25848-02002l0065-20050612-en-art2-par1-pnta"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25848-01997L0007-20050612-en-art4-par1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000025848</owns:synsetId>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(a) 'distance contract' means any contract concerning financial services concluded between a supplier and a consumer under an organised distance sales or service-provision scheme run by the supplier, who, for the purpose of that contract, makes exclusive use of one or more means of distance communication up to and including the time at which the contract is concluded;</owns:gloss>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-commercial_transactions-noun-1">
@@ -19872,12 +19845,11 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-course_of_conduct-noun-1">
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25646-32005L0029-en-art2-par1-pnth"/>
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25646-32005L0029-en-art2-par1-pntg"/>
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25646-32005L0029-en-art2-par1-pntf"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-25646-32005L0029-en-art2-par1-pntg"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-25646-32005L0029-en-art2-par1-pntf"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25646-32005L0029-en-art2-par1-pnte"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25646-32005L0029-en-art2-par1-pntd"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000025646</owns:synsetId>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(g) "code owner" means any entity, including a trader or group of traders, which is responsible for the formulation and revision of a code of conduct and/or for monitoring compliance with the code by those who have undertaken to be bound by it;</owns:gloss>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-lilly-noun-1">
@@ -20039,10 +20011,9 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-creditor-noun-1">
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25671-01987L0102-19980421-en-art1-par2-pntb"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-25671-01987L0102-19980421-en-art1-par2-pntb"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25671-01987L0102-19980421-en-art1bis-par2-pnt5"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000025671</owns:synsetId>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(b) 'creditor' means a natural or legal person who grants credit in the course of his trade, business or profession, or a group of such persons;</owns:gloss>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-defendant-noun-1">
@@ -20773,10 +20744,9 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-requested_authority-noun-1">
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27364-02004r2006-20050612-en-art3-par1-pntg"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-27364-02004r2006-20050612-en-art3-par1-pntg"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27364-02004r2006-20050612-en-art15-par5"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000027364</owns:synsetId>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(g) 'requested authority' means the competent authority that receives a request for mutual assistance;</owns:gloss>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-micro-organism-noun-1">
@@ -21744,7 +21714,6 @@
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25512-61999J0392-en-par13-rft1"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25512-62002A0177-en-par66"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25512-02004r2006-20050612-en-art3-par1-pntc"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25512-61999J0392-en-par180"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25512-61999J0392-en-par66"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25512-62000A0074-en-par157"/>
@@ -21754,6 +21723,7 @@
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25512-61999J0392-en-par77"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25512-61999J0392-en-opp1-pnt1"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25512-62000A0074-en-par191"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-25512-02004r2006-20050612-en-art3-par1-pntc"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25512-62000A0074-en-par1"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25512-61999J0392-en-par96"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25512-61999J0392-en-par175"/>
@@ -21768,7 +21738,6 @@
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25512-62000A0074-en-par103"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25512-61999J0392-en-par9-rft1"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25512-61997J0102-en-par4-rft1"/>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(c) 'competent authority' means any public authority established either at national, regional or local level with specific responsibilities to enforce the laws that protect consumers' interests;</owns:gloss>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25512-62000A0074-en-par178"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25512-61999J0392-en-par9-rft8"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25512-61999J0392-en-par36-rft1"/>
@@ -22347,12 +22316,11 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-unit_price-noun-1">
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(b) unit price shall mean the final price, including VAT and all other taxes, for one kilogramme, one litre, one metre, one square metre or one cubic metre of the product or a different single unit of quantity which is widely and customarily used in the Member State concerned in the marketing of specific products;</owns:gloss>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27883-31998L0006-en-art4-par2-sub1"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27883-31998L0006-en-art3-par3"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27883-31998L0006-en-art2-par1-pntb"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27883-31998L0006-en-art4-par1"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-27883-31998L0006-en-art2-par1-pntb"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000027883</owns:synsetId>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27883-31998L0006-en-art4-par2-sub2"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27883-31998L0006-en-art6-par1"/>
@@ -22533,11 +22501,11 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-means_of_distance_communication-noun-1">
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26673-02002l0065-20050612-en-art2-par1-pnte"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26673-01997L0007-20050612-en-art10-ptt"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26673-01997L0007-20050612-en-art2-par1-pnt1"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26673-01997L0007-20050612-en-art5-par2"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26673-01997L0007-20050612-en-art2-par1-pnt4"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-26673-02002l0065-20050612-en-art2-par1-pnte"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26673-01997L0007-20050612-en-pre-rec9"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26673-01997L0007-20050612-en-art4-par1-pntg"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26673-62003J0336-en-par28"/>
@@ -22546,7 +22514,6 @@
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000026673</owns:synsetId>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26673-01997L0007-20050612-en-art10-par2"/>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(e) 'means of distance communication' refers to any means which, without the simultaneous physical presence of the supplier and the consumer, may be used for the distance marketing of a service between those parties;</owns:gloss>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26673-01997L0007-20050612-en-art4-par2"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-materials-noun-1">
@@ -23038,9 +23005,8 @@
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26119-62000J0316-en-par23"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-established_service_provider-noun-1">
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-32303-32000l0031-en-art2-par1-pntc"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-32303-32000l0031-en-art2-par1-pntc"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032303</owns:synsetId>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(c) "established service provider": a service provider who effectively pursues an economic activity using a fixed establishment for an indefinite period. The presence and use of the technical means and technologies required to provide the service do not, in themselves, constitute an establishment of the provider;</owns:gloss>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-prior-noun-1">
@@ -23077,9 +23043,8 @@
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27120-62003J0198-en-sum3-sub2"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-sexual_harassment-noun-1">
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-32296-32004l0113-en-art2-par1-pntd"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-32296-32004l0113-en-art2-par1-pntd"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032296</owns:synsetId>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(d) sexual harassment: where any form of unwanted physical, verbal, non-verbal or physical conduct of a sexual nature occurs, with the purpose or effect of violating the dignity of a person, in particular when creating an intimidating, hostile, degrading, humiliating or offensive environment.</owns:gloss>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-amounts-noun-1">
@@ -23784,10 +23749,9 @@
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-total_cost_of_the_credit_to_the_consumer-noun-1">
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27791-01987L0102-19980421-en-pre-rec9"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27791-01987L0102-19980421-en-art1-par2-pnte"/>
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27791-01987L0102-19980421-en-art1-par2-pntd"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-27791-01987L0102-19980421-en-art1-par2-pntd"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-27791-01987L0102-19980421-en-art1bis-par2"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000027791</owns:synsetId>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(d) 'total cost of the credit to the consumer' means all the costs, including interest and other charges, which the consumer has to pay for the credit;</owns:gloss>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-interest_of_consumers-noun-1">
@@ -24522,9 +24486,8 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-harassment-noun-1">
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-32294-32004l0113-en-art2-par1-pntc"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-32294-32004l0113-en-art2-par1-pntc"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032294</owns:synsetId>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(c) harassment: where an unwanted conduct related to the sex of a person occurs with the purpose or effect of violating the dignity of a person and of creating an intimidating, hostile, degrading, humiliating or offensive environment;</owns:gloss>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-network-noun-1">
@@ -26100,16 +26063,15 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-commercial_communication-noun-1">
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25467-32005L0029-en-art7-par5"/>
-    <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000025467</owns:synsetId>
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25467-32005L0029-en-pre-rec5"/>
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25467-32005L0029-en-art2-par1-pntd"/>
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25467-32005L0029-en-art2-par1-pnti"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25467-32005L0029-en-pre-rec7"/>
+    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25467-32005L0029-en-pre-rec5"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25467-32005L0029-en-pre-rec15"/>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(f) "commercial communication": any form of communication designed to promote, directly or indirectly, the goods, services or image of a company, organisation or person pursuing a commercial, industrial or craft activity or exercising a regulated profession. The following do not in themselves constitute commercial communications:</owns:gloss>
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25467-32000l0031-en-art2-par1-pntf"/>
+    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25467-32005L0029-en-art7-par5"/>
+    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25467-32005L0029-en-art2-par1-pnti"/>
+    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25467-32005L0029-en-art2-par1-pntd"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-25467-32000l0031-en-art2-par1-pntf"/>
+    <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000025467</owns:synsetId>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-period_of_reflection-noun-1">
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26988-61996A0105-en-par76"/>
@@ -26456,17 +26418,16 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-code_owner-noun-1">
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000025450</owns:synsetId>
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25450-32006L0114-en-art2-par1-pnte"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-25450-32006L0114-en-art2-par1-pnte"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25450-32005L0029-en-art17-par1"/>
-    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25450-32005L0029-en-art10-par1"/>
+    <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25450-32005L0029-en-art14-par1-pnt2-pnt2-nov"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25450-32006L0114-en-art5-par3-sub1"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25450-32005L0029-en-art11-par1-sub4-pntb"/>
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25450-32005L0029-en-art2-par1-pntg"/>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(e) "code owner" means any entity, including a trader or group of traders, which is responsible for the formulation and revision of a code of conduct and/or for monitoring compliance with the code by those who have undertaken to be bound by it.</owns:gloss>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25450-32005L0029-en-pre-rec20"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25450-32005L0029-en-art14-par1-pnt4-nov-blk9"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-25450-32005L0029-en-art2-par1-pntg"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25450-32006L0114-en-art3"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-ec_treaty-noun-1">
@@ -26914,9 +26875,8 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-service_provider-noun-1">
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-32302-32000l0031-en-art2-par1-pntb"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-32302-32000l0031-en-art2-par1-pntb"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032302</owns:synsetId>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(b) "service provider": any natural or legal person providing an information society service;</owns:gloss>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-consumer_protection-noun-1">
@@ -28957,9 +28917,8 @@
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-credit_agreement-noun-1">
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-32306-01987L0102-19980421-en-art1-par2-pntc"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-32306-01987L0102-19980421-en-art1-par2-pntc"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032306</owns:synsetId>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(c) 'credit agreement' means an agreement whereby a creditor grants or promises to grant to a consumer a credit in the form of a deferred payment, a loan or other similar financial accommodation.</owns:gloss>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-costs-noun-1">
@@ -29902,16 +29861,14 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-information_society_services-noun-1">
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26363-32005L0029-en-ann2-par6"/>
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26363-32000l0031-en-art2-par1-pnta"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-26363-32000l0031-en-art2-par1-pnta"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-26363-01998L0027-20061228-en-ann-par11"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000026363</owns:synsetId>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(a) "information society services": services within the meaning of Article 1(2) of Directive 98/34/EC as amended by Directive 98/48/EC;</owns:gloss>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-recipient_of_the_service-noun-1">
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-32305-32000l0031-en-art2-par1-pntd"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-32305-32000l0031-en-art2-par1-pntd"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000032305</owns:synsetId>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(d) "recipient of the service": any natural or legal person who, for professional ends or otherwise, uses an information society service, in particular for the purposes of seeking information or making it accessible;</owns:gloss>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-transpires-noun-1">
@@ -30623,10 +30580,9 @@
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-durable_medium-noun-1">
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25888-31999L0044-en-art6-par3"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25888-02002l0065-20050612-en-art5-par1"/>
-    <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25888-02002l0065-20050612-en-art2-par1-pntf"/>
+    <sources:sourceDef rdf:resource="http://localhost/dalos/EN/sources.owl#source-25888-02002l0065-20050612-en-art2-par1-pntf"/>
     <sources:source rdf:resource="http://localhost/dalos/EN/sources.owl#source-25888-01997L0007-20050612-en-art5-par1-sub1"/>
     <owns:synsetId rdf:datatype="http://www.w3.org/2001/XMLSchema#string">100000025888</owns:synsetId>
-    <owns:gloss rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(f) 'durable medium' means any instrument which enables the consumer to store information addressed personally to him in a way accessible for future reference for a period of time adequate for the purposes of the information and which allows the unchanged reproduction of the information stored;</owns:gloss>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#NounSynset"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/EN/individuals.owl#synset-advertiser-noun-1">

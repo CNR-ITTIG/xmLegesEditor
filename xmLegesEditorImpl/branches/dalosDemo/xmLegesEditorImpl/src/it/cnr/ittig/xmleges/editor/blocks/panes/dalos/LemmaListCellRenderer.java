@@ -33,7 +33,9 @@ public class LemmaListCellRenderer extends JLabel implements ListCellRenderer {
 
 		if(value instanceof Synset){
 			setIcon(i18n.getIconFor("editor.panes.dalos.synsetlist.icon"));
-			if(((Synset)value).getDef()!=null && ((Synset)value).getDef().length()>0){
+			Synset syn = (Synset) value;			
+			//if(syn.getDefinitions() != null && syn.getDefinitions().size() > 0){
+			if(syn.hasDefinition()) {
 				background = Color.YELLOW;
 				foreground = Color.BLACK;
 				font = new Font(null, Font.ITALIC, size);			

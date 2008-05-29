@@ -91,7 +91,7 @@ public class SourceContainer extends JEditorPane implements HyperlinkListener{
 			html += "<tr bgcolor="+bgColor+"><td><img src=\"./signature.png\"></td><td><font face=\"Arial\">" + 
 						def + "</font></td><td>&nbsp;</td><td>" +
 						"<a href=\"" + source.getLink() + 
-						"\">" + source.getId() + "</a></td></tr>";			
+						"\">" + source.getPartitionId() + "</a></td></tr>";			
 		}
 		
 		html += "</table></body></html>";

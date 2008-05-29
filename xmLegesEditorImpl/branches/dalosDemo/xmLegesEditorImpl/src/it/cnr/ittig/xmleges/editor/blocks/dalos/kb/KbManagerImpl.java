@@ -93,7 +93,7 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		initSemPaths();
 	}
 	
-	private void loadLanguages() {		
+	private void loadLanguages() {
 		
 		String[] languages = utilDalos.getDalosLang();
 		for(int i = 0; i < languages.length; i++) {
@@ -155,6 +155,13 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		kbc.addLexicalProperties(syn);
 	}
 	
+	public void addDefSources(Synset syn) {
+		
+		if(syn == null) { return; }
+
+		KbContainer kbc = getContainer(syn.getLanguage());
+		kbc.addDefSources(syn);
+	}
 	
 	public Map getInterlingualProperties(Synset syn, String lang) {
 		//returns a Map<String,Collection>

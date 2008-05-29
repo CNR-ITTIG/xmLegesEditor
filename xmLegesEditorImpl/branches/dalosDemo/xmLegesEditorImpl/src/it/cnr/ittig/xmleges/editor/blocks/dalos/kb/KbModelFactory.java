@@ -156,6 +156,7 @@ public class KbModelFactory {
 		if(type.equalsIgnoreCase("individual")) {
 			readSchema(om, KbConf.METALEVEL_ONTO);
 			readSchema(om, KbConf.METALEVEL_PROP);
+			readSchema(om, KbConf.SOURCE_SCHEMA);
 			readLocalDocument(om, lang, KbConf.IND);
 			readLocalDocument(om, lang, KbConf.INDW);
 			readLocalDocument(om, lang, KbConf.LEXICALIZATIONS);
@@ -193,7 +194,7 @@ public class KbModelFactory {
 				return false;
 			}
 			String segFileName = segObj.toString();
-			//System.out.println("Segmentation: retrieving data from " + segFileName);
+			System.out.println("Segmentation: retrieving data from " + segFileName);
 			readSegment(om, segFileName);
 
 		} else {						
@@ -218,10 +219,8 @@ public class KbModelFactory {
 				System.out.println("URL: " + u.toString());
 				om.read(u.openStream(), null);
 			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				System.out.println("#### URL unreachable! Trying to load local data...");
 				String localFile = odm.doAltURLMapping(url);
 				System.out.println("localFile: " + localFile);

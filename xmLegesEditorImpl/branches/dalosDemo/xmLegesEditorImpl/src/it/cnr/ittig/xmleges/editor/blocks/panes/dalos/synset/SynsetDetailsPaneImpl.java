@@ -50,6 +50,14 @@ implements EventManagerListener, Loggable, Serviceable,
 		
 		super.updateObserver(syn);
 		
+		
+		if(syn.hasDefinition()) {
+			if(!syn.isDefCached()) {
+				kbManager.addDefSources(syn);				
+			}
+		}
+		
+		
 		synsetPane.draw(syn);
 		//frame.setShowingPane(this, true);
 	}

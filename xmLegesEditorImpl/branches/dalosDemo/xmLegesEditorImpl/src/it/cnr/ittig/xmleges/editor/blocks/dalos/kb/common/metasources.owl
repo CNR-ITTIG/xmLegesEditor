@@ -1,68 +1,86 @@
 <?xml version="1.0"?>
 <rdf:RDF
     xmlns="http://turing.ittig.cnr.it/jwn/ontologies/metasources.owl#"
-    xmlns:owns="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:owns="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
   xml:base="http://turing.ittig.cnr.it/jwn/ontologies/metasources.owl">
   <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl"/>
     <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     ></rdfs:comment>
-    <owl:imports rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl"/>
   </owl:Ontology>
-  <owl:Class rdf:ID="Partition"/>
-  <owl:Class rdf:ID="Source"/>
+  <owl:Class rdf:ID="Partition">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Origin"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="DefinitionSource">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Source"/>
+    </rdfs:subClassOf>
+  </owl:Class>
   <owl:Class rdf:ID="Document"/>
-  <owl:ObjectProperty rdf:ID="involvesSynset">
-    <rdfs:range rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
-    <rdfs:domain rdf:resource="#Source"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:ID="hasPartition">
-    <rdfs:range rdf:resource="#Partition"/>
-    <owl:inverseOf>
-      <owl:ObjectProperty rdf:ID="belongsTo"/>
-    </owl:inverseOf>
-    <rdfs:domain rdf:resource="#Document"/>
-  </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="source">
     <rdfs:domain rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
     <rdfs:range rdf:resource="#Source"/>
   </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="#belongsTo">
-    <rdfs:domain rdf:resource="#Partition"/>
-    <rdfs:range rdf:resource="#Document"/>
-    <owl:inverseOf rdf:resource="#hasPartition"/>
+  <owl:ObjectProperty rdf:ID="involvesSynset">
+    <rdfs:domain rdf:resource="#Source"/>
+    <rdfs:range rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Synset"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="involvesPartition">
+    <rdfs:domain rdf:resource="#Source"/>
     <rdfs:range rdf:resource="#Partition"/>
-    <rdfs:domain rdf:resource="#Source"/>
   </owl:ObjectProperty>
-  <owl:DatatypeProperty rdf:ID="link">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="#Document"/>
-  </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:ID="partitionCode">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     <rdfs:domain rdf:resource="#Partition"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:ID="content">
-    <rdfs:domain rdf:resource="#Source"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
   </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:ID="localFrequency">
     <rdfs:domain rdf:resource="#Source"/>
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
   </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:ID="documentCode">
-    <rdfs:domain rdf:resource="#Document"/>
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#Document"/>
   </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:ID="globalFrequency">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     <rdfs:domain rdf:resource="#Source"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="link">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Document"/>
+          <owl:Class rdf:about="#Partition"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
   </owl:DatatypeProperty>
+  <owl:FunctionalProperty rdf:ID="content">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#Partition"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:ID="belongsTo">
+    <owl:inverseOf>
+      <owl:InverseFunctionalProperty rdf:ID="hasPartition"/>
+    </owl:inverseOf>
+    <rdfs:range rdf:resource="#Document"/>
+    <rdfs:domain rdf:resource="#Partition"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </owl:FunctionalProperty>
+  <owl:InverseFunctionalProperty rdf:about="#hasPartition">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:range rdf:resource="#Partition"/>
+    <rdfs:domain rdf:resource="#Document"/>
+    <owl:inverseOf rdf:resource="#belongsTo"/>
+  </owl:InverseFunctionalProperty>
 </rdf:RDF>
 
 <!-- Created with Protege (with OWL Plugin 3.2.1, Build 365)  http://protege.stanford.edu -->

@@ -71,6 +71,7 @@ public class KbContainer {
 	OntProperty lexical = null;
 	OntProperty proto = null;
 	OntProperty glossProperty = null;
+	OntProperty hasDefProperty = null;
 	OntClass nSynClass = null;
 	OntClass vSynClass = null;
 	OntClass ajSynClass = null;
@@ -315,7 +316,6 @@ public class KbContainer {
 				syn = new Synset(LANGUAGE);
 				syn.setURI(suri);
 				synsets.put(suri, syn);
-				//sortedSynsets.add(syn);
 			} else {
 				System.err.println("Synset syn already here!? uri: " + suri);
 			}			
@@ -347,6 +347,7 @@ public class KbContainer {
 		lexical = om.getOntProperty(KbConf.METALEVEL_ONTO_NS + "lexicalForm");
 		proto = om.getOntProperty(KbConf.METALEVEL_ONTO_NS + "protoForm");
 		glossProperty = om.getOntProperty(KbConf.METALEVEL_ONTO_NS + "gloss");
+		hasDefProperty = om.getOntProperty(KbConf.METALEVEL_ONTO_NS + "hasDefinition");
 		nSynClass = om.getOntClass(KbConf.METALEVEL_ONTO_NS + "NounSynset");
 		vSynClass = om.getOntClass(KbConf.METALEVEL_ONTO_NS + "VerbSynset");
 		ajSynClass = om.getOntClass(KbConf.METALEVEL_ONTO_NS + "AdjectiveSynset");
@@ -359,11 +360,15 @@ public class KbContainer {
 		initOntResources(ind_m);
 		
 		if(contains == null || word == null || lexical == null) {
-			System.out.println("ERROR: null properties.");
+			System.err.println("ERROR: null object properties.");
+			return;
+		}
+		if(proto == null || glossProperty == null || hasDefProperty == null) {
+			System.err.println("ERROR: null datatype properties.");
 			return;
 		}
 		if(nSynClass == null || vSynClass == null || ajSynClass == null || avSynClass == null ) {
-			System.out.println("ERROR: null synset class!");
+			System.err.println("ERROR: null synset class!");
 			return;
 		}
 		
@@ -437,12 +442,21 @@ public class KbContainer {
 			}
 			syn.setURI(suri);
 			synsets.put(suri, syn);
-			//sortedSynsets.add(syn);
 		}
-				
+		
 		RDFNode glossNode = ores.getPropertyValue(glossProperty);
 		if(glossNode != null) {			
-			syn.setDef( ((Literal) glossNode).getString());
+			syn.setGloss( ((Literal) glossNode).getString());
+		}
+
+		if(hasDefProperty != null) {
+			RDFNode hasDef = ores.getPropertyValue(hasDefProperty);
+			if(hasDef != null) {
+				String hasDefValue = ((Literal) hasDef).getString();
+				if(hasDefValue.equalsIgnoreCase("true")) {
+					syn.setDefinition(true);				
+				}
+			}
 		}
 
 		for(Iterator k = ores.listPropertyValues(contains); k.hasNext();) {
@@ -462,12 +476,7 @@ public class KbContainer {
 			}
 		}
 		
-//		String key = ores.getNameSpace() + ores.getLocalName();
-//		synsets.put(key, syn);
-		//sortedSynsets.add(syn);
-
 		//Fill pivot classes (only if syn is a new synset)
-		//XXX
 		if(newSynset) {
 			OntModel om = ores.getOntModel();
 			OntProperty hasLexProp = om.getOntProperty(KbConf.LEXICALIZATION_PROP);
@@ -542,14 +551,15 @@ public class KbContainer {
 				return;
 			}
 			
-			Source source = new Source(((Literal) idNode).getString());
+			Source source = new Source();
+			source.setPartitionId(((Literal) idNode).getString());
 			
 			RDFNode linkNode = doc.getPropertyValue(linkProp);			
 			if(linkNode != null) {
 				source.setLink(((Literal) linkNode).getString());
 			}
 			
-			RDFNode contentNode = ores.getPropertyValue(contentProp);
+			RDFNode contentNode = part.getPropertyValue(contentProp);
 			if(contentNode != null) {
 				if(!contentNode.isLiteral()) {
 					System.out.println("## ERROR ## CONTENT IS " 
@@ -568,6 +578,84 @@ public class KbContainer {
 		syn.setSourceCached(true);
 	}
 
+	void addDefSources(Synset syn) {
+		
+		if(syn.isDefCached()) {
+			return;
+		}
+		
+		System.out.println(">> adding DEFINITIONS to " + syn + "...");
+		
+		OntModel om = KbModelFactory.getModel("seg.source", "", LANGUAGE, syn.getURI());
+		
+		Individual ind = om.getIndividual(syn.getURI());
+		if(ind == null) {
+			System.err.println("addDefSources() - ind is null!");
+			return;
+		}
+
+		OntProperty sourceProp = om.getOntProperty(KbConf.SOURCESCHEMA_NS + "source");
+		OntProperty involvesProp = om.getOntProperty(KbConf.SOURCESCHEMA_NS + "involvesPartition");
+		OntProperty belongsProp = om.getOntProperty(KbConf.SOURCESCHEMA_NS + "belongsTo");
+		OntProperty linkProp = om.getOntProperty(KbConf.SOURCESCHEMA_NS + "link");
+		OntProperty contentProp = om.getOntProperty(KbConf.SOURCESCHEMA_NS + "content");
+		OntProperty idProp = om.getOntProperty(KbConf.SOURCESCHEMA_NS + "partitionCode");
+		
+		OntClass defSourceClass = om.getOntClass(KbConf.SOURCESCHEMA_NS + "DefinitionSource");
+		
+		for(Iterator i = defSourceClass.listInstances(); i.hasNext();) {
+			OntResource aRes = (OntResource) i.next();
+			String aResUri = aRes.getNameSpace() + aRes.getLocalName();
+			for(Iterator k = ind.listPropertyValues(sourceProp); k.hasNext();) {
+				OntResource bRes = (OntResource) k.next();
+				String bResUri = bRes.getNameSpace() + bRes.getLocalName();
+				if(aResUri.equalsIgnoreCase(bResUri)) {
+					
+					System.out.println("Analyzing defsource " + aRes.getNameSpace() + aRes.getLocalName());
+					OntResource part = (OntResource) aRes.getPropertyValue(involvesProp);
+					OntResource doc = (OntResource) part.getPropertyValue(belongsProp);
+					
+					RDFNode idNode = part.getPropertyValue(idProp);
+					if(idNode == null) {
+						System.out.println("## ERROR ## partitionCode is null!! ind: " + ind);
+						return;
+					}
+
+					String id = ((Literal) idNode).getString();
+					
+					//System.out.println("Rilevata DEFINIZIONE: " + id);
+
+					Source source = new Source();
+					source.setPartitionId(id);
+					
+					RDFNode linkNode = doc.getPropertyValue(linkProp);			
+					if(linkNode != null) {
+						source.setLink(((Literal) linkNode).getString());
+					}
+					
+					RDFNode contentNode = part.getPropertyValue(contentProp);
+					if(contentNode != null) {
+						if(!contentNode.isLiteral()) {
+							System.out.println("## ERROR ## CONTENT IS " 
+									+ contentNode.getClass() + " : " + contentNode );					
+						} else {
+							String content = ((Literal) contentNode).getString();
+							source.setContent(content);
+						}
+					} else {
+						System.err.println("Null content for def-source " + source);
+					}
+
+					syn.addDefinition(source);
+				}
+			}
+			
+		}
+		
+		syn.setDefCached(true);
+
+	}
+	
 	void addLexicalProperties(Synset syn) {		
 		//Aggiunge le propriet� generiche e quelle lessicali
 
@@ -612,7 +700,7 @@ public class KbContainer {
 		
 		RDFNode glossNode = ind.getPropertyValue(glossProp);
 		if(glossNode != null) {
-			syn.setDef(((Literal) glossNode).getString());
+			syn.setGloss(((Literal) glossNode).getString());
 		}
 		
 		for(StmtIterator i = ind.listProperties(); i.hasNext();) {
