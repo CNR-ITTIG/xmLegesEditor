@@ -49,6 +49,12 @@ public interface KbManager extends Service {
 	 * 
 	 * @param syn
 	 */
+	public void addDefSources(Synset syn); 
+	
+	/**
+	 * 
+	 * @param syn
+	 */
 	public Map getInterlingualProperties(Synset syn, String lang); 
 	
 	/**

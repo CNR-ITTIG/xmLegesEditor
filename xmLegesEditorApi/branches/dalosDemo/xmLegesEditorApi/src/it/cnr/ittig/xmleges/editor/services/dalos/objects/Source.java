@@ -8,36 +8,35 @@ public class Source implements Comparable {
 	
 	String partitionId;	
 	
-	public Source(String id) {
+	public Source() {
 		
 		content = "";
-		link = "";
-		partitionId = id;
-	}
-	
-	public String getId() {
-		
-		return partitionId;
-	}
-
-	public void setContent(String str) {
-		
-		content = str;
-	}
+		link = null;
+		partitionId = null;
+	}		
 	
 	public String getContent() {
-		
 		return content;
 	}
 
-	public void setLink(String str) {
-		
-		link = str;
+	public void setContent(String content) {
+		this.content = content;
 	}
-	
+
 	public String getLink() {
-		
 		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
+
+	public String getPartitionId() {
+		return partitionId;
+	}
+
+	public void setPartitionId(String partitionId) {
+		this.partitionId = partitionId;
 	}
 
 	public String toString() {
@@ -48,7 +47,7 @@ public class Source implements Comparable {
 	public boolean equals(Object obj) {
 
 		if(obj instanceof Source) {
-			if(partitionId.equalsIgnoreCase(((Source) obj).getId())
+			if(partitionId.equalsIgnoreCase(((Source) obj).getPartitionId())
 					&& content.equalsIgnoreCase(((Source) obj).getContent()) ) {
 				return true;
 			}
@@ -71,8 +70,8 @@ public class Source implements Comparable {
 		}
 		
 		Source o = (Source) obj;
-		String str = getId() + getContent();
-		String ostr = o.getId() + o.getContent();
+		String str = getPartitionId() + getContent();
+		String ostr = o.getPartitionId() + o.getContent();
 		if(ostr.compareToIgnoreCase(str) < 0) {
 			return -1;
 		} else {

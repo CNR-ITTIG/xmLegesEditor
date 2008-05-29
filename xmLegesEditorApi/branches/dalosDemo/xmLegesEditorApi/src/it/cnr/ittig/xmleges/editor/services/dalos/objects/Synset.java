@@ -12,7 +12,7 @@ public class Synset implements Comparable {
 	
 	private String LANGUAGE;
 	
-	private String def;
+	private String gloss;
 	
 	private String lexicalForm = null;
 	
@@ -25,9 +25,15 @@ public class Synset implements Comparable {
 	
 	private boolean isSourceCached = false;
 	
+	private boolean isDefCached = false;
+	
 	private PivotOntoClass pivotClass = null;
 
+	private boolean definition; //synset has definition(s) ?
+	
 	private Collection sources;
+	
+	private Collection definitions;
 
 	private Collection variants = null;
 	
@@ -43,21 +49,24 @@ public class Synset implements Comparable {
 		semanticToSynset = new HashMap();
 		
 		sources = new TreeSet();
+		definitions = new TreeSet();
 		variants = new TreeSet();
 		
-		lexicalForm = "";
+		definition = false;
 		
+		lexicalForm = "";
+		gloss = null;
 	}
 
-	public void setDef(String str) {
+	public void setGloss(String str) {
 		
 		concreteSynset = true;
-		def = str;
+		gloss = str;
 	}
 	
-	public String getDef() {
+	public String getGloss() {
 		
-		return def;
+		return gloss;
 	}
 	
 	public void setLexicalForm(String lex) {
@@ -67,8 +76,8 @@ public class Synset implements Comparable {
 			return;
 		}
 		concreteSynset = true;
-		//FIXME Show lowercase variant for IT
-		//(fix original data...)
+		//Show lowercase variant for IT
+		//(or fix original data...)
 		if(LANGUAGE.equalsIgnoreCase("IT")) {
 			lex = lex.toLowerCase();
 		}
@@ -170,10 +179,21 @@ public class Synset implements Comparable {
 		return sources;
 	}
 
+	public void addDefinition(Source source) {
+
+		definition = true;
+		definitions.add(source);
+	}
+	
+	public Collection getDefinitions() {
+		
+		return definitions;
+	}
+
 	public void addVariant(String var) {
 
-		//FIXME Show lowercase variant for IT
-		//(fix original data...)
+		//Show lowercase variant for IT
+		//(or fix original data...)
 		if(LANGUAGE.equalsIgnoreCase("IT")) {
 			var = var.toLowerCase();
 		}
@@ -228,6 +248,22 @@ public class Synset implements Comparable {
 		}
 		String objForm = ((Synset) obj).toString();
 		return this.toString().compareToIgnoreCase(objForm);
+	}
+
+	public boolean hasDefinition() {
+		return definition;
+	}
+
+	public void setDefinition(boolean definition) {
+		this.definition = definition;
+	}
+
+	public boolean isDefCached() {
+		return isDefCached;
+	}
+
+	public void setDefCached(boolean isDefCached) {
+		this.isDefCached = isDefCached;
 	}
 
 }
