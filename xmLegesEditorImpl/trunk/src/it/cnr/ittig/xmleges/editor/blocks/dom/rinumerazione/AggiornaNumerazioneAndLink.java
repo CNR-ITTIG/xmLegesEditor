@@ -103,7 +103,7 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 						System.out.println("FOUND REFERRING ATTRIBUTE: nodo "+node.getNodeName()+" cambia attributo da "+attributo.getValue()+" a "+(String) modIDs.get(attributo.getValue()));
 						attributo.setValue((String) modIDs.get(attributo.getValue()));
 					}
-					if(modIDs.keySet().contains( ((String)attributo.getValue()).substring(1) ) ){
+					if(((String)attributo.getValue()).startsWith("#") && modIDs.keySet().contains( ((String)attributo.getValue()).substring(1) ) ){
 						
 						System.out.println("FOUND REFERRING ATTRIBUTE with #: nodo "+node.getNodeName()+" cambia attributo da "+((String)attributo.getValue())+" a "+"#"+(String) modIDs.get(((String)attributo.getValue()).substring(1)));
 						String newId = (String) modIDs.get(((String)attributo.getValue()).substring(1));
@@ -179,22 +179,21 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 			return;
 		if (isElementToBeIDUpdated(nodo)) {
 			IDValue = getIDByPosition(nodo);
-			if (isElementWithID(nodo)) {
+			
 				// IDValue = getIDByPosition(figlio);
 				// Se esiste già un id in qualunque elemento
 				// lo prendo come OldID
 				String OldID = ((Element) nodo).getAttribute("id");
 				
 				if (!UtilDom.hasIdAttribute(nodo) || !IDValue.equals(OldID)) {   // se non ce l'aveva o e' cambiato
-					System.out.println("idChanged: new  " + IDValue + " old " + OldID);
-					modIDs.put(OldID, IDValue);
+					
+					if(!IDValue.equals(OldID)){
+						System.err.println("NUM: idChanged: new  " + IDValue + " old " + OldID);
+						modIDs.put(OldID, IDValue);
+					}
+					System.err.println("NUM: setting id: new  " + IDValue + " old " + OldID);
 					UtilDom.setIdAttribute(nodo, IDValue);
 				}
-				
-			} else { // siamo comunque tra gli elementi di tipo ElementToBeIdUpdated
-				System.out.println("nuovo attributo: " + IDValue);
-				UtilDom.setIdAttribute(nodo, IDValue);
-			}
 		}// Fine if isElementToBeIDUpdated
 
 		NodeList figliNodo = nodo.getChildNodes();

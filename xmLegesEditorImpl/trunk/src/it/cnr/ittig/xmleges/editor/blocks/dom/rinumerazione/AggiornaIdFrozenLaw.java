@@ -121,7 +121,7 @@ public class AggiornaIdFrozenLaw {
 		// Per gli elementi che contengono un num genero l'ID sulla base di <num>
 		// Per gli altri genero l'ID sulla base della posizione
 		updateIDs(nir.item(0));
-		getAndUpdateReferringAttributes(nir.item(0));   // controllare: come interagisce con le note - ndr
+		getAndUpdateReferringAttributesFrozenLaw(nir.item(0));   // controllare: come interagisce con le note - ndr
 
 		
 		///////////  RIF - INTERNI  ///////////////
@@ -203,10 +203,10 @@ public class AggiornaIdFrozenLaw {
 			if (!UtilDom.hasIdAttribute(nodo) || !OldID.equals(IDValue)) {      
 				
 				if(!OldID.equals(IDValue)){
-					System.out.println("idChanged: new  " + IDValue + " old " + OldID);
+					System.err.println("idChanged: new  " + IDValue + " old " + OldID);
 					modIDs.put(OldID, IDValue);
 				}
-				
+				System.err.println("setting id: new  " + IDValue + " old " + OldID);
 				UtilDom.setIdAttribute(nodo, IDValue);
 				
 				
@@ -1229,7 +1229,7 @@ public class AggiornaIdFrozenLaw {
 			return false;
 	}
 	
-	protected void getAndUpdateReferringAttributes(Node node) {
+	protected void getAndUpdateReferringAttributesFrozenLaw(Node node) {
 		if (node == null || modIDs.size()==0)
 			return;
 
@@ -1254,7 +1254,7 @@ public class AggiornaIdFrozenLaw {
 		}	
 		NodeList figli = node.getChildNodes();
 		for (int j = 0; j < figli.getLength(); j++)
-			getAndUpdateReferringAttributes(figli.item(j));
+			getAndUpdateReferringAttributesFrozenLaw(figli.item(j));
 		return;
 	}
 
