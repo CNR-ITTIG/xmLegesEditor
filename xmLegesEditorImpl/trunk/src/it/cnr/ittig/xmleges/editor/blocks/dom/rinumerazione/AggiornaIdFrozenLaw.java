@@ -117,11 +117,19 @@ public class AggiornaIdFrozenLaw {
 		
 		System.err.println("CALLED AggiornaId");
 		
+		///////////     NOTE - NDR /////////////////
+		// aggiornamento relativo alle note:
+		// le note vengono ordinate in base a come compaiono nel testo prima di risettargli gli id
+		// potrebbe essere superfluo nel caso di setId senza Renum
+		Vector ndrId = getNdrIdFromDoc();
+		sortNotes(ndrId);
+		////////////////////////////////////////////
+		
 		
 		// Per gli elementi che contengono un num genero l'ID sulla base di <num>
 		// Per gli altri genero l'ID sulla base della posizione
 		updateIDs(nir.item(0));
-		getAndUpdateReferringAttributesFrozenLaw(nir.item(0));   // controllare: come interagisce con le note - ndr
+		getAndUpdateReferringAttributesFrozenLaw(nir.item(0));   
 
 		
 		///////////  RIF - INTERNI  ///////////////
@@ -129,18 +137,7 @@ public class AggiornaIdFrozenLaw {
 		// sulla base del contenuto testuale del riferimento interno
 		Rif = getRif();
 		setXlinkHrefInternalRifByContent();
-		///////////////////////////////////////////
-		
-		
-		
-		///////////     NOTE - NDR /////////////////
-		// aggiornamento relativo alle note:
-		// le note vengono ordinate in base a come compaiono nel testo
-		Vector ndrId = getNdrIdFromDoc();
-		sortNotes(ndrId);
-		setNdrLink(ndrId, false);
-		///////////////////////////////////////////		
-		
+		///////////////////////////////////////////	
 	}
 
 
@@ -187,14 +184,6 @@ public class AggiornaIdFrozenLaw {
 			// Aggiornamento ID dell'elemento se e' cambiato
 			OldID = ((Element) nodo).getAttribute("id");
 			
-			
-
-			// FIXME patch per id degli eventi - disabilita il setId degli eventi ma mantiene il setIdAttribute
-			// probabilmente a causa di un bug su getElementById in MetaCiclodiVitaImpl
-			//  		    if((getElementType(nodo)==EVENTO)){
-			//  		    	IDValue = OldID;
-			//			}
-
 
   		    if(logger.isDebugEnabled()) 		    
 			 logger.debug("idChanged: new  " + IDValue + " old " + OldID);
@@ -1240,7 +1229,7 @@ public class AggiornaIdFrozenLaw {
 				if(!UtilDom.isIdAttribute(attributo) && attributo.getValue()!=null && !((String)(attributo.getValue())).equals("")){
 					if (modIDs.keySet().contains(attributo.getValue())) {
 						
-						System.out.println("FOUND REFERRING ATTRIBUTE: nodo "+node.getNodeName()+" cambia attributo da "+attributo.getValue()+" a "+(String) modIDs.get(attributo.getValue()));
+						System.out.println("FOUND REFERRING ATTRIBUTE: nodo "+node.getNodeName()+" cambia attributo "+attributo.getName() + " da "+attributo.getValue()+" a "+(String) modIDs.get(attributo.getValue()));
 						attributo.setValue((String) modIDs.get(attributo.getValue()));
 					}
 					if(modIDs.keySet().contains( ((String)attributo.getValue()).substring(1) ) ){
@@ -1361,11 +1350,13 @@ public class AggiornaIdFrozenLaw {
 	//
 	//									GESTIONE NOTE-NDR
 	//
+	//										(fa schifo)
+	//
 	//
 	////////////////////////////////////////////////////////////////////////////////////
 	
 	
-	public Vector getNdrIdFromDoc() {
+	protected Vector getNdrIdFromDoc() {
 		NodeList ndr = doc.getElementsByTagName("ndr");
 		Vector ids = new Vector(50, 10);
 		for (int i = 0; i < ndr.getLength(); i++) {
@@ -1375,19 +1366,22 @@ public class AggiornaIdFrozenLaw {
 		}
 		return ids;
 	}
+	
 
-	public boolean sortNotes(Vector ndrId) {
-		// ordina le note dentro redazionale nello stesso ordine in cu compaiono gli ndr nel testo
+	protected boolean sortNotes(Vector ndrId) {
+		// ordina le note dentro  il tag redazionale nello stesso ordine in cu compaiono gli ndr nel testo
 		Vector newNotes = new Vector(50, 10);
 		Node parent = null;
 
 		// copia delle note nell'ordine in cui compaiono nel testo
 		for (int i = 0; i < ndrId.size(); i++) {
-			// FIXME bug su getElementById(); ancora non va
-			// if(doc.getElementById((String)ndrId.get(i))!=null)
-			// newNotes.add(doc.getElementById((String)ndrId.get(i)).cloneNode(true));
-			if (getNotaById((String) ndrId.get(i)) != null)
-				newNotes.add(getNotaById((String) ndrId.get(i)).cloneNode(true));
+			if (getNotaById((String) ndrId.get(i)) != null){
+				Node oldNota = getNotaById((String) ndrId.get(i)).cloneNode(true);
+				String oldId = UtilDom.getAttributeValueAsString(oldNota, "id");
+				Node clonedNota = oldNota.cloneNode(true);
+				UtilDom.setIdAttribute(clonedNota, oldId);
+				newNotes.add(clonedNota);			
+			}
 			else{
 				if(logger.isDebugEnabled())
 				    logger.debug("il nodo di " + ndrId.get(i) + " e' null");
@@ -1410,8 +1404,6 @@ public class AggiornaIdFrozenLaw {
 		if(logger.isDebugEnabled())
 			logger.debug("notaLength " + oldNotes.size() + " ndrLength " + newNotes.size());
 		if (oldNotes.size() == newNotes.size()) {
-//			if (oldNotes.size() > 0)
-//				parent = ((Node) oldNotes.get(0)).getParentNode();
 			for (int i = 0; i < oldNotes.size(); i++) {
 				parent = ((Node) oldNotes.get(i)).getParentNode();
 				if(logger.isDebugEnabled())
@@ -1429,16 +1421,28 @@ public class AggiornaIdFrozenLaw {
 		return false;
 	}
 
+	
+	
 	private Node getNotaById(String id) {
 		
-		System.err.println("getNotaById; id= "+id);
-		Node nota = (Node)doc.getElementById(id);
-		//System.err.println("con getElementById: "+nota.getTextContent());
+		// IMPORTANTE: 
+		// si usa getNotaById invece che il generico getElementById perche' questo metodo viene chiamato da sortNodes prima di aggiornare gli id 
+		// e prima di averli settati di tipo "ID" se gia' non lo sono
+		// ====> getElementById potrebbe non funzionare
+		// si rimpiazza con getNotaById
 		
-		if(nota==null)
-			System.err.println("getelementById NON FUNZIONA");
-		else
-			System.err.println("getelementById FUNZIONA");
+	
+//      TEST
+//		
+//		System.err.println("getNotaById; id= "+id);
+//		Node nota = (Node)doc.getElementById(id);
+//		//System.err.println("con getElementById: "+nota.getTextContent());
+//		
+//		if(nota==null)
+//			System.err.println("getelementById NON FUNZIONA");
+//		else
+//			System.err.println("getelementById FUNZIONA");
+	
 		
 		NodeList notes = doc.getElementsByTagName("nota");
 		for (int i = 0; i < notes.getLength(); i++) {
@@ -1446,8 +1450,10 @@ public class AggiornaIdFrozenLaw {
 				return (notes.item(i));
 		}
 		return null;
+		
 	}
 
+	
 	private Vector getOldNotes() {
 		Vector old = new Vector(50, 10);
 		NodeList notes = doc.getElementsByTagName("nota");
@@ -1458,54 +1464,6 @@ public class AggiornaIdFrozenLaw {
 	}
 
 	
-	private String getNdrNumPrefix(String num){
-		
-		char[] numChar = num.toCharArray();
-		int i=0;
-		
-		for (i=numChar.length-1; i>=0;i--){
-			if(!isDigit(numChar[i]))
-				break;
-		}
-		if(i>0)
-		   return num.substring(0,i+1);
-		return "n";
-	}
-	
-	public void setNdrLink(Vector ndrId, boolean renum) {
-		NodeList ndr = doc.getElementsByTagName("ndr");
-		NodeList note = doc.getElementsByTagName("nota");
-		String num, value, prefix;
-
-		for (int i = 0; i < ndr.getLength(); i++) {
-			
-			//prefix = getNdrNumPrefix(UtilDom.getAttributeValueAsString((Node) ndr.item(i), "num")); 
-			//num = prefix + (ndrId.indexOf(UtilDom.getAttributeValueAsString((Node) ndr.item(i), "num")) + 1);
-			
-			
-			prefix = getNdrNumPrefix(UtilDom.getAttributeValueAsString((Node) note.item(i), "id")); 
-			num = UtilDom.getAttributeValueAsString((Node) note.item(i), "id");
-			
-			UtilDom.setAttributeValue(ndr.item(i), "num", num);
-			if(logger.isDebugEnabled())
-				logger.debug("renum " + renum);
-			if (renum) {
-				// togliere l'intero prefix e non solo la n
-				value = num.substring(prefix.length());
-				UtilDom.setAttributeValue(ndr.item(i), "valore", value);
-				String tipoNdr = rinum.getRinumerazioneNdr();
-				if(logger.isDebugEnabled())
-					logger.debug("tipoNdr " + tipoNdr);
-				if (tipoNdr.equalsIgnoreCase("cardinale"))
-					UtilDom.setTextNode(ndr.item(i), "(" + value + ")");
-				else if (tipoNdr.equalsIgnoreCase("letterale"))
-					UtilDom.setTextNode(ndr.item(i), "(" + UtilLang.fromArabicToLetter(value).toLowerCase() + ")");
-				else
-					UtilDom.setTextNode(ndr.item(i), "(" + UtilLang.fromArabicToRoman(value).toLowerCase() + ")");
-			}
-		}
-	}
-	
 	
 	////////////////////////////////////////////////////////////////////////////////////
 	//
@@ -1514,9 +1472,6 @@ public class AggiornaIdFrozenLaw {
 	//
 	//
 	////////////////////////////////////////////////////////////////////////////////////
-	
-	
-	
 	
 	
 }

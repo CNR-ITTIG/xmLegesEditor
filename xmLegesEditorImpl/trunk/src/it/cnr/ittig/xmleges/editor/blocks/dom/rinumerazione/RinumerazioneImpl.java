@@ -114,11 +114,6 @@ public class RinumerazioneImpl implements Rinumerazione, DocumentBeforeInitUndoA
 		logger.debug("rinumerazione START");
 		NodeList nir = document.getElementsByTagName("NIR");
 		
-		if(renum)
-			System.err.println("-------------------->    RENUM   ATTIVA");
-		else
-			System.err.println("-------------------->    RENUM   NON   ATTIVA");
-		
 		try{
 			if (renum)
 				aggiornaNumerazioneAndLink.aggiornaNum(nir.item(0));

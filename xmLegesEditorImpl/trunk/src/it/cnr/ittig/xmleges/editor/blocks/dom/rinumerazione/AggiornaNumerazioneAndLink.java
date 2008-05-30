@@ -6,9 +6,11 @@ package it.cnr.ittig.xmleges.editor.blocks.dom.rinumerazione;
 import it.cnr.ittig.services.manager.Logger;
 import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
+import it.cnr.ittig.xmleges.core.util.lang.UtilLang;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 import it.cnr.ittig.xmleges.editor.services.util.urn.NirUtilUrn;
 
+import java.util.HashMap;
 import java.util.Vector;
 
 import org.w3c.dom.Attr;
@@ -40,25 +42,22 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 		this.nirUtilDom = rinumerazioneImpl.nirUtilDom;
 	}
 
+	
+	
 	public void aggiornaNum(Node nodo) {
 		
-		
-		System.err.println("CALLED AggiornaNum");
-		
+		modIDs=new HashMap();
 		doc = nodo.getOwnerDocument();
 		NodeList nir = doc.getElementsByTagName("NIR");
+		
+		System.err.println("CALLED AggiornaNum");
 
-			
-
-		// Recupero i nodi contenenti XlinkHref a elementi interni
-//		InternalXlinkHref = new Vector(50, 10);
-//		getInternalXlinkHref(nir.item(0));
-//		for (int i = 0; i < InternalXlinkHref.size(); i++) {
-//			logger.debug("external call InternalXlinkHref: " + UtilDom.getAttributeValueAsString((Node) InternalXlinkHref.get(i), "xlink:href"));
-//		}
-//
-
-
+		
+		// aggiornamento relativo alle note:
+		// le note vengono ordinate in base a come compaiono nel testo prima di risettargli gli id
+		Vector ndrId = getNdrIdFromDoc();
+		sortNotes(ndrId);
+		
 		// Aggiornamento ID e <num> degli elementi da rinumerare
 		updateIDsByPosition(nir.item(0));
 		updateNumByID();
@@ -77,18 +76,13 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 		getAndUpdateReferringAttributes(nir.item(0));   // cablare qui dentro l'updateInternalXlinkHref (FATTO)
 
 			
-		// aggiornamento relativo alle note:
-		// le note vengono ordinate in base a come compaiono nel testo
-		Vector ndrId = getNdrIdFromDoc();
-		sortNotes(ndrId);
-		setNdrLink(ndrId, true);
+		// rinumera gli ndr
+		renumNdr();
 		
 	}
 	
 	
 	protected void getAndUpdateReferringAttributes(Node node) {
-		
-		System.err.println("UpdateReferringAttributes VERSIONE NUM ATTIVA");
 		
 		if (node == null || modIDs.size()==0)
 			return;
@@ -100,7 +94,7 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 				if(!UtilDom.isIdAttribute(attributo) && attributo.getValue()!=null && !((String)(attributo.getValue())).equals("")){
 					if (modIDs.keySet().contains(attributo.getValue())) {
 						
-						System.out.println("FOUND REFERRING ATTRIBUTE: nodo "+node.getNodeName()+" cambia attributo da "+attributo.getValue()+" a "+(String) modIDs.get(attributo.getValue()));
+						System.out.println("FOUND REFERRING ATTRIBUTE: nodo "+node.getNodeName()+" cambia attributo "+attributo.getName() + " da "+attributo.getValue()+" a "+(String) modIDs.get(attributo.getValue()));
 						attributo.setValue((String) modIDs.get(attributo.getValue()));
 					}
 					if(((String)attributo.getValue()).startsWith("#") && modIDs.keySet().contains( ((String)attributo.getValue()).substring(1) ) ){
@@ -417,6 +411,49 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 		}
 
 		return res;
+	}
+	
+	
+	private void renumNdr() {
+		NodeList ndr = doc.getElementsByTagName("ndr");
+		NodeList note = doc.getElementsByTagName("nota");
+		// quando arrivo qui i vettori ndr e note sono nello stesso ordine
+		String num, value, prefix;
+
+		for (int i = 0; i < ndr.getLength(); i++) {
+						
+			prefix = getNdrNumPrefix(UtilDom.getAttributeValueAsString((Node) note.item(i), "id")); 
+			num = UtilDom.getAttributeValueAsString((Node) note.item(i), "id");
+			
+			// togliere l'intero prefix e non solo la n
+			value = num.substring(prefix.length());
+			UtilDom.setAttributeValue(ndr.item(i), "valore", value);
+			String tipoNdr = rinum.getRinumerazioneNdr();
+			if(logger.isDebugEnabled())
+				logger.debug("tipoNdr " + tipoNdr);
+			if (tipoNdr.equalsIgnoreCase("cardinale"))
+				UtilDom.setTextNode(ndr.item(i), "(" + value + ")");
+			else if (tipoNdr.equalsIgnoreCase("letterale"))
+				UtilDom.setTextNode(ndr.item(i), "(" + UtilLang.fromArabicToLetter(value).toLowerCase() + ")");
+			else
+				UtilDom.setTextNode(ndr.item(i), "(" + UtilLang.fromArabicToRoman(value).toLowerCase() + ")");
+		}
+	}
+	
+	
+	
+	private String getNdrNumPrefix(String num){
+		
+		char[] numChar = num.toCharArray();
+		int i=0;
+		
+		for (i=numChar.length-1; i>=0;i--){
+			if(!isDigit(numChar[i]))
+				break;
+		}
+		if(i>0)
+		   return num.substring(0,i+1);
+		return "n";
 	}
 	
 	
