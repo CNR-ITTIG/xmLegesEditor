@@ -317,14 +317,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                         <check action="view.pane.panes.segnalazioni" />
                         
                         
-                        <check action="view.pane.editor.panes.dalos.synsettree" />
-                        <check action="view.pane.editor.panes.dalos.synsetlist" />
-                        <check action="view.pane.editor.panes.dalos.synsetdetails" /> 
-                        <check action="view.pane.editor.panes.dalos.interlingualrelation" />    
-                        <check action="view.pane.editor.panes.dalos.linguisticrelation" />
-                        <check action="view.pane.editor.panes.dalos.semanticrelation" />
-                        <check action="view.pane.editor.panes.dalos.source" />
-                                           
+                        <!-- DALOS: stavano qua  -->                                       
                     
                         
                         <!--	check action="view.pane.editor.panes.ndv" /	-->
@@ -468,6 +461,16 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	                <item action="editor.dalos.check.backward" />
 	                <separator />
 	                <item action="editor.dalos.help" />
+	                <separator/>
+	                <menu action="menu.view.panes">
+	                	<check action="view.pane.editor.panes.dalos.synsettree" />
+                        <check action="view.pane.editor.panes.dalos.synsetlist" />
+                        <check action="view.pane.editor.panes.dalos.synsetdetails" /> 
+                        <check action="view.pane.editor.panes.dalos.linguisticrelation" />
+                        <check action="view.pane.editor.panes.dalos.semanticrelation" />
+                        <check action="view.pane.editor.panes.dalos.source" />
+						<check action="view.pane.editor.panes.dalos.interlingualrelation" />
+					</menu>      
                 </menu>
                 
                 
