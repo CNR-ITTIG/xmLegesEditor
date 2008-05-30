@@ -11,7 +11,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import org.apache.xerces.jaxp.DocumentBuilderFactoryImpl;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -166,8 +165,10 @@ public class UtilXml {
 				dbf.setIgnoringElementContentWhitespace(true);
 				// FIXME   c'e' nell'interfaccia standard di Jaxp dalla 1.5
 				// questo serve per abilitare la validazione con schema
-				((DocumentBuilderFactoryImpl)dbf).setFeature("http://xml.org/sax/features/validation", true);
-				((DocumentBuilderFactoryImpl)dbf).setFeature("http://apache.org/xml/features/validation/schema", true);	
+				//((DocumentBuilderFactoryImpl)dbf)
+				dbf.setFeature("http://xml.org/sax/features/validation", true);
+				//((DocumentBuilderFactoryImpl)dbf).
+				dbf.setFeature("http://apache.org/xml/features/validation/schema", true);	
 				//((DocumentBuilderFactoryImpl)dbf).setFeature("http://apache.org/xml/features/validation/id-idref-checking", false);					
 			}
 			dbf.setIgnoringComments(false);
