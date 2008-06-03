@@ -1,7 +1,10 @@
 package it.cnr.ittig.xmleges.editor.services.dalos.objects;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.TreeSet;
 
 public class TreeOntoClass extends DalosOntoClass {
@@ -14,6 +17,8 @@ public class TreeOntoClass extends DalosOntoClass {
 	private Collection concepts;
 	
 	private Collection semanticPaths;
+	
+	private Map semanticProperties;
 
 	public TreeOntoClass(String name) {
 		
@@ -22,22 +27,8 @@ public class TreeOntoClass extends DalosOntoClass {
 		//resources = new HashSet();
 		concepts = new HashSet();
 		semanticPaths = new TreeSet();
+		semanticProperties = new HashMap();
 	}
-	
-//	public boolean addTerm(Synset syn) {
-//		
-//		return resources.add(syn);
-//	}
-//	
-//	public boolean removeTerm(Synset syn) {
-//		
-//		return resources.remove(syn);
-//	}
-//	
-//	public Collection getResources() {
-//		
-//		return resources;
-//	}
 	
 	public boolean addConcept(PivotOntoClass poc) {
 		
@@ -66,6 +57,10 @@ public class TreeOntoClass extends DalosOntoClass {
 		return str;
 	}
 
+	public Map getSemanticProperties() {
+		return semanticProperties;
+	}
+
 	public Collection getSemanticPaths() {
 		return semanticPaths;
 	}
@@ -76,5 +71,16 @@ public class TreeOntoClass extends DalosOntoClass {
 	
 	public boolean addSemanticPaths(Object path) {
 		return this.semanticPaths.add(path);
+	}
+	
+	public void addSemanticProperty(String rel, TreeOntoClass toc) {
+		
+		Collection values = (Collection) semanticProperties.get(rel);
+		//System.out.println("addSemProp rel: " + rel + " values: " + values + " toc: " + toc);
+		if(values == null) {
+			values = new TreeSet();
+			semanticProperties.put(rel, values);
+		}
+		values.add(toc);
 	}
 }

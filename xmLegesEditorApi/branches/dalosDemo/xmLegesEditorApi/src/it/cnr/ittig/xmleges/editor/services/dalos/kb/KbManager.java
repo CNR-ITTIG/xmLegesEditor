@@ -61,7 +61,8 @@ public interface KbManager extends Service {
 	 * 
 	 * @param syn
 	 */
-	public void addSemanticProperties(Synset syn); 
+	//public void addSemanticProperties(Synset syn);
+	public Collection getSortedTreeClass(Synset syn);
 	
 	/**
 	 * 

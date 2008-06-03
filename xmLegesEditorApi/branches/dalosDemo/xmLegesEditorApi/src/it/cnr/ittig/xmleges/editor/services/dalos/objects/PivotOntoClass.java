@@ -65,6 +65,11 @@ public class PivotOntoClass extends DalosOntoClass {
 		return terms.remove(syn);
 	}
 	
+	public Collection getTerms() {
+	
+		return Collections.unmodifiableCollection(terms);
+	}
+	
 	public Collection getTerms(String lang) {
 		/*
 		 * Get lexicalizations in the specified language.
@@ -78,6 +83,17 @@ public class PivotOntoClass extends DalosOntoClass {
 				results.add(item);
 			}
 		}
+		
+		//Check equivalent synonym ?
+//		for(Iterator i = eqsynConcepts.iterator(); i.hasNext(); ) {
+//			PivotOntoClass item = (PivotOntoClass) i.next();
+//			for(Iterator k = item.getTerms().iterator(); k.hasNext(); ) {
+//				Synset syn = (Synset) k.next();
+//				if(syn.getLanguage().equalsIgnoreCase(lang)) {
+//					results.add(syn);
+//				}
+//			}
+//		}
 		
 		return results;
 	}

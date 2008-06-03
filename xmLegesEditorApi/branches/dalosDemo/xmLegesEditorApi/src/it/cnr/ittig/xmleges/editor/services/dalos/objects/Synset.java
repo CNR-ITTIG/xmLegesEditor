@@ -21,7 +21,7 @@ public class Synset implements Comparable {
 	
 	private boolean isLexicalPropCached = false;
 	
-	private boolean isSemanticPropCached = false;
+	//private boolean isSemanticPropCached = false;
 	
 	private boolean isSourceCached = false;
 	
@@ -39,14 +39,14 @@ public class Synset implements Comparable {
 	
 	public Map lexicalToSynset = null;
 		
-	public Map semanticToSynset = null;		
+	//public Map semanticToSynset = null;		
 	
 	public Synset(String language) {
 				
 		LANGUAGE = language;
 		
 		lexicalToSynset = new HashMap();
-		semanticToSynset = new HashMap();
+		//semanticToSynset = new HashMap();
 		
 		sources = new TreeSet();
 		definitions = new TreeSet();
@@ -129,15 +129,15 @@ public class Synset implements Comparable {
 		return isLexicalPropCached;
 	}
 
-	public void setSemanticPropCached(boolean status) {
-		
-		isSemanticPropCached = status;
-	}
-	
-	public boolean isSemanticPropCached() {
-		
-		return isSemanticPropCached;
-	}
+//	public void setSemanticPropCached(boolean status) {
+//		
+//		isSemanticPropCached = status;
+//	}
+//	
+//	public boolean isSemanticPropCached() {
+//		
+//		return isSemanticPropCached;
+//	}
 	
 	public void setSourceCached(boolean status) {
 		

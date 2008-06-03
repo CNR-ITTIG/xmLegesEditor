@@ -1,6 +1,6 @@
 package it.cnr.ittig.xmleges.editor.services.dalos.objects;
 
-public abstract class DalosOntoClass {
+public abstract class DalosOntoClass implements Comparable {
 	
 	private String URI;
 	
@@ -64,5 +64,15 @@ public abstract class DalosOntoClass {
 	public int hashCode() {
 		return 1;
 	}
+	
+	public int compareTo(Object obj) throws ClassCastException {
+		
+		if(!(obj instanceof DalosOntoClass)) {
+			throw new ClassCastException("Object is not a valid synset!");
+		}
+		String objForm = ((DalosOntoClass) obj).toString();
+		return this.toString().compareToIgnoreCase(objForm);
+	}
+
 
 }
