@@ -268,6 +268,7 @@ implements KbManager, Loggable, Serviceable, Initializable {
 					//Make it concrete
 					kbc.initSynset(syn);
 				}
+				terms.add(syn);
 			}
 		}
 		
