@@ -17,7 +17,7 @@
         =====================================================================  -->
 
 <!-- modifica aprile 2008: esiste una sola istanza opzionale del tag disposizioni -->
-<!--ELEMENT meta (descrittori,inquadramento?,ciclodivita?,lavoripreparatori?,redazionale*,proprietario*,risoluzione?,disposizioni*) -->
+<!--ELEMENT meta (descrittori,inquadramento?,iciclodivita?,lavoripreparatori?,redazionale*,proprietario*,risoluzione?,disposizioni*) -->
 <!ELEMENT meta (descrittori,inquadramento?,ciclodivita?,lavoripreparatori?,redazionale*,proprietario*,risoluzione?,disposizioni?)>
 
 <!ELEMENT inlinemeta (redazionale?,proprietario*,disposizioni?)>
@@ -213,13 +213,16 @@ D-A
  ===================================================================== -->
  
  <!-- =====================================================================  
-   modelo D-A: aggiunto elemento Keywords per impostare il valore degli argomenti
+   modelo D-A: aggiunto elemento Keywords per impostare il valore degli argomenti;
+   						 è stato scelto di impostarlo opzionale: ossia gli argomenti
+   						 di una disposizione devono obbligatoriamente essere scritti ma
+   						 possono anche non contenere keywords 
  ===================================================================== -->
- <!ENTITY % keywords "dsp:keywords">
+ <!ENTITY % keywords "dsp:keywords?">
  <!ELEMENT dsp:keywords (dsp:keyword)+>
  <!ATTLIST dsp:keywords schema CDATA #IMPLIED versione CDATA #IMPLIED>
  <!ELEMENT dsp:keyword EMPTY>
- <!ATTLIST dsp:keyword valore CDATA #REQUIRED codice CDATA #REQUIRED>
+ <!ATTLIST dsp:keyword valore CDATA #REQUIRED codice CDATA #IMPLIED>
 
 <!-- modifica aprile 2008: eliminato ANY dall'entità subargomenti -->
 <!--ENTITY % subargomenti "(ANY | %keywords;)" -->
@@ -237,13 +240,19 @@ D-A
 <!-- modifica aprile 2008: eliminati tag motivazioni e comunicazioni, non necessari nel tag disposizioni -->
 <!-- ELEMENT disposizioni (motivazioni?,regole?,modifiche?,comunicazioni?) -->
 <!ELEMENT disposizioni (regole?,modifiche?)>
-<!ATTLIST disposizioni %link; >
+<!--- =======================================================================
+		modello D-A: aggiunto l'attributo fonteUri all'elemento disposizioni, per indicare che il dizionario usato
+								 per la marcatura si riferisce ad un'ontologia, identificata da un URI
+			======================================================================= -->
+<!ATTLIST disposizioni %link;>
+<!ATTLIST disposizioni %fonteUri; >
+<!ENTITY % fonteUri %uri; IMPLIED>
 
 <!ELEMENT dsp:testo %valore; >
 <!ATTLIST dsp:testo %val; >
 <!ELEMENT dsp:pos EMPTY >
-
 <!ATTLIST dsp:pos %link; >
+
 <!ELEMENT dsp:termine %subargomenti; >
 
 <!ATTLIST dsp:termine da %uri; #IMPLIED a %uri; #IMPLIED >
@@ -300,7 +309,7 @@ D-A
 <!--- =======================================================================
 						modello D-A: nuova sottoclasse Regole.Costituzione.Introduzione
 			======================================================================= -->
-<!ENTITY % introduzione "(dsp:ambito | dsp:finalita | dsp:finanziaria)*">
+<!ENTITY % introduzione "(dsp:ambito | dsp:finalita | dsp:finanziaria)+">
 <!ELEMENT introduzione %introduzione; >
 
 <!--- =======================================================================
