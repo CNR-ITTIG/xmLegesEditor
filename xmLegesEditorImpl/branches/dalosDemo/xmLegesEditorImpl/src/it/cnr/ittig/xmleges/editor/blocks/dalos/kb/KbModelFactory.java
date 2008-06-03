@@ -194,7 +194,7 @@ public class KbModelFactory {
 				return false;
 			}
 			String segFileName = segObj.toString();
-			System.out.println("Segmentation: retrieving data from " + segFileName);
+			//System.out.println("Segmentation: retrieving data from " + segFileName);
 			readSegment(om, segFileName);
 
 		} else {						

@@ -584,7 +584,7 @@ public class KbContainer {
 			return;
 		}
 		
-		System.out.println(">> adding DEFINITIONS to " + syn + "...");
+		//System.out.println(">> adding DEFINITIONS to " + syn + "...");
 		
 		OntModel om = KbModelFactory.getModel("seg.source", "", LANGUAGE, syn.getURI());
 		
@@ -611,7 +611,7 @@ public class KbContainer {
 				String bResUri = bRes.getNameSpace() + bRes.getLocalName();
 				if(aResUri.equalsIgnoreCase(bResUri)) {
 					
-					System.out.println("Analyzing defsource " + aRes.getNameSpace() + aRes.getLocalName());
+					//System.out.println("Analyzing defsource " + aRes.getNameSpace() + aRes.getLocalName());
 					OntResource part = (OntResource) aRes.getPropertyValue(involvesProp);
 					OntResource doc = (OntResource) part.getPropertyValue(belongsProp);
 					
@@ -718,38 +718,38 @@ public class KbContainer {
 	
 	//TODO
 	//MODIFICARE !!!!	
-	void addSemanticProperties(Synset syn) {
-		//Aggiunge le propriet� semantiche
-		
-//		System.out.println("Adding semantic properties to " 
-//		+ syn.getLexicalForm() + "...");
-		if(syn.isSemanticPropCached()) {
-//			System.out.println("..already cached!");
-			return;
-		}
-		
-		OntModel om = KbModelFactory.getModel("dpinf");
-		
-		Individual ind = om.getIndividual(syn.getURI());
-		
-		//Questo funziona per le declared properties:
-		for(StmtIterator si = om.listStatements(
-				ind, (Property) null, (RDFNode) null); 
-				si.hasNext();) {
-			Statement stm = si.nextStatement();
-			Property op = stm.getPredicate();
-			RDFNode obj = stm.getObject();
-			addSemanticProperty(syn, op, obj);
-		}
-		
-		/*
-		 * Occorre una schema ontologico per le semantic property,
-		 * che deve essere caricato, dal quale prendere i link
-		 * semantici verso gli altri synset e i nomi dei link.
-		 */		
-
-		syn.setSemanticPropCached(true);
-	}	
+//	void addSemanticProperties(Synset syn) {
+//		//Aggiunge le propriet� semantiche
+//		
+////		System.out.println("Adding semantic properties to " 
+////		+ syn.getLexicalForm() + "...");
+//		if(syn.isSemanticPropCached()) {
+////			System.out.println("..already cached!");
+//			return;
+//		}
+//		
+//		OntModel om = KbModelFactory.getModel("dpinf");
+//		
+//		Individual ind = om.getIndividual(syn.getURI());
+//		
+//		//Questo funziona per le declared properties:
+//		for(StmtIterator si = om.listStatements(
+//				ind, (Property) null, (RDFNode) null); 
+//				si.hasNext();) {
+//			Statement stm = si.nextStatement();
+//			Property op = stm.getPredicate();
+//			RDFNode obj = stm.getObject();
+//			addSemanticProperty(syn, op, obj);
+//		}
+//		
+//		/*
+//		 * Occorre una schema ontologico per le semantic property,
+//		 * che deve essere caricato, dal quale prendere i link
+//		 * semantici verso gli altri synset e i nomi dei link.
+//		 */		
+//
+//		syn.setSemanticPropCached(true);
+//	}	
 	
 	private void addLinguisticProperty(Synset syn, Property prop, RDFNode obj) {
 		
@@ -775,24 +775,24 @@ public class KbContainer {
 	}
 	
 	
-	private void addSemanticProperty(Synset syn, Property prop, RDFNode obj) {
-		
-		String propName = prop.getLocalName();
-		String resUri = ((Resource) obj).getNameSpace() +
-			((Resource) obj).getLocalName();
-		Synset objSynset = (Synset) synsets.get(resUri);
-		if(objSynset == null) {
-			System.err.println("Unknown instance found: " + objSynset);
-			return;
-		}
-		Collection mappedSynsets = (Collection) syn.semanticToSynset.get(propName);
-		if(mappedSynsets == null) {
-			mappedSynsets = new HashSet();
-			syn.semanticToSynset.put(propName, mappedSynsets);
-		}
-		//Se viene implementato un Set non possono esserci doppioni (elementi disordinati!)
-		mappedSynsets.add(objSynset);		
-	}	
+//	private void addSemanticProperty(Synset syn, Property prop, RDFNode obj) {
+//		
+//		String propName = prop.getLocalName();
+//		String resUri = ((Resource) obj).getNameSpace() +
+//			((Resource) obj).getLocalName();
+//		Synset objSynset = (Synset) synsets.get(resUri);
+//		if(objSynset == null) {
+//			System.err.println("Unknown instance found: " + objSynset);
+//			return;
+//		}
+//		Collection mappedSynsets = (Collection) syn.semanticToSynset.get(propName);
+//		if(mappedSynsets == null) {
+//			mappedSynsets = new HashSet();
+//			syn.semanticToSynset.put(propName, mappedSynsets);
+//		}
+//		//Se viene implementato un Set non possono esserci doppioni (elementi disordinati!)
+//		mappedSynsets.add(objSynset);		
+//	}	
 	
 	Collection search(String search, String type) {
 		//Compie ricerche lessicali nell'insieme dei synset

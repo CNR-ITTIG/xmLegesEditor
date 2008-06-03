@@ -87,6 +87,7 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		
 		initPivotMapping();
 		addInterlingualLinks();
+		initSemanticProperties();
 		
 		loadLanguages();
 		
@@ -219,18 +220,26 @@ implements KbManager, Loggable, Serviceable, Initializable {
 			}
 		}
 	}
-	
-	public void addSemanticProperties(Synset syn) {
+
+	public Collection getSortedTreeClass(Synset syn) {
 		
-		if(syn == null) { return; }
-		
-		//UNDER CONSTRUCTION, DON'T GO ON!
-		if(true) return;
-		
-		KbContainer kbc = getContainer(syn.getLanguage());
-		kbc.addSemanticProperties(syn);
-		//kbc.compute("dp");
+		Collection results = new TreeSet(); 
+		PivotOntoClass poc = syn.getPivotClass();
+		results.addAll(poc.getLinks());
+		return results;
 	}
+	
+//	public void addSemanticProperties(Synset syn) {
+//		
+//		if(syn == null) { return; }
+//		
+//		//UNDER CONSTRUCTION, DON'T GO ON!
+//		if(true) return;
+//		
+////		KbContainer kbc = getContainer(syn.getLanguage());
+////		kbc.addSemanticProperties(syn);
+////		//kbc.compute("dp");
+//	}
 	
 	public void addSources(Synset syn) {
 		
@@ -288,7 +297,7 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		 * Ritorna un collection, non un synset, gli equivalent synset possono essere più di uno !!
 		 */
 		
-		System.out.println("%%% getSynset() syn:" + syn + " - lang:" + lang);
+		//System.out.println("%%% getSynset() syn:" + syn + " - lang:" + lang);
 		PivotOntoClass poc = syn.getPivotClass();
 		if(poc == null) {
 			System.err.println("ERROR getSynset() - poc is null for " + syn);
@@ -511,7 +520,69 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		return uri.substring(start, start + 2);		
 	}
 
+	private void initSemanticProperties() {
+		
+		OntModel onto = KbModelFactory.getModel("domain", "micro");
+		
+		System.out.println("()() Initializing semantic properties ()()");		
+		
+//		for(Iterator i = onto.listObjectProperties(); i.hasNext(); ) {
+//			OntProperty op = (OntProperty) i.next();
+//			String puri = op.getNameSpace() + op.getLocalName();
+//			String relName = checkRelationName(op.getLocalName());
+//			for(Iterator k = op.listDomain(); k.hasNext(); ) {
+//				OntClass soc = (OntClass) k.next();
+//				String suri = soc.getNameSpace() + soc.getLocalName();
+//				TreeOntoClass stoc = (TreeOntoClass) uriToTreeClass.get(suri);
+//				if(stoc == null) {
+//					//Not a domain class?
+//					continue;
+//				}
+//				for(Iterator z = op.listRange(); z.hasNext(); ) {
+//					OntClass ooc = (OntClass) z.next();
+//					String ouri = ooc.getNameSpace() + ooc.getLocalName();
+//					TreeOntoClass otoc = (TreeOntoClass) uriToTreeClass.get(ouri);
+//					if(otoc == null) {
+//						//Not a domain class?
+//						continue;
+//					}
+//					stoc.addSemanticProperty(relName, otoc);
+//				}
+//			}			
+//		}
+		
+		for(Iterator i = onto.listClasses(); i.hasNext(); ) {
+			OntClass soc = (OntClass) i.next();
+			TreeOntoClass stoc = (TreeOntoClass)
+				uriToTreeClass.get(soc.getNameSpace() + soc.getLocalName());
+			if(stoc == null) {
+				//Not a domain class?
+				continue;
+			}
+			for(Iterator k = soc.listDeclaredProperties(); k.hasNext(); ) {
+				OntProperty op = (OntProperty) k.next();
+				String relName = checkRelationName(op.getLocalName());
+				for(Iterator z = op.listRange(); z.hasNext(); ) {
+					OntClass ooc = (OntClass) z.next();
+					TreeOntoClass otoc = (TreeOntoClass)
+						uriToTreeClass.get(ooc.getNameSpace() + ooc.getLocalName());
+					if(otoc == null) {
+						//Not a domain class?
+						continue;
+					}
+					stoc.addSemanticProperty(relName, otoc);
+				}
+			}
+		}
+	}
 	
+	private String checkRelationName(String name) {
+		
+		name = name.replace('_', ' ');
+		name = name.replace('-', ' ');
+		
+		return name;
+	}
 	
 	private void copyDalosInTemp(){
 		String commonDirName = "common";
