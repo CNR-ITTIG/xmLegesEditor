@@ -254,13 +254,21 @@ implements KbManager, Loggable, Serviceable, Initializable {
 
 	public Collection getSynsets(TreeOntoClass toc, String lang) {
 		
+		KbContainer kbc = getContainer(lang);
+		
 		Collection terms = new TreeSet();
 		Collection concepts = toc.getConcepts();
 		
 		for(Iterator i = concepts.iterator(); i.hasNext();) {
 			PivotOntoClass poc = (PivotOntoClass) i.next();
 			Collection syns = poc.getTerms(lang);
-			terms.addAll(syns);
+			for(Iterator k = syns.iterator(); k.hasNext(); ) {
+				Synset syn = (Synset) k.next();
+				if(!syn.isConcreteSynset()) {
+					//Make it concrete
+					kbc.initSynset(syn);
+				}
+			}
 		}
 		
 		return terms;
@@ -276,7 +284,7 @@ implements KbManager, Loggable, Serviceable, Initializable {
 			
 	public Collection getSynsets(Synset syn, String lang) {
 		/*
-		 * Ritorna un collection, non un synset, gli equivalent synset possono essere più di uno !! <-----
+		 * Ritorna un collection, non un synset, gli equivalent synset possono essere più di uno !!
 		 */
 		
 		System.out.println("%%% getSynset() syn:" + syn + " - lang:" + lang);
