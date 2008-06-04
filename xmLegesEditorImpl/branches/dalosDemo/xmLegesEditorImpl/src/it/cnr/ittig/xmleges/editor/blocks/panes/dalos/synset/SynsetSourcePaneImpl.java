@@ -24,6 +24,7 @@ Initializable, Startable, SynsetSourcePane {
 		
 		synsetPane = new SourceContainer();
 		synsetPane.setI18n(i18n);
+		synsetPane.setUtilDalos(utilDalos);
 		
 		scrollPane.setViewportView(synsetPane);
 		

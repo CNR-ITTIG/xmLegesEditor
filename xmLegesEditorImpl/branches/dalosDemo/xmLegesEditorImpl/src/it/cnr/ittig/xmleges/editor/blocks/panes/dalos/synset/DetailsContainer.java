@@ -8,6 +8,7 @@ import it.cnr.ittig.xmleges.editor.services.dalos.objects.PivotOntoClass;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Source;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.TreeOntoClass;
+import it.cnr.ittig.xmleges.editor.services.dalos.util.UtilDalos;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -21,6 +22,7 @@ import javax.swing.text.html.HTMLDocument;
 public class DetailsContainer extends JEditorPane {
 	
 	I18n i18n;
+	UtilDalos utilDalos;
 	
 	public DetailsContainer() {
 		
@@ -44,6 +46,10 @@ public class DetailsContainer extends JEditorPane {
 	
 	public void setI18n(I18n i18n){
 		this.i18n = i18n;
+	}
+	
+	public void setUtilDalos(UtilDalos utilDalos){
+		this.utilDalos = utilDalos;
 	}
 	
 	public void draw(Synset synset) {
@@ -76,7 +82,7 @@ public class DetailsContainer extends JEditorPane {
 			for(Iterator i = defs.iterator(); i.hasNext(); ) {
 				Source source = (Source) i.next();
 				html += "<tr><td><img src=\"./signature.png\"></td><td><font face=\"Arial\">" + 
-						source.getContent() + "</font></td><td>&nbsp;</td><td>" +
+						utilDalos.highlightDef(source.getContent(),synset) + "</font></td><td>&nbsp;</td><td>" +
 						"<a href=\"" + source.getLink() + 
 						"\">" + source.getPartitionId() + "</a></td></tr>";
 			}

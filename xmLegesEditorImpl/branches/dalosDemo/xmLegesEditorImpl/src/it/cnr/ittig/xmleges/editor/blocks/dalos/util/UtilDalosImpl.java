@@ -12,6 +12,7 @@ import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.preference.PreferenceManager;
 import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
+import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.dalos.util.LangChangedEvent;
 import it.cnr.ittig.xmleges.editor.services.dalos.util.LangPanel;
 import it.cnr.ittig.xmleges.editor.services.dalos.util.UtilDalos;
@@ -20,7 +21,11 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.EventObject;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Properties;
 
 import javax.swing.AbstractAction;
@@ -203,6 +208,85 @@ public class UtilDalosImpl implements UtilDalos, EventManagerListener, Loggable,
 	public String[] getDalosLang(){
 		return dalosLang;
 	}
+	
+	
+	
+	public String highlightDef(String def,Synset syn){
+		String highlighted;
+		int index;
+		List variants = Arrays.asList(syn.getVariants().toArray());
+		String tagged;
+				
+		// ordino le varianti dalla piu' lunga alla piu' corta
+		Collections.sort(variants,new Comparator() {
+		    public int compare(Object a, Object b ) {
+		    	  return(((String)b).length()-((String)a).length());
+		    }
+		});
+		
+		for(Iterator it = variants.iterator(); it.hasNext();){
+			String currentVariant = (String) it.next();
+			
+			int from =0;
+			
+			while(from < def.length()-currentVariant.length()){
+				index = searchString(currentVariant, def,from);
+				//index = def.toLowerCase().indexOf(currentVariant.toLowerCase());
+				if(index!=-1){
+					tagged = "<font style=\"background-color: #FF8040\">"+def.substring(index,index+currentVariant.length())+"</font>";
+					highlighted = def.substring(0,index)+tagged+def.substring(index+currentVariant.length());
+					def = highlighted;
+					from = index+tagged.length();
+				}else{
+					from = def.length();
+				}
+			}	
+		}
+		return def;
+	}
+	
+	
+	
+	// un po' di lacchezzi per ignorare gli spazi
+	private int searchString(String match, String text, int fromHere){
+		text = text.substring(fromHere);
+		
+		int idx = text.toLowerCase().indexOf(match.toLowerCase());
+		if(idx!=-1)
+			return idx+fromHere;
+		
+		String[] tok = match.split("\\s+");
+		int start = text.toLowerCase().indexOf(tok[0].toLowerCase());
+		if(start!=-1){
+			idx = squeeze(text.substring(start)).toLowerCase().indexOf(squeeze(match).toLowerCase());
+			if(idx!=-1)
+				idx = start +idx;
+		}
+		if(idx!=-1)
+			return idx+fromHere;
+		return -1;
+	}
+	
+	
+	/**
+	 * @param str stringa da comprimere
+	 * @return la stringa compressa
+	 */
+	private String squeeze(String str) {
+		char[] buffer = str.toCharArray();
+		StringBuffer out = new StringBuffer(buffer.length);
+
+		for (int i = 0; i < buffer.length; i++) {
+			if (buffer[i] !=' ') {
+				out.append(buffer[i]);
+			}
+		}
+		return out.toString();
+	}
+	
+	
+	
+	
 	
 }
 

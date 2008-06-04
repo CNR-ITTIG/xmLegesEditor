@@ -36,6 +36,7 @@ implements EventManagerListener, Loggable, Serviceable,
 		
 		synsetPane = new DetailsContainer();
 		synsetPane.setI18n(i18n);
+		synsetPane.setUtilDalos(utilDalos);
 		
 		scrollPane.setViewportView(synsetPane);
 		

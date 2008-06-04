@@ -1,6 +1,7 @@
 package it.cnr.ittig.xmleges.editor.services.dalos.util;
 
 import it.cnr.ittig.services.manager.Service;
+import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 
 
 /**
@@ -65,6 +66,14 @@ public interface UtilDalos extends Service {
 	 * @return
 	 */
 	public String[] getDalosLang();
+	
+	/**
+	 * 
+	 * @param def
+	 * @param syn
+	 * @return
+	 */
+	public String highlightDef(String def,Synset syn);
 	
 
 }
