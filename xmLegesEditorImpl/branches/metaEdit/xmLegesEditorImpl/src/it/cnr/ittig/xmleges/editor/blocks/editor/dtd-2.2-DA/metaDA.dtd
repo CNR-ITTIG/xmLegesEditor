@@ -244,9 +244,10 @@ D-A
 		modello D-A: aggiunto l'attributo fonteUri all'elemento disposizioni, per indicare che il dizionario usato
 								 per la marcatura si riferisce ad un'ontologia, identificata da un URI
 			======================================================================= -->
+<!ENTITY % fonteUri "dsp:dizionario %uri;" >
 <!ATTLIST disposizioni %link;>
-<!ATTLIST disposizioni %fonteUri; >
-<!ENTITY % fonteUri %uri; IMPLIED>
+<!ATTLIST disposizioni %fonteUri; #IMPLIED>
+
 
 <!ELEMENT dsp:testo %valore; >
 <!ATTLIST dsp:testo %val; >
