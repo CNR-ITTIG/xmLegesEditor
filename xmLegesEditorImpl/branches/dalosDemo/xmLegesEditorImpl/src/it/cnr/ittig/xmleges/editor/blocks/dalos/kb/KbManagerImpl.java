@@ -546,8 +546,8 @@ implements KbManager, Loggable, Serviceable, Initializable {
 			String objUri = obj.getNameSpace() + obj.getLocalName();
 			TreeOntoClass stoc = (TreeOntoClass) uriToTreeClass.get(subjUri);
 			TreeOntoClass dtoc = (TreeOntoClass) uriToTreeClass.get(objUri);
-			System.out.println(">>> stoc:" + stoc + " dtoc:" + dtoc + " suri:" + subjUri + " ouri:" + objUri);
 			if(stoc == null || dtoc == null) {
+				System.out.println(">>> stoc:" + stoc + " dtoc:" + dtoc + " suri:" + subjUri + " ouri:" + objUri);
 				System.err.println("semantic properties: stoc or dtoc NULL !");
 				continue;
 			}
