@@ -94,7 +94,7 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		
 		
 		// FIXME   togliere; 
-		getSynsetsList(utilDalos.getGlobalLang());
+		//getSynsetsList(utilDalos.getGlobalLang());
 	}
 	
 	private void loadLanguages() {
