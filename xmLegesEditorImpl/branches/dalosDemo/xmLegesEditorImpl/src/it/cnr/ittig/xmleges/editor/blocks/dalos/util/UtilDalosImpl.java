@@ -56,6 +56,8 @@ public class UtilDalosImpl implements UtilDalos, EventManagerListener, Loggable,
 	
 	String globalLang = UtilDalos.IT; 	// DEFAULT LANG
 	
+	String treeOntoLang = null; 	
+	
 	Properties prefs = null;
 	
 	String[] dalosLang;
@@ -114,6 +116,15 @@ public class UtilDalosImpl implements UtilDalos, EventManagerListener, Loggable,
 	
 	private void setGlobalLang(String lang){
 		this.globalLang = lang.toUpperCase();
+	}
+	
+	
+	public String getTreeOntoLang(){
+		return this.treeOntoLang;
+	}
+	
+	public void setTreeOntoLang(String lang){
+		this.treeOntoLang = lang==null?lang:lang.toUpperCase();
 	}
 	
 	public class toLangAction extends AbstractAction {	

@@ -22,5 +22,7 @@ import it.cnr.ittig.xmleges.core.services.frame.Pane;
  */
 
 public interface SynsetTreePane extends Service, Pane {
+	
+	public boolean isSetInferred();
 
 }

@@ -35,12 +35,23 @@ public interface UtilDalos extends Service {
 	 */
 	public LangPanel getLanguageSwitchPanel();
 	
-	
 	/**
 	 * 
 	 * @return
 	 */
 	public String getGlobalLang();
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String getTreeOntoLang();
+	
+	/**
+	 * 
+	 * @param lang
+	 */
+	public void setTreeOntoLang(String lang);
 	
 	/**
 	 * 

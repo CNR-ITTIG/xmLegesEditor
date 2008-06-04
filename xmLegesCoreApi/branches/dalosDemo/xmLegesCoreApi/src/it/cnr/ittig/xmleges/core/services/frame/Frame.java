@@ -181,6 +181,13 @@ public interface Frame extends Service {
 	 * @param pane
 	 * @return
 	 */
+	public boolean isSelectedPane(String  paneName);
+	
+	/**
+	 * 
+	 * @param pane
+	 * @return
+	 */
 	public boolean isSelectedPane(Pane pane);
 	
 	/**

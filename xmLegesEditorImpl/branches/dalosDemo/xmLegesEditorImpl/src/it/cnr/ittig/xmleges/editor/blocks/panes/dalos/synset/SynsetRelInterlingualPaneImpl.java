@@ -46,20 +46,21 @@ Initializable, Startable, SynsetRelInterlingualPane {
 		
 		// gestione eventi LangChanged
 		if(event instanceof LangChangedEvent){
-			if(!((LangChangedEvent)event).getIsGlobalLang()){
-				destLang = ((LangChangedEvent) event).getLang();
-				if(!destLang.equals(utilDalos.getGlobalLang())){
-						frame.setSelectedPane(this);
-						
-						// ho rimesso questo perche' altriment nel caso in cui il pannello interlingual sia gia' selezionato non lo fa
-						Object syn = observableSynset.getSynset();
-						if( !(syn instanceof Synset) ) {
-							return;
-						}
-						clearTree();
-						focusGainedEvent((Synset) syn);	
-						
+			if(!((LangChangedEvent)event).getIsGlobalLang()){				
+				//	ho rimesso questo perche' altriment nel caso in cui il pannello interlingual sia gia' selezionato non lo fa
+				Object syn = observableSynset.getSynset();
+				if( !(syn instanceof Synset) ) {
+					return;
 				}
+				clearTree();
+				focusGainedEvent((Synset) syn);
+				
+				
+				// CONDIZIONE PER SELEZIONARE AUTOMATICAMENTE IL PANNELLO TRANSLATION
+				destLang = ((LangChangedEvent) event).getLang();
+				if(!destLang.equals(utilDalos.getGlobalLang()) && ((Synset)syn).getLanguage().equals(utilDalos.getGlobalLang()))	
+					frame.setSelectedPane(this);
+				
 			}
 		}
 		super.manageEvent(event);

@@ -15,11 +15,11 @@ import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.TreeOntoClass;
 import it.cnr.ittig.xmleges.editor.services.dalos.util.LangChangedEvent;
 import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetListPane;
+import it.cnr.ittig.xmleges.editor.services.panes.dalos.SynsetTreePane;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.MenuItem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -54,6 +54,7 @@ implements EventManagerListener, Loggable, Serviceable,
 	JPopupMenu popupMenu;
 	JComboBox searchType;
 	SynsetMarkupAction synsetMarkupAction;
+	SynsetTreePane synsetTreePane;
 	FindAction findAction = new FindAction();
 	String[] searchTypes={KbManager.CONTAINS,KbManager.STARTSWITH, KbManager.ENDSWITH,KbManager.MATCHES};
 	
@@ -63,6 +64,7 @@ implements EventManagerListener, Loggable, Serviceable,
 	public void service(ServiceManager serviceManager) throws ServiceException {
 
 		synsetMarkupAction = (SynsetMarkupAction) serviceManager.lookup(SynsetMarkupAction.class);
+		//synsetTreePane = (SynsetTreePane) serviceManager.lookup(SynsetTreePane.class);
 
 		super.service(serviceManager);
 	}
@@ -150,9 +152,11 @@ implements EventManagerListener, Loggable, Serviceable,
 	}
 	
 	protected void updateObserver(TreeOntoClass toc) {
-		
-		Collection tocSynsets = kbManager.getSynsets(toc, 
-				utilDalos.getGlobalLang());
+		String lang = utilDalos.getGlobalLang();
+		if(utilDalos.getTreeOntoLang()!=null){
+			lang = utilDalos.getTreeOntoLang();
+		}
+		Collection tocSynsets = kbManager.getSynsets(toc,lang);
 		list.setListData(tocSynsets.toArray());
 	}
 	
@@ -199,6 +203,10 @@ implements EventManagerListener, Loggable, Serviceable,
 	}
 	
 	private void searchAndDisplaySynsets(){
+		
+		// FIXME   implement inferred
+		//System.err.println("isInferred Selected  "+synsetTreePane.isSetInferred());
+		
 		Collection res = kbManager.search(textWords.getText(), (String)searchType.getSelectedItem(), utilDalos.getGlobalLang());
 		if(res!=null && !res.isEmpty()){
 			list.setListData(res.toArray());

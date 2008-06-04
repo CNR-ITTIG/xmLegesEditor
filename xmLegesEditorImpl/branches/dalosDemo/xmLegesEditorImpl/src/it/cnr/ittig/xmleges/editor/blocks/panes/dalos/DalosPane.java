@@ -15,7 +15,6 @@ import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import it.cnr.ittig.xmleges.editor.blocks.panes.dalos.synset.SynsetDetailsPaneImpl;
 import it.cnr.ittig.xmleges.editor.services.dalos.SynsetHolder;
 import it.cnr.ittig.xmleges.editor.services.dalos.kb.KbManager;
-import it.cnr.ittig.xmleges.editor.services.dalos.objects.PivotOntoClass;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.Synset;
 import it.cnr.ittig.xmleges.editor.services.dalos.objects.TreeOntoClass;
 import it.cnr.ittig.xmleges.editor.services.dalos.util.LangPanel;
@@ -25,7 +24,6 @@ import it.cnr.ittig.xmleges.editor.services.panes.dalos.synset.SynsetDetailsPane
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.util.EventObject;
-import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
 

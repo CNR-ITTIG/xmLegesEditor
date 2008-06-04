@@ -71,7 +71,8 @@ public abstract class SynsetPane extends DalosPane {
 	protected void updateObserver(Synset syn) {
 		
 		if(syn != null) {
-			setLocalFlag(syn.getLanguage());
+			if(!frame.isSelectedPane("editor.panes.dalos.interlingualrelation"))
+				setLocalFlag(syn.getLanguage());
 		}
 	}
 }

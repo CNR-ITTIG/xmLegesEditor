@@ -33,7 +33,6 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.RDF;
-import com.hp.hpl.jena.vocabulary.RDFS;
 
 /**
  * <h1>Implementazione del servizio
@@ -92,6 +91,10 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		loadLanguages();
 		
 		initSemPaths();
+		
+		
+		// FIXME   togliere; 
+		getSynsetsList(utilDalos.getGlobalLang());
 	}
 	
 	private void loadLanguages() {
