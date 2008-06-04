@@ -40,6 +40,7 @@ public class KbConf {
 	public static String LEXICALIZATIONS = "lexicalizations.owl";
 	public static String SOURCES = "sources.owl";
 	public static String INTERCONCEPTS = "interconcepts.owl";
+	public static String SEMPROPS = "semanticProperties.owl";
 	
 	//Common
 	//public static String CONCEPTS = "concepts.owl";

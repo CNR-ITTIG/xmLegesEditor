@@ -28,6 +28,7 @@ import com.hp.hpl.jena.ontology.OntDocumentManager;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntProperty;
 import com.hp.hpl.jena.ontology.OntResource;
+import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
@@ -139,6 +140,13 @@ implements KbManager, Loggable, Serviceable, Initializable {
 			System.err.println("KbManager - interconcepts file does not exist!!");
 		} else {
 			KbModelFactory.addDocument(KbConf.INTERCONCEPTS, "", interConceptsFile);
+		}
+
+		String semPropertiesFile = KbConf.dalosRepository + KbConf.SEMPROPS;		
+		if(!UtilFile.fileExistInTemp(semPropertiesFile)) {
+			System.err.println("KbManager - sem properties file does not exist!!");
+		} else {
+			KbModelFactory.addDocument(KbConf.SEMPROPS, "", semPropertiesFile);
 		}
 	}
 
@@ -525,58 +533,27 @@ implements KbManager, Loggable, Serviceable, Initializable {
 
 	private void initSemanticProperties() {
 		
-		OntModel onto = KbModelFactory.getModel("domain", "micro");
+		OntModel spModel = KbModelFactory.getModel("sem.prop");
 		
-		System.out.println("()() Initializing semantic properties ()()");		
+		System.out.println("()() Initializing semantic properties ()()");
 		
-//		for(Iterator i = onto.listObjectProperties(); i.hasNext(); ) {
-//			OntProperty op = (OntProperty) i.next();
-//			String puri = op.getNameSpace() + op.getLocalName();
-//			String relName = checkRelationName(op.getLocalName());
-//			for(Iterator k = op.listDomain(); k.hasNext(); ) {
-//				OntClass soc = (OntClass) k.next();
-//				String suri = soc.getNameSpace() + soc.getLocalName();
-//				TreeOntoClass stoc = (TreeOntoClass) uriToTreeClass.get(suri);
-//				if(stoc == null) {
-//					//Not a domain class?
-//					continue;
-//				}
-//				for(Iterator z = op.listRange(); z.hasNext(); ) {
-//					OntClass ooc = (OntClass) z.next();
-//					String ouri = ooc.getNameSpace() + ooc.getLocalName();
-//					TreeOntoClass otoc = (TreeOntoClass) uriToTreeClass.get(ouri);
-//					if(otoc == null) {
-//						//Not a domain class?
-//						continue;
-//					}
-//					stoc.addSemanticProperty(relName, otoc);
-//				}
-//			}			
-//		}
-		
-		for(Iterator i = onto.listClasses(); i.hasNext(); ) {
-			OntClass soc = (OntClass) i.next();
-			TreeOntoClass stoc = (TreeOntoClass)
-				uriToTreeClass.get(soc.getNameSpace() + soc.getLocalName());
-			if(stoc == null) {
-				//Not a domain class?
+		for(StmtIterator i = spModel.listStatements(); i.hasNext(); ) {
+			Statement stm = i.nextStatement();
+			Resource subj = stm.getSubject();
+			Property prop = stm.getPredicate();
+			Resource obj = (Resource) stm.getResource();
+			String subjUri = subj.getNameSpace() + subj.getLocalName();
+			String objUri = obj.getNameSpace() + obj.getLocalName();
+			TreeOntoClass stoc = (TreeOntoClass) uriToTreeClass.get(subjUri);
+			TreeOntoClass dtoc = (TreeOntoClass) uriToTreeClass.get(objUri);
+			System.out.println(">>> stoc:" + stoc + " dtoc:" + dtoc + " suri:" + subjUri + " ouri:" + objUri);
+			if(stoc == null || dtoc == null) {
+				System.err.println("semantic properties: stoc or dtoc NULL !");
 				continue;
 			}
-			for(Iterator k = soc.listDeclaredProperties(); k.hasNext(); ) {
-				OntProperty op = (OntProperty) k.next();
-				String relName = checkRelationName(op.getLocalName());
-				for(Iterator z = op.listRange(); z.hasNext(); ) {
-					OntClass ooc = (OntClass) z.next();
-					TreeOntoClass otoc = (TreeOntoClass)
-						uriToTreeClass.get(ooc.getNameSpace() + ooc.getLocalName());
-					if(otoc == null) {
-						//Not a domain class?
-						continue;
-					}
-					stoc.addSemanticProperty(relName, otoc);
-				}
-			}
-		}
+			String relName = checkRelationName(prop.getLocalName());
+			stoc.addSemanticProperty(relName, dtoc);
+		}		
 	}
 	
 	private String checkRelationName(String name) {
@@ -597,6 +574,7 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		String[] commonFiles = new String[] {
 				KbConf.LINKS, 
 				KbConf.INTERCONCEPTS,
+				KbConf.SEMPROPS,
 				KbConf.LOCAL_DOMAIN_ONTO,
 				KbConf.LOCAL_METALEVEL_FULL,
 				KbConf.LOCAL_SOURCE_SCHEMA, 

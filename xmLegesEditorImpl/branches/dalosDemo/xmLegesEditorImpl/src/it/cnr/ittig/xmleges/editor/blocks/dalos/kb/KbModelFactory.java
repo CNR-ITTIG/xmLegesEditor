@@ -145,6 +145,9 @@ public class KbModelFactory {
 			readLocalDocument(om, lang, KbConf.LINKS);
 			readLocalDocument(om, lang, KbConf.INTERCONCEPTS);
 		}
+		if(type.equalsIgnoreCase("sem.prop")) {
+			readLocalDocument(om, lang, KbConf.SEMPROPS);
+		}
 		if(type.equalsIgnoreCase("types")) {
 			readSchema(om, KbConf.CONCEPT_SCHEMA);
 			readLocalDocument(om, lang, KbConf.LEXICALIZATIONS);
@@ -229,7 +232,7 @@ public class KbModelFactory {
 		} else {
 			String localFile = odm.doAltURLMapping(url);
 			//System.out.println("localFile: " + localFile);
-			om.read(localFile);			
+			om.read(localFile);
 		}
 	}
 	
