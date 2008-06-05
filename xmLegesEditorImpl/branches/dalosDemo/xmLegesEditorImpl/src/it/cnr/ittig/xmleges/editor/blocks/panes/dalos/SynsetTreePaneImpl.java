@@ -14,6 +14,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.EventObject;
@@ -32,7 +33,7 @@ import javax.swing.tree.TreePath;
 
 public class SynsetTreePaneImpl extends DalosPane 
 implements EventManagerListener, Loggable, Serviceable, 
-	Initializable, Startable, SynsetTreePane {
+	Initializable, Startable, SynsetTreePane,ActionListener {
 
 	JTree tree;
 	JPopupMenu popupMenu;
@@ -47,7 +48,13 @@ implements EventManagerListener, Loggable, Serviceable,
 		
 		popupMenu = new JPopupMenu();
 		setInferred = new JCheckBox(i18n.getTextFor("editor.panes.dalos.synsettree.check.setinferred"));
+		setInferred.addActionListener(this);
+		
+		// TODO default TRUE; piazzarlo nelle preference;
 		setInferred.setSelected(true);
+		utilDalos.setIsInferred(true);
+		
+		
 		JToolBar bar = new JToolBar();
 		bar.add(setInferred);
 		panel.add(bar, BorderLayout.SOUTH);
@@ -127,9 +134,6 @@ implements EventManagerListener, Loggable, Serviceable,
 		observableSynset.setSynset(activeSynset);
 	}
 	
-	public boolean isSetInferred(){
-		return setInferred.isEnabled();
-	}
 	
 	protected class SynsetTreePaneMouseAdapter extends MouseAdapter {
 		
@@ -187,6 +191,14 @@ implements EventManagerListener, Loggable, Serviceable,
 			utilDalos.setTreeOntoLang(lang);
 			selectSynset(toc);
 		}
+	}
+
+
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()==setInferred){
+			utilDalos.setIsInferred(setInferred.isSelected());
+		}
+		
 	}
 	
 	

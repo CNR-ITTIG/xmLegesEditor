@@ -64,8 +64,6 @@ implements EventManagerListener, Loggable, Serviceable,
 	public void service(ServiceManager serviceManager) throws ServiceException {
 
 		synsetMarkupAction = (SynsetMarkupAction) serviceManager.lookup(SynsetMarkupAction.class);
-		//synsetTreePane = (SynsetTreePane) serviceManager.lookup(SynsetTreePane.class);
-
 		super.service(serviceManager);
 	}
 
@@ -204,8 +202,8 @@ implements EventManagerListener, Loggable, Serviceable,
 	
 	private void searchAndDisplaySynsets(){
 		
-		// FIXME   implement inferred
-		//System.err.println("isInferred Selected  "+synsetTreePane.isSetInferred());
+		boolean isInFerred = utilDalos.getIsInferred();
+		System.err.println("searchAndDisplaySynsets() : is Set Inferred "+isInFerred);
 		
 		Collection res = kbManager.search(textWords.getText(), (String)searchType.getSelectedItem(), utilDalos.getGlobalLang());
 		if(res!=null && !res.isEmpty()){

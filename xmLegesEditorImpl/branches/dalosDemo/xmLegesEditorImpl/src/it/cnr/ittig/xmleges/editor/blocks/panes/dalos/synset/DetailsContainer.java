@@ -54,6 +54,8 @@ public class DetailsContainer extends JEditorPane {
 	
 	public void draw(Synset synset) {
 		
+		String highlightColor = "#FFFF00";   // highlight definition yellow  
+		
 		//System.out.println("Drawing synset: " + synset);
 		if(synset == null) {
 			setText("<html>No match!</html>");
@@ -82,7 +84,7 @@ public class DetailsContainer extends JEditorPane {
 			for(Iterator i = defs.iterator(); i.hasNext(); ) {
 				Source source = (Source) i.next();
 				html += "<tr><td><img src=\"./signature.png\"></td><td><font face=\"Arial\">" + 
-						utilDalos.highlightDef(source.getContent(),synset) + "</font></td><td>&nbsp;</td><td>" +
+						utilDalos.highlightDef(source.getContent(),synset, highlightColor) + "</font></td><td>&nbsp;</td><td>" +
 						"<a href=\"" + source.getLink() + 
 						"\">" + source.getPartitionId() + "</a></td></tr>";
 			}

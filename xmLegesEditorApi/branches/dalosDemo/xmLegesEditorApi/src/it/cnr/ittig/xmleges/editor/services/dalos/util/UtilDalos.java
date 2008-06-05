@@ -56,6 +56,18 @@ public interface UtilDalos extends Service {
 	
 	/**
 	 * 
+	 * @param isInferred
+	 */
+	public void setIsInferred(boolean isInferred);
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean getIsInferred();
+	
+	/**
+	 * 
 	 * @param lang
 	 * @return
 	 */
@@ -75,5 +87,13 @@ public interface UtilDalos extends Service {
 	 */
 	public String highlightDef(String def,Synset syn);
 	
+	/**
+	 * 
+	 * @param def
+	 * @param syn
+	 * @param htmlColor
+	 * @return
+	 */
+	public String highlightDef(String def,Synset syn, String htmlColor);
 
 }

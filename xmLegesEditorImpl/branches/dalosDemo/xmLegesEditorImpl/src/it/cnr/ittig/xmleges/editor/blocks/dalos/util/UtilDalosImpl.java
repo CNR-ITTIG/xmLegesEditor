@@ -61,7 +61,9 @@ public class UtilDalosImpl implements UtilDalos, EventManagerListener, Loggable,
 	
 	String globalLang = UtilDalos.IT; 	// DEFAULT LANG
 	
-	String treeOntoLang = null; 	
+	String treeOntoLang = null; 
+	
+	boolean isInferred;
 	
 	Properties prefs = null;
 	
@@ -131,6 +133,15 @@ public class UtilDalosImpl implements UtilDalos, EventManagerListener, Loggable,
 	public void setTreeOntoLang(String lang){
 		this.treeOntoLang = lang==null?lang:lang.toUpperCase();
 	}
+	
+	public void setIsInferred(boolean isInferred){
+		this.isInferred = isInferred;
+	}
+	
+	public boolean getIsInferred(){
+		return this.isInferred;
+	}
+	
 	
 	public class toLangAction extends AbstractAction {	
 		
@@ -209,9 +220,7 @@ public class UtilDalosImpl implements UtilDalos, EventManagerListener, Loggable,
 		return dalosLang;
 	}
 	
-	
-	
-	public String highlightDef(String def,Synset syn){
+	public String highlightDef(String def,Synset syn, String htmlColor){
 		String highlighted;
 		int index;
 		List variants = Arrays.asList(syn.getVariants().toArray());
@@ -233,7 +242,7 @@ public class UtilDalosImpl implements UtilDalos, EventManagerListener, Loggable,
 				index = searchString(currentVariant, def,from);
 				//index = def.toLowerCase().indexOf(currentVariant.toLowerCase());
 				if(index!=-1){
-					tagged = "<font style=\"background-color: #FF8040\">"+def.substring(index,index+currentVariant.length())+"</font>";
+					tagged = "<font style=\"background-color:"+htmlColor+"\">"+def.substring(index,index+currentVariant.length())+"</font>";
 					highlighted = def.substring(0,index)+tagged+def.substring(index+currentVariant.length());
 					def = highlighted;
 					from = index+tagged.length();
@@ -243,6 +252,11 @@ public class UtilDalosImpl implements UtilDalos, EventManagerListener, Loggable,
 			}	
 		}
 		return def;
+	}
+	
+	public String highlightDef(String def,Synset syn){
+		String htmlColor ="#FF8040";   // default orange
+		return highlightDef(def, syn,htmlColor);
 	}
 	
 	
