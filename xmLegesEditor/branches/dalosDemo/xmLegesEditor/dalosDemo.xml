@@ -159,7 +159,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  class="it.cnr.ittig.xmleges.core.blocks.version.VersionImpl"
         >
         <configuration>
-            <version>2.0 rc7 DALOS_DEMO</version>
+            <version>2.0 rc_DALOS_SEAL_DEMO</version>
             <url>http://repo.ittig.cnr.it/nireditor2/versions.txt</url>
         </configuration>
     </component>
@@ -172,7 +172,11 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  class="it.cnr.ittig.xmleges.core.blocks.i18n.I18nImpl">
         <configuration>
             <!--locale language="it" country="IT" variant="16" /-->
-			<locale language="en" country="EN" />            
+			<locale language="en" country="EN" /> 
+			
+			<!-- scommentare la riga sotto nella versione per creare l'installer -->
+            <!--locale language="$ISO3_LANG" country="$ISO3_LANG" variant="16" /-->               
+            
             <base>i18n/editor</base>
             <base>i18n/editor-dom</base>
             <base>i18n/core</base>
@@ -1442,11 +1446,11 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 <element name="titolo" />
                 <element name="capo" />
                 <element name="sezione" />
-                <element name="articolo" />
-                <element name="comma" />
+                <!--element name="articolo" /-->
+                <!--element name="comma" /-->
                 <!--element name="lettera" /-->
                 <!--element name="numero" /-->
-                <element name="rubrica" />
+                <!--element name="rubrica" /-->
                 <element name="anness.*" />
                 <element name="ndr" />
                 <element name="nota.*" />
