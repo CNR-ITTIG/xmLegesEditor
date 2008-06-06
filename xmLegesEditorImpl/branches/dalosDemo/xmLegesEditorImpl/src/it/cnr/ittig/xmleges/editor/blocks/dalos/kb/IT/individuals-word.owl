@@ -1681,7 +1681,6 @@
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-eccezione">
     <owns:lexicalForm>ECCEZIONE</owns:lexicalForm>
     <owns:lexicalForm>ECCEZIONI</owns:lexicalForm>
-    <owns:lexicalForm>PER</owns:lexicalForm>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
     <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ECCEZIONE</owns:protoForm>
     <owns:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-eccezione-noun-1"/>
@@ -3200,7 +3199,6 @@
     <owns:lexicalForm>CONCESSIONE DI AUTORIZZAZIONI</owns:lexicalForm>
     <owns:lexicalForm>CONCESSIONE DI UN' AUTORIZZAZIONE</owns:lexicalForm>
     <owns:lexicalForm>CONCESSIONE DELL' AUTORIZZAZIONE</owns:lexicalForm>
-    <owns:lexicalForm>LA CONCESSIONE DELL'</owns:lexicalForm>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
     <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CONCESSIONE DELL' AUTORIZZAZIONE</owns:protoForm>
     <owns:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-concessione_dell-_autorizzazione-noun-1"/>
@@ -3313,7 +3311,6 @@
     <owns:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-protezione_degli_interessi_economici-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-trattamento_per_rigenerazione">
-    <owns:lexicalForm>AL TRATTAMENTO PER</owns:lexicalForm>
     <owns:lexicalForm>TRATTAMENTO PER RIGENERAZIONE</owns:lexicalForm>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
     <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TRATTAMENTO PER RIGENERAZIONE</owns:protoForm>
@@ -5397,7 +5394,6 @@
     <owns:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-paragrafo-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-utilizzazione">
-    <owns:lexicalForm>LORO</owns:lexicalForm>
     <owns:lexicalForm>UTILIZZAZIONE</owns:lexicalForm>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
     <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UTILIZZAZIONE</owns:protoForm>
@@ -8424,7 +8420,6 @@
     <owns:word rdf:resource="http://localhost/dalos/IT/individuals.owl#word-misure_adottate"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-priorita_al_trattamento">
-    <owns:lexicalForm>LA PRIORITÀ AL</owns:lexicalForm>
     <owns:lexicalForm>PRIORITÀ AL TRATTAMENTO</owns:lexicalForm>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
     <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PRIORITÀ AL TRATTAMENTO</owns:protoForm>
@@ -10035,7 +10030,6 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-attivita_di_rigenerazione">
     <owns:lexicalForm>ATTIVITÀ DI RIGENERAZIONE</owns:lexicalForm>
-    <owns:lexicalForm>DELLE ATTIVITÀ DI</owns:lexicalForm>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
     <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ATTIVITÀ DI RIGENERAZIONE</owns:protoForm>
     <owns:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-attivita_di_rigenerazione-noun-1"/>
@@ -12676,7 +12670,6 @@
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-rigenerazione">
     <owns:lexicalForm>RIGENERAZIONE</owns:lexicalForm>
-    <owns:lexicalForm>DI</owns:lexicalForm>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
     <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RIGENERAZIONE</owns:protoForm>
     <owns:sense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-rigenerazione-noun-1"/>
@@ -17851,7 +17844,6 @@
     <owns:containsWordSense rdf:resource="http://localhost/dalos/IT/individuals.owl#wordsense-regola_dell-_interpretazione-noun-1"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/dalos/IT/individuals.owl#word-carattere_tecnico">
-    <owns:lexicalForm>DI CARATTERE</owns:lexicalForm>
     <owns:lexicalForm>CARATTERE TECNICO</owns:lexicalForm>
     <rdf:type rdf:resource="http://turing.ittig.cnr.it/jwn/ontologies/owns.owl#Word"/>
     <owns:protoForm rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CARATTERE TECNICO</owns:protoForm>
