@@ -464,7 +464,7 @@ public class UtilDom {
 		return false;
 	}
 
-	private static boolean isIdAttribute(Node attribute) {
+	public static boolean isIdAttribute(Node attribute) {
 
 		try {
 			return ((AttrImpl) ((Attr) attribute)).isId();
@@ -1128,11 +1128,28 @@ public class UtilDom {
 	 * @return
 	 */
     public static Node[] getElementsByTagName(Document doc, Node fromHere, String tagName){
-		
-		NodeIterator nI = ((DocumentTraversal)doc).createNodeIterator(fromHere,NodeFilter.SHOW_ELEMENT,null,false);	
-		Vector v = new Vector();
-	  
+    	if(fromHere==null){
+    		fromHere=(Node)doc.getDocumentElement();
+    	}
+    	
+    	NodeIterator nI=null;
+    	Vector v = new Vector();
+  	  
 		Node node;
+		
+		try{
+			
+			nI = ((DocumentTraversal)doc).createNodeIterator(fromHere,NodeFilter.SHOW_ELEMENT,null,false);	
+		}catch (Exception e) {
+			System.out.println("errore qua");
+			(doc.getElementsByTagName(tagName)).item(0);
+			Node[] ret = new Node[1];
+			ret[0]=(Node)((doc.getElementsByTagName(tagName)).item(0));
+			
+			return  ret;
+			
+		}
+    		
 		
 		while ((node = nI.nextNode()) != null ) {
 			if(node.getNodeType()==Node.ELEMENT_NODE && node.getNodeName().equals(tagName))
