@@ -142,4 +142,9 @@ public class PartizioniImpl implements Partizioni, Loggable, Serviceable, Initia
 	protected UtilRulesManager getUtilRulesManager() {
 		return this.utilRulesManager;
 	}
+
+	public Node getPartizioneTemplate(String elemName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

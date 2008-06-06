@@ -1068,7 +1068,7 @@ public class NewRinviiFormImpl implements NewRinviiForm, Loggable, Serviceable, 
 				String[] componenti = date.split("/");
 				if ((componenti[0].equals("__")) && (componenti[0].equals("__"))) {
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
-					Date d = sdf.parse(componenti[2]);
+					sdf.parse(componenti[2]);
 					return true;
 				}
 			} catch (Exception e) {
@@ -1077,7 +1077,7 @@ public class NewRinviiFormImpl implements NewRinviiForm, Loggable, Serviceable, 
 		}
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat(UtilDate.getDateFormat());
-			Date d = sdf.parse(date);
+			sdf.parse(date);
 			return true;
 		} catch (Exception e) {
 			return false;

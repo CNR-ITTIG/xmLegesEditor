@@ -28,7 +28,6 @@ import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
@@ -455,7 +454,7 @@ public class NewRinviiAvanzateFormImpl implements NewRinviiAvanzateForm, Loggabl
 			String date = data;
 			try {
 				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-				Date d = sdf.parse(date);
+				sdf.parse(date);
 				return true;
 			} catch (Exception e) {
 				return false;

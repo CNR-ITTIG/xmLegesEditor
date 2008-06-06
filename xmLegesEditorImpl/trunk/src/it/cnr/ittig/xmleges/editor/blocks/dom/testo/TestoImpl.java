@@ -165,7 +165,7 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 
 	private int canChangeTagInSubTree(Node child, Node node, String action) {
 
-		Document documento = documento = documentManager.getDocumentAsDom();
+
 		int returnValue = 0;
 
 		try {
@@ -301,7 +301,7 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 	}
 
 	private void changeTagInSubTree(Node child, Node node, int start, int end, String action) {
-		Document documento = documento = documentManager.getDocumentAsDom();
+		Document documento = documentManager.getDocumentAsDom();
 		NodeList childList;
 		int i;
 
@@ -338,7 +338,7 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 	}
 
 	private Node rimuoviTag(Node node, int start, int end, String action) {
-		Document documento = documento = documentManager.getDocumentAsDom();
+		Document documento = documentManager.getDocumentAsDom();
 
 		String value = UtilDom.getText(node).trim();
 		String testo1 = value.substring(0, start);
@@ -521,7 +521,7 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 	}
 
 	private boolean canMettiTagInTree(Node node, String azione) {
-		Document documento = documento = documentManager.getDocumentAsDom();
+		Document documento = documentManager.getDocumentAsDom();
 		boolean returnValue = true;
 
 		try {
@@ -674,7 +674,7 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 
 	private void mettiTagInTree(Node node, String azione) {
 
-		Document documento = documento = documentManager.getDocumentAsDom();
+		Document documento = documentManager.getDocumentAsDom();
 		logger.debug("mettiBoldInTree");
 
 		if (node == null)
@@ -800,7 +800,7 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 		NodeList nl = node.getChildNodes();
 		Node p = nl.item(0);
 		String text = "";
-		Document documento = documento = documentManager.getDocumentAsDom();
+		Document documento = documentManager.getDocumentAsDom();
 
 		logger.debug("sono dentro mergeTagNodes" + node);
 
@@ -856,7 +856,7 @@ public class TestoImpl implements Testo, Loggable, Serviceable {
 	}
 
 	private boolean canMergeTagNodes(Node node, String azione) {
-		Document documento = documento = documentManager.getDocumentAsDom();
+		Document documento = documentManager.getDocumentAsDom();
 		boolean returnValue = true;
 
 		try {

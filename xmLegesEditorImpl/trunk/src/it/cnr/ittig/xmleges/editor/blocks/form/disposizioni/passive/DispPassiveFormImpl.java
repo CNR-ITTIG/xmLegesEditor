@@ -230,11 +230,7 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 					}
 				}
 				ciclodivita.setCiclodiVita(newEventi,newRelazioni);
-	   		    if (ciclodivitaForm.getVigToUpdate()!=null && ciclodivitaForm.getVigToUpdate().length>0) {
-	   		    	VigenzaEntity[] elenco =ciclodivitaForm.getVigToUpdate();
-	   		    	for(int i=0; i<elenco.length;i++)
-	   		    		vigenza.updateVigenzaOnDoc(elenco[i]);
-	   		    }
+	   		   
 			}
 		}
 		if (e.getSource() == sceltadove) {

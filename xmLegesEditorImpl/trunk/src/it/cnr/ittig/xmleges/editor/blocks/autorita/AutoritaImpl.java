@@ -157,7 +157,7 @@ public class AutoritaImpl implements Autorita, Loggable, Serviceable, Configurab
 	}
 
 	private Vector getIstituzioniValideVect(String data, int tipoIstituzione) {
-		int i;
+		
 		Vector resultVect = new Vector();
 		Node test;
 

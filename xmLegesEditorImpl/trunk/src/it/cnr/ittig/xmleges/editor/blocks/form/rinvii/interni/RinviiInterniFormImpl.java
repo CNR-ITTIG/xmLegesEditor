@@ -194,7 +194,7 @@ public class RinviiInterniFormImpl implements RinviiInterniForm, EventManagerLis
 			return true;
 		if (isDuplicatedId(c.getId()))
 			return false;
-		citazione base = (citazione) lmmrif.get(0);
+//		citazione base = (citazione) lmmrif.get(0);
 		return true;
 	}
 
