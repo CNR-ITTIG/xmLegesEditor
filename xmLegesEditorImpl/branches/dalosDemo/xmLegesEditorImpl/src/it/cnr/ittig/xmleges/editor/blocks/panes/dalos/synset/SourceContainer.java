@@ -71,13 +71,16 @@ public class SourceContainer extends JEditorPane implements HyperlinkListener{
 		}
 		
 		String html = "<html><body bgcolor=\"#EDE275\">" +
-			"</h3><h2><i>Sources</i></h2><table>"; 
+			//"<h2><i>Sources</i></h2><table>"; 
+			//"<h2>&nbsp;</h2>" +
+			"<table width=\"98%\"><tr><td>&nbsp;</td><td><h2><i>Source Text</i></h2></td>" +
+			"<td><h2><i>Links</i></h2></td></tr>";
 		
 		String evenBgColor = "#FFF380";
 		String oddBgColor =  "#EDE275";
 		String bgColor = evenBgColor;
 		int count = 0;
-		
+
 		for(Iterator i = synset.getSources().iterator(); i.hasNext();) {
 			
 			Source source = (Source) i.next();
@@ -92,13 +95,32 @@ public class SourceContainer extends JEditorPane implements HyperlinkListener{
 				def = utilDalos.highlightDef(def, synset);
 			}
 			
-			// SETTARE LA URL
-			source.setLink("http://www.dalosproject.eu");
+			String dcode = source.getDocumentId();
 			
+			String pcode = source.getPartitionId();
+			//Throw away partition code
+			pcode = pcode.substring(dcode.length());
+			//Throw away lang code
+			dcode = dcode.substring(0, dcode.length() - 3);
+			
+			//System.out.println("d:" + source.getDocumentId() + " p:" + source.getPartitionId() + " dcode:" + dcode + " pcode:" + pcode);
+
+			String linkBase = "http://turing.ittig.cnr.it/jwn/corpus/";
+
 			html += "<tr bgcolor="+bgColor+"><td><img src=\"./signature.png\"></td><td><font face=\"Arial\">" + 
-						def + "</font></td><td>&nbsp;</td><td>" +
-						"<a href=\"" + source.getLink() + 
-						"\">" + source.getPartitionId() + "</a></td></tr>";			
+						def + "</font></td><td align=\"center\">";
+						
+			String languages[] = {"EN", "ES", "IT", "NL" };			
+			for(int k = 0; k < languages.length; k++) {
+				String lang = languages[k];
+				if(k != 0) {
+					html += "<br>";
+				}
+				String langdcode = dcode + "-" + lang.toLowerCase();
+				String langpcode = langdcode + pcode;
+				html += "<a href=\"" + linkBase + lang + "/" + langdcode + "/" + langpcode + ".html" + "\">" + lang + "</a>";							
+			}												
+			html += "</td></tr>";
 		}
 		
 		html += "</table></body></html>";

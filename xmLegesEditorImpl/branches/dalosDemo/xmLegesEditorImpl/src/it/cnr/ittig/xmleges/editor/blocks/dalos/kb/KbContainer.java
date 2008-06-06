@@ -538,21 +538,31 @@ public class KbContainer {
 		OntProperty belongsProp = om.getOntProperty(KbConf.SOURCESCHEMA_NS + "belongsTo");
 		OntProperty linkProp = om.getOntProperty(KbConf.SOURCESCHEMA_NS + "link");
 		OntProperty contentProp = om.getOntProperty(KbConf.SOURCESCHEMA_NS + "content");
-		OntProperty idProp = om.getOntProperty(KbConf.SOURCESCHEMA_NS + "partitionCode");
+		OntProperty partIdProp = om.getOntProperty(KbConf.SOURCESCHEMA_NS + "partitionCode");
+		OntProperty docIdProp = om.getOntProperty(KbConf.SOURCESCHEMA_NS + "documentCode");
 		
 		for(Iterator i = ind.listPropertyValues(sourceProp); i.hasNext();) {
 			OntResource ores = (OntResource) i.next();
 			OntResource part = (OntResource) ores.getPropertyValue(involvesProp);
 			OntResource doc = (OntResource) part.getPropertyValue(belongsProp);
 			
-			RDFNode idNode = part.getPropertyValue(idProp);			
-			if(idNode == null) {
+			RDFNode partIdNode = part.getPropertyValue(partIdProp);
+			if(partIdNode == null) {
 				System.out.println("## ERROR ## partitionCode is null!! ind: " + ind);
 				return;
 			}
+			RDFNode docIdNode = doc.getPropertyValue(docIdProp);
+			if(docIdNode == null) {
+				System.out.println("## ERROR ## documentCode is null!! ind: " + ind);
+				return;
+			}
 			
+			String pcode = ((Literal) partIdNode).getString();
+			String dcode = ((Literal) docIdNode).getString();
+
 			Source source = new Source();
-			source.setPartitionId(((Literal) idNode).getString());
+			source.setPartitionId(pcode);
+			source.setDocumentId(dcode);
 			
 			RDFNode linkNode = doc.getPropertyValue(linkProp);			
 			if(linkNode != null) {
