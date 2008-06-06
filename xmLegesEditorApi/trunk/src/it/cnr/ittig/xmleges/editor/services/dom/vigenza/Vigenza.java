@@ -75,12 +75,8 @@ public interface Vigenza extends Service {
 	 */
 	public void setTipoDocVigenza();
 	
-	/**
-	 * Funzione che aggiorna le vigenze che fanno riferimento 
-	 * agli eventi cancellati dal ciclo di vita
-	 * @param vig vigenza da aggiornare
-	 */
-	public void updateVigenzaOnDoc(VigenzaEntity vig);
+	
+	
 
 	
 	

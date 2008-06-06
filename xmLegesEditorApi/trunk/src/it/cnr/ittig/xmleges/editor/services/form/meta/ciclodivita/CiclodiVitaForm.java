@@ -3,7 +3,7 @@ package it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita;
 import it.cnr.ittig.services.manager.Service;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
-import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
+
 
 /**
  * Servizio per la gestione della form per il ciclodivita del documento .
@@ -44,15 +44,7 @@ public interface CiclodiVitaForm extends Service {
 	 */
 	public int getEventoSelezionato();
 	
-	/**
-	 * Restituisce le relazioni ulteriori (non legate agli eventi) con altri
-	 * documenti.
-	 * 
-	 * @return relazioni con altri documenti
-	 */
-	public Relazione[] getRelazioniUlteriori();
 
-	
 	/**
 	 * Imposta la DTD del documento (base, completo...)
 	 * 
@@ -69,13 +61,7 @@ public interface CiclodiVitaForm extends Service {
 	 */
 	public void setEventi(Evento[] eventi);
 
-	/**
-	 * Imposta le relazioni ulteriori (non legate agli eventi) del documento
-	 * 
-	 * @param relazioniUlteriori altre relazioni del documento
-	 */
-	public void setRelazioniUlteriori(Relazione[] relazioniUlteriori);
-	
+
 	/**
 	 * 
 	 * @return
@@ -83,18 +69,6 @@ public interface CiclodiVitaForm extends Service {
 	public Relazione[] getRelazioniTotalefromCdvf();
 	
 	
-	/**
-	 * 
-	 * @param eventiOnVigenze
-	 * @param vigenze
-	 */
-	public void setEventiOnVigenze(String[] eventiOnVigenze, VigenzaEntity[] vigenze);
 	
-	/**
-	 * 
-	 * @return
-	 */
-	public VigenzaEntity[] getVigToUpdate();
-
 
 }
