@@ -6,8 +6,17 @@ public class Source implements Comparable {
 	
 	String link;
 	
-	String partitionId;	
+	String partitionId;
+	String documentId;
 	
+	public String getDocumentId() {
+		return documentId;
+	}
+
+	public void setDocumentId(String documentId) {
+		this.documentId = documentId;
+	}
+
 	public Source() {
 		
 		content = "";
