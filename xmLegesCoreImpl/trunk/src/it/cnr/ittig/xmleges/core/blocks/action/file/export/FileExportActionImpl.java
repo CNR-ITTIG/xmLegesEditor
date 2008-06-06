@@ -312,8 +312,8 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 	
 	public boolean doExportPDF() {
 
-		String XSL_FO_GU; 
-		String dtdName = documentManager.getDtdName();
+//		String XSL_FO_GU; 
+//		String dtdName = documentManager.getDtdName();
 		
 //		if (dtdName.startsWith("nir") && !nirUtilDom.isDocCNR(null))    // documenti NIR
 //			XSL_FO_GU = xslts.getXslt("pdf-gazzettaufficiale").getAbsolutePath();
@@ -382,9 +382,9 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
     
 	public boolean doExportRTF() {
 		
-		String XSL_FO_GU; 
-		String dtdName = documentManager.getDtdName();
-		
+//		String XSL_FO_GU; 
+//		String dtdName = documentManager.getDtdName();
+//		
 //		if (dtdName.startsWith("nir") && !nirUtilDom.isDocCNR(null))    // documenti NIR
 //			XSL_FO_GU = xslts.getXslt("pdf-gazzettaufficiale").getAbsolutePath();
 //		else 

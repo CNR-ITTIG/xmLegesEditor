@@ -125,10 +125,10 @@ public class XsltTransferHandler extends DomTransferHandler {
 				
 				// a questo punto parte il setDot ma non arriva il caretEvent a AntialiasedTextPane.caretUpdate; 
 				int currpos = pos+str.length();
-				String id = null;
+				
 				Element currelem = tc.getMappedSpan(currpos);
 				if(currelem != null){ 
-					id = tc.getElementId(currelem);
+					
 					//Node selNode = tc.getXsltMapper().getDomById(id, true);
 					//tc.update(selNode);
 					tc.removeAllHighlights();

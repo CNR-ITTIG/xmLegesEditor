@@ -27,8 +27,7 @@ public class SpellCheckWordImpl implements SpellCheckWord {
 
 	private int startOffset, endOffset;
 
-	private String[] suggestions;
-
+	
 	public SpellCheckWordImpl(String word, int startOffset, int endOffset) {
 		this.word = word;
 		this.startOffset = startOffset;
