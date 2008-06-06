@@ -10,7 +10,6 @@ import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.FormVerifier;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
-import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 import it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita.CiclodiVitaEventoForm;
 import it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita.CiclodiVitaForm;
 
@@ -128,7 +127,7 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 
 	public void actionPerformed(ActionEvent e) {				
 		 if (e.getSource().equals(eventoButton)) { 			// EVENTI
-			formEventi.setRel_totali(getRelazioniUlteriori());
+			formEventi.setRel_totali(null/*getRelazioniUlteriori()*/);
 			formEventi.setEventi(eventi);
 			setEventi(eventi);
 			
@@ -167,52 +166,52 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 
 	
 
-	/**
-	 * Restituisce un ID univoco per una nuova relazione.
-	 */
-	private String calcolaIDRelazione(String nomeTag) {
-		
-		String prefix = "r";
-
-		if (nomeTag.equals("attiva")) {
-			prefix = "ra";
-		} else if (nomeTag.equals("passiva")) {
-			prefix = "rp";
-		} else if (nomeTag.equals("originale")) {
-			prefix = "ro";
-		} else if (nomeTag.equals("giurisprudenza")) {
-			prefix = "rg";
-		} else if (nomeTag.equals("haallegato")) {
-			prefix = "haa";
-		}else if (nomeTag.equals("allegatodi")) {
-			prefix = "all";
-		}
-
-		String uID = prefix;
-		int max = 0;
-
-		
-		// e poi nelle relazioni degli eventi
-		for (int i = 0; i < eventi.length; i++) {
-			if (eventi[i].getFonte() != null) {
-				
-				try {
-					String s = eventi[i].getFonte().getId().substring(0, prefix.length());
-					if (s.equals(prefix)) {
-						Integer idValue = Integer.decode(eventi[i].getFonte().getId().substring(prefix.length()));
-						if (idValue.intValue() > max) {
-							max = idValue.intValue();
-						}
-					}
-				} catch (IndexOutOfBoundsException exc) {
-				}
-			}
-		}
-
-		uID += (max + 1);
-		
-		return uID;
-	}
+//	/**
+//	 * Restituisce un ID univoco per una nuova relazione.
+//	 */
+//	private String calcolaIDRelazione(String nomeTag) {
+//		
+//		String prefix = "r";
+//
+//		if (nomeTag.equals("attiva")) {
+//			prefix = "ra";
+//		} else if (nomeTag.equals("passiva")) {
+//			prefix = "rp";
+//		} else if (nomeTag.equals("originale")) {
+//			prefix = "ro";
+//		} else if (nomeTag.equals("giurisprudenza")) {
+//			prefix = "rg";
+//		} else if (nomeTag.equals("haallegato")) {
+//			prefix = "haa";
+//		}else if (nomeTag.equals("allegatodi")) {
+//			prefix = "all";
+//		}
+//
+//		String uID = prefix;
+//		int max = 0;
+//
+//		
+//		// e poi nelle relazioni degli eventi
+//		for (int i = 0; i < eventi.length; i++) {
+//			if (eventi[i].getFonte() != null) {
+//				
+//				try {
+//					String s = eventi[i].getFonte().getId().substring(0, prefix.length());
+//					if (s.equals(prefix)) {
+//						Integer idValue = Integer.decode(eventi[i].getFonte().getId().substring(prefix.length()));
+//						if (idValue.intValue() > max) {
+//							max = idValue.intValue();
+//						}
+//					}
+//				} catch (IndexOutOfBoundsException exc) {
+//				}
+//			}
+//		}
+//
+//		uID += (max + 1);
+//		
+//		return uID;
+//	}
 
 	public Relazione[] getRelazioniTotalefromCdvf() {
 		
@@ -237,15 +236,6 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 		return newRelazioni;
 	}
 
-	public void setEventiOnVigenze(String[] eventiOnVigenze, VigenzaEntity[] vigenze) {
-		formEventi.setEventiOnVigenze(eventiOnVigenze, vigenze);
-	}
-
-	
-	
-//	public VigenzaEntity[] getVigToUpdate(){
-//		return formEventi.getVigToUpdate();
-//	}
 
 	public boolean verifyForm() {
 		return true;
@@ -255,20 +245,7 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 		return errorMessage;
 	}
 
-	public Relazione[] getRelazioniUlteriori() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	public void setRelazioniUlteriori(Relazione[] relazioniUlteriori) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public VigenzaEntity[] getVigToUpdate() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	
 }

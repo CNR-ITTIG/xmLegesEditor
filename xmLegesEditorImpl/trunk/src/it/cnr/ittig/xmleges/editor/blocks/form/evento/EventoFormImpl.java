@@ -154,14 +154,17 @@ public class EventoFormImpl implements EventoForm, Loggable, Serviceable, Initia
 			Evento[] eventiOnDom=metaciclodivita.getEventi();
 			Relazione[] relazioniOnDom = metaciclodivita.getRelazioni();
 			ciclodivitaeventoForm.setEventi(eventiOnDom);
-			Relazione[] relazioniUlteriori = metaciclodivita.getRelazioniUlteriori(eventiOnDom,relazioniOnDom);
-			ciclodivitaeventoForm.setRel_totali(metaciclodivita.mergeRelazioni(ciclodivitaeventoForm.getEventi(),relazioniUlteriori));
+			//Relazione[] relazioniUlteriori = metaciclodivita.getRelazioniUlteriori(eventiOnDom,relazioniOnDom);
+//			ciclodivitaeventoForm.setRel_totali(metaciclodivita.mergeRelazioni(ciclodivitaeventoForm.getEventi(),relazioniUlteriori));
+			ciclodivitaeventoForm.setRel_totali(relazioniOnDom);
+			
 			if(openForm()){
 				// 1 - risetta tutti i nodi evento anche se non ci sono state variazioni
 				if(isUpdatedEventi(metaciclodivita.getEventi(), ciclodivitaeventoForm.getEventi())){
 					
 					metaciclodivita.setEventi(ciclodivitaeventoForm.getEventi());
-					metaciclodivita.setRelazioni(metaciclodivita.mergeRelazioni(ciclodivitaeventoForm.getEventi(),relazioniUlteriori));
+//					metaciclodivita.setRelazioni(metaciclodivita.mergeRelazioni(ciclodivitaeventoForm.getEventi(),relazioniUlteriori));
+					metaciclodivita.setRelazioni(relazioniOnDom);
 					
 					
 				}
@@ -178,9 +181,7 @@ public class EventoFormImpl implements EventoForm, Loggable, Serviceable, Initia
 		}
 	}
 
-//	public Vector getRemovedEvents() {
-//		return ciclodivitaeventoForm.getLastRemovedEvents();
-//	}
+
 
 	public void setTextField(JTextField textField) {
 		this.textField = textField;

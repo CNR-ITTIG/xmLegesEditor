@@ -22,7 +22,6 @@ import java.util.Vector;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -120,59 +119,6 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 		return rel;
 	}
 	
-	public Relazione[] mergeRelazioni(Evento[] eventi, Relazione[] relazioniUlteriori){	
-		//		 Ricomponi le relazioni eliminando quelle duplicate (caso di +eventi linkati ad 1 relazione)
-		Vector relazioniVect = new Vector();
-		boolean duplicated;
-		
-		for (int i = 0; i < eventi.length; i++) {
-			duplicated = false;
-			
-			for(int j=0; j<relazioniVect.size();j++){
-		        if(((Relazione)relazioniVect.get(j)).getId().equalsIgnoreCase(eventi[i].getFonte().getId()))
-		        	duplicated = true;
-			}
-			if(!duplicated)
-				relazioniVect.add(eventi[i].getFonte());		
-		}
-		for (int i = 0; i < relazioniUlteriori.length; i++) {
-			relazioniVect.add(relazioniUlteriori[i]);
-		}
-
-		Relazione[] newRelazioni = new Relazione[relazioniVect.size()];
-		relazioniVect.copyInto(newRelazioni);
-		
-		return newRelazioni;
-	}
-	
-	public Relazione[] getRelazioniUlteriori(Evento[] eventi, Relazione[] relazioni){
-		
-		// Dividi le relazioni in relazioni legate agli eventi e relazioni
-		// ulteriori.
-		// Le relazioni legate agli eventi vengono passate all'interno degli eventi stessi,
-		// mentre le relazioni ulteriori con setRelazioni.
-
-		Vector relazioniUlterioriVect = new Vector();
-
-		for (int i = 0; i < relazioni.length; i++) {
-			boolean found = false;
-			for (int j = 0; j < eventi.length; j++) {
-				if (relazioni[i].getId().equals(eventi[j].getFonte().getId())) {
-					found = true;
-					break;
-				}
-			}
-			if (!found) {
-				relazioniUlterioriVect.add(relazioni[i]);
-			}
-		}
-
-		Relazione[] relazioniUlteriori = new Relazione[relazioniUlterioriVect.size()];
-		relazioniUlterioriVect.copyInto(relazioniUlteriori);
-		
-		return relazioniUlteriori;
-	}
-	
 
 	public void setCiclodiVita(Evento[] eventi, Relazione[] relazioni) {
 		try {
@@ -188,7 +134,7 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 	}
 
 	public void setRelazioni(Relazione[] relazioni) {
-		
+		System.out.println("1");
 		try {
 			EditTransaction tr = documentManager.beginEdit();
 			if (setDOMRelazioni(relazioni)) {
@@ -202,7 +148,7 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 	}
 	
 	private boolean setDOMRelazioni(Relazione[] relazioni) {
-
+		
 		Document doc = documentManager.getDocumentAsDom();
 		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
 		Node ciclodivitaNode = UtilDom.findRecursiveChild(activeMeta,"ciclodivita");
@@ -215,6 +161,7 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 		}
 		
 		Node relazioniNode = doc.createElement("relazioni");
+		//TODO: qui si potrebbe controllare quali relazioni c'erano prima e se quelle di ora sono di meno, avvertire della cancellazione della relazione dovuta alla soppressione dell'evento
 		for (int i = 0; i < relazioni.length; i++) {
 			if (relazioni[i].getId() != null && relazioni[i].getLink() != null && !(relazioni[i].getLink().trim().equals(""))) {
 				Element relazione = doc.createElement(relazioni[i].getTagTipoRelazione());
@@ -241,7 +188,14 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 			utilRulesManager.orderedInsertChild(ciclodivitaNode,relazioniNode);
 				
 		if(missingciclodivita && relazioni.length>0){
-			utilRulesManager.orderedInsertChild(activeMeta,ciclodivitaNode);
+			try {
+				utilRulesManager.orderedInsertChild(activeMeta,ciclodivitaNode);
+				
+			} catch (Exception e) {
+				System.out.println("eccezione in orderedInsertChild");
+				return false;
+			}
+			
 		}
 		
 		return true;
@@ -274,32 +228,7 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 		return eventi;
 	}
 
-	public String[] getEventiOnVigenza() {
-		Vector totali=new Vector();
-		Document doc = documentManager.getDocumentAsDom();
-		Node activeMeta = nirUtilDom.findActiveMeta(doc,node);
-		
-		Node[] lista = UtilDom.getElementsByTagName(doc,activeMeta,"*");
-		for(int i=0; i<lista.length;i++){
-			NamedNodeMap attributo=lista[i].getAttributes();
-			Node inizio=attributo.getNamedItem("iniziovigore");
-			Node fine=attributo.getNamedItem("finevigore");
-		
-			if(inizio!=null){
-				if(!totali.contains(inizio.getNodeValue()))							
-					totali.add(inizio.getNodeValue());
-			}
-			if(fine!=null)
-				if(!totali.contains(fine.getNodeValue()))
-					totali.add(fine.getNodeValue());		
-			
-		}
 	
-		String[] id_trovati=new String[totali.size()];
-		totali.copyInto(id_trovati);
-		return id_trovati;
-					
-	}
 	
 	
 	

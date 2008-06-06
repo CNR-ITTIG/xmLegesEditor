@@ -398,59 +398,7 @@ public VigenzaEntity getVigenza(Node node, int start, int end) {
 		}
 	}
 	
-	public void updateVigenzaOnDoc(VigenzaEntity vig){
-		
-		Node node=vig.getOnNode();
-		if(node==null)
-			return;
-			try{
-				NamedNodeMap nnm = node.getAttributes();
-				if(nnm!=null){
-					EditTransaction tr = documentManager.beginEdit();
-					
-					//se esisteva gi� l'evento inizio sul dom si aggiorna al nuovo o si elimina se il nuovo � null
-					if(nnm.getNamedItem("iniziovigore")!=null){
-						if(vig.getEInizioVigore()!=null){
-//							UtilDom.setAttributeValue(node, "iniziovigore", vig.getEInizioVigore().getId());
-						}
-
-						else
-							nnm.removeNamedItem("iniziovigore");	
-
-					}
-	//				se esisteva gi� l'evento fine sul dom si aggiorna al nuovo o si elimina se il nuovo � null	
-					if(nnm.getNamedItem("finevigore")!=null){
-						if(vig.getEFineVigore()!=null){
-//							UtilDom.setAttributeValue(node, "finevigore", vig.getEFineVigore().getId());
-						}
-
-						else
-							nnm.removeNamedItem("finevigore");
-
-					}
-					if(nnm.getNamedItem("iniziovigore")==null && nnm.getNamedItem("finevigore")==null){
-						if(nnm.getNamedItem("status")!=null)
-							nnm.removeNamedItem("status");
-						if(node.getNodeName().equals("h:span")){
-//							appiattisce lo span
-							Node padre=node.getParentNode();				
-							extractText.extractTextDOM(node.getFirstChild(),0,UtilDom.getText(node.getFirstChild()).length());
-							padre.removeChild(node);
-							UtilDom.mergeTextNodes(padre);
-						}
-				
-					}
-					documentManager.commitEdit(tr);	
-				}
-				
-			}catch (DocumentManagerException ex) {
-				logger.error(ex.getMessage(), ex);
-				return;
-			}
-
-		
-	}
-
+	
 	
 
 }
