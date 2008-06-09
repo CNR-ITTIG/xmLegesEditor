@@ -41,7 +41,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
        
        	<root>
 			<priority value ="error" /> 
-			<appender-ref ref="ConsoleAppender" />
+			<!--appender-ref ref="ConsoleAppender" /-->
  			<appender-ref ref="BugReportAppender" /> 
  			<!--appender-ref ref="FileAppender" /-->
 		</root>
@@ -172,10 +172,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  class="it.cnr.ittig.xmleges.core.blocks.i18n.I18nImpl">
         <configuration>
             <!--locale language="it" country="IT" variant="16" /-->
-			<locale language="en" country="EN" /> 
+			<!--locale language="en" country="EN" /--> 
 			
 			<!-- scommentare la riga sotto nella versione per creare l'installer -->
-            <!--locale language="$ISO3_LANG" country="$ISO3_LANG" variant="16" /-->               
+            <locale language="$ISO3_LANG" country="$ISO3_LANG" variant="16" />               
             
             <base>i18n/editor</base>
             <base>i18n/editor-dom</base>
