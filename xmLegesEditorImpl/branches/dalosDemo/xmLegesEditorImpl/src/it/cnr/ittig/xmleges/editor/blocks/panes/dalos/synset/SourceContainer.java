@@ -11,11 +11,7 @@ import it.cnr.ittig.xmleges.editor.services.dalos.util.UtilDalos;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
-import java.util.List;
 
 import javax.swing.JEditorPane;
 import javax.swing.event.HyperlinkEvent;
@@ -63,22 +59,53 @@ public class SourceContainer extends JEditorPane implements HyperlinkListener{
 		this.utilDalos = utilDalos;
 	}
 	
-	public void draw(Synset synset) {
+	
+	private boolean isDirective(String dcode){
+		return (dcode.indexOf("A")==-1 && dcode.indexOf("J")==-1);
+	}
+	
+		
+	
+	public void drawDirective(Synset synset) {
+	
+		String evenBgColor = "#FFF380";
+		String oddBgColor =  "#EDE275";
+			
+		draw(synset,evenBgColor,oddBgColor,true);
+		
+	}
+	
+	public void drawSentence(Synset synset) {
 
+		
+		String evenBgColor = "#E0FFFF";
+		String oddBgColor =  "#BDEDFF";
+
+		draw(synset,evenBgColor,oddBgColor,false);
+		
+	}
+	
+	
+	
+	private void draw(Synset synset, String evenBgColor, String oddBgColor, boolean isDirective){
+		
+		String bgColor = evenBgColor;
+		
+		String docType = "Sentences";
+		if(isDirective)
+			docType = "Directives";
+		
 		if(synset == null) {
 			setText("<html>No match!</html>");
 			return;
 		}
 		
-		String html = "<html><body bgcolor=\"#EDE275\">" +
-			//"<h2><i>Sources</i></h2><table>"; 
-			//"<h2>&nbsp;</h2>" +
-			"<table width=\"98%\"><tr><td>&nbsp;</td><td><h2><i>Source Text</i></h2></td>" +
-			"<td><h2><i>Links</i></h2></td></tr>";
 		
-		String evenBgColor = "#FFF380";
-		String oddBgColor =  "#EDE275";
-		String bgColor = evenBgColor;
+		String html = "<html><body bgcolor="+bgColor+">" +
+			"<table width=\"98%\"><tr><td>&nbsp;</td><td><h2><i>Text</i></h2></td>" +
+			"<td><h2><i>Links</i></h2></td></tr>";
+
+
 		int count = 0;
 
 		for(Iterator i = synset.getSources().iterator(); i.hasNext();) {
@@ -86,9 +113,8 @@ public class SourceContainer extends JEditorPane implements HyperlinkListener{
 			Source source = (Source) i.next();
 			String def = source.getContent();
 			
-			bgColor = count++ % 2==0?evenBgColor:oddBgColor;
 			
-	
+
 			if(def == null || def.trim().length() < 1) {
 				def = "Source text not available";
 			}else{
@@ -105,29 +131,38 @@ public class SourceContainer extends JEditorPane implements HyperlinkListener{
 			
 			//System.out.println("d:" + source.getDocumentId() + " p:" + source.getPartitionId() + " dcode:" + dcode + " pcode:" + pcode);
 
-			String linkBase = "http://turing.ittig.cnr.it/jwn/corpus/";
-
-			html += "<tr bgcolor="+bgColor+"><td><img src=\"./signature.png\"></td><td><font face=\"Arial\">" + 
-						def + "</font></td><td align=\"center\">";
-						
-			String languages[] = {"EN", "ES", "IT", "NL" };			
-			for(int k = 0; k < languages.length; k++) {
-				String lang = languages[k];
-				if(k != 0) {
-					html += "<br>";
-				}
-				String langdcode = dcode + "-" + lang.toLowerCase();
-				String langpcode = langdcode + pcode;
-				html += "<a href=\"" + linkBase + lang + "/" + langdcode + "/" + langpcode + ".html" + "\">" + lang + "</a>";							
-			}												
-			html += "</td></tr>";
+			if((isDirective && isDirective(dcode)) || (!isDirective && !isDirective(dcode) )){
+				
+					bgColor = count++ % 2==0?evenBgColor:oddBgColor;
+					
+					String linkBase = "http://turing.ittig.cnr.it/jwn/corpus/";
+					
+					html += "<tr bgcolor="+bgColor+"\"><td><img src=\"./signature.png\"></td><td>"+"<b>"+dcode+":</b>"+"&nbsp;"+"<font face=\"Arial\">" + 
+								def + "</font></td><td align=\"center\">";
+								
+					String languages[] = utilDalos.getDalosLang(); //{"EN", "ES", "IT", "NL" };			
+					for(int k = 0; k < languages.length; k++) {
+						String lang = languages[k];
+						if(k != 0) {
+							html += "<br>";
+						}
+						String langdcode = dcode + "-" + lang.toLowerCase();
+						String langpcode = langdcode + pcode;
+						html += "<a href=\"" + linkBase + lang + "/" + langdcode + "/" + langpcode + ".html" + "\">" + lang + "</a>";							
+					}												
+					html += "</td></tr>";
+			}
 		}
 		
 		html += "</table></body></html>";
 
+		if(count == 0)
+			html="<html>No "+docType+"</html>";
+		
 		setText(html);
 		getCaret().setDot(0);
 
+		
 	}
 	
 	

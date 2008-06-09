@@ -50,9 +50,9 @@ implements EventManagerListener, Loggable, Serviceable,
 		setInferred = new JCheckBox(i18n.getTextFor("editor.panes.dalos.synsettree.check.setinferred"));
 		setInferred.addActionListener(this);
 		
-		// TODO default TRUE; piazzarlo nelle preference;
-		setInferred.setSelected(true);
-		utilDalos.setIsInferred(true);
+		// TODO default FALSE; piazzarlo nelle preference;
+		setInferred.setSelected(false);
+		utilDalos.setIsInferred(false);
 		
 		
 		JToolBar bar = new JToolBar();

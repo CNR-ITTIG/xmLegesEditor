@@ -21,6 +21,6 @@ import it.cnr.ittig.xmleges.core.services.frame.Pane;
  * @author <a href="agnoloni@ittig.cnr.it">Tommaso Agnoloni</a>
  */
 
-public interface SynsetSourcePane extends Service, Pane {
+public interface SynsetSourceDirectivesPane extends Service, Pane {
 
 }

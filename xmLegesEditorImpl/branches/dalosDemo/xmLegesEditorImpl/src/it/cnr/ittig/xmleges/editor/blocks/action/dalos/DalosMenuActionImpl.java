@@ -198,7 +198,8 @@ public class DalosMenuActionImpl implements DalosMenuAction, Loggable, Serviceab
 				panelsProps.setProperty("show.editor.panes.dalos.interlingualrelation", "true");
 				panelsProps.setProperty("show.editor.panes.dalos.linguisticrelation", "true");
 				panelsProps.setProperty("show.editor.panes.dalos.semanticrelation", "true");
-				panelsProps.setProperty("show.editor.panes.dalos.source", "true");
+				panelsProps.setProperty("show.editor.panes.dalos.directives.source", "true");
+				panelsProps.setProperty("show.editor.panes.dalos.sentences.source", "true");
 			}
 			//////////////////////////////////////
 			//
@@ -231,7 +232,8 @@ public class DalosMenuActionImpl implements DalosMenuAction, Loggable, Serviceab
 				barsProps.setProperty("check.view.pane.editor.panes.dalos.interlingualrelation", "true");
 				barsProps.setProperty("check.view.pane.editor.panes.dalos.linguisticrelation", "true");
 				barsProps.setProperty("check.view.pane.editor.panes.dalos.semanticrelation", "true");
-				barsProps.setProperty("check.view.pane.editor.panes.panes.dalos.source", "true");
+				barsProps.setProperty("check.view.pane.editor.panes.panes.dalos.directives.source", "true");
+				barsProps.setProperty("check.view.pane.editor.panes.panes.dalos.sentences.source", "true");
 			}
 			//
 			//
