@@ -386,7 +386,15 @@ public class KbContainer {
 
 		for(Iterator i = avSynClass.listInstances(false); i.hasNext();) {
 			analyzeSynsetResource((OntResource) i.next());
-		}		
+		}
+		
+		//read sources properties
+		//TODO
+//		OntProperty sourceProp = ind_m.getOntProperty(KbConf.METALEVEL_ONTO_NS + "sources");
+//		for(StmtIterator i = ind_m.listStatements(null, sourceProp, (RDFNode) null); i.hasNext();) {
+//			Statement stm = i.nextStatement();
+//			XXXX
+//		}
 	}
 	
 	/**
@@ -725,41 +733,6 @@ public class KbContainer {
 		
 		syn.setLexicalPropCached(true);
 	}
-	
-	//TODO
-	//MODIFICARE !!!!	
-//	void addSemanticProperties(Synset syn) {
-//		//Aggiunge le propriet� semantiche
-//		
-////		System.out.println("Adding semantic properties to " 
-////		+ syn.getLexicalForm() + "...");
-//		if(syn.isSemanticPropCached()) {
-////			System.out.println("..already cached!");
-//			return;
-//		}
-//		
-//		OntModel om = KbModelFactory.getModel("dpinf");
-//		
-//		Individual ind = om.getIndividual(syn.getURI());
-//		
-//		//Questo funziona per le declared properties:
-//		for(StmtIterator si = om.listStatements(
-//				ind, (Property) null, (RDFNode) null); 
-//				si.hasNext();) {
-//			Statement stm = si.nextStatement();
-//			Property op = stm.getPredicate();
-//			RDFNode obj = stm.getObject();
-//			addSemanticProperty(syn, op, obj);
-//		}
-//		
-//		/*
-//		 * Occorre una schema ontologico per le semantic property,
-//		 * che deve essere caricato, dal quale prendere i link
-//		 * semantici verso gli altri synset e i nomi dei link.
-//		 */		
-//
-//		syn.setSemanticPropCached(true);
-//	}	
 	
 	private void addLinguisticProperty(Synset syn, Property prop, RDFNode obj) {
 		

@@ -482,6 +482,19 @@ implements KbManager, Loggable, Serviceable, Initializable {
 				String ouri = objRes.getNameSpace() + objRes.getLocalName();
 				PivotOntoClass opoc = (PivotOntoClass) uriToPivotClass.get(ouri);
 				spoc.addEqsynConcept(opoc);
+				
+				//XXX Fix temporaneo - aggiustare i dati
+				//AGGIUNGI CLASSIFICAZIONE PER L'EQUIV-SYN
+				for(Iterator z = spoc.getLinks().iterator(); z.hasNext(); ) {
+					TreeOntoClass toc = (TreeOntoClass) z.next();
+					opoc.addLink(toc);
+					toc.addConcept(opoc);
+				}
+				for(Iterator z = opoc.getLinks().iterator(); z.hasNext(); ) {
+					TreeOntoClass toc = (TreeOntoClass) z.next();
+					spoc.addLink(toc);
+					toc.addConcept(spoc);
+				}
 			}
 			//fuzzy
 			for(Iterator k = subjRes.listPropertyValues(fuzzyProp); k.hasNext(); ) {
