@@ -1,14 +1,23 @@
 package it.cnr.ittig.xmleges.editor.services.dalos.objects;
 
+import java.util.Collection;
+import java.util.HashSet;
+
 public class Source implements Comparable {
 	
-	String content;
+	private String content;
 	
-	String link;
+	private String link;
 	
-	String partitionId;
-	String documentId;
+	private String partitionId;
+	private String documentId;
 	
+	private Collection linkedSynsets;
+	
+	public Collection getLinkedSynsets() {
+		return linkedSynsets;
+	}
+
 	public String getDocumentId() {
 		return documentId;
 	}
@@ -22,6 +31,7 @@ public class Source implements Comparable {
 		content = "";
 		link = null;
 		partitionId = null;
+		linkedSynsets = new HashSet();
 	}		
 	
 	public String getContent() {
