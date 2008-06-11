@@ -131,6 +131,12 @@ public class PartizioniImpl implements Partizioni, Loggable, Serviceable, Initia
 		// TODO Auto-generated method stub
 	}
 
+	
+	public Node getPartizioneTemplate(String elemName){
+		return(nodeInserter.getNodeTemplate(elemName, documentManager.getDocumentAsDom(), rulesManager));
+	}
+	
+	
 	protected Logger getLogger() {
 		return this.logger;
 	}
@@ -142,9 +148,9 @@ public class PartizioniImpl implements Partizioni, Loggable, Serviceable, Initia
 	protected UtilRulesManager getUtilRulesManager() {
 		return this.utilRulesManager;
 	}
-
-	public Node getPartizioneTemplate(String elemName) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	protected DocumentManager getDocumentManager() {
+		return this.documentManager;
 	}
+
 }
