@@ -226,16 +226,16 @@ public class RevisioniActionImpl implements RevisioniAction, Loggable, EventMana
 		Node oldArticolato = oldDoc.getElementsByTagName("articolato").item(0);
 		Node finalArticolato = revisioni.getFinalVersion(oldArticolato.cloneNode(true));
 
-		String dtdName = documentManager.getDtdName();
+		String grammarName = documentManager.getGrammarName();
 		int reply = 0;
 
 		if (!documentManager.isEmpty() && documentManager.isChanged() && (reply = utilMsg.msgYesNoCancel("action.file.open.save")) == 1) {
 			fileSaveAction.doSaveAs();
 			// documentManager.close();
 		}
-		if (reply != 2) { // non ? stato premuto cancel;
+		if (reply != 2) { // non e' stato premuto cancel;
 			File templatefile;
-			fileNewForm.openForm(dtdName);
+			fileNewForm.openForm(grammarName);
 			if (fileNewForm.isOKClicked()) {
 				try {
 					Properties p = fileNewForm.getSelectedDTD();
@@ -298,7 +298,7 @@ public class RevisioniActionImpl implements RevisioniAction, Loggable, EventMana
 
 		
 		Properties prop = new Properties();
-		prop.put("DOCTYPE", "<!DOCTYPE NIR SYSTEM \"" + documentManager.getDtdName() + "\">");
+		prop.put("DOCTYPE", "<!DOCTYPE NIR SYSTEM \"" + documentManager.getGrammarName()+ "\">");
 		prop.put("ENCODING","<?xml version=\"1.0\" encoding=\""+documentManager.getEncoding()+"\"?>");
 
 		int reply = 0;
