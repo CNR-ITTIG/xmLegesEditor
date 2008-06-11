@@ -230,9 +230,9 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 	public boolean doExportPDF() {
 
 		String XSL_FO_GU; 
-		String dtdName = documentManager.getDtdName();
+		String grammarName = documentManager.getGrammarName();
 		
-		if (dtdName.startsWith("nir") && !nirUtilDom.isDocCNR(null))    // documenti NIR
+		if (grammarName.startsWith("nir") && !nirUtilDom.isDocCNR(null))    // documenti NIR
 			XSL_FO_GU = xslts.getXslt("pdf-gazzettaufficiale").getAbsolutePath();
 		else 
 			XSL_FO_GU = xslts.getXslt("pdf-cnr").getAbsolutePath();
@@ -315,9 +315,9 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 	public boolean doExportRTF() {
 		
 		String XSL_FO_GU; 
-		String dtdName = documentManager.getDtdName();
+		String grammarName = documentManager.getGrammarName();
 		
-		if (dtdName.startsWith("nir") && !nirUtilDom.isDocCNR(null))    // documenti NIR
+		if (grammarName.startsWith("nir") && !nirUtilDom.isDocCNR(null))    // documenti NIR
 			XSL_FO_GU = xslts.getXslt("pdf-gazzettaufficiale").getAbsolutePath();
 		else 
 			XSL_FO_GU = xslts.getXslt("pdf-cnr").getAbsolutePath();
@@ -371,9 +371,9 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 	// ///////////////////// salva come HTML
 	public boolean doExportHTML() {
 		File xsl = null;
-		String dtdName = documentManager.getDtdName();
+		String grammarName = documentManager.getGrammarName();
 		
-		if (dtdName.startsWith("nir") && !nirUtilDom.isDocCNR(null)){    // documenti NIR
+		if (grammarName.startsWith("nir") && !nirUtilDom.isDocCNR(null)){    // documenti NIR
 			xsl = new File(xslts.getXslt("xsl-nir-nocss").getAbsolutePath());
 			
 			// per documenti NIR multivigenti; apre la form di setting dataVigenza 
@@ -417,8 +417,8 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 	public boolean doExportBrowser() {
 		
 		File xsl = null;
-		String dtdName = documentManager.getDtdName();
-		if (dtdName.startsWith("nir") && !nirUtilDom.isDocCNR(null)){  // documenti NIR
+		String grammarName = documentManager.getGrammarName();
+		if (grammarName.startsWith("nir") && !nirUtilDom.isDocCNR(null)){  // documenti NIR
 			xsl = new File(xslts.getXslt("xsl-nir").getAbsolutePath());
 			
 			// per documenti NIR multivigenti; apre la form di setting dataVigenza 
