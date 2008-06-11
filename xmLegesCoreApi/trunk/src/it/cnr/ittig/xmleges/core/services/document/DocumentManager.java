@@ -138,6 +138,16 @@ public interface DocumentManager extends Service {
 	 * @return nome del DTD o XSD
 	 */
 	public String getGrammarName();
+	
+	
+	/**
+	 * Restituisce il nome del DTD o XSD definito in <code>doc</code> Il nome
+	 * restituito non comprende nessun percorso.
+	 * 
+	 * @param doc
+	 * @return
+	 */
+	public String getGrammarName(Document doc);
 
 	/**
 	 * Restituisce l'intero documento come nodo DOM.
