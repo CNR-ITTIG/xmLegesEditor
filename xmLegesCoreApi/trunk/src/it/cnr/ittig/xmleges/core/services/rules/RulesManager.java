@@ -83,7 +83,13 @@ public interface RulesManager extends Service {
 	 */
 	public String getDefaultContent(String elem_name, String alternative) throws RulesManagerException;
 	
-	
+	/**
+	 * 
+	 * @param elem_name
+	 * @param nodes
+	 * @return
+	 * @throws RulesManagerException
+	 */
 	public String getDefaultContent(String elem_name, Vector nodes) throws RulesManagerException;
 
 	/**
