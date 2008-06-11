@@ -199,7 +199,7 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		
 		Node node = selectionManager.getActiveNode();
 		Document doc = documentManager.getDocumentAsDom();
-		descrittoriForm.setTipoDTD(documentManager.getDtdName());
+		descrittoriForm.setTipoDTD(documentManager.getGrammarName());
 		descrittoriForm.setAlias(descrittori.getAlias(node));
 		descrittoriForm.setPubblicazione(descrittori.getPubblicazione(node));
 		descrittoriForm.setRedazioni(descrittori.getRedazioni(node));
@@ -230,7 +230,7 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		inquadramentoForm.setInfomancanti(inquadramento.getInfomancanti());
 		inquadramentoForm.setOggetto(inquadramento.getOggetto());
 		inquadramentoForm.setProponenti(inquadramento.getProponenti());
-		inquadramentoForm.setTipoDTD(documentManager.getDtdName());
+		inquadramentoForm.setTipoDTD(documentManager.getGrammarName());
 		
 		if (inquadramentoForm.openForm()) {
 			try {
