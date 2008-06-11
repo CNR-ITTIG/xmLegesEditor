@@ -216,6 +216,7 @@ public class KbModelFactory {
 	private static void readSchema(OntModel om, String url, boolean useRemote) {
 		
 		if(useRemote) {
+			System.out.println("--> readSchema() REMOTE ON - url: " + url);
 			URL u = null;
 			try {
 				u = new URL(url);			
@@ -230,8 +231,9 @@ public class KbModelFactory {
 				om.read(localFile);
 			}
 		} else {
+			System.out.println("--> readSchema() REMOTE OFF - url: " + url);
 			String localFile = odm.doAltURLMapping(url);
-			//System.out.println("localFile: " + localFile);
+			System.out.println("localFile: " + localFile);
 			om.read(localFile);
 		}
 	}

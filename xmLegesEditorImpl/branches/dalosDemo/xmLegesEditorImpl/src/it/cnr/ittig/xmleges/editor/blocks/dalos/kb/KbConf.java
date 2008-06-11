@@ -49,6 +49,7 @@ public class KbConf {
 	public static String LOCAL_METALEVEL_ONTO = "owns.owl";
 	public static String LOCAL_METALEVEL_PROP = "owns-full.owl";
 	public static String LOCAL_SOURCE_SCHEMA = "metasources.owl";
+	public static String LOCAL_CONCEPT_SCHEMA = "metaconcepts.owl";
 	public static String LOCAL_METALEVEL_FULL = "language-properties-full.owl";
 	
 	public static String DALOS_NS = "http://localhost/dalos/";

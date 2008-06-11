@@ -126,6 +126,9 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_SOURCE_SCHEMA);
 		odm.addAltEntry(KbConf.SOURCE_SCHEMA, fileStr + file.getAbsolutePath());
 		System.out.println("ALTERNATIVE ENTRY: " + KbConf.SOURCE_SCHEMA + " --> file://" + file.getAbsolutePath());
+		file = UtilFile.getFileFromTemp(KbConf.dalosRepository + KbConf.LOCAL_CONCEPT_SCHEMA);
+		odm.addAltEntry(KbConf.CONCEPT_SCHEMA, fileStr + file.getAbsolutePath());
+		System.out.println("ALTERNATIVE ENTRY: " + KbConf.CONCEPT_SCHEMA + " --> file://" + file.getAbsolutePath());
 		
 		//Concepts Model
 		String conceptsFile = KbConf.dalosRepository + KbConf.LINKS;		
@@ -592,7 +595,8 @@ implements KbManager, Loggable, Serviceable, Initializable {
 				KbConf.LOCAL_METALEVEL_FULL,
 				KbConf.LOCAL_SOURCE_SCHEMA, 
 				KbConf.LOCAL_METALEVEL_ONTO, 
-				KbConf.LOCAL_METALEVEL_PROP
+				KbConf.LOCAL_METALEVEL_PROP,
+				KbConf.LOCAL_CONCEPT_SCHEMA
 	    };
 		
 		for (int i = 0; i < commonFiles.length; i++) {
