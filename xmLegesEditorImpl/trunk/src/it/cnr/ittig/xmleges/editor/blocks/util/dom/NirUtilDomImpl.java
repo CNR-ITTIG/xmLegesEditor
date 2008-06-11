@@ -53,13 +53,13 @@ public class NirUtilDomImpl implements NirUtilDom, Loggable, Serviceable{
 
 	
 	public boolean isDtdBase() {
-		if (documentManager.getDtdName().toLowerCase().indexOf("base") != -1 || documentManager.getDtdName().toLowerCase().indexOf("light") != -1)
+		if (documentManager.getGrammarName().toLowerCase().indexOf("base") != -1 || documentManager.getGrammarName().toLowerCase().indexOf("light") != -1)
 			return true;
 		return false;
 	}
 
 	public boolean isDtdDL() {
-		if (documentManager.getDtdName().toLowerCase().indexOf("dl") != -1)
+		if (documentManager.getGrammarName().toLowerCase().indexOf("dl") != -1)
 			return true;
 		return false;
 	}
