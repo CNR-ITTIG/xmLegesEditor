@@ -398,7 +398,7 @@ public class SchemaRulesManagerImpl implements RulesManager {
 	 *         di nodi che allinea con l'automa
 	 * @throws RulesManagerException
 	 */
-	public Vector getGappedAlignment(String elem_name, Collection elem_children) throws RulesManagerException {
+	private Vector getGappedAlignment(String elem_name, Collection elem_children) throws RulesManagerException {
 		// text elements must have no children
 		if (elem_name.startsWith("#"/*queryTextContent(elem_name)*/))
 			return new Vector();
@@ -409,12 +409,13 @@ public class SchemaRulesManagerImpl implements RulesManager {
 			throw new RulesManagerException("No rule for element <" + elem_name + ">");
 
 		// return the alignment
-		return getGappedAlignment(getContentGraph(elem_name), elem_children);
+		return getGappedAlignment(utilXsd.createContentGraph(elem_name), elem_children);
+		//return getGappedAlignment(getContentGraph(elem_name), elem_children);
 	}
 	
 	
 	
-	public Vector getGappedAlignment(ContentGraph graph, Collection sequence) {
+	private Vector getGappedAlignment(ContentGraph graph, Collection sequence) {
 		if (graph.getNodes_table().size() == 0)
 			try {
 				throw new RulesManagerException("Empty automata");
