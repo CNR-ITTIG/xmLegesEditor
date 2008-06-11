@@ -8,6 +8,7 @@ package it.cnr.ittig.xmleges.editor.blocks.dom.partizioni;
  */
 
 import it.cnr.ittig.services.manager.Logger;
+import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
 import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
@@ -30,6 +31,8 @@ public class NodeInserter {
 	NirUtilDom nirUtilDom;
 
 	UtilRulesManager utilRulesManager;
+	
+	DocumentManager documentManager;
 
 	Node modificato = null;
 
@@ -38,7 +41,9 @@ public class NodeInserter {
 		this.logger = partizioniImpl.getLogger();
 		this.nirUtilDom = partizioniImpl.getNirUtilDom();
 		this.utilRulesManager = partizioniImpl.getUtilRulesManager();
+		this.documentManager = partizioniImpl.getDocumentManager();
 	}
+	
 
 	public int canInsertNewNode(Node template, Document doc, Node activeNode, RulesManager rulesManager) {
 		logger.debug("ask for canInsertNewNode: " + template.getNodeName());
@@ -328,7 +333,7 @@ public class NodeInserter {
 		try {
 			do {
 				if (rulesManager.getAlternativeContents(parentContainer.getNodeName()).contains(template.getNodeName())
-						|| rulesManager.getAlternativeContents(parentContainer.getNodeName()).contains("num," + template.getNodeName()))
+					|| rulesManager.getAlternativeContents(parentContainer.getNodeName()).contains("num," + template.getNodeName()))
 					return parentContainer;
 
 				prevParentContainer = parentContainer;
@@ -419,23 +424,27 @@ public class NodeInserter {
 				
 				
 				//TODO migliorare gestione dtdFlessibile
-				if (doc.getDoctype().getSystemId().equals("nirflessibile.dtd"))
+				if(documentManager.getGrammarName().indexOf("flessibile")!=-1 || documentManager.getGrammarName().indexOf("light")!=-1)
 					return true;
 				
+				// GESTIONE ALTERNATIVA PER XSD :  da provare
+				
+				//Vector alternatives = new Vector();
+				//alternatives.add(template);
+				//System.err.println(rulesManager.getDefaultContent(activeNodeContainer.getNodeName(),alternatives));   
+				// questo modo funziona su dtd ma non su schema; verificare getGappedAlignment e contentModel/automa di comma
+				
+				
 				contents = rulesManager.getAlternativeContents(activeNodeContainer.getNodeName());
+				
+				//TODO non funziona con lo Schema perche' non e' ancora implementato getAlternativeContents()
 				for (int j = 0; j < contents.size(); j++)
-				if (((String) contents.get(j)).indexOf(template.getNodeName()) != -1) // il
-																						// template
-																						// e'
-																						// ammesso
-																						// come
-																						// contenuto
-																						// dell'active
-																						// node
+				if (((String) contents.get(j)).indexOf(template.getNodeName()) != -1) // il template e' ammesso come contenuto dell'active node
 					return true;				
 			}
 			return false;
 		} catch (RulesManagerException e) {
+			//e.printStackTrace();
 			return false;
 		}
 	}
@@ -490,11 +499,11 @@ public class NodeInserter {
 	// possibile, per necessita' di visualizzazione
 	// di un numero e di una rubrica
 	//TODO: migliorare gestione dtdFlessibile
-	private Node getNodeTemplate(String elem_name, Document doc, RulesManager rulesManager) {
+	public Node getNodeTemplate(String elem_name, Document doc, RulesManager rulesManager) {
 		
 		Node newNode = utilRulesManager.getNodeTemplate(doc, elem_name);
-		//TODO usare funzionalit� del RulesManager
-		if (doc.getDoctype().getSystemId().equals("nirflessibile.dtd")) {
+		//TODO usare funzionalita' del RulesManager
+		if(documentManager.getGrammarName().indexOf("flessibile")!=-1 || documentManager.getGrammarName().indexOf("light")!=-1){
 			addElement("num", doc, newNode, rulesManager);
 			addElement("rubrica", doc, newNode, rulesManager);
 			if (elem_name.equals("articolo")) {				
@@ -505,11 +514,7 @@ public class NodeInserter {
 			addElement("corpo", doc, newNode, rulesManager);	
 		}	
 		else {
-			//inserisci ovunque possibile il num
-			//FIXME attendere risposta dtd2.1
 			addElement("num", doc, newNode, rulesManager);
-			// inserisci ovunque possibile la rubrica
-			// FIXME attendere risposta dtd2.1
 			addElement("rubrica", doc, newNode, rulesManager);
 		}
 		return newNode;
