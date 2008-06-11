@@ -311,127 +311,12 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 	
 	
 	public boolean doExportPDF() {
-
-//		String XSL_FO_GU; 
-//		String dtdName = documentManager.getDtdName();
 		
-//		if (dtdName.startsWith("nir") && !nirUtilDom.isDocCNR(null))    // documenti NIR
-//			XSL_FO_GU = xslts.getXslt("pdf-gazzettaufficiale").getAbsolutePath();
-//		else 
-//			XSL_FO_GU = xslts.getXslt("pdf-cnr").getAbsolutePath();
-//	
-//		String osName = System.getProperty("os.name");
-//
-//		try {
-//			JFileChooser fileChooser = new JFileChooser();
-//			fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-//			String filterDesc = "Portable Document Format (*.pdf)";
-//			String[] masks = new String[1];
-//			masks[0] = ".*\\.[pP][dD][fF]$";
-//			fileChooser.setFileFilter(new RegexpFileFilter(filterDesc, masks));
-//			fileChooser.setCurrentDirectory(getLastExportAsFile() != null ? getLastExportAsFile().getParentFile() : null);
-//
-//			if (fileChooser.showSaveDialog(null) == JFileChooser.CANCEL_OPTION)
-//				return false;
-//			else {
-//				File file = fileChooser.getSelectedFile();
-//				if (!file.getAbsolutePath().matches("^.*\\.[pP][dD][fF]$"))
-//					file = new File(file.getAbsolutePath() + ".pdf");
-//
-//				// Controlla l'esistenza del file
-//				if (file.exists()) {
-//					if (!utilMsg.msgYesNo("action.file.save.replace")) {
-//						return false;
-//					}
-//				}
-//
-//				utilPdf.convertXML2PDF(documentManager.getDocumentAsDom(), XSL_FO_GU, file.getAbsolutePath());
-//				lastExport = file.getAbsolutePath();
-//
-//				if (osName.toLowerCase().matches("windows.*")) {
-//					String nomeFile = cmdWin(file.getAbsolutePath());
-//					for (int i = 0; i < readerPdf.length; i++)
-//						try {
-//							String cmd = readerPdf[i] + " " + nomeFile;
-//							Runtime.getRuntime().exec(cmd);
-//							break;
-//						} catch (Exception ex) {
-//						}
-//				}
-//				else {
-//					String nomeFile = file.getAbsolutePath();
-//					for (int i = 0; i < readerPdf.length; i++)
-//						try {
-//							String temp[] = new String[2];
-//							temp[0] = readerPdf[i];
-//							temp[1] = nomeFile;
-//							Runtime.getRuntime().exec(temp);	
-//							break;
-//						} catch (Exception ex) {
-//						}
-//				}
-//				return true;
-//			}
-//		} catch (Exception e) {
-//			logger.error(e.getMessage(), e);
-//			return false;
-//		}
 		return false;
 	}
     
     
 	public boolean doExportRTF() {
-		
-//		String XSL_FO_GU; 
-//		String dtdName = documentManager.getDtdName();
-//		
-//		if (dtdName.startsWith("nir") && !nirUtilDom.isDocCNR(null))    // documenti NIR
-//			XSL_FO_GU = xslts.getXslt("pdf-gazzettaufficiale").getAbsolutePath();
-//		else 
-//			XSL_FO_GU = xslts.getXslt("pdf-cnr").getAbsolutePath();
-//	
-//		String osName = System.getProperty("os.name");
-//
-//		try {
-//			JFileChooser fileChooser = new JFileChooser();
-//			fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-//			String filterDesc = "Rich Text Format (*.rtf)";
-//			String[] masks = new String[1];
-//			masks[0] = ".*\\.[rR][tT][fF]$";
-//			fileChooser.setFileFilter(new RegexpFileFilter(filterDesc, masks));
-//			fileChooser.setCurrentDirectory(getLastExportAsFile() != null ? getLastExportAsFile().getParentFile() : null);
-//
-//			if (fileChooser.showSaveDialog(null) == JFileChooser.CANCEL_OPTION)
-//				return false;
-//			else {
-//				File file = fileChooser.getSelectedFile();
-//				if (!file.getAbsolutePath().matches("^.*\\.[rR][tT][fF]$"))
-//					file = new File(file.getAbsolutePath() + ".rtf");
-//
-//				// Controlla l'esistenza del file
-//				if (file.exists()) {
-//					if (!utilMsg.msgYesNo("action.file.save.replace")) {
-//						return false;
-//					}
-//				}
-//
-//				utilRtf.convertXML2RTF(documentManager.getDocumentAsDom(), XSL_FO_GU, file.getAbsolutePath());
-//				lastExport = file.getAbsolutePath();
-//
-//				// FIXME prendere il path di OPENOFFICE/WORD dalle preference
-//				if (osName.equalsIgnoreCase("linux")) {
-//					if (Runtime.getRuntime().exec("oowrite2 " + file.getAbsolutePath()) == null)
-//						Runtime.getRuntime().exec("oowriter2 " + file.getAbsolutePath());
-//				} else if (osName.toLowerCase().matches("windows.*")) {
-//					 String nomeFile = cmdWin(file.getAbsolutePath());
-//					 Runtime.getRuntime().exec("cmd /C start " + nomeFile);					 
-//				}
-//				return true;
-//			}
-//		} catch (Exception e) {
-//			logger.error(e.getMessage(), e);
-//			return false;
-//		}
 		
 		return false;
 		
