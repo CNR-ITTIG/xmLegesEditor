@@ -249,7 +249,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 	public Node makePartition(Node container, boolean prima, VigenzaEntity vigenza) {
 		Node n;		
 		if (nirUtilDom.isContainer(container))
-			n =partizioni.nuovaPartizione(container, container.getNodeName());
+			n =partizioni.getPartizioneTemplate(container.getNodeName());//.nuovaPartizione(container, container.getNodeName());
 		else
 			n= utilRulesManager.getNodeTemplate(container.getNodeName());	
 		try {
