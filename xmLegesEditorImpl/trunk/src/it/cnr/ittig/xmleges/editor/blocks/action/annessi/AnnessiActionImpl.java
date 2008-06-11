@@ -134,7 +134,7 @@ public class AnnessiActionImpl implements AnnessiAction, EventManagerListener, L
 		File annessoTemplate = null;
 
 		Properties p = new Properties();
-		p.put("DOCTYPE", "<!DOCTYPE NIR SYSTEM \"" + documentManager.getDtdName().trim() + "\">");
+		p.put("DOCTYPE", "<!DOCTYPE NIR SYSTEM \"" + documentManager.getGrammarName().trim() + "\">");
 		try {
 			annessoTemplate = template.getNirTemplate(templateName, p);
 			logger.info("UtilityFile.copyTemplate");
