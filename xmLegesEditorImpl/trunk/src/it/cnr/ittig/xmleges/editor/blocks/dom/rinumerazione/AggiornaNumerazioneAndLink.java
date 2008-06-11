@@ -32,6 +32,8 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 	NirUtilDom nirUtilDom;
 
 	RulesManager rulesManager;
+	
+	
 
 
 	public AggiornaNumerazioneAndLink(RinumerazioneImpl rinumerazioneImpl) {
@@ -47,12 +49,15 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 	public void aggiornaNum(Node nodo) {
 		
 		modIDs=new HashMap();
+		
 		doc = nodo.getOwnerDocument();
 		NodeList nir = doc.getElementsByTagName("NIR");
 		
 		System.err.println("CALLED AggiornaNum");
-
 		
+		Vector removed = getRemovedIDs();
+
+		getAndKillReferringAttributes(nir.item(0), removed);
 		// aggiornamento relativo alle note:
 		// le note vengono ordinate in base a come compaiono nel testo prima di risettargli gli id
 		Vector ndrId = getNdrIdFromDoc();
@@ -82,6 +87,9 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 	}
 	
 	
+	
+
+
 	protected void getAndUpdateReferringAttributes(Node node) {
 		
 		if (node == null || modIDs.size()==0)
@@ -94,12 +102,12 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 				if(!UtilDom.isIdAttribute(attributo) && attributo.getValue()!=null && !((String)(attributo.getValue())).equals("")){
 					if (modIDs.keySet().contains(attributo.getValue())) {
 						
-						System.out.println("FOUND REFERRING ATTRIBUTE: nodo "+node.getNodeName()+" cambia attributo "+attributo.getName() + " da "+attributo.getValue()+" a "+(String) modIDs.get(attributo.getValue()));
+						
 						attributo.setValue((String) modIDs.get(attributo.getValue()));
 					}
 					if(((String)attributo.getValue()).startsWith("#") && modIDs.keySet().contains( ((String)attributo.getValue()).substring(1) ) ){
 						
-						System.out.println("FOUND REFERRING ATTRIBUTE with #: nodo "+node.getNodeName()+" cambia attributo da "+((String)attributo.getValue())+" a "+"#"+(String) modIDs.get(((String)attributo.getValue()).substring(1)));
+						
 						String newId = (String) modIDs.get(((String)attributo.getValue()).substring(1));
 						attributo.setValue("#"+newId);
 						
@@ -182,10 +190,10 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 				if (!UtilDom.hasIdAttribute(nodo) || !IDValue.equals(OldID)) {   // se non ce l'aveva o e' cambiato
 					
 					if(!IDValue.equals(OldID)){
-						System.err.println("NUM: idChanged: new  " + IDValue + " old " + OldID);
+//						System.err.println("NUM: idChanged: new  " + IDValue + " old " + OldID);
 						modIDs.put(OldID, IDValue);
 					}
-					System.err.println("NUM: setting id: new  " + IDValue + " old " + OldID);
+					
 					UtilDom.setIdAttribute(nodo, IDValue);
 				}
 		}// Fine if isElementToBeIDUpdated

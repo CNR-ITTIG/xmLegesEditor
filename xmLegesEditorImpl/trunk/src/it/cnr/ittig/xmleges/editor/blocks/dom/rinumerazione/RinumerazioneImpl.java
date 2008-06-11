@@ -9,15 +9,22 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.services.manager.Startable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentBeforeInitUndoAction;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
+import it.cnr.ittig.xmleges.core.services.panes.problems.Problem;
+import it.cnr.ittig.xmleges.core.services.panes.problems.ProblemsPane;
 import it.cnr.ittig.xmleges.core.services.preference.PreferenceManager;
 import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
+import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.rinumerazione.Rinumerazione;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 import it.cnr.ittig.xmleges.editor.services.util.urn.NirUtilUrn;
 
 import java.util.Properties;
+import java.util.Vector;
 
+import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
@@ -61,6 +68,8 @@ public class RinumerazioneImpl implements Rinumerazione, DocumentBeforeInitUndoA
 	RulesManager rulesManager;
 
 	PreferenceManager preferenceManager;
+	
+	ProblemsPane problemsPane;
 
 	NirUtilDom nirUtilDom;
 
@@ -69,6 +78,10 @@ public class RinumerazioneImpl implements Rinumerazione, DocumentBeforeInitUndoA
 	boolean renum = false;
 
 	String tipo;
+	
+	private Vector idStatus= new Vector();
+	
+	
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -82,6 +95,7 @@ public class RinumerazioneImpl implements Rinumerazione, DocumentBeforeInitUndoA
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 		nirUtilUrn = (NirUtilUrn) serviceManager.lookup(NirUtilUrn.class);
 		preferenceManager = (PreferenceManager) serviceManager.lookup(PreferenceManager.class);
+		problemsPane = (ProblemsPane) serviceManager.lookup(ProblemsPane.class);
 	}
 
 	public void start() throws Exception {
@@ -111,19 +125,61 @@ public class RinumerazioneImpl implements Rinumerazione, DocumentBeforeInitUndoA
 
 	// ///////////////////////////////////////////////// Rinumerazione Interface
 	public void aggiorna(Document document) {
+		
+		Vector removed = getRemoved(document);
+		if(removed!=null && removed.size()>0){
+			for(int i = 0; i<removed.size();i++){
+				System.out.println("removed "+removed.elementAt(i));
+				
+			}
+			
+			NodeList nir = document.getElementsByTagName("NIR");
+			Node node = nir.item(0);
+			addIdProblems(node, removed);
+			
+			
+			aggiornaNumerazioneAndLink.setRemovedIDs(removed);
+			
+		}
 		logger.debug("rinumerazione START");
 		NodeList nir = document.getElementsByTagName("NIR");
 		
 		try{
-			if (renum)
+			if (renum){
 				aggiornaNumerazioneAndLink.aggiornaNum(nir.item(0));
-			else
+			}
+			else{				
 				aggiornaNumerazioneAndLink.aggiornaID(nir.item(0));
+			}
 			logger.debug("rinumerazione END");
 		}catch(Exception ex){
 			ex.printStackTrace();
 			logger.error("rinumerazione non applicabile");
 		}
+
+		this.idStatus=new Vector();
+		setIdStatus(nir.item(0));
+	}
+
+	private Vector getRemoved(Document document) {
+		Vector removed = new Vector();
+		Vector oldIDs=getIdStatus();
+		NodeList nir = document.getElementsByTagName("NIR");
+		Node node = nir.item(0);
+		if (oldIDs==null || oldIDs.size()==0 || node == null)
+			return null;
+		
+		
+		Vector nonUpdatedIDs = new Vector();
+		getCurrentStatus(node,nonUpdatedIDs);
+				
+		for(int i = 0; i<oldIDs.size();i++){
+			if(!nonUpdatedIDs.contains(oldIDs.elementAt(i))){
+				removed.add(oldIDs.elementAt(i));
+			}
+		}
+		
+		return removed;
 	}
 
 	public void setRinumerazione(boolean renum) {
@@ -158,5 +214,75 @@ public class RinumerazioneImpl implements Rinumerazione, DocumentBeforeInitUndoA
 		setRinumerazione(isRenum);
 		return true;
 	}
+
+	public Vector getIdStatus() {
+		return idStatus;
+	}
+
+	public void getCurrentStatus(Node node, Vector status) {
+		if (node == null)		
+			return;
+			
+		String idValue = UtilDom.findAttribute(node, "id");
+		if(!idValue.equals(""))
+			status.add(idValue);
+				
+		NodeList figliNodo = node.getChildNodes();
+
+		for (int i = 0; i < figliNodo.getLength(); i++) {
+			Node figlio = figliNodo.item(i);
+			getCurrentStatus(figlio, status);
+		}
+		
+		
+	}
+	public void setIdStatus(Node node) {
+		
+				
+		if (node == null)		
+			return;
+			
+		String idValue = UtilDom.findAttribute(node, "id");
+		if(!idValue.equals(""))
+			this.idStatus.add(idValue);
+				
+		NodeList figliNodo = node.getChildNodes();
+
+		for (int i = 0; i < figliNodo.getLength(); i++) {
+			Node figlio = figliNodo.item(i);
+			setIdStatus(figlio);
+		}
+		
+	}
+	
+	protected void addIdProblems(Node node, Vector removed) {
+		
+		if (node == null || removed==null || removed.size()==0)
+			return;
+
+		
+		NamedNodeMap attrList = node.getAttributes();
+		if (attrList != null){
+			for (int j = 0; j < attrList.getLength(); j++) {
+				Attr attributo = (Attr) (attrList.item(j));
+				if(removed.contains(attributo.getValue())){
+					problemsPane.addProblem(new IdProblemImpl(node,Problem.WARNING,attributo.getName(),attributo.getValue()));
+					
+				}
+				
+				if(attributo.getValue().startsWith("#") && removed.contains( attributo.getValue().substring(1) ) ){
+					problemsPane.addProblem(new IdProblemImpl(node,Problem.WARNING,attributo.getName(),attributo.getValue()));
+				}
+			}
+		}
+					
+				
+		NodeList figliNodo = node.getChildNodes();
+
+		for (int i = 0; i < figliNodo.getLength(); i++) {
+			Node figlio = figliNodo.item(i);
+			addIdProblems(figlio, removed);
+		}
+}
 
 }

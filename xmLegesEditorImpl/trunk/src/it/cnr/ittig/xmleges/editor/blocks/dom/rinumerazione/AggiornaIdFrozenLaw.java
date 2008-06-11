@@ -35,6 +35,8 @@ public class AggiornaIdFrozenLaw {
 
 	NirUtilDom nirUtilDom;
 	
+	private Vector removedIDs= new Vector();
+	
 	// Mappa degli ID cambiati (non include i cancellati)key=oldID, value=newID
 	HashMap modIDs = new HashMap();
 
@@ -117,6 +119,10 @@ public class AggiornaIdFrozenLaw {
 		
 		System.err.println("CALLED AggiornaId");
 		
+		Vector removed = getRemovedIDs();
+
+		getAndKillReferringAttributes(nir.item(0), removed);
+		
 		///////////     NOTE - NDR /////////////////
 		// aggiornamento relativo alle note:
 		// le note vengono ordinate in base a come compaiono nel testo prima di risettargli gli id
@@ -195,7 +201,7 @@ public class AggiornaIdFrozenLaw {
 					System.err.println("idChanged: new  " + IDValue + " old " + OldID);
 					modIDs.put(OldID, IDValue);
 				}
-				System.err.println("setting id: new  " + IDValue + " old " + OldID);
+				
 				UtilDom.setIdAttribute(nodo, IDValue);
 				
 				
@@ -1229,12 +1235,12 @@ public class AggiornaIdFrozenLaw {
 				if(!UtilDom.isIdAttribute(attributo) && attributo.getValue()!=null && !((String)(attributo.getValue())).equals("")){
 					if (modIDs.keySet().contains(attributo.getValue())) {
 						
-						System.out.println("FOUND REFERRING ATTRIBUTE: nodo "+node.getNodeName()+" cambia attributo "+attributo.getName() + " da "+attributo.getValue()+" a "+(String) modIDs.get(attributo.getValue()));
+						
 						attributo.setValue((String) modIDs.get(attributo.getValue()));
 					}
 					if(modIDs.keySet().contains( ((String)attributo.getValue()).substring(1) ) ){
 						
-						System.out.println("FOUND REFERRING ATTRIBUTE with #: nodo "+node.getNodeName()+" cambia attributo da "+((String)attributo.getValue())+" a "+"#"+(String) modIDs.get(((String)attributo.getValue()).substring(1)));
+						
 						attributo.setValue("#"+(String) modIDs.get(((String)attributo.getValue()).substring(1)));
 					}
 				}
@@ -1463,6 +1469,16 @@ public class AggiornaIdFrozenLaw {
 		return old;
 	}
 
+	public Vector getRemovedIDs() {
+		return removedIDs;
+	}
+
+	public void setRemovedIDs(Vector removedIDs) {
+		this.removedIDs = removedIDs;
+	}
+	
+	
+
 	
 	
 	////////////////////////////////////////////////////////////////////////////////////
@@ -1473,5 +1489,35 @@ public class AggiornaIdFrozenLaw {
 	//
 	////////////////////////////////////////////////////////////////////////////////////
 	
+	
+	protected void getAndKillReferringAttributes(Node node, Vector removed) {
+			
+			if (node == null || removed==null || removed.size()==0)
+				return;
+	
+			
+			NamedNodeMap attrList = node.getAttributes();
+			if (attrList != null){
+				for (int j = 0; j < attrList.getLength(); j++) {
+					Attr attributo = (Attr) (attrList.item(j));
+					if(removed.contains(attributo.getValue())){
+						attributo.setValue("");
+						
+					}
+					
+					if(attributo.getValue().startsWith("#") && removed.contains( attributo.getValue().substring(1) ) ){
+						attributo.setValue("");
+					}
+				}
+			}
+						
+					
+			NodeList figliNodo = node.getChildNodes();
+	
+			for (int i = 0; i < figliNodo.getLength(); i++) {
+				Node figlio = figliNodo.item(i);
+				getAndKillReferringAttributes(figlio, removed);
+			}
+	}
 	
 }
