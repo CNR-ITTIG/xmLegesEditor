@@ -18,8 +18,6 @@ import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamSource;
 
-import org.apache.xerces.dom.AttrImpl;
-import org.apache.xerces.dom.ElementImpl;
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
@@ -467,8 +465,9 @@ public class UtilDom {
 	public static boolean isIdAttribute(Node attribute) {
 
 		try {
-			return ((AttrImpl) ((Attr) attribute)).isId();
+			return (((Attr) attribute)).isId();
 		} catch (ClassCastException e) {
+			e.printStackTrace();
 			return false;
 		}
 	}
@@ -501,8 +500,9 @@ public class UtilDom {
 
 		setAttributeValue(node, "id", id);
 		try {
-			((ElementImpl) ((Element) node)).setIdAttribute("id", true);
+			(((Element) node)).setIdAttribute("id", true);
 		} catch (ClassCastException ex) {
+			ex.printStackTrace();
 		}
 	}
 
@@ -1128,6 +1128,7 @@ public class UtilDom {
 	 * @return
 	 */
     public static Node[] getElementsByTagName(Document doc, Node fromHere, String tagName){
+
     	if(fromHere==null){
     		fromHere=(Node)doc.getDocumentElement();
     	}
