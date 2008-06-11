@@ -132,12 +132,12 @@ public interface DocumentManager extends Service {
 	public String getEncoding();
 
 	/**
-	 * Restituisce il nome del DTD definito nel documento xml. Il nome
+	 * Restituisce il nome del DTD o XSD definito nel documento xml. Il nome
 	 * restituito non comprende nessun percorso.
 	 * 
-	 * @return nome del DTD
+	 * @return nome del DTD o XSD
 	 */
-	public String getDtdName();
+	public String getGrammarName();
 
 	/**
 	 * Restituisce l'intero documento come nodo DOM.
