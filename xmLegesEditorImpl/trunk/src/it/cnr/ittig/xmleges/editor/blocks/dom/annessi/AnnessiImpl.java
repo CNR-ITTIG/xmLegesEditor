@@ -264,14 +264,12 @@ public class AnnessiImpl implements Annessi, Loggable, Serviceable {
 	}
 
 	private boolean isAllegabile(File fileAnnesso) {
-		if (documentManager.getDtdName().toLowerCase().startsWith("nirflessibile"))
+		if (documentManager.getGrammarName().toLowerCase().indexOf("flessibile")!=-1)
 			return (true);
 		Document annettere = UtilXml.readXML(fileAnnesso);
 		if (annettere != null) {
-			String dtdPath = annettere.getDoctype().getSystemId();
-			String[] pathChunks = dtdPath.split("/");
-			String currentDTD = pathChunks[pathChunks.length - 1];
-			if (currentDTD.equalsIgnoreCase(documentManager.getDtdName()))
+			String currentGrammar = documentManager.getGrammarName(annettere); 
+			if (currentGrammar.equalsIgnoreCase(documentManager.getGrammarName()))
 				return (true);
 		}
 		return (false);
