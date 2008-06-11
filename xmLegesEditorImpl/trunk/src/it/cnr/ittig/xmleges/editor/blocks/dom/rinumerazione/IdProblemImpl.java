@@ -37,7 +37,7 @@ public class IdProblemImpl implements Problem {
 
 	public String getText() {
 		// TODO Auto-generated method stub
-		return "Removed "+attrValue+". errore in "+attrName+" di "+node.getNodeName()+" ("+UtilDom.getAttributeValueAsString(node, "id")!=null?UtilDom.getAttributeValueAsString(node, "id"):""+")";
+		return "Removed "+attrValue+". errore in "+attrName+" di "+node.getNodeName()+" ("+(UtilDom.getAttributeValueAsString(node, "id")!=null?UtilDom.getAttributeValueAsString(node, "id"):"")+")";
 	}
 
 	public int getType() {
