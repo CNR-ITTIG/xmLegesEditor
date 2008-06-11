@@ -222,7 +222,7 @@ public class AnnessiFormImpl implements AnnessiForm, Loggable, Serviceable, Init
 				txtNomeFile.setText(nomeFile);
 				selectedFile = fileChooser.getSelectedFile();
 			} else if (isInternoTemplate()) {
-				fileNewForm.openForm(documentManager.getDtdName());
+				fileNewForm.openForm(documentManager.getGrammarName());
 				if (fileNewForm.isOKClicked()) {
 					nomeFile = fileNewForm.getSelectedTemplate();
 					txtNomeFile.setText(fileNewForm.getSelectedProvvedimento());
