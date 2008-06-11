@@ -227,7 +227,10 @@ public class DocumentManagerImpl implements DocumentManager, EventListener, Logg
 
 	
 	public String getGrammarName(){
-		Document doc = this.document;
+		return getGrammarName(this.document);
+	}
+	
+	public String getGrammarName(Document doc){
 		if (doc != null) {
 			String grammarPath = getGrammarPath(doc);//doc.getDoctype().getSystemId();
 			String[] pathChunks = grammarPath.split("/");
