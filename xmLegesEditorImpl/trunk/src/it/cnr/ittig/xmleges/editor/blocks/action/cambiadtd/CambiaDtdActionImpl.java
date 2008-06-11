@@ -190,7 +190,7 @@ public class CambiaDtdActionImpl implements CambiaDtdAction, EventManagerListene
 			test.setText("");
 			dtdfrom.setText("");
 			dtdto.setText("");
-			dtdfrom.setText(documentManager.getDtdName());
+			dtdfrom.setText(documentManager.getGrammarName());
 			if (documentManager.isChanged()) {
 				test.setText("Bisogna salvare il documento prima di effettuare il cambio di DTD.");
 				verify.setEnabled(false);
