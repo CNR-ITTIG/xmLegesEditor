@@ -132,6 +132,8 @@ public class FindReplaceActionImpl implements FindReplaceAction, EventManagerLis
 		form.setName("action.edit.findreplace");
 		
 		form.setHelpKey("help.contents.form.findreplace");
+
+		
 		
 		// form.setSize(300, 250);
 		find = (JTextField) form.getComponentByName("action.edit.findreplace.find");
