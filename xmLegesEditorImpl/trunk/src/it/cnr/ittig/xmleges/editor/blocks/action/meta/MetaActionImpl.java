@@ -269,10 +269,6 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		
 		ciclodivitaForm.setEventi(eventiOnDom);
 
-		
-		
-		VigenzaEntity[] vigenze = ciclodivita.getVigenze();
-		
 				
 		if(ciclodivitaForm.openForm()){
 			Evento[] newEventi = ciclodivitaForm.getEventi();
