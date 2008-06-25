@@ -79,7 +79,7 @@ Initializable, Startable, SynsetRelInterlingualPane {
 		//Mappa da relazioni a synset collection
 		Map relationToSynsets = kbManager.getInterlingualProperties(syn, destLang); 
 		
-		DefaultMutableTreeNode top = null, node = null;
+		DefaultMutableTreeNode top = null;
 
 		clearTree();
 
@@ -94,7 +94,7 @@ Initializable, Startable, SynsetRelInterlingualPane {
 		addLingualLinks(relationToSynsets, KbConf.MATCH_BROADER, top);
 		addLingualLinks(relationToSynsets, KbConf.MATCH_NARROW, top);
 		addLingualLinks(relationToSynsets, KbConf.MATCH_FUZZY, top);
-		addLingualLinks(relationToSynsets, KbConf.MATCH_COHYPO, top);
+		addLingualLinks(relationToSynsets, KbConf.MATCH_COHYPO, top);		
 		addLingualLinks(relationToSynsets, KbConf.MATCH_EQSYN, top);
 		tree.expandChilds(top);
 		

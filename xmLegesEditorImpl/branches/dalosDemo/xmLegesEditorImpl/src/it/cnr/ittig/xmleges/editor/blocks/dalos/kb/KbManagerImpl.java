@@ -168,6 +168,7 @@ implements KbManager, Loggable, Serviceable, Initializable {
 
 		KbContainer kbc = getContainer(syn.getLanguage());
 		kbc.addLexicalProperties(syn);
+		
 	}
 	
 	public void addDefSources(Synset syn) {
@@ -182,6 +183,11 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		//returns a Map<String,Collection>
 		
 		if(syn == null) { return null; }
+		
+		//XXX Fix language at program start
+		if(lang == null) {
+			lang = syn.getLanguage();
+		}
 		
 		Map results = new HashMap();
 
