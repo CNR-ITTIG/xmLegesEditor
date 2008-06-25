@@ -91,7 +91,7 @@ public class SourceContainer extends JEditorPane implements HyperlinkListener{
 		
 		String bgColor = evenBgColor;
 		
-		String docType = "Sentences";
+		String docType = "Decisions";
 		if(isDirective)
 			docType = "Directives";
 		
