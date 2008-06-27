@@ -100,8 +100,10 @@ public class AggiornaIdFrozenLaw {
 
     //Vettore dei riferimenti interni
     protected Vector Rif;
+    
+    Document document=null;
 
-	protected Document doc;
+	
 
 	/** Creates a new instance of AggiornaIDFrozenLaw */
 	public AggiornaIdFrozenLaw(RinumerazioneImpl rinumerazioneImpl) {
@@ -111,17 +113,16 @@ public class AggiornaIdFrozenLaw {
 		this.nirUtilDom = rinumerazioneImpl.nirUtilDom;
 	}
 
-	public void aggiornaID(Node nodo) {
+	public void aggiornaID(Document document) {
 		modIDs=new HashMap();
-		doc = nodo.getOwnerDocument();
-		NodeList nir = doc.getElementsByTagName("NIR");
-		
+		this.document=document;
 		
 		System.err.println("CALLED AggiornaId");
 		
-		Vector removed = getRemovedIDs();
+		//Vector removed = getRemovedIDs();
 
-		getAndKillReferringAttributes(nir.item(0), removed);
+		Node root=document.getElementsByTagName("NIR").item(0);
+		getAndKillReferringAttributes(root);
 		
 		///////////     NOTE - NDR /////////////////
 		// aggiornamento relativo alle note:
@@ -132,10 +133,11 @@ public class AggiornaIdFrozenLaw {
 		////////////////////////////////////////////
 		
 		
-		// Per gli elementi che contengono un num genero l'ID sulla base di <num>
+		// Per gli elementi che contengono un num, genero l'ID sulla base di <num>
 		// Per gli altri genero l'ID sulla base della posizione
-		updateIDs(nir.item(0));
-		getAndUpdateReferringAttributesFrozenLaw(nir.item(0));   
+		updateIDs(root);
+		
+		getAndUpdateReferringAttributesFrozenLaw(root);   
 
 		
 		///////////  RIF - INTERNI  ///////////////
@@ -914,7 +916,7 @@ public class AggiornaIdFrozenLaw {
 		int posizione = 0;
 		String nodeName = node.getNodeName();
 
-		NodeList listaNodi = doc.getElementsByTagName(nodeName);
+		NodeList listaNodi = node.getOwnerDocument().getElementsByTagName(nodeName);
 		int i = 0;
 		for (i = 0; i < listaNodi.getLength(); i++) {
 			if (listaNodi.item(i) == node) {
@@ -1223,7 +1225,10 @@ public class AggiornaIdFrozenLaw {
 		else
 			return false;
 	}
-	
+	/**
+	 * Aggiorna gli attributi che si riferiscono a ID modificati di altri elementi
+	 * @param node
+	 */
 	protected void getAndUpdateReferringAttributesFrozenLaw(Node node) {
 		if (node == null || modIDs.size()==0)
 			return;
@@ -1234,7 +1239,6 @@ public class AggiornaIdFrozenLaw {
 				Attr attributo = (Attr) (attrList.item(j));
 				if(!UtilDom.isIdAttribute(attributo) && attributo.getValue()!=null && !((String)(attributo.getValue())).equals("")){
 					if (modIDs.keySet().contains(attributo.getValue())) {
-						
 						
 						attributo.setValue((String) modIDs.get(attributo.getValue()));
 					}
@@ -1266,7 +1270,7 @@ public class AggiornaIdFrozenLaw {
 	
 	private Vector getRif() {
 		Rif = new Vector(50, 10);
-		NodeList rif = doc.getElementsByTagName("rif");
+		NodeList rif = document.getElementsByTagName("rif");
 		for (int i = 0; i < rif.getLength(); i++) {
 			if (!UtilDom.findAttribute(rif.item(i), "xlink:href").startsWith("urn"))
 				Rif.addElement(rif.item(i));
@@ -1361,10 +1365,12 @@ public class AggiornaIdFrozenLaw {
 	//
 	////////////////////////////////////////////////////////////////////////////////////
 	
-	
+	/**
+	 * Restituisce tutti gli id delle note citate da ndr (senza ripetizioni ma in ordine di apparizione sul doc)
+	 */
 	protected Vector getNdrIdFromDoc() {
-		NodeList ndr = doc.getElementsByTagName("ndr");
-		Vector ids = new Vector(50, 10);
+		NodeList ndr = document.getElementsByTagName("ndr");
+		Vector ids = new Vector();
 		for (int i = 0; i < ndr.getLength(); i++) {
 			String id = UtilDom.getAttributeValueAsString(ndr.item(i), "num");
 			if (ids.indexOf(id) == -1)
@@ -1373,17 +1379,20 @@ public class AggiornaIdFrozenLaw {
 		return ids;
 	}
 	
-
+//Qui si ordinano le note sul documento ma non gli si cambiano gli id
 	protected boolean sortNotes(Vector ndrId) {
 		// ordina le note dentro  il tag redazionale nello stesso ordine in cu compaiono gli ndr nel testo
-		Vector newNotes = new Vector(50, 10);
-		Node parent = null;
+		Vector newNotes = new Vector();
+		
 
-		// copia delle note nell'ordine in cui compaiono nel testo
+		// copia su newNotes delle note nell'ordine in cui compaiono ora nel testo
 		for (int i = 0; i < ndrId.size(); i++) {
 			if (getNotaById((String) ndrId.get(i)) != null){
-				Node oldNota = getNotaById((String) ndrId.get(i)).cloneNode(true);
+
+				Node oldNota = getNotaById((String) ndrId.get(i));
 				String oldId = UtilDom.getAttributeValueAsString(oldNota, "id");
+				
+				//PERCHè SI FA IL CLONE?
 				Node clonedNota = oldNota.cloneNode(true);
 				UtilDom.setIdAttribute(clonedNota, oldId);
 				newNotes.add(clonedNota);			
@@ -1400,15 +1409,20 @@ public class AggiornaIdFrozenLaw {
 			if(logger.isDebugEnabled())
 				logger.debug("ci sono note senza ndr; completa la lista");
 			// completa il vector newNotes da oldNotes con id != note in
-			// newNotes (aggiunge le note che non hanno un ndr)
+			// newNotes (aggiunge IN FONDO le note che non hanno un ndr)
 			for (int i = 0; i < oldNotes.size(); i++) {
 				if (ndrId.indexOf(UtilDom.getAttributeValueAsString((Node) oldNotes.get(i), "id")) == -1)
 					newNotes.add(oldNotes.get(i));
+				
 			}
 		}
          
 		if(logger.isDebugEnabled())
 			logger.debug("notaLength " + oldNotes.size() + " ndrLength " + newNotes.size());
+		
+		Node parent = null;
+		//LE OLDNOTES SONO NELL'ODINE DATO DAL DOC PRIMA DEL SETID NEWNOTES; INVECE NEWNOTES SONO IN ORDINE DIVERSO CHE DIPENDE DALL'ORDINE DEGLI NDR NEL TESTO
+		//FIXME: VA RIVISTO QUESTO REPLACECHILD
 		if (oldNotes.size() == newNotes.size()) {
 			for (int i = 0; i < oldNotes.size(); i++) {
 				parent = ((Node) oldNotes.get(i)).getParentNode();
@@ -1450,7 +1464,7 @@ public class AggiornaIdFrozenLaw {
 //			System.err.println("getelementById FUNZIONA");
 	
 		
-		NodeList notes = doc.getElementsByTagName("nota");
+		NodeList notes = document.getElementsByTagName("nota");
 		for (int i = 0; i < notes.getLength(); i++) {
 			if (UtilDom.getAttributeValueAsString(notes.item(i), "id").equals(id))
 				return (notes.item(i));
@@ -1459,10 +1473,13 @@ public class AggiornaIdFrozenLaw {
 		
 	}
 
-	
+	/**
+	 * restituisce tutte le note presenti sul DOCUMENTO prima del setId
+	 * @return
+	 */
 	private Vector getOldNotes() {
-		Vector old = new Vector(50, 10);
-		NodeList notes = doc.getElementsByTagName("nota");
+		Vector old = new Vector();
+		NodeList notes = document.getElementsByTagName("nota");
 		for (int i = 0; i < notes.getLength(); i++) {
 			old.add(notes.item(i));
 		}
@@ -1489,10 +1506,12 @@ public class AggiornaIdFrozenLaw {
 	//
 	////////////////////////////////////////////////////////////////////////////////////
 	
-	
-	protected void getAndKillReferringAttributes(Node node, Vector removed) {
+	/**
+	 * Elimina gli attributi che si riferiscono a id di elementi eliminati
+	 */
+	protected void getAndKillReferringAttributes(Node node){//, Vector removed) {
 			
-			if (node == null || removed==null || removed.size()==0)
+			if (node == null || this.removedIDs==null || this.removedIDs.size()==0)
 				return;
 	
 			
@@ -1500,12 +1519,12 @@ public class AggiornaIdFrozenLaw {
 			if (attrList != null){
 				for (int j = 0; j < attrList.getLength(); j++) {
 					Attr attributo = (Attr) (attrList.item(j));
-					if(removed.contains(attributo.getValue())){
+					if(this.removedIDs.contains(attributo.getValue())){
 						attributo.setValue("");
 						
 					}
 					
-					if(attributo.getValue().startsWith("#") && removed.contains( attributo.getValue().substring(1) ) ){
+					if(attributo.getValue().startsWith("#") && this.removedIDs.contains( attributo.getValue().substring(1) ) ){
 						attributo.setValue("");
 					}
 				}
@@ -1516,7 +1535,7 @@ public class AggiornaIdFrozenLaw {
 	
 			for (int i = 0; i < figliNodo.getLength(); i++) {
 				Node figlio = figliNodo.item(i);
-				getAndKillReferringAttributes(figlio, removed);
+				getAndKillReferringAttributes(figlio);
 			}
 	}
 	
