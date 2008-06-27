@@ -126,30 +126,28 @@ public class RinumerazioneImpl implements Rinumerazione, DocumentBeforeInitUndoA
 	// ///////////////////////////////////////////////// Rinumerazione Interface
 	public void aggiorna(Document document) {
 		
+		Node root=document.getElementsByTagName("NIR").item(0);
+		
 		Vector removed = getRemoved(document);
 		if(removed!=null && removed.size()>0){
 			for(int i = 0; i<removed.size();i++){
-				System.out.println("removed "+removed.elementAt(i));
-				
+				System.out.println("removed "+removed.elementAt(i));				
 			}
 			
-			NodeList nir = document.getElementsByTagName("NIR");
-			Node node = nir.item(0);
-			addIdProblems(node, removed);
-			
+			addIdProblems(root, removed);
+				
 			
 			aggiornaNumerazioneAndLink.setRemovedIDs(removed);
 			
 		}
 		logger.debug("rinumerazione START");
-		NodeList nir = document.getElementsByTagName("NIR");
 		
 		try{
 			if (renum){
-				aggiornaNumerazioneAndLink.aggiornaNum(nir.item(0));
+				aggiornaNumerazioneAndLink.aggiornaNum(document);
 			}
 			else{				
-				aggiornaNumerazioneAndLink.aggiornaID(nir.item(0));
+				aggiornaNumerazioneAndLink.aggiornaID(document);
 			}
 			logger.debug("rinumerazione END");
 		}catch(Exception ex){
@@ -158,20 +156,27 @@ public class RinumerazioneImpl implements Rinumerazione, DocumentBeforeInitUndoA
 		}
 
 		this.idStatus=new Vector();
-		setIdStatus(nir.item(0));
+		
+		setIdStatus(root);
+		
 	}
 
+	/**
+	 * Fa un confronto fra gli id dello stato precedente e quelli dell'attuale e restituisce il vettore degli id rimossi
+	 * @param document
+	 * @return
+	 */
 	private Vector getRemoved(Document document) {
 		Vector removed = new Vector();
 		Vector oldIDs=getIdStatus();
-		NodeList nir = document.getElementsByTagName("NIR");
-		Node node = nir.item(0);
-		if (oldIDs==null || oldIDs.size()==0 || node == null)
+		
+		Node root = document.getElementsByTagName("NIR").item(0);
+		if (oldIDs==null || oldIDs.size()==0 || root == null)
 			return null;
 		
 		
 		Vector nonUpdatedIDs = new Vector();
-		getCurrentStatus(node,nonUpdatedIDs);
+		getCurrentStatus(root,nonUpdatedIDs);
 				
 		for(int i = 0; i<oldIDs.size();i++){
 			if(!nonUpdatedIDs.contains(oldIDs.elementAt(i))){
@@ -219,6 +224,11 @@ public class RinumerazioneImpl implements Rinumerazione, DocumentBeforeInitUndoA
 		return idStatus;
 	}
 
+	/**
+	 * restituisce un vector con gli id presenti sul dom
+	 * @param node: nodo analizzato
+	 * @param status: vettore in uscita con gli id
+	 */
 	public void getCurrentStatus(Node node, Vector status) {
 		if (node == null)		
 			return;
