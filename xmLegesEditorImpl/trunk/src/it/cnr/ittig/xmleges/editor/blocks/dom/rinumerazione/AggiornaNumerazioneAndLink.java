@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Vector;
 
 import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -46,31 +47,27 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 
 	
 	
-	public void aggiornaNum(Node nodo) {
+	public void aggiornaNum(Document document) {
 		
 		modIDs=new HashMap();
-		
-		doc = nodo.getOwnerDocument();
-		NodeList nir = doc.getElementsByTagName("NIR");
+		this.document=document;
 		
 		System.err.println("CALLED AggiornaNum");
 		
-		Vector removed = getRemovedIDs();
-
-		getAndKillReferringAttributes(nir.item(0), removed);
+		getAndKillReferringAttributes(document);
 		// aggiornamento relativo alle note:
 		// le note vengono ordinate in base a come compaiono nel testo prima di risettargli gli id
 		Vector ndrId = getNdrIdFromDoc();
 		sortNotes(ndrId);
 		
 		// Aggiornamento ID e <num> degli elementi da rinumerare
-		updateIDsByPosition(nir.item(0));
+		updateIDsByPosition(document);
 		updateNumByID();
 		
 		
 		// Assegnazione degli ID alle partizioni di una Modifica (dentro le virgolette) 
 		// Anche con rinumerazione attiva, dentro le modifiche si applica il metodo AggiornaIdFrozenLaw.updateIDs (come se la rinumerazione fosse spenta) 
-		NodeList virgoletteList = doc.getElementsByTagName("virgolette");
+		NodeList virgoletteList = document.getElementsByTagName("virgolette");
 		for (int i = 0; i < virgoletteList.getLength(); i++) {
 			updateIDs(virgoletteList.item(i).getFirstChild());
 		}
@@ -78,7 +75,7 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 		// Recupero gli attributi che sono di tipo idref per poi aggiornarli
 		// nel caso avessero puntato a nodi che hanno cambiato posizione
 		// esempio idref: "fonte", "xlink:href"  etc. etc. 
-		getAndUpdateReferringAttributes(nir.item(0));   // cablare qui dentro l'updateInternalXlinkHref (FATTO)
+		getAndUpdateReferringAttributes(document);   // cablare qui dentro l'updateInternalXlinkHref (FATTO)
 
 			
 		// rinumera gli ndr
@@ -117,7 +114,7 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 						if (node.getNodeName().equals("rif")) {
 									// Se il nodo che ha come attributo xlink:href e' un rif
 									// allora si aggiorna anche il testo del rif
-									Node IntRifTextNode = doc.createTextNode(getTextInternalRifFromID(node, newId));
+									Node IntRifTextNode = document.createTextNode(getTextInternalRifFromID(node, newId));
 									// FIXME non e' detto che la nuova forma testuale debba
 									// essere quella standard; se il rif interno aveva una
 									// forma testuale personalizzata, va lasciata quella
@@ -212,7 +209,7 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 	private void updateNumByID() {
 		String numVal; // Valore dell'elemento <num>
 
-		NodeList numList = doc.getElementsByTagName("num");
+		NodeList numList = document.getElementsByTagName("num");
 		for (int i = 0; i < numList.getLength(); i++) {
 			Node num = numList.item(i);
 			if (!isElementWithinModifica(num)) {
@@ -241,10 +238,10 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 				if (num.getChildNodes().item(0) != null) {
 					if (!numVal.equals(num.getChildNodes().item(0).getNodeValue())) {
 						logger.debug("CHANGED NUM: Old num: " + num.getChildNodes().item(0).getNodeValue() + "  New num: " + numVal);
-						num.replaceChild(doc.createTextNode(numVal), num.getChildNodes().item(0));
+						num.replaceChild(document.createTextNode(numVal), num.getChildNodes().item(0));
 					}
 				} else
-					num.appendChild(doc.createTextNode(numVal));
+					num.appendChild(document.createTextNode(numVal));
 			}
 		}
 	}
@@ -423,34 +420,36 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 	
 	
 	private void renumNdr() {
-		NodeList ndr = doc.getElementsByTagName("ndr");
-		NodeList note = doc.getElementsByTagName("nota");
-		// quando arrivo qui i vettori ndr e note sono nello stesso ordine
-		String num, value, prefix;
-
-		for (int i = 0; i < ndr.getLength(); i++) {
-						
-			prefix = getNdrNumPrefix(UtilDom.getAttributeValueAsString((Node) note.item(i), "id")); 
-			num = UtilDom.getAttributeValueAsString((Node) note.item(i), "id");
+		NodeList ndr = document.getElementsByTagName("ndr");
+		for(int i=0; i<ndr.getLength();i++){
+			String notaId=UtilDom.getAttributeValueAsString(ndr.item(i), "num");
+			String prefix = getNdrNumPrefix(notaId); 
 			
 			// togliere l'intero prefix e non solo la n
-			value = num.substring(prefix.length());
-			UtilDom.setAttributeValue(ndr.item(i), "valore", value);
+			String value = notaId.substring(prefix.length());
+			
+			UtilDom.setAttributeValue((Node)ndr.item(i), "valore", value);
+			
 			String tipoNdr = rinum.getRinumerazioneNdr();
 			if(logger.isDebugEnabled())
 				logger.debug("tipoNdr " + tipoNdr);
 			if (tipoNdr.equalsIgnoreCase("cardinale"))
-				UtilDom.setTextNode(ndr.item(i), "(" + value + ")");
+				UtilDom.setTextNode((Node)ndr.item(i), "(" + value + ")");
 			else if (tipoNdr.equalsIgnoreCase("letterale"))
-				UtilDom.setTextNode(ndr.item(i), "(" + UtilLang.fromArabicToLetter(value).toLowerCase() + ")");
+				UtilDom.setTextNode((Node)ndr.item(i), "(" + UtilLang.fromArabicToLetter(value).toLowerCase() + ")");
 			else
-				UtilDom.setTextNode(ndr.item(i), "(" + UtilLang.fromArabicToRoman(value).toLowerCase() + ")");
+				UtilDom.setTextNode((Node)ndr.item(i), "(" + UtilLang.fromArabicToRoman(value).toLowerCase() + ")");
 		}
+
+	
 	}
 	
 	
 	
 	private String getNdrNumPrefix(String num){
+		
+		if (num.equals(""))
+			return "";
 		
 		char[] numChar = num.toCharArray();
 		int i=0;
