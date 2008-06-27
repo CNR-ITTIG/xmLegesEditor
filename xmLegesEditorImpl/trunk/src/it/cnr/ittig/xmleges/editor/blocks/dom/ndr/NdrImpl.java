@@ -128,9 +128,6 @@ public class NdrImpl implements Ndr, Loggable, Serviceable {
 			if (id == null) { // creazione di una nuova nota
 				Node nota = createNota(testo);
 				insertedTesta = insTesta(doc, nota);
-				
-				// setta l'id della nota
-				rinumerazione.aggiorna(doc);
 			
 				id = UtilDom.getAttributeValueAsString(nota, "id");
 				logger.debug("insertedTesta " + insertedTesta + " nota nuova " + id);
