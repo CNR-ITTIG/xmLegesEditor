@@ -61,30 +61,25 @@ public class MetaDescrittoriMaterieImpl implements MetaDescrittoriMaterie , Logg
 			Node descrittoriNode = UtilDom.findRecursiveChild(activeMeta,"descrittori");
 						
 			removeMetaByName("materie",node);
-			
-			for (int i = 0; i < vocabolari.length; i++) {
-				
-				Node vocabTag;
-				vocabTag = utilRulesManager.getNodeTemplate("materie");
-				
-				
-				UtilDom.setAttributeValue(vocabTag,"vocabolario",vocabolari[i].getNome());
-				String[] materieVocab=vocabolari[i].getMaterie();
-				if(materieVocab!=null && materieVocab.length>0){
-					vocabTag.removeChild(vocabTag.getChildNodes().item(0));
-					for (int j = 0; j < materieVocab.length; j++) {
-						Element materiaTag;
-						materiaTag = doc.createElement("materia");
-						UtilDom.setAttributeValue(materiaTag,"valore",vocabolari[i].getMaterie()[j]);
-						utilRulesManager.orderedInsertChild(vocabTag,materiaTag);
-						
+			if (vocabolari!=null)
+				for (int i = 0; i < vocabolari.length; i++) {
+					Node vocabTag;
+					vocabTag = utilRulesManager.getNodeTemplate("materie");
+					UtilDom.setAttributeValue(vocabTag,"vocabolario",vocabolari[i].getNome());
+					String[] materieVocab=vocabolari[i].getMaterie();
+					if(materieVocab!=null && materieVocab.length>0){
+						vocabTag.removeChild(vocabTag.getChildNodes().item(0));
+						for (int j = 0; j < materieVocab.length; j++) {
+							Element materiaTag;
+							materiaTag = doc.createElement("materia");
+							UtilDom.setAttributeValue(materiaTag,"valore",vocabolari[i].getMaterie()[j]);
+							utilRulesManager.orderedInsertChild(vocabTag,materiaTag);
+						}
+					}else{
+						UtilDom.setAttributeValue(vocabTag.getChildNodes().item(0),"valore",null);
 					}
-				}else{
-					UtilDom.setAttributeValue(vocabTag.getChildNodes().item(0),"valore",null);
+					utilRulesManager.orderedInsertChild(descrittoriNode,vocabTag);
 				}
-				utilRulesManager.orderedInsertChild(descrittoriNode,vocabTag);
-
-			}
 			rinumerazione.aggiorna(doc);
 			documentManager.commitEdit(tr);
 		} catch (DocumentManagerException ex) {
