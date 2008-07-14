@@ -52,8 +52,6 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 		modIDs=new HashMap();
 		this.document=document;
 		
-		System.err.println("CALLED AggiornaNum");
-		
 		getAndKillReferringAttributes(document);
 		// aggiornamento relativo alle note:
 		// le note vengono ordinate in base a come compaiono nel testo prima di risettargli gli id
@@ -423,11 +421,17 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 		NodeList ndr = document.getElementsByTagName("ndr");
 		for(int i=0; i<ndr.getLength();i++){
 			String notaId=UtilDom.getAttributeValueAsString(ndr.item(i), "num");
-			String prefix = getNdrNumPrefix(notaId); 
-			
-			// togliere l'intero prefix e non solo la n
-			String value = notaId.substring(prefix.length());
-			
+			String value=null;
+			if(notaId!=null && !notaId.trim().equals("")){
+				String prefix = getNdrNumPrefix(notaId); 				
+				// togliere l'intero prefix e non solo la n
+				value = notaId.substring(prefix.length());
+			}
+			else{ 
+				value="";
+				
+			}
+				
 			UtilDom.setAttributeValue((Node)ndr.item(i), "valore", value);
 			
 			String tipoNdr = rinum.getRinumerazioneNdr();
@@ -439,6 +443,7 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 				UtilDom.setTextNode((Node)ndr.item(i), "(" + UtilLang.fromArabicToLetter(value).toLowerCase() + ")");
 			else
 				UtilDom.setTextNode((Node)ndr.item(i), "(" + UtilLang.fromArabicToRoman(value).toLowerCase() + ")");
+			
 		}
 
 	

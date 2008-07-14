@@ -20,14 +20,15 @@ public class IdProblemImpl implements Problem {
 		this.attrValue=attrValue;
 		
 	}
+	//dovrebbe esserci un controllo sul tipo di IDProblem xes. nel caso di ndr va bene true.
 	public boolean canRemoveByUser() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	public boolean canResolveProblem() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	public Node getNode() {
@@ -45,9 +46,13 @@ public class IdProblemImpl implements Problem {
 		return this.type;
 	}
 
+	//elimina completamente il nodo riferente. va bene nel caso di ndr con nota nulla.
 	public boolean resolveProblem() {
-		// TODO Auto-generated method stub
-		return false;
+		
+		Node parent = (this.node).getParentNode();								
+		parent.removeChild(this.node);
+		UtilDom.mergeTextNodes(parent);
+		return true;
 	}
 
 }

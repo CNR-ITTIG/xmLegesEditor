@@ -4,6 +4,7 @@
 package it.cnr.ittig.xmleges.editor.blocks.dom.rinumerazione;
 
 import it.cnr.ittig.services.manager.Logger;
+import it.cnr.ittig.xmleges.core.services.panes.problems.ProblemsPane;
 import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
 import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
@@ -39,6 +40,8 @@ public class AggiornaIdFrozenLaw {
 	
 	// Mappa degli ID cambiati (non include i cancellati)key=oldID, value=newID
 	HashMap modIDs = new HashMap();
+	
+
 
 	protected static final int LIBRO = 0;
 
@@ -1370,49 +1373,65 @@ public class AggiornaIdFrozenLaw {
 	 */
 	protected Vector getNdrIdFromDoc() {
 		NodeList ndr = document.getElementsByTagName("ndr");
+		
 		Vector ids = new Vector();
+//		Vector toBeCanceled=new Vector();
 		for (int i = 0; i < ndr.getLength(); i++) {
 			String id = UtilDom.getAttributeValueAsString(ndr.item(i), "num");
-			if (ids.indexOf(id) == -1)
+			if(id==null || id.trim().equals("")){
+//				toBeCanceled.add(ndr.item(i));
+			}
+			else if (ids.indexOf(id) == -1)
 				ids.add(id);
 		}
+//		for(int i=0; i<toBeCanceled.size();i++){
+//			
+//			Node parent = ((Node) toBeCanceled.elementAt(i)).getParentNode();								
+//			parent.removeChild((Node) toBeCanceled.elementAt(i));
+//			UtilDom.mergeTextNodes(parent);
+//			
+//		}
 		return ids;
 	}
 	
 //Qui si ordinano le note sul documento ma non gli si cambiano gli id
 	protected boolean sortNotes(Vector ndrId) {
 		// ordina le note dentro  il tag redazionale nello stesso ordine in cu compaiono gli ndr nel testo
+		Vector newIDNotes = new Vector();
 		Vector newNotes = new Vector();
 		
 
 		// copia su newNotes delle note nell'ordine in cui compaiono ora nel testo
 		for (int i = 0; i < ndrId.size(); i++) {
-			if (getNotaById((String) ndrId.get(i)) != null){
-
-				Node oldNota = getNotaById((String) ndrId.get(i));
+			Node oldNota = getNotaById((String) ndrId.get(i));
+			if (oldNota != null){
 				String oldId = UtilDom.getAttributeValueAsString(oldNota, "id");
-				
 				//PERCHè SI FA IL CLONE?
 				Node clonedNota = oldNota.cloneNode(true);
 				UtilDom.setIdAttribute(clonedNota, oldId);
-				newNotes.add(clonedNota);			
+				newNotes.add(clonedNota);
+				newIDNotes.add(oldId);
+
 			}
 			else{
+				
 				if(logger.isDebugEnabled())
 				    logger.debug("il nodo di " + ndrId.get(i) + " e' null");
 			}
 		}
 
 		Vector oldNotes = getOldNotes();
-
-		if (oldNotes.size() > newNotes.size()) {
+		//newNotes non ha ripetizioni quindi sicuramente è <= di oldNotes
+		if (oldNotes.size() > newIDNotes.size()) {
 			if(logger.isDebugEnabled())
 				logger.debug("ci sono note senza ndr; completa la lista");
 			// completa il vector newNotes da oldNotes con id != note in
 			// newNotes (aggiunge IN FONDO le note che non hanno un ndr)
 			for (int i = 0; i < oldNotes.size(); i++) {
-				if (ndrId.indexOf(UtilDom.getAttributeValueAsString((Node) oldNotes.get(i), "id")) == -1)
-					newNotes.add(oldNotes.get(i));
+				if (newIDNotes.indexOf(UtilDom.getAttributeValueAsString((Node)oldNotes.get(i), "id")) == -1){
+					newIDNotes.add(UtilDom.getAttributeValueAsString((Node)oldNotes.get(i), "id"));
+					newNotes.add((Node)oldNotes.get(i));
+				}					
 				
 			}
 		}
@@ -1428,15 +1447,16 @@ public class AggiornaIdFrozenLaw {
 				parent = ((Node) oldNotes.get(i)).getParentNode();
 				if(logger.isDebugEnabled())
 					logger.debug("replace oldNote " + UtilDom.getAttributeValueAsString((Node) oldNotes.get(i), "id") + " with newNote "
-						+ UtilDom.getAttributeValueAsString((Node) newNotes.get(i), "id"));
+						+ newIDNotes.get(i));
 				// FIXME: non e' detto che il parent (redazionale) sia lo stesso per tutte le note; 
 				// e.g. note negli allegati
-				parent.replaceChild((Node) newNotes.get(i), (Node) oldNotes.get(i));
+				parent.replaceChild((Node)newNotes.get(i), (Node) oldNotes.get(i));
 			}
 			return true;
 		} else{
+			
 			if(logger.isDebugEnabled())
-				logger.debug("ci sono ndr senza nota");
+				logger.debug("ci sono note non riferite");
 		}
 		return false;
 	}
@@ -1520,6 +1540,7 @@ public class AggiornaIdFrozenLaw {
 				for (int j = 0; j < attrList.getLength(); j++) {
 					Attr attributo = (Attr) (attrList.item(j));
 					if(this.removedIDs.contains(attributo.getValue())){
+						
 						attributo.setValue("");
 						
 					}
@@ -1538,5 +1559,7 @@ public class AggiornaIdFrozenLaw {
 				getAndKillReferringAttributes(figlio);
 			}
 	}
+
+
 	
 }

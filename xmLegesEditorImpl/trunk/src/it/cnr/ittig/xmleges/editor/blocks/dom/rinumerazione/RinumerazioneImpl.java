@@ -121,6 +121,7 @@ public class RinumerazioneImpl implements Rinumerazione, DocumentBeforeInitUndoA
 			logger.debug("tipo: " + tipo);
 		}
 		aggiornaNumerazioneAndLink = new AggiornaNumerazioneAndLink(this);
+		problemsPane.delete();
 	}
 
 	// ///////////////////////////////////////////////// Rinumerazione Interface
@@ -130,15 +131,18 @@ public class RinumerazioneImpl implements Rinumerazione, DocumentBeforeInitUndoA
 		
 		Vector removed = getRemoved(document);
 		if(removed!=null && removed.size()>0){
-			for(int i = 0; i<removed.size();i++){
-				System.out.println("removed "+removed.elementAt(i));				
-			}
+//			for(int i = 0; i<removed.size();i++){
+//				System.out.println("removed "+removed.elementAt(i));				
+//			}
 			
 			addIdProblems(root, removed);
 				
 			
 			aggiornaNumerazioneAndLink.setRemovedIDs(removed);
 			
+		}
+		else{
+			aggiornaNumerazioneAndLink.setRemovedIDs(null);
 		}
 		logger.debug("rinumerazione START");
 		
@@ -277,6 +281,7 @@ public class RinumerazioneImpl implements Rinumerazione, DocumentBeforeInitUndoA
 				Attr attributo = (Attr) (attrList.item(j));
 				if(removed.contains(attributo.getValue())){
 					problemsPane.addProblem(new IdProblemImpl(node,Problem.WARNING,attributo.getName(),attributo.getValue()));
+					
 					
 				}
 				
