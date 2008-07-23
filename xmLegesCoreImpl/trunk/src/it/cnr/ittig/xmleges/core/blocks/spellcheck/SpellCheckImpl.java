@@ -118,10 +118,8 @@ public class SpellCheckImpl extends SpellCheckAdapter implements SpellCheck, Log
 		
 		
 	
-		text= "qusto testo e corrretto";
-		wordFinder = new CharSequenceWordFinder(text);
+		//text= "qusto testo e corrretto";
 		
-		spellCheck.check(wordFinder, this);
 		
 		
 				
@@ -130,17 +128,16 @@ public class SpellCheckImpl extends SpellCheckAdapter implements SpellCheck, Log
 		test(spellCheck, "più");
 		test(spellCheck, "mas");
 		
-//		spellCheck.addSpellCheckListener(this);
-//
-//		if (text != null) {
-//			this.testo = text;
-//			invalidWordsVect = new Vector();
-//			spellCheck.checkSpelling(new StringWordTokenizer(text));
-//
-//			SpellCheckWord[] ret = new SpellCheckWord[invalidWordsVect.size()];
-//			invalidWordsVect.copyInto(ret);
-//			return ret;
-//		}
+
+		if (text != null) {
+			this.testo = text;
+			invalidWordsVect = new Vector();
+			spellCheck.check(new CharSequenceWordFinder(text), this);
+			
+			SpellCheckWord[] ret = new SpellCheckWord[invalidWordsVect.size()];
+			invalidWordsVect.copyInto(ret);
+			return ret;
+		}
 		return null;
 	}
 
@@ -161,16 +158,14 @@ public class SpellCheckImpl extends SpellCheckAdapter implements SpellCheck, Log
 		int startOffset = event.getCurrentWord().getStart();//.getWordContextPosition();
 		int endOffset = startOffset + event.getCurrentWord().length();
 		
-		String[] sugg = getSuggestions(event.getCurrentWord().getText());
+		//String[] sugg = getSuggestions(event.getCurrentWord().getText());
 		
-		for(int i=0;i<sugg.length;i++){
-			System.err.println("sugg for "+event.getCurrentWord().getText() +": "+ sugg[i]);
-		}
+		//for(int i=0;i<sugg.length;i++){
+		//	System.err.println("sugg for "+event.getCurrentWord().getText() +": "+ sugg[i]);
+		//}
 		
-		// int startOffset = testo.indexOf(event.getInvalidWord());
-		// int endOffset = startOffset+event.getInvalidWord().length();
-		//if (event.getCurrentWord().getText().trim().length() > 1)
-			//invalidWordsVect.add(new SpellCheckWordImpl(event.getCurrentWord().getText(), startOffset, endOffset));
+		if (event.getCurrentWord().getText().trim().length() > 1)
+			invalidWordsVect.add(new SpellCheckWordImpl(event.getCurrentWord().getText(), startOffset, endOffset));
 	}
 
 	public String[] getSuggestions(String word) {
@@ -180,7 +175,7 @@ public class SpellCheckImpl extends SpellCheckAdapter implements SpellCheck, Log
 				String[] ret = new String[suggestions.size()];
 				int i = 0;
 				for (Iterator suggestedWord = suggestions.iterator(); suggestedWord.hasNext();)
-					ret[i++] = (((Word) suggestedWord.next()).getText());
+					ret[i++] = (String)suggestedWord.next();
 				return ret;
 			}
 		}
