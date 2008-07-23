@@ -10,15 +10,22 @@ import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.preference.PreferenceManager;
 import it.cnr.ittig.xmleges.core.services.spellcheck.SpellCheck;
 import it.cnr.ittig.xmleges.core.services.spellcheck.SpellCheckWord;
-import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
+import it.cnr.ittig.xmleges.core.services.threads.ThreadManager;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
 
-import java.io.File;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Vector;
+import java.util.zip.ZipFile;
 
-import com.xmlmind.spellcheck.engine.SpellChecker;
-import com.xmlmind.spellcheck.engine.SpellException;
-
+import org.dts.spell.SpellChecker;
+import org.dts.spell.dictionary.OpenOfficeSpellDictionary;
+import org.dts.spell.dictionary.SpellDictionary;
+import org.dts.spell.event.SpellCheckAdapter;
+import org.dts.spell.event.SpellCheckEvent;
+import org.dts.spell.finder.CharSequenceWordFinder;
+import org.dts.spell.finder.Word;
 
 
 
@@ -32,177 +39,152 @@ import com.xmlmind.spellcheck.engine.SpellException;
  * <dd><a href="http://www.ittig.cnr.it" target="_blank">Istituto di Teoria e Tecniche
  * dell'Informazione Giuridica (ITTIG) <br>
  * Consiglio Nazionale delle Ricerche - Italy </a></dd>
- * <dt><b>License: </b></dt>
+ * <dt><b>Lincense: </b></dt>
  * <dd><a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU General Public
  * License </a></dd>
  * </dl>
  * 
  * @version 1.0
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
- * @author <a href="mailto:agnoloni@ittig.cnr.it">Tommaso Agnoloni </a>
+ * @author <a href="mailto:agnoloni@dsi.unifi.it">Tommaso Agnoloni </a>
  */
-public class SpellCheckImpl implements SpellCheck, Loggable, Serviceable, Initializable {
+public class SpellCheckImpl extends SpellCheckAdapter implements SpellCheck, Loggable, Serviceable, Initializable  {
 
-	boolean libreriaCaricata;
-	
 	Logger logger;
 
-	UtilMsg utilMsg;
-	
 	PreferenceManager preferenceManager;
 
 	I18n i18n;
+
+	private static String dictFile = "it_IT.zip";
+
+	private static String phonetFile = null;
+
 	
-	private static String dictPath = UtilFile.getTempDirName()+"/it";
+	private SpellDictionary dictionary = null;
 	
-	private static String dictName = "it.dar";
-	
-	private SpellChecker checker=null;
-	
+	private SpellChecker spellCheck;
+
+	private List suggestions;
+
+	private Vector invalidWordsVect;
+
 	private String testo;
+
+	ThreadManager threadManager;
+	
+	CharSequenceWordFinder wordFinder;
 
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
 	}
 
 	public void service(ServiceManager serviceManager) throws ServiceException {
-		//threadManager = (ThreadManager) serviceManager.lookup(ThreadManager.class);
+		threadManager = (ThreadManager) serviceManager.lookup(ThreadManager.class);
 		i18n = (I18n) serviceManager.lookup(I18n.class);
-		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 	}
 
 	public void initialize() throws Exception {
-		
-		// copia dictName in dictPath se non esiste giï¿½
-		new File(dictPath).mkdir();
-	    File dictFile = new File(dictPath + File.separator,dictName);
-	    if(!dictFile.exists()){
-		   UtilFile.copyFile(getClass().getResourceAsStream(dictName),dictFile);
-		   UtilFile.copyFile(getClass().getResourceAsStream("language"),new File(dictPath + File.separator,"language"));
-		   UtilFile.copyFile(getClass().getResourceAsStream("default"),new File(dictPath + File.separator,"default"));
-	    }
-		
-		if (null==checker){
-		  try{	
-			checker = new SpellChecker(dictPath);					
-			try{	//Intercetto se ï¿½ scaduta la demo della libreria "xsc.jar"
-			   checker.setPersonalDictionaryPath("dizionarioUtente_%L%.txt");
-			   checker.setSelectedLanguage("it");	
-			}
-			catch(SpellException ex){
-			   logger.error(ex.getMessage(),ex);
-			}
-		    logger.debug("---Vocabolario caricato---"+checker.getSelectedLanguage()+"---");
-		    libreriaCaricata = true;
-		  }
-		  catch(Exception ex){
-			   logger.error(ex.getMessage(),ex);
-			   //utilMsg.msgInfo("spellcheck.error.library");
-			   libreriaCaricata = false;
-		  }
-		}
+
+		// FIXME per il momento evito di caricare il dizionario all'avvio visto che prende
+		// molta memoria
+
+		// threadManager.execute(new Runnable(){
+		// public void run(){
+		// try{
+		// dictionary = new SpellDictionaryHashMap(new
+		// InputStreamReader(getClass().getResourceAsStream(dictFile)));
+		// }
+		// catch(IOException e){
+		// logger.error(e.getMessage(),e);
+		// }
+		// }
+		// });
 	}
 
-	
-	public SpellCheckWord[] spellCheck(String text) {	
-		if (text != null) {
-			this.testo = text;
-			return doSearch();
+	public SpellCheckWord[] spellCheck(String text) {
+
+		try {
+			
+			ZipFile zip = new ZipFile(UtilFile.getFileFromTemp(dictFile).getAbsolutePath());
+			
+			if (null == dictionary)
+				dictionary = new OpenOfficeSpellDictionary(zip);//dictFile/*i18n.getTextFor("spellcheck.dictionary")*/));
+		} catch (IOException e) {
+			logger.error(e.getMessage(), e);
 		}
+		spellCheck = new SpellChecker(dictionary);
+		spellCheck.setCaseSensitive(false);
+		
+		
+	
+		text= "qusto testo e corrretto";
+		wordFinder = new CharSequenceWordFinder(text);
+		
+		spellCheck.check(wordFinder, this);
+		
+		
+				
+		test(spellCheck, "piu");
+		test(spellCheck, "gatto");
+		test(spellCheck, "più");
+		test(spellCheck, "mas");
+		
+//		spellCheck.addSpellCheckListener(this);
+//
+//		if (text != null) {
+//			this.testo = text;
+//			invalidWordsVect = new Vector();
+//			spellCheck.checkSpelling(new StringWordTokenizer(text));
+//
+//			SpellCheckWord[] ret = new SpellCheckWord[invalidWordsVect.size()];
+//			invalidWordsVect.copyInto(ret);
+//			return ret;
+//		}
 		return null;
 	}
+
 	
-	
-	private SpellCheckWord[] doSearch() {
-		
-      Vector listaparole = new Vector();		
-      if (null!=checker) {
-        boolean controlla = true;
-	    try{
-		checker.setInput(testo);
-		int err = checker.checkNext();
-		int offsetparziale = 0;
-		while (controlla) {			
-			if (err == SpellChecker.ERR_NONE) {
-			    controlla = false;
-				break;
-			}
-			String failingWord = checker.getWord();
-			int replacePos = checker.getPosition();
-			int replaceSize = failingWord.length();
-
-			switch(err) {
-			case SpellChecker.ERR_DUPLICATE:
-			case SpellChecker.ERR_REPLACE:
-			case SpellChecker.ERR_WRONG_CAP:
-			case SpellChecker.ERR_PUNCTUATION:
-				offsetparziale = offsetparziale+replacePos+replaceSize+1;
-				if (offsetparziale <= testo.length()) {
-					checker.setInput(testo.substring(offsetparziale,testo.length()));
-					err = checker.checkNext();
-				}
-				else controlla = false;
-				break;
-			case SpellChecker.ERR_UNKNOWN_WORD:
-				
-				//GESTIONE REGOLE:
-				boolean aggiungi = false;
-				//regola per l'apostrofo
-				if (failingWord.indexOf("'")!=-1) {
-					 
-				    String[] parti = failingWord.split("'");
-				    String nuovaParola = parti[0];
-				    for (int j=1; j<parti.length; j++) 
-				        nuovaParola.concat("' ").concat(parti[j]);
-				    if (getSuggestions(nuovaParola)!=null) aggiungi=true;  
-				}
-				else aggiungi=true;
-				
-				if (aggiungi) listaparole.add(new SpellCheckWordImpl(failingWord, offsetparziale+replacePos, offsetparziale+replacePos+replaceSize));
-
-				
-				offsetparziale = offsetparziale+replacePos+replaceSize+1;
-
-				if (offsetparziale <= testo.length()) {
-					checker.setInput(testo.substring(offsetparziale,testo.length()));
-					err = checker.checkNext();
-				}
-				else controlla = false;
-				break;
-			}
+	private void test(SpellChecker checker, String txt){
+		Word badWord =checker.checkSpell(txt);
+		if(badWord == null){
+			System.out.println("OK");
+		}else{
+			System.out.println("WRONG");
 		}
-	    }
-		catch(SpellException ex){
-			System.err.println(ex.getMessage());
-		}
-      }
-      SpellCheckWord[] ret = new SpellCheckWord[listaparole.size()];
-	  listaparole.copyInto(ret);
-		
-	  return ret;
 	}
 	
-	public String[] getSuggestions(String word) {
+	public void spellingError(SpellCheckEvent event) {
 		
-	 if (word != null) {
-	  try {
+		System.err.println("INVALID WORD:     "+event.getCurrentWord().getText());
+
+		int startOffset = event.getCurrentWord().getStart();//.getWordContextPosition();
+		int endOffset = startOffset + event.getCurrentWord().length();
 		
-		checker.setInput(word);  
+		String[] sugg = getSuggestions(event.getCurrentWord().getText());
 		
-		int err = checker.checkNext();
-		if (err == SpellChecker.ERR_NONE) return null;
-		switch(err) {	
-			   case SpellChecker.ERR_UNKNOWN_WORD:
-		
-		       String[] suggerimenti = checker.getSuggestions().toArray();	    
-  		       return suggerimenti;
-		     
+		for(int i=0;i<sugg.length;i++){
+			System.err.println("sugg for "+event.getCurrentWord().getText() +": "+ sugg[i]);
 		}
 		
-	  } catch(SpellException ex){}
-	 }		
-     return null;
+		// int startOffset = testo.indexOf(event.getInvalidWord());
+		// int endOffset = startOffset+event.getInvalidWord().length();
+		//if (event.getCurrentWord().getText().trim().length() > 1)
+			//invalidWordsVect.add(new SpellCheckWordImpl(event.getCurrentWord().getText(), startOffset, endOffset));
+	}
 
+	public String[] getSuggestions(String word) {
+		if (word != null) {
+			List suggestions = dictionary.getSuggestions(word, 5);
+			if (suggestions.size() > 0) {
+				String[] ret = new String[suggestions.size()];
+				int i = 0;
+				for (Iterator suggestedWord = suggestions.iterator(); suggestedWord.hasNext();)
+					ret[i++] = (((Word) suggestedWord.next()).getText());
+				return ret;
+			}
+		}
+		return null;
 	}
 
 	public String[] getDictionaries() {
@@ -222,55 +204,8 @@ public class SpellCheckImpl implements SpellCheck, Loggable, Serviceable, Initia
 		// TODO setCustomDictionary
 	}
 
-	public void addWord(String word, boolean temporaryDict) {
+	public void addWord(String word) {
 		// TODO addWord
-	}
-	
-	public void addSuggestion(String word, String suggestion, boolean temporaryDict) {		
-		
-		try {		
-		
-		  String dictionary = null;
-		  if (temporaryDict) dictionary = SpellChecker.TEMPORARY_DICT;
-		  else dictionary = SpellChecker.PERSONAL_DICT;		
-	      //se la parola ERRATA ï¿½ corretta con una NON PRESENTE fra i suggerimenti
-	      if (!isSuggestion(word, suggestion)) {
-	             //Inserisce la parola errata e il suggerimento per la parola impostato
-		         checker.learnSuggestion(word,suggestion,dictionary);
-		         //Inserisce la parola suggerita come giusta fra quelle giuste
-		         checker.learnWord(suggestion,dictionary);
-		         
-		         
-   		         
-		         //Salva il dizionario utente (QUESTO puï¿½ essere MESSO ALTROVE)
-		         if (!temporaryDict) checker.savePersonalDictionaries();
-		  }    
-		     
-		      
-		} catch (Exception ex) {
-			System.err.println(ex.getMessage());
-		}
-	}
-	
-	private boolean isSuggestion(String word, String suggestion) {
-		
-		  try {
-			
-			checker.setInput(word);  
-			
-			int err = checker.checkNext();
-			if (err == SpellChecker.ERR_NONE) return false;
-			switch(err) {	
-				   case SpellChecker.ERR_UNKNOWN_WORD:
-			
-			       String[] suggerimenti = checker.getSuggestions().toArray();
-			       for (int j=0; j<suggerimenti.length; j++)
-			    	   if (suggestion.equals(suggerimenti[j])) return true;
-	  		       return false;
-			}
-			
-		  } catch(SpellException ex){}
-		  return false;
 	}
 
 	public void removeWord(String word) {
@@ -281,7 +216,26 @@ public class SpellCheckImpl implements SpellCheck, Loggable, Serviceable, Initia
 		// TODO modifyWord
 	}
 
-	public boolean isLoad() {
-		return libreriaCaricata;
+	public void addSuggestion(String word, String suggestion, boolean temporaryDict) {
+		// TODO Auto-generated method stub
+		
 	}
+
+	public void addWord(String word, boolean temporaryDict) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public boolean isLoad() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	
+	
+	
+	
+	
+
+
 }
