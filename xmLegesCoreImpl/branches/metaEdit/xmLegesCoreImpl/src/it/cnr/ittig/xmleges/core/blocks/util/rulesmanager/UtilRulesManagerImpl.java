@@ -458,7 +458,7 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 				dtdRulesManager.fillRequiredAttributes(node);
 			NodeList list = node.getChildNodes();
 			for (int i = 0; i < list.getLength(); i++) {
-				dtdRulesManager.fillRequiredAttributes(list.item(i));
+				fillRecursiveRequiredAttributes(list.item(i));
 			}
 		}
 		catch(DtdRulesManagerException ex){

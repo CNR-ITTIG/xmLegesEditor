@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<D-A-Modello>
+<regole>
+<costituzione>
+<introduzione>
+<disposizione value="dsp:ambito" >
+<argomento value="dsp:destinatario" />
+<argomento value="dsp:attivita" />
+<argomento value="dsp:oggetto" />
+<argomento value="dsp:norma" />
+</disposizione>
+</introduzione>
+<definizione>
+<disposizione value="dsp:procedura" >
+<argomento value="dsp:destinatario" />
+<argomento value="dsp:controparte" />
+<argomento value="dsp:azione" />
+
+<argomento value="dsp:oggetto" />
+</disposizione>
+<disposizione value="dsp:termine_dominio" >
+<argomento value="dsp:definiens" />
+<argomento value="dsp:definiendum" />
+</disposizione>
+</definizione>
+<creazione>
+<disposizione value="dsp:destitutiva" >
+<argomento value="dsp:destinatario" />
+</disposizione>
+<disposizione value="dsp:istitutiva" >
+<argomento value="dsp:destinatario" />
+</disposizione>
+<disposizione value="dsp:organizzativa" >
+<argomento value="dsp:destinatario" />
+</disposizione>
+
+</creazione>
+<attribuzione>
+<disposizione value="dsp:diritto" >
+<argomento value="dsp:destinatario" />
+<argomento value="dsp:controparte" />
+<argomento value="dsp:attivita" />
+<argomento value="dsp:oggetto" />
+</disposizione>
+<disposizione value="dsp:dovere" >
+<argomento value="dsp:destinatario" />
+<argomento value="dsp:controparte" />
+<argomento value="dsp:attivita" />
+<argomento value="dsp:oggetto" />
+</disposizione>
+<disposizione value="dsp:potere" >
+<argomento value="dsp:destinatario" />
+<argomento value="dsp:controparte" />
+
+<argomento value="dsp:attivita" />
+<argomento value="dsp:oggetto" />
+</disposizione>
+</attribuzione>
+</costituzione>
+<regolazione>
+<azione>
+<disposizione value="dsp:divieto" >
+<argomento value="dsp:destinatario" />
+<argomento value="dsp:controparte" />
+<argomento value="dsp:azione" />
+<argomento value="dsp:oggetto" />
+</disposizione>
+<disposizione value="dsp:obbligo" >
+<argomento value="dsp:destinatario" />
+<argomento value="dsp:controparte" />
+<argomento value="dsp:azione" />
+
+<argomento value="dsp:oggetto" />
+</disposizione>
+<disposizione value="dsp:permesso" >
+<argomento value="dsp:destinatario" />
+<argomento value="dsp:controparte" />
+<argomento value="dsp:azione" />
+<argomento value="dsp:oggetto" />
+</disposizione>
+<disposizione value="dsp:pretesa" >
+<argomento value="dsp:destinatario" />
+<argomento value="dsp:controparte" />
+<argomento value="dsp:azione" />
+<argomento value="dsp:oggetto" />
+</disposizione>
+</azione>
+<riparazione>
+<disposizione value="dsp:nullita" >
+
+<argomento value="dsp:destinatario" />
+<argomento value="dsp:azione" />
+<argomento value="dsp:effetto" />
+<argomento value="dsp:oggetto" />
+</disposizione>
+<disposizione value="dsp:violazione" >
+<argomento value="dsp:destinatario" />
+<argomento value="dsp:azione" />
+<argomento value="dsp:oggetto" />
+<argomento value="dsp:pena" />
+</disposizione>
+</riparazione>
+</regolazione>
+</regole>
+<modifiche>
+<derogazione>
+<disposizione value="dsp:conferma" >
+
+<argomento value="dsp:norma" />
+</disposizione>
+<disposizione value="dsp:eccezione" >
+<argomento value="dsp:norma" />
+</disposizione>
+<disposizione value="dsp:estensione" >
+<argomento value="dsp:norma" />
+</disposizione>
+</derogazione>
+<modificazione>
+<disposizione value="dsp:abrogazione" >
+<argomento value="dsp:norma" />
+</disposizione>
+<disposizione value="dsp:integrazione" >
+<argomento value="dsp:norma" />
+</disposizione>
+<disposizione value="dsp:sostituzione" >
+
+<argomento value="dsp:norma" />
+</disposizione>
+</modificazione>
+</modifiche>
+</D-A-Modello>
+	
+

@@ -442,6 +442,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                         <item action="editor.meta.urn" />
                         <item action="editor.meta.descrittori.materie" />  
                     </menu>
+                    <menu action="menu.editor.metaedit">
+                       <item action="editor.metaedit.edit" />
+                    </menu>
                     <menu action="menu.editor.revisioni">
                         <item action="editor.revisioni.inserisci" />
                         <item action="editor.revisioni.sopprimi" />
@@ -605,6 +608,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <item action="editor.revisioni.testoafronte" />
                     <item action="editor.revisioni.messaggio" />
                     <item action="editor.revisioni.emendamenti" />
+                </toolbar>
+                <toolbar name="editor.metaedit" floatable="false" rollover="true">
+                    <item action="editor.metaedit.edit" />
                 </toolbar>
                 <toolbar name="frame" floatable="false" rollover="true">
                     <item action="frame.pane.maximize" />
@@ -787,6 +793,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 class="it.cnr.ittig.xmleges.editor.blocks.action.annessi.AnnessiActionImpl"
     />
     
+   
     <component  lifestyle="singleton" activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.action.autorita.AutoritaActionImpl"
     />
@@ -877,6 +884,11 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     />
     
     
+    <component  lifestyle="singleton" activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.action.metaedit.MetaEditActionImpl"
+    />
+    
+    
         
     <!-- ================================================================== -->
     <!-- ========================================================= DOMS === -->
@@ -938,6 +950,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     
 
     <component  class="it.cnr.ittig.xmleges.editor.blocks.dom.revisioni.RevisioniImpl" />
+    
+    
+    <component  class="it.cnr.ittig.xmleges.editor.blocks.dom.metaedit.MetaEditImpl" />
 
     
     
@@ -1110,6 +1125,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.xmleges.linker.XmLegesLinkerFormImpl">
         <configuration external="true" resource="XmLegesLinkerFormImpl.xconfig" />
     </component>
+    
+    
+     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.metaedit.MetaEditFormImpl" />
     
     
     <!-- ================================================================== -->
@@ -1416,11 +1434,14 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
         </configuration>
     </component>
     
+    
     <component  class="it.cnr.ittig.xmleges.core.blocks.util.ui.UtilUIImpl" />
     
     <component  class="it.cnr.ittig.xmleges.editor.blocks.util.dom.NirUtilDomImpl" />
     
     <component  class="it.cnr.ittig.xmleges.editor.blocks.util.urn.NirUtilUrnImpl" />
+    
+    <component  class="it.cnr.ittig.xmleges.editor.blocks.util.metaedit.ModelloDAImpl"/>
     
     <component  class="it.cnr.ittig.xmleges.core.blocks.help.HelpImpl" >
 	    <configuration external="true" resource="HelpImpl.xconfig" />
