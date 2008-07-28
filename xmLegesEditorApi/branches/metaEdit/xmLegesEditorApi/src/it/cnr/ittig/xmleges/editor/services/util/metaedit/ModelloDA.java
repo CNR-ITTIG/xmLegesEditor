@@ -49,6 +49,13 @@ public interface ModelloDA extends Service {
 	
 	/**
 	 * 
+	 * @param disposizione
+	 * @return
+	 */
+	public Vector getArgomentiListFor(String disposizione);
+	
+	/**
+	 * 
 	 * @param label
 	 * @return
 	 */

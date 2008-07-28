@@ -100,6 +100,20 @@ public class ModelloDAImpl implements  ModelloDA, Initializable, Loggable, Servi
 		return this.argomentiList;
 	}
 	
+	public Vector getArgomentiListFor(String disposizione){
+		Vector ret = new Vector();
+		Node dispNode = getClassificationFor(disposizione);
+		if(dispNode!=null){
+			NodeList children = dispNode.getChildNodes();
+			for(int i=0;i<children.getLength();i++){
+				if(children.item(i).getNodeName().equalsIgnoreCase("argomento"))
+					ret.add(UtilDom.getAttributeValueAsString(children.item(i), "value"));
+			}
+		  return ret;
+		}
+		return null;
+	}
+	
 	
 	private void createArgomentiList(){
 		
