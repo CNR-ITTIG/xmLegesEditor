@@ -797,13 +797,13 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
           <p style="background-color:yellow;font-weight:normal;">
                 <br/>
                 	<b>
-                		<xsl:value-of select="translate(substring-after(name(/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='regole']/*/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../.),'dsp:'),$lower,$upper)"/>
+                		&#160;<xsl:value-of select="translate(substring-after(name(/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='regole']/*/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../.),'dsp:'),$lower,$upper)"/>
                 	</b>
                 <br/>
                 <br/>
             <em>
                 <xsl:for-each select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='regole']/*/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../*/*/*[name()='dsp:keyword']">
-                    <xsl:value-of select="substring-after(name(../../.),'dsp:')" /> = <xsl:value-of select="@valore"/><br/>
+                    &#160;<xsl:value-of select="substring-after(name(../../.),'dsp:')" /> = <xsl:value-of select="@valore"/><br/>
                 </xsl:for-each>
             </em>
           </p>
@@ -815,13 +815,13 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             <p style="background-color:silver;font-weight:normal;">
             	<br/>
             		<b>
-                		<xsl:value-of select="translate(substring-after(name(/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifiche']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../.),'dsp:'),$lower,$upper)"/>
+                		&#160;<xsl:value-of select="translate(substring-after(name(/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifiche']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../.),'dsp:'),$lower,$upper)"/>
                 	</b>
                 <br/>
                 <br/>
             <em>
                 <xsl:for-each select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifiche']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../*/*/*[name()='dsp:keyword']">
-                    <xsl:value-of select="substring-after(name(../../.),'dsp:')"/> = <xsl:value-of select="@valore"/><br/>
+                    &#160;<xsl:value-of select="substring-after(name(../../.),'dsp:')"/> = <xsl:value-of select="@valore"/><br/>
                 </xsl:for-each>
             </em>
           </p>
