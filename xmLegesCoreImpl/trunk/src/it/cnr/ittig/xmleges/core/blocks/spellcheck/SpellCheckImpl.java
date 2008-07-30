@@ -13,19 +13,24 @@ import it.cnr.ittig.xmleges.core.services.spellcheck.SpellCheckWord;
 import it.cnr.ittig.xmleges.core.services.threads.ThreadManager;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
 
+
+import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
-import java.util.zip.ZipFile;
+
 
 import org.dts.spell.SpellChecker;
 import org.dts.spell.dictionary.OpenOfficeSpellDictionary;
 import org.dts.spell.dictionary.SpellDictionary;
+import org.dts.spell.dictionary.SpellDictionaryException;
 import org.dts.spell.event.SpellCheckAdapter;
 import org.dts.spell.event.SpellCheckEvent;
 import org.dts.spell.finder.CharSequenceWordFinder;
-import org.dts.spell.finder.Word;
+
+
+
 
 
 
@@ -58,22 +63,17 @@ public class SpellCheckImpl extends SpellCheckAdapter implements SpellCheck, Log
 
 	private static String dictFile = "it_IT.zip";
 
-	private static String phonetFile = null;
-
-	
 	private SpellDictionary dictionary = null;
 	
 	private SpellChecker spellCheck;
 
-	private List suggestions;
-
 	private Vector invalidWordsVect;
-
-	private String testo;
 
 	ThreadManager threadManager;
 	
 	CharSequenceWordFinder wordFinder;
+	
+	private String personal_dictionary="personal_dict.txt";
 
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
@@ -86,51 +86,24 @@ public class SpellCheckImpl extends SpellCheckAdapter implements SpellCheck, Log
 
 	public void initialize() throws Exception {
 
-		// FIXME per il momento evito di caricare il dizionario all'avvio visto che prende
-		// molta memoria
-
-		// threadManager.execute(new Runnable(){
-		// public void run(){
-		// try{
-		// dictionary = new SpellDictionaryHashMap(new
-		// InputStreamReader(getClass().getResourceAsStream(dictFile)));
-		// }
-		// catch(IOException e){
-		// logger.error(e.getMessage(),e);
-		// }
-		// }
-		// });
-	}
-
-	public SpellCheckWord[] spellCheck(String text) {
-
 		try {
+						
+			if(!UtilFile.fileExistInTemp(personal_dictionary)){
+				UtilFile.createTemp(personal_dictionary);
+			}
 			
-			ZipFile zip = new ZipFile(UtilFile.getFileFromTemp(dictFile).getAbsolutePath());
+			dictionary = new OpenOfficeSpellDictionary(getClass().getResourceAsStream(dictFile),UtilFile.getFileFromTemp(personal_dictionary));			
+			spellCheck = new SpellChecker(dictionary);
+			spellCheck.setCaseSensitive(false);
 			
-			if (null == dictionary)
-				dictionary = new OpenOfficeSpellDictionary(zip);//dictFile/*i18n.getTextFor("spellcheck.dictionary")*/));
 		} catch (IOException e) {
 			logger.error(e.getMessage(), e);
 		}
-		spellCheck = new SpellChecker(dictionary);
-		spellCheck.setCaseSensitive(false);
 		
-		
-	
-		//text= "qusto testo e corrretto";
-		
-		
-		
-				
-		test(spellCheck, "piu");
-		test(spellCheck, "gatto");
-		test(spellCheck, "più");
-		test(spellCheck, "mas");
-		
+	}
 
+	public SpellCheckWord[] spellCheck(String text) {
 		if (text != null) {
-			this.testo = text;
 			invalidWordsVect = new Vector();
 			spellCheck.check(new CharSequenceWordFinder(text), this);
 			
@@ -141,29 +114,11 @@ public class SpellCheckImpl extends SpellCheckAdapter implements SpellCheck, Log
 		return null;
 	}
 
-	
-	private void test(SpellChecker checker, String txt){
-		Word badWord =checker.checkSpell(txt);
-		if(badWord == null){
-			System.out.println("OK");
-		}else{
-			System.out.println("WRONG");
-		}
-	}
-	
 	public void spellingError(SpellCheckEvent event) {
 		
-		System.err.println("INVALID WORD:     "+event.getCurrentWord().getText());
-
 		int startOffset = event.getCurrentWord().getStart();//.getWordContextPosition();
 		int endOffset = startOffset + event.getCurrentWord().length();
-		
-		//String[] sugg = getSuggestions(event.getCurrentWord().getText());
-		
-		//for(int i=0;i<sugg.length;i++){
-		//	System.err.println("sugg for "+event.getCurrentWord().getText() +": "+ sugg[i]);
-		//}
-		
+				
 		if (event.getCurrentWord().getText().trim().length() > 1)
 			invalidWordsVect.add(new SpellCheckWordImpl(event.getCurrentWord().getText(), startOffset, endOffset));
 	}
@@ -200,7 +155,17 @@ public class SpellCheckImpl extends SpellCheckAdapter implements SpellCheck, Log
 	}
 
 	public void addWord(String word) {
-		// TODO addWord
+		
+		if(!dictionary.isCorrect(word)){
+			try
+		    {	          
+		      dictionary.addWord(word);     
+		    }
+		    catch (SpellDictionaryException e)
+		    {
+		      e.printStackTrace();
+		    }
+		}
 	}
 
 	public void removeWord(String word) {
@@ -210,22 +175,13 @@ public class SpellCheckImpl extends SpellCheckAdapter implements SpellCheck, Log
 	public void modifyWord(String oldWord, String newWord) {
 		// TODO modifyWord
 	}
-
-	public void addSuggestion(String word, String suggestion, boolean temporaryDict) {
-		// TODO Auto-generated method stub
 		
-	}
-
-	public void addWord(String word, boolean temporaryDict) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	public boolean isLoad() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
+	
+	
 	
 	
 	

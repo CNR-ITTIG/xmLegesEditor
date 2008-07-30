@@ -515,10 +515,11 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 		else if(evt.getSource() == addButton) {
 		    logger.debug("add word");
 		    if (misspelledIndex != -1 && misspelledIndex < words.length) {
-			  DomSpellCheckWord word = words[misspelledIndex];
-			  String oldText = word.getNode().getNodeValue();
-			
-			  domSpellCheck.getSpellCheck().addSuggestion(oldText.substring(word.getSpellCheckWord().getStartOffset(),word.getSpellCheckWord().getEndOffset()),this.getWord(),false);			        
+//			  DomSpellCheckWord word = words[misspelledIndex];
+//			  String oldText = word.getNode().getNodeValue();			
+//			  domSpellCheck.getSpellCheck().addSuggestion(oldText.substring(word.getSpellCheckWord().getStartOffset(),word.getSpellCheckWord().getEndOffset()),this.getWord(),false);
+			  
+			  domSpellCheck.getSpellCheck().addWord(this.getWord());
 			      
  			  //if (!this.getWord().equals(oldText.substring(word.getSpellCheckWord().getStartOffset(),word.getSpellCheckWord().getEndOffset())))
 			  replaceAllWord(words, misspelledIndex);
@@ -565,7 +566,7 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 		logger.debug("endOffset: " + words[misspelledIndex].getSpellCheckWord().getEndOffset());
 		logger.debug("replace with " + this.getWord());
 		
-		domSpellCheck.getSpellCheck().addSuggestion(oldText.substring(words[misspelledIndex].getSpellCheckWord().getStartOffset(),words[misspelledIndex].getSpellCheckWord().getEndOffset()),this.getWord(), true);
+//		domSpellCheck.getSpellCheck().addWord(this.getWord());
 		
 		String newText = oldText.substring(0, words[misspelledIndex].getSpellCheckWord().getStartOffset()) + this.getWord()
 				+ oldText.substring(words[misspelledIndex].getSpellCheckWord().getEndOffset());
@@ -612,9 +613,9 @@ public class SpellCheckFormImpl implements SpellCheckForm, Loggable, Serviceable
 				logger.debug("endOffset: " + words[i].getSpellCheckWord().getEndOffset());
 				logger.debug("replace with " + this.getWord());
 				
-				if (i==misspelledIndex) { //aggiungo !volta la parola al dizionario
-					domSpellCheck.getSpellCheck().addSuggestion(oldText.substring(words[i].getSpellCheckWord().getStartOffset(),words[i].getSpellCheckWord().getEndOffset()),this.getWord(),true);
-				}
+//				if (i==misspelledIndex) { //aggiungo !volta la parola al dizionario
+//					domSpellCheck.getSpellCheck().addWord(this.getWord());
+//				}
 				
 				String newText = oldText.substring(0, words[i].getSpellCheckWord().getStartOffset()) + this.getWord()
 				+ oldText.substring(words[i].getSpellCheckWord().getEndOffset());
