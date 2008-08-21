@@ -17,9 +17,9 @@ import it.cnr.ittig.xmleges.core.util.xml.UtilXml;
 import it.cnr.ittig.xmleges.editor.services.form.metaedit.MetaEditForm;
 import it.cnr.ittig.xmleges.editor.services.util.metaedit.ModelloDA;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
+import javax.swing.JOptionPane;
 
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
@@ -40,6 +40,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.util.Vector;
 /**
  * <h1>Implementazione del servizio
  * <code>it.cnr.ittig.xmleges.editor.services.form.metaedit.MetaEditForm</code>.</h1>
@@ -108,6 +109,8 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
 	  
 	static String DISPOSIZIONE     = "disposizione";
 	static String ARGOMENTO		="argomento";
+	static String TAG_KEYWORDS	="dsp:keywords";
+	static String TAG_KEYWORD	="dsp:keyword";
 	static String F_XML_KEYWORDS 	 = "DisposizioniKeywords.xml";
 	
 	
@@ -171,7 +174,8 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
 	    				Object[] path = event.getPath().getPath();
 	    				Element eNode = (Element) path[path.length - 1];
 	    				if (eNode.getNodeName() == DISPOSIZIONE)
-	    					fillTreeArguments(eNode);
+	    				  fillTreeArguments(eNode);
+	    				  expandAll(treeArgomenti);
 	    			}
 	    		});  
 	    
@@ -183,6 +187,7 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
 	    				if (modelloDA.isDisposizione(eNode.getNodeName())){
 	    					expandTreeDisposizioni(eNode);
 	    					fillTreeArguments(eNode);
+	    					expandAll(treeArgomenti);
 	    				}
 	    			}
 	    }); 
@@ -262,63 +267,59 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
 	      }
 	 }
 	
+	public void expandAll(JTree tree) {
+	    int row = 0;
+	    while (row <tree.getRowCount()) { 
+	      tree.expandRow(row);
+	      row++;
+	      }
+	 }
+	
+	
+
 	
 	private void fillTreeArguments(Element e) {
 		
+		treeArgomenti.setModel(null);
+		
+		
 		// CASO POPOLAMENTO ALBERO ARGUMENTS DA SELEZIONE ALBERO DISPOSIZIONI   (AGGIUNTA)
 		
-		if (e.getNodeName() == DISPOSIZIONE) {		
+		if (e.getNodeName() == DISPOSIZIONE) {	
+			treeArgomenti.setModel(new DomArgumentTreeModel((convertTreeDAToArguments(e))));
 			
-			NodeList eList = e.getChildNodes();
-			dispRoot = new DefaultMutableTreeNode("Argomenti" + " " + i18n.getTextFor("dom."+e.getAttribute("value")));
-			for(int i=0; i<eList.getLength(); i++) {
-				Node n = eList.item(i);
-				if (n.getNodeType() == n.ELEMENT_NODE) {
-					Element eDisp = (Element) eList.item(i);
-					argChild = new DefaultMutableTreeNode(i18n.getTextFor("dom."+eDisp.getAttribute("value"))); 
-					dispRoot.add(argChild);
-				}
-			}
-			DefaultTreeModel treeModel = new DefaultTreeModel(dispRoot);
-			treeArgomenti.setModel(treeModel);
+			treeArgomenti.setCellRenderer(new DomArgumentTreeCellRenderer());
 		}  
 		
 		//CASO POPOLAMENTO ALBERO ARGUMENTS DA SELEZIONE ALBERO PARTIZIONI   (MODIFICA)
 		
 		else if(modelloDA.isDisposizione(e.getNodeName())){
-			
-			dispRoot = new DefaultMutableTreeNode("Argomenti" + " " + i18n.getTextFor("dom."+e.getNodeName()));
-			fillRecursiveTreeArguments(e,dispRoot);
-
-			DefaultTreeModel treeModel = new DefaultTreeModel(dispRoot);
-			treeArgomenti.setModel(treeModel);
-		
+			treeArgomenti.setModel(new DomArgumentTreeModel(e));
+			treeArgomenti.setCellRenderer(new DomArgumentTreeCellRenderer());
 		}
 		else
 			emptyTreeArguments();
 	}
 
 	
-	// Problema: uniformare visualizzazione Argomenti in AGGIUNTA E IN MODIFICA
-	// SI PUO RIFARE MEGLIO: qui ci arrivo con un dom dal documento; devo saltare il nodo keywords e prendere il valore dall'attributo di keyword
-	// si potrebbe usare un DomTreeModel anche per gli argomenti ?
-	private void fillRecursiveTreeArguments(Element e, DefaultMutableTreeNode root){
-		DefaultMutableTreeNode child;
-		NodeList eList = e.getChildNodes();
-		for(int i=0; i<eList.getLength(); i++) {
-			if(!eList.item(i).getNodeName().equals("dsp:keywords")){
-				if(!eList.item(i).getNodeName().equals("dsp:keyword"))
-					child = new DefaultMutableTreeNode(i18n.getTextFor("dom."+eList.item(i).getNodeName()));
-				else
-					child = new DefaultMutableTreeNode(UtilDom.getAttributeValueAsString(eList.item(i),"valore"));
-				root.add(child);
-			}else 
-				child = root;
-			fillRecursiveTreeArguments((Element)eList.item(i), child);
+	// converte il formato dell'albero degli argomenti in ModelloDA in quello usato per la visualizzazione 
+	private Node convertTreeDAToArguments(Node node){
+		Vector argomentiList = modelloDA.getArgomentiList();
+		
+		Node newNode = documentManager.getDocumentAsDom().createElement(UtilDom.getAttributeValueAsString(node, "value"));
+		NodeList child = node.getChildNodes();
+		if(argomentiList.contains(newNode.getNodeName())){
+			Node nodeKws = documentManager.getDocumentAsDom().createElement(TAG_KEYWORDS);
+			newNode.appendChild(nodeKws);
 		}
+		for(int i=0;i<child.getLength();i++){
+			newNode.appendChild(convertTreeDAToArguments(child.item(i)));
+		}
+		return newNode;
 	}
 	
 	
+
 	public void emptyTreeArguments() {
 		treeArgomenti.setModel(null);
 	}
@@ -425,7 +426,6 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
 				/*--- elemento con nome disposizione */		  
 				else  {
 					if (e.getTagName().trim().toLowerCase() == DISPOSIZIONE) {
-						setForeground(Color.darkGray);
 						setText(i18n.getTextFor("dom."+e.getAttribute("value")));
 					}
 					else
@@ -514,35 +514,162 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
 	}
 	
 	
-	  
+	
+	
+	////////////////////////////////////////////////////////////////////////
+	//
+	//	 Visualizzazione dell'albero ARGOMENTI
+    //
+	////////////////////////////////////////////////////////////////////////
+	
+	class DomArgumentTreeModel  implements TreeModel { 
+		public DomArgumentTreeModel(Node root) { this.root = root; } 
+		public Object getRoot() { return root;} 
+
+		public int getChildCount(Object parent) { 
+			Node node = (Node) parent; 
+			NodeList list = node.getChildNodes(); 
+			return list.getLength(); 
+		} 
+		public Object getChild(Object parent, int index) { 
+			Node node = (Node) parent; 
+			NodeList list = node.getChildNodes(); 
+			return list.item(index); 
+		} 
+		
+/* --- visualizzo anche i figli "dsp:keywords"  		
+		public int getChildCount(Object parent) { 			
+			int childCount = 0;
+			Node node = (Node) parent; 
+			NodeList list = node.getChildNodes(); 
+			for(int i=0; i<list.getLength();i++){
+				// visualizza tutto meno che dsp:keywords 
+				//if(!((Element)list.item(i)).getTagName().trim().startsWith("dsp:keywords"))
+					childCount++;
+			}		
+			return childCount;
+		} 
+/*----------------------------------------------------------*/
+
+/* --- visualizzo anche i figli "dsp:keywords"  		
+		public Object getChild(Object parent, int index) { 
+			Node node = (Node) parent; 
+			NodeList list = node.getChildNodes(); 
+			int pos = 0;
+			for(int i = 0, cnt = 0; i < getChildCount(node); i++) {
+				// visualizza tutto meno che dsp:keywords 
+				//if(!((Element)list.item(i)).getTagName().trim().startsWith("dsp:keywords")){
+				// PROBLEMA: se salto keywords saltano anche tutti i figli 
+					if (cnt++ == index) {
+						pos = i;
+						break;
+					}
+				//}
+			}
+			return list.item(pos);
+		}
+/*-----------------------------------------------------*/
+
+		public int getIndexOfChild(Object parent, Object child) { 
+			Node node = (Node) parent; 
+			NodeList list = node.getChildNodes(); 
+			for (int i = 0; i < list.getLength(); i++) 
+				if (getChild(node, i) == child) 
+					return i; 
+			return -1; 
+		} 
+
+		public boolean isLeaf(Object node) { return getChildCount(node) == 0; } 
+		public void valueForPathChanged(TreePath path, Object newValue) {} 
+		public void addTreeModelListener(TreeModelListener l) {} 
+		public void removeTreeModelListener(TreeModelListener l) {} 
+		
+		Node root;
+		
+	} 
+	
+	
+	
+	
+	class DomArgumentTreeCellRenderer extends DefaultTreeCellRenderer { 
+		public Component getTreeCellRendererComponent(JTree tree, Object value,	boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus) {
+			super.getTreeCellRendererComponent(tree, value,selected, expanded, leaf, row, hasFocus);
+			Node node = (Node) value;
+			
+			if (modelloDA.isDisposizione(node.getNodeName().trim().toLowerCase())) { 					
+				setText("Argomenti di "+(i18n.getTextFor("dom."+node.getNodeName()).startsWith("dom")?node.getNodeName():i18n.getTextFor("dom."+node.getNodeName())));
+			} 
+			else if (node.getNodeName().trim().toLowerCase() == TAG_KEYWORD) {
+				setText(UtilDom.getAttributeValueAsString(node, "valore"));
+			}
+			else
+				setText(i18n.getTextFor("dom."+node.getNodeName()).startsWith("dom")?node.getNodeName():i18n.getTextFor("dom."+node.getNodeName()));
+
+			return this; 
+		}
+	}
+	
+	
 	protected class ButtonPiuAction extends AbstractAction {
 		
-	
 		public void actionPerformed(ActionEvent e) {
-			DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) treeArgomenti.getLastSelectedPathComponent();
-
+			Node selectedNode =  (Node) treeArgomenti.getLastSelectedPathComponent();
+			
     		if (selectedNode == null) return;
 
-    		if (selectedNode.getParent() == null) return;
-
-    		DefaultMutableTreeNode parent = (DefaultMutableTreeNode) selectedNode.getParent();
-    		DefaultMutableTreeNode rootArgs = (DefaultMutableTreeNode) treeArgomenti.getModel().getRoot();
-
+    		if (selectedNode.getParentNode() == null) return;
+    		
+    		Node parentNode = selectedNode.getParentNode();
     		String kw = (String) comboKeywords.getSelectedItem();
-    		DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(kw);
-    		DefaultTreeModel model = (DefaultTreeModel) treeArgomenti.getModel(); 
-    		if (selectedNode.getParent() == rootArgs) {
-    			int selectedIndex = selectedNode.getIndex(selectedNode);
-    			model.insertNodeInto(newNode, selectedNode, selectedIndex + 1);
+    		Node newKeyword = documentManager.getDocumentAsDom().createElement(TAG_KEYWORD);
+    		UtilDom.setAttributeValue(newKeyword, "valore", kw);
+    		
+    		if(selectedNode.getNodeName().equals(TAG_KEYWORDS) || parentNode.getNodeName().equals(TAG_KEYWORDS)) {  
+    		// sono sul nodo keywords
+    		  if(selectedNode.getNodeName().equals(TAG_KEYWORDS)) {
+    			if (CheckKwDuplicate(selectedNode, kw)) {
+    			  utilMsg.msgInfo("chiave " + kw + " già presente", "Chiave duplicata");
+    			  return;
+    			}
+    			else
+    			  selectedNode.appendChild(newKeyword);
+    		  }
+    		// altrimenti sono già su un nodo keyword valore 
+    		  else if(parentNode.getNodeName().equals(TAG_KEYWORDS)) {
+    			if (CheckKwDuplicate(parentNode, kw)) {
+   				  utilMsg.msgInfo("chiave " + kw + " già presente", "Chiave duplicata");
+   				  return;
+    			}
+    			else
+    			  parentNode.appendChild(newKeyword);
+    		  }
     		}
-    		else { 
-    			/*---------------------------------------------------------------*
-    			 *  si tratta di una keyword e si aggiunge al nodo parent, ossia  *
-    			 *  all'argomento padre											 * 
-    			 *----------------------------------------------------------------*/			
-    			int selectedIndex = parent.getIndex(parent);
-    			model.insertNodeInto(newNode, parent, selectedIndex + 1);
+    		else {
+    		  Node firstChild = selectedNode.getFirstChild();
+    		  if (firstChild.getNodeName().equals(TAG_KEYWORDS)) {
+    			if (CheckKwDuplicate(firstChild, kw)) {
+    			  utilMsg.msgInfo("chiave " + kw + " già presente", "Chiave duplicata");
+    			  return;
+    			}
+      			else
+      			  firstChild.appendChild(newKeyword);
+    		  }
     		}
+    		treeArgomenti.updateUI(); //reload per l'aggiornamento della visualizzazione
+ 			expandAll(treeArgomenti);
+		}
+		
+		private boolean CheckKwDuplicate(Node Kws, String value) {
+			NodeList kwChildren = Kws.getChildNodes();
+			boolean retValue = false;
+			for (int i=0; i<kwChildren.getLength(); i++) {
+				if (UtilDom.getAttributeValueAsString(kwChildren.item(i), "valore").equals(value)) {
+				  retValue = true;
+				  break;
+				}
+			}
+			return retValue;
+			
 		}
 	}  
 	
@@ -550,20 +677,28 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
 	
 	protected class ButtonMenoAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
-			DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) treeArgomenti.getLastSelectedPathComponent();
+			Node selectedNode =  (Node) treeArgomenti.getLastSelectedPathComponent();
+			
+//			DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) treeArgomenti.getLastSelectedPathComponent();
 
     		if (selectedNode == null) return;
-
-    		DefaultMutableTreeNode parent = (DefaultMutableTreeNode) selectedNode.getParent();
-    		DefaultMutableTreeNode rootArgs = (DefaultMutableTreeNode) treeArgomenti.getModel().getRoot();
-
-    		if (parent == null) return;
-
-    		if (parent.getParent() == rootArgs && selectedNode.isLeaf()) {
-    			int selectedIndex = selectedNode.getIndex(selectedNode);
-    			DefaultTreeModel model = (DefaultTreeModel) treeArgomenti.getModel(); 
-    			model.removeNodeFromParent(selectedNode);
+    		
+    		if(selectedNode.getNodeName().equals(TAG_KEYWORD)) {
+    		  Node parent = selectedNode.getParentNode();
+    		  parent.removeChild(selectedNode);
+    		  treeArgomenti.updateUI();
     		}
+
+//    		DefaultMutableTreeNode parent = (DefaultMutableTreeNode) selectedNode.getParent();
+//    		DefaultMutableTreeNode rootArgs = (DefaultMutableTreeNode) treeArgomenti.getModel().getRoot();
+
+//    		if (parent == null) return;
+
+//    		if (parent.getParent() == rootArgs && selectedNode.isLeaf()) {
+//    			int selectedIndex = selectedNode.getIndex(selectedNode);
+//    			DefaultTreeModel model = (DefaultTreeModel) treeArgomenti.getModel(); 
+//    			model.removeNodeFromParent(selectedNode);
+//    		}
 		}
 	}  
 	
@@ -574,6 +709,39 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
 		
 		public void actionPerformed(ActionEvent e) {
 			System.err.println("Button ACCEPT pressed");
+			TreePath selectionPath = treeDisposizioni.getSelectionPath(); 
+			Node selectedNode = (Node) selectionPath.getLastPathComponent();
+			Node rootDisp = documentManager.getDocumentAsDom().createElement(UtilDom.getAttributeValueAsString(selectedNode, "value"));
+			Node rootArg  = (Node) treeArgomenti.getModel().getRoot();
+			NodeList children = rootArg.getChildNodes();
+			int nChildren = children.getLength();
+
+			for(int i=0; i<nChildren; i++) {
+//				System.out.println(children.item(i).getNodeName());
+				rootDisp.appendChild(children.item(i).cloneNode(true));
+			}
+/*------------------------------------------------------------------------------------------------- 
+ * se si tratta di una marcatura esistente,  la sostituisco al corrispondente nodo di treePartizioni
+ * altrimenti aggiungo un nodo figlio alla root di treePartizioni 
+ *------------------------------------------------------------------------------------------------*/
+			Node rootPartizioni = (Node) treePartizioni.getModel().getRoot();
+			children = rootPartizioni.getChildNodes();
+			String marcaturaCorrente = UtilDom.getAttributeValueAsString(selectedNode, "value");
+			Node oldChild = null;
+			for (int i=0; i<children.getLength(); i++) {
+				if (children.item(i).getNodeName().equalsIgnoreCase(marcaturaCorrente)) {
+					oldChild = children.item(i);
+					break;
+				}
+			} 
+			if (oldChild != null) {
+				((Node)treePartizioni.getModel().getRoot()).replaceChild(rootDisp, oldChild);
+			}
+			else 
+				((Node)treePartizioni.getModel().getRoot()).appendChild(rootDisp);
+			
+			treePartizioni.updateUI(); // necessario?
+			System.out.println(UtilDom.getAttributeValueAsString(selectedNode, "value"));
 			
 			
 			// qui:  leggere il contenuto dell'albero argomenti; creare un nodo dom di interscambio del tipo: 
@@ -616,8 +784,19 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
 	protected class ButtonRejectAction extends AbstractAction {
 		
 		public void actionPerformed(ActionEvent e) {
+			
 			System.err.println("Button REJECT pressed");
-		}
+			TreePath selectionPath = treePartizioni.getSelectionPath(); 
+			Node selectedNode = (Node) selectionPath.getLastPathComponent();
+			if (selectedNode.getParentNode() == null)
+				utilMsg.msgInfo("Selezionare la marcatura semantica da eliminare", "Marcatura semantica non selezionata");
+			else {
+				Node root = (Node) treePartizioni.getModel().getRoot();
+				root.removeChild(selectedNode);
+				treePartizioni.updateUI();
+			}
+			
+	}
 		
 	}  
 	
@@ -636,7 +815,19 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
 	
 	public Node[] getDisposizioni() {
 		// TODO Auto-generated method stub
-		return null;
+		Node rootDisp = (Node) treePartizioni.getModel().getRoot();
+		NodeList children = rootDisp.getChildNodes();
+		if (children.getLength() > 0) {
+			Vector disposizioni = new Vector();
+			for (int i=0; i<children.getLength(); i++) {
+				disposizioni.add(children.item(i));
+			}
+			Node[] disposizioniOnPartition = new Node[disposizioni.size()];
+			disposizioni.copyInto(disposizioniOnPartition);
+			return disposizioniOnPartition;
+		}
+		else
+			return null;
 	}
 
 
