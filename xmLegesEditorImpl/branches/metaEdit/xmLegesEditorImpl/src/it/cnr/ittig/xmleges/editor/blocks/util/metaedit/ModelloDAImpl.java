@@ -122,7 +122,10 @@ public class ModelloDAImpl implements  ModelloDA, Initializable, Loggable, Servi
 		NodeList argomenti = modelloDA.getElementsByTagName("argomento");
 		
 		for(int i=0; i< argomenti.getLength(); i++){
-			argomentiList.add(UtilDom.getAttributeValueAsString(argomenti.item(i), "value"));	
+			if (argomentiList.contains(UtilDom.getAttributeValueAsString(argomenti.item(i), "value")))
+				;
+			else
+			  argomentiList.add(UtilDom.getAttributeValueAsString(argomenti.item(i), "value"));	
 		}
 	}
 	
