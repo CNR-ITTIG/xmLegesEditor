@@ -92,9 +92,9 @@ public class MetaEditImpl implements MetaEdit, Loggable, Serviceable {
 		
 		Vector ret = new Vector();
 		Node disposizioni = ((Document)documentManager.getDocumentAsDom()).getElementsByTagName("disposizioni").item(0);
-		disposizioniNodes = new Vector();
-		getDisposizioniFromDoc(disposizioni);
-		
+		disposizioniNodes = new Vector(); // vettore contenente come elementi nodi
+		Vector disposizioniList = modelloDA.getDisposizioniList();
+		getDisposizioniFromDoc(disposizioni, disposizioniList);
 		
 		for(int i=0; i<disposizioniNodes.size();i++){
 			// controlla se la disposizione si riferisce alla partizione con id "idPartition"
@@ -131,20 +131,16 @@ public class MetaEditImpl implements MetaEdit, Loggable, Serviceable {
 	
 	
 	
-	// mette nel Vector disposizioniNodes  tutti i nodi disposizione presenti nel documento
-	private void getDisposizioniFromDoc(Node node){	
-		
-		Vector disposizioniList = modelloDA.getDisposizioniList();
+	// mette nel Vector disposizioniNodes  tutti i nodi disposizione, del tipo <dsp:obbligo> presenti nel documento
+	private void getDisposizioniFromDoc(Node node, Vector disposizioniList){	
 		
 		if(node!=null){
 			if (disposizioniList.contains(node.getNodeName()))
 				disposizioniNodes.add(node);
-
-			
-				NodeList list = node.getChildNodes();
-				for (int i = 0; i < list.getLength(); i++) {
-					getDisposizioniFromDoc(list.item(i));
-				}
+			NodeList list = node.getChildNodes();
+			for (int i = 0; i < list.getLength(); i++) {
+				getDisposizioniFromDoc(list.item(i), disposizioniList);
+			}
 		}	
 	}
 	
