@@ -791,18 +791,21 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	<xsl:variable name="upper">ABCDEFGHIJKLMNOPQRSTUVWXYZ</xsl:variable> 
 	
 		
-        <xsl:if test="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='regole']/*/*/*/*[name()='dsp:pos'][@xlink:href=$id]">
-          
+        <!-- modifica agosto 2008: nel DTD non viene riportata la tassonomia delle classi di disposizioni, ma solo i tipi di disposizioni -->
+        <!-- xsl:if test="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='regole']/*/*/*/*[name()='dsp:pos'][@xlink:href=$id]" -->
+        <xsl:if test="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*/*[name()='dsp:pos'][@xlink:href=$id]">
           <!-- REGOLE -->
           <p style="background-color:yellow;font-weight:normal;">
                 <br/>
                 	<b>
-                		&#160;<xsl:value-of select="translate(substring-after(name(/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='regole']/*/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../.),'dsp:'),$lower,$upper)"/>
+                		<!-- xsl:value-of select="translate(substring-after(name(/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='regole']/*/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../.),'dsp:'),$lower,$upper)"/ -->
+                		&#160;<xsl:value-of select="translate(substring-after(name(/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*/*[name()='dsp:pos'][@xlink:href=$id]/../.),'dsp:'),$lower,$upper)"/>
                 	</b>
                 <br/>
                 <br/>
             <em>
-                <xsl:for-each select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='regole']/*/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../*/*/*[name()='dsp:keyword']">
+                <!-- xsl:for-each select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='regole']/*/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../*/*/*[name()='dsp:keyword']" -->
+                <xsl:for-each select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*/*[name()='dsp:pos'][@xlink:href=$id]/../*/*/*[name()='dsp:keyword']">
                     &#160;<xsl:value-of select="substring-after(name(../../.),'dsp:')" /> = <xsl:value-of select="@valore"/><br/>
                 </xsl:for-each>
             </em>
@@ -810,22 +813,30 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
         </xsl:if>
         
-        <xsl:if test="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifiche']/*/*/*[name()='dsp:pos'][@xlink:href=$id]">
+        <!-- 
+        		modifica agosto 2008: nel DTD non viene riportata la tassonomia delle classi di disposizioni, ma solo i tipi di disposizioni. 
+        		Questo implica che non si possono distinguere, in maniera elegante, le disposizioni Modifiche da quelle delle Regole, quindi
+        		non si attiva il colore distinto (giallo per le Regole egrigio per le Modifiche)  
+        -->
+        <!-- xsl:if test="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifiche']/*/*/*[name()='dsp:pos'][@xlink:href=$id]" -->
+        <!-- xsl:if test="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*/*[name()='dsp:pos'][@xlink:href=$id]" -->
             <!-- MODIFICHE -->
-            <p style="background-color:silver;font-weight:normal;">
-            	<br/>
-            		<b>
-                		&#160;<xsl:value-of select="translate(substring-after(name(/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifiche']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../.),'dsp:'),$lower,$upper)"/>
-                	</b>
-                <br/>
-                <br/>
-            <em>
-                <xsl:for-each select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifiche']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../*/*/*[name()='dsp:keyword']">
-                    &#160;<xsl:value-of select="substring-after(name(../../.),'dsp:')"/> = <xsl:value-of select="@valore"/><br/>
-                </xsl:for-each>
-            </em>
-          </p>
-        </xsl:if>
+            <!-- p style="background-color:silver;font-weight:normal;" -->
+            	<!-- br/ -->
+            		<!-- b -->
+                		<!-- xsl:value-of select="translate(substring-after(name(/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifiche']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../.),'dsp:'),$lower,$upper)"/ -->
+                		<!-- &#160;<xsl:value-of select="translate(substring-after(name(/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*/*[name()='dsp:pos'][@xlink:href=$id]/../.),'dsp:'),$lower,$upper)"/> -->
+                	<!-- /b -->
+                <!-- br/ -->
+                <!-- br/ -->
+            <!-- em -->
+                <!-- xsl:for-each select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifiche']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../*/*/*[name()='dsp:keyword']" -->
+                <!-- xsl:for-each select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*/*[name()='dsp:pos'][@xlink:href=$id]/../*/*/*[name()='dsp:keyword']" -->
+                <!--    &#160;<xsl:value-of select="substring-after(name(../../.),'dsp:')"/> = <xsl:value-of select="@valore"/><br/> -->
+                <!-- /xsl:for-each -->
+            <!-- /em -->
+          <!-- /p -->
+        <!-- /xsl:if -->
         
                 
         <xsl:apply-templates />
