@@ -1,383 +1,467 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <TopTerms>
-<Keyword Id="20" Name="abbonato (D)" />
-<Keyword Id="339" Name="accertamento " />
-<Keyword Id="210" Name="accesso " />
-<Keyword Id="323" Name="accesso pubblico " />
-<Keyword Id="176" Name="acquisizione " />
-<Keyword Id="296" Name="acquisizione telematica " />
-<Keyword Id="362" Name="aderente " />
-<Keyword Id="254" Name="adesione spontanea " />
-<Keyword Id="128" Name="adottare " />
-<Keyword Id="127" Name="adozione " />
-<Keyword Id="98" Name="aggiornamento " />
-<Keyword Id="363" Name="albo " />
-<Keyword Id="343" Name="ammenda " />
-<Keyword Id="194" Name="apparecchiatura terminale " />
-<Keyword Id="335" Name="appello " />
-
-<Keyword Id="302" Name="applicazione " />
-<Keyword Id="312" Name="archivio " />
-<Keyword Id="387" Name="assistito " />
-<Keyword Id="149" Name="associazione " />
-<Keyword Id="102" Name="attestazione " />
-<Keyword Id="268" Name="attività  " />
-<Keyword Id="179" Name="atto " />
-<Keyword Id="114" Name="-- atto amministrativo " />
-<Keyword Id="113" Name="-- atto giudiziario " />
-<Keyword Id="146" Name="-- atto pubblico " />
-<Keyword Id="298" Name="attuazione " />
-<Keyword Id="169" Name="autenticazione " />
-<Keyword Id="28" Name="-- autenticazione informatica (D)" />
-<Keyword Id="191" Name="autorità  " />
-<Keyword Id="166" Name="-- autorità   giudiziaria " />
-<Keyword Id="328" Name="---- autorità   giudiziaria ordinaria " />
-<Keyword Id="282" Name="autorità   per le garanzie nelle comunicazioni " />
-
-<Keyword Id="89" Name="autorizzazione " />
-<Keyword Id="14" Name="banca di dati (D)" />
-<Keyword Id="356" Name="beni culturali e ambientali " />
-<Keyword Id="13" Name="blocco " />
-<Keyword Id="271" Name="camera dei deputati " />
-<Keyword Id="101" Name="cancellazione " />
-<Keyword Id="357" Name="cartella clinica " />
-<Keyword Id="188" Name="casellario giudiziale " />
-<Keyword Id="315" Name="cavo " />
-<Keyword Id="292" Name="centro elaborazione dati dipartimento pubblica sicurezza " />
-<Keyword Id="119" Name="cessazione " />
-<Keyword Id="120" Name="cessione " />
-<Keyword Id="17" Name="chiamata (D)" />
-<Keyword Id="51" Name="chiunque " />
-<Keyword Id="95" Name="cittadino " />
-<Keyword Id="96" Name="-- cittadino extraeuropeo " />
-<Keyword Id="359" Name="codice di procedura civile " />
-
-<Keyword Id="358" Name="codice di procedura penale " />
-<Keyword Id="109" Name="codici di deontologia e di buona condotta " />
-<Keyword Id="219" Name="commissione parlamentare d'inchiesta " />
-<Keyword Id="234" Name="completezza " />
-<Keyword Id="93" Name="comune " />
-<Keyword Id="10" Name="comunicazione " />
-<Keyword Id="16" Name="-- comunicazione elettronica (D)" />
-<Keyword Id="94" Name="-- comunicazione sistematica " />
-<Keyword Id="278" Name="confessione religiosa " />
-<Keyword Id="57" Name="configurazione " />
-<Keyword Id="313" Name="connessione " />
-<Keyword Id="311" Name="conoscenza " />
-<Keyword Id="216" Name="conoscenza scientifica " />
-<Keyword Id="121" Name="consenso " />
-<Keyword Id="275" Name="consenso scritto " />
-<Keyword Id="360" Name="Consiglio d'Europa " />
-<Keyword Id="297" Name="consiglio dei ministri " />
-
-<Keyword Id="172" Name="consiglio superiore magistratura " />
-<Keyword Id="419" Name="contra legem " />
-<Keyword Id="132" Name="contratto " />
-<Keyword Id="378" Name="contratto a tempo determinato " />
-<Keyword Id="361" Name="contratto collettivo " />
-<Keyword Id="108" Name="contributo " />
-<Keyword Id="230" Name="correttezza " />
-<Keyword Id="273" Name="corte costituzionale " />
-<Keyword Id="29" Name="credenziali di autenticazione (D)" />
-<Keyword Id="115" Name="danno " />
-<Keyword Id="117" Name="-- danno non patrimoniale " />
-<Keyword Id="116" Name="-- danno patrimoniale " />
-<Keyword Id="122" Name="dato " />
-<Keyword Id="2" Name="-- dato personale (D)" />
-<Keyword Id="12" Name="---- dato anonimo (D)" />
-<Keyword Id="46" Name="---- dato biometrico " />
-<Keyword Id="140" Name="---- dato economico " />
-
-<Keyword Id="5" Name="---- dato giudiziario (D)" />
-<Keyword Id="3" Name="---- dato identificativo (D)" />
-<Keyword Id="104" Name="---- dato oggettivo " />
-<Keyword Id="225" Name="---- dato personale relativo a terzi " />
-<Keyword Id="50" Name="---- dato psichico " />
-<Keyword Id="23" Name="---- dato relativo all'ubicazione (D)" />
-<Keyword Id="4" Name="---- dato sensibile (D)" />
-<Keyword Id="45" Name="------ dato genetico " />
-<Keyword Id="48" Name="------ dato sanitario " />
-<Keyword Id="49" Name="------ dato sessuale " />
-<Keyword Id="139" Name="---- dato su abitudini di consumo " />
-<Keyword Id="141" Name="dato patrimoniale " />
-<Keyword Id="22" Name="dato relativo al traffico (D)" />
-<Keyword Id="276" Name="decisione " />
-<Keyword Id="260" Name="decorso termini " />
-<Keyword Id="382" Name="decreto " />
-<Keyword Id="384" Name="-- decreto legislativo " />
-
-<Keyword Id="412" Name="-- decreto-legge " />
-<Keyword Id="221" Name="delega " />
-<Keyword Id="385" Name="deliberazione " />
-<Keyword Id="337" Name="denuncia " />
-<Keyword Id="280" Name="designare " />
-<Keyword Id="227" Name="determinazione " />
-<Keyword Id="11" Name="diffusione " />
-<Keyword Id="251" Name="dignità  " />
-<Keyword Id="386" Name="diritto " />
-<Keyword Id="134" Name="diritto in sede giudiziaria " />
-<Keyword Id="178" Name="disciplinare tecnico " />
-<Keyword Id="204" Name="dispositivo elettronico " />
-<Keyword Id="413" Name="disposizione " />
-<Keyword Id="177" Name="-- disposizione di attuazione " />
-<Keyword Id="171" Name="documentazione " />
-<Keyword Id="388" Name="documento " />
-<Keyword Id="136" Name="-- documento amministrativo " />
-
-<Keyword Id="389" Name="-- documento di riconoscimento " />
-<Keyword Id="391" Name="-- documento programmatico sulla sicurezza " />
-<Keyword Id="203" Name="elaboratore " />
-<Keyword Id="66" Name="elaborazione " />
-<Keyword Id="65" Name="-- conservazione " />
-<Keyword Id="180" Name="-- consultazione " />
-<Keyword Id="77" Name="-- distruzione " />
-<Keyword Id="69" Name="-- estrazione " />
-<Keyword Id="72" Name="-- interconnessione " />
-<Keyword Id="67" Name="-- modificazione " />
-<Keyword Id="64" Name="-- organizzazione " />
-<Keyword Id="62" Name="-- raccolta " />
-<Keyword Id="63" Name="-- registrazione " />
-<Keyword Id="68" Name="-- selezione " />
-<Keyword Id="71" Name="-- utilizzo " />
-<Keyword Id="148" Name="ente " />
-<Keyword Id="92" Name="-- ente pubblico economico " />
-
-<Keyword Id="232" Name="esattezza " />
-<Keyword Id="262" Name="esercente le professioni sanitarie " />
-<Keyword Id="364" Name="estremo identificativo " />
-<Keyword Id="365" Name="fatturazione " />
-<Keyword Id="317" Name="fibra ottica " />
-<Keyword Id="238" Name="finalità " />
-<Keyword Id="236" Name="-- finalità giornalistica " />
-<Keyword Id="392" Name="firma digitale " />
-<Keyword Id="393" Name="fornitore " />
-<Keyword Id="15" Name="garante (D)" />
-<Keyword Id="252" Name="garanzia " />
-<Keyword Id="165" Name="gazzetta ufficiale " />
-<Keyword Id="289" Name="generalità " />
-<Keyword Id="330" Name="giudice " />
-<Keyword Id="332" Name="giudizio " />
-<Keyword Id="182" Name="identificazione " />
-<Keyword Id="8" Name="incaricato (D)" />
-
-<Keyword Id="144" Name="incolumità fisica " />
-<Keyword Id="212" Name="indagine " />
-<Keyword Id="214" Name="-- indagine statistica " />
-<Keyword Id="138" Name="indirizzo " />
-<Keyword Id="267" Name="individuazione " />
-<Keyword Id="237" Name="informativa " />
-<Keyword Id="242" Name="-- informativa impossibile " />
-<Keyword Id="81" Name="informazione " />
-<Keyword Id="100" Name="integrazione " />
-<Keyword Id="9" Name="interessato (D)" />
-<Keyword Id="395" Name="interesse " />
-<Keyword Id="397" Name="-- interesse collettivo " />
-<Keyword Id="396" Name="-- interesse legittimo " />
-<Keyword Id="143" Name="-- interesse pubblico " />
-<Keyword Id="319" Name="internet " />
-<Keyword Id="167" Name="interpello preventivo " />
-<Keyword Id="235" Name="inutilizzabilità " />
-
-<Keyword Id="304" Name="istante " />
-<Keyword Id="305" Name="istruttoria preliminare " />
-<Keyword Id="398" Name="lavoratore " />
-<Keyword Id="90" Name="legge " />
-<Keyword Id="400" Name="lettera raccomandata " />
-<Keyword Id="250" Name="libertà fondamentale " />
-<Keyword Id="231" Name="liceità " />
-<Keyword Id="411" Name="lista elettorale " />
-<Keyword Id="390" Name="magistrato amministrativo " />
-<Keyword Id="366" Name="magistrato ordinario " />
-<Keyword Id="421" Name="marina " />
-<Keyword Id="123" Name="medico di famiglia " />
-<Keyword Id="417" Name="medico di medicina generale " />
-<Keyword Id="196" Name="messaggio " />
-<Keyword Id="243" Name="mezzo sproporzionato " />
-<Keyword Id="309" Name="minimizzazione utilizzo " />
-<Keyword Id="348" Name="Ministero degli affari esteri " />
-
-<Keyword Id="347" Name="Ministero dell'economia e delle finanze " />
-<Keyword Id="418" Name="Ministero dell'interno " />
-<Keyword Id="346" Name="Ministero della giustizia " />
-<Keyword Id="355" Name="Ministro del lavoro e delle politiche sociali " />
-<Keyword Id="351" Name="Ministro dell'economia e delle finanze " />
-<Keyword Id="293" Name="Ministro dell'interno " />
-<Keyword Id="125" Name="Ministro della giustizia " />
-<Keyword Id="354" Name="Ministro della salute " />
-<Keyword Id="353" Name="Ministro della sanità " />
-<Keyword Id="352" Name="Ministro delle comunicazioni " />
-<Keyword Id="349" Name="Ministro per la funzione pubblica " />
-<Keyword Id="126" Name="Ministro per le innovazioni e le tecnologie " />
-<Keyword Id="350" Name="Ministro per le politiche comunitarie " />
-<Keyword Id="198" Name="misura " />
-<Keyword Id="197" Name="-- misura di sicurezza " />
-<Keyword Id="106" Name="-- misura idonea " />
-<Keyword Id="199" Name="-- misura informatica " />
-
-<Keyword Id="201" Name="-- misura logistica " />
-<Keyword Id="26" Name="-- misura minima (D)" />
-<Keyword Id="200" Name="-- misura organizzativa " />
-<Keyword Id="202" Name="-- misura procedurale " />
-<Keyword Id="326" Name="-- misura tecnica " />
-<Keyword Id="239" Name="modalità " />
-<Keyword Id="111" Name="modalità semplificata " />
-<Keyword Id="142" Name="modello " />
-<Keyword Id="308" Name="non luogo a provvedere " />
-<Keyword Id="403" Name="normativa " />
-<Keyword Id="368" Name="-- normativa antimafia " />
-<Keyword Id="241" Name="-- normativa comunitaria " />
-<Keyword Id="333" Name="nota difensiva " />
-<Keyword Id="44" Name="notifica " />
-<Keyword Id="402" Name="obbligo " />
-<Keyword Id="40" Name="operazione " />
-<Keyword Id="185" Name="opinione politica " />
-
-<Keyword Id="103" Name="opposizione " />
-<Keyword Id="369" Name="ordinamento " />
-<Keyword Id="370" Name="ordinanza " />
-<Keyword Id="263" Name="organismo sanitaro pubblico " />
-<Keyword Id="371" Name="organismo senza scopo di lucro " />
-<Keyword Id="173" Name="organo di autogoverno " />
-<Keyword Id="291" Name="organo pubblica sicurezza " />
-<Keyword Id="285" Name="paese extraeuropeo " />
-<Keyword Id="284" Name="paese terzo " />
-<Keyword Id="340" Name="pagamento " />
-<Keyword Id="336" Name="parere " />
-<Keyword Id="404" Name="Parlamento europeo " />
-<Keyword Id="30" Name="parola chiave (D)" />
-<Keyword Id="327" Name="parte " />
-<Keyword Id="186" Name="partito politico " />
-<Keyword Id="124" Name="pediatra " />
-<Keyword Id="258" Name="perizia " />
-
-<Keyword Id="208" Name="persona " />
-<Keyword Id="223" Name="persona deceduta " />
-<Keyword Id="97" Name="persona fisica " />
-<Keyword Id="147" Name="persona giuridica " />
-<Keyword Id="414" Name="persona presso la quale sono raccolti i dati personali " />
-<Keyword Id="233" Name="pertinenza " />
-<Keyword Id="295" Name="polizia " />
-<Keyword Id="193" Name="posizione geografica " />
-<Keyword Id="25" Name="posta elettronica (D)" />
-<Keyword Id="168" Name="presentazione " />
-<Keyword Id="301" Name="Presidente del Consiglio dei Ministri " />
-<Keyword Id="274" Name="Presidenza della Repubblica " />
-<Keyword Id="264" Name="privato " />
-<Keyword Id="256" Name="procedimento " />
-<Keyword Id="205" Name="procedura " />
-<Keyword Id="222" Name="procura " />
-<Keyword Id="373" Name="procuratore " />
-
-<Keyword Id="31" Name="profilo di autorizzazione (D)" />
-<Keyword Id="55" Name="programma informatico " />
-<Keyword Id="53" Name="protezione " />
-<Keyword Id="269" Name="provvedimento " />
-<Keyword Id="190" Name="pubblica amministrazione " />
-<Keyword Id="294" Name="pubblica sicurezza " />
-<Keyword Id="341" Name="pubblicazione " />
-<Keyword Id="345" Name="pubblicazione sentenza " />
-<Keyword Id="344" Name="pubblico ministero " />
-<Keyword Id="145" Name="pubblico registro " />
-<Keyword Id="316" Name="radio " />
-<Keyword Id="70" Name="raffronto " />
-<Keyword Id="183" Name="razza " />
-<Keyword Id="374" Name="reato " />
-<Keyword Id="162" Name="reclamo " />
-<Keyword Id="342" Name="reclusione " />
-<Keyword Id="129" Name="registro dei trattamenti " />
-
-<Keyword Id="266" Name="regolamento " />
-<Keyword Id="307" Name="regolarizzazione " />
-<Keyword Id="338" Name="relazione " />
-<Keyword Id="184" Name="religione " />
-<Keyword Id="406" Name="Repubblica Italiana " />
-<Keyword Id="7" Name="responsabile (D)" />
-<Keyword Id="322" Name="rete elettrica " />
-<Keyword Id="37" Name="rete pubblica di comunicazioni (D)" />
-<Keyword Id="324" Name="rete radiotelevisiva " />
-<Keyword Id="318" Name="rete satellitare " />
-<Keyword Id="325" Name="rete telecomunicazione " />
-<Keyword Id="320" Name="rete televisiva " />
-<Keyword Id="18" Name="reti di comunicazione elettronica (D)" />
-<Keyword Id="99" Name="rettifica " />
-<Keyword Id="213" Name="ricerca " />
-<Keyword Id="107" Name="richiedente " />
-<Keyword Id="105" Name="richiesta " />
-
-<Keyword Id="130" Name="-- richiesta autorizzazione " />
-<Keyword Id="217" Name="-- richiesta informale " />
-<Keyword Id="331" Name="ricorrente " />
-<Keyword Id="164" Name="ricorso " />
-<Keyword Id="218" Name="riferimento normativo " />
-<Keyword Id="277" Name="rigetto " />
-<Keyword Id="246" Name="risarcimento " />
-<Keyword Id="224" Name="riscontro " />
-<Keyword Id="288" Name="riservatezza " />
-<Keyword Id="189" Name="sanzione amministrativa " />
-<Keyword Id="35" Name="scopo scientifico (D)" />
-<Keyword Id="34" Name="scopo statistico (D)" />
-<Keyword Id="33" Name="scopo storico (D)" />
-<Keyword Id="163" Name="segnalazione " />
-<Keyword Id="416" Name="segreto " />
-<Keyword Id="401" Name="-- segreto aziendale e industriale " />
-<Keyword Id="299" Name="-- segreto di stato " />
-
-<Keyword Id="415" Name="-- segreto professionale " />
-<Keyword Id="272" Name="senato della repubblica " />
-<Keyword Id="290" Name="sentenza " />
-<Keyword Id="206" Name="sequenza di caratteri " />
-<Keyword Id="195" Name="servizio " />
-<Keyword Id="24" Name="servizio a valore aggiunto (D)" />
-<Keyword Id="19" Name="servizio di comunicazione elettronica (D)" />
-<Keyword Id="375" Name="servizio sanitario nazionale " />
-<Keyword Id="112" Name="servizio telefonico " />
-<Keyword Id="407" Name="sicurezza " />
-<Keyword Id="187" Name="sindacato " />
-<Keyword Id="32" Name="sistema di autorizzazione (D)" />
-<Keyword Id="283" Name="sistema di notificazione " />
-<Keyword Id="314" Name="sistema di trasmissione " />
-<Keyword Id="54" Name="sistema informativo " />
-<Keyword Id="215" Name="-- sistema informativo statistico " />
-<Keyword Id="376" Name="sms " />
-
-<Keyword Id="306" Name="soggetto non legittimato " />
-<Keyword Id="110" Name="soggetto privato " />
-<Keyword Id="91" Name="soggetto pubblico " />
-<Keyword Id="259" Name="sospensione " />
-<Keyword Id="255" Name="spesa " />
-<Keyword Id="377" Name="statuto " />
-<Keyword Id="209" Name="strumento " />
-<Keyword Id="58" Name="-- strumento elettronico (D)" />
-<Keyword Id="211" Name="studio " />
-<Keyword Id="399" Name="telefax " />
-<Keyword Id="410" Name="telelavoro " />
-<Keyword Id="379" Name="terminale " />
-<Keyword Id="420" Name="terza parte " />
-<Keyword Id="270" Name="test psico-attitudinale " />
-<Keyword Id="6" Name="titolare (D)" />
-<Keyword Id="131" Name="trasferimento " />
-<Keyword Id="170" Name="trasmissione " />
-
-<Keyword Id="1" Name="trattamento " />
-<Keyword Id="244" Name="-- trattamento automatizzato " />
-<Keyword Id="207" Name="-- trattamento consentito " />
-<Keyword Id="380" Name="-- trattamento illecito " />
-<Keyword Id="174" Name="-- trattamento non occasionale " />
-<Keyword Id="240" Name="-- trattamento obbligatorio " />
-<Keyword Id="175" Name="-- trattamento per ragioni di giustizia " />
-<Keyword Id="286" Name="trattazione giudiziaria " />
-<Keyword Id="329" Name="tribunale " />
-<Keyword Id="150" Name="tutela persone " />
-<Keyword Id="220" Name="ufficio giudiziario " />
-<Keyword Id="408" Name="Unione Europea " />
-<Keyword Id="21" Name="utente (D)" />
-<Keyword Id="253" Name="versamento " />
-<Keyword Id="228" Name="-- versamento bancario " />
-<Keyword Id="229" Name="-- versamento postale " />
-<Keyword Id="381" Name="videosorveglianza " />
-
-<Keyword Id="409" Name="violazione " />
-
+<Keyword Id="20" Name="abbonato" Dominio="S" />
+<Keyword Id="2418" Name="abilitazione" Dominio="N" />
+<Keyword Id="339" Name="accertamento" Dominio="N" />
+<Keyword Id="210" Name="accesso" Dominio="N" />
+<Keyword Id="323" Name="accesso pubblico" Dominio="N" />
+<Keyword Id="176" Name="acquisizione" Dominio="N" />
+<Keyword Id="296" Name="acquisizione telematica" Dominio="N" />
+<Keyword Id="362" Name="aderente" Dominio="N" />
+<Keyword Id="254" Name="adesione spontanea" Dominio="N" />
+<Keyword Id="128" Name="adottare" Dominio="N" />
+<Keyword Id="127" Name="adozione" Dominio="N" />
+<Keyword Id="98" Name="aggiornamento" Dominio="N" />
+<Keyword Id="363" Name="albo" Dominio="N" />
+<Keyword Id="2402" Name="albo professionale" Dominio="N" />
+<Keyword Id="343" Name="ammenda" Dominio="N" />
+<Keyword Id="2446" Name="anonimato" Dominio="N" />
+<Keyword Id="194" Name="apparecchiatura terminale" Dominio="N" />
+<Keyword Id="335" Name="appello" Dominio="N" />
+<Keyword Id="302" Name="applicazione" Dominio="N" />
+<Keyword Id="312" Name="archivio" Dominio="N" />
+<Keyword Id="387" Name="assistito" Dominio="N" />
+<Keyword Id="149" Name="associazione" Dominio="N" />
+<Keyword Id="102" Name="attestazione" Dominio="N" />
+<Keyword Id="268" Name="attività" Dominio="N" />
+<Keyword Id="2390" Name="attività ispettiva" Dominio="N" />
+<Keyword Id="179" Name="atto" Dominio="N" />
+<Keyword Id="114" Name="atto amministrativo" Dominio="N" />
+<Keyword Id="113" Name="atto giudiziario" Dominio="N" />
+<Keyword Id="146" Name="atto pubblico" Dominio="N" />
+<Keyword Id="298" Name="attuazione" Dominio="N" />
+<Keyword Id="169" Name="autenticazione" Dominio="N" />
+<Keyword Id="28" Name="autenticazione informatica" Dominio="S" />
+<Keyword Id="191" Name="autorità" Dominio="N" />
+<Keyword Id="166" Name="autorità  giudiziaria" Dominio="N" />
+<Keyword Id="328" Name="autorità  giudiziaria ordinaria" Dominio="N" />
+<Keyword Id="282" Name="autorità  per le garanzie nelle comunicazioni" Dominio="N" />
+<Keyword Id="89" Name="autorizzazione" Dominio="N" />
+<Keyword Id="2488" Name="banca dati dei sinistri" Dominio="N" />
+<Keyword Id="14" Name="banca di dati" Dominio="S" />
+<Keyword Id="2417" Name="benefici economici" Dominio="N" />
+<Keyword Id="356" Name="beni culturali e ambientali" Dominio="N" />
+<Keyword Id="13" Name="blocco" Dominio="S" />
+<Keyword Id="271" Name="camera dei deputati" Dominio="N" />
+<Keyword Id="101" Name="cancellazione" Dominio="N" />
+<Keyword Id="2392" Name="cancelleria" Dominio="N" />
+<Keyword Id="2378" Name="carichi pendenti" Dominio="N" />
+<Keyword Id="2448" Name="carta elettronica" Dominio="N" />
+<Keyword Id="2449" Name="carta non elettronica" Dominio="N" />
+<Keyword Id="357" Name="cartella clinica" Dominio="N" />
+<Keyword Id="188" Name="casellario giudiziale" Dominio="N" />
+<Keyword Id="315" Name="cavo" Dominio="N" />
+<Keyword Id="292" Name="centro elaborazione dati dipartimento pubblica sicurezza" Dominio="N" />
+<Keyword Id="2454" Name="certificato di assistenza al parto" Dominio="N" />
+<Keyword Id="119" Name="cessazione" Dominio="N" />
+<Keyword Id="120" Name="cessione" Dominio="N" />
+<Keyword Id="17" Name="chiamata" Dominio="S" />
+<Keyword Id="51" Name="chiunque" Dominio="N" />
+<Keyword Id="2384" Name="chiunque stabilito in Paese non UE" Dominio="N" />
+<Keyword Id="2383" Name="chiunque stabilito in territorio italiano" Dominio="N" />
+<Keyword Id="95" Name="cittadino" Dominio="N" />
+<Keyword Id="96" Name="cittadino extraeuropeo" Dominio="N" />
+<Keyword Id="359" Name="codice di procedura civile" Dominio="N" />
+<Keyword Id="358" Name="codice di procedura penale" Dominio="N" />
+<Keyword Id="109" Name="codici di deontologia e di buona condotta" Dominio="N" />
+<Keyword Id="219" Name="commissione parlamentare d'inchiesta" Dominio="N" />
+<Keyword Id="234" Name="completezza" Dominio="N" />
+<Keyword Id="2485" Name="comportamento debitorio" Dominio="N" />
+<Keyword Id="93" Name="comune" Dominio="N" />
+<Keyword Id="10" Name="comunicazione" Dominio="S" />
+<Keyword Id="16" Name="comunicazione elettronica" Dominio="S" />
+<Keyword Id="94" Name="comunicazione sistematica" Dominio="N" />
+<Keyword Id="278" Name="confessione religiosa" Dominio="N" />
+<Keyword Id="57" Name="configurazione" Dominio="N" />
+<Keyword Id="313" Name="connessione" Dominio="N" />
+<Keyword Id="311" Name="conoscenza" Dominio="N" />
+<Keyword Id="216" Name="conoscenza scientifica" Dominio="N" />
+<Keyword Id="121" Name="consenso" Dominio="N" />
+<Keyword Id="2429" Name="consenso orale" Dominio="N" />
+<Keyword Id="275" Name="consenso scritto" Dominio="N" />
+<Keyword Id="65" Name="conservazione" Dominio="N" />
+<Keyword Id="360" Name="Consiglio d'Europa" Dominio="N" />
+<Keyword Id="297" Name="consiglio dei ministri" Dominio="N" />
+<Keyword Id="2444" Name="consiglio superiore di sanità" Dominio="N" />
+<Keyword Id="172" Name="consiglio superiore magistratura" Dominio="N" />
+<Keyword Id="180" Name="consultazione" Dominio="N" />
+<Keyword Id="419" Name="contra legem" Dominio="N" />
+<Keyword Id="2419" Name="contrassegno su veicoli" Dominio="N" />
+<Keyword Id="132" Name="contratto" Dominio="N" />
+<Keyword Id="378" Name="contratto a tempo determinato" Dominio="N" />
+<Keyword Id="361" Name="contratto collettivo" Dominio="N" />
+<Keyword Id="108" Name="contributo" Dominio="N" />
+<Keyword Id="2478" Name="controllo a distanza" Dominio="N" />
+<Keyword Id="2395" Name="convenzione-tipo" Dominio="N" />
+<Keyword Id="2470" Name="convivente" Dominio="N" />
+<Keyword Id="230" Name="correttezza" Dominio="N" />
+<Keyword Id="273" Name="corte costituzionale" Dominio="N" />
+<Keyword Id="29" Name="credenziali di autenticazione" Dominio="S" />
+<Keyword Id="115" Name="danno" Dominio="N" />
+<Keyword Id="117" Name="danno non patrimoniale" Dominio="N" />
+<Keyword Id="116" Name="danno patrimoniale" Dominio="N" />
+<Keyword Id="122" Name="dato" Dominio="N" />
+<Keyword Id="12" Name="dato anonimo" Dominio="S" />
+<Keyword Id="46" Name="dato biometrico" Dominio="N" />
+<Keyword Id="140" Name="dato economico" Dominio="N" />
+<Keyword Id="45" Name="dato genetico" Dominio="N" />
+<Keyword Id="5" Name="dato giudiziario" Dominio="S" />
+<Keyword Id="3" Name="dato identificativo" Dominio="S" />
+<Keyword Id="2430" Name="dato idoneo a rivelare lo stato di salute" Dominio="N" />
+<Keyword Id="104" Name="dato oggettivo" Dominio="N" />
+<Keyword Id="141" Name="dato patrimoniale" Dominio="N" />
+<Keyword Id="2" Name="dato personale" Dominio="S" />
+<Keyword Id="2420" Name="dato personale in ambito sanitario" Dominio="N" />
+<Keyword Id="225" Name="dato personale relativo a terzi" Dominio="N" />
+<Keyword Id="50" Name="dato psichico" Dominio="N" />
+<Keyword Id="2401" Name="dato pubblico" Dominio="N" />
+<Keyword Id="2464" Name="dato relativo a studenti" Dominio="N" />
+<Keyword Id="2467" Name="dato relativo ad attività di studio e ricerca" Dominio="N" />
+<Keyword Id="22" Name="dato relativo al traffico" Dominio="S" />
+<Keyword Id="23" Name="dato relativo all'ubicazione" Dominio="S" />
+<Keyword Id="48" Name="dato sanitario" Dominio="N" />
+<Keyword Id="4" Name="dato sensibile" Dominio="S" />
+<Keyword Id="49" Name="dato sessuale" Dominio="N" />
+<Keyword Id="2472" Name="dato statistico" Dominio="N" />
+<Keyword Id="139" Name="dato su abitudini di consumo" Dominio="N" />
+<Keyword Id="2480" Name="datore di lavoro" Dominio="N" />
+<Keyword Id="276" Name="decisione" Dominio="N" />
+<Keyword Id="260" Name="decorso termini" Dominio="N" />
+<Keyword Id="382" Name="decreto" Dominio="N" />
+<Keyword Id="384" Name="decreto legislativo" Dominio="N" />
+<Keyword Id="412" Name="decreto-legge" Dominio="N" />
+<Keyword Id="221" Name="delega" Dominio="N" />
+<Keyword Id="385" Name="deliberazione" Dominio="N" />
+<Keyword Id="337" Name="denuncia" Dominio="N" />
+<Keyword Id="280" Name="designare" Dominio="N" />
+<Keyword Id="227" Name="determinazione" Dominio="N" />
+<Keyword Id="2455" Name="dichiarazione di nascita" Dominio="N" />
+<Keyword Id="2397" Name="difesa dello Stato" Dominio="N" />
+<Keyword Id="11" Name="diffusione" Dominio="S" />
+<Keyword Id="251" Name="dignità" Dominio="N" />
+<Keyword Id="386" Name="diritto" Dominio="N" />
+<Keyword Id="134" Name="diritto in sede giudiziaria" Dominio="N" />
+<Keyword Id="178" Name="disciplinare tecnico" Dominio="N" />
+<Keyword Id="2379" Name="disponibilità" Dominio="N" />
+<Keyword Id="204" Name="dispositivo elettronico" Dominio="N" />
+<Keyword Id="413" Name="disposizione" Dominio="N" />
+<Keyword Id="177" Name="disposizione di attuazione" Dominio="N" />
+<Keyword Id="77" Name="distruzione" Dominio="N" />
+<Keyword Id="171" Name="documentazione" Dominio="N" />
+<Keyword Id="388" Name="documento" Dominio="N" />
+<Keyword Id="136" Name="documento amministrativo" Dominio="N" />
+<Keyword Id="389" Name="documento di riconoscimento" Dominio="N" />
+<Keyword Id="391" Name="documento programmatico sulla sicurezza" Dominio="N" />
+<Keyword Id="2445" Name="donatore di midollo osseo" Dominio="N" />
+<Keyword Id="2461" Name="donatore di sangue" Dominio="N" />
+<Keyword Id="203" Name="elaboratore" Dominio="N" />
+<Keyword Id="66" Name="elaborazione" Dominio="N" />
+<Keyword Id="2408" Name="elezione" Dominio="N" />
+<Keyword Id="2435" Name="emergenza" Dominio="N" />
+<Keyword Id="148" Name="ente" Dominio="N" />
+<Keyword Id="2466" Name="ente di ricerca" Dominio="N" />
+<Keyword Id="92" Name="ente pubblico economico" Dominio="N" />
+<Keyword Id="232" Name="esattezza" Dominio="N" />
+<Keyword Id="262" Name="esercente le professioni sanitarie" Dominio="N" />
+<Keyword Id="2421" Name="esercente professione sanitaria" Dominio="N" />
+<Keyword Id="69" Name="estrazione" Dominio="N" />
+<Keyword Id="364" Name="estremo identificativo" Dominio="N" />
+<Keyword Id="2469" Name="familiare" Dominio="N" />
+<Keyword Id="2442" Name="fascetta adesiva" Dominio="N" />
+<Keyword Id="365" Name="fatturazione" Dominio="N" />
+<Keyword Id="317" Name="fibra ottica" Dominio="N" />
+<Keyword Id="238" Name="finalità" Dominio="N" />
+<Keyword Id="236" Name="finalità giornalistica" Dominio="N" />
+<Keyword Id="392" Name="firma digitale" Dominio="N" />
+<Keyword Id="393" Name="fornitore" Dominio="N" />
+<Keyword Id="2415" Name="funzione di controllo" Dominio="N" />
+<Keyword Id="2389" Name="funzione giurisdizionale" Dominio="N" />
+<Keyword Id="15" Name="garante" Dominio="S" />
+<Keyword Id="252" Name="garanzia" Dominio="N" />
+<Keyword Id="165" Name="gazzetta ufficiale" Dominio="N" />
+<Keyword Id="289" Name="generalità" Dominio="N" />
+<Keyword Id="330" Name="giudice" Dominio="N" />
+<Keyword Id="332" Name="giudizio" Dominio="N" />
+<Keyword Id="182" Name="identificazione" Dominio="N" />
+<Keyword Id="2407" Name="immigrazione" Dominio="N" />
+<Keyword Id="8" Name="incaricato" Dominio="S" />
+<Keyword Id="144" Name="incolumità fisica" Dominio="N" />
+<Keyword Id="2411" Name="incompatibilità" Dominio="N" />
+<Keyword Id="212" Name="indagine" Dominio="N" />
+<Keyword Id="214" Name="indagine statistica" Dominio="N" />
+<Keyword Id="138" Name="indirizzo" Dominio="N" />
+<Keyword Id="267" Name="individuazione" Dominio="N" />
+<Keyword Id="2410" Name="ineleggibilità" Dominio="N" />
+<Keyword Id="2404" Name="informare" Dominio="N" />
+<Keyword Id="237" Name="informativa" Dominio="N" />
+<Keyword Id="242" Name="informativa impossibile" Dominio="N" />
+<Keyword Id="2428" Name="informativa in modalità semplificata" Dominio="N" />
+<Keyword Id="81" Name="informazione" Dominio="N" />
+<Keyword Id="2484" Name="informazione commerciale" Dominio="N" />
+<Keyword Id="100" Name="integrazione" Dominio="N" />
+<Keyword Id="72" Name="interconnessione" Dominio="N" />
+<Keyword Id="9" Name="interessato" Dominio="S" />
+<Keyword Id="395" Name="interesse" Dominio="N" />
+<Keyword Id="397" Name="interesse collettivo" Dominio="N" />
+<Keyword Id="396" Name="interesse legittimo" Dominio="N" />
+<Keyword Id="143" Name="interesse pubblico" Dominio="N" />
+<Keyword Id="319" Name="internet" Dominio="N" />
+<Keyword Id="167" Name="interpello preventivo" Dominio="N" />
+<Keyword Id="235" Name="inutilizzabilità" Dominio="N" />
+<Keyword Id="304" Name="istante" Dominio="N" />
+<Keyword Id="2482" Name="Istituto di patronato e di assistenza sociale" Dominio="N" />
+<Keyword Id="2473" Name="Istituto nazionale di statistica" Dominio="N" />
+<Keyword Id="2463" Name="istituto scolastico di istruzione secondaria" Dominio="N" />
+<Keyword Id="305" Name="istruttoria preliminare" Dominio="N" />
+<Keyword Id="2486" Name="Isvap" Dominio="N" />
+<Keyword Id="398" Name="lavoratore" Dominio="N" />
+<Keyword Id="2476" Name="lavoro" Dominio="N" />
+<Keyword Id="2479" Name="lavoro a domicilio" Dominio="N" />
+<Keyword Id="90" Name="legge" Dominio="N" />
+<Keyword Id="400" Name="lettera raccomandata" Dominio="N" />
+<Keyword Id="250" Name="libertà fondamentale" Dominio="N" />
+<Keyword Id="231" Name="liceità" Dominio="N" />
+<Keyword Id="411" Name="lista elettorale" Dominio="N" />
+<Keyword Id="2382" Name="livello minimo" Dominio="N" />
+<Keyword Id="2393" Name="lodo arbitrale" Dominio="N" />
+<Keyword Id="390" Name="magistrato amministrativo" Dominio="N" />
+<Keyword Id="366" Name="magistrato ordinario" Dominio="N" />
+<Keyword Id="2459" Name="malattia di Creutzfeld-Jacob" Dominio="N" />
+<Keyword Id="2460" Name="malattie rare" Dominio="N" />
+<Keyword Id="2483" Name="mandato" Dominio="N" />
+<Keyword Id="421" Name="marina" Dominio="N" />
+<Keyword Id="2439" Name="medicinale" Dominio="N" />
+<Keyword Id="2422" Name="medico" Dominio="N" />
+<Keyword Id="123" Name="medico di famiglia" Dominio="N" />
+<Keyword Id="417" Name="medico di medicina generale" Dominio="N" />
+<Keyword Id="2458" Name="mesotelioma asbesto-correlati" Dominio="N" />
+<Keyword Id="196" Name="messaggio" Dominio="N" />
+<Keyword Id="243" Name="mezzo sproporzionato" Dominio="N" />
+<Keyword Id="309" Name="minimizzazione utilizzo" Dominio="N" />
+<Keyword Id="348" Name="Ministero degli affari esteri" Dominio="N" />
+<Keyword Id="347" Name="Ministero dell'economia e delle finanze" Dominio="N" />
+<Keyword Id="418" Name="Ministero dell'interno" Dominio="N" />
+<Keyword Id="346" Name="Ministero della giustizia" Dominio="N" />
+<Keyword Id="355" Name="Ministro del lavoro e delle politiche sociali" Dominio="N" />
+<Keyword Id="351" Name="Ministro dell'economia e delle finanze" Dominio="N" />
+<Keyword Id="293" Name="Ministro dell'interno" Dominio="N" />
+<Keyword Id="125" Name="Ministro della giustizia" Dominio="N" />
+<Keyword Id="354" Name="Ministro della salute" Dominio="N" />
+<Keyword Id="353" Name="Ministro della sanità" Dominio="N" />
+<Keyword Id="352" Name="Ministro delle comunicazioni" Dominio="N" />
+<Keyword Id="349" Name="Ministro per la funzione pubblica" Dominio="N" />
+<Keyword Id="126" Name="Ministro per le innovazioni e le tecnologie" Dominio="N" />
+<Keyword Id="350" Name="Ministro per le politiche comunitarie" Dominio="N" />
+<Keyword Id="2391" Name="minore" Dominio="N" />
+<Keyword Id="198" Name="misura" Dominio="N" />
+<Keyword Id="197" Name="misura di sicurezza" Dominio="N" />
+<Keyword Id="106" Name="misura idonea" Dominio="N" />
+<Keyword Id="199" Name="misura informatica" Dominio="N" />
+<Keyword Id="201" Name="misura logistica" Dominio="N" />
+<Keyword Id="26" Name="misura minima" Dominio="S" />
+<Keyword Id="200" Name="misura organizzativa" Dominio="N" />
+<Keyword Id="202" Name="misura procedurale" Dominio="N" />
+<Keyword Id="326" Name="misura tecnica" Dominio="N" />
+<Keyword Id="239" Name="modalità" Dominio="N" />
+<Keyword Id="111" Name="modalità semplificata" Dominio="N" />
+<Keyword Id="142" Name="modello" Dominio="N" />
+<Keyword Id="67" Name="modificazione" Dominio="N" />
+<Keyword Id="2474" Name="nascita" Dominio="N" />
+<Keyword Id="308" Name="non luogo a provvedere" Dominio="N" />
+<Keyword Id="403" Name="normativa" Dominio="N" />
+<Keyword Id="368" Name="normativa antimafia" Dominio="N" />
+<Keyword Id="241" Name="normativa comunitaria" Dominio="N" />
+<Keyword Id="333" Name="nota difensiva" Dominio="N" />
+<Keyword Id="44" Name="notifica" Dominio="N" />
+<Keyword Id="402" Name="obbligo" Dominio="N" />
+<Keyword Id="40" Name="operazione" Dominio="N" />
+<Keyword Id="185" Name="opinione politica" Dominio="N" />
+<Keyword Id="103" Name="opposizione" Dominio="N" />
+<Keyword Id="369" Name="ordinamento" Dominio="N" />
+<Keyword Id="370" Name="ordinanza" Dominio="N" />
+<Keyword Id="2403" Name="ordine professionale" Dominio="N" />
+<Keyword Id="2394" Name="ordine pubblico" Dominio="N" />
+<Keyword Id="2425" Name="organismo sanitario privato" Dominio="N" />
+<Keyword Id="263" Name="organismo sanitaro pubblico" Dominio="N" />
+<Keyword Id="371" Name="organismo senza scopo di lucro" Dominio="N" />
+<Keyword Id="64" Name="organizzazione" Dominio="N" />
+<Keyword Id="173" Name="organo di autogoverno" Dominio="N" />
+<Keyword Id="291" Name="organo pubblica sicurezza" Dominio="N" />
+<Keyword Id="285" Name="paese extraeuropeo" Dominio="N" />
+<Keyword Id="284" Name="paese terzo" Dominio="N" />
+<Keyword Id="340" Name="pagamento" Dominio="N" />
+<Keyword Id="336" Name="parere" Dominio="N" />
+<Keyword Id="404" Name="Parlamento europeo" Dominio="N" />
+<Keyword Id="30" Name="parola chiave" Dominio="S" />
+<Keyword Id="327" Name="parte" Dominio="N" />
+<Keyword Id="186" Name="partito politico" Dominio="N" />
+<Keyword Id="124" Name="pediatra" Dominio="N" />
+<Keyword Id="258" Name="perizia" Dominio="N" />
+<Keyword Id="208" Name="persona" Dominio="N" />
+<Keyword Id="223" Name="persona deceduta" Dominio="N" />
+<Keyword Id="97" Name="persona fisica" Dominio="N" />
+<Keyword Id="147" Name="persona giuridica" Dominio="N" />
+<Keyword Id="414" Name="persona presso la quale sono raccolti i dati personali" Dominio="N" />
+<Keyword Id="233" Name="pertinenza" Dominio="N" />
+<Keyword Id="295" Name="polizia" Dominio="N" />
+<Keyword Id="193" Name="posizione geografica" Dominio="N" />
+<Keyword Id="25" Name="posta elettronica" Dominio="S" />
+<Keyword Id="2451" Name="presa visione" Dominio="N" />
+<Keyword Id="2438" Name="prescrizione" Dominio="N" />
+<Keyword Id="168" Name="presentazione" Dominio="N" />
+<Keyword Id="2413" Name="presentazione candidature" Dominio="N" />
+<Keyword Id="301" Name="Presidente del Consiglio dei Ministri" Dominio="N" />
+<Keyword Id="274" Name="Presidenza della Repubblica" Dominio="N" />
+<Keyword Id="2477" Name="previdenza sociale" Dominio="N" />
+<Keyword Id="2376" Name="principio di necessità" Dominio="N" />
+<Keyword Id="264" Name="privato" Dominio="N" />
+<Keyword Id="256" Name="procedimento" Dominio="N" />
+<Keyword Id="205" Name="procedura" Dominio="N" />
+<Keyword Id="222" Name="procura" Dominio="N" />
+<Keyword Id="373" Name="procuratore" Dominio="N" />
+<Keyword Id="2431" Name="professionista" Dominio="N" />
+<Keyword Id="31" Name="profilo di autorizzazione" Dominio="S" />
+<Keyword Id="55" Name="programma informatico" Dominio="N" />
+<Keyword Id="53" Name="protezione" Dominio="N" />
+<Keyword Id="269" Name="provvedimento" Dominio="N" />
+<Keyword Id="190" Name="pubblica amministrazione" Dominio="N" />
+<Keyword Id="294" Name="pubblica sicurezza" Dominio="N" />
+<Keyword Id="341" Name="pubblicazione" Dominio="N" />
+<Keyword Id="345" Name="pubblicazione sentenza" Dominio="N" />
+<Keyword Id="2437" Name="pubblicità" Dominio="N" />
+<Keyword Id="2414" Name="pubblicità dell'attività di organi" Dominio="N" />
+<Keyword Id="344" Name="pubblico ministero" Dominio="N" />
+<Keyword Id="145" Name="pubblico registro" Dominio="N" />
+<Keyword Id="62" Name="raccolta" Dominio="N" />
+<Keyword Id="316" Name="radio" Dominio="N" />
+<Keyword Id="70" Name="raffronto" Dominio="N" />
+<Keyword Id="183" Name="razza" Dominio="N" />
+<Keyword Id="374" Name="reato" Dominio="N" />
+<Keyword Id="162" Name="reclamo" Dominio="N" />
+<Keyword Id="342" Name="reclusione" Dominio="N" />
+<Keyword Id="2409" Name="referendum" Dominio="N" />
+<Keyword Id="63" Name="registrazione" Dominio="N" />
+<Keyword Id="2456" Name="registro" Dominio="N" />
+<Keyword Id="129" Name="registro dei trattamenti" Dominio="N" />
+<Keyword Id="2487" Name="regolamentazione" Dominio="N" />
+<Keyword Id="266" Name="regolamento" Dominio="N" />
+<Keyword Id="307" Name="regolarizzazione" Dominio="N" />
+<Keyword Id="2436" Name="regole di condotta" Dominio="N" />
+<Keyword Id="338" Name="relazione" Dominio="N" />
+<Keyword Id="184" Name="religione" Dominio="N" />
+<Keyword Id="406" Name="Repubblica Italiana" Dominio="N" />
+<Keyword Id="7" Name="responsabile" Dominio="S" />
+<Keyword Id="322" Name="rete elettrica" Dominio="N" />
+<Keyword Id="37" Name="rete pubblica di comunicazioni" Dominio="S" />
+<Keyword Id="324" Name="rete radiotelevisiva" Dominio="N" />
+<Keyword Id="318" Name="rete satellitare" Dominio="N" />
+<Keyword Id="325" Name="rete telecomunicazione" Dominio="N" />
+<Keyword Id="320" Name="rete televisiva" Dominio="N" />
+<Keyword Id="18" Name="reti di comunicazione elettronica" Dominio="S" />
+<Keyword Id="99" Name="rettifica" Dominio="N" />
+<Keyword Id="213" Name="ricerca" Dominio="N" />
+<Keyword Id="2475" Name="ricerca medica" Dominio="N" />
+<Keyword Id="2440" Name="ricetta di medicinali" Dominio="N" />
+<Keyword Id="2447" Name="ricevente di midollo osseo" Dominio="N" />
+<Keyword Id="107" Name="richiedente" Dominio="N" />
+<Keyword Id="105" Name="richiesta" Dominio="N" />
+<Keyword Id="130" Name="richiesta autorizzazione" Dominio="N" />
+<Keyword Id="217" Name="richiesta informale" Dominio="N" />
+<Keyword Id="331" Name="ricorrente" Dominio="N" />
+<Keyword Id="164" Name="ricorso" Dominio="N" />
+<Keyword Id="218" Name="riferimento normativo" Dominio="N" />
+<Keyword Id="277" Name="rigetto" Dominio="N" />
+<Keyword Id="2452" Name="rilascio copia" Dominio="N" />
+<Keyword Id="246" Name="risarcimento" Dominio="N" />
+<Keyword Id="224" Name="riscontro" Dominio="N" />
+<Keyword Id="288" Name="riservatezza" Dominio="N" />
+<Keyword Id="2481" Name="rispetto" Dominio="N" />
+<Keyword Id="189" Name="sanzione amministrativa" Dominio="N" />
+<Keyword Id="2453" Name="scheda dimissione ospedaliera" Dominio="N" />
+<Keyword Id="2457" Name="schedario" Dominio="N" />
+<Keyword Id="35" Name="scopo scientifico" Dominio="S" />
+<Keyword Id="34" Name="scopo statistico" Dominio="S" />
+<Keyword Id="33" Name="scopo storico" Dominio="S" />
+<Keyword Id="2462" Name="scuola" Dominio="N" />
+<Keyword Id="163" Name="segnalazione" Dominio="N" />
+<Keyword Id="416" Name="segreto" Dominio="N" />
+<Keyword Id="401" Name="segreto aziendale e industriale" Dominio="N" />
+<Keyword Id="299" Name="segreto di stato" Dominio="N" />
+<Keyword Id="415" Name="segreto professionale" Dominio="N" />
+<Keyword Id="68" Name="selezione" Dominio="N" />
+<Keyword Id="272" Name="senato della repubblica" Dominio="N" />
+<Keyword Id="290" Name="sentenza" Dominio="N" />
+<Keyword Id="206" Name="sequenza di caratteri" Dominio="N" />
+<Keyword Id="195" Name="servizio" Dominio="N" />
+<Keyword Id="24" Name="servizio a valore aggiunto" Dominio="S" />
+<Keyword Id="19" Name="servizio di comunicazione elettronica" Dominio="S" />
+<Keyword Id="375" Name="servizio sanitario nazionale" Dominio="N" />
+<Keyword Id="112" Name="servizio telefonico" Dominio="N" />
+<Keyword Id="407" Name="sicurezza" Dominio="N" />
+<Keyword Id="2398" Name="sicurezza dello Stato" Dominio="N" />
+<Keyword Id="187" Name="sindacato" Dominio="N" />
+<Keyword Id="2416" Name="sindacato ispettivo" Dominio="N" />
+<Keyword Id="32" Name="sistema di autorizzazione" Dominio="S" />
+<Keyword Id="283" Name="sistema di notificazione" Dominio="N" />
+<Keyword Id="314" Name="sistema di trasmissione" Dominio="N" />
+<Keyword Id="54" Name="sistema informativo" Dominio="N" />
+<Keyword Id="215" Name="sistema informativo statistico" Dominio="N" />
+<Keyword Id="2471" Name="Sistema statistico nazionale" Dominio="N" />
+<Keyword Id="376" Name="sms" Dominio="N" />
+<Keyword Id="2381" Name="soggetto determinato" Dominio="N" />
+<Keyword Id="2380" Name="soggetto indeterminato" Dominio="N" />
+<Keyword Id="306" Name="soggetto non legittimato" Dominio="N" />
+<Keyword Id="110" Name="soggetto privato" Dominio="N" />
+<Keyword Id="91" Name="soggetto pubblico" Dominio="N" />
+<Keyword Id="2426" Name="soggetto pubblico in ambito sanitario" Dominio="N" />
+<Keyword Id="2427" Name="soggetto pubblico in prevenzione e sicurezza del lavoro" Dominio="N" />
+<Keyword Id="259" Name="sospensione" Dominio="N" />
+<Keyword Id="2400" Name="sottoscrizione" Dominio="N" />
+<Keyword Id="2412" Name="sottoscrizione liste" Dominio="N" />
+<Keyword Id="2399" Name="sottoscrzione" Dominio="N" />
+<Keyword Id="255" Name="spesa" Dominio="N" />
+<Keyword Id="2405" Name="stato civile" Dominio="N" />
+<Keyword Id="377" Name="statuto" Dominio="N" />
+<Keyword Id="2406" Name="straniero" Dominio="N" />
+<Keyword Id="209" Name="strumento" Dominio="N" />
+<Keyword Id="58" Name="strumento elettronico" Dominio="S" />
+<Keyword Id="211" Name="studio" Dominio="N" />
+<Keyword Id="2441" Name="tagliando" Dominio="N" />
+<Keyword Id="2423" Name="teleassistenza" Dominio="N" />
+<Keyword Id="399" Name="telefax" Dominio="N" />
+<Keyword Id="410" Name="telelavoro" Dominio="N" />
+<Keyword Id="2424" Name="telemedicina" Dominio="N" />
+<Keyword Id="379" Name="terminale" Dominio="N" />
+<Keyword Id="420" Name="terza parte" Dominio="N" />
+<Keyword Id="270" Name="test psico-attitudinale" Dominio="N" />
+<Keyword Id="6" Name="titolare" Dominio="S" />
+<Keyword Id="2443" Name="tossicodipendenza" Dominio="N" />
+<Keyword Id="131" Name="trasferimento" Dominio="N" />
+<Keyword Id="2385" Name="trasformazione in forma anonima" Dominio="N" />
+<Keyword Id="170" Name="trasmissione" Dominio="N" />
+<Keyword Id="1" Name="trattamento" Dominio="S" />
+<Keyword Id="244" Name="trattamento automatizzato" Dominio="N" />
+<Keyword Id="207" Name="trattamento consentito" Dominio="N" />
+<Keyword Id="380" Name="trattamento illecito" Dominio="N" />
+<Keyword Id="2450" Name="trattamento mediante carte" Dominio="N" />
+<Keyword Id="174" Name="trattamento non occasionale" Dominio="N" />
+<Keyword Id="240" Name="trattamento obbligatorio" Dominio="N" />
+<Keyword Id="175" Name="trattamento per ragioni di giustizia" Dominio="N" />
+<Keyword Id="286" Name="trattazione giudiziaria" Dominio="N" />
+<Keyword Id="329" Name="tribunale" Dominio="N" />
+<Keyword Id="2434" Name="tutela dell'incolumità fisica" Dominio="N" />
+<Keyword Id="2433" Name="tutela dell'infc" Dominio="N" />
+<Keyword Id="2432" Name="tutela della salute" Dominio="N" />
+<Keyword Id="150" Name="tutela persone" Dominio="N" />
+<Keyword Id="220" Name="ufficio giudiziario" Dominio="N" />
+<Keyword Id="408" Name="Unione Europea" Dominio="N" />
+<Keyword Id="2465" Name="università" Dominio="N" />
+<Keyword Id="21" Name="utente" Dominio="S" />
+<Keyword Id="71" Name="utilizzo" Dominio="N" />
+<Keyword Id="2396" Name="verifica dei requisiti" Dominio="N" />
+<Keyword Id="253" Name="versamento" Dominio="N" />
+<Keyword Id="228" Name="versamento bancario" Dominio="N" />
+<Keyword Id="229" Name="versamento postale" Dominio="N" />
+<Keyword Id="381" Name="videosorveglianza" Dominio="N" />
+<Keyword Id="409" Name="violazione" Dominio="N" />
 </TopTerms>
-
-
