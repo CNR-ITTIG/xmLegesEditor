@@ -140,6 +140,16 @@ public class MetaEditActionImpl implements MetaEditAction, EventManagerListener,
 		metaEditForm.setDisposizioni(onDocument);
 		metaEditForm.openForm();
 		if (metaEditForm.isOKClicked()) {
+			Node[] onPartition = metaEditForm.getDisposizioni();
+			
+			if(onPartition== null || onPartition.length==0)
+				System.err.println("NO META MARKUP FOR: "+idPartizione);
+			else{
+				for(int i=0; i<onPartition.length;i++){
+					System.err.println("META MARKUP FOR: "+idPartizione+" "+onPartition[i].getNodeName());
+					System.err.println("PASSING:  \n"+UtilDom.domToString(onPartition[i],true,"  "));
+				}
+			}
 				System.err.println("--------->  metaEditForm   OK");
 		}
 		
