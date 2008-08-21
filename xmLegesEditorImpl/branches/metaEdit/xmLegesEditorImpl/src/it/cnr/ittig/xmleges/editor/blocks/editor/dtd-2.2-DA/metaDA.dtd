@@ -239,7 +239,25 @@ D-A
 			======================================================================= -->
 <!-- modifica aprile 2008: eliminati tag motivazioni e comunicazioni, non necessari nel tag disposizioni -->
 <!-- ELEMENT disposizioni (motivazioni?,regole?,modifiche?,comunicazioni?) -->
-<!ELEMENT disposizioni (regole?,modifiche?)>
+
+<!-- modifica agosto 2008: nel DTD non viene riportata la tassonomia delle classi di 
+		 disposizioni, ma solo i tipi di disposizioni: la parte di modello Disposizioni-Argomenti
+		 relativo alle classi verrà memorizzato esternamente in modo da creare un DTD più flessibile
+		 compresi i relativi documenti XML																					 -->
+<!--- =======================================================================
+			Entità lista disposizioni dal modello D-A, senza suddivisioni in classi
+			======================================================================= -->
+<!ENTITY % listaDisposizioni "(dsp:ambito | dsp:finalita | dsp:finanziaria | dsp:procedura | 
+															 dsp:termine_dominio | dsp:destitutiva | dsp:istitutiva | dsp:organizzativa | dsp:diritto | 
+															 dsp:dovere | dsp:potere | dsp:divieto | dsp:obbligo | dsp:permesso | dsp:pretesa |
+															 dsp:nullita | dsp:violazione | dsp:conferma | dsp:eccezione | dsp:estensione | 
+															 dsp:abrogazione | dsp:integrazione | dsp:sostituzione)+">
+															 
+<!--	modifica agosto 2008: nel DTD non viene più riportata la tassonomia delle classi del modello D-A
+			ma solo la lista piatta dei tipi di disposizioni del modello D-A --> 
+<!-- ELEMENT disposizioni (regole?,modifiche?) -->
+<!ELEMENT disposizioni %listaDisposizioni; >
+
 <!--- =======================================================================
 		modello D-A: aggiunto l'attributo fonteUri all'elemento disposizioni, per indicare che il dizionario usato
 								 per la marcatura si riferisce ad un'ontologia, identificata da un URI
@@ -290,78 +308,91 @@ D-A
 <!-- DTD2.2 ENTITY % regole "(%atto; | %costitutive; | %regolative; | dsp:regola)+" -->
 
 <!--- =======================================================================
-						modello D-A: nuova classe Regole
+			modifica agosto 2008: nel DTD non viene più riportata la tassonomia delle classi del modello D-A 
+			modello D-A: nuova classe Regole
 			======================================================================= -->
-<!ENTITY % regole "(costituzione?, regolazione?)">
-<!ELEMENT regole %regole; >
+<!-- ENTITY % regole "(costituzione?, regolazione?)" -->
+<!-- ELEMENT regole %regole; -->
 
 <!--- =======================================================================
-						modello D-A: nuova sottoclasse Regole.Costituzione
+			modifica agosto 2008: nel DTD non viene più riportata la tassonomia delle classi del modello D-A 
+			modello D-A: nuova sottoclasse Regole.Costituzione
 			======================================================================= -->
-<!ENTITY % costituzione "(introduzione?, definizione?, creazione?, attribuzione?)">
-<!ELEMENT costituzione %costituzione; >
+<!-- ENTITY % costituzione "(introduzione?, definizione?, creazione?, attribuzione?)" -->
+<!-- ELEMENT costituzione %costituzione; -->
 
 <!--- =======================================================================
-						modello D-A: nuova sottoclasse Regole.Regolazione
+			modifica agosto 2008: nel DTD non viene più riportata la tassonomia delle classi del modello D-A 
+			modello D-A: nuova sottoclasse Regole.Regolazione
 			======================================================================= -->
-<!ENTITY % regolazione "(azione?, riparazione?)">
-<!ELEMENT regolazione %regolazione; >
-
-<!--- =======================================================================
-						modello D-A: nuova sottoclasse Regole.Costituzione.Introduzione
-			======================================================================= -->
-<!ENTITY % introduzione "(dsp:ambito | dsp:finalita | dsp:finanziaria)+">
-<!ELEMENT introduzione %introduzione; >
-
-<!--- =======================================================================
-						modello D-A: nuova sottoclasse Regole.Costituzione.Definizione
-			======================================================================= -->
-<!ENTITY % definizione "(dsp:procedura | dsp:termine_dominio)+">
-<!ELEMENT definizione %definizione; >
-
-<!--- =======================================================================
-						modello D-A: nuova sottoclasse Regole.Costituzione.Creazione
-			======================================================================= -->
-<!ENTITY % creazione "(dsp:destitutiva | dsp:istitutiva | dsp:organizzativa)+">
-<!ELEMENT creazione %creazione; >
-
-<!--- =======================================================================
-						modello D-A: nuova sottoclasse Regole.Costituzione.Attribuzione
-			======================================================================= -->
-<!ENTITY % attribuzione "(dsp:diritto | dsp:dovere | dsp:potere)+">
-<!ELEMENT attribuzione %attribuzione; >
-
-<!--- =======================================================================
-						modello D-A: nuova sottoclasse Regole.Regolazione.Azione
-			======================================================================= -->
-<!ENTITY % azione "(dsp:divieto | dsp:obbligo | dsp:permesso | dsp:pretesa)+">
-<!ELEMENT azione %azione; >
-
-<!--- =======================================================================
-						modello D-A: nuova sottoclasse Regole.Regolazione.Riparazione
-			======================================================================= -->
-<!ENTITY % riparazione "(dsp:nullita | dsp:violazione)+">
-<!ELEMENT riparazione %riparazione; >
-
-<!--- =======================================================================
-						modello D-A: nuova classe Modifiche.Derogazione
-			======================================================================= -->
-<!ENTITY % derogazione "(dsp:conferma | dsp:eccezione | dsp:estensione)+">
-<!ELEMENT derogazione %derogazione; >
-
-<!--- =======================================================================
-						modello D-A: nuova classe Modifiche.Modificazione
-			======================================================================= -->
-<!ENTITY % modificazione "(dsp:abrogazione | dsp:integrazione | dsp:sostituzione)+">
-<!ELEMENT modificazione %modificazione; >
+<!-- ENTITY % regolazione "(azione?, riparazione?)" -->
+<!-- ELEMENT regolazione %regolazione; -->
 
 
 <!--- =======================================================================
-						modello D-A: nuova classe Modifiche
+			modifica agosto 2008: nel DTD non viene più riportata la tassonomia delle classi del modello D-A 
+			modello D-A: nuova sottoclasse Regole.Costituzione.Introduzione
+			======================================================================= -->
+<!-- ENTITY % introduzione "(dsp:ambito | dsp:finalita | dsp:finanziaria)+"-->
+<!-- ELEMENT introduzione %introduzione; -->
+
+<!--- =======================================================================
+			modifica agosto 2008: nel DTD non viene più riportata la tassonomia delle classi del modello D-A 
+			modello D-A: nuova sottoclasse Regole.Costituzione.Definizione
+			======================================================================= -->
+<!-- ENTITY % definizione "(dsp:procedura | dsp:termine_dominio)+" -->
+<!-- ELEMENT definizione %definizione; -->
+
+<!--- =======================================================================
+			modifica agosto 2008: nel DTD non viene più riportata la tassonomia delle classi del modello D-A 
+			modello D-A: nuova sottoclasse Regole.Costituzione.Creazione
+			======================================================================= -->
+<!-- ENTITY % creazione "(dsp:destitutiva | dsp:istitutiva | dsp:organizzativa)+" -->
+<!-- ELEMENT creazione %creazione; -->
+
+<!--- =======================================================================
+			modifica agosto 2008: nel DTD non viene più riportata la tassonomia delle classi del modello D-A 
+			modello D-A: nuova sottoclasse Regole.Costituzione.Attribuzione
+			======================================================================= -->
+<!-- ENTITY % attribuzione "(dsp:diritto | dsp:dovere | dsp:potere)+" -->
+<!-- ELEMENT attribuzione %attribuzione; -->
+
+<!--- =======================================================================
+			modifica agosto 2008: nel DTD non viene più riportata la tassonomia delle classi del modello D-A 
+			modello D-A: nuova sottoclasse Regole.Regolazione.Azione
+			======================================================================= -->
+<!-- ENTITY % azione "(dsp:divieto | dsp:obbligo | dsp:permesso | dsp:pretesa)+" -->
+<!-- ELEMENT azione %azione; -->
+
+<!--- =======================================================================
+			modifica agosto 2008: nel DTD non viene più riportata la tassonomia delle classi del modello D-A 
+			modello D-A: nuova sottoclasse Regole.Regolazione.Riparazione
+			======================================================================= -->
+<!-- ENTITY % riparazione "(dsp:nullita | dsp:violazione)+" -->
+<!-- ELEMENT riparazione %riparazione; -->
+
+<!--- =======================================================================
+			modifica agosto 2008: nel DTD non viene più riportata la tassonomia delle classi del modello D-A 
+			modello D-A: nuova classe Modifiche.Derogazione
+			======================================================================= -->
+<!-- ENTITY % derogazione "(dsp:conferma | dsp:eccezione | dsp:estensione)+" -->
+<!-- ELEMENT derogazione %derogazione; -->
+
+<!--- =======================================================================
+			modifica agosto 2008: nel DTD non viene più riportata la tassonomia delle classi del modello D-A 
+			modello D-A: nuova classe Modifiche.Modificazione
+			======================================================================= -->
+<!-- ENTITY % modificazione "(dsp:abrogazione | dsp:integrazione | dsp:sostituzione)+" -->
+<!-- ELEMENT modificazione %modificazione; -->
+
+
+<!--- =======================================================================
+			dsp:abrogazione | dsp:integrazione | dsp:sostituzione
+			modello D-A: nuova classe Modifiche
 			======================================================================= -->
 
-<!ENTITY % modifiche "(derogazione?, modificazione?)">
-<!ELEMENT modifiche %modifiche; >
+<!-- ENTITY % modifiche "(derogazione?, modificazione?)" -->
+<!-- ELEMENT modifiche %modifiche; -->
 
 
 <!-- DTD2.2 ENTITY % dsp_ambito_entity "(%posizionitermini;,(dsp:destinatario,dsp:territorio,dsp:attivita))" -->
