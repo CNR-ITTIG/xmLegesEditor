@@ -149,6 +149,7 @@ public class MetaEditActionImpl implements MetaEditAction, EventManagerListener,
 					System.err.println("META MARKUP FOR: "+idPartizione+" "+onPartition[i].getNodeName());
 					System.err.println("PASSING:  \n"+UtilDom.domToString(onPartition[i],true,"  "));
 				}
+				metaEdit.setDAOnDocument(onPartition, idPartizione);
 			}
 				System.err.println("--------->  metaEditForm   OK");
 		}
