@@ -63,6 +63,10 @@ public class MetaEditImpl implements MetaEdit, Loggable, Serviceable {
 	
 	private Vector disposizioniNodes;
 
+	static String TAG_POS ="dsp:pos";
+	static String ATTR_POS_XLINK_HREF ="xlink:href";
+	static String ATTR_POS_XLINK_TYPE ="xlink:type";
+	static String ATTR_POS_XLINK_TYPE_VALUE ="simple";
 	
 	
 	// //////////////////////////////////////////////////// LogEnabled Interface
@@ -147,7 +151,27 @@ public class MetaEditImpl implements MetaEdit, Loggable, Serviceable {
 	
 
 	public void setDAOnDocument(Node[] DAList, String idPartition) {
-		// TODO Auto-generated method stub
+		// removeDAFromDocument(String idPartizione); --- removeChild(Node oldChild);
+		Node disposizioni = ((Document)documentManager.getDocumentAsDom()).getElementsByTagName("disposizioni").item(0);
+		disposizioniNodes = new Vector(); // vettore contenente come elementi nodi
+		Vector disposizioniList = modelloDA.getDisposizioniList();
+		getDisposizioniFromDoc(disposizioni, disposizioniList);
+		
+		for(int i=0; i<disposizioniNodes.size();i++){
+			// controlla se la disposizione si riferisce alla partizione con id "idPartition"
+			String pos = UtilDom.getAttributeValueAsString(UtilDom.findDirectChild((Node)disposizioniNodes.get(i),"dsp:pos"),"xlink:href");
+			pos=pos.startsWith("#")?pos.substring(1):pos;
+			if(pos.equalsIgnoreCase(idPartition))
+				disposizioni.removeChild((Node)disposizioniNodes.get(i));
+				
+		}
+		
+		Node nodePos= documentManager.getDocumentAsDom().createElement(TAG_POS);
+		UtilDom.setAttributeValue(nodePos, ATTR_POS_XLINK_HREF, idPartition);
+		UtilDom.setAttributeValue(nodePos, ATTR_POS_XLINK_TYPE, ATTR_POS_XLINK_TYPE_VALUE);
+		for(int i=0; i<DAList.length;i++) {
+		  DAList[i].appendChild(nodePos.cloneNode(true));
+		  disposizioni.appendChild(DAList[i]);
+		}
 	}
-
 }
