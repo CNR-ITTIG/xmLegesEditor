@@ -11,6 +11,7 @@ import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
+import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.core.util.xml.UtilXml;
@@ -19,7 +20,7 @@ import it.cnr.ittig.xmleges.editor.services.util.metaedit.ModelloDA;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
-import javax.swing.JOptionPane;
+import java.util.Vector;
 
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
@@ -29,9 +30,7 @@ import javax.swing.JTree;
 import javax.swing.event.TreeModelListener;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
-import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
-import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
@@ -39,8 +38,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
-import java.util.Vector;
 /**
  * <h1>Implementazione del servizio
  * <code>it.cnr.ittig.xmleges.editor.services.form.metaedit.MetaEditForm</code>.</h1>
@@ -84,6 +81,8 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
 	ModelloDA modelloDA;
 
 	DtdRulesManager dtdRulesManager;
+	
+	UtilRulesManager utilRulesManager;
 
 	DocumentManager documentManager;
 	
@@ -105,13 +104,17 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
 	private JComboBox comboKeywords;
 	private JButton buttonPiu, buttonMeno, buttonAccept, buttonReject;
 	private Document  keywords;
-	private DefaultMutableTreeNode dispRoot, argChild;	 
-	  
+	
 	static String DISPOSIZIONE     = "disposizione";
 	static String ARGOMENTO		="argomento";
 	static String TAG_KEYWORDS	="dsp:keywords";
 	static String TAG_KEYWORD	="dsp:keyword";
-	static String F_XML_KEYWORDS 	 = "DisposizioniKeywords.xml";
+	
+	// IT
+	//static String F_XML_KEYWORDS 	 = "DisposizioniKeywords.xml";
+	
+	// EN
+	static String F_XML_KEYWORDS 	 = "DisposizioniKeywords_EN.xml";
 	
 	
 
@@ -129,6 +132,7 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
 		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
+		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
@@ -166,6 +170,12 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
 	    
 	    buttonAccept.setAction(buttonAcceptAction);
 	    buttonReject.setAction(buttonRejectAction);
+	    
+	    //Usa un cell renderer per le keywords ?
+        KeywordsListCellRenderer  renderer = new KeywordsListCellRenderer();
+        renderer.setI18n(i18n);
+       
+        comboKeywords.setRenderer(renderer);
 	  
 	    
 	    treeDisposizioni.addTreeSelectionListener(
@@ -282,12 +292,10 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
 		
 		treeArgomenti.setModel(null);
 		
-		
 		// CASO POPOLAMENTO ALBERO ARGUMENTS DA SELEZIONE ALBERO DISPOSIZIONI   (AGGIUNTA)
 		
 		if (e.getNodeName() == DISPOSIZIONE) {	
-			treeArgomenti.setModel(new DomArgumentTreeModel((convertTreeDAToArguments(e))));
-			
+			treeArgomenti.setModel(new DomArgumentTreeModel((getArgumentsTemplate(e))));
 			treeArgomenti.setCellRenderer(new DomArgumentTreeCellRenderer());
 		}  
 		
@@ -302,19 +310,10 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
 	}
 
 	
-	// converte il formato dell'albero degli argomenti in ModelloDA in quello usato per la visualizzazione 
-	private Node convertTreeDAToArguments(Node node){
-		Vector argomentiList = modelloDA.getArgomentiList();
+	private Node getArgumentsTemplate(Node node){
 		
-		Node newNode = documentManager.getDocumentAsDom().createElement(UtilDom.getAttributeValueAsString(node, "value"));
-		NodeList child = node.getChildNodes();
-		if(argomentiList.contains(newNode.getNodeName())){
-			Node nodeKws = documentManager.getDocumentAsDom().createElement(TAG_KEYWORDS);
-			newNode.appendChild(nodeKws);
-		}
-		for(int i=0;i<child.getLength();i++){
-			newNode.appendChild(convertTreeDAToArguments(child.item(i)));
-		}
+		// FIXME qui ci sarebbe da forzare il template che ha il tag dsp:pos
+		Node newNode = utilRulesManager.getNodeTemplate(UtilDom.getAttributeValueAsString(node, "value"));	
 		return newNode;
 	}
 	
@@ -335,12 +334,10 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
 		keywords = UtilXml.readXML(this.getClass().getResourceAsStream(F_XML_KEYWORDS));
 		Element rootKw = keywords.getDocumentElement();
 		NodeList nlKw = rootKw.getChildNodes();
-		for (int i=0; i<nlKw.getLength();i++) {
+		for (int i=0; i<nlKw.getLength();i++) {		
 			Node nKw = nlKw.item(i); 
-			if (nKw.getNodeType() == nKw.ELEMENT_NODE) {
-				Element eKw = (Element) nKw;
-				comboKeywords.addItem(eKw.getAttribute("Name"));
-			}
+			if (nKw.getNodeType() == nKw.ELEMENT_NODE) 
+				comboKeywords.addItem(nKw);
 		}
 	}
 	
@@ -456,7 +453,7 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
 			Node node = (Node) parent; 
 			NodeList list = node.getChildNodes(); 
 			for(int i=0; i<list.getLength();i++){
-				if(!modelloDA.isArgomento(((Element)list.item(i)).getTagName().trim()))
+				if(show(list.item(i)))
 					childCount++;
 			}		
 			return childCount;
@@ -469,7 +466,7 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
 			int pos = 0;
 			for(int i = 0, cnt = 0; i < getChildCount(node); i++) {
 				// visualizza tutto meno che gli argomenti
-				if(!modelloDA.isArgomento(((Element)list.item(i)).getTagName().trim())){
+				if(show(list.item(i))){
 					if (cnt++ == index) {
 						pos = i;
 						break;
@@ -477,6 +474,13 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
 				}
 			}
 			return list.item(pos);
+		}
+		
+		private boolean show(Node node){
+				
+			String tagName = ((Element)node).getTagName().trim();
+			return !(modelloDA.isArgomento(tagName) || tagName.startsWith("dsp:pos")) ;
+			
 		}
 
 
@@ -525,50 +529,39 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
 	class DomArgumentTreeModel  implements TreeModel { 
 		public DomArgumentTreeModel(Node root) { this.root = root; } 
 		public Object getRoot() { return root;} 
-
-		public int getChildCount(Object parent) { 
-			Node node = (Node) parent; 
-			NodeList list = node.getChildNodes(); 
-			return list.getLength(); 
-		} 
-		public Object getChild(Object parent, int index) { 
-			Node node = (Node) parent; 
-			NodeList list = node.getChildNodes(); 
-			return list.item(index); 
-		} 
 		
-/* --- visualizzo anche i figli "dsp:keywords"  		
+ 		
 		public int getChildCount(Object parent) { 			
 			int childCount = 0;
 			Node node = (Node) parent; 
 			NodeList list = node.getChildNodes(); 
 			for(int i=0; i<list.getLength();i++){
-				// visualizza tutto meno che dsp:keywords 
-				//if(!((Element)list.item(i)).getTagName().trim().startsWith("dsp:keywords"))
+				if(!((Element)list.item(i)).getTagName().trim().startsWith("dsp:pos"))
 					childCount++;
 			}		
 			return childCount;
 		} 
-/*----------------------------------------------------------*/
 
-/* --- visualizzo anche i figli "dsp:keywords"  		
+		
 		public Object getChild(Object parent, int index) { 
-			Node node = (Node) parent; 
-			NodeList list = node.getChildNodes(); 
-			int pos = 0;
-			for(int i = 0, cnt = 0; i < getChildCount(node); i++) {
-				// visualizza tutto meno che dsp:keywords 
-				//if(!((Element)list.item(i)).getTagName().trim().startsWith("dsp:keywords")){
-				// PROBLEMA: se salto keywords saltano anche tutti i figli 
-					if (cnt++ == index) {
-						pos = i;
-						break;
-					}
-				//}
+		Node node = (Node) parent; 
+		NodeList list = node.getChildNodes(); 
+		int pos = 0;
+		int err = 0;
+		for(int i = 0; i < list.getLength(); i++) {
+			// visualizza tutto meno che dsp:pos
+			if(((Element)list.item(i)).getTagName().trim().startsWith("dsp:pos")){
+				err++;
 			}
+			if(i==index+err){
+				pos=i;
+				break;
+			}		
+		}
 			return list.item(pos);
 		}
-/*-----------------------------------------------------*/
+
+		
 
 		public int getIndexOfChild(Object parent, Object child) { 
 			Node node = (Node) parent; 
@@ -596,8 +589,8 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
 			super.getTreeCellRendererComponent(tree, value,selected, expanded, leaf, row, hasFocus);
 			Node node = (Node) value;
 			
-			if (modelloDA.isDisposizione(node.getNodeName().trim().toLowerCase())) { 					
-				setText("Argomenti di "+(i18n.getTextFor("dom."+node.getNodeName()).startsWith("dom")?node.getNodeName():i18n.getTextFor("dom."+node.getNodeName())));
+			if (modelloDA.isDisposizione(node.getNodeName().trim().toLowerCase())) { 	
+				setText(i18n.getTextFor("editor.form.metaedit.arguments.for.text")+" "+(i18n.getTextFor("dom."+node.getNodeName()).startsWith("dom")?node.getNodeName():i18n.getTextFor("dom."+node.getNodeName())));
 			} 
 			else if (node.getNodeName().trim().toLowerCase() == TAG_KEYWORD) {
 				setText(UtilDom.getAttributeValueAsString(node, "valore"));
@@ -613,6 +606,7 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
 	protected class ButtonPiuAction extends AbstractAction {
 		
 		public void actionPerformed(ActionEvent e) {
+			
 			Node selectedNode =  (Node) treeArgomenti.getLastSelectedPathComponent();
 			
     		if (selectedNode == null) return;
@@ -620,7 +614,7 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
     		if (selectedNode.getParentNode() == null) return;
     		
     		Node parentNode = selectedNode.getParentNode();
-    		String kw = (String) comboKeywords.getSelectedItem();
+    		String kw = UtilDom.getAttributeValueAsString((Node)comboKeywords.getSelectedItem(), "Name");
     		Node newKeyword = documentManager.getDocumentAsDom().createElement(TAG_KEYWORD);
     		UtilDom.setAttributeValue(newKeyword, "valore", kw);
     		
@@ -628,16 +622,16 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
     		// sono sul nodo keywords
     		  if(selectedNode.getNodeName().equals(TAG_KEYWORDS)) {
     			if (CheckKwDuplicate(selectedNode, kw)) {
-    			  utilMsg.msgInfo("chiave " + kw + " già presente", "Chiave duplicata");
+    				utilMsg.msgInfo(i18n.getTextFor("editor.form.metaedit.msg.error.key.text")+" \"" + kw + "\" "+i18n.getTextFor("editor.form.metaedit.msg.error.alreadypresent.text"), "editor.form.metaedit.msg.error.duplicated.text");
     			  return;
     			}
     			else
     			  selectedNode.appendChild(newKeyword);
     		  }
-    		// altrimenti sono già su un nodo keyword valore 
+    		  // altrimenti sono già su un nodo keyword valore 
     		  else if(parentNode.getNodeName().equals(TAG_KEYWORDS)) {
     			if (CheckKwDuplicate(parentNode, kw)) {
-   				  utilMsg.msgInfo("chiave " + kw + " già presente", "Chiave duplicata");
+    				utilMsg.msgInfo(i18n.getTextFor("editor.form.metaedit.msg.error.key.text")+" \"" + kw + "\" "+i18n.getTextFor("editor.form.metaedit.msg.error.alreadypresent.text"), "editor.form.metaedit.msg.error.duplicated.text");
    				  return;
     			}
     			else
@@ -646,13 +640,17 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
     		}
     		else {
     		  Node firstChild = selectedNode.getFirstChild();
-    		  if (firstChild.getNodeName().equals(TAG_KEYWORDS)) {
+    		  if (firstChild!=null && firstChild.getNodeName().equals(TAG_KEYWORDS)) {
     			if (CheckKwDuplicate(firstChild, kw)) {
-    			  utilMsg.msgInfo("chiave " + kw + " già presente", "Chiave duplicata");
+    			  utilMsg.msgInfo(i18n.getTextFor("editor.form.metaedit.msg.error.key.text")+" \"" + kw + "\" "+i18n.getTextFor("editor.form.metaedit.msg.error.alreadypresent.text"), "editor.form.metaedit.msg.error.duplicated.text");
     			  return;
     			}
       			else
       			  firstChild.appendChild(newKeyword);
+    		  }else{
+    			  Node newKeywords = documentManager.getDocumentAsDom().createElement(TAG_KEYWORDS);
+    			  newKeywords.appendChild(newKeyword);
+    			  selectedNode.appendChild(newKeywords);
     		  }
     		}
     		treeArgomenti.updateUI(); //reload per l'aggiornamento della visualizzazione
@@ -678,27 +676,16 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
 	protected class ButtonMenoAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
 			Node selectedNode =  (Node) treeArgomenti.getLastSelectedPathComponent();
-			
-//			DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) treeArgomenti.getLastSelectedPathComponent();
 
     		if (selectedNode == null) return;
     		
     		if(selectedNode.getNodeName().equals(TAG_KEYWORD)) {
     		  Node parent = selectedNode.getParentNode();
     		  parent.removeChild(selectedNode);
+    		  if(parent.getChildNodes().getLength()==0)
+    			  parent.getParentNode().removeChild(parent);
     		  treeArgomenti.updateUI();
     		}
-
-//    		DefaultMutableTreeNode parent = (DefaultMutableTreeNode) selectedNode.getParent();
-//    		DefaultMutableTreeNode rootArgs = (DefaultMutableTreeNode) treeArgomenti.getModel().getRoot();
-
-//    		if (parent == null) return;
-
-//    		if (parent.getParent() == rootArgs && selectedNode.isLeaf()) {
-//    			int selectedIndex = selectedNode.getIndex(selectedNode);
-//    			DefaultTreeModel model = (DefaultTreeModel) treeArgomenti.getModel(); 
-//    			model.removeNodeFromParent(selectedNode);
-//    		}
 		}
 	}  
 	
@@ -712,18 +699,26 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
 			TreePath selectionPath = treeDisposizioni.getSelectionPath(); 
 			Node selectedNode = (Node) selectionPath.getLastPathComponent();
 			Node rootDisp = documentManager.getDocumentAsDom().createElement(UtilDom.getAttributeValueAsString(selectedNode, "value"));
+						
 			Node rootArg  = (Node) treeArgomenti.getModel().getRoot();
 			NodeList children = rootArg.getChildNodes();
-			int nChildren = children.getLength();
-
-			for(int i=0; i<nChildren; i++) {
-//				System.out.println(children.item(i).getNodeName());
+			
+		
+			for(int i=0; i<children.getLength(); i++) {		
+				// setta il dsp:pos
+				if(children.item(i).getNodeName().startsWith("dsp:pos"))		
+						UtilDom.setAttributeValue(children.item(i), "xlink:href", idPartizione);
+				
 				rootDisp.appendChild(children.item(i).cloneNode(true));
 			}
-/*------------------------------------------------------------------------------------------------- 
- * se si tratta di una marcatura esistente,  la sostituisco al corrispondente nodo di treePartizioni
- * altrimenti aggiungo un nodo figlio alla root di treePartizioni 
- *------------------------------------------------------------------------------------------------*/
+						
+			
+			
+			
+			/*------------------------------------------------------------------------------------------------- 
+			 * se si tratta di una marcatura esistente,  la sostituisco al corrispondente nodo di treePartizioni
+			 * altrimenti aggiungo un nodo figlio alla root di treePartizioni 
+			 *------------------------------------------------------------------------------------------------*/
 			Node rootPartizioni = (Node) treePartizioni.getModel().getRoot();
 			children = rootPartizioni.getChildNodes();
 			String marcaturaCorrente = UtilDom.getAttributeValueAsString(selectedNode, "value");
@@ -742,38 +737,6 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
 			
 			treePartizioni.updateUI(); // necessario?
 			System.out.println(UtilDom.getAttributeValueAsString(selectedNode, "value"));
-			
-			
-			// qui:  leggere il contenuto dell'albero argomenti; creare un nodo dom di interscambio del tipo: 
-			
-			
-			
-//			<dsp:termine_dominio implicita="no">
-//			  <dsp:definiendum>
-//			    <dsp:keywords>
-//			      <dsp:keyword valore="dato personale">
-//			      </dsp:keyword>
-//			    </dsp:keywords>
-//			  </dsp:definiendum>
-//			  <dsp:definiens>
-//			    <dsp:keywords>
-//			      <dsp:keyword valore="informazione">
-//			      </dsp:keyword>
-//			      <dsp:keyword valore="associazione">
-//			      </dsp:keyword>
-//			    </dsp:keywords>
-//			  </dsp:definiens>
-//			</dsp:termine_dominio>
-			
-			
-			
-			// avente come root il nome della disposizione e come figli gli argomenti messi sotto keywords-keyword
-			
-			// alternativamente: metter un domTreeModel anche sugli argomenti in modo che il nodo dom fatto in quel modo  e' gia' pronto 
-			
-			// aggiungere (o sostituire se ce n'e' gia' uno dello stesso tipo) nell'array Node[] disposizioniOnDoc
-			
-			// chiamare fillTreePartition()
 			
 		}
 		
@@ -794,8 +757,7 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
 				Node root = (Node) treePartizioni.getModel().getRoot();
 				root.removeChild(selectedNode);
 				treePartizioni.updateUI();
-			}
-			
+			}			
 	}
 		
 	}  
@@ -814,7 +776,6 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
 	
 	
 	public Node[] getDisposizioni() {
-		// TODO Auto-generated method stub
 		Node rootDisp = (Node) treePartizioni.getModel().getRoot();
 		NodeList children = rootDisp.getChildNodes();
 		if (children.getLength() > 0) {

@@ -57,6 +57,15 @@ public interface DtdRulesManager extends Service {
 	 * @return
 	 */
 	public String getDefaultContent(String elem_name, String alternative) throws DtdRulesManagerException;
+	
+	/**
+	 * 
+	 * @param elem_name
+	 * @param nodes
+	 * @return
+	 * @throws DtdRulesManagerException
+	 */
+	public String getDefaultContent(String elem_name, Vector nodes) throws DtdRulesManagerException;
 
 	/**
 	 * Restituisce i possibili contenuti alternativi di un elemento

@@ -6,6 +6,8 @@ import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
+import it.cnr.ittig.xmleges.core.services.document.DocumentManagerException;
+import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.editor.services.dom.metaedit.MetaEdit;
@@ -118,15 +120,15 @@ public class MetaEditImpl implements MetaEdit, Loggable, Serviceable {
 	
 	// copia e converte un nodo disposizione del documento in un nodo DOM di interscambio contenente le informazioni per il popolamento della form 
 	private Node createInterchangeNode(Node node){
-			
-		//		 qui si arriva con la disposizione; prendere solo gli argomenti e le keywords  (argomenti in profondità)
+				
+		// qui si arriva con la disposizione; prendere solo gli argomenti el le keywords  (argomenti in profondità) + dsp:pos
 		
 		Node root = documentManager.getDocumentAsDom().createElement(node.getNodeName());
 		NodeList figli = node.getChildNodes();
 		Vector argomentiList = modelloDA.getArgomentiList();
 		
 		for(int i=0;i<figli.getLength();i++){
-			if(argomentiList.contains(figli.item(i).getNodeName())){
+			if(argomentiList.contains(figli.item(i).getNodeName()) || figli.item(i).getNodeName().startsWith("dsp:pos")){
 				root.appendChild(figli.item(i).cloneNode(true));
 			}
 		}
@@ -135,7 +137,7 @@ public class MetaEditImpl implements MetaEdit, Loggable, Serviceable {
 	
 	
 	
-	// mette nel Vector disposizioniNodes  tutti i nodi disposizione, del tipo <dsp:obbligo> presenti nel documento
+	// mette nel Vector disposizioniNodes  tutti i nodi disposizione
 	private void getDisposizioniFromDoc(Node node, Vector disposizioniList){	
 		
 		if(node!=null){
@@ -149,10 +151,32 @@ public class MetaEditImpl implements MetaEdit, Loggable, Serviceable {
 	}
 	
 	
-
+	
 	public void setDAOnDocument(Node[] DAList, String idPartition) {
-		// removeDAFromDocument(String idPartizione); --- removeChild(Node oldChild);
+		try {
+			EditTransaction tr = documentManager.beginEdit();
+			if (setDADom(DAList, idPartition)) {
+				//rinumerazione.aggiorna(doc);
+				documentManager.commitEdit(tr);
+			} else
+				documentManager.rollbackEdit(tr);
+		} catch (DocumentManagerException ex) {
+			logger.error(ex.getMessage(), ex);
+		}
+	}
+	
+	
+	
+	private boolean setDADom(Node[] DAList, String idPartition) {
+		
 		Node disposizioni = ((Document)documentManager.getDocumentAsDom()).getElementsByTagName("disposizioni").item(0);
+		
+		// ammesso che ci sia il nodo disposizioni; 
+		//  1:  se non c'e'  va creato 
+		//  2: nella rimozione per rimpiazzo chiedere al rulesMgr; se rimuovendo creo un nodo non valido poi non reinserisce piu'
+		// ci sono un po'troppi nodi clonati
+		
+		
 		disposizioniNodes = new Vector(); // vettore contenente come elementi nodi
 		Vector disposizioniList = modelloDA.getDisposizioniList();
 		getDisposizioniFromDoc(disposizioni, disposizioniList);
@@ -162,16 +186,30 @@ public class MetaEditImpl implements MetaEdit, Loggable, Serviceable {
 			String pos = UtilDom.getAttributeValueAsString(UtilDom.findDirectChild((Node)disposizioniNodes.get(i),"dsp:pos"),"xlink:href");
 			pos=pos.startsWith("#")?pos.substring(1):pos;
 			if(pos.equalsIgnoreCase(idPartition))
-				disposizioni.removeChild((Node)disposizioniNodes.get(i));
-				
+				disposizioni.removeChild((Node)disposizioniNodes.get(i));			
 		}
 		
-		Node nodePos= documentManager.getDocumentAsDom().createElement(TAG_POS);
-		UtilDom.setAttributeValue(nodePos, ATTR_POS_XLINK_HREF, idPartition);
-		UtilDom.setAttributeValue(nodePos, ATTR_POS_XLINK_TYPE, ATTR_POS_XLINK_TYPE_VALUE);
+				
 		for(int i=0; i<DAList.length;i++) {
-		  DAList[i].appendChild(nodePos.cloneNode(true));
-		  disposizioni.appendChild(DAList[i]);
+		
+		  try{
+			  System.err.println("in disposizioni: VALID ? "+dtdRulesManager.queryIsValid(disposizioni));
+			  System.err.println("tryying to insert "+UtilDom.domToString(DAList[i], true)+" is Valid ?  "+dtdRulesManager.queryIsValid(DAList[i]));	  
+		  }catch(Exception e){
+			  e.printStackTrace();
+		  }
+			
+		  //boolean t1 = utilRulesManager.orderedInsertChild(DAList[i],nodePos); //DAList[i].appendChild(nodePos);
+		  boolean t2 = utilRulesManager.orderedInsertChild(disposizioni,DAList[i].cloneNode(true)); // disposizioni.appendChild(DAList[i].cloneNode(true));
+		  System.err.println("inserted disposizione: "+t2);
 		}
+		
+		
+		
+		return true;
+		
+		
 	}
+	
+	
 }
