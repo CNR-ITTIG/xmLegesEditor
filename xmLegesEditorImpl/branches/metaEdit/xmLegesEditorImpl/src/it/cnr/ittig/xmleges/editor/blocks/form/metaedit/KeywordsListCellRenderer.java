@@ -36,12 +36,12 @@ public class KeywordsListCellRenderer extends JLabel implements ListCellRenderer
 
 
 		if(value instanceof Node){
-			setIcon(i18n.getIconFor("editor.form.metaedit.keywords.item.icon"));
+			//setIcon(i18n.getIconFor("editor.form.metaedit.keyword.icon"));
 			Node kw = (Node) value;			
 			
 			if(UtilDom.getAttributeValueAsString(kw, "Dominio").equalsIgnoreCase("S")){
-				background = Color.YELLOW;
-				foreground = Color.BLACK;
+				//background = Color.YELLOW;
+				//foreground = Color.BLACK;
 				font = new Font(null, Font.ITALIC, size);
 			}
 			

@@ -13,6 +13,8 @@ import it.cnr.ittig.xmleges.core.services.action.ActionManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentOpenedEvent;
+import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
+import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
@@ -68,6 +70,8 @@ public class MetaEditActionImpl implements MetaEditAction, EventManagerListener,
 	SelectionManager selectionManager;
 
 	DocumentManager documentManager;
+	
+	DtdRulesManager dtdRulesManager;
 
 	AbstractAction metaEditAction = new metaEditAction();
 
@@ -91,6 +95,7 @@ public class MetaEditActionImpl implements MetaEditAction, EventManagerListener,
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
+		dtdRulesManager = (DtdRulesManager) serviceManager.lookup(DtdRulesManager.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 		metaEdit = (MetaEdit) serviceManager.lookup(MetaEdit.class);
 		metaEditForm = (MetaEditForm) serviceManager.lookup(MetaEditForm.class);
@@ -165,15 +170,34 @@ public class MetaEditActionImpl implements MetaEditAction, EventManagerListener,
 	    return id;
 	}
 	
+	
 	protected void enableActions() {
 		metaEditAction.setEnabled(!documentManager.isEmpty());
 		if (activeNode == null) {
 			metaEditAction.setEnabled(false);
 		} else {
-			metaEditAction.setEnabled(true);
+			metaEditAction.setEnabled(canEnable(activeNode));
 		}
 	}
+	
+	
+	
+	//	 condizioni per abilitare il metaEdit: essere nell''articolato e usare una dtd che ammette il tag "disposizioni"
+	private boolean canEnable(Node node){
+		boolean canEnable = false;
+		if(!documentManager.isEmpty()){
+			Node meta =documentManager.getDocumentAsDom().getElementsByTagName("meta").item(0);
+			try{
+				if((UtilDom.findDirectChild(meta, "disposizioni")!=null || dtdRulesManager.queryAppendable(meta).contains("disposizioni")) && UtilDom.getPathName(node).matches(".*\\.articolato\\..*"))
+					canEnable = true;
+			}catch(DtdRulesManagerException ex){
+				return false;
+			}		
+		}
+		return canEnable;
+	}
 
+	
 	// ///////////////////////////////////////////////// Azioni
 	public class metaEditAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {

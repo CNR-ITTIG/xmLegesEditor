@@ -188,6 +188,25 @@ public class XsltMapperImpl implements XsltMapper, EventManagerListener, Loggabl
 
 		return instance.getI18nNodeText(node);
 	}
+	
+	
+	// aggiunti per internazionalizzazione fogli di stile
+	
+	public static String getI18nName(Node node) {
+		if (instance == null)
+			return null;
+
+		if (node == null)
+			return null;
+
+		return instance.getI18nNodeName(node);
+	}
+	
+	
+	public String getI18nNodeName(Node node) {
+		String ret = i18n.getTextFor("dom." + node.getNodeName());
+		return ret;
+	}
 
 	public static String getValidUrn(NodeList nodeList) {
 		
@@ -250,6 +269,7 @@ public class XsltMapperImpl implements XsltMapper, EventManagerListener, Loggabl
 		}
 		return ret;
 	}
+
 
 	public void mapGen2Parent(Node newNode, Node parentNode) {
 		synchronized (gen2parent) {

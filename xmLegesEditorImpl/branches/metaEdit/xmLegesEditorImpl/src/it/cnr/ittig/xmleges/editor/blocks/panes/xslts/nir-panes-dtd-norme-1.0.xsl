@@ -36,7 +36,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 		<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 		<xsl:apply-templates />
-        <!--	xsl:call-template name="vigenza"/	-->	
+        <!--	xsl:call-template name="metaDA"/	-->	
 	</xsl:element>
 </xsl:template>
 
@@ -57,7 +57,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		</xsl:attribute>
 		<!--	xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 		<xsl:apply-templates /	-->
-        <xsl:call-template name="vigenza"/>	
+        <xsl:call-template name="metaDA"/>	
 	</xsl:element>
 </xsl:template>
 
@@ -82,13 +82,13 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
         <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
         	<!--	xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
             <xsl:apply-templates /	-->
-        	<xsl:call-template name="vigenza"/>	
+        	<xsl:call-template name="metaDA"/>	
         </xsl:element>
 </xsl:template>
 
 <xsl:template match="*[name()='preambolo']">
     <xsl:element name="p" use-attribute-sets="XsltMapperSetClass">
-        <xsl:call-template name="vigenza"/>	
+        <xsl:call-template name="metaDA"/>	
     </xsl:element>
 </xsl:template>
 
@@ -102,7 +102,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     	<xsl:attribute name="style">margin: 30 5 5 5;</xsl:attribute>
     	<!--	xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
         <xsl:apply-templates /	-->
-        <xsl:call-template name="vigenza"/>
+        <xsl:call-template name="metaDA"/>
     </xsl:element>
 </xsl:template>
 
@@ -136,9 +136,11 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     	    text-align: center;
     	    margin-top: 40 0 5 0;
         </xsl:attribute>
-    	<!--	xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-    	<xsl:apply-templates /	-->
-    	<xsl:call-template name="vigenza"/>
+        
+    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+    	<xsl:apply-templates />
+    	<xsl:call-template name="metaDA"/>
+    	
     </xsl:element>
 </xsl:template>
 
@@ -153,9 +155,12 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	    <xsl:if test="@status='soppresso'">color:red;  text-decoration:line-through;</xsl:if>
 	    <xsl:if test="@status='inserito'">color:green</xsl:if>
         </xsl:attribute>
-        <xsl:call-template name="vigenza"/>	
-<!--    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />-->
-<!--    	<xsl:apply-templates />-->
+        
+        <!--xsl:call-template name="metaDA"/-->
+          
+        <xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+    	<xsl:apply-templates />
+    	
     </xsl:element>
 </xsl:template>
 
@@ -167,10 +172,15 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	    <xsl:if test="@status='soppresso'">color:red;  text-decoration:line-through;</xsl:if>
 	    <xsl:if test="@status='inserito'">color:green</xsl:if>            
         </xsl:attribute>
-        <xsl:call-template name="vigenza"/>	
-<!--    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />-->
-<!--    	<xsl:apply-templates />-->
+
+		<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+    	<xsl:apply-templates />
+    	<xsl:call-template name="metaDARubrica"/>	 	
     </xsl:element>
+    
+    <!-- PER GLI ELEMENTI CON RUBRICA LE METAINFO VANNO SOTTO IL TESTO DELLA RUBRICA  -->
+    
+    
 </xsl:template>
 
 <xsl:template match="*[name()='num']">
@@ -191,17 +201,23 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	    <xsl:if test="@status='soppresso'">color:red;  text-decoration:line-through;</xsl:if>
 	    <xsl:if test="@status='inserito'">color:green</xsl:if>
         </xsl:attribute>
-        <xsl:call-template name="vigenza"/>	
-<!--    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />-->
-<!--    	<xsl:apply-templates />-->
+        
+        <xsl:call-template name="metaDA"/>	
+         
+    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+    	<xsl:apply-templates />
+    	
     </xsl:element>
 </xsl:template>
 
 <xsl:template match="*[name()='corpo' or name()='alinea' or name()='coda']">
     <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
-        <xsl:call-template name="vigenza"/>	
-<!--    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />-->
-<!--    	<xsl:apply-templates />-->
+        <xsl:call-template name="metaDA"/>	
+        
+
+        
+    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+    	<xsl:apply-templates />
     </xsl:element>
 </xsl:template> 
 
@@ -215,7 +231,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     	<xsl:attribute name="style">margin: 20 30;</xsl:attribute>
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
         <xsl:apply-templates />
-        <!--	xsl:call-template name="vigenza"/	-->
+        <!--	xsl:call-template name="metaDA"/	-->
     </xsl:element>
 </xsl:template>
 
@@ -233,7 +249,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <xsl:template match="*[name()='sottoscrivente']">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
     	<xsl:attribute name="style">margin: 5 0 0 0;</xsl:attribute>
-        <xsl:call-template name="vigenza"/>
+        <xsl:call-template name="metaDA"/>
     </xsl:element>
 </xsl:template>
 
@@ -242,7 +258,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <xsl:template match="*[name()='visto']">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
     	<xsl:attribute name="style">font-style: italic; margin: 20 0</xsl:attribute>
-        <xsl:call-template name="vigenza"/>
+        <xsl:call-template name="metaDA"/>
     </xsl:element>
 </xsl:template		-->
 
@@ -258,7 +274,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 				<xsl:attribute name="style">margin: 20 0</xsl:attribute>
 			  </xsl:otherwise>
 		</xsl:choose>			  
-        <xsl:call-template name="vigenza"/>
+        <xsl:call-template name="metaDA"/>
     </xsl:element>
 </xsl:template>
 
@@ -290,7 +306,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 <xsl:template match="*[name()='annesso']">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-        <xsl:call-template name="vigenza"/>	
+        <xsl:call-template name="metaDA"/>	
 		<!--	xsl:apply-templates /	-->
     </xsl:element>
 	<p/>
@@ -404,7 +420,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		    	<font bgcolor="#FFEE99">
 		    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 	    		<!--	xsl:apply-templates /	-->
-   		        <xsl:call-template name="vigenza"/>	
+   		        <xsl:call-template name="metaDA"/>	
 	    		</font>
 		    	</xsl:element>
 			</i>
@@ -466,384 +482,98 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 </xsl:template>
 
 										
-<xsl:template name="vigenza_old">
-	<xsl:variable name="id">
-		<xsl:value-of select="@id" />
-	</xsl:variable>
-	<xsl:variable name="stato">
-		<xsl:value-of select="@status" />
-	</xsl:variable>
-	<xsl:variable name="inizio_id">
-		<xsl:value-of select="@iniziovigore"/>
-	</xsl:variable>
-	<xsl:variable name="fine_id">
-		<xsl:value-of select="@finevigore"/>
-	</xsl:variable>
-	<xsl:variable name="data_inizio">
-		<!--	xsl:value-of select="//*[name()='evento'][@id=$inizio_id]/@data"/	-->
-		<xsl:value-of select="id($inizio_id)/@data"/>
-	</xsl:variable>
-	<xsl:variable name="data_fine">
-		<!--	xsl:value-of select="//*[name()='evento'][@id=$fine_id]/@data"/	-->
-		<xsl:value-of select="id($fine_id)/@data"/>
-	</xsl:variable>
-	<xsl:choose>
-		<!-- DTD-DL -->
-		<xsl:when test="$stato='soppresso'">
-      		<xsl:choose>
-				<xsl:when test="local-name()='span'">
-				    <font color="red"><s>
-					    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
-					    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-					        <xsl:apply-templates />
-					    </xsl:element>
-				    </s></font>
-				</xsl:when>
-				<xsl:otherwise>
-				    <div style="color: red; "><s>
-					    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
-					    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-					        <xsl:apply-templates />
-					    </xsl:element>
-				    </s></div>
-				</xsl:otherwise>
-			</xsl:choose>
-		</xsl:when>
-		<xsl:when test="$stato='inserito'">
-      		<xsl:choose>
-				<xsl:when test="local-name()='span'">
-				    <font color="green">
-					    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
-					    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-					        <xsl:apply-templates />
-		    			</xsl:element>
-				    </font>
-				</xsl:when>
-				<xsl:otherwise>
-				    <div style="color: green; ">
-					    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
-					    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-					        <xsl:apply-templates />
-		    			</xsl:element>
-				    </div>
-				</xsl:otherwise>
-			</xsl:choose>
-		</xsl:when>
-		<!--		 DTD 2.1 		-->
-		<!-- ========================================== DATA FINE !='' ====================================== -->
-		<xsl:when test="$fine_id!=''">
-      		<xsl:choose>
-				<xsl:when test="local-name()='span'">
-					<font color="red">
-					    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
-					    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-					        <xsl:apply-templates />
-					    </xsl:element>
-
-
-	<xsl:choose>
-		<xsl:when test="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]">
-			<xsl:variable name="ittignota">
-				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:norma']/*[name()='ittig:notavigenza']/@id "/>
-			</xsl:variable>
-			<xsl:variable name="novella">
-				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:novella']/*[name()='dsp:pos']/@xlink:href"/>
-			</xsl:variable>	
-			<xsl:variable name="novellando">
-				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:novellando']/*[name()='dsp:pos']/@xlink:href"/>
-			</xsl:variable>	
-			<sup>
-				[<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>
-					<xsl:if test="$novellando">
-						<xsl:if test="$novella">
-							<!--	sostituzione	-->
-							<xsl:if test="$novella=$id">i</xsl:if>
-		   					<xsl:if test="$novellando=$id">e</xsl:if>
-	   					</xsl:if>
-   					</xsl:if>]
-			</sup>
-		</xsl:when>
-		<xsl:otherwise>
-
-
-			<span>
-				<em>
-				  <font size="2">
-					&#91;In vigore&#160;
-				 	<xsl:choose>
-						<xsl:when test="$data_inizio!=''">
-							dal <xsl:value-of select="concat(substring($data_inizio,7,2),'/',substring($data_inizio,5,2),'/',substring($data_inizio,1,4))"/>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:text>fino</xsl:text>
-						</xsl:otherwise>
-					</xsl:choose>
-					&#160;al <xsl:value-of select="concat(substring($data_fine,7,2),'/',substring($data_fine,5,2),'/',substring($data_fine,1,4))"/>
-					<xsl:choose>
-						<xsl:when test="$stato!=''">
-							(<xsl:value-of select="$stato"/>)
-						</xsl:when>
-					</xsl:choose>
-					<xsl:text>&#93;&#160;</xsl:text>
-				   </font>
-				</em>
-			</span>
-
-
-		</xsl:otherwise>
-	</xsl:choose>
-
-
-					</font>
-				</xsl:when>
-				<xsl:otherwise>
-				    <div style="color: red; ">
-					    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
-					    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-					        <xsl:apply-templates />
-					    </xsl:element>
-
-
-	<xsl:choose>
-		<xsl:when test="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]">
-			<xsl:variable name="ittignota">
-				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:norma']/*[name()='ittig:notavigenza']/@id "/>
-			</xsl:variable>
-			<xsl:variable name="novella">
-				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:novella']/*[name()='dsp:pos']/@xlink:href"/>
-			</xsl:variable>	
-			<xsl:variable name="novellando">
-				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:novellando']/*[name()='dsp:pos']/@xlink:href"/>
-			</xsl:variable>	
-			<sup>
-				[<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>
-					<xsl:if test="$novellando">
-						<xsl:if test="$novella">
-							<!--	sostituzione	-->
-							<xsl:if test="$novella=$id">i</xsl:if>
-		   					<xsl:if test="$novellando=$id">e</xsl:if>
-	   					</xsl:if>
-   					</xsl:if>]
-			</sup>
-		</xsl:when>
-		<xsl:otherwise>
-		
-		
-			<span>
-				<em>
-				  <font size="2">
-					&#91;In vigore&#160;
-				 	<xsl:choose>
-						<xsl:when test="$data_inizio!=''">
-							dal <xsl:value-of select="concat(substring($data_inizio,7,2),'/',substring($data_inizio,5,2),'/',substring($data_inizio,1,4))"/>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:text>fino</xsl:text>
-						</xsl:otherwise>
-					</xsl:choose>
-					&#160;al <xsl:value-of select="concat(substring($data_fine,7,2),'/',substring($data_fine,5,2),'/',substring($data_fine,1,4))"/>
-					<xsl:choose>
-						<xsl:when test="$stato!=''">
-							(<xsl:value-of select="$stato"/>)
-						</xsl:when>
-					</xsl:choose>
-					<xsl:text>&#93;&#160;</xsl:text>
-				   </font>
-				</em>
-			</span>
-
-
-		</xsl:otherwise>
-	</xsl:choose>
-
-
-				    </div>
-				</xsl:otherwise>
-			</xsl:choose>
-		</xsl:when>
-		<!--		 ========================================== DATA inizio !='' ====================================== -->
-		<xsl:when test="$inizio_id!=''">
-      		<xsl:choose>
-				<xsl:when test="local-name()='span'">
-				    <font color="green">
-					    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
-					    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-					        <xsl:apply-templates />
-					    </xsl:element>
-
-
-	<xsl:choose>
-		<xsl:when test="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]">
-			<xsl:variable name="ittignota">
-				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:norma']/*[name()='ittig:notavigenza']/@id "/>
-			</xsl:variable>
-			<xsl:variable name="novella">
-				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:novella']/*[name()='dsp:pos']/@xlink:href"/>
-			</xsl:variable>	
-			<xsl:variable name="novellando">
-				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:novellando']/*[name()='dsp:pos']/@xlink:href"/>
-			</xsl:variable>	
-			<sup>
-				[<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>
-					<xsl:if test="$novellando">
-						<xsl:if test="$novella">
-							<!--	sostituzione	-->
-							<xsl:if test="$novella=$id">i</xsl:if>
-		   					<xsl:if test="$novellando=$id">e</xsl:if>
-	   					</xsl:if>
-   					</xsl:if>]
-			</sup>
-
-		</xsl:when>
-		<xsl:otherwise>
-		
-						    
-			<span>
-				<em>
-				  <font size="2">
-					&#91;In vigore&#160;
-					dal <xsl:value-of select="concat(substring($data_inizio,7,2),'/',substring($data_inizio,5,2),'/',substring($data_inizio,1,4))"/>
-					&#93;
-				  </font>
-				</em>
-			</span>
-
-
-		</xsl:otherwise>
-	</xsl:choose>
-	
-		
-				    </font>
-				</xsl:when>
-				<xsl:otherwise>
-				    <div style="color: green; ">
-					    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
-					    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-					        <xsl:apply-templates />
-					    </xsl:element>
-
-
-	<xsl:choose>
-		<xsl:when test="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]">
-			<xsl:variable name="ittignota">
-				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:norma']/*[name()='ittig:notavigenza']/@id "/>
-			</xsl:variable>
-			<xsl:variable name="novella">
-				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:novella']/*[name()='dsp:pos']/@xlink:href"/>
-			</xsl:variable>	
-			<xsl:variable name="novellando">
-				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:novellando']/*[name()='dsp:pos']/@xlink:href"/>
-			</xsl:variable>	
-			<sup>
-				[<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>
-					<xsl:if test="$novellando">
-						<xsl:if test="$novella">
-							<!--	sostituzione	-->
-							<xsl:if test="$novella=$id">i</xsl:if>
-		   					<xsl:if test="$novellando=$id">e</xsl:if>
-	   					</xsl:if>
-   					</xsl:if>]
-			</sup>
-
-		</xsl:when>
-		<xsl:otherwise>
-		
-					    
-			<span>
-				<em>
-				  <font size="2">
-					&#91;In vigore&#160;
-					dal <xsl:value-of select="concat(substring($data_inizio,7,2),'/',substring($data_inizio,5,2),'/',substring($data_inizio,1,4))"/>
-					&#93;
-				  </font>
-				</em>
-			</span>
-
-
-		</xsl:otherwise>
-	</xsl:choose>
-	
-				
-				    </div>
-				</xsl:otherwise>
-			</xsl:choose>
-		</xsl:when>
-		<xsl:otherwise>
-		    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
-		    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-		        <xsl:apply-templates />
-		    </xsl:element>
-		</xsl:otherwise>
-	</xsl:choose>
-</xsl:template>
 
 
 
 
+<xsl:template name="metaDA">
 
-<xsl:template name="vigenza">
-<!-- MOMENTANEAMENTE SOSTITUITO COL TEMPLATE PER LA VISUALIZZ DELLE DISPOSIZIONI -->
+	<!-- MOMENTANEAMENTE SOSTITUITO COL TEMPLATE PER LA VISUALIZZ DELLE DISPOSIZIONI -->
 	<xsl:variable name="id">
 		<xsl:value-of select="@id" />
 	</xsl:variable>
 	
 	<xsl:variable name="lower">abcdefghijklmnopqrstuvwxyz</xsl:variable>
 	<xsl:variable name="upper">ABCDEFGHIJKLMNOPQRSTUVWXYZ</xsl:variable> 
-	
-		
-        <!-- modifica agosto 2008: nel DTD non viene riportata la tassonomia delle classi di disposizioni, ma solo i tipi di disposizioni -->
-        <!-- xsl:if test="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='regole']/*/*/*/*[name()='dsp:pos'][@xlink:href=$id]" -->
-        <xsl:if test="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*/*[name()='dsp:pos'][@xlink:href=$id]">
-          <!-- REGOLE -->
-          <p style="background-color:yellow;font-weight:normal;">
-                <br/>
-                	<b>
-                		<!-- xsl:value-of select="translate(substring-after(name(/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='regole']/*/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../.),'dsp:'),$lower,$upper)"/ -->
-                		&#160;<xsl:value-of select="translate(substring-after(name(/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*/*[name()='dsp:pos'][@xlink:href=$id]/../.),'dsp:'),$lower,$upper)"/>
-                	</b>
-                <br/>
-                <br/>
-            <em>
-                <!-- xsl:for-each select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='regole']/*/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../*/*/*[name()='dsp:keyword']" -->
-                <xsl:for-each select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*/*[name()='dsp:pos'][@xlink:href=$id]/../*/*/*[name()='dsp:keyword']">
-                    &#160;<xsl:value-of select="substring-after(name(../../.),'dsp:')" /> = <xsl:value-of select="@valore"/><br/>
-                </xsl:for-each>
-            </em>
-          </p>
 
-        </xsl:if>
-        
-        <!-- 
-        		modifica agosto 2008: nel DTD non viene riportata la tassonomia delle classi di disposizioni, ma solo i tipi di disposizioni. 
-        		Questo implica che non si possono distinguere, in maniera elegante, le disposizioni Modifiche da quelle delle Regole, quindi
-        		non si attiva il colore distinto (giallo per le Regole egrigio per le Modifiche)  
-        -->
-        <!-- xsl:if test="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifiche']/*/*/*[name()='dsp:pos'][@xlink:href=$id]" -->
-        <!-- xsl:if test="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*/*[name()='dsp:pos'][@xlink:href=$id]" -->
-            <!-- MODIFICHE -->
-            <!-- p style="background-color:silver;font-weight:normal;" -->
-            	<!-- br/ -->
-            		<!-- b -->
-                		<!-- xsl:value-of select="translate(substring-after(name(/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifiche']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../.),'dsp:'),$lower,$upper)"/ -->
-                		<!-- &#160;<xsl:value-of select="translate(substring-after(name(/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*/*[name()='dsp:pos'][@xlink:href=$id]/../.),'dsp:'),$lower,$upper)"/> -->
-                	<!-- /b -->
-                <!-- br/ -->
-                <!-- br/ -->
-            <!-- em -->
-                <!-- xsl:for-each select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifiche']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../*/*/*[name()='dsp:keyword']" -->
-                <!-- xsl:for-each select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*/*[name()='dsp:pos'][@xlink:href=$id]/../*/*/*[name()='dsp:keyword']" -->
-                <!--    &#160;<xsl:value-of select="substring-after(name(../../.),'dsp:')"/> = <xsl:value-of select="@valore"/><br/> -->
-                <!-- /xsl:for-each -->
-            <!-- /em -->
-          <!-- /p -->
-        <!-- /xsl:if -->
-        
-                
-        <xsl:apply-templates />
-	  
-		
+        <xsl:for-each select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*/*[name()='dsp:pos'][@xlink:href=$id]">
+         <div style="font-weight:normal;">
+          <table>
+         	<tr>
+         		<td style="background-color:FFFF99;font-weight:normal;font-size:medium;font-style:normal;">
+         		
+          
+                	<b>
+                		<!--&#160;<xsl:value-of select="translate(substring-after(name(./../.),'dsp:'),$lower,$upper)"/>:-->
+                		
+                		<!-- VERSIONE CON NOMI INTERNAZIONALIZZATI -->
+                		<xsl:variable name="i18nTagName"><xsl:value-of select="mapper:getI18nName(./../.)"/></xsl:variable> 
+                		<xsl:value-of select="translate($i18nTagName,$lower,$upper)"/>:
+             
+                	</b>
+            
+            	<xsl:for-each select="./../*/*/*[name()='dsp:keyword']">
+
+					<!-- OLD  -->
+                    <!--&#160;<xsl:value-of select="substring-after(name(../../.),'dsp:')" /> = <em><xsl:value-of select="@valore"/></em>-->
+            		
+            		<!-- VERSIONE CON NOMI INTERNAZIONALIZZATI -->
+                	<xsl:variable name="i18nTagName"><xsl:value-of select="mapper:getI18nName(../../.)"/></xsl:variable> 
+                	&#160;<xsl:value-of select="$i18nTagName" /> = <em><xsl:value-of select="@valore"/></em>
+                	
+                </xsl:for-each>          
+         
+          		</td>
+         	</tr>
+         </table>
+       </div> 
+	</xsl:for-each>    
+              
+</xsl:template>
+
+<xsl:template name="metaDARubrica">
+
+	<!-- MOMENTANEAMENTE SOSTITUITO COL TEMPLATE PER LA VISUALIZZ DELLE DISPOSIZIONI -->
+	<xsl:variable name="id">
+		<xsl:value-of select="./../@id" />
+	</xsl:variable>
 	
-	
+	<xsl:variable name="lower">abcdefghijklmnopqrstuvwxyz</xsl:variable>
+	<xsl:variable name="upper">ABCDEFGHIJKLMNOPQRSTUVWXYZ</xsl:variable> 
+
+        <xsl:for-each select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*/*[name()='dsp:pos'][@xlink:href=$id]">
+         <div style="font-weight:normal;">
+         <table>
+         	<tr>
+         		<td style="background-color:FFFF99;font-weight:normal;font-size:medium;font-style:normal;">
+         		
+          
+                	(<b>
+                		<!--&#160;<xsl:value-of select="translate(substring-after(name(./../.),'dsp:'),$lower,$upper)"/>:-->
+                		
+                		<!-- VERSIONE CON NOMI INTERNAZIONALIZZATI -->
+                		<xsl:variable name="i18nTagName"><xsl:value-of select="mapper:getI18nName(./../.)"/></xsl:variable> 
+                		<xsl:value-of select="translate($i18nTagName,$lower,$upper)"/>:
+             
+                	</b>
+            
+            	<xsl:for-each select="./../*/*/*[name()='dsp:keyword']">
+
+					<!-- OLD  -->
+                    <!--&#160;<xsl:value-of select="substring-after(name(../../.),'dsp:')" /> = <em><xsl:value-of select="@valore"/></em>-->
+            		
+            		<!-- VERSIONE CON NOMI INTERNAZIONALIZZATI -->
+                	<xsl:variable name="i18nTagName"><xsl:value-of select="mapper:getI18nName(../../.)"/></xsl:variable> 
+                	&#160;<xsl:value-of select="$i18nTagName" /> = <em><xsl:value-of select="@valore"/></em>
+                	
+                </xsl:for-each>)          
+         
+          </td>
+         </tr>
+         </table>
+         </div> 
+        </xsl:for-each>    
+              
 </xsl:template>
 
 

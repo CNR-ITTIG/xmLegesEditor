@@ -424,6 +424,7 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
 				else  {
 					if (e.getTagName().trim().toLowerCase() == DISPOSIZIONE) {
 						setText(i18n.getTextFor("dom."+e.getAttribute("value")));
+						//setIcon(i18n.getIconFor("editor.form.metaedit.provision.icon"));
 					}
 					else
 						setText(i18n.getTextFor("dom."+e.getNodeName()));	
@@ -512,7 +513,12 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
 		public Component getTreeCellRendererComponent(JTree tree, Object value,	boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus) {
 			super.getTreeCellRendererComponent(tree, value,selected, expanded, leaf, row, hasFocus);
 			Node node = (Node) value;
-			setText(i18n.getTextFor("dom."+node.getNodeName()).startsWith("dom")?node.getNodeName():i18n.getTextFor("dom."+node.getNodeName()));
+			if(i18n.getTextFor("dom."+node.getNodeName()).startsWith("dom")){
+				setText(node.getNodeName());			
+			}else{
+				setText(i18n.getTextFor("dom."+node.getNodeName()));
+				//setIcon(i18n.getIconFor("editor.form.metaedit.provision.icon"));
+			}
 			return this; 
 		}
 	}
@@ -594,9 +600,14 @@ public class MetaEditFormImpl implements MetaEditForm, Loggable, Serviceable, In
 			} 
 			else if (node.getNodeName().trim().toLowerCase() == TAG_KEYWORD) {
 				setText(UtilDom.getAttributeValueAsString(node, "valore"));
-			}
-			else
+				//setIcon(i18n.getIconFor("editor.form.metaedit.keyword.icon"));
+			}else if (node.getNodeName().trim().toLowerCase() == TAG_KEYWORDS) {
 				setText(i18n.getTextFor("dom."+node.getNodeName()).startsWith("dom")?node.getNodeName():i18n.getTextFor("dom."+node.getNodeName()));
+			}
+			else{
+				setText(i18n.getTextFor("dom."+node.getNodeName()).startsWith("dom")?node.getNodeName():i18n.getTextFor("dom."+node.getNodeName()));
+				//setIcon(i18n.getIconFor("editor.form.metaedit.argument.icon"));
+			}
 
 			return this; 
 		}
