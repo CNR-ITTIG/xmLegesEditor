@@ -169,7 +169,22 @@ public class MetaEditImpl implements MetaEdit, Loggable, Serviceable {
 	
 	private boolean setDADom(Node[] DAList, String idPartition) {
 		
-		Node disposizioni = ((Document)documentManager.getDocumentAsDom()).getElementsByTagName("disposizioni").item(0);
+		
+		Document doc = (Document)documentManager.getDocumentAsDom();
+		NodeList disposizioniNL = doc.getElementsByTagName("disposizioni");//.item(0);
+		
+		Node disposizioni = null;
+		NodeList templateToRemove = null;
+		
+		if(disposizioniNL.getLength()>0)
+			disposizioni = disposizioniNL.item(0);
+		else{
+			disposizioni = utilRulesManager.getNodeTemplate("disposizioni");
+			// qui da' un template per disposizioni da svuotare !!
+			Node meta = nirUtilDom.findActiveMeta(doc, doc.getDocumentElement());
+			utilRulesManager.orderedInsertChild(meta,disposizioni);
+			templateToRemove = disposizioni.getChildNodes();
+		}
 		
 		// ammesso che ci sia il nodo disposizioni; 
 		//  1:  se non c'e'  va creato 
@@ -185,6 +200,7 @@ public class MetaEditImpl implements MetaEdit, Loggable, Serviceable {
 			// controlla se la disposizione si riferisce alla partizione con id "idPartition"
 			String pos = UtilDom.getAttributeValueAsString(UtilDom.findDirectChild((Node)disposizioniNodes.get(i),"dsp:pos"),"xlink:href");
 			pos=pos.startsWith("#")?pos.substring(1):pos;
+			// da controllare con rulesManager.queryCanDelete()
 			if(pos.equalsIgnoreCase(idPartition))
 				disposizioni.removeChild((Node)disposizioniNodes.get(i));			
 		}
@@ -202,6 +218,15 @@ public class MetaEditImpl implements MetaEdit, Loggable, Serviceable {
 		  //boolean t1 = utilRulesManager.orderedInsertChild(DAList[i],nodePos); //DAList[i].appendChild(nodePos);
 		  boolean t2 = utilRulesManager.orderedInsertChild(disposizioni,DAList[i].cloneNode(true)); // disposizioni.appendChild(DAList[i].cloneNode(true));
 		  System.err.println("inserted disposizione: "+t2);
+		  
+		  
+		  // da controllare con rulesManager.queryCanDelete()
+		  for(int j=0; j<templateToRemove.getLength(); j++){
+			  disposizioni.removeChild(templateToRemove.item(j));
+		  }
+		  
+		  // se il nodo disposizioni rimane vuoto va eliminato
+		  
 		}
 		
 		

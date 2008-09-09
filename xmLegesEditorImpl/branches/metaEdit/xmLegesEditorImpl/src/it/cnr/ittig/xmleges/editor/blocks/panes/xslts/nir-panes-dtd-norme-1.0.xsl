@@ -55,9 +55,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 			font-style: bold;
 			margin: 15 0 15 0;
 		</xsl:attribute>
-		<!--	xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-		<xsl:apply-templates /	-->
-        <xsl:call-template name="metaDA"/>	
+		<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+		<xsl:apply-templates />
+        <!--xsl:call-template name="metaDA"/-->	
 	</xsl:element>
 </xsl:template>
 
@@ -80,15 +80,17 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <!-- ================================================================================ -->
 <xsl:template match="*[name()='formulainiziale']">
         <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-        	<!--	xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-            <xsl:apply-templates /	-->
-        	<xsl:call-template name="metaDA"/>	
+        	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+            <xsl:apply-templates />
+        	<!--xsl:call-template name="metaDA"/-->	
         </xsl:element>
 </xsl:template>
 
 <xsl:template match="*[name()='preambolo']">
     <xsl:element name="p" use-attribute-sets="XsltMapperSetClass">
-        <xsl:call-template name="metaDA"/>	
+    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+            <xsl:apply-templates />
+        <!--xsl:call-template name="metaDA"/-->	
     </xsl:element>
 </xsl:template>
 
@@ -100,9 +102,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <xsl:template match="*[name()='formulafinale']">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
     	<xsl:attribute name="style">margin: 30 5 5 5;</xsl:attribute>
-    	<!--	xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-        <xsl:apply-templates /	-->
-        <xsl:call-template name="metaDA"/>
+    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+        <xsl:apply-templates />
     </xsl:element>
 </xsl:template>
 
@@ -488,7 +489,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 <xsl:template name="metaDA">
 
-	<!-- MOMENTANEAMENTE SOSTITUITO COL TEMPLATE PER LA VISUALIZZ DELLE DISPOSIZIONI -->
 	<xsl:variable name="id">
 		<xsl:value-of select="@id" />
 	</xsl:variable>
@@ -533,7 +533,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 <xsl:template name="metaDARubrica">
 
-	<!-- MOMENTANEAMENTE SOSTITUITO COL TEMPLATE PER LA VISUALIZZ DELLE DISPOSIZIONI -->
 	<xsl:variable name="id">
 		<xsl:value-of select="./../@id" />
 	</xsl:variable>

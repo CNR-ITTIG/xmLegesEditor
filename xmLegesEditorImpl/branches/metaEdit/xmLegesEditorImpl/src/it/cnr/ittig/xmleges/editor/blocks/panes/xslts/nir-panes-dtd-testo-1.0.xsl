@@ -36,7 +36,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <!-- ================================================================================ -->
 
 <xsl:template match="h:br">
-	<font color="blue" weight="bold">¶</font><br/>
+	<font color="blue" weight="bold">ï¿½</font><br/>
 </xsl:template>
 
 <xsl:template match="h:hr">
@@ -103,9 +103,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 <xsl:template match="h:span">
          <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
-                <xsl:call-template name="vigenza"/>	
-<!--		    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />-->
-<!--		        <xsl:apply-templates />-->
+                <!--xsl:call-template name="vigenza"/-->	
+		    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+		        <xsl:apply-templates />
 	    </xsl:element>
 </xsl:template>	
 
@@ -127,10 +127,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <xsl:element name="p" use-attribute-sets="XsltMapperSetClass">
 	    <font color="blue" weight="bold">§</font>
 
-    	<!--	xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-        <xsl:apply-templates /	-->
+    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+        <xsl:apply-templates />
 
-        <xsl:call-template name="vigenza"/>	
+        <!--xsl:call-template name="vigenza"/-->	
 
     </xsl:element>
 </xsl:template>
