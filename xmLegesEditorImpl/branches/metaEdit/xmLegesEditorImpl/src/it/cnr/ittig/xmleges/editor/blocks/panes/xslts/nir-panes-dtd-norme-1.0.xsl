@@ -511,17 +511,29 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 		<xsl:value-of select="translate($i18nTagName,$lower,$upper)"/>:
              
                 	</b>
-            
-            	<xsl:for-each select="./../*/*/*[name()='dsp:keyword']">
+                	
+                
+                <xsl:for-each select="./../*/*[name()='dsp:keywords']">
 
-					<!-- OLD  -->
-                    <!--&#160;<xsl:value-of select="substring-after(name(../../.),'dsp:')" /> = <em><xsl:value-of select="@valore"/></em>-->
-            		
+					            		
             		<!-- VERSIONE CON NOMI INTERNAZIONALIZZATI -->
+                	<xsl:variable name="i18nTagName"><xsl:value-of select="mapper:getI18nName(../.)"/></xsl:variable> 
+                	&#160;<em><xsl:value-of select="$i18nTagName" /></em> = 
+                	
+                	<xsl:for-each select="./*[name()='dsp:keyword']">
+                		<xsl:value-of select="@valore"/>,
+                	</xsl:for-each>
+                	
+                	
+                </xsl:for-each>   
+                
+            
+                <!-- OLD -->
+            	<!--xsl:for-each select="./../*/*/*[name()='dsp:keyword']">
                 	<xsl:variable name="i18nTagName"><xsl:value-of select="mapper:getI18nName(../../.)"/></xsl:variable> 
                 	&#160;<xsl:value-of select="$i18nTagName" /> = <em><xsl:value-of select="@valore"/></em>
                 	
-                </xsl:for-each>          
+                </xsl:for-each-->          
          
           		</td>
          	</tr>
