@@ -220,10 +220,10 @@ public class MetaEditImpl implements MetaEdit, Loggable, Serviceable {
 		  System.err.println("inserted disposizione: "+t2);
 		  
 		  
-		  // da controllare con rulesManager.queryCanDelete()
-		  for(int j=0; j<templateToRemove.getLength(); j++){
-			  disposizioni.removeChild(templateToRemove.item(j));
-		  }
+//		  // da controllare con rulesManager.queryCanDelete()
+//		  for(int j=0; j<templateToRemove.getLength(); j++){
+//			  disposizioni.removeChild(templateToRemove.item(j));
+//		  }
 		  
 		  // se il nodo disposizioni rimane vuoto va eliminato
 		  
