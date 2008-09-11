@@ -17,7 +17,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <xsl:transform  xmlns:xsl   = "http://www.w3.org/1999/XSL/Transform"
                 xmlns:xlink = "http://www.w3.org/1999/xlink"
                 xmlns       = "http://www.w3.org/HTML/1998/html4"
-                xmlns:nir   = "http://www.normeinrete.it/nir/2.2"
+                xmlns:nir   = "http://www.normeinrete.it/nir/2.2/"
                 xmlns:mapper= "xalan://it.cnr.ittig.xmleges.core.blocks.panes.xsltmapper.XsltMapperImpl"
                 version     = "1.0"
 >
@@ -47,7 +47,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	</xsl:element>
 </xsl:template>
 
-<xsl:template match="*[name()='titoloDoc']">
+<xsl:template match="nir:titoloDoc">
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 		<xsl:attribute name="style">
 			text-align: center;
@@ -55,11 +55,23 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 			font-style: bold;
 			margin: 15 0 15 0;
 		</xsl:attribute>
-		<!--	xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-		<xsl:apply-templates /	-->
-        <xsl:call-template name="vigenza"/>	
+		<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+		<xsl:apply-templates />
+        <!--xsl:call-template name="vigenza"/-->	
 	</xsl:element>
 </xsl:template>
+
+<!--xsl:template match="*[name()='titoloDoc']">
+	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
+		<xsl:attribute name="style">
+			text-align: center;
+			font-size: x-large;
+			font-style: bold;
+			margin: 15 0 15 0;
+		</xsl:attribute>
+        <xsl:call-template name="vigenza"/>	
+	</xsl:element>
+</xsl:template-->
 
 <xsl:template match="*[name()='emanante']">
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
