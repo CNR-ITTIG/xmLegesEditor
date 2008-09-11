@@ -206,7 +206,7 @@ public class MetaEditImpl implements MetaEdit, Loggable, Serviceable {
 		}
 		
 				
-		for(int i=0; i<DAList.length;i++) {
+		for(int i=0; DAList!=null && i<DAList.length;i++) {
 		
 		  try{
 			  System.err.println("in disposizioni: VALID ? "+dtdRulesManager.queryIsValid(disposizioni));
