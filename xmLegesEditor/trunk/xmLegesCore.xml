@@ -96,7 +96,7 @@ File di composizione dell'applicazione xmLegesEditor CORE
         </configuration>
     </component>
 
-    <component  class="it.cnr.ittig.xmleges.core.blocks.dtd.DtdRulesManagerImpl" />
+    <component  class="it.cnr.ittig.xmleges.core.blocks.rules.RulesManagerImpl" />
     
     <component  class="it.cnr.ittig.xmleges.core.blocks.selection.SelectionManagerImpl" />
     
@@ -376,8 +376,10 @@ File di composizione dell'applicazione xmLegesEditor CORE
     <component 	class="it.cnr.ittig.xmleges.core.blocks.action.ActionManagerImpl" />
         
     <component  activation="startup"
-                class="it.cnr.ittig.xmleges.editor.blocks.action.filenew.FileNewActionImpl"
+                class="it.cnr.ittig.xmleges.core.blocks.action.file.neww.FileNewActionImpl"
     />
+    
+    
     
     <component  activation="startup"
                 class="it.cnr.ittig.xmleges.core.blocks.action.file.open.FileOpenActionImpl"
@@ -564,6 +566,8 @@ File di composizione dell'applicazione xmLegesEditor CORE
             
             <xslt   name="edit-documento"		file="panes-edit-minimale-1.0.xsl"	startup="true" />
             
+            <xslt   name="edit-documento-akomantoso"		file="panes-edit-documento-akomantoso-1.0.xsl"	startup="true" />
+            
             
             <xslt   name="edit-annessi"			file="nir-panes-edit-annessi-1.0.xsl" 		/>
             <xslt   name="edit-meta"			file="nir-panes-edit-meta-1.0.xsl"			/>
@@ -590,7 +594,8 @@ File di composizione dell'applicazione xmLegesEditor CORE
         >
         <configuration>
             <pane name="editor.panes.documento">
-                <xslt name="edit-documento"/>
+                <!--xslt name="edit-documento"/-->
+                <xslt name="edit-documento-akomantoso"/>
             </pane>
             <pane name="editor.panes.commenti">
                 <xslt name="commenti"/>
