@@ -4,6 +4,7 @@ import java.io.File;
 
 public class KbConf {
 
+	//useless comment
 	public static String dalosRepository = "dalos" + File.separatorChar;
 	
 	public static String mapSegmentFileName = "segmap.dat";
