@@ -17,6 +17,7 @@ import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.action.disposizioni.passive.DispPassiveAction;
 import it.cnr.ittig.xmleges.editor.services.form.disposizioni.passive.DispPassiveForm;
 import it.cnr.ittig.xmleges.editor.services.form.disposizioni.passive.ModificaDispPassiveForm;
+import it.cnr.ittig.xmleges.editor.services.form.disposizioni.passive.VerificaDispPassiveForm;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 
 import java.awt.event.ActionEvent;
@@ -65,6 +66,8 @@ public class DispPassiveActionImpl implements DispPassiveAction, Loggable, Event
 
 	DispPassiveForm dispPassiveForm;
 	
+//	VerificaDispPassiveForm verificaDispPassiveForm;
+	
 	ModificaDispPassiveForm modificaDispPassiveForm;
 	
 	NirUtilDom nirUtilDom;
@@ -72,6 +75,7 @@ public class DispPassiveActionImpl implements DispPassiveAction, Loggable, Event
 	Node activeNode;
 
 	AbstractAction vigenzaAction = new vigenzaAction();
+	AbstractAction verificaVigenzaAction = new verificaVigenzaAction();
 	AbstractAction rimuoviVigenzaAction = new rimuoviVigenzaAction();
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
@@ -86,27 +90,34 @@ public class DispPassiveActionImpl implements DispPassiveAction, Loggable, Event
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 		dispPassiveForm = (DispPassiveForm) serviceManager.lookup(DispPassiveForm.class);
+//		verificaDispPassiveForm = (VerificaDispPassiveForm) serviceManager.lookup(VerificaDispPassiveForm.class);
 		modificaDispPassiveForm = (ModificaDispPassiveForm) serviceManager.lookup(ModificaDispPassiveForm.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws java.lang.Exception {
+		actionManager.registerAction("editor.disposizioni.verificavigenza", verificaVigenzaAction);
 		actionManager.registerAction("editor.disposizioni.passive", vigenzaAction);
 		actionManager.registerAction("editor.disposizioni.rimuovipassive", rimuoviVigenzaAction);
 		eventManager.addListener(this, SelectionChangedEvent.class);
 		eventManager.addListener(this, DocumentOpenedEvent.class);
 		eventManager.addListener(this, DocumentClosedEvent.class);
 		vigenzaAction.setEnabled(false);
+		verificaVigenzaAction.setEnabled(false);
 		rimuoviVigenzaAction.setEnabled(false);
 	}
 
 	public void manageEvent(EventObject event) {
 		
-		if (event instanceof DocumentOpenedEvent && !documentManager.isEmpty() && !nirUtilDom.isDtdBase()) 
+		if (event instanceof DocumentOpenedEvent && !documentManager.isEmpty() && !nirUtilDom.isDtdBase()) { 
 			vigenzaAction.setEnabled(true);
+			verificaVigenzaAction.setEnabled(true);
+		}
 		
-		if (event instanceof DocumentClosedEvent)
+		if (event instanceof DocumentClosedEvent) {
 			vigenzaAction.setEnabled(false);
+			verificaVigenzaAction.setEnabled(false);
+		}
 		
 		if (event instanceof SelectionChangedEvent) {
 			activeNode = ((SelectionChangedEvent) event).getActiveNode();
@@ -120,6 +131,10 @@ public class DispPassiveActionImpl implements DispPassiveAction, Loggable, Event
 	public void doDispPassiva() {
 			dispPassiveForm.openForm(true);		
 	}
+	
+	public void doVerificaDispPassiva() {
+//		verificaDispPassiveForm.openForm(activeNode);		
+	}
 
 	public void undoDispPassiva() {
 		modificaDispPassiveForm.openForm(activeNode);		
@@ -130,6 +145,12 @@ public class DispPassiveActionImpl implements DispPassiveAction, Loggable, Event
 
 		public void actionPerformed(ActionEvent e) {
 			doDispPassiva();
+		}
+	}
+	public class verificaVigenzaAction extends AbstractAction {
+
+		public void actionPerformed(ActionEvent e) {
+			doVerificaDispPassiva();
 		}
 	}
 	public class rimuoviVigenzaAction extends AbstractAction {
