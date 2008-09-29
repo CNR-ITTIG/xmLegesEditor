@@ -76,9 +76,10 @@ public class FileExportFormImpl implements FileExportForm, Loggable, Serviceable
 	MouseAdapter mouseAdapter = new MouseAdapter() {
 		public void mouseClicked(MouseEvent e) {
 			if (SwingUtilities.isLeftMouseButton(e)) {
-				radioMonovigente.setSelected(true);				
-				//dataVigenza.set(new Date((String) listModel.getElementAt(sceltaDataVigenza.getSelectedIndex())));
-				dataVigenza.set(getAsDate((String) listModel.getElementAt(sceltaDataVigenza.getSelectedIndex())));
+				radioMonovigente.setSelected(true);		
+				if (sceltaDataVigenza.getSelectedIndex()!=-1)
+					//dataVigenza.set(new Date((String) listModel.getElementAt(sceltaDataVigenza.getSelectedIndex())));
+					dataVigenza.set(getAsDate((String) listModel.getElementAt(sceltaDataVigenza.getSelectedIndex())));
 			}
 		}
 	};
@@ -191,10 +192,14 @@ public class FileExportFormImpl implements FileExportForm, Loggable, Serviceable
 	private void setDateDiVigenza() {
 		Document doc = documentManager.getDocumentAsDom();
 		NodeList lista = doc.getElementsByTagName("evento");
-		String temp;
+		String data;
+		String fonte;
 		for(int i=0; i<lista.getLength();i++) {
-			temp=lista.item(i).getAttributes().getNamedItem("data").getNodeValue();
-			listModel.addElement(temp.substring(6, 8)+"/"+temp.substring(4, 6)+"/"+temp.substring(0, 4));
+			fonte=lista.item(i).getAttributes().getNamedItem("fonte").getNodeValue();
+			if (fonte.indexOf("rp")!=-1 | fonte.indexOf("ro")!=-1) { 
+				data=lista.item(i).getAttributes().getNamedItem("data").getNodeValue();
+				listModel.addElement(data.substring(6, 8)+"/"+data.substring(4, 6)+"/"+data.substring(0, 4));
+			}	
 		}
 	}
 }
