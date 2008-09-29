@@ -172,6 +172,7 @@ public class PartizioniFormImpl implements PartizioniForm, Loggable, Serviceable
 
 	private void popolaControlli(JComboBox combo) {
 		combo.addItem("");
+		combo.addItem("Allegato");
 		combo.addItem("Libro");
 		combo.addItem("Parte");
 		combo.addItem("Titolo");
@@ -251,7 +252,47 @@ public class PartizioniFormImpl implements PartizioniForm, Loggable, Serviceable
 		comboLat_0.addItem("octies");
 		comboLat_0.addItem("novies");
 		comboLat_0.addItem("decies");
-
+		comboLat_0.addItem("undecies");
+		comboLat_0.addItem("duodecies");
+		comboLat_0.addItem("ter decies");
+		comboLat_0.addItem("quater decies");
+		comboLat_0.addItem("quinquies decies");
+		comboLat_0.addItem("sexies decies");
+		comboLat_0.addItem("septies decies");
+		comboLat_0.addItem("duodevicies");
+		comboLat_0.addItem("undevicies");
+		comboLat_0.addItem("vicies");
+		comboLat_0.addItem("vicies semel");
+		comboLat_0.addItem("vicies bis");
+		comboLat_0.addItem("vicies ter");
+		comboLat_0.addItem("vicies quater");
+		comboLat_0.addItem("vicies quinques");
+		comboLat_0.addItem("vicies sexies");
+		comboLat_0.addItem("vicies septeis");
+		comboLat_0.addItem("duodetricies");
+		comboLat_0.addItem("undetricies");
+		comboLat_0.addItem("tricies");
+		comboLat_0.addItem("tricies semel");
+		comboLat_0.addItem("tricies bis");
+		comboLat_0.addItem("tricies ter");
+		comboLat_0.addItem("tricies quater");
+		comboLat_0.addItem("tricies quinques");
+		comboLat_0.addItem("tricies sexies");
+		comboLat_0.addItem("tricies septeis");
+		comboLat_0.addItem("duodequadragies");
+		comboLat_0.addItem("undequadragies");
+		comboLat_0.addItem("quadragies");
+		comboLat_0.addItem("quadragies semel");
+		comboLat_0.addItem("quadragies bis");
+		comboLat_0.addItem("quadragies ter");
+		comboLat_0.addItem("quadragies quater");
+		comboLat_0.addItem("quadragies quinques");
+		comboLat_0.addItem("quadragies sexies");
+		comboLat_0.addItem("quadragies septeis");
+		comboLat_0.addItem("duodequinquagies");
+		comboLat_0.addItem("undequinquagies");
+		comboLat_0.addItem("quinquagies");
+		
 		comboLat_1.removeAllItems();
 		comboLat_1.addItem("");
 		comboLat_1.addItem("bis");
@@ -263,6 +304,46 @@ public class PartizioniFormImpl implements PartizioniForm, Loggable, Serviceable
 		comboLat_1.addItem("octies");
 		comboLat_1.addItem("novies");
 		comboLat_1.addItem("decies");
+		comboLat_1.addItem("undecies");
+		comboLat_1.addItem("duodecies");
+		comboLat_1.addItem("ter decies");
+		comboLat_1.addItem("quater decies");
+		comboLat_1.addItem("quinquies decies");
+		comboLat_1.addItem("sexies decies");
+		comboLat_1.addItem("septies decies");
+		comboLat_1.addItem("duodevicies");
+		comboLat_1.addItem("undevicies");
+		comboLat_1.addItem("vicies");
+		comboLat_1.addItem("vicies semel");
+		comboLat_1.addItem("vicies bis");
+		comboLat_1.addItem("vicies ter");
+		comboLat_1.addItem("vicies quater");
+		comboLat_1.addItem("vicies quinques");
+		comboLat_1.addItem("vicies sexies");
+		comboLat_1.addItem("vicies septeis");
+		comboLat_1.addItem("duodetricies");
+		comboLat_1.addItem("undetricies");
+		comboLat_1.addItem("tricies");
+		comboLat_1.addItem("tricies semel");
+		comboLat_1.addItem("tricies bis");
+		comboLat_1.addItem("tricies ter");
+		comboLat_1.addItem("tricies quater");
+		comboLat_1.addItem("tricies quinques");
+		comboLat_1.addItem("tricies sexies");
+		comboLat_1.addItem("tricies septeis");
+		comboLat_1.addItem("duodequadragies");
+		comboLat_1.addItem("undequadragies");
+		comboLat_1.addItem("quadragies");
+		comboLat_1.addItem("quadragies semel");
+		comboLat_1.addItem("quadragies bis");
+		comboLat_1.addItem("quadragies ter");
+		comboLat_1.addItem("quadragies quater");
+		comboLat_1.addItem("quadragies quinques");
+		comboLat_1.addItem("quadragies sexies");
+		comboLat_1.addItem("quadragies septeis");
+		comboLat_1.addItem("duodequinquagies");
+		comboLat_1.addItem("undequinquagies");
+		comboLat_1.addItem("quinquagies");
 
 		comboLat_2.removeAllItems();
 		comboLat_2.addItem("");
@@ -275,6 +356,46 @@ public class PartizioniFormImpl implements PartizioniForm, Loggable, Serviceable
 		comboLat_2.addItem("octies");
 		comboLat_2.addItem("novies");
 		comboLat_2.addItem("decies");
+		comboLat_2.addItem("undecies");
+		comboLat_2.addItem("duodecies");
+		comboLat_2.addItem("ter decies");
+		comboLat_2.addItem("quater decies");
+		comboLat_2.addItem("quinquies decies");
+		comboLat_2.addItem("sexies decies");
+		comboLat_2.addItem("septies decies");
+		comboLat_2.addItem("duodevicies");
+		comboLat_2.addItem("undevicies");
+		comboLat_2.addItem("vicies");
+		comboLat_2.addItem("vicies semel");
+		comboLat_2.addItem("vicies bis");
+		comboLat_2.addItem("vicies ter");
+		comboLat_2.addItem("vicies quater");
+		comboLat_2.addItem("vicies quinques");
+		comboLat_2.addItem("vicies sexies");
+		comboLat_2.addItem("vicies septeis");
+		comboLat_2.addItem("duodetricies");
+		comboLat_2.addItem("undetricies");
+		comboLat_2.addItem("tricies");
+		comboLat_2.addItem("tricies semel");
+		comboLat_2.addItem("tricies bis");
+		comboLat_2.addItem("tricies ter");
+		comboLat_2.addItem("tricies quater");
+		comboLat_2.addItem("tricies quinques");
+		comboLat_2.addItem("tricies sexies");
+		comboLat_2.addItem("tricies septeis");
+		comboLat_2.addItem("duodequadragies");
+		comboLat_2.addItem("undequadragies");
+		comboLat_2.addItem("quadragies");
+		comboLat_2.addItem("quadragies semel");
+		comboLat_2.addItem("quadragies bis");
+		comboLat_2.addItem("quadragies ter");
+		comboLat_2.addItem("quadragies quater");
+		comboLat_2.addItem("quadragies quinques");
+		comboLat_2.addItem("quadragies sexies");
+		comboLat_2.addItem("quadragies septeis");
+		comboLat_2.addItem("duodequinquagies");
+		comboLat_2.addItem("undequinquagies");
+		comboLat_2.addItem("quinquagies");
 
 		comboLat_3.removeAllItems();
 		comboLat_3.addItem("");
@@ -287,18 +408,98 @@ public class PartizioniFormImpl implements PartizioniForm, Loggable, Serviceable
 		comboLat_3.addItem("octies");
 		comboLat_3.addItem("novies");
 		comboLat_3.addItem("decies");
+		comboLat_3.addItem("undecies");
+		comboLat_3.addItem("duodecies");
+		comboLat_3.addItem("ter decies");
+		comboLat_3.addItem("quater decies");
+		comboLat_3.addItem("quinquies decies");
+		comboLat_3.addItem("sexies decies");
+		comboLat_3.addItem("septies decies");
+		comboLat_3.addItem("duodevicies");
+		comboLat_3.addItem("undevicies");
+		comboLat_3.addItem("vicies");
+		comboLat_3.addItem("vicies semel");
+		comboLat_3.addItem("vicies bis");
+		comboLat_3.addItem("vicies ter");
+		comboLat_3.addItem("vicies quater");
+		comboLat_3.addItem("vicies quinques");
+		comboLat_3.addItem("vicies sexies");
+		comboLat_3.addItem("vicies septeis");
+		comboLat_3.addItem("duodetricies");
+		comboLat_3.addItem("undetricies");
+		comboLat_3.addItem("tricies");
+		comboLat_3.addItem("tricies semel");
+		comboLat_3.addItem("tricies bis");
+		comboLat_3.addItem("tricies ter");
+		comboLat_3.addItem("tricies quater");
+		comboLat_3.addItem("tricies quinques");
+		comboLat_3.addItem("tricies sexies");
+		comboLat_3.addItem("tricies septeis");
+		comboLat_3.addItem("duodequadragies");
+		comboLat_3.addItem("undequadragies");
+		comboLat_3.addItem("quadragies");
+		comboLat_3.addItem("quadragies semel");
+		comboLat_3.addItem("quadragies bis");
+		comboLat_3.addItem("quadragies ter");
+		comboLat_3.addItem("quadragies quater");
+		comboLat_3.addItem("quadragies quinques");
+		comboLat_3.addItem("quadragies sexies");
+		comboLat_3.addItem("quadragies septeis");
+		comboLat_3.addItem("duodequinquagies");
+		comboLat_3.addItem("undequinquagies");
+		comboLat_3.addItem("quinquagies");
 
-		comboLat_4.removeAllItems();
-		comboLat_4.addItem("");
-		comboLat_4.addItem("bis");
-		comboLat_4.addItem("ter");
-		comboLat_4.addItem("quater");
-		comboLat_4.addItem("quinquies");
-		comboLat_4.addItem("sexies");
-		comboLat_4.addItem("septies");
-		comboLat_4.addItem("octies");
-		comboLat_4.addItem("novies");
-		comboLat_4.addItem("decies");
+		comboLat_3.removeAllItems();
+		comboLat_3.addItem("");
+		comboLat_3.addItem("bis");
+		comboLat_3.addItem("ter");
+		comboLat_3.addItem("quater");
+		comboLat_3.addItem("quinquies");
+		comboLat_3.addItem("sexies");
+		comboLat_3.addItem("septies");
+		comboLat_3.addItem("octies");
+		comboLat_3.addItem("novies");
+		comboLat_3.addItem("decies");
+		comboLat_3.addItem("undecies");
+		comboLat_3.addItem("duodecies");
+		comboLat_3.addItem("ter decies");
+		comboLat_3.addItem("quater decies");
+		comboLat_3.addItem("quinquies decies");
+		comboLat_3.addItem("sexies decies");
+		comboLat_3.addItem("septies decies");
+		comboLat_3.addItem("duodevicies");
+		comboLat_3.addItem("undevicies");
+		comboLat_3.addItem("vicies");
+		comboLat_3.addItem("vicies semel");
+		comboLat_3.addItem("vicies bis");
+		comboLat_3.addItem("vicies ter");
+		comboLat_3.addItem("vicies quater");
+		comboLat_3.addItem("vicies quinques");
+		comboLat_3.addItem("vicies sexies");
+		comboLat_3.addItem("vicies septeis");
+		comboLat_3.addItem("duodetricies");
+		comboLat_3.addItem("undetricies");
+		comboLat_3.addItem("tricies");
+		comboLat_3.addItem("tricies semel");
+		comboLat_3.addItem("tricies bis");
+		comboLat_3.addItem("tricies ter");
+		comboLat_3.addItem("tricies quater");
+		comboLat_3.addItem("tricies quinques");
+		comboLat_3.addItem("tricies sexies");
+		comboLat_3.addItem("tricies septeis");
+		comboLat_3.addItem("duodequadragies");
+		comboLat_3.addItem("undequadragies");
+		comboLat_3.addItem("quadragies");
+		comboLat_3.addItem("quadragies semel");
+		comboLat_3.addItem("quadragies bis");
+		comboLat_3.addItem("quadragies ter");
+		comboLat_3.addItem("quadragies quater");
+		comboLat_3.addItem("quadragies quinques");
+		comboLat_3.addItem("quadragies sexies");
+		comboLat_3.addItem("quadragies septeis");
+		comboLat_3.addItem("duodequinquagies");
+		comboLat_3.addItem("undequinquagies");
+		comboLat_3.addItem("quinquagies");
 
 	}
 
@@ -394,6 +595,7 @@ public class PartizioniFormImpl implements PartizioniForm, Loggable, Serviceable
 				comboPartizioni_1.removeAllItems();
 			if (TipoPartizione.equals("")) {
 				comboPartizioni_1.addItem("");
+				comboPartizioni_1.addItem("Allegato");
 				comboPartizioni_1.addItem("Libro");
 				comboPartizioni_1.addItem("Parte");
 				comboPartizioni_1.addItem("Titolo");
@@ -403,6 +605,13 @@ public class PartizioniFormImpl implements PartizioniForm, Loggable, Serviceable
 				comboPartizioni_1.addItem("Comma");
 				comboPartizioni_1.addItem("Lettera");
 				comboPartizioni_1.addItem("Numero");
+			} else if (TipoPartizione.equals("Allegato")) {
+				comboPartizioni_1.addItem("");
+				comboPartizioni_1.addItem("Libro");
+				comboPartizioni_1.addItem("Parte");
+				comboPartizioni_1.addItem("Titolo");
+				comboPartizioni_1.addItem("Capo");
+				comboPartizioni_1.addItem("Sezione");
 			} else if (TipoPartizione.equals("Libro")) {
 				comboPartizioni_1.addItem("");
 				comboPartizioni_1.addItem("Parte");
@@ -446,6 +655,7 @@ public class PartizioniFormImpl implements PartizioniForm, Loggable, Serviceable
 
 			if (TipoPartizione.equals("")) {
 				comboPartizioni_2.addItem("");
+				comboPartizioni_2.addItem("Allegato");
 				comboPartizioni_2.addItem("Libro");
 				comboPartizioni_2.addItem("Parte");
 				comboPartizioni_2.addItem("Titolo");
@@ -455,6 +665,13 @@ public class PartizioniFormImpl implements PartizioniForm, Loggable, Serviceable
 				comboPartizioni_2.addItem("Comma");
 				comboPartizioni_2.addItem("Lettera");
 				comboPartizioni_2.addItem("Numero");
+			} else if (TipoPartizione.equals("Allegato")) {
+				comboPartizioni_2.addItem("");
+				comboPartizioni_2.addItem("Libro");
+				comboPartizioni_2.addItem("Parte");
+				comboPartizioni_2.addItem("Titolo");
+				comboPartizioni_2.addItem("Capo");
+				comboPartizioni_2.addItem("Sezione");
 			} else if (TipoPartizione.equals("Libro")) {
 				comboPartizioni_2.addItem("");
 				comboPartizioni_2.addItem("Parte");
@@ -497,6 +714,7 @@ public class PartizioniFormImpl implements PartizioniForm, Loggable, Serviceable
 
 			if (TipoPartizione.equals("")) {
 				comboPartizioni_3.addItem("");
+				comboPartizioni_3.addItem("Allegato");
 				comboPartizioni_3.addItem("Libro");
 				comboPartizioni_3.addItem("Parte");
 				comboPartizioni_3.addItem("Titolo");
@@ -506,6 +724,13 @@ public class PartizioniFormImpl implements PartizioniForm, Loggable, Serviceable
 				comboPartizioni_3.addItem("Comma");
 				comboPartizioni_3.addItem("Lettera");
 				comboPartizioni_3.addItem("Numero");
+			} else if (TipoPartizione.equals("Allegato")) {
+				comboPartizioni_3.addItem("");
+				comboPartizioni_3.addItem("Libro");
+				comboPartizioni_3.addItem("Parte");
+				comboPartizioni_3.addItem("Titolo");
+				comboPartizioni_3.addItem("Capo");
+				comboPartizioni_3.addItem("Sezione");
 			} else if (TipoPartizione.equals("Libro")) {
 				comboPartizioni_3.addItem("");
 				comboPartizioni_3.addItem("Parte");
@@ -547,6 +772,7 @@ public class PartizioniFormImpl implements PartizioniForm, Loggable, Serviceable
 				comboPartizioni_4.removeAllItems();
 			if (TipoPartizione.equals("")) {
 				comboPartizioni_4.addItem("");
+				comboPartizioni_4.addItem("Allegato");
 				comboPartizioni_4.addItem("Libro");
 				comboPartizioni_4.addItem("Parte");
 				comboPartizioni_4.addItem("Titolo");
@@ -556,6 +782,13 @@ public class PartizioniFormImpl implements PartizioniForm, Loggable, Serviceable
 				comboPartizioni_4.addItem("Comma");
 				comboPartizioni_4.addItem("Lettera");
 				comboPartizioni_4.addItem("Numero");
+			} else if (TipoPartizione.equals("Allegato")) {
+				comboPartizioni_4.addItem("");
+				comboPartizioni_4.addItem("Libro");
+				comboPartizioni_4.addItem("Parte");
+				comboPartizioni_4.addItem("Titolo");
+				comboPartizioni_4.addItem("Capo");
+				comboPartizioni_4.addItem("Sezione");
 			} else if (TipoPartizione.equals("Libro")) {
 				comboPartizioni_4.addItem("");
 				comboPartizioni_4.addItem("Parte");
@@ -746,6 +979,9 @@ public class PartizioniFormImpl implements PartizioniForm, Loggable, Serviceable
 
 	private boolean checkNumber(String partizione, String numero) {
 		if (!partizione.equals("")) {
+		  if (partizione.equals("Allegato"))
+			  return (isRomanOrArabo(numero, false) || isArabo(numero, false) || isLettera(numero, false));
+		  else	
 			if (partizione.equals("Libro") || partizione.equals("Parte") || partizione.equals("Titolo") || partizione.equals("Capo")
 					|| partizione.equals("Sezione"))
 				return (isRomanOrArabo(numero, true));
