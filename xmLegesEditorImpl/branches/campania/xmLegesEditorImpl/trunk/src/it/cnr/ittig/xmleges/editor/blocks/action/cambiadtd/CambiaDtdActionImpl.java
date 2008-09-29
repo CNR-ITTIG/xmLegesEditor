@@ -165,8 +165,8 @@ public class CambiaDtdActionImpl implements CambiaDtdAction, EventManagerListene
 				
 				UtilFile.copyFileInTemp(new FileInputStream(documentManager.getSourceName()), "tempChangeDtdFrom.xml");
 				
-				Source source = new StreamSource(new File("temp/tempChangeDtdFrom.xml"));
-				Result dest = new StreamResult("temp/tempChangeDtdTo.xml");
+				Source source = new StreamSource(new File(UtilFile.getTempDirName()+ File.separatorChar +"tempChangeDtdFrom.xml"));
+				Result dest = new StreamResult(UtilFile.getTempDirName()+ File.separatorChar +"tempChangeDtdTo.xml");
 				converti.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, dtdto.getText());
 				converti.setOutputProperty(OutputKeys.ENCODING, encoding);
 				converti.transform(source,dest);
