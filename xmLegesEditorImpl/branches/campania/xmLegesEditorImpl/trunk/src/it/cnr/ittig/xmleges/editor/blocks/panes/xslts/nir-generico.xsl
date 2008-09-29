@@ -1155,7 +1155,7 @@
 						<xsl:variable name="implicita">
 							<xsl:value-of select="../@implicita"/>
 						</xsl:variable>	
-						<xsl:variable name="urn">
+						<xsl:variable name="urn_meta">
 							<xsl:value-of select="../*[name()='dsp:norma']/*[name()='dsp:pos']/@xlink:href"/>
 						</xsl:variable>	
 						<xsl:variable name="autonota">
@@ -1207,7 +1207,7 @@
 	   					</xsl:if>
    					</xsl:if>					
 					<xsl:text> da: </xsl:text>
-					<a href="http://www.nir.it/cgi-bin/N2Ln?{$urn}" title="URN = {$urn}"><xsl:value-of select="$autonota"/></a>
+					<a href="http://www.nir.it/cgi-bin/N2Ln?{$urn_meta}" title="URN = {$urn_meta}"><xsl:value-of select="$autonota"/></a>
 					<xsl:text>. </xsl:text>
 			      </xsl:for-each>
 				</xsl:when>
@@ -1267,11 +1267,16 @@
 		- Date di vigenza che interessano il documento:
 		<xsl:text> </xsl:text> 
 		<xsl:for-each select="//*[name()='eventi']/*[@data!='']">
-			<xsl:variable name="data">
-				<xsl:value-of select="concat(substring(@data,7,2),'/',substring(@data,5,2),'/',substring(@data,1,4))"/>
+			<xsl:variable name="fonte">
+				<xsl:value-of select="substring(@fonte,1,2)"/>
 			</xsl:variable>
-			<xsl:value-of select="$data"/>
-			<xsl:text> - </xsl:text> 
+			<xsl:if test="$fonte!='ra'">
+				<xsl:variable name="data">
+					<xsl:value-of select="concat(substring(@data,7,2),'/',substring(@data,5,2),'/',substring(@data,1,4))"/>
+				</xsl:variable>
+				<xsl:value-of select="$data"/>
+				<xsl:text> - </xsl:text> 
+			</xsl:if>
 		</xsl:for-each>
 	 </p>		
 	</xsl:template>
