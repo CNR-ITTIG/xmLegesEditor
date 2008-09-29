@@ -1,0 +1,53 @@
+# $Id: orto,v 1.9 2008/05/20 12:59:28 simone Exp $
+s/(art|n|N)\.\s*(\d)/$1\._$2/g
+#sostituzione del ; con il . per risolvere i problemi di
+#propagazione dell'errore su frasi troppo lunghe
+#s/;/\./g
+s/(\n\r)+/ /g
+s/\r+/ /g
+s/\n+/ /g
+s/\s+/ /g
+s/#/_/g
+#elisioni
+s/([lctdnmrszhb])'|’/$1' /ig;
+s/([^lctdnmrszhbaeiou])'/$1 '/ig;
+s/([0-9]+)(\.*)( )([gG]ennaio|[Ff]ebbraio|[Mm]arzo|[aA]prile|[Mm]aggio|[Gg]iugno|[Ll]uglio|[Aa]gosto|[Ss]ettembre|[Oo]ttobre|[Nn]ovembre|[dD]icembre)( )*(\n*)( )*([0-9][0-9][0-9][0-9])/$1_$4_$8/g;
+s/(&nbs)+/ /g
+s/à|&agrave;/a'/g;
+s/&Agrave;|À/A'/g;
+s/è|é|&eacute;|&egrave;/e'/g;
+s/È|É|&Egrave;|&Eacute;/E'/g;
+s/ù|&ugrave;/u'/g;
+s/Ù|&Ugrave;/U'/g;
+s/ì|&igrave;/i'/g;
+s/Ì|&Igrave;/I'/g;
+s/ò|&ograve;/o'/g;
+s/Ò|&Ograve;/O'/g;
+s/&#186;/°/g;
+s/'''/'\"/g;
+s/''|``|«|»|&#171;|&#187;/\"/g;
+s/&quot;/\"/g;
+s/&amp;/&/g;
+s/"(.)/" $1/g
+s/(.)"/$1 "/g
+s/\(/\( /g
+s/(.)\)/$1 \)/g
+s/(;|!|\?)/ $1/g
+s/ -([a-zA-Z])/ - $1/g
+s/([a-zA-Z0-9])- /$1 - /g
+s/(;|!|\)|\(|\?)([a-zA-Z0-9'`"«»])/ $1 $2/g
+s/(\D+):(^\/\/)/$1 :/g
+s/(\D+?):\s/$1 : /g
+s/[^0-9](,)([a-zA-Z'`’\"«»])/ $1 $2/g
+s/(.+? )(De|Di|Dei|Delle|Della|Degli|Dalla|Da|Dai|Dalle|Dagli|Dall'|Dell')\s?([A-Z][a-z]+)/$1$2_$3/g;
+s/(Don|San)\s+([A-Z][a-z]+)/$1_$2/g;
+s/don\s+([A-Z][a-z]+)/Don_$1/g;
+s/san\s+([A-Z][a-z]+)/San_$1/g;
+s/([0-9]{3})\/([0-9]{4})/$1\/$2/g
+#s/([^\."])([\s\n]+)([A-Z][A-Za-z']+)/$1$2$3_/g
+#s/(?<![\."])([\s\n]+)([A-Z][A-Za-z']+)/$1$2_/g
+#s/([\s\n]+)([A-Z][A-Za-z]+)/$1$2_/g
+s/([a-zA-Z_]\d+),/$1\n,/g
+s/([a-zA-Z']),/$1\n,/g
+s/(\d),$/$1\n,/g
+#s/( )+/\n/g
