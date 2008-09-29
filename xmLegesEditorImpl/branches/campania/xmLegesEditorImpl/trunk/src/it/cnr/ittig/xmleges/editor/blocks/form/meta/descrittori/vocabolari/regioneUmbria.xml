@@ -17,7 +17,15 @@
 		<voce nome="Referendum"/>
 		<voce nome="Disciplina delle nomine di competenza regionale"/>
 		<voce nome="Elezione di rappresentanti del Consiglio regionale"/>
-		<voce nome="Procedure amministrative - Semplificazione e delegificazione normativa"/>
+	</voce>
+	<voce nome="AMMINISTRAZIONE REGIONALE">
+		<voce nome="Enti, Aziende e Istituzioni regionali"/>
+		<voce nome="Società a partecipazione regionale"/>
+		<voce nome="Organismi consultivi"/>
+		<voce nome="Altri organismi regionali"/>
+		<voce nome="Adesione ad Enti, Associazioni, Fondazioni"/>
+		<voce nome="Uffici e Personale"/>
+		<voce nome="Sistema Informativo"/>
 	</voce>
 	<voce nome="FINANZA E CONTABILITA'">
 		<voce nome="Finanza"/>
