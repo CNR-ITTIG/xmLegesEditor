@@ -10,7 +10,6 @@ import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.FormClosedListener;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
-import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
@@ -78,7 +77,6 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 	NirUtilDom nirUtilDom;
 	NirUtilUrn nirUtilUrn;
 	EventManager eventManager;
-	UtilUI utilui;
 	UtilMsg utilmsg;
 	MetaCiclodivita ciclodivita;
 	CiclodiVitaForm ciclodivitaForm;
@@ -142,7 +140,6 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 		nirUtilUrn = (NirUtilUrn) serviceManager.lookup(NirUtilUrn.class);
-		utilui = (UtilUI) serviceManager.lookup(UtilUI.class);
 		utilmsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		ciclodivita = (MetaCiclodivita) serviceManager.lookup(MetaCiclodivita.class);
@@ -293,6 +290,8 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 			dove.setText("");
 			partizione="";
 			implicita.setSelected(false);
+			if (rinumerazione.isRinumerazione())
+				utilmsg.msgInfo("editor.form.disposizioni.passive.rinumerazione");
 		}	
 		posDisposizione="";
 		activeNode = null;
@@ -300,10 +299,6 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 		operazioneProssima = NO_OPERAZIONE;
 		form.setSize(420, 280);
 		form.showDialog(false);
-		
-		if (rinumerazione.isRinumerazione())
-			utilmsg.msgInfo("editor.form.disposizioni.passive.rinumerazione");
-			
 		
 	}
 
