@@ -1145,5 +1145,39 @@ public class UtilDom {
 		return  ret;
 	}
 	
+    /**
+	 * 
+	 * @param doc
+	 * @param fromHere
+	 * @param tagAttribute
+	 * @param attributeValue
+	 * @return
+	 */
+    public static Node[] getElementsByAttributeValue(Document doc, Node fromHere, String tagAttribute, String attributeValue){
+		
+    	
+		NodeIterator nI = ((DocumentTraversal)doc).createNodeIterator(fromHere,NodeFilter.SHOW_ELEMENT,null,false);	
+		Vector v = new Vector();
+	  
+		Node node;
+
+		if (attributeValue==null) {	//restituisco tutti i nodi che hanno l'attributo
+			while ((node = nI.nextNode()) != null ) {
+				if(node.getNodeType()==Node.ELEMENT_NODE && getAttributeValueAsString(node, tagAttribute)!=null)					
+				  v.add(node);
+		    }			
+		}
+		else { //restituisco tutti i nodi che hanno l'attributo di valore 'attributeValue'
+			while ((node = nI.nextNode()) != null ) {
+				if(node.getNodeType()==Node.ELEMENT_NODE && attributeValue.equals(getAttributeValueAsString(node, tagAttribute)))					
+				  v.add(node);
+		    }
+		}
+		Node[] ret = new Node[v.size()];
+		for(int i=0; i<v.size();i++)
+			ret[i]=(Node)v.get(i);
+		return  ret;
+	}
 	
+		
 }
