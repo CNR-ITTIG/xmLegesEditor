@@ -576,7 +576,7 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 			if (!cwdDAV(dir))
 				return false;
 			
-			File file=new File("temp/tempDAV.xml");
+			File file=new File(UtilFile.getTempDirName()+ File.separatorChar +"tempDAV.xml");
 			String encoding;
 			if (documentManager.getEncoding() == null) {
 				logger.warn("No encoding found. Using default: UTF-8");
@@ -599,7 +599,7 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 				utilMsg.msgError("action.file.save.error.file");
 				logger.error(ex.toString(), ex);
 			}			
-			UtilFile.copyFile("temp/tempDAV.xml", "temp/tempDAV2.xml");
+			UtilFile.copyFile(UtilFile.getTempDirName()+ File.separatorChar +"tempDAV.xml", UtilFile.getTempDirName()+ File.separatorChar +"tempDAV2.xml");
 			File file2= UtilFile.getFileFromTemp("tempDAV2.xml");
 			
 			logger.debug("Write: " + httpURL.getScheme()+"//"+httpURL.getHost()+":"+httpURL.getPort()+webdavResource.getPath()+"/"+fileName);			
@@ -658,7 +658,7 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 					fileLocked.unlockMethod();
 			} catch (Exception e) {}
 			
-			File file=new File("temp/"+fileName);
+			File file=new File(UtilFile.getTempDirName()+ File.separatorChar +fileName);
 
 			logger.debug("Read: " + httpURL.getScheme()+"//"+httpURL.getHost()+":"+httpURL.getPort()+webdavResource.getPath()+"/"+fileName);
 			webdavResource.lockMethod(webdavResource.getPath()+"/"+fileName, password.getText(), LockMethod.DEPTH_INFINITY, LockMethod.SCOPE_EXCLUSIVE);			
