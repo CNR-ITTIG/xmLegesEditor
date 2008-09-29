@@ -25,13 +25,30 @@ import org.w3c.dom.Node;
  */
 public interface Disposizioni extends Service {
 		
+	//Disposizioni ATTIVE
 	/**
-	 * Funzione per l'aggiornamento dei metadati di disposizione ATTIVE
+	 * Funzione per l'aggiornamento dei metadati di disposizione ATTIVE (esclusa novella/novellando)
 	 * 
-	 * @return </code>True</code> operazione correttamente eseguita
+	 * @return la DSP che sto aggiungendo
 	 */
-	public boolean setDOMDispAttive(String pos, String norma, String partizione, String novellando, String novella, String autoNota, boolean implicita);
+	public Node setDOMDispAttive(Node metaDaModificare, String idMod, int operazioneIniziale, String completa, boolean condizione, String decorrenza, String idevento, String norma, String partizione, String[] delimitatori);
 	
+	/**
+	 * Funzione per l'aggiornamento dei metadati di disposizione ATTIVE (Novella)
+	 * 
+	 * @return la DSP che sto aggiungendo
+	 */
+	public void setDOMNovellaDispAttive(Node meta, String virgolettaContenuto, String tipo, String posizione, String virgolettaA, String virgolettaB);
+	
+	/**
+	 * Funzione per l'aggiornamento dei metadati di disposizione ATTIVE (Novellando)
+	 * 
+	 * @return la DSP che sto aggiungendo
+	 */
+	public void setDOMNovellandoDispAttive(Node meta, boolean parole, String tipoPartizione, String tipo, String ruoloA, String virgolettaA, String ruoloB, String virgolettaB);
+	
+	
+	//Disposizioni PASSIVE
 	/**
 	 * Funzione per l'aggiornamento dei metadati di disposizione PASSIVE e
 	 * per l'inserimento dei metadati proprietari (creazione della nota)
