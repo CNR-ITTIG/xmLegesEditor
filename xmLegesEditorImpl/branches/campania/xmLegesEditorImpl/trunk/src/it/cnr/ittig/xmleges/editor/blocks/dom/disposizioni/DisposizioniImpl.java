@@ -12,7 +12,9 @@ import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
+import it.cnr.ittig.xmleges.core.util.date.UtilDate;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
+import it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.attive.DispAttiveFormImpl;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
 import it.cnr.ittig.xmleges.editor.services.dom.partizioni.Partizioni;
@@ -138,6 +140,40 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		return true;
 	}
 	
+	private Node getMetaAfter(Node modifichepassive, String idNovella, String idNovellando) {
+
+		String cercoId = (!"".equals(idNovella) ? idNovella : idNovellando);
+		Document doc = documentManager.getDocumentAsDom();
+		Node[] nodi = UtilDom.getElementsByAttributeValue(doc,doc.getDocumentElement(),"iniziovigore",null);
+		for (int i=0; i<nodi.length; i++)
+			if (cercoId.equals(UtilDom.getAttributeValueAsString(nodi[i], "id"))) {
+				//cerco (i-1) se i!=0 altrimenti cerco i=1 (se esiste)
+				String cercaMeta;
+				if (i>0)
+					cercaMeta = UtilDom.getAttributeValueAsString(nodi[i-1], "id");
+				else 
+					if (nodi.length>1)
+						cercaMeta = UtilDom.getAttributeValueAsString(nodi[1], "id");
+					else
+						return null;
+				NodeList disposizioni = modifichepassive.getChildNodes();
+				Node dispCorrente;
+				Node test;
+				for (int j=0; j<disposizioni.getLength(); j++) {
+					dispCorrente = disposizioni.item(j);
+					test = UtilDom.findDirectChild(dispCorrente, "dsp:novella");
+					if (test!=null)
+						if (cercaMeta.equals(UtilDom.getAttributeValueAsString(test.getFirstChild(), "xlink:href")))
+								return dispCorrente.getNextSibling();
+					test = UtilDom.findDirectChild(dispCorrente, "dsp:novellando"); 
+					if (test!=null)
+						if (cercaMeta.equals(UtilDom.getAttributeValueAsString(test.getFirstChild(), "xlink:href")))
+								return dispCorrente.getNextSibling();						
+				}
+			}
+		return null;
+	}
+	
 	public boolean setDOMDisposizioni(String pos, String norma, String partizione, String novellando, String novella, String preNota, String autoNota, String postNota, boolean implicita, Evento eventoOriginale, Evento eventoVigore) {
 
 		Document doc = documentManager.getDocumentAsDom();
@@ -152,7 +188,8 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		Node modifichepassiveNode = UtilDom.findRecursiveChild(disposizioniNode,"modifichepassive");
 		if (modifichepassiveNode==null)
 			modifichepassiveNode = UtilDom.checkAndCreate(disposizioniNode, "modifichepassive");		
-
+		
+		Node metaAfter = getMetaAfter(modifichepassiveNode,novella, novellando);
 		Node operazioneNode;
 		if (!novellando.equals("") && !novella.equals("")) {	//sostituzione
 			operazioneNode = utilRulesManager.getNodeTemplate(doc,"dsp:sostituzione");
@@ -160,7 +197,10 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 				UtilDom.setAttributeValue(operazioneNode, "implicita", "si");
 			else
 				UtilDom.setAttributeValue(operazioneNode, "implicita", "no");				
-			modifichepassiveNode.appendChild(operazioneNode);
+			
+			//modifichepassiveNode.appendChild(operazioneNode);
+			modifichepassiveNode.insertBefore(operazioneNode,metaAfter);
+			
 			setNorma(operazioneNode, pos, norma, partizione, preNota, autoNota, postNota);
 			setNovella(operazioneNode, novella);
 			setNovellando(operazioneNode, novellando);			
@@ -171,7 +211,10 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 					UtilDom.setAttributeValue(operazioneNode, "implicita", "si");
 				else
 					UtilDom.setAttributeValue(operazioneNode, "implicita", "no");
-				modifichepassiveNode.appendChild(operazioneNode);
+				
+				//modifichepassiveNode.appendChild(operazioneNode);
+				modifichepassiveNode.insertBefore(operazioneNode,metaAfter);
+		
 				setNorma(operazioneNode, pos, norma, partizione, preNota, autoNota, postNota);
 				setNovellando(operazioneNode, novellando);
 			}
@@ -181,7 +224,10 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 					UtilDom.setAttributeValue(operazioneNode, "implicita", "si");
 				else
 					UtilDom.setAttributeValue(operazioneNode, "implicita", "no");
-				modifichepassiveNode.appendChild(operazioneNode);
+				
+				//modifichepassiveNode.appendChild(operazioneNode);
+				modifichepassiveNode.insertBefore(operazioneNode,metaAfter);
+		
 				setNorma(operazioneNode, pos, norma, partizione, preNota, autoNota, postNota);
 				setNovella(operazioneNode, novella);
 			}
@@ -189,6 +235,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		setUrn(eventoOriginale, eventoVigore);
 		//marco il documento come multivigente
 		setTipoDocVigenza();
+		rinumerazione.aggiorna(doc);
 		
 		return true;
 	}
@@ -230,10 +277,12 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 //		normaNode.appendChild(metaittigNode);
 //		Node notaittigNode = documentManager.getDocumentAsDom().createElementNS("http://www.ittig.it/provvedimenti/2.2", "ittig:nota");
 //		metaittigNode.appendChild(notaittigNode);
-		Node notaittigNode = documentManager.getDocumentAsDom().createElementNS("http://www.ittig.it/provvedimenti/2.2", "ittig:notavigenza");
+		Node notaittigNode = documentManager.getDocumentAsDom().createElementNS("http://www.ittig.cnr.it/provvedimenti/2.2", "ittig:notavigenza");
 		normaNode.appendChild(notaittigNode);
 		
-		UtilDom.setIdAttribute(notaittigNode, "itt" + documentManager.getDocumentAsDom().getElementsByTagName("ittig:notavigenza").getLength());
+		
+		//UtilDom.setIdAttribute(notaittigNode, "itt" + documentManager.getDocumentAsDom().getElementsByTagName("ittig:notavigenza").getLength());
+		UtilDom.setIdAttribute(notaittigNode, "");
 		
 		UtilDom.setAttributeValue(notaittigNode, "auto", autoNota);
 		
@@ -784,12 +833,14 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 	}
 	
 	
-	public boolean setDOMDispAttive(String pos, String norma, String partizione, String novellando, String novella, String autoNota, boolean implicita) {
-		Document doc = documentManager.getDocumentAsDom();
-		
+	/*
+	 *   PARTE DISPOSIZIONI ATTIVE. 
+	 */
+	
+	public Node setDOMDispAttive(Node metaDaModificare, String idMod, int operazioneIniziale, String completa, boolean condizione, String decorrenza, String idevento, String norma, String partizione, String[] delimitatori) {
+				
+		Document doc = documentManager.getDocumentAsDom();		
 		Node activeMeta = nirUtilDom.findActiveMeta(doc,null);
-
-		//inserisco la disposizione
 		Node disposizioniNode = UtilDom.findRecursiveChild(activeMeta,"disposizioni");
 		if (disposizioniNode==null)
 			disposizioniNode = nirUtilDom.checkAndCreateMeta(doc,activeMeta,"disposizioni");
@@ -798,39 +849,188 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		if (modificheattiveNode==null)
 			modificheattiveNode = UtilDom.checkAndCreate(disposizioniNode, "modificheattive");		
 
-		Node operazioneNode;
-		if (!novellando.equals("") && !novella.equals("")) {	//sostituzione
+		//se è una modifica, butto via il vecchio pacchetto.
+		
+		
+		//////////////buttare anche eventi collegati !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		
+		if (metaDaModificare!=null)
+			modificheattiveNode.removeChild(metaDaModificare);
+		
+		Node operazioneNode=null;
+		if (operazioneIniziale==DispAttiveFormImpl.SOSTITUZIONE)
 			operazioneNode = utilRulesManager.getNodeTemplate(doc,"dsp:sostituzione");
-			if (implicita)
-				UtilDom.setAttributeValue(operazioneNode, "implicita", "si");
-			else
-				UtilDom.setAttributeValue(operazioneNode, "implicita", "no");				
-			modificheattiveNode.appendChild(operazioneNode);
-			setNorma(operazioneNode, pos, norma, partizione, "", autoNota, "");
-			setNovella(operazioneNode, novella);
-			setNovellando(operazioneNode, novellando);			
+		else if (operazioneIniziale==DispAttiveFormImpl.INTEGRAZIONE)
+			operazioneNode = utilRulesManager.getNodeTemplate(doc,"dsp:integrazione");
+		else if (operazioneIniziale==DispAttiveFormImpl.ABROGAZIONE)
+			operazioneNode = utilRulesManager.getNodeTemplate(doc,"dsp:abrogazione");
+		UtilDom.setAttributeValue(operazioneNode, "completa", completa);
+		UtilDom.setAttributeValue(operazioneNode, "implicita", "si");	//imposto sempre a SI
+		modificheattiveNode.appendChild(operazioneNode);
+		//Pos -- indica il mod.
+		Node nodo = UtilDom.findDirectChild(operazioneNode, "dsp:pos");
+		if (nodo != null) // è stato inserito dal template minimale
+			operazioneNode.removeChild(nodo);
+		nodo = utilRulesManager.getNodeTemplate("dsp:pos");
+		UtilDom.setAttributeValue(nodo, "xlink:href", idMod);
+		operazioneNode.appendChild(nodo);			
+		UtilDom.setAttributeValue(nodo, "xlink:href", idMod);
+		operazioneNode.appendChild(nodo);
+		//Se è condizionata -- metto la condizione, altrimenti il termine
+		if (condizione) {
+			nodo = utilRulesManager.getNodeTemplate("dsp:condizione");
+			Node nodoCondizione = utilRulesManager.getNodeTemplate("dsp:testo");
+			UtilDom.setAttributeValue(nodoCondizione, "valore", decorrenza);
+			nodo.appendChild(nodoCondizione);
 		}
-		else if (!novellando.equals("")) {	//abrogazione
-				operazioneNode = utilRulesManager.getNodeTemplate(doc, "dsp:abrogazione");
-				if (implicita)
-					UtilDom.setAttributeValue(operazioneNode, "implicita", "si");
-				else
-					UtilDom.setAttributeValue(operazioneNode, "implicita", "no");
-				modificheattiveNode.appendChild(operazioneNode);
-				setNorma(operazioneNode, pos, norma, partizione, "", autoNota, "");
-				setNovellando(operazioneNode, novellando);
+		else {
+			if (idevento==null) {  //devo creare il nuovo evento (e relazione)
+				//relazione
+				Node relazioniNode = UtilDom.findRecursiveChild(activeMeta,"relazioni");
+				NodeList relazioniList = relazioniNode.getChildNodes();
+				int max=0;
+				for (int i = 0; i < relazioniList.getLength(); i++) {
+					Node relazioneNode = relazioniList.item(i);
+					if ("attiva".equals(relazioneNode.getNodeName())) {
+						String id = UtilDom.getAttributeValueAsString(relazioneNode, "id");
+						Integer idValue = Integer.decode(id.substring(2));
+						if (idValue.intValue() > max)
+							max = idValue.intValue();
+					}
+				}
+				max++;
+				Node nuovo = utilRulesManager.getNodeTemplate("attiva");
+				UtilDom.setAttributeValue(nuovo, "id", "ra"+max);
+				UtilDom.setAttributeValue(nuovo, "xlink:href", norma);
+				//UtilDom.setAttributeValue(nuovo, "xlink:type", "simple");
+				relazioniNode.appendChild(nuovo);
+				//evento
+				Node eventiNode = UtilDom.findRecursiveChild(activeMeta,"eventi");
+				idevento = "t" + (1 + eventiNode.getChildNodes().getLength());
+				nuovo = utilRulesManager.getNodeTemplate("evento");
+				UtilDom.setAttributeValue(nuovo, "data", decorrenza.substring(6, 10)+decorrenza.substring(3, 5)+decorrenza.substring(0, 2));   //???????
+				UtilDom.setAttributeValue(nuovo, "fonte", "ra"+max);
+				UtilDom.setAttributeValue(nuovo, "tipo", "modifica");
+				UtilDom.setIdAttribute(nuovo, idevento);
+				eventiNode.appendChild(nuovo);
 			}
-			else if (!novella.equals("")) {	//integrazione
-				operazioneNode = utilRulesManager.getNodeTemplate(doc,"dsp:integrazione");
-				if (implicita)
-					UtilDom.setAttributeValue(operazioneNode, "implicita", "si");
-				else
-					UtilDom.setAttributeValue(operazioneNode, "implicita", "no");
-				modificheattiveNode.appendChild(operazioneNode);
-				setNorma(operazioneNode, pos, norma, partizione, "", autoNota, "");
-				setNovella(operazioneNode, novella);
-			}		
-		return true;
+			nodo = utilRulesManager.getNodeTemplate("dsp:termine");
+			UtilDom.setAttributeValue(nodo, "da", "#"+idevento);
+		}
+		operazioneNode.appendChild(nodo);
+		//Norma -- Pos con eventuali bordi
+		Node normaNode = UtilDom.findDirectChild(operazioneNode, "dsp:norma");
+		if (normaNode != null) // è stato inserito dal template minimale
+			operazioneNode.removeChild(normaNode);
+		normaNode = utilRulesManager.getNodeTemplate("dsp:norma");
+		UtilDom.setAttributeValue(normaNode, "xlink:href", norma);
+		operazioneNode.appendChild(normaNode);
+		//inserisco il pos della Norma
+		nodo = utilRulesManager.getNodeTemplate("dsp:pos");
+		UtilDom.setAttributeValue(nodo, "xlink:href", norma+"#"+partizione);
+		normaNode.appendChild(nodo);
+		//inserisco il bordo della Norma
+		Node delimitatoreNode = null;
+		for (int i=0; i<delimitatori.length/3; i++) {
+			if (i==0) {	//inserisco dsp:subarg
+				Node subargNode = utilRulesManager.getNodeTemplate("dsp:subarg");
+				normaNode.appendChild(subargNode);
+				delimitatoreNode = subargNode;
+			}
+			nodo = documentManager.getDocumentAsDom().createElementNS("http://www.ittig.cnr.it/provvedimenti/2.2", "ittig:bordo");
+			UtilDom.setAttributeValue(nodo, "tipo", delimitatori[i*3]);
+			UtilDom.setAttributeValue(nodo, "num", delimitatori[i*3+1]);
+			if ("ordinale".equalsIgnoreCase(delimitatori[i*3+2]))
+				UtilDom.setAttributeValue(nodo, "ordinale", "si");
+			else
+				UtilDom.setAttributeValue(nodo, "ordinale", "no");
+			delimitatoreNode.appendChild(nodo);
+			delimitatoreNode = nodo;
+		}
+		modificheattiveNode.appendChild(operazioneNode);
+		return operazioneNode;
 	}
 
+	private void setPosizione(Node posizioneNode, String posizione, String virgoletta) {
+		Node posNode = null;
+		
+		if (!posizione.equals("inizio") | !posizione.equals("fine")) {	//aggiungo il POS in Posizione
+			posNode = utilRulesManager.getNodeTemplate("dsp:pos");
+			UtilDom.setAttributeValue(posNode, "xlink:href", virgoletta);
+			posizioneNode.appendChild(posNode);
+		}		
+		Node nodo = documentManager.getDocumentAsDom().createElementNS("http://www.ittig.cnr.it/provvedimenti/2.2", "ittig:dove");
+		UtilDom.setAttributeValue(nodo, "valore", posizione);
+		if (posNode==null)
+			posizioneNode.appendChild(nodo);
+		else
+			posNode.appendChild(nodo);
+	}
+	
+	public void setDOMNovellaDispAttive(Node meta, String virgolettaContenuto, String tipo, String posizione, String virgolettaA, String virgolettaB) {
+		//Posizione
+		if (posizione!=null) {
+			Node posizioneNode = utilRulesManager.getNodeTemplate("dsp:posizione");
+			if (posizione.equals("fra")) {
+				setPosizione(posizioneNode, "fra-prima", "#"+virgolettaA);
+				setPosizione(posizioneNode, "fra-dopo", "#"+virgolettaB);
+			}
+			else
+				setPosizione(posizioneNode, posizione, "#"+virgolettaA);	
+			meta.appendChild(posizioneNode);	
+		}
+		//Novella
+		Node novellaNode = utilRulesManager.getNodeTemplate("dsp:novella");
+		Node nodo = utilRulesManager.getNodeTemplate("dsp:pos");
+		UtilDom.setAttributeValue(nodo, "xlink:href", "#"+virgolettaContenuto);
+		novellaNode.appendChild(nodo); 
+		Node subargNode = utilRulesManager.getNodeTemplate("dsp:subarg");
+		nodo = documentManager.getDocumentAsDom().createElementNS("http://www.ittig.cnr.it/provvedimenti/2.2", "ittig:tipo");
+		UtilDom.setAttributeValue(nodo, "valore", tipo);
+		subargNode.appendChild(nodo);
+		novellaNode.appendChild(subargNode);
+		meta.appendChild(novellaNode);
+	}	
+	
+	public void setDOMNovellandoDispAttive(Node meta, boolean parole, String tipoPartizione, String tipo, String ruoloA, String virgolettaA, String ruoloB, String virgolettaB) {
+		//Novellando
+		Node novellandoNode = utilRulesManager.getNodeTemplate("dsp:novellando");
+		Node nodo;
+		if (parole) {
+			nodo = utilRulesManager.getNodeTemplate("dsp:pos");
+			if (tipo.equals("contenuto")) {
+				UtilDom.setAttributeValue(nodo, "xlink:href", "#"+virgolettaA);
+				novellandoNode.appendChild(nodo);
+				if (ruoloB!=null) {
+					nodo = utilRulesManager.getNodeTemplate("dsp:pos");
+					UtilDom.setAttributeValue(nodo, "xlink:href", "#"+virgolettaB);
+					Node ruoloNode = documentManager.getDocumentAsDom().createElementNS("http://www.ittig.cnr.it/provvedimenti/2.2", "ittig:ruolo");
+					UtilDom.setAttributeValue(ruoloNode, "valore", ruoloB);
+					nodo.appendChild(ruoloNode);
+					novellandoNode.appendChild(nodo);
+				}
+			}
+			else {		//delimitatori  (stesso di sopra ma ho anche un ruolo(A)... sopra è il default 'contenuto'
+				UtilDom.setAttributeValue(nodo, "xlink:href", "#"+virgolettaA);
+				Node ruoloNode = documentManager.getDocumentAsDom().createElementNS("http://www.ittig.cnr.it/provvedimenti/2.2", "ittig:ruolo");
+				UtilDom.setAttributeValue(ruoloNode, "valore", ruoloA);
+				nodo.appendChild(ruoloNode);
+				novellandoNode.appendChild(nodo);
+				if (ruoloB!=null) {
+					nodo = utilRulesManager.getNodeTemplate("dsp:pos");
+					UtilDom.setAttributeValue(nodo, "xlink:href", "#"+virgolettaB);
+					ruoloNode = documentManager.getDocumentAsDom().createElementNS("http://www.ittig.cnr.it/provvedimenti/2.2", "ittig:ruolo");
+					UtilDom.setAttributeValue(ruoloNode, "valore", ruoloB);
+					nodo.appendChild(ruoloNode);
+					novellandoNode.appendChild(nodo);
+				}
+			}
+		}
+		Node subargNode = utilRulesManager.getNodeTemplate("dsp:subarg");
+		nodo = documentManager.getDocumentAsDom().createElementNS("http://www.ittig.cnr.it/provvedimenti/2.2", "ittig:tipo");
+		UtilDom.setAttributeValue(nodo, "valore", tipoPartizione);
+		subargNode.appendChild(nodo);
+		novellandoNode.appendChild(subargNode);
+		meta.appendChild(novellandoNode);
+	}
 }
