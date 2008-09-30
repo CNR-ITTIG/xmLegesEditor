@@ -60,7 +60,7 @@ public class IlcActionImpl implements IlcAction, Loggable, EventManagerListener,
 
 	IlcForm ilcForm;
 	
-	IlcAction ilcAction = new IlcAction();
+	IlcAzione ilcAction = new IlcAzione();
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -98,7 +98,7 @@ public class IlcActionImpl implements IlcAction, Loggable, EventManagerListener,
 		ilcForm.openForm();		
 	}
 	// /////////////////////////////////////////////// Azioni
-	public class IlcAction extends AbstractAction {
+	public class IlcAzione extends AbstractAction {
 		
 		public void actionPerformed(ActionEvent e) {
 			doIlc();
