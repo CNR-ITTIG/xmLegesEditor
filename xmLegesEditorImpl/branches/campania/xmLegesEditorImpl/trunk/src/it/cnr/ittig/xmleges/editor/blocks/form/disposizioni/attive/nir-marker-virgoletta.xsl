@@ -17,7 +17,7 @@
 	<xsl:template match="//*[name()='virgolette']">
 		<xsl:if test="@id=$idvir">
 			<xsl:value-of select="."/>
-			<xsl:apply-templates/>
+			<!--	xsl:apply-templates/	-->
 		</xsl:if>			
 	</xsl:template>	
 
