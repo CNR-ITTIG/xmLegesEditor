@@ -25,7 +25,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <xsl:output method="html" 
             omit-xml-declaration="yes"
             encoding="ISO-8859-15"
-            indent="yes"/>
+            indent="no"/>
             
 <xsl:include href="nir-panes-dtd-norme-1.0.xsl"/>
 <xsl:include href="nir-panes-dtd-testo-1.0.xsl"/>

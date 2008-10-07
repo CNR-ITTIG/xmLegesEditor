@@ -456,18 +456,18 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 			if (logger.isDebugEnabled())
 				logger.debug("node: " + node);
 			if (xsltParam != null){
-				//ret = UtilXslt.serializedApplyXslt(node, xslt, xsltParam);
-				nodeHtml = UtilXslt.applyXslt(node, xslt, xsltParam);
+				ret = UtilXslt.serializedApplyXslt(node, xslt, xsltParam);
+				//nodeHtml = UtilXslt.applyXslt(node, xslt, xsltParam);
 			}
 			else{
-				//ret = UtilXslt.serializedApplyXslt(node, xslt);
-				nodeHtml = UtilXslt.applyXslt(node, xslt);
+				ret = UtilXslt.serializedApplyXslt(node, xslt);
+				//nodeHtml = UtilXslt.applyXslt(node, xslt);
 			}
 			if (logger.isDebugEnabled()){
 				logger.debug("html:" + UtilDom.domToString(nodeHtml, true, "\t", false));
 			}
-			ret = UtilDom.domToString(nodeHtml,false,null,false,true);
-			ret = ret.substring(ret.indexOf('\n'));
+			//ret = UtilDom.domToString(nodeHtml,false,null,false,true);
+			//ret = ret.substring(ret.indexOf('\n'));
 		} catch (Exception ex) {
 			logger.error(ex.toString(), ex);
 		}
@@ -821,6 +821,9 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 		}
 		if(logger.isDebugEnabled())
 			logger.debug("elem  null for   "+id);
+		
+		System.err.println("  LOCAL UPDATE FAILED IN "+ pane.name + "FOR node: "+node.getNodeName()+" ; id = "+id +" HTML elem "+elem);
+		
 		return null;
 	}
 	

@@ -439,7 +439,9 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 			
 			// FIXME  ho aggiunto come namespace xmlns quello dei ddl; organizzarlo per toglierlo modificando i fogli di stile in modo che non richiedano il namespace settato (come il generico; no match su nir:)
 			
-			templateXml = "<utilrulesmanager xmlns:h=\"http://www.w3.org/HTML/1998/html4\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:dsp=\"http://www.normeinrete.it/nir/disposizioni/1.0\" xmlns:cnr=\"http://www.cnr.it/provvedimenti/2.1\"  xmlns=\"http://www.normeinrete.it/disegnilegge/1.0\" >"
+			// xmlns=\"http://www.normeinrete.it/disegnilegge/1.0\"
+			
+			templateXml = "<utilrulesmanager xmlns=\"http://www.normeinrete.it/nir/2.2/\" xmlns:h=\"http://www.w3.org/HTML/1998/html4\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:dsp=\"http://www.normeinrete.it/nir/disposizioni/1.0\" xmlns:cnr=\"http://www.cnr.it/provvedimenti/2.1\">"
 					+ rulesManager.getDefaultContent(elem_name) + "</utilrulesmanager>";
 
 			domFactory.setValidating(false); // deactivate validation

@@ -19,13 +19,12 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 xmlns       = "http://www.w3.org/HTML/1998/html4"
                 xmlns:nir   = "http://www.normeinrete.it/nir/2.2/"
  			    xmlns:mapper= "xalan://it.cnr.ittig.xmleges.core.blocks.panes.xsltmapper.XsltMapperImpl"
-                version     = "1.0"
->
+                version     = "1.0">
 
 <xsl:output method="html" 
             omit-xml-declaration="yes"
             encoding="ISO-8859-15"
-            indent="yes"/>
+            indent="no"/>
 
 <xsl:include href="xsltmapper-1.0.xsl"/>
 
@@ -39,14 +38,14 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		    </style>
         </head>
 		<body>
-			<xsl:for-each select="//*[name()='meta']">
-				<xsl:apply-templates select="./*[name()='redazionale']/*[name()='nota']" />
+			<xsl:for-each select="//nir:meta">
+				<xsl:apply-templates select="./nir:redazionale/nir:nota" />
 			</xsl:for-each>
 		</body>
 	</html>
 </xsl:template>
 
-<xsl:template match="*[name()='denAnnesso']" >
+<xsl:template match="nir:denAnnesso" >
 		<hr/>
 		<center>
 			<b>
@@ -55,10 +54,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		</center>		
 </xsl:template>
 
-<xsl:template match="*[name()='nota']" >
+<xsl:template match="nir:nota" >
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 		<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-		<xsl:apply-templates select="../../../../*[name()='testata']/*[name()='denAnnesso']" />
+		<xsl:apply-templates select="../../../../nir:testata/nir:denAnnesso" />
 		<xsl:variable name="idnota"><xsl:value-of select="@id"/></xsl:variable>
 		<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 	    	<xsl:attribute name="style">
@@ -66,7 +65,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	        </xsl:attribute>
 	        
 			<font color="blue">
-			<xsl:for-each select="//*[name()='ndr' and @num=$idnota]">
+			<xsl:for-each select="//nir:ndr[@num=$idnota]">
 			  <b>
 				<xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
 					<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />

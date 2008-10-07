@@ -19,8 +19,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 xmlns       = "http://www.w3.org/HTML/1998/html4"
                 xmlns:nir   = "http://www.normeinrete.it/nir/2.2/"
                 xmlns:mapper= "xalan://it.cnr.ittig.xmleges.core.blocks.panes.xsltmapper.XsltMapperImpl"
-                version     = "1.0"
->
+                version     = "1.0">
 
 <xsl:output method="html" />
 <xsl:include href="nir-panes-dtd-norme-1.0.xsl"/>
@@ -40,14 +39,14 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 			</style>
 		</head>
 
-        <base href="{$base}" />
+        <!--<base href="{$base}" />-->
         <body>
           
-            <!--	xsl:apply-templates select="/*[name()='NIR']/*/*[name()='annessi']" /	-->
+            <!--	xsl:apply-templates select="/nir:NIR/*/nir:annessi" /	-->
             
 			<xsl:choose>
-				<xsl:when test="/*[name()='NIR']/*/*[name()='annessi']">
-					<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='annessi']" />
+				<xsl:when test="/nir:NIR/*/nir:annessi">
+					<xsl:apply-templates select="/nir:NIR/*/nir:annessi" />
 				</xsl:when>	
 				<xsl:otherwise>
 					<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">

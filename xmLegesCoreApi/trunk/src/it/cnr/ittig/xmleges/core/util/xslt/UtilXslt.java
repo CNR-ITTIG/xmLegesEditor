@@ -3,6 +3,7 @@ package it.cnr.ittig.xmleges.core.util.xslt;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.PrintWriter;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
@@ -17,6 +18,8 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 import org.w3c.dom.Node;
+
+import com.sun.org.apache.xalan.internal.xslt.EnvironmentCheck;
 
 /**
  * Classe di utilit&agrave; per l'applicazione dei fogli di stile a un documento
@@ -59,22 +62,53 @@ public class UtilXslt {
 	 * @throws TransformerException
 	 */
 	protected static Transformer getTransformerFor(File xslt) throws TransformerException{
+	
+		// CHECK ENVIRONMENT: 
+		//boolean environmentOK = (new EnvironmentCheck()).checkEnvironment (new PrintWriter(System.out));
+
 		Transformer tr;
 		if (transformers.containsKey(xslt) && cache) {
 			tr = (Transformer) transformers.get(xslt);
 		} else {
 			TransformerFactory factory = TransformerFactory.newInstance();
-			factory.setAttribute("http://xml.apache.org/xalan/features/incremental",java.lang.Boolean.TRUE);
+			
+			factory.setAttribute("http://xml.apache.org/xalan/features/incremental",Boolean.TRUE);
+			/*
+			 * http://xml.apache.org/xalan-j/features.html#factoryfeature
+			 * 
+			 * Produce output incrementally, rather than waiting to finish parsing the input before generating any output. 
+			 * By default this attribute is set to false. You can turn this attribute on to transform large documents where 
+			 * the stylesheet structure is optimized to execute individual templates without having to parse the entire document. 
+			 * For more information, see DTM incremental.
+			 * 
+			 * 
+			 *  When set to true: If the parser is Xerces, we perform an incremental transform on a single thread using the 
+			 *  Xerces "parse on demand" feature. If the parser is not Xerces, we run the transform in one thread and the parse in another. 
+			 *  Exception: if the parser is not Xerces and the XML source is a DOMSource, setting this feature to true has no effect.
+			 * 
+			 * Nel nostro caso e' una DOMSource
+			 * 
+			 */
+			
 			tr = factory.newTransformer(new StreamSource(xslt));
+			
 			tr.setOutputProperty(OutputKeys.METHOD, "html");		  
-			// OTHER
-			tr.setOutputProperty(OutputKeys.INDENT, "yes");
+			tr.setOutputProperty(OutputKeys.INDENT, "no");
 		    tr.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
 			tr.setOutputProperty(OutputKeys.ENCODING, "ISO-8859-15");
 			tr.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, "-//W3C//DTD HTML 4.01 Transitional//EN");
 			tr.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd");
 
 			transformers.put(xslt, tr);
+
+			//Boolean isStreamSource = (Boolean) factory.getFeature("http://javax.xml.transform.stream.StreamSource/feature");
+			//Boolean isStreamResult = (Boolean) factory.getFeature("http://javax.xml.transform.stream.StreamResult/feature");
+			
+			//if(isStreamSource)
+			//	System.err.println("Stream source supported");
+			//if(isStreamResult)
+			//	System.err.println("Stream result supported");
+
 		}
 		return tr; 
 	}
@@ -350,56 +384,6 @@ public class UtilXslt {
 		transformers.remove(xslt);
 	}
 	
-
-	//////////////////////////////////////////////////////////////////////////////////
-	//	
-	//METODI CON String xslt  	
-	//
-	//////////////////////////////////////////////////////////////////////////////////
-	///**
-	// * Converte il nodo <code>node</code> con le regole di trasformazione in
-	// * <code>xslt</code>. Attenzione xslt contiene le regole di
-	// * trasformazione non il path del file (per questo usare
-	// * <code>transformDom(Node node, File xslt)</code>).
-	// * 
-	// * @param node nodo da convertire
-	// * @param xslt regole di trasformazione
-	// * @return trasformazione
-	// * @throws TransformerException se il file di trasformazione non &egrave;
-	// *         applicabile
-	// */
-	//public static Node applyXslt(Node node, String xslt) throws TransformerException {
-	//	return applyXslt(node, xslt, null);
-	//}
-	//
-	//
-	///**
-	// * Converte il nodo <code>node</code> con le regole del file di
-	// * trasformazione <code>xslt</code> e i suoi parametri <code>param</code>.
-	// * 
-	// * @param node nodo da convertire
-	// * @param xslt file di trasformazione
-	// * @param param parametri del file di trasformazione
-	// * @return trasformazione
-	// * @throws TransformerException se il file di trasformazione non &egrave;
-	// *         applicabile
-	// */
-	//public static Node applyXslt(Node node, String xslt, Hashtable param) throws TransformerException {
-	//	Transformer tr;
-	//	if (transformers.containsKey(xslt) && cache) {
-	//		tr = (Transformer) transformers.get(xslt);
-	//	} else {
-	//		InputStream is = new ByteArrayInputStream(xslt.getBytes());
-	//		TransformerFactory factory = TransformerFactory.newInstance();
-	//		factory.setAttribute("http://xml.apache.org/xalan/features/incremental",java.lang.Boolean.TRUE);
-	//			
-	//		tr = factory.newTransformer(new StreamSource(is));
-	//		transformers.put(xslt, tr);
-	//	}
-	//	return applyXslt(tr, node, param);
-	//}
-	//
-	//////////////////////////////////////////////////////////////////////////////////
 	
 	
 }

@@ -19,13 +19,12 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 xmlns       = "http://www.w3.org/HTML/1998/html4"
                 xmlns:nir   = "http://www.normeinrete.it/nir/2.2/"
  			    xmlns:mapper= "xalan://it.cnr.ittig.xmleges.core.blocks.panes.xsltmapper.XsltMapperImpl"
-                version     = "1.0"
->
+                version     = "1.0">
 
 <xsl:output method="html" 
             omit-xml-declaration="yes"
             encoding="ISO-8859-15"
-            indent="yes"/>
+            indent="no"/>
             
 <xsl:strip-space elements="*" />
 
@@ -40,30 +39,30 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		    </style>
         </head>
 		<body>
-			<xsl:apply-templates select="//*[name()='annesso']|//*[name()='mrif']|//*[name()='rif' and name(..)!='mrif']|//*[name()='irif' and name(..)!='mrif']" />
+			<xsl:apply-templates select="//nir:annesso|//nir:mrif|//nir:rif[name(..)!='mrif']|//nir:irif[name(..)!='mrif']" />
 		</body>
 	</html>
 </xsl:template>
 
-<xsl:template match="*[name()='annesso']" >
-	 <xsl:if test="descendant::*[name()='rif' or name()='mrif']">
+<xsl:template match="nir:annesso" >
+	 <xsl:if test="descendant:: nir:rif | nir:mrif">
 		<br/><hr/>
 		<center>
 			<b>
-				<xsl:value-of select="./*[name()='testata']/*[name()='denAnnesso']"/>
+				<xsl:value-of select="./nir:testata/nir:denAnnesso"/>
 			</b>
 		</center>		
 	</xsl:if>		
 </xsl:template>
 
-<xsl:template match="*[name()='mrif']">
+<xsl:template match="nir:mrif">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
         - <xsl:apply-templates />
     </xsl:element>
 </xsl:template>
 
-<xsl:template match="*[name()='irif']">
+<xsl:template match="nir:irif">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
         - <xsl:apply-templates />
@@ -71,12 +70,11 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     </xsl:element>
 </xsl:template>
 
-<xsl:template match="*[name()='rif']">
+<xsl:template match="nir:rif">
 	<xsl:choose>
 		<xsl:when test="name(..) != 'mrif'">
 			<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 				<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-					
 				<xsl:choose>
 					<xsl:when test="substring(@xlink:href, 1, 1)!='#'">
 						<xsl:element name="font" use-attribute-sets="XsltMapperVerificaUrn">
@@ -87,7 +85,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 						- <xsl:apply-templates /> 
 					</xsl:otherwise>	
 				</xsl:choose>					
-				
 				<xsl:call-template name="makeA" />
 		    </xsl:element>
 		
@@ -106,14 +103,15 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	<xsl:element name="a">
 		<xsl:choose>
 			<xsl:when test="substring(@xlink:href, 1, 1)='#'">
-				<xsl:attribute name="href"><xsl:value-of select="@xlink:href" /></xsl:attribute>
+				<xsl:attribute name="href"><xsl:value-of select="@xlink:href"/></xsl:attribute>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:attribute name="href">http://www.nir.it/cgi-bin/N2Ln?<xsl:value-of select="@xlink:href" /></xsl:attribute>
+				<xsl:attribute name="href">http://www.nir.it/cgi-bin/N2Ln?<xsl:value-of select="@xlink:href"/></xsl:attribute>
 			</xsl:otherwise>
 		</xsl:choose>
 		[<xsl:apply-templates select="@xlink:href"/>]
 	</xsl:element>
 </xsl:template>
+
 
 </xsl:transform>

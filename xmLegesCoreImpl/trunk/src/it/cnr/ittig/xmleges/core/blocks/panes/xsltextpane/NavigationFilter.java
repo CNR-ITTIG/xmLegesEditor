@@ -1,6 +1,9 @@
 package it.cnr.ittig.xmleges.core.blocks.panes.xsltextpane;
 
+import java.util.Enumeration;
+
 import javax.swing.SwingConstants;
+import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Element;
 import javax.swing.text.JTextComponent;
@@ -62,16 +65,27 @@ public class NavigationFilter extends javax.swing.text.NavigationFilter {
 		// Debugging
 	    // System.err.println(textPane.getPane().getName()+"  setDot - DOT = "+dot );
 		try {
+			
 			Element newElem = textPane.getHTMLDocument().getCharacterElement(dot);
 			
+			
+			// GESTIONE LINK   <a/>
 			if(newElem != null) {
 				Object attr = newElem.getAttributes().getAttribute(HTML.Tag.A);
 				if (attr != null) {
-					textPane.href = attr.toString().trim();
-					return;
+					AttributeSet  as = (AttributeSet) attr;	
+					Enumeration en = as.getAttributeNames();
+					while (en.hasMoreElements()) {
+						Object k = en.nextElement();
+						Object v = as.getAttribute(k);
+						if ("href".equals(k.toString())){ 
+							textPane.href = "href="+v.toString().trim();
+							return;
+						}
+					}
 				}
-			}
-
+			}	
+			
 			Element span = textPane.getMappedSpan(dot);
 		
 			/*

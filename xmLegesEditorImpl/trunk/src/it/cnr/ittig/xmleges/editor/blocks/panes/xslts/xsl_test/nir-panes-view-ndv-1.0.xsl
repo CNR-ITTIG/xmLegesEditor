@@ -17,14 +17,15 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 xmlns:xlink = "http://www.w3.org/1999/xlink"
                 xmlns       = "http://www.w3.org/HTML/1998/html4"
                 xmlns:nir   = "http://www.normeinrete.it/nir/2.2/"
+                xmlns:dsp   = "http://www.normeinrete.it/nir/disposizioni/2.2/"
+                xmlns:ittig = "http://www.ittig.cnr.it/provvedimenti/2.2"
  			    xmlns:mapper= "xalan://it.cnr.ittig.xmleges.core.blocks.panes.xsltmapper.XsltMapperImpl"
-                version     = "1.0"
->
+                version     = "1.0">
 
 <xsl:output method="html" 
             omit-xml-declaration="yes"
             encoding="ISO-8859-15"
-            indent="yes"/>
+            indent="no"/>
 
 <xsl:include href="xsltmapper-1.0.xsl"/>
 
@@ -50,16 +51,16 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 			<xsl:value-of select="@id" />
 		</xsl:variable>
 		<xsl:variable name="ittignota">
-				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$idnota]/../../*[name()='dsp:norma']/*[name()='ittig:notavigenza']/@id"/>
+				<xsl:value-of select="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$idnota]/../../*[name()='dsp:norma']/ittig:notavigenza/@id"/>
 		</xsl:variable>	
 		<xsl:variable name="autonota">
-				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$idnota]/../../*[name()='dsp:norma']/*[name()='ittig:notavigenza']/@auto"/>
+				<xsl:value-of select="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$idnota]/../../*[name()='dsp:norma']/ittig:notavigenza/@auto"/>
 		</xsl:variable>	
 		<xsl:variable name="novella">
-				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$idnota]/../../*[name()='dsp:novella']/*[name()='dsp:pos']/@xlink:href"/>
+				<xsl:value-of select="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$idnota]/../../*[name()='dsp:novella']/dsp:pos/@xlink:href"/>
 		</xsl:variable>	
 		<xsl:variable name="novellando">
-			<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$idnota]/../../*[name()='dsp:novellando']/*[name()='dsp:pos']/@xlink:href"/>
+			<xsl:value-of select="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$idnota]/../../*[name()='dsp:novellando']/dsp:pos/@xlink:href"/>
 		</xsl:variable>	
 
 					<xsl:variable name="inizio_id">

@@ -18,11 +18,11 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 xmlns:xlink = "http://www.w3.org/1999/xlink"
                 xmlns       = "http://www.w3.org/HTML/1998/html4"
                 xmlns:nir   = "http://www.normeinrete.it/nir/2.2/"
+                xmlns:dsp   = "http://www.normeinrete.it/nir/disposizioni/2.2/"
+                xmlns:ittig = "http://www.ittig.cnr.it/provvedimenti/2.2"
                 xmlns:mapper= "xalan://it.cnr.ittig.xmleges.core.blocks.panes.xsltmapper.XsltMapperImpl"
-                version     = "1.0"
->
+                version     = "1.0">
 
-<xsl:output method="html" />
 
 <xsl:include href="xsltmapper-1.0.xsl"/>
 
@@ -32,7 +32,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <!-- ================================================================================ -->
 <!-- =============================================================== INTESTAZIONE === -->
 <!-- ================================================================================ -->
-<xsl:template match="*[name()='intestazione']">
+<xsl:template match="nir:intestazione">
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 		<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 		<xsl:apply-templates />
@@ -40,7 +40,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	</xsl:element>
 </xsl:template>
 
-<xsl:template match="*[name()='tipoDoc' or name()='dataDoc' or name()='numDoc']">
+<xsl:template match="nir:tipoDoc | nir:dataDoc | nir:numDoc">
 	<xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
 		<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 		<xsl:apply-templates />
@@ -48,6 +48,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 </xsl:template>
 
 <xsl:template match="nir:titoloDoc">
+NUOVO!!!
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 		<xsl:attribute name="style">
 			text-align: center;
@@ -61,7 +62,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	</xsl:element>
 </xsl:template>
 
-<!--xsl:template match="*[name()='titoloDoc']">
+<!--xsl:template match="nir:titoloDoc">
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 		<xsl:attribute name="style">
 			text-align: center;
@@ -73,7 +74,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	</xsl:element>
 </xsl:template-->
 
-<xsl:template match="*[name()='emanante']">
+<xsl:template match="nir:emanante">
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 		<xsl:attribute name="style">
 			text-align: center;
@@ -90,7 +91,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <!-- ================================================================================ -->
 <!-- =========================================================== FORMULA INIZIALE === -->
 <!-- ================================================================================ -->
-<xsl:template match="*[name()='formulainiziale']">
+<xsl:template match="nir:formulainiziale">
         <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
         	<!--	xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
             <xsl:apply-templates /	-->
@@ -98,7 +99,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
         </xsl:element>
 </xsl:template>
 
-<xsl:template match="*[name()='preambolo']">
+<xsl:template match="nir:preambolo">
     <xsl:element name="p" use-attribute-sets="XsltMapperSetClass">
         <xsl:call-template name="vigenza"/>	
     </xsl:element>
@@ -109,7 +110,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <!-- ================================================================================ -->
 <!-- ============================================================= FORMULA FINALE === -->
 <!-- ================================================================================ -->
-<xsl:template match="*[name()='formulafinale']">
+<xsl:template match="nir:formulafinale">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
     	<xsl:attribute name="style">margin: 30 5 5 5;</xsl:attribute>
     	<!--	xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
@@ -123,7 +124,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <!-- ================================================================================ -->
 <!-- ================================================================ DECORAZIONE === -->
 <!-- ================================================================================ -->
-<xsl:template match="*[name()='decorazione']">
+<xsl:template match="nir:decorazione">
     <!--	xsl:element name="span" use-attribute-sets="XsltMapperSetClass"	-->
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
@@ -131,7 +132,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     </xsl:element>
 </xsl:template>
 
-<xsl:template match="*[name()='rango']">
+<xsl:template match="nir:rango">
     <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
     	<xsl:value-of select="@tipo"/>
     </xsl:element>
@@ -142,7 +143,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <!-- ================================================================================ -->
 <!-- ================================================================= ARTICOLATO === -->
 <!-- ================================================================================ -->
-<xsl:template match="*[name()='articolato']">
+<xsl:template match="nir:articolato">
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
     	<xsl:attribute name="style">
     	    text-align: center;
@@ -154,10 +155,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     </xsl:element>
 </xsl:template>
 
-<xsl:template match="*[
-	name()='libro' or name()='parte' or name()='titolo' or name()='capo' or
-	name()='sezione' or name()='paragrafo' or name()='partizione' or name()='articolo'
-	]">
+<xsl:template match="nir:libro | nir:parte | nir:titolo | nir:capo |
+	nir:sezione | nir:paragrafo | nir:partizione | nir:articolo">
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
     	<xsl:attribute name="style">
     	    font-size: x-large;
@@ -171,7 +170,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     </xsl:element>
 </xsl:template>
 
-<xsl:template match="*[name()='rubrica']">
+<xsl:template match="nir:rubrica">
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
     	<xsl:attribute name="style">
     	    font-size: large;
@@ -185,7 +184,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     </xsl:element>
 </xsl:template>
 
-<xsl:template match="*[name()='num']">
+<xsl:template match="nir:num">
 	<b>
     <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
@@ -194,7 +193,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     </b>
 </xsl:template>
 
-<xsl:template match="*[name()='comma' or name()='el' or name()='en' or name()='ep']">
+<xsl:template match="nir:comma | nir:el | nir:en | nir:ep">
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
     	<xsl:attribute name="style">
     	    font-size: medium;
@@ -209,11 +208,11 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     </xsl:element>
 </xsl:template>
 
-<xsl:template match="*[name()='corpo' or name()='alinea' or name()='coda']">
+<xsl:template match="nir:corpo | nir:alinea | nir:coda">
     <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
         <xsl:call-template name="vigenza"/>	
-<!--    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />-->
-<!--    	<xsl:apply-templates />-->
+    	<!--xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" /-->
+    	<!--xsl:apply-templates /-->
     </xsl:element>
 </xsl:template> 
 
@@ -222,7 +221,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <!-- ================================================================================ -->
 <!-- ================================================================ CONCLUSIONE === -->
 <!-- ================================================================================ -->
-<xsl:template match="*[name()='conclusione']">
+<xsl:template match="nir:conclusione">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
     	<xsl:attribute name="style">margin: 20 30;</xsl:attribute>
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
@@ -235,14 +234,14 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		
 	
 	<!--	RIMOSSI DALLA DTD 2.2 - Ma servono ancora per i DDL -->
-<xsl:template match="*[name()='sottoscrizioni']">
+<xsl:template match="nir:sottoscrizioni">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
     	<xsl:attribute name="style">margin: 15 0 0 0;</xsl:attribute>
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
         <xsl:apply-templates />
     </xsl:element>
 </xsl:template>
-<xsl:template match="*[name()='sottoscrivente']">
+<xsl:template match="nir:sottoscrivente">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
     	<xsl:attribute name="style">margin: 5 0 0 0;</xsl:attribute>
         <xsl:call-template name="vigenza"/>
@@ -251,7 +250,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 	
 	<!--	RIMOSSI DALLA DTD 2.2
-<xsl:template match="*[name()='visto']">
+<xsl:template match="nir:visto">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
     	<xsl:attribute name="style">font-style: italic; margin: 20 0</xsl:attribute>
         <xsl:call-template name="vigenza"/>
@@ -260,7 +259,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 
 	<!--	Aggiunto dalla dtd 2.2	-->
-<xsl:template match="*[name()='firma']">
+<xsl:template match="nir:firma">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 		<xsl:choose>
 			  <xsl:when test="@tipo='visto'">
@@ -275,7 +274,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 </xsl:template>
 
 
-<xsl:template match="*[name()='dataeluogo']">
+<xsl:template match="nir:dataeluogo">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
     	<xsl:attribute name="style">font-style: italic;</xsl:attribute>
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
@@ -288,19 +287,19 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <!-- ================================================================================ -->
 <!-- ==================================================================== ANNESSI === -->
 <!-- ================================================================================ -->
-<xsl:template match="*[name()='annessi']">
+<xsl:template match="nir:annessi">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
         <xsl:apply-templates />
     </xsl:element>
 </xsl:template>
 
-<xsl:template match="*[name()='elencoAnnessi']">
+<xsl:template match="nir:elencoAnnessi">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
         <xsl:apply-templates />
     </xsl:element>
 </xsl:template>
 
-<xsl:template match="*[name()='annesso']">
+<xsl:template match="nir:annesso">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
         <xsl:call-template name="vigenza"/>	
 		<!--	xsl:apply-templates /	-->
@@ -310,7 +309,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	<p/>
 </xsl:template>
 
-<xsl:template match="*[name()='testata']">
+<xsl:template match="nir:testata">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
     	<xsl:attribute name="style">
     		background: #EEEEFF;
@@ -324,11 +323,11 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     		margin: 10 0 10 0;
     		font-size: small;
     	</xsl:attribute>
-        <xsl:apply-templates select="../*/*[name()='meta']/*" mode="oneroot" />
+        <xsl:apply-templates select="../*/nir:meta/*" mode="oneroot" />
     </xsl:element>    
 </xsl:template>
 
-<xsl:template match="*[name()='denAnnesso' or name()='titAnnesso']">
+<xsl:template match="nir:denAnnesso | nir:titAnnesso">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
     	<xsl:attribute name="align">right</xsl:attribute>
 		<font size="+1"><b>
@@ -338,7 +337,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     </xsl:element>
 </xsl:template>
 
-<xsl:template match="*[name()='preAnnesso']">
+<xsl:template match="nir:preAnnesso">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
     	<xsl:attribute name="style">text-align: left; font-size: large; font-weight: normal;</xsl:attribute>
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
@@ -347,7 +346,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     </xsl:element>
 </xsl:template>
 
-<xsl:template match="*[name()='rifesterno']">
+<xsl:template match="nir:rifesterno">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
     	<xsl:attribute name="style">
     		text-align: center;
@@ -363,13 +362,13 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     </xsl:element>
 </xsl:template>
 
-<xsl:template match="*[name()='meta']"/>
+<xsl:template match="nir:meta"/>
 
 
 <!-- ================================================================================ -->
 <!-- ======================== ELEMENTI INLINE E SPECIALI CON SEMENATICA RILEVANTE === -->
 <!-- ================================================================================ -->
-<xsl:template match="*[name()='mrif']">
+<xsl:template match="nir:mrif">
 	<u>
     <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
@@ -378,7 +377,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     </u>
 </xsl:template> 
 
-<xsl:template match="*[name()='rif' or name()='irif']">
+<xsl:template match="nir:rif | nir:irif">
 	<font color="blue"><u>
     <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
@@ -387,7 +386,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     </u></font>
 </xsl:template> 
 
-<xsl:template match="*[name()='mod']">
+
+<xsl:template match="nir:mod">
     <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
 	<font bgcolor="#FFDDAA">
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
@@ -396,7 +396,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     </xsl:element>
 </xsl:template> 
 
-<xsl:template match="*[name()='virgolette']">
+<xsl:template match="nir:virgolette">
 	<xsl:choose>
 		<xsl:when test="@tipo='struttura'">
 			<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
@@ -424,10 +424,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	</xsl:choose>
 </xsl:template>
 
-<xsl:template match="*[
-	name()='def' or name()='atto' or name()='soggetto' or name()='ente' or
-	name()='data' or name()='luogo' or name()='valute' or name()='importo'
-	]">
+<xsl:template match="
+	nir:def | nir:atto | nir:soggetto | nir:ente |
+	nir:data | nir:luogo | nir:valute | nir:importo">
     <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
     	<xsl:attribute name="style">color:green;</xsl:attribute>
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
@@ -441,17 +440,16 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <!-- =========================================================== DISEGNI DI LEGGE === -->
 <!-- ================================================================================ -->
 
-<xsl:template match="*[name()='legislatura']">
+<xsl:template match="nir:legislatura">
     <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
         <xsl:apply-templates />
     </xsl:element>
 </xsl:template>
 
-<xsl:template match="*[
-		name()='relazione' or name()='confronto' or 
-		name()='sinistra' or name()='destra'
-		]">
+<xsl:template match="
+		nir:relazione | nir:confronto | 
+		nir:sinistra | nir:destra">
         <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
         	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
             <xsl:apply-templates />
@@ -489,11 +487,11 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		<xsl:value-of select="@finevigore"/>
 	</xsl:variable>
 	<xsl:variable name="data_inizio">
-		<!--	xsl:value-of select="//*[name()='evento'][@id=$inizio_id]/@data"/	-->
+		<!--	xsl:value-of select="//nir:evento[@id=$inizio_id]/@data"/	-->
 		<xsl:value-of select="id($inizio_id)/@data"/>
 	</xsl:variable>
 	<xsl:variable name="data_fine">
-		<!--	xsl:value-of select="//*[name()='evento'][@id=$fine_id]/@data"/	-->
+		<!--	xsl:value-of select="//nir:evento[@id=$fine_id]/@data"/	-->
 		<xsl:value-of select="id($fine_id)/@data"/>
 	</xsl:variable>
 	<xsl:choose>
@@ -551,15 +549,15 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 
 	<xsl:choose>
-		<xsl:when test="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]">
+		<xsl:when test="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$id]">
 			<xsl:variable name="ittignota">
-				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:norma']/*[name()='ittig:notavigenza']/@id "/>
+				<xsl:value-of select="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$id]/../../dsp:norma/ittig:notavigenza/@id "/>
 			</xsl:variable>
 			<xsl:variable name="novella">
-				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:novella']/*[name()='dsp:pos']/@xlink:href"/>
+				<xsl:value-of select="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$id]/../../dsp:novella/dsp:pos/@xlink:href"/>
 			</xsl:variable>	
 			<xsl:variable name="novellando">
-				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:novellando']/*[name()='dsp:pos']/@xlink:href"/>
+				<xsl:value-of select="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$id]/../../dsp:novellando/dsp:pos/@xlink:href"/>
 			</xsl:variable>	
 			<sup>
 				[<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>
@@ -614,15 +612,15 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 
 	<xsl:choose>
-		<xsl:when test="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]">
+		<xsl:when test="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$id]">
 			<xsl:variable name="ittignota">
-				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:norma']/*[name()='ittig:notavigenza']/@id "/>
+				<xsl:value-of select="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$id]/../../dsp:norma/ittig:notavigenza/@id "/>
 			</xsl:variable>
 			<xsl:variable name="novella">
-				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:novella']/*[name()='dsp:pos']/@xlink:href"/>
+				<xsl:value-of select="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$id]/../../dsp:novella/dsp:pos/@xlink:href"/>
 			</xsl:variable>	
 			<xsl:variable name="novellando">
-				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:novellando']/*[name()='dsp:pos']/@xlink:href"/>
+				<xsl:value-of select="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$id]/../../dsp:novellando/dsp:pos/@xlink:href"/>
 			</xsl:variable>	
 			<sup>
 				[<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>
@@ -682,15 +680,15 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 
 	<xsl:choose>
-		<xsl:when test="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]">
+		<xsl:when test="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$id]">
 			<xsl:variable name="ittignota">
-				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:norma']/*[name()='ittig:notavigenza']/@id "/>
+				<xsl:value-of select="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$id]/../../dsp:norma/ittig:notavigenza/@id "/>
 			</xsl:variable>
 			<xsl:variable name="novella">
-				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:novella']/*[name()='dsp:pos']/@xlink:href"/>
+				<xsl:value-of select="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$id]/../../dsp:novella/dsp:pos/@xlink:href"/>
 			</xsl:variable>	
 			<xsl:variable name="novellando">
-				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:novellando']/*[name()='dsp:pos']/@xlink:href"/>
+				<xsl:value-of select="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$id]/../../dsp:novellando/dsp:pos/@xlink:href"/>
 			</xsl:variable>	
 			<sup>
 				[<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>
@@ -733,15 +731,15 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 
 	<xsl:choose>
-		<xsl:when test="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]">
+		<xsl:when test="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$id]">
 			<xsl:variable name="ittignota">
-				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:norma']/*[name()='ittig:notavigenza']/@id "/>
+				<xsl:value-of select="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$id]/../../dsp:norma/ittig:notavigenza/@id "/>
 			</xsl:variable>
 			<xsl:variable name="novella">
-				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:novella']/*[name()='dsp:pos']/@xlink:href"/>
+				<xsl:value-of select="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$id]/../../dsp:novella/dsp:pos/@xlink:href"/>
 			</xsl:variable>	
 			<xsl:variable name="novellando">
-				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$id]/../../*[name()='dsp:novellando']/*[name()='dsp:pos']/@xlink:href"/>
+				<xsl:value-of select="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$id]/../../dsp:novellando/dsp:pos/@xlink:href"/>
 			</xsl:variable>	
 			<sup>
 				[<xsl:value-of select="substring($ittignota,4,number(string-length($ittignota)))"/>

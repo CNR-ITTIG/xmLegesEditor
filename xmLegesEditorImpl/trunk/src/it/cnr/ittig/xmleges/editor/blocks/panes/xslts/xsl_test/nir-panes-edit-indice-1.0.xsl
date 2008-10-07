@@ -17,13 +17,12 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 xmlns       = "http://www.w3.org/HTML/1998/html4"
                 xmlns:nir   = "http://www.normeinrete.it/nir/2.2/"
                 xmlns:mapper= "xalan://it.cnr.ittig.xmleges.core.blocks.panes.xsltmapper.XsltMapperImpl"
-                version     = "1.0"
->
+                version     = "1.0">
 
 <xsl:output method="html" 
             omit-xml-declaration="yes"
             encoding="ISO-8859-15"
-            indent="yes"/>
+            indent="no"/>
             
 <xsl:include href="xsltmapper-1.0.xsl"/>
 <xsl:strip-space elements="*" />
@@ -36,26 +35,26 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		</style>
 	</head>
 	<body>
-	<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='articolato']/*" />
+	<xsl:apply-templates select="/nir:NIR/*/nir:articolato/*" />
 	</body>
 	</html>
 </xsl:template>
 
-<xsl:template match="*[name()='libro' or name()='parte' or name()='titolo' or name()='capo' or name()='sezione' or name()='paragrafo' or name()='partizione' or name()='articolo']">
+<xsl:template match="nir:libro | nir:parte | nir:titolo | nir:capo | nir:sezione | nir:paragrafo | nir:partizione | nir:articolo">
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
     	<xsl:apply-templates />
     </xsl:element>
 </xsl:template>
 
-<xsl:template match="*[name()='num']">
+<xsl:template match="nir:num">
 	<xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
    		<xsl:apply-templates  />
     </xsl:element>
 </xsl:template>
 
-<xsl:template match="*[name()='rubrica']">
+<xsl:template match="nir:rubrica">
     <font color="blue">
 		<xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
 	    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
