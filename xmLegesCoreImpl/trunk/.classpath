@@ -23,8 +23,7 @@
 	<classpathentry kind="lib" path="lib/commons-io-1.1.jar"/>	
 	
 	<classpathentry kind="lib" path="lib/logkit-1.0.1.jar"/>
-	<classpathentry kind="lib" path="lib/xsc.jar"/>		
-	<classpathentry kind="lib" path="lib/xsc_eval_key.jar"/>	
+	
 	
 	
 			<!--	WebDav	-->
