@@ -607,21 +607,7 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Loggabl
 				urnFormRelazione.setUrn(new Urn(fonte.getLink()));
 			} catch (ParseException e) {
 			}	
-			
-			
-//				boolean found=false;
-//				for(int i =0;i<eventi.length;i++){
-//					if(eventi[i].getFonte().getTagTipoRelazione().equals("originale")){
-//						tagTipoRelazioneSottoFormDatiEvento.removeItem("originale");
-//						found=true;
-//						break;
-//					}			
-//				}
-//				if(!found){
-//					if(tagTipoRelazioneSottoFormDatiEvento.getItemCount()<6)
-//						tagTipoRelazioneSottoFormDatiEvento.addItem("originale");
-//				}
-							
+										
 	
 				
 		}else{

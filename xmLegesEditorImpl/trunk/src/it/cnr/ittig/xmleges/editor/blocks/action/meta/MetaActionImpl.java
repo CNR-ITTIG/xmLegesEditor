@@ -29,7 +29,6 @@ import it.cnr.ittig.xmleges.editor.services.dom.meta.inquadramento.MetaInquadram
 import it.cnr.ittig.xmleges.editor.services.dom.meta.urndocumento.MetaUrnDocumento;
 import it.cnr.ittig.xmleges.editor.services.dom.rinumerazione.Rinumerazione;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.Vigenza;
-import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 import it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita.CiclodiVitaForm;
 import it.cnr.ittig.xmleges.editor.services.form.meta.cnr.CnrProprietariForm;
 import it.cnr.ittig.xmleges.editor.services.form.meta.descrittori.MaterieVocabolariForm;
