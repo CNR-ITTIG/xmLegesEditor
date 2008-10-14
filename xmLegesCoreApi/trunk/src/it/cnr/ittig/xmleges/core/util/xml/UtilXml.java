@@ -243,30 +243,6 @@ public class UtilXml {
 		}
 	}
 
-	/**
-	 * Versione del metodo che elimina dal file l'attributo xmlns che d&agrave; problemi prima di parsare l'XML.
-	 * 
-	 * @param is stream contenente il documento XML
-	 * @param validate
-	 * @param eh
-	 * @param nameSpaceAware
-	 * @return DOM del file
-	 */
-	public static Document readAndFixXML(InputStream is, boolean validate, ErrorHandler eh, boolean nameSpaceAware) {
-		try {
-			String removeThis = "xmlns=\"http://www.normeinrete.it/nir/1.0\"";
-			String removeThat = "xmlns=\"http://www.normeinrete.it/disegnilegge/1.0\"";
-			File temp = File.createTempFile("tmp", "tmp");
-			String filteredText = UtilFile.inputStreamToString(is).replaceAll(removeThis, "");
-			filteredText = filteredText.replaceAll(removeThat, "");
-			UtilFile.stringToFile(filteredText, temp);
-			Document doc = readXML(temp, validate, eh, nameSpaceAware);
-			temp.delete();
-			return doc;
-		} catch (Exception ex) {
-			return null;
-		}
-	}
 
 	/**
 	 * Converte la stringa <code>text</code> contenente codice XML nel
