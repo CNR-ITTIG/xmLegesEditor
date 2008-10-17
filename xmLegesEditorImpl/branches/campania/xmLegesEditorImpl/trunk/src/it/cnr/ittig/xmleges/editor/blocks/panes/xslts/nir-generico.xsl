@@ -976,7 +976,7 @@
 			<!-- ========================================== DATA FINE !='' ====================================== -->				
 				<xsl:when test="$data_fine!=''">
 					<xsl:variable name="ittignota">
-						<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$idnota]/../../*[name()='dsp:norma']/*[name()='ittig:notavigenza']/@id"/>
+						<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$idnota]/../../*[name()='dsp:norma']/*[name()='dsp:subarg']/*[name()='ittig:notavigenza']/@id"/>
 					</xsl:variable>		
 					<xsl:choose>
 						<xsl:when test="$data_fine&lt;number(number($datafine)+1)">
@@ -1159,7 +1159,7 @@
 							<xsl:value-of select="../*[name()='dsp:norma']/*[name()='dsp:pos']/@xlink:href"/>
 						</xsl:variable>	
 						<xsl:variable name="autonota">
-							<xsl:value-of select="../*[name()='dsp:norma']/*[name()='ittig:notavigenza']/@auto"/>
+							<xsl:value-of select="../*[name()='dsp:norma']/*[name()='dsp:subarg']/*[name()='ittig:notavigenza']/@auto"/>
 						</xsl:variable>	
 						<xsl:variable name="novella">
 							<xsl:value-of select="../*[name()='dsp:novella']/*[name()='dsp:pos']/@xlink:href"/>
