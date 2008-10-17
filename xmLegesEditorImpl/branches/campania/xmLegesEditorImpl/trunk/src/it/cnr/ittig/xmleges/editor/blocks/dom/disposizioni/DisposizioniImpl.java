@@ -262,23 +262,28 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		UtilDom.setAttributeValue(posNode, "xlink:href", pos);
 		
 		Node normaNode = UtilDom.findDirectChild(n, "dsp:norma");
+		
+		//Con la nuova DTD succede che norma finisce prima di pos. ERRORE
+		if (normaNode != null) {
+			n.removeChild(normaNode);
+			normaNode = null;
+		}
+		
 		if (normaNode == null) {// Non è stato inserito dal template minimale
 			normaNode = utilRulesManager.getNodeTemplate("dsp:norma");
 			n.appendChild(normaNode);
 		}	
 		UtilDom.setAttributeValue(normaNode, "xlink:href", norma);
+		
+		
 		Node normaposNode = utilRulesManager.getNodeTemplate("dsp:pos");
 		UtilDom.setAttributeValue(normaposNode, "xlink:href", partizione);
 		normaNode.appendChild(normaposNode);
 		
-		//Inserisco anche la nota qui !!!!
-		//cambio tutto!!
-//		Node metaittigNode = documentManager.getDocumentAsDom().createElementNS("http://www.ittig.it/provvedimenti/2.2", "ittig:meta");
-//		normaNode.appendChild(metaittigNode);
-//		Node notaittigNode = documentManager.getDocumentAsDom().createElementNS("http://www.ittig.it/provvedimenti/2.2", "ittig:nota");
-//		metaittigNode.appendChild(notaittigNode);
+		Node subargNode = utilRulesManager.getNodeTemplate("dsp:subarg");
 		Node notaittigNode = documentManager.getDocumentAsDom().createElementNS("http://www.ittig.cnr.it/provvedimenti/2.2", "ittig:notavigenza");
-		normaNode.appendChild(notaittigNode);
+		subargNode.appendChild(notaittigNode);
+		normaNode.appendChild(subargNode);
 		
 		
 		//UtilDom.setIdAttribute(notaittigNode, "itt" + documentManager.getDocumentAsDom().getElementsByTagName("ittig:notavigenza").getLength());
@@ -884,7 +889,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 			nodo.appendChild(nodoCondizione);
 		}
 		else {
-			if (idevento==null) {  //devo creare il nuovo evento (e relazione)
+			if (idevento==null | "t1".equals(idevento)) {  //devo creare il nuovo evento (e relazione)
 				//relazione
 				Node relazioniNode = UtilDom.findRecursiveChild(activeMeta,"relazioni");
 				NodeList relazioniList = relazioniNode.getChildNodes();
@@ -906,9 +911,13 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 				relazioniNode.appendChild(nuovo);
 				//evento
 				Node eventiNode = UtilDom.findRecursiveChild(activeMeta,"eventi");
-				idevento = "t" + (1 + eventiNode.getChildNodes().getLength());
+				if (eventiNode==null)
+					idevento = "t1";
+				else
+					idevento = "t" + (1 + eventiNode.getChildNodes().getLength());
 				nuovo = utilRulesManager.getNodeTemplate("evento");
-				UtilDom.setAttributeValue(nuovo, "data", decorrenza.substring(6, 10)+decorrenza.substring(3, 5)+decorrenza.substring(0, 2));   //???????
+				String data = (decorrenza.length()>8)? (decorrenza.substring(6, 10)+decorrenza.substring(3, 5)+decorrenza.substring(0, 2)) : decorrenza;
+				UtilDom.setAttributeValue(nuovo, "data", data);
 				UtilDom.setAttributeValue(nuovo, "fonte", "ra"+max);
 				UtilDom.setAttributeValue(nuovo, "tipo", "modifica");
 				UtilDom.setIdAttribute(nuovo, idevento);
@@ -927,7 +936,10 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		operazioneNode.appendChild(normaNode);
 		//inserisco il pos della Norma
 		nodo = utilRulesManager.getNodeTemplate("dsp:pos");
-		UtilDom.setAttributeValue(nodo, "xlink:href", norma+"#"+partizione);
+		if ("".equals(partizione))
+			UtilDom.setAttributeValue(nodo, "xlink:href", norma);
+		else
+			UtilDom.setAttributeValue(nodo, "xlink:href", norma+"#"+partizione);
 		normaNode.appendChild(nodo);
 		//inserisco il bordo della Norma
 		Node delimitatoreNode = null;
