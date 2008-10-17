@@ -110,6 +110,8 @@ public class XmLegesMarkerImpl implements XmLegesMarker, Loggable, Serviceable, 
 		setDefault();
 		// FIXME con gli eventi seriali non funziona
 		// execMonitor.setExec(exec);
+		
+		copyProgram();
 	}
 
 	// /////////////////////////////////////////////// StrutturaParser Interface
@@ -194,7 +196,7 @@ public class XmLegesMarkerImpl implements XmLegesMarker, Loggable, Serviceable, 
 		// From buildCommand 
 		// FIXME fare copia in dir parser/struttura
 		// if (firsTime) {
-		copyProgram();
+										//copyProgram();		spostato nell'inizialize
 		// firsTime = false;
 		// }
 
