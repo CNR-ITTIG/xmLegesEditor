@@ -111,10 +111,10 @@ public class DispAttiveActionImpl implements DispAttiveAction, Loggable, EventMa
 				dispoAttivaAction.setEnabled(UtilDom.findParentByName(activeNode, "mod")!=null);
 				Node vir = UtilDom.findParentByName(activeNode, "virgolette");
 				if (vir!=null) {
-					if ("struttura".equals(UtilDom.getAttributeValueAsString(vir, "tipo")))
+//					if ("struttura".equals(UtilDom.getAttributeValueAsString(vir, "tipo")))
 						dispoMarkerAction.setEnabled(true);
-					else
-						dispoMarkerAction.setEnabled(false);
+//					else
+//						dispoMarkerAction.setEnabled(false);
 				}
 				else 
 					dispoMarkerAction.setEnabled(false);

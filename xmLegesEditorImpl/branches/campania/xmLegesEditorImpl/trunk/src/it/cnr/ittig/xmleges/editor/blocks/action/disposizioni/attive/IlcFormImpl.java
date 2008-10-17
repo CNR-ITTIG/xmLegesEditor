@@ -24,14 +24,22 @@ import it.cnr.ittig.xmleges.editor.services.form.disposizioni.attive.Riferimento
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -223,10 +231,8 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 			Source source = new StreamSource(new File(UtilFile.getTempDirName()+ File.separatorChar +"tempEstrazioneMod.xml"));
 			//preparo il file con l'estrazione di tutti i mod
 			Result dest = new StreamResult(UtilFile.getTempDirName()+ File.separatorChar +"estrazioneTuttiMod.xml");
-			converti.setParameter("azione", "tutti");
-			//SIMONE (ilc) HA CHIESTO COME ENCODING iso-8859-1 ??????????????????????
-			//converti.setOutputProperty(OutputKeys.ENCODING,documentManager.getEncoding());
-			//converti.setOutputProperty(OutputKeys.ENCODING,"ISO-8859-1");		VA DI DEFAULT !!!
+			converti.setParameter("azione", "tutti");			
+			converti.setOutputProperty(OutputKeys.ENCODING,documentManager.getEncoding());
 			converti.transform(source,dest);
 			//preparo il file con l'estrazione dei mod che non hanno ancora il metadato
 			dest = new StreamResult(UtilFile.getTempDirName()+ File.separatorChar +"estrazioneNuoviMod.xml");
@@ -238,9 +244,6 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 			converti.setParameter("azione", "vecchi");
 			converti.setOutputProperty(OutputKeys.ENCODING,documentManager.getEncoding());
 			converti.transform(source,dest);
-			
-//			mod.setText("Nuove modifiche:\n\n"+UtilFile.fileToString(UtilFile.getTempDirName()+ File.separatorChar +"estrazioneNuoviMod.xml"));
-//			mod.setText(mod.getText()+"\n\nVecchie modifiche:\n\n"+UtilFile.fileToString(UtilFile.getTempDirName()+ File.separatorChar +"estrazioneVecchiMod.xml"));
 			inviaTutti.setEnabled(true);
 			inviaNuovi.setEnabled(true);
 		} catch (Exception e) {
@@ -261,20 +264,23 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 		NodeList disposizioni = radice.getChildNodes();
 		EditTransaction t = null;
 		try {
-			t = documentManager.beginEdit();	
+				
 			int conta = 0;
 			for (int i=0; i<disposizioni.getLength(); i++) {
 				if (disposizioni.item(i).getNodeType()==Node.TEXT_NODE)
 					continue;
 				conta++;
+				t = documentManager.beginEdit();
 				
 				if (!analizzaMeta(doc, disposizioni.item(i))) {
 					utilMsg.msgError("Errore durante l'inserimento dei metadati.\nNon so valutare la " + conta +"° disposizione:\n"+UtilDom.domToString(disposizioni.item(i),true,"   "));
-					//documentManager.rollbackEdit(t);	non funziona -> vado avanti
-					//return false;
+					documentManager.rollbackEdit(t);	//non funziona
 				}
+				else {
+					documentManager.setChanged(true);
+					documentManager.commitEdit(t);
+				}	
 			}
-			documentManager.commitEdit(t);
 		} catch (DocumentManagerException e) {
 			logger.error(e.getMessage());
 			return false;
@@ -457,6 +463,10 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 	
 	private boolean comunica(String file) {
 		
+		file = correggiCaratteri(file);
+		if (documentManager.getEncoding().toLowerCase().startsWith("utf"))
+			file = correggiInterrogativo(file);
+		
 		URL url;
 	    URLConnection urlConn;
 	    DataOutputStream printout;
@@ -494,16 +504,71 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 		return true;
 	}
 	
+	private String correggiCaratteri(String file) {
+		/*
+		 *  Sostituzioni effettuate:
+		 *  l'apici word (145)(146) convertito in ' (39) 
+		 */
+		String ilcFile = "ilc_CorCar_"+file;
+		String strLine;
+		BufferedReader vecchioFile;
+		Writer nuovoFile;
+		boolean utf = documentManager.getEncoding().toLowerCase().startsWith("utf");
+	    try{
+	    	vecchioFile = new BufferedReader(new InputStreamReader(new DataInputStream(new FileInputStream(UtilFile.getTempDirName() + File.separatorChar + file))));
+	    	nuovoFile = new OutputStreamWriter(new FileOutputStream(UtilFile.getTempDirName() + File.separatorChar + ilcFile), "ISO-8859-1");
+
+	    	while ((strLine = vecchioFile.readLine())!=null) {
+	    		if (utf) {
+	    			strLine.replaceAll("\\x{145}", "'");
+	    			strLine.replaceAll("\\x{146}", "'");
+	    		}
+	    		nuovoFile.write(strLine+"\n");
+	    	}
+    	    vecchioFile.close();    
+    	    nuovoFile.close();
+	    } catch (Exception e){
+	         System.err.println("Error: " + e.getMessage());
+	    }
+		return ilcFile;
+	}
+	
+	private String correggiInterrogativo(String file) {
+		/*
+		 *  Sostituzioni effettuate:
+		 *  carattere ? in bianco 
+		 */
+		String ilcFile = "ilc_CorPun_"+file;
+		String strLine;
+		BufferedReader vecchioFile;
+		Writer nuovoFile;
+	    try{
+	    	vecchioFile = new BufferedReader(new InputStreamReader(new DataInputStream(new FileInputStream(UtilFile.getTempDirName() + File.separatorChar + file))));
+	    	nuovoFile = new OutputStreamWriter(new FileOutputStream(UtilFile.getTempDirName() + File.separatorChar + ilcFile), "ISO-8859-1");
+
+	    	while ((strLine = vecchioFile.readLine())!=null) {
+	    		nuovoFile.write(strLine+"\n");
+	    	}
+    	    vecchioFile.close();    
+    	    nuovoFile.close();
+	    } catch (Exception e){
+	         System.err.println("Error: " + e.getMessage());
+	    }
+		return ilcFile;
+
+	}
+	
 	private boolean analizzaInLocale(String file) {
-		
+
+		file = correggiCaratteri(file);
+		if (documentManager.getEncoding().toLowerCase().startsWith("utf"))
+			file = correggiInterrogativo(file);
 		
 		String eseguibileIlc = "";
 		String osName = System.getProperty("os.name");
 		if (osName.toLowerCase().matches("windows.*"))
-			//eseguibileIlc = "software-ilc\\ittig.exe";
 			eseguibileIlc = "ittig.exe";
 		else
-			//eseguibileIlc = "software-ilc/ittig";
 			eseguibileIlc = "ittig";
 		
 		File command = new File(UtilFile.getTempDirName() + File.separatorChar + eseguibileIlc);
