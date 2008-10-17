@@ -40,10 +40,16 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		body { font-family: Arial; }
 		</style>
 	</head>
-	<body>
+	<body>	
 	
-		<!--	xsl:apply-templates select="/*[name()='NIR']/*/*[name()='meta']/*" /	-->
-		<xsl:call-template name="visualizzaMeta" />
+	<xsl:apply-templates select="/nir:NIR/*/nir:meta/nir:descrittori"  />
+	<xsl:apply-templates select="/nir:NIR/*/nir:meta/nir:inquadramento"   />	
+	<xsl:apply-templates select="/nir:NIR/*/nir:meta/nir:ciclodivita"   />	
+	<xsl:apply-templates select="/nir:NIR/*/nir:meta/nir:lavoripreparatori"   />	
+	<xsl:apply-templates select="/nir:NIR/*/nir:meta/nir:redazionale"   />	
+	<xsl:apply-templates select="/nir:NIR/*/nir:meta/nir:proprietario"   />	
+	<xsl:apply-templates select="/nir:NIR/*/nir:meta/nir:risoluzione"   />	
+	<xsl:apply-templates select="/nir:NIR/*/nir:meta/nir:disposizioni"   />	
 	
 	</body>
 	</html>

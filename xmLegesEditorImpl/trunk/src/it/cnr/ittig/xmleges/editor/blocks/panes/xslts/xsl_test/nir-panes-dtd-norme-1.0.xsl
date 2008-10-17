@@ -48,21 +48,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 </xsl:template>
 
 <xsl:template match="nir:titoloDoc">
-NUOVO!!!
-	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-		<xsl:attribute name="style">
-			text-align: center;
-			font-size: x-large;
-			font-style: bold;
-			margin: 15 0 15 0;
-		</xsl:attribute>
-		<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-		<xsl:apply-templates />
-        <!--xsl:call-template name="vigenza"/-->	
-	</xsl:element>
-</xsl:template>
-
-<!--xsl:template match="nir:titoloDoc">
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 		<xsl:attribute name="style">
 			text-align: center;
@@ -72,7 +57,7 @@ NUOVO!!!
 		</xsl:attribute>
         <xsl:call-template name="vigenza"/>	
 	</xsl:element>
-</xsl:template-->
+</xsl:template>
 
 <xsl:template match="nir:emanante">
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
@@ -165,8 +150,6 @@ NUOVO!!!
 	    <xsl:if test="@status='inserito'">color:green</xsl:if>
         </xsl:attribute>
         <xsl:call-template name="vigenza"/>	
-<!--    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />-->
-<!--    	<xsl:apply-templates />-->
     </xsl:element>
 </xsl:template>
 
@@ -179,8 +162,6 @@ NUOVO!!!
 	    <xsl:if test="@status='inserito'">color:green</xsl:if>            
         </xsl:attribute>
         <xsl:call-template name="vigenza"/>	
-<!--    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />-->
-<!--    	<xsl:apply-templates />-->
     </xsl:element>
 </xsl:template>
 
@@ -203,16 +184,12 @@ NUOVO!!!
 	    <xsl:if test="@status='inserito'">color:green</xsl:if>
         </xsl:attribute>
         <xsl:call-template name="vigenza"/>	
-<!--    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />-->
-<!--    	<xsl:apply-templates />-->
     </xsl:element>
 </xsl:template>
 
 <xsl:template match="nir:corpo | nir:alinea | nir:coda">
     <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
         <xsl:call-template name="vigenza"/>	
-    	<!--xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" /-->
-    	<!--xsl:apply-templates /-->
     </xsl:element>
 </xsl:template> 
 
@@ -224,14 +201,9 @@ NUOVO!!!
 <xsl:template match="nir:conclusione">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
     	<xsl:attribute name="style">margin: 20 30;</xsl:attribute>
-    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-        <xsl:apply-templates />
-        <!--	xsl:call-template name="vigenza"/	-->
+        <xsl:call-template name="vigenza"/>
     </xsl:element>
 </xsl:template>
-
-	
-		
 	
 	<!--	RIMOSSI DALLA DTD 2.2 - Ma servono ancora per i DDL -->
 <xsl:template match="nir:sottoscrizioni">
@@ -248,17 +220,7 @@ NUOVO!!!
     </xsl:element>
 </xsl:template>
 
-	
-	<!--	RIMOSSI DALLA DTD 2.2
-<xsl:template match="nir:visto">
-    <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-    	<xsl:attribute name="style">font-style: italic; margin: 20 0</xsl:attribute>
-        <xsl:call-template name="vigenza"/>
-    </xsl:element>
-</xsl:template		-->
 
-
-	<!--	Aggiunto dalla dtd 2.2	-->
 <xsl:template match="nir:firma">
     <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 		<xsl:choose>
@@ -323,7 +285,7 @@ NUOVO!!!
     		margin: 10 0 10 0;
     		font-size: small;
     	</xsl:attribute>
-        <xsl:apply-templates select="../*/nir:meta/*" mode="oneroot" />
+        <xsl:apply-templates select="../*/nir:meta/*"  />
     </xsl:element>    
 </xsl:template>
 
@@ -414,7 +376,7 @@ NUOVO!!!
 			<i>
 			<xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
 		    	<font bgcolor="#FFEE99">
-		    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+		    	<!--xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" /-->
 	    		<!--	xsl:apply-templates /	-->
    		        <xsl:call-template name="vigenza"/>	
 	    		</font>
