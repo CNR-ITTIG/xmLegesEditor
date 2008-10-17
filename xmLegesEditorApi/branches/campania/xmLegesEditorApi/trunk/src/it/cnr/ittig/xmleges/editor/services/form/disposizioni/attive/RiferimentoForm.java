@@ -50,7 +50,7 @@ public interface RiferimentoForm extends Service {
 	
 	/**
 	 * Restituisce i bordi, inseriti in una eventuale nota, di tipo:
-	 * <!--bordo:partizione,numero,ordinale#part2,num2,ord2-->
+	 * <!-- frammento: partizione,numero,ordinale-part2,num2,ord2-... -->
 	 * NextSibling() al rif individuato da getRiferimento().
 	 * 
 	 */
