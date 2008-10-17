@@ -251,6 +251,13 @@ public class DispMarkerFormImpl implements DispMarkerForm, Loggable, Serviceable
 						Node nuovo = figliVir.item(i).cloneNode(true);
 						corpo.appendChild(nuovo);
 					}
+					else {
+						Node nuovo = doc.createTextNode(" ");
+						corpo.appendChild(nuovo);
+					}
+						
+						
+						
 				UtilDom.mergeTextNodes(corpo, true);
 				
 				//completo, se indicato, la partizione sopra al comma
