@@ -274,7 +274,8 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 		if (mod==null)
 			return;	//nel passaggio fra le 2 form è stato cambiato il nodo attivo
 		Node[] virgolette = UtilDom.getElementsByTagName(doc, mod, "virgolette");
-		virContenuto.setText(UtilDom.getAttributeValueAsString(virgolette[virgolette.length-1],"id"));
+		if (virgolette.length>0)
+			virContenuto.setText(UtilDom.getAttributeValueAsString(virgolette[virgolette.length-1],"id"));
 		
 		setTipo();
 		setSelezioni();

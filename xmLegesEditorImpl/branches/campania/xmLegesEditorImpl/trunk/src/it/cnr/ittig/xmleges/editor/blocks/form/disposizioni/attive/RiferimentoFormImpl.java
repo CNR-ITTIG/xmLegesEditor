@@ -165,21 +165,21 @@ public class RiferimentoFormImpl implements RiferimentoForm, Loggable, ActionLis
 	}
 	
 	public String[] getBordiDaNota(Node rif) {
-		String parolaChiave="bordo:";
+		String parolaChiave="frammento:";
 		String[] vuota = new String[0];
 		Node bordoInCommento = rif.getNextSibling();
 		if (bordoInCommento==null)
 			return vuota;
 		if (bordoInCommento.getNodeType()!=Node.COMMENT_NODE)
 			return vuota;
-		String testoNota = bordoInCommento.getNodeValue();
+		String testoNota = bordoInCommento.getNodeValue().trim();
 		if (!testoNota.startsWith(parolaChiave))
 			return vuota;
 		testoNota=testoNota.substring(parolaChiave.length());
-		//SINTASSI ATTESA: <!--bordo:partizione,numero,ordinale#part2,num2,ord2-->
+		//SINTASSI ATTESA: <!-- frammento: partizione,numero,ordinale-part2,num2,ord2-... -->
 		String[] bordiTrovati;
 		try {
-			StringTokenizer partizioni = new StringTokenizer(testoNota, "#");
+			StringTokenizer partizioni = new StringTokenizer(testoNota, "-");
 			int token = partizioni.countTokens();
 			bordiTrovati = new String[3*token];
 			for (int i=0; i<token; i++) {

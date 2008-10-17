@@ -31,10 +31,12 @@ import java.awt.event.ActionListener;
 import java.util.EventObject;
 import java.util.StringTokenizer;
 
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JList;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import org.w3c.dom.Document;
@@ -80,6 +82,7 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 	JLabel etiDecorenza;
 	JLabel etiAtto;
 	JLabel etiPartizione;
+	JLabel etiInteroAtto;
 	JLabel etiDelimitatori;
 	JButton sceltaDecorrenza;
 	JButton sceltaAtto;
@@ -93,6 +96,8 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 	JButton abrogazione;
 	JButton sostituzione;
 	JButton integrazione;
+	JRadioButton interoAtto;
+	JRadioButton soloPartizione;
 
 	PartizioniForm partizioniForm;
 	DecorrenzaForm decorrenzaForm;
@@ -153,6 +158,7 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
  		etiDecorenza = (JLabel) form.getComponentByName("editor.disposizioni.attive.decorrenza.eti");
 		etiAtto = (JLabel) form.getComponentByName("editor.disposizioni.attive.atto.eti");
 		etiPartizione = (JLabel) form.getComponentByName("editor.disposizioni.attive.partizione.eti");
+		etiInteroAtto = (JLabel) form.getComponentByName("editor.disposizioni.attive.interoatto.eti");
 		etiDelimitatori = (JLabel) form.getComponentByName("editor.disposizioni.attive.delimitatori.eti");
 		sceltaDecorrenza = (JButton) form.getComponentByName("editor.disposizioni.attive.decorrenza.scelta");
 		sceltaAtto = (JButton) form.getComponentByName("editor.disposizioni.attive.atto.scelta");
@@ -166,6 +172,14 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 		abrogazione = (JButton) form.getComponentByName("editor.disposizioni.attive.abrogazione");
 		sostituzione = (JButton) form.getComponentByName("editor.disposizioni.attive.sostituzione");
 		integrazione = (JButton) form.getComponentByName("editor.disposizioni.attive.integrazione");
+
+		interoAtto = (JRadioButton) form.getComponentByName("editor.disposizioni.attive.sceltainteroatto");
+		soloPartizione = (JRadioButton) form.getComponentByName("editor.disposizioni.attive.sceltapartizione");
+		ButtonGroup grupporadio = new ButtonGroup();
+		grupporadio.add(interoAtto);
+		grupporadio.add(soloPartizione);
+		interoAtto.setSelected(true);
+		
 		abrogazione.addActionListener(this);
 		sostituzione.addActionListener(this);
 		integrazione.addActionListener(this);
@@ -178,6 +192,18 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 	
 	public void actionPerformed(ActionEvent e) {
 		
+		if (e.getSource() == interoAtto) {
+			delimitatori.setEnabled(false);
+			sceltaDelimitatore.setEnabled(false);
+			sceltaPartizione.setEnabled(false);
+		}
+		
+		if (e.getSource() == soloPartizione){
+			delimitatori.setEnabled(true);
+			sceltaDelimitatore.setEnabled(true);
+			sceltaPartizione.setEnabled(true);
+		}
+		
 		if (e.getSource() == sceltaDecorrenza) 
 			if (decorrenzaForm.openForm())
 				decorrenza.setText(decorrenzaForm.getDecorrenza());
@@ -189,8 +215,6 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 		if (e.getSource() == sceltaPartizione) {
 			if (partizioniForm.openForm()) {
 				String partizioneSelezionata = partizioniForm.getPartizioneEstesa();
-//				if ("Allegato".equals(partizioneSelezionata))
-//					partizioniForm.g
 				partizione.setText(makeSub(partizioneSelezionata));
 			}	
 		}
@@ -210,7 +234,7 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 				utilmsg.msgInfo("editor.disposizioni.attive.nodecorrenza");
 			else if ("".equals(atto.getText().trim()))
 				utilmsg.msgInfo("editor.disposizioni.attive.noatto");
-			else if ("".equals(partizione.getText().trim()))
+			else if (soloPartizione.isSelected() && "".equals(partizione.getText().trim()))
 				utilmsg.msgInfo("editor.disposizioni.attive.nopartizione");
 			else {
 				if (e.getSource() == abrogazione) {
@@ -248,6 +272,7 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 		Node nodoAttivo = selectionManager.getActiveNode();
 		
 		if (cancellaCampi) {
+			interoAtto.setSelected(true);
 			decorrenzaForm.initForm(nodoAttivo);
 			riferimentoForm.initForm(nodoAttivo);
 			//se ho metadati per questo MOD, li setto.
@@ -261,18 +286,20 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 				atto.setText(riferimentoForm.getRiferimento());
 				partizione.setText(riferimentoForm.getPartizionePrimoAtto());
 				listModel.clear();
-				//delimitatoriScelti=new String[0];	recupero delimitatori dal commento <!--bordo:part1#part2-->
+				//delimitatoriScelti=new String[0];	recupero delimitatori dal commento <!-- frammento:part1-part2-->
 				delimitatoriScelti= riferimentoForm.getBordi();
 				listModel.clear();
 				for (int i=0; i<delimitatoriScelti.length/3; i++)
 					listModel.addElement(delimitatoriScelti[i*3] + " (" + delimitatoriScelti[i*3+1] + ") " + delimitatoriScelti[i*3+2]);
 			}
+			if (!"".equals(partizione.getText()))
+				soloPartizione.setSelected(true);
 		}	
 
 		activeNode = null;
 		operazioneIniziale = NO_OPERAZIONE;
 		operazioneProssima = NO_OPERAZIONE;
-		form.setSize(420, 400);
+		form.setSize(420, 440);
 		form.showDialog(false);
 	}
 		
@@ -377,7 +404,8 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 					String id = UtilDom.getAttributeValueAsString(relazioneNode, "id");
 					for (int j = 0; j < eventiList.getLength(); j++)
 						if (id.equals(UtilDom.getAttributeValueAsString(eventiList.item(j), "fonte")))
-							return UtilDate.normToString(UtilDom.getAttributeValueAsString(eventiList.item(j), "id"));
+							//return UtilDate.normToString(UtilDom.getAttributeValueAsString(eventiList.item(j), "data"));
+							return UtilDom.getAttributeValueAsString(eventiList.item(j), "id");
 				}
 		}
 		return null;	//evento non trovato
@@ -405,18 +433,23 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 			if (operazioneIniziale!=ABROGAZIONE)
 				novellaForm.setMeta(nuovoMeta);
 			if (operazioneIniziale!=INTEGRAZIONE) {
-				String tipo = partizione.getText();
-				if (listModel.getSize()>0) 
-					tipo = delimitatoreForm.getDelimitatore()[delimitatoreForm.getDelimitatore().length-3];
+				String tipo = null;
+				if (interoAtto.isSelected())
+					tipo = "atto";
 				else {
-					String[] scelteTipo = new String[] {"allegato","libro","parte","titolo","capo","sezione","articolo","comma","lettera","numero","punto","periodo","parole"};
-					if (tipo.length()>3)
-						tipo = tipo.substring(0, 3);
-					for (int i=0; i<scelteTipo.length; i++)
-						if (tipo.equals(scelteTipo[i].substring(0, 3))) {
-							tipo = scelteTipo[i];
-							break;
-						}
+					tipo = partizione.getText();
+					if (listModel.getSize()>0) 
+						tipo = delimitatoreForm.getDelimitatore()[delimitatoreForm.getDelimitatore().length-3];
+					else {
+						String[] scelteTipo = new String[] {"allegato","libro","parte","titolo","capo","sezione","articolo","comma","lettera","numero","punto","periodo","parole"};
+						if (tipo.length()>3)
+							tipo = tipo.substring(0, 3);
+						for (int i=0; i<scelteTipo.length; i++)
+							if (tipo.equals(scelteTipo[i].substring(0, 3))) {
+								tipo = scelteTipo[i];
+								break;
+							}
+					}
 				}
 				novellandoForm.setMeta(nuovoMeta, tipo);
 			}
