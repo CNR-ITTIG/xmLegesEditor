@@ -286,7 +286,6 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 				atto.setText(riferimentoForm.getRiferimento());
 				partizione.setText(riferimentoForm.getPartizionePrimoAtto());
 				listModel.clear();
-				//delimitatoriScelti=new String[0];	recupero delimitatori dal commento <!-- frammento:part1-part2-->
 				delimitatoriScelti= riferimentoForm.getBordi();
 				listModel.clear();
 				for (int i=0; i<delimitatoriScelti.length/3; i++)

@@ -165,33 +165,29 @@ public class RiferimentoFormImpl implements RiferimentoForm, Loggable, ActionLis
 	}
 	
 	public String[] getBordiDaNota(Node rif) {
-		String parolaChiave="frammento:";
+		String parolaChiave="frammento";
 		String[] vuota = new String[0];
 		Node bordoInCommento = rif.getNextSibling();
 		if (bordoInCommento==null)
 			return vuota;
 		if (bordoInCommento.getNodeType()!=Node.COMMENT_NODE)
 			return vuota;
-		String testoNota = bordoInCommento.getNodeValue().trim();
+		String testoNota = bordoInCommento.getNodeValue().toLowerCase().trim();
 		if (!testoNota.startsWith(parolaChiave))
 			return vuota;
-		testoNota=testoNota.substring(parolaChiave.length());
-		//SINTASSI ATTESA: <!-- frammento: partizione,numero,ordinale-part2,num2,ord2-... -->
+		testoNota=(testoNota.substring(parolaChiave.length())).trim();
+		//SINTASSI ATTESA: <!-- frammento comma:ord=ultimo; lettera:num=c; ... -->
 		String[] bordiTrovati;
 		try {
-			StringTokenizer partizioni = new StringTokenizer(testoNota, "-");
+			StringTokenizer partizioni = new StringTokenizer(testoNota, ";");
 			int token = partizioni.countTokens();
 			bordiTrovati = new String[3*token];
 			for (int i=0; i<token; i++) {
-				StringTokenizer elementi = new StringTokenizer(partizioni.nextToken(), ",");
-				bordiTrovati[i*3] = elementi.nextToken();
-				bordiTrovati[i*3+1] = elementi.nextToken();
-				try {
-					bordiTrovati[i*3+2] = elementi.nextToken();
-				}
-				catch (Exception token3) {
-					bordiTrovati[i*3+2] = "";
-				}
+				StringTokenizer tokenPartizione = new StringTokenizer(partizioni.nextToken(), ":");
+				bordiTrovati[i*3] = tokenPartizione.nextToken();
+				StringTokenizer tokenNumero = new StringTokenizer(tokenPartizione.nextToken(), "=");
+				bordiTrovati[i*3+2] = ("ord".equals(tokenNumero.nextToken())) ? "ordinale" : "numero";
+				bordiTrovati[i*3+1] = tokenNumero.nextToken();
 			}
 		} catch (Exception e) {
 			return vuota;

@@ -89,7 +89,7 @@ public class DelimitatoreFormImpl implements DelimitatoreForm, Loggable, Service
 	public boolean openForm(String[] selezionati) {
 		
 		initForm(selezionati);
-		form.setSize(230, 250);
+		form.setSize(250, 250);
 		form.addFormVerifier(this);
 		form.showDialog();
 		return form.isOk();
