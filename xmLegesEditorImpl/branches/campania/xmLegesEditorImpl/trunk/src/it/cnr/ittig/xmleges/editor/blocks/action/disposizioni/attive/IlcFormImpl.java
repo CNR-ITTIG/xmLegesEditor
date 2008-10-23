@@ -283,7 +283,7 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 				t = documentManager.beginEdit();
 				
 				if (!analizzaMeta(doc, disposizioni.item(i))) {
-					utilMsg.msgError("Errore durante l'inserimento dei metadati.\nNon so valutare la " + conta +"° disposizione:\n"+UtilDom.domToString(disposizioni.item(i),true,"   "));
+					utilMsg.msgError("Errore durante l'inserimento dei metadati.\nNon so valutare la " + conta +"° disposizione:\n\n"+UtilDom.domToString(disposizioni.item(i),true,"   "));
 					documentManager.rollbackEdit(t);	//non funziona
 				}
 				else {
@@ -520,6 +520,7 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 		 */
 		String apiceAlto = "\u2018";
 		String apiceBasso = "\u2019";
+		
         String apiceAltoCodificato="'";
         String apiceBassoCodificato="'";
 		try {
@@ -528,6 +529,11 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 		} catch (UnsupportedEncodingException e1) {
 			e1.printStackTrace();
 		}
+		if ("?".equals(apiceAltoCodificato))
+			apiceAltoCodificato=apiceAlto;
+		if ("?".equals(apiceBassoCodificato))
+			apiceBassoCodificato=apiceBasso;
+        
 		String ilcFile = "ilc_CorCar_"+file;
 		String strLine;
 		InputStream in;
@@ -582,10 +588,10 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 	
 	private boolean analizzaInLocale(String file) {
 
-//		file = correggiCaratteri(file);
-//		if (documentManager.getEncoding().toLowerCase().startsWith("utf"))
-//			file = correggiInterrogativo(file);
-//		
+		file = correggiCaratteri(file);
+		if (documentManager.getEncoding().toLowerCase().startsWith("utf"))
+			file = correggiInterrogativo(file);
+		
 		String eseguibileIlc = "";
 		String osName = System.getProperty("os.name");
 		if (osName.toLowerCase().matches("windows.*"))
