@@ -59,7 +59,13 @@
 	
 	<xsl:template match="//*[name()='rif']">
 		<xsl:param name="usaId"/>
-		<xsl:text> RIF </xsl:text><xsl:value-of select="$usaId" /><xsl:text>-rif</xsl:text><xsl:value-of select="position()" /><xsl:text> </xsl:text>
+		<xsl:text> RIF </xsl:text><xsl:value-of select="$usaId" /><xsl:text>-rif</xsl:text><xsl:value-of select="position()" />
+		
+		<xsl:if test="contains(@xlink:href,'#')">
+			<xsl:text>#</xsl:text><xsl:value-of select="substring-after(@xlink:href,'#')"/> 
+		</xsl:if>			
+
+		<xsl:text> </xsl:text>
 	</xsl:template>
 	
 </xsl:stylesheet>
