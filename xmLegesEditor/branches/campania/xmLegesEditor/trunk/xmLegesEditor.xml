@@ -39,7 +39,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		</appender>
 		
 
-		<!--	logger name=".Rinumerazione" additivity="false">
+		<!--	logger name=".DocumentManager" additivity="false">
         	<priority value ="debug" />
         	<appender-ref ref="ConsoleAppender" />
         </logger	-->
@@ -166,7 +166,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  class="it.cnr.ittig.xmleges.core.blocks.version.VersionImpl"
         >
         <configuration>
-            <version>2.0 rc9.2 (versione per campania)</version>
+            <version>2.0 rc10</version>
             <url>http://repo.ittig.cnr.it/nireditor2/versions.txt</url>
         </configuration>
     </component>
@@ -1199,7 +1199,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 <pane name="editor.panes.disposizioni"	where="top-center"  	index="3" />               
                 <pane name="editor.panes.indice"		where="top-left"  	index="1" />                
                 <pane name="panes.source"            	where="top-center"		index="4" />
-                <!--	pane name="panes.xslteditor"           where="top-center"  	index="5" /		-->
+                <!--	pane name="panes.xslteditor"           where="top-center"  	index="5" /	-->
                 
                 <pane name="editor.panes.riferimenti" 		where="bottom-center"  	index="0" />
                 <pane name="editor.panes.rifincompleti"     where="bottom-center"  	index="1" />
