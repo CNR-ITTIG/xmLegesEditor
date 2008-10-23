@@ -29,15 +29,25 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetDecoder;
+import java.nio.charset.CharsetEncoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -506,30 +516,41 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 	
 	private String correggiCaratteri(String file) {
 		/*
-		 *  Sostituzioni effettuate:
-		 *  l'apici word (145)(146) convertito in ' (39) 
+		 *  Sostituzioni effettuate: apici word convertiti in ' 
 		 */
+		String apiceAlto = "\u2018";
+		String apiceBasso = "\u2019";
+        String apiceAltoCodificato="'";
+        String apiceBassoCodificato="'";
+		try {
+			apiceAltoCodificato = new String(apiceAlto.getBytes(documentManager.getEncoding()));
+			apiceBassoCodificato = new String(apiceBasso.getBytes(documentManager.getEncoding()));	
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
 		String ilcFile = "ilc_CorCar_"+file;
 		String strLine;
-		BufferedReader vecchioFile;
-		Writer nuovoFile;
-		boolean utf = documentManager.getEncoding().toLowerCase().startsWith("utf");
-	    try{
-	    	vecchioFile = new BufferedReader(new InputStreamReader(new DataInputStream(new FileInputStream(UtilFile.getTempDirName() + File.separatorChar + file))));
-	    	nuovoFile = new OutputStreamWriter(new FileOutputStream(UtilFile.getTempDirName() + File.separatorChar + ilcFile), "ISO-8859-1");
-
-	    	while ((strLine = vecchioFile.readLine())!=null) {
-	    		if (utf) {
-	    			strLine.replaceAll("\\x{145}", "'");
-	    			strLine.replaceAll("\\x{146}", "'");
-	    		}
-	    		nuovoFile.write(strLine+"\n");
-	    	}
-    	    vecchioFile.close();    
-    	    nuovoFile.close();
-	    } catch (Exception e){
-	         System.err.println("Error: " + e.getMessage());
-	    }
+		InputStream in;
+		OutputStream out;
+		try {
+			in = new FileInputStream(UtilFile.getTempDirName() + File.separatorChar + file);
+			out = new FileOutputStream(UtilFile.getTempDirName() + File.separatorChar + ilcFile);	
+			Reader r = new BufferedReader(new InputStreamReader(in, documentManager.getEncoding()));
+		    Writer w = new BufferedWriter(new OutputStreamWriter(out, "ISO-8859-1"));
+		    char[] buffer = new char[4096];
+		    int len;
+		    while ((len = r.read(buffer)) != -1) {
+		    	strLine = new String(buffer, 0, len);
+		    	strLine = strLine.replaceAll(apiceAltoCodificato, "'");
+	    		strLine = strLine.replaceAll(apiceBassoCodificato, "'");
+		    	w.write(strLine);
+		    }
+		    r.close();
+		    w.close();
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			return file;
+		}
 		return ilcFile;
 	}
 	
@@ -547,6 +568,7 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 	    	nuovoFile = new OutputStreamWriter(new FileOutputStream(UtilFile.getTempDirName() + File.separatorChar + ilcFile), "ISO-8859-1");
 
 	    	while ((strLine = vecchioFile.readLine())!=null) {
+	    		strLine = strLine.replace('?', ' ');
 	    		nuovoFile.write(strLine+"\n");
 	    	}
     	    vecchioFile.close();    
@@ -560,10 +582,10 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 	
 	private boolean analizzaInLocale(String file) {
 
-		file = correggiCaratteri(file);
-		if (documentManager.getEncoding().toLowerCase().startsWith("utf"))
-			file = correggiInterrogativo(file);
-		
+//		file = correggiCaratteri(file);
+//		if (documentManager.getEncoding().toLowerCase().startsWith("utf"))
+//			file = correggiInterrogativo(file);
+//		
 		String eseguibileIlc = "";
 		String osName = System.getProperty("os.name");
 		if (osName.toLowerCase().matches("windows.*"))

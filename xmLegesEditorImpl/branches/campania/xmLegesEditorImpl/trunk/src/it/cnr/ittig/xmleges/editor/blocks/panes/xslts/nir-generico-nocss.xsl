@@ -202,13 +202,16 @@
 			</head>
 			<body>
 			<p style="font-weight:bold;">
-				<xsl:choose>
-					<xsl:when test="$datafine!=''">
+				<xsl:text>Urn del documento: </xsl:text><xsl:call-template name="urnvigente"/>
+			</p>
+			<xsl:choose>
+				<xsl:when test="$datafine!=''">
+					<p style="font-weight:bold;">
 						<xsl:text>Documento vigente al </xsl:text>
 						<xsl:value-of select="concat(substring($datafine,7,2),'/',substring($datafine,5,2),'/',substring($datafine,1,4))"/><xsl:text>.</xsl:text>	
-					</xsl:when>
-				</xsl:choose>
-			</p>
+					</p>
+				</xsl:when>
+			</xsl:choose>
 			<xsl:choose>
 				<!--	xsl:when test="//*[name()='evento']/@data!=''"	-->
 				<xsl:when test="//*[name()='evento']/@fonte!='ro1'">
@@ -1083,7 +1086,62 @@
 			</xsl:choose>
 	</xsl:template>
 
+		
+	<!-- ======================================================== -->
+	<!--                                                          -->
+	<!--  template gestione urnvigente                            -->
+	<!--                                                          -->
+	<!-- ======================================================== -->
 	
+	<xsl:template name="urnvigente" >
+		<xsl:choose>
+			<xsl:when test="/*[name()='NIR']/@tipo!='multivigente'">
+				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='descrittori']/*[name()='urn']/@valore"/>
+			</xsl:when>	
+			<xsl:otherwise>
+				<xsl:for-each select="/*[name()='NIR']/*/*[name()='meta']/*[name()='descrittori']/*[name()='urn']">
+					<xsl:choose>
+						<xsl:when test="$datafine!=''">
+							<xsl:variable name="inizio_id">
+								<xsl:value-of select="@iniziovigore"/>
+							</xsl:variable>
+							<xsl:variable name="fine_id">
+								<xsl:value-of select="@finevigore"/>
+							</xsl:variable>
+							<xsl:variable name="data_inizio">
+								<!--	xsl:value-of select="//*[name()='evento'][@id=$inizio_id]/@data"/	-->
+								<xsl:value-of select="id($inizio_id)/@data"/>
+							</xsl:variable>
+							<xsl:variable name="data_fine">
+								<!--	xsl:value-of select="//*[name()='evento'][@id=$fine_id]/@data"/	-->
+								<xsl:value-of select="id($fine_id)/@data"/>
+							</xsl:variable>
+							<xsl:choose>
+								<xsl:when test="$data_fine!=''">
+									<xsl:if test="$data_inizio&lt;number(number($datafine)+1) and $data_fine&gt;$datafine">
+										<xsl:value-of select="@valore" />
+									</xsl:if>
+								</xsl:when>	
+								<xsl:otherwise>	
+									<xsl:if test="$data_inizio&lt;number(number($datafine)+1)">
+										<xsl:value-of select="@valore" />
+									</xsl:if>
+								</xsl:otherwise>	
+							</xsl:choose>
+						</xsl:when>	
+						<xsl:otherwise>
+				       	    <xsl:if test="@iniziovigore='t1'">
+								<xsl:value-of select="@valore" />
+							</xsl:if>
+						</xsl:otherwise>				
+					</xsl:choose>
+				</xsl:for-each>
+			</xsl:otherwise>				
+		</xsl:choose>				
+	</xsl:template>
+
+
+		
 	<!-- ======================================================== -->
 	<!--                                                          -->
 	<!--  template gestione vigenze                               -->
@@ -1268,8 +1326,11 @@
 		<xsl:when test="$saltare">
 		</xsl:when>
 		<xsl:otherwise>		
-			<xsl:variable name="id">
+			<xsl:variable name="idNoPound">
 				<xsl:value-of select="../@id" />
+			</xsl:variable>
+			<xsl:variable name="id">
+				<xsl:value-of select="concat('#',$idNoPound)"/>
 			</xsl:variable>
 			<xsl:variable name="numeronota">
 				<xsl:value-of select="position()" />
@@ -1336,7 +1397,7 @@
 						</xsl:variable>	
 
 						<xsl:if test="position()=1">
-							<a name="n{$id}" href="#t{$id}">[<xsl:value-of select="$numeronota"/>]</a>
+							<a name="n{$idNoPound}" href="#t{$idNoPound}">[<xsl:value-of select="$numeronota"/>]</a>
 		   				</xsl:if>
 
 						<xsl:text> - </xsl:text>
@@ -1380,7 +1441,7 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<!--	NON ho le informazione nei metadati -->			
-					<a name="n{$id}" href="#t{$id}">[<xsl:value-of select="$numeronota"/>]</a>
+					<a name="n{$idNoPound}" href="#t{$idNoPound}">[<xsl:value-of select="$numeronota"/>]</a>
 					<xsl:text> - Modificato da: </xsl:text>
 					<a href="http://www.nir.it/cgi-bin/N2Ln?{$urn}" title="URN = {$urn}"> <xsl:value-of select="$urn" /> </a>
 					<xsl:text>. </xsl:text>

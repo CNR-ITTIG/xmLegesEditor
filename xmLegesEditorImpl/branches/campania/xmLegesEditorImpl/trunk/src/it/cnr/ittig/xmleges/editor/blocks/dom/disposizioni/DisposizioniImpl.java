@@ -142,11 +142,11 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 	
 	private Node getMetaAfter(Node modifichepassive, String idNovella, String idNovellando) {
 
-		String cercoId = (!"".equals(idNovella) ? idNovella : idNovellando);
+		String cercoId = (!"#".equals(idNovella) ? idNovella : idNovellando);
 		Document doc = documentManager.getDocumentAsDom();
 		Node[] nodi = UtilDom.getElementsByAttributeValue(doc,doc.getDocumentElement(),"iniziovigore",null);
 		for (int i=0; i<nodi.length; i++)
-			if (cercoId.equals(UtilDom.getAttributeValueAsString(nodi[i], "id"))) {
+			if (cercoId.equals("#"+UtilDom.getAttributeValueAsString(nodi[i], "id"))) {
 				//cerco (i-1) se i!=0 altrimenti cerco i=1 (se esiste)
 				String cercaMeta;
 				if (i>0)
@@ -191,7 +191,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		
 		Node metaAfter = getMetaAfter(modifichepassiveNode,novella, novellando);
 		Node operazioneNode;
-		if (!novellando.equals("") && !novella.equals("")) {	//sostituzione
+		if (!novellando.equals("#") && !novella.equals("#")) {	//sostituzione
 			operazioneNode = utilRulesManager.getNodeTemplate(doc,"dsp:sostituzione");
 			if (implicita)
 				UtilDom.setAttributeValue(operazioneNode, "implicita", "si");
@@ -205,7 +205,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 			setNovella(operazioneNode, novella);
 			setNovellando(operazioneNode, novellando);			
 		}
-		else if (!novellando.equals("")) {	//abrogazione
+		else if (!novellando.equals("#")) {	//abrogazione
 				operazioneNode = utilRulesManager.getNodeTemplate(doc, "dsp:abrogazione");
 				if (implicita)
 					UtilDom.setAttributeValue(operazioneNode, "implicita", "si");
@@ -218,7 +218,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 				setNorma(operazioneNode, pos, norma, partizione, preNota, autoNota, postNota);
 				setNovellando(operazioneNode, novellando);
 			}
-			else if (!novella.equals("")) {	//integrazione
+			else if (!novella.equals("#")) {	//integrazione
 				operazioneNode = utilRulesManager.getNodeTemplate(doc,"dsp:integrazione");
 				if (implicita)
 					UtilDom.setAttributeValue(operazioneNode, "implicita", "si");

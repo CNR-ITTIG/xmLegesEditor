@@ -34,7 +34,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		    </style>
         </head>
 		<body>
-			<xsl:for-each select="//@iniziovigore">	
+			<!--	xsl:for-each select="//@iniziovigore"	-->	
+			<xsl:for-each select="//*[name()!='urn']/@iniziovigore">	
 				<xsl:apply-templates select=".." />
 			</xsl:for-each>
 		</body>
@@ -43,7 +44,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 <xsl:template match="//*">
    		<xsl:variable name="idnota">
-			<xsl:value-of select="@id" />
+			<xsl:value-of select="concat('#',@id)"/>
 		</xsl:variable>
 		<xsl:variable name="ittignota">
 				<xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*/*[name()='dsp:pos'][@xlink:href=$idnota]/../../*[name()='dsp:norma']/*[name()='dsp:subarg']/*[name()='ittig:notavigenza']/@id"/>

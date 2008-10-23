@@ -344,7 +344,7 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 			if (!dove.getText().equals("")) 
 				partizione = partizione + "#" + dove.getText();	//TODO testare se ho già una urn con partizioni specificate e decidere come comportarsi
 
-			if (!domDisposizioni.setDOMDisposizioni(posDisposizione, evento.getText(), partizione, idNovellando, idNovella, preNota, autoNota, postNota, implicita.isSelected(),eventoriginale, eventovigore))
+			if (!domDisposizioni.setDOMDisposizioni("#"+posDisposizione, evento.getText(), partizione, "#"+idNovellando, "#"+idNovella, preNota, autoNota, postNota, implicita.isSelected(),eventoriginale, eventovigore))
 				utilmsg.msgError("editor.form.disposizioni.passive.erroremetadati");
 				
 			operazioneIniziale = NO_OPERAZIONE;

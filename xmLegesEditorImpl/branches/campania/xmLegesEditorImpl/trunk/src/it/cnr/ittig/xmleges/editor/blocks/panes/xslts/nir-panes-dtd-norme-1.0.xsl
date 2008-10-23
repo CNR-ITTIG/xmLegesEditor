@@ -466,7 +466,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 										
 <xsl:template name="vigenza">
 	<xsl:variable name="id">
-		<xsl:value-of select="@id" />
+		<xsl:value-of select="concat('#',@id)"/>
 	</xsl:variable>
 	<xsl:variable name="stato">
 		<xsl:value-of select="@status" />
