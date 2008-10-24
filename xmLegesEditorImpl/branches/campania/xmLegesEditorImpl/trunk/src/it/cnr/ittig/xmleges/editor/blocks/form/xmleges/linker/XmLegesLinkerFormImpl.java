@@ -11,6 +11,7 @@ import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.form.Form;
+import it.cnr.ittig.xmleges.core.services.form.FormVerifier;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
@@ -68,7 +69,7 @@ import org.w3c.dom.Node;
  * @author <a href="mailto:sarti@dii.unisi.it">Lorenzo Sarti </a>, <a
  *         href="mailto:mirco.taddei@gmail.com">Mirco Taddei </a>
  */
-public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Serviceable, Configurable, Initializable {
+public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Serviceable, Configurable, Initializable, FormVerifier {
 	Logger logger;
 
 	Form form;
@@ -182,6 +183,7 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 		form.setMainComponent(this.getClass().getResourceAsStream("xmLegesLinker.jfrm"));
 		form.setSize(700, 500);
 		form.setName("editor.form.xmleges.link");
+		form.addFormVerifier(this);
 		
 		form.setHelpKey("help.contents.form.xmlegeslinker");
 		
@@ -295,6 +297,7 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 	}
 
 	protected void setSorgente(String text) {
+		risultati.setText("");
 		tabbedPane.setSelectedIndex(0);
 		sorgente.setText(text);
 		sorgente.setCaretPosition(0);
@@ -397,6 +400,14 @@ public class XmLegesLinkerFormImpl implements XmLegesLinkerForm, Loggable, Servi
 
 		if (error != null) 
 			utilMsg.msgError(form.getAsComponent(), mesErr + error);
+	}
+
+	public String getErrorMessage() {
+		return  i18n.getTextFor("editor.form.xmleges.link.msg.analizza");
+	}
+
+	public boolean verifyForm() {
+		return !"".equals(risultati.getText());
 	}
 
 }
