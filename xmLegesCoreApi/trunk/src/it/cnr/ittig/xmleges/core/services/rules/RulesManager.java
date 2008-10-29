@@ -4,6 +4,7 @@ import it.cnr.ittig.services.manager.Service;
 
 import java.io.File;
 import java.util.Collection;
+import java.util.Map;
 import java.util.Vector;
 
 import org.w3c.dom.Node;
@@ -59,8 +60,15 @@ public interface RulesManager extends Service {
 
 	/**
 	 * @param file
+	 * @deprecated
 	 */
 	public void loadRules(File file);
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public Map getQNamePrefixToNamespaceMap();
 
 	/**
 	 * Restituisce una stringa in formato XML che definisce il contenuto di

@@ -428,22 +428,58 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 	public Node getNodeTemplate(String elem_name) {
 		return getNodeTemplate(documentManager.getDocumentAsDom(), elem_name);
 	}
+	
+	
+	private String getNameSpacePrefix(String elemName){
+		return elemName.indexOf(":")!=-1?elemName.substring(0,elemName.indexOf(":")):null;
+	}
+	
+	
+	private String getNameSpaceDeclFor(String tagName){
+		
+		String nsPrefix = tagName.indexOf(":")!=-1?tagName.substring(0,tagName.indexOf(":")):null;
+		
+		String nameSpaceDecl = nsPrefix==null?"xmlns=\"":"xmlns:"+nsPrefix+"=\"";
+		nameSpaceDecl+=rulesManager.getQNamePrefixToNamespaceMap().get(nsPrefix).toString().trim()+"\"";
+		
+		return nameSpaceDecl;
+	}
+	
+	
+	private String getNameSpaceDeclForPrefix(String nsPrefix){
+				
+		String nameSpaceDecl = nsPrefix==null?"xmlns=\"":"xmlns:"+nsPrefix+"=\"";
+		nameSpaceDecl+=rulesManager.getQNamePrefixToNamespaceMap().get(nsPrefix).toString().trim()+"\"";
+		
+		return nameSpaceDecl;
+	}
 
 	public Node getNodeTemplate(Document doc, String elem_name) {
+		
 		Node newNode = null;
 		String templateXml;
 		try {
 			DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
-
-			// FIXME  ho aggiunto xmlns:cnr  --> verificare se da' noia su documenti non cnr
 			
-			// FIXME  ho aggiunto come namespace xmlns quello dei ddl; organizzarlo per toglierlo modificando i fogli di stile in modo che non richiedano il namespace settato (come il generico; no match su nir:)
+			// soluzione brutale: ci devo mettere tutti i namespace della dtd corrente;
+			// altrimenti dovrei andare a vedere da quali tag e' composto il defaultcontent e mettere solo quelli necessari
 			
-			// xmlns=\"http://www.normeinrete.it/disegnilegge/1.0\"
+			String nameSpaceDecl = "";
 			
-			templateXml = "<utilrulesmanager xmlns=\"http://www.normeinrete.it/nir/2.2/\" xmlns:h=\"http://www.w3.org/HTML/1998/html4\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:dsp=\"http://www.normeinrete.it/nir/disposizioni/1.0\" xmlns:cnr=\"http://www.cnr.it/provvedimenti/2.1\">"
-					+ rulesManager.getDefaultContent(elem_name) + "</utilrulesmanager>";
-
+			// itera tutti i nsPrefix
+			for(Iterator it=rulesManager.getQNamePrefixToNamespaceMap().keySet().iterator();it.hasNext();){
+				String nsPrefix = (String)it.next();
+				nameSpaceDecl+=getNameSpaceDeclForPrefix(nsPrefix)+" ";
+			}
+			
+			nameSpaceDecl = nameSpaceDecl.trim();
+			
+			if(logger.isDebugEnabled())
+				logger.debug("getting template with nsDecl "+nameSpaceDecl+"  for element  "+elem_name);
+						
+			
+			templateXml = "<utilrulesmanager "+nameSpaceDecl+">"+ rulesManager.getDefaultContent(elem_name) + "</utilrulesmanager>";
+			
 			domFactory.setValidating(false); // deactivate validation
 			domFactory.setNamespaceAware(true);
 			Document parsed = (Document) domFactory.newDocumentBuilder().parse(new ByteArrayInputStream(templateXml.getBytes("UTF-8")));
@@ -451,11 +487,13 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 			newNode = doc.importNode(parsed_root, true);
 			newNode = fillRecursiveRequiredAttributes(newNode);
 			domFactory.setValidating(true); // reactivate validation
+			
 		} catch (Exception ex) {
 			logger.error(ex.toString(), ex);
-		}
-		return newNode;
+		}		
+		return  newNode;
 	}
+	
 	
 	private Node fillRecursiveRequiredAttributes(Node node){
 		try{

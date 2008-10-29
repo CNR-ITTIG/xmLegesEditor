@@ -31,6 +31,7 @@ import java.io.ObjectOutputStream;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Vector;
 
 import org.w3c.dom.Node;
@@ -81,6 +82,8 @@ public class DtdRulesManagerImpl implements RulesManager, DeclHandler{
 	
 	protected boolean pre_check = false;
 	
+	protected HashMap  QNamePrefixesToNameSpaceMap;
+	
 	
 	
 	
@@ -102,9 +105,15 @@ public class DtdRulesManagerImpl implements RulesManager, DeclHandler{
 			att_hash = new HashMap();
 			attributes.put(elementName, att_hash);
 		}
-
 		// add a new attribute definition
 		att_hash.put(attributeName, new AttributeDeclaration(type, valueDefault, value));
+		
+		// save namespace attributes
+		if(attributeName.startsWith("xmlns")){
+			String QName = attributeName.indexOf(":")!=-1?attributeName.substring(attributeName.indexOf(":")+1):null;
+			QNamePrefixesToNameSpaceMap.put(QName, value);
+		}
+		
 	}
 
 	
@@ -152,6 +161,7 @@ public class DtdRulesManagerImpl implements RulesManager, DeclHandler{
 		rules = new HashMap();
 		alternative_contents = new HashMap();
 		attributes = new HashMap();
+		QNamePrefixesToNameSpaceMap = new HashMap();
 	}
 	
 	
@@ -159,11 +169,14 @@ public class DtdRulesManagerImpl implements RulesManager, DeclHandler{
 		rules = new HashMap();
 		alternative_contents = new HashMap();
 		attributes = new HashMap();
+		QNamePrefixesToNameSpaceMap = new HashMap();
 	}
 	
 	
 	
-	
+	public Map getQNamePrefixToNamespaceMap() {
+		return (Map) QNamePrefixesToNameSpaceMap;
+	}
 	
 	
 	///////////////////////////////////////////////////////////////////////
@@ -181,7 +194,7 @@ public class DtdRulesManagerImpl implements RulesManager, DeclHandler{
 
 		// parse DTD
 		UtilXml.readDTD(xml_file, this);
-
+		
 		logger.info("END loading rules from DTD");
 	}
 	
@@ -226,18 +239,22 @@ public class DtdRulesManagerImpl implements RulesManager, DeclHandler{
 		File rulesMap = new File(md5Path + File.separator, key + "_rules");
 		File alternativesMap = new File(md5Path, key + "_alternatives");
 		File attributesMap = new File(md5Path, key + "_attributes");
+		File nameSpaceMap = new File(md5Path, key + "_namespace");
 
-		if (key != null && rulesMap.exists() && alternativesMap.exists() && attributesMap.exists()) {
-			loadRulesFromCachedMap(rulesMap, alternativesMap, attributesMap);
+		if (key != null && rulesMap.exists() && alternativesMap.exists() && attributesMap.exists() && nameSpaceMap.exists()) {
+			loadRulesFromCachedMap(rulesMap, alternativesMap, attributesMap, nameSpaceMap);	
 		} else {
 			loadRules(xml_file);
-			saveRulesOnCachedMap(rulesMap, alternativesMap, attributesMap);
+			saveRulesOnCachedMap(rulesMap, alternativesMap, attributesMap, nameSpaceMap);
 		}
+		
+		logger.debug("QNameSpacePrefixToNameSpace: "+QNamePrefixesToNameSpaceMap.toString());
+		
 	}
 	
 	
 	// lettura delle regole dalle mappe salvate su file
-	private void loadRulesFromCachedMap(File rulesMap, File alternativesMap, File attributesMap) {
+	private void loadRulesFromCachedMap(File rulesMap, File alternativesMap, File attributesMap, File nameSpaceMap) {
 		logger.info("START loading rules from files");
 
 		FileInputStream fis = null;
@@ -272,7 +289,17 @@ public class DtdRulesManagerImpl implements RulesManager, DeclHandler{
 		} catch (Exception ex) {
 			logger.error("Error reading attributes map " + ex.getMessage(), ex);
 		}
-
+		
+		// reading namespaces
+		try {
+			fis = new FileInputStream(nameSpaceMap);
+			in = new ObjectInputStream(new BufferedInputStream(fis));
+			QNamePrefixesToNameSpaceMap = (HashMap) in.readObject();
+			in.close();
+		} catch (Exception ex) {
+			logger.error("Error reading namespaces map " + ex.getMessage(), ex);
+		}
+		
 		logger.info("END loading rules from files");
 	}
 	
@@ -281,7 +308,7 @@ public class DtdRulesManagerImpl implements RulesManager, DeclHandler{
 
 	// scrittura delle regole su mappe salvate su file
 	
-	private void saveRulesOnCachedMap(File rulesMap, File alternativesMap, File attributesMap) {
+	private void saveRulesOnCachedMap(File rulesMap, File alternativesMap, File attributesMap, File nameSpaceMap) {
 		FileOutputStream fos = null;
 		ObjectOutputStream out = null;
 
@@ -313,6 +340,16 @@ public class DtdRulesManagerImpl implements RulesManager, DeclHandler{
 			out.close();
 		} catch (Exception ex) {
 			logger.error("Error saving attributes map " + ex.getMessage(), ex);
+		}
+		
+		// saving namespaces
+		try {
+			fos = new FileOutputStream(nameSpaceMap);
+			out = new ObjectOutputStream(new BufferedOutputStream(fos));
+			out.writeObject(QNamePrefixesToNameSpaceMap);
+			out.close();
+		} catch (Exception ex) {
+			logger.error("Error saving namespaces map " + ex.getMessage(), ex);
 		}
 	}
 	
@@ -1965,8 +2002,6 @@ public class DtdRulesManagerImpl implements RulesManager, DeclHandler{
 			return new String("#PCDATA");
 		return new String("#ANY");
 	}
-
-
 
 	
 }

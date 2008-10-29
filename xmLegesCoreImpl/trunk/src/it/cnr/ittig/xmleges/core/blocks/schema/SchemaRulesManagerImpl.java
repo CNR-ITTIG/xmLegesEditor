@@ -23,6 +23,7 @@ import java.io.File;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Vector;
 
 import org.eclipse.xsd.XSDParticle;
@@ -134,6 +135,8 @@ public class SchemaRulesManagerImpl implements RulesManager {
 		clear();
 		utilXsd.loadRules(schemaPath);		
 	}
+	
+	
 
 	
 	public void loadRules(String filename, String schemaPath) {
@@ -149,6 +152,12 @@ public class SchemaRulesManagerImpl implements RulesManager {
 		utilXsd.loadRules(schema_file.getAbsolutePath());
 	}
 	
+	
+	
+	
+	public Map getQNamePrefixToNamespaceMap() {
+		return utilXsd.prefixToNamespace;
+	}
 
 	
 	
@@ -1603,7 +1612,6 @@ public class SchemaRulesManagerImpl implements RulesManager {
 		return new String("#ANY");
 		
 	}
-
 
 	
 }

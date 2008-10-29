@@ -21,6 +21,7 @@ import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 
 import java.io.File;
 import java.util.Collection;
+import java.util.Map;
 import java.util.Vector;
 
 import org.w3c.dom.Node;
@@ -52,6 +53,7 @@ public class RulesManagerImpl implements RulesManager, Initializable, Loggable {
 			rm=(RulesManager) new SchemaRulesManagerImpl(logger);
 		else
 			rm=(RulesManager) new DtdRulesManagerImpl(logger);
+		
 	}
 	
 	public boolean assessAttribute(Node node, String attributeName){
@@ -68,6 +70,11 @@ public class RulesManagerImpl implements RulesManager, Initializable, Loggable {
 		rm.clear();	
 	}
 
+	
+	
+	public Map getQNamePrefixToNamespaceMap() {
+		return rm.getQNamePrefixToNamespaceMap();
+	}
 
 
 	public void fillRequiredAttributes(Node elem) throws RulesManagerException {
@@ -343,5 +350,6 @@ public class RulesManagerImpl implements RulesManager, Initializable, Loggable {
 	public String getDefaultContent(String elem_name, Vector nodes) throws RulesManagerException {
 		return rm.getDefaultContent(elem_name, nodes);
 	}
+
 	
 }
