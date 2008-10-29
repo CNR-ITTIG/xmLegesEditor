@@ -18,7 +18,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 xmlns:xlink = "http://www.w3.org/1999/xlink"
                 xmlns       = "http://www.w3.org/HTML/1998/html4"
                 xmlns:nir   = "http://www.normeinrete.it/nir/2.2/"
-                xmlns:cnr   = "http://www.cnr.it/provvedimenti/2.1"
+                xmlns:cnr   = "http://www.cnr.it/provvedimenti/2.2"
                 xmlns:mapper= "xalan://it.cnr.ittig.xmleges.core.blocks.panes.xsltmapper.XsltMapperImpl"
                 version     = "1.0">
 
@@ -294,7 +294,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 			</xsl:attribute>
 			<xsl:value-of select="name()"/>
 			<br/>
-			trovato INFODOC
 		Fonte: <font color="blue"><xsl:value-of select="@fonte"/></font><br/>
 		Funzione: <font color="blue"><xsl:value-of select="@funzione"/></font><br/>
 		Natura: <font color="blue"><xsl:value-of select="@natura"/></font><br/>

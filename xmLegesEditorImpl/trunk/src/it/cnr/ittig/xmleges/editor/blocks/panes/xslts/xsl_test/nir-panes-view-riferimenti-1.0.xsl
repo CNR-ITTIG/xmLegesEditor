@@ -39,7 +39,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		    </style>
         </head>
 		<body>
-			<xsl:apply-templates select="//nir:annesso|//nir:mrif|//nir:rif[name(..)!='mrif']|//nir:irif[name(..)!='mrif']" />
+			<xsl:apply-templates select="//nir:annesso|//nir:mrif|//nir:rif[name(..)!='mrif']|//nir:irif[name(..)!='mrif']"> </xsl:apply-templates>
 		</body>
 	</html>
 </xsl:template>
