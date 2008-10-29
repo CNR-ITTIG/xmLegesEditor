@@ -282,7 +282,7 @@ public class UtilDom {
 		if (e != null)
 			return e;
 		try {
-			Node newNode = node.getOwnerDocument().createElement(tagName);
+			Node newNode = createElement(node.getOwnerDocument(),tagName);
 			node.appendChild(newNode);
 			return newNode;
 		} catch (DOMException ex) {
@@ -1083,6 +1083,25 @@ public class UtilDom {
 	public static String getNameSpaceURIforElement(Node node, String prefix) {
 		return (UtilDom.getAttributeValueAsString(node.getOwnerDocument().getDocumentElement(), "xmlns:" + prefix));
 	}
+	
+	
+	public static String getNameSpacePrefix(String qualifiedName){
+		return qualifiedName.indexOf(":")!=-1?qualifiedName.substring(0,qualifiedName.indexOf(":")):null;
+	}
+	
+	/**
+	 * 
+	 * @param doc
+	 * @param qualifiedName
+	 * @return
+	 */
+	public static Node createElement(Document doc, String qualifiedName){
+		String prefix = getNameSpacePrefix(qualifiedName);
+		String nsDecl = prefix!=null?"xmlns:"+prefix:"xmlns";
+		/** NOTA: da qui vede solo i NS dichiarati sulla root del documento e non tutti quelli dichiarati nella dtd [es. quelli dichiarati in tag proprietari]**/
+		String nsUri = UtilDom.getAttributeValueAsString(doc.getDocumentElement(), nsDecl);
+		return (Node)doc.createElementNS(nsUri, qualifiedName);
+	}
 
 	/**
 	 * Inserisce il nodo <code>newNode</code> come fratello successivo di
@@ -1139,16 +1158,12 @@ public class UtilDom {
 		Node node;
 		
 		try{
-			
 			nI = ((DocumentTraversal)doc).createNodeIterator(fromHere,NodeFilter.SHOW_ELEMENT,null,false);	
 		}catch (Exception e) {
-			System.out.println("errore qua");
-			(doc.getElementsByTagName(tagName)).item(0);
+			System.out.println("exception in UtilDom.getElementsByTagName()");
 			Node[] ret = new Node[1];
 			ret[0]=(Node)((doc.getElementsByTagName(tagName)).item(0));
-			
 			return  ret;
-			
 		}
     		
 		
