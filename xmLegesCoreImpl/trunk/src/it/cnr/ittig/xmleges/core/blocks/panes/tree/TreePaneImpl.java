@@ -256,7 +256,9 @@ public class TreePaneImpl implements TreePane, EventManagerListener, Loggable, S
 				logger.debug("reloaded all");
 				reload();
 			}
-			selectNode(selectionManager.getActiveNode(), false);
+			// mi pare inutile riselezionare il nodo attivo, a meno che non lo perda per qualche motivo
+			// Rimosso selectNode 15 Ott 2008
+			//selectNode(selectionManager.getActiveNode(), false);
 		}
 	}
 
@@ -308,7 +310,6 @@ public class TreePaneImpl implements TreePane, EventManagerListener, Loggable, S
 			expandSelectedOnly();
 			tree.scrollPathToVisible(paths[0]);
 			tree.repaint();
-			// SwingUtilities.getRoot(tree).repaint();
 		}
 	}
 
