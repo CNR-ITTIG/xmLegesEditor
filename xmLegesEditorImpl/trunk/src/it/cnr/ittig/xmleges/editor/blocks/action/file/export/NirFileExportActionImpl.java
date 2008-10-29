@@ -484,14 +484,16 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 			DOMWriter domWriter = new DOMWriter();
 			domWriter.setCanonical(true);
 			domWriter.setFormat(false);
-			domWriter.setOutput(dest);
+			domWriter.setOutput(dest,documentManager.getEncoding());
 			
 			Hashtable param = new Hashtable(2);
 			param.put("datafine",this.dataVigenza);
 			param.put("baseurl",UtilFile.getFolderPath(documentManager.getSourceName()));
 			
-			Node res = UtilXslt.applyXslt(documentManager.getDocumentAsDom(), xslt, param, documentManager.getEncoding());
+			String res = UtilXslt.serializedApplyXslt(documentManager.getDocumentAsDom(), xslt, param, documentManager.getEncoding());   // questo setEncoding qui non gli fa niente
 			domWriter.write(res);
+			
+			
 			return true;
 		} catch (Exception ex) {
 			logger.error(ex.toString(), ex);
