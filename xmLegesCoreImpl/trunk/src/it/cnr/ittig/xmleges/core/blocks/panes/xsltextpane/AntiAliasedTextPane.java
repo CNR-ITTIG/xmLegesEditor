@@ -312,6 +312,9 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 				pane.fireSelectedNodesChanged(ancestorBros);
 				return;
 			}
+
+			pane.firePaneStatusChanged();
+			
 		} else {
 			logger.debug("caretUpdate: with dot==mark");
 		}
@@ -320,7 +323,9 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 		int relSelEnd = selEnd - currelem.getStartOffset() - 1;
 
 		pane.fireSelectionChanged(selNode, relSelStart, relSelEnd);
-		pane.firePaneStatusChanged();
+		
+		// 15 Ott 2008; lo sposto sopra, sparato solo nel caso dot!=mark; altrimenti ad ogni pressione di tasto parte un evento; rallenta l'editing
+		//pane.firePaneStatusChanged();
 	}
 
 	public void changedUpdate(DocumentEvent e) {
@@ -451,22 +456,18 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 	protected String getHtml(Node node) {
 		logger.debug("BEGIN getHTML(Node)");
 		String ret = HTML_ERROR;
-		Node nodeHtml = null;
 		try {
 			if (logger.isDebugEnabled())
 				logger.debug("node: " + node);
 			if (xsltParam != null){
 				ret = UtilXslt.serializedApplyXslt(node, xslt, xsltParam);
-				//nodeHtml = UtilXslt.applyXslt(node, xslt, xsltParam);
 			}
 			else{
 				ret = UtilXslt.serializedApplyXslt(node, xslt);
-				//nodeHtml = UtilXslt.applyXslt(node, xslt);
 			}
 			if (logger.isDebugEnabled()){
-				logger.debug("html:" + UtilDom.domToString(nodeHtml, true, "\t", false));
+				logger.debug("html:" + ret);
 			}
-			//ret = UtilDom.domToString(nodeHtml,false,null,false,true);
 			//ret = ret.substring(ret.indexOf('\n'));
 		} catch (Exception ex) {
 			logger.error(ex.toString(), ex);
@@ -809,7 +810,8 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 					if(found)
 						return update(pane.getXsltMapper().getDomById(idContainer));			
 				}else{
-					getHTMLDocument().setOuterHTML(elem, convertEncoding(getHtml(node)));
+					getHTMLDocument().setOuterHTML(elem, getHtml(node));
+					//getHTMLDocument().setOuterHTML(elem, convertEncoding(getHtml(node)));//));
 				}
 				return node;
 			} catch (Exception ex) {
