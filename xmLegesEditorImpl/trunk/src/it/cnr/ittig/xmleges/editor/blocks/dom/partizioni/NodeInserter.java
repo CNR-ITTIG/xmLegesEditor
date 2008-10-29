@@ -457,7 +457,7 @@ public class NodeInserter {
 		Node corpo = UtilDom.findDirectChild(activeNodeContainer, "corpo");
 		tmpParent = corpo.getParentNode(); // sara' comma o lettera
 
-		newNode = doc.createElement("alinea");
+		newNode = UtilDom.createElement(doc, "alinea");
 
 		children = UtilDom.getAllChildElements(corpo);
 		for (int i = 0; i < children.size(); i++)
@@ -551,8 +551,8 @@ public class NodeInserter {
 		Iterator iterator;
 
 		if (node != null) {
-
-			newNode = doc.createElement(elem_name);
+		
+			newNode = UtilDom.createElement(doc,elem_name);
 			childList = node.getChildNodes();
 			// crea il vettore dei figli del padre del nodo corrente (tmpParent)
 			for (int i = 0; i < childList.getLength(); i++) {
@@ -567,7 +567,7 @@ public class NodeInserter {
 					// FIXME per dtd2.1; causa CMArticolo errato aggiunto !brothersContain() && canInsertBeforeRubNum
 					if (rulesManager.queryCanInsertBefore(node, tmpNode, newNode) && canInsertBeforeRubNum(tmpNode,newNode) && !brothersContain(node,elem_name)) {
 						node.insertBefore(newNode, tmpNode);
-						newNode = doc.createElement(elem_name);
+					    newNode = UtilDom.createElement(doc,elem_name);
 					}
 				} catch (Exception ex) {
 				}

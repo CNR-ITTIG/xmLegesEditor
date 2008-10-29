@@ -230,7 +230,7 @@ public class AnnessiImpl implements Annessi, Loggable, Serviceable {
 
 	private Node creaAnnessoInterno(Document documento, String urnAnnesso, Node testata, File fileAnnesso) {
 
-		Node annesso = documento.createElement("annesso");// utilRulesManager.getNodeTemplate("annesso");
+		Node annesso = UtilDom.createElement(documento, "annesso");// utilRulesManager.getNodeTemplate("annesso");
 		try {
 			Document annettere = UtilXml.readXML(fileAnnesso, true);
 			if (annettere == null) {

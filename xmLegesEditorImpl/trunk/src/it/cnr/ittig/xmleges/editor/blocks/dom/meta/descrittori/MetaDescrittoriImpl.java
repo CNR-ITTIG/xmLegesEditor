@@ -99,12 +99,11 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 		
 		if (pubblicazione.getNum() != null || pubblicazione.getNorm() != null) {
 			Node oldTag =  UtilDom.findRecursiveChild(activeMeta,"pubblicazione");
-			Element pubTag;
-			pubTag = doc.createElement("pubblicazione");
-			pubTag.setAttribute("tipo", pubblicazione.getTipo());
-			pubTag.setAttribute("norm", pubblicazione.getNorm());
+			Node pubTag = UtilDom.createElement(doc,"pubblicazione");
+			UtilDom.setAttributeValue(pubTag, "tipo", pubblicazione.getTipo());
+			UtilDom.setAttributeValue(pubTag, "norm", pubblicazione.getNorm());
 			if (pubblicazione.getNum() != null)
-				pubTag.setAttribute("num", pubblicazione.getNum());
+				UtilDom.setAttributeValue(pubTag, "num", pubblicazione.getNum());
 			descrittoriNode.replaceChild(pubTag, oldTag);
 		}
 	}
@@ -136,8 +135,7 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 
 		removeMetaByName("alias", node);
 		for (int i = 0; i < alias.length; i++) {
-			Element aliasTag;
-			aliasTag = doc.createElement("alias");
+			Node aliasTag = UtilDom.createElement(doc,"alias");
 			UtilDom.setAttributeValue(aliasTag,"valore",alias[i]);
 			Node child = descrittoriNode.getFirstChild();
 			boolean inserted = false;
@@ -213,12 +211,13 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 		if(redazioni!=null && redazioni.length>0){
 			
 			for (int i = 0; i < redazioni.length; i++) {
-				Element redazioneTag;
-				redazioneTag = doc.createElement("redazione");
-				redazioneTag.setAttribute("norm", redazioni[i].getData());
-				redazioneTag.setAttribute("nome", redazioni[i].getNome());
-				redazioneTag.setAttribute("url", redazioni[i].getUrl());
-				redazioneTag.setAttribute("contributo", redazioni[i].getContributo());
+				Node redazioneTag = UtilDom.createElement(doc,"redazione");
+				
+				UtilDom.setAttributeValue(redazioneTag, "norm", redazioni[i].getData());
+				UtilDom.setAttributeValue(redazioneTag, "nome", redazioni[i].getNome());
+				UtilDom.setAttributeValue(redazioneTag, "url", redazioni[i].getUrl());
+				UtilDom.setAttributeValue(redazioneTag, "contributo", redazioni[i].getContributo());
+				
 				Node child = descrittoriNode.getFirstChild();
 				boolean inserted = false;
 				do {
@@ -240,8 +239,7 @@ public class MetaDescrittoriImpl implements MetaDescrittori, Loggable, Serviceab
 				}
 			}
 		}else{
-				Element redazioneTag;
-				redazioneTag = doc.createElement("redazione");
+				Node redazioneTag = UtilDom.createElement(doc,"redazione");
 				UtilDom.setAttributeValue(redazioneTag, "nome", "");
 				UtilDom.setAttributeValue(redazioneTag, "norm", "");
 				

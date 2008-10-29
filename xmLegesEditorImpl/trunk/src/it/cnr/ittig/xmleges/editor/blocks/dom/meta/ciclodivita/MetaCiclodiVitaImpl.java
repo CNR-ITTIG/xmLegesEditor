@@ -160,11 +160,11 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 			missingciclodivita = true;
 		}
 		
-		Node relazioniNode = doc.createElement("relazioni");
+		Node relazioniNode = UtilDom.createElement(doc, "relazioni");
 		//TODO: qui si potrebbe controllare quali relazioni c'erano prima e se quelle di ora sono di meno, avvertire della cancellazione della relazione dovuta alla soppressione dell'evento
 		for (int i = 0; i < relazioni.length; i++) {
 			if (relazioni[i].getId() != null && relazioni[i].getLink() != null && !(relazioni[i].getLink().trim().equals(""))) {
-				Element relazione = doc.createElement(relazioni[i].getTagTipoRelazione());
+				Node relazione = UtilDom.createElement(doc,relazioni[i].getTagTipoRelazione());
 				UtilDom.setIdAttribute(relazione, relazioni[i].getId());
 				UtilDom.setAttributeValue(relazione, "xlink:href", relazioni[i].getLink());			
 				if( (relazioni[i].getEffetto_tipoall()!=null)&&(!relazioni[i].getEffetto_tipoall().equals(""))){
@@ -261,9 +261,9 @@ public class MetaCiclodiVitaImpl implements MetaCiclodivita, Loggable, Serviceab
 		}
 		
 		removeMetaByName("eventi",node);
-		Element eventiTag = doc.createElement("eventi");
+		Node eventiTag = UtilDom.createElement(doc,"eventi");
 		for (int i = 0; i < eventi.length; i++) {
-				Element eventoTag = doc.createElement("evento");
+				Node eventoTag = UtilDom.createElement(doc,"evento");
 				UtilDom.setIdAttribute(eventoTag, eventi[i].getId());
 				UtilDom.setAttributeValue(eventoTag, "data", eventi[i].getData());
 				if(eventi[i].getFonte().getTagTipoRelazione().equals("originale")){

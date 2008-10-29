@@ -216,7 +216,7 @@ public class NirUtilDomImpl implements NirUtilDom, Loggable, Serviceable{
 
 		if (found == null) { // se non c'e' il tag "nome" lo crea
 			child = meta.getFirstChild();
-			found = doc.createElement(nome);
+			found = UtilDom.createElement(doc,nome);
 			// qui getNodeTemplate
 			// PROBLEMA:
 			// la questione e' che prendendo i template magari il nodo minimale che crea non e' quello che si vuole ..
@@ -261,7 +261,7 @@ public class NirUtilDomImpl implements NirUtilDom, Loggable, Serviceable{
 			return (nodo);
 		}
 		// non c'e' l' inlinemeta
-		inlinemeta = doc.createElement("inlinemeta");
+		inlinemeta = UtilDom.createElement(doc, "inlinemeta");
 		nodo = activeNode;
 		try {
 			while (nodo.getParentNode() != null && !executed) {

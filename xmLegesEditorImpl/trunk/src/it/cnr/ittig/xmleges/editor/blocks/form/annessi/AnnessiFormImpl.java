@@ -15,6 +15,8 @@ import it.cnr.ittig.xmleges.editor.services.form.annessi.AnnessiForm;
 import it.cnr.ittig.xmleges.editor.services.form.filenew.FileNewForm;
 import it.cnr.ittig.xmleges.editor.services.provvedimenti.Provvedimenti;
 
+import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -241,7 +243,7 @@ public class AnnessiFormImpl implements AnnessiForm, Loggable, Serviceable, Init
 	}
 
 	private boolean canAnnessoInterno() {
-		Node annesso = (Node) documentManager.getDocumentAsDom().createElement("annesso");
+		Node annesso = UtilDom.createElement(documentManager.getDocumentAsDom(), "annesso");
 		try {
 			return ((rulesManager.queryAppendable(annesso)).contains("DocumentoNIR"));
 		} catch (RulesManagerException e) {

@@ -159,7 +159,8 @@ public class NdrImpl implements Ndr, Loggable, Serviceable {
 		modified = null;
 
 		// Preparazione elemento ndr
-		Element ndr = doc.createElement("ndr");
+	
+		Node ndr = UtilDom.createElement(doc,"ndr");
 		UtilDom.setAttributeValue(ndr, "num", id);
 		UtilDom.setAttributeValue(ndr, "valore", value);
 
@@ -186,7 +187,7 @@ public class NdrImpl implements Ndr, Loggable, Serviceable {
 
 		Node par = utilRulesManager.getNodeTemplate("h:p");
 		UtilDom.setTextNode(par, testo);
-		Element nota = doc.createElement("nota");
+		Node nota = UtilDom.createElement(doc,"nota");
 		UtilDom.setIdAttribute(nota, "n" + getNotNum(doc));
 		nota.appendChild(par);
 

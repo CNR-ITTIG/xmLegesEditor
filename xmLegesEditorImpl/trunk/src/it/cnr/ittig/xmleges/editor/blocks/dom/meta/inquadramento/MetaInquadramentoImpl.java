@@ -64,21 +64,21 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 		boolean missingInquadramento = false;
 		
 		if (inquadramentoNode==null){
-			inquadramentoNode = doc.createElement("inquadramento");
+			inquadramentoNode = UtilDom.createElement(doc, "inquadramento");
 			missingInquadramento = true;
 		}
 					
-		Element infodoc_element = doc.createElement("infodoc");
+		Node infodoc_element = UtilDom.createElement(doc, "infodoc");
 		if((infodoc.getNatura()!=null)&&(!infodoc.getNatura().trim().equals("")))
-			infodoc_element.setAttribute("natura", infodoc.getNatura());
+			UtilDom.setAttributeValue(infodoc_element, "natura", infodoc.getNatura());
 		if((infodoc.getNormativa()!=null)&&(!infodoc.getNormativa().trim().equals("")))
-			infodoc_element.setAttribute("normativa", infodoc.getNormativa());
+			UtilDom.setAttributeValue(infodoc_element,"normativa", infodoc.getNormativa());
 		if((infodoc.getFunzione()!=null)&&(!infodoc.getFunzione().trim().equals("")))
-			infodoc_element.setAttribute("funzione", infodoc.getFunzione());
+			UtilDom.setAttributeValue(infodoc_element,"funzione", infodoc.getFunzione());
 		if(infodoc.getFonte()!=null)
-			infodoc_element.setAttribute("fonte", infodoc.getFonte());
+			UtilDom.setAttributeValue(infodoc_element,"fonte", infodoc.getFonte());
 		if(infodoc.getRegistrazione()!=null)
-			infodoc_element.setAttribute("registrazione", infodoc.getRegistrazione());
+			UtilDom.setAttributeValue(infodoc_element,"registrazione", infodoc.getRegistrazione());
 			
 		Node infodocNode = (Node)infodoc_element;
 		
@@ -125,7 +125,7 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 		boolean missingInquadramento = false;
 		
 		if (inquadramentoNode==null){
-			inquadramentoNode = doc.createElement("inquadramento");
+			inquadramentoNode = UtilDom.createElement(doc,"inquadramento");
 			missingInquadramento = true;
 		}
 		
@@ -201,7 +201,7 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 		boolean missingInquadramento = false;
 		
 		if (inquadramentoNode==null){
-			inquadramentoNode = doc.createElement("inquadramento");
+			inquadramentoNode = UtilDom.createElement(doc,"inquadramento");
 			missingInquadramento = true;
 		}
 		
@@ -277,7 +277,7 @@ public class MetaInquadramentoImpl implements MetaInquadramento, Loggable, Servi
 		boolean missingInquadramento = false;
 		
 		if (inquadramentoNode==null){
-			inquadramentoNode = doc.createElement("inquadramento");
+			inquadramentoNode = UtilDom.createElement(doc,"inquadramento");
 			missingInquadramento = true;
 		}
 		

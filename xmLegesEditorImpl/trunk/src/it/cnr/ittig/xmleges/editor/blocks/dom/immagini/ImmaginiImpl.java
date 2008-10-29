@@ -15,7 +15,6 @@ import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.immagini.Immagini;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 /**
@@ -72,7 +71,6 @@ public class ImmaginiImpl implements Immagini, Loggable, Serviceable {
 
 	public Node insert(Node node, String src, int width, String tipoWidth, int height, String tipoHeight, String alt) {
 
-	//	Document doc = documentManager.getDocumentAsDom();
 
 		try {
 			EditTransaction tr = documentManager.beginEdit();
@@ -107,8 +105,7 @@ public class ImmaginiImpl implements Immagini, Loggable, Serviceable {
 	private boolean insertDOM(Node node, String src, int width, String tipoWidth, int height, String tipoHeight, String alt) {
 		Document doc = documentManager.getDocumentAsDom();
 
-		Element New = doc.createElementNS(UtilDom.getNameSpaceURIforElement(doc.getDocumentElement(), "h"), "h:img");
-		//Element New = doc.createElement("h:img");
+		Node New = UtilDom.createElement(doc, "h:img");
 		UtilDom.setAttributeValue(New, "src", src);
 		if (width>=0)
 			if (tipoWidth.equals("px"))

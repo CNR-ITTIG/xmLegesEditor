@@ -21,7 +21,6 @@ import it.cnr.ittig.xmleges.editor.services.util.urn.Urn;
 import java.util.Vector;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 /**
@@ -70,6 +69,8 @@ public class RinviiImpl implements Rinvii, Loggable, Serviceable {
 	Rinumerazione rinumerazione;
 
 	private Node modified = null;
+	
+	String nirNS = "http://www.normeinrete.it/nir/2.2/";
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -249,13 +250,13 @@ public class RinviiImpl implements Rinvii, Loggable, Serviceable {
 			for (int i = 0; i < id.length; i++)
 				descrizioneMRif[i] = "";
 		}
-
+		
 		Document document = documentManager.getDocumentAsDom();
 
-		Element newMultiCitazione = document.createElement("mrif");
+		Node newMultiCitazione = UtilDom.createElement(document, "mrif");
 
 		for (int i = 0; i < id.length; i++) {
-			Element newCitazione = document.createElement("rif");
+			Node newCitazione = UtilDom.createElement(document, "rif");
 			UtilDom.setAttributeValue(newCitazione, "xlink:href", (id[i]));
 			if (descrizioneMRif[Descrizioneindex].trim().length() > 0)
 				newCitazione.appendChild(document.createTextNode(descrizioneMRif[Descrizioneindex]));
@@ -306,9 +307,9 @@ public class RinviiImpl implements Rinvii, Loggable, Serviceable {
 
 		Document document = documentManager.getDocumentAsDom();
 
-		Element newMultiCitazione = document.createElement("mrif");
+		Node newMultiCitazione = UtilDom.createElement(document, "mrif");
 		for (int i = 0; i < urn.length; i++) {
-			Element newCitazione = document.createElement("rif");
+			Node newCitazione = UtilDom.createElement(document, "rif");
 			UtilDom.setAttributeValue(newCitazione, "xlink:href", urn[i].toString());
 			if (descrizioneMRif[Descrizioneindex].trim().length() > 0)
 				newCitazione.appendChild(document.createTextNode(descrizioneMRif[Descrizioneindex]));
@@ -359,7 +360,7 @@ public class RinviiImpl implements Rinvii, Loggable, Serviceable {
 	private boolean insertDOM(Node node, int start, int end, String id, String text) {
 		Document doc = documentManager.getDocumentAsDom();
 
-		Element NewCitazione = doc.createElement("rif");
+		Node NewCitazione = UtilDom.createElement(doc, "rif");
 		UtilDom.setAttributeValue(NewCitazione, "xlink:href", id);
 		NewCitazione.appendChild(doc.createTextNode("" + text));
 
@@ -389,7 +390,7 @@ public class RinviiImpl implements Rinvii, Loggable, Serviceable {
 
 	private boolean changeDOM(Node node, String id, String text, boolean updateText) {
 
-		Element newCitazione = documentManager.getDocumentAsDom().createElement("rif");
+		Node newCitazione = UtilDom.createElement(documentManager.getDocumentAsDom(), "rif");
 		UtilDom.setAttributeValue(newCitazione, "xlink:href", id);
 		if(! updateText)
 			text = UtilDom.getTextNode(node);

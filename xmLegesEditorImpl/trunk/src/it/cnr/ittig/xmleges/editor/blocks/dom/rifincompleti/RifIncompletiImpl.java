@@ -109,7 +109,7 @@ public class RifIncompletiImpl implements RifIncompleti, Loggable, Serviceable {
 		Node parent = node.getParentNode();
 		Document doc = documentManager.getDocumentAsDom();
 
-		Node tmp = doc.createElement("rif");
+		Node tmp = UtilDom.createElement(doc, "rif");
 		UtilDom.setAttributeValue(tmp, "xlink:href", urn.toString());
 		UtilDom.setTextNode(tmp, text);
      	try{
@@ -127,7 +127,7 @@ public class RifIncompletiImpl implements RifIncompleti, Loggable, Serviceable {
 		Node parent = node.getParentNode();
 		Document doc = documentManager.getDocumentAsDom();
 
-		Node tmp = doc.createElement("rif");
+		Node tmp = UtilDom.createElement(doc, "rif");
 		UtilDom.setAttributeValue(tmp, "xlink:href", rif);
 		UtilDom.setTextNode(tmp, text);
      	try{
@@ -172,7 +172,7 @@ public class RifIncompletiImpl implements RifIncompleti, Loggable, Serviceable {
 				return ritorno;							
 			} else { //Non ho fratelli e/o ho fratelli non text
 					Document doc = documentManager.getDocumentAsDom();					
-					ritorno = doc.createElement(container.getNodeName());
+					ritorno = UtilDom.createElement(doc, container.getNodeName());
 					UtilDom.setTextNode(ritorno, plainText);
 					try{
 						UtilDom.replace(container, ritorno);	

@@ -70,8 +70,7 @@ public class MetaDescrittoriMaterieImpl implements MetaDescrittoriMaterie , Logg
 				if(materieVocab!=null && materieVocab.length>0){
 					vocabTag.removeChild(vocabTag.getChildNodes().item(0));
 					for (int j = 0; j < materieVocab.length; j++) {
-						Element materiaTag;
-						materiaTag = doc.createElement("materia");
+						Node materiaTag = UtilDom.createElement(doc, "materia");
 						UtilDom.setAttributeValue(materiaTag,"valore",vocabolari[i].getMaterie()[j]);
 						utilRulesManager.orderedInsertChild(vocabTag,materiaTag);
 						

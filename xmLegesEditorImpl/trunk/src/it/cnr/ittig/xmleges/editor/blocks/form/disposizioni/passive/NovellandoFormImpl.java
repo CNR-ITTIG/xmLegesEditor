@@ -282,7 +282,7 @@ public class NovellandoFormImpl implements NovellandoForm, EventManagerListener,
 			 else {
 					try {
 						if (activeNode.getNodeName()!=null && rulesManager.queryIsValidAttribute(activeNode.getNodeName(), "iniziovigore")) 
-							if (disposizioni.getTipoDisposizione()==disposizioni.ABROGAZIONE || rulesManager.queryCanAppend(activeNode.getParentNode(), activeNode.getOwnerDocument().createElement(activeNode.getNodeName()))) {
+							if (disposizioni.getTipoDisposizione()==disposizioni.ABROGAZIONE || rulesManager.queryCanAppend(activeNode.getParentNode(), UtilDom.createElement(activeNode.getOwnerDocument(), activeNode.getNodeName()))) {
 								logger.debug("selezione non testo");
 								idSelezionato = UtilDom.getAttributeValueAsString(activeNode, "id");
 								if (idSelezionato==null)

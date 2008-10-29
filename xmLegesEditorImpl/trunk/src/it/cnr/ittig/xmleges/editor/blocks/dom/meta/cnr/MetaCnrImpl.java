@@ -15,7 +15,6 @@ import it.cnr.ittig.xmleges.editor.services.dom.rinumerazione.Rinumerazione;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -135,7 +134,7 @@ public class MetaCnrImpl implements MetaCnr, Loggable, Serviceable {
 			UtilDom.removeAllChildren(cnrNode);
 			
 			for(int i=0;i<elementsName.length;i++){
-				Element toInsertElement = doc.createElement(elementsName[i]);
+				Node toInsertElement = utilRulesManager.getNodeTemplate(elementsName[i]);//UtilDom.createElement(doc,elementsName[i]);
 				if((metadati[i]!=null)&&(!metadati[i].trim().equals("")))
 					UtilDom.setAttributeValue(toInsertElement,"valore",metadati[i]);
 				cnrNode.appendChild((Node)toInsertElement);	

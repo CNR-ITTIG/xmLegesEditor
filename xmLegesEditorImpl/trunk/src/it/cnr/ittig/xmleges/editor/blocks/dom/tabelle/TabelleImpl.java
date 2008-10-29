@@ -383,13 +383,13 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 		 */
 		Node root = documentManager.getDocumentAsDom().getDocumentElement();
 
-		tabella = documentManager.getDocumentAsDom().createElementNS(UtilDom.getNameSpaceURIforElement(root, "h"), "h:table");
+		tabella = UtilDom.createElement(documentManager.getDocumentAsDom(),"h:table");
 
 		if (caption) {
-			Node titolo = tabella.getOwnerDocument().createElementNS(UtilDom.getNameSpaceURIforElement(root, "h"), "h:caption");
+			Node titolo = UtilDom.createElement(documentManager.getDocumentAsDom(),"h:caption");
 
 			try {
-			 	Node nodoTesto = tabella.getOwnerDocument().createElementNS(UtilDom.getNameSpaceURIforElement(root, "h"), "h:caption");
+			 	Node nodoTesto = UtilDom.createElement(documentManager.getDocumentAsDom(),"h:caption");
 			 	
 				if (rulesManager.queryCanAppend(titolo, nodoTesto)) {
 					titolo.appendChild(nodoTesto);
@@ -401,12 +401,12 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 		}
 
 		if (head) {
-			Node intestaz = tabella.getOwnerDocument().createElementNS(UtilDom.getNameSpaceURIforElement(root, "h"), "h:thead");
+			Node intestaz = UtilDom.createElement(documentManager.getDocumentAsDom(),"h:thead");
 			// insertTab(intestaz,1,colonne);
-			Node newrow = tabella.getOwnerDocument().createElementNS(UtilDom.getNameSpaceURIforElement(root, "h"), "h:tr");
+			Node newrow = UtilDom.createElement(documentManager.getDocumentAsDom(),"h:tr");
 			// insertCelle(newrow,colonne);
 			for (int i = 1; i <= colonne; i++) {
-				Node newcell = tabella.getOwnerDocument().createElementNS(UtilDom.getNameSpaceURIforElement(root, "h"), "h:td");
+				Node newcell = UtilDom.createElement(documentManager.getDocumentAsDom(),"h:td");
 				// insertCelle(newrow,colonne);
 				newrow.appendChild(newcell);
 			}
@@ -415,12 +415,12 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 		}
 
 		if (foot) {
-			Node piede = tabella.getOwnerDocument().createElementNS(UtilDom.getNameSpaceURIforElement(root, "h"), "h:tfoot");
+			Node piede = UtilDom.createElement(documentManager.getDocumentAsDom(),"h:tfoot");
 			// insertTab(piede,1,colonne);
-			Node newrow = tabella.getOwnerDocument().createElementNS(UtilDom.getNameSpaceURIforElement(root, "h"), "h:tr");
+			Node newrow = UtilDom.createElement(documentManager.getDocumentAsDom(),"h:tr");
 			// insertCelle(newrow,colonne);
 			for (int i = 1; i <= colonne; i++) {
-				Node newcell = tabella.getOwnerDocument().createElementNS(UtilDom.getNameSpaceURIforElement(root, "h"), "h:td");
+				Node newcell = UtilDom.createElement(documentManager.getDocumentAsDom(),"h:td");
 				// insertCelle(newrow,colonne);
 				newrow.appendChild(newcell);
 			}
@@ -429,7 +429,7 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 
 		}
 
-		Node corpo = tabella.getOwnerDocument().createElementNS(UtilDom.getNameSpaceURIforElement(root, "h"), "h:tbody");
+		Node corpo = UtilDom.createElement(documentManager.getDocumentAsDom(),"h:tbody");
 		insertTab(corpo, righe, colonne);
 		tabella.appendChild(corpo);
 		return tabella;
@@ -462,9 +462,9 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 			logger.debug("numero di celle della nuova riga: " + numCelle);
 
 			// crea una nuova riga;
-			Node nuovaRiga = pos.getOwnerDocument().createElementNS(UtilDom.getNameSpaceURIforElement(pos, "h"), "h:tr");
+			Node nuovaRiga = UtilDom.createElement(pos.getOwnerDocument(),"h:tr");
 			for (int i = 0; i < numCelle; i++) {
-				Node nuovaCella = pos.getOwnerDocument().createElementNS(UtilDom.getNameSpaceURIforElement(pos, "h"), "h:td");
+				Node nuovaCella = UtilDom.createElement(pos.getOwnerDocument(),"h:td");
 				nuovaRiga.appendChild(nuovaCella);
 			}
 
@@ -644,7 +644,7 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 					NodeList fg = htr.getChildNodes();// lista delle righe
 					for (int i = 0; i < fg.getLength(); i++) {
 						NodeList np = fg.item(i).getChildNodes(); // lista colonne
-						Node nuovaCella = pos.getOwnerDocument().createElementNS(UtilDom.getNameSpaceURIforElement(pos, "h"), "h:td");
+						Node nuovaCella = UtilDom.createElement(pos.getOwnerDocument(),"h:td");
 
 						if (appendi) {
 							fg.item(i).insertBefore(nuovaCella, np.item(indice + 1));
@@ -759,7 +759,7 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 	protected Node insertTab(Node inizio, int righe, int colonne) {
 
 		for (int i = 1; i <= righe; i++) {
-			Node newrow = inizio.getOwnerDocument().createElementNS(UtilDom.getNameSpaceURIforElement(inizio, "h"), "h:tr");
+			Node newrow = UtilDom.createElement(inizio.getOwnerDocument(),"h:tr");
 			insertCelle(newrow, colonne);
 			inizio.appendChild(newrow);
 		}
@@ -770,7 +770,7 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 	protected Node insertCelle(Node riga, int colonne) {
 
 		for (int h = 1; h <= colonne; h++) {
-			Node newcell = riga.getOwnerDocument().createElementNS(UtilDom.getNameSpaceURIforElement(riga, "h"), "h:td");
+			Node newcell = UtilDom.createElement(riga.getOwnerDocument(),"h:td");
 			riga.appendChild(newcell);
 		}
 		return riga;

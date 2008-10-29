@@ -86,7 +86,7 @@ public class MetaUrnDocumentoImpl implements MetaUrnDocumento, Loggable, Service
 
 				Node next = urnNode;
 				for (int i = 1; i < urn.length; i++) {
-					urnNode = doc.createElement("urn");
+					urnNode = UtilDom.createElement(doc,"urn");
 					UtilDom.setAttributeValue(urnNode,"valore", urn[i].toString());
 					UtilDom.insertAfter(urnNode, next);
 					next = urnNode;
@@ -158,7 +158,7 @@ public class MetaUrnDocumentoImpl implements MetaUrnDocumento, Loggable, Service
 			} else { // ci sono gia' degli emananti
 				NodeList emanantiList = doc.getElementsByTagName("emanante");
 				emanante = emanantiList.item(emanantiList.getLength() - 1);
-				newEmanante = doc.createElement("emanante");
+				newEmanante = UtilDom.createElement(doc,"emanante");
 				UtilDom.insertAfter(newEmanante, emanante);
 				emanante = newEmanante;
 			}
@@ -170,7 +170,7 @@ public class MetaUrnDocumentoImpl implements MetaUrnDocumento, Loggable, Service
 					String newAutorita = regAutorita.getNomeIstituzioneFromUrnIstituzione((String) auto.get(j));
 					if (!findEmanante(doc, newAutorita)) {
 						UtilDom.setTextNode(emanante, newAutorita);
-						newEmanante = doc.createElement("emanante");
+						newEmanante = UtilDom.createElement(doc,"emanante");
 						UtilDom.insertAfter(newEmanante, emanante);
 						emanante = newEmanante;
 					}

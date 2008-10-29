@@ -279,7 +279,7 @@ public class SpostamentoImpl implements Spostamento, Loggable, Serviceable {
 		logger.debug(node.getNodeName() + " upgraded to " + parent.getNodeName());
 
 		// cambio il contenitore di node
-		newElement = (Node) doc.createElement(parent.getNodeName());
+		newElement = UtilDom.createElement(doc, parent.getNodeName());
 		
 		// assegna a newElement tutti gli attributi che aveva node; (ad esempio per preservare la vigenza)
 		UtilDom.replaceAttributes(newElement,node);
@@ -297,7 +297,7 @@ public class SpostamentoImpl implements Spostamento, Loggable, Serviceable {
 			if (!rulesManager.queryIsValid(parent)) { // il nodo
 				// contenitore ha
 				// perso validita'
-				Node corpo = (Node) doc.createElement("corpo");
+				Node corpo = UtilDom.createElement(doc, "corpo");
 				Node alinea = UtilDom.findDirectChild(parent, "alinea");
 				if (alinea != null) {
 					children = UtilDom.getAllChildElements(alinea);
@@ -342,7 +342,7 @@ public class SpostamentoImpl implements Spostamento, Loggable, Serviceable {
 
 	private Node changeTag(Node node, String newTag) {
 		Document doc = node.getOwnerDocument();
-		Node newElement = doc.createElement(newTag);
+		Node newElement = UtilDom.createElement(doc, newTag);
 		Vector children = UtilDom.getAllChildElements(node);
 		for (int i = 0; i < children.size(); i++)
 			newElement.appendChild((Node) children.get(i));
@@ -368,7 +368,7 @@ public class SpostamentoImpl implements Spostamento, Loggable, Serviceable {
 		logger.debug(node.getNodeName() + " downgraded  to " + newEl);
 
 		// cambio il contenitore di node
-		newElement = (Node) doc.createElement(newEl);
+		newElement = UtilDom.createElement(doc, newEl);
 		
 		// assegna a newElement tutti gli attributi che aveva node; (ad esempio per preservare la vigenza)
 		UtilDom.replaceAttributes(newElement,node);
@@ -387,7 +387,7 @@ public class SpostamentoImpl implements Spostamento, Loggable, Serviceable {
 		try {
 			if (!hasAlinea(brother)) { // se il fratello a cui appendere non ha
 				// l'alinea
-				Node alinea = (Node) doc.createElement("alinea");
+				Node alinea = UtilDom.createElement(doc, "alinea");
 				Node corpo = UtilDom.findDirectChild(brother, "corpo");
 				children = UtilDom.getAllChildElements(corpo);
 				for (int i = 0; i < children.size(); i++)

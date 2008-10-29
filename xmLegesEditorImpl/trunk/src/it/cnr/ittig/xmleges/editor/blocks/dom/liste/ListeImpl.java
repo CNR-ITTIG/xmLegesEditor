@@ -329,12 +329,6 @@ public class ListeImpl implements Liste, Loggable, Serviceable, Configurable, In
 	public Node creaLista(Node node, String tipolista) {
 
 		lista = utilRulesManager.getNodeTemplate(tipolista);
-		// lista = documentManager.getDocumentAsDom().createElement("h:ul");
-		/*
-		 * for (int i=1; i<=numeroElem; i++ ){ Node newelem =
-		 * lista.getOwnerDocument().createElement("h:li");
-		 * lista.appendChild(newelem); }
-		 */
 		return lista;
 	}
 
@@ -345,14 +339,7 @@ public class ListeImpl implements Liste, Loggable, Serviceable, Configurable, In
 
 	public Node creaListaDEF(Node node) {
 
-		lista = documentManager.getDocumentAsDom().createElement("h:dl");
-		/*
-		 * for (int i=1; i<=numeroElem; i++ ){ Node newelemDT =
-		 * lista.getOwnerDocument().createElement("h:dt");
-		 * lista.appendChild(newelemDT); Node newelemDD =
-		 * lista.getOwnerDocument().createElement("h:dd");
-		 * lista.appendChild(newelemDD); }
-		 */
+		lista = UtilDom.createElement(documentManager.getDocumentAsDom(),"h:dl");
 		return lista;
 	}
 

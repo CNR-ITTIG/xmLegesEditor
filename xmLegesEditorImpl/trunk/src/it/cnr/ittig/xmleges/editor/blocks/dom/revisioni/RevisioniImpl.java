@@ -763,20 +763,14 @@ public class RevisioniImpl implements Revisioni, Loggable, Serviceable {
 	 */
 	private Node makeModStruttura(Document newDoc, String str1, Node nNode, String tipo) {
 		Node newComma = utilRulesManager.getNodeTemplate(newDoc, "comma"); // va
-		// bene
-		// anche
-		// se
-		// il
-		// primo
-		// ï¿½
-		// vuoto?
+		// bene anche se il primo è vuoto?
 		Node newCorpo = UtilDom.findDirectChild(newComma, "corpo");
 		Node newMod = utilRulesManager.getNodeTemplate(newDoc, "mod");
 		Node newVirg = null, txt = null, node = null;
 		// Copia e importa il nodo sul nuovo documento per essere attaccato
 		// sotto <virgolette>
 		if (nNode != null) {
-			node = newDoc.createElement(tipo);
+			node = UtilDom.createElement(newDoc,tipo);
 			node = nNode.cloneNode(true);
 			node = newDoc.importNode(nNode, true);
 			node = getFinalVersion(node); // rimuove gli
