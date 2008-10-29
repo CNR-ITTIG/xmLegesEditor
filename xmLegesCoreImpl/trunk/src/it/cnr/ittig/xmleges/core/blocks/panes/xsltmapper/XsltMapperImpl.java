@@ -21,9 +21,12 @@ import java.util.Hashtable;
 
 import javax.swing.JEditorPane;
 
-import org.apache.xpath.NodeSet;
+
+//era   import org.apache.xpath.NodeSet;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import com.sun.org.apache.xpath.internal.NodeSet;
 
 /**
  * <h1>Implementazione del servizio
