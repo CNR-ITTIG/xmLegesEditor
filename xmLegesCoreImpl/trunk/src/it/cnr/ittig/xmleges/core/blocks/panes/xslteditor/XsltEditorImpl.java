@@ -232,10 +232,9 @@ public class XsltEditorImpl implements XsltEditor, Pane, Loggable, Serviceable, 
 			xsltPane.set(xslt, css, paramPanel.getParams());
 			try {
 				UtilXslt.remove(xslt);	//rimuovo il file altrimenti riprende "il vecchio" dalla cache
-				Node node = UtilXslt.applyXslt(documentManager.getDocumentAsDom(), xslt);
-				convTextArea.setText(UtilDom.domToString(node,true,"\t",false));
+				convTextArea.setText(UtilXslt.serializedApplyXslt(documentManager.getDocumentAsDom(), xslt));
 			} catch (Exception ex) {
-				// TODO MSG
+				System.err.println(ex.toString());
 				logger.error(ex.toString(), ex);
 			}
 			tabbedPane.setSelectedIndex(4);
