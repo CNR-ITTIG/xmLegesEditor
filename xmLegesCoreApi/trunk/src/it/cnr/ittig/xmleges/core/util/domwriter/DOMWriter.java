@@ -1,6 +1,7 @@
 package it.cnr.ittig.xmleges.core.util.domwriter;
 
 import it.cnr.ittig.xmleges.core.util.lang.UtilLang;
+import it.cnr.ittig.xmleges.core.util.xslt.UtilXslt;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -166,202 +167,224 @@ public class DOMWriter {
 		return this.expandEmptyTag;
 	}
 
-	/** Writes the specified node, recursively. */
-	public void write(Node node) {
-		if (node == null) {
-			return;
-		}
-		tabLevel++;
+	
+	
+	/** Writes serialized Document */
+	public void write(String serializedDoc){
+		fOut.print(serializedDoc);
+		fOut.flush();
+	}
+	
+	
 
-		short type = node.getNodeType();
-		switch (type) {
-		case Node.DOCUMENT_NODE: {
-			Document document = (Document) node;
-			if (!isCanonical()) {
-				addTabs();
-				fOut.println("<?xml version=\"1.0\" encoding=\"" + charEncoding + "\"?>");
-				fOut.flush();
-				write(document.getDoctype());
-			}
-			write(document.getDocumentElement());
-			break;
-		}
-
-		case Node.DOCUMENT_TYPE_NODE: {
-			addTabs();
-			DocumentType doctype = (DocumentType) node;
-			fOut.print("<!DOCTYPE ");
-			fOut.print(doctype.getName());
-			String publicId = doctype.getPublicId();
-			String systemId = doctype.getSystemId();
-			if (publicId != null) {
-				fOut.print(" PUBLIC '");
-				fOut.print(publicId);
-				fOut.print("' '");
-				fOut.print(systemId);
-				fOut.print('\'');
-			} else {
-				fOut.print(" SYSTEM '");
-				fOut.print(systemId);
-				fOut.print('\'');
-			}
-			String internalSubset = doctype.getInternalSubset();
-			if (internalSubset != null) {
-				fOut.println(" [");
-				fOut.print(internalSubset);
-				fOut.print(']');
-			}
-			fOut.println('>');
-			break;
-		}
-
-		case Node.ELEMENT_NODE: {
-			addTabs();
-			fOut.print('<');
-			fOut.print(node.getNodeName());
-			Attr attrs[] = sortAttributes(node.getAttributes());
-			for (int i = 0; i < attrs.length; i++) {
-				Attr attr = attrs[i];
-
-				if (!isXmlns() && attr.getNodeName().indexOf("xmlns") != -1)
-					continue;
-
-				// Modifica eseguita da Andrea Marchetti il 30-10-2003
-				// Il problema nasce dalla routine getAttributes che
-				// recupera sia gli attributi presenti nell'elemento
-				// che quelli dichiarati di tipo default dalla DTD.
-				// Il problema nasce dal fatto che non si preoccupa se
-				// nell'elemento l'attributo di tipo default gi? compariva
-				// In questo caso lo replica.
-				if (i > 0 && attrs[i].getNodeName().compareTo(attrs[i - 1].getNodeName()) == 0)
-					continue; // salta gli eventuali attributi doppioni
-				else {
-					fOut.print(' ');
-					fOut.print(attr.getNodeName());
-					fOut.print("=\"");
-					normalizeAndPrint(attr.getNodeValue());
-					fOut.print('"');
-				}
-			}
-
-			if (!isExpandEmptyTag() && isEmpty(node))
-				fOut.println(" />");
-			else {
-
-				if (node.getChildNodes().getLength() == 1 && node.getFirstChild().getNodeType() == Node.TEXT_NODE) {
-					fOut.print('>');
-					normalizeAndPrint(getText(node.getFirstChild()));
-					fOut.print("</");
-					fOut.print(node.getNodeName());
-					if (isFormat())
-						fOut.println('>');
-					else
-						fOut.print('>');
-
-				} else {
-					if (isFormat())
-						fOut.println('>');
-					else
-						fOut.print('>');
-
-					for (Node child = node.getFirstChild(); child != null; child = child.getNextSibling())
-						write(child);
-
-					addTabs();
-					fOut.print("</");
-					fOut.print(node.getNodeName());
-					if (isFormat())
-						fOut.println('>');
-					else
-						fOut.print('>');
-				}
-				fOut.flush();
-			}
-
-			fOut.flush();
-
-			break;
-		}
-
-		case Node.ENTITY_REFERENCE_NODE: {
-			if (isCanonical()) {
-				for (Node child = node.getFirstChild(); child != null; child = child.getNextSibling())
-					write(child);
-			} else {
-				fOut.print('&');
-				fOut.print(node.getNodeName());
-				fOut.print(';');
-				fOut.flush();
-			}
-			break;
-		}
-
-		case Node.CDATA_SECTION_NODE: {
-			// modifica inserita da Alessio Ceroni: elimina dal nodo di
-			// testo
-			// i caratteri di spaziatura iniziali e finali
-			String text = getText(node);
-
-			if (isCanonical()) {
-				if (text.length() > 0) {
-					addTabs();
-					normalizeAndPrint(text);
-					fOut.println();
-				}
-			} else {
-				fOut.print("<![CDATA[");
-				fOut.print(text);
-				if (isFormat())
-					fOut.println("]]>");
-				else
-					fOut.print("]]>");
-			}
-			fOut.flush();
-			break;
-		}
-
-		case Node.TEXT_NODE: {
-			// modifica inserita da Alessio Ceroni: elimina dal nodo di
-			// testo
-			// i caratteri di spaziatura iniziali e finali
-			if (format) {
-				String text = getText(node);
-				if (text.length() > 0) {
-					addTabs();
-					normalizeAndPrint(text);
-					fOut.println();
-				}
-			} else
-				normalizeAndPrint(node.getNodeValue());
-			fOut.flush();
-			break;
-		}
-
-		case Node.PROCESSING_INSTRUCTION_NODE: {
-			addTabs();
-			fOut.print("<?");
-			fOut.print(node.getNodeName());
-			String data = node.getNodeValue();
-			if (data != null && data.length() > 0) {
-				fOut.print(' ');
-				fOut.print(data);
-			}
-			fOut.println("?>");
-			fOut.flush();
-			break;
-		}
-
-		case Node.COMMENT_NODE: {
-			fOut.print("<!--");
-			fOut.print(node.getNodeValue());
-			fOut.println("-->");
-			fOut.flush();
-			break;
-		}
-		}
-
-		tabLevel--;
-	} // write(Node)
+	
+	/** Serialize and Writes Node */
+	public void write(Node node){
+		fOut.print(UtilXslt.serializeXML(node,format,charEncoding));
+		fOut.flush();
+	}
+	
+	
+//	/** Writes the specified node, recursively. */
+//	@Deprecated
+//	public void write(Node node) {
+//		if (node == null) {
+//			return;
+//		}
+//		tabLevel++;
+//
+//		short type = node.getNodeType();
+//		switch (type) {
+//		case Node.DOCUMENT_NODE: {
+//			Document document = (Document) node;
+//			if (!isCanonical()) {
+//				addTabs();
+//				fOut.println("<?xml version=\"1.0\" encoding=\"" + charEncoding + "\"?>");
+//				fOut.flush();
+//				write(document.getDoctype());
+//			}
+//			write(document.getDocumentElement());
+//			break;
+//		}
+//
+//		case Node.DOCUMENT_TYPE_NODE: {
+//			addTabs();
+//			DocumentType doctype = (DocumentType) node;
+//			fOut.print("<!DOCTYPE ");
+//			fOut.print(doctype.getName());
+//			String publicId = doctype.getPublicId();
+//			String systemId = doctype.getSystemId();
+//			if (publicId != null) {
+//				fOut.print(" PUBLIC '");
+//				fOut.print(publicId);
+//				fOut.print("' '");
+//				fOut.print(systemId);
+//				fOut.print('\'');
+//			} else {
+//				fOut.print(" SYSTEM '");
+//				fOut.print(systemId);
+//				fOut.print('\'');
+//			}
+//			String internalSubset = doctype.getInternalSubset();
+//			if (internalSubset != null) {
+//				fOut.println(" [");
+//				fOut.print(internalSubset);
+//				fOut.print(']');
+//			}
+//			fOut.println('>');
+//			break;
+//		}
+//
+//		case Node.ELEMENT_NODE: {
+//			addTabs();
+//			fOut.print('<');
+//			fOut.print(node.getNodeName());
+//			Attr attrs[] = sortAttributes(node.getAttributes());
+//			for (int i = 0; i < attrs.length; i++) {
+//				Attr attr = attrs[i];
+//
+//				if (!isXmlns() && attr.getNodeName().indexOf("xmlns") != -1)
+//					continue;
+//
+//				// Modifica eseguita da Andrea Marchetti il 30-10-2003
+//				// Il problema nasce dalla routine getAttributes che
+//				// recupera sia gli attributi presenti nell'elemento
+//				// che quelli dichiarati di tipo default dalla DTD.
+//				// Il problema nasce dal fatto che non si preoccupa se
+//				// nell'elemento l'attributo di tipo default gi? compariva
+//				// In questo caso lo replica.
+//				if (i > 0 && attrs[i].getNodeName().compareTo(attrs[i - 1].getNodeName()) == 0)
+//					continue; // salta gli eventuali attributi doppioni
+//				else {
+//					fOut.print(' ');
+//					fOut.print(attr.getNodeName());
+//					fOut.print("=\"");
+//					normalizeAndPrint(attr.getNodeValue());
+//					fOut.print('"');
+//				}
+//			}
+//
+//			if (!isExpandEmptyTag() && isEmpty(node))
+//				fOut.println(" />");
+//			else {
+//
+//				if (node.getChildNodes().getLength() == 1 && node.getFirstChild().getNodeType() == Node.TEXT_NODE) {
+//					fOut.print('>');
+//					normalizeAndPrint(getText(node.getFirstChild()));
+//					fOut.print("</");
+//					fOut.print(node.getNodeName());
+//					if (isFormat())
+//						fOut.println('>');
+//					else
+//						fOut.print('>');
+//
+//				} else {
+//					if (isFormat())
+//						fOut.println('>');
+//					else
+//						fOut.print('>');
+//
+//					for (Node child = node.getFirstChild(); child != null; child = child.getNextSibling())
+//						write(child);
+//
+//					addTabs();
+//					fOut.print("</");
+//					fOut.print(node.getNodeName());
+//					if (isFormat())
+//						fOut.println('>');
+//					else
+//						fOut.print('>');
+//				}
+//				fOut.flush();
+//			}
+//
+//			fOut.flush();
+//
+//			break;
+//		}
+//
+//		case Node.ENTITY_REFERENCE_NODE: {
+//			
+//			System.out.println("***************   ENTITY FOUND");
+//			
+//			if (isCanonical()) {
+//				for (Node child = node.getFirstChild(); child != null; child = child.getNextSibling())
+//					write(child);
+//			} else {
+//				fOut.print('&');
+//				fOut.print(node.getNodeName());
+//				fOut.print(';');
+//				fOut.flush();
+//			}
+//			break;
+//		}
+//
+//		case Node.CDATA_SECTION_NODE: {
+//			// modifica inserita da Alessio Ceroni: elimina dal nodo di
+//			// testo
+//			// i caratteri di spaziatura iniziali e finali
+//			String text = getText(node);
+//
+//			if (isCanonical()) {
+//				if (text.length() > 0) {
+//					addTabs();
+//					normalizeAndPrint(text);
+//					fOut.println();
+//				}
+//			} else {
+//				fOut.print("<![CDATA[");
+//				fOut.print(text);
+//				if (isFormat())
+//					fOut.println("]]>");
+//				else
+//					fOut.print("]]>");
+//			}
+//			fOut.flush();
+//			break;
+//		}
+//
+//		case Node.TEXT_NODE: {
+//			// modifica inserita da Alessio Ceroni: elimina dal nodo di
+//			// testo
+//			// i caratteri di spaziatura iniziali e finali
+//			if (format) {
+//				String text = getText(node);
+//				if (text.length() > 0) {
+//					addTabs();
+//					normalizeAndPrint(text);
+//					fOut.println();
+//				}
+//			} else
+//				normalizeAndPrint(node.getNodeValue());
+//			fOut.flush();
+//			break;
+//		}
+//
+//		case Node.PROCESSING_INSTRUCTION_NODE: {
+//			addTabs();
+//			fOut.print("<?");
+//			fOut.print(node.getNodeName());
+//			String data = node.getNodeValue();
+//			if (data != null && data.length() > 0) {
+//				fOut.print(' ');
+//				fOut.print(data);
+//			}
+//			fOut.println("?>");
+//			fOut.flush();
+//			break;
+//		}
+//
+//		case Node.COMMENT_NODE: {
+//			fOut.print("<!--");
+//			fOut.print(node.getNodeValue());
+//			fOut.println("-->");
+//			fOut.flush();
+//			break;
+//		}
+//		}
+//
+//		tabLevel--;
+//	} // write(Node)
 
 	/** Returns a sorted list of attributes. */
 	protected Attr[] sortAttributes(NamedNodeMap attrs) {

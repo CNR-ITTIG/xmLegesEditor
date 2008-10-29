@@ -3,7 +3,6 @@ package it.cnr.ittig.xmleges.core.util.xslt;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.PrintWriter;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
@@ -17,9 +16,8 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-
-import com.sun.org.apache.xalan.internal.xslt.EnvironmentCheck;
 
 /**
  * Classe di utilit&agrave; per l'applicazione dei fogli di stile a un documento
@@ -63,8 +61,16 @@ public class UtilXslt {
 	 */
 	protected static Transformer getTransformerFor(File xslt) throws TransformerException{
 	
+//	    String key = "javax.xml.transform.TransformerFactory";
+//	    String value = "org.apache.xalan.xsltc.trax.TransformerFactoryImpl";
+//	    Properties props = System.getProperties();
+//	    props.put(key, value);
+//	    System.setProperties(props); 
+		
+		
 		// CHECK ENVIRONMENT: 
 		//boolean environmentOK = (new EnvironmentCheck()).checkEnvironment (new PrintWriter(System.out));
+		
 
 		Transformer tr;
 		if (transformers.containsKey(xslt) && cache) {
@@ -72,7 +78,7 @@ public class UtilXslt {
 		} else {
 			TransformerFactory factory = TransformerFactory.newInstance();
 			
-			factory.setAttribute("http://xml.apache.org/xalan/features/incremental",Boolean.TRUE);
+			//factory.setAttribute("http://xml.apache.org/xalan/features/incremental",Boolean.TRUE);
 			/*
 			 * http://xml.apache.org/xalan-j/features.html#factoryfeature
 			 * 
@@ -92,23 +98,29 @@ public class UtilXslt {
 			
 			tr = factory.newTransformer(new StreamSource(xslt));
 			
-			tr.setOutputProperty(OutputKeys.METHOD, "html");		  
-			tr.setOutputProperty(OutputKeys.INDENT, "no");
-		    tr.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-			tr.setOutputProperty(OutputKeys.ENCODING, "ISO-8859-15");
+			
+			
+//			 for "XHTML" serialization, use the output method "xml"
+//			 and set publicId as shown
+//			 tr.setOutputProperty(OutputKeys.METHOD, "xml");
+//			 tr.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC,"-//W3C//DTD XHTML 1.0 Transitional//EN");
+//			 tr.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM,"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd");
+			
+						
+//			 For "HTML" serialization, use	
+			tr.setOutputProperty(OutputKeys.METHOD, "html");
 			tr.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, "-//W3C//DTD HTML 4.01 Transitional//EN");
 			tr.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd");
+			
+			
+			tr.setOutputProperty(OutputKeys.INDENT, "yes");
+		    tr.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+		    // default "ISO-8859-15"
+			tr.setOutputProperty(OutputKeys.ENCODING, "ISO-8859-15");
+			
+
 
 			transformers.put(xslt, tr);
-
-			//Boolean isStreamSource = (Boolean) factory.getFeature("http://javax.xml.transform.stream.StreamSource/feature");
-			//Boolean isStreamResult = (Boolean) factory.getFeature("http://javax.xml.transform.stream.StreamResult/feature");
-			
-			//if(isStreamSource)
-			//	System.err.println("Stream source supported");
-			//if(isStreamResult)
-			//	System.err.println("Stream result supported");
-
 		}
 		return tr; 
 	}
@@ -262,13 +274,7 @@ public class UtilXslt {
 	 *         applicabile
 	 */
 	public static String serializedApplyXslt(Node node, File xslt, String encoding) throws TransformerException {
-		// FIXME w/a per problemi di setOutputProperties in Xalan
-		Hashtable enc = null;
-		if(encoding != null){
-		 enc = new Hashtable(1);
-		 enc.put("encoding",encoding);
-		}
-		return serializedApplyXslt(node, xslt, enc, encoding);
+		return serializedApplyXslt(node, xslt, null, encoding);
 	}
 
 	
@@ -285,7 +291,7 @@ public class UtilXslt {
 	 *         applicabile
 	 */
 	public static String serializedApplyXslt(Node node, File xslt, Hashtable param) throws TransformerException {
-		return serializedApplyXslt(getTransformerFor(xslt), node, param);
+		return serializedApplyXslt(node,xslt,param,null);
 	}
 	
 	
@@ -322,7 +328,6 @@ public class UtilXslt {
 
 		if(encoding != null){
 			try{
-			  param.put("encoding",encoding);  
 			  tr.setOutputProperty(OutputKeys.ENCODING,encoding.toUpperCase());
 			}
 			catch(IllegalArgumentException e){
@@ -355,6 +360,8 @@ public class UtilXslt {
 	}
 	
 	
+	
+	
 	////////////////////////////////////////////////////////////////////////////////
 	//
 	////////////////////////////////////////////////////////////////////////////////
@@ -383,6 +390,59 @@ public class UtilXslt {
 	public static void remove(File xslt) {
 		transformers.remove(xslt);
 	}
+	
+	
+	
+	/**
+	 * Sostituisce UtilDom.domToString e DOMWriter.write utilizzando un Transformer identity
+	 * @param doc
+	 * @param format
+	 * @param encoding
+	 * @return
+	 */
+	public static String serializeXML(Node node, boolean format, String encoding) {
+		
+		
+		Transformer identityTr;
+		TransformerFactory factory = TransformerFactory.newInstance();
+		
+		try{	
+			identityTr = factory.newTransformer();
+			identityTr.setOutputProperty(OutputKeys.METHOD, "xml");	
+			
+			if(format)
+				identityTr.setOutputProperty(OutputKeys.INDENT, "yes");
+			else
+				identityTr.setOutputProperty(OutputKeys.INDENT, "no");
+			
+			
+			if(node instanceof Document){ // serialize document
+				identityTr.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
+				if(((Document)node).getDoctype()!=null)   // i documenti con xml-schema non hanno il docType
+					identityTr.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, ((Document)node).getDoctype().getSystemId());
+			}
+			else 						  // serialize node
+				identityTr.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+			
+			
+			System.err.println("serializing node with character encoding: "+encoding);
+			identityTr.setOutputProperty(OutputKeys.ENCODING,encoding);
+			
+			
+			DOMSource source = new DOMSource(node);
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			Result result = new StreamResult(baos);
+			identityTr.transform(source, result);
+			return baos.toString(encoding);
+			
+		}catch(Exception e){
+			//e.printStackTrace();
+			System.err.println(e.getMessage());
+			return null;
+		}	
+	}
+	
+	
 	
 	
 	
