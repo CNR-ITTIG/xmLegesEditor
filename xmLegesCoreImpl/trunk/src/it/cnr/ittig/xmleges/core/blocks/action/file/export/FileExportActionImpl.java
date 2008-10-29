@@ -282,7 +282,7 @@ public class FileExportActionImpl implements FileExportAction, EventManagerListe
 			DOMWriter domWriter = new DOMWriter();
 			domWriter.setCanonical(true);
 			domWriter.setFormat(false);
-			domWriter.setOutput(dest);
+			domWriter.setOutput(dest,documentManager.getEncoding());
 			
 			Node res = UtilXslt.applyXslt(documentManager.getDocumentAsDom(), xslt, documentManager.getEncoding());
 			domWriter.write(res);
