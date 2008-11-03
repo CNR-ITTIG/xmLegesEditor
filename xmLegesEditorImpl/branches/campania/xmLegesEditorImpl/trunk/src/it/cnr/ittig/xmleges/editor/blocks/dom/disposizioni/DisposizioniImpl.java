@@ -197,7 +197,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 				UtilDom.setAttributeValue(operazioneNode, "implicita", "si");
 			else
 				UtilDom.setAttributeValue(operazioneNode, "implicita", "no");				
-			
+			UtilDom.setAttributeValue(operazioneNode, "completa", "si");
 			//modifichepassiveNode.appendChild(operazioneNode);
 			modifichepassiveNode.insertBefore(operazioneNode,metaAfter);
 			
@@ -211,7 +211,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 					UtilDom.setAttributeValue(operazioneNode, "implicita", "si");
 				else
 					UtilDom.setAttributeValue(operazioneNode, "implicita", "no");
-				
+				UtilDom.setAttributeValue(operazioneNode, "completa", "si");
 				//modifichepassiveNode.appendChild(operazioneNode);
 				modifichepassiveNode.insertBefore(operazioneNode,metaAfter);
 		
@@ -224,7 +224,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 					UtilDom.setAttributeValue(operazioneNode, "implicita", "si");
 				else
 					UtilDom.setAttributeValue(operazioneNode, "implicita", "no");
-				
+				UtilDom.setAttributeValue(operazioneNode, "completa", "si");
 				//modifichepassiveNode.appendChild(operazioneNode);
 				modifichepassiveNode.insertBefore(operazioneNode,metaAfter);
 		
@@ -842,7 +842,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 	 *   PARTE DISPOSIZIONI ATTIVE. 
 	 */
 	
-	public Node setDOMDispAttive(Node metaDaModificare, String idMod, int operazioneIniziale, String completa, boolean condizione, String decorrenza, String idevento, String norma, String partizione, String[] delimitatori) {
+	public Node setDOMDispAttive(boolean implicita, Node metaDaModificare, String idMod, int operazioneIniziale, String completa, boolean condizione, String decorrenza, String idevento, String norma, String partizione, String[] delimitatori) {
 				
 		Document doc = documentManager.getDocumentAsDom();		
 		Node activeMeta = nirUtilDom.findActiveMeta(doc,null);
@@ -870,7 +870,10 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		else if (operazioneIniziale==DispAttiveFormImpl.ABROGAZIONE)
 			operazioneNode = utilRulesManager.getNodeTemplate(doc,"dsp:abrogazione");
 		UtilDom.setAttributeValue(operazioneNode, "completa", completa);
-		UtilDom.setAttributeValue(operazioneNode, "implicita", "si");	//imposto sempre a SI
+		if (implicita)
+			UtilDom.setAttributeValue(operazioneNode, "implicita", "si");
+		else
+			UtilDom.setAttributeValue(operazioneNode, "implicita", "no");	
 		modificheattiveNode.appendChild(operazioneNode);
 		//Pos -- indica il mod.
 		Node nodo = UtilDom.findDirectChild(operazioneNode, "dsp:pos");
