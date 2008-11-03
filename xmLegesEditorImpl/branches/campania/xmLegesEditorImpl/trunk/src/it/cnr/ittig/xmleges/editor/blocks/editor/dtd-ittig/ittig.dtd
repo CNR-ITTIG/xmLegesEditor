@@ -1,7 +1,7 @@
 
 <!ENTITY % ittigNS  "xmlns:ittig CDATA #FIXED 'http://www.ittig.cnr.it/provvedimenti/2.2'" >
-<!ENTITY % ittigtipo "(atto|allegato|libro|parte|titolo|capo|sezione|articolo|comma|alinea|lettera|numero|punto|periodo|parole)" >
-<!ENTITY % ittigdove "(prima|dopo|inizio|fine)" >
+<!ENTITY % ittigtipo "(atto|allegato|libro|parte|titolo|capo|sezione|articolo|comma|alinea|coda|lettera|numero|punto|periodo|parole|capoverso)" >
+<!ENTITY % ittigdove "(prima|dopo|inizio|fine|fra-prima|fra-dopo)" >
 <!ENTITY % ittigruolo "(da|a|prima|dopo)" >
 <!ENTITY % ittigordinale "(si|no)" >
 
