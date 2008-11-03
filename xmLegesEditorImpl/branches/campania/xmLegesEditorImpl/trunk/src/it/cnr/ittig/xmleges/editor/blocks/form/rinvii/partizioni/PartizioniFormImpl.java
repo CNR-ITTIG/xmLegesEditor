@@ -182,6 +182,7 @@ public class PartizioniFormImpl implements PartizioniForm, Loggable, Serviceable
 		combo.addItem("Comma");
 		combo.addItem("Lettera");
 		combo.addItem("Numero");
+		combo.addItem("Punto");
 	}
 
 	public String getPartizioneEstesa() {
@@ -986,7 +987,7 @@ public class PartizioniFormImpl implements PartizioniForm, Loggable, Serviceable
 					|| partizione.equals("Sezione"))
 				return (isRomanOrArabo(numero, true));
 			else {
-				if (partizione.equals("Articolo") || partizione.equals("Comma") || partizione.equals("Numero"))
+				if (partizione.equals("Punto") || partizione.equals("Articolo") || partizione.equals("Comma") || partizione.equals("Numero"))
 					return (isArabo(numero, true));
 				else
 					return (isLettera(numero, true));
