@@ -274,7 +274,7 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 		NodeList disposizioni = radice.getChildNodes();
 		EditTransaction t = null;
 		try {
-				
+			form.setDialogWaiting(true);	
 			int conta = 0;
 			for (int i=0; i<disposizioni.getLength(); i++) {
 				if (disposizioni.item(i).getNodeType()==Node.TEXT_NODE)
@@ -283,8 +283,10 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 				t = documentManager.beginEdit();
 				
 				if (!analizzaMeta(doc, disposizioni.item(i))) {
+					form.setDialogWaiting(false);
 					utilMsg.msgError("Errore durante l'inserimento dei metadati.\nNon so valutare la " + conta +"° disposizione:\n\n"+UtilDom.domToString(disposizioni.item(i),true,"   "));
 					documentManager.rollbackEdit(t);	//non funziona
+					form.setDialogWaiting(true);
 				}
 				else {
 					documentManager.setChanged(true);
@@ -294,7 +296,8 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 		} catch (DocumentManagerException e) {
 			logger.error(e.getMessage());
 			return false;
-		}			
+		}		
+		form.setDialogWaiting(false);
 		return true;
 	}
 	
@@ -311,7 +314,6 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 				operazioneIniziale = DispAttiveFormImpl.INTEGRAZIONE;
 			
 		//ricreo setMeta
-			String completa = "si";		//per ora non so far di meglio
 			Node posIlc = UtilDom.findRecursiveChild(metaIlc,"dsp:pos");
 			String idMod = UtilDom.getAttributeValueAsString(posIlc, "xlink:href");
 			//recupero il mod e i rif dal documento
@@ -328,9 +330,10 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 				urn = partizione.substring(0, partizione.indexOf("#"));
 				partizione = partizione.substring(partizione.indexOf("#")+1, partizione.length());
 			}				
-			else 
+			else {
 				urn = partizione;	//Se passa di qua sicuramente ha riconosciuto qualcosa di sbagliato
-			
+				partizione ="";
+			}
 			//controllo se ho bordi aggiuntivi nel testo
 			String[] bordiAggiuntivi =null;
 			bordiAggiuntivi = riferimentoForm.getBordiDaNota(rif[numRif]);
@@ -398,8 +401,13 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 						} catch (Exception e) {}
 					}
 			}
+			String completa = "si";
+			for (int i=0; i<delimitatori.length; i++)
+				if ("capoverso".equals(delimitatori[i]))
+					completa="no";
+			
 			//invoco la prima chiamata alle funzioni DOM	
-			Node nuovoMeta = domDisposizioni.setDOMDispAttive(modificoMetaEsistenti, "#"+idMod, operazioneIniziale, completa, condizionata, decorrenza, idevento, urn, partizione, delimitatori);
+			Node nuovoMeta = domDisposizioni.setDOMDispAttive(false, modificoMetaEsistenti, "#"+idMod, operazioneIniziale, completa, condizionata, decorrenza, idevento, urn, partizione, delimitatori);
 			
 		//setmeta di novella
 			Node novellaIlc = UtilDom.findRecursiveChild(metaIlc,"dsp:novella");
@@ -588,6 +596,7 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 	
 	private boolean analizzaInLocale(String file) {
 
+		form.setDialogWaiting(true);
 		file = correggiCaratteri(file);
 		if (documentManager.getEncoding().toLowerCase().startsWith("utf"))
 			file = correggiInterrogativo(file);
@@ -620,6 +629,7 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 	    inviaTutti.setEnabled(false);
 		inviaNuovi.setEnabled(false);
 		scriviMeta.setEnabled(true);
+		form.setDialogWaiting(false);
 		return true;
 	}
 }
