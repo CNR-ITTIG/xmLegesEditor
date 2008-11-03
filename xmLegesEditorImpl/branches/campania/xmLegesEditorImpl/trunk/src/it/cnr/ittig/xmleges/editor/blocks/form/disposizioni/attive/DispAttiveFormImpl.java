@@ -33,6 +33,7 @@ import java.util.StringTokenizer;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JList;
@@ -98,6 +99,8 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 	JButton integrazione;
 	JRadioButton interoAtto;
 	JRadioButton soloPartizione;
+	
+	JCheckBox implicita;
 
 	PartizioniForm partizioniForm;
 	DecorrenzaForm decorrenzaForm;
@@ -172,6 +175,8 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 		abrogazione = (JButton) form.getComponentByName("editor.disposizioni.attive.abrogazione");
 		sostituzione = (JButton) form.getComponentByName("editor.disposizioni.attive.sostituzione");
 		integrazione = (JButton) form.getComponentByName("editor.disposizioni.attive.integrazione");
+		
+		implicita = (JCheckBox) form.getComponentByName("editor.disposizioni.attive.implicita");
 
 		interoAtto = (JRadioButton) form.getComponentByName("editor.disposizioni.attive.sceltainteroatto");
 		soloPartizione = (JRadioButton) form.getComponentByName("editor.disposizioni.attive.sceltapartizione");
@@ -224,7 +229,7 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 				delimitatoriScelti = delimitatoreForm.getDelimitatore();
 				listModel.clear();
 				for (int i=0; i<delimitatoriScelti.length/3; i++)
-					listModel.addElement(delimitatoriScelti[i*3] + " (" + delimitatoriScelti[i*3+1] + ") " + delimitatoriScelti[i*3+2]);
+					listModel.addElement(delimitatoriScelti[i*3] + " " + delimitatoriScelti[i*3+1] + " " + delimitatoriScelti[i*3+2]);
 			}
 		}	
 		
@@ -272,6 +277,7 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 		Node nodoAttivo = selectionManager.getActiveNode();
 		
 		if (cancellaCampi) {
+			implicita.setSelected(false);
 			interoAtto.setSelected(true);
 			decorrenzaForm.initForm(nodoAttivo);
 			riferimentoForm.initForm(nodoAttivo);
@@ -280,12 +286,13 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 			if (modificoMetaEsistenti != null)
 				recuperaMeta(modificoMetaEsistenti);
 			else {
-				metaPresente.setText("");
-				info.setText("Inserisci i metadati della disposizione attiva:");
+				metaPresente.setText("NB: metadati non presenti");
+				info.setText("Inserisci i metadati della modifica attiva:");
 				decorrenza.setText(decorrenzaForm.getDecorrenza());
 				atto.setText(riferimentoForm.getRiferimento());
 				partizione.setText(riferimentoForm.getPartizionePrimoAtto());
 				listModel.clear();
+				//delimitatoriScelti=new String[0];	recupero delimitatori dal commento <!-- frammento:part1-part2-->
 				delimitatoriScelti= riferimentoForm.getBordi();
 				listModel.clear();
 				for (int i=0; i<delimitatoriScelti.length/3; i++)
@@ -303,8 +310,10 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 	}
 		
 	private void recuperaMeta(Node disposizione) {
-		metaPresente.setText("Nelle metainformazioni è già presente una " + disposizione.getLocalName() + ".");
-		info.setText("Modifica i metadati della disposizione attiva:");
+		if ("si".equals(UtilDom.getAttributeValueAsString(disposizione, "implicita")))
+			implicita.setSelected(true);
+		metaPresente.setText("NB: metadati già presenti (" + disposizione.getLocalName() + ")");
+		info.setText("Cambia i metadati della modifica attiva:");
 		//setto Decorrenza
 		Node termine = UtilDom.findRecursiveChild(disposizione,"dsp:termine");
 		decorrenza.setText("");
@@ -418,16 +427,23 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 		try {
 			t = documentManager.beginEdit();	
 			
-			//prima parte meta
-			String completa = decorrenzaForm.isDecorrenzaCondizionata() ? "no": "si";
-			
 			//decorrenza
 			String termine = decorrenza.getText();
 			String idevento=null;
 			if (!decorrenzaForm.isDecorrenzaCondizionata()) 	//voglio l'id dell'evento con data 'termine'.
 				idevento = trovaEvento(selectionManager.getActiveNode()); 										
 			
-			Node nuovoMeta = domDisposizioni.setDOMDispAttive(modificoMetaEsistenti, modCorrente, operazioneIniziale, completa, decorrenzaForm.isDecorrenzaCondizionata(), termine, idevento, atto.getText(), partizione.getText(), delimitatoreForm.getDelimitatore());
+			String completa = "si"; 
+			if (decorrenzaForm.isDecorrenzaCondizionata())
+				completa = "no";
+			else {
+				String[] bordi = delimitatoreForm.getDelimitatore();
+				for (int i=0; i<bordi.length; i++)
+					if ("capoverso".equals(bordi[i]))
+						completa="no";	
+			}
+			
+			Node nuovoMeta = domDisposizioni.setDOMDispAttive(implicita.isSelected(), modificoMetaEsistenti, modCorrente, operazioneIniziale, completa, decorrenzaForm.isDecorrenzaCondizionata(), termine, idevento, atto.getText(), partizione.getText(), delimitatoreForm.getDelimitatore());
 			
 			if (operazioneIniziale!=ABROGAZIONE)
 				novellaForm.setMeta(nuovoMeta);

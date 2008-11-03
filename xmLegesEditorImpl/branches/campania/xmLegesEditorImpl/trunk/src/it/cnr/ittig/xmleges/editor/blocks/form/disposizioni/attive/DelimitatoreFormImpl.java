@@ -89,7 +89,7 @@ public class DelimitatoreFormImpl implements DelimitatoreForm, Loggable, Service
 	public boolean openForm(String[] selezionati) {
 		
 		initForm(selezionati);
-		form.setSize(250, 250);
+		form.setSize(300, 250);
 		form.addFormVerifier(this);
 		form.showDialog();
 		return form.isOk();
@@ -122,10 +122,15 @@ public class DelimitatoreFormImpl implements DelimitatoreForm, Loggable, Service
 
 	private void popolaControlli(JComboBox combo) {
 		combo.addItem(" ");
+		combo.addItem("rubrica");
+		combo.addItem("alinea");
+		combo.addItem("coda");
+		combo.addItem("comma");
 		combo.addItem("lettera");
 		combo.addItem("numero");
 		combo.addItem("punto");
 		combo.addItem("periodo");
+		combo.addItem("capoverso");
 	}
 
 
@@ -143,7 +148,17 @@ public class DelimitatoreFormImpl implements DelimitatoreForm, Loggable, Service
 						ordinale[j].setSelected(false);
 						ordinale[j].setEnabled(false);
 					}
-				}	
+				}
+				if ("alinea".equals(tipo[i].getSelectedItem()) | "rubrica".equals(tipo[i].getSelectedItem()) | "coda".equals(tipo[i].getSelectedItem())) {
+					numero[i].setText("");
+					numero[i].setEnabled(false);
+					ordinale[i].setSelected(false);
+					ordinale[i].setEnabled(false);
+				}
+				else {
+					numero[i].setEnabled(true);
+					ordinale[i].setEnabled(true);
+				}
 				numero[i+1].setEnabled(true);
 				tipo[i+1].setEnabled(true);
 				ordinale[i+1].setEnabled(true);
@@ -160,7 +175,7 @@ public class DelimitatoreFormImpl implements DelimitatoreForm, Loggable, Service
 			if (" ".equals(tipo[i].getSelectedItem()) && "".equals(numero[i].getText().trim()))
 				continue;	//Partizione e Occorrenza NON settati
 			for (int j=0; j<=i; j++)
-				if (" ".equals(tipo[i].getSelectedItem()) || "".equals(numero[i].getText().trim()))
+				if ((" ".equals(tipo[j].getSelectedItem()) && tipo[j].isEnabled()) || ("".equals(numero[j].getText().trim()) && numero[j].isEnabled()))
 					return false;	//Partizione e/o Occorrenza mancanti
 			break;
 		}			
