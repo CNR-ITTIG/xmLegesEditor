@@ -5,7 +5,7 @@
             Dipende da: 'nirstrict' oppure 'nirloose'                                
                                                                                      
           Versione  2.2                                                              
-          Release   17/03/2008                                                       
+          Release   29/07/2008                                                       
           Fabio Vitali - UniBo                                                       
                                                                                      
             Per un'introduzione, si veda il documento 'note.html'                    
@@ -92,7 +92,6 @@ Elementi sotto l'articolo
 <!ELEMENT en %CMen; >
 <!ATTLIST en %globalifac;  >
 <!ELEMENT ep %CMep; >
-<!ATTLIST ep %globalifac;  >
 
 <!ELEMENT corpo %ParaLevel; >
 <!ATTLIST corpo %globalifac;  >
@@ -162,7 +161,7 @@ Elementi inline e speciali con semantica rilevante
 
 <!ATTLIST imod %link;  finoa %uri; #REQUIRED >
 
-<!ENTITY % CMvirg "libro | parte | titolo | capo | sezione | paragrafo | articolo | comma | el | en | ep | contenitore | gerarchia | partizione | %elinline; | %allblocchi;" >
+<!ENTITY % CMvirg "libro | parte | titolo | capo | sezione | paragrafo | articolo | comma | el | en | ep | partizione | %elinline; | %allblocchi;" >
 
 <!ELEMENT virgolette (#PCDATA |%CMvirg;)*>
 

@@ -8,7 +8,7 @@
            Dipende da: niente                                                       
                                                                                     
            Versione  2.2                                                            
-           Release   17/03/2008                                                     
+           Release   29/07/2008                                                     
            Fabio Vitali - UniBo                                                     
                                                                                     
            Per un'introduzione, si veda il documento 'note.html'                    
@@ -68,11 +68,11 @@ Entita' esterne: caratteri
 <!ENTITY % CMparagrafo  "(%Tarticolatobase;,(libro | parte | titolo | capo | sezione | articolo | partizione | contenitore)*)" >
 <!ENTITY % CMpartizione "(%Tarticolatobase;,(libro | parte | titolo | capo | sezione | paragrafo | articolo | partizione | contenitore)*)" >
 <!ENTITY % CMarticolo   "(inlinemeta?,num,((rubrica,decorazione?) | (decorazione,rubrica?))?,comma*)" >
-<!ENTITY % CMcomma      "(inlinemeta?,num?,(corpo | (alinea?,(el | en | ep)*,coda?)),decorazione?)" >
-<!ENTITY % CMel         "(num,(corpo | (alinea?,(el | en | ep)*,coda?)),decorazione?)" >
-<!ENTITY % CMen         "(num,(corpo | (alinea?,(el | en | ep)*,coda?)),decorazione?)" >
-<!ENTITY % CMep         "(num,(corpo | (alinea?,(el | en | ep)*,coda?)),decorazione?)" >
-<!ENTITY % CMlista      "(num,(corpo | (alinea?,lista*,coda?)))" >
+<!ENTITY % CMcomma      "(inlinemeta?,num?,(corpo | (alinea?,(el | en | ep)*,coda?,contenitore?)),decorazione?)" >
+<!ENTITY % CMel         "(num,(corpo | (alinea?,(el | en | ep)*,coda?,contenitore?)),decorazione?)" >
+<!ENTITY % CMen         "(num,(corpo | (alinea?,(el | en | ep)*,coda?,contenitore?)),decorazione?)" >
+<!ENTITY % CMep         "(num,(corpo | (alinea?,(el | en | ep)*,coda?,contenitore?)),decorazione?)" >
+<!ENTITY % CMlista      "(num,(corpo | (alinea?,lista*,coda?,contenitore?)))" >
 
 
 <!--  ====================================================================        

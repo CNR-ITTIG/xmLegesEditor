@@ -5,7 +5,7 @@
             Dipende da: 'nirstrict' oppure 'nirloose'                                
                                                                                      
           Versione  2.2                                                              
-          Release   17/03/2008                                                       
+          Release   29/07/2008                                                       
           Fabio Vitali - UniBo                                                       
                                                                                      
           Per un'introduzione, si veda il documento 'note.html'                      
@@ -19,11 +19,13 @@ Entita' principali
 <!ENTITY % link " xlink:type %linktype; #FIXED 'simple'  xlink:href %uri; #IMPLIED" >
 <!ENTITY % nome " nome %NIRnome; #REQUIRED" >
 <!ENTITY % nomefac " nome %NIRnome; #IMPLIED" >
+
 <!ENTITY % tempi " iniziovigore %uri; #IMPLIED finevigore %uri; #IMPLIED inizioefficacia %uri; #IMPLIED fineefficacia %uri; #IMPLIED" >
 
 <!ENTITY % vigenza " %tempi;  rel %uri; #IMPLIED status %status; #IMPLIED" >
 <!ENTITY % implicita " implicita %sino; 'no' "
 >
+
 <!ENTITY % completa " completa %sino; 'no' "
 >
 
@@ -57,7 +59,7 @@ Entita': content model comuni ai vari tipi di elementi
 <!ENTITY % nrmstruct   "intestazione | formulainiziale | preambolo | formulafinale | conclusione | annessi" >
 <!ENTITY % allvuoti    "%genvuoti; | %txtvuoti;" >
 <!ENTITY % allinline   "%geninline; | %txtinline; | %nrminline;" >
-<!ENTITY % allblocchi  "%genblocchi; | %txtblocchi;" >
+<!ENTITY % allblocchi  "%genblocchi; | %txtblocchi; | %genstruct;" >
 <!ENTITY % allstruct   "%genstruct; | %nrmstruct;" >
 <!ENTITY % elinline    "%allinline; | %allvuoti;" >
 <!ENTITY % strutture   "(%allstruct;)+" >
@@ -115,7 +117,7 @@ Elementi generici del documento semi-articolato
 <!ATTLIST blocco %globalireq;  >
 
 <!ATTLIST blocco %nome;  >
-<!ELEMENT contenitore (inlinemeta?,(%allblocchi; | contenitore | gerarchia | lista)+)>
+<!ELEMENT contenitore (inlinemeta?,(%allblocchi;)+)>
 
 <!ATTLIST contenitore %globalireq;  %nome;  >
 <!ELEMENT partizione %CMpartizione; >

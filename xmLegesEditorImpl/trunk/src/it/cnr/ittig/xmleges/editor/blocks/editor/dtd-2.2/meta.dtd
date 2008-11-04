@@ -5,7 +5,7 @@
           Dipende da: 'nirstrict' oppure 'nirloose'                                  
                                                                                      
           Versione  2.2                                                              
-          Release   17/03/2008                                                       
+          Release   29/07/2008                                                       
           Fabio Vitali - UniBo                                                       
                                                                                      
           Per un'introduzione, si veda il documento 'meta.html'                      
@@ -159,11 +159,13 @@
             Disposizioni                                                             
                                                                                      
         =====================================================================  -->
-<!ENTITY % subargomenti "ANY" >
-<!ENTITY % posizioni "((dsp:testo | dsp:pos)+)" >
-<!ENTITY % posizionitermini "(%posizioni;,(dsp:posizione*,dsp:termine?,dsp:condizione?))" >
-<!ENTITY % modifica "(%posizionitermini;,(dsp:norma,dsp:altradata*))" >
-<!ENTITY % modificadidominio "(%posizionitermini;,(dsp:norma,dsp:altradata*,dsp:dominio?))" >
+<!ENTITY % posizioni "((dsp:testo | dsp:pos)*)" >
+<!ENTITY % subargomenti "(%posizioni;,(dsp:subarg?))" >
+<!ENTITY % subarg "ANY" >
+
+<!ENTITY % posizionitermini "(%posizioni;,(dsp:termine?,dsp:condizione?))" >
+<!ENTITY % modifica "(%posizionitermini;,(dsp:norma,dsp:posizione*,dsp:altradata*))" >
+<!ENTITY % modificadidominio "(%posizionitermini;,(dsp:norma,dsp:posizione*,dsp:altradata*,dsp:dominio?))" >
 
 <!ELEMENT disposizioni (motivazioni?,regole?,modificheattive?,modifichepassive?,comunicazioni?)>
 
@@ -171,9 +173,9 @@
 
 <!ELEMENT dsp:testo %valore; >
 <!ATTLIST dsp:testo %val;  >
-<!ELEMENT dsp:pos EMPTY >
+<!ELEMENT dsp:pos %subarg; >
 
-<!ATTLIST dsp:pos %link;  >
+<!ATTLIST dsp:pos %link;  dove %tpos; #IMPLIED >
 <!ELEMENT dsp:termine %subargomenti; >
 
 <!ATTLIST dsp:termine da %uri; #IMPLIED a %uri; #IMPLIED >
@@ -380,9 +382,12 @@
 <!ELEMENT dsp:dominio      %subargomenti; >
 <!ELEMENT dsp:altradata    %subargomenti; >
 
-<!ATTLIST dsp:altradata rif %uri; #REQUIRED %nome;  ><!ELEMENT dsp:argomento   %subargomenti; >
+<!ATTLIST dsp:altradata rif %uri; #REQUIRED %nome;  >
+<!ELEMENT dsp:argomento   %subargomenti; >
 
 <!ATTLIST dsp:argomento %nome;  >
+
+<!ELEMENT dsp:subarg   %subarg; >
 
 <!--  =====================================================================        
             fine del file meta.dtd                                                
