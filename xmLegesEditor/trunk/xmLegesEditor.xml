@@ -310,11 +310,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                         <check action="view.pane.editor.panes.attributi" />
                         <check action="view.pane.panes.notes" />
                         <check action="view.pane.editor.panes.documento" />
-                        <!--
-                        <item action="view.pane.editor.panes.intestazione" />
-                        <item action="view.pane.editor.panes.articolato" />
-                        <item action="view.pane.editor.panes.formulafinale" />
-                        -->
+ 			<check action="view.pane.editor.panes.disposizioni" />                               
                         <check action="view.pane.editor.panes.annessi" />
    						<check action="view.pane.panes.source" />
                         <check action="view.pane.panes.xslteditor" /> 
@@ -322,19 +318,12 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                         <check action="view.pane.editor.panes.riferimenti" />
                         <check action="view.pane.editor.panes.rifincompleti" />
                         <check action="view.pane.editor.panes.ndr" />
+						<check action="view.pane.editor.panes.checklist" />
                         <check action="view.pane.editor.panes.errori" />
                         <check action="view.pane.editor.panes.commenti" />
                         <check action="view.pane.panes.problems" />
                         <check action="view.pane.panes.segnalazioni" />
-                        
-                        
-                        
-                        
-                        <check action="view.pane.editor.panes.ndv" />
-                        
-                        
-                        
-                        
+                        <check action="view.pane.editor.panes.ndv" /> 
                     </menu>
                     <check action="view.statusbar" />
                 </menu>
@@ -351,6 +340,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <!-- item action="tool.version" /-->
                     <!-- separator /-->
                     <item action="tool.xpatheval" />
+		    <separator />
+		    <item action="tool.ilc" />
                 </menu>
                 <menu action="menu.editor.insert">
                     <item action="editor.insert.immagini" />
@@ -392,15 +383,14 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                         <item action="editor.partizioni.numero" />
                         <item action="editor.partizioni.punto" />
                         <item action="editor.partizioni.rubrica" />
-                        <!--	item action="editor.partizioni.vigenza" /	-->                        
+			
+			<!--	item action="editor.disposizioni.verificavigenza" /		-->                        
+                        
                         <item action="editor.disposizioni.passive" />
 						<item action="editor.disposizioni.rimuovipassive" />
-                        
-                        
-                        <item action="editor.disposizioni.attive" />
-                        
-                        
-                        
+						<item action="editor.disposizioni.attive" />
+						<item action="editor.disposizioni.marker" />
+			                        
                         <item action="editor.annessi.annesso" />
                         <item action="editor.ndr" />
                         <!--item action="editor.rinumerazione" /-->
@@ -812,6 +802,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  lifestyle="singleton" activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.action.ndr.NdrActionImpl"
     />
+
+<!--	component  lifestyle="singleton" activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.action.repository.RepositoryActionImpl"
+    /	-->
     
     <component  activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.action.xmleges.linker.XmLegesLinkerActionImpl"
@@ -871,6 +865,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 class="it.cnr.ittig.xmleges.editor.blocks.action.disposizioni.attive.DispAttiveActionImpl"
     />
 
+
+
+    <component  activation="startup"                class="it.cnr.ittig.xmleges.editor.blocks.action.disposizioni.attive.IlcActionImpl"
+    />
 
 
 
@@ -1187,23 +1185,22 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 <pane name="editor.panes.meta"				where="top-center"  	index="1" />
                 <pane name="editor.panes.annessi"    		where="top-center"  	index="2" />
 
-                <pane name="editor.panes.indice"		where="top-center"  	index="3" />                                
+                <pane name="editor.panes.disposizioni"	where="top-center"  	index="3" />     
+                             
                 <pane name="editor.panes.indice"		where="top-left"  	index="1" />                
                 <pane name="panes.source"            	where="top-center"		index="4" />
                 <pane name="panes.xslteditor"           where="top-center"  	index="5" />
                 <pane name="editor.panes.riferimenti" 		where="bottom-center"  	index="0" />
                 <pane name="editor.panes.rifincompleti"     where="bottom-center"  	index="1" />
                 <pane name="editor.panes.ndr" 				where="bottom-center"  	index="2" />
-                <pane name="editor.panes.errori" 			where="bottom-center"	index="3" />
-                <pane name="editor.panes.commenti"			where="bottom-center"	index="4" />
-                <pane name="panes.notes"				where="bottom-center"  	index="5" />
-                <pane name="panes.problems"				where="bottom-center"  	index="6" />
-				<pane name="panes.segnalazioni"				where="bottom-center"  	index="7" />
-
+                <pane name="editor.panes.checklist"			where="bottom-center"  	index="3" />
+                <pane name="editor.panes.errori" 			where="bottom-center"	index="4" />
+                <pane name="editor.panes.commenti"			where="bottom-center"	index="5" />
+                <pane name="panes.notes"				where="bottom-center"  	index="6" />
+                <pane name="panes.problems"				where="bottom-center"  	index="7" />
+		<pane name="panes.segnalazioni"				where="bottom-center"  	index="8" />
+		<pane name="editor.panes.ndv" 				where="bottom-center"  	index="9" />
 				
-				<pane name="editor.panes.ndv" 				where="bottom-center"  	index="8" />
-
-
             </panes>
         </configuration>
     </component>
@@ -1214,15 +1211,15 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <!-- ======================================================== PANES === -->
     <!-- ================================================================== -->
     <component  class="it.cnr.ittig.xmleges.core.blocks.panes.attributes.AttributesPaneImpl">
-        <configuration>
-        	<readonly>id</readonly>
-        	<readonly>iniziovigore</readonly>
+        <readonly>id</readonly>
+        	<hidden>iniziovigore</hidden>
+        	<readonly>iniziovigore</readonly>>
         	<readonly>inizioefficacia</readonly>        	
+        	<hidden>finevigore</hidden>
         	<readonly>finevigore</readonly>
         	<readonly>fineefficacia</readonly>
         	<!-- <readonly>tipo</readonly> dtd2.2: e' anche il nome dell'attributo del tag firma--> 
-        	<readonly>status</readonly>
-        </configuration>
+        	<!--	SBLOCCO LO VOGLIO USARE PER GLI OMISSIS      			<readonly>status</readonly>	-->
 	</component>
 
     <component  class="it.cnr.ittig.xmleges.core.blocks.panes.tree.TreePaneImpl" />
@@ -1245,6 +1242,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             <xslt   name="dtd-globali"   		file="xsl_test/nir-panes-dtd-globali-1.0.xsl"	startup="true"/>
             <xslt   name="dtd-meta"     		file="xsl_test/nir-panes-dtd-meta-1.0.xsl"		startup="true"/>
             <xslt   name="edit-documento"		file="xsl_test/nir-panes-edit-documento-1.0.xsl"	startup="true" />
+	    <xslt   name="edit-disposizioni"	file="xsl_test/nir-panes-edit-disposizioni-1.0.xsl"	startup="true" />
             <xslt   name="edit-indice"			file="xsl_test/nir-panes-edit-indice-1.0.xsl"	startup="true" />            
             <xslt   name="edit-annessi"			file="xsl_test/nir-panes-edit-annessi-1.0.xsl" 		/>
             <xslt   name="edit-meta"			file="xsl_test/nir-panes-edit-meta-1.0.xsl"			/>
@@ -1253,6 +1251,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             <xslt   name="errori"				file="xsl_test/nir-panes-view-errori-1.0.xsl"		/>
             <xslt   name="commenti"				file="xsl_test/nir-panes-view-commenti-1.0.xsl"		/>
             <xslt   name="ndr"					file="xsl_test/nir-panes-view-ndr-1.0.xsl"			/>
+ 	    <xslt   name="checklist"			file="xsl_test/nir-panes-view-checklist-1.0.xsl"			/>
             <xslt   name="xsl-disegnilegge-testoafronte" 	file="nir-disegnilegge-testoafronte.xsl"     		startup="true" />
             <xslt   name="xsl-disegnilegge" 	file="nir-disegnilegge.xsl"     		startup="true" />
             <xslt   name="xsl-disegnilegge-nocss" 	file="nir-disegnilegge-nocss.xsl"	startup="true" />
@@ -1261,7 +1260,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             <css    name="disegnilegge-style"   file="nir-disegnilegge-style.css"       startup="true" />
             <css    name="nir-style"      		file="nir-generico-style.css"           startup="true" />
             <xslt   name="pdf-gazzettaufficiale" file="nir-fo-gazzettaufficiale.xsl"	startup="true" />
-            
+            <xslt   name="xslt-utility"			file="xsl_test/nir-xslt-utility.xsl"     		startup="true" />
             <xslt   name="xsl-cnr"              		file="cnrHTML.xsl"				startup="true" />
             <css    name="html-cnr-default_style"     	file="cnrLight.css"				startup="true" />
 			<css    name="html-cnr-alternative_style"   file="cnr.css"					startup="true" />        
@@ -1322,6 +1321,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             <pane name="editor.panes.documento">
                 <xslt name="edit-documento"/>
             </pane>
+	    <pane name="editor.panes.disposizioni">
+                <xslt name="edit-disposizioni"/>
+            </pane>
             <pane name="editor.panes.annessi">
                 <xslt name="edit-annessi"/>
             </pane>
@@ -1336,6 +1338,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             </pane>
             <pane name="editor.panes.ndr">
                 <xslt name="ndr"/>
+            </pane>
+	    <pane name="editor.panes.checklist">
+                <xslt name="checklist"/>
             </pane>
             <pane name="editor.panes.errori">
                 <xslt name="errori"/>
