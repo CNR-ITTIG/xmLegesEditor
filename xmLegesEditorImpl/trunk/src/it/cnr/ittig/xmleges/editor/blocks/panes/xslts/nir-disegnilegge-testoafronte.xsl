@@ -47,22 +47,24 @@
 	<!--                                                          -->
 	<!-- ======================================================== -->
 	<xsl:template match="nir:intestazione">
-		<xsl:apply-templates/>
+		<div class="intestazione">
+			<xsl:apply-templates/>
+		</div>			
 	</xsl:template>
 	<xsl:template match="nir:emanante">
-		<div class="sinistra">
+		<div class="emanante">
 			<xsl:apply-templates/>
 		</div>
 	</xsl:template>
 	<xsl:template match="nir:legislatura">
 		<div class="title">
-			----- <xsl:apply-templates/> -----
+			<xsl:apply-templates/>
 		</div>
 	</xsl:template>
 	<xsl:template match="nir:tipoDoc"/>
 	<xsl:template match="nir:numDoc">
-		<div class="sinistra">
-			N. <xsl:apply-templates/>
+		<div class="numdoc">
+			<xsl:apply-templates/>
 		</div>
 	</xsl:template>	
 	<xsl:template match="nir:intestazione/h:div ">
@@ -86,7 +88,7 @@
 		</div>
 	</xsl:template>
 	<xsl:template match="nir:intestazione/nir:titoloDoc">
-		<div class="intestazione">
+		<div class="titolodoc">
 			<h1>
 				<xsl:apply-templates/>
 			</h1>
@@ -179,8 +181,8 @@
 	<xsl:template match="nir:tipoDoc" mode="parallelo">
 		<xsl:apply-templates/>
 	</xsl:template>
-	<xsl:template match="nir:*
-	" mode="parallelo">
+		
+	<xsl:template match="nir:*" mode="parallelo">
 		<tr>
 			<td width="50%" valign="top">
 				<div class="{local-name()}">
@@ -257,7 +259,7 @@
 			<xsl:when test="($pos='right' and ../@status='soppresso')">
 				<i>Soppresso</i>
 			</xsl:when>
-			<xsl:when test="$pos='right' and not(.//@status) and not(../@status='inserito')">
+			<xsl:when test="$pos='right' and not(.//@status/../@status='inserito') and not(../@status='inserito')">
 				<i>Identico</i>
 			</xsl:when>
 			<xsl:otherwise>
@@ -300,18 +302,67 @@
 			<xsl:with-param name="pos" select="$pos"/>
 		</xsl:apply-templates></i>
 	</xsl:template>	
-	<xsl:template match="nir:virgolette">
+	<xsl:template match="nir:mod">
 		<xsl:param name="pos">none</xsl:param>
-		<p>
-			<xsl:text>"</xsl:text>
+		<div class="mod">
+		<!--	p>
+			<xsl:text>"</xsl:text	-->
 			<xsl:apply-templates>
 				<xsl:with-param name="pos" select="$pos"/>
 			</xsl:apply-templates>
-			<xsl:text>"</xsl:text>
-		</p>
+			<!--	xsl:text>"</xsl:text>
+		</p	-->
+		</div>
+	</xsl:template>
+	
+	<xsl:template match="nir:virgolette">
+		<xsl:param name="pos">none</xsl:param>	
+		<xsl:choose>
+			<xsl:when test="@tipo='parola'">
+		   		<span class="virgolette">
+					<xsl:apply-templates>
+						<xsl:with-param name="pos" select="$pos"/>
+					</xsl:apply-templates>
+				</span>			
+			</xsl:when>
+			<xsl:when test="@tipo='struttura'">
+				<xsl:choose>
+					<xsl:when test="$pos='left'">
+						<xsl:if test="not(.//@status/../@status='inserito') and not(../@status='inserito')">
+	   					<table bgcolor="#FFEE99" width="100%"><tr><td>
+							<xsl:apply-templates>
+								<xsl:with-param name="pos" select="$pos"/>
+							</xsl:apply-templates>
+						</td></tr></table>	
+						</xsl:if>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:if test="not(not(.//@status/../@status='inserito') and not(../@status='inserito'))">
+						<tr><td colspan="2">
+	   					<table bgcolor="#FFEE99" width="100%"><tr><td>
+							<xsl:apply-templates mode="parallelo">
+								<xsl:with-param name="pos" select="$pos"/>
+							</xsl:apply-templates>
+						</td></tr></table>	
+						</td></tr>
+						</xsl:if>
+					</xsl:otherwise>
+				</xsl:choose>												
+			</xsl:when>
+		</xsl:choose>				
+	</xsl:template>
+	<xsl:template match="nir:virgolette2222222" mode="parallelo">
+		<xsl:param name="pos">none</xsl:param>
+		<xsl:if test="@tipo='struttura'">
+	   		<table bgcolor="#FFEE99" width="100%"><tr><td>
+					<xsl:apply-templates mode="parallelo">
+						<xsl:with-param name="pos" select="$pos"/>
+					</xsl:apply-templates>
+			</td></tr></table>	
+		</xsl:if>		
 	</xsl:template>
 	<xsl:template match="nir:nome">
-		<span title="Nome: {.}">
+		<span class="nome" title="Nome: {.}">
 			<xsl:apply-templates/>
 		</span>
 	</xsl:template>
@@ -342,43 +393,20 @@
 		</div>
 	</xsl:template>
 	<xsl:template match="nir:dataeluogo">
-		<div style="margin-top:5px;">
+		<div class="margin-top:15px;">
 			<xsl:apply-templates/>
 		</div>
 	</xsl:template>
-
-
-	
-	<!--	RIMOSSI DALLA DTD 2.2
 	<xsl:template match="nir:sottoscrizioni">
-		<ul style="margin-top:5px;">
+		<div class="sottoscrizioni">
 			<xsl:apply-templates/>
-		</ul>
+		</div>
 	</xsl:template>
 	<xsl:template match="nir:sottoscrivente">
-		<li>
+		<div class="sottoscrivente">
 			<xsl:apply-templates/>
-		</li>
-	</xsl:template		-->	
-	
-	<!-- ======================================================== -->
-	<!--                                                          -->
-	<!--  Template MODIFICHE                                      -->
-	<!--                                                          -->
-	<!-- ======================================================== -->
-	<xsl:template match="*[name()='mod']">
-		<span class="mod">
- 	    	<xsl:apply-templates/>
- 		</span>
-	</xsl:template> 
-	<xsl:template match="*[name()='virgolette']">
-	    <div class="spazio">&#160;</div>
-	    <span class="virgolette">
-			<xsl:apply-templates />
-		</span>	
-	    <div class="spazio">&#160;</div>				
-	</xsl:template>	
-	
+		</div>
+	</xsl:template>
 	
 	<!-- ======================================================== -->
 	<!--                                                          -->
@@ -414,7 +442,7 @@
 	<!-- ======================================================== -->
 	<xsl:template match="nir:meta">
 		<hr/>
-		<table border="1" cellpadding="2" cellspacing="0" width="75%" style="margin-left: 15px;">
+		<table border="0" cellpadding="2" cellspacing="0" width="75%" style="margin-left: 15px;">
 			<xsl:apply-templates/>
 		</table>
 	</xsl:template>
@@ -450,7 +478,6 @@
 	<xsl:template match="h:span[@status='soppresso']">
 		<xsl:param name="pos">none</xsl:param>
 		<xsl:if test="$pos='left'">
-				
  		 <xsl:choose>
   		  <xsl:when test="following-sibling::node()[1]//@status='inserito'">
 		 	<xsl:apply-templates/>&#160;

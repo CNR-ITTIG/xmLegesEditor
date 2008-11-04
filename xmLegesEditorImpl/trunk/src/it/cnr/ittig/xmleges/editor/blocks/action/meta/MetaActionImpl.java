@@ -206,10 +206,6 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		if (descrittoriForm.openForm()) {
 			try {
 				EditTransaction tr = documentManager.beginEdit();
-				
-				//L'attributo non � mai settato nella form. ELIMINATO
-				//UtilDom.setAttributeValue(doc.getDocumentElement(), "tipo", descrittoriForm.getTipoPubblicazione());
-				
 				descrittori.setAlias(node, descrittoriForm.getAlias());
 				descrittori.setPubblicazione(node, descrittoriForm.getPubblicazione());
 				descrittori.setRedazioni(node, descrittoriForm.getRedazioni());
@@ -269,7 +265,8 @@ public class MetaActionImpl implements MetaAction, EventManagerListener, Loggabl
 		ciclodivitaForm.setEventi(eventiOnDom);
 
 				
-		if(ciclodivitaForm.openForm()){
+		ciclodivitaForm.openForm();
+		if (ciclodivitaForm.getModificaEventi()) {
 			Evento[] newEventi = ciclodivitaForm.getEventi();
 
 			Relazione[] newRelazioni = null;

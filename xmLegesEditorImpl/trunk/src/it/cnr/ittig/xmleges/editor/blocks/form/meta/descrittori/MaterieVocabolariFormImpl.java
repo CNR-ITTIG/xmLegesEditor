@@ -12,6 +12,9 @@ import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextField;
 import it.cnr.ittig.xmleges.core.services.form.listtextfield.ListTextFieldEditor;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
+import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
+import it.cnr.ittig.xmleges.core.util.file.UtilFile;
+import it.cnr.ittig.xmleges.core.util.xml.UtilXml;
 import it.cnr.ittig.xmleges.editor.blocks.form.browser.BrowserEvent;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Vocabolario;
 import it.cnr.ittig.xmleges.editor.services.form.meta.descrittori.MaterieVocabolariForm;
@@ -22,6 +25,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.File;
 import java.io.IOException;
 import java.util.EventObject;
 import java.util.Vector;
@@ -31,6 +35,12 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JEditorPane;
 import javax.swing.JList;
+
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
 
 public class MaterieVocabolariFormImpl implements MaterieVocabolariForm , Loggable,
 Serviceable, Initializable, ActionListener {
@@ -56,6 +66,7 @@ Serviceable, Initializable, ActionListener {
 	
 	ListTextField materie_teseo_listtextfield;
 	
+	String nomeVocabolario = null;
 			
 	//	Form ListTextFiled vocabolari
 //	Vocabolari.jfrm
@@ -64,6 +75,7 @@ Serviceable, Initializable, ActionListener {
 	JComboBox comboVocabolari;	
 	ListTextField vocabolari_listtextfield;		
 	Vocabolario[] vocabolari;
+	Vocabolario[] vocaboliSelezionati;
 	
 	// Mie variabili
 	Form sottoFormTeseo;
@@ -75,8 +87,10 @@ Serviceable, Initializable, ActionListener {
 	
 	
 	public boolean openForm() {
-		form.setSize(450, 300);
+		
+		form.setSize(650, 400);
 		form.showDialog();
+		updateVocaboli();
 		return form.isOk();
 
 	}
@@ -92,34 +106,114 @@ Serviceable, Initializable, ActionListener {
 
 	private void setMaterieVocab(String[] materie, String vocabolario) {
 
-		
 		for(int i=0;i<vocabolari.length;i++){
 			if(vocabolari[i].getNome().equalsIgnoreCase(vocabolario)){
 				vocabolari[i].setMaterie( (materie!=null && materie.length>0) ? materie : null);
 				return;
 			}
 		}			
-				
-		
 	}
 
-	public Vocabolario[] getVocabolari(){
-		
-		return vocabolari;
+	private void addMateriaVocab(String materia, String vocabolario) {
+
+		for(int i=0;i<vocabolari.length;i++){
+			if(vocabolari[i].getNome().equalsIgnoreCase(vocabolario)){
+				vocabolari[i].addMateria(materia);
+				return;
+			}
+		}				
 	}
+	
+	private void updateVocaboli(){
+		if (vocaboliSelezionati==null)
+			vocaboliSelezionati = new Vocabolario[0];
+			
+		for (int i=0; i<vocaboliSelezionati.length; i++) 
+			if (nomeVocabolario.equals(vocaboliSelezionati[i].getNome())) {
+				vocaboliSelezionati[i].setMaterie(new String[0]);
+				Object[] materieSelezionate =listaMaterieSelectedVocab.getSelectedValues();
+				for (int j=0; j<materieSelezionate.length; j++)
+					vocaboliSelezionati[i].addMateria((String) materieSelezionate[j]);
+				return;
+			}
+		//il vocabolario non era ancora fra i selezionati
+		Vocabolario[] nuovoVocabolario = new Vocabolario[1+vocaboliSelezionati.length];
+		for (int i=0; i<vocaboliSelezionati.length; i++)
+			nuovoVocabolario[i]=vocaboliSelezionati[i];
+		nuovoVocabolario[vocaboliSelezionati.length] = new Vocabolario();
+		nuovoVocabolario[vocaboliSelezionati.length].setNome(nomeVocabolario); 
+		Object[] materieSelezionate =listaMaterieSelectedVocab.getSelectedValues();
+		for (int i=0; i<materieSelezionate.length; i++)
+			nuovoVocabolario[vocaboliSelezionati.length].addMateria((String) materieSelezionate[i]);
+		
+		vocaboliSelezionati = nuovoVocabolario;
+	}
+	
+	public Vocabolario[] getVocabolari(){
+		return vocaboliSelezionati;
+	}
+	
 	public void setVocabolari(Vocabolario[] vocabolari) {
-		this.vocabolari = vocabolari;
+		
+		nomeVocabolario = null;
+		vocaboliSelezionati = vocabolari;
+		
+		//aggiungo le materie presenti nel documento (nei rispettivi vocabolari)
+		//che potrebbere non essere presenti nei vocabolari su file.
+		if (vocabolari!=null)
+			for (int i=0; i<vocabolari.length; i++) {
+				boolean trovato = false;
+				for (int j=0; j<this.vocabolari.length; j++)
+					if (this.vocabolari[j].getNome().equals(vocabolari[i].getNome())) {
+						trovato = true;
+						//aggiungo tutte le materie eventualmente non presenti nel vocabolario
+						String[] materie = vocabolari[i].getMaterie();
+						for (int k=0; k<materie.length; k++)
+							addMateriaVocab(materie[k], vocabolari[i].getNome());
+					}	
+				if (!trovato) {
+					//aggiungo il vocabolario e tutte le sue materie
+					Vocabolario[] temp = new Vocabolario[this.vocabolari.length+1];
+					for (int j=0; j<this.vocabolari.length; j++)
+						temp[j] = this.vocabolari[j];
+					temp[this.vocabolari.length]=vocabolari[i];
+					this.vocabolari = temp;
+				}
+				
+			}
+			
 		comboVocabolari.removeAllItems();
 		listaMaterieSelectedVocab.setListData(new Vector());
-		if (vocabolari != null) {			
-			for(int i=0;i<vocabolari.length;i++){
-				comboVocabolari.addItem(vocabolari[i].getNome());
-				setMaterieVocab(vocabolari[i].getMaterie(),vocabolari[i].getNome());
-			}
-		}
 		
+		if (this.vocabolari != null) {			
+			for(int i=0;i<this.vocabolari.length;i++){
+				comboVocabolari.addItem(this.vocabolari[i].getNome());
+				setMaterieVocab(this.vocabolari[i].getMaterie(),this.vocabolari[i].getNome());
+			}
+			//Seleziono il vocabolario e le materie presenti nel documento
+			if (vocabolari != null) 
+				setMaterieSelez(vocabolari[0]);
+
+		}	
 	}
 
+	private void setMaterieSelez(Vocabolario vocabolari) {
+		
+		comboVocabolari.setSelectedItem(vocabolari.getNome());
+		String[] materie = this.vocabolari[comboVocabolari.getSelectedIndex()].getMaterie();
+		String[] materieDaSelezionare = vocabolari.getMaterie();
+		int[] selezionati = new int[materieDaSelezionare.length];
+		for (int k=0; k<materieDaSelezionare.length; k++)
+			for (int i=0; i<materie.length; i++)
+				if (materie[i].equals(materieDaSelezionare[k])) {
+					selezionati[k]=i;
+					break;
+				}
+		listaMaterieSelectedVocab.setSelectedIndices(selezionati);
+		
+		nomeVocabolario = (String) comboVocabolari.getSelectedItem();
+	}
+	
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
 		
@@ -164,13 +258,24 @@ Serviceable, Initializable, ActionListener {
 
 			public void itemStateChanged(ItemEvent e) {
 
+				if(e.getStateChange()==ItemEvent.DESELECTED){
+					if (nomeVocabolario!=null)
+						updateVocaboli();
+				}
+				
 				if(e.getStateChange()==ItemEvent.SELECTED){
-					
+						
 					String[] materieToShow=getMaterieVocab((String)comboVocabolari.getSelectedItem());
 					if(materieToShow!=null)
 						listaMaterieSelectedVocab.setListData(materieToShow);
 					else
 						listaMaterieSelectedVocab.setListData(new Vector());
+					
+					if (vocaboliSelezionati!=null)
+						for (int j=0; j<vocaboliSelezionati.length; j++)
+							if (vocaboliSelezionati[j].getNome().equals(comboVocabolari.getSelectedItem()))
+								setMaterieSelez(vocaboliSelezionati[j]);
+					nomeVocabolario = (String) comboVocabolari.getSelectedItem();
 				}
 				
 			}
@@ -200,10 +305,57 @@ Serviceable, Initializable, ActionListener {
 		sottoFormTeseo.setMainComponent(getClass().getResourceAsStream("TeseoBrowser.jfrm"));
 		materie_teseo_listtextfield.setEditor(new MaterieTeseoListTextFieldEditor(sottoFormTeseo));
 		
+		try {
+			loadVocabulary();
+		} catch (Exception e) {}
 		
 		
 	}
 
+	private void loadVocabulary() {
+		
+		String prefix ="vocabolari";
+		String[] vocabulary = new String[]{"TESEO.xml", "regioneUmbria.xml", "CNIPA.xml"};
+
+		for (int i = 0; i < vocabulary.length; i++)		
+			//Non sovrascrivo i vocabolari già presenti
+			if (!new File(UtilFile.getTempDirName() + File.separatorChar + prefix+File.separator+vocabulary[i]).exists())	
+				UtilFile.copyFileInTempDir(getClass().getResourceAsStream(prefix + "/" + vocabulary[i]), prefix, vocabulary[i]);
+				
+		
+		//TODO: recupero anche altri vocabolari presenti nella temp (vocabolari)
+		//TODO: permettere il salvataggio dei vocabolari modifcati e/o nuovi
+		
+		vocabolari = new Vocabolario[vocabulary.length];
+		for (int i = 0; i < vocabulary.length; i++) { 
+			Document voc = UtilXml.readXML(UtilFile.getTempDirName() + File.separatorChar + prefix+File.separator+vocabulary[i]);
+			Node radice = (Node) voc.getDocumentElement();
+			vocabolari[i] = new Vocabolario();
+			Vector listaMaterie = new Vector();
+			vocabolari[i].setNome(UtilDom.getAttributeValueAsString(radice, "nome"));
+			componiMateria(listaMaterie, radice, "");
+			String[] temp = new String[listaMaterie.size()];
+			listaMaterie.copyInto(temp);
+			vocabolari[i].setMaterie(temp);
+			logger.debug("Letto vocabolario: " + vocabolari[i].getNome());
+		}	
+	}
+	
+	private void componiMateria(Vector listaMaterie, Node nodo, String materia) {
+		
+		if (nodo.getNodeType()==Node.TEXT_NODE)
+			return;
+		NodeList figli = nodo.getChildNodes();
+        if (figli.getLength() == 0)
+        	listaMaterie.add(materia.substring(1));
+		else {
+			if (!"".equals(materia)) //voglio rendere disponibile anche le voci contenitore, come materie
+				listaMaterie.add(materia.substring(1)); 
+			for (int i=0; i<figli.getLength(); i++)
+				componiMateria(listaMaterie, figli.item(i), materia+";"+UtilDom.getAttributeValueAsString(figli.item(i), "nome"));
+		}	
+	}	
+		
 	public void actionPerformed(ActionEvent e) {
 		 if (e.getSource().equals(vocabolariButton)) { // VOCABOLARI
 			 Vector v = new Vector();

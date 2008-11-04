@@ -51,6 +51,9 @@ public class MetaDescrittoriMaterieImpl implements MetaDescrittoriMaterie , Logg
 
 	public void setVocabolari(Node node, Vocabolario[] vocabolari) {
 		
+		//Voglio settare sul documento solo le materie selezionate
+		//questo implica (forse) poter avere nel documento un'unico vocabolario
+		
 		Document doc = documentManager.getDocumentAsDom();
 		try {
 			EditTransaction tr = documentManager.beginEdit();
@@ -58,31 +61,29 @@ public class MetaDescrittoriMaterieImpl implements MetaDescrittoriMaterie , Logg
 			Node descrittoriNode = UtilDom.findRecursiveChild(activeMeta,"descrittori");
 						
 			removeMetaByName("materie",node);
-			
-			for (int i = 0; i < vocabolari.length; i++) {
-				
-				Node vocabTag;
-				vocabTag = utilRulesManager.getNodeTemplate("materie");
-				
-				
-				UtilDom.setAttributeValue(vocabTag,"vocabolario",vocabolari[i].getNome());
-				String[] materieVocab=vocabolari[i].getMaterie();
-				if(materieVocab!=null && materieVocab.length>0){
-					vocabTag.removeChild(vocabTag.getChildNodes().item(0));
-					for (int j = 0; j < materieVocab.length; j++) {
-						Node materiaTag = UtilDom.createElement(doc, "materia");
-						UtilDom.setAttributeValue(materiaTag,"valore",vocabolari[i].getMaterie()[j]);
-						utilRulesManager.orderedInsertChild(vocabTag,materiaTag);
+		
 						
+			if (vocabolari!=null)
+				for (int i = 0; i < vocabolari.length; i++) {
+					Node vocabTag;
+					vocabTag = utilRulesManager.getNodeTemplate("materie");
+					UtilDom.setAttributeValue(vocabTag,"vocabolario",vocabolari[i].getNome());
+					String[] materieVocab=vocabolari[i].getMaterie();
+					if(materieVocab!=null && materieVocab.length>0){
+						vocabTag.removeChild(vocabTag.getChildNodes().item(0));
+						for (int j = 0; j < materieVocab.length; j++) {
+							Element materiaTag;
+							materiaTag = doc.createElement("materia");
+							UtilDom.setAttributeValue(materiaTag,"valore",vocabolari[i].getMaterie()[j]);
+							utilRulesManager.orderedInsertChild(vocabTag,materiaTag);
+						}
+					}else{
+						UtilDom.setAttributeValue(vocabTag.getChildNodes().item(0),"valore",null);
 					}
-				}else{
-					UtilDom.setAttributeValue(vocabTag.getChildNodes().item(0),"valore",null);
+					utilRulesManager.orderedInsertChild(descrittoriNode,vocabTag);
 				}
-				utilRulesManager.orderedInsertChild(descrittoriNode,vocabTag);
-
-			}
-			documentManager.commitEdit(tr);
 			rinumerazione.aggiorna(doc);
+			documentManager.commitEdit(tr);
 		} catch (DocumentManagerException ex) {
 			logger.error(ex.getMessage(), ex);
 			return;

@@ -240,6 +240,7 @@ public class XsltPaneImpl implements XsltPane, EventManagerListener, Loggable, S
 			}
 			
 			if (!updated){ 
+				System.err.println("STARTING GLOBAL UPDATE FOR "+this.getName());
 				updateTextPane();
 				updated = true;
 			}

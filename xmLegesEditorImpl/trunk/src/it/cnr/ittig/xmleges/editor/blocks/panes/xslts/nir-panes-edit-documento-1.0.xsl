@@ -46,13 +46,28 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             <base href="{$base}" />
         </head>
         <body>
-            <xsl:apply-templates select="/*[name()='NIR']/*/*[name()='meta']/*[name()='confronto']" />
-            <xsl:apply-templates select="/*[name()='NIR']/*/*[name()='intestazione']" />
-            <xsl:apply-templates select="/*[name()='NIR']/*/*[name()='formulainiziale']" />
-            <xsl:apply-templates select="/*[name()='NIR']/*/*[name()='relazione']"/>
-            <xsl:apply-templates select="/*[name()='NIR']/*/*[name()='articolato']|/*[name()='NIR']/*/*[name()='contenitore']|/*[name()='NIR']/*/*[name()='gerarchia']" />
-            <xsl:apply-templates select="/*[name()='NIR']/*/*[name()='formulafinale']" />
-            <xsl:apply-templates select="/*[name()='NIR']/*/*[name()='conclusione']" />           
+			<xsl:choose>
+				<xsl:when test="/*[name()='NIR']/*[@finevigore]">
+					<div style="color: red; ">
+			            <xsl:apply-templates select="/*[name()='NIR']/*/*[name()='meta']/*[name()='confronto']" />
+            			<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='intestazione']" />
+			            <xsl:apply-templates select="/*[name()='NIR']/*/*[name()='formulainiziale']" />
+			            <xsl:apply-templates select="/*[name()='NIR']/*/*[name()='relazione']"/>
+			            <xsl:apply-templates select="/*[name()='NIR']/*/*[name()='articolato']|/*[name()='NIR']/*/*[name()='contenitore']|/*[name()='NIR']/*/*[name()='gerarchia']" />
+			            <xsl:apply-templates select="/*[name()='NIR']/*/*[name()='formulafinale']" />
+			            <xsl:apply-templates select="/*[name()='NIR']/*/*[name()='conclusione']" />           		
+					</div>
+				</xsl:when>
+				<xsl:otherwise>
+			            <xsl:apply-templates select="/*[name()='NIR']/*/*[name()='meta']/*[name()='confronto']" />
+            			<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='intestazione']" />
+			            <xsl:apply-templates select="/*[name()='NIR']/*/*[name()='formulainiziale']" />
+			            <xsl:apply-templates select="/*[name()='NIR']/*/*[name()='relazione']"/>
+			            <xsl:apply-templates select="/*[name()='NIR']/*/*[name()='articolato']|/*[name()='NIR']/*/*[name()='contenitore']|/*[name()='NIR']/*/*[name()='gerarchia']" />
+			            <xsl:apply-templates select="/*[name()='NIR']/*/*[name()='formulafinale']" />
+			            <xsl:apply-templates select="/*[name()='NIR']/*/*[name()='conclusione']" />           
+				</xsl:otherwise>
+			</xsl:choose>	
         </body>
     </html>
 </xsl:template>

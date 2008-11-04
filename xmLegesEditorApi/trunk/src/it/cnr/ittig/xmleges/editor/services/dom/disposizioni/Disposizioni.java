@@ -1,6 +1,7 @@
 package it.cnr.ittig.xmleges.editor.services.dom.disposizioni;
 
 import it.cnr.ittig.services.manager.Service;
+import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 
 import org.w3c.dom.Node;
@@ -23,21 +24,38 @@ import org.w3c.dom.Node;
  * @version 1.0
  */
 public interface Disposizioni extends Service {
+		
+	//Disposizioni ATTIVE
+	/**
+	 * Funzione per l'aggiornamento dei metadati di disposizione ATTIVE (esclusa novella/novellando)
+	 * 
+	 * @return la DSP che sto aggiungendo
+	 */
+	public Node setDOMDispAttive(boolean implicita, Node metaDaModificare, String idMod, int operazioneIniziale, String completa, boolean condizione, String decorrenza, String idevento, String norma, String partizione, String[] delimitatori);
 	
 	/**
-	 * Funzione per l'aggiornamento dei metadati di disposizione ATTIVE
+	 * Funzione per l'aggiornamento dei metadati di disposizione ATTIVE (Novella)
 	 * 
-	 * @return </code>True</code> operazione correttamente eseguita
+	 * @return la DSP che sto aggiungendo
 	 */
-	public boolean setDOMDispAttive(String pos, String norma, String partizione, String novellando, String novella, String autoNota, boolean implicita);
+	public void setDOMNovellaDispAttive(Node meta, String virgolettaContenuto, String tipo, String posizione, String virgolettaA, String virgolettaB);
 	
+	/**
+	 * Funzione per l'aggiornamento dei metadati di disposizione ATTIVE (Novellando)
+	 * 
+	 * @return la DSP che sto aggiungendo
+	 */
+	public void setDOMNovellandoDispAttive(Node meta, boolean parole, String tipoPartizione, String tipo, String ruoloA, String virgolettaA, String ruoloB, String virgolettaB);
+	
+	
+	//Disposizioni PASSIVE
 	/**
 	 * Funzione per l'aggiornamento dei metadati di disposizione PASSIVE e
 	 * per l'inserimento dei metadati proprietari (creazione della nota)
 	 * 
 	 * @return </code>True</code> operazione correttamente eseguita
 	 */
-	public boolean setDOMDisposizioni(String pos, String Norma, String partizione, String Novellando, String Novella, String preNota, String autoNota, String postNota, boolean implicita);
+	public boolean setDOMDisposizioni(String pos, String Norma, String partizione, String Novellando, String Novella, String preNota, String autoNota, String postNota, boolean implicita, Evento eventoOriginale, Evento eventoVigore);
 	
 	/**
 	 * Funzione per l'inserimento di una nuova partizione
@@ -63,16 +81,7 @@ public interface Disposizioni extends Service {
 	 * Funzione per l'inserimento della nota ndr (per la vigenza)
 	*/
 	public void makeNotaVigenza(Node node);
-	
-	/**
-	 * Funzione per l'abilitazione dell'azione di assegnazione della vigenza
-	 * 
-	 * @param node nodo sul cui testo si vuole applicare la vigenza
-	 * @return </code>true</code> se l'azione puo' essere abilitata
-	 */
-	public boolean canSetVigenza(Node node);
-	
-	
+		
 	/**
 	 * Funzione Dom per l'assegnazione di un intervallo di vigenza ad una
 	 * porzione di testo
@@ -95,12 +104,7 @@ public interface Disposizioni extends Service {
 	 * @return
 	 */
 	public VigenzaEntity getVigenza(Node node, int start, int end);
-	/**
-	 * Funzione per la lettura del testo marcato
-	 * @return
-	 */
-	public String getSelectedText();
-	
+		
 	/**
 	 * Funzione per verificare se il documento ha almeno una vigenza
 	 * @return 
@@ -112,13 +116,6 @@ public interface Disposizioni extends Service {
 	 */
 	public void setTipoDocVigenza();
 	
-	/**
-	 * Funzione che aggiorna le vigenze che fanno riferimento 
-	 * agli eventi cancellati dal ciclo di vita
-	 * @param vig vigenza da aggiornare
-	 */
-	public void updateVigenzaOnDoc(VigenzaEntity vig);
-
 	/**
 	 * Undo ripristinando una vecchia vigenza
 	 */
@@ -132,10 +129,10 @@ public interface Disposizioni extends Service {
 	/**
 	 * Elimina vigenza
 	 */
-	public void doErase(String idNovellando, String idNovella, Node disposizione, Node novellando);
+	public Node doErase(String idNovellando, String idNovella, Node disposizione, Node novellando);
 	
 	/**
 	 * Modifica vigenza
 	 */
-	public void doChange(String norma, String pos, Node disposizione, String autonota, boolean implicita, Node novellando, String status);
+	public void doChange(String norma, String pos, Node disposizione, String autonota, boolean implicita, Node novellando, String status, String idEvento, String idNovella);
 }

@@ -122,9 +122,7 @@ public class RiferimentiPaneImpl implements RiferimentiPane, EventManagerListene
 
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws Exception {
-		
-//		popupMenu = bars.getPopup(false);
-		
+
 		bar.add(utilUI.applyI18n("panes.riferimenti.start", startAction));
 		bar.add(utilUI.applyI18n("panes.riferimenti.stop", stopAction));
 		bar.getComponent(0).setEnabled(true);
@@ -154,7 +152,7 @@ public class RiferimentiPaneImpl implements RiferimentiPane, EventManagerListene
 	
 	// ///////////////////////////////////////////////////// Startable Interface
 	public void start() throws Exception {
-		//frame.addPane(xsltPane, false);
+
 	}
 
 	public void stop() throws Exception {

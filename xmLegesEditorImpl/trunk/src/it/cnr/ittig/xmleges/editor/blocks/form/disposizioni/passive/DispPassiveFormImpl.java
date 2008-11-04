@@ -1,5 +1,4 @@
 package it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.passive;
-
 import it.cnr.ittig.services.manager.Initializable;
 import it.cnr.ittig.services.manager.Loggable;
 import it.cnr.ittig.services.manager.Logger;
@@ -11,9 +10,9 @@ import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.FormClosedListener;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
-import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
+import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
 import it.cnr.ittig.xmleges.core.util.date.UtilDate;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
@@ -23,6 +22,7 @@ import it.cnr.ittig.xmleges.editor.services.dom.disposizioni.Disposizioni;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.MetaCiclodivita;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
+import it.cnr.ittig.xmleges.editor.services.dom.rinumerazione.Rinumerazione;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.Vigenza;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
 import it.cnr.ittig.xmleges.editor.services.form.disposizioni.passive.DispPassiveForm;
@@ -77,7 +77,6 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 	NirUtilDom nirUtilDom;
 	NirUtilUrn nirUtilUrn;
 	EventManager eventManager;
-	UtilUI utilui;
 	UtilMsg utilmsg;
 	MetaCiclodivita ciclodivita;
 	CiclodiVitaForm ciclodivitaForm;
@@ -128,6 +127,8 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 	
 	JTextField data;
 
+	Rinumerazione rinumerazione;
+	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
@@ -139,7 +140,6 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 		nirUtilUrn = (NirUtilUrn) serviceManager.lookup(NirUtilUrn.class);
-		utilui = (UtilUI) serviceManager.lookup(UtilUI.class);
 		utilmsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		ciclodivita = (MetaCiclodivita) serviceManager.lookup(MetaCiclodivita.class);
@@ -148,6 +148,8 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 		novellandoForm = (NovellandoForm) serviceManager.lookup(NovellandoForm.class);
 		novellaForm = (NovellaForm) serviceManager.lookup(NovellaForm.class);
 		domDisposizioni  = (Disposizioni) serviceManager.lookup(Disposizioni.class);
+		
+		rinumerazione = (Rinumerazione) serviceManager.lookup(Rinumerazione.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
@@ -155,7 +157,8 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 		eventManager.addListener(this, DocumentClosedEvent.class);
 		form.setMainComponent(this.getClass().getResourceAsStream("DispPassive.jfrm"));
 		form.setName("editor.form.disposizioni.passive");
-		form.setCustomButtons(new String[] { "editor.form.disposizioni.passive.btn.cancel" });
+		form.setCustomButtons(new String[] { //"editor.form.disposizioni.passive.btn.cancel", 
+											"generic.close" });
 		form.setHelpKey("help.contents.form.disposizionipassive");
 		finevigoretesto = (JLabel) form.getComponentByName("editor.disposizioni.passive.finevigoretesto");
 		datatesto = (JLabel) form.getComponentByName("editor.disposizioni.passive.datatesto");
@@ -202,9 +205,9 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 			Evento[] eventiOnDom = ciclodivita.getEventi();
 			ciclodivitaForm.setEventi(eventiOnDom);
 			
-			if (ciclodivitaForm.openForm()) {
+				boolean formIsOk = ciclodivitaForm.openForm();
 				eventoselezionato = ciclodivitaForm.getEventoSelezionato();
-				if (eventoselezionato != -1) {	
+				if (eventoselezionato != -1 && formIsOk) {	
 					if (eventiOnDom.length!=0)
 						eventoriginale = eventiOnDom[0];
 					else
@@ -221,24 +224,25 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 						data.setText("");
 					}	
 				}	
-				Evento[] newEventi = ciclodivitaForm.getEventi();
-				Relazione[] newRelazioni = null;
-				if(newEventi!=null){
-					newRelazioni = new Relazione[newEventi.length];
-					for(int i=0;i<newEventi.length;i++){
-						newRelazioni[i]=newEventi[i].getFonte();
+				
+				if (ciclodivitaForm.getModificaEventi()) {	
+				
+					Evento[] newEventi = ciclodivitaForm.getEventi();
+					Relazione[] newRelazioni = null;
+					if(newEventi!=null){
+						newRelazioni = new Relazione[newEventi.length];
+						for(int i=0;i<newEventi.length;i++){
+							newRelazioni[i]=newEventi[i].getFonte();
+						}
 					}
-				}
-				ciclodivita.setCiclodiVita(newEventi,newRelazioni);
-	   		   
-			}
+					ciclodivita.setCiclodiVita(newEventi,newRelazioni);
+	   		    }
+			
 		}
 		if (e.getSource() == sceltadove) {
 			partizioniForm.openForm();
-			if (partizioniForm.getPartizioneEstesa().length() > 0) {
-				partizione = partizioniForm.getPartizioneEstesa();
-				dove.setText(makeSub(partizione));
-			}	
+			partizione = partizioniForm.getPartizioneEstesa();
+			dove.setText(makeSub(partizione));	
 		}
 		if (e.getSource() == abrogazione || e.getSource() == sostituzione
 				|| e.getSource() == integrazione) {
@@ -286,6 +290,8 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 			dove.setText("");
 			partizione="";
 			implicita.setSelected(false);
+			if (rinumerazione.isRinumerazione())
+				utilmsg.msgInfo("editor.form.disposizioni.passive.rinumerazione");
 		}	
 		posDisposizione="";
 		activeNode = null;
@@ -293,6 +299,7 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 		operazioneProssima = NO_OPERAZIONE;
 		form.setSize(420, 280);
 		form.showDialog(false);
+		
 	}
 
 	public int getTipoDisposizione() {
@@ -323,25 +330,57 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 		this.status = status;
 	}
 		
-	public void setOperazioneProssima() {
-		operazioneProssima = FINE;					//ELIMINARE IL METODO !!!!!!!!!!!!!!!!
+	public void setMeta() {
+			
+			String urn = eventovigore.getFonte().getLink();
+			try {
+				urn = nirUtilUrn.getFormaTestuale(new Urn(urn));
+				if (!partizione.equals("")) 
+					urn = partizione + " " + urn;
+			} catch (Exception e) {}
+			autoNota = urn;
+			
+			String partizione = evento.getText();
+			if (!dove.getText().equals("")) 
+				partizione = partizione + "#" + dove.getText();	//TODO testare se ho già una urn con partizioni specificate e decidere come comportarsi
+
+			if (!domDisposizioni.setDOMDisposizioni("#"+posDisposizione, evento.getText(), partizione, "#"+idNovellando, "#"+idNovella, preNota, autoNota, postNota, implicita.isSelected(),eventoriginale, eventovigore))
+				utilmsg.msgError("editor.form.disposizioni.passive.erroremetadati");
+				
+			operazioneIniziale = NO_OPERAZIONE;
 	}
 
 	private void undo(int operazione) {
+		
 		if (operazione==NOVELLANDO) {
-			logger.debug("Undo Novellando: (" + idNovellando + " " + iniziovigoreNovellando + " " + finevigoreNovellando + " " + statusNovellando);
-			if (nuovoNovellando)
-				domDisposizioni.doUndo(idNovellando, false);
-			else	
-				domDisposizioni.doUndo(idNovellando, iniziovigoreNovellando, finevigoreNovellando, statusNovellando);
-			if (operazioneIniziale==SOSTITUZIONE) {//se era una sostituzione undo anche di novella
-				logger.debug("Undo Novella: (" + idNovella + ")");
-				domDisposizioni.doUndo(idNovella, true);
-			} 
+			EditTransaction t = null;
+			try {
+				t = documentManager.beginEdit();
+				logger.debug("Undo Novellando: (" + idNovellando + " " + iniziovigoreNovellando + " " + finevigoreNovellando + " " + statusNovellando);
+				if (nuovoNovellando)
+					domDisposizioni.doUndo(idNovellando, false);
+				else	
+					domDisposizioni.doUndo(idNovellando, iniziovigoreNovellando, finevigoreNovellando, statusNovellando);
+				if (operazioneIniziale==SOSTITUZIONE) {//se era una sostituzione undo anche di novella
+					logger.debug("Undo Novella: (" + idNovella + ")");
+					domDisposizioni.doUndo(idNovella, true);
+				} 
+				documentManager.commitEdit(t);
+			} catch (Exception ex) {
+				documentManager.rollbackEdit(t);
+			}
 		}	
 		if (operazione==NOVELLA) {
-			logger.debug("Undo Novella: (" + idNovella + ")");
-			domDisposizioni.doUndo(idNovella, true);
+			EditTransaction t = null;
+			try {
+				t = documentManager.beginEdit();
+
+				logger.debug("Undo Novella: (" + idNovella + ")");
+				domDisposizioni.doUndo(idNovella, true);
+				documentManager.commitEdit(t);
+			} catch (Exception ex) {
+				documentManager.rollbackEdit(t);
+			}				
 		}	
 	}
 	
@@ -367,25 +406,6 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 			novellaForm.openForm(this);	
 		}	
 		
-		if (operazioneProssima == FINE) {
-			
-			String urn = eventovigore.getFonte().getLink();
-			try {
-				urn = nirUtilUrn.getFormaTestuale(new Urn(urn));
-				if (!partizione.equals("")) 
-					urn = partizione + " " + urn;
-			} catch (Exception e) {}
-			autoNota = urn;
-			
-			String partizione = evento.getText();
-			if (!dove.getText().equals("")) 
-				partizione = partizione + "#" + dove.getText();	//TODO testare se ho già una urn con partizioni specificate e decidere come comportarsi
-			
-			if (!domDisposizioni.setDOMDisposizioni(posDisposizione, evento.getText(), partizione, idNovellando, idNovella, preNota, autoNota, postNota, implicita.isSelected()))
-				utilmsg.msgError("editor.form.disposizioni.passive.erroremetadati");
-			
-			operazioneIniziale = NO_OPERAZIONE;
-		}
 		if (operazioneProssima == INIZIO) {
 			operazioneIniziale = NO_OPERAZIONE;
 			openForm(false);
@@ -424,3 +444,4 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 	}
 	
 }
+

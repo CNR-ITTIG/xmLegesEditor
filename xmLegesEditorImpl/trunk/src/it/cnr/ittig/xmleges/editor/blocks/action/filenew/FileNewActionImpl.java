@@ -117,11 +117,11 @@ public class FileNewActionImpl extends AbstractAction implements FileNewAction, 
 				templatefile = template.getNirTemplate(fileNewForm.getSelectedTemplate(), fileNewForm.getSelectedDTD());
 				if (fileOpenAction.doOpen(templatefile.getAbsolutePath(), false)) {
 					dm.setNew(true);
-					
-					//imposto la Rinumerazione ATTIVA (se non lo ï¿½ giï¿½)
+
+					//imposto la Rinumerazione ATTIVA (se non lo è già)
 					if (!rinumerazione.isRinumerazione())
 						rinumerazioneAction.doSetRinumerazione(true);
-					
+
 					return true;
 				} else
 					return false;

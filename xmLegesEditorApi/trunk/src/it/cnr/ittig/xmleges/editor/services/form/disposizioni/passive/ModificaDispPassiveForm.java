@@ -1,8 +1,8 @@
 package it.cnr.ittig.xmleges.editor.services.form.disposizioni.passive;
 
-import it.cnr.ittig.services.manager.Service;
-
 import org.w3c.dom.Node;
+
+import it.cnr.ittig.services.manager.Service;
 
 /**
  * Servizio per la visualizzazione della form per la modifica/eliminazione delle disposizioni passive
@@ -28,3 +28,4 @@ public interface ModificaDispPassiveForm extends Service {
 	public void openForm(Node activeNode);
 
 }
+

@@ -39,10 +39,19 @@ public interface CiclodiVitaForm extends Service {
 	 */
 	public Evento[] getEventi();
 
+	
 	/**
 	 * Restituisce l'indice dell'evento selezionato nella form.
 	 */
+
 	public int getEventoSelezionato();
+
+	
+	/**
+	 * Restituisce l'indice dell'evento selezionato nella form.
+	 */
+	public boolean getModificaEventi();
+
 	
 
 	/**
@@ -52,8 +61,6 @@ public interface CiclodiVitaForm extends Service {
 	 */
 	public void setTipoDTD(String tipoDTD);
 
-
-
 	/**
 	 * Imposta sulla form gli eventi associati al documento
 	 * 
@@ -61,14 +68,12 @@ public interface CiclodiVitaForm extends Service {
 	 */
 	public void setEventi(Evento[] eventi);
 
-
 	/**
 	 * 
 	 * @return
 	 */
 	public Relazione[] getRelazioniTotalefromCdvf();
 	
-	
-	
+
 
 }

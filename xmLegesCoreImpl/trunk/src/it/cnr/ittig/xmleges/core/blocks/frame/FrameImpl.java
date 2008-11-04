@@ -359,12 +359,33 @@ public class FrameImpl implements Frame, Loggable, Serviceable, Configurable, In
 			}
 		}
 	}
+	
+	public void reloadPerspective(Properties prop, boolean defaultValue){
+		Enumeration en = name2PaneFrames.keys();
+		
+		String defaultVal = Boolean.toString(defaultValue);
+		
+		while (en.hasMoreElements()) {
+			String name = en.nextElement().toString();
+			try {
+				PaneFrame paneFrame = (PaneFrame) name2PaneFrames.get(name);
+				
+				if (paneFrame != null) {
+					
+					boolean show = Boolean.valueOf(prop.getProperty("show." + paneFrame.getPane().getName(),defaultVal)).booleanValue();
+					paneFrame.setShow(show);
+					updateTab();
+				} else
+					logger.warn("cannot reload pane: " + paneFrame.getPane().getName());
+			} catch (Throwable tr) {
+				logger.error("Error reloading: " + name);
+			}
+		}
+	}
+	
+	
 
 	public void addPane(Pane pane, boolean scrollable) {
-		if (pane == null) {
-			logger.error("Null pane not added.");
-			return;
-		}
 		PaneFrame paneFrame = (PaneFrame) name2PaneFrames.get(pane.getName());
 		if (paneFrame != null) {
 			ViewPaneAction paneAction = new ViewPaneAction(paneFrame);
@@ -606,4 +627,38 @@ public class FrameImpl implements Frame, Loggable, Serviceable, Configurable, In
 			setInteraction(true);
 		}
 	}
+	
+
+	public void setSelectedPane(Pane pane){		
+		setSelectedPane(pane.getName());
+	}
+	
+	
+	public void setSelectedPane(String paneName){
+		PaneFrame pf = (PaneFrame) name2PaneFrames.get(paneName);
+		if (pf!=null && pf.isShow()) {
+			AutoTabbedPane tab = getAutoTabbedPane(pf);
+			tab.setSelected(pf);
+		}
+	}
+		
+	
+	public boolean isSelectedPane(Pane pane){		
+		return isSelectedPane(pane.getName());
+	}
+
+	public boolean isSelectedPane(String  paneName){		
+		PaneFrame pf = (PaneFrame) name2PaneFrames.get(paneName);
+		
+		AutoTabbedPane tab = getAutoTabbedPane(pf);
+		
+		return tab.isSelected(pf);
+
+	}
+	
+	
+	
+	
+	
+	
 }

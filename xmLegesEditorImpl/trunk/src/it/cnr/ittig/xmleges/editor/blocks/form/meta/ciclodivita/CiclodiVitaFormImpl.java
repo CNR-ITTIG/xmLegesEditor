@@ -81,7 +81,7 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 	
 	String errorMessage = "";
 
-
+	boolean modificaEventi;
 
 
 
@@ -120,6 +120,7 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 
 	// ////////////////////////////////////////////// CiclodiVitaForm Interface
 	public boolean openForm() {
+		modificaEventi=false;
 		form.setSize(650, 400);
 		form.showDialog();
 		return form.isOk();
@@ -136,19 +137,24 @@ public class CiclodiVitaFormImpl implements CiclodiVitaForm, Loggable, Serviceab
 			if (formEventi.openForm()) {
 				eventi = formEventi.getEventi();
 				eventiList.setListData(eventi);
+				modificaEventi = true;
 			}
 		}
 		
 	}
 
+
+	public boolean getModificaEventi() {
+		return modificaEventi;
+	}
+	
 	public int getEventoSelezionato() {
 		if (eventiList.isSelectionEmpty())
 			return -1;
 		else
 			return eventiList.getSelectedIndex();
 	}
-	
-	
+		
 	public Evento[] getEventi() {
 		return eventi;
 	}

@@ -1,6 +1,7 @@
 <configuration>
 	<browsers>
 		<browser>mozilla-firefox</browser>
+		<browser>firefox</browser>		
 		<browser>C:\\Programmi\\Internet Explorer\\iexplore.exe</browser>
 		<browser>cmd /C start</browser>
 		<!-- per il momento coi fogli di stile che abbiamo firefox su windows non funziona -->
@@ -10,6 +11,8 @@
 	</browsers>
 	<readerpdf>
 		<reader>xpdf</reader>
+		<reader>gpdf</reader>		
+		<reader>evince</reader>		
 		<reader>acroread</reader>
 		<reader>cmd /C start</reader>
 		<reader>command /C start</reader>					

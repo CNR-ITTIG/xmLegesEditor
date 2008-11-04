@@ -74,9 +74,8 @@ public interface Vigenza extends Service {
 	 *
 	 */
 	public void setTipoDocVigenza();
-	
-	
-	
+
+
 
 	
 	

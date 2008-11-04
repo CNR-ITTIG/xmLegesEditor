@@ -1,5 +1,4 @@
 package it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.attive;
-
 import it.cnr.ittig.services.manager.Initializable;
 import it.cnr.ittig.services.manager.Loggable;
 import it.cnr.ittig.services.manager.Logger;
@@ -10,37 +9,40 @@ import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.FormClosedListener;
+import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
-import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
 import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
+import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
 import it.cnr.ittig.xmleges.core.util.date.UtilDate;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
-import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
-import it.cnr.ittig.xmleges.editor.services.util.urn.NirUtilUrn;
-import it.cnr.ittig.xmleges.editor.services.util.urn.Urn;
 import it.cnr.ittig.xmleges.editor.services.dom.disposizioni.Disposizioni;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.MetaCiclodivita;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Relazione;
-import it.cnr.ittig.xmleges.editor.services.dom.vigenza.Vigenza;
-import it.cnr.ittig.xmleges.editor.services.dom.vigenza.VigenzaEntity;
+import it.cnr.ittig.xmleges.editor.services.form.disposizioni.attive.DecorrenzaForm;
+import it.cnr.ittig.xmleges.editor.services.form.disposizioni.attive.DelimitatoreForm;
 import it.cnr.ittig.xmleges.editor.services.form.disposizioni.attive.DispAttiveForm;
-import it.cnr.ittig.xmleges.editor.services.form.disposizioni.attive.NovellandoNovellaForm;
-import it.cnr.ittig.xmleges.editor.services.form.meta.ciclodivita.CiclodiVitaForm;
+import it.cnr.ittig.xmleges.editor.services.form.disposizioni.attive.NovellaForm;
+import it.cnr.ittig.xmleges.editor.services.form.disposizioni.attive.NovellandoForm;
+import it.cnr.ittig.xmleges.editor.services.form.disposizioni.attive.RiferimentoForm;
 import it.cnr.ittig.xmleges.editor.services.form.rinvii.partizioni.PartizioniForm;
+import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.EventObject;
 import java.util.StringTokenizer;
 
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultListModel;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.JList;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * <h1>Implementazione del servizio
@@ -73,54 +75,57 @@ import org.w3c.dom.Node;
 public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener, Loggable, ActionListener, Serviceable, Initializable, FormClosedListener {
 
 	Logger logger;
-	NirUtilDom nirUtilDom;
-	NirUtilUrn nirUtilUrn;
 	EventManager eventManager;
-	UtilUI utilui;
 	UtilMsg utilmsg;
-	MetaCiclodivita ciclodivita;
-	CiclodiVitaForm ciclodivitaForm;
-	int eventoselezionato = -1;
 	Form form;
-	JLabel finevigoretesto;
-	JLabel datatesto;
+	JLabel info;
+	JLabel metaPresente;
+	JLabel etiDecorenza;
+	JLabel etiAtto;
+	JLabel etiPartizione;
+	JLabel etiInteroAtto;
+	JLabel etiDelimitatori;
+	JButton sceltaDecorrenza;
+	JButton sceltaAtto;
+	JButton sceltaPartizione;
+	JButton sceltaDelimitatore;
+	JTextField decorrenza;
+	JTextField atto;
+	JTextField partizione;
+	JList delimitatori;
+	DefaultListModel listModel = new DefaultListModel();
 	JButton abrogazione;
 	JButton sostituzione;
 	JButton integrazione;
-	JButton sceltaevento;
-	JTextField evento;
-	JLabel dovetesto;
-	JButton sceltadove;
-	JTextField dove;
-	JLabel implicitatesto;
-	JCheckBox implicita; 
-	PartizioniForm partizioniForm;
-	NovellandoNovellaForm novellandoNovellaForm;
-	Node activeNode;
-	VigenzaEntity vigenzaEntity;
-	Vigenza vigenza;
-	String errorMessage = "";
+	JRadioButton interoAtto;
+	JRadioButton soloPartizione;
 	
+	JCheckBox implicita;
+
+	PartizioniForm partizioniForm;
+	DecorrenzaForm decorrenzaForm;
+	RiferimentoForm riferimentoForm;
+	DelimitatoreForm delimitatoreForm;
+	NovellandoForm novellandoForm;
+	NovellaForm novellaForm;
+
+	Node activeNode;	
 	DocumentManager documentManager;
+	SelectionManager selectionManager;
 
 	int operazioneIniziale;
 	int operazioneCorrente;
 	int operazioneProssima;
-	
-	String partizione="";
-	String posDisposizione = "";
-	String idNovellando = "";
-	String idNovella = "";
-	String preNota = "";
-	String autoNota = "";
-	String status;
-	
-	Disposizioni domDisposizioni;
-	Evento eventoriginale;
-	Evento eventovigore;
-	
-	JTextField data;
 
+	NirUtilDom nirUtilDom;
+	
+	String[] delimitatoriScelti;
+	
+	boolean listenerFormClosed;
+	Node modificoMetaEsistenti=null;
+	Disposizioni domDisposizioni;
+	String modCorrente;
+	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
@@ -130,15 +135,16 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 	public void service(ServiceManager serviceManager) throws ServiceException {
 		form = (Form) serviceManager.lookup(Form.class);
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
-		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
-		nirUtilUrn = (NirUtilUrn) serviceManager.lookup(NirUtilUrn.class);
-		utilui = (UtilUI) serviceManager.lookup(UtilUI.class);
 		utilmsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
-		ciclodivita = (MetaCiclodivita) serviceManager.lookup(MetaCiclodivita.class);
+		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
+		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 		partizioniForm = (PartizioniForm) serviceManager.lookup(PartizioniForm.class);
-		ciclodivitaForm = (CiclodiVitaForm) serviceManager.lookup(CiclodiVitaForm.class);
-		novellandoNovellaForm = (NovellandoNovellaForm) serviceManager.lookup(NovellandoNovellaForm.class);
+		decorrenzaForm = (DecorrenzaForm) serviceManager.lookup(DecorrenzaForm.class);
+		riferimentoForm = (RiferimentoForm) serviceManager.lookup(RiferimentoForm.class);
+		delimitatoreForm = (DelimitatoreForm) serviceManager.lookup(DelimitatoreForm.class);
+		novellandoForm = (NovellandoForm) serviceManager.lookup(NovellandoForm.class);
+		novellaForm = (NovellaForm) serviceManager.lookup(NovellaForm.class);
 		domDisposizioni  = (Disposizioni) serviceManager.lookup(Disposizioni.class);
 	}
 
@@ -147,105 +153,115 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 		eventManager.addListener(this, DocumentClosedEvent.class);
 		form.setMainComponent(this.getClass().getResourceAsStream("DispAttive.jfrm"));
 		form.setName("editor.form.disposizioni.attive");
-		form.setCustomButtons(new String[] { "editor.form.disposizioni.attive.btn.cancel" });
+		form.setCustomButtons(new String[] {"generic.close" });
 		form.setHelpKey("help.contents.form.disposizioniattive");
-		finevigoretesto = (JLabel) form.getComponentByName("editor.disposizioni.attive.finevigoretesto");
-		datatesto = (JLabel) form.getComponentByName("editor.disposizioni.attive.datatesto");
+
+		info = (JLabel) form.getComponentByName("editor.disposizioni.attive.info");
+		metaPresente = (JLabel) form.getComponentByName("editor.disposizioni.attive.metapresente");
+ 		etiDecorenza = (JLabel) form.getComponentByName("editor.disposizioni.attive.decorrenza.eti");
+		etiAtto = (JLabel) form.getComponentByName("editor.disposizioni.attive.atto.eti");
+		etiPartizione = (JLabel) form.getComponentByName("editor.disposizioni.attive.partizione.eti");
+		etiInteroAtto = (JLabel) form.getComponentByName("editor.disposizioni.attive.interoatto.eti");
+		etiDelimitatori = (JLabel) form.getComponentByName("editor.disposizioni.attive.delimitatori.eti");
+		sceltaDecorrenza = (JButton) form.getComponentByName("editor.disposizioni.attive.decorrenza.scelta");
+		sceltaAtto = (JButton) form.getComponentByName("editor.disposizioni.attive.atto.scelta");
+		sceltaPartizione = (JButton) form.getComponentByName("editor.disposizioni.attive.partizione.scelta");
+		sceltaDelimitatore = (JButton) form.getComponentByName("editor.disposizioni.attive.delimitatori.scelta");
+		decorrenza = (JTextField) form.getComponentByName("editor.disposizioni.attive.decorrenza");
+		atto = (JTextField) form.getComponentByName("editor.disposizioni.attive.atto");
+		partizione = (JTextField) form.getComponentByName("editor.disposizioni.attive.partizione");
+		delimitatori = (JList) form.getComponentByName("editor.disposizioni.attive.delimitatori");
+		delimitatori.setModel(listModel);
 		abrogazione = (JButton) form.getComponentByName("editor.disposizioni.attive.abrogazione");
 		sostituzione = (JButton) form.getComponentByName("editor.disposizioni.attive.sostituzione");
 		integrazione = (JButton) form.getComponentByName("editor.disposizioni.attive.integrazione");
+		
+		implicita = (JCheckBox) form.getComponentByName("editor.disposizioni.attive.implicita");
+
+		interoAtto = (JRadioButton) form.getComponentByName("editor.disposizioni.attive.sceltainteroatto");
+		soloPartizione = (JRadioButton) form.getComponentByName("editor.disposizioni.attive.sceltapartizione");
+		ButtonGroup grupporadio = new ButtonGroup();
+		grupporadio.add(interoAtto);
+		grupporadio.add(soloPartizione);
+		interoAtto.setSelected(true);
+		
 		abrogazione.addActionListener(this);
 		sostituzione.addActionListener(this);
 		integrazione.addActionListener(this);
-		evento = (JTextField) form.getComponentByName("editor.disposizioni.attive.evento");
-		sceltaevento = (JButton) form.getComponentByName("editor.disposizioni.attive.sceltaevento");
-		sceltaevento.addActionListener(this);
-		dovetesto = (JLabel) form.getComponentByName("editor.disposizioni.attive.dovetesto");
-		dove = (JTextField) form.getComponentByName("editor.disposizioni.attive.dove");
-		sceltadove = (JButton) form.getComponentByName("editor.disposizioni.attive.sceltadove");
-		sceltadove.addActionListener(this);
-		
-		implicitatesto = (JLabel) form.getComponentByName("editor.disposizioni.attive.implicitatesto");
-		implicita = (JCheckBox)  form.getComponentByName("editor.disposizioni.attive.implicita");
-		data = (JTextField) form.getComponentByName("editor.disposizioni.attive.data");
-
+		sceltaDecorrenza.addActionListener(this);
+		sceltaAtto.addActionListener(this);
+		sceltaPartizione.addActionListener(this);
+		sceltaDelimitatore.addActionListener(this);
 	}
 	
+	
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == sceltaevento) {
-			ciclodivita.setActiveNode(activeNode);
-			Evento[] eventiOnDom = ciclodivita.getEventi();
-			ciclodivitaForm.setEventi(eventiOnDom);
-			
-			if (ciclodivitaForm.openForm()) {
-				eventoselezionato = ciclodivitaForm.getEventoSelezionato();
-				if (eventoselezionato != -1) {	
-					if (eventiOnDom.length!=0)
-						eventoriginale = eventiOnDom[0];
-					else
-						eventoriginale = ciclodivitaForm.getEventi()[0];
-					eventovigore=ciclodivitaForm.getEventi()[eventoselezionato];
-					if (eventovigore.getFonte().getTagTipoRelazione().equalsIgnoreCase("attiva")) {
-						evento.setText(eventovigore.getFonte().getLink());
-						data.setText(UtilDate.normToString(eventovigore.getData()));
-					}	
-					else {
-						evento.setText(eventovigore.getFonte().getLink());
-						utilmsg.msgInfo("Dovresti selezionare un evento attivo");
-						evento.setText("");
-						data.setText("");
-					}	
-				}	
-				Evento[] newEventi = ciclodivitaForm.getEventi();
-				Relazione[] newRelazioni = null;
-				if(newEventi!=null){
-					newRelazioni = new Relazione[newEventi.length];
-					for(int i=0;i<newEventi.length;i++){
-						newRelazioni[i]=newEventi[i].getFonte();
-					}
-				}
-				ciclodivita.setCiclodiVita(newEventi,newRelazioni);
-	   		   
-			}
+		
+		if (e.getSource() == interoAtto) {
+			delimitatori.setEnabled(false);
+			sceltaDelimitatore.setEnabled(false);
+			sceltaPartizione.setEnabled(false);
 		}
-		if (e.getSource() == sceltadove) {
-			partizioniForm.openForm();
-			if (partizioniForm.getPartizioneEstesa().length() > 0) {
-				partizione = partizioniForm.getPartizioneEstesa();
-				dove.setText(makeSub(partizione));
+		
+		if (e.getSource() == soloPartizione){
+			delimitatori.setEnabled(true);
+			sceltaDelimitatore.setEnabled(true);
+			sceltaPartizione.setEnabled(true);
+		}
+		
+		if (e.getSource() == sceltaDecorrenza) 
+			if (decorrenzaForm.openForm())
+				decorrenza.setText(decorrenzaForm.getDecorrenza());
+		
+		if (e.getSource() == sceltaAtto) 
+			if (riferimentoForm.openForm())
+				atto.setText(riferimentoForm.getRiferimento());
+		
+		if (e.getSource() == sceltaPartizione) {
+			if (partizioniForm.openForm()) {
+				String partizioneSelezionata = partizioniForm.getPartizioneEstesa();
+				partizione.setText(makeSub(partizioneSelezionata));
 			}	
 		}
-		if (e.getSource() == abrogazione || e.getSource() == sostituzione
-				|| e.getSource() == integrazione) {
+		
+		if (e.getSource() == sceltaDelimitatore) {
+			if (delimitatoreForm.openForm(delimitatoriScelti)) {
+				delimitatoriScelti = delimitatoreForm.getDelimitatore();
+				listModel.clear();
+				for (int i=0; i<delimitatoriScelti.length/3; i++)
+					listModel.addElement(delimitatoriScelti[i*3] + " " + delimitatoriScelti[i*3+1] + " " + delimitatoriScelti[i*3+2]);
+			}
+		}	
+		
+		if (e.getSource() == abrogazione || e.getSource() == sostituzione || e.getSource() == integrazione) {
 			// verifiche per proseguire con la seconda maschera
-			if (evento.getText().equals(""))
-				utilmsg.msgInfo("editor.form.disposizioni.attive.noevento");
+			if ("".equals(decorrenza.getText().trim()))
+				utilmsg.msgInfo("editor.disposizioni.attive.nodecorrenza");
+			else if ("".equals(atto.getText().trim()))
+				utilmsg.msgInfo("editor.disposizioni.attive.noatto");
+			else if (soloPartizione.isSelected() && "".equals(partizione.getText().trim()))
+				utilmsg.msgInfo("editor.disposizioni.attive.nopartizione");
 			else {
-				
-				
-				//eliminare questa gestione ormai inutile
-				
-				
 				if (e.getSource() == abrogazione) {
 					operazioneIniziale = ABROGAZIONE;
 					operazioneCorrente = NOVELLANDO;
 					operazioneProssima = NOVELLANDO;
 					form.close();
-					novellandoNovellaForm.openForm(this);
+					novellandoForm.openForm(this,modificoMetaEsistenti);
 				}
 				if (e.getSource() == sostituzione) {
 					operazioneIniziale = SOSTITUZIONE;
 					operazioneCorrente = NOVELLANDO;
 					operazioneProssima = NOVELLANDO;
 					form.close();
-					novellandoNovellaForm.openForm(this);
+					novellandoForm.openForm(this,modificoMetaEsistenti);
 				}
 				if (e.getSource() == integrazione) {
 					operazioneIniziale = INTEGRAZIONE;
 					operazioneCorrente = NOVELLA;
 					operazioneProssima = NOVELLA;
 					form.close();
-					novellandoNovellaForm.openForm(this);
+					novellaForm.openForm(this,modificoMetaEsistenti);
 				}
 			}
 		}
@@ -257,103 +273,255 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 			return;		//questa form è già aperta
 		if (operazioneIniziale != NO_OPERAZIONE )
 			return;		//una form successiva è già aperta
-			
-		idNovellando="";
-		idNovella="";
+		
+		Node nodoAttivo = selectionManager.getActiveNode();
+		
 		if (cancellaCampi) {
-			evento.setText("");
-			data.setText("");
-			dove.setText("");
-			partizione="";
 			implicita.setSelected(false);
+			interoAtto.setSelected(true);
+			decorrenzaForm.initForm(nodoAttivo);
+			riferimentoForm.initForm(nodoAttivo);
+			//se ho metadati per questo MOD, li setto.
+			modificoMetaEsistenti = trovaMeta(nodoAttivo);
+			if (modificoMetaEsistenti != null)
+				recuperaMeta(modificoMetaEsistenti);
+			else {
+				metaPresente.setText("NB: metadati non presenti");
+				info.setText("Inserisci i metadati della modifica attiva:");
+				decorrenza.setText(decorrenzaForm.getDecorrenza());
+				atto.setText(riferimentoForm.getRiferimento());
+				partizione.setText(riferimentoForm.getPartizionePrimoAtto());
+				listModel.clear();
+				//delimitatoriScelti=new String[0];	recupero delimitatori dal commento <!-- frammento:part1-part2-->
+				delimitatoriScelti= riferimentoForm.getBordi();
+				listModel.clear();
+				for (int i=0; i<delimitatoriScelti.length/3; i++)
+					listModel.addElement(delimitatoriScelti[i*3] + " (" + delimitatoriScelti[i*3+1] + ") " + delimitatoriScelti[i*3+2]);
+			}
+			if (!"".equals(partizione.getText()))
+				soloPartizione.setSelected(true);
 		}	
-		posDisposizione="";
+
 		activeNode = null;
 		operazioneIniziale = NO_OPERAZIONE;
 		operazioneProssima = NO_OPERAZIONE;
-		form.setSize(420, 280);
+		form.setSize(420, 440);
 		form.showDialog(false);
 	}
-
-	public int getTipoDisposizione() {
-		return operazioneIniziale;
-	}
-	
-	public void setPosdisposizione(Node nodo) {
-		if (posDisposizione.equals(""))				//il controllo sul "" non dovrebbe essere più necessario perchè la sostituzione ora non agisce più sulla maschera della novella ........ CONTROLLARE
-			if (nirUtilDom.getNirContainer(nodo)!=null)
-				posDisposizione = UtilDom.getAttributeValueAsString(nirUtilDom.getNirContainer(nodo), "id");
-			else
-				posDisposizione = "??";
-	}
-	
-	public void setNovellando(String id) {
-		idNovellando = (id!=null) ? id : "";
-	}
-	
-	public void setNovella(String id) {
-		idNovella = (id!=null) ? id : "";
-	}
 		
-	public void setOperazioneProssima() {
-		operazioneProssima = FINE;					//ELIMINARE IL METODO !!!!!!!!!!!!!!!!
+	private void recuperaMeta(Node disposizione) {
+		if ("si".equals(UtilDom.getAttributeValueAsString(disposizione, "implicita")))
+			implicita.setSelected(true);
+		metaPresente.setText("NB: metadati già presenti (" + disposizione.getLocalName() + ")");
+		info.setText("Cambia i metadati della modifica attiva:");
+		//setto Decorrenza
+		Node termine = UtilDom.findRecursiveChild(disposizione,"dsp:termine");
+		decorrenza.setText("");
+		try { 
+			Node attributo = termine.getAttributes().getNamedItem("da");
+			if (attributo==null)
+				 attributo = termine.getAttributes().getNamedItem("a");
+			String valAttributo = attributo.getNodeValue();
+			valAttributo = valAttributo.substring(1, valAttributo.length());
+			Document doc = documentManager.getDocumentAsDom();
+			Node evento = doc.getElementById(valAttributo);
+			valAttributo = UtilDom.getAttributeValueAsString(evento, "data");
+			decorrenza.setText(UtilDate.normToString(valAttributo));
+		} catch (Exception e) {}
+		Node norma = UtilDom.findRecursiveChild(disposizione,"dsp:norma");
+		//setto Atto e Partizione
+		partizione.setText("");
+		atto.setText("");
+		try {
+			Node pos = UtilDom.findRecursiveChild(norma,"dsp:pos");
+			String valore = UtilDom.getAttributeValueAsString(pos,"xlink:href");
+			if (valore.indexOf("#")!=-1) {
+				partizione.setText(valore.substring(valore.indexOf("#")+1,valore.length()));
+				atto.setText(valore.substring(0, valore.indexOf("#")));
+			}	
+			else 
+				atto.setText(valore);
+		} catch (Exception e) {}
+		//setto Delimitatori
+		try {
+			delimitatoriScelti= prendiDelimitatori(new String[0], UtilDom.findRecursiveChild(norma,"ittig:bordo"));
+		} catch (Exception e) {
+			delimitatoriScelti=new String[0];
+		}
+		listModel.clear();
+		for (int i=0; i<delimitatoriScelti.length/3; i++)
+			listModel.addElement(delimitatoriScelti[i*3] + " (" + delimitatoriScelti[i*3+1] + ") " + delimitatoriScelti[i*3+2]);
+	}
+	
+	private String[] prendiDelimitatori(String[] attuale, Node bordo) {
+		if (bordo==null)
+			return attuale;
+		else {
+			int lunghezza = attuale.length;
+			String[] nuova = new String[lunghezza+3];
+			for (int i=0; i<lunghezza; i++)
+				nuova[i] = attuale [i];
+			try {
+				nuova[lunghezza] = UtilDom.getAttributeValueAsString(bordo,"tipo");
+				nuova[lunghezza+1] = UtilDom.getAttributeValueAsString(bordo,"num");
+				nuova[lunghezza+2] = "si".equalsIgnoreCase(UtilDom.getAttributeValueAsString(bordo,"ordinale")) ? "ordinale": "";
+			} catch (Exception e) {}	
+			return prendiDelimitatori(nuova, bordo.getFirstChild());
+		} 
+	}
+	
+	private Node trovaMeta(Node nodoAttivo) {
+		Document doc = documentManager.getDocumentAsDom(); 
+		modCorrente = "";
+		try {
+			modCorrente = "#"+UtilDom.getAttributeValueAsString(UtilDom.findParentByName(nodoAttivo, "mod"),"id");
+		} catch (Exception e) {
+			return null;
+		}	
+		Node activeMeta = nirUtilDom.findActiveMeta(doc,nodoAttivo);
+		Node modificheAttive = UtilDom.findRecursiveChild(activeMeta,"modificheattive");
+		if (modificheAttive==null)
+			return null;
+		NodeList disposizioni = modificheAttive.getChildNodes();
+		if (disposizioni==null)
+			return null;
+		for (int j=0; j<disposizioni.getLength(); j++)
+			try {
+				if (modCorrente.equals(UtilDom.getAttributeValueAsString(UtilDom.findDirectChild(disposizioni.item(j), "dsp:pos"), "xlink:href")))
+					return disposizioni.item(j);
+			} catch (Exception e) {}
+		return null;
+	}
+	
+	private String trovaEvento(Node nodoAttivo) {
+		String data = UtilDate.dateToNorm(UtilDate.textualFormatToDate(decorrenza.getText()));
+		
+		Document doc = documentManager.getDocumentAsDom();
+		Node activeMeta = nirUtilDom.findActiveMeta(doc,nodoAttivo);
+		Node eventi = UtilDom.findRecursiveChild(activeMeta,"eventi");
+		Node relazioni = UtilDom.findRecursiveChild(activeMeta,"relazioni");
+		NodeList eventiList = eventi.getChildNodes();
+		NodeList relazioniList = relazioni.getChildNodes();
+		for (int i = 0; i < relazioniList.getLength(); i++) {
+			Node relazioneNode = relazioniList.item(i);
+			if ("attiva".equals(relazioneNode.getNodeName()))
+				if (atto.getText().equals(UtilDom.getAttributeValueAsString(relazioneNode, "xlink:href"))) {
+					
+					//manca ancora test su data !!!!!!!!!!!!!!!
+					
+					String id = UtilDom.getAttributeValueAsString(relazioneNode, "id");
+					for (int j = 0; j < eventiList.getLength(); j++)
+						if (id.equals(UtilDom.getAttributeValueAsString(eventiList.item(j), "fonte")))
+							//return UtilDate.normToString(UtilDom.getAttributeValueAsString(eventiList.item(j), "data"));
+							return UtilDom.getAttributeValueAsString(eventiList.item(j), "id");
+				}
+		}
+		return null;	//evento non trovato
+	}
+	
+	
+	public void setMeta() {
+			
+		
+		EditTransaction t = null;
+		try {
+			t = documentManager.beginEdit();	
+			
+			//decorrenza
+			String termine = decorrenza.getText();
+			String idevento=null;
+			if (!decorrenzaForm.isDecorrenzaCondizionata()) 	//voglio l'id dell'evento con data 'termine'.
+				idevento = trovaEvento(selectionManager.getActiveNode()); 										
+			
+			String completa = "si"; 
+			if (decorrenzaForm.isDecorrenzaCondizionata())
+				completa = "no";
+			else {
+				String[] bordi = delimitatoreForm.getDelimitatore();
+				for (int i=0; i<bordi.length; i++)
+					if ("capoverso".equals(bordi[i]))
+						completa="no";	
+			}
+			
+			Node nuovoMeta = domDisposizioni.setDOMDispAttive(implicita.isSelected(), modificoMetaEsistenti, modCorrente, operazioneIniziale, completa, decorrenzaForm.isDecorrenzaCondizionata(), termine, idevento, atto.getText(), partizione.getText(), delimitatoreForm.getDelimitatore());
+			
+			if (operazioneIniziale!=ABROGAZIONE)
+				novellaForm.setMeta(nuovoMeta);
+			if (operazioneIniziale!=INTEGRAZIONE) {
+				String tipo = null;
+				if (interoAtto.isSelected())
+					tipo = "atto";
+				else {
+					tipo = partizione.getText();
+					if (listModel.getSize()>0) 
+						tipo = delimitatoreForm.getDelimitatore()[delimitatoreForm.getDelimitatore().length-3];
+					else {
+						String[] scelteTipo = new String[] {"allegato","libro","parte","titolo","capo","sezione","articolo","comma","lettera","numero","punto","periodo","parole"};
+						if (tipo.length()>3)
+							tipo = tipo.substring(0, 3);
+						for (int i=0; i<scelteTipo.length; i++)
+							if (tipo.equals(scelteTipo[i].substring(0, 3))) {
+								tipo = scelteTipo[i];
+								break;
+							}
+					}
+				}
+				novellandoForm.setMeta(nuovoMeta, tipo);
+			}
+			documentManager.commitEdit(t);
+		} catch (Exception ex) {
+			documentManager.rollbackEdit(t);
+		}
+		operazioneIniziale = NO_OPERAZIONE;
+	}
+	
+	public void setListenerFormClosed(boolean flag) {
+		listenerFormClosed = flag;
 	}
 	
 	public void formClosed() {
 
-		
-		
-		///////////////////non ha + senso
+		if (!listenerFormClosed)
+			return;					//sto aprendo maschere diverse da Novella/Novellando
 		
 		if (operazioneCorrente==operazioneProssima) {	//Ho scelto Indietro o chiuso con X
 			if (operazioneProssima == NOVELLA) {
-				operazioneProssima = INIZIO;				
+				if (operazioneIniziale == SOSTITUZIONE) 
+					operazioneProssima = NOVELLANDO;
+				else
+					operazioneProssima = INIZIO;
+				
+			} else if (operazioneProssima == NOVELLANDO) {
+				operazioneProssima = INIZIO;
 			}
-		    else 
-		    	if (operazioneProssima == NOVELLANDO) {
-		    		operazioneProssima = INIZIO;
-		    	}
 		}
 		
-		
-		
-		//eliminare questa gestione
 		if (operazioneProssima==NOVELLANDO) {
 			operazioneCorrente = NOVELLANDO;
-			novellandoNovellaForm.openForm(this);
-		}
-		//eliminare questa gestione
+			novellandoForm.openForm(this,modificoMetaEsistenti);
+		}	
 		if (operazioneProssima==NOVELLA) {
 			operazioneCorrente = NOVELLA;
-			novellandoNovellaForm.openForm(this);	
+			novellaForm.openForm(this,modificoMetaEsistenti);
 		}	
 		
-		
-		if (operazioneProssima == FINE) {
-			
-			String urn = eventovigore.getFonte().getLink();
-			try {
-				urn = nirUtilUrn.getFormaTestuale(new Urn(urn));
-				if (!partizione.equals("")) 
-					urn = partizione + " " + urn;
-			} catch (Exception e) {}
-			autoNota = urn;
-			
-			String partizione = evento.getText();
-			if (!dove.getText().equals("")) 
-				partizione = partizione + "#" + dove.getText();	//TODO testare se ho già una urn con partizioni specificate e decidere come comportarsi
-			
-			if (!domDisposizioni.setDOMDispAttive(posDisposizione, evento.getText(), partizione, idNovellando, idNovella, autoNota, implicita.isSelected()))
-				utilmsg.msgError("editor.form.disposizioni.attive.erroremetadati");
-			
-			operazioneIniziale = NO_OPERAZIONE;
-		}
 		if (operazioneProssima == INIZIO) {
 			operazioneIniziale = NO_OPERAZIONE;
 			openForm(false);
 		}
+		
+		if (operazioneProssima == FINE) 
+			setMeta();
+	}
+
+	public String getPartizione() {
+		return partizione.getText();
 	}
 	
+	public String[] getDelimitatori() {
+		return delimitatoriScelti;
+	}
+
 	private String makeSub(String partizione) {
 		StringTokenizer st = new StringTokenizer(partizione, " ");
 		String token;
@@ -384,5 +552,13 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 			if (form.isDialogVisible())
 				form.close();
 	}
-	
+
+	public void setOperazioneProssima(int operazione) {
+		operazioneProssima=operazione;
+	}
+
+	public int getOperazioneIniziale() {
+		return operazioneIniziale;
+	}
 }
+

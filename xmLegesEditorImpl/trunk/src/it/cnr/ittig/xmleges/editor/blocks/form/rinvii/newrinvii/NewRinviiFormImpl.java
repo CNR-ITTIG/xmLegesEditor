@@ -677,9 +677,9 @@ public class NewRinviiFormImpl implements NewRinviiForm, Loggable, Serviceable, 
 				for (int j = 0; j < numerotoken; j++) {
 					String token = st.nextToken();
 					if (token.equals("Comunita europee"))
-						urnautorita = "comunita.europee.";
+						urnautorita = "comunita.europee";
 					else if (token.equals("Unione europea"))
-						urnautorita = "unione.europea.";
+						urnautorita = "unione.europea";
 					else {
 						if (j == 0)   // livello 0
 							urnautorita = registroautorita.getUrnIstituzioneFromNomeIstituzione(token) + ";";

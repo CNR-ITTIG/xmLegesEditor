@@ -5,6 +5,7 @@ import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Enumeration;
@@ -74,6 +75,10 @@ public class AutoTabbedPane extends JPanel {
 
 	public void setSelected(PaneFrame paneFrame) {
 		tabbedPane.setSelectedComponent(paneFrame);
+	}
+	
+	public boolean isSelected(PaneFrame paneFrame){
+		return tabbedPane.getSelectedComponent().equals((Component)paneFrame);
 	}
 
 	public void update() {

@@ -137,11 +137,13 @@ public class XmLegesLinkerImpl implements XmLegesLinker, Loggable, Serviceable, 
 		sb.append(" -m dtdnir -i xml ");
 		
 		if(rifIncompleti && rifInterni)
-			sb.append(" -r ni");
+			sb.append(" -r nif");
 		else if(rifIncompleti)
-			sb.append(" -r n");
+			sb.append(" -r nf");
 		else if(rifInterni)
-			sb.append(" -r i");
+			sb.append(" -r if");
+		else
+			sb.append(" -r f");
 		
 		sb.append(" -f " + UtilFile.getTempDirName() + "/pr.in");
 		sb.append(" -F " + UtilFile.getTempDirName() + "/pr.out");

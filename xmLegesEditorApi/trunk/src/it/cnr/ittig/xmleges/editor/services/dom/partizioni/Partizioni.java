@@ -119,6 +119,7 @@ public interface Partizioni extends Service {
 	 */
 	public Node getPartizioneTemplate(String elemName);
 
+
 	/**
 	 * Aggrega i nodi <code>node[]</code> nella nuova partizione di tipo
 	 * <code>elemName</code> costruendo opportunamente i nodi mancanti.

@@ -740,9 +740,10 @@ public class TabelleImpl implements Tabelle, Loggable, Serviceable {
 						NodeList colonne = righe.item(i).getChildNodes(); 
 						Node nodoIndice = colonne.item(indice);
 						if (nodoIndice != null) {
-						  //TODO: bisognerebbe recuperare eventuali altri valori giï¿½ presenti in h:style
+						  //TODO: bisognerebbe recuperare eventuali altri valori già presenti in h:style
 						  //		(questo errore si ripete anche in allineamentoImpl
 						  UtilDom.setAttributeValue(nodoIndice, "h:style", "text-align: " + allinea + ";");
+
 						}  
 					}
 

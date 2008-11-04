@@ -45,12 +45,6 @@ public interface DispPassiveForm extends Service {
 	public int getTipoDisposizione();
 	
 	/**
-	 * Setta la prossima operazione da compiere
-	 * 
-	 */
-	public void setOperazioneProssima();
-
-	/**
 	 * Setta la posizione della disposizione
 	 * 
 	 */
@@ -79,4 +73,11 @@ public interface DispPassiveForm extends Service {
 	 * 
 	 */
 	public VigenzaEntity makeVigenza(Node node, String dsp, String status);
+	
+	/**
+	 * Richiama le funzioni DOM per la scrittura dei meta della disposizione
+	 * 
+	 */
+	public void setMeta();
 }
+

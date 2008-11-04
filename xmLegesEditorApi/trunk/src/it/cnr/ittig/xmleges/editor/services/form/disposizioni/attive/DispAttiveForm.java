@@ -2,10 +2,9 @@ package it.cnr.ittig.xmleges.editor.services.form.disposizioni.attive;
 
 import it.cnr.ittig.services.manager.Service;
 
-import org.w3c.dom.Node;
 
 /**
- * Servizio per la visualizzazione della form delle disposizioni attive
+ * Servizio per la visualizzazione della form per delle disposizioni attive
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
@@ -36,35 +35,35 @@ public interface DispAttiveForm extends Service {
 	 * Apre la form.
 	 */
 	public void openForm(boolean cancellaCampi);
-
-	/**
-	 * Ritorna il tipo di disposizione
-	 * 
-	 */
-	public int getTipoDisposizione();
 	
 	/**
-	 * Setta la prossima operazione da compiere
-	 * 
+	 * Richiama le funzioni DOM per la scrittura dei meta della disposizione
 	 */
-	public void setOperazioneProssima();
-
-	/**
-	 * Setta la posizione della disposizione
-	 * 
-	 */
-	public void setPosdisposizione(Node node);
+	public void setMeta();
 	
 	/**
-	 * Setta l'id del novellando
-	 * 
+	 * Attivo/disattivo il listener su FormClosed
 	 */
-	public void setNovellando(String id);
+	public void setListenerFormClosed(boolean flag);
+	
+	/**
+	 * Restituisce la partizione selezionata
+	 */
+	public String getPartizione();
+	
+	/**
+	 * Restituisce il delimitatore selezionato
+	 */
+	public String[] getDelimitatori();
+	
+	/**
+	 * Imposta la prossima operazione da eseguire
+	 */
+	public void setOperazioneProssima(int operazione);
 
 	/**
-	 * Setta l'id della novella
-	 * 
+	 * Restituisce l'operazione iniziale
 	 */
-	public void setNovella(String id);
+	public int getOperazioneIniziale();
 
 }

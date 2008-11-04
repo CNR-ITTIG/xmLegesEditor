@@ -3,6 +3,7 @@ package it.cnr.ittig.xmleges.core.services.frame;
 import it.cnr.ittig.services.manager.Service;
 
 import java.awt.Component;
+import java.util.Properties;
 
 /**
  * Servizio per la gestione della finestra principale dell'applicazione. <br>
@@ -159,4 +160,40 @@ public interface Frame extends Service {
 	 *        <code>pane</code>
 	 */
 	public void highlightPane(Pane pane, boolean highlight);
+	
+	/**
+	 * 
+	 * @param pane
+	 * @param show
+	 */
+	public void setSelectedPane(String paneName);
+	
+	
+	/**
+	 * 
+	 * @param pane
+	 * @param show
+	 */
+	public void setSelectedPane(Pane pane);
+	
+	/**
+	 * 
+	 * @param pane
+	 * @return
+	 */
+	public boolean isSelectedPane(String  paneName);
+	
+	/**
+	 * 
+	 * @param pane
+	 * @return
+	 */
+	public boolean isSelectedPane(Pane pane);
+	
+	/**
+	 * 
+	 * @param prop
+	 */
+	public void reloadPerspective(Properties prop, boolean defaultValue);
+	
 }

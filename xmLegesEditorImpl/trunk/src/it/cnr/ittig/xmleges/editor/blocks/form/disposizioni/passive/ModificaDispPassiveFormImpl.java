@@ -7,6 +7,7 @@ import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.form.Form;
+import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.util.date.UtilDate;
@@ -94,6 +95,7 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 	Vigenza vigenza;
 	String errorMessage = "";
 	
+	SelectionManager selectionManager;
 	DocumentManager documentManager;
 	
 	String partizione="";
@@ -111,6 +113,7 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 	Node pos;
 	Node novellando;
 	String id;
+	String idEvento;
 	String idNovella;
 	String idNovellando;
 	String dispCorrente;
@@ -139,6 +142,7 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 		partizioniForm = (PartizioniForm) serviceManager.lookup(PartizioniForm.class);
 		ciclodivitaForm = (CiclodiVitaForm) serviceManager.lookup(CiclodiVitaForm.class);
 		domDisposizioni  = (Disposizioni) serviceManager.lookup(Disposizioni.class);
+		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
@@ -176,22 +180,28 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 			Evento[] eventiOnDom = ciclodivita.getEventi();
 			ciclodivitaForm.setEventi(eventiOnDom);
 			
-			if (ciclodivitaForm.openForm()) {
-				eventoselezionato = ciclodivitaForm.getEventoSelezionato();
-				if (eventoselezionato != -1) {	
+			boolean formIsOk = ciclodivitaForm.openForm();
+			eventoselezionato = ciclodivitaForm.getEventoSelezionato();
+			if (eventoselezionato != -1 && formIsOk) {
+				
+					
 					eventoriginale = eventiOnDom[0];
 					eventovigore=ciclodivitaForm.getEventi()[eventoselezionato];
 					if (eventovigore.getFonte().getTagTipoRelazione().equalsIgnoreCase("passiva")) {
 						evento.setText(eventovigore.getFonte().getLink());
 						data.setText(UtilDate.normToString(eventovigore.getData()));
+						idEvento = eventovigore.getId();
+						modifica.setEnabled(true);
 					}	
 					else {
 						evento.setText(eventovigore.getFonte().getLink());
 						utilmsg.msgInfo("Dovresti selezionare un evento passivo");
 						evento.setText("");
 						data.setText("");
+						modifica.setEnabled(false);
 					}	
-				}	
+			}
+			if (ciclodivitaForm.getModificaEventi()) {	
 				Evento[] newEventi = ciclodivitaForm.getEventi();
 				Relazione[] newRelazioni = null;
 				if(newEventi!=null){
@@ -201,18 +211,17 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 					}
 				}
 				ciclodivita.setCiclodiVita(newEventi,newRelazioni);
-	   		    
 			}
 		}
 		if (e.getSource() == sceltadove) {
 			partizioniForm.openForm();
-			if (partizioniForm.getPartizioneEstesa().length() > 0) {
-				partizione = partizioniForm.getPartizioneEstesa();
-				dove.setText(makeSub(partizione));
-			}	
+			partizione = partizioniForm.getPartizioneEstesa();
+			dove.setText(makeSub(partizione));	
 		}
 		if (e.getSource() == elimina) {
-			domDisposizioni.doErase(idNovellando,idNovella,disposizione,novellando);
+			Node corrente = domDisposizioni.doErase(idNovellando,idNovella,disposizione,novellando);
+			if (corrente!=null)
+				selectionManager.setActiveNode(this, corrente);
 			form.close();
 		}	
 		if (e.getSource() == modifica)
@@ -222,7 +231,7 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 				(!vigenzaStatus.isEnabled() || statusCorrente.equals(vigenzaStatus.getSelectedItem())))
 					 utilmsg.msgError("Non hai effettuato nessuna modifica");
 			else {
-				//ricalcolo nota automatica
+				//ricalcolo nota automatica	
 				String autoNota = urnTestoCorrente;
 				if (!dispCorrente.equals(evento.getText())) {
 					autoNota =  evento.getText();
@@ -235,7 +244,7 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 				else	
 					autoNota = partTestoCorrente + autoNota;
 				
-				domDisposizioni.doChange(evento.getText(),dove.getText(),disposizione, autoNota, implicita.isSelected(),novellando, (String) vigenzaStatus.getSelectedItem());
+				domDisposizioni.doChange(evento.getText(),dove.getText(),disposizione, autoNota, implicita.isSelected(), novellando, (String) vigenzaStatus.getSelectedItem(), idEvento, idNovella);
 				form.close();
 			}	
 	}
@@ -248,8 +257,26 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 		doc =documentManager.getDocumentAsDom();
 		
 		if (UtilDom.getElementsByTagName(doc, UtilDom.findParentByName(activeNode,"NIR"), "modifichepassive").length>0) {
-			disposizione = ricercaDisposizione(UtilDom.getElementsByTagName(doc, UtilDom.findParentByName(activeNode,"NIR"), "modifichepassive")[0].getFirstChild());
+			disposizione = ricercaDisposizione(UtilDom.getElementsByTagName(doc, UtilDom.findParentByName(activeNode,"NIR"), "modifichepassive")[0].getLastChild());
 			if (disposizione!=null) {
+				
+				// Controllo anche se la disposizione selezionata non abbia subito ulteriori modifiche.
+				// In questo caso non permetto la modifica.
+				if (disposizione.getNodeName().equals("dsp:abrogazione")) {}
+				else if (disposizione.getNodeName().equals("dsp:integrazione")) {
+						if(UtilDom.getAttributeValueAsString(activeNode,"finevigore")!=null) {
+							utilmsg.msgInfo("editor.disposizioni.passive.noultimamodifica");
+							return;
+						}	
+					 }
+				     else if (disposizione.getNodeName().equals("dsp:sostituzione")) {
+				    	 //il test lo effettuo non per forza sul nodo attivo ma su quello della novella
+				    	 if(UtilDom.getAttributeValueAsString(doc.getElementById(idNovella),"finevigore")!=null) {
+								utilmsg.msgInfo("editor.disposizioni.passive.noultimamodifica");
+								return;
+							}	
+				     }
+				
 				implicitaCorrente = UtilDom.getAttributeValueAsString(disposizione, "implicita").equalsIgnoreCase("si");
 				norma = UtilDom.getElementsByTagName(doc, disposizione, "dsp:norma")[0];
 				pos = UtilDom.getElementsByTagName(doc, norma, "dsp:pos")[0];
@@ -263,16 +290,17 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 				modificaelimina.setText("Hai selezionato una " + tipoDisposizione + ".");
 				evento.setText(dispCorrente);
 				
-				//per il momento lo recupero dal testo... dopo recuperarlo dai metadati (dsp:tempi ....o simile)
 				NodeList eventi = UtilDom.findRecursiveChild(doc, "eventi").getChildNodes();
 				String evento;
-				if (!"".equals(UtilDom.getAttributeValueAsString(activeNode, "finevigore")))
+				if (UtilDom.getAttributeValueAsString(activeNode, "finevigore")!=null)
 					evento = UtilDom.getAttributeValueAsString(activeNode, "finevigore");
 				else
 					evento = UtilDom.getAttributeValueAsString(activeNode, "iniziovigore");
 				for (int i=0; i<eventi.getLength(); i++)
-					if (UtilDom.getAttributeValueAsString(eventi.item(i),"id").equals(evento))
+					if (UtilDom.getAttributeValueAsString(eventi.item(i),"id").equals(evento)) {
 						data.setText(UtilDate.normToString(UtilDom.getAttributeValueAsString(eventi.item(i),"data")));
+						idEvento = UtilDom.getAttributeValueAsString(eventi.item(i),"id");
+					}	
 					
 					
 				dove.setText(partCorrente);
@@ -300,7 +328,7 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 					urnTestoCorrente="";
 				}
 				partTestoCorrente = autoCorrente.substring(0, autoCorrente.indexOf(urnTestoCorrente));
-
+				
 				form.setSize(400, 280);
 				form.showDialog();
 			}
@@ -355,7 +383,7 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 								return cerca;
 							}	
 						}
-				return ricercaDisposizione(cerca.getNextSibling());
+				return ricercaDisposizione(cerca.getPreviousSibling());
 			}
 		} catch (Exception e) {
 			return null;

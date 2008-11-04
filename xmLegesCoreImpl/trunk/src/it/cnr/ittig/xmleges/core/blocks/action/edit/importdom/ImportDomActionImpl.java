@@ -145,7 +145,7 @@ public class ImportDomActionImpl implements ImportDomAction, EventManagerListene
 		form.setSize(600, 500);
 		form.setName("edit.importdom.form");
 
-		//TODO verificare necessitï¿½ di questo help
+		//TODO verificare necessità di questo help
 		form.setHelpKey("help.contents.form.importdom");
 		
 		form.replaceComponent("edit.importdom.form.file", fileTextField.getAsComponent());
