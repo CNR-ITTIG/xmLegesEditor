@@ -31,7 +31,7 @@ public interface Disposizioni extends Service {
 	 * 
 	 * @return la DSP che sto aggiungendo
 	 */
-	public Node setDOMDispAttive(Node metaDaModificare, String idMod, int operazioneIniziale, String completa, boolean condizione, String decorrenza, String idevento, String norma, String partizione, String[] delimitatori);
+	public Node setDOMDispAttive(boolean implicita, Node metaDaModificare, String idMod, int operazioneIniziale, String completa, boolean condizione, String decorrenza, String idevento, String norma, String partizione, String[] delimitatori);
 	
 	/**
 	 * Funzione per l'aggiornamento dei metadati di disposizione ATTIVE (Novella)
