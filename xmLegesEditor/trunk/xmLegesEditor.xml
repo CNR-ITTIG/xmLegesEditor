@@ -972,7 +972,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.meta.ciclodivita.CiclodiVitaEventoFormImpl" />
 
-    <component  class="it.cnr.ittig.xmleges.editor.blocks.form.ndr.NdrFormImpl" />
+	<component  class="it.cnr.ittig.xmleges.editor.blocks.form.ndr.NdrFormImpl" />
+
+	    
+<!--	component  class="it.cnr.ittig.xmleges.editor.blocks.form.repository.RepositoryFormImpl" /	-->
 
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.rinvii.attogiacitato.AttogiacitatoFormImpl" />
 
@@ -985,7 +988,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     />
     <component  lifestyle="singleton" activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.passive.DispPassiveFormImpl"
-    />
+    />    
     <component  lifestyle="pool"
                 class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.passive.NovellandoFormImpl"
     />
@@ -993,21 +996,46 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.passive.NovellaFormImpl"
     />
     
-
-
-
-
+<!--	component  lifestyle="singleton" activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.passive.VerificaDispPassiveFormImpl"
+    /	-->
 
     <component  lifestyle="singleton" activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.attive.DispAttiveFormImpl"
-    />
+    />    
 
-    <component  lifestyle="pool"
-                class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.attive.NovellandoNovellaFormImpl"
+    <component  lifestyle="singleton" activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.attive.DispMarkerFormImpl"
+    />    
+    
+	<component  lifestyle="singleton" activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.attive.DecorrenzaFormImpl"
+    />    
+        
+ 	<component  lifestyle="singleton" activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.attive.RiferimentoFormImpl"
+    />     
+    
+    <component  lifestyle="singleton" activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.attive.DelimitatoreFormImpl"
     />
     
-    
+    <component  lifestyle="singleton" activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.attive.NovellandoFormImpl"
+    />
 
+    <component  lifestyle="singleton" activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.attive.NovellaFormImpl"
+    />
+    
+    <component  lifestyle="singleton" activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.attive.VirgolettaFormImpl"
+    />
+    
+    <component  lifestyle="singleton" activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.action.disposizioni.attive.IlcFormImpl"
+    />
+   
 
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.link.LinkFormImpl">
         <configuration external="true" resource="LinkFormImpl.xconfig" />
