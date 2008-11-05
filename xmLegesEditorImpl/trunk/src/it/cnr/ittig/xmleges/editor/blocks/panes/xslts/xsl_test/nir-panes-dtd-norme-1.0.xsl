@@ -468,7 +468,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <xsl:template name="multivigente">
 		
 	<xsl:variable name="id">
-		<xsl:value-of select="@id" />
+		<xsl:value-of select="concat('#',@id)"/>
+		<!--xsl:value-of select="@id" /-->
 	</xsl:variable>
 	<xsl:variable name="inizio_id">
 		<xsl:value-of select="@iniziovigore"/>
@@ -597,7 +598,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	
 	<!-- dsp:norma/dsp:subarg/-->
 	<xsl:variable name="ittignota">
-				<xsl:value-of select="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$id]/../../dsp:norma/ittig:notavigenza/@id "/>
+				<xsl:value-of select="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$id]/../../dsp:norma/dsp:subarg/ittig:notavigenza/@id "/>
 	</xsl:variable>
 	<xsl:variable name="novella">
 				<xsl:value-of select="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$id]/../../dsp:novella/dsp:pos/@xlink:href"/>
