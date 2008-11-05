@@ -131,12 +131,5 @@ public interface NirUtilDom extends Service {
 	public  Node findActiveMeta(Document doc, Node node);
 	
 
-	/**
-	 * 
-	 * @param id1 primo id da confrontare
-	 * @param id2 secondo id da confrontare
-	 * @param dtdCompleta true se lavoro con la dtd completa
-	 * @return
-	 */
-	public String findFirstId(String id1, String id2, boolean dtdCompleta);
+	
 }
