@@ -333,18 +333,6 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		
 	}
 	
-	public void makeNotaVigenza(Node node) {			//non usata... buttare
-			
-		int numeroNota = 1+documentManager.getDocumentAsDom().getElementsByTagName("ittig:notavigenza").getLength();
-		Element ndr = documentManager.getDocumentAsDom().createElement("ndr");
-		UtilDom.setAttributeValue(ndr, "num", "itt"+numeroNota);
-		UtilDom.setAttributeValue(ndr, "valore", ""+numeroNota);
-		UtilDom.setTextNode(ndr, "{" + numeroNota + "}");
-		if (node.getNodeName().equals("h:span"))
-			node.appendChild(ndr);
-		else
-			UtilDom.findRecursiveChild(node,"num").appendChild(ndr);
-	}
 	
 	
 	public Node makePartition(Node container, boolean prima, VigenzaEntity vigenza) {
@@ -377,7 +365,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		Node span=null;
 		if (posizione < 0) 
 			if (node.getNextSibling()==null) {
-				span = node.getOwnerDocument().createElementNS(UtilDom.getNameSpaceURIforElement(documentManager.getDocumentAsDom().getDocumentElement(), "h"), "h:span");
+				span = UtilDom.createElement(node.getOwnerDocument(), "h:span");
 				node.getParentNode().appendChild(span);
 			}
 			else

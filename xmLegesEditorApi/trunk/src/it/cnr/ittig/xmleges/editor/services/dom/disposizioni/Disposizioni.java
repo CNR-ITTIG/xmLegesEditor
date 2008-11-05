@@ -77,11 +77,7 @@ public interface Disposizioni extends Service {
 	 */
 	public Node makeSpan(Node node, int posizione, VigenzaEntity vigenza, String testo);
 	
-	/**
-	 * Funzione per l'inserimento della nota ndr (per la vigenza)
-	*/
-	public void makeNotaVigenza(Node node);
-		
+	
 	/**
 	 * Funzione Dom per l'assegnazione di un intervallo di vigenza ad una
 	 * porzione di testo
