@@ -92,7 +92,7 @@ Elementi sotto l'articolo
 <!ELEMENT en %CMen; >
 <!ATTLIST en %globalifac;  >
 <!ELEMENT ep %CMep; >
-
+<!ATTLIST ep %globalifac;  >
 <!ELEMENT corpo %ParaLevel; >
 <!ATTLIST corpo %globalifac;  >
 <!ELEMENT alinea %inline; >
