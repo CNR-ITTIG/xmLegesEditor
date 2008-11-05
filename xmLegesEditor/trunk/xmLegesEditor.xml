@@ -1244,15 +1244,16 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             <xslt   name="edit-documento"		file="xsl_test/nir-panes-edit-documento-1.0.xsl"	startup="true" />
 	    	<xslt   name="edit-disposizioni"	file="xsl_test/nir-panes-edit-disposizioni-1.0.xsl"	startup="true" />
             <xslt   name="edit-indice"			file="xsl_test/nir-panes-edit-indice-1.0.xsl"	startup="true" />            
-            <xslt   name="edit-annessi"			file="xsl_test/nir-panes-edit-annessi-1.0.xsl" 		/>
-            <xslt   name="edit-meta"			file="xsl_test/nir-panes-edit-meta-1.0.xsl"			/>
-            <xslt   name="riferimenti"			file="xsl_test/nir-panes-view-riferimenti-1.0.xsl"	/>
-            <xslt   name="rifincompleti"		file="xsl_test/nir-panes-view-rifincompleti-1.0.xsl"	/>
-            <xslt   name="errori"				file="xsl_test/nir-panes-view-errori-1.0.xsl"		/>
-            <xslt   name="commenti"				file="xsl_test/nir-panes-view-commenti-1.0.xsl"		/>
-            <xslt   name="ndr"					file="xsl_test/nir-panes-view-ndr-1.0.xsl"			/>
- 	    	<xslt   name="checklist"			file="xsl_test/nir-panes-view-checklist-1.0.xsl"	/>
- 	    	<xslt   name="ndv"					file="xsl_test/nir-panes-view-ndv-1.0.xsl"			/> 	
+            <xslt   name="edit-annessi"			file="xsl_test/nir-panes-edit-annessi-1.0.xsl" 		startup="true" />
+            <xslt   name="edit-meta"			file="xsl_test/nir-panes-edit-meta-1.0.xsl"			startup="true" />
+            <xslt   name="riferimenti"			file="xsl_test/nir-panes-view-riferimenti-1.0.xsl"	startup="true" />
+            <xslt   name="rifincompleti"		file="xsl_test/nir-panes-view-rifincompleti-1.0.xsl"	startup="true" />
+            <xslt   name="errori"				file="xsl_test/nir-panes-view-errori-1.0.xsl"		startup="true" />
+            <xslt   name="commenti"				file="xsl_test/nir-panes-view-commenti-1.0.xsl"		startup="true" />
+            <xslt   name="ndr"					file="xsl_test/nir-panes-view-ndr-1.0.xsl"			startup="true" />
+ 	    	<xslt   name="checklist"			file="xsl_test/nir-panes-view-checklist-1.0.xsl"	startup="true" />
+ 	    	<xslt   name="ndv"					file="xsl_test/nir-panes-view-ndv-1.0.xsl"			startup="true" /> 
+ 	    	<xslt   name="xslt-utility"			file="xsl_test/nir-xslt-utility.xsl"     		    startup="true" />	
  	    	
             <xslt   name="xsl-disegnilegge-testoafronte" 	file="nir-disegnilegge-testoafronte.xsl"     		startup="true" />
             <xslt   name="xsl-disegnilegge" 	file="nir-disegnilegge.xsl"     		startup="true" />
@@ -1262,7 +1263,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             <css    name="disegnilegge-style"   file="nir-disegnilegge-style.css"       startup="true" />
             <css    name="nir-style"      		file="nir-generico-style.css"           startup="true" />
             <xslt   name="pdf-gazzettaufficiale" file="nir-fo-gazzettaufficiale.xsl"	startup="true" />
-            <xslt   name="xslt-utility"			file="xsl_test/nir-xslt-utility.xsl"     		startup="true" />
+            
             <xslt   name="xsl-cnr"              		file="cnrHTML.xsl"				startup="true" />
             <css    name="html-cnr-default_style"     	file="cnrLight.css"				startup="true" />
 			<css    name="html-cnr-alternative_style"   file="cnr.css"					startup="true" />        
