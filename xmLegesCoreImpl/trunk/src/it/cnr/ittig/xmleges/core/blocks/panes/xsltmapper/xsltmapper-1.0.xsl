@@ -35,7 +35,7 @@ license      : GNU General Public License http://www.gnu.org/licenses/gpl.html
      is no way to tell textpane to write on the element following caret (even 
      when the preceding element is not modifiable). Without the ending space 
      it's difficult to write at the end of the text. -->
-<xsl:template match="text()"><xsl:element name="span" use-attribute-sets="XsltMapperSetClass">&#160;<xsl:value-of select="." />&#160;</xsl:element></xsl:template>
+<xsl:template match="text()"><xsl:element name="span" use-attribute-sets="XsltMapperSetClassNoStyle">&#160;<xsl:value-of select="." />&#160;</xsl:element></xsl:template>
 
 
 <!-- ====================================================================== -->
@@ -55,19 +55,18 @@ license      : GNU General Public License http://www.gnu.org/licenses/gpl.html
 
 
 <!-- ====================================================================== -->
-<!-- =========================================== XSLT MAPPER SET CLASS ==== -->
+<!-- translate(name(.),':','_')"/>=========================================== XSLT MAPPER SET CLASS ==== -->
 <!-- ====================================================================== -->
 <xsl:attribute-set name="XsltMapperSetClass">
 
-<!--   eventualmente usare questo per supporto standardizzato a css
     <xsl:attribute name="class">
-        <xsl:value-of select="translate(name(.),':','_')"/>
+        <xsl:value-of select="translate(name(),':','_')"/>
     </xsl:attribute>
--->
+
     <xsl:attribute name="id">
-    	<xsl:value-of select="mapper:getUniqueId(.)"/>
+        <xsl:value-of select="mapper:getUniqueId(.)"/>
     </xsl:attribute>
-	<!--xsl:attribute name="style">
+	<xsl:attribute name="style">
    	    <xsl:choose>
     		<xsl:when test="@status='soppresso'">color:red;  text-decoration:line-through;</xsl:when>
     		<xsl:when test="@status='inserito'">color:green;</xsl:when>
@@ -75,8 +74,13 @@ license      : GNU General Public License http://www.gnu.org/licenses/gpl.html
     		<xsl:when test="@h:style!=''"><xsl:value-of select="@h:style"/></xsl:when>
     		<xsl:otherwise/>
     	</xsl:choose>
-    </xsl:attribute-->
+    </xsl:attribute>
 </xsl:attribute-set>
 
+<xsl:attribute-set name="XsltMapperSetClassNoStyle">
+    <xsl:attribute name="id">
+        <xsl:value-of select="mapper:getUniqueId(.)"/>
+    </xsl:attribute>
+</xsl:attribute-set>
 
 </xsl:transform>
