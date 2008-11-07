@@ -51,8 +51,6 @@ public class MetaDescrittoriMaterieImpl implements MetaDescrittoriMaterie , Logg
 
 	public void setVocabolari(Node node, Vocabolario[] vocabolari) {
 		
-		//Voglio settare sul documento solo le materie selezionate
-		//questo implica (forse) poter avere nel documento un'unico vocabolario
 		
 		Document doc = documentManager.getDocumentAsDom();
 		try {
@@ -78,7 +76,8 @@ public class MetaDescrittoriMaterieImpl implements MetaDescrittoriMaterie , Logg
 					}else{
 						UtilDom.setAttributeValue(vocabTag.getChildNodes().item(0),"valore",null);
 					}
-					utilRulesManager.orderedInsertChild(descrittoriNode,vocabTag);
+					if (!"".equals(UtilDom.getAttributeValueAsString(vocabTag.getChildNodes().item(0),"valore")))
+						utilRulesManager.orderedInsertChild(descrittoriNode,vocabTag);
 				}
 			rinumerazione.aggiorna(doc);
 			documentManager.commitEdit(tr);
