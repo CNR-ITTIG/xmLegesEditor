@@ -296,7 +296,7 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 				delimitatoriScelti= riferimentoForm.getBordi();
 				listModel.clear();
 				for (int i=0; i<delimitatoriScelti.length/3; i++)
-					listModel.addElement(delimitatoriScelti[i*3] + " (" + delimitatoriScelti[i*3+1] + ") " + delimitatoriScelti[i*3+2]);
+					listModel.addElement(delimitatoriScelti[i*3] + " " + delimitatoriScelti[i*3+1] + " " + delimitatoriScelti[i*3+2]);
 			}
 			if (!"".equals(partizione.getText()))
 				soloPartizione.setSelected(true);
@@ -350,7 +350,7 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 		}
 		listModel.clear();
 		for (int i=0; i<delimitatoriScelti.length/3; i++)
-			listModel.addElement(delimitatoriScelti[i*3] + " (" + delimitatoriScelti[i*3+1] + ") " + delimitatoriScelti[i*3+2]);
+			listModel.addElement(delimitatoriScelti[i*3] + " " + delimitatoriScelti[i*3+1] + " " + delimitatoriScelti[i*3+2]);
 	}
 	
 	private String[] prendiDelimitatori(String[] attuale, Node bordo) {
