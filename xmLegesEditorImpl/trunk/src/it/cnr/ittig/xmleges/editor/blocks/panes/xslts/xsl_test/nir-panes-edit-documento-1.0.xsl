@@ -39,15 +39,15 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 <xsl:template match="/">
    <html>
-   		<head>
+   		<head>    
 		    <style type="text/css">
-		        body { font-family: Arial; }
+		        body { font-family: Arial;}
 		    </style>
-            <base href="{$base}" />
+		    
+            <!--<base href="{$base}" />-->
         </head>
         <body>
-            <!-- RIMUOVO PER ORA c'e' solo nei DL -->
-            <!--xsl:apply-templates select="/nir:NIR/*/nir:meta/nir:confronto" /-->  
+            <xsl:apply-templates select="/nir:NIR/*/nir:meta/nir:confronto" />
             <xsl:apply-templates select="/nir:NIR/*/nir:intestazione" />
             <xsl:apply-templates select="/nir:NIR/*/nir:formulainiziale" />
             <xsl:apply-templates select="/nir:NIR/*/nir:relazione"/>
@@ -57,5 +57,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
         </body>
     </html>
 </xsl:template>
+
+<xsl:template match="/nir:NIR/*/nir:annessi" />
+
 
 </xsl:transform>

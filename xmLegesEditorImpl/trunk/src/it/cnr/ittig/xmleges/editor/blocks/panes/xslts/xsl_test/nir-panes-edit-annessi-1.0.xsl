@@ -41,8 +41,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
         <!--<base href="{$base}" />-->
         <body>
+          
+            <!--	xsl:apply-templates select="/nir:NIR/*/nir:annessi" /	-->
+            
 			<xsl:choose>
-			    <!-- era -->
 				<xsl:when test="/nir:NIR/*/nir:annessi">
 					<xsl:apply-templates select="/nir:NIR/*/nir:annessi" />
 				</xsl:when>	
