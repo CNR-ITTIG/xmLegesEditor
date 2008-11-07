@@ -1255,6 +1255,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
  	    	<xslt   name="ndv"					file="xsl_test/nir-panes-view-ndv-1.0.xsl"			startup="true" /> 
  	    	<xslt   name="xslt-utility"			file="xsl_test/nir-xslt-utility.xsl"     		    startup="true" />	
  	    	
+            
+            <css   name="css-nir"				file="xsl_test/nir-style.css"     			startup="true" />
+            
             <xslt   name="xsl-disegnilegge-testoafronte" 	file="nir-disegnilegge-testoafronte.xsl"     		startup="true" />
             <xslt   name="xsl-disegnilegge" 	file="nir-disegnilegge.xsl"     		startup="true" />
             <xslt   name="xsl-disegnilegge-nocss" 	file="nir-disegnilegge-nocss.xsl"	startup="true" />
@@ -1314,6 +1317,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
         <configuration>
             <pane name="editor.panes.documento">
                 <xslt name="edit-documento"/>
+                <css name="css-nir"/>
             </pane>
 	    	<pane name="editor.panes.disposizioni">
                 <xslt name="edit-disposizioni"/>
