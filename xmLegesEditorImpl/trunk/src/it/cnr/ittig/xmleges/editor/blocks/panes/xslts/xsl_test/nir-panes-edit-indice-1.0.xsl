@@ -30,9 +30,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <xsl:template match="/">
 	<html>
 	<head>
-		<style type="text/css">
-		body { font-family: Arial; }
-		</style>
+
 	</head>
 	<body>
 	<xsl:apply-templates select="/nir:NIR/*/nir:articolato/*" />

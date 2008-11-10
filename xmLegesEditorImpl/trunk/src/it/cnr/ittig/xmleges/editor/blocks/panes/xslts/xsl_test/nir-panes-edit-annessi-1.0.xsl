@@ -34,9 +34,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <xsl:template match="/">
    <html>
 		<head>
-			<style type="text/css">
-				body { font-family: Arial; }
-			</style>
+			
 		</head>
 
         <!--<base href="{$base}" />-->
@@ -50,11 +48,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 				</xsl:when>	
 				<xsl:otherwise>
 					<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-	   					<xsl:attribute name="style">
-	   						text-align: center;
-	            			margin: 30 15 15 25;
-		            		color: blue;
-					    </xsl:attribute>
 					    <xsl:text> Non ci sono annessi.</xsl:text>
 					</xsl:element>	    
 				</xsl:otherwise>

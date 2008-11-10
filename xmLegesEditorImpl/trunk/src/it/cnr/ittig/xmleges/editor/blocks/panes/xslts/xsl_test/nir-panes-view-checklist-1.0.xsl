@@ -17,6 +17,7 @@ Elementi sotto verifica: (documento principale e annessi)
                 xmlns:xlink = "http://www.w3.org/1999/xlink"
                 xmlns:h     = "http://www.w3.org/HTML/1998/html4"
                 xmlns       = "http://www.normeinrete.it/nir/2.2"
+                xmlns:nir   = "http://www.normeinrete.it/nir/2.2/"
  			    xmlns:mapper= "xalan://it.cnr.ittig.xmleges.core.blocks.panes.xsltmapper.XsltMapperImpl"
                 version     = "1.0"
 >
@@ -27,19 +28,17 @@ Elementi sotto verifica: (documento principale e annessi)
 
 <xsl:strip-space elements="*" />
 
-<xsl:template match="*[name()='NIR']">
+<xsl:template match="nir:NIR">
 	<html>
 		<head>
-		    <style type="text/css">
-		        body { font-family: Arial; }
-		    </style>
+
         </head>
 		<body>
 			<xsl:text> [ Documento principale ] </xsl:text><br/>
 			<xsl:call-template name="intestazione" />
 			<xsl:call-template name="descrittori" />
-			<xsl:for-each select="//*[name()='annesso']">
-				<br/><br/><xsl:text> [ Annesso: </xsl:text><xsl:value-of select="./*[name()='testata']/*[name()='denAnnesso']"/><xsl:text> ] </xsl:text><br/>			
+			<xsl:for-each select="//nir:annesso">
+				<br/><br/><xsl:text> [ Annesso: </xsl:text><xsl:value-of select="./nir:testata/nir:denAnnesso"/><xsl:text> ] </xsl:text><br/>			
 				<xsl:call-template name="intestazione" />
 				<xsl:call-template name="descrittori" />
 			</xsl:for-each>
@@ -53,8 +52,8 @@ Elementi sotto verifica: (documento principale e annessi)
 
 <xsl:template name="intestazione">
 	<xsl:choose>
-		<xsl:when test="./*/*[name()='intestazione']/*[name()='emanante']">
-			<xsl:apply-templates select="./*/*[name()='intestazione']/*[name()='emanante']" />
+		<xsl:when test="./*/nir:intestazione/nir:emanante">
+			<xsl:apply-templates select="./*/nir:intestazione/nir:emanante" />
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:call-template name="elementoAssente">
@@ -63,8 +62,8 @@ Elementi sotto verifica: (documento principale e annessi)
 		</xsl:otherwise>
 	</xsl:choose>
 	<xsl:choose>
-		<xsl:when test="./*/*[name()='intestazione']/*[name()='tipoDoc']">
-			<xsl:apply-templates select="./*/*[name()='intestazione']/*[name()='tipoDoc']" />
+		<xsl:when test="./*/nir:intestazione/nir:tipoDoc">
+			<xsl:apply-templates select="./*/nir:intestazione/nir:tipoDoc" />
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:call-template name="elementoAssente">
@@ -73,8 +72,8 @@ Elementi sotto verifica: (documento principale e annessi)
 		</xsl:otherwise>
 	</xsl:choose>
 	<xsl:choose>
-		<xsl:when test="./*/*[name()='intestazione']/*[name()='dataDoc']">
-			<xsl:apply-templates select="./*/*[name()='intestazione']/*[name()='dataDoc']" />
+		<xsl:when test="./*/nir:intestazione/nir:dataDoc">
+			<xsl:apply-templates select="./*/nir:intestazione/nir:dataDoc" />
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:call-template name="elementoAssente">
@@ -83,8 +82,8 @@ Elementi sotto verifica: (documento principale e annessi)
 		</xsl:otherwise>
 	</xsl:choose>
 	<xsl:choose>
-		<xsl:when test="./*/*[name()='intestazione']/*[name()='numDoc']">
-			<xsl:apply-templates select="./*/*[name()='intestazione']/*[name()='numDoc']" />
+		<xsl:when test="./*/nir:intestazione/nir:numDoc">
+			<xsl:apply-templates select="./*/nir:intestazione/nir:numDoc" />
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:call-template name="elementoAssente">
@@ -93,8 +92,8 @@ Elementi sotto verifica: (documento principale e annessi)
 		</xsl:otherwise>
 	</xsl:choose>
 	<xsl:choose>
-		<xsl:when test="./*/*[name()='intestazione']/*[name()='titoloDoc']">
-			<xsl:apply-templates select="./*/*[name()='intestazione']/*[name()='titoloDoc']" />
+		<xsl:when test="./*/nir:intestazione/nir:titoloDoc">
+			<xsl:apply-templates select="./*/nir:intestazione/nir:titoloDoc" />
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:call-template name="elementoAssente">
@@ -107,8 +106,8 @@ Elementi sotto verifica: (documento principale e annessi)
 
 <xsl:template name="descrittori">
 	<xsl:choose>
-		<xsl:when test="./*/*[name()='meta']/*[name()='descrittori']/*[name()='pubblicazione']">
-			<xsl:apply-templates select="./*/*[name()='meta']/*[name()='descrittori']/*[name()='pubblicazione']" />
+		<xsl:when test="./*/nir:meta/nir:descrittori/nir:pubblicazione">
+			<xsl:apply-templates select="./*/nir:meta/nir:descrittori/nir:pubblicazione" />
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:call-template name="elementoAssente">
@@ -117,8 +116,8 @@ Elementi sotto verifica: (documento principale e annessi)
 		</xsl:otherwise>
 	</xsl:choose>
 	<xsl:choose>
-		<xsl:when test="./*/*[name()='meta']/*[name()='descrittori']/*[name()='entratainvigore']">
-			<xsl:apply-templates select="./*/*[name()='meta']/*[name()='descrittori']/*[name()='entratainvigore']" />
+		<xsl:when test="./*/nir:meta/nir:descrittori/nir:entratainvigore">
+			<xsl:apply-templates select="./*/nir:meta/nir:descrittori/nir:entratainvigore" />
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:call-template name="elementoAssente">
@@ -127,11 +126,11 @@ Elementi sotto verifica: (documento principale e annessi)
 		</xsl:otherwise>
 	</xsl:choose>
 	<xsl:choose>
-		<xsl:when test="./*/*[name()='meta']/*[name()='descrittori']/*[name()='urn']">
-			<xsl:apply-templates select="./*/*[name()='meta']/*[name()='descrittori']/*[name()='urn']"/>
+		<xsl:when test="./*/nir:meta/nir:descrittori/nir:urn">
+			<xsl:apply-templates select="./*/nir:meta/nir:descrittori/nir:urn"/>
 		</xsl:when>
-		<!--	xsl:when test="/*[name()='NIR']/*/*[name()='meta']/*[name()='descrittori']/*[name()='urn']/@iniziovigore='t1'">
-			<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='meta']/*[name()='descrittori']/*[name()='urn']" />
+		<!--	xsl:when test="/nir:NIR/*/nir:meta/nir:descrittori/nir:urn/@iniziovigore='t1'">
+			<xsl:apply-templates select="/nir:NIR/*/nir:meta/nir:descrittori/nir:urn" />
 		</xsl:when	-->
 		<xsl:otherwise>
 			<xsl:call-template name="elementoAssente">
@@ -141,9 +140,9 @@ Elementi sotto verifica: (documento principale e annessi)
 	</xsl:choose>
 </xsl:template>
 
-<xsl:template match="*[name()='pubblicazione']" >
+<xsl:template match="nir:pubblicazione" >
 	<br/><font color="blue"><xsl:text> - </xsl:text><xsl:value-of select="local-name(.)"/><xsl:text>: </xsl:text></font>
-	<xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
+	 <xsl:element name="span"> <!-- use-attribute-sets="XsltMapperSetClass"-->   
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
         <xsl:value-of select="."/>
         <xsl:text> ( Data: </xsl:text><xsl:value-of select="@norm"/>
@@ -153,9 +152,9 @@ Elementi sotto verifica: (documento principale e annessi)
 	</xsl:element>		
 </xsl:template>
 
-<xsl:template match="*[name()='entratainvigore']" >
+<xsl:template match="nir:entratainvigore" >
 	<br/><font color="blue"><xsl:text> - </xsl:text><xsl:value-of select="local-name(.)"/><xsl:text>: </xsl:text></font>
-	<xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
+	<xsl:element name="span"> <!-- use-attribute-sets="XsltMapperSetClass"-->
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
         <xsl:value-of select="."/>
         <xsl:text> ( Data: </xsl:text><xsl:value-of select="@norm"/>
@@ -163,10 +162,10 @@ Elementi sotto verifica: (documento principale e annessi)
 	</xsl:element>		
 </xsl:template>
 
-<xsl:template match="*[name()='urn']" >
+<xsl:template match="nir:urn" >
 	<xsl:if test="not(@iniziovigore) or @iniziovigore='t1'">
 		<br/><font color="blue"><xsl:text> - </xsl:text><xsl:value-of select="local-name(.)"/><xsl:text>: </xsl:text></font>
-		<xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
+		<xsl:element name="span" > <!-- use-attribute-sets="XsltMapperSetClass"-->
     		<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
        	 <xsl:value-of select="."/><xsl:value-of select="@valore"/>
 		</xsl:element>	
@@ -175,7 +174,7 @@ Elementi sotto verifica: (documento principale e annessi)
 
 <xsl:template match="*" >
 	<br/><font color="blue"><xsl:text> - </xsl:text><xsl:value-of select="local-name(.)"/><xsl:text>: </xsl:text></font>
-	<xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
+	<xsl:element name="span" > <!-- use-attribute-sets="XsltMapperSetClass"-->
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
         <xsl:value-of select="."/>
 	</xsl:element>		

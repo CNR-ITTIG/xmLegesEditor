@@ -5,6 +5,9 @@
                 xmlns:h     = "http://www.w3.org/HTML/1998/html4"
                 xmlns       = "http://www.normeinrete.it/nir/2.2"
                 xmlns:mapper= "xalan://it.cnr.ittig.xmleges.core.blocks.panes.xsltmapper.XsltMapperImpl"
+                xmlns:nir   = "http://www.normeinrete.it/nir/2.2/"
+                xmlns:dsp   = "http://www.normeinrete.it/nir/disposizioni/2.2/"
+                xmlns:ittig = "http://www.ittig.cnr.it/provvedimenti/2.2"
                 version     = "1.0"
 >
 
@@ -15,14 +18,12 @@
 <xsl:template match="/">
    <html>
    		<head>
-		    <style type="text/css">
-		        body { font-family: Arial; }
-		    </style>
+		    
         </head>
         <base href="{$base}" />
         <body>
-	        <xsl:choose>
-				<xsl:when test="//*[name()='mod']">
+	        <xsl:choose>					
+				<xsl:when test="/nir:mod">
 		        	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 	   					<xsl:attribute name="style">
 	   						text-align: center;
@@ -32,7 +33,7 @@
 					    <xsl:text> Disposizioni attive </xsl:text>
 					</xsl:element>
 					<br/>
-					<xsl:for-each select="//*[name()='mod']">
+					<xsl:for-each select="/nir:mod">
 						<xsl:apply-templates select="./.." />
 					</xsl:for-each>			
 				</xsl:when>	
@@ -55,12 +56,12 @@
     </html>
 </xsl:template>
 
-<xsl:template match="*[name()='mod']">
+<xsl:template match="nir:mod">
 	<br/>
 	<xsl:variable name="id">#<xsl:value-of select="@id"/></xsl:variable>
 	<xsl:choose>
-		<xsl:when test="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modificheattive']/*/*[name()='dsp:pos'][@xlink:href=$id]">
-			<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modificheattive']/*/*[name()='dsp:pos'][@xlink:href=$id]/.."/>
+		<xsl:when test="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modificheattive/*/dsp:pos[@xlink:href=$id]">
+			<xsl:apply-templates select="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modificheattive/*/dsp:pos[@xlink:href=$id]/.."/>
 		</xsl:when>
 		<xsl:otherwise>
 			<div><font color="Green">Non sono disponibili informazioni nei metadati</font></div><br/>
@@ -70,17 +71,17 @@
 	<br/><br/><hr width="30%" align="center"/>
 </xsl:template> 
 
-<xsl:template match="*[name()='dsp:abrogazione' or name()='dsp:sostituzione' or name()='dsp:integrazione']">
+<xsl:template match="dsp:abrogazione | dsp:sostituzione | dsp:integrazione">
 	<div>
 	  <font color="Red">disposizione: </font>
 	  <font color="Black">tipo= </font>
 	  <font color="Blue"><xsl:value-of select="local-name()"/></font>
 	  <font color="Black"> ; identificativo= </font>
-	  <font color="Blue"><xsl:value-of select="*[name()='dsp:pos']/@xlink:href"/></font>
+	  <font color="Blue"><xsl:value-of select="dsp:pos/@xlink:href"/></font>
 	  <br/>
 	  <font color="Red">decorrenza: </font>
 	  <xsl:variable name="idDecorrenzaConPound">
-	  	<xsl:value-of select="*[name()='dsp:termine']/@da"/>
+	  	<xsl:value-of select="dsp:termine/@da"/>
 	  </xsl:variable>
 	  <xsl:variable name="idDecorrenza">
 	  	<xsl:value-of select="substring($idDecorrenzaConPound,2)"/>
@@ -91,36 +92,36 @@
 	  <font color="Blue"><xsl:value-of select="concat(substring($dataDecorrenza,7,2),'/',substring($dataDecorrenza,5,2),'/',substring($dataDecorrenza,1,4))"/></font>
 	  <br/>
 	  <font color="Red">norma: </font>
-	  <font color="Blue"><xsl:value-of select="*[name()='dsp:norma']/@xlink:href"/></font>
+	  <font color="Blue"><xsl:value-of select="dsp:norma/@xlink:href"/></font>
 	  <xsl:variable name="posNorma">
-	  	<xsl:value-of select="*[name()='dsp:norma']/*[name()='dsp:pos']/@xlink:href"/>
+	  	<xsl:value-of select="dsp:norma/dsp:pos/@xlink:href"/>
 	  </xsl:variable>
-	  <xsl:if test="*[name()='dsp:norma']/@xlink:href!=$posNorma">
+	  <xsl:if test="dsp:norma/@xlink:href!=$posNorma">
 			<font color="Black"> ; partizione: </font>
 			<font color="Blue"><xsl:value-of select="substring-after($posNorma,'#')" /></font>
 	  </xsl:if>
 	  <br/>
-	  <xsl:if test="*[name()='dsp:norma']/*[name()='dsp:subarg']">
-			<xsl:apply-templates select="*[name()='dsp:norma']/*[name()='dsp:subarg']/*[name()='ittig:bordo']" mode="dispo"/><br/>
+	  <xsl:if test="dsp:norma/dsp:subarg">
+			<xsl:apply-templates select="dsp:norma/dsp:subarg/ittig:bordo" mode="dispo"/><br/>
 	  </xsl:if>
-	  <xsl:if test="*[name()='dsp:posizione']">
+	  <xsl:if test="dsp:posizione">
 			<font color="Red">posizione: </font>
-			<xsl:apply-templates select="*[name()='dsp:posizione']/*[name()='dsp:pos']"  mode="dispo"/>
+			<xsl:apply-templates select="dsp:posizione/dsp:pos"  mode="dispo"/>
 	  </xsl:if>
-	  <xsl:if test="*[name()='dsp:novellando']">
+	  <xsl:if test="dsp:novellando">
 	  		<font color="Red">novellando: </font>
 			<font color="Black">tipo= </font>
-		  	<font color="Blue"><xsl:value-of select="*[name()='dsp:novellando']/*[name()='dsp:subarg']/*[name()='ittig:tipo']/@valore"/></font>
+		  	<font color="Blue"><xsl:value-of select="dsp:novellando/dsp:subarg/ittig:tipo/@valore"/></font>
   			<br/>
-			<xsl:apply-templates select="*[name()='dsp:novellando']"  mode="dispo"/>
+			<xsl:apply-templates select="dsp:novellando"  mode="dispo"/>
 	  </xsl:if>	  
-	  <xsl:if test="*[name()='dsp:novella']">
+	  <xsl:if test="dsp:novella">
 		    <font color="Red">novella: </font>
 			<font color="Black">tipo= </font>
-			<font color="Blue"><xsl:value-of select="*[name()='dsp:novella']/*[name()='dsp:subarg']/*[name()='ittig:tipo']/@valore"/></font>
+			<font color="Blue"><xsl:value-of select="dsp:novella/dsp:subarg/ittig:tipo/@valore"/></font>
 			<font color="Black"> ; contenuto= </font>
 			<xsl:variable name="idNovellaConPound">
-			  	<xsl:value-of select="*[name()='dsp:novella']/*[name()='dsp:pos']/@xlink:href"/>
+			  	<xsl:value-of select="dsp:novella/dsp:pos/@xlink:href"/>
 			</xsl:variable>
 			<xsl:variable name="idNovella">
 	  			<xsl:value-of select="substring($idNovellaConPound,2)"/>
@@ -148,9 +149,9 @@
 </xsl:template> 
 
 
-<xsl:template match="*[name()='dsp:posizione']/*[name()='dsp:pos']" mode="dispo">
+<xsl:template match="dsp:posizione/dsp:pos" mode="dispo">
 	<font color="Black"> dove= </font>
-	<font color="Blue"><xsl:value-of select="*[name()='ittig:dove']/@valore"/></font>
+	<font color="Blue"><xsl:value-of select="ittig:dove/@valore"/></font>
 	<font color="Black"> ; parole= </font>
 	<xsl:variable name="idPosizioneConPound">
 		<xsl:value-of select="@xlink:href"/>
@@ -177,9 +178,9 @@
 	<br/>
 </xsl:template> 
 
-<xsl:template match="*[name()='dsp:novellando']" mode="dispo">
+<xsl:template match="dsp:novellando" mode="dispo">
 	<xsl:variable name="idNovellandoConPound">
-		<xsl:value-of select="*[name()='dsp:pos']/@xlink:href"/>
+		<xsl:value-of select="dsp:pos/@xlink:href"/>
 	</xsl:variable>
 	<xsl:variable name="idNovellando">
 		<xsl:value-of select="substring($idNovellandoConPound,2)"/>
@@ -187,7 +188,7 @@
 	<xsl:variable name="testoNovellando">
 		<xsl:value-of select="id($idNovellando)"/>
 	</xsl:variable>
-	<xsl:if test="*[name()='dsp:pos']/*[name()='ittig:ruolo']">
+	<xsl:if test="dsp:pos/ittig:ruolo">
 		<font color="Black"> - parole= </font>
 		<font color="Blue">
 			<xsl:value-of select="$idNovellando"/>
@@ -203,11 +204,11 @@
 			<xsl:text> )</xsl:text>
 		</font>
 		<br/>
-		<xsl:apply-templates select="*[name()='dsp:pos']/*[name()='ittig:ruolo']"  mode="dispo"/>
+		<xsl:apply-templates select="dsp:pos/ittig:ruolo"  mode="dispo"/>
 	</xsl:if>
 </xsl:template> 
 
-<xsl:template match="*[name()='ittig:ruolo']" mode="dispo">
+<xsl:template match="ittig:ruolo" mode="dispo">
 	<font color="Black"> - dove: </font>
 	<font color="Blue"><xsl:value-of select="@valore"/></font>
 	<font color="Black"> ; parole: </font>	
@@ -236,7 +237,7 @@
 	<br/>
 </xsl:template> 
 
-<xsl:template match="*[name()='ittig:bordo']" mode="dispo">
+<xsl:template match="ittig:bordo" mode="dispo">
 	<xsl:variable name="tipoBordo">
 		<xsl:value-of select="@tipo"/>
 	</xsl:variable>
@@ -255,7 +256,7 @@
 		<!--	/xsl:otherwise>
 	</xsl:choose	-->
 	<br/>
-	<xsl:apply-templates select="*[name()='ittig:bordo']" mode="dispo"/>
+	<xsl:apply-templates select="ittig:bordo" mode="dispo"/>
 </xsl:template> 
 
 <xsl:template name="mostrainfo">

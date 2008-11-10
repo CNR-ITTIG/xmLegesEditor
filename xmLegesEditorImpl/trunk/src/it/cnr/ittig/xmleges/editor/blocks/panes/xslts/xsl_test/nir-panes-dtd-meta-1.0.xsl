@@ -86,10 +86,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 <xsl:template match="nir:pubblicazione"   >
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-	   	<xsl:attribute name="style">
-	            margin: 30 15 15 25;
-	            color: red;
-	    </xsl:attribute>
 	    <xsl:value-of select="name()"/>
 	</xsl:element>	    
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
@@ -106,10 +102,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 			<xsl:choose>
 				<xsl:when test="$num=1">
 					<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-	   					<xsl:attribute name="style">
-	            			margin: 30 15 15 25;
-		            		color: red;
-					    </xsl:attribute>
 					    <xsl:value-of select="name()"/>
 					</xsl:element>	    
 				</xsl:when>
@@ -126,10 +118,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 			<xsl:choose>
 				<xsl:when test="$num=1">
 					<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-	   					<xsl:attribute name="style">
-	            			margin: 30 15 15 25;
-		            		color: red;
-					    </xsl:attribute>
 					    <xsl:value-of select="name()"/>
 					</xsl:element>	    
 				</xsl:when>
@@ -172,10 +160,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 <xsl:template match="nir:redazione"   >
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-	   	<xsl:attribute name="style">
-	            margin: 30 15 15 25;
-	            color: red;
-	    </xsl:attribute>
 	    <xsl:value-of select="name()"/>
 	</xsl:element>	    
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
@@ -196,10 +180,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 <xsl:template match="nir:eventi"   >
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-	   	<xsl:attribute name="style">
-	            margin: 30 15 15 25;
-	            color: red;
-	    </xsl:attribute>
 	    <xsl:value-of select="name()"/>
 	</xsl:element>	
 	<xsl:apply-templates select="nir:evento" />    
@@ -209,10 +189,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 <xsl:template match="nir:relazioni"   >
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-	   	<xsl:attribute name="style">
-	            margin: 30 15 15 25;
-	            color: red;
-	    </xsl:attribute>
 	    Relazioni <!--xsl:value-of select="name()"/-->
 	</xsl:element>	    
 	<xsl:apply-templates select="nir:originale" mode="other"/>
@@ -288,13 +264,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 <xsl:template match="nir:infodoc"   > 
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-			<xsl:attribute name="style">
-           			margin: 30 15 15 25;
-            		color: red;
-			</xsl:attribute>
 			<xsl:value-of select="name()"/>
 			<br/>
-			trovato INFODOC
 		Fonte: <font color="blue"><xsl:value-of select="@fonte"/></font><br/>
 		Funzione: <font color="blue"><xsl:value-of select="@funzione"/></font><br/>
 		Natura: <font color="blue"><xsl:value-of select="@natura"/></font><br/>
@@ -304,20 +275,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 </xsl:template>
 
 
-<!--xsl:template match="nir:infomancanti"   >
-	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-		non fatto
-	</xsl:element>
-</xsl:template-->
-
 <xsl:template match="nir:oggetto | nir:proponenti | nir:infomancanti"   >
 			
 	<xsl:for-each select="*">
 		<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-		<xsl:attribute name="style">
-           			margin: 30 15 15 25;
-            		color: red;
-			</xsl:attribute>
 			<xsl:value-of select="name()"/>: <font color="blue"><xsl:value-of select="@valore"/></font>
 			<br/>
 		</xsl:element>	    
