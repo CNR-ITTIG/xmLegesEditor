@@ -34,14 +34,13 @@ Elementi sotto verifica: (documento principale e annessi)
 
         </head>
 		<body>
-			<xsl:text> [ Documento principale ] </xsl:text><br/>
+			<b><xsl:text>Documento principale</xsl:text></b>
+			<br/>
 			<xsl:call-template name="intestazione" />
 			<xsl:call-template name="descrittori" />
-			<xsl:for-each select="//nir:annesso">
-				<br/><br/><xsl:text> [ Annesso: </xsl:text><xsl:value-of select="./nir:testata/nir:denAnnesso"/><xsl:text> ] </xsl:text><br/>			
-				<xsl:call-template name="intestazione" />
-				<xsl:call-template name="descrittori" />
-			</xsl:for-each>
+			
+			<xsl:apply-templates select="//nir:annesso"/>
+			
 		</body>
 	</html>
 </xsl:template>
@@ -140,21 +139,31 @@ Elementi sotto verifica: (documento principale e annessi)
 	</xsl:choose>
 </xsl:template>
 
+
+<xsl:template match="nir:annesso" >
+	<br/><br/>
+	
+	<b><xsl:text>Annesso: </xsl:text><xsl:value-of select="./nir:testata/nir:denAnnesso"/></b>
+	<br/>			
+	<xsl:call-template name="intestazione" />
+	<xsl:call-template name="descrittori" />
+</xsl:template>
+
+
 <xsl:template match="nir:pubblicazione" >
-	<br/><font color="blue"><xsl:text> - </xsl:text><xsl:value-of select="local-name(.)"/><xsl:text>: </xsl:text></font>
-	 <xsl:element name="span"> <!-- use-attribute-sets="XsltMapperSetClass"-->   
+	<br/><font color="blue">&#160;-&#160;<xsl:value-of select="local-name(.)"/>:&#160;</font>
+	 <xsl:element name="span">   
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-        <xsl:value-of select="."/>
-        <xsl:text> ( Data: </xsl:text><xsl:value-of select="@norm"/>
-        <xsl:text> Numero: </xsl:text><xsl:value-of select="@num"/>
-        <xsl:text> Tipo: </xsl:text><xsl:value-of select="@tipo"/>
-        <xsl:text> ) </xsl:text>
+        <xsl:value-of select="."/>&#160;(&#160;Data:&#160;<xsl:value-of select="@norm"/>
+        &#160;Numero:&#160;<xsl:value-of select="@num"/>
+        &#160;Tipo:&#160;<xsl:value-of select="@tipo"/>
+        &#160;)&#160;
 	</xsl:element>		
 </xsl:template>
 
 <xsl:template match="nir:entratainvigore" >
-	<br/><font color="blue"><xsl:text> - </xsl:text><xsl:value-of select="local-name(.)"/><xsl:text>: </xsl:text></font>
-	<xsl:element name="span"> <!-- use-attribute-sets="XsltMapperSetClass"-->
+	<br/><font color="blue">&#160;-&#160;<xsl:value-of select="local-name(.)"/>::&#160;</font>
+	<xsl:element name="span"> 
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
         <xsl:value-of select="."/>
         <xsl:text> ( Data: </xsl:text><xsl:value-of select="@norm"/>
@@ -164,8 +173,8 @@ Elementi sotto verifica: (documento principale e annessi)
 
 <xsl:template match="nir:urn" >
 	<xsl:if test="not(@iniziovigore) or @iniziovigore='t1'">
-		<br/><font color="blue"><xsl:text> - </xsl:text><xsl:value-of select="local-name(.)"/><xsl:text>: </xsl:text></font>
-		<xsl:element name="span" > <!-- use-attribute-sets="XsltMapperSetClass"-->
+		<br/><font color="blue">&#160;-&#160;<xsl:value-of select="local-name(.)"/>:&#160;</font>
+		<xsl:element name="span" > 
     		<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
        	 <xsl:value-of select="."/><xsl:value-of select="@valore"/>
 		</xsl:element>	
@@ -173,8 +182,8 @@ Elementi sotto verifica: (documento principale e annessi)
 </xsl:template>
 
 <xsl:template match="*" >
-	<br/><font color="blue"><xsl:text> - </xsl:text><xsl:value-of select="local-name(.)"/><xsl:text>: </xsl:text></font>
-	<xsl:element name="span" > <!-- use-attribute-sets="XsltMapperSetClass"-->
+	<br/><font color="blue">&#160;-&#160;<xsl:value-of select="local-name(.)"/>:&#160;</font>
+	<xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
         <xsl:value-of select="."/>
 	</xsl:element>		
