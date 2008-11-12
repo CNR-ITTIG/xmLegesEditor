@@ -1,5 +1,7 @@
 package it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.attive;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.EventObject;
 
 import it.cnr.ittig.services.manager.Initializable;
@@ -21,12 +23,15 @@ import it.cnr.ittig.xmleges.editor.services.form.disposizioni.attive.VirgolettaF
 import it.cnr.ittig.xmleges.editor.services.form.rinvii.partizioni.PartizioniForm;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
-public class VirgolettaFormImpl implements VirgolettaForm, Loggable, Serviceable, Initializable, EventManagerListener {
+public class VirgolettaFormImpl implements VirgolettaForm, Loggable, Serviceable, Initializable, EventManagerListener, ActionListener {
 	
 	Logger logger;
 	EventManager eventManager;
@@ -35,9 +40,11 @@ public class VirgolettaFormImpl implements VirgolettaForm, Loggable, Serviceable
 	NirUtilDom nirUtilDom;
 
 	Form form;
+	Node modNode;
 	
 	JLabel riferimentoEti;
 	JTextField riferimento;
+	JComboBox sceltaRiferimento;
 	
 	public void service(ServiceManager serviceManager) throws ServiceException {
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
@@ -55,16 +62,48 @@ public class VirgolettaFormImpl implements VirgolettaForm, Loggable, Serviceable
 		form.setHelpKey("help.contents.form.disposizioniattive.virgoletta");
 		riferimentoEti = (JLabel) form.getComponentByName("editor.disposizioni.attive.riferimento.eti");
 		riferimento = (JTextField) form.getComponentByName("editor.disposizioni.attive.riferimento");
+		sceltaRiferimento = (JComboBox) form.getComponentByName("editor.disposizioni.attive.riferimento.scelta");
+		sceltaRiferimento.addActionListener(this);
 	}
 
+	private void popolaControlli() {
+		sceltaRiferimento.removeAllItems();
+		sceltaRiferimento.addItem(" ");
+		Node[] virgolette = UtilDom.getElementsByTagName(documentManager.getDocumentAsDom(), modNode, "virgolette");
+		if (virgolette!=null) {
+			for (int i = 0; i < virgolette.length; i++) {
+				String valore = virgolette[i].getFirstChild().getNodeValue();
+				String id = UtilDom.getAttributeValueAsString(virgolette[i], "id")+": ";
+				if (valore.length()>44)
+					sceltaRiferimento.addItem(id+valore.substring(0, 40) + " ...");
+				else
+					sceltaRiferimento.addItem(id+valore);
+			}
+		}
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == sceltaRiferimento) {
+			String sel = (String) sceltaRiferimento.getSelectedItem();
+			if (sel!=null)
+				if (" ".equals(sel))
+					riferimento.setText("");
+				else 
+					riferimento.setText(sel.substring(0, sel.indexOf(":")));
+		}
+			
+	}
+	
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
 	}
 
-	public void openForm(FormClosedListener listener) {
+	public void openForm(FormClosedListener listener, Node modNode) {
 		
+		this.modNode = modNode;
 		updateContent();
-		form.setSize(300, 150);
+		popolaControlli();
+		form.setSize(300, 200);
 		form.showDialog(listener);
 	}
 	
@@ -78,11 +117,15 @@ public class VirgolettaFormImpl implements VirgolettaForm, Loggable, Serviceable
 		
 		try {
 			Node virgoletta = UtilDom.findParentByName(selectionManager.getActiveNode(), "virgolette");
-			if (virgoletta!=null) {
+			if (virgoletta!=null && modNode==UtilDom.findParentByName(selectionManager.getActiveNode(), "mod")) {
 				riferimento.setText(UtilDom.getAttributeValueAsString(virgoletta,"id"));
+				for (int i=0; i<sceltaRiferimento.getItemCount(); i++)
+					if (((String) sceltaRiferimento.getItemAt(i)).startsWith(riferimento.getText()))
+						sceltaRiferimento.setSelectedIndex(i);
 				return;	
 			}
-		} catch (Exception e) {}			
+		} catch (Exception e) {}
+		sceltaRiferimento.setSelectedItem(" ");
 		riferimento.setText("");
 	}
 	
@@ -93,14 +136,6 @@ public class VirgolettaFormImpl implements VirgolettaForm, Loggable, Serviceable
 			else
 				updateContent();
 		}
-		
-		
-//		SelectionChangedEvent e = (SelectionChangedEvent) event;
-//		activeNode = ((SelectionChangedEvent) event).getActiveNode();
-//		if (activeNode!=null) {
-//			start = ((SelectionChangedEvent) event).getTextSelectionStart();
-//			end = ((SelectionChangedEvent) event).getTextSelectionEnd();
-//		}
 	}
 
 }

@@ -134,7 +134,7 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 		form.setMainComponent(this.getClass().getResourceAsStream("Novella.jfrm"));
 		form.setCustomButtons(null);		
 		
-		form.setName("editor.form.disposizioni.attive");
+		form.setName("editor.form.disposizioni.attive.novella");
 		form.setHelpKey("help.contents.form.disposizioniattive.novella");
 
 		avanti = (JButton) form.getComponentByName("editor.form.disposizioni.attive.btn.avanti");
@@ -250,7 +250,7 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 				virgolettaSelezionata = virFra1;
 			if (e.getSource() == sceltoFra2) 
 				virgolettaSelezionata = virFra2;
-			virgolettaForm.openForm(this);
+			virgolettaForm.openForm(this, disposizioni.getModCorrente());
 		}
 			
 		if (e.getSource() == avanti) {
@@ -270,9 +270,7 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 		//	se ho + di una virgoletta scelgo l'ultima per il contenuto
 		activeNode = selectionManager.getActiveNode();
 		Document doc = documentManager.getDocumentAsDom();
-		Node mod = UtilDom.findParentByName(activeNode, "mod");
-		if (mod==null)
-			return;	//nel passaggio fra le 2 form è stato cambiato il nodo attivo
+		Node mod = disposizioni.getModCorrente();
 		Node[] virgolette = UtilDom.getElementsByTagName(doc, mod, "virgolette");
 		if (virgolette.length>0)
 			virContenuto.setText(UtilDom.getAttributeValueAsString(virgolette[virgolette.length-1],"id"));
