@@ -16,7 +16,7 @@ Elementi sotto verifica: (documento principale e annessi)
 <xsl:transform  xmlns:xsl   = "http://www.w3.org/1999/XSL/Transform"
                 xmlns:xlink = "http://www.w3.org/1999/xlink"
                 xmlns:h     = "http://www.w3.org/HTML/1998/html4"
-                xmlns       = "http://www.normeinrete.it/nir/2.2"
+                xmlns       = "http://www.w3.org/HTML/1998/html4"
                 xmlns:nir   = "http://www.normeinrete.it/nir/2.2/"
  			    xmlns:mapper= "xalan://it.cnr.ittig.xmleges.core.blocks.panes.xsltmapper.XsltMapperImpl"
                 version     = "1.0"
@@ -31,23 +31,17 @@ Elementi sotto verifica: (documento principale e annessi)
 <xsl:template match="nir:NIR">
 	<html>
 		<head>
-
         </head>
 		<body>
 			<b><xsl:text>Documento principale</xsl:text></b>
 			<br/>
 			<xsl:call-template name="intestazione" />
 			<xsl:call-template name="descrittori" />
-			
 			<xsl:apply-templates select="//nir:annesso"/>
-			
 		</body>
 	</html>
 </xsl:template>
 
-<xsl:template name="check">
-
-</xsl:template>
 
 <xsl:template name="intestazione">
 	<xsl:choose>
@@ -182,10 +176,10 @@ Elementi sotto verifica: (documento principale e annessi)
 </xsl:template>
 
 <xsl:template match="*" >
-	<br/><font color="blue">&#160;-&#160;<xsl:value-of select="local-name(.)"/>:&#160;</font>
+	<br/><font color="blue">&#160;-&#160;<xsl:value-of select="local-name(.)"/>:&#160;</font>	
 	<xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-        <xsl:value-of select="."/>
+    	<xsl:apply-templates />
 	</xsl:element>		
 </xsl:template>
 
