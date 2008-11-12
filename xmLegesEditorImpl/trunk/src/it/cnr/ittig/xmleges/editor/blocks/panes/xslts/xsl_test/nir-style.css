@@ -52,8 +52,8 @@ body {	margin-left: 5px;
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
  .intestazione {
 	margin: 15px 10% 0px 10%;
-	text-align: center;
-	font-size: large;
+	text-align: left;
+	font-size: 100%;
 }
 .emanante{
 	margin: 10 0 10 0;
@@ -69,8 +69,7 @@ body {	margin-left: 5px;
 .titoloDoc {
 	margin-top: 15px;
 	text-align:center;
-	font-size: 100% ;
-	color: #FF8040;
+	font-size: large;
 	font-weight: bold;
 	text-align: center;
 }
@@ -257,12 +256,9 @@ elementi interni
  * ELEMENTI INTERNI                                                                                                    *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-.ndr {
-	text-decoration: underline;
-}
+
 
 .nota {
-	font-size:90%;
 	text-align: justify;
 	display: inline;
 	float: left;
