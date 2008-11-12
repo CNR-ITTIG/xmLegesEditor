@@ -72,7 +72,7 @@ public class VirgolettaFormImpl implements VirgolettaForm, Loggable, Serviceable
 		Node[] virgolette = UtilDom.getElementsByTagName(documentManager.getDocumentAsDom(), modNode, "virgolette");
 		if (virgolette!=null) {
 			for (int i = 0; i < virgolette.length; i++) {
-				String valore = virgolette[i].getFirstChild().getNodeValue();
+				String valore = UtilDom.getText(virgolette[i]);
 				String id = UtilDom.getAttributeValueAsString(virgolette[i], "id")+": ";
 				if (valore.length()>44)
 					sceltaRiferimento.addItem(id+valore.substring(0, 40) + " ...");
