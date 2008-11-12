@@ -23,7 +23,7 @@
         <base href="{$base}" />
         <body>
 	        <xsl:choose>					
-				<xsl:when test="/nir:mod">
+				<xsl:when test="//nir:mod">
 		        	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 	   					<xsl:attribute name="style">
 	   						text-align: center;
@@ -33,9 +33,7 @@
 					    <xsl:text> Disposizioni attive </xsl:text>
 					</xsl:element>
 					<br/>
-					<xsl:for-each select="/nir:mod">
-						<xsl:apply-templates select="./.." />
-					</xsl:for-each>			
+					<xsl:apply-templates select="//nir:mod"/>	
 				</xsl:when>	
 				<xsl:otherwise>
 					<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
@@ -49,9 +47,8 @@
 				</xsl:otherwise>
 			</xsl:choose>   
 			<br/><br/><br/><hr/><br/><br/>
-
 			<!--	mettere anche le passive	-->
-
+		
         </body>
     </html>
 </xsl:template>
