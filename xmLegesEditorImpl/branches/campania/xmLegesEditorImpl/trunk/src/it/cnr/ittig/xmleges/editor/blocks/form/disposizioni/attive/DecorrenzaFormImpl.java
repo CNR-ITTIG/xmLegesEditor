@@ -142,7 +142,7 @@ public class DecorrenzaFormImpl implements DecorrenzaForm, Loggable, Serviceable
 			selezionato = condizione;
 		if (datalibera.isSelected())
 			selezionato = datalibera;
-		form.setSize(260, 310);
+		form.setSize(300, 310);
 		form.showDialog();
 		if (!form.isOk())
 			selezionato.setSelected(true);

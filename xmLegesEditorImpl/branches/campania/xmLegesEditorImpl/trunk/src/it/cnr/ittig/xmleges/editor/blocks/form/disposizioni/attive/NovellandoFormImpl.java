@@ -243,7 +243,7 @@ public class NovellandoFormImpl implements NovellandoForm,
 		sceltaPartenza.addActionListener(this);
 		sceltaArrivo.addActionListener(this);
 
-		form.setSize(350, 290);
+		form.setSize(380, 300);
 	}
 
 	private void popolaControlli(JComboBox combo) {

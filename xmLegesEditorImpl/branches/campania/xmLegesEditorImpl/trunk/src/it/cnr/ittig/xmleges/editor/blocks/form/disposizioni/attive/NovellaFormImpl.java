@@ -186,7 +186,7 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 		prima.addActionListener(this);
 		dopo.addActionListener(this);	
 		fra.addActionListener(this);	
-		form.setSize(300, 330);
+		form.setSize(320, 330);
 	}
 	
 	private void setTipo() {
