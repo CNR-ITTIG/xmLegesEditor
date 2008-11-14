@@ -1,5 +1,7 @@
 package it.cnr.ittig.xmleges.editor.services.form.disposizioni.attive;
 
+import org.w3c.dom.Node;
+
 import it.cnr.ittig.services.manager.Service;
 
 
@@ -66,4 +68,8 @@ public interface DispAttiveForm extends Service {
 	 */
 	public int getOperazioneIniziale();
 
+	/**
+	 * Restituisce il nodo MOD su cui stiamo gestendo le disposizioni
+	 */
+	public Node getModCorrente();
 }
