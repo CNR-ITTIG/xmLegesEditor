@@ -110,6 +110,7 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 	NovellaForm novellaForm;
 
 	Node activeNode;	
+	Node modNode;
 	DocumentManager documentManager;
 	SelectionManager selectionManager;
 
@@ -267,6 +268,10 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 		}
 	}
 
+	public Node getModCorrente() {
+		return modNode;
+	}
+	
 	public void openForm(boolean cancellaCampi) {
 		
 		if (form.isDialogVisible())
@@ -275,6 +280,7 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 			return;		//una form successiva è già aperta
 		
 		Node nodoAttivo = selectionManager.getActiveNode();
+		modNode = UtilDom.findParentByName(nodoAttivo, "mod");
 		
 		if (cancellaCampi) {
 			implicita.setSelected(false);
@@ -296,7 +302,7 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 				delimitatoriScelti= riferimentoForm.getBordi();
 				listModel.clear();
 				for (int i=0; i<delimitatoriScelti.length/3; i++)
-					listModel.addElement(delimitatoriScelti[i*3] + " (" + delimitatoriScelti[i*3+1] + ") " + delimitatoriScelti[i*3+2]);
+					listModel.addElement(delimitatoriScelti[i*3] + " " + delimitatoriScelti[i*3+1] + " " + delimitatoriScelti[i*3+2]);
 			}
 			if (!"".equals(partizione.getText()))
 				soloPartizione.setSelected(true);
@@ -350,7 +356,7 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 		}
 		listModel.clear();
 		for (int i=0; i<delimitatoriScelti.length/3; i++)
-			listModel.addElement(delimitatoriScelti[i*3] + " (" + delimitatoriScelti[i*3+1] + ") " + delimitatoriScelti[i*3+2]);
+			listModel.addElement(delimitatoriScelti[i*3] + " " + delimitatoriScelti[i*3+1] + " " + delimitatoriScelti[i*3+2]);
 	}
 	
 	private String[] prendiDelimitatori(String[] attuale, Node bordo) {
@@ -561,4 +567,3 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 		return operazioneIniziale;
 	}
 }
-

@@ -64,20 +64,28 @@ import org.w3c.dom.Node;
  * 
  * @version 1.0
  */
-public class NovellandoFormImpl implements NovellandoForm, EventManagerListener, Loggable, ActionListener, Serviceable, Initializable, FormClosedListener {
+public class NovellandoFormImpl implements NovellandoForm,
+		EventManagerListener, Loggable, ActionListener, Serviceable,
+		Initializable, FormClosedListener {
 	Logger logger;
+
 	I18n i18n;
 
 	Form form;
+
 	DispAttiveForm disposizioni;
+
 	VirgolettaForm virgolettaForm;
 	
 	DocumentManager documentManager;
 	EventManager eventManager;
 	RulesManager rulesManager;
 	SelectionManager selectionManager;
-	 
-	JCheckBox parole;
+
+	JRadioButton parole;
+
+	JRadioButton partiz_porz;
+
 	JLabel etiPalole;
 	JLabel etiPosizionamento;
 	JLabel etiContenuto;
@@ -125,26 +133,41 @@ public class NovellandoFormImpl implements NovellandoForm, EventManagerListener,
 	public void initialize() throws java.lang.Exception {
 		//eventManager.addListener(this, SelectionChangedEvent.class);
 		eventManager.addListener(this, DocumentClosedEvent.class);
-		form.setMainComponent(this.getClass().getResourceAsStream("Novellando.jfrm"));
-		form.setCustomButtons(null);		
-		
-		form.setName("editor.form.disposizioni.attive");
+		form.setMainComponent(this.getClass().getResourceAsStream(
+				"Novellando.jfrm"));
+		form.setCustomButtons(null);
+
+		form.setName("editor.form.disposizioni.attive.novellando");
 		form.setHelpKey("help.contents.form.disposizioniattive.novellando");
 
 		avanti = (JButton) form.getComponentByName("editor.form.disposizioni.attive.btn.avanti");
 		indietro = (JButton) form.getComponentByName("editor.form.disposizioni.attive.btn.indietro");
 		avanti.addActionListener(this);
 		indietro.addActionListener(this);
-		parole = (JCheckBox) form.getComponentByName("editor.dispattive.novellando.parole");
+		parole = (JRadioButton) form.getComponentByName("editor.dispattive.novellando.parole");
 		parole.addActionListener(this);
-		etiPalole = (JLabel) form.getComponentByName("editor.dispattive.novellando.parole.eti");
-		etiPosizionamento = (JLabel) form.getComponentByName("editor.dispattive.novellando.posizionamento.eti");
-		etiContenuto = (JLabel) form.getComponentByName("editor.dispattive.novellando.contenuto.eti");
-		etiDelimitatori = (JLabel) form.getComponentByName("editor.dispattive.novellando.delimitatori.eti");
-		etiPartenza = (JLabel) form.getComponentByName("editor.dispattive.novellando.partenza.eti");
-		etiArrivo = (JLabel) form.getComponentByName("editor.dispattive.novellando.arrivo.eti");
-		sceltocontenuto = (JRadioButton) form.getComponentByName("editor.dispattive.novellando.contenuto"); 
-		sceltodelimitatori = (JRadioButton) form.getComponentByName("editor.dispattive.novellando.delimitatori"); 
+		partiz_porz = (JRadioButton) form
+				.getComponentByName("editor.dispattive.novellando.partiz-porz");
+		partiz_porz.addActionListener(this);
+		ButtonGroup grupporadio1 = new ButtonGroup();
+		grupporadio1.add(parole);
+		grupporadio1.add(partiz_porz);
+		etiPalole = (JLabel) form
+				.getComponentByName("editor.dispattive.novellando.parole.eti");
+		etiPosizionamento = (JLabel) form
+				.getComponentByName("editor.dispattive.novellando.posizionamento.eti");
+		etiContenuto = (JLabel) form
+				.getComponentByName("editor.dispattive.novellando.contenuto.eti");
+		etiDelimitatori = (JLabel) form
+				.getComponentByName("editor.dispattive.novellando.delimitatori.eti");
+		etiPartenza = (JLabel) form
+				.getComponentByName("editor.dispattive.novellando.partenza.eti");
+		etiArrivo = (JLabel) form
+				.getComponentByName("editor.dispattive.novellando.arrivo.eti");
+		sceltocontenuto = (JRadioButton) form
+				.getComponentByName("editor.dispattive.novellando.contenuto");
+		sceltodelimitatori = (JRadioButton) form
+				.getComponentByName("editor.dispattive.novellando.delimitatori");
 		sceltocontenuto.addActionListener(this);
 		sceltodelimitatori.addActionListener(this);
 		ButtonGroup grupporadio = new ButtonGroup();
@@ -170,9 +193,9 @@ public class NovellandoFormImpl implements NovellandoForm, EventManagerListener,
 		sceltaPosizionamento.addActionListener(this);
 		sceltaContenuto.addActionListener(this);
 		sceltaPartenza.addActionListener(this);
-		sceltaArrivo.addActionListener(this);		
-		
-		form.setSize(350, 290);
+		sceltaArrivo.addActionListener(this);
+
+		form.setSize(380, 300);
 	}
 	
 	private void popolaControlli(JComboBox combo) {
@@ -202,8 +225,8 @@ public class NovellandoFormImpl implements NovellandoForm, EventManagerListener,
 			setSceltaDelimitatori(false);
 		if (e.getSource() == sceltodelimitatori)
 			setSceltaDelimitatori(true);
-		
-		if (e.getSource() == parole) 
+
+		if (e.getSource() == parole || e.getSource() == partiz_porz)
 			setSceltaParole();
 		
 		if (e.getSource() == sceltaPosizionamento || e.getSource() == sceltaContenuto || e.getSource() == sceltaPartenza || e.getSource() == sceltaArrivo) {
@@ -217,7 +240,7 @@ public class NovellandoFormImpl implements NovellandoForm, EventManagerListener,
 				virgolettaSelezionata = virPartenza;
 			if (e.getSource() == sceltaArrivo) 
 				virgolettaSelezionata = virArrivo;
-			virgolettaForm.openForm(this);
+			virgolettaForm.openForm(this, disposizioni.getModCorrente());
 		}
 		
 		if (e.getSource() == avanti) {
@@ -253,31 +276,36 @@ public class NovellandoFormImpl implements NovellandoForm, EventManagerListener,
 		virArrivo.setText("");
 		activeNode = selectionManager.getActiveNode();
 		Document doc = documentManager.getDocumentAsDom();
-		Node mod = UtilDom.findParentByName(activeNode, "mod");
-		if (mod==null)
-			return;	//nel passaggio fra le 2 form è stato cambiato il nodo attivo
-		Node[] virgolette = UtilDom.getElementsByTagName(doc, mod, "virgolette");
+		Node mod = disposizioni.getModCorrente();
+		Node[] virgolette = UtilDom
+				.getElementsByTagName(doc, mod, "virgolette");
 		int trovate = virgolette.length;
 		switch (trovate) {
-			case 2:
-				parole.setSelected(true);
-				setSceltaDelimitatori(true);
-				virPartenza.setText(UtilDom.getAttributeValueAsString(virgolette[0],"id"));
-				virArrivo.setText(UtilDom.getAttributeValueAsString(virgolette[1],"id"));
-				setSceltaParole();
-				break;
-			case 1:
-				parole.setSelected(true);
-				setSceltaDelimitatori(false);
-				virContenuto.setText(UtilDom.getAttributeValueAsString(virgolette[0],"id"));
-				virPartenza.setText("");
-				virArrivo.setText("");
-				setSceltaParole();
-				break;
-			default:
-				parole.setSelected(false);
-				setSceltaDelimitatori(false);
-				setSceltaParole();
+		case 2:
+			parole.setSelected(true);
+			partiz_porz.setSelected(false);
+			setSceltaDelimitatori(true);
+			virPartenza.setText(UtilDom.getAttributeValueAsString(
+					virgolette[0], "id"));
+			virArrivo.setText(UtilDom.getAttributeValueAsString(virgolette[1],
+					"id"));
+			setSceltaParole();
+			break;
+		case 1:
+			parole.setSelected(true);
+			partiz_porz.setSelected(false);
+			setSceltaDelimitatori(false);
+			virContenuto.setText(UtilDom.getAttributeValueAsString(
+					virgolette[0], "id"));
+			virPartenza.setText("");
+			virArrivo.setText("");
+			setSceltaParole();
+			break;
+		default:
+			parole.setSelected(false);
+			partiz_porz.setSelected(true);
+			setSceltaDelimitatori(false);
+			setSceltaParole();
 		}
 	}
 
@@ -397,10 +425,12 @@ public class NovellandoFormImpl implements NovellandoForm, EventManagerListener,
 			if (pos1 == null) {
 				//	(***A***)
 				parole.setSelected(false);
+				partiz_porz.setSelected(true);
 				setSceltaDelimitatori(false);
 				setSceltaParole();
 			} else {
 				parole.setSelected(true);
+				partiz_porz.setSelected(false);
 				Node pos2 = pos1.getNextSibling();
 				while (pos2!=null && "dsp:subarg".equals(pos2.getNodeName()))
 					pos2 = pos2.getNextSibling();	//salto eventuali SubArgomenti
