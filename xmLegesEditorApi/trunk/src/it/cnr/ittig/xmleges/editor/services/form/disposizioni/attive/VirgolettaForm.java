@@ -1,5 +1,7 @@
 package it.cnr.ittig.xmleges.editor.services.form.disposizioni.attive;
 
+import org.w3c.dom.Node;
+
 import it.cnr.ittig.services.manager.Service;
 import it.cnr.ittig.xmleges.core.services.form.FormClosedListener;
 
@@ -25,7 +27,7 @@ public interface VirgolettaForm extends Service {
 	/**
 	 * Apre la form.
 	 */
-	public void openForm(FormClosedListener listener);
+	public void openForm(FormClosedListener listener, Node modifica);
 	
 	/**
 	 * Restituisce la virgoletta selezionata
