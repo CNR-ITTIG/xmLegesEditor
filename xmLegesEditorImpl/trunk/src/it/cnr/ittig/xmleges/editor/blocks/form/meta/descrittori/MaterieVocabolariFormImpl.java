@@ -19,6 +19,9 @@ import it.cnr.ittig.xmleges.editor.blocks.form.browser.BrowserEvent;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.descrittori.Vocabolario;
 import it.cnr.ittig.xmleges.editor.services.form.meta.descrittori.MaterieVocabolariForm;
 
+//disabilito il teseo
+//import it.cnr.ittig.xmleges.editor.services.form.browser.BrowserForm;
+
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -36,11 +39,9 @@ import javax.swing.JComboBox;
 import javax.swing.JEditorPane;
 import javax.swing.JList;
 
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
 
 public class MaterieVocabolariFormImpl implements MaterieVocabolariForm , Loggable,
 Serviceable, Initializable, ActionListener {
@@ -125,6 +126,7 @@ Serviceable, Initializable, ActionListener {
 	}
 	
 	private void updateVocaboli(){
+		
 		if (vocaboliSelezionati==null)
 			vocaboliSelezionati = new Vocabolario[0];
 			
@@ -168,8 +170,9 @@ Serviceable, Initializable, ActionListener {
 						trovato = true;
 						//aggiungo tutte le materie eventualmente non presenti nel vocabolario
 						String[] materie = vocabolari[i].getMaterie();
-						for (int k=0; k<materie.length; k++)
-							addMateriaVocab(materie[k], vocabolari[i].getNome());
+						if (materie!=null)
+							for (int k=0; k<materie.length; k++)
+								addMateriaVocab(materie[k], vocabolari[i].getNome());
 					}	
 				if (!trovato) {
 					//aggiungo il vocabolario e tutte le sue materie
@@ -202,14 +205,16 @@ Serviceable, Initializable, ActionListener {
 		comboVocabolari.setSelectedItem(vocabolari.getNome());
 		String[] materie = this.vocabolari[comboVocabolari.getSelectedIndex()].getMaterie();
 		String[] materieDaSelezionare = vocabolari.getMaterie();
+		if (materieDaSelezionare!=null) {
 		int[] selezionati = new int[materieDaSelezionare.length];
-		for (int k=0; k<materieDaSelezionare.length; k++)
-			for (int i=0; i<materie.length; i++)
-				if (materie[i].equals(materieDaSelezionare[k])) {
-					selezionati[k]=i;
-					break;
+			for (int k=0; k<materieDaSelezionare.length; k++)
+				for (int i=0; i<materie.length; i++)
+					if (materie[i].equals(materieDaSelezionare[k])) {
+						selezionati[k]=i;
+						break;
 				}
-		listaMaterieSelectedVocab.setSelectedIndices(selezionati);
+			listaMaterieSelectedVocab.setSelectedIndices(selezionati);
+		}
 		
 		nomeVocabolario = (String) comboVocabolari.getSelectedItem();
 	}
