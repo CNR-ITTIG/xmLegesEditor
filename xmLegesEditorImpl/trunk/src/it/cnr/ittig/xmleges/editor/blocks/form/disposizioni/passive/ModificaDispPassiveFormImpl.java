@@ -352,7 +352,7 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 				return null;
 			else {
 				if (cerca.getNodeName().equals("dsp:abrogazione")) {
-					if (UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(doc,UtilDom.getElementsByTagName(doc, cerca, "dsp:novellando")[0], "dsp:pos")[0],"xlink:href").equals(id)) {
+					if (UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(doc,UtilDom.getElementsByTagName(doc, cerca, "dsp:novellando")[0], "dsp:pos")[0],"xlink:href").equals("#"+id)) {
 						tipoDisposizione = "abrogazione";
 						idNovellando = id;
 						idNovella = "";
@@ -361,22 +361,26 @@ public class ModificaDispPassiveFormImpl implements ModificaDispPassiveForm, Log
 				}
 				else 
 					if (cerca.getNodeName().equals("dsp:sostituzione")) {
-						if (UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(doc, UtilDom.getElementsByTagName(doc, cerca, "dsp:novellando")[0], "dsp:pos")[0],"xlink:href").equals(id)) {
+						if (UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(doc, UtilDom.getElementsByTagName(doc, cerca, "dsp:novellando")[0], "dsp:pos")[0],"xlink:href").equals("#"+id)) {
 							tipoDisposizione = "sostituzione";
 							idNovellando = id;							
 							idNovella = UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(doc, UtilDom.getElementsByTagName(doc, cerca, "dsp:novella")[0], "dsp:pos")[0],"xlink:href");
+							//voglio levare il #
+							idNovella = idNovella.substring(1, idNovella.length());
 							return cerca; 
 						}
-						if (UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(doc, UtilDom.getElementsByTagName(doc, cerca, "dsp:novella")[0], "dsp:pos")[0],"xlink:href").equals(id)) {
+						if (UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(doc, UtilDom.getElementsByTagName(doc, cerca, "dsp:novella")[0], "dsp:pos")[0],"xlink:href").equals("#"+id)) {
 							tipoDisposizione = "sostituzione";
-							idNovellando = UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(doc, UtilDom.getElementsByTagName(doc, cerca, "dsp:novellando")[0], "dsp:pos")[0],"xlink:href");							
+							idNovellando = UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(doc, UtilDom.getElementsByTagName(doc, cerca, "dsp:novellando")[0], "dsp:pos")[0],"xlink:href");	
+							//voglio levare il #
+							idNovellando = idNovellando.substring(1, idNovellando.length());
 							idNovella = id;
 							return cerca; 
 						}	
 					}
 					else 
 						if (cerca.getNodeName().equals("dsp:integrazione")) {
-							if (UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(doc, UtilDom.getElementsByTagName(doc, cerca, "dsp:novella")[0], "dsp:pos")[0],"xlink:href").equals(id)) {
+							if (UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(doc, UtilDom.getElementsByTagName(doc, cerca, "dsp:novella")[0], "dsp:pos")[0],"xlink:href").equals("#"+id)) {
 								tipoDisposizione = "integrazione";
 								idNovellando = "";
 								idNovella = id;
