@@ -143,7 +143,7 @@ Elementi sotto verifica: (documento principale e annessi)
 
 <xsl:template match="*[name()='pubblicazione']" >
 	<br/><font color="blue"><xsl:text> - </xsl:text><xsl:value-of select="local-name(.)"/><xsl:text>: </xsl:text></font>
-	<xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
+	<xsl:element name="span">
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
         <xsl:value-of select="."/>
         <xsl:text> ( Data: </xsl:text><xsl:value-of select="@norm"/>
@@ -155,7 +155,7 @@ Elementi sotto verifica: (documento principale e annessi)
 
 <xsl:template match="*[name()='entratainvigore']" >
 	<br/><font color="blue"><xsl:text> - </xsl:text><xsl:value-of select="local-name(.)"/><xsl:text>: </xsl:text></font>
-	<xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
+	<xsl:element name="span">
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
         <xsl:value-of select="."/>
         <xsl:text> ( Data: </xsl:text><xsl:value-of select="@norm"/>
@@ -166,7 +166,7 @@ Elementi sotto verifica: (documento principale e annessi)
 <xsl:template match="*[name()='urn']" >
 	<xsl:if test="not(@iniziovigore) or @iniziovigore='t1'">
 		<br/><font color="blue"><xsl:text> - </xsl:text><xsl:value-of select="local-name(.)"/><xsl:text>: </xsl:text></font>
-		<xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
+		<xsl:element name="span">
     		<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
        	 <xsl:value-of select="."/><xsl:value-of select="@valore"/>
 		</xsl:element>	
