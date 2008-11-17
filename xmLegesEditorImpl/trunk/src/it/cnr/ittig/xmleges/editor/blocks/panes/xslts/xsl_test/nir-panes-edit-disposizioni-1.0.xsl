@@ -240,18 +240,17 @@
 	</xsl:variable>
 	<font color="Black"> - porzione: tipo= </font>
 	<font color="Blue"><xsl:value-of select="$tipoBordo"/></font>
-	<!--	xsl:choose>
-		<xsl:when test="$tipoBordo='alinea' | $tipoBordo='coda' | $tipoBordo='rubrica'">
-			<font color="Black"> ;</font>
-		</xsl:when>
-		<xsl:otherwise	-->
-			<font color="Black"> ; identificativo: </font>
-			<font color="Blue"><xsl:value-of select="@num"/></font>
-			<xsl:if test="@ordinale='si'">
-				<xsl:text> (ordinale)</xsl:text>
-			</xsl:if>
-		<!--	/xsl:otherwise>
-	</xsl:choose	-->
+	<font color="Black"> 
+		<xsl:choose>
+				<xsl:when test="@ordinale='si'">
+					<xsl:text> ; ordine:</xsl:text>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:text> ; identificativo:</xsl:text>
+				</xsl:otherwise>
+		</xsl:choose>
+	</font>
+	<font color="Blue"><xsl:value-of select="@num"/></font>
 	<br/>
 	<xsl:apply-templates select="ittig:bordo" mode="dispo"/>
 </xsl:template> 
