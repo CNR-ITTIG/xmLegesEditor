@@ -556,7 +556,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 
                     <item action="editor.disposizioni.attive" />
-
+					<item action="editor.disposizioni.marker" />
                     
                     <item action="editor.annessi.annesso" />
                     <item action="editor.ndr" />
