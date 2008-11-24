@@ -954,11 +954,10 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 			}
 			nodo = documentManager.getDocumentAsDom().createElementNS("http://www.ittig.cnr.it/provvedimenti/2.2", "ittig:bordo");
 			UtilDom.setAttributeValue(nodo, "tipo", delimitatori[i*3]);
-			UtilDom.setAttributeValue(nodo, "num", delimitatori[i*3+1]);
 			if ("ordinale".equalsIgnoreCase(delimitatori[i*3+2]))
-				UtilDom.setAttributeValue(nodo, "ordinale", "si");
+				UtilDom.setAttributeValue(nodo, "ord", delimitatori[i*3+1]);
 			else
-				UtilDom.setAttributeValue(nodo, "ordinale", "no");
+				UtilDom.setAttributeValue(nodo, "num", delimitatori[i*3+1]);
 			delimitatoreNode.appendChild(nodo);
 			delimitatoreNode = nodo;
 		}
@@ -969,17 +968,16 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 	private void setPosizione(Node posizioneNode, String posizione, String virgoletta) {
 		Node posNode = null;
 		
-		if (!posizione.equals("inizio") | !posizione.equals("fine")) {	//aggiungo il POS in Posizione
-			posNode = utilRulesManager.getNodeTemplate("dsp:pos");
-			UtilDom.setAttributeValue(posNode, "xlink:href", virgoletta);
-			posizioneNode.appendChild(posNode);
-		}		
-		Node nodo = documentManager.getDocumentAsDom().createElementNS("http://www.ittig.cnr.it/provvedimenti/2.2", "ittig:dove");
-		UtilDom.setAttributeValue(nodo, "valore", posizione);
-		if (posNode==null)
-			posizioneNode.appendChild(nodo);
-		else
+		posNode = utilRulesManager.getNodeTemplate("dsp:pos");
+		UtilDom.setAttributeValue(posNode, "xlink:href", virgoletta);
+		posizioneNode.appendChild(posNode);
+		if ("prima".equals(posizione) | "dopo".equals(posizione) | "da".equals(posizione) | "a".equals(posizione))		
+			UtilDom.setAttributeValue(posNode, "dove", posizione);
+		else {
+			Node nodo = documentManager.getDocumentAsDom().createElementNS("http://www.ittig.cnr.it/provvedimenti/2.2", "ittig:dove");
+			UtilDom.setAttributeValue(nodo, "valore", posizione);
 			posNode.appendChild(nodo);
+		}	
 	}
 	
 	public void setDOMNovellaDispAttive(Node meta, String virgolettaContenuto, String tipo, String posizione, String virgolettaA, String virgolettaB) {
