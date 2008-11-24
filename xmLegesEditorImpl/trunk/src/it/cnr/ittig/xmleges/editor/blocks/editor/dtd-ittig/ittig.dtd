@@ -3,7 +3,6 @@
 <!ENTITY % ittigtipo "(atto|allegato|libro|parte|titolo|capo|sezione|articolo|comma|alinea|coda|lettera|numero|punto|periodo|parole|capoverso)" >
 <!ENTITY % ittigdove "(prima|dopo|inizio|fine|fra-prima|fra-dopo)" >
 <!ENTITY % ittigruolo "(da|a|prima|dopo)" >
-<!ENTITY % ittigordinale "(si|no)" >
 
 <!ELEMENT ittig:notavigenza EMPTY >
 <!ATTLIST ittig:notavigenza %ittigNS; %idreq; auto %anystring; #REQUIRED>
@@ -18,4 +17,4 @@
 <!ATTLIST ittig:tipo %ittigNS; valore %ittigtipo; #REQUIRED>
 
 <!ELEMENT ittig:bordo (ittig:bordo?) >
-<!ATTLIST ittig:bordo %ittigNS; tipo %ittigtipo; #REQUIRED num %numero; #IMPLIED ordinale %ittigordinale; #REQUIRED>
+<!ATTLIST ittig:bordo %ittigNS; tipo %ittigtipo; #REQUIRED num %numero; #IMPLIED ord %numero; #IMPLIED>

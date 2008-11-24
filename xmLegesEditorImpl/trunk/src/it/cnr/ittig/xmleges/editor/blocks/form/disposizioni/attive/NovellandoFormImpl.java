@@ -170,12 +170,15 @@ public class NovellandoFormImpl implements NovellandoForm,
 				.getComponentByName("editor.dispattive.novellando.delimitatori");
 		sceltocontenuto.addActionListener(this);
 		sceltodelimitatori.addActionListener(this);
-		ButtonGroup grupporadio = new ButtonGroup();
-		grupporadio.add(sceltocontenuto);
-		grupporadio.add(sceltodelimitatori);
-		valorePosizionamento = (JComboBox) form.getComponentByName("editor.dispattive.novellando.posizionamento");
-		valorePartenza = (JComboBox) form.getComponentByName("editor.dispattive.novellando.partenza");
-		valoreArrivo = (JComboBox) form.getComponentByName("editor.dispattive.novellando.arrivo");
+		ButtonGroup grupporadio2 = new ButtonGroup();
+		grupporadio2.add(sceltocontenuto);
+		grupporadio2.add(sceltodelimitatori);
+		valorePosizionamento = (JComboBox) form
+				.getComponentByName("editor.dispattive.novellando.posizionamento");
+		valorePartenza = (JComboBox) form
+				.getComponentByName("editor.dispattive.novellando.partenza");
+		valoreArrivo = (JComboBox) form
+				.getComponentByName("editor.dispattive.novellando.arrivo");
 		valorePosizionamento.addActionListener(this);
 		valorePartenza.addActionListener(this);
 		valoreArrivo.addActionListener(this);
@@ -437,29 +440,51 @@ public class NovellandoFormImpl implements NovellandoForm,
 				Node ruolo1 = UtilDom.findRecursiveChild(pos1,"ittig:ruolo");
 				if (pos2==null) {
 					if (ruolo1 == null) {
-						//	(***C***)
-						valVirContenuto = UtilDom.getAttributeValueAsString(pos1,"xlink:href");
+						// (***C***)
+						valVirContenuto = UtilDom.getAttributeValueAsString(
+								pos1, "xlink:href");
+						if (valVirContenuto.length()>0)
+							valVirContenuto=valVirContenuto.substring(1);
 						setSceltaDelimitatori(false);
 					} else {
-						//	(***B***)	
-						valorePartenza.setSelectedItem(UtilDom.getAttributeValueAsString(ruolo1,"valore"));
-						valVirPartenza = UtilDom.getAttributeValueAsString(pos1,"xlink:href");
+						// (***B***)
+						valorePartenza.setSelectedItem(UtilDom
+								.getAttributeValueAsString(ruolo1, "valore"));
+						valVirPartenza = UtilDom.getAttributeValueAsString(
+								pos1, "xlink:href");
+						if (valVirPartenza.length()>0)
+							valVirPartenza=valVirPartenza.substring(1);
 						setSceltaDelimitatori(true);
 					}
 				} else {
 					Node ruolo2 = UtilDom.findRecursiveChild(pos2,"ittig:ruolo");
 					if (ruolo2 == null) {
-						//	(***E***)
-						valVirContenuto = UtilDom.getAttributeValueAsString(pos2,"xlink:href");  //scambio pos1 e 2
-						valorePosizionamento.setSelectedItem(UtilDom.getAttributeValueAsString(ruolo1,"valore"));
-						valVirPosizionamento = UtilDom.getAttributeValueAsString(pos1,"xlink:href");
+						// (***E***)
+						valVirContenuto = UtilDom.getAttributeValueAsString(
+								pos2, "xlink:href"); // scambio pos1 e 2
+						if (valVirContenuto.length()>0)
+							valVirContenuto=valVirContenuto.substring(1);
+						valorePosizionamento.setSelectedItem(UtilDom
+								.getAttributeValueAsString(ruolo1, "valore"));
+						valVirPosizionamento = UtilDom
+								.getAttributeValueAsString(pos1, "xlink:href");
+						if (valVirPosizionamento.length()>0)
+							valVirPosizionamento=valVirPosizionamento.substring(1);
 						setSceltaDelimitatori(false);
 					} else {
-						//	(***D***)	
-						valorePartenza.setSelectedItem(UtilDom.getAttributeValueAsString(ruolo1,"valore"));
-						valVirPartenza = UtilDom.getAttributeValueAsString(pos1,"xlink:href");
-						valoreArrivo.setSelectedItem(UtilDom.getAttributeValueAsString(ruolo2,"valore"));
-						valVirArrivo = UtilDom.getAttributeValueAsString(pos2,"xlink:href");
+						// (***D***)
+						valorePartenza.setSelectedItem(UtilDom
+								.getAttributeValueAsString(ruolo1, "valore"));
+						valVirPartenza = UtilDom.getAttributeValueAsString(
+								pos1, "xlink:href");
+						if (valVirPartenza.length()>0)
+							valVirPartenza=valVirPartenza.substring(1);
+						valoreArrivo.setSelectedItem(UtilDom
+								.getAttributeValueAsString(ruolo2, "valore"));
+						valVirArrivo = UtilDom.getAttributeValueAsString(pos2,
+								"xlink:href");
+						if (valVirArrivo.length()>0)
+							valVirArrivo=valVirArrivo.substring(1);
 						setSceltaDelimitatori(true);
 					}				
 				}
@@ -470,7 +495,7 @@ public class NovellandoFormImpl implements NovellandoForm,
 			Document doc = documentManager.getDocumentAsDom();
 			Node mod = UtilDom.findParentByName(activeNode, "mod");
 			if (mod==null)
-				return;	//nel passaggio fra le 2 form è stato cambiato il nodo attivo
+				return;
 			Node[] virgolette = UtilDom.getElementsByTagName(doc, mod, "virgolette");
 			if (virgolette!=null) {
 				String href;

@@ -370,7 +370,12 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 			try {
 				nuova[lunghezza] = UtilDom.getAttributeValueAsString(bordo,"tipo");
 				nuova[lunghezza+1] = UtilDom.getAttributeValueAsString(bordo,"num");
-				nuova[lunghezza+2] = "si".equalsIgnoreCase(UtilDom.getAttributeValueAsString(bordo,"ordinale")) ? "ordinale": "";
+				if (nuova[lunghezza+1]==null) {
+					nuova[lunghezza+1] = UtilDom.getAttributeValueAsString(bordo,"ord");
+					nuova[lunghezza+2] = "ordinale";
+				}
+				else 
+					nuova[lunghezza+2] = "";
 			} catch (Exception e) {}	
 			return prendiDelimitatori(nuova, bordo.getFirstChild());
 		} 
