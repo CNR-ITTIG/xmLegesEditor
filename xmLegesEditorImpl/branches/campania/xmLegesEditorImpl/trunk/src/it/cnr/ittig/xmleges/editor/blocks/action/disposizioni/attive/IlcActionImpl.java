@@ -10,6 +10,7 @@ import it.cnr.ittig.xmleges.core.services.action.ActionManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentOpenedEvent;
+import it.cnr.ittig.xmleges.core.services.document.DocumentChangedEvent;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.editor.services.action.disposizioni.attive.IlcAction;
@@ -80,6 +81,7 @@ public class IlcActionImpl implements IlcAction, Loggable, EventManagerListener,
 		actionManager.registerAction("tool.ilc", ilcAction);
 		eventManager.addListener(this, DocumentClosedEvent.class);
 		eventManager.addListener(this, DocumentOpenedEvent.class);
+		eventManager.addListener(this, DocumentChangedEvent.class);
 		ilcAction.setEnabled(false);
 	}
 
@@ -89,7 +91,7 @@ public class IlcActionImpl implements IlcAction, Loggable, EventManagerListener,
 			ilcAction.setEnabled(false);
 		}
 		
-		if (event instanceof DocumentOpenedEvent) {
+		if (event instanceof DocumentOpenedEvent | event instanceof DocumentChangedEvent) {
 			ilcAction.setEnabled(documentManager.getDocumentAsDom().getElementsByTagName("mod").getLength()>0);
 		}
 	}
