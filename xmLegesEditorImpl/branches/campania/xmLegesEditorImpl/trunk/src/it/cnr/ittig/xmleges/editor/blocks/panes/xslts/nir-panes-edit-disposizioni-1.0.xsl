@@ -149,31 +149,49 @@
 
 
 <xsl:template match="*[name()='dsp:posizione']/*[name()='dsp:pos']" mode="dispo">
+	<xsl:variable name="tipodove">
+	<xsl:choose>
+		<xsl:when test="@dove">
+			<xsl:value-of select="@dove"/>
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:value-of select="*[name()='ittig:dove']/@valore"/>
+		</xsl:otherwise>
+	</xsl:choose>
+	</xsl:variable>
 	<font color="Black"> dove= </font>
-	<font color="Blue"><xsl:value-of select="*[name()='ittig:dove']/@valore"/></font>
-	<font color="Black"> ; parole= </font>
-	<xsl:variable name="idPosizioneConPound">
-		<xsl:value-of select="@xlink:href"/>
-	</xsl:variable>
-	<xsl:variable name="idPosizione">
-		<xsl:value-of select="substring($idPosizioneConPound,2)"/>
-	</xsl:variable>
-	<xsl:variable name="testoPosizione">
-		<xsl:value-of select="id($idPosizione)"/>
-	</xsl:variable>
-	<font color="Blue">
-		<xsl:value-of select="idPosizione"/>
-		<xsl:text> ( </xsl:text>
-		<xsl:choose>
-			<xsl:when test="string-length($testoPosizione)>30">
-				<xsl:value-of select="substring($testoPosizione,1,30)"/><xsl:text> ...</xsl:text>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:value-of select="$testoPosizione"/>
-			</xsl:otherwise>
-		</xsl:choose>	
-		<xsl:text> )</xsl:text>
-	</font>
+	<font color="Blue"><xsl:value-of select="$tipodove"/></font>
+	<xsl:choose>
+	  <xsl:when test="$tipodove='inizio'">
+  	  </xsl:when>
+	  <xsl:when test="$tipodove='fine'">
+	  </xsl:when>
+	  <xsl:otherwise>
+		<font color="Black"> ; parole= </font>
+		<xsl:variable name="idPosizioneConPound">
+			<xsl:value-of select="@xlink:href"/>
+		</xsl:variable>
+		<xsl:variable name="idPosizione">
+			<xsl:value-of select="substring($idPosizioneConPound,2)"/>
+		</xsl:variable>
+		<xsl:variable name="testoPosizione">
+			<xsl:value-of select="id($idPosizione)"/>
+		</xsl:variable>
+		<font color="Blue">
+			<xsl:value-of select="idPosizione"/>
+			<xsl:text> ( </xsl:text>
+			<xsl:choose>
+				<xsl:when test="string-length($testoPosizione)>30">
+					<xsl:value-of select="substring($testoPosizione,1,30)"/><xsl:text> ...</xsl:text>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="$testoPosizione"/>
+				</xsl:otherwise>
+			</xsl:choose>	
+			<xsl:text> )</xsl:text>
+		</font>
+	  </xsl:otherwise>	
+	</xsl:choose>	 
 	<br/>
 </xsl:template> 
 
@@ -249,15 +267,16 @@
 		<xsl:otherwise	-->
 			<font color="Black"> 
 			  <xsl:choose>
-				<xsl:when test="@ordinale='si'">
+				<xsl:when test="@ord">
 					<xsl:text> ; ordine:</xsl:text>
+					<font color="Blue"><xsl:value-of select="@ord"/></font>
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:text> ; identificativo:</xsl:text>
+					<font color="Blue"><xsl:value-of select="@num"/></font>
 				</xsl:otherwise>
 			  </xsl:choose>
 			</font>
-			<font color="Blue"><xsl:value-of select="@num"/></font>
 		<!--	/xsl:otherwise>
 	</xsl:choose	-->
 	<br/>
