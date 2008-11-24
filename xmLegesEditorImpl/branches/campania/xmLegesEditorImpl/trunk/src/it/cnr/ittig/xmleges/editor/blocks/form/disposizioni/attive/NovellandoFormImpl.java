@@ -499,6 +499,8 @@ public class NovellandoFormImpl implements NovellandoForm,
 						// (***C***)
 						valVirContenuto = UtilDom.getAttributeValueAsString(
 								pos1, "xlink:href");
+						if (valVirContenuto.length()>0)
+							valVirContenuto=valVirContenuto.substring(1);
 						setSceltaDelimitatori(false);
 					} else {
 						// (***B***)
@@ -506,6 +508,8 @@ public class NovellandoFormImpl implements NovellandoForm,
 								.getAttributeValueAsString(ruolo1, "valore"));
 						valVirPartenza = UtilDom.getAttributeValueAsString(
 								pos1, "xlink:href");
+						if (valVirPartenza.length()>0)
+							valVirPartenza=valVirPartenza.substring(1);
 						setSceltaDelimitatori(true);
 					}
 				} else {
@@ -515,10 +519,14 @@ public class NovellandoFormImpl implements NovellandoForm,
 						// (***E***)
 						valVirContenuto = UtilDom.getAttributeValueAsString(
 								pos2, "xlink:href"); // scambio pos1 e 2
+						if (valVirContenuto.length()>0)
+							valVirContenuto=valVirContenuto.substring(1);
 						valorePosizionamento.setSelectedItem(UtilDom
 								.getAttributeValueAsString(ruolo1, "valore"));
 						valVirPosizionamento = UtilDom
 								.getAttributeValueAsString(pos1, "xlink:href");
+						if (valVirPosizionamento.length()>0)
+							valVirPosizionamento=valVirPosizionamento.substring(1);
 						setSceltaDelimitatori(false);
 					} else {
 						// (***D***)
@@ -526,10 +534,14 @@ public class NovellandoFormImpl implements NovellandoForm,
 								.getAttributeValueAsString(ruolo1, "valore"));
 						valVirPartenza = UtilDom.getAttributeValueAsString(
 								pos1, "xlink:href");
+						if (valVirPartenza.length()>0)
+							valVirPartenza=valVirPartenza.substring(1);
 						valoreArrivo.setSelectedItem(UtilDom
 								.getAttributeValueAsString(ruolo2, "valore"));
 						valVirArrivo = UtilDom.getAttributeValueAsString(pos2,
 								"xlink:href");
+						if (valVirArrivo.length()>0)
+							valVirArrivo=valVirArrivo.substring(1);
 						setSceltaDelimitatori(true);
 					}
 				}

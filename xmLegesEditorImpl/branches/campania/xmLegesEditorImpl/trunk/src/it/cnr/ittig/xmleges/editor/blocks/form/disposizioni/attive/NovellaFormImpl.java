@@ -343,6 +343,8 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 		else {
 			Node node = UtilDom.findRecursiveChild(novella,"dsp:pos");
 			String href = UtilDom.getAttributeValueAsString(node,"xlink:href");
+			if (href.length()>0)
+				href=href.substring(1);
 			activeNode = selectionManager.getActiveNode();
 			Document doc = documentManager.getDocumentAsDom();
 			Node mod = UtilDom.findParentByName(activeNode, "mod");
@@ -373,7 +375,11 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 			if (posizione!=null) {
 				Node tipo1 = UtilDom.findRecursiveChild(posizione,"dsp:pos");
 				node = UtilDom.findRecursiveChild(tipo1,"ittig:dove");
-				String valore1 = UtilDom.getAttributeValueAsString(node,"valore");
+				String valore1=null;
+				if (node==null) //ho utilizzato la forma compatta (il valore lo trovo in dove di dsp:pos)
+					valore1 = UtilDom.getAttributeValueAsString(tipo1,"dove");
+				else
+					valore1 = UtilDom.getAttributeValueAsString(node,"valore");
 				
 				if ("inizio".equals(valore1)) {
 					inizio.setSelected(true);
@@ -384,18 +390,26 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 				else if ("prima".equals(valore1)) {
 					prima.setSelected(true);
 					virPrima.setText(UtilDom.getAttributeValueAsString(tipo1,"xlink:href"));
+					if (virPrima.getText().length()>0)
+						virPrima.setText(virPrima.getText().substring(1));
 				}
 				else if ("dopo".equals(valore1)) {
 					dopo.setSelected(true);
 					virDopo.setText(UtilDom.getAttributeValueAsString(tipo1,"xlink:href"));
+					if (virDopo.getText().length()>0)
+						virDopo.setText(virDopo.getText().substring(1));
 				}
 				else {
 					fra.setEnabled(true);
 					virFra1.setText(UtilDom.getAttributeValueAsString(tipo1,"xlink:href"));
+					if (virFra1.getText().length()>0)
+						virFra1.setText(virFra1.getText().substring(1));
 					Node tipo2 = tipo1.getNextSibling();
 					if (tipo2!=null) {
 						node = UtilDom.findRecursiveChild(novella,"ittig:tipo");
 						virFra2.setText(UtilDom.getAttributeValueAsString(tipo2,"xlink:href"));
+						if (virFra2.getText().length()>0)
+							virFra2.setText(virFra2.getText().substring(1));
 					}
 				}
 			}
