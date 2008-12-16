@@ -133,6 +133,8 @@ public class NirUtilUrnImpl implements NirUtilUrn, Loggable, Serviceable {
 				return (formatestuale + " Codice di Procedura Penale");
 			else if (urn.getProvvedimento().equals("codice.procedura.civile"))
 				return (formatestuale + " Codice di Procedura Civile");
+			else if (urn.getProvvedimento().indexOf("regolamento")!=-1 && !urn.getAutorita().get(0).equals("stato") && !urn.getAutorita().get(0).equals("comunita.europee") && !urn.getAutorita().get(0).equals("unione.europea"))
+				formatestuale += "regolamento "; 	//TODO: fare altro. (altrimenti ci mette regolamento CE)
 			else
 				formatestuale += p.getProvvedimentoByUrn(urn.getProvvedimento()).getUrnCitazione() + " ";
 
