@@ -29,10 +29,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -43,13 +41,6 @@ import java.io.Writer;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.nio.ByteBuffer;
-import java.nio.CharBuffer;
-import java.nio.charset.Charset;
-import java.nio.charset.CharsetDecoder;
-import java.nio.charset.CharsetEncoder;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -151,6 +142,10 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 		etiBinario = (JLabel) form.getComponentByName("ilc.binario.eti");
 		binario = (JCheckBox) form.getComponentByName("ilc.binario");
 		binario.setSelected(true);
+		
+		//non implementato
+		binario.setEnabled(false);
+		
 		webserver.setEnabled(false);
 		binario.addActionListener(this);
 		etiUser = (JLabel) form.getComponentByName("ilc.user.eti");
@@ -172,7 +167,7 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 		String[] software = new String[]{"sf-ilc/ittig", "sf-ilc/ittig.exe", "sf-ilc/LESSICO.txt", "sf-ilc/MACRO.txt", "sf-ilc/RULE.txt"};
 		// copio in software-ilc
 		
-		// No. l'eseguibile dell'ilc è linka staticamente i vari moduli quindi devo lavorare nella cartalla corrente
+		// No. l'eseguibile dell'ilc linka staticamente i vari moduli quindi devo lavorare nella cartalla corrente
 		// (ovvero sia l'eseguibile che il file da trattare direttamente nella TEMP)    ---(A)(B)(C)
 		
 		for (int i = 0; i < software.length; i++)
