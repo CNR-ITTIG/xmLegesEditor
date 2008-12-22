@@ -341,7 +341,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <!-- separator /-->
                     <item action="tool.xpatheval" />
 		    <separator />
+
+		    <!--		item action="tool.repository" /		-->		    		    
 		    <item action="tool.ilc" />
+		    
                 </menu>
                 <menu action="menu.editor.insert">
                     <item action="editor.insert.immagini" />
@@ -383,18 +386,19 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                         <item action="editor.partizioni.numero" />
                         <item action="editor.partizioni.punto" />
                         <item action="editor.partizioni.rubrica" />
-			
-			<!--	item action="editor.disposizioni.verificavigenza" /		-->                        
-                        
-                        <item action="editor.disposizioni.passive" />
-						<item action="editor.disposizioni.rimuovipassive" />
-						<item action="editor.disposizioni.attive" />
-						<item action="editor.disposizioni.marker" />
-			                        
+						                        
                         <item action="editor.annessi.annesso" />
                         <item action="editor.ndr" />
                         <!--item action="editor.rinumerazione" /-->
                     </menu>
+                    <menu action="menu.editor.disposizioni">
+						<!--	item action="editor.disposizioni.verificavigenza" /		-->                        
+                        
+                        <item action="editor.disposizioni.passive" />
+						<item action="editor.disposizioni.rimuovipassive" />
+						<item action="editor.disposizioni.attive" />
+						<item action="editor.disposizioni.marker" />        
+                    </menu>                    
                     <menu action="menu.editor.tabelle">
                         <item action="editor.tabelle.crea" />
                         <item action="editor.tabelle.elimina" />
@@ -512,6 +516,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <separator />
                     <item action="edit.unmark" />
                 </toolbar>
+                
+<!--  commento x StackOverflowError
+
                 <toolbar name="editor.testo" floatable="false" rollover="true">
                     <item action="editor.testo.grassetto" />
                     <item action="editor.testo.corsivo" />
@@ -536,6 +543,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <item action="editor.spostamento.promuovi" />
                     <item action="editor.spostamento.riduci" />         
                 </toolbar>
+-->
+
+                
                 <toolbar name="editor.partizioni" floatable="false" rollover="true">
                 <!-- dividere su due toolbar ???
                     <item action="editor.partizioni.libro" />
@@ -551,16 +561,21 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <item action="editor.partizioni.punto" />
                     <item action="editor.partizioni.rubrica" />
                     <!--	item action="editor.partizioni.vigenza" /	-->
-                    <item action="editor.disposizioni.passive" />
-					<item action="editor.disposizioni.rimuovipassive" />
-
-
-                    <item action="editor.disposizioni.attive" />
-					<item action="editor.disposizioni.marker" />
                     
                     <item action="editor.annessi.annesso" />
                     <item action="editor.ndr" />
                 </toolbar>
+                <toolbar name="editor.partizioni" floatable="false" rollover="true">                
+                    <item action="editor.disposizioni.passive" />
+					<item action="editor.disposizioni.rimuovipassive" />
+
+		  		    <item action="editor.disposizioni.trasferisci" />
+		  		    
+		  		    
+                    <item action="editor.disposizioni.attive" />
+                </toolbar>
+                
+                
                 <toolbar name="editor.tabelle"  floatable="false" rollover="true">
                     <item action="editor.tabelle.crea" />
                     <item action="editor.tabelle.elimina" />
@@ -862,6 +877,14 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 
     <component  activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.action.disposizioni.attive.DispTrasferisciActionImpl"
+    />
+
+
+
+
+
+    <component  activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.action.disposizioni.attive.DispAttiveActionImpl"
     />
 
@@ -997,6 +1020,17 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <!--	component  lifestyle="singleton" activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.passive.VerificaDispPassiveFormImpl"
     /	-->
+
+
+
+
+
+    <component  lifestyle="singleton" activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.attive.DispTrasferisciFormImpl"
+    />    
+
+
+
 
     <component  lifestyle="singleton" activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.attive.DispAttiveFormImpl"
