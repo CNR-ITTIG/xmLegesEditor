@@ -245,7 +245,7 @@ public class DispTrasferisciFormImpl implements DispTrasferisciForm, Loggable, A
 				if (!listModel.contains(normaDaModificare + " decorrenza " + dataEvento)) {
 					boolean inserito = false;
 					for (int k=0; k<listModel.getSize(); k++)
-						if ((normaDaModificare + " decorrenza " + dataEvento).compareTo(listModel.getElementAt(k))<0) {
+						if ((normaDaModificare + " decorrenza " + dataEvento).compareTo((String) listModel.getElementAt(k))<0) {
 							listModel.add(k, normaDaModificare + " decorrenza " + dataEvento);
 							eventiAttivi.add(k-1, temp);
 							inserito = true;
