@@ -370,12 +370,13 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 
 	private void popolaTipoDtd(){
 		// tipoDoc Disegno di Legge vincola alla scelta della dtd dl (4' item)
-		if(tipoDoc.getSelectedItem().toString().toLowerCase().startsWith("disegn")){
-			tipoDtd.removeAllItems();
-			tipoDtd.addItem(XmLegesMarker.TIPO_DTD[3]);
-			tipoDtd.setSelectedIndex(0);
-		}
-		else if(tipoDoc.getSelectedItem().toString().toLowerCase().indexOf("cnr")!=-1){
+//		if(tipoDoc.getSelectedItem().toString().toLowerCase().startsWith("disegn")){
+//			tipoDtd.removeAllItems();
+//			tipoDtd.addItem(XmLegesMarker.TIPO_DTD[3]);
+//			tipoDtd.setSelectedIndex(0);
+//		}
+//		else 
+		if(tipoDoc.getSelectedItem().toString().toLowerCase().indexOf("cnr")!=-1){
 			tipoDtd.removeAllItems();
 			for(int i=0;i<2;i++)
 				   tipoDtd.addItem(XmLegesMarker.TIPO_DTD[i]);
@@ -391,9 +392,9 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 	}
 	
 	private int getSelectedDtd(){
-		if(tipoDoc.getSelectedItem().toString().toLowerCase().startsWith("disegn"))
-			return 3;
-		else
+//		if(tipoDoc.getSelectedItem().toString().toLowerCase().startsWith("disegn"))
+//			return 3;
+//		else
 			return tipoDtd.getSelectedIndex();
 	}
 	
