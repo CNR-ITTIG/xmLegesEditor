@@ -35,7 +35,7 @@
 				<style type="text/css">
 				body {
 					margin-left: 5px;
-					font-family: "Verdana, Arial, Helvetica, sans-serif" ;
+					font-family: 'Verdana, Arial, Helvetica, sans-serif' ;
 					font-size: 90% ;
 					text-align:justify;
 				}
@@ -182,6 +182,12 @@
 					width: 100%;
 					text-align: left;
 					margin-bottom: 20px;
+				}
+				.virgolette {
+					background: #FFEE99;
+				}
+				.mod {
+					background: #FFDDAA;
 				}
 				</style>
 				<!-- ======================================================== -->
@@ -505,11 +511,34 @@
 
 	</xsl:template>
 	
-	<xsl:template match="nir:corpo | nir:alinea">
-		<xsl:param name="pos">none</xsl:param>
-				<xsl:apply-templates>
-					<xsl:with-param name="pos" select="$pos"/>
-				</xsl:apply-templates>
+<xsl:template match="//*[name()='corpo']">
+		<a name="{@id}">&#160;</a>
+		<!--	div class="corpo">	
+		<xsl:choose>		
+			<xsl:when test="$datafine!=''">
+				<xsl:call-template name="vigenza"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="multivigenza"/>
+			</xsl:otherwise>
+		</xsl:choose>
+		</div	-->			
+		<xsl:apply-templates/>			
+	</xsl:template>
+	
+	<xsl:template match="//*[name()='alinea']">
+		<a name="{@id}">&#160;</a>
+		<!--	div class="alinea">
+		<xsl:choose>		
+			<xsl:when test="$datafine!=''">
+				<xsl:call-template name="vigenza"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="multivigenza"/>
+			</xsl:otherwise>
+		</xsl:choose>
+		</div	-->	
+		<xsl:apply-templates/>
 	</xsl:template>
 	
 	<!-- ======================================================== -->
@@ -518,26 +547,38 @@
 	<!--                                                          -->
 	<!-- ======================================================== -->
 	
-	
-	<xsl:template match="//*[name()='virgolette']">
-		<xsl:param name="pos">none</xsl:param>
-		<span>
-			<!--	xsl:text>"</xsl:text	-->
-			<xsl:choose>
-				<xsl:when test="$datafine!=''">
-					<xsl:call-template name="vigenza">
-						<xsl:with-param name="pos" select="$pos"/>
-					</xsl:call-template>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:call-template name="multivigenza">
-						<xsl:with-param name="pos" select="$pos"/>
-					</xsl:call-template>
-				</xsl:otherwise>
-			</xsl:choose>	
-			<!--	xsl:text>"</xsl:text	-->
+	<xsl:template match="//*[name()='mod']">
+		<a name="{@id}">&#160;</a>
+		<span class="mod">
+	        <xsl:choose>		
+			<xsl:when test="$datafine!=''">
+				<xsl:call-template name="vigenza"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="multivigenza"/>
+			</xsl:otherwise>
+			</xsl:choose>
 		</span>
+	</xsl:template> 
+		
+	<xsl:template match="//*[name()='virgolette']">
+		<a name="{@id}">&#160;</a>
+		
+		<xsl:choose>
+		<xsl:when test="@tipo='struttura'">
+	   		<table><tr><td class="virgolette">
+				<xsl:apply-templates/>
+			</td></tr></table>	
+		</xsl:when>
+		<xsl:otherwise>
+	    	<span class="virgolette">
+				<xsl:apply-templates/>
+			</span>	
+		</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>
+	
+	
 	<xsl:template match="//*[name()='nome']">
 		<span title="Nome: {.}">
 			<xsl:apply-templates/>
