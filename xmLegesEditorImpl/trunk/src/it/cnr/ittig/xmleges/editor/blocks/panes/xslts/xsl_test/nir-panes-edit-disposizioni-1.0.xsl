@@ -109,8 +109,8 @@
 	  		<font color="Red">novellando: </font>
 			<font color="Black">tipo= </font>
 		  	<font color="Blue"><xsl:value-of select="dsp:novellando/dsp:subarg/ittig:tipo/@valore"/></font>
-  			<br/>
 			<xsl:apply-templates select="dsp:novellando"  mode="dispo"/>
+			<br/>
 	  </xsl:if>	  
 	  <xsl:if test="dsp:novella">
 		    <font color="Red">novella: </font>
@@ -203,7 +203,9 @@
 	<xsl:variable name="testoNovellando">
 		<xsl:value-of select="id($idNovellando)"/>
 	</xsl:variable>
-	<xsl:if test="dsp:pos/ittig:ruolo">
+	<xsl:choose>
+	  <xsl:when test="dsp:pos/ittig:ruolo">
+	    <br/>
 		<font color="Black"> - parole= </font>
 		<font color="Blue">
 			<xsl:value-of select="$idNovellando"/>
@@ -220,7 +222,27 @@
 		</font>
 		<br/>
 		<xsl:apply-templates select="dsp:pos/ittig:ruolo"  mode="dispo"/>
-	</xsl:if>
+	  </xsl:when>
+	  <xsl:otherwise>
+		  <xsl:if test="dsp:pos">
+			<font color="Black"> - parole= </font>
+		  	<font color="Blue">
+			<xsl:value-of select="$idNovellando"/>
+			<xsl:text> ( </xsl:text>
+			<xsl:choose>
+				<xsl:when test="string-length($testoNovellando)>30">
+					<xsl:value-of select="substring($testoNovellando,1,30)"/><xsl:text> ...</xsl:text>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="$testoNovellando"/>
+				</xsl:otherwise>
+			</xsl:choose>	
+			<xsl:text> )</xsl:text>
+			</font>
+			<br/>
+		  </xsl:if>
+	    </xsl:otherwise>
+	</xsl:choose>
 </xsl:template> 
 
 <xsl:template match="ittig:ruolo" mode="dispo">
