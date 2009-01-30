@@ -468,6 +468,10 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 						tipo = delimitatoreForm.getDelimitatore()[delimitatoreForm.getDelimitatore().length-3];
 					else {
 						String[] scelteTipo = new String[] {"allegato","libro","parte","titolo","capo","sezione","articolo","comma","lettera","numero","punto","periodo","parole"};
+						//cerco l'ultimo pezzo dell'id
+						int pos = tipo.lastIndexOf("-");
+						if (pos!=-1)
+							tipo = tipo.substring(pos+1);
 						if (tipo.length()>3)
 							tipo = tipo.substring(0, 3);
 						for (int i=0; i<scelteTipo.length; i++)

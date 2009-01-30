@@ -14,7 +14,6 @@ import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.core.util.file.RegexpFileFilter;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
 import it.cnr.ittig.xmleges.editor.services.dom.disposizioni.Disposizioni;
-import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.form.disposizioni.attive.DispTrasferisciForm;
 import it.cnr.ittig.xmleges.editor.services.util.urn.NirUtilUrn;
 import it.cnr.ittig.xmleges.editor.services.util.urn.Urn;
@@ -27,10 +26,10 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.ParseException;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
-import javax.swing.AbstractAction;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -38,12 +37,8 @@ import javax.swing.JButton;
 import javax.swing.JList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.TransformerFactory;
 
-import org.w3c.dom.CDATASection;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.ErrorHandler;
@@ -96,6 +91,7 @@ public class DispTrasferisciFormImpl implements DispTrasferisciForm, Loggable, A
 	JButton salta;
 	JButton scrivi;
 	JLabel messaggio;
+	JLabel formatestuale;
 	JLabel norma;
 	JList trovati;
 	DefaultListModel listModel2 = new DefaultListModel();
@@ -118,6 +114,8 @@ public class DispTrasferisciFormImpl implements DispTrasferisciForm, Loggable, A
 	
 	UtilRulesManager utilRulesManager;
 	NirUtilUrn nirUtilUrn;
+	
+	String urnDoc;
 	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -148,6 +146,7 @@ public class DispTrasferisciFormImpl implements DispTrasferisciForm, Loggable, A
 		salta = (JButton) form.getComponentByName("editor.disposizioni.trasferisci.salta");
 		scrivi = (JButton) form.getComponentByName("editor.disposizioni.trasferisci.scrivi");
 		messaggio = (JLabel) form.getComponentByName("editor.disposizioni.trasferisci.messaggio");
+		formatestuale = (JLabel) form.getComponentByName("editor.disposizioni.trasferisci.formatestuale");
 		norma = (JLabel) form.getComponentByName("editor.disposizioni.trasferisci.norma");	
 		trovati = (JList) form.getComponentByName("editor.disposizioni.trasferisci.trovati");
 		trovati.setModel(listModel2);
@@ -185,13 +184,14 @@ public class DispTrasferisciFormImpl implements DispTrasferisciForm, Loggable, A
 		scrivi.setEnabled(false);
 		trasferisciMeta();
 
-		form.setSize(420, 330);
+		form.setSize(580, 400);
 		form.showDialog(true);
 		
 	}		
 	
 	private void settaMaschera(boolean a) {
 		messaggio.setText("");
+		formatestuale.setText("");
 		norma.setText("");
 		file.setEnabled(a);
 		repo.setEnabled(false);
@@ -208,9 +208,15 @@ public class DispTrasferisciFormImpl implements DispTrasferisciForm, Loggable, A
 			messaggio.setText("Finito");
 			return;
 		}
-		messaggio.setText("Devo trasferire i metadati nella norma");
+		messaggio.setText("Devo trasferire i metadati nella norma:");
 		ModificaDaTrasferire corrente = (ModificaDaTrasferire) eventiAttivi.get(correnteEvento);
 		norma.setText(corrente.getUrn());
+		try {
+			formatestuale.setText(nirUtilUrn.getFormaTestuale(new Urn(corrente.getUrn())));
+		} catch (ParseException e) {
+			formatestuale.setText("");
+		}
+		
 		for (int i=correnteEvento; i<eventiAttivi.size(); i++)
 			if (((ModificaDaTrasferire)eventiAttivi.get(i)).getUrn().equals(corrente.getUrn()))
 				numeroEventiNorma = i;
@@ -222,12 +228,15 @@ public class DispTrasferisciFormImpl implements DispTrasferisciForm, Loggable, A
 	}
 	
 	private void popolaMaschera() {
+		Document doc = documentManager.getDocumentAsDom();
+		urnDoc = UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(doc, null, "urn")[0],"valore");
+		
 		listModel.clear();
 		listModel2.clear();
 		eventiAttivi.clear();
 		scrivi.setEnabled(false);
-		Node[] relazioniAttive = UtilDom.getElementsByTagName(documentManager.getDocumentAsDom(), null, "attiva");
-		Node[] eventi = UtilDom.getElementsByTagName(documentManager.getDocumentAsDom(), null, "evento");
+		Node[] relazioniAttive = UtilDom.getElementsByTagName(doc, null, "attiva");
+		Node[] eventi = UtilDom.getElementsByTagName(doc, null, "evento");
 		if (relazioniAttive!=null) {
 			for (int i = 0; i < relazioniAttive.length; i++) {
 				String normaDaModificare = UtilDom.getAttributeValueAsString(relazioniAttive[i], "xlink:href");
@@ -384,6 +393,8 @@ public class DispTrasferisciFormImpl implements DispTrasferisciForm, Loggable, A
 					if (id.equals(UtilDom.getAttributeValueAsString(dspTermine[i], "da")))	
 						modifichePassive.appendChild(docModificato.importNode(daTrasformare.trasforma(dspTermine[i]), true));	
 				corrente++;
+				if (corrente>=eventiAttivi.size())
+					break;
 				daTrasformare = (ModificaDaTrasferire) eventiAttivi.get(corrente);
 			}				
 			//SALVO IL FILE
@@ -437,7 +448,6 @@ public class DispTrasferisciFormImpl implements DispTrasferisciForm, Loggable, A
 	}
 	
 	private void salva(Document document) {
-		//Serializzazione del DOM
 		OutputFormat format = new OutputFormat(document);
 		format.setLineSeparator(LineSeparator.Unix);
 
@@ -536,36 +546,36 @@ public class DispTrasferisciFormImpl implements DispTrasferisciForm, Loggable, A
 				disposizioneModificato.removeChild(posNodeModificato);
 			posNodeModificato = utilRulesManager.getNodeTemplate("dsp:pos");
 			disposizioneModificato.appendChild(posNodeModificato);
-			UtilDom.setAttributeValue(posNodeModificato, "xlink:href", urn);
+			UtilDom.setAttributeValue(posNodeModificato, "xlink:href", urnDoc);
 			//creo dsp:norma
 			Node normaNodeModificato = UtilDom.findDirectChild(disposizioneModificato, "dsp:norma");
 			if (normaNodeModificato != null) //è stato inserito dal template minimale
 				disposizioneModificato.removeChild(normaNodeModificato);
 			normaNodeModificato = utilRulesManager.getNodeTemplate("dsp:norma");
 			disposizioneModificato.appendChild(normaNodeModificato);	
-			UtilDom.setAttributeValue(normaNodeModificato, "xlink:href", norma.getText());
+			UtilDom.setAttributeValue(normaNodeModificato, "xlink:href", urnDoc);
 			//creo dsp:pos figlio di dsp:norma
-			Node posNormaNodeModificato = UtilDom.findDirectChild(normaNodeModificato, "dsp:pos");
+			Node posNormaNodeModificato = UtilDom.findDirectChild(normaNodeModificato, "dsp:pos");  
 			if (posNormaNodeModificato != null) //è stato inserito dal template minimale
 				normaNodeModificato.removeChild(posNormaNodeModificato);
 			posNormaNodeModificato = utilRulesManager.getNodeTemplate("dsp:pos");
 			normaNodeModificato.appendChild(posNormaNodeModificato);
-			UtilDom.setAttributeValue(posNormaNodeModificato, "xlink:href", urn+partizione);
+			UtilDom.setAttributeValue(posNormaNodeModificato, "xlink:href", urnDoc+partizione);
 			//inserisco dsp:subarg e ittig:notavigenza
-			Node subargNodeModificato = utilRulesManager.getNodeTemplate("dsp:subarg");
-			normaNodeModificato.appendChild(subargNodeModificato);
-			//Node notavigenzaNodeModificato = UtilDom.findDirectChild(normaNodeModificato, "ittig:notavigenza");
-			Node notavigenzaNodeModificato = documentManager.getDocumentAsDom().createElementNS("http://www.ittig.cnr.it/provvedimenti/2.2", "ittig:notavigenza");
-			UtilDom.setIdAttribute(notavigenzaNodeModificato, "");
-			String autoNota = "";
-			try {
-				autoNota = nirUtilUrn.getFormaTestuale(new Urn(urn));
-				if (!partizione.equals("")) 
-					autoNota = partizione + " " + autoNota;
-			} catch (Exception e) {}
-
-			UtilDom.setAttributeValue(notavigenzaNodeModificato, "auto", autoNota);
-			subargNodeModificato.appendChild(notavigenzaNodeModificato);
+//			Node subargNodeModificato = utilRulesManager.getNodeTemplate("dsp:subarg");
+//			normaNodeModificato.appendChild(subargNodeModificato);
+//			//Node notavigenzaNodeModificato = UtilDom.findDirectChild(normaNodeModificato, "ittig:notavigenza");
+//			Node notavigenzaNodeModificato = documentManager.getDocumentAsDom().createElementNS("http://www.ittig.cnr.it/provvedimenti/2.2", "ittig:notavigenza");
+//			UtilDom.setIdAttribute(notavigenzaNodeModificato, "");
+//			String autoNota = "";
+//			try {
+//				autoNota = nirUtilUrn.getFormaTestuale(new Urn(urnDoc));
+//				if (!partizione.equals("")) 
+//					autoNota = partizione + " " + autoNota;
+//			} catch (Exception e) {}
+//
+//			UtilDom.setAttributeValue(notavigenzaNodeModificato, "auto", autoNota);
+//			subargNodeModificato.appendChild(notavigenzaNodeModificato);
 			//inserisco dsp:novella/novellando e ralativo dsp:pos, dove però xlink:href punta al mod di modifica
 			Node posNode = UtilDom.findRecursiveChild(disposizioneModificante,"dsp:pos");
 			String mod = UtilDom.getAttributeValueAsString(posNode, "xlink:href");

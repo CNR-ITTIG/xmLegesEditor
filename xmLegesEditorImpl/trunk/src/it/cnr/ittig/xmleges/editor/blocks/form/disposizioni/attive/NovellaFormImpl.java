@@ -24,7 +24,6 @@ import it.cnr.ittig.xmleges.editor.services.form.disposizioni.attive.VirgolettaF
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.EventObject;
-import java.util.StringTokenizer;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -96,6 +95,7 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 	JTextField virDopo;
 	JTextField virFra1;
 	JTextField virFra2;
+	JRadioButton solocontenuto;
 	JRadioButton inizio;
 	JRadioButton fine;
 	JRadioButton prima;
@@ -168,23 +168,26 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 		sceltoFra2 = (JButton) form.getComponentByName("editor.dispattive.novella.fra.scelta2");
 		sceltoFra2.addActionListener(this);	
 		virFra2 = (JTextField) form.getComponentByName("editor.dispattive.novella.fra.vir2");
+		solocontenuto = (JRadioButton) form.getComponentByName("editor.dispattive.novellando.solocontenuto");
 		inizio = (JRadioButton) form.getComponentByName("editor.dispattive.novellando.inizio");
 		fine = (JRadioButton) form.getComponentByName("editor.dispattive.novellando.fine");
 		prima = (JRadioButton) form.getComponentByName("editor.dispattive.novellando.prima");
 		dopo = (JRadioButton) form.getComponentByName("editor.dispattive.novellando.dopo");
 		fra = (JRadioButton) form.getComponentByName("editor.dispattive.novellando.fra");
 		ButtonGroup grupporadio = new ButtonGroup();
+		grupporadio.add(solocontenuto);
 		grupporadio.add(inizio);
 		grupporadio.add(fine);
 		grupporadio.add(prima);
 		grupporadio.add(dopo);
 		grupporadio.add(fra);
+		solocontenuto.addActionListener(this);	
 		inizio.addActionListener(this);	
 		fine.addActionListener(this);	
 		prima.addActionListener(this);
 		dopo.addActionListener(this);	
 		fra.addActionListener(this);	
-		form.setSize(320, 330);
+		form.setSize(320, 350);
 	}
 	
 	private void setTipo() {
@@ -264,7 +267,7 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 	}
 
 	private void initForm() {
-		inizio.setSelected(true);
+		solocontenuto.setSelected(true);
 		//	se ho + di una virgoletta scelgo l'ultima per il contenuto
 		activeNode = selectionManager.getActiveNode();
 		Document doc = documentManager.getDocumentAsDom();
@@ -290,6 +293,7 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 		virDopo.setEnabled(isParola);
 		virFra1.setEnabled(isParola);
 		virFra2.setEnabled(isParola);
+		solocontenuto.setEnabled(isParola);
 		inizio.setEnabled(isParola);
 		fine.setEnabled(isParola);
 		prima.setEnabled(isParola);
@@ -304,7 +308,7 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 		if ("".equals(virContenuto.getText().trim()))
 			return;
 		boolean isParola = "parole".equals(tipo.getSelectedItem());
-		if (!isParola || inizio.isSelected() || fine.isSelected())
+		if (!isParola || solocontenuto.isSelected() || inizio.isSelected() || fine.isSelected())
 			avanti.setEnabled(true);
 		else {
 			if (prima.isSelected() && !"".equals(virPrima.getText().trim()))
@@ -379,6 +383,7 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 				else
 					valore1 = UtilDom.getAttributeValueAsString(node,"valore");
 				
+				solocontenuto.setSelected(true);
 				if ("inizio".equals(valore1)) {
 					inizio.setSelected(true);
 				}
