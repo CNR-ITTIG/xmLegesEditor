@@ -463,8 +463,11 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 				}
 				if (ruoloA!=null)	
 					tipo = "delimitatori";
-				if ("parole".equals(tipo))	
+				//if ("parole".equals(tipo))	
+				if ("parole".equals(tipoPartizione)) {
 					parole=true;
+					tipoPartizione = "parole";
+				}
 				domDisposizioni.setDOMNovellandoDispAttive(nuovoMeta, parole, tipoPartizione, tipo, ruoloA, virgolettaA, ruoloB, virgolettaB);
 			}
 			
