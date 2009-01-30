@@ -1032,7 +1032,10 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		}
 		Node subargNode = utilRulesManager.getNodeTemplate("dsp:subarg");
 		nodo = documentManager.getDocumentAsDom().createElementNS("http://www.ittig.cnr.it/provvedimenti/2.2", "ittig:tipo");
-		UtilDom.setAttributeValue(nodo, "valore", tipoPartizione);
+		if (parole)
+			UtilDom.setAttributeValue(nodo, "valore", "parole");
+		else
+			UtilDom.setAttributeValue(nodo, "valore", tipoPartizione);
 		subargNode.appendChild(nodo);
 		novellandoNode.appendChild(subargNode);
 		meta.appendChild(novellandoNode);
