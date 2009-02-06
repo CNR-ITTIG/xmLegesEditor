@@ -517,7 +517,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <item action="edit.unmark" />
                 </toolbar>
                 
-<!--  commento x StackOverflowError
+				<!-- Commento per AWTEventMulticaster StackoverflowError
 
                 <toolbar name="editor.testo" floatable="false" rollover="true">
                     <item action="editor.testo.grassetto" />
@@ -533,6 +533,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <item action="editor.allineamento.oriz.dx" />
                     <item action="editor.allineamento.oriz.giustificato" />
                 </toolbar>
+                
+                -->
+                
+                
                 <toolbar name="editor.liste" floatable="false" rollover="true">
                     <item action="editor.liste.numerata" />
                     <item action="editor.liste.puntata" />
@@ -543,7 +547,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <item action="editor.spostamento.promuovi" />
                     <item action="editor.spostamento.riduci" />         
                 </toolbar>
--->
+
 
                 
                 <toolbar name="editor.partizioni" floatable="false" rollover="true">
@@ -610,6 +614,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <item action="editor.meta.descrittori.materie" /> 
                     <item action="editor.meta.urn" />
                 </toolbar>
+                
+                <!-- commento per stackoverflowError AWTEventMultiCaster
+                
                 <toolbar name="editor.revisioni" floatable="false" rollover="true">
                     <item action="editor.revisioni.inserisci" />
                     <item action="editor.revisioni.sopprimi" />
@@ -617,6 +624,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <item action="editor.revisioni.messaggio" />
                     <item action="editor.revisioni.emendamenti" />
                 </toolbar>
+                
+                -->
+                
                 <toolbar name="frame" floatable="false" rollover="true">
                     <item action="frame.pane.maximize" />
                     <item action="frame.pane.restore" />
@@ -1355,36 +1365,47 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             </pane>
 	    	<pane name="editor.panes.disposizioni">
                 <xslt name="edit-disposizioni"/>
+                <css name="css-nir"/>
             </pane>
             <pane name="editor.panes.annessi">
                 <xslt name="edit-annessi"/>
+                <css name="css-nir"/>
             </pane>
             <pane name="editor.panes.meta">
                 <xslt name="edit-meta"/>
+                <css name="css-nir"/>
             </pane>
             <pane name="editor.panes.riferimenti">
                 <xslt name="riferimenti"/>
+                <css name="css-nir"/>
             </pane>
             <pane name="editor.panes.rifincompleti">
                 <xslt name="rifincompleti"/>
+                <css name="css-nir"/>
             </pane>
             <pane name="editor.panes.ndr">
                 <xslt name="ndr"/>
+                <css name="css-nir"/>
             </pane>
 	    	<pane name="editor.panes.checklist">
                 <xslt name="checklist"/>
+                <css name="css-nir"/>
             </pane>
             <pane name="editor.panes.errori">
                 <xslt name="errori"/>
+                <css name="css-nir"/>
             </pane>
             <pane name="editor.panes.commenti">
                 <xslt name="commenti"/>
+                <css name="css-nir"/>
             </pane>
             <pane name="editor.panes.indice">
                 <xslt name="edit-indice"/>
+                <css name="css-nir"/>
             </pane>
             <pane name="editor.panes.ndv">
                 <xslt name="ndv"/>
+                <css name="css-nir"/>
             </pane>
             
         </configuration>
