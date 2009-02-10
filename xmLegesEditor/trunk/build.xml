@@ -24,9 +24,18 @@
 		<fileset dir="${core-api}/lib">
 			<include name="*.jar" />
 		</fileset>
+		<fileset dir="${core-api}/lib/xerces-2_9_1">
+			<include name="*.jar" />
+		</fileset>
 	</path>
 	<path id="path-core-impl">
 		<fileset dir="${core-impl}/lib">
+			<include name="*.jar" />
+		</fileset>
+		<fileset dir="${core-impl}/lib/xerces-2_9_1">
+			<include name="*.jar" />
+		</fileset>
+		<fileset dir="${core-impl}/lib/eclipse-xsd-2_4">
 			<include name="*.jar" />
 		</fileset>
 	</path>
@@ -63,7 +72,7 @@
 		<include name="**/*.spp" />
 		<include name="**/*.bat" />
 		<include name="**/*.sh" />
-		<include name="**/*.dar" />
+		<include name="**/*.zip" />
 	</patternset>
 
 	<target name="init">
