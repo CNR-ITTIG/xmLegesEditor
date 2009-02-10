@@ -9,6 +9,7 @@ import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
 import it.cnr.ittig.xmleges.core.services.frame.Frame;
 import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
+import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.core.util.xml.UtilXml;
 import it.cnr.ittig.xmleges.editor.services.dom.rinumerazione.Rinumerazione;
@@ -40,7 +41,7 @@ import org.w3c.dom.NodeList;
 public class XmLegesLinkerImpl implements XmLegesLinker, Loggable, Serviceable {
 	Logger logger;
 
-	RulesManager rulesManager;
+	UtilRulesManager utilRulesManager;
 
 	DocumentManager documentManager;
 
@@ -59,7 +60,7 @@ public class XmLegesLinkerImpl implements XmLegesLinker, Loggable, Serviceable {
 
 	// /////////////////////////////////////////////////// Serviceable Interface
 	public void service(ServiceManager serviceManager) throws ServiceException {
-		rulesManager = (RulesManager) serviceManager.lookup(RulesManager.class);
+		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		rinumerazione = (Rinumerazione) serviceManager.lookup(Rinumerazione.class);
@@ -80,8 +81,11 @@ public class XmLegesLinkerImpl implements XmLegesLinker, Loggable, Serviceable {
 
 			logger.debug("nodo selezionato:  " + UtilDom.getNodeSummary(nodeSel));
 			Document doc = documentManager.getDocumentAsDom();
+			
+			String nameSpaceDecl = utilRulesManager.getNameSpaceDecl();
+			
 			parsedText = "<?xml version=\"1.0\" encoding=\""+documentManager.getEncoding()+"\"?>"
-					+ "<ris  xmlns:h=\"http://www.w3.org/HTML/1998/html4\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">" + parsedText.trim() + "</ris>";
+					+ "<ris "+nameSpaceDecl+">" + parsedText.trim() + "</ris>";
 
 			Node parsedNodeSel = UtilXml.textToXML(parsedText, true).getDocumentElement();
 			
@@ -182,8 +186,12 @@ public class XmLegesLinkerImpl implements XmLegesLinker, Loggable, Serviceable {
 			EditTransaction tr = documentManager.beginEdit();
 			Node parent = node.getParentNode();
 			String text = textRis;
+			
+			
+			String nameSpaceDecl = utilRulesManager.getNameSpaceDecl();
+			
 			text = "<?xml version=\"1.0\" encoding=\""+documentManager.getEncoding()+"\"?>"
-					+ "<ris  xmlns:h=\"http://www.w3.org/HTML/1998/html4\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">" + text + "</ris>";
+					+ "<ris "+nameSpaceDecl+">" + text + "</ris>";
 			Node root = UtilXml.textToXML(text, true).getDocumentElement(); 
 			// va
 			// sotto
@@ -231,8 +239,11 @@ public class XmLegesLinkerImpl implements XmLegesLinker, Loggable, Serviceable {
 				Node node = nodes[i];
 				Node parent = node.getParentNode();
 				String text = textRis[i];
+				
+				String nameSpaceDecl = utilRulesManager.getNameSpaceDecl();
+				
 				text = "<?xml version=\"1.0\" encoding=\""+documentManager.getEncoding()+"\"?>"
-						+ "<ris  xmlns:h=\"http://www.w3.org/HTML/1998/html4\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">" + text + "</ris>";
+						+ "<ris "+nameSpaceDecl+">" + text + "</ris>";
 				Node root = UtilXml.textToXML(text, true).getDocumentElement();
 
 				NodeList nl = root.getChildNodes();

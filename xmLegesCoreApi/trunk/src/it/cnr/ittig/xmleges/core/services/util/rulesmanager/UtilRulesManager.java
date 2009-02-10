@@ -200,6 +200,12 @@ public interface UtilRulesManager extends Service {
 	 * @return <code>true</code> se l'inserimento ha avuto successo
 	 */
 	public boolean insertSubTreeInText(Node node, int pos, boolean destructure);
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String getNameSpaceDecl();
 
 	
 

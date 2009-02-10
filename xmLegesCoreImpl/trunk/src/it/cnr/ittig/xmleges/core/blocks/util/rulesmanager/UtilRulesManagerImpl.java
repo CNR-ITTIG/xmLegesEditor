@@ -445,6 +445,20 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 		return nameSpaceDecl;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
+	public String getNameSpaceDecl(){
+		String nameSpaceDecl = "";
+		for(Iterator it=rulesManager.getQNamePrefixToNamespaceMap().keySet().iterator();it.hasNext();){
+				String nsPrefix = (String)it.next();
+				nameSpaceDecl+=getNameSpaceDeclForPrefix(nsPrefix)+" ";
+			}
+		nameSpaceDecl = nameSpaceDecl.trim();
+		return nameSpaceDecl;
+	}
+	
 	
 	private String getNameSpaceDeclForPrefix(String nsPrefix){
 				
@@ -464,15 +478,19 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 			// soluzione brutale: ci devo mettere tutti i namespace della dtd corrente;
 			// altrimenti dovrei andare a vedere da quali tag e' composto il defaultcontent e mettere solo quelli necessari
 			
-			String nameSpaceDecl = "";
+//          OLD SOLUTION ...
+//		
+//			String nameSpaceDecl = "";
+//			
+//			// itera tutti i nsPrefix
+//			for(Iterator it=rulesManager.getQNamePrefixToNamespaceMap().keySet().iterator();it.hasNext();){
+//				String nsPrefix = (String)it.next();
+//				nameSpaceDecl+=getNameSpaceDeclForPrefix(nsPrefix)+" ";
+//			}
+//			
+//			nameSpaceDecl = nameSpaceDecl.trim();
 			
-			// itera tutti i nsPrefix
-			for(Iterator it=rulesManager.getQNamePrefixToNamespaceMap().keySet().iterator();it.hasNext();){
-				String nsPrefix = (String)it.next();
-				nameSpaceDecl+=getNameSpaceDeclForPrefix(nsPrefix)+" ";
-			}
-			
-			nameSpaceDecl = nameSpaceDecl.trim();
+			String nameSpaceDecl = getNameSpaceDecl();
 			
 			if(logger.isDebugEnabled())
 				logger.debug("getting template with nsDecl "+nameSpaceDecl+"  for element  "+elem_name);
