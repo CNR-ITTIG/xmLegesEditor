@@ -72,6 +72,10 @@
 			</body>
 		</html>
 	</xsl:template>
+	
+	
+	<xsl:template match="text()">&#160;<xsl:value-of select="."/>&#160;</xsl:template>
+	
 
 	<xsl:template match="/*[name()='NIR']/*">	
 		<a name="{@id}">&#160;</a>
@@ -1340,5 +1344,7 @@
 		</xsl:for-each>
 	 </p>		
 	</xsl:template>
+	
 
+	
 </xsl:stylesheet>

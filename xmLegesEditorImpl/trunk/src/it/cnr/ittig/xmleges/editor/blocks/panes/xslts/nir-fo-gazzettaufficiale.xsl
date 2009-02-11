@@ -214,6 +214,8 @@
 		<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='annessi']"/>
 		<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='meta']/*[name()='redazionale']"/>
 	</xsl:template>
+	
+	<xsl:template match="text()">&#160;<xsl:value-of select="."/>&#160;</xsl:template>
 
 	<!-- ======================================================== -->
 	<!--                                                          -->
