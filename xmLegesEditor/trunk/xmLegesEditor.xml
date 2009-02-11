@@ -1302,6 +1302,13 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             
             <css   name="css-nir"				file="xsl_test/nir-style.css"     			startup="true" />
             
+            <css   name="css-documento"			file="xsl_test/nir-style-edit-documento.css"     			startup="true" />
+            <css   name="css-annessi"			file="xsl_test/nir-style-edit-annessi.css"     			startup="true" />
+            <css   name="css-disposizioni"		file="xsl_test/nir-style-edit-disposizioni.css"     			startup="true" />
+            <css   name="css-indice"			file="xsl_test/nir-style-edit-indice.css"     			startup="true" />
+            <css   name="css-meta"				file="xsl_test/nir-style-edit-meta.css"     			startup="true" />
+            
+            
             <xslt   name="xsl-disegnilegge-testoafronte" 	file="nir-disegnilegge-testoafronte.xsl"     		startup="true" />
             <xslt   name="xsl-disegnilegge" 	file="nir-disegnilegge.xsl"     		startup="true" />
             <xslt   name="xsl-disegnilegge-nocss" 	file="nir-disegnilegge-nocss.xsl"	startup="true" />
@@ -1361,19 +1368,19 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
         <configuration>
             <pane name="editor.panes.documento">
                 <xslt name="edit-documento"/>
-                <css name="css-nir"/>
+                <css name="css-documento"/>	
             </pane>
 	    	<pane name="editor.panes.disposizioni">
                 <xslt name="edit-disposizioni"/>
-                <css name="css-nir"/>
+                <css name="css-disposizioni"/>	
             </pane>
             <pane name="editor.panes.annessi">
                 <xslt name="edit-annessi"/>
-                <css name="css-nir"/>
+				<css name="css-annessi"/>	
             </pane>
             <pane name="editor.panes.meta">
                 <xslt name="edit-meta"/>
-                <css name="css-nir"/>
+				<css name="css-meta"/>	
             </pane>
             <pane name="editor.panes.riferimenti">
                 <xslt name="riferimenti"/>
@@ -1401,7 +1408,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             </pane>
             <pane name="editor.panes.indice">
                 <xslt name="edit-indice"/>
-                <css name="css-nir"/>
+                <css name="css-indice"/>
             </pane>
             <pane name="editor.panes.ndv">
                 <xslt name="ndv"/>
