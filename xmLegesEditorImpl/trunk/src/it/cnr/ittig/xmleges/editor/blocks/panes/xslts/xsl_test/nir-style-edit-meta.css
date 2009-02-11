@@ -1,0 +1,100 @@
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * ELEMENTO ROOT                                                                                                       *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+body {	margin-left: 5px;
+		font-family: "Verdana, Arial, Helvetica, sans-serif" ;
+		font-size: 12pt ;
+		text-align:justify;}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * METADATI                                                                                                            *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+.pubblicazione{
+	margin: 30 15 15 25;
+	color: red;
+}
+
+.urn{
+	margin: 30 15 15 25;
+	color: red;
+}
+
+.alias{
+	margin: 30 15 15 25;
+	color: red;
+}
+.redazione{
+    margin: 30 15 15 25;
+    color: red;	    
+}
+
+.eventi{
+    margin: 30 15 15 25;
+    color: red;	    
+}
+.relazioni{
+    margin: 30 15 15 25;
+    color: red;	    
+}
+.infodoc{
+    margin: 30 15 15 25;
+    color: red;	    
+}
+.oggetto, .proponenti, .infomancanti{
+    margin: 30 15 15 25;
+    color: red;	    
+}
+
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * ELEMENTI HTML                                                                                                       *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+	hr {
+		margin:30px 25% 30px 25%;
+		text-align:center;
+	}
+	em {
+		font-size: 100%
+	}
+	.small {
+		font-size: 65% ;
+	}
+	
+	li {
+		padding-right: 40px;
+		text-align: left;
+	}
+	
+	b b { font-weight: normal; }
+	
+	a {
+		text-align: justify;
+	}
+	
+	.hidden {
+		width:0px;
+		height:0px;
+		max-width:0px
+		max-height:0px
+		display: inline;
+		margin: 0 0 0 0;
+		padding: 0 0 0 0;
+	}
+	p {
+		text-align:justify;
+	}
+	.allineadx, p.allineadx {
+		width: 100%;
+		text-align: right;
+		margin-bottom: 20px;
+	}
+	.allineasx {
+		width: 100%;
+		text-align: left;
+		margin-bottom: 20px;
+	}
