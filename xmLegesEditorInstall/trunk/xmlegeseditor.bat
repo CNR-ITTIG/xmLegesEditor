@@ -33,4 +33,4 @@ set CLASSPATH=%CLASSPATH%;lib/jdom-1.0.jar
 set CLASSPATH=%CLASSPATH%;lib/FontBox-0.1.0-dev.jar
 set CLASSPATH=%CLASSPATH%;lib/PDFBox-0.7.3.jar
 
-start /MIN jre\bin\javaw -Xmx256m it.cnr.ittig.services.manager.Run xmLegesEditor.xml images\editor\xmLegesEditor.png
+start /MIN jre\bin\javaw -Xmx512m it.cnr.ittig.services.manager.Run xmLegesEditor.xml images\editor\xmLegesEditor.png
