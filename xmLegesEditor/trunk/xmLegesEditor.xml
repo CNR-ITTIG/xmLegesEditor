@@ -573,6 +573,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <item action="editor.disposizioni.passive" />
 					<item action="editor.disposizioni.rimuovipassive" />
 
+					<item action="editor.disposizioni.marker" />
 		  		    <item action="editor.disposizioni.trasferisci" />
 		  		    
 		  		    
