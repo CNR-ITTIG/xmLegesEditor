@@ -279,7 +279,7 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 				
 				if (!analizzaMeta(doc, disposizioni.item(i))) {
 					form.setDialogWaiting(false);
-					utilMsg.msgError("Errore durante l'inserimento dei metadati.\nNon so valutare la " + conta +"� disposizione:\n\n"+UtilDom.domToString(disposizioni.item(i),true,"   "));
+					utilMsg.msgError("Errore durante l'inserimento dei metadati.\nNon so valutare la " + conta +"' disposizione:\n\n"+UtilDom.domToString(disposizioni.item(i),true,"   "));
 					documentManager.rollbackEdit(t);	//non funziona
 					form.setDialogWaiting(true);
 				}
@@ -552,7 +552,7 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 		    char[] buffer = new char[4096];
 		    int len;
 		    while ((len = r.read(buffer)) != -1) {
-		    	strLine =new String(new String(buffer, 0, len).getBytes(documentManager.getEncoding()), "ISO-8859-1");
+		    	strLine = new String(buffer, 0, len);
 		    	strLine = strLine.replaceAll(apiceAltoCodificato, "'");
 	    		strLine = strLine.replaceAll(apiceBassoCodificato, "'");
 		    	w.write(strLine);
