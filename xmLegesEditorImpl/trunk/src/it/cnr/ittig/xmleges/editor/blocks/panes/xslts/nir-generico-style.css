@@ -154,3 +154,7 @@
 				.mod {
 					background: #FFDDAA;
 				}
+				.omissis {
+					font-weight: bold;
+					text-align: left;
+				}
