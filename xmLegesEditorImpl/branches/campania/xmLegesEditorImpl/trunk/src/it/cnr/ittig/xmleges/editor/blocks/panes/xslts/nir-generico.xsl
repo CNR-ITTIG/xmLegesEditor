@@ -82,10 +82,11 @@
 		<xsl:choose>
 			<xsl:when test="@status = 'omissis'">
 				<div class="omissis">
-					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:apply-templates select="*[name()='num']"/>
 					<xsl:if test="*[name()='rubrica']">
 						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
 					</xsl:if>
+					<xsl:text> ( Omissis )</xsl:text>
 				</div>
 			</xsl:when>
 			<xsl:otherwise>
@@ -132,10 +133,11 @@
 		<xsl:choose>
 			<xsl:when test="@status = 'omissis'">
 				<div class="omissis">
-					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:apply-templates select="*[name()='num']"/>
 					<xsl:if test="*[name()='rubrica']">
 						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
 					</xsl:if>
+					<xsl:text> ( Omissis )</xsl:text>
 				</div>
 			</xsl:when>
 			<xsl:otherwise>
@@ -204,10 +206,11 @@
 		<xsl:choose>
 			<xsl:when test="@status = 'omissis'">
 				<div class="omissis">
-					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:apply-templates select="*[name()='num']"/>
 					<xsl:if test="*[name()='rubrica']">
 						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
 					</xsl:if>
+					<xsl:text> ( Omissis )</xsl:text>
 				</div>
 			</xsl:when>
 			<xsl:otherwise>
@@ -234,10 +237,11 @@
 		<xsl:choose>
 			<xsl:when test="@status = 'omissis'">
 				<div class="omissis">
-					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:apply-templates select="*[name()='num']"/>
 					<xsl:if test="*[name()='rubrica']">
 						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
 					</xsl:if>
+					<xsl:text> ( Omissis )</xsl:text>
 				</div>
 			</xsl:when>
 			<xsl:otherwise>
@@ -268,10 +272,11 @@
 		<xsl:choose>
 			<xsl:when test="@status = 'omissis'">
 				<div class="omissis">
-					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:apply-templates select="*[name()='num']"/>
 					<xsl:if test="*[name()='rubrica']">
 						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
 					</xsl:if>
+					<xsl:text> ( Omissis )</xsl:text>
 				</div>
 			</xsl:when>
 			<xsl:otherwise>
@@ -298,10 +303,11 @@
 		<xsl:choose>
 			<xsl:when test="@status = 'omissis'">
 				<div class="omissis">
-					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:apply-templates select="*[name()='num']"/>
 					<xsl:if test="*[name()='rubrica']">
 						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
 					</xsl:if>
+					<xsl:text> ( Omissis )</xsl:text>
 				</div>
 			</xsl:when>
 			<xsl:otherwise>
@@ -328,10 +334,11 @@
 		<xsl:choose>
 			<xsl:when test="@status = 'omissis'">
 				<div class="omissis">
-					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:apply-templates select="*[name()='num']"/>
 					<xsl:if test="*[name()='rubrica']">
 						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
 					</xsl:if>
+					<xsl:text> ( Omissis )</xsl:text>
 				</div>
 			</xsl:when>
 			<xsl:otherwise>
@@ -358,10 +365,11 @@
 		<xsl:choose>
 			<xsl:when test="@status = 'omissis'">
 				<div class="omissis">
-					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:apply-templates select="*[name()='num']"/>
 					<xsl:if test="*[name()='rubrica']">
 						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
 					</xsl:if>
+					<xsl:text> ( Omissis )</xsl:text>
 				</div>
 			</xsl:when>
 			<xsl:otherwise>
@@ -388,10 +396,11 @@
 		<xsl:choose>
 			<xsl:when test="@status = 'omissis'">
 				<div class="omissis">
-					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:apply-templates select="*[name()='num']"/>
 					<xsl:if test="*[name()='rubrica']">
 						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
 					</xsl:if>
+					<xsl:text> ( Omissis )</xsl:text>
 				</div>
 			</xsl:when>
 			<xsl:otherwise>
@@ -419,10 +428,11 @@
 		<xsl:choose>
 			<xsl:when test="@status = 'omissis'">
 				<div class="omissis">
-					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:apply-templates select="*[name()='num']"/>
 					<xsl:if test="*[name()='rubrica']">
 						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
 					</xsl:if>
+					<xsl:text> ( Omissis )</xsl:text>
 				</div>
 			</xsl:when>
 			<xsl:otherwise>
@@ -471,10 +481,11 @@
 		<xsl:choose>
 			<xsl:when test="@status = 'omissis'">
 				<div class="omissis">
-					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:apply-templates select="*[name()='num']"/>
 					<xsl:if test="*[name()='rubrica']">
 						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
 					</xsl:if>
+					<xsl:text> ( Omissis )</xsl:text>
 				</div>
 			</xsl:when>
 			<xsl:otherwise>
@@ -502,10 +513,11 @@
 		<xsl:choose>
 			<xsl:when test="@status = 'omissis'">
 				<div class="omissis">
-					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:apply-templates select="*[name()='num']"/>
 					<xsl:if test="*[name()='rubrica']">
 						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
 					</xsl:if>
+					<xsl:text> ( Omissis )</xsl:text>
 				</div>
 			</xsl:when>
 			<xsl:otherwise>
@@ -542,10 +554,11 @@
 		<xsl:choose>
 			<xsl:when test="@status = 'omissis'">
 				<div class="omissis">
-					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:apply-templates select="*[name()='num']"/>
 					<xsl:if test="*[name()='rubrica']">
 						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
 					</xsl:if>
+					<xsl:text> ( Omissis )</xsl:text>
 				</div>
 			</xsl:when>
 			<xsl:otherwise>
@@ -571,10 +584,11 @@
 		<xsl:choose>
 			<xsl:when test="@status = 'omissis'">
 				<div class="omissis">
-					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:apply-templates select="*[name()='num']"/>
 					<xsl:if test="*[name()='rubrica']">
 						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
 					</xsl:if>
+					<xsl:text> ( Omissis )</xsl:text>
 				</div>
 			</xsl:when>
 			<xsl:otherwise>
@@ -601,10 +615,11 @@
 		<xsl:choose>
 			<xsl:when test="@status = 'omissis'">
 				<div class="omissis">
-					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:apply-templates select="*[name()='num']"/>
 					<xsl:if test="*[name()='rubrica']">
 						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
 					</xsl:if>
+					<xsl:text> ( Omissis )</xsl:text>
 				</div>
 			</xsl:when>
 			<xsl:otherwise>
@@ -637,10 +652,11 @@
 		<xsl:choose>
 			<xsl:when test="@status = 'omissis'">
 				<div class="omissis">
-					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:apply-templates select="*[name()='num']"/>
 					<xsl:if test="*[name()='rubrica']">
 						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
 					</xsl:if>
+					<xsl:text> ( Omissis )</xsl:text>
 				</div>
 			</xsl:when>
 			<xsl:otherwise>
@@ -666,10 +682,11 @@
 		<xsl:choose>
 			<xsl:when test="@status = 'omissis'">
 				<div class="omissis">
-					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:apply-templates select="*[name()='num']"/>
 					<xsl:if test="*[name()='rubrica']">
 						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
 					</xsl:if>
+					<xsl:text> ( Omissis )</xsl:text>
 				</div>
 			</xsl:when>
 			<xsl:otherwise>
@@ -763,10 +780,11 @@
 		<xsl:choose>
 			<xsl:when test="@status = 'omissis'">
 				<div class="omissis">
-					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:apply-templates select="*[name()='num']"/>
 					<xsl:if test="*[name()='rubrica']">
 						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
 					</xsl:if>
+					<xsl:text> ( Omissis )</xsl:text>
 				</div>
 			</xsl:when>
 			<xsl:otherwise>
