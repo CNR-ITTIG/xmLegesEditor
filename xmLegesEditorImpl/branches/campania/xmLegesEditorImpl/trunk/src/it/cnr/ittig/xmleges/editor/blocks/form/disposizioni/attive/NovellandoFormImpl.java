@@ -311,14 +311,12 @@ public class NovellandoFormImpl implements NovellandoForm,
 	}
 
 	private void initForm() {
-
-		// 1) se ho 2 virgolette (di TIPO parola) allora Scommetto su
-		// Delimitatori (con check PAROLE)
-		// 2) se ho 1 virgoletta allora Scommetto su Contenuto (con check
-		// PAROLE)
-		// 3) altrimenti (senza check PAROLE)
-
-		virgolettaSelezionata = null;
+		
+		//1)	se ho 2 virgolette (di TIPO parola) allora Scommetto su Delimitatori (con check PAROLE)
+		//2)	se ho 1 virgoletta allora Scommetto su Contenuto (con check PAROLE)
+		//3)	altrimenti (senza check PAROLE)   
+		
+		virgolettaSelezionata=null;
 		disposizioni.setListenerFormClosed(true);
 		valorePosizionamento.setSelectedItem(" ");
 		valorePartenza.setSelectedItem(" ");
@@ -398,49 +396,45 @@ public class NovellandoFormImpl implements NovellandoForm,
 
 	private void setBottoneAvanti() {
 		/*
-		 * 1) se non ho scelto parole posso proseguire. 2) se ho scelto
-		 * parole+Delimitatori devo avere almeno Partenza/Arrivo selezionato
-		 * (valore+virgoletta). 3) se ho scelto parole+Contenuto devo avere
-		 * almento contenuto+virgoletta impostato; inoltre, posizionamento e
-		 * posizionamentoVir ci devono essere entrambi o nessuno.
+		 * 1)	se non ho scelto parole posso proseguire.
+		 * 2)	se ho scelto parole+Delimitatori devo avere almeno Partenza/Arrivo selezionato (valore+virgoletta).
+		 * 3)	se ho scelto parole+Contenuto devo avere almento contenuto+virgoletta impostato;
+		 * 		inoltre, posizionamento e posizionamentoVir ci devono essere entrambi o nessuno.
 		 */
 
 		avanti.setEnabled(false);
-		if (!parole.isSelected()) // caso1
+		if (!parole.isSelected()) 		//caso1
 			avanti.setEnabled(true);
-		else if (sceltodelimitatori.isSelected()) { // caso2
-			boolean partenza1 = " ".equals(valorePartenza.getSelectedItem());
-			boolean partenza2 = "".equals(virPartenza.getText().trim());
-			boolean partenzaValida = (!partenza1) && (!partenza2);
-			boolean arrivo1 = " ".equals(valoreArrivo.getSelectedItem());
-			boolean arrivo2 = "".equals(virArrivo.getText().trim());
-			boolean arrivoValido = (!arrivo1) && (!arrivo2);
-			boolean selezioniParziali = (partenza1 && !partenza2)
-					|| (!partenza1 && partenza2) || (arrivo1 && !arrivo2)
-					|| (!arrivo1 && arrivo2);
-			avanti.setEnabled((partenzaValida || arrivoValido)
-					&& !selezioniParziali);
-		} else if (sceltocontenuto.isSelected()) { // caso3
-			boolean contenuto = "".equals(virContenuto.getText().trim());
-			boolean posizionamento1 = " ".equals(valorePosizionamento
-					.getSelectedItem());
-			boolean posizionamento2 = "".equals(virPosizionamento.getText()
-					.trim());
-			boolean posizionamentoValido = posizionamento1 == posizionamento2;
-			boolean selezioniParziali = (posizionamento1 && !posizionamento2)
-					|| (!posizionamento1 && posizionamento2);
-			avanti.setEnabled(!contenuto && posizionamentoValido
-					&& !selezioniParziali);
-		}
-
+		else
+			if (sceltodelimitatori.isSelected()) {		//caso2
+				boolean partenza1 = " ".equals(valorePartenza.getSelectedItem());
+				boolean partenza2 = "".equals(virPartenza.getText().trim());
+				boolean partenzaValida = (!partenza1) && (!partenza2);
+				boolean arrivo1 = " ".equals(valoreArrivo.getSelectedItem());
+				boolean arrivo2 = "".equals(virArrivo.getText().trim());
+				boolean arrivoValido = (!arrivo1) && (!arrivo2);
+				boolean selezioniParziali = (partenza1 && !partenza2) || (!partenza1 && partenza2) ||
+												(arrivo1 && !arrivo2) || (!arrivo1 && arrivo2);
+				avanti.setEnabled((partenzaValida || arrivoValido) && !selezioniParziali);
+			}
+			else 
+				if (sceltocontenuto.isSelected()) {		//caso3
+					boolean contenuto = "".equals(virContenuto.getText().trim());
+					boolean posizionamento1 = " ".equals(valorePosizionamento.getSelectedItem());
+					boolean posizionamento2 = "".equals(virPosizionamento.getText().trim());
+					boolean posizionamentoValido = posizionamento1 == posizionamento2;
+					boolean selezioniParziali = (posizionamento1 && !posizionamento2) || (!posizionamento1 && posizionamento2);
+					avanti.setEnabled(!contenuto && posizionamentoValido && !selezioniParziali);
+				}
+		
 	}
 
 	public void openForm(FormClosedListener listener, Node modificoMetaEsistenti) {
 
 		// avanti.setText(i18n.getTextFor("editor.form.disposizioni.attive.btn.avanti.text"));
 		this.listener = listener;
-		if (modificoMetaEsistenti == null)
-			initForm(); // inizializzo la form
+		if (modificoMetaEsistenti==null)
+			initForm();	//inizializzo la form
 		else
 			recuperaMeta(modificoMetaEsistenti);
 		setBottoneAvanti();
@@ -471,13 +465,14 @@ public class NovellandoFormImpl implements NovellandoForm,
 			/*
 			 * *** recupero virgoletta dai meta ***
 			 * 
-			 * pos1 = null No parole (***A***) (else) parole (test con pos2)
+			 *    pos1 = null     	No parole  (***A***)
+			 *    		(else)		parole (test con pos2)
 			 * 
-			 * pos2 = null Se pos1 ha anche un figlio Ruolo (1° delimitatore
-			 * (***B***)) (else) (1° contenuto (***C***))
-			 * 
-			 * (else) Se pos1 e pos2 hanno un figlio Ruolo (1° e 2° delimitatore
-			 * (***D***)) (else) (1° e 2° contenuto (***E***))
+			 *    pos2 = null		Se pos1 ha anche un figlio Ruolo		(1° delimitatore (***B***))
+			 *            			(else)									(1° contenuto (***C***))
+			 *            
+			 * 			(else)		Se pos1 e pos2 hanno un figlio Ruolo	(1° e 2° delimitatore (***D***))
+			 * 						(else)									(1° e 2° contenuto (***E***))
 			 */
 			Node pos1 = UtilDom.findRecursiveChild(novellando, "dsp:pos");
 			if (pos1 == null) {
