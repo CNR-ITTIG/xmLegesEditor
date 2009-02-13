@@ -151,6 +151,10 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 		etiBinario = (JLabel) form.getComponentByName("ilc.binario.eti");
 		binario = (JCheckBox) form.getComponentByName("ilc.binario");
 		binario.setSelected(true);
+		
+		//non implementato
+		binario.setEnabled(false);
+		
 		webserver.setEnabled(false);
 		binario.addActionListener(this);
 		etiUser = (JLabel) form.getComponentByName("ilc.user.eti");
@@ -172,7 +176,7 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 		String[] software = new String[]{"sf-ilc/ittig", "sf-ilc/ittig.exe", "sf-ilc/LESSICO.txt", "sf-ilc/MACRO.txt", "sf-ilc/RULE.txt"};
 		// copio in software-ilc
 		
-		// No. l'eseguibile dell'ilc è linka staticamente i vari moduli quindi devo lavorare nella cartalla corrente
+		// No. l'eseguibile dell'ilc linka staticamente i vari moduli quindi devo lavorare nella cartalla corrente
 		// (ovvero sia l'eseguibile che il file da trattare direttamente nella TEMP)    ---(A)(B)(C)
 		
 		for (int i = 0; i < software.length; i++)
@@ -284,7 +288,7 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 				
 				if (!analizzaMeta(doc, disposizioni.item(i))) {
 					form.setDialogWaiting(false);
-					utilMsg.msgError("Errore durante l'inserimento dei metadati.\nNon so valutare la " + conta +"° disposizione:\n\n"+UtilDom.domToString(disposizioni.item(i),true,"   "));
+					utilMsg.msgError("Errore durante l'inserimento dei metadati.\nNon so valutare la " + conta +"' disposizione:\n\n"+UtilDom.domToString(disposizioni.item(i),true,"   "));
 					documentManager.rollbackEdit(t);	//non funziona
 					form.setDialogWaiting(true);
 				}
@@ -468,8 +472,11 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 				}
 				if (ruoloA!=null)	
 					tipo = "delimitatori";
-				if ("parole".equals(tipo))	
+				//if ("parole".equals(tipo))	
+				if ("parole".equals(tipoPartizione)) {
 					parole=true;
+					tipoPartizione = "parole";
+				}
 				domDisposizioni.setDOMNovellandoDispAttive(nuovoMeta, parole, tipoPartizione, tipo, ruoloA, virgolettaA, ruoloB, virgolettaB);
 			}
 			
