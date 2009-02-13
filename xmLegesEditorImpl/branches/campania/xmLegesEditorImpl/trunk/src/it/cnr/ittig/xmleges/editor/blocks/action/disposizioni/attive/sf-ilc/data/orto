@@ -1,8 +1,14 @@
 # $Id: orto,v 1.9 2008/05/20 12:59:28 simone Exp $
-s/(art|n|N)\.\s*(\d)/$1\._$2/g
+s/(n|N)\.\s*(\d)/$1\._$2/g
 #sostituzione del ; con il . per risolvere i problemi di
 #propagazione dell'errore su frasi troppo lunghe
 #s/;/\./g
+s/fino a ([^:])/fino a: $1/g
+s/da VIR/da : VIR/g
+s/da "\s*VIR/da : " VIR/g
+s/seguente VIR/seguente : VIR/g
+s/infine/in fine/g
+s/[Aa]rt\./articolo/g
 s/(\n\r)+/ /g
 s/\r+/ /g
 s/\n+/ /g
@@ -50,4 +56,7 @@ s/([0-9]{3})\/([0-9]{4})/$1\/$2/g
 s/([a-zA-Z_]\d+),/$1\n,/g
 s/([a-zA-Z']),/$1\n,/g
 s/(\d),$/$1\n,/g
+s/(\D),/$1\n,/g
 #s/( )+/\n/g
+#aggeggiata
+s/b-bis/b_bis/
