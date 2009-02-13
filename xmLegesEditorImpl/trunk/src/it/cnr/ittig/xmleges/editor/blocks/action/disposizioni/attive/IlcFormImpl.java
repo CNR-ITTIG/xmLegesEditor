@@ -552,7 +552,7 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 		    char[] buffer = new char[4096];
 		    int len;
 		    while ((len = r.read(buffer)) != -1) {
-		    	strLine =new String(new String(buffer, 0, len).getBytes("UTF-8"), "ISO-8859-1");
+		    	strLine =new String(new String(buffer, 0, len).getBytes(documentManager.getEncoding()), "ISO-8859-1");
 		    	strLine = strLine.replaceAll(apiceAltoCodificato, "'");
 	    		strLine = strLine.replaceAll(apiceBassoCodificato, "'");
 		    	w.write(strLine);
