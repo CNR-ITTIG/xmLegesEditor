@@ -4,135 +4,29 @@ let RIF = "RIF"
 /* VIR */
 let VIR = "VIR"
 
-/* definisce una variabile per i modificatori di avverbi */
-
-let ADVMODIF =  "molto"|"troppo"|"meno"|"tanto"|"poco"|"un_po'"|"alquanto"|
-		"abbastanza"|"solo"|"perfino"|"ben"|"pur"|"puramente"|
-		"esclusivamente"|"estremamente"|"sensibilmente"|"terribilmente"|
-		"particolarmente"|"nettamente"|"discretamente"|"eccessivamente"|
-		"enormemente"
 
 
-
-/* crea una variabile TEMP per i lemmi che possono occorrere in modificatori temporali
-semza la preposizione */
-
-let TEMP = "lunedi'"|"martedi'"|"mercoledi'"|"giovedi'"|"venerdi'"|
-	   "sabato"|"domenica"|"gennaio"|"febbraio"|"marzo"|"aprile"|"maggio"|"giugno"|
-	   "luglio"|"agosto"|"settembre"|"ottobre"|"novembre"|"dicembre"|
-	   "mattina"|"pomeriggio"|"sera"|"notte"|"domani"|"ieri"|"settimana"|"mese"|"anno"|"secolo"|
-	   "millennio"|"lustro"|"biennio"|"triennio"|"decennio"|"trimestre"|"quadrimestre"|"semestre"|"week-end"|
-	   "fine_settimana"|"giorno"|"ora"|"minuto"|"secondo"
-
-/* crea una variabile NOUNOBBL per i lemmi che non possono occorrere come valori dell'elemento <dest> negli obblighi */
-
-let NOUNOBBL = "modificazione"|"eccezione"|"cio'"|"cui"|"I"|
-	   "II"|"III"|"IV"|"V"|"VI"|"VII"|"VIII"|"IX"|
-	   "X"|"comma"|"a"|"A"|"b"|"B"|"c"|"C"|"d"|"D"|"f"|"F"|"g"|"G"|"h"|"H"|"i"|"I"|"l"|"L"|
-		   "m"|"M"|"n"|"N"|"p"|"P"|"q"|"Q"|"r"|"R"|"s"|"S"|"t"|"T"|"u"|"U"|"v"|"V"|"z"|"Z"
-
-/* crea una variabile NOUNDEST per i lemmi che non possono occorrere come valori dell'elemento <dest> negli obblighi */
-
-let NOUNDEST = "fatto"|"reato"|"danno"|"profitto"|"comma"|"articolo"|"approvazione"|"guerra"|"violazione"|"diffusione"|
-		"documento"|"divulgazione"|"notificazione"|"pena"|"provvedimento"|"informazione"|"atto"|"dichiarazione"|"si"
 
 /* crea una variabile NORMABR per i lemmi che possono occorrere come valori di <norma> nelle abrogazioni */
 
 let NORMABR = "RIF"|"comma"|"articolo"|"capo"|"legge"|"decreto"|
-	   	"decreto-legge"|"sezione"|"disposizione"|
+	   	"decreto-legge"|"sezione"|"disposizione"| "lettera"|
 		"regolamento"|"norma"|"L"|"L."|"L.R."|"numero"|"periodo"|"provvedimento"
-	   
+/* */	   
+
+let NORMARIF = "RIF"
+
 /* crea una variabile NORMABRPP per i lemmi che non possono occorrere come valori di <norma> nelle abrogazioni */
 
 let NORMABRPP = "RIF"|"comma"|"articolo"|"capo"|"legge"|"decreto"|
 	   "decreto-legge"|"sezione"|"disposizione"|"regolamento"|"provvedimento"|"periodo"
 	   
-/* crea una variabile NORMINT per i lemmi che possono occorrere come valori di <norma> nelle integrazioni */
-
-let NORMINT = "RIF"|"articolo"|"capo"|"legge"|"testo"|"decreto"|
-	   	"decreto-legge"|"sezione"|"disposizione"|
-		"regolamento"|"norma"|"L"|"L."|"L.R."|"provvedimento"|"numero"
-
-/* crea una variabile POSINT per i lemmi che possono occorrere come valori di <posizione> nelle integrazioni */
-
-let POSINT = "parola"|"articolo"|"comma"|"lettera"|"numero"|"periodo"
-
-/* crea una variabile VERBINT per i lemmi che possono occorrere come verbi-pivot nelle integrazioni */
-
-let VERBINT = "premettere"|"aggiungere"|"inserire"
-
-/* crea una variabile NOUNPENA per i lemmi che possono occorrere come valori dell'argomento pena */
-
-let NOUNPENA = "sanzione"|"ammenda"|"arresto"|"reclusione"|"multa"|"ergastolo"|"morte"
-
-/* crea una variabile BLABLA per il pattern "e successive modificazioni" */
-
-let BLABLA = N_C
-		with {
-		   N.potgov != NORMABR
-		   }
 
 
-/* crea una variabile NOPOT per i chunk diversi da "aggiungere" */
 
-let NOPOT = X_C
-		with {
-		   X = ALL,
-	          IF ( X = FV,X.mod != NIL) {X.mod != "potere"},
-	          IF ( X = FV,X.mod = NIL) {X.potgov != "potere"}	          
-	           }
 
-/* crea una variabile NOPOT per i chunk diversi da "aggiungere" */
 
-let NOADJ = X_C
-		with {
-		   X = ALL,
-	          IF ( X = ADJ) {X.potgov != "solo"}	          
-	           }
 
-/* crea una variabile NOPOT per i chunk diversi da "aggiungere" */
-
-let NOINF = X_C
-		with {
-		   X = ALL,
-	          IF ( X = I) {X.prep != "a"|"ad"}	          
-	           }
-
-/* crea una variabile NOPOT per i chunk diversi da "aggiungere" */
-
-let NODEF = X_C
-		with {
-		   X = ALL,
-	          IF ( X = N ) {X.potgov != "a"|"A"|"b"|"B"|"c"|"C"|"d"|"D"|"f"|"F"|"g"|"G"|"h"|"H"|"i"|"I"|"l"|"L"|
-		   "m"|"M"|"n"|"N"|"p"|"P"|"q"|"Q"|"r"|"R"|"s"|"S"|"t"|"T"|"u"|"U"|"v"|"V"|"z"|"Z"}          
-	           }
-
-/* crea una variabile AV per i chunk diversi da "avere" */
-
-let AV = X_C
-		with {
-		   X = ALL,
-		  IF ( X = FV) {X.potgov != "avere"}	          
-	           }
-
-/* crea una variabile PUNCLETPAR per il pattern ": a) ... b)", ecc. */
-
-let PUNCLETPAR = PUNC_C1;N_C;PUNC_C2
-		with {
-		   PUNC1.punctype = ":"|";",
-		   N.potgov = "a"|"A"|"b"|"B"|"c"|"C"|"d"|"D"|"f"|"F"|"g"|"G"|"h"|"H"|"i"|"I"|"l"|"L"|
-		   "m"|"M"|"n"|"N"|"p"|"P"|"q"|"Q"|"r"|"R"|"s"|"S"|"t"|"T"|"u"|"U"|"v"|"V"|"z"|"Z",
-		   PUNC2.punctype = ")"
-		   }
-
-/* crea una variabile LETPAR per il pattern "a)" "b)", ecc. */
-
-let LETPAR = N_C;PUNC_C
-		with {
-		   N.potgov = "a"|"A"|"b"|"B"|"c"|"C"|"d"|"D"|"f"|"F"|"g"|"G"|"h"|"H"|"i"|"I"|"l"|"L"|
-		   "m"|"M"|"n"|"N"|"p"|"P"|"q"|"Q"|"r"|"R"|"s"|"S"|"t"|"T"|"u"|"U"|"v"|"V"|"z"|"Z",
-		   PUNC.punctype = ")"
-		   }
 
 /* crea una variabile LETTERASING per il pattern "lettera_Giulia" */
 
@@ -173,62 +67,16 @@ let LETTERATER = Q_C
 		   "m-ter"|"M-ter"|"n-ter"|"N-ter"|"p-ter"|"P-ter"|"q-ter"|"Q-ter"|"r-ter"|"R-ter"|"s-ter"|"S-ter"|"t-ter"|"T-ter"|"u-ter"|"U-ter"|"v-ter"|"V-ter"|"z-ter"|"Z-ter"
 		   }
 
-/* crea una variabile UPAR per il pattern "ee)"", ecc. */
 
-let UPAR = U_C;PUNC_C
-		with {
-		   PUNC.punctype = ")"
-		   }
 
-/* crea una variabile NUMPAR per il pattern "1)" "2)", ecc. */
 
-let NUMPAR = ADJ_C;PUNC_C
-		with {
-		   ADJ.potgov = "1"|"2"|"3"|"4"|"5"|"6"|"7"|"8",
-		   PUNC.punctype = ")"
-		   }
 
-/* crea una variabile EPAR per trattare un problema delle liste numerate*/
-
-let EPAR = COORD_C;PUNC_C
-		with {
-		   COORD.conjtype = "e",
-		   PUNC.punctype = ")"
-		   }
-		   
-/* crea una variabile PAR per eliminare i nomi tra parentesi come possibili valori di <destinatario> o <terzo>
-negli obblighi*/
-
-let PAR = PUNC_C1;X_C*;PUNC_C2
-		with {
-		   PUNC1.conjtype = "(",
-		   X = ALL,
-		   PUNC2.punctype = ")"
-		   }
-		   
-/* crea una variabile PIPPO */
-
-let PIPPO = P_C
-		with {
-		   IF (P.potgov = NORMABRPP) {P.prep != "a"|"in"}
-		   }
-   
-/* crea una variabile DIDIDI */
-
-let DIDIDI = X_C
-		with {
-		   X = ALL,
-		   IF (X = DI) {!"<ABR-NORMA>"|"<INT-NORMA>"|"<SOST-NORMA>" (T,X)}
-		   }
 
 /*la variabile raccogli alcune congiunzioni subordinanti con valore conclusivo */
 
 let CONCL = "dunque"|"infatti"|"quindi"|"in_realta'"|"pero'"|"ad_esempio"
 
 
-/*raccoglie i verbi copulativi*/
-
-let COPULA = "essere"|"sembrare"|"divenire"|"diventare"|"parere"
 
 /*definisce una classe di avverbiali modificatori, che comprende oltre agli ADV_C,
 "anche", "piu'" e altre congiunzioni (CONCL)
@@ -246,19 +94,7 @@ let ADVS = X_C;[COORD_C]
 	  		}
 	  	}
 
-/* per trattare un problema delle abrogazioni"*/
-let INTEMPR = X_C
-with {
-	X = ALL,
-	X.prep != "in"
-	}
 	  	
-/* per trattare un problema delle abrogazioni"*/
-let NOVERBUM = X_C
-with {
-	X = ALL,
-	X.potgov != "parola"
-	}
 
 /* per trattare un problema delle abrogazioni"*/
 let TEMPR = X_C
@@ -268,59 +104,15 @@ with {
            X.potgov != NORMABR
            }   
 	}
-
-
-/*tratta le costruzioni "di cui all'art."*/
-let ART = P_C1;P_C2
+/* per trattare un problema delle abrogazioni"*/
+let NODISP = X_C
 with {
-	P1.potgov = "cui",
-	P1.prep = "di",
-	P2.potgov = "art."|"comma"|"articolo"|"legge"|"decreto",
-	P2.prep = "a"
-	}
-
-/*coordina relative*/
-
-let RRRRSC = X_C;Y_C*;Z_C;T_C*;Z_C;T_C*;Z_C;T_C*;Z_C
-with {
-	X = CHE|N|P|di,
-	IF (X = N|P|di) {
-		X.potgov = "cui"|"quale"
-		},
-	Y != FV|BE,
-      T != FV|BE|N,
-      SUF(T*) # COORD_C;ADV*,
-      Z = FV|BE
-	}
-	
-/*coordina relative*/
-
-let RRRSC = X_C;Y_C*;Z_C;T_C*;Z_C;T_C*;Z_C
-with {
-	X = CHE|N|P|di,
-	IF (X = N|P|di) {
-		X.potgov = "cui"|"quale"
-		},
-	Y != FV|BE,
-      T != FV|BE|N,
-      SUF(T*) # COORD_C,
-	Z = FV|BE
+	X = ALL,
+        X.potgov != "disposizione"
 	}
 
 
-/*coordina relative*/
 
-let RRSC = X_C;Y_C*;Z_C;T_C*;Z_C
-with {
-	X = CHE|N|P|di,
-	IF (X = N|P|di) {
-		X.potgov = "cui"|"quale"
-		},
-	Y != FV|BE,
-      T != FV|BE|N,
-      SUF(T*) # COORD_C,
-	Z = FV|BE
-	}
 
 
 
@@ -339,75 +131,9 @@ with {
 	Z = FV|BE
 	}
 
-/* crea una variabile TEMPFV per i chunk diversi dai verbi trigger "sopprimere" etc.*/
 
-let TEMPFV = X_C
-		with {
-		 X = ALL,
-	         X.potgov != "abrogare"|"sopprimere"|"sostituire"|"inserire"|"aggiungere"
-		   }
-		   
-/* crea una variabile TEMPSOPP per i chunk diversi da "sopprimere" */
 
-let TEMPSOPP = X_C
-		with {
-		   X = ALL,
-	         IF ( X != ADJPART) {X.potgov != "sopprimere"|"abrogare"}
-		   }
-		   
-/* crea una variabile TEMPSOST per i chunk diversi da "sostituire" */
 
-let TEMPSOST = X_C
-		with {
-		   X = ALL,
-	         IF ( X != ADJPART) {X.potgov != "sostituire"}
-		   }
-		   		   
-/* crea una variabile TEMPINT per i chunk diversi da "aggiungere" */
-
-let TEMPINT = X_C
-		with {
-		   X = ALL,
-	           X.potgov != "aggiungere"
-	           }
-
-/* crea una variabile TEMPOBBL per i chunk diversi da "aggiungere" */
-
-let TEMPOBBL = X_C
-		with {
-		   X = ALL,
-	          IF ( X = BE,X.mod = NIL) {X.potgov != "tenuto"|"obbligato"},
-	          IF ( X = BE,X.mod != NIL) {X.mod != "dovere"},
-		  IF ( X = FV,X.mod != NIL) {X.mod != "dovere"}	          
-	           }
-
-/* crea una variabile TEMPPERM per i chunk diversi da "aggiungere" */
-
-let TEMPPERM = X_C
-		with {
-		   X = ALL,
-	          IF ( X = BE,X.mod = NIL) {X.potgov != "ammesso"|"consentito"|"autorizzato"},
-	          IF ( X = FV,X.mod = NIL) {X.potgov != "potere"},
-	          IF ( X = FV,X.mod != NIL) {X.mod != "potere"}       
-	           }
-
-/* crea una variabile TEMPDIV per i chunk diversi da "aggiungere" */
-
-let TEMPDIV = X_C
-		with {
-		   X = ALL,
-	          IF ( X = BE,X.mod = NIL ) {X.potgov != "vietare"|"ammettere"|"proibire"},
-	          IF ( X = BE,X.mod != NIL,X.premodif = "non" ) {X.mod != "potere",X.premodif != "non"},
-	          IF ( X = FV,X.mod != NIL,X.premodif = "non" ) {X.mod != "potere",X.premodif != "non",X.potgov != "essere"}
-	           }
-
-/* crea una variabile TEMPPERM per i chunk diversi da "aggiungere" */
-
-let TEMPDA = X_C
-		with {
-		   X = ALL,
-	          IF ( X = P) {X.potgov != "parte"}	          
-	           }
 
 /* frasi incidentali participiali o aggettivali che iniziano con una
 congiunzione subordinante*/
@@ -420,495 +146,35 @@ let INCPART = X_C;ADVS*;Y_C
 	    	   Y = ADJPART|ADJ
 	    	   }
 
-/*per il pattern "sono apportate le seguenti modificazioni:"*/
 
 
-let MODIF = FV_C;N_C;PUNC_C
-	    with {
-	           FV.potgov = "apportare",
-	    	   N.potgov = "modificazione",
-	    	   PUNC.punctype = ":"
-	    	   }
-/* roberto22.07*/
-let NOTMODIF = X_C
-	    with {
-                  X = ALL,
-	          IF (X = N) {X.potgov != "modificazione"}
-	          }
-
-/* roberto22.07*/
-let INF = X_C
-	    with {
-                  X = ALL,
-	          IF (X = I) {X.prep != "a"}
-	          }
-
-
-/* roberto22.07*/
-let INFCOORD = P_C;COORD_C;I_C
-	    with {
-                  COORD.conjtype = "e"|"o",
-		  I.prep = "a"
-		  }
-
-
-/* roberto22.07*/
-let DOV = X_C
-	    with {
-                  X = ALL,
-	          IF (X = FV) {X.mod != "dovere"}
-	          }
-
-/* roberto22.07*/
-let ARTSANZ = X_C
-	    with {
-                  X = ADJ|N|PUNC|COORD|NA|DI|SUBORD|P,
-	          IF (X = DI|N|P) {X.potgov != "articolo"}
-	          }
-
-/* roberto22.07*/
-let SANZ = X_C
-	    with {
-                  X = ALL,
-	          IF (X = BE) {X.potgov != "punire"},
-	          IF (X = N) {X.potgov != "pena"}
-	          }
-
-/* roberto22.07*/
-let SANZPENA = X_C
-	    with {
-                  X = ALL,
-	          IF (X = P) {X.potgov != NOUNPENA}
-	          }
-
-/* roberto22.07*/
-let NODI = X_C
-	    with {
-                  X = ALL,
-	          IF (X = DI) {X.potgov != "disposizione"|"articolo"|"art."}
-	          }
-	          
-/*per eliminare dall'analisi tutti i chunk nominali che occorrono prima del pattern "e successive modificazioni"*/
-
-
-let SUCCMOD = $P_C;X_C*;N_C
-	    with {       
-	          X = NOTMODIF
-	          }
-
-/*per eliminare dall'analisi tutti i chunk nominali che occorrono prima del pattern "e successive modificazioni"*/
-
-
-let FVAZIONE = X_C
-	    with {       
-	          X = ALL,
-	          IF (X = FV|BE) {!"<OBBL-AZIONE>" (X,T)}
-	          }
-
-/*per eliminare dall'analisi tutti i chunk nominali che occorrono prima del pattern "e successive modificazioni"*/
-
-let FVAZIONEE = X_C
-	    with {       
-	          X = ALL,
-	          IF (X = FV) {!subj (X,T)}
-	          }
-
-/*per eliminare dall'analisi tutti i chunk nominali che occorrono prima del pattern "e successive modificazioni"*/
-
-
-let NONSONOIO = X_C
-	    with {       
-	          X = ALL,
-	          IF (X = N) {!"<ABR-NORMAlista>" (T,X)}
-	          }
-
-/*per eliminare dall'analisi tutti i chunk nominali che occorrono prima del pattern "e successive modificazioni"*/
-
-
-let NONSONONEMMENOIO = X_C
-	    with {       
-	          X = ALL,
-	          IF (X = N) {!"<ABR-NORMA>" (T,X)}
-	          }
-
-/*per eliminare dall'analisi tutti i chunk nominali che occorrono prima del pattern "e successive modificazioni"*/
-
-
-let AAA = X_C
-	    with {       
-	          X = ALL,
-	          IF (X = DI) {!"<ABR-NORMA>" (T,X)}
-	          }
-
-/*per eliminare dall'analisi tutti i chunk nominali che occorrono prima del pattern "e successive modificazioni"*/
-
-
-let NODUEPUNC = X_C
-	    with {       
-	          X = ALL,
-	          IF (X = PUNC) {X.punctype != ":"}
-	          }
-	          
-/*per eliminare dall'analisi tutti i chunk nominali che occorrono prima del pattern "e successive modificazioni"*/
-
-
-let NODUEPUNCTI = X_C
-	    with {       
-	          X = ALL,
-	          IF (X = PUNC) {!"<SOST-NOVELLA>" (T,X)}
-	          }
-	          
-/*per eliminare dall'analisi tutti i chunk nominali che occorrono prima del pattern "e successive modificazioni"*/
-
-
-let NOPUNC = X_C
-	    with {       
-	          X = ALL,
-	          IF (X = PUNC) {X.punctype != ")"}
-	          }
-
-
-/*per eliminare dall'analisi tutti i chunk nominali che occorrono prima del pattern "e successive modificazioni"*/
-
-
-let NOPUNCVIRG = X_C
-	    with {       
-	          X = ALL,
-	          IF (X = PUNC) {X.punctype != ";"}
-	          }
-/*per eliminare dall'analisi tutti i chunk nominali che occorrono prima del pattern "e successive modificazioni"*/
-
-
-let NOQUOTE = X_C
-	    with {       
-	          X = ALL,
-	          IF (X = PUNC) {X.quote = "quoted"}
-	          }
-
-/*per eliminare dall'analisi tutti i chunk nominali che occorrono prima del pattern "e successive modificazioni"*/
-
-let NOMA = X_C
-	    with {       
-	          X = ALL,
-	          IF ( X = COORD ) {X.conjtype != "ma"}
-	          }
-
-/*per eliminare dall'analisi tutti i chunk nominali che occorrono prima del pattern "e successive modificazioni"*/
-
-
-let FILIPPO = X_C
-	    with {       
-	          X = ALL,
-	          IF (X = N) {!"<OBBL-AZIONE>" (T,X)}
-	          }
-
-/*per eliminare dall'analisi tutti i chunk nominali che occorrono prima del pattern "e successive modificazioni"*/
-
-
-let ALE = X_C
-	    with {       
-	          X = ALL,
-	          IF (X = N) {!"<DIV-AZIONE>" (T,X)}
-	          }
-
-/*per eliminare dall'analisi tutti i chunk nominali che occorrono prima del pattern "e successive modificazioni"*/
-
-
-let PIERO = X_C
-	    with {       
-	          X = ALL,
-	          IF (X = I) {!"<DIV-AZIONE>" (T,X)}
-	          }
-
-/*per eliminare dall'analisi tutti i chunk nominali che occorrono prima del pattern "e successive modificazioni"*/
-
-
-let NOME = X_C
-	    with {       
-	          X = N|NA,
-		  "PERM-AZIONE" (T,X)
-	          }
-	          
-/*per eliminare dall'analisi tutti i chunk nominali che occorrono prima del pattern "e successive modificazioni"*/
-
-
-let ADJECTIVE = X_C
-	    with {       
-	          X = ALL,
-		  IF (X = ADJ) {X.potgov != "solo"}
-	          }
-
-/*per eliminare dall'analisi tutti i chunk nominali che occorrono prima del pattern "e successive modificazioni"*/
-
-let NONOBBL = BE_C;X_C*;COORD_C
-	    with {       
-	          BE.potgov = "tenuto"|"obbligato"|"soggetto",
-	          BE.premodif = "non",
-	          X = NOMA,
-	          COORD.conjtype = "ma"
-	          }
-
-/*per eliminare dall'analisi tutti i chunk nominali che occorrono prima del pattern "e successive modificazioni"*/
-
-let NONOUN = X_C
-	    with {       
-	          X = ALL,
-	          IF (X = N) {!"<ABR-NORMA>" (T,X)}
-	          }
-
-/*per eliminare dall'analisi tutti i chunk nominali che occorrono prima del pattern "e successive modificazioni"*/
-
-let NOPOS = X_C
-	    with {       
-	          X = ALL,
-	          IF (X = N) {!"<ABR-POSIZIONE>" (T,X)}
-	          }
-
-/*per eliminare dall'analisi tutti i chunk nominali che occorrono prima del pattern "e successive modificazioni"*/
-
-let NOPOSSI = X_C
-	    with {       
-	          X = ALL,
-	          IF (X = N) {!"<SOST-POSIZIONE>" (T,X)}
-	          }
-
-/*per eliminare dall'analisi tutti i chunk nominali che occorrono prima del pattern "e successive modificazioni"*/
-
-let NOPREP = X_C
-	    with {       
-	          X = ALL,
-	          IF (X = P) {!"<PERM-AZIONE>" (Y,X)}
-	          }
-
-/*per eliminare dall'analisi tutti i chunk nominali che occorrono prima del pattern "e successive modificazioni"*/
-
-let NOPI = X_C
-	    with {       
-	          X = ALL,
-	          IF (X = P) {!"<INT-NORMA>" (Y,X)}
-	          }
-
-/*per eliminare dall'analisi tutti i chunk nominali che occorrono prima del pattern "e successive modificazioni"*/
-
-let NOSUBORD = X_C
-	    with {       
-	          X = ALL,
-	          IF (X = SUBORD) {!"<INT-POSIZIONE>" (Y,X)}
-	          }	          
-	          
-/*per eliminare dall'analisi tutti i chunk nominali che occorrono prima del pattern "e successive modificazioni"*/
-
-let NOPREPQUOTE = X_C
-	    with {       
-	          X = ALL,
-	          IF (X = P) {X.prep != "per"}
-	          }
-
-
-/*per eliminare dall'analisi i chunk "o con X" nella pena delle sanzioni"*/
-
-let OCON = X_C;P_C
-	    with {
-	    	  X = COORD|SUBORD,
-	    	  IF (X = COORD) {X.conjtype = "o"|"e"},
-	    	  IF (X = SUBORD) {X.conjtype = "nonche'"},
-	          P.prep = "con"
-	          }
-
-/*per eliminare dall'analisi i chunk "o, se ..., con X" nella pena delle sanzioni"*/
-
-let OCONSE = COORD_C;SUBORD_C;X_C*;P_C
-	    with {       
-	          COORD.conjtype = "o"|"e",
-	          SUBORD.conjtype = "se",
-	          X = ALL,
-	          IF (X = P) {X.prep != "con"},
-	          P.prep = "con"
-	          }
-
-/*per eliminare dall'analisi i chunk del pattern "salvo che il fatto non costituisca più grave reato" nelle sanzioni"*/
-
-let SALVOCHE = FV_C1;CHE_C;N_C1;FV_C2;NA_C;N_C2
-	    with {       
-		  FV1.potgov = "salvare",
-	          N1.potgov = "fatto",
-	          FV2.potgov = "costituire",
-	          NA.potgov = "grave",
-	          N2.potgov = "reato"
-	          }
-
-/*per eliminare dall'analisi i chunk del pattern "salvo che il fatto non costituisca più grave reato" nelle sanzioni"*/
-
-let SALVOQUANTO = P_C1;P_C2;ADJ_C
-	    with {       
-		  P1.potgov = "previsto"|"indicato",
-	          P1.prep = "salvo",
-		  P1.det = "quanto",
-	          P2.potgov = "comma"|"articolo"
-	          }
-
-/*per eliminare dall'analisi il chunk "essendovi tenuto" nelle sanzioni"*/
-
-let ESSENDOVI = BE_C
-	    with {       
-		  BE.aux = "essere",
-	          BE.potgov = "tenere"
-	          }
-
-/*per il quoted*/
-
-let QUOTE = X_C
-	    with {
-	           X = ALL,
-	           IF (X != CHE|U)
-			{ X.quote = quoted }
-	           }
-
-
-/*per saltare il virgolettato, quando questo è un unico chunk*/
-
-let VIRGOLETA = PUNC_C;X_C
-	    with {
-	           PUNC.punctype = ":",
-	           PUNC.quote = open close,
-	           X = ALL
-	    	   }
-
-/*per saltare il virgolettato, quando questo è un unico chunk*/
-
-let VIRGOLETANP = X_C
-	    with {
-	           X = ALL,
-	           X.quote = open close
-	    	   }
-
-/*per saltare il virgolettato, quando questo è rappresentato da più chunks*/
-
-let VIRGOLETB = PUNC_C;X_C*;Z_C
-	    with {
-	           PUNC.punctype = ":",
-	           PUNC.quote = open,
-	           X = QUOTE,
-	           Z != COORD,
-	           Z.quote = close
-	    	   }
-
-/*per saltare il virgolettato, quando questo è rappresentato da più chunks*/
-
-let VIRGOLETBNP = Y_C;X_C*;Z_C
-	    with {
-	           Y.quote = open,
-	           X = QUOTE,
-	           Z != COORD,
-	           Z.quote = close
-	    	   }
-
-/*per saltare il virgolettato, quando questo è rappresentato da più chunks e la penultima parola è un COORD*/
-
-let VIRGOLETBB = PUNC_C;X_C*;Z_C;T_C
-	    with {
-	           PUNC.punctype = ":",
-	           PUNC.quote = open,
-	           X = QUOTE,
-	           Z = COORD,
-	           Z.quote = close,
-	           T = ALL
-	    	   }
-
-/*per saltare il virgolettato, quando questo è rappresentato da più chunks e la penultima parola è un COORD*/
-
-let VIRGOLETBBNP = Y_C;X_C*;Z_C;T_C
-	    with {
-	           Y.quote = open,
-	           X = QUOTE,
-	           Z = COORD,
-	           Z.quote = close,
-	           T = ALL
-	    	   }
-
-/*per saltare il virgolettato, quando questo segue la congiunzione "e" ed è rappresentato da più chunks*/
-
-let VIRGOLETC = X_C*;Z_C
-	    with {
-	           X = QUOTE,
-	           Z = ALL,
-	           Z.quote = close
-	           }
 
 /*per saltare il virgolettato, quando questo è a fine frase*/
-
-let VIRGOLETD = X_C*;PUNC_C
-	    with {
-	           X = ALL,
-	           PUNC.punctype = ".",
-	           PUNC.quote = open
-	    	   }
-	    	   
-/*per saltare il virgolettato, quando questo è a fine frase*/
-
-let NOPROFITTO = P_C1;I_C1;P_C2;COORD_C1;P_C3;FV_C;COORD_C2;I_C2;P_C4;N_C
-	    with {
-	           P1.prep = "a",
-	           P1.potgov = "fine",
-	           I1.prep = "di",
-	           I1.potgov = "trarre",
-	           P2.prep = "per",
-	           P2.potgov = "se'",
-	           COORD1.conjtype = "o",
-	           P3.prep = "per",
-	           P3.potgov = "altro",
-	           FV.potgov = "profittare",
-	           COORD2.conjtype = "o",
-	           I2.prep = "di",
-	           I2.potgov = "recare",
-	           P4.prep = "ad",
-	           P4.potgov = "altro",
-	           N.potgov = "danno"
-	    	   }	    	  
-	    	   
-/*per saltare il virgolettato, quando questo è a fine frase*/
-
-let NOBE = X_C
-	    with {
-	           X = ALL,
-	           IF (X = BE) {X.potgov != "sopprimere"}
-	           }
-	           
-/*per saltare il virgolettato, quando questo è a fine frase*/
-
-let ESCA = X_C
-	    with {
-	           X = ALL,
-	           IF (X = P) {!"<INT-POSIZIONE>" (T,X)}
-	           }	    	  
-	           
-/*per saltare il virgolettato, quando questo è a fine frase*/
-
-let NOCOORD = X_C
-	    with {
-	           X = ALL,
-	           IF (X = COORD) {!"<SOST-NOVELLATOb>"|"<SOST-NOVELLAb>" (T,X)}
-	           }	 	       	    	   
-
-/*per saltare il virgolettato, quando questo è a fine frase*/
-
-let SALSA = X_C
-	    with {
-	           X = ALL,
-	           IF (X = P) {!"<SOST-POSIZIONE>" (T,X)}
-	           }	         
-	         
-/*per saltare il virgolettato, quando questo è a fine frase*/
-
-let CHILI = X_C
-	    with {
-	           X = ALL,
-	           IF (X = N) {X.potgov != "b"|"B"|"c"|"C"|"d"|"D"|"f"|"F"|"g"|"G"|"h"|"H"|"i"|"I"|"l"|"L"|
-		   "m"|"M"|"n"|"N"|"p"|"P"|"q"|"Q"|"r"|"R"|"s"|"S"|"t"|"T"|"u"|"U"|"v"|"V"|"z"|"Z"}
-	           }	         	        
+   	  
+     	         	        
 
 /* let BORDOTIPO = "libro"|"parte"|"titolo"|"capo"|"sezione"|"articolo"|*/
 /*    "rubrica"|"comma"|"alinea"|"lettera"|"numero"|"punto"|"periodo"*/
 
-let BORDOTIPO = "capo"|"sezione"|"articolo"|"rubrica"|"comma"|"alinea"|"lettera"|"numero"|"punto"|"periodo"
+let BORDOTIPO = "capo"|"sezione"|"articolo"|"rubrica"|"comma"|"alinea"|"lettera"|"numero"|"punto"|"periodo"|"capoverso"
 
+
+
+
+/* */
+let NOVERB = X_C
+    	     with {
+	     	  X != FV|BE
+		 }
+
+/* */
+
+let ABROGAZIONE = "abrogare" | "sopprimere" | "eliminare"
+
+/* */
+
+let SOSTITUZIONE = "sostituire" | "modificare"
+
+/* */
+
+let INTEGRAZIONE = "aggiungere"|"inserire"
