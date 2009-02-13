@@ -72,9 +72,24 @@
 			</body>
 		</html>
 	</xsl:template>
+	
+	
+	<xsl:template match="text()">&#160;<xsl:value-of select="."/>&#160;</xsl:template>
+	
 
 	<xsl:template match="/*[name()='NIR']/*">	
 		<a name="{@id}">&#160;</a>
+		<xsl:choose>
+			<xsl:when test="@status = 'omissis'">
+				<div class="omissis">
+					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:if test="*[name()='rubrica']">
+						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
+					</xsl:if>
+				</div>
+			</xsl:when>
+			<xsl:otherwise>
+
 		<div>
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">		
@@ -106,11 +121,25 @@
 			</xsl:otherwise>
 		</xsl:choose>				
 		</div>
+		
+			</xsl:otherwise>			
+		</xsl:choose>
 	</xsl:template>		
 	
 
 	<xsl:template match="/*[name()='NIR']/*/*[name()='formulainiziale']">
 		<a name="{@id}">&#160;</a>
+		<xsl:choose>
+			<xsl:when test="@status = 'omissis'">
+				<div class="omissis">
+					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:if test="*[name()='rubrica']">
+						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
+					</xsl:if>
+				</div>
+			</xsl:when>
+			<xsl:otherwise>
+
 		<div class="formulainiziale">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
@@ -121,6 +150,10 @@
 			</xsl:otherwise>
 		</xsl:choose>				
 		</div>
+				
+			</xsl:otherwise>			
+		</xsl:choose>
+		
 		<hr/>
 	</xsl:template>
 	
@@ -168,6 +201,17 @@
 
 	<xsl:template match="//*[name()='titoloDoc']">
 		<a name="{@id}">&#160;</a>
+		<xsl:choose>
+			<xsl:when test="@status = 'omissis'">
+				<div class="omissis">
+					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:if test="*[name()='rubrica']">
+						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
+					</xsl:if>
+				</div>
+			</xsl:when>
+			<xsl:otherwise>
+
 		<div class="titoloDoc">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
@@ -178,11 +222,26 @@
 			</xsl:otherwise>
 		</xsl:choose>				
 		</div>
+		
+			</xsl:otherwise>			
+		</xsl:choose>
+		
 	</xsl:template>
 	
 	
 	<xsl:template match="//*[name()='preambolo']">
 		<a name="{@id}">&#160;</a>
+		<xsl:choose>
+			<xsl:when test="@status = 'omissis'">
+				<div class="omissis">
+					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:if test="*[name()='rubrica']">
+						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
+					</xsl:if>
+				</div>
+			</xsl:when>
+			<xsl:otherwise>
+
 		<div class="preambolo">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
@@ -193,6 +252,10 @@
 			</xsl:otherwise>
 		</xsl:choose>				
 		</div>
+				
+			</xsl:otherwise>			
+		</xsl:choose>
+		
 	</xsl:template>	
 	<!-- ======================================================== -->
 	<!--                                                          -->
@@ -202,6 +265,17 @@
 	
 	<xsl:template match="//*[name()='articolato'] | //*[name()='contenitore']">
 		<a name="{@id}">&#160;</a>
+		<xsl:choose>
+			<xsl:when test="@status = 'omissis'">
+				<div class="omissis">
+					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:if test="*[name()='rubrica']">
+						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
+					</xsl:if>
+				</div>
+			</xsl:when>
+			<xsl:otherwise>
+
 		<div width="100%">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
@@ -212,11 +286,26 @@
 			</xsl:otherwise>
 		</xsl:choose>				
 		</div>
+		
+			</xsl:otherwise>			
+		</xsl:choose>
+
 	</xsl:template>
 
 	<!-- ========================== 	LIBRO		============================== -->
 	<xsl:template match="//*[name()='libro']">
 		<a name="{@id}">&#160;</a>
+		<xsl:choose>
+			<xsl:when test="@status = 'omissis'">
+				<div class="omissis">
+					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:if test="*[name()='rubrica']">
+						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
+					</xsl:if>
+				</div>
+			</xsl:when>
+			<xsl:otherwise>
+
 		<div class="libro">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
@@ -227,11 +316,26 @@
 			</xsl:otherwise>
 		</xsl:choose>				
 		</div>
+		
+			</xsl:otherwise>			
+		</xsl:choose>
+
 	</xsl:template>
 
 	<!-- ========================== 	PARTE		============================== -->
 	<xsl:template match="//*[name()='parte']">
 		<a name="{@id}">&#160;</a>
+		<xsl:choose>
+			<xsl:when test="@status = 'omissis'">
+				<div class="omissis">
+					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:if test="*[name()='rubrica']">
+						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
+					</xsl:if>
+				</div>
+			</xsl:when>
+			<xsl:otherwise>
+
 		<div class="parte">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
@@ -242,11 +346,26 @@
 			</xsl:otherwise>
 		</xsl:choose>				
 		</div>
+		
+			</xsl:otherwise>			
+		</xsl:choose>
+
 	</xsl:template>
 
 	<!-- ========================== 	TITOLO		============================== -->
 	<xsl:template match="//*[name()='titolo']">
 		<a name="{@id}">&#160;</a>
+		<xsl:choose>
+			<xsl:when test="@status = 'omissis'">
+				<div class="omissis">
+					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:if test="*[name()='rubrica']">
+						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
+					</xsl:if>
+				</div>
+			</xsl:when>
+			<xsl:otherwise>
+
 		<div class="titolo">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
@@ -257,11 +376,26 @@
 			</xsl:otherwise>
 		</xsl:choose>				
 		</div>
+		
+			</xsl:otherwise>			
+		</xsl:choose>
+
 	</xsl:template>
 
 	<!-- ========================== 	SEZIONE		============================== -->
 	<xsl:template match="//*[name()='sezione']">
 		<a name="{@id}">&#160;</a>
+		<xsl:choose>
+			<xsl:when test="@status = 'omissis'">
+				<div class="omissis">
+					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:if test="*[name()='rubrica']">
+						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
+					</xsl:if>
+				</div>
+			</xsl:when>
+			<xsl:otherwise>
+
 		<div class="sezione">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
@@ -272,12 +406,27 @@
 			</xsl:otherwise>
 		</xsl:choose>				
 		</div>
+		
+			</xsl:otherwise>			
+		</xsl:choose>
+
 	</xsl:template>
 
 	<!-- ========================== 	CAPO	============================== -->
 	<xsl:template match="//*[name()='capo']">
 		<hr />
 		<a name="{@id}">&#160;</a>
+		<xsl:choose>
+			<xsl:when test="@status = 'omissis'">
+				<div class="omissis">
+					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:if test="*[name()='rubrica']">
+						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
+					</xsl:if>
+				</div>
+			</xsl:when>
+			<xsl:otherwise>
+
 		<div class="capo">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
@@ -288,6 +437,10 @@
 			</xsl:otherwise>
 		</xsl:choose>				
 		</div>
+		
+			</xsl:otherwise>			
+		</xsl:choose>
+
 	</xsl:template>
 	
 	<!-- ========================== 	RUBRICA	 	============================== -->
@@ -315,6 +468,17 @@
 	
 	<xsl:template match="//*[name()='articolo']">
 		<a name="{@id}">&#160;</a>
+		<xsl:choose>
+			<xsl:when test="@status = 'omissis'">
+				<div class="omissis">
+					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:if test="*[name()='rubrica']">
+						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
+					</xsl:if>
+				</div>
+			</xsl:when>
+			<xsl:otherwise>
+
 		<div class="articolo">
 			<xsl:choose>
 				<xsl:when test="$datafine!=''">
@@ -325,12 +489,27 @@
 				</xsl:otherwise>
 			</xsl:choose>				
 		</div>
+		
+			</xsl:otherwise>			
+		</xsl:choose>
+
 	</xsl:template>
 	
 	<!-- =========================	COMMA e sotto comma	=============================== -->
 
 	<xsl:template match="//*[name()='comma']">
 		<a name="{@id}">&#160;</a>
+		<xsl:choose>
+			<xsl:when test="@status = 'omissis'">
+				<div class="omissis">
+					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:if test="*[name()='rubrica']">
+						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
+					</xsl:if>
+				</div>
+			</xsl:when>
+			<xsl:otherwise>
+
 		<p class="comma">
 			<xsl:choose>
 				<xsl:when test="$datafine!=''">
@@ -341,6 +520,10 @@
 				</xsl:otherwise>
 			</xsl:choose>				
 		</p>
+		
+			</xsl:otherwise>			
+		</xsl:choose>
+
 	</xsl:template>
 
 	<xsl:template match="//*[name()='num']">
@@ -355,7 +538,18 @@
 	</xsl:template>
 	<!-- =========================	EL , EN , EP	=============================== -->
 	<xsl:template match="//*[name()='el'] | //*[name()='en'] | //*[name()='ep']">
-	<a name="{@id}">&#160;</a>
+		<a name="{@id}">&#160;</a>
+		<xsl:choose>
+			<xsl:when test="@status = 'omissis'">
+				<div class="omissis">
+					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:if test="*[name()='rubrica']">
+						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
+					</xsl:if>
+				</div>
+			</xsl:when>
+			<xsl:otherwise>
+
 	<p class="{local-name()}">
 		<xsl:choose>
 			<xsl:when test="$datafine!=''">
@@ -366,11 +560,25 @@
 			</xsl:otherwise>
 		</xsl:choose>				
 	</p>			
+		
+			</xsl:otherwise>			
+		</xsl:choose>
 
 	</xsl:template>
 	
 	<xsl:template match="//*[name()='corpo']">
 		<a name="{@id}">&#160;</a>
+		<xsl:choose>
+			<xsl:when test="@status = 'omissis'">
+				<div class="omissis">
+					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:if test="*[name()='rubrica']">
+						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
+					</xsl:if>
+				</div>
+			</xsl:when>
+			<xsl:otherwise>
+
 		<!--	div class="corpo">	
 		<xsl:choose>		
 			<xsl:when test="$datafine!=''">
@@ -382,10 +590,25 @@
 		</xsl:choose>
 		</div	-->			
 		<xsl:apply-templates/>			
+		
+			</xsl:otherwise>			
+		</xsl:choose>
+
 	</xsl:template>
 	
 	<xsl:template match="//*[name()='alinea']">
 		<a name="{@id}">&#160;</a>
+		<xsl:choose>
+			<xsl:when test="@status = 'omissis'">
+				<div class="omissis">
+					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:if test="*[name()='rubrica']">
+						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
+					</xsl:if>
+				</div>
+			</xsl:when>
+			<xsl:otherwise>
+
 		<!--	div class="alinea">
 		<xsl:choose>		
 			<xsl:when test="$datafine!=''">
@@ -397,6 +620,10 @@
 		</xsl:choose>
 		</div	-->	
 		<xsl:apply-templates/>
+		
+			</xsl:otherwise>			
+		</xsl:choose>
+
 	</xsl:template>
 	
 	<!-- ======================================================== -->
@@ -407,6 +634,17 @@
 	
 	<xsl:template match="//*[name()='mod']">
 		<a name="{@id}">&#160;</a>
+		<xsl:choose>
+			<xsl:when test="@status = 'omissis'">
+				<div class="omissis">
+					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:if test="*[name()='rubrica']">
+						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
+					</xsl:if>
+				</div>
+			</xsl:when>
+			<xsl:otherwise>
+
 		<span class="mod">
 	        <xsl:choose>		
 			<xsl:when test="$datafine!=''">
@@ -417,11 +655,25 @@
 			</xsl:otherwise>
 			</xsl:choose>
 		</span>
+		
+			</xsl:otherwise>			
+		</xsl:choose>
+
 	</xsl:template> 
 		
 	<xsl:template match="//*[name()='virgolette']">
 		<a name="{@id}">&#160;</a>
-		
+		<xsl:choose>
+			<xsl:when test="@status = 'omissis'">
+				<div class="omissis">
+					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:if test="*[name()='rubrica']">
+						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
+					</xsl:if>
+				</div>
+			</xsl:when>
+			<xsl:otherwise>
+
 		<xsl:choose>
 		<xsl:when test="@tipo='struttura'">
 	   		<table><tr><td class="virgolette">
@@ -434,6 +686,10 @@
 			</span>	
 		</xsl:otherwise>
 		</xsl:choose>
+		
+			</xsl:otherwise>			
+		</xsl:choose>
+
 	</xsl:template>
 	
 	<xsl:template match="//*[name()='nome']">
@@ -504,6 +760,17 @@
 	<!-- ======================================================== -->
 	<xsl:template match="//*[name()='formulafinale']">
 		<a name="{@id}">&#160;</a>
+		<xsl:choose>
+			<xsl:when test="@status = 'omissis'">
+				<div class="omissis">
+					<xsl:apply-templates select="*[name()='num']"/><xsl:text> ( Omissis )</xsl:text>
+					<xsl:if test="*[name()='rubrica']">
+						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
+					</xsl:if>
+				</div>
+			</xsl:when>
+			<xsl:otherwise>
+
 		<div class="formulafinale">
 		<hr/>
 		<xsl:choose>
@@ -515,6 +782,10 @@
 			</xsl:otherwise>
 		</xsl:choose>				
 		</div>		
+		
+			</xsl:otherwise>			
+		</xsl:choose>
+
 	</xsl:template>
 	
 	<xsl:template match="//*[name()='conclusione']">
@@ -682,8 +953,7 @@
 			<xsl:apply-templates/>
 		</xsl:element>
 	</xsl:template>
-
-
+	
 	<xsl:template match="@*">
 		<xsl:attribute name="{local-name()}"><xsl:value-of select="."/></xsl:attribute>
 	</xsl:template>
@@ -1340,5 +1610,5 @@
 		</xsl:for-each>
 	 </p>		
 	</xsl:template>
-
+	
 </xsl:stylesheet>
