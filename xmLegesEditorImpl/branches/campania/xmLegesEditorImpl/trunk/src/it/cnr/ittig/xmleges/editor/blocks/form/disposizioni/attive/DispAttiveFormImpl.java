@@ -287,6 +287,7 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 			interoAtto.setSelected(true);
 			decorrenzaForm.initForm(nodoAttivo);
 			riferimentoForm.initForm(nodoAttivo);
+			delimitatoreForm.setDelimitatore();
 			//se ho metadati per questo MOD, li setto.
 			modificoMetaEsistenti = trovaMeta(nodoAttivo);
 			if (modificoMetaEsistenti != null)

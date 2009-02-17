@@ -79,6 +79,10 @@ public class DelimitatoreFormImpl implements DelimitatoreForm, Loggable, Service
 		this.logger = logger;
 	}
 
+	public void setDelimitatore() {
+		initForm(new String[0]);
+	}
+	
 	public String[] getDelimitatore() {
 
 		for (int i=4; i>=0; i--) {
