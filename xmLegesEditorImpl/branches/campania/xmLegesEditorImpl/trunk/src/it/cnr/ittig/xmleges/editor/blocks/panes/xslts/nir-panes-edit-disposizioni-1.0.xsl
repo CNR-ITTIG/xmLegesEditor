@@ -227,7 +227,7 @@
 	  </xsl:when>
 	  <xsl:otherwise>
 		  <xsl:if test="*[name()='dsp:pos']">
-			<font color="Black"> - parole= </font>
+			<font color="Black">; contenuto= </font>
 		  	<font color="Blue">
 			<xsl:value-of select="$idNovellando"/>
 			<xsl:text> ( </xsl:text>
