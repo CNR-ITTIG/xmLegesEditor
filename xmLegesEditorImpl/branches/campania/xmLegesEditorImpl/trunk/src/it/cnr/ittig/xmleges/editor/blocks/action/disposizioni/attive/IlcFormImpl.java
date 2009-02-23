@@ -414,6 +414,7 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 			Node nuovoMeta = domDisposizioni.setDOMDispAttive(false, modificoMetaEsistenti, "#"+idMod, operazioneIniziale, completa, condizionata, decorrenza, idevento, urn, partizione, delimitatori);
 			
 		//setmeta di novella
+			String tipoNovella = null;
 			Node novellaIlc = UtilDom.findRecursiveChild(metaIlc,"dsp:novella");
 			if (novellaIlc!=null) {
 				String posizione = null;
@@ -435,11 +436,12 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 					}			
 				}
 				
-				String tipo = UtilDom.getAttributeValueAsString(UtilDom.findRecursiveChild(novellaIlc,"ittig:tipo"), "valore");
+				tipoNovella = UtilDom.getAttributeValueAsString(UtilDom.findRecursiveChild(novellaIlc,"ittig:tipo"), "valore");
 				posIlc = UtilDom.findRecursiveChild(novellaIlc,"dsp:pos");
 				String virgolettaContenuto = UtilDom.getAttributeValueAsString(posIlc, "xlink:href");
+
 	
-				domDisposizioni.setDOMNovellaDispAttive(nuovoMeta, virgolettaContenuto, tipo, posizione, virgolettaA, virgolettaB);
+				domDisposizioni.setDOMNovellaDispAttive(nuovoMeta, virgolettaContenuto, tipoNovella, posizione, virgolettaA, virgolettaB);
 			}
 		
 		//setmeta di novellando
@@ -476,7 +478,9 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 				if ("parole".equals(tipoPartizione)) {
 					parole=true;
 					tipoPartizione = "parole";
-				}
+				} else if (tipoNovella != null)
+					tipoPartizione = tipoNovella;
+				
 				domDisposizioni.setDOMNovellandoDispAttive(nuovoMeta, parole, tipoPartizione, tipo, ruoloA, virgolettaA, ruoloB, virgolettaB);
 			}
 			
