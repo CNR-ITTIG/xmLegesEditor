@@ -457,11 +457,14 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 			
 			Node nuovoMeta = domDisposizioni.setDOMDispAttive(implicita.isSelected(), modificoMetaEsistenti, modCorrente, operazioneIniziale, completa, decorrenzaForm.isDecorrenzaCondizionata(), termine, idevento, atto.getText(), partizione.getText(), delimitatoreForm.getDelimitatore());
 			
+			String tipoNovella = null;
 			if (operazioneIniziale!=ABROGAZIONE)
-				novellaForm.setMeta(nuovoMeta);
+				tipoNovella = novellaForm.setMeta(nuovoMeta);
 			if (operazioneIniziale!=INTEGRAZIONE) {
 				String tipo = null;
-				if (interoAtto.isSelected())
+				if (tipoNovella!=null)					
+					tipo = tipoNovella;
+				else if (interoAtto.isSelected())
 					tipo = "atto";
 				else {
 					tipo = partizione.getText();
