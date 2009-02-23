@@ -27,5 +27,5 @@ public interface NovellaForm extends Service {
 	 */
 	public void openForm(FormClosedListener listener, Node meta);
 
-	public void setMeta(Node meta);
+	public String setMeta(Node meta);
 }
