@@ -134,11 +134,15 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 			Node nuovaUrn = utilRulesManager.getNodeTemplate(doc,"urn");
 			UtilDom.setAttributeValue(nuovaUrn, "valore", urnVersione);
 			UtilDom.setAttributeValue(nuovaUrn, "iniziovigore", eventoVigore.getId());
+			Node alias = UtilDom.findRecursiveChild(activeMeta,"alias");
 			Node materie = UtilDom.findRecursiveChild(activeMeta,"materie");
-			if (materie==null)
-				descrittoriNode.appendChild(nuovaUrn);
-			else
-				descrittoriNode.insertBefore(nuovaUrn, materie); 
+			if (alias!=null)
+				descrittoriNode.insertBefore(nuovaUrn, alias); 
+			else			
+				if (materie!=null)
+					descrittoriNode.insertBefore(nuovaUrn, materie); 
+				else					
+					descrittoriNode.appendChild(nuovaUrn);
 		}
 				
 		return true;
