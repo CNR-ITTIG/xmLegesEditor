@@ -178,7 +178,7 @@
 			<xsl:value-of select="id($idPosizione)"/>
 		</xsl:variable>
 		<font color="Blue">
-			<xsl:value-of select="idPosizione"/>
+			<xsl:value-of select="$idPosizione"/>
 			<xsl:text> ( </xsl:text>
 			<xsl:choose>
 				<xsl:when test="string-length($testoPosizione)>30">
