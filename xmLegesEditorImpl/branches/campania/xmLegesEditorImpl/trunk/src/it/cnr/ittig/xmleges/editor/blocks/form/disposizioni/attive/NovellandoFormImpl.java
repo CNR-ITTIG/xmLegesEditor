@@ -15,7 +15,6 @@ import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.FormClosedListener;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
-import it.cnr.ittig.xmleges.core.util.date.UtilDate;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.disposizioni.Disposizioni;
 import it.cnr.ittig.xmleges.editor.services.form.disposizioni.attive.NovellandoForm;
@@ -28,7 +27,6 @@ import java.util.EventObject;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -37,7 +35,6 @@ import javax.swing.JLabel;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import sun.rmi.runtime.GetThreadPoolAction;
 
 /**
  * <h1>Implementazione del servizio

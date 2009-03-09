@@ -15,8 +15,6 @@ import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.FormClosedListener;
 import it.cnr.ittig.xmleges.core.services.i18n.I18n;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
-import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
-import it.cnr.ittig.xmleges.core.util.date.UtilDate;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.dom.disposizioni.Disposizioni;
 import it.cnr.ittig.xmleges.editor.services.form.disposizioni.attive.NovellaForm;
@@ -26,7 +24,6 @@ import it.cnr.ittig.xmleges.editor.services.form.disposizioni.attive.VirgolettaF
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.EventObject;
-import java.util.StringTokenizer;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -195,7 +192,7 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 	
 	private void setTipo() {
 		tipo.removeAllItems();
-		String[] scelteTipo = new String[] {"allegato","libro","parte","titolo","capo","sezione","articolo","comma","lettera","numero","punto","rubrica","alinea","coda","periodo","parole"};
+		String[] scelteTipo = new String[] {"allegato","libro","parte","titolo","capo","sezione","articolo","comma","lettera","numero","punto","rubrica","alinea","coda","periodo","capoverso","parole"};
 		int numDelimitatori = disposizioni.getDelimitatori().length;
 		int da = 0;
 		String partizioneMenoGenerica;
