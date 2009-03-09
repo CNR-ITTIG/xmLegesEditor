@@ -32,8 +32,8 @@
 					    <xsl:text> Disposizioni attive </xsl:text>
 					</xsl:element>
 					<br/>
-					<xsl:for-each select="//*[name()='mod']">
-						<xsl:apply-templates select="./.." />
+					<xsl:for-each select="//*[name()!='mmod']/*[name()='mod'] | //*[name()='mmod']">
+							<xsl:apply-templates select="./.." />
 					</xsl:for-each>			
 				</xsl:when>	
 				<xsl:otherwise>
@@ -55,7 +55,28 @@
     </html>
 </xsl:template>
 
-<xsl:template match="*[name()='mod']">
+<xsl:template match="*[name()='mmod']">
+	<br/>
+	<xsl:text> Modifica multipla </xsl:text>
+	<br/>
+	<xsl:for-each select="*[name()='mod']">
+		<xsl:variable name="id">#<xsl:value-of select="@id"/></xsl:variable>
+		<xsl:choose>
+			<xsl:when test="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modificheattive']/*/*[name()='dsp:pos'][@xlink:href=$id]">
+				<xsl:apply-templates select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modificheattive']/*/*[name()='dsp:pos'][@xlink:href=$id]/.."/>
+			</xsl:when>
+			<xsl:otherwise>
+				<div><font color="Green">Non sono disponibili informazioni nei metadati</font></div><br/>
+			</xsl:otherwise>
+		</xsl:choose>		
+	</xsl:for-each>
+	<font bgcolor="#FFDD88">
+		<xsl:call-template name="modclassico" />
+	</font>
+	<br/><br/><hr width="30%" align="center"/>
+</xsl:template> 
+
+<xsl:template match="*[name()!='mmod']/*[name()='mod']">
 	<br/>
 	<xsl:variable name="id">#<xsl:value-of select="@id"/></xsl:variable>
 	<xsl:choose>
@@ -66,7 +87,9 @@
 			<div><font color="Green">Non sono disponibili informazioni nei metadati</font></div><br/>
 		</xsl:otherwise>
 	</xsl:choose>		
-	<xsl:call-template name="modclassico" />
+	<font bgcolor="#FFDDAA">
+		<xsl:call-template name="modclassico" />
+	</font>
 	<br/><br/><hr width="30%" align="center"/>
 </xsl:template> 
 
@@ -144,7 +167,9 @@
 	  </xsl:if>
 	  <br/>
 	</div>
-	<xsl:call-template name="modclassico" />
+	<font bgcolor="#FFDDAA">
+		<xsl:call-template name="modclassico" />
+	</font>
 </xsl:template> 
 
 
@@ -312,11 +337,9 @@
 </xsl:template> 
 
 <xsl:template name="modclassico">
-    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
-		<font bgcolor="#FFDDAA">
+    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">		
     		<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
         	<xsl:apply-templates />
-		</font>
     </xsl:element>
 </xsl:template> 
 

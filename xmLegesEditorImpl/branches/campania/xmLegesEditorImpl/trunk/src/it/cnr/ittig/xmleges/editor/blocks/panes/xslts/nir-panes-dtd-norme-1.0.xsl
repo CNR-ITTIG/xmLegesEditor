@@ -375,6 +375,15 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     </u></font>
 </xsl:template> 
 
+<xsl:template match="*[name()='mmod']">
+    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
+	<font bgcolor="#FFDD88">
+    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+        <xsl:apply-templates />
+	</font>
+    </xsl:element>
+</xsl:template> 
+
 <xsl:template match="*[name()='mod']">
     <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
 	<font bgcolor="#FFDDAA">

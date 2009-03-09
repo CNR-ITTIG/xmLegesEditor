@@ -647,6 +647,36 @@
 	<!--                                                          -->
 	<!-- ======================================================== -->
 	
+		<xsl:template match="//*[name()='mmod']">
+		<a name="{@id}">&#160;</a>
+		<xsl:choose>
+			<xsl:when test="@status = 'omissis'">
+				<div class="omissis">
+					<xsl:apply-templates select="*[name()='num']"/>
+					<xsl:if test="*[name()='rubrica']">
+						- <xsl:apply-templates select="*[name()='rubrica']/text()"/>
+					</xsl:if>
+					<xsl:text> ( Omissis )</xsl:text>
+				</div>
+			</xsl:when>
+			<xsl:otherwise>
+
+		<span class="mmod">
+	        <xsl:choose>		
+			<xsl:when test="$datafine!=''">
+				<xsl:call-template name="vigenza"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="multivigenza"/>
+			</xsl:otherwise>
+			</xsl:choose>
+		</span>
+		
+			</xsl:otherwise>			
+		</xsl:choose>
+
+	</xsl:template> 
+	
 	<xsl:template match="//*[name()='mod']">
 		<a name="{@id}">&#160;</a>
 		<xsl:choose>
