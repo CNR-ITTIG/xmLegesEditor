@@ -391,12 +391,12 @@ public class AggiornaIdFrozenLaw {
 				UtilDom.setIdAttribute(nodo, IDValue);
 				
 				//aggiorno le disposizioni
-				if (disposizioniPassiveId!= null && disposizioniPassiveId.contains(OldID))
+				if (disposizioniPassiveId!= null && disposizioniPassiveId.contains("#"+OldID))
 					if (!OldID.equals(IDValue))
-						updateDisposizionePassive(OldID, IDValue);
-				if (disposizioniAttiveId!= null && disposizioniAttiveId.contains(OldID))
+						updateDisposizionePassive("#"+OldID, "#"+IDValue);
+				if (disposizioniAttiveId!= null && disposizioniAttiveId.contains("#"+OldID))
 					if (!OldID.equals(IDValue))
-						updateDisposizioneAttive(OldID, IDValue);
+						updateDisposizioneAttive("#"+OldID, "#"+IDValue);
 				
 				if(logger.isDebugEnabled())
 				  logger.debug("idChanged: new  " + IDValue + " old " + OldID);
@@ -425,8 +425,10 @@ public class AggiornaIdFrozenLaw {
 		Node[] nuoveDisp = UtilDom.getElementsByTagName(doc,UtilDom.getElementsByTagName(doc,doc,"modificheattive")[0],"dsp:pos");
 		Node[] vecchieDisp = UtilDom.getElementsByTagName(doc,disposizioniAttive,"dsp:pos");
 		for (int i = 0; i < vecchieDisp.length; i++) {
-			if (oldID.equals(UtilDom.getAttributeValueAsString(vecchieDisp[i], "xlink:href")))
+			if (oldID.equals(UtilDom.getAttributeValueAsString(vecchieDisp[i], "xlink:href"))) {
 				UtilDom.setAttributeValue(nuoveDisp[i],"xlink:href",newID);
+				System.out.println(oldID + " --> " + newID);
+			}
 		}
 		disposizioniAttiveId.remove(oldID);
 	}
