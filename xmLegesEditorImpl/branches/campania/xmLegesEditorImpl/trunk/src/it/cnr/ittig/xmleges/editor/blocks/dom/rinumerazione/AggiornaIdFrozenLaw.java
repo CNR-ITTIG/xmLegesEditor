@@ -425,10 +425,8 @@ public class AggiornaIdFrozenLaw {
 		Node[] nuoveDisp = UtilDom.getElementsByTagName(doc,UtilDom.getElementsByTagName(doc,doc,"modificheattive")[0],"dsp:pos");
 		Node[] vecchieDisp = UtilDom.getElementsByTagName(doc,disposizioniAttive,"dsp:pos");
 		for (int i = 0; i < vecchieDisp.length; i++) {
-			if (oldID.equals(UtilDom.getAttributeValueAsString(vecchieDisp[i], "xlink:href"))) {
+			if (oldID.equals(UtilDom.getAttributeValueAsString(vecchieDisp[i], "xlink:href")))
 				UtilDom.setAttributeValue(nuoveDisp[i],"xlink:href",newID);
-				System.out.println(oldID + " --> " + newID);
-			}
 		}
 		disposizioniAttiveId.remove(oldID);
 	}
