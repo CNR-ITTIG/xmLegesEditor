@@ -32,9 +32,11 @@ public class AggiornaIdFrozenLaw {
 
 	NirUtilDom nirUtilDom;
 	
-	Vector disposizioniId;
+	Vector disposizioniPassiveId;
+	Vector disposizioniAttiveId;	
 	
-	Node disposizioni;
+	Node disposizioniPassive;
+	Node disposizioniAttive;
 
 	protected static final int LIBRO = 0;
 
@@ -161,12 +163,18 @@ public class AggiornaIdFrozenLaw {
 
 		//recupero id referenziati dalle disposizioni
 		try {
-			disposizioni = UtilDom.getElementsByTagName(doc,doc,"modifichepassive")[0].cloneNode(true);
-			disposizioniId = getDisposizioniIdFromDoc(UtilDom.getElementsByTagName(doc,doc,"modifichepassive")[0]);
+			disposizioniPassive = UtilDom.getElementsByTagName(doc,doc,"modifichepassive")[0].cloneNode(true);
+			disposizioniPassiveId = getDisposizioniIdFromDoc(UtilDom.getElementsByTagName(doc,doc,"modifichepassive")[0]);
 		} catch (Exception e) {
-			disposizioniId = null;
+			disposizioniPassiveId = null;
 		}
-			
+		try {
+			disposizioniAttive = UtilDom.getElementsByTagName(doc,doc,"modificheattive")[0].cloneNode(true);
+			disposizioniAttiveId = getDisposizioniIdFromDoc(UtilDom.getElementsByTagName(doc,doc,"modificheattive")[0]);
+		} catch (Exception e) {
+			disposizioniAttiveId = null;
+		}	
+		
 		// aggiornamento relativo alle note:
 		// le note vengono ordinate in base a come compaiono nel testo
 		Vector ndrId = getNdrIdFromDoc();
@@ -383,9 +391,12 @@ public class AggiornaIdFrozenLaw {
 				UtilDom.setIdAttribute(nodo, IDValue);
 				
 				//aggiorno le disposizioni
-				if (disposizioniId!= null && disposizioniId.contains(OldID))
+				if (disposizioniPassiveId!= null && disposizioniPassiveId.contains(OldID))
 					if (!OldID.equals(IDValue))
-						updateDisposizione(OldID, IDValue);
+						updateDisposizionePassive(OldID, IDValue);
+				if (disposizioniAttiveId!= null && disposizioniAttiveId.contains(OldID))
+					if (!OldID.equals(IDValue))
+						updateDisposizioneAttive(OldID, IDValue);
 				
 				if(logger.isDebugEnabled())
 				  logger.debug("idChanged: new  " + IDValue + " old " + OldID);
@@ -400,14 +411,24 @@ public class AggiornaIdFrozenLaw {
 		}
 	}
 
-	private void updateDisposizione(String oldID, String newID) {
+	private void updateDisposizionePassive(String oldID, String newID) {
 		Node[] nuoveDisp = UtilDom.getElementsByTagName(doc,UtilDom.getElementsByTagName(doc,doc,"modifichepassive")[0],"dsp:pos");
-		Node[] vecchieDisp = UtilDom.getElementsByTagName(doc,disposizioni,"dsp:pos");
+		Node[] vecchieDisp = UtilDom.getElementsByTagName(doc,disposizioniPassive,"dsp:pos");
 		for (int i = 0; i < vecchieDisp.length; i++) {
 			if (oldID.equals(UtilDom.getAttributeValueAsString(vecchieDisp[i], "xlink:href")))
 				UtilDom.setAttributeValue(nuoveDisp[i],"xlink:href",newID);
 		}
-		disposizioniId.remove(oldID);
+		disposizioniPassiveId.remove(oldID);
+	}
+	
+	private void updateDisposizioneAttive(String oldID, String newID) {
+		Node[] nuoveDisp = UtilDom.getElementsByTagName(doc,UtilDom.getElementsByTagName(doc,doc,"modificheattive")[0],"dsp:pos");
+		Node[] vecchieDisp = UtilDom.getElementsByTagName(doc,disposizioniAttive,"dsp:pos");
+		for (int i = 0; i < vecchieDisp.length; i++) {
+			if (oldID.equals(UtilDom.getAttributeValueAsString(vecchieDisp[i], "xlink:href")))
+				UtilDom.setAttributeValue(nuoveDisp[i],"xlink:href",newID);
+		}
+		disposizioniAttiveId.remove(oldID);
 	}
 	
 	private boolean isElementWithNum(Node node) {
