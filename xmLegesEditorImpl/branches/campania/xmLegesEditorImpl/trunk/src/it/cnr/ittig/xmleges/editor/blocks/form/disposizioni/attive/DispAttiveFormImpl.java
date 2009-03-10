@@ -215,8 +215,13 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 				decorrenza.setText(decorrenzaForm.getDecorrenza());
 		
 		if (e.getSource() == sceltaAtto) 
-			if (riferimentoForm.openForm())
-				atto.setText(riferimentoForm.getRiferimento());
+			if (riferimentoForm.openForm()) {
+				String temp = riferimentoForm.getRiferimento();
+				if (temp.indexOf("#")==-1)
+					atto.setText(temp);
+				else
+					atto.setText(temp.substring(0, temp.indexOf("#")));
+			}
 		
 		if (e.getSource() == sceltaPartizione) {
 			if (partizioniForm.openForm()) {
