@@ -354,7 +354,7 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 			virContenuto.setText("");
 			if (mod!=null) {
 				Node[] virgolette = UtilDom.getElementsByTagName(doc, mod, "virgolette");
-				if (virgolette!=null) {
+				if (virgolette.length >0) {
 					virContenuto.setText(UtilDom.getAttributeValueAsString(virgolette[virgolette.length-1],"id"));
 					for (int i=0; i<virgolette.length; i++)
 						if (href.equals(UtilDom.getAttributeValueAsString(virgolette[i], "id"))) {

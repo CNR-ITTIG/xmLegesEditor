@@ -556,9 +556,13 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 			token = st.nextToken();
 			if (dispari) {
 				dispari = false;
-				if (token.length()>3)
-					ret = ret + token.substring(0, 3).toLowerCase();
-				else ret = ret + token.toLowerCase();	//non dovrebbe capitare mai
+				//metto un caso particolare per Allegato X  che deve diventare allegato.x
+				if ("allegato".equals(token.toLowerCase()))
+					ret = ret + token.toLowerCase() + ".";
+				else
+					if (token.length()>3)
+						ret = ret + token.substring(0, 3).toLowerCase();
+					else ret = ret + token.toLowerCase();	//non dovrebbe capitare mai
 			}
 			else {
 				dispari = true;
