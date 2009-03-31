@@ -11,6 +11,8 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 
+import  it.cnr.ittig.xmleges.core.util.dom.UtilDom;
+
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMConfiguration;
 import org.w3c.dom.Document;
@@ -170,7 +172,7 @@ public class DOMWriter {
 		return this.expandEmptyTag;
 	}
 
-	
+
 	
 	/** Writes serialized Document */
 	public void write(String serializedDoc){
@@ -180,14 +182,6 @@ public class DOMWriter {
 	
 	
 
-	
-//	/** Serialize and Writes Node */
-//	public void write(Node node){
-//		fOut.print(UtilXslt.serializeXML(node,format,charEncoding));
-//		fOut.flush();
-//	}
-	
-	
 	/** Writes the specified node, recursively. */
 	public void write(Node node) {
 		if (node == null) {
@@ -253,7 +247,7 @@ public class DOMWriter {
 				// recupera sia gli attributi presenti nell'elemento
 				// che quelli dichiarati di tipo default dalla DTD.
 				// Il problema nasce dal fatto che non si preoccupa se
-				// nell'elemento l'attributo di tipo default gi? compariva
+				// nell'elemento l'attributo di tipo default gia' compariva
 				// In questo caso lo replica.
 				if (i > 0 && attrs[i].getNodeName().compareTo(attrs[i - 1].getNodeName()) == 0)
 					continue; // salta gli eventuali attributi doppioni
@@ -261,7 +255,10 @@ public class DOMWriter {
 					fOut.print(' ');
 					fOut.print(attr.getNodeName());
 					fOut.print("=\"");
-					normalizeAndPrint(attr.getNodeValue());
+					
+					Print(getNormalizedText(attr));
+					
+					//normalizeAndPrint(attr.getNodeValue());
 					fOut.print('"');
 				}
 			}
@@ -272,7 +269,7 @@ public class DOMWriter {
 
 				if (node.getChildNodes().getLength() == 1 && node.getFirstChild().getNodeType() == Node.TEXT_NODE) {
 					fOut.print('>');
-					normalizeAndPrint(getText(node.getFirstChild()));
+					Print(getNormalizedText(node.getFirstChild()));
 					fOut.print("</");
 					fOut.print(node.getNodeName());
 					if (isFormat())
@@ -306,9 +303,6 @@ public class DOMWriter {
 		}
 
 		case Node.ENTITY_REFERENCE_NODE: {
-			
-			System.out.println("***************   ENTITY FOUND");
-			
 			if (isCanonical()) {
 				for (Node child = node.getFirstChild(); child != null; child = child.getNextSibling())
 					write(child);
@@ -323,17 +317,18 @@ public class DOMWriter {
 
 		case Node.CDATA_SECTION_NODE: {
 			// modifica inserita da Alessio Ceroni: elimina dal nodo di
-			// testo
-			// i caratteri di spaziatura iniziali e finali
-			String text = getText(node);
+			// testo i caratteri di spaziatura iniziali e finali
+			
 
 			if (isCanonical()) {
+				String text = getNormalizedText(node);
 				if (text.length() > 0) {
 					addTabs();
-					normalizeAndPrint(text);
+					Print(text);
 					fOut.println();
 				}
 			} else {
+				String text = getText(node);
 				fOut.print("<![CDATA[");
 				fOut.print(text);
 				if (isFormat())
@@ -347,17 +342,16 @@ public class DOMWriter {
 
 		case Node.TEXT_NODE: {
 			// modifica inserita da Alessio Ceroni: elimina dal nodo di
-			// testo
-			// i caratteri di spaziatura iniziali e finali
+			// testo i caratteri di spaziatura iniziali e finali
+			String text = getNormalizedText(node);
 			if (format) {
-				String text = getText(node);
 				if (text.length() > 0) {
 					addTabs();
-					normalizeAndPrint(text);
+					Print(text);
 					fOut.println();
 				}
 			} else
-				normalizeAndPrint(node.getNodeValue());
+				Print(text);
 			fOut.flush();
 			break;
 		}
@@ -417,99 +411,108 @@ public class DOMWriter {
 
 	} // sortAttributes(NamedNodeMap):Attr[]
 
+	
 	//
 	// Protected methods
 	//
-
-	/** Normalizes and prints the given string. */
-	protected void normalizeAndPrint(String s) {
-
-		int len = (s != null) ? s.length() : 0;
-		for (int i = 0; i < len; i++) {
-			char c = s.charAt(i);
-			fOut.print(c);
-			//normalizeAndPrint(c);
-		}
-	} // normalizeAndPrint(String)
-
-	/** Normalizes and print the given character. */
-	protected void normalizeAndPrintt(char c) {
-
-		switch (c) {
-		case '<': {
-			fOut.print("&lt;");
-			break;
-		}
-		case '>': {
-			fOut.print("&gt;");
-			break;
-		}
-		case '&': {
-			fOut.print("&amp;");
-			break;
-		}
-		case '"': {
-			fOut.print("&quot;");
-			break;
-		}
-		case '\r':
-		case '\n': {
-			if (canonical) {
-				fOut.print("&#");
-				fOut.print(Integer.toString(c));
-				fOut.print(';');
-				break;
-			}
-			// else, default print char
-		}
-		default: {
-			fOut.print(c);
-		}
-		}
-
-	} // normalizeAndPrint(char)
 	
 	
-	protected String getText(Node node) {			
-		// era node.getNodeValue()
-		String ret = getSerializedText(node);	
-		return isTrimText() ? UtilLang.trimText(ret) : ret;
+	protected void Print(String s){
+		fOut.print(s);
 	}
 
 	
+//	/** Normalizes and prints the given string. */
+////	protected void normalizeAndPrint(String s) {
+////		
+////		fOut.print(s);
+////
+////		int len = (s != null) ? s.length() : 0;
+////		for (int i = 0; i < len; i++) {
+////			char c = s.charAt(i);
+////			normalizeAndPrint(c);
+////		}
+////	} // normalizeAndPrint(String)
+//	
+//
+//	/** Normalizes and print the given character. */
+//	protected void normalizeAndPrint(char c) {
+//
+//		switch (c) {
+//		case '<': {
+//			fOut.print("&lt;");
+//			break;
+//		}
+//		case '>': {
+//			fOut.print("&gt;");
+//			break;
+//		}
+//		case '&': {
+//			fOut.print("&amp;");
+//			break;
+//		}
+//		case '"': {
+//			fOut.print("&quot;");
+//			break;
+//		}
+//		case '\r':
+//		case '\n': {
+//			if (canonical) {
+//				fOut.print("&#");
+//				fOut.print(Integer.toString(c));
+//				fOut.print(';');
+//				break;
+//			}
+//			// else, default print char
+//		}
+//		default: {
+//			fOut.print(c);
+//		}
+//		}
+//
+//	} // normalizeAndPrint(char)
 	
+	
+	protected String getNormalizedText(Node node) {			
+		String text = getSerializedText(node);	
+		return isTrimText() ? UtilLang.trimText(text) : text;
+	}
+	
+	protected String getText(Node node) {			
+		String text = node.getNodeValue();	
+		return isTrimText() ? UtilLang.trimText(text) : text;
+	}
+	
+	
+	/**
+	 * Per la serializzazione normalizzata dei nodi di testo si usa il serializer 
+	 * del package org.w3c.dom.ls che gestisce correttamente le entita'
+	 * 
+	 */
 	protected  String getSerializedText(Node node) {
-		
-		
+					
 		DOMImplementationRegistry registry = null;
 		
 		try {
 			registry = DOMImplementationRegistry.newInstance();
 		} catch (Exception e) {
-			e.printStackTrace();
+		    e.printStackTrace();
 			return null;
 		}
 		 
 		DOMImplementationLS impl = (DOMImplementationLS)registry.getDOMImplementation("LS");
-		
 		LSSerializer writer = impl.createLSSerializer();
-		
-		
 		DOMConfiguration domConfig = writer.getDomConfig();
 		
 		//domConfig.setParameter("namespaces",Boolean.FALSE); 
 		//domConfig.setParameter("namespace-declarations",Boolean.TRUE);
 		domConfig.setParameter("format-pretty-print",Boolean.TRUE);
 		domConfig.setParameter("xml-declaration",Boolean.FALSE);
-			
-		 return writer.writeToString(node);
-
-
+		return writer.writeToString(node);
+		
 	}
 
 	
-	
-
 	/**
 	 * Controlla se un elemento &egrave; vuoto.
 	 * 
