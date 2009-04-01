@@ -292,7 +292,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 <xsl:template match="nir:mod">
     <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
-	<font bgcolor="#FFDDAA">
+    <!--
+    	<font bgcolor="#FFDDAA">
+    	-->
+	<font bgcolor="#FF0000">
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
         <xsl:apply-templates />
 	</font>
@@ -303,7 +306,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	<xsl:choose>
 		<xsl:when test="@tipo='struttura'">
 			<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-		    	<font bgcolor="#FFEE99">
+				<font bgcolor="#FFFF00">
+		    	<!--
+		    	font bgcolor="#FFEE99"
+		    	-->
 		    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
 	    		<xsl:apply-templates />
 	    		</font>
