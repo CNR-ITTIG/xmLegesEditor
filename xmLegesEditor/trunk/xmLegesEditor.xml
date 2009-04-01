@@ -1307,6 +1307,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             <css   name="css-annessi"			file="xsl_test/nir-style-edit-annessi.css"     			startup="true" />
             <css   name="css-disposizioni"		file="xsl_test/nir-style-edit-disposizioni.css"     			startup="true" />
             <css   name="css-indice"			file="xsl_test/nir-style-edit-indice.css"     			startup="true" />
+            <css   name="css-rif"			    file="xsl_test/nir-style-edit-riferimenti.css"     			startup="true" />
             <css   name="css-meta"				file="xsl_test/nir-style-edit-meta.css"     			startup="true" />
             
             
@@ -1385,7 +1386,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             </pane>
             <pane name="editor.panes.riferimenti">
                 <xslt name="riferimenti"/>
-                <css name="css-nir"/>
+                <css name="css-rif"/>
             </pane>
             <pane name="editor.panes.rifincompleti">
                 <xslt name="rifincompleti"/>
