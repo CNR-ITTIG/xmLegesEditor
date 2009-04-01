@@ -138,9 +138,11 @@ nir-styles-dtd-globali
 <!-- ================================================================ CONCLUSIONE === -->
 <!-- ================================================================================ -->
 */
+
 .conclusione{
 	margin: 20 30;
 }
+
 .sottoscrizioni{
 	margin: 15 0 0 0;
 }
@@ -148,10 +150,20 @@ nir-styles-dtd-globali
 	margin: 5 0 0 0;
 }
 
-.firma {
-	font-size: 80%;
-	font-weight: bold;
+.firma{
+	font-size: 100%;
+	font-style: italic;
+	margin: 20 0;
 }
+
+<!-- era cosi xsl:choose>
+	   <xsl:when test="@tipo='visto'">
+				<xsl:attribute name="style">font-style: italic; margin: 20 0</xsl:attribute>
+			  </xsl:when>
+			  <xsl:otherwise>
+				<xsl:attribute name="style">margin: 20 0</xsl:attribute>
+			  </xsl:otherwise>
+		</xsl:choose-->	
 
 .dataeluogo {
 	font-style: italic;
@@ -180,7 +192,7 @@ nir-styles-dtd-globali
 }
 
 .testata{
-	background: #EEEEFF;
+	background-color: #EEEEFF;
     margin: 10 0 10 0;
 }
 
@@ -220,11 +232,13 @@ nir-styles-dtd-globali
 
 
 .mod {
-    bgcolor="#FFDDAA";    	
+    background-color: "#FFDDAA";    	
 } 
 
 .virgolette {
-	bgcolor = "#FFEE99";
+	margin: 5 25 5 25;
+	font-style: italic;
+	background-color: #FFEE99;
 }
 
 .def, .atto, .soggetto, .nir:ente, .data, .luogo, .valute, .importo {
