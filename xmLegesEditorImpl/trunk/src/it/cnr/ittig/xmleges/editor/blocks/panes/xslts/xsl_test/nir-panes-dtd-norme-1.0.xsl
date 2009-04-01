@@ -132,10 +132,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 <xsl:template match="nir:num">
 	<b>
-    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
-    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-        <xsl:apply-templates />
-    </xsl:element>
+	    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
+	    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+	        <xsl:apply-templates />
+	    </xsl:element>
     </b>
 </xsl:template>
 
@@ -282,41 +282,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 </xsl:template> 
 
 
-<!-- old -->
-
-<!--
-
-<xsl:template match="*[name()='virgolette']">
-	<xsl:choose>
-		<xsl:when test="@tipo='struttura'">
-			<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-		    	<xsl:attribute name="style">
-		            margin: 5 25 5 25;
-		            font-style: italic;
-		            background-color: #FFEE99;
-		        </xsl:attribute>
-		    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-	    		<xsl:apply-templates />
-	    	</xsl:element>
-		</xsl:when>
-		<xsl:otherwise>
-			<i>
-			<xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
-		    	<font bgcolor="#FFEE99">
-		    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-   		        <xsl:call-template name="vigenza"/>	
-	    		</font>
-		    	</xsl:element>
-			</i>
-		</xsl:otherwise>
-	</xsl:choose>
-</xsl:template>
-
--->
-
 <xsl:template match="nir:mod">
     <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
-	<font bgcolor="#FF0000">
+	<font bgcolor="#FFDDAA">
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
         <xsl:apply-templates />
 	</font>
@@ -326,27 +294,23 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <xsl:template match="nir:virgolette">
 	<xsl:choose>
 		<xsl:when test="@tipo='struttura'">
-			<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-				<font bgcolor="#FFFF00">
-		    		<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-	    			<xsl:apply-templates />
-	    		</font>
-	    	</xsl:element>
+		   <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
+		    		<xsl:call-template name="vigenza"/>	
+	       </xsl:element>
 		</xsl:when>
 		<xsl:otherwise>
-			<i>
+		   <i>
 			<xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
 		    	<font bgcolor="#FFEE99">
-   		        <xsl:call-template name="vigenza"/>	
+   		        	<xsl:call-template name="vigenza"/>	
 	    		</font>
-		    	</xsl:element>
-			</i>
+		    </xsl:element>
+		   </i>
 		</xsl:otherwise>
 	</xsl:choose>
 </xsl:template>
 
-<xsl:template match="
-	nir:def | nir:atto | nir:soggetto | nir:ente |
+<xsl:template match="nir:def | nir:atto | nir:soggetto | nir:ente |
 	nir:data | nir:luogo | nir:valute | nir:importo">
     <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
     	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />

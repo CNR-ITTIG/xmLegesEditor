@@ -121,6 +121,8 @@ nir-styles-dtd-globali
 }
 
 .num {
+	
+	font-weight: bold;
 }
 
 
@@ -235,11 +237,12 @@ nir-styles-dtd-globali
     background-color: "#FFDDAA";    	
 } 
 
-.virgolette {
-	margin: 5 25 5 25;
-	font-style: italic;
+
+.virgolette {	
 	background-color: #FFEE99;
+	margin: 5 25 5 25;
 }
+
 
 .def, .atto, .soggetto, .nir:ente, .data, .luogo, .valute, .importo {
  color:green;

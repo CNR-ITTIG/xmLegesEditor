@@ -53,10 +53,12 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 </xsl:template>
 
 <xsl:template match="nir:rubrica">
-		<xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
-	    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-    		<xsl:apply-templates  />
-	    </xsl:element>
+		<font color="blue">
+			<xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
+		    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+	    		<xsl:apply-templates  />
+		    </xsl:element>
+	    </font>
 </xsl:template>
 
 <xsl:template match="*"/>

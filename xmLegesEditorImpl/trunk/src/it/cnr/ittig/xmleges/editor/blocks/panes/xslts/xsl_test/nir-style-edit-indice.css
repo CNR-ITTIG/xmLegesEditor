@@ -5,7 +5,7 @@
 
 body {	margin-left: 5px;
 		font-family: "Verdana, Arial, Helvetica, sans-serif" ;
-		font-size: 12pt ;
+		font-size: 14pt ;
 		text-align:justify;}
 
 
@@ -18,14 +18,4 @@ body {	margin-left: 5px;
  	font-size: 100%;
  	font-weight: bold; 	 
 }
-.rubrica{
-	font-size: 50%;
-	color:blue;
-}
 
-.num{
-	font-size: 50%;
-}
-
-
-span {color: inherit}
