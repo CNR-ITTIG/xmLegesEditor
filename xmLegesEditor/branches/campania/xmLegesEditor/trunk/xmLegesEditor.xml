@@ -5,7 +5,7 @@
 File di composizione dell'applicazione xmLegesEditor.
 
 author       : Mirco Taddei
-version      : 2.0 rc10
+version      : 2.0 rc10.d
 copyright (C): 2004 - 2005
                Istituto di Teoria e Tecniche dell'Informazione Giuridica (ITTIG)
                Consiglio Nazionale delle Ricerche - Italy
@@ -278,8 +278,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <item action="edit.replace" />
                     <separator/>
                     <item action="edit.changedtd" />
-                    <separator/>
-                    <item action="edit.importdom" />
+                    <!--	separator/>
+                    <item action="edit.importdom" /	-->
                     <separator/>
                     <item action="edit.comment" />
                     <item action="edit.procinstr" />
@@ -356,6 +356,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <!-- separator /-->                    
   <!--		item action="tool.repository" /		-->
 					<item action="tool.ilc" />
+				    <item action="tool.multivigente" />
                 </menu>
                 <menu action="menu.editor.insert">
                     <item action="editor.insert.immagini" />
@@ -879,6 +880,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     />
 
     <component  activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.action.disposizioni.multivigente.CreaMultivigenteActionImpl"
+    />
+        
+    <component  activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.action.disposizioni.attive.DispAttiveActionImpl"
     />
 
@@ -1010,6 +1015,14 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <!--	component  lifestyle="singleton" activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.passive.VerificaDispPassiveFormImpl"
     /	-->
+
+    <component  lifestyle="pool"
+                class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.multivigente.CreaMultivigenteFormImpl"
+    />
+    
+    <component  lifestyle="pool"
+                class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.multivigente.PosizionamentoManualeFormImpl"
+    />
 
     <component  lifestyle="singleton" activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.attive.DispAttiveFormImpl"
