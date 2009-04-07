@@ -182,12 +182,13 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		return null;
 	}
 	
-	public boolean setDOMDisposizioni(String pos, String norma, String partizione, String novellando, String novella, String preNota, String autoNota, String postNota, boolean implicita, Evento eventoOriginale, Evento eventoVigore) {
+	public Node setDOMDisposizioni(String pos, String norma, String partizione, String novellando, String novella, String preNota, String autoNota, String postNota, boolean implicita, Evento eventoOriginale, Evento eventoVigore) {
 
 		Document doc = documentManager.getDocumentAsDom();
 
 		Node activeMeta = nirUtilDom.findActiveMeta(doc,null);
-
+		Node operazioneNode=null;
+		
 		//inserisco la disposizione
 		Node disposizioniNode = UtilDom.findRecursiveChild(activeMeta,"disposizioni");
 		if (disposizioniNode==null)
@@ -198,7 +199,6 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 			modifichepassiveNode = UtilDom.checkAndCreate(disposizioniNode, "modifichepassive");		
 		
 		Node metaAfter = getMetaAfter(modifichepassiveNode,novella, novellando);
-		Node operazioneNode;
 		if (!novellando.equals("#") && !novella.equals("#")) {	//sostituzione
 			operazioneNode = utilRulesManager.getNodeTemplate(doc,"dsp:sostituzione");
 			if (implicita)
@@ -245,7 +245,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		setTipoDocVigenza();
 		rinumerazione.aggiorna(doc);
 		
-		return true;
+		return operazioneNode;
 	}
 
 	private void setNorma(Node n, String pos, String norma, String partizione, String preNota, String autoNota, String postNota) {
@@ -381,6 +381,29 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 
 		return n;
 	}
+	
+	public Node makePartition(Node fratello, Node daInserire, VigenzaEntity vigenza) {
+		
+
+		try {
+//			if (prima)
+//				n = fratello.getParentNode().insertBefore(n, fratello);
+//			else
+				daInserire = fratello.getParentNode().insertBefore(daInserire, fratello.getNextSibling());
+			daInserire = setVigenza(daInserire, "", -1, -1, vigenza);
+		}
+		catch (DOMException e) {
+			logger.error("Errore inserimento nuova partizione ( " + daInserire.getLocalName() + " )");
+		}
+		
+		
+		//questo inseriva una ndr come notaDIvigenza
+		//makeNotaVigenza(n);
+
+		return daInserire;
+	}
+	
+
 	
 	public Node makeSpan(Node node, int posizione, VigenzaEntity vigenza, String testo) {
 
@@ -849,6 +872,17 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 	/*
 	 *   PARTE DISPOSIZIONI ATTIVE. 
 	 */
+	
+	public void removeDOMDispAttive(Node meta) {
+		
+//		Document doc = documentManager.getDocumentAsDom();		
+//		Node activeMeta = nirUtilDom.findActiveMeta(doc,null);
+//		Node disposizioniNode = UtilDom.findRecursiveChild(activeMeta,"disposizioni");
+//					
+//		UtilDom.findRecursiveChild(disposizioniNode,"modificheattive").removeChild(meta);
+		
+		meta.getParentNode().removeChild(meta);
+	}	
 	
 	public Node setDOMDispAttive(boolean implicita, Node metaDaModificare, String idMod, int operazioneIniziale, String completa, boolean condizione, String decorrenza, String idevento, String norma, String partizione, String[] delimitatori) {
 				

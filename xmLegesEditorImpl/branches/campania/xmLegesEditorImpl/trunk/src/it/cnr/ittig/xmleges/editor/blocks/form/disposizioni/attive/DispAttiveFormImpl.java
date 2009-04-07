@@ -97,6 +97,7 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 	JButton abrogazione;
 	JButton sostituzione;
 	JButton integrazione;
+	JButton eliminaMetadati;
 	JRadioButton interoAtto;
 	JRadioButton soloPartizione;
 	
@@ -168,6 +169,7 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 		sceltaAtto = (JButton) form.getComponentByName("editor.disposizioni.attive.atto.scelta");
 		sceltaPartizione = (JButton) form.getComponentByName("editor.disposizioni.attive.partizione.scelta");
 		sceltaDelimitatore = (JButton) form.getComponentByName("editor.disposizioni.attive.delimitatori.scelta");
+		eliminaMetadati = (JButton) form.getComponentByName("editor.disposizioni.attive.elimina.meta");
 		decorrenza = (JTextField) form.getComponentByName("editor.disposizioni.attive.decorrenza");
 		atto = (JTextField) form.getComponentByName("editor.disposizioni.attive.atto");
 		partizione = (JTextField) form.getComponentByName("editor.disposizioni.attive.partizione");
@@ -193,10 +195,17 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 		sceltaAtto.addActionListener(this);
 		sceltaPartizione.addActionListener(this);
 		sceltaDelimitatore.addActionListener(this);
+		eliminaMetadati.addActionListener(this);
 	}
 	
 	
 	public void actionPerformed(ActionEvent e) {
+		
+		if (e.getSource() == eliminaMetadati) {
+			listenerFormClosed = false;
+			domDisposizioni.removeDOMDispAttive(modificoMetaEsistenti);
+			form.close();
+		}
 		
 		if (e.getSource() == interoAtto) {
 			delimitatori.setEnabled(false);
@@ -299,6 +308,7 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 				recuperaMeta(modificoMetaEsistenti);
 			else {
 				metaPresente.setText("NB: metadati non presenti");
+				sceltaDelimitatore.setEnabled(false);
 				info.setText("Inserisci i metadati della modifica attiva:");
 				decorrenza.setText(decorrenzaForm.getDecorrenza());
 				atto.setText(riferimentoForm.getRiferimento());
@@ -325,6 +335,7 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 		if ("si".equals(UtilDom.getAttributeValueAsString(disposizione, "implicita")))
 			implicita.setSelected(true);
 		metaPresente.setText("NB: metadati già presenti (" + disposizione.getLocalName() + ")");
+		sceltaDelimitatore.setEnabled(true);
 		info.setText("Cambia i metadati della modifica attiva:");
 		//setto Decorrenza
 		Node termine = UtilDom.findRecursiveChild(disposizione,"dsp:termine");
