@@ -164,6 +164,13 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 						cercaMeta = UtilDom.getAttributeValueAsString(nodi[1], "id");
 					else
 						return null;
+				
+				//TODO: non ho ben chiaro perchè ma avvolte cercaMeta=null (ipotesi... manca id su certe 'partizioni' tipo Legge????)
+				//Per ora faccio un return null
+				if (cercaMeta==null)
+					return null;
+				
+				
 				NodeList disposizioni = modifichepassive.getChildNodes();
 				Node dispCorrente;
 				Node test;
