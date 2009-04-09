@@ -164,6 +164,8 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 	Node virgolettaDaEliminare;
 	
 	boolean primaModifica;
+	File lastPathFile = null;
+	File lastPathList = null;
 	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -229,10 +231,14 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		
 		if (e.getSource() == lista) {
 			//apro file lista.xml delle modifiche
-			fileChooser = new JFileChooser();
+			if (lastPathList!=null)
+				fileChooser = new JFileChooser(lastPathList);
+			else
+				fileChooser = new JFileChooser();
 			fileChooser.setFileFilter(new RegexpFileFilter("XML", ".*\\.xml"));
 			if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-
+				lastPathList = fileChooser.getCurrentDirectory();
+				
 				//spostare su apertura documento
 				urnDocumento = UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(docEditor,docEditor,"originale")[0], "xlink:href");
 				
@@ -311,14 +317,21 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			
 		if (e.getSource() == file) {
 			if ((attivo = apriFile())!=null) {
+				form.setDialogWaiting(true);
 				vecchieModifiche = getPosLista();
 				docAttivo = parsa(attivo);
 				//effettuo un test per vedere se la norma aperta è quella che mi aspettavo
+				try {
 				if (!urnAttivo.equals(UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(docAttivo,docAttivo,"originale")[0], "xlink:href"))) {
 					settaForm(false, "Il file aperto non è corretto");
+					form.setDialogWaiting(false);
 					return;
 				}
-				
+				} catch (Exception ex) { //arriva qui se non apro un documento NIR (xex)
+					settaForm(false, "Il file aperto non è corretto");
+					form.setDialogWaiting(false);
+					return;
+				}
 				//azzero array e liste
 				dateEventi = new Vector();
 				idEventi = new Vector();
@@ -368,14 +381,20 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 					primaModifica=true;		//cambiare --- implementare la funzione di check sulle modifiche
 					while (proponiModificaTesto(null));
 				}
+				form.setDialogWaiting(false);
 			}
 		}
 		
 		if (e.getSource() == scrivi) {
+			
+			try {
 			listModel.setElementAt(((String) listModel.get(getPosLista())) + " --> applicata", getPosLista());
+			} catch (Exception ex) {}
 			correnteEvento++;
 			settaTasti(false,false,true);
 			while (proponiModificaTesto(null));
+			
+			
 		}
 		
 		if (e.getSource() == repo) {
@@ -390,6 +409,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 	
 	private boolean proponiModificaTesto(Node partizioneIndicata) {
 
+		form.setDialogWaiting(true);
 		
 		if (partizioneIndicata!=null && scrivi.isEnabled()) { //ho cambiato posizione e avevo già proposto qualcosa => cancella vecchia proposta
 			Node corrente = domDisposizioni.doErase(idNovellando,idNovella,nodeDisposizione,nodeNovellando);
@@ -410,6 +430,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				settaTasti(false,true,false);
 				setMessagge();
 			}
+			form.setDialogWaiting(false);
 			return false;
 		}
 		
@@ -507,7 +528,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		Node posizione = null;
 		int start = 0; int end=0;
 		if (partizioneIndicata==null)
-			posizione = cercaPosizione(docEditor, docEditor.importNode(nodoMeta,true));
+			posizione = cerca_Rif_e_Bordo(docEditor, docEditor.importNode(nodoMeta,true));
 		else {
 				posizione = partizioneIndicata;
 				start = posizionamentoManuale.getInizioSelezione();
@@ -694,7 +715,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		    	testoOriginale.setText(html);
 		    	
 		    	domWriter.setOutput(UtilFile.getTempDirName()+ File.separatorChar +"tempDopo.xml", getEncoding(docEditor));
-				domWriter.write(nodoDopo    /*!!!!!!!!!!!! posizione.getParentNode()*/);
+				domWriter.write(nodoDopo);
 				source = new StreamSource(new File(UtilFile.getTempDirName()+ File.separatorChar +"tempDopo.xml"));
 				dest = new StreamResult(UtilFile.getTempDirName()+ File.separatorChar +"tempHtmlDopo.xml");
 				converti.setParameter("datafine", "");
@@ -739,6 +760,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				logger.error(ex.toString(), ex);
 			}
 		}
+		form.setDialogWaiting(false);
 		return false;
 	}
 	
@@ -758,11 +780,11 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 	}
 
 	private void settaForm(boolean finito, String mess) {
-		testoModificato.setText("");
-		testoModifica.setText("");
-		testoOriginale.setText("");
-		formatestuale.setText("");
-		norma.setText("");
+		testoModificato.setText(" ");
+		testoModifica.setText(" ");
+		testoOriginale.setText(" ");
+		formatestuale.setText(" ");
+		norma.setText(" ");
 		if (finito)
 			formatestuale.setText("Finito");
 		errore.setText(mess);
@@ -796,10 +818,15 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 	}
 	
 	private File apriFile() {
-		fileChooser = new JFileChooser();
+		if (lastPathFile!=null)
+			fileChooser = new JFileChooser(lastPathFile);
+		else
+			fileChooser = new JFileChooser(lastPathList);
 		fileChooser.setFileFilter(new RegexpFileFilter("XML", ".*\\.xml"));
-		if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
+		if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+			lastPathFile = fileChooser.getCurrentDirectory();
 			return fileChooser.getSelectedFile();
+		}
 		return null;
 	}
 	
@@ -833,7 +860,17 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		}
 		return null;
 	}
-	private Node cercaPosizione(Document doc, Node metaCorrente) {
+	
+	private Node cerca_Ruolo_eo_Posizione(Document doc, Node metaCorrente) {
+	
+		if (!"dsp:integrazione".equals(metaCorrente.getNodeName())) {
+			
+		}
+		return null;
+	}
+	
+	
+	private Node cerca_Rif_e_Bordo(Document doc, Node metaCorrente) {
 		
 		tipoModifica = "";	//è ciò che voglio modificare
 		/*
@@ -860,6 +897,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		else 
 			tipoModifica = UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(doc,UtilDom.getElementsByTagName(doc,metaCorrente,"dsp:novella")[0],"ittig:tipo")[0],"valore");
 		
+		//Verifica se sto effettuando una modifica su una partizione Nir o di parole (=parole/periodi/capoversi/rubriche/alinee/....)
 		parole = true;
 		for (int i=0; i<elencoPartizioni.length; i++)
 			if (tipoModifica.equals(elencoPartizioni[i])) {
@@ -894,7 +932,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			else 
 				trovataPosizione=false;
 		}
-		if (trovataPosizione) {
+		if (trovataPosizione) {	//se ho individuato la partizione del rif, continuo nella ricerca di eventuali bordi
 			Node[] bordi = UtilDom.getElementsByTagName(doc,norma,"ittig:bordo");
 			posizionamentoManuale.azzeraBordi();
 			for (int i=0; i<bordi.length; i++) {
@@ -910,7 +948,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				posizionamentoManuale.aggiungiBordo(numOrd,tipo);
 				//tipo: atto|allegato|libro|parte|titolo|capo|sezione|articolo|comma|alinea|coda|lettera|numero|punto|periodo|parole|capoverso
 				if (tipo.equals("atto")) {
-					System.out.println("atto??");
+					System.out.println("cerca_Rif_e_Bordo: atto??   ATTO non dovrebbe mai essere presente nei BORDI !!!!");
 				} else if (tipo.equals("allegato")) {
 					tag = "annesso";
 					id = "ann";
@@ -950,14 +988,10 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				} else if (tipo.equals("punto")) {
 					tag = "ep";
 					id = "pun";
-				} else if (tipo.equals("periodo")) {
-					System.out.println("periodo??");
 				} else if (tipo.equals("parole")) {
-					System.out.println("parole??");
-				} else if (tipo.equals("capoverso")) {
-					System.out.println("capoverso??");
+					System.out.println("cerca_Rif_e_Bordo: parole??   PAROLE non dovrebbe mai essere presente nei BORDI !!!!");
 				}
-				if (tag!=null) {	//se è NULL per ora salto.
+				if (tag!=null) {   //Cerco il bordo
 					Node[] cerco = UtilDom.getElementsByTagName(doc,posiz,tag);
 					int da = 0;
 					int a = cerco.length;
@@ -989,6 +1023,12 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 								break;
 							}
 						}
+					}
+				} else { 	//verifico se sto cercando periodo o capoverso
+					if (tipo.equals("periodo")) {
+						System.out.println("cerca_Rif_e_Bordo: periodo??");
+					} else if (tipo.equals("capoverso")) {
+						System.out.println("cerca_Rif_e_Bordo: capoverso??");
 					}
 				}
 			}
@@ -1024,13 +1064,19 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 	}
 	
 	private String getEncoding(Document document) {
-		DeferredDocumentImpl ddi = (DeferredDocumentImpl) document;
-		//return ddi != null ? ddi.getXmlEncoding() : null;
-		if (ddi == null)
-			return "UTF-8";
-		if ("UTF-8".equals(ddi.getXmlEncoding()))
-			return "UTF-8";
-		return "Cp1250";
+		
+		return "Unicode";
+		
+//		DeferredDocumentImpl ddi = (DeferredDocumentImpl) document;
+//		//return ddi != null ? ddi.getXmlEncoding() : null;
+//		if (ddi == null)
+//			//return "UTF-8";
+//			return "UTF8";
+//		if ("UTF-8".equals(ddi.getXmlEncoding()))
+//			//return "UTF-8";
+//			return "UTF8";
+//		return "Cp1250";
+		
 	}
 
 	public String getErrorMessage() {
