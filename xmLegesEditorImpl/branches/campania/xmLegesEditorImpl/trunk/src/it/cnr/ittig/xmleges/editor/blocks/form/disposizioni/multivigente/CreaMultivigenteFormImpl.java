@@ -612,7 +612,13 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 						 posizione = nodoParola;
 					 }
 					
-				} else { //calcolo il valore di "end"
+				} 
+				else if ("periodo".equals(tipoModifica) || "capoverso".equals(tipoModifica)) {
+					//cerco la posizione del periodo
+					
+					
+				}
+				else { //calcolo il valore di "end"							COSA VUOLDIRE QUESTO ORA??????????????????????
 					
 					if (partizioneIndicata==null)
 						end = UtilDom.getTextNode(posizione).length();
@@ -625,7 +631,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			
 			
 			String tipoModifica = nodoMeta.getNodeName();
-			if ("dsp:abrogazione".equals(tipoModifica) | "dsp:sostituzione".equals(tipoModifica)) {
+			if ("dsp:abrogazione".equals(tipoModifica) || "dsp:sostituzione".equals(tipoModifica)) {
 				if (parole) {
 					//n = domDisposizioni.setVigenza(posizione, "", start, end, makeVigenza(posizione,"novellando","abrogato"));
 					n = domDisposizioni.setVigenza(posizione, "", start, end, makeVigenza(posizione,"novellando","abrogato"));
@@ -636,11 +642,38 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				modifica1 = n;
 				idNovellando += UtilDom.getAttributeValueAsString(n, "id");
 			}
-			if ("dsp:integrazione".equals(tipoModifica) | "dsp:sostituzione".equals(tipoModifica)) {
+			if ("dsp:integrazione".equals(tipoModifica) || "dsp:sostituzione".equals(tipoModifica)) {
 				if (parole) {
 					n = domDisposizioni.makeSpan(n, -1, makeVigenza(n,"novella","abrogato"),UtilDom.getText(virgolettaDaInserire));
 					
-				} else {				
+				} else {
+					//NEL CASO DI SOSTITUZIONE, se la partizione da inserire non ha NUM o RUBRICA le recupero da quella uscente (se presenti)
+					if ("dsp:sostituzione".equals(tipoModifica)) {
+						try {
+						Vector figliIntegrati = UtilDom.getChildElements((Node)UtilDom.getChildElements(virgolettaDaInserire).get(0));
+						Vector figliAbrogati = UtilDom.getChildElements(n);
+						String testo = UtilDom.getText((Node) figliIntegrati.get(0));
+						if (testo==null)
+							testo = "";
+						if ("".equals(testo)) {//non specifica il NUM il testo entrante
+							testo = UtilDom.getText((Node) figliAbrogati.get(0));
+							if (testo!=null)
+								UtilDom.setTextNode((Node) figliIntegrati.get(0), testo);
+						}
+						Node rubricaUscente = (Node) figliAbrogati.get(1);
+						if ("rubrica".equals(rubricaUscente.getNodeName())) {	//avevo una rubrica nel testo uscente
+							Node rubricaEntrante = (Node) figliIntegrati.get(1);
+							if (!"rubrica".equals(rubricaEntrante.getNodeName())) { //non sto inserento tutto il tag rubrica
+								rubricaEntrante = utilRulesManager.getNodeTemplate(docAttivo,"rubrica");
+								UtilDom.setTextNode(rubricaEntrante, UtilDom.getText(rubricaUscente));
+								UtilDom.insertAfter(rubricaEntrante, (Node) figliIntegrati.get(0));
+							}
+							else  //sto inserendo un tag rubrica
+								if ("".equals(rubricaEntrante)) //Tag vuoto
+									UtilDom.setTextNode(rubricaEntrante, UtilDom.getText(rubricaUscente));
+						}
+						} catch (Exception e) {}		
+					}					
 					n = domDisposizioni.makePartition(posizione, docEditor.importNode((Node)UtilDom.getChildElements(virgolettaDaInserire).get(0),true), makeVigenza(posizione,"novella","abrogato"));
 					UtilDom.mergeTextNodes(n);
 				}
@@ -1082,7 +1115,10 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 								Vector candidati = getNodi(posiz);
 								for (int j=0; j<candidati.size(); j++)
 									if (getTesto((Node) candidati.get(i)).indexOf(cerco)!=-1) {
-										return (Node) candidati.get(j);
+										
+										System.out.println("POSIZIONE dove trovare il periodo cercato: " + getTesto((Node) candidati.get(j)));
+										
+										return (Node) candidati.get(j);	//ATTENZIONE: voglio ritornare cmq un contenitore in cui trovare il periodo
 									}
 							}
 						}
