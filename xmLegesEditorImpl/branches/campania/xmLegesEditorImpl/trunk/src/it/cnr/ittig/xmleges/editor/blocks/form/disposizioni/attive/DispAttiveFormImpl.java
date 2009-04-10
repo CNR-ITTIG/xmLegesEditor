@@ -304,11 +304,11 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 			delimitatoreForm.setDelimitatore();
 			//se ho metadati per questo MOD, li setto.
 			modificoMetaEsistenti = trovaMeta(nodoAttivo);
+			eliminaMetadati.setEnabled(false);
 			if (modificoMetaEsistenti != null)
 				recuperaMeta(modificoMetaEsistenti);
 			else {
 				metaPresente.setText("NB: metadati non presenti");
-				sceltaDelimitatore.setEnabled(false);
 				info.setText("Inserisci i metadati della modifica attiva:");
 				decorrenza.setText(decorrenzaForm.getDecorrenza());
 				atto.setText(riferimentoForm.getRiferimento());
@@ -332,10 +332,10 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 	}
 		
 	private void recuperaMeta(Node disposizione) {
+		eliminaMetadati.setEnabled(true);
 		if ("si".equals(UtilDom.getAttributeValueAsString(disposizione, "implicita")))
 			implicita.setSelected(true);
 		metaPresente.setText("NB: metadati già presenti (" + disposizione.getLocalName() + ")");
-		sceltaDelimitatore.setEnabled(true);
 		info.setText("Cambia i metadati della modifica attiva:");
 		//setto Decorrenza
 		Node termine = UtilDom.findRecursiveChild(disposizione,"dsp:termine");

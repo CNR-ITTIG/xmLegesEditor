@@ -888,7 +888,15 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 //					
 //		UtilDom.findRecursiveChild(disposizioniNode,"modificheattive").removeChild(meta);
 		
-		meta.getParentNode().removeChild(meta);
+		Node padre = meta.getParentNode();
+		Node nonno = padre.getParentNode();
+		padre.removeChild(meta);
+		//se il tag padre <modificheattive> non ha figli, butto via anche lui. Se il nonno <disposizioni> non ha figli, butto via anche lui.
+		if (padre.getChildNodes().getLength()==0)
+			nonno.removeChild(padre);
+		if (nonno.getChildNodes().getLength()==0)
+			nonno.getParentNode().removeChild(nonno);
+		
 	}	
 	
 	public Node setDOMDispAttive(boolean implicita, Node metaDaModificare, String idMod, int operazioneIniziale, String completa, boolean condizione, String decorrenza, String idevento, String norma, String partizione, String[] delimitatori) {

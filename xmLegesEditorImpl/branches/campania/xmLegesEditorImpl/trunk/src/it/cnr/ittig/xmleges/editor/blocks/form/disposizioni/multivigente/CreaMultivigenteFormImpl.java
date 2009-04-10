@@ -17,6 +17,7 @@ import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.core.util.domwriter.DOMWriter;
 import it.cnr.ittig.xmleges.core.util.file.RegexpFileFilter;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
+import it.cnr.ittig.xmleges.core.util.lang.UtilLang;
 import it.cnr.ittig.xmleges.editor.services.dom.disposizioni.Disposizioni;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.MetaCiclodivita;
@@ -659,6 +660,9 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			nodeNovellando = modifica1;	
 			nodeDisposizione = domDisposizioni.setDOMDisposizioni(partizione, urnAttivo, urnAttivo+posDisposizione, "#"+idNovellando, "#"+idNovella, "", nota, "", true, eventoriginale, eventovigore);
 			
+			//mi posiziono sul nodo USCITO/ENTRATO
+			selectionManager.setActiveNode(this, modifica1);
+			
 			documentManager.commitEdit(t);
 			
 			} catch (Exception ex) {
@@ -922,7 +926,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		partizione = UtilDom.getAttributeValueAsString(pos,"xlink:href");
 		if (partizione.indexOf("#")!=-1) {
 			partizione = partizione.substring(1+partizione.indexOf("#"));
-			Node[] cerco = UtilDom.getElementsByAttributeValue(doc,posiz,"id",partizione);
+			Node[] cerco = UtilDom.getElementsByAttributeValue(doc,posiz,"id",partizione); 
 			if (cerco.length>0) {
 				if (cerco[0]!=null)
 					posiz = cerco[0];	//posizione su: partizione indicata nel rif
@@ -998,14 +1002,14 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 					int inc = 1;
 					int nValidi = 0;
 					int prendi = 0;
-					if (numOrd.equals("ultimo") | numOrd.equals("penultimo")) {
+					if (numOrd.equals("ultimo") || numOrd.equals("penultimo")) {
 						da = cerco.length;
 						a = 0;
 						inc = -1;
 					}
-					if (numOrd.equals("ultimo") | numOrd.equals("primo"))
+					if (numOrd.equals("ultimo") || numOrd.equals("primo"))
 						prendi = 1;
-					if (numOrd.equals("penultimo") | numOrd.equals("secondo"))
+					if (numOrd.equals("penultimo") || numOrd.equals("secondo"))
 						prendi = 2;				
 					if (id==null && !"".equals(numOrd)) //esempio: rubrica, alinea, coda, ... non hanno cardinalità (è implicitamente 1)
 						prendi = new Integer(numOrd).intValue();				
@@ -1025,10 +1029,63 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 						}
 					}
 				} else { 	//verifico se sto cercando periodo o capoverso
-					if (tipo.equals("periodo")) {
-						System.out.println("cerca_Rif_e_Bordo: periodo??");
-					} else if (tipo.equals("capoverso")) {
-						System.out.println("cerca_Rif_e_Bordo: capoverso??");
+					if (tipo.equals("periodo") || tipo.equals("capoverso")) {  //capoverso o bordo vanno intesi come un periodo che finisce con .
+						String testoPosizione = getTesto(posiz);
+						System.out.println("TESTO in cui cerco periodo/capoverso: " + testoPosizione);
+						
+						/* devo cercare '.', se questi sono in un numero o preceduti da un testo minore di 4 caratteri non li considero
+						   marcatori di fine periodo (eccezione sepreceduto da spazio, in questo caso lo considero punto fermo).*/
+						Vector periodo = new Vector();
+						StringTokenizer st = new StringTokenizer(testoPosizione, ".");
+						String temPeriodo = "";
+						while (st.hasMoreTokens()) {
+							String testPeriodo = temPeriodo+st.nextToken();
+							
+							System.out.println("ANALIZZO: " + testPeriodo);
+							
+							String lastParola = testPeriodo;
+							if (testPeriodo.indexOf(" ")!=-1)
+								lastParola = testPeriodo.substring(testPeriodo.lastIndexOf(" "));
+							System.out.println("PAROLA individuata: " + lastParola);
+							
+							if (lastParola.length()<2) {	//trovato ' .'
+								periodo.add(testPeriodo);
+								temPeriodo = "";
+								continue;
+							}
+							else if (lastParola.length()>4)		//trovato 'parola.', con parola più lunga di 3 caratteri
+								if (!isNumber(lastParola)) {	//non sono in un numero
+									periodo.add(testPeriodo);
+									temPeriodo = "";
+									continue;
+								}
+							temPeriodo = testPeriodo+".";
+						}
+						//se numOrd mi indica un numero compreso nei periodi individuati lo seleziono
+						if (periodo.size()>0) {
+							int prendi = -1;
+							if (numOrd.equals("primo")) 
+								prendi = 0;
+							else if (numOrd.equals("secondo"))
+								prendi = 1;
+							else if (numOrd.equals("penultimo"))
+								prendi = periodo.size()-2;
+							else if (numOrd.equals("ultimo"))
+								prendi = periodo.size()-1;
+							else  {
+								try {
+									prendi = new Integer(numOrd).intValue() - 1;
+								} catch (Exception e) {}
+							}
+							if (prendi >= 0 && prendi <periodo.size()) {  //ho trovato un periodo ammissibile
+								String cerco = (String) periodo.get(prendi);
+								Vector candidati = getNodi(posiz);
+								for (int j=0; j<candidati.size(); j++)
+									if (getTesto((Node) candidati.get(i)).indexOf(cerco)!=-1) {
+										return (Node) candidati.get(j);
+									}
+							}
+						}
 					}
 				}
 			}
@@ -1037,6 +1094,52 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			return null;
 		return posiz;
 	} 
+	
+	private static String getTesto(Node elem) {
+
+		if (elem.getNodeType() == Node.ELEMENT_NODE && elem.getNodeName() != "num") {
+			String text = null;
+			NodeList children = elem.getChildNodes();
+			for (int i = 0; i < children.getLength(); i++) {
+				String child_text = getTesto(children.item(i));
+				if (child_text != null) {
+					if (text != null)
+						text = text + " " + child_text;
+					else
+						text = child_text;
+				}
+			}
+			return text;
+		} else {
+			return UtilLang.trimText(elem.getNodeValue());
+		}
+	}
+	
+	private static Vector getNodi(Node elem) {
+		Vector elements = new Vector();
+		org.w3c.dom.NodeList children = elem.getChildNodes();
+		for (int i = 0; i < children.getLength(); i++) {
+			if (children.item(i).getNodeName() != "num")
+				elements.add(children.item(i));
+		}
+		return elements;
+	}
+	
+	private static boolean isNumber(String s) {
+		  boolean flag = false;
+		  for (int x = 0; x < s.length(); x++) {
+		    char c = s.charAt(x);
+		    if (x == 0 && (c == '-')) continue;		// Negativo
+		    if ((c >= '0') && (c <= '9')) {			// num: 0-9
+		    	flag=true; 
+		    	continue;
+		    }
+		    return false; 			//Non è un numero
+		  }
+		  return flag; 				//E' un numero
+		}
+
+
 	
 	private VigenzaEntity makeVigenza(Node node, String dsp, String status) {
 		
