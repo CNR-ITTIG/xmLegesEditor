@@ -167,6 +167,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 	boolean primaModifica;
 	File lastPathFile = null;
 	File lastPathList = null;
+	String periodoIndividuato="";
 	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -412,11 +413,15 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 
 		form.setDialogWaiting(true);
 		
-		if (partizioneIndicata!=null && scrivi.isEnabled()) { //ho cambiato posizione e avevo già proposto qualcosa => cancella vecchia proposta
-			Node corrente = domDisposizioni.doErase(idNovellando,idNovella,nodeDisposizione,nodeNovellando);
-			if (corrente!=null)
-				selectionManager.setActiveNode(this, corrente);
-		}
+		if (partizioneIndicata!=null)
+			if (scrivi.isEnabled()) { //ho cambiato posizione e avevo già proposto qualcosa => cancella vecchia proposta
+				Node corrente = domDisposizioni.doErase(idNovellando,idNovella,nodeDisposizione,nodeNovellando);
+				if (corrente!=null)
+					selectionManager.setActiveNode(this, corrente);
+			}
+			else 		//se ho selezionato delle parole manualmente, mi fido anche se nella realtà avevo chiesto di selezionarne altre
+				periodoIndividuato = UtilDom.getText(selectionManager.getActiveNode()).substring(selectionManager.getTextSelectionStart(),selectionManager.getTextSelectionEnd());
+
 //-----TEST	(fine/skip)	
 		//test per capire quale evento devo applicare
 		if (correnteEvento==disposizioniDaConvertire.size()) {
@@ -539,7 +544,49 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				else
 					parole=false;
 		}
-		if (posizione!=null) {	//NON PROPONGO LA MODIFICA (faccio vedere in ELSE il testo del MOD)
+		
+		if (posizione!=null) {
+			if (parole) {	//cerco parole/capoverso/periodo/alinea/rubrica...
+				if ("parole".equals(tipoModifica) && partizioneIndicata==null) {	
+					//se è parole, cerco le occorrenze di parole
+					//per ora solo la prima occorrenza della parola (numeroIterazioni=1)
+					 String  parolaDaCercare = UtilDom.getText(virgolettaDaEliminare).trim();
+					 Node nodoParola = cercaParola(parolaDaCercare, posizione);
+					 if (nodoParola!=null) {
+						 start = UtilDom.getText(nodoParola).indexOf(parolaDaCercare);
+						 end = start+parolaDaCercare.length();
+						 posizione = nodoParola;
+					 }
+					 else { //non ho trovato le parole cercate, effettuo una selezione casuale
+						 posizione=null;
+					}
+					
+				} 
+				else if ("periodo".equals(tipoModifica) || "capoverso".equals(tipoModifica)) {
+					//cerco la posizione del periodo: 'periodoIndividuato'
+					Node nodoParola = cercaParola(periodoIndividuato, posizione);
+					if (nodoParola!=null) {
+						 start = UtilDom.getText(nodoParola).indexOf(periodoIndividuato);
+						 end = start+periodoIndividuato.length();
+						 posizione = nodoParola;
+					}
+					else { //non sono capace di effettuare la selezione (xex selezione a cavallo su + tag), effettuo una selezione casuale
+						posizione=null;
+					}
+					
+				}
+				else { //calcolo il valore di "end"							COSA VUOLDIRE QUESTO ORA??????????????????????
+					
+					if (partizioneIndicata==null)
+						end = UtilDom.getTextNode(posizione).length();
+					
+					if (!UtilDom.isTextNode(posizione))
+						posizione = posizione.getFirstChild();
+				}
+					
+			}	
+		}
+		if (posizione!=null) {	//se è null NON PROPONGO LA MODIFICA (faccio vedere in ELSE il testo del MOD)
 
 			scrivi.setEnabled(true);
 			//creo un frammento con il 'nodo', PRIMA dell'applicazione della modifica, per trasformarlo in HTML
@@ -596,38 +643,8 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			eventovigore.setFonte(new Relazione("", "", norma.getText()));
 			
 			Node n=null;
-			
-			int numeroIterazioni = 1;
-			
-			
-			if (parole) {	//cerco parole/capoverso/periodo/alinea/rubrica...
-				if ("parole".equals(tipoModifica) && partizioneIndicata==null) {	
-					//se è parole, cerco le occorrenze di parole
-					//per ora solo la prima occorrenza della parola (numeroIterazioni=1)
-					 String  parolaDaCercare = UtilDom.getText(virgolettaDaEliminare).trim();
-					 Node nodoParola = cercaParola(parolaDaCercare, posizione);
-					 if (nodoParola!=null) {
-						 start = UtilDom.getText(nodoParola).indexOf(parolaDaCercare);
-						 end = start+parolaDaCercare.length();
-						 posizione = nodoParola;
-					 }
-					
-				} 
-				else if ("periodo".equals(tipoModifica) || "capoverso".equals(tipoModifica)) {
-					//cerco la posizione del periodo
-					
-					
-				}
-				else { //calcolo il valore di "end"							COSA VUOLDIRE QUESTO ORA??????????????????????
-					
-					if (partizioneIndicata==null)
-						end = UtilDom.getTextNode(posizione).length();
-					
-					if (!UtilDom.isTextNode(posizione))
-						posizione = posizione.getFirstChild();
-				}
-					
-			}
+
+
 			
 			
 			String tipoModifica = nodoMeta.getNodeName();
@@ -898,6 +915,8 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		return null;
 	}
 	
+	
+	
 	private Node cerca_Ruolo_eo_Posizione(Document doc, Node metaCorrente) {
 	
 		if (!"dsp:integrazione".equals(metaCorrente.getNodeName())) {
@@ -1110,17 +1129,10 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 									prendi = new Integer(numOrd).intValue() - 1;
 								} catch (Exception e) {}
 							}
-							if (prendi >= 0 && prendi <periodo.size()) {  //ho trovato un periodo ammissibile
-								String cerco = (String) periodo.get(prendi);
-								Vector candidati = getNodi(posiz);
-								for (int j=0; j<candidati.size(); j++)
-									if (getTesto((Node) candidati.get(i)).indexOf(cerco)!=-1) {
-										
-										System.out.println("POSIZIONE dove trovare il periodo cercato: " + getTesto((Node) candidati.get(j)));
-										
-										return (Node) candidati.get(j);	//ATTENZIONE: voglio ritornare cmq un contenitore in cui trovare il periodo
-									}
-							}
+							if (prendi >= 0 && prendi <periodo.size())   //ho trovato un periodo ammissibile
+								periodoIndividuato = ((String) periodo.get(prendi)) + ".";
+							else
+								periodoIndividuato = "";	
 						}
 					}
 				}
