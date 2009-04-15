@@ -594,7 +594,8 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 					
 			}	
 		}
-		if (posizione!=null) {	//se è null NON PROPONGO LA MODIFICA (faccio vedere in ELSE il testo del MOD)
+		if (posizione!=null			//se è null NON PROPONGO LA MODIFICA (faccio vedere in ELSE il testo del MOD)
+				&& (parole || tipoModifica.equals(posizione.getNodeName()))) {		//stesso se non modifica lo stesso tipo di partizione. 
 
 			scrivi.setEnabled(true);
 			//creo un frammento con il 'nodo', PRIMA dell'applicazione della modifica, per trasformarlo in HTML
@@ -818,6 +819,8 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		    		html = html+str+"\n";	
 		    	bufline.close ();
 		    	testoModifica.setText(html);
+		    	testoModificato.setText("");
+		    	testoOriginale.setText("");
 			} catch (Exception ex) {
 				logger.error(ex.toString(), ex);
 			}
