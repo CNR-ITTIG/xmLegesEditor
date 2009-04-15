@@ -424,7 +424,10 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 					selectionManager.setActiveNode(this, corrente);
 			}
 			else 		//se ho selezionato delle parole manualmente, mi fido anche se nella realtà avevo chiesto di selezionarne altre
-				periodoIndividuato = UtilDom.getText(selectionManager.getActiveNode()).substring(selectionManager.getTextSelectionStart(),selectionManager.getTextSelectionEnd());
+				try {
+					periodoIndividuato = UtilDom.getText(selectionManager.getActiveNode()).substring(selectionManager.getTextSelectionStart(),selectionManager.getTextSelectionEnd());
+				} 
+				catch (Exception e) {}
 
 //-----TEST	(fine/skip)	
 		//test per capire quale evento devo applicare
@@ -449,6 +452,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		
 		eventi.setSelectedIndex(getPosLista());		
 		Node nodoMeta = (Node)disposizioniDaConvertire.get(correnteEvento);
+		boolean implicita = ("si".equals(UtilDom.getAttributeValueAsString(nodoMeta,"implicita").toLowerCase())) ? true : false;
 		String idMod = UtilDom.getAttributeValueAsString(UtilDom.findRecursiveChild(nodoMeta,"dsp:pos"),"xlink:href").substring(1);
 		virgolettaDaInserire=null;
 		virgolettaDaEliminare=null;
@@ -712,7 +716,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			}
 				
 			nodeNovellando = modifica1;	
-			nodeDisposizione = domDisposizioni.setDOMDisposizioni(partizione, urnAttivo, urnAttivo+posDisposizione, "#"+idNovellando, "#"+idNovella, "", nota, "", true, eventoriginale, eventovigore);
+			nodeDisposizione = domDisposizioni.setDOMDisposizioni(partizione, urnAttivo, urnAttivo+posDisposizione, "#"+idNovellando, "#"+idNovella, "", nota, "", implicita, eventoriginale, eventovigore);
 			
 			//mi posiziono sul nodo USCITO/ENTRATO
 			selectionManager.setActiveNode(this, modifica1);
@@ -1082,7 +1086,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 								break;
 							}
 						} else {	//non considero l'id
-							if (++nValidi>prendi) {	// > così se arrivo con 0 o 1 prendo comunque il primo
+							if (++nValidi>=prendi) {	// >= così se arrivo con 0 o 1 prendo comunque il primo
 								posiz = cerco[indice];
 								break;
 							}
