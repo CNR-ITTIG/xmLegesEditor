@@ -702,16 +702,24 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 				doUndo(idNovella, true);	
 		}
 		
+		//Test anche se ho svuotato i tag contenitore (modifichepassive, disposizioni)
+		Node padre = disposizione.getParentNode();
+		Node nonno = padre.getParentNode();
 		int numeroNotaEliminata = Integer.parseInt(UtilDom.getAttributeValueAsString(UtilDom.findRecursiveChild(disposizione, "ittig:notavigenza"), "id").substring(3))-1;
-		disposizione.getParentNode().removeChild(disposizione);
-	
+		padre.removeChild(disposizione);
+		//se il tag padre <modifichepassive> non ha figli, butto via anche lui. Se il nonno <disposizioni> non ha figli, butto via anche lui.
+		if (padre.getChildNodes().getLength()==0)
+			nonno.removeChild(padre);
+		if (nonno.getChildNodes().getLength()==0)
+			nonno.getParentNode().removeChild(nonno);
+		
 		NodeList noteMeta = documentManager.getDocumentAsDom().getElementsByTagName("ittig:notavigenza");
 		for(int i=0; i<noteMeta.getLength();i++) {
 			int numero = Integer.parseInt(UtilDom.getAttributeValueAsString(noteMeta.item(i), "id").substring(3))-1;
 			if (numero>numeroNotaEliminata)
 				UtilDom.setAttributeValue(noteMeta.item(i), "id", "itt"+numero);
 		}
-		
+				
 		documentManager.commitEdit(t);
 		} catch (Exception ex) {
 			documentManager.rollbackEdit(t);

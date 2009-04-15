@@ -41,6 +41,8 @@ import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.util.StringTokenizer;
 import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -61,6 +63,7 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -140,6 +143,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 	int numMessaggiErrore;
 	
 	String partizione;
+	String[] partizioni ={"lib","prt","tit","cap","sez","art","com","en","el","ep"};
 	
 	TransformerFactory factory = TransformerFactory.newInstance();
 	DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -915,16 +919,13 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		return null;
 	}
 	
-	
-	
 	private Node cerca_Ruolo_eo_Posizione(Document doc, Node metaCorrente) {
 	
 		if (!"dsp:integrazione".equals(metaCorrente.getNodeName())) {
 			
 		}
 		return null;
-	}
-	
+	}	
 	
 	private Node cerca_Rif_e_Bordo(Document doc, Node metaCorrente) {
 		
@@ -978,15 +979,24 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		partizione = UtilDom.getAttributeValueAsString(pos,"xlink:href");
 		if (partizione.indexOf("#")!=-1) {
 			partizione = partizione.substring(1+partizione.indexOf("#"));
-			Node[] cerco = UtilDom.getElementsByAttributeValue(doc,posiz,"id",partizione); 
-			if (cerco.length>0) {
-				if (cerco[0]!=null)
-					posiz = cerco[0];	//posizione su: partizione indicata nel rif
-				else
-					trovataPosizione=false;
-			}
-			else 
-				trovataPosizione=false;
+			
+			//Questo meccanismo cerca id esatto della partizione. Per come numera l'editor, questo non è possibile
+//			Node[] cerco = UtilDom.getElementsByAttributeValue(doc,posiz,"id",partizione); 
+//			if (cerco.length>0) {
+//				if (cerco[0]!=null)
+//					posiz = cerco[0];	//posizione su: partizione indicata nel rif
+//				else
+//					trovataPosizione=false;
+//			}
+//			else 
+//				trovataPosizione=false;
+			
+			Node posizioneRif = cercaPosizioneContando(doc,UtilDom.getElementsByTagName(doc,doc,"articolato")[0],partizione,false);
+			if (posizioneRif==null)
+				trovataPosizione = false;
+			else
+				posiz = posizioneRif;
+			
 		}
 		if (trovataPosizione) {	//se ho individuato la partizione del rif, continuo nella ricerca di eventuali bordi
 			Node[] bordi = UtilDom.getElementsByTagName(doc,norma,"ittig:bordo");
@@ -1034,7 +1044,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				} else if (tipo.equals("rubrica")) {
 					tag = "rubrica";
 				} else if (tipo.equals("coda")) {
-					tag = "cosa";
+					tag = "coda";
 				} else if (tipo.equals("lettera")) {
 					tag = "el";
 					id = "let";
@@ -1051,31 +1061,29 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 					Node[] cerco = UtilDom.getElementsByTagName(doc,posiz,tag);
 					int da = 0;
 					int a = cerco.length;
-					int inc = 1;
 					int nValidi = 0;
 					int prendi = 0;
-					if (numOrd.equals("ultimo") || numOrd.equals("penultimo")) {
-						da = cerco.length;
-						a = 0;
-						inc = -1;
-					}
+					int ordineInverso = 0;
+					if (numOrd.equals("ultimo") || numOrd.equals("penultimo"))
+						ordineInverso = a-1;
 					if (numOrd.equals("ultimo") || numOrd.equals("primo"))
 						prendi = 1;
 					if (numOrd.equals("penultimo") || numOrd.equals("secondo"))
 						prendi = 2;				
 					if (id==null && !"".equals(numOrd)) //esempio: rubrica, alinea, coda, ... non hanno cardinalità (è implicitamente 1)
 						prendi = new Integer(numOrd).intValue();				
-					for (int j=da; j<a; j+=inc) {
-						if (null!=UtilDom.getAttributeValueAsString(cerco[j],"finevigore"))
+					for (int j=da; j<a; j++) {
+						int indice = Math.abs(j-ordineInverso);
+						if (null!=UtilDom.getAttributeValueAsString(cerco[indice],"finevigore"))
 							continue;	//non sto cercando tag con finevogore
 						if (prendi==0 && !"".equals(numOrd)) {	//faccio considerazioni sull'id
-							if (UtilDom.getAttributeValueAsString(cerco[j],"id").indexOf(id+numOrd)!=-1) {
-								posiz = cerco[j];	//posizione su: bordo individuato
+							if (UtilDom.getAttributeValueAsString(cerco[indice],"id").indexOf(id+numOrd)!=-1) {
+								posiz = cerco[indice];	//posizione su: bordo individuato
 								break;
 							}
 						} else {	//non considero l'id
-							if (nValidi++==prendi) {
-								posiz = cerco[j];
+							if (++nValidi>prendi) {	// > così se arrivo con 0 o 1 prendo comunque il primo
+								posiz = cerco[indice];
 								break;
 							}
 						}
@@ -1142,6 +1150,165 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			return null;
 		return posiz;
 	} 
+	
+	private Node cercaPosizioneContando(Document doc, Node posiz, String partizione, boolean ordinale) {
+		
+		String token;
+		StringTokenizer st = new StringTokenizer(partizione, "-");
+		while (st.hasMoreTokens()) {
+			token = st.nextToken();
+			if (token.startsWith("t"))	// -t1... non dichiara la partizione, ma l'evento.
+				continue;
+			for (int i=0; i<partizioni.length; i++)
+				if (token.startsWith(partizioni[i])) {
+					Node temp = conta(doc, posiz, id2tag(partizioni[i]), token.substring(partizioni[i].length()), ordinale);
+					if (temp!=null)
+						posiz = temp;
+					else
+						return posiz; //non ho trovato qualcosa. Mi blocco
+				}
+		}
+		return posiz;
+	}
+	
+	private Node conta(Document doc, Node dove, String nomeTag, String numeroTag, boolean ordinale) {
+		
+		//cerco il primo tag corrispondente in profondità
+		Node[] posizioniTrovate = UtilDom.getElementsByTagName(doc,dove,nomeTag);
+		if (posizioniTrovate.length>0) {
+			dove = posizioniTrovate[0];
+			//Da qui conto il numero di 'fratelli'
+			//Nel caso di partizione espressa come numero CARDINALE e con nodi dom con NUM=null, devo guardare i meta per capire se sono abrogazioni/sostituzioni/integrazioni
+			if (ordinale) {
+				int conta = 1;
+				try {
+					conta = new Integer(numeroTag).intValue();
+				}
+				catch (Exception e) {}
+				for (int i=0; i<posizioniTrovate.length; i++)		//restituisco il numeroTag° escludendo i testi Rossi 
+					if (isTestoVigente(posizioniTrovate[i])) 
+						if (--conta==0)
+							return posizioniTrovate[i];
+			}
+			else { //cardinale
+				Node[] dspSostituzione = UtilDom.getElementsByTagName(doc,doc,"dsp:sostituzione");
+				int conta = 1;
+				try {
+					conta = new Integer(numeroTag).intValue();
+				}
+				catch (Exception e) {}
+				if ("".equals(getNum(doc,dove))) {//NUM nulli
+					//considero i meta (se è un testo rosso vale come uno nel conteggio solo se NON è una Sostituzione
+					for (int i=0; i<posizioniTrovate.length; i++)
+						if (isTestoVigente(posizioniTrovate[i])) {
+							if (--conta==0)
+								return posizioniTrovate[i];
+						}
+						else { //cerco nei meta
+							for (int j=0; j<dspSostituzione.length; j++) {
+								String idTag = "#"+UtilDom.getAttributeValueAsString(posizioniTrovate[i],"id");
+								String idMeta = UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(doc,UtilDom.getElementsByTagName(doc,doc,"dsp:novellando")[0],"dsp:pos")[0],"xlink:href");
+								if (idTag.equals(idMeta))
+									break;
+							}
+							if (--conta==0)
+								return posizioniTrovate[i];
+						}
+				}
+				else {
+					for (int i=0; i<posizioniTrovate.length; i++)	//restituisco quello con NUM che inizia con numeroTag escludendo i testi Rossi 
+						if (isTestoVigente(posizioniTrovate[i])) {
+							conta--;
+							String numero = getNum(doc,posizioniTrovate[i]).trim();
+							if (numero.startsWith(numeroTag) || ("".equals(numero) && conta<=0))   //se trovo uno senza num , che è almeno numeroTag°, allora lo restituisco
+								return posizioniTrovate[i];		
+						}
+				}
+			}
+		}
+		return dove;
+	}
+	
+	private boolean isTestoVigente(Node test) {
+		try {
+			return (UtilDom.getAttributeValueAsString(test, "finevigore")==null);
+		}
+		catch (Exception e) {}
+		return true;
+	}
+	
+	private String getNum(Document doc, Node test) {
+		try {
+			String numero = UtilDom.getTextNode(UtilDom.getElementsByTagName(doc,test,"num")[0]);
+			//qualche correttivo
+			if (numero.toLowerCase().indexOf("unico")!=-1)
+				return "1";
+			Pattern pattern = Pattern.compile ("[0-9]");
+			Matcher matcher = pattern.matcher (numero);
+			while (matcher.find())
+				return matcher.group();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+	
+	private String tag2id(String tag) {
+		if (tag.equals("allegato")) 
+			return "ann";
+		else if (tag.equals("libro")) 
+			return "lib";				
+		else if (tag.equals("parte")) 
+			return "prt";
+		else if (tag.equals("titolo")) 
+			return "tit";				
+		else if (tag.equals("capo")) 
+			return "cap";
+		else if (tag.equals("sezione")) 
+			return "sez";
+		else if (tag.equals("articolo")) 
+			return "art";
+		else if (tag.equals("comma")) 
+			return "com";				
+		else if (tag.equals("lettera")) 
+			return "let";
+		else if (tag.equals("numero")) 
+			return "num";				
+		else if (tag.equals("punto")) 
+			return "pun";
+		//default (non dovrebbe arrivare mai)
+		if (tag.length()>3)
+			return tag.substring(0, 3);
+		return tag;
+	}
+	
+	private String id2tag(String id) {
+		if (id.equals("ann"))
+			return "annesso";
+		else if (id.equals("lib"))
+			return "libro";
+		else if (id.equals("prt"))
+			return "parte";
+		else if (id.equals("tit"))
+			return "titolo";
+		else if (id.equals("cap"))
+			return "capo";
+		else if (id.equals("sez"))
+			return "sezione";
+		else if (id.equals("art"))
+			return "articolo";
+		else if (id.equals("com"))
+			return "comma";
+		else if (id.equals("let"))
+			return "el";
+		else if (id.equals("num"))
+			return "en";
+		else if (id.equals("pun"))
+			return "ep";
+		//default ritorno l'ID
+		return id;	
+	}
 	
 	private static String getTesto(Node elem) {
 
