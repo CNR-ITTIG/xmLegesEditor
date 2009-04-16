@@ -236,7 +236,10 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 				if (num.getChildNodes().item(0) != null) {
 					if (!numVal.equals(num.getChildNodes().item(0).getNodeValue())) {
 						logger.debug("CHANGED NUM: Old num: " + num.getChildNodes().item(0).getNodeValue() + "  New num: " + numVal);
-						num.replaceChild(document.createTextNode(numVal), num.getChildNodes().item(0));
+						//
+						UtilDom.removeAllChildren(num);
+						num.appendChild(document.createTextNode(numVal));
+						//num.replaceChild(document.createTextNode(numVal), num.getChildNodes().item(0));
 					}
 				} else
 					num.appendChild(document.createTextNode(numVal));
