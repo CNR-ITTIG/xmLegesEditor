@@ -462,7 +462,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		Node tempNovella = UtilDom.findRecursiveChild(nodoMeta,"dsp:novella");
 		if (tempNovella!=null) {
 			String idVirgoletta = UtilDom.getAttributeValueAsString(UtilDom.findRecursiveChild(tempNovella,"dsp:pos"),"xlink:href").substring(1);
-			virgolettaDaInserire = UtilDom.getElementsByAttributeValue(docAttivo,docAttivo,"id",idVirgoletta)[0];
+			virgolettaDaInserire = UtilDom.getElementsByAttributeValue(docAttivo,docAttivo,"id",idVirgoletta)[0].cloneNode(true);  //lo clono perchè potrei integrarlo con num e rubrica e poi rimosizionarmi manualmente altrove
 		}
 		Node tempNovellando = UtilDom.findRecursiveChild(nodoMeta,"dsp:novellando");
 		if (tempNovellando!=null) {
@@ -598,7 +598,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			}	
 		}
 		if (posizione!=null			//se è null NON PROPONGO LA MODIFICA (faccio vedere in ELSE il testo del MOD)
-				&& (parole || ("atto".equals(tipoModifica) || tipoModifica.equals(posizione.getNodeName())))) {		//stesso se non modifica lo stesso tipo di partizione. 
+				&& (parole || ("atto".equals(tipoModifica) || meta2tag(tipoModifica).equals(posizione.getNodeName())))) {		//stesso se non modifica lo stesso tipo di partizione. 
 
 			scrivi.setEnabled(true);
 			//creo un frammento con il 'nodo', PRIMA dell'applicazione della modifica, per trasformarlo in HTML
@@ -1231,13 +1231,15 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 									break;
 								}
 							}
-							if (--conta==0 && nonTrovato)												//<=
+							if (nonTrovato && --conta==0)												//<=
 								return posizioniTrovate[i];
 						}
 				}
 				else {
 					for (int i=0; i<posizioniTrovate.length; i++)	//restituisco quello con NUM che inizia con numeroTag escludendo i testi Rossi 
 						if (isTestoVigente(posizioniTrovate[i])) {
+							if (i==12)
+								System.out.println("ii");
 							conta--;
 							String numero = getNum(doc,posizioniTrovate[i]).trim();
 							if (numero.startsWith(numeroTag) || ("".equals(numero) && conta<=0))   //se trovo uno senza num , che è almeno numeroTag°, allora lo restituisco
@@ -1263,7 +1265,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			//qualche correttivo
 			if (numero.toLowerCase().indexOf("unico")!=-1)
 				return "1";
-			Pattern pattern = Pattern.compile ("[0-9]");
+			Pattern pattern = Pattern.compile ("[0-9]+");
 			Matcher matcher = pattern.matcher (numero);
 			while (matcher.find())
 				return matcher.group();
@@ -1272,6 +1274,20 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			e.printStackTrace();
 		}
 		return "";
+	}
+	
+	private String meta2tag(String tag) {
+		//(atto|allegato|libro|parte|titolo|capo|sezione|articolo|comma|alinea|coda|lettera|numero|punto|periodo|parole|capoverso|rubrica)
+		if (tag.equals("allegato"))
+			return "annesso";
+		else if (tag.equals("lettera")) 
+			return "el";
+		else if (tag.equals("numero")) 
+			return "en";				
+		else if (tag.equals("punto")) 
+			return "ep";
+		//altri rimangono uguali
+		return tag;	
 	}
 	
 	private String tag2id(String tag) {
