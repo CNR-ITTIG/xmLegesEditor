@@ -11,6 +11,7 @@ import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.FormClosedListener;
 import it.cnr.ittig.xmleges.core.services.form.FormVerifier;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
+import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.date.UtilDate;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
@@ -99,6 +100,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 	Logger logger;
 	Form form;
 	PosizionamentoManualeForm posizionamentoManuale;
+	UtilMsg utilmsg;
 	
 	JTabbedPane tabbedPane;
 	JEditorPane testoModifica;
@@ -190,6 +192,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 		posizionamentoManuale = (PosizionamentoManualeForm) serviceManager.lookup(PosizionamentoManualeForm.class);
+		utilmsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
@@ -595,7 +598,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			}	
 		}
 		if (posizione!=null			//se è null NON PROPONGO LA MODIFICA (faccio vedere in ELSE il testo del MOD)
-				&& (parole || tipoModifica.equals(posizione.getNodeName()))) {		//stesso se non modifica lo stesso tipo di partizione. 
+				&& (parole || ("atto".equals(tipoModifica) || tipoModifica.equals(posizione.getNodeName())))) {		//stesso se non modifica lo stesso tipo di partizione. 
 
 			scrivi.setEnabled(true);
 			//creo un frammento con il 'nodo', PRIMA dell'applicazione della modifica, per trasformarlo in HTML
@@ -838,7 +841,14 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		listModel.clear();
 		//prendo evento originale
 		ciclodivita.setActiveNode(selectionManager.getActiveNode());		//???????? serve ????
-		eventoriginale = ciclodivita.getEventi()[0];
+		try {
+			eventoriginale = ciclodivita.getEventi()[0];
+		}
+		catch (Exception e) {
+			utilmsg.msgInfo("Inserire l'evento originale");
+			form.close();
+			return;
+		}
 		//copia dell'originale
 		docEditor = documentManager.getDocumentAsDom();
 		form.showDialog(false);					
@@ -1208,17 +1218,20 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 					//considero i meta (se è un testo rosso vale come uno nel conteggio solo se NON è una Sostituzione
 					for (int i=0; i<posizioniTrovate.length; i++)
 						if (isTestoVigente(posizioniTrovate[i])) {
-							if (--conta==0)
+							if (--conta==0)																//<=
 								return posizioniTrovate[i];
 						}
 						else { //cerco nei meta
+							String idTag = "#"+UtilDom.getAttributeValueAsString(posizioniTrovate[i],"id");
+							boolean nonTrovato = true;
 							for (int j=0; j<dspSostituzione.length; j++) {
-								String idTag = "#"+UtilDom.getAttributeValueAsString(posizioniTrovate[i],"id");
-								String idMeta = UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(doc,UtilDom.getElementsByTagName(doc,doc,"dsp:novellando")[0],"dsp:pos")[0],"xlink:href");
-								if (idTag.equals(idMeta))
+								String idMeta = UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(doc,UtilDom.getElementsByTagName(doc,dspSostituzione[j],"dsp:novellando")[0],"dsp:pos")[0],"xlink:href");
+								if (idTag.equals(idMeta)) {
+									nonTrovato = false;
 									break;
+								}
 							}
-							if (--conta==0)
+							if (--conta==0 && nonTrovato)												//<=
 								return posizioniTrovate[i];
 						}
 				}
