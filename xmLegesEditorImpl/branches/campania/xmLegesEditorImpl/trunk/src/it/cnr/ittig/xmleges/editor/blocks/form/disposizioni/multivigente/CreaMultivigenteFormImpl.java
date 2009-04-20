@@ -257,17 +257,17 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 					Document listamodifiche = parsa(fileChooser.getSelectedFile());
 					Node[] modifica = UtilDom.getElementsByAttributeValue(listamodifiche,listamodifiche,"urn", urnDocumento);
 					if (modifica.length==0)
-						settaForm(false, "Nessuna modifica da apportare");
+						errore.setText("Nessuna modifica da apportare");
 					else {
 						nodiModifica = UtilDom.getChildElements(modifica[0]);
-						settaForm(false, "");
+						settaForm(false);
 						correnteModifica = 0;
 						settaModifica();
 						settaTasti(false,true,false);
 						setMessagge();
 					}
 				} catch (Exception ex) {
-					settaForm(false, "Errore nel file aperto");
+					errore.setText("Errore nel file aperto");
 					messaggio.setText("");
 				}
 			}
@@ -332,15 +332,16 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				//effettuo un test per vedere se la norma aperta è quella che mi aspettavo
 				try {
 				if (!urnAttivo.equals(UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(docAttivo,docAttivo,"originale")[0], "xlink:href"))) {
-					settaForm(false, "Il file aperto non è corretto");
+					errore.setText("Il file aperto non è corretto");
 					form.setDialogWaiting(false);
 					return;
 				}
 				} catch (Exception ex) { //arriva qui se non apro un documento NIR (xex)
-					settaForm(false, "Il file aperto non è corretto");
+					errore.setText("Il file aperto non è corretto");
 					form.setDialogWaiting(false);
 					return;
 				}
+				errore.setText(" ");
 				//azzero array e liste
 				dateEventi = new Vector();
 				idEventi = new Vector();
@@ -383,7 +384,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 					}
 				}
 				if (idEventi.size()==0)	{//il file aperto non contiene nessun evento di modifica (non dovrebbe mai succedere)
-					settaForm(false, "Nessun evento trovato");
+					errore.setText("Nessun evento trovato");
 					numMessaggiErrore++;
 				} else {
 					settaTasti(false,false,true);
@@ -438,7 +439,8 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			//ho finito di scorrere le modifiche per il modificante corrente. Testo se ne ho altre norme modificanti da applicare			
 			if (correnteModifica==nodiModifica.size()-1) {
 				settaTasti(false,false,false);
-				settaForm(true, "");
+				settaForm(true);
+				errore.setText("");
 			}
 			else {
 				correnteModifica++;
@@ -836,7 +838,8 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		
 		vecchieModifiche = -1;
 		//posiziona form vuota, tasto apertura lista
-		settaForm(false, "");
+		settaForm(false);
+		errore.setText("");
 		settaTasti(true, false, false);
 		listModel.clear();
 		//prendo evento originale
@@ -854,7 +857,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		form.showDialog(false);					
 	}
 
-	private void settaForm(boolean finito, String mess) {
+	private void settaForm(boolean finito) {
 		testoModificato.setText(" ");
 		testoModifica.setText(" ");
 		testoOriginale.setText(" ");
@@ -862,7 +865,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		norma.setText(" ");
 		if (finito)
 			formatestuale.setText("Finito");
-		errore.setText(mess);
+		errore.setText(" ");
 	}
 	
 	private void settaTasti(boolean elenco, boolean apri, boolean modifica) {
