@@ -411,7 +411,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 	}
 
 	private int getPosLista() {
-		System.out.println("num Errore " + numMessaggiErrore + " +1 +correnteEvento " + correnteEvento + " + vecchieModifiche "+vecchieModifiche + " = " + (numMessaggiErrore+1+correnteEvento+vecchieModifiche));
+		//System.out.println("num Errore " + numMessaggiErrore + " +1 +correnteEvento " + correnteEvento + " + vecchieModifiche "+vecchieModifiche + " = " + (numMessaggiErrore+1+correnteEvento+vecchieModifiche));
 		return numMessaggiErrore+1+correnteEvento+vecchieModifiche;
 	}
 	
@@ -658,7 +658,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 
 
 			
-			
+			boolean modificaDentroModSegnalata = false;
 			String tipoModifica = nodoMeta.getNodeName();
 			if ("dsp:abrogazione".equals(tipoModifica) || "dsp:sostituzione".equals(tipoModifica)) {
 				if (parole) {
@@ -670,6 +670,13 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				}
 				modifica1 = n;
 				idNovellando += UtilDom.getAttributeValueAsString(n, "id");
+				
+				//Un ulteriore controllo. Se ho modificato dentro ad un mod => avverti di possibili modifiche a catena (da gestire manualmente)
+				if (UtilDom.findParentByName(n, "mod")!=null) {
+					modificaDentroModSegnalata = true;
+					utilmsg.msgInfo("Attenzione. Stai modificando un testo di una modifica (mod). Questo implica modifiche implicite da gestire manualmente.");
+				}
+				
 			}
 			if ("dsp:integrazione".equals(tipoModifica) || "dsp:sostituzione".equals(tipoModifica)) {
 				if (parole) {
@@ -704,7 +711,13 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 						} catch (Exception e) {}		
 					}					
 					n = domDisposizioni.makePartition(posizione, docEditor.importNode((Node)UtilDom.getChildElements(virgolettaDaInserire).get(0),true), makeVigenza(posizione,"novella","abrogato"));
-					UtilDom.mergeTextNodes(n);
+					UtilDom.trimAndMergeTextNodes(n,true);
+					
+					//Un ulteriore controllo. Se ho modificato dentro ad un mod => avverti di possibili modifiche a catena (da gestire manualmente)
+					if (!modificaDentroModSegnalata && UtilDom.findParentByName(n, "mod")!=null)
+						utilmsg.msgInfo("Attenzione. Stai modificando un testo di una modifica (mod). Questo implica modifiche implicite da gestire manualmente.");
+						
+					
 				}
 				if (modifica1 == null)
 					modifica1 = n;
