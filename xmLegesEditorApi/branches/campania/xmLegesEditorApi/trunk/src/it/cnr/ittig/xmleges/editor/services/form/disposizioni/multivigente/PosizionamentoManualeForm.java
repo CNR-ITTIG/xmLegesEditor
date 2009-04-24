@@ -30,8 +30,6 @@ public interface PosizionamentoManualeForm extends Service {
 	 */
 	public void openForm(FormClosedListener listener, Node inserire, String nomeDomNodo);
 	
-	public void azzeraBordi();
-	public void aggiungiBordo(String ord, String tipo);
 	public boolean isChange();
 	public Node getNodoSelezionato();
 	public int getInizioSelezione();
