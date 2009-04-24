@@ -27,7 +27,6 @@ import java.util.Vector;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -118,6 +117,7 @@ public class PosizionamentoManualeFormImpl implements PosizionamentoManualeForm,
 		sceltotesto = (JRadioButton) form.getComponentByName("editor.disposizioni.multivigente.testo"); 
 		sceltopartizione = (JRadioButton) form.getComponentByName("editor.disposizioni.multivigente.partizione");
 		sblocca = (JCheckBox)  form.getComponentByName("editor.disposizioni.multivigente.sblocca");
+		sblocca.addActionListener(this);
 		ButtonGroup grupporadio = new ButtonGroup();
 		grupporadio.add(sceltotesto);
 		grupporadio.add(sceltopartizione);
@@ -174,6 +174,18 @@ public class PosizionamentoManualeFormImpl implements PosizionamentoManualeForm,
 		if (e.getSource() == annulla) {
 			idotesto.setText("");
 			form.close();
+		}
+		if (e.getSource() == sblocca) {
+			activeNode = selectionManager.getActiveNode();
+			if (activeNode!=null) {
+				start = selectionManager.getTextSelectionStart();
+				end = selectionManager.getTextSelectionEnd();
+			}
+			else {
+				start=-1;
+				end=-1;
+			}
+			updateContent(activeNode, start, end);
 		}
 	}
 
