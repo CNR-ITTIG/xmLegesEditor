@@ -26,6 +26,7 @@ import java.util.Vector;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -74,9 +75,9 @@ public class PosizionamentoManualeFormImpl implements PosizionamentoManualeForm,
 	Node daEliminare;
 	
 	Form form;
-	JComboBox bordoOrdTipo;
 	JButton cambia;
 	JButton annulla;
+	JCheckBox sblocca;
 	
 	DocumentManager documentManager;
 	EventManager eventManager;
@@ -116,7 +117,7 @@ public class PosizionamentoManualeFormImpl implements PosizionamentoManualeForm,
 		idotesto = (JTextField) form.getComponentByName("editor.disposizioni.multivigente.selezione");
 		sceltotesto = (JRadioButton) form.getComponentByName("editor.disposizioni.multivigente.testo"); 
 		sceltopartizione = (JRadioButton) form.getComponentByName("editor.disposizioni.multivigente.partizione");
-		bordoOrdTipo = (JComboBox) form.getComponentByName("editor.disposizioni.multivigente.selez.ordTipo");
+		sblocca = (JCheckBox)  form.getComponentByName("editor.disposizioni.multivigente.sblocca");
 		ButtonGroup grupporadio = new ButtonGroup();
 		grupporadio.add(sceltotesto);
 		grupporadio.add(sceltopartizione);
@@ -146,6 +147,9 @@ public class PosizionamentoManualeFormImpl implements PosizionamentoManualeForm,
 	}
 
 	private boolean canSelec(Node node) {
+		
+		if (sblocca.isSelected())
+			return true;
 		
 		//Non deve essere selezionabile ciò che già ha un finefigore!?!?! (e se sto puntando per una integrazione)????
 		//Non deve essere puntabile un qualcosa che non può avere un fratello del tipo di quello che voglio inserire
@@ -208,6 +212,7 @@ public class PosizionamentoManualeFormImpl implements PosizionamentoManualeForm,
 
 	public void openForm(FormClosedListener listener, Node inserire, String nomeDomNodo) {
 		
+		sblocca.setSelected(false);
 		this.nomeDomNodo = nomeDomNodo;
 		if (inserire!=null) {
 			Vector temp = UtilDom.getChildElements(inserire);
@@ -236,16 +241,6 @@ public class PosizionamentoManualeFormImpl implements PosizionamentoManualeForm,
 			end=-1;
 		}
 		updateContent(activeNode, start, end);
-	}
-	
-	public void azzeraBordi() {
-		bordoOrdTipo.removeAll();
-		bordoOrdTipo.setEnabled(false);
-	}
-	
-	public void aggiungiBordo(String ord, String tipo) {
-		bordoOrdTipo.addItem(ord + " " + tipo);
-		bordoOrdTipo.setEnabled(true);
 	}
 	
 	public boolean isChange() {

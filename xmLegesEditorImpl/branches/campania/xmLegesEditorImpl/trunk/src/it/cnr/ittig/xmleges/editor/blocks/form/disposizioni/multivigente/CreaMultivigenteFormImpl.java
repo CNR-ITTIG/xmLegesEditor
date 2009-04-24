@@ -1031,7 +1031,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		}
 		if (trovataPosizione) {	//se ho individuato la partizione del rif, continuo nella ricerca di eventuali bordi
 			Node[] bordi = UtilDom.getElementsByTagName(doc,norma,"ittig:bordo");
-			posizionamentoManuale.azzeraBordi();
+	//posizionamentoManuale.azzeraBordi(); 														BUTTATO TUTTO PER ORA
 			for (int i=0; i<bordi.length; i++) {
 				String tag=null;
 				String id=null;
@@ -1042,7 +1042,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 					ordinale = true;
 				}
 				String tipo = UtilDom.getAttributeValueAsString(bordi[i],"tipo");
-				posizionamentoManuale.aggiungiBordo(numOrd,tipo);
+	//posizionamentoManuale.aggiungiBordo(numOrd,tipo); 										BUTTATO TUTTO PER ORA
 				//tipo: atto|allegato|libro|parte|titolo|capo|sezione|articolo|comma|alinea|coda|lettera|numero|punto|periodo|parole|capoverso
 				if (tipo.equals("atto")) {
 					System.out.println("cerca_Rif_e_Bordo: atto??   ATTO non dovrebbe mai essere presente nei BORDI !!!!");
