@@ -350,8 +350,8 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				dateEventi = new Vector();
 				idEventi = new Vector();
 				disposizioniDaConvertire = new Vector();
-				correnteEvento = 0;
 				vecchieModifiche = getPosLista();
+				correnteEvento = 0;
 				listModel.addElement("Apertura norma: " + urnAttivo);
 				//recupero tutti i meta che lavorano su 'urnDocumento'  [ Teoricamente potrebbe essere sbagliato, devo guardare solo all'evento interessato !!!!
 				//  													  Ci potrebbero essere altri eventi, di altre norme, che si accavallano a questi eventi. ]
@@ -408,8 +408,6 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			correnteEvento++;
 			settaTasti(false,false,true);
 			while (proponiModificaTesto(null));
-			
-			
 		}
 		
 		if (e.getSource() == repo) {
@@ -475,7 +473,17 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		Node tempNovella = UtilDom.findRecursiveChild(nodoMeta,"dsp:novella");
 		if (tempNovella!=null) {
 			String idVirgoletta = UtilDom.getAttributeValueAsString(UtilDom.findRecursiveChild(tempNovella,"dsp:pos"),"xlink:href").substring(1);
-			virgolettaDaInserire = UtilDom.getElementsByAttributeValue(docAttivo,docAttivo,"id",idVirgoletta)[0].cloneNode(true);  //lo clono perchè potrei integrarlo con num e rubrica e poi rimosizionarmi manualmente altrove
+			Node[] trovati = UtilDom.getElementsByAttributeValue(docAttivo,docAttivo,"id",idVirgoletta);
+			if (trovati.length>0)
+				virgolettaDaInserire = UtilDom.getElementsByAttributeValue(docAttivo,docAttivo,"id",idVirgoletta)[0].cloneNode(true);  //lo clono perchè potrei integrarlo con num e rubrica e poi rimosizionarmi manualmente altrove
+			else {
+				utilmsg.msgInfo("Attenzione. Hai informazioni nei metadati non presenti nel testo.");
+				try {
+					listModel.setElementAt(((String) listModel.get(getPosLista())) + " --> saltata", getPosLista());
+				} catch (Exception ex) {}
+				correnteEvento++;
+				return true;
+			}
 		}
 		Node tempNovellando = UtilDom.findRecursiveChild(nodoMeta,"dsp:novellando");
 		if (tempNovellando!=null) {
@@ -575,10 +583,10 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 					//se è parole, cerco le occorrenze di parole
 					//per ora solo la prima occorrenza della parola (numeroIterazioni=1)
 					 try {
-					 String  parolaDaCercare = UtilDom.getText(virgolettaDaEliminare).trim();
+					 String  parolaDaCercare = UtilDom.getText(virgolettaDaEliminare).trim().toLowerCase();
 					 Node nodoParola = cercaParola(parolaDaCercare, posizione);
 					 if (nodoParola!=null) {
-						 start = UtilDom.getText(nodoParola).indexOf(parolaDaCercare);
+						 start = UtilDom.getText(nodoParola).toLowerCase().indexOf(parolaDaCercare);
 						 end = start+parolaDaCercare.length();
 						 posizione = nodoParola;
 					 }
@@ -680,7 +688,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				if (parole) {
 					//n = domDisposizioni.setVigenza(posizione, "", start, end, makeVigenza(posizione,"novellando","abrogato"));
 					n = domDisposizioni.setVigenza(posizione, "", start, end, makeVigenza(posizione,"novellando","abrogato"));
-					
+					end = -1; //devo fare ancora il nuovo span
 				} else {
 					n = domDisposizioni.setVigenza(posizione, posizione.getNodeValue(), start, end, makeVigenza(posizione,"novellando","abrogato"));
 				}
@@ -699,7 +707,9 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				if (parole) {
 					if (n==null)
 						n = posizione;
-					n = domDisposizioni.makeSpan(n, -1, makeVigenza(n,"novella","abrogato"),UtilDom.getText(virgolettaDaInserire));
+					
+					//n = domDisposizioni.makeSpan(n, -1, makeVigenza(n,"novella","abrogato"),UtilDom.getText(virgolettaDaInserire));
+					n = domDisposizioni.makeSpan(n, end, makeVigenza(n,"novella","abrogato"),UtilDom.getText(virgolettaDaInserire));
 					
 				} else {
 					//NEL CASO DI SOSTITUZIONE, se la partizione da inserire non ha NUM o RUBRICA le recupero da quella uscente (se presenti)
@@ -976,7 +986,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 	private Node cercaParola(String parolaDaCercare, Node nodoCorrente) {
 		Node ret = null;
 		if (nodoCorrente.getNodeType() == Node.TEXT_NODE)
-			if ((UtilDom.getText(nodoCorrente)).indexOf(parolaDaCercare)!=-1)
+			if ((UtilDom.getText(nodoCorrente).toLowerCase()).indexOf(parolaDaCercare)!=-1)
 				return nodoCorrente;
 
 		if (nodoCorrente.getNodeType() == Node.ELEMENT_NODE) {
@@ -1292,8 +1302,6 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				else {
 					for (int i=0; i<posizioniTrovate.length; i++)	//restituisco quello con NUM che inizia con numeroTag escludendo i testi Rossi 
 						if (isTestoVigente(posizioniTrovate[i])) {
-							if (i==12)
-								System.out.println("ii");
 							conta--;
 							String numero = getNum(doc,posizioniTrovate[i]).trim();
 							if (numero.startsWith(numeroTag) || ("".equals(numero) && conta<=0))   //se trovo uno senza num , che è almeno numeroTag°, allora lo restituisco
