@@ -161,7 +161,7 @@ public class NdrImpl implements Ndr, Loggable, Serviceable {
 		// Preparazione elemento ndr
 	
 		Node ndr = UtilDom.createElement(doc,"ndr");
-		UtilDom.setAttributeValue(ndr, "num", id);
+		UtilDom.setAttributeValue(ndr, "num", "#"+id);
 		UtilDom.setAttributeValue(ndr, "valore", value);
 
 		try {
