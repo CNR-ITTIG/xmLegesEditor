@@ -67,7 +67,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	        </xsl:attribute>
 	        
 			<font color="blue">
-			<xsl:for-each select="//nir:ndr[@num=$idnota]">
+			
+			<xsl:for-each select="//nir:ndr[@num=concat('#',$idnota)]">
 			  <b>
 				<xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
 					<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
