@@ -1426,6 +1426,8 @@ public class AggiornaIdFrozenLaw {
 //		Vector toBeCanceled=new Vector();
 		for (int i = 0; i < ndr.getLength(); i++) {
 			String id = UtilDom.getAttributeValueAsString(ndr.item(i), "num");
+			if(id.startsWith("#"))
+				id=id.substring(1);
 			if(id==null || id.trim().equals("")){
 //				toBeCanceled.add(ndr.item(i));
 			}
@@ -1519,18 +1521,7 @@ public class AggiornaIdFrozenLaw {
 		// ====> getElementById potrebbe non funzionare
 		// si rimpiazza con getNotaById
 		
-	
-//      TEST
-//		
-//		System.err.println("getNotaById; id= "+id);
-//		Node nota = (Node)doc.getElementById(id);
-//		//System.err.println("con getElementById: "+nota.getTextContent());
-//		
-//		if(nota==null)
-//			System.err.println("getelementById NON FUNZIONA");
-//		else
-//			System.err.println("getelementById FUNZIONA");
-	
+
 		
 		NodeList notes = document.getElementsByTagName("nota");
 		for (int i = 0; i < notes.getLength(); i++) {
