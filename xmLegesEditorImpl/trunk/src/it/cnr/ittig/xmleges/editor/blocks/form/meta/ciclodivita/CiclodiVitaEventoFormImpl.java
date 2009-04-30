@@ -36,6 +36,7 @@ import java.awt.Dimension;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.ParseException;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Vector;
 
@@ -250,10 +251,23 @@ public class CiclodiVitaEventoFormImpl implements CiclodiVitaEventoForm, Loggabl
 					tagTipoRelazioneSottoFormDatiEvento.addItem("originale");
 					
 					NodeList pubList = doc.getElementsByTagName("entratainvigore");
+					//FIXME: AGGIUNGERE LA DATA DI PUBBLICAZIONE PIù 15 GIORNI
+					String data_pubb = (descrittori.getPubblicazione(doc.getElementsByTagName("NIR").item(0))).getNorm();
+					if (data_pubb!=null && !data_pubb.equals("")){
+						Calendar c1 = Calendar.getInstance(); 
+						c1.setTime(UtilDate.normToDate(data_pubb)); 						
+						c1.add(Calendar.DATE,15);
+						data_pubb = UtilDate.dateToNorm(c1.getTime());
+					}
+					else 
+						data_pubb = "";
+					
 					String data="";
 					if (pubList.getLength() > 0) {
 						Node n = pubList.item(0);					
-						data = n.getAttributes().getNamedItem("norm") != null ? n.getAttributes().getNamedItem("norm").getNodeValue() : null;
+						data = (n.getAttributes().getNamedItem("norm") != null && !n.getAttributes().getNamedItem("norm").getNodeValue().equals("")) ? 
+								n.getAttributes().getNamedItem("norm").getNodeValue() 
+								: data_pubb;
 					}				
 					dataFormDatiEvento.set(UtilDate.normToDate(data));
 					tagTipoEvento.setText("entrata in vigore");
