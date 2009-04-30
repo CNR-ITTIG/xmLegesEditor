@@ -12,7 +12,6 @@ import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManager;
 import it.cnr.ittig.xmleges.core.services.dtd.DtdRulesManagerException;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
-import it.cnr.ittig.xmleges.core.util.date.UtilDate;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.attive.DispAttiveFormImpl;
 import it.cnr.ittig.xmleges.editor.services.dom.meta.ciclodivita.Evento;

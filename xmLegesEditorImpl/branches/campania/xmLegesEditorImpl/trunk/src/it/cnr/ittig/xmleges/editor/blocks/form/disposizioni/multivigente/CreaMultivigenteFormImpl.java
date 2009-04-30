@@ -640,6 +640,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			EditTransaction t = null;
 			try {
 				t = documentManager.beginEdit();
+				documentManager.setChanged(true);
 				
 			if (primaModifica) {	//implementare altro meccanismo				
 				//creo la relazione (passiva)
@@ -691,6 +692,14 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 					end = -1; //devo fare ancora il nuovo span
 				} else {
 					n = domDisposizioni.setVigenza(posizione, posizione.getNodeValue(), start, end, makeVigenza(posizione,"novellando","abrogato"));
+					//dovrebbe accadere solo su Abrogazione di intero atto
+					String correzId = UtilDom.getAttributeValueAsString(n, "id");
+					if (correzId==null) {	
+						String prefisso = n.getLocalName();
+						int occorrenze = documentManager.getDocumentAsDom().getElementsByTagName(prefisso).getLength();
+						UtilDom.setIdAttribute(n, prefisso + occorrenze);
+						correzId = UtilDom.getAttributeValueAsString(n, "id");
+					}
 				}
 				modifica1 = n;
 				idNovellando += UtilDom.getAttributeValueAsString(n, "id");
@@ -741,7 +750,11 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 					}					
 					figliVirgoletta = UtilDom.getChildElements(virgolettaDaInserire);
 					n = domDisposizioni.makePartition(posizione, docEditor.importNode((Node)figliVirgoletta.get(0),true), makeVigenza(posizione,"novella","abrogato"));
-					UtilDom.trimAndMergeTextNodes(n,true);
+					try {
+						UtilDom.trimAndMergeTextNodes(n,true);
+					} catch (Exception e) {
+						// in un caso da errore (merge di Articolo con più commi LR Campania 12/1973)
+					}
 					
 					//Se ho modificato dentro ad un mod => avverti di possibili modifiche a catena (da gestire manualmente)
 					if (!modificaDentroModSegnalata && UtilDom.findParentByName(n, "mod")!=null)
