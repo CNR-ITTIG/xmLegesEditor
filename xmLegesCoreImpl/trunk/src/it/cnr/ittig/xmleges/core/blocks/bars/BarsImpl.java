@@ -149,8 +149,7 @@ public class BarsImpl implements Bars, EventManagerListener, Loggable,
 
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws java.lang.Exception {
-		prefs = preferenceManager.getPreferenceAsProperties(getClass()
-				.getName());
+		prefs = preferenceManager.getPreferenceAsProperties(getClass().getName());
 		toolbarPanel = new ToolbarPanel();
 		menubar = new JMenuBar();
 		statusbar = new StatusBarImpl(logger, i18n);
@@ -305,10 +304,9 @@ public class BarsImpl implements Bars, EventManagerListener, Loggable,
 			toolbar.setName(actionName);
 			panel.add(toolbar);
 			toolbar.setVisible(checkPreference(actionName));
-			BarsImpl.ViewBarAction viewAction = new BarsImpl.ViewBarAction(
-					toolbar);
+			BarsImpl.ViewBarAction viewAction = new BarsImpl.ViewBarAction(toolbar);
 			actionManager.registerAction(actionName, viewAction);
-			logger.debug("Toolbar builded: " + name);
+			logger.debug("Toolbar built: " + name);
 		}
 	}
 
