@@ -11,8 +11,6 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 
-import  it.cnr.ittig.xmleges.core.util.dom.UtilDom;
-
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMConfiguration;
 import org.w3c.dom.Document;
