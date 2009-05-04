@@ -164,27 +164,20 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 		dbf.setNamespaceAware(false);
 		UtilFile.copyFileInTemp(getClass().getResourceAsStream("nir-export-mod.xsl"), "nir-export-mod.xsl");
 		
-		String[] software = new String[]{"sf-ilc/ittig", "sf-ilc/ittig.exe", "sf-ilc/LESSICO.txt", "sf-ilc/MACRO.txt", "sf-ilc/RULE.txt"};
-		// copio in software-ilc
 		
-		// No. l'eseguibile dell'ilc linka staticamente i vari moduli quindi devo lavorare nella cartalla corrente
-		// (ovvero sia l'eseguibile che il file da trattare direttamente nella TEMP)    ---(A)(B)(C)
+
 		
-		for (int i = 0; i < software.length; i++)
-			//(A) UtilFile.copyFileInTempDir(getClass().getResourceAsStream(software[i]), "software-ilc", software[i]);
-			UtilFile.copyFileInTemp(getClass().getResourceAsStream(software[i]), software[i]);
-
-		String[] data = new String[]{"sf-ilc/data/abbrevi_punto_intermedio", "sf-ilc/data/abbrevia", "sf-ilc/data/cond_subst", "sf-ilc/data/match", "sf-ilc/data/match.~1.1.1.1.~", "sf-ilc/data/nomi_propri.txt", "sf-ilc/data/orto", "sf-ilc/data/orto.~1.8.~"};
-		// copio in software-ilc/data
-		for (int i = 0; i < data.length; i++)
-			//(B) UtilFile.copyFileInTempDir(getClass().getResourceAsStream(data[i]), "software-ilc/data", data[i]);
-			UtilFile.copyFileInTempDir(getClass().getResourceAsStream(data[i]), "data", data[i]);
-
-		String[] lists = new String[]{"sf-ilc/LISTS/C_IND", "sf-ilc/LISTS/C_LIST", "sf-ilc/LISTS/CL_DATA", "sf-ilc/LISTS/CL_IND", "sf-ilc/LISTS/CL_LIST", "sf-ilc/LISTS/E_DATA", "sf-ilc/LISTS/E_IND1", "sf-ilc/LISTS/E_IND1", "sf-ilc/LISTS/E_IND10", "sf-ilc/LISTS/E_IND11", "sf-ilc/LISTS/E_IND12", "sf-ilc/LISTS/E_IND13", "sf-ilc/LISTS/E_IND14", "sf-ilc/LISTS/E_IND15", "sf-ilc/LISTS/E_IND16", "sf-ilc/LISTS/E_IND17", "sf-ilc/LISTS/E_IND18", "sf-ilc/LISTS/E_IND19", "sf-ilc/LISTS/E_IND2", "sf-ilc/LISTS/E_IND20", "sf-ilc/LISTS/E_IND3", "sf-ilc/LISTS/E_IND4", "sf-ilc/LISTS/E_IND5", "sf-ilc/LISTS/E_IND6", "sf-ilc/LISTS/E_IND7", "sf-ilc/LISTS/E_IND8", "sf-ilc/LISTS/E_IND9", "sf-ilc/LISTS/E_LIST1", "sf-ilc/LISTS/E_LIST10", "sf-ilc/LISTS/E_LIST11", "sf-ilc/LISTS/E_LIST12", "sf-ilc/LISTS/E_LIST13", "sf-ilc/LISTS/E_LIST14", "sf-ilc/LISTS/E_LIST15", "sf-ilc/LISTS/E_LIST16", "sf-ilc/LISTS/E_LIST17", "sf-ilc/LISTS/E_LIST18", "sf-ilc/LISTS/E_LIST19", "sf-ilc/LISTS/E_LIST2", "sf-ilc/LISTS/E_LIST20", "sf-ilc/LISTS/E_LIST3", "sf-ilc/LISTS/E_LIST4", "sf-ilc/LISTS/E_LIST5", "sf-ilc/LISTS/E_LIST6", "sf-ilc/LISTS/E_LIST7", "sf-ilc/LISTS/E_LIST8", "sf-ilc/LISTS/E_LIST9", "sf-ilc/LISTS/E_LIST10", "sf-ilc/LISTS/L_LIST", "sf-ilc/LISTS/MG_C_LIST", "sf-ilc/LISTS/MG_multiwords", "sf-ilc/LISTS/MG_N_LIST", "sf-ilc/LISTS/MG_P_LIST", "sf-ilc/LISTS/R_IND1", "sf-ilc/LISTS/R_IND2", "sf-ilc/LISTS/R_IND3", "sf-ilc/LISTS/R_IND4.1", "sf-ilc/LISTS/R_IND4.1.gz", "sf-ilc/LISTS/R_IND4.2", "sf-ilc/LISTS/R_IND4.2.gz", "sf-ilc/LISTS/R_IND4seq", "sf-ilc/LISTS/R_LIST1", "sf-ilc/LISTS/R_LIST2", "sf-ilc/LISTS/R_LIST3", "sf-ilc/LISTS/R_LIST4", "sf-ilc/LISTS/R_LIST4.1", "sf-ilc/LISTS/R_LIST4.1.gz", "sf-ilc/LISTS/R_LIST4.2", "sf-ilc/LISTS/R_LIST4.2.gz", "sf-ilc/LISTS/R_LIST4seq", "sf-ilc/LISTS/R1_DATA", "sf-ilc/LISTS/R2_DATA", "sf-ilc/LISTS/RR_E_DATA", "sf-ilc/LISTS/RR_R_DATA", "sf-ilc/LISTS/RR_setvar1", "sf-ilc/LISTS/RR_setvar2", "sf-ilc/LISTS/S_DATA", "sf-ilc/LISTS/S_IND", "sf-ilc/LISTS/S_LIST", "sf-ilc/LISTS/setvar", "sf-ilc/LISTS/setvar1", "sf-ilc/LISTS/setvar2", "sf-ilc/LISTS/setvar3", "sf-ilc/LISTS/setvar4"};
-		// copio in software-ilc/data
-		for (int i = 0; i < lists.length; i++)
-			//(C) UtilFile.copyFileInTempDir(getClass().getResourceAsStream(lists[i]), "software-ilc/lists", lists[i]);
-			UtilFile.copyFileInTempDir(getClass().getResourceAsStream(lists[i]), "LISTS", lists[i]);
+		logger.debug("Start copying ilc SW");
+		String ilcDir = "sf-ilc";
+		String ilcSW = ilcDir+".zip";
+		if(!UtilFile.fileExistInTemp(ilcDir)){
+			UtilFile.copyFileInTemp(getClass().getResourceAsStream(ilcSW),ilcSW);
+			UtilFile.unZip(UtilFile.getFileFromTemp(ilcSW).getAbsolutePath(),UtilFile.getTempDirName());
+			UtilFile.getFileFromTemp(ilcSW).delete();
+			logger.debug("End copying ilc SW");
+		}else{
+			System.err.println("Already done");
+		}
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -606,11 +599,13 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 		else
 			eseguibileIlc = "ittig";
 		
-		File command = new File(UtilFile.getTempDirName() + File.separatorChar + eseguibileIlc);
+		String ilcDir = UtilFile.getTempDirName() + File.separatorChar + "sf-ilc";
+		
+		File command = new File(ilcDir + File.separatorChar + eseguibileIlc);
 		UtilFile.setExecPermission(command);
 		
 		try {
-			String toExec = command.toString() + " -i " + UtilFile.getTempDirName() + File.separatorChar + file + " -p " + UtilFile.getTempDirName();
+			String toExec = command.toString() + " -i " + UtilFile.getTempDirName() + File.separatorChar + file + " -p " + ilcDir;
 			logger.debug("command=" + toExec);
 			Process p = Runtime.getRuntime().exec(toExec);
 			p.waitFor();
