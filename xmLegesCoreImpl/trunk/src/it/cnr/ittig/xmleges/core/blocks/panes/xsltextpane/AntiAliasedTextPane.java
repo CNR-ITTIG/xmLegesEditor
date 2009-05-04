@@ -824,7 +824,7 @@ public final class AntiAliasedTextPane extends JTextPane implements DocumentList
 		if(logger.isDebugEnabled())
 			logger.debug("elem  null for   "+id);
 		
-		System.err.println("  LOCAL UPDATE FAILED IN "+ pane.name + "FOR node: "+node.getNodeName()+" ; id = "+id +" HTML elem "+elem);
+		//System.err.println("  LOCAL UPDATE FAILED IN "+ pane.name + "FOR node: "+node.getNodeName()+" ; id = "+id +" HTML elem "+elem);
 		
 		return null;
 	}
