@@ -12,7 +12,12 @@ import java.io.InputStream;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Enumeration;
+import java.util.SortedSet;
 import java.util.StringTokenizer;
+import java.util.TreeSet;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 /**
  * Classe di utilit&agrave; per i file.
@@ -34,6 +39,8 @@ public class UtilFile {
 
 	final static String tempDir;
 	final static String suffixFolder = "_xmlfile/";
+	
+	protected static SortedSet dirsMade;
 	
 	static {
 		tempDir = "temp";
@@ -468,6 +475,98 @@ public class UtilFile {
 		} catch (Exception ex) {
 			return false;
 		}
+	}
+	
+	
+//////////////////////////////////////////////
+	// 		UNZIP
+	//////////////////////////////////////////////
+	
+	/**
+	 * 
+	 */
+	public static void unZip(String fileName){
+		  unZip(fileName,"");
+	}
+	
+	  
+	/**
+	 * 
+	 * @param fileName
+	 * @param toDir
+	 */
+	public static void unZip(String fileName, String toDir) {
+		ZipFile zipFile;
+	    dirsMade = new TreeSet();
+	    try {
+	      zipFile = new ZipFile(fileName);
+	      Enumeration all = zipFile.entries();
+	      while (all.hasMoreElements()) {
+	        getFile(zipFile,(ZipEntry) all.nextElement(),toDir);
+	      }
+	    } catch (IOException err) {
+	      System.err.println("IO Error: " + err);
+	      return;
+	    }
+	}
+	
+	
+	private static ZipEntry convertZipEntryFileSeparator(ZipEntry ze){
+		String s = ze.getName();
+		if ( File.separatorChar != '/')
+		  s = s.replace('/', File.separatorChar);
+		return new ZipEntry(s);
+	}
+
+	
+	/**
+	 * Process one file from the zip, given its name. Either print the name, or
+	 * create the file on disk.
+	 */
+	protected static void getFile(ZipFile zipFile, ZipEntry e, String toDir) throws IOException {
+
+		byte[] b = new byte[8092];  
+
+		String zipName = convertZipEntryFileSeparator(e).getName();
+		if (zipName.startsWith(File.separator)) {
+			System.out.println("Ignoring absolute paths");    
+			zipName = zipName.substring(1);
+		}
+
+		zipName=toDir+File.separatorChar+zipName;
+
+		// if a directory, just return. We mkdir for every file,
+		// since some widely-used Zip creators don't put out
+		// any directory entries, or put them in the wrong place.
+		if (zipName.endsWith(File.separator)) {
+			return;
+		}
+		// Else must be a file; open the file for output
+		// Get the directory part.
+		int ix = zipName.lastIndexOf(File.separatorChar);
+		if (ix > 0) {
+			String dirName = zipName.substring(0, ix);
+			if (!dirsMade.contains(dirName)) {
+				File d = new File(dirName);
+				// If it already exists as a dir, don't do anything
+				if (!(d.exists() && d.isDirectory())) {
+					// Try to create the directory, warn if it fails
+					System.out.println("Creating Directory: " + dirName);
+					if (!d.mkdirs()) {
+						System.err.println("Warning: unable to mkdir "+ dirName);
+					}
+					dirsMade.add(dirName);
+				}
+			}
+		}
+		//System.err.println("Creating " + zipName);
+		FileOutputStream os = new FileOutputStream(zipName);
+		InputStream is = zipFile.getInputStream(e);
+		int n = 0;
+		while ((n = is.read(b)) > 0)
+			os.write(b, 0, n);
+		is.close();
+		os.close();
 	}
 	
 	
