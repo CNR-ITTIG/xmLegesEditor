@@ -1,0 +1,102 @@
+	body {
+		margin-left: 15 px;
+		font-family: "Verdana, Arial, Helvetica, sans-serif" ;
+		font-size: 10px ;
+	}
+	.title { 
+		font-size: 110% ;
+		font-weight: bold;
+		text-align: center;
+	} 
+	.emanante { 
+		font-size: 200% ;
+		text-align: center;
+		text-decoration: underline;
+	}
+	.numdoc { 
+		font-size: 110% ;
+		text-align: right;
+		font-weight: bold;
+	}
+	.nome { 
+		font-size: 110% ;
+	}
+	
+	.sinistra { 
+		font-size: 130% ;
+		text-align: left;
+		line-height: 100% ;
+	}
+	 	
+	.toc-articolo, .toc-annessi {
+		margin-left: 7px;
+		font-size: 65%;
+	}
+	.toc-comma {
+		margin-left: 15px;
+		font-size: 65%;
+	}
+	.toc {
+		margin-left: 2px;
+		font-size: 65%;
+		font-weight: bold;
+	}
+	.capo { 
+		font-size: 110% ;
+		font-weight: bold;
+		text-align: center;
+		line-height: 100% ;
+		margin-top: 25px; 
+	} 
+	.articolo { 
+		text-align: center;
+		font-weight: bold;
+		margin-top: 15px; 
+	}
+	.comma { 
+		margin-top: 5px; 
+	}
+	
+	.small {
+		font-size: 65% ;
+	}
+	.intestazione {
+		margin: 15px, 15%, 0px, 15%;
+		text-align: center;
+	}
+	.el {
+		margin-left: 40px;
+		text-indent: -30px;
+		margin-top: 3px;
+	}
+	.en {
+		margin-left: 50px;
+		text-indent: -30px;
+		margin-top: 3px;
+	}	
+    b b { font-weight: normal; }
+	.ndr {
+		color: #00cc00;
+		text-decoration: underline;
+	}
+	.soppresso {
+		color: red;
+		text-decoration: line-through;
+	}
+	.inserito {
+		color: green;
+	}
+	.mod {
+		display: inline;
+		font-weight: normal; 
+		font-style: normal; 
+		background: #FFDDAA;
+	}
+	.virgolette {
+		display: inline; 
+		border-width: solid; 
+		background: #FFEE99;
+	}	
+	.spazio {
+		display: inline; 
+	}

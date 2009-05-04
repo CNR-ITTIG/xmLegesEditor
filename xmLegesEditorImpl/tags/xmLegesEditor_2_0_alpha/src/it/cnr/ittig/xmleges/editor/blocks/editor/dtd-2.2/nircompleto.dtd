@@ -1,0 +1,193 @@
+<!ENTITY % PredefinedSimpleTypes SYSTEM "./pst.dtd">
+%PredefinedSimpleTypes;
+
+<!--  ====================================================================        
+           Modello dei documenti di NormeInRete (NIR)                               
+                                                                                    
+           nirstrict: definizioni globali dello schema completo                    
+           Dipende da: niente                                                       
+                                                                                    
+           Versione  2.2                                                            
+           Release   29/07/2008                                                     
+           Fabio Vitali - UniBo                                                     
+                                                                                    
+           Per un'introduzione, si veda il documento 'note.html'                    
+        ====================================================================        
+
+        ====================================================================        
+                                                                                    
+       	Entita' esterne: caratteri                                               
+                                                                                    
+        ====================================================================  -->
+
+<!ENTITY % ISOlat1 SYSTEM "./ISOlat1.ent">%ISOlat1;
+   
+<!ENTITY % ISOlat2 SYSTEM "./ISOlat2.ent">%ISOlat2;
+   
+<!ENTITY % ISOgrk3 SYSTEM "./ISOgrk3.ent">%ISOgrk3;
+   
+<!ENTITY % ISOdia SYSTEM "./ISOdia.ent">%ISOdia;
+     
+<!ENTITY % ISOpub SYSTEM "./ISOpub.ent">%ISOpub;
+     
+<!ENTITY % ISOnum SYSTEM "./ISOnum.ent">%ISOnum;
+     
+<!ENTITY % ISOtech SYSTEM "./ISOtech.ent">%ISOtech;
+   
+
+<!--  ====================================================================        
+                                                                                    
+       	Definizione dei namespace                                                
+                                                                                    
+        ====================================================================  -->
+
+
+
+
+
+
+<!--  ====================================================================        
+                                                                                    
+       	Entita' specifiche del documento completo                                
+                                                                                    
+        ====================================================================  -->
+
+<!ENTITY % Tarticolatobase     "(inlinemeta?,num?,rubrica?)" >
+
+<!ENTITY % CMcompleto   "(libro+ | parte+ | titolo+ | capo+ | articolo+)" >
+<!ENTITY % CMlibro      "(%Tarticolatobase;,(parte+ | titolo+ | capo+ | articolo+))" >
+<!ENTITY % CMparte      "(%Tarticolatobase;,(titolo+ | capo+ | articolo+))" >
+<!ENTITY % CMtitolo     "(%Tarticolatobase;,(capo+ | articolo+))" >
+<!ENTITY % CMcapo       "(%Tarticolatobase;,(sezione+ | articolo+))" >
+<!ENTITY % CMsezione    "(%Tarticolatobase;,(articolo+))" >
+<!ENTITY % CMparagrafo  "(%Tarticolatobase;,(libro | parte | titolo | capo | sezione | articolo | partizione | contenitore)+)" >
+<!ENTITY % CMpartizione "(%Tarticolatobase;,(libro | parte | titolo | capo | sezione | paragrafo | articolo | partizione | contenitore)+)" >
+<!ENTITY % CMarticolo   "(inlinemeta?,num,((rubrica,decorazione?) | (decorazione,rubrica?))?,comma+)" >
+<!ENTITY % CMcomma      "(inlinemeta?,num?,(corpo | (alinea?,el+,coda?)),decorazione?)" >
+<!ENTITY % CMel         "(num,(corpo | (alinea?,en+,coda?)),decorazione?)" >
+<!ENTITY % CMen         "(num,(corpo | (alinea?,en+,coda?)),decorazione?)" >
+<!ENTITY % CMep         "(num)" >
+<!ENTITY % CMlista      "(num,(corpo | (alinea?,lista+,coda?)))" >
+
+<!--  ====================================================================        
+                                                                                    
+       	Entita' tipodocumento                                                    
+                                                                                    
+        ====================================================================  -->
+
+<!ENTITY % NormaNazionale    "Legge | LeggeCostituzionale | DecretoLegge | DecretoLegislativo | DecretoMinisteriale | RegioDecreto | Dpr | Dpcm" >
+<!ENTITY % AltreNorme        "AttoDiAuthority | DecretoMinisterialeNN | DprNN | DpcmNN | LeggeRegionale" >
+<!ENTITY % DocumentiGenerici "Comunicato | DocArticolato | DocumentoNIR | SemiArticolato" >
+
+<!ENTITY % tipodocumento      "(%NormaNazionale; | %AltreNorme; | %DocumentiGenerici;)" >
+
+<!--  ====================================================================        
+                                                                                    
+       	Entita' esterne: DTD accessori                                           
+                                                                                    
+        ====================================================================  -->
+
+<!ENTITY % tipiDTD SYSTEM "./tipi.dtd">%tipiDTD;
+
+
+<!ENTITY % glbDTD SYSTEM "./globali.dtd">%glbDTD;
+
+
+<!ENTITY % txtDTD SYSTEM "./testo.dtd">%txtDTD;
+
+
+<!ENTITY % nrmDTD SYSTEM "./norme.dtd">%nrmDTD;
+
+
+<!ENTITY % proprietarioDTD SYSTEM "./proprietario.dtd">%proprietarioDTD;
+
+
+<!ENTITY % ProprietarioMeta "ANY" >
+<!ENTITY % Rproprietario "%strutture;" >
+<!ENTITY % metaDTD SYSTEM "./meta.dtd">%metaDTD;
+
+
+
+<!--  ====================================================================        
+                                                                                    
+       	Definizione dell'elemento radice                                         
+                                                                                    
+           Uso:                                                                     
+       	<NIR tipo="originale"                                                    
+           	 xmlns:xlink='http://www.w3.org/1999/xlink'                      
+       	   	 xmlns:h='http://www.w3.org/HTML/1998/html4'                     
+                    xmlns='http://www.normeinrete.it/nir/2.1/'>                      
+       		<Legge>                                                           
+       			<meta> ...</meta>                                          
+       			<intestazione> ...</intestazione>                          
+       			<formulainiziale> ...</formulainiziale>                    
+       			<articolato> ...</articolato>                              
+           		<formulafinale> ...</formulafinale>                        
+           		<conclusione> ...</conclusione>                            
+           		<annessi> ...</annessi>                                    
+       		</Legge>                                                          
+       	</NIR>                                                                    
+                                                                                    
+        ====================================================================  -->
+
+<!ELEMENT NIR %tipodocumento; ><!ATTLIST NIR xmlns:xlink CDATA #FIXED "http://www.w3.org/1999/xlink"
+ xmlns:h CDATA #FIXED "http://www.w3.org/HTML/1998/html4"
+ xmlns CDATA #FIXED "http://www.normeinrete.it/nir/2.2/"
+ xmlns:dsp CDATA #FIXED "http://www.normeinrete.it/nir/disposizioni/2.2/" >
+<!ATTLIST NIR tipo %tipovigenza; 'originale'  >
+
+<!--  ====================================================================        
+                                                                                    
+       	Elenco dei documenti articolati                                          
+                                                                                    
+        ====================================================================  -->
+
+<!ELEMENT Legge                   %docarticolato; >
+<!ATTLIST Legge %globalinorma;  >
+<!ELEMENT LeggeCostituzionale     %docarticolato; >
+<!ATTLIST LeggeCostituzionale %globalinorma;  >
+<!ELEMENT DecretoLegge            %docarticolato; >
+<!ATTLIST DecretoLegge %globalinorma;  >
+<!ELEMENT DecretoLegislativo      %docarticolato; >
+<!ATTLIST DecretoLegislativo %globalinorma;  >
+<!ELEMENT DecretoMinisteriale     %docarticolato; >
+<!ATTLIST DecretoMinisteriale %globalinorma;  >
+<!ELEMENT RegioDecreto            %docarticolato; >
+<!ATTLIST RegioDecreto %globalinorma;  >
+<!ELEMENT Dpr                     %docarticolato; >
+<!ATTLIST Dpr %globalinorma;  >
+<!ELEMENT Dpcm                    %docarticolato; >
+<!ATTLIST Dpcm %globalinorma;  >
+<!ELEMENT LeggeRegionale          %docarticolato; >
+<!ATTLIST LeggeRegionale %globalinorma;  >
+
+
+<!ELEMENT AttoDiAuthority         %semiarticolato; >
+<!ATTLIST AttoDiAuthority %globalinorma;  >
+<!ELEMENT DecretoMinisterialeNN   %semiarticolato; >
+<!ATTLIST DecretoMinisterialeNN %globalinorma;  >
+<!ELEMENT DprNN                   %semiarticolato; >
+<!ATTLIST DprNN %globalinorma;  >
+<!ELEMENT DpcmNN                  %semiarticolato; >
+<!ATTLIST DpcmNN %globalinorma;  >
+<!ELEMENT Comunicato              %semiarticolato; >
+<!ATTLIST Comunicato %globalinorma;  >
+<!ELEMENT DocArticolato           %docarticolato; >
+<!ATTLIST DocArticolato %globalinorma;  >
+<!ELEMENT DocumentoNIR            %semiarticolato; >
+<!ATTLIST DocumentoNIR %globalinorma;  >
+<!ELEMENT SemiArticolato          %semiarticolato; >
+<!ATTLIST SemiArticolato %globalinorma;  >
+
+
+<!ATTLIST Comunicato %nome;  >
+
+<!ATTLIST DocArticolato %nome;  >
+
+<!ATTLIST DocumentoNIR %nome;  >
+
+<!ATTLIST SemiArticolato %nome;  >
+
+<!--  =====================================================================        
+            fine completo                                                          
+        =====================================================================  -->
