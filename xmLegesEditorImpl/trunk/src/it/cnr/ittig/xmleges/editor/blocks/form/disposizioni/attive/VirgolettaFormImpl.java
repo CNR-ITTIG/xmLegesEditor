@@ -20,16 +20,13 @@ import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.services.form.disposizioni.attive.VirgolettaForm;
-import it.cnr.ittig.xmleges.editor.services.form.rinvii.partizioni.PartizioniForm;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 public class VirgolettaFormImpl implements VirgolettaForm, Loggable, Serviceable, Initializable, EventManagerListener, ActionListener {
 	
@@ -41,6 +38,7 @@ public class VirgolettaFormImpl implements VirgolettaForm, Loggable, Serviceable
 
 	Form form;
 	Node modNode;
+	Node mmodNode;
 	
 	JLabel riferimentoEti;
 	JTextField riferimento;
@@ -69,7 +67,11 @@ public class VirgolettaFormImpl implements VirgolettaForm, Loggable, Serviceable
 	private void popolaControlli() {
 		sceltaRiferimento.removeAllItems();
 		sceltaRiferimento.addItem(" ");
-		Node[] virgolette = UtilDom.getElementsByTagName(documentManager.getDocumentAsDom(), modNode, "virgolette");
+		Node[] virgolette;
+		if (mmodNode==null)
+			virgolette = UtilDom.getElementsByTagName(documentManager.getDocumentAsDom(), modNode, "virgolette");
+		else
+			virgolette = UtilDom.getElementsByTagName(documentManager.getDocumentAsDom(), mmodNode, "virgolette");
 		if (virgolette!=null) {
 			for (int i = 0; i < virgolette.length; i++) {
 				String valore = UtilDom.getText(virgolette[i]);
@@ -101,6 +103,10 @@ public class VirgolettaFormImpl implements VirgolettaForm, Loggable, Serviceable
 	public void openForm(FormClosedListener listener, Node modNode) {
 		
 		this.modNode = modNode;
+		if ("mmod".equals(modNode.getParentNode().getNodeName()))
+			mmodNode = modNode.getParentNode();
+		else
+			mmodNode = null;
 		updateContent();
 		popolaControlli();
 		form.setSize(300, 200);
@@ -117,7 +123,9 @@ public class VirgolettaFormImpl implements VirgolettaForm, Loggable, Serviceable
 		
 		try {
 			Node virgoletta = UtilDom.findParentByName(selectionManager.getActiveNode(), "virgolette");
-			if (virgoletta!=null && modNode==UtilDom.findParentByName(selectionManager.getActiveNode(), "mod")) {
+			if (virgoletta!=null && 
+					((modNode==UtilDom.findParentByName(selectionManager.getActiveNode(), "mod"))
+						|| (mmodNode==UtilDom.findParentByName(selectionManager.getActiveNode(), "mmod")))) {
 				riferimento.setText(UtilDom.getAttributeValueAsString(virgoletta,"id"));
 				for (int i=0; i<sceltaRiferimento.getItemCount(); i++)
 					if (((String) sceltaRiferimento.getItemAt(i)).startsWith(riferimento.getText()))

@@ -1,15 +1,5 @@
 package it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.attive;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-
 import it.cnr.ittig.services.manager.Initializable;
 import it.cnr.ittig.services.manager.Loggable;
 import it.cnr.ittig.services.manager.Logger;
@@ -19,6 +9,14 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.FormVerifier;
 import it.cnr.ittig.xmleges.editor.services.form.disposizioni.attive.DelimitatoreForm;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 
 public class DelimitatoreFormImpl implements DelimitatoreForm, Loggable, Serviceable, Initializable, ActionListener, FormVerifier {
@@ -79,6 +77,10 @@ public class DelimitatoreFormImpl implements DelimitatoreForm, Loggable, Service
 		this.logger = logger;
 	}
 
+	public void setDelimitatore() {
+		initForm(new String[0]);
+	}
+	
 	public String[] getDelimitatore() {
 
 		for (int i=4; i>=0; i--) {

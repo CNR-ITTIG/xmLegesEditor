@@ -12,7 +12,6 @@ import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
 import it.cnr.ittig.xmleges.core.services.rules.RulesManagerException;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
-import it.cnr.ittig.xmleges.core.util.date.UtilDate;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.attive.DispAttiveFormImpl;
 import it.cnr.ittig.xmleges.editor.services.dom.disposizioni.Disposizioni;
@@ -133,11 +132,17 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 			Node nuovaUrn = utilRulesManager.getNodeTemplate(doc,"urn");
 			UtilDom.setAttributeValue(nuovaUrn, "valore", urnVersione);
 			UtilDom.setAttributeValue(nuovaUrn, "iniziovigore", eventoVigore.getId());
+
+			Node alias = UtilDom.findRecursiveChild(activeMeta,"alias");
 			Node materie = UtilDom.findRecursiveChild(activeMeta,"materie");
-			if (materie==null)
-				descrittoriNode.appendChild(nuovaUrn);
-			else
-				descrittoriNode.insertBefore(nuovaUrn, materie); 
+			if (alias!=null)
+				descrittoriNode.insertBefore(nuovaUrn, alias); 
+			else			
+				if (materie!=null)
+					descrittoriNode.insertBefore(nuovaUrn, materie); 
+				else					
+					descrittoriNode.appendChild(nuovaUrn);
+
 		}
 				
 		return true;
@@ -159,6 +164,13 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 						cercaMeta = UtilDom.getAttributeValueAsString(nodi[1], "id");
 					else
 						return null;
+				
+				//TODO: non ho ben chiaro perchè ma avvolte cercaMeta=null (ipotesi... manca id su certe 'partizioni' tipo Legge????)
+				//Per ora faccio un return null
+				if (cercaMeta==null)
+					return null;
+				
+				
 				NodeList disposizioni = modifichepassive.getChildNodes();
 				Node dispCorrente;
 				Node test;
@@ -177,12 +189,13 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		return null;
 	}
 	
-	public boolean setDOMDisposizioni(String pos, String norma, String partizione, String novellando, String novella, String preNota, String autoNota, String postNota, boolean implicita, Evento eventoOriginale, Evento eventoVigore) {
+	public Node setDOMDisposizioni(String pos, String norma, String partizione, String novellando, String novella, String preNota, String autoNota, String postNota, boolean implicita, Evento eventoOriginale, Evento eventoVigore) {
 
 		Document doc = documentManager.getDocumentAsDom();
 
 		Node activeMeta = nirUtilDom.findActiveMeta(doc,null);
-
+		Node operazioneNode=null;
+		
 		//inserisco la disposizione
 		Node disposizioniNode = UtilDom.findRecursiveChild(activeMeta,"disposizioni");
 		if (disposizioniNode==null)
@@ -193,7 +206,6 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 			modifichepassiveNode = UtilDom.checkAndCreate(disposizioniNode, "modifichepassive");		
 		
 		Node metaAfter = getMetaAfter(modifichepassiveNode,novella, novellando);
-		Node operazioneNode;
 		if (!novellando.equals("#") && !novella.equals("#")) {	//sostituzione
 			operazioneNode = utilRulesManager.getNodeTemplate(doc,"dsp:sostituzione");
 			if (implicita)
@@ -240,7 +252,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		setTipoDocVigenza();
 		rinumerazione.aggiorna(doc);
 		
-		return true;
+		return operazioneNode;
 	}
 
 	private void setNorma(Node n, String pos, String norma, String partizione, String preNota, String autoNota, String postNota) {
@@ -364,6 +376,29 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 
 		return n;
 	}
+	
+	public Node makePartition(Node fratello, Node daInserire, VigenzaEntity vigenza) {
+		
+
+		try {
+//			if (prima)
+//				n = fratello.getParentNode().insertBefore(n, fratello);
+//			else
+				daInserire = fratello.getParentNode().insertBefore(daInserire, fratello.getNextSibling());
+			daInserire = setVigenza(daInserire, "", -1, -1, vigenza);
+		}
+		catch (DOMException e) {
+			logger.error("Errore inserimento nuova partizione ( " + daInserire.getLocalName() + " )");
+		}
+		
+		
+		//questo inseriva una ndr come notaDIvigenza
+		//makeNotaVigenza(n);
+
+		return daInserire;
+	}
+	
+
 	
 	public Node makeSpan(Node node, int posizione, VigenzaEntity vigenza, String testo) {
 
@@ -655,16 +690,24 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 				doUndo(idNovella, true);	
 		}
 		
+		//Test anche se ho svuotato i tag contenitore (modifichepassive, disposizioni)
+		Node padre = disposizione.getParentNode();
+		Node nonno = padre.getParentNode();
 		int numeroNotaEliminata = Integer.parseInt(UtilDom.getAttributeValueAsString(UtilDom.findRecursiveChild(disposizione, "ittig:notavigenza"), "id").substring(3))-1;
-		disposizione.getParentNode().removeChild(disposizione);
-	
+		padre.removeChild(disposizione);
+		//se il tag padre <modifichepassive> non ha figli, butto via anche lui. Se il nonno <disposizioni> non ha figli, butto via anche lui.
+		if (padre.getChildNodes().getLength()==0)
+			nonno.removeChild(padre);
+		if (nonno.getChildNodes().getLength()==0)
+			nonno.getParentNode().removeChild(nonno);
+		
 		NodeList noteMeta = documentManager.getDocumentAsDom().getElementsByTagName("ittig:notavigenza");
 		for(int i=0; i<noteMeta.getLength();i++) {
 			int numero = Integer.parseInt(UtilDom.getAttributeValueAsString(noteMeta.item(i), "id").substring(3))-1;
 			if (numero>numeroNotaEliminata)
 				UtilDom.setAttributeValue(noteMeta.item(i), "id", "itt"+numero);
 		}
-		
+				
 		documentManager.commitEdit(t);
 		} catch (Exception ex) {
 			documentManager.rollbackEdit(t);
@@ -832,6 +875,25 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 	/*
 	 *   PARTE DISPOSIZIONI ATTIVE. 
 	 */
+	
+	public void removeDOMDispAttive(Node meta) {
+		
+//		Document doc = documentManager.getDocumentAsDom();		
+//		Node activeMeta = nirUtilDom.findActiveMeta(doc,null);
+//		Node disposizioniNode = UtilDom.findRecursiveChild(activeMeta,"disposizioni");
+//					
+//		UtilDom.findRecursiveChild(disposizioniNode,"modificheattive").removeChild(meta);
+		
+		Node padre = meta.getParentNode();
+		Node nonno = padre.getParentNode();
+		padre.removeChild(meta);
+		//se il tag padre <modificheattive> non ha figli, butto via anche lui. Se il nonno <disposizioni> non ha figli, butto via anche lui.
+		if (padre.getChildNodes().getLength()==0)
+			nonno.removeChild(padre);
+		if (nonno.getChildNodes().getLength()==0)
+			nonno.getParentNode().removeChild(nonno);
+		
+	}	
 	
 	public Node setDOMDispAttive(boolean implicita, Node metaDaModificare, String idMod, int operazioneIniziale, String completa, boolean condizione, String decorrenza, String idevento, String norma, String partizione, String[] delimitatori) {
 				

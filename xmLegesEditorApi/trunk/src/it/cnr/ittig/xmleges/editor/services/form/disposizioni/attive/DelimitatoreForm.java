@@ -29,9 +29,10 @@ public interface DelimitatoreForm extends Service {
 	public boolean openForm(String[] selezionati);
 	
 	/**
-	 * Restituisce la decorrenza selezionata
+	 * Restituisce/inizializza la decorrenza
 	 * 
 	 */
 	public String[] getDelimitatore();
+	public void setDelimitatore();
 	
 }

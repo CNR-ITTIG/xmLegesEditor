@@ -26,6 +26,13 @@ import org.w3c.dom.Node;
 public interface Disposizioni extends Service {
 		
 	//Disposizioni ATTIVE
+	
+	/**
+	 * Funzione per l'eliminazione del metadato di disposizione ATTIVE
+	 * 
+	 */
+	public void removeDOMDispAttive(Node meta);
+	
 	/**
 	 * Funzione per l'aggiornamento dei metadati di disposizione ATTIVE (esclusa novella/novellando)
 	 * 
@@ -53,9 +60,9 @@ public interface Disposizioni extends Service {
 	 * Funzione per l'aggiornamento dei metadati di disposizione PASSIVE e
 	 * per l'inserimento dei metadati proprietari (creazione della nota)
 	 * 
-	 * @return </code>True</code> operazione correttamente eseguita
+	 * @return </code>Node</code> il meta aggiunto
 	 */
-	public boolean setDOMDisposizioni(String pos, String Norma, String partizione, String Novellando, String Novella, String preNota, String autoNota, String postNota, boolean implicita, Evento eventoOriginale, Evento eventoVigore);
+	public Node setDOMDisposizioni(String pos, String Norma, String partizione, String Novellando, String Novella, String preNota, String autoNota, String postNota, boolean implicita, Evento eventoOriginale, Evento eventoVigore);
 	
 	/**
 	 * Funzione per l'inserimento di una nuova partizione
@@ -65,6 +72,15 @@ public interface Disposizioni extends Service {
 	 * @return </code>Node</code> la nuova partizione inserita
 	 */
 	public Node makePartition(Node node, boolean prima, VigenzaEntity vigenza);
+	
+	/**
+	 * Funzione per l'inserimento di una partizione
+	 * 
+	 * @param node nodo fratello della nuova partizione da creare
+	 * @param node nodo da inserire come fratello del node fratello
+	 * @return </code>Node</code> la partizione inserita
+	 */
+	public Node makePartition(Node fratello, Node daInserire, VigenzaEntity vigenza);
 	
 	/**
 	 * Funzione per l'inserimento di un nuovo span

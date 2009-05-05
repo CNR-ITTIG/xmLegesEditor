@@ -192,7 +192,7 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 	
 	private void setTipo() {
 		tipo.removeAllItems();
-		String[] scelteTipo = new String[] {"allegato","libro","parte","titolo","capo","sezione","articolo","comma","lettera","numero","punto","periodo","parole"};
+		String[] scelteTipo = new String[] {"allegato","libro","parte","titolo","capo","sezione","articolo","comma","lettera","numero","punto","rubrica","alinea","coda","periodo","capoverso","parole"};
 		int numDelimitatori = disposizioni.getDelimitatori().length;
 		int da = 0;
 		String partizioneMenoGenerica;
@@ -354,7 +354,7 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 			virContenuto.setText("");
 			if (mod!=null) {
 				Node[] virgolette = UtilDom.getElementsByTagName(doc, mod, "virgolette");
-				if (virgolette!=null) {
+				if (virgolette.length >0) {
 					virContenuto.setText(UtilDom.getAttributeValueAsString(virgolette[virgolette.length-1],"id"));
 					for (int i=0; i<virgolette.length; i++)
 						if (href.equals(UtilDom.getAttributeValueAsString(virgolette[i], "id"))) {
@@ -432,7 +432,7 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 		form.showDialog(listener);
 	}
 	
-	public void setMeta(Node meta) {
+	public String setMeta(Node meta) {
 		String posizione = null;
 		String virgolettaA = null;
 		String virgolettaB = null;
@@ -456,5 +456,6 @@ public class NovellaFormImpl implements NovellaForm, EventManagerListener, Logga
 			}
 		}
 		domDisposizioni.setDOMNovellaDispAttive(meta, virContenuto.getText(), (String) tipo.getSelectedItem(), posizione, virgolettaA, virgolettaB);
+		return (String) tipo.getSelectedItem();
 	}
 }

@@ -97,6 +97,7 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 	JButton abrogazione;
 	JButton sostituzione;
 	JButton integrazione;
+	JButton eliminaMetadati;
 	JRadioButton interoAtto;
 	JRadioButton soloPartizione;
 	
@@ -168,6 +169,7 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 		sceltaAtto = (JButton) form.getComponentByName("editor.disposizioni.attive.atto.scelta");
 		sceltaPartizione = (JButton) form.getComponentByName("editor.disposizioni.attive.partizione.scelta");
 		sceltaDelimitatore = (JButton) form.getComponentByName("editor.disposizioni.attive.delimitatori.scelta");
+		eliminaMetadati = (JButton) form.getComponentByName("editor.disposizioni.attive.elimina.meta");
 		decorrenza = (JTextField) form.getComponentByName("editor.disposizioni.attive.decorrenza");
 		atto = (JTextField) form.getComponentByName("editor.disposizioni.attive.atto");
 		partizione = (JTextField) form.getComponentByName("editor.disposizioni.attive.partizione");
@@ -193,10 +195,17 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 		sceltaAtto.addActionListener(this);
 		sceltaPartizione.addActionListener(this);
 		sceltaDelimitatore.addActionListener(this);
+		eliminaMetadati.addActionListener(this);
 	}
 	
 	
 	public void actionPerformed(ActionEvent e) {
+		
+		if (e.getSource() == eliminaMetadati) {
+			listenerFormClosed = false;
+			domDisposizioni.removeDOMDispAttive(modificoMetaEsistenti);
+			form.close();
+		}
 		
 		if (e.getSource() == interoAtto) {
 			delimitatori.setEnabled(false);
@@ -215,8 +224,13 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 				decorrenza.setText(decorrenzaForm.getDecorrenza());
 		
 		if (e.getSource() == sceltaAtto) 
-			if (riferimentoForm.openForm())
-				atto.setText(riferimentoForm.getRiferimento());
+			if (riferimentoForm.openForm()) {
+				String temp = riferimentoForm.getRiferimento();
+				if (temp.indexOf("#")==-1)
+					atto.setText(temp);
+				else
+					atto.setText(temp.substring(0, temp.indexOf("#")));
+			}
 		
 		if (e.getSource() == sceltaPartizione) {
 			if (partizioniForm.openForm()) {
@@ -287,8 +301,10 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 			interoAtto.setSelected(true);
 			decorrenzaForm.initForm(nodoAttivo);
 			riferimentoForm.initForm(nodoAttivo);
+			delimitatoreForm.setDelimitatore();
 			//se ho metadati per questo MOD, li setto.
 			modificoMetaEsistenti = trovaMeta(nodoAttivo);
+			eliminaMetadati.setEnabled(false);
 			if (modificoMetaEsistenti != null)
 				recuperaMeta(modificoMetaEsistenti);
 			else {
@@ -316,6 +332,7 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 	}
 		
 	private void recuperaMeta(Node disposizione) {
+		eliminaMetadati.setEnabled(true);
 		if ("si".equals(UtilDom.getAttributeValueAsString(disposizione, "implicita")))
 			implicita.setSelected(true);
 		metaPresente.setText("NB: metadati già presenti (" + disposizione.getLocalName() + ")");
@@ -456,11 +473,14 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 			
 			Node nuovoMeta = domDisposizioni.setDOMDispAttive(implicita.isSelected(), modificoMetaEsistenti, modCorrente, operazioneIniziale, completa, decorrenzaForm.isDecorrenzaCondizionata(), termine, idevento, atto.getText(), partizione.getText(), delimitatoreForm.getDelimitatore());
 			
+			String tipoNovella = null;
 			if (operazioneIniziale!=ABROGAZIONE)
-				novellaForm.setMeta(nuovoMeta);
+				tipoNovella = novellaForm.setMeta(nuovoMeta);
 			if (operazioneIniziale!=INTEGRAZIONE) {
 				String tipo = null;
-				if (interoAtto.isSelected())
+				if (tipoNovella!=null)					
+					tipo = tipoNovella;
+				else if (interoAtto.isSelected())
 					tipo = "atto";
 				else {
 					tipo = partizione.getText();
@@ -547,9 +567,13 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 			token = st.nextToken();
 			if (dispari) {
 				dispari = false;
-				if (token.length()>3)
-					ret = ret + token.substring(0, 3).toLowerCase();
-				else ret = ret + token.toLowerCase();	//non dovrebbe capitare mai
+				//metto un caso particolare per Allegato X  che deve diventare allegato.x
+				if ("allegato".equals(token.toLowerCase()))
+					ret = ret + token.toLowerCase() + ".";
+				else
+					if (token.length()>3)
+						ret = ret + token.substring(0, 3).toLowerCase();
+					else ret = ret + token.toLowerCase();	//non dovrebbe capitare mai
 			}
 			else {
 				dispari = true;

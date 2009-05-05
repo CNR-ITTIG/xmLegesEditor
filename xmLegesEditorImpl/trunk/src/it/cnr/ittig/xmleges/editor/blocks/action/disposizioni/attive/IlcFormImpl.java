@@ -164,6 +164,11 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 		dbf.setNamespaceAware(false);
 		UtilFile.copyFileInTemp(getClass().getResourceAsStream("nir-export-mod.xsl"), "nir-export-mod.xsl");
 		
+		// copio in software-ilc
+		
+		// No. l'eseguibile dell'ilc linka staticamente i vari moduli quindi devo lavorare nella cartalla corrente
+		// (ovvero sia l'eseguibile che il file da trattare direttamente nella TEMP)    ---(A)(B)(C)
+
 		
 
 		
@@ -176,7 +181,7 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 			UtilFile.getFileFromTemp(ilcSW).delete();
 			logger.debug("End copying ilc SW");
 		}else{
-			System.err.println("Already done");
+			logger.debug("Already done");
 		}
 	}
 
@@ -398,6 +403,7 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 			Node nuovoMeta = domDisposizioni.setDOMDispAttive(false, modificoMetaEsistenti, "#"+idMod, operazioneIniziale, completa, condizionata, decorrenza, idevento, urn, partizione, delimitatori);
 			
 		//setmeta di novella
+			String tipoNovella = null;
 			Node novellaIlc = UtilDom.findRecursiveChild(metaIlc,"dsp:novella");
 			if (novellaIlc!=null) {
 				String posizione = null;
@@ -419,11 +425,12 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 					}			
 				}
 				
-				String tipo = UtilDom.getAttributeValueAsString(UtilDom.findRecursiveChild(novellaIlc,"ittig:tipo"), "valore");
+				tipoNovella = UtilDom.getAttributeValueAsString(UtilDom.findRecursiveChild(novellaIlc,"ittig:tipo"), "valore");
 				posIlc = UtilDom.findRecursiveChild(novellaIlc,"dsp:pos");
 				String virgolettaContenuto = UtilDom.getAttributeValueAsString(posIlc, "xlink:href");
+
 	
-				domDisposizioni.setDOMNovellaDispAttive(nuovoMeta, virgolettaContenuto, tipo, posizione, virgolettaA, virgolettaB);
+				domDisposizioni.setDOMNovellaDispAttive(nuovoMeta, virgolettaContenuto, tipoNovella, posizione, virgolettaA, virgolettaB);
 			}
 		
 		//setmeta di novellando
@@ -460,7 +467,9 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 				if ("parole".equals(tipoPartizione)) {
 					parole=true;
 					tipoPartizione = "parole";
-				}
+				} else if (tipoNovella != null)
+					tipoPartizione = tipoNovella;
+
 				domDisposizioni.setDOMNovellandoDispAttive(nuovoMeta, parole, tipoPartizione, tipo, ruoloA, virgolettaA, ruoloB, virgolettaB);
 			}
 			

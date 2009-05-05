@@ -1,12 +1,9 @@
-package it.cnr.ittig.xmleges.editor.services.form.disposizioni.attive;
-
-import org.w3c.dom.Node;
+package it.cnr.ittig.xmleges.editor.services.action.disposizioni.multivigente;
 
 import it.cnr.ittig.services.manager.Service;
-import it.cnr.ittig.xmleges.core.services.form.FormClosedListener;
 
 /**
- * Servizio per la visualizzazione della form per la gestione del novella
+ * Servizio per l'attivazione della crazione guidata del testo multivigente.
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
@@ -19,13 +16,13 @@ import it.cnr.ittig.xmleges.core.services.form.FormClosedListener;
  * General Public License </a></dd>
  * </dl>
  * 
- * @version 1.0
  */
-public interface NovellaForm extends Service {
-	/**
-	 * Apre la form per segnare il Novellando
-	 */
-	public void openForm(FormClosedListener listener, Node meta);
+public interface CreaMultivigenteAction extends Service {
 
-	public String setMeta(Node meta);
+	/**
+	 * Gestione delle procedura guidata di crazione del testo multivigente
+	 *
+	 */
+	public void doMultivigente();
+
 }

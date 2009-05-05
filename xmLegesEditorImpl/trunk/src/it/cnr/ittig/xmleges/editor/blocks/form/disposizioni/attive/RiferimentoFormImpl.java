@@ -118,6 +118,7 @@ public class RiferimentoFormImpl implements RiferimentoForm, Loggable, ActionLis
 	}
 	
 	public void initForm(Node nodoCorrente) {
+		riferimentoliberoData.setText("");
 		unicaPartizione="";
 		setRiferimentiMod(nodoCorrente);
 		if (listModel.getSize()>0) {
@@ -138,8 +139,14 @@ public class RiferimentoFormImpl implements RiferimentoForm, Loggable, ActionLis
 	}
 	
 	private void setRiferimentiMod(Node nodoCorrente) {
+		
+		
+		
 		Document doc = documentManager.getDocumentAsDom();
 		Node mod = UtilDom.findParentByName(nodoCorrente, "mod");
+		Node mmod = UtilDom.findParentByName(nodoCorrente, "mmod"); 
+		if (mmod != null)
+			mod = mmod;	//se sono in un mmod mi posiziono li
 		Node[] riferimenti = UtilDom.getElementsByTagName(doc, mod, "rif");
 		listModel.clear();
 		bordi=new String[0];
@@ -159,9 +166,10 @@ public class RiferimentoFormImpl implements RiferimentoForm, Loggable, ActionLis
 					//else	NO, voglio settare la partizione del primo atto 
 					//	unicaPartizione = "";
 					valore = valore.substring(0, valore.indexOf("#"));
-				}	
-				listModel.addElement(valore);
-			} catch (Exception e) {}
+				}
+				if (!listModel.contains(valore))	//si possono duplicare in caso di mmod 
+					listModel.addElement(valore);
+			} catch (Exception e) {}	
 	}
 	
 	public String[] getBordiDaNota(Node rif) {

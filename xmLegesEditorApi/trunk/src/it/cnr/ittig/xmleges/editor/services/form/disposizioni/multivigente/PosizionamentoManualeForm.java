@@ -1,4 +1,4 @@
-package it.cnr.ittig.xmleges.editor.services.form.disposizioni.attive;
+package it.cnr.ittig.xmleges.editor.services.form.disposizioni.multivigente;
 
 import org.w3c.dom.Node;
 
@@ -6,7 +6,8 @@ import it.cnr.ittig.services.manager.Service;
 import it.cnr.ittig.xmleges.core.services.form.FormClosedListener;
 
 /**
- * Servizio per la visualizzazione della form per la gestione del novella
+ * <code> * Servizio per la visualizzazione della form per il posizionamento
+ * manuale durante la creazione del testo multivigente</code>.
  * <p>
  * <dl>
  * <dt><b>Copyright &copy;: </b></dt>
@@ -21,11 +22,16 @@ import it.cnr.ittig.xmleges.core.services.form.FormClosedListener;
  * 
  * @version 1.0
  */
-public interface NovellaForm extends Service {
-	/**
-	 * Apre la form per segnare il Novellando
-	 */
-	public void openForm(FormClosedListener listener, Node meta);
+public interface PosizionamentoManualeForm extends Service {
 
-	public String setMeta(Node meta);
+	
+	/**
+	 * Apre la form.
+	 */
+	public void openForm(FormClosedListener listener, Node inserire, String nomeDomNodo);
+	
+	public boolean isChange();
+	public Node getNodoSelezionato();
+	public int getInizioSelezione();
+	public int getFineSelezione();
 }

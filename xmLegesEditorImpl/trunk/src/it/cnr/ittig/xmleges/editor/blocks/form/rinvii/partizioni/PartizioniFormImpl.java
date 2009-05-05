@@ -613,6 +613,7 @@ public class PartizioniFormImpl implements PartizioniForm, Loggable, Serviceable
 				comboPartizioni_1.addItem("Titolo");
 				comboPartizioni_1.addItem("Capo");
 				comboPartizioni_1.addItem("Sezione");
+				comboPartizioni_1.addItem("Articolo");
 			} else if (TipoPartizione.equals("Libro")) {
 				comboPartizioni_1.addItem("");
 				comboPartizioni_1.addItem("Parte");
