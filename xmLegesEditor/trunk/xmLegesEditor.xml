@@ -340,11 +340,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <!-- item action="tool.version" /-->
                     <!-- separator /-->
                     <item action="tool.xpatheval" />
-		    <separator />
-
-		    <!--		item action="tool.repository" /		-->		    		    
-		    <item action="tool.ilc" />
-		    
+				    <separator />
+					<item action="tool.ilc" />
+				    <item action="tool.multivigente" />
                 </menu>
                 <menu action="menu.editor.insert">
                     <item action="editor.insert.immagini" />
@@ -392,8 +390,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                         <!--item action="editor.rinumerazione" /-->
                     </menu>
                     <menu action="menu.editor.disposizioni">
-						<!--	item action="editor.disposizioni.verificavigenza" /		-->                        
-                        
                         <item action="editor.disposizioni.passive" />
 						<item action="editor.disposizioni.rimuovipassive" />
 						<item action="editor.disposizioni.attive" />
@@ -574,11 +570,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 <toolbar name="editor.partizioni" floatable="false" rollover="true">                
                     <item action="editor.disposizioni.passive" />
 					<item action="editor.disposizioni.rimuovipassive" />
-
-					<item action="editor.disposizioni.marker" />
-		  		    <item action="editor.disposizioni.trasferisci" />		  		    
-		  		    
                     <item action="editor.disposizioni.attive" />
+					<item action="editor.disposizioni.marker" />
+
                     <item action="editor.meta.modifica" />
 					<item action="editor.meta.virgolette" />
                     
@@ -895,27 +889,19 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     />
 
 
-
-
-    <component  activation="startup"
-                class="it.cnr.ittig.xmleges.editor.blocks.action.disposizioni.attive.DispTrasferisciActionImpl"
+	<component  activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.action.disposizioni.multivigente.CreaMultivigenteActionImpl"
     />
-
-
-
-
-
+        
     <component  activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.action.disposizioni.attive.DispAttiveActionImpl"
     />
 
-
-
-    <component  activation="startup"                class="it.cnr.ittig.xmleges.editor.blocks.action.disposizioni.attive.IlcActionImpl"
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.action.disposizioni.attive.IlcActionImpl"
     />
 
-
-
+    
     <component  activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.action.revisioni.RevisioniActionImpl"
     />
@@ -1042,15 +1028,14 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.passive.VerificaDispPassiveFormImpl"
     /	-->
 
-
-
-
-
-    <component  lifestyle="singleton" activation="startup"
-                class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.attive.DispTrasferisciFormImpl"
-    />    
-
-
+	
+	<component  lifestyle="pool"
+                class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.multivigente.CreaMultivigenteFormImpl"
+    />
+    
+    <component  lifestyle="pool"
+                class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.multivigente.PosizionamentoManualeFormImpl"
+    />
 
 
     <component  lifestyle="singleton" activation="startup"
