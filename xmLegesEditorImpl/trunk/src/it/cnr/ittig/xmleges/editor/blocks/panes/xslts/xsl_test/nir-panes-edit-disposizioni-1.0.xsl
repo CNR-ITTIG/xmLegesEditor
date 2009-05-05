@@ -33,7 +33,15 @@
 					    <xsl:text> Disposizioni attive </xsl:text>
 					</xsl:element>
 					<br/>
+					
+					<!--
+					<xsl:for-each select="//*[name()!='mmod']/*[name()='mod'] | //*[name()='mmod']">
+							<xsl:apply-templates select="./.." />
+					</xsl:for-each>	
+					-->
+					
 					<xsl:apply-templates select="//nir:mod"/>	
+					
 				</xsl:when>	
 				<xsl:otherwise>
 					<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
@@ -65,6 +73,28 @@
 		</xsl:otherwise>
 	</xsl:choose>		
 	<xsl:call-template name="modclassico" />
+	<br/><br/><hr width="30%" align="center"/>
+</xsl:template> 
+
+
+<xsl:template match="nir:mmod">
+	<br/>
+	<xsl:text> Modifica multipla </xsl:text>
+	<br/>
+	<xsl:for-each select="*[name()='mod']">
+		<xsl:variable name="id">#<xsl:value-of select="@id"/></xsl:variable>
+		<xsl:choose>
+			<xsl:when test="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modificheattive/*/dsp:pos[@xlink:href=$id]">
+				<xsl:apply-templates select="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modificheattive/*/dsp:pos[@xlink:href=$id]/.."/>
+			</xsl:when>
+			<xsl:otherwise>
+				<div><font color="Green">Non sono disponibili informazioni nei metadati</font></div><br/>
+			</xsl:otherwise>
+		</xsl:choose>		
+	</xsl:for-each>
+	<font bgcolor="#FFDD88">
+		<xsl:call-template name="modclassico" />
+	</font>
 	<br/><br/><hr width="30%" align="center"/>
 </xsl:template> 
 
@@ -176,7 +206,7 @@
 			<xsl:value-of select="id($idPosizione)"/>
 		</xsl:variable>
 		<font color="Blue">
-			<xsl:value-of select="idPosizione"/>
+			<xsl:value-of select="$idPosizione"/>
 			<xsl:text> ( </xsl:text>
 			<xsl:choose>
 				<xsl:when test="string-length($testoPosizione)>30">
@@ -225,7 +255,7 @@
 	  </xsl:when>
 	  <xsl:otherwise>
 		  <xsl:if test="dsp:pos">
-			<font color="Black"> - parole= </font>
+			<font color="Black">; contenuto= </font>
 		  	<font color="Blue">
 			<xsl:value-of select="$idNovellando"/>
 			<xsl:text> ( </xsl:text>

@@ -291,6 +291,15 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     </xsl:element>
 </xsl:template> 
 
+<xsl:template match="nir:mmod">
+    <xsl:element name="span" use-attribute-sets="XsltMapperSetClass">
+	<font bgcolor="#FFDD88">
+    	<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
+        <xsl:apply-templates />
+	</font>
+    </xsl:element>
+</xsl:template> 
+
 <xsl:template match="nir:virgolette">
 	<xsl:choose>
 		<xsl:when test="@tipo='struttura'">
@@ -503,7 +512,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		
 		<!-- dsp:norma/dsp:subarg/-->
 		<xsl:variable name="ittignota">
-					<xsl:value-of select="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$id]/../../dsp:norma/ittig:notavigenza/@id "/>
+					<xsl:value-of select="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$id]/../../dsp:norma/dsp:subarg/ittig:notavigenza/@id "/>
 		</xsl:variable>
 		<xsl:variable name="novella">
 					<xsl:value-of select="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$id]/../../dsp:novella/dsp:pos/@xlink:href"/>
