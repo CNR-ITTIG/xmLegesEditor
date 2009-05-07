@@ -178,6 +178,9 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 	Vector idMeta = new Vector();
 	Vector nodiTesto = new Vector();
 	
+	String decorrenza;
+	Node virgolettaModRimodificata;
+	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
@@ -401,6 +404,60 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		}
 		
 		if (e.getSource() == scrivi) {
+//			boolean creaMetadato = false;
+//			if (virgolettaModRimodificata!=null)				
+//				if ("virgolette".equals(virgolettaModRimodificata.getLocalName()))
+//					if (utilmsg.msgYesNo("Attenzione. Stai apportando modifiche all'interno di una virgoletta di una modifica. E' questo quello che vuoi fare? Se si creo il corrispondente evento attivo ma devi gestire manualmente la modifica passiva."))
+//						creaMetadato = true;
+//					else
+//						return;
+//				else //ho modificato in un mod, fuori dalle virgolette
+//					if (!utilmsg.msgYesNo("Attenzione. Stai apportando modifiche all'interno di una modifica. E' questo quello che vuoi fare? Se si gestisci eventuali eventi attivi e modifiche passive manualmente."))
+//						return;			
+//			if (creaMetadato) {
+//				//creazione evento e metadato
+//				Node disposiz = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docEditor,null),"disposizioni");
+//				Node modAtt = UtilDom.findRecursiveChild(disposiz,"modificheattive");
+//				if (modAtt==null)
+//					modAtt = disposiz.insertBefore(utilRulesManager.getNodeTemplate("modificheattive"), modDiMod.getParentNode());
+//				int max=0;
+//				String urn = "";
+//				Node relazioniNode = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docEditor,null),"relazioni");
+//				NodeList relazioniList = relazioniNode.getChildNodes();
+//				for (int i = 0; i < relazioniList.getLength(); i++) {
+//					Node relazioneNode = relazioniList.item(i);
+//					if ("originale".equals(relazioneNode.getNodeName()))
+//						urn = UtilDom.getAttributeValueAsString(relazioneNode, "xlink:href");
+//					if ("attiva".equals(relazioneNode.getNodeName())) {
+//						String id = UtilDom.getAttributeValueAsString(relazioneNode, "id");
+//						Integer idValue = Integer.decode(id.substring(2));
+//						if (idValue.intValue() > max)
+//							max = idValue.intValue();
+//					}
+//				}
+//				max++;
+//				Node nuovo = utilRulesManager.getNodeTemplate("attiva");
+//				UtilDom.setAttributeValue(nuovo, "id", "ra"+max);
+//				UtilDom.setAttributeValue(nuovo, "xlink:href", urn);
+//				//UtilDom.setAttributeValue(nuovo, "xlink:type", "simple");
+//				relazioniNode.appendChild(nuovo);
+//				//evento
+//				Node eventiNode = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docEditor,null),"eventi");
+//				String idevento = "t" + (1 + eventiNode.getChildNodes().getLength());
+//				nuovo = utilRulesManager.getNodeTemplate("evento");
+//				UtilDom.setAttributeValue(nuovo, "data", decorrenza);
+//				UtilDom.setAttributeValue(nuovo, "fonte", "ra"+max);
+//				UtilDom.setAttributeValue(nuovo, "tipo", "modifica");
+//				UtilDom.setIdAttribute(nuovo, idevento);
+//				eventiNode.appendChild(nuovo);
+//				//inserisco nuovo pacchetto meta. Attenzione, devo trovare chi punta la virgoletta (anche + di uno se siamo in un mmod),
+//				//o se è una modifica, di un mod, già in precedenza modificato. In questo secondo caso, queste disposizioni dichiarano
+//				//tutti di operare nello stesso mod, e quindi le considero una sola volta.
+//				Node nuovoMeta = trovaMeta();
+//			}
+//			
+			
+			
 			
 			try {
 			listModel.setElementAt(((String) listModel.get(getPosLista())) + " --> applicata", getPosLista());
@@ -422,6 +479,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 	
 	private boolean proponiModificaTesto(Node partizioneIndicata) {
 
+		try {
 		form.setDialogWaiting(true);
 		
 		if (partizioneIndicata!=null)
@@ -490,7 +548,12 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			Node temPos = UtilDom.findRecursiveChild(tempNovellando,"dsp:pos");
 			if (temPos!=null) { //xex abrogazione di parole
 				String idVirgoletta = UtilDom.getAttributeValueAsString(temPos,"xlink:href").substring(1);
-				virgolettaDaEliminare = UtilDom.getElementsByAttributeValue(docAttivo,docAttivo,"id",idVirgoletta)[0];
+				try{
+					virgolettaDaEliminare = UtilDom.getElementsByAttributeValue(docAttivo,docAttivo,"id",idVirgoletta)[0];
+				} catch (Exception e) {
+					System.out.println("Non ho trovato virgoletta puntata " + idVirgoletta + " -- " + e.getMessage());
+					virgolettaDaEliminare = null;
+				}
 			}
 			else  //xex per partizioni
 				virgolettaDaEliminare = null; //la lascio a null, tanto se mi serve, me la calcolo in 'cambia partizione'						
@@ -506,13 +569,6 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			Node relazioneNode = relazioniList.item(i);
 			String nodeName = relazioneNode.getNodeName();
 			String id = UtilDom.getAttributeValueAsString(relazioneNode, "id");
-//			if ("attiva".equals(nodeName)) {				
-//				Integer idValue = Integer.decode(id.substring(2));
-//				if (idValue.intValue() > maxPassiva)
-//					maxPassiva = idValue.intValue();
-//			}
-//			if ("passiva".equals(nodeName) && urnAttivo.equals(UtilDom.getAttributeValueAsString(relazioneNode, "xlink:href")))
-//					idEventiDaTestare.add(id);
 			if ("passiva".equals(nodeName)) {				
 				Integer idValue = Integer.decode(id.substring(2));
 				if (idValue.intValue() > maxPassiva)
@@ -544,8 +600,9 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 								 
 								//NO. o questo test lo faccio solo sulla prima modifica di ogni norma modificante, o scendo nel testo.
 								
-							
+							try {
 							listModel.setElementAt(((String) listModel.get(getPosLista())) + " --> saltata, già applicata", getPosLista());
+							} catch (Exception e) {}
 							correnteEvento++;
 							return true;
 							}
@@ -609,16 +666,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 						posizione=null;
 					}
 					
-				}
-//				else { //calcolo il valore di "end"							COSA VUOLDIRE QUESTO ORA??????????????????????
-//					
-//					if (partizioneIndicata==null)
-//						end = UtilDom.getTextNode(posizione).length();
-//					
-//					if (!UtilDom.isTextNode(posizione))
-//						posizione = posizione.getFirstChild();
-//				}
-					
+				}	
 			}	
 		}
 		if (posizione!=null			//se è null NON PROPONGO LA MODIFICA (faccio vedere in ELSE il testo del MOD)
@@ -658,7 +706,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 						idtermine = UtilDom.getAttributeValueAsString(termine, "a");
 					idtermine=idtermine.substring(1);  //levo la #
 					Node termineAttivo = UtilDom.getElementsByAttributeValue(docAttivo,docAttivo,"id",idtermine)[0];
-					String decorrenza = UtilDom.getAttributeValueAsString(termineAttivo, "data");
+					decorrenza = UtilDom.getAttributeValueAsString(termineAttivo, "data");
 				UtilDom.setAttributeValue(nuovo, "data", decorrenza);
 				UtilDom.setAttributeValue(nuovo, "fonte", "rp"+maxPassiva);
 				UtilDom.setAttributeValue(nuovo, "tipo", "modifica");
@@ -683,7 +731,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 
 
 			
-			boolean modificaDentroModSegnalata = false;
+			virgolettaModRimodificata = null;
 			String tipoModifica = nodoMeta.getNodeName();
 			if ("dsp:abrogazione".equals(tipoModifica) || "dsp:sostituzione".equals(tipoModifica)) {
 				if (parole) {
@@ -706,9 +754,11 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				
 				//Un ulteriore controllo. Se ho modificato dentro ad un mod => avverti di possibili modifiche a catena (da gestire manualmente)
 				if (UtilDom.findParentByName(n, "mod")!=null) {
-					modificaDentroModSegnalata = true;
-					utilmsg.msgInfo("Attenzione. Stai modificando un testo di una modifica (mod). Questo implica modifiche implicite da gestire manualmente.");
+					virgolettaModRimodificata = UtilDom.findParentByName(n, "virgolette");
+					if (virgolettaModRimodificata==null) //Sto modificando in un mod, ma fuori da una virgoletta => cosa voleva fare il legislatore??
+						virgolettaModRimodificata = UtilDom.findParentByName(n, "mod");
 				}
+
 				
 			}
 			figliVirgoletta = null;
@@ -752,14 +802,16 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 					n = domDisposizioni.makePartition(posizione, docEditor.importNode((Node)figliVirgoletta.get(0),true), makeVigenza(posizione,"novella","abrogato"));
 					try {
 						UtilDom.trimAndMergeTextNodes(n,true);
-					} catch (Exception e) {
-						// in un caso da errore (merge di Articolo con più commi LR Campania 12/1973)
-					}
+					} catch (Exception e) {}
 					
 					//Se ho modificato dentro ad un mod => avverti di possibili modifiche a catena (da gestire manualmente)
-					if (!modificaDentroModSegnalata && UtilDom.findParentByName(n, "mod")!=null)
-						utilmsg.msgInfo("Attenzione. Stai modificando un testo di una modifica (mod). Questo implica modifiche implicite da gestire manualmente.");
-
+					if (virgolettaModRimodificata==null & UtilDom.findParentByName(n, "mod")!=null) {
+						virgolettaModRimodificata = UtilDom.findParentByName(n, "virgolette");
+						if (virgolettaModRimodificata==null) //Sto modificando in un mod, ma fuori da una virgoletta => cosa voleva fare il legislatore??
+							virgolettaModRimodificata = UtilDom.findParentByName(n, "mod");
+					}
+					
+					
 				}
 				if (modifica1 == null)
 					modifica1 = n;
@@ -783,8 +835,8 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				for (int i=1; i<figliVirgoletta.size(); i++) {
 					nodiMeta = new Vector();
 					idMeta = new Vector();
-					Node nuovaPosizione = posizione.getNextSibling();
-					n = domDisposizioni.makePartition(nuovaPosizione, docEditor.importNode((Node)figliVirgoletta.get(i),true), makeVigenza(nuovaPosizione,"novella","abrogato"));
+					//Node nuovaPosizione = posizione.getNextSibling();
+					n = domDisposizioni.makePartition(n, docEditor.importNode((Node)figliVirgoletta.get(i),true), makeVigenza(n,"novella","abrogato"));
 					UtilDom.trimAndMergeTextNodes(n,true);
 					nodiMeta.add(domDisposizioni.setDOMDisposizioni(partizione, urnAttivo, urnAttivo+posDisposizione, "#", "#"+UtilDom.getAttributeValueAsString(n, "id"), "", nota, "", implicita, eventoriginale, eventovigore));
 					idMeta.add(UtilDom.getAttributeValueAsString(n, "id"));
@@ -905,6 +957,10 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			}
 		}
 		form.setDialogWaiting(false);
+		} catch (Exception e) {
+			System.out.println("Eccez. non gestita: " + e.getMessage());
+			//e.printStackTrace();
+		}
 		return false;
 	}
 	
