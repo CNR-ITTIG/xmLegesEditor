@@ -198,7 +198,8 @@ public class FileExportFormImpl implements FileExportForm, Loggable, Serviceable
 			fonte=lista.item(i).getAttributes().getNamedItem("fonte").getNodeValue();
 			if (fonte.indexOf("rp")!=-1 | fonte.indexOf("ro")!=-1) { 
 				data=lista.item(i).getAttributes().getNamedItem("data").getNodeValue();
-				listModel.addElement(data.substring(6, 8)+"/"+data.substring(4, 6)+"/"+data.substring(0, 4));
+				if (!listModel.contains(data.substring(6, 8)+"/"+data.substring(4, 6)+"/"+data.substring(0, 4)))
+					listModel.addElement(data.substring(6, 8)+"/"+data.substring(4, 6)+"/"+data.substring(0, 4));
 			}	
 		}
 	}
