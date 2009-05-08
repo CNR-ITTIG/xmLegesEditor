@@ -404,60 +404,79 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		}
 		
 		if (e.getSource() == scrivi) {
-//			boolean creaMetadato = false;
-//			if (virgolettaModRimodificata!=null)				
-//				if ("virgolette".equals(virgolettaModRimodificata.getLocalName()))
-//					if (utilmsg.msgYesNo("Attenzione. Stai apportando modifiche all'interno di una virgoletta di una modifica. E' questo quello che vuoi fare? Se si creo il corrispondente evento attivo ma devi gestire manualmente la modifica passiva."))
-//						creaMetadato = true;
-//					else
-//						return;
-//				else //ho modificato in un mod, fuori dalle virgolette
-//					if (!utilmsg.msgYesNo("Attenzione. Stai apportando modifiche all'interno di una modifica. E' questo quello che vuoi fare? Se si gestisci eventuali eventi attivi e modifiche passive manualmente."))
-//						return;			
-//			if (creaMetadato) {
-//				//creazione evento e metadato
-//				Node disposiz = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docEditor,null),"disposizioni");
-//				Node modAtt = UtilDom.findRecursiveChild(disposiz,"modificheattive");
-//				if (modAtt==null)
-//					modAtt = disposiz.insertBefore(utilRulesManager.getNodeTemplate("modificheattive"), modDiMod.getParentNode());
-//				int max=0;
-//				String urn = "";
-//				Node relazioniNode = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docEditor,null),"relazioni");
-//				NodeList relazioniList = relazioniNode.getChildNodes();
-//				for (int i = 0; i < relazioniList.getLength(); i++) {
-//					Node relazioneNode = relazioniList.item(i);
-//					if ("originale".equals(relazioneNode.getNodeName()))
-//						urn = UtilDom.getAttributeValueAsString(relazioneNode, "xlink:href");
-//					if ("attiva".equals(relazioneNode.getNodeName())) {
-//						String id = UtilDom.getAttributeValueAsString(relazioneNode, "id");
-//						Integer idValue = Integer.decode(id.substring(2));
-//						if (idValue.intValue() > max)
-//							max = idValue.intValue();
-//					}
-//				}
-//				max++;
-//				Node nuovo = utilRulesManager.getNodeTemplate("attiva");
-//				UtilDom.setAttributeValue(nuovo, "id", "ra"+max);
-//				UtilDom.setAttributeValue(nuovo, "xlink:href", urn);
-//				//UtilDom.setAttributeValue(nuovo, "xlink:type", "simple");
-//				relazioniNode.appendChild(nuovo);
-//				//evento
-//				Node eventiNode = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docEditor,null),"eventi");
-//				String idevento = "t" + (1 + eventiNode.getChildNodes().getLength());
-//				nuovo = utilRulesManager.getNodeTemplate("evento");
-//				UtilDom.setAttributeValue(nuovo, "data", decorrenza);
-//				UtilDom.setAttributeValue(nuovo, "fonte", "ra"+max);
-//				UtilDom.setAttributeValue(nuovo, "tipo", "modifica");
-//				UtilDom.setIdAttribute(nuovo, idevento);
-//				eventiNode.appendChild(nuovo);
-//				//inserisco nuovo pacchetto meta. Attenzione, devo trovare chi punta la virgoletta (anche + di uno se siamo in un mmod),
-//				//o se è una modifica, di un mod, già in precedenza modificato. In questo secondo caso, queste disposizioni dichiarano
-//				//tutti di operare nello stesso mod, e quindi le considero una sola volta.
-//				Node nuovoMeta = trovaMeta();
-//			}
-//			
-			
-			
+			boolean creaMetadato = false;
+			if (virgolettaModRimodificata!=null)				
+				if ("virgolette".equals(virgolettaModRimodificata.getLocalName()))
+					if (utilmsg.msgYesNo("Attenzione. Stai apportando modifiche all'interno di una virgoletta di una modifica. E' questo quello che vuoi fare? Se si creo il corrispondente evento attivo ma devi gestire manualmente la modifica passiva."))
+						creaMetadato = true;
+					else
+						return;
+				else //ho modificato in un mod, fuori dalle virgolette
+					if (!utilmsg.msgYesNo("Attenzione. Stai apportando modifiche all'interno di una modifica. E' questo quello che vuoi fare? Se si gestisci eventuali eventi attivi e modifiche passive manualmente."))
+						return;			
+			if (creaMetadato) {
+				Node disposiz = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docEditor,null),"disposizioni");
+				Node modAtt = UtilDom.findRecursiveChild(disposiz,"modificheattive");
+				//Attenzione, devo trovare chi punta la virgoletta (anche + di uno se siamo in un mmod),
+				//o se è una modifica, di un mod, già in precedenza modificato. 
+				//In questo secondo caso, queste disposizioni dichiarano tutti di operare nello stesso mod, e quindi le considero una sola volta.
+				String idVirgoletta = "#"+UtilDom.getAttributeValueAsString(virgolettaModRimodificata, "id");
+				Node[] metaCoinvolti = UtilDom.getElementsByAttributeValue(docEditor,modAtt,"xlink:href", idVirgoletta);
+				Vector daDuplicare = new Vector();
+				for (int i=0; i<metaCoinvolti.length; i++) {
+					Node dispoPos = metaCoinvolti[i].getParentNode().getParentNode().getFirstChild();
+					String id = UtilDom.getAttributeValueAsString(dispoPos, "xlink:href");
+					boolean trovato = false;
+					for (int j=0; j<daDuplicare.size(); j++)
+						if (id.equals(UtilDom.getAttributeValueAsString((Node)daDuplicare.get(j), "xlink:href"))) {
+							trovato = true;
+							break;
+						}
+					if (!trovato)
+						daDuplicare.add(dispoPos);
+				}
+				//creazione evento e metadato
+				int max=0;
+				String urn = "";
+				Node relazioniNode = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docEditor,null),"relazioni");
+				NodeList relazioniList = relazioniNode.getChildNodes();
+				for (int i = 0; i < relazioniList.getLength(); i++) {
+					Node relazioneNode = relazioniList.item(i);
+					if ("originale".equals(relazioneNode.getNodeName()))
+						urn = UtilDom.getAttributeValueAsString(relazioneNode, "xlink:href");
+					if ("attiva".equals(relazioneNode.getNodeName())) {
+						String id = UtilDom.getAttributeValueAsString(relazioneNode, "id");
+						Integer idValue = Integer.decode(id.substring(2));
+						if (idValue.intValue() > max)
+							max = idValue.intValue();
+					}
+				}
+				max++;
+				Node nuovo = utilRulesManager.getNodeTemplate("attiva");
+				UtilDom.setAttributeValue(nuovo, "id", "ra"+max);
+				UtilDom.setAttributeValue(nuovo, "xlink:href", urn);
+				relazioniNode.appendChild(nuovo);
+				//evento
+				Node eventiNode = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docEditor,null),"eventi");
+				String idevento = "t" + (1 + eventiNode.getChildNodes().getLength());
+				nuovo = utilRulesManager.getNodeTemplate("evento");
+				UtilDom.setAttributeValue(nuovo, "data", decorrenza);
+				UtilDom.setAttributeValue(nuovo, "fonte", "ra"+max);
+				UtilDom.setAttributeValue(nuovo, "tipo", "modifica");
+				UtilDom.setIdAttribute(nuovo, idevento);
+				eventiNode.appendChild(nuovo);
+				String idTermine = "#"+UtilDom.getAttributeValueAsString(nuovo, "id");
+				//inserisco nuovo/i meta
+				for (int j=0; j<daDuplicare.size(); j++) {
+					Node meta = ((Node) daDuplicare.get(j)).getParentNode();
+					Node nuovoMeta = meta.cloneNode(true);
+					UtilDom.setAttributeValue(UtilDom.findRecursiveChild(nuovoMeta,"dsp:termine"), "da", idTermine);
+					if (meta.getNextSibling()!=null)
+						meta.getParentNode().insertBefore(nuovoMeta, meta.getNextSibling());
+					else
+						meta.getParentNode().appendChild(nuovoMeta);
+				}
+			}
 			
 			try {
 			listModel.setElementAt(((String) listModel.get(getPosLista())) + " --> applicata", getPosLista());
@@ -959,7 +978,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		form.setDialogWaiting(false);
 		} catch (Exception e) {
 			System.out.println("Eccez. non gestita: " + e.getMessage());
-			//e.printStackTrace();
+			e.printStackTrace();
 		}
 		return false;
 	}
