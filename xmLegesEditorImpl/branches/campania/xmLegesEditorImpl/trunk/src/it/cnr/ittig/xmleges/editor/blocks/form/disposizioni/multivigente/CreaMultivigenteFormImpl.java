@@ -817,7 +817,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 						}
 						} catch (Exception e) {}		
 					}					
-					figliVirgoletta = UtilDom.getChildElements(virgolettaDaInserire);
+					figliVirgoletta = UtilDom.getAllChildElements(virgolettaDaInserire);
 					n = domDisposizioni.makePartition(posizione, docEditor.importNode((Node)figliVirgoletta.get(0),true), makeVigenza(posizione,"novella","abrogato"));
 					try {
 						UtilDom.trimAndMergeTextNodes(n,true);
