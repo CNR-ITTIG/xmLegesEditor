@@ -41,6 +41,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 		-->
         </head>
 		<body>
+		
+			<!--  non è questo il match giusto - per ora lo lascio non aggiornato-->
+		
 			<xsl:for-each select="//@iniziovigore">	
 				<xsl:apply-templates select=".." />
 			</xsl:for-each>
@@ -50,19 +53,19 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 
 <xsl:template match="//*">
    		<xsl:variable name="idnota">
-			<xsl:value-of select="@id" />
+   			<xsl:value-of select="concat('#',@id)"/>
 		</xsl:variable>
 		<xsl:variable name="ittignota">
-				<xsl:value-of select="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$idnota]/../../*[name()='dsp:norma']/ittig:notavigenza/@id"/>
+				<xsl:value-of select="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$idnota]/../../dsp:norma/dsp:subarg/ittig:notavigenza/@id"/>
 		</xsl:variable>	
 		<xsl:variable name="autonota">
-				<xsl:value-of select="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$idnota]/../../*[name()='dsp:norma']/ittig:notavigenza/@auto"/>
+				<xsl:value-of select="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$idnota]/../../dsp:norma/dsp:subarg/ittig:notavigenza/@auto"/>
 		</xsl:variable>	
 		<xsl:variable name="novella">
-				<xsl:value-of select="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$idnota]/../../*[name()='dsp:novella']/dsp:pos/@xlink:href"/>
+				<xsl:value-of select="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$idnota]/../../dsp:novella/dsp:pos/@xlink:href"/>
 		</xsl:variable>	
 		<xsl:variable name="novellando">
-			<xsl:value-of select="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$idnota]/../../*[name()='dsp:novellando']/dsp:pos/@xlink:href"/>
+			<xsl:value-of select="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modifichepassive/*/*/dsp:pos[@xlink:href=$idnota]/../../dsp:novellando/dsp:pos/@xlink:href"/>
 		</xsl:variable>	
 
 					<xsl:variable name="inizio_id">
