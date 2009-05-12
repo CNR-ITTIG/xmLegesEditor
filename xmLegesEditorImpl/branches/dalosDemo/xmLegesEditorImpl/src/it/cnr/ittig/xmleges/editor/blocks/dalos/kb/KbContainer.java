@@ -966,4 +966,85 @@ public class KbContainer {
 		spe.compute(type);
 		System.out.println("COMPUTE processing done.");
 	}
+	
+	//Generazione LightWeight Dalos KB:
+	void generateLightVersion() {
+		
+		System.out.println("############ LIGHT WEIGHT DALOS ONTOLOGY ########");
+		
+		ModelMaker maker = ModelFactory.createMemModelMaker();
+		OntModelSpec spec = new OntModelSpec( OntModelSpec.OWL_MEM );
+		spec.setImportModelMaker(maker);
+		OntModel lightModel = ModelFactory.createOntologyModel(spec, null);
+		
+		//Infila nel modello tutta la consumer-law ontology
+		OntModel domainModel = KbModelFactory.getModel("domain");
+		lightModel.add(domainModel);
+		
+		OntProperty lexProp = lightModel.createOntProperty("http://null.com/hasLexicalization");
+		
+		for(Iterator i = synsets.values().iterator(); i.hasNext(); ) {
+			Synset synset = (Synset) i.next();
+			if(!synset.isLinked()) continue;
+			
+			OntResource synResource = lightModel.createOntResource(synset.getURI());
+			//Prendi il concept relativo a questo synset
+			PivotOntoClass poc = synset.getPivotClass();
+			for(Iterator k = poc.getLinks().iterator(); k.hasNext(); ) {
+				TreeOntoClass toc = (TreeOntoClass) k.next();
+				OntClass oc = lightModel.createClass(toc.getURI());
+				lightModel.add(synResource, RDF.type, oc);
+			}
+
+			//Aggiungi tutte le varianti per l'italiano
+//			for(Iterator z = synset.getVariants().iterator(); z.hasNext(); ) {
+//				String variant = (String) z.next();
+//				Literal lit = lightModel.createLiteral(variant, aSynset.getLanguage());
+//				lightModel.add(synResource, lexProp, lit);
+//			}
+
+			//Aggiungi lessicalizzazioni nelle varie lingue
+			for(Iterator k = poc.getTerms().iterator(); k.hasNext(); ) {
+				Synset aSynset = (Synset) k.next();
+				//if(!aSynset.getLanguage().equals("IT")) continue;
+				aSynset = kbm.getSynset(aSynset.getURI());
+				//Aggiungi tutte le varianti
+				for(Iterator z = aSynset.getVariants().iterator(); z.hasNext(); ) {
+					String variant = (String) z.next();
+					Literal lit = lightModel.createLiteral(variant, aSynset.getLanguage());
+					lightModel.add(synResource, lexProp, lit);
+				}
+				
+			}
+		}
+
+		//Salva il modello
+		serialize(lightModel, "lightModel.owl", null, null);
+	}
+	
+	public static void serialize(OntModel om, String fileName, String base, String encoding) {
+		
+		RDFWriter writer = om.getWriter("RDF/XML"); //faster than RDF/XML-ABBREV		
+		File outputFile = new File(fileName);
+		//String relativeOutputFileName = "file://" + outputFile.getAbsolutePath();
+		
+		if(base != null) {
+			//Set base property
+			writer.setProperty("xmlbase", base);
+		}
+
+		System.out.println("Serializing ontology model to " + outputFile + "...");
+		try {
+			OutputStream out = new FileOutputStream(outputFile);
+			//Write down the BASE model only (don't follow imports...)
+			//writer.write(om.getBaseModel(), out, relativeOutputFileName);
+			writer.write(om.getBaseModel(), out, base);
+			out.close();
+		} catch(Exception e) {
+			System.err.println("Exception serializing model:" + e.getMessage());
+			e.printStackTrace();
+		}
+
+	}	
+
 }

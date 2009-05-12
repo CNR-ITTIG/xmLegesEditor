@@ -359,13 +359,19 @@ implements KbManager, Loggable, Serviceable, Initializable {
 		
 	public Collection search(String search) {
 		//Dovrebbe prendere la lingua dalle Preference?	
-		//Dovrebbe prendere il tipo di ricerca dalle Preference? (ultima usata)		
+		//Dovrebbe prendere il tipo di ricerca dalle Preference? (ultima usata)
+		
 		return search(search, KbManager.CONTAINS, utilDalos.getGlobalLang());
 	}
 	
 	
 	public Collection search(String search, String type, String lang) {
+
 		KbContainer kbc = getContainer(lang);
+		
+		//Esegui lightWeight
+		kbc.generateLightVersion();
+		
 		return kbc.search(search, type);
 	}
 	
