@@ -440,6 +440,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				String urn = "";
 				Node relazioniNode = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docEditor,null),"relazioni");
 				NodeList relazioniList = relazioniNode.getChildNodes();
+				Node ultimoAttiva = null;
 				for (int i = 0; i < relazioniList.getLength(); i++) {
 					Node relazioneNode = relazioniList.item(i);
 					if ("originale".equals(relazioneNode.getNodeName()))
@@ -447,6 +448,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 					if ("attiva".equals(relazioneNode.getNodeName())) {
 						String id = UtilDom.getAttributeValueAsString(relazioneNode, "id");
 						Integer idValue = Integer.decode(id.substring(2));
+						ultimoAttiva = relazioneNode;
 						if (idValue.intValue() > max)
 							max = idValue.intValue();
 					}
@@ -455,7 +457,10 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				Node nuovo = utilRulesManager.getNodeTemplate("attiva");
 				UtilDom.setAttributeValue(nuovo, "id", "ra"+max);
 				UtilDom.setAttributeValue(nuovo, "xlink:href", urn);
-				relazioniNode.appendChild(nuovo);
+				if (ultimoAttiva.getNextSibling()==null) 
+					relazioniNode.appendChild(nuovo);
+				else
+					relazioniNode.insertBefore(nuovo, ultimoAttiva.getNextSibling());
 				//evento
 				Node eventiNode = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docEditor,null),"eventi");
 				String idevento = "t" + (1 + eventiNode.getChildNodes().getLength());
@@ -816,7 +821,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 									UtilDom.setTextNode(rubricaEntrante, UtilDom.getText(rubricaUscente));
 						}
 						} catch (Exception e) {}		
-					}					
+					}
 					figliVirgoletta = UtilDom.getAllChildElements(virgolettaDaInserire);
 					n = domDisposizioni.makePartition(posizione, docEditor.importNode((Node)figliVirgoletta.get(0),true), makeVigenza(posizione,"novella","abrogato"));
 					try {
@@ -850,10 +855,10 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			
 			//Se la virgoletta conteneva più partizioni (per ora ho inserito solo 1°figlio di virgoletta) creo automaticamente
 			//delle integrazioni per il 2°,... eventuale figlio
-			if (figliVirgoletta!=null)
+			if (figliVirgoletta!=null) {
+				nodiMeta = new Vector();
+				idMeta = new Vector();
 				for (int i=1; i<figliVirgoletta.size(); i++) {
-					nodiMeta = new Vector();
-					idMeta = new Vector();
 					//Node nuovaPosizione = posizione.getNextSibling();
 					n = domDisposizioni.makePartition(n, docEditor.importNode((Node)figliVirgoletta.get(i),true), makeVigenza(n,"novella","abrogato"));
 					UtilDom.trimAndMergeTextNodes(n,true);
@@ -861,6 +866,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 					idMeta.add(UtilDom.getAttributeValueAsString(n, "id"));
 					nodiTesto.add(n);
 				}
+			}
 			
 			
 			//mi posiziono sul nodo USCITO/ENTRATO
@@ -1143,7 +1149,8 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
   	</dsp:norma>
 		*/	
 		boolean trovataPosizione = true;
-		Node posiz = UtilDom.getElementsByTagName(doc,doc,"meta")[0].getParentNode(); 	//posizione su: intero documento
+		Node interaNorma = UtilDom.getElementsByTagName(doc,doc,"meta")[0].getParentNode();
+		Node posiz = interaNorma; 																	//posizione su: intero documento
 		Node pos = UtilDom.getElementsByTagName(doc,norma,"dsp:pos")[0];
 		partizione = UtilDom.getAttributeValueAsString(pos,"xlink:href");
 		if (partizione.indexOf("#")!=-1) {
@@ -1317,7 +1324,16 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		}
 		else
 			return null;
-		return posiz;
+		
+		//test se sono posizionato su intera norma, ma ho già un finevigore, deseleziono
+		if (posiz!=interaNorma)
+			return posiz;	
+			
+		if (UtilDom.getAttributeValueAsString(interaNorma,"finevigore")!=null)
+			return null;
+		else
+			return interaNorma;
+		
 	} 
 	
 	private Node cercaPosizioneContando(Document doc, Node posiz, String partizione, boolean ordinale) {
