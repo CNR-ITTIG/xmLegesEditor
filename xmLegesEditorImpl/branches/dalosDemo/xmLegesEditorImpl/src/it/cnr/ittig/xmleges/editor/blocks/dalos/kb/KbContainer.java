@@ -996,17 +996,9 @@ public class KbContainer {
 				lightModel.add(synResource, RDF.type, oc);
 			}
 
-			//Aggiungi tutte le varianti per l'italiano
-//			for(Iterator z = synset.getVariants().iterator(); z.hasNext(); ) {
-//				String variant = (String) z.next();
-//				Literal lit = lightModel.createLiteral(variant, aSynset.getLanguage());
-//				lightModel.add(synResource, lexProp, lit);
-//			}
-
 			//Aggiungi lessicalizzazioni nelle varie lingue
 			for(Iterator k = poc.getTerms().iterator(); k.hasNext(); ) {
 				Synset aSynset = (Synset) k.next();
-				//if(!aSynset.getLanguage().equals("IT")) continue;
 				aSynset = kbm.getSynset(aSynset.getURI());
 				//Aggiungi tutte le varianti
 				for(Iterator z = aSynset.getVariants().iterator(); z.hasNext(); ) {
