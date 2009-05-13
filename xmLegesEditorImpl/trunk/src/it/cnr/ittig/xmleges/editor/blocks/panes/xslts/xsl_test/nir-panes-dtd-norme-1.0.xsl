@@ -304,11 +304,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	<xsl:choose>
 		<xsl:when test="@tipo='struttura'">
 		   <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
-		   		<xsl:attribute name="style"> 
-		   			margin: 5 25 5 25;
-		   			font-style: italic;
-		   			background: #FFEE99;
-		   		</xsl:attribute>
 		   		<xsl:call-template name="vigenza"/>	
 	       </xsl:element>
 		</xsl:when>
@@ -388,10 +383,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	<xsl:template name="multivigente">
 			
 		<xsl:variable name="id">
-			<xsl:value-of select="@id" />
-		</xsl:variable>
-		<xsl:variable name="idconpound"> 
-			<xsl:value-of select="concat('#',$id)"/>
+			<xsl:value-of select="concat('#',@id)" />
 		</xsl:variable>
 		<xsl:variable name="inizio_id">
 			<xsl:value-of select="@iniziovigore"/>
@@ -406,7 +398,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 					<xsl:when test="local-name()='span'">
 						<font color="red">
 							<xsl:call-template name="multivigente_red">
-								<xsl:with-param name="id" select="$idconpound"/>
+								<xsl:with-param name="id" select="$id"/>
 								<xsl:with-param name="inizio_id" select="$inizio_id"/>
 								<xsl:with-param name="fine_id" select="$fine_id"/>
 							</xsl:call-template>
@@ -415,7 +407,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 				    <xsl:otherwise>
 				    	<div style="color: red; ">
 				    	    <xsl:call-template name="multivigente_red">
-								<xsl:with-param name="id" select="$idconpound"/>
+								<xsl:with-param name="id" select="$id"/>
 								<xsl:with-param name="inizio_id" select="$inizio_id"/>
 								<xsl:with-param name="fine_id" select="$fine_id"/>
 							</xsl:call-template>
@@ -428,7 +420,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 					<xsl:when test="local-name()='span'">
 						<font color="green">
 							<xsl:call-template name="multivigente_green">
-								<xsl:with-param name="id" select="$idconpound"/>
+								<xsl:with-param name="id" select="$id"/>
 								<xsl:with-param name="inizio_id" select="$inizio_id"/>
 							</xsl:call-template>
 						</font>
@@ -436,7 +428,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 				    <xsl:otherwise>
 				    	<div style="color: green; ">
 				    		<xsl:call-template name="multivigente_green">
-								<xsl:with-param name="id" select="$idconpound"/>
+								<xsl:with-param name="id" select="$id"/>
 								<xsl:with-param name="inizio_id" select="$inizio_id"/>
 							</xsl:call-template>
 				    	</div>
