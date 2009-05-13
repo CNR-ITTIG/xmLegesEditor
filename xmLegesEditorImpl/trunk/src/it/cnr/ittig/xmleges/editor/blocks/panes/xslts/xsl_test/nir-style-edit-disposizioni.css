@@ -256,9 +256,12 @@ nir-style-edit-documento
     bgcolor="#FFDDAA";    	
 } 
 
-.virgolette {
-	bgcolor = "#FFEE99";
+
+.virgolette {	
+	background-color: #FFEE99;
+	margin: 5 25 5 25;
 }
+
 
 .def, .atto, .soggetto, .nir:ente, .data, .luogo, .valute, .importo {
  color:green;
