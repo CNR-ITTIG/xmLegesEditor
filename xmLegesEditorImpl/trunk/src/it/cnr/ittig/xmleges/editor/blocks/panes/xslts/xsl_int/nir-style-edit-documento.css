@@ -1,0 +1,470 @@
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * ELEMENTO ROOT                                                                                                       *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+body {	margin-left: 5px;
+		font-family: "Verdana, Arial, Helvetica, sans-serif" ;
+		font-size: 12pt ;
+		text-align:justify;}
+
+	
+/**************
+vanno aggiunti:
+nir-styles-dtd-norme
+nir-sryles-dtd-testo
+nir-styles-dtd-globali
+*************/
+/*
+<!-- ================================================================================ -->
+<!-- =============================================================== INTESTAZIONE === -->
+<!-- ================================================================================ -->
+*/
+
+.intestazione {
+	margin: 15px 10% 0px 10%;
+	text-align: left;
+	font-size: 100%;
+}
+.emanante{
+	margin: 10 0 10 0;
+	text-align: center;
+	font-size: large;					
+}
+.title {
+	margin-top: 10px;
+	text-align:center;
+	font-size: 90% ;
+	text-align: center;
+}
+.titoloDoc {
+	margin-top: 15px;
+	text-align:center;
+	font-size: large;
+	font-weight: bold;
+	text-align: center;
+}
+
+.tipoDoc, .dataDoc, .numDoc {
+}
+
+/*
+<!-- ================================================================================ -->
+<!-- =========================================================== FORMULA INIZIALE === -->
+<!-- ================================================================================ --> 
+*/
+
+.formulainiziale {
+	text-align: center;
+	font-size: 100%;
+	margin-bottom: 30px;
+}
+.preambolo {
+	text-align: right;
+	font-size: 100%;
+}
+
+/*
+<!-- ================================================================================ -->
+<!-- ============================================================= FORMULA FINALE === -->
+<!-- ================================================================================ -->
+*/
+
+.formulafinale {
+		text-align: justify;
+		margin: 30 5 5 5;
+		font-size:100%;
+	}
+
+/*
+<!-- ================================================================================ -->
+<!-- ================================================================ DECORAZIONE === -->
+<!-- ================================================================================ -->
+*/
+	
+.decorazione {
+	text-align: center;
+	margin-top: 0;
+	font-weight: lighter;
+	font-size: 100%;
+}
+
+.rango {
+}
+
+/*
+<!-- ================================================================================ -->
+<!-- ================================================================= ARTICOLATO === -->
+<!-- ================================================================================ -->
+*/
+.articolato {
+	text-align: center;
+    margin-top: 40 0 5 0;
+}
+
+.articolo { 
+	font-size: 100% ; 
+	margin-top: 15px; 
+	text-align: center;
+}
+.libro, .parte, .titolo, .capo, .sezione, .paragrafo, .partizione, .articolo{
+ 	font-size: x-large;
+    margin: 30 0 5 0;
+}
+
+.rubrica {
+	text-align: center;
+	margin-top: 0;
+	font-style: italic;
+	font-weight: lighter;
+	font-size: large;
+}
+
+.num {
+	
+	font-weight: bold;
+}
+
+
+.comma, .el, .en, .ep {
+	font-size: medium;	
+    text-align: left;
+    margin: 10 10 10 10;
+}
+
+.corpo, .alinea, .coda {
+}
+
+/*
+<!-- ================================================================================ -->
+<!-- ================================================================ CONCLUSIONE === -->
+<!-- ================================================================================ -->
+*/
+
+.conclusione{
+	margin: 20 30;
+}
+
+.sottoscrizioni{
+	margin: 15 0 0 0;
+}
+.sottoscrivente{
+	margin: 5 0 0 0;
+}
+
+.firma{
+	font-size: 100%;
+	font-style: italic;
+	margin: 20 0;
+}
+
+<!-- era cosi xsl:choose>
+	   <xsl:when test="@tipo='visto'">
+				<xsl:attribute name="style">font-style: italic; margin: 20 0</xsl:attribute>
+			  </xsl:when>
+			  <xsl:otherwise>
+				<xsl:attribute name="style">margin: 20 0</xsl:attribute>
+			  </xsl:otherwise>
+		</xsl:choose-->	
+
+.dataeluogo {
+	font-style: italic;
+	/*margin-top:25px;
+	font-style:italic;
+	font-weight:bold;*/
+}
+
+/*
+<!-- ================================================================================ -->
+<!-- ==================================================================== ANNESSI === -->
+<!-- ================================================================================ -->
+*/
+
+.annessi{
+	text-align: center;
+	margin: 30 15 15 25;
+	color: blue;
+}
+
+
+.elencoAnnessi {
+}
+
+.annesso {
+}
+
+.testata{
+	background-color: #EEEEFF;
+    margin: 10 0 10 0;
+}
+
+.denAnnesso, .titAnnesso {
+}
+
+.preAnnesso{
+	text-align: left; 
+	font-size: large; 
+	font-weight: normal;
+}
+
+.rifesterno{ 
+	text-align: center;
+	font-size: normal; 
+	font-weight: bold;
+	color:blue;
+	margin: 0 0 0 0;
+}
+
+.meta
+
+
+
+/*
+<!-- ================================================================================ -->
+<!-- ======================== ELEMENTI INLINE E SPECIALI CON SEMANTICA RILEVANTE === -->
+<!-- ================================================================================ --> 
+*/
+.mrif {
+
+} 
+
+.rif, .irif {
+	color: blue;
+} 
+
+
+.mod {
+    background-color: "#FFDDAA";    	
+} 
+
+
+.virgolette {	
+	background-color: #FFEE99;
+	margin: 5 25 5 25;
+}
+
+
+.def, .atto, .soggetto, .nir:ente, .data, .luogo, .valute, .importo {
+ color:green;
+}
+
+/*
+<!-- ================================================================================ -->
+<!-- =========================================================== DISEGNI DI LEGGE === -->
+<!-- ================================================================================ -->
+*/
+.legislatura {
+ 
+}
+
+.relazione, .confronto, .sinistra, .destra {
+        
+}
+/*  FINE DTD. NORME*/
+
+
+
+
+/*
+<!-- ================================================================================ -->
+<!-- ============================================================= ELEMENTI VUOTI === -->
+<!-- ================================================================================ -->
+*/
+
+.br {
+	font-color:blue; 
+	font-weight:bold;
+	
+}
+
+.hr {}
+
+.img {}
+    
+
+.object {}
+    
+.input {}
+
+/*
+<!-- ================================================================================ -->
+<!-- ============================================================ ELEMENTI INLINE === -->
+<!-- ================================================================================ -->
+*/
+
+.b {}
+
+.i {}
+
+.u {}
+
+.sub {}
+
+.sup{}
+
+.span {}
+
+.a {
+	font-color:blue;
+}
+
+/*
+<!-- ================================================================================ -->
+<!-- ===================================================== ELEMENTI BLOCCO E FORM === -->
+<!-- ================================================================================ -->
+*/
+
+.p {
+    font-color:blue;
+    font-weight:bold;
+}
+
+.div {}
+
+.form {}
+    
+/*  
+<!-- ================================================================================ -->
+<!-- ====================================================================== LISTE === -->
+<!-- ================================================================================ -->
+*/
+
+.ul {}
+
+.ol {}
+
+.li {}
+.dl {}
+    
+.dt {}
+    
+.dd {}
+    
+/*    
+<!-- ================================================================================ -->
+<!-- ==================================================================== TABELLE === -->
+<!-- ================================================================================ -->
+*/
+
+.table {}
+
+.caption {}
+    
+.thead {}
+    
+.tfoot {}
+    
+.tbody {}
+    
+.colgroup {}
+    
+.col {}
+    
+.tr {}
+    
+.th {}
+    
+.td {}
+    
+/* FINE DTD TEST0*/
+
+
+/*
+<!-- ================================================================================ -->
+<!-- ========================================================== ELEMENTI GENERICI === -->
+<!-- ================================================================================ -->
+*/
+
+.vuoto {}
+    
+.inlinea {}
+    
+.def, .atto, .soggetto, .ente, .data, .luogo, .valute, .importo {
+	color:green;
+}
+    
+.blocco {}
+
+.contenitore {}
+    
+.gerarchia {}
+    
+.l1 {}
+    
+.l2 {}
+    
+.l3 {}
+
+.l4 {}
+
+.l5 {}
+
+.l6 {}
+
+.l7 {}
+
+.l8 {}
+
+.l9 {}
+    
+.tit {}
+
+.ndr {
+	font-size:3;
+}
+
+/* FINE GLOBALI */
+
+
+
+
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * ELEMENTI HTML                                                                                                       *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+	hr {
+		margin:30px 25% 30px 25%;
+		text-align:center;
+	}
+	em {
+		font-size: 100%
+	}
+	.small {
+		font-size: 65% ;
+	}
+	
+	li {
+		padding-right: 40px;
+		text-align: left;
+	}
+	
+	b b { font-weight: normal; }
+	
+	a {
+		text-align: justify;
+	}
+	
+	.hidden {
+		width:0px;
+		height:0px;
+		max-width:0px
+		max-height:0px
+		display: inline;
+		margin: 0 0 0 0;
+		padding: 0 0 0 0;
+	}
+	p {
+		text-align:justify;
+	}
+	.allineadx, p.allineadx {
+		width: 100%;
+		text-align: right;
+		margin-bottom: 20px;
+	}
+	.allineasx {
+		width: 100%;
+		text-align: left;
+		margin-bottom: 20px;
+	}

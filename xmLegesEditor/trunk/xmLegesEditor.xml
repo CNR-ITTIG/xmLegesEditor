@@ -1277,41 +1277,38 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 class="it.cnr.ittig.xmleges.editor.blocks.panes.xslts.NirXsltsImpl"
         >
         <configuration>
-            <xslt   name="dtd-norme"     		file="xsl_test/nir-panes-dtd-norme-1.0.xsl"		startup="true"/>
-            <xslt   name="dtd-testo"     		file="xsl_test/nir-panes-dtd-testo-1.0.xsl"		startup="true"/>
-            <xslt   name="dtd-globali"   		file="xsl_test/nir-panes-dtd-globali-1.0.xsl"	startup="true"/>
-            <xslt   name="dtd-meta"     		file="xsl_test/nir-panes-dtd-meta-1.0.xsl"		startup="true"/>
-            <xslt   name="edit-documento"		file="xsl_test/nir-panes-edit-documento-1.0.xsl"	startup="true" />
-	    	<xslt   name="edit-disposizioni"	file="xsl_test/nir-panes-edit-disposizioni-1.0.xsl"	startup="true" />
-            <xslt   name="edit-indice"			file="xsl_test/nir-panes-edit-indice-1.0.xsl"	startup="true" />            
-            <xslt   name="edit-annessi"			file="xsl_test/nir-panes-edit-annessi-1.0.xsl" 		startup="true" />
-            <xslt   name="edit-meta"			file="xsl_test/nir-panes-edit-meta-1.0.xsl"			startup="true" />
-            <xslt   name="riferimenti"			file="xsl_test/nir-panes-view-riferimenti-1.0.xsl"	startup="true" />
-            <xslt   name="rifincompleti"		file="xsl_test/nir-panes-view-rifincompleti-1.0.xsl"	startup="true" />
-            <xslt   name="errori"				file="xsl_test/nir-panes-view-errori-1.0.xsl"		startup="true" />
-            <xslt   name="commenti"				file="xsl_test/nir-panes-view-commenti-1.0.xsl"		startup="true" />
-            <xslt   name="ndr"					file="xsl_test/nir-panes-view-ndr-1.0.xsl"			startup="true" />
- 	    	<xslt   name="checklist"			file="xsl_test/nir-panes-view-checklist-1.0.xsl"	startup="true" />
- 	    	<xslt   name="ndv"					file="xsl_test/nir-panes-view-ndv-1.0.xsl"			startup="true" /> 
- 	    	<xslt   name="xslt-utility"			file="xsl_test/nir-xslt-utility.xsl"     		    startup="true" />	
+            <xslt   name="dtd-norme"     		file="xsl_int/nir-panes-dtd-norme-1.0.xsl"		startup="true"/>
+            <xslt   name="dtd-testo"     		file="xsl_int/nir-panes-dtd-testo-1.0.xsl"		startup="true"/>
+            <xslt   name="dtd-globali"   		file="xsl_int/nir-panes-dtd-globali-1.0.xsl"	startup="true"/>
+            <xslt   name="dtd-meta"     		file="xsl_int/nir-panes-dtd-meta-1.0.xsl"		startup="true"/>
+            <xslt   name="edit-documento"		file="xsl_int/nir-panes-edit-documento-1.0.xsl"	startup="true" />
+	    	<xslt   name="edit-disposizioni"	file="xsl_int/nir-panes-edit-disposizioni-1.0.xsl"	startup="true" />
+            <xslt   name="edit-indice"			file="xsl_int/nir-panes-edit-indice-1.0.xsl"	startup="true" />            
+            <xslt   name="edit-annessi"			file="xsl_int/nir-panes-edit-annessi-1.0.xsl" 		startup="true" />
+            <xslt   name="edit-meta"			file="xsl_int/nir-panes-edit-meta-1.0.xsl"			startup="true" />
+            <xslt   name="riferimenti"			file="xsl_int/nir-panes-edit-riferimenti-1.0.xsl"	startup="true" />
+            <xslt   name="rifincompleti"		file="xsl_int/nir-panes-edit-rifincompleti-1.0.xsl"	startup="true" />
+            <xslt   name="errori"				file="xsl_int/nir-panes-edit-errori-1.0.xsl"		startup="true" />
+            <xslt   name="commenti"				file="xsl_int/nir-panes-edit-commenti-1.0.xsl"		startup="true" />
+            <xslt   name="ndr"					file="xsl_int/nir-panes-edit-ndr-1.0.xsl"			startup="true" />
+ 	    	<xslt   name="checklist"			file="xsl_int/nir-panes-edit-checklist-1.0.xsl"	startup="true" />
+ 	    	<xslt   name="ndv"					file="xsl_int/nir-panes-edit-ndv-1.0.xsl"			startup="true" /> 
+ 	    	<xslt   name="xslt-utility"			file="xsl_int/nir-xslt-utility.xsl"     		    startup="true" />	
  	    	
             
-            <css   name="css-nir"				file="xsl_test/nir-style.css"     			startup="true" />
+            <css   name="css-nir"				file="xsl_int/nir-style.css"     			startup="true" />
             
-            <css   name="css-documento"			file="xsl_test/nir-style-edit-documento.css"     			startup="true" />
-            <css   name="css-annessi"			file="xsl_test/nir-style-edit-annessi.css"     			startup="true" />
-            <css   name="css-disposizioni"		file="xsl_test/nir-style-edit-disposizioni.css"     			startup="true" />
-            <css   name="css-indice"			file="xsl_test/nir-style-edit-indice.css"     			startup="true" />
-            <css   name="css-rif"			    file="xsl_test/nir-style-edit-riferimenti.css"     			startup="true" />
-            <css   name="css-meta"				file="xsl_test/nir-style-edit-meta.css"     			startup="true" />
+            <css   name="css-documento"			file="xsl_int/nir-style-edit-documento.css"     			startup="true" />
+            <css   name="css-annessi"			file="xsl_int/nir-style-edit-annessi.css"     			startup="true" />
+            <css   name="css-disposizioni"		file="xsl_int/nir-style-edit-disposizioni.css"     			startup="true" />
+            <css   name="css-indice"			file="xsl_int/nir-style-edit-indice.css"     			startup="true" />
+            <css   name="css-rif"			    file="xsl_int/nir-style-edit-riferimenti.css"     			startup="true" />
+            <css   name="css-meta"				file="xsl_int/nir-style-edit-meta.css"     			startup="true" />
             
             
-            <xslt   name="xsl-disegnilegge-testoafronte" 	file="nir-disegnilegge-testoafronte.xsl"     		startup="true" />
-            <xslt   name="xsl-disegnilegge" 	file="nir-disegnilegge.xsl"     		startup="true" />
-            <xslt   name="xsl-disegnilegge-nocss" 	file="nir-disegnilegge-nocss.xsl"	startup="true" />
+            
             <xslt   name="xsl-nir"				file="nir-generico.xsl"     			startup="true" />
             <xslt   name="xsl-nir-nocss"		file="nir-generico-nocss.xsl"  			startup="true" />
-            <css    name="disegnilegge-style"   file="nir-disegnilegge-style.css"       startup="true" />
             <css    name="nir-style"      		file="nir-generico-style.css"           startup="true" />
             <xslt   name="pdf-gazzettaufficiale" file="nir-fo-gazzettaufficiale.xsl"	startup="true" />
             
