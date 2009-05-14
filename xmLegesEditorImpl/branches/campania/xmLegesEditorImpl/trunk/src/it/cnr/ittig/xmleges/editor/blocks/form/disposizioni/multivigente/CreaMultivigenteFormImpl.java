@@ -1267,7 +1267,6 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				} else { 	//verifico se sto cercando periodo o capoverso
 					if (tipo.equals("periodo") || tipo.equals("capoverso")) {  //capoverso o bordo vanno intesi come un periodo che finisce con .
 						String testoPosizione = getTesto(posiz);
-						System.out.println("TESTO in cui cerco periodo/capoverso: " + testoPosizione);
 						
 						/* devo cercare '.', se questi sono in un numero o preceduti da un testo minore di 4 caratteri non li considero
 						   marcatori di fine periodo (eccezione sepreceduto da spazio, in questo caso lo considero punto fermo).*/
@@ -1277,12 +1276,9 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 						while (st.hasMoreTokens()) {
 							String testPeriodo = temPeriodo+st.nextToken();
 							
-							System.out.println("ANALIZZO: " + testPeriodo);
-							
 							String lastParola = testPeriodo;
 							if (testPeriodo.indexOf(" ")!=-1)
 								lastParola = testPeriodo.substring(testPeriodo.lastIndexOf(" "));
-							System.out.println("PAROLA individuata: " + lastParola);
 							
 							if (lastParola.length()<2) {	//trovato ' .'
 								periodo.add(testPeriodo);
@@ -1393,7 +1389,12 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 							String idTag = "#"+UtilDom.getAttributeValueAsString(posizioniTrovate[i],"id");
 							boolean nonTrovato = true;
 							for (int j=0; j<dspSostituzione.length; j++) {
-								String idMeta = UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(doc,UtilDom.getElementsByTagName(doc,dspSostituzione[j],"dsp:novellando")[0],"dsp:pos")[0],"xlink:href");
+								Node test[] = UtilDom.getElementsByTagName(doc,UtilDom.getElementsByTagName(doc,dspSostituzione[j],"dsp:novellando")[0],"dsp:pos");
+								if (test.length==0) {	//caso abrogazioni
+									nonTrovato = false;
+									break;
+								}
+								String idMeta = UtilDom.getAttributeValueAsString(test[0],"xlink:href");
 								if (idTag.equals(idMeta)) {
 									nonTrovato = false;
 									break;
