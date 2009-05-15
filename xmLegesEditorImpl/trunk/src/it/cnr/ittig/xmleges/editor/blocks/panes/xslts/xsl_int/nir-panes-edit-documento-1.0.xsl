@@ -48,13 +48,28 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             <!--<base href="{$base}" />-->
         </head>
         <body>
-            <xsl:apply-templates select="/nir:NIR/*/nir:meta/nir:confronto" />
-            <xsl:apply-templates select="/nir:NIR/*/nir:intestazione" />
-            <xsl:apply-templates select="/nir:NIR/*/nir:formulainiziale" />
-            <xsl:apply-templates select="/nir:NIR/*/nir:relazione"/>
-            <xsl:apply-templates select="/nir:NIR/*/nir:articolato|/nir:NIR/*/nir:contenitore|/nir:NIR/*/nir:gerarchia" />
-            <xsl:apply-templates select="/nir:NIR/*/nir:formulafinale" />
-            <xsl:apply-templates select="/nir:NIR/*/nir:conclusione" />           
+         <xsl:choose>
+		   <xsl:when test="/nir:NIR/*[@finevigore]">
+			 <div style="color: red; ">
+	            <xsl:apply-templates select="/nir:NIR/*/nir:meta/nir:confronto" />
+	            <xsl:apply-templates select="/nir:NIR/*/nir:intestazione" />
+	            <xsl:apply-templates select="/nir:NIR/*/nir:formulainiziale" />
+	            <xsl:apply-templates select="/nir:NIR/*/nir:relazione"/>
+	            <xsl:apply-templates select="/nir:NIR/*/nir:articolato|/nir:NIR/*/nir:contenitore|/nir:NIR/*/nir:gerarchia" />
+	            <xsl:apply-templates select="/nir:NIR/*/nir:formulafinale" />
+	            <xsl:apply-templates select="/nir:NIR/*/nir:conclusione" />
+             </div>
+			</xsl:when>
+		  <xsl:otherwise>
+		   		<xsl:apply-templates select="/nir:NIR/*/nir:meta/nir:confronto" />
+	            <xsl:apply-templates select="/nir:NIR/*/nir:intestazione" />
+	            <xsl:apply-templates select="/nir:NIR/*/nir:formulainiziale" />
+	            <xsl:apply-templates select="/nir:NIR/*/nir:relazione"/>
+	            <xsl:apply-templates select="/nir:NIR/*/nir:articolato|/nir:NIR/*/nir:contenitore|/nir:NIR/*/nir:gerarchia" />
+	            <xsl:apply-templates select="/nir:NIR/*/nir:formulafinale" />
+	            <xsl:apply-templates select="/nir:NIR/*/nir:conclusione" />
+		  </xsl:otherwise>
+		  </xsl:choose>             
         </body>
     </html>
 </xsl:template>
