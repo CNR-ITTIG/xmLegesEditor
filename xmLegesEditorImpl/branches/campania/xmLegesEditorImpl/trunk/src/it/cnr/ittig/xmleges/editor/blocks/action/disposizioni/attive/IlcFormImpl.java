@@ -388,8 +388,27 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 				
 				
 			}
-			else 	//TODO: id = t1  (dovrei però prenderlo da <originale> recuperare fonte evento = id originale)
+			else {
 				decorrenza = UtilDom.getAttributeValueAsString(doc.getElementById("t1"), "data");
+				String urnDoc;
+				NodeList eventiList = UtilDom.findRecursiveChild(doc,"eventi").getChildNodes();
+				NodeList relazioniList = UtilDom.findRecursiveChild(doc,"relazioni").getChildNodes();
+				for (int i=0; i<relazioniList.getLength(); i++) {
+					Node relazioneNode = relazioniList.item(i);
+					if ("originale".equals(relazioneNode.getNodeName()))
+						urnDoc = UtilDom.getAttributeValueAsString(relazioneNode, "xlink:href");
+					if ("attiva".equals(relazioneNode.getNodeName())) {
+						String id = UtilDom.getAttributeValueAsString(relazioneNode, "id");
+						for (int j=0; j<eventiList.getLength(); j++) 
+							if (id.equals(UtilDom.getAttributeValueAsString(eventiList.item(j), "fonte")) 
+									&& decorrenza.equals(UtilDom.getAttributeValueAsString(eventiList.item(j), "data"))) {
+								
+								idevento = UtilDom.getAttributeValueAsString(eventiList.item(j), "id");
+								break;
+							}
+					}
+				}				
+			}
 			//verifico se il metadato esisteva
 			Node modificoMetaEsistenti = null;
 			Node modificheAttive = UtilDom.findRecursiveChild(doc,"modificheattive");
