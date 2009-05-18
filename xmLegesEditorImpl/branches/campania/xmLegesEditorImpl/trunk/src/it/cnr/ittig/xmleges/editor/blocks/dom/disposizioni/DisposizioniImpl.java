@@ -960,6 +960,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 				//relazione
 				Node relazioniNode = UtilDom.findRecursiveChild(activeMeta,"relazioni");
 				NodeList relazioniList = relazioniNode.getChildNodes();
+				Node ultimoAttiva = relazioniList.item(0);
 				int max=0;
 				for (int i = 0; i < relazioniList.getLength(); i++) {
 					Node relazioneNode = relazioniList.item(i);
@@ -968,14 +969,17 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 						Integer idValue = Integer.decode(id.substring(2));
 						if (idValue.intValue() > max)
 							max = idValue.intValue();
+						ultimoAttiva = relazioneNode;
 					}
 				}
 				max++;
 				Node nuovo = utilRulesManager.getNodeTemplate("attiva");
 				UtilDom.setAttributeValue(nuovo, "id", "ra"+max);
 				UtilDom.setAttributeValue(nuovo, "xlink:href", norma);
-				//UtilDom.setAttributeValue(nuovo, "xlink:type", "simple");
-				relazioniNode.appendChild(nuovo);
+				if (ultimoAttiva.getNextSibling()==null) 
+					relazioniNode.appendChild(nuovo);
+				else
+					relazioniNode.insertBefore(nuovo, ultimoAttiva.getNextSibling());
 				//evento
 				Node eventiNode = UtilDom.findRecursiveChild(activeMeta,"eventi");
 				if (eventiNode==null)
