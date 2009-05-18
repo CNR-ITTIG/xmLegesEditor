@@ -873,6 +873,8 @@ public class AggiornaIdFrozenLaw {
 			if (node.getAttributes() != null)
 				if (node.getAttributes().getNamedItem("id") != null) {
 					String id = node.getAttributes().getNamedItem("id").getNodeValue();
+					String regexp = "\\-t\\d+$";					
+					id=id.replaceAll(regexp,""); // espunge il suffisso -tx
 					for (int i = id.length() - 1; i >= 0; i--) {
 						if (!isDigit(id.charAt(i))) {
 							try {
@@ -899,6 +901,10 @@ public class AggiornaIdFrozenLaw {
 			if (node.getAttributes() != null)
 				if (node.getAttributes().getNamedItem("id") != null) {
 					String id = node.getAttributes().getNamedItem("id").getNodeValue();
+					
+					String regexp = "\\-t\\d+$";					
+					id=id.replaceAll(regexp,""); // espunge il suffisso -tx
+					
 					String lastId = id.substring(id.lastIndexOf("-"));
 					if(lastId.length()>0)
 					    lastLetterID = lastId.substring(lastId.indexOf("let")+3);
@@ -917,6 +923,10 @@ public class AggiornaIdFrozenLaw {
 			if (node.getAttributes() != null)
 				if (node.getAttributes().getNamedItem("id") != null) {
 					String id = node.getAttributes().getNamedItem("id").getNodeValue();
+					
+					String regexp = "\\-t\\d+$";					
+					id=id.replaceAll(regexp,""); // espunge il suffisso -tx
+					
 					String lastId = id.lastIndexOf("-")>0?id.substring(id.lastIndexOf("-")):"";
 					if(lastId.length()>0)
 					    lastLetterID = lastId.substring(lastId.indexOf("let")+3);
@@ -942,6 +952,10 @@ public class AggiornaIdFrozenLaw {
 			if (node.getAttributes() != null)
 				if (node.getAttributes().getNamedItem("id") != null) {
 					String id = node.getAttributes().getNamedItem("id").getNodeValue();
+					
+					String regexp = "\\-t\\d+$";					
+					id=id.replaceAll(regexp,""); // espunge il suffisso -tx
+			
 					for (i = id.length() - 1; i >= 0; i--) {
 						if (!isDigit(id.charAt(i))) {
 							try {
