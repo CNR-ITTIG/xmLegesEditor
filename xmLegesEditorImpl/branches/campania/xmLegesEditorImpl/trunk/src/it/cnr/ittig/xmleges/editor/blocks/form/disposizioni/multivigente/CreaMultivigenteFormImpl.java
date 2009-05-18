@@ -593,9 +593,13 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 					idEventiDaTestare.add(id);					
 			}			
 		}
-		if (partizioneIndicata==null)
+		if (partizioneIndicata==null || !scrivi.isEnabled())
 			maxPassiva++;
 			
+		//controllo grezzo
+		if (maxPassiva==0)
+			maxPassiva=1;		
+		
 			
 		Node eventiNode = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docEditor,null),"eventi");
 		int maxEventi = 1+UtilDom.findRecursiveChild(eventiNode,"eventi").getChildNodes().getLength();    //levare findrecursivechild
