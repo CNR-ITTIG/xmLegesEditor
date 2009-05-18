@@ -62,7 +62,6 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -132,7 +131,6 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 	
 	Vector nodiModifica;
 	int correnteModifica;
-	int vecchieModifiche;
 	String dataEvento;
 	String urnAttivo;
 	String urnDocumento;
@@ -140,7 +138,6 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 	Vector idEventi;
 	Vector disposizioniDaConvertire;
 	int correnteEvento;
-	int numMessaggiErrore;
 	
 	String partizione;
 	String[] partizioni ={"lib","prt","tit","cap","sez","art","com","en","el","ep"};
@@ -246,7 +243,6 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		
 		if (e.getSource() == lista) {
 			//apro file lista.xml delle modifiche
-			vecchieModifiche = -1;
 			if (lastPathList!=null)
 				fileChooser = new JFileChooser(lastPathList);
 			else
@@ -259,7 +255,6 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				urnDocumento = UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(docEditor,docEditor,"originale")[0], "xlink:href");
 				
 				listModel.clear();
-				numMessaggiErrore = 0;
 				try {
 					Document listamodifiche = parsa(fileChooser.getSelectedFile());
 					Node[] modifica = UtilDom.getElementsByAttributeValue(listamodifiche,listamodifiche,"urn", urnDocumento);
@@ -275,7 +270,6 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 					}
 				} catch (Exception ex) {
 					errore.setText("Errore nel file aperto");
-					messaggio.setText("");
 				}
 			}
 		}
@@ -353,9 +347,8 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				dateEventi = new Vector();
 				idEventi = new Vector();
 				disposizioniDaConvertire = new Vector();
-				vecchieModifiche = getPosLista();
 				correnteEvento = 0;
-				listModel.addElement("Apertura norma: " + urnAttivo);
+				listModel.clear();
 				//recupero tutti i meta che lavorano su 'urnDocumento'  [ Teoricamente potrebbe essere sbagliato, devo guardare solo all'evento interessato !!!!
 				//  													  Ci potrebbero essere altri eventi, di altre norme, che si accavallano a questi eventi. ]
 
@@ -384,17 +377,16 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 												tempPart = tempPart.substring(tempPart.indexOf("#")+1, tempPart.length());
 											String tipo = dspTermine[k].getParentNode().getNodeName();
 											tipo = tipo.substring(tipo.indexOf(":")+1, tipo.length()).toUpperCase();
-											listModel.addElement("Norma " + (correnteModifica+1) + ": " + tipo + " in data " + UtilDate.normToString(tempData) + " di " + tempPart);
+											listModel.addElement(tipo + " in data " + UtilDate.normToString(tempData) + " di " + tempPart);
 										}
 								}
 								break;
 							}
 					}
 				}
-				if (idEventi.size()==0)	{//il file aperto non contiene nessun evento di modifica (non dovrebbe mai succedere)
+				if (idEventi.size()==0)	//il file aperto non contiene nessun evento di modifica (non dovrebbe mai succedere)
 					errore.setText("Nessun evento trovato");
-					numMessaggiErrore++;
-				} else {
+				else {
 					settaTasti(false,false,true);
 					primaModifica=true;		//cambiare --- implementare la funzione di check sulle modifiche
 					while (proponiModificaTesto(null));
@@ -498,7 +490,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 
 	private int getPosLista() {
 		//System.out.println("num Errore " + numMessaggiErrore + " +1 +correnteEvento " + correnteEvento + " + vecchieModifiche "+vecchieModifiche + " = " + (numMessaggiErrore+1+correnteEvento+vecchieModifiche));
-		return numMessaggiErrore+1+correnteEvento+vecchieModifiche;
+		return correnteEvento;
 	}
 	
 	private boolean proponiModificaTesto(Node partizioneIndicata) {
@@ -990,8 +982,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 	}
 	
 	public void openForm() {
-		
-		vecchieModifiche = -1;
+
 		//posiziona form vuota, tasto apertura lista
 		settaForm(false);
 		errore.setText("");
