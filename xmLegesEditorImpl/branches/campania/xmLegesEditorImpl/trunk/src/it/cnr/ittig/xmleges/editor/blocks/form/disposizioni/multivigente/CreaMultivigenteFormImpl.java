@@ -369,16 +369,33 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 									//colleziono anche i nodi delle disposizioni interessate
 									for (int k=0; k<dspTermine.length; k++)
 										if (tempId.equals(UtilDom.getAttributeValueAsString(dspTermine[k], "da"))) {
-											disposizioniDaConvertire.add(dspTermine[k].getParentNode());
-											String tempPart = UtilDom.getAttributeValueAsString(UtilDom.findRecursiveChild(UtilDom.findRecursiveChild(dspTermine[k].getParentNode(),"dsp:norma"),"dsp:pos"),"xlink:href");
-											if (tempPart.indexOf("#")==-1)
-												tempPart = "intero atto";
-											else	
-												tempPart = tempPart.substring(tempPart.indexOf("#")+1, tempPart.length());
-											String tipo = dspTermine[k].getParentNode().getNodeName();
-											tipo = tipo.substring(tipo.indexOf(":")+1, tipo.length()).toUpperCase();
-											listModel.addElement(tipo + " in data " + UtilDate.normToString(tempData) + " di " + tempPart);
+											Node daAggiungere = dspTermine[k].getParentNode();
+											//li ordino
+											boolean inserito = false;
+											String nMod = UtilDom.getAttributeValueAsString((Node)UtilDom.getChildElements(daAggiungere).get(0), "xlink:href");
+											if (nMod!=null)
+												for (int z=0; z<disposizioniDaConvertire.size(); z++) {
+													String temp = UtilDom.getAttributeValueAsString((Node)(UtilDom.getChildElements((Node)disposizioniDaConvertire.get(z))).get(0), "xlink:href");
+													if (temp==null || nMod.compareTo(temp)<0) {
+														disposizioniDaConvertire.add(z, daAggiungere);
+														inserito = true;
+														break;
+													}
+												}
+											if (!inserito)
+												disposizioniDaConvertire.add(daAggiungere);
 										}
+									//popolo la finestra delle informazioni
+									for (int k=0; k<disposizioniDaConvertire.size(); k++) {
+										String tempPart = UtilDom.getAttributeValueAsString(UtilDom.findRecursiveChild(UtilDom.findRecursiveChild((Node)disposizioniDaConvertire.get(k),"dsp:norma"),"dsp:pos"),"xlink:href");
+										if (tempPart.indexOf("#")==-1)
+											tempPart = "intero atto";
+										else	
+											tempPart = tempPart.substring(tempPart.indexOf("#")+1, tempPart.length());
+										String tipo = ((Node)disposizioniDaConvertire.get(k)).getNodeName();
+										tipo = tipo.substring(tipo.indexOf(":")+1, tipo.length()).toUpperCase();
+										listModel.addElement(tipo + " in data " + UtilDate.normToString(tempData) + " di " + tempPart);
+									}
 								}
 								break;
 							}
@@ -409,7 +426,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			if (creaMetadato) {
 				Node disposiz = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docEditor,null),"disposizioni");
 				Node modAtt = UtilDom.findRecursiveChild(disposiz,"modificheattive");
-				//Attenzione, devo trovare chi punta la virgoletta (anche + di uno se siamo in un mmod),
+				//Attenzione, devo trovare chi punta la virgoletta, anche + di uno se siamo in un mmod (mmod potrei avere + urn modificate!?!?),
 				//o se è una modifica, di un mod, già in precedenza modificato. 
 				//In questo secondo caso, queste disposizioni dichiarano tutti di operare nello stesso mod, e quindi le considero una sola volta.
 				String idVirgoletta = "#"+UtilDom.getAttributeValueAsString(virgolettaModRimodificata, "id");
@@ -430,13 +447,14 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				//creazione evento e metadato
 				int max=0;
 				String urn = "";
+				try {
+					urn = UtilDom.getAttributeValueAsString(UtilDom.findRecursiveChild(((Node) daDuplicare.get(0)).getParentNode(),"dsp:norma"), "xlink:href");
+				} catch (Exception ex) {}
 				Node relazioniNode = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docEditor,null),"relazioni");
 				NodeList relazioniList = relazioniNode.getChildNodes();
 				Node ultimoAttiva = null;
 				for (int i = 0; i < relazioniList.getLength(); i++) {
 					Node relazioneNode = relazioniList.item(i);
-					if ("originale".equals(relazioneNode.getNodeName()))
-						urn = UtilDom.getAttributeValueAsString(relazioneNode, "xlink:href");
 					if ("attiva".equals(relazioneNode.getNodeName())) {
 						String id = UtilDom.getAttributeValueAsString(relazioneNode, "id");
 						Integer idValue = Integer.decode(id.substring(2));
@@ -599,7 +617,6 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		//controllo grezzo
 		if (maxPassiva==0)
 			maxPassiva=1;		
-		
 			
 		Node eventiNode = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docEditor,null),"eventi");
 		int maxEventi = 1+UtilDom.findRecursiveChild(eventiNode,"eventi").getChildNodes().getLength();    //levare findrecursivechild
