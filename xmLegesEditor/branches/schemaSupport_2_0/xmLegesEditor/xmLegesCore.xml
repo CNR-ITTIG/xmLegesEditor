@@ -37,6 +37,11 @@ File di composizione dell'applicazione xmLegesEditor CORE
  			<!--appender-ref ref="FileAppender" /-->
 		</root>
 		
+		<logger name=".RulesManager" additivity="false">
+                        <priority value ="debug" />
+                        <appender-ref ref="ConsoleAppender" />
+        </logger>
+		
 	
 	</log4j:configuration>
 	
@@ -492,7 +497,7 @@ File di composizione dell'applicazione xmLegesEditor CORE
     <!-- ======================================================== FORMS === -->
     <!-- ================================================================== -->
 
-    <component  class="it.cnr.ittig.xmleges.editor.blocks.form.filenew.FileNewFormImpl" />
+ <!--   <component  class="it.cnr.ittig.xmleges.editor.blocks.form.filenew.FileNewFormImpl" />-->
     
 <!-- EXPORT commento x il momento
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.fileexport.FileExportFormImpl" />
@@ -503,12 +508,12 @@ File di composizione dell'applicazione xmLegesEditor CORE
     <!-- ================================================================== -->
 
 <!-- SAREBBE DA ELIMINARE -->
-    <component  class="it.cnr.ittig.xmleges.editor.blocks.provvedimenti.ProvvedimentiImpl">
+<!--    <component  class="it.cnr.ittig.xmleges.editor.blocks.provvedimenti.ProvvedimentiImpl">
         <configuration external="true" resource="ProvvedimentiImpl.xconfig" />
-    </component>
+    </component> -->
 
 <!-- SAREBBE DA ELIMINARE -->    
-    <component  class="it.cnr.ittig.xmleges.editor.blocks.template.TemplateImpl" />       
+  <!--  <component  class="it.cnr.ittig.xmleges.editor.blocks.template.TemplateImpl" />       -->
            
     <!-- ================================================================== -->
     <!-- ======================================================== FRAME === -->
@@ -594,8 +599,8 @@ File di composizione dell'applicazione xmLegesEditor CORE
         >
         <configuration>
             <pane name="editor.panes.documento">
-                <!--xslt name="edit-documento"/-->
-                <xslt name="edit-documento-akomantoso"/>
+                <xslt name="edit-documento"/>
+                <!--xslt name="edit-documento-akomantoso"/-->
             </pane>
             <pane name="editor.panes.commenti">
                 <xslt name="commenti"/>
