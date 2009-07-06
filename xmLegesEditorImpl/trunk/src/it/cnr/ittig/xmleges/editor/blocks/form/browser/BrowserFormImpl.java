@@ -73,25 +73,6 @@ public class BrowserFormImpl implements BrowserForm, Loggable, Serviceable, Init
 		panel.add(webBrowser, BorderLayout.CENTER);
 		
 
-//		//Prove ----> sono da buttare poi
-//		System.err.println("--------------- debug JDIC --------------------------");
-//		
-////		WebBrowserUtil;
-////		JdicManager;
-////		JdicInitException;
-////		JdicManager;
-//		
-//		System.err.println("Platform: " + JdicManager.getPlatform());
-//		System.err.println("Browser path: " +WebBrowserUtil.getBrowserPath());	
-//		System.err.println("Binary name: " +WebBrowserUtil.getEmbedBinaryName());
-//		System.err.println("MozillaHome: "+WebBrowserUtil.getMozillaGreHome());
-//		System.err.println("Mozilla default browser: " + WebBrowserUtil.isDefaultBrowserMozilla());
-//				
-//		System.err.println("------------------------------------------------------");
-//		//WebBrowserUtil.enableDebugMessages(true);
-		
-		
-		
         webBrowser.addWebBrowserListener(
                 new WebBrowserListener() {
                             

@@ -425,7 +425,7 @@ public class UtilXslt {
 				identityTr.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
 			
 			
-			System.err.println("serializing node with character encoding: "+encoding);
+			//System.err.println("serializing node with character encoding: "+encoding);
 			identityTr.setOutputProperty(OutputKeys.ENCODING,encoding);
 			
 			

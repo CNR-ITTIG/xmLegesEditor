@@ -201,7 +201,6 @@ public class AttogiacitatoFormImpl implements AttogiacitatoForm, Loggable, Servi
 				// utilmsg.msgError(e.toString());
 			}
 		}
-		System.err.println("elenco NON ordinato; size: "+urnVector.size()); 
 	}
 
 	

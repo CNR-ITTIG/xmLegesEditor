@@ -167,9 +167,8 @@ public class AggiornaIdFrozenLaw {
 		modIDs=new HashMap();
 		this.document=document;
 		
-		System.err.println("CALLED AggiornaId");
+		//System.err.println("CALLED AggiornaId");
 		
-		//Vector removed = getRemovedIDs();
 
 		Node root=document.getElementsByTagName("NIR").item(0);
 		getAndKillReferringAttributes(root);
@@ -250,7 +249,7 @@ public class AggiornaIdFrozenLaw {
 			if (!UtilDom.hasIdAttribute(nodo) || !OldID.equals(IDValue)) {      
 				
 				if(!OldID.equals(IDValue)){
-					System.err.println("idChanged: new  " + IDValue + " old " + OldID);
+					//System.err.println("idChanged: new  " + IDValue + " old " + OldID);
 					modIDs.put(OldID, IDValue);
 				}
 				

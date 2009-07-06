@@ -515,7 +515,7 @@ public class DocumentManagerImpl implements DocumentManager, EventListener, Logg
 		} else {
 			UtilDom.trimTextNode(doc, true);
 			logger.info("Reading rules from DTDs...");
-			System.err.println("----------> GRAMMAR PATH:   "+getGrammarPath(doc));
+			//System.err.println("----------> GRAMMAR PATH:   "+getGrammarPath(doc));
 			
 			rulesManager.createRulesManager(getGrammarExtension(doc));
 			rulesManager.loadRules(filename, getGrammarPath(doc));
