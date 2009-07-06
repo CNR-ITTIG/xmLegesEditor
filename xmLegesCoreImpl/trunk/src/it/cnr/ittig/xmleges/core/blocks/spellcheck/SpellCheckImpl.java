@@ -61,7 +61,11 @@ public class SpellCheckImpl extends SpellCheckAdapter implements SpellCheck, Log
 
 	I18n i18n;
 
-	private static String dictFile = "it_IT.zip";
+	private static String IT_dictFile = "it_IT.zip";
+	
+	private static String EN_dictFile = "en_GB.zip";
+	
+	private static String dictFile = "it_IT.zip";   //default
 
 	private SpellDictionary dictionary = null;
 	
@@ -91,6 +95,16 @@ public class SpellCheckImpl extends SpellCheckAdapter implements SpellCheck, Log
 			if(!UtilFile.fileExistInTemp(personal_dictionary)){
 				UtilFile.createTemp(personal_dictionary);
 			}
+			
+			
+			//System.err.println("carica questo dizionario: "+i18n.getLocale().getLanguage());
+			
+			// To be improved:  CARICAMENTO DEL DIZIONARIO IN BASE ALLA LINGUA DELL'INTERFACCIA 
+			
+			if(i18n.getLocale().getLanguage().toLowerCase().contains("it"))
+				dictFile = IT_dictFile;
+			if(i18n.getLocale().getLanguage().toLowerCase().contains("en"))
+			    dictFile = EN_dictFile;
 			
 			dictionary = new OpenOfficeSpellDictionary(getClass().getResourceAsStream(dictFile),UtilFile.getFileFromTemp(personal_dictionary));			
 			spellCheck = new SpellChecker(dictionary);
