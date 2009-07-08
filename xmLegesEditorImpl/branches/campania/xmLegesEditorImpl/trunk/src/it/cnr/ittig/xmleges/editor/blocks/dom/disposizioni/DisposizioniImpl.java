@@ -108,12 +108,12 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		if (urnNode.length>0) {
 			//controllo la urn originale
 			urnOriginale = UtilDom.getAttributeValueAsString(urnNode[0], "valore");
-			//Se non è ancora settato inizio vigore lo imposto all'evento originale
+			//Se non ï¿½ ancora settato inizio vigore lo imposto all'evento originale
 			if (UtilDom.getAttributeValueAsString(urnNode[0], "iniziovigore")==null)
 				UtilDom.setAttributeValue(urnNode[0], "iniziovigore", eventoOriginale.getId());
 		}
 		try {
-			versione += eventoVigore.getFonte().toString().split(":")[4].replaceAll("-", "");
+			versione += eventoVigore.getFonte().toString().split(":")[4];
 			if (versione.indexOf(';')!=-1)
 					versione = versione.split(";")[0];
 		}
@@ -164,7 +164,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 					else
 						return null;
 				
-				//TODO: non ho ben chiaro perchè ma avvolte cercaMeta=null (ipotesi... manca id su certe 'partizioni' tipo Legge????)
+				//TODO: non ho ben chiaro perchï¿½ ma avvolte cercaMeta=null (ipotesi... manca id su certe 'partizioni' tipo Legge????)
 				//Per ora faccio un return null
 				if (cercaMeta==null)
 					return null;
@@ -202,7 +202,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 			
 		Node modifichepassiveNode = UtilDom.findRecursiveChild(disposizioniNode,"modifichepassive");
 		if (modifichepassiveNode==null)
-			modifichepassiveNode = UtilDom.checkAndCreate(disposizioniNode, "modifichepassive");		
+			modifichepassiveNode = UtilDom.checkAndCreate(disposizioniNode, "modifichepassive");
 		
 		Node metaAfter = getMetaAfter(modifichepassiveNode,novella, novellando);
 		if (!novellando.equals("#") && !novella.equals("#")) {	//sostituzione
@@ -269,7 +269,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		 */
 			
 		Node posNode = UtilDom.findDirectChild(n, "dsp:pos");
-		if (posNode == null) {// Non è stato inserito dal template minimale
+		if (posNode == null) {// Non ï¿½ stato inserito dal template minimale
 			posNode = utilRulesManager.getNodeTemplate("dsp:pos");
 			n.appendChild(posNode);
 		}	
@@ -283,7 +283,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 			normaNode = null;
 		}
 		
-		if (normaNode == null) {// Non è stato inserito dal template minimale
+		if (normaNode == null) {// Non ï¿½ stato inserito dal template minimale
 			normaNode = utilRulesManager.getNodeTemplate("dsp:norma");
 			n.appendChild(normaNode);
 		}	
@@ -318,7 +318,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		 */
 			
 		Node novellandoNode = UtilDom.findDirectChild(n, "dsp:novellando");
-		if (novellandoNode == null) {// Non è stato inserito dal template minimale
+		if (novellandoNode == null) {// Non ï¿½ stato inserito dal template minimale
 			novellandoNode = utilRulesManager.getNodeTemplate("dsp:novellando");
 			n.appendChild(novellandoNode);
 		}	
@@ -339,7 +339,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		 */
 			
 		Node novellaNode = UtilDom.findDirectChild(n, "dsp:novella");
-		if (novellaNode == null) {// Non è stato inserito dal template minimale
+		if (novellaNode == null) {// Non ï¿½ stato inserito dal template minimale
 			novellaNode = utilRulesManager.getNodeTemplate("dsp:novella");
 			n.appendChild(novellaNode);
 		}	
@@ -472,7 +472,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 				selectedText=node.getNodeValue();
 			}
 			else{        // racchiude il testo in uno span e lo riestrae ????
-            // il testo selezionato è una sottoparte del nodo di testo (va creato lo span)				
+            // il testo selezionato ï¿½ una sottoparte del nodo di testo (va creato lo span)				
 				
 				//qui crea uno span dal testo selezionato 
 				span = (Element) utilRulesManager.encloseTextInTag(node, start, end,"h:span","h");
@@ -518,7 +518,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		    return span;
 		
 		}else{   
-			//non è un nodo di testo
+			//non ï¿½ un nodo di testo
 		    NamedNodeMap nnm = node.getAttributes();
 		    // Assegnazione attributi di vigenza al nodo
 			if(vigenza.getEInizioVigore()!=null)
@@ -558,7 +558,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		if (id!=null) 
 			undo = doc.getElementById(id);
 		if (undo==null) {
-			logger.error("fallito undo perchè non trovo id: " + id);
+			logger.error("fallito undo perchï¿½ non trovo id: " + id);
 		}
 		else {
 			Node selezione = undo.getParentNode();
@@ -582,7 +582,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		if (id!=null) 
 			undo = doc.getElementById(id);
 		if (undo==null) {
-			logger.error("fallito undo perchè non trovo id: " + id);
+			logger.error("fallito undo perchï¿½ non trovo id: " + id);
 		}
 		else {
 			try {
@@ -748,7 +748,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 	selectedText="";
 	
 	if(!UtilDom.isTextNode(node)){
-		//non c'è selezione di testo sono su nodo generico
+		//non c'ï¿½ selezione di testo sono su nodo generico
 		if(node.getNodeValue()==null){
 			if(UtilDom.getTextNode(node)==null || UtilDom.getTextNode(node).trim().equals(""))
 				//	caso di selzione solo su nodo generici (articolato, formulainiziale, formulafinale ecc..)
@@ -769,7 +769,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 	   // Recupero contenuto Nodo
 		selectedText=UtilDom.getTextNode(parentNode);
 
-		//se il testo selezionato non coincide con quello dello span di cui è figlio
+		//se il testo selezionato non coincide con quello dello span di cui ï¿½ figlio
 		//si crea una nuova vigenza		
 		if(start!=end && selectedText.substring(start,end).length()<selectedText.length()){
 				selectedText=selectedText.substring(start,end);
@@ -915,10 +915,15 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 			disposizioniNode = nirUtilDom.checkAndCreateMeta(doc,activeMeta,"disposizioni");
 			
 		Node modificheattiveNode = UtilDom.findRecursiveChild(disposizioniNode,"modificheattive");
-		if (modificheattiveNode==null)
-			modificheattiveNode = UtilDom.checkAndCreate(disposizioniNode, "modificheattive");		
+		if (modificheattiveNode==null) {
+			modificheattiveNode = UtilDom.checkAndCreate(disposizioniNode, "modificheattive");
+			if (disposizioniNode.getFirstChild()!=modificheattiveNode)  //prima modifiche attive, poi passive
+				disposizioniNode.insertBefore(modificheattiveNode, disposizioniNode.getFirstChild());
+		}
+		
+		
 
-		//se è una modifica, butto via il vecchio pacchetto.
+		//se ï¿½ una modifica, butto via il vecchio pacchetto.
 		
 		
 		//////////////buttare anche eventi collegati !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -941,14 +946,14 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		modificheattiveNode.appendChild(operazioneNode);
 		//Pos -- indica il mod.
 		Node nodo = UtilDom.findDirectChild(operazioneNode, "dsp:pos");
-		if (nodo != null) // è stato inserito dal template minimale
+		if (nodo != null) // ï¿½ stato inserito dal template minimale
 			operazioneNode.removeChild(nodo);
 		nodo = utilRulesManager.getNodeTemplate("dsp:pos");
 		UtilDom.setAttributeValue(nodo, "xlink:href", idMod);
 		operazioneNode.appendChild(nodo);			
 		UtilDom.setAttributeValue(nodo, "xlink:href", idMod);
 		operazioneNode.appendChild(nodo);
-		//Se è condizionata -- metto la condizione, altrimenti il termine
+		//Se ï¿½ condizionata -- metto la condizione, altrimenti il termine
 		if (condizione) {
 			nodo = utilRulesManager.getNodeTemplate("dsp:condizione");
 			Node nodoCondizione = utilRulesManager.getNodeTemplate("dsp:testo");
@@ -1000,7 +1005,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		operazioneNode.appendChild(nodo);
 		//Norma -- Pos con eventuali bordi
 		Node normaNode = UtilDom.findDirectChild(operazioneNode, "dsp:norma");
-		if (normaNode != null) // è stato inserito dal template minimale
+		if (normaNode != null) // ï¿½ stato inserito dal template minimale
 			operazioneNode.removeChild(normaNode);
 		normaNode = utilRulesManager.getNodeTemplate("dsp:norma");
 		UtilDom.setAttributeValue(normaNode, "xlink:href", norma);
@@ -1091,7 +1096,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 					novellandoNode.appendChild(nodo);
 				}
 			}
-			else {		//delimitatori  (stesso di sopra ma ho anche un ruolo(A)... sopra è il default 'contenuto'
+			else {		//delimitatori  (stesso di sopra ma ho anche un ruolo(A)... sopra ï¿½ il default 'contenuto'
 				UtilDom.setAttributeValue(nodo, "xlink:href", "#"+virgolettaA);
 				Node ruoloNode = documentManager.getDocumentAsDom().createElementNS("http://www.ittig.cnr.it/provvedimenti/2.2", "ittig:ruolo");
 				UtilDom.setAttributeValue(ruoloNode, "valore", ruoloA);
