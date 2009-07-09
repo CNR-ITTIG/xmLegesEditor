@@ -434,7 +434,9 @@ public class AggiornaIdFrozenLaw {
 
 		// FIXME momentaneamente rimuove anche L ed R (l ed r) provenienti dalla
 		// decorazione
-		NumContent = NumContent.replaceAll("[(l]\\S*", "");
+
+		NumContent = NumContent.replaceAll("\\(l\\S*", "");
+		
 		// NumContent = NumContent.replaceAll("[(r]\\S*", "");
 		NumContent = NumContent.replaceAll("[^e][r]", ""); // salva il ter
 
