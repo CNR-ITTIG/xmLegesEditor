@@ -286,7 +286,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 					Node tempPos = UtilDom.findRecursiveChild(UtilDom.findRecursiveChild((Node)disposizioniDaConvertire.get(correnteEvento),"dsp:norma"),"dsp:pos");
 					String partizione = UtilDom.getAttributeValueAsString(tempPos,"xlink:href");
 					if (partizione.indexOf("#")!=-1) {
-						partizione = partizione.substring(1+partizione.indexOf("#"));  //xex  art1-com3-leta (significativo è let)
+						partizione = partizione.substring(1+partizione.indexOf("#"));  //xex  art1-com3-leta (significativo ï¿½ let)
 						StringTokenizer st = new StringTokenizer(partizione, "-");
 						String token = null;
 						while (st.hasMoreTokens())
@@ -329,15 +329,15 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			if ((attivo = apriFile())!=null) {
 				form.setDialogWaiting(true);
 				docAttivo = parsa(attivo);
-				//effettuo un test per vedere se la norma aperta è quella che mi aspettavo
+				//effettuo un test per vedere se la norma aperta ï¿½ quella che mi aspettavo
 				try {
 				if (!urnAttivo.equals(UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(docAttivo,docAttivo,"originale")[0], "xlink:href"))) {
-					errore.setText("Il file aperto non è corretto");
+					errore.setText("Il file aperto non ï¿½ corretto");
 					form.setDialogWaiting(false);
 					return;
 				}
 				} catch (Exception ex) { //arriva qui se non apro un documento NIR (xex)
-					errore.setText("Il file aperto non è corretto");
+					errore.setText("Il file aperto non ï¿½ corretto");
 					form.setDialogWaiting(false);
 					return;
 				}
@@ -427,7 +427,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				Node disposiz = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docEditor,null),"disposizioni");
 				Node modAtt = UtilDom.findRecursiveChild(disposiz,"modificheattive");
 				//Attenzione, devo trovare chi punta la virgoletta, anche + di uno se siamo in un mmod (mmod potrei avere + urn modificate!?!?),
-				//o se è una modifica, di un mod, già in precedenza modificato. 
+				//o se ï¿½ una modifica, di un mod, giï¿½ in precedenza modificato. 
 				//In questo secondo caso, queste disposizioni dichiarano tutti di operare nello stesso mod, e quindi le considero una sola volta.
 				String idVirgoletta = "#"+UtilDom.getAttributeValueAsString(virgolettaModRimodificata, "id");
 				Node[] metaCoinvolti = UtilDom.getElementsByAttributeValue(docEditor,modAtt,"xlink:href", idVirgoletta);
@@ -517,18 +517,18 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		form.setDialogWaiting(true);
 		
 		if (partizioneIndicata!=null)
-			if (scrivi.isEnabled()) { //ho cambiato posizione e avevo già proposto qualcosa => cancella vecchia proposta
+			if (scrivi.isEnabled()) { //ho cambiato posizione e avevo giï¿½ proposto qualcosa => cancella vecchia proposta
 				Node corrente = domDisposizioni.doErase(idNovellando,idNovella,nodeDisposizione,nodeNovellando);
 				if (corrente!=null)
 					selectionManager.setActiveNode(this, corrente);
 				
-				//Attenzione, se avevo più partizioni nella virgoletta => devo cancellare anche le altre integrazioni
+				//Attenzione, se avevo piï¿½ partizioni nella virgoletta => devo cancellare anche le altre integrazioni
 				if (figliVirgoletta!=null)
 					for (int i=1; i<figliVirgoletta.size(); i++) 
 						domDisposizioni.doErase("",(String)idMeta.get(i-1),(Node)nodiMeta.get(i-1),null);
 
 			}
-			else 		//se ho selezionato delle parole manualmente, mi fido anche se nella realtà avevo chiesto di selezionarne altre
+			else 		//se ho selezionato delle parole manualmente, mi fido anche se nella realtï¿½ avevo chiesto di selezionarne altre
 				try {
 					periodoIndividuato = UtilDom.getText(selectionManager.getActiveNode()).substring(selectionManager.getTextSelectionStart(),selectionManager.getTextSelectionEnd());
 				} 
@@ -567,7 +567,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			String idVirgoletta = UtilDom.getAttributeValueAsString(UtilDom.findRecursiveChild(tempNovella,"dsp:pos"),"xlink:href").substring(1);
 			Node[] trovati = UtilDom.getElementsByAttributeValue(docAttivo,docAttivo,"id",idVirgoletta);
 			if (trovati.length>0)
-				virgolettaDaInserire = UtilDom.getElementsByAttributeValue(docAttivo,docAttivo,"id",idVirgoletta)[0].cloneNode(true);  //lo clono perchè potrei integrarlo con num e rubrica e poi rimosizionarmi manualmente altrove
+				virgolettaDaInserire = UtilDom.getElementsByAttributeValue(docAttivo,docAttivo,"id",idVirgoletta)[0].cloneNode(true);  //lo clono perchï¿½ potrei integrarlo con num e rubrica e poi rimosizionarmi manualmente altrove
 			else {
 				utilmsg.msgInfo("Attenzione. Hai informazioni nei metadati non presenti nel testo.");
 				try {
@@ -593,7 +593,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				virgolettaDaEliminare = null; //la lascio a null, tanto se mi serve, me la calcolo in 'cambia partizione'						
 		}
 		
-		//test per capire se la modifica corrente è stata già applicata
+		//test per capire se la modifica corrente ï¿½ stata giï¿½ applicata
 		//verifico la presenza dell'evento (visto che ci sono mi calcolo anche un nuovo id)
 		Vector idEventiDaTestare = new Vector();
 		Node relazioniNode = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docEditor,null),"relazioni");
@@ -630,15 +630,15 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 						
 							
 							if (partizioneIndicata==null) {	
-							//per ora mi fermo qui. Ho verificato che esiste già un evento 'identico' nel modificato. Presumo quindi sia già stato modificato.
-							//In realtà dovrei prelevare l'attributo ID. Prendere tutte le partizioni che hanno attributo INIZIOVIGORE=id e/o
+							//per ora mi fermo qui. Ho verificato che esiste giï¿½ un evento 'identico' nel modificato. Presumo quindi sia giï¿½ stato modificato.
+							//In realtï¿½ dovrei prelevare l'attributo ID. Prendere tutte le partizioni che hanno attributo INIZIOVIGORE=id e/o
 							//FINEVIGORE=id (a seconda del tipo di modifica che voglio apportare), prelevare ID (della partizione/span) e ricercarlo
-							//fra i meta delle disposizioni passive. A questo punto DECIDERE se è stata già applicata oppure no.
+							//fra i meta delle disposizioni passive. A questo punto DECIDERE se ï¿½ stata giï¿½ applicata oppure no.
 								 
 								//NO. o questo test lo faccio solo sulla prima modifica di ogni norma modificante, o scendo nel testo.
 								
 							try {
-							listModel.setElementAt(((String) listModel.get(getPosLista())) + " --> saltata, già applicata", getPosLista());
+							listModel.setElementAt(((String) listModel.get(getPosLista())) + " --> saltata, giï¿½ applicata", getPosLista());
 							} catch (Exception e) {}
 							correnteEvento++;
 							return true;
@@ -674,7 +674,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		if (posizione!=null) {
 			if (parole && partizioneIndicata==null) {	//cerco parole/capoverso/periodo/alinea/rubrica...
 				if ("parole".equals(tipoModifica)) {	
-					//se è parole, cerco le occorrenze di parole
+					//se ï¿½ parole, cerco le occorrenze di parole
 					//per ora solo la prima occorrenza della parola (numeroIterazioni=1)
 					 try {
 					 String  parolaDaCercare = UtilDom.getText(virgolettaDaEliminare).trim().toLowerCase();
@@ -706,7 +706,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				}	
 			}	
 		}
-		if (posizione!=null			//se è null NON PROPONGO LA MODIFICA (faccio vedere in ELSE il testo del MOD)
+		if (posizione!=null			//se ï¿½ null NON PROPONGO LA MODIFICA (faccio vedere in ELSE il testo del MOD)
 				&& (parole || ("atto".equals(tipoModifica) || meta2tag(tipoModifica).equals(posizione.getNodeName())))) {		//stesso se non modifica lo stesso tipo di partizione. 
 
 			scrivi.setEnabled(true);
@@ -864,10 +864,10 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			}
 				
 			nodeNovellando = modifica1;	
-			nodeDisposizione = domDisposizioni.setDOMDisposizioni(partizione, urnAttivo, urnAttivo+posDisposizione, "#"+idNovellando, "#"+idNovella, "", nota, "", implicita, eventoriginale, eventovigore);
+			nodeDisposizione = domDisposizioni.setDOMDisposizioni("#"+partizione, urnAttivo, urnAttivo+posDisposizione, "#"+idNovellando, "#"+idNovella, "", nota, "", implicita, eventoriginale, eventovigore);
 			
-			//Se la virgoletta conteneva più partizioni (per ora ho inserito solo 1°figlio di virgoletta) creo automaticamente
-			//delle integrazioni per il 2°,... eventuale figlio
+			//Se la virgoletta conteneva piï¿½ partizioni (per ora ho inserito solo 1ï¿½figlio di virgoletta) creo automaticamente
+			//delle integrazioni per il 2ï¿½,... eventuale figlio
 			if (figliVirgoletta!=null) {
 				nodiMeta = new Vector();
 				idMeta = new Vector();
@@ -875,7 +875,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 					//Node nuovaPosizione = posizione.getNextSibling();
 					n = domDisposizioni.makePartition(n, docEditor.importNode((Node)figliVirgoletta.get(i),true), makeVigenza(n,"novella","abrogato"));
 					UtilDom.trimAndMergeTextNodes(n,true);
-					nodiMeta.add(domDisposizioni.setDOMDisposizioni(partizione, urnAttivo, urnAttivo+posDisposizione, "#", "#"+UtilDom.getAttributeValueAsString(n, "id"), "", nota, "", implicita, eventoriginale, eventovigore));
+					nodiMeta.add(domDisposizioni.setDOMDisposizioni("#"+partizione, urnAttivo, urnAttivo+posDisposizione, "#", "#"+UtilDom.getAttributeValueAsString(n, "id"), "", nota, "", implicita, eventoriginale, eventovigore));
 					idMeta.add(UtilDom.getAttributeValueAsString(n, "id"));
 					nodiTesto.add(n);
 				}
@@ -900,7 +900,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			if (modifica2 != null)
 				nodoDopo.appendChild(modifica2.cloneNode(true));
 			
-			//Aggiungo... se la virgoletta conteneva più partizioni
+			//Aggiungo... se la virgoletta conteneva piï¿½ partizioni
 			if (figliVirgoletta!=null)
 				for (int i=1; i<figliVirgoletta.size(); i++)
 					nodoDopo.appendChild(((Node)nodiTesto.get(i-1)).cloneNode(true));
@@ -1053,7 +1053,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		testoModifica.setText("");
 		testoOriginale.setText("");
 		messaggio.setVisible(false);
-		//norma è il "file" da aprire
+		//norma ï¿½ il "file" da aprire
 		norma.setText(urnAttivo);
 		try {
 			formatestuale.setText(nirUtilUrn.getFormaTestuale(new Urn(norma.getText())));
@@ -1116,7 +1116,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 	
 	private Node cerca_Rif_e_Bordo(Document doc, Node metaCorrente) {
 		
-		tipoModifica = "";	//è ciò che voglio modificare
+		tipoModifica = "";	//ï¿½ ciï¿½ che voglio modificare
 		/*
 		<dsp:novella>
 			<dsp:pos xlink:href="#mod1-vir1" xlink:type="simple" />
@@ -1168,7 +1168,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		if (partizione.indexOf("#")!=-1) {
 			partizione = partizione.substring(1+partizione.indexOf("#"));
 			
-			//Questo meccanismo cerca id esatto della partizione. Per come numera l'editor, questo non è possibile
+			//Questo meccanismo cerca id esatto della partizione. Per come numera l'editor, questo non ï¿½ possibile
 //			Node[] cerco = UtilDom.getElementsByAttributeValue(doc,posiz,"id",partizione); 
 //			if (cerco.length>0) {
 //				if (cerco[0]!=null)
@@ -1258,7 +1258,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 						prendi = 1;
 					if (numOrd.equals("penultimo") || numOrd.equals("secondo"))
 						prendi = 2;				
-					if (id==null && !"".equals(numOrd)) //esempio: rubrica, alinea, coda, ... non hanno cardinalità (è implicitamente 1)
+					if (id==null && !"".equals(numOrd)) //esempio: rubrica, alinea, coda, ... non hanno cardinalitï¿½ (ï¿½ implicitamente 1)
 						prendi = new Integer(numOrd).intValue();				
 					for (int j=da; j<a; j++) {
 						int indice = Math.abs(j-ordineInverso);
@@ -1270,7 +1270,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 								break;
 							}
 						} else {	//non considero l'id
-							if (++nValidi>=prendi) {	// >= così se arrivo con 0 o 1 prendo comunque il primo
+							if (++nValidi>=prendi) {	// >= cosï¿½ se arrivo con 0 o 1 prendo comunque il primo
 								posiz = cerco[indice];
 								break;
 							}
@@ -1297,7 +1297,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 								temPeriodo = "";
 								continue;
 							}
-							else if (lastParola.length()>4)		//trovato 'parola.', con parola più lunga di 3 caratteri
+							else if (lastParola.length()>4)		//trovato 'parola.', con parola piï¿½ lunga di 3 caratteri
 								if (!isNumber(lastParola)) {	//non sono in un numero
 									periodo.add(testPeriodo);
 									temPeriodo = "";
@@ -1333,7 +1333,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		else
 			return null;
 		
-		//test se sono posizionato su intera norma, ma ho già un finevigore, deseleziono
+		//test se sono posizionato su intera norma, ma ho giï¿½ un finevigore, deseleziono
 		if (posiz!=interaNorma)
 			return posiz;	
 			
@@ -1366,7 +1366,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 	
 	private Node conta(Document doc, Node dove, String nomeTag, String numeroTag, boolean ordinale) {
 		
-		//cerco il primo tag corrispondente in profondità
+		//cerco il primo tag corrispondente in profonditï¿½
 		Node[] posizioniTrovate = UtilDom.getElementsByTagName(doc,dove,nomeTag);
 		if (posizioniTrovate.length>0) {
 			dove = posizioniTrovate[0];
@@ -1378,7 +1378,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 					conta = new Integer(numeroTag).intValue();
 				}
 				catch (Exception e) {}
-				for (int i=0; i<posizioniTrovate.length; i++)		//restituisco il numeroTag° escludendo i testi Rossi 
+				for (int i=0; i<posizioniTrovate.length; i++)		//restituisco il numeroTagï¿½ escludendo i testi Rossi 
 					if (isTestoVigente(posizioniTrovate[i])) 
 						if (--conta==0)
 							return posizioniTrovate[i];
@@ -1391,7 +1391,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				}
 				catch (Exception e) {}
 				if ("".equals(getNum(doc,dove))) {//NUM nulli
-					//considero i meta (se è un testo rosso vale come uno nel conteggio solo se NON è una Sostituzione
+					//considero i meta (se ï¿½ un testo rosso vale come uno nel conteggio solo se NON ï¿½ una Sostituzione
 					for (int i=0; i<posizioniTrovate.length; i++)
 						if (isTestoVigente(posizioniTrovate[i])) {
 							if (--conta==0)																//<=
@@ -1421,7 +1421,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 						if (isTestoVigente(posizioniTrovate[i])) {
 							conta--;
 							String numero = getNum(doc,posizioniTrovate[i]).trim();
-							if (numero.startsWith(numeroTag) || ("".equals(numero) && conta<=0))   //se trovo uno senza num , che è almeno numeroTag°, allora lo restituisco
+							if (numero.startsWith(numeroTag) || ("".equals(numero) && conta<=0))   //se trovo uno senza num , che ï¿½ almeno numeroTagï¿½, allora lo restituisco
 								return posizioniTrovate[i];		
 						}
 				}
@@ -1564,7 +1564,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		    	flag=true; 
 		    	continue;
 		    }
-		    return false; 			//Non è un numero
+		    return false; 			//Non ï¿½ un numero
 		  }
 		  return flag; 				//E' un numero
 		}
