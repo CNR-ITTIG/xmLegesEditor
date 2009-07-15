@@ -242,7 +242,7 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 		if (e.getSource() == sceltadove) {
 			partizioniForm.openForm();
 			partizione = partizioniForm.getPartizioneEstesa();
-			dove.setText(makeSub(partizione));	
+			dove.setText(makeSub());	
 		}
 		if (e.getSource() == abrogazione || e.getSource() == sostituzione
 				|| e.getSource() == integrazione) {
@@ -412,25 +412,30 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 		}
 	}
 	
-	private String makeSub(String partizione) {
+	private String makeSub() {
 		StringTokenizer st = new StringTokenizer(partizione, " ");
 		String token;
 		String ret ="";
 		boolean dispari = ((st.countTokens() % 2)==0) ? true : false;
+		partizione="";
 		
 		while (st.hasMoreTokens()) {
 			token = st.nextToken();
 			if (dispari) {
+				partizione += token.toLowerCase();
 				dispari = false;
 				if (token.length()>3)
 					ret = ret + token.substring(0, 3).toLowerCase();
 				else ret = ret + token.toLowerCase();	//non dovrebbe capitare mai
 			}
 			else {
+				partizione += token+", ";
 				dispari = true;
 				ret = ret + token.toLowerCase() + "-";
 			}
-		}	
+		}
+		if (partizione.length()>1)
+			partizione = partizione.substring(0,partizione.length());
 		if (ret.length()>1)
 			return ret.substring(0, ret.length()-1);
 		else
@@ -444,4 +449,3 @@ public class DispPassiveFormImpl implements DispPassiveForm, EventManagerListene
 	}
 	
 }
-

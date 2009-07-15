@@ -132,7 +132,6 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 	
 	Vector nodiModifica;
 	int correnteModifica;
-	int vecchieModifiche;
 	String dataEvento;
 	String urnAttivo;
 	String urnDocumento;
@@ -140,7 +139,6 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 	Vector idEventi;
 	Vector disposizioniDaConvertire;
 	int correnteEvento;
-	int numMessaggiErrore;
 	
 	String partizione;
 	String[] partizioni ={"lib","prt","tit","cap","sez","art","com","en","el","ep"};
@@ -177,6 +175,9 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 	Vector nodiMeta = new Vector();
 	Vector idMeta = new Vector();
 	Vector nodiTesto = new Vector();
+	
+	String decorrenza;
+	Node virgolettaModRimodificata;
 	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -243,7 +244,6 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		
 		if (e.getSource() == lista) {
 			//apro file lista.xml delle modifiche
-			vecchieModifiche = -1;
 			if (lastPathList!=null)
 				fileChooser = new JFileChooser(lastPathList);
 			else
@@ -256,7 +256,6 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				urnDocumento = UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(docEditor,docEditor,"originale")[0], "xlink:href");
 				
 				listModel.clear();
-				numMessaggiErrore = 0;
 				try {
 					Document listamodifiche = parsa(fileChooser.getSelectedFile());
 					Node[] modifica = UtilDom.getElementsByAttributeValue(listamodifiche,listamodifiche,"urn", urnDocumento);
@@ -272,7 +271,6 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 					}
 				} catch (Exception ex) {
 					errore.setText("Errore nel file aperto");
-					messaggio.setText("");
 				}
 			}
 		}
@@ -350,9 +348,8 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				dateEventi = new Vector();
 				idEventi = new Vector();
 				disposizioniDaConvertire = new Vector();
-				vecchieModifiche = getPosLista();
 				correnteEvento = 0;
-				listModel.addElement("Apertura norma: " + urnAttivo);
+				listModel.clear();
 				//recupero tutti i meta che lavorano su 'urnDocumento'  [ Teoricamente potrebbe essere sbagliato, devo guardare solo all'evento interessato !!!!
 				//  													  Ci potrebbero essere altri eventi, di altre norme, che si accavallano a questi eventi. ]
 
@@ -373,25 +370,41 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 									//colleziono anche i nodi delle disposizioni interessate
 									for (int k=0; k<dspTermine.length; k++)
 										if (tempId.equals(UtilDom.getAttributeValueAsString(dspTermine[k], "da"))) {
-											disposizioniDaConvertire.add(dspTermine[k].getParentNode());
-											String tempPart = UtilDom.getAttributeValueAsString(UtilDom.findRecursiveChild(UtilDom.findRecursiveChild(dspTermine[k].getParentNode(),"dsp:norma"),"dsp:pos"),"xlink:href");
-											if (tempPart.indexOf("#")==-1)
-												tempPart = "intero atto";
-											else	
-												tempPart = tempPart.substring(tempPart.indexOf("#")+1, tempPart.length());
-											String tipo = dspTermine[k].getParentNode().getNodeName();
-											tipo = tipo.substring(tipo.indexOf(":")+1, tipo.length()).toUpperCase();
-											listModel.addElement("Norma " + (correnteModifica+1) + ": " + tipo + " in data " + UtilDate.normToString(tempData) + " di " + tempPart);
+											Node daAggiungere = dspTermine[k].getParentNode();
+											//li ordino
+											boolean inserito = false;
+											String nMod = UtilDom.getAttributeValueAsString((Node)UtilDom.getChildElements(daAggiungere).get(0), "xlink:href");
+											if (nMod!=null)
+												for (int z=0; z<disposizioniDaConvertire.size(); z++) {
+													String temp = UtilDom.getAttributeValueAsString((Node)(UtilDom.getChildElements((Node)disposizioniDaConvertire.get(z))).get(0), "xlink:href");
+													if (temp==null || nMod.compareTo(temp)<0) {
+														disposizioniDaConvertire.add(z, daAggiungere);
+														inserito = true;
+														break;
+													}
+												}
+											if (!inserito)
+												disposizioniDaConvertire.add(daAggiungere);
 										}
+									//popolo la finestra delle informazioni
+									for (int k=0; k<disposizioniDaConvertire.size(); k++) {
+										String tempPart = UtilDom.getAttributeValueAsString(UtilDom.findRecursiveChild(UtilDom.findRecursiveChild((Node)disposizioniDaConvertire.get(k),"dsp:norma"),"dsp:pos"),"xlink:href");
+										if (tempPart.indexOf("#")==-1)
+											tempPart = "intero atto";
+										else	
+											tempPart = tempPart.substring(tempPart.indexOf("#")+1, tempPart.length());
+										String tipo = ((Node)disposizioniDaConvertire.get(k)).getNodeName();
+										tipo = tipo.substring(tipo.indexOf(":")+1, tipo.length()).toUpperCase();
+										listModel.addElement(tipo + " in data " + UtilDate.normToString(tempData) + " di " + tempPart);
+									}
 								}
 								break;
 							}
 					}
 				}
-				if (idEventi.size()==0)	{//il file aperto non contiene nessun evento di modifica (non dovrebbe mai succedere)
+				if (idEventi.size()==0)	//il file aperto non contiene nessun evento di modifica (non dovrebbe mai succedere)
 					errore.setText("Nessun evento trovato");
-					numMessaggiErrore++;
-				} else {
+				else {
 					settaTasti(false,false,true);
 					primaModifica=true;		//cambiare --- implementare la funzione di check sulle modifiche
 					while (proponiModificaTesto(null));
@@ -401,6 +414,85 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		}
 		
 		if (e.getSource() == scrivi) {
+			boolean creaMetadato = false;
+			if (virgolettaModRimodificata!=null)				
+				if ("virgolette".equals(virgolettaModRimodificata.getLocalName()))
+					if (utilmsg.msgYesNo("Attenzione. Stai apportando modifiche all'interno di una virgoletta di una modifica. E' questo quello che vuoi fare? Se si creo il corrispondente evento attivo ma devi gestire manualmente la modifica passiva."))
+						creaMetadato = true;
+					else
+						return;
+				else //ho modificato in un mod, fuori dalle virgolette
+					if (!utilmsg.msgYesNo("Attenzione. Stai apportando modifiche all'interno di una modifica. E' questo quello che vuoi fare? Se si gestisci eventuali eventi attivi e modifiche passive manualmente."))
+						return;			
+			if (creaMetadato) {
+				Node disposiz = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docEditor,null),"disposizioni");
+				Node modAtt = UtilDom.findRecursiveChild(disposiz,"modificheattive");
+				//Attenzione, devo trovare chi punta la virgoletta, anche + di uno se siamo in un mmod (mmod potrei avere + urn modificate!?!?),
+				//o se ï¿½ una modifica, di un mod, giï¿½ in precedenza modificato. 
+				//In questo secondo caso, queste disposizioni dichiarano tutti di operare nello stesso mod, e quindi le considero una sola volta.
+				String idVirgoletta = "#"+UtilDom.getAttributeValueAsString(virgolettaModRimodificata, "id");
+				Node[] metaCoinvolti = UtilDom.getElementsByAttributeValue(docEditor,modAtt,"xlink:href", idVirgoletta);
+				Vector daDuplicare = new Vector();
+				for (int i=0; i<metaCoinvolti.length; i++) {
+					Node dispoPos = metaCoinvolti[i].getParentNode().getParentNode().getFirstChild();
+					String id = UtilDom.getAttributeValueAsString(dispoPos, "xlink:href");
+					boolean trovato = false;
+					for (int j=0; j<daDuplicare.size(); j++)
+						if (id.equals(UtilDom.getAttributeValueAsString((Node)daDuplicare.get(j), "xlink:href"))) {
+							trovato = true;
+							break;
+						}
+					if (!trovato)
+						daDuplicare.add(dispoPos);
+				}
+				//creazione evento e metadato
+				int max=0;
+				String urn = "";
+				try {
+					urn = UtilDom.getAttributeValueAsString(UtilDom.findRecursiveChild(((Node) daDuplicare.get(0)).getParentNode(),"dsp:norma"), "xlink:href");
+				} catch (Exception ex) {}
+				Node relazioniNode = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docEditor,null),"relazioni");
+				NodeList relazioniList = relazioniNode.getChildNodes();
+				Node ultimoAttiva = null;
+				for (int i = 0; i < relazioniList.getLength(); i++) {
+					Node relazioneNode = relazioniList.item(i);
+					if ("attiva".equals(relazioneNode.getNodeName())) {
+						String id = UtilDom.getAttributeValueAsString(relazioneNode, "id");
+						Integer idValue = Integer.decode(id.substring(2));
+						ultimoAttiva = relazioneNode;
+						if (idValue.intValue() > max)
+							max = idValue.intValue();
+					}
+				}
+				max++;
+				Node nuovo = utilRulesManager.getNodeTemplate("attiva");
+				UtilDom.setAttributeValue(nuovo, "id", "ra"+max);
+				UtilDom.setAttributeValue(nuovo, "xlink:href", urn);
+				if (ultimoAttiva.getNextSibling()==null) 
+					relazioniNode.appendChild(nuovo);
+				else
+					relazioniNode.insertBefore(nuovo, ultimoAttiva.getNextSibling());
+				//evento
+				Node eventiNode = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docEditor,null),"eventi");
+				String idevento = "t" + (1 + eventiNode.getChildNodes().getLength());
+				nuovo = utilRulesManager.getNodeTemplate("evento");
+				UtilDom.setAttributeValue(nuovo, "data", decorrenza);
+				UtilDom.setAttributeValue(nuovo, "fonte", "ra"+max);
+				UtilDom.setAttributeValue(nuovo, "tipo", "modifica");
+				UtilDom.setIdAttribute(nuovo, idevento);
+				eventiNode.appendChild(nuovo);
+				String idTermine = "#"+UtilDom.getAttributeValueAsString(nuovo, "id");
+				//inserisco nuovo/i meta
+				for (int j=0; j<daDuplicare.size(); j++) {
+					Node meta = ((Node) daDuplicare.get(j)).getParentNode();
+					Node nuovoMeta = meta.cloneNode(true);
+					UtilDom.setAttributeValue(UtilDom.findRecursiveChild(nuovoMeta,"dsp:termine"), "da", idTermine);
+					if (meta.getNextSibling()!=null)
+						meta.getParentNode().insertBefore(nuovoMeta, meta.getNextSibling());
+					else
+						meta.getParentNode().appendChild(nuovoMeta);
+				}
+			}
 			
 			try {
 			listModel.setElementAt(((String) listModel.get(getPosLista())) + " --> applicata", getPosLista());
@@ -417,11 +509,12 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 
 	private int getPosLista() {
 		//System.out.println("num Errore " + numMessaggiErrore + " +1 +correnteEvento " + correnteEvento + " + vecchieModifiche "+vecchieModifiche + " = " + (numMessaggiErrore+1+correnteEvento+vecchieModifiche));
-		return numMessaggiErrore+1+correnteEvento+vecchieModifiche;
+		return correnteEvento;
 	}
 	
 	private boolean proponiModificaTesto(Node partizioneIndicata) {
 
+		try {
 		form.setDialogWaiting(true);
 		
 		if (partizioneIndicata!=null)
@@ -490,7 +583,12 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			Node temPos = UtilDom.findRecursiveChild(tempNovellando,"dsp:pos");
 			if (temPos!=null) { //xex abrogazione di parole
 				String idVirgoletta = UtilDom.getAttributeValueAsString(temPos,"xlink:href").substring(1);
-				virgolettaDaEliminare = UtilDom.getElementsByAttributeValue(docAttivo,docAttivo,"id",idVirgoletta)[0];
+				try{
+					virgolettaDaEliminare = UtilDom.getElementsByAttributeValue(docAttivo,docAttivo,"id",idVirgoletta)[0];
+				} catch (Exception e) {
+					System.out.println("Non ho trovato virgoletta puntata " + idVirgoletta + " -- " + e.getMessage());
+					virgolettaDaEliminare = null;
+				}
 			}
 			else  //xex per partizioni
 				virgolettaDaEliminare = null; //la lascio a null, tanto se mi serve, me la calcolo in 'cambia partizione'						
@@ -506,13 +604,6 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			Node relazioneNode = relazioniList.item(i);
 			String nodeName = relazioneNode.getNodeName();
 			String id = UtilDom.getAttributeValueAsString(relazioneNode, "id");
-//			if ("attiva".equals(nodeName)) {				
-//				Integer idValue = Integer.decode(id.substring(2));
-//				if (idValue.intValue() > maxPassiva)
-//					maxPassiva = idValue.intValue();
-//			}
-//			if ("passiva".equals(nodeName) && urnAttivo.equals(UtilDom.getAttributeValueAsString(relazioneNode, "xlink:href")))
-//					idEventiDaTestare.add(id);
 			if ("passiva".equals(nodeName)) {				
 				Integer idValue = Integer.decode(id.substring(2));
 				if (idValue.intValue() > maxPassiva)
@@ -521,9 +612,12 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 					idEventiDaTestare.add(id);					
 			}			
 		}
-		if (partizioneIndicata==null)
+		if (partizioneIndicata==null || !scrivi.isEnabled())
 			maxPassiva++;
 			
+		//controllo grezzo
+		if (maxPassiva==0)
+			maxPassiva=1;		
 			
 		Node eventiNode = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docEditor,null),"eventi");
 		int maxEventi = 1+UtilDom.findRecursiveChild(eventiNode,"eventi").getChildNodes().getLength();    //levare findrecursivechild
@@ -544,8 +638,9 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 								 
 								//NO. o questo test lo faccio solo sulla prima modifica di ogni norma modificante, o scendo nel testo.
 								
-							
-							listModel.setElementAt(((String) listModel.get(getPosLista())) + " --> saltata, già applicata", getPosLista());
+							try {
+							listModel.setElementAt(((String) listModel.get(getPosLista())) + " --> saltata, giï¿½ applicata", getPosLista());
+							} catch (Exception e) {}
 							correnteEvento++;
 							return true;
 							}
@@ -609,16 +704,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 						posizione=null;
 					}
 					
-				}
-//				else { //calcolo il valore di "end"							COSA VUOLDIRE QUESTO ORA??????????????????????
-//					
-//					if (partizioneIndicata==null)
-//						end = UtilDom.getTextNode(posizione).length();
-//					
-//					if (!UtilDom.isTextNode(posizione))
-//						posizione = posizione.getFirstChild();
-//				}
-					
+				}	
 			}	
 		}
 		if (posizione!=null			//se è null NON PROPONGO LA MODIFICA (faccio vedere in ELSE il testo del MOD)
@@ -658,7 +744,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 						idtermine = UtilDom.getAttributeValueAsString(termine, "a");
 					idtermine=idtermine.substring(1);  //levo la #
 					Node termineAttivo = UtilDom.getElementsByAttributeValue(docAttivo,docAttivo,"id",idtermine)[0];
-					String decorrenza = UtilDom.getAttributeValueAsString(termineAttivo, "data");
+					decorrenza = UtilDom.getAttributeValueAsString(termineAttivo, "data");
 				UtilDom.setAttributeValue(nuovo, "data", decorrenza);
 				UtilDom.setAttributeValue(nuovo, "fonte", "rp"+maxPassiva);
 				UtilDom.setAttributeValue(nuovo, "tipo", "modifica");
@@ -683,7 +769,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 
 
 			
-			boolean modificaDentroModSegnalata = false;
+			virgolettaModRimodificata = null;
 			String tipoModifica = nodoMeta.getNodeName();
 			if ("dsp:abrogazione".equals(tipoModifica) || "dsp:sostituzione".equals(tipoModifica)) {
 				if (parole) {
@@ -706,8 +792,9 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				
 				//Un ulteriore controllo. Se ho modificato dentro ad un mod => avverti di possibili modifiche a catena (da gestire manualmente)
 				if (UtilDom.findParentByName(n, "mod")!=null) {
-					modificaDentroModSegnalata = true;
-					utilmsg.msgInfo("Attenzione. Stai modificando un testo di una modifica (mod). Questo implica modifiche implicite da gestire manualmente.");
+					virgolettaModRimodificata = UtilDom.findParentByName(n, "virgolette");
+					if (virgolettaModRimodificata==null) //Sto modificando in un mod, ma fuori da una virgoletta => cosa voleva fare il legislatore??
+						virgolettaModRimodificata = UtilDom.findParentByName(n, "mod");
 				}
 				
 			}
@@ -747,19 +834,21 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 									UtilDom.setTextNode(rubricaEntrante, UtilDom.getText(rubricaUscente));
 						}
 						} catch (Exception e) {}		
-					}					
-					figliVirgoletta = UtilDom.getChildElements(virgolettaDaInserire);
+					}
+					figliVirgoletta = UtilDom.getAllChildElements(virgolettaDaInserire);
 					n = domDisposizioni.makePartition(posizione, docEditor.importNode((Node)figliVirgoletta.get(0),true), makeVigenza(posizione,"novella","abrogato"));
 					try {
 						UtilDom.trimAndMergeTextNodes(n,true);
-					} catch (Exception e) {
-						// in un caso da errore (merge di Articolo con più commi LR Campania 12/1973)
-					}
+					} catch (Exception e) {}
 					
 					//Se ho modificato dentro ad un mod => avverti di possibili modifiche a catena (da gestire manualmente)
-					if (!modificaDentroModSegnalata && UtilDom.findParentByName(n, "mod")!=null)
-						utilmsg.msgInfo("Attenzione. Stai modificando un testo di una modifica (mod). Questo implica modifiche implicite da gestire manualmente.");
-
+					if (virgolettaModRimodificata==null & UtilDom.findParentByName(n, "mod")!=null) {
+						virgolettaModRimodificata = UtilDom.findParentByName(n, "virgolette");
+						if (virgolettaModRimodificata==null) //Sto modificando in un mod, ma fuori da una virgoletta => cosa voleva fare il legislatore??
+							virgolettaModRimodificata = UtilDom.findParentByName(n, "mod");
+					}
+					
+					
 				}
 				if (modifica1 == null)
 					modifica1 = n;
@@ -775,21 +864,22 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			}
 				
 			nodeNovellando = modifica1;	
-			nodeDisposizione = domDisposizioni.setDOMDisposizioni(partizione, urnAttivo, urnAttivo+posDisposizione, "#"+idNovellando, "#"+idNovella, "", nota, "", implicita, eventoriginale, eventovigore);
+			nodeDisposizione = domDisposizioni.setDOMDisposizioni("#"+partizione, urnAttivo, urnAttivo+posDisposizione, "#"+idNovellando, "#"+idNovella, "", nota, "", implicita, eventoriginale, eventovigore);
 			
-			//Se la virgoletta conteneva più partizioni (per ora ho inserito solo 1°figlio di virgoletta) creo automaticamente
-			//delle integrazioni per il 2°,... eventuale figlio
-			if (figliVirgoletta!=null)
+			//Se la virgoletta conteneva piï¿½ partizioni (per ora ho inserito solo 1ï¿½figlio di virgoletta) creo automaticamente
+			//delle integrazioni per il 2ï¿½,... eventuale figlio
+			if (figliVirgoletta!=null) {
+				nodiMeta = new Vector();
+				idMeta = new Vector();
 				for (int i=1; i<figliVirgoletta.size(); i++) {
-					nodiMeta = new Vector();
-					idMeta = new Vector();
-					Node nuovaPosizione = posizione.getNextSibling();
-					n = domDisposizioni.makePartition(nuovaPosizione, docEditor.importNode((Node)figliVirgoletta.get(i),true), makeVigenza(nuovaPosizione,"novella","abrogato"));
+					//Node nuovaPosizione = posizione.getNextSibling();
+					n = domDisposizioni.makePartition(n, docEditor.importNode((Node)figliVirgoletta.get(i),true), makeVigenza(n,"novella","abrogato"));
 					UtilDom.trimAndMergeTextNodes(n,true);
-					nodiMeta.add(domDisposizioni.setDOMDisposizioni(partizione, urnAttivo, urnAttivo+posDisposizione, "#", "#"+UtilDom.getAttributeValueAsString(n, "id"), "", nota, "", implicita, eventoriginale, eventovigore));
+					nodiMeta.add(domDisposizioni.setDOMDisposizioni("#"+partizione, urnAttivo, urnAttivo+posDisposizione, "#", "#"+UtilDom.getAttributeValueAsString(n, "id"), "", nota, "", implicita, eventoriginale, eventovigore));
 					idMeta.add(UtilDom.getAttributeValueAsString(n, "id"));
 					nodiTesto.add(n);
 				}
+			}
 			
 			
 			//mi posiziono sul nodo USCITO/ENTRATO
@@ -905,12 +995,15 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			}
 		}
 		form.setDialogWaiting(false);
+		} catch (Exception e) {
+			System.out.println("Eccez. non gestita: " + e.getMessage());
+			e.printStackTrace();
+		}
 		return false;
 	}
 	
 	public void openForm() {
-		
-		vecchieModifiche = -1;
+
 		//posiziona form vuota, tasto apertura lista
 		settaForm(false);
 		errore.setText("");
@@ -1068,7 +1161,8 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
   	</dsp:norma>
 		*/	
 		boolean trovataPosizione = true;
-		Node posiz = UtilDom.getElementsByTagName(doc,doc,"meta")[0].getParentNode(); 	//posizione su: intero documento
+		Node interaNorma = UtilDom.getElementsByTagName(doc,doc,"meta")[0].getParentNode();
+		Node posiz = interaNorma; 																	//posizione su: intero documento
 		Node pos = UtilDom.getElementsByTagName(doc,norma,"dsp:pos")[0];
 		partizione = UtilDom.getAttributeValueAsString(pos,"xlink:href");
 		if (partizione.indexOf("#")!=-1) {
@@ -1185,7 +1279,6 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				} else { 	//verifico se sto cercando periodo o capoverso
 					if (tipo.equals("periodo") || tipo.equals("capoverso")) {  //capoverso o bordo vanno intesi come un periodo che finisce con .
 						String testoPosizione = getTesto(posiz);
-						System.out.println("TESTO in cui cerco periodo/capoverso: " + testoPosizione);
 						
 						/* devo cercare '.', se questi sono in un numero o preceduti da un testo minore di 4 caratteri non li considero
 						   marcatori di fine periodo (eccezione sepreceduto da spazio, in questo caso lo considero punto fermo).*/
@@ -1195,12 +1288,9 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 						while (st.hasMoreTokens()) {
 							String testPeriodo = temPeriodo+st.nextToken();
 							
-							System.out.println("ANALIZZO: " + testPeriodo);
-							
 							String lastParola = testPeriodo;
 							if (testPeriodo.indexOf(" ")!=-1)
 								lastParola = testPeriodo.substring(testPeriodo.lastIndexOf(" "));
-							System.out.println("PAROLA individuata: " + lastParola);
 							
 							if (lastParola.length()<2) {	//trovato ' .'
 								periodo.add(testPeriodo);
@@ -1242,7 +1332,16 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		}
 		else
 			return null;
-		return posiz;
+		
+		//test se sono posizionato su intera norma, ma ho giï¿½ un finevigore, deseleziono
+		if (posiz!=interaNorma)
+			return posiz;	
+			
+		if (UtilDom.getAttributeValueAsString(interaNorma,"finevigore")!=null)
+			return null;
+		else
+			return interaNorma;
+		
 	} 
 	
 	private Node cercaPosizioneContando(Document doc, Node posiz, String partizione, boolean ordinale) {
@@ -1302,7 +1401,12 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 							String idTag = "#"+UtilDom.getAttributeValueAsString(posizioniTrovate[i],"id");
 							boolean nonTrovato = true;
 							for (int j=0; j<dspSostituzione.length; j++) {
-								String idMeta = UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(doc,UtilDom.getElementsByTagName(doc,dspSostituzione[j],"dsp:novellando")[0],"dsp:pos")[0],"xlink:href");
+								Node test[] = UtilDom.getElementsByTagName(doc,UtilDom.getElementsByTagName(doc,dspSostituzione[j],"dsp:novellando")[0],"dsp:pos");
+								if (test.length==0) {	//caso abrogazioni
+									nonTrovato = false;
+									break;
+								}
+								String idMeta = UtilDom.getAttributeValueAsString(test[0],"xlink:href");
 								if (idTag.equals(idMeta)) {
 									nonTrovato = false;
 									break;

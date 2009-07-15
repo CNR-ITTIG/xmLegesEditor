@@ -970,12 +970,14 @@
 		<xsl:variable name="idnota">
 			<xsl:value-of select="@id" />
 		</xsl:variable>
-		<a class="nota" name="{@id}" href="{concat('#ndr',@id)}">
+		
+		<xsl:for-each select="//*[name()='ndr'][@num=$idnota]">		
+			<a class="nota" name="{$idnota}" href="{concat('#ndr',$idnota)}">
+				<xsl:value-of select="."/>
+			</a>
+		</xsl:for-each>
 
-			<xsl:value-of select="//*[name()='ndr'][@num=$idnota]"/>
-			<!--	xsl:value-of select="@id"/	-->
-			
-		</a><span class="nota"><xsl:text>&#160;-&#160;</xsl:text></span>
+		<span class="nota"><xsl:text>&#160;-&#160;</xsl:text></span>
 		<xsl:apply-templates />
 	</xsl:template>
 

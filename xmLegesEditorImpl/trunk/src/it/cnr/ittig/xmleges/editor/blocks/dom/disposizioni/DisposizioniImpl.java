@@ -112,7 +112,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 				UtilDom.setAttributeValue(urnNode[0], "iniziovigore", eventoOriginale.getId());
 		}
 		try {
-			versione += eventoVigore.getFonte().toString().split(":")[4].replaceAll("-", "");
+			versione += eventoVigore.getFonte().toString().split(":")[4];
 			if (versione.indexOf(';')!=-1)
 					versione = versione.split(";")[0];
 		}
@@ -904,8 +904,13 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 			disposizioniNode = nirUtilDom.checkAndCreateMeta(doc,activeMeta,"disposizioni");
 			
 		Node modificheattiveNode = UtilDom.findRecursiveChild(disposizioniNode,"modificheattive");
-		if (modificheattiveNode==null)
-			modificheattiveNode = UtilDom.checkAndCreate(disposizioniNode, "modificheattive");		
+		if (modificheattiveNode==null) {
+			modificheattiveNode = UtilDom.checkAndCreate(disposizioniNode, "modificheattive");
+			if (disposizioniNode.getFirstChild()!=modificheattiveNode)  //prima modifiche attive, poi passive
+				disposizioniNode.insertBefore(modificheattiveNode, disposizioniNode.getFirstChild());
+		}
+		
+		
 
 		//se è una modifica, butto via il vecchio pacchetto.
 		
@@ -949,6 +954,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 				//relazione
 				Node relazioniNode = UtilDom.findRecursiveChild(activeMeta,"relazioni");
 				NodeList relazioniList = relazioniNode.getChildNodes();
+				Node ultimoAttiva = relazioniList.item(0);
 				int max=0;
 				for (int i = 0; i < relazioniList.getLength(); i++) {
 					Node relazioneNode = relazioniList.item(i);
@@ -957,14 +963,17 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 						Integer idValue = Integer.decode(id.substring(2));
 						if (idValue.intValue() > max)
 							max = idValue.intValue();
+						ultimoAttiva = relazioneNode;
 					}
 				}
 				max++;
 				Node nuovo = utilRulesManager.getNodeTemplate("attiva");
 				UtilDom.setAttributeValue(nuovo, "id", "ra"+max);
 				UtilDom.setAttributeValue(nuovo, "xlink:href", norma);
-				//UtilDom.setAttributeValue(nuovo, "xlink:type", "simple");
-				relazioniNode.appendChild(nuovo);
+				if (ultimoAttiva.getNextSibling()==null) 
+					relazioniNode.appendChild(nuovo);
+				else
+					relazioniNode.insertBefore(nuovo, ultimoAttiva.getNextSibling());
 				//evento
 				Node eventiNode = UtilDom.findRecursiveChild(activeMeta,"eventi");
 				if (eventiNode==null)
