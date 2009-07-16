@@ -365,7 +365,7 @@ public class SchemaRulesManagerImpl implements RulesManager {
 	 * @param nodes i nodi che devono essere contenuti nell'elemento
 	 * @throws RulesManagerException
 	 */
-	public String getDefaultContent(String elem_name, Vector nodes) throws RulesManagerException {
+	public String getConstrainedContent(String elem_name, Vector nodes) throws RulesManagerException {
 		// get node names
 		Vector node_names = new Vector();
 		for (Iterator i = nodes.iterator(); i.hasNext();) {

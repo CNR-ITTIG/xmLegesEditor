@@ -347,8 +347,8 @@ public class RulesManagerImpl implements RulesManager, Initializable, Loggable {
 
 
 
-	public String getDefaultContent(String elem_name, Vector nodes) throws RulesManagerException {
-		return rm.getDefaultContent(elem_name, nodes);
+	public String getConstrainedContent(String elem_name, Vector nodes) throws RulesManagerException {
+		return rm.getConstrainedContent(elem_name, nodes);
 	}
 
 	
