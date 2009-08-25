@@ -1,5 +1,7 @@
 package it.cnr.ittig.xmleges.editor.blocks.dom.disposizioni;
 
+import java.util.Hashtable;
+
 import it.cnr.ittig.services.manager.Loggable;
 import it.cnr.ittig.services.manager.Logger;
 import it.cnr.ittig.services.manager.ServiceException;
@@ -126,23 +128,50 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 				inserisci = false;
 		
 		if (inserisci) {
-			//imposto all'ultima urn il finevigore
-			UtilDom.setAttributeValue(urnNode[urnNode.length -1], "finevigore", eventoVigore.getId());
-			//inserisco una nuova urn con iniziovigore
-			Node nuovaUrn = utilRulesManager.getNodeTemplate(doc,"urn");
-			UtilDom.setAttributeValue(nuovaUrn, "valore", urnVersione);
-			UtilDom.setAttributeValue(nuovaUrn, "iniziovigore", eventoVigore.getId());
+			//colleziono id e date eventi
+			Hashtable hash = new Hashtable();
+			Node[] tEventi = UtilDom.getElementsByTagName(doc, UtilDom.findRecursiveChild(activeMeta,"eventi"), "evento");
+			for (int i=0; i<tEventi.length; i++)
+				hash.put(UtilDom.getAttributeValueAsString(tEventi[i], "id"),UtilDom.getAttributeValueAsString(tEventi[i], "data"));
 
-			Node alias = UtilDom.findRecursiveChild(activeMeta,"alias");
-			Node materie = UtilDom.findRecursiveChild(activeMeta,"materie");
-			if (alias!=null)
-				descrittoriNode.insertBefore(nuovaUrn, alias); 
-			else			
-				if (materie!=null)
-					descrittoriNode.insertBefore(nuovaUrn, materie); 
-				else					
-					descrittoriNode.appendChild(nuovaUrn);
-
+			String tModifica = (String) hash.get(eventoVigore.getId());
+			for (int i=0; i<urnNode.length; i++) {
+				String tDa = (String) hash.get(UtilDom.getAttributeValueAsString(urnNode[i], "iniziovigore")); 
+				if (tDa.compareTo(tModifica)<0) {
+					String tA = UtilDom.getAttributeValueAsString(urnNode[i], "finevigore");
+					if (tA!=null) {
+						if (((String) hash.get(tA)).compareTo(tModifica)>0) {
+							//CASO Modifica non Ordinata (devo spezzare la urn corrente)
+							Node nuovaUrn = utilRulesManager.getNodeTemplate(doc,"urn");
+							UtilDom.setAttributeValue(nuovaUrn, "valore", urnVersione);
+							UtilDom.setAttributeValue(nuovaUrn, "finevigore", tA);
+							UtilDom.setAttributeValue(nuovaUrn, "iniziovigore", eventoVigore.getId());
+							UtilDom.setAttributeValue(urnNode[i], "finevigore", eventoVigore.getId());
+							descrittoriNode.insertBefore(nuovaUrn, urnNode[i].getNextSibling()); 
+							break;
+						}
+					}
+					else {
+						//CASO Modifica Ordinata
+						//imposto all'ultima urn il finevigore
+						UtilDom.setAttributeValue(urnNode[urnNode.length -1], "finevigore", eventoVigore.getId());
+						//inserisco una nuova urn con iniziovigore
+						Node nuovaUrn = utilRulesManager.getNodeTemplate(doc,"urn");
+						UtilDom.setAttributeValue(nuovaUrn, "valore", urnVersione);
+						UtilDom.setAttributeValue(nuovaUrn, "iniziovigore", eventoVigore.getId());
+						Node alias = UtilDom.findRecursiveChild(activeMeta,"alias");
+						Node materie = UtilDom.findRecursiveChild(activeMeta,"materie");
+						if (alias!=null)
+							descrittoriNode.insertBefore(nuovaUrn, alias); 
+						else			
+							if (materie!=null)
+								descrittoriNode.insertBefore(nuovaUrn, materie); 
+							else					
+								descrittoriNode.appendChild(nuovaUrn);
+						break; //inutile... dovrei essere già sull'ultimo
+					}
+				}
+			}
 		}
 				
 		return true;
