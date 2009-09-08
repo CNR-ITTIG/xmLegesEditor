@@ -386,7 +386,7 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 					Node relazioneNode = relazioniList.item(i);
 					if ("originale".equals(relazioneNode.getNodeName()))
 						urnDoc = UtilDom.getAttributeValueAsString(relazioneNode, "xlink:href");
-					if ("attiva".equals(relazioneNode.getNodeName())) {
+					if ("attiva".equals(relazioneNode.getNodeName()) && urn.equals(UtilDom.getAttributeValueAsString(relazioneNode, "xlink:href"))) {
 						String id = UtilDom.getAttributeValueAsString(relazioneNode, "id");
 						for (int j=0; j<eventiList.getLength(); j++) 
 							if (id.equals(UtilDom.getAttributeValueAsString(eventiList.item(j), "fonte")) 
