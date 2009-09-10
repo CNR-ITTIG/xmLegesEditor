@@ -333,6 +333,9 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 			//controllo se ho bordi
 			Node pun = UtilDom.findRecursiveChild(metaIlc,"ittig:pun");
 			String[] delimitatori = bordiAggiuntivi;
+			String correzioneTipo = null;
+			if (delimitatori.length>0)
+				correzioneTipo = delimitatori[delimitatori.length-3];
 			if (pun!=null) {
 				int nBordi = -1;
 				Node bordo = pun;
@@ -422,7 +425,7 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 			Node nuovoMeta = domDisposizioni.setDOMDispAttive(false, modificoMetaEsistenti, "#"+idMod, operazioneIniziale, completa, condizionata, decorrenza, idevento, urn, partizione, delimitatori);
 			
 		//setmeta di novella
-			String tipoNovella = null;
+			String tipoNovella = null; 
 			Node novellaIlc = UtilDom.findRecursiveChild(metaIlc,"dsp:novella");
 			if (novellaIlc!=null) {
 				String posizione = null;
@@ -443,8 +446,11 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 
 					}			
 				}
-				
-				tipoNovella = UtilDom.getAttributeValueAsString(UtilDom.findRecursiveChild(novellaIlc,"ittig:tipo"), "valore");
+			
+				if (correzioneTipo != null)
+					tipoNovella = correzioneTipo;
+				else
+					tipoNovella = UtilDom.getAttributeValueAsString(UtilDom.findRecursiveChild(novellaIlc,"ittig:tipo"), "valore");
 				posIlc = UtilDom.findRecursiveChild(novellaIlc,"dsp:pos");
 				String virgolettaContenuto = UtilDom.getAttributeValueAsString(posIlc, "xlink:href");
 
@@ -462,7 +468,10 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 			boolean parole=false;
 			Node novellandoIlc = UtilDom.findRecursiveChild(metaIlc,"dsp:novellando");
 			if (novellandoIlc!=null) {
-				tipoPartizione = UtilDom.getAttributeValueAsString(UtilDom.findRecursiveChild(novellandoIlc,"ittig:tipo"), "valore");
+				if (correzioneTipo != null)
+					tipoNovella = correzioneTipo;
+				else
+					tipoPartizione = UtilDom.getAttributeValueAsString(UtilDom.findRecursiveChild(novellandoIlc,"ittig:tipo"), "valore");
 				pun = UtilDom.findRecursiveChild(novellandoIlc,"ittig:pun");
 				if (pun!=null) {
 					virgolettaA = UtilDom.getAttributeValueAsString(pun, "xlink:href");
@@ -485,7 +494,7 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 				//if ("parole".equals(tipo))	
 				if ("parole".equals(tipoPartizione)) {
 					parole=true;
-					tipoPartizione = "parole";
+					//tipoPartizione = "parole";
 				} else if (tipoNovella != null)
 					tipoPartizione = tipoNovella;
 
