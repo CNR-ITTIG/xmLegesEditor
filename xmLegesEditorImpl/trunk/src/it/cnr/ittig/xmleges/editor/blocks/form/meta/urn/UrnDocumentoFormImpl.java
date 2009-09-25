@@ -108,6 +108,9 @@ public class UrnDocumentoFormImpl implements UrnDocumentoForm, Initializable, Se
 
 		public boolean checkData() {
 			boolean ret = this.urnFormEdit.getUrn().isValid();
+			ret = ret && (((String)(this.urnFormEdit.getUrn().getDate()).elementAt(0)).length()==10);
+			//ci devo aggiungere un controllo per verificare se la data contiene sia il giorno che il mese che l'anno!!!!!
+			//this.urnFormEdit.getUrn().getDate().
 			if (!ret)
 				errorMessage = "editor.form.meta.urn.error";
 			return ret;
