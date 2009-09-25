@@ -71,6 +71,8 @@ public class ModificaActionImpl implements ModificaAction, EventManagerListener,
 	AbstractAction modificaAction = new modificaAction();
 	
 	AbstractAction virgoletteAction = new virgoletteAction();
+	
+	AbstractAction mmodAction = new mmodAction();
 
 	Rinumerazione rinumerazione;
 	
@@ -104,6 +106,7 @@ public class ModificaActionImpl implements ModificaAction, EventManagerListener,
 		
 		actionManager.registerAction("editor.meta.modifica", modificaAction);
 		actionManager.registerAction("editor.meta.virgolette", virgoletteAction);
+		actionManager.registerAction("editor.meta.mmod", mmodAction);
 		eventManager.addListener(this, DocumentOpenedEvent.class);
 		eventManager.addListener(this, SelectionChangedEvent.class);
 		// aggiungere un listener su DocumentChanged ????
@@ -111,6 +114,7 @@ public class ModificaActionImpl implements ModificaAction, EventManagerListener,
 				
 		modificaAction.setEnabled(false);
 		virgoletteAction.setEnabled(false);
+		mmodAction.setEnabled(false);
 	}
 
 	// ////////////////////////////////////////// EventManagerListener Interface
@@ -118,6 +122,7 @@ public class ModificaActionImpl implements ModificaAction, EventManagerListener,
 		
 		modificaAction.setEnabled(!documentManager.isEmpty() && canSetMod(selectionManager.getActiveNode()));
 		virgoletteAction.setEnabled(!documentManager.isEmpty() && canSetVirgolette(selectionManager.getActiveNode()));
+		mmodAction.setEnabled(!documentManager.isEmpty() && canSetMmod(selectionManager.getActiveNode()));
 	}
 	
 	
@@ -192,6 +197,22 @@ public class ModificaActionImpl implements ModificaAction, EventManagerListener,
 			return false;
 		}
 	}
+	
+	public boolean canSetMmod(Node n) {
+
+		if (n == null)
+			return false;
+
+		try {
+			if (n.getParentNode() != null)
+				return (rulesManager.queryAppendable(n).contains("mmod") || rulesManager.queryInsertableInside(n.getParentNode(), n).contains("mmod")
+						|| rulesManager.queryInsertableAfter(n.getParentNode(), n).contains("mmod") || rulesManager.queryInsertableBefore(
+						n.getParentNode(), n).contains("mmod"));
+			return false;
+		} catch (RulesManagerException ex) {
+			return false;
+		}
+	}
 
 	
 	public class modificaAction extends AbstractAction {
@@ -216,6 +237,34 @@ public class ModificaActionImpl implements ModificaAction, EventManagerListener,
 			EditTransaction tr = documentManager.beginEdit();
 								
 			Node child = utilRulesManager.getNodeTemplate("virgolette");
+			
+			utilRulesManager.insertNodeInText(node, start, end, child, true);
+			rinumerazione.aggiorna(doc);
+			documentManager.commitEdit(tr);
+			setModified(child);
+			
+		} catch (DocumentManagerException ex) {
+			logger.error(ex.getMessage(), ex);
+		}
+		
+	}
+
+	public class mmodAction extends AbstractAction {
+		public void actionPerformed(ActionEvent e) {
+			doMmod();
+		}
+	}
+	
+	public void doMmod() {
+		Document doc = documentManager.getDocumentAsDom();
+		Node node = selectionManager.getActiveNode();
+		int start = selectionManager.getTextSelectionStart();
+		int end = selectionManager.getTextSelectionEnd();
+		
+		try {
+			EditTransaction tr = documentManager.beginEdit();
+								
+			Node child = utilRulesManager.getNodeTemplate("mmod");
 			
 			utilRulesManager.insertNodeInText(node, start, end, child, true);
 			rinumerazione.aggiorna(doc);
