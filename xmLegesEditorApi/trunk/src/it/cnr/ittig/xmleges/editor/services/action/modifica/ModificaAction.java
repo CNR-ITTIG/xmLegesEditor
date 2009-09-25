@@ -30,5 +30,10 @@ public interface ModificaAction extends Service {
 	 */
 	public void doVirgolette();
 	
+	/**
+	 * Gestione del tag mmod
+	 */
+	public void doMmod();
+	
 
 }
