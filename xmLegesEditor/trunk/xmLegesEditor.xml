@@ -394,8 +394,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 						<item action="editor.disposizioni.rimuovipassive" />
 						<item action="editor.disposizioni.attive" />
 						<item action="editor.disposizioni.marker" />        
+						<item action="editor.meta.mmod" />
 						<item action="editor.meta.modifica" />
 						<item action="editor.meta.virgolette" />
+						
                     </menu>                    
                     <menu action="menu.editor.tabelle">
                         <item action="editor.tabelle.crea" />
@@ -573,8 +575,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <item action="editor.disposizioni.attive" />
 					<item action="editor.disposizioni.marker" />
 
+					<item action="editor.meta.mmod" />
                     <item action="editor.meta.modifica" />
 					<item action="editor.meta.virgolette" />
+					
                     
                 </toolbar>
                 
@@ -1537,6 +1541,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 <element name="proprietario" />
                 <element name="mod" />
                 <element name="virgolette" />       
+                <element name="mmod" />
             </exclude>           
         </configuration>
     </component>
