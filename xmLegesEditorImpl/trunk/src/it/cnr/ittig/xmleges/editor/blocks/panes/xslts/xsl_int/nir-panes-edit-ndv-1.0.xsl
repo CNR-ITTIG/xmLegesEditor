@@ -28,7 +28,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             indent="no"/>
 
 <xsl:include href="xsltmapper-1.0.xsl"/>
-
+<xsl:include href="nir-xslt-utility.xsl"/>
 <xsl:strip-space elements="*" />
 
 <xsl:template match="/">
@@ -80,7 +80,12 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 					<xsl:variable name="data_fine">
 						<xsl:value-of select="id($fine_id)/@data"/>
 					</xsl:variable>
-
+					<xsl:variable name="giornoprima">		
+						<xsl:call-template name="finevigenza">
+							<xsl:with-param name="datafinevigenza" select="$data_fine" />
+						</xsl:call-template>
+					</xsl:variable>		
+		
 		<xsl:if test="$ittignota">
 			<div>
 	    		<xsl:attribute name="style">
@@ -123,15 +128,29 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 							</xsl:choose>
 						</xsl:otherwise>			   				
 					</xsl:choose>			
-					<xsl:if test="$novellando">
-						<xsl:if test="$novella">
-							<!--	sostituzione	-->
-							<xsl:if test="$novella=$idnota"> (testo inserito)</xsl:if>
-		   					<xsl:if test="$novellando=$idnota"> (testo eliminato)</xsl:if>
-	   					</xsl:if>
-   					</xsl:if>
-					<xsl:text> da: </xsl:text>
-					<xsl:value-of select="$autonota"/> 	
+					<xsl:choose>
+						<xsl:when test="$novellando">
+							<xsl:choose>
+								<xsl:when test="$novella">
+									<!--	sostituzione	-->
+									<xsl:if test="$novella=$idnota">
+										<xsl:text> (testo inserito) da: </xsl:text><xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*[name()='dsp:novella']/*[name()='dsp:pos'][@xlink:href=$idnota]/../../*[name()='dsp:norma']/*[name()='dsp:subarg']/*[name()='ittig:notavigenza']/@auto"/>							
+									</xsl:if>
+		   							<xsl:if test="$novellando=$idnota">
+			   							<xsl:text> (testo eliminato) da: </xsl:text><xsl:value-of select="/*[name()='NIR']/*/*[name()='meta']/*[name()='disposizioni']/*[name()='modifichepassive']/*/*[name()='dsp:novellando']/*[name()='dsp:pos'][@xlink:href=$idnota]/../../*[name()='dsp:norma']/*[name()='dsp:subarg']/*[name()='ittig:notavigenza']/@auto"/>		   					
+		   							</xsl:if>
+			   					</xsl:when>
+		   						<xsl:otherwise>
+									<xsl:text> da: </xsl:text>
+									<xsl:value-of select="$autonota"/> 
+		   						</xsl:otherwise>
+		   					</xsl:choose>
+						</xsl:when>
+		   				<xsl:otherwise>
+							<xsl:text> da: </xsl:text>
+							<xsl:value-of select="$autonota"/> 
+		   				</xsl:otherwise>
+   					</xsl:choose>
 					<xsl:text>. </xsl:text>				
 					<xsl:choose>
 					<!-- ================= data_fine!='' =========-->
@@ -145,7 +164,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 										<xsl:text>fino</xsl:text>
 									</xsl:otherwise>
 								</xsl:choose>	
-								al <xsl:value-of select="concat(substring($data_fine,7,2),'/',substring($data_fine,5,2),'/',substring($data_fine,1,4))"/>
+								al <xsl:value-of select="$giornoprima"/>
 								
 								<!--	xsl:choose>			
 									<xsl:when test="$stato!=''">
