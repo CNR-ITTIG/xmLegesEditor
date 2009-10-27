@@ -332,7 +332,18 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				docAttivo = parsa(attivo);
 				//effettuo un test per vedere se la norma aperta è quella che mi aspettavo
 				try {
-				if (!urnAttivo.equals(UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(docAttivo,docAttivo,"originale")[0], "xlink:href"))) {
+					//Confronto le urn senza considerare giorno e mese, se presenti
+					String urnAttivoSemplificata = urnAttivo;
+					int posTrattino = urnAttivo.indexOf("-");
+					if (posTrattino!=-1) 
+						urnAttivoSemplificata=urnAttivo.substring(0,posTrattino)+urnAttivo.substring(urnAttivo.indexOf(";"));
+
+					String urnDocAttivoSemplificata = UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(docAttivo,docAttivo,"originale")[0], "xlink:href");
+					posTrattino = urnDocAttivoSemplificata.indexOf("-");
+					if (posTrattino!=-1) 
+						urnDocAttivoSemplificata=urnDocAttivoSemplificata.substring(0,posTrattino)+urnDocAttivoSemplificata.substring(urnDocAttivoSemplificata.indexOf(";"));
+		
+				if (!urnAttivoSemplificata.equals(urnDocAttivoSemplificata)) {
 					errore.setText("Il file aperto non è corretto");
 					form.setDialogWaiting(false);
 					return;
