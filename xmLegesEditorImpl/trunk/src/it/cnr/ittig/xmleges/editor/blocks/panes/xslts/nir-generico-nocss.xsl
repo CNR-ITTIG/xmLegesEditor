@@ -915,6 +915,11 @@
 			<xsl:apply-templates/>
 		</span>
 	</xsl:template>
+	
+	<xsl:template match="//*[name()='rifesterno']">
+		<a href="urnResolver.xql?urn={@xlink:href}" title="URN = {@xlink:href}" ><xsl:value-of select="@xlink:href" /></a>
+	</xsl:template>
+	
 	<xsl:template match="//*[name()='rif']">
 		<xsl:variable name="url">
 			<xsl:value-of select="@xlink:href" />
