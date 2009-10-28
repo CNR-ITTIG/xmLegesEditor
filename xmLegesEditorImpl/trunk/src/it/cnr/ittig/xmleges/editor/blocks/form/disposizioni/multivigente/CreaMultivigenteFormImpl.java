@@ -255,10 +255,17 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				//spostare su apertura documento
 				urnDocumento = UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(docEditor,docEditor,"originale")[0], "xlink:href");
 				
+				//Confronto le urn senza considerare giorno e mese, se presenti
+				String urnDocumentoSemplificata = urnDocumento;
+				int posTrattino = urnDocumento.indexOf("-");
+				if (posTrattino!=-1) 
+					urnDocumentoSemplificata=urnDocumento.substring(0,posTrattino)+urnDocumento.substring(urnDocumento.indexOf(";"));
+
+				
 				listModel.clear();
 				try {
 					Document listamodifiche = parsa(fileChooser.getSelectedFile());
-					Node[] modifica = UtilDom.getElementsByAttributeValue(listamodifiche,listamodifiche,"urn", urnDocumento);
+					Node[] modifica = UtilDom.getElementsByAttributeValue(listamodifiche,listamodifiche,"urn", urnDocumentoSemplificata);
 					if (modifica.length==0)
 						errore.setText("Nessuna modifica da apportare");
 					else {
