@@ -134,6 +134,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 	int correnteModifica;
 	String dataEvento;
 	String urnAttivo;
+	String urnCompletaAttivo;
 	String urnDocumento;
 	Vector dateEventi;
 	Vector idEventi;
@@ -255,7 +256,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				//spostare su apertura documento
 				urnDocumento = UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(docEditor,docEditor,"originale")[0], "xlink:href");
 				
-				//Confronto le urn senza considerare giorno e mese, se presenti
+				//Confronto le urn senza considerare giorno e mese, se presenti 
 				String urnDocumentoSemplificata = urnDocumento;
 				int posTrattino = urnDocumento.indexOf("-");
 				if (posTrattino!=-1) 
@@ -339,13 +340,15 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				docAttivo = parsa(attivo);
 				//effettuo un test per vedere se la norma aperta è quella che mi aspettavo
 				try {
-					//Confronto le urn senza considerare giorno e mese, se presenti
+					//Confronto le urn senza considerare giorno e mese, se presenti	
+					//sarebbe INUTILE, urnAttivo è già semplificata in lista.xml
 					String urnAttivoSemplificata = urnAttivo;
 					int posTrattino = urnAttivo.indexOf("-");
 					if (posTrattino!=-1) 
 						urnAttivoSemplificata=urnAttivo.substring(0,posTrattino)+urnAttivo.substring(urnAttivo.indexOf(";"));
 
-					String urnDocAttivoSemplificata = UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(docAttivo,docAttivo,"originale")[0], "xlink:href");
+					urnCompletaAttivo = UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(docAttivo,docAttivo,"originale")[0], "xlink:href");
+					String urnDocAttivoSemplificata = urnCompletaAttivo;
 					posTrattino = urnDocAttivoSemplificata.indexOf("-");
 					if (posTrattino!=-1) 
 						urnDocAttivoSemplificata=urnDocAttivoSemplificata.substring(0,posTrattino)+urnDocAttivoSemplificata.substring(urnDocAttivoSemplificata.indexOf(";"));
@@ -360,6 +363,9 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 					form.setDialogWaiting(false);
 					return;
 				}
+				
+				
+				
 				
 				errore.setText(" ");
 				//azzero array e liste
@@ -626,7 +632,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				Integer idValue = Integer.decode(id.substring(2));
 				if (idValue.intValue() > maxPassiva)
 					maxPassiva = idValue.intValue();
-				if (urnAttivo.equals(UtilDom.getAttributeValueAsString(relazioneNode, "xlink:href")))
+				if (urnCompletaAttivo.equals(UtilDom.getAttributeValueAsString(relazioneNode, "xlink:href")))
 					idEventiDaTestare.add(id);					
 			}			
 		}
@@ -750,7 +756,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				//creo la relazione (passiva)
 				Node nuovo = utilRulesManager.getNodeTemplate("passiva");
 				UtilDom.setAttributeValue(nuovo, "id", "rp"+maxPassiva);
-				UtilDom.setAttributeValue(nuovo, "xlink:href", norma.getText());
+				UtilDom.setAttributeValue(nuovo, "xlink:href", urnCompletaAttivo);
 				relazioniNode.appendChild(nuovo);
 				//creo l'evento (se non presente)
 			
@@ -781,7 +787,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			//Aggiorno il Novellando e creo (se necessario [integrazione] [sostituzione]) la novella (per ora vuota)
 			Evento[] eventi = ciclodivita.getEventi();
 			eventovigore = eventi[eventi.length-1];
-			eventovigore.setFonte(new Relazione("", "", norma.getText()));
+			eventovigore.setFonte(new Relazione("", "", urnCompletaAttivo));
 			
 			Node n=null;
 
@@ -876,13 +882,13 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			}
 	
 			try {
-				nota = nirUtilUrn.getFormaTestuale(new Urn(urnAttivo+posDisposizione));
+				nota = nirUtilUrn.getFormaTestuale(new Urn(urnCompletaAttivo+posDisposizione));
 			} catch (ParseException e) {
 				nota = formatestuale.getText();
 			}
 				
 			nodeNovellando = modifica1;	
-			nodeDisposizione = domDisposizioni.setDOMDisposizioni("#"+partizione, urnAttivo, urnAttivo+posDisposizione, "#"+idNovellando, "#"+idNovella, "", nota, "", implicita, eventoriginale, eventovigore);
+			nodeDisposizione = domDisposizioni.setDOMDisposizioni("#"+partizione, urnCompletaAttivo, urnCompletaAttivo+posDisposizione, "#"+idNovellando, "#"+idNovella, "", nota, "", implicita, eventoriginale, eventovigore);
 			
 			//Se la virgoletta conteneva piï¿½ partizioni (per ora ho inserito solo 1ï¿½figlio di virgoletta) creo automaticamente
 			//delle integrazioni per il 2ï¿½,... eventuale figlio
@@ -893,7 +899,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 					//Node nuovaPosizione = posizione.getNextSibling();
 					n = domDisposizioni.makePartition(n, docEditor.importNode((Node)figliVirgoletta.get(i),true), makeVigenza(n,"novella","abrogato"));
 					UtilDom.trimAndMergeTextNodes(n,true);
-					nodiMeta.add(domDisposizioni.setDOMDisposizioni("#"+partizione, urnAttivo, urnAttivo+posDisposizione, "#", "#"+UtilDom.getAttributeValueAsString(n, "id"), "", nota, "", implicita, eventoriginale, eventovigore));
+					nodiMeta.add(domDisposizioni.setDOMDisposizioni("#"+partizione, urnCompletaAttivo, urnCompletaAttivo+posDisposizione, "#", "#"+UtilDom.getAttributeValueAsString(n, "id"), "", nota, "", implicita, eventoriginale, eventovigore));
 					idMeta.add(UtilDom.getAttributeValueAsString(n, "id"));
 					nodiTesto.add(n);
 				}
