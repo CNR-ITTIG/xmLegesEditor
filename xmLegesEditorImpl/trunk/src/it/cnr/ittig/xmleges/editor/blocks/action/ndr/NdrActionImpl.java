@@ -7,6 +7,8 @@ import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.action.ActionManager;
+import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
+import it.cnr.ittig.xmleges.core.services.document.DocumentOpenedEvent;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.rules.RulesManager;
@@ -99,8 +101,10 @@ public class NdrActionImpl implements NdrAction, Loggable, EventManagerListener,
 		actionManager.registerAction("editor.ndr", ndrAction);
 		actionManager.registerAction("editor.ndr.clean", ndrCleanAction);
 		eventManager.addListener(this, SelectionChangedEvent.class);
+		eventManager.addListener(this, DocumentClosedEvent.class);
+		eventManager.addListener(this, DocumentOpenedEvent.class);
 		ndrAction.setEnabled(false);
-		ndrCleanAction.setEnabled(true);
+		ndrCleanAction.setEnabled(false);
 	}
 
 	// //////////////////////////////////////// EventManagerListener Interface
@@ -108,9 +112,14 @@ public class NdrActionImpl implements NdrAction, Loggable, EventManagerListener,
 		if (event instanceof SelectionChangedEvent) {
 			activeNode = ((SelectionChangedEvent) event).getActiveNode();
 			ndrAction.setEnabled(ndr.canSetNdr(activeNode));
-			ndrCleanAction.setEnabled(true);
 		}
+		if (event instanceof DocumentOpenedEvent)
+			ndrCleanAction.setEnabled(true);
+
+		if (event instanceof DocumentClosedEvent)
+			ndrCleanAction.setEnabled(false);
 	}
+	
 
 	protected void setModified(Node modified) {
 		if (modified != null) {
