@@ -167,9 +167,6 @@ public class AggiornaIdFrozenLaw {
 		modIDs=new HashMap();
 		this.document=document;
 		
-		//System.err.println("CALLED AggiornaId");
-		
-
 		Node root=document.getElementsByTagName("NIR").item(0);
 		getAndKillReferringAttributes(root);
 		
@@ -180,7 +177,7 @@ public class AggiornaIdFrozenLaw {
 		Vector ndrId = getNdrIdFromDoc();
 		sortNotes(ndrId);
 		////////////////////////////////////////////
-		
+		Node pubblicaz=document.getElementsByTagName("pubblicazione").item(0);
 		
 		// Per gli elementi che contengono un num, genero l'ID sulla base di <num>
 		// Per gli altri genero l'ID sulla base della posizione
@@ -1302,15 +1299,16 @@ public class AggiornaIdFrozenLaw {
 		if (attrList != null){
 			for (int j = 0; j < attrList.getLength(); j++) {
 				Attr attributo = (Attr) (attrList.item(j));
-				if(!UtilDom.isIdAttribute(attributo) && attributo.getValue()!=null && !((String)(attributo.getValue())).equals("")){
-					if (modIDs.keySet().contains(attributo.getValue())) {
-						
-						attributo.setValue((String) modIDs.get(attributo.getValue()));
-					}
-					if(modIDs.keySet().contains( ((String)attributo.getValue()).substring(1) ) ){
-						
-						
-						attributo.setValue("#"+(String) modIDs.get(((String)attributo.getValue()).substring(1)));
+				String referringAttrValue = (String)attributo.getValue();
+				if(!UtilDom.isIdAttribute(attributo) && referringAttrValue!=null && !referringAttrValue.equals("")){
+					if(referringAttrValue.startsWith("#")){						
+						if(modIDs.keySet().contains( referringAttrValue.substring(1) ) ){
+							attributo.setValue("#"+(String) modIDs.get(referringAttrValue.substring(1)));
+						}
+					}else {
+						if (modIDs.keySet().contains(attributo.getValue())) {				
+							attributo.setValue((String) modIDs.get(referringAttrValue));
+						}
 					}
 				}
 				
@@ -1425,10 +1423,23 @@ public class AggiornaIdFrozenLaw {
 	//
 	//									GESTIONE NOTE-NDR
 	//
-	//										(fa schifo)
+	//										(it sucks)
+//								-----------
+//								protected void fixNDRFromDoc() {
+//								NodeList ndr = document.getElementsByTagName("ndr");
+//								for (int i = 0; i < ndr.getLength(); i++) {
+//									String id = UtilDom.getAttributeValueAsString(ndr.item(i), "num");
+//									if(!id.startsWith("#"))
+//										UtilDom.setAttributeValue(ndr.item(i), "num", "#"+id);
+//									
+//								}
+//								---------
 	//
 	//
 	////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	
 	
 	/**
 	 * Restituisce tutti gli id delle note citate da ndr (senza ripetizioni ma in ordine di apparizione sul doc)
