@@ -45,5 +45,7 @@ public interface Ndr extends Service {
 	 * @return array di note
 	 */
 	public Nota[] getNotesFromDocument();
+	
+	public void fixNDRFromDoc();
 
 }
