@@ -343,6 +343,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 				    <separator />
 					<item action="tool.ilc" />
 				    <item action="tool.multivigente" />
+				    <separator />
+				    <item action="editor.ndr.clean" />
                 </menu>
                 <menu action="menu.editor.insert">
                     <item action="editor.insert.immagini" />
@@ -387,6 +389,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 						                        
                         <item action="editor.annessi.annesso" />
                         <item action="editor.ndr" />
+                        
                         <!--item action="editor.rinumerazione" /-->
                     </menu>
                     <menu action="menu.editor.disposizioni">
@@ -568,6 +571,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     
                     <item action="editor.annessi.annesso" />
                     <item action="editor.ndr" />
+                    
                 </toolbar>
                 <toolbar name="editor.partizioni" floatable="false" rollover="true">                
                     <item action="editor.disposizioni.passive" />
