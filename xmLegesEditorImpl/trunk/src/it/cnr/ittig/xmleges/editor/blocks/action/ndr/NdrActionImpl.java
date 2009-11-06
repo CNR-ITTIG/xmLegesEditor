@@ -25,6 +25,7 @@ import java.util.EventObject;
 import javax.swing.AbstractAction;
 
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * <h1>Implementazione del servizio
@@ -64,6 +65,8 @@ public class NdrActionImpl implements NdrAction, Loggable, EventManagerListener,
 	SelectionManager selectionManager;
 
 	AbstractAction ndrAction = new ndrAction();
+	
+	AbstractAction ndrCleanAction = new ndrCleanAction();
 
 	Ndr ndr;
 
@@ -94,8 +97,10 @@ public class NdrActionImpl implements NdrAction, Loggable, EventManagerListener,
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws java.lang.Exception {
 		actionManager.registerAction("editor.ndr", ndrAction);
+		actionManager.registerAction("editor.ndr.clean", ndrCleanAction);
 		eventManager.addListener(this, SelectionChangedEvent.class);
 		ndrAction.setEnabled(false);
+		ndrCleanAction.setEnabled(true);
 	}
 
 	// //////////////////////////////////////// EventManagerListener Interface
@@ -103,6 +108,7 @@ public class NdrActionImpl implements NdrAction, Loggable, EventManagerListener,
 		if (event instanceof SelectionChangedEvent) {
 			activeNode = ((SelectionChangedEvent) event).getActiveNode();
 			ndrAction.setEnabled(ndr.canSetNdr(activeNode));
+			ndrCleanAction.setEnabled(true);
 		}
 	}
 
@@ -111,6 +117,7 @@ public class NdrActionImpl implements NdrAction, Loggable, EventManagerListener,
 			selectionManager.setActiveNode(this, modified);
 			activeNode = modified;
 			ndrAction.setEnabled(ndr.canSetNdr(activeNode));
+			ndrCleanAction.setEnabled(true);
 			logger.debug(" set modified " + UtilDom.getPathName(modified));
 		} else
 			logger.debug(" modified null in set modified ");
@@ -143,11 +150,23 @@ public class NdrActionImpl implements NdrAction, Loggable, EventManagerListener,
 		}
 	}
 
+	// //////////////////////////////////////////// NdrCleanAction Interface
+	public void doCleanNdr() {
+		ndr.fixNDRFromDoc();
+	}
+
 	// /////////////////////////////////////////////// Azioni
 	public class ndrAction extends AbstractAction {
 
 		public void actionPerformed(ActionEvent e) {
 			doNewNdr();
+		}
+	}
+	
+	public class ndrCleanAction extends AbstractAction {
+
+		public void actionPerformed(ActionEvent e) {
+			doCleanNdr();
 		}
 	}
 }
