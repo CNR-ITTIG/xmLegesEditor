@@ -95,34 +95,36 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 			for (int j = 0; j < attrList.getLength(); j++) {
 				Attr attributo = (Attr) (attrList.item(j));
 				if(!UtilDom.isIdAttribute(attributo) && attributo.getValue()!=null && !((String)(attributo.getValue())).equals("")){
-					if (modIDs.keySet().contains(attributo.getValue())) {
-						
-						
-						attributo.setValue((String) modIDs.get(attributo.getValue()));
-					}
-					if(((String)attributo.getValue()).startsWith("#") && modIDs.keySet().contains( ((String)attributo.getValue()).substring(1) ) ){
-						
-						
-						String newId = (String) modIDs.get(((String)attributo.getValue()).substring(1));
-						attributo.setValue("#"+newId);
-						
-						
-						// ex updateInternalXlinkHref
-						// AGGIUNTO QUESTO IF AL getAndUpdateReferringAttributes() di AggiornaIdFrozenLaw
-						if (node.getNodeName().equals("rif")) {
-									// Se il nodo che ha come attributo xlink:href e' un rif
-									// allora si aggiorna anche il testo del rif
-									Node IntRifTextNode = document.createTextNode(getTextInternalRifFromID(node, newId));
-									// FIXME non e' detto che la nuova forma testuale debba
-									// essere quella standard; se il rif interno aveva una
-									// forma testuale personalizzata, va lasciata quella
-									node.replaceChild(IntRifTextNode, node.getFirstChild());
+					
+					
+					if(((String)attributo.getValue()).startsWith("#")){
+						if( modIDs.keySet().contains( ((String)attributo.getValue()).substring(1))){
+							String newId = (String) modIDs.get(((String)attributo.getValue()).substring(1));
+							attributo.setValue("#"+newId);
+							
+							
+							// ex updateInternalXlinkHref
+							// AGGIUNTO QUESTO IF AL getAndUpdateReferringAttributes() di AggiornaIdFrozenLaw
+							if (node.getNodeName().equals("rif")) {
+										// Se il nodo che ha come attributo xlink:href e' un rif
+										// allora si aggiorna anche il testo del rif
+										Node IntRifTextNode = document.createTextNode(getTextInternalRifFromID(node, newId));
+										// FIXME non e' detto che la nuova forma testuale debba
+										// essere quella standard; se il rif interno aveva una
+										// forma testuale personalizzata, va lasciata quella
+										node.replaceChild(IntRifTextNode, node.getFirstChild());
+			
+							}
 						}
-						
+					}else{
+						if (modIDs.keySet().contains(attributo.getValue())) 
+							attributo.setValue((String) modIDs.get(attributo.getValue()));
 					}
 				}
+					
 			}
 		}
+	
 		NodeList figli = node.getChildNodes();
 		for (int j = 0; j < figli.getLength(); j++)
 			getAndUpdateReferringAttributes(figli.item(j));
