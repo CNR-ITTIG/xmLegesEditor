@@ -199,4 +199,18 @@ public class NdrImpl implements Ndr, Loggable, Serviceable {
 		return (nodelistNota.getLength() + 1);
 	}
 
+
+	public void fixNDRFromDoc() {
+		
+		Document doc = documentManager.getDocumentAsDom();
+		NodeList ndr = doc.getElementsByTagName("ndr");
+		for (int i = 0; i < ndr.getLength(); i++) {
+			String id = UtilDom.getAttributeValueAsString(ndr.item(i), "num");
+			if(!id.startsWith("#"))
+				UtilDom.setAttributeValue(ndr.item(i), "num", "#"+id);
+			
+		}
+		
+	}
+
 }
