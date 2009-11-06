@@ -1,39 +1,62 @@
-				body {
+body {
 					margin-left: 5px;
-					font-family: "Verdana, Arial, Helvetica, sans-serif" ;
+					font-family: 'Arial, Helvetica, sans-serif, Times New Roman' ;
 					font-size: 90% ;
-					text-align:justify;
-				}
-				hr {
-					margin:30px 25% 30px 25%;
 					text-align:center;
 				}
-				em {
-					font-size: 100%
+
+
+p {
+					font-weight: normal ;
 				}
-				.small {
-					font-size: 65% ;
+
+
+div#contenitore {
+
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 10px;
+			margin-bottom: 10px ;
+			width: 780px ;
+
+}				
+hr {
+	margin:30px 25% 30px 25%;
+	text-align:center;
+}
+em {
+	font-size: 100%
+}
+.small {
+	font-size: 65% ;
+}
+.intestazione {
+	margin: 15px 0;
+	text-align: center;
+	font-size: large;
+	font-style:italic;
+	border: 2px solid #ccc;
+	padding:10px 10px;
+	background-color:#f9f9f9;
+	font-size: 130% ;
+}
+.title {
+	margin-top: 10px;
+	text-align:center;
+	font-size: 90% ;
+	text-align: center;
 				}
-				.intestazione {
-					margin: 15px 10% 0px 10%;
-					text-align: center;
-					font-size: large;
-				}
-				.title {
-					margin-top: 10px;
-					text-align:center;
-					font-size: 90% ;
-					text-align: center;
-				}
-				.titoloDoc {
-					margin-top: 15px;
-					text-align:center;
-					font-size: 110% ;
-					font-weight: bold;
-					text-align: center;
-				}	
+.titoloDoc {
+	margin-top: 10px;
+	text-align:center;
+	font-size: 110% ;
+	font-weight: bold;
+	font-style:normal;
+	color: #990000;
+}	
+	
 				.formulainiziale {
-					text-align: justify;
+					text-align: center;
 					font-size: 100%;
 					margin-bottom: 30px;
 				}
@@ -45,7 +68,12 @@
 					font-size: 100% ; 
 					margin-top: 15px; 
 					text-align: center;
+					font-weight:bold;
 				}
+.articolo {
+padding-bottom: 10px;
+border-bottom: 2px solid #ccc;
+}				
 				.titolo, .libro, .parte, .sezione { 
 					font-size: 100% ; 
 					font-weight: bold;
@@ -53,14 +81,13 @@
 				}	
 				.capo {
 					padding-top: 10px;
-					/*margin:25px 25% 5px 25%;*/
 					text-align: center;
 				}
 				p.rubrica {
 					text-align: center;
 					margin-top: 0;
 					font-style: italic;
-					font-weight: lighter;
+					font-weight: normal;
 					font-size: 100%;
 				}
 				p.decorazione {
@@ -76,6 +103,7 @@
 					margin-bottom: 5px;
 					text-align: justify;
 					text-indent: 1em;
+	padding: 3px;					
 				}
 				.el {
 					font-size: 100% ; 
@@ -84,22 +112,29 @@
 					margin-left: 5px;
 					text-indent: 2em;
 					margin-top: 2px;
+	padding: 3px;					
 				}
-				.en {
-					text-align: justify;
-					margin-left: 55px;
-					text-indent: -10px;
-					margin-top: 2px;
-					font-size: 100% ; 
-					font-weight: normal;
-				}
+
+
+.en , .ep {
+	font-size: 100%;
+	text-align: justify;
+	margin-left: 65px;
+	/*text-indent: -10px;*/
+	margin-top: 2px;
+	font-weight: normal;
+	
+}
+
+
 			    b b { font-weight: normal; }
-				.ndr {
-					text-decoration: underline;
-				}
-				a {
+				
+				a, a:visited {
 					text-align: justify;
+					text-decoration: none;
+					color: blue;
 				}
+				a:hover {text-decoration: underline;}
 				.nota {
 					font-size:90%;
 					text-align: justify;
@@ -160,4 +195,110 @@
 				.omissis {
 					font-weight: bold;
 					text-align: left;
+				}		
+				.coda {
+					text-align: justify;
+					font-weight:normal;
+					margin-left: 35px;
+					margin-bottom: 30px;
 				}
+				.emanante {
+font-style:normal;
+font-weight:bold;
+margin:10px;
+}	
+				.info {
+font-size:90%;
+font-style:normal;
+font-weight:lighter;
+margin-top:20px;
+text-align:center;
+				}	
+				.urnvigente{text-align: center; margin-bottom:10px;}
+				.vigore{ text-align: center; color: red; font-weight: bold; font-size: 120%; margin:20px;}
+div#timeline {
+
+margin: 5px auto;
+padding: 20px 20px;
+border: dashed 1px #999;
+
+text-align: left;
+
+}
+
+div#indice {
+
+margin: 5px auto;
+padding: 20px 20px;
+border: dashed 1px #999;
+text-align: left;
+
+}
+
+div#indice h2 {
+
+margin: 0px ;
+padding: 0px;
+text-align: center;
+font-size: 120%;
+font-weight: bold;
+
+}
+
+div.itemindice {
+margin: 25px;
+}
+
+#timeline ul {
+display: inline;
+}
+
+ul#choosedata {
+list-style-type: none;
+padding:0px;
+margin:0px;
+}
+
+li.choosedata
+{
+padding: 3px 3px;
+background-color: #eeeeec;
+color: #3465a4;
+text-align: center;
+border: solid 1px  #888a85;
+text-decoration: none;
+margin-top: 5px;
+margin-right: 1px;
+margin-bottom: 5px;
+margin-left: 1px;
+display: inline-block;
+
+}
+
+ul.choosedata-active {
+list-style-type: none;
+
+}
+
+li.choosedata-active {
+padding: 3px 3px;
+background-color: #284F94;
+color: #fff;
+text-align: center;
+border: solid 1px  #888a85;
+text-decoration: none;
+margin-top: 5px;
+margin-right: 1px;
+margin-bottom: 5px;
+margin-left: 1px;
+display: inline-block;
+}
+
+.choosedata a {
+text-decoration: none;
+}
+
+.choosedata a:visited {
+color: #284F94;
+}
+
