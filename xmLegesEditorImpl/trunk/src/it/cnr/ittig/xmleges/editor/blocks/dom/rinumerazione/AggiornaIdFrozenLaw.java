@@ -37,11 +37,9 @@ public class AggiornaIdFrozenLaw {
 	
 	private Vector removedIDs= new Vector();
 	
-	// Mappa degli ID cambiati (non include i cancellati)key=oldID, value=newID
+	/** Mappa degli ID cambiati (non include i cancellati)key=oldID, value=newID */
 	HashMap modIDs = new HashMap();
 	
-
-
 	protected static final int LIBRO = 0;
 
 	protected static final int PARTE = 1;
@@ -168,6 +166,7 @@ public class AggiornaIdFrozenLaw {
 		this.document=document;
 		
 		Node root=document.getElementsByTagName("NIR").item(0);
+		//si eliminano i referenti che puntano a ID scomparsi
 		getAndKillReferringAttributes(root);
 		
 		///////////     NOTE - NDR /////////////////
@@ -176,13 +175,12 @@ public class AggiornaIdFrozenLaw {
 		// potrebbe essere superfluo nel caso di setId senza Renum
 		Vector ndrId = getNdrIdFromDoc();
 		sortNotes(ndrId);
-		////////////////////////////////////////////
-		Node pubblicaz=document.getElementsByTagName("pubblicazione").item(0);
-		
+				
 		// Per gli elementi che contengono un num, genero l'ID sulla base di <num>
 		// Per gli altri genero l'ID sulla base della posizione
 		updateIDs(root);
 		
+		//si aggiornano i referenti a id modificati
 		getAndUpdateReferringAttributesFrozenLaw(root);   
 
 		
@@ -238,21 +236,14 @@ public class AggiornaIdFrozenLaw {
 			// Aggiornamento ID dell'elemento se e' cambiato
 			OldID = ((Element) nodo).getAttribute("id");
 			
-
-  		    if(logger.isDebugEnabled()) 		    
-			 logger.debug("idChanged: new  " + IDValue + " old " + OldID);
-  		    
-  		    // TODO check sulla prima condizione !UtilDom.hasIdAttribute(nodo) per nodi che hanno l'id ma non e' isId secondo Xerces
 			if (!UtilDom.hasIdAttribute(nodo) || !OldID.equals(IDValue)) {      
 				
 				if(!OldID.equals(IDValue)){
-					//System.err.println("idChanged: new  " + IDValue + " old " + OldID);
 					modIDs.put(OldID, IDValue);
 				}
 				
 				UtilDom.setIdAttribute(nodo, IDValue);
-				
-				
+							
 				if(logger.isDebugEnabled())
 				  logger.debug("idChanged: new  " + IDValue + " old " + OldID);
 			}
@@ -375,7 +366,7 @@ public class AggiornaIdFrozenLaw {
 		if (num == null)
 			return "";
 		String NumContent = UtilDom.getTextNode(num); // non bisogna andare in
-														// profondit?
+														// profondita'
 														// .getRecursiveTextNode(num);
 		// Prendo da <num> l'informazione utile a costruire l'ID
 		String InfoNum = getInformationToBuildID(NumContent);
@@ -485,13 +476,6 @@ public class AggiornaIdFrozenLaw {
 		return (true);
 	}
 
-//	protected boolean isElementToBeIDUpdated(Node figlio) {
-//		if (getElementType(figlio) != OTHER)
-//			return true;
-//		else
-//			return false;
-//	}
-
 	 protected boolean isElementToBeIDUpdated(Node figlio)
 	 {
 		 // in questo modo setta gli id solo agli elementi che hanno id REQUIRED
@@ -549,11 +533,9 @@ public class AggiornaIdFrozenLaw {
 		pos = getPosizioneArticolo(articolo, articolato);
 
 		if (isContained(articolo, "annesso")) {
-			// posArtAnnesso++;
 			Node annesso = UtilDom.findParentByName(articolo, "annesso");
 			IDValue = ((Element) annesso).getAttribute("id") + "-" + sigla + pos;
 		} else {
-			// posArt++;
 			IDValue = sigla + pos;
 		}
 		return IDValue;
@@ -563,7 +545,7 @@ public class AggiornaIdFrozenLaw {
 		String IDValue;
 		String sigla = getSiglaElemento(nodo);
 
-		// Verifico se il nodo ? fra quelli che devono avere un ID gerarchico
+		// Verifico se il nodo e' fra quelli che devono avere un ID gerarchico
 		// Se si' => acquisisco l'ID del parent
 		// Se il parent ha ID => scrivo l'ID in modo gerarchico
 		// altrimenti => scrivo l'ID in modo NON gerarchico
@@ -722,7 +704,7 @@ public class AggiornaIdFrozenLaw {
 							}
 						}
 					}
-					if (id.substring(i + 1).startsWith("0")) // ho trovato un id numerico di tipo 01, 001 etc
+					if (id.substring(i + 1).startsWith("0")) // trova un id numerico di tipo 01, 001 etc
 						return (0);
 				}
 
@@ -987,7 +969,7 @@ public class AggiornaIdFrozenLaw {
 			}
 		}
 		// modifica: adattamento per far corrispondere le lettere degli
-		// elelmenti el alla loro posizione nell'alfabeto us (non verificato il
+		// elementi el alla loro posizione nell'alfabeto us (non verificato il
 		// caso posAssolutaElemento)
 		
 		// FIXME non funzionera' piu' con i nuovi id fatti a lettere 
@@ -1423,17 +1405,6 @@ public class AggiornaIdFrozenLaw {
 	//
 	//									GESTIONE NOTE-NDR
 	//
-	//										(it sucks)
-//								-----------
-//								protected void fixNDRFromDoc() {
-//								NodeList ndr = document.getElementsByTagName("ndr");
-//								for (int i = 0; i < ndr.getLength(); i++) {
-//									String id = UtilDom.getAttributeValueAsString(ndr.item(i), "num");
-//									if(!id.startsWith("#"))
-//										UtilDom.setAttributeValue(ndr.item(i), "num", "#"+id);
-//									
-//								}
-//								---------
 	//
 	//
 	////////////////////////////////////////////////////////////////////////////////////
@@ -1448,24 +1419,15 @@ public class AggiornaIdFrozenLaw {
 		NodeList ndr = document.getElementsByTagName("ndr");
 		
 		Vector ids = new Vector();
-//		Vector toBeCanceled=new Vector();
+		
 		for (int i = 0; i < ndr.getLength(); i++) {
 			String id = UtilDom.getAttributeValueAsString(ndr.item(i), "num");
 			if(id.startsWith("#"))
 				id=id.substring(1);
-			if(id==null || id.trim().equals("")){
-//				toBeCanceled.add(ndr.item(i));
-			}
-			else if (ids.indexOf(id) == -1)
+			if(id!=null && !id.trim().equals("")&& (ids.indexOf(id) == -1))
 				ids.add(id);
 		}
-//		for(int i=0; i<toBeCanceled.size();i++){
-//			
-//			Node parent = ((Node) toBeCanceled.elementAt(i)).getParentNode();								
-//			parent.removeChild((Node) toBeCanceled.elementAt(i));
-//			UtilDom.mergeTextNodes(parent);
-//			
-//		}
+
 		return ids;
 	}
 	
@@ -1481,7 +1443,6 @@ public class AggiornaIdFrozenLaw {
 			Node oldNota = getNotaById((String) ndrId.get(i));
 			if (oldNota != null){
 				String oldId = UtilDom.getAttributeValueAsString(oldNota, "id");
-				//PERCHè SI FA IL CLONE?
 				Node clonedNota = oldNota.cloneNode(true);
 				UtilDom.setIdAttribute(clonedNota, oldId);
 				newNotes.add(clonedNota);
@@ -1593,7 +1554,7 @@ public class AggiornaIdFrozenLaw {
 	/**
 	 * Elimina gli attributi che si riferiscono a id di elementi eliminati
 	 */
-	protected void getAndKillReferringAttributes(Node node){//, Vector removed) {
+	protected void getAndKillReferringAttributes(Node node){
 			
 			if (node == null || this.removedIDs==null || this.removedIDs.size()==0)
 				return;
