@@ -204,10 +204,13 @@ public class ModificaActionImpl implements ModificaAction, EventManagerListener,
 			return false;
 
 		try {
-			if (n.getParentNode() != null)
+			if (n.getParentNode() != null){
+				System.out.println(rulesManager.queryInsertableAfter(n.getParentNode(), n));
 				return (rulesManager.queryAppendable(n).contains("mmod") || rulesManager.queryInsertableInside(n.getParentNode(), n).contains("mmod")
 						|| rulesManager.queryInsertableAfter(n.getParentNode(), n).contains("mmod") || rulesManager.queryInsertableBefore(
 						n.getParentNode(), n).contains("mmod"));
+				
+			}
 			return false;
 		} catch (RulesManagerException ex) {
 			return false;
