@@ -94,17 +94,17 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 		if (attrList != null){
 			for (int j = 0; j < attrList.getLength(); j++) {
 				Attr attributo = (Attr) (attrList.item(j));
-				if(!UtilDom.isIdAttribute(attributo) && attributo.getValue()!=null && !((String)(attributo.getValue())).equals("")){
+				String referringAttrValue = (String)(attributo.getValue());
+				if(!UtilDom.isIdAttribute(attributo) && referringAttrValue!=null && !referringAttrValue.equals("")){
 					
 					
-					if(((String)attributo.getValue()).startsWith("#")){
-						if( modIDs.keySet().contains( ((String)attributo.getValue()).substring(1))){
-							String newId = (String) modIDs.get(((String)attributo.getValue()).substring(1));
+					if(referringAttrValue.startsWith("#")){
+						if( modIDs.keySet().contains( referringAttrValue.substring(1))){
+							String newId = (String) modIDs.get(referringAttrValue.substring(1));
 							attributo.setValue("#"+newId);
 							
 							
 							// ex updateInternalXlinkHref
-							// AGGIUNTO QUESTO IF AL getAndUpdateReferringAttributes() di AggiornaIdFrozenLaw
 							if (node.getNodeName().equals("rif")) {
 										// Se il nodo che ha come attributo xlink:href e' un rif
 										// allora si aggiorna anche il testo del rif
@@ -118,7 +118,7 @@ public class AggiornaNumerazioneAndLink extends AggiornaIdFrozenLaw {
 						}
 					}else{
 						if (modIDs.keySet().contains(attributo.getValue())) 
-							attributo.setValue((String) modIDs.get(attributo.getValue()));
+							attributo.setValue((String) modIDs.get(referringAttrValue));
 					}
 				}
 					
