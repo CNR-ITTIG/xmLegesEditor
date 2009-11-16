@@ -178,6 +178,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 	
 	String decorrenza;
 	Node virgolettaModRimodificata;
+	boolean abragazioneInteraNorma;
 	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -378,23 +379,8 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 									for (int k=0; k<dspTermine.length; k++)
 										if (tempId.equals(UtilDom.getAttributeValueAsString(dspTermine[k], "da"))) {
 											Node daAggiungere = dspTermine[k].getParentNode();
-//											//li ordino
-//											boolean inserito = false;
-//											String nMod = UtilDom.getAttributeValueAsString((Node)UtilDom.getChildElements(daAggiungere).get(0), "xlink:href");
-//											if (nMod!=null)
-//												for (int z=0; z<disposizioniDaConvertire.size(); z++) {
-//													String temp = UtilDom.getAttributeValueAsString((Node)(UtilDom.getChildElements((Node)disposizioniDaConvertire.get(z))).get(0), "xlink:href");
-//													if (temp==null || nMod.compareTo(temp)<0) {
-//														disposizioniDaConvertire.add(z, daAggiungere);
-//														dateEventi.add(z, tempData);
-//														inserito = true;
-//														break;
-//													}
-//												}
-//											if (!inserito) {
-												disposizioniDaConvertire.add(daAggiungere);
-												dateEventi.add(tempData);
-//											}
+											disposizioniDaConvertire.add(daAggiungere);
+											dateEventi.add(tempData);
 										}
 								}
 								break;
@@ -436,6 +422,18 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				else //ho modificato in un mod, fuori dalle virgolette
 					if (!utilmsg.msgYesNo("Attenzione. Stai apportando modifiche all'interno di una modifica. E' questo quello che vuoi fare? Se si gestisci eventuali eventi attivi e modifiche passive manualmente."))
 						return;			
+			
+			if (abragazioneInteraNorma) { 	// Se ho abrogato un'intera norma è ho un 'rifesterno' ad un allegato 
+											// => segnalo che ho un allegato esterno da abrogare manualmente 		
+				Node[] allegatiEsterni = UtilDom.getElementsByTagName(docEditor,docEditor,"rifesterno");
+				if (allegatiEsterni.length>0) {
+					String messaggio = "Attenzione. Hai i seguenti allegati esterni da abrogare manualmente:";
+					for (int i=0; i<allegatiEsterni.length; i++)
+						messaggio +="\n- "+UtilDom.getAttributeValueAsString(allegatiEsterni[i],"xlink:href");
+					utilmsg.msgInfo(messaggio);
+				}
+			}
+			
 			if (creaMetadato) {
 				Node disposiz = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docEditor,null),"disposizioni");
 				Node modAtt = UtilDom.findRecursiveChild(disposiz,"modificheattive");
@@ -520,7 +518,6 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 	}
 
 	private int getPosLista() {
-		//System.out.println("num Errore " + numMessaggiErrore + " +1 +correnteEvento " + correnteEvento + " + vecchieModifiche "+vecchieModifiche + " = " + (numMessaggiErrore+1+correnteEvento+vecchieModifiche));
 		return correnteEvento;
 	}
 	
@@ -781,8 +778,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			
 			Node n=null;
 
-
-			
+			abragazioneInteraNorma = false;
 			virgolettaModRimodificata = null;
 			String tipoModifica = nodoMeta.getNodeName();
 			if ("dsp:abrogazione".equals(tipoModifica) || "dsp:sostituzione".equals(tipoModifica)) {
@@ -810,6 +806,9 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 					if (virgolettaModRimodificata==null) //Sto modificando in un mod, ma fuori da una virgoletta => cosa voleva fare il legislatore??
 						virgolettaModRimodificata = UtilDom.findParentByName(n, "mod");
 				}
+				//Un ulteriore controllo. Se ho abrogato un'intera norma devo controllare la presenza di allegati esterni al documento 				
+				if ("dsp:abrogazione".equals(tipoModifica) && "NIR".equals(n.getParentNode().getNodeName()))
+					abragazioneInteraNorma=true;
 				
 			}
 			figliVirgoletta = null;
