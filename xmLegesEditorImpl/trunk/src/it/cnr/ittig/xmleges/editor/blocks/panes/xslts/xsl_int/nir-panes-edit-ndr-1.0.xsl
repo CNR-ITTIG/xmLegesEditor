@@ -27,6 +27,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             indent="no"/>
 
 <xsl:include href="xsltmapper-1.0.xsl"/>
+<xsl:include href="nir-panes-dtd-norme-1.0.xsl"/>
 
 <xsl:strip-space elements="*" />
 
@@ -41,25 +42,24 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
         </head>
 		<body>
 			<xsl:for-each select="//nir:meta">
+				<xsl:apply-templates select="./../../nir:testata/nir:denAnnesso" />
 				<xsl:apply-templates select="./nir:redazionale/nir:nota" />
 			</xsl:for-each>
 		</body>
 	</html>
 </xsl:template>
 
-<xsl:template match="nir:denAnnesso" >
-		<hr/>
+<!--xsl:template match="nir:denAnnesso" >
 		<center>
 			<b>
 				<xsl:value-of select="."/>
 			</b>
-		</center>		
-</xsl:template>
+		</center>
+</xsl:template-->
 
 <xsl:template match="nir:nota" >
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 		<xsl:apply-templates select="mapper:getTextNodeIfEmpty(.)" />
-		<xsl:apply-templates select="../../../../nir:testata/nir:denAnnesso" />
 		<xsl:variable name="idnota"><xsl:value-of select="@id"/></xsl:variable>
 		<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
 	    	<xsl:attribute name="style">
