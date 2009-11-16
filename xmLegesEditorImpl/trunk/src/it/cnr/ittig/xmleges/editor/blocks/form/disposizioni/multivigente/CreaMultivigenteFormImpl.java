@@ -137,7 +137,6 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 	String urnCompletaAttivo;
 	String urnDocumento;
 	Vector dateEventi;
-	Vector idEventi;
 	Vector disposizioniDaConvertire;
 	int correnteEvento;
 	
@@ -253,20 +252,13 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 				lastPathList = fileChooser.getCurrentDirectory();
 				
-				//spostare su apertura documento
-				urnDocumento = UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(docEditor,docEditor,"originale")[0], "xlink:href");
-				
-				//Confronto le urn senza considerare giorno e mese, se presenti 
-				String urnDocumentoSemplificata = urnDocumento;
-				int posTrattino = urnDocumento.indexOf("-");
-				if (posTrattino!=-1) 
-					urnDocumentoSemplificata=urnDocumento.substring(0,posTrattino)+urnDocumento.substring(urnDocumento.indexOf(";"));
+				//spostare su apertura documento - Confronto le urn senza considerare giorno e mese, se presenti
+				urnDocumento = getSimpleUrn(UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(docEditor,docEditor,"originale")[0], "xlink:href"));
 
-				
 				listModel.clear();
 				try {
 					Document listamodifiche = parsa(fileChooser.getSelectedFile());
-					Node[] modifica = UtilDom.getElementsByAttributeValue(listamodifiche,listamodifiche,"urn", urnDocumentoSemplificata);
+					Node[] modifica = UtilDom.getElementsByAttributeValue(listamodifiche,listamodifiche,"urn", urnDocumento);
 					if (modifica.length==0)
 						errore.setText("Nessuna modifica da apportare");
 					else {
@@ -342,16 +334,9 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				try {
 					//Confronto le urn senza considerare giorno e mese, se presenti	
 					//sarebbe INUTILE, urnAttivo è già semplificata in lista.xml
-					String urnAttivoSemplificata = urnAttivo;
-					int posTrattino = urnAttivo.indexOf("-");
-					if (posTrattino!=-1) 
-						urnAttivoSemplificata=urnAttivo.substring(0,posTrattino)+urnAttivo.substring(urnAttivo.indexOf(";"));
-
+					String urnAttivoSemplificata = getSimpleUrn(urnAttivo);					
 					urnCompletaAttivo = UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(docAttivo,docAttivo,"originale")[0], "xlink:href");
-					String urnDocAttivoSemplificata = urnCompletaAttivo;
-					posTrattino = urnDocAttivoSemplificata.indexOf("-");
-					if (posTrattino!=-1) 
-						urnDocAttivoSemplificata=urnDocAttivoSemplificata.substring(0,posTrattino)+urnDocAttivoSemplificata.substring(urnDocAttivoSemplificata.indexOf(";"));
+					String urnDocAttivoSemplificata = getSimpleUrn(urnCompletaAttivo);
 		
 				if (!urnAttivoSemplificata.equals(urnDocAttivoSemplificata)) {
 					errore.setText("Il file aperto non è corretto");
@@ -370,7 +355,6 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				errore.setText(" ");
 				//azzero array e liste
 				dateEventi = new Vector();
-				idEventi = new Vector();
 				disposizioniDaConvertire = new Vector();
 				correnteEvento = 0;
 				listModel.clear();
@@ -381,7 +365,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				Node[] eventiAttivi = UtilDom.getElementsByTagName(docAttivo,docAttivo,"evento");
 				Node[] dspTermine = UtilDom.getElementsByTagName(docAttivo,docAttivo,"dsp:termine");
 				for (int i=0; i<relazioniAttive.length; i++) {
-					String urnPuntata = UtilDom.getAttributeValueAsString(relazioniAttive[i], "xlink:href");
+					String urnPuntata = getSimpleUrn(UtilDom.getAttributeValueAsString(relazioniAttive[i], "xlink:href"));
 					if (urnDocumento.equals(urnPuntata)) {
 						String idRelazione = UtilDom.getAttributeValueAsString(relazioniAttive[i], "id");
 						for (int j=0; j<eventiAttivi.length; j++)
@@ -389,44 +373,48 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 								String tempData = UtilDom.getAttributeValueAsString(eventiAttivi[j], "data");
 								if (dataEvento.equals(tempData)) {
 									String tempId = "#"+UtilDom.getAttributeValueAsString(eventiAttivi[j], "id");
-									idEventi.add(tempId);
-									dateEventi.add(tempData);
+									//dateEventi.add(tempData);   lo sposto sotto !!!!
 									//colleziono anche i nodi delle disposizioni interessate
 									for (int k=0; k<dspTermine.length; k++)
 										if (tempId.equals(UtilDom.getAttributeValueAsString(dspTermine[k], "da"))) {
 											Node daAggiungere = dspTermine[k].getParentNode();
-											//li ordino
-											boolean inserito = false;
-											String nMod = UtilDom.getAttributeValueAsString((Node)UtilDom.getChildElements(daAggiungere).get(0), "xlink:href");
-											if (nMod!=null)
-												for (int z=0; z<disposizioniDaConvertire.size(); z++) {
-													String temp = UtilDom.getAttributeValueAsString((Node)(UtilDom.getChildElements((Node)disposizioniDaConvertire.get(z))).get(0), "xlink:href");
-													if (temp==null || nMod.compareTo(temp)<0) {
-														disposizioniDaConvertire.add(z, daAggiungere);
-														inserito = true;
-														break;
-													}
-												}
-											if (!inserito)
+//											//li ordino
+//											boolean inserito = false;
+//											String nMod = UtilDom.getAttributeValueAsString((Node)UtilDom.getChildElements(daAggiungere).get(0), "xlink:href");
+//											if (nMod!=null)
+//												for (int z=0; z<disposizioniDaConvertire.size(); z++) {
+//													String temp = UtilDom.getAttributeValueAsString((Node)(UtilDom.getChildElements((Node)disposizioniDaConvertire.get(z))).get(0), "xlink:href");
+//													if (temp==null || nMod.compareTo(temp)<0) {
+//														disposizioniDaConvertire.add(z, daAggiungere);
+//														dateEventi.add(z, tempData);
+//														inserito = true;
+//														break;
+//													}
+//												}
+//											if (!inserito) {
 												disposizioniDaConvertire.add(daAggiungere);
+												dateEventi.add(tempData);
+//											}
 										}
-									//popolo la finestra delle informazioni
-									for (int k=0; k<disposizioniDaConvertire.size(); k++) {
-										String tempPart = UtilDom.getAttributeValueAsString(UtilDom.findRecursiveChild(UtilDom.findRecursiveChild((Node)disposizioniDaConvertire.get(k),"dsp:norma"),"dsp:pos"),"xlink:href");
-										if (tempPart.indexOf("#")==-1)
-											tempPart = "intero atto";
-										else	
-											tempPart = tempPart.substring(tempPart.indexOf("#")+1, tempPart.length());
-										String tipo = ((Node)disposizioniDaConvertire.get(k)).getNodeName();
-										tipo = tipo.substring(tipo.indexOf(":")+1, tipo.length()).toUpperCase();
-										listModel.addElement(tipo + " in data " + UtilDate.normToString(tempData) + " di " + tempPart);
-									}
 								}
 								break;
 							}
 					}
 				}
-				if (idEventi.size()==0)	//il file aperto non contiene nessun evento di modifica (non dovrebbe mai succedere)
+
+				//popolo la finestra delle informazioni
+				for (int k=0; k<disposizioniDaConvertire.size(); k++) {
+					String tempPart = UtilDom.getAttributeValueAsString(UtilDom.findRecursiveChild(UtilDom.findRecursiveChild((Node)disposizioniDaConvertire.get(k),"dsp:norma"),"dsp:pos"),"xlink:href");
+					if (tempPart.indexOf("#")==-1)
+						tempPart = "intero atto";
+					else	
+						tempPart = tempPart.substring(tempPart.indexOf("#")+1, tempPart.length());
+					String tipo = ((Node)disposizioniDaConvertire.get(k)).getNodeName();
+					tipo = tipo.substring(tipo.indexOf(":")+1, tipo.length()).toUpperCase();
+					listModel.addElement(tipo + " in data " + UtilDate.normToString((String)dateEventi.get(k)) + " di " + tempPart);
+				}
+				
+				if (dateEventi.size()==0)	//il file aperto non contiene nessun evento di modifica (non dovrebbe mai succedere)
 					errore.setText("Nessun evento trovato");
 				else {
 					settaTasti(false,false,true);
@@ -663,7 +651,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 								//NO. o questo test lo faccio solo sulla prima modifica di ogni norma modificante, o scendo nel testo.
 								
 							try {
-							listModel.setElementAt(((String) listModel.get(getPosLista())) + " --> saltata, giï¿½ applicata", getPosLista());
+							listModel.setElementAt(((String) listModel.get(getPosLista())) + " --> saltata, gia' applicata", getPosLista());
 							} catch (Exception e) {}
 							correnteEvento++;
 							return true;
@@ -1624,6 +1612,15 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			proponiModificaTesto(posizionamentoManuale.getNodoSelezionato());
 		}
 		
+	}
+	
+	private String getSimpleUrn(String urn) {
+		//Levo giorno e mese, se presenti (Da migliorare) 
+		String urnSemplificata = urn;
+		int posTrattino = urn.indexOf("-");
+		if (posTrattino!=-1) 
+			urnSemplificata=urn.substring(0,posTrattino)+urn.substring(urn.indexOf(";"));
+		return urnSemplificata;
 	}
 	
 	private String getEncoding(Document document) {
