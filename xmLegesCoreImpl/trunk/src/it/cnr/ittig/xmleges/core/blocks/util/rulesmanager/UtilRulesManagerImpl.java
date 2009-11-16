@@ -528,6 +528,39 @@ public class UtilRulesManagerImpl implements UtilRulesManager, Loggable, Service
 		}
 		return node;
 	}
+	
+	
+	/**
+	 * Setta i namespace dichiarati nella DTD/Schema  al <code>node</code> 
+	 * Serve nel caso di importazione di nodi da documenti esterni
+	 */
+	public Node completeNamespaceFor(Node node){
+		
+		Node newNode = null;
+		String templateXml;
+		try {
+			
+			DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
+			
+			String nameSpaceDecl = getNameSpaceDecl();
+			
+			templateXml = "<utilrulesmanager "+nameSpaceDecl+">"+ UtilDom.domToString(node) + "</utilrulesmanager>";
+			
+			domFactory.setValidating(false); // deactivate validation
+			domFactory.setNamespaceAware(true);
+			Document parsed = (Document) domFactory.newDocumentBuilder().parse(new ByteArrayInputStream(templateXml.getBytes()));
+			Node parsed_root = parsed.getDocumentElement().getFirstChild();
+			newNode = node.getOwnerDocument().importNode(parsed_root, true);
+			domFactory.setValidating(true); // reactivate validation
+			
+		} catch (Exception ex) {
+			logger.error(ex.toString(), ex);
+		}		
+		return  newNode;		
+	}
+	
+	
+	
 
 	public boolean canInsertBefore(Node node, String name) {
 		try {

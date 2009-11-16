@@ -162,6 +162,13 @@ public interface UtilRulesManager extends Service {
 	 * @return il nodo di default per l'elemento passato
 	 */
 	public Node getNodeTemplate(Document doc, String elem_name);
+	
+	/**
+	 * Setta i namespace dichiarati nella DTD/Schema  al <code>node</code> 
+	 * @param node
+	 * @return
+	 */
+	public Node completeNamespaceFor(Node node);
 
 	/**
 	 * Indica se &egrave; possibile inserire un nodo con nome

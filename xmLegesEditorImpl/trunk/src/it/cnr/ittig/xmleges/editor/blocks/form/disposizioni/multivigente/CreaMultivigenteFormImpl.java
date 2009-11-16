@@ -684,8 +684,10 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		//MIGLIORARE: se indico una partizione uso quella (ho l'id, quindi la cerco), altrimenti uso cercaPosizione. 
 		Node posizione = null;
 		int start = 0; int end=0;
-		if (partizioneIndicata==null)
-			posizione = cerca_Rif_e_Bordo(docEditor, docEditor.importNode(nodoMeta,true));
+		if (partizioneIndicata==null){
+			Node importedNode = docEditor.importNode(nodoMeta,true);
+			posizione = cerca_Rif_e_Bordo(docEditor, utilRulesManager.completeNamespaceFor(importedNode));
+		}
 		else {
 				posizione = partizioneIndicata;
 				start = posizionamentoManuale.getInizioSelezione();
@@ -860,7 +862,9 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 						} catch (Exception e) {}		
 					}
 					figliVirgoletta = UtilDom.getAllChildElements(virgolettaDaInserire);
-					n = domDisposizioni.makePartition(posizione, docEditor.importNode((Node)figliVirgoletta.get(0),true), makeVigenza(posizione,"novella","abrogato"));
+					Node importedNode = docEditor.importNode((Node)figliVirgoletta.get(0),true);
+					importedNode = utilRulesManager.completeNamespaceFor(importedNode);
+					n = domDisposizioni.makePartition(posizione, importedNode , makeVigenza(posizione,"novella","abrogato"));
 					try {
 						UtilDom.trimAndMergeTextNodes(n,true);
 					} catch (Exception e) {}
@@ -897,7 +901,9 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				idMeta = new Vector();
 				for (int i=1; i<figliVirgoletta.size(); i++) {
 					//Node nuovaPosizione = posizione.getNextSibling();
-					n = domDisposizioni.makePartition(n, docEditor.importNode((Node)figliVirgoletta.get(i),true), makeVigenza(n,"novella","abrogato"));
+					Node importedNode = docEditor.importNode((Node)figliVirgoletta.get(i),true);
+					importedNode = utilRulesManager.completeNamespaceFor(importedNode);
+					n = domDisposizioni.makePartition(n, importedNode , makeVigenza(n,"novella","abrogato"));
 					UtilDom.trimAndMergeTextNodes(n,true);
 					nodiMeta.add(domDisposizioni.setDOMDisposizioni("#"+partizione, urnCompletaAttivo, urnCompletaAttivo+posDisposizione, "#", "#"+UtilDom.getAttributeValueAsString(n, "id"), "", nota, "", implicita, eventoriginale, eventovigore));
 					idMeta.add(UtilDom.getAttributeValueAsString(n, "id"));
