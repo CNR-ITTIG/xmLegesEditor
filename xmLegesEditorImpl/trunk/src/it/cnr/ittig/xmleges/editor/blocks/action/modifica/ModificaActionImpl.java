@@ -205,7 +205,6 @@ public class ModificaActionImpl implements ModificaAction, EventManagerListener,
 
 		try {
 			if (n.getParentNode() != null){
-				System.out.println(rulesManager.queryInsertableAfter(n.getParentNode(), n));
 				return (rulesManager.queryAppendable(n).contains("mmod") || rulesManager.queryInsertableInside(n.getParentNode(), n).contains("mmod")
 						|| rulesManager.queryInsertableAfter(n.getParentNode(), n).contains("mmod") || rulesManager.queryInsertableBefore(
 						n.getParentNode(), n).contains("mmod"));
