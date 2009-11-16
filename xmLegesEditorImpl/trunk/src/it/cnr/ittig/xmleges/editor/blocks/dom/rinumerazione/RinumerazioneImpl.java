@@ -129,23 +129,22 @@ public class RinumerazioneImpl implements Rinumerazione, DocumentBeforeInitUndoA
 		
 		Node root=document.getElementsByTagName("NIR").item(0);
 		
+		
+		// prima di avviare la rinumerazione gestisce gli 
+		// id rimossi per eventuali problemi di consistenza
+		
 		Vector removed = getRemoved(document);
 		if(removed!=null && removed.size()>0){
-//			for(int i = 0; i<removed.size();i++){
-//				System.out.println("removed "+removed.elementAt(i));				
-//			}
-			
 			addIdProblems(root, removed);
-				
-			
-			aggiornaNumerazioneAndLink.setRemovedIDs(removed);
-			
+			aggiornaNumerazioneAndLink.setRemovedIDs(removed);	
 		}
 		else{
 			aggiornaNumerazioneAndLink.setRemovedIDs(null);
 		}
 		logger.debug("rinumerazione START");
 		
+		
+		// rinumerazione o setId
 		try{
 			if (renum){
 				aggiornaNumerazioneAndLink.aggiornaNum(document);
