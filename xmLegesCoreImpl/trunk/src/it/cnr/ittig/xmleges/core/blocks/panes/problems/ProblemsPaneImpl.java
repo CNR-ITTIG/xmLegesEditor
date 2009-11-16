@@ -169,6 +169,7 @@ public class ProblemsPaneImpl implements ProblemsPane, EventManagerListener, Log
 		if (!listModel.contains(problem)) {
 			listModel.addElement(problem);
 			frame.highlightPane(this, true);
+			frame.setSelectedPane(this);
 		}
 	}
 
