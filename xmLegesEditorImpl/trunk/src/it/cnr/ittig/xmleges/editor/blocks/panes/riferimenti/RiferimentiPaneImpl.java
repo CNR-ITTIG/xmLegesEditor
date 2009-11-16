@@ -131,7 +131,7 @@ public class RiferimentiPaneImpl implements RiferimentiPane, EventManagerListene
 		
 		//TODO prendere dalla configurazione
 		xsltPane.setName("editor.panes.riferimenti");
-		xsltPane.set(xslts.getXslt("riferimenti"), null, null);
+		xsltPane.set(xslts.getXslt("riferimenti"), xslts.getCss("css-rif"), null);
 		
 		((JPanel)xsltPane.getPaneAsComponent()).add(bar, BorderLayout.NORTH);
 			

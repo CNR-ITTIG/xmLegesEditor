@@ -1,3 +1,12 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * ELEMENTO ROOT                                                                                                       *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+body {	margin-left: 5px;
+		font-family: "Verdana, Arial, Helvetica, sans-serif" ;
+		font-size: 12pt ;
+		text-align:justify;}
+
 /*
 <!-- ================================================================================ -->
 <!-- ==================================================================== ANNESSI === -->
@@ -11,34 +20,8 @@
 }
 
 
-.elencoAnnessi {
-}
-
-.annesso {
-}
-
-.testata{
-	background: #EEEEFF;
-    margin: 10 0 10 0;
-}
 
 .denAnnesso, .titAnnesso {
 	background: #EEEEFF;
     margin: 10 0 10 0;
 }
-
-.preAnnesso{
-	text-align: left; 
-	font-size: large; 
-	font-weight: normal;
-}
-
-.rifesterno{ 
-	text-align: center;
-	font-size: normal; 
-	font-weight: bold;
-	color:blue;
-	margin: 0 0 0 0;
-}
-
-.meta

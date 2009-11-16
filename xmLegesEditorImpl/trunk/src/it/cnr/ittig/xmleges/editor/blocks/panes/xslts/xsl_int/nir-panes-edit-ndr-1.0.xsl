@@ -34,11 +34,6 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 <xsl:template match="/">
 	<html>
 		<head>
-		    <!--
-		    <style type="text/css">
-		        body { font-family: Arial; }
-		    </style>
-		    -->
         </head>
 		<body>
 			<xsl:for-each select="//nir:meta">
@@ -49,7 +44,21 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 	</html>
 </xsl:template>
 
-<!--xsl:template match="nir:denAnnesso" >
+
+<!--  PROVARE ANCHE QUESTO -->
+<!-- xsl:template match="nir:annesso" >
+	 <xsl:if test="descendant:: nir:rif | nir:mrif">
+		<br/><hr/>
+		<center>
+			<b>
+				<xsl:value-of select="./nir:testata/nir:denAnnesso"/>
+			</b>
+		</center>		
+	</xsl:if>		
+</xsl:template-->
+
+
+<!--  OLD   xsl:template match="nir:denAnnesso" >
 		<center>
 			<b>
 				<xsl:value-of select="."/>
