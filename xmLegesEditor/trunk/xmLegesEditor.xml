@@ -1312,6 +1312,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             <css   name="css-indice"			file="xsl_int/nir-style-edit-indice.css"     			startup="true" />
             <css   name="css-rif"			    file="xsl_int/nir-style-edit-riferimenti.css"     			startup="true" />
             <css   name="css-meta"				file="xsl_int/nir-style-edit-meta.css"     			startup="true" />
+            <css   name="css-ndr"				file="xsl_int/nir-style-edit-ndr.css"     			startup="true" />
             
             
             
@@ -1394,7 +1395,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             </pane>
             <pane name="editor.panes.ndr">
                 <xslt name="ndr"/>
-                <css name="css-nir"/>
+                <css name="css-ndr"/>
             </pane>
 	    	<pane name="editor.panes.checklist">
                 <xslt name="checklist"/>
