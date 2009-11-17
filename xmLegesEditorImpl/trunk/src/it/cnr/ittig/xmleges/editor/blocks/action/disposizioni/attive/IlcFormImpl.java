@@ -163,15 +163,7 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 		dbf.setValidating(false);
 		dbf.setNamespaceAware(false);
 		UtilFile.copyFileInTemp(getClass().getResourceAsStream("nir-export-mod.xsl"), "nir-export-mod.xsl");
-		
-		// copio in software-ilc
-		
-		// No. l'eseguibile dell'ilc linka staticamente i vari moduli quindi devo lavorare nella cartalla corrente
-		// (ovvero sia l'eseguibile che il file da trattare direttamente nella TEMP)    ---(A)(B)(C)
-
-		
-
-		
+			
 		logger.debug("Start copying ilc SW");
 		String ilcDir = "sf-ilc";
 		String ilcSW = ilcDir+".zip";

@@ -5,11 +5,13 @@ import it.cnr.ittig.services.manager.Logger;
 import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
+import it.cnr.ittig.services.manager.Startable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.EditTransaction;
 import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.FormClosedListener;
 import it.cnr.ittig.xmleges.core.services.form.FormVerifier;
+import it.cnr.ittig.xmleges.core.services.preference.PreferenceManager;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
@@ -38,6 +40,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.text.ParseException;
+import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.Vector;
 import java.util.regex.Matcher;
@@ -93,10 +96,11 @@ import org.w3c.dom.NodeList;
  * 
  * @version 1.0
  */
-public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable, ActionListener, Serviceable, Initializable, FormClosedListener, FormVerifier {
+public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable, ActionListener, Serviceable, Initializable, FormClosedListener, FormVerifier, Startable {
 
 	Logger logger;
 	Form form;
+	PreferenceManager preferenceManager;
 	PosizionamentoManualeForm posizionamentoManuale;
 	UtilMsg utilmsg;
 	
@@ -198,6 +202,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 		posizionamentoManuale = (PosizionamentoManualeForm) serviceManager.lookup(PosizionamentoManualeForm.class);
 		utilmsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
+		preferenceManager = (PreferenceManager) serviceManager.lookup(PreferenceManager.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
@@ -235,6 +240,27 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		testoModificato.setEditorKit(new HTMLEditorKit());
 		UtilFile.copyFileInTemp(getClass().getResourceAsStream("nir-nocss.xsl"), "nir-nocss.xsl");
 		elencoPartizioni = new String[]{"atto", "allegato", "libro", "parte", "titolo", "capo", "sezione", "articolo", "comma", "lettera", "numero", "punto"};
+		
+		Properties props = preferenceManager.getPreferenceAsProperties(this.getClass().getName());
+		try{
+		if (props.containsKey("lastPathList")) 
+			lastPathList = new File(props.get("lastPathList").toString().trim());
+		if (props.containsKey("lastPathFile")) 
+			lastPathFile = new File(props.get("lastPathFile").toString().trim());
+		} catch (Exception e) {}
+	}
+	
+	public void start() throws Exception {}
+
+	public void stop() throws Exception {
+		logger.debug("saving last host/user per il repository delle norme");
+		Properties props = preferenceManager.getPreferenceAsProperties(this.getClass().getName());
+		try {
+			props.setProperty("lastPathList", lastPathList.getAbsolutePath());
+			props.setProperty("lastPathFile", lastPathFile.getAbsolutePath());
+		} catch (Exception ex) {}
+		preferenceManager.setPreference(this.getClass().getName(), props);
+		logger.debug("saving OK");
 	}
 	
 	private void setMessagge() {
