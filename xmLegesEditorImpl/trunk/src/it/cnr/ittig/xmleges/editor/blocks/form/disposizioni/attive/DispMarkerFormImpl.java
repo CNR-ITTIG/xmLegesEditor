@@ -247,10 +247,8 @@ public class DispMarkerFormImpl implements DispMarkerForm, Loggable, Serviceable
 				}
 				
 				for (int i=0; i<figliVir.getLength(); i++)
-					if (!"h:br".equals(figliVir.item(i).getNodeName())) {
-						Node nuovo = figliVir.item(i).cloneNode(true);
-						corpo.appendChild(nuovo);
-					}
+					if (!"h:br".equals(figliVir.item(i).getNodeName()))
+						corpo.appendChild(doc.createTextNode(figliVir.item(i).getTextContent()));
 					else {
 						Node nuovo = doc.createTextNode(" ");
 						corpo.appendChild(nuovo);
