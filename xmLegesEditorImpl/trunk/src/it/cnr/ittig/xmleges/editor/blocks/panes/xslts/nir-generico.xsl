@@ -797,7 +797,11 @@
 		</span>
 	</xsl:template>
 	<xsl:template match="//*[name()='ndr']">
-		<a name="{concat('ndr',@num)}" href="#{@num}" title="Destinazione: {@num}">
+		<xsl:variable name="numnogratella">
+			<xsl:value-of select="substring(@num,2,string-length(@num))"/>
+		</xsl:variable>
+
+		<a name="{concat('ndr',$numnogratella)}" href="{@num}" title="Destinazione: {@num}">
 			<sup class="ndr">
 				<xsl:attribute name="title">Nota: <xsl:value-of select="."/></xsl:attribute>
 				<xsl:value-of select="."/>
@@ -975,8 +979,9 @@
 		<xsl:variable name="idnota">
 			<xsl:value-of select="@id" />
 		</xsl:variable>
-		
-		<xsl:for-each select="//*[name()='ndr'][@num=$idnota]">		
+		<xsl:variable name="idnotagratella">#<xsl:value-of select="@id" /></xsl:variable>
+
+		<xsl:for-each select="//*[name()='ndr'][@num=$idnotagratella]">		
 			<a class="nota" name="{$idnota}" href="{concat('#ndr',$idnota)}">
 				<xsl:value-of select="."/>
 			</a>
