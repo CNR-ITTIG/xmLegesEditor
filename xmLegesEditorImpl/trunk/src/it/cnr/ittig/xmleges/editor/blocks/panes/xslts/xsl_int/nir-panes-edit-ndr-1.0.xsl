@@ -37,34 +37,15 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
         </head>
 		<body>
 			<xsl:for-each select="//nir:meta">
-				<xsl:apply-templates select="./../../nir:testata/nir:denAnnesso" />
-				<xsl:apply-templates select="./nir:redazionale/nir:nota" />
+				<xsl:if test="descendant:: nir:nota">						
+					<xsl:apply-templates select="./../../nir:testata/nir:denAnnesso" />
+					<xsl:apply-templates select="./nir:redazionale/nir:nota" />
+				</xsl:if>				
 			</xsl:for-each>
 		</body>
 	</html>
 </xsl:template>
 
-
-<!--  PROVARE ANCHE QUESTO -->
-<!-- xsl:template match="nir:annesso" >
-	 <xsl:if test="descendant:: nir:rif | nir:mrif">
-		<br/><hr/>
-		<center>
-			<b>
-				<xsl:value-of select="./nir:testata/nir:denAnnesso"/>
-			</b>
-		</center>		
-	</xsl:if>		
-</xsl:template-->
-
-
-<!--  OLD   xsl:template match="nir:denAnnesso" >
-		<center>
-			<b>
-				<xsl:value-of select="."/>
-			</b>
-		</center>
-</xsl:template-->
 
 <xsl:template match="nir:nota" >
 	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
