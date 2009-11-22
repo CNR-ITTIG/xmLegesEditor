@@ -8,6 +8,53 @@ nir-panes-dtd-meta
 
 **********************/
 
+
+/*
+<!-- ================================================================================ -->
+<!-- ==================================================================== ANNESSI === -->
+<!-- ================================================================================ -->
+*/
+
+.annessi{
+	margin: 30 15 15 25;
+	color: gray;
+}
+
+
+.elencoAnnessi {
+}
+
+.annesso {
+}
+
+.testata{
+	background: #EEEEFF;
+    margin: 10 0 10 0;
+}
+
+.denAnnesso, .titAnnesso {
+}
+
+.preAnnesso{
+	text-align: left; 
+	font-size: large; 
+	font-weight: normal;
+}
+
+.rifesterno{ 
+	text-align: center;
+	font-size: normal; 
+	font-weight: bold;
+	color:blue;
+	margin: 0 0 0 0;
+}
+
+.meta
+
+
+
+
+
 /*
 <!-- ================================================================================ -->
 <!-- =============================================================== INTESTAZIONE === -->
@@ -48,7 +95,6 @@ nir-panes-dtd-meta
 */
 
 .formulainiziale {
-	text-align: center;
 	font-size: 100%;
 	margin-bottom: 30px;
 }
@@ -142,8 +188,8 @@ nir-panes-dtd-meta
 }
 
 .firma {
-	font-size: 80%;
-	font-weight: bold;
+	font-style: italic;
+	margin: 20 0;
 }
 
 .dataeluogo {
@@ -153,48 +199,7 @@ nir-panes-dtd-meta
 	font-weight:bold;*/
 }
 
-/*
-<!-- ================================================================================ -->
-<!-- ==================================================================== ANNESSI === -->
-<!-- ================================================================================ -->
-*/
 
-.annessi{
-	text-align: center;
-	margin: 30 15 15 25;
-	color: blue;
-}
-
-
-.elencoAnnessi {
-}
-
-.annesso {
-}
-
-.testata{
-	background: #EEEEFF;
-    margin: 10 0 10 0;
-}
-
-.denAnnesso, .titAnnesso {
-}
-
-.preAnnesso{
-	text-align: left; 
-	font-size: large; 
-	font-weight: normal;
-}
-
-.rifesterno{ 
-	text-align: center;
-	font-size: normal; 
-	font-weight: bold;
-	color:blue;
-	margin: 0 0 0 0;
-}
-
-.meta
 
 
 
