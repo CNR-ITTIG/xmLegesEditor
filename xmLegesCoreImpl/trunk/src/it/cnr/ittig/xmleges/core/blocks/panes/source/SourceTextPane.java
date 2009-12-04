@@ -3,6 +3,7 @@ package it.cnr.ittig.xmleges.core.blocks.panes.source;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
+import javax.swing.JEditorPane;
 import javax.swing.JTextPane;
 
 /**
@@ -22,7 +23,7 @@ import javax.swing.JTextPane;
  * 
  * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
  */
-public class SourceTextPane extends JTextPane {
+public class SourceTextPane extends JEditorPane {
 	boolean antialias;
 
 	public SourceTextPane(boolean antialias) {

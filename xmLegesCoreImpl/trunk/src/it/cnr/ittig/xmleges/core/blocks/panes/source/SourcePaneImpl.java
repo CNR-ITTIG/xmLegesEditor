@@ -14,14 +14,27 @@ import it.cnr.ittig.xmleges.core.services.frame.Frame;
 import it.cnr.ittig.xmleges.core.services.frame.PaneActivatedEvent;
 import it.cnr.ittig.xmleges.core.services.frame.PaneException;
 import it.cnr.ittig.xmleges.core.services.panes.source.SourcePane;
+import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
+import it.cnr.ittig.xmleges.core.util.clipboard.UtilClipboard;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
 import java.util.EventObject;
 
+import javax.swing.AbstractAction;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JToolBar;
+import javax.swing.ScrollPaneLayout;
 import javax.swing.text.Style;
-import javax.swing.text.StyleConstants;
+
+import org.bounce.text.xml.XMLEditorKit;
+import org.bounce.text.xml.XMLFoldingMargin;
+import org.bounce.text.xml.XMLStyleConstants;
 
 /**
  * <h1>Implementazione del servizio
@@ -64,12 +77,19 @@ public class SourcePaneImpl implements SourcePane, EventManagerListener, Loggabl
 	DocumentManager documentManager;
 
 	EventManager eventManager;
+	
+	UtilUI utilUi;
 
 	// TODO mettere nella configurazione del componente
 	SourceTextPane textPane = new SourceTextPane(true);
+	
+	JPanel panel;
 
 	Style tagStyle;
 
+	XMLEditorKit kit = new XMLEditorKit();	
+	
+	
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
 		this.logger = logger;
@@ -80,16 +100,51 @@ public class SourcePaneImpl implements SourcePane, EventManagerListener, Loggabl
 		frame = (Frame) serviceManager.lookup(Frame.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
+		utilUi = (UtilUI) serviceManager.lookup(UtilUI.class);
 	}
 
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws java.lang.Exception {
 		eventManager.addListener(this, PaneActivatedEvent.class);
-		frame.addPane(this, true);
-		textPane.setEditable(false);
-		tagStyle = textPane.addStyle("rif", textPane.getStyle("default"));
-		StyleConstants.setForeground(tagStyle, Color.BLUE);
+		panel = new JPanel(new BorderLayout());
+				
+		textPane.setEditable(true);		       
+        //tagStyle = textPane.addStyle("rif", textPane.getStyle("default"));
+		//StyleConstants.setForeground(tagStyle, Color.BLUE);		
+		
+		textPane.setEditorKit(kit);
+		
+		 // Enable auto indentation.
+        kit.setAutoIndentation(true);
+        // Enable tag completion.
+        kit.setTagCompletion(true); 
+        // Enable error highlighting.
+        textPane.getDocument().putProperty(XMLEditorKit.ERROR_HIGHLIGHTING_ATTRIBUTE, new Boolean(true));
+        // Set a style
+        kit.setStyle(XMLStyleConstants.ATTRIBUTE_NAME, new Color(255, 0, 0), 
+                      Font.BOLD);        
 
+		JToolBar bar = new JToolBar();
+		bar.add(utilUi.applyI18n("panes.xslteditor.open", new OpenAction()));
+		bar.addSeparator();
+		bar.add(utilUi.applyI18n("panes.xslteditor.save", new SaveAction()));
+		bar.add(utilUi.applyI18n("panes.xslteditor.saveas", new SaveAsAction()));
+			
+		
+		panel.add(bar,BorderLayout.NORTH);
+		
+		JPanel subpanel = new JPanel(new BorderLayout());
+		subpanel.add(new XMLFoldingMargin(textPane), BorderLayout.WEST);
+		subpanel.add(textPane, BorderLayout.CENTER);
+		
+		JScrollPane scroll = new JScrollPane(subpanel);
+		
+		
+		panel.add(scroll, BorderLayout.CENTER);
+		
+		frame.addPane(this, false);
+
+		
 	}
 
 	// ////////////////////////////////////////////////////////// Pane Interface
@@ -98,7 +153,7 @@ public class SourcePaneImpl implements SourcePane, EventManagerListener, Loggabl
 	}
 
 	public Component getPaneAsComponent() {
-		return textPane;
+		return panel;
 	}
 
 	public boolean canCut() {
@@ -118,7 +173,8 @@ public class SourcePaneImpl implements SourcePane, EventManagerListener, Loggabl
 	}
 
 	public boolean canPaste() {
-		return false;
+		return
+			false;
 	}
 
 	public void paste() throws PaneException {
@@ -126,11 +182,12 @@ public class SourcePaneImpl implements SourcePane, EventManagerListener, Loggabl
 	}
 
 	public boolean canPasteAsText() {
-		return false;
+		return UtilClipboard.hasString();
 	}
 
 	public void pasteAsText() throws PaneException {
-		throw new PaneException("Cannot paste as text");
+		textPane.replaceSelection(UtilClipboard.getAsString());
+		//throw new PaneException("Cannot paste as text");
 	}
 
 	public boolean canDelete() {
@@ -165,6 +222,7 @@ public class SourcePaneImpl implements SourcePane, EventManagerListener, Loggabl
 	}
 
 	public void reload() {
+		System.out.println("RICARIXOOOOOOOOOO");
 		if (documentManager.isEmpty())
 			textPane.setText("");
 		else {
@@ -183,7 +241,7 @@ public class SourcePaneImpl implements SourcePane, EventManagerListener, Loggabl
 			if (s != -1) {
 				e = text.indexOf(">", s);
 				pane.select(s, e + 1);
-				pane.setCharacterAttributes(tagStyle, true);
+				//pane.setCharacterAttributes(tagStyle, true);
 			}
 		}
 	}
@@ -194,4 +252,24 @@ public class SourcePaneImpl implements SourcePane, EventManagerListener, Loggabl
 			reload();
 		}
 	}
+	
+	public class OpenAction extends AbstractAction {
+		public void actionPerformed(ActionEvent e) {
+			
+			
+		}
+	}
+
+	public class SaveAction extends AbstractAction {
+		public void actionPerformed(ActionEvent e) {
+			
+		}
+	}
+
+	public class SaveAsAction extends AbstractAction {
+		public void actionPerformed(ActionEvent e) {
+		
+		}
+	}
+
 }
