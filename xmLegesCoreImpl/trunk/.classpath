@@ -31,7 +31,5 @@
 	<classpathentry kind="lib" path="lib/jmyspell-core-1.0.0-beta-2.jar"/>
 	<classpathentry kind="lib" path="lib/looks-2.2.1.jar"/>
 	<classpathentry kind="lib" path="lib/bounce-0.15.jar"/>
-	<classpathentry kind="lib" path="lib/batik-gui-util.jar"/>
-	
 	<classpathentry kind="output" path="bin"/>
 </classpath>
