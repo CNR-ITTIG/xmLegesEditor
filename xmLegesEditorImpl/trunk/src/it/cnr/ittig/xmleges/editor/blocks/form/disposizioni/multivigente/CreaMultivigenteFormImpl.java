@@ -33,6 +33,14 @@ import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
 import it.cnr.ittig.xmleges.editor.services.util.urn.NirUtilUrn;
 import it.cnr.ittig.xmleges.editor.services.util.urn.Urn;
 
+import java.io.FileWriter;
+import java.util.Vector;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import com.sun.org.apache.xml.internal.serialize.LineSeparator;
+import com.sun.org.apache.xml.internal.serialize.OutputFormat;
+import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -42,7 +50,6 @@ import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.util.Properties;
 import java.util.StringTokenizer;
-import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -56,6 +63,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
@@ -64,9 +72,6 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
@@ -427,7 +432,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				}
 				
 				if (dateEventi.size()==0)	//il file aperto non contiene nessun evento di modifica (non dovrebbe mai succedere)
-					errore.setText("Nessun evento trovato");
+					errore.setText("Nessun metadato di modifica");
 				else {
 					settaTasti(false,false,true);
 					primaModifica=true;		//cambiare --- implementare la funzione di check sulle modifiche
@@ -697,7 +702,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 		int start = 0; int end=0;
 		if (partizioneIndicata==null){
 			Node importedNode = docEditor.importNode(nodoMeta,true);
-			posizione = cerca_Rif_e_Bordo(docEditor, utilRulesManager.completeNamespaceFor(importedNode));
+			posizione = cerca_Rif_e_Bordo(docEditor, importedNode);
 		}
 		else {
 				posizione = partizioneIndicata;
@@ -876,7 +881,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 					}
 					figliVirgoletta = UtilDom.getAllChildElements(virgolettaDaInserire);
 					Node importedNode = docEditor.importNode((Node)figliVirgoletta.get(0),true);
-					importedNode = utilRulesManager.completeNamespaceFor(importedNode);
+					importedNode = importedNode;
 					n = domDisposizioni.makePartition(posizione, importedNode , makeVigenza(posizione,"novella","abrogato"));
 					try {
 						UtilDom.trimAndMergeTextNodes(n,true);
@@ -915,7 +920,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				for (int i=1; i<figliVirgoletta.size(); i++) {
 					//Node nuovaPosizione = posizione.getNextSibling();
 					Node importedNode = docEditor.importNode((Node)figliVirgoletta.get(i),true);
-					importedNode = utilRulesManager.completeNamespaceFor(importedNode);
+					importedNode = importedNode;
 					n = domDisposizioni.makePartition(n, importedNode , makeVigenza(n,"novella","abrogato"));
 					UtilDom.trimAndMergeTextNodes(n,true);
 					nodiMeta.add(domDisposizioni.setDOMDisposizioni("#"+partizione, urnCompletaAttivo, urnCompletaAttivo+posDisposizione, "#", "#"+UtilDom.getAttributeValueAsString(n, "id"), "", nota, "", implicita, eventoriginale, eventovigore));
@@ -1121,7 +1126,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 	private Document parsa(File file) {
 		try {
 			dbf.setValidating(false);
-			dbf.setNamespaceAware(false);
+			dbf.setNamespaceAware(true);
 			db = dbf.newDocumentBuilder();
 			db.setErrorHandler(null);
 			UtilFile.copyFileInTemp(new FileInputStream(file), nomeTemp);
@@ -1675,5 +1680,153 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				selectionManager.setActiveNode(this, corrente);
 		}
 		return true;
+	}
+	
+	public void salvaListaXml(Document doc) {
+		
+		Vector<Lista> lista = new Vector<Lista>();
+		String urn  = UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(doc,null,"originale")[0], "xlink:href");
+		urn = makeUrnBreve(urn);
+				
+		Node[] listTagAttiva = UtilDom.getElementsByTagName(doc,null,"attiva");
+		Node[] listTagEvento = UtilDom.getElementsByTagName(doc,null,"evento");
+		for (int j=0; j<listTagAttiva.length; j++) {
+			String id = UtilDom.getAttributeValueAsString(listTagAttiva[j], "id");
+			String href = UtilDom.getAttributeValueAsString(listTagAttiva[j], "xlink:href");
+			
+			href = makeUrnBreve(href);
+			
+			for (int z=0; z<listTagEvento.length; z++) {
+				String fonte = UtilDom.getAttributeValueAsString(listTagEvento[z], "fonte");
+				if (id.equals(fonte)) {
+					String data = UtilDom.getAttributeValueAsString(listTagEvento[z], "data");
+					lista.add(new Lista(data, href, urn));
+					break;
+				}
+			}
+		}
+		buildListaModifiche(lista);
+		
+		
+	}
+	
+	private void buildListaModifiche( Vector<Lista> modifiche) {
+
+		// <Modifiche>
+		// <Modifica urn="doc-passivo">
+		// <Evento data="aaaammgg" fonte="doc-attivo"/>
+		// ...
+		// </Modifica>
+		// ...
+		// </Modifiche>
+
+		String spiegaModifiche = "Devi aprire:\n";
+		
+		TransformerFactory factory = TransformerFactory.newInstance();
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		dbf.setValidating(false);
+		dbf.setNamespaceAware(false);
+		DocumentBuilder db;
+		try {
+			db = dbf.newDocumentBuilder();
+			Document doc = db.newDocument();
+			
+			Node output = doc.createElement("Modifiche");
+			doc.appendChild(output);
+			Node modifica = null;
+			Node evento;
+			Node[] esistenti;
+			Node itera;
+			int confronto;
+			for (int i = 0; i < modifiche.size(); i++) {
+				String urn = modifiche.get(i).getUrn_evento();
+				esistenti = UtilDom.getElementsByAttributeValue(doc, output, "urn", urn);
+				boolean unico = false;
+				if (esistenti.length == 0) {
+					modifica = doc.createElement("Modifica");
+					UtilDom.setAttributeValue(modifica, "urn", urn);
+					spiegaModifiche += urn+"\n";
+					itera = output.getFirstChild();
+					if (itera == null)
+						output.appendChild(modifica);
+					else
+						while (itera != null) {
+							confronto = (urn).compareTo(UtilDom.getAttributeValueAsString(itera, "urn"));
+							if (confronto < 0) {
+								output.insertBefore(modifica, itera);
+								break;
+							} else if (itera.getNextSibling() == null) {
+								output.appendChild(modifica);
+								break;
+							} else
+								itera = itera.getNextSibling();
+						}
+					unico = true;
+				} else
+					modifica = esistenti[0];
+				evento = doc.createElement("Evento");
+				String data = modifiche.get(i).getData_evento();
+				String fonte = modifiche.get(i).getUrn_attivo();
+				UtilDom.setAttributeValue(evento, "data", data);
+				UtilDom.setAttributeValue(evento, "fonte", fonte);
+				if (unico)
+					modifica.appendChild(evento);
+				else {
+					itera = modifica.getFirstChild();
+					while (itera != null) {
+						confronto = (data + fonte).compareTo(UtilDom.getAttributeValueAsString(itera, "data")+ UtilDom.getAttributeValueAsString(itera, "fonte"));
+						if (confronto < 0) {
+							modifica.insertBefore(evento, itera);
+							break;
+						} else if (confronto == 0)
+							break;
+						else if (itera.getNextSibling() == null) {
+							modifica.appendChild(evento);
+							break;
+						} else
+							itera = itera.getNextSibling();
+
+					}
+				}
+			}
+			salva(doc,spiegaModifiche);
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void salva(Document document,String spiegazioni) {
+
+		OutputFormat format = new OutputFormat(document);
+		format.setLineSeparator(LineSeparator.Unix);
+		format.setIndenting(true);
+		format.setEncoding("UTF-8");
+		String nomeXml = documentManager.getSourceName();
+		String nomeFile = "lista_"+(nomeXml.substring(1+nomeXml.lastIndexOf(File.separatorChar)));
+		try {
+			FileWriter fw;
+			if (lastPathList!=null)
+				if (lastPathList.getAbsolutePath().endsWith(""+File.separatorChar))
+					nomeFile = lastPathList.getAbsoluteFile()+nomeFile;
+				else
+					nomeFile = lastPathList.getAbsoluteFile()+""+File.separatorChar+nomeFile;
+			fw = new FileWriter(nomeFile);
+			XMLSerializer serializer = new XMLSerializer(fw, format);
+			serializer.serialize(document);
+			utilmsg.msgInfo("File modifiche salvato in: " + nomeFile + "\n\n"+spiegazioni);
+		} catch (Exception e) {
+			e.printStackTrace();
+			utilmsg.msgInfo("Errore. Azione non eseguita");
+		}
+	}
+
+	private String makeUrnBreve(String urnCompleta) { // grezzo: butto via giorno,mese se presenti
+
+		String urnCorta = urnCompleta;
+		int posTrattino = urnCompleta.indexOf("-");
+		if (posTrattino != -1)
+			urnCorta = urnCompleta.substring(0, posTrattino)
+					+ urnCompleta.substring(urnCompleta.indexOf(";"));
+		return urnCorta;
 	}
 }

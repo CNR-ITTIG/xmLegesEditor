@@ -7,6 +7,7 @@ import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.action.ActionManager;
+import it.cnr.ittig.xmleges.core.services.document.DocumentChangedEvent;
 import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.document.DocumentOpenedEvent;
@@ -58,6 +59,7 @@ public class CreaMultivigenteActionImpl implements CreaMultivigenteAction, Logga
 	CreaMultivigenteForm creaMultivigenteForm;
 
 	AbstractAction azione = new multivigenteAction();
+	AbstractAction azioneLista = new listaModificheAction();
 	
 	UtilMsg utilMsg;
 	
@@ -78,18 +80,27 @@ public class CreaMultivigenteActionImpl implements CreaMultivigenteAction, Logga
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws java.lang.Exception {
 		actionManager.registerAction("tool.multivigente", azione);
+		actionManager.registerAction("tool.lista", azioneLista);
 		eventManager.addListener(this, DocumentOpenedEvent.class);
 		eventManager.addListener(this, DocumentClosedEvent.class);
+		eventManager.addListener(this, DocumentChangedEvent.class);
 		azione.setEnabled(false);
+		azioneLista.setEnabled(false);
 	}
 
 	public void manageEvent(EventObject event) {
 		
+		if (event instanceof DocumentOpenedEvent | event instanceof DocumentChangedEvent)
+			azioneLista.setEnabled(documentManager.getDocumentAsDom().getElementsByTagName("mod").getLength()>0);
+		
 		if (event instanceof DocumentOpenedEvent)
 			azione.setEnabled(true);
 		
-		if (event instanceof DocumentClosedEvent)
+		if (event instanceof DocumentClosedEvent) {
 			azione.setEnabled(false);
+			azioneLista.setEnabled(false);
+		}
+		
 	}
 
 	public void doMultivigente() {
@@ -99,11 +110,20 @@ public class CreaMultivigenteActionImpl implements CreaMultivigenteAction, Logga
 			creaMultivigenteForm.openForm();		
 	}
 	
+	public void doListaModifiche() {
+		creaMultivigenteForm.salvaListaXml(documentManager.getDocumentAsDom());	
+	}
 	// /////////////////////////////////////////////// Azioni
 	public class multivigenteAction extends AbstractAction {
 
 		public void actionPerformed(ActionEvent e) {
 			doMultivigente();
+		}
+	}
+	public class listaModificheAction extends AbstractAction {
+
+		public void actionPerformed(ActionEvent e) {
+			doListaModifiche();
 		}
 	}
 }
