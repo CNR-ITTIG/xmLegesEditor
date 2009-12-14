@@ -1,5 +1,7 @@
 package it.cnr.ittig.xmleges.editor.services.form.disposizioni.multivigente;
 
+import org.w3c.dom.Document;
+
 import it.cnr.ittig.services.manager.Service;
 
 /**
@@ -27,4 +29,8 @@ public interface CreaMultivigenteForm extends Service {
 	 */
 	public void openForm();
 	
+	/**
+	 * Salva il file lista.xml contenente le modifiche gli eventi di modifica 
+	 */
+	public void salvaListaXml(Document doc);
 }
