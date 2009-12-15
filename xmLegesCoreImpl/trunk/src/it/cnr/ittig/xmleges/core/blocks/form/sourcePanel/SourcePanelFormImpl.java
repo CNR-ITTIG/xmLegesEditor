@@ -34,7 +34,7 @@ public class SourcePanelFormImpl implements SourcePanelForm, Loggable,Serviceabl
 	SourceTextPane textPane = new SourceTextPane(true);
 		
 	public boolean openForm() {
-		form.setSize(450, 600);
+		form.setSize(900, 900);
 		form.showDialog();
 		return form.isOk();
 
