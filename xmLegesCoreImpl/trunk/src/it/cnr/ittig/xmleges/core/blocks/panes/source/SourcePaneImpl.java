@@ -9,6 +9,7 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
+import it.cnr.ittig.xmleges.core.services.form.sourcePanel.SourcePanelForm;
 import it.cnr.ittig.xmleges.core.services.frame.FindIterator;
 import it.cnr.ittig.xmleges.core.services.frame.Frame;
 import it.cnr.ittig.xmleges.core.services.frame.PaneActivatedEvent;
@@ -22,14 +23,10 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
 import java.util.EventObject;
 
-import javax.swing.AbstractAction;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JToolBar;
-import javax.swing.ScrollPaneLayout;
 import javax.swing.text.Style;
 
 import org.bounce.text.xml.XMLEditorKit;
@@ -73,6 +70,8 @@ public class SourcePaneImpl implements SourcePane, EventManagerListener, Loggabl
 	Logger logger;
 
 	Frame frame;
+	
+	
 
 	DocumentManager documentManager;
 
@@ -106,42 +105,22 @@ public class SourcePaneImpl implements SourcePane, EventManagerListener, Loggabl
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws java.lang.Exception {
 		eventManager.addListener(this, PaneActivatedEvent.class);
-		panel = new JPanel(new BorderLayout());
-				
-		textPane.setEditable(true);		       
-        //tagStyle = textPane.addStyle("rif", textPane.getStyle("default"));
-		//StyleConstants.setForeground(tagStyle, Color.BLUE);		
-		
+		panel = new JPanel(new BorderLayout());				
+		textPane.setEditable(false);		   		
 		textPane.setEditorKit(kit);
-		
-		 // Enable auto indentation.
+		// Enable auto indentation.
         kit.setAutoIndentation(true);
         // Enable tag completion.
         kit.setTagCompletion(true); 
         // Enable error highlighting.
         textPane.getDocument().putProperty(XMLEditorKit.ERROR_HIGHLIGHTING_ATTRIBUTE, new Boolean(true));
         // Set a style
-        kit.setStyle(XMLStyleConstants.ATTRIBUTE_NAME, new Color(255, 0, 0), 
-                      Font.BOLD);        
-
-		JToolBar bar = new JToolBar();
-		bar.add(utilUi.applyI18n("panes.xslteditor.open", new OpenAction()));
-		bar.addSeparator();
-		bar.add(utilUi.applyI18n("panes.xslteditor.save", new SaveAction()));
-		bar.add(utilUi.applyI18n("panes.xslteditor.saveas", new SaveAsAction()));
-			
-		
-		panel.add(bar,BorderLayout.NORTH);
-		
+        kit.setStyle(XMLStyleConstants.ATTRIBUTE_NAME, new Color(255, 0, 0),Font.BOLD);        
 		JPanel subpanel = new JPanel(new BorderLayout());
 		subpanel.add(new XMLFoldingMargin(textPane), BorderLayout.WEST);
-		subpanel.add(textPane, BorderLayout.CENTER);
-		
-		JScrollPane scroll = new JScrollPane(subpanel);
-		
-		
-		panel.add(scroll, BorderLayout.CENTER);
-		
+		subpanel.add(textPane, BorderLayout.CENTER);		
+		JScrollPane scroll = new JScrollPane(subpanel);		
+		panel.add(scroll, BorderLayout.CENTER);		
 		frame.addPane(this, false);
 
 		
@@ -182,12 +161,11 @@ public class SourcePaneImpl implements SourcePane, EventManagerListener, Loggabl
 	}
 
 	public boolean canPasteAsText() {
-		return UtilClipboard.hasString();
+		return false;
 	}
 
 	public void pasteAsText() throws PaneException {
-		textPane.replaceSelection(UtilClipboard.getAsString());
-		//throw new PaneException("Cannot paste as text");
+		throw new PaneException("Cannot paste as text");
 	}
 
 	public boolean canDelete() {
@@ -222,14 +200,16 @@ public class SourcePaneImpl implements SourcePane, EventManagerListener, Loggabl
 	}
 
 	public void reload() {
-		System.out.println("RICARIXOOOOOOOOOO");
+		
+		
 		if (documentManager.isEmpty())
 			textPane.setText("");
 		else {
 			String text = UtilDom.domToString(documentManager.getDocumentAsDom(), true, "    ");
 			text = text.replaceAll("\r", "");
 			textPane.setText(text);
-			highlightTags(textPane);
+//			highlightTags(textPane);
+
 		}
 	}
 
@@ -253,23 +233,6 @@ public class SourcePaneImpl implements SourcePane, EventManagerListener, Loggabl
 		}
 	}
 	
-	public class OpenAction extends AbstractAction {
-		public void actionPerformed(ActionEvent e) {
-			
-			
-		}
-	}
-
-	public class SaveAction extends AbstractAction {
-		public void actionPerformed(ActionEvent e) {
-			
-		}
-	}
-
-	public class SaveAsAction extends AbstractAction {
-		public void actionPerformed(ActionEvent e) {
-		
-		}
-	}
+	
 
 }

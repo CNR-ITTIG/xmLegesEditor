@@ -4,7 +4,6 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
 import javax.swing.JEditorPane;
-import javax.swing.JTextPane;
 
 /**
  * Classe per il pannello di testo con il testo antialias.
