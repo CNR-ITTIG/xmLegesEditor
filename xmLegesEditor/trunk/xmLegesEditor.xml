@@ -285,6 +285,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <item action="edit.procinstr" />
                     <separator/>
                     <item action="edit.extracttext" />
+                    <item action="edit.editXML" />
                     <item action="edit.unmark" />
                 </menu>
                 <menu action="menu.view">
@@ -777,6 +778,10 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     />
     
     <component  activation="startup"
+    			class="it.cnr.ittig.xmleges.core.blocks.action.edit.sourceedit.SourceEditActionImpl" 
+    />
+    
+    <component  activation="startup"
                 class="it.cnr.ittig.xmleges.core.blocks.action.edit.importdom.ImportDomActionImpl"
     />
     
@@ -1120,6 +1125,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     />
     
     <component  class="it.cnr.ittig.xmleges.core.blocks.form.sourcePanel.SourcePanelFormImpl" />
+    
+   
     
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.xmleges.marker.XmLegesMarkerFormImpl">
         <configuration>

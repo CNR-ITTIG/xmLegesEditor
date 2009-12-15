@@ -13,8 +13,6 @@ import it.cnr.ittig.xmleges.core.services.form.sourcePanel.SourcePanelForm;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -23,8 +21,7 @@ import org.bounce.text.xml.XMLEditorKit;
 import org.bounce.text.xml.XMLFoldingMargin;
 import org.bounce.text.xml.XMLStyleConstants;
 
-public class SourcePanelFormImpl implements SourcePanelForm, Loggable,
-		Serviceable, Initializable, ActionListener {
+public class SourcePanelFormImpl implements SourcePanelForm, Loggable,Serviceable, Initializable {
 	
 	Logger logger;
 
@@ -85,21 +82,13 @@ public class SourcePanelFormImpl implements SourcePanelForm, Loggable,
 			
 	}
 
-	public void actionPerformed(ActionEvent e) {
-//		 if (e.getSource().equals(infodocButton)) { // INFODOC
-//			 formDatiInfodoc.showDialog();	
-//			 
-//			 if (formDatiInfodoc.isOk()) {
-//							 
-//				 
-//				
-//			 }
-		 	
-	}
+
 
 	public void setSourceText(String text) {
 		text = text.replaceAll("\r", "");
-		textPane.setText(text);		
+		textPane.setText(text);	
+		// si posiziona in testa
+		textPane.getCaret().setDot(0);
 	}
 
 	

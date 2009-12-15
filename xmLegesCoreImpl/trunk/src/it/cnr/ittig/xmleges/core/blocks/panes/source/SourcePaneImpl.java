@@ -208,8 +208,8 @@ public class SourcePaneImpl implements SourcePane, EventManagerListener, Loggabl
 			String text = UtilDom.domToString(documentManager.getDocumentAsDom(), true, "    ");
 			text = text.replaceAll("\r", "");
 			textPane.setText(text);
-//			highlightTags(textPane);
-
+			// si posiziona in testa
+			textPane.getCaret().setDot(0);
 		}
 	}
 
