@@ -16,9 +16,12 @@ import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
 import it.cnr.ittig.xmleges.core.services.form.sourcePanel.SourcePanelForm;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
+import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
+import it.cnr.ittig.xmleges.core.util.file.UtilFile;
 
 import java.awt.event.ActionEvent;
+import java.io.ByteArrayInputStream;
 import java.util.EventObject;
 
 import javax.swing.AbstractAction;
@@ -41,6 +44,8 @@ public class SourceEditActionImpl implements SourceEditAction, EventManagerListe
 
 	EditXMLAction editXMLAction;
 	
+	UtilMsg utilMsg;
+	
 
 	
 	public void service(ServiceManager serviceManager) throws ServiceException {
@@ -49,6 +54,7 @@ public class SourceEditActionImpl implements SourceEditAction, EventManagerListe
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
+		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 	}
 
 	
@@ -98,8 +104,20 @@ public class SourceEditActionImpl implements SourceEditAction, EventManagerListe
 				String text = UtilDom.domToString(documentManager.getDocumentAsDom(), true, "    ");
 				text = text.replaceAll("\r", "");
 				sourcePanelForm.setSourceText(text);
+				
 				if(sourcePanelForm.openForm()){
-
+/*					UtilFile.copyFileInTemp(new ByteArrayInputStream(sourcePanelForm.getSourceText().getBytes()), "temp.xml");
+					documentManager.getDocFromText(sourcePanelForm.getSourceText());
+					if(documentManager.hasErrors()){
+						if(utilMsg.msgWarning("Documento non valido. Sovrascrivere comunque?")){
+							documentManager.openSource(sourcePanelForm.getSourceText(),true);
+							return;
+						}
+						else
+							return;
+					}
+					documentManager.openSource(sourcePanelForm.getSourceText(),true);	
+*/
 				}
 			}
 		}
