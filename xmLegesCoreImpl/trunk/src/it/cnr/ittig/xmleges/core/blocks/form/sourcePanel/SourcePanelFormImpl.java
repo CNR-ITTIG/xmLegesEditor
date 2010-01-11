@@ -32,6 +32,8 @@ public class SourcePanelFormImpl implements SourcePanelForm, Loggable,Serviceabl
 	
 	// pannello per la gestione
 	SourceTextPane textPane = new SourceTextPane(true);
+	
+	
 		
 	public boolean openForm() {
 		form.setSize(900, 900);
@@ -47,7 +49,7 @@ public class SourcePanelFormImpl implements SourcePanelForm, Loggable,Serviceabl
 
 	public void service(ServiceManager serviceManager) throws ServiceException {
 		form = (Form) serviceManager.lookup(Form.class);		
-	
+		
 	}
 
 	public void initialize() throws Exception {
@@ -75,7 +77,7 @@ public class SourcePanelFormImpl implements SourcePanelForm, Loggable,Serviceabl
 		subpanel.add(textPane, BorderLayout.CENTER);
 		
 		JScrollPane scroll = new JScrollPane(subpanel);
-				
+		
 		panel.add(scroll, BorderLayout.CENTER);
 
 		form.replaceComponent("editor.form.sourcepane", panel);
@@ -90,7 +92,14 @@ public class SourcePanelFormImpl implements SourcePanelForm, Loggable,Serviceabl
 		// si posiziona in testa
 		textPane.getCaret().setDot(0);
 	}
+	
+	public String getSourceText() {
+		return textPane.getText();
+	}
+	
+	
 
+	
 	
 	
 			

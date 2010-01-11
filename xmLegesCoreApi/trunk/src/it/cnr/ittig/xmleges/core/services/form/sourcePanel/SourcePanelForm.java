@@ -8,6 +8,6 @@ public interface SourcePanelForm extends Service{
 	
 	public void setSourceText(String text);
 	
-		
+	public String getSourceText();
 
 }
