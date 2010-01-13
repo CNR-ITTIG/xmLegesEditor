@@ -31,7 +31,8 @@ public interface DispAttiveForm extends Service {
 	final static int INTEGRAZIONE = 4;
 	final static int NOVELLANDO = 5;
 	final static int NOVELLA = 6;
-	final static int FINE = 7;
+	final static int NONTESTUALE = 7;
+	final static int FINE = 8;
 	
 	/**
 	 * Apre la form.

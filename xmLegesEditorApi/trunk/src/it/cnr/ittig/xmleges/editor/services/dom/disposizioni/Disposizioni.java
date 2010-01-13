@@ -38,22 +38,25 @@ public interface Disposizioni extends Service {
 	 * 
 	 * @return la DSP che sto aggiungendo
 	 */
-	public Node setDOMDispAttive(boolean implicita, Node metaDaModificare, String idMod, int operazioneIniziale, String completa, boolean condizione, String decorrenza, String idevento, String norma, String partizione, String[] delimitatori);
+	public Node setDOMDispAttive(boolean implicita, Node metaDaModificare, String idMod, int operazioneIniziale, String completa, boolean condizione, String decorrenza, String idevento, String norma, String partizione, String[] delimitatori, String dispNonTestuale);
 	
 	/**
 	 * Funzione per l'aggiornamento dei metadati di disposizione ATTIVE (Novella)
-	 * 
-	 * @return la DSP che sto aggiungendo
+	 *
 	 */
 	public void setDOMNovellaDispAttive(Node meta, String virgolettaContenuto, String tipo, String posizione, String virgolettaA, String virgolettaB);
 	
 	/**
 	 * Funzione per l'aggiornamento dei metadati di disposizione ATTIVE (Novellando)
-	 * 
-	 * @return la DSP che sto aggiungendo
+	 *
 	 */
 	public void setDOMNovellandoDispAttive(Node meta, boolean parole, String tipoPartizione, String tipo, String ruoloA, String virgolettaA, String ruoloB, String virgolettaB);
 	
+	/**
+	 * Funzione per l'aggiornamento dei metadati di disposizione ATTIVE (Partizione e dominio)
+	 *
+	 */
+	public void setDOMNonTestualiAttive(Node meta, String partizione, String dominio);
 	
 	//Disposizioni PASSIVE
 	/**
@@ -147,4 +150,9 @@ public interface Disposizioni extends Service {
 	 * Modifica vigenza
 	 */
 	public void doChange(String norma, String pos, Node disposizione, String autonota, boolean implicita, Node novellando, String status, String idEvento, String idNovella);
+
+	/**
+	 * Inserisce la urn versionata
+	 */
+	public boolean setUrn(String idOriginale, String urnVigore, String idVigore);
 }
