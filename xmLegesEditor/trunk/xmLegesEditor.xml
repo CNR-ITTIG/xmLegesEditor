@@ -1087,7 +1087,9 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  lifestyle="singleton" activation="startup"
                 class="it.cnr.ittig.xmleges.editor.blocks.action.disposizioni.attive.IlcFormImpl"
     />
-   
+    <component  lifestyle="singleton" activation="startup"
+                class="it.cnr.ittig.xmleges.editor.blocks.form.disposizioni.attive.DispNonTestualiFormImpl"
+    />    
 
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.link.LinkFormImpl">
         <configuration external="true" resource="LinkFormImpl.xconfig" />
