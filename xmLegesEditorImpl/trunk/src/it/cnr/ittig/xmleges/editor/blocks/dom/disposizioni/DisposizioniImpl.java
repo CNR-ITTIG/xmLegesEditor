@@ -99,7 +99,10 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 	}
 	
 	private boolean setUrn(Evento eventoOriginale, Evento eventoVigore) {
+		return setUrn(eventoOriginale.getId(), eventoVigore.getFonte().toString(), eventoVigore.getId());
+	}
 		
+	public boolean setUrn(String idOriginale, String urnVigore, String idVigore) {	
 		Document doc = documentManager.getDocumentAsDom();
 		Node activeMeta = nirUtilDom.findActiveMeta(doc,null);
 		Node descrittoriNode = UtilDom.findRecursiveChild(activeMeta,"descrittori");
@@ -111,10 +114,10 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 			urnOriginale = UtilDom.getAttributeValueAsString(urnNode[0], "valore");
 			//Se non è ancora settato inizio vigore lo imposto all'evento originale
 			if (UtilDom.getAttributeValueAsString(urnNode[0], "iniziovigore")==null)
-				UtilDom.setAttributeValue(urnNode[0], "iniziovigore", eventoOriginale.getId());
+				UtilDom.setAttributeValue(urnNode[0], "iniziovigore", idOriginale);
 		}
 		try {
-			versione += eventoVigore.getFonte().toString().split(":")[4];
+			versione += urnVigore.split(":")[4];
 			if (versione.indexOf(';')!=-1)
 					versione = versione.split(";")[0];
 		}
@@ -134,7 +137,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 			for (int i=0; i<tEventi.length; i++)
 				hash.put(UtilDom.getAttributeValueAsString(tEventi[i], "id"),UtilDom.getAttributeValueAsString(tEventi[i], "data"));
 
-			String tModifica = (String) hash.get(eventoVigore.getId());
+			String tModifica = (String) hash.get(idVigore);
 			for (int i=0; i<urnNode.length; i++) {
 				String tDa = (String) hash.get(UtilDom.getAttributeValueAsString(urnNode[i], "iniziovigore")); 
 				if (tDa.compareTo(tModifica)<0) {
@@ -145,8 +148,8 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 							Node nuovaUrn = utilRulesManager.getNodeTemplate(doc,"urn");
 							UtilDom.setAttributeValue(nuovaUrn, "valore", urnVersione);
 							UtilDom.setAttributeValue(nuovaUrn, "finevigore", tA);
-							UtilDom.setAttributeValue(nuovaUrn, "iniziovigore", eventoVigore.getId());
-							UtilDom.setAttributeValue(urnNode[i], "finevigore", eventoVigore.getId());
+							UtilDom.setAttributeValue(nuovaUrn, "iniziovigore", idVigore);
+							UtilDom.setAttributeValue(urnNode[i], "finevigore", idVigore);
 							descrittoriNode.insertBefore(nuovaUrn, urnNode[i].getNextSibling()); 
 							break;
 						}
@@ -154,11 +157,11 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 					else {
 						//CASO Modifica Ordinata
 						//imposto all'ultima urn il finevigore
-						UtilDom.setAttributeValue(urnNode[urnNode.length -1], "finevigore", eventoVigore.getId());
+						UtilDom.setAttributeValue(urnNode[urnNode.length -1], "finevigore", idVigore);
 						//inserisco una nuova urn con iniziovigore
 						Node nuovaUrn = utilRulesManager.getNodeTemplate(doc,"urn");
 						UtilDom.setAttributeValue(nuovaUrn, "valore", urnVersione);
-						UtilDom.setAttributeValue(nuovaUrn, "iniziovigore", eventoVigore.getId());
+						UtilDom.setAttributeValue(nuovaUrn, "iniziovigore", idVigore);
 						Node alias = UtilDom.findRecursiveChild(activeMeta,"alias");
 						Node materie = UtilDom.findRecursiveChild(activeMeta,"materie");
 						if (alias!=null)
@@ -924,7 +927,7 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		
 	}	
 	
-	public Node setDOMDispAttive(boolean implicita, Node metaDaModificare, String idMod, int operazioneIniziale, String completa, boolean condizione, String decorrenza, String idevento, String norma, String partizione, String[] delimitatori) {
+	public Node setDOMDispAttive(boolean implicita, Node metaDaModificare, String idMod, int operazioneIniziale, String completa, boolean condizione, String decorrenza, String idevento, String norma, String partizione, String[] delimitatori, String dispNonTestuale) {
 				
 		Document doc = documentManager.getDocumentAsDom();		
 		Node activeMeta = nirUtilDom.findActiveMeta(doc,null);
@@ -956,6 +959,8 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 			operazioneNode = utilRulesManager.getNodeTemplate(doc,"dsp:integrazione");
 		else if (operazioneIniziale==DispAttiveFormImpl.ABROGAZIONE)
 			operazioneNode = utilRulesManager.getNodeTemplate(doc,"dsp:abrogazione");
+		else if (operazioneIniziale==DispAttiveFormImpl.NONTESTUALE)
+			operazioneNode = utilRulesManager.getNodeTemplate(doc,dispNonTestuale);
 		UtilDom.setAttributeValue(operazioneNode, "completa", completa);
 		if (implicita)
 			UtilDom.setAttributeValue(operazioneNode, "implicita", "si");
@@ -1140,4 +1145,22 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 		novellandoNode.appendChild(subargNode);
 		meta.appendChild(novellandoNode);
 	}
+	
+	public void setDOMNonTestualiAttive(Node meta, String partizione, String dominio) {
+
+		if (partizione!=null) {	//caso di RICOLLOCAZIONE
+			Node partizioneNode = utilRulesManager.getNodeTemplate("dsp:partizione");
+			Node nodo = utilRulesManager.getNodeTemplate("dsp:pos");
+			UtilDom.setAttributeValue(nodo, "xlink:href", "#"+partizione);
+			partizioneNode.appendChild(nodo); 
+			meta.appendChild(partizioneNode);
+		}
+		if (dominio!=null) {	//caso di INAUTENTICA, VARIAZIONE, MODTERMINI, DEROGA, ESTENSIONE
+			Node dominioNode = utilRulesManager.getNodeTemplate("dsp:dominio");
+			Node nodo = utilRulesManager.getNodeTemplate("dsp:testo");
+			UtilDom.setAttributeValue(nodo, "valore", dominio);
+			dominioNode.appendChild(nodo); 
+			meta.appendChild(dominioNode);
+		}
+	}	
 }

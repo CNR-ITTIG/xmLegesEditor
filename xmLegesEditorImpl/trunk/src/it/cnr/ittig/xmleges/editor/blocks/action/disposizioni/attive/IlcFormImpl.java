@@ -414,7 +414,7 @@ public class IlcFormImpl implements IlcForm, Loggable, ActionListener, Serviceab
 					completa="no";
 			
 			//invoco la prima chiamata alle funzioni DOM	
-			Node nuovoMeta = domDisposizioni.setDOMDispAttive(false, modificoMetaEsistenti, "#"+idMod, operazioneIniziale, completa, condizionata, decorrenza, idevento, urn, partizione, delimitatori);
+			Node nuovoMeta = domDisposizioni.setDOMDispAttive(false, modificoMetaEsistenti, "#"+idMod, operazioneIniziale, completa, condizionata, decorrenza, idevento, urn, partizione, delimitatori,"");
 			
 		//setmeta di novella
 			String tipoNovella = null; 

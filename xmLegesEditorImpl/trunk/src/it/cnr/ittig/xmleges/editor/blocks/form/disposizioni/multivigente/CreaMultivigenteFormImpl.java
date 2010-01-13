@@ -555,6 +555,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 	private boolean proponiModificaTesto(Node partizioneIndicata) {
 
 		try {
+		
 		form.setDialogWaiting(true);
 		
 		if (partizioneIndicata!=null)
@@ -593,456 +594,541 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 			form.setDialogWaiting(false);
 			return false;
 		}
-		
-		
-//-----FASE1 (processo il Meta, creo Mod/TestoPrima)
-		
-		eventi.setSelectedIndex(getPosLista());		
-		Node nodoMeta = (Node)disposizioniDaConvertire.get(correnteEvento);
-		boolean implicita = ("si".equals(UtilDom.getAttributeValueAsString(nodoMeta,"implicita").toLowerCase())) ? true : false;
-		String idMod = UtilDom.getAttributeValueAsString(UtilDom.findRecursiveChild(nodoMeta,"dsp:pos"),"xlink:href").substring(1);
-		virgolettaDaInserire=null;
-		virgolettaDaEliminare=null;
-		Node tempNovella = UtilDom.findRecursiveChild(nodoMeta,"dsp:novella");
-		if (tempNovella!=null) {
-			String idVirgoletta = UtilDom.getAttributeValueAsString(UtilDom.findRecursiveChild(tempNovella,"dsp:pos"),"xlink:href").substring(1);
-			Node[] trovati = UtilDom.getElementsByAttributeValue(docAttivo,docAttivo,"id",idVirgoletta);
-			if (trovati.length>0)
-				virgolettaDaInserire = UtilDom.getElementsByAttributeValue(docAttivo,docAttivo,"id",idVirgoletta)[0].cloneNode(true);  //lo clono perchè potrei integrarlo con num e rubrica e poi rimosizionarmi manualmente altrove
-			else {
-				utilmsg.msgInfo("Attenzione. Hai informazioni nei metadati non presenti nel testo.");
-				try {
-					listModel.setElementAt(((String) listModel.get(getPosLista())) + " --> saltata", getPosLista());
-				} catch (Exception ex) {}
-				correnteEvento++;
-				return true;
-			}
-		}
-		Node tempNovellando = UtilDom.findRecursiveChild(nodoMeta,"dsp:novellando");
-		if (tempNovellando!=null) {
-			Node temPos = UtilDom.findRecursiveChild(tempNovellando,"dsp:pos");
-			if (temPos!=null) { //xex abrogazione di parole
-				String idVirgoletta = UtilDom.getAttributeValueAsString(temPos,"xlink:href").substring(1);
-				try{
-					virgolettaDaEliminare = UtilDom.getElementsByAttributeValue(docAttivo,docAttivo,"id",idVirgoletta)[0];
-				} catch (Exception e) {
-					System.out.println("Non ho trovato virgoletta puntata " + idVirgoletta + " -- " + e.getMessage());
-					virgolettaDaEliminare = null;
+			
+		String testModificaTestuale = ((Node)disposizioniDaConvertire.get(correnteEvento)).getLocalName();
+		if (testModificaTestuale.equals("abrogazione") || testModificaTestuale.equals("sostituzione") || testModificaTestuale.equals("integrazione")) {	//modifica testuale
+			
+	//-----FASE1 (processo il Meta, creo Mod/TestoPrima)
+			
+			eventi.setSelectedIndex(getPosLista());		
+			Node nodoMeta = (Node)disposizioniDaConvertire.get(correnteEvento);
+			boolean implicita = ("si".equals(UtilDom.getAttributeValueAsString(nodoMeta,"implicita").toLowerCase())) ? true : false;
+			String idMod = UtilDom.getAttributeValueAsString(UtilDom.findRecursiveChild(nodoMeta,"dsp:pos"),"xlink:href").substring(1);
+			virgolettaDaInserire=null;
+			virgolettaDaEliminare=null;
+			Node tempNovella = UtilDom.findRecursiveChild(nodoMeta,"dsp:novella");
+			if (tempNovella!=null) {
+				String idVirgoletta = UtilDom.getAttributeValueAsString(UtilDom.findRecursiveChild(tempNovella,"dsp:pos"),"xlink:href").substring(1);
+				Node[] trovati = UtilDom.getElementsByAttributeValue(docAttivo,docAttivo,"id",idVirgoletta);
+				if (trovati.length>0)
+					virgolettaDaInserire = UtilDom.getElementsByAttributeValue(docAttivo,docAttivo,"id",idVirgoletta)[0].cloneNode(true);  //lo clono perchè potrei integrarlo con num e rubrica e poi rimosizionarmi manualmente altrove
+				else {
+					utilmsg.msgInfo("Attenzione. Hai informazioni nei metadati non presenti nel testo.");
+					try {
+						listModel.setElementAt(((String) listModel.get(getPosLista())) + " --> saltata", getPosLista());
+					} catch (Exception ex) {}
+					correnteEvento++;
+					return true;
 				}
 			}
-			else  //xex per partizioni
-				virgolettaDaEliminare = null; //la lascio a null, tanto se mi serve, me la calcolo in 'cambia partizione'						
-		}
-		
-		//test per capire se la modifica corrente è stata già applicata
-		//verifico la presenza dell'evento (visto che ci sono mi calcolo anche un nuovo id)
-		Vector idEventiDaTestare = new Vector();
-		Node relazioniNode = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docEditor,null),"relazioni");
-		NodeList relazioniList = relazioniNode.getChildNodes();
-		int maxPassiva=0;
-		for (int i = 0; i < relazioniList.getLength(); i++) {
-			Node relazioneNode = relazioniList.item(i);
-			String nodeName = relazioneNode.getNodeName();
-			String id = UtilDom.getAttributeValueAsString(relazioneNode, "id");
-			if ("passiva".equals(nodeName)) {				
-				Integer idValue = Integer.decode(id.substring(2));
-				if (idValue.intValue() > maxPassiva)
-					maxPassiva = idValue.intValue();
-				if (urnCompletaAttivo.equals(UtilDom.getAttributeValueAsString(relazioneNode, "xlink:href")))
-					idEventiDaTestare.add(id);					
-			}			
-		}
-		if (partizioneIndicata==null || !scrivi.isEnabled())
-			maxPassiva++;
-			
-		//controllo grezzo
-		if (maxPassiva==0)
-			maxPassiva=1;		
-			
-		Node eventiNode = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docEditor,null),"eventi");
-		int maxEventi = 1+UtilDom.findRecursiveChild(eventiNode,"eventi").getChildNodes().getLength();    //levare findrecursivechild
-		
-		if (primaModifica) { //implementare un controllo serio
-			Vector listaDegliEventi = UtilDom.getChildElements(eventiNode);
-			for (int j=0; j<idEventiDaTestare.size(); j++)
-				for (int z=0; z<listaDegliEventi.size(); z++)
-					if (((String)idEventiDaTestare.get(j)).equals(UtilDom.getAttributeValueAsString((Node)listaDegliEventi.get(z), "fonte"))) 
-						if ((dataEvento).equals(UtilDom.getAttributeValueAsString((Node)listaDegliEventi.get(z), "data"))) {
-						
-							
-							if (partizioneIndicata==null) {	
-							//per ora mi fermo qui. Ho verificato che esiste già un evento 'identico' nel modificato. Presumo quindi sia già stato modificato.
-							//In realtà dovrei prelevare l'attributo ID. Prendere tutte le partizioni che hanno attributo INIZIOVIGORE=id e/o
-							//FINEVIGORE=id (a seconda del tipo di modifica che voglio apportare), prelevare ID (della partizione/span) e ricercarlo
-							//fra i meta delle disposizioni passive. A questo punto DECIDERE se è stata già applicata oppure no.
-								 
-								//NO. o questo test lo faccio solo sulla prima modifica di ogni norma modificante, o scendo nel testo.
-								
-							try {
-							listModel.setElementAt(((String) listModel.get(getPosLista())) + " --> saltata, gia' applicata", getPosLista());
-							} catch (Exception e) {}
-							correnteEvento++;
-							return true;
-							}
-							
-						}
-		}
-		
-		//creo un frammento con il mod per trasformarlo in HTML
-		Node nodoMod = docAttivo.createElement("NIR");
-		Node nodoModOriginale = UtilDom.getElementsByAttributeValue(docAttivo,docAttivo,"id",idMod)[0];
-		nodoModOriginale = nirUtilDom.getContainer(nodoModOriginale);
-		nodoMod.appendChild(nodoModOriginale.cloneNode(true));
-		
-
-		
-		
-		//MIGLIORARE: se indico una partizione uso quella (ho l'id, quindi la cerco), altrimenti uso cercaPosizione. 
-		Node posizione = null;
-		int start = 0; int end=0;
-		if (partizioneIndicata==null){
-			Node importedNode = docEditor.importNode(nodoMeta,true);
-			posizione = cerca_Rif_e_Bordo(docEditor, importedNode);
-		}
-		else {
-				posizione = partizioneIndicata;
-				start = posizionamentoManuale.getInizioSelezione();
-				end = posizionamentoManuale.getFineSelezione();
-				if (start!=end) 
-					parole=true;
-				else
-					parole=false;
-		}
-		
-		if (posizione!=null) {
-			if (parole && partizioneIndicata==null) {	//cerco parole/capoverso/periodo/alinea/rubrica...
-				if ("parole".equals(tipoModifica)) {	
-					//se è parole, cerco le occorrenze di parole
-					//per ora solo la prima occorrenza della parola (numeroIterazioni=1)
-					 try {
-					 String  parolaDaCercare = UtilDom.getText(virgolettaDaEliminare).trim().toLowerCase();
-					 Node nodoParola = cercaParola(parolaDaCercare, posizione);
-					 if (nodoParola!=null) {
-						 start = UtilDom.getText(nodoParola).toLowerCase().indexOf(parolaDaCercare);
-						 end = start+parolaDaCercare.length();
-						 posizione = nodoParola;
-					 }
-					 else { //non ho trovato le parole cercate, effettuo una selezione casuale
-						 posizione=null;
-					}
+			Node tempNovellando = UtilDom.findRecursiveChild(nodoMeta,"dsp:novellando");
+			if (tempNovellando!=null) {
+				Node temPos = UtilDom.findRecursiveChild(tempNovellando,"dsp:pos");
+				if (temPos!=null) { //xex abrogazione di parole
+					String idVirgoletta = UtilDom.getAttributeValueAsString(temPos,"xlink:href").substring(1);
+					try{
+						virgolettaDaEliminare = UtilDom.getElementsByAttributeValue(docAttivo,docAttivo,"id",idVirgoletta)[0];
 					} catch (Exception e) {
-						posizione=null;
+						System.out.println("Non ho trovato virgoletta puntata " + idVirgoletta + " -- " + e.getMessage());
+						virgolettaDaEliminare = null;
 					}
-				} 
-				else if ("periodo".equals(tipoModifica) || "capoverso".equals(tipoModifica)) {
-					//cerco la posizione del periodo: 'periodoIndividuato'
-					Node nodoParola = cercaParola(periodoIndividuato, posizione);
-					if (nodoParola!=null) {
-						 start = UtilDom.getText(nodoParola).indexOf(periodoIndividuato);
-						 end = start+periodoIndividuato.length();
-						 posizione = nodoParola;
-					}
-					else { //non sono capace di effettuare la selezione (xex selezione a cavallo su + tag), effettuo una selezione casuale
-						posizione=null;
-					}
-					
-				}	
-			}	
-		}
-		if (posizione!=null			//se è null NON PROPONGO LA MODIFICA (faccio vedere in ELSE il testo del MOD)
-				&& (parole || ("atto".equals(tipoModifica) || meta2tag(tipoModifica).equals(posizione.getNodeName())))) {		//stesso se non modifica lo stesso tipo di partizione. 
-
-			scrivi.setEnabled(true);
-			//creo un frammento con il 'nodo', PRIMA dell'applicazione della modifica, per trasformarlo in HTML
-			Node nodoPrima = docEditor.createElement("NIR");
-			nodoPrima.appendChild(posizione.cloneNode(true));
-		
-		
-//-----FASE2 (creo relazione passiva)
-		
-			//nodi di comodo (buttare...migliorare)
-			Node modifica1 = null;
-			Node modifica2 = null;
+				}
+				else  //xex per partizioni
+					virgolettaDaEliminare = null; //la lascio a null, tanto se mi serve, me la calcolo in 'cambia partizione'						
+			}
 			
-			//Da qui effettuo modifiche sul documento. Se non sono confermate vanno poi annullate. !!!!!!!
+			//test per capire se la modifica corrente è stata già applicata
+			//verifico la presenza dell'evento (visto che ci sono mi calcolo anche un nuovo id)
+			Vector idEventiDaTestare = new Vector();
+			Node relazioniNode = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docEditor,null),"relazioni");
+			NodeList relazioniList = relazioniNode.getChildNodes();
+			int maxPassiva=0;
+			for (int i = 0; i < relazioniList.getLength(); i++) {
+				Node relazioneNode = relazioniList.item(i);
+				String nodeName = relazioneNode.getNodeName();
+				String id = UtilDom.getAttributeValueAsString(relazioneNode, "id");
+				if ("passiva".equals(nodeName)) {				
+					Integer idValue = Integer.decode(id.substring(2));
+					if (idValue.intValue() > maxPassiva)
+						maxPassiva = idValue.intValue();
+					if (urnCompletaAttivo.equals(UtilDom.getAttributeValueAsString(relazioneNode, "xlink:href")))
+						idEventiDaTestare.add(id);					
+				}			
+			}
+			if (partizioneIndicata==null || !scrivi.isEnabled())
+				maxPassiva++;
+				
+			//controllo grezzo
+			if (maxPassiva==0)
+				maxPassiva=1;		
+				
+			Node eventiNode = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docEditor,null),"eventi");
+			int maxEventi = 1+UtilDom.findRecursiveChild(eventiNode,"eventi").getChildNodes().getLength();    //levare findrecursivechild
+			
+			if (primaModifica) { //implementare un controllo serio
+				Vector listaDegliEventi = UtilDom.getChildElements(eventiNode);
+				for (int j=0; j<idEventiDaTestare.size(); j++)
+					for (int z=0; z<listaDegliEventi.size(); z++)
+						if (((String)idEventiDaTestare.get(j)).equals(UtilDom.getAttributeValueAsString((Node)listaDegliEventi.get(z), "fonte"))) 
+							if ((dataEvento).equals(UtilDom.getAttributeValueAsString((Node)listaDegliEventi.get(z), "data"))) {
+							
+								
+								if (partizioneIndicata==null) {	
+								//per ora mi fermo qui. Ho verificato che esiste già un evento 'identico' nel modificato. Presumo quindi sia già stato modificato.
+								//In realtà dovrei prelevare l'attributo ID. Prendere tutte le partizioni che hanno attributo INIZIOVIGORE=id e/o
+								//FINEVIGORE=id (a seconda del tipo di modifica che voglio apportare), prelevare ID (della partizione/span) e ricercarlo
+								//fra i meta delle disposizioni passive. A questo punto DECIDERE se è stata già applicata oppure no.
+									 
+									//NO. o questo test lo faccio solo sulla prima modifica di ogni norma modificante, o scendo nel testo.
+									
+								try {
+								listModel.setElementAt(((String) listModel.get(getPosLista())) + " --> saltata, gia' applicata", getPosLista());
+								} catch (Exception e) {}
+								correnteEvento++;
+								return true;
+								}
+								
+							}
+			}
+			
+			//creo un frammento con il mod per trasformarlo in HTML
+			Node nodoMod = docAttivo.createElement("NIR");
+			Node nodoModOriginale = UtilDom.getElementsByAttributeValue(docAttivo,docAttivo,"id",idMod)[0];
+			nodoModOriginale = nirUtilDom.getContainer(nodoModOriginale);
+			nodoMod.appendChild(nodoModOriginale.cloneNode(true));
+			
+	
+			
+			
+			//MIGLIORARE: se indico una partizione uso quella (ho l'id, quindi la cerco), altrimenti uso cercaPosizione. 
+			Node posizione = null;
+			int start = 0; int end=0;
+			if (partizioneIndicata==null){
+				Node importedNode = docEditor.importNode(nodoMeta,true);
+				posizione = cerca_Rif_e_Bordo(docEditor, importedNode);
+			}
+			else {
+					posizione = partizioneIndicata;
+					start = posizionamentoManuale.getInizioSelezione();
+					end = posizionamentoManuale.getFineSelezione();
+					if (start!=end) 
+						parole=true;
+					else
+						parole=false;
+			}
+			
+			if (posizione!=null) {
+				if (parole && partizioneIndicata==null) {	//cerco parole/capoverso/periodo/alinea/rubrica...
+					if ("parole".equals(tipoModifica)) {	
+						//se è parole, cerco le occorrenze di parole
+						//per ora solo la prima occorrenza della parola (numeroIterazioni=1)
+						 try {
+						 String  parolaDaCercare = UtilDom.getText(virgolettaDaEliminare).trim().toLowerCase();
+						 Node nodoParola = cercaParola(parolaDaCercare, posizione);
+						 if (nodoParola!=null) {
+							 start = UtilDom.getText(nodoParola).toLowerCase().indexOf(parolaDaCercare);
+							 end = start+parolaDaCercare.length();
+							 posizione = nodoParola;
+						 }
+						 else { //non ho trovato le parole cercate, effettuo una selezione casuale
+							 posizione=null;
+						}
+						} catch (Exception e) {
+							posizione=null;
+						}
+					} 
+					else if ("periodo".equals(tipoModifica) || "capoverso".equals(tipoModifica)) {
+						//cerco la posizione del periodo: 'periodoIndividuato'
+						Node nodoParola = cercaParola(periodoIndividuato, posizione);
+						if (nodoParola!=null) {
+							 start = UtilDom.getText(nodoParola).indexOf(periodoIndividuato);
+							 end = start+periodoIndividuato.length();
+							 posizione = nodoParola;
+						}
+						else { //non sono capace di effettuare la selezione (xex selezione a cavallo su + tag), effettuo una selezione casuale
+							posizione=null;
+						}
+						
+					}	
+				}	
+			}
+			if (posizione!=null			//se è null NON PROPONGO LA MODIFICA (faccio vedere in ELSE il testo del MOD)
+					&& (parole || ("atto".equals(tipoModifica) || meta2tag(tipoModifica).equals(posizione.getNodeName())))) {		//stesso se non modifica lo stesso tipo di partizione. 
+	
+				scrivi.setEnabled(true);
+				//creo un frammento con il 'nodo', PRIMA dell'applicazione della modifica, per trasformarlo in HTML
+				Node nodoPrima = docEditor.createElement("NIR");
+				nodoPrima.appendChild(posizione.cloneNode(true));
+			
+			
+	//-----FASE2 (creo relazione passiva)
+			
+				//nodi di comodo (buttare...migliorare)
+				Node modifica1 = null;
+				Node modifica2 = null;
+				
+				//Da qui effettuo modifiche sul documento. Se non sono confermate vanno poi annullate. !!!!!!!
+				EditTransaction t = null;
+				try {
+					t = documentManager.beginEdit();
+					documentManager.setChanged(true);
+					
+				if (primaModifica) {	//implementare altro meccanismo				
+					//creo la relazione (passiva)
+					Node nuovo = utilRulesManager.getNodeTemplate("passiva");
+					UtilDom.setAttributeValue(nuovo, "id", "rp"+maxPassiva);
+					UtilDom.setAttributeValue(nuovo, "xlink:href", urnCompletaAttivo);
+					relazioniNode.appendChild(nuovo);
+					//creo l'evento (se non presente)
+				
+					nuovo = utilRulesManager.getNodeTemplate("evento");
+						//cerco le info per l'evento sul documento attivo
+						Node termine = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docAttivo,nodoMeta),"dsp:termine");
+						String idtermine = UtilDom.getAttributeValueAsString(termine, "da");
+						if (idtermine==null)
+							idtermine = UtilDom.getAttributeValueAsString(termine, "a");
+						idtermine=idtermine.substring(1);  //levo la #
+						Node termineAttivo = UtilDom.getElementsByAttributeValue(docAttivo,docAttivo,"id",idtermine)[0];
+						decorrenza = UtilDom.getAttributeValueAsString(termineAttivo, "data");
+					UtilDom.setAttributeValue(nuovo, "data", decorrenza);
+					UtilDom.setAttributeValue(nuovo, "fonte", "rp"+maxPassiva);
+					UtilDom.setAttributeValue(nuovo, "tipo", "modifica");
+					UtilDom.setIdAttribute(nuovo, "t"+maxEventi);
+					eventiNode.appendChild(nuovo);
+					
+					primaModifica = false;
+				}
+			
+	//-----FASE3 (TestoDopo/modifiche sul DOM)
+			
+				String posDisposizione = "#"+UtilDom.getAttributeValueAsString(nirUtilDom.getContainer(nodoModOriginale), "id");
+				String nota;
+				idNovellando = "";
+				idNovella = "";
+				//Aggiorno il Novellando e creo (se necessario [integrazione] [sostituzione]) la novella (per ora vuota)
+				Evento[] eventi = ciclodivita.getEventi();
+				eventovigore = eventi[eventi.length-1];
+				eventovigore.setFonte(new Relazione("", "", urnCompletaAttivo));
+				
+				Node n=null;
+	
+				abragazioneInteraNorma = false;
+				virgolettaModRimodificata = null;
+				String tipoModifica = nodoMeta.getNodeName();
+				if ("dsp:abrogazione".equals(tipoModifica) || "dsp:sostituzione".equals(tipoModifica)) {
+					if (parole) {
+						//n = domDisposizioni.setVigenza(posizione, "", start, end, makeVigenza(posizione,"novellando","abrogato"));
+						n = domDisposizioni.setVigenza(posizione, "", start, end, makeVigenza(posizione,"novellando","abrogato"));
+						end = -1; //devo fare ancora il nuovo span
+					} else {
+						n = domDisposizioni.setVigenza(posizione, posizione.getNodeValue(), start, end, makeVigenza(posizione,"novellando","abrogato"));
+						//dovrebbe accadere solo su Abrogazione di intero atto
+						String correzId = UtilDom.getAttributeValueAsString(n, "id");
+						if (correzId==null) {	
+							String prefisso = n.getLocalName();
+							int occorrenze = documentManager.getDocumentAsDom().getElementsByTagName(prefisso).getLength();
+							UtilDom.setIdAttribute(n, prefisso + occorrenze);
+							correzId = UtilDom.getAttributeValueAsString(n, "id");
+						}
+					}
+					modifica1 = n;
+					idNovellando += UtilDom.getAttributeValueAsString(n, "id");
+					
+					//Un ulteriore controllo. Se ho modificato dentro ad un mod => avverti di possibili modifiche a catena (da gestire manualmente)
+					if (UtilDom.findParentByName(n, "mod")!=null) {
+						virgolettaModRimodificata = UtilDom.findParentByName(n, "virgolette");
+						if (virgolettaModRimodificata==null) //Sto modificando in un mod, ma fuori da una virgoletta => cosa voleva fare il legislatore??
+							virgolettaModRimodificata = UtilDom.findParentByName(n, "mod");
+					}
+					//Un ulteriore controllo. Se ho abrogato un'intera norma devo controllare la presenza di allegati esterni al documento 				
+					if ("dsp:abrogazione".equals(tipoModifica) && "NIR".equals(n.getParentNode().getNodeName()))
+						abragazioneInteraNorma=true;
+					
+				}
+				figliVirgoletta = null;
+				if ("dsp:integrazione".equals(tipoModifica) || "dsp:sostituzione".equals(tipoModifica)) {
+					if (parole) {
+						if (n==null)
+							n = posizione;
+						
+						//n = domDisposizioni.makeSpan(n, -1, makeVigenza(n,"novella","abrogato"),UtilDom.getText(virgolettaDaInserire));
+						n = domDisposizioni.makeSpan(n, end, makeVigenza(n,"novella","abrogato"),UtilDom.getText(virgolettaDaInserire));
+						
+					} else {
+						//NEL CASO DI SOSTITUZIONE, se la partizione da inserire non ha NUM o RUBRICA le recupero da quella uscente (se presenti)
+						if ("dsp:sostituzione".equals(tipoModifica)) {
+							try {
+							Vector figliIntegrati = UtilDom.getChildElements((Node)UtilDom.getChildElements(virgolettaDaInserire).get(0));
+							Vector figliAbrogati = UtilDom.getChildElements(n);
+							String testo = UtilDom.getText((Node) figliIntegrati.get(0));
+							if (testo==null)
+								testo = "";
+							if ("".equals(testo)) {//non specifica il NUM il testo entrante
+								testo = UtilDom.getText((Node) figliAbrogati.get(0));
+								if (testo!=null)
+									UtilDom.setTextNode((Node) figliIntegrati.get(0), testo);
+							}
+							Node rubricaUscente = (Node) figliAbrogati.get(1);
+							if ("rubrica".equals(rubricaUscente.getNodeName())) {	//avevo una rubrica nel testo uscente
+								Node rubricaEntrante = (Node) figliIntegrati.get(1);
+								if (!"rubrica".equals(rubricaEntrante.getNodeName())) { //non sto inserento tutto il tag rubrica
+									rubricaEntrante = utilRulesManager.getNodeTemplate(docAttivo,"rubrica");
+									UtilDom.setTextNode(rubricaEntrante, UtilDom.getText(rubricaUscente));
+									UtilDom.insertAfter(rubricaEntrante, (Node) figliIntegrati.get(0));
+								}
+								else  //sto inserendo un tag rubrica
+									if ("".equals(rubricaEntrante)) //Tag vuoto
+										UtilDom.setTextNode(rubricaEntrante, UtilDom.getText(rubricaUscente));
+							}
+							} catch (Exception e) {}		
+						}
+						figliVirgoletta = UtilDom.getAllChildElements(virgolettaDaInserire);
+						Node importedNode = docEditor.importNode((Node)figliVirgoletta.get(0),true);
+						importedNode = importedNode;
+						n = domDisposizioni.makePartition(posizione, importedNode , makeVigenza(posizione,"novella","abrogato"));
+						try {
+							UtilDom.trimAndMergeTextNodes(n,true);
+						} catch (Exception e) {}
+						
+						//Se ho modificato dentro ad un mod => avverti di possibili modifiche a catena (da gestire manualmente)
+						if (virgolettaModRimodificata==null & UtilDom.findParentByName(n, "mod")!=null) {
+							virgolettaModRimodificata = UtilDom.findParentByName(n, "virgolette");
+							if (virgolettaModRimodificata==null) //Sto modificando in un mod, ma fuori da una virgoletta => cosa voleva fare il legislatore??
+								virgolettaModRimodificata = UtilDom.findParentByName(n, "mod");
+						}
+						
+						
+					}
+					if (modifica1 == null)
+						modifica1 = n;
+					else
+						modifica2 = n;
+					idNovella += UtilDom.getAttributeValueAsString(n, "id");
+				}
+		
+				try {
+					nota = nirUtilUrn.getFormaTestuale(new Urn(urnCompletaAttivo+posDisposizione));
+				} catch (ParseException e) {
+					nota = formatestuale.getText();
+				}
+					
+				nodeNovellando = modifica1;	
+				nodeDisposizione = domDisposizioni.setDOMDisposizioni("#"+partizione, urnCompletaAttivo, urnCompletaAttivo+posDisposizione, "#"+idNovellando, "#"+idNovella, "", nota, "", implicita, eventoriginale, eventovigore);
+				
+				//Se la virgoletta conteneva piï¿½ partizioni (per ora ho inserito solo 1ï¿½figlio di virgoletta) creo automaticamente
+				//delle integrazioni per il 2ï¿½,... eventuale figlio
+				if (figliVirgoletta!=null) {
+					nodiMeta = new Vector();
+					idMeta = new Vector();
+					for (int i=1; i<figliVirgoletta.size(); i++) {
+						//Node nuovaPosizione = posizione.getNextSibling();
+						Node importedNode = docEditor.importNode((Node)figliVirgoletta.get(i),true);
+						importedNode = importedNode;
+						n = domDisposizioni.makePartition(n, importedNode , makeVigenza(n,"novella","abrogato"));
+						UtilDom.trimAndMergeTextNodes(n,true);
+						nodiMeta.add(domDisposizioni.setDOMDisposizioni("#"+partizione, urnCompletaAttivo, urnCompletaAttivo+posDisposizione, "#", "#"+UtilDom.getAttributeValueAsString(n, "id"), "", nota, "", implicita, eventoriginale, eventovigore));
+						idMeta.add(UtilDom.getAttributeValueAsString(n, "id"));
+						nodiTesto.add(n);
+					}
+				}
+				
+				
+				//mi posiziono sul nodo USCITO/ENTRATO
+				selectionManager.setActiveNode(this, modifica1);
+				
+				documentManager.commitEdit(t);
+				
+				} catch (Exception ex) {
+					documentManager.rollbackEdit(t);
+					ex.printStackTrace();
+				} 
+	
+	//-----FASE4 (Creazione frammenti xTab)		
+			
+				//creo un frammento con il 'nodo', DOPO l'applicazione della modifica, per trasformarlo in HTML
+				Node nodoDopo = docEditor.createElement("NIR");
+				nodoDopo.appendChild(modifica1.cloneNode(true));
+				if (modifica2 != null)
+					nodoDopo.appendChild(modifica2.cloneNode(true));
+				
+				//Aggiungo... se la virgoletta conteneva più partizioni
+				if (figliVirgoletta!=null)
+					for (int i=1; i<figliVirgoletta.size(); i++)
+						nodoDopo.appendChild(((Node)nodiTesto.get(i-1)).cloneNode(true));
+						
+				
+				//eseguo le trasf.in Html per farle vedere nei tab della maschera
+				DOMWriter domWriter = new DOMWriter();
+				domWriter.setCanonical(false);
+				domWriter.setFormat(false);
+				try {
+					//domWriter.setOutput(UtilFile.getTempDirName()+ File.separatorChar +"tempMod.xml");
+					domWriter.setOutput(UtilFile.getTempDirName()+ File.separatorChar +"tempMod.xml", getEncoding(docAttivo));
+					domWriter.write(nodoMod);
+					Source xsl = new StreamSource(new FileInputStream(UtilFile.getTempDirName()+ File.separatorChar +"nir-nocss.xsl"));
+					Transformer converti = factory.newTransformer(xsl);
+					converti.setOutputProperty(OutputKeys.ENCODING,documentManager.getEncoding());
+					Source source = new StreamSource(new File(UtilFile.getTempDirName()+ File.separatorChar +"tempMod.xml"));
+					Result dest = new StreamResult(UtilFile.getTempDirName()+ File.separatorChar +"tempHtmlMod.xml");
+					converti.setParameter("datafine", "");
+					converti.transform(source,dest);
+					String html="";
+					FileInputStream fis = new FileInputStream(UtilFile.getTempDirName()+ File.separatorChar +"tempHtmlMod.xml");
+					InputStreamReader isr=new InputStreamReader(fis);
+					BufferedReader bufline=new BufferedReader(isr);
+			    	String str;
+			    	while (null != ((str = bufline.readLine())))
+			    		html = html+str+"\n";	
+			    	bufline.close ();
+			    	testoModifica.setText(html);
+			    	
+			    	domWriter.setOutput(UtilFile.getTempDirName()+ File.separatorChar +"tempPrima.xml", getEncoding(docEditor));
+					domWriter.write(nodoPrima);
+					source = new StreamSource(new File(UtilFile.getTempDirName()+ File.separatorChar +"tempPrima.xml"));
+					dest = new StreamResult(UtilFile.getTempDirName()+ File.separatorChar +"tempHtmlPrima.xml");
+					converti.setParameter("datafine", "");
+					converti.transform(source,dest);
+					html="";
+					fis = new FileInputStream(UtilFile.getTempDirName()+ File.separatorChar +"tempHtmlPrima.xml");
+					isr=new InputStreamReader(fis);
+					bufline=new BufferedReader(isr);
+			    	while (null != ((str = bufline.readLine())))
+			    		html = html+str+"\n";	
+			    	bufline.close ();
+			    	testoOriginale.setText(html);
+			    	
+			    	domWriter.setOutput(UtilFile.getTempDirName()+ File.separatorChar +"tempDopo.xml", getEncoding(docEditor));
+					domWriter.write(nodoDopo);
+					source = new StreamSource(new File(UtilFile.getTempDirName()+ File.separatorChar +"tempDopo.xml"));
+					dest = new StreamResult(UtilFile.getTempDirName()+ File.separatorChar +"tempHtmlDopo.xml");
+					converti.setParameter("datafine", "");
+					converti.transform(source,dest);
+					html="";
+					fis = new FileInputStream(UtilFile.getTempDirName()+ File.separatorChar +"tempHtmlDopo.xml");
+					isr=new InputStreamReader(fis);
+					bufline=new BufferedReader(isr);
+			    	while (null != ((str = bufline.readLine())))
+			    		html = html+str+"\n";	
+			    	bufline.close ();
+			    	testoModificato.setText(html);
+				} catch (Exception ex) {
+					logger.error(ex.toString(), ex);
+				}
+			}
+			else { //solo il testo del MOD
+				scrivi.setEnabled(false);
+				DOMWriter domWriter = new DOMWriter();
+				domWriter.setCanonical(false);
+				domWriter.setFormat(false);
+				try {
+					domWriter.setOutput(UtilFile.getTempDirName()+ File.separatorChar +"tempMod.xml", getEncoding(docAttivo));
+					domWriter.write(nodoMod);
+					Source xsl = new StreamSource(new FileInputStream(UtilFile.getTempDirName()+ File.separatorChar +"nir-nocss.xsl"));
+					Transformer converti = factory.newTransformer(xsl);
+					converti.setOutputProperty(OutputKeys.ENCODING,documentManager.getEncoding());
+					Source source = new StreamSource(new File(UtilFile.getTempDirName()+ File.separatorChar +"tempMod.xml"));
+					Result dest = new StreamResult(UtilFile.getTempDirName()+ File.separatorChar +"tempHtmlMod.xml");
+					converti.setParameter("datafine", "");
+					converti.transform(source,dest);
+					String html="";
+					FileInputStream fis = new FileInputStream(UtilFile.getTempDirName()+ File.separatorChar +"tempHtmlMod.xml");
+					InputStreamReader isr=new InputStreamReader(fis);
+					BufferedReader bufline=new BufferedReader(isr);
+			    	String str;
+			    	while (null != ((str = bufline.readLine())))
+			    		html = html+str+"\n";	
+			    	bufline.close ();
+			    	testoModifica.setText(html);
+			    	testoModificato.setText("");
+			    	testoOriginale.setText("");
+				} catch (Exception ex) {
+					logger.error(ex.toString(), ex);
+				}
+			}
+			form.setDialogWaiting(false);
+			
+		}
+		else  {	//se arrivo qui sto facendo una modifiche diverse da abrogazione/sostituzione/integrazione.
+			
 			EditTransaction t = null;
 			try {
 				t = documentManager.beginEdit();
 				documentManager.setChanged(true);
 				
-			if (primaModifica) {	//implementare altro meccanismo				
-				//creo la relazione (passiva)
+				//Creo l'evento passivo
+				int max=0;
+				Node relazioniNode = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docEditor,null),"relazioni");
+				Node eventiNode = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docEditor,null),"eventi");
+				NodeList relazioniList = relazioniNode.getChildNodes();
+				for (int i = 0; i < relazioniList.getLength(); i++) {
+					Node relazioneNode = relazioniList.item(i);
+					if ("passiva".equals(relazioneNode.getNodeName())) {
+						String id = UtilDom.getAttributeValueAsString(relazioneNode, "id");
+						Integer idValue = Integer.decode(id.substring(2));
+						if (idValue.intValue() > max)
+							max = idValue.intValue();
+					}
+				}
+				max++;
 				Node nuovo = utilRulesManager.getNodeTemplate("passiva");
-				UtilDom.setAttributeValue(nuovo, "id", "rp"+maxPassiva);
+				UtilDom.setAttributeValue(nuovo, "id", "rp"+max);
 				UtilDom.setAttributeValue(nuovo, "xlink:href", urnCompletaAttivo);
 				relazioniNode.appendChild(nuovo);
-				//creo l'evento (se non presente)
-			
-				nuovo = utilRulesManager.getNodeTemplate("evento"); 
+				nuovo = utilRulesManager.getNodeTemplate("evento");
+				
 					//cerco le info per l'evento sul documento attivo
-					Node termine = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docAttivo,nodoMeta),"dsp:termine");
+					Node termine = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docAttivo,(Node)disposizioniDaConvertire.get(correnteEvento)),"dsp:termine");
 					String idtermine = UtilDom.getAttributeValueAsString(termine, "da");
 					if (idtermine==null)
 						idtermine = UtilDom.getAttributeValueAsString(termine, "a");
 					idtermine=idtermine.substring(1);  //levo la #
 					Node termineAttivo = UtilDom.getElementsByAttributeValue(docAttivo,docAttivo,"id",idtermine)[0];
 					decorrenza = UtilDom.getAttributeValueAsString(termineAttivo, "data");
+							
 				UtilDom.setAttributeValue(nuovo, "data", decorrenza);
-				UtilDom.setAttributeValue(nuovo, "fonte", "rp"+maxPassiva);
+				UtilDom.setAttributeValue(nuovo, "fonte", "rp"+max);
 				UtilDom.setAttributeValue(nuovo, "tipo", "modifica");
-				UtilDom.setIdAttribute(nuovo, "t"+maxEventi);
+				String idEvento="t"+(1+UtilDom.findRecursiveChild(eventiNode,"eventi").getChildNodes().getLength());
+				UtilDom.setIdAttribute(nuovo, idEvento);
 				eventiNode.appendChild(nuovo);
 				
-				primaModifica = false;
-			}
-		
-//-----FASE3 (TestoDopo/modifiche sul DOM)
-		
-			String posDisposizione = "#"+UtilDom.getAttributeValueAsString(nirUtilDom.getContainer(nodoModOriginale), "id");
-			String nota;
-			idNovellando = "";
-			idNovella = "";
-			//Aggiorno il Novellando e creo (se necessario [integrazione] [sostituzione]) la novella (per ora vuota)
-			Evento[] eventi = ciclodivita.getEventi();
-			eventovigore = eventi[eventi.length-1];
-			eventovigore.setFonte(new Relazione("", "", urnCompletaAttivo));
-			
-			Node n=null;
-
-			abragazioneInteraNorma = false;
-			virgolettaModRimodificata = null;
-			String tipoModifica = nodoMeta.getNodeName();
-			if ("dsp:abrogazione".equals(tipoModifica) || "dsp:sostituzione".equals(tipoModifica)) {
-				if (parole) {
-					//n = domDisposizioni.setVigenza(posizione, "", start, end, makeVigenza(posizione,"novellando","abrogato"));
-					n = domDisposizioni.setVigenza(posizione, "", start, end, makeVigenza(posizione,"novellando","abrogato"));
-					end = -1; //devo fare ancora il nuovo span
-				} else {
-					n = domDisposizioni.setVigenza(posizione, posizione.getNodeValue(), start, end, makeVigenza(posizione,"novellando","abrogato"));
-					//dovrebbe accadere solo su Abrogazione di intero atto
-					String correzId = UtilDom.getAttributeValueAsString(n, "id");
-					if (correzId==null) {	
-						String prefisso = n.getLocalName();
-						int occorrenze = documentManager.getDocumentAsDom().getElementsByTagName(prefisso).getLength();
-						UtilDom.setIdAttribute(n, prefisso + occorrenze);
-						correzId = UtilDom.getAttributeValueAsString(n, "id");
-					}
-				}
-				modifica1 = n;
-				idNovellando += UtilDom.getAttributeValueAsString(n, "id");
+				//Scrivo i meta (da attivi a) passivi
+				Node disposiz = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docEditor,null),"disposizioni");
+				Node modPas = UtilDom.findRecursiveChild(disposiz,"modifichepassive");
+				if (modPas==null) {
+					modPas = UtilDom.checkAndCreate(disposiz, "modifichepassive");
+					disposiz.appendChild(modPas);
+				}			
+				Node nuovoMeta = docEditor.importNode((Node)disposizioniDaConvertire.get(correnteEvento),true); 
+				Node pos = UtilDom.findRecursiveChild(nuovoMeta,"dsp:pos");
+				String partizMod = UtilDom.getAttributeValueAsString(pos,"xlink:href");  //qui trovo #modX - lo metto come partizione della urn di modifica
+				nuovoMeta.removeChild(pos);
+				Node temp = UtilDom.findRecursiveChild(nuovoMeta,"dsp:termine");
+				UtilDom.setAttributeValue(temp, "da", "#"+idEvento);
+				temp = UtilDom.findRecursiveChild(nuovoMeta,"dsp:norma");
+				UtilDom.setAttributeValue(temp, "xlink:href", urnCompletaAttivo);
+				temp = UtilDom.findRecursiveChild(temp,"dsp:pos");
+				UtilDom.setAttributeValue(temp, "xlink:href", urnCompletaAttivo+partizMod);	//partizMod ha già la #
+				UtilDom.removeEmptyText(nuovoMeta);
+				modPas.appendChild(nuovoMeta);
 				
-				//Un ulteriore controllo. Se ho modificato dentro ad un mod => avverti di possibili modifiche a catena (da gestire manualmente)
-				if (UtilDom.findParentByName(n, "mod")!=null) {
-					virgolettaModRimodificata = UtilDom.findParentByName(n, "virgolette");
-					if (virgolettaModRimodificata==null) //Sto modificando in un mod, ma fuori da una virgoletta => cosa voleva fare il legislatore??
-						virgolettaModRimodificata = UtilDom.findParentByName(n, "mod");
-				}
-				//Un ulteriore controllo. Se ho abrogato un'intera norma devo controllare la presenza di allegati esterni al documento 				
-				if ("dsp:abrogazione".equals(tipoModifica) && "NIR".equals(n.getParentNode().getNodeName()))
-					abragazioneInteraNorma=true;
+				domDisposizioni.setUrn("t1", urnCompletaAttivo, idEvento);
 				
-			}
-			figliVirgoletta = null;
-			if ("dsp:integrazione".equals(tipoModifica) || "dsp:sostituzione".equals(tipoModifica)) {
-				if (parole) {
-					if (n==null)
-						n = posizione;
-					
-					//n = domDisposizioni.makeSpan(n, -1, makeVigenza(n,"novella","abrogato"),UtilDom.getText(virgolettaDaInserire));
-					n = domDisposizioni.makeSpan(n, end, makeVigenza(n,"novella","abrogato"),UtilDom.getText(virgolettaDaInserire));
-					
-				} else {
-					//NEL CASO DI SOSTITUZIONE, se la partizione da inserire non ha NUM o RUBRICA le recupero da quella uscente (se presenti)
-					if ("dsp:sostituzione".equals(tipoModifica)) {
-						try {
-						Vector figliIntegrati = UtilDom.getChildElements((Node)UtilDom.getChildElements(virgolettaDaInserire).get(0));
-						Vector figliAbrogati = UtilDom.getChildElements(n);
-						String testo = UtilDom.getText((Node) figliIntegrati.get(0));
-						if (testo==null)
-							testo = "";
-						if ("".equals(testo)) {//non specifica il NUM il testo entrante
-							testo = UtilDom.getText((Node) figliAbrogati.get(0));
-							if (testo!=null)
-								UtilDom.setTextNode((Node) figliIntegrati.get(0), testo);
-						}
-						Node rubricaUscente = (Node) figliAbrogati.get(1);
-						if ("rubrica".equals(rubricaUscente.getNodeName())) {	//avevo una rubrica nel testo uscente
-							Node rubricaEntrante = (Node) figliIntegrati.get(1);
-							if (!"rubrica".equals(rubricaEntrante.getNodeName())) { //non sto inserento tutto il tag rubrica
-								rubricaEntrante = utilRulesManager.getNodeTemplate(docAttivo,"rubrica");
-								UtilDom.setTextNode(rubricaEntrante, UtilDom.getText(rubricaUscente));
-								UtilDom.insertAfter(rubricaEntrante, (Node) figliIntegrati.get(0));
-							}
-							else  //sto inserendo un tag rubrica
-								if ("".equals(rubricaEntrante)) //Tag vuoto
-									UtilDom.setTextNode(rubricaEntrante, UtilDom.getText(rubricaUscente));
-						}
-						} catch (Exception e) {}		
-					}
-					figliVirgoletta = UtilDom.getAllChildElements(virgolettaDaInserire);
-					Node importedNode = docEditor.importNode((Node)figliVirgoletta.get(0),true);
-					importedNode = importedNode;
-					n = domDisposizioni.makePartition(posizione, importedNode , makeVigenza(posizione,"novella","abrogato"));
-					try {
-						UtilDom.trimAndMergeTextNodes(n,true);
-					} catch (Exception e) {}
-					
-					//Se ho modificato dentro ad un mod => avverti di possibili modifiche a catena (da gestire manualmente)
-					if (virgolettaModRimodificata==null & UtilDom.findParentByName(n, "mod")!=null) {
-						virgolettaModRimodificata = UtilDom.findParentByName(n, "virgolette");
-						if (virgolettaModRimodificata==null) //Sto modificando in un mod, ma fuori da una virgoletta => cosa voleva fare il legislatore??
-							virgolettaModRimodificata = UtilDom.findParentByName(n, "mod");
-					}
-					
-					
-				}
-				if (modifica1 == null)
-					modifica1 = n;
-				else
-					modifica2 = n;
-				idNovella += UtilDom.getAttributeValueAsString(n, "id");
-			}
-	
-			try {
-				nota = nirUtilUrn.getFormaTestuale(new Urn(urnCompletaAttivo+posDisposizione));
-			} catch (ParseException e) {
-				nota = formatestuale.getText();
-			}
+				try {
+					listModel.setElementAt(((String) listModel.get(getPosLista())) + " --> applicata", getPosLista());
+				} catch (Exception ex) {}
 				
-			nodeNovellando = modifica1;	
-			nodeDisposizione = domDisposizioni.setDOMDisposizioni("#"+partizione, urnCompletaAttivo, urnCompletaAttivo+posDisposizione, "#"+idNovellando, "#"+idNovella, "", nota, "", implicita, eventoriginale, eventovigore);
-			
-			//Se la virgoletta conteneva piï¿½ partizioni (per ora ho inserito solo 1ï¿½figlio di virgoletta) creo automaticamente
-			//delle integrazioni per il 2ï¿½,... eventuale figlio
-			if (figliVirgoletta!=null) {
-				nodiMeta = new Vector();
-				idMeta = new Vector();
-				for (int i=1; i<figliVirgoletta.size(); i++) {
-					//Node nuovaPosizione = posizione.getNextSibling();
-					Node importedNode = docEditor.importNode((Node)figliVirgoletta.get(i),true);
-					importedNode = importedNode;
-					n = domDisposizioni.makePartition(n, importedNode , makeVigenza(n,"novella","abrogato"));
-					UtilDom.trimAndMergeTextNodes(n,true);
-					nodiMeta.add(domDisposizioni.setDOMDisposizioni("#"+partizione, urnCompletaAttivo, urnCompletaAttivo+posDisposizione, "#", "#"+UtilDom.getAttributeValueAsString(n, "id"), "", nota, "", implicita, eventoriginale, eventovigore));
-					idMeta.add(UtilDom.getAttributeValueAsString(n, "id"));
-					nodiTesto.add(n);
-				}
-			}
-			
-			
-			//mi posiziono sul nodo USCITO/ENTRATO
-			selectionManager.setActiveNode(this, modifica1);
-			
-			documentManager.commitEdit(t);
+				documentManager.commitEdit(t);
 			
 			} catch (Exception ex) {
 				documentManager.rollbackEdit(t);
 				ex.printStackTrace();
-			} 
-
-//-----FASE4 (Creazione frammenti xTab)		
+			}
+			correnteEvento++;
+			settaTasti(false,false,true);
+			while (proponiModificaTesto(null));
+		}
 		
-			//creo un frammento con il 'nodo', DOPO l'applicazione della modifica, per trasformarlo in HTML
-			Node nodoDopo = docEditor.createElement("NIR");
-			nodoDopo.appendChild(modifica1.cloneNode(true));
-			if (modifica2 != null)
-				nodoDopo.appendChild(modifica2.cloneNode(true));
-			
-			//Aggiungo... se la virgoletta conteneva più partizioni
-			if (figliVirgoletta!=null)
-				for (int i=1; i<figliVirgoletta.size(); i++)
-					nodoDopo.appendChild(((Node)nodiTesto.get(i-1)).cloneNode(true));
-					
-			
-			//eseguo le trasf.in Html per farle vedere nei tab della maschera
-			DOMWriter domWriter = new DOMWriter();
-			domWriter.setCanonical(false);
-			domWriter.setFormat(false);
-			try {
-				//domWriter.setOutput(UtilFile.getTempDirName()+ File.separatorChar +"tempMod.xml");
-				domWriter.setOutput(UtilFile.getTempDirName()+ File.separatorChar +"tempMod.xml", getEncoding(docAttivo));
-				domWriter.write(nodoMod);
-				Source xsl = new StreamSource(new FileInputStream(UtilFile.getTempDirName()+ File.separatorChar +"nir-nocss.xsl"));
-				Transformer converti = factory.newTransformer(xsl);
-				converti.setOutputProperty(OutputKeys.ENCODING,documentManager.getEncoding());
-				Source source = new StreamSource(new File(UtilFile.getTempDirName()+ File.separatorChar +"tempMod.xml"));
-				Result dest = new StreamResult(UtilFile.getTempDirName()+ File.separatorChar +"tempHtmlMod.xml");
-				converti.setParameter("datafine", "");
-				converti.transform(source,dest);
-				String html="";
-				FileInputStream fis = new FileInputStream(UtilFile.getTempDirName()+ File.separatorChar +"tempHtmlMod.xml");
-				InputStreamReader isr=new InputStreamReader(fis);
-				BufferedReader bufline=new BufferedReader(isr);
-		    	String str;
-		    	while (null != ((str = bufline.readLine())))
-		    		html = html+str+"\n";	
-		    	bufline.close ();
-		    	testoModifica.setText(html);
-		    	
-		    	domWriter.setOutput(UtilFile.getTempDirName()+ File.separatorChar +"tempPrima.xml", getEncoding(docEditor));
-				domWriter.write(nodoPrima);
-				source = new StreamSource(new File(UtilFile.getTempDirName()+ File.separatorChar +"tempPrima.xml"));
-				dest = new StreamResult(UtilFile.getTempDirName()+ File.separatorChar +"tempHtmlPrima.xml");
-				converti.setParameter("datafine", "");
-				converti.transform(source,dest);
-				html="";
-				fis = new FileInputStream(UtilFile.getTempDirName()+ File.separatorChar +"tempHtmlPrima.xml");
-				isr=new InputStreamReader(fis);
-				bufline=new BufferedReader(isr);
-		    	while (null != ((str = bufline.readLine())))
-		    		html = html+str+"\n";	
-		    	bufline.close ();
-		    	testoOriginale.setText(html);
-		    	
-		    	domWriter.setOutput(UtilFile.getTempDirName()+ File.separatorChar +"tempDopo.xml", getEncoding(docEditor));
-				domWriter.write(nodoDopo);
-				source = new StreamSource(new File(UtilFile.getTempDirName()+ File.separatorChar +"tempDopo.xml"));
-				dest = new StreamResult(UtilFile.getTempDirName()+ File.separatorChar +"tempHtmlDopo.xml");
-				converti.setParameter("datafine", "");
-				converti.transform(source,dest);
-				html="";
-				fis = new FileInputStream(UtilFile.getTempDirName()+ File.separatorChar +"tempHtmlDopo.xml");
-				isr=new InputStreamReader(fis);
-				bufline=new BufferedReader(isr);
-		    	while (null != ((str = bufline.readLine())))
-		    		html = html+str+"\n";	
-		    	bufline.close ();
-		    	testoModificato.setText(html);
-			} catch (Exception ex) {
-				logger.error(ex.toString(), ex);
-			}
-		}
-		else { //solo il testo del MOD
-			scrivi.setEnabled(false);
-			DOMWriter domWriter = new DOMWriter();
-			domWriter.setCanonical(false);
-			domWriter.setFormat(false);
-			try {
-				domWriter.setOutput(UtilFile.getTempDirName()+ File.separatorChar +"tempMod.xml", getEncoding(docAttivo));
-				domWriter.write(nodoMod);
-				Source xsl = new StreamSource(new FileInputStream(UtilFile.getTempDirName()+ File.separatorChar +"nir-nocss.xsl"));
-				Transformer converti = factory.newTransformer(xsl);
-				converti.setOutputProperty(OutputKeys.ENCODING,documentManager.getEncoding());
-				Source source = new StreamSource(new File(UtilFile.getTempDirName()+ File.separatorChar +"tempMod.xml"));
-				Result dest = new StreamResult(UtilFile.getTempDirName()+ File.separatorChar +"tempHtmlMod.xml");
-				converti.setParameter("datafine", "");
-				converti.transform(source,dest);
-				String html="";
-				FileInputStream fis = new FileInputStream(UtilFile.getTempDirName()+ File.separatorChar +"tempHtmlMod.xml");
-				InputStreamReader isr=new InputStreamReader(fis);
-				BufferedReader bufline=new BufferedReader(isr);
-		    	String str;
-		    	while (null != ((str = bufline.readLine())))
-		    		html = html+str+"\n";	
-		    	bufline.close ();
-		    	testoModifica.setText(html);
-		    	testoModificato.setText("");
-		    	testoOriginale.setText("");
-			} catch (Exception ex) {
-				logger.error(ex.toString(), ex);
-			}
-		}
-		form.setDialogWaiting(false);
 		} catch (Exception e) {
 			System.out.println("Eccez. non gestita: " + e.getMessage());
 			e.printStackTrace();

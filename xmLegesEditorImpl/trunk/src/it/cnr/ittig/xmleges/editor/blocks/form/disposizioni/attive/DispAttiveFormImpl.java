@@ -20,6 +20,7 @@ import it.cnr.ittig.xmleges.editor.services.dom.disposizioni.Disposizioni;
 import it.cnr.ittig.xmleges.editor.services.form.disposizioni.attive.DecorrenzaForm;
 import it.cnr.ittig.xmleges.editor.services.form.disposizioni.attive.DelimitatoreForm;
 import it.cnr.ittig.xmleges.editor.services.form.disposizioni.attive.DispAttiveForm;
+import it.cnr.ittig.xmleges.editor.services.form.disposizioni.attive.DispNonTestualiForm;
 import it.cnr.ittig.xmleges.editor.services.form.disposizioni.attive.NovellaForm;
 import it.cnr.ittig.xmleges.editor.services.form.disposizioni.attive.NovellandoForm;
 import it.cnr.ittig.xmleges.editor.services.form.disposizioni.attive.RiferimentoForm;
@@ -97,6 +98,7 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 	JButton abrogazione;
 	JButton sostituzione;
 	JButton integrazione;
+	JButton nontestuale;
 	JButton eliminaMetadati;
 	JRadioButton interoAtto;
 	JRadioButton soloPartizione;
@@ -109,6 +111,7 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 	DelimitatoreForm delimitatoreForm;
 	NovellandoForm novellandoForm;
 	NovellaForm novellaForm;
+	DispNonTestualiForm dispNonTestualiForm;
 
 	Node activeNode;	
 	Node modNode;
@@ -147,6 +150,7 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 		delimitatoreForm = (DelimitatoreForm) serviceManager.lookup(DelimitatoreForm.class);
 		novellandoForm = (NovellandoForm) serviceManager.lookup(NovellandoForm.class);
 		novellaForm = (NovellaForm) serviceManager.lookup(NovellaForm.class);
+		dispNonTestualiForm = (DispNonTestualiForm) serviceManager.lookup(DispNonTestualiForm.class);
 		domDisposizioni  = (Disposizioni) serviceManager.lookup(Disposizioni.class);
 	}
 
@@ -178,7 +182,7 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 		abrogazione = (JButton) form.getComponentByName("editor.disposizioni.attive.abrogazione");
 		sostituzione = (JButton) form.getComponentByName("editor.disposizioni.attive.sostituzione");
 		integrazione = (JButton) form.getComponentByName("editor.disposizioni.attive.integrazione");
-		
+		nontestuale = (JButton) form.getComponentByName("editor.disposizioni.attive.nontestuale");
 		implicita = (JCheckBox) form.getComponentByName("editor.disposizioni.attive.implicita");
 
 		interoAtto = (JRadioButton) form.getComponentByName("editor.disposizioni.attive.sceltainteroatto");
@@ -191,6 +195,7 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 		abrogazione.addActionListener(this);
 		sostituzione.addActionListener(this);
 		integrazione.addActionListener(this);
+		nontestuale.addActionListener(this);
 		sceltaDecorrenza.addActionListener(this);
 		sceltaAtto.addActionListener(this);
 		sceltaPartizione.addActionListener(this);
@@ -248,7 +253,7 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 			}
 		}	
 		
-		if (e.getSource() == abrogazione || e.getSource() == sostituzione || e.getSource() == integrazione) {
+		if (e.getSource() == abrogazione || e.getSource() == sostituzione || e.getSource() == integrazione || e.getSource() == nontestuale) {
 			// verifiche per proseguire con la seconda maschera
 			if ("".equals(decorrenza.getText().trim()))
 				utilmsg.msgInfo("editor.disposizioni.attive.nodecorrenza");
@@ -278,8 +283,15 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 					form.close();
 					novellaForm.openForm(this,modificoMetaEsistenti);
 				}
+				if (e.getSource() == nontestuale) {
+					operazioneIniziale = NONTESTUALE;
+					operazioneCorrente = NONTESTUALE;
+					operazioneProssima = NONTESTUALE;
+					form.close();
+					dispNonTestualiForm.openForm(this,modificoMetaEsistenti);
+				}
 			}
-		}
+		}			
 	}
 
 	public Node getModCorrente() {
@@ -327,7 +339,7 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 		activeNode = null;
 		operazioneIniziale = NO_OPERAZIONE;
 		operazioneProssima = NO_OPERAZIONE;
-		form.setSize(420, 440);
+		form.setSize(480, 440);
 		form.showDialog(false);
 	}
 		
@@ -449,8 +461,7 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 	
 	
 	public void setMeta() {
-			
-		
+				
 		EditTransaction t = null;
 		try {
 			t = documentManager.beginEdit();	
@@ -470,38 +481,42 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 					if ("capoverso".equals(bordi[i]))
 						completa="no";	
 			}
-			
-			Node nuovoMeta = domDisposizioni.setDOMDispAttive(implicita.isSelected(), modificoMetaEsistenti, modCorrente, operazioneIniziale, completa, decorrenzaForm.isDecorrenzaCondizionata(), termine, idevento, atto.getText(), partizione.getText(), delimitatoreForm.getDelimitatore());
+	
+			Node nuovoMeta = domDisposizioni.setDOMDispAttive(implicita.isSelected(), modificoMetaEsistenti, modCorrente, operazioneIniziale, completa, decorrenzaForm.isDecorrenzaCondizionata(), termine, idevento, atto.getText(), partizione.getText(), delimitatoreForm.getDelimitatore(), dispNonTestualiForm.getDSP());
 			
 			String tipoNovella = null;
-			if (operazioneIniziale!=ABROGAZIONE)
-				tipoNovella = novellaForm.setMeta(nuovoMeta);
-			if (operazioneIniziale!=INTEGRAZIONE) {
-				String tipo = null;
-				if (tipoNovella!=null)					
-					tipo = tipoNovella;
-				else if (interoAtto.isSelected())
-					tipo = "atto";
-				else {
-					tipo = partizione.getText();
-					if (listModel.getSize()>0) 
-						tipo = delimitatoreForm.getDelimitatore()[delimitatoreForm.getDelimitatore().length-3];
+			if (operazioneIniziale==NONTESTUALE) {
+				dispNonTestualiForm.setMeta(nuovoMeta);
+			} else {
+				if (operazioneIniziale!=ABROGAZIONE)
+					tipoNovella = novellaForm.setMeta(nuovoMeta);
+				if (operazioneIniziale!=INTEGRAZIONE) {
+					String tipo = null;
+					if (tipoNovella!=null)					
+						tipo = tipoNovella;
+					else if (interoAtto.isSelected())
+						tipo = "atto";
 					else {
-						String[] scelteTipo = new String[] {"allegato","libro","parte","titolo","capo","sezione","articolo","comma","lettera","numero","punto","periodo","parole"};
-						//cerco l'ultimo pezzo dell'id
-						int pos = tipo.lastIndexOf("-");
-						if (pos!=-1)
-							tipo = tipo.substring(pos+1);
-						if (tipo.length()>3)
-							tipo = tipo.substring(0, 3);
-						for (int i=0; i<scelteTipo.length; i++)
-							if (tipo.equals(scelteTipo[i].substring(0, 3))) {
-								tipo = scelteTipo[i];
-								break;
-							}
+						tipo = partizione.getText();
+						if (listModel.getSize()>0) 
+							tipo = delimitatoreForm.getDelimitatore()[delimitatoreForm.getDelimitatore().length-3];
+						else {
+							String[] scelteTipo = new String[] {"allegato","libro","parte","titolo","capo","sezione","articolo","comma","lettera","numero","punto","periodo","parole"};
+							//cerco l'ultimo pezzo dell'id
+							int pos = tipo.lastIndexOf("-");
+							if (pos!=-1)
+								tipo = tipo.substring(pos+1);
+							if (tipo.length()>3)
+								tipo = tipo.substring(0, 3);
+							for (int i=0; i<scelteTipo.length; i++)
+								if (tipo.equals(scelteTipo[i].substring(0, 3))) {
+									tipo = scelteTipo[i];
+									break;
+								}
+						}
 					}
+					novellandoForm.setMeta(nuovoMeta, tipo);
 				}
-				novellandoForm.setMeta(nuovoMeta, tipo);
 			}
 			documentManager.commitEdit(t);
 		} catch (Exception ex) {
@@ -517,7 +532,7 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 	public void formClosed() {
 
 		if (!listenerFormClosed)
-			return;					//sto aprendo maschere diverse da Novella/Novellando
+			return;					//sto aprendo maschere diverse da Novella/Novellando/NonTestuale
 		
 		if (operazioneCorrente==operazioneProssima) {	//Ho scelto Indietro o chiuso con X
 			if (operazioneProssima == NOVELLA) {
@@ -527,6 +542,8 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 					operazioneProssima = INIZIO;
 				
 			} else if (operazioneProssima == NOVELLANDO) {
+				operazioneProssima = INIZIO;
+			} else if (operazioneProssima == NONTESTUALE) {
 				operazioneProssima = INIZIO;
 			}
 		}
