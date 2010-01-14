@@ -661,7 +661,11 @@ public class ConnectActionImpl implements ConnectAction, EventManagerListener, L
 			File file=new File(UtilFile.getTempDirName()+ File.separatorChar +fileName);
 
 			logger.debug("Read: " + httpURL.getScheme()+"//"+httpURL.getHost()+":"+httpURL.getPort()+webdavResource.getPath()+"/"+fileName);
+			try {
 			webdavResource.lockMethod(webdavResource.getPath()+"/"+fileName, password.getText(), LockMethod.DEPTH_INFINITY, LockMethod.SCOPE_EXCLUSIVE);			
+			} catch (Exception nl) {
+				logger.debug("Non riesco a fare lock di: " + httpURL.getScheme()+"//"+httpURL.getHost()+":"+httpURL.getPort()+webdavResource.getPath()+"/"+fileName);
+			}
 			
 			if (!webdavResource.getMethod(webdavResource.getPath()+"/"+fileName, file))
 				utilMsg.msgError(webdavResource.getStatusCode() + ": " + webdavResource.getStatusMessage());				
