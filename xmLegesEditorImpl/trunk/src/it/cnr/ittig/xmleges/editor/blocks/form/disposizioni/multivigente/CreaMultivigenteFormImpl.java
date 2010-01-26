@@ -146,6 +146,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 	String urnCompletaAttivo;
 	String urnDocumento;
 	Vector dateEventi;
+	Vector idEventi;
 	Vector disposizioniDaConvertire;
 	int correnteEvento;
 	
@@ -387,6 +388,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				errore.setText(" ");
 				//azzero array e liste
 				dateEventi = new Vector();
+				idEventi = new Vector();
 				disposizioniDaConvertire = new Vector();
 				correnteEvento = 0;
 				listModel.clear();
@@ -405,34 +407,45 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 								String tempData = UtilDom.getAttributeValueAsString(eventiAttivi[j], "data");
 								if (dataEvento.equals(tempData)) {
 									String tempId = "#"+UtilDom.getAttributeValueAsString(eventiAttivi[j], "id");
-									//dateEventi.add(tempData);   lo sposto sotto !!!!
+									idEventi.add(tempId);
+									dateEventi.add(tempData);
 									//colleziono anche i nodi delle disposizioni interessate
 									for (int k=0; k<dspTermine.length; k++)
 										if (tempId.equals(UtilDom.getAttributeValueAsString(dspTermine[k], "da"))) {
 											Node daAggiungere = dspTermine[k].getParentNode();
-											disposizioniDaConvertire.add(daAggiungere);
-											dateEventi.add(tempData);
+											//li ordino
+											boolean inserito = false;
+											String nMod = UtilDom.getAttributeValueAsString((Node)UtilDom.getChildElements(daAggiungere).get(0), "xlink:href");
+											if (nMod!=null)
+												for (int z=0; z<disposizioniDaConvertire.size(); z++) {
+													String temp = UtilDom.getAttributeValueAsString((Node)(UtilDom.getChildElements((Node)disposizioniDaConvertire.get(z))).get(0), "xlink:href");
+													if (temp==null || nMod.compareTo(temp)<0) {
+														disposizioniDaConvertire.add(z, daAggiungere);
+														inserito = true;
+														break;
+													}
+												}
+											if (!inserito)
+												disposizioniDaConvertire.add(daAggiungere);
 										}
+									//popolo la finestra delle informazioni
+									for (int k=0; k<disposizioniDaConvertire.size(); k++) {
+										String tempPart = UtilDom.getAttributeValueAsString(UtilDom.findRecursiveChild(UtilDom.findRecursiveChild((Node)disposizioniDaConvertire.get(k),"dsp:norma"),"dsp:pos"),"xlink:href");
+										if (tempPart.indexOf("#")==-1)
+											tempPart = "intero atto";
+										else	
+											tempPart = tempPart.substring(tempPart.indexOf("#")+1, tempPart.length());
+										String tipo = ((Node)disposizioniDaConvertire.get(k)).getNodeName();
+										tipo = tipo.substring(tipo.indexOf(":")+1, tipo.length()).toUpperCase();
+										listModel.addElement(tipo + " in data " + UtilDate.normToString(tempData) + " di " + tempPart);
+									}
 								}
 								break;
 							}
 					}
 				}
-
-				//popolo la finestra delle informazioni
-				for (int k=0; k<disposizioniDaConvertire.size(); k++) {
-					String tempPart = UtilDom.getAttributeValueAsString(UtilDom.findRecursiveChild(UtilDom.findRecursiveChild((Node)disposizioniDaConvertire.get(k),"dsp:norma"),"dsp:pos"),"xlink:href");
-					if (tempPart.indexOf("#")==-1)
-						tempPart = "intero atto";
-					else	
-						tempPart = tempPart.substring(tempPart.indexOf("#")+1, tempPart.length());
-					String tipo = ((Node)disposizioniDaConvertire.get(k)).getNodeName();
-					tipo = tipo.substring(tipo.indexOf(":")+1, tipo.length()).toUpperCase();
-					listModel.addElement(tipo + " in data " + UtilDate.normToString((String)dateEventi.get(k)) + " di " + tempPart);
-				}
-				
-				if (dateEventi.size()==0)	//il file aperto non contiene nessun evento di modifica (non dovrebbe mai succedere)
-					errore.setText("Nessun metadato di modifica");
+				if (idEventi.size()==0)	//il file aperto non contiene nessun evento di modifica (non dovrebbe mai succedere)
+					errore.setText("Nessun evento trovato");
 				else {
 					settaTasti(false,false,true);
 					primaModifica=true;		//cambiare --- implementare la funzione di check sulle modifiche
