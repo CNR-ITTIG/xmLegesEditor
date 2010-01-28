@@ -796,7 +796,8 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				
 					nuovo = utilRulesManager.getNodeTemplate("evento");
 						//cerco le info per l'evento sul documento attivo
-						Node termine = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docAttivo,nodoMeta),"dsp:termine");
+						Node termine = UtilDom.findRecursiveChild(nodoMeta,"dsp:termine");
+						
 						String idtermine = UtilDom.getAttributeValueAsString(termine, "da");
 						if (idtermine==null)
 							idtermine = UtilDom.getAttributeValueAsString(termine, "a");
