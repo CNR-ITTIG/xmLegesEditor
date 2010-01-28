@@ -433,7 +433,7 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 		return null;
 	}
 	
-	private String trovaEvento(Node nodoAttivo) {
+	private String trovaEvento(Node nodoAttivo, String dataModifica) {
 		String data = UtilDate.dateToNorm(UtilDate.textualFormatToDate(decorrenza.getText()));
 		
 		Document doc = documentManager.getDocumentAsDom();
@@ -446,14 +446,12 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 			Node relazioneNode = relazioniList.item(i);
 			if ("attiva".equals(relazioneNode.getNodeName()))
 				if (atto.getText().equals(UtilDom.getAttributeValueAsString(relazioneNode, "xlink:href"))) {
-					
-					//manca ancora test su data !!!!!!!!!!!!!!!
-					
 					String id = UtilDom.getAttributeValueAsString(relazioneNode, "id");
 					for (int j = 0; j < eventiList.getLength(); j++)
 						if (id.equals(UtilDom.getAttributeValueAsString(eventiList.item(j), "fonte")))
-							//return UtilDate.normToString(UtilDom.getAttributeValueAsString(eventiList.item(j), "data"));
-							return UtilDom.getAttributeValueAsString(eventiList.item(j), "id");
+							if (dataModifica.equals(UtilDom.getAttributeValueAsString(eventiList.item(j), "data")))
+								//return UtilDate.normToString(UtilDom.getAttributeValueAsString(eventiList.item(j), "data"));
+								return UtilDom.getAttributeValueAsString(eventiList.item(j), "id");
 				}
 		}
 		return null;	//evento non trovato
@@ -470,7 +468,7 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 			String termine = decorrenza.getText();
 			String idevento=null;
 			if (!decorrenzaForm.isDecorrenzaCondizionata()) 	//voglio l'id dell'evento con data 'termine'.
-				idevento = trovaEvento(selectionManager.getActiveNode()); 										
+				idevento = trovaEvento(selectionManager.getActiveNode(),termine); 										
 			
 			String completa = "si"; 
 			if (decorrenzaForm.isDecorrenzaCondizionata())
