@@ -398,13 +398,14 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				Node[] relazioniAttive = UtilDom.getElementsByTagName(docAttivo,docAttivo,"attiva");
 				Node[] eventiAttivi = UtilDom.getElementsByTagName(docAttivo,docAttivo,"evento");
 				Node[] dspTermine = UtilDom.getElementsByTagName(docAttivo,docAttivo,"dsp:termine");
+				String tempData = "";
 				for (int i=0; i<relazioniAttive.length; i++) {
 					String urnPuntata = getSimpleUrn(UtilDom.getAttributeValueAsString(relazioniAttive[i], "xlink:href"));
 					if (urnDocumento.equals(urnPuntata)) {
 						String idRelazione = UtilDom.getAttributeValueAsString(relazioniAttive[i], "id");
 						for (int j=0; j<eventiAttivi.length; j++)
 							if (idRelazione.equals(UtilDom.getAttributeValueAsString(eventiAttivi[j], "fonte"))) {
-								String tempData = UtilDom.getAttributeValueAsString(eventiAttivi[j], "data");
+								tempData = UtilDom.getAttributeValueAsString(eventiAttivi[j], "data");
 								if (dataEvento.equals(tempData)) {
 									String tempId = "#"+UtilDom.getAttributeValueAsString(eventiAttivi[j], "id");
 									idEventi.add(tempId);
@@ -428,22 +429,23 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 											if (!inserito)
 												disposizioniDaConvertire.add(daAggiungere);
 										}
-									//popolo la finestra delle informazioni
-									for (int k=0; k<disposizioniDaConvertire.size(); k++) {
-										String tempPart = UtilDom.getAttributeValueAsString(UtilDom.findRecursiveChild(UtilDom.findRecursiveChild((Node)disposizioniDaConvertire.get(k),"dsp:norma"),"dsp:pos"),"xlink:href");
-										if (tempPart.indexOf("#")==-1)
-											tempPart = "intero atto";
-										else	
-											tempPart = tempPart.substring(tempPart.indexOf("#")+1, tempPart.length());
-										String tipo = ((Node)disposizioniDaConvertire.get(k)).getNodeName();
-										tipo = tipo.substring(tipo.indexOf(":")+1, tipo.length()).toUpperCase();
-										listModel.addElement(tipo + " in data " + UtilDate.normToString(tempData) + " di " + tempPart);
-									}
 								}
 								break;
 							}
 					}
 				}
+				//popolo la finestra delle informazioni
+				for (int k=0; k<disposizioniDaConvertire.size(); k++) {
+					String tempPart = UtilDom.getAttributeValueAsString(UtilDom.findRecursiveChild(UtilDom.findRecursiveChild((Node)disposizioniDaConvertire.get(k),"dsp:norma"),"dsp:pos"),"xlink:href");
+					if (tempPart.indexOf("#")==-1)
+						tempPart = "intero atto";
+					else	
+						tempPart = tempPart.substring(tempPart.indexOf("#")+1, tempPart.length());
+					String tipo = ((Node)disposizioniDaConvertire.get(k)).getNodeName();
+					tipo = tipo.substring(tipo.indexOf(":")+1, tipo.length()).toUpperCase();
+					listModel.addElement(tipo + " in data " + UtilDate.normToString(tempData) + " di " + tempPart);
+				}
+				
 				if (idEventi.size()==0)	//il file aperto non contiene nessun evento di modifica (non dovrebbe mai succedere)
 					errore.setText("Nessun evento trovato");
 				else {
