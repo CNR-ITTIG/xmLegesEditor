@@ -29,6 +29,7 @@ import javax.swing.AbstractAction;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class SourceEditActionImpl implements SourceEditAction, EventManagerListener, Loggable, Serviceable, Initializable {
 
@@ -94,6 +95,16 @@ public class SourceEditActionImpl implements SourceEditAction, EventManagerListe
 	}
 	
 	
+	private Node getRootElement(Document doc) {
+		NodeList nl = doc.getChildNodes();
+		for (int i = 0; i < nl.getLength(); i++)
+			if (nl.item(i).getNodeType() == Node.ELEMENT_NODE)
+				return nl.item(i);
+		return null;
+	}
+	
+	
+	
 	protected class EditXMLAction extends AbstractAction {
 
 		public void actionPerformed(ActionEvent arg0) {
@@ -111,51 +122,47 @@ public class SourceEditActionImpl implements SourceEditAction, EventManagerListe
 				Document doc = documentManager.getDocumentAsDom(); 
 				
 				if(sourcePanelForm.openForm()){
-					
-					Node newNode = UtilXml.textToXML(sourcePanelForm.getSourceText(),doc);
-					UtilDom.replace(oldNode, newNode);
-					UtilFile.copyFileInTemp(new ByteArrayInputStream(UtilDom.domToString(documentManager.getDocumentAsDom(), true, "    ").getBytes()), "temp.xml");
-					documentManager.getDocFromText(UtilDom.domToString(documentManager.getDocumentAsDom(), true, "    "));
-					if(documentManager.hasErrors()){
-						if(utilMsg.msgWarning("Documento non valido. Sovrascrivere comunque?")){
-							documentManager.openSource(UtilFile.getFileFromTemp("temp.xml").getPath(),true);
-							return;
-						}
-						else{
-							UtilDom.replace(newNode, oldNode);
-							return;
-						}
-					}
-					documentManager.openSource(UtilFile.getFileFromTemp("temp.xml").getPath(),true);	
-
-				}
-			}
-		}
-
-		private void doEditXML2() {
-			if (!documentManager.isEmpty()){
-
-				String text = UtilDom.domToString(documentManager.getDocumentAsDom(), true, "    ");
-				text = text.replaceAll("\r", "");
-				sourcePanelForm.setSourceText(text);
 				
-				if(sourcePanelForm.openForm()){
 					
-					UtilFile.copyFileInTemp(new ByteArrayInputStream(sourcePanelForm.getSourceText().getBytes()), "temp.xml");
-					documentManager.getDocFromText(sourcePanelForm.getSourceText());
-					if(documentManager.hasErrors()){
-						if(utilMsg.msgWarning("Documento non valido. Sovrascrivere comunque?")){
-							documentManager.openSource(UtilFile.getFileFromTemp("temp.xml").getPath(),true);
-							return;
+						
+					if(oldNode.equals(getRootElement(doc))){ //  SONO SULLA ROOT
+						UtilFile.copyFileInTemp(new ByteArrayInputStream(sourcePanelForm.getSourceText().getBytes()), "temp.xml");
+						documentManager.getDocFromText(sourcePanelForm.getSourceText());
+						if(documentManager.hasErrors()){
+							if(utilMsg.msgWarning("Documento non valido. Sovrascrivere comunque?")){
+								documentManager.openSource(UtilFile.getFileFromTemp("temp.xml").getPath(),true);
+								return;
+							}
+							else{
+								return;
+							}
 						}
-						else
-							return;
+						documentManager.openSource(UtilFile.getFileFromTemp("temp.xml").getPath(),true);	
+					}else{	
+						Node newNode = UtilXml.textToXML(sourcePanelForm.getSourceText(),doc);
+						UtilDom.replace(oldNode, newNode);
+						UtilFile.copyFileInTemp(new ByteArrayInputStream(UtilDom.domToString(documentManager.getDocumentAsDom(), true, "    ").getBytes()), "temp.xml");
+						documentManager.getDocFromText(UtilDom.domToString(documentManager.getDocumentAsDom(), true, "    "));
+						if(documentManager.hasErrors()){
+							if(utilMsg.msgWarning("Documento non valido. Sovrascrivere comunque?")){
+								documentManager.openSource(UtilFile.getFileFromTemp("temp.xml").getPath(),true);
+								return;
+							}
+							else{
+								UtilDom.replace(newNode, oldNode);
+								return;
+							}
+						}
+						documentManager.openSource(UtilFile.getFileFromTemp("temp.xml").getPath(),true);	
 					}
-					documentManager.openSource(UtilFile.getFileFromTemp("temp.xml").getPath(),true);	
-
+					
+					
+					
 				}
 			}
 		}
+
+	
 
 		
 	}
