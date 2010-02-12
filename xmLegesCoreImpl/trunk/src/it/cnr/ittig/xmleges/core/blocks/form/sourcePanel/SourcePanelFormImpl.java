@@ -36,7 +36,7 @@ public class SourcePanelFormImpl implements SourcePanelForm, Loggable,Serviceabl
 	
 		
 	public boolean openForm() {
-		form.setSize(900, 900);
+		form.setSize(900, 700);
 		form.showDialog();
 		return form.isOk();
 
@@ -77,6 +77,7 @@ public class SourcePanelFormImpl implements SourcePanelForm, Loggable,Serviceabl
 		subpanel.add(textPane, BorderLayout.CENTER);
 		
 		JScrollPane scroll = new JScrollPane(subpanel);
+		
 		
 		panel.add(scroll, BorderLayout.CENTER);
 
