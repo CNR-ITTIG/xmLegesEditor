@@ -291,4 +291,11 @@ public interface DocumentManager extends Service {
 	 * @param action azione da rimuovere
 	 */
 	public void removeBeforeInitUndoAction(DocumentBeforeInitUndoAction action);
+	
+	/**
+	 * Restituisce un documento a partire dal testo sorgente
+	 * @param sourceText
+	 * @return
+	 */
+	public Document getDocFromText(String sourceText);
 }

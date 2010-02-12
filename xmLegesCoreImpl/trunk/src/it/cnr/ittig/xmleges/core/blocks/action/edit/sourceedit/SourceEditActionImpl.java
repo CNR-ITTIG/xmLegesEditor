@@ -19,6 +19,7 @@ import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
+import it.cnr.ittig.xmleges.core.util.xml.UtilXml;
 
 import java.awt.event.ActionEvent;
 import java.io.ByteArrayInputStream;
@@ -26,6 +27,7 @@ import java.util.EventObject;
 
 import javax.swing.AbstractAction;
 
+import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 public class SourceEditActionImpl implements SourceEditAction, EventManagerListener, Loggable, Serviceable, Initializable {
@@ -39,7 +41,7 @@ public class SourceEditActionImpl implements SourceEditAction, EventManagerListe
 	SelectionManager selectionManager;
 	
 	DocumentManager documentManager;
-	
+		
 	SourcePanelForm sourcePanelForm;
 
 	EditXMLAction editXMLAction;
@@ -101,27 +103,60 @@ public class SourceEditActionImpl implements SourceEditAction, EventManagerListe
 		private void doEditXML() {
 			if (!documentManager.isEmpty()){
 
+//				String text = UtilDom.domToString(documentManager.getDocumentAsDom(), true, "    ");
+				Node oldNode = selectionManager.getActiveNode();
+				String text = UtilDom.domToString(oldNode, true, "    ");
+				text = text.replaceAll("\r", "");
+				sourcePanelForm.setSourceText(text);
+				Document doc = documentManager.getDocumentAsDom(); 
+				
+				if(sourcePanelForm.openForm()){
+					
+					Node newNode = UtilXml.textToXML(sourcePanelForm.getSourceText(),doc);
+					UtilDom.replace(oldNode, newNode);
+					UtilFile.copyFileInTemp(new ByteArrayInputStream(UtilDom.domToString(documentManager.getDocumentAsDom(), true, "    ").getBytes()), "temp.xml");
+					documentManager.getDocFromText(UtilDom.domToString(documentManager.getDocumentAsDom(), true, "    "));
+					if(documentManager.hasErrors()){
+						if(utilMsg.msgWarning("Documento non valido. Sovrascrivere comunque?")){
+							documentManager.openSource(UtilFile.getFileFromTemp("temp.xml").getPath(),true);
+							return;
+						}
+						else{
+							UtilDom.replace(newNode, oldNode);
+							return;
+						}
+					}
+					documentManager.openSource(UtilFile.getFileFromTemp("temp.xml").getPath(),true);	
+
+				}
+			}
+		}
+
+		private void doEditXML2() {
+			if (!documentManager.isEmpty()){
+
 				String text = UtilDom.domToString(documentManager.getDocumentAsDom(), true, "    ");
 				text = text.replaceAll("\r", "");
 				sourcePanelForm.setSourceText(text);
 				
 				if(sourcePanelForm.openForm()){
-/*					UtilFile.copyFileInTemp(new ByteArrayInputStream(sourcePanelForm.getSourceText().getBytes()), "temp.xml");
+					
+					UtilFile.copyFileInTemp(new ByteArrayInputStream(sourcePanelForm.getSourceText().getBytes()), "temp.xml");
 					documentManager.getDocFromText(sourcePanelForm.getSourceText());
 					if(documentManager.hasErrors()){
 						if(utilMsg.msgWarning("Documento non valido. Sovrascrivere comunque?")){
-							documentManager.openSource(sourcePanelForm.getSourceText(),true);
+							documentManager.openSource(UtilFile.getFileFromTemp("temp.xml").getPath(),true);
 							return;
 						}
 						else
 							return;
 					}
-					documentManager.openSource(sourcePanelForm.getSourceText(),true);	
-*/
+					documentManager.openSource(UtilFile.getFileFromTemp("temp.xml").getPath(),true);	
+
 				}
 			}
 		}
-		
+
 		
 	}
 	

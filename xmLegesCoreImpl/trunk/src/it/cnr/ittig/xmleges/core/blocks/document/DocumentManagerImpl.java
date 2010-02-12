@@ -27,7 +27,9 @@ import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.core.util.domwriter.DOMWriter;
 import it.cnr.ittig.xmleges.core.util.xml.UtilXml;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.Vector;
 
@@ -519,6 +521,26 @@ public class DocumentManagerImpl implements DocumentManager, EventListener, Logg
 			
 			rulesManager.createRulesManager(getGrammarExtension(doc));
 			rulesManager.loadRules(filename, getGrammarPath(doc));
+			
+			logger.info("Reading rules OK");
+		}
+		logger.info("Reading file Ok");
+		return doc;
+	}
+	
+	public Document getDocFromText(String sourceText) {
+		errors.clear();
+		Document doc = UtilXml.readXML(new ByteArrayInputStream(sourceText.getBytes()),true,this,true);
+		if (doc == null) {
+			logger.info("Reading file KO");
+			// return null;
+		} else {
+			UtilDom.trimTextNode(doc, true);
+			logger.info("Reading rules from DTDs...");
+			//System.err.println("----------> GRAMMAR PATH:   "+getGrammarPath(doc));
+			
+			rulesManager.createRulesManager(getGrammarExtension(doc));
+			rulesManager.loadRules("temp.xml", getGrammarPath(doc));
 			
 			logger.info("Reading rules OK");
 		}
