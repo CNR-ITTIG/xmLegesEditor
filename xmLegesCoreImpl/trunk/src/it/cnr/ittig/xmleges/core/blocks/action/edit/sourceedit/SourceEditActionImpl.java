@@ -17,9 +17,11 @@ import it.cnr.ittig.xmleges.core.services.form.sourcePanel.SourcePanelForm;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionChangedEvent;
 import it.cnr.ittig.xmleges.core.services.selection.SelectionManager;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
+import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
 import it.cnr.ittig.xmleges.core.util.xml.UtilXml;
+
 
 import java.awt.event.ActionEvent;
 import java.io.ByteArrayInputStream;
@@ -42,9 +44,11 @@ public class SourceEditActionImpl implements SourceEditAction, EventManagerListe
 	SelectionManager selectionManager;
 	
 	DocumentManager documentManager;
+	
+	UtilRulesManager utilRulesManager;
 		
 	SourcePanelForm sourcePanelForm;
-
+	
 	EditXMLAction editXMLAction;
 	
 	UtilMsg utilMsg;
@@ -57,6 +61,7 @@ public class SourceEditActionImpl implements SourceEditAction, EventManagerListe
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
+		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
 		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
 	}
 
@@ -111,58 +116,96 @@ public class SourceEditActionImpl implements SourceEditAction, EventManagerListe
 			doEditXML();	
 		}
 
+//		private void doEditXML2() {
+//			if (!documentManager.isEmpty()){
+//
+//				String text = UtilDom.domToString(documentManager.getDocumentAsDom(), true, "    ", true, false);//UtilDom.domToString(documentManager.getDocumentAsDom(), true, "    ");
+//				text = text.replaceAll("\r", "");
+//				sourcePanelForm.setSourceText(text);
+//				
+//				if(sourcePanelForm.openForm()){
+//					//in temp c'è quello nuovo
+//					UtilFile.copyFileInTemp(new ByteArrayInputStream(sourcePanelForm.getSourceText().getBytes()), "temp.xml");
+//					documentManager.getDocFromText(sourcePanelForm.getSourceText());
+//					if(documentManager.hasErrors()){
+//						if(utilMsg.msgWarning("Documento non valido. Sovrascrivere comunque?")){
+//							documentManager.openSource(UtilFile.getFileFromTemp("temp.xml").getPath(),true);
+//							return;
+//						}
+//						else
+//							return;
+//					}
+//					documentManager.openSource(UtilFile.getFileFromTemp("temp.xml").getPath(),true);	
+//
+//				}
+//			}
+//		}
 		private void doEditXML() {
+			
 			if (!documentManager.isEmpty()){
-
-//				String text = UtilDom.domToString(documentManager.getDocumentAsDom(), true, "    ");
+			
 				Node oldNode = selectionManager.getActiveNode();
-				String text = UtilDom.domToString(oldNode, true, "    ");
+				Document doc = documentManager.getDocumentAsDom();
+				Node currentNode = ( ((oldNode==null) || (oldNode.equals(getRootElement(doc))))? doc: oldNode);
+				String text = UtilDom.domToString(currentNode, true, "    ", true, false);
 				text = text.replaceAll("\r", "");
 				sourcePanelForm.setSourceText(text);
-				Document doc = documentManager.getDocumentAsDom(); 
-				
+							
 				if(sourcePanelForm.openForm()){
-				
-					
-						
-					if(oldNode.equals(getRootElement(doc))){ //  SONO SULLA ROOT
+					if(currentNode.equals(doc)){  //  SONO SULLA ROOT						
 						UtilFile.copyFileInTemp(new ByteArrayInputStream(sourcePanelForm.getSourceText().getBytes()), "temp.xml");
+						
 						documentManager.getDocFromText(sourcePanelForm.getSourceText());
 						if(documentManager.hasErrors()){
 							if(utilMsg.msgWarning("Documento non valido. Sovrascrivere comunque?")){
 								documentManager.openSource(UtilFile.getFileFromTemp("temp.xml").getPath(),true);
 								return;
 							}
-							else{
+							else
 								return;
-							}
 						}
-						documentManager.openSource(UtilFile.getFileFromTemp("temp.xml").getPath(),true);	
-					}else{	
-						Node newNode = UtilXml.textToXML(sourcePanelForm.getSourceText(),doc);
-						UtilDom.replace(oldNode, newNode);
-						UtilFile.copyFileInTemp(new ByteArrayInputStream(UtilDom.domToString(documentManager.getDocumentAsDom(), true, "    ").getBytes()), "temp.xml");
-						documentManager.getDocFromText(UtilDom.domToString(documentManager.getDocumentAsDom(), true, "    "));
+						documentManager.openSource(UtilFile.getFileFromTemp("temp.xml").getPath(),true);
+					}
+					else{ //sono su un nodo generico
+						String nameSpaceDecl = utilRulesManager.getNameSpaceDecl();
+						String toParse = "<?xml version=\"1.0\" encoding=\""+documentManager.getEncoding()+"\"?>"+ 
+						"<ris "+nameSpaceDecl+">" + sourcePanelForm.getSourceText().trim() + "</ris>";
+	
+						Node newNode = UtilXml.textToXML(toParse, doc).getFirstChild();
+						if(newNode==null){
+							utilMsg.msgWarning("Documento non valido");
+							return;
+						}
+						UtilDom.trimTextNode(newNode, true);
+						UtilDom.replace(currentNode, newNode);
+						//	UtilFile.copyFileInTemp(new ByteArrayInputStream(UtilDom.domToString(documentManager.getDocumentAsDom(), true, "    ", true, false).getBytes()), "temp.xml");
+						documentManager.getDocFromText(UtilDom.domToString(documentManager.getDocumentAsDom(), true, "    ", true, false));
 						if(documentManager.hasErrors()){
 							if(utilMsg.msgWarning("Documento non valido. Sovrascrivere comunque?")){
-								documentManager.openSource(UtilFile.getFileFromTemp("temp.xml").getPath(),true);
+								//	documentManager.openSource(UtilFile.getFileFromTemp("temp.xml").getPath(),true);
 								return;
 							}
 							else{
 								UtilDom.replace(newNode, oldNode);
+								UtilFile.copyFileInTemp(new ByteArrayInputStream(UtilDom.domToString(documentManager.getDocumentAsDom(), true, "    ", true, false).getBytes()), "temp.xml");
+								documentManager.openSource(UtilFile.getFileFromTemp("temp.xml").getPath(),true);
 								return;
 							}
 						}
-						documentManager.openSource(UtilFile.getFileFromTemp("temp.xml").getPath(),true);	
+						//documentManager.openSource(UtilFile.getFileFromTemp("temp.xml").getPath(),true);
 					}
-					
-					
-					
 				}
+				
 			}
+			// problemi aperti:
+//								se scarto il cambiamento non fa il refresh del pannello errori
+//								il semaforo resta sempre verde anche con errori di validazione
+//								non gestisce errori sintattici
+			
 		}
-
 	
+
+		
 
 		
 	}
