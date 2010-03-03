@@ -333,11 +333,15 @@ public class NewRinviiFormImpl implements NewRinviiForm, Loggable, Serviceable, 
 								// radice
 								// "es
 								// prt-2"
+								try {
 								if (sottopart1[k + 1].substring(0, 3).compareTo(sottopart2[k + 1].substring(0, 3)) == 0) {
 									mRifDescription.add(",");
 									mRifDescription.add(sottopart2[k + 1].substring(3, sottopart2[k + 1].length()));
 									Partizioni.set(j, null);
 									break;
+								}
+								} catch (Exception e) {
+									// TODO: arriva qui ad esempio con rif multimo: URN#allegato-a, URN#allegato-b
 								}
 							}
 					}
