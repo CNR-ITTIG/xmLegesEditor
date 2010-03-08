@@ -341,6 +341,7 @@ public class NewRinviiFormImpl implements NewRinviiForm, Loggable, Serviceable, 
 									break;
 								}
 								} catch (Exception e) {
+									logger.error(e.getMessage());
 									// TODO: arriva qui ad esempio con rif multimo: URN#allegato-a, URN#allegato-b
 								}
 							}
