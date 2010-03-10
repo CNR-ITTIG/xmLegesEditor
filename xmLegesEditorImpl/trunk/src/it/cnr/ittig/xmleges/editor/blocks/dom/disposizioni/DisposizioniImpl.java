@@ -105,16 +105,21 @@ public class DisposizioniImpl implements Disposizioni, Loggable, Serviceable {
 	public boolean setUrn(String idOriginale, String urnVigore, String idVigore) {	
 		Document doc = documentManager.getDocumentAsDom();
 		Node activeMeta = nirUtilDom.findActiveMeta(doc,null);
+		Node ciclodivitaNode = UtilDom.findRecursiveChild(activeMeta,"ciclodivita");
+		String urnOriginale = UtilDom.getAttributeValueAsString(UtilDom.getElementsByTagName(doc, ciclodivitaNode, "originale")[0],"xlink:href");
+		
 		Node descrittoriNode = UtilDom.findRecursiveChild(activeMeta,"descrittori");
-		Node[] urnNode = UtilDom.getElementsByTagName(doc, descrittoriNode, "urn");
-		String urnOriginale = "";
+		Node[] urnNode = UtilDom.getElementsByTagAndAttributeStartsWith(doc, descrittoriNode, "urn", "valore", urnOriginale);
+		
+		//String urnOriginale = "";
 		String versione = "@";
-		if (urnNode.length>0) {
+		for (int i=0; i<urnNode.length; i++) {
 			//controllo la urn originale
-			urnOriginale = UtilDom.getAttributeValueAsString(urnNode[0], "valore");
+			//urnOriginale = UtilDom.getAttributeValueAsString(urnNode[i], "valore");
 			//Se non è ancora settato inizio vigore lo imposto all'evento originale
-			if (UtilDom.getAttributeValueAsString(urnNode[0], "iniziovigore")==null)
-				UtilDom.setAttributeValue(urnNode[0], "iniziovigore", idOriginale);
+			if (UtilDom.getAttributeValueAsString(urnNode[i], "iniziovigore")==null)
+				UtilDom.setAttributeValue(urnNode[i], "iniziovigore", idOriginale);
+			break;
 		}
 		try {
 			versione += urnVigore.split(":")[4];
