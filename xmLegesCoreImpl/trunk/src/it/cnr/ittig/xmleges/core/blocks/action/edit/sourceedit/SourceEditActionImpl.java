@@ -159,7 +159,7 @@ public class SourceEditActionImpl implements SourceEditAction, EventManagerListe
 
 						Node newNode = UtilXml.textToXML(toParse, doc);
 						if(newNode==null){
-							utilMsg.msgError("Documento non valido - SYNTAX ERROR");
+							utilMsg.msgError("Documento malformato");
 							//doEditXML();
 							return;
 						}
