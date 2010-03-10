@@ -1212,5 +1212,73 @@ public class UtilDom {
 		return  ret;
 	}
 	
+    /**
+	 * 
+	 * @param doc
+	 * @param fromHere
+	 * @param tagAttribute
+	 * @param attributeValue
+	 * @return
+	 */
+    public static Node[] getElementsByTagAndAttributeValue(Document doc, Node fromHere, String tagName, String tagAttribute, String attributeValue){
 		
+    	
+		NodeIterator nI = ((DocumentTraversal)doc).createNodeIterator(fromHere,NodeFilter.SHOW_ELEMENT,null,false);	
+		Vector v = new Vector();
+	  
+		Node node;
+
+		if (attributeValue==null) {	//restituisco tutti i nodi che hanno l'attributo
+			while ((node = nI.nextNode()) != null ) {
+				if(node.getNodeType()==Node.ELEMENT_NODE && node.getNodeName().equals(tagName) && getAttributeValueAsString(node, tagAttribute)!=null)					
+				  v.add(node);
+		    }			
+		}
+		else { //restituisco tutti i nodi che hanno l'attributo di valore 'attributeValue'
+			while ((node = nI.nextNode()) != null ) {
+				if(node.getNodeType()==Node.ELEMENT_NODE && node.getNodeName().equals(tagName) && attributeValue.equals(getAttributeValueAsString(node, tagAttribute)))					
+				  v.add(node);
+		    }
+		}
+		Node[] ret = new Node[v.size()];
+		for(int i=0; i<v.size();i++)
+			ret[i]=(Node)v.get(i);
+		return  ret;
+	}
+    
+    /**
+	 * 
+	 * @param doc
+	 * @param fromHere
+	 * @param tagAttribute
+	 * @param attributeValue
+	 * @return
+	 */
+    public static Node[] getElementsByTagAndAttributeStartsWith(Document doc, Node fromHere, String tagName, String tagAttribute, String attributeStartsWith){
+		
+    	
+		NodeIterator nI = ((DocumentTraversal)doc).createNodeIterator(fromHere,NodeFilter.SHOW_ELEMENT,null,false);	
+		Vector v = new Vector();
+	  
+		Node node;
+
+		if (attributeStartsWith==null) {	//restituisco tutti i nodi che hanno l'attributo
+			while ((node = nI.nextNode()) != null ) {
+				if(node.getNodeType()==Node.ELEMENT_NODE && node.getNodeName().equals(tagName) && getAttributeValueAsString(node, tagAttribute)!=null)					
+				  v.add(node);
+		    }			
+		}
+		else { //restituisco tutti i nodi che hanno l'attributo che inizia per 'attributeStartsWith'
+			while ((node = nI.nextNode()) != null ) {
+				String att = getAttributeValueAsString(node, tagAttribute);
+				if (att!=null)
+				if(node.getNodeType()==Node.ELEMENT_NODE && node.getNodeName().equals(tagName) && att.startsWith(attributeStartsWith))					
+				  v.add(node);
+		    }
+		}
+		Node[] ret = new Node[v.size()];
+		for(int i=0; i<v.size();i++)
+			ret[i]=(Node)v.get(i);
+		return  ret;
+	}
 }
