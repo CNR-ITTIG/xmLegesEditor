@@ -13,9 +13,15 @@ import it.cnr.ittig.xmleges.core.services.form.sourcePanel.SourcePanelForm;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
+import javax.swing.text.DefaultEditorKit;
 
 import org.bounce.text.xml.XMLEditorKit;
 import org.bounce.text.xml.XMLFoldingMargin;
@@ -33,6 +39,17 @@ public class SourcePanelFormImpl implements SourcePanelForm, Loggable,Serviceabl
 	// pannello per la gestione
 	SourceTextPane textPane = new SourceTextPane(true);
 	
+	
+	JPopupMenu popupMenu;
+	
+	MouseAdapter mouseAdapter = new MouseAdapter() {
+		public void mousePressed(MouseEvent e) {}
+		public void mouseReleased(MouseEvent e) {}
+		public void mouseClicked(MouseEvent e) {
+			if (e.getButton() == MouseEvent.BUTTON3)
+				popupMenu.show(e.getComponent(), e.getX(), e.getY());
+		}
+	};
 	
 		
 	public boolean openForm() {
@@ -60,7 +77,24 @@ public class SourcePanelFormImpl implements SourcePanelForm, Loggable,Serviceabl
 		form.setSize(850, 300);
 		form.setDialogResizable(true);
 						
-		textPane.setEditable(true);		       
+		textPane.setEditable(true);
+		
+		
+		popupMenu = new JPopupMenu();
+		JMenuItem menuItem = new JMenuItem(new DefaultEditorKit.CutAction());
+        menuItem.setText("Cut");
+        menuItem.setMnemonic(KeyEvent.VK_T);
+        popupMenu.add(menuItem);
+        menuItem = new JMenuItem(new DefaultEditorKit.CopyAction());
+        menuItem.setText("Copy");
+        menuItem.setMnemonic(KeyEvent.VK_C);
+        popupMenu.add(menuItem);
+        menuItem = new JMenuItem(new DefaultEditorKit.PasteAction());
+        menuItem.setText("Paste");
+        menuItem.setMnemonic(KeyEvent.VK_P);
+        popupMenu.add(menuItem);
+		textPane.addMouseListener(mouseAdapter);
+        
 		XMLEditorKit kit = new XMLEditorKit();
 		textPane.setEditorKit(kit);
 		 // Enable auto indentation.
