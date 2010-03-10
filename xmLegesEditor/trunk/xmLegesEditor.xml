@@ -474,6 +474,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 <item action="edit.paste" />
                 <item action="edit.pastetext" />
                 <item action="edit.delete" />
+                <item action="edit.editXML" />
                 <separator/>
                 <item action="edit.find" />
                 <item action="edit.findnext" />
