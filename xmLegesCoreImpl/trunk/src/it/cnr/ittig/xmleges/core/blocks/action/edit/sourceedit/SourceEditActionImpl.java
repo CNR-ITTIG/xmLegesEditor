@@ -129,28 +129,38 @@ public class SourceEditActionImpl implements SourceEditAction, EventManagerListe
 				sourcePanelForm.setSourceText(text);
 
 				if(sourcePanelForm.openForm()){
-					if(currentNode.equals(doc)){  //  SONO SULLA ROOT						
-						UtilFile.copyFileInTemp(new ByteArrayInputStream(sourcePanelForm.getSourceText().getBytes()), "temp.xml");
-
-						Document newDoc = documentManager.getDocFromText(sourcePanelForm.getSourceText());
+					
+					// SONO SULLA ROOT [INTERO DOCUMENTO]	
+					if(currentNode.equals(doc)){  
+						
+						UtilFile.copyFileInTemp(new ByteArrayInputStream(sourcePanelForm.getSourceText().getBytes()), "edit.xml");
+						// edit.xml è il documento che sto editando
+						Document newDoc = documentManager.open(UtilFile.getFileFromTemp("edit.xml").getPath());
+						// qui non assegna il doc al documentManager; l'unico motivo per parsare il testo da documentManager 
+						// e' per fargli gestire il pannello degli errori; il documento viene assegnato al 
+						// documentManager solo quando si passa da openSource
 						
 						if(newDoc==null){   // documento malformato
 							utilMsg.msgError("Documento non valido - SYNTAX ERROR");
 							//doEditXML();
+							documentManager.clearErrors();
 							return;
 						}
 						if(documentManager.hasErrors()){
 							if(utilMsg.msgWarning("Documento non valido. Sovrascrivere comunque?")){
-								documentManager.close();
-								documentManager.openSource(UtilFile.getFileFromTemp("temp.xml").getPath(),true);
+								documentManager.setDoc(newDoc, true);
 								return;
 							}
-							else
+							else{
+								documentManager.clearErrors();
 								return;
+							}
 						}
-						documentManager.openSource(UtilFile.getFileFromTemp("temp.xml").getPath(),true);
+						documentManager.setDoc(newDoc, true);
 					}
-					else{ //sono su un nodo generico
+					
+					//	SONO SU UN NODO GENERICO
+					else{ 
 
 
 						String nameSpaceDecl = utilRulesManager.getNameSpaceDecl();
@@ -166,42 +176,39 @@ public class SourceEditActionImpl implements SourceEditAction, EventManagerListe
 
 						newNode = newNode.getFirstChild();
 						UtilDom.trimTextNode(newNode, true);
-						UtilDom.replace(currentNode, newNode);
-						//        UtilFile.copyFileInTemp(new ByteArrayInputStream(UtilDom.domToString(documentManager.getDocumentAsDom(), true, "    ", true, false).getBytes()), "temp.xml");
-						documentManager.getDocFromText(UtilDom.domToString(documentManager.getDocumentAsDom(), true, "    ", true, false));
+						UtilDom.replace(currentNode, newNode); // qui vado a modificare direttamente il documento principale
+						
+						UtilFile.copyFileInTemp(new ByteArrayInputStream(UtilDom.domToString(documentManager.getDocumentAsDom(), true, "    ", true, false).getBytes()), "edit.xml");
+						documentManager.open(UtilFile.getFileFromTemp("edit.xml").getPath());
+						
 							if(documentManager.hasErrors()){
 								if(utilMsg.msgWarning("Documento non valido. Sovrascrivere comunque?")){
-									//        documentManager.openSource(UtilFile.getFileFromTemp("temp.xml").getPath(),true);
+									// il doc è lo  stesso
 									return;
 								}
 								else{
+									// ripristino il documento ripiazzando il nodo e riparso tutto
 									UtilDom.replace(newNode, oldNode);
-									UtilFile.copyFileInTemp(new ByteArrayInputStream(UtilDom.domToString(documentManager.getDocumentAsDom(), true, "    ", true, false).getBytes()), "temp.xml");
-									documentManager.close();
-									documentManager.openSource(UtilFile.getFileFromTemp("temp.xml").getPath(),true);
+									documentManager.clearErrors();
 									return;
 								}
 							}
 						
-
 					}
-					//documentManager.openSource(UtilFile.getFileFromTemp("temp.xml").getPath(),true);
+					//documentManager.openSource(UtilFile.getFileFromTemp("edit.xml").getPath(),true);
 				}
 			}
 
 		}
 		// problemi aperti:
-//		se scarto il cambiamento non fa il refresh del pannello errori
-//		il semaforo resta sempre verde anche con errori di validazione
-//		X non gestisce errori sintattici
+		// se scarto il cambiamento non fa il refresh del pannello errori
+		// il semaforo resta sempre verde anche con errori di validazione
+		// X non gestisce errori sintattici
 
 	}
 	
-
-		
-
-		
-	}
+	
+}
 	
 	
 

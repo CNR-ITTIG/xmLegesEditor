@@ -176,6 +176,10 @@ public class ProblemsPaneImpl implements ProblemsPane, EventManagerListener, Log
 	public void removeProblem(Problem problem) {
 		listModel.removeElement(problem);
 	}
+	
+	public void removeAllProblems(){
+		listModel.removeAllElements();
+	}
 
 	// ////////////////////////////////////////////////////////// Pane Interface
 	public String getName() {

@@ -35,4 +35,11 @@ public interface ProblemsPane extends Service, Pane {
 	 * @param problem problema da rimuovere dal pannello
 	 */
 	public void removeProblem(Problem problem);
+	
+	/**
+	 * 
+	 *
+	 */
+	public void removeAllProblems();
+	
 }

@@ -144,19 +144,33 @@ public class DocumentManagerImpl implements DocumentManager, EventListener, Logg
 		}
 	}
 
+	
 	// /////////////////////////////////////////////// DocumentManager Interface
+	
 	public String getSource() {
 		return this.source;
 	}
 
+	
 	public boolean openSource(String source) {
 		return openSource(source, false);
 	}
 
-	public boolean openSource(String source, boolean isNew) {
+	public boolean openSource(String source, boolean isNew) {	
+		Document doc = open(source);
+		return setDoc(source,doc,isNew);
+	}
+	
+	
+	public boolean setDoc(Document doc, boolean isNew){
+		return setDoc(this.source, doc, isNew);
+	}
+	
+	private boolean setDoc(String source, Document doc, boolean isNew){
+		
 		if (this.document != null)
 			close();
-		Document doc = open(source);
+		
 		if (doc != null) {
 			this.document = doc;
 			DOMWriter.setDefaultEncoding(getEncoding());
@@ -497,9 +511,12 @@ public class DocumentManagerImpl implements DocumentManager, EventListener, Logg
 		logger.debug("DOM EVENT END");
 	}
 
+	public void clearErrors(){
+		errors.clear();
+		problemsPane.removeAllProblems();
+	}
 
-
-	protected Document open(String filename) {
+	public Document open(String filename) {
 		errors.clear();
 		logger.info("Reading file: " + filename);
 
