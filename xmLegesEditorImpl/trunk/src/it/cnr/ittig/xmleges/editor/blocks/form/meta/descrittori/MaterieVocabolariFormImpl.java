@@ -320,7 +320,7 @@ Serviceable, Initializable, ActionListener {
 	private void loadVocabulary() {
 		
 		String prefix ="vocabolari";
-		String[] vocabulary = new String[]{"TESEO.xml", "regioneUmbria.xml", "CNIPA.xml"};
+		String[] vocabulary = new String[]{"TESEO.xml", "regioneUmbria.xml", "CNIPA.xml", "regioneToscana.xml"};
 
 		for (int i = 0; i < vocabulary.length; i++)		
 			//Non sovrascrivo i vocabolari già presenti
