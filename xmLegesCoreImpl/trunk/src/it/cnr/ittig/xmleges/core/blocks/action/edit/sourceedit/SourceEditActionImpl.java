@@ -123,85 +123,61 @@ public class SourceEditActionImpl implements SourceEditAction, EventManagerListe
 
 				Node oldNode = selectionManager.getActiveNode();
 				Document doc = documentManager.getDocumentAsDom();
-				Node currentNode = ( ((oldNode==null) || (oldNode.equals(getRootElement(doc))))? doc: oldNode);
+				Node currentNode = ( ((oldNode==null) || (oldNode.equals(getRootElement(doc))))? getRootElement(doc).getFirstChild(): oldNode);
+				oldNode = currentNode;
 				String text = UtilDom.domToString(currentNode, true, "    ", true, false);
 				text = text.replaceAll("\r", "");
 				sourcePanelForm.setSourceText(text);
 
 				if(sourcePanelForm.openForm()){
-					if(currentNode.equals(doc)){  //  SONO SULLA ROOT						
-						UtilFile.copyFileInTemp(new ByteArrayInputStream(sourcePanelForm.getSourceText().getBytes()), "temp.xml");
+					String nameSpaceDecl = utilRulesManager.getNameSpaceDecl();
+                    String toParse = "<?xml version=\"1.0\" encoding=\""+documentManager.getEncoding()+"\"?>"+
+                    "<ris "+nameSpaceDecl+">" + sourcePanelForm.getSourceText().trim() + "</ris>";
 
-						Document newDoc = documentManager.getDocFromText(sourcePanelForm.getSourceText());
-						
-						if(newDoc==null){   // documento malformato
-							utilMsg.msgError("Documento non valido - SYNTAX ERROR");
-							//doEditXML();
-							documentManager.clearErrors();
-							return;
-						}
-						if(documentManager.hasErrors()){
-							if(utilMsg.msgWarning("Documento non valido. Sovrascrivere comunque?")){
-								documentManager.close();
-								documentManager.openSource(UtilFile.getFileFromTemp("temp.xml").getPath(),true);
-								return;
-							}
-							else{
-								documentManager.clearErrors();
-								return;
-							}
-						}
-						documentManager.openSource(UtilFile.getFileFromTemp("temp.xml").getPath(),true);
-					}
-					
-					//	SONO SU UN NODO GENERICO
-					else{ 
+                    Node newNode = UtilXml.textToXML(toParse, doc);
+                    if(newNode==null){
+                        utilMsg.msgError("Documento malformato");
+//                        documentManager.clearErrors();
+                        return;
+                    }
 
+                    newNode = newNode.getFirstChild();
+                    UtilDom.trimTextNode(newNode, true);
+                    UtilDom.replace(currentNode, newNode); // qui vado a modificare direttamente il documento principale
+                    
+                    UtilFile.copyFileInTemp(new ByteArrayInputStream(UtilDom.domToString(documentManager.getDocumentAsDom(), true, "    ", true, false).getBytes()), "edit.xml");
+                    documentManager.open(UtilFile.getFileFromTemp("edit.xml").getPath());
+                    
+                        if(documentManager.hasErrors()){
+                            if(utilMsg.msgWarning("Documento non valido. Sovrascrivere comunque?")){
+                                // il doc è lo  stesso
+                                return;
+                            }
+                            else{
+                                // ripristino il documento ripiazzando il nodo e riparso tutto
+                                UtilDom.replace(newNode, oldNode);
+                                documentManager.clearErrors();
+                                return;
+                            }
+                        }
 
-						String nameSpaceDecl = utilRulesManager.getNameSpaceDecl();
-						String toParse = "<?xml version=\"1.0\" encoding=\""+documentManager.getEncoding()+"\"?>"+
-						"<ris "+nameSpaceDecl+">" + sourcePanelForm.getSourceText().trim() + "</ris>";
-
-						Node newNode = UtilXml.textToXML(toParse, doc);
-						if(newNode==null){
-							utilMsg.msgError("Documento malformato");
-							//doEditXML();
-							return;
-						}
-
-						newNode = newNode.getFirstChild();
-						UtilDom.trimTextNode(newNode, true);
-						UtilDom.replace(currentNode, newNode);
-						//        UtilFile.copyFileInTemp(new ByteArrayInputStream(UtilDom.domToString(documentManager.getDocumentAsDom(), true, "    ", true, false).getBytes()), "temp.xml");
-						documentManager.getDocFromText(UtilDom.domToString(documentManager.getDocumentAsDom(), true, "    ", true, false));
-							if(documentManager.hasErrors()){
-								if(utilMsg.msgWarning("Documento non valido. Sovrascrivere comunque?")){
-									// il doc è lo  stesso
-									return;
-								}
-								else{
-									// ripristino il documento ripiazzando il nodo e riparso tutto
-									UtilDom.replace(newNode, oldNode);
-									documentManager.clearErrors();
-									return;
-								}
-							}
-						
-					}
-					//documentManager.openSource(UtilFile.getFileFromTemp("edit.xml").getPath(),true);
 				}
 			}
-
 		}
+
+
 		// problemi aperti:
-		// se scarto il cambiamento non fa il refresh del pannello errori
-		// il semaforo resta sempre verde anche con errori di validazione
-		// X non gestisce errori sintattici
+//		se scarto il cambiamento non fa il refresh del pannello errori
+//		il semaforo resta sempre verde anche con errori di validazione
+
 
 	}
 	
-	
-}
+
+		
+
+		
+	}
 	
 	
 
