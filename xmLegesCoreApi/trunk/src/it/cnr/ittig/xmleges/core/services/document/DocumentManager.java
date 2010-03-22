@@ -97,6 +97,13 @@ public interface DocumentManager extends Service {
 	 *         correttamente
 	 */
 	public boolean openSource(String source, boolean isNew);
+	
+	/**
+	 * Apre il file sul documento ma non lo assegna al documentmanager. Si usa per fare la validazione
+	 * @param filename
+	 * @return
+	 */
+	public Document open(String filename);
 
 	/**
 	 * Indica se il documento aperto contiene errori emessi dal parser XML. Tali
@@ -297,10 +304,5 @@ public interface DocumentManager extends Service {
 	 */
 	public void removeBeforeInitUndoAction(DocumentBeforeInitUndoAction action);
 	
-	/**
-	 * Restituisce un documento a partire dal testo sorgente
-	 * @param sourceText
-	 * @return
-	 */
-	public Document getDocFromText(String sourceText);
+	
 }
