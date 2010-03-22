@@ -129,16 +129,10 @@ public class SourceEditActionImpl implements SourceEditAction, EventManagerListe
 				sourcePanelForm.setSourceText(text);
 
 				if(sourcePanelForm.openForm()){
-					
-					// SONO SULLA ROOT [INTERO DOCUMENTO]	
-					if(currentNode.equals(doc)){  
-						
-						UtilFile.copyFileInTemp(new ByteArrayInputStream(sourcePanelForm.getSourceText().getBytes()), "edit.xml");
-						// edit.xml è il documento che sto editando
-						Document newDoc = documentManager.open(UtilFile.getFileFromTemp("edit.xml").getPath());
-						// qui non assegna il doc al documentManager; l'unico motivo per parsare il testo da documentManager 
-						// e' per fargli gestire il pannello degli errori; il documento viene assegnato al 
-						// documentManager solo quando si passa da openSource
+					if(currentNode.equals(doc)){  //  SONO SULLA ROOT						
+						UtilFile.copyFileInTemp(new ByteArrayInputStream(sourcePanelForm.getSourceText().getBytes()), "temp.xml");
+
+						Document newDoc = documentManager.getDocFromText(sourcePanelForm.getSourceText());
 						
 						if(newDoc==null){   // documento malformato
 							utilMsg.msgError("Documento non valido - SYNTAX ERROR");
@@ -148,7 +142,8 @@ public class SourceEditActionImpl implements SourceEditAction, EventManagerListe
 						}
 						if(documentManager.hasErrors()){
 							if(utilMsg.msgWarning("Documento non valido. Sovrascrivere comunque?")){
-								documentManager.setDoc(newDoc, true);
+								documentManager.close();
+								documentManager.openSource(UtilFile.getFileFromTemp("temp.xml").getPath(),true);
 								return;
 							}
 							else{
@@ -156,7 +151,7 @@ public class SourceEditActionImpl implements SourceEditAction, EventManagerListe
 								return;
 							}
 						}
-						documentManager.setDoc(newDoc, true);
+						documentManager.openSource(UtilFile.getFileFromTemp("temp.xml").getPath(),true);
 					}
 					
 					//	SONO SU UN NODO GENERICO
@@ -176,11 +171,9 @@ public class SourceEditActionImpl implements SourceEditAction, EventManagerListe
 
 						newNode = newNode.getFirstChild();
 						UtilDom.trimTextNode(newNode, true);
-						UtilDom.replace(currentNode, newNode); // qui vado a modificare direttamente il documento principale
-						
-						UtilFile.copyFileInTemp(new ByteArrayInputStream(UtilDom.domToString(documentManager.getDocumentAsDom(), true, "    ", true, false).getBytes()), "edit.xml");
-						documentManager.open(UtilFile.getFileFromTemp("edit.xml").getPath());
-						
+						UtilDom.replace(currentNode, newNode);
+						//        UtilFile.copyFileInTemp(new ByteArrayInputStream(UtilDom.domToString(documentManager.getDocumentAsDom(), true, "    ", true, false).getBytes()), "temp.xml");
+						documentManager.getDocFromText(UtilDom.domToString(documentManager.getDocumentAsDom(), true, "    ", true, false));
 							if(documentManager.hasErrors()){
 								if(utilMsg.msgWarning("Documento non valido. Sovrascrivere comunque?")){
 									// il doc è lo  stesso

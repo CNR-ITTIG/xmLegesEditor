@@ -69,21 +69,6 @@ public interface DocumentManager extends Service {
 	 * @param source sorgente del documento
 	 */
 	public void setSourceName(String source);
-	
-	/**
-	 * 
-	 * @param doc
-	 * @param isNew
-	 * @return
-	 */
-	public boolean setDoc(Document doc, boolean isNew);
-	
-	/**
-	 * 
-	 * @param filename
-	 * @return
-	 */
-	public Document open(String filename);
 
 	/**
 	 * Imposta la sorgente del documento e legge il documento. Questo metodo
@@ -128,7 +113,7 @@ public interface DocumentManager extends Service {
 	 * @return errori dell'apertura del documento
 	 */
 	public String[] getErrors();
-	
+
 	/**
 	 * 
 	 */
@@ -312,5 +297,10 @@ public interface DocumentManager extends Service {
 	 */
 	public void removeBeforeInitUndoAction(DocumentBeforeInitUndoAction action);
 	
-
+	/**
+	 * Restituisce un documento a partire dal testo sorgente
+	 * @param sourceText
+	 * @return
+	 */
+	public Document getDocFromText(String sourceText);
 }
