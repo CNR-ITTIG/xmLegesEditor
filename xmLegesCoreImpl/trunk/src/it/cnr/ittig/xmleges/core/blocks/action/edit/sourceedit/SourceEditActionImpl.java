@@ -7,6 +7,7 @@ import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.action.ActionManager;
+import it.cnr.ittig.xmleges.core.services.action.file.validator.FileValidatorAction;
 import it.cnr.ittig.xmleges.core.services.action.sourceedit.SourceEditAction;
 import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
@@ -21,7 +22,6 @@ import it.cnr.ittig.xmleges.core.services.util.rulesmanager.UtilRulesManager;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 import it.cnr.ittig.xmleges.core.util.file.UtilFile;
 import it.cnr.ittig.xmleges.core.util.xml.UtilXml;
-
 
 import java.awt.event.ActionEvent;
 import java.io.ByteArrayInputStream;
@@ -43,6 +43,8 @@ public class SourceEditActionImpl implements SourceEditAction, EventManagerListe
 
 	SelectionManager selectionManager;
 	
+	FileValidatorAction fileValidatorAction;
+	
 	DocumentManager documentManager;
 	
 	UtilRulesManager utilRulesManager;
@@ -60,6 +62,7 @@ public class SourceEditActionImpl implements SourceEditAction, EventManagerListe
 		actionManager = (ActionManager) serviceManager.lookup(ActionManager.class);
 		eventManager = (EventManager) serviceManager.lookup(EventManager.class);
 		selectionManager = (SelectionManager) serviceManager.lookup(SelectionManager.class);
+		fileValidatorAction = (FileValidatorAction) serviceManager.lookup(FileValidatorAction.class);
 		documentManager = (DocumentManager) serviceManager.lookup(DocumentManager.class);
 		utilRulesManager = (UtilRulesManager) serviceManager.lookup(UtilRulesManager.class);
 		utilMsg = (UtilMsg) serviceManager.lookup(UtilMsg.class);
@@ -118,7 +121,7 @@ public class SourceEditActionImpl implements SourceEditAction, EventManagerListe
 
 
 		private void doEditXML() {
-			
+
 			if (!documentManager.isEmpty()){
 
 				Node oldNode = selectionManager.getActiveNode();
@@ -131,48 +134,40 @@ public class SourceEditActionImpl implements SourceEditAction, EventManagerListe
 
 				if(sourcePanelForm.openForm()){
 					String nameSpaceDecl = utilRulesManager.getNameSpaceDecl();
-                    String toParse = "<?xml version=\"1.0\" encoding=\""+documentManager.getEncoding()+"\"?>"+
-                    "<ris "+nameSpaceDecl+">" + sourcePanelForm.getSourceText().trim() + "</ris>";
+					String toParse = "<?xml version=\"1.0\" encoding=\""+documentManager.getEncoding()+"\"?>"+
+					"<ris "+nameSpaceDecl+">" + sourcePanelForm.getSourceText().trim() + "</ris>";
 
-                    Node newNode = UtilXml.textToXML(toParse, doc);
-                    if(newNode==null){
-                        utilMsg.msgError("Documento malformato");
-//                        documentManager.clearErrors();
-                        return;
-                    }
+					Node newNode = UtilXml.textToXML(toParse, doc);
+					if(newNode==null){
+						utilMsg.msgError("Documento malformato");
+						// documentManager.clearErrors();
+						return;
+					}
+					newNode = newNode.getFirstChild();
+					UtilDom.trimTextNode(newNode, true);
+					UtilDom.replace(currentNode, newNode); // qui vado a modificare direttamente il documento principale
 
-                    newNode = newNode.getFirstChild();
-                    UtilDom.trimTextNode(newNode, true);
-                    UtilDom.replace(currentNode, newNode); // qui vado a modificare direttamente il documento principale
-                    
-                    UtilFile.copyFileInTemp(new ByteArrayInputStream(UtilDom.domToString(documentManager.getDocumentAsDom(), true, "    ", true, false).getBytes()), "edit.xml");
-                    documentManager.open(UtilFile.getFileFromTemp("edit.xml").getPath());
-                    
-                        if(documentManager.hasErrors()){
-                            if(utilMsg.msgWarning("Documento non valido. Sovrascrivere comunque?")){
-                                // il doc è lo  stesso
-                                return;
-                            }
-                            else{
-                                // ripristino il documento ripiazzando il nodo e riparso tutto
-                                UtilDom.replace(newNode, oldNode);
-                                documentManager.clearErrors();
-                                return;
-                            }
-                        }
+					UtilFile.copyFileInTemp(new ByteArrayInputStream(UtilDom.domToString(documentManager.getDocumentAsDom(), true, "    ", true, false).getBytes()), "edit.xml");
+					documentManager.open(UtilFile.getFileFromTemp("edit.xml").getPath());
 
+					if(documentManager.hasErrors()){
+						if(!utilMsg.msgWarning("Documento non valido. Sovrascrivere comunque?")){
+							// ripristino il documento ripiazzando il nodo e riparso tutto
+							UtilDom.replace(newNode, oldNode);
+							documentManager.clearErrors();
+						}
+					}else{
+						documentManager.clearErrors();
+					}
+					fileValidatorAction.showMessage();
 				}
 			}
 		}
 
 
-		// problemi aperti:
-//		se scarto il cambiamento non fa il refresh del pannello errori
-//		il semaforo resta sempre verde anche con errori di validazione
-
 
 	}
-	
+
 
 		
 

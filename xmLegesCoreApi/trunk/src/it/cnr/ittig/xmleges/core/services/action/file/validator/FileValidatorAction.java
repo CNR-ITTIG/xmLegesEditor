@@ -27,5 +27,12 @@ public interface FileValidatorAction extends Service {
 	 * @return <code>true</code> se il documento &egrave; valido
 	 */
 	public boolean doValidation();
+	
+	
+	/**
+	 * 
+	 * @param yesNo
+	 */
+	public void showMessage();
 
 }

@@ -129,7 +129,12 @@ public class FileValidatorActionImpl implements FileValidatorAction, EventManage
 		else
 			return false;
 	}
-
+	
+	
+	public void showMessage(){
+		showMessage(false);
+	}
+	
 	protected void showMessage(boolean yesNo) {
 		String[] errors = documentManager.getErrors();
 		bars.getStatusBar().setDefaultBackground("file-validator");
