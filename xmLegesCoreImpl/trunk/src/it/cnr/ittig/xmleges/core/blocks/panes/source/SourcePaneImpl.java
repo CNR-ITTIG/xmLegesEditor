@@ -6,6 +6,7 @@ import it.cnr.ittig.services.manager.Logger;
 import it.cnr.ittig.services.manager.ServiceException;
 import it.cnr.ittig.services.manager.ServiceManager;
 import it.cnr.ittig.services.manager.Serviceable;
+import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
@@ -105,6 +106,7 @@ public class SourcePaneImpl implements SourcePane, EventManagerListener, Loggabl
 	// ///////////////////////////////////////////////// Initializable Interface
 	public void initialize() throws java.lang.Exception {
 		eventManager.addListener(this, PaneActivatedEvent.class);
+		eventManager.addListener(this, DocumentClosedEvent.class);
 		panel = new JPanel(new BorderLayout());				
 		textPane.setEditable(false);		   		
 		textPane.setEditorKit(kit);
@@ -230,7 +232,9 @@ public class SourcePaneImpl implements SourcePane, EventManagerListener, Loggabl
 	public void manageEvent(EventObject event) {
 		if (event instanceof PaneActivatedEvent && this.equals(((PaneActivatedEvent) event).getPane())) {
 			reload();
-		}
+		}else if  (event instanceof DocumentClosedEvent) {
+			reload();
+		}	
 	}
 	
 	
