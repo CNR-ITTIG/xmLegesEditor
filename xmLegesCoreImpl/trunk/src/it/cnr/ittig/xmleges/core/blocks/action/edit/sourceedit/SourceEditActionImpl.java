@@ -118,11 +118,11 @@ public class SourceEditActionImpl implements SourceEditAction, EventManagerListe
 	protected class EditXMLAction extends AbstractAction {
 
 		public void actionPerformed(ActionEvent arg0) {
-			doEditXML();	
+			doEditXML("");	
 		}
 
 
-		private void doEditXML() {
+		private void doEditXML(String textForm) {
 
 			if (!documentManager.isEmpty()){
 
@@ -130,9 +130,11 @@ public class SourceEditActionImpl implements SourceEditAction, EventManagerListe
 				Document doc = documentManager.getDocumentAsDom();
 				Node currentNode = (((oldNode==null) || (oldNode.equals(getRootElement(doc))))? getRootElement(doc).getFirstChild(): oldNode);
 				oldNode = currentNode;
-				String text = UtilDom.domToString(currentNode, true, "    ", true, false);
-				text = text.replaceAll("\r", "");
-				sourcePanelForm.setSourceText(text);
+				if (textForm == null || textForm.equals("")){
+					textForm = UtilDom.domToString(currentNode, true, "    ", true, false);
+					textForm = textForm.replaceAll("\r", "");
+				}
+				sourcePanelForm.setSourceText(textForm);
 
 				if(sourcePanelForm.openForm()){
 
@@ -143,7 +145,9 @@ public class SourceEditActionImpl implements SourceEditAction, EventManagerListe
 					Node newNode = UtilXml.textToXML(toParse, doc);
 					if(newNode==null){
 						utilMsg.msgError("edit.editXML.msg.error.malformed");
+						doEditXML(sourcePanelForm.getSourceText().trim());
 						// nel caso di malformed document non passa dal pannello degli errori
+						// si potrebbe parametrizzare il testo del pannello e lanciare doEditXML(testo)
 						// documentManager.clearErrors();
 						return;
 					}
