@@ -770,6 +770,12 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 class="it.cnr.ittig.xmleges.core.blocks.action.edit.findreplace.FindReplaceActionImpl"
     />
     
+    
+    <component  activation="startup"
+                class="it.cnr.ittig.xmleges.core.blocks.action.edit.findreplace.SourceFindReplaceActionImpl"
+    />
+    
+    
     <component  activation="startup"
                 class="it.cnr.ittig.xmleges.core.blocks.action.edit.comment.CommentActionImpl"
     />
@@ -1506,6 +1512,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <!-- ================================================================== -->
     <!-- ======================================================== UTILS === -->
     <!-- ================================================================== -->
+        
     <component  class="it.cnr.ittig.xmleges.core.blocks.util.msg.UtilMsgImpl" />
     
     <component  class="it.cnr.ittig.xmleges.core.blocks.util.pdf.UtilPdfImpl" />

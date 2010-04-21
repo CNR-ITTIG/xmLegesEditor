@@ -135,6 +135,7 @@ public class SourceEditActionImpl implements SourceEditAction, EventManagerListe
 					textForm = textForm.replaceAll("\r", "");
 				}
 				sourcePanelForm.setSourceText(textForm);
+				
 
 				if(sourcePanelForm.openForm()){
 

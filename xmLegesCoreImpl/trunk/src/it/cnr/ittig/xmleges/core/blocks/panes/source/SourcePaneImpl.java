@@ -10,14 +10,12 @@ import it.cnr.ittig.xmleges.core.services.document.DocumentClosedEvent;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManager;
 import it.cnr.ittig.xmleges.core.services.event.EventManagerListener;
-import it.cnr.ittig.xmleges.core.services.form.sourcePanel.SourcePanelForm;
 import it.cnr.ittig.xmleges.core.services.frame.FindIterator;
 import it.cnr.ittig.xmleges.core.services.frame.Frame;
 import it.cnr.ittig.xmleges.core.services.frame.PaneActivatedEvent;
 import it.cnr.ittig.xmleges.core.services.frame.PaneException;
 import it.cnr.ittig.xmleges.core.services.panes.source.SourcePane;
 import it.cnr.ittig.xmleges.core.services.util.ui.UtilUI;
-import it.cnr.ittig.xmleges.core.util.clipboard.UtilClipboard;
 import it.cnr.ittig.xmleges.core.util.dom.UtilDom;
 
 import java.awt.BorderLayout;

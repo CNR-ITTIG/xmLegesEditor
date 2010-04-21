@@ -1,5 +1,6 @@
 package it.cnr.ittig.xmleges.core.blocks.panes.source;
 
+
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
@@ -20,13 +21,16 @@ import javax.swing.JEditorPane;
  * License </a></dd>
  * </dl>
  * 
- * @author <a href="mailto:mirco.taddei@gmail.com">Mirco Taddei</a>
+ * 
  */
 public class SourceTextPane extends JEditorPane {
 	boolean antialias;
+	
+	SourceFindIterator sourcefinditerator;
 
 	public SourceTextPane(boolean antialias) {
 		super();
+		sourcefinditerator = new SourceFindIterator(this);
 		this.antialias = antialias;
 	}
 
@@ -41,6 +45,9 @@ public class SourceTextPane extends JEditorPane {
 			} catch (ClassCastException ex) {
 			}
 		super.paintComponent(g);
+	}
+	public SourceFindIterator getSourceFindIterator(){
+		return this.sourcefinditerator;
 	}
 
 }
