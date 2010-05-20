@@ -22,6 +22,7 @@
         </head>
         <base href="{$base}" />
         <body>
+        	<xsl:apply-templates select="//nir:mmod"/>	
 	        <xsl:choose>					
 				<xsl:when test="//nir:mod">
 		        	<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
@@ -78,24 +79,13 @@
 
 
 <xsl:template match="nir:mmod">
-	<br/>
-	<xsl:text> Modifica multipla </xsl:text>
-	<br/>
-	<xsl:for-each select="*[name()='mod']">
-		<xsl:variable name="id">#<xsl:value-of select="@id"/></xsl:variable>
-		<xsl:choose>
-			<xsl:when test="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modificheattive/*/dsp:pos[@xlink:href=$id]">
-				<xsl:apply-templates select="/nir:NIR/*/nir:meta/nir:disposizioni/nir:modificheattive/*/dsp:pos[@xlink:href=$id]/.."/>
-			</xsl:when>
-			<xsl:otherwise>
-				<div><font color="Green">Non sono disponibili informazioni nei metadati</font></div><br/>
-			</xsl:otherwise>
-		</xsl:choose>		
-	</xsl:for-each>
-	<font bgcolor="#FFDD88">
-		<xsl:call-template name="modclassico" />
-	</font>
-	<br/><br/><hr width="30%" align="center"/>
+	<xsl:choose>
+		<xsl:when test="nir:mod">
+		</xsl:when>
+		<xsl:otherwise>
+			<br/>Attenzione. Modifica multipla (mmod id=<xsl:value-of select="@id"/>) senza modifica (mod).<br/>
+		</xsl:otherwise>
+	</xsl:choose>
 </xsl:template> 
 
 <xsl:template match="dsp:abrogazione | dsp:sostituzione | dsp:integrazione">
