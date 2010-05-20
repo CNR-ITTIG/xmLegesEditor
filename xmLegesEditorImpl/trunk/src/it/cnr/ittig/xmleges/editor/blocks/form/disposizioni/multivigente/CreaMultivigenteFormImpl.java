@@ -1072,6 +1072,7 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				documentManager.setChanged(true);
 				
 				//Creo l'evento passivo
+				
 				int max=0;
 				Node relazioniNode = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docEditor,null),"relazioni");
 				Node eventiNode = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docEditor,null),"eventi");
@@ -1107,6 +1108,9 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				String idEvento="t"+(1+UtilDom.findRecursiveChild(eventiNode,"eventi").getChildNodes().getLength());
 				UtilDom.setIdAttribute(nuovo, idEvento);
 				eventiNode.appendChild(nuovo);
+					
+				primaModifica = false;
+				
 				
 				//Scrivo i meta (da attivi a) passivi
 				Node disposiz = UtilDom.findRecursiveChild(nirUtilDom.findActiveMeta(docEditor,null),"disposizioni");
@@ -1133,6 +1137,9 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 				try {
 					listModel.setElementAt(((String) listModel.get(getPosLista())) + " --> applicata", getPosLista());
 				} catch (Exception ex) {}
+				
+				//setto cmq multivigente il documento
+				domDisposizioni.setTipoDocVigenza();
 				
 				documentManager.commitEdit(t);
 			
