@@ -88,6 +88,22 @@
 	</xsl:choose>
 </xsl:template> 
 
+<xsl:template match="dsp:ricollocazione | dsp:intautentica | dsp:variazione | dsp:modtermini">
+	<font color="Blue">Modifica non testuale (di contenuto): <xsl:value-of select="local-name()"/></font><br/><br/>
+</xsl:template> 
+
+<xsl:template match="dsp:vigenza | dsp:annullamento | dsp:proroga | dsp:reviviscenza | dsp:posticipo | dsp:sospensione | dsp:retroattivita | dsp:ultrattivita | dsp:inapplicazione">
+	<font color="Blue">Modifica non testuale (di portata): <xsl:value-of select="local-name()"/></font><br/><br/>
+</xsl:template> 
+
+<xsl:template match="dsp:deroga | dsp:estensione">
+	<font color="Blue">Modifica non testuale (di portata): <xsl:value-of select="local-name()"/></font><br/><br/>
+</xsl:template> 
+
+<xsl:template match="dsp:recepisce | dsp:attua | dsp:ratifica | dsp:attuadelega | dsp:attuadelegifica | dsp:converte | dsp:reitera">
+	<font color="Blue">Modifica non testuale (di ordinamento): <xsl:value-of select="local-name()"/></font><br/><br/>
+</xsl:template> 
+
 <xsl:template match="dsp:abrogazione | dsp:sostituzione | dsp:integrazione">
 	<div>
 	  <font color="Red">disposizione: </font>
