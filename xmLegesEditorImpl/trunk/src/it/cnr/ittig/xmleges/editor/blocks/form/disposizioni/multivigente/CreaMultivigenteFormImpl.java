@@ -420,7 +420,14 @@ public class CreaMultivigenteFormImpl implements CreaMultivigenteForm, Loggable,
 											if (nMod!=null)
 												for (int z=0; z<disposizioniDaConvertire.size(); z++) {
 													String temp = UtilDom.getAttributeValueAsString((Node)(UtilDom.getChildElements((Node)disposizioniDaConvertire.get(z))).get(0), "xlink:href");
-													if (temp==null || nMod.compareTo(temp)<0) {
+													try {
+														if (temp==null || (new Integer(nMod).intValue() < new Integer(temp).intValue())) {
+															disposizioniDaConvertire.add(z, daAggiungere);
+															inserito = true;
+															break;
+														}
+													}
+													catch (Exception err) {
 														disposizioniDaConvertire.add(z, daAggiungere);
 														inserito = true;
 														break;
