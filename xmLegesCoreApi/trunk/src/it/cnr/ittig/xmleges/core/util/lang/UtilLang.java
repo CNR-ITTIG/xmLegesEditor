@@ -67,8 +67,10 @@ public class UtilLang {
 	static public String trimText(String str) {
 		if (str == null)
 			return str;
-
-		str = str.replace('\n', ' ').replace('\t', ' ').replaceAll("[ +]", " ").trim();   // 26-03-08 ho rimesso il trim(); 
+        
+		// FIXME questa espressione regolare serviva a qualcosa ?
+		//.replaceAll("[ +]", " ")		
+		str = str.replace('\n', ' ').replace('\t', ' ').trim();   // 26-03-08 ho rimesso il trim(); 
 		str = squeeze(str, ' ');
 		return str;
 	}
