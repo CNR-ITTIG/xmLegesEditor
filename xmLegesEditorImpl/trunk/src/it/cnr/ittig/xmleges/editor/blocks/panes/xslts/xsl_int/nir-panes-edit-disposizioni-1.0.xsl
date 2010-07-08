@@ -80,7 +80,7 @@
 
 <xsl:template match="nir:mmod">
 	<xsl:choose>
-		<xsl:when test="nir:mod">
+		<xsl:when test="//nir:mod">
 		</xsl:when>
 		<xsl:otherwise>
 			<br/>Attenzione. Modifica multipla (mmod id=<xsl:value-of select="@id"/>) senza modifica (mod).<br/>
