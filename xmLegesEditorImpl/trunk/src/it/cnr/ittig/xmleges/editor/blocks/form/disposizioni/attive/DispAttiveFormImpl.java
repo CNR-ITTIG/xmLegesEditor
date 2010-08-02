@@ -437,7 +437,7 @@ public class DispAttiveFormImpl implements DispAttiveForm, EventManagerListener,
 		String data = UtilDate.dateToNorm(UtilDate.textualFormatToDate(decorrenza.getText()));
 		
 		Document doc = documentManager.getDocumentAsDom();
-		Node activeMeta = nirUtilDom.findActiveMeta(doc,nodoAttivo);
+		Node activeMeta = UtilDom.getElementsByTagName(doc,doc,"meta")[0]; //DEVO LAVORARE SUL META DEL DOC PRINCIPALE nirUtilDom.findActiveMeta(doc,nodoAttivo);
 		Node eventi = UtilDom.findRecursiveChild(activeMeta,"eventi");
 		Node relazioni = UtilDom.findRecursiveChild(activeMeta,"relazioni");
 		NodeList eventiList = eventi.getChildNodes();
