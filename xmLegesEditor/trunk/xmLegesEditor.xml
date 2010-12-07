@@ -239,6 +239,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                     <separator/>
                     <menu action="file.export">
                     	<item action="file.export.browser" />
+              	        <item action="file.export.TAF" />
                         <item action="file.export.pdf" /> 
           				<item action="file.export.rtf" />
                         <item action="file.export.html" />
@@ -1004,6 +1005,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.filenew.FileNewFormImpl" />
     
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.fileexport.FileExportFormImpl" />
+    
+    <component  class="it.cnr.ittig.xmleges.editor.blocks.form.fileexportTAF.FileExportTafFormImpl" />
 
     <component  class="it.cnr.ittig.xmleges.editor.blocks.form.meta.descrittori.MetaDescrittoriFormImpl" />
     
@@ -1337,6 +1340,8 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             
             <xslt   name="xsl-nir"				file="nir-generico.xsl"     			startup="true" />
             <xslt   name="xsl-nir-nocss"		file="nir-generico-nocss.xsl"  			startup="true" />
+            <xslt   name="xsl-nir-testoafronte"	file="nir-testoafronte.xsl"     			startup="true" />
+            <css    name="nir-testoafronte-style"  file="nir-testoafronte-style.css"           startup="true" />
             <css    name="nir-style"      		file="nir-generico-style.css"           startup="true" />
             <xslt   name="pdf-gazzettaufficiale" file="nir-fo-gazzettaufficiale.xsl"	startup="true" />
             

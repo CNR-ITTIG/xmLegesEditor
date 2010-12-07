@@ -28,6 +28,7 @@ import it.cnr.ittig.xmleges.core.util.file.UtilFile;
 import it.cnr.ittig.xmleges.core.util.xslt.UtilXslt;
 import it.cnr.ittig.xmleges.editor.services.action.file.export.NirFileExportAction;
 import it.cnr.ittig.xmleges.editor.services.dom.vigenza.Vigenza;
+import it.cnr.ittig.xmleges.editor.services.form.fileExportTAF.FileExportTafForm;
 import it.cnr.ittig.xmleges.editor.services.form.fileexport.FileExportForm;
 import it.cnr.ittig.xmleges.editor.services.panes.xslts.NirXslts;
 import it.cnr.ittig.xmleges.editor.services.util.dom.NirUtilDom;
@@ -43,8 +44,6 @@ import java.util.StringTokenizer;
 
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
-
-import org.w3c.dom.Node;
 /**
  * <h1>Implementazione del servizio
  * <code>it.cnr.ittig.xmleges.editor.services.action.file.export.NirFileExportAction</code>.</h1>
@@ -114,10 +113,14 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 	NirXslts xslts;
 		
 	FileExportForm fileExportForm;
+	
+	FileExportTafForm fileExportTafForm;
 
 	FileTextField fileTextField;
 
 	ExportBrowserAction exportBrowserAction;
+	
+	ExportTestoafronteAction exportTestoafronteAction;
 
 	ExportHTMLAction exportHTMLAction;
 
@@ -138,6 +141,10 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 	String[] readerPdf;
 	
 	String dataVigenza = "";
+	
+	String data1 = "";
+	
+	String data2 = "";
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -156,6 +163,7 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 		utilPdf = (UtilPdf) serviceManager.lookup(UtilPdf.class);
 		utilRtf = (UtilRtf) serviceManager.lookup(UtilRtf.class);	
 		fileExportForm = (FileExportForm) serviceManager.lookup(FileExportForm.class);
+		fileExportTafForm = (FileExportTafForm) serviceManager.lookup(FileExportTafForm.class);
 		vigenza = (Vigenza) serviceManager.lookup(Vigenza.class);
 		nirUtilDom = (NirUtilDom) serviceManager.lookup(NirUtilDom.class);
 	}
@@ -182,6 +190,8 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 	public void initialize() throws Exception {
 		exportBrowserAction = new ExportBrowserAction();
 		actionManager.registerAction("file.export.browser", exportBrowserAction);
+		exportTestoafronteAction = new ExportTestoafronteAction();
+		actionManager.registerAction("file.export.TAF", exportTestoafronteAction);
 		exportHTMLAction = new ExportHTMLAction();
 		actionManager.registerAction("file.export.html", exportHTMLAction);
 		exportPDFAction = new ExportPDFAction();
@@ -220,6 +230,7 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 	public void manageEvent(EventObject event) {
 		exportBrowserAction.setEnabled(!documentManager.isEmpty());
 		exportHTMLAction.setEnabled(!documentManager.isEmpty());
+		exportTestoafronteAction.setEnabled(!documentManager.isEmpty());
 		//export per i DDL non è implementato (disabilito)
 		exportPDFAction.setEnabled(!documentManager.isEmpty() && !documentManager.getRootElement().getFirstChild().getNodeName().equals("DisegnoLegge"));
 		exportRTFAction.setEnabled(!documentManager.isEmpty() && !documentManager.getRootElement().getFirstChild().getNodeName().equals("DisegnoLegge"));
@@ -448,6 +459,7 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 						Runtime.getRuntime().exec(cmd);
 						break;
 					} catch (Exception ex) {
+						ex.printStackTrace();
 					}
 				return true;
 			}
@@ -458,6 +470,60 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 		return false;
 	}
 
+	
+	public boolean doExportTestoAFronte() {
+		
+		
+		String data1;
+		String data2;
+		
+		System.err.println("--------EXPORT TESTO A FFF");
+		
+		File xsl = null;
+		String grammarName = documentManager.getGrammarName();
+		if (grammarName.startsWith("nir") && !nirUtilDom.isDocCNR(null)){  // documenti NIR
+			xsl = new File(xslts.getXslt("xsl-nir-testoafronte").getAbsolutePath());
+			
+			// per documenti NIR multivigenti; apre la form di setting dataVigenza 
+			if(vigenza.isVigente()){    												// abilito il testoafronte solo se è multivigente
+				if(fileExportTafForm.openForm()){
+				   
+                     this.data1 = fileExportTafForm.getData1();
+                     this.data2 = fileExportTafForm.getData2();
+                     
+                     System.err.println("--------DATA1 "+this.data1);
+                     System.err.println("--------DATA2 "+this.data2);
+				   
+				}
+				else
+				   return false;
+			}
+		}
+
+		
+		try {
+			File temp = UtilFile.createTemp("export.html");
+			temp.deleteOnExit();
+			if (exportHTML(xsl, temp)) {
+				for (int i = 0; i < browsers.length; i++)
+					try {
+						String cmd = browsers[i] + " " + temp.getAbsolutePath();
+						Runtime.getRuntime().exec(cmd);
+						break;
+					} catch (Exception ex) {
+					}
+				return true;
+			}
+		} catch (Exception ex) {
+			utilMsg.msgError("file.export.error.browser");
+			logger.error(ex.toString(), ex);
+		}
+		return false;
+	}
+
+	
+	
+	// questo era il testo a fronte dei ddl
 	public boolean doTestoAFronte() {
 		try {
 			File temp = UtilFile.createTemp("export-ddl.html");
@@ -486,9 +552,13 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 			domWriter.setFormat(false);
 			domWriter.setOutput(dest,documentManager.getEncoding());
 			
-			Hashtable param = new Hashtable(2);
+			Hashtable param = new Hashtable(4);
 			param.put("datafine",this.dataVigenza);
+			
 			param.put("baseurl",UtilFile.getFolderPath(documentManager.getSourceName()));
+			
+			param.put("data1",this.data1);
+			param.put("data2",this.data2);
 			
 			String res = UtilXslt.serializedApplyXslt(documentManager.getDocumentAsDom(), xslt, param, documentManager.getEncoding());   // questo setEncoding qui non gli fa niente
 			domWriter.write(res);
@@ -552,6 +622,13 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 		}
 	}
 
+	
+	protected class ExportTestoafronteAction extends AbstractAction {
+		public void actionPerformed(ActionEvent e) {
+			doExportTestoAFronte();
+		}
+	}
+	
 	protected class ExportHTMLAction extends AbstractAction {
 		public void actionPerformed(ActionEvent e) {
 			doExportHTML();

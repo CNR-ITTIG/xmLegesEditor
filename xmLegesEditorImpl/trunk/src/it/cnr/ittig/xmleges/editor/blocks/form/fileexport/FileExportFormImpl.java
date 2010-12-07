@@ -1,11 +1,5 @@
 package it.cnr.ittig.xmleges.editor.blocks.form.fileexport;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import it.cnr.ittig.services.manager.Initializable;
 import it.cnr.ittig.services.manager.Loggable;
 import it.cnr.ittig.services.manager.Logger;
@@ -15,7 +9,6 @@ import it.cnr.ittig.services.manager.Serviceable;
 import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.form.Form;
 import it.cnr.ittig.xmleges.core.services.form.FormVerifier;
-import it.cnr.ittig.xmleges.core.services.document.DocumentManager;
 import it.cnr.ittig.xmleges.core.services.form.date.DateForm;
 import it.cnr.ittig.xmleges.core.services.util.msg.UtilMsg;
 import it.cnr.ittig.xmleges.core.util.date.UtilDate;
@@ -26,12 +19,6 @@ import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.DefaultListModel;
-import javax.swing.ListSelectionModel;
-import javax.swing.SwingUtilities;
-
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
@@ -39,9 +26,6 @@ import javax.swing.JList;
 import javax.swing.JRadioButton;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
