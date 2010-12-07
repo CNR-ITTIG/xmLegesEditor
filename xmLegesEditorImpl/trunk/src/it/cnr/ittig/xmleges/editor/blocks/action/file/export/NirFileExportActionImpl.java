@@ -459,7 +459,7 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 						Runtime.getRuntime().exec(cmd);
 						break;
 					} catch (Exception ex) {
-						ex.printStackTrace();
+						//ex.printStackTrace();
 					}
 				return true;
 			}
