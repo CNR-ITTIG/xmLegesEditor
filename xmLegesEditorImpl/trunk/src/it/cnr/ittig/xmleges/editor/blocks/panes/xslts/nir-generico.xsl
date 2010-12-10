@@ -30,7 +30,7 @@
 				</title>
 				
 				<meta http-equiv="Content-Type" content="text/html; charset={$encoding}"/>
-				<link rel="stylesheet" type="text/css" href="nir-style-jtest.css" media="screen" />
+				<link rel="stylesheet" type="text/css" href="nir-generico-style.css" media="screen" />
 				
 			</head>
 			<body>
