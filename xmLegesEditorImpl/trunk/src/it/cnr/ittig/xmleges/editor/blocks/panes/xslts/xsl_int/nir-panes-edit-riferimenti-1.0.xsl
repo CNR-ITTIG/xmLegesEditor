@@ -103,7 +103,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 				<xsl:attribute name="href"><xsl:value-of select="@xlink:href"/></xsl:attribute>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:attribute name="href">http://www.nir.it/cgi-bin/N2Ln?<xsl:value-of select="@xlink:href"/></xsl:attribute>
+				<xsl:attribute name="href">http://www.normattiva.it/uri-res/N2Ls?<xsl:value-of select="@xlink:href"/></xsl:attribute>
 			</xsl:otherwise>
 		</xsl:choose>
 		[<xsl:apply-templates select="@xlink:href"/>]

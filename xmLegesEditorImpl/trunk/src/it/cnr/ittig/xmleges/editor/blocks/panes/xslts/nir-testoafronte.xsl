@@ -30,6 +30,8 @@
 	<!-- ======================================================== -->
 	
 	
+	<xsl:template match="text()">&#160;<xsl:value-of select="."/>&#160;</xsl:template>
+	
 	<xsl:template match="nir:NIR/*">
 	<!-- xsl:template match="nir:Legge | nir:DocumentoNIR" -->
 		<html>
@@ -685,7 +687,7 @@
 		<xsl:param name="pos">
 			none
 		</xsl:param>
-		<a href="urnResolver.xql?css={$css}&amp;urn={@xlink:href}" title="URN = {@xlink:href}">
+		<a href="http://www.normattiva.it/uri-res/N2Ls?{@xlink:href}" title="URN = {@xlink:href}">
 			<xsl:value-of select="@xlink:href" />
 		</a>
 	</xsl:template>
@@ -708,13 +710,13 @@
 				<xsl:choose>
 					<xsl:when
 						test="$strina='&#59;' or $strina='&#46;' or $strina='&#58;' or $strina='&#44;'  or $strina='&#45;'">
-						<a href="urnResolver.xql?css={$css}&amp;urn={@xlink:href}"
+						<a href="http://www.normattiva.it/uri-res/N2Ls?{@xlink:href}"
 							title="URN = {@xlink:href}">
 							<xsl:apply-templates />
 						</a>
 					</xsl:when>
 					<xsl:otherwise>
-						<a href="urnResolver.xql?css={$css}&amp;urn={@xlink:href}"
+						<a href="http://www.normattiva.it/uri-res/N2Ls?{@xlink:href}"
 							title="URN = {@xlink:href}">
 							<xsl:apply-templates />
 						</a>
@@ -1637,7 +1639,7 @@
 										</xsl:if>
 									</xsl:if>
 									<xsl:text> da: </xsl:text>
-									<a href="urnResolver.xql?css={$css}&amp;urn={$urn_meta}"
+									<a href="http://www.normattiva.it/uri-res/N2Ls?{$urn_meta}"
 										title="URN = {$urn_meta}">
 										<xsl:value-of select="$autonota" />
 									</a>
@@ -1652,7 +1654,7 @@
 									]
 								</a>
 								<xsl:text> - Modificato da: </xsl:text>
-								<a href="urnResolver.xql?css={$css}&amp;urn={$urn}" title="URN = {$urn}">
+								<a href="http://www.normattiva.it/uri-res/N2Ls?{$urn}">
 									<xsl:value-of select="$urn" />
 								</a>
 								<xsl:text>. </xsl:text>

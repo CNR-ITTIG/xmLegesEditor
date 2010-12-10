@@ -1340,9 +1340,12 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
             
             <xslt   name="xsl-nir"				file="nir-generico.xsl"     			startup="true" />
             <xslt   name="xsl-nir-nocss"		file="nir-generico-nocss.xsl"  			startup="true" />
+            
             <xslt   name="xsl-nir-testoafronte"	file="nir-testoafronte.xsl"     			startup="true" />
             <css    name="nir-testoafronte-style"  file="nir-testoafronte-style.css"           startup="true" />
+            
             <css    name="nir-style"      		file="nir-generico-style.css"           startup="true" />
+            
             <xslt   name="pdf-gazzettaufficiale" file="nir-fo-gazzettaufficiale.xsl"	startup="true" />
             
             <xslt   name="xsl-cnr"              		file="cnrHTML.xsl"				startup="true" />
