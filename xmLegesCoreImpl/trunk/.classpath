@@ -30,6 +30,6 @@
 	<classpathentry kind="lib" path="lib/eclipse-xsd-2_4/org.eclipse.xsd_2.4.0.v200804012208.jar"/>
 	<classpathentry kind="lib" path="lib/jmyspell-core-1.0.0-beta-2.jar"/>
 	<classpathentry kind="lib" path="lib/looks-2.2.1.jar"/>
-	<classpathentry kind="lib" path="lib/bounce-0.17.jar"/>
+	<classpathentry kind="lib" path="lib/bounce-0.18.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
