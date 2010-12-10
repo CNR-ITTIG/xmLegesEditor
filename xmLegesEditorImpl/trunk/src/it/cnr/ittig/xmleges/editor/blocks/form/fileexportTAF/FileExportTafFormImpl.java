@@ -136,7 +136,7 @@ public class FileExportTafFormImpl implements FileExportTafForm, Loggable, Servi
 		etichettaVigenze1 = (JLabel) form.getComponentByName("editor.form.fileexportTAF.labeldata1");
 		etichettaVigenze2 = (JLabel) form.getComponentByName("editor.form.fileexportTAF.labeldata2");
 		
-		form.setSize(350,250);
+		form.setSize(500,300);
 		form.setName("editor.form.fileexportTAF");
 		form.addFormVerifier(this);		
 		

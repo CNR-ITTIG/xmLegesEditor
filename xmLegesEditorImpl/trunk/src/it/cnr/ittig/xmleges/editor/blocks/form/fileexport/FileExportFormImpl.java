@@ -140,7 +140,7 @@ public class FileExportFormImpl implements FileExportForm, Loggable, Serviceable
 		grupporadio.add(radioMultivigente);
 		radioMonovigente.setSelected(true);
 		dataVigenza.set(null);
-		form.setSize(250, 300);
+		form.setSize(300, 350);
 		form.setName("editor.form.fileexport");
 		form.addFormVerifier(this);		
 		
