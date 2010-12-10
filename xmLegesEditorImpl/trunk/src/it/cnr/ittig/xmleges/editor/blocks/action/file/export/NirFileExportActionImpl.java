@@ -230,7 +230,7 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 	public void manageEvent(EventObject event) {
 		exportBrowserAction.setEnabled(!documentManager.isEmpty());
 		exportHTMLAction.setEnabled(!documentManager.isEmpty());
-		exportTestoafronteAction.setEnabled(!documentManager.isEmpty());
+		exportTestoafronteAction.setEnabled(!documentManager.isEmpty() && vigenza.isVigente());
 		//export per i DDL non è implementato (disabilito)
 		exportPDFAction.setEnabled(!documentManager.isEmpty() && !documentManager.getRootElement().getFirstChild().getNodeName().equals("DisegnoLegge"));
 		exportRTFAction.setEnabled(!documentManager.isEmpty() && !documentManager.getRootElement().getFirstChild().getNodeName().equals("DisegnoLegge"));
@@ -474,11 +474,6 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 	public boolean doExportTestoAFronte() {
 		
 		
-		String data1;
-		String data2;
-		
-		System.err.println("--------EXPORT TESTO A FFF");
-		
 		File xsl = null;
 		String grammarName = documentManager.getGrammarName();
 		if (grammarName.startsWith("nir") && !nirUtilDom.isDocCNR(null)){  // documenti NIR
@@ -491,10 +486,7 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
                      this.data1 = fileExportTafForm.getData1();
                      this.data2 = fileExportTafForm.getData2();
                      
-                     System.err.println("--------DATA1 "+this.data1);
-                     System.err.println("--------DATA2 "+this.data2);
-				   
-				}
+        		}
 				else
 				   return false;
 			}
@@ -557,6 +549,7 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 			
 			param.put("baseurl",UtilFile.getFolderPath(documentManager.getSourceName()));
 			
+			// parametri validi per il foglio di esportazione Testo a Fronte
 			param.put("data1",this.data1);
 			param.put("data2",this.data2);
 			

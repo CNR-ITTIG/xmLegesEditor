@@ -1,10 +1,10 @@
 <configuration>
 	<browsers>
 		<browser>mozilla-firefox</browser>
-		<browser>firefox</browser>	
+		<browser>firefox</browser>
 		<browser>C:\\Programmi\\Internet Explorer\\iexplore.exe</browser>
-		<browser>cmd /C start</browser>
 		<browser>C:\\Programmi\\Mozilla Firefox\\firefox.exe</browser>		
+		<browser>cmd /C start</browser>	
 		<browser>command /C start</browser>
 	</browsers>
 	<readerpdf>
