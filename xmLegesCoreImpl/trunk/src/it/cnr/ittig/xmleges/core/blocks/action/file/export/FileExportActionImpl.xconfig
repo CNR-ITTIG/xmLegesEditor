@@ -2,6 +2,8 @@
 	<browsers>
 		<browser>mozilla-firefox</browser>
 		<browser>firefox</browser>		
+		<browser>C:\\Program Files\\Mozilla Firefox\\firefox.exe</browser>
+		<browser>C:\\Program Files\\Internet Explorer\\iexplore.exe</browser>
 		<browser>C:\\Programmi\\Internet Explorer\\iexplore.exe</browser>
 		<browser>cmd /C start</browser>
 		<!-- per il momento coi fogli di stile che abbiamo firefox su windows non funziona -->
