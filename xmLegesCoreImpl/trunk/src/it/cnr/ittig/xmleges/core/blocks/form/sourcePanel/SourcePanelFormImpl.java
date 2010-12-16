@@ -149,10 +149,12 @@ public class SourcePanelFormImpl implements SourcePanelForm, Loggable,
 		JPanel subpanel = new JPanel(new BorderLayout());
 		subpanel.add(new XMLFoldingMargin(textPane), BorderLayout.WEST);
 		subpanel.add(textPane, BorderLayout.CENTER);
-
+		
 		JScrollPane scroll = new JScrollPane(subpanel);
-
+		scroll.getVerticalScrollBar().setUnitIncrement(16);
+		
 		panel.add(scroll, BorderLayout.CENTER);
+		
 
 		form.replaceComponent("editor.form.sourcepane", panel);
 		
