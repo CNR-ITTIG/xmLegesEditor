@@ -150,23 +150,12 @@ public class FileExportTafFormImpl implements FileExportTafForm, Loggable, Servi
 
 	public boolean verifyForm() {
 		
-		boolean isValid = true;
-		
-		
-//		if(isMonoVigente()){
-//			if((dataVigenza.getAsYYYYMMDD()==null || dataVigenza.getAsYYYYMMDD().trim().length()!=8))
-//				isValid = false;
-//			else if(dataVigenza.getAsDate().compareTo(UtilDate.getCurrentDate())>0){
-//				utilmsg.msgInfo("editor.form.fileexport.msg.err.dateaftervalid");
-//				dataVigenza.set(UtilDate.getCurrentDate());
-//			}
-//		}
-		
-		
-		if(!isValid)
+		boolean isvalid = (getData1().compareTo(getData2())<0); 
+		if (!isvalid)
 			errorMessage = "editor.form.fileexport.msg.err.dateerror";
+		return isvalid;
 		
-		return isValid;
+		
 	}
 	
 
