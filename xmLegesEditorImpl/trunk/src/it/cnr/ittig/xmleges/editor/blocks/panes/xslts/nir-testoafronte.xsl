@@ -50,12 +50,22 @@
 			</head>
 			<body>
 				<table cellpadding="0" cellspacing="5" border="0" width="100%">
-					<tr style="margin:top:30px; margin-bottom:30px;">
-						<td colspan="2">
-							data1:
+					<tr>
+						Testo a fronte tra
+						<td width="50%" valign="top">
+							documento vigente al
 							<xsl:value-of select="$data1" />
-							data2:
-							<xsl:value-of select="$data2" />
+						</td>
+						<td width="50%" valign="top">
+							e documento vigente al
+							<xsl:value-of select="$data2" />	
+						</td>
+					</tr>
+				</table>
+				<table cellpadding="0" cellspacing="5" border="0" width="100%">
+					<tr style="margin:top:30px; margin-bottom:30px;">
+						
+						<td colspan="2">							
 							<xsl:apply-templates select="nir:intestazione" />
 						</td>
 					</tr>
@@ -1454,7 +1464,7 @@
 													</xsl:apply-templates>
 													
 													<xsl:text> </xsl:text>
-													(ABROGATO) <!-- D: -->
+													&#160;[...]<!-- D: -->
 													<xsl:call-template name="scriviNota">
 														<xsl:with-param name="id" select="$id"/>
 													</xsl:call-template>
