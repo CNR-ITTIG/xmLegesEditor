@@ -354,20 +354,20 @@ li.choosedata-active 		{
 				}
 .abrogato			{
 				display:inline;
-				color:#f00;
+				/*color:#f00;*/
 													/* text-decoration:line-through !important;  */
 				}
 .art_abrogato			{
 				margin: 15px;
 				font-size: 160%;
-				color:#f00;
+				/*color:#f00;*/
 													/* text-decoration:line-through !important;  */
 
 				}
 .inserito			{
 				display:inline;
 													/* font-style:italic !important; */
-				color:#060;
+				/*color:#060;*/
 				}
 .identicoRight {
 				display:inline;
@@ -377,20 +377,21 @@ li.choosedata-active 		{
 .abrogatoRight {
 				display:inline;
 				font-style:italic;	
-				color:#f00;		
+				background: #FF0000 !important;		
 				
 				}		
 .inseritoRight {
 				display:inline;
 													/* font-style:italic !important; */
 				font-weight: bold;
-				color:#060;
+				background: #00FF00 !important;
 				}		
 .sostituitoRight{
 				display:inline;
 													/* font-style:italic !important; */
 				font-weight: bold;
-				color:#f0f;
+				font-style:italic;
+				background: #FFFF00 !important;
 				}	
 				
 #menuHor			{
