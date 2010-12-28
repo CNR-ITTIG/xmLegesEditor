@@ -67,6 +67,7 @@
 						
 						<td colspan="2">							
 							<xsl:apply-templates select="nir:intestazione" />
+							<xsl:apply-templates select="nir:formulainiziale" />
 						</td>
 					</tr>
 					<tr valign="top">
@@ -87,39 +88,110 @@
 	<!-- Template intestazione e relazione -->
 	<!-- -->
 	<!-- ======================================================== -->
-	<xsl:template match="nir:intestazione">
-		<div class="intestazione">
+	
+	
+	<xsl:template match="/*[name()='NIR']/*/*[name()='formulainiziale']">
+		<div class="formulainiziale">
 			<xsl:apply-templates />
+			&#160;
 		</div>
+
+		<hr />
 	</xsl:template>
-	<xsl:template match="nir:emanante">
+	
+	<xsl:template match="/*[name()='NIR']/*/*[name()='intestazione']">
+
+		<div class="intestazione">
+
+			<xsl:apply-templates select="*[name()='emanante']" />
+			<xsl:apply-templates select="*[name()='tipoDoc']" />
+			<xsl:text> </xsl:text>
+			<xsl:apply-templates select="*[name()='dataDoc']" />
+			<xsl:text>, n. </xsl:text>
+			<xsl:apply-templates select="*[name()='numDoc']" />
+			<xsl:apply-templates select="*[name()='titoloDoc']" />
+
+			
+
+
+			<div class="info">
+				&#160;
+				<xsl:variable name="tipo">
+					<xsl:value-of
+						select="//*[name()='NIR']/*/*[name()='meta']/*[name()='descrittori']/*[name()='pubblicazione']/@tipo" />
+				</xsl:variable>
+				<xsl:variable name="num">
+					<xsl:value-of
+						select="//*[name()='NIR']/*/*[name()='meta']/*[name()='descrittori']/*[name()='pubblicazione']/@num" />
+				</xsl:variable>
+				<xsl:variable name="data">
+					<xsl:value-of
+						select="//*[name()='NIR']/*/*[name()='meta']/*[name()='descrittori']/*[name()='pubblicazione']/@norm" />
+				</xsl:variable>
+				<xsl:text>Pubblicato su </xsl:text>
+				<xsl:value-of select="$tipo" />
+				<xsl:text>, n.&#160;</xsl:text>
+				<xsl:value-of select="$num" />
+				<xsl:if test="$data!=''">
+					<xsl:text> del </xsl:text>
+					<xsl:value-of
+						select="concat(substring($data,7,2),'/',substring($data,5,2),'/',substring($data,1,4))" />
+				</xsl:if>
+			</div>
+		</div>
+	
+	</xsl:template>
+	
+	<xsl:template match="//*[name()='tipoDoc']">
+		<span>
+			<xsl:value-of select="." />
+		</span>
+	</xsl:template>
+	<xsl:template match="//*[name()='dataDoc']">
+		<span>
+			<xsl:value-of select="." />
+		</span>
+	</xsl:template>
+	<xsl:template match="//*[name()='numDoc']">
+		<span>
+			<xsl:value-of select="." />
+		</span>
+	</xsl:template>
+
+
+	<xsl:template match="//*[name()='emanante']">
 		<div class="emanante">
 			<xsl:apply-templates />
+			&#160;
 		</div>
 	</xsl:template>
 
-	<xsl:template match="nir:tipoDoc" />
-	<xsl:template match="nir:numDoc">
-		<div class="numdoc">
-			<xsl:apply-templates />
-		</div>
-	</xsl:template>
-	<xsl:template match="nir:intestazione/h:div ">
-		<div class="intestazione">
-			<xsl:attribute name="style">
-			    <xsl:value-of select="@style" />
-		    </xsl:attribute>
-			<xsl:apply-templates />
-		</div>
+	<xsl:template match="//*[name()='titoloDoc']">
+
+				<div class="titoloDoc">
+					&#160;
+					<div class="titolodoc">
+						<h1>
+							<xsl:apply-templates />
+						</h1>
+					</div>
+					&#160;
+				</div>
+
 	</xsl:template>
 
-	<xsl:template match="nir:intestazione/nir:titoloDoc">
-		<div class="titolodoc">
-			<h1>
+
+	<xsl:template match="//*[name()='preambolo']">
+			
+			<div class="preambolo">
 				<xsl:apply-templates />
-			</h1>
-		</div>
+			</div>
+		
+
 	</xsl:template>
+	
+
+	
 
 	<!-- ======================================================== -->
 	<!-- -->
