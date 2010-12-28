@@ -1,14 +1,18 @@
 <configuration>
 	<browsers>
-		<!--    FIREFOX   -->
+		<!--  LINUX  FIREFOX   -->
 		<browser>mozilla-firefox</browser>
 		<browser>firefox</browser>
-		<browser>C:\\Programmi\\Mozilla Firefox\\firefox.exe</browser>
-		<browser>C:\\Program Files\\Mozilla Firefox\\firefox.exe</browser>
-		<!--    IEXPLORER   -->
+		
+		<!--  WINDOWS  FIREFOX   -->
+		<!--browser>C:\\Programmi\\Mozilla Firefox\\firefox.exe</browser-->
+		<!--browser>C:\\Program Files\\Mozilla Firefox\\firefox.exe</browser-->
+		
+		<!--  WINDOWS  IEXPLORER   -->
 		<browser>C:\\Programmi\\Internet Explorer\\iexplore.exe</browser>
 		<browser>C:\\Program Files\\Internet Explorer\\iexplore.exe</browser>
-		<!--    altro   -->		
+		
+		<!--   WIN altro   -->		
 		<browser>cmd /C start</browser>	
 		<browser>command /C start</browser>
 	</browsers>

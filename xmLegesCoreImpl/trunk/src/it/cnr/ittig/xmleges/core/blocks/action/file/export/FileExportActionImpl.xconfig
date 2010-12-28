@@ -1,14 +1,19 @@
 <configuration>
-	<browsers>
+<browsers>
+		<!--  LINUX  FIREFOX   -->
 		<browser>mozilla-firefox</browser>
-		<browser>firefox</browser>		
-		<browser>C:\\Program Files\\Mozilla Firefox\\firefox.exe</browser>
-		<browser>C:\\Program Files\\Internet Explorer\\iexplore.exe</browser>
+		<browser>firefox</browser>
+		
+		<!--  WINDOWS  FIREFOX   -->
+		<!--browser>C:\\Programmi\\Mozilla Firefox\\firefox.exe</browser-->
+		<!--browser>C:\\Program Files\\Mozilla Firefox\\firefox.exe</browser-->
+		
+		<!--  WINDOWS  IEXPLORER   -->
 		<browser>C:\\Programmi\\Internet Explorer\\iexplore.exe</browser>
-		<browser>cmd /C start</browser>
-		<!-- per il momento coi fogli di stile che abbiamo firefox su windows non funziona -->
-		<browser>C:\\Programmi\\Mozilla Firefox\\firefox.exe</browser>		
-		<browser>cmd /C start</browser>
+		<browser>C:\\Program Files\\Internet Explorer\\iexplore.exe</browser>
+		
+		<!--   WIN altro   -->		
+		<browser>cmd /C start</browser>	
 		<browser>command /C start</browser>
 	</browsers>
 	<readerpdf>
