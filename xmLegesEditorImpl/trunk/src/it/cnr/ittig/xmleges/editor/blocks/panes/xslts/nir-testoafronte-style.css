@@ -376,22 +376,24 @@ li.choosedata-active 		{
 				
 .abrogatoRight {
 				display:inline;
+				font-weight: bold;
 				font-style:italic;	
-				background: #FF0000 !important;		
+				background: #FF6666 !important;		
 				
 				}		
 .inseritoRight {
 				display:inline;
 													/* font-style:italic !important; */
 				font-weight: bold;
-				background: #00FF00 !important;
+				font-style:italic;
+				background: #CCFF99 !important;
 				}		
 .sostituitoRight{
 				display:inline;
 													/* font-style:italic !important; */
 				font-weight: bold;
 				font-style:italic;
-				background: #FFFF00 !important;
+				background: #FFFF99 !important;
 				}	
 				
 #menuHor			{

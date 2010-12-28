@@ -1528,12 +1528,15 @@
 											</xsl:when>
 											<xsl:otherwise>
 												<div class="abrogatoRight">
-													<xsl:apply-templates select="nir:num">
+													<xsl:value-of select="node()"></xsl:value-of>
+														
+													
+													<!-- xsl:apply-templates select="nir:num">
 														<xsl:with-param name="pos" select="$pos" />
 													</xsl:apply-templates>
 													<xsl:apply-templates select="nir:rubrica | nir:corpo| nir:alinea">
 														<xsl:with-param name="pos" select="$pos" />
-													</xsl:apply-templates>
+													</xsl:apply-templates-->
 													
 													<xsl:text> </xsl:text>
 													&#160;[...]<!-- D: -->
