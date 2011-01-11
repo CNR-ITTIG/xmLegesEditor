@@ -182,7 +182,7 @@ public class RiferimentiPaneImpl implements RiferimentiPane, EventManagerListene
 					JEditorPane ep = new JEditorPane();
 				    try {
 				    	//test connessione
-				        ep.setPage("http://www.nir.it");
+				        ep.setPage("http://www.normattiva.it");
 				       
 				        client = new HttpClient(new MultiThreadedHttpConnectionManager());
 					
@@ -229,7 +229,7 @@ public class RiferimentiPaneImpl implements RiferimentiPane, EventManagerListene
 	}
 
 	private void testURN(String urn) {
-		GetMethod get = new GetMethod("http://www.nir.it/cgi-bin/N2Ln?"+urn);
+		GetMethod get = new GetMethod("http://www.normattiva.it/uri-res/N2Ls?"+urn);
 		get.setFollowRedirects(true);
 
 		try {

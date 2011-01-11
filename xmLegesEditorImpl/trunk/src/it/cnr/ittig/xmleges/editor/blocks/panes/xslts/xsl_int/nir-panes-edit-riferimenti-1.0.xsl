@@ -97,13 +97,27 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 </xsl:template>
 
 <xsl:template name="makeA">
+
+
+	<xsl:variable name="riftilde">
+			<xsl:choose>
+			   <xsl:when test="contains(@xlink:href, '#')">
+			      <xsl:value-of select="substring-before(@xlink:href, '#')"/>~<xsl:value-of select="substring-after(@xlink:href, '#')"/>
+			   </xsl:when>
+		   <xsl:otherwise>
+				<xsl:value-of select="@xlink:href"/>
+		   </xsl:otherwise>
+		   </xsl:choose>
+	</xsl:variable>
+
+
 	<xsl:element name="a">
 		<xsl:choose>
 			<xsl:when test="substring(@xlink:href, 1, 1)='#'">
 				<xsl:attribute name="href"><xsl:value-of select="@xlink:href"/></xsl:attribute>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:attribute name="href">http://www.normattiva.it/uri-res/N2Ls?<xsl:value-of select="@xlink:href"/></xsl:attribute>
+				<xsl:attribute name="href">http://www.normattiva.it/uri-res/N2Ls?<xsl:value-of select="$riftilde"/></xsl:attribute>
 			</xsl:otherwise>
 		</xsl:choose>
 		[<xsl:apply-templates select="@xlink:href"/>]

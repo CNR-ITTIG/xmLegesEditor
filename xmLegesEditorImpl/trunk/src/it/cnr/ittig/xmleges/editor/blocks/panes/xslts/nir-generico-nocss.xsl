@@ -920,48 +920,71 @@
 		<a href="http://www.nir.it/cgi-bin/N2Ln?{@xlink:href}" title="URN = {@xlink:href}" ><xsl:value-of select="@xlink:href" /></a>
 	</xsl:template>
 	
-	<xsl:template match="//*[name()='rif']">
+	
+		<xsl:template match="//*[name()='rif']">
 		<xsl:variable name="url">
 			<xsl:value-of select="@xlink:href" />
 		</xsl:variable>
 		<xsl:variable name="post">
 			<xsl:value-of select="./parent::*" />
-		</xsl:variable>			
-		<xsl:variable name="strina">
+		</xsl:variable>
+		<xsl:variable name="stringa">
 			<xsl:value-of select="substring(substring-after($post,.),1,1)" />
-		</xsl:variable>	
+		</xsl:variable>
+		
+		<xsl:variable name="riftilde">
+			<xsl:choose>
+			   <xsl:when test="contains(@xlink:href, '#')">
+			      <xsl:value-of select="substring-before(@xlink:href, '#')"/>~<xsl:value-of select="substring-after(@xlink:href, '#')"/>
+			   </xsl:when>
+		   <xsl:otherwise>
+				<xsl:value-of select="@xlink:href"/>
+		   </xsl:otherwise>
+		   </xsl:choose>
+		</xsl:variable>
+		
+		
+		
 		<xsl:choose>
-			<xsl:when test="contains($url,'urn:nir:')">
+			<xsl:when test="contains($url,'urn:')">
 				<xsl:choose>
-					<xsl:when test="$strina='&#59;' or $strina='&#46;' or $strina='&#58;' or $strina='&#44;'  or $strina='&#45;'">		 
-						<a href="http://www.nir.it/cgi-bin/N2Ln?{@xlink:href}" title="URN = {@xlink:href}">
-							<xsl:apply-templates/>
+					<xsl:when
+						test="$stringa='&#59;' or $stringa='&#46;' or $stringa='&#58;' or $stringa='&#44;'  or $stringa='&#45;'">
+						<a href="http://www.normattiva.it/uri-res/N2Ls?{$riftilde}"
+							title="URN = {$riftilde}">
+							<xsl:apply-templates />
 						</a>
 					</xsl:when>
-					<xsl:otherwise>					 
-						<a href="http://www.nir.it/cgi-bin/N2Ln?{@xlink:href}" title="URN = {@xlink:href}">						
-							<xsl:apply-templates/>						
-						</a>&#160;
+					<xsl:otherwise>
+						<a href="http://www.normattiva.it/uri-res/N2Ls?{$riftilde}"
+							title="URN = {$riftilde}">
+							<xsl:apply-templates />
+						</a>
+						&#160;
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:choose>
-					<xsl:when test="$strina='&#59;' or $strina='&#46;' or $strina='&#58;' or $strina='&#44;'  or $strina='&#45;'">		 
+					<xsl:when
+						test="$stringa='&#59;' or $stringa='&#46;' or $stringa='&#58;' or $stringa='&#44;'  or $stringa='&#45;'">
 						<a href="{@xlink:href}" title="Destinazione: {@xlink:href}">
-							<xsl:apply-templates/>
+							<xsl:apply-templates />
 						</a>
 					</xsl:when>
-					<xsl:otherwise>					 
-						<a href="{@xlink:href}" title="Destinazione: {@xlink:href}">						
-						<xsl:apply-templates/>						
-						</a>&#160;
+					<xsl:otherwise>
+						<a href="{@xlink:href}" title="Destinazione: {@xlink:href}">
+							<xsl:apply-templates />
+						</a>
+						&#160;
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:otherwise>
 		</xsl:choose>
-		
 	</xsl:template>
+	
+	
+	
 	<xsl:template match="//*[name()='data']">
 		<span title="Data: {concat(substring(@norm,7,2),'/',substring(@norm,5,2),'/',substring(@norm,1,4))}">
 			<xsl:apply-templates/>

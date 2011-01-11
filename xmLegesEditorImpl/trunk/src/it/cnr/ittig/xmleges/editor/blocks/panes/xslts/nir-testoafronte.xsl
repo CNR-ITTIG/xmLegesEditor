@@ -774,32 +774,41 @@
 		</a>
 	</xsl:template>
 
+
 	<xsl:template match="//*[name()='rif']">
-		<xsl:param name="pos">
-			none
-		</xsl:param>
 		<xsl:variable name="url">
 			<xsl:value-of select="@xlink:href" />
 		</xsl:variable>
 		<xsl:variable name="post">
 			<xsl:value-of select="./parent::*" />
 		</xsl:variable>
-		<xsl:variable name="strina">
+		<xsl:variable name="stringa">
 			<xsl:value-of select="substring(substring-after($post,.),1,1)" />
+		</xsl:variable>
+		
+		<xsl:variable name="riftilde">
+			<xsl:choose>
+			   <xsl:when test="contains(@xlink:href, '#')">
+			      <xsl:value-of select="substring-before(@xlink:href, '#')"/>~<xsl:value-of select="substring-after(@xlink:href, '#')"/>
+			   </xsl:when>
+		   <xsl:otherwise>
+				<xsl:value-of select="@xlink:href"/>
+		   </xsl:otherwise>
+		   </xsl:choose>
 		</xsl:variable>
 		<xsl:choose>
 			<xsl:when test="contains($url,'urn:')">
 				<xsl:choose>
 					<xsl:when
-						test="$strina='&#59;' or $strina='&#46;' or $strina='&#58;' or $strina='&#44;'  or $strina='&#45;'">
-						<a href="http://www.normattiva.it/uri-res/N2Ls?{@xlink:href}"
-							title="URN = {@xlink:href}">
+						test="$stringa='&#59;' or $stringa='&#46;' or $stringa='&#58;' or $stringa='&#44;'  or $stringa='&#45;'">
+						<a href="http://www.normattiva.it/uri-res/N2Ls?{$riftilde}"
+							title="URN = {$riftilde}">
 							<xsl:apply-templates />
 						</a>
 					</xsl:when>
 					<xsl:otherwise>
-						<a href="http://www.normattiva.it/uri-res/N2Ls?{@xlink:href}"
-							title="URN = {@xlink:href}">
+						<a href="http://www.normattiva.it/uri-res/N2Ls?{$riftilde}"
+							title="URN = {$riftilde}">
 							<xsl:apply-templates />
 						</a>
 						&#160;
@@ -809,7 +818,7 @@
 			<xsl:otherwise>
 				<xsl:choose>
 					<xsl:when
-						test="$strina='&#59;' or $strina='&#46;' or $strina='&#58;' or $strina='&#44;'  or $strina='&#45;'">
+						test="$stringa='&#59;' or $stringa='&#46;' or $stringa='&#58;' or $stringa='&#44;'  or $stringa='&#45;'">
 						<a href="{@xlink:href}" title="Destinazione: {@xlink:href}">
 							<xsl:apply-templates />
 						</a>
@@ -823,8 +832,11 @@
 				</xsl:choose>
 			</xsl:otherwise>
 		</xsl:choose>
-
 	</xsl:template>
+
+
+
+
 	<xsl:template match="//*[name()='data']">
 		<xsl:param name="pos">
 			none

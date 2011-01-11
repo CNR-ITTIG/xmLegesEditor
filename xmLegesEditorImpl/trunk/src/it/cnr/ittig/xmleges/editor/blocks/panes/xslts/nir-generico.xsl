@@ -1032,19 +1032,33 @@
 		<xsl:variable name="stringa">
 			<xsl:value-of select="substring(substring-after($post,.),1,1)" />
 		</xsl:variable>
+		
+		<xsl:variable name="riftilde">
+			<xsl:choose>
+			   <xsl:when test="contains(@xlink:href, '#')">
+			      <xsl:value-of select="substring-before(@xlink:href, '#')"/>~<xsl:value-of select="substring-after(@xlink:href, '#')"/>
+			   </xsl:when>
+		   <xsl:otherwise>
+				<xsl:value-of select="@xlink:href"/>
+		   </xsl:otherwise>
+		   </xsl:choose>
+		</xsl:variable>
+		
+		
+		
 		<xsl:choose>
 			<xsl:when test="contains($url,'urn:')">
 				<xsl:choose>
 					<xsl:when
 						test="$stringa='&#59;' or $stringa='&#46;' or $stringa='&#58;' or $stringa='&#44;'  or $stringa='&#45;'">
-						<a href="http://www.normattiva.it/uri-res/N2Ls?{@xlink:href}"
-							title="URN = {@xlink:href}">
+						<a href="http://www.normattiva.it/uri-res/N2Ls?{$riftilde}"
+							title="URN = {$riftilde}">
 							<xsl:apply-templates />
 						</a>
 					</xsl:when>
 					<xsl:otherwise>
-						<a href="http://www.normattiva.it/uri-res/N2Ls?{@xlink:href}"
-							title="URN = {@xlink:href}">
+						<a href="http://www.normattiva.it/uri-res/N2Ls?{$riftilde}"
+							title="URN = {$riftilde}">
 							<xsl:apply-templates />
 						</a>
 						&#160;
@@ -1070,6 +1084,8 @@
 		</xsl:choose>
 
 	</xsl:template>
+	
+	
 	<xsl:template match="//*[name()='data']">
 		<div style="display:inline"
 			title="Data: {concat(substring(@norm,7,2),'/',substring(@norm,5,2),'/',substring(@norm,1,4))}">
