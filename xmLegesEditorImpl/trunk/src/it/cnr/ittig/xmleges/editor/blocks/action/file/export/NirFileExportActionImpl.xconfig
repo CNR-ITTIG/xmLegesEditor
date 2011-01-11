@@ -5,8 +5,8 @@
 		<browser>firefox</browser>
 		
 		<!--  WINDOWS  FIREFOX   -->
-		<!--browser>C:\\Programmi\\Mozilla Firefox\\firefox.exe</browser-->
-		<!--browser>C:\\Program Files\\Mozilla Firefox\\firefox.exe</browser-->
+		<browser>C:\\Programmi\\Mozilla Firefox\\firefox.exe</browser>
+		<browser>C:\\Program Files\\Mozilla Firefox\\firefox.exe</browser>
 		
 		<!--  WINDOWS  IEXPLORER   -->
 		<browser>C:\\Programmi\\Internet Explorer\\iexplore.exe</browser>
