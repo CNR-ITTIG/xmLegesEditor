@@ -1,0 +1,44 @@
+%ENCODING%
+%DOCTYPE%
+<NIR xmlns="http://www.normeinrete.it/disegnilegge/1.0" xmlns:h="http://www.w3.org/HTML/1998/html4">
+	<DisegnoLegge tipo="modificato">
+		<meta>
+			<descrittori>
+				<approvazione norm="" internal_id="" leg="15" tipodoc="DdlAssemblea"/>
+				<redazione norm="" nome="" url="http://www.senato.it"/>
+				<urn>urn:nir:senato.repubblica:disegno.legge;assemblea:15.legislatura;nnn</urn>
+			</descrittori>
+			<confronto>
+				<sinistra>Testo proposto dalla Commissione</sinistra>
+				<destra>Testo approvato dall'Assemblea</destra>
+			</confronto>
+		</meta>
+		<intestazione>
+			<emanante>SENATO DELLA REPUBBLICA</emanante>
+			<legislatura>Legislatura XV</legislatura>
+			<tipoDoc>DISEGNO DI LEGGE</tipoDoc>
+			<numDoc/>
+			<h:div style="text-align:center; font:italic">
+				Testo sottoposto all'esame dell'Assemblea
+			</h:div>
+			<h:p style="text-align:center; font:bold">DISEGNO DI LEGGE</h:p>
+			<titoloDoc/>
+			<h:div style="text-align:center; font:bold">d'iniziativa dei senatori <nome/>, <nome/>, <nome/>.</h:div>
+			<h:div style="text-align:center; font:italic">oppure</h:div>
+			<h:div style="text-align:center; font:bold">presentato dal Ministro {denominazione}</h:div>
+			<h:div style="text-align:center; font:bold">di concerto col Ministro {denominazione}</h:div>
+			<h:div style="text-align:center; font:bold">COMUNICATO ALLA PRESIDENZA IL <data norm=""/></h:div>
+		</intestazione>
+		<articolato>
+			<articolo id="art1">
+				<num>Art. 1</num>
+				<rubrica></rubrica>
+				<comma id="art1-com1">
+					<num>1. </num>
+					<corpo/>
+				</comma>
+			</articolo>
+		</articolato>
+	</DisegnoLegge>
+</NIR>
+
