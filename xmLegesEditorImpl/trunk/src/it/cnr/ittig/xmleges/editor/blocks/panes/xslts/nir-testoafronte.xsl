@@ -54,11 +54,11 @@
 						Testo a fronte tra
 						<td width="50%" valign="top">
 							documento vigente al
-							<xsl:value-of select="$data1" />
+							<xsl:value-of select="substring($data1,7,2)"/>/<xsl:value-of select="substring($data1,5,2)"/>/<xsl:value-of select="substring($data1,1,4)"/>
 						</td>
 						<td width="50%" valign="top">
 							e documento vigente al
-							<xsl:value-of select="$data2" />	
+							<xsl:value-of select="substring($data2,7,2)"/>/<xsl:value-of select="substring($data2,5,2)"/>/<xsl:value-of select="substring($data2,1,4)"/>	
 						</td>
 					</tr>
 				</table>
@@ -443,11 +443,11 @@
 		<xsl:param name="pos">
 			none
 		</xsl:param>
-		<p class="rubrica">
+		<div class="rubrica">
 			<xsl:call-template name="vigenza">
 				<xsl:with-param name="pos" select="$pos" />
 			</xsl:call-template>
-		</p>
+		</div>
 	</xsl:template>
 
 	<xsl:template match="//*[name()='decorazione']">
@@ -932,11 +932,11 @@
 				</p>
 			</xsl:when>
 			<xsl:otherwise>
-				<p class="firma">
+				<div class="firma">
 					<xsl:call-template name="vigenza">
 						<xsl:with-param name="pos" select="$pos" />
 					</xsl:call-template>
-				</p>
+				</div>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
