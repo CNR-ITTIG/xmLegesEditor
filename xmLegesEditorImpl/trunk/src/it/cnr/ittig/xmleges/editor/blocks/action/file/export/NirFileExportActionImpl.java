@@ -455,7 +455,7 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 			if (exportHTML(xsl, temp)) {
 				for (int i = 0; i < browsers.length; i++)
 					try {
-						String cmd = browsers[i] + " " + temp.getAbsolutePath();
+						String cmd = "\""+browsers[i]+"\"" + " " +"\""+ temp.getAbsolutePath()+"\"";      //.replaceAll(" ", " 20");
 						Runtime.getRuntime().exec(cmd);
 						break;
 					} catch (Exception ex) {
@@ -499,7 +499,8 @@ public class NirFileExportActionImpl implements NirFileExportAction, EventManage
 			if (exportHTML(xsl, temp)) {
 				for (int i = 0; i < browsers.length; i++)
 					try {
-						String cmd = browsers[i] + " " + temp.getAbsolutePath();
+						//String cmd = browsers[i] + " " + temp.getAbsolutePath();
+						String cmd = "\""+browsers[i]+"\"" + " " +"\""+ temp.getAbsolutePath()+"\"";
 						Runtime.getRuntime().exec(cmd);
 						break;
 					} catch (Exception ex) {
