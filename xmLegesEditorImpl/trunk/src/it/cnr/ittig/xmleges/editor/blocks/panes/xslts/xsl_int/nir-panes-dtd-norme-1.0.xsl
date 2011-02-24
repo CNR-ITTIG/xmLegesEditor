@@ -72,7 +72,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 </xsl:template>
 
 <xsl:template match="nir:preambolo">
-    <xsl:element name="p" use-attribute-sets="XsltMapperSetClass">
+    <xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
         <xsl:call-template name="vigenza"/>	
     </xsl:element>
 </xsl:template>
