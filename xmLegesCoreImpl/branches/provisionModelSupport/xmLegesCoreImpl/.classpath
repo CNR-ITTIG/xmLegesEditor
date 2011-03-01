@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/xmLegesCoreApi"/>
+	<classpathentry kind="lib" path="lib/dom4j-1.5.2.jar"/>
+	<classpathentry kind="lib" path="lib/jaxen-1.1-beta-4.jar"/>
+	<classpathentry kind="lib" path="lib/xerces-2_9_1/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="lib/xerces-2_9_1/serializer.jar"/>
+	<classpathentry kind="lib" path="lib/xerces-2_9_1/xml-apis.jar"/>
+	<classpathentry kind="lib" path="lib/xalan.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.9.jar"/>
+	<classpathentry kind="lib" path="lib/activation.jar"/>
+	<classpathentry kind="lib" path="lib/mail.jar"/>
+	<classpathentry kind="lib" path="lib/formsrt.jar"/>
+	<classpathentry kind="lib" path="lib/avalon-framework-cvs-20020806.jar"/>
+	<classpathentry kind="lib" path="lib/batik.jar"/>
+	<classpathentry kind="lib" path="lib/fop.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="lib/xmlgraphics-commons-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/commons-io-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/logkit-1.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/commons-httpclient.jar"/>
+	<classpathentry kind="lib" path="lib/jakarta-slide-webdavlib-2.1.jar"/>
+	<classpathentry kind="lib" path="lib/jdom-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/PDFBox-0.7.3.jar"/>
+	<classpathentry kind="lib" path="lib/FontBox-0.1.0-dev.jar"/>
+	<classpathentry kind="lib" path="lib/eclipse-xsd-2_4/org.eclipse.emf.common_2.4.0.v200804012208.jar"/>
+	<classpathentry kind="lib" path="lib/eclipse-xsd-2_4/org.eclipse.emf.ecore_2.4.0.v200804012208.jar"/>
+	<classpathentry kind="lib" path="lib/eclipse-xsd-2_4/org.eclipse.xsd_2.4.0.v200804012208.jar"/>
+	<classpathentry kind="lib" path="lib/jmyspell-core-1.0.0-beta-2.jar"/>
+	<classpathentry kind="lib" path="lib/looks-2.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/bounce-0.18.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
