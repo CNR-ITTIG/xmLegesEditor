@@ -1,0 +1,190 @@
+<!--  =====================================================================        
+            Modello dei documenti di NormeInRete (NIR)                               
+                                                                                     
+            norme: elementi ed attributi con contenuto normativo                     
+            Dipende da: 'nirstrict' oppure 'nirloose'                                
+                                                                                     
+          Versione  2.2                                                              
+          Release   29/07/2008                                                       
+          Fabio Vitali - UniBo                                                       
+                                                                                     
+            Per un'introduzione, si veda il documento 'note.html'                    
+        =====================================================================  -->
+
+<!--  =====================================================================
+
+Strutture fondamentali dei documenti normativi
+
+=====================================================================  -->
+<!ENTITY % docarticolato       "(meta,intestazione,formulainiziale,articolato,formulafinale,conclusione,annessi?)" >
+<!ENTITY % semiarticolato      "(meta,intestazione?,formulainiziale?,(%genstruct;)?,formulafinale?,conclusione?,annessi?)" >
+<!--  =====================================================================
+
+Elementi dell'intestazione
+
+=====================================================================  -->
+<!ELEMENT intestazione (#PCDATA |%elinline; | tipoDoc | dataDoc | numDoc | titoloDoc | emanante)*>
+<!ELEMENT tipoDoc %inline; >
+<!ELEMENT numDoc %inline; >
+
+<!ATTLIST numDoc %nomefac;  >
+<!ELEMENT titoloDoc %inlinefac; >
+<!ATTLIST titoloDoc %globalifac;  >
+<!ELEMENT emanante %inline; >
+<!ELEMENT dataDoc %inline; >
+
+<!ATTLIST dataDoc %data;  >
+
+<!--  =====================================================================
+
+Formula iniziale e finale
+
+=====================================================================  -->
+<!ELEMENT formulainiziale (#PCDATA |%elinline; | %allblocchi; | preambolo)*>
+
+<!ATTLIST formulainiziale %globalifac;  >
+<!ELEMENT formulafinale %ParaLevel; >
+<!ATTLIST formulafinale %globalifac;  >
+
+<!ELEMENT preambolo (#PCDATA |%elinline; | %allblocchi; | inlinemeta)*>
+
+<!ATTLIST preambolo %globalifac;  >
+
+<!ELEMENT decorazione (#PCDATA |%elinline; | rango)*>
+<!ELEMENT rango EMPTY >
+
+<!ATTLIST rango tipo %tiporango; #REQUIRED >
+<!--  =====================================================================
+
+Elementi dell'articolato
+
+=====================================================================  -->
+<!ELEMENT articolato %CMcompleto; >
+<!ATTLIST articolato %vigenza;  >
+<!ELEMENT libro      %CMlibro; >
+<!ATTLIST libro %globalireq;  >
+<!ELEMENT parte      %CMparte; >
+<!ATTLIST parte %globalireq;  >
+<!ELEMENT titolo     %CMtitolo; >
+<!ATTLIST titolo %globalireq;  >
+<!ELEMENT capo       %CMcapo; >
+<!ATTLIST capo %globalireq;  >
+<!ELEMENT sezione    %CMsezione; >
+<!ATTLIST sezione %globalireq;  >
+<!ELEMENT paragrafo  %CMparagrafo; >
+<!ATTLIST paragrafo %globalireq;  >
+<!ELEMENT articolo   %CMarticolo; >
+<!ATTLIST articolo %globalireq;  >
+
+<!ELEMENT rubrica %inlinefac; >
+<!ATTLIST rubrica %globalifac;  >
+<!ELEMENT num %inline; >
+
+<!--  =====================================================================
+
+Elementi sotto l'articolo
+
+=====================================================================  -->
+<!ELEMENT comma %CMcomma; >
+<!ATTLIST comma %globalireq;  >
+<!ELEMENT el %CMel; >
+<!ATTLIST el %globalifac;  >
+<!ELEMENT en %CMen; >
+<!ATTLIST en %globalifac;  >
+<!ELEMENT ep %CMep; >
+<!ATTLIST ep %globalifac;  >
+<!ELEMENT corpo %ParaLevel; >
+<!ATTLIST corpo %globalifac;  >
+<!ELEMENT alinea %inline; >
+<!ELEMENT coda %inline; >
+<!--  =====================================================================
+
+Elementi della conclusione
+
+=====================================================================  -->
+
+<!ELEMENT conclusione (#PCDATA |%elinline; | dataeluogo | firma)*>
+<!ELEMENT dataeluogo %inline; >
+
+<!ATTLIST dataeluogo %data;  %dove;  >
+
+<!ELEMENT firma %ParaLevel; >
+<!ATTLIST firma %globalifac;  >
+
+<!ATTLIST firma tipo %tipofirma; 'sottoscrizione'  >
+
+<!--  =====================================================================
+
+Elementi degli annessi
+
+=====================================================================  -->
+<!ELEMENT annessi (elencoAnnessi?,annesso+)>
+<!ELEMENT elencoAnnessi %blocchi; >
+
+<!ELEMENT annesso (inlinemeta?,testata?,(%NormaNazionale; | %AltreNorme; | %DocumentiGenerici; | rifesterno))>
+
+<!ATTLIST annesso %globalireq;  >
+<!ELEMENT rifesterno EMPTY >
+
+<!ATTLIST rifesterno %link;  >
+<!ELEMENT testata (denAnnesso?,titAnnesso?,preAnnesso?)>
+<!ELEMENT denAnnesso %ParaLevel; >
+<!ATTLIST denAnnesso %globalifac;  >
+<!ELEMENT titAnnesso %ParaLevel; >
+<!ATTLIST titAnnesso %globalifac;  >
+<!ELEMENT preAnnesso %ParaLevel; >
+<!ATTLIST preAnnesso %globalifac;  >
+<!--  =====================================================================
+
+Elementi inline e speciali con semantica rilevante
+
+=====================================================================  -->
+<!ELEMENT rif %inlinefac; >
+<!ATTLIST rif %globalifac;  >
+
+<!ATTLIST rif %link;  >
+<!ELEMENT mrif %inlinefac; >
+<!ATTLIST mrif %globalifac;  >
+<!ELEMENT irif %inlinefac; >
+<!ATTLIST irif %globalifac;  >
+
+<!ATTLIST irif %link;  finoa %uri; #REQUIRED >
+
+<!ENTITY % modType_mixed "%elinline; | virgolette" >
+<!ENTITY % modType "(#PCDATA | %modType_mixed;)*" >
+<!ELEMENT mod  %modType; >
+<!ATTLIST mod %globalireq;  >
+<!ELEMENT mmod %modType; >
+<!ATTLIST mmod %globalireq;  >
+<!ELEMENT imod %modType; >
+<!ATTLIST imod %globalireq;  >
+
+<!ATTLIST imod %link;  finoa %uri; #REQUIRED >
+
+<!ENTITY % CMvirg "libro | parte | titolo | capo | sezione | paragrafo | articolo | comma | el | en | ep | partizione | %elinline; | %allblocchi;" >
+
+<!ELEMENT virgolette (#PCDATA |%CMvirg;)*>
+
+<!ATTLIST virgolette tipo (parola|struttura) 'parola'  %globalireq;  >
+<!ELEMENT def %inline; >
+<!ELEMENT atto %inline; >
+
+<!ATTLIST atto %codice;  >
+<!ELEMENT soggetto %inline; >
+
+<!ATTLIST soggetto %codice;  >
+<!ELEMENT ente %inline; >
+
+<!ATTLIST ente %codice;  >
+<!ELEMENT data %inline; >
+
+<!ATTLIST data %data;  >
+<!ELEMENT luogo %inline; >
+
+<!ATTLIST luogo %dove;  >
+<!ELEMENT importo %inline; >
+
+<!ATTLIST importo valore %numero; #IMPLIED valuta %valute; 'EU'  >
+<!--  =====================================================================        
+            fine del file norme.dtd                                                  
+        =====================================================================  -->

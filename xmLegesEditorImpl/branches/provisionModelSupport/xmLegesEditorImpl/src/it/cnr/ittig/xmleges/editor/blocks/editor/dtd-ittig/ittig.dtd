@@ -1,0 +1,20 @@
+
+<!ENTITY % ittigNS  "xmlns:ittig CDATA #FIXED 'http://www.ittig.cnr.it/provvedimenti/2.2'" >
+<!ENTITY % ittigtipo "(atto|allegato|libro|parte|titolo|capo|sezione|articolo|comma|alinea|coda|lettera|numero|punto|periodo|parole|capoverso|rubrica)" >
+<!ENTITY % ittigdove "(prima|dopo|inizio|fine|fra-prima|fra-dopo)" >
+<!ENTITY % ittigruolo "(da|a|prima|dopo)" >
+
+<!ELEMENT ittig:notavigenza EMPTY >
+<!ATTLIST ittig:notavigenza %ittigNS; %idreq; auto %anystring; #REQUIRED>
+
+<!ELEMENT ittig:dove EMPTY >
+<!ATTLIST ittig:dove %ittigNS; valore %ittigdove; #REQUIRED>
+
+<!ELEMENT ittig:ruolo EMPTY >
+<!ATTLIST ittig:ruolo %ittigNS; valore %ittigruolo; #REQUIRED>
+
+<!ELEMENT ittig:tipo EMPTY >
+<!ATTLIST ittig:tipo %ittigNS; valore %ittigtipo; #REQUIRED>
+
+<!ELEMENT ittig:bordo (ittig:bordo?) >
+<!ATTLIST ittig:bordo %ittigNS; tipo %ittigtipo; #REQUIRED num %numero; #IMPLIED ord %numero; #IMPLIED>
