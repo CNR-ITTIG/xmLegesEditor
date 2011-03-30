@@ -163,56 +163,12 @@ public class NirXsltPanesImpl implements NirXsltPanes, Loggable, Serviceable, Co
 		if (node == null)
 			return;
 
-		String nodeName = node.getNodeName();
-		Node container = nirUtilDom.getParentContainer(node);
-		String contName = container.getNodeName();
-		
+		String nodeName = node.getNodeName();		
 		
 
 		if(node.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE && node.getNodeValue().startsWith("<rif")) {   // processing instruction di tipo rif (rif incompleti)
 			return;
-		}else if ("comma".equals(contName) || "el".equals(contName) || "en".equals(contName) || "ep".equals(contName)) {
-			String contained = node.getNodeValue();
-			Node[] nexts = UtilDom.getAllNextSibling(node);
-			int azione = partizioni.canInsertNuovaPartizione(node, container);
-			if (azione != -1) {
-				Node n = partizioni.nuovaPartizione(node, contName, azione);
-				EditTransaction tr = null;
-				// n: nuovo nodo; node: nodo di partenza
-				try { // gestione spezzamento testo
-					tr = documentManager.beginEdit();
-					if (UtilDom.findDirectChild(n, "corpo") != null
-							&& (node.getParentNode().getNodeName().equals("corpo") || node.getParentNode().getNodeName().equals("alinea"))) { // sono
-						// dentro
-						// un
-						// corpo
-						if (contained != null) {
-							Node corpoParent = node.getParentNode();
-							node.setNodeValue(contained.substring(0, start));
-							UtilDom.removeEmptyText(corpoParent);
-							if (n != null) {
-								Node newCorpo = UtilDom.findDirectChild(n, "corpo");
-								UtilDom.setTextNode(newCorpo, contained.substring(start));
-								for (int i = 0; i < nexts.length; i++)
-									newCorpo.appendChild(nexts[i]);
-								UtilDom.removeEmptyText(n);
-							}
-						}
-					}
-					documentManager.commitEdit(tr);
-				} catch (Exception ex) {
-					logger.error(ex.getMessage(), ex);
-					documentManager.rollbackEdit(tr);
-				}
-				if (n != null) {
-					Node corpo = UtilDom.findDirectChild(n, "corpo");
-					if (corpo != null)
-						selectionManager.setActiveNode(this, corpo);
-					else
-						selectionManager.setActiveNode(this, n);
-				}
-			}
-		} else if ("h:p".equals(node.getParentNode().getNodeName()) || "h:li".equals(node.getParentNode().getNodeName())) {
+		}else if ("h:p".equals(node.getParentNode().getNodeName()) || "h:li".equals(node.getParentNode().getNodeName())) {
 			String text = null;
 			Node parent = node.getParentNode();
 			if (UtilDom.isTextNode(node)) {
@@ -254,7 +210,52 @@ public class NirXsltPanesImpl implements NirXsltPanes, Loggable, Serviceable, Co
 					documentManager.rollbackEdit(tr);
 				}
 			}
-		}
+		} else {
+			Node container = nirUtilDom.getParentContainer(node);
+			String contName = container.getNodeName();
+			if ("comma".equals(contName) || "el".equals(contName) || "en".equals(contName) || "ep".equals(contName)) {
+			String contained = node.getNodeValue();
+			Node[] nexts = UtilDom.getAllNextSibling(node);
+			int azione = partizioni.canInsertNuovaPartizione(node, container);
+			if (azione != -1) {
+				Node n = partizioni.nuovaPartizione(node, contName, azione);
+				EditTransaction tr = null;
+				// n: nuovo nodo; node: nodo di partenza
+				try { // gestione spezzamento testo
+					tr = documentManager.beginEdit();
+					if (UtilDom.findDirectChild(n, "corpo") != null
+							&& (node.getParentNode().getNodeName().equals("corpo") || node.getParentNode().getNodeName().equals("alinea"))) { // sono
+						// dentro
+						// un
+						// corpo
+						if (contained != null) {
+							Node corpoParent = node.getParentNode();
+							node.setNodeValue(contained.substring(0, start));
+							UtilDom.removeEmptyText(corpoParent);
+							if (n != null) {
+								Node newCorpo = UtilDom.findDirectChild(n, "corpo");
+								UtilDom.setTextNode(newCorpo, contained.substring(start));
+								for (int i = 0; i < nexts.length; i++)
+									newCorpo.appendChild(nexts[i]);
+								UtilDom.removeEmptyText(n);
+							}
+						}
+					}
+					documentManager.commitEdit(tr);
+				} catch (Exception ex) {
+					logger.error(ex.getMessage(), ex);
+					documentManager.rollbackEdit(tr);
+				}
+				if (n != null) {
+					Node corpo = UtilDom.findDirectChild(n, "corpo");
+					if (corpo != null)
+						selectionManager.setActiveNode(this, corpo);
+					else
+						selectionManager.setActiveNode(this, n);
+				}
+			}
+		} 
+	}
 	}
 
 	// ////////////////////////////////////////// DeleteNextPrevAction Interface
