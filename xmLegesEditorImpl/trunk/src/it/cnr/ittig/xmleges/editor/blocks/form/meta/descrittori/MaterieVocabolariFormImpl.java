@@ -320,10 +320,10 @@ Serviceable, Initializable, ActionListener {
 	private void loadVocabulary() {
 		
 		String prefix ="vocabolari";
-		String[] vocabulary = new String[]{"TESEO.xml", "regioneUmbria.xml", "CNIPA.xml", "regioneToscana.xml"};
+		String[] vocabulary = new String[]{"TESEO.xml", "regioneUmbria.xml", "CNIPA.xml", "regioneToscana.xml", "regioneMolise.xml"};
 
 		for (int i = 0; i < vocabulary.length; i++)		
-			//Non sovrascrivo i vocabolari già presenti
+			//Non sovrascrivo i vocabolari giï¿½ presenti
 			if (!new File(UtilFile.getTempDirName() + File.separatorChar + prefix+File.separator+vocabulary[i]).exists())	
 				UtilFile.copyFileInTempDir(getClass().getResourceAsStream(prefix + "/" + vocabulary[i]), prefix, vocabulary[i]);
 				
