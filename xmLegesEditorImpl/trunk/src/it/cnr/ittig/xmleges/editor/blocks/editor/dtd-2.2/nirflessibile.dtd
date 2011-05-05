@@ -1,20 +1,19 @@
 <!ENTITY % PredefinedSimpleTypes SYSTEM "./pst.dtd">
 %PredefinedSimpleTypes;
 
-<!--  ====================================================================        
-           Modello dei documenti di NormeInRete (NIR)                               
-                                                                                    
-           nirloose: definizioni globali dello schema flessibile                    
-           Dipende da: niente                                                       
-                                                                                    
-           Versione  2.2                                                            
-           Release   29/07/2008                                                     
-           Fabio Vitali - UniBo                                                     
-                                                                                    
-           Per un'introduzione, si veda il documento 'note.html'                    
-        ====================================================================        
+<!--  =====================================================================
+Modello dei documenti di NormeInRete (NIR)
 
-        ====================================================================        
+nirloose: definizioni globali dello schema flessibile
+Dipende da: niente
+
+Versione  2.2
+Release   30/06/2010 (Release FInale)
+Fabio Vitali - UniBo
+
+Per un'introduzione, si veda il documento 'note.html'
+=====================================================================  -->
+<!--  ====================================================================        
                                                                                     
        	Entita' esterne: caratteri                                               
                                                                                     

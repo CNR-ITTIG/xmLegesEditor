@@ -1,15 +1,15 @@
-<!--  =====================================================================        
-            Modello dei documenti di NormeInRete (NIR)                               
-                                                                                     
-            globali: elementi ed attributi comuni o generici                         
-            Dipende da: 'nirstrict' oppure 'nirloose'                                
-                                                                                     
-          Versione  2.2                                                              
-          Release   29/07/2008                                                       
-          Fabio Vitali - UniBo                                                       
-                                                                                     
-          Per un'introduzione, si veda il documento 'note.html'                      
-        =====================================================================  -->
+<!--  =====================================================================
+Modello dei documenti di NormeInRete (NIR)
+
+globali: elementi ed attributi comuni o generici
+Dipende da: 'nirstrict' oppure 'nirloose'
+
+Versione  2.2
+Release   30/06/2010 (Release FInale)
+Fabio Vitali - UniBo
+
+Per un'introduzione, si veda il documento 'note.html'
+=====================================================================  -->
 <!--  =====================================================================
 
 Entita' principali
@@ -51,11 +51,11 @@ Entita': content model comuni ai vari tipi di elementi
 <!ENTITY % genvuoti    "vuoto | ndr" >
 <!ENTITY % geninline   "inlinea" >
 <!ENTITY % genblocchi  "blocco" >
-<!ENTITY % genstruct   "contenitore | gerarchia | articolato" >
+<!ENTITY % genstruct   "contenitore | gerarchia | lista | articolato" >
 <!ENTITY % txtvuoti    "h:br | h:hr | h:img" >
 <!ENTITY % txtinline   "h:span | h:i | h:u | h:b | h:sup | h:sub | h:a" >
 <!ENTITY % txtblocchi  "h:div | h:p | h:form | h:table | h:object | %liste;" >
-<!ENTITY % nrminline   "rif | irif | mrif | mod | mmod | def | atto | soggetto | luogo | ente | data | importo" >
+<!ENTITY % nrminline   "rif | irif | mrif | mod | imod | mmod | def | atto | soggetto | luogo | ente | data | importo" >
 <!ENTITY % nrmstruct   "intestazione | formulainiziale | preambolo | formulafinale | conclusione | annessi" >
 <!ENTITY % allvuoti    "%genvuoti; | %txtvuoti;" >
 <!ENTITY % allinline   "%geninline; | %txtinline; | %nrminline;" >

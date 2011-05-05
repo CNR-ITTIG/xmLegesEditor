@@ -1,15 +1,15 @@
-<!--  =====================================================================        
-            Modello dei documenti di NormeInRete (NIR)                               
-                                                                                     
-            testo: elementi ed attributi testuali                                    
-            Dipende da: 'nirstrict' oppure 'nirloose'                                
-                                                                                     
-          Versione  2.2                                                              
-          Release   29/07/2008                                                       
-          Fabio Vitali - UniBo                                                       
-                                                                                     
-            Per un'introduzione, si veda il documento 'note.html'                    
-        =====================================================================  -->
+<!--  =====================================================================
+Modello dei documenti di NormeInRete (NIR)
+
+testo: elementi ed attributi testuali
+Dipende da: 'nirstrict' oppure 'nirloose'
+
+Versione  2.2
+Release   30/06/2010 (Release FInale)
+Fabio Vitali - UniBo
+
+Per un'introduzione, si veda il documento 'note.html'
+=====================================================================  -->
 
 <!--  =====================================================================
 
@@ -35,7 +35,7 @@ Tipi semplici HTML
 <!ENTITY % valign     "(top|middle|bottom|baseline)" >
 <!ENTITY % Evalign "((top|middle|bottom|baseline))" >
 
-<!--  =====================================================================        
+<!--  =======================        
                                                                                      
             Elementi con content model EMPTY                                         
                                                                                      
