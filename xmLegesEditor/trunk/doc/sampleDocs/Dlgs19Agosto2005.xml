@@ -1,0 +1,869 @@
+<?xml version="1.0" encoding="windows-1252"?>
+	<!DOCTYPE NIR SYSTEM 'nircompleto.dtd'>
+	<NIR tipo="originale" xmlns="http://www.normeinrete.it/nir/2.2/" xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<DecretoLegislativo>
+			<meta>
+				<descrittori>
+					<pubblicazione norm="20050922" num="221" tipo="GU" />
+					<entratainvigore norm="" />
+					<redazione id="red1" nome="" norm="" />
+					<urn valore="" />
+				</descrittori>
+			</meta>
+			<intestazione>
+				<tipoDoc>Decreto Legislativo </tipoDoc>
+				<dataDoc norm="20050819">19 agosto 2005</dataDoc>
+				, n. 
+				<numDoc>190</numDoc>
+				<titoloDoc>
+					&quot;Attuazione della 
+					<rif xlink:href="urn:nir:comunita.europee:direttiva:2002;2002-65-ce" xlink:type="simple">direttiva 2002/65/CE</rif>
+					relativa alla commercializzazione a distanza di servizi finanziari ai consumatori&quot; 
+				</titoloDoc>
+				pubblicato nella Gazzetta Ufficiale n. 221 del 22 settembre 2005 
+			</intestazione>
+			<formulainiziale>
+				<h:p>IL PRESIDENTE DELLA REPUBBLICA </h:p>
+				<h:p>Visti gli articoli 76 e 87 della Costituzione; </h:p>
+				<preambolo>
+					<h:p>
+						Vista la 
+						<rif xlink:href="urn:nir:stato:legge:2003-10-31;306" xlink:type="simple">legge 31 ottobre 2003, n. 306</rif>
+						, ed in particolare l'
+						<rif xlink:href="#art1" xlink:type="simple">articolo 1</rif>
+						, commi 1 e 3, e l'allegato B;
+					</h:p>
+					<h:p>
+						Vista la 
+						<rif xlink:href="urn:nir:comunita.europee:direttiva:2002-09-23;2002-65-ce" xlink:type="simple">direttiva 2002/65/CE del Parlamento europeo e del Consiglio, del 23 settembre 2002</rif>
+						, concernente la commercializzazione a distanza di servizi finanziari ai consumatori e che modifica la 
+						<rif xlink:href="urn:nir:comunita.europee:direttiva:1990;90-619-cee" xlink:type="simple">direttiva 90/619/CEE del Consiglio</rif>
+						e le direttive 97/7/CE e 98/27/CE;
+					</h:p>
+					<h:p>
+						Vista la 
+						<rif xlink:href="urn:nir:comunita.europee:direttiva:2002-11-05;2002-83-ce" xlink:type="simple">direttiva 2002/83/CE del Parlamento europeo, del 5 novembre 2002</rif>
+						, relativa all'assicurazione sulla vita;
+					</h:p>
+					<h:p>
+						Vista la 
+						<rif xlink:href="urn:nir:stato:legge:1982-08-12;576" xlink:type="simple">legge 12 agosto 1982, n. 576</rif>
+						;
+					</h:p>
+					<h:p>
+						Vista la 
+						<rif xlink:href="urn:nir:stato:legge:1990-08-07;241" xlink:type="simple">legge 7 agosto 1990, n. 241</rif>
+						, e successive modificazioni;
+					</h:p>
+					<h:p>
+						Visto il 
+						<rif xlink:href="urn:nir:stato:decreto.legge:1991-05-03;143" xlink:type="simple">decreto-legge 3 maggio 1991, n. 143</rif>
+						, convertito, con modificazioni, dalla 
+						<rif xlink:href="urn:nir:stato:legge:1991-07-05;197" xlink:type="simple">legge 5 luglio 1991, n. 197</rif>
+						;
+					</h:p>
+					<h:p>
+						Visto il testo unico delle leggi in materia bancaria e creditizia, di cui al 
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:1993-09-01;385" xlink:type="simple">decreto legislativo 1 settembre 1993, n. 385</rif>
+						;
+					</h:p>
+					<h:p>
+						Visto il 
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:1995-03-17;174" xlink:type="simple">decreto legislativo 17 marzo 1995, n. 174</rif>
+						;
+					</h:p>
+					<h:p>
+						Visto il 
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:1995-03-17;175" xlink:type="simple">decreto legislativo 17 marzo 1995, n. 175</rif>
+						;
+					</h:p>
+					<h:p>
+						Visto il 
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:1996-12-04;659" xlink:type="simple">decreto legislativo 4 dicembre 1996, n. 659</rif>
+						;
+					</h:p>
+					<h:p>
+						Vista la 
+						<rif xlink:href="urn:nir:stato:legge:1998-07-30;281" xlink:type="simple">legge 30 luglio 1998, n. 281</rif>
+						, e successive modificazioni; Visto il 
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:1998-11-09;427" xlink:type="simple">decreto legislativo 9 novembre 1998, n. 427</rif>
+						;
+					</h:p>
+					<h:p>
+						Visto il testo unico delle disposizioni in materia di intermediazione finanziaria, ai sensi degli articoli 8 e 21 della 
+						<rif xlink:href="urn:nir:stato:legge:1996-02-06;52" xlink:type="simple">legge 6 febbraio 1996, n. 52</rif>
+						, di cui al 
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:1998-02-24;58" xlink:type="simple">decreto legislativo 24 febbraio 1998, n. 58</rif>
+						;
+					</h:p>
+					<h:p>
+						Visto il 
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:1999-05-22;185" xlink:type="simple">decreto legislativo 22 maggio 1999, n. 185</rif>
+						;
+					</h:p>
+					<h:p>
+						Visto il 
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:2003-04-09;70" xlink:type="simple">decreto legislativo 9 aprile 2003, n. 70</rif>
+						;
+					</h:p>
+					<h:p>
+						Visto il 
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:2003-06-30;196" xlink:type="simple">decreto legislativo 30 giugno 2003, n. 196</rif>
+						;
+					</h:p>
+					<h:p>Vista la preliminare deliberazione del Consiglio dei Ministri, adottata nella riunione del 20 maggio 2005;</h:p>
+					<h:p>Acquisiti i pareri delle competenti Commissioni della Camera dei deputati e del Senato della Repubblica;</h:p>
+					<h:p>Vista la deliberazione del Consiglio dei Ministri, adottata nella riunione del 29 luglio 2005;</h:p>
+					<h:p>Sulla proposta del Ministro per le politiche comunitarie e del Ministro delle attività produttive, di concerto con i Ministri degli affari esteri, della giustizia e dell'economia e delle finanze;</h:p>
+				</preambolo>
+				<h:p>Emana</h:p>
+				<h:p>il seguente decreto legislativo: </h:p>
+			</formulainiziale>
+			<articolato>
+				<articolo id="art1">
+					<num>Art. 1.</num>
+					<rubrica>Oggetto e campo di applicazione </rubrica>
+					<comma id="art1-com1">
+						<num>1.</num>
+						<corpo>Il presente decreto si applica alla commercializzazione a distanza di servizi finanziari ai consumatori, anche quando una delle fasi della commercializzazione comporta la partecipazione, indipendentemente dal suo stato giuridico, di un soggetto diverso dal fornitore. </corpo>
+					</comma>
+					<comma id="art1-com2">
+						<num>2.</num>
+						<corpo>Per i contratti riguardanti servizi finanziari costituiti da un accordo iniziale di servizio seguito da operazioni successive o da una serie di operazioni distinte della stessa natura scaglionate nel tempo, le disposizioni del presente decreto si applicano esclusivamente all'accordo iniziale. Se non vi e' un accordo iniziale di servizio, ma le operazioni successive o distinte della stessa natura scaglionate nel tempo sono eseguite tra le stesse parti contrattuali, gli articoli 3, 4, 5, 6, 7, 8 e 9 si applicano solo quando e' eseguita la prima operazione. Tuttavia, se nessuna operazione della stessa natura e' eseguita entro un periodo di un anno, l'operazione successiva e' considerata come la prima di una nuova serie di operazioni e, di conseguenza, si applicano le disposizioni degli articoli 3, 4, 5, 6, 7, 8 e 9. </corpo>
+					</comma>
+					<comma id="art1-com3">
+						<num>3.</num>
+						<corpo>Ferme restando le disposizioni che stabiliscono regimi di autorizzazione per la commercializzazione dei servizi finanziari in Italia, sono fatte salve, ove non espressamente derogate, le disposizioni in materia bancaria, finanziaria, assicurativa e dei sistemi di pagamento e le competenze delle autorità indipendenti di settore. </corpo>
+					</comma>
+				</articolo>
+				<articolo id="art2">
+					<num>Art. 2.</num>
+					<rubrica>Definizioni </rubrica>
+					<comma id="art2-com1">
+						<num>1.</num>
+						<alinea>Ai fini del presente decreto si intende per: </alinea>
+						<el id="art2-com1-leta">
+							<num>a)</num>
+							<corpo>«contratto a distanza»: qualunque contratto avente per oggetto servizi finanziari, concluso tra un fornitore e un consumatore nell'ambito di un sistema di vendita o di prestazione di servizi a distanza organizzato dal fornitore che, per tale contratto, impieghi esclusivamente una o più tecniche di comunicazione a distanza fino alla conclusione del contratto, compresa la conclusione del contratto stesso; </corpo>
+						</el>
+						<el id="art2-com1-letb">
+							<num>b)</num>
+							<corpo>«servizio finanziario»: qualsiasi servizio di natura bancaria, creditizia, di pagamento, di investimento, di assicurazione o di previdenza individuale; </corpo>
+						</el>
+						<el id="art2-com1-letc">
+							<num>c)</num>
+							<corpo>«fornitore»: qualunque persona fisica o giuridica, soggetto pubblico o privato, che, nell'ambito delle proprie attività commerciali o professionali, e' il fornitore contrattuale dei servizi oggetto di contratti a distanza; </corpo>
+						</el>
+						<el id="art2-com1-letd">
+							<num>d)</num>
+							<corpo>«consumatore»: qualunque persona fisica che, nei contratti a distanza, agisca per fini che non rientrano nel quadro della propria attività imprenditoriale o professionale; </corpo>
+						</el>
+						<el id="art2-com1-lete">
+							<num>e)</num>
+							<corpo>«tecnica di comunicazione a distanza»: qualunque mezzo che, senza la presenza fisica e simultanea del fornitore e del consumatore, possa impiegarsi per la commercializzazione a distanza di un servizio tra le parti; </corpo>
+						</el>
+						<el id="art2-com1-letf">
+							<num>f)</num>
+							<corpo>«supporto durevole»: qualsiasi strumento che permetta al consumatore di memorizzare informazioni a lui personalmente dirette in modo che possano essere agevolmente recuperate durante un periodo di tempo adeguato ai fini cui sono destinate le informazioni stesse, e che consenta la riproduzione immutata delle informazioni memorizzate; </corpo>
+						</el>
+						<el id="art2-com1-letg">
+							<num>g)</num>
+							<corpo>«operatore o fornitore di tecnica di comunicazione a distanza»: qualunque persona fisica o giuridica, pubblica o privata, la cui attività commerciale o professionale consista nel mettere a disposizione dei fornitori una o più tecniche di comunicazione a distanza; </corpo>
+						</el>
+						<el id="art2-com1-leth">
+							<num>h)</num>
+							<corpo>«reclamo del consumatore»: una dichiarazione, sostenuta da validi elementi di prova, secondo cui un fornitore ha commesso o potrebbe commettere un'infrazione alla normativa sulla protezione degli interessi dei consumatori; </corpo>
+						</el>
+						<el id="art2-com1-leti">
+							<num>i)</num>
+							<corpo>«interessi collettivi dei consumatori»: gli interessi di un numero di consumatori che sono stati o potrebbero essere danneggiati da un'infrazione. </corpo>
+						</el>
+					</comma>
+				</articolo>
+				<articolo id="art3">
+					<num>Art. 3.</num>
+					<rubrica>Informazione del consumatore prima della conclusione del contratto a distanza </rubrica>
+					<comma id="art3-com1">
+						<num>1.</num>
+						<alinea>Nella fase delle trattative e comunque prima che il consumatore sia vincolato da un contratto a distanza o da un'offerta, gli sono fornite le informazioni riguardanti: </alinea>
+						<el id="art3-com1-leta">
+							<num>a)</num>
+							<corpo>il fornitore;</corpo>
+						</el>
+						<el id="art3-com1-letb">
+							<num>b)</num>
+							<corpo>il servizio finanziario;</corpo>
+						</el>
+						<el id="art3-com1-letc">
+							<num>c)</num>
+							<corpo>il contratto a distanza;</corpo>
+						</el>
+						<el id="art3-com1-letd">
+							<num>d)</num>
+							<corpo>il ricorso. </corpo>
+						</el>
+					</comma>
+					<comma id="art3-com2">
+						<num>2.</num>
+						<corpo>
+							Le informazioni di cui al 
+							<rif xlink:href="#art3-com1" xlink:type="simple">comma 1</rif>
+							, il cui fine commerciale deve risultare in maniera inequivocabile, sono fornite in modo chiaro e comprensibile con qualunque mezzo adeguato alla tecnica di comunicazione a distanza utilizzata, tenendo debitamente conto in particolare dei doveri di correttezza e buona fede nella fase precontrattuale e dei principi che disciplinano la protezione degli incapaci di agire e dei minori. 
+						</corpo>
+					</comma>
+					<comma id="art3-com3">
+						<num>3.</num>
+						<corpo>Le informazioni relative agli obblighi contrattuali, da comunicare al consumatore nella fase precontrattuale, devono essere conformi agli obblighi contrattuali imposti dalla legge applicabile al contratto a distanza anche qualora la tecnica di comunicazione impiegata sia quella elettronica. </corpo>
+					</comma>
+					<comma id="art3-com4">
+						<num>4.</num>
+						<corpo>
+							Se il fornitore ha sede in uno Stato non appartenente all'Unione europea, le informazioni di cui al 
+							<rif xlink:href="#art3-com3" xlink:type="simple">comma 3</rif>
+							devono essere conformi agli obblighi contrattuali imposti dalla legge italiana qualora il contratto sia concluso. 
+						</corpo>
+					</comma>
+				</articolo>
+				<articolo id="art4">
+					<num>Art. 4.</num>
+					<rubrica>Informazioni relative al fornitore </rubrica>
+					<comma id="art4-com1">
+						<num>1.</num>
+						<alinea>Le informazioni relative al fornitore riguardano: </alinea>
+						<el id="art4-com1-leta">
+							<num>a)</num>
+							<corpo>l'identità del fornitore e la sua attività principale, l'indirizzo geografico al quale il fornitore e' stabilito e qualsiasi altro indirizzo geografico rilevante nei rapporti tra consumatore e fornitore; </corpo>
+						</el>
+						<el id="art4-com1-letb">
+							<num>b)</num>
+							<corpo>l'identità del rappresentante del fornitore stabilito in Italia e l'indirizzo geografico rilevante nei rapporti tra consumatore e rappresentante, quando tale rappresentante esista; </corpo>
+						</el>
+						<el id="art4-com1-letc">
+							<num>c)</num>
+							<corpo>se il consumatore ha relazioni commerciali con un professionista diverso dal fornitore, l'identità del professionista, la veste in cui agisce nei confronti del consumatore, nonche' l'indirizzo geografico rilevante nei rapporti tra consumatore e professionista; </corpo>
+						</el>
+						<el id="art4-com1-letd">
+							<num>d)</num>
+							<corpo>se il fornitore e' iscritto in un registro commerciale o in un pubblico registro analogo, il registro di commercio in cui il fornitore e' iscritto e il numero di registrazione o un elemento equivalente per identificarlo nel registro; </corpo>
+						</el>
+						<el id="art4-com1-lete">
+							<num>e)</num>
+							<corpo>qualora l'attività del fornitore sia soggetta ad autorizzazione, gli estremi della competente autorità di controllo. </corpo>
+						</el>
+					</comma>
+				</articolo>
+				<articolo id="art5">
+					<num>Art. 5.</num>
+					<rubrica>Informazioni relative al servizio finanziario </rubrica>
+					<comma id="art5-com1">
+						<num>1.</num>
+						<alinea>Le informazioni relative al servizio finanziario riguardano: </alinea>
+						<el id="art5-com1-leta">
+							<num>a)</num>
+							<corpo>una descrizione delle principali caratteristiche del servizio finanziario; </corpo>
+						</el>
+						<el id="art5-com1-letb">
+							<num>b)</num>
+							<corpo>il prezzo totale che il consumatore dovrà corrispondere al fornitore per il servizio finanziario, compresi tutti i relativi oneri, commissioni e spese e tutte le imposte versate tramite il fornitore o, se non e' possibile indicare il prezzo esatto, la base di calcolo del prezzo, che consenta al consumatore di verificare quest'ultimo; </corpo>
+						</el>
+						<el id="art5-com1-letc">
+							<num>c)</num>
+							<corpo>se del caso, un avviso indicante che il servizio finanziario e' in rapporto con strumenti che implicano particolari rischi dovuti a loro specifiche caratteristiche o alle operazioni da effettuare, o il cui prezzo dipenda dalle fluttuazioni dei mercati finanziari su cui il fornitore non esercita alcuna influenza, e che i risultati ottenuti in passato non costituiscono elementi indicativi riguardo ai risultati futuri; </corpo>
+						</el>
+						<el id="art5-com1-letd">
+							<num>d)</num>
+							<corpo>l'indicazione dell'eventuale esistenza di altre imposte e costi non versati tramite il fornitore o non fatturati da quest'ultimo; </corpo>
+						</el>
+						<el id="art5-com1-lete">
+							<num>e)</num>
+							<corpo>qualsiasi limite del periodo durante il quale sono valide le informazioni fornite; </corpo>
+						</el>
+						<el id="art5-com1-letf">
+							<num>f)</num>
+							<corpo>le modalità di pagamento e di esecuzione, nonche' le caratteristiche essenziali delle condizioni di sicurezza delle operazioni di pagamento da effettuarsi nell'ambito dei contratti a distanza; </corpo>
+						</el>
+						<el id="art5-com1-letg">
+							<num>g)</num>
+							<corpo>qualsiasi costo specifico aggiuntivo per il consumatore relativo all'utilizzazione della tecnica di comunicazione a distanza, se addebitato; </corpo>
+						</el>
+						<el id="art5-com1-leth">
+							<num>h)</num>
+							<corpo>l'indicazione dell'esistenza di collegamenti o connessioni con altri servizi finanziari, con la illustrazione degli eventuali effetti complessivi derivanti dalla combinazione. </corpo>
+						</el>
+					</comma>
+				</articolo>
+				<articolo id="art6">
+					<num>Art. 6.</num>
+					<rubrica>Informazioni relative al contratto a distanza </rubrica>
+					<comma id="art6-com1">
+						<num>1.</num>
+						<alinea>Le informazioni relative al contratto a distanza riguardano: </alinea>
+						<el id="art6-com1-leta">
+							<num>a)</num>
+							<corpo>
+								l'esistenza o la mancanza del diritto di recesso conformemente all'
+								<rif xlink:href="#art11" xlink:type="simple">articolo 11</rif>
+								e, se tale diritto esiste, la durata e le modalità d'esercizio, comprese le informazioni relative all'importo che il consumatore può essere tenuto a versare ai sensi dell'
+								<rif xlink:href="#art12-com1" xlink:type="simple">articolo 12, comma 1</rif>
+								, nonche' alle conseguenze derivanti dal mancato esercizio di detto diritto; 
+							</corpo>
+						</el>
+						<el id="art6-com1-letb">
+							<num>b)</num>
+							<corpo>la durata minima del contratto a distanza, in caso di prestazione permanente o periodica di servizi finanziari; </corpo>
+						</el>
+						<el id="art6-com1-letc">
+							<num>c)</num>
+							<corpo>le informazioni relative agli eventuali diritti delle parti, secondo i termini del contratto a distanza, di mettere fine allo stesso prima della scadenza o unilateralmente, comprese le penali eventualmente stabilite dal contratto in tali casi; </corpo>
+						</el>
+						<el id="art6-com1-letd">
+							<num>d)</num>
+							<corpo>le istruzioni pratiche per l'esercizio del diritto di recesso, comprendenti tra l'altro il mezzo, inclusa in ogni caso la lettera raccomandata con avviso di ricevimento, e l'indirizzo a cui deve essere inviata la comunicazione di recesso; </corpo>
+						</el>
+						<el id="art6-com1-lete">
+							<num>e)</num>
+							<corpo>lo Stato membro o gli Stati membri sulla cui legislazione il fornitore si basa per instaurare rapporti con il consumatore prima della conclusione del contratto a distanza; </corpo>
+						</el>
+						<el id="art6-com1-letf">
+							<num>f)</num>
+							<corpo>qualsiasi clausola contrattuale sulla legislazione applicabile al contratto a distanza e sul foro competente; </corpo>
+						</el>
+						<el id="art6-com1-letg">
+							<num>g)</num>
+							<corpo>la lingua o le lingue in cui sono comunicate le condizioni contrattuali e le informazioni preliminari di cui al presente articolo, nonche' la lingua o le lingue in cui il fornitore, con l'accordo del consumatore, si impegna a comunicare per la durata del contratto a distanza. </corpo>
+						</el>
+					</comma>
+				</articolo>
+				<articolo id="art7">
+					<num>Art. 7.</num>
+					<rubrica>Informazioni relative al ricorso </rubrica>
+					<comma id="art7-com1">
+						<num>1.</num>
+						<alinea>Le informazioni relative al ricorso riguardano: </alinea>
+						<el id="art7-com1-leta">
+							<num>a)</num>
+							<corpo>l'esistenza o la mancanza di procedure extragiudiziali di reclamo e di ricorso accessibili al consumatore che e' parte del contratto a distanza e, ove tali procedure esistono, le modalità che consentono al consumatore di avvalersene; </corpo>
+						</el>
+						<el id="art7-com1-letb">
+							<num>b)</num>
+							<corpo>l'esistenza di fondi di garanzia o di altri dispositivi di indennizzo. </corpo>
+						</el>
+					</comma>
+				</articolo>
+				<articolo id="art8">
+					<num>Art. 8.</num>
+					<rubrica>Comunicazioni mediante telefonia vocale </rubrica>
+					<comma id="art8-com1">
+						<num>1.</num>
+						<alinea>In caso di comunicazioni mediante telefonia vocale: </alinea>
+						<el id="art8-com1-leta">
+							<num>a)</num>
+							<corpo>l'identità del fornitore e il fine commerciale della chiamata avviata dal fornitore sono dichiarati in maniera inequivoca all'inizio di qualsiasi conversazione con il consumatore; </corpo>
+						</el>
+						<el id="art8-com1-letb">
+							<num>b)</num>
+							<alinea>devono essere fornite, previo consenso del consumatore, solo le informazioni seguenti: </alinea>
+							<en id="art8-com1-letb-num1">
+								<num>1)</num>
+								<corpo>l'identità della persona in contatto con il consumatore e il suo rapporto con il fornitore;</corpo>
+							</en>
+							<en id="art8-com1-letb-num2">
+								<num>2)</num>
+								<corpo>una descrizione delle principali caratteristiche del servizio finanziario;</corpo>
+							</en>
+							<en id="art8-com1-letb-num3">
+								<num>3)</num>
+								<corpo>il prezzo totale che il consumatore dovrà corrispondere al fornitore per il servizio finanziario, comprese tutte le imposte versate tramite il fornitore o, se non e' possibile indicare il prezzo esatto, la base di calcolo del prezzo, che consenta al consumatore di verificare quest'ultimo;</corpo>
+							</en>
+							<en id="art8-com1-letb-num4">
+								<num>4)</num>
+								<corpo>l'indicazione dell'eventuale esistenza di altre imposte e/o costi non versati tramite il fornitore o non fatturati da quest'ultimo;</corpo>
+							</en>
+							<en id="art8-com1-letb-num5">
+								<num>5)</num>
+								<corpo>
+									l'esistenza o la mancanza del diritto di recesso conformemente all'
+									<rif xlink:href="#art11" xlink:type="simple">articolo 11</rif>
+									e, se tale diritto esiste, la durata e le modalità d'esercizio, comprese le informazioni relative all'importo che il consumatore può essere tenuto a versare ai sensi dell'
+									<rif xlink:href="#art12-com1" xlink:type="simple">articolo 12, comma 1</rif>
+									. 
+								</corpo>
+							</en>
+						</el>
+					</comma>
+					<comma id="art8-com2">
+						<num>2.</num>
+						<corpo>
+							Il fornitore comunica al consumatore che altre informazioni sono disponibili su richiesta e ne precisa la natura. Il fornitore comunica in ogni caso le informazioni complete quando adempie ai propri obblighi ai sensi dell'
+							<rif xlink:href="#art10" xlink:type="simple">articolo 10</rif>
+							. 
+						</corpo>
+					</comma>
+				</articolo>
+				<articolo id="art9">
+					<num>Art. 9.</num>
+					<rubrica>Requisiti aggiuntivi in materia di informazioni </rubrica>
+					<comma id="art9-com1">
+						<num>1.</num>
+						<corpo>Oltre alle informazioni di cui agli articoli 3, 4, 5, 6 e 7 sono applicabili le disposizioni più rigorose previste dalla normativa di settore che disciplina l'offerta del servizio o del prodotto interessato. </corpo>
+					</comma>
+					<comma id="art9-com2">
+						<num>2.</num>
+						<corpo>
+							Il Ministero delle attività produttive comunica alla Commissione europea le disposizioni nazionali sui requisiti di informazione preliminare che sono aggiuntive rispetto a quelle di cui all'
+							<rif xlink:href="urn:nir:comunita.europee:direttiva:2002;2002-65-ce#art3" xlink:type="simple">articolo 3, paragrafo 1, della direttiva 2002/65/CE</rif>
+							. 
+						</corpo>
+					</comma>
+					<comma id="art9-com3">
+						<num>3.</num>
+						<corpo>
+							Le autorità di vigilanza del settore bancario, assicurativo, finanziario e della previdenza complementare comunicano al Ministero delle attività produttive le disposizioni di cui al 
+							<rif xlink:href="#art9-com2" xlink:type="simple">comma 2</rif>
+							, per le materie di rispettiva competenza. 
+						</corpo>
+					</comma>
+					<comma id="art9-com4">
+						<num>4.</num>
+						<corpo>
+							Le informazioni di cui al 
+							<rif xlink:href="#art9-com2" xlink:type="simple">comma 2</rif>
+							sono messe a disposizione dei consumatori e dei fornitori, anche mediante l'utilizzo di sistemi telematici, a cura del Ministero delle attività produttive. 
+						</corpo>
+					</comma>
+				</articolo>
+				<articolo id="art10">
+					<num>Art. 10.</num>
+					<rubrica>Comunicazione delle condizioni contrattuali e delle informazioni preliminari </rubrica>
+					<comma id="art10-com1">
+						<num>1.</num>
+						<corpo>Il fornitore comunica al consumatore tutte le condizioni contrattuali nonche' le informazioni di cui agli articoli 3, 4, 5, 6, 7, 8 e 9, su supporto cartaceo o su un altro supporto durevole, disponibile e accessibile per il consumatore in tempo utile, prima che lo stesso sia vincolato da un contratto a distanza o da un'offerta. </corpo>
+					</comma>
+					<comma id="art10-com2">
+						<num>2.</num>
+						<corpo>
+							Il fornitore ottempera all'obbligo di cui al 
+							<rif xlink:href="#art10-com1" xlink:type="simple">comma 1</rif>
+							subito dopo la conclusione del contratto a distanza, se quest'ultimo e' stato concluso su richiesta del consumatore utilizzando una tecnica di comunicazione a distanza che non consente di trasmettere le condizioni contrattuali ne' le informazioni ai sensi del 
+							<rif xlink:href="#art10-com1" xlink:type="simple">comma 1</rif>
+							. 
+						</corpo>
+					</comma>
+					<comma id="art10-com3">
+						<num>3.</num>
+						<corpo>In qualsiasi momento del rapporto contrattuale il consumatore, se lo richiede, ha il diritto di ricevere le condizioni contrattuali su supporto cartaceo. Inoltre lo stesso ha il diritto di cambiare la tecnica di comunicazione a distanza utilizzata, a meno che ciò non sia incompatibile con il contratto concluso o con la natura del servizio finanziario prestato. </corpo>
+					</comma>
+				</articolo>
+				<articolo id="art11">
+					<num>Art. 11.</num>
+					<rubrica>Diritto di recesso </rubrica>
+					<comma id="art11-com1">
+						<num>1.</num>
+						<corpo>Il consumatore dispone di un termine di quattordici giorni per recedere dal contratto senza penali e senza dover indicare il motivo. </corpo>
+					</comma>
+					<comma id="art11-com2">
+						<num>2.</num>
+						<corpo>
+							Il predetto termine e' esteso a trenta giorni per i contratti a distanza aventi per oggetto le assicurazioni sulla vita di cui al 
+							<rif xlink:href="urn:nir:stato:decreto.legislativo:1995-03-17;174" xlink:type="simple">decreto legislativo 17 marzo 1995, n. 174</rif>
+							, e le operazioni aventi ad oggetto gli schemi pensionistici individuali. 
+						</corpo>
+					</comma>
+					<comma id="art11-com3">
+						<num>3.</num>
+						<alinea>Il termine durante il quale può essere esercitato il diritto di recesso decorre alternativamente: </alinea>
+						<el id="art11-com3-leta">
+							<num>a)</num>
+							<corpo>dalla data della conclusione del contratto, tranne nel caso delle assicurazioni sulla vita, per le quali il termine comincia a decorrere dal momento in cui al consumatore e' comunicato che il contratto e' stato concluso; </corpo>
+						</el>
+						<el id="art11-com3-letb">
+							<num>b)</num>
+							<corpo>
+								dalla data in cui il consumatore riceve le condizioni contrattuali e le informazioni di cui all'
+								<rif xlink:href="#art10" xlink:type="simple">articolo 10</rif>
+								, se tale data e' successiva a quella di cui alla 
+								<rif xlink:href="#art11-com3-leta" xlink:type="simple">lettera a)</rif>
+								. 
+							</corpo>
+						</el>
+					</comma>
+					<comma id="art11-com4">
+						<num>4.</num>
+						<corpo>L'efficacia dei contratti relativi ai servizi di investimento e' sospesa durante la decorrenza del termine previsto per l'esercizio del diritto di recesso. </corpo>
+					</comma>
+					<comma id="art11-com5">
+						<num>5.</num>
+						<alinea>Il diritto di recesso non si applica: </alinea>
+						<el id="art11-com5-leta">
+							<num>a)</num>
+							<alinea>ai servizi finanziari, diversi dal servizio di gestione su base individuale di portafogli di investimento se gli investimenti non sono stati già avviati, il cui prezzo dipende da fluttuazioni del mercato finanziario che il fornitore non e' in grado di controllare e che possono aver luogo durante il periodo di recesso, quali ad esempio i servizi riguardanti: </alinea>
+							<en id="art11-com5-leta-num1">
+								<num>1)</num>
+								<corpo>operazioni di cambio;</corpo>
+							</en>
+							<en id="art11-com5-leta-num2">
+								<num>2)</num>
+								<corpo>strumenti del mercato monetario;</corpo>
+							</en>
+							<en id="art11-com5-leta-num3">
+								<num>3)</num>
+								<corpo>valori mobiliari;</corpo>
+							</en>
+							<en id="art11-com5-leta-num4">
+								<num>4)</num>
+								<corpo>quote di un organismo di investimento collettivo;</corpo>
+							</en>
+							<en id="art11-com5-leta-num5">
+								<num>5)</num>
+								<corpo>contratti a termine fermo (futures) su strumenti finanziari, compresi gli strumenti equivalenti che si regolano in contanti;</corpo>
+							</en>
+							<en id="art11-com5-leta-num6">
+								<num>6)</num>
+								<corpo>contratti a termine su tassi di interesse (FRA);</corpo>
+							</en>
+							<en id="art11-com5-leta-num7">
+								<num>7)</num>
+								<corpo>contratti swaps su tassi d'interesse, su valute o contratti di scambio connessi ad azioni o a indici azionari (equity swaps);</corpo>
+							</en>
+							<en id="art11-com5-leta-num8">
+								<num>8)</num>
+								<corpo>opzioni per acquistare o vendere qualsiasi strumento previsto dalla presente lettera, compresi gli strumenti equivalenti che si regolano in contanti. Sono comprese in particolare in questa categoria le opzioni su valute e su tassi d'interesse; </corpo>
+							</en>
+						</el>
+						<el id="art11-com5-letb">
+							<num>b)</num>
+							<corpo>alle polizze di assicurazione viaggio e bagagli o alle analoghe polizze assicurative a breve termine di durata inferiore a un mese; </corpo>
+						</el>
+						<el id="art11-com5-letc">
+							<num>c)</num>
+							<corpo>ai contratti interamente eseguiti da entrambe le parti su esplicita richiesta scritta del consumatore prima che quest'ultimo eserciti il suo diritto di recesso, nonche' ai contratti di assicurazione obbligatoria della responsabilità civile per i danni derivanti dalla circolazione dei veicoli a motore e dei natanti, per i quali si sia verificato l'evento assicurato; </corpo>
+						</el>
+						<el id="art11-com5-letd">
+							<num>d)</num>
+							<corpo>
+								alle dichiarazioni dei consumatori rilasciate dinanzi ad un pubblico ufficiale a condizione che il pubblico ufficiale confermi che al consumatore sono garantiti i diritti di cui all'
+								<rif xlink:href="#art10-com1" xlink:type="simple">articolo 10, comma 1</rif>
+								. 
+							</corpo>
+						</el>
+					</comma>
+					<comma id="art11-com6">
+						<num>6.</num>
+						<corpo>
+							Se esercita il diritto di recesso, il consumatore invia, prima dello scadere del termine e secondo le istruzioni che gli sono state date ai sensi dell'
+							<rif xlink:href="#art6-com1-letd" xlink:type="simple">articolo 6, comma 1, lettera d)</rif>
+							, una comunicazione scritta al fornitore, mediante lettera raccomandata con avviso di ricevimento o altro mezzo indicato ai sensi dell'
+							<rif xlink:href="#art6-com1-letd" xlink:type="simple">articolo 6, comma 1, lettera d)</rif>
+							. 
+						</corpo>
+					</comma>
+					<comma id="art11-com7">
+						<num>7.</num>
+						<corpo>
+							Il presente articolo non si applica alla risoluzione dei contratti di credito disciplinata dall'
+							<rif xlink:href="urn:nir:stato:decreto.legislativo:1999-05-22;185#art5" xlink:type="simple">articolo 5 del decreto legislativo 22 maggio 1999, n. 185</rif>
+							, e dall'
+							<rif xlink:href="urn:nir:stato:decreto.legislativo:1998-11-09;427#art8" xlink:type="simple">articolo 8 del decreto legislativo 9 novembre 1998, n. 427</rif>
+							. 
+						</corpo>
+					</comma>
+					<comma id="art11-com8">
+						<num>8.</num>
+						<corpo>Se ad un contratto a distanza relativo ad un determinato servizio finanziario e' aggiunto un altro contratto a distanza riguardante servizi finanziari prestati da un fornitore o da un terzo sulla base di un accordo tra il terzo e il fornitore, questo contratto aggiuntivo e' risolto, senza alcuna penale, qualora il consumatore eserciti il suo diritto di recesso secondo le modalità fissate dal presente articolo. </corpo>
+					</comma>
+				</articolo>
+				<articolo id="art12">
+					<num>Art. 12.</num>
+					<rubrica>Pagamento del servizio fornito prima del recesso </rubrica>
+					<comma id="art12-com1">
+						<num>1.</num>
+						<corpo>
+							Il consumatore che esercita il diritto di recesso previsto dall'
+							<rif xlink:href="#art11-com1" xlink:type="simple">articolo 11, comma 1</rif>
+							, e' tenuto a pagare solo l'importo del servizio finanziario effettivamente prestato dal fornitore conformemente al contratto a distanza. L'esecuzione del contratto può iniziare solo previa richiesta del consumatore. Nei contratti di assicurazione l'impresa trattiene la frazione di premio relativa al periodo in cui il contratto ha avuto effetto. 
+						</corpo>
+					</comma>
+					<comma id="art12-com2">
+						<num>2.</num>
+						<alinea>
+							L'importo di cui al 
+							<rif xlink:href="#art12-com1" xlink:type="simple">comma 1</rif>
+							non può: 
+						</alinea>
+						<el id="art12-com2-leta">
+							<num>a)</num>
+							<corpo>eccedere un importo proporzionale all'importanza del servizio già fornito in rapporto a tutte le prestazioni previste dal contratto a distanza; </corpo>
+						</el>
+						<el id="art12-com2-letb">
+							<num>b)</num>
+							<corpo>essere di entità tale da poter costituire una penale. </corpo>
+						</el>
+					</comma>
+					<comma id="art12-com3">
+						<num>3.</num>
+						<corpo>
+							Il fornitore non può esigere dal consumatore il pagamento di un importo in base al 
+							<rif xlink:href="#art12-com1" xlink:type="simple">comma 1</rif>
+							se non e' in grado di provare che il consumatore e' stato debitamente informato dell'importo dovuto, in conformità all'
+							<rif xlink:href="#art6-com1-leta" xlink:type="simple">articolo 6, comma 1, lettera a)</rif>
+							. Egli non può tuttavia in alcun caso esigere tale pagamento se ha dato inizio all'esecuzione del contratto prima della scadenza del periodo di esercizio del diritto di recesso di cui all'
+							<rif xlink:href="#art11-com1" xlink:type="simple">articolo 11, comma 1</rif>
+							, senza che vi fosse una preventiva richiesta del consumatore. 
+						</corpo>
+					</comma>
+					<comma id="art12-com4">
+						<num>4.</num>
+						<corpo>
+							Il fornitore e' tenuto a rimborsare al consumatore, entro 15 giorni, tutti gli importi da questo versatigli in conformità del contratto a distanza, ad eccezione dell'importo di cui al 
+							<rif xlink:href="#art12-com1" xlink:type="simple">comma 1</rif>
+							. Il periodo decorre dal giorno in cui il fornitore riceve la comunicazione di recesso. L'impresa di assicurazione deve adempiere alle obbligazioni derivanti dal contratto, concernenti il periodo in cui il contratto medesimo ha avuto effetto. 
+						</corpo>
+					</comma>
+					<comma id="art12-com5">
+						<num>5.</num>
+						<corpo>
+							Il consumatore paga al fornitore il corrispettivo di cui al 
+							<rif xlink:href="#art12-com1" xlink:type="simple">comma 1</rif>
+							e gli restituisce qualsiasi bene o importo che abbia ricevuto da quest'ultimo entro quindici giorni dall'invio della comunicazione di recesso. Non sono ripetibili gli indennizzi e le somme eventualmente corrisposte dall'impresa agli assicurati e agli altri aventi diritto a prestazioni assicurative. 
+						</corpo>
+					</comma>
+					<comma id="art12-com6">
+						<num>6.</num>
+						<corpo>
+							Per i finanziamenti diretti principalmente a permettere di acquistare o mantenere diritti di proprietà su terreni o edifici esistenti o progettati, o di rinnovare o ristrutturare edifici, l'efficacia del recesso e' subordinata alla restituzione di cui al 
+							<rif xlink:href="#art12-com5" xlink:type="simple">comma 5</rif>
+							. 
+						</corpo>
+					</comma>
+				</articolo>
+				<articolo id="art13">
+					<num>Art. 13.</num>
+					<rubrica>Pagamento dei servizi finanziari offerti a distanza </rubrica>
+					<comma id="art13-com1">
+						<num>1.</num>
+						<corpo>
+							Il consumatore può effettuare il pagamento con carte di credito, debito o con altri strumenti di pagamento, ove ciò sia previsto tra le modalità di pagamento, che gli sono comunicate ai sensi dell'
+							<rif xlink:href="#art5-com1-letf" xlink:type="simple">articolo 5, comma 1, lettera f)</rif>
+							. 
+						</corpo>
+					</comma>
+					<comma id="art13-com2">
+						<num>2.</num>
+						<corpo>
+							Fatta salva l'applicazione dell'
+							<rif xlink:href="urn:nir:stato:legge:1991-07-05;197#art12" xlink:type="simple">articolo 12 della legge 5 luglio 1991, n. 197</rif>
+							, l'ente che emette o fornisce lo strumento di pagamento riaccredita al consumatore i pagamenti non autorizzati o dei quali questi dimostri l'eccedenza rispetto al prezzo pattuito ovvero l'effettuazione mediante l'uso fraudolento della propria carta di pagamento da parte del fornitore o di un terzo. L'ente che emette o fornisce lo strumento di pagamento ha diritto di addebitare al fornitore le somme riaccreditate al consumatore. 
+						</corpo>
+					</comma>
+					<comma id="art13-com3">
+						<num>3.</num>
+						<corpo>Fermo restando quanto previsto dalla disciplina sul valore probatorio della firma elettronica e dei documenti elettronici, e' in capo all'ente che emette o fornisce lo strumento di pagamento l'onere di provare che la transazione di pagamento e' stata autorizzata, accuratamente registrata e contabilizzata e che la medesima non e' stata alterata da guasto tecnico o da altra carenza. L'uso dello strumento di pagamento non comporta necessariamente che il pagamento sia stato autorizzato. </corpo>
+					</comma>
+					<comma id="art13-com4">
+						<num>4.</num>
+						<corpo>
+							Relativamente alle operazioni di pagamento da effettuarsi nell'ambito di contratti a distanza, il fornitore adotta condizioni di sicurezza conformi a quanto disposto ai sensi dell'
+							<rif xlink:href="urn:nir:stato:decreto.legislativo:1993-09-01;385#art146" xlink:type="simple">articolo 146 del decreto legislativo 1° settembre 1993, n. 385</rif>
+							, avendo riguardo, in particolare, alle esigenze di integrità, di autenticità e di tracciabilità delle operazioni medesime. 
+						</corpo>
+					</comma>
+				</articolo>
+				<articolo id="art14">
+					<num>Art. 14.</num>
+					<rubrica>Servizi non richiesti </rubrica>
+					<comma id="art14-com1">
+						<num>1.</num>
+						<corpo>E' vietata la fornitura di servizi finanziari al consumatore che non ne ha preliminarmente fatto richiesta, se la fornitura comporta una domanda di pagamento immediato, o differito. </corpo>
+					</comma>
+					<comma id="art14-com2">
+						<num>2.</num>
+						<corpo>Il consumatore non e' tenuto ad alcuna prestazione corrispettiva in caso di fornitura non richiesta. In ogni caso, la mancata risposta non significa consenso. </corpo>
+					</comma>
+				</articolo>
+				<articolo id="art15">
+					<num>Art. 15.</num>
+					<rubrica>Comunicazioni non richieste </rubrica>
+					<comma id="art15-com1">
+						<num>1.</num>
+						<alinea>L'utilizzazione da parte di un fornitore delle seguenti tecniche di comunicazione a distanza richiede il previo consenso del consumatore: </alinea>
+						<el id="art15-com1-leta">
+							<num>a)</num>
+							<corpo>sistemi di chiamata senza intervento di un operatore mediante dispositivo automatico; </corpo>
+						</el>
+						<el id="art15-com1-letb">
+							<num>b)</num>
+							<corpo>telefax. </corpo>
+						</el>
+					</comma>
+					<comma id="art15-com2">
+						<num>2.</num>
+						<corpo>
+							Le tecniche di comunicazione a distanza diverse da quelle indicate al 
+							<rif xlink:href="#art15-com1" xlink:type="simple">comma 1</rif>
+							, quando consentono una comunicazione individuale, non sono autorizzate se non e' stato ottenuto il consenso del consumatore interessato. 
+						</corpo>
+					</comma>
+					<comma id="art15-com3">
+						<num>3.</num>
+						<corpo>Le misure di cui ai commi 1 e 2 non comportano costi per i consumatori. </corpo>
+					</comma>
+				</articolo>
+				<articolo id="art16">
+					<num>Art. 16.</num>
+					<rubrica>S a n z i o n i </rubrica>
+					<comma id="art16-com1">
+						<num>1.</num>
+						<corpo>Salvo che il fatto costituisca reato, il fornitore che contravviene alle norme di cui al presente decreto, ovvero che ostacola l'esercizio del diritto di recesso da parte del consumatore ovvero non rimborsa al consumatore le somme da questi eventualmente pagate, e' punito con la sanzione amministrativa pecuniaria, per ciascuna violazione, da euro cinquemila a euro cinquantamila. </corpo>
+					</comma>
+					<comma id="art16-com2">
+						<num>2.</num>
+						<corpo>
+							Nei casi di particolare gravità o di recidiva, nonche' nell'ipotesi della violazione dell'
+							<rif xlink:href="#art18-com3" xlink:type="simple">articolo 18, comma 3</rif>
+							, i limiti minimo e massimo della sanzione indicata al 
+							<rif xlink:href="#art16-com1" xlink:type="simple">comma 1</rif>
+							sono raddoppiati. 
+						</corpo>
+					</comma>
+					<comma id="art16-com3">
+						<num>3.</num>
+						<corpo>Le autorità di vigilanza dei settori bancario, assicurativo, finanziario e della previdenza complementare e, ciascuna nel proprio ambito di competenza, accertano le violazioni alle disposizioni di cui al presente decreto e le relative sanzioni sono irrogate secondo le procedure rispettivamente applicabili in ciascun settore. </corpo>
+					</comma>
+					<comma id="art16-com4">
+						<num>4.</num>
+						<corpo>Il contratto e' nullo, nel caso in cui il fornitore ostacola l'esercizio del diritto di recesso da parte del contraente ovvero non rimborsa le somme da questi eventualmente pagate, ovvero viola gli obblighi di informativa precontrattuale in modo da alterare in modo significativo la rappresentazione delle sue caratteristiche. </corpo>
+					</comma>
+					<comma id="art16-com5">
+						<num>5.</num>
+						<corpo>La nullità può essere fatta valere solo dal consumatore e obbliga le parti alla restituzione di quanto ricevuto. Nei contratti di assicurazione l'impresa e' tenuta alla restituzione dei premi pagati e deve adempiere alle obbligazioni concernenti il periodo in cui il contratto ha avuto esecuzione. Non sono ripetibili gli indennizzi e le somme eventualmente corrisposte dall'impresa agli assicurati e agli altri aventi diritto a prestazioni assicurative. E' fatto salvo il diritto del consumatore ad agire per il risarcimento dei danni. </corpo>
+					</comma>
+					<comma id="art16-com6">
+						<num>6.</num>
+						<corpo>
+							Sono fatte salve le sanzioni previste nel 
+							<rif xlink:href="urn:nir:stato:decreto.legislativo:2003-06-30;196" xlink:type="simple">decreto legislativo 30 giugno 2003, n. 196</rif>
+							. 
+						</corpo>
+					</comma>
+				</articolo>
+				<articolo id="art17">
+					<num>Art. 17.</num>
+					<rubrica>Irrinunciabilità dei diritti </rubrica>
+					<comma id="art17-com1">
+						<num>1.</num>
+						<corpo>I diritti attribuiti al consumatore dal presente decreto sono irrinunciabili. E' nulla ogni pattuizione che abbia l'effetto di privare il consumatore della protezione assicurata dalle disposizioni del presente decreto. La nullità può essere fatta valere solo dal consumatore e può essere rilevata d'ufficio dal giudice. </corpo>
+					</comma>
+					<comma id="art17-com2">
+						<num>2.</num>
+						<corpo>Ove le parti abbiano scelto di applicare al contratto una legislazione diversa da quella italiana, al consumatore devono comunque essere riconosciute le condizioni di tutela previste dal presente decreto. </corpo>
+					</comma>
+				</articolo>
+				<articolo id="art18">
+					<num>Art. 18.</num>
+					<rubrica>Ricorso giurisdizionale o amministrativo </rubrica>
+					<comma id="art18-com1">
+						<num>1.</num>
+						<corpo>
+							Le associazioni dei consumatori iscritte all'elenco di cui all'
+							<rif xlink:href="urn:nir:stato:legge:1998-07-30;281#art5" xlink:type="simple">articolo 5 della legge 30 luglio 1998, n. 281</rif>
+							, sono legittimate a proporre alle competenti autorità di vigilanza, nell'ambito delle rispettive attribuzioni, al fine di tutelare gli interessi collettivi dei consumatori, reclamo per l'accertamento di violazioni delle disposizioni del presente decreto. 
+						</corpo>
+					</comma>
+					<comma id="art18-com2">
+						<num>2.</num>
+						<corpo>
+							Le associazioni dei consumatori iscritte all'elenco di cui all'
+							<rif xlink:href="urn:nir:stato:legge:1998-07-30;281#art5" xlink:type="simple">articolo 5 della legge 30 luglio 1998, n. 281</rif>
+							, sono legittimate a proporre all'autorità giudiziaria l'azione inibitoria per far cessare le violazioni delle disposizioni del presente decreto nei confronti delle imprese o degli intermediari ai sensi dell'
+							<rif xlink:href="urn:nir:stato:legge:1998;281#art3" xlink:type="simple">articolo 3 della citata legge n. 281 del 1998</rif>
+							. 
+						</corpo>
+					</comma>
+					<comma id="art18-com3">
+						<num>3.</num>
+						<corpo>
+							Le autorità di vigilanza nei settori bancario, assicurativo, finanziario e della previdenza complementare, nell'esercizio dei rispettivi poteri, anche al di fuori dell'ipotesi di cui al 
+							<rif xlink:href="#art18-com1" xlink:type="simple">comma 1</rif>
+							, ordinano ai soggetti vigilati la cessazione o vietano l'inizio di pratiche non conformi alle disposizioni del presente decreto. 
+						</corpo>
+					</comma>
+					<comma id="art18-com4">
+						<num>4.</num>
+						<corpo>Sono fatte salve, ove non espressamente derogate, le disposizioni in materia bancaria, finanziaria, assicurativa e dei sistemi di pagamento, ivi comprese le attribuzioni delle rispettive autorità di vigilanza di settore. </corpo>
+					</comma>
+				</articolo>
+				<articolo id="art19">
+					<num>Art. 19.</num>
+					<rubrica>Composizione extragiudiziale delle controversie </rubrica>
+					<comma id="art19-com1">
+						<num>1.</num>
+						<corpo>Il Ministero dell'economia e delle finanze, il Ministero delle attività produttive ed il Ministero della giustizia, sentite le autorità di vigilanza di settore, possono promuovere, nell'ambito degli ordinari stanziamenti di bilancio, l'istituzione di adeguate ed efficaci procedure extragiudiziali di reclamo e di ricorso per la composizione di controversie riguardanti i consumatori, conformi ai principi previsti dall'ordinamento comunitario e da quello nazionale e che operano nell'ambito della rete europea relativa ai servizi finanziari (FIN NET). </corpo>
+					</comma>
+					<comma id="art19-com2">
+						<num>2.</num>
+						<corpo>
+							Gli organi di composizione extragiudiziale delle controversie comunicano ai Ministeri di cui al 
+							<rif xlink:href="#art19-com1" xlink:type="simple">comma 1</rif>
+							le decisioni significative che adottano sulla commercializzazione a distanza dei servizi finanziari. 
+						</corpo>
+					</comma>
+				</articolo>
+				<articolo id="art20">
+					<num>Art. 20.</num>
+					<rubrica>Onere della prova </rubrica>
+					<comma id="art20-com1">
+						<num>1.</num>
+						<alinea>Sul fornitore grava l'onere della prova riguardante: </alinea>
+						<el id="art20-com1-leta">
+							<num>a)</num>
+							<corpo>l'adempimento agli obblighi di informazione del consumatore;</corpo>
+						</el>
+						<el id="art20-com1-letb">
+							<num>b)</num>
+							<corpo>la prestazione del consenso del consumatore alla conclusione del contratto;</corpo>
+						</el>
+						<el id="art20-com1-letc">
+							<num>c)</num>
+							<corpo>l'esecuzione del contratto;</corpo>
+						</el>
+						<el id="art20-com1-letd">
+							<num>d)</num>
+							<corpo>la responsabilità per l'inadempimento delle obbligazioni derivanti dal contratto. </corpo>
+						</el>
+					</comma>
+					<comma id="art20-com2">
+						<num>2.</num>
+						<corpo>
+							Le clausole che hanno per effetto l'inversione o la modifica dell'onere della prova di cui al 
+							<rif xlink:href="#art20-com1" xlink:type="simple">comma 1</rif>
+							si presumono abusive ai sensi dell'
+							<rif xlink:href="urn:nir:stato:codice.civile:1942-03-16;262#art1469bis-com3-num18" xlink:type="simple">articolo 1469-bis, terzo comma, n. 18), del codice civile</rif>
+							. 
+						</corpo>
+					</comma>
+				</articolo>
+				<articolo id="art21">
+					<num>Art. 21.</num>
+					<rubrica>Misure transitorie </rubrica>
+					<comma id="art21-com1">
+						<num>1.</num>
+						<corpo>
+							Le disposizioni del presente decreto si applicano anche nei confronti dei fornitori stabiliti in un altro Stato membro che non ha ancora recepito la 
+							<rif xlink:href="urn:nir:comunita.europee:direttiva:2002;2002-65-ce" xlink:type="simple">direttiva 2002/65/CE</rif>
+							e in cui non vigono obblighi corrispondenti a quelli in essa previsti. 
+						</corpo>
+					</comma>
+				</articolo>
+				<articolo id="art22">
+					<num>Art. 22.</num>
+					<rubrica>Clausola di invarianza degli oneri </rubrica>
+					<comma id="art22-com1">
+						<num>1.</num>
+						<corpo>Dall'attuazione del presente decreto non devono derivare nuovi o maggiori oneri per il bilancio dello Stato. </corpo>
+					</comma>
+				</articolo>
+			</articolato>
+			<formulafinale />
+			<conclusione />
+		</DecretoLegislativo>
+	</NIR>

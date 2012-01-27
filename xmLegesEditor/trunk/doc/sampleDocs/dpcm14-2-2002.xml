@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="iso-8859-15"?>
+	<!DOCTYPE NIR SYSTEM 'nircompleto.dtd'>
+	<NIR tipo="originale" xmlns="http://www.normeinrete.it/nir/2.2/" xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" xmlns:h="http://www.w3.org/HTML/1998/html4" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<Dpcm>
+			<meta>
+				<descrittori>
+					<pubblicazione norm="20020321" num="68" tipo="GU" />
+					<entratainvigore norm="" />
+					<redazione id="red1" nome="" norm="" />
+					<urn valore="" />
+				</descrittori>
+			</meta>
+			<intestazione>
+				Gazzetta Ufficiale N. 68 del 21 Marzo 2002 
+				<tipoDoc>DECRETO DEL PRESIDENTE DEL CONSIGLIO DEI MINISTRI </tipoDoc>
+				<dataDoc norm="20020214">14 febbraio 2002</dataDoc>
+				<titoloDoc>Utilizzazione di quota dei proventi derivanti dalle licenze UMTS per il piano e-government. </titoloDoc>
+			</intestazione>
+			<formulainiziale>
+				<h:p>IL PRESIDENTE DEL CONSIGLIO DEI MINISTRI </h:p>
+				<preambolo>
+					<h:p>
+						Visto l'art. 103, commi 1, 2 e 3 della 
+						<rif xlink:href="urn:nir:stato:legge:2000-12-23" xlink:type="simple">legge 23 dicembre 2000</rif>
+						, n.
+					</h:p>
+					<h:p>388, recante &quot;Disposizioni per la formazione del bilancio annuale e pluriennale dello Stato&quot;, nel quale sono individuate le specifiche iniziative cui destinare la quota del dieci per cento dei ricavi complessivamente devoluti allo sviluppo delle opportunita' legate alla nuova economia dell'informazione, iniziative tra le quali rientrano i progetti per l'introduzione delle nuove tecnologie e l'informatizzazione della pubblica amministrazione;</h:p>
+					<h:p>Vista la deliberazione del Consiglio dei Ministri del 25 gennaio 2001 e successive modificazioni, relativa alle modalita' di utilizzo del fondo costituito dai proventi derivanti dalle licenze UMTS di cui al predetto art. 103, con la quale sono state determinate le risorse per il finanziamento del piano di azione di e-government;</h:p>
+					<h:p>
+						Visto il parere della Conferenza unificata, di cui all'
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:1997-08-28;281#art8" xlink:type="simple">art. 8 del decreto legislativo 28 agosto 1997, n. 281</rif>
+						, espresso in data 22 febbraio 2001;
+					</h:p>
+					<h:p>
+						Visto l'
+						<rif xlink:href="urn:nir:stato:decreto.legge:2000-12-27;392#art2quater-com2" xlink:type="simple">art. 2-quater, comma 2, del decreto-legge n. 392 del 27 dicembre 2000</rif>
+						, convertito, con modificazioni, dalla 
+						<rif xlink:href="urn:nir:stato:legge:2001-02-28;26" xlink:type="simple">legge 28 febbraio 2001, n. 26</rif>
+						, il quale stabilisce che &quot;All'utilizzazione della quota del fondo, di cui all'
+						<rif xlink:href="urn:nir:stato:legge:2000-12-23;388#art103" xlink:type="simple">art. 103 della legge 23 dicembre 2000, n. 388</rif>
+						..., si provvede con decreto del Presidente del Consiglio dei Ministri su proposta dei Ministri competenti, di concerto con il Ministro del tesoro, del bilancio e della programmazione economica, in deroga a quanto previsto dal comma 2 del citato art. 103&quot;;
+					</h:p>
+					<h:p>
+						Visti i decreti del Ministro del tesoro, del bilancio e della programmazione economica del 19 marzo 2001, n. 21679 e del Ministro dell'economia e delle finanze del 30 ottobre 2001, n. 87196, con i quali sono state assegnate alle amministrazioni interessate le risorse di cui all'
+						<rif xlink:href="#art1" xlink:type="simple">art. 1</rif>
+						del presente decreto;
+					</h:p>
+					<h:p>
+						Visto il 
+						<rif xlink:href="urn:nir:presidente.consiglio.ministri:decreto:2001-08-09" xlink:type="simple">decreto del Presidente del Consiglio dei Ministri del 9 agosto 2001</rif>
+						relativo alla delega in materia di innovazione e tecnologie al Ministro senza portafoglio dott. Lucio Stanca;
+					</h:p>
+					<h:p>
+						Visto il 
+						<rif xlink:href="urn:nir:presidente.consiglio.ministri:decreto:2001-08-09" xlink:type="simple">decreto del Presidente del Consiglio dei Ministri del 9 agosto 2001</rif>
+						relativo alla delega in materia di funzione pubblica e di coordinamento dei servizi di informazione e sicurezza al Ministro senza portafoglio on. dott. Franco Frattini;
+					</h:p>
+					<h:p>
+						Visto il 
+						<rif xlink:href="urn:nir:presidente.consiglio.ministri:decreto:2001-09-27" xlink:type="simple">decreto del Presidente del Consiglio dei Ministri del 27 settembre 2001</rif>
+						recante istituzione del Dipartimento per l'innovazione e le tecnologie, il quale tra l'altro assicura il supporto necessario per l'elaborazione, la promozione, l'aggiornamento, il monitoraggio e la verifica del piano d'azione per il &quot;governo elettronico&quot;;
+					</h:p>
+					<h:p>
+						Considerata l'esigenza di finalizzare la quota del fondo di cui all'
+						<rif xlink:href="urn:nir:stato:legge:2000-12-23;388#art103" xlink:type="simple">art. 103 della legge 23 dicembre 2000, n. 388</rif>
+						, all'innovazione dei servizi ai cittadini e alle imprese, attraverso l'utilizzo di tecnologie informatiche e l'integrazione di servizi erogati da diverse amministrazioni;
+					</h:p>
+					<h:p>Considerati i risultati fin qui ottenuti nel programma di sperimentazione della carta d'identita' elettronica, che rendono necessario, per accelerare l'innovazione dei servizi e la loro inter-operabilita' sul territorio nazionale, la disponibilita' di regole tecniche per la realizzazione della carta nazionale dei servizi;</h:p>
+					<h:p>
+						Visto il parere favorevole della Conferenza unificata di cui all'
+						<rif xlink:href="urn:nir:stato:decreto.legislativo:1997-08-28;281#art8" xlink:type="simple">art. 8 del decreto legislativo 28 agosto 1997, n. 281</rif>
+						, espresso in data 31 gennaio 2002;
+					</h:p>
+					<h:p>Su proposta del Ministro per l'innovazione e le tecnologie, di concerto con il Ministro per la funzione pubblica e con il Ministro dell'economia e delle finanze;</h:p>
+				</preambolo>
+				<h:p>Decreta: </h:p>
+			</formulainiziale>
+			<articolato>
+				<articolo id="art1">
+					<num>Art. 1. </num>
+					<rubrica>Premesse </rubrica>
+					<comma id="art1-com1">
+						<num>1.</num>
+						<corpo>Il decreto disciplina procedure e modalita' per l'utilizzo dei fondi assegnati al finanziamento del piano d'azione di e-government, riportati nell'allegato A al presente decreto, di cui costituisce parte integrante. </corpo>
+					</comma>
+					<comma id="art1-com2">
+						<num>2.</num>
+						<corpo>Nel decreto per &quot;azione&quot; si intende l'insieme delle iniziative finalizzate al perseguimento di specifici obiettivi del piano di e-government che trova attuazione in progetti da finanziare attraverso le disponibilita' individuate al punto 1, lettera c), della deliberazione del Consiglio dei Ministri del 25 gennaio 2001. Le azioni, riportate nella tabella di cui all'allegato A del decreto, definiscono le categorie di progetti da realizzare, i relativi finanziamenti e l'indicazione delle amministrazioni competenti. </corpo>
+					</comma>
+				</articolo>
+				<articolo id="art2">
+					<num>Art. 2. </num>
+					<rubrica>Progetti </rubrica>
+					<comma id="art2-com1">
+						<num>1.</num>
+						<alinea>Nell'ambito delle azioni previste dal programma di e-government i progetti sono raggruppati in: </alinea>
+						<el id="art2-com1-leta">
+							<num>a)</num>
+							<corpo>progetti di competenza delle regioni e degli enti locali;</corpo>
+						</el>
+						<el id="art2-com1-letb">
+							<num>b)</num>
+							<corpo>progetti di competenza di amministrazioni centrali;</corpo>
+						</el>
+						<el id="art2-com1-letc">
+							<num>c)</num>
+							<corpo>progetti di competenza del Dipartimento per l'innovazione e le tecnologie della Presidenza del Consiglio dei Ministri. </corpo>
+						</el>
+					</comma>
+					<comma id="art2-com2">
+						<num>2.</num>
+						<corpo>L'indirizzo, il coordinamento a livello nazionale del piano di azione del programma di e-government, il monitoraggio dei relativi progetti sono affidati al Dipartimento per l'innovazione e le tecnologie. Esso promuove la costituzione di un tavolo congiunto permanente di consultazione e cooperazione con le amministrazioni centrali, le regioni e gli enti locali anche relativamente alle modalita' di attuazione del piano ed alle regole tecniche di cui al successivo comma. </corpo>
+					</comma>
+					<comma id="art2-com3">
+						<num>3.</num>
+						<corpo>
+							Il centro tecnico di cui all'
+							<rif xlink:href="urn:nir:stato:legge:1997-05-15;127#art17-com19" xlink:type="simple">art. 17, comma 19, della legge 15 maggio 1997, n. 127</rif>
+							, e successive modificazioni e integrazioni, sulla base delle direttive impartite dal Dipartimento per l'innovazione e le tecnologie, definisce le regole tecniche che sono emanate dal Ministro. Assicura, inoltre, il coordinamento tecnico, la progettazione esecutiva e l'assistenza tecnica alla realizzazione dei progetti indicati al 
+							<rif xlink:href="#art2-com1-letc" xlink:type="simple">comma 1, lettera c)</rif>
+							. 
+						</corpo>
+					</comma>
+					<comma id="art2-com4">
+						<num>4.</num>
+						<corpo>Il Dipartimento per l'innovazione e le tecnologie, di concerto con il Dipartimento della funzione pubblica, promuove il coordinamento tra le azioni del programma di e-government ed altre iniziative a livello nazionale ad esso correlate. </corpo>
+					</comma>
+					<comma id="art2-com5">
+						<num>5.</num>
+						<corpo>Il Dipartimento della funzione pubblica e il Dipartimento per l'innovazione e le tecnologie promuovono e coordinano l'attivita' di formazione del personale delle pubbliche amministrazioni prevista dal piano di azione e-government. </corpo>
+					</comma>
+				</articolo>
+				<articolo id="art3">
+					<num>Art. 3. </num>
+					<rubrica>A v v i s i </rubrica>
+					<comma id="art3-com1">
+						<num>1.</num>
+						<alinea>
+							Per la partecipazione ai progetti di cui all'
+							<rif xlink:href="#art2-com1-leta" xlink:type="simple">art. 2, comma 1, lettera a)</rif>
+							, il Dipartimento per l'innovazione e le tecnologie porta a conoscenza delle amministrazioni interessate appositi avvisi, approvati dal Ministro per l'innovazione e le tecnologie, che indicano: 
+						</alinea>
+						<el id="art3-com1-leta">
+							<num>a)</num>
+							<corpo>obiettivi generali;</corpo>
+						</el>
+						<el id="art3-com1-letb">
+							<num>b)</num>
+							<corpo>obiettivi specifici;</corpo>
+						</el>
+						<el id="art3-com1-letc">
+							<num>c)</num>
+							<corpo>destinatari;</corpo>
+						</el>
+						<el id="art3-com1-letd">
+							<num>d)</num>
+							<corpo>modalita' di finanziamento;</corpo>
+						</el>
+						<el id="art3-com1-lete">
+							<num>e)</num>
+							<corpo>modalita' di presentazione;</corpo>
+						</el>
+						<el id="art3-com1-letf">
+							<num>f)</num>
+							<corpo>criteri di valutazione;</corpo>
+						</el>
+						<el id="art3-com1-letg">
+							<num>g)</num>
+							<corpo>regole tecniche di riferimento. </corpo>
+						</el>
+					</comma>
+					<comma id="art3-com2">
+						<num>2.</num>
+						<corpo>Gli avvisi sono diffusi in successive cadenze temporali. </corpo>
+					</comma>
+					<comma id="art3-com3">
+						<num>3.</num>
+						<corpo>
+							I progetti di cui all'
+							<rif xlink:href="#art2" xlink:type="simple">art. 2</rif>
+							potranno vedere la partecipazione congiunta di piu' amministrazioni. 
+						</corpo>
+					</comma>
+					<comma id="art3-com4">
+						<num>4.</num>
+						<corpo>
+							Per la valutazione dei progetti e' istituita, con decreto del Ministro per l'innovazione e le tecnologie, una commissione composta da tredici esperti, dotati di adeguata qualificazione professionale, di cui sette, compreso il presidente, individuati dal Ministro, tre designati dalle regioni e tre dagli enti locali, entro quindici giorni dall'adozione del presente decreto. Tale commissione valuta i progetti in base ai criteri indicati nei rispettivi avvisi conformemente a quanto stabilito al 
+							<rif xlink:href="#art4" xlink:type="simple">successivo art. 4</rif>
+							. 
+						</corpo>
+					</comma>
+					<comma id="art3-com5">
+						<num>5.</num>
+						<corpo>Nel corso del suo esame, la commissione di valutazione puo' richiedere ai proponenti chiarimenti sul contenuto tecnico ed organizzativo dei progetti. Inoltre la commissione puo' suggerire eventuali modifiche e accorpamenti dei progetti presentati. </corpo>
+					</comma>
+					<comma id="art3-com6">
+						<num>6.</num>
+						<corpo>A conclusione delle procedure di selezione, la commissione di valutazione trasmette gli atti al Dipartimento per l'innovazione e le tecnologie che, in base anche alle disponibilita' di fondi prevista dagli avvisi, puo' richiedere modifiche, accorpamenti o variazioni della quota da finanziare dei progetti, approva i progetti ammessi al finanziamento e ne da' comunicazione al Ministro per l'innovazione e le tecnologie. </corpo>
+					</comma>
+					<comma id="art3-com7">
+						<num>7.</num>
+						<corpo>
+							I fondi per il finanziamento dei progetti, di cui all'
+							<rif xlink:href="#art2-com1-leta" xlink:type="simple">art. 2, comma 1, lettera a)</rif>
+							, sono trasferiti alle regioni ed agli enti locali interessati con decreto del Ministro per l'innovazione e le tecnologie. 
+						</corpo>
+					</comma>
+					<comma id="art3-com8">
+						<num>8.</num>
+						<corpo>
+							I decreti di cui al 
+							<rif xlink:href="#art3-com7" xlink:type="simple">comma 7</rif>
+							sono emanati entro quindici giorni dalla data di approvazione dei progetti. 
+						</corpo>
+					</comma>
+					<comma id="art3-com9">
+						<num>9.</num>
+						<corpo>
+							Alle spese di funzionamento della commissione di valutazione di cui al 
+							<rif xlink:href="#art3-com5" xlink:type="simple">comma 5</rif>
+							, si provvede mediante quota parte delle risorse di cui all'allegato A, azione 3.2 (gestione del programma di lavoro). Con successivo decreto del Dipartimento per l'innovazione e le tecnologie, di concerto con il Ministero dell'economia e delle finanze, sono determinati i compensi corrisposti ai membri della commissione, in base alla normativa vigente. 
+						</corpo>
+					</comma>
+				</articolo>
+				<articolo id="art4">
+					<num>Art. 4. </num>
+					<rubrica>C r i t e r i </rubrica>
+					<comma id="art4-com1">
+						<num>1.</num>
+						<corpo>
+							I progetti di cui all'
+							<rif xlink:href="#art2-com1-leta" xlink:type="simple">art. 2, comma 1, lettera a)</rif>
+							, sono selezionati solo se conformi alle indicazioni ed agli obiettivi generali individuati nel capitolo 2 del piano di azione per l'e-government e dei piani regionali ove esistenti. 
+						</corpo>
+					</comma>
+					<comma id="art4-com2">
+						<num>2.</num>
+						<corpo>I progetti sono selezionati nel rispetto dei principi definiti dal protocollo d'intesa, relativo all'attuazione del piano di e-government per le regioni e gli enti locali, approvato dalla Conferenza unificata nella seduta del 18 gennaio 2001. </corpo>
+					</comma>
+					<comma id="art4-com3">
+						<num>3.</num>
+						<alinea>
+							I progetti previsti all'
+							<rif xlink:href="#art2-com1-leta" xlink:type="simple">art. 2, comma 1, lettera a)</rif>
+							, devono inoltre attenersi ai seguenti criteri generali: 
+						</alinea>
+						<el id="art4-com3-leta">
+							<num>a)</num>
+							<corpo>promuovere servizi ai cittadini e alle imprese, realizzabili anche attraverso l'integrazione fra diverse amministrazioni;</corpo>
+						</el>
+						<el id="art4-com3-letb">
+							<num>b)</num>
+							<corpo>promuovere il riuso delle soluzioni in ambienti con caratteristiche simili;</corpo>
+						</el>
+						<el id="art4-com3-letc">
+							<num>c)</num>
+							<corpo>prevedere un piano di sviluppo e di avviamento all'esercizio, comprendente un piano economico complessivo che evidenzi tutte le varie voci di costo previste dal progetto stesso;</corpo>
+						</el>
+						<el id="art4-com3-letd">
+							<num>d)</num>
+							<corpo>favorire progetti in compartecipazione di piu' amministrazioni;</corpo>
+						</el>
+						<el id="art4-com3-lete">
+							<num>e)</num>
+							<corpo>favorire la collaborazione tra settore pubblico e settore privato. </corpo>
+						</el>
+					</comma>
+					<comma id="art4-com4">
+						<num>4.</num>
+						<corpo>Ulteriori criteri potranno essere previsti, in ogni singolo avviso, dal Dipartimento per l'innovazione e le tecnologie, in relazione ad obiettivi specifici. </corpo>
+					</comma>
+				</articolo>
+				<articolo id="art5">
+					<num>Art. 5. </num>
+					<rubrica>Finanziamenti </rubrica>
+					<comma id="art5-com1">
+						<num>1.</num>
+						<corpo>Il finanziamento di ciascun progetto selezionato, rispondente ai requisiti richiamati dagli articoli 3 e 4, e' pari a non piu' del 50% dell'intero ammontare della spesa prevista per la sua realizzazione. </corpo>
+					</comma>
+					<comma id="art5-com2">
+						<num>2.</num>
+						<corpo>Le amministrazioni proponenti si impegnano a reperire i fondi necessari al finanziamento della quota residua. </corpo>
+					</comma>
+					<comma id="art5-com3">
+						<num>3.</num>
+						<corpo>Il finanziamento dei progetti concerne le attivita' di progettazione e realizzazione dei sistemi informativi, nonche' i costi di conduzione, limitatamente al periodo sperimentale di esercizio fino ad un anno a partire dalla data del collaudo. </corpo>
+					</comma>
+					<comma id="art5-com4">
+						<num>4.</num>
+						<corpo>
+							Per le amministrazioni che adotteranno la modalita' della compartecipazione con impegno al riuso della soluzione informatica realizzata, secondo quanto previsto dall'
+							<rif xlink:href="#art4" xlink:type="simple">art. 4</rif>
+							, il finanziamento potra' riguardare i costi di personalizzazione del sistema e quelli relativi all'avviamento in esercizio. 
+						</corpo>
+					</comma>
+					<comma id="art5-com5">
+						<num>5.</num>
+						<corpo>I fondi assegnati a ciascun progetto sono erogati in piu' soluzioni sulla base dello stato di avanzamento del progetto. </corpo>
+					</comma>
+					<comma id="art5-com6">
+						<num>6.</num>
+						<corpo>
+							Le modalita' di erogazione dei finanziamenti, di cui ai commi 1 e 5, sono stabilite dal Dipartimento per l'innovazione e le tecnologie ed indicati negli avvisi di cui all'
+							<rif xlink:href="#art3" xlink:type="simple">art. 3</rif>
+							. 
+						</corpo>
+					</comma>
+				</articolo>
+				<articolo id="art6">
+					<num>Art. 6. </num>
+					<rubrica>Modalita' </rubrica>
+					<comma id="art6-com1">
+						<num>1.</num>
+						<corpo>
+							I progetti di cui all'
+							<rif xlink:href="#art2-com1-letb" xlink:type="simple">art. 2, comma 1, lettera b)</rif>
+							, sono approvati dal Ministro competente di concerto con il Ministro per l'innovazione e le tecnologie. Il Dipartimento per l'innovazione e le tecnologie ne assicura la coerenza con il piano di azione, sentite le regioni per le materie di loro competenza o oggetto di decentramento. 
+						</corpo>
+					</comma>
+					<comma id="art6-com2">
+						<num>2.</num>
+						<corpo>
+							I progetti di cui all'
+							<rif xlink:href="#art2-com1-letc" xlink:type="simple">art. 2, comma 1, lettera c)</rif>
+							, sono approvati dal Ministro per l'innovazione e le tecnologie, su proposta del Dipartimento per l'innovazione e le tecnologie, che ne verifica la coerenza con il piano di azione e con i piani regionali e territoriali, ove esistenti. 
+						</corpo>
+					</comma>
+					<comma id="art6-com3">
+						<num>3.</num>
+						<corpo>
+							Al finanziamento dei progetti di cui all'
+							<rif xlink:href="#art2-com1-letc" xlink:type="simple">art. 2, comma 1, lettera c)</rif>
+							, provvede il Dipartimento per l'innovazione e le tecnologie, anche per i progetti di cui e' incaricato il Centro tecnico. Il finanziamento dell'azione 13 di cui all'allegato A avviene in base a ripartizione delle risorse concordata tra il Dipartimento dell'innovazione e delle tecnologie ed il Dipartimento della funzione pubblica. 
+						</corpo>
+					</comma>
+					<comma id="art6-com4">
+						<num>4.</num>
+						<corpo>Per l'utilizzazione dei fondi, le amministrazioni competenti si atterranno alle disposizioni normative attualmente applicate da ciascuna amministrazione nell'ambito dell'ordinamento vigente. </corpo>
+					</comma>
+				</articolo>
+				<articolo id="art7">
+					<num>Art. 7. </num>
+					<rubrica>Norme finali </rubrica>
+					<comma id="art7-com1">
+						<num>1.</num>
+						<corpo>
+							<mod id="mod1">Sono abrogati i decreti del Presidente del Consiglio dei Ministri del 25 settembre 2000 e del 6 marzo 2001. </mod>
+						</corpo>
+					</comma>
+				</articolo>
+			</articolato>
+			<formulafinale />
+			<conclusione>
+				<dataeluogo codice="00100" norm="20020214">Il presente decreto sara' trasmesso ai competenti organi di controllo e sara' pubblicato nella Gazzetta Ufficiale della Repubblica italiana. Roma, 14 febbraio 2002 </dataeluogo>
+				<firma tipo="sottoscrizione">Il Presidente del Consiglio dei Ministri Berlusconi </firma>
+				<firma tipo="sottoscrizione">Il Ministro per l'innovazione e le tecnologie Stanca </firma>
+				<firma tipo="sottoscrizione">Il Ministro per la funzione pubblica Frattini </firma>
+				<firma tipo="sottoscrizione">Il Ministro dell'economia e delle finanze Tremonti </firma>
+			</conclusione>
+			<annessi>
+				<annesso id="ann1">
+					<testata>
+						<denAnnesso>
+							<h:p>Allegato A</h:p>
+						</denAnnesso>
+						<titAnnesso>
+							<h:p />
+						</titAnnesso>
+						<preAnnesso>
+							<h:p />
+						</preAnnesso>
+					</testata>
+					<DocumentoNIR nome="">
+						<meta>
+							<descrittori>
+								<pubblicazione norm="" num="" tipo="GU" />
+								<entratainvigore norm="" />
+								<redazione id="red2" nome="" norm="" />
+								<urn valore="" />
+							</descrittori>
+						</meta>
+						<intestazione />
+						<formulainiziale />
+						<contenitore id="con1" nome="">
+							<h:p>
+								(
+								<rif xlink:href="#art1-com1" xlink:type="simple">art. 1, comma 1</rif>
+								) FINANZIAMENTI RIPARTITI PER CATEGORIA DI PROGETTI ===================================================================== Progetti 
+								<rif xlink:href="#art2-com1-leta" xlink:type="simple">art. 2, | | | comma 1, lettera a)</rif>
+								| |Lire (mld)| Euro ===================================================================== Azione 6.1 (regioni e|Servizi delle | | enti locali).... |regioni.... | 150| 77.468.534,86 --------------------------------------------------------------------- Azione 6.2 (enti |Informatizzazione | | locali).... |enti locali.... | 300|154.937.069,73 --------------------------------------------------------------------- Azione 7.1 |Accesso servizi | | (comuni).... |anagrafici.... | 20| 10.329.137,98 --------------------------------------------------------------------- Azione 7.2 |Indice | | (comuni).... |anagrafico (1).... | 15| 7.746.853,49 --------------------------------------------------------------------- Azione 7.3 (regioni e|Servizio di notifica | | enti locali).... |eventi.... | 15| 7.746.853,49 --------------------------------------------------------------------- Totale regioni e enti|Progetti | | locali . . . |e-government.... | 500|258.228.449,55 
+							</h:p>
+							<h:p>
+								===================================================================== Progetti 
+								<rif xlink:href="#art2-com1-letb" xlink:type="simple">art. 2, | | | comma 1, lettera b)</rif>
+								| |Lire (mld)| Euro ===================================================================== Azione 7.2.... |Indice anagrafico.... | 10| 5.164.568,99 --------------------------------------------------------------------- |Servizio di notifica | | Azione 7.3.... |eventi.... | 5| 2.582.284,50 --------------------------------------------------------------------- |Sperimentazione CIE e | | Azione 9.1.... |CNS (2).... | 70|36.151.982,94 --------------------------------------------------------------------- |Seconda emissione ed | | Azione 9.2.... |erogazione servizi....| 20|10.329.137,98 --------------------------------------------------------------------- Totale Ministero |Anagrafi e carta | | dell'interno . . . |d'identità.... | 105|54.227.974,41 --------------------------------------------------------------------- Totale Ministero | | | dell'economia e delle| | | finanze . . . |e-procurement.... | 10| 5.164.568,99 
+							</h:p>
+							<h:p>
+								===================================================================== Progetti 
+								<rif xlink:href="#art2-com1-letb" xlink:type="simple">art. 2, | | | comma 1, lettera b)</rif>
+								| |Lire (mld)| Euro ===================================================================== Azione 13.... |Formazione.... | 65| 33.569.698,44 --------------------------------------------------------------------- Dipartimento per | | | l'innovazione e le | | | tecnologie e | | | Dipartimento della | | | funzione pubblica....|Formazione.... | 65| 33.569.698,44 --------------------------------------------------------------------- |Elaborazione della | | Azione 3.1.1.... |strategia.... | 1| 516.456,90 --------------------------------------------------------------------- |Comunicazione della | | Azione 3.1.2.... |strategia.... | 1| 516.456,90 --------------------------------------------------------------------- |Studio di fattibilità| | |della rete | | Azione 3.1.3.... |nazionaIe.... | 1| 516.456,90 --------------------------------------------------------------------- |Specificazione dei | | Azione 3.1.4.... |servizi.... | 2| 1.032.913,80 --------------------------------------------------------------------- |Gestione del | | |programma di | | Azione 3.2.... |lavoro.... | 10| 5.164.568,99 --------------------------------------------------------------------- Azione 4.... |Rete nazionale.... | 30| 15.493.706,97 --------------------------------------------------------------------- |Servizio di notifica | | Azione 7.3.... |eventi.... | 5| 2.582.284,50 --------------------------------------------------------------------- Azione 10.... |Firma digitale.... | 5| 2.582.284,50 --------------------------------------------------------------------- |Gestione flussi | | Azione 11.... |documentali.... | 15| 7.746.853,49 --------------------------------------------------------------------- Dipartimento per | | | l'innovazione e le |Servizi di rete e | | tecnologie.... |management.... | 70| 36.151.982,95 --------------------------------------------------------------------- |Portali | | Azione 5.1.... |informativi.... | 10| 5.164.568,99 --------------------------------------------------------------------- |Portali per | | |l'erogazione di | | Azione 5.2.... |servizi.... | 35| 18.075.991,47 --------------------------------------------------------------------- Dipartimento per | | | l'innovazione e le | | | tecnologie.... |Portali.... | 45| 23.240.560,46 --------------------------------------------------------------------- |Totale Dipartimento | | |per l'innovazione e | | |le tecnologie . . . | 180| 92.962.241,85 --------------------------------------------------------------------- |Finanziamento | | |totale . . . | 795|410.583.234,80 ------ (1) Finanziamento iscritto nell'unita' revisionale 3.2.1.4 delle Stato di previsione del Ministero dell'interno. 
+							</h:p>
+							<h:p>(2) Per CIE si intende carta d'identita' elettronica, per CNS carta nazionale dei servizi. </h:p>
+							<h:p />
+						</contenitore>
+						<formulafinale />
+						<conclusione />
+					</DocumentoNIR>
+				</annesso>
+			</annessi>
+		</Dpcm>
+	</NIR>

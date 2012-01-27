@@ -1,0 +1,112 @@
+xmLegesEditor source code is available at
+
+https://svn.ittig.cnr.it/svn/xmLegesEditor
+
+
+Use this command to anonymously check out the latest project source code:
+# Non-members may check out a read-only working copy anonymously over HTTP.
+
+svn co https://svn.ittig.cnr.it/svn/xmLegesEditor/xmLegesCoreApi/trunk ./xmLegesCoreApi
+svn co https://svn.ittig.cnr.it/svn/xmLegesEditor/xmLegesCoreImpl/trunk ./xmLegesCoreImpl
+svn co https://svn.ittig.cnr.it/svn/xmLegesEditor/xmLegesEditor/trunk ./xmLegesEditor
+svn co https://svn.ittig.cnr.it/svn/xmLegesEditor/xmLegesEditorApi/trunk ./xmLegesEditorApi
+svn co https://svn.ittig.cnr.it/svn/xmLegesEditor/xmLegesEditorImpl/trunk ./xmLegesEditorImpl
+
+
+The project is divided in:
+
+Api  / Impl   [interfaces and  implementazions]
+Core / Editor   [Core packages contain code related to generic basic functionalities of a visual xml editor; Editor packages contain code related to the implementation of specific NIR (NormeInRete) related functionalities]
+
+________________________________________________________________________________________________________
+
+
+
+You can checkout the project directly in Eclipse using an svn plugin
+
+
+1) install an svn eclipse plugin   ( e.g. subversive or subclipse)
+
+2) from Eclipse
+
+
+   open perspective --->  Svn Repository Exploring
+
+
+   rightClick -> New-> Repository Location -> https://svn.ittig.cnr.it/svn/xmLegesEditor
+
+
+   checkout:   xmLegesCoreApi/trunk    -->  in xmLegesCoreApi   
+   	       xmLegesCoreImpl/trunk   -->  in xmLegesCoreImpl
+	       xmLegesEditor/trunk     -->  in xmLegesEditor
+               xmLegesEditorApi/trunk  -->  in xmLegesEditorApi
+	       xmLegesEditorImpl/trunk  -->  in xmLegesEditorImpl
+
+3) compile the project with java 5+ ; recommended JDK6 
+    
+
+4) execute: 
+
+   From Eclipse Run menu:
+
+   - New Java Application
+
+     	Name: xmLegesEditor
+     	Project: xmLegesEditor
+        Main Class:  it.cnr.ittig.services.manager.Run
+	VM Arguments:  -Xmx256m
+        Arguments -->  Program Arguments  -->  xmLegesEditor.xml /images/editor/xmLegesEditor.png
+     
+
+5) The application starts
+
+
+---------------------------------------------------------------------------------------------------
+
+Some information to navigate through the source code: 
+
+The application is architectured in "components"; each component provides specific "services";
+The execution of the application is managed by the ServiceManager component 
+(it.cnr.ittig.services.manager.Run) which reads the application composition file: 
+
+xmLegesEditor.xml
+
+By inspecting such file it is possible to understand which components compose the application and find related source code and configurations;
+
+Some basic components:
+
+DocumentManager:   manage the opening / closure / validation of an XML document
+SelectionManager: manage the selection of text and xml nodes in the different editing panels
+RulesManager:  manage the querying to DTD or  Schema to enable XML valid operations.
+
+etc..
+
+
+Forms in the UI ( .jfrm files) are designed with "abeille forms designer 1.3"
+
+For each editor functionality [ e.g. a button] 
+find in the source code the:
+
+   ***action   component
+   ***dom      component
+   ***form     component
+
+
+Application UI labels for internazionalization are in the .properties file in the i18n directory
+
+
+From eclipse it is possible to generate the JavaDoc for the project classes
+
+______________________________________________________________________________________
+
+for further information please contact
+
+Tommaso Agnoloni
+
+agnoloni@ittig.cnr.it
+
+Tel. 0554399666
+Mob. 3282811456
+skype:  t.agnoloni
+
+             
