@@ -12,6 +12,25 @@ Questo file e' volutamente vuoto. Inserire le proprie estensioni
 qui dentro o sostituire il file con uno dallo stesso nome
 =====================================================================  -->
 
+<!ENTITY % cnrMeta "cnr:meta" >
+
+<!ENTITY % ProprietarioMeta "(%cnrMeta;)*" >
+
+<!--    =====================================================================        
+          Metadati proprietari del CNR                                               
+        =====================================================================  -->
+
+<!ENTITY % cnrDTD SYSTEM "./cnr.dtd">
+
+%cnrDTD;
+
+<!--    =====================================================================        
+          Metadati proprietari ITTIG                                               
+        =====================================================================  -->
+
+<!ENTITY % ittigDTD SYSTEM "./ittig.dtd">
+
+%ittigDTD;
 
 <!--  =====================================================================        
             fine del file proprietario                                               
