@@ -44,5 +44,6 @@ set CLASSPATH=%CLASSPATH%;lib/eclipse-xsd-2_4/org.eclipse.emf.common_2.4.0.v2008
 set CLASSPATH=%CLASSPATH%;lib/eclipse-xsd-2_4/org.eclipse.emf.ecore_2.4.0.v200804012208.jar
 set CLASSPATH=%CLASSPATH%;lib/eclipse-xsd-2_4/org.eclipse.xsd_2.4.0.v200804012208.jar
 set CLASSPATH=%CLASSPATH%;lib/PDFBox-0.7.3.jar
+set CLASSPATH=%CLASSPATH%;lib/bounce-0.18.jar
 
 start /MIN jre\bin\javaw -Xmx256m it.cnr.ittig.services.manager.Run xmLegesEditor.xml images\editor\xmLegesEditor.png

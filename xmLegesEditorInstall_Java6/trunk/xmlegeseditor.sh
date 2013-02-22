@@ -51,7 +51,7 @@ export CLASSPATH=$CLASSPATH:lib/eclipse-xsd-2_4/org.eclipse.emf.common_2.4.0.v20
 export CLASSPATH=$CLASSPATH:lib/eclipse-xsd-2_4/org.eclipse.emf.ecore_2.4.0.v200804012208.jar
 export CLASSPATH=$CLASSPATH:lib/eclipse-xsd-2_4/org.eclipse.xsd_2.4.0.v200804012208.jar
 export CLASSPATH=$CLASSPATH:lib/PDFBox-0.7.3.jar
-
+export CLASSPATH=$CLASSPATH:lib/bounce-0.18.jar
 
 
 export LC_ALL=it_IT@euro
