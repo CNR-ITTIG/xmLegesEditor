@@ -243,11 +243,8 @@ public class XmLegesMarkerImpl implements XmLegesMarker, Loggable, Serviceable, 
 			String commandUnz = command + " -o " + UtilFile.getTempDirName() + File.separatorChar + "importUnz.xml -Z ";
 
 			exec.runCommand(commandUnz);
-
 			
-			String td = this.tipoDoc.toLowerCase();
-			if( (td.indexOf("disegno") > -1 || td.indexOf("proposta") > -1 ) &&
-					td.indexOf("legge") > -1 &&	td.indexOf("regionale") > -1 ) {
+			if( this.tipoDoc.equals("ddlr")) {
 				postFix = true; //Attiva fix xml per ddl/pdl regionali
 				this.tipoDoc = "Legge"; //In caso di fix XML a posteriori, lancia il parser come fosse una Legge.				
 			}
@@ -313,7 +310,11 @@ public class XmLegesMarkerImpl implements XmLegesMarker, Loggable, Serviceable, 
 		sb.append(" -d ");
 		sb.append(dtd);
 		sb.append(" -t ");
-		sb.append(tipoDoc);
+		if(tipoDoc.equals("ddlr")) {
+			sb.append("l");			
+		} else {
+			sb.append(tipoDoc);
+		}
 		if (tipoDocAltro != null && tipoDocAltro.trim().length()>0) {
 			sb.append(" -T ");
 			sb.append(tipoDocAltro);

@@ -54,7 +54,7 @@ public interface XmLegesMarker extends Service {
 			"Documento NIR", "Provvedimento CNR" };
 
 	//final public static String[] TIPO_DOC_VALORE = new String[] { "l", "lcost", "dl", "dlgs", "rd", "dpr", "dprNN", "dpcm", "dpcmNN", "dm", "dmNN", "lr", "rreg", "reg", "circ", "prov", "ddl", "crp", "nir", "cnr" };
-	final public static String[] TIPO_DOC_VALORE = new String[] { "l", "lcost", "dl", "dlgs", "rd", "dpr", "dprNN", "dpcm", "dpcmNN", "dm", "dmNN", "lr", "rreg", "reg", "circ", "prov", "ddl", "l", "nir", "cnr" };
+	final public static String[] TIPO_DOC_VALORE = new String[] { "l", "lcost", "dl", "dlgs", "rd", "dpr", "dprNN", "dpcm", "dpcmNN", "dm", "dmNN", "lr", "rreg", "reg", "circ", "prov", "ddl", "ddlr", "nir", "cnr" };
 
 	/**
 	 * Array di valori per presentare il testo nelle form per
