@@ -114,6 +114,7 @@ public class DdlRegionaliHeader {
 		nlist = intestazione.getElementsByTagName("dataDoc");
 		if(nlist.getLength() == 0) {
 			data = dom.createElement("dataDoc");
+			data.setAttribute("norm", "");
 			intestazione.appendChild(data);
 		} else {
 			data = (Element) nlist.item(0);
