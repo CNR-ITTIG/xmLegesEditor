@@ -83,7 +83,7 @@ public class DdlRegionaliMarker {
 
 			Element pubb = dom.createElement("pubblicazione");
 			pubb.setAttribute("tipo", "GU");
-			pubb.setAttribute("name", "");
+			pubb.setAttribute("num", "");
 			pubb.setAttribute("norm", "");
 			descr.appendChild(pubb);
 			
@@ -92,8 +92,8 @@ public class DdlRegionaliMarker {
 			descr.appendChild(vigore);
 			
 			Element redazione = dom.createElement("redazione");
-			redazione.setAttribute("nome", "");
 			redazione.setAttribute("id", "red1");
+			redazione.setAttribute("nome", "");
 			redazione.setAttribute("norm", "");
 			descr.appendChild(redazione);
 			
