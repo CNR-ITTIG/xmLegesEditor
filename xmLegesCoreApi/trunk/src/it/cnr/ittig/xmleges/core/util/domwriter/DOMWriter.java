@@ -226,6 +226,7 @@ public class DOMWriter {
 				fOut.print(']');
 			}
 			fOut.println('>');
+			fOut.println("<?xml-stylesheet type=\"text/xsl\" href=\"csi.xslt\"?>");		//TODO: Cambiare. Forzo inserimento insieme al DOCUMENT TYPE
 			break;
 		}
 
