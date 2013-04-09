@@ -84,6 +84,8 @@ public class XmLegesMarkerImpl implements XmLegesMarker, Loggable, Serviceable, 
 	String logLevel;
 
 	String error = null;
+	
+	boolean postFix = false; //Attiva il Fixing dell'XML a posteriori
 
 	// //////////////////////////////////////////////////// LogEnabled Interface
 	public void enableLogging(Logger logger) {
@@ -237,12 +239,43 @@ public class XmLegesMarkerImpl implements XmLegesMarker, Loggable, Serviceable, 
 			UtilFile.copyFileInTemp(new FileInputStream(file), "import");
 			command += " -f " + UtilFile.getTempDirName() + File.separatorChar + "import";
 			command += " -o " + UtilFile.getTempDirName() + File.separatorChar + "import.xml";
+			
+			String commandUnz = command + " -o " + UtilFile.getTempDirName() + File.separatorChar + "importUnz.xml -Z ";
+
+			exec.runCommand(commandUnz);
+
+			
+			String td = this.tipoDoc.toLowerCase();
+			if( (td.indexOf("disegno") > -1 || td.indexOf("proposta") > -1 ) &&
+					td.indexOf("legge") > -1 &&	td.indexOf("regionale") > -1 ) {
+				postFix = true; //Attiva fix xml per ddl/pdl regionali
+				this.tipoDoc = "Legge"; //In caso di fix XML a posteriori, lancia il parser come fosse una Legge.				
+			}
+
+			if(postFix) {
+				command += " -Z "; //Disattiva analisi header e mette l'intestazione in error per analisi successiva
+			}
+			
+			System.out.println("Executing " + command);
 			exec.runCommand(command);
 			error = exec.getStderr().trim();
 			if (error.length() == 0)
 				error = null;
 			// return new ByteArrayInputStream(exec.getStdout().getBytes());
-			return new FileInputStream(UtilFile.getTempDirName() + File.separatorChar + "import.xml");
+			if(!postFix) {
+				return new FileInputStream(UtilFile.getTempDirName() + File.separatorChar + "import.xml");
+			} else {
+				//Fix a posteriori dell'XML -- Supporto ai Disegni/Proposte di legge regionali (Piemonte)
+				DdlRegionaliMarker drm = new DdlRegionaliMarker();
+				drm.setInputFileName(UtilFile.getTempDirName() + File.separatorChar + "import.xml");
+				drm.setOutputFileName(UtilFile.getTempDirName() + File.separatorChar + "import2.xml");
+				drm.setEncoding(this.encoding);
+				if(drm.processXML()) {
+					return new FileInputStream(UtilFile.getTempDirName() + File.separatorChar + "import2.xml");
+				} else {
+					return new FileInputStream(UtilFile.getTempDirName() + File.separatorChar + "import.xml");
+				}
+			}
 		} catch (ExecTimeoutException ex) {
 			logger.error("timeout", ex);
 		} catch (ExecException ex) {
