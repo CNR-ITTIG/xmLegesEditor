@@ -146,7 +146,8 @@ public class XmLegesLinkerImpl implements XmLegesLinker, Loggable, Serviceable, 
 			sb.append(" -r f");
 		
 		sb.append(" -f " + UtilFile.getTempDirName() + "/pr.in");
-		sb.append(" -F " + UtilFile.getTempDirName() + "/pr.out");
+		//sb.append(" -F " + UtilFile.getTempDirName() + "/pr.out");
+		sb.append(" >" + UtilFile.getTempDirName() + "/pr.out");
 		sb.append(" -L file=" + UtilFile.getTempDirName() + "/pr.err");
 		try {
 			UtilFile.copyFileInTemp(new ByteArrayInputStream(text.getBytes()), "pr.in");

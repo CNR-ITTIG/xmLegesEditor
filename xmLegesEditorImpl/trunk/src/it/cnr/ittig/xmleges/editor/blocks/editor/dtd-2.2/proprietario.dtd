@@ -12,9 +12,19 @@ Questo file e' volutamente vuoto. Inserire le proprie estensioni
 qui dentro o sostituire il file con uno dallo stesso nome
 =====================================================================  -->
 
+<!ENTITY % crpMeta "(crp:meta)" >
+
 <!ENTITY % cnrMeta "cnr:meta" >
 
-<!ENTITY % ProprietarioMeta "(%cnrMeta;)*" >
+<!ENTITY % ProprietarioMeta "(%crpMeta; | %cnrMeta;)*" >
+
+<!--    =====================================================================        
+          Metadati proprietari del CR Piemonte                                               
+        =====================================================================  -->
+
+<!ENTITY % crpDTD SYSTEM "./crp.dtd">
+
+%crpDTD;
 
 <!--    =====================================================================        
           Metadati proprietari del CNR                                               

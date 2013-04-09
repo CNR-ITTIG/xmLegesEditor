@@ -270,8 +270,11 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 		 	14	Circolare
 		 	15	Provvedimento
 		 16   Disegno di Legge
-		 17   Documento NIR
-		 18   Provvedimento CNR
+		 
+Aggiungo 17 Disegno/Proposta di Legge regionale
+		 
+		 18   Documento NIR
+		 19   Provvedimento CNR
 		 */
 		
 		String comboItem = null;
@@ -299,7 +302,7 @@ public class XmLegesMarkerFormImpl implements XmLegesMarkerForm, FileTextFieldLi
 			else if(unknownTipoDoc.indexOf("disegno")!=-1 || unknownTipoDoc.indexOf("ddl")!=-1 || unknownTipoDoc.indexOf("d.d.l.")!=-1)
 				comboItem = parser.TIPO_DOC[16];
 			else if(unknownTipoDoc.indexOf("provvedimento")!=-1)
-				comboItem = parser.TIPO_DOC[18];
+				comboItem = parser.TIPO_DOC[19];
 			else 
 				comboItem = parser.TIPO_DOC[0];
 			

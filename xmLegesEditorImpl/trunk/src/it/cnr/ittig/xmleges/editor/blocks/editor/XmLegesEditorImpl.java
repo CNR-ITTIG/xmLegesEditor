@@ -100,6 +100,9 @@ public class XmLegesEditorImpl implements XmLegesEditor, Loggable, Serviceable, 
 							// DISEGNI DI LEGGE
 							"dtd-dl/dllight.dtd", "dtd-dl/dllight.spp",
 							
+							// CRP
+							"dtd-crp/crp.dtd",
+							
 							// CNR
 							"dtd-cnr/cnr.dtd",
 

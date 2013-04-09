@@ -174,6 +174,42 @@
     </provvedimento>  
 </classe>
 
+
+
+
+
+
+
+
+<classe name="Proposte di Legge regionali">
+<!-- ******************************************************* PRESENTAZIONE CRP DDL -->
+    <provvedimento name="DDL Consiglio Regionale Piemonte" emananti="SI">
+	    <urn>
+	        <atto>disegno.legge</atto>
+	        <citazione>disegno di legge regionale</citazione>
+	        <autorita>=^regione\.piemonte$</autorita>
+	    </urn>
+	    <template tipo="Articolato" numerato="SI" tag="DDLCRP">ddlCRP.xml</template>
+	    <dtd name="DTD Nir Completo">nircompleto.dtd</dtd>
+    </provvedimento>
+<!-- ******************************************************* PRESENTAZIONE CRP PDL -->
+    <provvedimento name="PDL Consiglio Regionale Piemonte" emananti="SI">
+	    <urn>
+	        <atto>proposta.legge</atto>
+	        <citazione>proposta di legge regionale</citazione>
+	        <autorita>=^regione\.piemonte$</autorita>	
+	    </urn>
+	    <template tipo="Articolato" numerato="SI" tag="PDLCRP">pdlCRP.xml</template>
+	    <dtd name="DTD Nir Completo">nircompleto.dtd</dtd>
+    </provvedimento>    
+</classe>
+
+
+
+
+
+
+
 <!-- ====================================================== LEGGE REGIONALE -->
 <classe name="Legge regionale">
     <provvedimento name="Legge regionale" emananti="SI">
@@ -493,21 +529,6 @@
 		<!--dtd name="DTD Nir Base">nirbase.dtd</dtd-->
     </provvedimento>
 </classe>
-<!-- ============================================================= DELIBERE -->
-<classe name="Delibera">
-    <provvedimento name="Delibera" emananti="SI">
-	    <urn>
-	        <atto>delibera</atto>
-	        <citazione autorita="SI">delibera</citazione>
-	        <autorita>!(^stato$|^presidente\.repubblica)</autorita>
-	    </urn>
-	    <template tipo="Articolato" tag="DocArticolato" nome="delibera">XX-Art.xml</template>
-	    <template tipo="SemiArticolato" tag="SemiArticolato" nome="delibera">XX-Semi.xml</template>
-	    <dtd name="DTD Nir Completo">nircompleto.dtd</dtd>
-		<dtd name="DTD Nir Flessibile">nirflessibile.dtd</dtd>
-		<!--dtd name="DTD Nir Base">nirbase.dtd</dtd-->
-    </provvedimento>
-</classe>
 <!-- ======================================================== DELIBERAZIONI -->
 <classe name="Deliberazione">
     <provvedimento name="Deliberazione" emananti="SI">
@@ -678,4 +699,18 @@
 		<dtd name="DTD Nir Flessibile">nirflessibile.dtd</dtd>
     </provvedimento>
 </classe>
+
+
+<!-- ====================================================== DETERMINAZIONE -->
+<classe name="Determinazione">
+    <provvedimento name="Determinazione" emananti="SI">
+	    <urn>
+	        <atto>determinazione</atto>
+	        <citazione>determinazione</citazione>
+	        <autorita>=^regione.*</autorita>
+	    </urn>
+	    
+    </provvedimento>
+</classe>
+
 </provvedimenti>

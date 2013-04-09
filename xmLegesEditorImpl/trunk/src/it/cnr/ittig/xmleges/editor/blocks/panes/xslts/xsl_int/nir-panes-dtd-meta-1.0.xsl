@@ -19,6 +19,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 xmlns       = "http://www.w3.org/HTML/1998/html4"
                 xmlns:nir   = "http://www.normeinrete.it/nir/2.2/"
                 xmlns:cnr   = "http://www.cnr.it/provvedimenti/2.1"
+                xmlns:crp   = "http://www.consiglioregionale.piemonte.it/atti/1.0"
                 xmlns:mapper= "xalan://it.cnr.ittig.xmleges.core.blocks.panes.xsltmapper.XsltMapperImpl"
                 version     = "1.0">
 
@@ -302,6 +303,24 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
 			<font color="blue"><xsl:value-of select="@valore"/></font>
 		</xsl:element>		
 	</xsl:for-each>
+</xsl:template>
+
+<xsl:template match="crp:presentatori">
+		<xsl:element name="div" use-attribute-sets="XsltMapperSetClass">
+	   		<xsl:attribute name="style">
+	            margin: 30 15 15 25;
+	            color: red;
+	    	</xsl:attribute>
+	    	<br/><b>Presentatori:</b><br/>	    
+		</xsl:element>
+		<xsl:apply-templates select="crp:presentatore" />
+</xsl:template>
+
+<xsl:template match="crp:presentatore">
+		   <br/><xsl:value-of select="@num"/><xsl:text>) </xsl:text><xsl:value-of select="@cognome"/><xsl:text> </xsl:text><xsl:value-of select="@nome"/>
+		   <xsl:if test="@firm='S'">
+		       <font color="blue"> (Firma)</font>
+		   </xsl:if>
 </xsl:template>
 
 </xsl:transform>
