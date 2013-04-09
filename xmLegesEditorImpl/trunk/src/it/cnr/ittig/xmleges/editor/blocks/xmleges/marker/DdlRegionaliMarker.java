@@ -66,7 +66,7 @@ public class DdlRegionaliMarker {
    		return fixXML(dom);
 	}
 		
-	private boolean fixXML(Document dom) {	
+	public boolean fixXML(Document dom) {	
 
 		Element nir = dom.getDocumentElement();
 		
