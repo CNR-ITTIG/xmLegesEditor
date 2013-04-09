@@ -1,0 +1,51 @@
+<!-- ===================================================================== -->
+<!-- DTD di crp:meta                                     		   -->
+<!-- ===================================================================== -->
+<!--     Metadati per gli atti del Consiglio Regionale del Piemonte        -->
+<!--                                                                       -->
+<!--     Release  1.0                                                      -->
+<!--     data     13/02/2013                                               -->
+<!--                                                                       -->
+<!--     Pierluigi Spinosa - (TecnoDiritto)                                -->
+<!--     Enrico Francesconi - (ITTIG/CNR)	                           -->
+<!-- ===================================================================== -->
+
+<!-- ===================================================================== 
+	Metadato CRP		Descrizione
+     .....................................................................
+1.	presentatori:		contenitore dei presentatori del PDL/DDL regionale
+1.1	presentatore:        	contenitore del singolo presentatore
+1.1.1	firm:			primo firmatario del PDL/DDL (S/N)
+1.1.2	cognome:		cognome del presentatore
+1.1.3	nome:			nome del presentatore
+    ===================================================================== -->
+
+<!ENTITY % crpNS  "xmlns:crp CDATA #FIXED 'http://www.consiglioregionale.piemonte.it/atti/1.0'" >
+
+<!ELEMENT crp:meta		(crp:presentatori)? >
+<!ATTLIST crp:meta		%crpNS; >
+
+<!ELEMENT crp:presentatori	(crp:presentatore)* >
+
+<!ELEMENT crp:presentatore	EMPTY >
+
+<!ATTLIST crp:presentatore	num		CDATA	#REQUIRED
+				firm		(S|N)	#REQUIRED
+				cognome		CDATA	#REQUIRED
+				nome		CDATA	#REQUIRED >
+
+<!--    =====================================================================        
+        esempio                                             
+        =====================================================================
+
+	<crp:meta xmlns:crp="http://www.consiglioregionale.piemonte.it/atti/1.0">
+		<presentatori>
+			<presentatore num="1" firm="S" Cognome="Cattaneo" nome="Valerio" />
+			<presentatore num="2" firm="N" Cognome="Boniperti" nome="Roberto" />
+			...
+		</presentatori>
+  -->
+
+<!--    =====================================================================        
+        fine di crp:meta                                             
+        =====================================================================  -->

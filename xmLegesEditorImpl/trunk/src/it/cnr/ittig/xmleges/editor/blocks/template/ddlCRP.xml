@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="iso-8859-15"?>
+
+%DOCTYPE%
+
+	<NIR tipo="originale" 	xmlns="http://www.normeinrete.it/nir/2.2/" 
+				xmlns:dsp="http://www.normeinrete.it/nir/disposizioni/2.2/" 
+				xmlns:h="http://www.w3.org/HTML/1998/html4" 
+				xmlns:xlink="http://www.w3.org/1999/xlink">
+		<DocArticolato nome="disegnoLeggeRegionale">
+			<meta>
+				<descrittori>
+					<pubblicazione norm="" num="" tipo="GU" />
+					<entratainvigore norm="" />
+					<redazione id="red1" nome="CRPiemonte" norm="" />
+					<urn valore="urn:nir:regione.piemonte;consiglio:disegno.legge:aaaa-mm-gg;nn" />
+				</descrittori>
+				<proprietario soggetto="CRP" xlink:href="http://www.consiglioregionale.piemonte.it" xlink:type="simple">
+					<crp:meta xmlns:crp="http://www.consiglioregionale.piemonte.it/atti/1.0" >
+						<crp:presentatori>
+						</crp:presentatori>
+					</crp:meta>
+				</proprietario>
+			</meta>
+			<intestazione>
+				<emanante>Consiglio Regionale del Piemonte</emanante>
+				<tipoDoc>Disegno di legge regionale</tipoDoc> n. 
+				<numDoc></numDoc> presentato il  
+				<dataDoc norm=""></dataDoc>
+				<titoloDoc></titoloDoc>
+			</intestazione>
+			<formulainiziale />
+			<articolato>
+				<articolo id="art1">
+					<num>Art. 1.</num>
+					<rubrica></rubrica>
+					<comma id="art1-com1">
+						<num>1.</num>
+						<corpo></corpo>
+					</comma>
+				</articolo>
+			</articolato>
+			<formulafinale />
+			<conclusione />
+		</DocArticolato>
+	</NIR>
