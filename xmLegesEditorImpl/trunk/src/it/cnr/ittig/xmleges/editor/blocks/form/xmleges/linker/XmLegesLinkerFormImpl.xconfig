@@ -23,5 +23,5 @@
 <ente name="" urn="" />
 <ente name="CNR" urn="consiglio.nazionale.ricerche" />
 <ente name="CNIPA" urn="centro.nazionale.informatica.pubblica.amministrazione" />
-<ente name="CR Piemonte" urn="regione.piemonte\;consiglio" />
+<ente name="CR Piemonte" urn="regione.piemonte;consiglio" />
 </configuration>
