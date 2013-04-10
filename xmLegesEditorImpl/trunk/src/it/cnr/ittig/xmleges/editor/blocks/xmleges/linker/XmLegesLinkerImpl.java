@@ -147,8 +147,8 @@ public class XmLegesLinkerImpl implements XmLegesLinker, Loggable, Serviceable, 
 		
 		sb.append(" -f " + UtilFile.getTempDirName() + "/pr.in");
 		//sb.append(" -F " + UtilFile.getTempDirName() + "/pr.out");
-		sb.append(" >" + UtilFile.getTempDirName() + "/pr.out");
 		sb.append(" -L file=" + UtilFile.getTempDirName() + "/pr.err");
+		sb.append(" > " + UtilFile.getTempDirName() + "/pr.out");
 		try {
 			UtilFile.copyFileInTemp(new ByteArrayInputStream(text.getBytes()), "pr.in");
 
@@ -158,8 +158,8 @@ public class XmLegesLinkerImpl implements XmLegesLinker, Loggable, Serviceable, 
 			error = exec.getStderr().trim();
 			if (error.length() == 0)
 				error = null;
-			// return new ByteArrayInputStream(exec.getStdout().getBytes());
-			return new FileInputStream(UtilFile.getTempDirName() + File.separatorChar + "pr.out");
+			return new ByteArrayInputStream(exec.getStdout().getBytes());
+			//return new FileInputStream(UtilFile.getTempDirName() + File.separatorChar + "pr.out");
 
 		} catch (ExecTimeoutException ex) {
 			logger.warn("Timeout del parser");
