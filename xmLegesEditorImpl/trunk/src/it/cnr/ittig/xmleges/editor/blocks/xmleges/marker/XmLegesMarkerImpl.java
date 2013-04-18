@@ -296,7 +296,7 @@ public class XmLegesMarkerImpl implements XmLegesMarker, Loggable, Serviceable, 
 		
 		// FIXME fare copia in dir parser/struttura
 		// if (firsTime) {
-	    //copyProgram();
+	    copyProgram();
 		// firsTime = false;
 		// }
 		
