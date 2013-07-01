@@ -42,7 +42,7 @@ import org.w3c.dom.ls.LSSerializer;
 public class DOMWriter {
 
 	static String defaultEncoding = "iso-8859-15";
-
+	
 	public static void setDefaultEncoding(String encoding) {
 		if (encoding != null)
 			defaultEncoding = encoding;
@@ -226,7 +226,10 @@ public class DOMWriter {
 				fOut.print(']');
 			}
 			fOut.println('>');
-			fOut.println("<?xml-stylesheet type=\"text/xsl\" href=\"csi.xslt\"?>");		//TODO: Cambiare. Forzo inserimento insieme al DOCUMENT TYPE
+			if ("" != inlineXSLT) {
+				addTabs();
+				fOut.println("<?xml-stylesheet type=\"text/xsl\" href=\""+inlineXSLT+"\"?>");
+			}
 			break;
 		}
 
@@ -531,4 +534,9 @@ public class DOMWriter {
 		return true;
 	}
 
+	private String inlineXSLT = "";
+
+	public void setInlineXSLT(String xslt) {
+		inlineXSLT = xslt;
+	}
 }
