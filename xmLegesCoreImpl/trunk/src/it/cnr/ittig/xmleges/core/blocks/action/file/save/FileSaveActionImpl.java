@@ -133,6 +133,8 @@ public class FileSaveActionImpl implements FileSaveAction, EventManagerListener,
 	FileSaveActionImpl.SaveAsAction saveAsAction;
 
 	String defaultEncoding = "UTF-8";
+	
+	String inlineXSLT = "";
 
 	JFileChooser fileChooser;
 
@@ -169,6 +171,12 @@ public class FileSaveActionImpl implements FileSaveAction, EventManagerListener,
 			logger.info("Default encoding: '" + defaultEncoding + '\'');
 		} catch (Exception ex) {
 			logger.info("No default encoding in configuration. Using: '" + defaultEncoding + '\'');
+		}
+		try {
+			inlineXSLT = configuration.getChild("inlinexslt").getValue().trim();
+			logger.info("Inline xslt: '" + inlineXSLT + '\'');
+		} catch (Exception ex) {
+			inlineXSLT = "";
 		}
 
 		try {
@@ -353,7 +361,7 @@ public class FileSaveActionImpl implements FileSaveAction, EventManagerListener,
 		return false;
 	}
 
-	//Funzione di utilità per copiare la cartella che contiene gli allegati del file.
+	//Funzione di utilitï¿½ per copiare la cartella che contiene gli allegati del file.
 	private boolean copyFolder(String path) {
 		
 		Document dom = documentManager.getDocumentAsDom();
@@ -389,6 +397,9 @@ public class FileSaveActionImpl implements FileSaveAction, EventManagerListener,
 		DOMWriter domWriter = new DOMWriter();
 		domWriter.setCanonical(false);
 		domWriter.setFormat(true);
+		
+		domWriter.setInlineXSLT(inlineXSLT);
+		
 		try {
 			copyFolder(UtilFile.getFolderPath(file.getAbsolutePath()));
 			
