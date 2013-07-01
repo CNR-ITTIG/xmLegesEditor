@@ -740,6 +740,7 @@ license      : GNU General Public License (http://www.gnu.org/licenses/gpl.html)
                 <description>Xml files</description> 
                 <extension>xml</extension> 
             </filter>
+			<inlinexslt></inlinexslt>
         </configuration>
     </component>
 
